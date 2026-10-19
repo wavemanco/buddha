@@ -4,6 +4,8 @@ Build agents that improve their own procedures for producing useful, meaningfull
 
 **Start with [the consolidated living plan](docs/PLAN.md)** for the complete original objective, completed work, new findings, dependencies and the next slice. It is the sole current roadmap; design and review documents supply specifications and evidence.
 
+Git history and slice PRs are maintained in [wavemanco/buddha](https://github.com/wavemanco/buddha). The initial commit preserves the existing slices together; subsequent changes use separate slice branches. [REC-01's recovery contract](docs/RECOVERY-CONTRACT.md) and sealed historical reader establish the next recovery boundary; linked continuation is not yet executable.
+
 **Slice 3 is implemented and its live pilot is complete:** bounded policy optimization with a fixed proposer, candidate archive, shared spending ledger and common development screen, alongside the existing v1.1 baseline runner. The recovery pilot completed 63 calls for $0.300153 in recorded conservative cost; its child scored higher on one development prompt. This is exploratory evidence, not a held-out improvement claim. See [the completed results and limitations](docs/FIRST-LIVE-RESULTS.md). Generated-source self-modification remains a later slice.
 
 The [pilot concern review](docs/PILOT-REVIEW.md) records repeated plots, effects on both metrics and operational gaps. Its recommendations are incorporated into the living plan. Matching runtime/test source is now preserved. Meaningful diversity has not been validated; benchmark scores remain unchanged.
@@ -121,5 +123,4 @@ python -m pip_audit --no-deps -r requirements.txt
 python -m compileall -q buddha tests
 ```
 
-There is no Git repository or hosted CI in the supplied directory; verification is local. The supplied instruction requires a check-in after each vertical slice. Slice 3's one-prompt live validation is complete; broader evaluation and recovery automation remain future work. Preserve the matching source revision before changing frozen implementation files. Genuine source self-modification requires the separate isolated-executor slice. HyperAgents contributes conceptual inspiration only; its source is excluded.
-
+CI is configured on Windows/Linux, Python 3.13, using the pinned tools in `requirements-dev.txt`; application runtime dependencies remain empty. Development auditing includes certifi (MPL-2.0), recorded in the recovery contract, without adding it to the application runtime. Local verification is reported separately from hosted CI. The user authorizes continued implementation with a summary and PR per slice, pausing for live execution or a required decision. Genuine source self-modification requires the separate isolated-executor work. HyperAgents contributes conceptual inspiration only; its source is excluded. Earlier dated handoffs describing absent Git/CI are historical.
