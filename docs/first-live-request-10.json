@@ -1,0 +1,202 @@
+{
+  "dispatch_to_unknown_event_seconds": 2.563,
+  "event_history_sha256": "42900d8551b80ff448ffe5e38687fd9171523c16b2e9ad601ab8a276b717c131",
+  "format": "buddha.incident-review.v1",
+  "held_microusd": 532373,
+  "ledger_sha256": "6d87bf1617b7c0514756296cf32c7f4da4cb4a60b11f845c3de51806027a2bb9",
+  "manifest_sha256": "65ebc4cc2b129f158ff56792f071362cd6dda0438da7b88a9c5ab719ad65046d",
+  "operations": [
+    {
+      "actual_microusd": 187,
+      "operation_id": "2533f44d4047690ce9e63b64cea81fe71986d6b1ac624617de25b2520cbcb8ee",
+      "provider_request_id": "req_2bf539b665654dd68835cdcf62570d3b",
+      "reply_metadata": {
+        "finish_reason": "stop",
+        "input_tokens": 20,
+        "model": "gpt-5.6-luna",
+        "output_tokens": 98,
+        "refused": false,
+        "service_tier": "default"
+      },
+      "request_sha256": "3e77b9c2ec01c66b1426beeb571778f3eb35f5be45bac776e13f25f0b0d5b89a",
+      "reserve_microusd": 532373,
+      "response_sha256": "cb4aed782ab10dee4c1dfe95d0405afe35dd4023b5d7513f0d6551060208642f",
+      "status": "completed"
+    },
+    {
+      "actual_microusd": 194,
+      "operation_id": "aafd53c121133902aa39362952d4f896ff1190193bca25f92a5603e1a17203e0",
+      "provider_request_id": "req_a2e360057b8945ad8c6f6b24ceb5e69a",
+      "reply_metadata": {
+        "finish_reason": "stop",
+        "input_tokens": 20,
+        "model": "gpt-5.6-luna",
+        "output_tokens": 102,
+        "refused": false,
+        "service_tier": "default"
+      },
+      "request_sha256": "3e77b9c2ec01c66b1426beeb571778f3eb35f5be45bac776e13f25f0b0d5b89a",
+      "reserve_microusd": 532373,
+      "response_sha256": "7c1863169468c33fa1964aa9549b2cdaa1c5821e8b64b4f4ce50f7dfcd97c585",
+      "status": "completed"
+    },
+    {
+      "actual_microusd": 189,
+      "operation_id": "4bd6f7e51e0b69accffa6342b27a0eaa83538bbe979af01e9376a6720598ceba",
+      "provider_request_id": "req_b1cf92631acc4a1e84ebbbc1a65325e2",
+      "reply_metadata": {
+        "finish_reason": "stop",
+        "input_tokens": 20,
+        "model": "gpt-5.6-luna",
+        "output_tokens": 99,
+        "refused": false,
+        "service_tier": "default"
+      },
+      "request_sha256": "3e77b9c2ec01c66b1426beeb571778f3eb35f5be45bac776e13f25f0b0d5b89a",
+      "reserve_microusd": 532373,
+      "response_sha256": "f9039378f2e723717327f1f0b22dc91b3ec8ffe5e2a5ffd342083dc32a80e726",
+      "status": "completed"
+    },
+    {
+      "actual_microusd": 196,
+      "operation_id": "5b380db65da8f3ec0571a2d17ac960c0a8a1792e18ba59b6823148444566746a",
+      "provider_request_id": "req_7ed090f6869e4fabbb1b401915bf5d33",
+      "reply_metadata": {
+        "finish_reason": "stop",
+        "input_tokens": 20,
+        "model": "gpt-5.6-luna",
+        "output_tokens": 103,
+        "refused": false,
+        "service_tier": "default"
+      },
+      "request_sha256": "3e77b9c2ec01c66b1426beeb571778f3eb35f5be45bac776e13f25f0b0d5b89a",
+      "reserve_microusd": 532373,
+      "response_sha256": "5521f2c6bc2463f52eede731472a26bcfc197b4ee55888e964a86659435f4a49",
+      "status": "completed"
+    },
+    {
+      "actual_microusd": 190,
+      "operation_id": "403f62e9d3e7759e73a5dae68ad793e5fe672fc478bf1b78894752ea64843cef",
+      "provider_request_id": "req_36f57188dae7425e8f6d37a656463cdb",
+      "reply_metadata": {
+        "finish_reason": "stop",
+        "input_tokens": 20,
+        "model": "gpt-5.6-luna",
+        "output_tokens": 100,
+        "refused": false,
+        "service_tier": "default"
+      },
+      "request_sha256": "3e77b9c2ec01c66b1426beeb571778f3eb35f5be45bac776e13f25f0b0d5b89a",
+      "reserve_microusd": 532373,
+      "response_sha256": "b937433c8f76f4b4c95f6a15920f2d8f3675d1b59c2c008758205afd92f49139",
+      "status": "completed"
+    },
+    {
+      "actual_microusd": 174,
+      "operation_id": "b577220ac3617e0bf412b5f7d620bf1d5f4ffe5437b0cff1a5310648a00e300d",
+      "provider_request_id": "req_bd4741f595964257adbcf8dca75fe19c",
+      "reply_metadata": {
+        "finish_reason": "stop",
+        "input_tokens": 20,
+        "model": "gpt-5.6-luna",
+        "output_tokens": 91,
+        "refused": false,
+        "service_tier": "default"
+      },
+      "request_sha256": "3e77b9c2ec01c66b1426beeb571778f3eb35f5be45bac776e13f25f0b0d5b89a",
+      "reserve_microusd": 532373,
+      "response_sha256": "2ba6adb8e9c0feda18a90a786ea2611d37bebd90054a505a0aa4de476c4319de",
+      "status": "completed"
+    },
+    {
+      "actual_microusd": 198,
+      "operation_id": "e940c8c6c58ec152a5f8dc43579ab88e12e40cac31acf35efb5f87958f3406ba",
+      "provider_request_id": "req_a6534f175b064b87909e7f77493b602c",
+      "reply_metadata": {
+        "finish_reason": "stop",
+        "input_tokens": 20,
+        "model": "gpt-5.6-luna",
+        "output_tokens": 104,
+        "refused": false,
+        "service_tier": "default"
+      },
+      "request_sha256": "3e77b9c2ec01c66b1426beeb571778f3eb35f5be45bac776e13f25f0b0d5b89a",
+      "reserve_microusd": 532373,
+      "response_sha256": "4ef47ed27c4f810c014fcf207b83f061e9f95c1c08f5424d066174284feddc59",
+      "status": "completed"
+    },
+    {
+      "actual_microusd": 176,
+      "operation_id": "d6392ef29aa32ca295b30234c02fad5360a7bbb929a35eef1d17e17d4b498370",
+      "provider_request_id": "req_c731480b75484d05a40fa922e73e059e",
+      "reply_metadata": {
+        "finish_reason": "stop",
+        "input_tokens": 20,
+        "model": "gpt-5.6-luna",
+        "output_tokens": 92,
+        "refused": false,
+        "service_tier": "default"
+      },
+      "request_sha256": "3e77b9c2ec01c66b1426beeb571778f3eb35f5be45bac776e13f25f0b0d5b89a",
+      "reserve_microusd": 532373,
+      "response_sha256": "6a0d0789e55e3e96151696301d70516db19e3bd7c1f88f1f9fe301f2638f7d6a",
+      "status": "completed"
+    },
+    {
+      "actual_microusd": 205,
+      "operation_id": "6771af2d238ca2a42f4acdab28d771fcd38ee4122c7bc18144c309375b6ae86f",
+      "provider_request_id": "req_ca9f78a4a79c43d493c404fbc8445871",
+      "reply_metadata": {
+        "finish_reason": "stop",
+        "input_tokens": 20,
+        "model": "gpt-5.6-luna",
+        "output_tokens": 108,
+        "refused": false,
+        "service_tier": "default"
+      },
+      "request_sha256": "3e77b9c2ec01c66b1426beeb571778f3eb35f5be45bac776e13f25f0b0d5b89a",
+      "reserve_microusd": 532373,
+      "response_sha256": "2c13b08251f69547b758488eebbfe44a3efa4e6f2422019d1f0bfcd769808bab",
+      "status": "completed"
+    },
+    {
+      "actual_microusd": null,
+      "operation_id": "231aad4e4c5d27b6fdd9e73da5993aee27f357dfa36b40c3b3463836c89c581b",
+      "provider_request_id": null,
+      "request_sha256": "3e77b9c2ec01c66b1426beeb571778f3eb35f5be45bac776e13f25f0b0d5b89a",
+      "reserve_microusd": 532373,
+      "status": "unknown"
+    }
+  ],
+  "recorded_microusd": 1709,
+  "request_fingerprint": "3e77b9c2ec01c66b1426beeb571778f3eb35f5be45bac776e13f25f0b0d5b89a",
+  "run_id": "a1257f96467b490b910b559437a71258",
+  "unknown_events": [
+    {
+      "actual_microusd": null,
+      "created_at": "2026-10-19T15:45:08.112Z",
+      "event_id": 29,
+      "event_type": "reserved",
+      "operation_id": "231aad4e4c5d27b6fdd9e73da5993aee27f357dfa36b40c3b3463836c89c581b",
+      "reserved_microusd": 532373
+    },
+    {
+      "actual_microusd": null,
+      "created_at": "2026-10-19T15:45:08.116Z",
+      "event_id": 30,
+      "event_type": "dispatched",
+      "operation_id": "231aad4e4c5d27b6fdd9e73da5993aee27f357dfa36b40c3b3463836c89c581b",
+      "reserved_microusd": 532373
+    },
+    {
+      "actual_microusd": null,
+      "created_at": "2026-10-19T15:45:10.679Z",
+      "event_id": 31,
+      "event_type": "unknown",
+      "operation_id": "231aad4e4c5d27b6fdd9e73da5993aee27f357dfa36b40c3b3463836c89c581b",
+      "reserved_microusd": 532373
+    }
+  ],
+  "unknown_operation_id": "231aad4e4c5d27b6fdd9e73da5993aee27f357dfa36b40c3b3463836c89c581b",
+  "unknown_receipt_count": 0
+}

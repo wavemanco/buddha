@@ -1,0 +1,15 @@
+User-supplied original PowerShell traceback, relevant excerpt (October 19, 2026):
+
+  File "C:\Users\arvik\code\buddha\buddha\provider.py", line 398, in execute
+    result = self.transport.send(call)
+  File "C:\Users\arvik\code\buddha\buddha\provider.py", line 306, in send
+    response = connection.getresponse()
+  File "C:\Program Files\Python313\Lib\http\client.py", line 1450, in getresponse
+    response.begin()
+  File "C:\Program Files\Python313\Lib\http\client.py", line 297, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "C:\Program Files\Python313\Lib\socket.py", line 719, in readinto
+    return self._sock.recv_into(b)
+  File "C:\Program Files\Python313\Lib\ssl.py", line 1138, in read
+    return self._sslobj.read(len, buffer)
+KeyboardInterrupt

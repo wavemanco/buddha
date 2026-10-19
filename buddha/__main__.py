@@ -1,0 +1,515 @@
+"""Local CLI; model network access requires the explicit run --live option."""
+
+import argparse
+import getpass
+import hashlib
+import http.client
+import json
+import os
+import re
+import sys
+import tempfile
+import warnings
+from collections.abc import Iterator, Sequence
+from contextlib import contextmanager, suppress
+from dataclasses import asdict
+from decimal import Decimal, InvalidOperation
+from pathlib import Path
+
+from buddha.benchmark import (
+    UPSTREAM_COMMIT,
+    _canonical,
+    _object,
+    _parse,
+    import_evaluation,
+    load_prompts,
+    prompt_manifest,
+)
+from buddha.diagnostics import DiagnosticHTTPTransport, failure_summary
+from buddha.evaluation import ValidationError
+from buddha.ledger import Ledger
+from buddha.policy import Policy
+from buddha.provider import Call, ModelSpec, Reply
+from buddha.run import DATASETS, ReplayTransport, RunSettings, load_run, prepare_run, run_baseline
+
+
+def _notice(message: str) -> None:
+    # Console output must never change a paid operation's outcome.
+    with suppress(OSError, ValueError):
+        print(f"[buddha] {message}", file=sys.stderr, flush=True)
+
+
+def _error_record(message: str, directory: Path | None) -> dict[str, object]:
+    record: dict[str, object] = {"error": message}
+    if directory is not None:
+        diagnostic = failure_summary(directory)
+        if diagnostic is not None:
+            record["diagnostic"] = diagnostic
+            _notice("Provider failure metadata was saved; the reservation remains held.")
+    return record
+
+
+def _usd(value: object) -> int:
+    if (
+        not isinstance(value, str)
+        or len(value) > 32
+        or not re.fullmatch(r"[0-9]+(?:\.[0-9]{1,6})?", value)
+    ):
+        raise ValidationError("set budget_usd to an explicit decimal string")
+    try:
+        amount = Decimal(value)
+        micros = amount * 1000000
+        if (
+            not amount.is_finite()
+            or not 0 < micros <= 2**63 - 1
+            or micros != micros.to_integral_value()
+        ):
+            raise ValidationError("budget must be positive USD with at most six decimal places")
+        return int(micros)
+    except InvalidOperation:
+        raise ValidationError("invalid USD budget") from None
+
+
+def _settings(path: Path, budget_override: str | None) -> RunSettings:
+    raw = _object(_parse(path.read_bytes()))
+    amount = raw.pop("budget_usd", None)
+    if "budget_microusd" in raw:
+        raise ValidationError("configuration uses budget_usd, not budget_microusd")
+    raw["budget_microusd"] = _usd(budget_override if budget_override is not None else amount)
+    return RunSettings.from_record(raw)
+
+
+@contextmanager
+def _key_environment(settings: RunSettings, *, prompt_keys: bool) -> Iterator[None]:
+    """Optionally acquire missing credentials without files, echo or shell history.
+
+    Only the trusted host runs in this process. These temporary environment values
+    must never be inherited by a future generated-source executor.
+    """
+    previous: dict[str, str | None] = {}
+    try:
+        if prompt_keys:
+            names = {
+                "openai": "OPENAI_API_KEY",
+                "anthropic": "ANTHROPIC_API_KEY",
+            }
+            for provider in dict.fromkeys(spec.provider for spec in settings.profiles()):
+                name = names.get(provider)
+                if name is None or os.environ.get(name):
+                    continue
+                if not sys.stdin.isatty() or not sys.stderr.isatty():
+                    raise ValidationError("hidden key entry requires an interactive terminal")
+                _notice("Key input is hidden. Paste once, then press Enter; no characters appear.")
+                try:
+                    with warnings.catch_warnings():
+                        warnings.simplefilter("error", getpass.GetPassWarning)
+                        value = getpass.getpass(f"{name} (hidden, this process only): ")
+                except (EOFError, getpass.GetPassWarning):
+                    raise ValidationError("hidden key entry was unavailable or cancelled") from None
+                if not value or any(not 33 <= ord(char) <= 126 for char in value):
+                    raise ValidationError("provider credential is missing or invalid")
+                previous[name] = os.environ.get(name)
+                os.environ[name] = value
+                _notice(f"{name} received (hidden; provider access is checked during execution).")
+        yield
+    finally:
+        for name, old_value in previous.items():
+            if old_value is None:
+                os.environ.pop(name, None)
+            else:
+                os.environ[name] = old_value
+
+
+def _fetch(dataset: str, destination: Path) -> None:
+    filename, expected = DATASETS[dataset]
+    connection = http.client.HTTPSConnection("raw.githubusercontent.com", timeout=30)
+    try:
+        connection.request("GET", f"/novelty-bench/novelty-bench/{UPSTREAM_COMMIT}/data/{filename}")
+        response = connection.getresponse()
+        raw = response.read(8 * 1024 * 1024 + 1)
+        if response.status != 200 or hashlib.sha256(raw).hexdigest() != expected:
+            raise ValidationError("official dataset fetch failed byte verification")
+    finally:
+        connection.close()
+    if destination.is_symlink():
+        raise ValidationError("dataset destination must not be a symlink")
+    if destination.exists():
+        if destination.read_bytes() != raw:
+            raise ValidationError("dataset destination conflicts; nothing overwritten")
+    else:
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        with destination.open("xb") as stream:
+            stream.write(raw)
+    print(json.dumps({"dataset": dataset, "sha256": expected, "upstream_commit": UPSTREAM_COMMIT}))
+
+
+def _check_upstream() -> None:
+    connection = http.client.HTTPSConnection("api.github.com", timeout=30)
+    try:
+        connection.request(
+            "GET",
+            "/repos/novelty-bench/novelty-bench/git/ref/heads/main",
+            headers={"Accept": "application/vnd.github+json", "User-Agent": "buddha-benchmark"},
+        )
+        response = connection.getresponse()
+        raw = response.read(65537)
+        if response.status != 200 or len(raw) > 65536:
+            raise ValidationError("could not verify the latest official benchmark revision")
+        latest = _object(_object(_parse(raw)).get("object")).get("sha")
+        if latest != UPSTREAM_COMMIT:
+            raise ValidationError(
+                "upstream changed; review and update the benchmark pin before a new run"
+            )
+    finally:
+        connection.close()
+
+
+def _demo(destination: Path) -> None:
+    if not destination.exists():
+        profiles = [
+            ModelSpec("replay", model, 100000, cap, 1000000, 1000000, "offline fixture")
+            for model, cap in [("generator", 4096), ("partition", 16000), ("quality", 16000)]
+        ]
+        settings = RunSettings(
+            profiles[0],
+            profiles[1],
+            profiles[2],
+            budget_microusd=1000000,
+            max_calls=64,
+            bounds_verified=False,
+        )
+        with tempfile.TemporaryDirectory() as temporary:
+            data = Path(temporary) / "synthetic.jsonl"
+            data.write_bytes(
+                _canonical({"id": "demo-1", "prompt": "Offer a useful alternative."}) + b"\n"
+            )
+            prepare_run(
+                destination,
+                dataset_path=data,
+                expected_dataset_sha256=hashlib.sha256(data.read_bytes()).hexdigest(),
+                settings=settings,
+                synthetic=True,
+            )
+    manifest, settings, _, _ = load_run(destination)
+    if not manifest["synthetic"] or any(s.provider != "replay" for s in settings.profiles()):
+        raise ValidationError("demo only resumes a synthetic replay run")
+    summary = run_baseline(destination, transport=ReplayTransport())
+    print(json.dumps({"mode": "synthetic_replay", "paid_calls": 0, "summary": asdict(summary)}))
+
+
+class _SearchReplay(ReplayTransport):
+    """Synthetic policy proposals; inherited judgments are deliberately constant."""
+
+    def send(self, call: Call) -> Reply:
+        body = _object(_parse(call.body_json.encode()))
+        schema = _object(body.get("response_format", {})).get("json_schema", {})
+        if _object(schema).get("name") == "Policy":
+            self.calls += 1
+            suffix = hashlib.sha256(call.body_json.encode()).hexdigest()[:16]
+            policy = Policy(f"Synthetic demo policy {suffix}.", "in-context")
+            return Reply(
+                _canonical(policy.to_record()).decode(),
+                call.spec.model,
+                f"replay-{self.calls}",
+                10,
+                5,
+                "stop",
+            )
+        return super().send(call)
+
+
+def _search_demo(destination: Path) -> None:
+    from buddha.search import SearchSpec, load_search, prepare_search, run_search
+
+    if not destination.exists():
+        profiles = [
+            ModelSpec("replay", model, 100000, cap, 1000000, 1000000, "offline fixture")
+            for model, cap in [("generator", 4096), ("partition", 16000), ("quality", 16000)]
+        ]
+        settings = RunSettings(
+            profiles[0],
+            profiles[1],
+            profiles[2],
+            budget_microusd=1000000,
+            max_calls=256,
+            bounds_verified=False,
+        )
+        with tempfile.TemporaryDirectory() as temporary:
+            data = Path(temporary) / "synthetic.jsonl"
+            data.write_bytes(
+                b"".join(
+                    _canonical({"id": name, "prompt": text}) + b"\n"
+                    for name, text in [
+                        ("dev-a", "Offer a useful alternative."),
+                        ("dev-b", "Suggest another practical mechanism."),
+                        ("validation-canary", "Reserved validation task."),
+                        ("final-canary", "Reserved final task."),
+                    ]
+                )
+            )
+            prepare_search(
+                destination,
+                dataset_path=data,
+                expected_dataset_sha256=hashlib.sha256(data.read_bytes()).hexdigest(),
+                settings=settings,
+                spec=SearchSpec(iterations=2, screen_size=2),
+                splits={
+                    "development": ["dev-a", "dev-b"],
+                    "validation": ["validation-canary"],
+                    "final": ["final-canary"],
+                },
+                synthetic=True,
+            )
+    manifest, settings, _, _ = load_search(destination)
+    if not manifest["synthetic"] or any(s.provider != "replay" for s in settings.profiles()):
+        raise ValidationError("search demo only resumes a synthetic replay run")
+    report = run_search(destination, transport=_SearchReplay())
+    print(json.dumps({"mode": "synthetic_replay", "paid_calls": 0, "report": report}))
+
+
+def main(argv: Sequence[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    commands = parser.add_subparsers(dest="command", required=True)
+    commands.add_parser(
+        "check-upstream", help="verify this build still matches current upstream HEAD"
+    )
+    demo = commands.add_parser("demo", help="run or resume a credential-free synthetic example")
+    demo.add_argument("--out", type=Path, required=True)
+    search_demo = commands.add_parser("search-demo", help="run or resume synthetic policy search")
+    search_demo.add_argument("--out", type=Path, required=True)
+    search_prepare = commands.add_parser(
+        "search-prepare", help="freeze a bounded development search"
+    )
+    search_prepare.add_argument("--dataset", choices=DATASETS, required=True)
+    search_prepare.add_argument("--data", type=Path, required=True)
+    search_prepare.add_argument("--config", type=Path, required=True)
+    search_prepare.add_argument("--budget-usd")
+    search_prepare.add_argument("--screen-size", type=int, default=1)
+    search_prepare.add_argument("--iterations", type=int, default=1)
+    search_prepare.add_argument("--max-active", type=int, default=8)
+    search_prepare.add_argument("--seed", type=int, default=7)
+    search_prepare.add_argument(
+        "--method", choices=["archive", "latest", "uninformed"], default="archive"
+    )
+    search_prepare.add_argument("--out", type=Path, required=True)
+    search_run = commands.add_parser(
+        "search-run", help="execute or resume one frozen policy search"
+    )
+    search_run.add_argument("--run", type=Path, required=True)
+    search_run.add_argument("--live", action="store_true")
+    search_run.add_argument("--prompt-keys", action="store_true")
+    search_inspect = commands.add_parser(
+        "search-inspect", help="reconstruct search offline from receipts"
+    )
+    search_inspect.add_argument("--run", type=Path, required=True)
+    watch = commands.add_parser("watch", help="observe an existing run without keys or API calls")
+    watch.add_argument("--run", type=Path, required=True)
+    fetch = commands.add_parser(
+        "fetch", help="fetch hash-verified pinned v1.1 prompts; no model calls"
+    )
+    fetch.add_argument("--dataset", choices=DATASETS, required=True)
+    fetch.add_argument("--out", type=Path, required=True)
+    prepare = commands.add_parser("prepare", help="freeze a development baseline without API calls")
+    prepare.add_argument("--dataset", choices=DATASETS, required=True)
+    prepare.add_argument("--data", type=Path, required=True)
+    prepare.add_argument("--config", type=Path, required=True)
+    prepare.add_argument("--budget-usd", help="explicit USD decimal override for the configuration")
+    prepare.add_argument(
+        "--limit", type=int, help="development pilot: first N source rows, recorded exactly"
+    )
+    prepare.add_argument("--out", type=Path, required=True)
+    run = commands.add_parser("run", help="execute/resume the frozen baseline")
+    run.add_argument("--run", type=Path, required=True)
+    run.add_argument(
+        "--live", action="store_true", help="allow model API spending under the frozen cap"
+    )
+    run.add_argument(
+        "--prompt-keys", action="store_true", help="enter missing API keys without echo or files"
+    )
+    for name in ["inspect", "verify"]:
+        command = commands.add_parser(
+            name, help="inspect the ledger or verify all exported artifacts offline"
+        )
+        command.add_argument("--run", type=Path, required=True)
+    args = parser.parse_args(argv)
+    try:
+        if args.command == "check-upstream":
+            _check_upstream()
+            print(json.dumps({"latest_matches": True, "upstream_commit": UPSTREAM_COMMIT}))
+        elif args.command == "demo":
+            _demo(args.out)
+        elif args.command == "search-demo":
+            _search_demo(args.out)
+        elif args.command == "watch":
+            from buddha.progress import watch_run
+
+            if not (args.run / "manifest.json").is_file():
+                raise ValidationError("watch requires an existing prepared run")
+            watched = watch_run(args.run)
+            print(json.dumps(watched))
+            return 0 if watched.get("status") == "complete" else 2
+        elif args.command == "search-prepare":
+            from buddha.search import SearchSpec, prepare_search
+
+            settings = _settings(args.config, args.budget_usd)
+            spec = SearchSpec(
+                iterations=args.iterations,
+                max_active=args.max_active,
+                seed=args.seed,
+                method=args.method,
+                screen_size=args.screen_size,
+            )
+            _check_upstream()
+            prepare_search(
+                args.out,
+                dataset_path=args.data,
+                expected_dataset_sha256=DATASETS[args.dataset][1],
+                settings=settings,
+                spec=spec,
+            )
+            print(
+                json.dumps(
+                    {
+                        "status": "prepared",
+                        "model_calls": 0,
+                        "budget_microusd": settings.budget_microusd,
+                    }
+                )
+            )
+        elif args.command in {"search-run", "search-inspect"}:
+            from buddha.progress import Progress
+            from buddha.search import inspect_search, load_search, run_search
+
+            if args.command == "search-inspect":
+                print(json.dumps(inspect_search(args.run)))
+            else:
+                if args.prompt_keys and not args.live:
+                    raise ValidationError("--prompt-keys requires --live")
+                _, settings, _, _ = load_search(args.run)
+                if args.live:
+                    settings.permit_live()
+                transport = (
+                    DiagnosticHTTPTransport(args.run, allow_paid=True)
+                    if args.live
+                    else _SearchReplay()
+                )
+                with _key_environment(settings, prompt_keys=args.prompt_keys):
+                    _notice("Starting policy search. Provider calls can take time.")
+                    with Progress(args.run):
+                        report = run_search(args.run, transport=transport, allow_paid=args.live)
+                print(
+                    json.dumps(
+                        {"mode": "live" if args.live else "synthetic_replay", "report": report}
+                    )
+                )
+        elif args.command == "fetch":
+            _fetch(args.dataset, args.out)
+        elif args.command == "prepare":
+            settings = _settings(args.config, args.budget_usd)
+            _check_upstream()
+            expected = DATASETS[args.dataset][1]
+            prompts = load_prompts(args.data, expected_sha256=expected)
+            if args.limit is not None and not 1 <= args.limit <= len(prompts):
+                raise ValidationError("pilot limit must be within the dataset size")
+            ids = [p.id for p in prompts[: args.limit]] if args.limit is not None else None
+            prepare_run(
+                args.out,
+                dataset_path=args.data,
+                expected_dataset_sha256=expected,
+                settings=settings,
+                prompt_ids=ids,
+            )
+            print(json.dumps({"status": "prepared", "model_calls": 0}))
+        else:
+            manifest, settings, prompts, protocol = load_run(args.run)
+            if args.command == "run":
+                from buddha.progress import Progress
+
+                if args.prompt_keys and not args.live:
+                    raise ValidationError("--prompt-keys requires --live")
+                if args.live:
+                    settings.permit_live()
+                baseline_transport = (
+                    DiagnosticHTTPTransport(args.run, allow_paid=True)
+                    if args.live
+                    else ReplayTransport()
+                )
+                with _key_environment(settings, prompt_keys=args.prompt_keys):
+                    _notice("Starting baseline evaluation. Provider calls can take time.")
+                    with Progress(args.run):
+                        result = run_baseline(
+                            args.run, transport=baseline_transport, allow_paid=args.live
+                        )
+                print(
+                    json.dumps(
+                        {
+                            "mode": "live" if args.live else "synthetic_replay",
+                            "summary": asdict(result),
+                        }
+                    )
+                )
+            elif args.command == "verify":
+                result, _ = import_evaluation(
+                    args.run / "evaluation",
+                    protocol=protocol,
+                    expected_prompt_hashes=prompt_manifest(prompts),
+                )
+                print(
+                    json.dumps(
+                        {
+                            "verified": True,
+                            "synthetic": manifest["synthetic"],
+                            "summary": asdict(result),
+                        }
+                    )
+                )
+            else:
+                info: dict[str, object] = {
+                    "metric_version": protocol.metric_version,
+                    "synthetic": manifest["synthetic"],
+                    "prompt_count": len(prompts),
+                    "budget_microusd": settings.budget_microusd,
+                    "max_calls": settings.max_calls,
+                    "reservation_per_call_microusd": {
+                        role: spec.reserve_microusd()
+                        for role, spec in zip(
+                            ("generation", "partition", "quality"), settings.profiles(), strict=True
+                        )
+                    },
+                }
+                path = args.run / "operations.sqlite3"
+                if path.exists():
+                    ledger = Ledger(
+                        path,
+                        run_id=str(manifest["run_id"]),
+                        manifest_sha256=hashlib.sha256(_canonical(manifest)).hexdigest(),
+                        budget_microusd=settings.budget_microusd,
+                        max_calls=settings.max_calls,
+                    )
+                    info["ledger"] = ledger.totals()
+                print(json.dumps(info))
+        return 0
+    except ValidationError as error:
+        _notice("Stopped. See the error JSON; no automatic retry was made.")
+        directory = args.run if args.command in {"run", "search-run"} else None
+        print(json.dumps(_error_record(str(error), directory)))
+        return 2
+    except (OSError, ValueError):
+        _notice("Stopped. See the error JSON; no automatic retry was made.")
+        print(json.dumps({"error": "filesystem or public-data network operation failed"}))
+        return 2
+    except KeyboardInterrupt:
+        _notice("Interrupted. Any uncertain provider requests retain their reservations.")
+        directory = args.run if args.command in {"run", "search-run"} else None
+        print(
+            json.dumps(
+                _error_record(
+                    "interrupted; keep the run directory for review before resuming", directory
+                )
+            )
+        )
+        return 130
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

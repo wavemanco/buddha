@@ -1,0 +1,345 @@
+{
+  "format": "buddha.pilot-review-evidence.v1",
+  "review_date": "2026-10-19",
+  "review_scope": "All 30 completed recovery stories; policies, official-reference labels/scores and selected implementation paths. Unblinded qualitative review; not a comprehensive security audit or independently adjudicated rescore.",
+  "completed_run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb",
+  "coverage": [
+    {
+      "label": "A-independent",
+      "candidate_id": "2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525",
+      "responses_reviewed": 10,
+      "prompt_id": "curated-0",
+      "prompt": "Tell me a story in five sentences about a girl and her dog.",
+      "partition": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        1,
+        6,
+        7,
+        8
+      ],
+      "generation_scores": [
+        8,
+        8,
+        7,
+        8,
+        7,
+        7,
+        null,
+        8,
+        7,
+        8
+      ],
+      "mean_utility": 7.183934838498671,
+      "mean_distinct": 9.0
+    },
+    {
+      "label": "B-in-context",
+      "candidate_id": "68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06",
+      "responses_reviewed": 10,
+      "prompt_id": "curated-0",
+      "prompt": "Tell me a story in five sentences about a girl and her dog.",
+      "partition": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "generation_scores": [
+        7,
+        8,
+        7,
+        7,
+        8,
+        8,
+        8,
+        8,
+        7,
+        8
+      ],
+      "mean_utility": 7.480236373570919,
+      "mean_distinct": 10.0
+    },
+    {
+      "label": "C-child",
+      "candidate_id": "34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b",
+      "responses_reviewed": 10,
+      "prompt_id": "curated-0",
+      "prompt": "Tell me a story in five sentences about a girl and her dog.",
+      "partition": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "generation_scores": [
+        9,
+        8,
+        9,
+        8,
+        8,
+        9,
+        9,
+        8,
+        9,
+        9
+      ],
+      "mean_utility": 8.5672732825065,
+      "mean_distinct": 10.0
+    }
+  ],
+  "semantic_cases": [
+    {
+      "case_id": "butterfly-rescue",
+      "candidates": [
+        "A-independent"
+      ],
+      "answers_1based": [
+        1,
+        2,
+        5,
+        7
+      ],
+      "observation": "Blue butterfly chase, missing dog, pawprints, lost juvenile animal and reunion recur. Only answers 2 and 7 were grouped together.",
+      "status": "unblinded qualitative concern; no adjudicated replacement labels"
+    },
+    {
+      "case_id": "oak-door-garden",
+      "candidates": [
+        "A-independent"
+      ],
+      "answers_1based": [
+        4,
+        6,
+        8
+      ],
+      "observation": "Hidden door beneath old oak and magical garden recur; rewards/endings differ.",
+      "status": "shared-premise concern; equivalence requires review"
+    },
+    {
+      "case_id": "lost-sounds-bridge",
+      "candidates": [
+        "C-child"
+      ],
+      "answers_1based": [
+        3,
+        10
+      ],
+      "observation": "Dog finds lost sounds, leads girl beneath bridge, recovered instrument/music restores sounds.",
+      "status": "strong equivalence concern; original judge labels remain separate"
+    },
+    {
+      "case_id": "audible-recovery-family",
+      "candidates": [
+        "C-child"
+      ],
+      "answers_1based": [
+        1,
+        3,
+        4,
+        5,
+        7,
+        9,
+        10
+      ],
+      "observation": "Seven stories use hearing or recovering lost things/sounds.",
+      "status": "premise concentration, not a verdict that all seven are equivalent"
+    },
+    {
+      "case_id": "rain-premise-distinct-outcomes",
+      "candidates": [
+        "C-child"
+      ],
+      "answers_1based": [
+        6,
+        8
+      ],
+      "observation": "Both use supernatural rain detection; fawn rescue and seed/garden outcomes differ materially.",
+      "status": "counterexample to merging solely because opening premise is shared"
+    },
+    {
+      "case_id": "cross-policy-fawn",
+      "candidates": [
+        "A-independent",
+        "B-in-context"
+      ],
+      "answers_1based": [
+        1,
+        1
+      ],
+      "observation": "Butterfly, pawprints, lost fawn and reunion recur across policies.",
+      "status": "generator concentration; official within-set scoring does not assess cross-policy novelty"
+    },
+    {
+      "case_id": "missing-bell-event",
+      "candidates": [
+        "A-independent"
+      ],
+      "answers_1based": [
+        9
+      ],
+      "observation": "Fox thanks characters for finding a bell that was not narrated as found.",
+      "status": "craft/causal concern, not a formal task violation"
+    },
+    {
+      "case_id": "unresolved-silence",
+      "candidates": [
+        "C-child"
+      ],
+      "answers_1based": [
+        5
+      ],
+      "observation": "Ringing bell silences birds; final forest restoration is not causally developed.",
+      "status": "craft/causal concern allowing fantasy conventions"
+    },
+    {
+      "case_id": "decorative-weather-power",
+      "candidates": [
+        "C-child"
+      ],
+      "answers_1based": [
+        8
+      ],
+      "observation": "Weather-sensing ability does not explain the garden discovery or outcome.",
+      "status": "craft concern, not automatically low utility"
+    },
+    {
+      "case_id": "unclear-drone-navigation",
+      "candidates": [
+        "C-child"
+      ],
+      "answers_1based": [
+        2
+      ],
+      "observation": "Collar flashlight guides drifting drone without a clear control mechanism.",
+      "status": "craft/plausibility concern, not formal impossibility"
+    }
+  ],
+  "probes": {
+    "provably_unsent_journal_failure": {
+      "https_connection_constructions": 0,
+      "status": "unknown",
+      "held_microusd": 532373,
+      "network_attempts": 0
+    },
+    "receiptless_unknown_scope": {
+      "new_operation_dispatched_after_receiptless_unknown": true,
+      "actual_network_calls": 0
+    },
+    "dead_writer_observer": {
+      "observer_status": "running",
+      "pending_count": 1,
+      "writer_process_exists": false,
+      "stale_lock_present": true,
+      "actual_network_calls": 0
+    }
+  },
+  "sensitivity_example": {
+    "assumption": "Only child answers 3 and 10 merged; all other labels and first-head scores unchanged. Hypothetical arithmetic illustration, NOT a corrected official result.",
+    "original_distinct": 10,
+    "original_utility": 8.5672732825065,
+    "illustrative_distinct": 9,
+    "illustrative_utility": 8.29662022090274,
+    "utility_credit_removed": 0.2706530616037597
+  },
+  "accounting": {
+    "combined_known_microusd": 301862,
+    "unresolved_original_hold_microusd": 532373,
+    "unallocated_authorization_microusd": 49165765,
+    "remaining_calls": 55
+  },
+  "source_sha256": {
+    "buddha/archive.py": "9549deb0f347cf6114ef3f802b9dfef8a94e0db7cbbd3497697987d5e21ba2ee",
+    "buddha/benchmark.py": "9e131a9f4fd92197b256518ea778984875d9aee2a58efb3ccc759d6553a79ae2",
+    "buddha/diagnostics.py": "a67b9bb07656931f6b690d53b65ed2ca21c66051550718713635fa731952bb91",
+    "buddha/evaluation.py": "87e23a9afbdbc466da7ed44cc1bb2b2fd8622d480efd9db95155d75ddda77e78",
+    "buddha/ledger.py": "7d53f6fd6b34e6ed7edd7bc44d1b7b0282e46a7d56f08fc664f244852fd1dcf4",
+    "buddha/policy.py": "717f6fdad1e880d83326d6a314e0dfa604be1044f8209f27061380e16cfebb3e",
+    "buddha/progress.py": "3f505797fabf12102de95628328cf604149289badc7531a30e4af98f1271af3d",
+    "buddha/provider.py": "2477feaa8b16f3715f0ee2db5db7baedf3066969fd9128e6b773803ff2b3711f",
+    "buddha/run.py": "e270fa16b87a57efa50f9e372561afffdb308f9ce441d6783ba31773dfb005e3",
+    "buddha/search.py": "aca15a11fa46a270fa9989fe88ccc0ca2914cec91149868b34895403aaff1182",
+    "buddha/splits.py": "419fa286d812b43e3095fbb41a62844b40477f880d94c8d60de069a52c324a2a",
+    "buddha/__init__.py": "0857bd60619c1e1c8538fe768cbe82c781bb4e302abc6cf59130f1b17d052230",
+    "buddha/__main__.py": "6959a02633d3b78a3db95329f94eba78397c23471c9b703af08853df831e4ba5"
+  },
+  "input_sha256": {
+    "runs/first-live-recovery/candidates/2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525/policy.json": "9bff8df1355eba2020af8a27a4176082226515397eed543a6f5959b884303615",
+    "runs/first-live-recovery/candidates/2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525/evaluation/generations.jsonl": "e40cdf6ad5d6ee28ad99cfc8b2848effe43ca4f4eccdb8928e0393770dca89ad",
+    "runs/first-live-recovery/candidates/2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525/evaluation/v1.1/partitions.jsonl": "86f53e55d09d349fe085796e30a3ad0d06766ec79456baa4a1563ff81bbf8e0a",
+    "runs/first-live-recovery/candidates/2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525/evaluation/v1.1/scores.jsonl": "d24e2096c9b0afac2955ddec76ae69d6ee618dabe38a4fa262f21260a9b3f357",
+    "runs/first-live-recovery/candidates/2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525/evaluation/v1.1/summary.json": "9091ba96f34181bb2d3b4aebe213c650ec7a39167e7be0806525e4482c664347",
+    "runs/first-live-recovery/candidates/2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525/evaluation/provenance.json": "88956cfec61c4282d5961f2efe60fcc034066dcc1e5511311c63b4d7818ef550",
+    "runs/first-live-recovery/candidates/68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06/policy.json": "0007d0f07d5bbb18bfe67eed4ab666d04811c062b72c11ab233c7cde79116064",
+    "runs/first-live-recovery/candidates/68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06/evaluation/generations.jsonl": "583ec243c296c7f34e8a760c465010cd2c981bcb3ebbf74f71aa4483bfae8994",
+    "runs/first-live-recovery/candidates/68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06/evaluation/v1.1/partitions.jsonl": "c5c144d6217114eaffb7620c111959346fa6f0e54b15d613bb07f176e55e6af7",
+    "runs/first-live-recovery/candidates/68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06/evaluation/v1.1/scores.jsonl": "faa7c4afb15bb99aba31cd807258df357f0acf0dc8ddc7dea6b411f0c824afa3",
+    "runs/first-live-recovery/candidates/68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06/evaluation/v1.1/summary.json": "852cf5526bf172ce234a496dd3f6e44da0c10bdb4ec1e156285cb1c2183f56f2",
+    "runs/first-live-recovery/candidates/68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06/evaluation/provenance.json": "fd8464b0c6254fa83fddda492192d258d8a4fe2ebc908f2c8b1b2670b26c1172",
+    "runs/first-live-recovery/candidates/34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b/policy.json": "eb3fdc647d0ca558159cb864d5ec6f15efa2a2f8b02db9f04901b2fad304c50a",
+    "runs/first-live-recovery/candidates/34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b/evaluation/generations.jsonl": "3a4231dbaf886282e5b2641813e8601b19347de308ab74203f90d65cfeab6f50",
+    "runs/first-live-recovery/candidates/34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b/evaluation/v1.1/partitions.jsonl": "7aa275c3ef38f7480d505269b37a600a30427e732b4c2f927c9604ffd946c686",
+    "runs/first-live-recovery/candidates/34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b/evaluation/v1.1/scores.jsonl": "63c5633db8e228bca982020d095a81181be1c8f9d3f8196747bbbb8b02677e7c",
+    "runs/first-live-recovery/candidates/34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b/evaluation/v1.1/summary.json": "9477d6825d9afdcd468eec93521a97ff2248b5526fca7f20f537094f859e162a",
+    "runs/first-live-recovery/candidates/34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b/evaluation/provenance.json": "f5f6d806d11f7f5449e7ec8fcb7bb572b88fac5d64d6194b9023658fb553c5dd",
+    "runs/first-live-search/manifest.json": "2244c5fa284502ade3f05533b5b095b7bde725d31f64d7a9531f058a3340ffeb",
+    "runs/first-live-search/operations.sqlite3": "6d87bf1617b7c0514756296cf32c7f4da4cb4a60b11f845c3de51806027a2bb9",
+    "runs/first-live-recovery/manifest.json": "5c049dcecc61884bd1714fddd414fe4cd3e35325f7724199f694b9f77f9c76ee",
+    "runs/first-live-recovery/operations.sqlite3": "f9011bba84f6d938fd9f58a2013732efe19b639c59136f31e02ffca924b39eea",
+    "runs/first-live-recovery/funding.json": "ccdd1bc835a0473f6faeb9b5c021db5d1245927f5690bfb97d4916b4f0f81714",
+    "runs/first-live-recovery/report.json": "e7c5f8ed9d27dc1e65a88123a7b5668288875cf0c902e367999bf463a2508b65"
+  },
+  "run_files_unchanged_during_probes": true,
+  "new_provider_calls": 0,
+  "runtime_files_changed": false,
+  "golden_semantic_labels_created": false,
+  "source_snapshot": {
+    "path": "docs/snapshots/pilot-runtime-2026-10-19.zip",
+    "sha256": "bd32c4d50339e2f2e1cadf01f5872fa3c1cdf12c196e7676a18d6fe96bd534e0",
+    "archived_source_and_test_files": 29,
+    "manifest_core_hashes_verified": true,
+    "credential_files_or_environment_included": false
+  },
+  "verification": {
+    "unit_tests": {
+      "passed": 245,
+      "duration_seconds": 18.94
+    },
+    "ruff_lint": "passed",
+    "ruff_format": {
+      "passed": true,
+      "python_files": 25
+    },
+    "strict_mypy": {
+      "passed": true,
+      "runtime_files": 13
+    },
+    "bandit": {
+      "issues": 0,
+      "existing_narrow_rng_suppressions": 2
+    },
+    "pip_audit_no_deps": "no known vulnerabilities; no third-party runtime dependencies",
+    "compileall": "passed",
+    "report_local_links": "validated",
+    "all_recorded_artifact_and_runtime_hashes": "validated",
+    "both_frozen_contracts": "validated",
+    "source_zip_and_index": "validated",
+    "hosted_ci": false
+  }
+}
