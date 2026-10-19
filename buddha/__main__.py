@@ -9,6 +9,7 @@ import os
 import re
 import sys
 import tempfile
+import uuid
 import warnings
 from collections.abc import Iterator, Sequence
 from contextlib import contextmanager, suppress
@@ -16,6 +17,7 @@ from dataclasses import asdict
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
 
+from buddha.authorization import Authorization, runtime_fingerprint
 from buddha.benchmark import (
     UPSTREAM_COMMIT,
     _canonical,
@@ -27,6 +29,7 @@ from buddha.benchmark import (
 )
 from buddha.diagnostics import DiagnosticHTTPTransport, failure_summary
 from buddha.evaluation import ValidationError
+from buddha.history import _plain
 from buddha.ledger import Ledger
 from buddha.policy import Policy
 from buddha.provider import Call, ModelSpec, Reply
@@ -270,6 +273,36 @@ def _search_demo(destination: Path) -> None:
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
+    authorization_create = commands.add_parser(
+        "authorization-create", help="create one explicit shared dollar/call authorization offline"
+    )
+    authorization_create.add_argument("--out", type=Path, required=True)
+    authorization_create.add_argument("--budget-usd", required=True)
+    authorization_create.add_argument("--max-calls", type=int, required=True)
+    authorization_create.add_argument("--scope", required=True)
+    authorization_import = commands.add_parser(
+        "authorization-import",
+        help="adopt sealed historical costs and liability without model calls",
+    )
+    authorization_import.add_argument("--authorization", type=Path, required=True)
+    authorization_import.add_argument("--run", type=Path, required=True)
+    authorization_import.add_argument("--manifest-sha256", required=True)
+    authorization_import.add_argument("--ledger-sha256", required=True)
+    authorization_bind = commands.add_parser(
+        "authorization-bind", help="bind an empty prepared run to existing shared authorization"
+    )
+    authorization_bind.add_argument("--authorization", type=Path, required=True)
+    authorization_bind.add_argument("--run", type=Path, required=True)
+    authorization_inspect = commands.add_parser(
+        "authorization-inspect", help="read shared accounting without keys, writes or model calls"
+    )
+    authorization_inspect.add_argument("--authorization", type=Path, required=True)
+    authorization_deactivate = commands.add_parser(
+        "authorization-deactivate", help="permanently deactivate a bound run without model calls"
+    )
+    authorization_deactivate.add_argument("--authorization", type=Path, required=True)
+    authorization_deactivate.add_argument("--run-id", required=True)
+    authorization_deactivate.add_argument("--reason", required=True)
     commands.add_parser(
         "check-upstream", help="verify this build still matches current upstream HEAD"
     )
@@ -298,6 +331,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     search_run.add_argument("--run", type=Path, required=True)
     search_run.add_argument("--live", action="store_true")
     search_run.add_argument("--prompt-keys", action="store_true")
+    search_run.add_argument("--authorization", type=Path)
     search_inspect = commands.add_parser(
         "search-inspect", help="reconstruct search offline from receipts"
     )
@@ -326,6 +360,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     run.add_argument(
         "--prompt-keys", action="store_true", help="enter missing API keys without echo or files"
     )
+    run.add_argument("--authorization", type=Path)
     for name in ["inspect", "verify"]:
         command = commands.add_parser(
             name, help="inspect the ledger or verify all exported artifacts offline"
@@ -333,7 +368,64 @@ def main(argv: Sequence[str] | None = None) -> int:
         command.add_argument("--run", type=Path, required=True)
     args = parser.parse_args(argv)
     try:
-        if args.command == "check-upstream":
+        authorization = None
+        if args.command in {"run", "search-run"} and args.live:
+            if args.authorization is None:
+                raise ValidationError("--live requires an existing --authorization database")
+            authorization = Authorization(args.authorization)
+            authorization.for_run(args.run).authorize_dispatch()
+        if args.command == "authorization-create":
+            budget = _usd(args.budget_usd)
+            if not args.scope.strip():
+                raise ValidationError("authorization scope must be nonblank")
+            created = Authorization.create(
+                args.out,
+                authorization_id=uuid.uuid4().hex,
+                budget_microusd=budget,
+                max_calls=args.max_calls,
+                scope=args.scope,
+            )
+            print(json.dumps(created.summary()))
+        elif args.command == "authorization-import":
+            adopted = Authorization(args.authorization)
+            adopted.import_history(
+                args.run,
+                manifest_sha256=args.manifest_sha256,
+                ledger_sha256=args.ledger_sha256,
+            )
+            print(json.dumps(adopted.summary()))
+        elif args.command == "authorization-bind":
+            bound = Authorization(args.authorization)
+            _plain(args.run.absolute())
+            record = _object(_parse((args.run / "manifest.json").read_bytes()))
+            if record.get("format") == "buddha.policy-search.v1":
+                from buddha.search import load_search
+
+                load_search(args.run)
+            elif record.get("format") == "buddha.baseline.v1":
+                manifest, settings, _, _ = load_run(args.run)
+                path = args.run / "operations.sqlite3"
+                try:
+                    _plain(path.absolute())
+                except FileNotFoundError:
+                    Ledger(
+                        path,
+                        run_id=str(manifest["run_id"]),
+                        manifest_sha256=hashlib.sha256(_canonical(manifest)).hexdigest(),
+                        budget_microusd=settings.budget_microusd,
+                        max_calls=settings.max_calls,
+                    )
+            else:
+                raise ValidationError("unsupported run manifest")
+            bound.bind_run(args.run, runtime_sha256=runtime_fingerprint())
+            print(json.dumps(bound.summary()))
+        elif args.command == "authorization-inspect":
+            print(json.dumps(Authorization(args.authorization).summary()))
+        elif args.command == "authorization-deactivate":
+            deactivated = Authorization(args.authorization)
+            deactivated.deactivate(args.run_id, args.reason)
+            print(json.dumps(deactivated.summary()))
+        elif args.command == "check-upstream":
             _check_upstream()
             print(json.dumps({"latest_matches": True, "upstream_commit": UPSTREAM_COMMIT}))
         elif args.command == "demo":
@@ -396,7 +488,12 @@ def main(argv: Sequence[str] | None = None) -> int:
                 with _key_environment(settings, prompt_keys=args.prompt_keys):
                     _notice("Starting policy search. Provider calls can take time.")
                     with Progress(args.run):
-                        report = run_search(args.run, transport=transport, allow_paid=args.live)
+                        report = run_search(
+                            args.run,
+                            transport=transport,
+                            allow_paid=args.live,
+                            authorization=authorization,
+                        )
                 print(
                     json.dumps(
                         {"mode": "live" if args.live else "synthetic_replay", "report": report}
@@ -438,7 +535,10 @@ def main(argv: Sequence[str] | None = None) -> int:
                     _notice("Starting baseline evaluation. Provider calls can take time.")
                     with Progress(args.run):
                         result = run_baseline(
-                            args.run, transport=baseline_transport, allow_paid=args.live
+                            args.run,
+                            transport=baseline_transport,
+                            allow_paid=args.live,
+                            authorization=authorization,
                         )
                 print(
                     json.dumps(

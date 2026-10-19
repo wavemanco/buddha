@@ -7,6 +7,9 @@ import unittest
 from dataclasses import replace
 from pathlib import Path
 
+from authorization_helpers import authorized_run
+
+from buddha.authorization import Authorization, runtime_fingerprint
 from buddha.benchmark import Prompt
 from buddha.evaluation import ValidationError
 from buddha.ledger import Ledger
@@ -91,8 +94,31 @@ class BaselineRunTests(unittest.TestCase):
 
     def test_completed_replay_does_not_preflight_credentials(self):
         self.prepare()
-        expected = run_baseline(self.destination, transport=ReplayTransport())
-        actual = run_baseline(self.destination, transport=HTTPTransport(allow_paid=False))
+        manifest = json.loads((self.destination / "manifest.json").read_text())
+        selected = settings()
+        Ledger(
+            self.destination / "operations.sqlite3",
+            run_id=manifest["run_id"],
+            manifest_sha256=_sha(manifest),
+            budget_microusd=selected.budget_microusd,
+            max_calls=selected.max_calls,
+        )
+        authority = Authorization.create(
+            self.root / "authorization.sqlite3",
+            authorization_id="cached-replay",
+            budget_microusd=selected.budget_microusd,
+            max_calls=selected.max_calls,
+            scope="offline cached-receipt integration fixture",
+        )
+        authority.bind_run(self.destination, runtime_sha256=runtime_fingerprint())
+        expected = run_baseline(
+            self.destination, transport=ReplayTransport(), authorization=authority
+        )
+        actual = run_baseline(
+            self.destination,
+            transport=HTTPTransport(allow_paid=False),
+            authorization=authority,
+        )
         self.assertEqual(expected, actual)
 
     def test_embedded_prompt_substitution_cannot_claim_verified_dataset(self):
@@ -217,6 +243,9 @@ class SharedExecutionTests(unittest.TestCase):
         self.root = Path(self.temporary.name)
 
     def broker(self, transport):
+        if isinstance(transport, HTTPTransport):
+            _, ledger = authorized_run(self.root / "run", budget_microusd=1000000, max_calls=64)
+            return BudgetBroker(ledger, transport)
         return BudgetBroker(
             Ledger(
                 self.root / "operations.sqlite3",

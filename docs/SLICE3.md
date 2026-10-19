@@ -2,6 +2,8 @@
 
 This records the original offline checkpoint; costs and pending checks below describe that historical state. The [CLI progress follow-up](CLI-PROGRESS.md) records the first interruption and the added observation tools. The subsequent recovery pilot is now complete; see [verified results](FIRST-LIVE-RESULTS.md). [PLAN.md](PLAN.md) owns the consolidated current status and next slice.
 
+The live commands below document the original runtime. Current paid entry points require shared `--authorization`; historical manifests must use their preserved matching source for exact reconstruction. See the current [recovery contract](RECOVERY-CONTRACT.md) and [key setup](API-KEYS.md).
+
 Implementation date: October 19, 2026. The latest official NoveltyBench code, metric v1.1 at commit `64a23be6b18ec1dacc298830aab276061b6e143c`, remains normative. This slice implements a fixed proposer that changes declarative generation policies. It does not execute generated Python, evolve the improver, establish held-out gains, or reproduce Novamine's results. No paid call has occurred.
 
 ## Implemented behavior

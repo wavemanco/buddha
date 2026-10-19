@@ -17,6 +17,7 @@ from pathlib import Path
 from buddha import archive, benchmark, evaluation, ledger, policy, provider, run
 from buddha import splits as split_tools
 from buddha.archive import Candidate, active_pool, frontier, select_parent
+from buddha.authorization import Authorization
 from buddha.benchmark import (
     METRIC_VERSION,
     Prompt,
@@ -556,7 +557,11 @@ def _walk(
 
 
 def run_search(
-    directory: Path, *, transport: Transport, allow_paid: bool = False
+    directory: Path,
+    *,
+    transport: Transport,
+    allow_paid: bool = False,
+    authorization: Authorization | None = None,
 ) -> dict[str, object]:
     if type(allow_paid) is not bool:
         raise ValidationError("allow_paid must be boolean")
@@ -566,9 +571,15 @@ def run_search(
             if not allow_paid:
                 raise ValidationError("live search requires explicit paid execution")
             settings.permit_live()
+            if authorization is None:
+                raise ValidationError("live search requires shared authorization")
         elif not manifest["synthetic"]:
             raise ValidationError("replay is reserved for synthetic demonstrations")
-        ledger = _ledger(directory, manifest, settings)
+        ledger = (
+            authorization.for_run(directory)
+            if authorization is not None
+            else _ledger(directory, manifest, settings)
+        )
         _preflight(directory, manifest, settings, prompts)
         return _walk(directory, manifest, settings, spec, prompts, BudgetBroker(ledger, transport))
 

@@ -364,7 +364,20 @@ class BudgetBroker:
     """
 
     def __init__(self, ledger: "Ledger", transport: Transport) -> None:
+        from buddha.authorization import AuthorizedLedger
+
+        if isinstance(transport, HTTPTransport) and not isinstance(ledger, AuthorizedLedger):
+            raise ValidationError("HTTP execution requires shared authorization")
         self.ledger, self.transport = ledger, transport
+
+    def authorize(self, call: Call) -> None:
+        """Check funding before credentials or any new live reservation."""
+        from buddha.authorization import AuthorizedLedger
+
+        if call.spec.provider != "replay" or isinstance(self.transport, HTTPTransport):
+            if not isinstance(self.ledger, AuthorizedLedger):
+                raise ValidationError("live execution requires shared authorization")
+            self.ledger.authorize_dispatch()
 
     @staticmethod
     def _bounds(call: Call, reply: Reply) -> None:
@@ -381,6 +394,8 @@ class BudgetBroker:
 
     def execute(self, operation_id: str, call: Call) -> Reply:
         existing = self.ledger.get(operation_id)
+        if existing is None or existing.status == "reserved":
+            self.authorize(call)
         if (existing is None or existing.status == "reserved") and isinstance(
             self.transport, HTTPTransport
         ):

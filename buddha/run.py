@@ -8,6 +8,7 @@ from dataclasses import asdict, dataclass
 from datetime import UTC, date, datetime
 from pathlib import Path
 
+from buddha.authorization import Authorization
 from buddha.benchmark import (
     DEFAULT_PARTITION_MODEL,
     DEFAULT_QUALITY_MODEL,
@@ -440,6 +441,7 @@ def operation_executor(
         operation_id = _sha([*prefix, prompt_id, stage, index])
         saved = broker.ledger.get(operation_id)
         if (saved is None or saved.status == "reserved") and not credentials_checked:
+            broker.authorize(call)
             if isinstance(broker.transport, HTTPTransport):
                 broker.transport.preflight(_generation(settings.generation, "preflight"))
                 broker.transport.preflight(
@@ -566,7 +568,13 @@ def evaluate_prompts(
     return rows
 
 
-def run_baseline(directory: Path, *, transport: Transport, allow_paid: bool = False) -> RunSummary:
+def run_baseline(
+    directory: Path,
+    *,
+    transport: Transport,
+    allow_paid: bool = False,
+    authorization: Authorization | None = None,
+) -> RunSummary:
     manifest, settings, prompts, protocol = load_run(directory)
     if type(allow_paid) is not bool:
         raise ValidationError("allow_paid must be boolean")
@@ -575,14 +583,20 @@ def run_baseline(directory: Path, *, transport: Transport, allow_paid: bool = Fa
         if not allow_paid:
             raise ValidationError("live model calls require explicit paid execution")
         settings.permit_live()
+        if authorization is None:
+            raise ValidationError("live evaluation requires shared authorization")
     elif not manifest["synthetic"]:
         raise ValidationError("replay transport is reserved for synthetic demonstrations")
-    ledger = Ledger(
-        directory / "operations.sqlite3",
-        run_id=_text(manifest["run_id"], "run ID"),
-        manifest_sha256=_sha(manifest),
-        budget_microusd=settings.budget_microusd,
-        max_calls=settings.max_calls,
+    ledger = (
+        authorization.for_run(directory)
+        if authorization is not None
+        else Ledger(
+            directory / "operations.sqlite3",
+            run_id=_text(manifest["run_id"], "run ID"),
+            manifest_sha256=_sha(manifest),
+            budget_microusd=settings.budget_microusd,
+            max_calls=settings.max_calls,
+        )
     )
     execute = operation_executor(
         BudgetBroker(ledger, transport), settings, namespace=(manifest["run_id"],)
