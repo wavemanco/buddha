@@ -1,0 +1,180 @@
+{
+  "format": "buddha.review.nb02b-delivery.v1",
+  "date": "2026-10-20",
+  "scope": "Version-neutral funded text API attempts under actual shared authority; no native evaluator integration claim",
+  "local_tests": {
+    "full": {
+      "count": 478,
+      "seconds": 139.356,
+      "skipped": 2,
+      "exit_code": 0
+    },
+    "final_gateway": {
+      "count": 41,
+      "seconds": 35.467,
+      "exit_code": 0,
+      "additional_cases_after_full_run": 5
+    },
+    "wire": {
+      "count": 24,
+      "included_in_full": true
+    },
+    "checkpoint_after_lint_binding": {
+      "count": 1,
+      "seconds": 2.348,
+      "exit_code": 0,
+      "subcases": 4
+    }
+  },
+  "checks": [
+    {
+      "name": "lint",
+      "command": [
+        "python",
+        "-m",
+        "ruff",
+        "check",
+        "buddha",
+        "tests"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "format",
+      "command": [
+        "python",
+        "-m",
+        "ruff",
+        "format",
+        "--check",
+        "buddha",
+        "tests"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "types",
+      "command": [
+        "python",
+        "-m",
+        "mypy",
+        "--strict",
+        "buddha"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "security",
+      "command": [
+        "python",
+        "-m",
+        "bandit",
+        "-q",
+        "-r",
+        "buddha"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "dependencies",
+      "command": [
+        "python",
+        "-m",
+        "pip_audit",
+        "--no-deps",
+        "-r",
+        "requirements.txt"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "compile",
+      "command": [
+        "python",
+        "-m",
+        "compileall",
+        "-q",
+        "buddha",
+        "tests"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "whitespace",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "tests_first": [
+    "Missing buddha.gateway module",
+    "Old runtime-only authority rejected new selection identity",
+    "Received full body lost on header-processing interrupt/invalid header",
+    "IncompleteRead partial bytes lost",
+    "Completed overrun returned as cached success",
+    "Other configured provider credential persisted",
+    "Escaped credential persisted in malformed outer JSON"
+  ],
+  "closed_findings": [
+    "Frozen authority rejects consistently rewritten profile/selection/manifest/invocation",
+    "Actual installed core bound separately from selected host-profile tree",
+    "Received envelope checkpoints before billing and survives one-shot serialization/storage interruption",
+    "Partial body and missing/invalid headers retained with explicit incompleteness",
+    "Known cost overrun committed then stops; cached replay still a bound breach",
+    "Token breach below reserve keeps unknown full hold and stops every shared run",
+    "Known provider credentials denied/withheld including cross-provider and malformed escaped text"
+  ],
+  "composed_checks": [
+    "Actual mocked HTTPS for both providers with unchanged request bytes",
+    "Real Authorization/AuthorizedLedger attached atomic transitions",
+    "Concurrent dispatch has one send winner",
+    "Mixed legacy/new dollar envelope and final call slot",
+    "Caps and expired account review before credential lookup",
+    "Completed replay without keys/live permission/active run",
+    "Post-send selected-file drift permits terminal accounting but prevents next send",
+    "Anthropic inclusive input/cache usage"
+  ],
+  "preserved": {
+    "protected_input_files": 287,
+    "all_protected_input_hashes_unchanged": true,
+    "financial_schema_changed": false,
+    "legacy_body_or_identity_algorithm_changed": false,
+    "pilot_runtime_zip_sha256": "bd32c4d50339e2f2e1cadf01f5872fa3c1cdf12c196e7676a18d6fe96bd534e0"
+  },
+  "paid_model_calls": 0,
+  "live_allocation_created": false,
+  "live_profile_verified": false,
+  "new_paid_cli_enabled": false,
+  "identity_limits": [
+    "Trusted caller supplies stable semantic logical IDs and physical attempt numbers",
+    "No HTTP arrival-order or body-only sample identity",
+    "Explicit installed application module closure and runtime metadata; not OS/stdlib attestation",
+    "No selected official lock/install or import/network confinement proof"
+  ],
+  "remaining_gates": [
+    "BENCH-02C actual native SDK context bridge, evaluator/parser/retry/fallback/summary differential checks",
+    "BENCH-03C composed same-agent/same-runner configuration upgrade and retirement",
+    "Fresh account/model/billing bound verification and explicit live allocation",
+    "Calibration, useful-diversity, held-out, source mutation and improved-improver evidence"
+  ],
+  "previous_slice_ci": {
+    "pr": 11,
+    "commit": "7c325abd500a11f05b6fc3dea66a674166df07a6",
+    "windows": "success",
+    "ubuntu": "success",
+    "pr_run": 39429631164,
+    "push_run": 39429623455
+  },
+  "this_slice_hosted_ci": "pending publication",
+  "source_sha256": {
+    "buddha/gateway.py": "1b060d55690f5663f64848dbb662a754c9f1bc2ae5b997b745e279734a707890",
+    "buddha/wire.py": "30ece8a4359b1efdb9666196d48e285f7ce438e671914740d6e577af2be63dfe",
+    "buddha/authorization.py": "7d97c54c0ed1c24e1f91222ddee1a96a331566f17dfa4dc8580ab0bc6819c3c5",
+    "buddha/releases.py": "33361cf5b0923b373ee53dd73597063195c2c0d519baead50d40fb4bcfab44f5",
+    "tests/test_gateway.py": "80e9029bab1fd782d51c405bb875884d92bbf8744946d53993c7117556e824e9",
+    "tests/test_wire.py": "5b3992931fbdb45afafbca1645596112d27695059ca9e17975df2e9b2dc49a2e"
+  }
+}

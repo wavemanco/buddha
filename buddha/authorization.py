@@ -220,7 +220,16 @@ def _manifest_record(directory: Path) -> tuple[dict[str, object], tuple[str, str
     record = _object(_parse(path.read_bytes()))
     checksum = record.pop("record_sha256", None)
     digest = hashlib.sha256(_canonical(record)).hexdigest()
-    if record.get("format") in ("buddha.policy-search.v1", "buddha.policy-search-continuation.v1"):
+    if record.get("format") == "buddha.gateway-run.v1":
+        from buddha.gateway import validate_manifest
+
+        if checksum != digest:
+            raise ValidationError("gateway manifest checksum differs")
+        validate_manifest(record)
+    elif record.get("format") in (
+        "buddha.policy-search.v1",
+        "buddha.policy-search-continuation.v1",
+    ):
         if checksum != digest:
             raise ValidationError("search manifest checksum differs")
     elif record.get("format") != "buddha.baseline.v1" or checksum is not None:
@@ -236,6 +245,14 @@ def _manifest_record(directory: Path) -> tuple[dict[str, object], tuple[str, str
 
 def _manifest(directory: Path) -> tuple[str, str, int, int]:
     return _manifest_record(directory)[1]
+
+
+def _execution_identity(directory: Path, record: dict[str, object]) -> str:
+    if record.get("format") == "buddha.gateway-run.v1":
+        from buddha.gateway import execution_identity
+
+        return execution_identity(directory, record)
+    return runtime_fingerprint()
 
 
 def _accept_unknown(
@@ -544,10 +561,10 @@ class Authorization:
         claim: tuple[str, str, str, str] | None = None,
     ) -> None:
         _hex(runtime_sha256, "runtime hash")
-        if runtime_sha256 != runtime_fingerprint():
-            raise OperationConflict("declared runtime differs from the actual installed runtime")
         directory = _path(directory)
         record, config = _manifest_record(directory)
+        if runtime_sha256 != _execution_identity(directory, record):
+            raise OperationConflict("declared runtime differs from the actual installed runtime")
         ledger = _path(directory / "operations.sqlite3")
         authority_path = _path(self.path)
         if claim is None:
@@ -736,13 +753,16 @@ class AuthorizedLedger(Ledger):
             raise OperationConflict("authorization and run ledger must be different files")
         self.config = _manifest(self.directory)
         self.run_id = self.config[0]
-        self.runtime_sha256 = runtime_fingerprint()
+        self.runtime_sha256 = _execution_identity(
+            self.directory, _manifest_record(self.directory)[0]
+        )
         with self._transaction():
             pass
 
     def _execution_contract(self) -> None:
-        if _manifest(self.directory) != self.config or (
-            runtime_fingerprint() != self.runtime_sha256
+        record, config = _manifest_record(self.directory)
+        if config != self.config or (
+            _execution_identity(self.directory, record) != self.runtime_sha256
         ):
             raise OperationConflict("bound run manifest or executable runtime changed")
 
