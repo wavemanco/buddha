@@ -246,6 +246,21 @@ def _stage_configs(protocol: EvaluationProtocol) -> tuple[dict[str, object], dic
     return partition, score
 
 
+def _row_config(
+    row: Mapping[str, object], protocol: EvaluationProtocol, config: dict[str, object]
+) -> None:
+    if {"fallback_judge", "fallback_calls", "unscored"}.intersection(row):
+        raise ValidationError("local evaluation does not support fallback or unscored evidence")
+    partition, score = _stage_configs(protocol)
+    for key, expected in (
+        ("generation_config", config),
+        ("partition_config", partition),
+        ("score_config", score),
+    ):
+        if key in row and not _same(row[key], expected):
+            raise ValidationError("supplied row configuration differs from the declared protocol")
+
+
 def _validated_rows(
     rows: Sequence[Mapping[str, object]], protocol: EvaluationProtocol, config: dict[str, object]
 ) -> tuple[RunSummary, list[dict[str, object]]]:
@@ -253,6 +268,7 @@ def _validated_rows(
     for row in _sequence(rows, "evaluation rows"):
         if not isinstance(row, Mapping):
             raise ValidationError("evaluation row must be a mapping")
+        _row_config(row, protocol, config)
         normalized.append(_object(dict(row)))
     manifest = prompt_manifest(
         tuple(
@@ -427,6 +443,8 @@ def import_evaluation(
         raise ValidationError("artifact row coverage mismatch")
     partition_config, score_config = _stage_configs(protocol)
     for generation, partition, score in zip(generations, partitions, scores, strict=True):
+        for row in (generation, partition, score):
+            _row_config(row, protocol, config)
         for key in _GENERATION_FIELDS:
             if (
                 key not in generation

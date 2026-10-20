@@ -12,6 +12,8 @@ The [pilot concern review](docs/PILOT-REVIEW.md) records repeated plots, effects
 
 The [first-run incident review](docs/FIRST-LIVE-REVIEW.md) preserves the uncertain request's evidence, explains the diagnostic gap and records the recovery constraints. New CLI model calls now save safe HTTP diagnostic metadata without changing the frozen evaluator or retrying existing work.
 
+The [direct conformance audit](docs/NOVELTYBENCH-CONFORMANCE.md) confirms successful metric construction but records request/parser/recovery differences from native upstream execution. Benchmark alignment is the next gate before larger experiments; historical scores and profiles remain unchanged.
+
 The normative reference is the latest official NoveltyBench code, checked during this work: **v1.1**, commit `64a23be6b18ec1dacc298830aab276061b6e143c`. The paper is historical context. New CLI experiments check upstream HEAD and refuse to start if the reference changed; existing runs keep their frozen version. There is no v1.0 runtime path.
 
 ## Run the offline example
@@ -39,7 +41,7 @@ This synthetic example evaluates independent-sampling and in-context seeds, prop
 
 The first live experiment was authorized for **up to $50 combined**, covering both providers and all search stages. The initial attempt was interrupted while awaiting answer 10. Its nine replies and full uncertain reservation remain intact. The completed recovery restart used a **$49.465918 cap and 118-call allowance**, accounting for the original $0.534082 committed liability and ten attempted calls. It repeated the same one-prompt, two-seed, one-proposal engineering pilot with fresh evidence. Both attempts are now historical inputs. Shared authorization imports their sealed liabilities once and enforces the combined dollar/call cap. The linked continuation reuses nine saved replies as evidence, sends a separately identified replacement for the unknown tenth, then completes the remaining search stages. Its new report separates new cost, inherited evidence cost and shared experiment accounting.
 
-The corrected linked run completed and was verified: nine saved replies reused, 51 new calls for $0.274533, with the original unknown still held. [Linked results and concerns](docs/LINKED-CONTINUATION-RESULTS.md) record the three candidate scores, repeated plots, literal/craft failures and shared accounting. The completed run is closed to new paid calls; its [execution handoff](docs/FIRST-LIVE-CONTINUATION.md) remains historical evidence. REC-05's inspection and recovery usability work is next.
+The corrected linked run completed and was verified: nine saved replies reused, 51 new calls for $0.274533, with the original unknown still held. [Linked results and concerns](docs/LINKED-CONTINUATION-RESULTS.md) record the three candidate scores, repeated plots, literal/craft failures and shared accounting. The completed run is closed to new paid calls; its [execution handoff](docs/FIRST-LIVE-CONTINUATION.md) remains historical evidence. The living plan now prioritizes exact benchmark alignment; REC-05's inspection and recovery usability work remains open.
 
 Read the saved completed report without keys or source reconstruction:
 

@@ -383,6 +383,25 @@ class ContinuationSourceTests(unittest.TestCase):
         with patch("buddha.run.__file__", str(altered)), self.assertRaises(ValidationError):
             self.read()
 
+    def test_only_exact_reviewed_benchmark_validation_revision_is_compatible(self):
+        from buddha import benchmark, continuation
+
+        with zipfile.ZipFile(ARCHIVE) as bundle:
+            previous = hashlib.sha256(bundle.read("buddha/benchmark.py")).hexdigest()
+        raw = Path(benchmark.__file__).read_bytes()
+        actual = hashlib.sha256(raw).hexdigest()
+        self.assertEqual((previous, actual), continuation._BENCHMARK_VALIDATION_REVISION)
+        self.assertEqual(len(self.read().completed), 9)
+        altered = self.root / "benchmark.py"
+        altered.write_bytes(raw + b"\n# unreviewed revision\n")
+        with patch("buddha.benchmark.__file__", str(altered)), self.assertRaises(ValidationError):
+            self.read()
+        with (
+            patch("buddha.continuation._BENCHMARK_VALIDATION_REVISION", (actual, previous)),
+            self.assertRaises(ValidationError),
+        ):
+            self.read()
+
     def test_later_rebinding_cannot_hide_changed_child_request_semantics(self):
         import buddha.run as run_module
 
