@@ -96,7 +96,7 @@ class AuthorizationContinuationTests(unittest.TestCase):
             "format": "buddha.linked-continuation.v1",
             "source_run_id": "source",
             "source_ledger_sha256": self.source_seal,
-            "authorization_path": str(self.path),
+            "authorization_path": str(self.authority.path),
             "runtime_sha256": runtime_fingerprint(),
             "acceptance_reason": self.claim["reason"],
             "replacement": {"source_operation_id": "slot-9"},
@@ -149,6 +149,16 @@ class AuthorizationContinuationTests(unittest.TestCase):
         self.assertEqual((self.source / "operations.sqlite3").read_bytes(), self.source_bytes)
         ledger = self.authority.for_run(directory)
         ledger.reserve("replacement", sha("replacement"), 100)
+
+    def test_canonical_authority_identity_accepts_an_equivalent_input_path(self):
+        (self.root / "alias").mkdir()
+        self.path = self.root / "alias" / ".." / "authority.sqlite3"
+        canonical = self.authority.path
+        self.authority = Authorization(self.path)
+        self.assertEqual(self.authority.path, canonical)
+        directory = self.prepare("canonical-continuation")
+        self.bind(directory)
+        self.assertEqual(self.authority.for_run(directory).totals()["operation_count"], 0)
 
     def test_generic_bind_cannot_skip_the_continuation_claim(self):
         directory = self.prepare("continuation")
