@@ -7,19 +7,13 @@ and arithmetic does not establish that their judgments are correct or authentic.
 import hashlib
 import json
 import math
-import re
 from collections.abc import Mapping, Sequence
 from dataclasses import asdict, dataclass, fields
 
-
-class ValidationError(ValueError):
-    """Evidence or configuration violates the experiment contract."""
-
-
-def _integer(value: object, name: str, minimum: int) -> int:
-    if type(value) is not int or value < minimum:
-        raise ValidationError(f"{name} must be an integer >= {minimum}")
-    return value
+from buddha.common import ValidationError as ValidationError
+from buddha.common import _hex as _hex
+from buddha.common import _integer as _integer
+from buddha.common import _text as _text
 
 
 def _number(value: object, name: str) -> float:
@@ -38,17 +32,6 @@ def _patience(value: object) -> None:
     numeric = _number(value, "patience")
     if not 0 <= numeric <= 1:
         raise ValidationError("patience must be in [0, 1]")
-
-
-def _hex(value: object, name: str, length: int = 64) -> None:
-    if not isinstance(value, str) or not re.fullmatch(rf"[0-9a-f]{{{length}}}", value):
-        raise ValidationError(f"{name} must be {length} lowercase hexadecimal characters")
-
-
-def _text(value: object, name: str) -> str:
-    if not isinstance(value, str) or not value.strip():
-        raise ValidationError(f"{name} must be nonblank text")
-    return value
 
 
 def _sequence(value: object, name: str) -> Sequence[object]:

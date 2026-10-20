@@ -12,8 +12,7 @@ from contextlib import closing, contextmanager
 from pathlib import Path
 from typing import cast
 
-from buddha.benchmark import _canonical, _object, _parse
-from buddha.evaluation import ValidationError, _hex, _text
+from buddha.common import ValidationError, _canonical, _hex, _object, _parse, _text
 from buddha.history import HistoricalOperation, _plain, read_history
 from buddha.ledger import (
     _SCHEMA as LEDGER_SCHEMA,

@@ -11,8 +11,7 @@ from contextlib import closing
 from dataclasses import dataclass
 from pathlib import Path
 
-from buddha.benchmark import _canonical, _object, _parse
-from buddha.evaluation import ValidationError, _hex, _integer, _text
+from buddha.common import ValidationError, _canonical, _hex, _integer, _object, _parse, _text
 from buddha.provider import Reply
 
 

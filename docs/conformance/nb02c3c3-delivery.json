@@ -10,8 +10,17 @@
     "strict_mypy": "pass;31 source files on explicit linux and win32"
   },
   "ci": {
-    "scope": "Hosted results reported only after observed; parent#18 PR/push Windows/Linux green703tests each",
-    "status": "pending publication"
+    "checks": "all four terminal success;721 tests per platform",
+    "head_commit": "7d1ebd2325788f928b6f8da7b5347eabca2d42a8",
+    "merge_commit": "f4ca271e66ad9539dcfcff3347f959b48c186d60",
+    "platforms": [
+      "windows-latest",
+      "ubuntu-latest"
+    ],
+    "pr_workflow_run": 39485411459,
+    "pull_request": 20,
+    "push_workflow_run": 39485401946,
+    "status": "observed green and merged"
   },
   "date": "2026-10-20",
   "findings": {

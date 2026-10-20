@@ -390,7 +390,11 @@ class ContinuationSourceTests(unittest.TestCase):
             previous = hashlib.sha256(bundle.read("buddha/benchmark.py")).hexdigest()
         raw = Path(benchmark.__file__).read_bytes()
         actual = hashlib.sha256(raw).hexdigest()
-        self.assertEqual((previous, actual), continuation._BENCHMARK_VALIDATION_REVISION)
+        self.assertEqual(previous, continuation._BENCHMARK_VALIDATION_REVISION[0])
+        self.assertEqual(
+            (continuation._BENCHMARK_VALIDATION_REVISION[1], actual),
+            continuation._GENERIC_EXTRACTION_MODULES["buddha.benchmark"],
+        )
         self.assertEqual(len(self.read().completed), 9)
         altered = self.root / "benchmark.py"
         altered.write_bytes(raw + b"\n# unreviewed revision\n")

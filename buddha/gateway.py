@@ -23,7 +23,7 @@ from pathlib import Path
 from typing import cast
 
 from buddha.authorization import Authorization, AuthorizedLedger
-from buddha.evaluation import ValidationError
+from buddha.common import ValidationError
 from buddha.ledger import Ledger, OperationConflict
 from buddha.provider import (
     BoundBreach,
@@ -98,8 +98,7 @@ CORE = frozenset(
                 "ledger",
                 "history",
                 "provider",
-                "evaluation",
-                "benchmark",
+                "common",
             )
         ),
     }
@@ -256,8 +255,7 @@ def _core_sources() -> dict[str, str]:
     import buddha
     from buddha import (
         authorization,
-        benchmark,
-        evaluation,
+        common,
         history,
         ledger,
         provider,
@@ -269,8 +267,7 @@ def _core_sources() -> dict[str, str]:
         buddha,
         sys.modules[__name__],
         authorization,
-        benchmark,
-        evaluation,
+        common,
         history,
         ledger,
         provider,

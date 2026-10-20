@@ -1,0 +1,217 @@
+{
+  "actual_provider_calls": 0,
+  "checks": {
+    "application_bandit": "pass;no findings;existing unused suppression warnings retained",
+    "compile": "pass",
+    "diff_check": "pass",
+    "markdown_links": "pass;249 local links;README and top-level docs",
+    "ruff_format": "pass;76 files",
+    "ruff_lint": "pass",
+    "runtime_pip_audit": "pass;no known vulnerabilities;separate evaluator-image restrictions unchanged",
+    "strict_mypy": "pass;33 source files;linux and win32"
+  },
+  "ci": {
+    "parent_PR20": "all four PR/push Windows/Linux checks terminal green at7d1ebd2325788f928b6f8da7b5347eabca2d42a8; merged f4ca271e66ad9539dcfcff3347f959b48c186d60",
+    "request_checkpoint_merged_PRs": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    "status": "pending publication"
+  },
+  "date": "2026-10-20",
+  "findings": {
+    "03C-I1": "Full regression RED743 tests (3 failures/19 errors) correctly rejected unreviewed helper extraction. Exact before/after module hashes and pinned common source now compose with original NB01 pair; nonhelper AST/original helper definitions unchanged. No old runtime binding changed.",
+    "03C-I2": "Review reproduced four missing/altered archived-common acceptance failures before fix, including provider-only new import. Current/applicable archived helper seals now required. Exact-equal snapshot handling was corrected and tested; no dynamic pre-fix RED claimed for that separate equality edge.",
+    "03C-I3": "First proof had silent hidden-child output on Windows. Explicit existing stdout/stderr handles now relay progress; second full proof observed all stages and final summary."
+  },
+  "format": "buddha.review.nb03c-delivery.v1",
+  "limits": [
+    "Two canned releases plus separate actual pinned-official regression; no guarantee for unknown future interfaces",
+    "Only reviewed fixed seed and existing supported text/provider/runtime envelope; no arbitrary evolved-agent clearance",
+    "Current-v1 pure record codecs; SQLite ledger512MiB,receipt64MiB,100000operations ceilings",
+    "Operator seals establish saved-byte consistency, not provider origin, invoice reconciliation or new execution authority",
+    "Retirement preserves financial database locations and holds; archives only fixture-owned active source/config roots",
+    "No schema migration; old exact-runtime/source identity algorithms and original NB01 pair preserved",
+    "CPU environment variant, dependency advisories/license limits and uncertain-payment retry stops remain explicit",
+    "No new paid CLI/allocation, semantic judge accuracy, source evolution or held-out improvement claim"
+  ],
+  "local_tests": {
+    "common": {
+      "count": 10,
+      "pass": true
+    },
+    "continuation": {
+      "count": 47,
+      "new_groups": 10,
+      "pass": true,
+      "seconds": 36.482,
+      "skipped": 0
+    },
+    "full": {
+      "count": 753,
+      "exit_code": 0,
+      "log": "runs/reviews/nb03c-full-tests.log",
+      "seconds": 356.555,
+      "skipped": 4
+    },
+    "gateway_history": {
+      "count": 12,
+      "pass": true,
+      "seconds": 15.941,
+      "skipped": 0
+    },
+    "pinned_official_regression": {
+      "completed_keyless_reuse_new_sends": 0,
+      "core_seals": 9,
+      "direct_captures": 6,
+      "fixture": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3c3-baseline-bkxdohj9",
+      "mocked_sends": 26,
+      "native_artifacts_and_body_multisets_match": true,
+      "original_owner_resume_new_sends": 3,
+      "pass": true,
+      "source_seals": 21,
+      "unchanged_probe": "nb02c3c3-baseline-probe.py"
+    },
+    "readme_examples": {
+      "actual_provider_calls": 0,
+      "pass": true,
+      "successful_invocations": 7
+    },
+    "two_release_containers": {
+      "B_identity_unchanged": true,
+      "Windows_parent_child_progress_relay": "observed in second full proof",
+      "active_copy_files": 23,
+      "core_seals": 9,
+      "direct_captures": 7,
+      "direct_commands": 4,
+      "fixture": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb03c-compatible-vbqfuvi2",
+      "guards": [
+        "selected nested dependency rejected",
+        "unsupported count rejected",
+        "unsupported path rejected",
+        "opaque unsupported capability rejected by actual Gateway before binding",
+        "retired A original selection/roots rejected before new owner creation"
+      ],
+      "host_SDKs_unavailable": true,
+      "legacy_host_modules_physically_absent": [
+        "benchmark",
+        "evaluation",
+        "run",
+        "search",
+        "policy"
+      ],
+      "mocked_sends": 18,
+      "new_B_operations_after_hold": 0,
+      "old_history_unchanged_after_retirement": true,
+      "pass": true,
+      "source_seals": 26,
+      "synthetic_spent_microusd": 145,
+      "synthetic_unknown_hold_microusd": 100200
+    }
+  },
+  "new_live_allocation": false,
+  "new_paid_command": false,
+  "preserved": {
+    "all_hashes_unchanged": true,
+    "original_unknown_hold_unchanged": true,
+    "pilot_runtime_zip_sha256": "bd32c4d50339e2f2e1cadf01f5872fa3c1cdf12c196e7676a18d6fe96bd534e0",
+    "protected_input_files": 287
+  },
+  "scope": "Bounded configuration-only release baselines and retirement; new and historical raw Gateway formats remain distinct from legacy pilot format",
+  "source": {
+    "buddha/authorization.py": {
+      "bytes": 41038,
+      "sha256": "1fa9242515b38938673cb40a7179289d43ea99ddf1dd6d2e8cf18d52f248e5f5"
+    },
+    "buddha/benchmark.py": {
+      "bytes": 19118,
+      "sha256": "b72c74a0b9b7e786b9969c72a400f449ab5758938ee9f24af660a887d866c2a9"
+    },
+    "buddha/common.py": {
+      "bytes": 2238,
+      "sha256": "3a0a693a0f4a0f2eed3b858d0b3ac42148871dbca284e56e0e368726309393c0"
+    },
+    "buddha/continuation.py": {
+      "bytes": 38383,
+      "sha256": "6230fd976f4b83f2c56e34ee0dba039ec9d011f773f59f25f1c6da357c546c54"
+    },
+    "buddha/evaluation.py": {
+      "bytes": 8207,
+      "sha256": "4cabb1a48689a140fc6f6129ed8d9eae1d047d3e09eae794170c74479413b8d6"
+    },
+    "buddha/gateway.py": {
+      "bytes": 40594,
+      "sha256": "e844fcb695b97c76ecb7432ece6b8d96416806554038e202fd6b0f7f3da57a2e"
+    },
+    "buddha/gateway_history.py": {
+      "bytes": 16848,
+      "sha256": "a773ae6066e5b8a4f503e4b346b73570ace2ebeb811017f7b656cc211fded57c"
+    },
+    "buddha/history.py": {
+      "bytes": 10510,
+      "sha256": "f87d737fa5b0c81651a01b20f7551d1ab7e476ea7ad91d9f24c7c321e383e643"
+    },
+    "buddha/ledger.py": {
+      "bytes": 18593,
+      "sha256": "4b16ac5c53e4fe5735cdf54762e6ad738d35309c6744a468362f41eac413394a"
+    },
+    "buddha/provider.py": {
+      "bytes": 21651,
+      "sha256": "17de071c1416afa32f9da32eb627e24264d8a0a848862fdf4853057125f18a02"
+    },
+    "docs/conformance/nb03c-compatible-releases-evidence.json": {
+      "bytes": 253548,
+      "sha256": "4194e6305c6d196d60f5b71f3bf6f9dc428ccdabab0a2333d58e56dc81b7147d"
+    },
+    "docs/conformance/nb03c-compatible-releases-probe.py": {
+      "bytes": 49049,
+      "sha256": "05af73e00dba85114d0ba7d2b785dabfc043c7683cc4b854fd8b4d02629af04a"
+    },
+    "docs/conformance/nb03c-direct-worker.py": {
+      "bytes": 5856,
+      "sha256": "39932c41b67955e7db1f5a026df6fe195dfb6ac969d594110c8f03dc6d3776b7"
+    },
+    "docs/conformance/nb03c-official-regression-evidence.json": {
+      "bytes": 197921,
+      "sha256": "9275f14123b72764948297641125d4c876c662ce6ea0c1995a442d6693a6008c"
+    },
+    "tests/fixtures/gateway-v1-old-core.json": {
+      "bytes": 14649,
+      "sha256": "af7b47389a4758e8da226170fa8a5b639af51d99fddcadf9ec73721d6fe7e98d"
+    },
+    "tests/test_common.py": {
+      "bytes": 16697,
+      "sha256": "b270320e96d2fc4bdf91a9449346d22ae4a5b5ba975259301d95c07e59ef6bf6"
+    },
+    "tests/test_continuation_common.py": {
+      "bytes": 11509,
+      "sha256": "eccea96cf1717d2a400750f586362626a62b155c85eb41de06b83642eb6fb923"
+    },
+    "tests/test_continuation_source.py": {
+      "bytes": 20507,
+      "sha256": "a68694c3b4912b8fffe01ea7facbbd7771fedf2b596bc7b6c0fe9e7c85edd4e5"
+    },
+    "tests/test_gateway_history.py": {
+      "bytes": 18217,
+      "sha256": "d4a9bb8aa930330425ef90320c9b18d2eb18cfef35d2f00dc7c839f345098059"
+    }
+  }
+}
