@@ -1,0 +1,205 @@
+{
+  "actual_review": "docs/conformance/meas01-adjudication-review.json",
+  "actual_review_sha256": "31a8ed84887cf85a391b2729e8cb0ea656fa331e82b413d8b954c7c9f0c294a3",
+  "base_commit": "c5ae7de8df9d75d204276a3d6b1264f644b1f4d3",
+  "benchmark_provider_API_calls": 0,
+  "checks": {
+    "bandit": "pass;15,201 lines;10 previously scoped suppressions;no new finding",
+    "compile": "pass",
+    "git_diff_check": "pass",
+    "markdown_links": "pass;315 local file targets in33 guides/boundary reports;not remote/anchor/semantic validation",
+    "new_dependencies": false,
+    "ruff_format": "pass;94 files including helper",
+    "ruff_lint": "pass;including standalone helper",
+    "runtime_pip_audit": "pass;core only,larger evaluator closure limits unchanged",
+    "source_mutations_during_full_suite": false,
+    "strict_mypy": "pass;37 application/agent sources, linux and win32; frozen source from checks earlier this slice"
+  },
+  "ci": {
+    "parent_PR25": "LinuxPR/push andWindowsPR success;Windowspush pending at2026-10-20T23:23:46Z",
+    "parent_PR_workflow": "https://github.com/wavemanco/buddha/actions/runs/39511810509",
+    "parent_push_workflow": "https://github.com/wavemanco/buddha/actions/runs/39511804409",
+    "status": "pending publication;local checks are not hosted CI"
+  },
+  "coverage": {
+    "answer_appearances": 96,
+    "authored_cards": 7,
+    "focused_cards": 9,
+    "historical_sets": 6,
+    "historical_unique_answers": 60,
+    "items": 22,
+    "resolved_historical_full_sets": 2,
+    "resolved_items": 17,
+    "two_review_tentative_partitions_equal_items": 20,
+    "uncertain_items": 5,
+    "uncertain_pair_appearances": 16,
+    "unique_source_uncertain_pairs": 15
+  },
+  "date": "2026-10-20",
+  "format": "buddha.review.meas01-adjudication-delivery.v1",
+  "frozen_study": {
+    "actors": {
+      "adjudicator": "/root/meas01_blind_adjudicator",
+      "resolved_model_identifier": null,
+      "reviewers": [
+        "/root/meas01_blind_r1",
+        "/root/meas01_blind_r2"
+      ],
+      "type": "model"
+    },
+    "manifest": "docs/conformance/meas01-study/manifest.json",
+    "raw_file_sha256": {
+      "docs/conformance/meas01-study/adjudication.json": "90f27482740ed16a14992d0691ce657b64071f03b2dcbf5be6d837658b85aadf",
+      "docs/conformance/meas01-study/adjudicator-response.json": "1c9607bbea5917ceb69f17a80b31b8c5c589342d05711923ca7e8c3889fd6483",
+      "docs/conformance/meas01-study/pack.json": "8a29cded45e11f62eaecba52e5d9c30a88e2733b28cc8138aa2fdb38d025bf15",
+      "docs/conformance/meas01-study/response-template.json": "d24eb17f5f1ff6aa460b351344e10d87595fe9199a75f53a5df9ce1ddfe47eff",
+      "docs/conformance/meas01-study/review-1-original.json": "1040b617a53a558bba529df933cab26634ad283901823b3db45c84041e3ed2d4",
+      "docs/conformance/meas01-study/review-1.json": "62ffe48b752fa73a05cad5b8841a306ef439f62baa5e6fa37d025789838d74f9",
+      "docs/conformance/meas01-study/review-2-original.json": "591dbbcc2aef2e1649e6f758113e8fd597c9f5eaa1830fe42869a3e1b253ca9c",
+      "docs/conformance/meas01-study/review-2.json": "fb33d2f73e30888e6ead75ca0385c38eab4c6498ec32e281e7894480273501a3",
+      "docs/conformance/meas01-study/review-instructions-v1.md": "552408a06da88cb6b3224f5cb457106ab5a3470d9ccab3983cb011ea19dff75d",
+      "docs/conformance/meas01-study/review-instructions-v2.md": "4aaec6b793a7d7e60c54305870b7041cbaf76f4f2d53eb3287339ef85e48e4d5",
+      "tests/fixtures/meas01-expectations.json": "9211231da884cdce93a9a9b0c486d7f582646a113623f0ba784177808c6571d8"
+    },
+    "selection_rule": "all_explicitly_resolved_complete_items",
+    "sha256": "fe46424035d586a514f71a0f1e832e86e50320d7732852fb92a539e772f0372b"
+  },
+  "limits": [
+    "Separate contexts are not statistical or diverse-model independence",
+    "No human sample or fully identified frozen model audit instrument",
+    "One development prompt plus authored controls; repeated/inherited appearances are dependent",
+    "No new original official partitions/scores/utility/rankings",
+    "Unresolved items produce no regression expectations; labels are versioned model judgments, not immutable ground truth",
+    "These are frozen delegated model judgments, not human ratings, semantic truth or population judge-accuracy evidence; exact inherited model identifiers are unavailable.",
+    "Blinding was an instructional restriction with self-reported access in fresh delegated sessions, not OS confinement. It does not establish independent training, architecture or absence of common model bias. Agreement on tentative partitions is descriptive only.",
+    "No official scores are revised. Focused cross-policy comparisons cannot be used as official within-set rescoring; repeated/inherited answer appearances are not independent observations.",
+    "All resolved full-item groups may be selected explicitly as development regression expectations; no automatic pair expansion, transitive closure, majority vote or author-intent gold is inferred. All five uncertain items remain outside resolved expectations.",
+    "This audit exercises the actual frozen adjudicated_expectations implementation and 12 malformed-input rejections under read-only guards, independently of the parent's test suite; it does not claim to rerun that full suite.",
+    "MEAS-01's bounded model-development review has complete review/adjudication and tested selected-fixture extraction evidence. DESIGN's independent instrument/human sample and useful-diversity/generalization claims remain open; MEAS-02 must audit the unchanged official judge separately.",
+    "The audit itself makes zero additional model/provider calls. Prior native delegated reviews used platform model computation; exact platform costs and inherited model identifiers are unavailable and not claimed universally free.",
+    "Read-only guards cover Python entry points listed in this engineering probe; they are a bounded dynamic check, not an OS sandbox or proof of arbitrary code safety.",
+    "Source pins,declared IDs and self-reported access are provenance observations,not reviewer identity authentication",
+    "No generation or new native evaluator execution in this slice;new official-judge/order assessment remains MEAS-02",
+    "The broader human EVAL-02 gate,source evolution,held-out gain and improved-improver claims remain open"
+  ],
+  "local_tests": {
+    "focused": {
+      "count": 30,
+      "seconds": 0.751,
+      "skipped": 0
+    },
+    "freeze": "Application,helper,tests and frozen study/fixture unchanged during final full run;only guides/delivery prose edited",
+    "full": {
+      "count": 925,
+      "exit_code": 0,
+      "seconds": 665.713,
+      "skipped": 5
+    },
+    "independent_actual_counterexamples": 12,
+    "new_adjudication_groups": 12,
+    "resource_warnings": "errors"
+  },
+  "logs": {
+    "meas01-adjudication-29-green.log": {
+      "bytes": 5988,
+      "sha256": "8e27ff543341bea2a83ef77ef4794502c54456c9725e95d0a11236bb89057e75"
+    },
+    "meas01-adjudication-bandit.log": {
+      "bytes": 4301,
+      "sha256": "30612fa4006c5e04ebc2550cd1d6fbf189b4fbcb20f1a8c48ff9d82ec7d8fc4e"
+    },
+    "meas01-adjudication-final-30-green.log": {
+      "bytes": 6210,
+      "sha256": "124fc79e65585bb1e794b0ae64fb07bf6e79c4fd7a1e1cf6f356aed8afc96dfa"
+    },
+    "meas01-adjudication-first-functional.log": {
+      "bytes": 2468,
+      "sha256": "63c4005a0e0175d42b2f78a9e03502fc5a5e8bd4074a92b923f1c9d5f7240c34"
+    },
+    "meas01-adjudication-full-suite-final.log": {
+      "bytes": 159490,
+      "sha256": "07db96cbb82b5b23ed75dbde2b068ac7f2a21c91cc033ad55de75c27c77697a3"
+    },
+    "meas01-adjudication-full-suite.log": {
+      "bytes": 4261,
+      "sha256": "8cb3e38797520f24dfcecca217abb610c0219c361295b86e1cd9e3813a677ebd"
+    },
+    "meas01-adjudication-markdown-links.json": {
+      "bytes": 157,
+      "sha256": "abcfb12e9629a9c3f2661b986b8b0d3e0800ef35c1b10c8dff325740ccb45cc8"
+    },
+    "meas01-adjudication-missing-function-red.log": {
+      "bytes": 1096,
+      "sha256": "bbba0b02a3b3fb3b2cd020d5ea51be3b600156dd55d9cab5cf50b57c4fb7ff27"
+    },
+    "meas01-adjudication-pip-audit.log": {
+      "bytes": 268,
+      "sha256": "e82148c0c30269ca5a2c35420ece6af011a4faf5a375325d750e243ffdb10625"
+    },
+    "meas01-adjudication-published-study-green.log": {
+      "bytes": 324,
+      "sha256": "168b007ae29af8e52b8a1925a55b34ac5d7dd09890ffa603338a95c79a9fb86a"
+    },
+    "meas01-adjudication-static-checks.json": {
+      "bytes": 512,
+      "sha256": "039d3f0bda6164ff52f4a93f53b4ad2311733c76a7ffa49365b8682ecae232f5"
+    }
+  },
+  "model_review_usage": {
+    "Codex_platform_model_usage": "Used native delegation; exact platform cost and model identifier unavailable, not claimed universally free",
+    "benchmark_provider_API_calls": 0,
+    "new_benchmark_allocation": false
+  },
+  "new_benchmark_allocation": false,
+  "preservation": {
+    "authority_prior_seal": "docs/conformance/rec05b-pilot-verification-input.json",
+    "authority_sha256": "52d293f04921af5418a46a0ce33b1ffd296ae3753cbd3aee7da5130f3dd2c06a",
+    "before_and_after_match_prior_seals": true,
+    "official_partition_score_and_all_financial_bytes_unchanged": true,
+    "package_file_count": 36,
+    "package_prior_seal": "docs/conformance/rec05c-code-preservation.json",
+    "protected_file_count": 287,
+    "protected_prior_seal": "docs/conformance/nb01-preservation.json",
+    "zip_sha256": "bd32c4d50339e2f2e1cadf01f5872fa3c1cdf12c196e7676a18d6fe96bd534e0"
+  },
+  "public_api": {
+    "behavior": "validates declared identity/coverage and exact physical hashes;rejects selected unresolved items;copies complete selected adjudicator assessments without majority vote or pair closure",
+    "empty_selection": "legal,including when every item is uncertain",
+    "inputs": "in-memory JSON data and exact raw bytes; maximum5MiB per raw input;not an aggregate memory/time guarantee",
+    "library": "standalone docs/conformance/meas01-pack.py:adjudicated_expectations(pack,two_frozen_raw_reviews,raw_response,raw_record,explicit_item_ids)",
+    "output": "buddha.meas01-expectations.v1;model-development expectations,not human truth or official scores",
+    "selection": "all17 explicitly resolved complete items, original pack order;all5 uncertain items excluded"
+  },
+  "scope": "Bounded blinded model-development review, explicit adjudication and portable expectation bindings; no official rescore or scientific success claim",
+  "source": {
+    "docs/MEASUREMENT-AUDIT-RESULTS.md": {
+      "bytes": 8027,
+      "sha256": "526a152610e09c066f71b7b691dcf80ad614fcc61901b7bc279a7c104843111a"
+    },
+    "docs/conformance/meas01-pack.py": {
+      "bytes": 27532,
+      "sha256": "6328f94c4280c29992cbdd87c205e45950406c00f6af636d4392fb7a6777e4fc"
+    },
+    "docs/conformance/meas01-study/manifest.json": {
+      "bytes": 3433,
+      "sha256": "fe46424035d586a514f71a0f1e832e86e50320d7732852fb92a539e772f0372b"
+    },
+    "tests/fixtures/meas01-expectations.json": {
+      "bytes": 76965,
+      "sha256": "9211231da884cdce93a9a9b0c486d7f582646a113623f0ba784177808c6571d8"
+    },
+    "tests/test_meas01_adjudication.py": {
+      "bytes": 16791,
+      "sha256": "8f8e34be108e521f47a5e101e42ee0c16624f0b7fc2338e48e7201b30c54d439"
+    }
+  },
+  "spec": "MEAS-01",
+  "status": "complete_at_bounded_model_development_scope",
+  "verification_history": {
+    "actual_study_integration": "Added after public artifacts existed;first actual-study group passed;no invented prior RED",
+    "first_functional": "11 functional groups passed before final actual-study integration;not represented as prior red behavior",
+    "partial_full": "Earlier full run deliberately stopped to add actual-study integration;partial log retained and not claimed pass",
+    "red": "Missing-function loader failure reproduced before implementation;no blanket behavior-RED claim",
+    "schema_corrections": "Both originals frozen before validation;two reviews required24 uncertain-pair field-key corrections only;every other field/judgment verified equal"
+  }
+}

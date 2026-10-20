@@ -6,7 +6,7 @@ Build agents that improve their own procedures for producing useful, meaningfull
 
 ## Current state
 
-The implementation checkpoint is **REC-05C**. The project has auditable API
+The implementation checkpoint is **MEAS-01**. The project has auditable API
 accounting, linked recovery, bounded policy search, replaceable release selection,
 and isolated fixed-seed generation. The unchanged official LLM partition, score
 and summary commands now compose with generated C1 answers in a complete
@@ -20,18 +20,21 @@ now checks explicitly sealed saved requests, results, lineage and accounting
 without keys, model calls or record changes. The [doctor](docs/DOCTOR.md) now
 reports locks, unknown writer identity, outstanding diagnostics and native
 completion anchors without resuming work. The [blinded measurement audit](docs/MEASUREMENT-AUDIT.md)
-now has an offline review pack; independent review and adjudication remain open.
+now has two frozen model reviews and a separate blinded adjudication. The
+[results](docs/MEASUREMENT-AUDIT-RESULTS.md) preserve 17 resolved items and five
+uncertain items; human scientific validation remains open.
 
 These are distinct from scientific success. Meaningful diversity, held-out
 improvement, genuine task/improver source evolution and an improved improver have
-**not been established**. Both completed one-prompt pilots contain repeated plots;
-original benchmark scores and raw evidence remain unchanged. See the
+**not been established**. Earlier pilot reviews flagged recurring premises and
+possible plot overlap. Blinded model review resolves some as distinct and leaves
+others uncertain; original benchmark scores and raw evidence remain unchanged. See the
 [pilot review](docs/PILOT-REVIEW.md), [recovery results](docs/FIRST-LIVE-RESULTS.md)
 and [linked continuation results](docs/LINKED-CONTINUATION-RESULTS.md).
 
-At this checkpoint the living plan contains **11 remaining leaf slices**.
+At this checkpoint the living plan contains **10 remaining leaf slices**.
 The native pipeline is complete at its declared offline scope. Umbrella milestones
-are not counted again. They cover measurement (2),
+are not counted again. They cover measurement (1),
 policy/search (3), source evolution (3), held-out evaluation (2) and the
 improver comparison (1). This is a checkpoint count, not a promise that research
 findings will never require a smaller slice; [PLAN.md](docs/PLAN.md) determines
@@ -93,7 +96,7 @@ This synthetic example evaluates independent-sampling and in-context seeds, prop
 
 The first live experiment was authorized for **up to $50 combined**, covering both providers and all search stages. The initial attempt was interrupted while awaiting answer 10. Its nine replies and full uncertain reservation remain intact. The completed recovery restart used a **$49.465918 cap and 118-call allowance**, accounting for the original $0.534082 committed liability and ten attempted calls. It repeated the same one-prompt, two-seed, one-proposal engineering pilot with fresh evidence. Both attempts are now historical inputs. Shared authorization imports their sealed liabilities once and enforces the combined dollar/call cap. The linked continuation reuses nine saved replies as evidence, sends a separately identified replacement for the unknown tenth, then completes the remaining search stages. Its new report separates new cost, inherited evidence cost and shared experiment accounting.
 
-The corrected linked run completed and was verified: nine saved replies reused, 51 new calls for $0.274533, with the original unknown still held. [Linked results and concerns](docs/LINKED-CONTINUATION-RESULTS.md) record the three candidate scores, repeated plots, literal/craft failures and shared accounting. The completed run is closed to new paid calls; its [execution handoff](docs/FIRST-LIVE-CONTINUATION.md) remains historical evidence. Benchmark conformance now passes at its declared offline scope; REC-05's bounded read-only verification and diagnostic gates are complete; independent measurement calibration is next.
+The corrected linked run completed and was verified: nine saved replies reused, 51 new calls for $0.274533, with the original unknown still held. [Linked results and concerns](docs/LINKED-CONTINUATION-RESULTS.md) record the three candidate scores, repeated plots, literal/craft failures and shared accounting. The completed run is closed to new paid calls; its [execution handoff](docs/FIRST-LIVE-CONTINUATION.md) remains historical evidence. Benchmark conformance now passes at its declared offline scope; REC-05's bounded read-only verification and diagnostic gates are complete; the blinded model-development review is complete, and auditing the official judge against those judgments is next.
 
 This command prints the saved completed report once in this window. It needs no
 keys, makes no changes and spends nothing:

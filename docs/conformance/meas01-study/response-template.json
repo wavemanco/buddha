@@ -1,0 +1,859 @@
+{
+  "format": "buddha.meas01-submission.v1",
+  "items": [
+    {
+      "answers": [
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "91fccccb4df9c46a5ed457f0c13825cc",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "1012bb233ec6d2bebfe0b4dabbf4eb55",
+          "uncertainty": ""
+        }
+      ],
+      "groups": null,
+      "id": "92bbea60cc82d82c3f0727116decc86b",
+      "rationale": "",
+      "uncertain_pairs": []
+    },
+    {
+      "answers": [
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "d36a193383a41b917d61e8f47885c127",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "5a555875dc883ac26a3e5190c56feafe",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "83f7be99bfb825e4c4db9743e109f1d5",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "9673b5a72b6ff43f18e5fb29d7239915",
+          "uncertainty": ""
+        }
+      ],
+      "groups": null,
+      "id": "9bef63191451b984d6e7940e8cf87435",
+      "rationale": "",
+      "uncertain_pairs": []
+    },
+    {
+      "answers": [
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "1f05a4f755b5e8b034e868d8cb9ccfc7",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "12bf998ddb94aabf41f8b4c36541f60d",
+          "uncertainty": ""
+        }
+      ],
+      "groups": null,
+      "id": "1c6b4f8f841d8095f3e49f35ba7f9d9c",
+      "rationale": "",
+      "uncertain_pairs": []
+    },
+    {
+      "answers": [
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "0cb42de52c35843758e4c875ddd9a43c",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "fe53ecd2eb3929bba2a4fccc1dae528b",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "2cf7f72fa2321501e29a78f8d87438c0",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "e6842d2bc6f0277d85bd4b2676c2f6fc",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "49b1ad6c2976bfa8920c048f7e69158b",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "b36eb078d07198b4fcac77b102c61511",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "4161819f4660b5515d94bab7adbf9e4a",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "736715e4ad9011ed71a16af7aac66b40",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "6107f57b393b3718b197f0b08a47862d",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "706638063826e0a2550ac5be7a220908",
+          "uncertainty": ""
+        }
+      ],
+      "groups": null,
+      "id": "d46355da75af2b016bf57e11744eded5",
+      "rationale": "",
+      "uncertain_pairs": []
+    },
+    {
+      "answers": [
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "1865a1afea96c4744f6771318aa3d6b4",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "a693127cda5a96374b9ef33e26460da4",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "ea4caf5456e2c8862861ee4f711a863b",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "ac938a8cd91a677e7779493ea5d979db",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "de956ae4097cec695869dc79f332b9e5",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "79978427aa3c43b7bcc05fe8375f60b9",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "16f9bf7d341494e7bbe88a786bfb7877",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "64e4eda8c94c28fe463f8ad577340966",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "09415ff47609795fbbe140d05815bd87",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "de528fb1f286939a564ddb996dfd6e74",
+          "uncertainty": ""
+        }
+      ],
+      "groups": null,
+      "id": "51234f90d16f7154c9064a7637c48093",
+      "rationale": "",
+      "uncertain_pairs": []
+    },
+    {
+      "answers": [
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "b8f3511cccbb7cd35d3d6188f4bcb393",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "fd9092f32ea8d4357bed97dbae929c62",
+          "uncertainty": ""
+        }
+      ],
+      "groups": null,
+      "id": "2e4ad7b4d67bbacdd1a7f9bf6144aa48",
+      "rationale": "",
+      "uncertain_pairs": []
+    },
+    {
+      "answers": [
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "23784d7af28be3099ac4c81b91a1e386",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "5de847af0bcc1920ec5329f117c1f607",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "adb7640e3117e2d7fecb725b184fe7c5",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "dbe29fe7b178a44865b7de6817824711",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "b8acbf0a8d30733301afa18130e1ebc3",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "a2fce1358a2454f4e563c44b66f07b4f",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "212c23519d288c6c66e404628115a8f4",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "64b47a02665aa2c62832da55ac11cbdd",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "2e44cf79a6d4941fbff90df635983240",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "5b53b5817abfa52dce6726be481082f2",
+          "uncertainty": ""
+        }
+      ],
+      "groups": null,
+      "id": "344e6398cb019bc7e0e69d6bcc2f4d88",
+      "rationale": "",
+      "uncertain_pairs": []
+    },
+    {
+      "answers": [
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "10c440e0341fedd28223fbeb52921f4a",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "8e7baf14171d86446d5351713f052361",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "8710ec44abb26ca6a13cad1e38f0f413",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "09fb9aff0cec0f95275a90aa36b30269",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "1d26ae1af7a54a22f737909f28808268",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "772df7da44f88c0cbff505e2be1612a7",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "c736afa8fef6a2c3466bdac0683168ad",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "c78cdf0e34cf2b1ac9a06c29f96951dc",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "b6c257d4eb02a05a71d4a464af89bf78",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "51b4b29dfd2c0114173319c1ba4e2f5b",
+          "uncertainty": ""
+        }
+      ],
+      "groups": null,
+      "id": "a6deca95bec239a475b0124ec6348ff6",
+      "rationale": "",
+      "uncertain_pairs": []
+    },
+    {
+      "answers": [
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "61fb2dc048d5cb6240ce40558598ed64",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "095c985e9ec5ea81852328ed8396e803",
+          "uncertainty": ""
+        }
+      ],
+      "groups": null,
+      "id": "bdcdc29b741cb601ef9062c05a490aca",
+      "rationale": "",
+      "uncertain_pairs": []
+    },
+    {
+      "answers": [
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "d3f819db3a145e3fc39fd8364a74dc38",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "bc3e4c414f9cac035346f7299840f2e4",
+          "uncertainty": ""
+        }
+      ],
+      "groups": null,
+      "id": "8664f647a70dd7df7e1c260b7dc7b511",
+      "rationale": "",
+      "uncertain_pairs": []
+    },
+    {
+      "answers": [
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "9fce9e3e951d7788c9ffb9435f580170",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "9c6265496583bc234c9d3cf9d6ea2fad",
+          "uncertainty": ""
+        }
+      ],
+      "groups": null,
+      "id": "be26bf6f449325ec2e0fcb3f5e75756a",
+      "rationale": "",
+      "uncertain_pairs": []
+    },
+    {
+      "answers": [
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "226f1598c3caed2eefc194714fb3914b",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "d171187e870dcf82119cea13d3165e53",
+          "uncertainty": ""
+        }
+      ],
+      "groups": null,
+      "id": "2da27b0ae8c3039fcff89e5530889fb3",
+      "rationale": "",
+      "uncertain_pairs": []
+    },
+    {
+      "answers": [
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "db74c37fc59c517eef8568c12eadab4b",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "58f993adc274019328c7b10464be47f9",
+          "uncertainty": ""
+        }
+      ],
+      "groups": null,
+      "id": "d4ec43273c6d8f4c59d77fa59427638a",
+      "rationale": "",
+      "uncertain_pairs": []
+    },
+    {
+      "answers": [
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "72d7f861e100faff39a2527f0611c210",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "00b2469d9e00d30523bc9c78e7055457",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "c9f81e017f7438834d89aa3e6f46765a",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "df6f528563e850d67d396c76a6bc75d3",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "55453440696cb95e0b8c5f3ecc3d9acd",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "f7c5cc2a848f31ecc181f4390da6904d",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "973b43d281f923026b0509a848a489bc",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "def98a7dcd76d9c27967b23bddf03bda",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "319b5cec10547073218ba5b29b4bd60d",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "31308b530f0edae1e0266258a1ec10ed",
+          "uncertainty": ""
+        }
+      ],
+      "groups": null,
+      "id": "eb0cebeb4449dc16174c85a9a0d878b9",
+      "rationale": "",
+      "uncertain_pairs": []
+    },
+    {
+      "answers": [
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "ac86a5d7632a449920f1ba6ea5b972dd",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "07400b060e67495573c0c690256e1515",
+          "uncertainty": ""
+        }
+      ],
+      "groups": null,
+      "id": "33d067fb4613a2ef2da48df5f8ef1e19",
+      "rationale": "",
+      "uncertain_pairs": []
+    },
+    {
+      "answers": [
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "6e332d69421cb978781b64511da3d3cf",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "1f6ccfb5fcae50a774c4d98e6c87fbc1",
+          "uncertainty": ""
+        }
+      ],
+      "groups": null,
+      "id": "e7feb4d99fea5f238cd59e3cdf82aa3b",
+      "rationale": "",
+      "uncertain_pairs": []
+    },
+    {
+      "answers": [
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "83f481fccb15fc4505a4927003c8e470",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "96854e3a2170213ce2ca21333a1c76fc",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "5b5475d4a9dfd4ee49c4d70794125930",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "b15355a01f8750efe1a507d7c7e7e1bd",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "e851845fe9bdf961aa66acf81df5f636",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "57636bd60753cf774252aa29e0ff318a",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "1acc0753ff2baf53eb255ad5ee40e48f",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "ca3d62f5635769800f84f24b2c8ff9f4",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "ab318b66b8aa87ba0e5d156dd2bd0c8d",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "f848374daa06073a569e6dd3b107d6c7",
+          "uncertainty": ""
+        }
+      ],
+      "groups": null,
+      "id": "80262d25cd742e1fdfec68a8c9c7017a",
+      "rationale": "",
+      "uncertain_pairs": []
+    },
+    {
+      "answers": [
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "216b6020c9f578762aabb8a82cc7858a",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "646b082f13a763daa9684761eadb283d",
+          "uncertainty": ""
+        }
+      ],
+      "groups": null,
+      "id": "a58d409d4c57a0355ae8c255154c9c6b",
+      "rationale": "",
+      "uncertain_pairs": []
+    },
+    {
+      "answers": [
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "eecc49d79aad0fc118a55928305df255",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "478e7be78120f0912f270c05e9d8fc36",
+          "uncertainty": ""
+        }
+      ],
+      "groups": null,
+      "id": "c68c830af8c997b24e3a9b67c7f345f4",
+      "rationale": "",
+      "uncertain_pairs": []
+    },
+    {
+      "answers": [
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "5baf0f6ed779e18cf33dda69bc6367ca",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "52b70b147e7bd11fe5373988141cbc15",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "71c7a847a58b93d2de23bcc07c4563c6",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "59c458b071ef37f0c3fd08d14d6b6d8f",
+          "uncertainty": ""
+        }
+      ],
+      "groups": null,
+      "id": "8ea2c26319ada4d4865fcd7cd05b661d",
+      "rationale": "",
+      "uncertain_pairs": []
+    },
+    {
+      "answers": [
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "6fab571ac6d066fc056a1f04f8cea742",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "1eda249504c6a4412c0308ed99fc7ce1",
+          "uncertainty": ""
+        }
+      ],
+      "groups": null,
+      "id": "bba87d6fd854389765a0303dce90450e",
+      "rationale": "",
+      "uncertain_pairs": []
+    },
+    {
+      "answers": [
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "949759694a7f653398bcfe31505757f7",
+          "uncertainty": ""
+        },
+        {
+          "compliance": null,
+          "compliance_rationale": "",
+          "craft_notes": "",
+          "id": "c7853941b71b358a5c05600e60a796c9",
+          "uncertainty": ""
+        }
+      ],
+      "groups": null,
+      "id": "8433af3c1b37d8fd660566988aabf71e",
+      "rationale": "",
+      "uncertain_pairs": []
+    }
+  ],
+  "pack_sha256": "8a29cded45e11f62eaecba52e5d9c30a88e2733b28cc8138aa2fdb38d025bf15",
+  "reviewer": {
+    "id": "",
+    "prior_exposure": "",
+    "type": ""
+  }
+}

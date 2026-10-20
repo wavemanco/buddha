@@ -14,11 +14,14 @@
     "strict_mypy": "pass;37 application sources;linux and win32"
   },
   "ci": {
+    "PR25": "Linux PR/push success; both Windows unit/composed steps still in progress, observed2026-10-20T23:18Z",
+    "PR_workflow": "https://github.com/wavemanco/buddha/actions/runs/39511810509",
     "main_PR23_merge_workflow": "https://github.com/wavemanco/buddha/actions/runs/39506966085;Linux/Windows success observed",
-    "parent_PR24": "Linux PR/push checks green;Windows checks last observed running",
+    "parent_PR24": "all four PR/push Linux/Windows jobs terminal success at72a59c62a1b80650089dee57d10e2d0714e28485; merged366d05b7908256633c6cdc792b89f60db6ea96f2 at2026-10-20T23:06:31Z",
     "parent_PR_workflow": "https://github.com/wavemanco/buddha/actions/runs/39508636874",
     "parent_push_workflow": "https://github.com/wavemanco/buddha/actions/runs/39508627401",
-    "status": "pending publication;local tests do not establish hosted CI"
+    "push_workflow": "https://github.com/wavemanco/buddha/actions/runs/39511804409",
+    "status": "hosted Windows checks pending; not claimed green"
   },
   "coverage": {
     "authored_cards": 7,

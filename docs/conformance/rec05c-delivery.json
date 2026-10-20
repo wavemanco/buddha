@@ -170,12 +170,16 @@
     "strict_mypy": "pass;37 sources;linux and win32"
   },
   "ci": {
+    "PR24": "all four PR/push Linux/Windows jobs terminal success at72a59c62a1b80650089dee57d10e2d0714e28485",
+    "PR_workflow": "https://github.com/wavemanco/buddha/actions/runs/39508636874",
     "main_PR22_merge_workflow": "https://github.com/wavemanco/buddha/actions/runs/39500411647;terminalsuccessobserved",
     "main_PR23_merge_workflow": "https://github.com/wavemanco/buddha/actions/runs/39506966085;terminal Linux/Windows success observed",
+    "merge": "366d05b7908256633c6cdc792b89f60db6ea96f2 at2026-10-20T23:06:31Z",
     "parent_PR23": "all four PR/push Windows/Linux jobs green atfe6ff20cc50b7dad77e3dbba4cc0d0e7280c977f;merged04c88b9959c9d4ff1be4334b1af754f2112fe84b at2026-10-20T22:17:04Z",
     "parent_PR_workflow": "https://github.com/wavemanco/buddha/actions/runs/39502913318",
     "parent_push_workflow": "https://github.com/wavemanco/buddha/actions/runs/39502898820",
-    "status": "pending publication;local tests do not establish hosted CI"
+    "push_workflow": "https://github.com/wavemanco/buddha/actions/runs/39508627401",
+    "status": "observed green and merged; local and hosted checks remain separate"
   },
   "date": "2026-10-20",
   "findings": {

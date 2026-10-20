@@ -1,0 +1,527 @@
+{
+  "format": "buddha.meas01-pack.v1",
+  "items": [
+    {
+      "answers": [
+        {
+          "id": "91fccccb4df9c46a5ed457f0c13825cc",
+          "text": "Mara and her dog, Pippin, lived beside a dry riverbed where the village’s water wheel had stopped turning.  \nOne morning, Pippin began barking at a patch of moss-covered stones, and Mara discovered a buried tunnel beneath them.  \nShe crawled inside with Pippin and found that fallen branches had blocked an underground stream.  \nWhile Pippin squeezed through a narrow gap to pull loose the smallest branches, Mara used her shovel to clear the larger ones.  \nWater rushed back to the wheel, the village fountains splashed again, and Mara and Pippin became the keepers of the hidden stream."
+        },
+        {
+          "id": "1012bb233ec6d2bebfe0b4dabbf4eb55",
+          "text": "Mara and her dog, Pippin, discovered that the old lighthouse bell rang whenever the sea hid something important.  \nWhen the fishing village’s fresh-water well suddenly turned salty, Mara climbed the lighthouse stairs while Pippin sniffed along the walls.  \nPippin scratched at a loose stone, and Mara found a copper pipe leading beneath the cliffs.  \nTogether they followed it to a blocked spring, where Mara cleared the stones and Pippin dragged out a torn sailcloth clogging the opening.  \nFresh water rushed back to the village, and from then on Mara and Pippin became the keepers of the lighthouse’s mysterious bell."
+        }
+      ],
+      "id": "92bbea60cc82d82c3f0727116decc86b",
+      "prompt": "Tell me a story in five sentences about a girl and her dog."
+    },
+    {
+      "answers": [
+        {
+          "id": "d36a193383a41b917d61e8f47885c127",
+          "text": "YES"
+        },
+        {
+          "id": "5a555875dc883ac26a3e5190c56feafe",
+          "text": "NO"
+        },
+        {
+          "id": "83f7be99bfb825e4c4db9743e109f1d5",
+          "text": "NO, because nine is odd."
+        },
+        {
+          "id": "9673b5a72b6ff43f18e5fb29d7239915",
+          "text": "No"
+        }
+      ],
+      "id": "9bef63191451b984d6e7940e8cf87435",
+      "prompt": "Is 9 an even number? Respond with exactly YES or NO and no other characters."
+    },
+    {
+      "answers": [
+        {
+          "id": "1f05a4f755b5e8b034e868d8cb9ccfc7",
+          "text": "Mara taught her dog, Pippin, to find lost sounds instead of lost objects.  \nWhenever a robin stopped singing or a bicycle bell went silent, Pippin led her through the neighborhood by tugging gently at his red leash.  \nOne evening, he pulled her beneath the old bridge, where they discovered a tiny music box wedged between the stones.  \nMara wound it carefully, and its bright melody returned the missing sounds to every bird, bell, and rustling tree nearby.  \nAfter that, Pippin slept beside the music box, guarding the songs he had rescued."
+        },
+        {
+          "id": "12bf998ddb94aabf41f8b4c36541f60d",
+          "text": "Mara taught her one-eyed dog, Pippin, to find lost sounds instead of lost things.  \nWhenever a bell stopped ringing or a song disappeared, Pippin would tilt his head and lead her through the town by scent.  \nOne winter morning, he guided her beneath the frozen bridge, where the river had trapped the cheerful voice of an old street musician.  \nMara warmed the musician’s broken harmonica in her pocket while Pippin barked until the river released the song.  \nAfter that, whenever Mara felt lonely, Pippin found her own laughter and brought it home."
+        }
+      ],
+      "id": "1c6b4f8f841d8095f3e49f35ba7f9d9c",
+      "prompt": "Tell me a story in five sentences about a girl and her dog."
+    },
+    {
+      "answers": [
+        {
+          "id": "0cb42de52c35843758e4c875ddd9a43c",
+          "text": "Mara taught her dog, Pippin, to find lost sounds instead of lost objects.  \nWhenever a robin stopped singing or a bicycle bell went silent, Pippin led her through the neighborhood by tugging gently at his red leash.  \nOne evening, he pulled her beneath the old bridge, where they discovered a tiny music box wedged between the stones.  \nMara wound it carefully, and its bright melody returned the missing sounds to every bird, bell, and rustling tree nearby.  \nAfter that, Pippin slept beside the music box, guarding the songs he had rescued."
+        },
+        {
+          "id": "fe53ecd2eb3929bba2a4fccc1dae528b",
+          "text": "Mara taught her one-eyed dog, Pippin, to find lost sounds instead of lost things.  \nWhenever a bell stopped ringing or a song disappeared, Pippin would tilt his head and lead her through the town by scent.  \nOne winter morning, he guided her beneath the frozen bridge, where the river had trapped the cheerful voice of an old street musician.  \nMara warmed the musician’s broken harmonica in her pocket while Pippin barked until the river released the song.  \nAfter that, whenever Mara felt lonely, Pippin found her own laughter and brought it home."
+        },
+        {
+          "id": "2cf7f72fa2321501e29a78f8d87438c0",
+          "text": "Mara’s dog, Fig, could smell rain hours before the clouds arrived.  \nOne afternoon, Fig dragged her toward the old train tunnel, where they found a tiny fawn trapped behind a fallen gate.  \nMara squeezed through the bars, but the gate would not budge until Fig tugged a rusted lever hidden beneath the weeds.  \nThe fawn limped free and disappeared into the forest just as rain began tapping the rails.  \nFrom then on, Mara trusted Fig’s nose—even when it led them somewhere she had never dared to go."
+        },
+        {
+          "id": "e6842d2bc6f0277d85bd4b2676c2f6fc",
+          "text": "Mara’s dog, Fig, barked whenever the moon appeared, so she built him a cardboard telescope to investigate it.  \nOne night, Fig dragged her into the garden and pointed the telescope at a tiny blinking light between the stars.  \nMara discovered it was a lost drone carrying a child’s birthday message, drifting far beyond its neighborhood.  \nWith Fig barking directions, she guided the drone home by tying a flashlight to his collar and waving it from the hilltop.  \nThe next morning, a grateful family left Fig a cake, which he shared with Mara only after inspecting every crumb."
+        },
+        {
+          "id": "49b1ad6c2976bfa8920c048f7e69158b",
+          "text": "Mara taught her old dog, Biscuit, to find lost sounds instead of lost objects.  \nOne afternoon, Biscuit led her through the woods to a tiny bell buried beneath the roots of an oak tree.  \nWhen Mara rang it, every bird in the forest fell silent.  \nShe realized the bell belonged to a missing shepherd who had vanished years ago, and its echo pointed toward his abandoned cabin.  \nBy sunset, Mara and Biscuit had returned the bell to the shepherd’s family, who said the forest finally sounded right again."
+        },
+        {
+          "id": "b36eb078d07198b4fcac77b102c61511",
+          "text": "Mara taught her old dog, Pippin, to find lost things by following the faintest sound they made.  \nOne windy afternoon, Pippin led her beneath the town bridge, where a tiny music box was humming in the mud.  \nMara cleaned it and discovered it belonged to the baker, who had lost it on the day his daughter was born.  \nThe grateful baker offered them any treat in his shop, but Pippin chose a plain loaf and carried it carefully to a shivering stray.  \nFrom then on, Mara practiced finding what people needed most, while Pippin became famous for knowing when that need was a warm meal."
+        },
+        {
+          "id": "4161819f4660b5515d94bab7adbf9e4a",
+          "text": "Mara’s dog, Pippin, could hear lost things before anyone else knew they were missing.  \nOne windy afternoon, he dragged her to the town clock and pawed at a loose stone beneath it.  \nMara found a tiny brass key and used it to open the clockmaker’s forgotten cabinet.  \nInside was a stack of letters addressed to people who had moved away decades ago.  \nTogether, Mara and Pippin delivered every letter they could, giving the town its old goodbyes at last."
+        },
+        {
+          "id": "736715e4ad9011ed71a16af7aac66b40",
+          "text": "Mara’s dog, Button, could hear lost things humming beneath the floorboards.  \nWhenever Mara misplaced a button, key, or birthday coin, Button pressed his ear to the wood and wagged toward the answer.  \nOne rainy evening, he led her to a loose plank beneath which lay a bundle of letters her late grandmother had hidden years ago.  \nThe letters revealed that Grandma had once dreamed of sailing around the world but stayed home to raise Mara’s mother.  \nMara tucked the letters safely away, then began building a small wooden boat for herself and Button."
+        },
+        {
+          "id": "6107f57b393b3718b197f0b08a47862d",
+          "text": "Mara’s dog, Pippin, could hear lost things calling from beneath the ground.  \nOne afternoon, he led her past the meadow to an old stone well where her grandmother’s silver locket had disappeared years before.  \nMara lowered a basket tied to a rope, and Pippin barked whenever it drifted near the locket.  \nWhen they pulled it up, the locket was warm and humming with the sound of her grandmother’s lullaby.  \nFrom then on, Mara and Pippin searched for forgotten treasures, returning each one before sunset."
+        },
+        {
+          "id": "706638063826e0a2550ac5be7a220908",
+          "text": "Mara’s dog, Pippin, could smell rain hours before the clouds appeared.  \nOne afternoon, he tugged her toward the old greenhouse behind the library, where they found a box of abandoned seed packets.  \nMara planted them in her backyard, while Pippin guarded the rows from hungry sparrows.  \nBy summer, the garden had grown into a maze of sunflowers, beans, and tiny blue flowers no one had seen before.  \nMara gave the mysterious blossoms to the library, and Pippin became famous as the dog who discovered a new kind of garden."
+        }
+      ],
+      "id": "d46355da75af2b016bf57e11744eded5",
+      "prompt": "Tell me a story in five sentences about a girl and her dog."
+    },
+    {
+      "answers": [
+        {
+          "id": "1865a1afea96c4744f6771318aa3d6b4",
+          "text": "Lena and her dog, Biscuit, built a blanket fort in the living room on a rainy afternoon.  \nWhen the lights suddenly went out, Biscuit bravely led Lena through the dark house with a flashlight tied to his collar.  \nThey discovered that a fallen branch had knocked out the power outside.  \nWhile they waited for help, Lena shared her snacks with Biscuit and told him stories by candlelight.  \nWhen the lights returned, they celebrated by making their fort even bigger."
+        },
+        {
+          "id": "a693127cda5a96374b9ef33e26460da4",
+          "text": "Grace and her dog, Pudding, discovered a bright yellow umbrella floating in the town fountain.  \nPudding tugged it from the water while Grace searched for its owner.  \nThey followed a trail of wet footprints to a little boy sitting sadly on a bench.  \nWhen Grace returned the umbrella, the boy thanked them and invited Pudding to share his ball.  \nBy sunset, the new friends were laughing together beneath the cheerful yellow canopy."
+        },
+        {
+          "id": "ea4caf5456e2c8862861ee4f711a863b",
+          "text": "Ava and her dog, Milo, heard a faint whimper coming from the neighborhood park.  \nThey followed the sound and found a puppy stuck inside an empty cardboard box.  \nMilo barked for help while Ava carefully lifted the box and freed the frightened puppy.  \nThe puppy’s owner soon arrived, thanking Ava and Milo with happy tears.  \nAfterward, the three dogs played together while Ava smiled beneath the setting sun."
+        },
+        {
+          "id": "ac938a8cd91a677e7779493ea5d979db",
+          "text": "Clara and her dog, Toby, set out early to deliver homemade cookies to their elderly neighbor.  \nOn the way, a gust of wind scattered the cookies across the sidewalk.  \nToby sniffed out every last one and carried them gently back in his basket.  \nTheir neighbor laughed with delight when they finally arrived.  \nAs a reward, she gave Toby a bright blue ribbon and Clara a warm hug."
+        },
+        {
+          "id": "de956ae4097cec695869dc79f332b9e5",
+          "text": "Sophie and her dog, Max, discovered a small wooden boat washed up beside the river.  \nThey climbed in and drifted gently downstream, following the sparkle of the afternoon sun.  \nWhen the boat bumped into a muddy bank, Max jumped out and found a lost red kite tangled in the reeds.  \nSophie freed the kite, and they carried it home as the prize of their unexpected adventure.  \nThat evening, they flew it together until the first stars appeared."
+        },
+        {
+          "id": "79978427aa3c43b7bcc05fe8375f60b9",
+          "text": "Nora and her dog, Waffles, woke early to find a trail of paw prints leading across the snowy yard.  \nThey followed the prints to a shivering kitten hiding beneath the garden shed.  \nNora wrapped the kitten in her scarf while Waffles stood guard beside them.  \nSoon, a relieved neighbor arrived to take the kitten home.  \nThat night, Nora gave Waffles an extra-big treat for being such a helpful friend."
+        },
+        {
+          "id": "16f9bf7d341494e7bbe88a786bfb7877",
+          "text": "Maya and her dog, Pepper, loved exploring the woods behind their house.  \nOne afternoon, Pepper dashed after a blue butterfly and disappeared beneath the trees.  \nMaya followed his paw prints until she found him beside a tiny fawn trapped in a patch of vines.  \nTogether, Maya and Pepper freed the fawn, who bounded away into the sunlight.  \nFrom that day on, the woods felt like a magical kingdom where every adventure began with friendship."
+        },
+        {
+          "id": "64e4eda8c94c28fe463f8ad577340966",
+          "text": "Emma and her dog, Scout, found a dusty map tucked beneath the old porch.  \nThe map led them through the garden to a hollow tree filled with glowing fireflies.  \nScout gently nudged a small silver key hidden among the roots.  \nEmma used it to open a forgotten music box in the attic, which played a cheerful tune.  \nFrom then on, she and Scout searched the house for more secrets every Saturday."
+        },
+        {
+          "id": "09415ff47609795fbbe140d05815bd87",
+          "text": "Mia and her dog, Oliver, built a tiny garden beside their apartment.  \nOliver accidentally dug up an old marble, which Mia planted beside the flowers as a “magic seed.”  \nBy morning, a curious squirrel had arranged colorful pebbles around it.  \nMia and Oliver smiled, believing their garden had welcomed a secret visitor."
+        },
+        {
+          "id": "de528fb1f286939a564ddb996dfd6e74",
+          "text": "Lily and her dog, Rusty, planted a sunflower seed in their backyard.  \nEvery morning, Rusty dug a little hole beside it while Lily watered the soil.  \nOne day, a bright sunflower bloomed, and a family of bees gathered around its golden petals.  \nLily made a sign asking everyone to protect the bees, and Rusty proudly carried it around the garden.  \nTogether, they learned that even a small seed could grow into something wonderful."
+        }
+      ],
+      "id": "51234f90d16f7154c9064a7637c48093",
+      "prompt": "Tell me a story in five sentences about a girl and her dog."
+    },
+    {
+      "answers": [
+        {
+          "id": "b8f3511cccbb7cd35d3d6188f4bcb393",
+          "text": "Sophie and her dog, Max, discovered a small wooden boat washed up beside the river.  \nThey climbed in and drifted gently downstream, following the sparkle of the afternoon sun.  \nWhen the boat bumped into a muddy bank, Max jumped out and found a lost red kite tangled in the reeds.  \nSophie freed the kite, and they carried it home as the prize of their unexpected adventure.  \nThat evening, they flew it together until the first stars appeared."
+        },
+        {
+          "id": "fd9092f32ea8d4357bed97dbae929c62",
+          "text": "Grace and her dog, Pudding, discovered a bright yellow umbrella floating in the town fountain.  \nPudding tugged it from the water while Grace searched for its owner.  \nThey followed a trail of wet footprints to a little boy sitting sadly on a bench.  \nWhen Grace returned the umbrella, the boy thanked them and invited Pudding to share his ball.  \nBy sunset, the new friends were laughing together beneath the cheerful yellow canopy."
+        }
+      ],
+      "id": "2e4ad7b4d67bbacdd1a7f9bf6144aa48",
+      "prompt": "Tell me a story in five sentences about a girl and her dog."
+    },
+    {
+      "answers": [
+        {
+          "id": "23784d7af28be3099ac4c81b91a1e386",
+          "text": "Nora and her dog, Clover, found a dusty music box in the attic.  \nWhen Nora wound it up, a gentle melody made Clover dance in circles.  \nThe tune led them to a loose floorboard hiding a collection of old family photographs.  \nNora recognized her grandmother as a young girl standing beside a dog just like Clover.  \nSmiling, she placed the photograph beside the music box and danced with Clover until sunset."
+        },
+        {
+          "id": "5de847af0bcc1920ec5329f117c1f607",
+          "text": "Lily and her dog, Scout, planted a sunflower seed in their backyard.  \nEvery morning, Scout dug a little hole beside it, while Lily carefully watered the soil.  \nWeeks later, the sunflower grew taller than Lily and attracted a hummingbird with shimmering wings.  \nScout barked happily whenever the bird returned, as if greeting an old friend.  \nBy summer’s end, Lily saved some seeds so they could grow another garden together."
+        },
+        {
+          "id": "adb7640e3117e2d7fecb725b184fe7c5",
+          "text": "Clara and her dog, Finn, heard a soft whimper coming from inside a hollow log.  \nThey discovered a shivering hedgehog trapped beneath a tangle of twigs.  \nFinn nudged the branches aside while Clara gently lifted the little creature free.  \nAfter warming up, the hedgehog waddled into the ferns and disappeared.  \nClara gave Finn an extra-long belly rub for being such a thoughtful helper."
+        },
+        {
+          "id": "dbe29fe7b178a44865b7de6817824711",
+          "text": "Sofia and her dog, Max, discovered a glowing feather beneath the old oak tree.  \nWhen Sofia picked it up, the feather showed them a hidden path through the garden.  \nMax sniffed along the path until they reached a tiny door in the stone wall.  \nBehind it, they found a warm den filled with lost toys from the neighborhood.  \nSofia and Max returned every toy, earning grateful smiles from everyone they met."
+        },
+        {
+          "id": "b8acbf0a8d30733301afa18130e1ebc3",
+          "text": "Ava and her dog, Pippin, discovered a small red kite tangled in a pine tree.  \nThey carefully freed it and followed the name written on its tail to a nearby hill.  \nThere, they met a boy who had been searching for the kite all afternoon.  \nPippin returned it proudly, holding the string gently between his teeth.  \nThe boy thanked them by teaching Ava and Pippin how to make the kite dance in the wind."
+        },
+        {
+          "id": "a2fce1358a2454f4e563c44b66f07b4f",
+          "text": "Ivy and her dog, Sunny, found a tiny cloud caught in the branches of their favorite tree.  \nThey climbed carefully and nudged it loose with a long stick.  \nThe cloud floated upward, sprinkling silver raindrops over the thirsty garden.  \nIn gratitude, it shaped itself into a sparkling rainbow above their home.  \nIvy and Sunny danced beneath it until the last colors faded."
+        },
+        {
+          "id": "212c23519d288c6c66e404628115a8f4",
+          "text": "Ruby and her dog, Waffles, found a mysterious key buried beneath the porch.  \nThey tried it on every lock in the house until it opened an old garden gate.  \nBeyond the gate stood a neglected orchard filled with ripe, sparkling apples.  \nRuby and Waffles gathered the fruit and shared it with their hungry neighbors.  \nFrom then on, the secret orchard became the happiest place in the village."
+        },
+        {
+          "id": "64b47a02665aa2c62832da55ac11cbdd",
+          "text": "Emma and her dog, Rocket, loved watching the stars from their rooftop garden.  \nOne night, a bright red balloon drifted down and landed beside them.  \nTied to its string was a note from a child across town wishing for a friend.  \nEmma and Rocket followed the address and invited the child to join their next stargazing night.  \nSoon, the three new friends shared stories beneath a sky full of sparkling constellations."
+        },
+        {
+          "id": "2e44cf79a6d4941fbff90df635983240",
+          "text": "Mia and her dog, Biscuit, loved exploring the woods behind their house.  \nOne afternoon, Biscuit chased a blue butterfly and disappeared around a bend.  \nMia followed his paw prints until she found him sitting beside a lost fawn.  \nTogether, they guided the fawn back to its mother near the meadow.  \nThat evening, Mia hugged Biscuit and declared him the bravest dog in the world."
+        },
+        {
+          "id": "5b53b5817abfa52dce6726be481082f2",
+          "text": "Lena and her dog, Pepper, built a tiny boat from old wooden crates.  \nThey floated it in the backyard pond, where Pepper proudly wore a captain’s hat.  \nA sudden breeze carried the boat toward the reeds, and Lena paddled after it with a broom.  \nWhen they finally returned to shore, Pepper shook water everywhere and wagged his tail.  \nLena laughed and decided their next adventure would need a bigger boat."
+        }
+      ],
+      "id": "344e6398cb019bc7e0e69d6bcc2f4d88",
+      "prompt": "Tell me a story in five sentences about a girl and her dog."
+    },
+    {
+      "answers": [
+        {
+          "id": "10c440e0341fedd28223fbeb52921f4a",
+          "text": "Maya loved exploring the woods behind her house with her dog, Biscuit.  \nOne afternoon, Biscuit chased a blue butterfly and disappeared behind a cluster of bushes.  \nMaya followed his paw prints and found him sitting beside a tiny lost fox cub.  \nTogether, they carried the cub to the forest ranger, who reunited it with its family.  \nFrom that day on, Maya and Biscuit were known as the woods’ bravest helpers."
+        },
+        {
+          "id": "8e7baf14171d86446d5351713f052361",
+          "text": "Maya and her dog, Biscuit, loved exploring the forest behind their house.  \nOne afternoon, Biscuit chased a blue butterfly and led Maya to a hidden clearing.  \nIn the center stood a tiny tree covered in golden apples.  \nMaya picked one, and the tree granted her wish to help every lost animal find its way home.  \nFrom that day on, Maya and Biscuit became the forest’s happiest rescuers."
+        },
+        {
+          "id": "8710ec44abb26ca6a13cad1e38f0f413",
+          "text": "Maya and her dog, Pepper, loved exploring the woods behind their house.  \nOne afternoon, Pepper dashed after a blue butterfly and disappeared into the trees.  \nMaya followed his paw prints until she found him beside a tiny stream, guarding a lost kitten.  \nTogether, they carried the kitten home and helped reunite it with its grateful family.  \nFrom then on, Maya knew every adventure was better with Pepper by her side."
+        },
+        {
+          "id": "09fb9aff0cec0f95275a90aa36b30269",
+          "text": "Maya and her dog, Biscuit, loved exploring the woods behind their house.  \nOne afternoon, Biscuit chased a blue butterfly and disappeared down a narrow path.  \nMaya followed his paw prints until she found him beside a tiny lost fox cub.  \nTogether, they carried the cub to the forest ranger, who reunited it with its mother.  \nFrom that day on, Maya and Biscuit were known as the bravest helpers in the whole village."
+        },
+        {
+          "id": "1d26ae1af7a54a22f737909f28808268",
+          "text": "Mia and her golden dog, Sunny, loved exploring the woods behind their house.  \nOne afternoon, they discovered a tiny door hidden beneath a curtain of ivy.  \nWhen Mia opened it, a trail of glowing paw prints led them to a sparkling pond.  \nSunny barked happily as a friendly fox emerged and thanked them for finding his lost silver bell.  \nMia and Sunny returned home at sunset, carrying the bell’s gentle music in their hearts."
+        },
+        {
+          "id": "772df7da44f88c0cbff505e2be1612a7",
+          "text": "Maya found a lost golden retriever shivering beneath an old oak tree.  \nShe wrapped him in her jacket and named him Sunny because his tail wagged whenever the clouds parted.  \nTogether, they searched the neighborhood for his family, following a trail of paw prints and dropped dog treats.  \nAt last, they found a worried boy waiting beside a blue house, and Sunny bounded into his arms.  \nThough Maya was sad to say goodbye, the boy promised that she and Sunny would always be best friends."
+        },
+        {
+          "id": "c736afa8fef6a2c3466bdac0683168ad",
+          "text": "Maya and her dog, Biscuit, loved exploring the woods behind their house.  \nOne afternoon, Biscuit chased a blue butterfly and disappeared around a bend.  \nMaya followed his paw prints until she found him beside a tiny lost fawn.  \nTogether, they guided the fawn back to its mother near the edge of the forest.  \nThat evening, Maya and Biscuit returned home tired, muddy, and proud of their adventure."
+        },
+        {
+          "id": "c78cdf0e34cf2b1ac9a06c29f96951dc",
+          "text": "Maya and her dog, Biscuit, loved exploring the woods behind their house.  \nOne afternoon, they discovered a tiny door hidden beneath an old oak tree.  \nWhen Maya opened it, a trail of glowing paw prints led them to a garden filled with singing flowers.  \nBiscuit barked happily, and the flowers gave Maya a silver seed to plant at home.  \nBy spring, the seed had grown into a tree where every lost animal could find its way home."
+        },
+        {
+          "id": "b6c257d4eb02a05a71d4a464af89bf78",
+          "text": "Maya and her dog, Biscuit, loved exploring the woods behind their house.  \nOne afternoon, they discovered a tiny door hidden beneath the roots of an old oak tree.  \nBiscuit scratched at it, and the door swung open to reveal a glowing garden.  \nMaya and Biscuit spent the day helping the garden’s fairies find a lost moonflower.  \nAs a reward, the fairies gave them a sparkling seed that bloomed into stars every night."
+        },
+        {
+          "id": "51b4b29dfd2c0114173319c1ba4e2f5b",
+          "text": "Maya and her dog, Pepper, loved exploring the woods behind their house.  \nOne afternoon, Pepper discovered a tiny door hidden beneath the roots of an old oak tree.  \nTogether, they stepped inside and found a glowing garden filled with singing flowers.  \nMaya wished for the garden to stay safe, and Pepper barked happily when the flowers nodded.  \nFrom that day on, they visited their secret garden every sunset and kept its magic hidden."
+        }
+      ],
+      "id": "a6deca95bec239a475b0124ec6348ff6",
+      "prompt": "Tell me a story in five sentences about a girl and her dog."
+    },
+    {
+      "answers": [
+        {
+          "id": "61fb2dc048d5cb6240ce40558598ed64",
+          "text": "A girl entered her dog in a village obstacle race. He stopped at every fence to help a slower puppy climb over it. By the time they reached the finish, the prizes had been awarded. The girl asked the organizers to start a team event. Next year, the two dogs crossed the line together."
+        },
+        {
+          "id": "095c985e9ec5ea81852328ed8396e803",
+          "text": "A girl and her dog boarded a train to the sea. At the first station she realized she had left her ticket at home. The conductor found her reservation using the dog's name, which she had entered by mistake. He printed a replacement and stamped it with a paw. She framed the ticket when they returned."
+        }
+      ],
+      "id": "bdcdc29b741cb601ef9062c05a490aca",
+      "prompt": "Tell me a story in five sentences about a girl and her dog."
+    },
+    {
+      "answers": [
+        {
+          "id": "d3f819db3a145e3fc39fd8364a74dc38",
+          "text": "Mira's dog stole her mitten. She chased him to the frozen pond. He dropped it beside a hole in the ice. Inside the hole, a duck was struggling to climb out. Mira used the mitten to pull it onto the bank."
+        },
+        {
+          "id": "bc3e4c414f9cac035346f7299840f2e4",
+          "text": "Mira's dog stole her mitten. She chased him to the frozen pond. He dropped it beside a hole in the ice. Inside the hole, a duck was struggling to climb out. Mira used the mitten to pull it onto the bank."
+        }
+      ],
+      "id": "8664f647a70dd7df7e1c260b7dc7b511",
+      "prompt": "Tell me a story in five sentences about a girl and her dog."
+    },
+    {
+      "answers": [
+        {
+          "id": "9fce9e3e951d7788c9ffb9435f580170",
+          "text": "Mia and her dog, Biscuit, loved exploring the woods behind their house.  \nOne afternoon, Biscuit chased a blue butterfly and disappeared around a bend.  \nMia followed his paw prints until she found him sitting beside a lost fawn.  \nTogether, they guided the fawn back to its mother near the meadow.  \nThat evening, Mia hugged Biscuit and declared him the bravest dog in the world."
+        },
+        {
+          "id": "9c6265496583bc234c9d3cf9d6ea2fad",
+          "text": "Maya and her dog, Biscuit, loved exploring the woods behind their house.  \nOne afternoon, Biscuit chased a blue butterfly and disappeared around a bend.  \nMaya followed his paw prints until she found him beside a tiny lost fawn.  \nTogether, they guided the fawn back to its mother near the edge of the forest.  \nThat evening, Maya and Biscuit returned home tired, muddy, and proud of their adventure."
+        }
+      ],
+      "id": "be26bf6f449325ec2e0fcb3f5e75756a",
+      "prompt": "Tell me a story in five sentences about a girl and her dog."
+    },
+    {
+      "answers": [
+        {
+          "id": "226f1598c3caed2eefc194714fb3914b",
+          "text": "A girl taught her dog to bring letters from the gate. One morning he brought a sealed envelope addressed to nobody. She opened it and found a map of the garden. Following it, she unearthed her grandmother's missing wedding ring. That evening she returned it at the family dinner."
+        },
+        {
+          "id": "d171187e870dcf82119cea13d3165e53",
+          "text": "Every day a girl sent her dog to fetch the mail. This time he returned with an envelope bearing no name. Its contents were a plan showing a buried spot in their yard. There she dug up the wedding ring her grandmother had lost. She gave it back to her grandmother over supper."
+        }
+      ],
+      "id": "2da27b0ae8c3039fcff89e5530889fb3",
+      "prompt": "Tell me a story in five sentences about a girl and her dog."
+    },
+    {
+      "answers": [
+        {
+          "id": "db74c37fc59c517eef8568c12eadab4b",
+          "text": "Mara and her dog, Pip, discovered a tiny door in the roots of the oldest tree in their village.  \nWhen Mara unlocked it, a staircase appeared, leading to an underground garden where every plant held a forgotten memory.  \nPip sniffed out the wilted silver flower containing the memory of the village’s missing spring.  \nMara read the memory aloud while Pip dug a channel from the garden to the dry village well.  \nBy sunrise, the spring returned, and the villagers planted a new tree whose roots sheltered the secret door."
+        },
+        {
+          "id": "58f993adc274019328c7b10464be47f9",
+          "text": "Mara and her dog, Pippin, lived beside a dry riverbed where the village’s water wheel had stopped turning.  \nOne morning, Pippin began barking at a patch of moss-covered stones, and Mara discovered a buried tunnel beneath them.  \nShe crawled inside with Pippin and found that fallen branches had blocked an underground stream.  \nWhile Pippin squeezed through a narrow gap to pull loose the smallest branches, Mara used her shovel to clear the larger ones.  \nWater rushed back to the wheel, the village fountains splashed again, and Mara and Pippin became the keepers of the hidden stream."
+        }
+      ],
+      "id": "d4ec43273c6d8f4c59d77fa59427638a",
+      "prompt": "Tell me a story in five sentences about a girl and her dog."
+    },
+    {
+      "answers": [
+        {
+          "id": "72d7f861e100faff39a2527f0611c210",
+          "text": "Maya and her dog, Pepper, loved exploring the meadow behind their house.  \nOne afternoon, Pepper chased a blue butterfly and disappeared into the tall grass.  \nMaya followed his paw prints until she found him beside a tiny lost fox cub.  \nTogether, they carried the frightened cub to the forest ranger’s cabin.  \nThat evening, Maya, Pepper, and their new fox friend watched the sunset beneath a sky full of stars."
+        },
+        {
+          "id": "00b2469d9e00d30523bc9c78e7055457",
+          "text": "Mia found a small golden puppy hiding beneath her porch one rainy afternoon.  \nShe named him Biscuit and promised to take care of him forever.  \nEvery morning, they explored the woods behind her house, searching for interesting stones and singing birds.  \nOne day, Biscuit followed a trail of paw prints and led Mia to a lost kitten.  \nFrom then on, Mia, Biscuit, and the kitten became the happiest little team in the village."
+        },
+        {
+          "id": "c9f81e017f7438834d89aa3e6f46765a",
+          "text": "Lily and her dog, Max, loved exploring the woods behind their house.  \nOne morning, Max raced ahead and discovered a tiny door hidden beneath an old oak tree.  \nWhen Lily opened it, they found a glowing garden filled with singing flowers.  \nThe flowers gave Max a golden collar that helped him understand every word Lily said.  \nFrom that day on, Lily and Max shared the most wonderful adventures together."
+        },
+        {
+          "id": "df6f528563e850d67d396c76a6bc75d3",
+          "text": "Mia found a small golden dog hiding beneath the porch during a summer rainstorm.  \nShe named him Biscuit and promised to take care of him forever.  \nEvery morning, they explored the meadow behind her house, searching for butterflies and shiny stones.  \nOne day, Biscuit led Mia to a lost child deep in the woods.  \nFrom then on, everyone in town called them the bravest friends around."
+        },
+        {
+          "id": "55453440696cb95e0b8c5f3ecc3d9acd",
+          "text": "Maya and her dog, Biscuit, loved exploring the forest behind their house.  \nOne afternoon, Biscuit chased a blue butterfly and disappeared around a bend.  \nMaya followed his paw prints until she found him beside a tiny lost fawn.  \nTogether, they guided the fawn back to its mother near the meadow.  \nFrom then on, Maya and Biscuit were known as the forest’s bravest rescuers."
+        },
+        {
+          "id": "f7c5cc2a848f31ecc181f4390da6904d",
+          "text": "Maya found a small golden dog shivering beneath her porch one rainy afternoon.  \nShe wrapped him in a blanket and named him Biscuit.  \nEvery day, Biscuit followed Maya to school and waited faithfully by the gate.  \nOne morning, he led her to a lost child hiding in the park.  \nFrom then on, Maya and Biscuit were known as the town’s bravest little heroes."
+        },
+        {
+          "id": "973b43d281f923026b0509a848a489bc",
+          "text": "Maya and her dog, Biscuit, loved exploring the woods behind their house.  \nOne afternoon, Biscuit darted after a blue butterfly and disappeared among the trees.  \nMaya followed his paw prints until she found him beside a tiny stream, guarding a lost fawn.  \nTogether, they guided the fawn back to its mother before sunset.  \nFrom then on, Maya called Biscuit her bravest little forest ranger."
+        },
+        {
+          "id": "def98a7dcd76d9c27967b23bddf03bda",
+          "text": "Maya and her dog, Biscuit, loved exploring the forest behind their house.  \nOne morning, they discovered a tiny blue door hidden beneath an old oak tree.  \nWhen Maya opened it, a trail of glowing paw prints led them to a moonlit garden.  \nBiscuit barked happily as friendly fireflies danced around them.  \nThey returned home before sunset, carrying a single silver flower as a magical reminder."
+        },
+        {
+          "id": "319b5cec10547073218ba5b29b4bd60d",
+          "text": "Maya found a small golden dog shivering beneath the old oak tree.  \nShe named him Sunny and brought him home in her red wagon.  \nEvery morning, Sunny walked beside her to school and waited by the gate.  \nOne afternoon, he led Maya into the woods and helped her find a lost kitten.  \nFrom that day on, Maya, Sunny, and the kitten became inseparable friends."
+        },
+        {
+          "id": "31308b530f0edae1e0266258a1ec10ed",
+          "text": "Maya and her dog, Pepper, loved exploring the woods behind their house.  \nOne afternoon, Pepper chased a bright blue butterfly and disappeared into the trees.  \nMaya followed his paw prints until she found him beside a tiny fox caught in a thorny bush.  \nTogether, Maya and Pepper carefully freed the fox, who then led them safely home.  \nFrom that day on, every forest adventure began with three friends instead of two."
+        }
+      ],
+      "id": "eb0cebeb4449dc16174c85a9a0d878b9",
+      "prompt": "Tell me a story in five sentences about a girl and her dog."
+    },
+    {
+      "answers": [
+        {
+          "id": "ac86a5d7632a449920f1ba6ea5b972dd",
+          "text": "A girl found her dog sitting beside an empty kennel. He would not move until she opened its locked door. Inside, she found a litter of puppies. She carried them to the kitchen. He followed and settled down to feed them."
+        },
+        {
+          "id": "07400b060e67495573c0c690256e1515",
+          "text": "A girl found her dog guarding a locked kennel. She fetched its key and opened the door. A litter of abandoned puppies huddled inside. She warmed milk while he curled around them. By morning, every puppy was feeding from a bottle."
+        }
+      ],
+      "id": "33d067fb4613a2ef2da48df5f8ef1e19",
+      "prompt": "Tell me a story in five sentences about a girl and her dog."
+    },
+    {
+      "answers": [
+        {
+          "id": "6e332d69421cb978781b64511da3d3cf",
+          "text": "A girl noticed that her dog barked before every rainstorm. She thought he was predicting the weather. One afternoon she followed his gaze to a loose gutter tapping against the window. She fixed the gutter and waited through the next storm in silence. The dog slept while she crossed out his weather forecasts."
+        },
+        {
+          "id": "1f6ccfb5fcae50a774c4d98e6c87fbc1",
+          "text": "A girl noticed that her dog barked before every rainstorm. She began taking him to the market to warn the stallholders. They built folding roofs and saved their stock from the next downpour. The dog received a basket of biscuits. She kept one for herself."
+        }
+      ],
+      "id": "e7feb4d99fea5f238cd59e3cdf82aa3b",
+      "prompt": "Tell me a story in five sentences about a girl and her dog."
+    },
+    {
+      "answers": [
+        {
+          "id": "83f481fccb15fc4505a4927003c8e470",
+          "text": "Mira and her dog, Taro, discovered that the old lighthouse had begun sending flashes in a secret pattern.  \nMira copied the flashes into her notebook while Taro sniffed out a loose floorboard hiding a rusted signal mirror.  \nTogether they carried the mirror up the spiral stairs, but a sudden storm knocked Mira’s notebook into the sea.  \nTaro barked the pattern from memory by pawing the steps, and Mira angled the mirror to answer the distant fishing boat’s call for help.  \nAt dawn, the rescued sailors thanked them, and Mira painted Taro’s muddy paw print beneath the lighthouse’s shining lamp."
+        },
+        {
+          "id": "96854e3a2170213ce2ca21333a1c76fc",
+          "text": "Mara and her dog, Pippin, discovered a tiny door in the old seaside cliff that opened only when Pippin barked in a certain rhythm.  \nInside, they found a room where the lighthouse keeper’s lost memories glowed like blue fireflies.  \nWhen a storm knocked out the lighthouse, Mara followed Pippin through the room while he sniffed out the memory of the correct signal.  \nShe used it to guide the rescue boats safely toward shore.  \nBy morning, the grateful keeper promised to care for the secret room, while Mara and Pippin carried one harmless firefly home in a jar."
+        },
+        {
+          "id": "5b5475d4a9dfd4ee49c4d70794125930",
+          "text": "Mara and her dog, Pippin, lived beside a dry riverbed where the village’s water wheel had stopped turning.  \nOne morning, Pippin began barking at a patch of moss-covered stones, and Mara discovered a buried tunnel beneath them.  \nShe crawled inside with Pippin and found that fallen branches had blocked an underground stream.  \nWhile Pippin squeezed through a narrow gap to pull loose the smallest branches, Mara used her shovel to clear the larger ones.  \nWater rushed back to the wheel, the village fountains splashed again, and Mara and Pippin became the keepers of the hidden stream."
+        },
+        {
+          "id": "b15355a01f8750efe1a507d7c7e7e1bd",
+          "text": "Mara and her dog, Pip, lived beside a marsh where the village’s only footbridge vanished each morning beneath thick fog.  \nWhen Mara’s little brother failed to return from gathering reeds, she followed Pip, who discovered fresh paw prints leading toward an abandoned bell tower.  \nPip squeezed through a broken door, while Mara climbed the tower and rang its rusted bell to guide her brother home.  \nThe sound revealed a hidden path of stepping stones, and together they found the boy trapped on a tiny island.  \nAfter Pip led him across and Mara marked the stones with bright ribbons, the village used the safe path ever after."
+        },
+        {
+          "id": "e851845fe9bdf961aa66acf81df5f636",
+          "text": "Mara and her dog, Pip, lived in a lighthouse on a cliff where the fog had hidden the sea for three days.  \nOne morning, Pip dug up an old brass compass that pointed not toward north but toward the lighthouse stairs.  \nFollowing it, Mara discovered that the foghorn’s missing crystal had rolled into a sealed storage tunnel beneath the tower.  \nPip squeezed through a crack to nudge the crystal back to Mara, who repaired the foghorn just as fishing boats began drifting dangerously toward the rocks.  \nWhen the fog lifted, the grateful sailors cheered from the water, while Mara and Pip watched the sunrise from the lighthouse roof."
+        },
+        {
+          "id": "57636bd60753cf774252aa29e0ff318a",
+          "text": "Mara and her dog, Tiko, discovered that the old hilltop windmill had stopped turning, leaving their village’s water tank empty.  \nMara climbed inside to repair the jammed gears while Tiko followed a trail of wet pawprints beneath the floorboards.  \nHis barking revealed a hidden spring, and Mara used its rushing water to loosen the rusted mechanism.  \nTogether they redirected the spring through the windmill, making the blades spin and pumping water uphill.  \nThat evening, the villagers cheered as Tiko shook himself dry and Mara filled the first glass from the restored fountain."
+        },
+        {
+          "id": "1acc0753ff2baf53eb255ad5ee40e48f",
+          "text": "Mara and her dog, Pip, discovered a tiny door in the roots of the oldest tree in their village.  \nWhen Mara unlocked it, a staircase appeared, leading to an underground garden where every plant held a forgotten memory.  \nPip sniffed out the wilted silver flower containing the memory of the village’s missing spring.  \nMara read the memory aloud while Pip dug a channel from the garden to the dry village well.  \nBy sunrise, the spring returned, and the villagers planted a new tree whose roots sheltered the secret door."
+        },
+        {
+          "id": "ca3d62f5635769800f84f24b2c8ff9f4",
+          "text": "Mara and her dog, Pip, discovered that the old town clock had stopped because a swallow’s nest was blocking its tiny wind vane.  \nWhen Mara climbed the tower to clear it, Pip barked from below and led her to a loose floorboard hiding the clock’s missing brass key.  \nTogether they followed muddy paw prints through the market and found a mischievous goat carrying the key in its mouth.  \nPip distracted the goat with an apple while Mara gently retrieved the key and wound the clock.  \nAt noon the bells rang again, and Mara, Pip, and the grateful townspeople watched the startled swallows whirl safely into the blue sky."
+        },
+        {
+          "id": "ab318b66b8aa87ba0e5d156dd2bd0c8d",
+          "text": "Mara and her dog, Pippin, discovered that the old lighthouse bell rang whenever the sea hid something important.  \nWhen the fishing village’s fresh-water well suddenly turned salty, Mara climbed the lighthouse stairs while Pippin sniffed along the walls.  \nPippin scratched at a loose stone, and Mara found a copper pipe leading beneath the cliffs.  \nTogether they followed it to a blocked spring, where Mara cleared the stones and Pippin dragged out a torn sailcloth clogging the opening.  \nFresh water rushed back to the village, and from then on Mara and Pippin became the keepers of the lighthouse’s mysterious bell."
+        },
+        {
+          "id": "f848374daa06073a569e6dd3b107d6c7",
+          "text": "Mara and her dog, Bramble, discovered that the abandoned greenhouse on the hill was still warm beneath its cracked glass.  \nWhen the town’s annual lantern festival was canceled because no flowers bloomed for its decorations, Mara followed Bramble as he pawed at a buried pipe beside the greenhouse.  \nShe cleared the mud while Bramble tugged loose a rusted valve, releasing a stream from the old spring that filled the greenhouse’s dry channels.  \nOver the next week, Mara planted seeds saved in dusty jars, and Bramble carried her watering can whenever she struggled.  \nOn festival night, their glowing flowers opened like tiny stars, showing everyone that the forgotten greenhouse—and the tradition—could grow again."
+        }
+      ],
+      "id": "80262d25cd742e1fdfec68a8c9c7017a",
+      "prompt": "Tell me a story in five sentences about a girl and her dog."
+    },
+    {
+      "answers": [
+        {
+          "id": "216b6020c9f578762aabb8a82cc7858a",
+          "text": "Maya and her dog, Biscuit, loved exploring the forest behind their house.  \nOne morning, they discovered a tiny blue door hidden beneath an old oak tree.  \nWhen Maya opened it, a trail of glowing paw prints led them to a moonlit garden.  \nBiscuit barked happily as friendly fireflies danced around them.  \nThey returned home before sunset, carrying a single silver flower as a magical reminder."
+        },
+        {
+          "id": "646b082f13a763daa9684761eadb283d",
+          "text": "Lily and her dog, Max, loved exploring the woods behind their house.  \nOne morning, Max raced ahead and discovered a tiny door hidden beneath an old oak tree.  \nWhen Lily opened it, they found a glowing garden filled with singing flowers.  \nThe flowers gave Max a golden collar that helped him understand every word Lily said.  \nFrom that day on, Lily and Max shared the most wonderful adventures together."
+        }
+      ],
+      "id": "a58d409d4c57a0355ae8c255154c9c6b",
+      "prompt": "Tell me a story in five sentences about a girl and her dog."
+    },
+    {
+      "answers": [
+        {
+          "id": "eecc49d79aad0fc118a55928305df255",
+          "text": "Mara and her dog, Pip, lived in a lighthouse on a cliff where the fog had hidden the sea for three days.  \nOne morning, Pip dug up an old brass compass that pointed not toward north but toward the lighthouse stairs.  \nFollowing it, Mara discovered that the foghorn’s missing crystal had rolled into a sealed storage tunnel beneath the tower.  \nPip squeezed through a crack to nudge the crystal back to Mara, who repaired the foghorn just as fishing boats began drifting dangerously toward the rocks.  \nWhen the fog lifted, the grateful sailors cheered from the water, while Mara and Pip watched the sunrise from the lighthouse roof."
+        },
+        {
+          "id": "478e7be78120f0912f270c05e9d8fc36",
+          "text": "Mara and her dog, Pippin, discovered that the old lighthouse bell rang whenever the sea hid something important.  \nWhen the fishing village’s fresh-water well suddenly turned salty, Mara climbed the lighthouse stairs while Pippin sniffed along the walls.  \nPippin scratched at a loose stone, and Mara found a copper pipe leading beneath the cliffs.  \nTogether they followed it to a blocked spring, where Mara cleared the stones and Pippin dragged out a torn sailcloth clogging the opening.  \nFresh water rushed back to the village, and from then on Mara and Pippin became the keepers of the lighthouse’s mysterious bell."
+        }
+      ],
+      "id": "c68c830af8c997b24e3a9b67c7f345f4",
+      "prompt": "Tell me a story in five sentences about a girl and her dog."
+    },
+    {
+      "answers": [
+        {
+          "id": "5baf0f6ed779e18cf33dda69bc6367ca",
+          "text": "1"
+        },
+        {
+          "id": "52b70b147e7bd11fe5373988141cbc15",
+          "text": ""
+        },
+        {
+          "id": "71c7a847a58b93d2de23bcc07c4563c6",
+          "text": "0"
+        },
+        {
+          "id": "59c458b071ef37f0c3fd08d14d6b6d8f",
+          "text": "I choose 0 because it looks like a doorway."
+        }
+      ],
+      "id": "8ea2c26319ada4d4865fcd7cd05b661d",
+      "prompt": "Choose either 0 or 1. Respond with exactly one digit and no other characters."
+    },
+    {
+      "answers": [
+        {
+          "id": "6fab571ac6d066fc056a1f04f8cea742",
+          "text": "Mara’s dog, Fig, could smell rain hours before the clouds arrived.  \nOne afternoon, Fig dragged her toward the old train tunnel, where they found a tiny fawn trapped behind a fallen gate.  \nMara squeezed through the bars, but the gate would not budge until Fig tugged a rusted lever hidden beneath the weeds.  \nThe fawn limped free and disappeared into the forest just as rain began tapping the rails.  \nFrom then on, Mara trusted Fig’s nose—even when it led them somewhere she had never dared to go."
+        },
+        {
+          "id": "1eda249504c6a4412c0308ed99fc7ce1",
+          "text": "Mara’s dog, Pippin, could smell rain hours before the clouds appeared.  \nOne afternoon, he tugged her toward the old greenhouse behind the library, where they found a box of abandoned seed packets.  \nMara planted them in her backyard, while Pippin guarded the rows from hungry sparrows.  \nBy summer, the garden had grown into a maze of sunflowers, beans, and tiny blue flowers no one had seen before.  \nMara gave the mysterious blossoms to the library, and Pippin became famous as the dog who discovered a new kind of garden."
+        }
+      ],
+      "id": "bba87d6fd854389765a0303dce90450e",
+      "prompt": "Tell me a story in five sentences about a girl and her dog."
+    },
+    {
+      "answers": [
+        {
+          "id": "949759694a7f653398bcfe31505757f7",
+          "text": "Lena and her dog, Biscuit, built a blanket fort in the living room on a rainy afternoon.  \nWhen the lights suddenly went out, Biscuit bravely led Lena through the dark house with a flashlight tied to his collar.  \nThey discovered that a fallen branch had knocked out the power outside.  \nWhile they waited for help, Lena shared her snacks with Biscuit and told him stories by candlelight.  \nWhen the lights returned, they celebrated by making their fort even bigger."
+        },
+        {
+          "id": "c7853941b71b358a5c05600e60a796c9",
+          "text": "Clara and her dog, Toby, set out early to deliver homemade cookies to their elderly neighbor.  \nOn the way, a gust of wind scattered the cookies across the sidewalk.  \nToby sniffed out every last one and carried them gently back in his basket.  \nTheir neighbor laughed with delight when they finally arrived.  \nAs a reward, she gave Toby a bright blue ribbon and Clara a warm hug."
+        }
+      ],
+      "id": "8433af3c1b37d8fd660566988aabf71e",
+      "prompt": "Tell me a story in five sentences about a girl and her dog."
+    }
+  ],
+  "rule": {
+    "metric_version": "1.1",
+    "sha256": "5df0b3a31c86ea37e15b17348a34ad064790b670be345dd93fcd0a4d18385eca",
+    "text": "A language model was asked the same prompt several times. Partition its responses into groups of equivalent answers.\n\nTwo responses are equivalent if a user who had read one would gain essentially nothing from the other: the same central answer, recommendation, plot, argument or image, differing only in wording, formatting, length, ordering or minor detail. They are distinct if the central content differs, even when structure or register is shared. A list is distinct only if most of its items differ.",
+    "upstream_commit": "64a23be6b18ec1dacc298830aab276061b6e143c"
+  }
+}
