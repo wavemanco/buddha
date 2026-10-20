@@ -1,0 +1,337 @@
+{
+  "actual_candidates": [
+    {
+      "candidate_id": "2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525",
+      "direct_upstream_utility": 7.183934838498669,
+      "distinct": 9,
+      "generation_scores": [
+        8,
+        8,
+        7,
+        8,
+        7,
+        7,
+        null,
+        8,
+        7,
+        8
+      ],
+      "heads": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        7,
+        8,
+        9
+      ],
+      "local_utility": 7.183934838498671,
+      "partition": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        1,
+        6,
+        7,
+        8
+      ],
+      "run": "first-live-recovery",
+      "saved_utility": 7.183934838498671
+    },
+    {
+      "candidate_id": "68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06",
+      "direct_upstream_utility": 7.4802363735709205,
+      "distinct": 10,
+      "generation_scores": [
+        7,
+        8,
+        7,
+        7,
+        8,
+        8,
+        8,
+        8,
+        7,
+        8
+      ],
+      "heads": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "local_utility": 7.480236373570919,
+      "partition": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "run": "first-live-recovery",
+      "saved_utility": 7.480236373570919
+    },
+    {
+      "candidate_id": "34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b",
+      "direct_upstream_utility": 8.567273282506498,
+      "distinct": 10,
+      "generation_scores": [
+        9,
+        8,
+        9,
+        8,
+        8,
+        9,
+        9,
+        8,
+        9,
+        9
+      ],
+      "heads": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "local_utility": 8.5672732825065,
+      "partition": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "run": "first-live-recovery",
+      "saved_utility": 8.5672732825065
+    },
+    {
+      "candidate_id": "2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525",
+      "direct_upstream_utility": 5.304218778625656,
+      "distinct": 6,
+      "generation_scores": [
+        7,
+        7,
+        7,
+        7,
+        null,
+        null,
+        7,
+        null,
+        7,
+        null
+      ],
+      "heads": [
+        0,
+        1,
+        2,
+        3,
+        6,
+        8
+      ],
+      "local_utility": 5.304218778625656,
+      "partition": [
+        0,
+        1,
+        2,
+        3,
+        0,
+        3,
+        4,
+        4,
+        5,
+        5
+      ],
+      "run": "first-live-continuation-v2",
+      "saved_utility": 5.304218778625656
+    },
+    {
+      "candidate_id": "68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06",
+      "direct_upstream_utility": 7.117946910703381,
+      "distinct": 10,
+      "generation_scores": [
+        8,
+        7,
+        8,
+        7,
+        7,
+        7,
+        4,
+        8,
+        3,
+        8
+      ],
+      "heads": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "local_utility": 7.117946910703382,
+      "partition": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "run": "first-live-continuation-v2",
+      "saved_utility": 7.117946910703382
+    },
+    {
+      "candidate_id": "12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da",
+      "direct_upstream_utility": 8.252794839170917,
+      "distinct": 10,
+      "generation_scores": [
+        9,
+        9,
+        8,
+        8,
+        7,
+        8,
+        7,
+        8,
+        8,
+        8
+      ],
+      "heads": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "local_utility": 8.252794839170917,
+      "partition": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "run": "first-live-continuation-v2",
+      "saved_utility": 8.252794839170917
+    }
+  ],
+  "actual_runs_unchanged": true,
+  "execution": "Direct unchanged selected upstream AST function bodies with actual installed NumPy; no CLI, provider calls, or run ZIP execution",
+  "format": "buddha.review.scoring-conformance.v1",
+  "local_refusal_behavior": "rejects incomplete evaluation rather than publishing survivor-only means",
+  "maximum_utility_floating_difference": 8.881784197001252e-16,
+  "numpy_version": "2.2.6",
+  "pandas_version": "2.3.2",
+  "partition_differential_cases": 6060,
+  "prompt_bytes_equal": true,
+  "rejection_probes": {
+    "empty_local": "ValidationError",
+    "empty_upstream": "ZeroDivisionError",
+    "missing_head_local": "ValidationError",
+    "missing_head_upstream_spread": "ValueError",
+    "zero_quality_local": "ValidationError",
+    "zero_quality_upstream_spread": "ValueError"
+  },
+  "source_functions": {
+    "common": [
+      "render_responses"
+    ],
+    "judge": [
+      "shuffled_order"
+    ],
+    "partition": [
+      "canonical",
+      "partition_fold"
+    ],
+    "score": [
+      "heads",
+      "score_first_occurrences",
+      "score_fold",
+      "score_refused",
+      "spread",
+      "utility_fields"
+    ],
+    "summarize": [
+      "summarize"
+    ]
+  },
+  "upstream_commit": "64a23be6b18ec1dacc298830aab276061b6e143c",
+  "upstream_refusal_shape": {
+    "distinct": 2,
+    "generation_scores": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "partition_scores": [],
+    "unscored": "judge_refusal",
+    "utility": null
+  },
+  "upstream_refusal_summary": {
+    "mean_distinct": 2.0,
+    "mean_utility": 8.0,
+    "n_scored": 1,
+    "unscored": 1,
+    "version": "1.1"
+  },
+  "upstream_sha256": {
+    "common": "ba60bf0f2a409c3774d75880f305325a28ed34320610667542a4596c41f424af",
+    "judge": "4decf04790b90a03368eb792dfe29045435914a73ab83a52185d9dd0d1613902",
+    "partition": "263970891ff3ee1cc8df369a33beefe5cb5de618b5dd146a5234536d97954aca",
+    "score": "418985a40e9e159cfeffe9a43ab2c727010d7a7a29407f4e14cab3c81b77cbae",
+    "summarize": "0a8bd1eb7f317584f579eaa827e580f9cefe4177a1abdc35b2cb06ef96eeea9e"
+  },
+  "utility_differential_cases": 1515
+}

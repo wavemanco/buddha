@@ -1,0 +1,284 @@
+{
+  "format": "buddha.review.reference-dependency-licenses.v1",
+  "scope": "Isolated offline reference research only; no application dependency changes",
+  "packages": [
+    {
+      "name": "annotated-types",
+      "version": "0.7.0",
+      "license_expression": null,
+      "license": null,
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "metadata_url": "https://pypi.org/pypi/annotated-types/0.7.0/json"
+    },
+    {
+      "name": "anthropic",
+      "version": "1.4.0",
+      "license_expression": null,
+      "license": "MIT",
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "metadata_url": "https://pypi.org/pypi/anthropic/1.4.0/json"
+    },
+    {
+      "name": "anyio",
+      "version": "4.10.0",
+      "license_expression": "MIT",
+      "license": null,
+      "classifiers": [],
+      "metadata_url": "https://pypi.org/pypi/anyio/4.10.0/json"
+    },
+    {
+      "name": "certifi",
+      "version": "2025.8.3",
+      "license_expression": null,
+      "license": "MPL-2.0",
+      "classifiers": [
+        "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)"
+      ],
+      "metadata_url": "https://pypi.org/pypi/certifi/2025.8.3/json"
+    },
+    {
+      "name": "colorama",
+      "version": "0.4.6",
+      "license_expression": null,
+      "license": "",
+      "classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "metadata_url": "https://pypi.org/pypi/colorama/0.4.6/json"
+    },
+    {
+      "name": "distro",
+      "version": "1.9.0",
+      "license_expression": null,
+      "license": "Apache License, Version 2.0",
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "metadata_url": "https://pypi.org/pypi/distro/1.9.0/json"
+    },
+    {
+      "name": "docstring-parser",
+      "version": "0.18.0",
+      "license_expression": null,
+      "license": "MIT",
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "metadata_url": "https://pypi.org/pypi/docstring-parser/0.18.0/json"
+    },
+    {
+      "name": "h11",
+      "version": "0.16.0",
+      "license_expression": null,
+      "license": "MIT",
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "metadata_url": "https://pypi.org/pypi/h11/0.16.0/json"
+    },
+    {
+      "name": "httpcore",
+      "version": "1.0.9",
+      "license_expression": "BSD-3-Clause",
+      "license": null,
+      "classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "metadata_url": "https://pypi.org/pypi/httpcore/1.0.9/json"
+    },
+    {
+      "name": "httpcore2",
+      "version": "2.12.0",
+      "license_expression": "BSD-3-Clause",
+      "license": null,
+      "classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "metadata_url": "https://pypi.org/pypi/httpcore2/2.12.0/json"
+    },
+    {
+      "name": "httpx",
+      "version": "0.28.1",
+      "license_expression": null,
+      "license": "BSD-3-Clause",
+      "classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "metadata_url": "https://pypi.org/pypi/httpx/0.28.1/json"
+    },
+    {
+      "name": "httpx2",
+      "version": "2.12.0",
+      "license_expression": "BSD-3-Clause",
+      "license": null,
+      "classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "metadata_url": "https://pypi.org/pypi/httpx2/2.12.0/json"
+    },
+    {
+      "name": "idna",
+      "version": "3.19",
+      "license_expression": "BSD-3-Clause",
+      "license": null,
+      "classifiers": [],
+      "metadata_url": "https://pypi.org/pypi/idna/3.19/json"
+    },
+    {
+      "name": "jiter",
+      "version": "0.10.0",
+      "license_expression": null,
+      "license": "MIT",
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "metadata_url": "https://pypi.org/pypi/jiter/0.10.0/json"
+    },
+    {
+      "name": "numpy",
+      "version": "2.2.6",
+      "license_expression": null,
+      "license": "See complete package license and bundled component notices at the metadata URL.",
+      "classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "metadata_url": "https://pypi.org/pypi/numpy/2.2.6/json"
+    },
+    {
+      "name": "openai",
+      "version": "1.107.0",
+      "license_expression": null,
+      "license": "Apache-2.0",
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "metadata_url": "https://pypi.org/pypi/openai/1.107.0/json"
+    },
+    {
+      "name": "pandas",
+      "version": "2.3.2",
+      "license_expression": null,
+      "license": "See complete package license and bundled component notices at the metadata URL.",
+      "classifiers": [
+        "License :: OSI Approved :: BSD License"
+      ],
+      "metadata_url": "https://pypi.org/pypi/pandas/2.3.2/json"
+    },
+    {
+      "name": "pydantic",
+      "version": "2.11.7",
+      "license_expression": "MIT",
+      "license": null,
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "metadata_url": "https://pypi.org/pypi/pydantic/2.11.7/json"
+    },
+    {
+      "name": "pydantic-core",
+      "version": "2.33.2",
+      "license_expression": null,
+      "license": "MIT",
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "metadata_url": "https://pypi.org/pypi/pydantic-core/2.33.2/json"
+    },
+    {
+      "name": "python-dateutil",
+      "version": "2.9.0.post0",
+      "license_expression": null,
+      "license": "Dual License",
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License",
+        "License :: OSI Approved :: BSD License"
+      ],
+      "metadata_url": "https://pypi.org/pypi/python-dateutil/2.9.0.post0/json"
+    },
+    {
+      "name": "pytz",
+      "version": "2025.2",
+      "license_expression": null,
+      "license": "MIT",
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "metadata_url": "https://pypi.org/pypi/pytz/2025.2/json"
+    },
+    {
+      "name": "six",
+      "version": "1.17.0",
+      "license_expression": null,
+      "license": "MIT",
+      "classifiers": [
+        "License :: OSI Approved :: MIT License"
+      ],
+      "metadata_url": "https://pypi.org/pypi/six/1.17.0/json"
+    },
+    {
+      "name": "sniffio",
+      "version": "1.3.1",
+      "license_expression": null,
+      "license": "MIT OR Apache-2.0",
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License",
+        "License :: OSI Approved :: MIT License"
+      ],
+      "metadata_url": "https://pypi.org/pypi/sniffio/1.3.1/json"
+    },
+    {
+      "name": "tqdm",
+      "version": "4.67.1",
+      "license_expression": null,
+      "license": "MPL-2.0 AND MIT",
+      "classifiers": [
+        "License :: OSI Approved :: MIT License",
+        "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)"
+      ],
+      "metadata_url": "https://pypi.org/pypi/tqdm/4.67.1/json"
+    },
+    {
+      "name": "truststore",
+      "version": "0.10.4",
+      "license_expression": "MIT",
+      "license": null,
+      "classifiers": [],
+      "metadata_url": "https://pypi.org/pypi/truststore/0.10.4/json"
+    },
+    {
+      "name": "typing-extensions",
+      "version": "4.15.0",
+      "license_expression": "PSF-2.0",
+      "license": null,
+      "classifiers": [],
+      "metadata_url": "https://pypi.org/pypi/typing-extensions/4.15.0/json"
+    },
+    {
+      "name": "typing-inspection",
+      "version": "0.4.1",
+      "license_expression": "MIT",
+      "license": null,
+      "classifiers": [],
+      "metadata_url": "https://pypi.org/pypi/typing-inspection/0.4.1/json"
+    },
+    {
+      "name": "tzdata",
+      "version": "2025.2",
+      "license_expression": null,
+      "license": "Apache-2.0",
+      "classifiers": [
+        "License :: OSI Approved :: Apache Software License"
+      ],
+      "metadata_url": "https://pypi.org/pypi/tzdata/2025.2/json"
+    }
+  ],
+  "notes": [
+    "Certifi is MPL-2.0; tqdm offers MIT/MPL licensing.",
+    "NumPy package license includes bundled GNU runtime notices, including GPL with GCC runtime exception and LGPL libquadmath for relevant binary distributions. No NumPy distribution is added to the application.",
+    "Transitive wheel hashes are taken from the pinned official uv.lock and enforced by pip --require-hashes; only binary wheels were installed."
+  ]
+}

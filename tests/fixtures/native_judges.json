@@ -1,0 +1,128 @@
+{
+  "format": "buddha.review.nb02-locked-sdk-wire.v1",
+  "commit": "64a23be6b18ec1dacc298830aab276061b6e143c",
+  "models": {
+    "partition": "gpt-5.6-luna",
+    "quality": "claude-opus-5"
+  },
+  "sdk_versions": {
+    "openai": "1.107.0",
+    "anthropic": "1.4.0",
+    "pydantic": "2.11.7",
+    "numpy": "2.2.6",
+    "pandas": "2.3.2",
+    "httpx": "0.28.1",
+    "httpx2": "2.12.0"
+  },
+  "upstream_source_seals": {
+    "src/common.py": "ba60bf0f2a409c3774d75880f305325a28ed34320610667542a4596c41f424af",
+    "src/partition.py": "263970891ff3ee1cc8df369a33beefe5cb5de618b5dd146a5234536d97954aca",
+    "src/score.py": "418985a40e9e159cfeffe9a43ab2c727010d7a7a29407f4e14cab3c81b77cbae",
+    "src/judge.py": "4decf04790b90a03368eb792dfe29045435914a73ab83a52185d9dd0d1613902",
+    "src/inference.py": "16f538382eb8f86453545d806f021060e7020df728dd3f84270b9d0909a483d5",
+    "src/summarize.py": "0a8bd1eb7f317584f579eaa827e580f9cefe4177a1abdc35b2cb06ef96eeea9e",
+    "LICENSE": "14e69e7fbb2f8fd0aa8ccf17d7d4ddd54665555c613a0336767f7a5fa477895c"
+  },
+  "source_execution": "unchanged selected official judge plus its judge_client function; real locked SDK serialization and parsing; fake in-memory HTTP transports",
+  "provider_network_calls": 0,
+  "actual_api_keys_used": false,
+  "captured_bodies": [
+    {
+      "provider": "openai",
+      "path": "/v1/chat/completions",
+      "body": {
+        "messages": [
+          {
+            "role": "system",
+            "content": "A language model was asked the same prompt several times. Partition its responses into groups of equivalent answers.\n\nTwo responses are equivalent if a user who had read one would gain essentially nothing from the other: the same central answer, recommendation, plot, argument or image, differing only in wording, formatting, length, ordering or minor detail. They are distinct if the central content differs, even when structure or register is shared. A list is distinct only if most of its items differ."
+          },
+          {
+            "role": "user",
+            "content": "three full responses"
+          }
+        ],
+        "model": "gpt-5.6-luna",
+        "response_format": {
+          "type": "json_schema",
+          "json_schema": {
+            "schema": {
+              "properties": {
+                "groups": {
+                  "items": {
+                    "items": {
+                      "type": "integer"
+                    },
+                    "type": "array"
+                  },
+                  "title": "Groups",
+                  "type": "array"
+                }
+              },
+              "required": [
+                "groups"
+              ],
+              "title": "Partition",
+              "type": "object",
+              "additionalProperties": false
+            },
+            "name": "Partition",
+            "strict": true
+          }
+        },
+        "stream": false
+      }
+    },
+    {
+      "provider": "anthropic",
+      "path": "/v1/messages",
+      "body": {
+        "max_tokens": 16000,
+        "messages": [
+          {
+            "role": "user",
+            "content": "one full response"
+          }
+        ],
+        "model": "claude-opus-5",
+        "output_config": {
+          "effort": "high",
+          "format": {
+            "type": "json_schema",
+            "schema": {
+              "properties": {
+                "score": {
+                  "title": "Score",
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "score"
+              ],
+              "title": "Score",
+              "type": "object",
+              "additionalProperties": false
+            }
+          }
+        },
+        "system": "Score the response to the prompt, 1-10, by how well it serves what the prompt asked for.\n\nA prompt that asks for one thing is best served by one thing; elaboration beyond the ask earns nothing, and craft counts where the prompt calls for it.\n10: the best response an expert could give to this prompt.\n7: good, with clear room to improve.\n4: a weak attempt that still answers the prompt.\n1-3: fails the ask: wrong form or scope, off-topic, empty, or a substantive error.\n\nAn unusual angle or format is fine if it answers the prompt.",
+        "thinking": {
+          "type": "adaptive"
+        }
+      }
+    }
+  ],
+  "parsed_partition": {
+    "groups": [
+      [
+        0,
+        1
+      ],
+      [
+        2
+      ]
+    ]
+  },
+  "parsed_score": {
+    "score": 7
+  }
+}
