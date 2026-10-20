@@ -3,12 +3,14 @@
 import io
 import json
 import os
+import sys
 import tempfile
 import unittest
 from contextlib import redirect_stderr, redirect_stdout
 from dataclasses import replace
 from datetime import UTC, datetime
 from pathlib import Path
+from types import ModuleType, SimpleNamespace
 from unittest.mock import Mock, patch
 
 from authorization_helpers import authorized_run
@@ -22,6 +24,51 @@ from buddha.run import prepare_run
 
 
 class CLITests(unittest.TestCase):
+    def test_continuation_source_is_read_only_and_requires_no_keys(self):
+        source = SimpleNamespace(
+            history=SimpleNamespace(
+                run_id="source", manifest_sha256="a" * 64, ledger_sha256="b" * 64
+            ),
+            completed=tuple(SimpleNamespace(actual_microusd=190) for _ in range(9)),
+            unknown=SimpleNamespace(operation_id="c" * 64, reserve_microusd=532373),
+        )
+        reader = Mock(return_value=source)
+        module = ModuleType("buddha.continuation")
+        module.read_source = reader
+        with (
+            patch.dict(sys.modules, {"buddha.continuation": module}),
+            patch("buddha.__main__._key_environment") as keys,
+            patch("http.client.HTTPSConnection") as connection,
+            redirect_stdout(io.StringIO()) as output,
+        ):
+            result = main(
+                [
+                    "continuation-source",
+                    "--source",
+                    "source",
+                    "--manifest-sha256",
+                    "a" * 64,
+                    "--ledger-sha256",
+                    "b" * 64,
+                    "--archive",
+                    "source.zip",
+                    "--archive-sha256",
+                    "d" * 64,
+                ]
+            )
+        self.assertEqual(result, 0)
+        self.assertEqual(json.loads(output.getvalue())["completed_receipts"], 9)
+        self.assertEqual(json.loads(output.getvalue())["model_calls"], 0)
+        reader.assert_called_once_with(
+            Path("source"),
+            manifest_sha256="a" * 64,
+            ledger_sha256="b" * 64,
+            archived_runtime_zip=Path("source.zip"),
+            archived_runtime_sha256="d" * 64,
+        )
+        keys.assert_not_called()
+        connection.assert_not_called()
+
     def bind_authorization(self, root, target):
         authorization = root / "authorization.sqlite3"
         with redirect_stdout(io.StringIO()):
