@@ -16,6 +16,7 @@ import sqlite3
 from collections.abc import Iterator
 from contextlib import closing, contextmanager
 from dataclasses import dataclass
+from functools import cache
 from pathlib import Path
 from typing import cast
 
@@ -94,6 +95,27 @@ _SCHEMA_V2 = [
     """CREATE TRIGGER unknown_receipts_no_delete BEFORE DELETE ON unknown_receipts BEGIN
         SELECT RAISE(ABORT, 'unknown receipts are immutable'); END""",
 ]
+
+
+def _schema_signature(
+    connection: sqlite3.Connection, schema: str = "main"
+) -> tuple[tuple[str, str, str, str | None], ...]:
+    queries = {
+        "main": "SELECT type,name,tbl_name,sql FROM main.sqlite_master "
+        "WHERE name NOT LIKE 'sqlite_%' ORDER BY type,name",
+        "funding": "SELECT type,name,tbl_name,sql FROM funding.sqlite_master "
+        "WHERE name NOT LIKE 'sqlite_%' ORDER BY type,name",
+    }
+    return tuple(tuple(row) for row in connection.execute(queries[schema]))
+
+
+@cache
+def _expected_schema(statements: tuple[str, ...]) -> tuple[tuple[str, str, str, str | None], ...]:
+    """Let SQLite normalize trusted DDL exactly as it does durable databases."""
+    with closing(sqlite3.connect(":memory:")) as connection:
+        for statement in statements:
+            connection.execute(statement)
+        return _schema_signature(connection)
 
 
 def _amount(value: object, name: str) -> int:
@@ -251,7 +273,9 @@ class Ledger:
                 raise OperationConflict("ledger run configuration differs from the frozen run")
 
     @contextmanager
-    def _transaction(self) -> Iterator[sqlite3.Connection]:
+    def _transaction(
+        self, action: str = "read", operation_id: str | None = None
+    ) -> Iterator[sqlite3.Connection]:
         try:
             with closing(
                 sqlite3.connect(self.path, timeout=30, isolation_level=None)
@@ -269,7 +293,7 @@ class Ledger:
         _text(operation_id, "operation_id")
         _hex(request_sha256, "request_sha256")
         _amount(reserve_microusd, "reserve_microusd")
-        with self._transaction() as connection:
+        with self._transaction("reserve", operation_id) as connection:
             prior = _find(connection, operation_id)
             if prior is not None:
                 if (prior["request_sha256"], prior["reserve_microusd"]) != (
@@ -296,7 +320,7 @@ class Ledger:
 
     def dispatch(self, operation_id: str) -> bool:
         _text(operation_id, "operation_id")
-        with self._transaction() as connection:
+        with self._transaction("dispatch", operation_id) as connection:
             row = _require(connection, operation_id)
             if row["status"] != "reserved":
                 return False
@@ -325,7 +349,7 @@ class Ledger:
         _amount(actual_microusd, "actual_microusd")
         _text(provider_request_id, "provider_request_id")
         encoded = _response_json(response)
-        with self._transaction() as connection:
+        with self._transaction("complete", operation_id) as connection:
             prior = _require(connection, operation_id)
             if prior["status"] == "completed":
                 if (
@@ -363,7 +387,7 @@ class Ledger:
         if provider_request_id is not None:
             _text(provider_request_id, "provider_request_id")
         supplied = encoded is not None or provider_request_id is not None
-        with self._transaction() as connection:
+        with self._transaction("unknown", operation_id) as connection:
             prior = _require(connection, operation_id)
             if prior["status"] == "unknown":
                 if prior["response_json"] is not None or prior["provider_request_id"] is not None:

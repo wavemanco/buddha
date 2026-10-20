@@ -4,7 +4,7 @@ Build agents that improve their own procedures for producing useful, meaningfull
 
 **Start with [the consolidated living plan](docs/PLAN.md)** for the complete original objective, completed work, new findings, dependencies and the next slice. It is the sole current roadmap; design and review documents supply specifications and evidence.
 
-Git history and slice PRs are maintained in [wavemanco/buddha](https://github.com/wavemanco/buddha). The initial commit preserves the existing slices together; subsequent changes use separate slice branches. [REC-01's recovery contract](docs/RECOVERY-CONTRACT.md) and sealed historical reader establish the next recovery boundary; linked continuation is not yet executable.
+Git history and slice PRs are maintained in [wavemanco/buddha](https://github.com/wavemanco/buddha). The initial commit preserves the existing slices together; subsequent changes use separate slice branches. The [recovery contract](docs/RECOVERY-CONTRACT.md) covers sealed history and the new shared spending authority; linked continuation is not yet executable.
 
 **Slice 3 is implemented and its live pilot is complete:** bounded policy optimization with a fixed proposer, candidate archive, shared spending ledger and common development screen, alongside the existing v1.1 baseline runner. The recovery pilot completed 63 calls for $0.300153 in recorded conservative cost; its child scored higher on one development prompt. This is exploratory evidence, not a held-out improvement claim. See [the completed results and limitations](docs/FIRST-LIVE-RESULTS.md). Generated-source self-modification remains a later slice.
 
@@ -37,16 +37,15 @@ python -m buddha search-inspect --run runs/slice3-demo
 
 This synthetic example evaluates independent-sampling and in-context seeds, proposes JSON policies, evaluates eligible children on the same development prompts, and reconstructs the archive from cached receipts. Its judgments are constant fixtures, so it demonstrates orchestration rather than improvement.
 
-The first live experiment was authorized for **up to $50 combined**, covering both providers and all search stages. The initial attempt was interrupted while awaiting answer 10. Its nine replies and full uncertain reservation remain intact. The completed recovery restart used a **$49.465918 cap and 118-call allowance**, accounting for the original $0.534082 committed liability and ten attempted calls. It repeated the same one-prompt, two-seed, one-proposal engineering pilot with fresh evidence. Leave the original inactive. Recovery preparation and funding across directories remain manual; see [the incident review](docs/FIRST-LIVE-REVIEW.md) and [completion handoff](docs/FIRST-LIVE-RESULTS.md). The commands below describe the completed run; they do not start a new optimization iteration.
+The first live experiment was authorized for **up to $50 combined**, covering both providers and all search stages. The initial attempt was interrupted while awaiting answer 10. Its nine replies and full uncertain reservation remain intact. The completed recovery restart used a **$49.465918 cap and 118-call allowance**, accounting for the original $0.534082 committed liability and ten attempted calls. It repeated the same one-prompt, two-seed, one-proposal engineering pilot with fresh evidence. Both attempts are now historical inputs. Shared authorization can import their sealed liabilities once and enforce the combined dollar/call cap for new bound runs; the continuation that will reuse the nine original replies is still being implemented.
 
-Supply keys locally through the new hidden prompts:
+Read the saved completed report without keys or source reconstruction:
 
 ```powershell
-python -m buddha search-inspect --run runs/first-live-recovery
-python -m buddha search-run --run runs/first-live-recovery --live --prompt-keys
+Get-Content runs/first-live-recovery/report.json
 ```
 
-Read [API key setup](docs/API-KEYS.md) before execution. Missing `OPENAI_API_KEY` and `ANTHROPIC_API_KEY` values are requested without echo; prompted keys live only in the runner process and are removed on exit. Do not paste them into chat. Pre-existing environment values are also supported. A budget or uncertain-provider stop preserves receipts and may leave an incomplete candidate; resume the same directory.
+New live commands require an existing `--authorization` database and a matching immutable run/runtime binding before key entry. Historical manifests retain their source guards; use the preserved original runtime for exact reconstruction, rather than attempting to run them with changed source. Read [API key setup](docs/API-KEYS.md) before execution. Prompted keys live only in the runner process and are removed on exit. Do not paste them into chat.
 
 The CLI acknowledges each received key, announces execution, and shows elapsed time, recorded replies, pending/unknown requests, recorded cost, held reservations and published candidate counts. Unchanged state produces a heartbeat every ten seconds. These messages use stderr; stdout remains JSON. Receiving a key confirms local entry, not provider authentication.
 
@@ -75,10 +74,12 @@ python -m buddha inspect --run runs/pilot
 
 These commands fetch public data and freeze configuration; they do not invoke models. The selected IDs/text and full source dataset are preserved and checked against their hashes. `--limit` selects the first N source rows for an engineering pilot; it does not create a representative scientific split. Without `--limit`, all source prompts are selected; raise the call allowance deliberately for larger runs.
 
-Set `OPENAI_API_KEY` and `ANTHROPIC_API_KEY` through the process environment or your secret manager. [.env.example](.env.example) contains placeholders; the CLI does not load it automatically. Keys never enter the run manifest or ledger. Enable model calls explicitly:
+Set `OPENAI_API_KEY` and `ANTHROPIC_API_KEY` through the process environment or your secret manager. [.env.example](.env.example) contains placeholders; the CLI does not load it automatically. Keys never enter the run manifest or ledger. An experiment needs a reviewed shared authorization, sealed prior liabilities where applicable, and an empty new run binding. Set `$authorizationPath` to that existing database; these commands do not create additional spending authority:
 
 ```powershell
-python -m buddha run --run runs/pilot --live --prompt-keys
+python -m buddha authorization-inspect --authorization $authorizationPath
+python -m buddha authorization-bind --authorization $authorizationPath --run runs/pilot
+python -m buddha run --run runs/pilot --live --prompt-keys --authorization $authorizationPath
 python -m buddha inspect --run runs/pilot
 python -m buddha verify --run runs/pilot
 ```

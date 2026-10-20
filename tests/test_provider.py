@@ -8,6 +8,9 @@ from tempfile import TemporaryDirectory
 from types import SimpleNamespace
 from unittest.mock import Mock, patch
 
+from authorization_helpers import authorized_run
+
+from buddha.authorization import AuthorizedLedger
 from buddha.evaluation import ValidationError
 from buddha.ledger import BudgetExceeded, Ledger
 from buddha.provider import (
@@ -62,9 +65,15 @@ def reply(**changes):
     )
 
 
-class MemoryLedger:
+class MemoryLedger(AuthorizedLedger):
+    """Broker unit double; disk/HTTP integration uses real authorization storage."""
+
     def __init__(self):
         self.operation = None
+        self.authorization_checks = 0
+
+    def authorize_dispatch(self):
+        self.authorization_checks += 1
 
     def reserve(self, operation_id, request_sha256, reserve_microusd):
         if self.operation is None:
@@ -161,6 +170,7 @@ class ProviderTests(unittest.TestCase):
         self.assertEqual(ledger.operation.actual_microusd, 11)
         self.assertEqual(broker.execute("op", call()), result)
         transport.send.assert_called_once()
+        self.assertEqual(ledger.authorization_checks, 1)
 
     def test_timeout_keeps_unknown_liability_and_never_retries(self):
         ledger = MemoryLedger()
@@ -186,27 +196,19 @@ class ProviderTests(unittest.TestCase):
 
     def test_durable_ledger_reopens_without_second_dispatch(self):
         with TemporaryDirectory() as directory:
-            path = Path(directory) / "ledger.sqlite"
-            settings = dict(
-                run_id="test", manifest_sha256="a" * 64, budget_microusd=1000, max_calls=3
-            )
+            run_directory = Path(directory) / "run"
+            authority, ledger = authorized_run(run_directory)
             transport = Mock()
             transport.send.return_value = reply()
-            expected = BudgetBroker(Ledger(path, **settings), transport).execute("op", call())
-            reopened = Ledger(path, **settings)
+            expected = BudgetBroker(ledger, transport).execute("op", call())
+            reopened = authority.for_run(run_directory)
             self.assertEqual(BudgetBroker(reopened, transport).execute("op", call()), expected)
             self.assertEqual(reopened.totals()["spent_microusd"], 11)
             transport.send.assert_called_once()
 
     def test_cost_overrun_is_durable_before_ledger_rejects_it(self):
         with TemporaryDirectory() as directory:
-            ledger = Ledger(
-                Path(directory) / "ledger.sqlite",
-                run_id="test",
-                manifest_sha256="b" * 64,
-                budget_microusd=1000,
-                max_calls=3,
-            )
+            _, ledger = authorized_run(Path(directory) / "run")
             transport = Mock()
             transport.send.return_value = reply(input_tokens=200, output_tokens=0)
             with self.assertRaises(BudgetExceeded):
@@ -244,15 +246,13 @@ class ProviderTests(unittest.TestCase):
 
     def test_unexpected_tier_receipt_is_durable_in_real_ledger(self):
         with TemporaryDirectory() as directory:
-            path = Path(directory) / "ledger.sqlite"
-            settings = dict(
-                run_id="test", manifest_sha256="c" * 64, budget_microusd=1000, max_calls=3
-            )
+            run_directory = Path(directory) / "run"
+            authority, ledger = authorized_run(run_directory)
             transport = Mock()
             transport.send.return_value = reply(service_tier="priority", provider_request_id="")
             with self.assertRaises(BoundBreach):
-                BudgetBroker(Ledger(path, **settings), transport).execute("op", call())
-            ledger = Ledger(path, **settings)
+                BudgetBroker(ledger, transport).execute("op", call())
+            ledger = authority.for_run(run_directory)
             self.assertEqual(ledger.get("op").status, "unknown")
             self.assertEqual(ledger.get("op").response["service_tier"], "priority")
             self.assertEqual(ledger.totals()["reserved_microusd"], 120)
@@ -290,28 +290,108 @@ class ProviderTests(unittest.TestCase):
             HTTPTransport().send(call())
 
     def test_missing_credential_fails_before_reservation_or_dispatch(self):
-        ledger = MemoryLedger()
         with (
+            TemporaryDirectory() as directory,
             patch.dict("os.environ", {}, clear=True),
             patch("buddha.provider.http.client.HTTPSConnection") as connection,
         ):
+            _, ledger = authorized_run(Path(directory) / "run")
             with self.assertRaises(ValidationError):
                 BudgetBroker(ledger, HTTPTransport(allow_paid=True)).execute("op", call())
-        self.assertIsNone(ledger.operation)
+            self.assertEqual(ledger.totals()["operation_count"], 0)
         connection.assert_not_called()
 
     def test_completed_http_replay_requires_no_credentials_or_live_permission(self):
-        ledger = MemoryLedger()
-        transport = Mock()
-        transport.send.return_value = reply()
-        expected = BudgetBroker(ledger, transport).execute("op", call())
         with (
+            TemporaryDirectory() as directory,
             patch.dict("os.environ", {}, clear=True),
             patch("buddha.provider.http.client.HTTPSConnection") as connection,
         ):
+            _, ledger = authorized_run(Path(directory) / "run")
+            transport = Mock()
+            transport.send.return_value = reply()
+            expected = BudgetBroker(ledger, transport).execute("op", call())
             actual = BudgetBroker(ledger, HTTPTransport()).execute("op", call())
         self.assertEqual(actual, expected)
         connection.assert_not_called()
+
+    def test_http_broker_rejects_missing_authority_before_credentials_or_http(self):
+        with (
+            TemporaryDirectory() as directory,
+            patch.dict("os.environ", {}, clear=True),
+            patch("buddha.provider.http.client.HTTPSConnection") as connection,
+        ):
+            ledger = Ledger(
+                Path(directory) / "plain.sqlite3",
+                run_id="plain",
+                manifest_sha256="a" * 64,
+                budget_microusd=1000,
+                max_calls=3,
+            )
+            transport = HTTPTransport(allow_paid=True)
+            with patch.object(transport, "preflight") as preflight:
+                with self.assertRaises(ValidationError):
+                    BudgetBroker(ledger, transport)
+            preflight.assert_not_called()
+            self.assertEqual(ledger.totals()["operation_count"], 0)
+        connection.assert_not_called()
+
+    def test_live_call_cannot_bypass_authority_with_non_http_transport(self):
+        with TemporaryDirectory() as directory:
+            ledger = Ledger(
+                Path(directory) / "plain.sqlite3",
+                run_id="plain",
+                manifest_sha256="a" * 64,
+                budget_microusd=1000,
+                max_calls=3,
+            )
+            transport = Mock()
+            broker = BudgetBroker(ledger, transport)
+            with self.assertRaises(ValidationError):
+                broker.execute("op", call())
+            self.assertEqual(ledger.totals()["operation_count"], 0)
+            transport.send.assert_not_called()
+
+    def test_authority_is_checked_before_credentials_or_reservation(self):
+        with (
+            TemporaryDirectory() as directory,
+            patch.dict("os.environ", {}, clear=True),
+            patch("buddha.provider.http.client.HTTPSConnection") as connection,
+        ):
+            _, ledger = authorized_run(Path(directory) / "run")
+            transport = HTTPTransport(allow_paid=True)
+            with (
+                patch.object(ledger, "authorize_dispatch", side_effect=ValidationError("inactive")),
+                patch.object(transport, "preflight") as preflight,
+            ):
+                with self.assertRaisesRegex(ValidationError, "inactive"):
+                    BudgetBroker(ledger, transport).execute("op", call())
+            preflight.assert_not_called()
+            self.assertEqual(ledger.totals()["operation_count"], 0)
+        connection.assert_not_called()
+
+    def test_completed_plain_ledger_can_replay_without_paid_transport(self):
+        with TemporaryDirectory() as directory:
+            ledger = Ledger(
+                Path(directory) / "plain.sqlite3",
+                run_id="plain",
+                manifest_sha256="a" * 64,
+                budget_microusd=1000,
+                max_calls=3,
+            )
+            ledger.reserve("op", call().fingerprint(), call().spec.reserve_microusd())
+            ledger.dispatch("op")
+            saved = reply()
+            ledger.complete(
+                "op",
+                response=saved.to_record(),
+                actual_microusd=11,
+                provider_request_id=saved.provider_request_id,
+            )
+            transport = Mock()
+            self.assertEqual(BudgetBroker(ledger, transport).execute("op", call()), saved)
+            self.assertEqual(ledger.totals()["spent_microusd"], 11)
+            transport.send.assert_not_called()
 
     def send_envelope(self, envelope, selected=None):
         response = Mock(status=200)

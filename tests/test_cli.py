@@ -11,6 +11,8 @@ from datetime import UTC, datetime
 from pathlib import Path
 from unittest.mock import Mock, patch
 
+from authorization_helpers import authorized_run
+
 from buddha.__main__ import _check_upstream, _key_environment, _settings, _usd, main
 from buddha.benchmark import UPSTREAM_COMMIT
 from buddha.diagnostics import DiagnosticHTTPTransport
@@ -20,6 +22,136 @@ from buddha.run import prepare_run
 
 
 class CLITests(unittest.TestCase):
+    def bind_authorization(self, root, target):
+        authorization = root / "authorization.sqlite3"
+        with redirect_stdout(io.StringIO()):
+            self.assertEqual(
+                main(
+                    [
+                        "authorization-create",
+                        "--out",
+                        str(authorization),
+                        "--budget-usd",
+                        "50",
+                        "--max-calls",
+                        "128",
+                        "--scope",
+                        "Mocked CLI integration only",
+                    ]
+                ),
+                0,
+            )
+            self.assertEqual(
+                main(
+                    [
+                        "authorization-bind",
+                        "--authorization",
+                        str(authorization),
+                        "--run",
+                        str(target),
+                    ]
+                ),
+                0,
+            )
+        return authorization
+
+    def test_authorization_create_and_inspect_are_offline_and_inspection_is_readonly(self):
+        with (
+            tempfile.TemporaryDirectory() as temporary,
+            patch("http.client.HTTPSConnection") as connection,
+            patch("buddha.__main__._key_environment") as keys,
+        ):
+            path = Path(temporary) / "authority.sqlite3"
+            with redirect_stdout(io.StringIO()) as output:
+                self.assertEqual(
+                    main(
+                        [
+                            "authorization-create",
+                            "--out",
+                            str(path),
+                            "--budget-usd",
+                            "1.25",
+                            "--max-calls",
+                            "4",
+                            "--scope",
+                            "A declared bounded offline fixture",
+                        ]
+                    ),
+                    0,
+                )
+            self.assertEqual(json.loads(output.getvalue())["budget_microusd"], 1_250_000)
+            before = path.read_bytes()
+            with redirect_stdout(io.StringIO()) as output:
+                self.assertEqual(
+                    main(
+                        [
+                            "authorization-inspect",
+                            "--authorization",
+                            str(path),
+                        ]
+                    ),
+                    0,
+                )
+            summary = json.loads(output.getvalue())
+            self.assertEqual(summary["scope"], "A declared bounded offline fixture")
+            self.assertEqual(summary["remaining_calls"], 4)
+            self.assertEqual(summary["operation_count"], 0)
+            self.assertEqual(path.read_bytes(), before)
+            connection.assert_not_called()
+            keys.assert_not_called()
+
+    def test_authorization_creation_rejects_blank_scope_without_storage(self):
+        with tempfile.TemporaryDirectory() as temporary, redirect_stdout(io.StringIO()):
+            path = Path(temporary) / "authority.sqlite3"
+            self.assertEqual(
+                main(
+                    [
+                        "authorization-create",
+                        "--out",
+                        str(path),
+                        "--budget-usd",
+                        "1",
+                        "--max-calls",
+                        "4",
+                        "--scope",
+                        "  ",
+                    ]
+                ),
+                2,
+            )
+            self.assertFalse(path.exists())
+
+    def test_authorization_deactivate_is_offline_and_prevents_further_dispatch(self):
+        with (
+            tempfile.TemporaryDirectory() as temporary,
+            patch("http.client.HTTPSConnection") as connection,
+            patch("buddha.__main__._key_environment") as keys,
+        ):
+            directory = Path(temporary) / "run"
+            authority, _ = authorized_run(directory)
+            with redirect_stdout(io.StringIO()) as output:
+                self.assertEqual(
+                    main(
+                        [
+                            "authorization-deactivate",
+                            "--authorization",
+                            str(authority.path),
+                            "--run-id",
+                            "run",
+                            "--reason",
+                            "Preserve superseded attempt",
+                        ]
+                    ),
+                    0,
+                )
+            summary = json.loads(output.getvalue())
+            self.assertFalse(summary["runs"][0]["active"])
+            with self.assertRaises(ValidationError):
+                authority.for_run(directory).authorize_dispatch()
+            self.assertEqual(summary["operation_count"], 0)
+            connection.assert_not_called()
+            keys.assert_not_called()
+
     def test_hidden_keys_are_process_local_and_removed_even_after_failure(self):
         settings = _settings(Path(__file__).parent.parent / "examples" / "live-config.json", "50")
         with (
@@ -126,6 +258,7 @@ class CLITests(unittest.TestCase):
                 settings=settings,
                 synthetic=True,
             )
+            authorization = self.bind_authorization(root, target)
             with (
                 redirect_stderr(io.StringIO()) as progress,
                 patch.dict(os.environ, {}, clear=True),
@@ -135,7 +268,20 @@ class CLITests(unittest.TestCase):
                 patch.object(DiagnosticHTTPTransport, "send", side_effect=received) as send,
                 redirect_stdout(io.StringIO()) as output,
             ):
-                self.assertEqual(main(["run", "--run", str(target), "--live", "--prompt-keys"]), 0)
+                self.assertEqual(
+                    main(
+                        [
+                            "run",
+                            "--run",
+                            str(target),
+                            "--live",
+                            "--prompt-keys",
+                            "--authorization",
+                            str(authorization),
+                        ]
+                    ),
+                    0,
+                )
                 self.assertEqual(send.call_count, 12)
                 for secret in sentinels:
                     self.assertNotIn(secret, output.getvalue())
@@ -269,6 +415,7 @@ class CLITests(unittest.TestCase):
                 settings=settings,
                 synthetic=True,
             )
+            authorization = self.bind_authorization(root, target)
             response = Mock(status=429)
             response.read.return_value = b'{"error":{"message":"secret-error-sentinel"}}'
             response.getheader.return_value = "req_A12345678"
@@ -287,7 +434,19 @@ class CLITests(unittest.TestCase):
                 redirect_stdout(io.StringIO()) as output,
                 redirect_stderr(io.StringIO()) as progress,
             ):
-                self.assertEqual(main(["run", "--run", str(target), "--live"]), 2)
+                self.assertEqual(
+                    main(
+                        [
+                            "run",
+                            "--run",
+                            str(target),
+                            "--live",
+                            "--authorization",
+                            str(authorization),
+                        ]
+                    ),
+                    2,
+                )
             result = json.loads(output.getvalue())
             self.assertEqual(result["diagnostic"]["http_status"], 429)
             self.assertEqual(result["diagnostic"]["provider_request_id"], "req_A12345678")

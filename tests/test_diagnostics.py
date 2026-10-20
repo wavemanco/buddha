@@ -6,6 +6,8 @@ import unittest
 from pathlib import Path
 from unittest.mock import Mock, patch
 
+from authorization_helpers import authorized_run
+
 from buddha.diagnostics import DiagnosticHTTPTransport, failure_summary
 from buddha.evaluation import ValidationError
 from buddha.ledger import Ledger
@@ -16,7 +18,7 @@ class DiagnosticsTests(unittest.TestCase):
     def setUp(self):
         temporary = tempfile.TemporaryDirectory()
         self.addCleanup(temporary.cleanup)
-        self.directory = Path(temporary.name)
+        self.directory = Path(temporary.name) / "run"
         self.spec = ModelSpec(
             "openai", "test-model", 100, 10, 1_000_000, 2_000_000, "https://example.org/bounds"
         )
@@ -31,12 +33,8 @@ class DiagnosticsTests(unittest.TestCase):
                 }
             ),
         )
-        self.ledger = Ledger(
-            self.directory / "operations.sqlite3",
-            run_id="run",
-            manifest_sha256="f" * 64,
-            budget_microusd=10_000,
-            max_calls=20,
+        self.authority, self.ledger = authorized_run(
+            self.directory, budget_microusd=10_000, max_calls=20
         )
         self.transport = DiagnosticHTTPTransport(self.directory, allow_paid=True)
         self.operation = "a" * 64
@@ -170,9 +168,19 @@ class DiagnosticsTests(unittest.TestCase):
         connection.request.assert_called_once()
 
     def test_ambiguous_dispatched_fingerprint_blocks_http(self):
+        # Legacy input can contain multiple dispatches; current authority prevents
+        # creating this state. Exercise the transport's defensive reader directly.
+        config = self.ledger.config
+        legacy = Ledger(
+            self.ledger.path,
+            run_id=config[0],
+            manifest_sha256=config[1],
+            budget_microusd=config[2],
+            max_calls=config[3],
+        )
         for operation in (self.operation, "b" * 64):
-            self.ledger.reserve(operation, self.call.fingerprint(), 120)
-            self.ledger.dispatch(operation)
+            legacy.reserve(operation, self.call.fingerprint(), 120)
+            legacy.dispatch(operation)
         with (
             patch("buddha.diagnostics.http.client.HTTPSConnection") as connection,
             patch.dict("os.environ", {"OPENAI_API_KEY": "KEY-CANARY"}),
