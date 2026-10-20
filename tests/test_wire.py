@@ -2,14 +2,16 @@
 
 import base64
 import copy
+import gzip
 import hashlib
 import json
 import unittest
+import zlib
 from dataclasses import FrozenInstanceError
 from unittest.mock import patch
 
 from buddha.releases import ReleaseError
-from buddha.wire import RawEnvelope, Usage, WireError, extract_usage
+from buddha.wire import RawEnvelope, Usage, WireError, decoded_body, extract_usage
 
 
 class RawEnvelopeTests(unittest.TestCase):
@@ -184,6 +186,142 @@ class RawEnvelopeTests(unittest.TestCase):
             with self.assertRaises(WireError):
                 self.envelope(headers=(("retry-after", "1"), ("x-should-retry", "false")))
         self.assertTrue(issubclass(WireError, ReleaseError))
+
+
+class CompressionTests(unittest.TestCase):
+    body = b'{"model":"fixed","usage":{"prompt_tokens":2,"completion_tokens":3}}'
+
+    def envelope(self, body, headers=(), **changes):
+        return RawEnvelope("openai", 200, body, (("x-request-id", "rid"), *headers), **changes)
+
+    def test_plain_and_identity_bodies_keep_existing_bytes_and_billing(self):
+        for headers in ((), (("content-encoding", "identity"),)):
+            with self.subTest(headers=headers):
+                envelope = self.envelope(self.body, headers)
+                self.assertEqual(decoded_body(envelope), self.body)
+                self.assertEqual(extract_usage(envelope), Usage("fixed", "rid", 2, 3, ""))
+
+    def test_gzip_and_wrapped_or_raw_deflate_preserve_encoded_evidence(self):
+        compressor = zlib.compressobj(wbits=-zlib.MAX_WBITS)
+        raw_deflate = compressor.compress(self.body) + compressor.flush()
+        for coding, body in (
+            ("gzip", gzip.compress(self.body, mtime=0)),
+            ("deflate", zlib.compress(self.body)),
+            ("deflate", raw_deflate),
+        ):
+            with self.subTest(coding=coding, body=body):
+                envelope = self.envelope(body, (("Content-Encoding", coding),))
+                self.assertEqual(decoded_body(envelope), self.body)
+                self.assertEqual(extract_usage(envelope), Usage("fixed", "rid", 2, 3, ""))
+                self.assertEqual(envelope.body, body)
+                self.assertEqual(envelope.received_sha256, hashlib.sha256(body).hexdigest())
+                self.assertEqual(RawEnvelope.from_record(envelope.to_record()), envelope)
+
+    def test_repeated_headers_and_comma_chains_decode_in_reverse_application_order(self):
+        body = zlib.compress(gzip.compress(self.body, mtime=0))
+        for headers in (
+            (("content-encoding", "gzip, deflate"),),
+            (("content-encoding", "gzip"), ("Content-Encoding", "deflate")),
+            (("content-encoding", "identity, GZIP, deflate"),),
+        ):
+            with self.subTest(headers=headers):
+                envelope = self.envelope(body, headers)
+                self.assertEqual(decoded_body(envelope), self.body)
+                self.assertEqual(
+                    envelope.headers[1:], tuple((name.lower(), value) for name, value in headers)
+                )
+        double_gzip = gzip.compress(gzip.compress(self.body, mtime=0), mtime=0)
+        self.assertEqual(
+            decoded_body(self.envelope(double_gzip, (("content-encoding", "gzip,gzip"),))),
+            self.body,
+        )
+
+    def test_malformed_incomplete_and_unsupported_codings_retain_raw_evidence(self):
+        gzip_body = gzip.compress(self.body, mtime=0)
+        corrupt = gzip_body[:-8] + bytes([gzip_body[-8] ^ 1]) + gzip_body[-7:]
+        for body, coding in (
+            (gzip_body[:-1], "gzip"),
+            (corrupt, "gzip"),
+            (gzip_body + b"trailing bytes", "gzip"),
+            (gzip_body + gzip_body, "gzip"),
+            (zlib.compress(self.body)[:-1], "deflate"),
+            (b"not compressed", "deflate"),
+            (self.body, "br"),
+            (self.body, "zstd"),
+            (self.body, ""),
+            (self.body, "gzip,,deflate"),
+            (self.body, "gzip; q=1"),
+            (self.body, ","),
+            (self.body, ",".join(["identity"] * 6)),
+        ):
+            with self.subTest(coding=coding, body=body):
+                envelope = self.envelope(body, (("content-encoding", coding),))
+                before = envelope.to_record()
+                with self.assertRaises(WireError):
+                    decoded_body(envelope)
+                with self.assertRaises(WireError):
+                    extract_usage(envelope)
+                self.assertEqual(envelope.to_record(), before)
+
+    def test_decoded_boundary_and_bomb_are_bounded_during_inflation(self):
+        exact = gzip.compress(b"x" * 256, mtime=0)
+        too_large = gzip.compress(b"x" * 257, mtime=0)
+        bomb = gzip.compress(b"x" * 100_000, mtime=0)
+        with patch("buddha.wire.MAX_BODY_BYTES", 256):
+            self.assertEqual(
+                decoded_body(self.envelope(exact, (("content-encoding", "gzip"),))), b"x" * 256
+            )
+            for body in (too_large, bomb):
+                with self.subTest(size=len(body)), self.assertRaises(WireError):
+                    decoded_body(self.envelope(body, (("content-encoding", "gzip"),)))
+
+        original = zlib.decompressobj
+        limits = []
+
+        class CheckedDecoder:
+            def __init__(self, decoder):
+                self.decoder = decoder
+
+            def decompress(self, data, max_length=0):
+                if not 0 < max_length <= 257:
+                    raise AssertionError("decoder allocation was not bounded")
+                limits.append(max_length)
+                return self.decoder.decompress(data, max_length)
+
+            def __getattr__(self, name):
+                return getattr(self.decoder, name)
+
+        with (
+            patch("buddha.wire.MAX_BODY_BYTES", 256),
+            patch(
+                "buddha.wire.zlib.decompressobj",
+                side_effect=lambda *args: CheckedDecoder(original(*args)),
+            ),
+            self.assertRaises(WireError),
+        ):
+            decoded_body(self.envelope(bomb, (("content-encoding", "gzip"),)))
+        self.assertTrue(limits)
+
+    def test_encoded_bound_and_unavailable_evidence_reject_decoding(self):
+        envelope = self.envelope(self.body)
+        with patch("buddha.wire.MAX_BODY_BYTES", len(self.body) - 1), self.assertRaises(WireError):
+            decoded_body(envelope)
+        for changes in ({"truncated": True}, {"headers_complete": False}):
+            with self.subTest(changes=changes), self.assertRaises(WireError):
+                decoded_body(self.envelope(self.body, **changes))
+        with self.assertRaises(WireError):
+            decoded_body(RawEnvelope("openai", 200, b"", withheld=True, received_sha256="a" * 64))
+        for value in (None, b"raw", {}):
+            with self.subTest(value=value), self.assertRaises(WireError):
+                decoded_body(value)
+
+    def test_error_bodies_can_be_screened_but_never_establish_usage(self):
+        envelope = RawEnvelope(
+            "openai", 429, gzip.compress(self.body, mtime=0), (("content-encoding", "gzip"),)
+        )
+        self.assertEqual(decoded_body(envelope), self.body)
+        with self.assertRaises(WireError):
+            extract_usage(envelope)
 
 
 class UsageTests(unittest.TestCase):

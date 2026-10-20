@@ -9,12 +9,14 @@ import binascii
 import hashlib
 import json
 import re
+import zlib
 from dataclasses import dataclass, field
 from typing import cast
 
 from buddha.releases import ReleaseError
 
 MAX_BODY_BYTES = 16 * 1024 * 1024
+MAX_ENCODINGS = 5
 MAX_HEADERS = 64
 MAX_HEADER_VALUE_BYTES = 8192
 MAX_REQUEST_ID_BYTES = 1024
@@ -27,6 +29,7 @@ HEADER_NAMES = frozenset(
         "retry-after-ms",
         "x-should-retry",
         "content-type",
+        "content-encoding",
     }
 )
 
@@ -218,6 +221,55 @@ def _object(value: object) -> dict[str, object]:
     return cast(dict[str, object], value)
 
 
+def _inflate(raw: bytes, coding: str) -> bytes:
+    modes = (zlib.MAX_WBITS | 16,) if coding == "gzip" else (zlib.MAX_WBITS, -zlib.MAX_WBITS)
+    for index, mode in enumerate(modes):
+        try:
+            decoder = zlib.decompressobj(mode)
+            decoded = decoder.decompress(raw, MAX_BODY_BYTES + 1)
+        except zlib.error:
+            if index + 1 < len(modes):
+                continue  # Match the pinned SDKs' initial raw-deflate fallback.
+            raise WireError("invalid compressed response body") from None
+        if len(decoded) > MAX_BODY_BYTES or decoder.unconsumed_tail:
+            raise WireError("decoded response exceeds the byte ceiling")
+        if not decoder.eof or decoder.unused_data:
+            raise WireError("compressed response is incomplete or has trailing data")
+        return decoded
+    raise WireError("unsupported compression mode")
+
+
+def decoded_body(envelope: RawEnvelope) -> bytes:
+    """Decode complete captured content under encoded/intermediate/output ceilings.
+
+    Preserve the original bytes and digest. HTTP error bodies can be screened;
+    only extract_usage decides whether their status supports billing evidence.
+    Unknown coding, incomplete streams and trailing members fail closed, even
+    where an SDK's more lenient decoder might return a partial/first body.
+    """
+    if not isinstance(envelope, RawEnvelope) or (
+        envelope.truncated or envelope.withheld or not envelope.headers_complete
+    ):
+        raise WireError("complete available response evidence is required for decoding")
+    raw = envelope.body
+    if len(raw) > MAX_BODY_BYTES:
+        raise WireError("encoded response exceeds the byte ceiling")
+    codings = [
+        coding.strip().lower()
+        for name, value in envelope.headers
+        if name == "content-encoding"
+        for coding in value.split(",")
+    ]
+    if len(codings) > MAX_ENCODINGS or any(
+        coding not in {"identity", "gzip", "deflate"} for coding in codings
+    ):
+        raise WireError("unsupported or excessive content encoding")
+    for coding in reversed(codings):
+        if coding != "identity":
+            raw = _inflate(raw, coding)
+    return raw
+
+
 def extract_usage(envelope: RawEnvelope) -> Usage:
     """Read inclusive billing counters only; do not parse content, finish or judgment.
 
@@ -233,7 +285,9 @@ def extract_usage(envelope: RawEnvelope) -> Usage:
         raise WireError("complete successful response evidence is required")
     try:
         parsed: object = json.loads(
-            envelope.body.decode("utf-8"), object_pairs_hook=_pairs, parse_constant=_nonfinite
+            decoded_body(envelope).decode("utf-8"),
+            object_pairs_hook=_pairs,
+            parse_constant=_nonfinite,
         )
         json.dumps(parsed, allow_nan=False)
         record = _object(parsed)

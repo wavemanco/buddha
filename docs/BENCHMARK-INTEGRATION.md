@@ -195,4 +195,40 @@ The optional probe needs the already prepared [locked research environment](BENC
 .\runs\reference-env\Scripts\python.exe docs/conformance/nb02c-context-probe.py
 ```
 
-Remaining native integration includes a funded adapter that preserves supported semantic/account headers and compression, bounded shared dispatch admission for native concurrent calls, a confined official environment and worker channel, actual module/CLI artifacts and summaries, and the frozen seed agent's generation path. Source evolution and the composed configuration-only upgrade/retirement gates remain separate. The preserved AnyIO lock advisories still require an explicit active-environment/confinement assessment; no research-only audit is presented as live readiness.
+C2 below delivers the funded SDK transport/header/compression seam and offline admission/replay composition. Remaining native integration includes a confined official environment and production worker channel, configured full-module hooks, actual module/CLI artifacts and summaries, and the frozen seed agent's generation path. Source evolution and the composed configuration-only upgrade/retirement gates remain separate. The preserved AnyIO lock advisories still require an explicit active-environment/confinement assessment; no research-only audit is presented as live readiness.
+
+## BENCH-02C2: optional SDK views over the funded gateway
+
+`buddha.native_transport.make_transport()` returns the selected SDK HTTP transport type: HTTPX for OpenAI, HTTPX2 for Anthropic. These packages remain optional isolated evaluator dependencies, not application dependencies. A host-supplied async `Exchange` accepts a frozen `NativeRequest` and returns durable `RawEnvelope` evidence. The adapter allocates the logical/physical identity before its first await, preserves exact SDK body bytes, and exposes no provider credential or direct HTTP transport.
+
+The adapter validates the fixed POST endpoint, literal Host and Content-Length, then removes only SDK placeholder authentication, host/length framing and ordinary connection keep-alive. Cookie/proxy credentials and other hop headers fail. All remaining SDK headers reach host profile validation. Supported metadata, semantic and account headers are never silently discarded. Responses retain original encoded bytes and selected headers for the real SDK's parsing and decoding; the host separately validates bounded content decoding and billing.
+
+Gateway profile format `buddha.gateway-profiles.v2` adds `headers` (supported lowercase names mapped to explicit nonempty lists of reviewed values) and `account_headers` (provider-specific owner account names mapped to one fixed value). Unsupported names, arbitrary-value declarations, control characters, duplicates and unreviewed values fail before credentials or reservation. SDK retry metadata must match the physical attempt index. Worker-supplied account copies must equal the frozen owner; omitted owner account headers are injected by the host. The complete profile, submitted headers and exact body remain bound to the invocation/request. Existing v1 profiles and empty-header call records retain their original representation.
+
+Content coding is limited to identity, gzip and zlib/raw deflate, with at most five ordered layers and 16 MiB limits on encoded, intermediate and final bodies. Encoding headers, raw bytes and their digest remain immutable. Truncated streams, trailing compressed members, unsupported coding and excessive expansion stop with unknown liability. This is deliberately stricter than the pinned SDKs' lenient behavior on missing gzip trailers or trailing bytes: those cases are recorded authority/evidence stops, not exact native-parser equivalence.
+
+Known provider credentials are screened in received raw bytes, selected headers and bounded decoded content, including ASCII JSON escapes. Opaque or unreadable final payloads are withheld. Without complete response headers, requested compression is withheld; otherwise only verifiable plain JSON is retained. These rules prevent the demonstrated compressed-key retention paths, including unsolicited or misdeclared compression. They do not claim exhaustive detection of arbitrary encodings embedded in ordinary answer text. Withholding retains the received digest and unknown hold, rather than recoverable body/header bytes.
+
+`NativeStop` propagates without SDK retries; an unexpected exchange exception becomes a sanitized unknown stop. Native judgment/schema/fold/refusal parsing still runs in the original SDK/evaluator after a complete funded response. Cancellation remains cancellation: this adapter does not claim to terminate host work. The trusted channel and owned-process cleanup belong to C3.
+
+The [funded SDK probe](conformance/nb02c2-funded-sdk-probe.py) composes real attached authority, the actual Gateway and mocked HTTPS with the pinned SDKs and original selected evaluator functions. It checks raw receipt replay through native parsing without keys or further sends, concurrent identical-body identities under one offline admission queue, malformed judgment text, refusal/fallback, fold attempts, compression, and durable unknown/authority stops. Synthetic profiles explicitly cover the observed Windows SDK metadata; they are not live pricing/account approvals. This remains selected-function evidence. The in-process offline queue does not establish a production worker channel, actual installed-lock closure, complete official CLI execution, OS confinement or worker credential exclusion.
+
+These commands run once in the current PowerShell window, use temporary fixtures and synthetic credentials, and spend nothing. They need no SDK installation or real keys:
+
+```powershell
+python -m unittest discover -s tests -p test_gateway_headers.py
+python -m unittest discover -s tests -p test_native_transport.py
+python -m unittest discover -s tests -p test_wire.py
+```
+
+The first checks profile/account/header and compressed-receipt safeguards through actual accounting. The second checks the optional transport's exact-byte/context/stop boundaries with a canned SDK interface. The third checks bounded raw evidence and decoding independently.
+
+The optional command below requires the already prepared locked research environment and fixed-hash reference files described for C1. It runs once in the same window, blocks external network, uses fake keys, writes temporary fixtures and ignored evidence under `runs/reviews/`, and spends nothing. `Ctrl+C` stops it. The preserved AnyIO advisories mean this research environment is not approved for a live worker:
+
+```powershell
+.\runs\reference-env\Scripts\python.exe docs/conformance/nb02c2-funded-sdk-probe.py
+```
+
+Complete official modules, generic configured hooks/aliases/resume, confined bounded channels, actual native artifacts/summary and unchanged frozen-agent generation remain BENCH-02C3. The same-agent/same-runner release upgrade and safe retirement proof remains BENCH-03C. No new paid CLI or allocation is enabled here.
+
+[Delivery evidence](conformance/nb02c2-delivery.json) records the 555-test local suite and root-reproduced 30-scenario oracle. [The independent boundary review](conformance/nb02c2-boundary-review.md) records reproduced failures, closed regressions and remaining execution limits. All 287 protected historical inputs remain byte-identical.
