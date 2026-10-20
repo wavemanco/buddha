@@ -569,7 +569,7 @@ async def main():
         self.assertEqual(result["fixture.synthetic"], {"kind": "image-synthetic"})
 
     def derived_class(self):
-        owner = self.roots["environment"] / "derived.py"
+        owner = (self.roots["environment"] / "derived.py").resolve()
         raw = (
             b"from types import ModuleType\nclass Derived(ModuleType):\n"
             b"    __file__ = 'relative-placeholder.py'\n"
@@ -602,6 +602,31 @@ async def main():
             result = self.import_audit(worker)
         self.assertEqual(result["fixture.derived"]["kind"], "image-derived-class")
         self.assertEqual(result["fixture.derived"]["owner"]["kind"], "environment")
+
+    async def test_derived_class_fixture_resolves_alias_before_defining_and_sealing(self):
+        environment = self.roots["environment"]
+        (environment / "sub").mkdir()
+        self.roots["environment"] = environment / "sub" / ".."
+        self.config["roots"]["environment"] = str(self.roots["environment"])
+        worker, cls, owner = self.derived_class()
+        module = cls()
+        with patch.dict(sys.modules, {"fixture.derived": module}, clear=True):
+            result = self.import_audit(worker)
+            self.assertEqual(result["fixture.derived"]["owner"]["path"], str(owner))
+            self.assertEqual(owner, (environment / "derived.py").resolve())
+            alias = str(self.roots["environment"] / "derived.py")
+            initializer = cls.__init__
+            code = initializer.__code__
+            for changed in ("namespace", "code"):
+                with self.subTest(changed=changed):
+                    initializer.__globals__["__file__"] = str(owner)
+                    initializer.__code__ = code
+                    if changed == "namespace":
+                        initializer.__globals__["__file__"] = alias
+                    else:
+                        initializer.__code__ = code.replace(co_filename=alias)
+                    with self.assertRaises(WorkerError):
+                        self.import_audit(worker)
 
     async def test_derived_class_rejects_impostor_reusing_constructor_and_owner_drift(self):
         worker, cls, owner = self.derived_class()
