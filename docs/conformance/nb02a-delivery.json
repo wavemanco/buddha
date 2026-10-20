@@ -1,0 +1,31 @@
+{
+  "format": "buddha.review.nb02a-delivery.v1",
+  "protected_input_files": 287,
+  "input_hashes_unchanged": true,
+  "model_calls": 0,
+  "application_dependency_changes": false,
+  "full_suite": {
+    "tests": 392,
+    "skipped": 1,
+    "seconds": 102.587,
+    "status": "passed"
+  },
+  "focused_reference_tests": 5,
+  "local_checks": {
+    "ruff": "passed",
+    "mypy_strict_modules": 17,
+    "bandit": "passed",
+    "runtime_dependency_audit": "passed",
+    "compile": "passed",
+    "diff_check": "passed"
+  },
+  "locked_scoring_reproduced": true,
+  "locked_request_reproduced": true,
+  "real_locked_sdk_mock_wire_parsed": true,
+  "upstream_lock_sha256": "ff6d5b15b77e4ca46a33604586eb7d99666d2802752ab962af9baa2924a50758",
+  "limits": [
+    "No native paid dispatch implemented.",
+    "Native parsing/recovery/controller integration still open.",
+    "No live semantic judge calibration performed."
+  ]
+}

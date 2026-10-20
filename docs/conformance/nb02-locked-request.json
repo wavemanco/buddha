@@ -1,0 +1,132 @@
+{
+  "format": "buddha.noveltybench-request-conformance.v1",
+  "reference_commit": "64a23be6b18ec1dacc298830aab276061b6e143c",
+  "sdk_probe_versions": {
+    "anthropic": "1.4.0",
+    "numpy": "2.2.6",
+    "openai": "1.107.0",
+    "pydantic": "2.11.7"
+  },
+  "request_differences": {
+    "partition_extra_cap_and_tier": 6,
+    "score_extra_tier": 55
+  },
+  "adversarial_probes": {
+    "anthropic_generation_http400_content_filter": {
+      "local": "ProviderUncertain",
+      "local_attempts": 1,
+      "note": "Fake in-memory HTTP object; no credentials or real network.",
+      "upstream": "[refused]"
+    },
+    "anthropic_refusal_fallback": {
+      "local_automatic_fallback": false,
+      "score": 7,
+      "upstream_models": [
+        "primary",
+        "fallback"
+      ],
+      "upstream_used": "fallback"
+    },
+    "malformed_partition_fold_retry_leniency": {
+      "local_single_fold_raises": true,
+      "upstream_calls": 3,
+      "upstream_partition": [
+        0,
+        1
+      ]
+    },
+    "max_tokens": {
+      "local": "ValidationError",
+      "upstream": "ValueError"
+    },
+    "pydantic_boolean": {
+      "local_accepts": false,
+      "upstream_score": 1
+    },
+    "pydantic_duplicate_key": {
+      "local_accepts": false,
+      "upstream_score": 7
+    },
+    "pydantic_extra_property": {
+      "local_accepts": false,
+      "upstream_score": 7
+    },
+    "pydantic_integer_float": {
+      "local_accepts": false,
+      "upstream_score": 7
+    },
+    "pydantic_string": {
+      "local_accepts": false,
+      "upstream_score": 7
+    },
+    "refusal": {
+      "local": "ValidationError",
+      "upstream": "JudgeRefusal"
+    },
+    "single_text": {
+      "local": {
+        "score": 7
+      },
+      "upstream": 7
+    },
+    "two_text_blocks": {
+      "local": "ValidationError",
+      "upstream": 7
+    }
+  },
+  "generation_probes": {
+    "anthropic_body_fixtures": "plain and instruction/history requests match except explicit tier",
+    "in-context": {
+      "native_messages_match": true,
+      "per_sample_body_count": 10
+    },
+    "openai_normalization": [
+      {
+        "output": "text",
+        "refusal": false,
+        "stop": "stop"
+      },
+      {
+        "output": "[empty]",
+        "refusal": false,
+        "stop": "stop"
+      },
+      {
+        "output": "[empty]",
+        "refusal": false,
+        "stop": "length"
+      },
+      {
+        "output": "partial",
+        "refusal": false,
+        "stop": "length"
+      },
+      {
+        "output": "[refused]",
+        "refusal": false,
+        "stop": "content_filter"
+      },
+      {
+        "output": "[refused]",
+        "refusal": true,
+        "stop": "stop"
+      }
+    ],
+    "regenerate": {
+      "native_messages_match": true,
+      "per_sample_body_count": 10
+    }
+  },
+  "network_calls": 0,
+  "api_keys_read": false,
+  "input_hashes_unchanged": true,
+  "upstream_seals": {
+    "LICENSE": "14e69e7fbb2f8fd0aa8ccf17d7d4ddd54665555c613a0336767f7a5fa477895c",
+    "src/common.py": "ba60bf0f2a409c3774d75880f305325a28ed34320610667542a4596c41f424af",
+    "src/inference.py": "16f538382eb8f86453545d806f021060e7020df728dd3f84270b9d0909a483d5",
+    "src/judge.py": "4decf04790b90a03368eb792dfe29045435914a73ab83a52185d9dd0d1613902",
+    "src/partition.py": "263970891ff3ee1cc8df369a33beefe5cb5de618b5dd146a5234536d97954aca",
+    "src/score.py": "418985a40e9e159cfeffe9a43ab2c727010d7a7a29407f4e14cab3c81b77cbae",
+    "src/summarize.py": "0a8bd1eb7f317584f579eaa827e580f9cefe4177a1abdc35b2cb06ef96eeea9e"
+  }
+}

@@ -2,6 +2,7 @@
 
 `buddha/benchmark.py` reuses the exact `JUDGE_SYSTEM` and `SCORE_SYSTEM` strings
 from NoveltyBench, and implements compatible rendering and ordering behavior.
+The reference request fixture also preserves those exact prompt strings.
 Source: https://github.com/novelty-bench/novelty-bench at commit
 `64a23be6b18ec1dacc298830aab276061b6e143c`, `src/partition.py`, `src/score.py`,
 `src/common.py`, and `src/judge.py`.
