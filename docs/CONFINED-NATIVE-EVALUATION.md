@@ -233,3 +233,15 @@ The separately recorded [partition proof](conformance/nb02c3b-funded-native-evid
 [independent security review](conformance/nb02c3b-security-review.md) keep their
 scopes distinct. Canned judgments establish engineering behavior, not semantic
 judgment accuracy, useful diversity, source evolution or held-out improvement.
+
+
+## Composed selected baseline
+
+[The native baseline guide](NATIVE-BASELINE.md) now connects isolated fixed-seed
+generation and exact selected C1 native bytes to these official commands through
+one shared authorization and separate immutable stage owners. Its actual
+26-mocked-send proof includes mid-score interruption/recovery, completed keyless
+reuse and direct command comparisons. The host checks required population
+coverage without altering native results or summary bytes. This adds no paid
+CLI, new allocation, semantic improvement or arbitrary evolved-source claim;
+cross-release compatibility/retirement remains its separate plan gate.

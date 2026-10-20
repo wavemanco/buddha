@@ -329,3 +329,34 @@ C3C3 still owns complete generation-to-native-summary composition, immutable
 per-stage inputs, selected-population coverage and a summary stage unable to
 spend. BENCH-03C still owns configuration-only cross-release upgrade/retirement.
 No new paid command, allocation or scientific improvement claim follows.
+
+
+## BENCH-02C3C3: composed frozen-agent native baseline
+
+The [native baseline controller](NATIVE-BASELINE.md) now composes selected C1
+Tasks, isolated generation, exact native-answer derivation and the ordered
+`Release.commands` through separate immutable owners under one shared authority.
+A frozen external flow descriptor supplies input paths, required output paths
+and population fields; no benchmark-version, formula or metric-stage branch is
+added to the controller. Model-free summary has no model mapping or paid
+transport and independently anchors its completion like every other stage.
+
+Consumed configuration, C1 data, prior completion records and reports are checked
+against their frozen byte digests. Required result populations must match the
+selected typed IDs exactly; native numerical results, prescribed row projections
+and opaque summaries are preserved. A complete baseline requires no optimizer
+mapping and makes no promotion or improvement claim.
+
+[Actual full-pipeline evidence](conformance/nb02c3c3-baseline-evidence.json)
+compares generated data through all three unchanged official commands with direct
+oracles. Twenty-six mocked sends, a genuine mid-score interruption/same-owner
+continuation and completed keyless reuse pass with zero real API calls. The
+individual C3A/B malformed/refused/fold/retry/cache controls retain their exact
+scope. Remaining financial stops and environment restrictions remain explicit;
+this is not unrestricted SDK-failure retry or arbitrary-code equivalence.
+
+BENCH-03C still must demonstrate the same agent/controller across differently
+configured releases and retirement preserving read-only history and liability.
+Live semantic calibration, source evolution and scientific improvement remain
+separate. A seal published before its authority anchor is retained and rejected
+on resume, rather than silently blessed; REC-05 owns that recovery-usability gap.

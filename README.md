@@ -6,12 +6,12 @@ Build agents that improve their own procedures for producing useful, meaningfull
 
 ## Current state
 
-The implementation checkpoint is **BENCH-02C3C2**. The project has auditable API
+The implementation checkpoint is **BENCH-02C3C3**. The project has auditable API
 accounting, linked recovery, bounded policy search, replaceable release selection,
 and isolated fixed-seed generation. The unchanged official LLM partition, score
-and summary commands each have confined offline conformance evidence. Their
-complete generation-to-summary composition is in progress; configuration-only
-cross-release upgrade and retirement still need their composed acceptance check.
+and summary commands now compose with generated C1 answers in a complete
+[offline-tested native baseline](docs/NATIVE-BASELINE.md). Configuration-only
+cross-release upgrade and retirement are the next composed acceptance check.
 
 These are distinct from scientific success. Meaningful diversity, held-out
 improvement, genuine task/improver source evolution and an improved improver have
@@ -20,9 +20,9 @@ original benchmark scores and raw evidence remain unchanged. See the
 [pilot review](docs/PILOT-REVIEW.md), [recovery results](docs/FIRST-LIVE-RESULTS.md)
 and [linked continuation results](docs/LINKED-CONTINUATION-RESULTS.md).
 
-At this checkpoint the living plan contains **16 remaining leaf slices**,
-including the pipeline slice in progress. Umbrella milestones are not counted
-again. They cover benchmark integration (2), recovery/usability (3), measurement
+At this checkpoint the living plan contains **15 remaining leaf slices**.
+The native pipeline is complete at its declared offline scope. Umbrella milestones are not counted
+again. They cover benchmark integration (1), recovery/usability (3), measurement
 (2), policy/search (3), source evolution (3), held-out evaluation (2) and the
 improver comparison (1). This is a checkpoint count, not a promise that research
 findings will never require a smaller slice; [PLAN.md](docs/PLAN.md) determines
@@ -112,7 +112,7 @@ The [slice 2 guide](docs/SLICE2.md) and [original continuation handoff](docs/FIR
 preserve the frozen pilot's preparation, execution, API-key and recovery commands.
 They describe the historical v1.1 runner, whose bounded request/parser behavior
 is distinct from full native execution. They are not instructions or additional
-spending permission for the unfinished native baseline path.
+spending permission for the new native baseline path.
 
 The existing baseline independently samples ten answers with low reasoning
 effort. Its historical generation/partition model and quality judge are recorded
@@ -145,6 +145,7 @@ payment stops new spending. Arbitrary evolved source and publication remain gate
 - [Architecture and scientific contract](docs/DESIGN.md)
 - [Replaceable benchmark integration contract](docs/BENCHMARK-INTEGRATION.md)
 - [Frozen seed and isolated generation](docs/FROZEN-SEED.md)
+- [Complete selected native baseline](docs/NATIVE-BASELINE.md)
 - [Complete native commands and environment limits](docs/CONFINED-NATIVE-EVALUATION.md)
 - [Pinned benchmark source audit](docs/NOVELTYBENCH.md)
 - [Research and successors](docs/RESEARCH.md)
