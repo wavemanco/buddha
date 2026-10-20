@@ -6,6 +6,8 @@ REC-04B operational handoff, October 20, 2026. [PLAN.md](PLAN.md) remains the si
 
 Use a normal interactive PowerShell window from this checkout. The reviewed preparation uses the `-v2` paths below. The earlier path without that suffix is permanently inactive.
 
+The first command moves PowerShell into the project folder. The second starts or resumes the prepared live continuation, asks for missing API keys without displaying them, and can spend money within the shared budget.
+
 ```powershell
 cd C:\Users\arvik\code\buddha
 python -m buddha search-run --run runs/first-live-continuation-v2 --live --prompt-keys --authorization runs/first-live-authorization-v2.sqlite3
@@ -19,12 +21,21 @@ A complete run publishes `runs/first-live-continuation-v2/report.json` and candi
 
 After completion, tell Codex the run finished; the files in this checkout can be reviewed directly. If it stops, retain the error text and directory. Uncertain transmission keeps its reservation and stops shared dispatch; an automatic retry is never inferred from elapsed time. A purely local preparation failure remains unsent and can be reviewed for resuming that same operation. Reusing a complete run replays saved replies without new model calls.
 
-The independent watcher is optional:
+These optional commands only read saved records. They do not start or resume the run, ask for API keys, or spend money.
+
+`watch` continuously shows progress for this continuation's new calls: replies received, pending or uncertain requests, recorded costs and money held. Run it in a separate PowerShell window while the main run executes. It stops when it sees completion or an uncertain request needing review. Press **Ctrl+C** to stop only the watcher; the main run in the other window keeps going. The watcher reads saved records, so its updates do not prove the main run is still running.
 
 ```powershell
 python -m buddha watch --run runs/first-live-continuation-v2
+```
+
+`authorization-inspect` prints a one-time budget summary as JSON (structured text). It covers the original attempt, completed recovery and this continuation, showing money spent, money still held and the remaining allowance.
+
+```powershell
 python -m buddha authorization-inspect --authorization runs/first-live-authorization-v2.sqlite3
 ```
+
+Run these commands separately if you want the budget summary immediately. If you paste both into the same window, the second waits until `watch` exits.
 
 ## Funding and provenance
 
