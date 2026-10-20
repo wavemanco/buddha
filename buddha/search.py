@@ -232,23 +232,23 @@ def load_search(
     if directory.is_symlink() or any(path.is_symlink() for path in directory.rglob("*")):
         raise ValidationError("search artifacts must not contain symlinks")
     manifest = _read(directory / "manifest.json")
-    if (
-        set(manifest)
-        != {
-            "format",
-            "run_id",
-            "population",
-            "synthetic",
-            "settings",
-            "spec",
-            "source_sha256",
-            "splits",
-            "families",
-            "screen_ids",
-            "contracts",
-            "comparison_key",
-        }
-        or manifest["format"] != "buddha.policy-search.v1"
+    linked = manifest.get("format") == "buddha.policy-search-continuation.v1"
+    if set(manifest) != {
+        "format",
+        "run_id",
+        "population",
+        "synthetic",
+        "settings",
+        "spec",
+        "source_sha256",
+        "splits",
+        "families",
+        "screen_ids",
+        "contracts",
+        "comparison_key",
+    } | ({"continuation"} if linked else set()) or manifest["format"] not in (
+        "buddha.policy-search.v1",
+        "buddha.policy-search-continuation.v1",
     ):
         raise ValidationError("unsupported search manifest")
     _text(manifest["run_id"], "run ID")
@@ -278,6 +278,10 @@ def load_search(
         settings, source_hash, screen, manifest["contracts"]
     ):
         raise ValidationError("frozen implementation or comparison controls changed")
+    if linked:
+        from buddha.continuation import load_continuation
+
+        load_continuation(directory, manifest, settings, spec, screen)
     return manifest, settings, spec, screen
 
 
@@ -294,11 +298,18 @@ def _ledger(directory: Path, manifest: dict[str, object], settings: RunSettings)
 def _configuration(
     settings: RunSettings, selected: Policy, manifest: dict[str, object]
 ) -> dict[str, object]:
-    return generation_config(settings) | {
+    configuration = generation_config(settings) | {
         "sampling": selected.sampling,
         "buddha_policy": selected.to_record(),
         "buddha_template": manifest["contracts"],
     }
+    if manifest["format"] == "buddha.policy-search-continuation.v1":
+        lineage = _object(manifest["continuation"])
+        configuration["buddha_continuation"] = {
+            "lineage_sha256": _sha(lineage),
+            "runtime_sha256": lineage["runtime_sha256"],
+        }
+    return configuration
 
 
 def _candidate_protocol(
@@ -362,19 +373,70 @@ def _walk(
     prompts: tuple[Prompt, ...],
     broker: BudgetBroker,
 ) -> dict[str, object]:
+    linked = manifest["format"] == "buddha.policy-search-continuation.v1"
+    if linked:
+        from buddha.continuation import load_continuation
+
+    continuation = (
+        load_continuation(directory, manifest, settings, spec, prompts) if linked else None
+    )
     candidates: list[Candidate] = []
     policies: dict[str, Policy] = {}
     evidence: dict[str, list[dict[str, object]]] = {}
     summaries: dict[str, dict[str, object]] = {}
     decisions: list[dict[str, object]] = []
     billed: dict[str, tuple[str, int, str | None]] = {}
+    inherited: dict[str, tuple[str, int, str | None]] = {}
+
+    def shared_accounting() -> dict[str, object]:
+        if continuation is None:
+            return {}
+        lineage = _object(manifest["continuation"])
+        authority = Authorization(Path(_text(lineage["authorization_path"], "authorization path")))
+        current = authority.summary()
+        context = continuation.authorization_context
+        local = broker.ledger.totals()
+        for key in ("committed_microusd", "spent_microusd", "reserved_microusd", "operation_count"):
+            if _integer(current[key], key, 0) != _integer(context[key], key, 0) + local[key]:
+                raise ValidationError("shared accounting changed outside the declared continuation")
+        static = ("authorization_id", "budget_microusd", "max_calls", "scope", "terms_sha256")
+        if any(current[key] != context[key] for key in static):
+            raise ValidationError("shared authorization terms differ from preparation")
+        return {
+            key: current[key]
+            for key in (
+                *static,
+                "committed_microusd",
+                "spent_microusd",
+                "reserved_microusd",
+                "operation_count",
+                "available_microusd",
+                "remaining_calls",
+            )
+        }
+
+    shared_accounting()
 
     def metered(namespace: Sequence[object], candidate_id: str | None = None) -> Execute:
         invoke = operation_executor(broker, settings, namespace=namespace)
 
         def execute(prompt_id: str, stage: str, index: int, call: Call) -> Reply:
-            reply = invoke(prompt_id, stage, index, call)
             operation_id = _sha([*namespace, prompt_id, stage, index])
+            if continuation is not None and operation_id in continuation.replies:
+                reference = continuation.replies[operation_id]
+                if call.fingerprint() != reference.request_sha256 or (
+                    stage != reference.stage
+                    or candidate_id != reference.candidate_id
+                    or prompt_id != reference.prompt_id
+                    or index != reference.index
+                ):
+                    raise ValidationError(
+                        "inherited reply differs from its declared semantic request"
+                    )
+                BudgetBroker._bounds(call, reference.reply)
+                inherited[operation_id] = (stage, reference.actual_microusd, candidate_id)
+                return reference.reply
+            reply = invoke(prompt_id, stage, index, call)
             operation = broker.ledger.get(operation_id)
             if (
                 operation is None
@@ -494,6 +556,8 @@ def _walk(
         _put(decision_path, decision)
         decisions.append(decision)
     totals = broker.ledger.totals()
+    if continuation is not None and set(inherited) != set(continuation.replies):
+        raise ValidationError("complete continuation did not use every inherited receipt")
     by_stage = {
         stage: sum(amount for recorded, amount, _ in billed.values() if recorded == stage)
         for stage in ("proposal", "generation", "partition", "score")
@@ -526,6 +590,14 @@ def _walk(
             "proposal_microusd": by_stage["proposal"],
         }
     )
+    candidate_reports = [
+        asdict(item)
+        | {
+            "summary": summaries[item.candidate_id],
+            "evaluation_microusd": by_candidate[item.candidate_id],
+        }
+        for item in candidates
+    ]
     report: dict[str, object] = {
         "format": "buddha.policy-search-report.v1",
         "status": "complete",
@@ -536,14 +608,7 @@ def _walk(
         "comparison_key": manifest["comparison_key"],
         "screen_ids": manifest["screen_ids"],
         "spec": asdict(spec),
-        "candidates": [
-            asdict(item)
-            | {
-                "summary": summaries[item.candidate_id],
-                "evaluation_microusd": by_candidate[item.candidate_id],
-            }
-            for item in candidates
-        ],
+        "candidates": candidate_reports,
         "active_ids": [
             item.candidate_id for item in active_pool(candidates, max_active=spec.max_active)
         ],
@@ -552,6 +617,47 @@ def _walk(
         "costs": costs,
         "claim": "exploratory development measurements; no held-out improvement claim",
     }
+    if continuation is not None:
+        inherited_total = sum(amount for _, amount, _ in inherited.values())
+        inherited_by_candidate = {
+            item.candidate_id: sum(
+                amount for _, amount, owner in inherited.values() if owner == item.candidate_id
+            )
+            for item in candidates
+        }
+        report["format"] = "buddha.policy-search-report.v2"
+        report["inherited_costs"] = {
+            "committed_microusd": inherited_total,
+            "spent_microusd": inherited_total,
+            "reserved_microusd": 0,
+            "operation_count": len(inherited),
+            "by_stage_microusd": {"generation": inherited_total},
+            "by_candidate_microusd": inherited_by_candidate,
+        }
+        report["evidence_costs"] = {
+            "committed_microusd": totals["committed_microusd"] + inherited_total,
+            "spent_microusd": totals["spent_microusd"] + inherited_total,
+            "reserved_microusd": totals["reserved_microusd"],
+            "operation_count": totals["operation_count"] + len(inherited),
+        }
+        report["authorization"] = shared_accounting()
+        report["continuation"] = {
+            "source_run_id": continuation.source.history.run_id,
+            "source_manifest_sha256": continuation.source.history.manifest_sha256,
+            "source_ledger_sha256": continuation.source.history.ledger_sha256,
+            "replacement": asdict(continuation.replacement),
+            "inherited_operation_ids": list(continuation.replies),
+            "accounting": (
+                "costs are new physical operations; inherited evidence is charged once "
+                "in shared accounting"
+            ),
+        }
+        for record in candidate_reports:
+            candidate_id = _text(record["candidate_id"], "candidate ID")
+            record["inherited_evaluation_microusd"] = inherited_by_candidate[candidate_id]
+            record["evidence_evaluation_microusd"] = (
+                by_candidate[candidate_id] + inherited_by_candidate[candidate_id]
+            )
     _put(directory / "report.json", report)
     return report
 
@@ -567,6 +673,8 @@ def run_search(
         raise ValidationError("allow_paid must be boolean")
     with _lock(directory):
         manifest, settings, spec, prompts = load_search(directory)
+        if manifest["format"] == "buddha.policy-search-continuation.v1" and authorization is None:
+            raise ValidationError("linked execution requires its shared authorization")
         if any(item.provider != "replay" for item in settings.profiles()):
             if not allow_paid:
                 raise ValidationError("live search requires explicit paid execution")

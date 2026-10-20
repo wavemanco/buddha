@@ -86,10 +86,18 @@ def _published(directory: Path, manifest: dict[str, object]) -> int:
 
 
 def _complete(directory: Path, manifest: dict[str, object]) -> bool:
-    if manifest.get("format") == "buddha.policy-search.v1":
+    if manifest.get("format") in (
+        "buddha.policy-search.v1",
+        "buddha.policy-search-continuation.v1",
+    ):
         report = _read(directory / "report.json", checksummed=True)
+        report_format = (
+            "buddha.policy-search-report.v1"
+            if manifest["format"] == "buddha.policy-search.v1"
+            else "buddha.policy-search-report.v2"
+        )
         return (
-            report.get("format") == "buddha.policy-search-report.v1"
+            report.get("format") == report_format
             and report.get("status") == "complete"
             and report.get("run_id") == manifest.get("run_id")
             and report.get("comparison_key") == manifest.get("comparison_key")

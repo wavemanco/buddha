@@ -148,6 +148,22 @@ class ProgressTests(unittest.TestCase):
         self.complete(self.ledger())
         self.assertEqual(snapshot(self.directory)["status"], "running")
 
+    def test_linked_completion_requires_its_v2_report_before_watcher_finishes(self):
+        self.manifest["format"] = "buddha.policy-search-continuation.v1"
+        self.write_record("manifest.json", self.manifest)
+        ledger = self.ledger()
+        self.complete(ledger)
+        self.assertEqual(snapshot(self.directory)["status"], "running")
+        self.report()
+        self.assertEqual(snapshot(self.directory)["status"], "running")
+        self.report(format="buddha.policy-search-report.v2")
+        before = (self.directory / "operations.sqlite3").read_bytes()
+        self.assertEqual(snapshot(self.directory)["status"], "complete")
+        self.assertEqual(watch_run(self.directory, stream=io.StringIO())["status"], "complete")
+        self.assertEqual((self.directory / "operations.sqlite3").read_bytes(), before)
+        ledger.reserve("pending", "b" * 64, 1_000_000)
+        self.assertEqual(snapshot(self.directory)["status"], "running")
+
     def test_report_requires_checksum_run_identity_and_no_pending_operations(self):
         ledger = self.ledger()
         self.complete(ledger)

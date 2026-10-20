@@ -10,7 +10,7 @@ Keep the keys in your password manager or secrets manager. Never paste them into
 
 ## Recommended: hidden entry for one command
 
-From a normal interactive PowerShell terminal in `C:\Users\arvik\code\buddha`, a new, reviewed run uses the following form. Set `$runPath` and `$authorizationPath` to the prepared run and its existing shared authorization database. The linked first-run continuation is not yet executable:
+From a normal interactive PowerShell terminal in `C:\Users\arvik\code\buddha`, a new, reviewed run uses the following form. Set `$runPath` and `$authorizationPath` to the prepared run and its existing shared authorization database. A linked run must first be frozen and bound by `continuation-prepare`; it cannot use the generic binding command:
 
 ```powershell
 python -m buddha search-run --run $runPath --live --prompt-keys --authorization $authorizationPath

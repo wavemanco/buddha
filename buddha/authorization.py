@@ -215,22 +215,91 @@ def _totals(rows: list[sqlite3.Row]) -> dict[str, int]:
     }
 
 
-def _manifest(directory: Path) -> tuple[str, str, int, int]:
+def _manifest_record(directory: Path) -> tuple[dict[str, object], tuple[str, str, int, int]]:
     path = _path(directory / "manifest.json")
     record = _object(_parse(path.read_bytes()))
     checksum = record.pop("record_sha256", None)
     digest = hashlib.sha256(_canonical(record)).hexdigest()
-    if record.get("format") == "buddha.policy-search.v1":
+    if record.get("format") in ("buddha.policy-search.v1", "buddha.policy-search-continuation.v1"):
         if checksum != digest:
             raise ValidationError("search manifest checksum differs")
     elif record.get("format") != "buddha.baseline.v1" or checksum is not None:
         raise ValidationError("unsupported run manifest")
     settings = _object(record.get("settings"))
-    return (
+    return record, (
         _text(record.get("run_id"), "run ID"),
         digest,
         _amount(settings.get("budget_microusd"), "run budget"),
         _amount(settings.get("max_calls"), "run call cap"),
+    )
+
+
+def _manifest(directory: Path) -> tuple[str, str, int, int]:
+    return _manifest_record(directory)[1]
+
+
+def _accept_unknown(
+    connection: sqlite3.Connection,
+    schema: str,
+    values: tuple[str, str, str, str, str],
+    *,
+    require_existing: bool = False,
+) -> None:
+    source_run_id, operation_id, continuation_run_id, evidence_sha256, reason = values
+    for value, name in (
+        (source_run_id, "source run"),
+        (operation_id, "operation ID"),
+        (continuation_run_id, "continuation run"),
+        (reason, "review reason"),
+    ):
+        _text(value, name)
+    _hex(evidence_sha256, "historical evidence hash")
+    queries = {
+        "main": (
+            "SELECT r.historical,r.historical_ledger_sha256,o.status,o.response_json,"
+            "o.provider_request_id FROM main.auth_runs r "
+            "JOIN main.auth_operations o USING(run_id) WHERE r.run_id=? AND o.operation_id=?",
+            "SELECT r.historical,d.run_id FROM main.auth_runs r "
+            "LEFT JOIN main.auth_deactivations d USING(run_id) WHERE r.run_id=?",
+            "SELECT * FROM main.auth_acceptances WHERE source_run_id=? AND operation_id=?",
+            "INSERT INTO main.auth_acceptances VALUES (?,?,?,?,?)",
+        ),
+        "funding": (
+            "SELECT r.historical,r.historical_ledger_sha256,o.status,o.response_json,"
+            "o.provider_request_id FROM funding.auth_runs r "
+            "JOIN funding.auth_operations o USING(run_id) WHERE r.run_id=? AND o.operation_id=?",
+            "SELECT r.historical,d.run_id FROM funding.auth_runs r "
+            "LEFT JOIN funding.auth_deactivations d USING(run_id) WHERE r.run_id=?",
+            "SELECT * FROM funding.auth_acceptances WHERE source_run_id=? AND operation_id=?",
+            "INSERT INTO funding.auth_acceptances VALUES (?,?,?,?,?)",
+        ),
+    }
+    source_query, target_query, prior_query, insert_query = queries[schema]
+    source = connection.execute(source_query, (source_run_id, operation_id)).fetchone()
+    target = connection.execute(target_query, (continuation_run_id,)).fetchone()
+    if source is None or tuple(source)[:3] != (1, evidence_sha256, "unknown"):
+        raise OperationConflict("review must identify an exact historical unknown")
+    if source["response_json"] is not None or source["provider_request_id"] is not None:
+        raise OperationConflict(
+            "received uncertain billing evidence requires reconciliation before continuation"
+        )
+    if target is None or tuple(target) != (0, None):
+        raise OperationConflict("unknown review requires an active newly bound continuation")
+    prior = connection.execute(prior_query, (source_run_id, operation_id)).fetchone()
+    if prior is not None:
+        if tuple(prior) != values:
+            raise OperationConflict("historical unknown already has a different review")
+        return
+    if require_existing:
+        raise OperationConflict("continuation binding lacks its original atomic source claim")
+    connection.execute(insert_query, values)
+    _event(
+        connection,
+        schema,
+        "historical_unknown_accepted",
+        source_run_id,
+        operation_id,
+        {"continuation_run_id": continuation_run_id, "evidence_sha256": evidence_sha256},
     )
 
 
@@ -448,13 +517,67 @@ class Authorization:
             )
 
     def bind_run(self, directory: Path, *, runtime_sha256: str) -> None:
+        self._bind(directory, runtime_sha256=runtime_sha256)
+
+    def bind_continuation(
+        self,
+        directory: Path,
+        *,
+        runtime_sha256: str,
+        source_run_id: str,
+        operation_id: str,
+        evidence_sha256: str,
+        reason: str,
+    ) -> None:
+        """Atomically bind one continuation and its still-held historical unknown."""
+        self._bind(
+            directory,
+            runtime_sha256=runtime_sha256,
+            claim=(source_run_id, operation_id, evidence_sha256, reason),
+        )
+
+    def _bind(
+        self,
+        directory: Path,
+        *,
+        runtime_sha256: str,
+        claim: tuple[str, str, str, str] | None = None,
+    ) -> None:
         _hex(runtime_sha256, "runtime hash")
         if runtime_sha256 != runtime_fingerprint():
             raise OperationConflict("declared runtime differs from the actual installed runtime")
         directory = _path(directory)
-        config = _manifest(directory)
+        record, config = _manifest_record(directory)
         ledger = _path(directory / "operations.sqlite3")
         authority_path = _path(self.path)
+        if claim is None:
+            if record["format"] == "buddha.policy-search-continuation.v1":
+                raise OperationConflict("a linked continuation requires its atomic source claim")
+        else:
+            if record["format"] != "buddha.policy-search-continuation.v1":
+                raise OperationConflict("source claims require a linked continuation manifest")
+            continuation = _object(record.get("continuation"))
+            replacement = _object(continuation.get("replacement"))
+            for value, name in zip(
+                claim,
+                ("source run", "operation ID", "historical evidence hash", "review reason"),
+                strict=True,
+            ):
+                _text(value, name)
+            _hex(claim[2], "historical evidence hash")
+            if (
+                continuation.get("format") != "buddha.linked-continuation.v1"
+                or (
+                    continuation.get("source_run_id"),
+                    replacement.get("source_operation_id"),
+                    continuation.get("source_ledger_sha256"),
+                    continuation.get("acceptance_reason"),
+                )
+                != claim
+                or continuation.get("authorization_path") != str(authority_path)
+                or continuation.get("runtime_sha256") != runtime_sha256
+            ):
+                raise OperationConflict("continuation manifest differs from its exact source claim")
         if ledger.samefile(authority_path):
             raise OperationConflict("authorization and run ledger must be different files")
         values = (config[0], config[1], str(directory), str(ledger), runtime_sha256, None, 0)
@@ -474,6 +597,8 @@ class Authorization:
                 _journal(connection, "funding")
                 connection.execute("BEGIN IMMEDIATE")
                 with connection:
+                    if _manifest(directory) != config:
+                        raise OperationConflict("run manifest changed during authorization binding")
                     terms = _validate(connection, "funding")
                     has_binding = connection.execute(
                         "SELECT 1 FROM main.sqlite_master WHERE type='table' "
@@ -489,6 +614,13 @@ class Authorization:
                         if tuple(prior) != values or not has_binding:
                             raise OperationConflict(
                                 "run is already bound to another scope or runtime"
+                            )
+                        if claim is not None:
+                            _accept_unknown(
+                                connection,
+                                "funding",
+                                (claim[0], claim[1], config[0], *claim[2:]),
+                                require_existing=True,
                             )
                         return
                     if (
@@ -512,6 +644,10 @@ class Authorization:
                         config[0],
                         details={"runtime_sha256": runtime_sha256},
                     )
+                    if claim is not None:
+                        _accept_unknown(
+                            connection, "funding", (claim[0], claim[1], config[0], *claim[2:])
+                        )
         except (sqlite3.Error, OSError, ValueError) as error:
             if isinstance(error, ValidationError):
                 raise
@@ -529,51 +665,9 @@ class Authorization:
         evidence_sha256: str,
         reason: str,
     ) -> None:
-        for value, name in (
-            (source_run_id, "source run"),
-            (operation_id, "operation ID"),
-            (continuation_run_id, "continuation run"),
-            (reason, "review reason"),
-        ):
-            _text(value, name)
-        _hex(evidence_sha256, "historical evidence hash")
         values = (source_run_id, operation_id, continuation_run_id, evidence_sha256, reason)
         with self._connection(write=True) as connection:
-            source = connection.execute(
-                "SELECT r.historical,r.historical_ledger_sha256,o.status,o.response_json,"
-                "o.provider_request_id FROM main.auth_runs r "
-                "JOIN main.auth_operations o USING(run_id) WHERE r.run_id=? AND o.operation_id=?",
-                (source_run_id, operation_id),
-            ).fetchone()
-            target = connection.execute(
-                "SELECT historical FROM main.auth_runs WHERE run_id=?", (continuation_run_id,)
-            ).fetchone()
-            if source is None or tuple(source)[:3] != (1, evidence_sha256, "unknown"):
-                raise OperationConflict("review must identify an exact historical unknown")
-            if source["response_json"] is not None or source["provider_request_id"] is not None:
-                raise OperationConflict(
-                    "received uncertain billing evidence requires reconciliation "
-                    "before continuation"
-                )
-            if target is None or target[0] != 0:
-                raise OperationConflict("unknown review requires a newly bound continuation")
-            prior = connection.execute(
-                "SELECT * FROM main.auth_acceptances WHERE source_run_id=? AND operation_id=?",
-                (source_run_id, operation_id),
-            ).fetchone()
-            if prior is not None:
-                if tuple(prior) != values:
-                    raise OperationConflict("historical unknown already has a different review")
-                return
-            connection.execute("INSERT INTO main.auth_acceptances VALUES (?,?,?,?,?)", values)
-            _event(
-                connection,
-                "main",
-                "historical_unknown_accepted",
-                source_run_id,
-                operation_id,
-                {"continuation_run_id": continuation_run_id, "evidence_sha256": evidence_sha256},
-            )
+            _accept_unknown(connection, "main", values)
 
     def deactivate(self, run_id: str, reason: str) -> None:
         _text(run_id, "run ID")
