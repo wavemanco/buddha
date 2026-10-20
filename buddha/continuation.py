@@ -8,25 +8,30 @@ from __future__ import annotations
 
 import ast
 import hashlib
+import io
+import platform
 import sqlite3
 import stat
+import uuid
 import zipfile
 import zlib
 from collections.abc import Mapping
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass, replace
 from pathlib import Path, PurePosixPath
 from types import MappingProxyType
 from typing import TYPE_CHECKING
 
 from buddha import archive, benchmark, evaluation, policy, provider, run, splits
-from buddha.benchmark import Prompt, _object, _parse, load_prompts
+from buddha.benchmark import Prompt, _canonical, _object, _parse, load_prompts
 from buddha.evaluation import ValidationError, _hex, _text
 from buddha.history import HistoricalOperation, History, _plain, read_history
+from buddha.ledger import _amount
 from buddha.policy import Policy
 from buddha.provider import BudgetBroker, Reply
 from buddha.run import RunSettings, _generation, _sha
 
 if TYPE_CHECKING:
+    from buddha.authorization import Authorization
     from buddha.search import SearchSpec
 
 _MAX_ARCHIVE = 64 * 1024 * 1024
@@ -46,8 +51,29 @@ _OLD_CONTRACT_KEYS = {
 _HOST_DEFINITIONS = {
     "buddha.run": {"operation_executor", "run_baseline"},
     "buddha.provider": {"PreparedHTTP", "_ReceivedInterrupt"},
-    "buddha.search": {"run_search"},
+    "buddha.search": {"run_search", "load_search", "_configuration", "_walk"},
 }
+_METADATA_KEYS = {
+    "format",
+    "source_directory",
+    "source_run_id",
+    "source_manifest_sha256",
+    "source_ledger_sha256",
+    "archived_runtime_file",
+    "archived_runtime_sha256",
+    "runtime_sha256",
+    "runtime_archive_file",
+    "runtime_archive_sha256",
+    "authorization_path",
+    "acceptance_reason",
+    "authorization_context",
+    "inherited",
+    "replacement",
+}
+_ACCEPTANCE_REASON = (
+    "Reviewed linked continuation: retain the original unknown liability, reuse nine authentic "
+    "receipts and issue a separately identified replacement tenth request."
+)
 _HOST_METHODS = {
     "HTTPTransport": {"__init__", "_credential", "preflight", "prepare", "send", "send_prepared"},
     "BudgetBroker": {"__init__", "authorize", "execute"},
@@ -142,6 +168,18 @@ class Source:
             self.history.manifest_sha256,
             self.history.ledger_sha256,
         )
+
+
+@dataclass(frozen=True)
+class Continuation:
+    source: Source
+    replies: Mapping[str, InheritedReference]
+    replacement: ReplacementReference
+    authorization_context_json: str
+
+    @property
+    def authorization_context(self) -> dict[str, object]:
+        return _object(_parse(self.authorization_context_json.encode("utf-8")))
 
 
 def _file_hash(path: Path) -> str:
@@ -484,4 +522,341 @@ def read_source(
             raise
         raise ValidationError(
             "continuation source or preserved runtime could not be validated"
+        ) from None
+
+
+def _context(value: object, source: Source, directory: Path) -> tuple[int, int]:
+    context = _object(value)
+    budget = _amount(context.get("budget_microusd"), "shared budget")
+    calls = _amount(context.get("max_calls"), "shared call cap")
+    scope = _text(context.get("scope"), "shared scope")
+    _text(context.get("authorization_id"), "authorization ID")
+    if context.get("terms_sha256") != _sha(
+        {
+            "currency": "USD",
+            "budget_microusd": budget,
+            "max_calls": calls,
+            "scope": scope,
+        }
+    ):
+        raise ValidationError("continuation authorization terms checksum differs")
+    rows = context.get("runs")
+    if not isinstance(rows, list):
+        raise ValidationError("continuation requires its initial authorized run population")
+    known, held, count = 0, 0, 0
+    sources = []
+    identities = set()
+    for raw in rows:
+        row = _object(raw)
+        run_id = _text(row.get("run_id"), "authorized run ID")
+        if run_id in identities:
+            raise ValidationError("initial authorization population contains duplicate runs")
+        identities.add(run_id)
+        spent = _amount(row.get("spent_microusd"), "initial known cost")
+        reserved = _amount(row.get("reserved_microusd"), "initial held cost")
+        operations = _amount(row.get("operation_count"), "initial calls")
+        if _amount(row.get("committed_microusd"), "initial committed cost") != spent + reserved:
+            raise ValidationError("initial per-run financial totals do not reconcile")
+        known += spent
+        held += reserved
+        count += operations
+        if run_id == source.history.run_id:
+            sources.append(row)
+    if len(sources) != 1:
+        raise ValidationError("original source must already be imported into the shared authority")
+    row = sources[0]
+    if (
+        type(row.get("historical")) is not int
+        or row.get("historical") != 1
+        or row.get("active") is not False
+        or row.get("directory") != str(directory)
+        or row.get("manifest_sha256") != source.history.manifest_sha256
+        or row.get("historical_ledger_sha256") != source.history.ledger_sha256
+        or any(row.get(key) != value for key, value in source.history.totals().items())
+    ):
+        raise ValidationError("initial authorization does not bind the inactive sealed source")
+    expected = {
+        "spent_microusd": known,
+        "reserved_microusd": held,
+        "committed_microusd": known + held,
+        "operation_count": count,
+        "available_microusd": max(0, budget - known - held),
+        "remaining_calls": max(0, calls - count),
+    }
+    if any(
+        _amount(context.get(key), "initial " + key) != amount for key, amount in expected.items()
+    ):
+        raise ValidationError("initial combined authorization totals do not reconcile")
+    if expected["available_microusd"] <= 0 or expected["remaining_calls"] <= 0:
+        raise ValidationError("the shared authorization has no remaining continuation allowance")
+    return expected["available_microusd"], min(55, expected["remaining_calls"])
+
+
+def _runtime_archive(runtime_sha256: str) -> bytes:
+    files = {}
+    for source_file in sorted(Path(__file__).parent.glob("*.py")):
+        _plain(source_file)
+        files["buddha/" + source_file.name] = source_file.read_bytes()
+    fingerprints = {
+        name.removeprefix("buddha/"): hashlib.sha256(raw).hexdigest() for name, raw in files.items()
+    }
+    if _sha(fingerprints) != runtime_sha256:
+        raise ValidationError("runtime changed while preserving continuation source")
+    notices = Path(__file__).parent.parent / "THIRD_PARTY_NOTICES.md"
+    _plain(notices)
+    files[notices.name] = notices.read_bytes()
+    index = {
+        "format": "buddha.runtime-source-snapshot.v1",
+        "python_version": platform.python_version(),
+        "runtime_sha256": runtime_sha256,
+        "files_sha256": {name: hashlib.sha256(raw).hexdigest() for name, raw in files.items()},
+    }
+    stream = io.BytesIO()
+    with zipfile.ZipFile(stream, "w", compression=zipfile.ZIP_DEFLATED) as bundle:
+        for name, raw in files.items():
+            bundle.writestr(name, raw)
+        bundle.writestr("source-index.json", _canonical(index) + b"\n")
+    return stream.getvalue()
+
+
+def _current_runtime(directory: Path, metadata: dict[str, object]) -> None:
+    from buddha.authorization import runtime_fingerprint
+
+    expected = _text(metadata["runtime_sha256"], "continuation runtime hash")
+    _hex(expected, "continuation runtime hash")
+    if expected != runtime_fingerprint():
+        raise ValidationError("the continuation executable runtime changed")
+    snapshot = _snapshot(
+        directory / "runtime-source.zip",
+        _text(metadata["runtime_archive_sha256"], "runtime archive hash"),
+    )
+    notices = Path(__file__).parent.parent / "THIRD_PARTY_NOTICES.md"
+    archived_notices = snapshot.pop(notices.name, None)
+    if archived_notices is None or hashlib.sha256(archived_notices).hexdigest() != _file_hash(
+        notices
+    ):
+        raise ValidationError("runtime archive must preserve its matching third-party notices")
+    prefix = "buddha/"
+    if any(not name.startswith(prefix) or "/" in name[len(prefix) :] for name in snapshot):
+        raise ValidationError("runtime archive must contain only package sources and their notices")
+    fingerprints = {
+        name.removeprefix(prefix): hashlib.sha256(raw).hexdigest() for name, raw in snapshot.items()
+    }
+    if _sha(fingerprints) != expected:
+        raise ValidationError("runtime archive differs from the authorized executable runtime")
+
+
+def load_continuation(
+    directory: Path,
+    manifest: dict[str, object],
+    settings: RunSettings,
+    spec: SearchSpec,
+    prompts: tuple[Prompt, ...],
+) -> Continuation:
+    """Validate inherited evidence and saved sources without loading or funding a run."""
+    from buddha.search import _read
+
+    try:
+        directory = directory.absolute()
+        _plain(directory)
+        _plain(directory / "manifest.json")
+        if _read(directory / "manifest.json") != manifest or (
+            manifest.get("format") != "buddha.policy-search-continuation.v1"
+        ):
+            raise ValidationError("continuation manifest differs from its saved identity")
+        metadata = _object(manifest.get("continuation"))
+        if set(metadata) != _METADATA_KEYS or metadata["format"] != "buddha.linked-continuation.v1":
+            raise ValidationError("unsupported linked-continuation metadata")
+        if metadata["archived_runtime_file"] != "source-runtime.zip" or (
+            metadata["runtime_archive_file"] != "runtime-source.zip"
+        ):
+            raise ValidationError(
+                "continuation source archives must use their declared local names"
+            )
+        source_directory = Path(_text(metadata["source_directory"], "original source directory"))
+        _plain(source_directory)
+        if not source_directory.is_absolute() or str(source_directory.resolve()) != str(
+            source_directory
+        ):
+            raise ValidationError("original source directory must be its canonical absolute path")
+        source = read_source(
+            source_directory,
+            manifest_sha256=_text(metadata["source_manifest_sha256"], "source manifest hash"),
+            ledger_sha256=_text(metadata["source_ledger_sha256"], "source ledger hash"),
+            archived_runtime_zip=directory / "source-runtime.zip",
+            archived_runtime_sha256=_text(
+                metadata["archived_runtime_sha256"], "source archive hash"
+            ),
+        )
+        if metadata["source_run_id"] != source.history.run_id or (
+            metadata["acceptance_reason"] != _ACCEPTANCE_REASON
+        ):
+            raise ValidationError("original identity or reviewed continuation purpose differs")
+        authority_path = Path(_text(metadata["authorization_path"], "shared authorization path"))
+        if not authority_path.is_absolute() or str(authority_path.resolve()) != str(authority_path):
+            raise ValidationError("shared authority path must be its canonical absolute path")
+        budget, calls = _context(metadata["authorization_context"], source, source_directory)
+        if settings != replace(source.settings, budget_microusd=budget, max_calls=calls) or (
+            spec != source.spec or tuple(prompts) != (source.prompt,)
+        ):
+            raise ValidationError("continuation changed frozen science or its allocated allowance")
+        original = source.history.manifest
+        if any(
+            manifest.get(key) != original[key]
+            for key in (
+                "source_sha256",
+                "splits",
+                "families",
+                "screen_ids",
+                "synthetic",
+                "population",
+            )
+        ):
+            raise ValidationError("continuation changed its original dataset or screen population")
+        new_run_id = _text(manifest.get("run_id"), "continuation run ID")
+        references = source.references(new_run_id)
+        replacement = source.replacement(new_run_id)
+        if _canonical(metadata["inherited"]) != _canonical(
+            [asdict(ref) for ref in references.values()]
+        ) or (_canonical(metadata["replacement"]) != _canonical(asdict(replacement))):
+            raise ValidationError(
+                "inherited receipts or replacement lineage differ from authentic slots"
+            )
+        _current_runtime(directory, metadata)
+        return Continuation(
+            source,
+            references,
+            replacement,
+            _canonical(metadata["authorization_context"]).decode("utf-8"),
+        )
+    except (
+        OSError,
+        TypeError,
+        ValueError,
+        KeyError,
+        zipfile.BadZipFile,
+        zlib.error,
+        EOFError,
+        RuntimeError,
+    ) as error:
+        if isinstance(error, ValidationError):
+            raise
+        raise ValidationError("linked continuation could not be loaded consistently") from None
+
+
+def prepare_continuation(
+    out: Path,
+    *,
+    source: Path,
+    source_manifest_sha256: str,
+    source_ledger_sha256: str,
+    authorization: Authorization,
+    archived_runtime_zip: Path,
+    archived_runtime_sha256: str,
+) -> Path:
+    """Publish a source-linked new run, then atomically claim its shared allowance.
+
+    Partial unbound directories are preserved for review. No automatic repair,
+    provider call, unknown release or replacement dispatch happens here.
+    """
+    from buddha.authorization import Authorization, runtime_fingerprint
+    from buddha.search import _atomic, _comparison, _contracts, _ledger, _put, load_search
+
+    if not isinstance(authorization, Authorization) or not isinstance(out, Path):
+        raise ValidationError("continuation preparation requires an authority and filesystem paths")
+    try:
+        origin = read_source(
+            source,
+            manifest_sha256=source_manifest_sha256,
+            ledger_sha256=source_ledger_sha256,
+            archived_runtime_zip=archived_runtime_zip,
+            archived_runtime_sha256=archived_runtime_sha256,
+        )
+        source = source.absolute().resolve()
+        out = out.absolute()
+        _plain(out.parent)
+        if out.exists() or out.is_symlink():
+            _plain(out)
+            if not (out / "manifest.json").is_file():
+                raise ValidationError(
+                    "partial unbound continuation requires review; directory preserved"
+                )
+            manifest, selected, spec, prompts = load_search(out)
+            saved = load_continuation(out, manifest, selected, spec, prompts)
+            metadata = _object(manifest["continuation"])
+            if saved.source.history != origin.history or metadata["authorization_path"] != str(
+                authorization.path
+            ):
+                raise ValidationError(
+                    "existing continuation belongs to a different source or authority"
+                )
+        else:
+            context = authorization.summary()
+            context.pop("event_count")
+            budget, calls = _context(context, origin, source)
+            selected = replace(origin.settings, budget_microusd=budget, max_calls=calls)
+            runtime = runtime_fingerprint()
+            runtime_raw = _runtime_archive(runtime)
+            new_run_id = uuid.uuid4().hex
+            references = origin.references(new_run_id)
+            replacement = origin.replacement(new_run_id)
+            metadata = {
+                "format": "buddha.linked-continuation.v1",
+                "source_directory": str(source),
+                "source_run_id": origin.history.run_id,
+                "source_manifest_sha256": origin.history.manifest_sha256,
+                "source_ledger_sha256": origin.history.ledger_sha256,
+                "archived_runtime_file": "source-runtime.zip",
+                "archived_runtime_sha256": archived_runtime_sha256,
+                "runtime_sha256": runtime,
+                "runtime_archive_file": "runtime-source.zip",
+                "runtime_archive_sha256": hashlib.sha256(runtime_raw).hexdigest(),
+                "authorization_path": str(authorization.path),
+                "acceptance_reason": _ACCEPTANCE_REASON,
+                "authorization_context": context,
+                "inherited": [asdict(ref) for ref in references.values()],
+                "replacement": asdict(replacement),
+            }
+            manifest = origin.history.manifest | {
+                "format": "buddha.policy-search-continuation.v1",
+                "run_id": new_run_id,
+                "settings": asdict(selected),
+                "contracts": _contracts(),
+                "continuation": metadata,
+            }
+            manifest["comparison_key"] = _comparison(
+                selected,
+                _text(manifest["source_sha256"], "dataset hash"),
+                (origin.prompt,),
+                manifest["contracts"],
+            )
+            out.mkdir()
+            _plain(out)
+            original_archive = archived_runtime_zip.read_bytes()
+            if hashlib.sha256(original_archive).hexdigest() != archived_runtime_sha256:
+                raise ValidationError("original source archive changed during preparation")
+            _atomic(out / "source-runtime.zip", original_archive)
+            _atomic(out / "runtime-source.zip", runtime_raw)
+            dataset = (source / "dataset.jsonl").read_bytes()
+            if hashlib.sha256(dataset).hexdigest() != manifest["source_sha256"]:
+                raise ValidationError("original dataset changed during preparation")
+            _atomic(out / "dataset.jsonl", dataset)
+            _put(out / "manifest.json", manifest)
+            _ledger(out, manifest, selected)
+            loaded = load_search(out)
+            load_continuation(out, *loaded)
+        authorization.bind_continuation(
+            out,
+            runtime_sha256=_text(metadata["runtime_sha256"], "continuation runtime hash"),
+            source_run_id=origin.history.run_id,
+            operation_id=origin.unknown.operation_id,
+            evidence_sha256=origin.history.ledger_sha256,
+            reason=_text(metadata["acceptance_reason"], "continuation acceptance reason"),
+        )
+        return out
+    except (OSError, TypeError, ValueError, KeyError) as error:
+        if isinstance(error, ValidationError):
+            raise
+        raise ValidationError(
+            "continuation preparation failed; preserve any partial directory"
         ) from None

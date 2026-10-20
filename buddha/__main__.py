@@ -276,11 +276,17 @@ def main(argv: Sequence[str] | None = None) -> int:
     continuation_source = commands.add_parser(
         "continuation-source", help="verify original receipt slots and saved science offline"
     )
-    continuation_source.add_argument("--source", type=Path, required=True)
-    continuation_source.add_argument("--manifest-sha256", required=True)
-    continuation_source.add_argument("--ledger-sha256", required=True)
-    continuation_source.add_argument("--archive", type=Path, required=True)
-    continuation_source.add_argument("--archive-sha256", required=True)
+    continuation_prepare = commands.add_parser(
+        "continuation-prepare", help="freeze and bind a linked continuation without model calls"
+    )
+    for command in (continuation_source, continuation_prepare):
+        command.add_argument("--source", type=Path, required=True)
+        command.add_argument("--manifest-sha256", required=True)
+        command.add_argument("--ledger-sha256", required=True)
+        command.add_argument("--archive", type=Path, required=True)
+        command.add_argument("--archive-sha256", required=True)
+    continuation_prepare.add_argument("--authorization", type=Path, required=True)
+    continuation_prepare.add_argument("--out", type=Path, required=True)
     authorization_create = commands.add_parser(
         "authorization-create", help="create one explicit shared dollar/call authorization offline"
     )
@@ -377,11 +383,14 @@ def main(argv: Sequence[str] | None = None) -> int:
     args = parser.parse_args(argv)
     try:
         authorization = None
-        if args.command in {"run", "search-run"} and args.live:
-            if args.authorization is None:
+        if args.command in {"run", "search-run"}:
+            if args.live and args.authorization is None:
                 raise ValidationError("--live requires an existing --authorization database")
-            authorization = Authorization(args.authorization)
-            authorization.for_run(args.run).authorize_dispatch()
+            if args.authorization is not None:
+                authorization = Authorization(args.authorization)
+                bound_ledger = authorization.for_run(args.run)
+                if args.live:
+                    bound_ledger.authorize_dispatch()
         if args.command == "continuation-source":
             from buddha.continuation import read_source
 
@@ -407,6 +416,33 @@ def main(argv: Sequence[str] | None = None) -> int:
                         "unknown_operation_id": source.unknown.operation_id,
                         "unknown_hold_microusd": source.unknown.reserve_microusd,
                         "claim": "source verified; no continuation prepared or spending allocated",
+                    }
+                )
+            )
+        elif args.command == "continuation-prepare":
+            from buddha.continuation import prepare_continuation
+            from buddha.search import load_search
+
+            target = prepare_continuation(
+                args.out,
+                source=args.source,
+                source_manifest_sha256=args.manifest_sha256,
+                source_ledger_sha256=args.ledger_sha256,
+                authorization=Authorization(args.authorization),
+                archived_runtime_zip=args.archive,
+                archived_runtime_sha256=args.archive_sha256,
+            )
+            manifest, settings, _, _ = load_search(target)
+            print(
+                json.dumps(
+                    {
+                        "status": "prepared",
+                        "run": str(target),
+                        "run_id": manifest["run_id"],
+                        "model_calls": 0,
+                        "inherited_replies": 9,
+                        "budget_microusd": settings.budget_microusd,
+                        "max_calls": settings.max_calls,
                     }
                 )
             )
@@ -513,7 +549,14 @@ def main(argv: Sequence[str] | None = None) -> int:
             else:
                 if args.prompt_keys and not args.live:
                     raise ValidationError("--prompt-keys requires --live")
-                _, settings, _, _ = load_search(args.run)
+                manifest, settings, _, _ = load_search(args.run)
+                if manifest["format"] == "buddha.policy-search-continuation.v1":
+                    if authorization is None:
+                        raise ValidationError("linked execution requires --authorization")
+                    _notice(
+                        "Reusing 9 inherited replies. Progress counts new API operations; "
+                        "the original unknown request remains held."
+                    )
                 if args.live:
                     settings.permit_live()
                 transport = (
