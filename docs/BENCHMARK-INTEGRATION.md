@@ -94,3 +94,33 @@ The uncommitted BENCH-02B native-call draft was preserved separately before this
 | MOD-7 | Retiring/removing the old active driver leaves old artifact seals, read-only verification, known costs and unknown holds unchanged, requires no old evaluator dependency for accounting, and cannot reopen paid authority. |
 
 BENCH-03 is complete only when these composed checks pass. A descriptor class, registry, import-only test or configuration file by itself does not establish plug-and-play upgrades. BENCH-02 independently requires exact official conformance; source self-modification and improved useful diversity retain their own gates.
+
+## BENCH-03B: implemented offline configuration and identity boundary
+
+`buddha.releases` is independent of the old benchmark, evaluator, controller and accounting imports. It uses only the standard library and exposes:
+
+| API | Function and limits |
+| --- | --- |
+| `Release.from_record()` / `Release.from_bytes()` | Validate and freeze release data: upstream revision, complete expected official-file inventory, lock/dataset paths, literal JSON field mappings, answer count, sealed Python module entry points with argument lists, output paths and required capability identifiers. No import, installation or evaluation occurs. |
+| `inventory(root)` | Hash every regular file in a selected directory, including nested dependencies. Reject unsafe/aliased portable paths, links, reparse points, hard-link aliases, special files, unreadable subtrees, observed concurrent changes and bounded-resource violations. No filenames or cache directories are silently excluded. |
+| `prepare_selection(release, roots, capabilities=...)` | Check required capabilities before reading components, verify the real official tree against its expected inventory, and snapshot five disjoint roots: official source, dependency environment, reusable runner, host, and agent. Host-supplied capability identifiers select real profile files under the host root; release data cannot manufacture a capability or paid permission. |
+| `Selection.to_bytes()` / `Selection.from_bytes()` | Preserve a deeply immutable, canonical record with separate release and agent fingerprints and component inventories. Returned dictionaries are independent copies. Installation paths are excluded from identity; relative names and file bytes are included. |
+| `verify_selection(selection, roots, expected_sha256=...)` | Compare the selection to the owning manifest's frozen expected digest before reading files, then recheck every selected tree. A consistently edited record cannot pass against the original expected identity. No writes, locks, credential access, subprocesses or network calls occur. |
+
+Version 1 supports literal top-level JSON field mappings, 1–1,000 ordered text answers, at most 32 module invocations with 128 arguments each, and the whole-argument `{artifacts}` placeholder. Module names must identify files in the sealed official source. Arguments are data for the future runner, never shell text or expressions. A new argument schema outside this envelope must fail explicitly; it must not be evaluated as code. Portable path validation includes Windows reserved names and case/ancestor collisions.
+
+The implementation bounds each JSON record at 32 MiB, each component at 100,000 entries / 64 GiB, and each file at 8 GiB, hashing in bounded chunks. These are host integrity-check ceilings, not an API token or research budget. File-handle identity, size and modification time are checked against path metadata; full before/after path checks retain creation/change time. Python 3.13 on Windows can return a different `ctime` through `fstat` and `lstat`, so those two sources' `ctime` values are not equated. Directory changes and traversal errors remain explicit failures.
+
+This selection checks the actual files inside the roots provided by the host. It does **not** discover imports outside them, certify dependency-lock/install equivalence, execute CLI compatibility checks, prove upstream authenticity or bind an allocation. The runner must validate its environment/import confinement and consume this selection under its immutable owning run before any live claim. The existing manifest/runtime algorithm remains unchanged. Unrelated releases must live outside the selected roots; putting all releases under one selected component would correctly include them in that component's identity.
+
+The second canned release test proves configuration acceptance and stable agent/runner inventories with changed counts/field names/artifact paths. It does not run the second evaluator or establish the composed MOD-1–7 gates, which remain BENCH-03C. Weak or malformed answer content is never inspected by this integrity layer.
+
+The focused check below runs once in the existing PowerShell window. It creates and removes temporary fixture directories, reads their files, and spends nothing. It needs no API keys or downloaded evaluator environment:
+
+```powershell
+python -m unittest discover -s tests -p test_releases.py
+```
+
+It tests configuration validation, immutable round trips, real selected-file drift, nested dependencies, unrelated installation/removal, frozen owner identity, portable path/link/resource boundaries and offline behavior. The old runtime and paid-call tests remain part of the full regression suite. No new user-facing release execution command is enabled by this slice.
+
+[Delivery evidence](conformance/nb03b-delivery.json) records the successful 418-test full suite in 92.312 seconds (two host symlink-privilege skips), 26 focused checks (one host skip), Ruff lint/format, strict mypy across 18 runtime modules, Bandit, application dependency audit, compilation and whitespace checks. All 287 protected historical input hashes remain unchanged. Independent review's Windows reserved-name finding was reproduced with 13 failing assertions and closed using the standard-library predicate plus directory-case checks. BENCH-03A's hosted Windows/Linux checks passed; this slice's hosted results are reported separately after publication.

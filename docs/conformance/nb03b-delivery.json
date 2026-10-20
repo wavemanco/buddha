@@ -1,0 +1,123 @@
+{
+  "format": "buddha.review.nb03b-delivery.v1",
+  "date": "2026-10-20",
+  "scope": "Offline immutable release configuration, selected-file integrity and owner-bound verification",
+  "tests": {
+    "total": 418,
+    "seconds": 92.312,
+    "skipped": 2,
+    "focused_total": 26,
+    "focused_skipped": 1
+  },
+  "checks": [
+    {
+      "command": [
+        "C:\\Program Files\\Python313\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "buddha",
+        "tests"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "C:\\Program Files\\Python313\\python.exe",
+        "-m",
+        "ruff",
+        "format",
+        "--check",
+        "buddha",
+        "tests"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "C:\\Program Files\\Python313\\python.exe",
+        "-m",
+        "mypy",
+        "--strict",
+        "buddha"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "C:\\Program Files\\Python313\\python.exe",
+        "-m",
+        "bandit",
+        "-r",
+        "buddha",
+        "-q"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "C:\\Program Files\\Python313\\python.exe",
+        "-m",
+        "pip_audit",
+        "--no-deps",
+        "-r",
+        "requirements.txt"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "C:\\Program Files\\Python313\\python.exe",
+        "-m",
+        "compileall",
+        "-q",
+        "buddha",
+        "tests"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "tests_first": {
+    "missing_module_observed": true,
+    "unreadable_subtree_and_reparse_negatives_observed": true,
+    "reserved_windows_names_and_directory_case_alias_negatives_observed": 13
+  },
+  "independent_review": {
+    "reserved_windows_paths": "fixed with ntpath.isreserved and nested regressions",
+    "owner_expected_identity": "required before file reads",
+    "second_release_execution": "not claimed; remains BENCH-03C"
+  },
+  "protected_input_files": 287,
+  "all_protected_input_hashes_unchanged": true,
+  "source_sha256": {
+    "buddha/releases.py": "7d1561e54ee6b70214db3d2869a50ea9edcceef470d68c3cc5e196474b6ee792",
+    "tests/test_releases.py": "bea974f3e004343a3b7dee93a3d792e666ffa37c8c6917b37d79c2d0824d5c49"
+  },
+  "paid_calls": 0,
+  "new_paid_route": false,
+  "legacy_source_or_manifest_algorithm_changed": false,
+  "modular_execution_complete": false,
+  "native_conformance_complete": false,
+  "remaining_gates": [
+    "owning run and shared-authority integration",
+    "dependency-lock/install and import confinement verification",
+    "official native evaluation and same-runner upgrade/retirement composition"
+  ],
+  "previous_slice_ci": {
+    "pr": 10,
+    "commit": "34b03855fa7956c6af40dceaf2c82d6bf5f9050f",
+    "pr_run": 39426973722,
+    "push_run": 39426964244,
+    "windows": "success",
+    "ubuntu": "success"
+  },
+  "this_slice_hosted_ci": "pending publication"
+}
