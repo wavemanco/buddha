@@ -24,14 +24,14 @@ jobs:
       - name: Unit and composed acceptance tests
         run: python -m unittest discover -s tests
       - name: Lint
-        run: python -m ruff check buddha tests
+        run: python -m ruff check buddha tests agents
       - name: Formatting
-        run: python -m ruff format --check buddha tests
+        run: python -m ruff format --check buddha tests agents
       - name: Types
-        run: python -m mypy --strict buddha
+        run: python -m mypy --strict buddha agents
       - name: Code security
-        run: python -m bandit -r buddha
+        run: python -m bandit -r buddha agents
       - name: Runtime dependency vulnerabilities
         run: python -m pip_audit --no-deps -r requirements.txt
       - name: Compile
-        run: python -m compileall -q buddha tests
+        run: python -m compileall -q buddha tests agents
