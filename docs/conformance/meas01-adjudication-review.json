@@ -1,0 +1,3058 @@
+{
+  "actual_expectations_api": {
+    "all_17_resolved_items_explicitly_selected_in_pack_order": true,
+    "all_5_uncertain_items_excluded": true,
+    "all_published_raws_match_frozen_originals": true,
+    "base_revision": "c5ae7de",
+    "base_source_sha256": "1122219cea9d644e5d1979af965caa777434c5363741e08e700eccaab755f6f8",
+    "fixture_sha256": "9211231da884cdce93a9a9b0c486d7f582646a113623f0ba784177808c6571d8",
+    "function_names": [
+      "_adjudicated_expectations",
+      "adjudicated_expectations"
+    ],
+    "input_and_output_mutation_isolation": true,
+    "negative_cases": [
+      {
+        "case": "same_semantics_changed_raw_response_bytes",
+        "error_type": "ValueError",
+        "reason": "frozen adjudication binding differs",
+        "status": "rejected"
+      },
+      {
+        "case": "frozen_reviews_swapped",
+        "error_type": "ValueError",
+        "reason": "frozen adjudication binding differs",
+        "status": "rejected"
+      },
+      {
+        "case": "unknown_selected_item",
+        "error_type": "ValueError",
+        "reason": "selected case is not explicitly resolved",
+        "status": "rejected"
+      },
+      {
+        "case": "unresolved_selected_item",
+        "error_type": "ValueError",
+        "reason": "selected case is not explicitly resolved",
+        "status": "rejected"
+      },
+      {
+        "case": "duplicate_selected_item",
+        "error_type": "ValueError",
+        "reason": "unique explicit selection required",
+        "status": "rejected"
+      },
+      {
+        "case": "missing_adjudicated_case",
+        "error_type": "ValueError",
+        "reason": "adjudicated case coverage incomplete",
+        "status": "rejected"
+      },
+      {
+        "case": "duplicate_adjudicated_case",
+        "error_type": "ValueError",
+        "reason": "unknown or duplicate adjudicated case",
+        "status": "rejected"
+      },
+      {
+        "case": "resolved_status_with_explicit_uncertainty",
+        "error_type": "ValueError",
+        "reason": "explicit uncertainty cannot become a resolved expectation",
+        "status": "rejected"
+      },
+      {
+        "case": "blank_decision_rationale",
+        "error_type": "ValueError",
+        "reason": "nonempty text required",
+        "status": "rejected"
+      },
+      {
+        "case": "wrong_record_adjudicator",
+        "error_type": "ValueError",
+        "reason": "frozen adjudication binding differs",
+        "status": "rejected"
+      },
+      {
+        "case": "reviewer_id_reused_as_adjudicator",
+        "error_type": "ValueError",
+        "reason": "separate declared reviewer and adjudicator IDs required",
+        "status": "rejected"
+      },
+      {
+        "case": "nonstring_selected_id",
+        "error_type": "ValueError",
+        "reason": "selected case is not explicitly resolved",
+        "status": "rejected"
+      }
+    ],
+    "only_AST_changes_two_new_function_definitions": true,
+    "publication_file_sha256": {
+      "docs/conformance/meas01-study/adjudication.json": "90f27482740ed16a14992d0691ce657b64071f03b2dcbf5be6d837658b85aadf",
+      "docs/conformance/meas01-study/adjudicator-response.json": "1c9607bbea5917ceb69f17a80b31b8c5c589342d05711923ca7e8c3889fd6483",
+      "docs/conformance/meas01-study/pack.json": "8a29cded45e11f62eaecba52e5d9c30a88e2733b28cc8138aa2fdb38d025bf15",
+      "docs/conformance/meas01-study/response-template.json": "d24eb17f5f1ff6aa460b351344e10d87595fe9199a75f53a5df9ce1ddfe47eff",
+      "docs/conformance/meas01-study/review-1-original.json": "1040b617a53a558bba529df933cab26634ad283901823b3db45c84041e3ed2d4",
+      "docs/conformance/meas01-study/review-1.json": "62ffe48b752fa73a05cad5b8841a306ef439f62baa5e6fa37d025789838d74f9",
+      "docs/conformance/meas01-study/review-2-original.json": "591dbbcc2aef2e1649e6f758113e8fd597c9f5eaa1830fe42869a3e1b253ca9c",
+      "docs/conformance/meas01-study/review-2.json": "fb33d2f73e30888e6ead75ca0385c38eab4c6498ec32e281e7894480273501a3",
+      "docs/conformance/meas01-study/review-instructions-v1.md": "552408a06da88cb6b3224f5cb457106ab5a3470d9ccab3983cb011ea19dff75d",
+      "docs/conformance/meas01-study/review-instructions-v2.md": "4aaec6b793a7d7e60c54305870b7041cbaf76f4f2d53eb3287339ef85e48e4d5",
+      "tests/fixtures/meas01-expectations.json": "9211231da884cdce93a9a9b0c486d7f582646a113623f0ba784177808c6571d8"
+    },
+    "publication_manifest_sha256": "fe46424035d586a514f71a0f1e832e86e50320d7732852fb92a539e772f0372b",
+    "read_only_guarded_api_and_detached_replay": true,
+    "returned_bytes_equal_committed_fixture": true,
+    "source_sha256": "6328f94c4280c29992cbdd87c205e45950406c00f6af636d4392fb7a6777e4fc"
+  },
+  "adjudicator_stated_results": [
+    {
+      "answer_sources": {
+        "1012bb233ec6d2bebfe0b4dabbf4eb55": {
+          "answer_source": {
+            "file_sha256": "2a832606113ca4bc71b529591d8c2c7519b44af8d253c057a4230f49192caabb",
+            "json_pointer": "/generations/6",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 624,
+          "answer_utf8_sha256": "3b6861a84de9eb76d9a80945ee851783b5e06cfe57a4c480bd9fb96d669d0c22",
+          "candidate_id": "12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da",
+          "original_index_0based": 6,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 6,
+            "file_sha256": "92c0b5e123da834132b7587b61b4c9e457c8fbdcdaea29a68ba569273a5667fa",
+            "json_pointer": "/partition/6",
+            "path": "runs\\first-live-continuation-v2\\candidates\\12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:C:7",
+          "run_id": "a486d90396934a45940637d77a168304"
+        },
+        "91fccccb4df9c46a5ed457f0c13825cc": {
+          "answer_source": {
+            "file_sha256": "2a832606113ca4bc71b529591d8c2c7519b44af8d253c057a4230f49192caabb",
+            "json_pointer": "/generations/9",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 590,
+          "answer_utf8_sha256": "08746c302a89f525682b17300a34c39cd39dcd0c75e72daf6f184eff5b1d23ea",
+          "candidate_id": "12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da",
+          "original_index_0based": 9,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 9,
+            "file_sha256": "92c0b5e123da834132b7587b61b4c9e457c8fbdcdaea29a68ba569273a5667fa",
+            "json_pointer": "/partition/9",
+            "path": "runs\\first-live-continuation-v2\\candidates\\12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:C:10",
+          "run_id": "a486d90396934a45940637d77a168304"
+        }
+      },
+      "disagreement_resolution": "Both submissions tentatively grouped the pair and flagged its boundary. I checked the actual discovery, joint debris removal and restored-water ending rather than accepting agreement alone. Those actions support a shared central plot, while the bell/salt-water mystery could still count as central new imagery; the tentative grouping and uncertainty are retained. Both five-sentence forms were checked.",
+      "groups": [
+        [
+          "first-live-continuation-v2:C:10",
+          "first-live-continuation-v2:C:7"
+        ]
+      ],
+      "item_id": "92bbea60cc82d82c3f0727116decc86b",
+      "kind": "historical_comparison",
+      "literal_compliance_uncertain": [],
+      "literal_compliance_violations": [],
+      "rationale": "Tentatively equivalent: the dog locates a concealed water route, girl and dog jointly clear a blockage, village water returns, and the pair become keepers. A dry riverbed and wheel versus a salty well, pipe and lighthouse change the framing around that same operative sequence. The bell premise leaves the explicit centrality uncertainty below. Literal compliance: Every answer has five narrative sentences about a girl and her dog; craft or causal concerns are assessed separately.",
+      "source_context": {
+        "case_id": "L-M1",
+        "source": "runs/reviews/rec04l-content-review.md"
+      },
+      "source_id": "4",
+      "status": "uncertain",
+      "uncertain_pairs": [
+        {
+          "left": "first-live-continuation-v2:C:10",
+          "rationale": "Both centrally uncover and unblock the village water supply. The lighthouse bell that detects hidden things and the salty-well mystery could supply a new central premise or image rather than merely replace the dry riverbed and wheel, so the same-plot grouping remains tentative.",
+          "right": "first-live-continuation-v2:C:7"
+        }
+      ]
+    },
+    {
+      "answer_sources": {
+        "5a555875dc883ac26a3e5190c56feafe": {
+          "answer_utf8_bytes": 2,
+          "answer_utf8_sha256": "23794d91c53ae875c8e247d72561e35d9d06ee07c70c9e0dbcc977a6d161504a",
+          "control_file": "docs/conformance/meas01-authored-controls.json",
+          "control_file_sha256": "0d97d892be45541ffc39a7a9723fd734b7e3d0a770c284bcbff7741b006fc209",
+          "control_id": "closed-answer-content-and-form",
+          "original_index_0based": 0
+        },
+        "83f7be99bfb825e4c4db9743e109f1d5": {
+          "answer_utf8_bytes": 24,
+          "answer_utf8_sha256": "082ff7fd114170fa1afd5c52fa50d6fb0fd6c38ade91c500a99494046eea4ce4",
+          "control_file": "docs/conformance/meas01-authored-controls.json",
+          "control_file_sha256": "0d97d892be45541ffc39a7a9723fd734b7e3d0a770c284bcbff7741b006fc209",
+          "control_id": "closed-answer-content-and-form",
+          "original_index_0based": 3
+        },
+        "9673b5a72b6ff43f18e5fb29d7239915": {
+          "answer_utf8_bytes": 2,
+          "answer_utf8_sha256": "1ea442a134b2a184bd5d40104401f2a37fbc09ccf3f4bc9da161c6099be3691d",
+          "control_file": "docs/conformance/meas01-authored-controls.json",
+          "control_file_sha256": "0d97d892be45541ffc39a7a9723fd734b7e3d0a770c284bcbff7741b006fc209",
+          "control_id": "closed-answer-content-and-form",
+          "original_index_0based": 2
+        },
+        "d36a193383a41b917d61e8f47885c127": {
+          "answer_utf8_bytes": 3,
+          "answer_utf8_sha256": "f9171164593756e56fb197327b529a4955590566560dbe62d586bff41be9d297",
+          "control_file": "docs/conformance/meas01-authored-controls.json",
+          "control_file_sha256": "0d97d892be45541ffc39a7a9723fd734b7e3d0a770c284bcbff7741b006fc209",
+          "control_id": "closed-answer-content-and-form",
+          "original_index_0based": 1
+        }
+      },
+      "disagreement_resolution": "Both submissions gave the same partition and literal-form labels. I verified that YES and NO have opposing content, that the explanation only supports NO, and that No differs from the required uppercase token. The false YES is recorded as a factual concern, not turned into a new formatting violation.",
+      "groups": [
+        [
+          "authored:closed-answer-content-and-form:1"
+        ],
+        [
+          "authored:closed-answer-content-and-form:0",
+          "authored:closed-answer-content-and-form:3",
+          "authored:closed-answer-content-and-form:2"
+        ]
+      ],
+      "item_id": "9bef63191451b984d6e7940e8cf87435",
+      "kind": "authored_control",
+      "literal_compliance_uncertain": [],
+      "literal_compliance_violations": [
+        "authored:closed-answer-content-and-form:3",
+        "authored:closed-answer-content-and-form:2"
+      ],
+      "rationale": "YES asserts the opposite answer from the three negative responses. The oddness explanation and capitalization change do not change the central NO answer; exact output form is assessed separately from content equivalence and factual accuracy. Literal compliance: The two exact uppercase tokens satisfy the literal form; the explanatory response and mixed-case No violate it. Factual truth is recorded separately.",
+      "source_context": {},
+      "source_id": "closed-answer-content-and-form",
+      "status": "resolved",
+      "uncertain_pairs": []
+    },
+    {
+      "answer_sources": {
+        "12bf998ddb94aabf41f8b4c36541f60d": {
+          "answer_source": {
+            "file_sha256": "3a4231dbaf886282e5b2641813e8601b19347de308ab74203f90d65cfeab6f50",
+            "json_pointer": "/generations/2",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-recovery\\candidates\\34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 551,
+          "answer_utf8_sha256": "8182e78e6b9d467210cfc95240afda33925018e7d87fcd0ff146ff4cddcc7b1e",
+          "candidate_id": "34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b",
+          "original_index_0based": 2,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 2,
+            "file_sha256": "7aa275c3ef38f7480d505269b37a600a30427e732b4c2f927c9604ffd946c686",
+            "json_pointer": "/partition/2",
+            "path": "runs\\first-live-recovery\\candidates\\34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-recovery:C:3",
+          "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+        },
+        "1f05a4f755b5e8b034e868d8cb9ccfc7": {
+          "answer_source": {
+            "file_sha256": "3a4231dbaf886282e5b2641813e8601b19347de308ab74203f90d65cfeab6f50",
+            "json_pointer": "/generations/9",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-recovery\\candidates\\34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 542,
+          "answer_utf8_sha256": "69ab8293ca69682a3590bdf98347558e483643280ec39f8250dd141fcc145321",
+          "candidate_id": "34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b",
+          "original_index_0based": 9,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 9,
+            "file_sha256": "7aa275c3ef38f7480d505269b37a600a30427e732b4c2f927c9604ffd946c686",
+            "json_pointer": "/partition/9",
+            "path": "runs\\first-live-recovery\\candidates\\34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-recovery:C:10",
+          "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+        }
+      },
+      "disagreement_resolution": "Both submissions separated the stories, but the second retained a pair uncertainty. I checked what is recovered, how it is recovered and the ending: general soundscape restoration by a music box differs centrally from freeing one voice and then personal laughter. I resolve that boundary as distinct in this bounded adjudication; the shared premise alone is insufficient.",
+      "groups": [
+        [
+          "first-live-recovery:C:10"
+        ],
+        [
+          "first-live-recovery:C:3"
+        ]
+      ],
+      "item_id": "1c6b4f8f841d8095f3e49f35ba7f9d9c",
+      "kind": "historical_comparison",
+      "literal_compliance_uncertain": [],
+      "literal_compliance_violations": [],
+      "rationale": "Distinct: finding and winding a music box restores the surrounding soundscape in the first story; warming a harmonica and barking release a musician's song from a frozen river in the second, followed by recovering the girl's laughter. The shared lost-sounds premise, dog and bridge do not erase those different central events, mechanisms and resolutions. Literal compliance: Every answer has five narrative sentences about a girl and her dog; craft or causal concerns are assessed separately.",
+      "source_context": {
+        "case_id": "lost-sounds-bridge",
+        "source": "docs/pilot-review-evidence.json#/semantic_cases"
+      },
+      "source_id": "1",
+      "status": "resolved",
+      "uncertain_pairs": []
+    },
+    {
+      "answer_sources": {
+        "0cb42de52c35843758e4c875ddd9a43c": {
+          "answer_source": {
+            "file_sha256": "3a4231dbaf886282e5b2641813e8601b19347de308ab74203f90d65cfeab6f50",
+            "json_pointer": "/generations/9",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-recovery\\candidates\\34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 542,
+          "answer_utf8_sha256": "69ab8293ca69682a3590bdf98347558e483643280ec39f8250dd141fcc145321",
+          "candidate_id": "34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b",
+          "original_index_0based": 9,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 9,
+            "file_sha256": "7aa275c3ef38f7480d505269b37a600a30427e732b4c2f927c9604ffd946c686",
+            "json_pointer": "/partition/9",
+            "path": "runs\\first-live-recovery\\candidates\\34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-recovery:C:10",
+          "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+        },
+        "2cf7f72fa2321501e29a78f8d87438c0": {
+          "answer_source": {
+            "file_sha256": "3a4231dbaf886282e5b2641813e8601b19347de308ab74203f90d65cfeab6f50",
+            "json_pointer": "/generations/5",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-recovery\\candidates\\34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 506,
+          "answer_utf8_sha256": "4cbdb7f1381e4e1ded738348c6c2f41699cccc2fbce4168e0c7eea087c5d580a",
+          "candidate_id": "34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b",
+          "original_index_0based": 5,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 5,
+            "file_sha256": "7aa275c3ef38f7480d505269b37a600a30427e732b4c2f927c9604ffd946c686",
+            "json_pointer": "/partition/5",
+            "path": "runs\\first-live-recovery\\candidates\\34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-recovery:C:6",
+          "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+        },
+        "4161819f4660b5515d94bab7adbf9e4a": {
+          "answer_source": {
+            "file_sha256": "3a4231dbaf886282e5b2641813e8601b19347de308ab74203f90d65cfeab6f50",
+            "json_pointer": "/generations/0",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-recovery\\candidates\\34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 459,
+          "answer_utf8_sha256": "c5e85ac413aedf50bfdbc0f2c2a0cc4d1e2a1593fd4acb52013e069007c3582c",
+          "candidate_id": "34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b",
+          "original_index_0based": 0,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 0,
+            "file_sha256": "7aa275c3ef38f7480d505269b37a600a30427e732b4c2f927c9604ffd946c686",
+            "json_pointer": "/partition/0",
+            "path": "runs\\first-live-recovery\\candidates\\34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-recovery:C:1",
+          "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+        },
+        "49b1ad6c2976bfa8920c048f7e69158b": {
+          "answer_source": {
+            "file_sha256": "3a4231dbaf886282e5b2641813e8601b19347de308ab74203f90d65cfeab6f50",
+            "json_pointer": "/generations/4",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-recovery\\candidates\\34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 505,
+          "answer_utf8_sha256": "43ead82b6a64f7b45d1bbefb7b0eb1b418975a07723135131c69ee5f86cc85a8",
+          "candidate_id": "34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b",
+          "original_index_0based": 4,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 4,
+            "file_sha256": "7aa275c3ef38f7480d505269b37a600a30427e732b4c2f927c9604ffd946c686",
+            "json_pointer": "/partition/4",
+            "path": "runs\\first-live-recovery\\candidates\\34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-recovery:C:5",
+          "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+        },
+        "6107f57b393b3718b197f0b08a47862d": {
+          "answer_source": {
+            "file_sha256": "3a4231dbaf886282e5b2641813e8601b19347de308ab74203f90d65cfeab6f50",
+            "json_pointer": "/generations/3",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-recovery\\candidates\\34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 512,
+          "answer_utf8_sha256": "5e5574108cc836077869951b4df48ba15c18b1833ed69961ed793d33b57718c6",
+          "candidate_id": "34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b",
+          "original_index_0based": 3,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 3,
+            "file_sha256": "7aa275c3ef38f7480d505269b37a600a30427e732b4c2f927c9604ffd946c686",
+            "json_pointer": "/partition/3",
+            "path": "runs\\first-live-recovery\\candidates\\34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-recovery:C:4",
+          "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+        },
+        "706638063826e0a2550ac5be7a220908": {
+          "answer_source": {
+            "file_sha256": "3a4231dbaf886282e5b2641813e8601b19347de308ab74203f90d65cfeab6f50",
+            "json_pointer": "/generations/7",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-recovery\\candidates\\34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 527,
+          "answer_utf8_sha256": "6ff1b2c4b79bf0a8949cef96a5bef443184814530d65e8897bc67d96d0cfa2a9",
+          "candidate_id": "34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b",
+          "original_index_0based": 7,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 7,
+            "file_sha256": "7aa275c3ef38f7480d505269b37a600a30427e732b4c2f927c9604ffd946c686",
+            "json_pointer": "/partition/7",
+            "path": "runs\\first-live-recovery\\candidates\\34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-recovery:C:8",
+          "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+        },
+        "736715e4ad9011ed71a16af7aac66b40": {
+          "answer_source": {
+            "file_sha256": "3a4231dbaf886282e5b2641813e8601b19347de308ab74203f90d65cfeab6f50",
+            "json_pointer": "/generations/8",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-recovery\\candidates\\34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 557,
+          "answer_utf8_sha256": "76eae6e96f625dfd700b06753a5bc3140fcc38a9a7ec4ac7437ed7e9272923fb",
+          "candidate_id": "34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b",
+          "original_index_0based": 8,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 8,
+            "file_sha256": "7aa275c3ef38f7480d505269b37a600a30427e732b4c2f927c9604ffd946c686",
+            "json_pointer": "/partition/8",
+            "path": "runs\\first-live-recovery\\candidates\\34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-recovery:C:9",
+          "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+        },
+        "b36eb078d07198b4fcac77b102c61511": {
+          "answer_source": {
+            "file_sha256": "3a4231dbaf886282e5b2641813e8601b19347de308ab74203f90d65cfeab6f50",
+            "json_pointer": "/generations/6",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-recovery\\candidates\\34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 583,
+          "answer_utf8_sha256": "1c7640c21514eda6ae8e9d0c9549a3137cea0f88be0f93ae9f6fc85c801b87bf",
+          "candidate_id": "34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b",
+          "original_index_0based": 6,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 6,
+            "file_sha256": "7aa275c3ef38f7480d505269b37a600a30427e732b4c2f927c9604ffd946c686",
+            "json_pointer": "/partition/6",
+            "path": "runs\\first-live-recovery\\candidates\\34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-recovery:C:7",
+          "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+        },
+        "e6842d2bc6f0277d85bd4b2676c2f6fc": {
+          "answer_source": {
+            "file_sha256": "3a4231dbaf886282e5b2641813e8601b19347de308ab74203f90d65cfeab6f50",
+            "json_pointer": "/generations/1",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-recovery\\candidates\\34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 582,
+          "answer_utf8_sha256": "3c7e2905c46c6a6ba2c60e1beef70df37e1504ea7ed9b6be5a52793a96d3b0b3",
+          "candidate_id": "34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b",
+          "original_index_0based": 1,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 1,
+            "file_sha256": "7aa275c3ef38f7480d505269b37a600a30427e732b4c2f927c9604ffd946c686",
+            "json_pointer": "/partition/1",
+            "path": "runs\\first-live-recovery\\candidates\\34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-recovery:C:2",
+          "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+        },
+        "fe53ecd2eb3929bba2a4fccc1dae528b": {
+          "answer_source": {
+            "file_sha256": "3a4231dbaf886282e5b2641813e8601b19347de308ab74203f90d65cfeab6f50",
+            "json_pointer": "/generations/2",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-recovery\\candidates\\34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 551,
+          "answer_utf8_sha256": "8182e78e6b9d467210cfc95240afda33925018e7d87fcd0ff146ff4cddcc7b1e",
+          "candidate_id": "34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b",
+          "original_index_0based": 2,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 2,
+            "file_sha256": "7aa275c3ef38f7480d505269b37a600a30427e732b4c2f927c9604ffd946c686",
+            "json_pointer": "/partition/2",
+            "path": "runs\\first-live-recovery\\candidates\\34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-recovery:C:3",
+          "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+        }
+      },
+      "disagreement_resolution": "Both submissions proposed ten singletons; the second flagged the two lost-sounds stories. I compared all ten plots, including the two music boxes and two letter discoveries. Different central recoveries and consequences justify separation: the baker/stray episode is not a soundscape restoration, and Grandma's unfulfilled sailing dream is not delivery of the town's goodbyes. The music-box versus frozen-river pair is resolved as distinct for the same concrete event and payoff differences as in the focused card. Five sentences were checked for every answer.",
+      "groups": [
+        [
+          "first-live-recovery:C:10"
+        ],
+        [
+          "first-live-recovery:C:3"
+        ],
+        [
+          "first-live-recovery:C:6"
+        ],
+        [
+          "first-live-recovery:C:2"
+        ],
+        [
+          "first-live-recovery:C:5"
+        ],
+        [
+          "first-live-recovery:C:7"
+        ],
+        [
+          "first-live-recovery:C:1"
+        ],
+        [
+          "first-live-recovery:C:9"
+        ],
+        [
+          "first-live-recovery:C:4"
+        ],
+        [
+          "first-live-recovery:C:8"
+        ]
+      ],
+      "item_id": "d46355da75af2b016bf57e11744eded5",
+      "kind": "historical_set",
+      "literal_compliance_uncertain": [],
+      "literal_compliance_violations": [],
+      "rationale": "Ten distinct central episodes: restoring sounds with a music box; releasing a musician's song and finding laughter; opening a gate to free a fawn; guiding a message drone home; tracing a shepherd through a bell and returning it to his family; returning a baker's music box and feeding a stray; discovering and delivering old town letters; finding Grandma's sailing letters and beginning a boat; retrieving a lullaby-bearing locket; and growing abandoned seeds. Shared detection talents, names, bridges, letters or music boxes do not eliminate the different uses and outcomes. Literal compliance: Every answer has five narrative sentences about a girl and her dog; craft or causal concerns are assessed separately.",
+      "source_context": {
+        "candidate_id": "34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b",
+        "execution_scope": "historical bounded legacy adapter; official instruction strings and ordinary metrics previously compared to pinned source, not retroactively a native CLI run",
+        "legacy_judging": {
+          "fallback": "disabled",
+          "ordering_seed": null,
+          "partition_effort": "provider_default",
+          "partition_max_output_tokens": 16000,
+          "partition_repair": "disabled",
+          "quality_effort": "high",
+          "quality_max_output_tokens": 16000
+        },
+        "metric_scope": "Original saved metric values for context only; not rescored or adjudication-corrected.",
+        "prompt_id": "curated-0",
+        "protocol_fingerprint": "c05bd74e4872ddb3f4e5c545e77ec2a4bcb92fee964da528018264b9556b3cb8",
+        "recorded_distinct": 10,
+        "recorded_utility": 8.5672732825065,
+        "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+      },
+      "source_id": "first-live-recovery:C",
+      "status": "resolved",
+      "uncertain_pairs": []
+    },
+    {
+      "answer_sources": {
+        "09415ff47609795fbbe140d05815bd87": {
+          "answer_source": {
+            "file_sha256": "910b20fc0afc3165a512f9da2e8d2657e19581202ad35ebd47a3ef34ebcb3f8d",
+            "json_pointer": "/generations/8",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 325,
+          "answer_utf8_sha256": "9a71117f6c03b016037bf0984ef7e6aaa597e585d848a16a066984279c1e7365",
+          "candidate_id": "68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06",
+          "original_index_0based": 8,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 8,
+            "file_sha256": "34a0439beef0a3fb916846ac5f561a6e3f49f83fc658a778db873203f91e433b",
+            "json_pointer": "/partition/8",
+            "path": "runs\\first-live-continuation-v2\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:B:9",
+          "run_id": "a486d90396934a45940637d77a168304"
+        },
+        "16f9bf7d341494e7bbe88a786bfb7877": {
+          "answer_source": {
+            "file_sha256": "910b20fc0afc3165a512f9da2e8d2657e19581202ad35ebd47a3ef34ebcb3f8d",
+            "json_pointer": "/generations/0",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 442,
+          "answer_utf8_sha256": "85f18b0f7098464eef91eabbdcd525c7988242d7f8554088995c10f84863ec80",
+          "candidate_id": "68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06",
+          "original_index_0based": 0,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 0,
+            "file_sha256": "34a0439beef0a3fb916846ac5f561a6e3f49f83fc658a778db873203f91e433b",
+            "json_pointer": "/partition/0",
+            "path": "runs\\first-live-continuation-v2\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:B:1",
+          "run_id": "a486d90396934a45940637d77a168304"
+        },
+        "1865a1afea96c4744f6771318aa3d6b4": {
+          "answer_source": {
+            "file_sha256": "910b20fc0afc3165a512f9da2e8d2657e19581202ad35ebd47a3ef34ebcb3f8d",
+            "json_pointer": "/generations/1",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 466,
+          "answer_utf8_sha256": "981adf504d4bab2ac288e70b0916bf39813f074fe55bd1fe34d122f847bd0338",
+          "candidate_id": "68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06",
+          "original_index_0based": 1,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 1,
+            "file_sha256": "34a0439beef0a3fb916846ac5f561a6e3f49f83fc658a778db873203f91e433b",
+            "json_pointer": "/partition/1",
+            "path": "runs\\first-live-continuation-v2\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:B:2",
+          "run_id": "a486d90396934a45940637d77a168304"
+        },
+        "64e4eda8c94c28fe463f8ad577340966": {
+          "answer_source": {
+            "file_sha256": "910b20fc0afc3165a512f9da2e8d2657e19581202ad35ebd47a3ef34ebcb3f8d",
+            "json_pointer": "/generations/3",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 394,
+          "answer_utf8_sha256": "50af2e56199bd5849bc8ceb2d0ec800bd4e5e03d35325161fcc6142cfccd16ce",
+          "candidate_id": "68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06",
+          "original_index_0based": 3,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 3,
+            "file_sha256": "34a0439beef0a3fb916846ac5f561a6e3f49f83fc658a778db873203f91e433b",
+            "json_pointer": "/partition/3",
+            "path": "runs\\first-live-continuation-v2\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:B:4",
+          "run_id": "a486d90396934a45940637d77a168304"
+        },
+        "79978427aa3c43b7bcc05fe8375f60b9": {
+          "answer_source": {
+            "file_sha256": "910b20fc0afc3165a512f9da2e8d2657e19581202ad35ebd47a3ef34ebcb3f8d",
+            "json_pointer": "/generations/4",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 402,
+          "answer_utf8_sha256": "c70784e9bdf63a84d162fc0e768aca6e4adbf5543b6eaa675b4d6489d14c5db0",
+          "candidate_id": "68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06",
+          "original_index_0based": 4,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 4,
+            "file_sha256": "34a0439beef0a3fb916846ac5f561a6e3f49f83fc658a778db873203f91e433b",
+            "json_pointer": "/partition/4",
+            "path": "runs\\first-live-continuation-v2\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:B:5",
+          "run_id": "a486d90396934a45940637d77a168304"
+        },
+        "a693127cda5a96374b9ef33e26460da4": {
+          "answer_source": {
+            "file_sha256": "910b20fc0afc3165a512f9da2e8d2657e19581202ad35ebd47a3ef34ebcb3f8d",
+            "json_pointer": "/generations/9",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 433,
+          "answer_utf8_sha256": "5966103adafeaebdac4d839ed9b9024afe096ca83baaa29115cd42e412ebc9d8",
+          "candidate_id": "68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06",
+          "original_index_0based": 9,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 9,
+            "file_sha256": "34a0439beef0a3fb916846ac5f561a6e3f49f83fc658a778db873203f91e433b",
+            "json_pointer": "/partition/9",
+            "path": "runs\\first-live-continuation-v2\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:B:10",
+          "run_id": "a486d90396934a45940637d77a168304"
+        },
+        "ac938a8cd91a677e7779493ea5d979db": {
+          "answer_source": {
+            "file_sha256": "910b20fc0afc3165a512f9da2e8d2657e19581202ad35ebd47a3ef34ebcb3f8d",
+            "json_pointer": "/generations/7",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 380,
+          "answer_utf8_sha256": "eaf6c8f7e56b28531efb1234f6c7e13a0a675bcaadee18d697756d45d0a0fc5d",
+          "candidate_id": "68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06",
+          "original_index_0based": 7,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 7,
+            "file_sha256": "34a0439beef0a3fb916846ac5f561a6e3f49f83fc658a778db873203f91e433b",
+            "json_pointer": "/partition/7",
+            "path": "runs\\first-live-continuation-v2\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:B:8",
+          "run_id": "a486d90396934a45940637d77a168304"
+        },
+        "de528fb1f286939a564ddb996dfd6e74": {
+          "answer_source": {
+            "file_sha256": "910b20fc0afc3165a512f9da2e8d2657e19581202ad35ebd47a3ef34ebcb3f8d",
+            "json_pointer": "/generations/5",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 432,
+          "answer_utf8_sha256": "bdca96080187a8eb3e3e7080d2535a8270f97e01e81b1f8fe0449f1fb112b354",
+          "candidate_id": "68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06",
+          "original_index_0based": 5,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 5,
+            "file_sha256": "34a0439beef0a3fb916846ac5f561a6e3f49f83fc658a778db873203f91e433b",
+            "json_pointer": "/partition/5",
+            "path": "runs\\first-live-continuation-v2\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:B:6",
+          "run_id": "a486d90396934a45940637d77a168304"
+        },
+        "de956ae4097cec695869dc79f332b9e5": {
+          "answer_source": {
+            "file_sha256": "910b20fc0afc3165a512f9da2e8d2657e19581202ad35ebd47a3ef34ebcb3f8d",
+            "json_pointer": "/generations/2",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 445,
+          "answer_utf8_sha256": "543a755c73f243437f09c026c62fdcd1a04e5c64a19dda952f95d4f8ee255793",
+          "candidate_id": "68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06",
+          "original_index_0based": 2,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 2,
+            "file_sha256": "34a0439beef0a3fb916846ac5f561a6e3f49f83fc658a778db873203f91e433b",
+            "json_pointer": "/partition/2",
+            "path": "runs\\first-live-continuation-v2\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:B:3",
+          "run_id": "a486d90396934a45940637d77a168304"
+        },
+        "ea4caf5456e2c8862861ee4f711a863b": {
+          "answer_source": {
+            "file_sha256": "910b20fc0afc3165a512f9da2e8d2657e19581202ad35ebd47a3ef34ebcb3f8d",
+            "json_pointer": "/generations/6",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 412,
+          "answer_utf8_sha256": "8c1e2582001cc0a7f628b62a38694432f25fcf163f364bb724e91dd9d190f8ae",
+          "candidate_id": "68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06",
+          "original_index_0based": 6,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 6,
+            "file_sha256": "34a0439beef0a3fb916846ac5f561a6e3f49f83fc658a778db873203f91e433b",
+            "json_pointer": "/partition/6",
+            "path": "runs\\first-live-continuation-v2\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:B:7",
+          "run_id": "a486d90396934a45940637d77a168304"
+        }
+      },
+      "disagreement_resolution": "Both submissions separated all ten; the second recorded uncertainty between the puppy and kitten rescues. I checked the different discovery actions, specific distress and aid, and the owner-return ending. I retain provisional separation and that uncertainty: box extraction and warming in snow could be central action changes or minor realizations of the same pet-rescue plot. The remaining episodes change the central problem or payoff. The garden/marble answer visibly has four sentences, while the extra dog in the puppy ending is a craft issue.",
+      "groups": [
+        [
+          "first-live-continuation-v2:B:2"
+        ],
+        [
+          "first-live-continuation-v2:B:10"
+        ],
+        [
+          "first-live-continuation-v2:B:7"
+        ],
+        [
+          "first-live-continuation-v2:B:8"
+        ],
+        [
+          "first-live-continuation-v2:B:3"
+        ],
+        [
+          "first-live-continuation-v2:B:5"
+        ],
+        [
+          "first-live-continuation-v2:B:1"
+        ],
+        [
+          "first-live-continuation-v2:B:4"
+        ],
+        [
+          "first-live-continuation-v2:B:9"
+        ],
+        [
+          "first-live-continuation-v2:B:6"
+        ]
+      ],
+      "item_id": "51234f90d16f7154c9064a7637c48093",
+      "kind": "historical_set",
+      "literal_compliance_uncertain": [],
+      "literal_compliance_violations": [
+        "first-live-continuation-v2:B:9"
+      ],
+      "rationale": "Provisionally ten distinct episodes: a blackout in a blanket fort; returning an umbrella and making friends; freeing a boxed puppy for its owner; recovering scattered cookies; a boat trip yielding a kite; warming a snowbound kitten for its owner; freeing a fawn from vines; following a map and key to a music box; a marble garden visited by a squirrel; and growing a sunflower that prompts bee protection. The puppy/kitten rescue boundary is explicitly uncertain; a shared gentle rescue or gardening structure alone does not settle equivalence. Literal compliance: Nine answers have five narrative sentences. The marble-and-squirrel story has four and violates the requested count; the unexplained third dog is a separate continuity concern.",
+      "source_context": {
+        "candidate_id": "68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06",
+        "execution_scope": "historical bounded legacy adapter; official instruction strings and ordinary metrics previously compared to pinned source, not retroactively a native CLI run",
+        "legacy_judging": {
+          "fallback": "disabled",
+          "ordering_seed": null,
+          "partition_effort": "provider_default",
+          "partition_max_output_tokens": 16000,
+          "partition_repair": "disabled",
+          "quality_effort": "high",
+          "quality_max_output_tokens": 16000
+        },
+        "metric_scope": "Original saved metric values for context only; not rescored or adjudication-corrected.",
+        "prompt_id": "curated-0",
+        "protocol_fingerprint": "c09af665ef4e17ffeb58d39b526854ddd9f0082113f51cd4fb2019c904218d93",
+        "recorded_distinct": 10,
+        "recorded_utility": 7.117946910703382,
+        "run_id": "a486d90396934a45940637d77a168304"
+      },
+      "source_id": "first-live-continuation-v2:B",
+      "status": "uncertain",
+      "uncertain_pairs": [
+        {
+          "left": "first-live-continuation-v2:B:7",
+          "rationale": "Both find a distressed young pet, assist it and see its owner arrive. Their discovery and rescue actions differ: sound leads to extracting a puppy from a box, while paw prints lead to warming a snowbound kitten. Those concrete scenes may be central new content or minor variants of one rescue-and-return plot; separate groups remain tentative.",
+          "right": "first-live-continuation-v2:B:5"
+        }
+      ]
+    },
+    {
+      "answer_sources": {
+        "b8f3511cccbb7cd35d3d6188f4bcb393": {
+          "answer_source": {
+            "file_sha256": "910b20fc0afc3165a512f9da2e8d2657e19581202ad35ebd47a3ef34ebcb3f8d",
+            "json_pointer": "/generations/2",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 445,
+          "answer_utf8_sha256": "543a755c73f243437f09c026c62fdcd1a04e5c64a19dda952f95d4f8ee255793",
+          "candidate_id": "68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06",
+          "original_index_0based": 2,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 2,
+            "file_sha256": "34a0439beef0a3fb916846ac5f561a6e3f49f83fc658a778db873203f91e433b",
+            "json_pointer": "/partition/2",
+            "path": "runs\\first-live-continuation-v2\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:B:3",
+          "run_id": "a486d90396934a45940637d77a168304"
+        },
+        "fd9092f32ea8d4357bed97dbae929c62": {
+          "answer_source": {
+            "file_sha256": "910b20fc0afc3165a512f9da2e8d2657e19581202ad35ebd47a3ef34ebcb3f8d",
+            "json_pointer": "/generations/9",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 433,
+          "answer_utf8_sha256": "5966103adafeaebdac4d839ed9b9024afe096ca83baaa29115cd42e412ebc9d8",
+          "candidate_id": "68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06",
+          "original_index_0based": 9,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 9,
+            "file_sha256": "34a0439beef0a3fb916846ac5f561a6e3f49f83fc658a778db873203f91e433b",
+            "json_pointer": "/partition/9",
+            "path": "runs\\first-live-continuation-v2\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:B:10",
+          "run_id": "a486d90396934a45940637d77a168304"
+        }
+      },
+      "disagreement_resolution": "Both submissions separated these answers. I checked the actual boat outing and kite-kept ending against the footprint search and umbrella-returned ending, supporting distinct central plots. Each has five sentences about the girl and her dog.",
+      "groups": [
+        [
+          "first-live-continuation-v2:B:3"
+        ],
+        [
+          "first-live-continuation-v2:B:10"
+        ]
+      ],
+      "item_id": "2e4ad7b4d67bbacdd1a7f9bf6144aa48",
+      "kind": "historical_comparison",
+      "literal_compliance_uncertain": [],
+      "literal_compliance_violations": [],
+      "rationale": "Distinct: the boat excursion leads to keeping and flying a found kite, whereas the umbrella search returns property to a boy and creates a friendship. Finding an object is shared structure; the main activity and resolution differ. Literal compliance: Every answer has five narrative sentences about a girl and her dog; craft or causal concerns are assessed separately.",
+      "source_context": {
+        "shared_element": "finding an object",
+        "source_case": "continuation-B3-B10"
+      },
+      "source_id": "8",
+      "status": "resolved",
+      "uncertain_pairs": []
+    },
+    {
+      "answer_sources": {
+        "212c23519d288c6c66e404628115a8f4": {
+          "answer_source": {
+            "file_sha256": "583ec243c296c7f34e8a760c465010cd2c981bcb3ebbf74f71aa4483bfae8994",
+            "json_pointer": "/generations/7",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-recovery\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 392,
+          "answer_utf8_sha256": "3cf1fd209f3070b6f0e5f43b8eb7785eb38f2e03d9b8cd64aa612686028adc00",
+          "candidate_id": "68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06",
+          "original_index_0based": 7,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 7,
+            "file_sha256": "c5c144d6217114eaffb7620c111959346fa6f0e54b15d613bb07f176e55e6af7",
+            "json_pointer": "/partition/7",
+            "path": "runs\\first-live-recovery\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-recovery:B:8",
+          "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+        },
+        "23784d7af28be3099ac4c81b91a1e386": {
+          "answer_source": {
+            "file_sha256": "583ec243c296c7f34e8a760c465010cd2c981bcb3ebbf74f71aa4483bfae8994",
+            "json_pointer": "/generations/4",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-recovery\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 408,
+          "answer_utf8_sha256": "aeb5c6053620e39fe951acfc918b901838f83d938bccf7aa9579d2e3217e1926",
+          "candidate_id": "68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06",
+          "original_index_0based": 4,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 4,
+            "file_sha256": "c5c144d6217114eaffb7620c111959346fa6f0e54b15d613bb07f176e55e6af7",
+            "json_pointer": "/partition/4",
+            "path": "runs\\first-live-recovery\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-recovery:B:5",
+          "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+        },
+        "2e44cf79a6d4941fbff90df635983240": {
+          "answer_source": {
+            "file_sha256": "583ec243c296c7f34e8a760c465010cd2c981bcb3ebbf74f71aa4483bfae8994",
+            "json_pointer": "/generations/0",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-recovery\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 380,
+          "answer_utf8_sha256": "a484e1a399e4546bc444b56d6ad90b021158787f76138310c2d9e0d50eec53fb",
+          "candidate_id": "68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06",
+          "original_index_0based": 0,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 0,
+            "file_sha256": "c5c144d6217114eaffb7620c111959346fa6f0e54b15d613bb07f176e55e6af7",
+            "json_pointer": "/partition/0",
+            "path": "runs\\first-live-recovery\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-recovery:B:1",
+          "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+        },
+        "5b53b5817abfa52dce6726be481082f2": {
+          "answer_source": {
+            "file_sha256": "583ec243c296c7f34e8a760c465010cd2c981bcb3ebbf74f71aa4483bfae8994",
+            "json_pointer": "/generations/1",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-recovery\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 409,
+          "answer_utf8_sha256": "b849180b1c75b4092bf059a9ae9fbb073be52ce7d34368da86f0f7eb350830fd",
+          "candidate_id": "68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06",
+          "original_index_0based": 1,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 1,
+            "file_sha256": "c5c144d6217114eaffb7620c111959346fa6f0e54b15d613bb07f176e55e6af7",
+            "json_pointer": "/partition/1",
+            "path": "runs\\first-live-recovery\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-recovery:B:2",
+          "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+        },
+        "5de847af0bcc1920ec5329f117c1f607": {
+          "answer_source": {
+            "file_sha256": "583ec243c296c7f34e8a760c465010cd2c981bcb3ebbf74f71aa4483bfae8994",
+            "json_pointer": "/generations/5",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-recovery\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 429,
+          "answer_utf8_sha256": "60b565bdf054019ec4f819790284e3d2afb7eab488e4c8a84fb1a3a63a1f01a7",
+          "candidate_id": "68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06",
+          "original_index_0based": 5,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 5,
+            "file_sha256": "c5c144d6217114eaffb7620c111959346fa6f0e54b15d613bb07f176e55e6af7",
+            "json_pointer": "/partition/5",
+            "path": "runs\\first-live-recovery\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-recovery:B:6",
+          "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+        },
+        "64b47a02665aa2c62832da55ac11cbdd": {
+          "answer_source": {
+            "file_sha256": "583ec243c296c7f34e8a760c465010cd2c981bcb3ebbf74f71aa4483bfae8994",
+            "json_pointer": "/generations/3",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-recovery\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 418,
+          "answer_utf8_sha256": "2a42cf5a221f30a69a65da5fc22fac64a3079fdf15d03e6265dedc77ee2ef151",
+          "candidate_id": "68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06",
+          "original_index_0based": 3,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 3,
+            "file_sha256": "c5c144d6217114eaffb7620c111959346fa6f0e54b15d613bb07f176e55e6af7",
+            "json_pointer": "/partition/3",
+            "path": "runs\\first-live-recovery\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-recovery:B:4",
+          "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+        },
+        "a2fce1358a2454f4e563c44b66f07b4f": {
+          "answer_source": {
+            "file_sha256": "583ec243c296c7f34e8a760c465010cd2c981bcb3ebbf74f71aa4483bfae8994",
+            "json_pointer": "/generations/9",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-recovery\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 373,
+          "answer_utf8_sha256": "c9d6fabe45f533170925ecae72d3691ad6b97d5cee6b32b67bda3819c5f2777b",
+          "candidate_id": "68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06",
+          "original_index_0based": 9,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 9,
+            "file_sha256": "c5c144d6217114eaffb7620c111959346fa6f0e54b15d613bb07f176e55e6af7",
+            "json_pointer": "/partition/9",
+            "path": "runs\\first-live-recovery\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-recovery:B:10",
+          "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+        },
+        "adb7640e3117e2d7fecb725b184fe7c5": {
+          "answer_source": {
+            "file_sha256": "583ec243c296c7f34e8a760c465010cd2c981bcb3ebbf74f71aa4483bfae8994",
+            "json_pointer": "/generations/8",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-recovery\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 388,
+          "answer_utf8_sha256": "3fd420548241bb8af3cea8821e98eef1f9ece59d03d8a12d0f58b3bb280c3e32",
+          "candidate_id": "68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06",
+          "original_index_0based": 8,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 8,
+            "file_sha256": "c5c144d6217114eaffb7620c111959346fa6f0e54b15d613bb07f176e55e6af7",
+            "json_pointer": "/partition/8",
+            "path": "runs\\first-live-recovery\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-recovery:B:9",
+          "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+        },
+        "b8acbf0a8d30733301afa18130e1ebc3": {
+          "answer_source": {
+            "file_sha256": "583ec243c296c7f34e8a760c465010cd2c981bcb3ebbf74f71aa4483bfae8994",
+            "json_pointer": "/generations/6",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-recovery\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 402,
+          "answer_utf8_sha256": "0509836026e3744bd2937da957ecbc891a154fc9d0fb9cd6dbca708d61b384f4",
+          "candidate_id": "68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06",
+          "original_index_0based": 6,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 6,
+            "file_sha256": "c5c144d6217114eaffb7620c111959346fa6f0e54b15d613bb07f176e55e6af7",
+            "json_pointer": "/partition/6",
+            "path": "runs\\first-live-recovery\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-recovery:B:7",
+          "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+        },
+        "dbe29fe7b178a44865b7de6817824711": {
+          "answer_source": {
+            "file_sha256": "583ec243c296c7f34e8a760c465010cd2c981bcb3ebbf74f71aa4483bfae8994",
+            "json_pointer": "/generations/2",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-recovery\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 406,
+          "answer_utf8_sha256": "60e7a085427f7c3cd1c5dd249d52cd90c6224d1f13c261d676e8288c23073cbd",
+          "candidate_id": "68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06",
+          "original_index_0based": 2,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 2,
+            "file_sha256": "c5c144d6217114eaffb7620c111959346fa6f0e54b15d613bb07f176e55e6af7",
+            "json_pointer": "/partition/2",
+            "path": "runs\\first-live-recovery\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-recovery:B:3",
+          "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+        }
+      },
+      "disagreement_resolution": "The submissions agreed on ten separate plots. I checked each discovery and payoff, including the different animal-help, object-return and magical-garden episodes, rather than treating shared structure as duplication. None repeats another's particular central action and consequence. All five-sentence forms were checked.",
+      "groups": [
+        [
+          "first-live-recovery:B:5"
+        ],
+        [
+          "first-live-recovery:B:6"
+        ],
+        [
+          "first-live-recovery:B:9"
+        ],
+        [
+          "first-live-recovery:B:3"
+        ],
+        [
+          "first-live-recovery:B:7"
+        ],
+        [
+          "first-live-recovery:B:10"
+        ],
+        [
+          "first-live-recovery:B:8"
+        ],
+        [
+          "first-live-recovery:B:4"
+        ],
+        [
+          "first-live-recovery:B:1"
+        ],
+        [
+          "first-live-recovery:B:2"
+        ]
+      ],
+      "item_id": "344e6398cb019bc7e0e69d6bcc2f4d88",
+      "kind": "historical_set",
+      "literal_compliance_uncertain": [],
+      "literal_compliance_violations": [],
+      "rationale": "Ten distinct central plots: a music box leading to a family photograph; sunflower growing with a returning hummingbird; freeing a hedgehog; a feather revealing lost toys for return; returning a named kite and learning to fly it; freeing a cloud that waters a garden and becomes a rainbow; opening an orchard and sharing fruit; answering a balloon friendship message; reuniting a fawn after a butterfly chase; and a homemade boat mishap. Common helpfulness, discovery and tone do not substitute for shared central content. Literal compliance: Every answer has five narrative sentences about a girl and her dog; craft or causal concerns are assessed separately.",
+      "source_context": {
+        "candidate_id": "68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06",
+        "execution_scope": "historical bounded legacy adapter; official instruction strings and ordinary metrics previously compared to pinned source, not retroactively a native CLI run",
+        "legacy_judging": {
+          "fallback": "disabled",
+          "ordering_seed": null,
+          "partition_effort": "provider_default",
+          "partition_max_output_tokens": 16000,
+          "partition_repair": "disabled",
+          "quality_effort": "high",
+          "quality_max_output_tokens": 16000
+        },
+        "metric_scope": "Original saved metric values for context only; not rescored or adjudication-corrected.",
+        "prompt_id": "curated-0",
+        "protocol_fingerprint": "63de526b6e4c6bb1a3a9f3564b4fb15ec905b8d152fafa974685b9fcff22d2e0",
+        "recorded_distinct": 10,
+        "recorded_utility": 7.480236373570919,
+        "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+      },
+      "source_id": "first-live-recovery:B",
+      "status": "resolved",
+      "uncertain_pairs": []
+    },
+    {
+      "answer_sources": {
+        "09fb9aff0cec0f95275a90aa36b30269": {
+          "answer_source": {
+            "file_sha256": "e40cdf6ad5d6ee28ad99cfc8b2848effe43ca4f4eccdb8928e0393770dca89ad",
+            "json_pointer": "/generations/6",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-recovery\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 417,
+          "answer_utf8_sha256": "964a965f99a82a7274833c1369bef8369a94e9f95d820a6cd1c9e029d3da5f03",
+          "candidate_id": "2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525",
+          "original_index_0based": 6,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 1,
+            "file_sha256": "86f53e55d09d349fe085796e30a3ad0d06766ec79456baa4a1563ff81bbf8e0a",
+            "json_pointer": "/partition/6",
+            "path": "runs\\first-live-recovery\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-recovery:A:7",
+          "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+        },
+        "10c440e0341fedd28223fbeb52921f4a": {
+          "answer_source": {
+            "file_sha256": "e40cdf6ad5d6ee28ad99cfc8b2848effe43ca4f4eccdb8928e0393770dca89ad",
+            "json_pointer": "/generations/1",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-recovery\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 413,
+          "answer_utf8_sha256": "85d8bba5f1b6a7d1ed7d179fad094c726d0c6829157e742bbf57be1a448b2934",
+          "candidate_id": "2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525",
+          "original_index_0based": 1,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 1,
+            "file_sha256": "86f53e55d09d349fe085796e30a3ad0d06766ec79456baa4a1563ff81bbf8e0a",
+            "json_pointer": "/partition/1",
+            "path": "runs\\first-live-recovery\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-recovery:A:2",
+          "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+        },
+        "1d26ae1af7a54a22f737909f28808268": {
+          "answer_source": {
+            "file_sha256": "e40cdf6ad5d6ee28ad99cfc8b2848effe43ca4f4eccdb8928e0393770dca89ad",
+            "json_pointer": "/generations/8",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-recovery\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 429,
+          "answer_utf8_sha256": "865621661a7a35c9e09efd0efc42c7c4e3689dcbf73a99816f9a34d4353e8e4a",
+          "candidate_id": "2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525",
+          "original_index_0based": 8,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 7,
+            "file_sha256": "86f53e55d09d349fe085796e30a3ad0d06766ec79456baa4a1563ff81bbf8e0a",
+            "json_pointer": "/partition/8",
+            "path": "runs\\first-live-recovery\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-recovery:A:9",
+          "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+        },
+        "51b4b29dfd2c0114173319c1ba4e2f5b": {
+          "answer_source": {
+            "file_sha256": "e40cdf6ad5d6ee28ad99cfc8b2848effe43ca4f4eccdb8928e0393770dca89ad",
+            "json_pointer": "/generations/5",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-recovery\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 438,
+          "answer_utf8_sha256": "fa54bf360a9949c1acde817064257bf525c869fd95edd1b624425b8c986aba60",
+          "candidate_id": "2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525",
+          "original_index_0based": 5,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 5,
+            "file_sha256": "86f53e55d09d349fe085796e30a3ad0d06766ec79456baa4a1563ff81bbf8e0a",
+            "json_pointer": "/partition/5",
+            "path": "runs\\first-live-recovery\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-recovery:A:6",
+          "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+        },
+        "772df7da44f88c0cbff505e2be1612a7": {
+          "answer_source": {
+            "file_sha256": "e40cdf6ad5d6ee28ad99cfc8b2848effe43ca4f4eccdb8928e0393770dca89ad",
+            "json_pointer": "/generations/9",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-recovery\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 490,
+          "answer_utf8_sha256": "634180a25f15eb5bdd92966ed4bd9092776666387d605848c5f1ceb181393458",
+          "candidate_id": "2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525",
+          "original_index_0based": 9,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 8,
+            "file_sha256": "86f53e55d09d349fe085796e30a3ad0d06766ec79456baa4a1563ff81bbf8e0a",
+            "json_pointer": "/partition/9",
+            "path": "runs\\first-live-recovery\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-recovery:A:10",
+          "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+        },
+        "8710ec44abb26ca6a13cad1e38f0f413": {
+          "answer_source": {
+            "file_sha256": "e40cdf6ad5d6ee28ad99cfc8b2848effe43ca4f4eccdb8928e0393770dca89ad",
+            "json_pointer": "/generations/4",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-recovery\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 421,
+          "answer_utf8_sha256": "ca432e9fdb81892bf3bd56fe9156569a6ef817d4a5d89aa8d253e6d65bb4179c",
+          "candidate_id": "2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525",
+          "original_index_0based": 4,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 4,
+            "file_sha256": "86f53e55d09d349fe085796e30a3ad0d06766ec79456baa4a1563ff81bbf8e0a",
+            "json_pointer": "/partition/4",
+            "path": "runs\\first-live-recovery\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-recovery:A:5",
+          "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+        },
+        "8e7baf14171d86446d5351713f052361": {
+          "answer_source": {
+            "file_sha256": "e40cdf6ad5d6ee28ad99cfc8b2848effe43ca4f4eccdb8928e0393770dca89ad",
+            "json_pointer": "/generations/2",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-recovery\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 389,
+          "answer_utf8_sha256": "1f8b33fbd98834348773faaf61e90902c37fbc7b1210aff620c8147e71109ef8",
+          "candidate_id": "2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525",
+          "original_index_0based": 2,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 2,
+            "file_sha256": "86f53e55d09d349fe085796e30a3ad0d06766ec79456baa4a1563ff81bbf8e0a",
+            "json_pointer": "/partition/2",
+            "path": "runs\\first-live-recovery\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-recovery:A:3",
+          "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+        },
+        "b6c257d4eb02a05a71d4a464af89bf78": {
+          "answer_source": {
+            "file_sha256": "e40cdf6ad5d6ee28ad99cfc8b2848effe43ca4f4eccdb8928e0393770dca89ad",
+            "json_pointer": "/generations/3",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-recovery\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 420,
+          "answer_utf8_sha256": "7448a7db9a09b66172cda704793a601c17d0c2e73b5d1d07dd50386b138c3cb4",
+          "candidate_id": "2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525",
+          "original_index_0based": 3,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 3,
+            "file_sha256": "86f53e55d09d349fe085796e30a3ad0d06766ec79456baa4a1563ff81bbf8e0a",
+            "json_pointer": "/partition/3",
+            "path": "runs\\first-live-recovery\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-recovery:A:4",
+          "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+        },
+        "c736afa8fef6a2c3466bdac0683168ad": {
+          "answer_source": {
+            "file_sha256": "e40cdf6ad5d6ee28ad99cfc8b2848effe43ca4f4eccdb8928e0393770dca89ad",
+            "json_pointer": "/generations/0",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-recovery\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 400,
+          "answer_utf8_sha256": "58b9958d04b10317093c7e38278b44bd0b471965a50c462aea15c038f57c7830",
+          "candidate_id": "2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525",
+          "original_index_0based": 0,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 0,
+            "file_sha256": "86f53e55d09d349fe085796e30a3ad0d06766ec79456baa4a1563ff81bbf8e0a",
+            "json_pointer": "/partition/0",
+            "path": "runs\\first-live-recovery\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-recovery:A:1",
+          "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+        },
+        "c78cdf0e34cf2b1ac9a06c29f96951dc": {
+          "answer_source": {
+            "file_sha256": "e40cdf6ad5d6ee28ad99cfc8b2848effe43ca4f4eccdb8928e0393770dca89ad",
+            "json_pointer": "/generations/7",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-recovery\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 429,
+          "answer_utf8_sha256": "de49cae5b3ecd47ef8de19073008e00de606d2564ed98dbb8f3ed90960772d31",
+          "candidate_id": "2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525",
+          "original_index_0based": 7,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 6,
+            "file_sha256": "86f53e55d09d349fe085796e30a3ad0d06766ec79456baa4a1563ff81bbf8e0a",
+            "json_pointer": "/partition/7",
+            "path": "runs\\first-live-recovery\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-recovery:A:8",
+          "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+        }
+      },
+      "disagreement_resolution": "Both submissions grouped the four direct butterfly/reunion stories, and I verified their matching discovery and return sequence. They differed on grouping the apple wish with the animal-homing seed, while the first instead flagged the seed versus fairy/star-seed boundary. My provisional groups keep these three plots separate, with both specific uncertainties retained: magical purpose overlaps in one comparison, journey and gift imagery in the other. Their grouping is not forced by transitivity. Both submissions' uncertainty about the temporarily cared-for dog is justified by the text and remains. Other five-sentence counts were checked.",
+      "groups": [
+        [
+          "first-live-recovery:A:2",
+          "first-live-recovery:A:5",
+          "first-live-recovery:A:7",
+          "first-live-recovery:A:1"
+        ],
+        [
+          "first-live-recovery:A:3"
+        ],
+        [
+          "first-live-recovery:A:9"
+        ],
+        [
+          "first-live-recovery:A:10"
+        ],
+        [
+          "first-live-recovery:A:8"
+        ],
+        [
+          "first-live-recovery:A:4"
+        ],
+        [
+          "first-live-recovery:A:6"
+        ]
+      ],
+      "item_id": "a6deca95bec239a475b0124ec6348ff6",
+      "kind": "historical_set",
+      "literal_compliance_uncertain": [
+        "first-live-recovery:A:10"
+      ],
+      "literal_compliance_violations": [],
+      "rationale": "The four butterfly-led animal reunions share the central sequence: dog disappears after a blue butterfly, girl follows paw prints, they find a lost young animal and help return it to family. Species, helper and praise are minor variants of that sequence. Provisionally separate are a golden-apple wish granting animal-homing help; a hidden pond and fox's bell; returning a found dog to a boy; a singing garden giving an animal-homing seed; a fairy moonflower quest yielding a star-blooming seed; and keeping a singing garden secret. Explicit uncertainties preserve the botanical-gift boundaries without forcing transitivity. Literal compliance: All ten have five narrative sentences. Nine clearly concern the girl and her dog; the story of a dog temporarily named and cared for before return to a boy leaves the possessive relationship uncertain. Fantasy and causal gaps are separate.",
+      "source_context": {
+        "candidate_id": "2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525",
+        "execution_scope": "historical bounded legacy adapter; official instruction strings and ordinary metrics previously compared to pinned source, not retroactively a native CLI run",
+        "legacy_judging": {
+          "fallback": "disabled",
+          "ordering_seed": null,
+          "partition_effort": "provider_default",
+          "partition_max_output_tokens": 16000,
+          "partition_repair": "disabled",
+          "quality_effort": "high",
+          "quality_max_output_tokens": 16000
+        },
+        "metric_scope": "Original saved metric values for context only; not rescored or adjudication-corrected.",
+        "prompt_id": "curated-0",
+        "protocol_fingerprint": "ed4ccc570de8a532f9c5dffa59b71cbf2231c64a738d8466512405bffe600af1",
+        "recorded_distinct": 9,
+        "recorded_utility": 7.183934838498671,
+        "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+      },
+      "source_id": "first-live-recovery:A",
+      "status": "uncertain",
+      "uncertain_pairs": [
+        {
+          "left": "first-live-recovery:A:3",
+          "rationale": "Both botanical magical discoveries provide a way for lost animals to find home. An apple granting the girl a wish immediately versus a seed carried from a hidden singing garden and grown into an animal-homing tree changes the journey and mechanism; it remains uncertain whether those are central plot content or minor realizations of the same gift.",
+          "right": "first-live-recovery:A:8"
+        },
+        {
+          "left": "first-live-recovery:A:8",
+          "rationale": "Both enter an oak-root garden and receive a magical seed. The second adds a task for fairies and changes the payoff from helping animals home to nightly star blooms. These support tentative separation, but the shared door/garden/seed image leaves uncertainty about whether the changes exceed minor detail.",
+          "right": "first-live-recovery:A:4"
+        }
+      ]
+    },
+    {
+      "answer_sources": {
+        "095c985e9ec5ea81852328ed8396e803": {
+          "answer_utf8_bytes": 299,
+          "answer_utf8_sha256": "1eea8d37fd127a2f6396013b70a92f6da98c5a426f80d3be12a560417401f988",
+          "control_file": "docs/conformance/meas01-authored-controls.json",
+          "control_file_sha256": "0d97d892be45541ffc39a7a9723fd734b7e3d0a770c284bcbff7741b006fc209",
+          "control_id": "required-subject-different-content",
+          "original_index_0based": 1
+        },
+        "61fb2dc048d5cb6240ce40558598ed64": {
+          "answer_utf8_bytes": 284,
+          "answer_utf8_sha256": "74d427a1bb2b1e6acaab8938215e14b5252465763e6ca43fdfbd679ff00ce458",
+          "control_file": "docs/conformance/meas01-authored-controls.json",
+          "control_file_sha256": "0d97d892be45541ffc39a7a9723fd734b7e3d0a770c284bcbff7741b006fc209",
+          "control_id": "required-subject-different-content",
+          "original_index_0based": 0
+        }
+      },
+      "disagreement_resolution": "Both submissions separated the stories. I checked the dog's helping behavior and resulting team event against the conductor's reservation lookup and souvenir ticket; these add different central content. Both five-sentence counts and subjects comply.",
+      "groups": [
+        [
+          "authored:required-subject-different-content:0"
+        ],
+        [
+          "authored:required-subject-different-content:1"
+        ]
+      ],
+      "item_id": "bdcdc29b741cb601ef9062c05a490aca",
+      "kind": "authored_control",
+      "literal_compliance_uncertain": [],
+      "literal_compliance_violations": [],
+      "rationale": "Distinct: helping a slower puppy loses an obstacle race but inspires a team event, while a mistaken reservation under the dog's name solves a forgotten train-ticket problem and yields a keepsake. The central problem, action and payoff differ. Literal compliance: Every answer has five narrative sentences about a girl and her dog; craft or causal concerns are assessed separately.",
+      "source_context": {},
+      "source_id": "required-subject-different-content",
+      "status": "resolved",
+      "uncertain_pairs": []
+    },
+    {
+      "answer_sources": {
+        "bc3e4c414f9cac035346f7299840f2e4": {
+          "answer_utf8_bytes": 203,
+          "answer_utf8_sha256": "8b37b74d5ed33ccec5ec98702ccac00e663cefca52d0238f8fa6a97203fb51f6",
+          "control_file": "docs/conformance/meas01-authored-controls.json",
+          "control_file_sha256": "0d97d892be45541ffc39a7a9723fd734b7e3d0a770c284bcbff7741b006fc209",
+          "control_id": "exact-repeat",
+          "original_index_0based": 0
+        },
+        "d3f819db3a145e3fc39fd8364a74dc38": {
+          "answer_utf8_bytes": 203,
+          "answer_utf8_sha256": "8b37b74d5ed33ccec5ec98702ccac00e663cefca52d0238f8fa6a97203fb51f6",
+          "control_file": "docs/conformance/meas01-authored-controls.json",
+          "control_file_sha256": "0d97d892be45541ffc39a7a9723fd734b7e3d0a770c284bcbff7741b006fc209",
+          "control_id": "exact-repeat",
+          "original_index_0based": 1
+        }
+      },
+      "disagreement_resolution": "Both submissions grouped the pair. I checked the full texts and confirmed exact equality, not merely a shared topic. Each identical answer has five narrative sentences about Mira and her dog.",
+      "groups": [
+        [
+          "authored:exact-repeat:1",
+          "authored:exact-repeat:0"
+        ]
+      ],
+      "item_id": "8664f647a70dd7df7e1c260b7dc7b511",
+      "kind": "authored_control",
+      "literal_compliance_uncertain": [],
+      "literal_compliance_violations": [],
+      "rationale": "Equivalent: the texts are identical, including stealing the mitten, chasing the dog to the frozen pond, finding a duck in the ice hole and rescuing it with the mitten. Literal compliance: Every answer has five narrative sentences about a girl and her dog; craft or causal concerns are assessed separately.",
+      "source_context": {},
+      "source_id": "exact-repeat",
+      "status": "resolved",
+      "uncertain_pairs": []
+    },
+    {
+      "answer_sources": {
+        "9c6265496583bc234c9d3cf9d6ea2fad": {
+          "answer_source": {
+            "file_sha256": "e40cdf6ad5d6ee28ad99cfc8b2848effe43ca4f4eccdb8928e0393770dca89ad",
+            "json_pointer": "/generations/0",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-recovery\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 400,
+          "answer_utf8_sha256": "58b9958d04b10317093c7e38278b44bd0b471965a50c462aea15c038f57c7830",
+          "candidate_id": "2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525",
+          "original_index_0based": 0,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 0,
+            "file_sha256": "86f53e55d09d349fe085796e30a3ad0d06766ec79456baa4a1563ff81bbf8e0a",
+            "json_pointer": "/partition/0",
+            "path": "runs\\first-live-recovery\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-recovery:A:1",
+          "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+        },
+        "9fce9e3e951d7788c9ffb9435f580170": {
+          "answer_source": {
+            "file_sha256": "583ec243c296c7f34e8a760c465010cd2c981bcb3ebbf74f71aa4483bfae8994",
+            "json_pointer": "/generations/0",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-recovery\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 380,
+          "answer_utf8_sha256": "a484e1a399e4546bc444b56d6ad90b021158787f76138310c2d9e0d50eec53fb",
+          "candidate_id": "68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06",
+          "original_index_0based": 0,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 0,
+            "file_sha256": "c5c144d6217114eaffb7620c111959346fa6f0e54b15d613bb07f176e55e6af7",
+            "json_pointer": "/partition/0",
+            "path": "runs\\first-live-recovery\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-recovery:B:1",
+          "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+        }
+      },
+      "disagreement_resolution": "Both submissions grouped the pair. I checked the unchanged chase, discovery and fawn-return actions and found only minor naming, scenery and closing-emotion variations. Both five-sentence forms comply.",
+      "groups": [
+        [
+          "first-live-recovery:B:1",
+          "first-live-recovery:A:1"
+        ]
+      ],
+      "item_id": "be26bf6f449325ec2e0fcb3f5e75756a",
+      "kind": "historical_comparison",
+      "literal_compliance_uncertain": [],
+      "literal_compliance_violations": [],
+      "rationale": "Equivalent: the dog chases a blue butterfly, the girl follows paw prints, and they guide a lost fawn to its mother. The name change, location phrasing and hug versus tired pride are minor differences around the same plot. Literal compliance: Every answer has five narrative sentences about a girl and her dog; craft or causal concerns are assessed separately.",
+      "source_context": {
+        "case_id": "cross-policy-fawn",
+        "source": "docs/pilot-review-evidence.json#/semantic_cases"
+      },
+      "source_id": "3",
+      "status": "resolved",
+      "uncertain_pairs": []
+    },
+    {
+      "answer_sources": {
+        "226f1598c3caed2eefc194714fb3914b": {
+          "answer_utf8_bytes": 279,
+          "answer_utf8_sha256": "c9174a9874d80486fd62e2b033fb68829bded4b03ea46c7c9c0a3bf78f6798fd",
+          "control_file": "docs/conformance/meas01-authored-controls.json",
+          "control_file_sha256": "0d97d892be45541ffc39a7a9723fd734b7e3d0a770c284bcbff7741b006fc209",
+          "control_id": "central-plot-paraphrase",
+          "original_index_0based": 0
+        },
+        "d171187e870dcf82119cea13d3165e53": {
+          "answer_utf8_bytes": 275,
+          "answer_utf8_sha256": "5af2863afb3856398fcc0f8571da11f121e5911238a7402e16ce2fac021ea4b6",
+          "control_file": "docs/conformance/meas01-authored-controls.json",
+          "control_file_sha256": "0d97d892be45541ffc39a7a9723fd734b7e3d0a770c284bcbff7741b006fc209",
+          "control_id": "central-plot-paraphrase",
+          "original_index_0based": 1
+        }
+      },
+      "disagreement_resolution": "Both submissions grouped these. I checked all five corresponding events, from mail collection through the family meal; the second text restates the first plot. Both literal story forms comply.",
+      "groups": [
+        [
+          "authored:central-plot-paraphrase:0",
+          "authored:central-plot-paraphrase:1"
+        ]
+      ],
+      "item_id": "2da27b0ae8c3039fcff89e5530889fb3",
+      "kind": "authored_control",
+      "literal_compliance_uncertain": [],
+      "literal_compliance_violations": [],
+      "rationale": "Equivalent paraphrases: the mail-fetching dog brings an unaddressed envelope with a garden map, the girl uncovers her grandmother's lost wedding ring and returns it at dinner. No central event or consequence changes. Literal compliance: Every answer has five narrative sentences about a girl and her dog; craft or causal concerns are assessed separately.",
+      "source_context": {},
+      "source_id": "central-plot-paraphrase",
+      "status": "resolved",
+      "uncertain_pairs": []
+    },
+    {
+      "answer_sources": {
+        "58f993adc274019328c7b10464be47f9": {
+          "answer_source": {
+            "file_sha256": "2a832606113ca4bc71b529591d8c2c7519b44af8d253c057a4230f49192caabb",
+            "json_pointer": "/generations/9",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 590,
+          "answer_utf8_sha256": "08746c302a89f525682b17300a34c39cd39dcd0c75e72daf6f184eff5b1d23ea",
+          "candidate_id": "12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da",
+          "original_index_0based": 9,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 9,
+            "file_sha256": "92c0b5e123da834132b7587b61b4c9e457c8fbdcdaea29a68ba569273a5667fa",
+            "json_pointer": "/partition/9",
+            "path": "runs\\first-live-continuation-v2\\candidates\\12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:C:10",
+          "run_id": "a486d90396934a45940637d77a168304"
+        },
+        "db74c37fc59c517eef8568c12eadab4b": {
+          "answer_source": {
+            "file_sha256": "2a832606113ca4bc71b529591d8c2c7519b44af8d253c057a4230f49192caabb",
+            "json_pointer": "/generations/1",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 523,
+          "answer_utf8_sha256": "9f6dc0924012ef3a77decc8191b67b6c413113d407dc8066cf24a2d9981ce4d6",
+          "candidate_id": "12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da",
+          "original_index_0based": 1,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 1,
+            "file_sha256": "92c0b5e123da834132b7587b61b4c9e457c8fbdcdaea29a68ba569273a5667fa",
+            "json_pointer": "/partition/1",
+            "path": "runs\\first-live-continuation-v2\\candidates\\12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:C:2",
+          "run_id": "a486d90396934a45940637d77a168304"
+        }
+      },
+      "disagreement_resolution": "Both submissions separated these. I verified that the memory-flower story depends on a different central recovery mechanism and image from the obstruction-clearing story, rather than treating all restored-water endings as equivalent. Each has five narrative sentences about the girl and her dog.",
+      "groups": [
+        [
+          "first-live-continuation-v2:C:2"
+        ],
+        [
+          "first-live-continuation-v2:C:10"
+        ]
+      ],
+      "item_id": "d4ec43273c6d8f4c59d77fa59427638a",
+      "kind": "historical_comparison",
+      "literal_compliance_uncertain": [],
+      "literal_compliance_violations": [],
+      "rationale": "Distinct: a memory-bearing underground garden and reading a spring's memory while digging restore the well in one story, while removing fallen branches from an underground stream restores the wheel and fountains in the other. A shared goal of village water restoration does not erase the different operative discovery, magical image and intervention. Literal compliance: Every answer has five narrative sentences about a girl and her dog; craft or causal concerns are assessed separately.",
+      "source_context": {
+        "shared_element": "water restoration",
+        "source_case": "continuation-C2-C10"
+      },
+      "source_id": "9",
+      "status": "resolved",
+      "uncertain_pairs": []
+    },
+    {
+      "answer_sources": {
+        "00b2469d9e00d30523bc9c78e7055457": {
+          "answer_source": {
+            "file_sha256": "82f861fc6293c539f96cf5d1559bcb82040f95a8569e297dda385fb2595f9176",
+            "json_pointer": "/generations/8",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 426,
+          "answer_utf8_sha256": "e65390e0ef61cea30d5c9ba33333fde5a7ed9e9c3a41c65cf27e2485770a9575",
+          "candidate_id": "2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525",
+          "original_index_0based": 8,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 5,
+            "file_sha256": "b430e724a5f31dadfc9bf4e0c6297dc31f9b45e069648ecdde530a21b89bbce0",
+            "json_pointer": "/partition/8",
+            "path": "runs\\first-live-continuation-v2\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:A:9",
+          "run_id": "a486d90396934a45940637d77a168304"
+        },
+        "31308b530f0edae1e0266258a1ec10ed": {
+          "answer_source": {
+            "file_sha256": "82f861fc6293c539f96cf5d1559bcb82040f95a8569e297dda385fb2595f9176",
+            "json_pointer": "/generations/7",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 420,
+          "answer_utf8_sha256": "e3a6af264338a2565a4e73d8f5a3ce2253f063e0a5ef49cceb970921f5307fab",
+          "candidate_id": "2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525",
+          "original_index_0based": 7,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 4,
+            "file_sha256": "b430e724a5f31dadfc9bf4e0c6297dc31f9b45e069648ecdde530a21b89bbce0",
+            "json_pointer": "/partition/7",
+            "path": "runs\\first-live-continuation-v2\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:A:8",
+          "run_id": "a486d90396934a45940637d77a168304"
+        },
+        "319b5cec10547073218ba5b29b4bd60d": {
+          "answer_source": {
+            "file_sha256": "82f861fc6293c539f96cf5d1559bcb82040f95a8569e297dda385fb2595f9176",
+            "json_pointer": "/generations/9",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 356,
+          "answer_utf8_sha256": "9ecd202036aea34d2650c0ddb7c909c3e5a03775fecf36f2bf1b1661d3992094",
+          "candidate_id": "2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525",
+          "original_index_0based": 9,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 5,
+            "file_sha256": "b430e724a5f31dadfc9bf4e0c6297dc31f9b45e069648ecdde530a21b89bbce0",
+            "json_pointer": "/partition/9",
+            "path": "runs\\first-live-continuation-v2\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:A:10",
+          "run_id": "a486d90396934a45940637d77a168304"
+        },
+        "55453440696cb95e0b8c5f3ecc3d9acd": {
+          "answer_source": {
+            "file_sha256": "82f861fc6293c539f96cf5d1559bcb82040f95a8569e297dda385fb2595f9176",
+            "json_pointer": "/generations/3",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 378,
+          "answer_utf8_sha256": "59f6d2887acc2dc2c8ce078ac75f5cd6def7464aa81b76bae6afb915d2cc2a86",
+          "candidate_id": "2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525",
+          "original_index_0based": 3,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 3,
+            "file_sha256": "b430e724a5f31dadfc9bf4e0c6297dc31f9b45e069648ecdde530a21b89bbce0",
+            "json_pointer": "/partition/3",
+            "path": "runs\\first-live-continuation-v2\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:A:4",
+          "run_id": "a486d90396934a45940637d77a168304"
+        },
+        "72d7f861e100faff39a2527f0611c210": {
+          "answer_source": {
+            "file_sha256": "82f861fc6293c539f96cf5d1559bcb82040f95a8569e297dda385fb2595f9176",
+            "json_pointer": "/generations/6",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 415,
+          "answer_utf8_sha256": "019a84c0c75719dc786ccade4975eb5e389600804de249a833c49195df374b4b",
+          "candidate_id": "2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525",
+          "original_index_0based": 6,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 4,
+            "file_sha256": "b430e724a5f31dadfc9bf4e0c6297dc31f9b45e069648ecdde530a21b89bbce0",
+            "json_pointer": "/partition/6",
+            "path": "runs\\first-live-continuation-v2\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:A:7",
+          "run_id": "a486d90396934a45940637d77a168304"
+        },
+        "973b43d281f923026b0509a848a489bc": {
+          "answer_source": {
+            "file_sha256": "82f861fc6293c539f96cf5d1559bcb82040f95a8569e297dda385fb2595f9176",
+            "json_pointer": "/generations/5",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 392,
+          "answer_utf8_sha256": "ff28d848e335eab7e9359c5c7e8b918183923acf956e605cde3ac9ebf3f7c1e1",
+          "candidate_id": "2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525",
+          "original_index_0based": 5,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 3,
+            "file_sha256": "b430e724a5f31dadfc9bf4e0c6297dc31f9b45e069648ecdde530a21b89bbce0",
+            "json_pointer": "/partition/5",
+            "path": "runs\\first-live-continuation-v2\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:A:6",
+          "run_id": "a486d90396934a45940637d77a168304"
+        },
+        "c9f81e017f7438834d89aa3e6f46765a": {
+          "answer_source": {
+            "file_sha256": "82f861fc6293c539f96cf5d1559bcb82040f95a8569e297dda385fb2595f9176",
+            "json_pointer": "/generations/2",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 406,
+          "answer_utf8_sha256": "2bd88b729c974daefa1fe419c6db2d8c7fede3c5829f6956fabdd435dcb4d359",
+          "candidate_id": "2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525",
+          "original_index_0based": 2,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 2,
+            "file_sha256": "b430e724a5f31dadfc9bf4e0c6297dc31f9b45e069648ecdde530a21b89bbce0",
+            "json_pointer": "/partition/2",
+            "path": "runs\\first-live-continuation-v2\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:A:3",
+          "run_id": "a486d90396934a45940637d77a168304"
+        },
+        "def98a7dcd76d9c27967b23bddf03bda": {
+          "answer_source": {
+            "file_sha256": "82f861fc6293c539f96cf5d1559bcb82040f95a8569e297dda385fb2595f9176",
+            "json_pointer": "/generations/1",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 394,
+          "answer_utf8_sha256": "d66842114ef9ba0ae3974bd465f8834496d79d6404be7cb5c7a175b03dc47cb5",
+          "candidate_id": "2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525",
+          "original_index_0based": 1,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 1,
+            "file_sha256": "b430e724a5f31dadfc9bf4e0c6297dc31f9b45e069648ecdde530a21b89bbce0",
+            "json_pointer": "/partition/1",
+            "path": "runs\\first-live-continuation-v2\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:A:2",
+          "run_id": "a486d90396934a45940637d77a168304"
+        },
+        "df6f528563e850d67d396c76a6bc75d3": {
+          "answer_source": {
+            "file_sha256": "82f861fc6293c539f96cf5d1559bcb82040f95a8569e297dda385fb2595f9176",
+            "json_pointer": "/generations/4",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 385,
+          "answer_utf8_sha256": "619fee701780d0892a3aedf58a33cf8a6c9c6882298a962ae1e6c77ddb49a5b5",
+          "candidate_id": "2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525",
+          "original_index_0based": 4,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 0,
+            "file_sha256": "b430e724a5f31dadfc9bf4e0c6297dc31f9b45e069648ecdde530a21b89bbce0",
+            "json_pointer": "/partition/4",
+            "path": "runs\\first-live-continuation-v2\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:A:5",
+          "run_id": "a486d90396934a45940637d77a168304"
+        },
+        "f7c5cc2a848f31ecc181f4390da6904d": {
+          "answer_source": {
+            "file_sha256": "82f861fc6293c539f96cf5d1559bcb82040f95a8569e297dda385fb2595f9176",
+            "json_pointer": "/generations/0",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 357,
+          "answer_utf8_sha256": "2d3b42f9578e602a239380bf036d845d05583b36ddc8c11af0d95cdce65870fe",
+          "candidate_id": "2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525",
+          "original_index_0based": 0,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 0,
+            "file_sha256": "b430e724a5f31dadfc9bf4e0c6297dc31f9b45e069648ecdde530a21b89bbce0",
+            "json_pointer": "/partition/0",
+            "path": "runs\\first-live-continuation-v2\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:A:1",
+          "run_id": "a486d90396934a45940637d77a168304"
+        }
+      },
+      "disagreement_resolution": "The first submission grouped the ranger/fox story with the fawn reunions and separated the trapped-fox story; the second paired the fox friendships and kept the fawns separate. After checking the endings, I tentatively favor the fox-friendship pair, since a lasting new companion differs from reunion with an animal's mother, but retain all five nontrivial butterfly-rescue boundary uncertainties rather than infer transitive consensus. Both submissions paired the kitten-adoption stories and paired the child-adoption stories; I checked the shared adoption-to-helper arcs and retain four explicit kitten/child boundary uncertainties because new household friendship versus civic recognition may be central or minor. Both garden stories were checked: the communication-changing collar is more than a flower souvenir. All ten meet the literal five-sentence form.",
+      "groups": [
+        [
+          "first-live-continuation-v2:A:7",
+          "first-live-continuation-v2:A:8"
+        ],
+        [
+          "first-live-continuation-v2:A:9",
+          "first-live-continuation-v2:A:10"
+        ],
+        [
+          "first-live-continuation-v2:A:3"
+        ],
+        [
+          "first-live-continuation-v2:A:5",
+          "first-live-continuation-v2:A:1"
+        ],
+        [
+          "first-live-continuation-v2:A:4",
+          "first-live-continuation-v2:A:6"
+        ],
+        [
+          "first-live-continuation-v2:A:2"
+        ]
+      ],
+      "item_id": "eb0cebeb4449dc16174c85a9a0d878b9",
+      "kind": "historical_set",
+      "literal_compliance_uncertain": [],
+      "literal_compliance_violations": [],
+      "rationale": "Tentatively group the butterfly-led fox rescues that end in a new fox friendship, while separating the close fawn-reunion pair; the exact fox/fawn and rescue/aftermath boundaries remain explicit uncertainties. The adopted-dog stories form a kitten-and-lasting-trio pair and a child-and-public-heroes pair, also with uncertain cross-pair boundaries. The magical collar enabling speech understanding differs centrally from the garden visit yielding a flower keepsake. Names, weather, adoption location and daily routines are minor within the paired adoption stories. Literal compliance: Every answer has five narrative sentences about a girl and her dog; craft or causal concerns are assessed separately.",
+      "source_context": {
+        "candidate_id": "2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525",
+        "execution_scope": "historical bounded legacy adapter; official instruction strings and ordinary metrics previously compared to pinned source, not retroactively a native CLI run",
+        "legacy_judging": {
+          "fallback": "disabled",
+          "ordering_seed": null,
+          "partition_effort": "provider_default",
+          "partition_max_output_tokens": 16000,
+          "partition_repair": "disabled",
+          "quality_effort": "high",
+          "quality_max_output_tokens": 16000
+        },
+        "metric_scope": "Original saved metric values for context only; not rescored or adjudication-corrected.",
+        "prompt_id": "curated-0",
+        "protocol_fingerprint": "402bb54c19910b7b07d3c3ceeac60e94e4a3842cc7f9f9cd22951d11a4f96586",
+        "recorded_distinct": 6,
+        "recorded_utility": 5.304218778625656,
+        "run_id": "a486d90396934a45940637d77a168304"
+      },
+      "source_id": "first-live-continuation-v2:A",
+      "status": "uncertain",
+      "uncertain_pairs": [
+        {
+          "left": "first-live-continuation-v2:A:7",
+          "rationale": "Tentatively equivalent fox-rescue-to-friendship plots after the same butterfly chase and paw-print search. Carrying a lost cub to a ranger versus freeing a thorn-trapped fox that reciprocates by guiding them home could change the central intervention and resolution.",
+          "right": "first-live-continuation-v2:A:8"
+        },
+        {
+          "left": "first-live-continuation-v2:A:7",
+          "rationale": "Provisionally separate because the fox becomes a new friend while the fawn is returned to its mother. The nearly identical butterfly-and-paw-print discovery and animal-help sequence could make species and aftermath minor differences.",
+          "right": "first-live-continuation-v2:A:4"
+        },
+        {
+          "left": "first-live-continuation-v2:A:7",
+          "rationale": "Provisionally separate: ranger-assisted fox discovery ends in friendship, while the fawn goes back to its mother. The shared detailed chase, tracking and help sequence leaves the centrality of the changed outcome uncertain.",
+          "right": "first-live-continuation-v2:A:6"
+        },
+        {
+          "left": "first-live-continuation-v2:A:8",
+          "rationale": "Provisionally separate: freeing a trapped fox leads to reciprocal guidance home and a lasting third friend, while the fawn is guided to its mother. Both nevertheless center on the same butterfly-led discovery and animal rescue, so the changed intervention and aftermath may be read as minor.",
+          "right": "first-live-continuation-v2:A:4"
+        },
+        {
+          "left": "first-live-continuation-v2:A:8",
+          "rationale": "Provisionally separate because the fox guides the rescuers home and remains their friend, while the lost fawn returns to its mother. The close chase-and-tracking rescue sequence creates a remaining central-content boundary.",
+          "right": "first-live-continuation-v2:A:6"
+        },
+        {
+          "left": "first-live-continuation-v2:A:9",
+          "rationale": "Both adopt a small golden dog, establish daily companionship and have it lead the girl to a lost being. A kitten joining their team versus a child discovery earning public praise may be a central resolution change or a minor variation of the adopted-dog-becomes-helper arc.",
+          "right": "first-live-continuation-v2:A:5"
+        },
+        {
+          "left": "first-live-continuation-v2:A:9",
+          "rationale": "Provisionally separate kitten/trio and child/hero endings follow the same adopted-golden-dog-becomes-helper arc. Exploring versus waiting at school is background; it is uncertain whether the different found being and payoff provide enough new central content.",
+          "right": "first-live-continuation-v2:A:1"
+        },
+        {
+          "left": "first-live-continuation-v2:A:10",
+          "rationale": "The adopted dog finds a kitten that joins the household in one story and a lost child followed by civic recognition in the other. Tentatively distinct outcomes, but their common adoption-to-helpfulness arc makes the boundary uncertain.",
+          "right": "first-live-continuation-v2:A:5"
+        },
+        {
+          "left": "first-live-continuation-v2:A:10",
+          "rationale": "Both show adoption, daily school companionship and the dog leading the girl to someone lost. A kitten becoming an inseparable companion versus a child discovery and hero status may change the central resolution or only its details.",
+          "right": "first-live-continuation-v2:A:1"
+        }
+      ]
+    },
+    {
+      "answer_sources": {
+        "07400b060e67495573c0c690256e1515": {
+          "answer_utf8_bytes": 229,
+          "answer_utf8_sha256": "31932577ab765c96edeee0f33c24a8075ed312d42a1eedf4b9f85194e0bb0fbf",
+          "control_file": "docs/conformance/meas01-authored-controls.json",
+          "control_file_sha256": "0d97d892be45541ffc39a7a9723fd734b7e3d0a770c284bcbff7741b006fc209",
+          "control_id": "craft-and-literal-form",
+          "original_index_0based": 1
+        },
+        "ac86a5d7632a449920f1ba6ea5b972dd": {
+          "answer_utf8_bytes": 219,
+          "answer_utf8_sha256": "9a29bdafb29fd85d5f15028aad7c21d6af5b2cb8eaaa06ff9ee349cbb5916e3b",
+          "control_file": "docs/conformance/meas01-authored-controls.json",
+          "control_file_sha256": "0d97d892be45541ffc39a7a9723fd734b7e3d0a770c284bcbff7741b006fc209",
+          "control_id": "craft-and-literal-form",
+          "original_index_0based": 0
+        }
+      },
+      "disagreement_resolution": "Both submissions grouped the pair. I checked the same dog-directed kennel opening, puppy discovery and care sequence, while retaining the first text's empty/occupied contradiction and unclear feeding as craft concerns. Those do not create a new central episode or break the required five-sentence form.",
+      "groups": [
+        [
+          "authored:craft-and-literal-form:0",
+          "authored:craft-and-literal-form:1"
+        ]
+      ],
+      "item_id": "33d067fb4613a2ef2da48df5f8ef1e19",
+      "kind": "authored_control",
+      "literal_compliance_uncertain": [],
+      "literal_compliance_violations": [],
+      "rationale": "Equivalent central plot: the dog waits at a locked kennel, the girl opens it, discovers puppies, and they care for them. Kitchen versus milk-and-bottles and the first version's internal problems change realization or craft, not the main rescue-and-care episode. Literal compliance: Every answer has five narrative sentences about a girl and her dog; craft or causal concerns are assessed separately.",
+      "source_context": {},
+      "source_id": "craft-and-literal-form",
+      "status": "resolved",
+      "uncertain_pairs": []
+    },
+    {
+      "answer_sources": {
+        "1f6ccfb5fcae50a774c4d98e6c87fbc1": {
+          "answer_utf8_bytes": 255,
+          "answer_utf8_sha256": "1ea78c1187f430523b4c9db2e00d1114d8a5fec1fee4d370bd556bfabd1c3e97",
+          "control_file": "docs/conformance/meas01-authored-controls.json",
+          "control_file_sha256": "0d97d892be45541ffc39a7a9723fd734b7e3d0a770c284bcbff7741b006fc209",
+          "control_id": "shared-premise-different-outcome",
+          "original_index_0based": 0
+        },
+        "6e332d69421cb978781b64511da3d3cf": {
+          "answer_utf8_bytes": 309,
+          "answer_utf8_sha256": "66f884f6aae32760c260a75f120d4bea4199bb696bf35a7c32e86bb5f405c821",
+          "control_file": "docs/conformance/meas01-authored-controls.json",
+          "control_file_sha256": "0d97d892be45541ffc39a7a9723fd734b7e3d0a770c284bcbff7741b006fc209",
+          "control_id": "shared-premise-different-outcome",
+          "original_index_0based": 1
+        }
+      },
+      "disagreement_resolution": "Both submissions separated the pair. I checked the explanatory reversal in the gutter story against successful use of the warning in the market story; those are opposing central developments, not paraphrases. Both have five narrative sentences about the girl and her dog.",
+      "groups": [
+        [
+          "authored:shared-premise-different-outcome:1"
+        ],
+        [
+          "authored:shared-premise-different-outcome:0"
+        ]
+      ],
+      "item_id": "e7feb4d99fea5f238cd59e3cdf82aa3b",
+      "kind": "authored_control",
+      "literal_compliance_uncertain": [],
+      "literal_compliance_violations": [],
+      "rationale": "Distinct: one plot overturns the weather-predicting belief by discovering and fixing a noisy gutter; the other uses the dog's warnings to save market goods and earns a reward. Identical opening observations lead to different causal accounts, actions and conclusions. Literal compliance: Every answer has five narrative sentences about a girl and her dog; craft or causal concerns are assessed separately.",
+      "source_context": {},
+      "source_id": "shared-premise-different-outcome",
+      "status": "resolved",
+      "uncertain_pairs": []
+    },
+    {
+      "answer_sources": {
+        "1acc0753ff2baf53eb255ad5ee40e48f": {
+          "answer_source": {
+            "file_sha256": "2a832606113ca4bc71b529591d8c2c7519b44af8d253c057a4230f49192caabb",
+            "json_pointer": "/generations/1",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 523,
+          "answer_utf8_sha256": "9f6dc0924012ef3a77decc8191b67b6c413113d407dc8066cf24a2d9981ce4d6",
+          "candidate_id": "12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da",
+          "original_index_0based": 1,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 1,
+            "file_sha256": "92c0b5e123da834132b7587b61b4c9e457c8fbdcdaea29a68ba569273a5667fa",
+            "json_pointer": "/partition/1",
+            "path": "runs\\first-live-continuation-v2\\candidates\\12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:C:2",
+          "run_id": "a486d90396934a45940637d77a168304"
+        },
+        "57636bd60753cf774252aa29e0ff318a": {
+          "answer_source": {
+            "file_sha256": "2a832606113ca4bc71b529591d8c2c7519b44af8d253c057a4230f49192caabb",
+            "json_pointer": "/generations/7",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 585,
+          "answer_utf8_sha256": "d9c4d341a6a2128132535f41a954d1882d77f23d38299787282f09718a9a529a",
+          "candidate_id": "12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da",
+          "original_index_0based": 7,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 7,
+            "file_sha256": "92c0b5e123da834132b7587b61b4c9e457c8fbdcdaea29a68ba569273a5667fa",
+            "json_pointer": "/partition/7",
+            "path": "runs\\first-live-continuation-v2\\candidates\\12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:C:8",
+          "run_id": "a486d90396934a45940637d77a168304"
+        },
+        "5b5475d4a9dfd4ee49c4d70794125930": {
+          "answer_source": {
+            "file_sha256": "2a832606113ca4bc71b529591d8c2c7519b44af8d253c057a4230f49192caabb",
+            "json_pointer": "/generations/9",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 590,
+          "answer_utf8_sha256": "08746c302a89f525682b17300a34c39cd39dcd0c75e72daf6f184eff5b1d23ea",
+          "candidate_id": "12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da",
+          "original_index_0based": 9,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 9,
+            "file_sha256": "92c0b5e123da834132b7587b61b4c9e457c8fbdcdaea29a68ba569273a5667fa",
+            "json_pointer": "/partition/9",
+            "path": "runs\\first-live-continuation-v2\\candidates\\12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:C:10",
+          "run_id": "a486d90396934a45940637d77a168304"
+        },
+        "83f481fccb15fc4505a4927003c8e470": {
+          "answer_source": {
+            "file_sha256": "2a832606113ca4bc71b529591d8c2c7519b44af8d253c057a4230f49192caabb",
+            "json_pointer": "/generations/5",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 606,
+          "answer_utf8_sha256": "aee02a4e172d6cd86ace94d665fdba27f8614081b7572cab025f9f84b4b7c470",
+          "candidate_id": "12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da",
+          "original_index_0based": 5,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 5,
+            "file_sha256": "92c0b5e123da834132b7587b61b4c9e457c8fbdcdaea29a68ba569273a5667fa",
+            "json_pointer": "/partition/5",
+            "path": "runs\\first-live-continuation-v2\\candidates\\12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:C:6",
+          "run_id": "a486d90396934a45940637d77a168304"
+        },
+        "96854e3a2170213ce2ca21333a1c76fc": {
+          "answer_source": {
+            "file_sha256": "2a832606113ca4bc71b529591d8c2c7519b44af8d253c057a4230f49192caabb",
+            "json_pointer": "/generations/3",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 567,
+          "answer_utf8_sha256": "91a465c89ea4a5cb281a9305a526344c4782b158a8d57e8dd6db0f40a8ae70e7",
+          "candidate_id": "12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da",
+          "original_index_0based": 3,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 3,
+            "file_sha256": "92c0b5e123da834132b7587b61b4c9e457c8fbdcdaea29a68ba569273a5667fa",
+            "json_pointer": "/partition/3",
+            "path": "runs\\first-live-continuation-v2\\candidates\\12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:C:4",
+          "run_id": "a486d90396934a45940637d77a168304"
+        },
+        "ab318b66b8aa87ba0e5d156dd2bd0c8d": {
+          "answer_source": {
+            "file_sha256": "2a832606113ca4bc71b529591d8c2c7519b44af8d253c057a4230f49192caabb",
+            "json_pointer": "/generations/6",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 624,
+          "answer_utf8_sha256": "3b6861a84de9eb76d9a80945ee851783b5e06cfe57a4c480bd9fb96d669d0c22",
+          "candidate_id": "12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da",
+          "original_index_0based": 6,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 6,
+            "file_sha256": "92c0b5e123da834132b7587b61b4c9e457c8fbdcdaea29a68ba569273a5667fa",
+            "json_pointer": "/partition/6",
+            "path": "runs\\first-live-continuation-v2\\candidates\\12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:C:7",
+          "run_id": "a486d90396934a45940637d77a168304"
+        },
+        "b15355a01f8750efe1a507d7c7e7e1bd": {
+          "answer_source": {
+            "file_sha256": "2a832606113ca4bc71b529591d8c2c7519b44af8d253c057a4230f49192caabb",
+            "json_pointer": "/generations/4",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 632,
+          "answer_utf8_sha256": "dcec3284cbfe8ca9d9b729bc6b262f7e8af79d41fa4351d434aabd18b2bcf124",
+          "candidate_id": "12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da",
+          "original_index_0based": 4,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 4,
+            "file_sha256": "92c0b5e123da834132b7587b61b4c9e457c8fbdcdaea29a68ba569273a5667fa",
+            "json_pointer": "/partition/4",
+            "path": "runs\\first-live-continuation-v2\\candidates\\12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:C:5",
+          "run_id": "a486d90396934a45940637d77a168304"
+        },
+        "ca3d62f5635769800f84f24b2c8ff9f4": {
+          "answer_source": {
+            "file_sha256": "2a832606113ca4bc71b529591d8c2c7519b44af8d253c057a4230f49192caabb",
+            "json_pointer": "/generations/8",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 624,
+          "answer_utf8_sha256": "5ded396f95713ec49ca50e7929ae06f59c67f619a17eeb9ad760ecc58a7e73e6",
+          "candidate_id": "12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da",
+          "original_index_0based": 8,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 8,
+            "file_sha256": "92c0b5e123da834132b7587b61b4c9e457c8fbdcdaea29a68ba569273a5667fa",
+            "json_pointer": "/partition/8",
+            "path": "runs\\first-live-continuation-v2\\candidates\\12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:C:9",
+          "run_id": "a486d90396934a45940637d77a168304"
+        },
+        "e851845fe9bdf961aa66acf81df5f636": {
+          "answer_source": {
+            "file_sha256": "2a832606113ca4bc71b529591d8c2c7519b44af8d253c057a4230f49192caabb",
+            "json_pointer": "/generations/0",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 634,
+          "answer_utf8_sha256": "6383e8b9f2163e3bc53012a193e0627beca404b6a82a7337c80d134260e532df",
+          "candidate_id": "12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da",
+          "original_index_0based": 0,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 0,
+            "file_sha256": "92c0b5e123da834132b7587b61b4c9e457c8fbdcdaea29a68ba569273a5667fa",
+            "json_pointer": "/partition/0",
+            "path": "runs\\first-live-continuation-v2\\candidates\\12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:C:1",
+          "run_id": "a486d90396934a45940637d77a168304"
+        },
+        "f848374daa06073a569e6dd3b107d6c7": {
+          "answer_source": {
+            "file_sha256": "2a832606113ca4bc71b529591d8c2c7519b44af8d253c057a4230f49192caabb",
+            "json_pointer": "/generations/2",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 726,
+          "answer_utf8_sha256": "4c1141b50407ce0c4f8b7eeb19369e6e9db6f968b9a7671c9ddbfa8bf8c33831",
+          "candidate_id": "12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da",
+          "original_index_0based": 2,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 2,
+            "file_sha256": "92c0b5e123da834132b7587b61b4c9e457c8fbdcdaea29a68ba569273a5667fa",
+            "json_pointer": "/partition/2",
+            "path": "runs\\first-live-continuation-v2\\candidates\\12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:C:3",
+          "run_id": "a486d90396934a45940637d77a168304"
+        }
+      },
+      "disagreement_resolution": "Both submissions proposed the same nine groups; I checked all central episodes independently. The shared branch/spring-obstruction action supports the tentative water pair, and both reviewers' windmill/water uncertainties are retained. The second also flagged the mirror versus memory-room signaling pair. I resolve those as distinct here: a storm destroys written notes and the dog supplies its own remembered pattern for mirror signaling in one; the other requires entry to an external magical archive to retrieve a keeper's signal during an outage. The central obstacle, recovery action and image differ, not just wording. The memory-flower water story and greenhouse-festival story also add different central mechanisms or goals. All ten have five sentences; the clock/key and pump gaps remain craft concerns.",
+      "groups": [
+        [
+          "first-live-continuation-v2:C:6"
+        ],
+        [
+          "first-live-continuation-v2:C:4"
+        ],
+        [
+          "first-live-continuation-v2:C:10",
+          "first-live-continuation-v2:C:7"
+        ],
+        [
+          "first-live-continuation-v2:C:5"
+        ],
+        [
+          "first-live-continuation-v2:C:1"
+        ],
+        [
+          "first-live-continuation-v2:C:8"
+        ],
+        [
+          "first-live-continuation-v2:C:2"
+        ],
+        [
+          "first-live-continuation-v2:C:9"
+        ],
+        [
+          "first-live-continuation-v2:C:3"
+        ]
+      ],
+      "item_id": "80262d25cd742e1fdfec68a8c9c7017a",
+      "kind": "historical_set",
+      "literal_compliance_uncertain": [],
+      "literal_compliance_violations": [],
+      "rationale": "Tentatively equivalent stream/well stories use dog-assisted discovery of a hidden water route, joint blockage removal and restored village water, with uncertainty about the bell/salty-well framing. Separate central episodes involve a signal mirror and the dog's remembered pattern; a magical room of stored lighthouse memories; a brother rescued using revealed stepping stones; compass-led recovery of a foghorn crystal; a spring-powered windmill repair; reading a memory flower to restore a spring; a clock key recovered from a goat; and greenhouse flowers grown to revive a festival. The windmill versus blockage-clearing boundaries remain explicitly uncertain; shared infrastructure or maritime rescue themes alone are insufficient. Literal compliance: Every answer has five narrative sentences about a girl and her dog; craft or causal concerns are assessed separately.",
+      "source_context": {
+        "candidate_id": "12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da",
+        "execution_scope": "historical bounded legacy adapter; official instruction strings and ordinary metrics previously compared to pinned source, not retroactively a native CLI run",
+        "legacy_judging": {
+          "fallback": "disabled",
+          "ordering_seed": null,
+          "partition_effort": "provider_default",
+          "partition_max_output_tokens": 16000,
+          "partition_repair": "disabled",
+          "quality_effort": "high",
+          "quality_max_output_tokens": 16000
+        },
+        "metric_scope": "Original saved metric values for context only; not rescored or adjudication-corrected.",
+        "prompt_id": "curated-0",
+        "protocol_fingerprint": "84e51699d2490e78d178c53c40edaf8815a8d7abc9ab8810931804a006841c58",
+        "recorded_distinct": 10,
+        "recorded_utility": 8.252794839170917,
+        "run_id": "a486d90396934a45940637d77a168304"
+      },
+      "source_id": "first-live-continuation-v2:C",
+      "status": "uncertain",
+      "uncertain_pairs": [
+        {
+          "left": "first-live-continuation-v2:C:10",
+          "rationale": "Tentatively equivalent because both uncover and jointly unblock a hidden source of village water. The lighthouse bell and salty-well mystery could be central new premise or imagery rather than minor framing around the same blockage-clearing plot.",
+          "right": "first-live-continuation-v2:C:7"
+        },
+        {
+          "left": "first-live-continuation-v2:C:10",
+          "rationale": "Provisionally separate: removing branches from an existing stream restarts a wheel, whereas redirecting a newly discovered spring loosens and drives windmill pumping machinery. Both restore village water and machinery through a hidden-water discovery, so it remains uncertain whether the repair mechanism changes central content.",
+          "right": "first-live-continuation-v2:C:8"
+        },
+        {
+          "left": "first-live-continuation-v2:C:8",
+          "rationale": "Provisionally separate: using spring water to restore and power a pump differs from unblocking the spring that supplies a salty well. Both discover hidden water and restore village supply, leaving the centrality of the changed intervention uncertain.",
+          "right": "first-live-continuation-v2:C:7"
+        }
+      ]
+    },
+    {
+      "answer_sources": {
+        "216b6020c9f578762aabb8a82cc7858a": {
+          "answer_source": {
+            "file_sha256": "82f861fc6293c539f96cf5d1559bcb82040f95a8569e297dda385fb2595f9176",
+            "json_pointer": "/generations/1",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 394,
+          "answer_utf8_sha256": "d66842114ef9ba0ae3974bd465f8834496d79d6404be7cb5c7a175b03dc47cb5",
+          "candidate_id": "2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525",
+          "original_index_0based": 1,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 1,
+            "file_sha256": "b430e724a5f31dadfc9bf4e0c6297dc31f9b45e069648ecdde530a21b89bbce0",
+            "json_pointer": "/partition/1",
+            "path": "runs\\first-live-continuation-v2\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:A:2",
+          "run_id": "a486d90396934a45940637d77a168304"
+        },
+        "646b082f13a763daa9684761eadb283d": {
+          "answer_source": {
+            "file_sha256": "82f861fc6293c539f96cf5d1559bcb82040f95a8569e297dda385fb2595f9176",
+            "json_pointer": "/generations/2",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 406,
+          "answer_utf8_sha256": "2bd88b729c974daefa1fe419c6db2d8c7fede3c5829f6956fabdd435dcb4d359",
+          "candidate_id": "2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525",
+          "original_index_0based": 2,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 2,
+            "file_sha256": "b430e724a5f31dadfc9bf4e0c6297dc31f9b45e069648ecdde530a21b89bbce0",
+            "json_pointer": "/partition/2",
+            "path": "runs\\first-live-continuation-v2\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:A:3",
+          "run_id": "a486d90396934a45940637d77a168304"
+        }
+      },
+      "disagreement_resolution": "Both submissions separated the pair. I checked the actual gift and its consequence rather than letting shared garden imagery decide: a souvenir and a new communication ability are different central payoffs. Both five-sentence story forms comply.",
+      "groups": [
+        [
+          "first-live-continuation-v2:A:2"
+        ],
+        [
+          "first-live-continuation-v2:A:3"
+        ]
+      ],
+      "item_id": "a58d409d4c57a0355ae8c255154c9c6b",
+      "kind": "historical_comparison",
+      "literal_compliance_uncertain": [],
+      "literal_compliance_violations": [],
+      "rationale": "Distinct: a garden visit ends with a silver-flower souvenir in one story; in the other, the garden grants the dog a collar that enables understanding the girl's words. A lasting communication change supplies new central content beyond the shared tiny door and luminous garden. Literal compliance: Every answer has five narrative sentences about a girl and her dog; craft or causal concerns are assessed separately.",
+      "source_context": {
+        "case_id": "L-M4-oak",
+        "source": "runs/reviews/rec04l-content-review.md"
+      },
+      "source_id": "5",
+      "status": "resolved",
+      "uncertain_pairs": []
+    },
+    {
+      "answer_sources": {
+        "478e7be78120f0912f270c05e9d8fc36": {
+          "answer_source": {
+            "file_sha256": "2a832606113ca4bc71b529591d8c2c7519b44af8d253c057a4230f49192caabb",
+            "json_pointer": "/generations/6",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 624,
+          "answer_utf8_sha256": "3b6861a84de9eb76d9a80945ee851783b5e06cfe57a4c480bd9fb96d669d0c22",
+          "candidate_id": "12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da",
+          "original_index_0based": 6,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 6,
+            "file_sha256": "92c0b5e123da834132b7587b61b4c9e457c8fbdcdaea29a68ba569273a5667fa",
+            "json_pointer": "/partition/6",
+            "path": "runs\\first-live-continuation-v2\\candidates\\12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:C:7",
+          "run_id": "a486d90396934a45940637d77a168304"
+        },
+        "eecc49d79aad0fc118a55928305df255": {
+          "answer_source": {
+            "file_sha256": "2a832606113ca4bc71b529591d8c2c7519b44af8d253c057a4230f49192caabb",
+            "json_pointer": "/generations/0",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 634,
+          "answer_utf8_sha256": "6383e8b9f2163e3bc53012a193e0627beca404b6a82a7337c80d134260e532df",
+          "candidate_id": "12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da",
+          "original_index_0based": 0,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 0,
+            "file_sha256": "92c0b5e123da834132b7587b61b4c9e457c8fbdcdaea29a68ba569273a5667fa",
+            "json_pointer": "/partition/0",
+            "path": "runs\\first-live-continuation-v2\\candidates\\12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:C:1",
+          "run_id": "a486d90396934a45940637d77a168304"
+        }
+      },
+      "disagreement_resolution": "Both submissions separated these stories. I checked the missing-part repair and maritime danger against the blockage-removal and water-supply goal; lighthouse scenery does not make them equivalent. Both five-sentence forms comply.",
+      "groups": [
+        [
+          "first-live-continuation-v2:C:1"
+        ],
+        [
+          "first-live-continuation-v2:C:7"
+        ]
+      ],
+      "item_id": "c68c830af8c997b24e3a9b67c7f345f4",
+      "kind": "historical_comparison",
+      "literal_compliance_uncertain": [],
+      "literal_compliance_violations": [],
+      "rationale": "Distinct: compass-led crystal recovery repairs a foghorn and averts danger to boats; pipe-following and clearing a spring restore fresh drinking water. A lighthouse, hidden route and helpful dog are shared, but the central problem, intervention and outcome differ. Literal compliance: Every answer has five narrative sentences about a girl and her dog; craft or causal concerns are assessed separately.",
+      "source_context": {
+        "shared_element": "required girl/dog and lighthouse",
+        "source_case": "continuation-C1-C7"
+      },
+      "source_id": "7",
+      "status": "resolved",
+      "uncertain_pairs": []
+    },
+    {
+      "answer_sources": {
+        "52b70b147e7bd11fe5373988141cbc15": {
+          "answer_utf8_bytes": 0,
+          "answer_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "control_file": "docs/conformance/meas01-authored-controls.json",
+          "control_file_sha256": "0d97d892be45541ffc39a7a9723fd734b7e3d0a770c284bcbff7741b006fc209",
+          "control_id": "strict-single-digit",
+          "original_index_0based": 3
+        },
+        "59c458b071ef37f0c3fd08d14d6b6d8f": {
+          "answer_utf8_bytes": 43,
+          "answer_utf8_sha256": "988c6e4de133ea9db33fe9b3bb868976c7b3049abd12ea35ea16e4514edf19dc",
+          "control_file": "docs/conformance/meas01-authored-controls.json",
+          "control_file_sha256": "0d97d892be45541ffc39a7a9723fd734b7e3d0a770c284bcbff7741b006fc209",
+          "control_id": "strict-single-digit",
+          "original_index_0based": 2
+        },
+        "5baf0f6ed779e18cf33dda69bc6367ca": {
+          "answer_utf8_bytes": 1,
+          "answer_utf8_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+          "control_file": "docs/conformance/meas01-authored-controls.json",
+          "control_file_sha256": "0d97d892be45541ffc39a7a9723fd734b7e3d0a770c284bcbff7741b006fc209",
+          "control_id": "strict-single-digit",
+          "original_index_0based": 1
+        },
+        "71c7a847a58b93d2de23bcc07c4563c6": {
+          "answer_utf8_bytes": 1,
+          "answer_utf8_sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+          "control_file": "docs/conformance/meas01-authored-controls.json",
+          "control_file_sha256": "0d97d892be45541ffc39a7a9723fd734b7e3d0a770c284bcbff7741b006fc209",
+          "control_id": "strict-single-digit",
+          "original_index_0based": 0
+        }
+      },
+      "disagreement_resolution": "Both submissions gave the same groups and compliance labels. I checked the blank text as presented, the two opposing selections and the explanation's explicit choice of 0. Neither adding an explanation nor failing the required form changes that central choice, and the blank answer is not assigned an intended digit.",
+      "groups": [
+        [
+          "authored:strict-single-digit:1"
+        ],
+        [
+          "authored:strict-single-digit:3"
+        ],
+        [
+          "authored:strict-single-digit:0",
+          "authored:strict-single-digit:2"
+        ]
+      ],
+      "item_id": "8ea2c26319ada4d4865fcd7cd05b661d",
+      "kind": "authored_control",
+      "literal_compliance_uncertain": [],
+      "literal_compliance_violations": [
+        "authored:strict-single-digit:3",
+        "authored:strict-single-digit:2"
+      ],
+      "rationale": "The selections 1 and 0 have different central answers. The empty answer supplies no choice and is kept separate without inference. The extended answer still centrally selects 0; the doorway comparison is a minor reason attached to that choice, while violating the exact output requirement. Literal compliance: The single digits 1 and 0 comply. The blank response and the explanatory sentence violate the exact one-digit form.",
+      "source_context": {},
+      "source_id": "strict-single-digit",
+      "status": "resolved",
+      "uncertain_pairs": []
+    },
+    {
+      "answer_sources": {
+        "1eda249504c6a4412c0308ed99fc7ce1": {
+          "answer_source": {
+            "file_sha256": "3a4231dbaf886282e5b2641813e8601b19347de308ab74203f90d65cfeab6f50",
+            "json_pointer": "/generations/7",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-recovery\\candidates\\34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 527,
+          "answer_utf8_sha256": "6ff1b2c4b79bf0a8949cef96a5bef443184814530d65e8897bc67d96d0cfa2a9",
+          "candidate_id": "34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b",
+          "original_index_0based": 7,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 7,
+            "file_sha256": "7aa275c3ef38f7480d505269b37a600a30427e732b4c2f927c9604ffd946c686",
+            "json_pointer": "/partition/7",
+            "path": "runs\\first-live-recovery\\candidates\\34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-recovery:C:8",
+          "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+        },
+        "6fab571ac6d066fc056a1f04f8cea742": {
+          "answer_source": {
+            "file_sha256": "3a4231dbaf886282e5b2641813e8601b19347de308ab74203f90d65cfeab6f50",
+            "json_pointer": "/generations/5",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-recovery\\candidates\\34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 506,
+          "answer_utf8_sha256": "4cbdb7f1381e4e1ded738348c6c2f41699cccc2fbce4168e0c7eea087c5d580a",
+          "candidate_id": "34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b",
+          "original_index_0based": 5,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 5,
+            "file_sha256": "7aa275c3ef38f7480d505269b37a600a30427e732b4c2f927c9604ffd946c686",
+            "json_pointer": "/partition/5",
+            "path": "runs\\first-live-recovery\\candidates\\34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-recovery:C:6",
+          "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+        }
+      },
+      "disagreement_resolution": "Both submissions separated these. I checked the rescue mechanism and immediate fawn release against the extended planting and flower-sharing outcome. The common opening talent does not supply equivalent central content. Both have five narrative sentences.",
+      "groups": [
+        [
+          "first-live-recovery:C:6"
+        ],
+        [
+          "first-live-recovery:C:8"
+        ]
+      ],
+      "item_id": "bba87d6fd854389765a0303dce90450e",
+      "kind": "historical_comparison",
+      "literal_compliance_uncertain": [],
+      "literal_compliance_violations": [],
+      "rationale": "Distinct: opening a gate to free a fawn at a tunnel is the central event in one story; discovering seed packets, growing unusual flowers and sharing them with the library is the other's central development. The rain-smelling talent and dog leading the girl somewhere are shared setup, not the same plot. Literal compliance: Every answer has five narrative sentences about a girl and her dog; craft or causal concerns are assessed separately.",
+      "source_context": {
+        "case_id": "rain-premise-distinct-outcomes",
+        "source": "docs/pilot-review-evidence.json#/semantic_cases"
+      },
+      "source_id": "2",
+      "status": "resolved",
+      "uncertain_pairs": []
+    },
+    {
+      "answer_sources": {
+        "949759694a7f653398bcfe31505757f7": {
+          "answer_source": {
+            "file_sha256": "910b20fc0afc3165a512f9da2e8d2657e19581202ad35ebd47a3ef34ebcb3f8d",
+            "json_pointer": "/generations/1",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 466,
+          "answer_utf8_sha256": "981adf504d4bab2ac288e70b0916bf39813f074fe55bd1fe34d122f847bd0338",
+          "candidate_id": "68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06",
+          "original_index_0based": 1,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 1,
+            "file_sha256": "34a0439beef0a3fb916846ac5f561a6e3f49f83fc658a778db873203f91e433b",
+            "json_pointer": "/partition/1",
+            "path": "runs\\first-live-continuation-v2\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:B:2",
+          "run_id": "a486d90396934a45940637d77a168304"
+        },
+        "c7853941b71b358a5c05600e60a796c9": {
+          "answer_source": {
+            "file_sha256": "910b20fc0afc3165a512f9da2e8d2657e19581202ad35ebd47a3ef34ebcb3f8d",
+            "json_pointer": "/generations/7",
+            "jsonl_line_1based": 1,
+            "path": "runs\\first-live-continuation-v2\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\generations.jsonl"
+          },
+          "answer_utf8_bytes": 380,
+          "answer_utf8_sha256": "eaf6c8f7e56b28531efb1234f6c7e13a0a675bcaadee18d697756d45d0a0fc5d",
+          "candidate_id": "68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06",
+          "original_index_0based": 7,
+          "prompt_id": "curated-0",
+          "recorded_partition": {
+            "class_id": 7,
+            "file_sha256": "34a0439beef0a3fb916846ac5f561a6e3f49f83fc658a778db873203f91e433b",
+            "json_pointer": "/partition/7",
+            "path": "runs\\first-live-continuation-v2\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\v1.1\\partitions.jsonl"
+          },
+          "reference_id": "first-live-continuation-v2:B:8",
+          "run_id": "a486d90396934a45940637d77a168304"
+        }
+      },
+      "disagreement_resolution": "Both submissions separated the pair. I checked the blackout, waiting and fort celebration against retrieving and delivering the cookies; these are different episodes. Both five-sentence forms comply.",
+      "groups": [
+        [
+          "first-live-continuation-v2:B:2"
+        ],
+        [
+          "first-live-continuation-v2:B:8"
+        ]
+      ],
+      "item_id": "8433af3c1b37d8fd660566988aabf71e",
+      "kind": "historical_comparison",
+      "literal_compliance_uncertain": [],
+      "literal_compliance_violations": [],
+      "rationale": "Distinct: a power outage interrupts blanket-fort play and leads to a shared wait before enlarging the fort; scattered cookies interrupt a delivery and are recovered for a neighbor. The central problem and action sequence differ despite the common friendly girl-and-dog tone. Literal compliance: Every answer has five narrative sentences about a girl and her dog; craft or causal concerns are assessed separately.",
+      "source_context": {
+        "shared_element": "required girl/dog",
+        "source_case": "continuation-B2-B8"
+      },
+      "source_id": "6",
+      "status": "resolved",
+      "uncertain_pairs": []
+    }
+  ],
+  "coverage": {
+    "answer_appearances": 96,
+    "authored_cards": 7,
+    "focused_cards": 9,
+    "historical_sets": 6,
+    "historical_unique_answers": 60,
+    "items": 22,
+    "resolved_historical_full_sets": 2,
+    "resolved_items": 17,
+    "two_review_tentative_partitions_equal_items": 20,
+    "uncertain_items": 5,
+    "uncertain_pair_appearances": 16,
+    "unique_source_uncertain_pairs": 15
+  },
+  "format": "buddha.meas01-adjudication-independent-review.v1",
+  "frozen_source_sha256": {
+    "docs/conformance/meas01-authored-controls.json": "0d97d892be45541ffc39a7a9723fd734b7e3d0a770c284bcbff7741b006fc209",
+    "docs/conformance/meas01-pack.py": "6328f94c4280c29992cbdd87c205e45950406c00f6af636d4392fb7a6777e4fc",
+    "docs/conformance/meas01-study/manifest.json": "fe46424035d586a514f71a0f1e832e86e50320d7732852fb92a539e772f0372b",
+    "docs/conformance/nb01-preservation.json": "29a0f3e272e6bd19b8b94c3a090c38b3403a95ef71a124b847cab3d8e90f46d4",
+    "docs/conformance/rec05b-pilot-verification-input.json": "5ae91c22fed21b60f2fae94d651c4f6034f5b1f342ba8122b5135d5510b249d5",
+    "docs/conformance/rec05c-code-preservation.json": "f6d89868c5a45c3bef2d91f7d5a7d0c7bac81dd7c69f8f7158dcc35a623af331",
+    "runs/meas01-review-pack-schema-v2/complete.json": "0139d594b9032b4069cc7cb05b396d22f86679ceb2c7e9d3c11ec525d4b70a1d",
+    "runs/meas01-review-pack-schema-v2/private/coverage.json": "2ae628c4e7761968964364c11e785c3a677024b5d0177e97e1317a23bc7b0939",
+    "runs/meas01-review-pack-schema-v2/private/provenance.json": "9cfea7b8f78abaf822753a19f8fcc496d4c6de34c0d1784ef6a31c184982c35f",
+    "runs/meas01-review-pack-schema-v2/reviewer/pack.json": "8a29cded45e11f62eaecba52e5d9c30a88e2733b28cc8138aa2fdb38d025bf15",
+    "runs/reviews/meas01-frozen-adjudicated-response.json": "1c9607bbea5917ceb69f17a80b31b8c5c589342d05711923ca7e8c3889fd6483",
+    "runs/reviews/meas01-frozen-adjudication.json": "90f27482740ed16a14992d0691ce657b64071f03b2dcbf5be6d837658b85aadf",
+    "runs/reviews/meas01-frozen-r1-schema-v2.json": "62ffe48b752fa73a05cad5b8841a306ef439f62baa5e6fa37d025789838d74f9",
+    "runs/reviews/meas01-frozen-r1.json": "1040b617a53a558bba529df933cab26634ad283901823b3db45c84041e3ed2d4",
+    "runs/reviews/meas01-frozen-r2-schema-v2.json": "fb33d2f73e30888e6ead75ca0385c38eab4c6498ec32e281e7894480273501a3",
+    "runs/reviews/meas01-frozen-r2.json": "591dbbcc2aef2e1649e6f758113e8fd597c9f5eaa1830fe42869a3e1b253ca9c",
+    "runs/reviews/meas01-frozen-reviews.json": "f1076f47668a92bd7cac3242ccc8c4ed5c8a978b408be6dc2b1d3c79986cfaec",
+    "runs/reviews/meas01-pack-pre-schema-guide.py": "b11f90867111b5063bfd120594c370e8ada238696782309ad3bdd13c0fd34d8d",
+    "runs/reviews/meas01-source-inventory.json": "a5a429d22adade574639c315dc36f908834d6f87b215aa878db70381d75bf0ef",
+    "tests/fixtures/meas01-expectations.json": "9211231da884cdce93a9a9b0c486d7f582646a113623f0ba784177808c6571d8",
+    "tests/test_meas01_adjudication.py": "8f8e34be108e521f47a5e101e42ee0c16624f0b7fc2338e48e7201b30c54d439",
+    "tests/test_meas01_pack.py": "aa2403eee11b0a47cb00e20c817b966f2790ff7a584d61a0a23338f10498ed6f"
+  },
+  "guards": {
+    "SQLite_opens": 0,
+    "engineering_validator_compiled_before_guard": "runs/reviews/meas01-pack-pre-schema-guide.py",
+    "forbidden_operations_observed": [],
+    "keys_read": 0,
+    "network_and_provider_calls": 0,
+    "official_or_seed_code_executed": false,
+    "roundtrip_file_reads_only_six_selected_generation_files": true,
+    "validator_calls_memory_only": true
+  },
+  "limits": [
+    "These are frozen delegated model judgments, not human ratings, semantic truth or population judge-accuracy evidence; exact inherited model identifiers are unavailable.",
+    "Blinding was an instructional restriction with self-reported access in fresh delegated sessions, not OS confinement. It does not establish independent training, architecture or absence of common model bias. Agreement on tentative partitions is descriptive only.",
+    "No official scores are revised. Focused cross-policy comparisons cannot be used as official within-set rescoring; repeated/inherited answer appearances are not independent observations.",
+    "All resolved full-item groups may be selected explicitly as development regression expectations; no automatic pair expansion, transitive closure, majority vote or author-intent gold is inferred. All five uncertain items remain outside resolved expectations.",
+    "This audit exercises the actual frozen adjudicated_expectations implementation and 12 malformed-input rejections under read-only guards, independently of the parent's test suite; it does not claim to rerun that full suite.",
+    "MEAS-01's bounded model-development review has complete review/adjudication and tested selected-fixture extraction evidence. DESIGN's independent instrument/human sample and useful-diversity/generalization claims remain open; MEAS-02 must audit the unchanged official judge separately.",
+    "The audit itself makes zero additional model/provider calls. Prior native delegated reviews used platform model computation; exact platform costs and inherited model identifiers are unavailable and not claimed universally free.",
+    "Read-only guards cover Python entry points listed in this engineering probe; they are a bounded dynamic check, not an OS sandbox or proof of arbitrary code safety."
+  ],
+  "live_and_frozen_byte_matches": [
+    {
+      "path": "runs/reviews/meas01-blind-r1-response.json",
+      "sha256": "1040b617a53a558bba529df933cab26634ad283901823b3db45c84041e3ed2d4"
+    },
+    {
+      "path": "runs/reviews/meas01-blind-r1-response-schema-v2.json",
+      "sha256": "62ffe48b752fa73a05cad5b8841a306ef439f62baa5e6fa37d025789838d74f9"
+    },
+    {
+      "path": "runs/reviews/meas01-blind-r2-response.json",
+      "sha256": "591dbbcc2aef2e1649e6f758113e8fd597c9f5eaa1830fe42869a3e1b253ca9c"
+    },
+    {
+      "path": "runs/reviews/meas01-blind-r2-response-schema-v2.json",
+      "sha256": "fb33d2f73e30888e6ead75ca0385c38eab4c6498ec32e281e7894480273501a3"
+    },
+    {
+      "path": "runs/reviews/meas01-blind-adjudicated-response.json",
+      "sha256": "1c9607bbea5917ceb69f17a80b31b8c5c589342d05711923ca7e8c3889fd6483"
+    },
+    {
+      "path": "runs/reviews/meas01-blind-adjudication.json",
+      "sha256": "90f27482740ed16a14992d0691ce657b64071f03b2dcbf5be6d837658b85aadf"
+    }
+  ],
+  "named_findings": {
+    "L_M1_blocked_water": {
+      "adjudicator_status": "uncertain",
+      "displayed_grouping": "tentatively_equivalent",
+      "excluded_from_resolved_expectations": true,
+      "item_id": "92bbea60cc82d82c3f0727116decc86b"
+    },
+    "five_shared_subject_controls": {
+      "adjudicator_label": "distinct",
+      "adjudicator_status": "resolved",
+      "item_ids": [
+        "bba87d6fd854389765a0303dce90450e",
+        "8433af3c1b37d8fd660566988aabf71e",
+        "c68c830af8c997b24e3a9b67c7f345f4",
+        "2e4ad7b4d67bbacdd1a7f9bf6144aa48",
+        "d4ec43273c6d8f4c59d77fa59427638a"
+      ]
+    },
+    "lost_sounds_bridge": {
+      "adjudicator_label": "distinct",
+      "adjudicator_status": "resolved",
+      "earlier_concern_not_forced_as_expectation": true,
+      "item_id": "1c6b4f8f841d8095f3e49f35ba7f9d9c"
+    },
+    "strict_controls": [
+      {
+        "answer_sources": {
+          "5a555875dc883ac26a3e5190c56feafe": {
+            "answer_utf8_bytes": 2,
+            "answer_utf8_sha256": "23794d91c53ae875c8e247d72561e35d9d06ee07c70c9e0dbcc977a6d161504a",
+            "control_file": "docs/conformance/meas01-authored-controls.json",
+            "control_file_sha256": "0d97d892be45541ffc39a7a9723fd734b7e3d0a770c284bcbff7741b006fc209",
+            "control_id": "closed-answer-content-and-form",
+            "original_index_0based": 0
+          },
+          "83f7be99bfb825e4c4db9743e109f1d5": {
+            "answer_utf8_bytes": 24,
+            "answer_utf8_sha256": "082ff7fd114170fa1afd5c52fa50d6fb0fd6c38ade91c500a99494046eea4ce4",
+            "control_file": "docs/conformance/meas01-authored-controls.json",
+            "control_file_sha256": "0d97d892be45541ffc39a7a9723fd734b7e3d0a770c284bcbff7741b006fc209",
+            "control_id": "closed-answer-content-and-form",
+            "original_index_0based": 3
+          },
+          "9673b5a72b6ff43f18e5fb29d7239915": {
+            "answer_utf8_bytes": 2,
+            "answer_utf8_sha256": "1ea442a134b2a184bd5d40104401f2a37fbc09ccf3f4bc9da161c6099be3691d",
+            "control_file": "docs/conformance/meas01-authored-controls.json",
+            "control_file_sha256": "0d97d892be45541ffc39a7a9723fd734b7e3d0a770c284bcbff7741b006fc209",
+            "control_id": "closed-answer-content-and-form",
+            "original_index_0based": 2
+          },
+          "d36a193383a41b917d61e8f47885c127": {
+            "answer_utf8_bytes": 3,
+            "answer_utf8_sha256": "f9171164593756e56fb197327b529a4955590566560dbe62d586bff41be9d297",
+            "control_file": "docs/conformance/meas01-authored-controls.json",
+            "control_file_sha256": "0d97d892be45541ffc39a7a9723fd734b7e3d0a770c284bcbff7741b006fc209",
+            "control_id": "closed-answer-content-and-form",
+            "original_index_0based": 1
+          }
+        },
+        "disagreement_resolution": "Both submissions gave the same partition and literal-form labels. I verified that YES and NO have opposing content, that the explanation only supports NO, and that No differs from the required uppercase token. The false YES is recorded as a factual concern, not turned into a new formatting violation.",
+        "groups": [
+          [
+            "authored:closed-answer-content-and-form:1"
+          ],
+          [
+            "authored:closed-answer-content-and-form:0",
+            "authored:closed-answer-content-and-form:3",
+            "authored:closed-answer-content-and-form:2"
+          ]
+        ],
+        "item_id": "9bef63191451b984d6e7940e8cf87435",
+        "kind": "authored_control",
+        "literal_compliance_uncertain": [],
+        "literal_compliance_violations": [
+          "authored:closed-answer-content-and-form:3",
+          "authored:closed-answer-content-and-form:2"
+        ],
+        "rationale": "YES asserts the opposite answer from the three negative responses. The oddness explanation and capitalization change do not change the central NO answer; exact output form is assessed separately from content equivalence and factual accuracy. Literal compliance: The two exact uppercase tokens satisfy the literal form; the explanatory response and mixed-case No violate it. Factual truth is recorded separately.",
+        "source_context": {},
+        "source_id": "closed-answer-content-and-form",
+        "status": "resolved",
+        "uncertain_pairs": []
+      },
+      {
+        "answer_sources": {
+          "52b70b147e7bd11fe5373988141cbc15": {
+            "answer_utf8_bytes": 0,
+            "answer_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "control_file": "docs/conformance/meas01-authored-controls.json",
+            "control_file_sha256": "0d97d892be45541ffc39a7a9723fd734b7e3d0a770c284bcbff7741b006fc209",
+            "control_id": "strict-single-digit",
+            "original_index_0based": 3
+          },
+          "59c458b071ef37f0c3fd08d14d6b6d8f": {
+            "answer_utf8_bytes": 43,
+            "answer_utf8_sha256": "988c6e4de133ea9db33fe9b3bb868976c7b3049abd12ea35ea16e4514edf19dc",
+            "control_file": "docs/conformance/meas01-authored-controls.json",
+            "control_file_sha256": "0d97d892be45541ffc39a7a9723fd734b7e3d0a770c284bcbff7741b006fc209",
+            "control_id": "strict-single-digit",
+            "original_index_0based": 2
+          },
+          "5baf0f6ed779e18cf33dda69bc6367ca": {
+            "answer_utf8_bytes": 1,
+            "answer_utf8_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+            "control_file": "docs/conformance/meas01-authored-controls.json",
+            "control_file_sha256": "0d97d892be45541ffc39a7a9723fd734b7e3d0a770c284bcbff7741b006fc209",
+            "control_id": "strict-single-digit",
+            "original_index_0based": 1
+          },
+          "71c7a847a58b93d2de23bcc07c4563c6": {
+            "answer_utf8_bytes": 1,
+            "answer_utf8_sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+            "control_file": "docs/conformance/meas01-authored-controls.json",
+            "control_file_sha256": "0d97d892be45541ffc39a7a9723fd734b7e3d0a770c284bcbff7741b006fc209",
+            "control_id": "strict-single-digit",
+            "original_index_0based": 0
+          }
+        },
+        "disagreement_resolution": "Both submissions gave the same groups and compliance labels. I checked the blank text as presented, the two opposing selections and the explanation's explicit choice of 0. Neither adding an explanation nor failing the required form changes that central choice, and the blank answer is not assigned an intended digit.",
+        "groups": [
+          [
+            "authored:strict-single-digit:1"
+          ],
+          [
+            "authored:strict-single-digit:3"
+          ],
+          [
+            "authored:strict-single-digit:0",
+            "authored:strict-single-digit:2"
+          ]
+        ],
+        "item_id": "8ea2c26319ada4d4865fcd7cd05b661d",
+        "kind": "authored_control",
+        "literal_compliance_uncertain": [],
+        "literal_compliance_violations": [
+          "authored:strict-single-digit:3",
+          "authored:strict-single-digit:2"
+        ],
+        "rationale": "The selections 1 and 0 have different central answers. The empty answer supplies no choice and is kept separate without inference. The extended answer still centrally selects 0; the doorway comparison is a minor reason attached to that choice, while violating the exact output requirement. Literal compliance: The single digits 1 and 0 comply. The blank response and the explanatory sentence violate the exact one-digit form.",
+        "source_context": {},
+        "source_id": "strict-single-digit",
+        "status": "resolved",
+        "uncertain_pairs": []
+      }
+    ]
+  },
+  "official_rule": {
+    "exact_ast_literal_match": true,
+    "literal_utf8_sha256": "5df0b3a31c86ea37e15b17348a34ad064790b670be345dd93fcd0a4d18385eca",
+    "path": "runs\\references\\noveltybench-conformance\\64a23be6b18ec1dacc298830aab276061b6e143c\\src\\partition.py",
+    "source_sha256": "263970891ff3ee1cc8df369a33beefe5cb5de618b5dd146a5234536d97954aca"
+  },
+  "preservation": {
+    "authority_prior_seal": "docs/conformance/rec05b-pilot-verification-input.json",
+    "authority_sha256": "52d293f04921af5418a46a0ce33b1ffd296ae3753cbd3aee7da5130f3dd2c06a",
+    "before_and_after_match_prior_seals": true,
+    "official_partition_score_and_all_financial_bytes_unchanged": true,
+    "package_file_count": 36,
+    "package_prior_seal": "docs/conformance/rec05c-code-preservation.json",
+    "protected_file_count": 287,
+    "protected_prior_seal": "docs/conformance/nb01-preservation.json",
+    "zip_sha256": "bd32c4d50339e2f2e1cadf01f5872fa3c1cdf12c196e7676a18d6fe96bd534e0"
+  },
+  "probe_sha256": "d3010537e6228898c1a9cb04133ba130e32fe054f867ccbe258debbe434e1a0f",
+  "provenance_checks": {
+    "all_authored_literals_roundtrip": true,
+    "all_resolved_items_have_no_explicit_or_answer_uncertainty": true,
+    "all_statuses_and_rationales_are_adjudicator_authored": true,
+    "historical_utf8_and_prompt_candidate_protocol_roundtrips": 60,
+    "public_schema_whitelist_and_global_id_uniqueness": true,
+    "raw_review_and_response_digest_binding": true,
+    "six_selected_generation_source_reads": [
+      {
+        "case": "six_declared_source_reads",
+        "path": "runs\\first-live-continuation-v2\\candidates\\12a952c28d6898e486f9d6b7ce87f05e996073aeac320ee6cc8fa8a99a2a57da\\evaluation\\generations.jsonl"
+      },
+      {
+        "case": "six_declared_source_reads",
+        "path": "runs\\first-live-recovery\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\generations.jsonl"
+      },
+      {
+        "case": "six_declared_source_reads",
+        "path": "runs\\first-live-continuation-v2\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\generations.jsonl"
+      },
+      {
+        "case": "six_declared_source_reads",
+        "path": "runs\\first-live-recovery\\candidates\\2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525\\evaluation\\generations.jsonl"
+      },
+      {
+        "case": "six_declared_source_reads",
+        "path": "runs\\first-live-recovery\\candidates\\34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b\\evaluation\\generations.jsonl"
+      },
+      {
+        "case": "six_declared_source_reads",
+        "path": "runs\\first-live-continuation-v2\\candidates\\68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06\\evaluation\\generations.jsonl"
+      }
+    ],
+    "three_distinct_declared_model_reviewer_ids": true
+  },
+  "raw_review_schema_corrections": [
+    {
+      "corrected_schema_valid": true,
+      "entire_parsed_document_equal_after_key_rename": true,
+      "original_schema_rejected": true,
+      "renamed_pair_objects": 12,
+      "reviewer": "r1"
+    },
+    {
+      "corrected_schema_valid": true,
+      "entire_parsed_document_equal_after_key_rename": true,
+      "original_schema_rejected": true,
+      "renamed_pair_objects": 12,
+      "reviewer": "r2"
+    }
+  ],
+  "resolved_item_ids_eligible_for_explicit_selected_fixtures": [
+    "9bef63191451b984d6e7940e8cf87435",
+    "1c6b4f8f841d8095f3e49f35ba7f9d9c",
+    "d46355da75af2b016bf57e11744eded5",
+    "2e4ad7b4d67bbacdd1a7f9bf6144aa48",
+    "344e6398cb019bc7e0e69d6bcc2f4d88",
+    "bdcdc29b741cb601ef9062c05a490aca",
+    "8664f647a70dd7df7e1c260b7dc7b511",
+    "be26bf6f449325ec2e0fcb3f5e75756a",
+    "2da27b0ae8c3039fcff89e5530889fb3",
+    "d4ec43273c6d8f4c59d77fa59427638a",
+    "33d067fb4613a2ef2da48df5f8ef1e19",
+    "e7feb4d99fea5f238cd59e3cdf82aa3b",
+    "a58d409d4c57a0355ae8c255154c9c6b",
+    "c68c830af8c997b24e3a9b67c7f345f4",
+    "8ea2c26319ada4d4865fcd7cd05b661d",
+    "bba87d6fd854389765a0303dce90450e",
+    "8433af3c1b37d8fd660566988aabf71e"
+  ],
+  "scope": "Independent engineering/provenance audit of frozen model development judgments, unblinded only after final response and adjudication raw hashes were frozen; no new ratings or source execution.",
+  "status": "pass",
+  "uncertain_item_ids_excluded_from_resolved_expectations": [
+    "92bbea60cc82d82c3f0727116decc86b",
+    "51234f90d16f7154c9064a7637c48093",
+    "a6deca95bec239a475b0124ec6348ff6",
+    "eb0cebeb4449dc16174c85a9a0d878b9",
+    "80262d25cd742e1fdfec68a8c9c7017a"
+  ]
+}

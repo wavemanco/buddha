@@ -1,0 +1,1222 @@
+{
+  "format": "buddha.meas01-submission.v1",
+  "items": [
+    {
+      "answers": [
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog clearing branches from an underground stream to restore the village wheel and fountains.",
+          "craft_notes": "",
+          "id": "91fccccb4df9c46a5ed457f0c13825cc",
+          "uncertainty": "Central-content equivalence remains uncertain for the explicit pair(s) involving 1012bb233ec6d2bebfe0b4dabbf4eb55. The displayed groups are tentative for those comparisons."
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog following a pipe to a blocked spring and restoring fresh water to the village.",
+          "craft_notes": "The bell is introduced as detecting hidden things but is not shown ringing or directing the search. The link between the spring blockage and salt in the well is asserted through the outcome rather than explained.",
+          "id": "1012bb233ec6d2bebfe0b4dabbf4eb55",
+          "uncertainty": "Central-content equivalence remains uncertain for the explicit pair(s) involving 91fccccb4df9c46a5ed457f0c13825cc. The displayed groups are tentative for those comparisons."
+        }
+      ],
+      "groups": [
+        [
+          "91fccccb4df9c46a5ed457f0c13825cc",
+          "1012bb233ec6d2bebfe0b4dabbf4eb55"
+        ]
+      ],
+      "id": "92bbea60cc82d82c3f0727116decc86b",
+      "rationale": "Tentatively equivalent: the dog locates a concealed water route, girl and dog jointly clear a blockage, village water returns, and the pair become keepers. A dry riverbed and wheel versus a salty well, pipe and lighthouse change the framing around that same operative sequence. The bell premise leaves the explicit centrality uncertainty below.",
+      "uncertain_pairs": [
+        {
+          "left": "91fccccb4df9c46a5ed457f0c13825cc",
+          "right": "1012bb233ec6d2bebfe0b4dabbf4eb55",
+          "rationale": "Both centrally uncover and unblock the village water supply. The lighthouse bell that detects hidden things and the salty-well mystery could supply a new central premise or image rather than merely replace the dry riverbed and wheel, so the same-plot grouping remains tentative."
+        }
+      ]
+    },
+    {
+      "answers": [
+        {
+          "compliance": "complies",
+          "compliance_rationale": "The entire response is exactly the permitted uppercase token YES, with no other characters; its factual error is recorded separately.",
+          "craft_notes": "Nine is odd, so YES gives the wrong factual answer despite meeting the literal output form.",
+          "id": "d36a193383a41b917d61e8f47885c127",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "The entire response is exactly the permitted uppercase token NO, with no other characters.",
+          "craft_notes": "",
+          "id": "5a555875dc883ac26a3e5190c56feafe",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "violates",
+          "compliance_rationale": "The response adds a comma, explanatory words and a period beyond the required exact YES or NO token.",
+          "craft_notes": "",
+          "id": "83f7be99bfb825e4c4db9743e109f1d5",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "violates",
+          "compliance_rationale": "No is not the exact uppercase token NO required by the prompt.",
+          "craft_notes": "",
+          "id": "9673b5a72b6ff43f18e5fb29d7239915",
+          "uncertainty": ""
+        }
+      ],
+      "groups": [
+        [
+          "d36a193383a41b917d61e8f47885c127"
+        ],
+        [
+          "5a555875dc883ac26a3e5190c56feafe",
+          "83f7be99bfb825e4c4db9743e109f1d5",
+          "9673b5a72b6ff43f18e5fb29d7239915"
+        ]
+      ],
+      "id": "9bef63191451b984d6e7940e8cf87435",
+      "rationale": "YES asserts the opposite answer from the three negative responses. The oddness explanation and capitalization change do not change the central NO answer; exact output form is assessed separately from content equivalence and factual accuracy.",
+      "uncertain_pairs": []
+    },
+    {
+      "answers": [
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog finding a music box whose melody restores the neighborhood's missing sounds.",
+          "craft_notes": "",
+          "id": "1f05a4f755b5e8b034e868d8cb9ccfc7",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog releasing a musician's song from the river and later recovering the girl's laughter.",
+          "craft_notes": "Warming the broken harmonica and barking release a river-held song through an asserted magical link; fantasy is allowed, though the transition is compressed.",
+          "id": "12bf998ddb94aabf41f8b4c36541f60d",
+          "uncertainty": ""
+        }
+      ],
+      "groups": [
+        [
+          "1f05a4f755b5e8b034e868d8cb9ccfc7"
+        ],
+        [
+          "12bf998ddb94aabf41f8b4c36541f60d"
+        ]
+      ],
+      "id": "1c6b4f8f841d8095f3e49f35ba7f9d9c",
+      "rationale": "Distinct: finding and winding a music box restores the surrounding soundscape in the first story; warming a harmonica and barking release a musician's song from a frozen river in the second, followed by recovering the girl's laughter. The shared lost-sounds premise, dog and bridge do not erase those different central events, mechanisms and resolutions.",
+      "uncertain_pairs": []
+    },
+    {
+      "answers": [
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog restoring missing sounds with a recovered music box.",
+          "craft_notes": "",
+          "id": "0cb42de52c35843758e4c875ddd9a43c",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog releasing a trapped musician's song and finding the girl's laughter.",
+          "craft_notes": "",
+          "id": "fe53ecd2eb3929bba2a4fccc1dae528b",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog opening a gate at a train tunnel to free a fawn.",
+          "craft_notes": "",
+          "id": "2cf7f72fa2321501e29a78f8d87438c0",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog helping a lost birthday-message drone get home.",
+          "craft_notes": "How a cardboard telescope, barking and a collar flashlight guide the distant drone is not established, leaving the return mechanism compressed.",
+          "id": "e6842d2bc6f0277d85bd4b2676c2f6fc",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog finding a shepherd's bell and returning it to his family.",
+          "craft_notes": "The bell first silences birds, then leads to a missing shepherd's cabin; how returning it to the family makes the forest sound right is left unstated.",
+          "id": "49b1ad6c2976bfa8920c048f7e69158b",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog returning a baker's music box and giving the reward loaf to a stray.",
+          "craft_notes": "",
+          "id": "b36eb078d07198b4fcac77b102c61511",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog opening a clockmaker's cabinet and delivering its old letters.",
+          "craft_notes": "",
+          "id": "4161819f4660b5515d94bab7adbf9e4a",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog finding her grandmother's letters and beginning a boat.",
+          "craft_notes": "",
+          "id": "736715e4ad9011ed71a16af7aac66b40",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog retrieving her grandmother's musical locket from a well.",
+          "craft_notes": "",
+          "id": "6107f57b393b3718b197f0b08a47862d",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog finding abandoned seeds and growing unusual flowers.",
+          "craft_notes": "The opening rain-smelling talent does not visibly contribute to discovering the seeds or growing the garden.",
+          "id": "706638063826e0a2550ac5be7a220908",
+          "uncertainty": ""
+        }
+      ],
+      "groups": [
+        [
+          "0cb42de52c35843758e4c875ddd9a43c"
+        ],
+        [
+          "fe53ecd2eb3929bba2a4fccc1dae528b"
+        ],
+        [
+          "2cf7f72fa2321501e29a78f8d87438c0"
+        ],
+        [
+          "e6842d2bc6f0277d85bd4b2676c2f6fc"
+        ],
+        [
+          "49b1ad6c2976bfa8920c048f7e69158b"
+        ],
+        [
+          "b36eb078d07198b4fcac77b102c61511"
+        ],
+        [
+          "4161819f4660b5515d94bab7adbf9e4a"
+        ],
+        [
+          "736715e4ad9011ed71a16af7aac66b40"
+        ],
+        [
+          "6107f57b393b3718b197f0b08a47862d"
+        ],
+        [
+          "706638063826e0a2550ac5be7a220908"
+        ]
+      ],
+      "id": "d46355da75af2b016bf57e11744eded5",
+      "rationale": "Ten distinct central episodes: restoring sounds with a music box; releasing a musician's song and finding laughter; opening a gate to free a fawn; guiding a message drone home; tracing a shepherd through a bell and returning it to his family; returning a baker's music box and feeding a stray; discovering and delivering old town letters; finding Grandma's sailing letters and beginning a boat; retrieving a lullaby-bearing locket; and growing abandoned seeds. Shared detection talents, names, bridges, letters or music boxes do not eliminate the different uses and outcomes.",
+      "uncertain_pairs": []
+    },
+    {
+      "answers": [
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog waiting out a power failure and enlarging their blanket fort.",
+          "craft_notes": "",
+          "id": "1865a1afea96c4744f6771318aa3d6b4",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog returning an umbrella to a boy and making a friend.",
+          "craft_notes": "",
+          "id": "a693127cda5a96374b9ef33e26460da4",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog freeing a puppy from a cardboard box before its owner arrives.",
+          "craft_notes": "The final sentence mentions three dogs although only Milo and the rescued puppy have been introduced.",
+          "id": "ea4caf5456e2c8862861ee4f711a863b",
+          "uncertainty": "Central-content equivalence remains uncertain for the explicit pair(s) involving 79978427aa3c43b7bcc05fe8375f60b9. The displayed groups are tentative for those comparisons."
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog recovering scattered cookies and completing their delivery.",
+          "craft_notes": "",
+          "id": "ac938a8cd91a677e7779493ea5d979db",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog taking a boat trip, finding a kite and flying it.",
+          "craft_notes": "",
+          "id": "de956ae4097cec695869dc79f332b9e5",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog finding and warming a snowbound kitten until its owner arrives.",
+          "craft_notes": "",
+          "id": "79978427aa3c43b7bcc05fe8375f60b9",
+          "uncertainty": "Central-content equivalence remains uncertain for the explicit pair(s) involving ea4caf5456e2c8862861ee4f711a863b. The displayed groups are tentative for those comparisons."
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog freeing a fawn entangled in vines.",
+          "craft_notes": "",
+          "id": "16f9bf7d341494e7bbe88a786bfb7877",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog following a map and key to a forgotten music box.",
+          "craft_notes": "",
+          "id": "64e4eda8c94c28fe463f8ad577340966",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "violates",
+          "compliance_rationale": "The story concerns a girl and her dog but contains four sentences, rather than the requested five.",
+          "craft_notes": "",
+          "id": "09415ff47609795fbbe140d05815bd87",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog growing a sunflower and asking people to protect visiting bees.",
+          "craft_notes": "",
+          "id": "de528fb1f286939a564ddb996dfd6e74",
+          "uncertainty": ""
+        }
+      ],
+      "groups": [
+        [
+          "1865a1afea96c4744f6771318aa3d6b4"
+        ],
+        [
+          "a693127cda5a96374b9ef33e26460da4"
+        ],
+        [
+          "ea4caf5456e2c8862861ee4f711a863b"
+        ],
+        [
+          "ac938a8cd91a677e7779493ea5d979db"
+        ],
+        [
+          "de956ae4097cec695869dc79f332b9e5"
+        ],
+        [
+          "79978427aa3c43b7bcc05fe8375f60b9"
+        ],
+        [
+          "16f9bf7d341494e7bbe88a786bfb7877"
+        ],
+        [
+          "64e4eda8c94c28fe463f8ad577340966"
+        ],
+        [
+          "09415ff47609795fbbe140d05815bd87"
+        ],
+        [
+          "de528fb1f286939a564ddb996dfd6e74"
+        ]
+      ],
+      "id": "51234f90d16f7154c9064a7637c48093",
+      "rationale": "Provisionally ten distinct episodes: a blackout in a blanket fort; returning an umbrella and making friends; freeing a boxed puppy for its owner; recovering scattered cookies; a boat trip yielding a kite; warming a snowbound kitten for its owner; freeing a fawn from vines; following a map and key to a music box; a marble garden visited by a squirrel; and growing a sunflower that prompts bee protection. The puppy/kitten rescue boundary is explicitly uncertain; a shared gentle rescue or gardening structure alone does not settle equivalence.",
+      "uncertain_pairs": [
+        {
+          "left": "ea4caf5456e2c8862861ee4f711a863b",
+          "right": "79978427aa3c43b7bcc05fe8375f60b9",
+          "rationale": "Both find a distressed young pet, assist it and see its owner arrive. Their discovery and rescue actions differ: sound leads to extracting a puppy from a box, while paw prints lead to warming a snowbound kitten. Those concrete scenes may be central new content or minor variants of one rescue-and-return plot; separate groups remain tentative."
+        }
+      ]
+    },
+    {
+      "answers": [
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog taking a riverboat trip and finding a red kite to fly.",
+          "craft_notes": "",
+          "id": "b8f3511cccbb7cd35d3d6188f4bcb393",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog returning a fountain umbrella to its owner and making a new friend.",
+          "craft_notes": "",
+          "id": "fd9092f32ea8d4357bed97dbae929c62",
+          "uncertainty": ""
+        }
+      ],
+      "groups": [
+        [
+          "b8f3511cccbb7cd35d3d6188f4bcb393"
+        ],
+        [
+          "fd9092f32ea8d4357bed97dbae929c62"
+        ]
+      ],
+      "id": "2e4ad7b4d67bbacdd1a7f9bf6144aa48",
+      "rationale": "Distinct: the boat excursion leads to keeping and flying a found kite, whereas the umbrella search returns property to a boy and creates a friendship. Finding an object is shared structure; the main activity and resolution differ.",
+      "uncertain_pairs": []
+    },
+    {
+      "answers": [
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog following a music box's melody to a photograph of her grandmother with a similar dog.",
+          "craft_notes": "",
+          "id": "23784d7af28be3099ac4c81b91a1e386",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog growing a sunflower, greeting a hummingbird and saving seeds.",
+          "craft_notes": "",
+          "id": "5de847af0bcc1920ec5329f117c1f607",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog freeing a hedgehog trapped among twigs in a log.",
+          "craft_notes": "",
+          "id": "adb7640e3117e2d7fecb725b184fe7c5",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog following a magical feather to lost toys and returning them.",
+          "craft_notes": "",
+          "id": "dbe29fe7b178a44865b7de6817824711",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog returning a kite to its owner and learning to fly it.",
+          "craft_notes": "",
+          "id": "b8acbf0a8d30733301afa18130e1ebc3",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog freeing a cloud that waters the garden and becomes a rainbow.",
+          "craft_notes": "",
+          "id": "a2fce1358a2454f4e563c44b66f07b4f",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog opening a secret orchard and sharing its apples.",
+          "craft_notes": "",
+          "id": "212c23519d288c6c66e404628115a8f4",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog following a balloon message to make a stargazing friend.",
+          "craft_notes": "",
+          "id": "64b47a02665aa2c62832da55ac11cbdd",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog following the dog after a butterfly chase and reuniting a fawn with its mother.",
+          "craft_notes": "",
+          "id": "2e44cf79a6d4941fbff90df635983240",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog struggling with a homemade boat blown toward pond reeds.",
+          "craft_notes": "The scale of the tiny boat and who is aboard are ambiguous when the story shifts from floating it to returning to shore.",
+          "id": "5b53b5817abfa52dce6726be481082f2",
+          "uncertainty": ""
+        }
+      ],
+      "groups": [
+        [
+          "23784d7af28be3099ac4c81b91a1e386"
+        ],
+        [
+          "5de847af0bcc1920ec5329f117c1f607"
+        ],
+        [
+          "adb7640e3117e2d7fecb725b184fe7c5"
+        ],
+        [
+          "dbe29fe7b178a44865b7de6817824711"
+        ],
+        [
+          "b8acbf0a8d30733301afa18130e1ebc3"
+        ],
+        [
+          "a2fce1358a2454f4e563c44b66f07b4f"
+        ],
+        [
+          "212c23519d288c6c66e404628115a8f4"
+        ],
+        [
+          "64b47a02665aa2c62832da55ac11cbdd"
+        ],
+        [
+          "2e44cf79a6d4941fbff90df635983240"
+        ],
+        [
+          "5b53b5817abfa52dce6726be481082f2"
+        ]
+      ],
+      "id": "344e6398cb019bc7e0e69d6bcc2f4d88",
+      "rationale": "Ten distinct central plots: a music box leading to a family photograph; sunflower growing with a returning hummingbird; freeing a hedgehog; a feather revealing lost toys for return; returning a named kite and learning to fly it; freeing a cloud that waters a garden and becomes a rainbow; opening an orchard and sharing fruit; answering a balloon friendship message; reuniting a fawn after a butterfly chase; and a homemade boat mishap. Common helpfulness, discovery and tone do not substitute for shared central content.",
+      "uncertain_pairs": []
+    },
+    {
+      "answers": [
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog finding a fox cub after a butterfly chase and taking it to a ranger for reunion.",
+          "craft_notes": "",
+          "id": "10c440e0341fedd28223fbeb52921f4a",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog finding a golden-apple tree that grants a wish to help lost animals home.",
+          "craft_notes": "",
+          "id": "8e7baf14171d86446d5351713f052361",
+          "uncertainty": "Central-content equivalence remains uncertain for the explicit pair(s) involving c78cdf0e34cf2b1ac9a06c29f96951dc. The displayed groups are tentative for those comparisons."
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog finding a kitten after a butterfly chase and reuniting it with its family.",
+          "craft_notes": "",
+          "id": "8710ec44abb26ca6a13cad1e38f0f413",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog finding a fox cub after a butterfly chase and bringing it to a ranger for reunion.",
+          "craft_notes": "",
+          "id": "09fb9aff0cec0f95275a90aa36b30269",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog following a hidden door and glowing tracks to a pond and a fox's silver bell.",
+          "craft_notes": "The fox thanks them for finding his silver bell, but no preceding action explicitly shows them finding it.",
+          "id": "1d26ae1af7a54a22f737909f28808268",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "uncertain",
+          "compliance_rationale": "There are five narrative sentences about a girl and a dog she names and cares for, but the dog is returned to a boy as his established family. Whether temporary companionship meets the literal phrase her dog is ambiguous.",
+          "craft_notes": "",
+          "id": "772df7da44f88c0cbff505e2be1612a7",
+          "uncertainty": "Literal subject uncertainty: she names and temporarily cares for the dog, but the story identifies the boy as its family and returns him to the boy."
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog guiding a lost fawn back to its mother after a butterfly chase.",
+          "craft_notes": "",
+          "id": "c736afa8fef6a2c3466bdac0683168ad",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog visiting a singing garden and planting its gift seed into a tree that helps lost animals home.",
+          "craft_notes": "",
+          "id": "c78cdf0e34cf2b1ac9a06c29f96951dc",
+          "uncertainty": "Central-content equivalence remains uncertain for the explicit pair(s) involving 8e7baf14171d86446d5351713f052361, b6c257d4eb02a05a71d4a464af89bf78. The displayed groups are tentative for those comparisons."
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog finding a moonflower for fairies and receiving a seed that blooms into stars.",
+          "craft_notes": "",
+          "id": "b6c257d4eb02a05a71d4a464af89bf78",
+          "uncertainty": "Central-content equivalence remains uncertain for the explicit pair(s) involving c78cdf0e34cf2b1ac9a06c29f96951dc. The displayed groups are tentative for those comparisons."
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog discovering a singing garden, wishing it safe and visiting it secretly.",
+          "craft_notes": "The flowers nod to the wish for safety; what protection the wish creates is left undeveloped.",
+          "id": "51b4b29dfd2c0114173319c1ba4e2f5b",
+          "uncertainty": ""
+        }
+      ],
+      "groups": [
+        [
+          "10c440e0341fedd28223fbeb52921f4a",
+          "8710ec44abb26ca6a13cad1e38f0f413",
+          "09fb9aff0cec0f95275a90aa36b30269",
+          "c736afa8fef6a2c3466bdac0683168ad"
+        ],
+        [
+          "8e7baf14171d86446d5351713f052361"
+        ],
+        [
+          "1d26ae1af7a54a22f737909f28808268"
+        ],
+        [
+          "772df7da44f88c0cbff505e2be1612a7"
+        ],
+        [
+          "c78cdf0e34cf2b1ac9a06c29f96951dc"
+        ],
+        [
+          "b6c257d4eb02a05a71d4a464af89bf78"
+        ],
+        [
+          "51b4b29dfd2c0114173319c1ba4e2f5b"
+        ]
+      ],
+      "id": "a6deca95bec239a475b0124ec6348ff6",
+      "rationale": "The four butterfly-led animal reunions share the central sequence: dog disappears after a blue butterfly, girl follows paw prints, they find a lost young animal and help return it to family. Species, helper and praise are minor variants of that sequence. Provisionally separate are a golden-apple wish granting animal-homing help; a hidden pond and fox's bell; returning a found dog to a boy; a singing garden giving an animal-homing seed; a fairy moonflower quest yielding a star-blooming seed; and keeping a singing garden secret. Explicit uncertainties preserve the botanical-gift boundaries without forcing transitivity.",
+      "uncertain_pairs": [
+        {
+          "left": "8e7baf14171d86446d5351713f052361",
+          "right": "c78cdf0e34cf2b1ac9a06c29f96951dc",
+          "rationale": "Both botanical magical discoveries provide a way for lost animals to find home. An apple granting the girl a wish immediately versus a seed carried from a hidden singing garden and grown into an animal-homing tree changes the journey and mechanism; it remains uncertain whether those are central plot content or minor realizations of the same gift."
+        },
+        {
+          "left": "c78cdf0e34cf2b1ac9a06c29f96951dc",
+          "right": "b6c257d4eb02a05a71d4a464af89bf78",
+          "rationale": "Both enter an oak-root garden and receive a magical seed. The second adds a task for fairies and changes the payoff from helping animals home to nightly star blooms. These support tentative separation, but the shared door/garden/seed image leaves uncertainty about whether the changes exceed minor detail."
+        }
+      ]
+    },
+    {
+      "answers": [
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog helping a slower puppy in a race and inspiring a team event.",
+          "craft_notes": "",
+          "id": "61fb2dc048d5cb6240ce40558598ed64",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog resolving a forgotten train ticket through a reservation under the dog's name.",
+          "craft_notes": "",
+          "id": "095c985e9ec5ea81852328ed8396e803",
+          "uncertainty": ""
+        }
+      ],
+      "groups": [
+        [
+          "61fb2dc048d5cb6240ce40558598ed64"
+        ],
+        [
+          "095c985e9ec5ea81852328ed8396e803"
+        ]
+      ],
+      "id": "bdcdc29b741cb601ef9062c05a490aca",
+      "rationale": "Distinct: helping a slower puppy loses an obstacle race but inspires a team event, while a mistaken reservation under the dog's name solves a forgotten train-ticket problem and yields a keepsake. The central problem, action and payoff differ.",
+      "uncertain_pairs": []
+    },
+    {
+      "answers": [
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog rescuing a duck from an ice hole after a stolen-mitten chase.",
+          "craft_notes": "",
+          "id": "d3f819db3a145e3fc39fd8364a74dc38",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog rescuing a duck from an ice hole after a stolen-mitten chase.",
+          "craft_notes": "",
+          "id": "bc3e4c414f9cac035346f7299840f2e4",
+          "uncertainty": ""
+        }
+      ],
+      "groups": [
+        [
+          "d3f819db3a145e3fc39fd8364a74dc38",
+          "bc3e4c414f9cac035346f7299840f2e4"
+        ]
+      ],
+      "id": "8664f647a70dd7df7e1c260b7dc7b511",
+      "rationale": "Equivalent: the texts are identical, including stealing the mitten, chasing the dog to the frozen pond, finding a duck in the ice hole and rescuing it with the mitten.",
+      "uncertain_pairs": []
+    },
+    {
+      "answers": [
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog reuniting a lost fawn with its mother after a butterfly chase.",
+          "craft_notes": "",
+          "id": "9fce9e3e951d7788c9ffb9435f580170",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog reuniting a lost fawn with its mother after a butterfly chase.",
+          "craft_notes": "",
+          "id": "9c6265496583bc234c9d3cf9d6ea2fad",
+          "uncertainty": ""
+        }
+      ],
+      "groups": [
+        [
+          "9fce9e3e951d7788c9ffb9435f580170",
+          "9c6265496583bc234c9d3cf9d6ea2fad"
+        ]
+      ],
+      "id": "be26bf6f449325ec2e0fcb3f5e75756a",
+      "rationale": "Equivalent: the dog chases a blue butterfly, the girl follows paw prints, and they guide a lost fawn to its mother. The name change, location phrasing and hug versus tired pride are minor differences around the same plot.",
+      "uncertain_pairs": []
+    },
+    {
+      "answers": [
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog following an unaddressed envelope's map to her grandmother's ring and returning it at dinner.",
+          "craft_notes": "",
+          "id": "226f1598c3caed2eefc194714fb3914b",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog following an unaddressed envelope's map to her grandmother's ring and returning it at supper.",
+          "craft_notes": "",
+          "id": "d171187e870dcf82119cea13d3165e53",
+          "uncertainty": ""
+        }
+      ],
+      "groups": [
+        [
+          "226f1598c3caed2eefc194714fb3914b",
+          "d171187e870dcf82119cea13d3165e53"
+        ]
+      ],
+      "id": "2da27b0ae8c3039fcff89e5530889fb3",
+      "rationale": "Equivalent paraphrases: the mail-fetching dog brings an unaddressed envelope with a garden map, the girl uncovers her grandmother's lost wedding ring and returns it at dinner. No central event or consequence changes.",
+      "uncertain_pairs": []
+    },
+    {
+      "answers": [
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog reading a flower-held memory and digging a channel to restore the village spring.",
+          "craft_notes": "",
+          "id": "db74c37fc59c517eef8568c12eadab4b",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog clearing branches from an underground stream to restore village water.",
+          "craft_notes": "",
+          "id": "58f993adc274019328c7b10464be47f9",
+          "uncertainty": ""
+        }
+      ],
+      "groups": [
+        [
+          "db74c37fc59c517eef8568c12eadab4b"
+        ],
+        [
+          "58f993adc274019328c7b10464be47f9"
+        ]
+      ],
+      "id": "d4ec43273c6d8f4c59d77fa59427638a",
+      "rationale": "Distinct: a memory-bearing underground garden and reading a spring's memory while digging restore the well in one story, while removing fallen branches from an underground stream restores the wheel and fountains in the other. A shared goal of village water restoration does not erase the different operative discovery, magical image and intervention.",
+      "uncertain_pairs": []
+    },
+    {
+      "answers": [
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog following a butterfly chase to a fox cub, bringing it to a ranger and gaining a fox friend.",
+          "craft_notes": "The cub is taken to a ranger, but the transition from that handoff to the fox joining their sunset scene is unstated.",
+          "id": "72d7f861e100faff39a2527f0611c210",
+          "uncertainty": "Central-content equivalence remains uncertain for the explicit pair(s) involving 31308b530f0edae1e0266258a1ec10ed, 55453440696cb95e0b8c5f3ecc3d9acd, 973b43d281f923026b0509a848a489bc. The displayed groups are tentative for those comparisons."
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog adopting a puppy that later finds a kitten which joins their team.",
+          "craft_notes": "",
+          "id": "00b2469d9e00d30523bc9c78e7055457",
+          "uncertainty": "Central-content equivalence remains uncertain for the explicit pair(s) involving df6f528563e850d67d396c76a6bc75d3, f7c5cc2a848f31ecc181f4390da6904d. The displayed groups are tentative for those comparisons."
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog entering a magical garden where the dog receives a collar for understanding her speech.",
+          "craft_notes": "",
+          "id": "c9f81e017f7438834d89aa3e6f46765a",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog adopting a dog that later finds a lost child and earns a hero reputation.",
+          "craft_notes": "The child is found, but a return to safety or reunion is omitted before public praise.",
+          "id": "df6f528563e850d67d396c76a6bc75d3",
+          "uncertainty": "Central-content equivalence remains uncertain for the explicit pair(s) involving 00b2469d9e00d30523bc9c78e7055457, 319b5cec10547073218ba5b29b4bd60d. The displayed groups are tentative for those comparisons."
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog following a butterfly chase and reuniting a fawn with its mother.",
+          "craft_notes": "",
+          "id": "55453440696cb95e0b8c5f3ecc3d9acd",
+          "uncertainty": "Central-content equivalence remains uncertain for the explicit pair(s) involving 72d7f861e100faff39a2527f0611c210, 31308b530f0edae1e0266258a1ec10ed. The displayed groups are tentative for those comparisons."
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog adopting a dog that waits at school and later finds a lost child.",
+          "craft_notes": "The child is found, but the story moves directly to hero status without narrating safety or reunion.",
+          "id": "f7c5cc2a848f31ecc181f4390da6904d",
+          "uncertainty": "Central-content equivalence remains uncertain for the explicit pair(s) involving 00b2469d9e00d30523bc9c78e7055457, 319b5cec10547073218ba5b29b4bd60d. The displayed groups are tentative for those comparisons."
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog following a butterfly chase and returning a fawn to its mother.",
+          "craft_notes": "",
+          "id": "973b43d281f923026b0509a848a489bc",
+          "uncertainty": "Central-content equivalence remains uncertain for the explicit pair(s) involving 72d7f861e100faff39a2527f0611c210, 31308b530f0edae1e0266258a1ec10ed. The displayed groups are tentative for those comparisons."
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog visiting a magical garden and bringing home a silver flower.",
+          "craft_notes": "Moonlight in the garden before returning before sunset can be part of the fantasy; the temporal transition is not explained.",
+          "id": "def98a7dcd76d9c27967b23bddf03bda",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog adopting a dog that later finds a kitten which joins their household.",
+          "craft_notes": "",
+          "id": "319b5cec10547073218ba5b29b4bd60d",
+          "uncertainty": "Central-content equivalence remains uncertain for the explicit pair(s) involving df6f528563e850d67d396c76a6bc75d3, f7c5cc2a848f31ecc181f4390da6904d. The displayed groups are tentative for those comparisons."
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog freeing a thorn-trapped fox that guides them home and becomes their friend.",
+          "craft_notes": "",
+          "id": "31308b530f0edae1e0266258a1ec10ed",
+          "uncertainty": "Central-content equivalence remains uncertain for the explicit pair(s) involving 72d7f861e100faff39a2527f0611c210, 55453440696cb95e0b8c5f3ecc3d9acd, 973b43d281f923026b0509a848a489bc. The displayed groups are tentative for those comparisons."
+        }
+      ],
+      "groups": [
+        [
+          "72d7f861e100faff39a2527f0611c210",
+          "31308b530f0edae1e0266258a1ec10ed"
+        ],
+        [
+          "00b2469d9e00d30523bc9c78e7055457",
+          "319b5cec10547073218ba5b29b4bd60d"
+        ],
+        [
+          "c9f81e017f7438834d89aa3e6f46765a"
+        ],
+        [
+          "df6f528563e850d67d396c76a6bc75d3",
+          "f7c5cc2a848f31ecc181f4390da6904d"
+        ],
+        [
+          "55453440696cb95e0b8c5f3ecc3d9acd",
+          "973b43d281f923026b0509a848a489bc"
+        ],
+        [
+          "def98a7dcd76d9c27967b23bddf03bda"
+        ]
+      ],
+      "id": "eb0cebeb4449dc16174c85a9a0d878b9",
+      "rationale": "Tentatively group the butterfly-led fox rescues that end in a new fox friendship, while separating the close fawn-reunion pair; the exact fox/fawn and rescue/aftermath boundaries remain explicit uncertainties. The adopted-dog stories form a kitten-and-lasting-trio pair and a child-and-public-heroes pair, also with uncertain cross-pair boundaries. The magical collar enabling speech understanding differs centrally from the garden visit yielding a flower keepsake. Names, weather, adoption location and daily routines are minor within the paired adoption stories.",
+      "uncertain_pairs": [
+        {
+          "left": "72d7f861e100faff39a2527f0611c210",
+          "right": "31308b530f0edae1e0266258a1ec10ed",
+          "rationale": "Tentatively equivalent fox-rescue-to-friendship plots after the same butterfly chase and paw-print search. Carrying a lost cub to a ranger versus freeing a thorn-trapped fox that reciprocates by guiding them home could change the central intervention and resolution."
+        },
+        {
+          "left": "72d7f861e100faff39a2527f0611c210",
+          "right": "55453440696cb95e0b8c5f3ecc3d9acd",
+          "rationale": "Provisionally separate because the fox becomes a new friend while the fawn is returned to its mother. The nearly identical butterfly-and-paw-print discovery and animal-help sequence could make species and aftermath minor differences."
+        },
+        {
+          "left": "72d7f861e100faff39a2527f0611c210",
+          "right": "973b43d281f923026b0509a848a489bc",
+          "rationale": "Provisionally separate: ranger-assisted fox discovery ends in friendship, while the fawn goes back to its mother. The shared detailed chase, tracking and help sequence leaves the centrality of the changed outcome uncertain."
+        },
+        {
+          "left": "31308b530f0edae1e0266258a1ec10ed",
+          "right": "55453440696cb95e0b8c5f3ecc3d9acd",
+          "rationale": "Provisionally separate: freeing a trapped fox leads to reciprocal guidance home and a lasting third friend, while the fawn is guided to its mother. Both nevertheless center on the same butterfly-led discovery and animal rescue, so the changed intervention and aftermath may be read as minor."
+        },
+        {
+          "left": "31308b530f0edae1e0266258a1ec10ed",
+          "right": "973b43d281f923026b0509a848a489bc",
+          "rationale": "Provisionally separate because the fox guides the rescuers home and remains their friend, while the lost fawn returns to its mother. The close chase-and-tracking rescue sequence creates a remaining central-content boundary."
+        },
+        {
+          "left": "00b2469d9e00d30523bc9c78e7055457",
+          "right": "df6f528563e850d67d396c76a6bc75d3",
+          "rationale": "Both adopt a small golden dog, establish daily companionship and have it lead the girl to a lost being. A kitten joining their team versus a child discovery earning public praise may be a central resolution change or a minor variation of the adopted-dog-becomes-helper arc."
+        },
+        {
+          "left": "00b2469d9e00d30523bc9c78e7055457",
+          "right": "f7c5cc2a848f31ecc181f4390da6904d",
+          "rationale": "Provisionally separate kitten/trio and child/hero endings follow the same adopted-golden-dog-becomes-helper arc. Exploring versus waiting at school is background; it is uncertain whether the different found being and payoff provide enough new central content."
+        },
+        {
+          "left": "319b5cec10547073218ba5b29b4bd60d",
+          "right": "df6f528563e850d67d396c76a6bc75d3",
+          "rationale": "The adopted dog finds a kitten that joins the household in one story and a lost child followed by civic recognition in the other. Tentatively distinct outcomes, but their common adoption-to-helpfulness arc makes the boundary uncertain."
+        },
+        {
+          "left": "319b5cec10547073218ba5b29b4bd60d",
+          "right": "f7c5cc2a848f31ecc181f4390da6904d",
+          "rationale": "Both show adoption, daily school companionship and the dog leading the girl to someone lost. A kitten becoming an inseparable companion versus a child discovery and hero status may change the central resolution or only its details."
+        }
+      ]
+    },
+    {
+      "answers": [
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog opening a locked kennel, finding puppies and taking them inside for care.",
+          "craft_notes": "The kennel is called empty before puppies are discovered inside, without marking that as an initial mistaken impression. The male dog settling down to feed them leaves the feeding method unclear; a nursing mechanism is not assumed.",
+          "id": "ac86a5d7632a449920f1ba6ea5b972dd",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog opening a locked kennel and helping bottle-feed abandoned puppies.",
+          "craft_notes": "",
+          "id": "07400b060e67495573c0c690256e1515",
+          "uncertainty": ""
+        }
+      ],
+      "groups": [
+        [
+          "ac86a5d7632a449920f1ba6ea5b972dd",
+          "07400b060e67495573c0c690256e1515"
+        ]
+      ],
+      "id": "33d067fb4613a2ef2da48df5f8ef1e19",
+      "rationale": "Equivalent central plot: the dog waits at a locked kennel, the girl opens it, discovers puppies, and they care for them. Kitchen versus milk-and-bottles and the first version's internal problems change realization or craft, not the main rescue-and-care episode.",
+      "uncertain_pairs": []
+    },
+    {
+      "answers": [
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog discovering that a gutter explains the barking and abandoning the dog's weather forecasts.",
+          "craft_notes": "",
+          "id": "6e332d69421cb978781b64511da3d3cf",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog using the dog's rain warnings to help market stalls save their goods.",
+          "craft_notes": "",
+          "id": "1f6ccfb5fcae50a774c4d98e6c87fbc1",
+          "uncertainty": ""
+        }
+      ],
+      "groups": [
+        [
+          "6e332d69421cb978781b64511da3d3cf"
+        ],
+        [
+          "1f6ccfb5fcae50a774c4d98e6c87fbc1"
+        ]
+      ],
+      "id": "e7feb4d99fea5f238cd59e3cdf82aa3b",
+      "rationale": "Distinct: one plot overturns the weather-predicting belief by discovering and fixing a noisy gutter; the other uses the dog's warnings to save market goods and earns a reward. Identical opening observations lead to different causal accounts, actions and conclusions.",
+      "uncertain_pairs": []
+    },
+    {
+      "answers": [
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog using a mirror and the dog's remembered signal to help sailors after notes are lost.",
+          "craft_notes": "The dog's remembered pattern is permitted as fantasy; how barking/pawing transmits it and how the mirror answer completes the rescue are compressed.",
+          "id": "83f481fccb15fc4505a4927003c8e470",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog finding a correct lighthouse signal among a keeper's magically stored memories.",
+          "craft_notes": "",
+          "id": "96854e3a2170213ce2ca21333a1c76fc",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog clearing branches from an underground stream to restore village water.",
+          "craft_notes": "",
+          "id": "5b5475d4a9dfd4ee49c4d70794125930",
+          "uncertainty": "Central-content equivalence remains uncertain for the explicit pair(s) involving ab318b66b8aa87ba0e5d156dd2bd0c8d, 57636bd60753cf774252aa29e0ff318a. The displayed groups are tentative for those comparisons."
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog finding her brother on an island and marking a safe crossing through the fog.",
+          "craft_notes": "The bell revealing stepping stones is an asserted magical mechanism, allowed by the task.",
+          "id": "b15355a01f8750efe1a507d7c7e7e1bd",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog following a compass to retrieve a missing foghorn crystal and warn boats.",
+          "craft_notes": "",
+          "id": "e851845fe9bdf961aa66acf81df5f636",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog using a discovered spring to repair and power a windmill pump.",
+          "craft_notes": "How spring flow loosens the gears, spins the windmill and pumps water uphill is left undeveloped.",
+          "id": "57636bd60753cf774252aa29e0ff318a",
+          "uncertainty": "Central-content equivalence remains uncertain for the explicit pair(s) involving 5b5475d4a9dfd4ee49c4d70794125930, ab318b66b8aa87ba0e5d156dd2bd0c8d. The displayed groups are tentative for those comparisons."
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog reading a plant-held spring memory and digging a channel to restore water.",
+          "craft_notes": "",
+          "id": "1acc0753ff2baf53eb255ad5ee40e48f",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog retrieving a clock key from a goat and restarting the town clock.",
+          "craft_notes": "The key is first hidden beneath a floorboard and then carried by a goat without a stated transfer. The initially obstructing nest is not explicitly cleared before the clock restarts.",
+          "id": "ca3d62f5635769800f84f24b2c8ff9f4",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog following a pipe to clear a spring blockage and restore fresh village water.",
+          "craft_notes": "The detecting bell is introduced but is not shown directing the search; how blockage causes the salty well is unstated.",
+          "id": "ab318b66b8aa87ba0e5d156dd2bd0c8d",
+          "uncertainty": "Central-content equivalence remains uncertain for the explicit pair(s) involving 5b5475d4a9dfd4ee49c4d70794125930, 57636bd60753cf774252aa29e0ff318a. The displayed groups are tentative for those comparisons."
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog restoring greenhouse irrigation and growing flowers for a canceled festival.",
+          "craft_notes": "",
+          "id": "f848374daa06073a569e6dd3b107d6c7",
+          "uncertainty": ""
+        }
+      ],
+      "groups": [
+        [
+          "83f481fccb15fc4505a4927003c8e470"
+        ],
+        [
+          "96854e3a2170213ce2ca21333a1c76fc"
+        ],
+        [
+          "5b5475d4a9dfd4ee49c4d70794125930",
+          "ab318b66b8aa87ba0e5d156dd2bd0c8d"
+        ],
+        [
+          "b15355a01f8750efe1a507d7c7e7e1bd"
+        ],
+        [
+          "e851845fe9bdf961aa66acf81df5f636"
+        ],
+        [
+          "57636bd60753cf774252aa29e0ff318a"
+        ],
+        [
+          "1acc0753ff2baf53eb255ad5ee40e48f"
+        ],
+        [
+          "ca3d62f5635769800f84f24b2c8ff9f4"
+        ],
+        [
+          "f848374daa06073a569e6dd3b107d6c7"
+        ]
+      ],
+      "id": "80262d25cd742e1fdfec68a8c9c7017a",
+      "rationale": "Tentatively equivalent stream/well stories use dog-assisted discovery of a hidden water route, joint blockage removal and restored village water, with uncertainty about the bell/salty-well framing. Separate central episodes involve a signal mirror and the dog's remembered pattern; a magical room of stored lighthouse memories; a brother rescued using revealed stepping stones; compass-led recovery of a foghorn crystal; a spring-powered windmill repair; reading a memory flower to restore a spring; a clock key recovered from a goat; and greenhouse flowers grown to revive a festival. The windmill versus blockage-clearing boundaries remain explicitly uncertain; shared infrastructure or maritime rescue themes alone are insufficient.",
+      "uncertain_pairs": [
+        {
+          "left": "5b5475d4a9dfd4ee49c4d70794125930",
+          "right": "ab318b66b8aa87ba0e5d156dd2bd0c8d",
+          "rationale": "Tentatively equivalent because both uncover and jointly unblock a hidden source of village water. The lighthouse bell and salty-well mystery could be central new premise or imagery rather than minor framing around the same blockage-clearing plot."
+        },
+        {
+          "left": "5b5475d4a9dfd4ee49c4d70794125930",
+          "right": "57636bd60753cf774252aa29e0ff318a",
+          "rationale": "Provisionally separate: removing branches from an existing stream restarts a wheel, whereas redirecting a newly discovered spring loosens and drives windmill pumping machinery. Both restore village water and machinery through a hidden-water discovery, so it remains uncertain whether the repair mechanism changes central content."
+        },
+        {
+          "left": "57636bd60753cf774252aa29e0ff318a",
+          "right": "ab318b66b8aa87ba0e5d156dd2bd0c8d",
+          "rationale": "Provisionally separate: using spring water to restore and power a pump differs from unblocking the spring that supplies a salty well. Both discover hidden water and restore village supply, leaving the centrality of the changed intervention uncertain."
+        }
+      ]
+    },
+    {
+      "answers": [
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog visiting an enchanted garden and returning with a silver-flower keepsake.",
+          "craft_notes": "The moonlit garden and return before sunset leave timing unexplained; the fantasy setting can accommodate that, so it is not a literal form violation.",
+          "id": "216b6020c9f578762aabb8a82cc7858a",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog entering a singing garden where the dog gains a collar for understanding her speech.",
+          "craft_notes": "",
+          "id": "646b082f13a763daa9684761eadb283d",
+          "uncertainty": ""
+        }
+      ],
+      "groups": [
+        [
+          "216b6020c9f578762aabb8a82cc7858a"
+        ],
+        [
+          "646b082f13a763daa9684761eadb283d"
+        ]
+      ],
+      "id": "a58d409d4c57a0355ae8c255154c9c6b",
+      "rationale": "Distinct: a garden visit ends with a silver-flower souvenir in one story; in the other, the garden grants the dog a collar that enables understanding the girl's words. A lasting communication change supplies new central content beyond the shared tiny door and luminous garden.",
+      "uncertain_pairs": []
+    },
+    {
+      "answers": [
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog retrieving a missing crystal to repair the foghorn before boats hit rocks.",
+          "craft_notes": "",
+          "id": "eecc49d79aad0fc118a55928305df255",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog following a pipe and clearing a blocked spring to restore fresh water.",
+          "craft_notes": "The bell's detecting rule is not used explicitly in the action, and the blockage-to-saltiness link is not developed.",
+          "id": "478e7be78120f0912f270c05e9d8fc36",
+          "uncertainty": ""
+        }
+      ],
+      "groups": [
+        [
+          "eecc49d79aad0fc118a55928305df255"
+        ],
+        [
+          "478e7be78120f0912f270c05e9d8fc36"
+        ]
+      ],
+      "id": "c68c830af8c997b24e3a9b67c7f345f4",
+      "rationale": "Distinct: compass-led crystal recovery repairs a foghorn and averts danger to boats; pipe-following and clearing a spring restore fresh drinking water. A lighthouse, hidden route and helpful dog are shared, but the central problem, intervention and outcome differ.",
+      "uncertain_pairs": []
+    },
+    {
+      "answers": [
+        {
+          "compliance": "complies",
+          "compliance_rationale": "The entire response is exactly the single permitted digit 1.",
+          "craft_notes": "",
+          "id": "5baf0f6ed779e18cf33dda69bc6367ca",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "violates",
+          "compliance_rationale": "The response is empty, so it does not contain the required one digit.",
+          "craft_notes": "",
+          "id": "52b70b147e7bd11fe5373988141cbc15",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "The entire response is exactly the single permitted digit 0.",
+          "craft_notes": "",
+          "id": "71c7a847a58b93d2de23bcc07c4563c6",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "violates",
+          "compliance_rationale": "The response includes words, spaces and punctuation beyond the required single digit.",
+          "craft_notes": "",
+          "id": "59c458b071ef37f0c3fd08d14d6b6d8f",
+          "uncertainty": ""
+        }
+      ],
+      "groups": [
+        [
+          "5baf0f6ed779e18cf33dda69bc6367ca"
+        ],
+        [
+          "52b70b147e7bd11fe5373988141cbc15"
+        ],
+        [
+          "71c7a847a58b93d2de23bcc07c4563c6",
+          "59c458b071ef37f0c3fd08d14d6b6d8f"
+        ]
+      ],
+      "id": "8ea2c26319ada4d4865fcd7cd05b661d",
+      "rationale": "The selections 1 and 0 have different central answers. The empty answer supplies no choice and is kept separate without inference. The extended answer still centrally selects 0; the doorway comparison is a minor reason attached to that choice, while violating the exact output requirement.",
+      "uncertain_pairs": []
+    },
+    {
+      "answers": [
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog opening a gate at a train tunnel to free a fawn as rain arrives.",
+          "craft_notes": "The rain-smelling talent frames the scene but does not explain how the dog locates the trapped fawn.",
+          "id": "6fab571ac6d066fc056a1f04f8cea742",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog finding abandoned seeds, growing unusual flowers and sharing them with the library.",
+          "craft_notes": "The rain-smelling talent is introduced without an operative role in the seed discovery or garden outcome.",
+          "id": "1eda249504c6a4412c0308ed99fc7ce1",
+          "uncertainty": ""
+        }
+      ],
+      "groups": [
+        [
+          "6fab571ac6d066fc056a1f04f8cea742"
+        ],
+        [
+          "1eda249504c6a4412c0308ed99fc7ce1"
+        ]
+      ],
+      "id": "bba87d6fd854389765a0303dce90450e",
+      "rationale": "Distinct: opening a gate to free a fawn at a tunnel is the central event in one story; discovering seed packets, growing unusual flowers and sharing them with the library is the other's central development. The rain-smelling talent and dog leading the girl somewhere are shared setup, not the same plot.",
+      "uncertain_pairs": []
+    },
+    {
+      "answers": [
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog waiting through a power outage and then enlarging their blanket fort.",
+          "craft_notes": "",
+          "id": "949759694a7f653398bcfe31505757f7",
+          "uncertainty": ""
+        },
+        {
+          "compliance": "complies",
+          "compliance_rationale": "Five sentences tell a story about a girl and her dog recovering wind-scattered cookies and completing a neighbor's delivery.",
+          "craft_notes": "",
+          "id": "c7853941b71b358a5c05600e60a796c9",
+          "uncertainty": ""
+        }
+      ],
+      "groups": [
+        [
+          "949759694a7f653398bcfe31505757f7"
+        ],
+        [
+          "c7853941b71b358a5c05600e60a796c9"
+        ]
+      ],
+      "id": "8433af3c1b37d8fd660566988aabf71e",
+      "rationale": "Distinct: a power outage interrupts blanket-fort play and leads to a shared wait before enlarging the fort; scattered cookies interrupt a delivery and are recovered for a neighbor. The central problem and action sequence differ despite the common friendly girl-and-dog tone.",
+      "uncertain_pairs": []
+    }
+  ],
+  "pack_sha256": "8a29cded45e11f62eaecba52e5d9c30a88e2733b28cc8138aa2fdb38d025bf15",
+  "reviewer": {
+    "id": "meas01-blind-adjudicator",
+    "type": "model",
+    "prior_exposure": "Fresh delegated session; only reviewer pack and two frozen blinded model submissions; no source identities, policies, scores, concerns or key; exact inherited model identifier unavailable."
+  }
+}

@@ -1,0 +1,1163 @@
+{
+  "adjudication_sha256": "90f27482740ed16a14992d0691ce657b64071f03b2dcbf5be6d837658b85aadf",
+  "adjudicator": {
+    "id": "meas01-blind-adjudicator",
+    "prior_exposure": "Fresh delegated session; only reviewer pack and two frozen blinded model submissions; no source identities, policies, scores, concerns or key; exact inherited model identifier unavailable.",
+    "type": "model"
+  },
+  "cases": [
+    {
+      "adjudication": {
+        "disagreement_resolution": "Both submissions gave the same partition and literal-form labels. I verified that YES and NO have opposing content, that the explanation only supports NO, and that No differs from the required uppercase token. The false YES is recorded as a factual concern, not turned into a new formatting violation.",
+        "item_id": "9bef63191451b984d6e7940e8cf87435",
+        "rationale": "YES asserts the opposite answer from the three negative responses. The oddness explanation and capitalization change do not change the central NO answer; exact output form is assessed separately from content equivalence and factual accuracy. Literal compliance: The two exact uppercase tokens satisfy the literal form; the explanatory response and mixed-case No violate it. Factual truth is recorded separately.",
+        "status": "resolved"
+      },
+      "assessment": {
+        "answers": [
+          {
+            "compliance": "complies",
+            "compliance_rationale": "The entire response is exactly the permitted uppercase token YES, with no other characters; its factual error is recorded separately.",
+            "craft_notes": "Nine is odd, so YES gives the wrong factual answer despite meeting the literal output form.",
+            "id": "d36a193383a41b917d61e8f47885c127",
+            "uncertainty": ""
+          },
+          {
+            "compliance": "complies",
+            "compliance_rationale": "The entire response is exactly the permitted uppercase token NO, with no other characters.",
+            "craft_notes": "",
+            "id": "5a555875dc883ac26a3e5190c56feafe",
+            "uncertainty": ""
+          },
+          {
+            "compliance": "violates",
+            "compliance_rationale": "The response adds a comma, explanatory words and a period beyond the required exact YES or NO token.",
+            "craft_notes": "",
+            "id": "83f7be99bfb825e4c4db9743e109f1d5",
+            "uncertainty": ""
+          },
+          {
+            "compliance": "violates",
+            "compliance_rationale": "No is not the exact uppercase token NO required by the prompt.",
+            "craft_notes": "",
+            "id": "9673b5a72b6ff43f18e5fb29d7239915",
+            "uncertainty": ""
+          }
+        ],
+        "groups": [
+          [
+            "d36a193383a41b917d61e8f47885c127"
+          ],
+          [
+            "5a555875dc883ac26a3e5190c56feafe",
+            "83f7be99bfb825e4c4db9743e109f1d5",
+            "9673b5a72b6ff43f18e5fb29d7239915"
+          ]
+        ],
+        "id": "9bef63191451b984d6e7940e8cf87435",
+        "rationale": "YES asserts the opposite answer from the three negative responses. The oddness explanation and capitalization change do not change the central NO answer; exact output form is assessed separately from content equivalence and factual accuracy.",
+        "uncertain_pairs": []
+      },
+      "item": {
+        "answers": [
+          {
+            "id": "d36a193383a41b917d61e8f47885c127",
+            "text": "YES"
+          },
+          {
+            "id": "5a555875dc883ac26a3e5190c56feafe",
+            "text": "NO"
+          },
+          {
+            "id": "83f7be99bfb825e4c4db9743e109f1d5",
+            "text": "NO, because nine is odd."
+          },
+          {
+            "id": "9673b5a72b6ff43f18e5fb29d7239915",
+            "text": "No"
+          }
+        ],
+        "id": "9bef63191451b984d6e7940e8cf87435",
+        "prompt": "Is 9 an even number? Respond with exactly YES or NO and no other characters."
+      }
+    },
+    {
+      "adjudication": {
+        "disagreement_resolution": "Both submissions separated the stories, but the second retained a pair uncertainty. I checked what is recovered, how it is recovered and the ending: general soundscape restoration by a music box differs centrally from freeing one voice and then personal laughter. I resolve that boundary as distinct in this bounded adjudication; the shared premise alone is insufficient.",
+        "item_id": "1c6b4f8f841d8095f3e49f35ba7f9d9c",
+        "rationale": "Distinct: finding and winding a music box restores the surrounding soundscape in the first story; warming a harmonica and barking release a musician's song from a frozen river in the second, followed by recovering the girl's laughter. The shared lost-sounds premise, dog and bridge do not erase those different central events, mechanisms and resolutions. Literal compliance: Every answer has five narrative sentences about a girl and her dog; craft or causal concerns are assessed separately.",
+        "status": "resolved"
+      },
+      "assessment": {
+        "answers": [
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog finding a music box whose melody restores the neighborhood's missing sounds.",
+            "craft_notes": "",
+            "id": "1f05a4f755b5e8b034e868d8cb9ccfc7",
+            "uncertainty": ""
+          },
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog releasing a musician's song from the river and later recovering the girl's laughter.",
+            "craft_notes": "Warming the broken harmonica and barking release a river-held song through an asserted magical link; fantasy is allowed, though the transition is compressed.",
+            "id": "12bf998ddb94aabf41f8b4c36541f60d",
+            "uncertainty": ""
+          }
+        ],
+        "groups": [
+          [
+            "1f05a4f755b5e8b034e868d8cb9ccfc7"
+          ],
+          [
+            "12bf998ddb94aabf41f8b4c36541f60d"
+          ]
+        ],
+        "id": "1c6b4f8f841d8095f3e49f35ba7f9d9c",
+        "rationale": "Distinct: finding and winding a music box restores the surrounding soundscape in the first story; warming a harmonica and barking release a musician's song from a frozen river in the second, followed by recovering the girl's laughter. The shared lost-sounds premise, dog and bridge do not erase those different central events, mechanisms and resolutions.",
+        "uncertain_pairs": []
+      },
+      "item": {
+        "answers": [
+          {
+            "id": "1f05a4f755b5e8b034e868d8cb9ccfc7",
+            "text": "Mara taught her dog, Pippin, to find lost sounds instead of lost objects.  \nWhenever a robin stopped singing or a bicycle bell went silent, Pippin led her through the neighborhood by tugging gently at his red leash.  \nOne evening, he pulled her beneath the old bridge, where they discovered a tiny music box wedged between the stones.  \nMara wound it carefully, and its bright melody returned the missing sounds to every bird, bell, and rustling tree nearby.  \nAfter that, Pippin slept beside the music box, guarding the songs he had rescued."
+          },
+          {
+            "id": "12bf998ddb94aabf41f8b4c36541f60d",
+            "text": "Mara taught her one-eyed dog, Pippin, to find lost sounds instead of lost things.  \nWhenever a bell stopped ringing or a song disappeared, Pippin would tilt his head and lead her through the town by scent.  \nOne winter morning, he guided her beneath the frozen bridge, where the river had trapped the cheerful voice of an old street musician.  \nMara warmed the musician’s broken harmonica in her pocket while Pippin barked until the river released the song.  \nAfter that, whenever Mara felt lonely, Pippin found her own laughter and brought it home."
+          }
+        ],
+        "id": "1c6b4f8f841d8095f3e49f35ba7f9d9c",
+        "prompt": "Tell me a story in five sentences about a girl and her dog."
+      }
+    },
+    {
+      "adjudication": {
+        "disagreement_resolution": "Both submissions proposed ten singletons; the second flagged the two lost-sounds stories. I compared all ten plots, including the two music boxes and two letter discoveries. Different central recoveries and consequences justify separation: the baker/stray episode is not a soundscape restoration, and Grandma's unfulfilled sailing dream is not delivery of the town's goodbyes. The music-box versus frozen-river pair is resolved as distinct for the same concrete event and payoff differences as in the focused card. Five sentences were checked for every answer.",
+        "item_id": "d46355da75af2b016bf57e11744eded5",
+        "rationale": "Ten distinct central episodes: restoring sounds with a music box; releasing a musician's song and finding laughter; opening a gate to free a fawn; guiding a message drone home; tracing a shepherd through a bell and returning it to his family; returning a baker's music box and feeding a stray; discovering and delivering old town letters; finding Grandma's sailing letters and beginning a boat; retrieving a lullaby-bearing locket; and growing abandoned seeds. Shared detection talents, names, bridges, letters or music boxes do not eliminate the different uses and outcomes. Literal compliance: Every answer has five narrative sentences about a girl and her dog; craft or causal concerns are assessed separately.",
+        "status": "resolved"
+      },
+      "assessment": {
+        "answers": [
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog restoring missing sounds with a recovered music box.",
+            "craft_notes": "",
+            "id": "0cb42de52c35843758e4c875ddd9a43c",
+            "uncertainty": ""
+          },
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog releasing a trapped musician's song and finding the girl's laughter.",
+            "craft_notes": "",
+            "id": "fe53ecd2eb3929bba2a4fccc1dae528b",
+            "uncertainty": ""
+          },
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog opening a gate at a train tunnel to free a fawn.",
+            "craft_notes": "",
+            "id": "2cf7f72fa2321501e29a78f8d87438c0",
+            "uncertainty": ""
+          },
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog helping a lost birthday-message drone get home.",
+            "craft_notes": "How a cardboard telescope, barking and a collar flashlight guide the distant drone is not established, leaving the return mechanism compressed.",
+            "id": "e6842d2bc6f0277d85bd4b2676c2f6fc",
+            "uncertainty": ""
+          },
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog finding a shepherd's bell and returning it to his family.",
+            "craft_notes": "The bell first silences birds, then leads to a missing shepherd's cabin; how returning it to the family makes the forest sound right is left unstated.",
+            "id": "49b1ad6c2976bfa8920c048f7e69158b",
+            "uncertainty": ""
+          },
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog returning a baker's music box and giving the reward loaf to a stray.",
+            "craft_notes": "",
+            "id": "b36eb078d07198b4fcac77b102c61511",
+            "uncertainty": ""
+          },
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog opening a clockmaker's cabinet and delivering its old letters.",
+            "craft_notes": "",
+            "id": "4161819f4660b5515d94bab7adbf9e4a",
+            "uncertainty": ""
+          },
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog finding her grandmother's letters and beginning a boat.",
+            "craft_notes": "",
+            "id": "736715e4ad9011ed71a16af7aac66b40",
+            "uncertainty": ""
+          },
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog retrieving her grandmother's musical locket from a well.",
+            "craft_notes": "",
+            "id": "6107f57b393b3718b197f0b08a47862d",
+            "uncertainty": ""
+          },
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog finding abandoned seeds and growing unusual flowers.",
+            "craft_notes": "The opening rain-smelling talent does not visibly contribute to discovering the seeds or growing the garden.",
+            "id": "706638063826e0a2550ac5be7a220908",
+            "uncertainty": ""
+          }
+        ],
+        "groups": [
+          [
+            "0cb42de52c35843758e4c875ddd9a43c"
+          ],
+          [
+            "fe53ecd2eb3929bba2a4fccc1dae528b"
+          ],
+          [
+            "2cf7f72fa2321501e29a78f8d87438c0"
+          ],
+          [
+            "e6842d2bc6f0277d85bd4b2676c2f6fc"
+          ],
+          [
+            "49b1ad6c2976bfa8920c048f7e69158b"
+          ],
+          [
+            "b36eb078d07198b4fcac77b102c61511"
+          ],
+          [
+            "4161819f4660b5515d94bab7adbf9e4a"
+          ],
+          [
+            "736715e4ad9011ed71a16af7aac66b40"
+          ],
+          [
+            "6107f57b393b3718b197f0b08a47862d"
+          ],
+          [
+            "706638063826e0a2550ac5be7a220908"
+          ]
+        ],
+        "id": "d46355da75af2b016bf57e11744eded5",
+        "rationale": "Ten distinct central episodes: restoring sounds with a music box; releasing a musician's song and finding laughter; opening a gate to free a fawn; guiding a message drone home; tracing a shepherd through a bell and returning it to his family; returning a baker's music box and feeding a stray; discovering and delivering old town letters; finding Grandma's sailing letters and beginning a boat; retrieving a lullaby-bearing locket; and growing abandoned seeds. Shared detection talents, names, bridges, letters or music boxes do not eliminate the different uses and outcomes.",
+        "uncertain_pairs": []
+      },
+      "item": {
+        "answers": [
+          {
+            "id": "0cb42de52c35843758e4c875ddd9a43c",
+            "text": "Mara taught her dog, Pippin, to find lost sounds instead of lost objects.  \nWhenever a robin stopped singing or a bicycle bell went silent, Pippin led her through the neighborhood by tugging gently at his red leash.  \nOne evening, he pulled her beneath the old bridge, where they discovered a tiny music box wedged between the stones.  \nMara wound it carefully, and its bright melody returned the missing sounds to every bird, bell, and rustling tree nearby.  \nAfter that, Pippin slept beside the music box, guarding the songs he had rescued."
+          },
+          {
+            "id": "fe53ecd2eb3929bba2a4fccc1dae528b",
+            "text": "Mara taught her one-eyed dog, Pippin, to find lost sounds instead of lost things.  \nWhenever a bell stopped ringing or a song disappeared, Pippin would tilt his head and lead her through the town by scent.  \nOne winter morning, he guided her beneath the frozen bridge, where the river had trapped the cheerful voice of an old street musician.  \nMara warmed the musician’s broken harmonica in her pocket while Pippin barked until the river released the song.  \nAfter that, whenever Mara felt lonely, Pippin found her own laughter and brought it home."
+          },
+          {
+            "id": "2cf7f72fa2321501e29a78f8d87438c0",
+            "text": "Mara’s dog, Fig, could smell rain hours before the clouds arrived.  \nOne afternoon, Fig dragged her toward the old train tunnel, where they found a tiny fawn trapped behind a fallen gate.  \nMara squeezed through the bars, but the gate would not budge until Fig tugged a rusted lever hidden beneath the weeds.  \nThe fawn limped free and disappeared into the forest just as rain began tapping the rails.  \nFrom then on, Mara trusted Fig’s nose—even when it led them somewhere she had never dared to go."
+          },
+          {
+            "id": "e6842d2bc6f0277d85bd4b2676c2f6fc",
+            "text": "Mara’s dog, Fig, barked whenever the moon appeared, so she built him a cardboard telescope to investigate it.  \nOne night, Fig dragged her into the garden and pointed the telescope at a tiny blinking light between the stars.  \nMara discovered it was a lost drone carrying a child’s birthday message, drifting far beyond its neighborhood.  \nWith Fig barking directions, she guided the drone home by tying a flashlight to his collar and waving it from the hilltop.  \nThe next morning, a grateful family left Fig a cake, which he shared with Mara only after inspecting every crumb."
+          },
+          {
+            "id": "49b1ad6c2976bfa8920c048f7e69158b",
+            "text": "Mara taught her old dog, Biscuit, to find lost sounds instead of lost objects.  \nOne afternoon, Biscuit led her through the woods to a tiny bell buried beneath the roots of an oak tree.  \nWhen Mara rang it, every bird in the forest fell silent.  \nShe realized the bell belonged to a missing shepherd who had vanished years ago, and its echo pointed toward his abandoned cabin.  \nBy sunset, Mara and Biscuit had returned the bell to the shepherd’s family, who said the forest finally sounded right again."
+          },
+          {
+            "id": "b36eb078d07198b4fcac77b102c61511",
+            "text": "Mara taught her old dog, Pippin, to find lost things by following the faintest sound they made.  \nOne windy afternoon, Pippin led her beneath the town bridge, where a tiny music box was humming in the mud.  \nMara cleaned it and discovered it belonged to the baker, who had lost it on the day his daughter was born.  \nThe grateful baker offered them any treat in his shop, but Pippin chose a plain loaf and carried it carefully to a shivering stray.  \nFrom then on, Mara practiced finding what people needed most, while Pippin became famous for knowing when that need was a warm meal."
+          },
+          {
+            "id": "4161819f4660b5515d94bab7adbf9e4a",
+            "text": "Mara’s dog, Pippin, could hear lost things before anyone else knew they were missing.  \nOne windy afternoon, he dragged her to the town clock and pawed at a loose stone beneath it.  \nMara found a tiny brass key and used it to open the clockmaker’s forgotten cabinet.  \nInside was a stack of letters addressed to people who had moved away decades ago.  \nTogether, Mara and Pippin delivered every letter they could, giving the town its old goodbyes at last."
+          },
+          {
+            "id": "736715e4ad9011ed71a16af7aac66b40",
+            "text": "Mara’s dog, Button, could hear lost things humming beneath the floorboards.  \nWhenever Mara misplaced a button, key, or birthday coin, Button pressed his ear to the wood and wagged toward the answer.  \nOne rainy evening, he led her to a loose plank beneath which lay a bundle of letters her late grandmother had hidden years ago.  \nThe letters revealed that Grandma had once dreamed of sailing around the world but stayed home to raise Mara’s mother.  \nMara tucked the letters safely away, then began building a small wooden boat for herself and Button."
+          },
+          {
+            "id": "6107f57b393b3718b197f0b08a47862d",
+            "text": "Mara’s dog, Pippin, could hear lost things calling from beneath the ground.  \nOne afternoon, he led her past the meadow to an old stone well where her grandmother’s silver locket had disappeared years before.  \nMara lowered a basket tied to a rope, and Pippin barked whenever it drifted near the locket.  \nWhen they pulled it up, the locket was warm and humming with the sound of her grandmother’s lullaby.  \nFrom then on, Mara and Pippin searched for forgotten treasures, returning each one before sunset."
+          },
+          {
+            "id": "706638063826e0a2550ac5be7a220908",
+            "text": "Mara’s dog, Pippin, could smell rain hours before the clouds appeared.  \nOne afternoon, he tugged her toward the old greenhouse behind the library, where they found a box of abandoned seed packets.  \nMara planted them in her backyard, while Pippin guarded the rows from hungry sparrows.  \nBy summer, the garden had grown into a maze of sunflowers, beans, and tiny blue flowers no one had seen before.  \nMara gave the mysterious blossoms to the library, and Pippin became famous as the dog who discovered a new kind of garden."
+          }
+        ],
+        "id": "d46355da75af2b016bf57e11744eded5",
+        "prompt": "Tell me a story in five sentences about a girl and her dog."
+      }
+    },
+    {
+      "adjudication": {
+        "disagreement_resolution": "Both submissions separated these answers. I checked the actual boat outing and kite-kept ending against the footprint search and umbrella-returned ending, supporting distinct central plots. Each has five sentences about the girl and her dog.",
+        "item_id": "2e4ad7b4d67bbacdd1a7f9bf6144aa48",
+        "rationale": "Distinct: the boat excursion leads to keeping and flying a found kite, whereas the umbrella search returns property to a boy and creates a friendship. Finding an object is shared structure; the main activity and resolution differ. Literal compliance: Every answer has five narrative sentences about a girl and her dog; craft or causal concerns are assessed separately.",
+        "status": "resolved"
+      },
+      "assessment": {
+        "answers": [
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog taking a riverboat trip and finding a red kite to fly.",
+            "craft_notes": "",
+            "id": "b8f3511cccbb7cd35d3d6188f4bcb393",
+            "uncertainty": ""
+          },
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog returning a fountain umbrella to its owner and making a new friend.",
+            "craft_notes": "",
+            "id": "fd9092f32ea8d4357bed97dbae929c62",
+            "uncertainty": ""
+          }
+        ],
+        "groups": [
+          [
+            "b8f3511cccbb7cd35d3d6188f4bcb393"
+          ],
+          [
+            "fd9092f32ea8d4357bed97dbae929c62"
+          ]
+        ],
+        "id": "2e4ad7b4d67bbacdd1a7f9bf6144aa48",
+        "rationale": "Distinct: the boat excursion leads to keeping and flying a found kite, whereas the umbrella search returns property to a boy and creates a friendship. Finding an object is shared structure; the main activity and resolution differ.",
+        "uncertain_pairs": []
+      },
+      "item": {
+        "answers": [
+          {
+            "id": "b8f3511cccbb7cd35d3d6188f4bcb393",
+            "text": "Sophie and her dog, Max, discovered a small wooden boat washed up beside the river.  \nThey climbed in and drifted gently downstream, following the sparkle of the afternoon sun.  \nWhen the boat bumped into a muddy bank, Max jumped out and found a lost red kite tangled in the reeds.  \nSophie freed the kite, and they carried it home as the prize of their unexpected adventure.  \nThat evening, they flew it together until the first stars appeared."
+          },
+          {
+            "id": "fd9092f32ea8d4357bed97dbae929c62",
+            "text": "Grace and her dog, Pudding, discovered a bright yellow umbrella floating in the town fountain.  \nPudding tugged it from the water while Grace searched for its owner.  \nThey followed a trail of wet footprints to a little boy sitting sadly on a bench.  \nWhen Grace returned the umbrella, the boy thanked them and invited Pudding to share his ball.  \nBy sunset, the new friends were laughing together beneath the cheerful yellow canopy."
+          }
+        ],
+        "id": "2e4ad7b4d67bbacdd1a7f9bf6144aa48",
+        "prompt": "Tell me a story in five sentences about a girl and her dog."
+      }
+    },
+    {
+      "adjudication": {
+        "disagreement_resolution": "The submissions agreed on ten separate plots. I checked each discovery and payoff, including the different animal-help, object-return and magical-garden episodes, rather than treating shared structure as duplication. None repeats another's particular central action and consequence. All five-sentence forms were checked.",
+        "item_id": "344e6398cb019bc7e0e69d6bcc2f4d88",
+        "rationale": "Ten distinct central plots: a music box leading to a family photograph; sunflower growing with a returning hummingbird; freeing a hedgehog; a feather revealing lost toys for return; returning a named kite and learning to fly it; freeing a cloud that waters a garden and becomes a rainbow; opening an orchard and sharing fruit; answering a balloon friendship message; reuniting a fawn after a butterfly chase; and a homemade boat mishap. Common helpfulness, discovery and tone do not substitute for shared central content. Literal compliance: Every answer has five narrative sentences about a girl and her dog; craft or causal concerns are assessed separately.",
+        "status": "resolved"
+      },
+      "assessment": {
+        "answers": [
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog following a music box's melody to a photograph of her grandmother with a similar dog.",
+            "craft_notes": "",
+            "id": "23784d7af28be3099ac4c81b91a1e386",
+            "uncertainty": ""
+          },
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog growing a sunflower, greeting a hummingbird and saving seeds.",
+            "craft_notes": "",
+            "id": "5de847af0bcc1920ec5329f117c1f607",
+            "uncertainty": ""
+          },
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog freeing a hedgehog trapped among twigs in a log.",
+            "craft_notes": "",
+            "id": "adb7640e3117e2d7fecb725b184fe7c5",
+            "uncertainty": ""
+          },
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog following a magical feather to lost toys and returning them.",
+            "craft_notes": "",
+            "id": "dbe29fe7b178a44865b7de6817824711",
+            "uncertainty": ""
+          },
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog returning a kite to its owner and learning to fly it.",
+            "craft_notes": "",
+            "id": "b8acbf0a8d30733301afa18130e1ebc3",
+            "uncertainty": ""
+          },
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog freeing a cloud that waters the garden and becomes a rainbow.",
+            "craft_notes": "",
+            "id": "a2fce1358a2454f4e563c44b66f07b4f",
+            "uncertainty": ""
+          },
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog opening a secret orchard and sharing its apples.",
+            "craft_notes": "",
+            "id": "212c23519d288c6c66e404628115a8f4",
+            "uncertainty": ""
+          },
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog following a balloon message to make a stargazing friend.",
+            "craft_notes": "",
+            "id": "64b47a02665aa2c62832da55ac11cbdd",
+            "uncertainty": ""
+          },
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog following the dog after a butterfly chase and reuniting a fawn with its mother.",
+            "craft_notes": "",
+            "id": "2e44cf79a6d4941fbff90df635983240",
+            "uncertainty": ""
+          },
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog struggling with a homemade boat blown toward pond reeds.",
+            "craft_notes": "The scale of the tiny boat and who is aboard are ambiguous when the story shifts from floating it to returning to shore.",
+            "id": "5b53b5817abfa52dce6726be481082f2",
+            "uncertainty": ""
+          }
+        ],
+        "groups": [
+          [
+            "23784d7af28be3099ac4c81b91a1e386"
+          ],
+          [
+            "5de847af0bcc1920ec5329f117c1f607"
+          ],
+          [
+            "adb7640e3117e2d7fecb725b184fe7c5"
+          ],
+          [
+            "dbe29fe7b178a44865b7de6817824711"
+          ],
+          [
+            "b8acbf0a8d30733301afa18130e1ebc3"
+          ],
+          [
+            "a2fce1358a2454f4e563c44b66f07b4f"
+          ],
+          [
+            "212c23519d288c6c66e404628115a8f4"
+          ],
+          [
+            "64b47a02665aa2c62832da55ac11cbdd"
+          ],
+          [
+            "2e44cf79a6d4941fbff90df635983240"
+          ],
+          [
+            "5b53b5817abfa52dce6726be481082f2"
+          ]
+        ],
+        "id": "344e6398cb019bc7e0e69d6bcc2f4d88",
+        "rationale": "Ten distinct central plots: a music box leading to a family photograph; sunflower growing with a returning hummingbird; freeing a hedgehog; a feather revealing lost toys for return; returning a named kite and learning to fly it; freeing a cloud that waters a garden and becomes a rainbow; opening an orchard and sharing fruit; answering a balloon friendship message; reuniting a fawn after a butterfly chase; and a homemade boat mishap. Common helpfulness, discovery and tone do not substitute for shared central content.",
+        "uncertain_pairs": []
+      },
+      "item": {
+        "answers": [
+          {
+            "id": "23784d7af28be3099ac4c81b91a1e386",
+            "text": "Nora and her dog, Clover, found a dusty music box in the attic.  \nWhen Nora wound it up, a gentle melody made Clover dance in circles.  \nThe tune led them to a loose floorboard hiding a collection of old family photographs.  \nNora recognized her grandmother as a young girl standing beside a dog just like Clover.  \nSmiling, she placed the photograph beside the music box and danced with Clover until sunset."
+          },
+          {
+            "id": "5de847af0bcc1920ec5329f117c1f607",
+            "text": "Lily and her dog, Scout, planted a sunflower seed in their backyard.  \nEvery morning, Scout dug a little hole beside it, while Lily carefully watered the soil.  \nWeeks later, the sunflower grew taller than Lily and attracted a hummingbird with shimmering wings.  \nScout barked happily whenever the bird returned, as if greeting an old friend.  \nBy summer’s end, Lily saved some seeds so they could grow another garden together."
+          },
+          {
+            "id": "adb7640e3117e2d7fecb725b184fe7c5",
+            "text": "Clara and her dog, Finn, heard a soft whimper coming from inside a hollow log.  \nThey discovered a shivering hedgehog trapped beneath a tangle of twigs.  \nFinn nudged the branches aside while Clara gently lifted the little creature free.  \nAfter warming up, the hedgehog waddled into the ferns and disappeared.  \nClara gave Finn an extra-long belly rub for being such a thoughtful helper."
+          },
+          {
+            "id": "dbe29fe7b178a44865b7de6817824711",
+            "text": "Sofia and her dog, Max, discovered a glowing feather beneath the old oak tree.  \nWhen Sofia picked it up, the feather showed them a hidden path through the garden.  \nMax sniffed along the path until they reached a tiny door in the stone wall.  \nBehind it, they found a warm den filled with lost toys from the neighborhood.  \nSofia and Max returned every toy, earning grateful smiles from everyone they met."
+          },
+          {
+            "id": "b8acbf0a8d30733301afa18130e1ebc3",
+            "text": "Ava and her dog, Pippin, discovered a small red kite tangled in a pine tree.  \nThey carefully freed it and followed the name written on its tail to a nearby hill.  \nThere, they met a boy who had been searching for the kite all afternoon.  \nPippin returned it proudly, holding the string gently between his teeth.  \nThe boy thanked them by teaching Ava and Pippin how to make the kite dance in the wind."
+          },
+          {
+            "id": "a2fce1358a2454f4e563c44b66f07b4f",
+            "text": "Ivy and her dog, Sunny, found a tiny cloud caught in the branches of their favorite tree.  \nThey climbed carefully and nudged it loose with a long stick.  \nThe cloud floated upward, sprinkling silver raindrops over the thirsty garden.  \nIn gratitude, it shaped itself into a sparkling rainbow above their home.  \nIvy and Sunny danced beneath it until the last colors faded."
+          },
+          {
+            "id": "212c23519d288c6c66e404628115a8f4",
+            "text": "Ruby and her dog, Waffles, found a mysterious key buried beneath the porch.  \nThey tried it on every lock in the house until it opened an old garden gate.  \nBeyond the gate stood a neglected orchard filled with ripe, sparkling apples.  \nRuby and Waffles gathered the fruit and shared it with their hungry neighbors.  \nFrom then on, the secret orchard became the happiest place in the village."
+          },
+          {
+            "id": "64b47a02665aa2c62832da55ac11cbdd",
+            "text": "Emma and her dog, Rocket, loved watching the stars from their rooftop garden.  \nOne night, a bright red balloon drifted down and landed beside them.  \nTied to its string was a note from a child across town wishing for a friend.  \nEmma and Rocket followed the address and invited the child to join their next stargazing night.  \nSoon, the three new friends shared stories beneath a sky full of sparkling constellations."
+          },
+          {
+            "id": "2e44cf79a6d4941fbff90df635983240",
+            "text": "Mia and her dog, Biscuit, loved exploring the woods behind their house.  \nOne afternoon, Biscuit chased a blue butterfly and disappeared around a bend.  \nMia followed his paw prints until she found him sitting beside a lost fawn.  \nTogether, they guided the fawn back to its mother near the meadow.  \nThat evening, Mia hugged Biscuit and declared him the bravest dog in the world."
+          },
+          {
+            "id": "5b53b5817abfa52dce6726be481082f2",
+            "text": "Lena and her dog, Pepper, built a tiny boat from old wooden crates.  \nThey floated it in the backyard pond, where Pepper proudly wore a captain’s hat.  \nA sudden breeze carried the boat toward the reeds, and Lena paddled after it with a broom.  \nWhen they finally returned to shore, Pepper shook water everywhere and wagged his tail.  \nLena laughed and decided their next adventure would need a bigger boat."
+          }
+        ],
+        "id": "344e6398cb019bc7e0e69d6bcc2f4d88",
+        "prompt": "Tell me a story in five sentences about a girl and her dog."
+      }
+    },
+    {
+      "adjudication": {
+        "disagreement_resolution": "Both submissions separated the stories. I checked the dog's helping behavior and resulting team event against the conductor's reservation lookup and souvenir ticket; these add different central content. Both five-sentence counts and subjects comply.",
+        "item_id": "bdcdc29b741cb601ef9062c05a490aca",
+        "rationale": "Distinct: helping a slower puppy loses an obstacle race but inspires a team event, while a mistaken reservation under the dog's name solves a forgotten train-ticket problem and yields a keepsake. The central problem, action and payoff differ. Literal compliance: Every answer has five narrative sentences about a girl and her dog; craft or causal concerns are assessed separately.",
+        "status": "resolved"
+      },
+      "assessment": {
+        "answers": [
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog helping a slower puppy in a race and inspiring a team event.",
+            "craft_notes": "",
+            "id": "61fb2dc048d5cb6240ce40558598ed64",
+            "uncertainty": ""
+          },
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog resolving a forgotten train ticket through a reservation under the dog's name.",
+            "craft_notes": "",
+            "id": "095c985e9ec5ea81852328ed8396e803",
+            "uncertainty": ""
+          }
+        ],
+        "groups": [
+          [
+            "61fb2dc048d5cb6240ce40558598ed64"
+          ],
+          [
+            "095c985e9ec5ea81852328ed8396e803"
+          ]
+        ],
+        "id": "bdcdc29b741cb601ef9062c05a490aca",
+        "rationale": "Distinct: helping a slower puppy loses an obstacle race but inspires a team event, while a mistaken reservation under the dog's name solves a forgotten train-ticket problem and yields a keepsake. The central problem, action and payoff differ.",
+        "uncertain_pairs": []
+      },
+      "item": {
+        "answers": [
+          {
+            "id": "61fb2dc048d5cb6240ce40558598ed64",
+            "text": "A girl entered her dog in a village obstacle race. He stopped at every fence to help a slower puppy climb over it. By the time they reached the finish, the prizes had been awarded. The girl asked the organizers to start a team event. Next year, the two dogs crossed the line together."
+          },
+          {
+            "id": "095c985e9ec5ea81852328ed8396e803",
+            "text": "A girl and her dog boarded a train to the sea. At the first station she realized she had left her ticket at home. The conductor found her reservation using the dog's name, which she had entered by mistake. He printed a replacement and stamped it with a paw. She framed the ticket when they returned."
+          }
+        ],
+        "id": "bdcdc29b741cb601ef9062c05a490aca",
+        "prompt": "Tell me a story in five sentences about a girl and her dog."
+      }
+    },
+    {
+      "adjudication": {
+        "disagreement_resolution": "Both submissions grouped the pair. I checked the full texts and confirmed exact equality, not merely a shared topic. Each identical answer has five narrative sentences about Mira and her dog.",
+        "item_id": "8664f647a70dd7df7e1c260b7dc7b511",
+        "rationale": "Equivalent: the texts are identical, including stealing the mitten, chasing the dog to the frozen pond, finding a duck in the ice hole and rescuing it with the mitten. Literal compliance: Every answer has five narrative sentences about a girl and her dog; craft or causal concerns are assessed separately.",
+        "status": "resolved"
+      },
+      "assessment": {
+        "answers": [
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog rescuing a duck from an ice hole after a stolen-mitten chase.",
+            "craft_notes": "",
+            "id": "d3f819db3a145e3fc39fd8364a74dc38",
+            "uncertainty": ""
+          },
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog rescuing a duck from an ice hole after a stolen-mitten chase.",
+            "craft_notes": "",
+            "id": "bc3e4c414f9cac035346f7299840f2e4",
+            "uncertainty": ""
+          }
+        ],
+        "groups": [
+          [
+            "d3f819db3a145e3fc39fd8364a74dc38",
+            "bc3e4c414f9cac035346f7299840f2e4"
+          ]
+        ],
+        "id": "8664f647a70dd7df7e1c260b7dc7b511",
+        "rationale": "Equivalent: the texts are identical, including stealing the mitten, chasing the dog to the frozen pond, finding a duck in the ice hole and rescuing it with the mitten.",
+        "uncertain_pairs": []
+      },
+      "item": {
+        "answers": [
+          {
+            "id": "d3f819db3a145e3fc39fd8364a74dc38",
+            "text": "Mira's dog stole her mitten. She chased him to the frozen pond. He dropped it beside a hole in the ice. Inside the hole, a duck was struggling to climb out. Mira used the mitten to pull it onto the bank."
+          },
+          {
+            "id": "bc3e4c414f9cac035346f7299840f2e4",
+            "text": "Mira's dog stole her mitten. She chased him to the frozen pond. He dropped it beside a hole in the ice. Inside the hole, a duck was struggling to climb out. Mira used the mitten to pull it onto the bank."
+          }
+        ],
+        "id": "8664f647a70dd7df7e1c260b7dc7b511",
+        "prompt": "Tell me a story in five sentences about a girl and her dog."
+      }
+    },
+    {
+      "adjudication": {
+        "disagreement_resolution": "Both submissions grouped the pair. I checked the unchanged chase, discovery and fawn-return actions and found only minor naming, scenery and closing-emotion variations. Both five-sentence forms comply.",
+        "item_id": "be26bf6f449325ec2e0fcb3f5e75756a",
+        "rationale": "Equivalent: the dog chases a blue butterfly, the girl follows paw prints, and they guide a lost fawn to its mother. The name change, location phrasing and hug versus tired pride are minor differences around the same plot. Literal compliance: Every answer has five narrative sentences about a girl and her dog; craft or causal concerns are assessed separately.",
+        "status": "resolved"
+      },
+      "assessment": {
+        "answers": [
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog reuniting a lost fawn with its mother after a butterfly chase.",
+            "craft_notes": "",
+            "id": "9fce9e3e951d7788c9ffb9435f580170",
+            "uncertainty": ""
+          },
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog reuniting a lost fawn with its mother after a butterfly chase.",
+            "craft_notes": "",
+            "id": "9c6265496583bc234c9d3cf9d6ea2fad",
+            "uncertainty": ""
+          }
+        ],
+        "groups": [
+          [
+            "9fce9e3e951d7788c9ffb9435f580170",
+            "9c6265496583bc234c9d3cf9d6ea2fad"
+          ]
+        ],
+        "id": "be26bf6f449325ec2e0fcb3f5e75756a",
+        "rationale": "Equivalent: the dog chases a blue butterfly, the girl follows paw prints, and they guide a lost fawn to its mother. The name change, location phrasing and hug versus tired pride are minor differences around the same plot.",
+        "uncertain_pairs": []
+      },
+      "item": {
+        "answers": [
+          {
+            "id": "9fce9e3e951d7788c9ffb9435f580170",
+            "text": "Mia and her dog, Biscuit, loved exploring the woods behind their house.  \nOne afternoon, Biscuit chased a blue butterfly and disappeared around a bend.  \nMia followed his paw prints until she found him sitting beside a lost fawn.  \nTogether, they guided the fawn back to its mother near the meadow.  \nThat evening, Mia hugged Biscuit and declared him the bravest dog in the world."
+          },
+          {
+            "id": "9c6265496583bc234c9d3cf9d6ea2fad",
+            "text": "Maya and her dog, Biscuit, loved exploring the woods behind their house.  \nOne afternoon, Biscuit chased a blue butterfly and disappeared around a bend.  \nMaya followed his paw prints until she found him beside a tiny lost fawn.  \nTogether, they guided the fawn back to its mother near the edge of the forest.  \nThat evening, Maya and Biscuit returned home tired, muddy, and proud of their adventure."
+          }
+        ],
+        "id": "be26bf6f449325ec2e0fcb3f5e75756a",
+        "prompt": "Tell me a story in five sentences about a girl and her dog."
+      }
+    },
+    {
+      "adjudication": {
+        "disagreement_resolution": "Both submissions grouped these. I checked all five corresponding events, from mail collection through the family meal; the second text restates the first plot. Both literal story forms comply.",
+        "item_id": "2da27b0ae8c3039fcff89e5530889fb3",
+        "rationale": "Equivalent paraphrases: the mail-fetching dog brings an unaddressed envelope with a garden map, the girl uncovers her grandmother's lost wedding ring and returns it at dinner. No central event or consequence changes. Literal compliance: Every answer has five narrative sentences about a girl and her dog; craft or causal concerns are assessed separately.",
+        "status": "resolved"
+      },
+      "assessment": {
+        "answers": [
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog following an unaddressed envelope's map to her grandmother's ring and returning it at dinner.",
+            "craft_notes": "",
+            "id": "226f1598c3caed2eefc194714fb3914b",
+            "uncertainty": ""
+          },
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog following an unaddressed envelope's map to her grandmother's ring and returning it at supper.",
+            "craft_notes": "",
+            "id": "d171187e870dcf82119cea13d3165e53",
+            "uncertainty": ""
+          }
+        ],
+        "groups": [
+          [
+            "226f1598c3caed2eefc194714fb3914b",
+            "d171187e870dcf82119cea13d3165e53"
+          ]
+        ],
+        "id": "2da27b0ae8c3039fcff89e5530889fb3",
+        "rationale": "Equivalent paraphrases: the mail-fetching dog brings an unaddressed envelope with a garden map, the girl uncovers her grandmother's lost wedding ring and returns it at dinner. No central event or consequence changes.",
+        "uncertain_pairs": []
+      },
+      "item": {
+        "answers": [
+          {
+            "id": "226f1598c3caed2eefc194714fb3914b",
+            "text": "A girl taught her dog to bring letters from the gate. One morning he brought a sealed envelope addressed to nobody. She opened it and found a map of the garden. Following it, she unearthed her grandmother's missing wedding ring. That evening she returned it at the family dinner."
+          },
+          {
+            "id": "d171187e870dcf82119cea13d3165e53",
+            "text": "Every day a girl sent her dog to fetch the mail. This time he returned with an envelope bearing no name. Its contents were a plan showing a buried spot in their yard. There she dug up the wedding ring her grandmother had lost. She gave it back to her grandmother over supper."
+          }
+        ],
+        "id": "2da27b0ae8c3039fcff89e5530889fb3",
+        "prompt": "Tell me a story in five sentences about a girl and her dog."
+      }
+    },
+    {
+      "adjudication": {
+        "disagreement_resolution": "Both submissions separated these. I verified that the memory-flower story depends on a different central recovery mechanism and image from the obstruction-clearing story, rather than treating all restored-water endings as equivalent. Each has five narrative sentences about the girl and her dog.",
+        "item_id": "d4ec43273c6d8f4c59d77fa59427638a",
+        "rationale": "Distinct: a memory-bearing underground garden and reading a spring's memory while digging restore the well in one story, while removing fallen branches from an underground stream restores the wheel and fountains in the other. A shared goal of village water restoration does not erase the different operative discovery, magical image and intervention. Literal compliance: Every answer has five narrative sentences about a girl and her dog; craft or causal concerns are assessed separately.",
+        "status": "resolved"
+      },
+      "assessment": {
+        "answers": [
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog reading a flower-held memory and digging a channel to restore the village spring.",
+            "craft_notes": "",
+            "id": "db74c37fc59c517eef8568c12eadab4b",
+            "uncertainty": ""
+          },
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog clearing branches from an underground stream to restore village water.",
+            "craft_notes": "",
+            "id": "58f993adc274019328c7b10464be47f9",
+            "uncertainty": ""
+          }
+        ],
+        "groups": [
+          [
+            "db74c37fc59c517eef8568c12eadab4b"
+          ],
+          [
+            "58f993adc274019328c7b10464be47f9"
+          ]
+        ],
+        "id": "d4ec43273c6d8f4c59d77fa59427638a",
+        "rationale": "Distinct: a memory-bearing underground garden and reading a spring's memory while digging restore the well in one story, while removing fallen branches from an underground stream restores the wheel and fountains in the other. A shared goal of village water restoration does not erase the different operative discovery, magical image and intervention.",
+        "uncertain_pairs": []
+      },
+      "item": {
+        "answers": [
+          {
+            "id": "db74c37fc59c517eef8568c12eadab4b",
+            "text": "Mara and her dog, Pip, discovered a tiny door in the roots of the oldest tree in their village.  \nWhen Mara unlocked it, a staircase appeared, leading to an underground garden where every plant held a forgotten memory.  \nPip sniffed out the wilted silver flower containing the memory of the village’s missing spring.  \nMara read the memory aloud while Pip dug a channel from the garden to the dry village well.  \nBy sunrise, the spring returned, and the villagers planted a new tree whose roots sheltered the secret door."
+          },
+          {
+            "id": "58f993adc274019328c7b10464be47f9",
+            "text": "Mara and her dog, Pippin, lived beside a dry riverbed where the village’s water wheel had stopped turning.  \nOne morning, Pippin began barking at a patch of moss-covered stones, and Mara discovered a buried tunnel beneath them.  \nShe crawled inside with Pippin and found that fallen branches had blocked an underground stream.  \nWhile Pippin squeezed through a narrow gap to pull loose the smallest branches, Mara used her shovel to clear the larger ones.  \nWater rushed back to the wheel, the village fountains splashed again, and Mara and Pippin became the keepers of the hidden stream."
+          }
+        ],
+        "id": "d4ec43273c6d8f4c59d77fa59427638a",
+        "prompt": "Tell me a story in five sentences about a girl and her dog."
+      }
+    },
+    {
+      "adjudication": {
+        "disagreement_resolution": "Both submissions grouped the pair. I checked the same dog-directed kennel opening, puppy discovery and care sequence, while retaining the first text's empty/occupied contradiction and unclear feeding as craft concerns. Those do not create a new central episode or break the required five-sentence form.",
+        "item_id": "33d067fb4613a2ef2da48df5f8ef1e19",
+        "rationale": "Equivalent central plot: the dog waits at a locked kennel, the girl opens it, discovers puppies, and they care for them. Kitchen versus milk-and-bottles and the first version's internal problems change realization or craft, not the main rescue-and-care episode. Literal compliance: Every answer has five narrative sentences about a girl and her dog; craft or causal concerns are assessed separately.",
+        "status": "resolved"
+      },
+      "assessment": {
+        "answers": [
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog opening a locked kennel, finding puppies and taking them inside for care.",
+            "craft_notes": "The kennel is called empty before puppies are discovered inside, without marking that as an initial mistaken impression. The male dog settling down to feed them leaves the feeding method unclear; a nursing mechanism is not assumed.",
+            "id": "ac86a5d7632a449920f1ba6ea5b972dd",
+            "uncertainty": ""
+          },
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog opening a locked kennel and helping bottle-feed abandoned puppies.",
+            "craft_notes": "",
+            "id": "07400b060e67495573c0c690256e1515",
+            "uncertainty": ""
+          }
+        ],
+        "groups": [
+          [
+            "ac86a5d7632a449920f1ba6ea5b972dd",
+            "07400b060e67495573c0c690256e1515"
+          ]
+        ],
+        "id": "33d067fb4613a2ef2da48df5f8ef1e19",
+        "rationale": "Equivalent central plot: the dog waits at a locked kennel, the girl opens it, discovers puppies, and they care for them. Kitchen versus milk-and-bottles and the first version's internal problems change realization or craft, not the main rescue-and-care episode.",
+        "uncertain_pairs": []
+      },
+      "item": {
+        "answers": [
+          {
+            "id": "ac86a5d7632a449920f1ba6ea5b972dd",
+            "text": "A girl found her dog sitting beside an empty kennel. He would not move until she opened its locked door. Inside, she found a litter of puppies. She carried them to the kitchen. He followed and settled down to feed them."
+          },
+          {
+            "id": "07400b060e67495573c0c690256e1515",
+            "text": "A girl found her dog guarding a locked kennel. She fetched its key and opened the door. A litter of abandoned puppies huddled inside. She warmed milk while he curled around them. By morning, every puppy was feeding from a bottle."
+          }
+        ],
+        "id": "33d067fb4613a2ef2da48df5f8ef1e19",
+        "prompt": "Tell me a story in five sentences about a girl and her dog."
+      }
+    },
+    {
+      "adjudication": {
+        "disagreement_resolution": "Both submissions separated the pair. I checked the explanatory reversal in the gutter story against successful use of the warning in the market story; those are opposing central developments, not paraphrases. Both have five narrative sentences about the girl and her dog.",
+        "item_id": "e7feb4d99fea5f238cd59e3cdf82aa3b",
+        "rationale": "Distinct: one plot overturns the weather-predicting belief by discovering and fixing a noisy gutter; the other uses the dog's warnings to save market goods and earns a reward. Identical opening observations lead to different causal accounts, actions and conclusions. Literal compliance: Every answer has five narrative sentences about a girl and her dog; craft or causal concerns are assessed separately.",
+        "status": "resolved"
+      },
+      "assessment": {
+        "answers": [
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog discovering that a gutter explains the barking and abandoning the dog's weather forecasts.",
+            "craft_notes": "",
+            "id": "6e332d69421cb978781b64511da3d3cf",
+            "uncertainty": ""
+          },
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog using the dog's rain warnings to help market stalls save their goods.",
+            "craft_notes": "",
+            "id": "1f6ccfb5fcae50a774c4d98e6c87fbc1",
+            "uncertainty": ""
+          }
+        ],
+        "groups": [
+          [
+            "6e332d69421cb978781b64511da3d3cf"
+          ],
+          [
+            "1f6ccfb5fcae50a774c4d98e6c87fbc1"
+          ]
+        ],
+        "id": "e7feb4d99fea5f238cd59e3cdf82aa3b",
+        "rationale": "Distinct: one plot overturns the weather-predicting belief by discovering and fixing a noisy gutter; the other uses the dog's warnings to save market goods and earns a reward. Identical opening observations lead to different causal accounts, actions and conclusions.",
+        "uncertain_pairs": []
+      },
+      "item": {
+        "answers": [
+          {
+            "id": "6e332d69421cb978781b64511da3d3cf",
+            "text": "A girl noticed that her dog barked before every rainstorm. She thought he was predicting the weather. One afternoon she followed his gaze to a loose gutter tapping against the window. She fixed the gutter and waited through the next storm in silence. The dog slept while she crossed out his weather forecasts."
+          },
+          {
+            "id": "1f6ccfb5fcae50a774c4d98e6c87fbc1",
+            "text": "A girl noticed that her dog barked before every rainstorm. She began taking him to the market to warn the stallholders. They built folding roofs and saved their stock from the next downpour. The dog received a basket of biscuits. She kept one for herself."
+          }
+        ],
+        "id": "e7feb4d99fea5f238cd59e3cdf82aa3b",
+        "prompt": "Tell me a story in five sentences about a girl and her dog."
+      }
+    },
+    {
+      "adjudication": {
+        "disagreement_resolution": "Both submissions separated the pair. I checked the actual gift and its consequence rather than letting shared garden imagery decide: a souvenir and a new communication ability are different central payoffs. Both five-sentence story forms comply.",
+        "item_id": "a58d409d4c57a0355ae8c255154c9c6b",
+        "rationale": "Distinct: a garden visit ends with a silver-flower souvenir in one story; in the other, the garden grants the dog a collar that enables understanding the girl's words. A lasting communication change supplies new central content beyond the shared tiny door and luminous garden. Literal compliance: Every answer has five narrative sentences about a girl and her dog; craft or causal concerns are assessed separately.",
+        "status": "resolved"
+      },
+      "assessment": {
+        "answers": [
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog visiting an enchanted garden and returning with a silver-flower keepsake.",
+            "craft_notes": "The moonlit garden and return before sunset leave timing unexplained; the fantasy setting can accommodate that, so it is not a literal form violation.",
+            "id": "216b6020c9f578762aabb8a82cc7858a",
+            "uncertainty": ""
+          },
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog entering a singing garden where the dog gains a collar for understanding her speech.",
+            "craft_notes": "",
+            "id": "646b082f13a763daa9684761eadb283d",
+            "uncertainty": ""
+          }
+        ],
+        "groups": [
+          [
+            "216b6020c9f578762aabb8a82cc7858a"
+          ],
+          [
+            "646b082f13a763daa9684761eadb283d"
+          ]
+        ],
+        "id": "a58d409d4c57a0355ae8c255154c9c6b",
+        "rationale": "Distinct: a garden visit ends with a silver-flower souvenir in one story; in the other, the garden grants the dog a collar that enables understanding the girl's words. A lasting communication change supplies new central content beyond the shared tiny door and luminous garden.",
+        "uncertain_pairs": []
+      },
+      "item": {
+        "answers": [
+          {
+            "id": "216b6020c9f578762aabb8a82cc7858a",
+            "text": "Maya and her dog, Biscuit, loved exploring the forest behind their house.  \nOne morning, they discovered a tiny blue door hidden beneath an old oak tree.  \nWhen Maya opened it, a trail of glowing paw prints led them to a moonlit garden.  \nBiscuit barked happily as friendly fireflies danced around them.  \nThey returned home before sunset, carrying a single silver flower as a magical reminder."
+          },
+          {
+            "id": "646b082f13a763daa9684761eadb283d",
+            "text": "Lily and her dog, Max, loved exploring the woods behind their house.  \nOne morning, Max raced ahead and discovered a tiny door hidden beneath an old oak tree.  \nWhen Lily opened it, they found a glowing garden filled with singing flowers.  \nThe flowers gave Max a golden collar that helped him understand every word Lily said.  \nFrom that day on, Lily and Max shared the most wonderful adventures together."
+          }
+        ],
+        "id": "a58d409d4c57a0355ae8c255154c9c6b",
+        "prompt": "Tell me a story in five sentences about a girl and her dog."
+      }
+    },
+    {
+      "adjudication": {
+        "disagreement_resolution": "Both submissions separated these stories. I checked the missing-part repair and maritime danger against the blockage-removal and water-supply goal; lighthouse scenery does not make them equivalent. Both five-sentence forms comply.",
+        "item_id": "c68c830af8c997b24e3a9b67c7f345f4",
+        "rationale": "Distinct: compass-led crystal recovery repairs a foghorn and averts danger to boats; pipe-following and clearing a spring restore fresh drinking water. A lighthouse, hidden route and helpful dog are shared, but the central problem, intervention and outcome differ. Literal compliance: Every answer has five narrative sentences about a girl and her dog; craft or causal concerns are assessed separately.",
+        "status": "resolved"
+      },
+      "assessment": {
+        "answers": [
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog retrieving a missing crystal to repair the foghorn before boats hit rocks.",
+            "craft_notes": "",
+            "id": "eecc49d79aad0fc118a55928305df255",
+            "uncertainty": ""
+          },
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog following a pipe and clearing a blocked spring to restore fresh water.",
+            "craft_notes": "The bell's detecting rule is not used explicitly in the action, and the blockage-to-saltiness link is not developed.",
+            "id": "478e7be78120f0912f270c05e9d8fc36",
+            "uncertainty": ""
+          }
+        ],
+        "groups": [
+          [
+            "eecc49d79aad0fc118a55928305df255"
+          ],
+          [
+            "478e7be78120f0912f270c05e9d8fc36"
+          ]
+        ],
+        "id": "c68c830af8c997b24e3a9b67c7f345f4",
+        "rationale": "Distinct: compass-led crystal recovery repairs a foghorn and averts danger to boats; pipe-following and clearing a spring restore fresh drinking water. A lighthouse, hidden route and helpful dog are shared, but the central problem, intervention and outcome differ.",
+        "uncertain_pairs": []
+      },
+      "item": {
+        "answers": [
+          {
+            "id": "eecc49d79aad0fc118a55928305df255",
+            "text": "Mara and her dog, Pip, lived in a lighthouse on a cliff where the fog had hidden the sea for three days.  \nOne morning, Pip dug up an old brass compass that pointed not toward north but toward the lighthouse stairs.  \nFollowing it, Mara discovered that the foghorn’s missing crystal had rolled into a sealed storage tunnel beneath the tower.  \nPip squeezed through a crack to nudge the crystal back to Mara, who repaired the foghorn just as fishing boats began drifting dangerously toward the rocks.  \nWhen the fog lifted, the grateful sailors cheered from the water, while Mara and Pip watched the sunrise from the lighthouse roof."
+          },
+          {
+            "id": "478e7be78120f0912f270c05e9d8fc36",
+            "text": "Mara and her dog, Pippin, discovered that the old lighthouse bell rang whenever the sea hid something important.  \nWhen the fishing village’s fresh-water well suddenly turned salty, Mara climbed the lighthouse stairs while Pippin sniffed along the walls.  \nPippin scratched at a loose stone, and Mara found a copper pipe leading beneath the cliffs.  \nTogether they followed it to a blocked spring, where Mara cleared the stones and Pippin dragged out a torn sailcloth clogging the opening.  \nFresh water rushed back to the village, and from then on Mara and Pippin became the keepers of the lighthouse’s mysterious bell."
+          }
+        ],
+        "id": "c68c830af8c997b24e3a9b67c7f345f4",
+        "prompt": "Tell me a story in five sentences about a girl and her dog."
+      }
+    },
+    {
+      "adjudication": {
+        "disagreement_resolution": "Both submissions gave the same groups and compliance labels. I checked the blank text as presented, the two opposing selections and the explanation's explicit choice of 0. Neither adding an explanation nor failing the required form changes that central choice, and the blank answer is not assigned an intended digit.",
+        "item_id": "8ea2c26319ada4d4865fcd7cd05b661d",
+        "rationale": "The selections 1 and 0 have different central answers. The empty answer supplies no choice and is kept separate without inference. The extended answer still centrally selects 0; the doorway comparison is a minor reason attached to that choice, while violating the exact output requirement. Literal compliance: The single digits 1 and 0 comply. The blank response and the explanatory sentence violate the exact one-digit form.",
+        "status": "resolved"
+      },
+      "assessment": {
+        "answers": [
+          {
+            "compliance": "complies",
+            "compliance_rationale": "The entire response is exactly the single permitted digit 1.",
+            "craft_notes": "",
+            "id": "5baf0f6ed779e18cf33dda69bc6367ca",
+            "uncertainty": ""
+          },
+          {
+            "compliance": "violates",
+            "compliance_rationale": "The response is empty, so it does not contain the required one digit.",
+            "craft_notes": "",
+            "id": "52b70b147e7bd11fe5373988141cbc15",
+            "uncertainty": ""
+          },
+          {
+            "compliance": "complies",
+            "compliance_rationale": "The entire response is exactly the single permitted digit 0.",
+            "craft_notes": "",
+            "id": "71c7a847a58b93d2de23bcc07c4563c6",
+            "uncertainty": ""
+          },
+          {
+            "compliance": "violates",
+            "compliance_rationale": "The response includes words, spaces and punctuation beyond the required single digit.",
+            "craft_notes": "",
+            "id": "59c458b071ef37f0c3fd08d14d6b6d8f",
+            "uncertainty": ""
+          }
+        ],
+        "groups": [
+          [
+            "5baf0f6ed779e18cf33dda69bc6367ca"
+          ],
+          [
+            "52b70b147e7bd11fe5373988141cbc15"
+          ],
+          [
+            "71c7a847a58b93d2de23bcc07c4563c6",
+            "59c458b071ef37f0c3fd08d14d6b6d8f"
+          ]
+        ],
+        "id": "8ea2c26319ada4d4865fcd7cd05b661d",
+        "rationale": "The selections 1 and 0 have different central answers. The empty answer supplies no choice and is kept separate without inference. The extended answer still centrally selects 0; the doorway comparison is a minor reason attached to that choice, while violating the exact output requirement.",
+        "uncertain_pairs": []
+      },
+      "item": {
+        "answers": [
+          {
+            "id": "5baf0f6ed779e18cf33dda69bc6367ca",
+            "text": "1"
+          },
+          {
+            "id": "52b70b147e7bd11fe5373988141cbc15",
+            "text": ""
+          },
+          {
+            "id": "71c7a847a58b93d2de23bcc07c4563c6",
+            "text": "0"
+          },
+          {
+            "id": "59c458b071ef37f0c3fd08d14d6b6d8f",
+            "text": "I choose 0 because it looks like a doorway."
+          }
+        ],
+        "id": "8ea2c26319ada4d4865fcd7cd05b661d",
+        "prompt": "Choose either 0 or 1. Respond with exactly one digit and no other characters."
+      }
+    },
+    {
+      "adjudication": {
+        "disagreement_resolution": "Both submissions separated these. I checked the rescue mechanism and immediate fawn release against the extended planting and flower-sharing outcome. The common opening talent does not supply equivalent central content. Both have five narrative sentences.",
+        "item_id": "bba87d6fd854389765a0303dce90450e",
+        "rationale": "Distinct: opening a gate to free a fawn at a tunnel is the central event in one story; discovering seed packets, growing unusual flowers and sharing them with the library is the other's central development. The rain-smelling talent and dog leading the girl somewhere are shared setup, not the same plot. Literal compliance: Every answer has five narrative sentences about a girl and her dog; craft or causal concerns are assessed separately.",
+        "status": "resolved"
+      },
+      "assessment": {
+        "answers": [
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog opening a gate at a train tunnel to free a fawn as rain arrives.",
+            "craft_notes": "The rain-smelling talent frames the scene but does not explain how the dog locates the trapped fawn.",
+            "id": "6fab571ac6d066fc056a1f04f8cea742",
+            "uncertainty": ""
+          },
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog finding abandoned seeds, growing unusual flowers and sharing them with the library.",
+            "craft_notes": "The rain-smelling talent is introduced without an operative role in the seed discovery or garden outcome.",
+            "id": "1eda249504c6a4412c0308ed99fc7ce1",
+            "uncertainty": ""
+          }
+        ],
+        "groups": [
+          [
+            "6fab571ac6d066fc056a1f04f8cea742"
+          ],
+          [
+            "1eda249504c6a4412c0308ed99fc7ce1"
+          ]
+        ],
+        "id": "bba87d6fd854389765a0303dce90450e",
+        "rationale": "Distinct: opening a gate to free a fawn at a tunnel is the central event in one story; discovering seed packets, growing unusual flowers and sharing them with the library is the other's central development. The rain-smelling talent and dog leading the girl somewhere are shared setup, not the same plot.",
+        "uncertain_pairs": []
+      },
+      "item": {
+        "answers": [
+          {
+            "id": "6fab571ac6d066fc056a1f04f8cea742",
+            "text": "Mara’s dog, Fig, could smell rain hours before the clouds arrived.  \nOne afternoon, Fig dragged her toward the old train tunnel, where they found a tiny fawn trapped behind a fallen gate.  \nMara squeezed through the bars, but the gate would not budge until Fig tugged a rusted lever hidden beneath the weeds.  \nThe fawn limped free and disappeared into the forest just as rain began tapping the rails.  \nFrom then on, Mara trusted Fig’s nose—even when it led them somewhere she had never dared to go."
+          },
+          {
+            "id": "1eda249504c6a4412c0308ed99fc7ce1",
+            "text": "Mara’s dog, Pippin, could smell rain hours before the clouds appeared.  \nOne afternoon, he tugged her toward the old greenhouse behind the library, where they found a box of abandoned seed packets.  \nMara planted them in her backyard, while Pippin guarded the rows from hungry sparrows.  \nBy summer, the garden had grown into a maze of sunflowers, beans, and tiny blue flowers no one had seen before.  \nMara gave the mysterious blossoms to the library, and Pippin became famous as the dog who discovered a new kind of garden."
+          }
+        ],
+        "id": "bba87d6fd854389765a0303dce90450e",
+        "prompt": "Tell me a story in five sentences about a girl and her dog."
+      }
+    },
+    {
+      "adjudication": {
+        "disagreement_resolution": "Both submissions separated the pair. I checked the blackout, waiting and fort celebration against retrieving and delivering the cookies; these are different episodes. Both five-sentence forms comply.",
+        "item_id": "8433af3c1b37d8fd660566988aabf71e",
+        "rationale": "Distinct: a power outage interrupts blanket-fort play and leads to a shared wait before enlarging the fort; scattered cookies interrupt a delivery and are recovered for a neighbor. The central problem and action sequence differ despite the common friendly girl-and-dog tone. Literal compliance: Every answer has five narrative sentences about a girl and her dog; craft or causal concerns are assessed separately.",
+        "status": "resolved"
+      },
+      "assessment": {
+        "answers": [
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog waiting through a power outage and then enlarging their blanket fort.",
+            "craft_notes": "",
+            "id": "949759694a7f653398bcfe31505757f7",
+            "uncertainty": ""
+          },
+          {
+            "compliance": "complies",
+            "compliance_rationale": "Five sentences tell a story about a girl and her dog recovering wind-scattered cookies and completing a neighbor's delivery.",
+            "craft_notes": "",
+            "id": "c7853941b71b358a5c05600e60a796c9",
+            "uncertainty": ""
+          }
+        ],
+        "groups": [
+          [
+            "949759694a7f653398bcfe31505757f7"
+          ],
+          [
+            "c7853941b71b358a5c05600e60a796c9"
+          ]
+        ],
+        "id": "8433af3c1b37d8fd660566988aabf71e",
+        "rationale": "Distinct: a power outage interrupts blanket-fort play and leads to a shared wait before enlarging the fort; scattered cookies interrupt a delivery and are recovered for a neighbor. The central problem and action sequence differ despite the common friendly girl-and-dog tone.",
+        "uncertain_pairs": []
+      },
+      "item": {
+        "answers": [
+          {
+            "id": "949759694a7f653398bcfe31505757f7",
+            "text": "Lena and her dog, Biscuit, built a blanket fort in the living room on a rainy afternoon.  \nWhen the lights suddenly went out, Biscuit bravely led Lena through the dark house with a flashlight tied to his collar.  \nThey discovered that a fallen branch had knocked out the power outside.  \nWhile they waited for help, Lena shared her snacks with Biscuit and told him stories by candlelight.  \nWhen the lights returned, they celebrated by making their fort even bigger."
+          },
+          {
+            "id": "c7853941b71b358a5c05600e60a796c9",
+            "text": "Clara and her dog, Toby, set out early to deliver homemade cookies to their elderly neighbor.  \nOn the way, a gust of wind scattered the cookies across the sidewalk.  \nToby sniffed out every last one and carried them gently back in his basket.  \nTheir neighbor laughed with delight when they finally arrived.  \nAs a reward, she gave Toby a bright blue ribbon and Clara a warm hug."
+          }
+        ],
+        "id": "8433af3c1b37d8fd660566988aabf71e",
+        "prompt": "Tell me a story in five sentences about a girl and her dog."
+      }
+    }
+  ],
+  "format": "buddha.meas01-expectations.v1",
+  "limits": [
+    "Explicit model-development expectations, not objective truth or official scores.",
+    "Declared IDs and byte bindings do not establish model diversity or independence.",
+    "Unresolved cases stay explicit; no majority vote, pair closure or gold labels.",
+    "Human scientific audit and held-out claims remain separate open gates."
+  ],
+  "pack_sha256": "8a29cded45e11f62eaecba52e5d9c30a88e2733b28cc8138aa2fdb38d025bf15",
+  "response_sha256": "1c9607bbea5917ceb69f17a80b31b8c5c589342d05711923ca7e8c3889fd6483",
+  "submission_sha256": [
+    "62ffe48b752fa73a05cad5b8841a306ef439f62baa5e6fa37d025789838d74f9",
+    "fb33d2f73e30888e6ead75ca0385c38eab4c6498ec32e281e7894480273501a3"
+  ],
+  "unresolved_item_ids": [
+    "92bbea60cc82d82c3f0727116decc86b",
+    "51234f90d16f7154c9064a7637c48093",
+    "a6deca95bec239a475b0124ec6348ff6",
+    "eb0cebeb4449dc16174c85a9a0d878b9",
+    "80262d25cd742e1fdfec68a8c9c7017a"
+  ]
+}

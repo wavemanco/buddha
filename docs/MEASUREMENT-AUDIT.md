@@ -1,8 +1,9 @@
 # Review distinctiveness without changing the benchmark
 
-MEAS-01 prepares independent review of the preserved development examples.
-[PLAN.md](PLAN.md) owns its status and completion gate. Preparing a pack does not
-complete that gate or prove that the original judge was wrong.
+MEAS-01 supplies blinded review of the preserved development examples.
+[PLAN.md](PLAN.md) owns its status and completion gate. The bounded model review
+and adjudication are complete; [results](MEASUREMENT-AUDIT-RESULTS.md) retain
+uncertainty and do not establish that the original judge was wrong.
 
 The pack uses the exact official equivalence rule from the pilot's pinned
 NoveltyBench v1.1 source. The benchmark's scores, classes and original answer order
@@ -54,7 +55,12 @@ without it, the folder is incomplete.
 
 The inventory and historical run files are local evidence under ignored `runs/`;
 they are not included in a fresh Git clone. The committed helper, authored controls
-and portable fixture tests remain reproducible without those private inputs.
+and portable fixture tests remain reproducible without those private inputs. The
+completed study also publishes its exact anonymous pack, raw reviews and
+adjudication under [the study manifest](conformance/meas01-study/manifest.json).
+That manifest and the [expectations fixture](../tests/fixtures/meas01-expectations.json)
+allow the review bindings to be checked from a fresh clone without the original
+private inventory; they do not recreate the original live calls.
 
 ## What to give a reviewer
 
@@ -86,29 +92,35 @@ empty. Preserve each response's exact bytes and hash before comparing reviewers;
 record later adjudication and remaining uncertainty separately. Unresolved cases
 remain unresolved. No automatic merging or corrected official ranking follows.
 
-## Remaining gate
+## Completed bounded review and remaining scientific gate
 
-Independent review and explicit adjudication remain open after pack preparation.
-Two fresh, separately instructed Codex model sessions received only the same
-reviewer folder, without this chat, the private key or earlier reports. Their raw
-responses were frozen before comparison or adjudication. The first instructions
-omitted the exact uncertain-pair field names; both original responses are retained,
-and a versioned formatting clarification produced structurally valid copies with
-all judgments unchanged. A fresh blinded adjudicator now receives only the pack
-and those two frozen responses. The inherited
-model's resolved identifier is unavailable in the exposed metadata; that limit
-and possible shared-model dependence must remain explicit. Separate sessions do
-not establish statistical or diverse-model independence.
+Two fresh, separately instructed Codex model sessions received only the public
+reviewer material, without this chat, the private key or earlier reports. Their
+raw responses were frozen before comparison. The first instructions omitted
+exact uncertain-pair field names; originals are retained beside valid copies,
+with all 24 format-only corrections checked to preserve every judgment. A third
+fresh model session received only the public material and frozen valid reviews
+for explicit adjudication. Its response and decisions were frozen before unblinding.
 
-A preparer who has seen policies and scores is not a cold reviewer. The human
-sample in [DESIGN.md](DESIGN.md) remains a separate requirement for the broader
-scientific judge-exploitation gate. The plan does not require that sample before
-MEAS-01 can obtain bounded model-development judgments. Model-only review cannot
-claim the human component, a fully identified frozen model instrument or scientific
-validity for subsequent experiments.
+The [results](MEASUREMENT-AUDIT-RESULTS.md) and
+[independent provenance audit](conformance/meas01-adjudication-review.json) record
+17 explicitly resolved items and five uncertain items. Both original reviews,
+disagreements and remaining uncertainty remain visible. The helper's pure
+`adjudicated_expectations` API checks exact raw review/adjudication hashes,
+coverage, declared identities and explicit resolution before exporting selected
+complete items. This study selects every resolved item in pack order and excludes
+every uncertain item. It does not turn a majority vote or provisional grouping
+into gold, change official partitions or assign a corrected ranking.
 
-Only explicitly adjudicated cases can become semantic regression expectations.
-MEAS-02 will separately test the official judge's application of its rule, ordering
+A preparer who has seen policies and scores is not a cold reviewer. Restrictions
+were instructional and access self-reported, not OS confinement. The inherited
+models' resolved identifiers are unavailable; separate sessions do not establish
+statistical or diverse-model independence. These are bounded model-development
+judgments, not human ground truth or a fully identified frozen audit instrument.
+The human sample in [DESIGN.md](DESIGN.md) remains required for the broader
+scientific judge-exploitation gate and EVAL-02; it has not been completed here.
+
+MEAS-02 separately tests the official judge's application of its rule, ordering
 and source-prescribed lenient recovery. Independent labels never silently replace
 the benchmark. Additional paid judging requires its own concrete allocation;
 the historical $50 authorization is not reusable permission for this work.

@@ -1,0 +1,69 @@
+{
+  "actors": {
+    "adjudicator": "/root/meas01_blind_adjudicator",
+    "resolved_model_identifier": null,
+    "reviewers": [
+      "/root/meas01_blind_r1",
+      "/root/meas01_blind_r2"
+    ],
+    "type": "model"
+  },
+  "assessment": "Model-adjudicated development expectations; no official score or objective truth claim",
+  "blinding": {
+    "adjudicator_materials": [
+      "pack.json",
+      "review-instructions-v2.md",
+      "response-template.json",
+      "review-1.json",
+      "review-2.json"
+    ],
+    "enforcement": "Instructional restriction; reviewers self-reported material access; not OS confinement",
+    "fresh_fork": "none",
+    "private_key_or_old_scores_supplied": false,
+    "reviewer_materials": [
+      "pack.json",
+      "review-instructions-v1.md",
+      "response-template.json"
+    ]
+  },
+  "clarification": {
+    "mapping": "answer_ids[0] -> left; answer_ids[1] -> right; reason -> rationale",
+    "scope": "Uncertain-pair object keys only; original bytes preserved and all other decisions equal",
+    "semantic_rule_or_task_or_answer_changes": false,
+    "version": 2
+  },
+  "cost_scope": {
+    "Codex_platform_model_usage": "Used native delegation; exact platform cost and model identifier unavailable, not claimed universally free",
+    "benchmark_provider_API_calls": 0,
+    "new_benchmark_allocation": false
+  },
+  "counts": {
+    "answer_appearances": 96,
+    "items": 22,
+    "resolved_items": 17,
+    "uncertain_items": 5
+  },
+  "date": "2026-10-20",
+  "files": {
+    "docs/conformance/meas01-study/adjudication.json": "90f27482740ed16a14992d0691ce657b64071f03b2dcbf5be6d837658b85aadf",
+    "docs/conformance/meas01-study/adjudicator-response.json": "1c9607bbea5917ceb69f17a80b31b8c5c589342d05711923ca7e8c3889fd6483",
+    "docs/conformance/meas01-study/pack.json": "8a29cded45e11f62eaecba52e5d9c30a88e2733b28cc8138aa2fdb38d025bf15",
+    "docs/conformance/meas01-study/response-template.json": "d24eb17f5f1ff6aa460b351344e10d87595fe9199a75f53a5df9ce1ddfe47eff",
+    "docs/conformance/meas01-study/review-1-original.json": "1040b617a53a558bba529df933cab26634ad283901823b3db45c84041e3ed2d4",
+    "docs/conformance/meas01-study/review-1.json": "62ffe48b752fa73a05cad5b8841a306ef439f62baa5e6fa37d025789838d74f9",
+    "docs/conformance/meas01-study/review-2-original.json": "591dbbcc2aef2e1649e6f758113e8fd597c9f5eaa1830fe42869a3e1b253ca9c",
+    "docs/conformance/meas01-study/review-2.json": "fb33d2f73e30888e6ead75ca0385c38eab4c6498ec32e281e7894480273501a3",
+    "docs/conformance/meas01-study/review-instructions-v1.md": "552408a06da88cb6b3224f5cb457106ab5a3470d9ccab3983cb011ea19dff75d",
+    "docs/conformance/meas01-study/review-instructions-v2.md": "4aaec6b793a7d7e60c54305870b7041cbaf76f4f2d53eb3287339ef85e48e4d5",
+    "tests/fixtures/meas01-expectations.json": "9211231da884cdce93a9a9b0c486d7f582646a113623f0ba784177808c6571d8"
+  },
+  "format": "buddha.meas01-study.v1",
+  "limits": [
+    "Separate contexts are not statistical or diverse-model independence",
+    "No human sample or fully identified frozen model audit instrument",
+    "One development prompt plus authored controls; repeated/inherited appearances are dependent",
+    "No new original official partitions/scores/utility/rankings",
+    "Unresolved items produce no regression expectations; labels are versioned model judgments, not immutable ground truth"
+  ],
+  "selection_rule": "all_explicitly_resolved_complete_items"
+}

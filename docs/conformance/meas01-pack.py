@@ -455,6 +455,103 @@ def validate_submission(pack, submission):
         raise ValueError("malformed review submission") from error
 
 
+def _adjudicated_expectations(pack, submissions, response, record, selected_item_ids):
+    if not isinstance(submissions, list) or len(submissions) != 2:
+        raise ValueError("this study requires two frozen reviews")
+    for raw in [*submissions, response, record]:
+        if type(raw) is not bytes or len(raw) > 5 * 1024 * 1024:
+            raise ValueError("bounded raw JSON bytes required")
+    reviews = [parse(raw) for raw in submissions]
+    final, document = parse(response), parse(record)
+    for reviewed in [*reviews, final]:
+        validate_submission(pack, reviewed)
+    reviewer_ids = [reviewed["reviewer"]["id"] for reviewed in reviews]
+    if len(set(reviewer_ids)) != 2 or final["reviewer"]["id"] in reviewer_ids:
+        raise ValueError("separate declared reviewer and adjudicator IDs required")
+    if set(document) != {
+        "format",
+        "pack_sha256",
+        "adjudicator",
+        "submission_sha256",
+        "response_sha256",
+        "cases",
+    }:
+        raise ValueError("adjudication fields differ")
+    if (
+        document["format"] != "buddha.meas01-adjudication.v1"
+        or document["pack_sha256"] != digest(encode(pack))
+        or document["submission_sha256"] != [digest(raw) for raw in submissions]
+        or document["response_sha256"] != digest(response)
+        or document["adjudicator"] != final["reviewer"]
+    ):
+        raise ValueError("frozen adjudication binding differs")
+    material = {item["id"]: item for item in pack["items"]}
+    assessments = {item["id"]: item for item in final["items"]}
+    if not isinstance(document["cases"], list):
+        raise ValueError("explicit case decisions required")
+    decisions = {}
+    for case in document["cases"]:
+        if set(case) != {"item_id", "status", "rationale", "disagreement_resolution"}:
+            raise ValueError("adjudicated case fields differ")
+        item_id = case["item_id"]
+        if item_id not in material or item_id in decisions:
+            raise ValueError("unknown or duplicate adjudicated case")
+        if case["status"] not in ("resolved", "uncertain"):
+            raise ValueError("explicit resolution status required")
+        _text(case["rationale"])
+        _text(case["disagreement_resolution"])
+        assessment = assessments[item_id]
+        if case["status"] == "resolved" and (
+            assessment["uncertain_pairs"]
+            or any(answer["compliance"] == "uncertain" for answer in assessment["answers"])
+        ):
+            raise ValueError("explicit uncertainty cannot become a resolved expectation")
+        decisions[item_id] = case
+    if set(decisions) != set(material):
+        raise ValueError("adjudicated case coverage incomplete")
+    if not isinstance(selected_item_ids, list) or len(set(selected_item_ids)) != len(
+        selected_item_ids
+    ):
+        raise ValueError("unique explicit selection required")
+    for item_id in selected_item_ids:
+        if item_id not in decisions or decisions[item_id]["status"] != "resolved":
+            raise ValueError("selected case is not explicitly resolved")
+    result = {
+        "format": "buddha.meas01-expectations.v1",
+        "pack_sha256": document["pack_sha256"],
+        "submission_sha256": document["submission_sha256"],
+        "response_sha256": digest(response),
+        "adjudication_sha256": digest(record),
+        "adjudicator": document["adjudicator"],
+        "cases": [
+            {
+                "item": material[item_id],
+                "assessment": assessments[item_id],
+                "adjudication": decisions[item_id],
+            }
+            for item_id in selected_item_ids
+        ],
+        "unresolved_item_ids": [
+            item_id for item_id in material if decisions[item_id]["status"] == "uncertain"
+        ],
+        "limits": [
+            "Explicit model-development expectations, not objective truth or official scores.",
+            "Declared IDs and byte bindings do not establish model diversity or independence.",
+            "Unresolved cases stay explicit; no majority vote, pair closure or gold labels.",
+            "Human scientific audit and held-out claims remain separate open gates.",
+        ],
+    }
+    return parse(encode(result))  # Independent JSON data, without input/output aliases.
+
+
+def adjudicated_expectations(pack, submissions, response, record, selected_item_ids):
+    """Export only explicitly selected, adjudicator-resolved complete items."""
+    try:
+        return _adjudicated_expectations(pack, submissions, response, record, selected_item_ids)
+    except (KeyError, IndexError, TypeError, AttributeError, UnicodeError, RecursionError) as error:
+        raise ValueError("malformed adjudicated review") from error
+
+
 _GUIDE = """# Independent review
 
 Read pack.json and fill a copy of response-template.json. Do not open a provenance
