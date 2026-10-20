@@ -37,6 +37,13 @@ if TYPE_CHECKING:
 _MAX_ARCHIVE = 64 * 1024 * 1024
 _MAX_MEMBER = 16 * 1024 * 1024
 _CORE_MODULES = (archive, benchmark, evaluation, policy, splits)
+# NB-01: the sole reviewed compatibility exception tightens artifact input checks.
+# Requests, prompt text, grouping and metric arithmetic are unchanged. No other
+# source revision is accepted; see docs/NOVELTYBENCH-CONFORMANCE.md.
+_BENCHMARK_VALIDATION_REVISION = (
+    "9e131a9f4fd92197b256518ea778984875d9aee2a58efb3ccc759d6553a79ae2",
+    "15b57b974c702d69c7b9e172c73798bd555db5eedb3286bd8c792d1fe0568763",
+)
 _OLD_CONTRACT_KEYS = {
     "system_sha256",
     "proposal_schema_sha256",
@@ -338,9 +345,10 @@ def _science(snapshot: dict[str, bytes], contracts: object) -> None:
             raise ValidationError("protected original search controls changed")
     for module in _CORE_MODULES:
         path = Path(_text(module.__file__, "scientific source path"))
-        if (
-            _file_hash(path)
-            != hashlib.sha256(snapshot[module.__name__.replace(".", "/") + ".py"]).hexdigest()
+        previous = hashlib.sha256(snapshot[module.__name__.replace(".", "/") + ".py"]).hexdigest()
+        actual = _file_hash(path)
+        if actual != previous and not (
+            module is benchmark and (previous, actual) == _BENCHMARK_VALIDATION_REVISION
         ):
             raise ValidationError("scientific evaluator, policy or archive source changed")
     for module in (provider, run, search):

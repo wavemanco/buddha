@@ -2,7 +2,7 @@
 
 **Normative reference:** the latest official code/protocol, currently v1.1 at the pinned commit below. The paper and v1.0 discussion are historical context, not implementation requirements. [Slice 2 notes](SLICE2-BENCHMARK-NOTES.md) describe the implemented v1.1 adapter and explicit execution controls.
 
-Research checked 2026-10-18. These findings come from official papers, repositories, datasets, and saved evaluation artifacts. **No live model generations or judge scores were reproduced, and no paid calls were made.** Local calculations inspected published records; they do not independently validate the judgments.
+Research initially checked 2026-10-18. The October 20 [direct conformance audit](NOVELTYBENCH-CONFORMANCE.md) rechecks current HEAD/dataset seals, successful scoring and actual request construction, and records remaining native-execution differences. These findings come from official papers, repositories, datasets, and saved evaluation artifacts. **No live model generations or judge scores were reproduced, and no paid calls were made.** Local calculations inspected published records; they do not independently validate the judgments.
 
 ## Frozen sources
 

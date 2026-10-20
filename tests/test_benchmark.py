@@ -385,6 +385,59 @@ class ArtifactTests(unittest.TestCase):
             self.export(protocol=selected, generation_config=config, rows=[row(selected)])
         self.assertNotIn("never-print-this-key", str(caught.exception))
 
+    def test_export_rejects_unsupported_judge_outcomes_before_dropping_metadata(self):
+        for field, value in (
+            ("fallback_judge", "different-judge"),
+            ("fallback_calls", [0]),
+            ("unscored", "judge_refusal"),
+        ):
+            self.destination = Path(self.temporary.name) / field
+            with self.subTest(field=field):
+                with self.assertRaises(ValidationError):
+                    self.export(rows=[self.row | {field: value}])
+                self.assertFalse(self.destination.exists())
+
+    def test_export_validates_supplied_configs_before_replacing_them(self):
+        self.export()
+        original = json.loads((self.destination / "v1.1/scores.jsonl").read_bytes())
+        for field in ("generation_config", "partition_config", "score_config"):
+            self.destination = Path(self.temporary.name) / field
+            supplied = dict(original[field])
+            supplied["model" if field == "generation_config" else "judge_model"] = "other"
+            with self.subTest(field=field):
+                with self.assertRaises(ValidationError):
+                    self.export(rows=[self.row | {field: supplied}])
+                self.assertFalse(self.destination.exists())
+
+    def test_matching_optional_configs_roundtrip_without_changes(self):
+        self.export()
+        original = json.loads((self.destination / "v1.1/scores.jsonl").read_bytes())
+        self.destination = Path(self.temporary.name) / "matching"
+        self.export(rows=[original])
+        _, imported = self.read()
+        self.assertEqual(imported[0], original)
+
+    def test_import_rejects_rehashed_unsupported_outcomes_in_every_stage(self):
+        self.export()
+        for name in ("generations.jsonl", "v1.1/partitions.jsonl", "v1.1/scores.jsonl"):
+            path = self.destination / name
+            original = path.read_bytes()
+            for field, value in (
+                ("fallback_judge", "different-judge"),
+                ("fallback_calls", [0]),
+                ("unscored", "judge_refusal"),
+            ):
+                write_jsonl(path, [json.loads(original) | {field: value}])
+                reseal(self.destination)
+                before = {p: p.read_bytes() for p in self.destination.rglob("*") if p.is_file()}
+                with self.subTest(name=name, field=field), self.assertRaises(ValidationError):
+                    self.read()
+                self.assertEqual(
+                    before, {p: p.read_bytes() for p in self.destination.rglob("*") if p.is_file()}
+                )
+            path.write_bytes(original)
+            reseal(self.destination)
+
 
 if __name__ == "__main__":
     unittest.main()

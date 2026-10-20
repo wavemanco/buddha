@@ -1,5 +1,7 @@
 # Slice 2 benchmark fidelity and limits
 
+The October 20 [direct conformance audit](NOVELTYBENCH-CONFORMANCE.md) supersedes broad fidelity interpretations of this historical note. It confirms successful metric/request construction within the declared profile, records additional parser differences, and leaves full native execution alignment open as BENCH-02.
+
 The normative reference is NoveltyBench code commit
 [`64a23be6b18ec1dacc298830aab276061b6e143c`](https://github.com/novelty-bench/novelty-bench/tree/64a23be6b18ec1dacc298830aab276061b6e143c),
 metric v1.1. The paper describes historical evaluation and is not the current
@@ -9,7 +11,7 @@ An independent offline comparison extracted upstream functions using Python's
 AST, without importing its model-serving dependencies. Both generation request
 bodies matched: independent same-prompt sampling, low reasoning effort, and a
 4,096-token combined reasoning/output allowance corresponding to upstream's
-2,048-token setting. The Partition and Score JSON schemas matched upstream's
+explicit 2,048-token setting (not the bare inference CLI default). The Partition and Score JSON schemas matched upstream's
 Pydantic schemas, and the Anthropic high-effort quality request matched.
 
 Subsequent deliberate controls differ from upstream requests: OpenAI partition
