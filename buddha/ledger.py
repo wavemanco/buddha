@@ -97,14 +97,29 @@ _SCHEMA_V2 = [
 ]
 
 
+_BINDING_SCHEMA = (
+    "CREATE TABLE main.authorization_binding ("
+    "singleton INTEGER PRIMARY KEY CHECK(singleton=1), "
+    "schema_version INTEGER NOT NULL CHECK(schema_version=1), "
+    "authorization_id TEXT NOT NULL, authority_path TEXT NOT NULL, "
+    "terms_sha256 TEXT NOT NULL)",
+    *(
+        f"CREATE TRIGGER main.authorization_binding_no_{action.lower()} "
+        f"BEFORE {action} ON authorization_binding BEGIN "
+        "SELECT RAISE(ABORT,'authority binding is immutable'); END"
+        for action in ("UPDATE", "DELETE")
+    ),
+)
+
+
 def _schema_signature(
     connection: sqlite3.Connection, schema: str = "main"
 ) -> tuple[tuple[str, str, str, str | None], ...]:
     queries = {
         "main": "SELECT type,name,tbl_name,sql FROM main.sqlite_master "
-        "WHERE name NOT LIKE 'sqlite_%' ORDER BY type,name",
+        "WHERE name NOT GLOB 'sqlite_*' ORDER BY type,name",
         "funding": "SELECT type,name,tbl_name,sql FROM funding.sqlite_master "
-        "WHERE name NOT LIKE 'sqlite_%' ORDER BY type,name",
+        "WHERE name NOT GLOB 'sqlite_*' ORDER BY type,name",
     }
     return tuple(tuple(row) for row in connection.execute(queries[schema]))
 
@@ -251,7 +266,7 @@ class Ledger:
             version = connection.execute("PRAGMA user_version").fetchone()[0]
             if version == 0:
                 if connection.execute(
-                    "SELECT 1 FROM sqlite_master WHERE name NOT LIKE 'sqlite_%' LIMIT 1"
+                    "SELECT 1 FROM sqlite_master WHERE name NOT GLOB 'sqlite_*' LIMIT 1"
                 ).fetchone():
                     raise ValidationError("unversioned database is not an empty ledger")
                 for statement in _SCHEMA:

@@ -13,7 +13,8 @@ from unittest.mock import patch
 from buddha.benchmark import _canonical
 from buddha.evaluation import ValidationError
 from buddha.history import read_history
-from buddha.ledger import Ledger
+from buddha.ledger import _SCHEMA as LEDGER_SCHEMA
+from buddha.ledger import Ledger, _expected_schema, _schema_signature
 from buddha.provider import Reply
 from buddha.run import _sha
 
@@ -82,11 +83,18 @@ class HistoryTests(unittest.TestCase):
 
     def corrupt(self, sql, arguments=()):
         with closing(sqlite3.connect(self.path)) as connection, connection:
-            triggers = connection.execute("SELECT name FROM sqlite_master WHERE type='trigger'")
-            for (name,) in triggers.fetchall():
+            triggers = connection.execute(
+                "SELECT name,tbl_name,sql FROM sqlite_master WHERE type='trigger'"
+            ).fetchall()
+            for name, _, _ in triggers:
                 connection.execute(f'DROP TRIGGER "{name}"')
             connection.execute("PRAGMA ignore_check_constraints=ON")
             connection.execute(sql, arguments)
+            for _, table, statement in triggers:
+                if connection.execute(
+                    "SELECT 1 FROM sqlite_master WHERE type='table' AND name=?", (table,)
+                ).fetchone():
+                    connection.execute(statement)
 
     def files(self):
         return {
@@ -182,6 +190,7 @@ class HistoryTests(unittest.TestCase):
         self.corrupt("DROP TABLE unknown_receipts")
         with closing(sqlite3.connect(self.path)) as connection, connection:
             connection.execute("PRAGMA user_version=1")
+            self.assertEqual(_schema_signature(connection), _expected_schema(tuple(LEDGER_SCHEMA)))
         before = self.files()
         self.assertEqual(self.read().totals()["operation_count"], 10)
         self.assertEqual(before, self.files())

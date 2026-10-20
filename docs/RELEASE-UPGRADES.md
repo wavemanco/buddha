@@ -60,9 +60,11 @@ does not waive execution guards. Local hashes establish consistency with saved
 bytes, not provider authenticity or invoice reconciliation. Unsupported future
 record formats need a separately tested reader extension.
 
-The older pilot/search receipt format uses `buddha.history` instead. Its retained
-uncertainty-receipt and inspection work remains REC-05; the new Gateway reader
-does not silently change that historical format.
+The older pilot/search receipt format uses `buddha.history` instead.
+[REC-05A](RECOVERY-CONTRACT.md#rec-05a-retained-receipts-and-sealed-reads) now
+preserves its earlier and terminal replies too. Search verification and writer
+diagnostics remain REC-05B/C. The two reader formats remain separate; neither
+migrates historical financial records.
 
 The shared paid core now obtains generic JSON and validation helpers from
 `buddha.common`. The old scientific modules re-export those same helpers for
