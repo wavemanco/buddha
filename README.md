@@ -4,19 +4,50 @@ Build agents that improve their own procedures for producing useful, meaningfull
 
 **Start with [the consolidated living plan](docs/PLAN.md)** for the complete original objective, completed work, new findings, dependencies and the next slice. It is the sole current roadmap; design and review documents supply specifications and evidence.
 
-Git history and slice PRs are maintained in [wavemanco/buddha](https://github.com/wavemanco/buddha). The initial commit preserves the existing slices together; subsequent changes use separate slice branches. The [recovery contract](docs/RECOVERY-CONTRACT.md) covers sealed history, shared spending authority, unsent preparation and linked continuation. The read-only `continuation-source` command verifies the nine original receipt slots and preserved scientific source. `continuation-prepare` freezes a new linked run and atomically claims its shared allowance without model calls.
+## Current state
 
-**Slice 3 is implemented and its live pilot is complete:** bounded policy optimization with a fixed proposer, candidate archive, shared spending ledger and common development screen, alongside the existing v1.1 baseline runner. The recovery pilot completed 63 calls for $0.300153 in recorded conservative cost; its child scored higher on one development prompt. This is exploratory evidence, not a held-out improvement claim. See [the completed results and limitations](docs/FIRST-LIVE-RESULTS.md). Generated-source self-modification remains a later slice.
+The implementation checkpoint is **BENCH-02C3C2**. The project has auditable API
+accounting, linked recovery, bounded policy search, replaceable release selection,
+and isolated fixed-seed generation. The unchanged official LLM partition, score
+and summary commands each have confined offline conformance evidence. Their
+complete generation-to-summary composition is in progress; configuration-only
+cross-release upgrade and retirement still need their composed acceptance check.
 
-The [pilot concern review](docs/PILOT-REVIEW.md) records repeated plots, effects on both metrics and operational gaps. Its recommendations are incorporated into the living plan. Matching runtime/test source is now preserved. Meaningful diversity has not been validated; benchmark scores remain unchanged.
+These are distinct from scientific success. Meaningful diversity, held-out
+improvement, genuine task/improver source evolution and an improved improver have
+**not been established**. Both completed one-prompt pilots contain repeated plots;
+original benchmark scores and raw evidence remain unchanged. See the
+[pilot review](docs/PILOT-REVIEW.md), [recovery results](docs/FIRST-LIVE-RESULTS.md)
+and [linked continuation results](docs/LINKED-CONTINUATION-RESULTS.md).
 
-The [first-run incident review](docs/FIRST-LIVE-REVIEW.md) preserves the uncertain request's evidence, explains the diagnostic gap and records the recovery constraints. New CLI model calls now save safe HTTP diagnostic metadata without changing the frozen evaluator or retrying existing work.
+At this checkpoint the living plan contains **16 remaining leaf slices**,
+including the pipeline slice in progress. Umbrella milestones are not counted
+again. They cover benchmark integration (2), recovery/usability (3), measurement
+(2), policy/search (3), source evolution (3), held-out evaluation (2) and the
+improver comparison (1). This is a checkpoint count, not a promise that research
+findings will never require a smaller slice; [PLAN.md](docs/PLAN.md) determines
+the current status and order.
 
-The [direct conformance audit](docs/NOVELTYBENCH-CONFORMANCE.md) confirms successful metric construction but records request/parser/recovery differences from native upstream execution. Benchmark alignment is the next gate before larger experiments; historical scores and profiles remain unchanged.
+The normative benchmark reference is the inspected official **NoveltyBench v1.1**,
+commit `64a23be6b18ec1dacc298830aab276061b6e143c`. The paper is historical context.
+Existing runs keep their frozen reference. Compatible new releases are intended
+to use installation, configuration and checks before running the same frozen
+agent; [the modularity contract](docs/BENCHMARK-INTEGRATION.md) states the exact
+capability limits and outstanding upgrade/retirement proof.
 
-The modular foundation now separates release identity, frozen answers, paid authority and SDK transport. [Confined native execution](docs/CONFINED-NATIVE-EVALUATION.md) runs complete official LLM partition, scoring and summary commands in separately verified Linux workers through that boundary. The [frozen seed](docs/FROZEN-SEED.md) now generates source-bound ordered answers in its own container through host-owned accounting, without importing benchmark code on the host. The complete generation-to-summary pipeline and release-upgrade/retirement proof remain open. These are offline-tested library paths; no new paid CLI or allocation is enabled.
+The new native library path enables no paid CLI or new allocation. The original
+$50 authorization belongs only to the historical experiment; its completed
+allocations are inactive and its unknown-request hold remains recorded. Finish
+the benchmark/measurement gates and establish a concrete new allocation before
+another paid experiment. [API key guidance](docs/API-KEYS.md) explains process-only
+key entry; never paste keys into chat or commit them.
 
-The normative reference is the latest official NoveltyBench code, checked during this work: **v1.1**, commit `64a23be6b18ec1dacc298830aab276061b6e143c`. The paper is historical context. New CLI experiments check upstream HEAD and refuse to start if the reference changed; existing runs keep their frozen version. There is no v1.0 runtime path.
+Slice-specific commits and PRs are maintained in
+[wavemanco/buddha](https://github.com/wavemanco/buddha). See the
+[frozen generation guide](docs/FROZEN-SEED.md),
+[confined evaluator guide](docs/CONFINED-NATIVE-EVALUATION.md) and
+[conformance audit](docs/NOVELTYBENCH-CONFORMANCE.md) for implemented scope and
+limitations. Infrastructure checks do not certify semantic judge accuracy.
 
 ## Run the offline example
 
@@ -29,6 +60,11 @@ python -m buddha inspect --run runs/slice2-demo
 python -m buddha verify --run runs/slice2-demo
 ```
 
+All four commands run once in this PowerShell window, require no keys and spend
+nothing. `demo` creates the example; repeating it reuses saved replies. `inspect`
+prints its progress/accounting, and `verify` checks the stored evidence. They
+write only the selected example directory; Ctrl+C stops a foreground command.
+
 The example uses canned responses and judgments. It demonstrates the complete data/accounting path, including cached resume; its scores are synthetic. The second run reuses the same 12 completed operations and makes no new transport calls.
 
 ## Policy optimization and the first live run
@@ -39,13 +75,19 @@ python -m buddha search-demo --out runs/slice3-demo
 python -m buddha search-inspect --run runs/slice3-demo
 ```
 
+These commands also run once here without keys or API spending. `search-demo`
+creates a synthetic policy search; repeating it reconstructs the same search
+from saved replies. `search-inspect` prints the saved search/accounting. Only the
+selected example directory changes; Ctrl+C stops a foreground command.
+
 This synthetic example evaluates independent-sampling and in-context seeds, proposes JSON policies, evaluates eligible children on the same development prompts, and reconstructs the archive from cached receipts. Its judgments are constant fixtures, so it demonstrates orchestration rather than improvement.
 
 The first live experiment was authorized for **up to $50 combined**, covering both providers and all search stages. The initial attempt was interrupted while awaiting answer 10. Its nine replies and full uncertain reservation remain intact. The completed recovery restart used a **$49.465918 cap and 118-call allowance**, accounting for the original $0.534082 committed liability and ten attempted calls. It repeated the same one-prompt, two-seed, one-proposal engineering pilot with fresh evidence. Both attempts are now historical inputs. Shared authorization imports their sealed liabilities once and enforces the combined dollar/call cap. The linked continuation reuses nine saved replies as evidence, sends a separately identified replacement for the unknown tenth, then completes the remaining search stages. Its new report separates new cost, inherited evidence cost and shared experiment accounting.
 
 The corrected linked run completed and was verified: nine saved replies reused, 51 new calls for $0.274533, with the original unknown still held. [Linked results and concerns](docs/LINKED-CONTINUATION-RESULTS.md) record the three candidate scores, repeated plots, literal/craft failures and shared accounting. The completed run is closed to new paid calls; its [execution handoff](docs/FIRST-LIVE-CONTINUATION.md) remains historical evidence. The living plan now prioritizes exact benchmark alignment; REC-05's inspection and recovery usability work remains open.
 
-Read the saved completed report without keys or source reconstruction:
+This command prints the saved completed report once in this window. It needs no
+keys, makes no changes and spends nothing:
 
 ```powershell
 Get-Content runs/first-live-recovery/report.json
@@ -61,40 +103,26 @@ To observe an existing process from another terminal without credentials, writes
 python -m buddha watch --run runs/first-live-recovery
 ```
 
-The watcher works with runs started before progress output was added. It stops when it finds a matching saved completion record or an uncertain operation requiring review. No ledger activity alone cannot establish whether the original process is alive; check its terminal for errors. Do not retry uncertain requests before reconciliation.
+The watcher keeps running in the second window; Ctrl+C stops watching without
+stopping the original run. It works with runs started before progress output was added. It stops when it finds a matching saved completion record or an uncertain operation requiring review. No ledger activity alone cannot establish whether the original process is alive; check its terminal for errors. Do not retry uncertain requests before reconciliation.
 
-## Prepare a live baseline
+## Historical live CLI
 
-The current baseline independently samples ten answers with low reasoning effort. It uses `gpt-5.6-luna` for generation and set partitioning, and the v1.1 `claude-opus-5` quality judge for each class's first answer. The generation setting of 2,048 corresponds to upstream's doubled 4,096 combined output/reasoning allowance. Both effective judge prompts are pinned byte-for-byte.
+The [slice 2 guide](docs/SLICE2.md) and [original continuation handoff](docs/FIRST-LIVE-CONTINUATION.md)
+preserve the frozen pilot's preparation, execution, API-key and recovery commands.
+They describe the historical v1.1 runner, whose bounded request/parser behavior
+is distinct from full native execution. They are not instructions or additional
+spending permission for the unfinished native baseline path.
 
-The [example configuration](examples/live-config.json) is a generic template with **no spending cap**. Supply an explicit `--budget-usd` when freezing a run. The approved $50 is for the one first live search above; this baseline workflow is an alternative experiment, not additional spending authorization. [Historical cost scenarios](docs/SLICE2.md#cost-planning) are estimates rather than measured charges.
-
-```powershell
-python -m buddha check-upstream
-python -m buddha fetch --dataset curated --out runs/datasets/curated.jsonl
-
-# Alternative baseline preparation; this does not authorize an additional paid run:
-python -m buddha prepare --dataset curated --data runs/datasets/curated.jsonl --config examples/live-config.json --budget-usd 50 --limit 5 --out runs/pilot
-python -m buddha inspect --run runs/pilot
-```
-
-These commands fetch public data and freeze configuration; they do not invoke models. The selected IDs/text and full source dataset are preserved and checked against their hashes. `--limit` selects the first N source rows for an engineering pilot; it does not create a representative scientific split. Without `--limit`, all source prompts are selected; raise the call allowance deliberately for larger runs.
-
-Set `OPENAI_API_KEY` and `ANTHROPIC_API_KEY` through the process environment or your secret manager. [.env.example](.env.example) contains placeholders; the CLI does not load it automatically. Keys never enter the run manifest or ledger. An experiment needs a reviewed shared authorization, sealed prior liabilities where applicable, and an empty new run binding. Set `$authorizationPath` to that existing database; these commands do not create additional spending authority:
-
-```powershell
-python -m buddha authorization-inspect --authorization $authorizationPath
-python -m buddha authorization-bind --authorization $authorizationPath --run runs/pilot
-python -m buddha run --run runs/pilot --live --prompt-keys --authorization $authorizationPath
-python -m buddha inspect --run runs/pilot
-python -m buddha verify --run runs/pilot
-```
-
-The same `run` command resumes completed work. A timeout or unknown provider outcome stops automatic replay and retains its reservation; do not reissue it under a new operation ID. A malformed completed judgment is retained and charged in accounting, then rejected when parsed again. Reconciliation requires external provider evidence, not a retry assumption. See [operation recovery and limits](docs/SLICE2.md#accounting-and-recovery).
+The existing baseline independently samples ten answers with low reasoning
+effort. Its historical generation/partition model and quality judge are recorded
+in the frozen run manifests. Reverify actual models, provider bounds, rates,
+reference version and authorization before a new live experiment; model names
+in old examples are not a fresh availability or pricing check.
 
 ## Artifacts and guarantees
 
-Each run contains a frozen `manifest.json`, byte-verified `dataset.jsonl`, and SQLite ledger. A complete result publishes:
+Each historical CLI run contains a frozen `manifest.json`, byte-verified `dataset.jsonl`, and SQLite ledger. A complete result publishes:
 
 ```text
 evaluation/
@@ -107,13 +135,18 @@ evaluation/
 
 Imports check complete expected coverage, exact prompt identity, protocol/file hashes, consistency across stages, and metric arithmetic. Provenance establishes local consistency; it is not official certification or a signature. [Benchmark compatibility notes](docs/SLICE2-BENCHMARK-NOTES.md) document deliberate bounded-execution differences from native upstream behavior. Running upstream judging on these files can make new paid calls; use a copy for independent rescoring.
 
-The local cap uses conservative maximum-rate accounting over provider-reported tokens, including reasoning and cache usage. It reserves a whole documented context allowance before each request. This can stop a run earlier than invoice-based accounting would. Guarantees depend on the configured bounds and provider honoring the requested model/tier; unexpected identities or tiers stop spending and retain evidence. Rates must be reverified within seven days before live execution. No automatic retries, fallback judges, generated-code execution, or publication occur.
+The local cap uses conservative maximum-rate accounting over provider-reported tokens, including reasoning and cache usage. It reserves a whole documented context allowance before each request. This can stop a run earlier than invoice-based accounting would. Guarantees depend on the configured bounds and provider honoring the requested model/tier; unexpected identities or tiers stop spending and retain evidence. Rates must be reverified within seven days before live execution. That historical CLI has no automatic retries or fallback judges. The separately
+confined native evaluator preserves prescribed fallback behavior, while uncertain
+payment stops new spending. Arbitrary evolved source and publication remain gated.
 
 ## Design and verification
 
 - [Consolidated living plan and current next slice](docs/PLAN.md)
 - [Architecture and scientific contract](docs/DESIGN.md)
-- [Latest benchmark source audit](docs/NOVELTYBENCH.md)
+- [Replaceable benchmark integration contract](docs/BENCHMARK-INTEGRATION.md)
+- [Frozen seed and isolated generation](docs/FROZEN-SEED.md)
+- [Complete native commands and environment limits](docs/CONFINED-NATIVE-EVALUATION.md)
+- [Pinned benchmark source audit](docs/NOVELTYBENCH.md)
 - [Research and successors](docs/RESEARCH.md)
 - [Slice 2 handoff, costs, and verification](docs/SLICE2.md)
 - [Slice 3 policy-search handoff](docs/SLICE3.md)
@@ -122,12 +155,21 @@ The local cap uses conservative maximum-rate accounting over provider-reported t
 
 ```powershell
 python -m unittest discover -s tests -v
-python -m ruff check buddha tests
-python -m ruff format --check buddha tests
-python -m mypy --strict buddha
-python -m bandit -r buddha
+python -m ruff check buddha tests agents
+python -m ruff format --check buddha tests agents
+python -m mypy --strict buddha agents
+python -m bandit -r buddha agents
 python -m pip_audit --no-deps -r requirements.txt
-python -m compileall -q buddha tests
+python -m compileall -q buddha tests agents
 ```
+
+These checks run once in the current window and make no model calls. `unittest`
+runs portable tests with temporary fixtures; Ruff checks style and formatting;
+Mypy checks types; Bandit checks common source-security mistakes; `pip_audit`
+checks the core dependency list for known advisories and may access its advisory
+service; `compileall` checks Python compilation and writes local bytecode caches.
+Ctrl+C stops a foreground check. Real-container proofs are separate optional
+checks documented in their guides; the core audit does not clear the larger
+native evaluator environment.
 
 CI is configured on Windows/Linux, Python 3.13, using the pinned tools in `requirements-dev.txt`; application runtime dependencies remain empty. Development auditing includes certifi (MPL-2.0), recorded in the recovery contract, without adding it to the application runtime. Local verification is reported separately from hosted CI. The user authorizes continued implementation with a summary and PR per slice, pausing for live execution or a required decision. Genuine source self-modification requires the separate isolated-executor work. HyperAgents contributes conceptual inspiration only; its source is excluded. Earlier dated handoffs describing absent Git/CI are historical.
