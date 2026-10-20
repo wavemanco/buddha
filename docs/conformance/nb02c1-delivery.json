@@ -1,0 +1,147 @@
+{
+  "format": "buddha.review.nb02c1-delivery.v1",
+  "date": "2026-10-20",
+  "scope": "Frozen host answer artifacts and coroutine-creation identity; selected-function SDK oracle only",
+  "local_tests": {
+    "full": {
+      "count": 513,
+      "seconds": 134.491,
+      "skipped": 2,
+      "exit_code": 0
+    },
+    "answers": {
+      "count": 19,
+      "seconds": 0.067,
+      "exit_code": 0
+    },
+    "contexts": {
+      "count": 11,
+      "seconds": 0.054,
+      "exit_code": 0
+    },
+    "oracle": {
+      "scenarios": 22,
+      "source_license_seals": 6,
+      "provider_network_calls": 0,
+      "actual_keys_used": false,
+      "exit_code": 0
+    }
+  },
+  "tests_first": {
+    "answers_missing_module": true,
+    "answers_population_id_metadata_regressions_observed": true,
+    "contexts": "implementation existed before first test execution; no tests-first claim"
+  },
+  "checks": [
+    {
+      "name": "oracle",
+      "command": ".\\runs\\reference-env\\Scripts\\python.exe docs/conformance/nb02c-context-probe.py *> runs/reviews/nb02c1-root-probe.log; Get-Content runs/reviews/nb02c1-root-probe.log -Tail 6; exit $LASTEXITCODE",
+      "exit_code": 0
+    },
+    {
+      "name": "security",
+      "command": "python -m bandit -q -r buddha",
+      "exit_code": 0
+    },
+    {
+      "name": "types",
+      "command": "python -m mypy --strict buddha",
+      "exit_code": 0
+    },
+    {
+      "name": "lint",
+      "command": "python -m ruff check buddha tests",
+      "exit_code": 0
+    },
+    {
+      "name": "format",
+      "command": "python -m ruff format --check buddha tests",
+      "exit_code": 0
+    },
+    {
+      "name": "compile",
+      "command": "python -m compileall -q buddha tests",
+      "exit_code": 0
+    },
+    {
+      "name": "whitespace",
+      "command": "git diff --check",
+      "exit_code": 0
+    },
+    {
+      "name": "dependencies",
+      "command": "python -m pip_audit --no-deps -r requirements.txt",
+      "exit_code": 0
+    }
+  ],
+  "artifact_checks": [
+    "Exact source and release digests",
+    "Explicit host-owned ordered selection without relabeling full dataset",
+    "String/int64 IDs preserve types; bool/float rejected",
+    "Original row extras and heterogeneous paraphrases survive native JSONL",
+    "Literal empty/refused/repetitive/malformed/noncompliant text preserved",
+    "Outer population/count/type/order/UTF8 and metadata collisions rejected",
+    "Deep immutable canonical bytes and fresh returned records",
+    "Two canned release schemas/counts/paths use same artifact code"
+  ],
+  "context_checks": [
+    "Synchronous coroutine-creation ordinals independent of await/HTTP order",
+    "Concurrent rows and identical bodies retain distinct stable IDs",
+    "Nested logical/model legs and physical attempt indices",
+    "Exceptions/cancellation restore caller context",
+    "Copied thread frames allocate unique physical indices",
+    "NativeStop escapes both actual pinned SDK ordinary-Exception retries",
+    "Row scope restoration is not revocation of already-captured task snapshots"
+  ],
+  "oracle_checks": [
+    "Actual pinned SDKs and original fixed-hash selected functions",
+    "Artifact-backed canned rows reach original score_llm/run_cached",
+    "Direct/instrumented outcome and request digest comparisons",
+    "Both SDKs ordinary transport exception: nine attempts; NativeStop: one",
+    "Native malformed/refused/length/duplicate/multiblock/fallback outcomes",
+    "Partition fold retries and lenient repair",
+    "Concurrency, partial cache resume, complete cache hit, row halt escape"
+  ],
+  "preserved": {
+    "protected_input_files": 287,
+    "all_protected_input_hashes_unchanged": true,
+    "legacy_runtime_algorithm_or_historical_artifact_changed": false
+  },
+  "reference_environment": "Preserved locked research closure and known AnyIO advisories; blocked-network/fake-key oracle only, not live runtime approval",
+  "paid_model_calls": 0,
+  "new_live_allocation": false,
+  "new_paid_command": false,
+  "agent_generation_executed": false,
+  "native_cli_complete": false,
+  "funded_sdk_composition_complete": false,
+  "os_confinement_verified": false,
+  "modular_upgrade_retirement_complete": false,
+  "remaining": [
+    "BENCH-02C2 funded transport/header/compression/queue/replay composition",
+    "BENCH-02C3 full official modules/environment, configured hooks, confined channels and frozen seed generation",
+    "BENCH-03C actual same-agent/same-runner upgrade and retirement",
+    "Independent calibration, held-out evidence, source mutation and improved-improver experiment"
+  ],
+  "previous_slice_ci": {
+    "pr": 12,
+    "commit": "42ee5ba1015dd1c410f583247b12a7fd519ad29a",
+    "push_run": 39442866485,
+    "pr_run": 39442879703,
+    "windows": "success",
+    "ubuntu": "success",
+    "pr_tests": {
+      "count": 483,
+      "windows_seconds": 892.381,
+      "ubuntu_seconds": 88.739,
+      "skipped_each": 1
+    }
+  },
+  "this_slice_hosted_ci": "pending publication",
+  "source_sha256": {
+    "buddha/answers.py": "be860546b2692ea4a710d93855f487dd49d9c8e28eb3f2ec757df697cefb8d0b",
+    "buddha/native_context.py": "47a488b8d731617bda21380232e5e49801e0c0b4261f69b71c24fb9eae0ba298",
+    "tests/test_answers.py": "ab07d16a024a304245dd8432063354028f7cfd998520f82cb542ff0a7a3aaa4f",
+    "tests/test_native_context.py": "4ac72732dbca636c2345e41ae6de990003fa8ee1ff4bc6e4990fc4f9d023dad0",
+    "docs/conformance/nb02c-context-probe.py": "1ae1a0e84c92b3a26167d988b9873837927b284504c4c74cae87f191839c826d"
+  }
+}

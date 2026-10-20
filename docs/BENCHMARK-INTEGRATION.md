@@ -163,3 +163,36 @@ python -m unittest discover -s tests -p test_wire.py
 ```
 
 The first command checks the real shared-authority request/receipt path, including failures, races, interruptions and mixed legacy/new funding. The second checks immutable raw records, header and billing validation independently of benchmark semantics. No new user-facing paid command is enabled until the native runner is implemented and verified.
+
+## BENCH-02C1: frozen answers and native call context
+
+The artifact seam separates an agent's ordered text from the evaluator's rules. `buddha.answers.Task` contains only an ID, literal prompt and requested answer count. It has no judge prompt, metric version or scoring formula. `TaskSet.from_dataset()` / `.from_file()` check the exact configured dataset hash and freeze its source and release identity. String and signed 64-bit integer IDs remain distinct; booleans/floats are rejected. `TaskSet.select(ordered_ids)` binds a nonempty, explicit population and its order without pretending a copied subset is the original official dataset.
+
+`Answers.from_results()` accepts the exact ordered population, an agent fingerprint and noncolliding host metadata. `.native_bytes()` exports JSONL using the selected release's field mappings. Original row fields, including distinct `prompt_paraphrases`, survive unchanged; they matter to the official cache key even where a judge does not read them. Outer count/type/order/UTF-8 errors fail, but empty text, refusal placeholders, duplicates, malformed task-requested JSON and noncompliant writing remain literal answers. No task-content quality filter, score, rank or optimizer projection is involved.
+
+Both artifacts retain full dataset bytes for the trusted host to verify their derivation. **An agent receives only its selected individual `Task` objects, never the full `TaskSet` or `Answers` source-bearing record.** These classes do not execute agent code, generate answers, authorize a split/population or grant access to final data. The later controller must enforce those permissions and bind these immutable inputs to the actual worker and funding invocation. Returned records are copies; canonical bytes and their fingerprints are immutable.
+
+`buddha.native_context.Contexts` supplies a separate identity primitive for a trusted native worker. `.row(identity)` enters an explicit population/cache context. `.wrap(async_function, label)` returns a synchronous coroutine factory: it allocates its child ordinal when the native code creates the coroutine, before `gather` schedules or awaits it. Nested wrappers distinguish logical judge calls and primary/fallback legs. `.attempt()` allocates a physical index inside that logical call, independent of body equality or HTTP arrival order. Counters are thread safe; context restoration covers exceptions and cancellation. Creating a wrapped coroutine outside a row or asking for an attempt outside a logical call fails.
+
+Row exit restores the caller's context; it does not revoke snapshots already captured by pending coroutines or copied tasks. Context is identity data, not authority. The paid boundary must independently check the actual frozen command/cache key/typed row identity, invocation, worker role, source and allocation. It must terminate/reap owned work on cancellation. C1 does not install configurable hooks into complete official modules or prove their alias handling, subprocess lifetime or confinement.
+
+`NativeStop` deliberately derives directly from `BaseException` and accepts only fixed sanitized reason codes. Both pinned SDKs retry ordinary transport `Exception` values. The future funded adapter must emit this stop only after the host has retained its ledger state, and the trusted outer runner must handle it as an incomplete run. It cannot let an unknown liability become another automatic SDK send. Native parse/fold/refusal errors keep their own original semantics; this stop does not redefine them.
+
+The optional [selected-function probe](conformance/nb02c-context-probe.py) uses fixed-digest original NoveltyBench functions and the real pinned SDKs. It compares direct and instrumented results/request hashes, checks concurrent identical-body calls, cache resume, fallback/fold attempts and SDK retry escape. The artifact-backed fixture is explicitly synthetic; it is not a new official release. Retry sleep alone is stubbed. These are selected-function/SDK observations, not full CLI execution, a funded Gateway adapter, original timing, header/compression parity or an OS sandbox.
+
+The regular checks below run once in the current PowerShell window, use temporary data and canned async functions, require no SDK downloads or keys, and spend nothing:
+
+```powershell
+python -m unittest discover -s tests -p test_answers.py
+python -m unittest discover -s tests -p test_native_context.py
+```
+
+The first checks the frozen source/population/native-answer boundary across two release configurations; the second checks logical/physical identities under changed scheduling, cancellation and copied thread contexts.
+
+The optional probe needs the already prepared [locked research environment](BENCHMARK-REFERENCE-PROFILE.md#reproduction-and-dependency-notices) and the six fixed-hash source/license files listed in its script. A clean checkout alone does not contain those ignored reference inputs. It runs once in the same window, uses fake keys and blocked network, writes temporary fixtures plus ignored evidence under `runs/reviews/`, and spends nothing. `Ctrl+C` stops it:
+
+```powershell
+.\runs\reference-env\Scripts\python.exe docs/conformance/nb02c-context-probe.py
+```
+
+Remaining native integration includes a funded adapter that preserves supported semantic/account headers and compression, bounded shared dispatch admission for native concurrent calls, a confined official environment and worker channel, actual module/CLI artifacts and summaries, and the frozen seed agent's generation path. Source evolution and the composed configuration-only upgrade/retirement gates remain separate. The preserved AnyIO lock advisories still require an explicit active-environment/confinement assessment; no research-only audit is presented as live readiness.
