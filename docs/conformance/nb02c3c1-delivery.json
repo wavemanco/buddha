@@ -1,0 +1,80 @@
+{
+  "checks": {
+    "bandit": "pass; buddha and agents, no findings",
+    "compile": "pass; buddha/tests/agents",
+    "core_runtime_pip_audit": "pass; no known vulnerabilities; separate evaluator environment restrictions remain unchanged",
+    "git_diff_check": "pass",
+    "ruff_format": "pass;65 files",
+    "ruff_lint": "pass; buddha/tests/agents",
+    "strict_mypy": "pass;28 source files; default plus explicit linux and win32 platforms"
+  },
+  "ci": {
+    "scope": "Hosted Windows/Linux results must be observed after this commit is published",
+    "status": "pending publication"
+  },
+  "date": "2026-10-20",
+  "format": "buddha.review.nb02c3c1-delivery.v1",
+  "legacy_oracle_sources": {
+    "buddha/policy.py": {
+      "bytes": 6398,
+      "sha256": "717f6fdad1e880d83326d6a314e0dfa604be1044f8209f27061380e16cfebb3e"
+    },
+    "buddha/provider.py": {
+      "bytes": 21655,
+      "sha256": "052b639a5c61317868ad19f8381aeecd6be880677eb642a07b65a2338b0bebd1"
+    },
+    "buddha/run.py": {
+      "bytes": 24646,
+      "sha256": "a972cb8d1a04bef7abad7efdf7f1eec803bb88cd55c30cf64148119a3d7c6dbb"
+    }
+  },
+  "limits": [
+    "Pure callback interface only; no SDK, networking, credential access, paid authority, OS confinement or native pipeline execution",
+    "Nominal legacy request/text behavior compared; malformed outer provider fields are deliberately rejected more strictly",
+    "Blank prompts retain original seed rejection; C1 retains their source data and the host must preserve explicit generation failure",
+    "Effective [empty]/[refused] strings are explicit legacy recipe transformations; C3C2 must retain original raw replies before normalization",
+    "Wire/channel/executor byte and resource limits remain C3C2; no standalone aggregate request/response-size guarantee",
+    "Existing in-context mode is supported but first baseline remains empty instructions/regenerate; extra experiment arms are not automatic",
+    "No meaningful-diversity, held-out improvement, source-modification or cross-release compatibility claim"
+  ],
+  "local_tests": {
+    "count": 657,
+    "exit_code": 0,
+    "log": "runs/reviews/nb02c3c1-full-tests.log",
+    "seconds": 192.53,
+    "skipped": 3
+  },
+  "new_live_allocation": false,
+  "new_paid_command": false,
+  "paid_model_calls": 0,
+  "preserved": {
+    "all_hashes_unchanged": true,
+    "pilot_runtime_zip_sha256": "bd32c4d50339e2f2e1cadf01f5872fa3c1cdf12c196e7676a18d6fe96bd534e0",
+    "protected_input_files": 287,
+    "unknown_hold_unchanged": true
+  },
+  "scope": "Standalone pure fixed seed request/normalization/generation recipe, no isolation or paid/native execution",
+  "seed_sha256": "2b87bfe0d3c97ee45db2d45260985ffe0234eca93967f4689fb7c59f82603921",
+  "source": {
+    ".github/workflows/ci.yml": {
+      "bytes": 1118,
+      "sha256": "3f6f66aed3687743152947437575d01fec8ee0284bb7bd50a57ad08ac4196618"
+    },
+    "agents/frozen_seed.py": {
+      "bytes": 7938,
+      "sha256": "2b87bfe0d3c97ee45db2d45260985ffe0234eca93967f4689fb7c59f82603921"
+    },
+    "tests/test_frozen_seed.py": {
+      "bytes": 16307,
+      "sha256": "b63605a7026a260167f1dd64bc217e5303ef364f0f485bccdad00ba32a4f1da8"
+    }
+  },
+  "tests_first": {
+    "focused_green": {
+      "count": 15,
+      "independent_read_only_rerun": true,
+      "independent_seconds": 0.01
+    },
+    "observed_red": "Before agents/frozen_seed.py existed, unittest discovery failed importing test_frozen_seed with ModuleNotFoundError: agents; one failed loader test"
+  }
+}
