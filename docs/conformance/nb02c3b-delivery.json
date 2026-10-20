@@ -18,8 +18,17 @@
     "strict_mypy": "pass;27 application modules; explicit linux and win32"
   },
   "ci": {
-    "scope": "Hosted Windows/Linux results must be observed for the published commit; local Windows verification is separate",
-    "status": "pending publication"
+    "all_checks": "pass for both platforms in both runs;643 tests per platform",
+    "fix": "Canonicalize shared derived-class fixture owner and add portable alias plus forged-namespace/co_filename controls; actual Windows8.3 reproduction passed",
+    "initial_failure": "7e1bd06 Windows642 suite rejected a noncanonical test-fixture compile path; Linux passed; production strict owner guard unchanged",
+    "platforms": [
+      "windows-latest",
+      "ubuntu-latest"
+    ],
+    "pull_request_run": 39477651392,
+    "push_run": 39477644222,
+    "reviewed_commit": "17b6427edcb949cc981197ee045691a11d46b084",
+    "status": "success"
   },
   "date": "2026-10-20",
   "evidence": {
@@ -184,6 +193,16 @@
       "additional_checks": 6,
       "pass": true,
       "scenarios": 10
+    },
+    "windows_fixture_fix": {
+      "actual_windows_8dot3_red_green": true,
+      "count": 643,
+      "exit_code": 0,
+      "focused_worker_count": 34,
+      "focused_worker_skipped": 1,
+      "scope": "test-only fix; application and full-native proof source hashes unchanged",
+      "seconds": 190.515,
+      "skipped": 4
     }
   },
   "new_live_allocation": false,

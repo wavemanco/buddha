@@ -9,8 +9,12 @@
     "strict_mypy": "pass;28 source files; default plus explicit linux and win32 platforms"
   },
   "ci": {
-    "scope": "Hosted Windows/Linux results must be observed after this commit is published",
-    "status": "pending publication"
+    "all_checks": "Windows/Linux green for both runs;658 tests each, all quality checks pass",
+    "inherited_fix": "Canonical derived-class test fixture owner and portable alias controls; original seed/proof hashes unchanged",
+    "pull_request_run": 39478079998,
+    "push_run": 39478072056,
+    "reviewed_commit": "f476d9fdf823462e7540fbcadd37d1e6bcb94b2a",
+    "status": "success"
   },
   "date": "2026-10-20",
   "format": "buddha.review.nb02c3c1-delivery.v1",
