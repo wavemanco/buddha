@@ -1,0 +1,178 @@
+{
+  "architecture": "amd64",
+  "audit_helper": {
+    "callable": "collect_audit",
+    "path": "/opt/runtime-prepare.py",
+    "result_format": "buddha.review.nb02c3-installed-runtime.v1",
+    "sha256": "6c5cc5475dbd1f8d511fbc6e4adbcc20ca5c00ef770cc202874a3333d471eff4"
+  },
+  "base": "python@sha256:3121f8b0804aa3698ab750d9a39ea4a42657a385c9b133722b915e55c51551a6",
+  "base_source_revision": "d7d46d97a9ffd58269d8d1d0218ce959362b4298",
+  "checks": {
+    "actual_installed_tamper_denied": [
+      "RECORD file SHA256 mismatch",
+      "unowned site-packages file"
+    ],
+    "base_site_packages_imported": false,
+    "fresh_measurement_identical": true,
+    "full_imports": [
+      "src.score",
+      "src.summarize",
+      "src.judge",
+      "src.evaluation_io"
+    ],
+    "hash_pinned_offline_install": true,
+    "imported_modules": 2652,
+    "imports_changed_installed_tree": false,
+    "installed_record_integrity": true,
+    "pip_check": "No broken requirements found",
+    "preparation_helper_bandit": {
+      "B310": "reviewed literal HTTPS PyPI address; overlay wheel SHA256 independently fixed",
+      "B404": "reviewed subprocess module import",
+      "B603": "reviewed fixed-interpreter pip argument vector, no shell",
+      "suppressed": false
+    },
+    "preparation_helper_ruff": "pass",
+    "requirements_audit": "pip-audit: no known vulnerabilities found; requirement set only, not full OS vulnerability attestation",
+    "unowned_site_packages": []
+  },
+  "config": {
+    "Cmd": [
+      "/opt/venv/bin/python"
+    ],
+    "Entrypoint": null,
+    "Env": [
+      "PATH=/opt/venv/bin:/usr/local/bin:/usr/bin:/bin",
+      "GPG_KEY=7169605F62C751356D054A26A821E680E5FA6305",
+      "PYTHON_VERSION=3.13.12",
+      "PYTHON_SHA256=2a84cd31dd8d8ea8aaff75de66fc1b4b0127dd5799aa50a64ae9a313885b4593",
+      "PYTHONDONTWRITEBYTECODE=1",
+      "PYTHONUNBUFFERED=1",
+      "PIP_DISABLE_PIP_VERSION_CHECK=1"
+    ],
+    "Healthcheck": null,
+    "User": "65532:65532",
+    "Volumes": null,
+    "WorkingDir": null
+  },
+  "debian_base": "debian:bookworm-slim@sha256:13cb01d584d2c23f475c088c168a48f9a08f033a10460572fbfd10912ec5ba7c",
+  "evidence": {
+    "runs/reviews/nb02c3-runtime-audit.json": {
+      "bytes": 1601,
+      "sha256": "a8be37115d116d8ab91249587fc948714480c300720ff9b2e3a2557f60b30bbd"
+    },
+    "runs/reviews/nb02c3-runtime-base-notices.json": {
+      "bytes": 101733,
+      "sha256": "155577f93132061f722331361fe5c8666a94de9feb4d95623ec8c5c2402d767e"
+    },
+    "runs/reviews/nb02c3-runtime-denials.json": {
+      "bytes": 906,
+      "sha256": "112515c9fc8ba5c337f2827a3b19107239dd16e396d5b67c37873478f86cc39b"
+    },
+    "runs/reviews/nb02c3-runtime-full-import.json": {
+      "bytes": 869664,
+      "sha256": "289b4f2fdc1bc268c4d6c8cb8d0a2cc192155ef9afa30b0ab1a6e783f0861db1"
+    },
+    "runs/reviews/nb02c3-runtime-image.json": {
+      "bytes": 2100,
+      "sha256": "5acc9d021149d1a99686fd2907c8de44749bb9c552acfa1bc845ef535ce24c64"
+    },
+    "runs/reviews/nb02c3-runtime-installed.json": {
+      "bytes": 2349973,
+      "sha256": "91a640bc4bc639f7f9ff96528bf6347ccc1cd754113391b8e54a23f28d5928c6"
+    },
+    "runs/reviews/nb02c3-runtime-originless.json": {
+      "bytes": 2384,
+      "sha256": "5558cc43aa9bbe94e7cd06cc6fc046a82223f868531775d5d7cddc72a4afddbc"
+    }
+  },
+  "excluded_origin_root": "/usr/local/lib/python3.13/site-packages",
+  "executable": "/opt/venv/bin/python",
+  "format": "buddha.review.nb02c3-runtime-preparation.v1",
+  "image": "buddha-nb-runtime@sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
+  "image_id": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
+  "installed_manifest": {
+    "distribution_count": 28,
+    "inventory_count": 6556,
+    "path": "/opt/runtime-manifest.json",
+    "record_checked_files": 6546,
+    "sha256": "91a640bc4bc639f7f9ff96528bf6347ccc1cd754113391b8e54a23f28d5928c6",
+    "symlinks": {
+      "bin/python": {
+        "symlink": "/usr/local/bin/python",
+        "target_is_directory": false,
+        "target_sha256": "73b68fc2dac176af16098180a2c98a03ee9f1f1b02db25d42d44d782e79e2330"
+      },
+      "bin/python3": {
+        "symlink": "python",
+        "target_is_directory": false,
+        "target_sha256": "73b68fc2dac176af16098180a2c98a03ee9f1f1b02db25d42d44d782e79e2330"
+      },
+      "bin/python3.13": {
+        "symlink": "python",
+        "target_is_directory": false,
+        "target_sha256": "73b68fc2dac176af16098180a2c98a03ee9f1f1b02db25d42d44d782e79e2330"
+      },
+      "lib64": {
+        "symlink": "lib",
+        "target_is_directory": true
+      }
+    }
+  },
+  "license_review": {
+    "base_copyright_files": 97,
+    "decision_scope": "explicitly flagged to parent before local isolated build; no distribution/commercial publishing authorization claimed",
+    "flagged_components": [
+      "certifi: MPL-2.0",
+      "tqdm: MPL-2.0 AND MIT (component-specific; see LICENCE)",
+      "NumPy wheel bundled libgfortran: GPL-3.0-with-GCC-exception",
+      "NumPy wheel bundled libquadmath: LGPL-2.1-or-later",
+      "Debian base contains GNU/LGPL tools and libraries; preserve /usr/share/doc notices"
+    ],
+    "wheel_license_notice_files": 30
+  },
+  "official_base_source": "https://github.com/docker-library/python/tree/d7d46d97a9ffd58269d8d1d0218ce959362b4298/3.13/slim-bookworm",
+  "only_version_override": {
+    "anyio": [
+      "4.10.0",
+      "4.14.2"
+    ]
+  },
+  "os": "linux",
+  "python": "3.13.12 (main, Apr  7 2026, 02:24:03) [GCC 12.2.0]",
+  "recipes": {
+    "docs/conformance/nb02c3-runtime-prepare.py": {
+      "bytes": 9896,
+      "sha256": "6c5cc5475dbd1f8d511fbc6e4adbcc20ca5c00ef770cc202874a3333d471eff4"
+    },
+    "docs/conformance/nb02c3-runtime-requirements.txt": {
+      "bytes": 16067,
+      "sha256": "afaf07a9bac1d73a5ef729de4a17815acb7082caaa761c9af18fca7a811c1b2d"
+    },
+    "docs/conformance/nb02c3-runtime-wheels.json": {
+      "bytes": 37446,
+      "sha256": "5d82d44433b13bd8444b88ea3d90d5e9dcbe6600d05195a90f8cd8629c9bfd0d"
+    },
+    "docs/conformance/nb02c3-runtime.Dockerfile": {
+      "bytes": 980,
+      "sha256": "2b1b4e1e9326d7d68e3251836ce11c89fb58f757edc81307fdea0d77ef17c0ac"
+    }
+  },
+  "rootfs": {
+    "Layers": [
+      "sha256:335fc45cf5e8eaa6d5b19a54b16db34311ce0d7a068eb2a9222eab4ddd3c216d",
+      "sha256:a3b24bfc5606b42b18401939577e675bc39abe5f86a823eb64421735a8e54f3d",
+      "sha256:1a1e948362a80bb937face73e2b6946a0ebc56b5088d7170e963b24326991924",
+      "sha256:42c278eada1f8b6da188720e3b2165c65fd5aa54867aa866cdd0958179c7a448",
+      "sha256:7ca584df67f159405db06fe9812eaf6b670d6159d68ecfa5ade80cf07ddfa42c",
+      "sha256:07dfc0fa1c6d82c550dd51071614f34f7af12759878f70705de8982979d34877",
+      "sha256:884c48a781fe468c10cf4bf12a4e811edb1a59133711152d209f2a2fb19205ac",
+      "sha256:da1716859165c588593b0288d5146ddb05f54a3d42874b2bb368f8b777607e91",
+      "sha256:86e04bd56cd186982279d0fc162e70ca6667c9471797f69ab081dc7cf2a2b625"
+    ],
+    "Type": "layers"
+  },
+  "scope": "offline minimal full-module score/summary import environment; not a native execution/confinement acceptance claim",
+  "stdlib_root": "/usr/local/lib/python3.13",
+  "upstream_commit": "64a23be6b18ec1dacc298830aab276061b6e143c"
+}

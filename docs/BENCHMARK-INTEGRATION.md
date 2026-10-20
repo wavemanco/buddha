@@ -232,3 +232,51 @@ The optional command below requires the already prepared locked research environ
 Complete official modules, generic configured hooks/aliases/resume, confined bounded channels, actual native artifacts/summary and unchanged frozen-agent generation remain BENCH-02C3. The same-agent/same-runner release upgrade and safe retirement proof remains BENCH-03C. No new paid CLI or allocation is enabled here.
 
 [Delivery evidence](conformance/nb02c2-delivery.json) records the 555-test local suite and root-reproduced 30-scenario oracle. [The independent boundary review](conformance/nb02c2-boundary-review.md) records reproduced failures, closed regressions and remaining execution limits. All 287 protected historical inputs remain byte-identical.
+
+## BENCH-02C3A: confined complete native scoring and summaries
+
+The generic `NativeSession(gateway, descriptor=..., output=...).run()` library
+path consumes the actual owning Gateway and a frozen command descriptor. It
+starts one fresh worker per command and returns a host execution report. Native
+artifacts remain in their own directory. The descriptor selects the full
+module/CLI arguments, explicit hooks/aliases, installed image/inventory and
+model/profile mapping; it does not add a scoring algorithm to shared code.
+
+[The execution guide](CONFINED-NATIVE-EVALUATION.md) documents ownership,
+confinement, artifacts, raw-receipt replay, native caches and the limits.
+[The independent review](conformance/nb02c3-boundary-review.md) records actual
+red/green source-bytecode, diagnostics and descriptor/entrypoint findings.
+[The runtime record](conformance/nb02c3-runtime-environment.json) seals the
+installed Linux environment, including its explicit AnyIO security overlay.
+The host application retains its standard-library-only runtime requirements;
+the actual judge SDKs run in the separate reviewed image.
+
+Physical request serialization is explicit. Native parser/fallback/summary
+behavior and literal files are checked against unwrapped complete official
+entry points with canned provider replies. On failed multi-head commands,
+concurrent cancellation can change how many calls are issued. The deterministic
+parser-failure fixtures use a single head per row; successful multi-head
+fixtures separately cover identities and full outputs. Network timing and
+arbitrary failed-call-count equality are not conformance claims.
+
+The command below needs the pinned official files, prepared Linux image and
+installed-runtime evidence described in the execution/runtime guides. Run it
+once in the current PowerShell window with Docker Desktop's Linux engine
+running. It uses fake keys and mocked HTTPS, creates/removes its own temporary
+containers and writes ignored conformance evidence under `runs/reviews/`.
+It makes no paid calls or changes to historical runs. Ctrl+C stops it and
+attempts owned cleanup.
+
+```powershell
+python docs/conformance/nb02c3-funded-native-probe.py
+```
+
+This checks direct-versus-funded complete scoring/summary, native parser and
+fallback outcomes, partial/full caches, keyless raw replay, physical unknown
+stops and descriptor drift. [Delivery evidence](conformance/nb02c3-delivery.json)
+records the exact checks and protected-input preservation.
+
+C3A does not execute official partitioning or the frozen seed agent, nor does
+the low-level session prove selected C1 population/answer derivation. Those
+remain C3B/C. The same-agent/same-runner upgrade and safe retirement acceptance
+remains BENCH-03C. No new live allocation or paid CLI follows from this slice.

@@ -1,0 +1,131 @@
+{
+  "checks": {
+    "bandit": "pass; no findings, suppression parser warnings retained in local log",
+    "compile": "pass",
+    "documented_runtime_audit_command": "pass; actual installed inventory unchanged",
+    "git_diff_check": "pass",
+    "ruff_format": "pass;62files",
+    "ruff_lint": "pass",
+    "runtime_dependency_audit": "pass; no known vulnerabilities",
+    "strict_mypy": "pass;27 runtime modules; explicit linux and win32 platforms after portable subprocess flag lookup"
+  },
+  "ci": {
+    "current_fix": "hosted rerun pending; no green claim for the fix yet",
+    "linux": "628 tests, lint and format pass; types failed on Windows-only subprocess.CREATE_NO_WINDOW attribute; repaired and locally rechecked on both platform modes",
+    "pull_request_run": 39462587715,
+    "reviewed_commit": "a553fe1a3d2cbc79d571a437f7565bacd379d7b2",
+    "windows": "success;628 tests"
+  },
+  "date": "2026-10-20",
+  "evidence": {
+    "nb02c3-bytecode-shadow-red.json": {
+      "bytes": 957,
+      "sha256": "9d028858f5174c540a0c8f6cb201fc041440b9cc29cdf924d8bf4f4de4fe376c"
+    },
+    "nb02c3-executor-evidence.json": {
+      "bytes": 10711,
+      "sha256": "cd749f402ce23eb0a09b8a301e0b694d1480cca771e054d696fe85092cb6a6f1"
+    },
+    "nb02c3-executor-startup-failure-v2.json": {
+      "bytes": 8723,
+      "sha256": "0788fd5c2b7966b7a1599cad72a5960d46fc8358d2f9080c7bdd0a1a58d0a781"
+    },
+    "nb02c3-executor-ten-case-before-pycache.json": {
+      "bytes": 9563,
+      "sha256": "7ab18d781c6110691e927d84a592bfa2b3c561da8e41fbcddd2e8b567b53518f"
+    },
+    "nb02c3-funded-native-evidence.json": {
+      "bytes": 278248,
+      "sha256": "fbea43d8d3b34dd683bc34e1a7220ed601a2dfb7eba1f0a71ee52f5b49c68c7b"
+    },
+    "nb02c3-funded-native-fixture-failure-v3.log": {
+      "sha256": "7a2a0730744720fadeef14dac012c43367619c0e88d8d9238f5c7a53f518f69e"
+    },
+    "nb02c3-runtime-environment.json": {
+      "bytes": 7377,
+      "sha256": "dc58b658821a536d13c300b6b1f756aa8dc3b2adcc5699627a4827f8361f7d9a"
+    }
+  },
+  "format": "buddha.review.nb02c3a-delivery.v1",
+  "image_id": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
+  "limits": [
+    "NativeSession evaluator route only; generic Executor role tests do not implement the frozen seed agent",
+    "Complete score/summary from canned partitions; full official partition closure and frozen generation remain BENCH-02C3B/C",
+    "Context input digest is sealed; NativeSession does not itself prove C1 TaskSet/Answers derivation or selected experiment population",
+    "Unknown liability retains holds; worker wall limit is not a bounded host callback/finalization deadline",
+    "Trusted local Docker/image/host owner; control metadata checked after capture, no malicious-daemon or whole-OS vulnerability claim",
+    "No semantic-diversity, judge-accuracy, held-out improvement, source-evolution or leaderboard claim",
+    "Physical requests serialized; no network timing or multi-head failure cancellation request-count parity claimed; deterministic one-head failure fixtures and successful multi-head cases separately checked"
+  ],
+  "local_tests": {
+    "actual_docker": {
+      "cases": 11,
+      "owned_cleanup_verified": true,
+      "pass": true,
+      "unrelated_canary_preserved": true
+    },
+    "executor": {
+      "count": 19,
+      "exit_code": 0,
+      "seconds": 0.238
+    },
+    "executor_portable_flag_fix": {
+      "count": 19,
+      "exit_code": 0,
+      "seconds": 0.32
+    },
+    "full": {
+      "count": 628,
+      "exit_code": 0,
+      "seconds": 184.232,
+      "skipped": 3
+    },
+    "late_adversarial_root_rerun": {
+      "count": 3,
+      "exit_code": 0,
+      "seconds": 3.948
+    },
+    "oracle": {
+      "additional_checks": 6,
+      "completed_operations": 28,
+      "mock_https_attempts": 32,
+      "provider_network_calls": 0,
+      "real_keys_used": false,
+      "replay_new_charges": 0,
+      "replay_new_sends": 0,
+      "root_rerun_exit_code": 0,
+      "same_owner_keyless_replay_replies": 4,
+      "scenarios": 10,
+      "synthetic_spent_microusd": 140,
+      "unknown_operations": 4
+    },
+    "post_ci_refresh": {
+      "actual_docker_cases": 11,
+      "additional_funding_recovery_checks": 6,
+      "full_native_scenarios": 10,
+      "initial_executor_startup_failure": "retained; descendant fixture produced no frame and exited255 before timeout; identical serial rerun passed; cause not established",
+      "status": "pass; sources resealed after two portable subprocess flag lookups; zero paid calls"
+    },
+    "session": {
+      "count": 28,
+      "exit_code": 0,
+      "seconds": 48.579,
+      "skipped": 0
+    },
+    "worker": {
+      "count": 23,
+      "exit_code": 0,
+      "skipped": 1
+    }
+  },
+  "new_live_allocation": false,
+  "new_paid_command": false,
+  "paid_model_calls": 0,
+  "preserved": {
+    "all_hashes_unchanged": true,
+    "original_unknown_hold_unchanged": true,
+    "pilot_runtime_zip_sha256": "bd32c4d50339e2f2e1cadf01f5872fa3c1cdf12c196e7676a18d6fe96bd534e0",
+    "protected_input_files": 287
+  },
+  "scope": "Complete unchanged official LLM scoring and summary entrypoints in owned confined workers; canned partition inputs, no generation/partition execution or native live-readiness claim"
+}
