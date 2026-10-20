@@ -365,3 +365,18 @@ def read_authority(raw: bytes) -> dict[str, object]:
         if isinstance(error, ValidationError):
             raise
         raise ValidationError("authorization snapshot could not be decoded consistently") from None
+
+
+def _local_binding(raw: bytes) -> dict[str, object] | None:
+    # The same immutable bytes have already passed _read_database's native DDL,
+    # config and binding-row checks. Read this relationship without opening a path.
+    with closing(sqlite3.connect(":memory:")) as connection:
+        connection.deserialize(raw)
+        connection.row_factory = sqlite3.Row
+        connection.execute("PRAGMA query_only=ON")
+        connection.execute("PRAGMA trusted_schema=OFF")
+        if not connection.execute(
+            "SELECT 1 FROM sqlite_master WHERE type='table' AND name='authorization_binding'"
+        ).fetchone():
+            return None
+        return dict(connection.execute("SELECT * FROM authorization_binding").fetchone())

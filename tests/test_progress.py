@@ -10,8 +10,11 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
+from doctor_helpers import files, native, protected
+
 from buddha.ledger import Ledger
 from buddha.progress import Progress, snapshot, watch_run
+from buddha.provider import Reply
 
 
 def digest(value):
@@ -24,11 +27,12 @@ class ProgressTests(unittest.TestCase):
     def setUp(self):
         temporary = tempfile.TemporaryDirectory()
         self.addCleanup(temporary.cleanup)
-        self.directory = Path(temporary.name)
+        self.directory = Path(temporary.name).resolve()
         self.manifest = {
             "format": "buddha.policy-search.v1",
             "run_id": "run-1",
             "comparison_key": "f" * 64,
+            "settings": {"budget_microusd": 50_000_000, "max_calls": 100},
             "secret_canary": "PRIVATE-PROMPT-POLICY-KEY-CANARY",
         }
         self.write_record("manifest.json", self.manifest)
@@ -52,7 +56,14 @@ class ProgressTests(unittest.TestCase):
         ledger.dispatch(operation)
         ledger.complete(
             operation,
-            response={"text": "PRIVATE-RESPONSE-REQUEST-ID-CANARY"},
+            response=Reply(
+                "PRIVATE-RESPONSE-REQUEST-ID-CANARY",
+                "test-model",
+                "PRIVATE-RESPONSE-REQUEST-ID-CANARY",
+                5,
+                3,
+                "stop",
+            ).to_record(),
             actual_microusd=600_000,
             provider_request_id="PRIVATE-RESPONSE-REQUEST-ID-CANARY",
         )
@@ -94,8 +105,12 @@ class ProgressTests(unittest.TestCase):
         connection = sqlite3.connect(self.directory / "operations.sqlite3")
         self.addCleanup(connection.close)
         connection.execute("BEGIN EXCLUSIVE")
+        connection.execute("INSERT INTO events(event_type) VALUES ('synthetic busy')")
         started = time.monotonic()
-        self.assertEqual(snapshot(self.directory)["status"], "unavailable")
+        result = snapshot(self.directory)
+        self.assertEqual(result["status"], "busy_or_changing")
+        self.assertIsNone(result["spent_microusd"])
+        self.assertIsNone(result["operation_count"])
         self.assertLess(time.monotonic() - started, 0.5)
 
     def test_blocked_worker_has_flushed_heartbeats_and_safe_output(self):
@@ -117,7 +132,9 @@ class ProgressTests(unittest.TestCase):
         printed = output.getvalue()
         self.assertIn("already recorded", printed)
         self.assertIn("still waiting", printed.lower())
-        self.assertIn("Run complete", printed)
+        self.assertNotIn("Run complete", printed)
+        self.assertIn("Execution returned; saved completion not observed.", printed)
+        self.assertIn("Writer identity unknown.", printed)
         self.assertIn("recorded cost $0.600000; held $2.000000; cap $50.000000", printed)
         self.assertGreaterEqual(output.flush_count, 3)
         self.assertNotIn("CANARY", printed)
@@ -144,25 +161,56 @@ class ProgressTests(unittest.TestCase):
         with Progress(self.directory, stream=Broken()):
             pass
 
-    def test_complete_operations_without_report_are_still_running(self):
+    def test_complete_operations_without_report_have_no_running_owner_claim(self):
         self.complete(self.ledger())
-        self.assertEqual(snapshot(self.directory)["status"], "running")
+        result = snapshot(self.directory)
+        self.assertEqual(result["status"], "observed")
+        self.assertEqual(result["writer"]["identity"], "unknown")
+        self.assertEqual(result["lock"]["status"], "absent")
+
+    def test_dispatched_request_remains_observed_with_unknown_writer(self):
+        ledger = self.ledger()
+        ledger.reserve("pending", "b" * 64, 2_000_000)
+        ledger.dispatch("pending")
+        (self.directory / ".search.lock").write_bytes(b"")
+        before = ledger.events()
+        result = snapshot(self.directory)
+        self.assertEqual(result["status"], "observed")
+        self.assertEqual(result["dispatched_count"], 1)
+        self.assertEqual(result["held_microusd"], 2_000_000)
+        self.assertEqual(result["lock"]["status"], "legacy_empty")
+        self.assertEqual(result["writer"]["identity"], "unknown")
+        self.assertEqual(ledger.events(), before)
+
+    def test_native_progress_and_watch_require_explicit_anchor_and_print_stage_caps(self):
+        fixture = native(self, complete=True)
+        authority = fixture.authority.path
+        before = files(fixture.directory, authority)
+        output = io.StringIO()
+        with protected(fixture.directory, authority):
+            self.assertEqual(snapshot(fixture.directory)["status"], "observed")
+            result = watch_run(fixture.directory, authorization=authority, stream=output)
+        self.assertEqual(result["status"], "complete")
+        self.assertIsNone(result["budget_microusd"])
+        self.assertIn("per-stage caps", output.getvalue())
+        self.assertIn("saved local completion record", output.getvalue())
+        self.assertEqual(files(fixture.directory, authority), before)
 
     def test_linked_completion_requires_its_v2_report_before_watcher_finishes(self):
         self.manifest["format"] = "buddha.policy-search-continuation.v1"
         self.write_record("manifest.json", self.manifest)
         ledger = self.ledger()
         self.complete(ledger)
-        self.assertEqual(snapshot(self.directory)["status"], "running")
+        self.assertEqual(snapshot(self.directory)["status"], "observed")
         self.report()
-        self.assertEqual(snapshot(self.directory)["status"], "running")
+        self.assertNotEqual(snapshot(self.directory)["status"], "complete")
         self.report(format="buddha.policy-search-report.v2")
         before = (self.directory / "operations.sqlite3").read_bytes()
         self.assertEqual(snapshot(self.directory)["status"], "complete")
         self.assertEqual(watch_run(self.directory, stream=io.StringIO())["status"], "complete")
         self.assertEqual((self.directory / "operations.sqlite3").read_bytes(), before)
         ledger.reserve("pending", "b" * 64, 1_000_000)
-        self.assertEqual(snapshot(self.directory)["status"], "running")
+        self.assertEqual(snapshot(self.directory)["status"], "observed")
 
     def test_report_requires_checksum_run_identity_and_no_pending_operations(self):
         ledger = self.ledger()
@@ -225,7 +273,12 @@ class ProgressTests(unittest.TestCase):
         self.assertEqual(snapshot(self.directory)["candidate_count"], 1)
 
     def test_baseline_requires_bound_provenance_and_matching_artifact_hashes(self):
-        self.manifest = {"format": "buddha.baseline.v1", "run_id": "run-1", "protocol": {}}
+        self.manifest = {
+            "format": "buddha.baseline.v1",
+            "run_id": "run-1",
+            "protocol": {},
+            "settings": {"budget_microusd": 50_000_000, "max_calls": 100},
+        }
         (self.directory / "manifest.json").write_text(json.dumps(self.manifest), encoding="utf-8")
         self.complete(self.ledger())
         evaluation = self.directory / "evaluation"

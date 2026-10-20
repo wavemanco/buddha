@@ -1,0 +1,294 @@
+{
+  "authority_bytes_unchanged": true,
+  "authority_owners": [
+    {
+      "active": false,
+      "run_id": "a1257f96467b490b910b559437a71258"
+    },
+    {
+      "active": false,
+      "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+    },
+    {
+      "active": false,
+      "run_id": "a486d90396934a45940637d77a168304"
+    }
+  ],
+  "authority_totals": {
+    "committed_microusd": 1108768,
+    "operation_count": 124,
+    "reserved_microusd": 532373,
+    "spent_microusd": 576395
+  },
+  "cases": [
+    {
+      "accounting": {
+        "budget_microusd": 50000000,
+        "committed_microusd": 534082,
+        "completed_count": 9,
+        "dispatched_count": 0,
+        "max_calls": 128,
+        "operation_count": 10,
+        "reserved_count": 0,
+        "reserved_microusd": 532373,
+        "spent_microusd": 1709,
+        "unknown_count": 1
+      },
+      "candidate_count": 0,
+      "completion": {
+        "record_sha256": null,
+        "status": "no_completion_observed"
+      },
+      "diagnostics": [],
+      "input_format": "buddha.policy-search.v1",
+      "lock": {
+        "name": null,
+        "pid": null,
+        "status": "absent"
+      },
+      "needs_review": true,
+      "observed_sha256": {
+        "authorization": "52d293f04921af5418a46a0ce33b1ffd296ae3753cbd3aee7da5130f3dd2c06a",
+        "manifest.json": "2244c5fa284502ade3f05533b5b095b7bde725d31f64d7a9531f058a3340ffeb",
+        "operations.sqlite3": "6d87bf1617b7c0514756296cf32c7f4da4cb4a60b11f845c3de51806027a2bb9"
+      },
+      "run": "first-live-search",
+      "run_id": "a1257f96467b490b910b559437a71258",
+      "shared_accounting": {
+        "committed_microusd": 1108768,
+        "operation_count": 124,
+        "reserved_microusd": 532373,
+        "spent_microusd": 576395
+      },
+      "status": "observed",
+      "writer": {
+        "identity": "unknown",
+        "pid_observation": null
+      }
+    },
+    {
+      "accounting": {
+        "budget_microusd": 49465918,
+        "committed_microusd": 300153,
+        "completed_count": 63,
+        "dispatched_count": 0,
+        "max_calls": 118,
+        "operation_count": 63,
+        "reserved_count": 0,
+        "reserved_microusd": 0,
+        "spent_microusd": 300153,
+        "unknown_count": 0
+      },
+      "candidate_count": 3,
+      "completion": {
+        "record_sha256": "e7c5f8ed9d27dc1e65a88123a7b5668288875cf0c902e367999bf463a2508b65",
+        "status": "stored_completion_observed"
+      },
+      "diagnostics": [],
+      "input_format": "buddha.policy-search.v1",
+      "lock": {
+        "name": null,
+        "pid": null,
+        "status": "absent"
+      },
+      "needs_review": false,
+      "observed_sha256": {
+        "authorization": "52d293f04921af5418a46a0ce33b1ffd296ae3753cbd3aee7da5130f3dd2c06a",
+        "decisions/iteration-000000.json": "b28be2bce92e68c01cd147481fc21f46718e51abaa60f0fe0236e4a6d7c10e8d",
+        "decisions/seed-0.json": "c13428a1941d05235dcf70bd47eadd481618151085bda881774eaef88fd60454",
+        "decisions/seed-1.json": "aeec36eac53bfe7f6b44f087896fbd556ddfcaac215828bda93c80d5a02efa50",
+        "manifest.json": "5c049dcecc61884bd1714fddd414fe4cd3e35325f7724199f694b9f77f9c76ee",
+        "operations.sqlite3": "f9011bba84f6d938fd9f58a2013732efe19b639c59136f31e02ffca924b39eea",
+        "report.json": "e7c5f8ed9d27dc1e65a88123a7b5668288875cf0c902e367999bf463a2508b65"
+      },
+      "run": "first-live-recovery",
+      "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb",
+      "shared_accounting": {
+        "committed_microusd": 1108768,
+        "operation_count": 124,
+        "reserved_microusd": 532373,
+        "spent_microusd": 576395
+      },
+      "status": "observed",
+      "writer": {
+        "identity": "unknown",
+        "pid_observation": null
+      }
+    },
+    {
+      "accounting": {
+        "budget_microusd": 49165765,
+        "committed_microusd": 274533,
+        "completed_count": 51,
+        "dispatched_count": 0,
+        "max_calls": 55,
+        "operation_count": 51,
+        "reserved_count": 0,
+        "reserved_microusd": 0,
+        "spent_microusd": 274533,
+        "unknown_count": 0
+      },
+      "candidate_count": 3,
+      "completion": {
+        "record_sha256": "8f6afbd49fd8db86cdae8f7e345fc33839166aa0caaf9b911e04f5a6a591c5b9",
+        "status": "stored_completion_observed"
+      },
+      "diagnostics": [],
+      "input_format": "buddha.policy-search-continuation.v1",
+      "lock": {
+        "name": null,
+        "pid": null,
+        "status": "absent"
+      },
+      "needs_review": false,
+      "observed_sha256": {
+        "authorization": "52d293f04921af5418a46a0ce33b1ffd296ae3753cbd3aee7da5130f3dd2c06a",
+        "decisions/iteration-000000.json": "dcd28630281822820214ecb55ac38381863c0a6952b610e55c307d45d3dde942",
+        "decisions/seed-0.json": "c53266c3db0f71fe2c6fc756b23338237f09b3be66c66f8e8ca78ba9c0fa28f6",
+        "decisions/seed-1.json": "e1db3a05ff29cf4b5c5fc450de8b008dca72b76751cffc4a79f4dcdfe97dfe2a",
+        "manifest.json": "a632f45ddf1344d8921d26e5672eb3eb2b57c5694d6360b73034a750dbb7de95",
+        "operations.sqlite3": "89bba60c2081b6f7d54e2cc8475cb26c56a24412157fa7b8c0de735822820609",
+        "report.json": "8f6afbd49fd8db86cdae8f7e345fc33839166aa0caaf9b911e04f5a6a591c5b9"
+      },
+      "run": "first-live-continuation-v2",
+      "run_id": "a486d90396934a45940637d77a168304",
+      "shared_accounting": {
+        "committed_microusd": 1108768,
+        "operation_count": 124,
+        "reserved_microusd": 532373,
+        "spent_microusd": 576395
+      },
+      "status": "observed",
+      "writer": {
+        "identity": "unknown",
+        "pid_observation": null
+      }
+    }
+  ],
+  "cli": [
+    {
+      "accounting": {
+        "budget_microusd": 50000000,
+        "committed_microusd": 534082,
+        "completed_count": 9,
+        "dispatched_count": 0,
+        "max_calls": 128,
+        "operation_count": 10,
+        "reserved_count": 0,
+        "reserved_microusd": 532373,
+        "spent_microusd": 1709,
+        "unknown_count": 1
+      },
+      "argv": [
+        "python",
+        "-m",
+        "buddha",
+        "doctor",
+        "--run",
+        "runs/first-live-search",
+        "--authorization",
+        "runs/first-live-authorization-v2.sqlite3"
+      ],
+      "completion": {
+        "record_sha256": null,
+        "status": "no_completion_observed"
+      },
+      "credentials_absent_from_environment": true,
+      "exit_code": 3,
+      "output_sha256": "17dcf0919f92b83e06cca4861758c168d732964cd389bf3451aa3768c040aff8",
+      "prior_input_seals_match_before_after": true,
+      "stderr_bytes": 0,
+      "stdout_json": true
+    },
+    {
+      "accounting": {
+        "budget_microusd": 49165765,
+        "committed_microusd": 274533,
+        "completed_count": 51,
+        "dispatched_count": 0,
+        "max_calls": 55,
+        "operation_count": 51,
+        "reserved_count": 0,
+        "reserved_microusd": 0,
+        "spent_microusd": 274533,
+        "unknown_count": 0
+      },
+      "argv": [
+        "python",
+        "-m",
+        "buddha",
+        "doctor",
+        "--run",
+        "runs/first-live-continuation-v2",
+        "--authorization",
+        "runs/first-live-authorization-v2.sqlite3"
+      ],
+      "completion": {
+        "record_sha256": "8f6afbd49fd8db86cdae8f7e345fc33839166aa0caaf9b911e04f5a6a591c5b9",
+        "status": "stored_completion_observed"
+      },
+      "credentials_absent_from_environment": true,
+      "exit_code": 0,
+      "output_sha256": "14e7625bcd82776221bff62f7d4d0972c8eefea44d45979b9865f83fb8e058b0",
+      "prior_input_seals_match_before_after": true,
+      "stderr_bytes": 0,
+      "stdout_json": true
+    }
+  ],
+  "format": "buddha.review.rec05c-real-observation.v1",
+  "guarded_observations": {
+    "network_source_sqlite_writes_credentials_archived_execution_forbidden": true,
+    "only_selected_run_and_explicit_authority_files_opened": true,
+    "runtime_financial_and_execution_constructors_forbidden": true
+  },
+  "limits": [
+    "Observer output establishes recorded bookkeeping consistency, not provider origin or scientific validity.",
+    "Fresh CLI subprocesses use no credentials and are file-hash bracketed; Python monkeypatch guards apply to the separate in-process observations.",
+    "Unchanged before/after bytes are not proof of an atomic snapshot under arbitrary concurrent writers."
+  ],
+  "new_input_seals_substituted": false,
+  "package_source_sha256": {
+    "__init__.py": "0857bd60619c1e1c8538fe768cbe82c781bb4e302abc6cf59130f1b17d052230",
+    "__main__.py": "749379d618f14efefaef35eddad73720c77ab30f4494d85253fd1a756d969617",
+    "agent_run.py": "3f7f8ff3cb9965216f19c6564da1e830f0f629a346ec1cc29e2583c119bea88d",
+    "agent_worker.py": "c6f86105c0a42304687f857209bb17172f2f38fda26699d25e2618f6e01a745f",
+    "answers.py": "be860546b2692ea4a710d93855f487dd49d9c8e28eb3f2ec757df697cefb8d0b",
+    "archive.py": "9549deb0f347cf6114ef3f802b9dfef8a94e0db7cbbd3497697987d5e21ba2ee",
+    "authorization.py": "06d8615f8b301285a951b08bece0570e5b1b89467fc99fa4e994c7e5e5f30c47",
+    "baseline.py": "c988e823d9890b712a4b50a58a3d808c6630fdcf3e6fb94227ee9e591d04a432",
+    "benchmark.py": "7ef7e26b2ef3cbf4119118a985334048fd30b68a5629f3e3196fa77e8200c49f",
+    "channel.py": "c46d236865b15f1918efa23d961ed7163533c9bbef2b0cec7f61d6f8e95d6e5f",
+    "common.py": "3a0a693a0f4a0f2eed3b858d0b3ac42148871dbca284e56e0e368726309393c0",
+    "continuation.py": "b0136052472868aee379d7ac78dfd11bcfa40e91aedcd6916d30f9a334003414",
+    "diagnostics.py": "ca0af1304e3fbe99569f0b027f99269b151e08265785b39ed53c39f820097e24",
+    "doctor.py": "80104522cb402a3a6ae35521bdc29c12a234f1a3249157127fbb4ebb3f6903e5",
+    "evaluation.py": "4cabb1a48689a140fc6f6129ed8d9eae1d047d3e09eae794170c74479413b8d6",
+    "executor.py": "b5e84f2dbcdc436aee23272e7d96b567cb5b16ead256a34d08bccc70b480d186",
+    "gateway.py": "e844fcb695b97c76ecb7432ece6b8d96416806554038e202fd6b0f7f3da57a2e",
+    "gateway_history.py": "a773ae6066e5b8a4f503e4b346b73570ace2ebeb811017f7b656cc211fded57c",
+    "history.py": "d42e92a7e6c88a2f72090eaaa50de39dc355957e7c61f5b89dd97162d8b0eefa",
+    "ledger.py": "5c7e56f1e2c5e68046d6380ebacc03110300eae34d348d7dca683a0591d64130",
+    "native_context.py": "47a488b8d731617bda21380232e5e49801e0c0b4261f69b71c24fb9eae0ba298",
+    "native_run.py": "60aafd5ef9e355e82faae2dc12397c6b0b2b649c3273c1bda9c0c757e0775a19",
+    "native_transport.py": "ccd4917132939630231b8b8c69540189cd52f60951fa08d467d90b9571ccb6c0",
+    "native_worker.py": "8fa4b85ae6e75202de4b345302cb70253b6c0c5b47f004490f8d9a09750ecaa1",
+    "policy.py": "717f6fdad1e880d83326d6a314e0dfa604be1044f8209f27061380e16cfebb3e",
+    "process_observation.py": "28ad4b424ae0bec10aa2d3bf145cb62e1b26eb088db5e83fb6900fab6d5495a8",
+    "progress.py": "47d21dada88347e63c01b05cf5c31db8e2cc157e501b812b58a2650d078393ba",
+    "provider.py": "17de071c1416afa32f9da32eb627e24264d8a0a848862fdf4853057125f18a02",
+    "reference.py": "36356c8a25dae3501014513095cb6f838c4ae54b02a129bdffc4a5cb2dfa6f35",
+    "releases.py": "33361cf5b0923b373ee53dd73597063195c2c0d519baead50d40fb4bcfab44f5",
+    "run.py": "a972cb8d1a04bef7abad7efdf7f1eec803bb88cd55c30cf64148119a3d7c6dbb",
+    "search.py": "ac7b3648355b139797773cbe2bb8b67abbc8533eefd987cd7692275692a9a95c",
+    "search_evidence.py": "7f9c014bb61e2fc06691db9ec5a832fe803966715011d94ea34618b1df753ae3",
+    "search_verify.py": "41bdc2689d2b64e93765fe4572017a6c4264d5c3c6df49bba2a63e74b9ab6a63",
+    "splits.py": "419fa286d812b43e3095fbb41a62844b40477f880d94c8d60de069a52c324a2a",
+    "wire.py": "48f40a71bf10c84dfd1d15f0baef50198cce8a229748355f116ad6a25cab12b4"
+  },
+  "package_sources_unchanged": true,
+  "pilot_zip_sha256": "bd32c4d50339e2f2e1cadf01f5872fa3c1cdf12c196e7676a18d6fe96bd534e0",
+  "pilot_zip_unchanged": true,
+  "preserved_seals_source": "docs/conformance/nb01-preservation.json input_sha256",
+  "protected_input_files": 287,
+  "protected_inputs_match_original_seals_before_after": true
+}

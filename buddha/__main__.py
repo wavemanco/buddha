@@ -356,8 +356,14 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     search_verify.add_argument("--run", type=Path, required=True)
     search_verify.add_argument("--evidence", type=Path, required=True)
+    doctor = commands.add_parser(
+        "doctor", help="observe saved work and locks without writes or calls"
+    )
+    doctor.add_argument("--run", type=Path, required=True)
+    doctor.add_argument("--authorization", type=Path)
     watch = commands.add_parser("watch", help="observe an existing run without keys or API calls")
     watch.add_argument("--run", type=Path, required=True)
+    watch.add_argument("--authorization", type=Path)
     fetch = commands.add_parser(
         "fetch", help="fetch hash-verified pinned v1.1 prompts; no model calls"
     )
@@ -520,12 +526,32 @@ def main(argv: Sequence[str] | None = None) -> int:
             verification = verify_search(args.run, evidence=declaration)
             print(json.dumps(verification.to_record()))
             return 0 if verification.status == "verified" else 3
+        elif args.command == "doctor":
+            from buddha.doctor import observe
+
+            observation = observe(args.run, authorization=args.authorization)
+            print(json.dumps(observation))
+            return (
+                0 if observation["status"] == "observed" and not observation["needs_review"] else 3
+            )
         elif args.command == "watch":
             from buddha.progress import watch_run
 
-            if not (args.run / "manifest.json").is_file():
+            prepared = False
+            for name in ("manifest.json", "context.json"):
+                path = args.run.absolute() / name
+                try:
+                    _plain(path)
+                    prepared |= path.is_file()
+                except FileNotFoundError:
+                    continue
+            if not prepared:
                 raise ValidationError("watch requires an existing prepared run")
-            watched = watch_run(args.run)
+            watched = (
+                watch_run(args.run)
+                if args.authorization is None
+                else watch_run(args.run, authorization=args.authorization)
+            )
             print(json.dumps(watched))
             return 0 if watched.get("status") == "complete" else 2
         elif args.command == "search-prepare":
