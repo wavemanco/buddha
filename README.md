@@ -6,7 +6,7 @@ Build agents that improve their own procedures for producing useful, meaningfull
 
 ## Current state
 
-The implementation checkpoint is **REC-05B**. The project has auditable API
+The implementation checkpoint is **REC-05C**. The project has auditable API
 accounting, linked recovery, bounded policy search, replaceable release selection,
 and isolated fixed-seed generation. The unchanged official LLM partition, score
 and summary commands now compose with generated C1 answers in a complete
@@ -17,7 +17,9 @@ controlled cross-release checks and a separate pinned-official regression.
 now preserves earlier uncertainty and terminal receipts separately, counting a
 completed charge once. [Read-only search verification](docs/SEARCH-VERIFICATION.md)
 now checks explicitly sealed saved requests, results, lineage and accounting
-without keys, model calls or record changes. Writer/lock diagnostics are next.
+without keys, model calls or record changes. The [doctor](docs/DOCTOR.md) now
+reports locks, unknown writer identity, outstanding diagnostics and native
+completion anchors without resuming work. Measurement calibration is next.
 
 These are distinct from scientific success. Meaningful diversity, held-out
 improvement, genuine task/improver source evolution and an improved improver have
@@ -26,9 +28,9 @@ original benchmark scores and raw evidence remain unchanged. See the
 [pilot review](docs/PILOT-REVIEW.md), [recovery results](docs/FIRST-LIVE-RESULTS.md)
 and [linked continuation results](docs/LINKED-CONTINUATION-RESULTS.md).
 
-At this checkpoint the living plan contains **12 remaining leaf slices**.
+At this checkpoint the living plan contains **11 remaining leaf slices**.
 The native pipeline is complete at its declared offline scope. Umbrella milestones
-are not counted again. They cover recovery/usability (1), measurement (2),
+are not counted again. They cover measurement (2),
 policy/search (3), source evolution (3), held-out evaluation (2) and the
 improver comparison (1). This is a checkpoint count, not a promise that research
 findings will never require a smaller slice; [PLAN.md](docs/PLAN.md) determines
@@ -44,7 +46,7 @@ capability limits and the bounded upgrade/retirement evidence.
 The new native library path enables no paid CLI or new allocation. The original
 $50 authorization belongs only to the historical experiment; its completed
 allocations are inactive and its unknown-request hold remains recorded. Finish
-the remaining verification/measurement gates and establish a concrete new allocation before
+the measurement gates and establish a concrete new allocation before
 another paid experiment. [API key guidance](docs/API-KEYS.md) explains process-only
 key entry; never paste keys into chat or commit them.
 
@@ -90,7 +92,7 @@ This synthetic example evaluates independent-sampling and in-context seeds, prop
 
 The first live experiment was authorized for **up to $50 combined**, covering both providers and all search stages. The initial attempt was interrupted while awaiting answer 10. Its nine replies and full uncertain reservation remain intact. The completed recovery restart used a **$49.465918 cap and 118-call allowance**, accounting for the original $0.534082 committed liability and ten attempted calls. It repeated the same one-prompt, two-seed, one-proposal engineering pilot with fresh evidence. Both attempts are now historical inputs. Shared authorization imports their sealed liabilities once and enforces the combined dollar/call cap. The linked continuation reuses nine saved replies as evidence, sends a separately identified replacement for the unknown tenth, then completes the remaining search stages. Its new report separates new cost, inherited evidence cost and shared experiment accounting.
 
-The corrected linked run completed and was verified: nine saved replies reused, 51 new calls for $0.274533, with the original unknown still held. [Linked results and concerns](docs/LINKED-CONTINUATION-RESULTS.md) record the three candidate scores, repeated plots, literal/craft failures and shared accounting. The completed run is closed to new paid calls; its [execution handoff](docs/FIRST-LIVE-CONTINUATION.md) remains historical evidence. Benchmark conformance now passes at its declared offline scope; REC-05's read-only verification is implemented; writer/lock diagnostics remain next.
+The corrected linked run completed and was verified: nine saved replies reused, 51 new calls for $0.274533, with the original unknown still held. [Linked results and concerns](docs/LINKED-CONTINUATION-RESULTS.md) record the three candidate scores, repeated plots, literal/craft failures and shared accounting. The completed run is closed to new paid calls; its [execution handoff](docs/FIRST-LIVE-CONTINUATION.md) remains historical evidence. Benchmark conformance now passes at its declared offline scope; REC-05's bounded read-only verification and diagnostic gates are complete; independent measurement calibration is next.
 
 This command prints the saved completed report once in this window. It needs no
 keys, makes no changes and spends nothing:
@@ -152,6 +154,7 @@ payment stops new spending. Arbitrary evolved source and publication remain gate
 - [Replaceable benchmark integration contract](docs/BENCHMARK-INTEGRATION.md)
 - [Frozen seed and isolated generation](docs/FROZEN-SEED.md)
 - [Complete selected native baseline](docs/NATIVE-BASELINE.md)
+- [Read-only doctor, locks and watch commands](docs/DOCTOR.md)
 - [Complete native commands and environment limits](docs/CONFINED-NATIVE-EVALUATION.md)
 - [Pinned benchmark source audit](docs/NOVELTYBENCH.md)
 - [Research and successors](docs/RESEARCH.md)
@@ -179,4 +182,4 @@ Ctrl+C stops a foreground check. Real-container proofs are separate optional
 checks documented in their guides; the core audit does not clear the larger
 native evaluator environment.
 
-CI is configured on Windows/Linux, Python 3.13, using the pinned tools in `requirements-dev.txt`; application runtime dependencies remain empty. Development auditing includes certifi (MPL-2.0), recorded in the recovery contract, without adding it to the application runtime. Local verification is reported separately from hosted CI. The user authorizes continued implementation with a summary and PR per slice, pausing for live execution or a required decision. Genuine source self-modification requires the separate isolated-executor work. HyperAgents contributes conceptual inspiration only; its source is excluded. Earlier dated handoffs describing absent Git/CI are historical.
+CI is configured on Windows/Linux, Python 3.13, using the pinned tools in `requirements-dev.txt`; application runtime dependencies remain empty. Development auditing includes certifi (MPL-2.0), recorded in the recovery contract, without adding it to the application runtime. Local verification is reported separately from hosted CI. The user authorizes continued implementation with a summary and PR per slice, pausing for live execution or a required decision. Genuine source self-modification requires the separately gated source-evolution work. HyperAgents contributes conceptual inspiration only; its source is excluded. Earlier dated handoffs describing absent Git/CI are historical.

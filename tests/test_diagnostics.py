@@ -1,13 +1,19 @@
 """Diagnostic sidecars retain safe failure metadata without another dispatch."""
 
+import hashlib
 import json
+import sqlite3
 import tempfile
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import Mock, patch
 
+import test_history
 from authorization_helpers import authorized_run
 
+from buddha import diagnostics
+from buddha.benchmark import _canonical
 from buddha.diagnostics import DiagnosticHTTPTransport, failure_summary
 from buddha.evaluation import ValidationError
 from buddha.ledger import Ledger
@@ -327,7 +333,7 @@ class DiagnosticsTests(unittest.TestCase):
         self.assertNotIn("X-Client-Request-Id", connection.request.call_args.kwargs["headers"])
         self.assertEqual(connection.request.call_args.kwargs["body"], self.call.body_json.encode())
 
-    def test_latest_success_supersedes_old_uncertain_summary(self):
+    def test_newer_unrelated_success_cannot_hide_an_outstanding_unknown_summary(self):
         from buddha.search import _put
 
         connection, _ = self.connection(status=500)
@@ -347,7 +353,244 @@ class DiagnosticsTests(unittest.TestCase):
             }
         )
         _put(self.directory / "diagnostics" / ("b" * 64) / "outcome.json", saved)
+        self.assertEqual(failure_summary(self.directory)["operation_id"], self.operation)
+
+    def test_newer_uncertain_without_correlated_request_cannot_hide_older_match(self):
+        from buddha.search import _put
+
+        connection, _ = self.connection(status=500)
+        with self.assertRaises(ProviderUncertain):
+            self.execute(connection)
+        saved = self.outcome()
+        saved.pop("record_sha256")
+        saved.update(operation_id="b" * 64, at="2099-01-01T00:00:00+00:00")
+        _put(self.directory / "diagnostics" / ("b" * 64) / "outcome.json", saved)
+        self.assertEqual(failure_summary(self.directory)["operation_id"], self.operation)
+
+    def diagnostic_pair(self):
+        connection, _ = self.connection(status=429)
+        with self.assertRaises(ProviderUncertain):
+            self.execute(connection)
+        base = self.directory / "diagnostics" / self.operation
+        return tuple(
+            json.loads((base / name).read_bytes()) for name in ("request.json", "outcome.json")
+        )
+
+    def seal(self, record):
+        saved = {key: value for key, value in record.items() if key != "record_sha256"}
+        saved["record_sha256"] = hashlib.sha256(_canonical(saved)).hexdigest()
+        return _canonical(saved)
+
+    def test_plural_summaries_use_only_supplied_operations_and_bounded_callback(self):
+        request, outcome = self.diagnostic_pair()
+        other = "b" * 64
+        blobs = {}
+        for operation, at in (
+            (self.operation, "2026-01-01T00:00:00+00:00"),
+            (other, "2027-01-01T00:00:00+00:00"),
+        ):
+            for name, record in (("request.json", request), ("outcome.json", outcome)):
+                blobs[f"diagnostics/{operation}/{name}"] = self.seal(
+                    record | {"operation_id": operation, "at": at}
+                )
+        selected = {
+            self.operation: (self.call.fingerprint(), "unknown"),
+            other: (self.call.fingerprint(), "dispatched"),
+        }
+        consumed = []
+
+        def read(relative, maximum):
+            consumed.append((relative, maximum))
+            return blobs[relative]
+
+        with patch("buddha.diagnostics.sqlite3.connect", side_effect=AssertionError("source SQL")):
+            summaries = diagnostics.failure_summaries(selected, read=read)
+        self.assertEqual([row["operation_id"] for row in summaries], [other, self.operation])
+        self.assertEqual({name for name, _ in consumed}, set(blobs))
+        self.assertTrue(all(maximum == 65536 for _, maximum in consumed))
+        self.assertTrue(
+            all(
+                set(row)
+                == {
+                    "operation_id",
+                    "phase",
+                    "http_status",
+                    "error_category",
+                    "error_code",
+                    "provider_request_id",
+                    "client_request_id",
+                }
+                for row in summaries
+            )
+        )
+        summaries[0]["phase"] = "mutated return value"
+        self.assertEqual(
+            diagnostics.failure_summaries(selected, read=read)[0]["phase"], outcome["phase"]
+        )
+
+    def test_plural_reserved_and_completed_operations_do_not_explain_dispatch_failure(self):
+        callback = Mock(side_effect=AssertionError("reserved operation was read"))
+        self.assertEqual(
+            diagnostics.failure_summaries(
+                {self.operation: (self.call.fingerprint(), "reserved")}, read=callback
+            ),
+            (),
+        )
+        callback.assert_not_called()
+        with self.assertRaises(ValidationError):
+            diagnostics.failure_summaries(
+                {self.operation: (self.call.fingerprint(), "completed")}, read=callback
+            )
+
+    def test_invalid_newer_pair_does_not_discard_an_older_matched_summary(self):
+        request, outcome = self.diagnostic_pair()
+        other = "b" * 64
+        blobs = {
+            f"diagnostics/{self.operation}/request.json": self.seal(request),
+            f"diagnostics/{self.operation}/outcome.json": self.seal(outcome),
+            f"diagnostics/{other}/request.json": self.seal(
+                request | {"operation_id": other, "client_request_id": "bad"}
+            ),
+            f"diagnostics/{other}/outcome.json": self.seal(
+                outcome | {"operation_id": other, "at": "2099-01-01T00:00:00+00:00"}
+            ),
+        }
+        summaries = diagnostics.failure_summaries(
+            {
+                other: (self.call.fingerprint(), "unknown"),
+                self.operation: (self.call.fingerprint(), "unknown"),
+            },
+            read=lambda relative, maximum: blobs[relative],
+        )
+        self.assertEqual([row["operation_id"] for row in summaries], [self.operation])
+
+    def test_plural_ties_are_deterministic_and_malformed_records_stay_unexplained(self):
+        request, outcome = self.diagnostic_pair()
+        other = "b" * 64
+        blobs = {}
+        for operation in (self.operation, other):
+            for name, record in (("request.json", request), ("outcome.json", outcome)):
+                blobs[f"diagnostics/{operation}/{name}"] = self.seal(
+                    record | {"operation_id": operation, "at": "2026-01-01T00:00:00+00:00"}
+                )
+        selected = {
+            self.operation: (self.call.fingerprint(), "unknown"),
+            other: (self.call.fingerprint(), "unknown"),
+        }
+
+        def read(relative, maximum):
+            return blobs[relative]
+
+        self.assertEqual(
+            [row["operation_id"] for row in diagnostics.failure_summaries(selected, read=read)],
+            [other, self.operation],
+        )
+        for raw in (b"[" * 20_000, b"x" * 65_537, b"{}", b'{"schema":1,"schema":1}'):
+            with self.subTest(raw_length=len(raw)):
+                blobs[f"diagnostics/{other}/outcome.json"] = raw
+                self.assertEqual(
+                    [
+                        row["operation_id"]
+                        for row in diagnostics.failure_summaries(selected, read=read)
+                    ],
+                    [self.operation],
+                )
+
+    def test_plural_rejects_invalid_supplied_identities_before_reading(self):
+        callback = Mock(side_effect=AssertionError("invalid operation caused a read"))
+        for selected in (
+            {"../outside": (self.call.fingerprint(), "unknown")},
+            {self.operation: ("wrong hash", "unknown")},
+            {self.operation: (self.call.fingerprint(), [])},
+            {self.operation: [self.call.fingerprint(), "unknown"]},
+        ):
+            with self.subTest(selected=selected), self.assertRaises(ValidationError):
+                diagnostics.failure_summaries(selected, read=callback)
+        callback.assert_not_called()
+
+    def change_manifest(self, format_name, *, checksum=True):
+        path = self.directory / "manifest.json"
+        manifest = json.loads(path.read_bytes())
+        manifest.pop("record_sha256", None)
+        manifest["format"] = format_name
+        digest = hashlib.sha256(_canonical(manifest)).hexdigest()
+        if checksum:
+            manifest["record_sha256"] = digest
+        path.write_bytes(_canonical(manifest))
+        test_history.HistoryTests.corrupt(
+            SimpleNamespace(path=self.ledger.path),
+            "UPDATE run_config SET manifest_sha256=?",
+            (digest,),
+        )
+
+    def test_wrapper_accepts_unchecksummed_baseline_and_rejects_native_owner(self):
+        self.diagnostic_pair()
+        self.change_manifest("buddha.baseline.v1", checksum=False)
+        self.assertEqual(failure_summary(self.directory)["operation_id"], self.operation)
+        self.change_manifest("buddha.gateway-run.v1")
         self.assertIsNone(failure_summary(self.directory))
+
+    def test_wrapper_requires_checksummed_matching_legacy_manifest(self):
+        self.diagnostic_pair()
+        path = self.directory / "manifest.json"
+        original = path.read_bytes()
+        for field, value in (("record_sha256", "0" * 64), ("run_id", "another-run")):
+            with self.subTest(field=field):
+                manifest = json.loads(original)
+                manifest[field] = value
+                path.write_bytes(self.seal(manifest) if field == "run_id" else _canonical(manifest))
+                self.assertIsNone(failure_summary(self.directory))
+        path.write_bytes(original)
+        self.assertIsNotNone(failure_summary(self.directory))
+
+    def test_wrapper_uses_only_memory_sql_and_does_not_follow_binding_authority(self):
+        self.diagnostic_pair()
+        original_connect = sqlite3.connect
+        connections = []
+
+        def connect(database, *args, **kwargs):
+            connections.append(database)
+            self.assertEqual(database, ":memory:")
+            return original_connect(database, *args, **kwargs)
+
+        before = {
+            str(path.relative_to(self.directory)): path.read_bytes()
+            for path in self.directory.rglob("*")
+            if path.is_file()
+        }
+        with patch("buddha.diagnostics.sqlite3.connect", side_effect=connect):
+            self.assertIsNotNone(failure_summary(self.directory))
+        self.assertTrue(connections)
+        self.assertEqual(
+            before,
+            {
+                str(path.relative_to(self.directory)): path.read_bytes()
+                for path in self.directory.rglob("*")
+                if path.is_file()
+            },
+        )
+
+    def test_wrapper_rejects_live_journal_hardlinks_and_source_drift(self):
+        self.diagnostic_pair()
+        journal = self.ledger.path.with_name(self.ledger.path.name + "-journal")
+        journal.write_bytes(b"uncheckpointed transaction")
+        self.assertIsNone(failure_summary(self.directory))
+        journal.unlink()
+        linked = self.directory / "ledger-alias"
+        linked.hardlink_to(self.ledger.path)
+        self.assertIsNone(failure_summary(self.directory))
+        linked.unlink()
+        original_read = diagnostics._read
+        manifest_path = self.directory / "manifest.json"
+
+        def read(path, maximum):
+            raw = original_read(path, maximum)
+            if path.name == "outcome.json":
+                manifest_path.write_bytes(manifest_path.read_bytes() + b" ")
+            return raw
+
+        with patch("buddha.diagnostics._read", side_effect=read):
+            self.assertIsNone(failure_summary(self.directory))
 
     def test_summary_requires_unknown_ledger_operation_with_matching_fingerprint(self):
         from buddha.search import _put
@@ -377,6 +620,14 @@ class DiagnosticsTests(unittest.TestCase):
             provider_request_id="req_12345678",
         )
         self.assertIsNone(failure_summary(self.directory))
+
+    def test_unrelated_legal_nonhex_pending_id_does_not_hide_unknown_diagnostic(self):
+        self.ledger.reserve("pending", "b" * 64, 1)
+        self.diagnostic_pair()
+        summary = failure_summary(self.directory)
+        self.assertIsNotNone(summary)
+        self.assertEqual(summary["operation_id"], self.operation)
+        self.assertEqual(self.ledger.get("pending").status, "reserved")
 
     def test_summary_requires_correlated_request_record(self):
         from buddha.search import _put

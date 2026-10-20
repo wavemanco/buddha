@@ -155,7 +155,11 @@
     "parent_PR22": "all four PR/push Windows/Linux jobs terminal green at21660311596edeec3ef729168782c2967416f09b;merged73ab10db251919822a634460cb6984e3a0cd0c16",
     "parent_PR_workflow": "https://github.com/wavemanco/buddha/actions/runs/39496939894",
     "parent_push_workflow": "https://github.com/wavemanco/buddha/actions/runs/39496868183",
-    "status": "pending publication;local full suite does not establish hosted CI"
+    "status": "success;all four PR23/push Windows/Linux jobs terminal green at fe6ff20cc50b7dad77e3dbba4cc0d0e7280c977f",
+    "PR23_workflow": "https://github.com/wavemanco/buddha/actions/runs/39502913318",
+    "PR23_push_workflow": "https://github.com/wavemanco/buddha/actions/runs/39502898820",
+    "PR23_merge_commit": "04c88b9959c9d4ff1be4334b1af754f2112fe84b",
+    "PR23_merged_at": "2026-10-20T22:17:04Z"
   },
   "date": "2026-10-20",
   "findings": {

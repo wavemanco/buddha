@@ -278,3 +278,52 @@ checks and limitations. This is no provider authentication, semantic judgment,
 invoice reconciliation, retry permission, hold release or scientific
 improvement claim. REC-05C still owns writer/lock observations and diagnostics;
 hosted CI follows publication.
+
+
+## REC-05C doctor, process evidence and outstanding diagnostics
+
+[The doctor guide](DOCTOR.md) documents one-time observation and continuous
+watch commands, their explicit optional authorization, JSON and exit codes.
+The observer reads bounded local bytes and queries SQLite only in memory.
+It supports legacy baseline/search/continuation records, raw Gateway owners
+and native baseline folders using their respective receipt codecs. It never
+follows an authority, descriptor or component path merely because metadata
+names it. Missing/busy/unsafe input has unavailable accounting, not zero cost.
+
+Current empty search locks and PID-only native locks cannot establish writer
+identity. Read-only operating-system PID samples are separate from ownership,
+health, provider progress and container cleanup. Watch no longer calls a
+readable ledger running; returning from an execution context no longer
+establishes saved completion. Neither observation nor elapsed time removes
+a lock, settles a request, releases its reservation or authorizes a retry.
+
+The shared diagnostic helper starts with outstanding ledger operations,
+validates their exact request/outcome pairs and returns deterministic matched
+safe metadata. Newer unrelated, invalid or completed records cannot suppress
+an older unresolved explanation. Legal ledger IDs outside the legacy sidecar
+format remain accounting records; they do not disable other explanations.
+The transport writer itself is unchanged.
+
+Native completion observations retain original stage owners, exact attempt
+inventories and report/release/task/summary bindings. Explicit authority
+mirrors and deactivation reasons anchor completion records. Missing authority
+is unobserved anchoring; active owners with completion records need review.
+Bad/foreign seals, duplicate or partial owner records and changed attempts
+cannot become complete observations. Existing execution refusal is retained;
+doctor never adopts a seal, creates a replacement owner or invokes resume.
+
+Final local suite: 895 tests in 665.672s, with 5 Windows
+symlink-permission skips; ResourceWarnings are errors. Ruff lint/format
+(91 files), strict mypy (37 sources, Linux and Windows), Bandit, core
+dependency audit, compilation and local Markdown targets pass. Twelve native
+observation controls and all three real histories pass; all 287 protected
+inputs, pilot ZIP, costs and unknown hold remain unchanged. Zero real calls.
+
+[Delivery](conformance/rec05c-delivery.json),
+[actual observations](conformance/rec05c-real-observation.json),
+[native controls](conformance/rec05c-native-observation-review.json) and
+[code preservation](conformance/rec05c-code-preservation.json) record scope.
+Refreshed native controls, the final full suite and real-history checks
+cover the final sources. This closes bounded REC-05 observation, not provider
+authentication, atomic live snapshots, invoice reconciliation, manual lock
+recovery, positive writer identification or scientific improvement.

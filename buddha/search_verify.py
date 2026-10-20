@@ -9,7 +9,6 @@ import sqlite3
 import zipfile
 import zlib
 from collections.abc import Sequence
-from contextlib import closing
 from dataclasses import asdict, dataclass, replace
 from pathlib import Path
 
@@ -40,7 +39,13 @@ from buddha.policy import MUTATION_SYSTEM, Policy, proposal_schema, propose_call
 from buddha.provider import BudgetBroker, Call, Reply
 from buddha.run import DATASETS, Execute, RunSettings, _generation, _sha, evaluate_prompts
 from buddha.search import SearchSpec, _candidate_protocol, _comparison
-from buddha.search_evidence import SealedEvidence, SealedRun, read_authority, read_search_evidence
+from buddha.search_evidence import (
+    SealedEvidence,
+    SealedRun,
+    _local_binding,
+    read_authority,
+    read_search_evidence,
+)
 from buddha.splits import validate_splits
 
 _FINANCIALS = ("committed_microusd", "spent_microusd", "reserved_microusd", "operation_count")
@@ -272,21 +277,6 @@ def _archive_contract(snapshot: dict[str, bytes], contracts: dict[str, object]) 
         != "3a0a693a0f4a0f2eed3b858d0b3ac42148871dbca284e56e0e368726309393c0"
     ):
         raise ValidationError("archived generic helpers differ from the legacy profile")
-
-
-def _local_binding(raw: bytes) -> dict[str, object] | None:
-    # The same immutable bytes have already passed _read_database's native DDL,
-    # config and binding-row checks. Read this relationship without opening a path.
-    with closing(sqlite3.connect(":memory:")) as connection:
-        connection.deserialize(raw)
-        connection.row_factory = sqlite3.Row
-        connection.execute("PRAGMA query_only=ON")
-        connection.execute("PRAGMA trusted_schema=OFF")
-        if not connection.execute(
-            "SELECT 1 FROM sqlite_master WHERE type='table' AND name='authorization_binding'"
-        ).fetchone():
-            return None
-        return dict(connection.execute("SELECT * FROM authorization_binding").fetchone())
 
 
 def _shared(snapshot: SealedEvidence, histories: dict[Path, History]) -> dict[str, object] | None:

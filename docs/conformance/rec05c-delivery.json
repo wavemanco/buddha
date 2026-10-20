@@ -1,0 +1,442 @@
+{
+  "actual_history": {
+    "all36_package_sources_unchanged": true,
+    "all_original_expected_hashes_and_zip_unchanged": true,
+    "all_real_owners_inactive": true,
+    "cases": [
+      {
+        "accounting": {
+          "budget_microusd": 50000000,
+          "committed_microusd": 534082,
+          "completed_count": 9,
+          "dispatched_count": 0,
+          "max_calls": 128,
+          "operation_count": 10,
+          "reserved_count": 0,
+          "reserved_microusd": 532373,
+          "spent_microusd": 1709,
+          "unknown_count": 1
+        },
+        "candidate_count": 0,
+        "completion": {
+          "record_sha256": null,
+          "status": "no_completion_observed"
+        },
+        "diagnostics": [],
+        "input_format": "buddha.policy-search.v1",
+        "lock": {
+          "name": null,
+          "pid": null,
+          "status": "absent"
+        },
+        "needs_review": true,
+        "observed_sha256": {
+          "authorization": "52d293f04921af5418a46a0ce33b1ffd296ae3753cbd3aee7da5130f3dd2c06a",
+          "manifest.json": "2244c5fa284502ade3f05533b5b095b7bde725d31f64d7a9531f058a3340ffeb",
+          "operations.sqlite3": "6d87bf1617b7c0514756296cf32c7f4da4cb4a60b11f845c3de51806027a2bb9"
+        },
+        "run": "first-live-search",
+        "run_id": "a1257f96467b490b910b559437a71258",
+        "shared_accounting": {
+          "committed_microusd": 1108768,
+          "operation_count": 124,
+          "reserved_microusd": 532373,
+          "spent_microusd": 576395
+        },
+        "status": "observed",
+        "writer": {
+          "identity": "unknown",
+          "pid_observation": null
+        }
+      },
+      {
+        "accounting": {
+          "budget_microusd": 49465918,
+          "committed_microusd": 300153,
+          "completed_count": 63,
+          "dispatched_count": 0,
+          "max_calls": 118,
+          "operation_count": 63,
+          "reserved_count": 0,
+          "reserved_microusd": 0,
+          "spent_microusd": 300153,
+          "unknown_count": 0
+        },
+        "candidate_count": 3,
+        "completion": {
+          "record_sha256": "e7c5f8ed9d27dc1e65a88123a7b5668288875cf0c902e367999bf463a2508b65",
+          "status": "stored_completion_observed"
+        },
+        "diagnostics": [],
+        "input_format": "buddha.policy-search.v1",
+        "lock": {
+          "name": null,
+          "pid": null,
+          "status": "absent"
+        },
+        "needs_review": false,
+        "observed_sha256": {
+          "authorization": "52d293f04921af5418a46a0ce33b1ffd296ae3753cbd3aee7da5130f3dd2c06a",
+          "decisions/iteration-000000.json": "b28be2bce92e68c01cd147481fc21f46718e51abaa60f0fe0236e4a6d7c10e8d",
+          "decisions/seed-0.json": "c13428a1941d05235dcf70bd47eadd481618151085bda881774eaef88fd60454",
+          "decisions/seed-1.json": "aeec36eac53bfe7f6b44f087896fbd556ddfcaac215828bda93c80d5a02efa50",
+          "manifest.json": "5c049dcecc61884bd1714fddd414fe4cd3e35325f7724199f694b9f77f9c76ee",
+          "operations.sqlite3": "f9011bba84f6d938fd9f58a2013732efe19b639c59136f31e02ffca924b39eea",
+          "report.json": "e7c5f8ed9d27dc1e65a88123a7b5668288875cf0c902e367999bf463a2508b65"
+        },
+        "run": "first-live-recovery",
+        "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb",
+        "shared_accounting": {
+          "committed_microusd": 1108768,
+          "operation_count": 124,
+          "reserved_microusd": 532373,
+          "spent_microusd": 576395
+        },
+        "status": "observed",
+        "writer": {
+          "identity": "unknown",
+          "pid_observation": null
+        }
+      },
+      {
+        "accounting": {
+          "budget_microusd": 49165765,
+          "committed_microusd": 274533,
+          "completed_count": 51,
+          "dispatched_count": 0,
+          "max_calls": 55,
+          "operation_count": 51,
+          "reserved_count": 0,
+          "reserved_microusd": 0,
+          "spent_microusd": 274533,
+          "unknown_count": 0
+        },
+        "candidate_count": 3,
+        "completion": {
+          "record_sha256": "8f6afbd49fd8db86cdae8f7e345fc33839166aa0caaf9b911e04f5a6a591c5b9",
+          "status": "stored_completion_observed"
+        },
+        "diagnostics": [],
+        "input_format": "buddha.policy-search-continuation.v1",
+        "lock": {
+          "name": null,
+          "pid": null,
+          "status": "absent"
+        },
+        "needs_review": false,
+        "observed_sha256": {
+          "authorization": "52d293f04921af5418a46a0ce33b1ffd296ae3753cbd3aee7da5130f3dd2c06a",
+          "decisions/iteration-000000.json": "dcd28630281822820214ecb55ac38381863c0a6952b610e55c307d45d3dde942",
+          "decisions/seed-0.json": "c53266c3db0f71fe2c6fc756b23338237f09b3be66c66f8e8ca78ba9c0fa28f6",
+          "decisions/seed-1.json": "e1db3a05ff29cf4b5c5fc450de8b008dca72b76751cffc4a79f4dcdfe97dfe2a",
+          "manifest.json": "a632f45ddf1344d8921d26e5672eb3eb2b57c5694d6360b73034a750dbb7de95",
+          "operations.sqlite3": "89bba60c2081b6f7d54e2cc8475cb26c56a24412157fa7b8c0de735822820609",
+          "report.json": "8f6afbd49fd8db86cdae8f7e345fc33839166aa0caaf9b911e04f5a6a591c5b9"
+        },
+        "run": "first-live-continuation-v2",
+        "run_id": "a486d90396934a45940637d77a168304",
+        "shared_accounting": {
+          "committed_microusd": 1108768,
+          "operation_count": 124,
+          "reserved_microusd": 532373,
+          "spent_microusd": 576395
+        },
+        "status": "observed",
+        "writer": {
+          "identity": "unknown",
+          "pid_observation": null
+        }
+      }
+    ],
+    "committed_microusd": 1108768,
+    "evidence": "docs/conformance/rec05c-real-observation.json",
+    "fresh_CLI": "documented originalexit3/linkedexit0;no environment credentials;prior-seal before/after brackets;in-process monkeypatch guards are a separate observation proof",
+    "held_microusd": 532373,
+    "known_microusd": 576395,
+    "physical_attempts": 124,
+    "protected_inputs": 287
+  },
+  "actual_provider_calls": 0,
+  "base_commit": "fe6ff20cc50b7dad77e3dbba4cc0d0e7280c977f",
+  "checks": {
+    "bandit": "pass;no application findings;existing suppressions retained",
+    "code_preservation": "18 checks pass;exact financial/runtime bytes and diagnostic-writer/relocated-helper ASTs;see rec05c-code-preservation.json",
+    "compile": "pass",
+    "git_diff_check": "pass",
+    "markdown_links": "pass;283 local file targets;README/project guides/two boundary reviews",
+    "ruff_format": "pass;91 files",
+    "ruff_lint": "pass",
+    "runtime_pip_audit": "pass;no known core vulnerabilities;larger evaluator closure limits unchanged",
+    "strict_mypy": "pass;37 sources;linux and win32"
+  },
+  "ci": {
+    "main_PR22_merge_workflow": "https://github.com/wavemanco/buddha/actions/runs/39500411647;terminalsuccessobserved",
+    "parent_PR23": "all four PR/push Windows/Linux jobs green atfe6ff20cc50b7dad77e3dbba4cc0d0e7280c977f;merged04c88b9959c9d4ff1be4334b1af754f2112fe84b at2026-10-20T22:17:04Z",
+    "parent_PR_workflow": "https://github.com/wavemanco/buddha/actions/runs/39502913318",
+    "parent_push_workflow": "https://github.com/wavemanco/buddha/actions/runs/39502898820",
+    "status": "pending publication;local tests do not establish hosted CI"
+  },
+  "date": "2026-10-20",
+  "findings": {
+    "REC5C-F1": "Diagnostic selection chose global newest outcome before ledger correlation. Two initial REDs reproduce hidden outstanding failures; now ledger-selected pairs validated before deterministic sorting.",
+    "REC5C-F2": "Readable accounting was called running; context-return printed Run complete with pending work. Spec REDs and final progress cases require observed/unknown-writer state and saved completion marker.",
+    "REC5C-F3": "Current locks contain no matching process creation/boot identity. No stronger writer state is invented. PID samples use signal-free pidfd/zero-time Windows handle queries and explicit unavailable outcomes.",
+    "REC5C-F4": "Genuine Windows native final seal keys use platform separators. Initial positive control failed; accept only complete exact known Windows or POSIX key mappings, preserving hashes/writer bytes.",
+    "REC5C-F5": "Actual temp-copy REDs accepted final summary redirected to generation answers, and wrong final release/tasks hashes. Bind exact sealed final artifact/selected release/stage0 task identity.",
+    "REC5C-F6": "Copied physical owner IDs inflated totals; extra/partial owner directories and orphan/noncanonical completion records could be ignored. Exact original population and distinct run IDs now fail closed.",
+    "REC5C-F7": "Initial strict diagnostic-map integration turned legal plain ledger IDs into unavailable accounting. Filter only sidecar-inapplicable IDs; preserve their financial states. A separately reproduced CLI-wrapper sibling bug receives the same codec-boundary correction.",
+    "REC5C-F8": "Original helper raw Windows-path output assertion could be vacuous against JSON escaping. Strengthened final test compares escaped fragments; full suite covers it. Its interrupted partial focused rerun is retained, not claimed green.",
+    "REC5C-F9": "Default lock state falsely said absent when a missing/unreadable root could not be observed. Two runnable REDs close with explicit unavailable; old no-authorization CLI-watch call shape retained after first full-suite failure."
+  },
+  "format": "buddha.review.rec05c-delivery.v1",
+  "limits": [
+    "Observations are not external seals, atomic live snapshots, provider authentication, invoice reconciliation or semantic judgment",
+    "Existing empty/PID-only locks cannot identify dead/reused/matching writers; numeric presence can include Linux zombie and change immediately",
+    "Actual process samples ran Windows;Linux syscall behavior uses mocks/type checks locally until hosted Linux CI",
+    "No absent-lock/PID inference about provider cancellation, container cleanup, safe resume or permission to spend",
+    "Only supplied local root and explicitly selected authority are read; metadata component/descriptor/authority paths remain data",
+    "Whole selected authority totals include other owners;only selected local owner mirrors are checked",
+    "Bounded observation may be unavailable during journals or concurrent writes;byte ceilings are not universal memory/time guarantees",
+    "Strong writer identity receipts, lock recovery, completion adoption, retry, reconciliation, owner replacement and liability release are not introduced",
+    "Native observer checks saved host completion bindings;it does not rerun or certify evaluator/seed science",
+    "No new paid CLI/allocation, source evolution, meaningful-diversity, held-out gain or improved-improver claim"
+  ],
+  "local_tests": {
+    "diagnostics_final": {
+      "count": 31,
+      "seconds": 3.939,
+      "skipped": 0
+    },
+    "doctor_before_final_helper_assertion": {
+      "count": 20,
+      "seconds": 46.591,
+      "skipped": 0
+    },
+    "full": {
+      "count": 895,
+      "exit_code": 0,
+      "seconds": 665.672,
+      "skipped": 5
+    },
+    "logs": {
+      "rec05c-bandit-final.log": {
+        "bytes": 3977,
+        "sha256": "234a70e81fd6630378becd3ec4b65ba841fbeae616d19aec0a09655030a3a70d"
+      },
+      "rec05c-bandit.log": {
+        "bytes": 3977,
+        "sha256": "6a33a9da3ae4773bdc71e704e7512a144aba036aeaf8e71304483be23b54ad94"
+      },
+      "rec05c-code-preservation-final.json": {
+        "bytes": 4741,
+        "sha256": "f6d89868c5a45c3bef2d91f7d5a7d0c7bac81dd7c69f8f7158dcc35a623af331"
+      },
+      "rec05c-code-preservation.json": {
+        "bytes": 4635,
+        "sha256": "4f5163cc980be389e0ec146b2bd92fb1e6c062816982f0b055f46e2c22e34886"
+      },
+      "rec05c-diagnostics-green.log": {
+        "bytes": 135,
+        "sha256": "238cfa8b8424dc5dcf0763cd94d182fb88672e90acd249b659999567dd9d9df8"
+      },
+      "rec05c-diagnostics-nonhex-red.log": {
+        "bytes": 743,
+        "sha256": "e09293040e074b7ef721ad38ba7ecaf102b402f76c4390af4f13f42e6176ba76"
+      },
+      "rec05c-diagnostics-red.log": {
+        "bytes": 2325,
+        "sha256": "0954ceb8e91820543f88b1ba91d6ec6f56f75034b3cd076bf09bb075bc59507c"
+      },
+      "rec05c-doctor-20-final.log": {
+        "bytes": 1654,
+        "sha256": "e378b23beacb0a317fcd2567538a163b148b1f5e3421c3d6e6167642740cfcf0"
+      },
+      "rec05c-doctor-20.log": {
+        "bytes": 3423,
+        "sha256": "6d3f6ff660347ba4beea0911e6f7373028d615b7dd62f8082c770fe4a8de2627"
+      },
+      "rec05c-doctor-native-review-closed.json": {
+        "bytes": 10562,
+        "sha256": "5d1cfd0bd403929473135f8aa34d288e84412a24d1c73d63a308a20e046f9f0a"
+      },
+      "rec05c-doctor-native-review-current.json": {
+        "bytes": 10562,
+        "sha256": "dee427282b2847b8330d6dacb123e75b90f79b3d324a04efa5ba92c87a8c4ddb"
+      },
+      "rec05c-doctor-native-review-final.json": {
+        "bytes": 9685,
+        "sha256": "140e040209314151ecb72d586c3b491334df96608bf76fb74bf2516cb76363eb"
+      },
+      "rec05c-doctor-native-review.json": {
+        "bytes": 4215,
+        "sha256": "fbb56bd585606843c30c77533ec728ebe628191462122b6e00c999cd0e6dace2"
+      },
+      "rec05c-full-suite-final.log": {
+        "bytes": 153384,
+        "sha256": "5f1939fa4deb3724f9698cc73ea81e8512c82c9c193e926afb8bb8a1704627ba"
+      },
+      "rec05c-full-suite.log": {
+        "bytes": 154394,
+        "sha256": "b4fc340c62b0259e05bcee73b1b8c2f30da2db4cf0f6e0524381af1e9e45b138"
+      },
+      "rec05c-pip-audit.log": {
+        "bytes": 268,
+        "sha256": "e82148c0c30269ca5a2c35420ece6af011a4faf5a375325d750e243ffdb10625"
+      },
+      "rec05c-process-final-green.log": {
+        "bytes": 2747,
+        "sha256": "c6dec052ccc559e0a1f24ab58d4c6c24a927861970cea5c11c137ce984e088d1"
+      },
+      "rec05c-process-missing-red.log": {
+        "bytes": 950,
+        "sha256": "cd7cf644398068c549160c5f9b77f019cf5676e6d2250cb6fbcf5cdb8542b5cf"
+      },
+      "rec05c-progress-18-final.log": {
+        "bytes": 2986,
+        "sha256": "055d2acb12194bb39ddc234e230bb81500bc34e102bff5d41327996c69c65c33"
+      },
+      "rec05c-real-observation-final.json": {
+        "bytes": 12216,
+        "sha256": "b57eae82af542391b3f8356e4ee69a615b109a7668e2e252bdfc1d346fad6de0"
+      },
+      "rec05c-real-observation.json": {
+        "bytes": 12216,
+        "sha256": "6112731f99c4ade5dcc87af60974e401416529adad0a06035006db9c66e628ee"
+      },
+      "rec05c-unobserved-lock-cli-green.log": {
+        "bytes": 545,
+        "sha256": "ea3848ac115ff32698ddb44562bddd7dd00ab8f5505eab44c046d74f1df7352d"
+      },
+      "rec05c-unobserved-lock-red.log": {
+        "bytes": 1741,
+        "sha256": "783afb38e302e5132e25fd35c3de598a252d3fd78b826817880f89e0fa17038d"
+      }
+    },
+    "native_observation_cases": 12,
+    "new_total_vs_REC05B": 49,
+    "process": {
+      "count": 15,
+      "seconds": 0.007,
+      "skipped": 0
+    },
+    "progress": {
+      "count": 18,
+      "seconds": 6.871,
+      "skipped": 0
+    }
+  },
+  "native_review": {
+    "cases": 12,
+    "evidence": "docs/conformance/rec05c-native-observation-review.json",
+    "memory_only_SQL_connections": 78,
+    "original_files_unchanged": 41,
+    "scope": "retained mocked-provider native baseline plus temporary copy counterexamples;no driver/runtime/container execution",
+    "source_note": "refreshed12-case proof uses final observer80104522 after the unavailable-lock correction; all previous RED/closed proofs retained"
+  },
+  "public_api": {
+    "cli": "python -m buddha doctor --run <saved-run> [--authorization <existing-db>]",
+    "exit_codes": {
+      "invalid_command_exception": 2,
+      "observed_without_review": 0,
+      "review_or_busy_unavailable_unsupported": 3
+    },
+    "library": "buddha.doctor.observe(Path,authorization=explicit_optional_Path)",
+    "status": [
+      "observed",
+      "busy_or_changing",
+      "unavailable",
+      "unsupported"
+    ],
+    "watch": "same explicit optional authority; saved completion/review stops observation; Ctrl+C stops only watcher"
+  },
+  "scope": "Read-only current-record observation, truthful missing writer identity and ledger-correlated legacy diagnostic explanations; no writer/recovery transition",
+  "source": {
+    "buddha/__main__.py": {
+      "bytes": 33230,
+      "sha256": "749379d618f14efefaef35eddad73720c77ab30f4494d85253fd1a756d969617"
+    },
+    "buddha/authorization.py": {
+      "bytes": 40555,
+      "sha256": "06d8615f8b301285a951b08bece0570e5b1b89467fc99fa4e994c7e5e5f30c47"
+    },
+    "buddha/baseline.py": {
+      "bytes": 26895,
+      "sha256": "c988e823d9890b712a4b50a58a3d808c6630fdcf3e6fb94227ee9e591d04a432"
+    },
+    "buddha/common.py": {
+      "bytes": 2238,
+      "sha256": "3a0a693a0f4a0f2eed3b858d0b3ac42148871dbca284e56e0e368726309393c0"
+    },
+    "buddha/diagnostics.py": {
+      "bytes": 21248,
+      "sha256": "ca0af1304e3fbe99569f0b027f99269b151e08265785b39ed53c39f820097e24"
+    },
+    "buddha/doctor.py": {
+      "bytes": 28625,
+      "sha256": "80104522cb402a3a6ae35521bdc29c12a234f1a3249157127fbb4ebb3f6903e5"
+    },
+    "buddha/gateway_history.py": {
+      "bytes": 16848,
+      "sha256": "a773ae6066e5b8a4f503e4b346b73570ace2ebeb811017f7b656cc211fded57c"
+    },
+    "buddha/history.py": {
+      "bytes": 12198,
+      "sha256": "d42e92a7e6c88a2f72090eaaa50de39dc355957e7c61f5b89dd97162d8b0eefa"
+    },
+    "buddha/ledger.py": {
+      "bytes": 19148,
+      "sha256": "5c7e56f1e2c5e68046d6380ebacc03110300eae34d348d7dca683a0591d64130"
+    },
+    "buddha/process_observation.py": {
+      "bytes": 2813,
+      "sha256": "28ad4b424ae0bec10aa2d3bf145cb62e1b26eb088db5e83fb6900fab6d5495a8"
+    },
+    "buddha/progress.py": {
+      "bytes": 8679,
+      "sha256": "47d21dada88347e63c01b05cf5c31db8e2cc157e501b812b58a2650d078393ba"
+    },
+    "buddha/run.py": {
+      "bytes": 24646,
+      "sha256": "a972cb8d1a04bef7abad7efdf7f1eec803bb88cd55c30cf64148119a3d7c6dbb"
+    },
+    "buddha/search.py": {
+      "bytes": 29125,
+      "sha256": "ac7b3648355b139797773cbe2bb8b67abbc8533eefd987cd7692275692a9a95c"
+    },
+    "buddha/search_evidence.py": {
+      "bytes": 18499,
+      "sha256": "7f9c014bb61e2fc06691db9ec5a832fe803966715011d94ea34618b1df753ae3"
+    },
+    "buddha/search_verify.py": {
+      "bytes": 45054,
+      "sha256": "41bdc2689d2b64e93765fe4572017a6c4264d5c3c6df49bba2a63e74b9ab6a63"
+    },
+    "tests/doctor_helpers.py": {
+      "bytes": 4632,
+      "sha256": "265cddfcb7b72cfdec100469ed40352677cc09a654ae6515e064827f34158f34"
+    },
+    "tests/test_diagnostics.py": {
+      "bytes": 27985,
+      "sha256": "41eebf0f004259bf31f3041729d47d2760959ab6d0d62dfa35eaa1fd1a6e6f17"
+    },
+    "tests/test_doctor.py": {
+      "bytes": 20436,
+      "sha256": "6bc21fcd76d6815de6ba0695be233e705d3814e407e9542e216b850a0b86648d"
+    },
+    "tests/test_process_observation.py": {
+      "bytes": 8029,
+      "sha256": "9c0f104da231cd3cb5b1bbbf4d0b78c240df847a51e37553b043088cad999f82"
+    },
+    "tests/test_progress.py": {
+      "bytes": 13959,
+      "sha256": "aad3c80785f910df8031f6cbc88be840f72a70b23c856058274ddc1ca59b0e8e"
+    }
+  },
+  "spec": "REC-05C",
+  "status": "complete",
+  "verification_history": {
+    "corrections": "No-authorization watch keeps its old call shape. Missing/unreadable root lock status must be unavailable, not absent:2actualREDs then3targetedGREEN0.018s including existingCLItest.",
+    "first_full": "894tests661.678s;1CLI-watchcallshapeassertionfailure;5platformskips;preservedrec05c-full-suite.log",
+    "partial_focused": "A helper-only Windows assertion rerun was stopped, not counted green; final full suite covers the strengthened assertion."
+  }
+}
