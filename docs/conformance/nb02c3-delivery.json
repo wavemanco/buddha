@@ -7,10 +7,14 @@
     "ruff_format": "pass;62files",
     "ruff_lint": "pass",
     "runtime_dependency_audit": "pass; no known vulnerabilities",
-    "strict_mypy": "pass;27runtime modules"
+    "strict_mypy": "pass;27 runtime modules; explicit linux and win32 platforms after portable subprocess flag lookup"
   },
   "ci": {
-    "status": "pending publication; no hosted claim yet"
+    "current_fix": "hosted rerun pending; no green claim for the fix yet",
+    "linux": "628 tests, lint and format pass; types failed on Windows-only subprocess.CREATE_NO_WINDOW attribute; repaired and locally rechecked on both platform modes",
+    "pull_request_run": 39462587715,
+    "reviewed_commit": "a553fe1a3d2cbc79d571a437f7565bacd379d7b2",
+    "windows": "success;628 tests"
   },
   "date": "2026-10-20",
   "evidence": {
@@ -20,15 +24,19 @@
     },
     "nb02c3-executor-evidence.json": {
       "bytes": 10711,
-      "sha256": "e5e4ee0830fb4dc61b1cc3ec0026f6aecadf5e28de2ed071f6b45617b6d965b3"
+      "sha256": "cd749f402ce23eb0a09b8a301e0b694d1480cca771e054d696fe85092cb6a6f1"
+    },
+    "nb02c3-executor-startup-failure-v2.json": {
+      "bytes": 8723,
+      "sha256": "0788fd5c2b7966b7a1599cad72a5960d46fc8358d2f9080c7bdd0a1a58d0a781"
     },
     "nb02c3-executor-ten-case-before-pycache.json": {
       "bytes": 9563,
       "sha256": "7ab18d781c6110691e927d84a592bfa2b3c561da8e41fbcddd2e8b567b53518f"
     },
     "nb02c3-funded-native-evidence.json": {
-      "bytes": 275924,
-      "sha256": "4906f50ff3b76bcefcc46eb37093064eed8de113c5de1ad59447757a9c5f82ba"
+      "bytes": 278248,
+      "sha256": "fbea43d8d3b34dd683bc34e1a7220ed601a2dfb7eba1f0a71ee52f5b49c68c7b"
     },
     "nb02c3-funded-native-fixture-failure-v3.log": {
       "sha256": "7a2a0730744720fadeef14dac012c43367619c0e88d8d9238f5c7a53f518f69e"
@@ -61,6 +69,11 @@
       "exit_code": 0,
       "seconds": 0.238
     },
+    "executor_portable_flag_fix": {
+      "count": 19,
+      "exit_code": 0,
+      "seconds": 0.32
+    },
     "full": {
       "count": 628,
       "exit_code": 0,
@@ -85,6 +98,13 @@
       "scenarios": 10,
       "synthetic_spent_microusd": 140,
       "unknown_operations": 4
+    },
+    "post_ci_refresh": {
+      "actual_docker_cases": 11,
+      "additional_funding_recovery_checks": 6,
+      "full_native_scenarios": 10,
+      "initial_executor_startup_failure": "retained; descendant fixture produced no frame and exited255 before timeout; identical serial rerun passed; cause not established",
+      "status": "pass; sources resealed after two portable subprocess flag lookups; zero paid calls"
     },
     "session": {
       "count": 28,

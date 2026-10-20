@@ -71,7 +71,7 @@
         },
         "claim": "native command artifacts; experiment coverage and promotion remain separate",
         "command_sha256": "1ccd8926594d6c091b6b2f8dc665f96adcca8f7d8b6b105cf6caf67c0b33e683",
-        "descriptor_sha256": "03f3f12acbb7fe73536353b245fb9e26624f68df7796cb3e6ca0fb89ed725ae0",
+        "descriptor_sha256": "76af40bc97aaccfa5ad3b65adb1cf5e3249036a72993e4911ea931795fb3656b",
         "execution": {
           "cleanup_status": "removed",
           "configuration": {
@@ -105,23 +105,23 @@
             },
             "image": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
             "mounts": {
-              "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\valid-oai\\inputs",
-              "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\valid-oai\\official",
-              "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\valid-oai\\runner"
+              "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\valid-oai\\inputs",
+              "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\valid-oai\\official",
+              "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\valid-oai\\runner"
             },
             "role": "evaluator"
           },
-          "container_id": "78d609c9d739331845d3ae9357bfaaf015721cbd2892d4f1e4025cbda755f4f6",
-          "elapsed_seconds": 13.511024700012058,
+          "container_id": "462f23e244d1583c82dc8ed7f2a2656cfdbe7ba02edc382895fd4c56fb777d34",
+          "elapsed_seconds": 15.414909499930218,
           "exit_code": 0,
           "frame_count": 8,
           "image_id": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
           "stderr_bytes": 222,
-          "stderr_sha256": "27cc8d48899cf08b738d608b44d1957c5f674f2906db4931e38cb2461f122941",
+          "stderr_sha256": "9563ca35a5ebe965312d258abf4e433f4d36f3fc3b5a21cc3b4f7520fd768d95",
           "stdout_bytes": 1304117
         },
         "format": "buddha.native-command-report.v1",
-        "gateway_manifest_sha256": "f49df3298307eb6ba38ee3306cc15d8c3019d577fde07a3c5986d12309290618",
+        "gateway_manifest_sha256": "b88af055470cb252480c11739f6eab8e3d7e14d8381b7ad8915619e0570a1fee",
         "gateway_totals": {
           "committed_microusd": 20,
           "operation_count": 4,
@@ -138,29 +138,6 @@
         }
       },
       "requests": [
-        {
-          "attempt": 0,
-          "body_sha256": "05c8c5805eba5501b55bc7251ccfad9c4551dbf304aed562a939bc846a08f814",
-          "headers": {
-            "accept": "application/json",
-            "accept-encoding": "gzip, deflate",
-            "content-type": "application/json",
-            "user-agent": "AsyncOpenAI/Python 1.107.0",
-            "x-stainless-arch": "x64",
-            "x-stainless-async": "async:asyncio",
-            "x-stainless-helper-method": "chat.completions.parse",
-            "x-stainless-lang": "python",
-            "x-stainless-os": "Linux",
-            "x-stainless-package-version": "1.107.0",
-            "x-stainless-read-timeout": "600",
-            "x-stainless-retry-count": "0",
-            "x-stainless-runtime": "CPython",
-            "x-stainless-runtime-version": "3.13.12"
-          },
-          "logical_id": "5d7e1da0b861be2a6c0421a24278c62cd297248da17b1cadf73a16ac9e3166ba",
-          "model": "test-model",
-          "provider": "openai"
-        },
         {
           "attempt": 0,
           "body_sha256": "6c181bd883871c16707ea425982a03fed73169931a517edcf8a4aa6395046ef0",
@@ -227,6 +204,29 @@
             "x-stainless-runtime-version": "3.13.12"
           },
           "logical_id": "6c1e204425b645a5d47c963dc2573ccd8cb190dd0bcb7fbaa17f6b63a6d6d9fd",
+          "model": "test-model",
+          "provider": "openai"
+        },
+        {
+          "attempt": 0,
+          "body_sha256": "05c8c5805eba5501b55bc7251ccfad9c4551dbf304aed562a939bc846a08f814",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "user-agent": "AsyncOpenAI/Python 1.107.0",
+            "x-stainless-arch": "x64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-helper-method": "chat.completions.parse",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Linux",
+            "x-stainless-package-version": "1.107.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12"
+          },
+          "logical_id": "5d7e1da0b861be2a6c0421a24278c62cd297248da17b1cadf73a16ac9e3166ba",
           "model": "test-model",
           "provider": "openai"
         }
@@ -298,7 +298,7 @@
         },
         "claim": "native command artifacts; experiment coverage and promotion remain separate",
         "command_sha256": "1ccd8926594d6c091b6b2f8dc665f96adcca8f7d8b6b105cf6caf67c0b33e683",
-        "descriptor_sha256": "298930de08b05c055f3c8f92b71ef44f04b1cb1db6ac8c75366c8894ff0f0a0c",
+        "descriptor_sha256": "57b141545c636a665ca1e7d6a7a7604a3a10624a37fd52dfaf9e5c453f988728",
         "execution": {
           "cleanup_status": "removed",
           "configuration": {
@@ -332,23 +332,23 @@
             },
             "image": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
             "mounts": {
-              "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\unknown-oai\\inputs",
-              "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\unknown-oai\\official",
-              "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\unknown-oai\\runner"
+              "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\unknown-oai\\inputs",
+              "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\unknown-oai\\official",
+              "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\unknown-oai\\runner"
             },
             "role": "evaluator"
           },
-          "container_id": "fc4430751dbe6a3488efb947b2ce2c38144d4501b4e467742dd258c757a81f98",
-          "elapsed_seconds": 8.85146330005955,
+          "container_id": "b3c0d64ba93421ae14465f72812ee12cc87234e6adbbbfde0fc2628239377d44",
+          "elapsed_seconds": 9.984962299931794,
           "exit_code": 0,
           "frame_count": 5,
           "image_id": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
           "stderr_bytes": 3493,
-          "stderr_sha256": "d55cc875dd3ae97394e71a03aa4151f5558875ee427fd01ecef652ade66029c9",
-          "stdout_bytes": 1296662
+          "stderr_sha256": "16d57b7887faa14babac1e61b13a9938007ac666900145a6d8d3e00949c674c6",
+          "stdout_bytes": 1296666
         },
         "format": "buddha.native-command-report.v1",
-        "gateway_manifest_sha256": "157b6a221561c7df28af3a0f1b3a98a778af5ea5049f0c3851c738fef93dd867",
+        "gateway_manifest_sha256": "c3bbdcfef6d66d4f485d88462116de4a6c9ff8e0f3e6c2e1d3260956a3a691cb",
         "gateway_totals": {
           "committed_microusd": 2256000,
           "operation_count": 1,
@@ -367,7 +367,7 @@
       "requests": [
         {
           "attempt": 0,
-          "body_sha256": "6c181bd883871c16707ea425982a03fed73169931a517edcf8a4aa6395046ef0",
+          "body_sha256": "05c8c5805eba5501b55bc7251ccfad9c4551dbf304aed562a939bc846a08f814",
           "headers": {
             "accept": "application/json",
             "accept-encoding": "gzip, deflate",
@@ -384,14 +384,14 @@
             "x-stainless-runtime": "CPython",
             "x-stainless-runtime-version": "3.13.12"
           },
-          "logical_id": "6bca3c8df9df2d9d25a5f5235da1e3a337119dafdbcb83b8980fd577b11be962",
+          "logical_id": "5d7e1da0b861be2a6c0421a24278c62cd297248da17b1cadf73a16ac9e3166ba",
           "model": "test-model",
           "provider": "openai"
         }
       ],
       "sends": [
         {
-          "body_sha256": "6c181bd883871c16707ea425982a03fed73169931a517edcf8a4aa6395046ef0",
+          "body_sha256": "05c8c5805eba5501b55bc7251ccfad9c4551dbf304aed562a939bc846a08f814",
           "headers": {
             "accept": "application/json",
             "accept-encoding": "gzip, deflate",
@@ -478,7 +478,7 @@
         },
         "claim": "native command artifacts; experiment coverage and promotion remain separate",
         "command_sha256": "ecc54570395ee256a314eb1e65b647762c8f36341384ba7fa2917d4085757d43",
-        "descriptor_sha256": "582902171119ead097b996185ea8cc22cf0d5f2ac191c69e5e0ed38807730337",
+        "descriptor_sha256": "7e4a1abb1bb228d325b5c4ec2ab7189d3ad2aff38858e074d571cb2d67c9b2df",
         "execution": {
           "cleanup_status": "removed",
           "configuration": {
@@ -512,14 +512,14 @@
             },
             "image": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
             "mounts": {
-              "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\unknown-anthropic\\inputs",
-              "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\unknown-anthropic\\official",
-              "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\unknown-anthropic\\runner"
+              "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\unknown-anthropic\\inputs",
+              "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\unknown-anthropic\\official",
+              "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\unknown-anthropic\\runner"
             },
             "role": "evaluator"
           },
-          "container_id": "3c2e32fde89c0ebeac5e94402788b300d0c6df4f0538906f473c7bf02d0cddb8",
-          "elapsed_seconds": 8.374794699950144,
+          "container_id": "4c1f2a21c9e94e27ee4ee16f329a1d981bb123da7e5a7e5f605cbe539ce0ff71",
+          "elapsed_seconds": 9.077207900001667,
           "exit_code": 0,
           "frame_count": 5,
           "image_id": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
@@ -528,7 +528,7 @@
           "stdout_bytes": 1240151
         },
         "format": "buddha.native-command-report.v1",
-        "gateway_manifest_sha256": "94004e2121aaafc0b100fbca87448212e9e172478b9dee001b9629cbf4f24053",
+        "gateway_manifest_sha256": "b461b8e00252cfb3871a0601624c0be3ad5a4b31b2287da4fee83cf680558931",
         "gateway_totals": {
           "committed_microusd": 2032000,
           "operation_count": 1,
@@ -660,7 +660,7 @@
         },
         "claim": "native command artifacts; experiment coverage and promotion remain separate",
         "command_sha256": "1ccd8926594d6c091b6b2f8dc665f96adcca8f7d8b6b105cf6caf67c0b33e683",
-        "descriptor_sha256": "b4b1ce55e0fb437efead9244a19fd046cfd401995cbbb85bb044eae373c090dc",
+        "descriptor_sha256": "bce49f4faa7db5ee9f4064f5ea2cf662cfdc5efa2ef0403c12a701c2a6c71b8d",
         "execution": {
           "cleanup_status": "removed",
           "configuration": {
@@ -694,23 +694,23 @@
             },
             "image": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
             "mounts": {
-              "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\timeout-oai\\inputs",
-              "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\timeout-oai\\official",
-              "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\timeout-oai\\runner"
+              "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\timeout-oai\\inputs",
+              "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\timeout-oai\\official",
+              "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\timeout-oai\\runner"
             },
             "role": "evaluator"
           },
-          "container_id": "d8504bdb3cc20cd36e3030c00654bfd4bfa8141863bbfe9c2d587a8274aecd94",
-          "elapsed_seconds": 9.086647500051185,
+          "container_id": "3d46cd78ecef1f95704e9f444e982ef8bab3dbb814efbfe095da181a2c1ab09d",
+          "elapsed_seconds": 10.236278900061734,
           "exit_code": 0,
           "frame_count": 5,
           "image_id": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
           "stderr_bytes": 3493,
-          "stderr_sha256": "d55cc875dd3ae97394e71a03aa4151f5558875ee427fd01ecef652ade66029c9",
-          "stdout_bytes": 1296662
+          "stderr_sha256": "16d57b7887faa14babac1e61b13a9938007ac666900145a6d8d3e00949c674c6",
+          "stdout_bytes": 1296666
         },
         "format": "buddha.native-command-report.v1",
-        "gateway_manifest_sha256": "b4f67d17e44f241943129c42cab2d5484fdcfe28039135ca6180ac33db596356",
+        "gateway_manifest_sha256": "c5a3834f6dd82c897e24cfb69e6569879e0c3b385764e8c5695cc50e42362548",
         "gateway_totals": {
           "committed_microusd": 2256000,
           "operation_count": 1,
@@ -729,7 +729,7 @@
       "requests": [
         {
           "attempt": 0,
-          "body_sha256": "6c181bd883871c16707ea425982a03fed73169931a517edcf8a4aa6395046ef0",
+          "body_sha256": "05c8c5805eba5501b55bc7251ccfad9c4551dbf304aed562a939bc846a08f814",
           "headers": {
             "accept": "application/json",
             "accept-encoding": "gzip, deflate",
@@ -746,14 +746,14 @@
             "x-stainless-runtime": "CPython",
             "x-stainless-runtime-version": "3.13.12"
           },
-          "logical_id": "6bca3c8df9df2d9d25a5f5235da1e3a337119dafdbcb83b8980fd577b11be962",
+          "logical_id": "5d7e1da0b861be2a6c0421a24278c62cd297248da17b1cadf73a16ac9e3166ba",
           "model": "test-model",
           "provider": "openai"
         }
       ],
       "sends": [
         {
-          "body_sha256": "6c181bd883871c16707ea425982a03fed73169931a517edcf8a4aa6395046ef0",
+          "body_sha256": "05c8c5805eba5501b55bc7251ccfad9c4551dbf304aed562a939bc846a08f814",
           "headers": {
             "accept": "application/json",
             "accept-encoding": "gzip, deflate",
@@ -840,7 +840,7 @@
         },
         "claim": "native command artifacts; experiment coverage and promotion remain separate",
         "command_sha256": "ecc54570395ee256a314eb1e65b647762c8f36341384ba7fa2917d4085757d43",
-        "descriptor_sha256": "018ebe018019e77fbfddbbfcd6d4f24bedcad1aaff301b193e4e990c395c0f9d",
+        "descriptor_sha256": "454021176e1b86ad2066de04b49368fcc7f659b05a2eeee7edf3e814601f03d5",
         "execution": {
           "cleanup_status": "removed",
           "configuration": {
@@ -874,14 +874,14 @@
             },
             "image": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
             "mounts": {
-              "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\timeout-anthropic\\inputs",
-              "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\timeout-anthropic\\official",
-              "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\timeout-anthropic\\runner"
+              "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\timeout-anthropic\\inputs",
+              "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\timeout-anthropic\\official",
+              "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\timeout-anthropic\\runner"
             },
             "role": "evaluator"
           },
-          "container_id": "f0132f8bd460503dec706550b989c793cd4a42336542fc7bb15b662479ba38df",
-          "elapsed_seconds": 8.766599300084636,
+          "container_id": "62dc910ff84c7d0b6660f096fb5fbb93e7ca7e3ee4105ba2e768f72bf5f59c18",
+          "elapsed_seconds": 9.26949719991535,
           "exit_code": 0,
           "frame_count": 5,
           "image_id": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
@@ -890,7 +890,7 @@
           "stdout_bytes": 1240151
         },
         "format": "buddha.native-command-report.v1",
-        "gateway_manifest_sha256": "5b9b0e03d5047320cbceb5a6d913ecbf0605551fbce904d01c389fdcff7ae372",
+        "gateway_manifest_sha256": "34ad1be7f61e471c4da88db2bcab41f3d6e332746fc4658151903e1173437d84",
         "gateway_totals": {
           "committed_microusd": 2032000,
           "operation_count": 1,
@@ -1436,9 +1436,9 @@
           },
           "image": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
           "mounts": {
-            "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\direct-valid-oai\\inputs",
-            "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\direct-valid-oai\\official",
-            "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\direct-valid-oai\\runner"
+            "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\direct-valid-oai\\inputs",
+            "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\direct-valid-oai\\official",
+            "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\direct-valid-oai\\runner"
           },
           "role": "evaluator"
         },
@@ -1465,7 +1465,7 @@
         "ready_audit_module_count": 2663,
         "ready_audit_sha256": "472240eba880b26a50d9e7868da78e6bbbf65f428a99dab8f052e29a112d47cf",
         "stderr_bytes": 222,
-        "stderr_sha256": "e48ef7c346c81e7abd58c117b64a22d33da58bd9f2a9ca1139fbcde7ea82423a"
+        "stderr_sha256": "257471b90fee8fd94d865f350610d6ba3611a6c0752ea572fd4c60c2de5f1a75"
       },
       "funded": {
         "files": {
@@ -1529,7 +1529,7 @@
           },
           "claim": "native command artifacts; experiment coverage and promotion remain separate",
           "command_sha256": "1ccd8926594d6c091b6b2f8dc665f96adcca8f7d8b6b105cf6caf67c0b33e683",
-          "descriptor_sha256": "03f3f12acbb7fe73536353b245fb9e26624f68df7796cb3e6ca0fb89ed725ae0",
+          "descriptor_sha256": "76af40bc97aaccfa5ad3b65adb1cf5e3249036a72993e4911ea931795fb3656b",
           "execution": {
             "cleanup_status": "removed",
             "configuration": {
@@ -1563,23 +1563,23 @@
               },
               "image": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
               "mounts": {
-                "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\valid-oai\\inputs",
-                "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\valid-oai\\official",
-                "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\valid-oai\\runner"
+                "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\valid-oai\\inputs",
+                "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\valid-oai\\official",
+                "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\valid-oai\\runner"
               },
               "role": "evaluator"
             },
-            "container_id": "4276be951d2e45a49aa82288ce79a51923c4b1bbae352795f99c0a5edcbff01f",
-            "elapsed_seconds": 14.71690859994851,
+            "container_id": "75a80070da5491945d8e8eccacea7183b6f71db1a00ae5cf199e69bd2b759337",
+            "elapsed_seconds": 15.473913499969058,
             "exit_code": 0,
             "frame_count": 8,
             "image_id": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
             "stderr_bytes": 222,
-            "stderr_sha256": "bf61bc3ae1dd8589436f83a2c7f8aeb20f3366fb0d9918a0ce820a032c679237",
+            "stderr_sha256": "b8a6858fad39f8b3a9a01ed00d6cccf2bbed516d90a279b7be9a5b4454ea3bbc",
             "stdout_bytes": 1304117
           },
           "format": "buddha.native-command-report.v1",
-          "gateway_manifest_sha256": "f49df3298307eb6ba38ee3306cc15d8c3019d577fde07a3c5986d12309290618",
+          "gateway_manifest_sha256": "b88af055470cb252480c11739f6eab8e3d7e14d8381b7ad8915619e0570a1fee",
           "gateway_totals": {
             "committed_microusd": 20,
             "operation_count": 4,
@@ -1596,6 +1596,29 @@
           }
         },
         "requests": [
+          {
+            "attempt": 0,
+            "body_sha256": "05c8c5805eba5501b55bc7251ccfad9c4551dbf304aed562a939bc846a08f814",
+            "headers": {
+              "accept": "application/json",
+              "accept-encoding": "gzip, deflate",
+              "content-type": "application/json",
+              "user-agent": "AsyncOpenAI/Python 1.107.0",
+              "x-stainless-arch": "x64",
+              "x-stainless-async": "async:asyncio",
+              "x-stainless-helper-method": "chat.completions.parse",
+              "x-stainless-lang": "python",
+              "x-stainless-os": "Linux",
+              "x-stainless-package-version": "1.107.0",
+              "x-stainless-read-timeout": "600",
+              "x-stainless-retry-count": "0",
+              "x-stainless-runtime": "CPython",
+              "x-stainless-runtime-version": "3.13.12"
+            },
+            "logical_id": "5d7e1da0b861be2a6c0421a24278c62cd297248da17b1cadf73a16ac9e3166ba",
+            "model": "test-model",
+            "provider": "openai"
+          },
           {
             "attempt": 0,
             "body_sha256": "6c181bd883871c16707ea425982a03fed73169931a517edcf8a4aa6395046ef0",
@@ -1664,54 +1687,10 @@
             "logical_id": "6c1e204425b645a5d47c963dc2573ccd8cb190dd0bcb7fbaa17f6b63a6d6d9fd",
             "model": "test-model",
             "provider": "openai"
-          },
-          {
-            "attempt": 0,
-            "body_sha256": "05c8c5805eba5501b55bc7251ccfad9c4551dbf304aed562a939bc846a08f814",
-            "headers": {
-              "accept": "application/json",
-              "accept-encoding": "gzip, deflate",
-              "content-type": "application/json",
-              "user-agent": "AsyncOpenAI/Python 1.107.0",
-              "x-stainless-arch": "x64",
-              "x-stainless-async": "async:asyncio",
-              "x-stainless-helper-method": "chat.completions.parse",
-              "x-stainless-lang": "python",
-              "x-stainless-os": "Linux",
-              "x-stainless-package-version": "1.107.0",
-              "x-stainless-read-timeout": "600",
-              "x-stainless-retry-count": "0",
-              "x-stainless-runtime": "CPython",
-              "x-stainless-runtime-version": "3.13.12"
-            },
-            "logical_id": "5d7e1da0b861be2a6c0421a24278c62cd297248da17b1cadf73a16ac9e3166ba",
-            "model": "test-model",
-            "provider": "openai"
           }
         ],
         "sends": [
           {
-            "body_sha256": "6c181bd883871c16707ea425982a03fed73169931a517edcf8a4aa6395046ef0",
-            "headers": {
-              "accept": "application/json",
-              "accept-encoding": "gzip, deflate",
-              "content-type": "application/json",
-              "user-agent": "AsyncOpenAI/Python 1.107.0",
-              "x-stainless-arch": "x64",
-              "x-stainless-async": "async:asyncio",
-              "x-stainless-helper-method": "chat.completions.parse",
-              "x-stainless-lang": "python",
-              "x-stainless-os": "Linux",
-              "x-stainless-package-version": "1.107.0",
-              "x-stainless-read-timeout": "600",
-              "x-stainless-retry-count": "0",
-              "x-stainless-runtime": "CPython",
-              "x-stainless-runtime-version": "3.13.12"
-            },
-            "model": "test-model",
-            "provider": "openai"
-          },
-          {
             "body_sha256": "05c8c5805eba5501b55bc7251ccfad9c4551dbf304aed562a939bc846a08f814",
             "headers": {
               "accept": "application/json",
@@ -1755,6 +1734,27 @@
           },
           {
             "body_sha256": "05c8c5805eba5501b55bc7251ccfad9c4551dbf304aed562a939bc846a08f814",
+            "headers": {
+              "accept": "application/json",
+              "accept-encoding": "gzip, deflate",
+              "content-type": "application/json",
+              "user-agent": "AsyncOpenAI/Python 1.107.0",
+              "x-stainless-arch": "x64",
+              "x-stainless-async": "async:asyncio",
+              "x-stainless-helper-method": "chat.completions.parse",
+              "x-stainless-lang": "python",
+              "x-stainless-os": "Linux",
+              "x-stainless-package-version": "1.107.0",
+              "x-stainless-read-timeout": "600",
+              "x-stainless-retry-count": "0",
+              "x-stainless-runtime": "CPython",
+              "x-stainless-runtime-version": "3.13.12"
+            },
+            "model": "test-model",
+            "provider": "openai"
+          },
+          {
+            "body_sha256": "6c181bd883871c16707ea425982a03fed73169931a517edcf8a4aa6395046ef0",
             "headers": {
               "accept": "application/json",
               "accept-encoding": "gzip, deflate",
@@ -1839,9 +1839,9 @@
           },
           "image": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
           "mounts": {
-            "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\direct-summary\\inputs",
-            "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\direct-summary\\official",
-            "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\direct-summary\\runner"
+            "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\direct-summary\\inputs",
+            "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\direct-summary\\official",
+            "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\direct-summary\\runner"
           },
           "role": "evaluator"
         },
@@ -1932,7 +1932,7 @@
           },
           "claim": "native command artifacts; experiment coverage and promotion remain separate",
           "command_sha256": "a30b319727c74eea9e5fb9e033d42984c425b1be026df3538e9831f8fc99ac14",
-          "descriptor_sha256": "6a81d7e8e9313c49f87620819e079bd77160c392db848d6092a5aface1d8ade0",
+          "descriptor_sha256": "880923ce412355aa5b75aae658f701fda35e9791fbed280974172697db8662aa",
           "execution": {
             "cleanup_status": "removed",
             "configuration": {
@@ -1966,14 +1966,14 @@
               },
               "image": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
               "mounts": {
-                "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\summary\\inputs",
-                "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\summary\\official",
-                "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\summary\\runner"
+                "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\summary\\inputs",
+                "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\summary\\official",
+                "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\summary\\runner"
               },
               "role": "evaluator"
             },
-            "container_id": "ea4ef9edb0e65c186bbc2135b01a4d7d1f6874a4057932afc162891be4ff7b63",
-            "elapsed_seconds": 7.1003949999576434,
+            "container_id": "2689e62543b47e91722599e53fb5419cb40dbdb40b50cd994c08b476e7f3dce9",
+            "elapsed_seconds": 8.059613900026307,
             "exit_code": 0,
             "frame_count": 4,
             "image_id": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
@@ -1982,7 +1982,7 @@
             "stdout_bytes": 1236927
           },
           "format": "buddha.native-command-report.v1",
-          "gateway_manifest_sha256": "932b9211b9692300d35a02bee5a490e95607b805afad56e415d16cb856adba8e",
+          "gateway_manifest_sha256": "dfc8be6692c3de40c7ababbdaab843be815359143103577ed3ea733516f6d258",
           "gateway_totals": {
             "committed_microusd": 0,
             "operation_count": 0,
@@ -2070,9 +2070,9 @@
           },
           "image": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
           "mounts": {
-            "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\direct-full-cache\\inputs",
-            "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\direct-full-cache\\official",
-            "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\direct-full-cache\\runner"
+            "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\direct-full-cache\\inputs",
+            "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\direct-full-cache\\official",
+            "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\direct-full-cache\\runner"
           },
           "role": "evaluator"
         },
@@ -2163,7 +2163,7 @@
           },
           "claim": "native command artifacts; experiment coverage and promotion remain separate",
           "command_sha256": "1ccd8926594d6c091b6b2f8dc665f96adcca8f7d8b6b105cf6caf67c0b33e683",
-          "descriptor_sha256": "677245e8a5980fcc56caefc2be5959f16a97f5fa17e837800f46841abb98fb82",
+          "descriptor_sha256": "2ebc6a7cb8cb476977a098a2e41f157654f04b6922337dd060c00436f391f216",
           "execution": {
             "cleanup_status": "removed",
             "configuration": {
@@ -2197,14 +2197,14 @@
               },
               "image": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
               "mounts": {
-                "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\full-cache\\inputs",
-                "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\full-cache\\official",
-                "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\full-cache\\runner"
+                "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\full-cache\\inputs",
+                "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\full-cache\\official",
+                "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\full-cache\\runner"
               },
               "role": "evaluator"
             },
-            "container_id": "2962c77d258fc4d9deec78964c6d6f00ce08e8a826d00319aabe4f061a6ce406",
-            "elapsed_seconds": 6.991296399966814,
+            "container_id": "710990f96f431cbab1906b80d7222f55ace137b9469fdaa6091d78a0c95c8b57",
+            "elapsed_seconds": 7.867877000011504,
             "exit_code": 0,
             "frame_count": 4,
             "image_id": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
@@ -2213,7 +2213,7 @@
             "stdout_bytes": 1238738
           },
           "format": "buddha.native-command-report.v1",
-          "gateway_manifest_sha256": "9dcefec9f27f9f8be3cc0ade3737805ba689613858b33a47b676eed2e442b3e1",
+          "gateway_manifest_sha256": "c54c400cf417ad06255d8a8468d615653d4707d851c6914118e210eff51bf034",
           "gateway_totals": {
             "committed_microusd": 0,
             "operation_count": 0,
@@ -2440,9 +2440,9 @@
           },
           "image": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
           "mounts": {
-            "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\direct-partial-cache\\inputs",
-            "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\direct-partial-cache\\official",
-            "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\direct-partial-cache\\runner"
+            "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\direct-partial-cache\\inputs",
+            "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\direct-partial-cache\\official",
+            "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\direct-partial-cache\\runner"
           },
           "role": "evaluator"
         },
@@ -2469,7 +2469,7 @@
         "ready_audit_module_count": 2663,
         "ready_audit_sha256": "472240eba880b26a50d9e7868da78e6bbbf65f428a99dab8f052e29a112d47cf",
         "stderr_bytes": 232,
-        "stderr_sha256": "ad3904df27db90d106060b9078803d0ba470f23fe12fbdfce3db846c9b5ec38d"
+        "stderr_sha256": "12f501d4f5b0e3bec51e61c6273691fb89ef0c20850b19171733295f2cbf1468"
       },
       "funded": {
         "files": {
@@ -2533,7 +2533,7 @@
           },
           "claim": "native command artifacts; experiment coverage and promotion remain separate",
           "command_sha256": "1ccd8926594d6c091b6b2f8dc665f96adcca8f7d8b6b105cf6caf67c0b33e683",
-          "descriptor_sha256": "5fe47ebdc7926aa3c85d5367d6ad9dc4e29ec4bcfc840198f27a97dbb67750e4",
+          "descriptor_sha256": "b4f304e1cb21b6dd070b1f6ebb86daeac6eb8cab5477b6c8f044d746c9e0fd10",
           "execution": {
             "cleanup_status": "removed",
             "configuration": {
@@ -2567,23 +2567,23 @@
               },
               "image": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
               "mounts": {
-                "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\partial-cache\\inputs",
-                "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\partial-cache\\official",
-                "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\partial-cache\\runner"
+                "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\partial-cache\\inputs",
+                "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\partial-cache\\official",
+                "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\partial-cache\\runner"
               },
               "role": "evaluator"
             },
-            "container_id": "1230ceeb08675a9c57e1611401d0e477620b219b2287b412faeb82dd5d15c664",
-            "elapsed_seconds": 11.50516920001246,
+            "container_id": "9a8f480e769f3ba2f95f78f5b6da0d15d8501f1a1a42bfa5d46537d6dd01e45a",
+            "elapsed_seconds": 11.922368100029416,
             "exit_code": 0,
             "frame_count": 6,
             "image_id": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
             "stderr_bytes": 232,
-            "stderr_sha256": "5a365ea3e90287adac0027626b6678028e0321ca92a972e3213ef0dcfdedb23d",
+            "stderr_sha256": "8d0177bfd18fa0dea2fdaecdb791b303c373ee0067939cbc98e2a8d08ed0b617",
             "stdout_bytes": 1300051
           },
           "format": "buddha.native-command-report.v1",
-          "gateway_manifest_sha256": "3c3ce983ee486c5d046d2c039028f250ae84224564aab86851cea777e48b594c",
+          "gateway_manifest_sha256": "f248741588be8b5f865316887fb707bd9193abd51c2abf6e9abf2ebb11b8a518",
           "gateway_totals": {
             "committed_microusd": 10,
             "operation_count": 2,
@@ -2902,9 +2902,9 @@
           },
           "image": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
           "mounts": {
-            "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\direct-bad-oai\\inputs",
-            "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\direct-bad-oai\\official",
-            "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\direct-bad-oai\\runner"
+            "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\direct-bad-oai\\inputs",
+            "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\direct-bad-oai\\official",
+            "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\direct-bad-oai\\runner"
           },
           "role": "evaluator"
         },
@@ -2931,7 +2931,7 @@
         "ready_audit_module_count": 2663,
         "ready_audit_sha256": "472240eba880b26a50d9e7868da78e6bbbf65f428a99dab8f052e29a112d47cf",
         "stderr_bytes": 736,
-        "stderr_sha256": "2cf745eb25259592f0136cab5280220c7c1104d6578f9d024a13580c0dd4caef"
+        "stderr_sha256": "0381036b6a83dc376e744bebdabf8e0dbab75114fe5e031356e4a3d5339dfcbc"
       },
       "funded": {
         "files": {
@@ -2995,7 +2995,7 @@
           },
           "claim": "native command artifacts; experiment coverage and promotion remain separate",
           "command_sha256": "1ccd8926594d6c091b6b2f8dc665f96adcca8f7d8b6b105cf6caf67c0b33e683",
-          "descriptor_sha256": "cd745c8e096be74a8e4002586cb718c50c0612ba10a5660101e529c0996532df",
+          "descriptor_sha256": "a544b1152ec3ced40e60cd0c2b61abeb3c16ea9cfefbfbf5a534219b67898c60",
           "execution": {
             "cleanup_status": "removed",
             "configuration": {
@@ -3029,23 +3029,23 @@
               },
               "image": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
               "mounts": {
-                "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\bad-oai\\inputs",
-                "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\bad-oai\\official",
-                "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\bad-oai\\runner"
+                "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\bad-oai\\inputs",
+                "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\bad-oai\\official",
+                "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\bad-oai\\runner"
               },
               "role": "evaluator"
             },
-            "container_id": "4012701483fbdf21438e5939bc5a3fe355b74eb47c6cd76e835f7c5c8ff19b83",
-            "elapsed_seconds": 10.733193999971263,
+            "container_id": "ba647b5c3cd4c398246485d47b749a368f606c69698db6b62ea60d9734ddedb9",
+            "elapsed_seconds": 11.243103799992241,
             "exit_code": 0,
             "frame_count": 6,
             "image_id": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
             "stderr_bytes": 736,
-            "stderr_sha256": "591c1ba82cba41796ddacd67f2dabd0c087494bb465f95e6dcac5f57464470a4",
+            "stderr_sha256": "39d38e44633310a5423dcc39e2f59aef0301b80dbf5a65087f0b1071c677a6e1",
             "stdout_bytes": 1298637
           },
           "format": "buddha.native-command-report.v1",
-          "gateway_manifest_sha256": "54d1906e0b1beb5a76f05c4bddbb11c79482b9053ae66e6b70dd6dd818ee7dea",
+          "gateway_manifest_sha256": "94e17c1d076028093e759823956dfcd6bd9ee277f05b55d493c725f910ac65de",
           "gateway_totals": {
             "committed_microusd": 10,
             "operation_count": 2,
@@ -3364,9 +3364,9 @@
           },
           "image": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
           "mounts": {
-            "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\direct-length-oai\\inputs",
-            "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\direct-length-oai\\official",
-            "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\direct-length-oai\\runner"
+            "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\direct-length-oai\\inputs",
+            "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\direct-length-oai\\official",
+            "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\direct-length-oai\\runner"
           },
           "role": "evaluator"
         },
@@ -3393,7 +3393,7 @@
         "ready_audit_module_count": 2663,
         "ready_audit_sha256": "472240eba880b26a50d9e7868da78e6bbbf65f428a99dab8f052e29a112d47cf",
         "stderr_bytes": 708,
-        "stderr_sha256": "11f37747d1b3aea634cb9a647514e2fc9e0219bb5192d2d31dfb47d3a9dff360"
+        "stderr_sha256": "bc9a3220feb4174b2d1cfe1f0110442a1aa522d39a49bcd97edb545223e08fd7"
       },
       "funded": {
         "files": {
@@ -3457,7 +3457,7 @@
           },
           "claim": "native command artifacts; experiment coverage and promotion remain separate",
           "command_sha256": "1ccd8926594d6c091b6b2f8dc665f96adcca8f7d8b6b105cf6caf67c0b33e683",
-          "descriptor_sha256": "e58825bd493f233b54a247962aa97945bc2a0fbb4bdb147e6f4220198c6b3b9f",
+          "descriptor_sha256": "e943db3304f72c21f01a85d45f646edec57d34e0d05f48a6b33612da8a2a213e",
           "execution": {
             "cleanup_status": "removed",
             "configuration": {
@@ -3491,23 +3491,23 @@
               },
               "image": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
               "mounts": {
-                "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\length-oai\\inputs",
-                "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\length-oai\\official",
-                "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\length-oai\\runner"
+                "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\length-oai\\inputs",
+                "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\length-oai\\official",
+                "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\length-oai\\runner"
               },
               "role": "evaluator"
             },
-            "container_id": "a86056845f3b772f84d9e9eede7caa21ba46c7c8e3e66340c370a312256a16a4",
-            "elapsed_seconds": 10.404505499987863,
+            "container_id": "bb02829bae176bc7c4ad2476df1dc50a96fc7bf248a1797f557990b5efcebac4",
+            "elapsed_seconds": 12.535108500043862,
             "exit_code": 0,
             "frame_count": 6,
             "image_id": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
             "stderr_bytes": 708,
-            "stderr_sha256": "ccdf0f3e164dad195486efd28b08321285bcdd3af8db1178d6cc9e371d76ef7c",
+            "stderr_sha256": "006c18d606bf2c78c02a6c4b68ff4561852a2ed0081c0632fb590ad99ba7e4a4",
             "stdout_bytes": 1298637
           },
           "format": "buddha.native-command-report.v1",
-          "gateway_manifest_sha256": "d697e2c3b69713d350afd6a3d481d856f8fed70a2d194a46ecf52e0181694561",
+          "gateway_manifest_sha256": "8afe090bda33b18b62dc0a4b11da89372816c5566b9af190cac8ad3c6b078151",
           "gateway_totals": {
             "committed_microusd": 10,
             "operation_count": 2,
@@ -3543,7 +3543,7 @@
               "x-stainless-runtime": "CPython",
               "x-stainless-runtime-version": "3.13.12"
             },
-            "logical_id": "c1b3768bf303274e5b628e841891179ee4b4662728433ff5f19fcd5d20f25926",
+            "logical_id": "70eddcde4f189dcf16598363719e4b27251addfca0b7b34ea32e5f3271dbcae0",
             "model": "test-model",
             "provider": "openai"
           },
@@ -3566,7 +3566,7 @@
               "x-stainless-runtime": "CPython",
               "x-stainless-runtime-version": "3.13.12"
             },
-            "logical_id": "70eddcde4f189dcf16598363719e4b27251addfca0b7b34ea32e5f3271dbcae0",
+            "logical_id": "c1b3768bf303274e5b628e841891179ee4b4662728433ff5f19fcd5d20f25926",
             "model": "test-model",
             "provider": "openai"
           }
@@ -3826,9 +3826,9 @@
           },
           "image": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
           "mounts": {
-            "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\direct-refusal-oai\\inputs",
-            "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\direct-refusal-oai\\official",
-            "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\direct-refusal-oai\\runner"
+            "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\direct-refusal-oai\\inputs",
+            "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\direct-refusal-oai\\official",
+            "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\direct-refusal-oai\\runner"
           },
           "role": "evaluator"
         },
@@ -3855,7 +3855,7 @@
         "ready_audit_module_count": 2663,
         "ready_audit_sha256": "472240eba880b26a50d9e7868da78e6bbbf65f428a99dab8f052e29a112d47cf",
         "stderr_bytes": 366,
-        "stderr_sha256": "17415da5c3ad2510776063da71dc0586bb10ff20d19dae3bb4b395f9f59c1023"
+        "stderr_sha256": "7db8d9ec9a63038035b8b3f91258dc1cc91470738f0d1a2848c369d84b041e21"
       },
       "funded": {
         "files": {
@@ -3919,7 +3919,7 @@
           },
           "claim": "native command artifacts; experiment coverage and promotion remain separate",
           "command_sha256": "1ccd8926594d6c091b6b2f8dc665f96adcca8f7d8b6b105cf6caf67c0b33e683",
-          "descriptor_sha256": "c71377e1576ec9d762eb47b39a87f5a5c3b55788d1440fa23475b197224fea87",
+          "descriptor_sha256": "3b21691ce3d648a4c58c88d80d47afbba9bcc07fe025c65c180e86c168f67cc0",
           "execution": {
             "cleanup_status": "removed",
             "configuration": {
@@ -3953,23 +3953,23 @@
               },
               "image": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
               "mounts": {
-                "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\refusal-oai\\inputs",
-                "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\refusal-oai\\official",
-                "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\refusal-oai\\runner"
+                "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\refusal-oai\\inputs",
+                "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\refusal-oai\\official",
+                "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\refusal-oai\\runner"
               },
               "role": "evaluator"
             },
-            "container_id": "35c269fcb962b8c1c9c1b7c58b68c6b02b7ab0775800dc4877ca2dbe84ecad88",
-            "elapsed_seconds": 10.324298999970779,
+            "container_id": "9104778412ba641c30cdc3d16bea9e1e82ab6d4732a519dbd37b2a9956e3b9ee",
+            "elapsed_seconds": 12.373383300029673,
             "exit_code": 0,
             "frame_count": 6,
             "image_id": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
             "stderr_bytes": 366,
-            "stderr_sha256": "fb54dfcc8d55875d0f09639604489b16cd2e36ca8e191f9970a3cd5d55928fb2",
+            "stderr_sha256": "d96ef688fb7079fb5de17aa7a0c6283b8cd01d700a6fb176fc8eaf35a067c976",
             "stdout_bytes": 1298637
           },
           "format": "buddha.native-command-report.v1",
-          "gateway_manifest_sha256": "070bc3763ca3b979b11faf80006c83e48ea594371413fec7142544ffd69a0a1c",
+          "gateway_manifest_sha256": "b1f8ed1a9a3ac133d9a312bd9ae3f6b23c2a15c141e353c87ec47b320477123f",
           "gateway_totals": {
             "committed_microusd": 10,
             "operation_count": 2,
@@ -4442,9 +4442,9 @@
           },
           "image": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
           "mounts": {
-            "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\direct-valid-anthropic\\inputs",
-            "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\direct-valid-anthropic\\official",
-            "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\direct-valid-anthropic\\runner"
+            "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\direct-valid-anthropic\\inputs",
+            "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\direct-valid-anthropic\\official",
+            "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\direct-valid-anthropic\\runner"
           },
           "role": "evaluator"
         },
@@ -4471,7 +4471,7 @@
         "ready_audit_module_count": 2663,
         "ready_audit_sha256": "472240eba880b26a50d9e7868da78e6bbbf65f428a99dab8f052e29a112d47cf",
         "stderr_bytes": 166,
-        "stderr_sha256": "66fef1d81da2900b983f8ec97478daa1b98bea7100c070b58e7484a0eef87776"
+        "stderr_sha256": "024b3eb42ca5fca60a80755eadd1cfdd25ce92ae9a588901c0a9b53e4acd8042"
       },
       "funded": {
         "files": {
@@ -4535,7 +4535,7 @@
           },
           "claim": "native command artifacts; experiment coverage and promotion remain separate",
           "command_sha256": "ecc54570395ee256a314eb1e65b647762c8f36341384ba7fa2917d4085757d43",
-          "descriptor_sha256": "8fbdaa07997e4e3bf90234f63d5a0894be52e371f56756c54d8ea6f2f96e57a7",
+          "descriptor_sha256": "83145839f89c2c5905ef1ecf31baf549309005dc2190cd1cc18c55ced129438c",
           "execution": {
             "cleanup_status": "removed",
             "configuration": {
@@ -4569,23 +4569,23 @@
               },
               "image": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
               "mounts": {
-                "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\valid-anthropic\\inputs",
-                "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\valid-anthropic\\official",
-                "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\valid-anthropic\\runner"
+                "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\valid-anthropic\\inputs",
+                "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\valid-anthropic\\official",
+                "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\valid-anthropic\\runner"
               },
               "role": "evaluator"
             },
-            "container_id": "e83cbb97e5b332bff4e361e35ad2cd8583e0020a3bbe404b352b358581667be5",
-            "elapsed_seconds": 13.001211700029671,
+            "container_id": "7bdd463ee32a63668d36f914df9a03d3fde55b3218b480e6109dca77e5b2ce19",
+            "elapsed_seconds": 14.33170910004992,
             "exit_code": 0,
             "frame_count": 8,
             "image_id": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
             "stderr_bytes": 222,
-            "stderr_sha256": "2d591d15fd63966b43a88d4c05c773d1dd71ec92b974990fd2cb0619da746bcb",
+            "stderr_sha256": "6cea9c0976d3e3694120862814b738d4961c8c7694a7351385fbbb9136a8c17c",
             "stdout_bytes": 1247631
           },
           "format": "buddha.native-command-report.v1",
-          "gateway_manifest_sha256": "f3f786d5468f893e44afacda9d249ce5e7394e601cf4aab0fac6fb9abc44a0e9",
+          "gateway_manifest_sha256": "90338b818f4debf4875f17115bf420489fc9e8656d4630b1346819d892d79dcb",
           "gateway_totals": {
             "committed_microusd": 20,
             "operation_count": 4,
@@ -5446,9 +5446,9 @@
           },
           "image": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
           "mounts": {
-            "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\direct-fallback-anthropic\\inputs",
-            "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\direct-fallback-anthropic\\official",
-            "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\direct-fallback-anthropic\\runner"
+            "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\direct-fallback-anthropic\\inputs",
+            "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\direct-fallback-anthropic\\official",
+            "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\direct-fallback-anthropic\\runner"
           },
           "role": "evaluator"
         },
@@ -5475,7 +5475,7 @@
         "ready_audit_module_count": 2663,
         "ready_audit_sha256": "472240eba880b26a50d9e7868da78e6bbbf65f428a99dab8f052e29a112d47cf",
         "stderr_bytes": 166,
-        "stderr_sha256": "8904b69c2ab1f02420825e729fa4cfe5dd69c830eb7c0a3bbf9c3aa9c6b92e17"
+        "stderr_sha256": "a35f7b923565b108bb26d93004ab74952b66ad82bec6afc76d25fb60a382ee30"
       },
       "funded": {
         "files": {
@@ -5539,7 +5539,7 @@
           },
           "claim": "native command artifacts; experiment coverage and promotion remain separate",
           "command_sha256": "ecc54570395ee256a314eb1e65b647762c8f36341384ba7fa2917d4085757d43",
-          "descriptor_sha256": "ffb721ef8bddcbd743200068b6201921adbec6868bb4aa125a3ed3e2bdb5e694",
+          "descriptor_sha256": "8ff19a54b6a778694409200f55f1e5b53693aeecb97d30e3c43dd398189952d6",
           "execution": {
             "cleanup_status": "removed",
             "configuration": {
@@ -5573,23 +5573,23 @@
               },
               "image": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
               "mounts": {
-                "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\fallback-anthropic\\inputs",
-                "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\fallback-anthropic\\official",
-                "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\fallback-anthropic\\runner"
+                "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\fallback-anthropic\\inputs",
+                "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\fallback-anthropic\\official",
+                "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\fallback-anthropic\\runner"
               },
               "role": "evaluator"
             },
-            "container_id": "999021b44cc2d2fa08fe3299658453e4a468dc8e3e097bfd79d8e66a84fcbbb9",
-            "elapsed_seconds": 20.606961200013757,
+            "container_id": "b45054787ab372a733964a1390069159748647f1c47ac5a3c279658ceb8290c7",
+            "elapsed_seconds": 22.76724600000307,
             "exit_code": 0,
             "frame_count": 12,
             "image_id": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
             "stderr_bytes": 222,
-            "stderr_sha256": "53526b48a628787af6fec7a652249e9fb3497fdb5dd005065f7a247dd7557f68",
+            "stderr_sha256": "fe1cb5af56c70bfb5d0d3bd6de23fac4e254e198e7bb46124facf08767745766",
             "stdout_bytes": 1255791
           },
           "format": "buddha.native-command-report.v1",
-          "gateway_manifest_sha256": "6830d36b720808037e0832a5d8e9fca2152e03db71220844f3887fac84e5b95c",
+          "gateway_manifest_sha256": "8ea478c2d522a05d1d2dab0d133ce8f0ff80cc9165eaa1ff213c235f01f81235",
           "gateway_totals": {
             "committed_microusd": 40,
             "operation_count": 8,
@@ -6342,9 +6342,9 @@
           },
           "image": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
           "mounts": {
-            "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\direct-multiblock-anthropic\\inputs",
-            "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\direct-multiblock-anthropic\\official",
-            "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\direct-multiblock-anthropic\\runner"
+            "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\direct-multiblock-anthropic\\inputs",
+            "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\direct-multiblock-anthropic\\official",
+            "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\direct-multiblock-anthropic\\runner"
           },
           "role": "evaluator"
         },
@@ -6371,7 +6371,7 @@
         "ready_audit_module_count": 2663,
         "ready_audit_sha256": "472240eba880b26a50d9e7868da78e6bbbf65f428a99dab8f052e29a112d47cf",
         "stderr_bytes": 166,
-        "stderr_sha256": "165e94f3fc8eae4b15e9a2e6623a7138809deeb0e8b1e9ce1914a5f7611db310"
+        "stderr_sha256": "73763b580f50a18789aee54ee234de6d79875b1bf17bc99214451b7a9f65eae6"
       },
       "funded": {
         "files": {
@@ -6435,7 +6435,7 @@
           },
           "claim": "native command artifacts; experiment coverage and promotion remain separate",
           "command_sha256": "ecc54570395ee256a314eb1e65b647762c8f36341384ba7fa2917d4085757d43",
-          "descriptor_sha256": "f60f2be56f50f9004d4ad874c81077a1102afb6527d2dfece3cd74b278e9af9c",
+          "descriptor_sha256": "5a5caa71b778f8a975594c8d89e3ab358489e18b9935750e926dd86832d717e4",
           "execution": {
             "cleanup_status": "removed",
             "configuration": {
@@ -6469,23 +6469,23 @@
               },
               "image": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
               "mounts": {
-                "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\multiblock-anthropic\\inputs",
-                "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\multiblock-anthropic\\official",
-                "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\tmpogudpkv1\\multiblock-anthropic\\runner"
+                "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\multiblock-anthropic\\inputs",
+                "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\multiblock-anthropic\\official",
+                "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3a-ci-fix\\runs\\reviews\\tmpe6ls4jeh\\multiblock-anthropic\\runner"
               },
               "role": "evaluator"
             },
-            "container_id": "2e456627db1905b7660c72c7cff4f975f23aaf5365e115a492319c7c7478e1dd",
-            "elapsed_seconds": 13.275038600084372,
+            "container_id": "0161b682c455b18bf70f4e636c0485a5803bb59daf1fa4837f3001d358603762",
+            "elapsed_seconds": 15.65216049994342,
             "exit_code": 0,
             "frame_count": 8,
             "image_id": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
             "stderr_bytes": 222,
-            "stderr_sha256": "7b4e37628e4ad90e152f1a4d3af9a913761816b6fbe8b9f959e901f09fcd2ffb",
+            "stderr_sha256": "1d687f78849b6216638e7acc08a7b536ad8f87be8c82548b2c88a0b609d42b72",
             "stdout_bytes": 1247631
           },
           "format": "buddha.native-command-report.v1",
-          "gateway_manifest_sha256": "4fed87ad069f1c11136bc7bcbd8e0f097736093ceeb2d46e4373a8cbff78bd7d",
+          "gateway_manifest_sha256": "f5354b574ab36c99a65311824508d62bbbc83ffe930adfe7f133393e80747344",
           "gateway_totals": {
             "committed_microusd": 20,
             "operation_count": 4,
@@ -6709,7 +6709,7 @@
   "source_sha256": {
     "buddha\\__init__.py": "0857bd60619c1e1c8538fe768cbe82c781bb4e302abc6cf59130f1b17d052230",
     "buddha\\channel.py": "c46d236865b15f1918efa23d961ed7163533c9bbef2b0cec7f61d6f8e95d6e5f",
-    "buddha\\executor.py": "8dfb356b0b09629161d6b64f2e2a8bf765b97d68c7bd812bd77f63637be66226",
+    "buddha\\executor.py": "b5e84f2dbcdc436aee23272e7d96b567cb5b16ead256a34d08bccc70b480d186",
     "buddha\\native_context.py": "47a488b8d731617bda21380232e5e49801e0c0b4261f69b71c24fb9eae0ba298",
     "buddha\\native_run.py": "4f9be59c4cd8d312ce8836f7cf68e46cc4995b0c0079cb9f85636799a435c1dd",
     "buddha\\native_transport.py": "ccd4917132939630231b8b8c69540189cd52f60951fa08d467d90b9571ccb6c0",

@@ -72,6 +72,25 @@ The executor owns a fresh labelled container, uses a frozen explicit local endpo
 
 Native output files remain byte-preserving artifacts, separate from host import evidence and the report. Both worker and host enforce size/count/aggregate bounds; links and special files are denied in collection. The host rejects portable-path/case/ancestor collisions, invalid base64, noncontiguous or short nonterminal chunks, and revalidates artifact parents before publication. Atomic hard-link publication refuses an existing destination. A failed or incomplete command cannot become a complete host report merely because some native files exist.
 
+## Hosted portability check and refreshed observations
+
+The first hosted commit passed all 628 tests on Windows and Linux. Windows
+completed all CI checks; Linux's strict type check rejected two direct references
+to the Windows-only `subprocess.CREATE_NO_WINDOW` constant. Both subprocess call
+sites now use a portable attribute lookup, retaining the same flag on Windows
+and zero on Linux. Strict mypy over all 27 runtime modules passes under both
+explicit platform modes; all 19 executor tests pass.
+
+The full native ten-case/six-check proof and eleven real-container boundary
+checks were rerun against the changed executor source and passed with zero paid
+calls. The first boundary refresh failed before exercising its descendant:
+exit 255, no frame, 60 diagnostic bytes, then verified owned cleanup and an
+unaffected canary. [That failed observation is retained](nb02c3-executor-startup-failure-v2.json).
+The identical probe passed when run serially after the full-native refresh.
+No resource ceiling or assertion was relaxed, and the startup failure's cause
+has not been established. Updated evidence hashes are in the delivery record.
+Hosted CI for the corrected commit is reported separately after observation.
+
 ## Explicit limits and remaining work
 
 - **Worker timeout versus host finalization:** the wall limit terminates worker execution. The synchronous host callback must finish durable accounting before returning. The provider socket timeout is not a whole-operation deadline; no bounded total-return guarantee or orphan sender-thread workaround is claimed.

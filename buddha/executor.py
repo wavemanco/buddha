@@ -173,7 +173,7 @@ def _control(docker: str, args: list[str]) -> bytes:
             capture_output=True,
             timeout=10,
             check=False,
-            creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
+            creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0) if os.name == "nt" else 0,
         )
         if result.returncode or len(result.stdout) + len(result.stderr) > MAX_JSON_BYTES:
             raise ExecutorError("control")
@@ -539,7 +539,7 @@ def run_container(
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
-            creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
+            creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0) if os.name == "nt" else 0,
         )
         if process.stdin is None or process.stdout is None or process.stderr is None:
             raise ExecutorError("launch")
