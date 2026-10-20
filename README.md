@@ -22,7 +22,10 @@ reports locks, unknown writer identity, outstanding diagnostics and native
 completion anchors without resuming work. The [blinded measurement audit](docs/MEASUREMENT-AUDIT.md)
 now has two frozen model reviews and a separate blinded adjudication. The
 [results](docs/MEASUREMENT-AUDIT-RESULTS.md) preserve 17 resolved items and five
-uncertain items; human scientific validation remains open.
+uncertain items; human scientific validation remains open. The
+[offline judge audit](docs/MEASUREMENT-JUDGE-AUDIT.md) reproduces all six saved
+partitions and compares 95 resolved distinct relations. Equivalent controls and
+fresh repeated/order tests still need measurement.
 
 These are distinct from scientific success. Meaningful diversity, held-out
 improvement, genuine task/improver source evolution and an improved improver have
