@@ -1,6 +1,8 @@
 # Linked continuation of the interrupted pilot
 
-REC-04B operational handoff, October 20, 2026. [PLAN.md](PLAN.md) remains the single roadmap. This document records execution inputs and evidence; completion of the user-run continuation is still REC-04L.
+REC-04B operational handoff, October 20, 2026. [PLAN.md](PLAN.md) remains the single roadmap. This document preserves execution inputs and evidence for the completed REC-04L continuation.
+
+**Completed and verified October 20, 2026:** the continuation reused nine answers and completed 51 new calls for $0.274533 in new recorded cost. [Results, accounting and remaining concerns](LINKED-CONTINUATION-RESULTS.md) record the outcome. The instructions and preparation figures below are retained as the execution record.
 
 ## Execution and expected result
 
