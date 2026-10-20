@@ -1,0 +1,115 @@
+{
+  "checks": {
+    "application_bandit": "pass; buddha/agents; no findings, existing suppression warnings retained",
+    "compile": "pass",
+    "core_runtime_pip_audit": "pass; no known vulnerabilities; separate evaluator restrictions retained",
+    "engineering_probe": "Ruff/format/compile pass;67 fixture-assertion Bandit findings only, ordinary-Python guard",
+    "git_diff_check": "pass",
+    "ruff_format": "pass;71 files",
+    "ruff_lint": "pass; buddha/tests/agents",
+    "strict_mypy": "pass;31 source files on explicit linux and win32"
+  },
+  "ci": {
+    "scope": "Hosted results reported only after observed; parent#18 PR/push Windows/Linux green703tests each",
+    "status": "pending publication"
+  },
+  "date": "2026-10-20",
+  "findings": {
+    "C3C3-I1": "reproduced unanchored completion acceptance closed; interrupted-publication usability retained for REC-05",
+    "C3C3-I2": "reproduced consumed configuration/report substitution closed; expected-byte guards and seal/report regression checks pass",
+    "C3C3-I3": "final-summary mutation guarded and tested after implementation; no observed pre-fix RED claim"
+  },
+  "format": "buddha.review.nb02c3c3-delivery.v1",
+  "limits": [
+    "Only exact reviewed fixed seed; arbitrary source evolution needs SRC-01 minimal image/gate",
+    "External text/Python/JSONL flow data and separate final model-free summary; no unknown-future-release guarantee",
+    "Native numerical results and prescribed projections unchanged; selected coverage is not promotion, compliance or meaningful variety",
+    "C3A/B CPU variant, known advisories/license limits and uncertain-payment retry differences remain explicit; incomplete stops do not become altered scores",
+    "Exact exported C1 file, canonical Answers and native bytes are distinct identities; new metadata remains{}",
+    "Original-owner replay only; unknown/dispatched liabilities held, no automatic retry/replacement",
+    "Pre-existing active-owner completion seal and hard-kill lock fail closed for REC-05 usability; no auto-anchor or process-death guess",
+    "Worker wall clock does not bound admitted synchronous host accounting finalization; trusted local Docker/OS/image only",
+    "No new paid CLI/allocation, provider availability, semantic-judge accuracy, held-out improvement, source evolution or improved-improver claim"
+  ],
+  "local_tests": {
+    "actual_container_pipeline": {
+      "actual_provider_calls": 0,
+      "all_owners_inactive_after_completion": true,
+      "by_owner": [
+        20,
+        2,
+        4,
+        0
+      ],
+      "complete_keyless_reuse_new_sends": 0,
+      "direct_sdk_captures": 6,
+      "host_agent_or_scientific_execution": false,
+      "interrupted_receipt_retained_byte_record_equal": true,
+      "mocked_physical_sends": 26,
+      "native_artifact_comparisons": 3,
+      "pass": true,
+      "request_body_multiset_equal": true,
+      "reserved_microusd": 0,
+      "retained_fixture": "runs/reviews/nb02c3c3-baseline-zcjpjpp5",
+      "score_received_interruption_after_physical_send": 23,
+      "score_resume_new_sends": 3,
+      "shared_authorization_owners": 4,
+      "synthetic_spent_microusd": 250,
+      "typed_id_row_order_normalization_only": true,
+      "unchanged_core_seals": 10,
+      "unchanged_source_config_seals": 21
+    },
+    "controller": {
+      "count": 18,
+      "log": "runs/reviews/nb02c3c3-baseline-tests.log",
+      "seconds": 102.725,
+      "skipped": 0
+    },
+    "full": {
+      "count": 721,
+      "exit_code": 0,
+      "log": "runs/reviews/nb02c3c3-full-tests.log",
+      "seconds": 367.942,
+      "skipped": 4
+    }
+  },
+  "new_live_allocation": false,
+  "new_paid_command": false,
+  "paid_model_calls": 0,
+  "preserved": {
+    "all_hashes_unchanged": true,
+    "original_unknown_hold_unchanged": true,
+    "pilot_runtime_zip_sha256": "bd32c4d50339e2f2e1cadf01f5872fa3c1cdf12c196e7676a18d6fe96bd534e0",
+    "protected_input_files": 287
+  },
+  "scope": "Bounded offline frozen-seed/C1 selected native baseline, version-neutral stage flow, original-owner recovery and literal official evaluation; no new paid route or scientific improvement claim",
+  "selected_upstream_commit": "64a23be6b18ec1dacc298830aab276061b6e143c",
+  "source": {
+    "buddha/baseline.py": {
+      "bytes": 26895,
+      "sha256": "c988e823d9890b712a4b50a58a3d808c6630fdcf3e6fb94227ee9e591d04a432"
+    },
+    "docs/conformance/nb02c3c3-baseline-evidence.json": {
+      "bytes": 198017,
+      "sha256": "0c28387c832e1a5e9dee59912fdf47c2694f443a4ed08c6f5bcc35759a06ee30"
+    },
+    "docs/conformance/nb02c3c3-baseline-probe.py": {
+      "bytes": 37527,
+      "sha256": "d4eb66a332e6d54365cd30be0ea1189492e1742327dc828c5d60855b1fb4c1ea"
+    },
+    "tests/test_baseline.py": {
+      "bytes": 31807,
+      "sha256": "2c8a9d39fea0e73dd4ca50302a963aef3c3f957bd93ba6d6b998ee545d6745fb"
+    }
+  },
+  "tests_first": {
+    "actual_review_reds": [
+      "active owner plus unanchored completion accepted and later blessed",
+      "transient consumed definition affected downstream owner despite restored file",
+      "transient unsealed cached report entered completed result with bound file restored"
+    ],
+    "fixture_failure": "initial14 controller groups cascaded from incomplete mocked native import audit; fixture corrected to include all configured modules, without relaxing production",
+    "missing_module_red": "unittest loader failed ModuleNotFoundError: buddha.baseline before implementation",
+    "regressions": "reproduced cases have passing guards; final-summary race was first executed after its fix, not claimed as an observed pre-fix RED"
+  }
+}

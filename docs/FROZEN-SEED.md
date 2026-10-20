@@ -4,7 +4,8 @@ BENCH-02C3C1 moves the existing seed generation procedure into
 `agents/frozen_seed.py`, a standalone standard-library module. It contains no
 NoveltyBench version, judge prompt, SDK, credential reader, network sender or
 accounting import. This recipe is now used by the isolated fixed-seed route below. The complete
-official pipeline remains a separate gate in [the plan](PLAN.md).
+[official pipeline](NATIVE-BASELINE.md) now has its own offline composition evidence
+and preserves the separate claim gates in [the plan](PLAN.md).
 
 The first baseline treatment remains empty instructions with independent
 `regenerate` sampling. The same implementation also preserves the existing
@@ -141,4 +142,6 @@ provenance, not meaningful novelty, provider availability or native judging.
 [C3C2 delivery evidence](conformance/nb02c3c2-delivery.json) records the 703-test
 suite, source seals, independent review, three reproduced source/data-scope
 regressions and actual container checks. The composed generation, native
-partition, score and summary pipeline remains C3C3 in [the plan](PLAN.md).
+partition, score and summary pipeline is now recorded separately in the
+[native baseline guide](NATIVE-BASELINE.md); broader claim gates remain in
+[the plan](PLAN.md).
