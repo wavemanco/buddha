@@ -306,3 +306,26 @@ coverage. BENCH-03C must demonstrate configuration-only release changes and
 retirement across the same frozen agent and generic runner. Native semantic
 calibration, a new live allocation and scientific improvement claims remain
 separate; this slice enables no paid command.
+
+
+## BENCH-02C3C2: isolated fixed-seed generation
+
+The [reviewed standalone seed](FROZEN-SEED.md#isolated-fixed-seed-generation)
+now executes only inside agent-role containers through `AgentSession`. The host
+binds actual reviewed source, configuration, selected C1 TaskSet and runtime
+inputs. Only one sanitized task and the minimal source/runner mounts reach each
+container; full data, evaluator, original metadata, authority and credentials do
+not. Raw replies and accounting precede seed normalization. Completed receipts
+replay through the same owner; unknown liability stops new spending.
+
+C1 Answers publish only after exact ordered coverage and successful process
+exit/owned cleanup for every selected task. Native generation metadata remains
+an explicit controller responsibility. [Delivery](conformance/nb02c3c2-delivery.json)
+records 703 portable tests and ten actual-container cases plus replay with zero
+real API calls. The fixed reviewed seed restriction is deliberate: arbitrary
+source evolution requires SRC-01's separate minimal image and execution gate.
+
+C3C3 still owns complete generation-to-native-summary composition, immutable
+per-stage inputs, selected-population coverage and a summary stage unable to
+spend. BENCH-03C still owns configuration-only cross-release upgrade/retirement.
+No new paid command, allocation or scientific improvement claim follows.
