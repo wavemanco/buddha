@@ -1,0 +1,190 @@
+{
+  "architecture": "amd64",
+  "audit_helper": {
+    "callable": "collect_audit",
+    "path": "/opt/runtime-prepare.py",
+    "sha256": "6c5cc5475dbd1f8d511fbc6e4adbcc20ca5c00ef770cc202874a3333d471eff4"
+  },
+  "base": "python@sha256:3121f8b0804aa3698ab750d9a39ea4a42657a385c9b133722b915e55c51551a6",
+  "binary_variant": {
+    "torch": [
+      "2.7.1",
+      "2.7.1+cpu"
+    ]
+  },
+  "checks": {
+    "fresh_installed_manifest_identical": true,
+    "full_imports": "pending",
+    "known_vulnerabilities": "retained and restricted; see nb02c3b-security-review.md",
+    "paid_provider_calls": 0,
+    "pip_check": "No broken requirements found"
+  },
+  "config": {
+    "ArgsEscaped": true,
+    "Cmd": [
+      "/opt/venv/bin/python"
+    ],
+    "Env": [
+      "PATH=/opt/venv/bin:/usr/local/bin:/usr/bin:/bin",
+      "GPG_KEY=7169605F62C751356D054A26A821E680E5FA6305",
+      "PYTHON_VERSION=3.13.12",
+      "PYTHON_SHA256=2a84cd31dd8d8ea8aaff75de66fc1b4b0127dd5799aa50a64ae9a313885b4593",
+      "PYTHONDONTWRITEBYTECODE=1",
+      "PYTHONUNBUFFERED=1",
+      "PIP_DISABLE_PIP_VERSION_CHECK=1"
+    ],
+    "User": "65532:65532"
+  },
+  "derived_modules": {
+    "_remote_module_non_scriptable": {
+      "basename": "_remote_module_non_scriptable.py",
+      "kind": "source",
+      "owners": [
+        "lib/python3.13/site-packages/torch/distributed/nn/jit/instantiator.py",
+        "lib/python3.13/site-packages/torch/distributed/nn/jit/templates/remote_module_template.py"
+      ],
+      "root": "/tmp",
+      "sha256": "8205b16956fb264841ecd8644784a0d157f87df79b17c16825dc1163433ce5d8"
+    },
+    "torch._VF": {
+      "kind": "class",
+      "module": "torch._VF",
+      "owner": "lib/python3.13/site-packages/torch/_VF.py",
+      "qualname": "VFModule"
+    },
+    "torch.backends.cudnn": {
+      "kind": "class",
+      "module": "torch.backends.cudnn",
+      "owner": "lib/python3.13/site-packages/torch/backends/cudnn/__init__.py",
+      "qualname": "CudnnModule"
+    },
+    "torch.backends.mkldnn": {
+      "kind": "class",
+      "module": "torch.backends.mkldnn",
+      "owner": "lib/python3.13/site-packages/torch/backends/mkldnn/__init__.py",
+      "qualname": "MkldnnModule"
+    },
+    "torch.backends.quantized": {
+      "kind": "class",
+      "module": "torch.backends.quantized",
+      "owner": "lib/python3.13/site-packages/torch/backends/quantized/__init__.py",
+      "qualname": "QuantizedEngine"
+    },
+    "torch.classes": {
+      "kind": "class",
+      "module": "torch._classes",
+      "owner": "lib/python3.13/site-packages/torch/_classes.py",
+      "qualname": "_Classes"
+    },
+    "torch.ops": {
+      "kind": "class",
+      "module": "torch._ops",
+      "owner": "lib/python3.13/site-packages/torch/_ops.py",
+      "qualname": "_Ops"
+    }
+  },
+  "evidence": {
+    "runs/reference-linux-nb02c3b/cpu-image-v1/receipts/build-command-v3.json": {
+      "bytes": 1602,
+      "sha256": "26263f91310ee2dd29589102d51e7f6e58d1e70db863c42e604054d01df5820c"
+    },
+    "runs/reference-linux-nb02c3b/cpu-image-v1/receipts/build-result-v3.json": {
+      "bytes": 127,
+      "sha256": "3894011cba8dde3dcd0f1d7cf3a0623597e0b7e616576d5e481b6cc730113c46"
+    },
+    "runs/reference-linux-nb02c3b/cpu-image-v1/receipts/context.json": {
+      "bytes": 7925,
+      "sha256": "06c9226a07ee867286a5e30c24be6ce2b9e38a657014b2ee2727b2a93e78c819"
+    },
+    "runs/reference-linux-nb02c3b/cpu-image-v1/receipts/image-inspect.json": {
+      "bytes": 2584,
+      "sha256": "a2c8864df10cc4e08b798f7339f8cf7b8e8be6f1b48d3d76b3f641ee9122b058"
+    },
+    "runs/reference-linux-nb02c3b/cpu-image-v1/receipts/installed-audit-v2.json": {
+      "bytes": 2140,
+      "sha256": "f780bf8ab517199250d70997d0ff6e77b34ecd5936af41a8a62412f25f116bd6"
+    },
+    "runs/reviews/nb02c3b-runtime-installed.json": {
+      "bytes": 8799208,
+      "sha256": "b6b8ab4d349926577905b95b0784c622d6e443f34ea2b73625e09e72b497cf4b"
+    }
+  },
+  "exact_upstream_binary_lock": false,
+  "executable": "/opt/venv/bin/python",
+  "format": "buddha.review.nb02c3b-runtime-preparation.v1",
+  "image": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+  "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+  "installed_manifest": {
+    "distribution_count": 57,
+    "inventory_count": 24043,
+    "path": "/opt/runtime-manifest.json",
+    "record_checked_files": 24033,
+    "sha256": "b6b8ab4d349926577905b95b0784c622d6e443f34ea2b73625e09e72b497cf4b"
+  },
+  "os": "linux",
+  "python": "3.13.12 (main, Apr  7 2026, 02:24:03) [GCC 12.2.0]",
+  "rootfs": {
+    "Layers": [
+      "sha256:335fc45cf5e8eaa6d5b19a54b16db34311ce0d7a068eb2a9222eab4ddd3c216d",
+      "sha256:a3b24bfc5606b42b18401939577e675bc39abe5f86a823eb64421735a8e54f3d",
+      "sha256:1a1e948362a80bb937face73e2b6946a0ebc56b5088d7170e963b24326991924",
+      "sha256:42c278eada1f8b6da188720e3b2165c65fd5aa54867aa866cdd0958179c7a448",
+      "sha256:7ca584df67f159405db06fe9812eaf6b670d6159d68ecfa5ade80cf07ddfa42c",
+      "sha256:dca2e9f2ab3e0c4e41b0c43a09036f72412b2e3139d4dc2b9085b7944c1fb5e7",
+      "sha256:6865c3c418c58bff08f709975dd08f5c1cd27f25b125896abda6424ca4091f5e",
+      "sha256:9f502c1037f5a051376f1ec5825533e78fe0baacfb7f298d4756642d2a73ab86",
+      "sha256:69a8bcc18946def19ec1f2516f9f2cff365700bc230a57ac2e4e37eaa75274ae"
+    ],
+    "Type": "layers"
+  },
+  "scope": "actual CPU installed audit; complete imports and native parity pending",
+  "synthetic_modules": [
+    "_cython_3_0_11",
+    "_cython_3_1_0",
+    "_cython_3_1_3",
+    "cython_runtime",
+    "pyexpat.errors",
+    "pyexpat.model",
+    "six.moves",
+    "torch._C._aoti",
+    "torch._C._autograd",
+    "torch._C._cpu",
+    "torch._C._distributed_autograd",
+    "torch._C._distributed_c10d",
+    "torch._C._distributed_rpc",
+    "torch._C._dynamo",
+    "torch._C._dynamo.autograd_compiler",
+    "torch._C._dynamo.eval_frame",
+    "torch._C._dynamo.guards",
+    "torch._C._dynamo.utils",
+    "torch._C._export",
+    "torch._C._fft",
+    "torch._C._functorch",
+    "torch._C._instruction_counter",
+    "torch._C._itt",
+    "torch._C._jit",
+    "torch._C._jit_tree_views",
+    "torch._C._lazy",
+    "torch._C._lazy_ts_backend",
+    "torch._C._linalg",
+    "torch._C._monitor",
+    "torch._C._nested",
+    "torch._C._nn",
+    "torch._C._onnx",
+    "torch._C._profiler",
+    "torch._C._return_types",
+    "torch._C._sparse",
+    "torch._C._special",
+    "torch._C._te",
+    "torch._C._verbose",
+    "torch._C.cpp",
+    "torch._C.cpp.nn"
+  ],
+  "upstream_commit": "64a23be6b18ec1dacc298830aab276061b6e143c",
+  "version_overlay": {
+    "anyio": [
+      "4.10.0",
+      "4.14.2"
+    ]
+  }
+}

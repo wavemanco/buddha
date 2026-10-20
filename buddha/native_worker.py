@@ -168,10 +168,11 @@ class NativeWorker:
 
     def _environment(self) -> dict[str, object]:
         expected = _object(self.inventories["environment"])
-        if set(expected) not in (
-            {"helper_sha256", "manifest_sha256", "inventory"},
-            {"helper_sha256", "manifest_sha256", "inventory", "synthetic_modules"},
-        ):
+        required = {"helper_sha256", "manifest_sha256", "inventory"}
+        if not required <= set(expected) or set(expected) - required - {
+            "synthetic_modules",
+            "derived_modules",
+        }:
             raise WorkerError("invalid installed runtime contract")
         if file_hash(RUNTIME_HELPER) != _digest(expected["helper_sha256"]) or file_hash(
             RUNTIME_MANIFEST
@@ -196,6 +197,11 @@ class NativeWorker:
             names = _texts(expected["synthetic_modules"], empty=True)
             if len(names) != len(set(names)):
                 raise WorkerError("duplicate synthetic module declaration")
+        derived = _object(expected.get("derived_modules", {}))
+        if len(derived) > 128:
+            raise WorkerError("too many derived module declarations")
+        for name in derived:
+            _text(name)
         return _object(actual["inventory"])
 
     def _origin(self, path: Path) -> dict[str, object]:
@@ -224,34 +230,116 @@ class NativeWorker:
             return {"kind": "base-image", "path": str(path), "sha256": file_hash(path)}
         raise WorkerError("imported module is outside the selected runtime")
 
+    def _derived_import(self, name: str, module: ModuleType, raw: object) -> dict[str, object]:
+        declaration = _object(raw)
+        namespace = vars(module)
+        if namespace.get("__name__") != name:
+            raise WorkerError("derived module name differs from declaration")
+
+        def owner(relative: object) -> dict[str, object]:
+            entry = self._origin(self.roots["environment"] / _path(relative))
+            if entry["kind"] != "environment":
+                raise WorkerError("derived module owner is outside installed environment")
+            return entry
+
+        if declaration.get("kind") == "class":
+            _object(declaration, {"kind", "module", "qualname", "owner"})
+            cls = type(module)
+            module_name, qualname = _text(declaration["module"]), _text(declaration["qualname"])
+            parts = qualname.split(".")
+            initializer = vars(cls).get("__init__")
+            defining = getattr(initializer, "__globals__", {})
+            code = getattr(initializer, "__code__", None)
+            if (
+                cls.__module__ != module_name
+                or cls.__qualname__ != qualname
+                or any(not part.isidentifier() for part in parts)
+                or namespace.get("__file__") is not None
+                or getattr(namespace.get("__spec__"), "origin", None) is not None
+                or defining.get("__name__") != module_name
+                or code is None
+            ):
+                raise WorkerError("derived module class differs from declaration")
+            actual: object = defining.get(parts[0])
+            for part in parts[1:]:
+                actual = vars(actual).get(part) if hasattr(actual, "__dict__") else None
+            entry = owner(declaration["owner"])
+            if (
+                actual is not cls
+                or defining.get("__file__") != entry["path"]
+                or code.co_filename != entry["path"]
+            ):
+                raise WorkerError("derived module class has no matching sealed definition")
+            return {
+                "kind": "image-derived-class",
+                "module": module_name,
+                "qualname": qualname,
+                "owner": entry,
+            }
+        _object(declaration, {"kind", "root", "basename", "sha256", "owners"})
+        root = Path(_text(declaration["root"]))
+        basename = _path(declaration["basename"])
+        raw_path = _text(namespace.get("__file__"))
+        path = Path(raw_path)
+        if (
+            declaration["kind"] != "source"
+            or root not in {Path(SAFE_ENV["TMPDIR"]), self.roots["artifacts"].parent}
+            or Path(basename).name != basename
+            or path.name != basename
+            or str(path) != raw_path
+            or ".." in path.parts
+            or not path.is_absolute()
+            or not path.resolve(strict=True).is_relative_to(_root(root))
+            or getattr(namespace.get("__spec__"), "origin", None) != str(path)
+            or path.is_symlink()
+            or not stat.S_ISREG(path.lstat().st_mode)
+            or path.lstat().st_nlink != 1
+            or file_hash(path) != _digest(declaration["sha256"])
+        ):
+            raise WorkerError("generated module differs from its exact declaration")
+        _root(path.parent)
+        owners = _texts(declaration["owners"])
+        if len(owners) != len(set(owners)):
+            raise WorkerError("duplicate generated module owner")
+        return {
+            "kind": "image-derived-source",
+            "path": str(path),
+            "sha256": declaration["sha256"],
+            "owners": [owner(item) for item in owners],
+        }
+
     def _audit_imports(self) -> dict[str, object]:
         result: dict[str, object] = {}
         environment = _object(self.inventories["environment"])
         synthetic = _texts(environment.get("synthetic_modules", []), empty=True)
+        derived = _object(environment.get("derived_modules", {}))
         for name, module in tuple(sys.modules.items()):
             if module is None:
                 continue
-            spec = getattr(module, "__spec__", None)
+            namespace = vars(module)
+            spec = namespace.get("__spec__")
             origin = getattr(spec, "origin", None)
-            file = getattr(module, "__file__", None)
+            file = namespace.get("__file__")
             if origin in {"built-in", "frozen"}:
                 result[name] = {"kind": origin}
+            elif name in derived:
+                result[name] = self._derived_import(name, module, derived[name])
             elif file:
                 result[name] = self._origin(Path(file))
             elif origin is None and name in synthetic:
-                loader = getattr(module, "__loader__", None)
+                loader = namespace.get("__loader__")
                 entry: dict[str, object] = {"kind": "image-synthetic"}
                 if loader is not None:
                     owner = sys.modules.get(type(loader).__module__)
-                    owner_file = getattr(owner, "__file__", None)
+                    owner_file = vars(owner).get("__file__") if owner is not None else None
                     if not owner_file:
                         raise WorkerError("synthetic loader has no sealed owner")
                     entry["loader_owner"] = self._origin(Path(owner_file))
                     if _object(entry["loader_owner"])["kind"] != "environment":
                         raise WorkerError("synthetic loader owner is outside environment")
                 result[name] = entry
-            elif getattr(module, "__path__", None) is not None:
-                paths = [Path(item).resolve(strict=True) for item in module.__path__]
+            elif namespace.get("__path__") is not None:
+                paths = [Path(item).resolve(strict=True) for item in namespace["__path__"]]
                 allowed = [
                     self.roots[role].resolve() for role in ("official", "runner", "environment")
                 ]
@@ -579,6 +667,9 @@ class NativeWorker:
             status, reason = "complete", "complete"
         except NativeStop as stop:
             status, reason = "stopped", stop.reason
+        except SystemExit as exit:
+            success = exit.code is None or isinstance(exit.code, int) and exit.code == 0
+            status, reason = ("complete", "complete") if success else ("failed", "native_error")
         except Exception:
             status, reason = "failed", "native_error"
         finally:

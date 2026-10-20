@@ -1,0 +1,125 @@
+{
+  "builder_audit_sha256": "870e4f8f697d136d2d120ac67d1b4b82c77e0418df8c8376b90e9fdc3d60e558",
+  "cleanup_status": "removed",
+  "evidence_path": "runs/reference-linux-nb02c3b/cpu/build-results/29baee26912f452b9691bc35997f43bd/evidence.json",
+  "evidence_sha256": "138cad7e99153c6bbc610eb09c38cdacd9e2b5b38ba569154ee85d179463dc5a",
+  "filename": "rouge_score-0.1.2-py3-none-any.whl",
+  "format": "buddha.review.nb02c3b-derived-rouge.v1",
+  "hash_seed": "randomized under -I; no deterministic seed claim",
+  "image_id": "sha256:d9476e5c6baf21ba4e70709b96100bdc7fe30637e59a377432690088c8dc77c1",
+  "installation_enabled": false,
+  "repeat_sha256": [
+    "bab5e3cb074d16e6e0968044d54816798caee21c69c543be381166cb8092fa0e",
+    "bab5e3cb074d16e6e0968044d54816798caee21c69c543be381166cb8092fa0e"
+  ],
+  "source_date_epoch": 1704067200,
+  "source_files": {
+    "buddha/__init__.py": "0857bd60619c1e1c8538fe768cbe82c781bb4e302abc6cf59130f1b17d052230",
+    "buddha/channel.py": "c46d236865b15f1918efa23d961ed7163533c9bbef2b0cec7f61d6f8e95d6e5f",
+    "buddha/executor.py": "b5e84f2dbcdc436aee23272e7d96b567cb5b16ead256a34d08bccc70b480d186",
+    "buddha/releases.py": "33361cf5b0923b373ee53dd73597063195c2c0d519baead50d40fb4bcfab44f5",
+    "docs/conformance/nb02c3-runtime-environment.json": "dc58b658821a536d13c300b6b1f756aa8dc3b2adcc5699627a4827f8361f7d9a",
+    "docs/conformance/nb02c3b-cpu-wheels.json": "7a83b877580fdebcbab8e863b6c637b5847c9c9c662240bab8037ce739103d93",
+    "docs/conformance/nb02c3b-rouge-build-worker.py": "b79ba7d48022c3538f6307c41c4a3c52c577e97489af512a38888f55cdf11bab",
+    "docs/conformance/nb02c3b-rouge-build.py": "7340aae3684d334cdb66746c4e7a9d5d3547e50f4f35c71187d2772aae2c5671"
+  },
+  "source_sha256": "c7d4da2683e68c9abf0135ef915d63a46643666f848e558a1b9f7ead17ff0f04",
+  "toolchain": {
+    "pip": "25.3",
+    "python": "3.13.12 (main, Apr  7 2026, 02:24:03) [GCC 12.2.0]"
+  },
+  "wheel_bytes": 24987,
+  "wheel_inventory": {
+    "rouge_score-0.1.2.dist-info/METADATA": {
+      "bytes": 4186,
+      "sha256": "ed60ef2ad9adee44a51a62fb12d62d19acc8307e648167ac3d8cba9770ed0299",
+      "source_mapping": "generated metadata"
+    },
+    "rouge_score-0.1.2.dist-info/RECORD": {
+      "bytes": 1468,
+      "sha256": "27b8e5f7aa11a700af93d19816c7fd4e4b683092362a9886e0af00911cf245ec",
+      "source_mapping": "generated metadata"
+    },
+    "rouge_score-0.1.2.dist-info/WHEEL": {
+      "bytes": 91,
+      "sha256": "4a63b1614ee9ccd281a804af409ec38d7dd719417dda5ac684c6f747afe28aa2",
+      "source_mapping": "generated metadata"
+    },
+    "rouge_score-0.1.2.dist-info/top_level.txt": {
+      "bytes": 12,
+      "sha256": "c576df64673df6f1391b5e5c8514734574ab27531cd3ae630a0b3c5d69e738a9",
+      "source_mapping": "generated metadata"
+    },
+    "rouge_score/__init__.py": {
+      "bytes": 590,
+      "sha256": "7d007905e3e38fc10b41821cf4f49807732208e683dec8b2ff48ac1c4b2cbc91",
+      "source_mapping": "sealed source"
+    },
+    "rouge_score/create_pyrouge_files.py": {
+      "bytes": 2492,
+      "sha256": "fc6b662278957958d25ad04ca192016de1fa5ccba7cf56b76e3b27d439866e80",
+      "source_mapping": "sealed source"
+    },
+    "rouge_score/io.py": {
+      "bytes": 6892,
+      "sha256": "b50771934202974815dc1797a74fa542e417f82a483d453ffd97420eb52cf05f",
+      "source_mapping": "sealed source"
+    },
+    "rouge_score/io_test.py": {
+      "bytes": 3637,
+      "sha256": "f8d2944edb1447469213a9f13dc016ef4edad982097f615cc0e9f8f25fd56b49",
+      "source_mapping": "sealed source"
+    },
+    "rouge_score/rouge.py": {
+      "bytes": 3101,
+      "sha256": "d4a271f18af0eea41136998afd70ad01f36130ebed6643855424739d3b88aad8",
+      "source_mapping": "sealed source"
+    },
+    "rouge_score/rouge_scorer.py": {
+      "bytes": 10707,
+      "sha256": "9484c5fd05e22cd28b5053bf9de586b3620cf65b0c38052b8690badd51f31d1a",
+      "source_mapping": "sealed source"
+    },
+    "rouge_score/rouge_scorer_test.py": {
+      "bytes": 13589,
+      "sha256": "383b1c631072dccd398321f501e3a7dfd89dd51a8299b42e621fd2cb24ed90da",
+      "source_mapping": "sealed source"
+    },
+    "rouge_score/scoring.py": {
+      "bytes": 5712,
+      "sha256": "b3fc153499e484665294ddbaeb876452b40a8fa2120e824b804928c96e3f2c1a",
+      "source_mapping": "sealed source"
+    },
+    "rouge_score/scoring_test.py": {
+      "bytes": 7850,
+      "sha256": "64e751c099da0d3ff4934c5f190a2f201af55fed46d2efafc403054ce64e2236",
+      "source_mapping": "sealed source"
+    },
+    "rouge_score/test_util.py": {
+      "bytes": 1291,
+      "sha256": "91ae80cd7cf30963840546f89df2906601b793bca027acf65e49b46c74aeb53c",
+      "source_mapping": "sealed source"
+    },
+    "rouge_score/tokenize.py": {
+      "bytes": 1882,
+      "sha256": "dc91cea8f09507f744549160c458031d0956e35fa230c80d01f990eba20a7403",
+      "source_mapping": "sealed source"
+    },
+    "rouge_score/tokenize_test.py": {
+      "bytes": 1137,
+      "sha256": "9a4c1332bbec9c4d3c4fb3fc3e7cd2fd2925d9a614a442a6037ef04935d1c0b2",
+      "source_mapping": "sealed source"
+    },
+    "rouge_score/tokenizers.py": {
+      "bytes": 1648,
+      "sha256": "2b7b9dae505ce8739064ba8e4791b871b13aa1f65bc54e25692f1a9ba8600508",
+      "source_mapping": "sealed source"
+    },
+    "rouge_score/tokenizers_test.py": {
+      "bytes": 1375,
+      "sha256": "89fdd7c7ffbe49d272c2661b6101168b734c8a042b3e9ce343baa778d20d71b3",
+      "source_mapping": "sealed source"
+    }
+  },
+  "wheel_sha256": "bab5e3cb074d16e6e0968044d54816798caee21c69c543be381166cb8092fa0e"
+}

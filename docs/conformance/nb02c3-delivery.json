@@ -10,11 +10,16 @@
     "strict_mypy": "pass;27 runtime modules; explicit linux and win32 platforms after portable subprocess flag lookup"
   },
   "ci": {
-    "current_fix": "hosted rerun pending; no green claim for the fix yet",
-    "linux": "628 tests, lint and format pass; types failed on Windows-only subprocess.CREATE_NO_WINDOW attribute; repaired and locally rechecked on both platform modes",
-    "pull_request_run": 39462587715,
-    "reviewed_commit": "a553fe1a3d2cbc79d571a437f7565bacd379d7b2",
-    "windows": "success;628 tests"
+    "all_checks": "pass on both platforms for both runs;628 tests per platform",
+    "initial_failure": "original a553fe1 Linux628 tests passed but strict types failed on Windows-only subprocess constants; repaired without changing guards and proofs refreshed",
+    "platforms": [
+      "windows-latest",
+      "ubuntu-latest"
+    ],
+    "pull_request_run": 39465812144,
+    "push_run": 39465801382,
+    "reviewed_commit": "8b3a34570054fa14b4f99bd89635c0d71708cf55",
+    "status": "success"
   },
   "date": "2026-10-20",
   "evidence": {

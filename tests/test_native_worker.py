@@ -326,6 +326,74 @@ async def main():
             json.loads((self.roots["artifacts"] / "summary.json").read_bytes()), {"native": True}
         )
 
+    def exit_worker(self, code, *, asynchronous):
+        entry = "async def main():" if asynchronous else "def main():"
+        source = (
+            "from pathlib import Path\nimport sys\n" + entry + "\n"
+            " Path(sys.argv[1]+'/partitions.jsonl.partial').write_bytes("
+            "b'completed native row\\n')\n"
+            f" raise SystemExit({code!r})\n"
+        )
+        self.put("official", self.main_name + ".py", source)
+        self.config["inventories"]["official"] = inventory(self.roots["official"])
+        self.config["hooks"] = {"modules": [self.main_name], "cache": None, "calls": [], "sdk": []}
+        return self.worker()
+
+    async def test_system_exit_zero_is_native_success_and_exports_artifacts(self):
+        worker = self.exit_worker(0, asynchronous=False)
+        await worker.run()
+        self.assertEqual(self.frames(worker)[-1]["status"], "complete")
+        self.assertEqual(self.frames(worker)[-1]["reason"], "complete")
+        self.assertTrue(any(frame["type"] == "file" for frame in self.frames(worker)))
+
+    async def test_system_exit_none_is_native_success(self):
+        worker = self.exit_worker(None, asynchronous=True)
+        await worker.run()
+        self.assertEqual(self.frames(worker)[-1]["status"], "complete")
+
+    async def test_system_exit_nonzero_is_native_failure_and_keeps_journal(self):
+        worker = self.exit_worker(2, asynchronous=True)
+        await worker.run()
+        self.assertEqual(self.frames(worker)[-1]["status"], "failed")
+        self.assertEqual(self.frames(worker)[-1]["reason"], "native_error")
+        self.assertEqual(
+            (self.roots["artifacts"] / "partitions.jsonl.partial").read_bytes(),
+            b"completed native row\n",
+        )
+
+    async def test_source_style_incomplete_exit_is_native_failure(self):
+        worker = self.exit_worker("1 eval dirs incomplete: /scratch/artifacts", asynchronous=True)
+        await worker.run()
+        self.assertEqual(self.frames(worker)[-1]["status"], "failed")
+        self.assertEqual(self.frames(worker)[-1]["reason"], "native_error")
+        paths = [frame["path"] for frame in self.frames(worker) if frame["type"] == "file"]
+        self.assertIn("partitions.jsonl.partial", paths)
+
+    async def test_system_exit_false_is_native_success(self):
+        worker = self.exit_worker(False, asynchronous=True)
+        await worker.run()
+        self.assertEqual(self.frames(worker)[-1]["status"], "complete")
+
+    async def test_system_exit_noninteger_zero_is_native_failure(self):
+        worker = self.exit_worker(0.0, asynchronous=True)
+        await worker.run()
+        self.assertEqual(self.frames(worker)[-1]["status"], "failed")
+        self.assertEqual(self.frames(worker)[-1]["reason"], "native_error")
+
+    async def test_keyboard_interrupt_still_escapes_after_journal_export(self):
+        self.exit_worker(None, asynchronous=True)
+        source = self.roots["official"] / (self.main_name + ".py")
+        source.write_bytes(
+            source.read_bytes().replace(b"raise SystemExit(None)", b"raise KeyboardInterrupt()")
+        )
+        self.config["inventories"]["official"] = inventory(self.roots["official"])
+        worker = self.worker()
+        with self.assertRaises(KeyboardInterrupt):
+            await worker.run()
+        frames = self.frames(worker)
+        self.assertEqual(frames[-1]["status"], "failed")
+        self.assertTrue(any(frame["type"] == "file" for frame in frames))
+
     async def test_missing_hook_and_source_drift_fail_before_ready(self):
         self.config["hooks"]["calls"][0]["target"] = self.judge_name + ":absent"
         worker = self.worker()
@@ -499,6 +567,158 @@ async def main():
         with patch.dict(sys.modules, {"fixture.synthetic": synthetic}, clear=True):
             result = self.import_audit(worker)
         self.assertEqual(result["fixture.synthetic"], {"kind": "image-synthetic"})
+
+    def derived_class(self):
+        owner = (self.roots["environment"] / "derived.py").resolve()
+        raw = (
+            b"from types import ModuleType\nclass Derived(ModuleType):\n"
+            b"    __file__ = 'relative-placeholder.py'\n"
+            b"    def __init__(self):\n        super().__init__('fixture.derived')\n"
+        )
+        owner.write_bytes(raw)
+        namespace = {"__name__": "fixture.owner", "__file__": str(owner)}
+        exec(compile(raw, str(owner), "exec"), namespace)
+        environment = self.config["inventories"]["environment"]
+        environment["inventory"]["derived.py"] = {
+            "sha256": hashlib.sha256(raw).hexdigest(),
+            "bytes": len(raw),
+        }
+        environment["derived_modules"] = {
+            "fixture.derived": {
+                "kind": "class",
+                "module": "fixture.owner",
+                "qualname": "Derived",
+                "owner": "derived.py",
+            }
+        }
+        worker = self.worker()
+        worker.expected_environment = environment["inventory"]
+        return worker, namespace["Derived"], owner
+
+    async def test_derived_class_matches_sealed_defining_namespace_without_dynamic_lookups(self):
+        worker, cls, _ = self.derived_class()
+        module = cls()
+        with patch.dict(sys.modules, {"fixture.derived": module}, clear=True):
+            result = self.import_audit(worker)
+        self.assertEqual(result["fixture.derived"]["kind"], "image-derived-class")
+        self.assertEqual(result["fixture.derived"]["owner"]["kind"], "environment")
+
+    async def test_derived_class_fixture_resolves_alias_before_defining_and_sealing(self):
+        environment = self.roots["environment"]
+        (environment / "sub").mkdir()
+        self.roots["environment"] = environment / "sub" / ".."
+        self.config["roots"]["environment"] = str(self.roots["environment"])
+        worker, cls, owner = self.derived_class()
+        module = cls()
+        with patch.dict(sys.modules, {"fixture.derived": module}, clear=True):
+            result = self.import_audit(worker)
+            self.assertEqual(result["fixture.derived"]["owner"]["path"], str(owner))
+            self.assertEqual(owner, (environment / "derived.py").resolve())
+            alias = str(self.roots["environment"] / "derived.py")
+            initializer = cls.__init__
+            code = initializer.__code__
+            for changed in ("namespace", "code"):
+                with self.subTest(changed=changed):
+                    initializer.__globals__["__file__"] = str(owner)
+                    initializer.__code__ = code
+                    if changed == "namespace":
+                        initializer.__globals__["__file__"] = alias
+                    else:
+                        initializer.__code__ = code.replace(co_filename=alias)
+                    with self.assertRaises(WorkerError):
+                        self.import_audit(worker)
+
+    async def test_derived_class_rejects_impostor_reusing_constructor_and_owner_drift(self):
+        worker, cls, owner = self.derived_class()
+        impostor = type(
+            "Derived",
+            (cls,),
+            {
+                "__module__": "fixture.owner",
+                "__init__": cls.__init__,
+            },
+        )
+        with patch.dict(sys.modules, {"fixture.derived": impostor()}, clear=True):
+            with self.assertRaises(WorkerError):
+                self.import_audit(worker)
+        owner.write_bytes(b"# changed sealed defining source\n")
+        with patch.dict(sys.modules, {"fixture.derived": cls()}, clear=True):
+            with self.assertRaises(WorkerError):
+                self.import_audit(worker)
+
+    async def test_exact_derived_source_rejects_drift_escape_and_undeclared_files(self):
+        private = self.root / "private"
+        private.mkdir()
+        (private / "sub").mkdir()
+        generated = private / "generated.py"
+        raw = b"value = 'fixed generated source'\n"
+        generated.write_bytes(raw)
+        environment = self.config["inventories"]["environment"]
+        owner_raw = (self.roots["environment"] / "identity.txt").read_bytes()
+        environment["inventory"]["identity.txt"] = {
+            "sha256": hashlib.sha256(owner_raw).hexdigest(),
+            "bytes": len(owner_raw),
+        }
+        environment["derived_modules"] = {
+            "fixture.generated": {
+                "kind": "source",
+                "root": str(private),
+                "basename": "generated.py",
+                "sha256": hashlib.sha256(raw).hexdigest(),
+                "owners": ["identity.txt"],
+            }
+        }
+        worker = self.worker()
+        worker.expected_environment = environment["inventory"]
+        module = ModuleType("fixture.generated")
+        module.__file__ = str(generated)
+        module.__spec__ = type("Spec", (), {"origin": str(generated)})()
+        with patch("buddha.native_worker.SAFE_ENV", {"TMPDIR": str(private)}):
+            with patch.dict(sys.modules, {"fixture.generated": module}, clear=True):
+                result = self.import_audit(worker)
+            self.assertEqual(result["fixture.generated"]["kind"], "image-derived-source")
+            for mutation in (
+                "drift",
+                "escape",
+                "undeclared",
+                "owner",
+                "origin",
+                "parent_alias",
+                "dot_alias",
+                "double_alias",
+            ):
+                with self.subTest(mutation=mutation):
+                    generated.write_bytes(raw)
+                    module.__file__ = str(generated)
+                    module.__spec__.origin = str(generated)
+                    if mutation == "drift":
+                        generated.write_bytes(b"different generated source\n")
+                    elif mutation == "escape":
+                        escaped = self.root / "generated.py"
+                        escaped.write_bytes(raw)
+                        module.__file__ = module.__spec__.origin = str(escaped)
+                    elif mutation == "undeclared":
+                        worker.inventories["environment"]["derived_modules"] = {}
+                    elif mutation == "owner":
+                        (self.roots["environment"] / "identity.txt").write_bytes(b"drift")
+                    elif mutation.endswith("_alias"):
+                        middle = {
+                            "parent_alias": "sub" + os.sep + "..",
+                            "dot_alias": ".",
+                            "double_alias": "",
+                        }[mutation]
+                        module.__file__ = module.__spec__.origin = (
+                            str(private) + os.sep + middle + os.sep + "generated.py"
+                        )
+                    else:
+                        module.__spec__.origin = "different-origin"
+                    with patch.dict(sys.modules, {"fixture.generated": module}, clear=True):
+                        with self.assertRaises(WorkerError):
+                            self.import_audit(worker)
+                    worker.inventories["environment"]["derived_modules"] = environment[
+                        "derived_modules"
+                    ]
+                    (self.roots["environment"] / "identity.txt").write_bytes(owner_raw)
 
     async def test_artifact_hard_links_are_rejected_before_export(self):
         first = self.roots["artifacts"] / "first"
