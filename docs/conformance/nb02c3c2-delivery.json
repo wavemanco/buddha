@@ -10,8 +10,16 @@
     "strict_mypy": "pass;30 source files; explicit linux and win32"
   },
   "ci": {
-    "scope": "Hosted Windows/Linux results reported only after observed",
-    "status": "pending publication"
+    "all_checks": "Windows/Linux green for both runs;703 tests each plus all quality checks",
+    "observed_push_windows": {
+      "seconds": 832.162,
+      "skipped": 1,
+      "tests": 703
+    },
+    "pull_request_run": 39480874069,
+    "push_run": 39480863404,
+    "reviewed_commit": "cb2280f16f0946307dae436ed03d4a091d5de788",
+    "status": "success"
   },
   "date": "2026-10-20",
   "format": "buddha.review.nb02c3c2-delivery.v1",
