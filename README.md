@@ -19,7 +19,8 @@ completed charge once. [Read-only search verification](docs/SEARCH-VERIFICATION.
 now checks explicitly sealed saved requests, results, lineage and accounting
 without keys, model calls or record changes. The [doctor](docs/DOCTOR.md) now
 reports locks, unknown writer identity, outstanding diagnostics and native
-completion anchors without resuming work. Measurement calibration is next.
+completion anchors without resuming work. The [blinded measurement audit](docs/MEASUREMENT-AUDIT.md)
+now has an offline review pack; independent review and adjudication remain open.
 
 These are distinct from scientific success. Meaningful diversity, held-out
 improvement, genuine task/improver source evolution and an improved improver have
@@ -155,6 +156,7 @@ payment stops new spending. Arbitrary evolved source and publication remain gate
 - [Frozen seed and isolated generation](docs/FROZEN-SEED.md)
 - [Complete selected native baseline](docs/NATIVE-BASELINE.md)
 - [Read-only doctor, locks and watch commands](docs/DOCTOR.md)
+- [Blinded measurement audit and review pack](docs/MEASUREMENT-AUDIT.md)
 - [Complete native commands and environment limits](docs/CONFINED-NATIVE-EVALUATION.md)
 - [Pinned benchmark source audit](docs/NOVELTYBENCH.md)
 - [Research and successors](docs/RESEARCH.md)
