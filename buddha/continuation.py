@@ -57,6 +57,12 @@ _GENERIC_EXTRACTION_MODULES = {
     ),
 }
 _GENERIC_COMMON_SHA256 = "3a0a693a0f4a0f2eed3b858d0b3ac42148871dbca284e56e0e368726309393c0"
+# REC-05B: only this exact refactor accepts already-buffered artifacts. The
+# original importer AST and remaining scientific module are preserved in tests.
+_BENCHMARK_BYTES_REVISION = (
+    "b72c74a0b9b7e786b9969c72a400f449ab5758938ee9f24af660a887d866c2a9",
+    "7ef7e26b2ef3cbf4119118a985334048fd30b68a5629f3e3196fa77e8200c49f",
+)
 _OLD_CONTRACT_KEYS = {
     "system_sha256",
     "proposal_schema_sha256",
@@ -215,52 +221,91 @@ def _snapshot(path: Path, expected_sha256: str) -> dict[str, bytes]:
     if not isinstance(path, Path):
         raise ValidationError("archived runtime requires a filesystem Path")
     _plain(path)
-    if path.stat().st_size > _MAX_ARCHIVE or _file_hash(path) != expected_sha256:
+    if not path.is_file() or path.stat().st_size > _MAX_ARCHIVE:
         raise ValidationError("archived runtime seal or size differs")
-    with zipfile.ZipFile(path) as bundle:
-        entries = bundle.infolist()
-        names = [entry.filename for entry in entries]
-        if (
-            len(entries) > 4096
-            or len(set(names)) != len(names)
-            or sum(entry.file_size for entry in entries) > _MAX_ARCHIVE
-        ):
-            raise ValidationError("archived runtime contains duplicate or oversized entries")
-        for entry in entries:
-            entry_path = PurePosixPath(entry.filename)
-            if (
-                entry.is_dir()
-                or entry_path.is_absolute()
-                or ".." in entry_path.parts
-                or "\\" in entry.filename
-                or ":" in entry.filename
-                or entry_path.as_posix() != entry.filename
-                or entry.orig_filename != entry.filename
-                or entry.flag_bits & 1
-                or stat.S_IFMT(entry.external_attr >> 16) not in {0, stat.S_IFREG}
-                or entry.file_size > _MAX_MEMBER
-            ):
-                raise ValidationError(
-                    "archived runtime entries must be bounded regular relative files"
-                )
-        if "source-index.json" not in names:
-            raise ValidationError("archived runtime has no source index")
-        index = _object(_parse(bundle.read("source-index.json")))
-        if index.get("format") != "buddha.runtime-source-snapshot.v1":
-            raise ValidationError("unsupported archived runtime index")
-        expected = _object(index.get("files_sha256"))
-        if set(expected) | {"source-index.json"} != set(names) or "source-index.json" in expected:
-            raise ValidationError("archived runtime inventory differs from its source index")
-        result = {}
-        for name, digest in expected.items():
-            _hex(digest, "archived source hash")
-            raw = bundle.read(name)
-            if hashlib.sha256(raw).hexdigest() != digest:
-                raise ValidationError("archived source differs from its indexed hash")
-            result[name] = raw
-    if _file_hash(path) != expected_sha256:
+    with path.open("rb") as stream:
+        raw = stream.read(_MAX_ARCHIVE + 1)
+    result = _snapshot_bytes(raw, expected_sha256)
+    _plain(path)
+    if not path.is_file() or path.stat().st_size > _MAX_ARCHIVE:
+        raise ValidationError("archived runtime changed during observation")
+    with path.open("rb") as stream:
+        observed = stream.read(_MAX_ARCHIVE + 1)
+    if observed != raw:
         raise ValidationError("archived runtime changed during observation")
     return result
+
+
+def _snapshot_member(bundle: zipfile.ZipFile, name: str) -> bytes:
+    entry = bundle.getinfo(name)
+    if entry.compress_type not in {zipfile.ZIP_STORED, zipfile.ZIP_DEFLATED}:
+        raise ValidationError("archived runtime requires stored or deflated ZIP members")
+    maximum = min(_MAX_MEMBER, entry.file_size)
+    # ZipExtFile's deflate decoder has a 4096-byte floor; the production member
+    # ceiling is 16 MiB. Explicit reads bound expansion before metadata cropping.
+    with bundle.open(entry) as stream:
+        raw = stream.read(maximum + 1)
+    if len(raw) != entry.file_size or len(raw) > _MAX_MEMBER:
+        raise ValidationError("archived runtime member size differs from its bounded declaration")
+    return raw
+
+
+def _snapshot_bytes(raw: bytes, expected_sha256: str) -> dict[str, bytes]:
+    _hex(expected_sha256, "archived runtime hash")
+    if (
+        not isinstance(raw, bytes)
+        or len(raw) > _MAX_ARCHIVE
+        or hashlib.sha256(raw).hexdigest() != expected_sha256
+    ):
+        raise ValidationError("archived runtime seal or size differs")
+    try:
+        with zipfile.ZipFile(io.BytesIO(raw)) as bundle:
+            entries = bundle.infolist()
+            names = [entry.filename for entry in entries]
+            if (
+                len(entries) > 4096
+                or len(set(names)) != len(names)
+                or sum(entry.file_size for entry in entries) > _MAX_ARCHIVE
+            ):
+                raise ValidationError("archived runtime contains duplicate or oversized entries")
+            for entry in entries:
+                entry_path = PurePosixPath(entry.filename)
+                if (
+                    entry.is_dir()
+                    or entry_path.is_absolute()
+                    or ".." in entry_path.parts
+                    or "\\" in entry.filename
+                    or ":" in entry.filename
+                    or entry_path.as_posix() != entry.filename
+                    or entry.orig_filename != entry.filename
+                    or entry.flag_bits & 1
+                    or stat.S_IFMT(entry.external_attr >> 16) not in {0, stat.S_IFREG}
+                    or entry.file_size > _MAX_MEMBER
+                ):
+                    raise ValidationError(
+                        "archived runtime entries must be bounded regular relative files"
+                    )
+            if "source-index.json" not in names:
+                raise ValidationError("archived runtime has no source index")
+            index = _object(_parse(_snapshot_member(bundle, "source-index.json")))
+            if index.get("format") != "buddha.runtime-source-snapshot.v1":
+                raise ValidationError("unsupported archived runtime index")
+            expected = _object(index.get("files_sha256"))
+            if (
+                set(expected) | {"source-index.json"} != set(names)
+                or "source-index.json" in expected
+            ):
+                raise ValidationError("archived runtime inventory differs from its source index")
+            result = {}
+            for name, digest in expected.items():
+                _hex(digest, "archived source hash")
+                raw = _snapshot_member(bundle, name)
+                if hashlib.sha256(raw).hexdigest() != digest:
+                    raise ValidationError("archived source differs from its indexed hash")
+                result[name] = raw
+        return result
+    except (zipfile.BadZipFile, zipfile.LargeZipFile, EOFError, RuntimeError, zlib.error):
+        raise ValidationError("archived runtime ZIP could not be decoded consistently") from None
 
 
 def _definition(raw: bytes, name: str) -> str:
@@ -364,15 +409,20 @@ def _science(snapshot: dict[str, bytes], contracts: object) -> None:
         if hashlib.sha256(snapshot[module_name.replace(".", "/") + ".py"]).hexdigest() != digest:
             raise ValidationError("original contract does not match the preserved runtime")
     archived_common = snapshot.get("buddha/common.py")
-    uses_common = any(
-        hashlib.sha256(snapshot[name.replace(".", "/") + ".py"]).hexdigest() == revision[1]
-        for name, revision in _GENERIC_EXTRACTION_MODULES.items()
-    ) or any(
-        isinstance(node, ast.ImportFrom)
-        and node.level == 0
-        and node.module == "buddha.common"
-        and [(name.name, name.asname) for name in node.names] == [("ValidationError", None)]
-        for node in ast.parse(snapshot["buddha/provider.py"]).body
+    uses_common = (
+        any(
+            hashlib.sha256(snapshot[name.replace(".", "/") + ".py"]).hexdigest() == revision[1]
+            for name, revision in _GENERIC_EXTRACTION_MODULES.items()
+        )
+        or hashlib.sha256(snapshot["buddha/benchmark.py"]).hexdigest()
+        == (_BENCHMARK_BYTES_REVISION[1])
+        or any(
+            isinstance(node, ast.ImportFrom)
+            and node.level == 0
+            and node.module == "buddha.common"
+            and [(name.name, name.asname) for name in node.names] == [("ValidationError", None)]
+            for node in ast.parse(snapshot["buddha/provider.py"]).body
+        )
     )
     if (archived_common is not None or uses_common) and (
         archived_common is None
@@ -389,6 +439,8 @@ def _science(snapshot: dict[str, bytes], contracts: object) -> None:
         path = Path(_text(module.__file__, "scientific source path"))
         previous = hashlib.sha256(snapshot[module.__name__.replace(".", "/") + ".py"]).hexdigest()
         actual = _file_hash(path)
+        if module is benchmark and actual != previous and actual == _BENCHMARK_BYTES_REVISION[1]:
+            actual = _BENCHMARK_BYTES_REVISION[0]
         extraction = _GENERIC_EXTRACTION_MODULES.get(module.__name__)
         if actual != previous and extraction is not None and actual == extraction[1]:
             actual = extraction[0]

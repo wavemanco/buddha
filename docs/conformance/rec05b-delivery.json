@@ -1,0 +1,393 @@
+{
+  "actual_history": {
+    "all34_package_sources_unchanged_in_real_probe": true,
+    "all_actual_allocations": "inactive;unchanged",
+    "all_protected_inputs_and_zip_unchanged": true,
+    "cases": [
+      {
+        "input_sha256": "474bed13bc90019d897a4348ea52d3ec1d88be6ebd7bc5e18b3b9c29bdfc9e76",
+        "main": "first-live-search",
+        "report": {
+          "checked": {
+            "candidates": 0,
+            "decisions": 0,
+            "inherited_operations": 0,
+            "physical_operations": 9
+          },
+          "claim": "saved-evidence consistency only; no provider or semantic attestation",
+          "costs": {
+            "committed_microusd": 534082,
+            "operation_count": 10,
+            "reserved_microusd": 532373,
+            "spent_microusd": 1709
+          },
+          "evidence_sha256": "474bed13bc90019d897a4348ea52d3ec1d88be6ebd7bc5e18b3b9c29bdfc9e76",
+          "format": "buddha.search-verification-report.v1",
+          "missing": {
+            "index": 9,
+            "operation_id": "231aad4e4c5d27b6fdd9e73da5993aee27f357dfa36b40c3b3463836c89c581b",
+            "prompt_id": "curated-0",
+            "stage": "generation",
+            "status": "unknown"
+          },
+          "run_id": "a1257f96467b490b910b559437a71258",
+          "shared_accounting": {
+            "committed_microusd": 1108768,
+            "operation_count": 124,
+            "reserved_microusd": 532373,
+            "spent_microusd": 576395
+          },
+          "shared_scope": {
+            "matched_run_ids": [
+              "a1257f96467b490b910b559437a71258"
+            ],
+            "unmatched_run_ids": [
+              "a0946e22ae1e45d6bf8f74cf9f4f30bb",
+              "a486d90396934a45940637d77a168304"
+            ]
+          },
+          "status": "incomplete"
+        }
+      },
+      {
+        "input_sha256": "8089a4d0ab916da4264ccec358a318f66c7636c4d248525b30591ae017546770",
+        "main": "first-live-recovery",
+        "report": {
+          "checked": {
+            "candidates": 3,
+            "decisions": 3,
+            "inherited_operations": 0,
+            "physical_operations": 63
+          },
+          "claim": "saved-evidence consistency only; no provider or semantic attestation",
+          "costs": {
+            "committed_microusd": 300153,
+            "operation_count": 63,
+            "reserved_microusd": 0,
+            "spent_microusd": 300153
+          },
+          "evidence_sha256": "8089a4d0ab916da4264ccec358a318f66c7636c4d248525b30591ae017546770",
+          "format": "buddha.search-verification-report.v1",
+          "missing": null,
+          "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb",
+          "shared_accounting": {
+            "committed_microusd": 1108768,
+            "operation_count": 124,
+            "reserved_microusd": 532373,
+            "spent_microusd": 576395
+          },
+          "shared_scope": {
+            "matched_run_ids": [
+              "a0946e22ae1e45d6bf8f74cf9f4f30bb",
+              "a1257f96467b490b910b559437a71258"
+            ],
+            "unmatched_run_ids": [
+              "a486d90396934a45940637d77a168304"
+            ]
+          },
+          "status": "verified"
+        }
+      },
+      {
+        "input_sha256": "0a380b5040cc654953cb75690cfb040c20d1a5e126b062283499099c2c1c90b7",
+        "main": "first-live-continuation-v2",
+        "report": {
+          "checked": {
+            "candidates": 3,
+            "decisions": 3,
+            "inherited_operations": 9,
+            "physical_operations": 51
+          },
+          "claim": "saved-evidence consistency only; no provider or semantic attestation",
+          "costs": {
+            "committed_microusd": 274533,
+            "operation_count": 51,
+            "reserved_microusd": 0,
+            "spent_microusd": 274533
+          },
+          "evidence_sha256": "0a380b5040cc654953cb75690cfb040c20d1a5e126b062283499099c2c1c90b7",
+          "format": "buddha.search-verification-report.v1",
+          "missing": null,
+          "run_id": "a486d90396934a45940637d77a168304",
+          "shared_accounting": {
+            "committed_microusd": 1108768,
+            "operation_count": 124,
+            "reserved_microusd": 532373,
+            "spent_microusd": 576395
+          },
+          "shared_scope": {
+            "matched_run_ids": [
+              "a0946e22ae1e45d6bf8f74cf9f4f30bb",
+              "a1257f96467b490b910b559437a71258",
+              "a486d90396934a45940637d77a168304"
+            ],
+            "unmatched_run_ids": []
+          },
+          "status": "verified"
+        }
+      }
+    ],
+    "costs_microusd": {
+      "committed": 1108768,
+      "held": 532373,
+      "known": 576395,
+      "operation_count": 124
+    },
+    "evidence": "docs/conformance/rec05b-real-verification.json",
+    "guarded": "network, writers, broker/ledger/authority constructors, source SQLite connections and archived execution forbidden; memory snapshots only",
+    "protected_inputs": 287,
+    "unknown_request": "original tenth remains unknown and held; no reconciliation"
+  },
+  "actual_provider_calls": 0,
+  "base_commit": "73ab10db251919822a634460cb6984e3a0cd0c16",
+  "checks": {
+    "bandit": "pass;no application findings;existing suppression warnings retained",
+    "compile": "pass",
+    "documented_real_cli": "pass;fresh process;exit0;51 physical+9 inherited;all explicit owners matched",
+    "git_diff_check": "pass",
+    "markdown_links": "pass;266 local file targets;README and project guides plus independent review",
+    "ruff_format": "pass;86 files",
+    "ruff_lint": "pass",
+    "runtime_pip_audit": "pass;no known vulnerabilities;separate evaluator environment limits unchanged",
+    "strict_mypy": "pass;35 sources;linux and win32"
+  },
+  "ci": {
+    "parent_PR22": "all four PR/push Windows/Linux jobs terminal green at21660311596edeec3ef729168782c2967416f09b;merged73ab10db251919822a634460cb6984e3a0cd0c16",
+    "parent_PR_workflow": "https://github.com/wavemanco/buddha/actions/runs/39496939894",
+    "parent_push_workflow": "https://github.com/wavemanco/buddha/actions/runs/39496868183",
+    "status": "pending publication;local full suite does not establish hosted CI"
+  },
+  "date": "2026-10-20",
+  "findings": {
+    "REC5B-F1": "Initial semantic run14pass/1error: archive helper mutated the nested manifest source contract, breaking linked protocol fingerprints. Copy before augmenting; final linked positive and manifest-immutability checks pass.",
+    "REC5B-F2": "Actual public counterexample accepted an extra sealed candidate policy.backup.json. Require exact six-file candidate inventory.",
+    "REC5B-F3": "Known extracted archive was accepted without sealed common.py dependency. Exact dependent profiles now require the common seal; original pre-extraction profile remains valid.",
+    "REC5B-F4": "Foreign or missing local binding passed selected shared mirror checks. Match authorization ID/path and canonical full-config binding checksum. Initial patch used the wrong inner terms checksum and broke the valid linked positive; corrected by tracing Authorization._binding_values; final21 positive/review checks pass.",
+    "REC5B-F5": "Coherently reduced historical source costs were accepted in initial context. Match immutable imported owner/history seals and totals; mutable initial context without historical snapshot is unsupported.",
+    "REC5B-F6": "Native DDL alone allowed illegal owner/operation/acceptance/deactivation scalar and state data. Generic authority row validation now rejects them while preserving opaque cross-codec receipt objects and recorded foreign absolute paths as data.",
+    "REC5B-F7": "Actual read bounds, portable aliases/ancestor roots and network roots were independently challenged. Bound consumed bytes/tree entries; reject unsafe roots, links, locks and nonempty sidecars before observation or decoding.",
+    "REC5B-F8": "Underdeclared ZIP expansion exceeded patched member ceiling; malformed deflate escaped as raw zlib error. Bounded member reads, allowed codecs, returned-length checks and typed errors close reproduced cases without archived execution.",
+    "REC5B-F9": "Bandit exposed two assert-based type narrowings. Use validated values/typed checks; final Bandit has no findings."
+  },
+  "format": "buddha.review.rec05b-delivery.v1",
+  "input_declaration": {
+    "authority": "explicitly sealed v2;all3 owners matched in linked case",
+    "bytes": 47803,
+    "path": "docs/conformance/rec05b-pilot-verification-input.json",
+    "root_counts": {
+      "linked": 129,
+      "original": 4,
+      "recovery": 152
+    },
+    "sha256": "5ae91c22fed21b60f2fae94d651c4f6034f5b1f342ba8122b5135d5510b249d5",
+    "source": "expected fingerprints copied from existing nb01-preservation.json, not resealed from observed live files"
+  },
+  "limits": [
+    "Saved-byte/slot/arithmetic/lineage consistency is not provider origin, invoice reconciliation or semantic judge correctness",
+    "Incomplete reports certify only checked prefix; unreached scientific artifacts remain unchecked",
+    "Current whole-authority accounting and unmatched owners are explicit; historical report totals are not replaced by later totals",
+    "Unknown legacy scientific profiles and mutable initial context without separate historical snapshot are unsupported; no current-policy defaults",
+    "Only declared legacy formats; modular native release/baseline paths retain their own evidence contracts",
+    "Stored/deflated archives only; bounded indexed/returned bytes do not certify full compressed stream or import closure; stdlib4096-byte deflate floor below production16MiB ceiling",
+    "Byte/tree/row ceilings are not universal resident-memory or execution-time guarantees",
+    "No archived code execution, exact historical runtime reconstruction, credential use or network",
+    "No writer-liveness claim, lock deletion, retry, receipt reconciliation, hold release, paid allocation or new paid command",
+    "No meaningful-diversity, source evolution, held-out gain or improved-improver claim"
+  ],
+  "local_tests": {
+    "full": {
+      "count": 846,
+      "exit_code": 0,
+      "seconds": 602.21,
+      "skipped": 5
+    },
+    "independent_review_and_pure": {
+      "count": 21,
+      "seconds": 22.221,
+      "skipped": 0
+    },
+    "logs": {
+      "rec05b-archive-red.json": {
+        "bytes": 579,
+        "sha256": "55a8968f973deea3944e34799b7447ab2684547161a521c124d702b892452728"
+      },
+      "rec05b-authority-shape-red.json": {
+        "bytes": 3792,
+        "sha256": "19e7221e613837d4ec05717d3793a04948f636aeb1bb5bffd959f23a904cd102"
+      },
+      "rec05b-bandit-red.log": {
+        "bytes": 5176,
+        "sha256": "328abf1cffeeb9730fee276faece7b134a425d7b4b8cdd8e358176b626ca47bd"
+      },
+      "rec05b-bandit.log": {
+        "bytes": 3977,
+        "sha256": "a3ce0e433dd25c48490bf026a49cc00e077f1f33d2d847cbd6518a47eb79b9f7"
+      },
+      "rec05b-binding-counterexample.json": {
+        "bytes": 836,
+        "sha256": "1adcb5bcd636b18057dcf24be7e685bf5a23dd8779cc4f2b480940b11bf0c416"
+      },
+      "rec05b-bounded-archive-red.log": {
+        "bytes": 2053,
+        "sha256": "b6d9a25a905766f348d631e0ffc52eb6ef60de6d390eb91b6b1020e3052b0c5b"
+      },
+      "rec05b-bounded-buffered-preservation.json": {
+        "bytes": 1549,
+        "sha256": "51957ff3807b180ab5307d4f985d999eebb61b9f5db36b71df7200dedde9c5dd"
+      },
+      "rec05b-buffered-continuation-green.log": {
+        "bytes": 1503,
+        "sha256": "812d1500428dd506a2311f49d4cfb4322c0cf8a10a376843c411f3e78a7ae7c5"
+      },
+      "rec05b-context-counterexample.json": {
+        "bytes": 738,
+        "sha256": "bb2a2e5f4f07b7e7724e914c0f404208fcfdca74410f134fb64d71c3d8a3934c"
+      },
+      "rec05b-documented-cli.json": {
+        "bytes": 824,
+        "sha256": "85c8aae9da7a49f75066189789d17d6ecfd9a293c740de338363a5963669e961"
+      },
+      "rec05b-full-suite.log": {
+        "bytes": 144881,
+        "sha256": "97ee8e52075ec4b939b7d62337188c4c37dd07ee6f8f5f6a5c4c2816c5e4f153"
+      },
+      "rec05b-independent-focused-green.log": {
+        "bytes": 126,
+        "sha256": "3d22c6433d19bd5d0e2aebd8a518f962e7fb76e1739cd163226d2fb93a6bb7fd"
+      },
+      "rec05b-independent-focused-pre-binding-correction.log": {
+        "bytes": 1413,
+        "sha256": "772484d65b9b69a86a6d610eb969d9d3aa5f42a8ea654b08ec1201c3eefac536"
+      },
+      "rec05b-pip-audit.log": {
+        "bytes": 268,
+        "sha256": "e82148c0c30269ca5a2c35420ece6af011a4faf5a375325d750e243ffdb10625"
+      },
+      "rec05b-real-verifier-final.json": {
+        "bytes": 8156,
+        "sha256": "5e6eabcd3412d7a4aa29f9772e5153abf611d59d12056ae7edf3faa2f8c33bc4"
+      },
+      "rec05b-search-evidence-real-storage-final.json": {
+        "bytes": 106561,
+        "sha256": "47f3da65816121ee0142e533cc877a4f5669d547e3e6f30285842749c2aa26f8"
+      },
+      "rec05b-search-evidence-row-final-green.log": {
+        "bytes": 3991,
+        "sha256": "0063269488eaea89cd91d0ffe24545996e9938c7d280a4aed89bb3f2d498463f"
+      },
+      "rec05b-search-verify-19.log": {
+        "bytes": 3972,
+        "sha256": "8f804a77b94319fb6b65884dc61ad0eb4e781de02cd97fac3f1b3bad0fa51dc5"
+      },
+      "rec05b-search-verify-initial-tests.log": {
+        "bytes": 4766,
+        "sha256": "eee47d98aead49178e84837f7e15e646398d0dca89e267fda392f84262d158a1"
+      },
+      "rec05b-verifier-counterexamples.json": {
+        "bytes": 1071,
+        "sha256": "c0f0d3bec19024ede78e992ab202a7a8be8f73426f46882384c59618921076c9"
+      }
+    },
+    "new_groups": 62,
+    "resource_warnings": "errors in final full/focused runs",
+    "semantic_funding_cli": {
+      "count": 19,
+      "seconds": 44.631,
+      "skipped": 0
+    },
+    "storage": {
+      "count": 21,
+      "seconds": 7.511,
+      "skipped": 1
+    }
+  },
+  "public_api": {
+    "cli": "python -m buddha search-verify --run <saved-run> --evidence <preserved-input.json>",
+    "exit_codes": {
+      "incomplete_or_unsupported": 3,
+      "invalid_evidence": 2,
+      "verified": 0
+    },
+    "library": "buddha.search_verify.verify_search(Path, evidence=explicit_record)",
+    "statuses": [
+      "verified",
+      "incomplete",
+      "unsupported"
+    ]
+  },
+  "scope": "Known legacy policy-search.v1 and bounded linked-continuation saved-evidence verification; no execution or paid route",
+  "source": {
+    "buddha/__main__.py": {
+      "bytes": 32171,
+      "sha256": "199d7a95b9a005ff610f757e0e4304c8d7e256b37a3fa671d4eb95d76c80fbf8"
+    },
+    "buddha/authorization.py": {
+      "bytes": 40555,
+      "sha256": "06d8615f8b301285a951b08bece0570e5b1b89467fc99fa4e994c7e5e5f30c47"
+    },
+    "buddha/benchmark.py": {
+      "bytes": 19836,
+      "sha256": "7ef7e26b2ef3cbf4119118a985334048fd30b68a5629f3e3196fa77e8200c49f"
+    },
+    "buddha/common.py": {
+      "bytes": 2238,
+      "sha256": "3a0a693a0f4a0f2eed3b858d0b3ac42148871dbca284e56e0e368726309393c0"
+    },
+    "buddha/continuation.py": {
+      "bytes": 40924,
+      "sha256": "b0136052472868aee379d7ac78dfd11bcfa40e91aedcd6916d30f9a334003414"
+    },
+    "buddha/history.py": {
+      "bytes": 12198,
+      "sha256": "d42e92a7e6c88a2f72090eaaa50de39dc355957e7c61f5b89dd97162d8b0eefa"
+    },
+    "buddha/ledger.py": {
+      "bytes": 19148,
+      "sha256": "5c7e56f1e2c5e68046d6380ebacc03110300eae34d348d7dca683a0591d64130"
+    },
+    "buddha/search_evidence.py": {
+      "bytes": 17759,
+      "sha256": "160dac986d16979d25f67ec05ca47d332839b3b3017c368b2883e6b938ccc29c"
+    },
+    "buddha/search_verify.py": {
+      "bytes": 45784,
+      "sha256": "b0fcff4db2b8d029198457dde1eadaa58f1a083d3d394b4b3efa87d181b7a735"
+    },
+    "tests/search_verify_helpers.py": {
+      "bytes": 9447,
+      "sha256": "71ff939dd95f375bbc9259eb8391850e62ce74447f54ce77b6ee36d2c7c78618"
+    },
+    "tests/test_continuation_common.py": {
+      "bytes": 12962,
+      "sha256": "d61b29db05270c919ffbf3f0970f9b479ea89a43ebff6e1cedf5356082c39786"
+    },
+    "tests/test_continuation_source.py": {
+      "bytes": 20675,
+      "sha256": "ab1b416299b8727b161ea1164400ea974ce1328bcc74ee624eaebe2fb45e3846"
+    },
+    "tests/test_evaluation_bytes.py": {
+      "bytes": 20101,
+      "sha256": "60c0027bb227ada29f8e744a8f1a75af948ead27a7bb35ce1fec2faa4a974249"
+    },
+    "tests/test_search_evidence.py": {
+      "bytes": 24218,
+      "sha256": "aadf63178eae6db067fee30689efb262a1c6a12f516776a2776a5ef4af8502ce"
+    },
+    "tests/test_search_verify.py": {
+      "bytes": 17074,
+      "sha256": "f9b2fa531c566041bdb43a08efd356271889951a06d0ac33f3e937d97de76f22"
+    },
+    "tests/test_search_verify_review.py": {
+      "bytes": 5576,
+      "sha256": "dd117aa3bd8160a43949e4c2b8fdbabfbe702cd0ac7ff6d280ac595422d356c7"
+    }
+  },
+  "spec": "REC-05B",
+  "status": "complete",
+  "verification_history": {
+    "context_orchestration_failure": "An earlier60-test continuation target had59pass/1exact-runtime refusal because another package source was concurrently materialized; guard was retained. Final846 suite runs under whole-package source freeze.",
+    "empty_discovery_invocation": "Initial root discovery without -s tests ran0 and returned5; corrected immediately; no test success claimed for it.",
+    "missing_api_reds": "storage, pure byte importer/archive and semantic verifier checks failed on missing APIs before implementation",
+    "preservation": "Original benchmark AST reassembled exactly; original ZIP/index validator reassembled after reversing only declared sealed-byte/bounded-read changes; old NB01/common compatibility and other continuation ASTs retained. See rec05b-preservation.json."
+  }
+}

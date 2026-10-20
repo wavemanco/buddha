@@ -234,6 +234,47 @@ the preserved runtime archive, real charges and the original hold are unchanged.
 No model calls were made. Hosted CI is recorded separately after publication.
 
 [REC-05A delivery evidence](conformance/rec05a-delivery.json) records source
-seals, tests, findings and preservation checks. REC-05B/C still own the separate
-read-only search verifier and writer/lock diagnostics. This slice adds no new
-reconciliation/retry command, paid allocation or scientific improvement claim.
+seals, tests, findings and preservation checks. REC-05B supplies the separate
+read-only saved-search verifier below; REC-05C owns writer/lock diagnostics.
+REC-05A adds no reconciliation/retry command, paid allocation or scientific
+improvement claim.
+
+
+## REC-05B read-only saved-search verification
+
+[The search-verification guide](SEARCH-VERIFICATION.md) documents the concrete
+pilot command, supplied file fingerprints and JSON outcomes. `search-verify`
+reads exact sealed bytes, queries SQLite only in memory and checks known
+legacy scientific recipes against saved receipts. It verifies candidate
+exports, decisions, lineage, inherited requests, funding and selected shared
+mirrors without resuming the search or executing archived Python. The old
+`search-inspect` still reconstructs caches and may write them.
+
+Complete consistency returns `verified`; missing work returns `incomplete`
+with its checked prefix; unsupported scientific profiles or mutable historical
+contexts stay explicit. Invalid evidence raises `ValidationError`. The CLI
+returns 0 for verified, 3 for incomplete or unsupported, and 2 for invalid evidence. Current shared totals and matched owner
+scope are separate from a selected run's physical costs and historical report.
+
+Bounded inventory/byte reads reject locks, links, unsafe paths and active
+SQLite sidecars; all selected files must have explicit previously preserved
+fingerprints. The pure five-artifact importer preserves the original scoring
+validator. ZIP input remains bounded indexed data: stored/deflated codecs
+only, typed decoding failures and bounded returned members. This is not full
+compressed-stream or executable import-closure certification. Byte ceilings
+are not universal memory/time guarantees.
+
+Final local checks passed 846 tests in 602.210 seconds,
+with 5 existing/platform skips. Ruff lint/format (86 files), strict types
+(35 sources, Linux and Windows), Bandit, runtime dependency audit and compilation
+passed. Actual histories yield the expected original incomplete, fresh recovery
+verified and linked continuation verified results. All 287 protected inputs,
+the pilot ZIP, costs and unknown hold remain unchanged; zero model calls.
+
+[Delivery evidence](conformance/rec05b-delivery.json),
+[actual saved-history results](conformance/rec05b-real-verification.json) and
+[independent boundary review](conformance/rec05b-boundary-review.md) record the
+checks and limitations. This is no provider authentication, semantic judgment,
+invoice reconciliation, retry permission, hold release or scientific
+improvement claim. REC-05C still owns writer/lock observations and diagnostics;
+hosted CI follows publication.

@@ -350,6 +350,12 @@ def main(argv: Sequence[str] | None = None) -> int:
         "search-inspect", help="reconstruct search offline from receipts"
     )
     search_inspect.add_argument("--run", type=Path, required=True)
+    search_verify = commands.add_parser(
+        "search-verify",
+        help="check explicitly sealed search evidence without writes or model calls",
+    )
+    search_verify.add_argument("--run", type=Path, required=True)
+    search_verify.add_argument("--evidence", type=Path, required=True)
     watch = commands.add_parser("watch", help="observe an existing run without keys or API calls")
     watch.add_argument("--run", type=Path, required=True)
     fetch = commands.add_parser(
@@ -504,6 +510,16 @@ def main(argv: Sequence[str] | None = None) -> int:
             _demo(args.out)
         elif args.command == "search-demo":
             _search_demo(args.out)
+        elif args.command == "search-verify":
+            from buddha.search_evidence import MAX_MANIFEST_BYTES, _absolute, _read
+            from buddha.search_verify import verify_search
+
+            declaration = _object(
+                _parse(_read(_absolute(str(args.evidence.absolute())), MAX_MANIFEST_BYTES))
+            )
+            verification = verify_search(args.run, evidence=declaration)
+            print(json.dumps(verification.to_record()))
+            return 0 if verification.status == "verified" else 3
         elif args.command == "watch":
             from buddha.progress import watch_run
 

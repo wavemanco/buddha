@@ -1,0 +1,31 @@
+{
+  "base_commit": "21660311596edeec3ef729168782c2967416f09b",
+  "checks": {
+    "all_other_continuation_functions_ast_unchanged": true,
+    "old_nb01_common_maps_ast_unchanged": true,
+    "original_zip_index_member_validation_ast_reassembled": true,
+    "whole_original_benchmark_ast_reassembled": true
+  },
+  "explicit_new_archive_guards": [
+    "bounded index/member ZipExtFile.read(min(declared_size,16MiB)+1)",
+    "stored/deflated codecs only; unsupported codings fail typed",
+    "returned member length equals declared size and stays within member ceiling",
+    "ZIP/zlib/EOF/Runtime errors become ValidationError"
+  ],
+  "format": "buddha.rec05b-bounded-buffered-preservation.v1",
+  "limits": [
+    "stdlib deflate output has4096-byte floor; production16MiB member ceiling exceeds it",
+    "not a guarantee of full compressed-stream validity: a forged underdeclared member can return its indexed prefix under stdlib CRC semantics",
+    "no archived source execution/import-closure or provider attestation"
+  ],
+  "source_sha256": {
+    "benchmark.py": "7ef7e26b2ef3cbf4119118a985334048fd30b68a5629f3e3196fa77e8200c49f",
+    "common.py": "3a0a693a0f4a0f2eed3b858d0b3ac42148871dbca284e56e0e368726309393c0",
+    "continuation.py": "b0136052472868aee379d7ac78dfd11bcfa40e91aedcd6916d30f9a334003414"
+  },
+  "tests": {
+    "focused17": "GREEN0.266s; further parent frozen suite pending",
+    "native_red": "runs/reviews/rec05b-archive-red.json",
+    "owned_red": "runs/reviews/rec05b-bounded-archive-red.log"
+  }
+}
