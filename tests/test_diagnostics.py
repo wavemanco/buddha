@@ -59,7 +59,7 @@ class DiagnosticsTests(unittest.TestCase):
 
     def execute(self, connection):
         with (
-            patch("buddha.diagnostics.http.client.HTTPSConnection", return_value=connection),
+            patch("buddha.provider.http.client.HTTPSConnection", return_value=connection),
             patch.dict("os.environ", {"OPENAI_API_KEY": "KEY-CANARY"}),
         ):
             return BudgetBroker(self.ledger, self.transport).execute(self.operation, self.call)
@@ -182,7 +182,7 @@ class DiagnosticsTests(unittest.TestCase):
             legacy.reserve(operation, self.call.fingerprint(), 120)
             legacy.dispatch(operation)
         with (
-            patch("buddha.diagnostics.http.client.HTTPSConnection") as connection,
+            patch("buddha.provider.http.client.HTTPSConnection") as connection,
             patch.dict("os.environ", {"OPENAI_API_KEY": "KEY-CANARY"}),
         ):
             with self.assertRaises(ValidationError):
@@ -194,7 +194,7 @@ class DiagnosticsTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as other:
             transport = DiagnosticHTTPTransport(Path(other), allow_paid=True)
             with (
-                patch("buddha.diagnostics.http.client.HTTPSConnection") as connection,
+                patch("buddha.provider.http.client.HTTPSConnection") as connection,
                 patch.dict("os.environ", {"OPENAI_API_KEY": "KEY-CANARY"}),
             ):
                 for selected in (self.transport, transport):
@@ -206,9 +206,10 @@ class DiagnosticsTests(unittest.TestCase):
     def test_request_journal_failure_prevents_http(self):
         connection, _ = self.connection()
         with patch("buddha.diagnostics._put", side_effect=OSError("WRITE-SECRET-CANARY")):
-            with self.assertRaises(ProviderUncertain):
+            with self.assertRaises(ValidationError):
                 self.execute(connection)
         connection.request.assert_not_called()
+        self.assertEqual(self.ledger.get(self.operation).status, "reserved")
 
     def test_outcome_journal_failure_does_not_discard_billable_reply(self):
         from buddha.search import _put
@@ -256,7 +257,7 @@ class DiagnosticsTests(unittest.TestCase):
         before = self.ledger.events()
         connection, _ = self.connection()
         with (
-            patch("buddha.diagnostics.http.client.HTTPSConnection", return_value=connection),
+            patch("buddha.provider.http.client.HTTPSConnection", return_value=connection),
             patch.dict("os.environ", {"OPENAI_API_KEY": "KEY-CANARY"}),
         ):
             self.transport.send(self.call)
@@ -317,7 +318,7 @@ class DiagnosticsTests(unittest.TestCase):
             ).encode()
         )
         with (
-            patch("buddha.diagnostics.http.client.HTTPSConnection", return_value=connection),
+            patch("buddha.provider.http.client.HTTPSConnection", return_value=connection),
             patch.dict("os.environ", {"ANTHROPIC_API_KEY": "KEY-CANARY"}),
         ):
             result = BudgetBroker(self.ledger, self.transport).execute(self.operation, self.call)

@@ -12,7 +12,7 @@ import json
 import math
 import os
 from contextlib import suppress
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, field
 from typing import TYPE_CHECKING, Protocol
 from urllib.parse import urlsplit
 
@@ -249,8 +249,33 @@ class Reply:
         )
 
 
+class _ReceivedInterrupt(BaseException):
+    """Carry received evidence across an interrupted optional local operation."""
+
+    def __init__(self, reply: Reply, interruption: KeyboardInterrupt | SystemExit) -> None:
+        super().__init__("provider reply received before local interruption")
+        self.reply = reply
+        self.interruption = interruption
+
+
 class Transport(Protocol):
     def send(self, call: Call) -> Reply: ...
+
+
+@dataclass(frozen=True)
+class PreparedHTTP:
+    """One unsent request; the caller owns and closes its connection resource."""
+
+    provider: str
+    path: str
+    body: bytes = field(repr=False)
+    headers: tuple[tuple[str, str], ...] = field(repr=False)
+    connection: http.client.HTTPSConnection = field(repr=False, compare=False)
+    diagnostic: tuple[tuple[str, object], ...] = ()
+
+    def close(self) -> None:
+        with suppress(Exception):
+            self.connection.close()
 
 
 class HTTPTransport:
@@ -286,7 +311,9 @@ class HTTPTransport:
         """Validate local permission/credentials without creating a paid operation."""
         self._credential(call)
 
-    def send(self, call: Call) -> Reply:
+    def prepare(self, operation_id: str, call: Call) -> PreparedHTTP:
+        """Complete local work without connecting or transmitting any request."""
+        _text(operation_id, "operation ID")
         provider = call.spec.provider
         key = self._credential(call)
         host, path = (
@@ -299,26 +326,40 @@ class HTTPTransport:
             headers["Authorization"] = "Bearer " + key
         else:
             headers |= {"x-api-key": key, "anthropic-version": "2023-06-01"}
-        connection = None
         try:
+            body = call.body_json.encode("utf-8")
             connection = http.client.HTTPSConnection(host, timeout=self.timeout_seconds)
-            connection.request("POST", path, body=call.body_json.encode("utf-8"), headers=headers)
+            return PreparedHTTP(provider, path, body, tuple(headers.items()), connection)
+        except Exception:
+            raise ValidationError("HTTP request preparation failed; no request sent") from None
+
+    def send(self, call: Call) -> Reply:
+        prepared = self.prepare("direct-http", call)
+        try:
+            return self.send_prepared(prepared)
+        except _ReceivedInterrupt as received:
+            raise received.interruption from None
+        finally:
+            prepared.close()
+
+    def send_prepared(self, prepared: PreparedHTTP) -> Reply:
+        """Transmit once; its owner closes the prepared connection on every exit."""
+        connection = prepared.connection
+        try:
+            connection.request(
+                "POST", prepared.path, body=prepared.body, headers=dict(prepared.headers)
+            )
             response = connection.getresponse()
             raw = response.read(16 * 1024 * 1024 + 1)
             if response.status != 200 or len(raw) > 16 * 1024 * 1024:
                 raise ProviderUncertain("provider response cannot be reconciled")
             envelope = _json(raw.decode("utf-8"))
             request_id = response.getheader(
-                "x-request-id" if provider == "openai" else "request-id"
+                "x-request-id" if prepared.provider == "openai" else "request-id"
             )
-            return self._reply(provider, envelope, request_id or "")
+            return self._reply(prepared.provider, envelope, request_id or "")
         except Exception:
             raise ProviderUncertain("provider response cannot be reconciled") from None
-        finally:
-            if connection is not None:
-                # A socket-close error must not discard received billable usage.
-                with suppress(OSError):
-                    connection.close()
 
     @staticmethod
     def _reply(provider: str, body: object, request_id: str) -> Reply:
@@ -407,36 +448,59 @@ class BudgetBroker:
             result = Reply.from_record(operation.response)
             self._bounds(call, result)
             return result
-        if operation.status != "reserved" or not self.ledger.dispatch(operation_id):
+        if operation.status != "reserved":
             raise PendingOperation("operation may already be billed; reconciliation is required")
+        prepared = (
+            self.transport.prepare(operation_id, call)
+            if isinstance(self.transport, HTTPTransport)
+            else None
+        )
+        interruption: KeyboardInterrupt | SystemExit | None = None
         try:
-            result = self.transport.send(call)
-            if not isinstance(result, Reply):
-                raise ProviderUncertain("transport returned an invalid reply")
-        except BaseException as error:
-            self.ledger.mark_unknown(operation_id)
-            if isinstance(error, (KeyboardInterrupt, SystemExit)):
-                raise
-            raise ProviderUncertain("dispatched operation has an uncertain outcome") from None
-        expected_tier = {"openai": "default", "anthropic": "standard"}.get(call.spec.provider)
-        if (
-            result.model != call.spec.model
-            or not result.provider_request_id
-            or (expected_tier and result.service_tier and result.service_tier != expected_tier)
-        ):
-            self.ledger.mark_unknown(
+            if not self.ledger.dispatch(operation_id):
+                raise PendingOperation(
+                    "operation may already be billed; reconciliation is required"
+                )
+            try:
+                result = (
+                    self.transport.send_prepared(prepared)
+                    if isinstance(self.transport, HTTPTransport) and prepared is not None
+                    else self.transport.send(call)
+                )
+                if not isinstance(result, Reply):
+                    raise ProviderUncertain("transport returned an invalid reply")
+            except _ReceivedInterrupt as received:
+                result, interruption = received.reply, received.interruption
+            except BaseException as error:
+                self.ledger.mark_unknown(operation_id)
+                if isinstance(error, (KeyboardInterrupt, SystemExit)):
+                    raise
+                raise ProviderUncertain("dispatched operation has an uncertain outcome") from None
+            expected_tier = {"openai": "default", "anthropic": "standard"}.get(call.spec.provider)
+            if (
+                result.model != call.spec.model
+                or not result.provider_request_id
+                or (expected_tier and result.service_tier and result.service_tier != expected_tier)
+            ):
+                self.ledger.mark_unknown(
+                    operation_id,
+                    response=result.to_record(),
+                    provider_request_id=result.provider_request_id or None,
+                )
+                raise BoundBreach(
+                    "provider identity or pricing tier is uncertain; "
+                    "receipt and reservation retained"
+                )
+            self.ledger.complete(
                 operation_id,
                 response=result.to_record(),
-                provider_request_id=result.provider_request_id or None,
+                actual_microusd=call.spec.cost_microusd(result.input_tokens, result.output_tokens),
+                provider_request_id=result.provider_request_id,
             )
-            raise BoundBreach(
-                "provider identity or pricing tier is uncertain; receipt and reservation retained"
-            )
-        self.ledger.complete(
-            operation_id,
-            response=result.to_record(),
-            actual_microusd=call.spec.cost_microusd(result.input_tokens, result.output_tokens),
-            provider_request_id=result.provider_request_id,
-        )
-        self._bounds(call, result)
-        return result
+            self._bounds(call, result)
+            if interruption is not None:
+                raise interruption from None
+            return result
+        finally:
+            if prepared is not None:
+                prepared.close()

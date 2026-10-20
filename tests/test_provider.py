@@ -460,7 +460,7 @@ class ProviderTests(unittest.TestCase):
             ),
             patch.dict("os.environ", {"OPENAI_API_KEY": "key"}),
         ):
-            with self.assertRaises(ProviderUncertain) as error:
+            with self.assertRaises(ValidationError) as error:
                 HTTPTransport(allow_paid=True).send(call())
         self.assertNotIn("secret-sentinel", str(error.exception))
 

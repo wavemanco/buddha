@@ -5,19 +5,28 @@ extension records its own source hash and the exact request fingerprint.
 """
 
 import hashlib
-import http.client
 import re
 import sqlite3
 import time
 import uuid
 import warnings
 from contextlib import closing, suppress
+from dataclasses import replace
 from datetime import UTC, datetime
 from pathlib import Path
 
 from buddha.benchmark import _canonical, _object, _parse
 from buddha.evaluation import ValidationError
-from buddha.provider import Call, HTTPTransport, ProviderUncertain, Reply, _json
+from buddha.history import _plain
+from buddha.provider import (
+    Call,
+    HTTPTransport,
+    PreparedHTTP,
+    ProviderUncertain,
+    Reply,
+    _json,
+    _ReceivedInterrupt,
+)
 from buddha.search import _put
 
 _LIMIT = 16 * 1024 * 1024
@@ -61,20 +70,29 @@ _OUTCOME_KEYS = _REQUEST_KEYS | {
 }
 
 
-def _binding(directory: Path, call: Call) -> str:
+def _binding(directory: Path, call: Call, operation_id: str | None = None) -> str:
     """A read-only lookup cannot create or change the run's accounting database."""
     try:
         uri = (directory / "operations.sqlite3").as_uri() + "?mode=ro"
         with closing(sqlite3.connect(uri, uri=True)) as connection:
-            rows = connection.execute(
-                "SELECT operation_id FROM operations "
-                "WHERE status='dispatched' AND request_sha256=?",
-                (call.fingerprint(),),
-            ).fetchmany(2)
+            connection.execute("PRAGMA query_only=ON")
+            connection.execute("PRAGMA trusted_schema=OFF")
+            if operation_id is None:
+                rows = connection.execute(
+                    "SELECT operation_id FROM operations WHERE status='dispatched' "
+                    "AND request_sha256=?",
+                    (call.fingerprint(),),
+                ).fetchmany(2)
+            else:
+                rows = connection.execute(
+                    "SELECT operation_id FROM operations WHERE operation_id=? "
+                    "AND status IN ('reserved','dispatched') AND request_sha256=?",
+                    (operation_id, call.fingerprint()),
+                ).fetchmany(2)
     except sqlite3.Error:
         raise ValidationError("diagnostics could not bind the dispatched operation") from None
     if len(rows) != 1 or not isinstance(rows[0][0], str) or not _HEX.fullmatch(rows[0][0]):
-        raise ValidationError("diagnostics require exactly one matching dispatched operation")
+        raise ValidationError("diagnostics require exactly one matching prepared operation")
     return rows[0][0]
 
 
@@ -99,59 +117,107 @@ class DiagnosticHTTPTransport(HTTPTransport):
         super().__init__(allow_paid=allow_paid, timeout_seconds=timeout_seconds)
         self.directory = directory.resolve()
 
-    def send(self, call: Call) -> Reply:
-        key = self._credential(call)
-        operation_id = _binding(self.directory, call)
+    def prepare(self, operation_id: str, call: Call) -> PreparedHTTP:
+        operation_id = _binding(self.directory, call, operation_id)
         provider = call.spec.provider
-        host, path = (
-            ("api.openai.com", "/v1/chat/completions")
-            if provider == "openai"
-            else ("api.anthropic.com", "/v1/messages")
-        )
-        record: dict[str, object] = {
+        host = "api.openai.com" if provider == "openai" else "api.anthropic.com"
+        expected: dict[str, object] = {
             "schema": 1,
             "operation_id": operation_id,
             "request_sha256": call.fingerprint(),
             "provider": provider,
-            "at": datetime.now(UTC).isoformat(),
-            "client_request_id": str(uuid.uuid4()),
             "method": "POST",
             "host": host,
             "adapter_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         }
         destination = self.directory / "diagnostics" / operation_id
+        request = destination / "request.json"
         try:
-            _put(destination / "request.json", record)
-        except (OSError, ValidationError):
+            for component in (request, *request.parents):
+                try:
+                    _plain(component)
+                except FileNotFoundError:
+                    continue
+            if request.exists():
+                with request.open("rb") as stream:
+                    raw = stream.read(65_537)
+                if len(raw) > 65_536:
+                    raise ValidationError("oversized diagnostic request")
+                record = _object(_parse(raw))
+                checksum = record.pop("record_sha256", None)
+                at, client_id = record.get("at"), record.get("client_request_id")
+                if (
+                    checksum != hashlib.sha256(_canonical(record)).hexdigest()
+                    or set(record) != _REQUEST_KEYS
+                    or type(record["schema"]) is not int
+                    or any(record.get(key) != value for key, value in expected.items())
+                    or not isinstance(at, str)
+                    or datetime.fromisoformat(at).tzinfo is None
+                    or not isinstance(client_id, str)
+                    or str(uuid.UUID(client_id)) != client_id
+                ):
+                    raise ValidationError("diagnostic request identity differs")
+            else:
+                record = expected | {
+                    "at": datetime.now(UTC).isoformat(),
+                    "client_request_id": str(uuid.uuid4()),
+                }
+                _put(request, record)
+        except Exception:
             raise ValidationError(
-                "diagnostic request record could not be saved; no request sent"
+                "diagnostic request preparation failed; no request sent"
             ) from None
-        headers = {"Content-Type": "application/json"}
-        if provider == "openai":
-            headers |= {
-                "Authorization": "Bearer " + key,
-                "X-Client-Request-Id": str(record["client_request_id"]),
-            }
-        else:
-            headers |= {"x-api-key": key, "anthropic-version": "2023-06-01"}
+        prepared = super().prepare(operation_id, call)
+        try:
+            return replace(
+                prepared,
+                headers=prepared.headers
+                + (
+                    (("X-Client-Request-Id", str(record["client_request_id"])),)
+                    if provider == "openai"
+                    else ()
+                ),
+                diagnostic=tuple(record.items()),
+            )
+        except BaseException:
+            prepared.close()
+            raise
+
+    def send(self, call: Call) -> Reply:
+        # Legacy/direct transport entry: no automatic reuse of a dispatched request.
+        operation_id = _binding(self.directory, call)
+        request = self.directory / "diagnostics" / operation_id / "request.json"
+        if request.exists() or request.is_symlink():
+            raise ValidationError("diagnostic request was already prepared; use its broker")
+        prepared = self.prepare(operation_id, call)
+        try:
+            return self.send_prepared(prepared)
+        except _ReceivedInterrupt as received:
+            raise received.interruption from None
+        finally:
+            prepared.close()
+
+    def send_prepared(self, prepared: PreparedHTTP) -> Reply:
+        record = dict(prepared.diagnostic)
+        destination = self.directory / "diagnostics" / str(record["operation_id"])
+        provider, connection = prepared.provider, prepared.connection
         phase, status, request_id, error_code = "connect", None, None, None
         started = time.monotonic()
-        connection = None
 
         def outcome(result: str, category: str | None) -> None:
-            saved = record | {
-                "at": datetime.now(UTC).isoformat(),
-                "phase": phase,
-                "http_status": status,
-                "provider_request_id": request_id,
-                "elapsed_ms": int((time.monotonic() - started) * 1000),
-                "outcome": result,
-                "error_category": category,
-                "error_code": error_code,
-            }
             try:
+                saved = record | {
+                    "at": datetime.now(UTC).isoformat(),
+                    "phase": phase,
+                    "http_status": status,
+                    "provider_request_id": request_id,
+                    "elapsed_ms": int((time.monotonic() - started) * 1000),
+                    "outcome": result,
+                    "error_category": category,
+                    "error_code": error_code,
+                }
                 _put(destination / "outcome.json", saved)
-            except (OSError, ValidationError):
+            except Exception:
                 # A diagnostic storage failure must never discard a billable reply.
                 with suppress(Exception):
                     warnings.warn(
@@ -159,9 +225,10 @@ class DiagnosticHTTPTransport(HTTPTransport):
                     )
 
         try:
-            connection = http.client.HTTPSConnection(host, timeout=self.timeout_seconds)
             phase = "send_request"
-            connection.request("POST", path, body=call.body_json.encode("utf-8"), headers=headers)
+            connection.request(
+                "POST", prepared.path, body=prepared.body, headers=dict(prepared.headers)
+            )
             phase = "await_headers"
             response = connection.getresponse()
             status = response.status
@@ -195,11 +262,10 @@ class DiagnosticHTTPTransport(HTTPTransport):
             )
             outcome("uncertain", category)
             raise ProviderUncertain("provider response cannot be reconciled") from None
-        finally:
-            if connection is not None:
-                with suppress(Exception):
-                    connection.close()
-        outcome("response_received", None)
+        try:
+            outcome("response_received", None)
+        except (KeyboardInterrupt, SystemExit) as interruption:
+            raise _ReceivedInterrupt(result, interruption) from None
         return result
 
 
