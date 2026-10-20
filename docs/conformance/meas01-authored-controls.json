@@ -1,0 +1,73 @@
+[
+  {
+    "id": "exact-repeat",
+    "prompt": "Tell me a story in five sentences about a girl and her dog.",
+    "answers": [
+      "Mira's dog stole her mitten. She chased him to the frozen pond. He dropped it beside a hole in the ice. Inside the hole, a duck was struggling to climb out. Mira used the mitten to pull it onto the bank.",
+      "Mira's dog stole her mitten. She chased him to the frozen pond. He dropped it beside a hole in the ice. Inside the hole, a duck was struggling to climb out. Mira used the mitten to pull it onto the bank."
+    ],
+    "purpose": "Literal duplicate diagnostic; intended construction is not independent adjudication.",
+    "author": "Codex, pack preparer; unblinded to pilot concerns",
+    "provenance": "New synthetic development control authored for MEAS-01; no model API or benchmark score."
+  },
+  {
+    "id": "central-plot-paraphrase",
+    "prompt": "Tell me a story in five sentences about a girl and her dog.",
+    "answers": [
+      "A girl taught her dog to bring letters from the gate. One morning he brought a sealed envelope addressed to nobody. She opened it and found a map of the garden. Following it, she unearthed her grandmother's missing wedding ring. That evening she returned it at the family dinner.",
+      "Every day a girl sent her dog to fetch the mail. This time he returned with an envelope bearing no name. Its contents were a plan showing a buried spot in their yard. There she dug up the wedding ring her grandmother had lost. She gave it back to her grandmother over supper."
+    ],
+    "purpose": "Shared central problem, actions and resolution expressed with different wording; retain reviewer disagreement.",
+    "author": "Codex, pack preparer; unblinded to pilot concerns",
+    "provenance": "New synthetic development control authored for MEAS-01; no model API or benchmark score."
+  },
+  {
+    "id": "required-subject-different-content",
+    "prompt": "Tell me a story in five sentences about a girl and her dog.",
+    "answers": [
+      "A girl entered her dog in a village obstacle race. He stopped at every fence to help a slower puppy climb over it. By the time they reached the finish, the prizes had been awarded. The girl asked the organizers to start a team event. Next year, the two dogs crossed the line together.",
+      "A girl and her dog boarded a train to the sea. At the first station she realized she had left her ticket at home. The conductor found her reservation using the dog's name, which she had entered by mistake. He printed a replacement and stamped it with a paw. She framed the ticket when they returned."
+    ],
+    "purpose": "Required girl and dog shared across different central situations and outcomes; source names are not a similarity rule.",
+    "author": "Codex, pack preparer; unblinded to pilot concerns",
+    "provenance": "New synthetic development control authored for MEAS-01; no model API or benchmark score."
+  },
+  {
+    "id": "shared-premise-different-outcome",
+    "prompt": "Tell me a story in five sentences about a girl and her dog.",
+    "answers": [
+      "A girl noticed that her dog barked before every rainstorm. She began taking him to the market to warn the stallholders. They built folding roofs and saved their stock from the next downpour. The dog received a basket of biscuits. She kept one for herself.",
+      "A girl noticed that her dog barked before every rainstorm. She thought he was predicting the weather. One afternoon she followed his gaze to a loose gutter tapping against the window. She fixed the gutter and waited through the next storm in silence. The dog slept while she crossed out his weather forecasts."
+    ],
+    "purpose": "Identical opening premise with different causal development and resolution; no assumption that shared premise forces equivalence.",
+    "author": "Codex, pack preparer; unblinded to pilot concerns",
+    "provenance": "New synthetic development control authored for MEAS-01; no model API or benchmark score."
+  },
+  {
+    "id": "strict-single-digit",
+    "prompt": "Choose either 0 or 1. Respond with exactly one digit and no other characters.",
+    "answers": ["0", "1", "I choose 0 because it looks like a doorway.", ""],
+    "purpose": "Separate central content, exact answer form, embellishment and empty response; no utility benefit assumed for added explanation.",
+    "author": "Codex, pack preparer; unblinded to pilot concerns",
+    "provenance": "New synthetic development control authored for MEAS-01; no model API or benchmark score."
+  },
+  {
+    "id": "closed-answer-content-and-form",
+    "prompt": "Is 9 an even number? Respond with exactly YES or NO and no other characters.",
+    "answers": ["NO", "YES", "No", "NO, because nine is odd."],
+    "purpose": "Separate formal compliance from factual correctness and semantic equivalence. Form alone does not establish utility.",
+    "author": "Codex, pack preparer; unblinded to pilot concerns",
+    "provenance": "New synthetic development control authored for MEAS-01; no model API or benchmark score."
+  },
+  {
+    "id": "craft-and-literal-form",
+    "prompt": "Tell me a story in five sentences about a girl and her dog.",
+    "answers": [
+      "A girl found her dog sitting beside an empty kennel. He would not move until she opened its locked door. Inside, she found a litter of puppies. She carried them to the kitchen. He followed and settled down to feed them.",
+      "A girl found her dog guarding a locked kennel. She fetched its key and opened the door. A litter of abandoned puppies huddled inside. She warmed milk while he curled around them. By morning, every puppy was feeding from a bottle."
+    ],
+    "purpose": "Elicit concrete causal or craft observations separately from sentence count and equivalence. Neither author intent nor fantasy plausibility establishes a gold quality label.",
+    "author": "Codex, pack preparer; unblinded to pilot concerns",
+    "provenance": "New synthetic development control authored for MEAS-01; no model API or benchmark score."
+  }
+]

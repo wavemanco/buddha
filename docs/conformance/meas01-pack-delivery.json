@@ -1,0 +1,175 @@
+{
+  "actual_review": "docs/conformance/meas01-pack-review.json",
+  "actual_review_sha256": "a8d2bb6a7374c0ecc2d8916e323ef78926c011653a8bcdc49ec2d0bf2a977494",
+  "base_commit": "72a59c62a1b80650089dee57d10e2d0714e28485",
+  "benchmark_provider_API_calls": 0,
+  "checks": {
+    "bandit": "pass;application/agent/helper;one new scoped B311 annotation for reproducible presentation RNG,9 prior suppressions retained",
+    "compile": "pass",
+    "git_diff_check": "pass",
+    "markdown_links": "pass;287 local file targets in README/guides/preparation review",
+    "ruff_format": "pass;93 files including helper",
+    "ruff_lint": "pass;including helper",
+    "runtime_pip_audit": "pass;no known core vulnerabilities;larger evaluator closure limits unchanged",
+    "strict_mypy": "pass;37 application sources;linux and win32"
+  },
+  "ci": {
+    "main_PR23_merge_workflow": "https://github.com/wavemanco/buddha/actions/runs/39506966085;Linux/Windows success observed",
+    "parent_PR24": "Linux PR/push checks green;Windows checks last observed running",
+    "parent_PR_workflow": "https://github.com/wavemanco/buddha/actions/runs/39508636874",
+    "parent_push_workflow": "https://github.com/wavemanco/buddha/actions/runs/39508627401",
+    "status": "pending publication;local tests do not establish hosted CI"
+  },
+  "coverage": {
+    "authored_cards": 7,
+    "comparison_cards": 9,
+    "historical_answers": 60,
+    "historical_sets": 6,
+    "response_answers": 96,
+    "response_items": 22
+  },
+  "date": "2026-10-20",
+  "format": "buddha.review.meas01-pack-delivery.v1",
+  "human_requirement": "broader DESIGN214 scientific gate remains open; not an invented prerequisite for model-development MEAS01 review",
+  "independent_review_state": "two blinded model reviews frozen and structurally validated; separate fresh blinded adjudication underway; no gate closure inferred",
+  "inventory_sha256": "a5a429d22adade574639c315dc36f908834d6f87b215aa878db70381d75bf0ef",
+  "limits": [
+    "Preparation is not semantic judgment, adjudication or a corrected benchmark score",
+    "One historical development prompt; inherited/repeated answers are not independent samples",
+    "Authored controls are not candidate responses and do not measure policy transfer",
+    "Style can reveal likely origin; reviewer-folder restriction is instructed, not OS confinement",
+    "Exact inherited review-model identifier is unavailable; no exact-model instrument, diverse-model or statistical-independence claim",
+    "Platform model-review usage is distinct from benchmark API calls; no assertion of universal free research cost",
+    "Human scientific sample, official-judge audit, source evolution and held-out claims remain open",
+    "Per-file/population checks are not aggregate-memory/time guarantees or atomic live snapshots"
+  ],
+  "local_tests": {
+    "actual_counterexamples": 8,
+    "focused": {
+      "count": 18,
+      "seconds": 0.72,
+      "skipped": 0
+    },
+    "full": {
+      "count": 913,
+      "exit_code": 0,
+      "seconds": 663.419,
+      "skipped": 5
+    },
+    "post_guide_clarification": {
+      "focused_count": 18,
+      "scope": "only_GUIDE literal changed after full suite; final AST and output-byte proof records scope",
+      "seconds": 0.54
+    },
+    "resource_warnings": "errors"
+  },
+  "logs": {
+    "meas01-pack-18-green.log": {
+      "bytes": 3624,
+      "sha256": "25aed90fb31b7353338748e1e759f85b532c04ce691e3790ba75a2a7e9b39215"
+    },
+    "meas01-pack-bandit-final.log": {
+      "bytes": 4301,
+      "sha256": "fd99bbde3118c4dd66125afb23fa540f8f9656d424bbe8050fb64c8a5c750dbe"
+    },
+    "meas01-pack-bandit.log": {
+      "bytes": 4496,
+      "sha256": "1a777312007b6a2fc975ba6610fd34ec56f9b3ec94cc47dfe61c3a08e7dbbb76"
+    },
+    "meas01-pack-duplicate-ids-red.log": {
+      "bytes": 2169,
+      "sha256": "22c757d95c279842c331d12f103afacf1cf77dca935342572c4c96422285e0ce"
+    },
+    "meas01-pack-first-functional.log": {
+      "bytes": 2864,
+      "sha256": "0528d8e89cbe4d1042ce84cfbae614943874d832a61c4bd5d72d05299015a747"
+    },
+    "meas01-pack-full-suite-final.log": {
+      "bytes": 156904,
+      "sha256": "cab81ecf38cd31c295e871e4dfad66236f6d5420d52931c9bdfc6745e12f2181"
+    },
+    "meas01-pack-full-suite.log": {
+      "bytes": 3028,
+      "sha256": "5ef5089a60f7908b86d096ca1a714ca71ef4936cdf24648c1ef7876be2844b38"
+    },
+    "meas01-pack-identities-red.log": {
+      "bytes": 6125,
+      "sha256": "99e1b23c576eb6af57855dfc6b30928340220384c4537caf47a70a2277981cc9"
+    },
+    "meas01-pack-missing-helper-red.log": {
+      "bytes": 1473,
+      "sha256": "ceae07c5962bfbeca35958dd3022fe66b06810bad63263bb9987719e1be0d055"
+    },
+    "meas01-pack-overflow-red.log": {
+      "bytes": 969,
+      "sha256": "6435cadcd972c777e577737d71177f881167eb98aa2e2c9f2a53c84cb46719ac"
+    },
+    "meas01-pack-parent-path-red.log": {
+      "bytes": 3293,
+      "sha256": "e9d58be787783e6514500289605bc43e8ab1f7a190ba070ba8b16c03d0db4619"
+    },
+    "meas01-pack-pip-audit.log": {
+      "bytes": 268,
+      "sha256": "e82148c0c30269ca5a2c35420ece6af011a4faf5a375325d750e243ffdb10625"
+    },
+    "meas01-pack-schema-bandit.log": {
+      "bytes": 972,
+      "sha256": "91d8ad33001ee8b206f260312e1c103773e35de78e69872c55ea6c32f257f97a"
+    },
+    "meas01-pack-schema-guide-18-green.log": {
+      "bytes": 3624,
+      "sha256": "1fe67ef7fde7e8fb5b060918c7536eb1885f87b6d33dcb93f4fb7e933e79e012"
+    }
+  },
+  "meas01_complete": false,
+  "new_benchmark_allocation": false,
+  "official_rule": {
+    "assignment": "JUDGE_SYSTEM",
+    "ast_literal_matches": true,
+    "source": "runs\\references\\noveltybench-conformance\\64a23be6b18ec1dacc298830aab276061b6e143c\\src\\partition.py",
+    "source_sha256": "263970891ff3ee1cc8df369a33beefe5cb5de618b5dd146a5234536d97954aca",
+    "source_unchanged": true,
+    "text_utf8_sha256": "5df0b3a31c86ea37e15b17348a34ad064790b670be345dd93fcd0a4d18385eca"
+  },
+  "pack_sha256": "8a29cded45e11f62eaecba52e5d9c30a88e2733b28cc8138aa2fdb38d025bf15",
+  "preservation": {
+    "V2_authority_prior_seal": true,
+    "all36_package_sources_unchanged": true,
+    "financial_or_runtime_transition_changed": false,
+    "protected287_and_zip_prior_seals": true
+  },
+  "reviewer_constraints": "Only reviewer/pack.json, REVIEW.md, response-template.json; no parent chat/private key/old scores/concerns; raw responses frozen before comparison",
+  "scope": "Offline masked development material and structural submission checks; independent judgments/adjudication are separate work",
+  "source": {
+    "docs/MEASUREMENT-AUDIT.md": {
+      "bytes": 6960,
+      "sha256": "ea369c7a96ca8de66fa1d0a62b02407ad7248872bd87c191842ed0ee7a76d89f"
+    },
+    "docs/conformance/meas01-authored-controls.json": {
+      "bytes": 6045,
+      "sha256": "0d97d892be45541ffc39a7a9723fd734b7e3d0a770c284bcbff7741b006fc209"
+    },
+    "docs/conformance/meas01-pack.py": {
+      "bytes": 22801,
+      "sha256": "1122219cea9d644e5d1979af965caa777434c5363741e08e700eccaab755f6f8"
+    },
+    "tests/test_meas01_pack.py": {
+      "bytes": 26819,
+      "sha256": "aa2403eee11b0a47cb00e20c817b966f2790ff7a584d61a0a23338f10498ed6f"
+    }
+  },
+  "spec": "MEAS-01 preparation",
+  "status": "prepared",
+  "verification_history": {
+    "CLI": "fresh preparation succeeded; repeating same output refused with exit2 and all six output seals unchanged",
+    "behavioral_RED_to_GREEN": [
+      "root-parent path I/O escape",
+      "duplicate public IDs",
+      "foreign answer/source provenance",
+      "JSON1e999 nonfinite output"
+    ],
+    "first_full": "stopped before final run to annotate deterministic RNG nonsecurity purpose; partial log retained, not claimed passing",
+    "loader_RED": "missing helper before implementation; first14 functional groups initially green",
+    "schema_clarification": "Both first reviews rejected because instructions omitted uncertain-pair field names. Original bytes frozen; format-only corrections match after deterministic key mapping. Only helper GUIDE literal changed after full913; final18 and actual proof refreshed, no full rerun claim."
+  }
+}

@@ -171,6 +171,7 @@
   },
   "ci": {
     "main_PR22_merge_workflow": "https://github.com/wavemanco/buddha/actions/runs/39500411647;terminalsuccessobserved",
+    "main_PR23_merge_workflow": "https://github.com/wavemanco/buddha/actions/runs/39506966085;terminal Linux/Windows success observed",
     "parent_PR23": "all four PR/push Windows/Linux jobs green atfe6ff20cc50b7dad77e3dbba4cc0d0e7280c977f;merged04c88b9959c9d4ff1be4334b1af754f2112fe84b at2026-10-20T22:17:04Z",
     "parent_PR_workflow": "https://github.com/wavemanco/buddha/actions/runs/39502913318",
     "parent_push_workflow": "https://github.com/wavemanco/buddha/actions/runs/39502898820",
