@@ -280,3 +280,29 @@ C3A does not execute official partitioning or the frozen seed agent, nor does
 the low-level session prove selected C1 population/answer derivation. Those
 remain C3B/C. The same-agent/same-runner upgrade and safe retirement acceptance
 remains BENCH-03C. No new live allocation or paid CLI follows from this slice.
+
+
+## BENCH-02C3B: complete official partition entry point
+
+The same generic `NativeSession`, configured hooks and funded SDK channel now
+run the unchanged full official LLM partition CLI. The worker adds generic
+exact declarations for dependency-generated module classes/source and preserves
+artifacts when the native CLI exits with `SystemExit`. It contains no Torch or
+NoveltyBench-version branch. The selected CPU runtime, derived ROUGE wheel,
+installed bytes and imported origins have separate immutable evidence; held
+CUDA artifacts remain historical preparation, not an enabled runtime.
+
+[The execution guide](CONFINED-NATIVE-EVALUATION.md#complete-official-partition-command)
+explains the direct-versus-funded controls, cache/replay behavior, optional
+command and financial-stop differences. [Delivery evidence](conformance/nb02c3b-delivery.json)
+records the tests and limits. The CPU binary variant and explicit security
+overlay do not imply exact upstream binary-lock equivalence or blanket
+security/license clearance. Known advisories prohibit using this evaluator
+image for arbitrary source-evolved agents.
+
+C3C still must bind isolated frozen seed generation to selected C1 tasks and
+ordered answers, then compose native partition/score/summary with complete
+coverage. BENCH-03C must demonstrate configuration-only release changes and
+retirement across the same frozen agent and generic runner. Native semantic
+calibration, a new live allocation and scientific improvement claims remain
+separate; this slice enables no paid command.

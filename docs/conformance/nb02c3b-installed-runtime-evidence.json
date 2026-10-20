@@ -1,0 +1,247 @@
+{
+  "build_result": {
+    "context_unchanged": true,
+    "log_sha256": "061d901cd9ca703c4954ef04e9e193b6cba61344b4cd2f0d9b8f1dab3b47dd4d",
+    "returncode": 0
+  },
+  "context": {
+    "context_bytes": 250823483,
+    "files": {
+      ".dockerignore": "f87d6eb0e2bb35993129167a5708521bc07e5179bbc146035c40eb3f712c71cb",
+      "Dockerfile": "2b1b4e1e9326d7d68e3251836ce11c89fb58f757edc81307fdea0d77ef17c0ac",
+      "requirements.txt": "aa49cb8a5058cf06e1dde5710b01d82ba8aa3b095224b3270be41ff6b5923ef6",
+      "runtime-prepare.py": "6c5cc5475dbd1f8d511fbc6e4adbcc20ca5c00ef770cc202874a3333d471eff4",
+      "wheelhouse.json": "e903df6b0770b8928b9f5ff5f397da676fdd295cc6133458b0c55b104d2e54ce",
+      "wheels/MarkupSafe-3.0.2-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": "15ab75ef81add55874e7ab7055e9c397312385bd9ced94920f2802310c930396",
+      "wheels/PyYAML-6.0.2-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": "70b189594dbe54f75ab3a1acec5f1e3faa7e8cf2f1e08d9b561cb41b845f69d5",
+      "wheels/absl_py-2.3.1-py3-none-any.whl": "eeecf07f0c2a93ace0772c92e596ace6d3d3996c042b2128459aaae2a76de11d",
+      "wheels/annotated_types-0.7.0-py3-none-any.whl": "1f02e8b43a8fbbc3f3e0d4f0f4bfc8131bcb4eebe8849b8e5c773f3a1c582a53",
+      "wheels/anthropic-1.4.0-py3-none-any.whl": "590e85bff75b713a123b03f586d68f02266b5fdc49f70dd75f721ced93a4716c",
+      "wheels/anyio-4.14.2-py3-none-any.whl": "9f505dda5ac9f0c8309b5e8bd445a8c2bf7246f3ce950121e45ea15bc41d1494",
+      "wheels/certifi-2025.8.3-py3-none-any.whl": "f6c12493cfb1b06ba2ff328595af9350c65d6644968e5d3a2ffd78699af217a5",
+      "wheels/charset_normalizer-3.4.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl": "416175faf02e4b0810f1f38bcb54682878a4af94059a1cd63b8747244420801f",
+      "wheels/click-8.2.1-py3-none-any.whl": "61a3265b914e850b85317d0b3109c7f8cd35a670f963866005d6ef1d5175a12b",
+      "wheels/colorama-0.4.6-py2.py3-none-any.whl": "4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6",
+      "wheels/distro-1.9.0-py3-none-any.whl": "7bffd925d65168f85027d8da9af6bddab658135b840670a223589bc0c8ef02b2",
+      "wheels/docstring_parser-0.18.0-py3-none-any.whl": "b3fcbed555c47d8479be0796ef7e19c2670d428d72e96da63f3a40122860374b",
+      "wheels/filelock-3.19.1-py3-none-any.whl": "d38e30481def20772f5baf097c122c3babc4fcdb7e14e57049eb9d88c6dc017d",
+      "wheels/fsspec-2025.3.0-py3-none-any.whl": "efb87af3efa9103f94ca91a7f8cb7a4df91af9f74fc106c9c7ea0efd7277c1b3",
+      "wheels/h11-0.16.0-py3-none-any.whl": "63cf8bbe7522de3bf65932fda1d9c2772064ffb3dae62d55932da54b31cb6c86",
+      "wheels/hf_xet-1.1.9-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": "a4c5a840c2c4e6ec875ed13703a60e3523bc7f48031dfd750923b2a4d1a5fc3c",
+      "wheels/httpcore-1.0.9-py3-none-any.whl": "2d400746a40668fc9dec9810239072b40b4484b640a8c38fd654a024c7a1bf55",
+      "wheels/httpcore2-2.12.0-py3-none-any.whl": "7e04258ce01013d7d615e5b910a3b27fac937d7a95038227e79652b4ba3b4ceb",
+      "wheels/httpx-0.28.1-py3-none-any.whl": "d909fcccc110f8c7faf814ca82a9a4d816bc5a6dbfea25d6591d6985b8ba59ad",
+      "wheels/httpx2-2.12.0-py3-none-any.whl": "cc8b6eecb8661c146b8f89a60e97456ee086e91a784ed31ac450c3a9e613dd36",
+      "wheels/huggingface_hub-0.34.4-py3-none-any.whl": "9b365d781739c93ff90c359844221beef048403f1bc1f1c123c191257c3c890a",
+      "wheels/idna-3.19-py3-none-any.whl": "815e7be7a7806d54abb586dc943addc79e8b2ee16915059658cbeff4b1b43bf4",
+      "wheels/jinja2-3.1.6-py3-none-any.whl": "85ece4451f492d0c13c5dd7c13a64681a86afae63a5f347908daf103ce6d2f67",
+      "wheels/jiter-0.10.0-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": "2e2227db6ba93cb3e2bf67c87e594adde0609f146344e8207e8730364db27041",
+      "wheels/joblib-1.5.2-py3-none-any.whl": "4e1f0bdbb987e6d843c70cf43714cb276623def372df3c22fe5266b2670bc241",
+      "wheels/lxml-6.0.1-cp313-cp313-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl": "1bce45a2c32032afddbd84ed8ab092130649acb935536ef7a9559636ce7ffd4a",
+      "wheels/mpmath-1.3.0-py3-none-any.whl": "a0b2b9fe80bbcd81a6647ff13108738cfb482d481d826cc0e02f5b35e5c88d2c",
+      "wheels/networkx-3.5-py3-none-any.whl": "0030d386a9a06dee3565298b4a734b68589749a544acbb6c412dc9e2489ec6ec",
+      "wheels/nltk-3.9.1-py3-none-any.whl": "4fa26829c5b00715afe3061398a8989dc643b92ce7dd93fb4585a70930d168a1",
+      "wheels/numpy-2.2.6-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": "1bc23a79bfabc5d056d106f9befb8d50c31ced2fbc70eedb8155aec74a45798f",
+      "wheels/openai-1.107.0-py3-none-any.whl": "3dcfa3cbb116bd6924b27913b8da28c4a787379ff60049588547a1013e6d6438",
+      "wheels/packaging-25.0-py3-none-any.whl": "29572ef2b1f17581046b3a2227d5c611fb25ec70ca1ba8554b24b0e69331a484",
+      "wheels/pandas-2.3.2-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": "4ac8c320bded4718b298281339c1a50fb00a6ba78cb2a63521c39bec95b0209b",
+      "wheels/portalocker-3.2.0-py3-none-any.whl": "3cdc5f565312224bc570c49337bd21428bba0ef363bbcf58b9ef4a9f11779968",
+      "wheels/pydantic-2.11.7-py3-none-any.whl": "dde5df002701f6de26248661f6835bbe296a47bf73990135c7d07ce741b9623b",
+      "wheels/pydantic_core-2.33.2-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": "9fdac5d6ffa1b5a83bca06ffe7583f5576555e6c8b3a91fbd25ea7780f825f7d",
+      "wheels/python_dateutil-2.9.0.post0-py2.py3-none-any.whl": "a8b2bc7bffae282281c8140a97d3aa9c14da0b136dfe83f850eea9a5f7470427",
+      "wheels/pytz-2025.2-py2.py3-none-any.whl": "5ddf76296dd8c44c26eb8f4b6f35488f3ccbf6fbbd7adee0b7262d43f0ec2f00",
+      "wheels/regex-2025.9.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl": "09a41dc039e1c97d3c2ed3e26523f748e58c4de3ea7a31f95e1cf9ff973fff5a",
+      "wheels/requests-2.32.5-py3-none-any.whl": "2462f94637a34fd532264295e186976db0f5d453d1cdd31473c85a6a161affb6",
+      "wheels/rouge_score-0.1.2-py3-none-any.whl": "bab5e3cb074d16e6e0968044d54816798caee21c69c543be381166cb8092fa0e",
+      "wheels/sacrebleu-2.5.1-py3-none-any.whl": "7c9f7ee75bec3a5bf19dd87112dfd654952130e403ad30c48298fb7da3212d5d",
+      "wheels/safetensors-0.6.2-cp38-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": "8045db2c872db8f4cbe3faa0495932d89c38c899c603f21e9b6486951a5ecb8f",
+      "wheels/setuptools-79.0.1-py3-none-any.whl": "e147c0549f27767ba362f9da434eab9c5dc0045d5304feb602a0af001089fc51",
+      "wheels/six-1.17.0-py2.py3-none-any.whl": "4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274",
+      "wheels/sniffio-1.3.1-py3-none-any.whl": "2f6da418d1f1e0fddd844478f41680e794e6051915791a034ff65e5f100525a2",
+      "wheels/sympy-1.14.0-py3-none-any.whl": "e091cc3e99d2141a0ba2847328f5479b05d94a6635cb96148ccb3f34671bd8f5",
+      "wheels/tabulate-0.9.0-py3-none-any.whl": "024ca478df22e9340661486f85298cff5f6dcdba14f3813e8830015b9ed1948f",
+      "wheels/tokenizers-0.22.0-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": "a89264e26f63c449d8cded9061adea7b5de53ba2346fc7e87311f7e4117c1cc8",
+      "wheels/torch-2.7.1+cpu-cp313-cp313-manylinux_2_28_x86_64.whl": "84ea1f6a1d15663037d01b121d6e33bb9da3c90af8e069e5072c30f413455a57",
+      "wheels/tqdm-4.67.1-py3-none-any.whl": "26445eca388f82e72884e0d580d5464cd801a3ea01e63e5601bdff9ba6a48de2",
+      "wheels/transformers-4.56.1-py3-none-any.whl": "1697af6addfb6ddbce9618b763f4b52d5a756f6da4899ffd1b4febf58b779248",
+      "wheels/truststore-0.10.4-py3-none-any.whl": "adaeaecf1cbb5f4de3b1959b42d41f6fab57b2b1666adb59e89cb0b53361d981",
+      "wheels/typing_extensions-4.15.0-py3-none-any.whl": "f0fa19c6845758ab08074a0cfa8b7aecb71c999ca73d62883bc25cc018c4e548",
+      "wheels/typing_inspection-0.4.1-py3-none-any.whl": "389055682238f53b04f7badcb49b989835495a96700ced5dab2d8feae4b26f51",
+      "wheels/tzdata-2025.2-py2.py3-none-any.whl": "1a403fada01ff9221ca8044d701868fa132215d84beb92242d9acd2147f667a8",
+      "wheels/urllib3-2.5.0-py3-none-any.whl": "e6b01673c0fa6a13e374b50871808eb3bf7046c4b125b216f6bf1cc604cff0dc"
+    },
+    "format": "buddha.review.nb02c3b-cpu-build-context.v1",
+    "rouge_receipt": "runs\\reference-linux-nb02c3b\\cpu\\build-results\\29baee26912f452b9691bc35997f43bd\\summary.json",
+    "source_manifest_sha256": "7a83b877580fdebcbab8e863b6c637b5847c9c9c662240bab8037ce739103d93",
+    "wheel_count": 57
+  },
+  "earlier_observations": [
+    {
+      "phase": "build attempt1",
+      "receipt": "build-result.json",
+      "result": "Buildx unavailable under empty fresh client config; no image built"
+    },
+    {
+      "phase": "build preparation2",
+      "receipt": "preparation-attempt-v2.json",
+      "result": "component hard-link guard mistakenly used on installed host tool; stopped before build"
+    },
+    {
+      "final_receipt": "installed-audit-v2.json",
+      "phase": "first fresh installed audit export",
+      "result": "audit and owned cleanup passed; public JSON report export failed on private bytes; fresh corrected rerun passed"
+    }
+  ],
+  "format": "buddha.review.nb02c3b-installed-cpu.v1",
+  "fresh_audit": {
+    "driver_sha256": "051febe4edc042dd70c93d4c9e66fae3598a38869fa49a93c39d6db76106a644",
+    "execution": {
+      "cleanup_status": "removed",
+      "configuration": {
+        "engine_endpoint_sha256": "30341252ca9aa2b298da11cd8527fdfbf8ab30a2f3b5a3c871188c778b20af30",
+        "host": {
+          "CapDrop": [
+            "ALL"
+          ],
+          "CgroupnsMode": "private",
+          "IpcMode": "none",
+          "LogConfig": {
+            "Config": {},
+            "Type": "none"
+          },
+          "Memory": 1073741824,
+          "MemorySwap": 1073741824,
+          "NanoCpus": 1000000000,
+          "NetworkMode": "none",
+          "PidMode": "",
+          "PidsLimit": 32,
+          "Privileged": false,
+          "ReadonlyRootfs": true,
+          "SecurityOpt": [
+            "no-new-privileges:true"
+          ],
+          "Tmpfs": {
+            "/scratch": "rw,size=128m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700",
+            "/tmp": "rw,size=16m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700"
+          },
+          "UTSMode": ""
+        },
+        "image": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+        "mounts": {
+          "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reference-linux-nb02c3b\\cpu-image-v1\\installed-audit-xsro5p3y"
+        },
+        "role": "evaluator"
+      },
+      "container_id": "2734f6c4748a8f0ad19ea41fa9aa5f32e99a1d9bab20ea22087e0b5952a7f10b",
+      "elapsed_seconds": 4.391558500006795,
+      "exit_code": 0,
+      "frame_count": 2,
+      "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 8799377
+    },
+    "installed": {
+      "bytes": 8799208,
+      "path": "runs/reviews/nb02c3b-runtime-installed.json",
+      "sha256": "b6b8ab4d349926577905b95b0784c622d6e443f34ea2b73625e09e72b497cf4b"
+    },
+    "manifest": {
+      "bytes": 8799208,
+      "fresh_identical": true,
+      "sha256": "b6b8ab4d349926577905b95b0784c622d6e443f34ea2b73625e09e72b497cf4b",
+      "type": "manifest"
+    },
+    "wrapper_sha256": "8dee08954d13d233d177a179ee8289a39b4dc9a15776d4c6477c0ae64f61370f"
+  },
+  "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+  "input_receipts": {
+    "runs\\reference-linux-nb02c3b\\cpu-image-v1\\receipts\\build-command-v2.json": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "runs\\reference-linux-nb02c3b\\cpu-image-v1\\receipts\\build-command-v3.json": {
+      "bytes": 1602,
+      "sha256": "26263f91310ee2dd29589102d51e7f6e58d1e70db863c42e604054d01df5820c"
+    },
+    "runs\\reference-linux-nb02c3b\\cpu-image-v1\\receipts\\build-command.json": {
+      "bytes": 1233,
+      "sha256": "5494113c89761192ce8ac517c3c8d8f6c7a22856593344497f146c56f6959819"
+    },
+    "runs\\reference-linux-nb02c3b\\cpu-image-v1\\receipts\\build-result-v3.json": {
+      "bytes": 127,
+      "sha256": "3894011cba8dde3dcd0f1d7cf3a0623597e0b7e616576d5e481b6cc730113c46"
+    },
+    "runs\\reference-linux-nb02c3b\\cpu-image-v1\\receipts\\build-result.json": {
+      "bytes": 127,
+      "sha256": "913a2af5306a8ccc82f85a7a17c6e55954a86e2a5621b5cbe443ba2ec1b81a64"
+    },
+    "runs\\reference-linux-nb02c3b\\cpu-image-v1\\receipts\\context.json": {
+      "bytes": 7925,
+      "sha256": "06c9226a07ee867286a5e30c24be6ce2b9e38a657014b2ee2727b2a93e78c819"
+    },
+    "runs\\reference-linux-nb02c3b\\cpu-image-v1\\receipts\\image-inspect.json": {
+      "bytes": 2584,
+      "sha256": "a2c8864df10cc4e08b798f7339f8cf7b8e8be6f1b48d3d76b3f641ee9122b058"
+    },
+    "runs\\reference-linux-nb02c3b\\cpu-image-v1\\receipts\\installed-audit-v2.json": {
+      "bytes": 2140,
+      "sha256": "f780bf8ab517199250d70997d0ff6e77b34ecd5936af41a8a62412f25f116bd6"
+    },
+    "runs\\reference-linux-nb02c3b\\cpu-image-v1\\receipts\\preparation-attempt-v2.json": {
+      "bytes": 229,
+      "sha256": "3a5792f8d35957aa4a67640595c80d719fe4d0b467aa33e3bd8962d245ac54dd"
+    }
+  },
+  "paid_provider_calls": 0,
+  "scope": "Actual isolated private CPU evaluator image and installed byte inventory, not full native partition parity, general dependency clearance or distribution approval",
+  "successful_build": {
+    "argv": [
+      "C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.EXE",
+      "--config",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\reference-linux-nb02c3b\\cpu-image-v1\\docker-client",
+      "--host",
+      "npipe:////./pipe/dockerDesktopLinuxEngine",
+      "build",
+      "--network=none",
+      "--platform=linux/amd64",
+      "--pull=false",
+      "--progress=plain",
+      "--tag=buddha-nb-runtime:nb02c3b-cpu-v1",
+      "--iidfile=C:\\Users\\arvik\\code\\buddha\\runs\\reference-linux-nb02c3b\\cpu-image-v1\\receipts\\image-id-v3.txt",
+      "--build-arg=http_proxy=",
+      "--build-arg=HTTP_PROXY=",
+      "--build-arg=https_proxy=",
+      "--build-arg=HTTPS_PROXY=",
+      "--build-arg=ftp_proxy=",
+      "--build-arg=FTP_PROXY=",
+      "--build-arg=all_proxy=",
+      "--build-arg=ALL_PROXY=",
+      "--build-arg=no_proxy=",
+      "--build-arg=NO_PROXY=",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\reference-linux-nb02c3b\\cpu-image-v1\\context"
+    ],
+    "client_config": {
+      "cliPluginsExtraDirs": [
+        "C:\\Program Files\\Docker\\Docker\\resources\\cli-plugins"
+      ]
+    },
+    "client_config_sha256": "3dbc8c4713dba0b720824fde4fe2faff1434334408697f8a39c1922b1bb80517",
+    "context_sha256": "06c9226a07ee867286a5e30c24be6ce2b9e38a657014b2ee2727b2a93e78c819",
+    "env_names": [
+      "COMSPEC",
+      "DOCKER_BUILDKIT",
+      "PATH",
+      "PATHEXT",
+      "SYSTEMDRIVE",
+      "SYSTEMROOT",
+      "TEMP",
+      "TMP",
+      "WINDIR"
+    ],
+    "no_auth_proxy_headers_config": true,
+    "no_ssh_or_secret_mount": true,
+    "plugin_host_tool_link_count": 2,
+    "plugin_sha256": "644979c56508c20262adb51958dc61c99863812da90c4872f966b332f994c934"
+  }
+}

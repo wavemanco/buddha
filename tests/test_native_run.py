@@ -315,6 +315,96 @@ class NativeSessionTests(unittest.TestCase):
         }
         self.assertIsNone(session.handle({"type": "ready", "aliases": [], "audit": audit}))
 
+    def test_derived_class_audit_requires_the_exact_sealed_declaration(self):
+        environment = self.worker["inventories"]["environment"]
+        environment["derived_modules"] = {
+            "fixture.derived": {
+                "kind": "class",
+                "module": "fixture.owner",
+                "qualname": "Derived",
+                "owner": "lib/python3.13/site-packages/fixture.py",
+            }
+        }
+        entry = {
+            "kind": "image-derived-class",
+            "module": "fixture.owner",
+            "qualname": "Derived",
+            "owner": {
+                "kind": "environment",
+                "path": "/opt/venv/lib/python3.13/site-packages/fixture.py",
+                "sha256": "f" * 64,
+            },
+        }
+        for mutation in (None, "module", "qualname", "owner", "undeclared"):
+            with self.subTest(mutation=mutation):
+                self.freeze()
+                session = self.session()
+                audit = self.audit() | {"fixture.derived": copy.deepcopy(entry)}
+                if mutation in {"module", "qualname"}:
+                    audit["fixture.derived"][mutation] = "Impostor"
+                elif mutation == "owner":
+                    audit["fixture.derived"]["owner"]["sha256"] = "0" * 64
+                elif mutation == "undeclared":
+                    audit["undeclared"] = audit.pop("fixture.derived")
+                if mutation is None:
+                    self.assertIsNone(
+                        session.handle({"type": "ready", "aliases": [], "audit": audit})
+                    )
+                else:
+                    with self.assertRaises(NativeRunError):
+                        session.handle({"type": "ready", "aliases": [], "audit": audit})
+        self.assertEqual(self.fixture.authority.summary()["operation_count"], 0)
+
+    def test_derived_source_audit_requires_exact_hash_private_root_basename_and_owners(self):
+        environment = self.worker["inventories"]["environment"]
+        environment["derived_modules"] = {
+            "fixture.generated": {
+                "kind": "source",
+                "root": "/tmp",
+                "basename": "generated.py",
+                "sha256": "a" * 64,
+                "owners": ["lib/python3.13/site-packages/fixture.py"],
+            }
+        }
+        entry = {
+            "kind": "image-derived-source",
+            "path": "/tmp/private/generated.py",
+            "sha256": "a" * 64,
+            "owners": [
+                {
+                    "kind": "environment",
+                    "path": "/opt/venv/lib/python3.13/site-packages/fixture.py",
+                    "sha256": "f" * 64,
+                }
+            ],
+        }
+        for mutation in (None, "hash", "root", "basename", "escape", "owner", "extra"):
+            with self.subTest(mutation=mutation):
+                self.freeze()
+                session = self.session()
+                audit = self.audit() | {"fixture.generated": copy.deepcopy(entry)}
+                generated = audit["fixture.generated"]
+                if mutation == "hash":
+                    generated["sha256"] = "0" * 64
+                elif mutation == "root":
+                    generated["path"] = "/official/private/generated.py"
+                elif mutation == "basename":
+                    generated["path"] = "/tmp/private/different.py"
+                elif mutation == "escape":
+                    generated["path"] = "/tmp/../elsewhere/generated.py"
+                elif mutation == "owner":
+                    generated["owners"][0]["sha256"] = "0" * 64
+                elif mutation == "extra":
+                    generated["owners"].append(copy.deepcopy(generated["owners"][0]))
+                if mutation is None:
+                    self.assertIsNone(
+                        session.handle({"type": "ready", "aliases": [], "audit": audit})
+                    )
+                else:
+                    with self.assertRaises(NativeRunError):
+                        session.handle({"type": "ready", "aliases": [], "audit": audit})
+        self.assertEqual(self.fixture.authority.summary()["operation_count"], 0)
+
     def test_ready_rejects_namespace_path_without_any_selected_inventory(self):
         session = self.session()
         audit = self.audit()

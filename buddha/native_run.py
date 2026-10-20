@@ -334,17 +334,65 @@ class NativeSession:
                 expected[path] = "sdk:" + _text(entry["provider"])
         return expected
 
+    def _derived_audit(self, name: str, entry: dict[str, object], env: dict[str, object]) -> None:
+        declarations = _object(env.get("derived_modules", {}))
+        declaration = _object(declarations.get(name))
+
+        def owner(relative: object) -> dict[str, object]:
+            path = _path(relative)
+            digest = _digest(_object(_object(env["inventory"]).get(path)).get("sha256"))
+            return {"kind": "environment", "path": "/opt/venv/" + path, "sha256": digest}
+
+        if entry["kind"] == "image-derived-class":
+            _object(entry, {"kind", "module", "qualname", "owner"})
+            _object(declaration, {"kind", "module", "qualname", "owner"})
+            if (
+                declaration["kind"] != "class"
+                or _text(entry["module"]) != _text(declaration["module"])
+                or _text(entry["qualname"]) != _text(declaration["qualname"])
+                or any(not part.isidentifier() for part in _text(entry["qualname"]).split("."))
+                or entry["owner"] != owner(declaration["owner"])
+            ):
+                raise NativeRunError("derived native class differs from its owner")
+            return
+        _object(entry, {"kind", "path", "sha256", "owners"})
+        _object(declaration, {"kind", "root", "basename", "sha256", "owners"})
+        path = PurePosixPath(_text(entry["path"]))
+        root, basename = _text(declaration["root"]), _path(declaration["basename"])
+        owners = declaration["owners"]
+        if (
+            declaration["kind"] != "source"
+            or root not in {executor.CONTAINER_TMP, "/scratch"}
+            or not path.is_absolute()
+            or ".." in path.parts
+            or str(path) != entry["path"]
+            or not path.is_relative_to(root)
+            or PurePosixPath(basename).name != basename
+            or path.name != basename
+            or _digest(entry["sha256"]) != _digest(declaration["sha256"])
+            or type(owners) is not list
+            or not 0 < len(owners) <= 128
+        ):
+            raise NativeRunError("generated native source differs from its owner")
+        names = [_path(item) for item in owners]
+        if len(names) != len(set(names)) or entry["owners"] != [owner(item) for item in names]:
+            raise NativeRunError("generated native source has different sealed owners")
+
     def _audit(self, value: object, *, require_command: bool = True) -> str:
         audit = _object(value)
         if not audit or len(audit) > 100000:
             raise NativeRunError("native import audit is unavailable")
         env = _object(self.inventories["environment"])
+        if len(_object(env.get("derived_modules", {}))) > 128:
+            raise NativeRunError("too many derived module declarations")
         for name, raw in audit.items():
             _text(name)
             entry = _object(raw)
             kind = entry.get("kind")
             if kind in {"built-in", "frozen"}:
                 _object(entry, {"kind"})
+            elif kind in {"image-derived-class", "image-derived-source"}:
+                self._derived_audit(name, entry, env)
             elif kind == "image-synthetic":
                 if name not in cast(list[object], env.get("synthetic_modules", [])) or set(
                     entry

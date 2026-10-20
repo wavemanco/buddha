@@ -1,0 +1,200 @@
+{
+  "checks": {
+    "application_bandit": "pass; no findings; suppression parser warnings retained",
+    "application_runtime_pip_audit": "pass; no known vulnerabilities in core requirements; does not clear the separately reviewed ML evaluator environment",
+    "compile": "pass",
+    "engineering_helpers_bandit": {
+      "errors": 0,
+      "findings": 41,
+      "fixture_assertions": 35,
+      "log": "runs/reviews/nb02c3b-engineering-bandit-final.json",
+      "reviewed_trusted_source_exec": 2,
+      "reviewed_typed_subprocess_findings": 4,
+      "scope": "Research helpers are not claimed clean; trusted compile/exec binds consumed engineering bytes and typed subprocesses run the reviewed owned build"
+    },
+    "git_diff_check": "pass",
+    "ruff_format": "pass;63 application/test files and six new engineering helpers",
+    "ruff_lint": "pass; application/tests and six new engineering helpers",
+    "strict_mypy": "pass;27 application modules; explicit linux and win32"
+  },
+  "ci": {
+    "scope": "Hosted Windows/Linux results must be observed for the published commit; local Windows verification is separate",
+    "status": "pending publication"
+  },
+  "date": "2026-10-20",
+  "evidence": {
+    "nb02c3b-cpu-advisories.json": {
+      "bytes": 323152,
+      "sha256": "81dbca9f15e99d174adb46b11076c77b49453d80ce7b9dc1cb807a15fbf019ad"
+    },
+    "nb02c3b-cpu-bundled-advisories.json": {
+      "bytes": 30363,
+      "sha256": "bf6110f71e5088677ed871db18eed18b5cdcf8faa0cd86cda7f89c78e6540765"
+    },
+    "nb02c3b-cpu-prepare.py": {
+      "bytes": 12244,
+      "sha256": "8e2a58261f79e8606bc8730c1b68fdf4347148aed5610cc819991d6b602ae8bb"
+    },
+    "nb02c3b-cpu-requirements.txt": {
+      "bytes": 5461,
+      "sha256": "ee91268b9adc20159fd79f8fa7f57208ff91842e706f3b21774e9c50a8f1f482"
+    },
+    "nb02c3b-cpu-review.md": {
+      "bytes": 13817,
+      "sha256": "77f9b4047eab97f5fb8f287e3d35bd9dd4f7cbe592937b761efb20530ea951d7"
+    },
+    "nb02c3b-cpu-wheels.json": {
+      "bytes": 136778,
+      "sha256": "7a83b877580fdebcbab8e863b6c637b5847c9c9c662240bab8037ce739103d93"
+    },
+    "nb02c3b-direct-worker.py": {
+      "bytes": 6413,
+      "sha256": "4a666e511387566738c65826717ea9f40fb54ed1ba4d7d28347a7a264d40c543"
+    },
+    "nb02c3b-funded-native-evidence.json": {
+      "bytes": 585866,
+      "sha256": "260e3396983b01ba6333d5e5bac7f41e45685eb51f342593c376558fa8d26205"
+    },
+    "nb02c3b-funded-native-probe.py": {
+      "bytes": 27517,
+      "sha256": "0ca3605b2be6fb989682e22c3ba8c3a7873cbf7bdf698c86ec36dffdcbda62f6"
+    },
+    "nb02c3b-import-evidence.json": {
+      "bytes": 8951,
+      "sha256": "72814c71cc7858e9439425b6e5c537fc62067a185f4789ebd607f5316c3a9ca6"
+    },
+    "nb02c3b-installed-runtime-evidence.json": {
+      "bytes": 15021,
+      "sha256": "3bbf9f5158065abba38977182b7f76a2818a569c73382f3bf41e94d2070e90d4"
+    },
+    "nb02c3b-rouge-build-evidence.json": {
+      "bytes": 248651,
+      "sha256": "138cad7e99153c6bbc610eb09c38cdacd9e2b5b38ba569154ee85d179463dc5a"
+    },
+    "nb02c3b-rouge-build-worker.py": {
+      "bytes": 9680,
+      "sha256": "b79ba7d48022c3538f6307c41c4a3c52c577e97489af512a38888f55cdf11bab"
+    },
+    "nb02c3b-rouge-build.json": {
+      "bytes": 5472,
+      "sha256": "8b98bc94dbfb425921451e408cc64e91061f3b9e84aa40aa8c32c1dcd02606f7"
+    },
+    "nb02c3b-rouge-build.py": {
+      "bytes": 21882,
+      "sha256": "7340aae3684d334cdb66746c4e7a9d5d3547e50f4f35c71187d2772aae2c5671"
+    },
+    "nb02c3b-runtime-advisories.json": {
+      "bytes": 327722,
+      "sha256": "be9bd1fcb1b9a9187ecdd9b355e49d5909669258dc3d7c3eab7f0d06740d3a77"
+    },
+    "nb02c3b-runtime-environment.json": {
+      "bytes": 6809,
+      "sha256": "90e905e2fc381e62adc0553a8e195b7d120886fa597743297e5032dbbfd0eedf"
+    },
+    "nb02c3b-runtime-prepare.py": {
+      "bytes": 21871,
+      "sha256": "aeed1d41ef1c47e3b665c767cbd7b2b971bdb98513d4e6aa5d46f7354b7058bf"
+    },
+    "nb02c3b-runtime-requirements.txt": {
+      "bytes": 7072,
+      "sha256": "c97223ac8937d444711fa157cbce86ec640d7bd784fc78f41dd25ab3ea5f56ee"
+    },
+    "nb02c3b-runtime-review.md": {
+      "bytes": 7867,
+      "sha256": "2b22d32c2bdb27a660f496621426d93f231982301827dfe6fab2c459a3ed5f2b"
+    },
+    "nb02c3b-runtime-wheels.json": {
+      "bytes": 156054,
+      "sha256": "3a4f480e9b09d60282c9987aa9dc19c2b1c85bcd839a41f5340d7f72598f2746"
+    },
+    "nb02c3b-score-regression-evidence.json": {
+      "bytes": 275922,
+      "sha256": "d0db5372b06a082cff01ee5cc9c58419f46f92983bea0a4daed8e0c221b8a379"
+    },
+    "nb02c3b-security-review.md": {
+      "bytes": 40960,
+      "sha256": "0734d097922f13903a86d08bb8c63494256805bff85e6925bcb0680a1341d7ae"
+    }
+  },
+  "format": "buddha.review.nb02c3b-delivery.v1",
+  "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+  "limits": [
+    "LLM-only full official command; no classifier/NLI/model downloads, arbitrary agents or source-evolution execution in the CPU evaluator image",
+    "Official source/SDK versions fixed; Torch same-version CPU binary and explicit AnyIO overlay are distinct from exact upstream binary-lock equivalence",
+    "Known top-level/bundled advisories, GNU notice/component gaps and no distribution approval retained in independent review",
+    "Runtime environment JSON retains its actual preparation-stage metadata; later import/full-command results are separately sealed rather than rewriting the tested descriptor",
+    "Six uncertain usage/timeout/503 cases stop after one held attempt; direct SDK HTTP503 retry counts differ explicitly for financial safety",
+    "Literal native results are separate from coverage/promotion and semantic assessment; persistent-invalid official fold can fill missing answers as singleton classes",
+    "Direct and funded normalized JSONL typed-ID row order only; no arbitrary scheduling/network timing/cancellation request-count parity claim",
+    "Trusted local Docker/OS/image owner; no malicious-daemon, virtual-machine or whole-OS security claim; synchronous accounting finalization not bounded by worker wall time",
+    "C1 source-population derivation, frozen agent generation, composed upgrades/retirement, native live readiness and scientific/source-evolution claims remain open",
+    "Reusable research probe retains sealed C3A helpers and both installed-audit JSON prerequisites; production never imports those engineering helpers"
+  ],
+  "local_tests": {
+    "full": {
+      "count": 642,
+      "exit_code": 0,
+      "log": "runs/reviews/nb02c3b-full-tests-final.log",
+      "seconds": 214.6,
+      "skipped": 3
+    },
+    "import_preparation": {
+      "imported_modules": 5181,
+      "native_main_run": false,
+      "pass": true,
+      "provider_calls": 0
+    },
+    "installed_audits": {
+      "distributions": 57,
+      "independent_fresh_audit_matches": true,
+      "inventory_entries": 24043,
+      "record_files": 24033,
+      "unowned_site_packages": 0
+    },
+    "partition_oracle": {
+      "actual_provider_calls": 0,
+      "additional_checks": 7,
+      "completed_operations": 42,
+      "keyless_replay_replies": 2,
+      "mock_direct_sdk_captures": 78,
+      "mock_funded_https_attempts": 48,
+      "pass": true,
+      "real_keys_used": false,
+      "replay_new_charges": 0,
+      "replay_new_sends": 0,
+      "scenarios": 17,
+      "synthetic_reserved_microusd": 12864000,
+      "synthetic_spent_microusd": 210,
+      "unknown_operations": 6
+    },
+    "preparation_build_checks": {
+      "groups": 11,
+      "pass": true
+    },
+    "rouge_build": {
+      "failed_owned_attempts_preserved": 2,
+      "fresh_source_build_directories": 2,
+      "identical_wheel_bytes": true,
+      "independent_toolchains": false,
+      "wheel_bytes": 24987,
+      "wheel_sha256": "bab5e3cb074d16e6e0968044d54816798caee21c69c543be381166cb8092fa0e"
+    },
+    "score_summary_regression": {
+      "actual_provider_calls": 0,
+      "additional_checks": 6,
+      "pass": true,
+      "scenarios": 10
+    }
+  },
+  "new_live_allocation": false,
+  "new_paid_command": false,
+  "paid_model_calls": 0,
+  "preserved": {
+    "all_hashes_unchanged": true,
+    "original_unknown_hold_unchanged": true,
+    "pilot_runtime_zip_sha256": "bd32c4d50339e2f2e1cadf01f5872fa3c1cdf12c196e7676a18d6fe96bd534e0",
+    "protected_input_files": 287
+  },
+  "scope": "Complete unchanged official --alg llm partition CLI in owned confinement; distinct sealed CPU environment and generic derived-import guards; frozen generation/C1 population binding remains C3C",
+  "selected_upstream_commit": "64a23be6b18ec1dacc298830aab276061b6e143c"
+}
