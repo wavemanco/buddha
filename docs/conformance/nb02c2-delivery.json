@@ -1,0 +1,123 @@
+{
+  "format": "buddha.review.nb02c2-delivery.v1",
+  "date": "2026-10-20",
+  "scope": "Optional native SDK transport and real funded Gateway composition; selected native functions with mocked HTTPS, not complete CLI or OS confinement",
+  "local_tests": {
+    "full": {
+      "count": 555,
+      "seconds": 159.21,
+      "skipped": 2,
+      "exit_code": 0
+    },
+    "headers": {
+      "count": 24,
+      "seconds": 19.919,
+      "exit_code": 0
+    },
+    "wire": {
+      "count": 31,
+      "seconds": 0.007,
+      "exit_code": 0
+    },
+    "transport": {
+      "count": 11,
+      "exit_code": 0
+    },
+    "oracle": {
+      "scenarios": 30,
+      "mock_https_sends": 37,
+      "provider_network_calls": 0,
+      "completed_operations": 26,
+      "unknown_operations": 11,
+      "synthetic_spent_microusd": 130,
+      "real_keys_used": false,
+      "root_rerun_exit_code": 0
+    }
+  },
+  "checks": {
+    "ruff_lint": "pass",
+    "ruff_format": "pass; 54 files",
+    "strict_mypy": "pass; 23 runtime modules",
+    "bandit": "pass",
+    "runtime_dependency_audit": "pass; no known vulnerabilities",
+    "compile": "pass",
+    "git_diff_check": "pass"
+  },
+  "tests_first": [
+    {
+      "finding": "Unsolicited gzip after header capture interruption",
+      "observed": "one Gateway assertion failed before repair; passes after repair"
+    },
+    {
+      "finding": "Misdeclared identity, nested gzip, absent coding with complete headers",
+      "observed": "independent reviewer reproduced three retained/recoverable synthetic-key capture failures before shared guard; composed regressions now pass"
+    },
+    {
+      "finding": "SDK raw header byte type/size checked after decode",
+      "observed": "implementer observed four failing assertions before predecode guard; 11 focused transport tests now pass"
+    },
+    {
+      "finding": "Native transport module absent",
+      "observed": "initial missing-module focused failure before implementation"
+    },
+    {
+      "finding": "Profile/header v2 absent",
+      "observed": "initial 10 errors and one passing header test before implementation"
+    }
+  ],
+  "behavior": [
+    "SDK body bytes, supported semantic headers and original encoded responses preserved",
+    "Explicit reviewed header values; frozen owner account injection or matching worker copies; no alternate-account charge",
+    "Completed raw receipts replay through actual SDK/evaluator parsing without credentials or further sends/cost",
+    "Original native malformed judgment, refusal/fallback, duplicate/multiblock, length and partition fold outcomes compared directly",
+    "Both real judge SDKs configured max_retries=8 stop after one uncertain timeout/status/usage/partial request with retained hold",
+    "Native score_llm/run_cached receives frozen answer artifacts; six identical-body concurrent calls remain distinct and unknown stop escapes row handling",
+    "Bounded gzip/zlib/raw-deflate decoding preserves encoded evidence; strict incomplete/trailing coding stop explicitly differs from lenient SDK decoder",
+    "Known keys and ASCII JSON escapes screened raw and declared-decoded; opaque/misdeclared compressed bodies withheld; readable malformed provider text retained",
+    "No financial schema, legacy call representation, body or runtime-fingerprint algorithm changed"
+  ],
+  "preserved": {
+    "protected_input_files": 287,
+    "all_hashes_unchanged": true,
+    "original_unknown_hold_unchanged": true,
+    "pilot_runtime_zip_sha256": "bd32c4d50339e2f2e1cadf01f5872fa3c1cdf12c196e7676a18d6fe96bd534e0"
+  },
+  "paid_model_calls": 0,
+  "new_live_allocation": false,
+  "new_paid_command": false,
+  "reference_environment": "Preserved research SDK lock including known AnyIO advisories; fake-key blocked-network oracle only; active worker needs explicit patched/confinement decision",
+  "limits": [
+    "Original selected fixed-hash functions, explicit hooks and actual SDKs; not full official modules/CLI",
+    "Actual adapter/context/probe sources bound as invocation inputs; actual installed worker/import closure remains C3",
+    "Synthetic release/environment/profile metadata is explicitly a fixture, not an installed-lock or live billing attestation",
+    "Offline in-process admission queue with synchronous mocked HTTP; no production RPC/owned sender/cancellation cleanup proof",
+    "Python network guards are not OS confinement or worker credential exclusion",
+    "Known-key/raw/JSON-escape/declared-coding screening is not exhaustive arbitrary encoding or steganography detection",
+    "No unchanged-agent full baseline, composed new-release upgrade/retirement, scientific improvement or source evolution claim"
+  ],
+  "previous_slice_ci": {
+    "pr": 13,
+    "commit": "02c6a9122c40f2045ffe48ab4129e72ec9598fe7",
+    "pr_run": 39446930657,
+    "push_run": 39446918723,
+    "windows": "success",
+    "ubuntu": "success",
+    "pr_tests": {
+      "count": 513,
+      "windows_seconds": 438.368,
+      "ubuntu_seconds": 88.692,
+      "skips_each": 1
+    }
+  },
+  "this_slice_hosted_ci": "pending publication",
+  "source_sha256": {
+    "buddha/gateway.py": "8f6d2c08c8d41c8f4a869c30c7b9e8bbe4c40c78e0219a519dc9211c3748315b",
+    "buddha/wire.py": "48f40a71bf10c84dfd1d15f0baef50198cce8a229748355f116ad6a25cab12b4",
+    "buddha/native_transport.py": "ccd4917132939630231b8b8c69540189cd52f60951fa08d467d90b9571ccb6c0",
+    "tests/test_gateway_headers.py": "0f4a561aa1b4c5bf2dc3933e329337aff75c971c4cddafd9fbdd229310bef540",
+    "tests/test_native_transport.py": "dedc7abbd7096fb64542b1edd95257b91823d2e71eb965aacfe70a014049f590",
+    "tests/test_wire.py": "9e947c7e48af4ed270859d205e3c6435e2ec256da43287e193d453548467704d",
+    "docs/conformance/nb02c2-funded-sdk-probe.py": "1ee45bbebe39af5b2eb2e03171f9436a15571e6a3474d87523f96c5db7b32121"
+  },
+  "evidence_sha256": "41a025b0d7d2f41718aac242ab51ebdb54312b384e5c571974f29ab3d32ea505"
+}

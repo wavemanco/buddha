@@ -47,12 +47,43 @@ from buddha.releases import (
     file_hash,
     verify_selection,
 )
-from buddha.wire import HEADER_NAMES, MAX_BODY_BYTES, RawEnvelope, WireError, extract_usage
+from buddha.wire import (
+    HEADER_NAMES,
+    MAX_BODY_BYTES,
+    RawEnvelope,
+    WireError,
+    decoded_body,
+    extract_usage,
+)
 
 FORMAT = "buddha.gateway-run.v1"
 CAPABILITIES = {
     "openai.chat-completions.v1": ("openai", "api.openai.com", "/v1/chat/completions"),
     "anthropic.messages.v1": ("anthropic", "api.anthropic.com", "/v1/messages"),
+}
+FORWARD_HEADERS = frozenset(
+    {
+        "accept",
+        "accept-encoding",
+        "content-type",
+        "user-agent",
+        "anthropic-version",
+        "x-stainless-lang",
+        "x-stainless-package-version",
+        "x-stainless-os",
+        "x-stainless-arch",
+        "x-stainless-runtime",
+        "x-stainless-runtime-version",
+        "x-stainless-async",
+        "x-stainless-retry-count",
+        "x-stainless-read-timeout",
+        "x-stainless-timeout",
+        "x-stainless-helper-method",
+    }
+)
+ACCOUNT_HEADERS = {
+    "openai": frozenset({"openai-organization", "openai-project"}),
+    "anthropic": frozenset({"anthropic-workspace-id"}),
 }
 CORE = frozenset(
     {
@@ -122,19 +153,78 @@ def _texts(value: object, *, blank: bool = False) -> tuple[str, ...]:
     return result
 
 
+def _header_value(value: object) -> str:
+    text = _text(value)
+    if any(not 32 <= ord(char) <= 126 for char in text):
+        raise GatewayError("request headers require bounded printable ASCII")
+    return text
+
+
+def _headers(value: object) -> tuple[tuple[str, str], ...]:
+    if type(value) is not tuple or len(value) > 64:
+        raise GatewayError("request headers require a bounded immutable sequence")
+    result = []
+    seen = set()
+    allowed = FORWARD_HEADERS | frozenset().union(*ACCOUNT_HEADERS.values())
+    for pair in value:
+        if type(pair) is not tuple or len(pair) != 2:
+            raise GatewayError("request headers require immutable name/value pairs")
+        name = _text(pair[0]).lower()
+        if name not in allowed or name in seen:
+            raise GatewayError("unsupported or duplicate request header")
+        seen.add(name)
+        result.append((name, _header_value(pair[1])))
+    if sum(len(name) + len(text) for name, text in result) > 64 * 1024:
+        raise GatewayError("request header byte ceiling exceeded")
+    return tuple(result)
+
+
+def _profile_headers(profile: dict[str, object], provider: str) -> None:
+    forwarded = _object(profile["headers"])
+    accounts = _object(profile["account_headers"])
+    if set(forwarded) - FORWARD_HEADERS or set(accounts) - ACCOUNT_HEADERS[provider]:
+        raise GatewayError("profile declares an unsupported request header")
+    for name, values in forwarded.items():
+        for value in _texts(values):
+            _header_value(value)
+            if name == "accept-encoding" and (
+                len(value.split(",")) > 5
+                or any(
+                    item.strip().lower() not in {"identity", "gzip", "deflate"}
+                    for item in value.split(",")
+                )
+            ):
+                raise GatewayError("profile declares unsupported content coding")
+            if name == "anthropic-version" and (provider != "anthropic" or value != "2023-06-01"):
+                raise GatewayError("profile declares an unsupported Anthropic protocol")
+            if name == "content-type" and value.lower() not in {
+                "application/json",
+                "application/json; charset=utf-8",
+            }:
+                raise GatewayError("profile must send JSON content")
+    for account_value in accounts.values():
+        _header_value(account_value)
+
+
 def _profile_file(value: object) -> dict[str, object]:
     record = _object(value, {"format", "profiles"})
-    if record["format"] != "buddha.gateway-profiles.v1":
+    if _text(record["format"]) not in {"buddha.gateway-profiles.v1", "buddha.gateway-profiles.v2"}:
         raise GatewayError("unsupported gateway profile file")
     profiles = _object(record["profiles"])
     if not 1 <= len(profiles) <= 128:
         raise GatewayError("expected a bounded nonempty profile map")
     for name, raw in profiles.items():
         _text(name)
-        profile = _object(
-            raw,
-            {"spec", "response_models", "request_tiers", "response_tiers", "allow_omitted_tier"},
-        )
+        fields = {
+            "spec",
+            "response_models",
+            "request_tiers",
+            "response_tiers",
+            "allow_omitted_tier",
+        }
+        if record["format"] == "buddha.gateway-profiles.v2":
+            fields |= {"headers", "account_headers"}
+        profile = _object(raw, fields)
         spec = _spec(profile["spec"])
         if spec.provider not in {"openai", "anthropic"}:
             raise GatewayError("a gateway profile requires a supported HTTP provider")
@@ -143,6 +233,8 @@ def _profile_file(value: object) -> dict[str, object]:
         _texts(profile["response_tiers"], blank=True)
         if type(profile["allow_omitted_tier"]) is not bool:
             raise GatewayError("omitted-tier permission must be boolean")
+        if "headers" in profile:
+            _profile_headers(profile, spec.provider)
     return record
 
 
@@ -434,6 +526,7 @@ class GatewayCall:
     logical_id: str
     attempt: int
     body: bytes = field(repr=False)
+    headers: tuple[tuple[str, str], ...] = field(default=(), repr=False)
 
     @_checked
     def __post_init__(self) -> None:
@@ -445,15 +538,36 @@ class GatewayCall:
         if type(self.body) is not bytes or len(self.body) > MAX_BODY_BYTES:
             raise GatewayError("request must contain bounded immutable bytes")
         _load(self.body)
+        object.__setattr__(self, "headers", _headers(self.headers))
 
     def to_record(self) -> dict[str, object]:
-        return {
+        record: dict[str, object] = {
             "capability": self.capability,
             "profile_id": self.profile_id,
             "logical_id": self.logical_id,
             "attempt": self.attempt,
             "body_base64": base64.b64encode(self.body).decode("ascii"),
         }
+        if self.headers:
+            record["headers"] = [list(pair) for pair in self.headers]
+        return record
+
+
+def _selected_headers(call: GatewayCall, profile: dict[str, object]) -> tuple[tuple[str, str], ...]:
+    permitted = _object(profile.get("headers", {}))
+    accounts = _object(profile.get("account_headers", {}))
+    submitted = dict(call.headers)
+    for name, value in call.headers:
+        if name in accounts:
+            if value != accounts[name]:
+                raise GatewayError("request account differs from the frozen owner")
+        elif name not in permitted or value not in _texts(permitted[name]):
+            raise GatewayError("request header differs from its reviewed profile")
+        if name == "x-stainless-retry-count" and value != str(call.attempt):
+            raise GatewayError("SDK retry count differs from the physical identity")
+    return call.headers + tuple(
+        (name, _text(value)) for name, value in accounts.items() if name not in submitted
+    )
 
 
 def _request_spec(call: GatewayCall, profile: dict[str, object]) -> ModelSpec:
@@ -575,6 +689,7 @@ def _capture(
     secrets: tuple[str, ...],
     truncated: bool,
     headers_complete: bool,
+    compression_requested: bool = False,
 ) -> RawEnvelope:
     withheld = any(
         _contains_secret(raw, key)
@@ -583,6 +698,42 @@ def _capture(
         )
         for key in secrets
     )
+    try:
+        captured = RawEnvelope(
+            provider,
+            status,
+            raw[:MAX_BODY_BYTES],
+            headers,
+            truncated=truncated,
+            headers_complete=headers_complete,
+        )
+    except WireError:
+        captured = RawEnvelope(
+            provider, status, raw[:MAX_BODY_BYTES], (), truncated=truncated, headers_complete=False
+        )
+    if not captured.headers_complete:
+        if compression_requested:
+            withheld = True
+        else:
+            try:
+                # Without coding metadata, retain only verifiable plain JSON.
+                _load(raw)
+            except ReleaseError:
+                withheld = True
+    decoded = raw
+    if any(name == "content-encoding" for name, _ in headers):
+        try:
+            decoded = decoded_body(captured)
+        except WireError:
+            # Unscreenable encoded bytes may contain a recoverable credential.
+            withheld = True
+    try:
+        decoded.decode("utf-8")
+        if re.search(rb"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]", decoded):
+            withheld = True
+    except UnicodeError:
+        withheld = True
+    withheld |= any(_contains_secret(decoded, key) for key in secrets)
     if withheld:
         return RawEnvelope(
             provider,
@@ -592,21 +743,9 @@ def _capture(
             truncated,
             True,
             hashlib.sha256(raw).hexdigest(),
-            headers_complete=headers_complete,
+            headers_complete=captured.headers_complete,
         )
-    try:
-        return RawEnvelope(
-            provider,
-            status,
-            raw[:MAX_BODY_BYTES],
-            headers,
-            truncated=truncated,
-            headers_complete=headers_complete,
-        )
-    except WireError:
-        return RawEnvelope(
-            provider, status, raw[:MAX_BODY_BYTES], (), truncated=truncated, headers_complete=False
-        )
+    return captured
 
 
 class RawHTTPTransport:
@@ -630,13 +769,22 @@ class RawHTTPTransport:
             raise GatewayError("provider credential is missing or invalid")
         if hashlib.sha256(key.encode()).hexdigest() != review_fingerprint:
             raise GatewayError("provider credential differs from the reviewed account binding")
-        if any(_contains_secret(call.body, value) for value in _secrets(key)):
+        header_bytes = b"\n".join(
+            name.encode() + b":" + value.encode() for name, value in call.headers
+        )
+        if any(
+            _contains_secret(call.body, value) or _contains_secret(header_bytes, value)
+            for value in _secrets(key)
+        ):
             raise GatewayError("request contains the provider credential; nothing was sent")
-        headers = {"Content-Type": "application/json"}
+        headers = dict(call.headers)
+        if "content-type" not in headers:
+            headers["Content-Type"] = "application/json"
         if provider == "openai":
             headers["Authorization"] = "Bearer " + key
         else:
-            headers |= {"x-api-key": key, "anthropic-version": "2023-06-01"}
+            headers["x-api-key"] = key
+            headers.setdefault("anthropic-version", "2023-06-01")
         try:
             connection = http.client.HTTPSConnection(host, timeout=self.timeout_seconds)
         except Exception:
@@ -649,6 +797,11 @@ class RawHTTPTransport:
             "x-api-key", ""
         )
         secrets = _secrets(key)
+        compression_requested = any(
+            name.lower() == "accept-encoding"
+            and any(token.strip().lower() != "identity" for token in value.split(","))
+            for name, value in prepared.headers
+        )
         raw: bytes | None = None
         selected: tuple[tuple[str, str], ...] = ()
         truncated = False
@@ -676,6 +829,7 @@ class RawHTTPTransport:
                 secrets=secrets,
                 truncated=truncated,
                 headers_complete=True,
+                compression_requested=compression_requested,
             )
         except BaseException as error:
             if raw is not None:
@@ -687,6 +841,7 @@ class RawHTTPTransport:
                     secrets=secrets,
                     truncated=truncated,
                     headers_complete=headers_complete,
+                    compression_requested=compression_requested,
                 )
                 raise ReceivedReply(envelope, error) from None
             if isinstance(error, (KeyboardInterrupt, SystemExit)):
@@ -732,6 +887,7 @@ class Gateway:
         profiles = _object(_object(current["profiles"]).get(call.capability))
         profile = _object(_object(profiles["profiles"]).get(call.profile_id))
         spec = _request_spec(call, profile)
+        headers = _selected_headers(call, profile)
         operation_id = self.operation_id(call)
         request_hash = _sha(
             [
@@ -778,7 +934,7 @@ class Gateway:
             raise PendingOperation("attempt may already be billed; no automatic retry")
         reviewed = _object(_object(current["review"])["credential_sha256"])
         prepared = self.transport.prepare(
-            operation_id, call, spec, _text(reviewed.get(spec.provider))
+            operation_id, replace(call, headers=headers), spec, _text(reviewed.get(spec.provider))
         )
         try:
             if not self.ledger.dispatch(operation_id):

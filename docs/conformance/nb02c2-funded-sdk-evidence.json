@@ -1,0 +1,3406 @@
+{
+  "actual_api_keys_used": false,
+  "commit": "64a23be6b18ec1dacc298830aab276061b6e143c",
+  "format": "buddha.review.nb02c2-funded-sdk.v1",
+  "invocation_source_sha256": {
+    "buddha\\answers.py": "be860546b2692ea4a710d93855f487dd49d9c8e28eb3f2ec757df697cefb8d0b",
+    "buddha\\native_context.py": "47a488b8d731617bda21380232e5e49801e0c0b4261f69b71c24fb9eae0ba298",
+    "buddha\\native_transport.py": "ccd4917132939630231b8b8c69540189cd52f60951fa08d467d90b9571ccb6c0",
+    "docs\\conformance\\nb02c-context-probe.py": "1ae1a0e84c92b3a26167d988b9873837927b284504c4c74cae87f191839c826d",
+    "docs\\conformance\\nb02c2-funded-sdk-probe.py": "1ee45bbebe39af5b2eb2e03171f9436a15571e6a3474d87523f96c5db7b32121"
+  },
+  "limits": [
+    "selected pinned functions and explicit hooks, not complete official CLI",
+    "synthetic release/profile fixtures; no live maximum-price attestation",
+    "in-process offline shared queue; no production IPC/cancellation cleanup",
+    "Python network guard, not OS confinement or worker credential isolation",
+    "raw replay preserves policy headers, not historical wall-clock timing"
+  ],
+  "native_header_profiles": {
+    "anthropic": {
+      "accept": [
+        "application/json"
+      ],
+      "accept-encoding": [
+        "gzip, deflate"
+      ],
+      "anthropic-version": [
+        "2023-06-01"
+      ],
+      "content-type": [
+        "application/json"
+      ],
+      "user-agent": [
+        "AsyncAnthropic/Python 1.4.0"
+      ],
+      "x-stainless-arch": [
+        "other:amd64"
+      ],
+      "x-stainless-async": [
+        "async:asyncio"
+      ],
+      "x-stainless-lang": [
+        "python"
+      ],
+      "x-stainless-os": [
+        "Windows"
+      ],
+      "x-stainless-package-version": [
+        "1.4.0"
+      ],
+      "x-stainless-read-timeout": [
+        "600"
+      ],
+      "x-stainless-retry-count": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "x-stainless-runtime": [
+        "CPython"
+      ],
+      "x-stainless-runtime-version": [
+        "3.13.12"
+      ],
+      "x-stainless-timeout": [
+        "600"
+      ]
+    },
+    "openai": {
+      "accept": [
+        "application/json"
+      ],
+      "accept-encoding": [
+        "gzip, deflate"
+      ],
+      "content-type": [
+        "application/json"
+      ],
+      "user-agent": [
+        "AsyncOpenAI/Python 1.107.0"
+      ],
+      "x-stainless-arch": [
+        "other:amd64"
+      ],
+      "x-stainless-async": [
+        "async:asyncio"
+      ],
+      "x-stainless-helper-method": [
+        "chat.completions.parse"
+      ],
+      "x-stainless-lang": [
+        "python"
+      ],
+      "x-stainless-os": [
+        "Windows"
+      ],
+      "x-stainless-package-version": [
+        "1.107.0"
+      ],
+      "x-stainless-read-timeout": [
+        "600"
+      ],
+      "x-stainless-retry-count": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "x-stainless-runtime": [
+        "CPython"
+      ],
+      "x-stainless-runtime-version": [
+        "3.13.12"
+      ]
+    }
+  },
+  "provider_network_calls": 0,
+  "scenarios": [
+    {
+      "mock_https_sends": 1,
+      "mode": "valid",
+      "operations": [
+        {
+          "actual_microusd": 5,
+          "operation_id": "0e9e7f08c86afac2fb3916ebc7758aaf5a72993e44499260106f01d2a480345e",
+          "raw_body_sha256": "b047c54319240bd523e50f5fe4ecf34704af5b48d3818d0cbd5fd01cc6259fa6",
+          "receipt_sha256": "9c7fb4ff5b7c0daec97b0169b74f52d4f3e5f1e07c14fcbdc729cf52db168411",
+          "reserve_microusd": 2256000,
+          "status": "completed"
+        }
+      ],
+      "outcome": {
+        "value": [
+          {
+            "score": 7
+          },
+          "test-model"
+        ]
+      },
+      "provider": "openai",
+      "replay": {
+        "additional_mock_https_sends": 0,
+        "outcome": {
+          "value": [
+            {
+              "score": 7
+            },
+            "test-model"
+          ]
+        },
+        "totals_unchanged": true
+      },
+      "requests": [
+        {
+          "body_sha256": "c2005edf715ec0c8b8e6b8b3a42147d935bd3dd0b1c9e723cc88c118832bf486",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "user-agent": "AsyncOpenAI/Python 1.107.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-helper-method": "chat.completions.parse",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.107.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12"
+          },
+          "logical_id": "640b725d9fd1cfd2989377e5de7ffeb6d96a2614bfb5ab01d51a793459029238",
+          "model": "test-model",
+          "physical": 0,
+          "provider": "openai"
+        },
+        {
+          "body_sha256": "c2005edf715ec0c8b8e6b8b3a42147d935bd3dd0b1c9e723cc88c118832bf486",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "user-agent": "AsyncOpenAI/Python 1.107.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-helper-method": "chat.completions.parse",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.107.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12"
+          },
+          "logical_id": "640b725d9fd1cfd2989377e5de7ffeb6d96a2614bfb5ab01d51a793459029238",
+          "model": "test-model",
+          "physical": 0,
+          "provider": "openai"
+        }
+      ],
+      "sdk_max_retries": 8,
+      "sdk_transport_calls": 1,
+      "sent": [
+        {
+          "body_sha256": "c2005edf715ec0c8b8e6b8b3a42147d935bd3dd0b1c9e723cc88c118832bf486",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "openai-project": "offline-owner-project",
+            "user-agent": "AsyncOpenAI/Python 1.107.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-helper-method": "chat.completions.parse",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.107.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12"
+          },
+          "provider": "openai"
+        }
+      ],
+      "totals": {
+        "committed_microusd": 5,
+        "operation_count": 1,
+        "reserved_microusd": 0,
+        "spent_microusd": 5
+      }
+    },
+    {
+      "mock_https_sends": 1,
+      "mode": "bad",
+      "operations": [
+        {
+          "actual_microusd": 5,
+          "operation_id": "d1563e661a0d792b85e368417d6abf65860d14f64f208b7b72886e343e17419f",
+          "raw_body_sha256": "9bdb459c10040247c32e8c9545e13741f4956c0809de5c0a3672674afc510217",
+          "receipt_sha256": "bcc512eeb8d3a9fc0e2b7f7598951ab81d47f8d205d888d0bc992a79d8027861",
+          "reserve_microusd": 2256000,
+          "status": "completed"
+        }
+      ],
+      "outcome": {
+        "error": "ValidationError"
+      },
+      "provider": "openai",
+      "replay": {
+        "additional_mock_https_sends": 0,
+        "outcome": {
+          "error": "ValidationError"
+        },
+        "totals_unchanged": true
+      },
+      "requests": [
+        {
+          "body_sha256": "c2005edf715ec0c8b8e6b8b3a42147d935bd3dd0b1c9e723cc88c118832bf486",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "user-agent": "AsyncOpenAI/Python 1.107.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-helper-method": "chat.completions.parse",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.107.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12"
+          },
+          "logical_id": "640b725d9fd1cfd2989377e5de7ffeb6d96a2614bfb5ab01d51a793459029238",
+          "model": "test-model",
+          "physical": 0,
+          "provider": "openai"
+        },
+        {
+          "body_sha256": "c2005edf715ec0c8b8e6b8b3a42147d935bd3dd0b1c9e723cc88c118832bf486",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "user-agent": "AsyncOpenAI/Python 1.107.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-helper-method": "chat.completions.parse",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.107.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12"
+          },
+          "logical_id": "640b725d9fd1cfd2989377e5de7ffeb6d96a2614bfb5ab01d51a793459029238",
+          "model": "test-model",
+          "physical": 0,
+          "provider": "openai"
+        }
+      ],
+      "sdk_max_retries": 8,
+      "sdk_transport_calls": 1,
+      "sent": [
+        {
+          "body_sha256": "c2005edf715ec0c8b8e6b8b3a42147d935bd3dd0b1c9e723cc88c118832bf486",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "openai-project": "offline-owner-project",
+            "user-agent": "AsyncOpenAI/Python 1.107.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-helper-method": "chat.completions.parse",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.107.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12"
+          },
+          "provider": "openai"
+        }
+      ],
+      "totals": {
+        "committed_microusd": 5,
+        "operation_count": 1,
+        "reserved_microusd": 0,
+        "spent_microusd": 5
+      }
+    },
+    {
+      "mock_https_sends": 1,
+      "mode": "refusal",
+      "operations": [
+        {
+          "actual_microusd": 5,
+          "operation_id": "fa17e5ffda924435670755ce9a0500f71e4ffc78dea912024214721ca1f3ee1b",
+          "raw_body_sha256": "dfe38cf020cd9a1f0afea694a5558245e7e5d21e350cf4c84d25041cb6e1ddd6",
+          "receipt_sha256": "61b18696d695f354ece13e6dcd7a9eef80448868b4e6881d72e295039cd317f0",
+          "reserve_microusd": 2256000,
+          "status": "completed"
+        }
+      ],
+      "outcome": {
+        "error": "ValueError"
+      },
+      "provider": "openai",
+      "replay": {
+        "additional_mock_https_sends": 0,
+        "outcome": {
+          "error": "ValueError"
+        },
+        "totals_unchanged": true
+      },
+      "requests": [
+        {
+          "body_sha256": "c2005edf715ec0c8b8e6b8b3a42147d935bd3dd0b1c9e723cc88c118832bf486",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "user-agent": "AsyncOpenAI/Python 1.107.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-helper-method": "chat.completions.parse",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.107.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12"
+          },
+          "logical_id": "640b725d9fd1cfd2989377e5de7ffeb6d96a2614bfb5ab01d51a793459029238",
+          "model": "test-model",
+          "physical": 0,
+          "provider": "openai"
+        },
+        {
+          "body_sha256": "c2005edf715ec0c8b8e6b8b3a42147d935bd3dd0b1c9e723cc88c118832bf486",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "user-agent": "AsyncOpenAI/Python 1.107.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-helper-method": "chat.completions.parse",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.107.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12"
+          },
+          "logical_id": "640b725d9fd1cfd2989377e5de7ffeb6d96a2614bfb5ab01d51a793459029238",
+          "model": "test-model",
+          "physical": 0,
+          "provider": "openai"
+        }
+      ],
+      "sdk_max_retries": 8,
+      "sdk_transport_calls": 1,
+      "sent": [
+        {
+          "body_sha256": "c2005edf715ec0c8b8e6b8b3a42147d935bd3dd0b1c9e723cc88c118832bf486",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "openai-project": "offline-owner-project",
+            "user-agent": "AsyncOpenAI/Python 1.107.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-helper-method": "chat.completions.parse",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.107.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12"
+          },
+          "provider": "openai"
+        }
+      ],
+      "totals": {
+        "committed_microusd": 5,
+        "operation_count": 1,
+        "reserved_microusd": 0,
+        "spent_microusd": 5
+      }
+    },
+    {
+      "mock_https_sends": 1,
+      "mode": "length",
+      "operations": [
+        {
+          "actual_microusd": 5,
+          "operation_id": "421dca6895df6115a805ccd026e2b7d36e0477e4c6ff45c82fc816e2f6e27f20",
+          "raw_body_sha256": "17bf1e4f9c5c02c5799e786f879b213c37ad753daabb74bb9d92164c75ac18fd",
+          "receipt_sha256": "1b250e703d783599aef9f078c28a9618d6342b1d3e58ab73c99a80978f3bade9",
+          "reserve_microusd": 2256000,
+          "status": "completed"
+        }
+      ],
+      "outcome": {
+        "error": "LengthFinishReasonError"
+      },
+      "provider": "openai",
+      "replay": {
+        "additional_mock_https_sends": 0,
+        "outcome": {
+          "error": "LengthFinishReasonError"
+        },
+        "totals_unchanged": true
+      },
+      "requests": [
+        {
+          "body_sha256": "c2005edf715ec0c8b8e6b8b3a42147d935bd3dd0b1c9e723cc88c118832bf486",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "user-agent": "AsyncOpenAI/Python 1.107.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-helper-method": "chat.completions.parse",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.107.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12"
+          },
+          "logical_id": "640b725d9fd1cfd2989377e5de7ffeb6d96a2614bfb5ab01d51a793459029238",
+          "model": "test-model",
+          "physical": 0,
+          "provider": "openai"
+        },
+        {
+          "body_sha256": "c2005edf715ec0c8b8e6b8b3a42147d935bd3dd0b1c9e723cc88c118832bf486",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "user-agent": "AsyncOpenAI/Python 1.107.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-helper-method": "chat.completions.parse",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.107.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12"
+          },
+          "logical_id": "640b725d9fd1cfd2989377e5de7ffeb6d96a2614bfb5ab01d51a793459029238",
+          "model": "test-model",
+          "physical": 0,
+          "provider": "openai"
+        }
+      ],
+      "sdk_max_retries": 8,
+      "sdk_transport_calls": 1,
+      "sent": [
+        {
+          "body_sha256": "c2005edf715ec0c8b8e6b8b3a42147d935bd3dd0b1c9e723cc88c118832bf486",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "openai-project": "offline-owner-project",
+            "user-agent": "AsyncOpenAI/Python 1.107.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-helper-method": "chat.completions.parse",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.107.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12"
+          },
+          "provider": "openai"
+        }
+      ],
+      "totals": {
+        "committed_microusd": 5,
+        "operation_count": 1,
+        "reserved_microusd": 0,
+        "spent_microusd": 5
+      }
+    },
+    {
+      "mock_https_sends": 1,
+      "mode": "gzip",
+      "operations": [
+        {
+          "actual_microusd": 5,
+          "operation_id": "29e8eb7f00e1da7aad3f20ba2c133c07b893d76c016f72c782c8498ae08904fd",
+          "raw_body_sha256": "2b2ab0e9ae23a75406a923e860ef7d27ca4c504c6d4d19a14e40872d894d8f68",
+          "receipt_sha256": "6403b02e24cfd9191d4afcb511ecb26118b57bf901ecd5520483f2da6965da93",
+          "reserve_microusd": 2256000,
+          "status": "completed"
+        }
+      ],
+      "outcome": {
+        "value": [
+          {
+            "score": 7
+          },
+          "test-model"
+        ]
+      },
+      "provider": "openai",
+      "replay": {
+        "additional_mock_https_sends": 0,
+        "outcome": {
+          "value": [
+            {
+              "score": 7
+            },
+            "test-model"
+          ]
+        },
+        "totals_unchanged": true
+      },
+      "requests": [
+        {
+          "body_sha256": "c2005edf715ec0c8b8e6b8b3a42147d935bd3dd0b1c9e723cc88c118832bf486",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "user-agent": "AsyncOpenAI/Python 1.107.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-helper-method": "chat.completions.parse",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.107.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12"
+          },
+          "logical_id": "640b725d9fd1cfd2989377e5de7ffeb6d96a2614bfb5ab01d51a793459029238",
+          "model": "test-model",
+          "physical": 0,
+          "provider": "openai"
+        },
+        {
+          "body_sha256": "c2005edf715ec0c8b8e6b8b3a42147d935bd3dd0b1c9e723cc88c118832bf486",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "user-agent": "AsyncOpenAI/Python 1.107.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-helper-method": "chat.completions.parse",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.107.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12"
+          },
+          "logical_id": "640b725d9fd1cfd2989377e5de7ffeb6d96a2614bfb5ab01d51a793459029238",
+          "model": "test-model",
+          "physical": 0,
+          "provider": "openai"
+        }
+      ],
+      "sdk_max_retries": 8,
+      "sdk_transport_calls": 1,
+      "sent": [
+        {
+          "body_sha256": "c2005edf715ec0c8b8e6b8b3a42147d935bd3dd0b1c9e723cc88c118832bf486",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "openai-project": "offline-owner-project",
+            "user-agent": "AsyncOpenAI/Python 1.107.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-helper-method": "chat.completions.parse",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.107.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12"
+          },
+          "provider": "openai"
+        }
+      ],
+      "totals": {
+        "committed_microusd": 5,
+        "operation_count": 1,
+        "reserved_microusd": 0,
+        "spent_microusd": 5
+      }
+    },
+    {
+      "mock_https_sends": 1,
+      "mode": "deflate",
+      "operations": [
+        {
+          "actual_microusd": 5,
+          "operation_id": "11c304805bfd52a8abd483532577c3cc52ac565eee794ff311f81ce940d3e7d1",
+          "raw_body_sha256": "1a0986a1db9a31c9a5fc4bc2f7baf0d7e544967e6d5f57e98b0168136df80b1f",
+          "receipt_sha256": "82c987059e20e5b238f3683d809a76474eff841f3d84891b0bac3e849b68b4b8",
+          "reserve_microusd": 2256000,
+          "status": "completed"
+        }
+      ],
+      "outcome": {
+        "value": [
+          {
+            "score": 7
+          },
+          "test-model"
+        ]
+      },
+      "provider": "openai",
+      "replay": {
+        "additional_mock_https_sends": 0,
+        "outcome": {
+          "value": [
+            {
+              "score": 7
+            },
+            "test-model"
+          ]
+        },
+        "totals_unchanged": true
+      },
+      "requests": [
+        {
+          "body_sha256": "c2005edf715ec0c8b8e6b8b3a42147d935bd3dd0b1c9e723cc88c118832bf486",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "user-agent": "AsyncOpenAI/Python 1.107.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-helper-method": "chat.completions.parse",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.107.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12"
+          },
+          "logical_id": "640b725d9fd1cfd2989377e5de7ffeb6d96a2614bfb5ab01d51a793459029238",
+          "model": "test-model",
+          "physical": 0,
+          "provider": "openai"
+        },
+        {
+          "body_sha256": "c2005edf715ec0c8b8e6b8b3a42147d935bd3dd0b1c9e723cc88c118832bf486",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "user-agent": "AsyncOpenAI/Python 1.107.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-helper-method": "chat.completions.parse",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.107.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12"
+          },
+          "logical_id": "640b725d9fd1cfd2989377e5de7ffeb6d96a2614bfb5ab01d51a793459029238",
+          "model": "test-model",
+          "physical": 0,
+          "provider": "openai"
+        }
+      ],
+      "sdk_max_retries": 8,
+      "sdk_transport_calls": 1,
+      "sent": [
+        {
+          "body_sha256": "c2005edf715ec0c8b8e6b8b3a42147d935bd3dd0b1c9e723cc88c118832bf486",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "openai-project": "offline-owner-project",
+            "user-agent": "AsyncOpenAI/Python 1.107.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-helper-method": "chat.completions.parse",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.107.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12"
+          },
+          "provider": "openai"
+        }
+      ],
+      "totals": {
+        "committed_microusd": 5,
+        "operation_count": 1,
+        "reserved_microusd": 0,
+        "spent_microusd": 5
+      }
+    },
+    {
+      "mock_https_sends": 1,
+      "mode": "unknown",
+      "operations": [
+        {
+          "actual_microusd": null,
+          "operation_id": "6a420b6aa61e09792b7b28cfe607a075f9160c122ca331fa667c3355fadd6a97",
+          "raw_body_sha256": "e9059cf9522aba2ac333998e301d6db6affdb0516c9abcbb30b31c8e3c7efa0d",
+          "receipt_sha256": "eb41297ab58402801a54104f96e04731b91a1e9588235af3b771c6de8bff29b7",
+          "reserve_microusd": 2256000,
+          "status": "unknown"
+        }
+      ],
+      "outcome": {
+        "error": "NativeStop",
+        "reason": "unknown"
+      },
+      "provider": "openai",
+      "replay": {
+        "additional_mock_https_sends": 0,
+        "outcome": {
+          "error": "NativeStop",
+          "reason": "authority"
+        },
+        "totals_unchanged": true
+      },
+      "requests": [],
+      "sdk_max_retries": 8,
+      "sdk_transport_calls": 1,
+      "sent": [
+        {
+          "body_sha256": "c2005edf715ec0c8b8e6b8b3a42147d935bd3dd0b1c9e723cc88c118832bf486",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "openai-project": "offline-owner-project",
+            "user-agent": "AsyncOpenAI/Python 1.107.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-helper-method": "chat.completions.parse",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.107.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12"
+          },
+          "provider": "openai"
+        }
+      ],
+      "totals": {
+        "committed_microusd": 2256000,
+        "operation_count": 1,
+        "reserved_microusd": 2256000,
+        "spent_microusd": 0
+      }
+    },
+    {
+      "mock_https_sends": 1,
+      "mode": "status",
+      "operations": [
+        {
+          "actual_microusd": null,
+          "operation_id": "fcd1f199bddd6c9004ff5292f118c53642eb4bd9399e94a25eb2d9a140fe740c",
+          "raw_body_sha256": "b047c54319240bd523e50f5fe4ecf34704af5b48d3818d0cbd5fd01cc6259fa6",
+          "receipt_sha256": "4950a0fa1936f3e477aa995314142b9b914065bafdb435547ac90666a01d4e6a",
+          "reserve_microusd": 2256000,
+          "status": "unknown"
+        }
+      ],
+      "outcome": {
+        "error": "NativeStop",
+        "reason": "unknown"
+      },
+      "provider": "openai",
+      "replay": {
+        "additional_mock_https_sends": 0,
+        "outcome": {
+          "error": "NativeStop",
+          "reason": "authority"
+        },
+        "totals_unchanged": true
+      },
+      "requests": [],
+      "sdk_max_retries": 8,
+      "sdk_transport_calls": 1,
+      "sent": [
+        {
+          "body_sha256": "c2005edf715ec0c8b8e6b8b3a42147d935bd3dd0b1c9e723cc88c118832bf486",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "openai-project": "offline-owner-project",
+            "user-agent": "AsyncOpenAI/Python 1.107.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-helper-method": "chat.completions.parse",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.107.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12"
+          },
+          "provider": "openai"
+        }
+      ],
+      "totals": {
+        "committed_microusd": 2256000,
+        "operation_count": 1,
+        "reserved_microusd": 2256000,
+        "spent_microusd": 0
+      }
+    },
+    {
+      "mock_https_sends": 1,
+      "mode": "partial",
+      "operations": [
+        {
+          "actual_microusd": null,
+          "operation_id": "3bca054ce2df8f650b464d28d629727feffb16eecbaf045847448b0b491503e0",
+          "raw_body_sha256": "988472cdb593cd2b8cea02525f3893cf66d772fcd0306f429b60cbd35cae09e1",
+          "receipt_sha256": "c4e535467e6371740de7e627fc6b8859c37f2783dfcad7b5b899c6c6e90565e4",
+          "reserve_microusd": 2256000,
+          "status": "unknown"
+        }
+      ],
+      "outcome": {
+        "error": "NativeStop",
+        "reason": "unknown"
+      },
+      "provider": "openai",
+      "replay": {
+        "additional_mock_https_sends": 0,
+        "outcome": {
+          "error": "NativeStop",
+          "reason": "authority"
+        },
+        "totals_unchanged": true
+      },
+      "requests": [],
+      "sdk_max_retries": 8,
+      "sdk_transport_calls": 1,
+      "sent": [
+        {
+          "body_sha256": "c2005edf715ec0c8b8e6b8b3a42147d935bd3dd0b1c9e723cc88c118832bf486",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "openai-project": "offline-owner-project",
+            "user-agent": "AsyncOpenAI/Python 1.107.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-helper-method": "chat.completions.parse",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.107.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12"
+          },
+          "provider": "openai"
+        }
+      ],
+      "totals": {
+        "committed_microusd": 2256000,
+        "operation_count": 1,
+        "reserved_microusd": 2256000,
+        "spent_microusd": 0
+      }
+    },
+    {
+      "mock_https_sends": 1,
+      "mode": "timeout",
+      "operations": [
+        {
+          "actual_microusd": null,
+          "operation_id": "70628db677b059795176d783a70dfc5815c91a3f12184bd491f4084a1f676566",
+          "raw_body_sha256": null,
+          "receipt_sha256": null,
+          "reserve_microusd": 2256000,
+          "status": "unknown"
+        }
+      ],
+      "outcome": {
+        "error": "NativeStop",
+        "reason": "unknown"
+      },
+      "provider": "openai",
+      "replay": {
+        "additional_mock_https_sends": 0,
+        "outcome": {
+          "error": "NativeStop",
+          "reason": "authority"
+        },
+        "totals_unchanged": true
+      },
+      "requests": [],
+      "sdk_max_retries": 8,
+      "sdk_transport_calls": 1,
+      "sent": [
+        {
+          "body_sha256": "c2005edf715ec0c8b8e6b8b3a42147d935bd3dd0b1c9e723cc88c118832bf486",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "openai-project": "offline-owner-project",
+            "user-agent": "AsyncOpenAI/Python 1.107.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-helper-method": "chat.completions.parse",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.107.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12"
+          },
+          "provider": "openai"
+        }
+      ],
+      "totals": {
+        "committed_microusd": 2256000,
+        "operation_count": 1,
+        "reserved_microusd": 2256000,
+        "spent_microusd": 0
+      }
+    },
+    {
+      "mock_https_sends": 1,
+      "mode": "interrupted",
+      "operations": [
+        {
+          "actual_microusd": null,
+          "operation_id": "2c5e98cfe82f6993c1de224b211b045b6bcfcf7643ece53597cbba7032ec22f6",
+          "raw_body_sha256": "b047c54319240bd523e50f5fe4ecf34704af5b48d3818d0cbd5fd01cc6259fa6",
+          "receipt_sha256": "38153596b250bec8d62fc6eb111ff0849a7503f4936c5655ecc010bc3fafaeb0",
+          "reserve_microusd": 2256000,
+          "status": "unknown"
+        }
+      ],
+      "outcome": {
+        "error": "NativeStop",
+        "reason": "cancelled"
+      },
+      "provider": "openai",
+      "replay": {
+        "additional_mock_https_sends": 0,
+        "outcome": {
+          "error": "NativeStop",
+          "reason": "authority"
+        },
+        "totals_unchanged": true
+      },
+      "requests": [],
+      "sdk_max_retries": 8,
+      "sdk_transport_calls": 1,
+      "sent": [
+        {
+          "body_sha256": "c2005edf715ec0c8b8e6b8b3a42147d935bd3dd0b1c9e723cc88c118832bf486",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "openai-project": "offline-owner-project",
+            "user-agent": "AsyncOpenAI/Python 1.107.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-helper-method": "chat.completions.parse",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.107.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12"
+          },
+          "provider": "openai"
+        }
+      ],
+      "totals": {
+        "committed_microusd": 2256000,
+        "operation_count": 1,
+        "reserved_microusd": 2256000,
+        "spent_microusd": 0
+      }
+    },
+    {
+      "mock_https_sends": 0,
+      "mode": "valid",
+      "operations": [],
+      "outcome": {
+        "error": "NativeStop",
+        "reason": "authority"
+      },
+      "provider": "openai",
+      "requests": [],
+      "sdk_max_retries": 8,
+      "sdk_transport_calls": 1,
+      "sent": [],
+      "totals": {
+        "committed_microusd": 0,
+        "operation_count": 0,
+        "reserved_microusd": 0,
+        "spent_microusd": 0
+      }
+    },
+    {
+      "mock_https_sends": 1,
+      "mode": "valid",
+      "operations": [
+        {
+          "actual_microusd": 5,
+          "operation_id": "fdb7b88e373e9d96dc8e949678da4006a7ef3d5e0b54e57cfc347fe2847121fd",
+          "raw_body_sha256": "2a0778d8603f64cd5b81d7dc59cb66c4cdbb890a9f41bb36b25bf485b062cdd5",
+          "receipt_sha256": "3920a5f029488418a7414e32949df741d5b995cab64e83be1e021aaae74a3788",
+          "reserve_microusd": 2032000,
+          "status": "completed"
+        }
+      ],
+      "outcome": {
+        "value": [
+          {
+            "score": 7
+          },
+          "claude-primary"
+        ]
+      },
+      "provider": "anthropic",
+      "replay": {
+        "additional_mock_https_sends": 0,
+        "outcome": {
+          "value": [
+            {
+              "score": 7
+            },
+            "claude-primary"
+          ]
+        },
+        "totals_unchanged": true
+      },
+      "requests": [
+        {
+          "body_sha256": "ea9e7f5836cf4c31894b6d54590309dac695d7f0c648800ee60b840d0bc71992",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "logical_id": "640b725d9fd1cfd2989377e5de7ffeb6d96a2614bfb5ab01d51a793459029238",
+          "model": "claude-primary",
+          "physical": 0,
+          "provider": "anthropic"
+        },
+        {
+          "body_sha256": "ea9e7f5836cf4c31894b6d54590309dac695d7f0c648800ee60b840d0bc71992",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "logical_id": "640b725d9fd1cfd2989377e5de7ffeb6d96a2614bfb5ab01d51a793459029238",
+          "model": "claude-primary",
+          "physical": 0,
+          "provider": "anthropic"
+        }
+      ],
+      "sdk_max_retries": 8,
+      "sdk_transport_calls": 1,
+      "sent": [
+        {
+          "body_sha256": "ea9e7f5836cf4c31894b6d54590309dac695d7f0c648800ee60b840d0bc71992",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "anthropic-workspace-id": "offline-owner-workspace",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "provider": "anthropic"
+        }
+      ],
+      "totals": {
+        "committed_microusd": 5,
+        "operation_count": 1,
+        "reserved_microusd": 0,
+        "spent_microusd": 5
+      }
+    },
+    {
+      "mock_https_sends": 1,
+      "mode": "bad",
+      "operations": [
+        {
+          "actual_microusd": 5,
+          "operation_id": "d7833737bbfccb9c5b424c1026183fdb6d9c671b53c9274e36cd73eafebb67b1",
+          "raw_body_sha256": "ad4cea50e5ed17f69d5aeff99579daeac00976a57cedf3799618f7c75318b1d4",
+          "receipt_sha256": "5d9d579142a30ca92277293b5644f9b4474cc11ed4ea5fb70497026cf24f13c2",
+          "reserve_microusd": 2032000,
+          "status": "completed"
+        }
+      ],
+      "outcome": {
+        "error": "ValidationError"
+      },
+      "provider": "anthropic",
+      "replay": {
+        "additional_mock_https_sends": 0,
+        "outcome": {
+          "error": "ValidationError"
+        },
+        "totals_unchanged": true
+      },
+      "requests": [
+        {
+          "body_sha256": "ea9e7f5836cf4c31894b6d54590309dac695d7f0c648800ee60b840d0bc71992",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "logical_id": "640b725d9fd1cfd2989377e5de7ffeb6d96a2614bfb5ab01d51a793459029238",
+          "model": "claude-primary",
+          "physical": 0,
+          "provider": "anthropic"
+        },
+        {
+          "body_sha256": "ea9e7f5836cf4c31894b6d54590309dac695d7f0c648800ee60b840d0bc71992",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "logical_id": "640b725d9fd1cfd2989377e5de7ffeb6d96a2614bfb5ab01d51a793459029238",
+          "model": "claude-primary",
+          "physical": 0,
+          "provider": "anthropic"
+        }
+      ],
+      "sdk_max_retries": 8,
+      "sdk_transport_calls": 1,
+      "sent": [
+        {
+          "body_sha256": "ea9e7f5836cf4c31894b6d54590309dac695d7f0c648800ee60b840d0bc71992",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "anthropic-workspace-id": "offline-owner-workspace",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "provider": "anthropic"
+        }
+      ],
+      "totals": {
+        "committed_microusd": 5,
+        "operation_count": 1,
+        "reserved_microusd": 0,
+        "spent_microusd": 5
+      }
+    },
+    {
+      "mock_https_sends": 2,
+      "mode": "refusal",
+      "operations": [
+        {
+          "actual_microusd": 5,
+          "operation_id": "7aa70ca72916425c83c39a4c6e84754f6d8e3c43834cae0f72fdbbcaed7d221c",
+          "raw_body_sha256": "d459e69bf8cb10a1e760798218e628cb09558e5a28f1d1c00d2a9fd0f3104fc2",
+          "receipt_sha256": "7b690252fad86d7ad25eac7b5b3db7a9fd7927023f60ce6f920ccb39d3cbd2b2",
+          "reserve_microusd": 2032000,
+          "status": "completed"
+        },
+        {
+          "actual_microusd": 5,
+          "operation_id": "07e1332995f8b7a009739c1c0623a055ae2d4e9e6969a5e27dc3493ec54f7bee",
+          "raw_body_sha256": "f17eeacd3fee7b2968c8392da706dc16917ccc3775362587eb963ad13cf1ac84",
+          "receipt_sha256": "ee2a342edf9324063bfb9acf41d4a309642ecf394aa247c7b0651d6507e32927",
+          "reserve_microusd": 2032000,
+          "status": "completed"
+        }
+      ],
+      "outcome": {
+        "error": "JudgeRefusal"
+      },
+      "provider": "anthropic",
+      "replay": {
+        "additional_mock_https_sends": 0,
+        "outcome": {
+          "error": "JudgeRefusal"
+        },
+        "totals_unchanged": true
+      },
+      "requests": [
+        {
+          "body_sha256": "ea9e7f5836cf4c31894b6d54590309dac695d7f0c648800ee60b840d0bc71992",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "logical_id": "640b725d9fd1cfd2989377e5de7ffeb6d96a2614bfb5ab01d51a793459029238",
+          "model": "claude-primary",
+          "physical": 0,
+          "provider": "anthropic"
+        },
+        {
+          "body_sha256": "9040c136b840431ca43c111650cbf66bf9acef816bdd9496c0119af2049f7972",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "logical_id": "4ea0775c249ee44ba9c77b0f7533d994c2583b1736ac550175e3d2dc2321f2c3",
+          "model": "claude-fallback",
+          "physical": 0,
+          "provider": "anthropic"
+        },
+        {
+          "body_sha256": "ea9e7f5836cf4c31894b6d54590309dac695d7f0c648800ee60b840d0bc71992",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "logical_id": "640b725d9fd1cfd2989377e5de7ffeb6d96a2614bfb5ab01d51a793459029238",
+          "model": "claude-primary",
+          "physical": 0,
+          "provider": "anthropic"
+        },
+        {
+          "body_sha256": "9040c136b840431ca43c111650cbf66bf9acef816bdd9496c0119af2049f7972",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "logical_id": "4ea0775c249ee44ba9c77b0f7533d994c2583b1736ac550175e3d2dc2321f2c3",
+          "model": "claude-fallback",
+          "physical": 0,
+          "provider": "anthropic"
+        }
+      ],
+      "sdk_max_retries": 8,
+      "sdk_transport_calls": 2,
+      "sent": [
+        {
+          "body_sha256": "ea9e7f5836cf4c31894b6d54590309dac695d7f0c648800ee60b840d0bc71992",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "anthropic-workspace-id": "offline-owner-workspace",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "provider": "anthropic"
+        },
+        {
+          "body_sha256": "9040c136b840431ca43c111650cbf66bf9acef816bdd9496c0119af2049f7972",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "anthropic-workspace-id": "offline-owner-workspace",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "provider": "anthropic"
+        }
+      ],
+      "totals": {
+        "committed_microusd": 10,
+        "operation_count": 2,
+        "reserved_microusd": 0,
+        "spent_microusd": 10
+      }
+    },
+    {
+      "mock_https_sends": 1,
+      "mode": "length",
+      "operations": [
+        {
+          "actual_microusd": 5,
+          "operation_id": "f6e357b64985f8c62be944f5f10081bd9b205f847d66e08ccca6d2628aa73a2f",
+          "raw_body_sha256": "6ebfbf79ce722da7b7e0e12c373dcb097fa53db500fcf22dc901fdf8af31f3af",
+          "receipt_sha256": "b72f4ffc7cead88d9a0f4d0686172739301a5ddf37d79d207ce0b7cefe7a129e",
+          "reserve_microusd": 2032000,
+          "status": "completed"
+        }
+      ],
+      "outcome": {
+        "error": "ValueError"
+      },
+      "provider": "anthropic",
+      "replay": {
+        "additional_mock_https_sends": 0,
+        "outcome": {
+          "error": "ValueError"
+        },
+        "totals_unchanged": true
+      },
+      "requests": [
+        {
+          "body_sha256": "ea9e7f5836cf4c31894b6d54590309dac695d7f0c648800ee60b840d0bc71992",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "logical_id": "640b725d9fd1cfd2989377e5de7ffeb6d96a2614bfb5ab01d51a793459029238",
+          "model": "claude-primary",
+          "physical": 0,
+          "provider": "anthropic"
+        },
+        {
+          "body_sha256": "ea9e7f5836cf4c31894b6d54590309dac695d7f0c648800ee60b840d0bc71992",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "logical_id": "640b725d9fd1cfd2989377e5de7ffeb6d96a2614bfb5ab01d51a793459029238",
+          "model": "claude-primary",
+          "physical": 0,
+          "provider": "anthropic"
+        }
+      ],
+      "sdk_max_retries": 8,
+      "sdk_transport_calls": 1,
+      "sent": [
+        {
+          "body_sha256": "ea9e7f5836cf4c31894b6d54590309dac695d7f0c648800ee60b840d0bc71992",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "anthropic-workspace-id": "offline-owner-workspace",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "provider": "anthropic"
+        }
+      ],
+      "totals": {
+        "committed_microusd": 5,
+        "operation_count": 1,
+        "reserved_microusd": 0,
+        "spent_microusd": 5
+      }
+    },
+    {
+      "mock_https_sends": 1,
+      "mode": "gzip",
+      "operations": [
+        {
+          "actual_microusd": 5,
+          "operation_id": "33dcb3b160697415b12e47cecd502a4a2e609aeaecce2994592efa942ee7ca94",
+          "raw_body_sha256": "aa353b5cd2860150aea2259b05726dcae39b8164d57300d907da5b76cbee6c3b",
+          "receipt_sha256": "0cf8cd08523e0ceb3071e16b56369ada4094b26f74971d3fab397a8521dc0aa9",
+          "reserve_microusd": 2032000,
+          "status": "completed"
+        }
+      ],
+      "outcome": {
+        "value": [
+          {
+            "score": 7
+          },
+          "claude-primary"
+        ]
+      },
+      "provider": "anthropic",
+      "replay": {
+        "additional_mock_https_sends": 0,
+        "outcome": {
+          "value": [
+            {
+              "score": 7
+            },
+            "claude-primary"
+          ]
+        },
+        "totals_unchanged": true
+      },
+      "requests": [
+        {
+          "body_sha256": "ea9e7f5836cf4c31894b6d54590309dac695d7f0c648800ee60b840d0bc71992",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "logical_id": "640b725d9fd1cfd2989377e5de7ffeb6d96a2614bfb5ab01d51a793459029238",
+          "model": "claude-primary",
+          "physical": 0,
+          "provider": "anthropic"
+        },
+        {
+          "body_sha256": "ea9e7f5836cf4c31894b6d54590309dac695d7f0c648800ee60b840d0bc71992",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "logical_id": "640b725d9fd1cfd2989377e5de7ffeb6d96a2614bfb5ab01d51a793459029238",
+          "model": "claude-primary",
+          "physical": 0,
+          "provider": "anthropic"
+        }
+      ],
+      "sdk_max_retries": 8,
+      "sdk_transport_calls": 1,
+      "sent": [
+        {
+          "body_sha256": "ea9e7f5836cf4c31894b6d54590309dac695d7f0c648800ee60b840d0bc71992",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "anthropic-workspace-id": "offline-owner-workspace",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "provider": "anthropic"
+        }
+      ],
+      "totals": {
+        "committed_microusd": 5,
+        "operation_count": 1,
+        "reserved_microusd": 0,
+        "spent_microusd": 5
+      }
+    },
+    {
+      "mock_https_sends": 1,
+      "mode": "deflate",
+      "operations": [
+        {
+          "actual_microusd": 5,
+          "operation_id": "395d7721d361a85ce7a095d723f91f68e5c8e6de5418de7ebbb6fb0d39e758a0",
+          "raw_body_sha256": "5f82a2455c64663574236e471945c11b9eb0f487b545766719cb3bf95c068ce6",
+          "receipt_sha256": "491038b68aa2d266744ba470282ed197b2f1b737471d486cb20d704200c09c39",
+          "reserve_microusd": 2032000,
+          "status": "completed"
+        }
+      ],
+      "outcome": {
+        "value": [
+          {
+            "score": 7
+          },
+          "claude-primary"
+        ]
+      },
+      "provider": "anthropic",
+      "replay": {
+        "additional_mock_https_sends": 0,
+        "outcome": {
+          "value": [
+            {
+              "score": 7
+            },
+            "claude-primary"
+          ]
+        },
+        "totals_unchanged": true
+      },
+      "requests": [
+        {
+          "body_sha256": "ea9e7f5836cf4c31894b6d54590309dac695d7f0c648800ee60b840d0bc71992",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "logical_id": "640b725d9fd1cfd2989377e5de7ffeb6d96a2614bfb5ab01d51a793459029238",
+          "model": "claude-primary",
+          "physical": 0,
+          "provider": "anthropic"
+        },
+        {
+          "body_sha256": "ea9e7f5836cf4c31894b6d54590309dac695d7f0c648800ee60b840d0bc71992",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "logical_id": "640b725d9fd1cfd2989377e5de7ffeb6d96a2614bfb5ab01d51a793459029238",
+          "model": "claude-primary",
+          "physical": 0,
+          "provider": "anthropic"
+        }
+      ],
+      "sdk_max_retries": 8,
+      "sdk_transport_calls": 1,
+      "sent": [
+        {
+          "body_sha256": "ea9e7f5836cf4c31894b6d54590309dac695d7f0c648800ee60b840d0bc71992",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "anthropic-workspace-id": "offline-owner-workspace",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "provider": "anthropic"
+        }
+      ],
+      "totals": {
+        "committed_microusd": 5,
+        "operation_count": 1,
+        "reserved_microusd": 0,
+        "spent_microusd": 5
+      }
+    },
+    {
+      "mock_https_sends": 1,
+      "mode": "unknown",
+      "operations": [
+        {
+          "actual_microusd": null,
+          "operation_id": "a0a7fd799bda75bd46dcfa3b2ed5b583d588db802284082bafde8f277cd3e33a",
+          "raw_body_sha256": "121b90978d67b086e02329112bd2a3cd16937f5f4b3ff933fb534b61f19e9dfa",
+          "receipt_sha256": "917a6fb826f0a385960a01738f2041627fc391f1e4d22c4cdcaef8861d0d144c",
+          "reserve_microusd": 2032000,
+          "status": "unknown"
+        }
+      ],
+      "outcome": {
+        "error": "NativeStop",
+        "reason": "unknown"
+      },
+      "provider": "anthropic",
+      "replay": {
+        "additional_mock_https_sends": 0,
+        "outcome": {
+          "error": "NativeStop",
+          "reason": "authority"
+        },
+        "totals_unchanged": true
+      },
+      "requests": [],
+      "sdk_max_retries": 8,
+      "sdk_transport_calls": 1,
+      "sent": [
+        {
+          "body_sha256": "ea9e7f5836cf4c31894b6d54590309dac695d7f0c648800ee60b840d0bc71992",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "anthropic-workspace-id": "offline-owner-workspace",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "provider": "anthropic"
+        }
+      ],
+      "totals": {
+        "committed_microusd": 2032000,
+        "operation_count": 1,
+        "reserved_microusd": 2032000,
+        "spent_microusd": 0
+      }
+    },
+    {
+      "mock_https_sends": 1,
+      "mode": "status",
+      "operations": [
+        {
+          "actual_microusd": null,
+          "operation_id": "9975cdc682408502c9c87e07ade2761e1e47c485e86e80e5c3555db83444f8d1",
+          "raw_body_sha256": "2a0778d8603f64cd5b81d7dc59cb66c4cdbb890a9f41bb36b25bf485b062cdd5",
+          "receipt_sha256": "ef9ca53911a46485fd89838599dc33f189b5353f1a76b24b50f642a73634177a",
+          "reserve_microusd": 2032000,
+          "status": "unknown"
+        }
+      ],
+      "outcome": {
+        "error": "NativeStop",
+        "reason": "unknown"
+      },
+      "provider": "anthropic",
+      "replay": {
+        "additional_mock_https_sends": 0,
+        "outcome": {
+          "error": "NativeStop",
+          "reason": "authority"
+        },
+        "totals_unchanged": true
+      },
+      "requests": [],
+      "sdk_max_retries": 8,
+      "sdk_transport_calls": 1,
+      "sent": [
+        {
+          "body_sha256": "ea9e7f5836cf4c31894b6d54590309dac695d7f0c648800ee60b840d0bc71992",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "anthropic-workspace-id": "offline-owner-workspace",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "provider": "anthropic"
+        }
+      ],
+      "totals": {
+        "committed_microusd": 2032000,
+        "operation_count": 1,
+        "reserved_microusd": 2032000,
+        "spent_microusd": 0
+      }
+    },
+    {
+      "mock_https_sends": 1,
+      "mode": "partial",
+      "operations": [
+        {
+          "actual_microusd": null,
+          "operation_id": "d1c7b54238f787902cd4a3def9c6fb7dc3bd813c25e392200fa649efcbf2c080",
+          "raw_body_sha256": "1b7090933c0c2844d908025ea0e950d68f842bfc58ef50256e1923a92d9224f9",
+          "receipt_sha256": "0d8e64b3d9594c779cb071087d4b5564815726682aee111f9312acde2ec87c66",
+          "reserve_microusd": 2032000,
+          "status": "unknown"
+        }
+      ],
+      "outcome": {
+        "error": "NativeStop",
+        "reason": "unknown"
+      },
+      "provider": "anthropic",
+      "replay": {
+        "additional_mock_https_sends": 0,
+        "outcome": {
+          "error": "NativeStop",
+          "reason": "authority"
+        },
+        "totals_unchanged": true
+      },
+      "requests": [],
+      "sdk_max_retries": 8,
+      "sdk_transport_calls": 1,
+      "sent": [
+        {
+          "body_sha256": "ea9e7f5836cf4c31894b6d54590309dac695d7f0c648800ee60b840d0bc71992",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "anthropic-workspace-id": "offline-owner-workspace",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "provider": "anthropic"
+        }
+      ],
+      "totals": {
+        "committed_microusd": 2032000,
+        "operation_count": 1,
+        "reserved_microusd": 2032000,
+        "spent_microusd": 0
+      }
+    },
+    {
+      "mock_https_sends": 1,
+      "mode": "timeout",
+      "operations": [
+        {
+          "actual_microusd": null,
+          "operation_id": "d6ac98618fe4c75f8535fc4c4d5333470bc061dff5ce149ec8ff7cff82238b8d",
+          "raw_body_sha256": null,
+          "receipt_sha256": null,
+          "reserve_microusd": 2032000,
+          "status": "unknown"
+        }
+      ],
+      "outcome": {
+        "error": "NativeStop",
+        "reason": "unknown"
+      },
+      "provider": "anthropic",
+      "replay": {
+        "additional_mock_https_sends": 0,
+        "outcome": {
+          "error": "NativeStop",
+          "reason": "authority"
+        },
+        "totals_unchanged": true
+      },
+      "requests": [],
+      "sdk_max_retries": 8,
+      "sdk_transport_calls": 1,
+      "sent": [
+        {
+          "body_sha256": "ea9e7f5836cf4c31894b6d54590309dac695d7f0c648800ee60b840d0bc71992",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "anthropic-workspace-id": "offline-owner-workspace",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "provider": "anthropic"
+        }
+      ],
+      "totals": {
+        "committed_microusd": 2032000,
+        "operation_count": 1,
+        "reserved_microusd": 2032000,
+        "spent_microusd": 0
+      }
+    },
+    {
+      "mock_https_sends": 1,
+      "mode": "interrupted",
+      "operations": [
+        {
+          "actual_microusd": null,
+          "operation_id": "23b39110d5ac19428721ff92dcaf9946481c1e263597c0182f0925dfba0410d7",
+          "raw_body_sha256": "2a0778d8603f64cd5b81d7dc59cb66c4cdbb890a9f41bb36b25bf485b062cdd5",
+          "receipt_sha256": "3e82fbd4973a70480c3911993195906470ea24c9c38c1052196273abbfa595a9",
+          "reserve_microusd": 2032000,
+          "status": "unknown"
+        }
+      ],
+      "outcome": {
+        "error": "NativeStop",
+        "reason": "cancelled"
+      },
+      "provider": "anthropic",
+      "replay": {
+        "additional_mock_https_sends": 0,
+        "outcome": {
+          "error": "NativeStop",
+          "reason": "authority"
+        },
+        "totals_unchanged": true
+      },
+      "requests": [],
+      "sdk_max_retries": 8,
+      "sdk_transport_calls": 1,
+      "sent": [
+        {
+          "body_sha256": "ea9e7f5836cf4c31894b6d54590309dac695d7f0c648800ee60b840d0bc71992",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "anthropic-workspace-id": "offline-owner-workspace",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "provider": "anthropic"
+        }
+      ],
+      "totals": {
+        "committed_microusd": 2032000,
+        "operation_count": 1,
+        "reserved_microusd": 2032000,
+        "spent_microusd": 0
+      }
+    },
+    {
+      "mock_https_sends": 2,
+      "mode": "fallback",
+      "operations": [
+        {
+          "actual_microusd": 5,
+          "operation_id": "147e91e0a1351a9108035d6b3da0f4deea877e28d2e89c6dbf2f74f7ba8231f4",
+          "raw_body_sha256": "d459e69bf8cb10a1e760798218e628cb09558e5a28f1d1c00d2a9fd0f3104fc2",
+          "receipt_sha256": "7b690252fad86d7ad25eac7b5b3db7a9fd7927023f60ce6f920ccb39d3cbd2b2",
+          "reserve_microusd": 2032000,
+          "status": "completed"
+        },
+        {
+          "actual_microusd": 5,
+          "operation_id": "08d6e491d3171a994e0599973ca96909fd57bb023129d369a7662ad27a831b1a",
+          "raw_body_sha256": "4743c1bde5bb2b32265fc08c5bf7e277a116818cef49b0208c08782cc29aa3b9",
+          "receipt_sha256": "24a0cc0c9ca02bf14ca8d03f2c271942050f9407390e4f65faaf78dc2a3631f1",
+          "reserve_microusd": 2032000,
+          "status": "completed"
+        }
+      ],
+      "outcome": {
+        "value": [
+          {
+            "score": 7
+          },
+          "claude-fallback"
+        ]
+      },
+      "provider": "anthropic",
+      "replay": {
+        "additional_mock_https_sends": 0,
+        "outcome": {
+          "value": [
+            {
+              "score": 7
+            },
+            "claude-fallback"
+          ]
+        },
+        "totals_unchanged": true
+      },
+      "requests": [
+        {
+          "body_sha256": "ea9e7f5836cf4c31894b6d54590309dac695d7f0c648800ee60b840d0bc71992",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "logical_id": "640b725d9fd1cfd2989377e5de7ffeb6d96a2614bfb5ab01d51a793459029238",
+          "model": "claude-primary",
+          "physical": 0,
+          "provider": "anthropic"
+        },
+        {
+          "body_sha256": "9040c136b840431ca43c111650cbf66bf9acef816bdd9496c0119af2049f7972",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "logical_id": "4ea0775c249ee44ba9c77b0f7533d994c2583b1736ac550175e3d2dc2321f2c3",
+          "model": "claude-fallback",
+          "physical": 0,
+          "provider": "anthropic"
+        },
+        {
+          "body_sha256": "ea9e7f5836cf4c31894b6d54590309dac695d7f0c648800ee60b840d0bc71992",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "logical_id": "640b725d9fd1cfd2989377e5de7ffeb6d96a2614bfb5ab01d51a793459029238",
+          "model": "claude-primary",
+          "physical": 0,
+          "provider": "anthropic"
+        },
+        {
+          "body_sha256": "9040c136b840431ca43c111650cbf66bf9acef816bdd9496c0119af2049f7972",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "logical_id": "4ea0775c249ee44ba9c77b0f7533d994c2583b1736ac550175e3d2dc2321f2c3",
+          "model": "claude-fallback",
+          "physical": 0,
+          "provider": "anthropic"
+        }
+      ],
+      "sdk_max_retries": 8,
+      "sdk_transport_calls": 2,
+      "sent": [
+        {
+          "body_sha256": "ea9e7f5836cf4c31894b6d54590309dac695d7f0c648800ee60b840d0bc71992",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "anthropic-workspace-id": "offline-owner-workspace",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "provider": "anthropic"
+        },
+        {
+          "body_sha256": "9040c136b840431ca43c111650cbf66bf9acef816bdd9496c0119af2049f7972",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "anthropic-workspace-id": "offline-owner-workspace",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "provider": "anthropic"
+        }
+      ],
+      "totals": {
+        "committed_microusd": 10,
+        "operation_count": 2,
+        "reserved_microusd": 0,
+        "spent_microusd": 10
+      }
+    },
+    {
+      "mock_https_sends": 1,
+      "mode": "duplicate",
+      "operations": [
+        {
+          "actual_microusd": 5,
+          "operation_id": "c55298ed2692db0a702ea8de3c5805f771e552af3a1d5eb7790541e3780ea369",
+          "raw_body_sha256": "9d5edf0bbb997e411eb71ce6faf8a389b75a79c51dad1ce72b6db2f6fd4bc4ba",
+          "receipt_sha256": "7e88c0d66d6d56315cacd2e6b67396b5cbe02be4642f2933c2b5387a792fc4fd",
+          "reserve_microusd": 2032000,
+          "status": "completed"
+        }
+      ],
+      "outcome": {
+        "value": [
+          {
+            "score": 7
+          },
+          "claude-primary"
+        ]
+      },
+      "provider": "anthropic",
+      "replay": {
+        "additional_mock_https_sends": 0,
+        "outcome": {
+          "value": [
+            {
+              "score": 7
+            },
+            "claude-primary"
+          ]
+        },
+        "totals_unchanged": true
+      },
+      "requests": [
+        {
+          "body_sha256": "ea9e7f5836cf4c31894b6d54590309dac695d7f0c648800ee60b840d0bc71992",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "logical_id": "640b725d9fd1cfd2989377e5de7ffeb6d96a2614bfb5ab01d51a793459029238",
+          "model": "claude-primary",
+          "physical": 0,
+          "provider": "anthropic"
+        },
+        {
+          "body_sha256": "ea9e7f5836cf4c31894b6d54590309dac695d7f0c648800ee60b840d0bc71992",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "logical_id": "640b725d9fd1cfd2989377e5de7ffeb6d96a2614bfb5ab01d51a793459029238",
+          "model": "claude-primary",
+          "physical": 0,
+          "provider": "anthropic"
+        }
+      ],
+      "sdk_max_retries": 8,
+      "sdk_transport_calls": 1,
+      "sent": [
+        {
+          "body_sha256": "ea9e7f5836cf4c31894b6d54590309dac695d7f0c648800ee60b840d0bc71992",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "anthropic-workspace-id": "offline-owner-workspace",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "provider": "anthropic"
+        }
+      ],
+      "totals": {
+        "committed_microusd": 5,
+        "operation_count": 1,
+        "reserved_microusd": 0,
+        "spent_microusd": 5
+      }
+    },
+    {
+      "mock_https_sends": 1,
+      "mode": "multiblock",
+      "operations": [
+        {
+          "actual_microusd": 5,
+          "operation_id": "604645494d3cba89b14075aac4a04fcae5533e74111ab56f70b918da97b92371",
+          "raw_body_sha256": "9d6e3e6e2ff36f8d4507fc5078602ca6414c9fc2690c9085117fe7ccff03de8d",
+          "receipt_sha256": "569fd814d4b1ebc60c5a03bad24c38747effdda64e9a20f2d3522f8fe7bf62f0",
+          "reserve_microusd": 2032000,
+          "status": "completed"
+        }
+      ],
+      "outcome": {
+        "value": [
+          {
+            "score": 7
+          },
+          "claude-primary"
+        ]
+      },
+      "provider": "anthropic",
+      "replay": {
+        "additional_mock_https_sends": 0,
+        "outcome": {
+          "value": [
+            {
+              "score": 7
+            },
+            "claude-primary"
+          ]
+        },
+        "totals_unchanged": true
+      },
+      "requests": [
+        {
+          "body_sha256": "ea9e7f5836cf4c31894b6d54590309dac695d7f0c648800ee60b840d0bc71992",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "logical_id": "640b725d9fd1cfd2989377e5de7ffeb6d96a2614bfb5ab01d51a793459029238",
+          "model": "claude-primary",
+          "physical": 0,
+          "provider": "anthropic"
+        },
+        {
+          "body_sha256": "ea9e7f5836cf4c31894b6d54590309dac695d7f0c648800ee60b840d0bc71992",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "logical_id": "640b725d9fd1cfd2989377e5de7ffeb6d96a2614bfb5ab01d51a793459029238",
+          "model": "claude-primary",
+          "physical": 0,
+          "provider": "anthropic"
+        }
+      ],
+      "sdk_max_retries": 8,
+      "sdk_transport_calls": 1,
+      "sent": [
+        {
+          "body_sha256": "ea9e7f5836cf4c31894b6d54590309dac695d7f0c648800ee60b840d0bc71992",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "anthropic-workspace-id": "offline-owner-workspace",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "provider": "anthropic"
+        }
+      ],
+      "totals": {
+        "committed_microusd": 5,
+        "operation_count": 1,
+        "reserved_microusd": 0,
+        "spent_microusd": 5
+      }
+    },
+    {
+      "mock_https_sends": 0,
+      "mode": "valid",
+      "operations": [],
+      "outcome": {
+        "error": "NativeStop",
+        "reason": "authority"
+      },
+      "provider": "anthropic",
+      "requests": [],
+      "sdk_max_retries": 8,
+      "sdk_transport_calls": 1,
+      "sent": [],
+      "totals": {
+        "committed_microusd": 0,
+        "operation_count": 0,
+        "reserved_microusd": 0,
+        "spent_microusd": 0
+      }
+    },
+    {
+      "mock_https_sends": 3,
+      "mode": "fold",
+      "operations": [
+        {
+          "actual_microusd": 5,
+          "operation_id": "604e16560280b88ba6c4b7e0d4de2f99661719cfefd483b25b419f6ebc87ce1c",
+          "raw_body_sha256": "4620ee2d132b52a0fdbf671fe87d9061126a3a3d5b62ff6d75094dbc79b654d0",
+          "receipt_sha256": "bd562b0c63262576e520a33ce287db355337c1191a92a953f3ae9436bb8f9155",
+          "reserve_microusd": 2256000,
+          "status": "completed"
+        },
+        {
+          "actual_microusd": 5,
+          "operation_id": "9ac7fa58531828707e43d17c5cc1d71cf54ea615d95d290be1da36e384f2a541",
+          "raw_body_sha256": "4620ee2d132b52a0fdbf671fe87d9061126a3a3d5b62ff6d75094dbc79b654d0",
+          "receipt_sha256": "a085743017d6db690c99e32c91071d80bace7cb54d62729fbcb77197eef579fa",
+          "reserve_microusd": 2256000,
+          "status": "completed"
+        },
+        {
+          "actual_microusd": 5,
+          "operation_id": "2f4184b3d70ff640c1e589c795af4ff1f9c9d42d21d22c4f6e5d15467ed71bcc",
+          "raw_body_sha256": "4620ee2d132b52a0fdbf671fe87d9061126a3a3d5b62ff6d75094dbc79b654d0",
+          "receipt_sha256": "232dd035323f0c5b5c538f29af8b5497d65676aa6ac528a582fbaba6b5673124",
+          "reserve_microusd": 2256000,
+          "status": "completed"
+        }
+      ],
+      "outcome": {
+        "value": {
+          "distinct": 2,
+          "partition": [
+            0,
+            1
+          ]
+        }
+      },
+      "provider": "openai",
+      "requests": [
+        {
+          "body_sha256": "4990913d08b32f3e0f4928619d47dd554de957173730480e935080a65be49f21",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "user-agent": "AsyncOpenAI/Python 1.107.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-helper-method": "chat.completions.parse",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.107.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12"
+          },
+          "logical_id": "640b725d9fd1cfd2989377e5de7ffeb6d96a2614bfb5ab01d51a793459029238",
+          "model": "test-model",
+          "physical": 0,
+          "provider": "openai"
+        },
+        {
+          "body_sha256": "4990913d08b32f3e0f4928619d47dd554de957173730480e935080a65be49f21",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "user-agent": "AsyncOpenAI/Python 1.107.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-helper-method": "chat.completions.parse",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.107.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12"
+          },
+          "logical_id": "e2ca5722c10d0b16148361517f9b3b465a339c0abe6e306829529a3ade754926",
+          "model": "test-model",
+          "physical": 0,
+          "provider": "openai"
+        },
+        {
+          "body_sha256": "4990913d08b32f3e0f4928619d47dd554de957173730480e935080a65be49f21",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "user-agent": "AsyncOpenAI/Python 1.107.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-helper-method": "chat.completions.parse",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.107.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12"
+          },
+          "logical_id": "ca4d802fae5ac7787cfef2a0eec8f2931453e910926dc9f89a1690497eb6288b",
+          "model": "test-model",
+          "physical": 0,
+          "provider": "openai"
+        }
+      ],
+      "sdk_max_retries": 8,
+      "sdk_transport_calls": 3,
+      "sent": [
+        {
+          "body_sha256": "4990913d08b32f3e0f4928619d47dd554de957173730480e935080a65be49f21",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "openai-project": "offline-owner-project",
+            "user-agent": "AsyncOpenAI/Python 1.107.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-helper-method": "chat.completions.parse",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.107.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12"
+          },
+          "provider": "openai"
+        },
+        {
+          "body_sha256": "4990913d08b32f3e0f4928619d47dd554de957173730480e935080a65be49f21",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "openai-project": "offline-owner-project",
+            "user-agent": "AsyncOpenAI/Python 1.107.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-helper-method": "chat.completions.parse",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.107.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12"
+          },
+          "provider": "openai"
+        },
+        {
+          "body_sha256": "4990913d08b32f3e0f4928619d47dd554de957173730480e935080a65be49f21",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "openai-project": "offline-owner-project",
+            "user-agent": "AsyncOpenAI/Python 1.107.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-helper-method": "chat.completions.parse",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.107.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12"
+          },
+          "provider": "openai"
+        }
+      ],
+      "totals": {
+        "committed_microusd": 15,
+        "operation_count": 3,
+        "reserved_microusd": 0,
+        "spent_microusd": 15
+      }
+    },
+    {
+      "fresh_native_cache_replay": {
+        "additional_mock_https_sends": 0,
+        "totals_unchanged": true
+      },
+      "mock_https_sends": 6,
+      "mode": "rows",
+      "operations": [
+        {
+          "actual_microusd": 5,
+          "operation_id": "4d6e2854d6ec39ce72806e19b9e5b482b55aca8dbed8ec06eebc567f857df0d3",
+          "raw_body_sha256": "2a0778d8603f64cd5b81d7dc59cb66c4cdbb890a9f41bb36b25bf485b062cdd5",
+          "receipt_sha256": "5d4f761a0b1b69df582bf72314828199afe5b1ad9cfa1c74b570e25b5fc6444f",
+          "reserve_microusd": 2032000,
+          "status": "completed"
+        },
+        {
+          "actual_microusd": 5,
+          "operation_id": "f91b92a4722857526f7cd124da31dfb5b38086b1c3bc4d2ddb9a0fe973a76cab",
+          "raw_body_sha256": "2a0778d8603f64cd5b81d7dc59cb66c4cdbb890a9f41bb36b25bf485b062cdd5",
+          "receipt_sha256": "4ca479ffcb8d0e36afaa12064d8201dff51bd28c72145ba1d3a111c68b5c8458",
+          "reserve_microusd": 2032000,
+          "status": "completed"
+        },
+        {
+          "actual_microusd": 5,
+          "operation_id": "d0a2781295d7c6cf13a164775e1d1fb5a271f6ae55954a48eda285678e64a7e8",
+          "raw_body_sha256": "2a0778d8603f64cd5b81d7dc59cb66c4cdbb890a9f41bb36b25bf485b062cdd5",
+          "receipt_sha256": "e47a0b597724350900bfbcf82921b3fd5deaf3cd8ba6153c916043b8fb9553a4",
+          "reserve_microusd": 2032000,
+          "status": "completed"
+        },
+        {
+          "actual_microusd": 5,
+          "operation_id": "da6eb85b39843b78114b81113f8b6e4e54ded10a564b6757640d6571aaef4e72",
+          "raw_body_sha256": "2a0778d8603f64cd5b81d7dc59cb66c4cdbb890a9f41bb36b25bf485b062cdd5",
+          "receipt_sha256": "55c4c6058f9940ca0402480e5d2c3fa2e786f2c8077466420ebedb5578e34579",
+          "reserve_microusd": 2032000,
+          "status": "completed"
+        },
+        {
+          "actual_microusd": 5,
+          "operation_id": "614fb828e86a2ca17b44a8de21e2db46e365c4248f8b9426a4f0478309151dba",
+          "raw_body_sha256": "2a0778d8603f64cd5b81d7dc59cb66c4cdbb890a9f41bb36b25bf485b062cdd5",
+          "receipt_sha256": "b0870f5eeaba1f5ac3e8872f34634cd83f3c6034dc5e7967c793ba095db79640",
+          "reserve_microusd": 2032000,
+          "status": "completed"
+        },
+        {
+          "actual_microusd": 5,
+          "operation_id": "f64b10134563a43b68aeb4d1f9a5894ea3299da41f82ba62e78c113305f23871",
+          "raw_body_sha256": "2a0778d8603f64cd5b81d7dc59cb66c4cdbb890a9f41bb36b25bf485b062cdd5",
+          "receipt_sha256": "3fe72c0e2620f8d0d63269860b3d6ff44cbdc9b7f2c6e4439c5c5c9c70d74695",
+          "reserve_microusd": 2032000,
+          "status": "completed"
+        }
+      ],
+      "outcome": {
+        "value": [
+          {
+            "generation_scores": [
+              7,
+              7
+            ],
+            "generations": [
+              "same",
+              "same"
+            ],
+            "id": "a",
+            "partition": [
+              0,
+              1
+            ],
+            "prompt": "identical",
+            "score_config": {
+              "judge_model": "claude-primary"
+            },
+            "score_key": "305bfb602e8c831ac36e1cfdf0f9af013b687cece6479d2c633d9b43cefc4e07"
+          },
+          {
+            "generation_scores": [
+              7,
+              7
+            ],
+            "generations": [
+              "same",
+              "same"
+            ],
+            "id": "b",
+            "partition": [
+              0,
+              1
+            ],
+            "prompt": "identical",
+            "score_config": {
+              "judge_model": "claude-primary"
+            },
+            "score_key": "305bfb602e8c831ac36e1cfdf0f9af013b687cece6479d2c633d9b43cefc4e07"
+          },
+          {
+            "generation_scores": [
+              7,
+              7
+            ],
+            "generations": [
+              "same",
+              "same"
+            ],
+            "id": "c",
+            "partition": [
+              0,
+              1
+            ],
+            "prompt": "identical",
+            "score_config": {
+              "judge_model": "claude-primary"
+            },
+            "score_key": "305bfb602e8c831ac36e1cfdf0f9af013b687cece6479d2c633d9b43cefc4e07"
+          }
+        ]
+      },
+      "provider": "anthropic",
+      "requests": [
+        {
+          "body_sha256": "a98d794cf95fcf0e815d4f495b62716f7c62ce2ce4111a4ed9bc35268cd4ca4f",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "logical_id": "8c45314a7650e26eb9488bca65d4fcc00bbf97756bd671dc0f015101ed3d761e",
+          "model": "claude-primary",
+          "physical": 0,
+          "provider": "anthropic"
+        },
+        {
+          "body_sha256": "a98d794cf95fcf0e815d4f495b62716f7c62ce2ce4111a4ed9bc35268cd4ca4f",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "logical_id": "05111e38967d420695be09db6f3dfc052df37a8a173419c551a51ba9ad83990a",
+          "model": "claude-primary",
+          "physical": 0,
+          "provider": "anthropic"
+        },
+        {
+          "body_sha256": "a98d794cf95fcf0e815d4f495b62716f7c62ce2ce4111a4ed9bc35268cd4ca4f",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "logical_id": "0d34a464d0bb6d22ede8e96f4467dc635a6ce8776d50db76f28efb54d0da6e45",
+          "model": "claude-primary",
+          "physical": 0,
+          "provider": "anthropic"
+        },
+        {
+          "body_sha256": "a98d794cf95fcf0e815d4f495b62716f7c62ce2ce4111a4ed9bc35268cd4ca4f",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "logical_id": "1bd2307a8f076567d80c1ef92ca18270eae739afe9d6a211aba48d8025e83d4b",
+          "model": "claude-primary",
+          "physical": 0,
+          "provider": "anthropic"
+        },
+        {
+          "body_sha256": "a98d794cf95fcf0e815d4f495b62716f7c62ce2ce4111a4ed9bc35268cd4ca4f",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "logical_id": "06b9c381268f3c7faba40add48472703b7181678f03a3aee9bd7203a942370e9",
+          "model": "claude-primary",
+          "physical": 0,
+          "provider": "anthropic"
+        },
+        {
+          "body_sha256": "a98d794cf95fcf0e815d4f495b62716f7c62ce2ce4111a4ed9bc35268cd4ca4f",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "logical_id": "a57b547b415b8c4817781b706d813f10634a5a3c201a420ea88b6d98a710088c",
+          "model": "claude-primary",
+          "physical": 0,
+          "provider": "anthropic"
+        },
+        {
+          "body_sha256": "a98d794cf95fcf0e815d4f495b62716f7c62ce2ce4111a4ed9bc35268cd4ca4f",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "logical_id": "a57b547b415b8c4817781b706d813f10634a5a3c201a420ea88b6d98a710088c",
+          "model": "claude-primary",
+          "physical": 0,
+          "provider": "anthropic"
+        },
+        {
+          "body_sha256": "a98d794cf95fcf0e815d4f495b62716f7c62ce2ce4111a4ed9bc35268cd4ca4f",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "logical_id": "1bd2307a8f076567d80c1ef92ca18270eae739afe9d6a211aba48d8025e83d4b",
+          "model": "claude-primary",
+          "physical": 0,
+          "provider": "anthropic"
+        },
+        {
+          "body_sha256": "a98d794cf95fcf0e815d4f495b62716f7c62ce2ce4111a4ed9bc35268cd4ca4f",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "logical_id": "8c45314a7650e26eb9488bca65d4fcc00bbf97756bd671dc0f015101ed3d761e",
+          "model": "claude-primary",
+          "physical": 0,
+          "provider": "anthropic"
+        },
+        {
+          "body_sha256": "a98d794cf95fcf0e815d4f495b62716f7c62ce2ce4111a4ed9bc35268cd4ca4f",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "logical_id": "06b9c381268f3c7faba40add48472703b7181678f03a3aee9bd7203a942370e9",
+          "model": "claude-primary",
+          "physical": 0,
+          "provider": "anthropic"
+        },
+        {
+          "body_sha256": "a98d794cf95fcf0e815d4f495b62716f7c62ce2ce4111a4ed9bc35268cd4ca4f",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "logical_id": "05111e38967d420695be09db6f3dfc052df37a8a173419c551a51ba9ad83990a",
+          "model": "claude-primary",
+          "physical": 0,
+          "provider": "anthropic"
+        },
+        {
+          "body_sha256": "a98d794cf95fcf0e815d4f495b62716f7c62ce2ce4111a4ed9bc35268cd4ca4f",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "logical_id": "0d34a464d0bb6d22ede8e96f4467dc635a6ce8776d50db76f28efb54d0da6e45",
+          "model": "claude-primary",
+          "physical": 0,
+          "provider": "anthropic"
+        }
+      ],
+      "sdk_max_retries": 8,
+      "sdk_transport_calls": 6,
+      "sent": [
+        {
+          "body_sha256": "a98d794cf95fcf0e815d4f495b62716f7c62ce2ce4111a4ed9bc35268cd4ca4f",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "anthropic-workspace-id": "offline-owner-workspace",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "provider": "anthropic"
+        },
+        {
+          "body_sha256": "a98d794cf95fcf0e815d4f495b62716f7c62ce2ce4111a4ed9bc35268cd4ca4f",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "anthropic-workspace-id": "offline-owner-workspace",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "provider": "anthropic"
+        },
+        {
+          "body_sha256": "a98d794cf95fcf0e815d4f495b62716f7c62ce2ce4111a4ed9bc35268cd4ca4f",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "anthropic-workspace-id": "offline-owner-workspace",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "provider": "anthropic"
+        },
+        {
+          "body_sha256": "a98d794cf95fcf0e815d4f495b62716f7c62ce2ce4111a4ed9bc35268cd4ca4f",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "anthropic-workspace-id": "offline-owner-workspace",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "provider": "anthropic"
+        },
+        {
+          "body_sha256": "a98d794cf95fcf0e815d4f495b62716f7c62ce2ce4111a4ed9bc35268cd4ca4f",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "anthropic-workspace-id": "offline-owner-workspace",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "provider": "anthropic"
+        },
+        {
+          "body_sha256": "a98d794cf95fcf0e815d4f495b62716f7c62ce2ce4111a4ed9bc35268cd4ca4f",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "anthropic-workspace-id": "offline-owner-workspace",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "provider": "anthropic"
+        }
+      ],
+      "totals": {
+        "committed_microusd": 30,
+        "operation_count": 6,
+        "reserved_microusd": 0,
+        "spent_microusd": 30
+      }
+    },
+    {
+      "mock_https_sends": 1,
+      "mode": "rows_stop",
+      "operations": [
+        {
+          "actual_microusd": null,
+          "operation_id": "033a0e93452eecdd7c2df522f64619d3d67ce461283d8602ac998740bdcd28b9",
+          "raw_body_sha256": "121b90978d67b086e02329112bd2a3cd16937f5f4b3ff933fb534b61f19e9dfa",
+          "receipt_sha256": "fd151f9de3960dfeab18b03df22885849fa233147a73eea6a584c02664b7aac6",
+          "reserve_microusd": 2032000,
+          "status": "unknown"
+        }
+      ],
+      "outcome": {
+        "error": "NativeStop",
+        "reason": "unknown"
+      },
+      "provider": "anthropic",
+      "requests": [],
+      "sdk_max_retries": 8,
+      "sdk_transport_calls": 1,
+      "sent": [
+        {
+          "body_sha256": "a98d794cf95fcf0e815d4f495b62716f7c62ce2ce4111a4ed9bc35268cd4ca4f",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "anthropic-version": "2023-06-01",
+            "anthropic-workspace-id": "offline-owner-workspace",
+            "content-type": "application/json",
+            "user-agent": "AsyncAnthropic/Python 1.4.0",
+            "x-stainless-arch": "other:amd64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Windows",
+            "x-stainless-package-version": "1.4.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12",
+            "x-stainless-timeout": "600"
+          },
+          "provider": "anthropic"
+        }
+      ],
+      "totals": {
+        "committed_microusd": 2032000,
+        "operation_count": 1,
+        "reserved_microusd": 2032000,
+        "spent_microusd": 0
+      }
+    }
+  ],
+  "sdk_private_methods_patched": false,
+  "sdk_versions": {
+    "anthropic": "1.4.0",
+    "httpx": "0.28.1",
+    "httpx2": "2.12.0",
+    "openai": "1.107.0",
+    "pydantic": "2.11.7"
+  },
+  "upstream_source_sha256": {
+    "LICENSE": "14e69e7fbb2f8fd0aa8ccf17d7d4ddd54665555c613a0336767f7a5fa477895c",
+    "src/common.py": "ba60bf0f2a409c3774d75880f305325a28ed34320610667542a4596c41f424af",
+    "src/evaluation_io.py": "8a34e01308677469d984dd59e36412c2994baf2554fd3a5f026be9ef98a3a5c7",
+    "src/judge.py": "4decf04790b90a03368eb792dfe29045435914a73ab83a52185d9dd0d1613902",
+    "src/partition.py": "263970891ff3ee1cc8df369a33beefe5cb5de618b5dd146a5234536d97954aca",
+    "src/score.py": "418985a40e9e159cfeffe9a43ab2c727010d7a7a29407f4e14cab3c81b77cbae"
+  }
+}
