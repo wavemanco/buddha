@@ -109,7 +109,19 @@
       "skips_each": 1
     }
   },
-  "this_slice_hosted_ci": "pending publication",
+  "this_slice_hosted_ci": {
+    "commit": "2ed10a769454b9e61192da057ce32284a1ccdf75",
+    "pr_run": 39451326961,
+    "push_run": 39451297128,
+    "windows": "success",
+    "ubuntu": "success",
+    "pr_tests": {
+      "count": 555,
+      "windows_seconds": 479.135,
+      "ubuntu_seconds": 118.125,
+      "skips_each": 1
+    }
+  },
   "source_sha256": {
     "buddha/gateway.py": "8f6d2c08c8d41c8f4a869c30c7b9e8bbe4c40c78e0219a519dc9211c3748315b",
     "buddha/wire.py": "48f40a71bf10c84dfd1d15f0baef50198cce8a229748355f116ad6a25cab12b4",

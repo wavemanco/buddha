@@ -14,6 +14,8 @@ The [first-run incident review](docs/FIRST-LIVE-REVIEW.md) preserves the uncerta
 
 The [direct conformance audit](docs/NOVELTYBENCH-CONFORMANCE.md) confirms successful metric construction but records request/parser/recovery differences from native upstream execution. Benchmark alignment is the next gate before larger experiments; historical scores and profiles remain unchanged.
 
+The modular foundation now separates release identity, frozen answers, paid authority and SDK transport. [Confined native execution](docs/CONFINED-NATIVE-EVALUATION.md) runs complete official LLM scoring and summary commands in separately verified Linux workers through that boundary. Full partition execution, frozen seed generation and the composed release-upgrade/retirement proof remain open. This adds an offline-tested library path; no new paid CLI or allocation is enabled.
+
 The normative reference is the latest official NoveltyBench code, checked during this work: **v1.1**, commit `64a23be6b18ec1dacc298830aab276061b6e143c`. The paper is historical context. New CLI experiments check upstream HEAD and refuse to start if the reference changed; existing runs keep their frozen version. There is no v1.0 runtime path.
 
 ## Run the offline example

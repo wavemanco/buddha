@@ -1,0 +1,22 @@
+{"label": "direct-valid-oai", "status": "complete", "captures": 4, "files": ["v1.1/partitions.jsonl", "v1.1/scores.jsonl"]}
+{"label": "direct-valid-anthropic", "status": "complete", "captures": 4, "files": ["v1.1/partitions.jsonl", "v1.1/scores.jsonl"]}
+{"label": "valid-oai", "replay": false, "status": "complete", "requests": 4, "sends": 4, "ledger": {"committed_microusd": 20, "spent_microusd": 20, "reserved_microusd": 0, "operation_count": 4}}
+{"label": "valid-oai", "replay": true, "status": "complete", "requests": 4, "sends": 0, "ledger": {"committed_microusd": 20, "spent_microusd": 20, "reserved_microusd": 0, "operation_count": 4}}
+{"label": "direct-summary", "status": "complete", "captures": 0, "files": ["v1.1/scores.jsonl", "v1.1/summary.json"]}
+{"label": "summary", "replay": false, "status": "complete", "requests": 0, "sends": 0, "ledger": {"committed_microusd": 0, "spent_microusd": 0, "reserved_microusd": 0, "operation_count": 0}}
+{"label": "direct-full-cache", "status": "complete", "captures": 0, "files": ["v1.1/partitions.jsonl", "v1.1/scores.jsonl"]}
+{"label": "full-cache", "replay": false, "status": "complete", "requests": 0, "sends": 0, "ledger": {"committed_microusd": 0, "spent_microusd": 0, "reserved_microusd": 0, "operation_count": 0}}
+{"label": "direct-partial-cache", "status": "complete", "captures": 2, "files": ["v1.1/partitions.jsonl", "v1.1/scores.jsonl"]}
+{"label": "partial-cache", "replay": false, "status": "complete", "requests": 2, "sends": 2, "ledger": {"committed_microusd": 10, "spent_microusd": 10, "reserved_microusd": 0, "operation_count": 2}}
+{"label": "direct-bad-oai", "status": "failed", "captures": 3, "files": ["v1.1/partitions.jsonl", "v1.1/scores.jsonl.partial"]}
+{"label": "bad-oai", "replay": false, "status": "failed", "requests": 4, "sends": 4, "ledger": {"committed_microusd": 20, "spent_microusd": 20, "reserved_microusd": 0, "operation_count": 4}}
+Traceback (most recent call last):
+  File "C:\Users\arvik\code\buddha\docs\conformance\nb02c3-funded-native-probe.py", line 894, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\arvik\code\buddha\docs\conformance\nb02c3-funded-native-probe.py", line 781, in main
+    comparison = compare(direct_result, funded_result)
+  File "C:\Users\arvik\code\buddha\docs\conformance\nb02c3-funded-native-probe.py", line 690, in compare
+    assert keys(direct_evidence["captures"]) == keys(funded_evidence["sends"])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
