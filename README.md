@@ -4,7 +4,7 @@ Build agents that improve their own procedures for producing useful, meaningfull
 
 **Start with [the consolidated living plan](docs/PLAN.md)** for the complete original objective, completed work, new findings, dependencies and the next slice. It is the sole current roadmap; design and review documents supply specifications and evidence.
 
-Git history and slice PRs are maintained in [wavemanco/buddha](https://github.com/wavemanco/buddha). The initial commit preserves the existing slices together; subsequent changes use separate slice branches. The [recovery contract](docs/RECOVERY-CONTRACT.md) covers sealed history and the new shared spending authority; linked continuation is not yet executable.
+Git history and slice PRs are maintained in [wavemanco/buddha](https://github.com/wavemanco/buddha). The initial commit preserves the existing slices together; subsequent changes use separate slice branches. The [recovery contract](docs/RECOVERY-CONTRACT.md) covers sealed history, shared spending authority and unsent preparation. The read-only `continuation-source` command verifies the nine original receipt slots and preserved scientific source; linked execution is the next slice and is not yet available.
 
 **Slice 3 is implemented and its live pilot is complete:** bounded policy optimization with a fixed proposer, candidate archive, shared spending ledger and common development screen, alongside the existing v1.1 baseline runner. The recovery pilot completed 63 calls for $0.300153 in recorded conservative cost; its child scored higher on one development prompt. This is exploratory evidence, not a held-out improvement claim. See [the completed results and limitations](docs/FIRST-LIVE-RESULTS.md). Generated-source self-modification remains a later slice.
 

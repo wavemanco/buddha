@@ -273,6 +273,14 @@ def _search_demo(destination: Path) -> None:
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
+    continuation_source = commands.add_parser(
+        "continuation-source", help="verify original receipt slots and saved science offline"
+    )
+    continuation_source.add_argument("--source", type=Path, required=True)
+    continuation_source.add_argument("--manifest-sha256", required=True)
+    continuation_source.add_argument("--ledger-sha256", required=True)
+    continuation_source.add_argument("--archive", type=Path, required=True)
+    continuation_source.add_argument("--archive-sha256", required=True)
     authorization_create = commands.add_parser(
         "authorization-create", help="create one explicit shared dollar/call authorization offline"
     )
@@ -374,7 +382,35 @@ def main(argv: Sequence[str] | None = None) -> int:
                 raise ValidationError("--live requires an existing --authorization database")
             authorization = Authorization(args.authorization)
             authorization.for_run(args.run).authorize_dispatch()
-        if args.command == "authorization-create":
+        if args.command == "continuation-source":
+            from buddha.continuation import read_source
+
+            source = read_source(
+                args.source,
+                manifest_sha256=args.manifest_sha256,
+                ledger_sha256=args.ledger_sha256,
+                archived_runtime_zip=args.archive,
+                archived_runtime_sha256=args.archive_sha256,
+            )
+            print(
+                json.dumps(
+                    {
+                        "status": "verified_source",
+                        "model_calls": 0,
+                        "source_run_id": source.history.run_id,
+                        "source_manifest_sha256": source.history.manifest_sha256,
+                        "source_ledger_sha256": source.history.ledger_sha256,
+                        "completed_receipts": len(source.completed),
+                        "inherited_microusd": sum(
+                            item.actual_microusd or 0 for item in source.completed
+                        ),
+                        "unknown_operation_id": source.unknown.operation_id,
+                        "unknown_hold_microusd": source.unknown.reserve_microusd,
+                        "claim": "source verified; no continuation prepared or spending allocated",
+                    }
+                )
+            )
+        elif args.command == "authorization-create":
             budget = _usd(args.budget_usd)
             if not args.scope.strip():
                 raise ValidationError("authorization scope must be nonblank")
