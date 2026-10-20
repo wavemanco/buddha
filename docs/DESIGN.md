@@ -2,6 +2,8 @@
 
 The [consolidated living plan](PLAN.md) owns current sequence, status, dependencies and the next slice. This document owns the architecture and scientific contract. Its original slice numbers below are retained for traceability, not as a competing roadmap.
 
+The [replaceable benchmark contract](BENCHMARK-INTEGRATION.md) supplies the confirmed upgrade/retirement boundary: pin a new official evaluator through release configuration, run the existing frozen agent after compatibility/funding checks, then use development results for later self-improvement. Agent treatment, benchmark driver and shared paid gateway have separate identities and responsibilities. This boundary still needs implementation; the historical v1.1-specific interfaces described below remain frozen evidence, not a universal integration API.
+
 Design date: October 18, 2026; implementation status updated October 20. Slices 1–3 and bounded linked recovery are implemented; source evolution remains proposed. The interrupted first attempt now has a verified linked result reusing its nine replies, while the original missing request stays unknown and held. The fresh restart also completed its one-prompt pilot. Observed score differences do not establish meaningful diversity or general improvement. The latest official code and protocol checked for these experiments, v1.1, are normative; the paper supplies historical context. See [the incident review](FIRST-LIVE-REVIEW.md), [fresh-pilot results](FIRST-LIVE-RESULTS.md), [linked results](LINKED-CONTINUATION-RESULTS.md), and [pilot concerns](PILOT-REVIEW.md). No leaderboard submission has occurred.
 
 ## 1. Objective and claims
