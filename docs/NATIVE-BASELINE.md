@@ -142,6 +142,12 @@ No agent or official scientific implementation executes on the host. All 26
 physical requests are mocked; this is no real model-spending or improvement
 measurement.
 
+BENCH-03C repeats this unchanged probe after the generic-helper extraction;
+[its separate regression evidence](conformance/nb03c-official-regression-evidence.json)
+binds the new nine-module core with the same native artifacts and call counts.
+The original ten-module record above remains historical. See
+[upgrade and retirement](RELEASE-UPGRADES.md) for the composed release checks.
+
 The optional command below repeats that proof once in the current PowerShell
 window. It needs the previously prepared C3A and C3B Docker Linux images, the
 sealed official source checkout and C3B installed-inventory JSON under

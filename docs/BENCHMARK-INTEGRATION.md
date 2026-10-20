@@ -2,7 +2,7 @@
 
 October 20, 2026. BENCH-03A records the user's confirmed upgrade requirement: **install and pin a new official NoveltyBench release, configure it, check compatibility and funding, then run the existing agent before changing or optimizing that agent.** A benchmark update must not require rebuilding the agent, search controller or accounting system. [PLAN.md](PLAN.md) owns implementation order and status; this document defines the contract and acceptance criteria.
 
-This is an accepted architecture requirement, not a claim that today's code already provides it. BENCH-02's official-conformance gate still applies. No paid route, allocation or historical result changes with this document.
+The declared configuration-only envelope now has [composed upgrade/retirement evidence](RELEASE-UPGRADES.md), including a separate actual pinned-official regression. This does not certify unknown future interfaces, semantic judge accuracy or live readiness. No new paid route, allocation or historical result changes with this gate.
 
 ## Three separate boundaries
 
@@ -65,11 +65,11 @@ Existing runs never follow a new default. Before uninstalling their driver, eith
 
 For new manifests, bind the shared host core, selected driver/source/lock, agent treatment, official configuration, population and paid capability profile separately and together. Include transitive runtime dependencies and nested package files. An unrelated driver installed in its own environment must not change a frozen run's identity; changes to shared code actually used by that run must. Do not solve this by omitting plugin files from source verification.
 
-Legacy manifests retain their existing identity algorithm and sealed runtime. No rehashing, relabeling, blanket source-guard exception or evidence migration is implied. Historical readers must preserve both legal earlier uncertainty receipts and terminal receipts; REC-05A's known limitation remains open.
+Legacy manifests retain their existing identity algorithm and sealed runtime. No rehashing, relabeling, blanket source-guard exception or evidence migration is implied. Historical readers must preserve both legal earlier uncertainty receipts and terminal receipts. The new raw Gateway reader does so; REC-05A's separate legacy pilot-reader limitation remains open.
 
-## Current coupling to remove
+## Coupling inspected at BENCH-03A
 
-These are inspected repository facts, rather than hypothetical future failures:
+These were inspected repository facts at the architecture checkpoint. The native path now separates their active execution dependencies; the legacy interfaces remain for their frozen evidence:
 
 | Evidence | Consequence for the new boundary |
 | --- | --- |
@@ -153,7 +153,7 @@ Raw bodies are bounded at 16 MiB. Preserved headers are `x-request-id`, `request
 
 Known provider credentials are screened in requests and received evidence, including ASCII JSON escapes inside malformed outer JSON. A credential-bearing response is withheld: only a digest/flags remain, never body/header content. Withheld or incomplete evidence cannot be replayed as an ordinary exact reply. One-shot local interruptions after capture or during checkpoint/terminal writes preserve the receipt before propagating the interruption. Process death, persistent storage failure or repeated interrupts before a durable checkpoint can still leave only an unknown reservation; no automatic redispatch follows. Non-success HTTP status without authenticated billing evidence also retains the hold rather than assuming a free retry.
 
-The installed host module closure is bound separately from the operator's host-profile directory. A benign copied tree cannot stand in for changed executing code. This covers the explicit actual application modules and rejects unbound package imports/dynamic loading; it is not OS sandboxing, complete standard-library attestation or proof that the selected official environment matches its lock. The host still reuses generic validation/accounting helpers from existing modules. Removing that legacy import coupling, enforcing the native subprocess/network boundary, running official parsing/retries/fallbacks, and proving same-runner upgrades/retirement remain BENCH-02C/03C gates.
+The installed host module closure is bound separately from the operator's host-profile directory. A benign copied tree cannot stand in for changed executing code. This covers the explicit actual application modules and rejects unbound package imports/dynamic loading; it is not OS sandboxing, complete standard-library attestation or proof that the selected official environment matches its lock. The frozen BENCH-02B evidence binds its original core. Subsequent native gates established confined official execution; BENCH-03C now moves the unchanged generic helpers into `buddha.common` and proves the active path without the legacy scientific modules or host judge SDKs. New owners bind the nine-module core; older records keep their original inventory and exact executing-runtime guards. [Upgrade/retirement evidence and reader limits](RELEASE-UPGRADES.md) are separate from those historical proofs.
 
 These checks run once in the current PowerShell window, create/remove temporary fixtures, use fake keys and mocked HTTP, and spend nothing. They need no downloaded official evaluator or real API keys:
 

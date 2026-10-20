@@ -1,7 +1,6 @@
 """Pinned NoveltyBench v1.1 prompts and local artifact integrity, never certification."""
 
 import hashlib
-import json
 import math
 import os
 import random
@@ -12,6 +11,21 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import cast
 
+from buddha.common import (
+    _canonical as _canonical,
+)
+from buddha.common import (
+    _invalid_constant as _invalid_constant,
+)
+from buddha.common import (
+    _object as _object,
+)
+from buddha.common import (
+    _parse as _parse,
+)
+from buddha.common import (
+    _unique_pairs as _unique_pairs,
+)
 from buddha.evaluation import (
     EvaluationProtocol,
     RunSummary,
@@ -73,50 +87,8 @@ def _utf8(text: str) -> bytes:
         raise ValidationError("text must be valid UTF-8") from error
 
 
-def _canonical(value: object) -> bytes:
-    try:
-        return json.dumps(
-            value, sort_keys=True, separators=(",", ":"), ensure_ascii=True, allow_nan=False
-        ).encode("utf-8")
-    except (TypeError, ValueError, UnicodeError, RecursionError) as error:
-        raise ValidationError("configuration or evidence is not finite JSON") from error
-
-
-def _object(value: object) -> dict[str, object]:
-    if not isinstance(value, dict) or any(not isinstance(k, str) for k in value):
-        raise ValidationError("expected a JSON object with string keys")
-    return cast(dict[str, object], value)
-
-
 def _same(first: object, second: object) -> bool:
     return _canonical(first) == _canonical(second)
-
-
-def _unique_pairs(pairs: list[tuple[str, object]]) -> dict[str, object]:
-    result: dict[str, object] = {}
-    for key, value in pairs:
-        if key in result:
-            raise ValidationError("duplicate JSON object key")
-        result[key] = value
-    return result
-
-
-def _invalid_constant(value: str) -> object:
-    raise ValidationError("nonfinite JSON number")
-
-
-def _parse(raw: bytes) -> object:
-    try:
-        return cast(
-            object,
-            json.loads(
-                raw.decode("utf-8"),
-                object_pairs_hook=_unique_pairs,
-                parse_constant=_invalid_constant,
-            ),
-        )
-    except (UnicodeError, json.JSONDecodeError) as error:
-        raise ValidationError("invalid UTF-8 JSON") from error
 
 
 def _jsonl(raw: bytes) -> list[dict[str, object]]:

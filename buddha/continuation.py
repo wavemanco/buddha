@@ -21,7 +21,7 @@ from pathlib import Path, PurePosixPath
 from types import MappingProxyType
 from typing import TYPE_CHECKING
 
-from buddha import archive, benchmark, evaluation, policy, provider, run, splits
+from buddha import archive, benchmark, common, evaluation, policy, provider, run, splits
 from buddha.benchmark import Prompt, _canonical, _object, _parse, load_prompts
 from buddha.evaluation import ValidationError, _hex, _text
 from buddha.history import HistoricalOperation, History, _plain, read_history
@@ -37,13 +37,26 @@ if TYPE_CHECKING:
 _MAX_ARCHIVE = 64 * 1024 * 1024
 _MAX_MEMBER = 16 * 1024 * 1024
 _CORE_MODULES = (archive, benchmark, evaluation, policy, splits)
-# NB-01: the sole reviewed compatibility exception tightens artifact input checks.
+# NB-01: the reviewed compatibility exception tightens artifact input checks.
 # Requests, prompt text, grouping and metric arithmetic are unchanged. No other
 # source revision is accepted; see docs/NOVELTYBENCH-CONFORMANCE.md.
 _BENCHMARK_VALIDATION_REVISION = (
     "9e131a9f4fd92197b256518ea778984875d9aee2a58efb3ccc759d6553a79ae2",
     "15b57b974c702d69c7b9e172c73798bd555db5eedb3286bd8c792d1fe0568763",
 )
+# BENCH-03C: only these exact files move unchanged helpers into the sealed common
+# module. Normalize to their reviewed predecessors before applying the old guard.
+_GENERIC_EXTRACTION_MODULES = {
+    "buddha.benchmark": (
+        "15b57b974c702d69c7b9e172c73798bd555db5eedb3286bd8c792d1fe0568763",
+        "b72c74a0b9b7e786b9969c72a400f449ab5758938ee9f24af660a887d866c2a9",
+    ),
+    "buddha.evaluation": (
+        "87e23a9afbdbc466da7ed44cc1bb2b2fd8622d480efd9db95155d75ddda77e78",
+        "4cabb1a48689a140fc6f6129ed8d9eae1d047d3e09eae794170c74479413b8d6",
+    ),
+}
+_GENERIC_COMMON_SHA256 = "3a0a693a0f4a0f2eed3b858d0b3ac42148871dbca284e56e0e368726309393c0"
 _OLD_CONTRACT_KEYS = {
     "system_sha256",
     "proposal_schema_sha256",
@@ -301,6 +314,14 @@ def _scientific_module(raw: bytes, module_name: str) -> str:
             module_name == "buddha.provider"
             and isinstance(node, ast.ImportFrom)
             and node.level == 0
+            and node.module == "buddha.common"
+            and [(name.name, name.asname) for name in node.names] == [("ValidationError", None)]
+        ):
+            node.module = "buddha.evaluation"
+        if (
+            module_name == "buddha.provider"
+            and isinstance(node, ast.ImportFrom)
+            and node.level == 0
             and node.module == "dataclasses"
         ):
             node.names = [
@@ -314,6 +335,11 @@ def _scientific_module(raw: bytes, module_name: str) -> str:
 def _science(snapshot: dict[str, bytes], contracts: object) -> None:
     from buddha import search
 
+    if (
+        _file_hash(Path(_text(common.__file__, "generic helper source path")))
+        != _GENERIC_COMMON_SHA256
+    ):
+        raise ValidationError("generic helper source differs from the reviewed extraction")
     protected = _object(contracts)
     if set(protected) != _OLD_CONTRACT_KEYS:
         raise ValidationError("unsupported original policy-search contract")
@@ -337,6 +363,22 @@ def _science(snapshot: dict[str, bytes], contracts: object) -> None:
         _hex(digest, "original source hash")
         if hashlib.sha256(snapshot[module_name.replace(".", "/") + ".py"]).hexdigest() != digest:
             raise ValidationError("original contract does not match the preserved runtime")
+    archived_common = snapshot.get("buddha/common.py")
+    uses_common = any(
+        hashlib.sha256(snapshot[name.replace(".", "/") + ".py"]).hexdigest() == revision[1]
+        for name, revision in _GENERIC_EXTRACTION_MODULES.items()
+    ) or any(
+        isinstance(node, ast.ImportFrom)
+        and node.level == 0
+        and node.module == "buddha.common"
+        and [(name.name, name.asname) for name in node.names] == [("ValidationError", None)]
+        for node in ast.parse(snapshot["buddha/provider.py"]).body
+    )
+    if (archived_common is not None or uses_common) and (
+        archived_common is None
+        or hashlib.sha256(archived_common).hexdigest() != _GENERIC_COMMON_SHA256
+    ):
+        raise ValidationError("archived generic helpers differ from the reviewed extraction")
     if hashlib.sha256(snapshot["buddha/search.py"]).hexdigest() != protected["controller_sha256"]:
         raise ValidationError("original controller differs from the preserved runtime")
     current = search._contracts()
@@ -347,6 +389,9 @@ def _science(snapshot: dict[str, bytes], contracts: object) -> None:
         path = Path(_text(module.__file__, "scientific source path"))
         previous = hashlib.sha256(snapshot[module.__name__.replace(".", "/") + ".py"]).hexdigest()
         actual = _file_hash(path)
+        extraction = _GENERIC_EXTRACTION_MODULES.get(module.__name__)
+        if actual != previous and extraction is not None and actual == extraction[1]:
+            actual = extraction[0]
         if actual != previous and not (
             module is benchmark and (previous, actual) == _BENCHMARK_VALIDATION_REVISION
         ):

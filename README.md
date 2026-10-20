@@ -6,12 +6,14 @@ Build agents that improve their own procedures for producing useful, meaningfull
 
 ## Current state
 
-The implementation checkpoint is **BENCH-02C3C3**. The project has auditable API
+The implementation checkpoint is **BENCH-03C**. The project has auditable API
 accounting, linked recovery, bounded policy search, replaceable release selection,
 and isolated fixed-seed generation. The unchanged official LLM partition, score
 and summary commands now compose with generated C1 answers in a complete
-[offline-tested native baseline](docs/NATIVE-BASELINE.md). Configuration-only
-cross-release upgrade and retirement are the next composed acceptance check.
+[offline-tested native baseline](docs/NATIVE-BASELINE.md).
+[Configuration-only upgrades and retirement](docs/RELEASE-UPGRADES.md) now pass
+controlled cross-release checks and a separate pinned-official regression.
+Recovery and inspection usability are next.
 
 These are distinct from scientific success. Meaningful diversity, held-out
 improvement, genuine task/improver source evolution and an improved improver have
@@ -20,10 +22,10 @@ original benchmark scores and raw evidence remain unchanged. See the
 [pilot review](docs/PILOT-REVIEW.md), [recovery results](docs/FIRST-LIVE-RESULTS.md)
 and [linked continuation results](docs/LINKED-CONTINUATION-RESULTS.md).
 
-At this checkpoint the living plan contains **15 remaining leaf slices**.
-The native pipeline is complete at its declared offline scope. Umbrella milestones are not counted
-again. They cover benchmark integration (1), recovery/usability (3), measurement
-(2), policy/search (3), source evolution (3), held-out evaluation (2) and the
+At this checkpoint the living plan contains **14 remaining leaf slices**.
+The native pipeline is complete at its declared offline scope. Umbrella milestones
+are not counted again. They cover recovery/usability (3), measurement (2),
+policy/search (3), source evolution (3), held-out evaluation (2) and the
 improver comparison (1). This is a checkpoint count, not a promise that research
 findings will never require a smaller slice; [PLAN.md](docs/PLAN.md) determines
 the current status and order.
@@ -33,7 +35,7 @@ commit `64a23be6b18ec1dacc298830aab276061b6e143c`. The paper is historical conte
 Existing runs keep their frozen reference. Compatible new releases are intended
 to use installation, configuration and checks before running the same frozen
 agent; [the modularity contract](docs/BENCHMARK-INTEGRATION.md) states the exact
-capability limits and outstanding upgrade/retirement proof.
+capability limits and the bounded upgrade/retirement evidence.
 
 The new native library path enables no paid CLI or new allocation. The original
 $50 authorization belongs only to the historical experiment; its completed

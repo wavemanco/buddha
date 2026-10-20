@@ -16,7 +16,7 @@ from dataclasses import asdict, dataclass, field
 from typing import TYPE_CHECKING, Protocol
 from urllib.parse import urlsplit
 
-from buddha.evaluation import ValidationError
+from buddha.common import ValidationError
 
 if TYPE_CHECKING:
     from buddha.ledger import Ledger

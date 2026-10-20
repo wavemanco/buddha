@@ -20,7 +20,7 @@ from functools import cache
 from pathlib import Path
 from typing import cast
 
-from buddha.evaluation import ValidationError, _hex, _integer, _text
+from buddha.common import ValidationError, _hex, _integer, _text
 
 
 class BudgetExceeded(ValidationError):
