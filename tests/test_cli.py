@@ -232,17 +232,17 @@ class CLITests(unittest.TestCase):
         )
         sentinels = ("dummy-secret-openai", "dummy-secret-anthropic")
 
-        def received(call):
+        def received(prepared):
             for secret in sentinels:
-                self.assertNotIn(secret, call.body_json)
-            body = json.loads(call.body_json)
+                self.assertNotIn(secret.encode(), prepared.body)
+            body = json.loads(prepared.body)
             name = body.get("response_format", {}).get("json_schema", {}).get("name")
             text = "Synthetic answer."
             if name == "Partition":
                 text = '{"groups":[[0,1,2,3,4,5,6,7,8,9]]}'
-            elif call.spec == settings.quality:
+            elif body["model"] == settings.quality.model:
                 text = '{"score":8}'
-            return Reply(text, call.spec.model, "dummy-receipt", 10, 5, "stop")
+            return Reply(text, body["model"], "dummy-receipt", 10, 5, "stop")
 
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
@@ -265,7 +265,10 @@ class CLITests(unittest.TestCase):
                 patch("buddha.__main__.sys.stdin.isatty", return_value=True),
                 patch("buddha.__main__.sys.stderr.isatty", return_value=True),
                 patch("buddha.__main__.getpass.getpass", side_effect=sentinels),
-                patch.object(DiagnosticHTTPTransport, "send", side_effect=received) as send,
+                patch("buddha.provider.http.client.HTTPSConnection"),
+                patch.object(
+                    DiagnosticHTTPTransport, "send_prepared", side_effect=received
+                ) as send,
                 redirect_stdout(io.StringIO()) as output,
             ):
                 self.assertEqual(

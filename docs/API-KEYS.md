@@ -34,6 +34,8 @@ Preparation freezes the local cap into the run manifest. Live execution also req
 
 The shared cap covers its declared imported and bound runs and depends on verified provider model, token and maximum-rate bounds. Recorded charges are conservative calculations from returned usage, not provider invoices. Upstream rescoring, taxes, prepaid-credit purchases, old executable copies and unrelated provider traffic remain outside the current host guard. Creating another database does not grant new user authorization. Do not create new directories or authorities to bypass an interrupted or exhausted experiment. Check provider evidence before reconciling an unknown operation.
 
+A required local request-preparation error now leaves an unsent `reserved` operation. Fix the local cause and resume that same run/operation; its original allocation and saved request UUID are reused. A request that reached transmission can remain `dispatched` or `unknown` and needs review instead. Elapsed time or a local diagnostic failure does not prove the original interrupted request was unsent.
+
 Resume the same directory rather than preparing a new one. Offline inspection requires no credentials:
 
 ```powershell
