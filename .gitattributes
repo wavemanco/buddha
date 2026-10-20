@@ -1,2 +1,4 @@
 # Frozen experiment manifests hash exact source bytes. Preserve checkout bytes.
 * -text
+# CRLF is intentional; retain checks for actual trailing spaces and blank EOFs.
+* whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

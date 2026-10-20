@@ -1,6 +1,6 @@
 # Buddha: consolidated living plan
 
-Revision 1 — October 19, 2026. **This is the single authoritative roadmap for scope, order, status, dependencies and the next work slice.** It combines the original research/design plan, completed implementation, live-pilot findings and the user's request to salvage the interrupted attempt. Update this file as evidence changes; do not start a separate roadmap.
+Revision 2 — October 19, 2026. **This is the single authoritative roadmap for scope, order, status, dependencies and the next work slice.** It combines the original research/design plan, completed implementation, live-pilot findings and the user's request to salvage the interrupted attempt. Update this file as evidence changes; do not start a separate roadmap.
 
 [DESIGN.md](DESIGN.md) supplies the technical and scientific contract. [RESEARCH.md](RESEARCH.md) and [NOVELTYBENCH.md](NOVELTYBENCH.md) supply source-backed context. Run manifests, receipts, results and dated reviews supply evidence. Those documents retain their roles; their old recommendations and slice numbers do not override this plan's current sequence.
 
@@ -39,8 +39,8 @@ This adds concrete work to the original paid-operation/resumability requirements
 
 | ID | Status | Deliverable / completion gate | Depends on |
 | --- | --- | --- | --- |
-| REC-01 | **Next** | Specify shared authorization, inherited-receipt provenance, definitely-not-sent versus unknown outcomes, replacement-attempt identities, and inactive-source rules. Write failing acceptance checks and a concrete implementation shape before production edits. Include versioning of the actual runtime/transport, append-only schema evolution where needed, and exact original-source replay from the saved snapshot. Check in with the proposed shape. | Existing evidence/source snapshot |
-| REC-02 | Planned | Enforce one shared dollar/call authorization across the declared attempts. Repeated/concurrent allocations cannot spend the same remainder; old inactive attempts cannot independently spend it. Typed errors and durable events preserve existing liability. Reconcile combined totals with per-run records. | REC-01 |
+| REC-01 | Complete | [Recovery contract](RECOVERY-CONTRACT.md), immutable sealed historical reader and tests-first evidence delivered. Both real histories read without changes. Full 260-test suite passes (one host symlink-privilege skip); lint/types/security/audit/compile pass locally. Exact archived reconstruction was verified in the pilot review; no continuation or shared spending authority is claimed yet. | Existing evidence/source snapshot |
+| REC-02 | **Next** | Enforce one shared dollar/call authorization across the declared attempts. Repeated/concurrent allocations cannot spend the same remainder; old inactive attempts cannot independently spend it. Typed errors and durable events preserve existing liability. Reconcile combined totals with per-run records. | REC-01 |
 | REC-03 | Planned | Correct the provably-unsent boundary through the real broker/transport path. A local pre-HTTP preparation failure has a truthful recoverable state; genuinely ambiguous transmission retains its reservation and cannot silently retry. Explicitly test the scope of unknown-operation stopping rules. | REC-01; integrate with REC-02 |
 | REC-04 | Planned | Implement and verify the linked continuation: reference the nine authentic original receipts without charging them again; identify a new tenth request explicitly; finish the remaining frozen pilot stages. Preserve the original unknown and immutable original evidence. Resume after interruption without duplicate new calls. Produce combined accounting and lineage, then have the user execute the reviewed bounded continuation locally. | REC-02, REC-03; fresh source/contract checks |
 | REC-05 | Planned | Add a review/doctor path for stale locks and dispatched work, summaries tied to outstanding operations, and a genuinely read-only verification entry point. A dead writer is not reported as proven alive; elapsed time alone never releases liability. Distinguish observation from writable cached reconstruction. | REC-01; needed before relying on unattended/long-running operation |
@@ -111,7 +111,7 @@ A better task agent is not evidence of a better improver. If causal claims conce
 - NoveltyBench and a separately declared sealed transfer benchmark can support different claims. Never describe within-set difference as proof of historical originality or indefinite open-endedness.
 - A contemporary Novamine/leaderboard comparison is **conditional later work**: refresh official reference/submission conditions and comparable evidence before making a claim. Full external comparability, reproducible artifacts and honest total cost are required. No leaderboard submission or publication occurs merely because it appears in this plan, and beating a leader is an empirical target rather than an infrastructure acceptance test.
 - Keep the local design small. No queue service, Redis, vector database, multi-tenant backend, training framework or persistent multi-agent platform is required by the present evidence. Optional internal critics, adaptive selection, curricula and extra sampling mechanisms remain hypotheses drawn from the research register, not automatically scheduled features.
-- Each implementation item starts with spec-defined failing checks, a concrete shape and the minimum correct implementation. Run appropriate checks and stop with a summary after each vertical slice. This plan does not authorize chaining slices, changing frozen experiments or spending through a new directory.
+- Each implementation item starts with spec-defined failing checks, a concrete shape and the minimum correct implementation. The user now authorizes continuing implementation across slices, pausing only for a required live run or user decision. Relay a summary and create a conventional commit/PR for each small slice; then continue authorized work. Keep dependent PRs stacked without silently merging unreviewed work. Frozen experiments and paid scope remain protected.
 
 ## Funding snapshot and execution boundary
 
@@ -149,6 +149,8 @@ For each new finding, record its evidence in the appropriate dated report, give 
 
 At each completed slice, update its status, evidence and remaining limits, set exactly one next slice, and summarize the change to the user. Claim states change only with their own evidence. Frozen manifests/receipts/results remain historical records; corrections use an explicit new version or linked assessment. Do not duplicate sequencing in incident reports, review handoffs or a second status file.
 
+Git baseline `eacd68c` preserves the pre-recovery implementation in [wavemanco/buddha](https://github.com/wavemanco/buddha). Existing slices 1–3 were captured together because no earlier Git history existed; future slices have separate branches/PRs. CI is configured for Windows/Linux with pinned checking tools. Slice reports distinguish local checks from observed hosted-CI results.
+
 Pending experiment-specific choices include the supplemental criterion, independent-review arrangement, broader prompt coverage/repetition count, practical-effect thresholds, finalization analysis, and allocations beyond the requested continuation. They are deliberately not invented to fill a table; freeze them at the relevant gate before observation or spending.
 
 ## Revision log
@@ -156,3 +158,4 @@ Pending experiment-specific choices include the supplemental criterion, independ
 | Revision | Date | Change and reason |
 | --- | --- | --- |
 | 1 | 2026-10-19 | Consolidated the original five-slice design, completed pilot and source preservation, all M/E/O pilot findings, and the requested original-run continuation. Inserted recovery/calibration gates without dropping real source evolution, held-out comparisons or improver evaluation. REC-01 is the next slice. No runtime implementation or paid execution starts with this planning update. |
+| 2 | 2026-10-19 | User authorized continuous implementation with slice summaries and PRs until a live-run/decision gate. Established Git baseline and slice branch/CI; REC-01 adds the concrete recovery contract and sealed read-only history foundation after observed failing acceptance tests. REC-02 is next. |
