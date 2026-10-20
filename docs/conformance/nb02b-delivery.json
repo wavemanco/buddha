@@ -168,7 +168,15 @@
     "pr_run": 39429631164,
     "push_run": 39429623455
   },
-  "this_slice_hosted_ci": "pending publication",
+  "this_slice_hosted_ci": {
+    "commit": "42ee5ba1015dd1c410f583247b12a7fd519ad29a",
+    "pr_run": 39442879703,
+    "push_run": 39442866485,
+    "windows": "success",
+    "ubuntu": "success",
+    "tests_each": 483,
+    "skips_each": 1
+  },
   "source_sha256": {
     "buddha/gateway.py": "1b060d55690f5663f64848dbb662a754c9f1bc2ae5b997b745e279734a707890",
     "buddha/wire.py": "30ece8a4359b1efdb9666196d48e285f7ce438e671914740d6e577af2be63dfe",
