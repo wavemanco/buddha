@@ -1,0 +1,176 @@
+{
+  "actual_provider_calls": 0,
+  "cases": [
+    {
+      "input_sha256": "474bed13bc90019d897a4348ea52d3ec1d88be6ebd7bc5e18b3b9c29bdfc9e76",
+      "main": "first-live-search",
+      "report": {
+        "checked": {
+          "candidates": 0,
+          "decisions": 0,
+          "inherited_operations": 0,
+          "physical_operations": 9
+        },
+        "claim": "saved-evidence consistency only; no provider or semantic attestation",
+        "costs": {
+          "committed_microusd": 534082,
+          "operation_count": 10,
+          "reserved_microusd": 532373,
+          "spent_microusd": 1709
+        },
+        "evidence_sha256": "474bed13bc90019d897a4348ea52d3ec1d88be6ebd7bc5e18b3b9c29bdfc9e76",
+        "format": "buddha.search-verification-report.v1",
+        "missing": {
+          "index": 9,
+          "operation_id": "231aad4e4c5d27b6fdd9e73da5993aee27f357dfa36b40c3b3463836c89c581b",
+          "prompt_id": "curated-0",
+          "stage": "generation",
+          "status": "unknown"
+        },
+        "run_id": "a1257f96467b490b910b559437a71258",
+        "shared_accounting": {
+          "committed_microusd": 1108768,
+          "operation_count": 124,
+          "reserved_microusd": 532373,
+          "spent_microusd": 576395
+        },
+        "shared_scope": {
+          "matched_run_ids": [
+            "a1257f96467b490b910b559437a71258"
+          ],
+          "unmatched_run_ids": [
+            "a0946e22ae1e45d6bf8f74cf9f4f30bb",
+            "a486d90396934a45940637d77a168304"
+          ]
+        },
+        "status": "incomplete"
+      }
+    },
+    {
+      "input_sha256": "8089a4d0ab916da4264ccec358a318f66c7636c4d248525b30591ae017546770",
+      "main": "first-live-recovery",
+      "report": {
+        "checked": {
+          "candidates": 3,
+          "decisions": 3,
+          "inherited_operations": 0,
+          "physical_operations": 63
+        },
+        "claim": "saved-evidence consistency only; no provider or semantic attestation",
+        "costs": {
+          "committed_microusd": 300153,
+          "operation_count": 63,
+          "reserved_microusd": 0,
+          "spent_microusd": 300153
+        },
+        "evidence_sha256": "8089a4d0ab916da4264ccec358a318f66c7636c4d248525b30591ae017546770",
+        "format": "buddha.search-verification-report.v1",
+        "missing": null,
+        "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb",
+        "shared_accounting": {
+          "committed_microusd": 1108768,
+          "operation_count": 124,
+          "reserved_microusd": 532373,
+          "spent_microusd": 576395
+        },
+        "shared_scope": {
+          "matched_run_ids": [
+            "a0946e22ae1e45d6bf8f74cf9f4f30bb",
+            "a1257f96467b490b910b559437a71258"
+          ],
+          "unmatched_run_ids": [
+            "a486d90396934a45940637d77a168304"
+          ]
+        },
+        "status": "verified"
+      }
+    },
+    {
+      "input_sha256": "0a380b5040cc654953cb75690cfb040c20d1a5e126b062283499099c2c1c90b7",
+      "main": "first-live-continuation-v2",
+      "report": {
+        "checked": {
+          "candidates": 3,
+          "decisions": 3,
+          "inherited_operations": 9,
+          "physical_operations": 51
+        },
+        "claim": "saved-evidence consistency only; no provider or semantic attestation",
+        "costs": {
+          "committed_microusd": 274533,
+          "operation_count": 51,
+          "reserved_microusd": 0,
+          "spent_microusd": 274533
+        },
+        "evidence_sha256": "0a380b5040cc654953cb75690cfb040c20d1a5e126b062283499099c2c1c90b7",
+        "format": "buddha.search-verification-report.v1",
+        "missing": null,
+        "run_id": "a486d90396934a45940637d77a168304",
+        "shared_accounting": {
+          "committed_microusd": 1108768,
+          "operation_count": 124,
+          "reserved_microusd": 532373,
+          "spent_microusd": 576395
+        },
+        "shared_scope": {
+          "matched_run_ids": [
+            "a0946e22ae1e45d6bf8f74cf9f4f30bb",
+            "a1257f96467b490b910b559437a71258",
+            "a486d90396934a45940637d77a168304"
+          ],
+          "unmatched_run_ids": []
+        },
+        "status": "verified"
+      }
+    }
+  ],
+  "expected_seals_source": "docs/conformance/nb01-preservation.json input_sha256; no live-seal derivation",
+  "format": "buddha.review.rec05b-real-verifier-final.v1",
+  "network_writes_authority_and_runtime_constructors_forbidden": true,
+  "package_source_sha256": {
+    "__init__.py": "0857bd60619c1e1c8538fe768cbe82c781bb4e302abc6cf59130f1b17d052230",
+    "__main__.py": "199d7a95b9a005ff610f757e0e4304c8d7e256b37a3fa671d4eb95d76c80fbf8",
+    "agent_run.py": "3f7f8ff3cb9965216f19c6564da1e830f0f629a346ec1cc29e2583c119bea88d",
+    "agent_worker.py": "c6f86105c0a42304687f857209bb17172f2f38fda26699d25e2618f6e01a745f",
+    "answers.py": "be860546b2692ea4a710d93855f487dd49d9c8e28eb3f2ec757df697cefb8d0b",
+    "archive.py": "9549deb0f347cf6114ef3f802b9dfef8a94e0db7cbbd3497697987d5e21ba2ee",
+    "authorization.py": "06d8615f8b301285a951b08bece0570e5b1b89467fc99fa4e994c7e5e5f30c47",
+    "baseline.py": "c988e823d9890b712a4b50a58a3d808c6630fdcf3e6fb94227ee9e591d04a432",
+    "benchmark.py": "7ef7e26b2ef3cbf4119118a985334048fd30b68a5629f3e3196fa77e8200c49f",
+    "channel.py": "c46d236865b15f1918efa23d961ed7163533c9bbef2b0cec7f61d6f8e95d6e5f",
+    "common.py": "3a0a693a0f4a0f2eed3b858d0b3ac42148871dbca284e56e0e368726309393c0",
+    "continuation.py": "b0136052472868aee379d7ac78dfd11bcfa40e91aedcd6916d30f9a334003414",
+    "diagnostics.py": "f352d035883efaacbc71a70ab564e6cccbceb5b7974d1dbd4bd744087c026645",
+    "evaluation.py": "4cabb1a48689a140fc6f6129ed8d9eae1d047d3e09eae794170c74479413b8d6",
+    "executor.py": "b5e84f2dbcdc436aee23272e7d96b567cb5b16ead256a34d08bccc70b480d186",
+    "gateway.py": "e844fcb695b97c76ecb7432ece6b8d96416806554038e202fd6b0f7f3da57a2e",
+    "gateway_history.py": "a773ae6066e5b8a4f503e4b346b73570ace2ebeb811017f7b656cc211fded57c",
+    "history.py": "d42e92a7e6c88a2f72090eaaa50de39dc355957e7c61f5b89dd97162d8b0eefa",
+    "ledger.py": "5c7e56f1e2c5e68046d6380ebacc03110300eae34d348d7dca683a0591d64130",
+    "native_context.py": "47a488b8d731617bda21380232e5e49801e0c0b4261f69b71c24fb9eae0ba298",
+    "native_run.py": "60aafd5ef9e355e82faae2dc12397c6b0b2b649c3273c1bda9c0c757e0775a19",
+    "native_transport.py": "ccd4917132939630231b8b8c69540189cd52f60951fa08d467d90b9571ccb6c0",
+    "native_worker.py": "8fa4b85ae6e75202de4b345302cb70253b6c0c5b47f004490f8d9a09750ecaa1",
+    "policy.py": "717f6fdad1e880d83326d6a314e0dfa604be1044f8209f27061380e16cfebb3e",
+    "progress.py": "67f1fbebffd9bfbe74d09261a1d95af21a30c53f44c3ea5178c3da833f8c6b49",
+    "provider.py": "17de071c1416afa32f9da32eb627e24264d8a0a848862fdf4853057125f18a02",
+    "reference.py": "36356c8a25dae3501014513095cb6f838c4ae54b02a129bdffc4a5cb2dfa6f35",
+    "releases.py": "33361cf5b0923b373ee53dd73597063195c2c0d519baead50d40fb4bcfab44f5",
+    "run.py": "a972cb8d1a04bef7abad7efdf7f1eec803bb88cd55c30cf64148119a3d7c6dbb",
+    "search.py": "ac7b3648355b139797773cbe2bb8b67abbc8533eefd987cd7692275692a9a95c",
+    "search_evidence.py": "160dac986d16979d25f67ec05ca47d332839b3b3017c368b2883e6b938ccc29c",
+    "search_verify.py": "b0fcff4db2b8d029198457dde1eadaa58f1a083d3d394b4b3efa87d181b7a735",
+    "splits.py": "419fa286d812b43e3095fbb41a62844b40477f880d94c8d60de069a52c324a2a",
+    "wire.py": "48f40a71bf10c84dfd1d15f0baef50198cce8a229748355f116ad6a25cab12b4"
+  },
+  "package_sources_unchanged": true,
+  "pilot_zip_unchanged": true,
+  "protected_input_bytes_unchanged": true,
+  "protected_inputs": 287,
+  "source_sha256": {
+    "benchmark.py": "7ef7e26b2ef3cbf4119118a985334048fd30b68a5629f3e3196fa77e8200c49f",
+    "continuation.py": "b0136052472868aee379d7ac78dfd11bcfa40e91aedcd6916d30f9a334003414",
+    "search_evidence.py": "160dac986d16979d25f67ec05ca47d332839b3b3017c368b2883e6b938ccc29c",
+    "search_verify.py": "b0fcff4db2b8d029198457dde1eadaa58f1a083d3d394b4b3efa87d181b7a735"
+  }
+}

@@ -390,7 +390,27 @@ def import_evaluation(
         or {p.relative_to(source).as_posix() for p in paths if p.is_dir()} != {"v1.1"}
     ):
         raise ValidationError("evaluation has missing, unexpected, or symlinked artifacts")
-    provenance = _object(_parse((source / "provenance.json").read_bytes()))
+    blobs = {name: (source / name).read_bytes() for name in expected_files}
+    return import_evaluation_bytes(
+        blobs, protocol=protocol, expected_prompt_hashes=expected_prompt_hashes
+    )
+
+
+def import_evaluation_bytes(
+    blobs: Mapping[str, bytes],
+    *,
+    protocol: EvaluationProtocol,
+    expected_prompt_hashes: Mapping[str, str],
+) -> tuple[RunSummary, list[dict[str, object]]]:
+    _check_protocol(protocol)
+    if not isinstance(blobs, Mapping):
+        raise ValidationError("evaluation artifacts must be a mapping of names to bytes")
+    blobs = dict(blobs)
+    if set(blobs) != set(_ARTIFACTS) | {"provenance.json"} or any(
+        not isinstance(raw, bytes) for raw in blobs.values()
+    ):
+        raise ValidationError("evaluation requires exactly five named byte artifacts")
+    provenance = _object(_parse(blobs.pop("provenance.json")))
     checksum = provenance.pop("provenance_sha256", None)
     if (
         checksum != _digest(_canonical(provenance))
@@ -407,7 +427,6 @@ def import_evaluation(
     hashes = _object(provenance.get("artifact_hashes"))
     if set(hashes) != set(_ARTIFACTS):
         raise ValidationError("provenance artifact inventory mismatch")
-    blobs = {name: (source / name).read_bytes() for name in _ARTIFACTS}
     if any(hashes[name] != _digest(raw) for name, raw in blobs.items()):
         raise ValidationError("artifact byte hash mismatch")
     generations, partitions, scores = (_jsonl(blobs[name]) for name in _ARTIFACTS[:3])

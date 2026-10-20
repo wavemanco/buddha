@@ -8,6 +8,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 import test_continuation_source as fixtures
+import test_evaluation_bytes as buffered_fixtures
 
 from buddha import benchmark, common, continuation, evaluation, provider
 from buddha.common import ValidationError
@@ -27,6 +28,10 @@ EXTRACTION_REVISIONS = {
     ),
 }
 COMMON_SHA256 = "3a0a693a0f4a0f2eed3b858d0b3ac42148871dbca284e56e0e368726309393c0"
+BYTES_REVISION = (
+    "b72c74a0b9b7e786b9969c72a400f449ab5758938ee9f24af660a887d866c2a9",
+    "7ef7e26b2ef3cbf4119118a985334048fd30b68a5629f3e3196fa77e8200c49f",
+)
 
 
 def sha(raw):
@@ -110,6 +115,22 @@ class ContinuationCommonTests(unittest.TestCase):
                 continuation._science(changed, contracts)
         self.assertEqual(before, self.fixture.files())
 
+    def test_archived_buffered_benchmark_requires_common_with_original_provider(self):
+        snapshot = continuation._snapshot(fixtures.ARCHIVE, fixtures.ARCHIVE_SHA)
+        contracts = fixtures.old_contracts()
+        snapshot["buddha/benchmark.py"] = Path(benchmark.__file__).read_bytes()
+        contracts["source_sha256"]["buddha.benchmark"] = sha(snapshot["buddha/benchmark.py"])
+        snapshot["buddha/common.py"] = Path(common.__file__).read_bytes()
+        continuation._science(snapshot, contracts)
+        for archived_common in (None, b"# unreviewed archived common\n"):
+            changed = dict(snapshot)
+            if archived_common is None:
+                del changed["buddha/common.py"]
+            else:
+                changed["buddha/common.py"] = archived_common
+            with self.subTest(archived_common=archived_common), self.assertRaises(ValidationError):
+                continuation._science(changed, contracts)
+
     def test_nonhelper_scientific_ast_matches_sealed_preextraction_modules(self):
         # Captured from exact 7d1ebd2325788f928b6f8da7b5347eabca2d42a8 blobs.
         # Only moved definitions, their exact common aliases and the now-unused
@@ -130,6 +151,8 @@ class ContinuationCommonTests(unittest.TestCase):
         ]:
             with self.subTest(module=module.__name__):
                 tree = ast.parse(Path(module.__file__).read_bytes())
+                if module is benchmark:
+                    tree = buffered_fixtures.reassemble_importer(tree)
                 nodes = []
                 for node in tree.body:
                     if isinstance(node, (ast.FunctionDef, ast.ClassDef)) and node.name in helpers:
@@ -156,10 +179,14 @@ class ContinuationCommonTests(unittest.TestCase):
         self.assertEqual(continuation._BENCHMARK_VALIDATION_REVISION, NB01_REVISION)
         self.assertEqual(continuation._GENERIC_EXTRACTION_MODULES, EXTRACTION_REVISIONS)
         self.assertEqual(continuation._GENERIC_COMMON_SHA256, COMMON_SHA256)
+        self.assertEqual(continuation._BENCHMARK_BYTES_REVISION, BYTES_REVISION)
         self.assertEqual(sha(Path(common.__file__).read_bytes()), COMMON_SHA256)
         for module in (benchmark, evaluation):
             self.assertEqual(
-                sha(Path(module.__file__).read_bytes()), EXTRACTION_REVISIONS[module.__name__][1]
+                sha(Path(module.__file__).read_bytes()),
+                BYTES_REVISION[1]
+                if module is benchmark
+                else EXTRACTION_REVISIONS[module.__name__][1],
             )
         self.assertEqual(len(self.fixture.read().completed), 9)
 
