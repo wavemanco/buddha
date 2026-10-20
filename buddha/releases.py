@@ -263,6 +263,38 @@ def _signature(information: os.stat_result) -> tuple[int, int, int, int, int]:
     )
 
 
+def file_hash(path: Path, *, max_bytes: int = MAX_FILE_BYTES) -> str:
+    """Hash a bounded regular file using the component inventory's integrity rules."""
+    try:
+        if not isinstance(path, Path) or type(max_bytes) is not int or max_bytes < 0:
+            raise ReleaseError("file hash requires a Path and nonnegative byte ceiling")
+        path = path.absolute()
+        for parent in path.parents:
+            _information(parent)
+        information = _information(path)
+        if not stat.S_ISREG(information.st_mode) or information.st_nlink != 1:
+            raise ReleaseError("component files must be regular without hard-link aliases")
+        if information.st_size > max_bytes:
+            raise ReleaseError("component byte limit exceeded")
+        digest = hashlib.sha256()
+        read = 0
+        with path.open("rb") as stream:
+            while block := stream.read(min(1024 * 1024, information.st_size - read + 1)):
+                read += len(block)
+                if read > information.st_size:
+                    raise ReleaseError("component grew during inventory")
+                digest.update(block)
+            # Windows Python 3.13 can report different ctime via fstat/lstat.
+            # Full before/after path checks still retain ctime.
+            if _signature(os.fstat(stream.fileno()))[:4] != _signature(information)[:4]:
+                raise ReleaseError("opened component differs from inventoried file")
+        if read != information.st_size or _signature(_information(path)) != _signature(information):
+            raise ReleaseError("component changed during inventory")
+        return digest.hexdigest()
+    except OSError:
+        raise ReleaseError("component file could not be read") from None
+
+
 def inventory(root: Path) -> dict[str, str]:
     """Hash every regular file; never follow links or ignore nested dependencies."""
     try:
@@ -281,28 +313,12 @@ def inventory(root: Path) -> dict[str, str]:
                 if stat.S_ISDIR(information.st_mode):
                     directories[path] = _signature(information)
                     continue
-                if not stat.S_ISREG(information.st_mode) or information.st_nlink != 1:
-                    raise ReleaseError("component files must be regular without hard-link aliases")
                 total += information.st_size
                 if information.st_size > MAX_FILE_BYTES or total > MAX_TREE_BYTES:
                     raise ReleaseError("component byte limit exceeded")
-                digest = hashlib.sha256()
-                read = 0
-                with path.open("rb") as stream:
-                    while block := stream.read(min(1024 * 1024, information.st_size - read + 1)):
-                        read += len(block)
-                        if read > information.st_size:
-                            raise ReleaseError("component grew during inventory")
-                        digest.update(block)
-                    # Windows Python 3.13 can report different ctime via fstat/lstat.
-                    # Compare open identity/content metadata; full path checks retain ctime.
-                    if _signature(os.fstat(stream.fileno()))[:4] != _signature(information)[:4]:
-                        raise ReleaseError("opened component differs from inventoried file")
-                if read != information.st_size or _signature(_information(path)) != _signature(
-                    information
-                ):
+                result[name] = file_hash(path, max_bytes=MAX_FILE_BYTES)
+                if _signature(_information(path)) != _signature(information):
                     raise ReleaseError("component changed during inventory")
-                result[name] = digest.hexdigest()
         if any(_signature(_information(path)) != before for path, before in directories.items()):
             raise ReleaseError("component directory changed during inventory")
         _inventory(result)
