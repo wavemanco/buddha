@@ -12,7 +12,17 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from buddha.common import ValidationError, _canonical, _hex, _integer, _object, _parse, _text
+from buddha.ledger import (
+    _BINDING_SCHEMA,
+    _SCHEMA,
+    _SCHEMA_V2,
+    _expected_schema,
+    _schema_signature,
+)
 from buddha.provider import Reply
+
+MAX_MANIFEST_BYTES = 32 * 1024**2
+MAX_LEDGER_BYTES = 512 * 1024**2
 
 
 @dataclass(frozen=True)
@@ -24,6 +34,8 @@ class HistoricalOperation:
     reply: Reply | None
     actual_microusd: int | None
     provider_request_id: str | None
+    uncertainty_reply: Reply | None = None
+    uncertainty_request_id: str | None = None
 
 
 @dataclass(frozen=True)
@@ -88,6 +100,24 @@ def _inactive(directory: Path) -> None:
                 raise ValidationError("historical source has an active SQLite sidecar")
 
 
+def _bounded_read(path: Path, maximum: int) -> bytes:
+    if path.stat().st_size > maximum:
+        raise ValidationError("historical evidence exceeds its byte ceiling")
+    with path.open("rb") as stream:
+        raw = stream.read(maximum + 1)
+    if len(raw) > maximum:
+        raise ValidationError("historical evidence exceeds its byte ceiling")
+    return raw
+
+
+def _reply(value: object) -> Reply | None:
+    if value is None:
+        return None
+    if not isinstance(value, str):
+        raise ValidationError("historical reply must be stored JSON text")
+    return Reply.from_record(_parse(value.encode("utf-8")))
+
+
 def _operation(row: sqlite3.Row) -> HistoricalOperation:
     operation_id = _text(row["operation_id"], "historical operation ID")
     request_hash = row["request_sha256"]
@@ -97,43 +127,48 @@ def _operation(row: sqlite3.Row) -> HistoricalOperation:
     status = row["status"]
     if status not in {"reserved", "dispatched", "completed", "unknown"}:
         raise ValidationError("unsupported historical operation state")
-    reply = None
-    raw_reply = row["receipt_json"]
-    if raw_reply is not None:
-        if not isinstance(raw_reply, str):
-            raise ValidationError("historical reply must be stored JSON text")
-        reply = Reply.from_record(_parse(raw_reply.encode("utf-8")))
-    request_id = row["receipt_request_id"]
+    reply = _reply(row["response_json"])
+    uncertainty_reply = _reply(row["uncertainty_json"])
+    request_id = row["provider_request_id"]
     if request_id is not None:
         request_id = _text(request_id, "historical provider request ID")
+    uncertainty_id = row["uncertainty_request_id"]
+    if uncertainty_id is not None:
+        uncertainty_id = _text(uncertainty_id, "historical uncertainty request ID")
     actual = row["actual_microusd"]
     if status == "completed":
         actual = _amount(actual, "historical actual cost")
         if reply is None or not request_id or reply.provider_request_id != request_id:
             raise ValidationError("completed historical receipt identity is inconsistent")
-    elif (
-        actual is not None
-        or row["response_json"] is not None
-        or row["provider_request_id"] is not None
-    ):
+    elif actual is not None or reply is not None or request_id is not None:
         raise ValidationError("unfinished historical operation has completed fields")
-    if status != "unknown" and row["unknown_operation_id"] is not None:
-        raise ValidationError("unknown receipt is attached to another operation state")
-    if status in {"reserved", "dispatched"} and (reply is not None or request_id is not None):
-        raise ValidationError("unsatisfied historical operation has a receipt")
-    if row["unknown_operation_id"] is not None and reply is None and request_id is None:
-        raise ValidationError("unknown historical receipt contains no evidence")
+    if row["unknown_operation_id"] is not None:
+        if status not in {"unknown", "completed"}:
+            raise ValidationError("unknown receipt is attached to another operation state")
+        if uncertainty_reply is None and uncertainty_id is None:
+            raise ValidationError("unknown historical receipt contains no evidence")
+    if status == "unknown":
+        reply, request_id = uncertainty_reply, uncertainty_id
     return HistoricalOperation(
-        operation_id, request_hash, reserve, status, reply, actual, request_id
+        operation_id,
+        request_hash,
+        reserve,
+        status,
+        reply,
+        actual,
+        request_id,
+        uncertainty_reply,
+        uncertainty_id,
     )
 
 
 def _read_database(
-    path: Path, run_id: str, manifest_hash: str, budget: int, max_calls: int
+    raw: bytes, run_id: str, manifest_hash: str, budget: int, max_calls: int
 ) -> tuple[HistoricalOperation, ...]:
-    # immutable=1 prevents SQLite creating WAL/shm files; seals and sidecar checks
-    # bracket the read because immutable mode intentionally does not lock writers.
-    with closing(sqlite3.connect(path.as_uri() + "?mode=ro&immutable=1", uri=True)) as connection:
+    # Query the exact sealed bytes rather than reopening an unlocked file that
+    # could transiently change and be restored before the final seal check.
+    with closing(sqlite3.connect(":memory:")) as connection:
+        connection.deserialize(raw)
         connection.row_factory = sqlite3.Row
         connection.execute("PRAGMA query_only=ON")
         connection.execute("PRAGMA trusted_schema=OFF")
@@ -141,29 +176,42 @@ def _read_database(
         version = connection.execute("PRAGMA user_version").fetchone()[0]
         if version not in {1, 2}:
             raise ValidationError("unsupported historical ledger schema")
+        binding = connection.execute(
+            "SELECT 1 FROM sqlite_master WHERE type='table' AND name='authorization_binding'"
+        ).fetchone()
+        statements = (
+            *_SCHEMA,
+            *(_SCHEMA_V2 if version == 2 else ()),
+            *(_BINDING_SCHEMA if binding else ()),
+        )
+        if _schema_signature(connection) != _expected_schema(statements):
+            raise ValidationError("historical ledger schema differs from its trusted definition")
+        if connection.execute("PRAGMA foreign_key_check").fetchone():
+            raise ValidationError("historical ledger contains orphan evidence")
+        if binding:
+            rows = connection.execute("SELECT * FROM authorization_binding").fetchall()
+            if len(rows) != 1 or rows[0]["singleton"] != 1 or rows[0]["schema_version"] != 1:
+                raise ValidationError("invalid historical authority binding")
+            _text(rows[0]["authorization_id"], "historical authorization ID")
+            _text(rows[0]["authority_path"], "historical authority path")
+            _hex(rows[0]["terms_sha256"], "historical authority terms")
         config = connection.execute(
             "SELECT singleton,run_id,manifest_sha256,budget_microusd,max_calls FROM run_config"
         ).fetchall()
         if len(config) != 1 or tuple(config[0]) != (1, run_id, manifest_hash, budget, max_calls):
             raise ValidationError("historical ledger does not match the sealed manifest")
         if version == 2:
-            if connection.execute(
-                "SELECT 1 FROM unknown_receipts r LEFT JOIN operations o USING(operation_id) "
-                "WHERE o.operation_id IS NULL LIMIT 1"
-            ).fetchone():
-                raise ValidationError("historical unknown receipt has no operation")
             query = (
                 "SELECT o.*,r.operation_id AS unknown_operation_id,"
-                "CASE WHEN o.status='unknown' THEN r.response_json ELSE o.response_json END "
-                "AS receipt_json,CASE WHEN o.status='unknown' THEN r.provider_request_id "
-                "ELSE o.provider_request_id END AS receipt_request_id "
+                "r.response_json AS uncertainty_json,"
+                "r.provider_request_id AS uncertainty_request_id "
                 "FROM operations o LEFT JOIN unknown_receipts r USING(operation_id) "
                 "ORDER BY o.operation_id"
             )
         else:
             query = (
-                "SELECT *,NULL AS unknown_operation_id,response_json AS receipt_json,"
-                "provider_request_id AS receipt_request_id FROM operations ORDER BY operation_id"
+                "SELECT *,NULL AS unknown_operation_id,NULL AS uncertainty_json,"
+                "NULL AS uncertainty_request_id FROM operations ORDER BY operation_id"
             )
         operations = tuple(_operation(row) for row in connection.execute(query))
         if len({item.operation_id for item in operations}) != len(operations):
@@ -194,7 +242,7 @@ def read_history(directory: Path, *, manifest_sha256: str, ledger_sha256: str) -
             if not path.is_file():
                 raise ValidationError("historical evidence must be regular files")
         _inactive(directory)
-        manifest_bytes = manifest_path.read_bytes()
+        manifest_bytes = _bounded_read(manifest_path, MAX_MANIFEST_BYTES)
         manifest = _object(_parse(manifest_bytes))
         checksum = manifest.pop("record_sha256", None)
         canonical = _canonical(manifest)
@@ -206,14 +254,16 @@ def read_history(directory: Path, *, manifest_sha256: str, ledger_sha256: str) -
         settings = _object(manifest.get("settings"))
         budget = _amount(settings.get("budget_microusd"), "historical budget")
         max_calls = _amount(settings.get("max_calls"), "historical call cap")
-        if hashlib.sha256(ledger_path.read_bytes()).hexdigest() != ledger_sha256:
+        ledger_bytes = _bounded_read(ledger_path, MAX_LEDGER_BYTES)
+        if hashlib.sha256(ledger_bytes).hexdigest() != ledger_sha256:
             raise ValidationError("historical ledger seal differs")
-        operations = _read_database(ledger_path, run_id, manifest_sha256, budget, max_calls)
+        operations = _read_database(ledger_bytes, run_id, manifest_sha256, budget, max_calls)
         _inactive(directory)
         for path in (directory, manifest_path, ledger_path):
             _plain(path)
-        if manifest_path.read_bytes() != manifest_bytes or (
-            hashlib.sha256(ledger_path.read_bytes()).hexdigest() != ledger_sha256
+        if _bounded_read(manifest_path, MAX_MANIFEST_BYTES) != manifest_bytes or (
+            hashlib.sha256(_bounded_read(ledger_path, MAX_LEDGER_BYTES)).hexdigest()
+            != ledger_sha256
         ):
             raise ValidationError("historical evidence changed during observation")
         return History(
@@ -225,7 +275,7 @@ def read_history(directory: Path, *, manifest_sha256: str, ledger_sha256: str) -
             operations,
             canonical.decode("utf-8"),
         )
-    except (OSError, sqlite3.Error, UnicodeError, ValueError, TypeError) as error:
+    except (OSError, sqlite3.Error, UnicodeError, ValueError, TypeError, RecursionError) as error:
         if isinstance(error, ValidationError):
             raise
         raise ValidationError("historical evidence could not be read consistently") from None

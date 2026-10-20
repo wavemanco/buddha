@@ -2,6 +2,10 @@
 
 This is the technical contract for REC-01 in [PLAN.md](PLAN.md), not a second roadmap. It preserves the scientific evidence and defines the boundaries the following recovery slices must implement. No model request is authorized by this document alone.
 
+REC-05A now closes the legacy retained-receipt reader limitation described at
+the REC-02 checkpoint. Its [implemented scope](#rec-05a-retained-receipts-and-sealed-reads)
+does not add a reconciliation command or resolve the original missing request.
+
 ## Historical evidence
 
 `read_history(directory, manifest_sha256=..., ledger_sha256=...)` produces an immutable snapshot from the existing manifest and SQLite ledger. The manifest seal hashes canonical content excluding its checksum field; the ledger seal hashes complete file bytes. Reading must not create, migrate, lock for writing, reconcile or alter the source run. It checks manifest/config identity, supported schema, valid operation states, completed receipt identity, and consistent before/after source bytes. Pending journals, symlinks/reparse paths and an existing writer lock are refused rather than guessed safe.
@@ -155,3 +159,81 @@ Disposable-copy reconstruction with socket connections forbidden exactly matched
 [Results and limitations](LINKED-CONTINUATION-RESULTS.md) close REC-04's bounded recovery gate. They also preserve continued central-plot repetition, task/craft failures and task-specific policy instructions as development diagnostics. Official metrics stay unchanged; useful-diversity, transfer and source-evolution claims remain open. REC-05 supplies the remaining read-only verification and truthful process/diagnostic observation work.
 
 REC-04L hosted Windows and Ubuntu checks passed in [the exact PR workflow](https://github.com/wavemanco/buddha/actions/runs/39390407380). NB-01 subsequently adds one exact old/new benchmark source-hash compatibility pair for validation-only provenance tightening, documented in [the benchmark audit](NOVELTYBENCH-CONFORMANCE.md#nb-c2-a-reproduced-provenance-defect-is-fixed). Valid scientific behavior remains covered by the archived/current executable comparisons; other source changes remain rejected. No frozen runtime or result is rewritten.
+
+
+## REC-05A: retained receipts and sealed reads
+
+A legal legacy `Ledger.mark_unknown()` followed by `Ledger.complete()` preserves
+its earlier immutable uncertainty row. The historical reader now accepts this
+state and exposes both records instead of rejecting it or hiding the earlier one.
+`HistoricalOperation.uncertainty_reply` and `uncertainty_request_id` retain that
+prior evidence. Existing `reply` and `provider_request_id` still mean the terminal
+reply for a completed operation, or the uncertain reply/ID for an unknown one.
+The earlier and later texts, models and IDs may differ; an uncertain body/header
+identity mismatch remains evidence of uncertainty.
+
+A completed operation contributes its recorded terminal charge exactly once.
+Its earlier receipt adds no second operation, charge or reservation. A genuine
+reservation overrun keeps the full recorded charge. An unresolved operation
+retains its full reservation. No model-price lookup or recomputation occurs.
+Malformed earlier/terminal replies, empty or orphan uncertainty rows, uncertainty
+evidence on reserved/dispatched operations, terminal identity mismatches and
+unfinished terminal fields remain failures. Schema-1 snapshots remain readable
+without adding a table or migrating their source. Returned records/replies are
+frozen; nested manifest access remains an independent copy.
+
+The reader consumes the exact database bytes checked against the supplied seal
+through an in-memory SQLite connection, with queries only and trusted schema
+features disabled. Reopening an unlocked source for SQL queries could observe a
+transient replacement even if its original bytes were restored before the last
+hash check. Regression checks reproduced that substitution, including an actual
+historical authorization import of the wrong temporary charge, before the fix.
+The new path returns only records derived from the supplied sealed bytes.
+Before reading stored records, it also requires the exact known native tables
+and immutable triggers, including the optional authorization-binding table.
+Views, added or altered objects, broken foreign keys and malformed binding rows
+are rejected. Binding paths are recorded data: the reader never opens that
+other authority or treats its presence as permission to spend. The shared schema
+helper also checks the literal SQLite internal-name prefix so a user-created
+object cannot hide behind a wildcard. These checks change no financial table,
+trigger, schema version, migration or accounting transition.
+Before/after source checks, link/sidecar/lock refusals and manifest/config identity
+checks remain. Reads are bounded at 32 MiB per manifest and 512 MiB per ledger;
+these are input byte ceilings, not financial limits. Deep JSON failures are
+reported as `ValidationError`, including when hidden in an earlier receipt.
+
+`Authorization.import_history()` uses the existing effective terminal signature;
+its implementation and all financial schemas/transitions are unchanged. An
+identical repeated import creates no extra charge or event. A source that was
+already imported under another ledger seal still conflicts, even when its later
+snapshot is valid. This change cannot automatically replace an imported unknown,
+release its hold, authenticate provider evidence or authorize another attempt.
+The original real unknown and completed linked continuation remain unchanged.
+
+The three optional checks below run once in the current PowerShell window. They
+create temporary synthetic files and use no API keys, network or paid calls.
+They change no existing run; Ctrl+C stops a foreground check.
+
+```powershell
+python -m unittest discover -s tests -p test_history_reconciled.py
+python -m unittest discover -s tests -p test_history_snapshot.py
+python -m unittest discover -s tests -p test_history_schema.py
+```
+
+The first checks legal earlier/final receipts, malformed states, immutability,
+schema-1 reads, genuine recorded overrun and one-charge/idempotent imports. The
+second checks exact sealed-byte consumption, transient file substitution,
+actual import accounting, bounded reads and unchanged source evidence. The
+third checks exact native versions, rejected database views/altered structure,
+foreign keys and recorded authorization bindings before receipt parsing.
+
+Final local checks passed 784 tests in 470.426 seconds, with four existing skips.
+Ruff lint/format (79 files), strict types (33 sources, Linux and Windows), Bandit,
+the runtime dependency audit and compilation passed. All 287 protected files,
+the preserved runtime archive, real charges and the original hold are unchanged.
+No model calls were made. Hosted CI is recorded separately after publication.
+
+[REC-05A delivery evidence](conformance/rec05a-delivery.json) records source
+seals, tests, findings and preservation checks. REC-05B/C still own the separate
+read-only search verifier and writer/lock diagnostics. This slice adds no new
+reconciliation/retry command, paid allocation or scientific improvement claim.

@@ -11,7 +11,9 @@
     "strict_mypy": "pass;33 source files;linux and win32"
   },
   "ci": {
+    "PR21_workflow": "https://github.com/wavemanco/buddha/actions/runs/39491765406",
     "parent_PR20": "all four PR/push Windows/Linux checks terminal green at7d1ebd2325788f928b6f8da7b5347eabca2d42a8; merged f4ca271e66ad9539dcfcff3347f959b48c186d60",
+    "push_workflow": "https://github.com/wavemanco/buddha/actions/runs/39491690811",
     "request_checkpoint_merged_PRs": [
       1,
       2,
@@ -32,9 +34,10 @@
       17,
       18,
       19,
-      20
+      20,
+      21
     ],
-    "status": "pending publication"
+    "status": "all four PR/push Windows/Linux checks terminal green at e1a4e41d1667f4ca04f427c2f689dd3eed15dd45; merged 709e4f6229b9b86519f273df489c77ed6b3d4451"
   },
   "date": "2026-10-20",
   "findings": {

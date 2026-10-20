@@ -15,6 +15,9 @@ from typing import cast
 from buddha.common import ValidationError, _canonical, _hex, _object, _parse, _text
 from buddha.history import HistoricalOperation, _plain, read_history
 from buddha.ledger import (
+    _BINDING_SCHEMA as _BINDING_SCHEMA,
+)
+from buddha.ledger import (
     _SCHEMA as LEDGER_SCHEMA,
 )
 from buddha.ledger import (
@@ -96,19 +99,6 @@ _AUTH_TRIGGERS = tuple(
     "SELECT RAISE(ABORT,'authorization records are immutable'); END"
     for table in sorted(_TABLES - {"auth_operations"})
     for action in ("UPDATE", "DELETE")
-)
-_BINDING_SCHEMA = (
-    "CREATE TABLE main.authorization_binding ("
-    "singleton INTEGER PRIMARY KEY CHECK(singleton=1), "
-    "schema_version INTEGER NOT NULL CHECK(schema_version=1), "
-    "authorization_id TEXT NOT NULL, authority_path TEXT NOT NULL, "
-    "terms_sha256 TEXT NOT NULL)",
-    *(
-        f"CREATE TRIGGER main.authorization_binding_no_{action.lower()} "
-        f"BEFORE {action} ON authorization_binding BEGIN "
-        "SELECT RAISE(ABORT,'authority binding is immutable'); END"
-        for action in ("UPDATE", "DELETE")
-    ),
 )
 
 

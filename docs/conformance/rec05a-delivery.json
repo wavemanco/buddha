@@ -1,0 +1,205 @@
+{
+  "actual_provider_calls": 0,
+  "base_commit": "709e4f6229b9b86519f273df489c77ed6b3d4451",
+  "checks": {
+    "bandit": "pass;no application findings;existing suppression warnings retained",
+    "compile": "pass",
+    "git_diff_check": "pass",
+    "markdown_links": "pass;255 local file targets;README and top-level docs",
+    "ruff_format": "pass;79 files",
+    "ruff_lint": "pass",
+    "runtime_pip_audit": "pass;no known vulnerabilities;separate evaluator environment limits unchanged",
+    "strict_mypy": "pass;33 sources;linux and win32"
+  },
+  "ci": {
+    "parent_PR21": "four PR/push Windows/Linux checks terminal green at e1a4e41d1667f4ca04f427c2f689dd3eed15dd45; merged709e4f6229b9b86519f273df489c77ed6b3d4451",
+    "parent_PR_workflow": "https://github.com/wavemanco/buddha/actions/runs/39491765406",
+    "parent_push_workflow": "https://github.com/wavemanco/buddha/actions/runs/39491690811",
+    "status": "pending publication"
+  },
+  "date": "2026-10-20",
+  "financial_preservation": {
+    "base_commit": "709e4f6229b9b86519f273df489c77ed6b3d4451",
+    "checks": {
+      "all_authorization_functions_ast_identical": true,
+      "all_authorization_remaining_top_level_assignments_ast_identical": true,
+      "binding_schema_ast_identical_after_relocation": true,
+      "binding_schema_exact_bytes_identical_after_relocation": true,
+      "common_exact_bytes_unchanged": true,
+      "history_plain_inactive_ast_identical": true,
+      "ledger_changed_functions_only_like_to_glob_literal_prefix": true,
+      "ledger_functions_only_expected_changes": [
+        "_schema_signature",
+        "Ledger.__init__"
+      ],
+      "ledger_schema1_schema2_ast_identical": true
+    },
+    "format": "buddha.rec05a-schema-preservation.v1",
+    "scope": "AST and source-byte preservation of financial methods/DDL; not test execution or provider attestation",
+    "source_sha256": {
+      "authorization.py": "06d8615f8b301285a951b08bece0570e5b1b89467fc99fa4e994c7e5e5f30c47",
+      "common.py": "3a0a693a0f4a0f2eed3b858d0b3ac42148871dbca284e56e0e368726309393c0",
+      "history.py": "d42e92a7e6c88a2f72090eaaa50de39dc355957e7c61f5b89dd97162d8b0eefa",
+      "ledger.py": "5c7e56f1e2c5e68046d6380ebacc03110300eae34d348d7dca683a0591d64130"
+    }
+  },
+  "findings": {
+    "REC2-F1": "Native unknown->completed retains its earlier immutable row. Reader now exposes both, charges recorded terminal once and preserves true overruns/unknown holds.",
+    "REC5A-F2": "Pre/post file hashes alone allowed transient unsealed receipt and charge substitution, including an actual temporary Authorization.import_history mirror. SQL now consumes exact sealed bytes in memory.",
+    "REC5A-F3": "Initial/post checks used unbounded read_bytes. Actual read(maximum+1) enforces32MiB manifest/512MiB ledger even when stat reports a smaller file.",
+    "REC5A-F4": "Benign views/altered DDL/orphan events/malformed optional bindings were accepted under a resealed database. Exact trusted native schema and FK/binding checks now precede stored-data queries.",
+    "REC5A-F5": "SQL LIKE sqlite_% hid legal sqliteXuntrusted objects. Three shared metadata/initialization predicates now use literal-prefix GLOB; main, funding and version0 regressions close it.",
+    "REC5A-F6": "Deep JSON in manifest/earlier receipt escaped as RecursionError. Public reads/imports now fail with ValidationError before source/authority changes."
+  },
+  "format": "buddha.review.rec05a-delivery.v1",
+  "limits": [
+    "Saved-byte consistency is not provider origin, invoice reconciliation or permission to spend",
+    "Public reader remains known policy-search.v1 only; native Gateway and linked scientific verification are separate paths",
+    "Strict native SQLite schema1/2 plus optional known binding; unsupported schemas/formats fail closed",
+    "Byte ceilings are not a resident-memory or execution-time guarantee",
+    "No event-by-event transition reconstruction or scientific artifact verification in this financial snapshot reader",
+    "Identical imports are idempotent; another seal cannot replace an already imported unknown or release its hold",
+    "No new receipt-reconciliation/retry/verification/doctor command, live allocation or API call",
+    "No semantic diversity, source evolution, held-out improvement or improved-improver claim"
+  ],
+  "local_tests": {
+    "full": {
+      "count": 784,
+      "exit_code": 0,
+      "log": "runs/reviews/rec05a-full-tests.log",
+      "seconds": 470.426,
+      "skipped": 4
+    },
+    "logs": {
+      "rec05a-full-tests.log": {
+        "bytes": 2352,
+        "sha256": "baecca4c6534aaf0481c7de992d002862c73e78f345ed87bfc53a7c79c697033"
+      },
+      "rec05a-history-schema-red.log": {
+        "bytes": 28617,
+        "sha256": "3052f015b3dff33dfd37c9244a549b9c9c44406c7d44fdc9bfa6cacef8294cdc"
+      },
+      "rec05a-history-snapshot-red.log": {
+        "bytes": 6973,
+        "sha256": "11311ee16d1068a2cc5d1a635609b2563ceb19a1c11bc1b12d4a1f87f0833e1a"
+      },
+      "rec05a-retained-history-red.log": {
+        "bytes": 1867,
+        "sha256": "2acf31efc888bca9b7739d1a864d9efebb61185380fa1dbf593ab84e6b2996ea"
+      }
+    },
+    "new_groups": {
+      "native_schema": 11,
+      "retained_receipts": 14,
+      "sealed_snapshots": 6
+    },
+    "observed_before_fix": {
+      "deep_json": "one-off actual20k-depth RecursionError reproduced before fix; subsequent runnable regression",
+      "retained_legal_transition": "RED one original positive acceptance check",
+      "schema": "RED eleven groups/twenty-one failing subcases; genuine native1/2 controls pass",
+      "snapshot": "RED six groups/five failures including actual Authorization import and bounded-read subcases"
+    }
+  },
+  "new_live_allocation": false,
+  "new_paid_command": false,
+  "real_read_only_verification": {
+    "actual_provider_calls": 0,
+    "all_allocations_inactive": true,
+    "format": "buddha.review.rec05a-real-histories.v1",
+    "network_forbidden": true,
+    "pilot_runtime_zip_sha256": "bd32c4d50339e2f2e1cadf01f5872fa3c1cdf12c196e7676a18d6fe96bd534e0",
+    "protected_files_unchanged": 287,
+    "real_authorization": {
+      "committed_microusd": 1108768,
+      "operation_count": 124,
+      "reserved_microusd": 532373,
+      "spent_microusd": 576395
+    },
+    "sources": [
+      {
+        "earlier_receipts": 0,
+        "source": "runs\\first-live-search",
+        "totals": {
+          "committed_microusd": 534082,
+          "operation_count": 10,
+          "reserved_microusd": 532373,
+          "spent_microusd": 1709
+        }
+      },
+      {
+        "earlier_receipts": 0,
+        "source": "runs\\first-live-recovery",
+        "totals": {
+          "committed_microusd": 300153,
+          "operation_count": 63,
+          "reserved_microusd": 0,
+          "spent_microusd": 300153
+        }
+      }
+    ]
+  },
+  "scope": "Known legacy policy-search.v1 sealed financial snapshots; legal retained earlier receipts",
+  "source": {
+    "buddha/authorization.py": {
+      "bytes": 40555,
+      "sha256": "06d8615f8b301285a951b08bece0570e5b1b89467fc99fa4e994c7e5e5f30c47"
+    },
+    "buddha/benchmark.py": {
+      "bytes": 19118,
+      "sha256": "b72c74a0b9b7e786b9969c72a400f449ab5758938ee9f24af660a887d866c2a9"
+    },
+    "buddha/common.py": {
+      "bytes": 2238,
+      "sha256": "3a0a693a0f4a0f2eed3b858d0b3ac42148871dbca284e56e0e368726309393c0"
+    },
+    "buddha/continuation.py": {
+      "bytes": 38383,
+      "sha256": "6230fd976f4b83f2c56e34ee0dba039ec9d011f773f59f25f1c6da357c546c54"
+    },
+    "buddha/evaluation.py": {
+      "bytes": 8207,
+      "sha256": "4cabb1a48689a140fc6f6129ed8d9eae1d047d3e09eae794170c74479413b8d6"
+    },
+    "buddha/gateway_history.py": {
+      "bytes": 16848,
+      "sha256": "a773ae6066e5b8a4f503e4b346b73570ace2ebeb811017f7b656cc211fded57c"
+    },
+    "buddha/history.py": {
+      "bytes": 12198,
+      "sha256": "d42e92a7e6c88a2f72090eaaa50de39dc355957e7c61f5b89dd97162d8b0eefa"
+    },
+    "buddha/ledger.py": {
+      "bytes": 19148,
+      "sha256": "5c7e56f1e2c5e68046d6380ebacc03110300eae34d348d7dca683a0591d64130"
+    },
+    "buddha/provider.py": {
+      "bytes": 21651,
+      "sha256": "17de071c1416afa32f9da32eb627e24264d8a0a848862fdf4853057125f18a02"
+    },
+    "buddha/run.py": {
+      "bytes": 24646,
+      "sha256": "a972cb8d1a04bef7abad7efdf7f1eec803bb88cd55c30cf64148119a3d7c6dbb"
+    },
+    "buddha/search.py": {
+      "bytes": 29125,
+      "sha256": "ac7b3648355b139797773cbe2bb8b67abbc8533eefd987cd7692275692a9a95c"
+    },
+    "tests/test_history.py": {
+      "bytes": 12873,
+      "sha256": "74364404fe61018bfe3d90920d8b78d72a0ab2a9301cb74d16ae147888b17fcd"
+    },
+    "tests/test_history_reconciled.py": {
+      "bytes": 16256,
+      "sha256": "23f09171a3a681ac17c1cc8c9fa6d0424f5da08e87648ea3db3499bf62dd3da0"
+    },
+    "tests/test_history_schema.py": {
+      "bytes": 10974,
+      "sha256": "84e41b8b9a782297fce8168f84189f296647b6203c3d8b7369f09df604777ea9"
+    },
+    "tests/test_history_snapshot.py": {
+      "bytes": 10019,
+      "sha256": "2c4789c8f272b120bb7e2baac06ce229f7dcdd5b98514f4f1fb8582d544fd2fc"
+    }
+  },
+  "status": "complete"
+}

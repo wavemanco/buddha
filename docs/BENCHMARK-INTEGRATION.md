@@ -65,7 +65,7 @@ Existing runs never follow a new default. Before uninstalling their driver, eith
 
 For new manifests, bind the shared host core, selected driver/source/lock, agent treatment, official configuration, population and paid capability profile separately and together. Include transitive runtime dependencies and nested package files. An unrelated driver installed in its own environment must not change a frozen run's identity; changes to shared code actually used by that run must. Do not solve this by omitting plugin files from source verification.
 
-Legacy manifests retain their existing identity algorithm and sealed runtime. No rehashing, relabeling, blanket source-guard exception or evidence migration is implied. Historical readers must preserve both legal earlier uncertainty receipts and terminal receipts. The new raw Gateway reader does so; REC-05A's separate legacy pilot-reader limitation remains open.
+Legacy manifests retain their existing identity algorithm and sealed runtime. No rehashing, relabeling, blanket source-guard exception or evidence migration is implied. Historical readers must preserve both legal earlier uncertainty receipts and terminal receipts. Both the new raw Gateway reader and [REC-05A's separate legacy reader](RECOVERY-CONTRACT.md#rec-05a-retained-receipts-and-sealed-reads) now do so. Their formats and execution guards remain distinct.
 
 ## Coupling inspected at BENCH-03A
 
