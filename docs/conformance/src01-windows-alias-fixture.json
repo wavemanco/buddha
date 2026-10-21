@@ -1,0 +1,131 @@
+{
+  "checked_on": "2026-10-21T05:34:24.699098+00:00",
+  "failure": {
+    "errors": 1,
+    "failure": "audit_layout resolved-target equality passed, then raw symlink-target whitelist failed",
+    "head": "445bce337f586ef4b13a0db4cb74fa4795b19ca6",
+    "job": 119045046335,
+    "log_sha256": "9e4c103d7ddd93649d17a0644a766e401819d7b59f2bcfaa7e62b0874ec47d46",
+    "pr": 37,
+    "python": "3.13.16",
+    "run": 39546271327,
+    "seconds": 2048.492,
+    "skipped": 1,
+    "test": "test_src01_runtime.SourceRuntimeTests.test_supported_interpreter_alias_is_bound_to_actual_binary",
+    "tests": 1084
+  },
+  "fix": "Use one native Windows verbatim namespace throughout the trusted temporary fixture, including UNC and existing verbatim paths. Preserve actual raw target, resolved-target and interpreter-byte checks; add an explicit raw-target equality assertion.",
+  "format": "buddha.src01-windows-alias-fixture.v1",
+  "hosted_ci": "Pending new exact-head push/PR checks; old failed results remain historical evidence.",
+  "live_allocation_changes": 0,
+  "preservation": {
+    "audit_helper_sha256": "7224d52eecb27f33bfcf9810af9f8d674d3646ed03fc958167149accd0bbad14",
+    "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+    "no_new_skip": true,
+    "no_readlink_mock_or_target_normalization": true,
+    "no_removed_assertion": true,
+    "old_delivery_records_unchanged": true,
+    "production_application_executor_finance_official_code_changed": false,
+    "runtime_environment_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951"
+  },
+  "real_provider_calls": 0,
+  "root_cause": {
+    "native_namespace_probe": {
+      "link_type": "native directory junction, not the unavailable file-symlink case",
+      "observed_readlink": "\\\\?\\C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-windows-alias-fixture\\runs\\reviews\\windows-link-namespace\\base",
+      "plain_spelling_matches": false,
+      "plain_target": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-windows-alias-fixture\\runs\\reviews\\windows-link-namespace\\base",
+      "platform": "nt",
+      "same_resolved_directory": true,
+      "verbatim_resolve_preserved": true,
+      "verbatim_spelling_matches": true,
+      "verbatim_target": "\\\\?\\C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-windows-alias-fixture\\runs\\reviews\\windows-link-namespace\\base"
+    },
+    "observation": "Native Windows readlink returns the substitution namespace for an absolute reparse target. The fixture formerly used plain drive paths, making its exact raw-target spelling inconsistent.",
+    "primary_reference": "https://docs.python.org/3.13/library/os.html#os.readlink",
+    "scope": "Portable Windows test fixture, not a change to the Linux-only production audit policy. The hosted traceback does not itself show raw target text."
+  },
+  "status": "fixture correction locally checked; privileged Windows full CI pending",
+  "test_sha256": {
+    "after": "0a50d567590e59779ac19cae6dd582e85a1a3cace5f84ad4b76bf050f8ccf586",
+    "before": "b41ab2017585bc2d0e9fee8144df7f3460eaddd68b216ed1d70bbaa36c61ce3f"
+  },
+  "unchanged_tracked_files_except_test": 304,
+  "validation": {
+    "actual_linux": {
+      "execution": {
+        "cleanup_status": "removed",
+        "configuration": {
+          "engine_endpoint_sha256": "30341252ca9aa2b298da11cd8527fdfbf8ab30a2f3b5a3c871188c778b20af30",
+          "host": {
+            "CapDrop": [
+              "ALL"
+            ],
+            "CgroupnsMode": "private",
+            "IpcMode": "none",
+            "LogConfig": {
+              "Config": {},
+              "Type": "none"
+            },
+            "Memory": 134217728,
+            "MemorySwap": 134217728,
+            "NanoCpus": 500000000,
+            "NetworkMode": "none",
+            "PidMode": "",
+            "PidsLimit": 16,
+            "Privileged": false,
+            "ReadonlyRootfs": true,
+            "SecurityOpt": [
+              "no-new-privileges:true"
+            ],
+            "Tmpfs": {
+              "/scratch": "rw,size=16m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700",
+              "/tmp": "rw,size=16m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700"
+            },
+            "UTSMode": ""
+          },
+          "image": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+          "mounts": {
+            "/runner": "C:\\Users\\arvik\\AppData\\Local\\Temp\\buddha-windows-fixture-linux-agk16gzg"
+          },
+          "role": "agent"
+        },
+        "container_id": "f2366d12b03ed599aeb7d9d96e82ee4b5c5e242538ca3f79d431cd83f39d4f7f",
+        "elapsed_seconds": 1.3069436000660062,
+        "exit_code": 0,
+        "frame_count": 1,
+        "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+        "stderr_bytes": 0,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_bytes": 56
+      },
+      "format": "buddha.src01-windows-fixture-linux-check.v1",
+      "observations": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 10
+      },
+      "real_provider_calls": 0,
+      "source_sha256": {
+        "docs/conformance/src01-runtime-audit.py": "7224d52eecb27f33bfcf9810af9f8d674d3646ed03fc958167149accd0bbad14",
+        "tests/test_src01_runtime.py": "0a50d567590e59779ac19cae6dd582e85a1a3cace5f84ad4b76bf050f8ccf586"
+      },
+      "status": "pass"
+    },
+    "bandit": "no issues; existing nosec diagnostics retained",
+    "compileall": "pass",
+    "format": "pass",
+    "lint": "pass",
+    "local_full_suite": "Not rerun for this test-only correction; exact changed-source full suite is required in hosted Linux/privileged Windows CI.",
+    "portable": {
+      "limitation": "Local Windows account lacks file-symlink privileges; CI must prove that case.",
+      "result": "pass",
+      "seconds": 0.228,
+      "skipped": 4,
+      "tests": 11
+    },
+    "runtime_dependencies": "No dependency/requirements/image change; prior runtime audit retained.",
+    "strict_mypy": "38 sources pass"
+  }
+}
