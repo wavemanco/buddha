@@ -1,4 +1,11 @@
-# MEAS-02: offline saved-judgment audit
+# MEAS-02: official judge audit
+
+**Live audit completed:** all 40 frozen targets/four anchored batches, 40 physical
+attempts, $0.032213 recorded cost and zero held. See
+[the live results](MEASUREMENT-LIVE-RESULTS.md) for resolved controls, raw-parser
+replay and material judge variability. No further command is needed for this
+audit. The preparation and original commands below remain the execution
+contract; they do not authorize another experiment.
 
 October 20, 2026. All six saved historical partition replies reproduce their
 recorded classes through the pinned official v1.1 selected functions, without

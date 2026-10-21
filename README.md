@@ -6,8 +6,8 @@ Build agents that improve their own procedures for producing useful, meaningfull
 
 ## Current state
 
-The completed measurement checkpoint is **MEAS-01**; the next gate is the
-**MEAS-02 official-judge audit**. The project has auditable API
+The bounded **MEAS-01/MEAS-02 measurement audit is complete**; next is the
+**POL-02 controlled policy comparison**. The project has auditable API
 accounting, linked recovery, bounded policy search, replaceable release selection,
 and isolated fixed-seed generation. The unchanged official LLM partition, score
 and summary commands now compose with generated C1 answers in a complete
@@ -25,8 +25,13 @@ now has two frozen model reviews and a separate blinded adjudication. The
 [results](docs/MEASUREMENT-AUDIT-RESULTS.md) preserve 17 resolved items and five
 uncertain items; human scientific validation remains open. The
 [offline judge audit](docs/MEASUREMENT-JUDGE-AUDIT.md) reproduces all six saved
-partitions and compares 95 resolved distinct relations. Equivalent controls and
-fresh repeated/order tests still need measurement. A
+partitions and compares 95 resolved distinct relations. The
+[live audit](docs/MEASUREMENT-LIVE-RESULTS.md) now covers all 40 targets: resolved
+controls agree, including equivalents, but one historical story set varies
+between 4, 5 and 9 groups across repeated/order occasions. Raw official parser
+replay confirms this is present in the judge's replies, without repair.
+Uncertain cases remain uncertain; this is not population accuracy or a new
+ranking. A
 [prepared native study](docs/MEASUREMENT-JUDGE-AUDIT.md#prepared-native-study-interface)
 now binds those 40 supplied controls to separate accounting occasions; its
 offline execution checks do not supply new model judgments. Its
@@ -49,11 +54,11 @@ others uncertain; original benchmark scores and raw evidence remain unchanged. S
 [pilot review](docs/PILOT-REVIEW.md), [recovery results](docs/FIRST-LIVE-RESULTS.md)
 and [linked continuation results](docs/LINKED-CONTINUATION-RESULTS.md).
 
-At this checkpoint the living plan contains **9 remaining leaf slices**.
+At this checkpoint the living plan contains **8 remaining leaf slices**.
 The Windows PID-lock observer follow-up is complete at its shared-reader scope;
 [the guide](docs/DOCTOR.md#windows-file-sharing) states its boundaries.
 The native pipeline is complete at its declared offline scope. Umbrella milestones
-are not counted again. They cover measurement (1),
+are not counted again. They cover
 policy/search (2), source evolution (3), held-out evaluation (2) and the
 improver comparison (1). This is a checkpoint count, not a promise that research
 findings will never require a smaller slice; [PLAN.md](docs/PLAN.md) determines
@@ -72,7 +77,9 @@ user has now approved a separate **$15 / 120-attempt judge audit**, allowing a
 partial result with its reason recorded. At preparation, its allocation had zero
 calls and passed local key-binding checks after 1,025 local tests and confined
 native proofs. The original audit has since completed with verified saved
-accounting and four completion anchors; scientific review remains separate. The
+accounting and four completion anchors: 40 attempts, $0.032213 recorded cost
+and zero held. [The results](docs/MEASUREMENT-LIVE-RESULTS.md) retain judge
+variability and broader scientific limits. No further audit command is needed. The
 original $50 experiment
 remains closed, with its unknown-request hold preserved. See the
 [approved audit handoff](docs/MEASUREMENT-JUDGE-AUDIT.md#approved-15-live-audit). [API key guidance](docs/API-KEYS.md) explains process-only
