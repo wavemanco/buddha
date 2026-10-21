@@ -58,9 +58,14 @@ The [actual twelve-task protocol](docs/POLICY-COMPARISON.md) now declares
 membership, the unchanged official instrument, analysis and masked supplemental
 review; its [cost proposal](docs/POLICY-COMPARISON-COSTS.md) creates no funding.
 The [passive results reader](docs/POLICY-RESULTS.md) checks saved evidence and
-computes the primary comparisons while keeping incomplete results explicit.
-The remaining registered reporting layer, account/runtime checks, a tested
-handoff and the live comparison remain open.
+computes the primary comparisons, ranges by original category, each generation
+repetition and score/group disagreement between judging occasions. Its token/cost
+views keep unknown usage, recorded charges, holds and recovery metadata explicit.
+Before launch, the panel mapping must be frozen, its packet materializer
+implemented/tested, and account/runtime checks, approved funding and a tested
+handoff completed. The actual answer packet and supplemental reviews follow real
+saved generation. The live comparison and human scientific assessment remain
+open; these reporting features do not complete the experiment.
 
 The [source runtime](docs/SOURCE-RUNTIME.md) and [candidate execution boundary](docs/SOURCE-CANDIDATES.md)
 now pass composed isolation, model-channel, accounting and recovery checks.

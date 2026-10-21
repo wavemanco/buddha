@@ -8,6 +8,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
+from buddha import noveltybench_results
 from buddha.answers import Answers, TaskSet
 from buddha.noveltybench_results import NoveltyBenchResultsError, project_rows
 from buddha.releases import Release, _json
@@ -99,6 +100,72 @@ def fixture():
         for row in partitions
     ]
     return tasks, answers, partitions, scores
+
+
+class ReportingConfigurationTests(unittest.TestCase):
+    def setUp(self):
+        self.record = fixture()[0].to_record()["release"]
+        self.record["source"].update(
+            {"src/partition.py": "1" * 64, "src/score.py": "2" * 64, "src/summarize.py": "3" * 64}
+        )
+        self.record["commands"] = [
+            {"module": "src.partition", "argv": ["{artifacts}"]},
+            {"module": "src.score", "argv": ["--fallback-judge", "fallback-model"]},
+            {"module": "src.summarize", "argv": ["{artifacts}"]},
+        ]
+        self.record["artifacts"]["results"] = ["p.jsonl", "s.jsonl"]
+        self.stages = [
+            {"outputs": [{"path": name}]} for name in ("p.jsonl", "s.jsonl", "summary.json")
+        ]
+
+    def read(self):
+        return noveltybench_results.reporting_configuration(
+            Release.from_record(self.record), self.stages
+        )
+
+    def test_roles_follow_declared_artifact_flow_rather_than_stage_index_or_module_name(self):
+        self.assertEqual(
+            self.read(),
+            {"stage_roles": ["grouping", "quality", "summary"], "fallback_model": "fallback-model"},
+        )
+        self.record["commands"][:2] = self.record["commands"][1::-1]
+        self.stages[:2] = self.stages[1::-1]
+        self.assertEqual(
+            self.read(),
+            {"stage_roles": ["quality", "grouping", "summary"], "fallback_model": "fallback-model"},
+        )
+
+    def test_explicit_equals_argument_is_read_without_executing_official_sources(self):
+        self.record["commands"][1]["argv"] = ["--fallback-judge=fallback-model"]
+        self.assertEqual(self.read()["fallback_model"], "fallback-model")
+
+    def test_missing_or_ambiguous_fallback_is_unknown_without_inventing_a_default(self):
+        for argv in (
+            [],
+            ["--fallback-judge"],
+            ["--fallback-judge="],
+            ["--fallback-judge", "--patience", "0.8"],
+            ["--fallback-judge", "first", "--fallback-judge=second"],
+        ):
+            with self.subTest(argv=argv):
+                self.record["commands"][1]["argv"] = argv
+                self.assertIsNone(self.read()["fallback_model"])
+
+    def test_ambiguous_or_missing_stage_roles_are_a_typed_projection_error(self):
+        for stages in (
+            self.stages[:2],
+            [self.stages[0], self.stages[0], self.stages[2]],
+            [self.stages[0], {"outputs": [{"path": "other.jsonl"}]}, self.stages[2]],
+            [
+                self.stages[0],
+                {"outputs": [{"path": "p.jsonl"}, {"path": "s.jsonl"}]},
+                self.stages[2],
+            ],
+        ):
+            with self.subTest(stages=stages), self.assertRaises(NoveltyBenchResultsError):
+                noveltybench_results.reporting_configuration(
+                    Release.from_record(self.record), stages
+                )
 
 
 class NoveltyBenchResultsTests(unittest.TestCase):
