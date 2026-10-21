@@ -61,10 +61,11 @@ The [passive results reader](docs/POLICY-RESULTS.md) checks saved evidence and
 computes the primary comparisons, ranges by original category, each generation
 repetition and score/group disagreement between judging occasions. Its token/cost
 views keep unknown usage, recorded charges, holds and recovery metadata explicit.
-Before launch, the panel mapping must be frozen, its packet materializer
-implemented/tested, and account/runtime checks, approved funding and a tested
-handoff completed. The actual answer packet and supplemental reviews follow real
-saved generation. The live comparison and human scientific assessment remain
+The [private panel mapping](docs/POLICY-PANEL.md) derives fixed masks from pinned
+study metadata before answers are inspected; it contains no answer text. The
+packet materializer, account/runtime checks, approved funding and a tested
+handoff remain open before launch. The actual answer packet and supplemental
+reviews follow real saved generation. The live comparison and human scientific assessment remain
 open; these reporting features do not complete the experiment.
 
 The [source runtime](docs/SOURCE-RUNTIME.md) and [candidate execution boundary](docs/SOURCE-CANDIDATES.md)

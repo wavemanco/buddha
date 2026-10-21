@@ -1,0 +1,270 @@
+{
+  "actual_pre_answer_freeze": {
+    "counts": {
+      "positions": 240,
+      "sets": 24,
+      "tasks": 6
+    },
+    "dataset_sha256": "ca9b6f470e5d7f7e34a281e2fdaa6f6e51c38bdae075ea580d184139ec391fa7",
+    "format": "buddha.policy-panel-freeze.v1",
+    "input_sha256": {
+      "docs/POLICY-COMPARISON.md": "a3cd4ee3011f0e269e0b2e66570953c847574497d8e8b02a359b247a59423ab0",
+      "docs/conformance/pol02-study-intent.json": "befcce0c56aaa86326e4ed5c116564e72488ad469f16ff53b9ad5390391bb01e",
+      "docs/conformance/pol02-study-source-review.json": "6bcf52430668d06456d31e14629dd0ad7093d1656099faba8a8c75cd7a51fcc0"
+    },
+    "mapping_bytes": 26901,
+    "mapping_sha256": "c4e6d3afbf64135678c19d24ea83dcbc6e820f93165e629cb5f689ce49507181",
+    "private_mapping": "runs/reviews/pol02-panel-plan.private.json; ignored, excluded from reviewer inputs and repository",
+    "scope": {
+      "database_read": false,
+      "generated_answers_read": false,
+      "judging_outputs_read": false,
+      "keys_read": false,
+      "materializer_implemented": false,
+      "provider_calls": 0,
+      "reviews_complete": false
+    },
+    "source_sha256": {
+      "buddha/answers.py": "be860546b2692ea4a710d93855f487dd49d9c8e28eb3f2ec757df697cefb8d0b",
+      "buddha/policy_panel.py": "d8fe6d5253b688cd376a47343e0d1377407008ca5d50b4a228a88031d6b8e264",
+      "buddha/policy_study.py": "9b5c1633b3202b1cea0eb37bff051c2cafa25e83a4ae227393e07593791e13a2",
+      "buddha/releases.py": "33361cf5b0923b373ee53dd73597063195c2c0d519baead50d40fb4bcfab44f5"
+    },
+    "status": "pre-answer mapping only; actual answer materialization remains open",
+    "study_sha256": "897db6a13c2a3f35bf5dd11e99e5aac20173c1a556f7e55aea9ccfa63a3c19de"
+  },
+  "format": "buddha.policy-panel-plan-delivery.v1",
+  "funding": {
+    "proposal_usd": 50,
+    "proposed_attempts": 4096,
+    "status": "unallocated; historical balances not reused"
+  },
+  "hosted_ci": {
+    "parent_pr": {
+      "baseRefName": "main",
+      "headRefOid": "0a0c6b91b17fc9fa6151646b0f2344b2ae22aac9",
+      "mergeCommit": null,
+      "number": 44,
+      "state": "OPEN",
+      "statusCheckRollup": [
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-21T17:45:13Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/wavemanco/buddha/actions/runs/39641912065/job/119367344507",
+          "name": "checks (ubuntu-latest)",
+          "startedAt": "2026-10-21T17:13:49Z",
+          "status": "COMPLETED",
+          "workflowName": "checks"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-10-21T17:46:23Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/wavemanco/buddha/actions/runs/39641901910/job/119367314339",
+          "name": "checks (ubuntu-latest)",
+          "startedAt": "2026-10-21T17:13:46Z",
+          "status": "COMPLETED",
+          "workflowName": "checks"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "0001-01-01T00:00:00Z",
+          "conclusion": "",
+          "detailsUrl": "https://github.com/wavemanco/buddha/actions/runs/39641912065/job/119367344975",
+          "name": "checks (windows-latest)",
+          "startedAt": "2026-10-21T17:13:49Z",
+          "status": "IN_PROGRESS",
+          "workflowName": "checks"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "0001-01-01T00:00:00Z",
+          "conclusion": "",
+          "detailsUrl": "https://github.com/wavemanco/buddha/actions/runs/39641901910/job/119367313710",
+          "name": "checks (windows-latest)",
+          "startedAt": "2026-10-21T17:13:46Z",
+          "status": "IN_PROGRESS",
+          "workflowName": "checks"
+        }
+      ],
+      "url": "https://github.com/wavemanco/buddha/pull/44"
+    },
+    "this_slice": "not yet published; no hosted-green claim"
+  },
+  "independent_coordinate_proof": {
+    "checks": {
+      "all_four_arms": true,
+      "all_original_positions_0_to_9": true,
+      "answers_ordered_by_full_sha_within_each_set": true,
+      "cells_match_intent_execution_order": true,
+      "consumed_inputs_unchanged": true,
+      "cross_domain_union_unique": true,
+      "exact_full_map_and_raw_canonical_bytes": true,
+      "original_string_IDs_preserved": true,
+      "set_order_globally_ascending_full_sha": true,
+      "source_metadata_pins_exact": true
+    },
+    "counts": {
+      "arms_per_task": 4,
+      "positions": 240,
+      "positions_per_set": 10,
+      "sets": 24,
+      "source_tasks_in_panel": 6,
+      "unique_set_and_answer_labels": 264
+    },
+    "format": "buddha.policy-panel-independent-coordinate-proof.v1",
+    "input_sha256": {
+      "docs/POLICY-COMPARISON.md": "a3cd4ee3011f0e269e0b2e66570953c847574497d8e8b02a359b247a59423ab0",
+      "docs/conformance/pol02-study-intent.json": "befcce0c56aaa86326e4ed5c116564e72488ad469f16ff53b9ad5390391bb01e",
+      "docs/conformance/pol02-study-source-review.json": "6bcf52430668d06456d31e14629dd0ad7093d1656099faba8a8c75cd7a51fcc0"
+    },
+    "limits": [
+      "Engineering verification of pre-answer coordinates only; no generated outputs,ratings or scientific truth assessed.",
+      "Private map was read under explicit authorization but is not copied into this receipt or exposed to reviewers.",
+      "No planner,PolicyStudy,project module,tests,provider,environment key,container,authority or source database used."
+    ],
+    "method": "standard-library-only reconstruction from preexisting pinned source-review IDs/repeats and intent execution-order/expected cell IDs; no project imports",
+    "prior_freeze_receipt_sha256": "6efe1fa3b0e269a87f269c6edb9f1cafe7922e109fda7deb9dd3e0cd642cd3e9",
+    "private_mapping_bytes": 26901,
+    "private_mapping_sha256": "c4e6d3afbf64135678c19d24ea83dcbc6e820f93165e629cb5f689ce49507181",
+    "status": "PASS",
+    "study_sha256": "897db6a13c2a3f35bf5dd11e99e5aac20173c1a556f7e55aea9ccfa63a3c19de"
+  },
+  "limits": {
+    "gate": "POL-02 sole Next; seven major leaves remain",
+    "masking": "procedural only; private map excluded from repository and reviewer inputs",
+    "max_json_bytes": 33554432,
+    "max_panel_positions": 100000
+  },
+  "next": "Implement/test saved-generation packet materializer, then protected handoff. Actual packets/reviews require saved generation.",
+  "preservation": {
+    "changed_existing_python_files": [
+      "buddha/policy_results.py",
+      "buddha/policy_study.py",
+      "tests/test_policy_study.py"
+    ],
+    "existing_python_files": 166,
+    "historical_conformance_files": 162,
+    "official_source_or_paid_transition_changes": false,
+    "original_plan_history_rows": 44
+  },
+  "quality": {
+    "checks": [
+      {
+        "chunk_id": "011fd9",
+        "cmd": "python -m ruff check buddha tests agents",
+        "exit_code": 0,
+        "name": "lint",
+        "original_token_count": 5,
+        "output": "All checks passed!\n",
+        "wall_time_seconds": 0.4285732
+      },
+      {
+        "chunk_id": "b7ad74",
+        "cmd": "python -m ruff format --check buddha tests agents",
+        "exit_code": 0,
+        "name": "format",
+        "original_token_count": 7,
+        "output": "134 files already formatted\n",
+        "wall_time_seconds": 0.3766992
+      },
+      {
+        "chunk_id": "edd364",
+        "cmd": "python -m mypy --strict --platform linux --cache-dir runs/reviews/mypy-panel-linux buddha agents",
+        "exit_code": 0,
+        "name": "types-linux",
+        "original_token_count": 12,
+        "output": "Success: no issues found in 48 source files\r\n",
+        "wall_time_seconds": 2.4376329
+      },
+      {
+        "chunk_id": "263c13",
+        "cmd": "python -m mypy --strict --platform win32 --cache-dir runs/reviews/mypy-panel-win32 buddha agents",
+        "exit_code": 0,
+        "name": "types-windows",
+        "original_token_count": 12,
+        "output": "Success: no issues found in 48 source files\r\n",
+        "wall_time_seconds": 2.7369379
+      },
+      {
+        "chunk_id": "47438c",
+        "cmd": "python -m bandit -q -r buddha agents",
+        "exit_code": 0,
+        "name": "security",
+        "original_token_count": 1161,
+        "output": "[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\agent_worker.py:62\r\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\agent_worker.py:64\r\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\agent_worker.py:65\r\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\agent_worker.py:66\r\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\agent_worker.py:67\r\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\agent_worker.py:65\r\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\agent_worker.py:66\r\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\agent_worker.py:67\r\n[tester]\tWARNING\tnosec encountered (B102), but no failed test on file buddha\\agent_worker.py:284\r\n[tester]\tWARNING\tnosec encountered (B102), but no failed test on file buddha\\agent_worker.py:284\r\n[tester]\tWARNING\tnosec encountered (B102), but no failed test on file buddha\\agent_worker.py:284\r\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\candidate_worker.py:66\r\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\candidate_worker.py:68\r\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\candidate_worker.py:69\r\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\candidate_worker.py:70\r\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\candidate_worker.py:71\r\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\candidate_worker.py:69\r\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\candidate_worker.py:70\r\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\candidate_worker.py:71\r\n[tester]\tWARNING\tnosec encountered (B102), but no failed test on file buddha\\candidate_worker.py:215\r\n[tester]\tWARNING\tnosec encountered (B102), but no failed test on file buddha\\candidate_worker.py:215\r\n[tester]\tWARNING\tnosec encountered (B102), but no failed test on file buddha\\candidate_worker.py:288\r\n[tester]\tWARNING\tnosec encountered (B102), but no failed test on file buddha\\candidate_worker.py:288\r\n[tester]\tWARNING\tnosec encountered (B102), but no failed test on file buddha\\candidate_worker.py:288\r\n[manager]\tWARNING\tTest in comment: executor is not a test name or id, ignoring\r\n[manager]\tWARNING\tTest in comment: owned is not a test name or id, ignoring\r\n[manager]\tWARNING\tTest in comment: bounded is not a test name or id, ignoring\r\n[manager]\tWARNING\tTest in comment: container is not a test name or id, ignoring\r\n[manager]\tWARNING\tTest in comment: tmpfs is not a test name or id, ignoring\r\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\native_worker.py:61\r\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\native_worker.py:62\r\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\native_worker.py:63\r\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\native_worker.py:64\r\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\native_worker.py:65\r\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\native_worker.py:66\r\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\native_worker.py:67\r\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\native_worker.py:68\r\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\native_worker.py:69\r\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\native_worker.py:70\r\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\native_worker.py:61\r\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\native_worker.py:63\r\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\native_worker.py:64\r\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\native_worker.py:65\r\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\native_worker.py:66\r\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\native_worker.py:67\r\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\native_worker.py:68\r\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\native_worker.py:69\r\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\native_worker.py:70\r\n",
+        "wall_time_seconds": 1.8525274
+      },
+      {
+        "chunk_id": "e53fd6",
+        "cmd": "python -m pip_audit --no-deps -r requirements.txt",
+        "exit_code": 0,
+        "name": "dependencies",
+        "original_token_count": 67,
+        "output": "WARNING:pip_audit._cli:--no-deps is supported, but users are encouraged to fully hash their pinned dependencies\r\nWARNING:pip_audit._cli:Consider using a tool like `pip-compile`: https://pip-tools.readthedocs.io/en/latest/#using-hashes\r\nNo known vulnerabilities found\r\n",
+        "wall_time_seconds": 16.2215945
+      },
+      {
+        "chunk_id": "078026",
+        "cmd": "python -m compileall -q buddha agents",
+        "exit_code": 0,
+        "name": "compile",
+        "original_token_count": 0,
+        "output": "",
+        "wall_time_seconds": 0.5619891
+      }
+    ],
+    "format": "buddha.policy-panel-final-quality.v1"
+  },
+  "scope": {
+    "actual_study_authority_created": false,
+    "generated_answers_read": false,
+    "keys_read": false,
+    "materializer_implemented": false,
+    "native_judge_outputs_read": false,
+    "provider_calls": 0,
+    "scientific_improvement": false,
+    "source_database_sql": false,
+    "supplemental_reviews_complete": false
+  },
+  "source_sha256": {
+    "README.md": "f45c1b9b882b1692952573410f9b6447b44a91b63a3d6d811f2bf8d03938a5dc",
+    "buddha/policy_panel.py": "d8fe6d5253b688cd376a47343e0d1377407008ca5d50b4a228a88031d6b8e264",
+    "buddha/policy_results.py": "60118f0e73ce8e2bb04697e10b5417fe03c68247b8821d4818c7bacffd66ccaf",
+    "buddha/policy_study.py": "9b5c1633b3202b1cea0eb37bff051c2cafa25e83a4ae227393e07593791e13a2",
+    "docs/PLAN.md": "6bb0c69d0d8db728fd699f28b12e9349359a25d11e24e45cdfedf4289ef84ee8",
+    "docs/POLICY-COMPARISON.md": "a3cd4ee3011f0e269e0b2e66570953c847574497d8e8b02a359b247a59423ab0",
+    "docs/POLICY-PANEL.md": "7cd0a8d0d0a2912f63727a757bf7f59c97ccf62f2708885098e2138f712331f0",
+    "docs/POLICY-RESULTS.md": "eb9634d0b1bbc75f94d2f631cd0b25a58eadaaa2e695f45df7875d8f98eedd92",
+    "docs/POLICY-STUDY.md": "85f12af49a958ec6b3deb87a9ccb827444f8afe31fa736b0a68c54d7952869f9",
+    "docs/conformance/pol02-panel-plan-review.json": "33a4fa2f185ecda3348b03e6ec5de0b950d3e8101ee83c8a6fc220530fbfac4f",
+    "docs/conformance/pol02-study-intent.json": "befcce0c56aaa86326e4ed5c116564e72488ad469f16ff53b9ad5390391bb01e",
+    "docs/conformance/pol02-study-source-review.json": "6bcf52430668d06456d31e14629dd0ad7093d1656099faba8a8c75cd7a51fcc0",
+    "tests/test_policy_panel.py": "8528bb38c6656573460572304939d86bf2cd3f902642913f653e5aa097a68f95",
+    "tests/test_policy_study.py": "026ba4c2b3e3d64e1806dd7a337b2b4a2cbf6c7890a720ed4e19164320110ae5"
+  },
+  "spec": [
+    "PLAN POL-02",
+    "POLICY-COMPARISON supplemental blinded development review",
+    "DESIGN sections3,5,7,11"
+  ],
+  "status": "bounded offline pure-mapping gate passed",
+  "tests": {
+    "count": 1257,
+    "existing_local_skips": 10,
+    "final_repository": {
+      "exit_code": 0,
+      "finished_utc": "2026-10-21T18:04:23.878334+00:00",
+      "format": "buddha.policy-panel-full-suite.v1",
+      "inputs_unchanged": true,
+      "log_sha256": "fcb60c6390c5f2a454a3a091ddb0456d0d2d437d9527e28aa8a241bb1048994f",
+      "wall_seconds": 2255.0771577999694
+    },
+    "input_map_sha256": "567e2038166bf45e52f1807f6b0f27cae44dcba2333e4bdc385bdd9c13295f01",
+    "new_planner_methods": 12,
+    "new_shared_intent_methods": 2,
+    "python_input_count": 168,
+    "seconds": 2254.455
+  }
+}

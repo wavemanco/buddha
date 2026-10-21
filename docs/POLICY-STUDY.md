@@ -159,10 +159,12 @@ checks saved evidence and primary arithmetic, then describes ranges by original
 category, both generation repetitions, J1 minus J0 judging results and
 changed group relations. Its token/cost views distinguish known usage from
 incomplete totals and recorded charges from held reservations. Parser/recovery
-causes and missing metadata remain unknown. Before launch, freeze the masked
-panel mapping, implement/test the packet materializer, and complete
-account/runtime checks, approved funding and a tested handoff. The actual answer
-packet and supplemental reviews follow real saved generation. Live results stay
+causes and missing metadata remain unknown. The separate
+[pre-answer mapping](POLICY-PANEL.md) now binds the reviewed panel coordinates and
+deterministic masks without consuming answers. Before launch, implement/test
+the packet materializer and complete account/runtime checks, approved funding
+and a tested handoff. The actual answer packet and supplemental reviews follow
+real saved generation. Live results stay
 open, and model development review does not close the later human scientific
 assessment.
 The original $50 experiment and $15 judge audit do not authorize this study.

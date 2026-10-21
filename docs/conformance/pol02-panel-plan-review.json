@@ -1,0 +1,603 @@
+{
+  "base_commit": "0a0c6b91b17fc9fa6151646b0f2344b2ae22aac9",
+  "evidence": {
+    "pol02-intent-extraction-independent-review.json": {
+      "base_commit": "0a0c6b91b17fc9fa6151646b0f2344b2ae22aac9",
+      "base_source_sha256": {
+        "buddha/policy_results.py": "a41f9837c70f4eefe5080e549cf40133a300d2680684101d13447d2198a8ad97",
+        "buddha/policy_study.py": "a1d0c3d5d608312f1efe28c149190857b12ae031609e9ab217d96c8c9e3ed8ab",
+        "tests/test_policy_study.py": "9d1579874dd42fd8df0360be419100541ebbb46f04aee40d57f9fb91919dee97"
+      },
+      "checks": {
+        "added_test_methods": [
+          "PolicyStudyTests.test_reviewed_intent_validation_binds_all_original_identity_fields",
+          "PolicyStudyTests.test_reviewed_intent_validation_rejects_untyped_trust_inputs"
+        ],
+        "old_identity_join_ast_exact_after_declared_data_seam_mapping": true,
+        "old_test_methods": 17,
+        "old_test_methods_ast_exact": true,
+        "policy_study_existing_module_ast_exact_after_removing_new_helper": true,
+        "reader_module_ast_exact_after_restoring_only_removed_helper_import_and_single_call": true
+      },
+      "format": "buddha.policy-intent-extraction-independent-review.v1",
+      "limits": [
+        "Static source and AST review only. No tests,API calls,outputs,containers,source SQLite,authority or credentials accessed.",
+        "Source consistency is not proof of publication time/authenticity; caller-owned original byte pins remain required.",
+        "New policy_panel implementation and its test file are outside this review."
+      ],
+      "release_join": "Unchanged _Reader.definition derives reader.release from this same study.source.release; TaskSet construction checks stored release_sha256 against Release.fingerprint. No separate authority/source identity is discarded.",
+      "reviewed_mappings": [
+        "raw JSON loading moves to caller; closed _object key validation stays in helper",
+        "reader.release fingerprint/record replaced with source TaskSet release identity/record",
+        "not _same(a,b) replaced by _json(a)!=_json(b); _same already uses this exact canonical serialization",
+        "typed public PolicyStudy validation and protocol digest guard added",
+        "helper error is PolicyStudyError; unchanged reader outer ValueError boundary still converts it to PolicyResultsError"
+      ],
+      "source_sha256": {
+        "buddha/policy_results.py": "60118f0e73ce8e2bb04697e10b5417fe03c68247b8821d4818c7bacffd66ccaf",
+        "buddha/policy_study.py": "9b5c1633b3202b1cea0eb37bff051c2cafa25e83a4ae227393e07593791e13a2",
+        "tests/test_policy_study.py": "026ba4c2b3e3d64e1806dd7a337b2b4a2cbf6c7890a720ed4e19164320110ae5"
+      },
+      "status": "PASS",
+      "test_meaningfulness": [
+        "Positive canonical intent uses original full source,selected population,ordered arms/cells and release; file/socket guard and nonmutation check precede negatives.",
+        "Every top-level and expected identity is independently invalidated; bool arm,float repetition and changed typed selected-ID order must reject.",
+        "Missing study,nonobject declaration,bool digest and uppercase digest reject through typed error."
+      ]
+    },
+    "pol02-panel-actual-freeze.json": {
+      "counts": {
+        "positions": 240,
+        "sets": 24,
+        "tasks": 6
+      },
+      "dataset_sha256": "ca9b6f470e5d7f7e34a281e2fdaa6f6e51c38bdae075ea580d184139ec391fa7",
+      "format": "buddha.policy-panel-freeze.v1",
+      "input_sha256": {
+        "docs/POLICY-COMPARISON.md": "a3cd4ee3011f0e269e0b2e66570953c847574497d8e8b02a359b247a59423ab0",
+        "docs/conformance/pol02-study-intent.json": "befcce0c56aaa86326e4ed5c116564e72488ad469f16ff53b9ad5390391bb01e",
+        "docs/conformance/pol02-study-source-review.json": "6bcf52430668d06456d31e14629dd0ad7093d1656099faba8a8c75cd7a51fcc0"
+      },
+      "mapping_bytes": 26901,
+      "mapping_sha256": "c4e6d3afbf64135678c19d24ea83dcbc6e820f93165e629cb5f689ce49507181",
+      "private_mapping": "runs/reviews/pol02-panel-plan.private.json; ignored, excluded from reviewer inputs and repository",
+      "scope": {
+        "database_read": false,
+        "generated_answers_read": false,
+        "judging_outputs_read": false,
+        "keys_read": false,
+        "materializer_implemented": false,
+        "provider_calls": 0,
+        "reviews_complete": false
+      },
+      "source_sha256": {
+        "buddha/answers.py": "be860546b2692ea4a710d93855f487dd49d9c8e28eb3f2ec757df697cefb8d0b",
+        "buddha/policy_panel.py": "d8fe6d5253b688cd376a47343e0d1377407008ca5d50b4a228a88031d6b8e264",
+        "buddha/policy_study.py": "9b5c1633b3202b1cea0eb37bff051c2cafa25e83a4ae227393e07593791e13a2",
+        "buddha/releases.py": "33361cf5b0923b373ee53dd73597063195c2c0d519baead50d40fb4bcfab44f5"
+      },
+      "status": "pre-answer mapping only; actual answer materialization remains open",
+      "study_sha256": "897db6a13c2a3f35bf5dd11e99e5aac20173c1a556f7e55aea9ccfa63a3c19de"
+    },
+    "pol02-panel-guide-receipt.json": {
+      "databases_or_keys_or_generated_outputs_read": false,
+      "documents": [
+        {
+          "bytes": 6665,
+          "path": "docs/POLICY-PANEL.md",
+          "sha256": "7cd0a8d0d0a2912f63727a757bf7f59c97ccf62f2708885098e2138f712331f0"
+        },
+        {
+          "bytes": 17825,
+          "path": "README.md",
+          "sha256": "f45c1b9b882b1692952573410f9b6447b44a91b63a3d6d811f2bf8d03938a5dc"
+        },
+        {
+          "bytes": 13850,
+          "path": "docs/POLICY-RESULTS.md",
+          "sha256": "eb9634d0b1bbc75f94d2f631cd0b25a58eadaaa2e695f45df7875d8f98eedd92"
+        },
+        {
+          "bytes": 9858,
+          "path": "docs/POLICY-STUDY.md",
+          "sha256": "85f12af49a958ec6b3deb87a9ccb827444f8afe31fa736b0a68c54d7952869f9"
+        }
+      ],
+      "format": "buddha.pol02-panel-guide-receipt.v1",
+      "interface": "plan_panel(study, *, intent_raw, expected_intent_sha256, source_review_raw, expected_source_review_sha256, expected_protocol_sha256) -> detached dict",
+      "network_or_providers": false,
+      "new_operator_commands": false,
+      "observed_source_and_data_pins": [
+        {
+          "path": "buddha/policy_panel.py",
+          "sha256": "d8fe6d5253b688cd376a47343e0d1377407008ca5d50b4a228a88031d6b8e264"
+        },
+        {
+          "path": "buddha/policy_study.py",
+          "sha256": "9b5c1633b3202b1cea0eb37bff051c2cafa25e83a4ae227393e07593791e13a2"
+        },
+        {
+          "path": "docs/POLICY-COMPARISON.md",
+          "sha256": "a3cd4ee3011f0e269e0b2e66570953c847574497d8e8b02a359b247a59423ab0"
+        },
+        {
+          "path": "docs/conformance/pol02-study-intent.json",
+          "sha256": "befcce0c56aaa86326e4ed5c116564e72488ad469f16ff53b9ad5390391bb01e"
+        },
+        {
+          "path": "docs/conformance/pol02-study-source-review.json",
+          "sha256": "6bcf52430668d06456d31e14629dd0ad7093d1656099faba8a8c75cd7a51fcc0"
+        }
+      ],
+      "open_gates": "Actual mapping freeze evidence, packet materializer, supplemental reviews, protected handoff, funding, live readiness/comparison, human assessment",
+      "scope": "New POLICY-PANEL guide plus README/results/study links; no PLAN/Python/tests edits",
+      "source_head": "0a0c6b91b17fc9fa6151646b0f2344b2ae22aac9",
+      "source_pin_scope": "Observed implementation bytes used to write prose; not a test or final verification claim",
+      "tests_run_by_this_agent": false,
+      "verification": "Owned-guide diff/trailing-whitespace inspection passed"
+    },
+    "pol02-panel-independent-coordinate-proof.json": {
+      "checks": {
+        "all_four_arms": true,
+        "all_original_positions_0_to_9": true,
+        "answers_ordered_by_full_sha_within_each_set": true,
+        "cells_match_intent_execution_order": true,
+        "consumed_inputs_unchanged": true,
+        "cross_domain_union_unique": true,
+        "exact_full_map_and_raw_canonical_bytes": true,
+        "original_string_IDs_preserved": true,
+        "set_order_globally_ascending_full_sha": true,
+        "source_metadata_pins_exact": true
+      },
+      "counts": {
+        "arms_per_task": 4,
+        "positions": 240,
+        "positions_per_set": 10,
+        "sets": 24,
+        "source_tasks_in_panel": 6,
+        "unique_set_and_answer_labels": 264
+      },
+      "format": "buddha.policy-panel-independent-coordinate-proof.v1",
+      "input_sha256": {
+        "docs/POLICY-COMPARISON.md": "a3cd4ee3011f0e269e0b2e66570953c847574497d8e8b02a359b247a59423ab0",
+        "docs/conformance/pol02-study-intent.json": "befcce0c56aaa86326e4ed5c116564e72488ad469f16ff53b9ad5390391bb01e",
+        "docs/conformance/pol02-study-source-review.json": "6bcf52430668d06456d31e14629dd0ad7093d1656099faba8a8c75cd7a51fcc0"
+      },
+      "limits": [
+        "Engineering verification of pre-answer coordinates only; no generated outputs,ratings or scientific truth assessed.",
+        "Private map was read under explicit authorization but is not copied into this receipt or exposed to reviewers.",
+        "No planner,PolicyStudy,project module,tests,provider,environment key,container,authority or source database used."
+      ],
+      "method": "standard-library-only reconstruction from preexisting pinned source-review IDs/repeats and intent execution-order/expected cell IDs; no project imports",
+      "prior_freeze_receipt_sha256": "6efe1fa3b0e269a87f269c6edb9f1cafe7922e109fda7deb9dd3e0cd642cd3e9",
+      "private_mapping_bytes": 26901,
+      "private_mapping_sha256": "c4e6d3afbf64135678c19d24ea83dcbc6e820f93165e629cb5f689ce49507181",
+      "status": "PASS",
+      "study_sha256": "897db6a13c2a3f35bf5dd11e99e5aac20173c1a556f7e55aea9ccfa63a3c19de"
+    },
+    "pol02-panel-independent-review.json": {
+      "actual_freeze_metadata": {
+        "counts": {
+          "positions": 240,
+          "sets": 24,
+          "tasks": 6
+        },
+        "dataset_matches_review": true,
+        "input_pin_mismatches": [],
+        "mapping_bytes": 26901,
+        "mapping_sha256": "c4e6d3afbf64135678c19d24ea83dcbc6e820f93165e629cb5f689ce49507181",
+        "private_mapping_opened": false,
+        "receipt": "runs/reviews/pol02-panel-actual-freeze.json",
+        "receipt_sha256": "6efe1fa3b0e269a87f269c6edb9f1cafe7922e109fda7deb9dd3e0cd642cd3e9",
+        "source_pin_mismatches": [],
+        "study_matches_intent": true,
+        "study_sha256": "897db6a13c2a3f35bf5dd11e99e5aac20173c1a556f7e55aea9ccfa63a3c19de"
+      },
+      "checks": [
+        "Caller supplied raw intent/review bytes are finite bounded JSON and checked against external lowercase SHA pins before semantic adoption; protocol pin is validated/joined,not read.",
+        "Shared validate_intent binds release,full/selected TaskSet,study,four arms and complete generation schedule; previous extraction review is retained separately.",
+        "Complete literal source dataset establishes first-seen category order; reviewed selected typed IDs,categories and UTF8 prompt hashes match selected tasks in order.",
+        "One selected representative per original category and alternating ordinal repetition are required; bools/duplicates/foreign IDs and inconsistent counts fail.",
+        "Every four-arm original answer position is represented before outcomes; vectors contain only frozen typed coordinates,not text,scores,availability or review judgments.",
+        "Full64lowercase SHA labels and ascending ranks are explicit prospective conventions; one shared label set rejects set/answer and cross-set collisions.",
+        "MAX_PANEL_POSITIONS100000 is checked before label expansion; original input and returned JSON ceilings remain32MiB; no sampling or truncation.",
+        "Planner imports only pure data/standard-library helpers and contains no file,environment,key,network,authority,agent/evaluator or model call.",
+        "Guide distinguishes private procedural masking from cryptographic secrecy and future materializer/review/funding/live-readiness gates."
+      ],
+      "format": "buddha.policy-panel-independent-review.v1",
+      "guide_links": {
+        "broken": [],
+        "local_targets": [
+          "PLAN.md",
+          "POLICY-COMPARISON.md"
+        ]
+      },
+      "limits": [
+        "Static source/test/doc and public freeze-metadata inspection only; no tests,API,keys,authority,source SQLite,containers,generated outputs or private mapping opened.",
+        "The review establishes bounded data consistency and planned coordinates,not review execution,prior publication authenticity,physical freshness,semantic accuracy or comparative gain.",
+        "Full repository suite remains a separate parent-owned validation gate."
+      ],
+      "prior_extraction_receipt": {
+        "path": "runs/reviews/pol02-intent-extraction-independent-review.json",
+        "sha256": "25852220b719532af2d0ff2b9cf1a858e57bc235b2743a8b2638e0dc7035e4d2"
+      },
+      "source_sha256": {
+        "buddha/policy_panel.py": "d8fe6d5253b688cd376a47343e0d1377407008ca5d50b4a228a88031d6b8e264",
+        "buddha/policy_results.py": "60118f0e73ce8e2bb04697e10b5417fe03c68247b8821d4818c7bacffd66ccaf",
+        "buddha/policy_study.py": "9b5c1633b3202b1cea0eb37bff051c2cafa25e83a4ae227393e07593791e13a2",
+        "docs/POLICY-COMPARISON.md": "a3cd4ee3011f0e269e0b2e66570953c847574497d8e8b02a359b247a59423ab0",
+        "docs/POLICY-PANEL.md": "7cd0a8d0d0a2912f63727a757bf7f59c97ccf62f2708885098e2138f712331f0",
+        "docs/conformance/pol02-study-intent.json": "befcce0c56aaa86326e4ed5c116564e72488ad469f16ff53b9ad5390391bb01e",
+        "docs/conformance/pol02-study-source-review.json": "6bcf52430668d06456d31e14629dd0ad7093d1656099faba8a8c75cd7a51fcc0",
+        "tests/test_policy_panel.py": "8528bb38c6656573460572304939d86bf2cd3f902642913f653e5aa097a68f95",
+        "tests/test_policy_study.py": "026ba4c2b3e3d64e1806dd7a337b2b4a2cbf6c7890a720ed4e19164320110ae5"
+      },
+      "status": "PASS; bounded static review",
+      "tests_static_review": {
+        "actual_tests_run_by_this_reviewer": false,
+        "method_count": 12,
+        "methods": [
+          "test_exact_vectors_sorted_full_labels_typed_ids_and_all_positions",
+          "test_six_category_ten_answer_fixture_has_24_sets_and_240_positions",
+          "test_raw_byte_pins_are_external_and_checked_before_semantic_adoption",
+          "test_resealed_intent_must_match_complete_study_and_all_derived_identities",
+          "test_resealed_review_cannot_change_dataset_selected_ids_category_or_prompt",
+          "test_panel_population_category_order_repeats_and_declared_counts_are_not_claims",
+          "test_category_order_comes_from_literal_dataset_not_selected_or_source_view",
+          "test_missing_or_invalid_literal_categories_fail_instead_of_inferred_groups",
+          "test_collision_and_planned_position_ceiling_fail_before_expansion",
+          "test_malformed_bounded_json_inputs_raise_only_typed_errors",
+          "test_pure_result_is_fresh_and_contains_no_text_or_future_observation_claim",
+          "test_fresh_import_has_no_reader_execution_finance_or_legacy_dependency"
+        ],
+        "parent_reported_focused_result": "12 methods GREEN0.380s,zero skips,ResourceWarnings as errors; initial RED was missing-module loader failure,not12 behavioral REDs"
+      }
+    },
+    "pol02-panel-intent-focused.json": {
+      "format": "buddha.policy-panel-intent-focused.v1",
+      "new_methods": [
+        "test_reviewed_intent_validation_binds_all_original_identity_fields",
+        "test_reviewed_intent_validation_rejects_untyped_trust_inputs"
+      ],
+      "observed_green": {
+        "exit_code": 0,
+        "seconds": 0.345,
+        "tests": 19,
+        "tool_chunk": "4cc834"
+      },
+      "observed_red": {
+        "errors": 2,
+        "exit_code": 1,
+        "reason": "Both added methods fail to import missing validate_intent;17 original methods pass",
+        "seconds": 0.339,
+        "tests": 19,
+        "tool_chunk": "023df6"
+      },
+      "raw_transcripts": "The original Codex tool results retain both transcripts; no local raw transcript copy is asserted",
+      "scope": "Pure data joins and passivity; not a native study or independent publication authenticity proof",
+      "source_pins_captured_after_focused_green": {
+        "buddha/policy_results.py": "60118f0e73ce8e2bb04697e10b5417fe03c68247b8821d4818c7bacffd66ccaf",
+        "buddha/policy_study.py": "9b5c1633b3202b1cea0eb37bff051c2cafa25e83a4ae227393e07593791e13a2",
+        "tests/test_policy_study.py": "026ba4c2b3e3d64e1806dd7a337b2b4a2cbf6c7890a720ed4e19164320110ae5"
+      }
+    },
+    "pol02-panel-package-prevalidation-review.json": {
+      "actual_current_metadata_checks": {
+        "earlier_evidence_paths_present": 9,
+        "history_rows": 44,
+        "plan_revision": 44,
+        "private_map_arrays_embedded_in_earlier_evidence": [],
+        "quality_exit_codes": {
+          "compile": 0,
+          "dependencies": 0,
+          "format": 0,
+          "lint": 0,
+          "security": 0,
+          "types-linux": 0,
+          "types-windows": 0
+        },
+        "replacement_literals": [
+          {
+            "line_numbers": [
+              108
+            ],
+            "original_literal_occurrences": 1
+          },
+          {
+            "line_numbers": [
+              191
+            ],
+            "original_literal_occurrences": 1
+          },
+          {
+            "line_numbers": [
+              213
+            ],
+            "original_literal_occurrences": 1
+          }
+        ],
+        "total_evidence_including_this_receipt": 10
+      },
+      "corrected_findings": [
+        "Packager now compares the actual recorded full-suite input map to the terminal source_sha256 map before export.",
+        "Packager now pre-encodes delivery_raw before any tracked write,closing the deferred-serialization gap."
+      ],
+      "format": "buddha.policy-panel-packaging-independent-review.v1",
+      "historical_receipts_intentionally_not_rebased": "Earlier focused panel test receipt pins an earlier test version; final-freeze receipt is the current seal and is checked separately. Historical receipt is retained rather than relabeled.",
+      "limits": [
+        "Neither script executed; future terminal suite result and fresh parentPR snapshot remain prerequisites,not outcomes of this review.",
+        "No tests,source/app writes,keys,authority,database,providers,containers or generated outputs accessed.",
+        "Sync before/after checks and atomic single-file replacement are serial operator protection,not a cross-process transaction."
+      ],
+      "source_sha256": {
+        "docs/PLAN.md": "11f87c492da70f4a4eb94a17368205ecb76f4c4ff5aebb12f3104706bbfd19b4",
+        "runs/reviews/pol02-panel-package.py": "f22641a931f914692c722ea8ea3ecc0b13e9f81098856d4d0f7d7afa35fe71e3",
+        "runs/reviews/pol02-panel-sync-primary.py": "ab19b7a3b2d80df4258eb7c9b7a3bcee6cfc06aba3800f6468bca43d93e3512d"
+      },
+      "static_package_checks": [
+        "Refuses optimized Python before data reads; requires successful terminal receipt,unchanged168-source map,current source hashes,exact before-map equality,matching log digest and1257/10skip summary.",
+        "Requires seven successful quality records,source-bound final reviews,actual6/24/240 freeze,independentcoordinateproof,exact private-map digest and ignored status; only map hash/count metadata enters output.",
+        "Before first tracked write checks162 historical conformance and166 prior Python files,with only reviewed study/reader extraction and two study tests changed.",
+        "Checks current old PLAN11f87c49,three CURRENT prose literals each exactly once,and preserves all44 history rows before appending45.",
+        "Fresh PR44 metadata must match exact base0a0c6b91; merged wording requires four SUCCESS checks,otherwise open/pending is preserved.",
+        "Both review and delivery JSON are encoded with allow_nanFalse before the first tracked write. Only two named conformance JSON and PLAN are written.",
+        "This prevalidation receipt is included as a distinct historical engineering review; both corrections are described without asserting changed historical charges or scores."
+      ],
+      "static_sync_checks": [
+        "Retains explicit optimized-mode refusal,original718a0819 HEAD,onlyPLANdirty status,and historical2be0 handoff hash before parsing45sourcepins.",
+        "Checks old PLAN11f87c49,new delivery PLAN hash,44-to45 exact history prefix and guarded targetbytes.",
+        "Stages/fsyncs in ignored current-worktree review directory on C,then atomically replaces only primary/docs/PLAN.md; rechecks HEAD/status/sourcepins/newbytes after replacement."
+      ],
+      "status": "PASS after two narrow packager guard corrections; static prevalidation only"
+    },
+    "pol02-policy-panel-final-freeze-gateway.json": {
+      "change": "Only test fresh-import subprocess timeout=15 added after prior delivery. Production source unchanged.",
+      "evidence_sha256": {
+        "pol02-policy-panel-timeout-final-focused.log": "a2e3194b44ac231e27317b42cc47702c3ebff153f58a2bfd2da95caaeb60144b",
+        "pol02-policy-panel-timeout-final.json": "08b86b2e6da29efbad64b642c2ce34d31d830f4c6ac0c029f6cf2fb5dba0aa6d"
+      },
+      "focused": {
+        "exit_code": 0,
+        "resource_warnings": "errors",
+        "seconds": 0.38,
+        "skips": 0,
+        "tests": 12
+      },
+      "format": "buddha.policy-panel-final-freeze-addendum.v1",
+      "limits": [
+        "No full suite,actual mapping freeze,answer materialization,outputs,keys,databases,providers or Docker.",
+        "Missing-API RED is the actual single module-loader failure; no claim that12 behaviors were observed red.",
+        "Synthetic six-category24/240 test is not an actual-study mapping proof. Parent owns that independent freeze."
+      ],
+      "prior_delivery": {
+        "path": "runs/reviews/pol02-policy-panel-focused-delivery-gateway.json",
+        "preserved": true,
+        "sha256": "07b5477bb5a0bff4e0e5272e28e0426afd401ecc4c318276db1f0bee65c97dea"
+      },
+      "quality_scope": "Ruff check/format pass final two files. Strict mypy Linux+Win,Bandit and compile passed at identical final production bytes and the immediately prior test bytes; the sole later test change is timeout=15.",
+      "recorded_at_utc": "2026-10-21T17:24:28.666172+00:00",
+      "source_sha256": {
+        "buddha/policy_panel.py": "d8fe6d5253b688cd376a47343e0d1377407008ca5d50b4a228a88031d6b8e264",
+        "tests/test_policy_panel.py": "8528bb38c6656573460572304939d86bf2cd3f902642913f653e5aa097a68f95"
+      },
+      "status": "final owned two files frozen"
+    },
+    "pol02-policy-panel-focused-delivery-gateway.json": {
+      "api": "plan_panel(study, *, intent_raw,expected_intent_sha256,source_review_raw,expected_source_review_sha256,expected_protocol_sha256)->dict",
+      "base_commit": "0a0c6b91",
+      "evidence_sha256": {
+        "pol02-policy-panel-final-focused-quality.json": "b6269120c1acb0f75f64b91feb001dd99bde7e974a7e0ccd201c7e5e680bf767",
+        "pol02-policy-panel-final-focused.log": "7c33d9921ba78f120b9c1b2f5bf348cb1129aba9e25d03eda759b56a18898338",
+        "pol02-policy-panel-first-functional.json": "2251df6e19449d72c4f634faceda54c0923b3a21851541cc9f4cd412cc80bbb1",
+        "pol02-policy-panel-first-functional.log": "7345169c374e5f5eb596c1da6b3b937a6911a514315b5c391d5e7fad011e2146",
+        "pol02-policy-panel-first-quality.json": "d418af7617303d5a1fe097659c5af01890630baf472a824d7d9e597cb7aa914d",
+        "pol02-policy-panel-missing-api-red.json": "d980d5e8eb73fbbba4de82aa433aee2e2c4907b6a6084789a3312771a2246ed7",
+        "pol02-policy-panel-missing-api-red.log": "f1e709b26ac8c66e877cffd262d7811fd3cb130fe084218e116def5611bbede0"
+      },
+      "final_functional": {
+        "resource_warnings": "errors",
+        "seconds": 0.348,
+        "skips": 0,
+        "tests": 12
+      },
+      "first_functional": {
+        "resource_warnings": "errors",
+        "seconds": 0.387,
+        "skips": 0,
+        "tests": 12
+      },
+      "format": "buddha.policy-panel-focused-delivery.v1",
+      "initial_quality_note": "First strict mypy pass found inferred result-dict variance; only an explicit result:dict[str,object] annotation was added, then final focused/quality checks passed. Initial failure remains in its receipt.",
+      "limits": {
+        "ceiling_scope": "Before label/per-position expansion and planner cell-map creation; shared validate_intent can call the existing bounded study.schedule earlier.",
+        "max_panel_positions": 100000,
+        "raw_and_output_json_bytes": 33554432
+      },
+      "quality": {
+        "format": "buddha.policy-panel-final-focused-quality.v1",
+        "results": [
+          {
+            "status": "fulfilled",
+            "value": {
+              "chunk_id": "f9aac1",
+              "cmd": "python -W error::ResourceWarning -m unittest discover -s tests -p test_policy_panel.py -v",
+              "exit_code": 0,
+              "name": "focused",
+              "original_token_count": 587,
+              "output": "test_category_order_comes_from_literal_dataset_not_selected_or_source_view (test_policy_panel.PolicyPanelTests.test_category_order_comes_from_literal_dataset_not_selected_or_source_view) ... ok\r\ntest_collision_and_planned_position_ceiling_fail_before_expansion (test_policy_panel.PolicyPanelTests.test_collision_and_planned_position_ceiling_fail_before_expansion) ... ok\r\ntest_exact_vectors_sorted_full_labels_typed_ids_and_all_positions (test_policy_panel.PolicyPanelTests.test_exact_vectors_sorted_full_labels_typed_ids_and_all_positions) ... ok\r\ntest_fresh_import_has_no_reader_execution_finance_or_legacy_dependency (test_policy_panel.PolicyPanelTests.test_fresh_import_has_no_reader_execution_finance_or_legacy_dependency) ... ok\r\ntest_malformed_bounded_json_inputs_raise_only_typed_errors (test_policy_panel.PolicyPanelTests.test_malformed_bounded_json_inputs_raise_only_typed_errors) ... ok\r\ntest_missing_or_invalid_literal_categories_fail_instead_of_inferred_groups (test_policy_panel.PolicyPanelTests.test_missing_or_invalid_literal_categories_fail_instead_of_inferred_groups) ... ok\r\ntest_panel_population_category_order_repeats_and_declared_counts_are_not_claims (test_policy_panel.PolicyPanelTests.test_panel_population_category_order_repeats_and_declared_counts_are_not_claims) ... ok\r\ntest_pure_result_is_fresh_and_contains_no_text_or_future_observation_claim (test_policy_panel.PolicyPanelTests.test_pure_result_is_fresh_and_contains_no_text_or_future_observation_claim) ... ok\r\ntest_raw_byte_pins_are_external_and_checked_before_semantic_adoption (test_policy_panel.PolicyPanelTests.test_raw_byte_pins_are_external_and_checked_before_semantic_adoption) ... ok\r\ntest_resealed_intent_must_match_complete_study_and_all_derived_identities (test_policy_panel.PolicyPanelTests.test_resealed_intent_must_match_complete_study_and_all_derived_identities) ... ok\r\ntest_resealed_review_cannot_change_dataset_selected_ids_category_or_prompt (test_policy_panel.PolicyPanelTests.test_resealed_review_cannot_change_dataset_selected_ids_category_or_prompt) ... ok\r\ntest_six_category_ten_answer_fixture_has_24_sets_and_240_positions (test_policy_panel.PolicyPanelTests.test_six_category_ten_answer_fixture_has_24_sets_and_240_positions) ... ok\r\n\r\n----------------------------------------------------------------------\r\nRan 12 tests in 0.348s\r\n\r\nOK\r\n",
+              "wall_time_seconds": 0.7137469
+            }
+          },
+          {
+            "status": "fulfilled",
+            "value": {
+              "chunk_id": "dbc133",
+              "cmd": "python -m ruff check buddha/policy_panel.py tests/test_policy_panel.py",
+              "exit_code": 0,
+              "name": "ruff",
+              "original_token_count": 5,
+              "output": "All checks passed!\n",
+              "wall_time_seconds": 0.2614218
+            }
+          },
+          {
+            "status": "fulfilled",
+            "value": {
+              "chunk_id": "769e61",
+              "cmd": "python -m ruff format --check buddha/policy_panel.py tests/test_policy_panel.py",
+              "exit_code": 0,
+              "name": "format",
+              "original_token_count": 7,
+              "output": "2 files already formatted\n",
+              "wall_time_seconds": 0.2338887
+            }
+          },
+          {
+            "status": "fulfilled",
+            "value": {
+              "chunk_id": "7fe992",
+              "cmd": "python -m mypy --strict --platform linux --cache-dir runs/reviews/mypy-panel-linux buddha/policy_panel.py",
+              "exit_code": 0,
+              "name": "mypy_linux",
+              "original_token_count": 11,
+              "output": "Success: no issues found in 1 source file\r\n",
+              "wall_time_seconds": 0.4811099
+            }
+          },
+          {
+            "status": "fulfilled",
+            "value": {
+              "chunk_id": "87a2ad",
+              "cmd": "python -m mypy --strict --platform win32 --cache-dir runs/reviews/mypy-panel-win buddha/policy_panel.py",
+              "exit_code": 0,
+              "name": "mypy_win",
+              "original_token_count": 11,
+              "output": "Success: no issues found in 1 source file\r\n",
+              "wall_time_seconds": 0.4966349
+            }
+          },
+          {
+            "status": "fulfilled",
+            "value": {
+              "chunk_id": "0cb272",
+              "cmd": "python -m bandit -q buddha/policy_panel.py",
+              "exit_code": 0,
+              "name": "bandit",
+              "original_token_count": 0,
+              "output": "",
+              "wall_time_seconds": 0.6063563
+            }
+          },
+          {
+            "status": "fulfilled",
+            "value": {
+              "chunk_id": "d20175",
+              "cmd": "python -m py_compile buddha/policy_panel.py tests/test_policy_panel.py",
+              "exit_code": 0,
+              "name": "compile",
+              "original_token_count": 0,
+              "output": "",
+              "wall_time_seconds": 0.2706562
+            }
+          }
+        ]
+      },
+      "recorded_at_utc": "2026-10-21T17:23:41.298412+00:00",
+      "red": {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-W",
+          "error::ResourceWarning",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_policy_panel.py",
+          "-v"
+        ],
+        "exit_code": 1,
+        "format": "buddha.policy-panel-missing-api-red.v1",
+        "log": "runs/reviews/pol02-policy-panel-missing-api-red.log",
+        "log_sha256": "f1e709b26ac8c66e877cffd262d7811fd3cb130fe084218e116def5611bbede0",
+        "scope": "Twelve methods written before implementation; actual module-loader RED only, not twelve behavioral failures.",
+        "wall_seconds": 0.3109973999671638
+      },
+      "scope": [
+        "Pure prospective mapping only; source-review membership/prompt/category/count/repetition joins checked against frozen Study and external raw-byte pins.",
+        "Twelve methods were written before implementation. Missing-module RED is one loader failure, not twelve behavioral REDs.",
+        "Six-category24-set/240-position test is synthetic only. Actual pinned-study private mapping/freeze is parent-owned and has not been generated by this agent.",
+        "No answer materialization, review outputs, source paths, provider/model requests, funding, I/O or analysis claims are added by the planner.",
+        "No full suite, actual outcomes, ledger, authority, credentials, provider calls or Docker accessed; no new dependency or commit."
+      ],
+      "source_lf_only": {
+        "buddha/policy_panel.py": true,
+        "tests/test_policy_panel.py": true
+      },
+      "source_sha256": {
+        "buddha/policy_panel.py": "d8fe6d5253b688cd376a47343e0d1377407008ca5d50b4a228a88031d6b8e264",
+        "buddha/policy_study.py": "9b5c1633b3202b1cea0eb37bff051c2cafa25e83a4ae227393e07593791e13a2",
+        "tests/test_policy_panel.py": "5fcad37a0e5f3f20ee49c390436bca296be15f5fbaa5f6963fbd0757379a1dd2"
+      },
+      "status": "owned source and tests frozen; focused checks passed",
+      "test_methods": [
+        "test_exact_vectors_sorted_full_labels_typed_ids_and_all_positions",
+        "test_six_category_ten_answer_fixture_has_24_sets_and_240_positions",
+        "test_raw_byte_pins_are_external_and_checked_before_semantic_adoption",
+        "test_resealed_intent_must_match_complete_study_and_all_derived_identities",
+        "test_resealed_review_cannot_change_dataset_selected_ids_category_or_prompt",
+        "test_panel_population_category_order_repeats_and_declared_counts_are_not_claims",
+        "test_category_order_comes_from_literal_dataset_not_selected_or_source_view",
+        "test_missing_or_invalid_literal_categories_fail_instead_of_inferred_groups",
+        "test_collision_and_planned_position_ceiling_fail_before_expansion",
+        "test_malformed_bounded_json_inputs_raise_only_typed_errors",
+        "test_pure_result_is_fresh_and_contains_no_text_or_future_observation_claim",
+        "test_fresh_import_has_no_reader_execution_finance_or_legacy_dependency"
+      ],
+      "typed_error": "PolicyPanelError(ReleaseError)"
+    },
+    "pol02-policy-panel-missing-api-red.json": {
+      "command": [
+        "C:\\Program Files\\Python313\\python.exe",
+        "-W",
+        "error::ResourceWarning",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_policy_panel.py",
+        "-v"
+      ],
+      "exit_code": 1,
+      "format": "buddha.policy-panel-missing-api-red.v1",
+      "log": "runs/reviews/pol02-policy-panel-missing-api-red.log",
+      "log_sha256": "f1e709b26ac8c66e877cffd262d7811fd3cb130fe084218e116def5611bbede0",
+      "scope": "Twelve methods written before implementation; actual module-loader RED only, not twelve behavioral failures.",
+      "wall_seconds": 0.3109973999671638
+    }
+  },
+  "format": "buddha.policy-panel-plan-review.v1",
+  "limits": [
+    "Initial panel RED is one module-loader error, not twelve observed behavioral failures.",
+    "Shared-intent RED/GREEN transcripts remain original Codex tool results; the focused receipt does not assert local raw logs.",
+    "Static source reviews, mocked checks and coordinate reconstruction do not establish fresh model judgments or scientific truth.",
+    "Private deterministic masks are procedural and can be recomputed from known coordinates; reviewer access separation remains required."
+  ],
+  "local_evidence_sha256": {
+    "pol02-intent-extraction-independent-review.json": "25852220b719532af2d0ff2b9cf1a858e57bc235b2743a8b2638e0dc7035e4d2",
+    "pol02-panel-actual-freeze.json": "6efe1fa3b0e269a87f269c6edb9f1cafe7922e109fda7deb9dd3e0cd642cd3e9",
+    "pol02-panel-guide-receipt.json": "a60ba112f1531807c8f7643b457f3f942ba3b22d4ae52bcc13703a1b307316f2",
+    "pol02-panel-independent-coordinate-proof.json": "382d69e8a9675fe273dc8f4454c44abcc69232f952a60419f54c0f94ff47449a",
+    "pol02-panel-independent-review.json": "7e4e4de541016d886235004d3fbfdc98b4f9f34d64909fd2cb77ec19046bc2bc",
+    "pol02-panel-intent-focused.json": "4e83bb06d20ffdfa06f6701ea22c410e9eb31e02ef25a8721c6674affc4c3ec6",
+    "pol02-panel-package-prevalidation-review.json": "b226a0d0d54592324a33339f5d2500fda837b3953996504cf27280e2d0695f59",
+    "pol02-policy-panel-final-freeze-gateway.json": "91af8f97e41994c6a0d275c2c248dce5bae1e1b4615d5c93dc53c82fe1e4fa0c",
+    "pol02-policy-panel-focused-delivery-gateway.json": "07b5477bb5a0bff4e0e5272e28e0426afd401ecc4c318276db1f0bee65c97dea",
+    "pol02-policy-panel-missing-api-red.json": "d980d5e8eb73fbbba4de82aa433aee2e2c4907b6a6084789a3312771a2246ed7"
+  },
+  "package_prevalidation": "Before execution, independent review required equality of the retained full-suite input map and terminal source map, plus complete delivery serialization before tracked writes. Both guards were added; finite JSON encoding is explicit. These are pre-delivery helper corrections, not findings of changed historical charges or scores.",
+  "status": "bounded offline pure-mapping gate passed; materializer remains open"
+}
