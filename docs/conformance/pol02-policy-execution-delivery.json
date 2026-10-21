@@ -1,0 +1,198 @@
+{
+  "format": "buddha.pol02-policy-execution-delivery.v1",
+  "limits": [
+    "Trusted host/filesystem/daemon/images; one local study writer",
+    "Current retained execution prefix is checked; externally completed chronology is not authenticated",
+    "Original direct input mount EIO remains unresolved; separate full run is not its repair or a root-cause proof",
+    "Synthetic replies establish engineering execution, not judgment accuracy, independent stochastic samples or scientific effects",
+    "Official metrics and opaque summaries remain unchanged; a complete engineering publication does not establish a valid scientific gain",
+    "Actual membership/instrument/child/cost/allocation/supplemental review/analysis and live handoff remain open",
+    "Interruption journaling applies during child execution; no arbitrary hard-kill/disk-failure guarantee",
+    "Historical allocations are closed; no unused balance is newly allocated"
+  ],
+  "plan_item": "POL-02 execution prerequisite; POL-02 sole Next and seven open plan leaves",
+  "preservation": {
+    "base_commit": "5c8460acd711d6ce0b879a5378b61e1b66cdddbd",
+    "dependencies_ci_worker_financial_scientific_fixed_seed_sources_changed": false,
+    "historical_conformance_files_exact": true,
+    "intentional_existing_controller_revisions": [
+      "buddha/baseline.py",
+      "buddha/native_evaluation.py",
+      "buddha/native_pipeline.py"
+    ],
+    "old_revision_rows_exact": 40,
+    "original_handoff_source_pins_exact": 45,
+    "original_test_methods": {
+      "tests/test_baseline.py": {
+        "added": [
+          "BaselineTests.test_additional_control_inputs_are_bound_to_every_generation_and_native_owner",
+          "BaselineTests.test_changed_external_control_cannot_be_adopted_when_a_later_owner_is_bound"
+        ],
+        "old_methods_exact": 27,
+        "old_test_methods_exact": 19
+      },
+      "tests/test_native_evaluation.py": {
+        "added": [
+          "NativeEvaluationTests.test_additional_study_controls_are_bound_to_every_native_owner",
+          "NativeEvaluationTests.test_changed_control_cannot_be_adopted_while_preparing_a_later_judging_owner"
+        ],
+        "old_methods_exact": 22,
+        "old_test_methods_exact": 14
+      }
+    },
+    "other_existing_application_agent_files_exact": 40,
+    "primary_executable_checkout_changed": false,
+    "primary_plan_mirror": "separate guarded documentation-only synchronization"
+  },
+  "real_keys_used": false,
+  "real_provider_calls": 0,
+  "recorded_utc": "2026-10-21T12:54:40.974782+00:00",
+  "scope": {
+    "actual_research_study": false,
+    "benchmark_specific_algorithms_added": false,
+    "four_fixed_conditions": true,
+    "new_funding": false,
+    "new_paid_cli": false,
+    "original_owner_recovery": true,
+    "scientific_improvement_established": false,
+    "separate_generation_and_judging_repetitions": true,
+    "source_evolution": false,
+    "study_controller": true,
+    "truthful_partial_observations": true
+  },
+  "source_sha256": {
+    "README.md": "ef35693343bc597f827f2d44cf2fe72b0bc20b7340fe2922e5e607d99f03732d",
+    "buddha/baseline.py": "13661931c95b676d95c724fba1e3db490a4a0c4374adec1e8ee4d1193579ca4a",
+    "buddha/native_evaluation.py": "79f726146de257ce801d8cf9aa273a58fb154b6f66fa6570b6ed29b008d780ab",
+    "buddha/native_pipeline.py": "9a8fe6b5d85380494e73426928f0c5344493d203de5f4f53866d5f2c9baeeaa0",
+    "buddha/policy_run.py": "7b3d1da3a209d4b49a76c3b5d766e11a66f29b5d243fdcec38933eb0e4c8f811",
+    "docs/API-KEYS.md": "6571dbeeb05293641a752ffd90425a99d53e8e52a677b4a76a1ce6bff0ffdb3b",
+    "docs/NATIVE-BASELINE.md": "aebbcdc6576f5c255f6aae3931dcdfc4db1ec51fa0b5bbb8561cad38461a2800",
+    "docs/NATIVE-EVALUATION.md": "6585490bbb7188667ef2e8f1ab15d7a6b4d2ff95ee03584f21e25ff576ff139c",
+    "docs/PLAN.md": "fdbdf4d232d597744a35d9a6d9419cb6ef02594e9e698fb7ffdd7e47d5135737",
+    "docs/POLICY-EXECUTION.md": "33665ac1ec838a465c3cf3772eb80f36bcb6da54eb1086b30d8b94e4891ae635",
+    "docs/POLICY-STUDY.md": "8185f971b9555e7abc49b12967c5510e6f89342553787c901830d99a00fe9594",
+    "docs/conformance/pol02-policy-execution-native-evidence.json": "8146a6d92e73f5256b892d75f0f36b740951be1fb4f896efb7fd0fdbd6e829a2",
+    "docs/conformance/pol02-policy-execution-review.json": "4150999283fb674870b1ba81f1bca6dece08eeb11e4292bdaab9917eed16b041",
+    "tests/test_baseline.py": "cc140d9247c4f78fea70c30f6896aca64aff98ee49c529d5bb41c1381206870b",
+    "tests/test_native_evaluation.py": "709d2df718605de4618fb3a6fd24c39005d6faa3f79760658b2c8eca9bacc148",
+    "tests/test_native_pipeline.py": "918b75fdc1ad874b316247698f1699171db91909aa160b082928398477d8e510",
+    "tests/test_policy_run.py": "220024134719635fce7ae5de57dcaa87dfc36c360bb4f74f87baeaad31da3c63"
+  },
+  "status": "Offline engineering gate complete; exact-head hosted CI pending publication",
+  "validation": {
+    "actual_native": {
+      "bytes": 669114,
+      "sha256": "8146a6d92e73f5256b892d75f0f36b740951be1fb4f896efb7fd0fdbd6e829a2"
+    },
+    "closing_independent_review": {
+      "current_local_links_resolved": 199,
+      "delivery_pins_checked": 17,
+      "old_conformance_files_exact": 150,
+      "old_plan_revision_rows_exact": 40,
+      "other_existing_application_agent_files_exact": 40,
+      "reviewer": "separate native Codex agent gateway_authority_review",
+      "scope": "engineering review, not independent human/scientific evaluation",
+      "status": "pass; no blockers; no new probes, edits or reruns",
+      "terminal_arithmetic_and_current_claims_checked": true
+    },
+    "current_local_markdown_links": 199,
+    "full_suite": {
+      "diagnostics_retained": [
+        "existing native-worker asyncio0.144second slow-task message",
+        "expected diagnostic-save RuntimeWarning fixture"
+      ],
+      "existing_local_skips": 10,
+      "exit_code": 0,
+      "log_sha256": "2ebc1557aa732a3f62df1f1c5d407eab8f8aebee3379217a7eac627e03b99d96",
+      "resource_warnings": "errors",
+      "seconds": 1378.427,
+      "tail": "as made.\r\n............................................s.............................................................................................................................................................................................................................................................s.......................................................................................................................................................................................................................................................................................................................s.Executing <Task finished name='Task-231' coro=<NativeWorkerTests.test_script_startup_creates_scratch_and_resets_safe_environment() done, defined at C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-execution\\tests\\test_native_worker.py:747> result=None created at C:\\Program Files\\Python313\\Lib\\asyncio\\runners.py:100> took 0.144 seconds\r\n.........................................................................................................................................................................s..................................................................s..........................................ss.ss.........C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-execution\\buddha\\diagnostics.py:277: RuntimeWarning: diagnostic outcome could not be saved\r\n  outcome(\"response_received\", None)\r\n........................................\r\n----------------------------------------------------------------------\r\nRan 1173 tests in 1378.427s\r\n\r\nOK (skipped=10)\r\n",
+      "tests": 1173
+    },
+    "full_suite_process": {
+      "bytes": 104,
+      "record": {
+        "command": "python -W error::ResourceWarning -m unittest discover -s tests",
+        "exit_code": 0
+      },
+      "sha256": "b8f454d7614b8b4167f4d9fb6862730aacd6589b044167d7d346d40646d8c863"
+    },
+    "no_redundant_full_rerun_after_final_pass": true,
+    "quality_exits": {
+      "pol02-study-final-security-compile.exit.json": {
+        "bytes": 38,
+        "record": {
+          "bandit": 0,
+          "compile": 0
+        },
+        "sha256": "40eba48c4bcb7d2f7832f55b0ed3dab0c2426e8c4d79b00f65e9d63496736746"
+      },
+      "pol02-study-final-style.exit.json": {
+        "bytes": 35,
+        "record": {
+          "format": 0,
+          "lint": 0
+        },
+        "sha256": "622c11f6fb889c3d38cee2c89184f4166c4faac41ed1eaf607c1a0f2c80327dc"
+      },
+      "pol02-study-final-types.exit.json": {
+        "bytes": 35,
+        "record": {
+          "linux": 0,
+          "win32": 0
+        },
+        "sha256": "713224713187b4992ab96690d8eaff5d75b643dfb399f1b2b61d90d18d71c4ca"
+      },
+      "pol02-study-security.exit.json": {
+        "bytes": 36,
+        "record": {
+          "audit": 0,
+          "bandit": 0
+        },
+        "sha256": "fc8740e08f846a3e2914812e816ba8ddb08612fecb58a6d7a071c3e85335c9e6"
+      }
+    },
+    "quality_logs": {
+      "pol02-study-audit.log": {
+        "bytes": 268,
+        "sha256": "e82148c0c30269ca5a2c35420ece6af011a4faf5a375325d750e243ffdb10625",
+        "text": "WARNING:pip_audit._cli:--no-deps is supported, but users are encouraged to fully hash their pinned dependencies\nWARNING:pip_audit._cli:Consider using a tool like `pip-compile`: https://pip-tools.readthedocs.io/en/latest/#using-hashes\nNo known vulnerabilities found\n"
+      },
+      "pol02-study-final-bandit.log": {
+        "bytes": 5296,
+        "sha256": "6d83d2669941c3d5c3356692f8b69034e50f05ca55d5248ac3aa48b8e535e53e",
+        "text": "[main]\tINFO\tprofile include tests: None\n[main]\tINFO\tprofile exclude tests: None\n[main]\tINFO\tcli include tests: None\n[main]\tINFO\tcli exclude tests: None\n[main]\tINFO\trunning on Python 3.13.12\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\agent_worker.py:62\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\agent_worker.py:64\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\agent_worker.py:65\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\agent_worker.py:66\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\agent_worker.py:67\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\agent_worker.py:65\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\agent_worker.py:66\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\agent_worker.py:67\n[tester]\tWARNING\tnosec encountered (B102), but no failed test on file buddha\\agent_worker.py:284\n[tester]\tWARNING\tnosec encountered (B102), but no failed test on file buddha\\agent_worker.py:284\n[tester]\tWARNING\tnosec encountered (B102), but no failed test on file buddha\\agent_worker.py:284\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\candidate_worker.py:66\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\candidate_worker.py:68\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\candidate_worker.py:69\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\candidate_worker.py:70\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\candidate_worker.py:71\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\candidate_worker.py:69\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\candidate_worker.py:70\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\candidate_worker.py:71\n[tester]\tWARNING\tnosec encountered (B102), but no failed test on file buddha\\candidate_worker.py:215\n[tester]\tWARNING\tnosec encountered (B102), but no failed test on file buddha\\candidate_worker.py:215\n[tester]\tWARNING\tnosec encountered (B102), but no failed test on file buddha\\candidate_worker.py:288\n[tester]\tWARNING\tnosec encountered (B102), but no failed test on file buddha\\candidate_worker.py:288\n[tester]\tWARNING\tnosec encountered (B102), but no failed test on file buddha\\candidate_worker.py:288\n[manager]\tWARNING\tTest in comment: executor is not a test name or id, ignoring\n[manager]\tWARNING\tTest in comment: owned is not a test name or id, ignoring\n[manager]\tWARNING\tTest in comment: bounded is not a test name or id, ignoring\n[manager]\tWARNING\tTest in comment: container is not a test name or id, ignoring\n[manager]\tWARNING\tTest in comment: tmpfs is not a test name or id, ignoring\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\native_worker.py:61\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\native_worker.py:62\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\native_worker.py:63\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\native_worker.py:64\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\native_worker.py:65\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\native_worker.py:66\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\native_worker.py:67\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\native_worker.py:68\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\native_worker.py:69\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\native_worker.py:70\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\native_worker.py:61\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\native_worker.py:63\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\native_worker.py:64\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\native_worker.py:65\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\native_worker.py:66\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\native_worker.py:67\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\native_worker.py:68\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\native_worker.py:69\n[tester]\tWARNING\tnosec encountered (B108), but no failed test on file buddha\\native_worker.py:70\nRun started:2026-10-21 08:33:02.503560+00:00\n\nTest results:\n\tNo issues identified.\n\nCode scanned:\n\tTotal lines of code: 17319\n\tTotal lines skipped (#nosec): 0\n\tTotal potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 12\n\nRun metrics:\n\tTotal issues (by severity):\n\t\tUndefined: 0\n\t\tLow: 0\n\t\tMedium: 0\n\t\tHigh: 0\n\tTotal issues (by confidence):\n\t\tUndefined: 0\n\t\tLow: 0\n\t\tMedium: 0\n\t\tHigh: 0\nFiles skipped (0):\n"
+      },
+      "pol02-study-final-compile.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "text": ""
+      },
+      "pol02-study-final-format.log": {
+        "bytes": 29,
+        "sha256": "875a21eb7522c817878d30ceb9fb3ae1fe140fd169ec37dc163997fd8a5ae11a",
+        "text": "123 files already formatted\n"
+      },
+      "pol02-study-final-lint.log": {
+        "bytes": 20,
+        "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+        "text": "All checks passed!\n"
+      },
+      "pol02-study-final-types-linux.log": {
+        "bytes": 45,
+        "sha256": "73cc387dbefa102cdfc7d7db87d6c95c795a4f8d220916a50712bbe6567a758e",
+        "text": "Success: no issues found in 44 source files\n"
+      },
+      "pol02-study-final-types-win32.log": {
+        "bytes": 45,
+        "sha256": "73cc387dbefa102cdfc7d7db87d6c95c795a4f8d220916a50712bbe6567a758e",
+        "text": "Success: no issues found in 44 source files\n"
+      }
+    },
+    "review": {
+      "bytes": 87157,
+      "sha256": "4150999283fb674870b1ba81f1bca6dece08eeb11e4292bdaab9917eed16b041"
+    }
+  }
+}

@@ -2,17 +2,21 @@
 
 The user authorized **up to US$50 for one first live experiment** on 2026-10-19. That is a combined cap across OpenAI and Anthropic, including seed candidates, proposals, generation and judging. It does not authorize repeated $50 experiments. The original and completed recovery attempts are historical evidence. The [living plan](PLAN.md) governs their linked continuation; do not restart either historical directory under a fresh allowance.
 
-## Current judge-audit allowance
+## Completed judge-audit allowance
 
-A separate MEAS-02 audit is now approved for **$15 total and 120 physical attempt
-records**, across 40 frozen judge targets. Partial completion is allowed only with
-its status and reason recorded. This uses the verified Standard/default public
-OpenAI prices and requires only an OpenAI project-scoped inference key. It does
-not reopen the old $50 experiment or authorize search, generation or quality
-scoring. The [current handoff](MEASUREMENT-JUDGE-AUDIT.md#approved-15-live-audit)
-explains the one-session hidden entry, command flags and result files. Its local
-account review stores only a fingerprint; account settings remain manual
-assertions, not evidence obtained from the provider API.
+The separate MEAS-02 audit was approved for **$15 total and 120 physical
+attempt records** across 40 frozen judge targets. It completed all 40 targets
+with 40 attempts, $0.032213 recorded cost and zero held.
+[The results](MEASUREMENT-LIVE-RESULTS.md) retain its evidence and limits.
+This allowance and the original $50 experiment are closed; neither unused
+balance authorizes the next comparison, generation, quality scoring or search.
+
+That audit used the verified Standard/default public OpenAI prices and only
+an OpenAI project inference key. Its [historical handoff](MEASUREMENT-JUDGE-AUDIT.md#approved-15-live-audit)
+explains one-session hidden entry and saved results. Local account review
+stores only a fingerprint; account settings are manual assertions, not
+evidence obtained from the provider API. A new live study needs its own
+reviewed configuration, allocation and command.
 
 ## Historical pilot: two dedicated keys
 
@@ -55,4 +59,4 @@ python -m buddha authorization-inspect --authorization $authorizationPath
 Get-Content runs/first-live-recovery/report.json
 ```
 
-Revoke a key in its provider dashboard if it is exposed. The historical policy pilot can resume with a replacement key and retain its completed replies. The native MEAS-02 audit binds the original key fingerprint: stop and review a credential-change procedure before resuming it. Do not edit or replace its saved account review to bypass that check. Changes to models, prompts, splits or budgets require a new experiment and a separately authorized spending decision.
+Revoke a key in its provider dashboard if it is exposed. For an active authorized policy run, replacing a key retains its completed replies; a new key does not reactivate a closed historical run. The native MEAS-02 audit binds the original key fingerprint: stop and review a credential-change procedure before resuming it. Do not edit or replace its saved account review to bypass that check. Changes to models, prompts, splits or budgets require a new experiment and a separately authorized spending decision.

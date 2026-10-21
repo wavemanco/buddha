@@ -13,6 +13,12 @@ and does not select or optimize an agent. [PLAN.md](PLAN.md) remains the roadmap
 | `prepare_baseline(directory, descriptor=..., authorization=..., review=...)` | Validate the configuration and selected files, create a fresh baseline directory and bind its first generation owner to the existing shared authorization. Reads no keys and makes no provider calls. |
 | `run_baseline(directory, transport=...)` | Run the configured stages or resume their original owners. Preserve every attempt, raw reply and uncertain hold. Actual spending still requires the caller's paid transport, reviewed profiles, keys and active shared authority. |
 
+Preparation also accepts optional `input_files`: a bounded list or tuple of
+additional control-file Paths. Their original hashes are bound to generation
+and inherited by every native stage, including on recovery. Resuming does not
+require resupplying them. The [policy controller](POLICY-EXECUTION.md) uses this
+to retain the complete study's original inputs.
+
 These are library interfaces, not a newly enabled paid command. Preparing a
 baseline does not create or extend the user's authorization. The historical
 $50 experiment and its inactive allocations remain unchanged.

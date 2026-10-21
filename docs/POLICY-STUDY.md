@@ -8,6 +8,8 @@ start a run, allocate money or authorize access to a task partition.
 
 [PLAN.md](PLAN.md) remains the roadmap. This is an offline prerequisite within
 POL-02; the controlled experiment and its scientific conclusions remain open.
+The separate [execution controller](POLICY-EXECUTION.md) connects this artifact
+to generation and fresh native judging; the data helper itself does not run it.
 
 ## The four conditions
 
@@ -88,8 +90,9 @@ prompt samples, and they are not permission to retain only a favorable score.
 This distinction responds to the [live audit](MEASUREMENT-LIVE-RESULTS.md): one
 fixed ten-story set received partitions with 4, 5, 9 and 9 groups on separate
 occasions. Generating again and judging again measure different sources of
-variation. The eventual controller must preserve every official result and
-apply the analysis rule declared before observation.
+variation. The [execution controller](POLICY-EXECUTION.md) preserves every
+official result; an actual study still needs its analysis rule fixed before
+observation.
 
 An occasion ID here does not select a new display order or seed, change the
 official evaluator, create a funding owner or ensure a fresh provider request.
@@ -146,9 +149,10 @@ it needs no keys or Docker and spends nothing. Ctrl+C stops it.
 The separate [native evaluation route](NATIVE-EVALUATION.md) now reuses anchored
 generated answers for fresh full judging occasions and retains interruption and
 partial-result evidence. This structure artifact does not execute that route.
-Before a live comparison, POL-02 still needs their composed funded controller,
-reviewed actual task/family membership, the exact child,
-model/instrument/source bindings, costs and spending authority, and the frozen
+The [composed controller](POLICY-EXECUTION.md) now connects those routes under
+an existing study-scoped authority. Before a live comparison, POL-02 still
+needs reviewed actual task/family membership, the exact child,
+model/instrument/source bindings, costs and spending authority, and frozen
 supplemental review and analysis rules. The original $50 experiment and $15
 judge audit do not authorize this study. This artifact closes none of those
 remaining gates and reports no improvement result.

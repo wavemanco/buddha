@@ -107,6 +107,54 @@ class NativeEvaluationFixture(unittest.TestCase):
 
 
 class NativeEvaluationTests(NativeEvaluationFixture):
+    def test_changed_control_cannot_be_adopted_while_preparing_a_later_judging_owner(self):
+        from buddha import native_evaluation as evaluation_module
+
+        control = self.root / "external-evaluation-control-race.json"
+        control.write_bytes(b'{"frozen":"original"}')
+        self.descriptor.write_bytes(_json(self.record))
+        prepare_evaluation(
+            self.directory,
+            descriptor=self.descriptor,
+            authorization=self.fixture.authority,
+            review=self.fixture.fixture.review,
+            input_files=(control,),
+        )
+        original_prepare = evaluation_module.prepare_gateway
+
+        def change_before_new_binding(directory, **kwargs):
+            if directory == self.directory / "owners/2":
+                control.write_bytes(b'{"frozen":"changed-between-check-and-binding"}')
+            return original_prepare(directory, **kwargs)
+
+        with (
+            patch.object(
+                evaluation_module, "prepare_gateway", side_effect=change_before_new_binding
+            ),
+            self.assertRaises(EvaluationError),
+        ):
+            self.run_evaluation()
+        self.assertEqual(self.fixture.physical_sends - self.before_sends, 1)
+        self.assertEqual(len(self.fixture.events), 1)
+
+    def test_additional_study_controls_are_bound_to_every_native_owner(self):
+        control = self.root / "external-evaluation-control.json"
+        control.write_bytes(b'{"frozen":"study-control"}')
+        self.descriptor.write_bytes(_json(self.record))
+        prepare_evaluation(
+            self.directory,
+            descriptor=self.descriptor,
+            authorization=self.fixture.authority,
+            review=self.fixture.fixture.review,
+            input_files=(control,),
+        )
+        self.assertEqual(self.run_evaluation()["status"], "complete")
+        expected = {"path": str(control), "sha256": sha(control.read_bytes())}
+        for index in range(1, 4):
+            record = json.loads((self.directory / f"owners/{index}/manifest.json").read_bytes())
+            with self.subTest(index=index):
+                self.assertIn(expected, record["invocation"]["inputs"])
+
     def test_two_fresh_occasions_reuse_exact_anchored_c1_and_create_distinct_paid_identities(self):
         self.prepare()
         first = self.run_evaluation()

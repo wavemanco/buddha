@@ -63,6 +63,12 @@ authorization database and reviewed container/OS boundaries remain assumptions.
 | `prepare_evaluation(directory, descriptor=..., authorization=..., review=...)` | Check the original generation and new configuration, create a fresh occasion directory and prepare its first native owner. Reads no keys and makes no provider calls. |
 | `run_evaluation(directory, transport=...)` | Run or resume that occasion through its original owners, retaining replies, attempts and incomplete-result explanations. Actual paid work still requires active authority, reviewed profiles, a paid transport and locally supplied keys. |
 
+Preparation also accepts optional `input_files`: a bounded list or tuple of
+additional control-file Paths. Their original hashes are bound to the first
+owner and inherited by later owners, including on recovery. Callers need not
+resupply them when resuming. The [policy controller](POLICY-EXECUTION.md) uses
+this existing provenance boundary to bind the whole frozen study.
+
 These are library interfaces. This slice supplies no new paid CLI command,
 funding allocation or actual study membership. The historical $50 experiment
 and $15 judge audit do not authorize another comparison.
