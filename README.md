@@ -72,6 +72,8 @@ The [source runtime](docs/SOURCE-RUNTIME.md) and [candidate execution boundary](
 now pass composed isolation, model-channel, accounting and recovery checks.
 Selected task code runs only in the pinned container; the host controls paid
 calls and completion. Inherited source mutation and improvement remain open.
+The [source-evolution backlog context](docs/BACKLOG.md) records the intended Python
+code and inherited-improver endpoint, the current gap and its existing plan gates.
 
 These are distinct from scientific success. Meaningful diversity, held-out
 improvement, genuine task/improver source evolution and an improved improver have
