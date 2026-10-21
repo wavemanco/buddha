@@ -50,6 +50,11 @@ sampling mode sees earlier answers and preserves literal task requirements.
 Fixed policies reuse the native pipeline; legacy search keeps v1. Controlled
 policy comparisons remain open.
 
+A separate [source-agent runtime prerequisite](docs/SOURCE-RUNTIME.md) now passes
+actual filesystem, network, resource and cleanup checks on a pinned minimal
+Python image. Production candidate execution and its model channel still need
+their composed checks; the existing fixed-seed route is unchanged.
+
 These are distinct from scientific success. Meaningful diversity, held-out
 improvement, genuine task/improver source evolution and an improved improver have
 **not been established**. Earlier pilot reviews flagged recurring premises and
