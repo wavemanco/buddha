@@ -342,6 +342,18 @@ class BaselineTests(unittest.TestCase):
             self.prepare()
         self.assertEqual((self.directory / "owners/0/manifest.json").read_bytes(), before)
 
+    def test_completed_report_reuse_survives_other_completed_baseline_on_shared_grant(self):
+        self.prepare()
+        first = self.run_pipeline()
+        stored = (self.directory / "report.json").read_bytes()
+        second = self.root / "another-complete-baseline"
+        self.prepare(directory=second)
+        self.assertEqual(self.run_pipeline(directory=second)["status"], "complete")
+        sent = self.physical_sends
+        self.assertEqual(self.run_pipeline(paid=False), first)
+        self.assertEqual((self.directory / "report.json").read_bytes(), stored)
+        self.assertEqual(self.physical_sends, sent)
+
     def test_complete_composes_distinct_owners_c1_links_typed_ids_and_literal_summary(self):
         self.prepare()
         report = self.run_pipeline()

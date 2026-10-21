@@ -1,0 +1,2370 @@
+{
+  "actual_keys_used": false,
+  "actual_provider_calls": 0,
+  "answers_file_sha256": "a4f4621c3029c628f3ebe4fd86753022ee6187063f74e332cb6acfab959940a8",
+  "answers_sha256": "43a99af70c5cd336c9455477c92b0d2666cc988d6bb9f6602367079254fff243",
+  "asset_sha256": {
+    "C:\\Users\\arvik\\code\\buddha\\runs\\references\\noveltybench-conformance\\64a23be6b18ec1dacc298830aab276061b6e143c\\LICENSE": "14e69e7fbb2f8fd0aa8ccf17d7d4ddd54665555c613a0336767f7a5fa477895c",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\references\\noveltybench-conformance\\64a23be6b18ec1dacc298830aab276061b6e143c\\data\\curated.jsonl": "ca9b6f470e5d7f7e34a281e2fdaa6f6e51c38bdae075ea580d184139ec391fa7",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\references\\noveltybench-conformance\\64a23be6b18ec1dacc298830aab276061b6e143c\\src\\common.py": "ba60bf0f2a409c3774d75880f305325a28ed34320610667542a4596c41f424af",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\references\\noveltybench-conformance\\64a23be6b18ec1dacc298830aab276061b6e143c\\src\\evaluation_io.py": "8a34e01308677469d984dd59e36412c2994baf2554fd3a5f026be9ef98a3a5c7",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\references\\noveltybench-conformance\\64a23be6b18ec1dacc298830aab276061b6e143c\\src\\judge.py": "4decf04790b90a03368eb792dfe29045435914a73ab83a52185d9dd0d1613902",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\references\\noveltybench-conformance\\64a23be6b18ec1dacc298830aab276061b6e143c\\src\\partition.py": "263970891ff3ee1cc8df369a33beefe5cb5de618b5dd146a5234536d97954aca",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\references\\noveltybench-conformance\\64a23be6b18ec1dacc298830aab276061b6e143c\\src\\score.py": "418985a40e9e159cfeffe9a43ab2c727010d7a7a29407f4e14cab3c81b77cbae",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\references\\noveltybench-conformance\\64a23be6b18ec1dacc298830aab276061b6e143c\\src\\summarize.py": "0a8bd1eb7f317584f579eaa827e580f9cefe4177a1abdc35b2cb06ef96eeea9e",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\references\\noveltybench-conformance\\64a23be6b18ec1dacc298830aab276061b6e143c\\uv.lock": "ff6d5b15b77e4ca46a33604586eb7d99666d2802752ab962af9baa2924a50758",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3b-runtime-installed.json": "b6b8ab4d349926577905b95b0784c622d6e443f34ea2b73625e09e72b497cf4b",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\agents\\frozen_seed.py": "2b87bfe0d3c97ee45db2d45260985ffe0234eca93967f4689fb7c59f82603921",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\docs\\conformance\\nb02c3-direct-worker.py": "286b1b564f4095532b95c509aedd85001275b54b0da8a57dd72a506a23b96c63",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\docs\\conformance\\nb02c3-runtime-environment.json": "dc58b658821a536d13c300b6b1f756aa8dc3b2adcc5699627a4827f8361f7d9a",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\docs\\conformance\\nb02c3b-direct-worker.py": "4a666e511387566738c65826717ea9f40fb54ed1ba4d7d28347a7a264d40c543",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\docs\\conformance\\nb02c3b-funded-native-evidence.json": "260e3396983b01ba6333d5e5bac7f41e45685eb51f342593c376558fa8d26205",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\docs\\conformance\\nb02c3b-runtime-environment.json": "90e905e2fc381e62adc0553a8e195b7d120886fa597743297e5032dbbfd0eedf",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\nb02c3b-runtime-installed.json": "b6b8ab4d349926577905b95b0784c622d6e443f34ea2b73625e09e72b497cf4b"
+  },
+  "assets_preserved": true,
+  "baseline": {
+    "completion_authorization": {
+      "authorization_id": "baseline-proof",
+      "available_microusd": 9999750,
+      "budget_microusd": 10000000,
+      "committed_microusd": 250,
+      "event_count": 113,
+      "max_calls": 50,
+      "operation_count": 26,
+      "remaining_calls": 24,
+      "reserved_microusd": 0,
+      "runs": [
+        {
+          "active": false,
+          "committed_microusd": 10,
+          "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\1",
+          "historical": 0,
+          "historical_ledger_sha256": null,
+          "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\1\\operations.sqlite3",
+          "manifest_sha256": "431d65b912aab8fb54360f01f8c5aa590ef7b1a0280ecc9e3219260f9de197f3",
+          "operation_count": 2,
+          "reserved_microusd": 0,
+          "run_id": "460c05b972ad4b96935c0a9e0d0d0c58",
+          "runtime_sha256": "3862f2a568657a48ced0e3973783db3d4db8e7a8d98394411456484eac92b409",
+          "spent_microusd": 10
+        },
+        {
+          "active": false,
+          "committed_microusd": 20,
+          "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\2",
+          "historical": 0,
+          "historical_ledger_sha256": null,
+          "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\2\\operations.sqlite3",
+          "manifest_sha256": "6e68247a3246e888789dddc0e7053d761a9ce5aed24f610cfd413d88a53fd3bd",
+          "operation_count": 4,
+          "reserved_microusd": 0,
+          "run_id": "9dd6ca59c179406fa4e391ec416cd5c2",
+          "runtime_sha256": "b303c383156e4af0d385566253c73d30830aad43815030aa8d1580814c16c2c3",
+          "spent_microusd": 20
+        },
+        {
+          "active": false,
+          "committed_microusd": 220,
+          "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\0",
+          "historical": 0,
+          "historical_ledger_sha256": null,
+          "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\0\\operations.sqlite3",
+          "manifest_sha256": "4d0c9e40b8ccaf94d9209fd1355bec45099af84d11c4059c5b71c23af42e1f8b",
+          "operation_count": 20,
+          "reserved_microusd": 0,
+          "run_id": "cd6244696e65420eb377cf700cccb701",
+          "runtime_sha256": "0a7383aadcba45e423b68d304932062fd1c0023fd8232b775a7e055160f10e89",
+          "spent_microusd": 220
+        },
+        {
+          "active": false,
+          "committed_microusd": 0,
+          "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\3",
+          "historical": 0,
+          "historical_ledger_sha256": null,
+          "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\3\\operations.sqlite3",
+          "manifest_sha256": "552732e21ca2a426424aa9f9e3dee44a9a930457025c794ae8b16ccef005ce5f",
+          "operation_count": 0,
+          "reserved_microusd": 0,
+          "run_id": "d4a1d0a290b14f198fdd918e19a9c347",
+          "runtime_sha256": "527ec60978d4743382a5c22b4ece9005b36c3c03440c786acba3ca9cdf76c587",
+          "spent_microusd": 0
+        }
+      ],
+      "scope": "offline actual baseline proof; fake HTTPS only",
+      "spent_microusd": 250,
+      "terms_sha256": "cf062e09d4eb1545283c812361c27429c0268d88f863ef00533ad4bce7efe98a"
+    },
+    "current_authorization": {
+      "authorization_id": "baseline-proof",
+      "available_microusd": 9999750,
+      "budget_microusd": 10000000,
+      "committed_microusd": 250,
+      "event_count": 113,
+      "max_calls": 50,
+      "operation_count": 26,
+      "remaining_calls": 24,
+      "reserved_microusd": 0,
+      "runs": [
+        {
+          "active": false,
+          "committed_microusd": 10,
+          "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\1",
+          "historical": 0,
+          "historical_ledger_sha256": null,
+          "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\1\\operations.sqlite3",
+          "manifest_sha256": "431d65b912aab8fb54360f01f8c5aa590ef7b1a0280ecc9e3219260f9de197f3",
+          "operation_count": 2,
+          "reserved_microusd": 0,
+          "run_id": "460c05b972ad4b96935c0a9e0d0d0c58",
+          "runtime_sha256": "3862f2a568657a48ced0e3973783db3d4db8e7a8d98394411456484eac92b409",
+          "spent_microusd": 10
+        },
+        {
+          "active": false,
+          "committed_microusd": 20,
+          "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\2",
+          "historical": 0,
+          "historical_ledger_sha256": null,
+          "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\2\\operations.sqlite3",
+          "manifest_sha256": "6e68247a3246e888789dddc0e7053d761a9ce5aed24f610cfd413d88a53fd3bd",
+          "operation_count": 4,
+          "reserved_microusd": 0,
+          "run_id": "9dd6ca59c179406fa4e391ec416cd5c2",
+          "runtime_sha256": "b303c383156e4af0d385566253c73d30830aad43815030aa8d1580814c16c2c3",
+          "spent_microusd": 20
+        },
+        {
+          "active": false,
+          "committed_microusd": 220,
+          "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\0",
+          "historical": 0,
+          "historical_ledger_sha256": null,
+          "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\0\\operations.sqlite3",
+          "manifest_sha256": "4d0c9e40b8ccaf94d9209fd1355bec45099af84d11c4059c5b71c23af42e1f8b",
+          "operation_count": 20,
+          "reserved_microusd": 0,
+          "run_id": "cd6244696e65420eb377cf700cccb701",
+          "runtime_sha256": "0a7383aadcba45e423b68d304932062fd1c0023fd8232b775a7e055160f10e89",
+          "spent_microusd": 220
+        },
+        {
+          "active": false,
+          "committed_microusd": 0,
+          "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\3",
+          "historical": 0,
+          "historical_ledger_sha256": null,
+          "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\3\\operations.sqlite3",
+          "manifest_sha256": "552732e21ca2a426424aa9f9e3dee44a9a930457025c794ae8b16ccef005ce5f",
+          "operation_count": 0,
+          "reserved_microusd": 0,
+          "run_id": "d4a1d0a290b14f198fdd918e19a9c347",
+          "runtime_sha256": "527ec60978d4743382a5c22b4ece9005b36c3c03440c786acba3ca9cdf76c587",
+          "spent_microusd": 0
+        }
+      ],
+      "scope": "offline actual baseline proof; fake HTTPS only",
+      "spent_microusd": 250,
+      "terms_sha256": "cf062e09d4eb1545283c812361c27429c0268d88f863ef00533ad4bce7efe98a"
+    },
+    "new_sends": [
+      {
+        "body_sha256": "c7d480734f34179c1e1a8ea0642c48fed258282d5fe0dbd9da7349a1b5ae0d4f",
+        "headers": {
+          "content-type": "application/json"
+        },
+        "model": "seed-fixture",
+        "provider": "openai",
+        "stage": "generation"
+      },
+      {
+        "body_sha256": "c7d480734f34179c1e1a8ea0642c48fed258282d5fe0dbd9da7349a1b5ae0d4f",
+        "headers": {
+          "content-type": "application/json"
+        },
+        "model": "seed-fixture",
+        "provider": "openai",
+        "stage": "generation"
+      },
+      {
+        "body_sha256": "c7d480734f34179c1e1a8ea0642c48fed258282d5fe0dbd9da7349a1b5ae0d4f",
+        "headers": {
+          "content-type": "application/json"
+        },
+        "model": "seed-fixture",
+        "provider": "openai",
+        "stage": "generation"
+      },
+      {
+        "body_sha256": "c7d480734f34179c1e1a8ea0642c48fed258282d5fe0dbd9da7349a1b5ae0d4f",
+        "headers": {
+          "content-type": "application/json"
+        },
+        "model": "seed-fixture",
+        "provider": "openai",
+        "stage": "generation"
+      },
+      {
+        "body_sha256": "c7d480734f34179c1e1a8ea0642c48fed258282d5fe0dbd9da7349a1b5ae0d4f",
+        "headers": {
+          "content-type": "application/json"
+        },
+        "model": "seed-fixture",
+        "provider": "openai",
+        "stage": "generation"
+      },
+      {
+        "body_sha256": "c7d480734f34179c1e1a8ea0642c48fed258282d5fe0dbd9da7349a1b5ae0d4f",
+        "headers": {
+          "content-type": "application/json"
+        },
+        "model": "seed-fixture",
+        "provider": "openai",
+        "stage": "generation"
+      },
+      {
+        "body_sha256": "c7d480734f34179c1e1a8ea0642c48fed258282d5fe0dbd9da7349a1b5ae0d4f",
+        "headers": {
+          "content-type": "application/json"
+        },
+        "model": "seed-fixture",
+        "provider": "openai",
+        "stage": "generation"
+      },
+      {
+        "body_sha256": "c7d480734f34179c1e1a8ea0642c48fed258282d5fe0dbd9da7349a1b5ae0d4f",
+        "headers": {
+          "content-type": "application/json"
+        },
+        "model": "seed-fixture",
+        "provider": "openai",
+        "stage": "generation"
+      },
+      {
+        "body_sha256": "c7d480734f34179c1e1a8ea0642c48fed258282d5fe0dbd9da7349a1b5ae0d4f",
+        "headers": {
+          "content-type": "application/json"
+        },
+        "model": "seed-fixture",
+        "provider": "openai",
+        "stage": "generation"
+      },
+      {
+        "body_sha256": "c7d480734f34179c1e1a8ea0642c48fed258282d5fe0dbd9da7349a1b5ae0d4f",
+        "headers": {
+          "content-type": "application/json"
+        },
+        "model": "seed-fixture",
+        "provider": "openai",
+        "stage": "generation"
+      },
+      {
+        "body_sha256": "f16eb39e7412e9289dbc67994b4b17142ee498e5f061f085544362e2d648f978",
+        "headers": {
+          "content-type": "application/json"
+        },
+        "model": "seed-fixture",
+        "provider": "openai",
+        "stage": "generation"
+      },
+      {
+        "body_sha256": "f16eb39e7412e9289dbc67994b4b17142ee498e5f061f085544362e2d648f978",
+        "headers": {
+          "content-type": "application/json"
+        },
+        "model": "seed-fixture",
+        "provider": "openai",
+        "stage": "generation"
+      },
+      {
+        "body_sha256": "f16eb39e7412e9289dbc67994b4b17142ee498e5f061f085544362e2d648f978",
+        "headers": {
+          "content-type": "application/json"
+        },
+        "model": "seed-fixture",
+        "provider": "openai",
+        "stage": "generation"
+      },
+      {
+        "body_sha256": "f16eb39e7412e9289dbc67994b4b17142ee498e5f061f085544362e2d648f978",
+        "headers": {
+          "content-type": "application/json"
+        },
+        "model": "seed-fixture",
+        "provider": "openai",
+        "stage": "generation"
+      },
+      {
+        "body_sha256": "f16eb39e7412e9289dbc67994b4b17142ee498e5f061f085544362e2d648f978",
+        "headers": {
+          "content-type": "application/json"
+        },
+        "model": "seed-fixture",
+        "provider": "openai",
+        "stage": "generation"
+      },
+      {
+        "body_sha256": "f16eb39e7412e9289dbc67994b4b17142ee498e5f061f085544362e2d648f978",
+        "headers": {
+          "content-type": "application/json"
+        },
+        "model": "seed-fixture",
+        "provider": "openai",
+        "stage": "generation"
+      },
+      {
+        "body_sha256": "f16eb39e7412e9289dbc67994b4b17142ee498e5f061f085544362e2d648f978",
+        "headers": {
+          "content-type": "application/json"
+        },
+        "model": "seed-fixture",
+        "provider": "openai",
+        "stage": "generation"
+      },
+      {
+        "body_sha256": "f16eb39e7412e9289dbc67994b4b17142ee498e5f061f085544362e2d648f978",
+        "headers": {
+          "content-type": "application/json"
+        },
+        "model": "seed-fixture",
+        "provider": "openai",
+        "stage": "generation"
+      },
+      {
+        "body_sha256": "f16eb39e7412e9289dbc67994b4b17142ee498e5f061f085544362e2d648f978",
+        "headers": {
+          "content-type": "application/json"
+        },
+        "model": "seed-fixture",
+        "provider": "openai",
+        "stage": "generation"
+      },
+      {
+        "body_sha256": "f16eb39e7412e9289dbc67994b4b17142ee498e5f061f085544362e2d648f978",
+        "headers": {
+          "content-type": "application/json"
+        },
+        "model": "seed-fixture",
+        "provider": "openai",
+        "stage": "generation"
+      },
+      {
+        "body_sha256": "161077a3dd206db20932c1c844807146d3763d834bb17ccbeb6007f924cf859c",
+        "headers": {
+          "accept": "application/json",
+          "accept-encoding": "gzip, deflate",
+          "content-type": "application/json",
+          "user-agent": "AsyncOpenAI/Python 1.107.0",
+          "x-stainless-arch": "x64",
+          "x-stainless-async": "async:asyncio",
+          "x-stainless-helper-method": "chat.completions.parse",
+          "x-stainless-lang": "python",
+          "x-stainless-os": "Linux",
+          "x-stainless-package-version": "1.107.0",
+          "x-stainless-read-timeout": "600",
+          "x-stainless-retry-count": "0",
+          "x-stainless-runtime": "CPython",
+          "x-stainless-runtime-version": "3.13.12"
+        },
+        "model": "test-model",
+        "provider": "openai",
+        "stage": "partition"
+      },
+      {
+        "body_sha256": "140598b4ed561b3ec3da8f1289ea35457808a3495bd85e60ff193a04927e0e64",
+        "headers": {
+          "accept": "application/json",
+          "accept-encoding": "gzip, deflate",
+          "content-type": "application/json",
+          "user-agent": "AsyncOpenAI/Python 1.107.0",
+          "x-stainless-arch": "x64",
+          "x-stainless-async": "async:asyncio",
+          "x-stainless-helper-method": "chat.completions.parse",
+          "x-stainless-lang": "python",
+          "x-stainless-os": "Linux",
+          "x-stainless-package-version": "1.107.0",
+          "x-stainless-read-timeout": "600",
+          "x-stainless-retry-count": "0",
+          "x-stainless-runtime": "CPython",
+          "x-stainless-runtime-version": "3.13.12"
+        },
+        "model": "test-model",
+        "provider": "openai",
+        "stage": "partition"
+      },
+      {
+        "body_sha256": "126977ead12e17c0a747572ed7aaf303989232319b03b27dff8baa2a7a50b065",
+        "headers": {
+          "accept": "application/json",
+          "accept-encoding": "gzip, deflate",
+          "content-type": "application/json",
+          "user-agent": "AsyncOpenAI/Python 1.107.0",
+          "x-stainless-arch": "x64",
+          "x-stainless-async": "async:asyncio",
+          "x-stainless-helper-method": "chat.completions.parse",
+          "x-stainless-lang": "python",
+          "x-stainless-os": "Linux",
+          "x-stainless-package-version": "1.107.0",
+          "x-stainless-read-timeout": "600",
+          "x-stainless-retry-count": "0",
+          "x-stainless-runtime": "CPython",
+          "x-stainless-runtime-version": "3.13.12"
+        },
+        "model": "test-model",
+        "provider": "openai",
+        "stage": "score"
+      },
+      {
+        "body_sha256": "126977ead12e17c0a747572ed7aaf303989232319b03b27dff8baa2a7a50b065",
+        "headers": {
+          "accept": "application/json",
+          "accept-encoding": "gzip, deflate",
+          "content-type": "application/json",
+          "user-agent": "AsyncOpenAI/Python 1.107.0",
+          "x-stainless-arch": "x64",
+          "x-stainless-async": "async:asyncio",
+          "x-stainless-helper-method": "chat.completions.parse",
+          "x-stainless-lang": "python",
+          "x-stainless-os": "Linux",
+          "x-stainless-package-version": "1.107.0",
+          "x-stainless-read-timeout": "600",
+          "x-stainless-retry-count": "0",
+          "x-stainless-runtime": "CPython",
+          "x-stainless-runtime-version": "3.13.12"
+        },
+        "model": "test-model",
+        "provider": "openai",
+        "stage": "score"
+      },
+      {
+        "body_sha256": "92775b44b1a1c2abb5d1542cf3a3307367d6527da7d61e0d320f4bdddc6d1409",
+        "headers": {
+          "accept": "application/json",
+          "accept-encoding": "gzip, deflate",
+          "content-type": "application/json",
+          "user-agent": "AsyncOpenAI/Python 1.107.0",
+          "x-stainless-arch": "x64",
+          "x-stainless-async": "async:asyncio",
+          "x-stainless-helper-method": "chat.completions.parse",
+          "x-stainless-lang": "python",
+          "x-stainless-os": "Linux",
+          "x-stainless-package-version": "1.107.0",
+          "x-stainless-read-timeout": "600",
+          "x-stainless-retry-count": "0",
+          "x-stainless-runtime": "CPython",
+          "x-stainless-runtime-version": "3.13.12"
+        },
+        "model": "test-model",
+        "provider": "openai",
+        "stage": "score"
+      },
+      {
+        "body_sha256": "92775b44b1a1c2abb5d1542cf3a3307367d6527da7d61e0d320f4bdddc6d1409",
+        "headers": {
+          "accept": "application/json",
+          "accept-encoding": "gzip, deflate",
+          "content-type": "application/json",
+          "user-agent": "AsyncOpenAI/Python 1.107.0",
+          "x-stainless-arch": "x64",
+          "x-stainless-async": "async:asyncio",
+          "x-stainless-helper-method": "chat.completions.parse",
+          "x-stainless-lang": "python",
+          "x-stainless-os": "Linux",
+          "x-stainless-package-version": "1.107.0",
+          "x-stainless-read-timeout": "600",
+          "x-stainless-retry-count": "0",
+          "x-stainless-runtime": "CPython",
+          "x-stainless-runtime-version": "3.13.12"
+        },
+        "model": "test-model",
+        "provider": "openai",
+        "stage": "score"
+      }
+    ],
+    "owned_containers_after": [
+      "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+    ],
+    "owned_containers_before": [
+      "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+    ],
+    "report_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\report.json",
+    "report_sha256": "a7bb0379659e1c5c837234af59f4206e85b873dac139730cbbdd165b7807f25f",
+    "status": "complete"
+  },
+  "baseline_owners": [
+    {
+      "authorization_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\authorization.sqlite3",
+      "index": 0,
+      "ledger_sha256": "319f258eb704d64573134625bc3049687558b2d9fe124b293442d870889fd802",
+      "manifest_file_sha256": "f37fc2dd8528b9e6ca5456976ecac49db3006bf9477b373d6a79cb0cff8f5a98",
+      "manifest_sha256": "4d0c9e40b8ccaf94d9209fd1355bec45099af84d11c4059c5b71c23af42e1f8b",
+      "operations": [
+        {
+          "actual_microusd": 11,
+          "attempt": 0,
+          "body_sha256": "c7d480734f34179c1e1a8ea0642c48fed258282d5fe0dbd9da7349a1b5ae0d4f",
+          "logical_id": "e5c3bf1a2b5e6758d176237d6dca83c8268ccc05ca1f550f032b161779276400",
+          "operation_id": "04a03ec633c0f3f01233774285d68cd468f3276b9c45e34b043aaa97e78908ac",
+          "receipt_sha256": "9df3167373211a85609c9cc7f54ea1d1e1b0fb2881a5cbcde60ff9c280c13658",
+          "status": "completed"
+        },
+        {
+          "actual_microusd": 11,
+          "attempt": 0,
+          "body_sha256": "c7d480734f34179c1e1a8ea0642c48fed258282d5fe0dbd9da7349a1b5ae0d4f",
+          "logical_id": "74af40b46336e8991411ae349ab44d0bb251d1455a2559669ba677e13d074253",
+          "operation_id": "137347f6c39cc453956326dfcdc1ad25eadcecb516a8534286d85cd09f644485",
+          "receipt_sha256": "d7db28d14fb88c4e90a3c0391632d208903e75e53f4e11b124917105478e846e",
+          "status": "completed"
+        },
+        {
+          "actual_microusd": 11,
+          "attempt": 0,
+          "body_sha256": "c7d480734f34179c1e1a8ea0642c48fed258282d5fe0dbd9da7349a1b5ae0d4f",
+          "logical_id": "da9ee9c70490576c81297a81578f89231b30383d74ea92c6f11f1cd546ad5e23",
+          "operation_id": "2425dcf74cd4baaf2019e74408a60addba9e824ca17e6feaaeb06330c445e3be",
+          "receipt_sha256": "aae5f6ad982996cd140be786f0940dce7254725c801b3026af7f679b6d9299a8",
+          "status": "completed"
+        },
+        {
+          "actual_microusd": 11,
+          "attempt": 0,
+          "body_sha256": "f16eb39e7412e9289dbc67994b4b17142ee498e5f061f085544362e2d648f978",
+          "logical_id": "09e469093a3c9dea5cda12791e05a014a478280800f1336066fcd7fe96811492",
+          "operation_id": "24ab8e548c9ec0b0865b8e4f5c8767306f94d9a0d536e23d2a8048caefcb8694",
+          "receipt_sha256": "4b7e35d83dc8fdfea079037cc8a491c77e66ffeaf1d73150e09989342efb3020",
+          "status": "completed"
+        },
+        {
+          "actual_microusd": 11,
+          "attempt": 0,
+          "body_sha256": "c7d480734f34179c1e1a8ea0642c48fed258282d5fe0dbd9da7349a1b5ae0d4f",
+          "logical_id": "1891f64f1dec0e2ce6c1ce021f5518f941cc184f2c2461e5576f38c839e2c5c8",
+          "operation_id": "288614f080bc3a799c83d959013b9ba93cd326cce77225db4ab621153105e7ad",
+          "receipt_sha256": "547ac77b680067e0f9dc04efea07ecf332f2eed72b7cc73156a5cfe5bd308d6f",
+          "status": "completed"
+        },
+        {
+          "actual_microusd": 11,
+          "attempt": 0,
+          "body_sha256": "c7d480734f34179c1e1a8ea0642c48fed258282d5fe0dbd9da7349a1b5ae0d4f",
+          "logical_id": "230593fe75f8e5faf8ff34cc49601a38fc4dd573b64f375fb8b05474bf5f20a9",
+          "operation_id": "3d600eea5892c22122a0181a5c8c368ff71b97dde2caae85932c7baf71038952",
+          "receipt_sha256": "d912485eee3646629d7d31080aff40bf2d9e660ede0e4fcf108195428647b7a5",
+          "status": "completed"
+        },
+        {
+          "actual_microusd": 11,
+          "attempt": 0,
+          "body_sha256": "c7d480734f34179c1e1a8ea0642c48fed258282d5fe0dbd9da7349a1b5ae0d4f",
+          "logical_id": "c36ceabe2607c1c8470f68849109cecf36c16482ae6ee5fecb759f9bfaf9a6d4",
+          "operation_id": "419de812f6aae9b6ad04dd97da7dcfa71ef75356147aa06639856c3c185c81f5",
+          "receipt_sha256": "4ac821da2ec1650b8625e5effae01e992a9894865302e62859aec2a91ef94fb6",
+          "status": "completed"
+        },
+        {
+          "actual_microusd": 11,
+          "attempt": 0,
+          "body_sha256": "c7d480734f34179c1e1a8ea0642c48fed258282d5fe0dbd9da7349a1b5ae0d4f",
+          "logical_id": "85e92e424a995ffffc3b1c7b7ab83fb469d09370350b0aeab02fd2e27372da90",
+          "operation_id": "421287d7f40f92e8372e03faddce34092a8c69e7101e70d44904ee44ba87cda2",
+          "receipt_sha256": "4253953d2c559a19c4c57bf9a024f6d370454a479f6645068fe8698bd6724d2d",
+          "status": "completed"
+        },
+        {
+          "actual_microusd": 11,
+          "attempt": 0,
+          "body_sha256": "f16eb39e7412e9289dbc67994b4b17142ee498e5f061f085544362e2d648f978",
+          "logical_id": "b095683d8809491fc4429658aa5c1bc2a1c5eb6dba8d722d480d57ab559099db",
+          "operation_id": "4efc1e2346e1e79a8fca907ae1fcebd17d7e5634061b241a5fa211d5ae290049",
+          "receipt_sha256": "8a40b7e9415d404d2e0af0f1cd336a61aa6206901c42b62bf1bfe213cb22a2b6",
+          "status": "completed"
+        },
+        {
+          "actual_microusd": 11,
+          "attempt": 0,
+          "body_sha256": "f16eb39e7412e9289dbc67994b4b17142ee498e5f061f085544362e2d648f978",
+          "logical_id": "6251e3eb9aa64ecf9ca162a4679c30d76bdad43391f780ea8512fa3bc41860ab",
+          "operation_id": "50442fce416ef3c3d2779663157f220df0938789fa387e9acdc2f9632c49cbbd",
+          "receipt_sha256": "b1a2738059d1f14939313a148805fcf7d7abc3d753ee1f3ebf040d11d4bcfe2d",
+          "status": "completed"
+        },
+        {
+          "actual_microusd": 11,
+          "attempt": 0,
+          "body_sha256": "f16eb39e7412e9289dbc67994b4b17142ee498e5f061f085544362e2d648f978",
+          "logical_id": "be9be1d8dcfd7f4b66b4b508ad21ccc5b4ded4e04fcda8d8309598be6c22e4b6",
+          "operation_id": "7f5f6db0b5efe844e94f48b613f796b051694cce60242867b46ebf1795567f18",
+          "receipt_sha256": "6f17605dd1c695fadb8429192b22caf95ba06b3170e52459021ff751ecdcbb68",
+          "status": "completed"
+        },
+        {
+          "actual_microusd": 11,
+          "attempt": 0,
+          "body_sha256": "f16eb39e7412e9289dbc67994b4b17142ee498e5f061f085544362e2d648f978",
+          "logical_id": "cf14c9b3caf213a016935259d8ce59c15432da4989b43de9ab9f254f5ea9c1bf",
+          "operation_id": "895dabc0936945aa841c19b8953f5adbb5e5b618178b5521a8e12ca9010b667e",
+          "receipt_sha256": "78b1a2ff467c4c7a162ecbfb03fa493efc60b63a447dda4215f3c8ebd9f804ad",
+          "status": "completed"
+        },
+        {
+          "actual_microusd": 11,
+          "attempt": 0,
+          "body_sha256": "f16eb39e7412e9289dbc67994b4b17142ee498e5f061f085544362e2d648f978",
+          "logical_id": "8fffac39bb8a082c5f52449a0ba8d3c43cc668a6f2d4496bca47da421a9e671a",
+          "operation_id": "986effcfc673481c29d8a44b8a1af40644ebad9a59097ea14096d43b40d5401c",
+          "receipt_sha256": "05d3df19087545fae88cb416f28f72d67022f7b5579d509a7bd2e8ac90d3f65e",
+          "status": "completed"
+        },
+        {
+          "actual_microusd": 11,
+          "attempt": 0,
+          "body_sha256": "c7d480734f34179c1e1a8ea0642c48fed258282d5fe0dbd9da7349a1b5ae0d4f",
+          "logical_id": "b14d7cf2a4bcd4d452d99a45275bd9d702a8645dc68abe06893cebafd767104a",
+          "operation_id": "b30a625f71cbffe7656285e0d57197152679a728ea0fb4d236a65fce5c3a8c10",
+          "receipt_sha256": "fb368da56eba005df0e60605e42cc21c02d2a70f90f03c6bdde8450527d0ce76",
+          "status": "completed"
+        },
+        {
+          "actual_microusd": 11,
+          "attempt": 0,
+          "body_sha256": "c7d480734f34179c1e1a8ea0642c48fed258282d5fe0dbd9da7349a1b5ae0d4f",
+          "logical_id": "5557b1a1c38eb96a956d4a917267520dcb2425cd08e10c4cb3ae5e545f729806",
+          "operation_id": "bdae305b8da89db4b8c8e9cc0a0d691997456e8f94e809396cfd824f9641032a",
+          "receipt_sha256": "5c0d5d316eae65c8ab3311354be6c830f409476d61ae50483ccb88f92ae36ca5",
+          "status": "completed"
+        },
+        {
+          "actual_microusd": 11,
+          "attempt": 0,
+          "body_sha256": "c7d480734f34179c1e1a8ea0642c48fed258282d5fe0dbd9da7349a1b5ae0d4f",
+          "logical_id": "807f7e63bb350c592c483b03104f5d6ebc87f3561db7d31c3b4b9f509dcdb6eb",
+          "operation_id": "cc8ae6ba83a7015f37098993f784ae9bae7d9784745053cf1ea2855b52c5d945",
+          "receipt_sha256": "6b25cbdd3bd0181cf84116f70961a3104183d46f9d195ef0a4f72e5b828e98a2",
+          "status": "completed"
+        },
+        {
+          "actual_microusd": 11,
+          "attempt": 0,
+          "body_sha256": "f16eb39e7412e9289dbc67994b4b17142ee498e5f061f085544362e2d648f978",
+          "logical_id": "39e41dcce475b097ce3921141937dea2b50d868b5a026f0efc224d9e72b213ee",
+          "operation_id": "dba870532c78c00ed9277021fa551d8e449957cf61f9255e6a0a8c7f9ea647f9",
+          "receipt_sha256": "98ce390ea5817ec6c0e1465fb29b3edfd2f63081897d6d25f08ee449e8dae2f8",
+          "status": "completed"
+        },
+        {
+          "actual_microusd": 11,
+          "attempt": 0,
+          "body_sha256": "f16eb39e7412e9289dbc67994b4b17142ee498e5f061f085544362e2d648f978",
+          "logical_id": "ba5cecd868723d7b8aef5d7d716498f075396837e225cca1fcc5559e08d523b5",
+          "operation_id": "dba949fd4e37c5d371dcd819a1ff291972e7f22a315dff254ab4bdfffc7c6b7c",
+          "receipt_sha256": "3cf053a0db5a979fc5b0d3de03abfdccc1d5c181a877ab2b3494ebb2b557af29",
+          "status": "completed"
+        },
+        {
+          "actual_microusd": 11,
+          "attempt": 0,
+          "body_sha256": "f16eb39e7412e9289dbc67994b4b17142ee498e5f061f085544362e2d648f978",
+          "logical_id": "9b4d7ed13794812ef012972a6cbdccbc09994e46b8550410474009a6b0dc9302",
+          "operation_id": "dc8e562218272aaeb25409cc760a33a755ab835ee38e320abb50b20a675ae133",
+          "receipt_sha256": "727a3b6488ce2f191f9cc189a21e4a8fa68c567982584444aaedba83067acffb",
+          "status": "completed"
+        },
+        {
+          "actual_microusd": 11,
+          "attempt": 0,
+          "body_sha256": "f16eb39e7412e9289dbc67994b4b17142ee498e5f061f085544362e2d648f978",
+          "logical_id": "061721725d287c2fb8ee233f56020c128de45ff9d7747e7c8a9db6ae1f23a2fa",
+          "operation_id": "e784f6860e1ad0b1206c35de247d399fd486473d2d5a01a7ca278f933d09f5c7",
+          "receipt_sha256": "00c3dfaed26cac6bf074edd77724b16763d67b315582a27dddbfe1b872926e57",
+          "status": "completed"
+        }
+      ],
+      "run_id": "cd6244696e65420eb377cf700cccb701",
+      "totals": {
+        "committed_microusd": 220,
+        "operation_count": 20,
+        "reserved_microusd": 0,
+        "spent_microusd": 220
+      }
+    },
+    {
+      "authorization_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\authorization.sqlite3",
+      "index": 1,
+      "ledger_sha256": "63d32a9eafb3a09b58d75768588221aaa610c49b1fd656dfda29e771ddbaea3f",
+      "manifest_file_sha256": "54c7484c411453bd86e129bd1f4621cf5021f9807a86aa0d096145fd6ebb77ee",
+      "manifest_sha256": "431d65b912aab8fb54360f01f8c5aa590ef7b1a0280ecc9e3219260f9de197f3",
+      "operations": [
+        {
+          "actual_microusd": 5,
+          "attempt": 0,
+          "body_sha256": "161077a3dd206db20932c1c844807146d3763d834bb17ccbeb6007f924cf859c",
+          "logical_id": "ed79ad2dadc1b2ab7d67276ac20b8bfe1012f0b978f4e83492558124542a85b8",
+          "operation_id": "da088d50bfc5ecf14b8c4f8c3feee9fff97e298ab71445b74bc2379ebc3397d0",
+          "receipt_sha256": "023cf9c031879485849d378a8000bae6517da26ec2f74bb200b49b298116629b",
+          "status": "completed"
+        },
+        {
+          "actual_microusd": 5,
+          "attempt": 0,
+          "body_sha256": "140598b4ed561b3ec3da8f1289ea35457808a3495bd85e60ff193a04927e0e64",
+          "logical_id": "a9fe42e596dd8273853fc0c3a795814d591d7b63df90785b308290473173c5cf",
+          "operation_id": "eaf1977935bf5cb9e942c1f81f238c24bb263ce1e0fe39dda5860fa6cd148475",
+          "receipt_sha256": "47ae0135bf18b84cc759fd705013daa0eca0a6d73eadf2f9767730cc62953dd2",
+          "status": "completed"
+        }
+      ],
+      "run_id": "460c05b972ad4b96935c0a9e0d0d0c58",
+      "totals": {
+        "committed_microusd": 10,
+        "operation_count": 2,
+        "reserved_microusd": 0,
+        "spent_microusd": 10
+      }
+    },
+    {
+      "authorization_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\authorization.sqlite3",
+      "index": 2,
+      "ledger_sha256": "6242dc1bc286dbe21ad3b6ec45a837c02553fd8d38e18034e04e2a3c4a1b4719",
+      "manifest_file_sha256": "543bc361f697036ab878b7b109b71c46d98ac837056fe7d0bcddb13a6c681fc7",
+      "manifest_sha256": "6e68247a3246e888789dddc0e7053d761a9ce5aed24f610cfd413d88a53fd3bd",
+      "operations": [
+        {
+          "actual_microusd": 5,
+          "attempt": 0,
+          "body_sha256": "92775b44b1a1c2abb5d1542cf3a3307367d6527da7d61e0d320f4bdddc6d1409",
+          "logical_id": "3ab3ffd3c38edfab87675f3dc7ea658600ee744027627bc12ad3319feb9f8f35",
+          "operation_id": "727846a8ba519c57e6dd768945c20ab1dbfa6fbc6f84f58e78c8dc6c44d65c80",
+          "receipt_sha256": "5e930130c16c3997ec474879798bdf673b667b11a2bfe9f8229fd9e5707616e0",
+          "status": "completed"
+        },
+        {
+          "actual_microusd": 5,
+          "attempt": 0,
+          "body_sha256": "126977ead12e17c0a747572ed7aaf303989232319b03b27dff8baa2a7a50b065",
+          "logical_id": "618fcddbe5a94f6a50a545f7748bbc6054ad8c3e0ac8f11694d667abebea6e01",
+          "operation_id": "8139a46b46badc20fb1b27c68076aaef9ee7de390f3dd25ca31a15b03cc6e4b5",
+          "receipt_sha256": "71cea9f51b629657aca3261f02f1c6958047060f8277adb70d12dd0cf1d4a05b",
+          "status": "completed"
+        },
+        {
+          "actual_microusd": 5,
+          "attempt": 0,
+          "body_sha256": "92775b44b1a1c2abb5d1542cf3a3307367d6527da7d61e0d320f4bdddc6d1409",
+          "logical_id": "592a40e5cdb8e89dc55f478e92c4089d392766ac8e2effae8f59b789016b9b04",
+          "operation_id": "abf53a9ee81d98f554625fb299b7b7ba58e15324a56fb0f00e5db5622b2d05e6",
+          "receipt_sha256": "d38b6791d0c563844b07f76ca95690d98574641eb7098ceb6a0c194b8bd3072b",
+          "status": "completed"
+        },
+        {
+          "actual_microusd": 5,
+          "attempt": 0,
+          "body_sha256": "126977ead12e17c0a747572ed7aaf303989232319b03b27dff8baa2a7a50b065",
+          "logical_id": "bfe187be3f482812ed8dc5a3909efd289c1d89ac8b424f9a8d0f835fb4f9e0d4",
+          "operation_id": "d28bd8628b7269bcf80587ea62a7e24c41c83b94ab13c4afe4f0d603be824a26",
+          "receipt_sha256": "11a6bd6e09b85342c01579eae69e42eeab8a71274d04e59818af9aa3f22af561",
+          "status": "completed"
+        }
+      ],
+      "run_id": "9dd6ca59c179406fa4e391ec416cd5c2",
+      "totals": {
+        "committed_microusd": 20,
+        "operation_count": 4,
+        "reserved_microusd": 0,
+        "spent_microusd": 20
+      }
+    },
+    {
+      "authorization_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\authorization.sqlite3",
+      "index": 3,
+      "ledger_sha256": "a2b6f55cc024a138bdd3ab143c6d0b08a508dfb7cbfd4670b7f56c4f15ebc0ee",
+      "manifest_file_sha256": "66662ce6a7c17bf8756f6329562534856daa65525b16886728b6e112765cfa3e",
+      "manifest_sha256": "552732e21ca2a426424aa9f9e3dee44a9a930457025c794ae8b16ccef005ce5f",
+      "operations": [],
+      "run_id": "d4a1d0a290b14f198fdd918e19a9c347",
+      "totals": {
+        "committed_microusd": 0,
+        "operation_count": 0,
+        "reserved_microusd": 0,
+        "spent_microusd": 0
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "all_three_artifact_families_equal": true,
+      "baseline_files": {
+        "generations.jsonl": "91c736e67a3a0eab1bcde27a733f8bca31224ca3fb333ecf034f621dcc74f3bd",
+        "v1.1/partitions.jsonl": "c2533e156f933a3661f394134195b14a0fd96e2612baa05e275b2a4314902286"
+      },
+      "body_multiset": {
+        "140598b4ed561b3ec3da8f1289ea35457808a3495bd85e60ff193a04927e0e64": 1,
+        "161077a3dd206db20932c1c844807146d3763d834bb17ccbeb6007f924cf859c": 1
+      },
+      "required": "v1.1/partitions.jsonl",
+      "stage": 1
+    },
+    {
+      "all_three_artifact_families_equal": true,
+      "baseline_files": {
+        "v1.1/partitions.jsonl": "c2533e156f933a3661f394134195b14a0fd96e2612baa05e275b2a4314902286",
+        "v1.1/scores.jsonl": "28bf3cdd60357f3de0a09d56aca604c5145eaf89046886214ea833c4522bfc69"
+      },
+      "body_multiset": {
+        "126977ead12e17c0a747572ed7aaf303989232319b03b27dff8baa2a7a50b065": 2,
+        "92775b44b1a1c2abb5d1542cf3a3307367d6527da7d61e0d320f4bdddc6d1409": 2
+      },
+      "required": "v1.1/scores.jsonl",
+      "stage": 2
+    },
+    {
+      "all_three_artifact_families_equal": true,
+      "baseline_files": {
+        "v1.1/scores.jsonl": "28bf3cdd60357f3de0a09d56aca604c5145eaf89046886214ea833c4522bfc69",
+        "v1.1/summary.json": "18e6115bcac97aa9cbb05cf0bc6817a7da9b3cc26029210c36fcbbc0605dab5a"
+      },
+      "body_multiset": {},
+      "required": "v1.1/summary.json",
+      "stage": 3
+    }
+  ],
+  "current_authorization": {
+    "authorization_id": "baseline-proof",
+    "available_microusd": 9999690,
+    "budget_microusd": 10000000,
+    "committed_microusd": 310,
+    "event_count": 173,
+    "max_calls": 50,
+    "operation_count": 38,
+    "remaining_calls": 12,
+    "reserved_microusd": 0,
+    "runs": [
+      {
+        "active": false,
+        "committed_microusd": 20,
+        "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-1\\owners\\2",
+        "historical": 0,
+        "historical_ledger_sha256": null,
+        "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-1\\owners\\2\\operations.sqlite3",
+        "manifest_sha256": "11d42107d774059a31cdddfdd8b4d648d09466ef097a93ddb01106097c052719",
+        "operation_count": 4,
+        "reserved_microusd": 0,
+        "run_id": "0888c0f0f19347b9a8cd5a6159baf640",
+        "runtime_sha256": "d5da6b6c6a05ed8330f8d21b3af77c31acd8475aeb57c7acb995a0995a6cc8ec",
+        "spent_microusd": 20
+      },
+      {
+        "active": false,
+        "committed_microusd": 10,
+        "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-0\\owners\\1",
+        "historical": 0,
+        "historical_ledger_sha256": null,
+        "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-0\\owners\\1\\operations.sqlite3",
+        "manifest_sha256": "53194034d71938a199f696a960a3b46f83a12491c2f87b4095c59ca51f3689d7",
+        "operation_count": 2,
+        "reserved_microusd": 0,
+        "run_id": "0bc75ed1d0084e048eaebdcc70983eb9",
+        "runtime_sha256": "056c8cacf3b2743e64e8b21e4a73323bc56b4b76548d50bd0bfdcef902c01b65",
+        "spent_microusd": 10
+      },
+      {
+        "active": false,
+        "committed_microusd": 0,
+        "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-1\\owners\\3",
+        "historical": 0,
+        "historical_ledger_sha256": null,
+        "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-1\\owners\\3\\operations.sqlite3",
+        "manifest_sha256": "43c847c39bfd3f626041a5734b2f65bf27f677aae8ddcdeaca8a0a0db3d06635",
+        "operation_count": 0,
+        "reserved_microusd": 0,
+        "run_id": "31ab60d714154b05abf513474836b310",
+        "runtime_sha256": "7213d26bb0459b9fb24b6f443d85df1282a0a20a3c38a553c40a39e27a715f52",
+        "spent_microusd": 0
+      },
+      {
+        "active": false,
+        "committed_microusd": 10,
+        "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\1",
+        "historical": 0,
+        "historical_ledger_sha256": null,
+        "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\1\\operations.sqlite3",
+        "manifest_sha256": "431d65b912aab8fb54360f01f8c5aa590ef7b1a0280ecc9e3219260f9de197f3",
+        "operation_count": 2,
+        "reserved_microusd": 0,
+        "run_id": "460c05b972ad4b96935c0a9e0d0d0c58",
+        "runtime_sha256": "3862f2a568657a48ced0e3973783db3d4db8e7a8d98394411456484eac92b409",
+        "spent_microusd": 10
+      },
+      {
+        "active": false,
+        "committed_microusd": 10,
+        "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-1\\owners\\1",
+        "historical": 0,
+        "historical_ledger_sha256": null,
+        "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-1\\owners\\1\\operations.sqlite3",
+        "manifest_sha256": "8b094237bce18d7ad2fa715c2cbcb86401d0eb0d5d40a042314650f2648a40d5",
+        "operation_count": 2,
+        "reserved_microusd": 0,
+        "run_id": "7e4d8cd154b942e99273f7184e541a59",
+        "runtime_sha256": "b69f066da30d605ee6d65304c8f415454ab6e4e1ace572866a4b9723d8906c52",
+        "spent_microusd": 10
+      },
+      {
+        "active": false,
+        "committed_microusd": 20,
+        "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\2",
+        "historical": 0,
+        "historical_ledger_sha256": null,
+        "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\2\\operations.sqlite3",
+        "manifest_sha256": "6e68247a3246e888789dddc0e7053d761a9ce5aed24f610cfd413d88a53fd3bd",
+        "operation_count": 4,
+        "reserved_microusd": 0,
+        "run_id": "9dd6ca59c179406fa4e391ec416cd5c2",
+        "runtime_sha256": "b303c383156e4af0d385566253c73d30830aad43815030aa8d1580814c16c2c3",
+        "spent_microusd": 20
+      },
+      {
+        "active": false,
+        "committed_microusd": 20,
+        "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-0\\owners\\2",
+        "historical": 0,
+        "historical_ledger_sha256": null,
+        "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-0\\owners\\2\\operations.sqlite3",
+        "manifest_sha256": "1ff6b133582ec630d56c1afdfc9c556a110fd3e6eb67a2d06b13a49aff7746a6",
+        "operation_count": 4,
+        "reserved_microusd": 0,
+        "run_id": "a6d73483957149f18bfef23f47e47a0c",
+        "runtime_sha256": "ce3978887068f240b6391b763e53c489467fd6d609b0d7ea50df77c11c5d0033",
+        "spent_microusd": 20
+      },
+      {
+        "active": false,
+        "committed_microusd": 220,
+        "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\0",
+        "historical": 0,
+        "historical_ledger_sha256": null,
+        "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\0\\operations.sqlite3",
+        "manifest_sha256": "4d0c9e40b8ccaf94d9209fd1355bec45099af84d11c4059c5b71c23af42e1f8b",
+        "operation_count": 20,
+        "reserved_microusd": 0,
+        "run_id": "cd6244696e65420eb377cf700cccb701",
+        "runtime_sha256": "0a7383aadcba45e423b68d304932062fd1c0023fd8232b775a7e055160f10e89",
+        "spent_microusd": 220
+      },
+      {
+        "active": false,
+        "committed_microusd": 0,
+        "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\3",
+        "historical": 0,
+        "historical_ledger_sha256": null,
+        "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\3\\operations.sqlite3",
+        "manifest_sha256": "552732e21ca2a426424aa9f9e3dee44a9a930457025c794ae8b16ccef005ce5f",
+        "operation_count": 0,
+        "reserved_microusd": 0,
+        "run_id": "d4a1d0a290b14f198fdd918e19a9c347",
+        "runtime_sha256": "527ec60978d4743382a5c22b4ece9005b36c3c03440c786acba3ca9cdf76c587",
+        "spent_microusd": 0
+      },
+      {
+        "active": false,
+        "committed_microusd": 0,
+        "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-0\\owners\\3",
+        "historical": 0,
+        "historical_ledger_sha256": null,
+        "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-0\\owners\\3\\operations.sqlite3",
+        "manifest_sha256": "afa030153898e967d9449fe1b1da189123c62d6a3c3138b8542d13a113e31305",
+        "operation_count": 0,
+        "reserved_microusd": 0,
+        "run_id": "d652746a890f413db58ba142fcb01ddd",
+        "runtime_sha256": "57c62960477bead5fcf84a5694fb64b59120cc2461c8b0cdaad8c1d29c9531dc",
+        "spent_microusd": 0
+      }
+    ],
+    "scope": "offline actual baseline proof; fake HTTPS only",
+    "spent_microusd": 310,
+    "terms_sha256": "cf062e09d4eb1545283c812361c27429c0268d88f863ef00533ad4bce7efe98a"
+  },
+  "direct_captures": 0,
+  "distinct_owner_count": 10,
+  "fixture_directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2",
+  "fixture_entry_override": "trusted host run_evaluation only; no science/agent rewrite",
+  "format": "buddha.review.pol02-native-evaluation.v1",
+  "helper_consumed_sha256": "d4eb66a332e6d54365cd30be0ea1189492e1742327dc828c5d60855b1fb4c1ea",
+  "host_agent_execution": false,
+  "host_official_execution": false,
+  "keyless_replay": {
+    "all_files_unchanged": true,
+    "new_sends": 0,
+    "new_workers": 0
+  },
+  "limits": [
+    "two selected curated tasks and synthetic replies; no judge accuracy claim",
+    "fixed canned replies; no statistical independence or model-truth claim",
+    "native JSONL normalized by typed-ID row order only; answer order preserved",
+    "host dispatch shim only; science and seed source execute solely in containers",
+    "actual containers trust the reviewed local daemon, kernel and sealed images",
+    "receipt interruption is cooperative; hard-kill recovery is not claimed"
+  ],
+  "literal_outputs": [
+    {
+      "answers": [
+        "poor duplicate",
+        "poor duplicate",
+        "[empty]",
+        "[refused]",
+        " unfinished JSON {",
+        "poor duplicate",
+        "poor duplicate",
+        "[empty]",
+        "[refused]",
+        " unfinished JSON {"
+      ],
+      "task_id": "curated-9"
+    },
+    {
+      "answers": [
+        "poor duplicate",
+        "poor duplicate",
+        "[empty]",
+        "[refused]",
+        " unfinished JSON {",
+        "poor duplicate",
+        "poor duplicate",
+        "[empty]",
+        "[refused]",
+        " unfinished JSON {"
+      ],
+      "task_id": "curated-0"
+    }
+  ],
+  "native_answers_sha256": "91c736e67a3a0eab1bcde27a733f8bca31224ca3fb333ecf034f621dcc74f3bd",
+  "occasions": [
+    {
+      "completion_authorization": {
+        "authorization_id": "baseline-proof",
+        "available_microusd": 9999720,
+        "budget_microusd": 10000000,
+        "committed_microusd": 280,
+        "event_count": 143,
+        "max_calls": 50,
+        "operation_count": 32,
+        "remaining_calls": 18,
+        "reserved_microusd": 0,
+        "runs": [
+          {
+            "active": false,
+            "committed_microusd": 10,
+            "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-0\\owners\\1",
+            "historical": 0,
+            "historical_ledger_sha256": null,
+            "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-0\\owners\\1\\operations.sqlite3",
+            "manifest_sha256": "53194034d71938a199f696a960a3b46f83a12491c2f87b4095c59ca51f3689d7",
+            "operation_count": 2,
+            "reserved_microusd": 0,
+            "run_id": "0bc75ed1d0084e048eaebdcc70983eb9",
+            "runtime_sha256": "056c8cacf3b2743e64e8b21e4a73323bc56b4b76548d50bd0bfdcef902c01b65",
+            "spent_microusd": 10
+          },
+          {
+            "active": false,
+            "committed_microusd": 10,
+            "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\1",
+            "historical": 0,
+            "historical_ledger_sha256": null,
+            "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\1\\operations.sqlite3",
+            "manifest_sha256": "431d65b912aab8fb54360f01f8c5aa590ef7b1a0280ecc9e3219260f9de197f3",
+            "operation_count": 2,
+            "reserved_microusd": 0,
+            "run_id": "460c05b972ad4b96935c0a9e0d0d0c58",
+            "runtime_sha256": "3862f2a568657a48ced0e3973783db3d4db8e7a8d98394411456484eac92b409",
+            "spent_microusd": 10
+          },
+          {
+            "active": false,
+            "committed_microusd": 20,
+            "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\2",
+            "historical": 0,
+            "historical_ledger_sha256": null,
+            "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\2\\operations.sqlite3",
+            "manifest_sha256": "6e68247a3246e888789dddc0e7053d761a9ce5aed24f610cfd413d88a53fd3bd",
+            "operation_count": 4,
+            "reserved_microusd": 0,
+            "run_id": "9dd6ca59c179406fa4e391ec416cd5c2",
+            "runtime_sha256": "b303c383156e4af0d385566253c73d30830aad43815030aa8d1580814c16c2c3",
+            "spent_microusd": 20
+          },
+          {
+            "active": false,
+            "committed_microusd": 20,
+            "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-0\\owners\\2",
+            "historical": 0,
+            "historical_ledger_sha256": null,
+            "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-0\\owners\\2\\operations.sqlite3",
+            "manifest_sha256": "1ff6b133582ec630d56c1afdfc9c556a110fd3e6eb67a2d06b13a49aff7746a6",
+            "operation_count": 4,
+            "reserved_microusd": 0,
+            "run_id": "a6d73483957149f18bfef23f47e47a0c",
+            "runtime_sha256": "ce3978887068f240b6391b763e53c489467fd6d609b0d7ea50df77c11c5d0033",
+            "spent_microusd": 20
+          },
+          {
+            "active": false,
+            "committed_microusd": 220,
+            "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\0",
+            "historical": 0,
+            "historical_ledger_sha256": null,
+            "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\0\\operations.sqlite3",
+            "manifest_sha256": "4d0c9e40b8ccaf94d9209fd1355bec45099af84d11c4059c5b71c23af42e1f8b",
+            "operation_count": 20,
+            "reserved_microusd": 0,
+            "run_id": "cd6244696e65420eb377cf700cccb701",
+            "runtime_sha256": "0a7383aadcba45e423b68d304932062fd1c0023fd8232b775a7e055160f10e89",
+            "spent_microusd": 220
+          },
+          {
+            "active": false,
+            "committed_microusd": 0,
+            "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\3",
+            "historical": 0,
+            "historical_ledger_sha256": null,
+            "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\3\\operations.sqlite3",
+            "manifest_sha256": "552732e21ca2a426424aa9f9e3dee44a9a930457025c794ae8b16ccef005ce5f",
+            "operation_count": 0,
+            "reserved_microusd": 0,
+            "run_id": "d4a1d0a290b14f198fdd918e19a9c347",
+            "runtime_sha256": "527ec60978d4743382a5c22b4ece9005b36c3c03440c786acba3ca9cdf76c587",
+            "spent_microusd": 0
+          },
+          {
+            "active": false,
+            "committed_microusd": 0,
+            "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-0\\owners\\3",
+            "historical": 0,
+            "historical_ledger_sha256": null,
+            "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-0\\owners\\3\\operations.sqlite3",
+            "manifest_sha256": "afa030153898e967d9449fe1b1da189123c62d6a3c3138b8542d13a113e31305",
+            "operation_count": 0,
+            "reserved_microusd": 0,
+            "run_id": "d652746a890f413db58ba142fcb01ddd",
+            "runtime_sha256": "57c62960477bead5fcf84a5694fb64b59120cc2461c8b0cdaad8c1d29c9531dc",
+            "spent_microusd": 0
+          }
+        ],
+        "scope": "offline actual baseline proof; fake HTTPS only",
+        "spent_microusd": 280,
+        "terms_sha256": "cf062e09d4eb1545283c812361c27429c0268d88f863ef00533ad4bce7efe98a"
+      },
+      "current_authorization": {
+        "authorization_id": "baseline-proof",
+        "available_microusd": 9999720,
+        "budget_microusd": 10000000,
+        "committed_microusd": 280,
+        "event_count": 143,
+        "max_calls": 50,
+        "operation_count": 32,
+        "remaining_calls": 18,
+        "reserved_microusd": 0,
+        "runs": [
+          {
+            "active": false,
+            "committed_microusd": 10,
+            "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-0\\owners\\1",
+            "historical": 0,
+            "historical_ledger_sha256": null,
+            "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-0\\owners\\1\\operations.sqlite3",
+            "manifest_sha256": "53194034d71938a199f696a960a3b46f83a12491c2f87b4095c59ca51f3689d7",
+            "operation_count": 2,
+            "reserved_microusd": 0,
+            "run_id": "0bc75ed1d0084e048eaebdcc70983eb9",
+            "runtime_sha256": "056c8cacf3b2743e64e8b21e4a73323bc56b4b76548d50bd0bfdcef902c01b65",
+            "spent_microusd": 10
+          },
+          {
+            "active": false,
+            "committed_microusd": 10,
+            "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\1",
+            "historical": 0,
+            "historical_ledger_sha256": null,
+            "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\1\\operations.sqlite3",
+            "manifest_sha256": "431d65b912aab8fb54360f01f8c5aa590ef7b1a0280ecc9e3219260f9de197f3",
+            "operation_count": 2,
+            "reserved_microusd": 0,
+            "run_id": "460c05b972ad4b96935c0a9e0d0d0c58",
+            "runtime_sha256": "3862f2a568657a48ced0e3973783db3d4db8e7a8d98394411456484eac92b409",
+            "spent_microusd": 10
+          },
+          {
+            "active": false,
+            "committed_microusd": 20,
+            "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\2",
+            "historical": 0,
+            "historical_ledger_sha256": null,
+            "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\2\\operations.sqlite3",
+            "manifest_sha256": "6e68247a3246e888789dddc0e7053d761a9ce5aed24f610cfd413d88a53fd3bd",
+            "operation_count": 4,
+            "reserved_microusd": 0,
+            "run_id": "9dd6ca59c179406fa4e391ec416cd5c2",
+            "runtime_sha256": "b303c383156e4af0d385566253c73d30830aad43815030aa8d1580814c16c2c3",
+            "spent_microusd": 20
+          },
+          {
+            "active": false,
+            "committed_microusd": 20,
+            "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-0\\owners\\2",
+            "historical": 0,
+            "historical_ledger_sha256": null,
+            "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-0\\owners\\2\\operations.sqlite3",
+            "manifest_sha256": "1ff6b133582ec630d56c1afdfc9c556a110fd3e6eb67a2d06b13a49aff7746a6",
+            "operation_count": 4,
+            "reserved_microusd": 0,
+            "run_id": "a6d73483957149f18bfef23f47e47a0c",
+            "runtime_sha256": "ce3978887068f240b6391b763e53c489467fd6d609b0d7ea50df77c11c5d0033",
+            "spent_microusd": 20
+          },
+          {
+            "active": false,
+            "committed_microusd": 220,
+            "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\0",
+            "historical": 0,
+            "historical_ledger_sha256": null,
+            "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\0\\operations.sqlite3",
+            "manifest_sha256": "4d0c9e40b8ccaf94d9209fd1355bec45099af84d11c4059c5b71c23af42e1f8b",
+            "operation_count": 20,
+            "reserved_microusd": 0,
+            "run_id": "cd6244696e65420eb377cf700cccb701",
+            "runtime_sha256": "0a7383aadcba45e423b68d304932062fd1c0023fd8232b775a7e055160f10e89",
+            "spent_microusd": 220
+          },
+          {
+            "active": false,
+            "committed_microusd": 0,
+            "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\3",
+            "historical": 0,
+            "historical_ledger_sha256": null,
+            "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\3\\operations.sqlite3",
+            "manifest_sha256": "552732e21ca2a426424aa9f9e3dee44a9a930457025c794ae8b16ccef005ce5f",
+            "operation_count": 0,
+            "reserved_microusd": 0,
+            "run_id": "d4a1d0a290b14f198fdd918e19a9c347",
+            "runtime_sha256": "527ec60978d4743382a5c22b4ece9005b36c3c03440c786acba3ca9cdf76c587",
+            "spent_microusd": 0
+          },
+          {
+            "active": false,
+            "committed_microusd": 0,
+            "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-0\\owners\\3",
+            "historical": 0,
+            "historical_ledger_sha256": null,
+            "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-0\\owners\\3\\operations.sqlite3",
+            "manifest_sha256": "afa030153898e967d9449fe1b1da189123c62d6a3c3138b8542d13a113e31305",
+            "operation_count": 0,
+            "reserved_microusd": 0,
+            "run_id": "d652746a890f413db58ba142fcb01ddd",
+            "runtime_sha256": "57c62960477bead5fcf84a5694fb64b59120cc2461c8b0cdaad8c1d29c9531dc",
+            "spent_microusd": 0
+          }
+        ],
+        "scope": "offline actual baseline proof; fake HTTPS only",
+        "spent_microusd": 280,
+        "terms_sha256": "cf062e09d4eb1545283c812361c27429c0268d88f863ef00533ad4bce7efe98a"
+      },
+      "new_sends": [
+        {
+          "body_sha256": "92775b44b1a1c2abb5d1542cf3a3307367d6527da7d61e0d320f4bdddc6d1409",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "user-agent": "AsyncOpenAI/Python 1.107.0",
+            "x-stainless-arch": "x64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-helper-method": "chat.completions.parse",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Linux",
+            "x-stainless-package-version": "1.107.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12"
+          },
+          "model": "test-model",
+          "provider": "openai",
+          "stage": "score"
+        },
+        {
+          "body_sha256": "92775b44b1a1c2abb5d1542cf3a3307367d6527da7d61e0d320f4bdddc6d1409",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "user-agent": "AsyncOpenAI/Python 1.107.0",
+            "x-stainless-arch": "x64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-helper-method": "chat.completions.parse",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Linux",
+            "x-stainless-package-version": "1.107.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12"
+          },
+          "model": "test-model",
+          "provider": "openai",
+          "stage": "score"
+        },
+        {
+          "body_sha256": "126977ead12e17c0a747572ed7aaf303989232319b03b27dff8baa2a7a50b065",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "user-agent": "AsyncOpenAI/Python 1.107.0",
+            "x-stainless-arch": "x64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-helper-method": "chat.completions.parse",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Linux",
+            "x-stainless-package-version": "1.107.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12"
+          },
+          "model": "test-model",
+          "provider": "openai",
+          "stage": "score"
+        }
+      ],
+      "owned_containers_after": [
+        "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+      ],
+      "owned_containers_before": [
+        "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+      ],
+      "owners": [
+        {
+          "authorization_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\authorization.sqlite3",
+          "index": 1,
+          "ledger_sha256": "0214335e65d12d246c09bf864da4b519214221299f816eb26c32e12e1cd75a60",
+          "manifest_file_sha256": "f777864a4785d9f785694defae5b29273f78ce4e60b9c19475ac9d47ed14c0ab",
+          "manifest_sha256": "53194034d71938a199f696a960a3b46f83a12491c2f87b4095c59ca51f3689d7",
+          "operations": [
+            {
+              "actual_microusd": 5,
+              "attempt": 0,
+              "body_sha256": "140598b4ed561b3ec3da8f1289ea35457808a3495bd85e60ff193a04927e0e64",
+              "logical_id": "a9fe42e596dd8273853fc0c3a795814d591d7b63df90785b308290473173c5cf",
+              "operation_id": "0a5ab887b6c2a7f8c55e0871776475a521dea0d8dd1dec2f1c75d858c9a25d2e",
+              "receipt_sha256": "5f5af1bbbf683635ac2fd8afa829fbd3a32f99c848a514a92f00173f823d6dde",
+              "status": "completed"
+            },
+            {
+              "actual_microusd": 5,
+              "attempt": 0,
+              "body_sha256": "161077a3dd206db20932c1c844807146d3763d834bb17ccbeb6007f924cf859c",
+              "logical_id": "ed79ad2dadc1b2ab7d67276ac20b8bfe1012f0b978f4e83492558124542a85b8",
+              "operation_id": "676fdbf517b6fb952d2908328e83f8f25470de9a839f5755267e5194400d6d6d",
+              "receipt_sha256": "45c46b4dbdd8e5631d48a459b670befd58c86a41c9be6eb76f91aeac48a62b42",
+              "status": "completed"
+            }
+          ],
+          "run_id": "0bc75ed1d0084e048eaebdcc70983eb9",
+          "totals": {
+            "committed_microusd": 10,
+            "operation_count": 2,
+            "reserved_microusd": 0,
+            "spent_microusd": 10
+          }
+        },
+        {
+          "authorization_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\authorization.sqlite3",
+          "index": 2,
+          "ledger_sha256": "b5a3c2efaf43214f9ecf3ae09ffaf3a59aa0f8adc518f3c78f8b2f6b669fd70b",
+          "manifest_file_sha256": "38aa2e208e25b8645358bc68287591941123b5c988db3651cc090a4230cf1966",
+          "manifest_sha256": "1ff6b133582ec630d56c1afdfc9c556a110fd3e6eb67a2d06b13a49aff7746a6",
+          "operations": [
+            {
+              "actual_microusd": 5,
+              "attempt": 0,
+              "body_sha256": "92775b44b1a1c2abb5d1542cf3a3307367d6527da7d61e0d320f4bdddc6d1409",
+              "logical_id": "3ab3ffd3c38edfab87675f3dc7ea658600ee744027627bc12ad3319feb9f8f35",
+              "operation_id": "588f83ec1e7c4f5b14348ba92479a74868ed409cad6ff884cefecaf4bac04f63",
+              "receipt_sha256": "35ef1d1111c270cc3bf4ea3ae56a09d55e7150baf059ccbebb207395ff56e3c0",
+              "status": "completed"
+            },
+            {
+              "actual_microusd": 5,
+              "attempt": 0,
+              "body_sha256": "92775b44b1a1c2abb5d1542cf3a3307367d6527da7d61e0d320f4bdddc6d1409",
+              "logical_id": "592a40e5cdb8e89dc55f478e92c4089d392766ac8e2effae8f59b789016b9b04",
+              "operation_id": "6d16c5a22109b01e5217091523caad2db3d4f0683b5a66e3a2dd08ec7759f4bf",
+              "receipt_sha256": "848c08206722e20cac348bde6fe7f0aa5d9dbb79750a908797a907b0dee8e469",
+              "status": "completed"
+            },
+            {
+              "actual_microusd": 5,
+              "attempt": 0,
+              "body_sha256": "126977ead12e17c0a747572ed7aaf303989232319b03b27dff8baa2a7a50b065",
+              "logical_id": "bfe187be3f482812ed8dc5a3909efd289c1d89ac8b424f9a8d0f835fb4f9e0d4",
+              "operation_id": "95e93200f9596b9b1a41a209a197136b979ab3f3ab3f3a6eb6eac0b5782f6f27",
+              "receipt_sha256": "52fec13f44174d457a173dbd701e7b78d1d9e11009188b1d5f235195400ce21d",
+              "status": "completed"
+            },
+            {
+              "actual_microusd": 5,
+              "attempt": 0,
+              "body_sha256": "126977ead12e17c0a747572ed7aaf303989232319b03b27dff8baa2a7a50b065",
+              "logical_id": "618fcddbe5a94f6a50a545f7748bbc6054ad8c3e0ac8f11694d667abebea6e01",
+              "operation_id": "a4aae269c5eaa8fa2478676eba068c2bcb30a320a5b5644097806f57d67386da",
+              "receipt_sha256": "f3efd2fe121d72482a34bed53d3d3e7e8376c2a05819ec15211f5f62d82fe88a",
+              "status": "completed"
+            }
+          ],
+          "run_id": "a6d73483957149f18bfef23f47e47a0c",
+          "totals": {
+            "committed_microusd": 20,
+            "operation_count": 4,
+            "reserved_microusd": 0,
+            "spent_microusd": 20
+          }
+        },
+        {
+          "authorization_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\authorization.sqlite3",
+          "index": 3,
+          "ledger_sha256": "5b1648839ef74ccbec14ea72da7d48b3d5ecee34823ce330cd9f9b2924f0ca20",
+          "manifest_file_sha256": "7c367c044d21d7a57f9b4ae3ae308031d2a67bde969488f865bf5fd9785bcead",
+          "manifest_sha256": "afa030153898e967d9449fe1b1da189123c62d6a3c3138b8542d13a113e31305",
+          "operations": [],
+          "run_id": "d652746a890f413db58ba142fcb01ddd",
+          "totals": {
+            "committed_microusd": 0,
+            "operation_count": 0,
+            "reserved_microusd": 0,
+            "spent_microusd": 0
+          }
+        }
+      ],
+      "prefix": {
+        "authority": {
+          "authorization_id": "baseline-proof",
+          "available_microusd": 9999735,
+          "budget_microusd": 10000000,
+          "committed_microusd": 265,
+          "event_count": 128,
+          "max_calls": 50,
+          "operation_count": 29,
+          "remaining_calls": 21,
+          "reserved_microusd": 0,
+          "runs": [
+            {
+              "active": false,
+              "committed_microusd": 10,
+              "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-0\\owners\\1",
+              "historical": 0,
+              "historical_ledger_sha256": null,
+              "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-0\\owners\\1\\operations.sqlite3",
+              "manifest_sha256": "53194034d71938a199f696a960a3b46f83a12491c2f87b4095c59ca51f3689d7",
+              "operation_count": 2,
+              "reserved_microusd": 0,
+              "run_id": "0bc75ed1d0084e048eaebdcc70983eb9",
+              "runtime_sha256": "056c8cacf3b2743e64e8b21e4a73323bc56b4b76548d50bd0bfdcef902c01b65",
+              "spent_microusd": 10
+            },
+            {
+              "active": false,
+              "committed_microusd": 10,
+              "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\1",
+              "historical": 0,
+              "historical_ledger_sha256": null,
+              "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\1\\operations.sqlite3",
+              "manifest_sha256": "431d65b912aab8fb54360f01f8c5aa590ef7b1a0280ecc9e3219260f9de197f3",
+              "operation_count": 2,
+              "reserved_microusd": 0,
+              "run_id": "460c05b972ad4b96935c0a9e0d0d0c58",
+              "runtime_sha256": "3862f2a568657a48ced0e3973783db3d4db8e7a8d98394411456484eac92b409",
+              "spent_microusd": 10
+            },
+            {
+              "active": false,
+              "committed_microusd": 20,
+              "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\2",
+              "historical": 0,
+              "historical_ledger_sha256": null,
+              "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\2\\operations.sqlite3",
+              "manifest_sha256": "6e68247a3246e888789dddc0e7053d761a9ce5aed24f610cfd413d88a53fd3bd",
+              "operation_count": 4,
+              "reserved_microusd": 0,
+              "run_id": "9dd6ca59c179406fa4e391ec416cd5c2",
+              "runtime_sha256": "b303c383156e4af0d385566253c73d30830aad43815030aa8d1580814c16c2c3",
+              "spent_microusd": 20
+            },
+            {
+              "active": true,
+              "committed_microusd": 5,
+              "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-0\\owners\\2",
+              "historical": 0,
+              "historical_ledger_sha256": null,
+              "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-0\\owners\\2\\operations.sqlite3",
+              "manifest_sha256": "1ff6b133582ec630d56c1afdfc9c556a110fd3e6eb67a2d06b13a49aff7746a6",
+              "operation_count": 1,
+              "reserved_microusd": 0,
+              "run_id": "a6d73483957149f18bfef23f47e47a0c",
+              "runtime_sha256": "ce3978887068f240b6391b763e53c489467fd6d609b0d7ea50df77c11c5d0033",
+              "spent_microusd": 5
+            },
+            {
+              "active": false,
+              "committed_microusd": 220,
+              "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\0",
+              "historical": 0,
+              "historical_ledger_sha256": null,
+              "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\0\\operations.sqlite3",
+              "manifest_sha256": "4d0c9e40b8ccaf94d9209fd1355bec45099af84d11c4059c5b71c23af42e1f8b",
+              "operation_count": 20,
+              "reserved_microusd": 0,
+              "run_id": "cd6244696e65420eb377cf700cccb701",
+              "runtime_sha256": "0a7383aadcba45e423b68d304932062fd1c0023fd8232b775a7e055160f10e89",
+              "spent_microusd": 220
+            },
+            {
+              "active": false,
+              "committed_microusd": 0,
+              "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\3",
+              "historical": 0,
+              "historical_ledger_sha256": null,
+              "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\3\\operations.sqlite3",
+              "manifest_sha256": "552732e21ca2a426424aa9f9e3dee44a9a930457025c794ae8b16ccef005ce5f",
+              "operation_count": 0,
+              "reserved_microusd": 0,
+              "run_id": "d4a1d0a290b14f198fdd918e19a9c347",
+              "runtime_sha256": "527ec60978d4743382a5c22b4ece9005b36c3c03440c786acba3ca9cdf76c587",
+              "spent_microusd": 0
+            }
+          ],
+          "scope": "offline actual baseline proof; fake HTTPS only",
+          "spent_microusd": 265,
+          "terms_sha256": "cf062e09d4eb1545283c812361c27429c0268d88f863ef00533ad4bce7efe98a"
+        },
+        "interrupted": true,
+        "keyless": false,
+        "new_sends": [
+          {
+            "body_sha256": "140598b4ed561b3ec3da8f1289ea35457808a3495bd85e60ff193a04927e0e64",
+            "headers": {
+              "accept": "application/json",
+              "accept-encoding": "gzip, deflate",
+              "content-type": "application/json",
+              "user-agent": "AsyncOpenAI/Python 1.107.0",
+              "x-stainless-arch": "x64",
+              "x-stainless-async": "async:asyncio",
+              "x-stainless-helper-method": "chat.completions.parse",
+              "x-stainless-lang": "python",
+              "x-stainless-os": "Linux",
+              "x-stainless-package-version": "1.107.0",
+              "x-stainless-read-timeout": "600",
+              "x-stainless-retry-count": "0",
+              "x-stainless-runtime": "CPython",
+              "x-stainless-runtime-version": "3.13.12"
+            },
+            "model": "test-model",
+            "provider": "openai",
+            "stage": "partition"
+          },
+          {
+            "body_sha256": "161077a3dd206db20932c1c844807146d3763d834bb17ccbeb6007f924cf859c",
+            "headers": {
+              "accept": "application/json",
+              "accept-encoding": "gzip, deflate",
+              "content-type": "application/json",
+              "user-agent": "AsyncOpenAI/Python 1.107.0",
+              "x-stainless-arch": "x64",
+              "x-stainless-async": "async:asyncio",
+              "x-stainless-helper-method": "chat.completions.parse",
+              "x-stainless-lang": "python",
+              "x-stainless-os": "Linux",
+              "x-stainless-package-version": "1.107.0",
+              "x-stainless-read-timeout": "600",
+              "x-stainless-retry-count": "0",
+              "x-stainless-runtime": "CPython",
+              "x-stainless-runtime-version": "3.13.12"
+            },
+            "model": "test-model",
+            "provider": "openai",
+            "stage": "partition"
+          },
+          {
+            "body_sha256": "126977ead12e17c0a747572ed7aaf303989232319b03b27dff8baa2a7a50b065",
+            "headers": {
+              "accept": "application/json",
+              "accept-encoding": "gzip, deflate",
+              "content-type": "application/json",
+              "user-agent": "AsyncOpenAI/Python 1.107.0",
+              "x-stainless-arch": "x64",
+              "x-stainless-async": "async:asyncio",
+              "x-stainless-helper-method": "chat.completions.parse",
+              "x-stainless-lang": "python",
+              "x-stainless-os": "Linux",
+              "x-stainless-package-version": "1.107.0",
+              "x-stainless-read-timeout": "600",
+              "x-stainless-retry-count": "0",
+              "x-stainless-runtime": "CPython",
+              "x-stainless-runtime-version": "3.13.12"
+            },
+            "model": "test-model",
+            "provider": "openai",
+            "stage": "score"
+          }
+        ],
+        "observations": {
+          "0.json": "406ed2bec7dc9788bc1cf9a8db69f8416ec0d1d4704cabf53cb880f58df5fec2"
+        },
+        "owned_containers_after": [
+          "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+        ],
+        "owned_containers_before": [
+          "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+        ],
+        "owners": [
+          {
+            "authorization_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\authorization.sqlite3",
+            "index": 1,
+            "ledger_sha256": "0214335e65d12d246c09bf864da4b519214221299f816eb26c32e12e1cd75a60",
+            "manifest_file_sha256": "f777864a4785d9f785694defae5b29273f78ce4e60b9c19475ac9d47ed14c0ab",
+            "manifest_sha256": "53194034d71938a199f696a960a3b46f83a12491c2f87b4095c59ca51f3689d7",
+            "operations": [
+              {
+                "actual_microusd": 5,
+                "attempt": 0,
+                "body_sha256": "140598b4ed561b3ec3da8f1289ea35457808a3495bd85e60ff193a04927e0e64",
+                "logical_id": "a9fe42e596dd8273853fc0c3a795814d591d7b63df90785b308290473173c5cf",
+                "operation_id": "0a5ab887b6c2a7f8c55e0871776475a521dea0d8dd1dec2f1c75d858c9a25d2e",
+                "receipt_sha256": "5f5af1bbbf683635ac2fd8afa829fbd3a32f99c848a514a92f00173f823d6dde",
+                "status": "completed"
+              },
+              {
+                "actual_microusd": 5,
+                "attempt": 0,
+                "body_sha256": "161077a3dd206db20932c1c844807146d3763d834bb17ccbeb6007f924cf859c",
+                "logical_id": "ed79ad2dadc1b2ab7d67276ac20b8bfe1012f0b978f4e83492558124542a85b8",
+                "operation_id": "676fdbf517b6fb952d2908328e83f8f25470de9a839f5755267e5194400d6d6d",
+                "receipt_sha256": "45c46b4dbdd8e5631d48a459b670befd58c86a41c9be6eb76f91aeac48a62b42",
+                "status": "completed"
+              }
+            ],
+            "run_id": "0bc75ed1d0084e048eaebdcc70983eb9",
+            "totals": {
+              "committed_microusd": 10,
+              "operation_count": 2,
+              "reserved_microusd": 0,
+              "spent_microusd": 10
+            }
+          },
+          {
+            "authorization_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\authorization.sqlite3",
+            "index": 2,
+            "ledger_sha256": "6fec593c8c6f1d79964c620bb42f15acf2d3013357232452d486a9f527b5a03f",
+            "manifest_file_sha256": "38aa2e208e25b8645358bc68287591941123b5c988db3651cc090a4230cf1966",
+            "manifest_sha256": "1ff6b133582ec630d56c1afdfc9c556a110fd3e6eb67a2d06b13a49aff7746a6",
+            "operations": [
+              {
+                "actual_microusd": 5,
+                "attempt": 0,
+                "body_sha256": "126977ead12e17c0a747572ed7aaf303989232319b03b27dff8baa2a7a50b065",
+                "logical_id": "618fcddbe5a94f6a50a545f7748bbc6054ad8c3e0ac8f11694d667abebea6e01",
+                "operation_id": "a4aae269c5eaa8fa2478676eba068c2bcb30a320a5b5644097806f57d67386da",
+                "receipt_sha256": "f3efd2fe121d72482a34bed53d3d3e7e8376c2a05819ec15211f5f62d82fe88a",
+                "status": "completed"
+              }
+            ],
+            "run_id": "a6d73483957149f18bfef23f47e47a0c",
+            "totals": {
+              "committed_microusd": 5,
+              "operation_count": 1,
+              "reserved_microusd": 0,
+              "spent_microusd": 5
+            }
+          }
+        ],
+        "report": null
+      },
+      "report_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-0\\report.json",
+      "report_sha256": "9e540452a0298036b02e27315c28d0d424eb30daa433546699971fc3d5c19aac",
+      "status": "complete"
+    },
+    {
+      "completion_authorization": {
+        "authorization_id": "baseline-proof",
+        "available_microusd": 9999690,
+        "budget_microusd": 10000000,
+        "committed_microusd": 310,
+        "event_count": 173,
+        "max_calls": 50,
+        "operation_count": 38,
+        "remaining_calls": 12,
+        "reserved_microusd": 0,
+        "runs": [
+          {
+            "active": false,
+            "committed_microusd": 20,
+            "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-1\\owners\\2",
+            "historical": 0,
+            "historical_ledger_sha256": null,
+            "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-1\\owners\\2\\operations.sqlite3",
+            "manifest_sha256": "11d42107d774059a31cdddfdd8b4d648d09466ef097a93ddb01106097c052719",
+            "operation_count": 4,
+            "reserved_microusd": 0,
+            "run_id": "0888c0f0f19347b9a8cd5a6159baf640",
+            "runtime_sha256": "d5da6b6c6a05ed8330f8d21b3af77c31acd8475aeb57c7acb995a0995a6cc8ec",
+            "spent_microusd": 20
+          },
+          {
+            "active": false,
+            "committed_microusd": 10,
+            "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-0\\owners\\1",
+            "historical": 0,
+            "historical_ledger_sha256": null,
+            "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-0\\owners\\1\\operations.sqlite3",
+            "manifest_sha256": "53194034d71938a199f696a960a3b46f83a12491c2f87b4095c59ca51f3689d7",
+            "operation_count": 2,
+            "reserved_microusd": 0,
+            "run_id": "0bc75ed1d0084e048eaebdcc70983eb9",
+            "runtime_sha256": "056c8cacf3b2743e64e8b21e4a73323bc56b4b76548d50bd0bfdcef902c01b65",
+            "spent_microusd": 10
+          },
+          {
+            "active": false,
+            "committed_microusd": 0,
+            "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-1\\owners\\3",
+            "historical": 0,
+            "historical_ledger_sha256": null,
+            "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-1\\owners\\3\\operations.sqlite3",
+            "manifest_sha256": "43c847c39bfd3f626041a5734b2f65bf27f677aae8ddcdeaca8a0a0db3d06635",
+            "operation_count": 0,
+            "reserved_microusd": 0,
+            "run_id": "31ab60d714154b05abf513474836b310",
+            "runtime_sha256": "7213d26bb0459b9fb24b6f443d85df1282a0a20a3c38a553c40a39e27a715f52",
+            "spent_microusd": 0
+          },
+          {
+            "active": false,
+            "committed_microusd": 10,
+            "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\1",
+            "historical": 0,
+            "historical_ledger_sha256": null,
+            "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\1\\operations.sqlite3",
+            "manifest_sha256": "431d65b912aab8fb54360f01f8c5aa590ef7b1a0280ecc9e3219260f9de197f3",
+            "operation_count": 2,
+            "reserved_microusd": 0,
+            "run_id": "460c05b972ad4b96935c0a9e0d0d0c58",
+            "runtime_sha256": "3862f2a568657a48ced0e3973783db3d4db8e7a8d98394411456484eac92b409",
+            "spent_microusd": 10
+          },
+          {
+            "active": false,
+            "committed_microusd": 10,
+            "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-1\\owners\\1",
+            "historical": 0,
+            "historical_ledger_sha256": null,
+            "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-1\\owners\\1\\operations.sqlite3",
+            "manifest_sha256": "8b094237bce18d7ad2fa715c2cbcb86401d0eb0d5d40a042314650f2648a40d5",
+            "operation_count": 2,
+            "reserved_microusd": 0,
+            "run_id": "7e4d8cd154b942e99273f7184e541a59",
+            "runtime_sha256": "b69f066da30d605ee6d65304c8f415454ab6e4e1ace572866a4b9723d8906c52",
+            "spent_microusd": 10
+          },
+          {
+            "active": false,
+            "committed_microusd": 20,
+            "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\2",
+            "historical": 0,
+            "historical_ledger_sha256": null,
+            "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\2\\operations.sqlite3",
+            "manifest_sha256": "6e68247a3246e888789dddc0e7053d761a9ce5aed24f610cfd413d88a53fd3bd",
+            "operation_count": 4,
+            "reserved_microusd": 0,
+            "run_id": "9dd6ca59c179406fa4e391ec416cd5c2",
+            "runtime_sha256": "b303c383156e4af0d385566253c73d30830aad43815030aa8d1580814c16c2c3",
+            "spent_microusd": 20
+          },
+          {
+            "active": false,
+            "committed_microusd": 20,
+            "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-0\\owners\\2",
+            "historical": 0,
+            "historical_ledger_sha256": null,
+            "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-0\\owners\\2\\operations.sqlite3",
+            "manifest_sha256": "1ff6b133582ec630d56c1afdfc9c556a110fd3e6eb67a2d06b13a49aff7746a6",
+            "operation_count": 4,
+            "reserved_microusd": 0,
+            "run_id": "a6d73483957149f18bfef23f47e47a0c",
+            "runtime_sha256": "ce3978887068f240b6391b763e53c489467fd6d609b0d7ea50df77c11c5d0033",
+            "spent_microusd": 20
+          },
+          {
+            "active": false,
+            "committed_microusd": 220,
+            "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\0",
+            "historical": 0,
+            "historical_ledger_sha256": null,
+            "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\0\\operations.sqlite3",
+            "manifest_sha256": "4d0c9e40b8ccaf94d9209fd1355bec45099af84d11c4059c5b71c23af42e1f8b",
+            "operation_count": 20,
+            "reserved_microusd": 0,
+            "run_id": "cd6244696e65420eb377cf700cccb701",
+            "runtime_sha256": "0a7383aadcba45e423b68d304932062fd1c0023fd8232b775a7e055160f10e89",
+            "spent_microusd": 220
+          },
+          {
+            "active": false,
+            "committed_microusd": 0,
+            "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\3",
+            "historical": 0,
+            "historical_ledger_sha256": null,
+            "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\3\\operations.sqlite3",
+            "manifest_sha256": "552732e21ca2a426424aa9f9e3dee44a9a930457025c794ae8b16ccef005ce5f",
+            "operation_count": 0,
+            "reserved_microusd": 0,
+            "run_id": "d4a1d0a290b14f198fdd918e19a9c347",
+            "runtime_sha256": "527ec60978d4743382a5c22b4ece9005b36c3c03440c786acba3ca9cdf76c587",
+            "spent_microusd": 0
+          },
+          {
+            "active": false,
+            "committed_microusd": 0,
+            "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-0\\owners\\3",
+            "historical": 0,
+            "historical_ledger_sha256": null,
+            "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-0\\owners\\3\\operations.sqlite3",
+            "manifest_sha256": "afa030153898e967d9449fe1b1da189123c62d6a3c3138b8542d13a113e31305",
+            "operation_count": 0,
+            "reserved_microusd": 0,
+            "run_id": "d652746a890f413db58ba142fcb01ddd",
+            "runtime_sha256": "57c62960477bead5fcf84a5694fb64b59120cc2461c8b0cdaad8c1d29c9531dc",
+            "spent_microusd": 0
+          }
+        ],
+        "scope": "offline actual baseline proof; fake HTTPS only",
+        "spent_microusd": 310,
+        "terms_sha256": "cf062e09d4eb1545283c812361c27429c0268d88f863ef00533ad4bce7efe98a"
+      },
+      "current_authorization": {
+        "authorization_id": "baseline-proof",
+        "available_microusd": 9999690,
+        "budget_microusd": 10000000,
+        "committed_microusd": 310,
+        "event_count": 173,
+        "max_calls": 50,
+        "operation_count": 38,
+        "remaining_calls": 12,
+        "reserved_microusd": 0,
+        "runs": [
+          {
+            "active": false,
+            "committed_microusd": 20,
+            "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-1\\owners\\2",
+            "historical": 0,
+            "historical_ledger_sha256": null,
+            "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-1\\owners\\2\\operations.sqlite3",
+            "manifest_sha256": "11d42107d774059a31cdddfdd8b4d648d09466ef097a93ddb01106097c052719",
+            "operation_count": 4,
+            "reserved_microusd": 0,
+            "run_id": "0888c0f0f19347b9a8cd5a6159baf640",
+            "runtime_sha256": "d5da6b6c6a05ed8330f8d21b3af77c31acd8475aeb57c7acb995a0995a6cc8ec",
+            "spent_microusd": 20
+          },
+          {
+            "active": false,
+            "committed_microusd": 10,
+            "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-0\\owners\\1",
+            "historical": 0,
+            "historical_ledger_sha256": null,
+            "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-0\\owners\\1\\operations.sqlite3",
+            "manifest_sha256": "53194034d71938a199f696a960a3b46f83a12491c2f87b4095c59ca51f3689d7",
+            "operation_count": 2,
+            "reserved_microusd": 0,
+            "run_id": "0bc75ed1d0084e048eaebdcc70983eb9",
+            "runtime_sha256": "056c8cacf3b2743e64e8b21e4a73323bc56b4b76548d50bd0bfdcef902c01b65",
+            "spent_microusd": 10
+          },
+          {
+            "active": false,
+            "committed_microusd": 0,
+            "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-1\\owners\\3",
+            "historical": 0,
+            "historical_ledger_sha256": null,
+            "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-1\\owners\\3\\operations.sqlite3",
+            "manifest_sha256": "43c847c39bfd3f626041a5734b2f65bf27f677aae8ddcdeaca8a0a0db3d06635",
+            "operation_count": 0,
+            "reserved_microusd": 0,
+            "run_id": "31ab60d714154b05abf513474836b310",
+            "runtime_sha256": "7213d26bb0459b9fb24b6f443d85df1282a0a20a3c38a553c40a39e27a715f52",
+            "spent_microusd": 0
+          },
+          {
+            "active": false,
+            "committed_microusd": 10,
+            "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\1",
+            "historical": 0,
+            "historical_ledger_sha256": null,
+            "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\1\\operations.sqlite3",
+            "manifest_sha256": "431d65b912aab8fb54360f01f8c5aa590ef7b1a0280ecc9e3219260f9de197f3",
+            "operation_count": 2,
+            "reserved_microusd": 0,
+            "run_id": "460c05b972ad4b96935c0a9e0d0d0c58",
+            "runtime_sha256": "3862f2a568657a48ced0e3973783db3d4db8e7a8d98394411456484eac92b409",
+            "spent_microusd": 10
+          },
+          {
+            "active": false,
+            "committed_microusd": 10,
+            "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-1\\owners\\1",
+            "historical": 0,
+            "historical_ledger_sha256": null,
+            "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-1\\owners\\1\\operations.sqlite3",
+            "manifest_sha256": "8b094237bce18d7ad2fa715c2cbcb86401d0eb0d5d40a042314650f2648a40d5",
+            "operation_count": 2,
+            "reserved_microusd": 0,
+            "run_id": "7e4d8cd154b942e99273f7184e541a59",
+            "runtime_sha256": "b69f066da30d605ee6d65304c8f415454ab6e4e1ace572866a4b9723d8906c52",
+            "spent_microusd": 10
+          },
+          {
+            "active": false,
+            "committed_microusd": 20,
+            "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\2",
+            "historical": 0,
+            "historical_ledger_sha256": null,
+            "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\2\\operations.sqlite3",
+            "manifest_sha256": "6e68247a3246e888789dddc0e7053d761a9ce5aed24f610cfd413d88a53fd3bd",
+            "operation_count": 4,
+            "reserved_microusd": 0,
+            "run_id": "9dd6ca59c179406fa4e391ec416cd5c2",
+            "runtime_sha256": "b303c383156e4af0d385566253c73d30830aad43815030aa8d1580814c16c2c3",
+            "spent_microusd": 20
+          },
+          {
+            "active": false,
+            "committed_microusd": 20,
+            "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-0\\owners\\2",
+            "historical": 0,
+            "historical_ledger_sha256": null,
+            "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-0\\owners\\2\\operations.sqlite3",
+            "manifest_sha256": "1ff6b133582ec630d56c1afdfc9c556a110fd3e6eb67a2d06b13a49aff7746a6",
+            "operation_count": 4,
+            "reserved_microusd": 0,
+            "run_id": "a6d73483957149f18bfef23f47e47a0c",
+            "runtime_sha256": "ce3978887068f240b6391b763e53c489467fd6d609b0d7ea50df77c11c5d0033",
+            "spent_microusd": 20
+          },
+          {
+            "active": false,
+            "committed_microusd": 220,
+            "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\0",
+            "historical": 0,
+            "historical_ledger_sha256": null,
+            "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\0\\operations.sqlite3",
+            "manifest_sha256": "4d0c9e40b8ccaf94d9209fd1355bec45099af84d11c4059c5b71c23af42e1f8b",
+            "operation_count": 20,
+            "reserved_microusd": 0,
+            "run_id": "cd6244696e65420eb377cf700cccb701",
+            "runtime_sha256": "0a7383aadcba45e423b68d304932062fd1c0023fd8232b775a7e055160f10e89",
+            "spent_microusd": 220
+          },
+          {
+            "active": false,
+            "committed_microusd": 0,
+            "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\3",
+            "historical": 0,
+            "historical_ledger_sha256": null,
+            "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline\\owners\\3\\operations.sqlite3",
+            "manifest_sha256": "552732e21ca2a426424aa9f9e3dee44a9a930457025c794ae8b16ccef005ce5f",
+            "operation_count": 0,
+            "reserved_microusd": 0,
+            "run_id": "d4a1d0a290b14f198fdd918e19a9c347",
+            "runtime_sha256": "527ec60978d4743382a5c22b4ece9005b36c3c03440c786acba3ca9cdf76c587",
+            "spent_microusd": 0
+          },
+          {
+            "active": false,
+            "committed_microusd": 0,
+            "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-0\\owners\\3",
+            "historical": 0,
+            "historical_ledger_sha256": null,
+            "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-0\\owners\\3\\operations.sqlite3",
+            "manifest_sha256": "afa030153898e967d9449fe1b1da189123c62d6a3c3138b8542d13a113e31305",
+            "operation_count": 0,
+            "reserved_microusd": 0,
+            "run_id": "d652746a890f413db58ba142fcb01ddd",
+            "runtime_sha256": "57c62960477bead5fcf84a5694fb64b59120cc2461c8b0cdaad8c1d29c9531dc",
+            "spent_microusd": 0
+          }
+        ],
+        "scope": "offline actual baseline proof; fake HTTPS only",
+        "spent_microusd": 310,
+        "terms_sha256": "cf062e09d4eb1545283c812361c27429c0268d88f863ef00533ad4bce7efe98a"
+      },
+      "new_sends": [
+        {
+          "body_sha256": "140598b4ed561b3ec3da8f1289ea35457808a3495bd85e60ff193a04927e0e64",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "user-agent": "AsyncOpenAI/Python 1.107.0",
+            "x-stainless-arch": "x64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-helper-method": "chat.completions.parse",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Linux",
+            "x-stainless-package-version": "1.107.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12"
+          },
+          "model": "test-model",
+          "provider": "openai",
+          "stage": "partition"
+        },
+        {
+          "body_sha256": "161077a3dd206db20932c1c844807146d3763d834bb17ccbeb6007f924cf859c",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "user-agent": "AsyncOpenAI/Python 1.107.0",
+            "x-stainless-arch": "x64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-helper-method": "chat.completions.parse",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Linux",
+            "x-stainless-package-version": "1.107.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12"
+          },
+          "model": "test-model",
+          "provider": "openai",
+          "stage": "partition"
+        },
+        {
+          "body_sha256": "126977ead12e17c0a747572ed7aaf303989232319b03b27dff8baa2a7a50b065",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "user-agent": "AsyncOpenAI/Python 1.107.0",
+            "x-stainless-arch": "x64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-helper-method": "chat.completions.parse",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Linux",
+            "x-stainless-package-version": "1.107.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12"
+          },
+          "model": "test-model",
+          "provider": "openai",
+          "stage": "score"
+        },
+        {
+          "body_sha256": "126977ead12e17c0a747572ed7aaf303989232319b03b27dff8baa2a7a50b065",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "user-agent": "AsyncOpenAI/Python 1.107.0",
+            "x-stainless-arch": "x64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-helper-method": "chat.completions.parse",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Linux",
+            "x-stainless-package-version": "1.107.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12"
+          },
+          "model": "test-model",
+          "provider": "openai",
+          "stage": "score"
+        },
+        {
+          "body_sha256": "92775b44b1a1c2abb5d1542cf3a3307367d6527da7d61e0d320f4bdddc6d1409",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "user-agent": "AsyncOpenAI/Python 1.107.0",
+            "x-stainless-arch": "x64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-helper-method": "chat.completions.parse",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Linux",
+            "x-stainless-package-version": "1.107.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12"
+          },
+          "model": "test-model",
+          "provider": "openai",
+          "stage": "score"
+        },
+        {
+          "body_sha256": "92775b44b1a1c2abb5d1542cf3a3307367d6527da7d61e0d320f4bdddc6d1409",
+          "headers": {
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "content-type": "application/json",
+            "user-agent": "AsyncOpenAI/Python 1.107.0",
+            "x-stainless-arch": "x64",
+            "x-stainless-async": "async:asyncio",
+            "x-stainless-helper-method": "chat.completions.parse",
+            "x-stainless-lang": "python",
+            "x-stainless-os": "Linux",
+            "x-stainless-package-version": "1.107.0",
+            "x-stainless-read-timeout": "600",
+            "x-stainless-retry-count": "0",
+            "x-stainless-runtime": "CPython",
+            "x-stainless-runtime-version": "3.13.12"
+          },
+          "model": "test-model",
+          "provider": "openai",
+          "stage": "score"
+        }
+      ],
+      "owned_containers_after": [
+        "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+      ],
+      "owned_containers_before": [
+        "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+      ],
+      "owners": [
+        {
+          "authorization_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\authorization.sqlite3",
+          "index": 1,
+          "ledger_sha256": "ca93ae17ad56805b811a89522e051e10ffc09f31c2b784bcd81ba691b43bae88",
+          "manifest_file_sha256": "d93805b849eb9cbf52ed6a2a4001ea4a846a506c7eebd19114032761dfda7bf4",
+          "manifest_sha256": "8b094237bce18d7ad2fa715c2cbcb86401d0eb0d5d40a042314650f2648a40d5",
+          "operations": [
+            {
+              "actual_microusd": 5,
+              "attempt": 0,
+              "body_sha256": "161077a3dd206db20932c1c844807146d3763d834bb17ccbeb6007f924cf859c",
+              "logical_id": "ed79ad2dadc1b2ab7d67276ac20b8bfe1012f0b978f4e83492558124542a85b8",
+              "operation_id": "bbc420c63286896303df852477f7caeb1ee5a1cc64560542b14864b29cedb384",
+              "receipt_sha256": "4db38be39d7caea4e106c75ddbe1a9d2e6c4081691fe4069584da52d3aa55706",
+              "status": "completed"
+            },
+            {
+              "actual_microusd": 5,
+              "attempt": 0,
+              "body_sha256": "140598b4ed561b3ec3da8f1289ea35457808a3495bd85e60ff193a04927e0e64",
+              "logical_id": "a9fe42e596dd8273853fc0c3a795814d591d7b63df90785b308290473173c5cf",
+              "operation_id": "ef3c03c754d96c338677899abdd87169e56409630dc6b94cc2a238fe3d4f63f2",
+              "receipt_sha256": "ffa6af1052f3c36c50b3866a38080d9d374eb657a5d800a59655495c22b9772f",
+              "status": "completed"
+            }
+          ],
+          "run_id": "7e4d8cd154b942e99273f7184e541a59",
+          "totals": {
+            "committed_microusd": 10,
+            "operation_count": 2,
+            "reserved_microusd": 0,
+            "spent_microusd": 10
+          }
+        },
+        {
+          "authorization_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\authorization.sqlite3",
+          "index": 2,
+          "ledger_sha256": "71586a7d7a3e34a26cd0b6ebf9d14ba0ece0be1e0f9a1e826d4996957915b6c3",
+          "manifest_file_sha256": "3f2470d7685bc2a33339dcfb25ccc714ae976e0f5df92d630d9c950f9e159c73",
+          "manifest_sha256": "11d42107d774059a31cdddfdd8b4d648d09466ef097a93ddb01106097c052719",
+          "operations": [
+            {
+              "actual_microusd": 5,
+              "attempt": 0,
+              "body_sha256": "126977ead12e17c0a747572ed7aaf303989232319b03b27dff8baa2a7a50b065",
+              "logical_id": "618fcddbe5a94f6a50a545f7748bbc6054ad8c3e0ac8f11694d667abebea6e01",
+              "operation_id": "4b559d8f5e69f825c70dbec8c7d6185cb18e87ac39851964c0ba0cf3ecc28bcc",
+              "receipt_sha256": "484be4e28958230108f5e4050807d10cd9f47dfdb86c8ec87a64b0565fdd5891",
+              "status": "completed"
+            },
+            {
+              "actual_microusd": 5,
+              "attempt": 0,
+              "body_sha256": "126977ead12e17c0a747572ed7aaf303989232319b03b27dff8baa2a7a50b065",
+              "logical_id": "bfe187be3f482812ed8dc5a3909efd289c1d89ac8b424f9a8d0f835fb4f9e0d4",
+              "operation_id": "ab59e0ca5a8f7d9ba2d215df9ff0a17174ac6e877eb403da9f0fac7ef7903fea",
+              "receipt_sha256": "2d81b7a45e12791ae42990115d0738cae4bce0b57d3853edcbe076fd22db3eba",
+              "status": "completed"
+            },
+            {
+              "actual_microusd": 5,
+              "attempt": 0,
+              "body_sha256": "92775b44b1a1c2abb5d1542cf3a3307367d6527da7d61e0d320f4bdddc6d1409",
+              "logical_id": "3ab3ffd3c38edfab87675f3dc7ea658600ee744027627bc12ad3319feb9f8f35",
+              "operation_id": "be4a4c265f1e4e6031e5b90061afab585ebea057f0c400c4d295b6a5b99b637c",
+              "receipt_sha256": "fcebaa1155a811f8a424c1b6f992119ce75bf451db076ea7e2a19d0cb77fe29e",
+              "status": "completed"
+            },
+            {
+              "actual_microusd": 5,
+              "attempt": 0,
+              "body_sha256": "92775b44b1a1c2abb5d1542cf3a3307367d6527da7d61e0d320f4bdddc6d1409",
+              "logical_id": "592a40e5cdb8e89dc55f478e92c4089d392766ac8e2effae8f59b789016b9b04",
+              "operation_id": "e4a90573752f49c5efb445a9927a55a3f8e038f64628212b480165fce4b3b8f8",
+              "receipt_sha256": "c81f5f2b8e61c32997b9f70f7eefc3e2a97e09f47b68140d2ee6703f09e37ecd",
+              "status": "completed"
+            }
+          ],
+          "run_id": "0888c0f0f19347b9a8cd5a6159baf640",
+          "totals": {
+            "committed_microusd": 20,
+            "operation_count": 4,
+            "reserved_microusd": 0,
+            "spent_microusd": 20
+          }
+        },
+        {
+          "authorization_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\authorization.sqlite3",
+          "index": 3,
+          "ledger_sha256": "85d0b95704425aebac58dd2253d8324f313e2026d75981492819420247c36fd0",
+          "manifest_file_sha256": "8a2a99d9f22eab1368f4a92fdcc05eb3db9ff3b263b9cf49d8b63a1300f4006e",
+          "manifest_sha256": "43c847c39bfd3f626041a5734b2f65bf27f677aae8ddcdeaca8a0a0db3d06635",
+          "operations": [],
+          "run_id": "31ab60d714154b05abf513474836b310",
+          "totals": {
+            "committed_microusd": 0,
+            "operation_count": 0,
+            "reserved_microusd": 0,
+            "spent_microusd": 0
+          }
+        }
+      ],
+      "prefix": null,
+      "report_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\evaluation-1\\report.json",
+      "report_sha256": "8353e96873ba39003361a7e75d080937f80847fefb5bdb821529ccc9d6584026",
+      "status": "complete"
+    }
+  ],
+  "original_baseline_inventory": {
+    "attempts/0-0/answers.json": "a4f4621c3029c628f3ebe4fd86753022ee6187063f74e332cb6acfab959940a8",
+    "attempts/0-0/partial.jsonl": "a9baba86596672d08c07115a070f11f428233285d91f590236f83e892f8265c0",
+    "attempts/0-0/report.json": "df0448be9c5a99499cedab2c1ed5e580a51760cf8e7f864142de43f207e2a019",
+    "attempts/1-0/artifacts/generations.jsonl": "91c736e67a3a0eab1bcde27a733f8bca31224ca3fb333ecf034f621dcc74f3bd",
+    "attempts/1-0/artifacts/v1.1/partitions.jsonl": "c2533e156f933a3661f394134195b14a0fd96e2612baa05e275b2a4314902286",
+    "attempts/1-0/imports-final.json": "fb941f9e3f0e5b7f5ff991df9e865015cbc6d52d5ee15dbff8f309c414e28b2b",
+    "attempts/1-0/imports-ready.json": "f636e03db9cacaf578534c9899485c77ec52d7f778b85d16aadb239e390edaca",
+    "attempts/1-0/report.json": "d3d69dd80307a1e9a152b602e486fbf5337e5c0de2a41cbea2ef55345a4b091e",
+    "attempts/2-0/artifacts/v1.1/partitions.jsonl": "c2533e156f933a3661f394134195b14a0fd96e2612baa05e275b2a4314902286",
+    "attempts/2-0/artifacts/v1.1/scores.jsonl": "28bf3cdd60357f3de0a09d56aca604c5145eaf89046886214ea833c4522bfc69",
+    "attempts/2-0/imports-final.json": "236d13f715c0dd6fe448af389951272595dadd2bbc20dfc653ccd2a1d7da27e4",
+    "attempts/2-0/imports-ready.json": "77d9008ba3016f06f28fba6e8c3e515e1ba699a5605c196a8c86cf69b13e23cd",
+    "attempts/2-0/report.json": "1c01cbea1c498bf80999262e4dab7dada15762ffb60f5cb7b3a9c396e768e4d6",
+    "attempts/3-0/artifacts/v1.1/scores.jsonl": "28bf3cdd60357f3de0a09d56aca604c5145eaf89046886214ea833c4522bfc69",
+    "attempts/3-0/artifacts/v1.1/summary.json": "18e6115bcac97aa9cbb05cf0bc6817a7da9b3cc26029210c36fcbbc0605dab5a",
+    "attempts/3-0/imports-final.json": "7afa13e2ff6f2007ca6696710de6ca3064c06a1d044a101151ac0fe2933e47d4",
+    "attempts/3-0/imports-ready.json": "dc03ddf03bf68339257c57f817fc80f4c696db6545088a9313293176402f52df",
+    "attempts/3-0/report.json": "f8b59884a961f6d429c610d857fad4f8ce376a97d50939514b35791c7c96cc52",
+    "command-1.json": "e292d712a7de9881391c67f9ce6ac990c62ff00c8af3e47b5bae63e50c0d3364",
+    "command-2.json": "0ea4b8d0b2a04682757245ca6e308b55ede1603fb3e542281892401e1b122feb",
+    "command-3.json": "128c3e8bed8f5d5a33b72e35eb6a8eff818d627565663dd33d5e010daed72eee",
+    "completed/0.json": "8ad90f98723394f668c40e297f6139e831a681ff3b0a357a14b4fdd1f56ea1e7",
+    "completed/1.json": "106f24c839771d692f4cc09ba7e7e013fcf78b8c422afea1cd8518b21a5be426",
+    "completed/2.json": "5bfb45ead3362854d6342c7a308e87bd245e5034872471a72a1009e1f74222e2",
+    "completed/3.json": "cfb2f90dc4b40ce10de151db577d8540295f2bddd552a7d1f0cf6553e880279f",
+    "context.json": "caea8274b612e4c2c2a227f0ed29aac88aac900cba8b6a046387ca3a0aaaf5b2",
+    "native-answers.jsonl": "91c736e67a3a0eab1bcde27a733f8bca31224ca3fb333ecf034f621dcc74f3bd",
+    "owners/0/manifest.json": "f37fc2dd8528b9e6ca5456976ecac49db3006bf9477b373d6a79cb0cff8f5a98",
+    "owners/0/operations.sqlite3": "319f258eb704d64573134625bc3049687558b2d9fe124b293442d870889fd802",
+    "owners/1/manifest.json": "54c7484c411453bd86e129bd1f4621cf5021f9807a86aa0d096145fd6ebb77ee",
+    "owners/1/operations.sqlite3": "63d32a9eafb3a09b58d75768588221aaa610c49b1fd656dfda29e771ddbaea3f",
+    "owners/2/manifest.json": "543bc361f697036ab878b7b109b71c46d98ac837056fe7d0bcddb13a6c681fc7",
+    "owners/2/operations.sqlite3": "6242dc1bc286dbe21ad3b6ec45a837c02553fd8d38e18034e04e2a3c4a1b4719",
+    "owners/3/manifest.json": "66662ce6a7c17bf8756f6329562534856daa65525b16886728b6e112765cfa3e",
+    "owners/3/operations.sqlite3": "a2b6f55cc024a138bdd3ab143c6d0b08a508dfb7cbfd4670b7f56c4f15ebc0ee",
+    "report.json": "a7bb0379659e1c5c837234af59f4206e85b873dac139730cbbdd165b7807f25f",
+    "staging/1/0.bin": "91c736e67a3a0eab1bcde27a733f8bca31224ca3fb333ecf034f621dcc74f3bd",
+    "staging/2/0.bin": "c2533e156f933a3661f394134195b14a0fd96e2612baa05e275b2a4314902286",
+    "staging/3/0.bin": "28bf3cdd60357f3de0a09d56aca604c5145eaf89046886214ea833c4522bfc69"
+  },
+  "original_generation_controls": {
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline.json": "6edc7eaf7e0f57577c306a3e388f948b7ea7cec8d1b93831f053a6f548207eab",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\generation.json": "82351914f6de6006eb348f6b64a3b449a46f323583b23f41a4c03abef94aac7e",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\tasks.json": "afa9acc5f5102240970f0685c80d785daa982e4071fe9b2ce4f755ac9d07daa3"
+  },
+  "owned_containers_after": [
+    "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+  ],
+  "owned_containers_before": [
+    "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+  ],
+  "source_generation": {
+    "baseline_directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-native-evaluation-t2y41tu2\\baseline",
+    "owner_ledger_sha256": "319f258eb704d64573134625bc3049687558b2d9fe124b293442d870889fd802",
+    "owner_manifest_sha256": "4d0c9e40b8ccaf94d9209fd1355bec45099af84d11c4059c5b71c23af42e1f8b",
+    "stage_seal_sha256": "8ad90f98723394f668c40e297f6139e831a681ff3b0a357a14b4fdd1f56ea1e7"
+  },
+  "source_preserved": true,
+  "source_sha256": {
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\agents\\frozen_seed.py": "2b87bfe0d3c97ee45db2d45260985ffe0234eca93967f4689fb7c59f82603921",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\__init__.py": "0857bd60619c1e1c8538fe768cbe82c781bb4e302abc6cf59130f1b17d052230",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\__main__.py": "17a7af599e4d7b79094b806e01cedb765b560063bbcf82367f59e9f8e04005d7",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\agent_run.py": "3f7f8ff3cb9965216f19c6564da1e830f0f629a346ec1cc29e2583c119bea88d",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\agent_worker.py": "c6f86105c0a42304687f857209bb17172f2f38fda26699d25e2618f6e01a745f",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\answers.py": "be860546b2692ea4a710d93855f487dd49d9c8e28eb3f2ec757df697cefb8d0b",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\archive.py": "9549deb0f347cf6114ef3f802b9dfef8a94e0db7cbbd3497697987d5e21ba2ee",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\authorization.py": "06d8615f8b301285a951b08bece0570e5b1b89467fc99fa4e994c7e5e5f30c47",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\baseline.py": "98b6970e1fd2d086d1723656fbd92931ce2f94e77ff68cfc73e06105c6c2e52a",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\benchmark.py": "7ef7e26b2ef3cbf4119118a985334048fd30b68a5629f3e3196fa77e8200c49f",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\candidate_run.py": "99bd61eb7f92cb323918459f2fde19108a9511483154d42a03fe500dd7db07df",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\candidate_worker.py": "be39d7d7ed57a202d3b1362f279ccd40e9407a44219be8298831857d2ce6b7c6",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\channel.py": "c46d236865b15f1918efa23d961ed7163533c9bbef2b0cec7f61d6f8e95d6e5f",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\common.py": "3a0a693a0f4a0f2eed3b858d0b3ac42148871dbca284e56e0e368726309393c0",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\continuation.py": "b0136052472868aee379d7ac78dfd11bcfa40e91aedcd6916d30f9a334003414",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\diagnostics.py": "ca0af1304e3fbe99569f0b027f99269b151e08265785b39ed53c39f820097e24",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\doctor.py": "afa511a747c4be2951ba53fea5cfe2822077a0f7a6f80a80a3255594d5b5d19b",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\evaluation.py": "4cabb1a48689a140fc6f6129ed8d9eae1d047d3e09eae794170c74479413b8d6",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\executor.py": "b5e84f2dbcdc436aee23272e7d96b567cb5b16ead256a34d08bccc70b480d186",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\gateway.py": "e844fcb695b97c76ecb7432ece6b8d96416806554038e202fd6b0f7f3da57a2e",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\gateway_history.py": "a773ae6066e5b8a4f503e4b346b73570ace2ebeb811017f7b656cc211fded57c",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\history.py": "d42e92a7e6c88a2f72090eaaa50de39dc355957e7c61f5b89dd97162d8b0eefa",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\ledger.py": "5c7e56f1e2c5e68046d6380ebacc03110300eae34d348d7dca683a0591d64130",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\native_context.py": "47a488b8d731617bda21380232e5e49801e0c0b4261f69b71c24fb9eae0ba298",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\native_evaluation.py": "86f242fa70f9bf830ab3ca09b311ec110ea18a1a86bcaf1f942f6c3ebefb3d5f",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\native_pipeline.py": "9a9d91f28734eeb59564499fe49169e8218da6870b2156cea6838dea44573f49",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\native_run.py": "60aafd5ef9e355e82faae2dc12397c6b0b2b649c3273c1bda9c0c757e0775a19",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\native_transport.py": "ccd4917132939630231b8b8c69540189cd52f60951fa08d467d90b9571ccb6c0",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\native_worker.py": "8fa4b85ae6e75202de4b345302cb70253b6c0c5b47f004490f8d9a09750ecaa1",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\policy.py": "717f6fdad1e880d83326d6a314e0dfa604be1044f8209f27061380e16cfebb3e",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\policy_study.py": "a1d0c3d5d608312f1efe28c149190857b12ae031609e9ab217d96c8c9e3ed8ab",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\process_observation.py": "28ad4b424ae0bec10aa2d3bf145cb62e1b26eb088db5e83fb6900fab6d5495a8",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\progress.py": "47d21dada88347e63c01b05cf5c31db8e2cc157e501b812b58a2650d078393ba",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\proposer.py": "40e7ebf562966370f9f77c1e7f0e369b9fd34e37c0a0b88b246a7a630e4a40dd",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\provider.py": "17de071c1416afa32f9da32eb627e24264d8a0a848862fdf4853057125f18a02",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\reference.py": "36356c8a25dae3501014513095cb6f838c4ae54b02a129bdffc4a5cb2dfa6f35",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\releases.py": "33361cf5b0923b373ee53dd73597063195c2c0d519baead50d40fb4bcfab44f5",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\run.py": "a972cb8d1a04bef7abad7efdf7f1eec803bb88cd55c30cf64148119a3d7c6dbb",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\search.py": "ac7b3648355b139797773cbe2bb8b67abbc8533eefd987cd7692275692a9a95c",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\search_evidence.py": "1d89ed7ae541f52b79cc643edd2615955104cceb8508036d3b288e646fa30a34",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\search_verify.py": "41bdc2689d2b64e93765fe4572017a6c4264d5c3c6df49bba2a63e74b9ab6a63",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\splits.py": "419fa286d812b43e3095fbb41a62844b40477f880d94c8d60de069a52c324a2a",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\wire.py": "48f40a71bf10c84dfd1d15f0baef50198cce8a229748355f116ad6a25cab12b4",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\docs\\conformance\\nb02c3c3-baseline-probe.py": "d4eb66a332e6d54365cd30be0ea1189492e1742327dc828c5d60855b1fb4c1ea",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\runs\\reviews\\pol02-evaluation-native-probe.py": "00bf1482cb7968ff40fc76b93415f1304ec2ca07cd101101a6215bc8aa26ceff"
+  },
+  "status": "passed",
+  "synthetic_physical_sends": 38,
+  "task_ids": [
+    "curated-9",
+    "curated-0"
+  ]
+}

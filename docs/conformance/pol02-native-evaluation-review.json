@@ -1,0 +1,1022 @@
+{
+  "format": "buddha.pol02-native-evaluation-review-evidence.v1",
+  "real_provider_calls": 0,
+  "recorded_utc": "2026-10-21T07:24:14.736175+00:00",
+  "records": {
+    "independent_review": {
+      "record": {
+        "earlier_evidence_preserved": [
+          {
+            "bytes": 7684,
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-retired-producer-proof-2.json",
+            "sha256": "d2f3ae1f417e2553ed2b216757c9c653a2163de7db9ecde903f2f513ac935899"
+          },
+          {
+            "bytes": 7684,
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-retired-producer-proof-final.json",
+            "sha256": "c9029beca84070ec20198321257ef80e4eeabcba96ce5c67cada7a34db2e54cd"
+          },
+          {
+            "bytes": 16219,
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-retired-producer-probe-v1.py",
+            "sha256": "308fbd02cb1179a32765e056482ac002aed0402956dee62415de89f6a6f65c74"
+          },
+          {
+            "bytes": 16231,
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-retired-producer-debug.py",
+            "sha256": "d8733928494d20d0575e7804be461f4e9591dd131df797663bebf02a050b117c"
+          },
+          {
+            "bytes": 9855,
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation-independent-review.json",
+            "sha256": "983ffdb258db26f8bd7e528b3217d3dce7997e40ac4557231ece5848ac5938fa"
+          },
+          {
+            "bytes": 7684,
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-retired-producer-proof-lf-final.json",
+            "sha256": "ef88c00455346c95fc86e5732f087838f93bf19388b85c56aa51fb15fe9731c8"
+          },
+          {
+            "bytes": 11105,
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-publication-adversarial.json",
+            "sha256": "63f24925d59ef3a6fb8a668c0e0f1e3554bb8a02b516fabd57ac67b489d52ef1"
+          },
+          {
+            "bytes": 8038,
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-publication-adversarial.py",
+            "sha256": "00385d30a0c788e940d8a684be06361e35806a2f04a4bfcf8320889136449275"
+          }
+        ],
+        "earlier_probe_failures": {
+          "classification": "engineering fixture failures, not production defects",
+          "detail": "First/debug attempts cleared system metadata environment before preparation; generation source validation passed, new owner preparation rejected nonblank runtime metadata. Probe preparation order corrected without production change. Original scripts, fixtures and synthetic failure diagnostics retained."
+        },
+        "final_retirement_proof": {
+          "bytes": 7684,
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-retired-producer-proof-event-floor-final.json",
+          "sha256": "b337132f75472d3c91293cc838b0761711671bdf47f5253265a4c12111a86733"
+        },
+        "final_sources": {
+          "buddha/baseline.py": "98b6970e1fd2d086d1723656fbd92931ce2f94e77ff68cfc73e06105c6c2e52a",
+          "buddha/native_evaluation.py": "86f242fa70f9bf830ab3ca09b311ec110ea18a1a86bcaf1f942f6c3ebefb3d5f",
+          "buddha/native_pipeline.py": "9a9d91f28734eeb59564499fe49169e8218da6870b2156cea6838dea44573f49"
+        },
+        "findings": [
+          {
+            "basis": "Source-traced valid singleton configuration; not an independently executed pre-fix RED.",
+            "fix": "Final-stage priority always constructs a separate payment-disabled Gateway, including index1 singleton.",
+            "id": "NE-R1",
+            "issue": "When the first native command is also the final command, selecting the first caller-paid Gateway left the intended second no-payment guard absent. Empty profiles already blocked model dispatch, so this was not an observed spending escape.",
+            "runnable_check": "tests/test_native_evaluation.py::SingleCommandEvaluationTests::test_single_first_and_final_native_command_has_two_independent_no_payment_guards",
+            "status": "fixed"
+          },
+          {
+            "basis": "Source-traced bounded-hash/unbounded-consumption growth race; no allocation bomb executed by this reviewer.",
+            "fix": "Read actual MAX_JSON_BYTES+1 bytes through the descriptor, reject excess, verify actual consumed hash.",
+            "id": "NE-R2",
+            "issue": "Shared consumed-byte helper used unbounded read_bytes after a separate bounded file hash.",
+            "runnable_check": "tests/test_native_evaluation.py::PipelineInputTests::test_growth_after_hash_is_rejected_with_bounded_byte_consumption",
+            "status": "fixed"
+          },
+          {
+            "basis": "Actual private fixture RED observed on E8a4/Pc365/B795a: completed index1 changed to false, existing authority anchor retained; keyless rerun returned authority partial with zero sends.",
+            "fix": "Remove outer OperationConflict financial catch; typed EvaluationError rejects changed completed anchor.",
+            "id": "NE-R3",
+            "independent_provisional_green": {
+              "exit_code": 0,
+              "pin_caveat": "Collected around LF-only normalization window; final-source retirement proof and root final regression window are the final pins, not this provisional fixture.",
+              "result": "typed rejection; no new observation or send",
+              "session": 99107
+            },
+            "issue": "Escaped completion-anchor OperationConflict was misclassified as financial stop rather than invalid saved evidence.",
+            "runnable_check": "tests/test_native_evaluation.py::NativeEvaluationTests::test_changed_completed_stage_is_invalid_evidence_rather_than_a_funding_stop",
+            "status": "fixed"
+          },
+          {
+            "basis": "Actual private fixture RED observed on E8a4/Pc365/B795a: change only source auth_runs.runtime_sha256 to 64 zeros and restore exact triggers; prepare accepted and created owner1 with zero sends.",
+            "fix": "Require one strict nonhistorical source authority row with runtime SHA equal original manifest execution SHA; no current/old program execution required.",
+            "id": "NE-R4",
+            "independent_provisional_green": {
+              "exit_code": 0,
+              "pin_caveat": "Collected around LF-only normalization window; not claimed a final-pin independent regression suite.",
+              "result": "typed rejection before new owner; restored original source control completes",
+              "session": 99107
+            },
+            "issue": "Stored source authorization runtime identity lacked equality join to the original source owner manifest.",
+            "runnable_check": "tests/test_native_evaluation.py::NativeEvaluationTests::test_source_authority_runtime_identity_must_match_its_original_manifest",
+            "status": "fixed"
+          },
+          {
+            "basis": "Actual32case shared-publisher RED on E86f/P3394/B98b: changing only saved authorization.event_count to0 while retaining4 completed own owners/6operations was accepted; original bytes restored.",
+            "fix": "After validating old owner rows require event_count >= 1+len(old); no imported operation event assumptions or capture-time attestation.",
+            "green_case": {
+              "case": "event_counter_backwards_to_zero",
+              "new_sends": 0,
+              "original_report_restored": true,
+              "outcome": "rejected_pipeline_error",
+              "publisher_file_mutations": 0
+            },
+            "id": "NE-R5",
+            "independent_final_green": {
+              "bytes": 11103,
+              "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-publication-adversarial-final.json",
+              "sha256": "fb85a2fb985763449f170853be2340305d60cc7ceb34d75cc16f0acdc421ca01"
+            },
+            "independent_red": {
+              "bytes": 11105,
+              "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-publication-adversarial.json",
+              "sha256": "63f24925d59ef3a6fb8a668c0e0f1e3554bb8a02b516fabd57ac67b489d52ef1"
+            },
+            "issue": "Nonnegative/max-only event validation admitted an impossible count lacking creation and known owner registrations. Observation consistency, not an observed spending escape.",
+            "red_case": {
+              "case": "event_counter_backwards_to_zero",
+              "new_sends": 0,
+              "original_report_restored": true,
+              "outcome": "accepted",
+              "publisher_file_mutations": 0
+            },
+            "runnable_check": "tests/test_native_evaluation.py::NativeEvaluationTests::test_completed_snapshot_cannot_claim_zero_events_for_existing_owners",
+            "status": "fixed"
+          }
+        ],
+        "format": "buddha.pol02-native-evaluation-independent-review.v1",
+        "guide_review": {
+          "claims_checked": [
+            "fresh judge occasion versus same-owner received-reply recovery",
+            "original C1 task/config/agent/runtime identity versus independently selected neutral evaluator component",
+            "retired original program paths permitted while original data/accounting remains necessary",
+            "singleton final command profiles empty plus payment-disabled transport",
+            "raw native summary can be opaque/nonfinite without scientific metric promotion",
+            "unknown liability retained; no replacement owners or release inferred from time",
+            "historical authorization observation compatibility does not authenticate capture time",
+            "no paid CLI/funding/study membership or scientific independence claim",
+            "necessary creation and known-owner event floor without imported operation event assumptions or timestamp attestation"
+          ],
+          "path": "docs/NATIVE-EVALUATION.md",
+          "sha256": "df0156bbf5988cb0077ff8e4a00d4a89f514484353aee1f8345a29c5746dc405",
+          "status": "pass"
+        },
+        "limits": [
+          "Trusted host, filesystem, supplied authorization and validated SQLite/source bytes remain assumptions.",
+          "Retirement probe uses mocked container and HTTPS, not actual OS confinement or full scientific/native differential oracle.",
+          "New evaluator uses original C1 release; future release/schema relabeling is not enabled.",
+          "Original producer executable/component paths are absent, but program bytes are retained at moved private paths; no uninstall/host-escape claim.",
+          "Shared completed authorization snapshot is a typed compatible historical observation, not an independently authenticated timestamped statement. Current authority remains permission source.",
+          "No new judge measurements, actual study membership, instrument/funding allocation, promotion or improvement claim.",
+          "Root owns complete native Docker composition, full-suite and delivery/roadmap claims; they are not asserted by this review.",
+          "Final full-suite/actual-container evidence is parent-owned, not executed or claimed by this independent review."
+        ],
+        "publication_adversarial_checks": {
+          "actual_container_invocations": 0,
+          "actual_provider_calls": 0,
+          "evidence": {
+            "bytes": 11103,
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-publication-adversarial-final.json",
+            "sha256": "fb85a2fb985763449f170853be2340305d60cc7ceb34d75cc16f0acdc421ca01"
+          },
+          "limit": "Lower historical holds/committed amounts are not blanket-rejected; event floor is necessary known-event consistency, not capture-time authentication.",
+          "mutations": [
+            "bool/int/float/bounded financial and event numeric types",
+            "wrong terms identity/scope/budget/call cap",
+            "inconsistent financial arithmetic",
+            "invented/omitted/duplicate owners",
+            "completed own-owner identity/activity/amount changes",
+            "impossible or excessive counters",
+            "changed sealed answers/summary/scientific stage",
+            "missing/extra authorization fields"
+          ],
+          "new_sends_during_each_check": 0,
+          "original_report_exactly_restored_each_case": true,
+          "positive_cases": 1,
+          "probe": {
+            "bytes": 8044,
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-publication-adversarial-final.py",
+            "sha256": "205b5607726da4bb921e2d980efbccca728f94eb61c799041f64307f2761513d"
+          },
+          "publisher_file_mutations_each_case": 0,
+          "rejected_mutations": 31,
+          "same_32case_population_as_red": true,
+          "synthetic_baseline_sends_before_direct_checks": 12,
+          "unexpected_acceptances": 0
+        },
+        "retirement_probe": {
+          "bytes": 16236,
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-retired-producer-probe.py",
+          "sha256": "95f5f8330b203c53582d3d7eb83f9b691bc5a04a8649e00e28280efa33e07fb2"
+        },
+        "retirement_results": {
+          "actual_container_invocations": 0,
+          "actual_provider_calls": 0,
+          "completed_keyless_replay_new_executions": 0,
+          "completed_keyless_replay_new_sends": 0,
+          "evaluation_imports_agent_run": false,
+          "fresh_native_mock_sends": 2,
+          "native_stage_roles": [
+            "evaluator",
+            "evaluator",
+            "evaluator"
+          ],
+          "neutral_current_agent_differs": true,
+          "new_generation_constructions": 0,
+          "original_data_config_owner_files_unchanged": 39,
+          "producer_mock_sends": 6,
+          "retired_original_program_trees": 7,
+          "same_literal_c1_native_bytes": true,
+          "source_gateway_constructions": 0,
+          "two_isolated_processes": true,
+          "watched_source_files_unchanged": 46
+        },
+        "reviewed_paths": [
+          "source generation manifest/ledger/authority mirror",
+          "original stage seal/C1/config/task/provenance",
+          "fresh evaluator selection and neutral agent component",
+          "shared native stage/replay/anchor/publication",
+          "partial observations/cancellation/unknown stops",
+          "typed historical authorization completion observation"
+        ],
+        "scope": "Independent source review, synthetic accounting/HTTPS fixtures and two-process retired-producer data-only composition. No tracked edits, full suite, actual container, provider, credential or historical-study access by this reviewer.",
+        "source_files": {
+          "buddha/baseline.py": {
+            "bytes": 18357,
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\baseline.py",
+            "sha256": "98b6970e1fd2d086d1723656fbd92931ce2f94e77ff68cfc73e06105c6c2e52a"
+          },
+          "buddha/native_evaluation.py": {
+            "bytes": 24880,
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\native_evaluation.py",
+            "sha256": "86f242fa70f9bf830ab3ca09b311ec110ea18a1a86bcaf1f942f6c3ebefb3d5f"
+          },
+          "buddha/native_pipeline.py": {
+            "bytes": 19234,
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\buddha\\native_pipeline.py",
+            "sha256": "9a9d91f28734eeb59564499fe49169e8218da6870b2156cea6838dea44573f49"
+          },
+          "docs/NATIVE-EVALUATION.md": {
+            "bytes": 10645,
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\docs\\NATIVE-EVALUATION.md",
+            "sha256": "df0156bbf5988cb0077ff8e4a00d4a89f514484353aee1f8345a29c5746dc405"
+          },
+          "tests/test_native_evaluation.py": {
+            "bytes": 21732,
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\tests\\test_native_evaluation.py",
+            "sha256": "6065e56b92cdf318f147a3d0b90a0545c5e7a86b2439b8c23fa6f6e8ddc3fb1e"
+          }
+        },
+        "status": "pass_no_remaining_concrete_blocker_in_reviewed_scope",
+        "worktree": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation"
+      },
+      "source_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation-independent-review-final.json",
+      "source_sha256": "35bd3e4dcfce5854da8b0089ef9d4317b8ed5cc9a3f63fba00f20fcfbd4f47bd"
+    },
+    "old_baseline_replay_red": {
+      "record": {
+        "captured": [
+          {
+            "current_auth_operations": 12,
+            "current_event_count": 65,
+            "differing_top_level_fields": [
+              "authorization"
+            ],
+            "old_auth_operations": 6,
+            "old_event_count": 33,
+            "relative_path": "report.json"
+          }
+        ],
+        "claim": "controlled synthetic recovery regression, not a live-run incident",
+        "first_status": "complete",
+        "format": "buddha.pol02-shared-authority-complete-replay-red.v1",
+        "old_baseline_sha256": "c988e823d9890b712a4b50a58a3d808c6630fdcf3e6fb94227ee9e591d04a432",
+        "real_provider_calls": 0,
+        "replay_error": "an existing stage input or descriptor differs; owner retained",
+        "replay_error_type": "BaselineError",
+        "replay_sends": 0,
+        "second_status": "complete"
+      },
+      "source_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-contract\\runs\\reviews\\pol02-shared-authorization-complete-replay-red.json",
+      "source_sha256": "df9590fc808c2ae7b88573a1f98b97c9dc1024ae96bf05e59dff5a1be1757661"
+    },
+    "publication_cases": {
+      "record": {
+        "actual_container_invocations": 0,
+        "actual_provider_calls": 0,
+        "cases": [
+          {
+            "case": "positive_original_snapshot_after_other_owners",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "accepted",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "boolean_committed_microusd",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "boolean_spent_microusd",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "boolean_reserved_microusd",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "boolean_operation_count",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "boolean_event_count",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "boolean_available_microusd",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "boolean_remaining_calls",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "float_spent",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "negative_reserved",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "unbounded_operation_count",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "wrong_terms_sha",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "wrong_authorization_id",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "wrong_budget",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "bool_max_calls",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "wrong_scope",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "inconsistent_committed",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "event_counter_exceeds_current",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "event_counter_backwards_to_zero",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "operation_counter_backwards",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "own_active_bool_to_int",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "own_historical_int_to_bool",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "own_runtime_changed",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "sealed_answers_changed",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "sealed_summary_changed",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "scientific_stage_changed",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "authorization_extra_field",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "authorization_missing_field",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "omitted_own_owner",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "duplicated_owner",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "invented_owner",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "completed_own_amount_backwards",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          }
+        ],
+        "current_authorization_snapshot_sha256": "5cbb96b7246ea02d2a155ebe500514066b5167ffa29aa516bca67329cbe32df0",
+        "format": "buddha.pol02-publication-adversarial.v1",
+        "limits": [
+          "Direct shared publisher checks on real synthetic completed baselines/Auth; no full controller or actual Docker execution in this probe.",
+          "Mutated reports were untrusted test inputs; exact original bytes restored after each call.",
+          "Backward held/committed totals are not blanket-rejected; historical observation capture time is not authenticated."
+        ],
+        "mock_baseline_sends": 12,
+        "original_report_sha256": "aeaea686410b2c23db9c8f290039c1cec893dfe49d660598a04db41a9a03bfb3",
+        "source_sha256": {
+          "buddha\\__init__.py": "0857bd60619c1e1c8538fe768cbe82c781bb4e302abc6cf59130f1b17d052230",
+          "buddha\\__main__.py": "17a7af599e4d7b79094b806e01cedb765b560063bbcf82367f59e9f8e04005d7",
+          "buddha\\agent_run.py": "3f7f8ff3cb9965216f19c6564da1e830f0f629a346ec1cc29e2583c119bea88d",
+          "buddha\\agent_worker.py": "c6f86105c0a42304687f857209bb17172f2f38fda26699d25e2618f6e01a745f",
+          "buddha\\answers.py": "be860546b2692ea4a710d93855f487dd49d9c8e28eb3f2ec757df697cefb8d0b",
+          "buddha\\archive.py": "9549deb0f347cf6114ef3f802b9dfef8a94e0db7cbbd3497697987d5e21ba2ee",
+          "buddha\\authorization.py": "06d8615f8b301285a951b08bece0570e5b1b89467fc99fa4e994c7e5e5f30c47",
+          "buddha\\baseline.py": "98b6970e1fd2d086d1723656fbd92931ce2f94e77ff68cfc73e06105c6c2e52a",
+          "buddha\\benchmark.py": "7ef7e26b2ef3cbf4119118a985334048fd30b68a5629f3e3196fa77e8200c49f",
+          "buddha\\candidate_run.py": "99bd61eb7f92cb323918459f2fde19108a9511483154d42a03fe500dd7db07df",
+          "buddha\\candidate_worker.py": "be39d7d7ed57a202d3b1362f279ccd40e9407a44219be8298831857d2ce6b7c6",
+          "buddha\\channel.py": "c46d236865b15f1918efa23d961ed7163533c9bbef2b0cec7f61d6f8e95d6e5f",
+          "buddha\\common.py": "3a0a693a0f4a0f2eed3b858d0b3ac42148871dbca284e56e0e368726309393c0",
+          "buddha\\continuation.py": "b0136052472868aee379d7ac78dfd11bcfa40e91aedcd6916d30f9a334003414",
+          "buddha\\diagnostics.py": "ca0af1304e3fbe99569f0b027f99269b151e08265785b39ed53c39f820097e24",
+          "buddha\\doctor.py": "afa511a747c4be2951ba53fea5cfe2822077a0f7a6f80a80a3255594d5b5d19b",
+          "buddha\\evaluation.py": "4cabb1a48689a140fc6f6129ed8d9eae1d047d3e09eae794170c74479413b8d6",
+          "buddha\\executor.py": "b5e84f2dbcdc436aee23272e7d96b567cb5b16ead256a34d08bccc70b480d186",
+          "buddha\\gateway.py": "e844fcb695b97c76ecb7432ece6b8d96416806554038e202fd6b0f7f3da57a2e",
+          "buddha\\gateway_history.py": "a773ae6066e5b8a4f503e4b346b73570ace2ebeb811017f7b656cc211fded57c",
+          "buddha\\history.py": "d42e92a7e6c88a2f72090eaaa50de39dc355957e7c61f5b89dd97162d8b0eefa",
+          "buddha\\ledger.py": "5c7e56f1e2c5e68046d6380ebacc03110300eae34d348d7dca683a0591d64130",
+          "buddha\\native_context.py": "47a488b8d731617bda21380232e5e49801e0c0b4261f69b71c24fb9eae0ba298",
+          "buddha\\native_evaluation.py": "86f242fa70f9bf830ab3ca09b311ec110ea18a1a86bcaf1f942f6c3ebefb3d5f",
+          "buddha\\native_pipeline.py": "9a9d91f28734eeb59564499fe49169e8218da6870b2156cea6838dea44573f49",
+          "buddha\\native_run.py": "60aafd5ef9e355e82faae2dc12397c6b0b2b649c3273c1bda9c0c757e0775a19",
+          "buddha\\native_transport.py": "ccd4917132939630231b8b8c69540189cd52f60951fa08d467d90b9571ccb6c0",
+          "buddha\\native_worker.py": "8fa4b85ae6e75202de4b345302cb70253b6c0c5b47f004490f8d9a09750ecaa1",
+          "buddha\\policy.py": "717f6fdad1e880d83326d6a314e0dfa604be1044f8209f27061380e16cfebb3e",
+          "buddha\\policy_study.py": "a1d0c3d5d608312f1efe28c149190857b12ae031609e9ab217d96c8c9e3ed8ab",
+          "buddha\\process_observation.py": "28ad4b424ae0bec10aa2d3bf145cb62e1b26eb088db5e83fb6900fab6d5495a8",
+          "buddha\\progress.py": "47d21dada88347e63c01b05cf5c31db8e2cc157e501b812b58a2650d078393ba",
+          "buddha\\proposer.py": "40e7ebf562966370f9f77c1e7f0e369b9fd34e37c0a0b88b246a7a630e4a40dd",
+          "buddha\\provider.py": "17de071c1416afa32f9da32eb627e24264d8a0a848862fdf4853057125f18a02",
+          "buddha\\reference.py": "36356c8a25dae3501014513095cb6f838c4ae54b02a129bdffc4a5cb2dfa6f35",
+          "buddha\\releases.py": "33361cf5b0923b373ee53dd73597063195c2c0d519baead50d40fb4bcfab44f5",
+          "buddha\\run.py": "a972cb8d1a04bef7abad7efdf7f1eec803bb88cd55c30cf64148119a3d7c6dbb",
+          "buddha\\search.py": "ac7b3648355b139797773cbe2bb8b67abbc8533eefd987cd7692275692a9a95c",
+          "buddha\\search_evidence.py": "1d89ed7ae541f52b79cc643edd2615955104cceb8508036d3b288e646fa30a34",
+          "buddha\\search_verify.py": "41bdc2689d2b64e93765fe4572017a6c4264d5c3c6df49bba2a63e74b9ab6a63",
+          "buddha\\splits.py": "419fa286d812b43e3095fbb41a62844b40477f880d94c8d60de069a52c324a2a",
+          "buddha\\wire.py": "48f40a71bf10c84dfd1d15f0baef50198cce8a229748355f116ad6a25cab12b4"
+        },
+        "status": "pass"
+      },
+      "source_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-publication-adversarial-final.json",
+      "source_sha256": "fb85a2fb985763449f170853be2340305d60cc7ceb34d75cc16f0acdc421ca01"
+    },
+    "publication_cases_before_fix": {
+      "record": {
+        "actual_container_invocations": 0,
+        "actual_provider_calls": 0,
+        "cases": [
+          {
+            "case": "positive_original_snapshot_after_other_owners",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "accepted",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "boolean_committed_microusd",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "boolean_spent_microusd",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "boolean_reserved_microusd",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "boolean_operation_count",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "boolean_event_count",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "boolean_available_microusd",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "boolean_remaining_calls",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "float_spent",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "negative_reserved",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "unbounded_operation_count",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "wrong_terms_sha",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "wrong_authorization_id",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "wrong_budget",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "bool_max_calls",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "wrong_scope",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "inconsistent_committed",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "event_counter_exceeds_current",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "event_counter_backwards_to_zero",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "accepted",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "operation_counter_backwards",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "own_active_bool_to_int",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "own_historical_int_to_bool",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "own_runtime_changed",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "sealed_answers_changed",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "sealed_summary_changed",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "scientific_stage_changed",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "authorization_extra_field",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "authorization_missing_field",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "omitted_own_owner",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "duplicated_owner",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "invented_owner",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          },
+          {
+            "case": "completed_own_amount_backwards",
+            "new_sends": 0,
+            "original_report_restored": true,
+            "outcome": "rejected_pipeline_error",
+            "publisher_file_mutations": 0
+          }
+        ],
+        "current_authorization_snapshot_sha256": "3a2b674fbedc67c3554861b6afe28a39e27c1a3e9cfe81b3b133f0f196c5d105",
+        "format": "buddha.pol02-publication-adversarial.v1",
+        "limits": [
+          "Direct shared publisher checks on real synthetic completed baselines/Auth; no full controller or actual Docker execution in this probe.",
+          "Mutated reports were untrusted test inputs; exact original bytes restored after each call.",
+          "Backward held/committed totals are not blanket-rejected; historical observation capture time is not authenticated."
+        ],
+        "mock_baseline_sends": 12,
+        "original_report_sha256": "1570925083ba6ab8eca15c4f9a79d87f05e3dc84a3ce3e47add73bca007eb5e2",
+        "source_sha256": {
+          "buddha\\__init__.py": "0857bd60619c1e1c8538fe768cbe82c781bb4e302abc6cf59130f1b17d052230",
+          "buddha\\__main__.py": "17a7af599e4d7b79094b806e01cedb765b560063bbcf82367f59e9f8e04005d7",
+          "buddha\\agent_run.py": "3f7f8ff3cb9965216f19c6564da1e830f0f629a346ec1cc29e2583c119bea88d",
+          "buddha\\agent_worker.py": "c6f86105c0a42304687f857209bb17172f2f38fda26699d25e2618f6e01a745f",
+          "buddha\\answers.py": "be860546b2692ea4a710d93855f487dd49d9c8e28eb3f2ec757df697cefb8d0b",
+          "buddha\\archive.py": "9549deb0f347cf6114ef3f802b9dfef8a94e0db7cbbd3497697987d5e21ba2ee",
+          "buddha\\authorization.py": "06d8615f8b301285a951b08bece0570e5b1b89467fc99fa4e994c7e5e5f30c47",
+          "buddha\\baseline.py": "98b6970e1fd2d086d1723656fbd92931ce2f94e77ff68cfc73e06105c6c2e52a",
+          "buddha\\benchmark.py": "7ef7e26b2ef3cbf4119118a985334048fd30b68a5629f3e3196fa77e8200c49f",
+          "buddha\\candidate_run.py": "99bd61eb7f92cb323918459f2fde19108a9511483154d42a03fe500dd7db07df",
+          "buddha\\candidate_worker.py": "be39d7d7ed57a202d3b1362f279ccd40e9407a44219be8298831857d2ce6b7c6",
+          "buddha\\channel.py": "c46d236865b15f1918efa23d961ed7163533c9bbef2b0cec7f61d6f8e95d6e5f",
+          "buddha\\common.py": "3a0a693a0f4a0f2eed3b858d0b3ac42148871dbca284e56e0e368726309393c0",
+          "buddha\\continuation.py": "b0136052472868aee379d7ac78dfd11bcfa40e91aedcd6916d30f9a334003414",
+          "buddha\\diagnostics.py": "ca0af1304e3fbe99569f0b027f99269b151e08265785b39ed53c39f820097e24",
+          "buddha\\doctor.py": "afa511a747c4be2951ba53fea5cfe2822077a0f7a6f80a80a3255594d5b5d19b",
+          "buddha\\evaluation.py": "4cabb1a48689a140fc6f6129ed8d9eae1d047d3e09eae794170c74479413b8d6",
+          "buddha\\executor.py": "b5e84f2dbcdc436aee23272e7d96b567cb5b16ead256a34d08bccc70b480d186",
+          "buddha\\gateway.py": "e844fcb695b97c76ecb7432ece6b8d96416806554038e202fd6b0f7f3da57a2e",
+          "buddha\\gateway_history.py": "a773ae6066e5b8a4f503e4b346b73570ace2ebeb811017f7b656cc211fded57c",
+          "buddha\\history.py": "d42e92a7e6c88a2f72090eaaa50de39dc355957e7c61f5b89dd97162d8b0eefa",
+          "buddha\\ledger.py": "5c7e56f1e2c5e68046d6380ebacc03110300eae34d348d7dca683a0591d64130",
+          "buddha\\native_context.py": "47a488b8d731617bda21380232e5e49801e0c0b4261f69b71c24fb9eae0ba298",
+          "buddha\\native_evaluation.py": "86f242fa70f9bf830ab3ca09b311ec110ea18a1a86bcaf1f942f6c3ebefb3d5f",
+          "buddha\\native_pipeline.py": "3394cb2a76f6c533daa3e55a257c230a6dc21de4b4d9a7b3258c0314c2606b87",
+          "buddha\\native_run.py": "60aafd5ef9e355e82faae2dc12397c6b0b2b649c3273c1bda9c0c757e0775a19",
+          "buddha\\native_transport.py": "ccd4917132939630231b8b8c69540189cd52f60951fa08d467d90b9571ccb6c0",
+          "buddha\\native_worker.py": "8fa4b85ae6e75202de4b345302cb70253b6c0c5b47f004490f8d9a09750ecaa1",
+          "buddha\\policy.py": "717f6fdad1e880d83326d6a314e0dfa604be1044f8209f27061380e16cfebb3e",
+          "buddha\\policy_study.py": "a1d0c3d5d608312f1efe28c149190857b12ae031609e9ab217d96c8c9e3ed8ab",
+          "buddha\\process_observation.py": "28ad4b424ae0bec10aa2d3bf145cb62e1b26eb088db5e83fb6900fab6d5495a8",
+          "buddha\\progress.py": "47d21dada88347e63c01b05cf5c31db8e2cc157e501b812b58a2650d078393ba",
+          "buddha\\proposer.py": "40e7ebf562966370f9f77c1e7f0e369b9fd34e37c0a0b88b246a7a630e4a40dd",
+          "buddha\\provider.py": "17de071c1416afa32f9da32eb627e24264d8a0a848862fdf4853057125f18a02",
+          "buddha\\reference.py": "36356c8a25dae3501014513095cb6f838c4ae54b02a129bdffc4a5cb2dfa6f35",
+          "buddha\\releases.py": "33361cf5b0923b373ee53dd73597063195c2c0d519baead50d40fb4bcfab44f5",
+          "buddha\\run.py": "a972cb8d1a04bef7abad7efdf7f1eec803bb88cd55c30cf64148119a3d7c6dbb",
+          "buddha\\search.py": "ac7b3648355b139797773cbe2bb8b67abbc8533eefd987cd7692275692a9a95c",
+          "buddha\\search_evidence.py": "1d89ed7ae541f52b79cc643edd2615955104cceb8508036d3b288e646fa30a34",
+          "buddha\\search_verify.py": "41bdc2689d2b64e93765fe4572017a6c4264d5c3c6df49bba2a63e74b9ab6a63",
+          "buddha\\splits.py": "419fa286d812b43e3095fbb41a62844b40477f880d94c8d60de069a52c324a2a",
+          "buddha\\wire.py": "48f40a71bf10c84dfd1d15f0baef50198cce8a229748355f116ad6a25cab12b4"
+        },
+        "status": "unexpected_acceptance"
+      },
+      "source_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-publication-adversarial.json",
+      "source_sha256": "63f24925d59ef3a6fb8a668c0e0f1e3554bb8a02b516fabd57ac67b489d52ef1"
+    },
+    "retired_producer": {
+      "record": {
+        "consumer": {
+          "actual_container_invocations": 0,
+          "completed_keyless_replay_new_executions": 0,
+          "completed_keyless_replay_new_sends": 0,
+          "current_neutral_agent_sha256": "9f1d5324d6efc052d9ce522ed9fe240fefc290649f1ac504438798e5fa6e2d03",
+          "evaluation_imports_agent_run": false,
+          "fresh_mock_native_sends": 2,
+          "native_stage_roles": [
+            "evaluator",
+            "evaluator",
+            "evaluator"
+          ],
+          "neutral_agent_differs_from_producer": true,
+          "new_generation_constructors": 0,
+          "original_agent_sha256": "688427a4620497cc613dd37ea2ee3ff5e6b35d5113e3e64e4956776bea7ca6bd",
+          "preserved_source_file_count": 39,
+          "real_provider_calls": 0,
+          "same_literal_c1_native_bytes": true,
+          "source_gateway_constructors": 0,
+          "status": "pass"
+        },
+        "fixture_directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-retired-producer-n_u3z_79",
+        "format": "buddha.pol02-retired-producer-probe.v1",
+        "limitations": [
+          "Synthetic source fixture and mocked container/HTTPS; not an actual OS confinement or scientific result.",
+          "Original programs are preserved at moved private paths; only their original active locations are absent.",
+          "Retained original owner/data/config/C1 inputs remain necessary evidence; actual repository and historical studies are untouched."
+        ],
+        "probe_sha256": "95f5f8330b203c53582d3d7eb83f9b691bc5a04a8649e00e28280efa33e07fb2",
+        "producer_mock_sends": 6,
+        "retired_program_trees": [
+          {
+            "files": 1,
+            "original": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-retired-producer-n_u3z_79\\data\\tmphgepmhg8\\agent",
+            "retired": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-retired-producer-n_u3z_79\\retired\\0",
+            "tree_sha256": "688427a4620497cc613dd37ea2ee3ff5e6b35d5113e3e64e4956776bea7ca6bd"
+          },
+          {
+            "files": 2,
+            "original": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-retired-producer-n_u3z_79\\data\\tmphgepmhg8\\environment",
+            "retired": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-retired-producer-n_u3z_79\\retired\\1",
+            "tree_sha256": "1a8be056e2d0487b2fa218601eee1acc0975e36d1bf342548a19fb9d7e9d027e"
+          },
+          {
+            "files": 2,
+            "original": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-retired-producer-n_u3z_79\\data\\tmphgepmhg8\\host",
+            "retired": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-retired-producer-n_u3z_79\\retired\\2",
+            "tree_sha256": "15a87083bb4bdc3e563337bc1d05c181458fe37d870846cfe369c9c2ff45ad68"
+          },
+          {
+            "files": 7,
+            "original": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-retired-producer-n_u3z_79\\data\\tmphgepmhg8\\native-runner",
+            "retired": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-retired-producer-n_u3z_79\\retired\\3",
+            "tree_sha256": "dd76dbfe45538327521fdeaa87c9b332b9568b4c19911b937740c626ecd7ae20"
+          },
+          {
+            "files": 7,
+            "original": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-retired-producer-n_u3z_79\\data\\tmphgepmhg8\\official",
+            "retired": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-retired-producer-n_u3z_79\\retired\\4",
+            "tree_sha256": "325c37b52f2d5128402e420d0fe678b19bb97c482ec6fd15028e25aec2d380ba"
+          },
+          {
+            "files": 5,
+            "original": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-retired-producer-n_u3z_79\\data\\tmphgepmhg8\\runner",
+            "retired": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-retired-producer-n_u3z_79\\retired\\5",
+            "tree_sha256": "92741d65cad16e2f6027d38a94a4420571d74d6b6f390739c1886086aa46371d"
+          },
+          {
+            "files": 46,
+            "original": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-retired-producer-n_u3z_79\\producer-code",
+            "retired": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-retired-producer-n_u3z_79\\retired\\6",
+            "tree_sha256": "f307b962210848ba65a1968f4e1c2b679d01e286321f6a2c75443d266cebe45f"
+          }
+        ],
+        "source_sha256": {
+          "agents/frozen_seed.py": "2b87bfe0d3c97ee45db2d45260985ffe0234eca93967f4689fb7c59f82603921",
+          "buddha/__init__.py": "0857bd60619c1e1c8538fe768cbe82c781bb4e302abc6cf59130f1b17d052230",
+          "buddha/__main__.py": "17a7af599e4d7b79094b806e01cedb765b560063bbcf82367f59e9f8e04005d7",
+          "buddha/agent_run.py": "3f7f8ff3cb9965216f19c6564da1e830f0f629a346ec1cc29e2583c119bea88d",
+          "buddha/agent_worker.py": "c6f86105c0a42304687f857209bb17172f2f38fda26699d25e2618f6e01a745f",
+          "buddha/answers.py": "be860546b2692ea4a710d93855f487dd49d9c8e28eb3f2ec757df697cefb8d0b",
+          "buddha/archive.py": "9549deb0f347cf6114ef3f802b9dfef8a94e0db7cbbd3497697987d5e21ba2ee",
+          "buddha/authorization.py": "06d8615f8b301285a951b08bece0570e5b1b89467fc99fa4e994c7e5e5f30c47",
+          "buddha/baseline.py": "98b6970e1fd2d086d1723656fbd92931ce2f94e77ff68cfc73e06105c6c2e52a",
+          "buddha/benchmark.py": "7ef7e26b2ef3cbf4119118a985334048fd30b68a5629f3e3196fa77e8200c49f",
+          "buddha/candidate_run.py": "99bd61eb7f92cb323918459f2fde19108a9511483154d42a03fe500dd7db07df",
+          "buddha/candidate_worker.py": "be39d7d7ed57a202d3b1362f279ccd40e9407a44219be8298831857d2ce6b7c6",
+          "buddha/channel.py": "c46d236865b15f1918efa23d961ed7163533c9bbef2b0cec7f61d6f8e95d6e5f",
+          "buddha/common.py": "3a0a693a0f4a0f2eed3b858d0b3ac42148871dbca284e56e0e368726309393c0",
+          "buddha/continuation.py": "b0136052472868aee379d7ac78dfd11bcfa40e91aedcd6916d30f9a334003414",
+          "buddha/diagnostics.py": "ca0af1304e3fbe99569f0b027f99269b151e08265785b39ed53c39f820097e24",
+          "buddha/doctor.py": "afa511a747c4be2951ba53fea5cfe2822077a0f7a6f80a80a3255594d5b5d19b",
+          "buddha/evaluation.py": "4cabb1a48689a140fc6f6129ed8d9eae1d047d3e09eae794170c74479413b8d6",
+          "buddha/executor.py": "b5e84f2dbcdc436aee23272e7d96b567cb5b16ead256a34d08bccc70b480d186",
+          "buddha/gateway.py": "e844fcb695b97c76ecb7432ece6b8d96416806554038e202fd6b0f7f3da57a2e",
+          "buddha/gateway_history.py": "a773ae6066e5b8a4f503e4b346b73570ace2ebeb811017f7b656cc211fded57c",
+          "buddha/history.py": "d42e92a7e6c88a2f72090eaaa50de39dc355957e7c61f5b89dd97162d8b0eefa",
+          "buddha/ledger.py": "5c7e56f1e2c5e68046d6380ebacc03110300eae34d348d7dca683a0591d64130",
+          "buddha/native_context.py": "47a488b8d731617bda21380232e5e49801e0c0b4261f69b71c24fb9eae0ba298",
+          "buddha/native_evaluation.py": "86f242fa70f9bf830ab3ca09b311ec110ea18a1a86bcaf1f942f6c3ebefb3d5f",
+          "buddha/native_pipeline.py": "9a9d91f28734eeb59564499fe49169e8218da6870b2156cea6838dea44573f49",
+          "buddha/native_run.py": "60aafd5ef9e355e82faae2dc12397c6b0b2b649c3273c1bda9c0c757e0775a19",
+          "buddha/native_transport.py": "ccd4917132939630231b8b8c69540189cd52f60951fa08d467d90b9571ccb6c0",
+          "buddha/native_worker.py": "8fa4b85ae6e75202de4b345302cb70253b6c0c5b47f004490f8d9a09750ecaa1",
+          "buddha/policy.py": "717f6fdad1e880d83326d6a314e0dfa604be1044f8209f27061380e16cfebb3e",
+          "buddha/policy_study.py": "a1d0c3d5d608312f1efe28c149190857b12ae031609e9ab217d96c8c9e3ed8ab",
+          "buddha/process_observation.py": "28ad4b424ae0bec10aa2d3bf145cb62e1b26eb088db5e83fb6900fab6d5495a8",
+          "buddha/progress.py": "47d21dada88347e63c01b05cf5c31db8e2cc157e501b812b58a2650d078393ba",
+          "buddha/proposer.py": "40e7ebf562966370f9f77c1e7f0e369b9fd34e37c0a0b88b246a7a630e4a40dd",
+          "buddha/provider.py": "17de071c1416afa32f9da32eb627e24264d8a0a848862fdf4853057125f18a02",
+          "buddha/reference.py": "36356c8a25dae3501014513095cb6f838c4ae54b02a129bdffc4a5cb2dfa6f35",
+          "buddha/releases.py": "33361cf5b0923b373ee53dd73597063195c2c0d519baead50d40fb4bcfab44f5",
+          "buddha/run.py": "a972cb8d1a04bef7abad7efdf7f1eec803bb88cd55c30cf64148119a3d7c6dbb",
+          "buddha/search.py": "ac7b3648355b139797773cbe2bb8b67abbc8533eefd987cd7692275692a9a95c",
+          "buddha/search_evidence.py": "1d89ed7ae541f52b79cc643edd2615955104cceb8508036d3b288e646fa30a34",
+          "buddha/search_verify.py": "41bdc2689d2b64e93765fe4572017a6c4264d5c3c6df49bba2a63e74b9ab6a63",
+          "buddha/splits.py": "419fa286d812b43e3095fbb41a62844b40477f880d94c8d60de069a52c324a2a",
+          "buddha/wire.py": "48f40a71bf10c84dfd1d15f0baef50198cce8a229748355f116ad6a25cab12b4",
+          "tests/test_agent_run.py": "b859f368da7adf04249f77587605b6437c97f280876355b1f90fa9b44fb1c4d0",
+          "tests/test_baseline.py": "91a39902bafe15bf054145de6d85e2faf595f8e62b0ecc18ca6f5387dabf9896",
+          "tests/test_gateway.py": "80e9029bab1fd782d51c405bb875884d92bbf8744946d53993c7117556e824e9"
+        },
+        "status": "pass"
+      },
+      "source_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-retired-producer-proof-event-floor-final.json",
+      "source_sha256": "b337132f75472d3c91293cc838b0761711671bdf47f5253265a4c12111a86733"
+    }
+  },
+  "red_logs": {
+    "pol02-native-evaluation-missing-module-red.log": {
+      "sha256": "8376c11a304010cae64799e7780fe783b7a0d04b4632b9cd1924df5866ab81b0",
+      "text": "test_native_evaluation (unittest.loader._FailedTest.test_native_evaluation) ... ERROR\n\n======================================================================\nERROR: test_native_evaluation (unittest.loader._FailedTest.test_native_evaluation)\n----------------------------------------------------------------------\nImportError: Failed to import test module: test_native_evaluation\nTraceback (most recent call last):\n  File \"C:\\Program Files\\Python313\\Lib\\unittest\\loader.py\", line 396, in _find_test_path\n    module = self._get_module_from_name(name)\n  File \"C:\\Program Files\\Python313\\Lib\\unittest\\loader.py\", line 339, in _get_module_from_name\n    __import__(name)\n    ~~~~~~~~~~^^^^^^\n  File \"C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\tests\\test_native_evaluation.py\", line 16, in <module>\n    from buddha.native_evaluation import EvaluationError, prepare_evaluation, run_evaluation\nModuleNotFoundError: No module named 'buddha.native_evaluation'\n\n\n----------------------------------------------------------------------\nRan 1 test in 0.001s\n\nFAILED (errors=1)\n"
+    },
+    "pol02-native-protocol-observation-red.log": {
+      "sha256": "8777f0e39147daf58f8d3246c609b4b8a67a0e6f043f8e7f9f601449631e27ea",
+      "text": "FF\n======================================================================\nFAIL: test_first_partition_coverage_failure_cannot_start_quality_or_complete (test_native_evaluation.NativeEvaluationTests.test_first_partition_coverage_failure_cannot_start_quality_or_complete)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\tests\\test_native_evaluation.py\", line 200, in test_first_partition_coverage_failure_cannot_start_quality_or_complete\n    self.assertEqual(len(observations), 1)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 0 != 1\n\n======================================================================\nFAIL: test_changed_completed_stage_is_invalid_evidence_rather_than_a_funding_stop (test_native_evaluation.NativeEvaluationTests.test_changed_completed_stage_is_invalid_evidence_rather_than_a_funding_stop)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\tests\\test_native_evaluation.py\", line 216, in test_changed_completed_stage_is_invalid_evidence_rather_than_a_funding_stop\n    with self.assertRaises(EvaluationError):\n         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\nAssertionError: EvaluationError not raised\n\n----------------------------------------------------------------------\nRan 2 tests in 20.448s\n\nFAILED (failures=2)\n"
+    },
+    "pol02-publication-event-count-red.log": {
+      "sha256": "915b6d624d5dd369d0ca4761b6dc1cd8f688fbc91e3e640ef1f2a61e38915251",
+      "text": "F\n======================================================================\nFAIL: test_completed_snapshot_cannot_claim_zero_events_for_existing_owners (test_native_evaluation.NativeEvaluationTests.test_completed_snapshot_cannot_claim_zero_events_for_existing_owners)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\tests\\test_native_evaluation.py\", line 177, in test_completed_snapshot_cannot_claim_zero_events_for_existing_owners\n    with self.assertRaises(EvaluationError):\n         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\nAssertionError: EvaluationError not raised\n\n----------------------------------------------------------------------\nRan 1 test in 10.633s\n\nFAILED (failures=1)\n"
+    },
+    "pol02-source-runtime-join-red.log": {
+      "sha256": "a62e6ddd586af6d08cd1ee0656d5e7b2e548bc27a3f2667b018bc9cbad0bf734",
+      "text": "F\n======================================================================\nFAIL: test_source_authority_runtime_identity_must_match_its_original_manifest (test_native_evaluation.NativeEvaluationTests.test_source_authority_runtime_identity_must_match_its_original_manifest)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-native-evaluation\\tests\\test_native_evaluation.py\", line 207, in test_source_authority_runtime_identity_must_match_its_original_manifest\n    with self.assertRaises(EvaluationError):\n         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\nAssertionError: EvaluationError not raised\n\n----------------------------------------------------------------------\nRan 1 test in 6.852s\n\nFAILED (failures=1)\n"
+    }
+  }
+}
