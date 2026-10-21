@@ -5,9 +5,10 @@ import sqlite3
 from pathlib import Path
 from typing import cast
 
-from buddha.answers import _id, _utf8
+from buddha.answers import _id
 from buddha.doctor import _Busy, _Unsupported
 from buddha.native_evaluation import _Generation, _read_generation
+from buddha.policy_panel import _materials as panel_materials
 from buddha.policy_panel import _pinned, plan_panel
 from buddha.policy_results import _Reader, _rows, _same
 from buddha.releases import ReleaseError, _digest, _json, _object, _root, _text
@@ -24,28 +25,12 @@ def _sha(raw: bytes) -> str:
 def _materials(
     raw: bytes, expected: str, protocol: bytes, protocol_sha256: str, release: dict[str, object]
 ) -> tuple[dict[str, object], str]:
-    record = _object(
-        _pinned(raw, expected),
-        {"format", "release_sha256", "protocol_sha256", "rule", "rubric"},
-    )
-    rule = _object(record["rule"], {"text", "sha256", "upstream_revision"})
-    rubric = _object(record["rubric"], {"text", "protocol_start", "protocol_end"})
-    text = _utf8(_text(rule["text"]))
-    rubric_text = _utf8(_text(rubric["text"]))
-    start, end = rubric["protocol_start"], rubric["protocol_end"]
-    if (
-        record["format"] != "buddha.policy-panel-review.v1"
-        or _digest(record["release_sha256"]) != _sha(_json(release))
-        or _digest(record["protocol_sha256"]) != protocol_sha256
-        or _digest(rule["sha256"]) != _sha(text.encode())
-        or rule["upstream_revision"] != _object(release["upstream"])["revision"]
-        or type(start) is not int
-        or type(end) is not int
-        or not 0 <= start < end <= len(protocol)
-        or protocol[start:end] != rubric_text.encode()
-    ):
-        raise PolicyPanelReadError("review materials differ from their reviewed release/protocol")
-    return {"text": text, "sha256": rule["sha256"]}, rubric_text
+    try:
+        return panel_materials(raw, expected, protocol, protocol_sha256, release)
+    except ReleaseError:
+        raise PolicyPanelReadError(
+            "review materials differ from their reviewed release/protocol"
+        ) from None
 
 
 def materialize_panel(

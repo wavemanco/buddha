@@ -72,8 +72,10 @@ class _Execution:
     files: dict[Path, str]
 
 
-def _definition(
-    path: Path, authority: Authorization, bindings: dict[str, object] | None = None
+def _configuration(
+    study_reference: object,
+    baseline_reference: object,
+    bindings: dict[str, object] | None = None,
 ) -> _Execution:
     files: dict[Path, str] = {}
 
@@ -88,16 +90,12 @@ def _definition(
         files[source] = hashlib.sha256(raw).hexdigest()
         return raw
 
-    description = _object(_load(consume(path)), {"format", "study", "baseline", "authorization"})
-    if description["format"] != "buddha.policy-execution.v1":
-        raise PolicyRunError("unsupported policy execution descriptor")
-
     def reference(value: object) -> bytes:
         record = _object(value, {"path", "sha256"})
         return consume(pipeline._absolute(record["path"]), _digest(record["sha256"]))
 
-    study = PolicyStudy.from_bytes(reference(description["study"]))
-    template_raw = reference(description["baseline"])
+    study = PolicyStudy.from_bytes(reference(study_reference))
+    template_raw = reference(baseline_reference)
     template = _object(_load(template_raw), {"format", "tasks", "generation", "native", "stages"})
     tasks = TaskSet.from_bytes(consume(pipeline._absolute(template["tasks"])))
     generation = _object(template["generation"])
@@ -107,7 +105,7 @@ def _definition(
         {"format", "tasks", "config", "entrypoint", "executor", "profile"},
     )
     baseline._definition(
-        pipeline._absolute(_object(description["baseline"])["path"]),
+        pipeline._absolute(_object(baseline_reference)["path"]),
         {str(source): digest for source, digest in files.items()},
     )
     if (
@@ -117,19 +115,37 @@ def _definition(
         or recipe["config"] != study.schedule()[0]["generation_config"]
     ):
         raise PolicyRunError("baseline template changes the study's selected tasks or first config")
+    for source in _sources():
+        consume(source)
+    return _Execution(study, template, recipe, files)
+
+
+def _definition(
+    path: Path, authority: Authorization, bindings: dict[str, object] | None = None
+) -> _Execution:
+    path = path.absolute()
+    raw = pipeline._read(path, None if bindings is None else bindings[str(path)])
+    descriptor_sha256 = hashlib.sha256(raw).hexdigest()
+    description = _object(_load(raw), {"format", "study", "baseline", "authorization"})
+    if description["format"] != "buddha.policy-execution.v1":
+        raise PolicyRunError("unsupported policy execution descriptor")
+    execution = _configuration(description["study"], description["baseline"], bindings)
     expected = _object(description["authorization"], {"path", "id", "terms_sha256", "scope"})
     summary = authority.summary()
     if (
         pipeline._absolute(expected["path"]) != authority.path
         or _text(expected["id"]) != summary["authorization_id"]
         or _digest(expected["terms_sha256"]) != summary["terms_sha256"]
-        or expected["scope"] != "policy study: " + study.fingerprint()
+        or expected["scope"] != "policy study: " + execution.study.fingerprint()
         or expected["scope"] != summary["scope"]
     ):
         raise PolicyRunError("study differs from the explicit shared authority and scope")
-    for source in _sources():
-        consume(source)
-    return _Execution(study, template, recipe, files)
+    return _Execution(
+        execution.study,
+        execution.template,
+        execution.recipe,
+        {path: descriptor_sha256} | execution.files,
+    )
 
 
 def _controls(directory: Path, execution: _Execution) -> list[Path]:
