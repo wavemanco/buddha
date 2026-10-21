@@ -433,13 +433,16 @@ stop and obtain an appropriate project-scoped key or an explicitly reviewed
 routing profile first. Never paste a key into a visible confirmation field.
 
 Local handoff verification passed: 1,025 tests, the confined 40-target study and actual-profile partial-stop/keyless-recovery proofs. The [handoff delivery](conformance/meas02-live-handoff-delivery.json) records the exact pins and limits; hosted PR checks are reported separately.
-From this project folder, in an ordinary interactive PowerShell window:
+In an ordinary interactive PowerShell window, from any folder:
 
 ```powershell
-python docs/conformance/meas02-live.py --handoff runs/meas02-live-20261020/handoff.json --live --prompt-keys --confirm-project-key
+python C:\Users\arvik\code\buddha\docs\conformance\meas02-live.py --handoff C:\Users\arvik\code\buddha\runs\meas02-live-20261020\handoff.json --live --prompt-keys --confirm-project-key
 ```
 
-This runs once and can spend within the approved $15/120 shared allowance.
+This uses absolute paths for both files, so the current folder does not matter.
+The original frozen launcher requires an absolute handoff path; its earlier
+documented relative path stopped before key entry. This runs once and can spend
+within the approved $15/120 shared allowance.
 `--live` enables unfinished work; `--prompt-keys` requests the missing OpenAI key
 without displaying it. `--confirm-project-key` confirms the project/key condition
 above. Paste once at the hidden key prompt and press Enter. The same process
@@ -525,3 +528,19 @@ accuracy or whether a native repair path caused a disagreement. Raw replies and
 the official parser/repair behavior need separate review. This report-writing
 step is optional for you; sending back the run's completion/partial status and
 observation filename is enough for me to do the analysis here.
+
+## If the launcher stops before key entry
+
+If the absolute-path command above still stops without an explained reason,
+run this optional diagnostic in the same PowerShell window that showed the error:
+
+```powershell
+python -c "import json,os,sys; print(json.dumps(dict(python=sys.executable,version=sys.version.split()[0],stdin_tty=sys.stdin.isatty(),stderr_tty=sys.stderr.isatty(),openai_key_already_set=bool(os.environ.get('OPENAI_API_KEY')))))"
+```
+
+This runs once, spends nothing, writes no files and asks for no key. It prints
+the Python interpreter/version, whether the terminal supports interactive input
+and error output, and only whether an OpenAI key is already set. It never prints
+the key or checks whether the provider accepts it. Use the same window because
+these settings can differ between windows. Send the printed JSON for diagnosis;
+the generic stopped message alone does not identify which check failed.

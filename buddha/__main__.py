@@ -36,6 +36,20 @@ from buddha.provider import Call, ModelSpec, Reply
 from buddha.run import DATASETS, ReplayTransport, RunSettings, load_run, prepare_run, run_baseline
 
 
+class KeyInputError(ValidationError):
+    """A fixed credential-input guard reason, without credential contents."""
+
+    def __init__(self, code: str) -> None:
+        self.code = code
+        super().__init__(
+            {
+                "key_terminal_required": "hidden key entry requires an interactive terminal",
+                "key_input_unavailable": "hidden key entry was unavailable or cancelled",
+                "key_input_invalid": "provider credential is missing or invalid",
+            }[code]
+        )
+
+
 def _notice(message: str) -> None:
     # Console output must never change a paid operation's outcome.
     with suppress(OSError, ValueError):
@@ -101,16 +115,16 @@ def _key_environment(settings: RunSettings, *, prompt_keys: bool) -> Iterator[No
                 if name is None or os.environ.get(name):
                     continue
                 if not sys.stdin.isatty() or not sys.stderr.isatty():
-                    raise ValidationError("hidden key entry requires an interactive terminal")
+                    raise KeyInputError("key_terminal_required")
                 _notice("Key input is hidden. Paste once, then press Enter; no characters appear.")
                 try:
                     with warnings.catch_warnings():
                         warnings.simplefilter("error", getpass.GetPassWarning)
                         value = getpass.getpass(f"{name} (hidden, this process only): ")
                 except (EOFError, getpass.GetPassWarning):
-                    raise ValidationError("hidden key entry was unavailable or cancelled") from None
+                    raise KeyInputError("key_input_unavailable") from None
                 if not value or any(not 33 <= ord(char) <= 126 for char in value):
-                    raise ValidationError("provider credential is missing or invalid")
+                    raise KeyInputError("key_input_invalid")
                 previous[name] = os.environ.get(name)
                 os.environ[name] = value
                 _notice(f"{name} received (hidden; provider access is checked during execution).")
