@@ -28,7 +28,10 @@ partitions and compares 95 resolved distinct relations. Equivalent controls and
 fresh repeated/order tests still need measurement. A
 [prepared native study](docs/MEASUREMENT-JUDGE-AUDIT.md#prepared-native-study-interface)
 now binds those 40 supplied controls to separate accounting occasions; its
-offline execution checks do not supply new model judgments.
+offline execution checks do not supply new model judgments. Its
+[operator launcher](docs/MEASUREMENT-JUDGE-AUDIT.md#operator-commands) checks
+source and shared funding before hidden key entry, then shows progress and
+retains the original owners when interrupted.
 
 These are distinct from scientific success. Meaningful diversity, held-out
 improvement, genuine task/improver source evolution and an improved improver have
@@ -53,11 +56,12 @@ to use installation, configuration and checks before running the same frozen
 agent; [the modularity contract](docs/BENCHMARK-INTEGRATION.md) states the exact
 capability limits and the bounded upgrade/retirement evidence.
 
-The new native library path enables no paid CLI or new allocation. The original
-$50 authorization belongs only to the historical experiment; its completed
-allocations are inactive and its unknown-request hold remains recorded. Finish
-the measurement gates and establish a concrete new allocation before
-another paid experiment. [API key guidance](docs/API-KEYS.md) explains process-only
+The prepared study launcher requires an explicit live flag, a reviewed account
+profile and an existing active allocation before unfinished work can run. No new
+allocation has been created or approved. The original $50 authorization belongs
+only to the historical experiment; its completed allocations are inactive and
+its unknown-request hold remains recorded. Establish a concrete new allocation
+before another paid experiment. [API key guidance](docs/API-KEYS.md) explains process-only
 key entry; never paste keys into chat or commit them.
 
 Slice-specific commits and PRs are maintained in
@@ -111,7 +115,7 @@ keys, makes no changes and spends nothing:
 Get-Content runs/first-live-recovery/report.json
 ```
 
-New live commands require an existing `--authorization` database and a matching immutable run/runtime binding before key entry. Historical manifests retain their source guards; use the preserved original runtime for exact reconstruction, rather than attempting to run them with changed source. Read [API key setup](docs/API-KEYS.md) before execution. Prompted keys live only in the runner process and are removed on exit. Do not paste them into chat.
+Historical pilot live commands require an existing `--authorization` database and a matching immutable run/runtime binding before key entry. The new study launcher instead reads the authority bound to its prepared original owners. Historical manifests retain their source guards; use the preserved original runtime for exact reconstruction, rather than attempting to run them with changed source. Read [API key setup](docs/API-KEYS.md) before execution. Prompted keys live only in the runner process and are removed on exit. Do not paste them into chat.
 
 The CLI acknowledges each received key, announces execution, and shows elapsed time, recorded replies, pending/unknown requests, recorded cost, held reservations and published candidate counts. Unchanged state produces a heartbeat every ten seconds. These messages use stderr; stdout remains JSON. Receiving a key confirms local entry, not provider authentication.
 

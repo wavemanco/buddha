@@ -173,12 +173,13 @@ development provenance retain original item/answer/source identities separately.
 Review labels and expected classes are not sent to the judge.
 
 The [study controller](conformance/meas02-native-audit.py) uses the existing
-`Gateway`, `NativeSession` and shared `Authorization`. Its two library functions
+`Gateway`, `NativeSession` and shared `Authorization`. Its library functions
 are deliberately separate from the old pilot command:
 
 | Interface | Function |
 | --- | --- |
 | `prepare_native_audit(directory, descriptor=..., authorization=..., review=...)` | Validate the frozen controls and source selection, materialize the four native inputs and bind four original request owners to an existing authorization. Reads no keys and makes no provider calls. Partial preparation remains incomplete. |
+| `check_native_audit(directory)` | Check source bindings, retained completions, owner state, next account review and immediate funding without keys, workers or provider calls. Completed-only reuse needs no live profile refresh. |
 | `run_native_audit(directory, transport=...)` | Run or recover those original owners. Retain raw replies, every physical attempt, partial artifacts and unknown-charge holds. Actual spending requires an explicitly paid transport, reviewed profiles, keys and active shared authorization. |
 
 The descriptor's exact fields are `format` (`buddha.meas02-native-audit.v1`),
@@ -240,8 +241,10 @@ lacks the prepared image, private history and reference environment. Simulated
 reply groups test mapping and execution, not semantic accuracy or equivalence
 detection by a real model.
 
-No paid command, new allocation or account-specific price profile is supplied
-by this preparation. The original target proposal and readiness note remain
+The original preparation supplied no paid command, new allocation or
+account-specific profile. The operator entry below now provides explicit live
+execution over supplied authority; it creates no allocation and grants no
+spending permission. The original target proposal and readiness note remain
 historical proposals rather than being rewritten as approvals.
 
 The [actual native proof](conformance/meas02-native-proof.json) passes all 40
@@ -255,3 +258,133 @@ order. The official code and controller required no change for this fixture fix.
 The [independent boundary review](conformance/meas02-native-independent-review.json)
 and [delivery record](conformance/meas02-native-delivery.json) retain source pins,
 negative controls, completed checks and their exact limits.
+
+
+## Operator commands
+
+The [local launcher](conformance/meas02-run.py) uses the existing hidden-key
+helper and the same study controller. It does not change official requests,
+answer order, evaluator code or the application's version-neutral modules.
+A reviewed descriptor, account review and active shared authorization must be
+supplied first. No such live allocation has yet been approved for this study.
+The user's Standard/default project setting is confirmed; credentials, applicable
+account pricing and the new dollar/physical-attempt allowance still need binding.
+
+The following are command forms for the reviewed files, **not instructions to
+start a paid run now**. `$studyPath`, `$descriptorPath`, `$authorizationPath` and
+`$reviewPath` stand for those supplied paths. Run from the project folder in the
+same PowerShell window; a new window is unnecessary.
+
+```powershell
+python docs/conformance/meas02-run.py prepare --run $studyPath --descriptor $descriptorPath --authorization $authorizationPath --review $reviewPath
+```
+
+This runs once, writes the study inputs and four request-owner records, and
+attaches them to the existing allocation. It asks for no keys and makes no model
+calls. It does not create money or multiply the shared limits. Partial preparation
+remains incomplete; keep its records if it stops. Ctrl+C stops the command.
+
+```powershell
+python docs/conformance/meas02-run.py check --run $studyPath
+```
+
+This runs once without keys or provider spending. It checks the frozen inputs,
+source, all original owners, saved completion evidence and the next unfinished
+batch's account/funding conditions. It prints `ready` or `complete` and identifies
+the next occasion. It opens the existing authority/ledger interfaces; it is not a
+historical read-only viewer. A ready result is a current check, not a promise the
+whole study can finish. Execution repeats these checks after key entry.
+
+```powershell
+python docs/conformance/meas02-run.py run --run $studyPath --live --prompt-keys
+```
+
+After the new allocation is approved, this runs or continues the study once and
+can spend within its shared limits. It checks first, then requests only the
+reviewed OpenAI key if absent from this process's environment. Paste once and
+press Enter: characters remain hidden. A received-key message confirms local
+entry, not provider authentication. The key's fingerprint must match the reviewed
+account before containers start. Prompted keys are removed when execution exits;
+pre-existing environment values are left as they were. Never send keys in chat.
+
+After key entry, a starting message and immediate progress line appear. A
+heartbeat repeats every ten seconds during native startup and provider waits.
+It shows shared attempt records, recorded spending, held money and the cap.
+An attempt record may exist before transmission; recorded spending is the
+conservative local calculation, not a reconciled invoice. Held money covers an
+unfinished request and is not an extra charge. Progress-observer failure does
+not change request accounting or grant permission to continue past a stop.
+
+Ctrl+C cancels foreground execution and retains replies, original owners and
+outstanding holds. Continue with the same command and study directory only when
+the retained state permits it; a lost reply or unknown payment requires review.
+Do not create a fresh directory or allocation to escape a hold. A hard kill can
+leave the running lock; its presence alone cannot prove whether a writer lives.
+
+```powershell
+python docs/conformance/meas02-run.py run --run $studyPath
+```
+
+After all four batches complete, this runs once to recheck and reuse their saved
+completion evidence, without keys or new provider calls. Unfinished work refuses
+without `--live`. Exit 0 means successful preparation/checking or a completed
+run; exit 3 means an incomplete run, 130 means Ctrl+C and 2 means a stopped or
+invalid command. A cancellation or incomplete
+result never prints successful completion.
+
+**MEAS2-O1/O2 (reproduced operator guard failures).** A small unrelated reservation
+must not disguise inadequate funding, and an inactive later owner must stop the
+study before an earlier owner spends. The shared preflight now enforces both.
+A full existing unsent reservation can only be reused under the original request
+identity; another owner's hold is no credit. Source changes after checking are
+also rechecked before execution. **MEAS2-O3** rejects an oversized credential,
+even if its fingerprint matches, before worker startup. The
+[independent review](conformance/meas02-operator-independent-review.json) records
+the actual failing checks and their fixes. These are engineering findings, not
+new evidence about semantic judge accuracy.
+
+The separate [operator native proof](conformance/meas02-operator-native-proof.json)
+exercises this actual launch path over all 40 targets: hidden input, immediate
+progress, received-reply interruption, original-owner recovery and completed
+keyless reuse. It records 42 simulated sends and zero real calls. Simulated
+credentials never leave the fixture; temporary environment values are restored.
+The earlier native proof remains unchanged as a separate historical record.
+The [operator delivery](conformance/meas02-operator-delivery.json) records the
+final checks and their limits. No synthetic response establishes the real
+judge's semantic accuracy or stability.
+
+
+## Proposed next live allocation
+
+This is a concrete decision proposal, not authorization: **a new $5 shared cap
+and at most 120 physical API attempt records** for the 40 frozen judge targets,
+across all four occasions. Use the explicit `gpt-5.6-luna` partition profile,
+unchanged official requests and the user-confirmed Standard/default project
+setting. No generation, search, quality rescore or extra targets are included.
+The original experiment's unused balance is not transferred or reopened.
+
+Under public Standard pricing, the proposed conservative profile uses maximum
+input/output rates of $0.50/$1.80 per million tokens, including the long-context
+and default cache-write upper envelope. Reserving the entire 1,050,000-token
+context as input plus 128,000 output tokens requires **$0.7554 before each
+request**. This deliberately exceeds a jointly feasible input/output usage: the
+model's actual maximum input is 922,000. The safety envelope leaves the native
+wire unchanged rather than inserting a smaller output cap or tier override.
+See the official [pricing](https://developers.openai.com/api/docs/pricing),
+[model limits](https://developers.openai.com/api/docs/models/gpt-5.6-luna) and
+[cache billing](https://developers.openai.com/api/docs/guides/prompt-caching).
+
+The $5 cap does **not** guarantee completion: it covers only six such worst-case
+requests. Ordinary short responses release unused reservations, which can let
+many more targets finish. No credible measured forecast exists yet for this
+study. A funding stop is accepted as an incomplete result; retain all replies
+and holds, with no automatic top-up, replacement owners or extra targets.
+The 120 physical-attempt cap is separate from the proposal's 120 possible
+semantic folds: native SDK retries may require additional physical attempts,
+and the shared cap can stop them. Unknown payment stops further spending.
+
+Before creation or execution, confirm that public prices apply (custom/Scale
+terms need their own reviewed envelope), bind any required account headers or
+explicitly none, and produce the credential fingerprint locally through hidden
+entry. No raw key belongs in chat or a saved review. The new $5/120 allowance and
+acceptance of partial completion still require the user's approval.

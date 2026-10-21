@@ -23,9 +23,12 @@ from buddha.baseline import (  # noqa: E402
     _write,
 )
 from buddha.gateway import (  # noqa: E402
+    CAPABILITIES,
     Gateway,
     RawHTTPTransport,
     _read_manifest,
+    _review,
+    _spec,
     execution_identity,
     prepare_gateway,
 )
@@ -110,8 +113,9 @@ def _sources():
     if file_hash(MATERIALIZER) != MATERIALIZER_SHA256:
         raise NativeAuditError("consumed materializer source changed before invocation binding")
     package = ROOT / "buddha"
-    return [Path(__file__).resolve(), MATERIALIZER] + [
-        package / (name + ".py") for name in (*RUNNER_FILES, "executor", "native_run", "baseline")
+    return [Path(__file__).resolve(), MATERIALIZER, Path(__file__).with_name("meas02-run.py")] + [
+        package / (name + ".py")
+        for name in (*RUNNER_FILES, "executor", "native_run", "baseline", "__main__")
     ]
 
 
@@ -337,7 +341,7 @@ def run_native_audit(directory, *, transport):
         return _run(directory, transport)
 
 
-def _run(directory, transport):
+def _state(directory, transport):
     anchor = Gateway(directory / "owners/0", transport=transport)
     initial = _read_manifest(anchor.directory)
     bindings = {item["path"]: item["sha256"] for item in initial["invocation"]["inputs"]}
@@ -376,8 +380,6 @@ def _run(directory, transport):
         raise NativeAuditError("study completion records are not the original ordered prefix")
     if (directory / "report.json").exists() and len(names) != 4:
         raise NativeAuditError("published study report lacks four complete anchored batches")
-    reports = []
-    seals = {}
     protected = {}
     completions = {}
     # Validate every retained completion before any unfinished batch can spend.
@@ -409,6 +411,107 @@ def _run(directory, transport):
         completions[index] = (report, attempt, digest)
         protected.update({attempt / name: value for name, value in seal["files"].items()})
         protected[sealed] = digest
+    if len(completions) == 4 and (directory / "report.json").exists():
+        expected = _result(
+            [completions[index][0] for index in range(4)],
+            {str(index): completions[index][2] for index in range(4)},
+        )
+        if _read(directory / "report.json") != _json(expected):
+            raise NativeAuditError("published study report differs from anchored completion")
+    active = {row["run_id"]: row["active"] for row in authority.summary()["runs"]}
+    if any(not active[records[index]["run_id"]] for index in range(4) if index not in completions):
+        raise NativeAuditError("an unfinished study owner is inactive; original state retained")
+    return {
+        "definition": definition,
+        "batches": batches,
+        "descriptors": descriptors,
+        "records": records,
+        "gateways": gateways,
+        "authority": authority,
+        "completions": completions,
+        "protected": protected,
+    }
+
+
+@checked
+def check_native_audit(directory):
+    """Validate original live owners before key entry; never dispatch or create funding.
+
+    An existing unsent reservation may be reusable. This is not a promise that
+    native scheduling next requests that exact operation or completes the audit.
+    Normal run validation and exact Gateway guards still repeat after key entry.
+    """
+    if not isinstance(directory, Path):
+        raise NativeAuditError("study needs its original Path directory")
+    directory = directory.absolute()
+    with _exclusive(directory):
+        state = _state(directory, RawHTTPTransport(allow_paid=False))
+        records = state["records"]
+        remaining = [index for index in range(4) if index not in state["completions"]]
+        result = {
+            "status": "ready" if remaining else "complete",
+            "next_batch": remaining[0] if remaining else None,
+            "next_occasion": state["batches"][remaining[0]]["occasion"] if remaining else None,
+            "authorization_path": records[0]["authorization_path"],
+            "review": _load(_json(records[0]["review"])),
+            "credential_sha256": _load(_json(records[0]["review"]["credential_sha256"])),
+            "source_files": [dict(item) for item in records[0]["invocation"]["inputs"]],
+            "profiles": [],
+        }
+        if not remaining:
+            return result
+        index = remaining[0]
+        gateway = state["gateways"][index]
+        gateway.ledger.authorize_dispatch()
+        _review(records[index]["review"], fresh=True)
+        specs = []
+        for provider, mapping in state["definition"]["native"]["profiles"].items():
+            capability = next(key for key, value in CAPABILITIES.items() if value[0] == provider)
+            profiles = records[index]["profiles"][capability]["profiles"]
+            for model, name in mapping.items():
+                spec = _spec(profiles[name]["spec"])
+                if spec.model != model or spec.provider != provider:
+                    raise NativeAuditError("native judge differs from reviewed model profile")
+                specs.append(spec)
+        if not specs:
+            raise NativeAuditError("unfinished study lacks a reviewed judge profile")
+        local = gateway.ledger.totals()
+        shared = state["authority"].summary()
+        # Own unsent holds may be reused without fresh capacity; another owner's
+        # holds are not credit. Exact request identity remains Gateway-owned.
+        reserve = min(spec.reserve_microusd() for spec in specs)
+        if local["reserved_microusd"] < reserve:
+            settings = records[index]["settings"]
+            if (
+                shared["remaining_calls"] == 0
+                or local["operation_count"] >= settings["max_calls"]
+                or shared["available_microusd"] < reserve
+                or settings["budget_microusd"] - local["committed_microusd"] < reserve
+            ):
+                raise NativeAuditError("study lacks verified capacity for a new physical attempt")
+        result["profiles"] = specs
+        return result
+
+
+def _result(reports, seals):
+    return {
+        "format": "buddha.meas02-native-study-report.v1",
+        "status": "complete",
+        "input_kind": "supplied audit controls",
+        "target_count": 40,
+        "batches": reports,
+        "batch_seals": seals,
+        "claim": CLAIM,
+    }
+
+
+def _run(directory, transport):
+    state = _state(directory, transport)
+    descriptors, batches = state["descriptors"], state["batches"]
+    gateways, records = state["gateways"], state["records"]
+    authority, completions = state["authority"], state["completions"]
+    protected = state["protected"]
+    reports, seals = [], {}
     for index, (recipe, batch) in enumerate(zip(descriptors, batches, strict=True)):
         for path, digest in protected.items():
             _read(path, digest)
@@ -459,14 +562,6 @@ def _run(directory, transport):
         _read(path, digest)
     # A repeated read reports the same scientific completion, not later unrelated
     # authority activity. Every bound owner and completion is still revalidated.
-    result = {
-        "format": "buddha.meas02-native-study-report.v1",
-        "status": "complete",
-        "input_kind": "supplied audit controls",
-        "target_count": 40,
-        "batches": reports,
-        "batch_seals": seals,
-        "claim": CLAIM,
-    }
+    result = _result(reports, seals)
     _same_or_write(directory / "report.json", _json(result))
     return result
