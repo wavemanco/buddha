@@ -25,7 +25,10 @@ now has two frozen model reviews and a separate blinded adjudication. The
 uncertain items; human scientific validation remains open. The
 [offline judge audit](docs/MEASUREMENT-JUDGE-AUDIT.md) reproduces all six saved
 partitions and compares 95 resolved distinct relations. Equivalent controls and
-fresh repeated/order tests still need measurement.
+fresh repeated/order tests still need measurement. A
+[prepared native study](docs/MEASUREMENT-JUDGE-AUDIT.md#prepared-native-study-interface)
+now binds those 40 supplied controls to separate accounting occasions; its
+offline execution checks do not supply new model judgments.
 
 These are distinct from scientific success. Meaningful diversity, held-out
 improvement, genuine task/improver source evolution and an improved improver have
