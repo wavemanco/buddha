@@ -1,0 +1,1121 @@
+{
+  "claims": [
+    "Development judge calibration only",
+    "No candidate improvement,quality rescore,held-out or population judge-accuracy claim"
+  ],
+  "counts": {
+    "additional_order_fullsets": 12,
+    "baseline_items": 22,
+    "nominal_max_semantic_folds_without_SDK_retries": 120,
+    "same_order_fullset_repeats": 6,
+    "targets": 40
+  },
+  "date": "2026-10-20",
+  "execution_conditions": [
+    "Same literal prompt and answer texts from frozen pack;no regenerated/rewritten/padded answers",
+    "Use unchanged official partition renderer/parser/fold under pinned reference;short cards are semantic controls,not ten-answer benchmark scores",
+    "Each target has a fresh physical accounting occasion and empty native cache;repeat must preserve the scientific request body,not reuse an old receipt",
+    "Retain actual original-answer mappings for every official display permutation",
+    "All22 cases remain in population including5uncertain;uncertain independent labels are not treated as errors or gold",
+    "Budget and every physical SDK attempt are host-owned;unknowns or insufficient verified funding stop;targets may remain incomplete",
+    "Requires verified applicable model/tier/rate profile,concrete new allocation and separately reviewed execution path before any provider call"
+  ],
+  "format": "buddha.meas02-target-proposal.v1",
+  "funding": {
+    "allocated": false,
+    "historical_balance_is_not_permission": true,
+    "native_price_profile_verified": false,
+    "physical_attempt_allowance": null
+  },
+  "input_sha256": {
+    "docs/conformance/meas01-adjudication-review.json": "31a8ed84887cf85a391b2729e8cb0ea656fa331e82b413d8b954c7c9f0c294a3",
+    "docs/conformance/meas01-study/pack.json": "8a29cded45e11f62eaecba52e5d9c30a88e2733b28cc8138aa2fdb38d025bf15"
+  },
+  "official_source_sha256": {
+    "common.py": "ba60bf0f2a409c3774d75880f305325a28ed34320610667542a4596c41f424af",
+    "judge.py": "4decf04790b90a03368eb792dfe29045435914a73ab83a52185d9dd0d1613902",
+    "partition.py": "263970891ff3ee1cc8df369a33beefe5cb5de618b5dd146a5234536d97954aca"
+  },
+  "rendering_checks": {
+    "all40_actual_official_renderings_checked": true,
+    "each_fullset_has_three_distinct_actual_display_orders": true,
+    "schema_materialization": "Trusted pinned Pydantic schema generated before no-import guard;calls/mapping checked inside unchanged guard",
+    "scope": "Rendered system/user/schema only;not a funded SDK/HTTP request or fresh judge measurement",
+    "six_repeat_renderings_equal_baseline": true
+  },
+  "status": "proposed_not_authorized_or_executable",
+  "targets": [
+    {
+      "answer_count": 2,
+      "answer_ids_in_pack_order": [
+        "91fccccb4df9c46a5ed457f0c13825cc",
+        "1012bb233ec6d2bebfe0b4dabbf4eb55"
+      ],
+      "item_id": "92bbea60cc82d82c3f0727116decc86b",
+      "kind": "historical_comparison",
+      "occasion": "baseline",
+      "official_display_order": [
+        0,
+        1
+      ],
+      "official_display_seed": null,
+      "rendered_call_sha256": "3e2c501036f0d8b4d2bf6f063c7c4ba0bd22b3a3b48c10a688a34aa6b80464e8",
+      "target_id": "cb547ee4fce4214f6d63ba97ac70e8bbe1b85eba620a60a420c8cdca4d93db72"
+    },
+    {
+      "answer_count": 4,
+      "answer_ids_in_pack_order": [
+        "d36a193383a41b917d61e8f47885c127",
+        "5a555875dc883ac26a3e5190c56feafe",
+        "83f7be99bfb825e4c4db9743e109f1d5",
+        "9673b5a72b6ff43f18e5fb29d7239915"
+      ],
+      "item_id": "9bef63191451b984d6e7940e8cf87435",
+      "kind": "authored_control",
+      "occasion": "baseline",
+      "official_display_order": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "official_display_seed": null,
+      "rendered_call_sha256": "6d2dba2bbe25bda8fa33063cc7809cf99445bddf7cd867dea2b5b31575787d61",
+      "target_id": "6b665579406460d1c1a5624882469cae9b71fa45c13f226623685d3c03c026c9"
+    },
+    {
+      "answer_count": 2,
+      "answer_ids_in_pack_order": [
+        "1f05a4f755b5e8b034e868d8cb9ccfc7",
+        "12bf998ddb94aabf41f8b4c36541f60d"
+      ],
+      "item_id": "1c6b4f8f841d8095f3e49f35ba7f9d9c",
+      "kind": "historical_comparison",
+      "occasion": "baseline",
+      "official_display_order": [
+        0,
+        1
+      ],
+      "official_display_seed": null,
+      "rendered_call_sha256": "74f7e68302ad43a67bfc0c3833e16f7e3123d3997c8937225a42e9cc701dbe92",
+      "target_id": "a135685527cb320af80feaf461c011764d9a6d43d15fa51531753cf33e8e80e3"
+    },
+    {
+      "answer_count": 10,
+      "answer_ids_in_pack_order": [
+        "0cb42de52c35843758e4c875ddd9a43c",
+        "fe53ecd2eb3929bba2a4fccc1dae528b",
+        "2cf7f72fa2321501e29a78f8d87438c0",
+        "e6842d2bc6f0277d85bd4b2676c2f6fc",
+        "49b1ad6c2976bfa8920c048f7e69158b",
+        "b36eb078d07198b4fcac77b102c61511",
+        "4161819f4660b5515d94bab7adbf9e4a",
+        "736715e4ad9011ed71a16af7aac66b40",
+        "6107f57b393b3718b197f0b08a47862d",
+        "706638063826e0a2550ac5be7a220908"
+      ],
+      "item_id": "d46355da75af2b016bf57e11744eded5",
+      "kind": "historical_set",
+      "occasion": "baseline",
+      "official_display_order": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "official_display_seed": null,
+      "rendered_call_sha256": "dc91d2c82a3a755034f3d818288826077414ffd98ed407f29fad29f482f83c4e",
+      "target_id": "b75401683289d5fac8953854fc6bc6ba7e50006125cbf65d44f0bb30821d418d"
+    },
+    {
+      "answer_count": 10,
+      "answer_ids_in_pack_order": [
+        "1865a1afea96c4744f6771318aa3d6b4",
+        "a693127cda5a96374b9ef33e26460da4",
+        "ea4caf5456e2c8862861ee4f711a863b",
+        "ac938a8cd91a677e7779493ea5d979db",
+        "de956ae4097cec695869dc79f332b9e5",
+        "79978427aa3c43b7bcc05fe8375f60b9",
+        "16f9bf7d341494e7bbe88a786bfb7877",
+        "64e4eda8c94c28fe463f8ad577340966",
+        "09415ff47609795fbbe140d05815bd87",
+        "de528fb1f286939a564ddb996dfd6e74"
+      ],
+      "item_id": "51234f90d16f7154c9064a7637c48093",
+      "kind": "historical_set",
+      "occasion": "baseline",
+      "official_display_order": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "official_display_seed": null,
+      "rendered_call_sha256": "6502d1d7ac3afce2fec75990ed76ee001ffa07613944b8567f439d8abf57e77a",
+      "target_id": "afd58c052271bc3eb3951cbe449c33697add179c4656764350b09cfe086af390"
+    },
+    {
+      "answer_count": 2,
+      "answer_ids_in_pack_order": [
+        "b8f3511cccbb7cd35d3d6188f4bcb393",
+        "fd9092f32ea8d4357bed97dbae929c62"
+      ],
+      "item_id": "2e4ad7b4d67bbacdd1a7f9bf6144aa48",
+      "kind": "historical_comparison",
+      "occasion": "baseline",
+      "official_display_order": [
+        0,
+        1
+      ],
+      "official_display_seed": null,
+      "rendered_call_sha256": "bdef4aff894df7de2a84b89b9da9f1f747060b9b50c3465a7a949fc2f3231399",
+      "target_id": "6e93c568f2bde513acc7af4ba2ce4a428ae062edaaad88d57f145b6add1458ca"
+    },
+    {
+      "answer_count": 10,
+      "answer_ids_in_pack_order": [
+        "23784d7af28be3099ac4c81b91a1e386",
+        "5de847af0bcc1920ec5329f117c1f607",
+        "adb7640e3117e2d7fecb725b184fe7c5",
+        "dbe29fe7b178a44865b7de6817824711",
+        "b8acbf0a8d30733301afa18130e1ebc3",
+        "a2fce1358a2454f4e563c44b66f07b4f",
+        "212c23519d288c6c66e404628115a8f4",
+        "64b47a02665aa2c62832da55ac11cbdd",
+        "2e44cf79a6d4941fbff90df635983240",
+        "5b53b5817abfa52dce6726be481082f2"
+      ],
+      "item_id": "344e6398cb019bc7e0e69d6bcc2f4d88",
+      "kind": "historical_set",
+      "occasion": "baseline",
+      "official_display_order": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "official_display_seed": null,
+      "rendered_call_sha256": "57a3eeeef716d1c9c34d322b0665deb9a34c60ae8fa00afa640849b3af581b6c",
+      "target_id": "04c87d23d68434abdf1b889a246826d132d81e13bb36ef3ea8a60e8f55989f18"
+    },
+    {
+      "answer_count": 10,
+      "answer_ids_in_pack_order": [
+        "10c440e0341fedd28223fbeb52921f4a",
+        "8e7baf14171d86446d5351713f052361",
+        "8710ec44abb26ca6a13cad1e38f0f413",
+        "09fb9aff0cec0f95275a90aa36b30269",
+        "1d26ae1af7a54a22f737909f28808268",
+        "772df7da44f88c0cbff505e2be1612a7",
+        "c736afa8fef6a2c3466bdac0683168ad",
+        "c78cdf0e34cf2b1ac9a06c29f96951dc",
+        "b6c257d4eb02a05a71d4a464af89bf78",
+        "51b4b29dfd2c0114173319c1ba4e2f5b"
+      ],
+      "item_id": "a6deca95bec239a475b0124ec6348ff6",
+      "kind": "historical_set",
+      "occasion": "baseline",
+      "official_display_order": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "official_display_seed": null,
+      "rendered_call_sha256": "7633e8a7d2af0f699055124724e2576a0f2acc27ec57382bca2f01893280ad6e",
+      "target_id": "2b0a8044e749c2150de58a7fd3d510a7289e45ab91f6fc6a3de017d7674af376"
+    },
+    {
+      "answer_count": 2,
+      "answer_ids_in_pack_order": [
+        "61fb2dc048d5cb6240ce40558598ed64",
+        "095c985e9ec5ea81852328ed8396e803"
+      ],
+      "item_id": "bdcdc29b741cb601ef9062c05a490aca",
+      "kind": "authored_control",
+      "occasion": "baseline",
+      "official_display_order": [
+        0,
+        1
+      ],
+      "official_display_seed": null,
+      "rendered_call_sha256": "016a30b60499118dc9f8b34bb1ecbcc686f52089577afcdb0d106c4cf4b6fe58",
+      "target_id": "c3e924a6a049c211b95026fc11988facdb355912cf60b5e4940301ec83fcfbd9"
+    },
+    {
+      "answer_count": 2,
+      "answer_ids_in_pack_order": [
+        "d3f819db3a145e3fc39fd8364a74dc38",
+        "bc3e4c414f9cac035346f7299840f2e4"
+      ],
+      "item_id": "8664f647a70dd7df7e1c260b7dc7b511",
+      "kind": "authored_control",
+      "occasion": "baseline",
+      "official_display_order": [
+        0,
+        1
+      ],
+      "official_display_seed": null,
+      "rendered_call_sha256": "3618f43eca28a4643e7fbfc6d09a1840ba5ef39efefd516995e4586c7a1b6c0d",
+      "target_id": "77efd16cc97f43fd65e9a41bac149b42196d4ed6ed83dd781d7735eeff2d6e2b"
+    },
+    {
+      "answer_count": 2,
+      "answer_ids_in_pack_order": [
+        "9fce9e3e951d7788c9ffb9435f580170",
+        "9c6265496583bc234c9d3cf9d6ea2fad"
+      ],
+      "item_id": "be26bf6f449325ec2e0fcb3f5e75756a",
+      "kind": "historical_comparison",
+      "occasion": "baseline",
+      "official_display_order": [
+        0,
+        1
+      ],
+      "official_display_seed": null,
+      "rendered_call_sha256": "3fac5ff72abaee8e811c5b64cf3854eafa226288ef8c321bf29b8253a88916e2",
+      "target_id": "302d114d4a18cb0e5d7cf3c9384cc4ef19157912667bc76c8a1a4d7fa633e4c4"
+    },
+    {
+      "answer_count": 2,
+      "answer_ids_in_pack_order": [
+        "226f1598c3caed2eefc194714fb3914b",
+        "d171187e870dcf82119cea13d3165e53"
+      ],
+      "item_id": "2da27b0ae8c3039fcff89e5530889fb3",
+      "kind": "authored_control",
+      "occasion": "baseline",
+      "official_display_order": [
+        0,
+        1
+      ],
+      "official_display_seed": null,
+      "rendered_call_sha256": "e9eef38182a74a32c27c3fac475825b4d4b95000099074485de96c7bd9ef8852",
+      "target_id": "2a0ce106a9364151bfc6414d686b6c5fc552ba90201f1099e9d4ce32926bc1d3"
+    },
+    {
+      "answer_count": 2,
+      "answer_ids_in_pack_order": [
+        "db74c37fc59c517eef8568c12eadab4b",
+        "58f993adc274019328c7b10464be47f9"
+      ],
+      "item_id": "d4ec43273c6d8f4c59d77fa59427638a",
+      "kind": "historical_comparison",
+      "occasion": "baseline",
+      "official_display_order": [
+        0,
+        1
+      ],
+      "official_display_seed": null,
+      "rendered_call_sha256": "ea5a8657617ef6b186a7be824e7a1c07b5980b8327dfcf41e958bf002a68945e",
+      "target_id": "82647c090fc918a8121e4d8b6449a31bacf87862a6e6fee86b78908770b98268"
+    },
+    {
+      "answer_count": 10,
+      "answer_ids_in_pack_order": [
+        "72d7f861e100faff39a2527f0611c210",
+        "00b2469d9e00d30523bc9c78e7055457",
+        "c9f81e017f7438834d89aa3e6f46765a",
+        "df6f528563e850d67d396c76a6bc75d3",
+        "55453440696cb95e0b8c5f3ecc3d9acd",
+        "f7c5cc2a848f31ecc181f4390da6904d",
+        "973b43d281f923026b0509a848a489bc",
+        "def98a7dcd76d9c27967b23bddf03bda",
+        "319b5cec10547073218ba5b29b4bd60d",
+        "31308b530f0edae1e0266258a1ec10ed"
+      ],
+      "item_id": "eb0cebeb4449dc16174c85a9a0d878b9",
+      "kind": "historical_set",
+      "occasion": "baseline",
+      "official_display_order": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "official_display_seed": null,
+      "rendered_call_sha256": "c64e94b5f903ef76b07a1e461576404dc26532fef44ce21cc50efd21eed4205a",
+      "target_id": "2fde5cddac3f937261edcc8d597ebd0619e1a478b12a9ad19023e68b6f1680a8"
+    },
+    {
+      "answer_count": 2,
+      "answer_ids_in_pack_order": [
+        "ac86a5d7632a449920f1ba6ea5b972dd",
+        "07400b060e67495573c0c690256e1515"
+      ],
+      "item_id": "33d067fb4613a2ef2da48df5f8ef1e19",
+      "kind": "authored_control",
+      "occasion": "baseline",
+      "official_display_order": [
+        0,
+        1
+      ],
+      "official_display_seed": null,
+      "rendered_call_sha256": "99eed1af23de159d620b6c4e5212b42e2c488e77e8fdb955556263c662ae6222",
+      "target_id": "4e9276a5fcdf847f98a0834a582a5e8bfd0fce77f31b1ee24d4563516519d613"
+    },
+    {
+      "answer_count": 2,
+      "answer_ids_in_pack_order": [
+        "6e332d69421cb978781b64511da3d3cf",
+        "1f6ccfb5fcae50a774c4d98e6c87fbc1"
+      ],
+      "item_id": "e7feb4d99fea5f238cd59e3cdf82aa3b",
+      "kind": "authored_control",
+      "occasion": "baseline",
+      "official_display_order": [
+        0,
+        1
+      ],
+      "official_display_seed": null,
+      "rendered_call_sha256": "02207b68b8b2e13e564e92dc373870bd8a2d862ffb436b8ab0b02006e4ba3949",
+      "target_id": "caa9a3667eb5fe1db0378cbe41259ea6b703a59744ce68e8bcbd8263407a1137"
+    },
+    {
+      "answer_count": 10,
+      "answer_ids_in_pack_order": [
+        "83f481fccb15fc4505a4927003c8e470",
+        "96854e3a2170213ce2ca21333a1c76fc",
+        "5b5475d4a9dfd4ee49c4d70794125930",
+        "b15355a01f8750efe1a507d7c7e7e1bd",
+        "e851845fe9bdf961aa66acf81df5f636",
+        "57636bd60753cf774252aa29e0ff318a",
+        "1acc0753ff2baf53eb255ad5ee40e48f",
+        "ca3d62f5635769800f84f24b2c8ff9f4",
+        "ab318b66b8aa87ba0e5d156dd2bd0c8d",
+        "f848374daa06073a569e6dd3b107d6c7"
+      ],
+      "item_id": "80262d25cd742e1fdfec68a8c9c7017a",
+      "kind": "historical_set",
+      "occasion": "baseline",
+      "official_display_order": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "official_display_seed": null,
+      "rendered_call_sha256": "fda2119cb12756e2e1dae6eb09d8048cc411cd9336b246bd252f3a3838c21400",
+      "target_id": "5ced79ce1a1593aa9155ab0731dc7b056cb95d0cbb5062266d5cee3919bd80a9"
+    },
+    {
+      "answer_count": 2,
+      "answer_ids_in_pack_order": [
+        "216b6020c9f578762aabb8a82cc7858a",
+        "646b082f13a763daa9684761eadb283d"
+      ],
+      "item_id": "a58d409d4c57a0355ae8c255154c9c6b",
+      "kind": "historical_comparison",
+      "occasion": "baseline",
+      "official_display_order": [
+        0,
+        1
+      ],
+      "official_display_seed": null,
+      "rendered_call_sha256": "302a49c9787a4112947db47809a360af619abde53b7d56cbcc3bb6fd5c8086ea",
+      "target_id": "809f5bbbf61118c37f589d9cca774af8e7a4b55d969b1c606ba078fd8f05033c"
+    },
+    {
+      "answer_count": 2,
+      "answer_ids_in_pack_order": [
+        "eecc49d79aad0fc118a55928305df255",
+        "478e7be78120f0912f270c05e9d8fc36"
+      ],
+      "item_id": "c68c830af8c997b24e3a9b67c7f345f4",
+      "kind": "historical_comparison",
+      "occasion": "baseline",
+      "official_display_order": [
+        0,
+        1
+      ],
+      "official_display_seed": null,
+      "rendered_call_sha256": "991a75d03276ebdea7def283e843115a685a2ad6cde3beb0f3ad1def121ffbc6",
+      "target_id": "8f888a71c67043ea900c2133945ee8abfec99f3a7e50c81c4e8016a9030582b1"
+    },
+    {
+      "answer_count": 4,
+      "answer_ids_in_pack_order": [
+        "5baf0f6ed779e18cf33dda69bc6367ca",
+        "52b70b147e7bd11fe5373988141cbc15",
+        "71c7a847a58b93d2de23bcc07c4563c6",
+        "59c458b071ef37f0c3fd08d14d6b6d8f"
+      ],
+      "item_id": "8ea2c26319ada4d4865fcd7cd05b661d",
+      "kind": "authored_control",
+      "occasion": "baseline",
+      "official_display_order": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "official_display_seed": null,
+      "rendered_call_sha256": "05d5776b3f1b4b9da1cab820c1e0daa09efb6db646aacba5e5d429203c3a8a92",
+      "target_id": "c4b1718453edbce5da9ad90d89394e15fa6a3dbb03237fc3ea8c85ccb57c4b27"
+    },
+    {
+      "answer_count": 2,
+      "answer_ids_in_pack_order": [
+        "6fab571ac6d066fc056a1f04f8cea742",
+        "1eda249504c6a4412c0308ed99fc7ce1"
+      ],
+      "item_id": "bba87d6fd854389765a0303dce90450e",
+      "kind": "historical_comparison",
+      "occasion": "baseline",
+      "official_display_order": [
+        0,
+        1
+      ],
+      "official_display_seed": null,
+      "rendered_call_sha256": "0f73bdc390ef82ffb21f047d7ee3a4636363467aaaafd55e06ff34b4a3dc0246",
+      "target_id": "76c58af16ef766c716b17572c8b480c461eb1fac48a03b17fee0d199c8e77549"
+    },
+    {
+      "answer_count": 2,
+      "answer_ids_in_pack_order": [
+        "949759694a7f653398bcfe31505757f7",
+        "c7853941b71b358a5c05600e60a796c9"
+      ],
+      "item_id": "8433af3c1b37d8fd660566988aabf71e",
+      "kind": "historical_comparison",
+      "occasion": "baseline",
+      "official_display_order": [
+        0,
+        1
+      ],
+      "official_display_seed": null,
+      "rendered_call_sha256": "56c62ced7aab1feb4651adbfa8a40f93cd2c8d2dbb8607f147e0c1e8911ab263",
+      "target_id": "cb3e04bc71a68832dbb0e75af447e4eff7ae36719067fc08b96b9ec1723c5875"
+    },
+    {
+      "answer_count": 10,
+      "answer_ids_in_pack_order": [
+        "0cb42de52c35843758e4c875ddd9a43c",
+        "fe53ecd2eb3929bba2a4fccc1dae528b",
+        "2cf7f72fa2321501e29a78f8d87438c0",
+        "e6842d2bc6f0277d85bd4b2676c2f6fc",
+        "49b1ad6c2976bfa8920c048f7e69158b",
+        "b36eb078d07198b4fcac77b102c61511",
+        "4161819f4660b5515d94bab7adbf9e4a",
+        "736715e4ad9011ed71a16af7aac66b40",
+        "6107f57b393b3718b197f0b08a47862d",
+        "706638063826e0a2550ac5be7a220908"
+      ],
+      "item_id": "d46355da75af2b016bf57e11744eded5",
+      "kind": "historical_set",
+      "occasion": "same-order-repeat",
+      "official_display_order": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "official_display_seed": null,
+      "rendered_call_sha256": "dc91d2c82a3a755034f3d818288826077414ffd98ed407f29fad29f482f83c4e",
+      "target_id": "ce8b528f0023922822ef4e6b30fed931e6f91eba50a6fc4974b6c8931f4d7d00"
+    },
+    {
+      "answer_count": 10,
+      "answer_ids_in_pack_order": [
+        "1865a1afea96c4744f6771318aa3d6b4",
+        "a693127cda5a96374b9ef33e26460da4",
+        "ea4caf5456e2c8862861ee4f711a863b",
+        "ac938a8cd91a677e7779493ea5d979db",
+        "de956ae4097cec695869dc79f332b9e5",
+        "79978427aa3c43b7bcc05fe8375f60b9",
+        "16f9bf7d341494e7bbe88a786bfb7877",
+        "64e4eda8c94c28fe463f8ad577340966",
+        "09415ff47609795fbbe140d05815bd87",
+        "de528fb1f286939a564ddb996dfd6e74"
+      ],
+      "item_id": "51234f90d16f7154c9064a7637c48093",
+      "kind": "historical_set",
+      "occasion": "same-order-repeat",
+      "official_display_order": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "official_display_seed": null,
+      "rendered_call_sha256": "6502d1d7ac3afce2fec75990ed76ee001ffa07613944b8567f439d8abf57e77a",
+      "target_id": "7f6a7bb72b64f4d235b3e5526115877c59c4d5674727a01d61566d3d36bbafa8"
+    },
+    {
+      "answer_count": 10,
+      "answer_ids_in_pack_order": [
+        "23784d7af28be3099ac4c81b91a1e386",
+        "5de847af0bcc1920ec5329f117c1f607",
+        "adb7640e3117e2d7fecb725b184fe7c5",
+        "dbe29fe7b178a44865b7de6817824711",
+        "b8acbf0a8d30733301afa18130e1ebc3",
+        "a2fce1358a2454f4e563c44b66f07b4f",
+        "212c23519d288c6c66e404628115a8f4",
+        "64b47a02665aa2c62832da55ac11cbdd",
+        "2e44cf79a6d4941fbff90df635983240",
+        "5b53b5817abfa52dce6726be481082f2"
+      ],
+      "item_id": "344e6398cb019bc7e0e69d6bcc2f4d88",
+      "kind": "historical_set",
+      "occasion": "same-order-repeat",
+      "official_display_order": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "official_display_seed": null,
+      "rendered_call_sha256": "57a3eeeef716d1c9c34d322b0665deb9a34c60ae8fa00afa640849b3af581b6c",
+      "target_id": "84bcfaf535efb768e8f671ed9da4c7c5f66cd788711dd9f7fee146ac939f0afe"
+    },
+    {
+      "answer_count": 10,
+      "answer_ids_in_pack_order": [
+        "10c440e0341fedd28223fbeb52921f4a",
+        "8e7baf14171d86446d5351713f052361",
+        "8710ec44abb26ca6a13cad1e38f0f413",
+        "09fb9aff0cec0f95275a90aa36b30269",
+        "1d26ae1af7a54a22f737909f28808268",
+        "772df7da44f88c0cbff505e2be1612a7",
+        "c736afa8fef6a2c3466bdac0683168ad",
+        "c78cdf0e34cf2b1ac9a06c29f96951dc",
+        "b6c257d4eb02a05a71d4a464af89bf78",
+        "51b4b29dfd2c0114173319c1ba4e2f5b"
+      ],
+      "item_id": "a6deca95bec239a475b0124ec6348ff6",
+      "kind": "historical_set",
+      "occasion": "same-order-repeat",
+      "official_display_order": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "official_display_seed": null,
+      "rendered_call_sha256": "7633e8a7d2af0f699055124724e2576a0f2acc27ec57382bca2f01893280ad6e",
+      "target_id": "5a70c537a537bbec65d45ecddbc794676736f2c4b11769a4131275b5f4fbc99d"
+    },
+    {
+      "answer_count": 10,
+      "answer_ids_in_pack_order": [
+        "72d7f861e100faff39a2527f0611c210",
+        "00b2469d9e00d30523bc9c78e7055457",
+        "c9f81e017f7438834d89aa3e6f46765a",
+        "df6f528563e850d67d396c76a6bc75d3",
+        "55453440696cb95e0b8c5f3ecc3d9acd",
+        "f7c5cc2a848f31ecc181f4390da6904d",
+        "973b43d281f923026b0509a848a489bc",
+        "def98a7dcd76d9c27967b23bddf03bda",
+        "319b5cec10547073218ba5b29b4bd60d",
+        "31308b530f0edae1e0266258a1ec10ed"
+      ],
+      "item_id": "eb0cebeb4449dc16174c85a9a0d878b9",
+      "kind": "historical_set",
+      "occasion": "same-order-repeat",
+      "official_display_order": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "official_display_seed": null,
+      "rendered_call_sha256": "c64e94b5f903ef76b07a1e461576404dc26532fef44ce21cc50efd21eed4205a",
+      "target_id": "f7e6399a6cea45deeb44732eb28e49c915616c208617071de8e396e03d43bee9"
+    },
+    {
+      "answer_count": 10,
+      "answer_ids_in_pack_order": [
+        "83f481fccb15fc4505a4927003c8e470",
+        "96854e3a2170213ce2ca21333a1c76fc",
+        "5b5475d4a9dfd4ee49c4d70794125930",
+        "b15355a01f8750efe1a507d7c7e7e1bd",
+        "e851845fe9bdf961aa66acf81df5f636",
+        "57636bd60753cf774252aa29e0ff318a",
+        "1acc0753ff2baf53eb255ad5ee40e48f",
+        "ca3d62f5635769800f84f24b2c8ff9f4",
+        "ab318b66b8aa87ba0e5d156dd2bd0c8d",
+        "f848374daa06073a569e6dd3b107d6c7"
+      ],
+      "item_id": "80262d25cd742e1fdfec68a8c9c7017a",
+      "kind": "historical_set",
+      "occasion": "same-order-repeat",
+      "official_display_order": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "official_display_seed": null,
+      "rendered_call_sha256": "fda2119cb12756e2e1dae6eb09d8048cc411cd9336b246bd252f3a3838c21400",
+      "target_id": "7f973d2dd864e7c3b2a15fc82813e4d4427c0d6a92d625cd1554d62d7c79d0b7"
+    },
+    {
+      "answer_count": 10,
+      "answer_ids_in_pack_order": [
+        "0cb42de52c35843758e4c875ddd9a43c",
+        "fe53ecd2eb3929bba2a4fccc1dae528b",
+        "2cf7f72fa2321501e29a78f8d87438c0",
+        "e6842d2bc6f0277d85bd4b2676c2f6fc",
+        "49b1ad6c2976bfa8920c048f7e69158b",
+        "b36eb078d07198b4fcac77b102c61511",
+        "4161819f4660b5515d94bab7adbf9e4a",
+        "736715e4ad9011ed71a16af7aac66b40",
+        "6107f57b393b3718b197f0b08a47862d",
+        "706638063826e0a2550ac5be7a220908"
+      ],
+      "item_id": "d46355da75af2b016bf57e11744eded5",
+      "kind": "historical_set",
+      "occasion": "order-seed-0",
+      "official_display_order": [
+        4,
+        5,
+        6,
+        8,
+        1,
+        3,
+        9,
+        2,
+        0,
+        7
+      ],
+      "official_display_seed": 0,
+      "rendered_call_sha256": "2c882906e160aaf704dc47c7bf0580e6c8a76bb3190666309f7a937bcb12e5ee",
+      "target_id": "4e8f88ae79f04fe4c43cfdf5e0889e0c19d272ac705f8dce8f9c6f06183bc9fe"
+    },
+    {
+      "answer_count": 10,
+      "answer_ids_in_pack_order": [
+        "1865a1afea96c4744f6771318aa3d6b4",
+        "a693127cda5a96374b9ef33e26460da4",
+        "ea4caf5456e2c8862861ee4f711a863b",
+        "ac938a8cd91a677e7779493ea5d979db",
+        "de956ae4097cec695869dc79f332b9e5",
+        "79978427aa3c43b7bcc05fe8375f60b9",
+        "16f9bf7d341494e7bbe88a786bfb7877",
+        "64e4eda8c94c28fe463f8ad577340966",
+        "09415ff47609795fbbe140d05815bd87",
+        "de528fb1f286939a564ddb996dfd6e74"
+      ],
+      "item_id": "51234f90d16f7154c9064a7637c48093",
+      "kind": "historical_set",
+      "occasion": "order-seed-0",
+      "official_display_order": [
+        4,
+        5,
+        6,
+        8,
+        1,
+        3,
+        9,
+        2,
+        0,
+        7
+      ],
+      "official_display_seed": 0,
+      "rendered_call_sha256": "6e7c8c70e5c17e302bbdf7864b3aff47061c2a6d066c0c2a3fffedecbb9db92d",
+      "target_id": "22fd3c8c53a8ef29b5febf830a43991cbf8d0f2958890bb09c2654236ca74dcf"
+    },
+    {
+      "answer_count": 10,
+      "answer_ids_in_pack_order": [
+        "23784d7af28be3099ac4c81b91a1e386",
+        "5de847af0bcc1920ec5329f117c1f607",
+        "adb7640e3117e2d7fecb725b184fe7c5",
+        "dbe29fe7b178a44865b7de6817824711",
+        "b8acbf0a8d30733301afa18130e1ebc3",
+        "a2fce1358a2454f4e563c44b66f07b4f",
+        "212c23519d288c6c66e404628115a8f4",
+        "64b47a02665aa2c62832da55ac11cbdd",
+        "2e44cf79a6d4941fbff90df635983240",
+        "5b53b5817abfa52dce6726be481082f2"
+      ],
+      "item_id": "344e6398cb019bc7e0e69d6bcc2f4d88",
+      "kind": "historical_set",
+      "occasion": "order-seed-0",
+      "official_display_order": [
+        4,
+        5,
+        6,
+        8,
+        1,
+        3,
+        9,
+        2,
+        0,
+        7
+      ],
+      "official_display_seed": 0,
+      "rendered_call_sha256": "12c8095edc4f9d98c5ac75b3af17b36e72d0dbd27509a67993f1a558c816776b",
+      "target_id": "7964f4a16ed1ad8b467e346bf11d42a2bb5568b43e1a0082e38f87969c1b73fe"
+    },
+    {
+      "answer_count": 10,
+      "answer_ids_in_pack_order": [
+        "10c440e0341fedd28223fbeb52921f4a",
+        "8e7baf14171d86446d5351713f052361",
+        "8710ec44abb26ca6a13cad1e38f0f413",
+        "09fb9aff0cec0f95275a90aa36b30269",
+        "1d26ae1af7a54a22f737909f28808268",
+        "772df7da44f88c0cbff505e2be1612a7",
+        "c736afa8fef6a2c3466bdac0683168ad",
+        "c78cdf0e34cf2b1ac9a06c29f96951dc",
+        "b6c257d4eb02a05a71d4a464af89bf78",
+        "51b4b29dfd2c0114173319c1ba4e2f5b"
+      ],
+      "item_id": "a6deca95bec239a475b0124ec6348ff6",
+      "kind": "historical_set",
+      "occasion": "order-seed-0",
+      "official_display_order": [
+        4,
+        5,
+        6,
+        8,
+        1,
+        3,
+        9,
+        2,
+        0,
+        7
+      ],
+      "official_display_seed": 0,
+      "rendered_call_sha256": "730d5439b9095172452ffc80bf179ebfc8bcb6094a558c42d63bc8bdb0fb2ffa",
+      "target_id": "65ff054877ab700f72208d2944f6274005d369e3b62e5a521cccae91db0ee7c0"
+    },
+    {
+      "answer_count": 10,
+      "answer_ids_in_pack_order": [
+        "72d7f861e100faff39a2527f0611c210",
+        "00b2469d9e00d30523bc9c78e7055457",
+        "c9f81e017f7438834d89aa3e6f46765a",
+        "df6f528563e850d67d396c76a6bc75d3",
+        "55453440696cb95e0b8c5f3ecc3d9acd",
+        "f7c5cc2a848f31ecc181f4390da6904d",
+        "973b43d281f923026b0509a848a489bc",
+        "def98a7dcd76d9c27967b23bddf03bda",
+        "319b5cec10547073218ba5b29b4bd60d",
+        "31308b530f0edae1e0266258a1ec10ed"
+      ],
+      "item_id": "eb0cebeb4449dc16174c85a9a0d878b9",
+      "kind": "historical_set",
+      "occasion": "order-seed-0",
+      "official_display_order": [
+        4,
+        5,
+        6,
+        8,
+        1,
+        3,
+        9,
+        2,
+        0,
+        7
+      ],
+      "official_display_seed": 0,
+      "rendered_call_sha256": "d854dd453bc312fbaeccb7413bbd2a53361fa79501488ec4be04ffe0e8bdf8f4",
+      "target_id": "68b3e5927ed1e33d5157dae6ab5b39aca3aec69002acc07f3d458979a4681bbd"
+    },
+    {
+      "answer_count": 10,
+      "answer_ids_in_pack_order": [
+        "83f481fccb15fc4505a4927003c8e470",
+        "96854e3a2170213ce2ca21333a1c76fc",
+        "5b5475d4a9dfd4ee49c4d70794125930",
+        "b15355a01f8750efe1a507d7c7e7e1bd",
+        "e851845fe9bdf961aa66acf81df5f636",
+        "57636bd60753cf774252aa29e0ff318a",
+        "1acc0753ff2baf53eb255ad5ee40e48f",
+        "ca3d62f5635769800f84f24b2c8ff9f4",
+        "ab318b66b8aa87ba0e5d156dd2bd0c8d",
+        "f848374daa06073a569e6dd3b107d6c7"
+      ],
+      "item_id": "80262d25cd742e1fdfec68a8c9c7017a",
+      "kind": "historical_set",
+      "occasion": "order-seed-0",
+      "official_display_order": [
+        4,
+        5,
+        6,
+        8,
+        1,
+        3,
+        9,
+        2,
+        0,
+        7
+      ],
+      "official_display_seed": 0,
+      "rendered_call_sha256": "4b3e63f53f87220320e3cfd62dd54774c1ad27a6eb1959ef7162a1b51864ed00",
+      "target_id": "a702201cfd03fa3d363bc70c494f696ac0bd9b85eb6fb3ebe4cda6fad0a78ce2"
+    },
+    {
+      "answer_count": 10,
+      "answer_ids_in_pack_order": [
+        "0cb42de52c35843758e4c875ddd9a43c",
+        "fe53ecd2eb3929bba2a4fccc1dae528b",
+        "2cf7f72fa2321501e29a78f8d87438c0",
+        "e6842d2bc6f0277d85bd4b2676c2f6fc",
+        "49b1ad6c2976bfa8920c048f7e69158b",
+        "b36eb078d07198b4fcac77b102c61511",
+        "4161819f4660b5515d94bab7adbf9e4a",
+        "736715e4ad9011ed71a16af7aac66b40",
+        "6107f57b393b3718b197f0b08a47862d",
+        "706638063826e0a2550ac5be7a220908"
+      ],
+      "item_id": "d46355da75af2b016bf57e11744eded5",
+      "kind": "historical_set",
+      "occasion": "order-seed-20261020",
+      "official_display_order": [
+        2,
+        9,
+        0,
+        7,
+        5,
+        6,
+        1,
+        3,
+        4,
+        8
+      ],
+      "official_display_seed": 20261020,
+      "rendered_call_sha256": "ba7ea32b76c1f374b7ec252d7f35d0df5f57211efb71bc17f7b17214cc31db3b",
+      "target_id": "6d3b8b0c4cb97b8101c61b82ce31ba8871b97a6cfaf6daa609cce903fe8b1d96"
+    },
+    {
+      "answer_count": 10,
+      "answer_ids_in_pack_order": [
+        "1865a1afea96c4744f6771318aa3d6b4",
+        "a693127cda5a96374b9ef33e26460da4",
+        "ea4caf5456e2c8862861ee4f711a863b",
+        "ac938a8cd91a677e7779493ea5d979db",
+        "de956ae4097cec695869dc79f332b9e5",
+        "79978427aa3c43b7bcc05fe8375f60b9",
+        "16f9bf7d341494e7bbe88a786bfb7877",
+        "64e4eda8c94c28fe463f8ad577340966",
+        "09415ff47609795fbbe140d05815bd87",
+        "de528fb1f286939a564ddb996dfd6e74"
+      ],
+      "item_id": "51234f90d16f7154c9064a7637c48093",
+      "kind": "historical_set",
+      "occasion": "order-seed-20261020",
+      "official_display_order": [
+        2,
+        9,
+        0,
+        7,
+        5,
+        6,
+        1,
+        3,
+        4,
+        8
+      ],
+      "official_display_seed": 20261020,
+      "rendered_call_sha256": "521f44d656afd9ad513c1d7679b081edbdbbeb2e85f2e7f2f0e4cbc7501dffec",
+      "target_id": "8090f7e5c02fce64ddf9ee15d30fff7dd1d5f6cf627af8dffbbc9710087b2051"
+    },
+    {
+      "answer_count": 10,
+      "answer_ids_in_pack_order": [
+        "23784d7af28be3099ac4c81b91a1e386",
+        "5de847af0bcc1920ec5329f117c1f607",
+        "adb7640e3117e2d7fecb725b184fe7c5",
+        "dbe29fe7b178a44865b7de6817824711",
+        "b8acbf0a8d30733301afa18130e1ebc3",
+        "a2fce1358a2454f4e563c44b66f07b4f",
+        "212c23519d288c6c66e404628115a8f4",
+        "64b47a02665aa2c62832da55ac11cbdd",
+        "2e44cf79a6d4941fbff90df635983240",
+        "5b53b5817abfa52dce6726be481082f2"
+      ],
+      "item_id": "344e6398cb019bc7e0e69d6bcc2f4d88",
+      "kind": "historical_set",
+      "occasion": "order-seed-20261020",
+      "official_display_order": [
+        2,
+        9,
+        0,
+        7,
+        5,
+        6,
+        1,
+        3,
+        4,
+        8
+      ],
+      "official_display_seed": 20261020,
+      "rendered_call_sha256": "14efe52bffc096167b6c26e812c46cc884ee891b267a34b03c31219ce00a952c",
+      "target_id": "6aca1d1914c4bc30c5e2c7edddc26e0cde8d7ab42503ca40703b4b0151ac60e6"
+    },
+    {
+      "answer_count": 10,
+      "answer_ids_in_pack_order": [
+        "10c440e0341fedd28223fbeb52921f4a",
+        "8e7baf14171d86446d5351713f052361",
+        "8710ec44abb26ca6a13cad1e38f0f413",
+        "09fb9aff0cec0f95275a90aa36b30269",
+        "1d26ae1af7a54a22f737909f28808268",
+        "772df7da44f88c0cbff505e2be1612a7",
+        "c736afa8fef6a2c3466bdac0683168ad",
+        "c78cdf0e34cf2b1ac9a06c29f96951dc",
+        "b6c257d4eb02a05a71d4a464af89bf78",
+        "51b4b29dfd2c0114173319c1ba4e2f5b"
+      ],
+      "item_id": "a6deca95bec239a475b0124ec6348ff6",
+      "kind": "historical_set",
+      "occasion": "order-seed-20261020",
+      "official_display_order": [
+        2,
+        9,
+        0,
+        7,
+        5,
+        6,
+        1,
+        3,
+        4,
+        8
+      ],
+      "official_display_seed": 20261020,
+      "rendered_call_sha256": "4c9a9822653c97dc7fdb9433a19ddf375c6556ef6412eed10764871603e2cb44",
+      "target_id": "5d5671f019d80d194493296fd96cfe55e8e1172b8e3098f71b14bfbdc423fdff"
+    },
+    {
+      "answer_count": 10,
+      "answer_ids_in_pack_order": [
+        "72d7f861e100faff39a2527f0611c210",
+        "00b2469d9e00d30523bc9c78e7055457",
+        "c9f81e017f7438834d89aa3e6f46765a",
+        "df6f528563e850d67d396c76a6bc75d3",
+        "55453440696cb95e0b8c5f3ecc3d9acd",
+        "f7c5cc2a848f31ecc181f4390da6904d",
+        "973b43d281f923026b0509a848a489bc",
+        "def98a7dcd76d9c27967b23bddf03bda",
+        "319b5cec10547073218ba5b29b4bd60d",
+        "31308b530f0edae1e0266258a1ec10ed"
+      ],
+      "item_id": "eb0cebeb4449dc16174c85a9a0d878b9",
+      "kind": "historical_set",
+      "occasion": "order-seed-20261020",
+      "official_display_order": [
+        2,
+        9,
+        0,
+        7,
+        5,
+        6,
+        1,
+        3,
+        4,
+        8
+      ],
+      "official_display_seed": 20261020,
+      "rendered_call_sha256": "001f3966e90b06c3fa7812c8ecaae5e5829b799d0699ad73d7b349d07accc27e",
+      "target_id": "3091f124d3e5a1fe60492d3be8ca830a90e9144d3f5253ed3474a3f578181dc4"
+    },
+    {
+      "answer_count": 10,
+      "answer_ids_in_pack_order": [
+        "83f481fccb15fc4505a4927003c8e470",
+        "96854e3a2170213ce2ca21333a1c76fc",
+        "5b5475d4a9dfd4ee49c4d70794125930",
+        "b15355a01f8750efe1a507d7c7e7e1bd",
+        "e851845fe9bdf961aa66acf81df5f636",
+        "57636bd60753cf774252aa29e0ff318a",
+        "1acc0753ff2baf53eb255ad5ee40e48f",
+        "ca3d62f5635769800f84f24b2c8ff9f4",
+        "ab318b66b8aa87ba0e5d156dd2bd0c8d",
+        "f848374daa06073a569e6dd3b107d6c7"
+      ],
+      "item_id": "80262d25cd742e1fdfec68a8c9c7017a",
+      "kind": "historical_set",
+      "occasion": "order-seed-20261020",
+      "official_display_order": [
+        2,
+        9,
+        0,
+        7,
+        5,
+        6,
+        1,
+        3,
+        4,
+        8
+      ],
+      "official_display_seed": 20261020,
+      "rendered_call_sha256": "3768e8cba07389862a7c1bc049febd8848efe90db52c4278c9de2fc59fee3659",
+      "target_id": "65de8240c61f54add3e6bd2cb5bf92b2a1a115cc925e110386b3b42b397bc731"
+    }
+  ]
+}

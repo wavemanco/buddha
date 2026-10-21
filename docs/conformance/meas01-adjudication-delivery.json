@@ -16,10 +16,13 @@
     "strict_mypy": "pass;37 application/agent sources, linux and win32; frozen source from checks earlier this slice"
   },
   "ci": {
-    "parent_PR25": "LinuxPR/push andWindowsPR success;Windowspush pending at2026-10-20T23:23:46Z",
+    "PR26": "all four PR/push Linux/Windows terminal success atd061f3c114e61c2bc6159f0fac2a16ad410cdc04; merged255577c426e02e0f09f9d485d22777423ece9277 at2026-10-20T23:51:46Z",
+    "PR26_PR_workflow": "https://github.com/wavemanco/buddha/actions/runs/39514919940",
+    "PR26_push_workflow": "https://github.com/wavemanco/buddha/actions/runs/39514873100",
+    "parent_PR25": "all four PR/push Linux/Windows jobs terminal success atc5ae7de8df9d75d204276a3d6b1264f644b1f4d3; merged e2a62cc1abbd318b3bda6ce39df91841c1652f07 at2026-10-20T23:26:44Z",
     "parent_PR_workflow": "https://github.com/wavemanco/buddha/actions/runs/39511810509",
     "parent_push_workflow": "https://github.com/wavemanco/buddha/actions/runs/39511804409",
-    "status": "pending publication;local checks are not hosted CI"
+    "status": "observed green and merged;historical source pins unchanged"
   },
   "coverage": {
     "answer_appearances": 96,

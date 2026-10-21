@@ -1,0 +1,253 @@
+{
+  "actual_counts": {
+    "compared_pair_appearances": 97,
+    "duplicate_pair_appearances": 2,
+    "item_statuses": {
+      "compared": 9,
+      "not_measured_cross_scope": 1,
+      "not_measured_missing_saved_judgment": 0,
+      "not_measured_no_saved_judgment": 7
+    },
+    "pair_appearances": 115,
+    "resolved_items": 17,
+    "unique_agreeing_pairs": 95,
+    "unique_candidate_pairs": 95,
+    "unique_conflicting_pairs": 0,
+    "unique_disagreeing_pairs": 0,
+    "unique_unmeasured_pairs": 0
+  },
+  "actual_guarded_comparator_output_exact": true,
+  "all_95_unique_measured_expectations_distinct": true,
+  "claim_review": {
+    "120_semantic_folds_not_physical_attempt_bound": true,
+    "40_targets_proposal_not_approved": true,
+    "MEAS02_remains_next_partial": true,
+    "README_PLAN_revision26_guide_consistent_at_sampled_hashes": true,
+    "equivalence_sensitivity_not_measured": true,
+    "full_suite_running_no_terminal_claim": true,
+    "human_EVAL02_scientific_and_generalization_gates_open": true,
+    "no_new_live_allocation_or_price_profile": true,
+    "official_quality_scores_and_rankings_unchanged": true
+  },
+  "date": "2026-10-20",
+  "existing_focused_test_evidence": {
+    "path": "runs/reviews/meas02-final-14-green.log",
+    "reported": "14 groups pass, 0.472s; read as evidence, not independently rerun here",
+    "sha256": "b3f9385f7caa80b5a97d3a62ea6d3aa59b723ae6fd9c49d3c64f95c0fa7c8a71"
+  },
+  "findings": [],
+  "format": "buddha.meas02-independent-review.v1",
+  "historical_replay": {
+    "control_counts": {
+      "fold_cases": 9,
+      "generic_judge_fallback_cases": 4,
+      "mapping_cases": 4,
+      "stage_cases": 6
+    },
+    "legacy_one_attempt_repair_disabled": true,
+    "leniency_required": false,
+    "parsed_text_not_full_HTTP": true,
+    "six_strict_successes": true,
+    "strict_equals_lenient": true
+  },
+  "independent_counterexamples_and_controls": [
+    {
+      "case": "task_changed_with_same_answers",
+      "error": "selected historical prompt differs from saved task",
+      "status": "typed_rejection"
+    },
+    {
+      "case": "foreign_candidate_scope",
+      "error": "unknown or duplicate saved scope",
+      "status": "typed_rejection"
+    },
+    {
+      "case": "reordered_source_population",
+      "error": "saved source population, order or text differs",
+      "status": "typed_rejection"
+    },
+    {
+      "case": "changed_literal_answer",
+      "error": "selected answer text differs",
+      "status": "typed_rejection"
+    },
+    {
+      "case": "missing_saved_judgment",
+      "counts": {
+        "compared_pair_appearances": 52,
+        "duplicate_pair_appearances": 2,
+        "item_statuses": {
+          "compared": 8,
+          "not_measured_cross_scope": 1,
+          "not_measured_missing_saved_judgment": 1,
+          "not_measured_no_saved_judgment": 7
+        },
+        "pair_appearances": 115,
+        "resolved_items": 17,
+        "unique_agreeing_pairs": 50,
+        "unique_candidate_pairs": 95,
+        "unique_conflicting_pairs": 0,
+        "unique_disagreeing_pairs": 0,
+        "unique_unmeasured_pairs": 45
+      },
+      "status": "explicitly_unmeasured"
+    },
+    {
+      "case": "synthetic_conflicting_case_expectations",
+      "pair": {
+        "appearance_count": 2,
+        "conflicting_expectations": true,
+        "expected_relations": [
+          "distinct",
+          "equivalent"
+        ],
+        "outcome": "conflicting_expectations",
+        "references": [
+          "first-live-recovery:C:3",
+          "first-live-recovery:C:10"
+        ],
+        "saved": "distinct",
+        "scope": {
+          "candidate_id": "34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b",
+          "prompt_id": "curated-0",
+          "run_id": "a0946e22ae1e45d6bf8f74cf9f4f30bb"
+        }
+      },
+      "status": "explicit_conflict_not_majority"
+    },
+    {
+      "case": "arbitrary_class_numbers",
+      "status": "same_relations"
+    },
+    {
+      "case": "defensive_output",
+      "status": "inputs_and_new_result_unchanged"
+    }
+  ],
+  "limits": [
+    "95 agreements are selected, dependent development distinct relations only; there is no measured equivalence sensitivity, judge accuracy, Kappa or population reliability estimate.",
+    "Eight resolved items are unmeasured here: one cross-candidate card and seven authored controls; five uncertain items remain excluded. Missing saved judgments are explicit unmeasured states, not errors or zero-quality observations.",
+    "This independent pass binds the actual final six-row/23-control replay evidence and its exact official selected ASTs without rerunning the official functions. It separately executes only the pure first-party comparator and engineering optimized-mode guard.",
+    "Existing actual replay uses trusted selected official AST code with in-process Python mocks; this is not OS confinement, complete-module/SDK execution, network isolation proof, concurrency parity or raw-provider attestation.",
+    "Replay source hash checks occur before the trusted selected AST compilation; the research script uses assertions and explicitly refuses optimized compilation before external dependencies/source reads. Standard-library imports and interpreter startup precede that guard.",
+    "The independent pure API guard blocks the listed file/key/network/process/SQLite/execution entry points; it is a bounded dynamic engineering check, not proof of arbitrary code safety.",
+    "Legacy Reply.text lacks full raw HTTP and block provenance. Original successful adapter requests used one attempt and disabled partition repair; current selected-function replay does not relabel those historical runs as native.",
+    "No fresh provider calls, model judgments, quality rescores, holdout text assessment or spending allocation occurred. Native pricing/account maximums remain unverified; historical balance does not authorize this proposed study.",
+    "The study remains model development evidence with instructional/self-reported blinding and unknown exact inherited model identities. Broader human evaluation, held-out improvement and generalization claims remain open.",
+    "Root delivery JSON was pending during this audit and is outside these frozen input pins; source/test/full-suite completion is not inferred from this independent report."
+  ],
+  "normal_actual_final_run_log": {
+    "path": "runs/reviews/meas02-official-replay-debug-required.log",
+    "record": {
+      "evidence_sha256": "0478d7c1950407afdbd6935f4266bf54d85dac19b0e8be0f159abd119c766d94",
+      "fallback_cases": 4,
+      "fold_cases": 9,
+      "mapping_cases": 4,
+      "rows": 6,
+      "stage_cases": 6,
+      "status": "passed",
+      "strict_successes": 6
+    },
+    "sha256": "76e727b9da1100cffdf04466b5996851b1cdc2a45bdbdbe32f8497b6b58a98ed"
+  },
+  "normal_rerun_chain": [
+    {
+      "all_other_parsed_evidence_equal": true,
+      "path": "runs/reviews/meas02-official-replay-first-success.json",
+      "probe_sha256": null,
+      "sha256": "32291d3bad4c3385e4e35dea6f8a5d8de9df6405482fe6ba645cc77c1083a096"
+    },
+    {
+      "all_other_parsed_evidence_equal": true,
+      "path": "runs/reviews/meas02-official-replay.json",
+      "probe_sha256": "1bffcc987cca77b6ea5fc3e24c0b462aa1bde31b047edf31f64fa2b8e74e6e29",
+      "sha256": "378bbf554cfdfb5f3a31924a35d75314a597dc8cd07df788e1ff27e9a03bffe9"
+    },
+    {
+      "all_other_parsed_evidence_equal": true,
+      "path": "runs/reviews/meas02-official-replay-published.json",
+      "probe_sha256": "e059ab5b8b601fc33648b6e028d0116a8ebcc8ef61fa871fbdeebd4c426379da",
+      "sha256": "7e1e02b9eda339c4dd1d7985812dc39dc78527e772694011628ca4ac30ad32b9"
+    },
+    {
+      "all_other_parsed_evidence_equal": true,
+      "path": "runs/reviews/meas02-official-replay-debug-required.json",
+      "probe_sha256": "ea6e8ad1a33353bb9bfdb00ffac69555033eb17fc6322aeea785fcccbd6057b8",
+      "sha256": "0478d7c1950407afdbd6935f4266bf54d85dac19b0e8be0f159abd119c766d94"
+    }
+  ],
+  "official_selected_AST_exact_as_recorded": {
+    "runs\\references\\noveltybench-conformance\\64a23be6b18ec1dacc298830aab276061b6e143c\\src\\common.py": "ba60bf0f2a409c3774d75880f305325a28ed34320610667542a4596c41f424af",
+    "runs\\references\\noveltybench-conformance\\64a23be6b18ec1dacc298830aab276061b6e143c\\src\\judge.py": "4decf04790b90a03368eb792dfe29045435914a73ab83a52185d9dd0d1613902",
+    "runs\\references\\noveltybench-conformance\\64a23be6b18ec1dacc298830aab276061b6e143c\\src\\partition.py": "263970891ff3ee1cc8df369a33beefe5cb5de618b5dd146a5234536d97954aca"
+  },
+  "optimized_guard_checks": [
+    {
+      "external_imports_attempted": [],
+      "optimization_level": 1,
+      "status": "stopped_before_ROOT_external_dependencies_official_source"
+    },
+    {
+      "external_imports_attempted": [],
+      "optimization_level": 2,
+      "status": "stopped_before_ROOT_external_dependencies_official_source"
+    }
+  ],
+  "preservation": {
+    "287_prior_inputs_match_before_after": true,
+    "36_prior_package_sources_match_before_after": true,
+    "official_three_source_files_unchanged": true,
+    "old_replay_records_preserved": true,
+    "source_population_exact": true,
+    "v2_authority_prior_sha256": "52d293f04921af5418a46a0ce33b1ffd296ae3753cbd3aee7da5130f3dd2c06a",
+    "zip_prior_sha256": "bd32c4d50339e2f2e1cadf01f5872fa3c1cdf12c196e7676a18d6fe96bd534e0"
+  },
+  "safe_reproduced_old_assertion_bypass": [
+    {
+      "input": "inert_memory_only",
+      "official_source_executed": false,
+      "optimization_level": 0,
+      "outcome": "wrong_hash_rejected"
+    },
+    {
+      "input": "inert_memory_only",
+      "official_source_executed": false,
+      "optimization_level": 1,
+      "outcome": "wrong_hash_accepted_without_assertions"
+    }
+  ],
+  "scope": "Independent read-only engineering and claim audit; no new ratings, no full-suite repetition, no official selected-source execution in this independent pass.",
+  "source_and_evidence_sha256": {
+    "README.md": "63af6f1e1fba95bd6c0532a893b55b076528e2390553c65f92a3517557584925",
+    "docs/DESIGN.md": "6815d7053ba7ed2cc0ba70cfe36340a4653011c96a901985bbfc16604ba8fd35",
+    "docs/MEASUREMENT-AUDIT-RESULTS.md": "526a152610e09c066f71b7b691dcf80ad614fcc61901b7bc279a7c104843111a",
+    "docs/MEASUREMENT-JUDGE-AUDIT.md": "9ab383328f1c283b5a331ea5c412ccd88ad83fcef66deb052e654e78cdd47b79",
+    "docs/PLAN.md": "620b9385378689f0eaf863cfa47ba3b15be107790c0a496c65ed6ba0e36c46ff",
+    "docs/conformance/meas01-adjudication-review.json": "31a8ed84887cf85a391b2729e8cb0ea656fa331e82b413d8b954c7c9f0c294a3",
+    "docs/conformance/meas02-compare.py": "be070ef7b9339bbe7f0d94a65a27f504bcb75f7b992e594692342e307dd9772c",
+    "docs/conformance/meas02-official-replay.json": "0478d7c1950407afdbd6935f4266bf54d85dac19b0e8be0f159abd119c766d94",
+    "docs/conformance/meas02-official-replay.py": "ea6e8ad1a33353bb9bfdb00ffac69555033eb17fc6322aeea785fcccbd6057b8",
+    "docs/conformance/meas02-paid-readiness.json": "92d3bab78eca9e2da9dd343a1222003e2a127a113832b6380e3c7302ec3b38c9",
+    "docs/conformance/meas02-relation-comparison.json": "831b06449647317c7e9820200984888c56c41a3d3da4bf49b175b4dfa0e14989",
+    "tests/fixtures/meas01-expectations.json": "9211231da884cdce93a9a9b0c486d7f582646a113623f0ba784177808c6571d8",
+    "tests/search_verify_helpers.py": "71ff939dd95f375bbc9259eb8391850e62ce74447f54ce77b6ee36d2c7c78618",
+    "tests/test_meas02_compare.py": "d45368552944865e944a861240122da218ca6e584a6225c77e143079fe0986b0",
+    "tests/test_meas02_replay_cli.py": "72826e9d2d1f931056baf4a8f7fcb9f937722c4142ef8263f56536817c6aca62"
+  },
+  "status": "pass",
+  "uncertain_excluded_item_ids": [
+    "92bbea60cc82d82c3f0727116decc86b",
+    "51234f90d16f7154c9064a7637c48093",
+    "a6deca95bec239a475b0124ec6348ff6",
+    "eb0cebeb4449dc16174c85a9a0d878b9",
+    "80262d25cd742e1fdfec68a8c9c7017a"
+  ],
+  "wrapper_input_count": 5,
+  "wrapper_physical_input_bindings": {
+    "docs/conformance/meas01-adjudication-review.json": "31a8ed84887cf85a391b2729e8cb0ea656fa331e82b413d8b954c7c9f0c294a3",
+    "docs/conformance/meas02-compare.py": "be070ef7b9339bbe7f0d94a65a27f504bcb75f7b992e594692342e307dd9772c",
+    "docs/conformance/meas02-official-replay.json": "0478d7c1950407afdbd6935f4266bf54d85dac19b0e8be0f159abd119c766d94",
+    "docs/conformance/meas02-official-replay.py": "ea6e8ad1a33353bb9bfdb00ffac69555033eb17fc6322aeea785fcccbd6057b8",
+    "tests/fixtures/meas01-expectations.json": "9211231da884cdce93a9a9b0c486d7f582646a113623f0ba784177808c6571d8"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-20",
+  "format": "buddha.meas02-paid-readiness-note.v1",
+  "limits": [
+    "Historical rates or unused historical balance do not authorize or certify new requests",
+    "No claim that all40 targets can finish within any proposed cap;no cap has been allocated",
+    "Current prices are dated observations and must be refreshed and bound before paid execution",
+    "No account settings or credentials read or changed"
+  ],
+  "model_page_observation": {
+    "cache_write_multiplier": "1.25",
+    "context_window": 1050000,
+    "long_context_multipliers": {
+      "input": "2",
+      "output": "1.5"
+    },
+    "long_context_threshold_input_tokens": 272000,
+    "max_output_tokens": 128000,
+    "model": "gpt-5.6-luna",
+    "standard_short_context_USD_per_million": {
+      "input": "0.20",
+      "output": "1.20"
+    }
+  },
+  "not_verified": [
+    "Actual project processing tier and any contracted or regional rates",
+    "A complete applicable native maximum-price profile for the chosen account",
+    "A new experiment allocation, physical-attempt allowance and live command"
+  ],
+  "planned_measurement_not_authorized": {
+    "construction": "22 pack items once;6 full sets repeated once;2 distinct official display-order seeds for each6 full sets",
+    "physical_attempts": "Every SDK transport attempt counts separately under a hard allowance;budget/unknown stops may leave targets incomplete.120 folds is not a bound including SDK retries.",
+    "scope": "Partition assessment only;not candidate generation, quality rescore, full benchmark result or held-out evaluation",
+    "semantic_fold_invocations_without_SDK_retry": "up to120 at native3fold limit",
+    "target_judgments": 40
+  },
+  "sources": {
+    "model": "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+    "omitted_tier": "https://developers.openai.com/api/reference/resources/chat/subresources/completions/methods/create",
+    "pricing": "https://developers.openai.com/api/docs/pricing"
+  },
+  "status": "research_only_not_a_live_profile_or_allocation",
+  "tier_observation": "Omitted service_tier uses auto and project settings; response records actual processing tier."
+}
