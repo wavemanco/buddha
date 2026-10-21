@@ -1,0 +1,91 @@
+{
+  "approved_on_local_date": "2026-10-20",
+  "execution": "Prepare a local hidden-key handoff; no API key is supplied in chat or saved in a file. This approval is no claim that allocation/profile preparation or a paid run has already happened.",
+  "format": "buddha.meas02-live-approval.v1",
+  "historical_authorizations": "Original$50authorities remain inactive with all charges and unknown hold unchanged. This is a separate, newly approved15USD scope; the earlier5USD suggestion remains a historical proposal, not an allocation.",
+  "input_sha256": {
+    "docs/conformance/meas01-adjudication-review.json": "31a8ed84887cf85a391b2729e8cb0ea656fa331e82b413d8b954c7c9f0c294a3",
+    "docs/conformance/meas01-study/pack.json": "8a29cded45e11f62eaecba52e5d9c30a88e2733b28cc8138aa2fdb38d025bf15",
+    "docs/conformance/meas02-target-proposal.json": "efa7071f37ffa18d5d7909969258b4fb378939cc768537de10a9555599213cce"
+  },
+  "local_timezone": "America/Los_Angeles",
+  "partial_result_contract": {
+    "allowed": true,
+    "complete_only_after_all40_targets_and_four_native_anchored_batches": true,
+    "hard_kill_limit": "A hard kill cannot guarantee a final observation; retain underlying evidence and describe the interrupted state without claiming completion.",
+    "must_be_explicitly_labeled": true,
+    "must_include_reason_for_incompleteness": true,
+    "no_automatic_topup_new_allowance_or_owner_replacement": true,
+    "preserve_original_owners_raw_replies_usage_holds_and_partial_rows": true
+  },
+  "profile": {
+    "account_facts_source": "User assertions in this chat; no provider account endpoint was queried. Credential fingerprint proves same key only, not account facts or authentication.",
+    "account_header_condition": "Operator must locally confirm a project-scoped inference key for the verified Standard/default public-PAYG project, with no account-routing override. Stop instead of guessing if this is not true.",
+    "account_headers": {},
+    "allow_omitted_tier": true,
+    "bounds_source": "https://developers.openai.com/api/docs/pricing",
+    "input_microusd_per_million": 500000,
+    "input_token_ceiling": 1050000,
+    "max_output_tokens": 128000,
+    "model": "gpt-5.6-luna",
+    "output_microusd_per_million": 1800000,
+    "per_attempt_reservation_microusd": 755400,
+    "provider": "openai",
+    "reason": "Conservative public Standard long-context/default30m-cache-write envelope; independent whole-context input plus full output deliberately over-reserves a jointly feasible request. No cap/tier field injected into official wire.",
+    "request_tiers": [
+      "auto",
+      "default"
+    ],
+    "response_models": [
+      "gpt-5.6-luna"
+    ],
+    "response_tiers": [
+      "",
+      "default"
+    ]
+  },
+  "recorded_at_utc": "2026-10-21T01:29:11.723012+00:00",
+  "scope": {
+    "additional_targets": false,
+    "attempt_cap_choice": "Controller-selected120: separate explicit physical cap across four owners; the40targets have up to120native semantic folds, and SDK retries can consume physical allowance sooner. This is not a completion guarantee.",
+    "generation": false,
+    "host_transport_timeout_seconds": 60,
+    "model": "gpt-5.6-luna",
+    "occasions": [
+      {
+        "name": "baseline",
+        "targets": 22
+      },
+      {
+        "name": "same-order-repeat",
+        "targets": 6
+      },
+      {
+        "name": "order-seed-0",
+        "targets": 6
+      },
+      {
+        "name": "order-seed-20261020",
+        "targets": 6
+      }
+    ],
+    "policy_search": false,
+    "provider": "openai",
+    "quality_scoring": false,
+    "shared_budget_microusd": 15000000,
+    "shared_max_physical_attempt_records": 120,
+    "study": "MEAS-02 official v1.1 judge-only audit on the existing frozen40target proposal",
+    "worker_wall_seconds_per_batch": 900
+  },
+  "sources": {
+    "account_routing": "https://developers.openai.com/api/reference/overview#authentication",
+    "cache_billing": "https://developers.openai.com/api/docs/guides/prompt-caching",
+    "model_limits": "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+    "pricing": "https://developers.openai.com/api/docs/pricing"
+  },
+  "user_instructions": {
+    "account_pricing": "Public pay-as-you-go pricing",
+    "account_processing_tier": "Standard/default (verified)",
+    "budget_quote": "Approve $15 / <you decide on number of attempts> / partial result ok but it needs to be recorded properly as a \"partial result\" with reason for incompleteness."
+  }
+}

@@ -1,0 +1,617 @@
+{
+  "actual_containers": 1,
+  "actual_provider_calls": 0,
+  "configuration_sha256": "4461d0edd17e2ceab019b323f62305110293ecd5ac8b6be65b77d437a49b5acf",
+  "existing_study_bytes_unchanged_on_resume": true,
+  "first_launch_hidden_entries": 1,
+  "first_observation": {
+    "authorization": {
+      "authorization_id": "synthetic-meas02-live-launch-dvgtreec",
+      "available_microusd": 14244600,
+      "budget_microusd": 15000000,
+      "committed_microusd": 755400,
+      "event_count": 8,
+      "max_calls": 120,
+      "operation_count": 1,
+      "remaining_calls": 119,
+      "reserved_microusd": 755400,
+      "runs": [
+        {
+          "active": true,
+          "committed_microusd": 0,
+          "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\meas02-live-launch-dvgtreec\\study\\owners\\2",
+          "historical": 0,
+          "historical_ledger_sha256": null,
+          "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\meas02-live-launch-dvgtreec\\study\\owners\\2\\operations.sqlite3",
+          "manifest_sha256": "9da5590b90d4a4507f46aacffeccc781b68f1dd2855fdc7e9194fe8643d48e9e",
+          "operation_count": 0,
+          "reserved_microusd": 0,
+          "run_id": "meas02-1229313580e8572e7957eb8dbf9fc2b8397b102eb61fd0d8109f956d0f5f89eb",
+          "runtime_sha256": "4b3bf2b1a0e61407d46785968d8402165921c595b11f1a917a88047d1d6a6c0b",
+          "spent_microusd": 0
+        },
+        {
+          "active": true,
+          "committed_microusd": 755400,
+          "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\meas02-live-launch-dvgtreec\\study\\owners\\0",
+          "historical": 0,
+          "historical_ledger_sha256": null,
+          "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\meas02-live-launch-dvgtreec\\study\\owners\\0\\operations.sqlite3",
+          "manifest_sha256": "b84813bdff11bb0392303eaf0a63100e9d846797b3f94d9100178191fd714db9",
+          "operation_count": 1,
+          "reserved_microusd": 755400,
+          "run_id": "meas02-1e939529c90242fed07d9fcaaf7e100838b9d087934591a15596d71c3bba040f",
+          "runtime_sha256": "127d707c9fd9c56ca024f723fdb500fc71deb6863d922ba11eca8d80617e7dd4",
+          "spent_microusd": 0
+        },
+        {
+          "active": true,
+          "committed_microusd": 0,
+          "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\meas02-live-launch-dvgtreec\\study\\owners\\3",
+          "historical": 0,
+          "historical_ledger_sha256": null,
+          "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\meas02-live-launch-dvgtreec\\study\\owners\\3\\operations.sqlite3",
+          "manifest_sha256": "7893f93c24f5a073caeac462f5e31ec4b5ca9890be2e9a22a72480f9120c3dca",
+          "operation_count": 0,
+          "reserved_microusd": 0,
+          "run_id": "meas02-60efb2c0c244028782a4b483202742b3d0b5318cb05db35a1da68788428850a6",
+          "runtime_sha256": "e65f8031b44ddc38325c645f59228c72aa9509478f7d661bb506dcdbea581d2e",
+          "spent_microusd": 0
+        },
+        {
+          "active": true,
+          "committed_microusd": 0,
+          "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\meas02-live-launch-dvgtreec\\study\\owners\\1",
+          "historical": 0,
+          "historical_ledger_sha256": null,
+          "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\meas02-live-launch-dvgtreec\\study\\owners\\1\\operations.sqlite3",
+          "manifest_sha256": "398d5d346b517ba5749e046fd6047f22f25f3dba49a57421a51b16ee390abf0d",
+          "operation_count": 0,
+          "reserved_microusd": 0,
+          "run_id": "meas02-79e9803961cfccb4181b4ca160f17ebc91d609aedba47d2e66596a28eba31d89",
+          "runtime_sha256": "47f008131a5b4e75e1fa743f5521c29378e510b752f0b99fc1006643cbfa5c96",
+          "spent_microusd": 0
+        }
+      ],
+      "scope": "offline first-live handoff engineering proof only; no live permission",
+      "spent_microusd": 0,
+      "terms_sha256": "615e1abba4c7190c93953925f116b68f693a38c1751cd71a2041056a914cf308"
+    },
+    "batch_seals": {},
+    "batches": [
+      {
+        "aliases": [
+          {
+            "label": "cache",
+            "path": "src.score:run_cached"
+          },
+          {
+            "label": "cache",
+            "path": "src.evaluation_io:run_cached"
+          },
+          {
+            "label": "cache",
+            "path": "src.partition:run_cached"
+          },
+          {
+            "label": "judge_call",
+            "path": "src.score:judge_call"
+          },
+          {
+            "label": "judge_call",
+            "path": "src.judge:judge_call"
+          },
+          {
+            "label": "judge",
+            "path": "src.judge:judge"
+          },
+          {
+            "label": "sdk:openai",
+            "path": "src.common:AsyncOpenAI"
+          },
+          {
+            "label": "sdk:anthropic",
+            "path": "src.judge:anthropic"
+          }
+        ],
+        "artifacts": {
+          "generations.jsonl": "e8c325ba07290ba584ef646f73170c258a33da9f1d709d3b342ed236292983a6",
+          "v1.1/partitions.jsonl.partial": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "call_counter_scope": "worker requests and delivered raw responses, including cached replay",
+        "calls": {
+          "completed": 0,
+          "requested": 1,
+          "stopped": 1
+        },
+        "claim": "native command artifacts; experiment coverage and promotion remain separate",
+        "command_sha256": "57a32d33733fbaba2af9dd94d3a27187a62fdd1f914177c79bc25e896abaecf7",
+        "descriptor_sha256": "5c696f66782f61f9bfad81e5c6cc5cd74b88c7605ccb3bbffaed8b171f50a12c",
+        "execution": {
+          "cleanup_status": "removed",
+          "configuration": {
+            "engine_endpoint_sha256": "30341252ca9aa2b298da11cd8527fdfbf8ab30a2f3b5a3c871188c778b20af30",
+            "host": {
+              "CapDrop": [
+                "ALL"
+              ],
+              "CgroupnsMode": "private",
+              "IpcMode": "none",
+              "LogConfig": {
+                "Config": {},
+                "Type": "none"
+              },
+              "Memory": 2147483648,
+              "MemorySwap": 2147483648,
+              "NanoCpus": 1000000000,
+              "NetworkMode": "none",
+              "PidMode": "",
+              "PidsLimit": 64,
+              "Privileged": false,
+              "ReadonlyRootfs": true,
+              "SecurityOpt": [
+                "no-new-privileges:true"
+              ],
+              "Tmpfs": {
+                "/scratch": "rw,size=128m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700",
+                "/tmp": "rw,size=16m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700"
+              },
+              "UTSMode": ""
+            },
+            "image": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+            "mounts": {
+              "/inputs": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\meas02-live-launch-dvgtreec\\study\\inputs\\0",
+              "/official": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\meas02-live-launch-dvgtreec\\components\\official",
+              "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\meas02-live-launch-dvgtreec\\components\\runner"
+            },
+            "role": "evaluator"
+          },
+          "container_id": "0c2237672319ab9d9993ec4f5de5cee9ee235dc560fc41b8757035279af358dc",
+          "elapsed_seconds": 31.942884600022808,
+          "exit_code": 0,
+          "frame_count": 5,
+          "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+          "stderr_bytes": 145,
+          "stderr_sha256": "78159e523e755aa3d0a2e5f01588213ed968e5f75eb434f3b9c00663e4c706a6",
+          "stdout_bytes": 2398699
+        },
+        "format": "buddha.native-command-report.v1",
+        "gateway_manifest_sha256": "b84813bdff11bb0392303eaf0a63100e9d846797b3f94d9100178191fd714db9",
+        "gateway_totals": {
+          "committed_microusd": 755400,
+          "operation_count": 1,
+          "reserved_microusd": 755400,
+          "spent_microusd": 0
+        },
+        "gateway_totals_scope": "entire owning gateway ledger, including prior calls and unknown holds",
+        "ready_audit_sha256": "fb3398c64eaed0c50c690ebdd0008ec300844a7fc3874033d0f330d39f1039d7",
+        "status": "stopped",
+        "worker": {
+          "audit_sha256": "6b952f44ef4966909261f9b947a7e5eff4d8fe2c1cfe5cb17aafc9a2e30b56fc",
+          "reason": "unknown",
+          "status": "stopped"
+        }
+      }
+    ],
+    "claim": "supplied audit controls; no C1 generation, quality score or improvement claim",
+    "coverage": {
+      "expected_count": 40,
+      "missing_target_ids": [
+        "cb547ee4fce4214f6d63ba97ac70e8bbe1b85eba620a60a420c8cdca4d93db72",
+        "6b665579406460d1c1a5624882469cae9b71fa45c13f226623685d3c03c026c9",
+        "a135685527cb320af80feaf461c011764d9a6d43d15fa51531753cf33e8e80e3",
+        "b75401683289d5fac8953854fc6bc6ba7e50006125cbf65d44f0bb30821d418d",
+        "afd58c052271bc3eb3951cbe449c33697add179c4656764350b09cfe086af390",
+        "6e93c568f2bde513acc7af4ba2ce4a428ae062edaaad88d57f145b6add1458ca",
+        "04c87d23d68434abdf1b889a246826d132d81e13bb36ef3ea8a60e8f55989f18",
+        "2b0a8044e749c2150de58a7fd3d510a7289e45ab91f6fc6a3de017d7674af376",
+        "c3e924a6a049c211b95026fc11988facdb355912cf60b5e4940301ec83fcfbd9",
+        "77efd16cc97f43fd65e9a41bac149b42196d4ed6ed83dd781d7735eeff2d6e2b",
+        "302d114d4a18cb0e5d7cf3c9384cc4ef19157912667bc76c8a1a4d7fa633e4c4",
+        "2a0ce106a9364151bfc6414d686b6c5fc552ba90201f1099e9d4ce32926bc1d3",
+        "82647c090fc918a8121e4d8b6449a31bacf87862a6e6fee86b78908770b98268",
+        "2fde5cddac3f937261edcc8d597ebd0619e1a478b12a9ad19023e68b6f1680a8",
+        "4e9276a5fcdf847f98a0834a582a5e8bfd0fce77f31b1ee24d4563516519d613",
+        "caa9a3667eb5fe1db0378cbe41259ea6b703a59744ce68e8bcbd8263407a1137",
+        "5ced79ce1a1593aa9155ab0731dc7b056cb95d0cbb5062266d5cee3919bd80a9",
+        "809f5bbbf61118c37f589d9cca774af8e7a4b55d969b1c606ba078fd8f05033c",
+        "8f888a71c67043ea900c2133945ee8abfec99f3a7e50c81c4e8016a9030582b1",
+        "c4b1718453edbce5da9ad90d89394e15fa6a3dbb03237fc3ea8c85ccb57c4b27",
+        "76c58af16ef766c716b17572c8b480c461eb1fac48a03b17fee0d199c8e77549",
+        "cb3e04bc71a68832dbb0e75af447e4eff7ae36719067fc08b96b9ec1723c5875",
+        "ce8b528f0023922822ef4e6b30fed931e6f91eba50a6fc4974b6c8931f4d7d00",
+        "7f6a7bb72b64f4d235b3e5526115877c59c4d5674727a01d61566d3d36bbafa8",
+        "84bcfaf535efb768e8f671ed9da4c7c5f66cd788711dd9f7fee146ac939f0afe",
+        "5a70c537a537bbec65d45ecddbc794676736f2c4b11769a4131275b5f4fbc99d",
+        "f7e6399a6cea45deeb44732eb28e49c915616c208617071de8e396e03d43bee9",
+        "7f973d2dd864e7c3b2a15fc82813e4d4427c0d6a92d625cd1554d62d7c79d0b7",
+        "4e8f88ae79f04fe4c43cfdf5e0889e0c19d272ac705f8dce8f9c6f06183bc9fe",
+        "22fd3c8c53a8ef29b5febf830a43991cbf8d0f2958890bb09c2654236ca74dcf",
+        "7964f4a16ed1ad8b467e346bf11d42a2bb5568b43e1a0082e38f87969c1b73fe",
+        "65ff054877ab700f72208d2944f6274005d369e3b62e5a521cccae91db0ee7c0",
+        "68b3e5927ed1e33d5157dae6ab5b39aca3aec69002acc07f3d458979a4681bbd",
+        "a702201cfd03fa3d363bc70c494f696ac0bd9b85eb6fb3ebe4cda6fad0a78ce2",
+        "6d3b8b0c4cb97b8101c61b82ce31ba8871b97a6cfaf6daa609cce903fe8b1d96",
+        "8090f7e5c02fce64ddf9ee15d30fff7dd1d5f6cf627af8dffbbc9710087b2051",
+        "6aca1d1914c4bc30c5e2c7edddc26e0cde8d7ab42503ca40703b4b0151ac60e6",
+        "5d5671f019d80d194493296fd96cfe55e8e1172b8e3098f71b14bfbdc423fdff",
+        "3091f124d3e5a1fe60492d3be8ca830a90e9144d3f5253ed3474a3f578181dc4",
+        "65de8240c61f54add3e6bd2cb5bf92b2a1a115cc925e110386b3b42b397bc731"
+      ],
+      "partial_status": "valid",
+      "partial_target_ids": [],
+      "scope": "sealed batches plus THIS attempt's validated unsealed rows only; missing IDs are absent from this observation, not necessarily earlier unsealed attempts; API receipts are not target coverage",
+      "sealed_target_ids": []
+    },
+    "evidence": {
+      "attempt": "attempts/0-0",
+      "files": {
+        "attempts/0-0/artifacts/generations.jsonl": "e8c325ba07290ba584ef646f73170c258a33da9f1d709d3b342ed236292983a6",
+        "attempts/0-0/artifacts/v1.1/partitions.jsonl.partial": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "attempts/0-0/imports-final.json": "6ce41fb63d4809e9e876bbe89a477da4998770191666d0a7240d740162edea70",
+        "attempts/0-0/imports-ready.json": "da003dac3a08922a7f4c2ff2149e5892d8bb2cfcb39f66482ca99890363f5f7c",
+        "attempts/0-0/report.json": "7b99a35c630228385aaf52900868079874fddd422b81bc5d700f1df8d0a5dc52"
+      },
+      "operations": [
+        {
+          "actual_microusd": null,
+          "operation_id": "63973b0845bf2effd4ab9a0221b7774c051ad4412fbcdcbb38ee665a8f4dd18e",
+          "owner": 0,
+          "receipt_sha256": "2765ef0cbd628a2ed2971194cfd96d4821dbdd345c7ab6785b6b0eb4d3e30503",
+          "request_sha256": "cd02ef97aa9fae7fe63c66fa88525644b44a4fd28390225142ba1b1143cc9c2e",
+          "reserve_microusd": 755400,
+          "status": "unknown"
+        }
+      ],
+      "prior_observations": {},
+      "receipt_hash_scope": "canonical response record retained in each original owner ledger"
+    },
+    "format": "buddha.meas02-native-study-report.v1",
+    "input_kind": "supplied audit controls",
+    "observation": "observations/ad86260c6b444fcabdc6618c8cffde78.json",
+    "result": "partial",
+    "status": "incomplete",
+    "stop": {
+      "codes": [
+        "unknown"
+      ],
+      "execution_reason": null,
+      "native_reason": "unknown",
+      "reason": "unknown"
+    },
+    "stopped_batch": 0,
+    "stopped_occasion": "baseline",
+    "target_count": 40
+  },
+  "first_public_result": {
+    "format": "buddha.meas02-live-launch.v1",
+    "observation": "observations/ad86260c6b444fcabdc6618c8cffde78.json",
+    "reason": "unknown",
+    "reason_codes": [
+      "unknown"
+    ],
+    "result": "partial",
+    "status": "incomplete"
+  },
+  "fixture": "runs/reviews/meas02-live-launch-dvgtreec",
+  "format": "buddha.meas02-live-launch-native-proof.v1",
+  "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+  "limits": [
+    "Synthetic malformed usage, not a scientific judgment or provider billing fact.",
+    "No real API call, account authentication or semantic audit result."
+  ],
+  "mocked_physical_sends": 1,
+  "original_user_authority": {
+    "after_operations": 0,
+    "before_operations": 0,
+    "bytes_unchanged": true,
+    "sha256": "bd369ce7e5d79a19e27142bdb3420cdf610446d7ccf778c7819d75ee69fe8019"
+  },
+  "raw_receipt": {
+    "received_sha256": "24e1ed462cb13aaf16729e6543b44b79ac437d9cfdafe60ebf997cd93f2f3f73",
+    "retained_literal_bytes": 292,
+    "status": "unknown"
+  },
+  "real_credentials_used": false,
+  "requests": [
+    {
+      "body_sha256": "1f60b418301be0495f1d34cbaa9034ebf8bdc99c1372a40faf9abc29350dea25",
+      "model": "gpt-5.6-luna"
+    }
+  ],
+  "resumed_hidden_entries": 0,
+  "resumed_observation": {
+    "authorization": {
+      "authorization_id": "synthetic-meas02-live-launch-dvgtreec",
+      "available_microusd": 14244600,
+      "budget_microusd": 15000000,
+      "committed_microusd": 755400,
+      "event_count": 8,
+      "max_calls": 120,
+      "operation_count": 1,
+      "remaining_calls": 119,
+      "reserved_microusd": 755400,
+      "runs": [
+        {
+          "active": true,
+          "committed_microusd": 0,
+          "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\meas02-live-launch-dvgtreec\\study\\owners\\2",
+          "historical": 0,
+          "historical_ledger_sha256": null,
+          "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\meas02-live-launch-dvgtreec\\study\\owners\\2\\operations.sqlite3",
+          "manifest_sha256": "9da5590b90d4a4507f46aacffeccc781b68f1dd2855fdc7e9194fe8643d48e9e",
+          "operation_count": 0,
+          "reserved_microusd": 0,
+          "run_id": "meas02-1229313580e8572e7957eb8dbf9fc2b8397b102eb61fd0d8109f956d0f5f89eb",
+          "runtime_sha256": "4b3bf2b1a0e61407d46785968d8402165921c595b11f1a917a88047d1d6a6c0b",
+          "spent_microusd": 0
+        },
+        {
+          "active": true,
+          "committed_microusd": 755400,
+          "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\meas02-live-launch-dvgtreec\\study\\owners\\0",
+          "historical": 0,
+          "historical_ledger_sha256": null,
+          "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\meas02-live-launch-dvgtreec\\study\\owners\\0\\operations.sqlite3",
+          "manifest_sha256": "b84813bdff11bb0392303eaf0a63100e9d846797b3f94d9100178191fd714db9",
+          "operation_count": 1,
+          "reserved_microusd": 755400,
+          "run_id": "meas02-1e939529c90242fed07d9fcaaf7e100838b9d087934591a15596d71c3bba040f",
+          "runtime_sha256": "127d707c9fd9c56ca024f723fdb500fc71deb6863d922ba11eca8d80617e7dd4",
+          "spent_microusd": 0
+        },
+        {
+          "active": true,
+          "committed_microusd": 0,
+          "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\meas02-live-launch-dvgtreec\\study\\owners\\3",
+          "historical": 0,
+          "historical_ledger_sha256": null,
+          "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\meas02-live-launch-dvgtreec\\study\\owners\\3\\operations.sqlite3",
+          "manifest_sha256": "7893f93c24f5a073caeac462f5e31ec4b5ca9890be2e9a22a72480f9120c3dca",
+          "operation_count": 0,
+          "reserved_microusd": 0,
+          "run_id": "meas02-60efb2c0c244028782a4b483202742b3d0b5318cb05db35a1da68788428850a6",
+          "runtime_sha256": "e65f8031b44ddc38325c645f59228c72aa9509478f7d661bb506dcdbea581d2e",
+          "spent_microusd": 0
+        },
+        {
+          "active": true,
+          "committed_microusd": 0,
+          "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\meas02-live-launch-dvgtreec\\study\\owners\\1",
+          "historical": 0,
+          "historical_ledger_sha256": null,
+          "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\meas02-live-launch-dvgtreec\\study\\owners\\1\\operations.sqlite3",
+          "manifest_sha256": "398d5d346b517ba5749e046fd6047f22f25f3dba49a57421a51b16ee390abf0d",
+          "operation_count": 0,
+          "reserved_microusd": 0,
+          "run_id": "meas02-79e9803961cfccb4181b4ca160f17ebc91d609aedba47d2e66596a28eba31d89",
+          "runtime_sha256": "47f008131a5b4e75e1fa743f5521c29378e510b752f0b99fc1006643cbfa5c96",
+          "spent_microusd": 0
+        }
+      ],
+      "scope": "offline first-live handoff engineering proof only; no live permission",
+      "spent_microusd": 0,
+      "terms_sha256": "615e1abba4c7190c93953925f116b68f693a38c1751cd71a2041056a914cf308"
+    },
+    "batch_seals": {},
+    "batches": [],
+    "claim": "supplied audit controls; no C1 generation, quality score or improvement claim",
+    "coverage": {
+      "expected_count": 40,
+      "missing_target_ids": [
+        "cb547ee4fce4214f6d63ba97ac70e8bbe1b85eba620a60a420c8cdca4d93db72",
+        "6b665579406460d1c1a5624882469cae9b71fa45c13f226623685d3c03c026c9",
+        "a135685527cb320af80feaf461c011764d9a6d43d15fa51531753cf33e8e80e3",
+        "b75401683289d5fac8953854fc6bc6ba7e50006125cbf65d44f0bb30821d418d",
+        "afd58c052271bc3eb3951cbe449c33697add179c4656764350b09cfe086af390",
+        "6e93c568f2bde513acc7af4ba2ce4a428ae062edaaad88d57f145b6add1458ca",
+        "04c87d23d68434abdf1b889a246826d132d81e13bb36ef3ea8a60e8f55989f18",
+        "2b0a8044e749c2150de58a7fd3d510a7289e45ab91f6fc6a3de017d7674af376",
+        "c3e924a6a049c211b95026fc11988facdb355912cf60b5e4940301ec83fcfbd9",
+        "77efd16cc97f43fd65e9a41bac149b42196d4ed6ed83dd781d7735eeff2d6e2b",
+        "302d114d4a18cb0e5d7cf3c9384cc4ef19157912667bc76c8a1a4d7fa633e4c4",
+        "2a0ce106a9364151bfc6414d686b6c5fc552ba90201f1099e9d4ce32926bc1d3",
+        "82647c090fc918a8121e4d8b6449a31bacf87862a6e6fee86b78908770b98268",
+        "2fde5cddac3f937261edcc8d597ebd0619e1a478b12a9ad19023e68b6f1680a8",
+        "4e9276a5fcdf847f98a0834a582a5e8bfd0fce77f31b1ee24d4563516519d613",
+        "caa9a3667eb5fe1db0378cbe41259ea6b703a59744ce68e8bcbd8263407a1137",
+        "5ced79ce1a1593aa9155ab0731dc7b056cb95d0cbb5062266d5cee3919bd80a9",
+        "809f5bbbf61118c37f589d9cca774af8e7a4b55d969b1c606ba078fd8f05033c",
+        "8f888a71c67043ea900c2133945ee8abfec99f3a7e50c81c4e8016a9030582b1",
+        "c4b1718453edbce5da9ad90d89394e15fa6a3dbb03237fc3ea8c85ccb57c4b27",
+        "76c58af16ef766c716b17572c8b480c461eb1fac48a03b17fee0d199c8e77549",
+        "cb3e04bc71a68832dbb0e75af447e4eff7ae36719067fc08b96b9ec1723c5875",
+        "ce8b528f0023922822ef4e6b30fed931e6f91eba50a6fc4974b6c8931f4d7d00",
+        "7f6a7bb72b64f4d235b3e5526115877c59c4d5674727a01d61566d3d36bbafa8",
+        "84bcfaf535efb768e8f671ed9da4c7c5f66cd788711dd9f7fee146ac939f0afe",
+        "5a70c537a537bbec65d45ecddbc794676736f2c4b11769a4131275b5f4fbc99d",
+        "f7e6399a6cea45deeb44732eb28e49c915616c208617071de8e396e03d43bee9",
+        "7f973d2dd864e7c3b2a15fc82813e4d4427c0d6a92d625cd1554d62d7c79d0b7",
+        "4e8f88ae79f04fe4c43cfdf5e0889e0c19d272ac705f8dce8f9c6f06183bc9fe",
+        "22fd3c8c53a8ef29b5febf830a43991cbf8d0f2958890bb09c2654236ca74dcf",
+        "7964f4a16ed1ad8b467e346bf11d42a2bb5568b43e1a0082e38f87969c1b73fe",
+        "65ff054877ab700f72208d2944f6274005d369e3b62e5a521cccae91db0ee7c0",
+        "68b3e5927ed1e33d5157dae6ab5b39aca3aec69002acc07f3d458979a4681bbd",
+        "a702201cfd03fa3d363bc70c494f696ac0bd9b85eb6fb3ebe4cda6fad0a78ce2",
+        "6d3b8b0c4cb97b8101c61b82ce31ba8871b97a6cfaf6daa609cce903fe8b1d96",
+        "8090f7e5c02fce64ddf9ee15d30fff7dd1d5f6cf627af8dffbbc9710087b2051",
+        "6aca1d1914c4bc30c5e2c7edddc26e0cde8d7ab42503ca40703b4b0151ac60e6",
+        "5d5671f019d80d194493296fd96cfe55e8e1172b8e3098f71b14bfbdc423fdff",
+        "3091f124d3e5a1fe60492d3be8ca830a90e9144d3f5253ed3474a3f578181dc4",
+        "65de8240c61f54add3e6bd2cb5bf92b2a1a115cc925e110386b3b42b397bc731"
+      ],
+      "partial_status": "unavailable",
+      "partial_target_ids": [],
+      "scope": "sealed batches plus THIS attempt's validated unsealed rows only; missing IDs are absent from this observation, not necessarily earlier unsealed attempts; API receipts are not target coverage",
+      "sealed_target_ids": []
+    },
+    "evidence": {
+      "attempt": null,
+      "files": {},
+      "operations": [
+        {
+          "actual_microusd": null,
+          "operation_id": "63973b0845bf2effd4ab9a0221b7774c051ad4412fbcdcbb38ee665a8f4dd18e",
+          "owner": 0,
+          "receipt_sha256": "2765ef0cbd628a2ed2971194cfd96d4821dbdd345c7ab6785b6b0eb4d3e30503",
+          "request_sha256": "cd02ef97aa9fae7fe63c66fa88525644b44a4fd28390225142ba1b1143cc9c2e",
+          "reserve_microusd": 755400,
+          "status": "unknown"
+        }
+      ],
+      "prior_observations": {
+        "observations/ad86260c6b444fcabdc6618c8cffde78.json": "d8ed92c222c1e5a0bd04811d43d51232c116e70a69aae0c3e98353dafeba2f5d"
+      },
+      "receipt_hash_scope": "canonical response record retained in each original owner ledger"
+    },
+    "format": "buddha.meas02-native-study-report.v1",
+    "input_kind": "supplied audit controls",
+    "observation": "observations/b6a97e00fb9646c2aa5c6f1552b29759.json",
+    "result": "partial",
+    "status": "incomplete",
+    "stop": {
+      "codes": [
+        "unknown"
+      ],
+      "execution_reason": null,
+      "native_reason": null,
+      "reason": "unknown"
+    },
+    "stopped_batch": 0,
+    "stopped_occasion": "baseline",
+    "target_count": 40
+  },
+  "resumed_public_result": {
+    "format": "buddha.meas02-live-launch.v1",
+    "observation": "observations/b6a97e00fb9646c2aa5c6f1552b29759.json",
+    "reason": "unknown",
+    "reason_codes": [
+      "unknown"
+    ],
+    "result": "partial",
+    "status": "incomplete"
+  },
+  "selection_sha256": "45e4b7b6c1f9f84a33e7bf5ea6137e55fd9446b60c4e4b09a756d7308d0f9e91",
+  "source_sha256": {
+    "buddha\\__init__.py": "0857bd60619c1e1c8538fe768cbe82c781bb4e302abc6cf59130f1b17d052230",
+    "buddha\\__main__.py": "749379d618f14efefaef35eddad73720c77ab30f4494d85253fd1a756d969617",
+    "buddha\\agent_run.py": "3f7f8ff3cb9965216f19c6564da1e830f0f629a346ec1cc29e2583c119bea88d",
+    "buddha\\agent_worker.py": "c6f86105c0a42304687f857209bb17172f2f38fda26699d25e2618f6e01a745f",
+    "buddha\\answers.py": "be860546b2692ea4a710d93855f487dd49d9c8e28eb3f2ec757df697cefb8d0b",
+    "buddha\\archive.py": "9549deb0f347cf6114ef3f802b9dfef8a94e0db7cbbd3497697987d5e21ba2ee",
+    "buddha\\authorization.py": "06d8615f8b301285a951b08bece0570e5b1b89467fc99fa4e994c7e5e5f30c47",
+    "buddha\\baseline.py": "c988e823d9890b712a4b50a58a3d808c6630fdcf3e6fb94227ee9e591d04a432",
+    "buddha\\benchmark.py": "7ef7e26b2ef3cbf4119118a985334048fd30b68a5629f3e3196fa77e8200c49f",
+    "buddha\\channel.py": "c46d236865b15f1918efa23d961ed7163533c9bbef2b0cec7f61d6f8e95d6e5f",
+    "buddha\\common.py": "3a0a693a0f4a0f2eed3b858d0b3ac42148871dbca284e56e0e368726309393c0",
+    "buddha\\continuation.py": "b0136052472868aee379d7ac78dfd11bcfa40e91aedcd6916d30f9a334003414",
+    "buddha\\diagnostics.py": "ca0af1304e3fbe99569f0b027f99269b151e08265785b39ed53c39f820097e24",
+    "buddha\\doctor.py": "afa511a747c4be2951ba53fea5cfe2822077a0f7a6f80a80a3255594d5b5d19b",
+    "buddha\\evaluation.py": "4cabb1a48689a140fc6f6129ed8d9eae1d047d3e09eae794170c74479413b8d6",
+    "buddha\\executor.py": "b5e84f2dbcdc436aee23272e7d96b567cb5b16ead256a34d08bccc70b480d186",
+    "buddha\\gateway.py": "e844fcb695b97c76ecb7432ece6b8d96416806554038e202fd6b0f7f3da57a2e",
+    "buddha\\gateway_history.py": "a773ae6066e5b8a4f503e4b346b73570ace2ebeb811017f7b656cc211fded57c",
+    "buddha\\history.py": "d42e92a7e6c88a2f72090eaaa50de39dc355957e7c61f5b89dd97162d8b0eefa",
+    "buddha\\ledger.py": "5c7e56f1e2c5e68046d6380ebacc03110300eae34d348d7dca683a0591d64130",
+    "buddha\\native_context.py": "47a488b8d731617bda21380232e5e49801e0c0b4261f69b71c24fb9eae0ba298",
+    "buddha\\native_run.py": "60aafd5ef9e355e82faae2dc12397c6b0b2b649c3273c1bda9c0c757e0775a19",
+    "buddha\\native_transport.py": "ccd4917132939630231b8b8c69540189cd52f60951fa08d467d90b9571ccb6c0",
+    "buddha\\native_worker.py": "8fa4b85ae6e75202de4b345302cb70253b6c0c5b47f004490f8d9a09750ecaa1",
+    "buddha\\policy.py": "717f6fdad1e880d83326d6a314e0dfa604be1044f8209f27061380e16cfebb3e",
+    "buddha\\process_observation.py": "28ad4b424ae0bec10aa2d3bf145cb62e1b26eb088db5e83fb6900fab6d5495a8",
+    "buddha\\progress.py": "47d21dada88347e63c01b05cf5c31db8e2cc157e501b812b58a2650d078393ba",
+    "buddha\\provider.py": "17de071c1416afa32f9da32eb627e24264d8a0a848862fdf4853057125f18a02",
+    "buddha\\reference.py": "36356c8a25dae3501014513095cb6f838c4ae54b02a129bdffc4a5cb2dfa6f35",
+    "buddha\\releases.py": "33361cf5b0923b373ee53dd73597063195c2c0d519baead50d40fb4bcfab44f5",
+    "buddha\\run.py": "a972cb8d1a04bef7abad7efdf7f1eec803bb88cd55c30cf64148119a3d7c6dbb",
+    "buddha\\search.py": "ac7b3648355b139797773cbe2bb8b67abbc8533eefd987cd7692275692a9a95c",
+    "buddha\\search_evidence.py": "7f9c014bb61e2fc06691db9ec5a832fe803966715011d94ea34618b1df753ae3",
+    "buddha\\search_verify.py": "41bdc2689d2b64e93765fe4572017a6c4264d5c3c6df49bba2a63e74b9ab6a63",
+    "buddha\\splits.py": "419fa286d812b43e3095fbb41a62844b40477f880d94c8d60de069a52c324a2a",
+    "buddha\\wire.py": "48f40a71bf10c84dfd1d15f0baef50198cce8a229748355f116ad6a25cab12b4",
+    "docs\\conformance\\meas01-adjudication-review.json": "31a8ed84887cf85a391b2729e8cb0ea656fa331e82b413d8b954c7c9f0c294a3",
+    "docs\\conformance\\meas01-study\\pack.json": "8a29cded45e11f62eaecba52e5d9c30a88e2733b28cc8138aa2fdb38d025bf15",
+    "docs\\conformance\\meas02-live-approval.json": "2bdc7d0f5e3b4d6cfa9d551102c1cf14be4658d9d81abe798d84b7da47336bfa",
+    "docs\\conformance\\meas02-live-probe.py": "8ac36e9fd7e3fb3e419e683e9cc758756561691628df3e95be10b40aab5a51a7",
+    "docs\\conformance\\meas02-live.py": "c4c325c98ca0433e7ad77a7a86df0defb924a91a38112d54d5597bab527ff2d4",
+    "docs\\conformance\\meas02-materialize.py": "361ec95b56802eb018681113f012d0f4efaec48d587e556bc6df9993aae26c7d",
+    "docs\\conformance\\meas02-native-audit.py": "ac7cddb5021507712206352cd95fc1264f061e55a3c5fa0b298b8428c5ca23f1",
+    "docs\\conformance\\meas02-run.py": "ff48850a2281bb4ded265654443730c2d43185fb0fbe45236710ee94e6eb7fb8",
+    "docs\\conformance\\meas02-target-proposal.json": "efa7071f37ffa18d5d7909969258b4fb378939cc768537de10a9555599213cce",
+    "runs\\reviews\\meas02-live-launch-dvgtreec\\recipe.json": "eec623c7133d47d29077bad856bf9743101424d8a20c65abf90519432b8b624f"
+  },
+  "status": "PASS",
+  "synthetic_authorization": {
+    "authorization_id": "synthetic-meas02-live-launch-dvgtreec",
+    "available_microusd": 14244600,
+    "budget_microusd": 15000000,
+    "committed_microusd": 755400,
+    "event_count": 8,
+    "max_calls": 120,
+    "operation_count": 1,
+    "remaining_calls": 119,
+    "reserved_microusd": 755400,
+    "runs": [
+      {
+        "active": true,
+        "committed_microusd": 0,
+        "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\meas02-live-launch-dvgtreec\\study\\owners\\2",
+        "historical": 0,
+        "historical_ledger_sha256": null,
+        "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\meas02-live-launch-dvgtreec\\study\\owners\\2\\operations.sqlite3",
+        "manifest_sha256": "9da5590b90d4a4507f46aacffeccc781b68f1dd2855fdc7e9194fe8643d48e9e",
+        "operation_count": 0,
+        "reserved_microusd": 0,
+        "run_id": "meas02-1229313580e8572e7957eb8dbf9fc2b8397b102eb61fd0d8109f956d0f5f89eb",
+        "runtime_sha256": "4b3bf2b1a0e61407d46785968d8402165921c595b11f1a917a88047d1d6a6c0b",
+        "spent_microusd": 0
+      },
+      {
+        "active": true,
+        "committed_microusd": 755400,
+        "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\meas02-live-launch-dvgtreec\\study\\owners\\0",
+        "historical": 0,
+        "historical_ledger_sha256": null,
+        "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\meas02-live-launch-dvgtreec\\study\\owners\\0\\operations.sqlite3",
+        "manifest_sha256": "b84813bdff11bb0392303eaf0a63100e9d846797b3f94d9100178191fd714db9",
+        "operation_count": 1,
+        "reserved_microusd": 755400,
+        "run_id": "meas02-1e939529c90242fed07d9fcaaf7e100838b9d087934591a15596d71c3bba040f",
+        "runtime_sha256": "127d707c9fd9c56ca024f723fdb500fc71deb6863d922ba11eca8d80617e7dd4",
+        "spent_microusd": 0
+      },
+      {
+        "active": true,
+        "committed_microusd": 0,
+        "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\meas02-live-launch-dvgtreec\\study\\owners\\3",
+        "historical": 0,
+        "historical_ledger_sha256": null,
+        "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\meas02-live-launch-dvgtreec\\study\\owners\\3\\operations.sqlite3",
+        "manifest_sha256": "7893f93c24f5a073caeac462f5e31ec4b5ca9890be2e9a22a72480f9120c3dca",
+        "operation_count": 0,
+        "reserved_microusd": 0,
+        "run_id": "meas02-60efb2c0c244028782a4b483202742b3d0b5318cb05db35a1da68788428850a6",
+        "runtime_sha256": "e65f8031b44ddc38325c645f59228c72aa9509478f7d661bb506dcdbea581d2e",
+        "spent_microusd": 0
+      },
+      {
+        "active": true,
+        "committed_microusd": 0,
+        "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\meas02-live-launch-dvgtreec\\study\\owners\\1",
+        "historical": 0,
+        "historical_ledger_sha256": null,
+        "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\meas02-live-launch-dvgtreec\\study\\owners\\1\\operations.sqlite3",
+        "manifest_sha256": "398d5d346b517ba5749e046fd6047f22f25f3dba49a57421a51b16ee390abf0d",
+        "operation_count": 0,
+        "reserved_microusd": 0,
+        "run_id": "meas02-79e9803961cfccb4181b4ca160f17ebc91d609aedba47d2e66596a28eba31d89",
+        "runtime_sha256": "47f008131a5b4e75e1fa743f5521c29378e510b752f0b99fc1006643cbfa5c96",
+        "spent_microusd": 0
+      }
+    ],
+    "scope": "offline first-live handoff engineering proof only; no live permission",
+    "spent_microusd": 0,
+    "terms_sha256": "615e1abba4c7190c93953925f116b68f693a38c1751cd71a2041056a914cf308"
+  },
+  "temporary_key_environment_restored": true
+}

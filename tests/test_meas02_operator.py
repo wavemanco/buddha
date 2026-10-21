@@ -222,7 +222,13 @@ class OperatorTests(unittest.TestCase):
         self.assertNotIn(KEY, self.out.getvalue() + self.err.getvalue())
         self.out, self.err = Terminal(), Terminal()
         self.controller.run_native_audit.side_effect = None
-        self.controller.run_native_audit.return_value = {"status": "incomplete", "stopped_batch": 1}
+        self.controller.run_native_audit.return_value = {
+            "status": "incomplete",
+            "result": "partial",
+            "stopped_batch": 1,
+            "stop": {"reason": "money", "codes": ["money"]},
+            "observation": "observations/operator-fixture.json",
+        }
         with self.operator(key=KEY):
             self.assertEqual(main(["run", "--run", str(self.directory), "--live"]), 3)
         self.assertIn("incomplete", self.out.getvalue())

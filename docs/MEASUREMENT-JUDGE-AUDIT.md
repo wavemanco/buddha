@@ -266,9 +266,10 @@ The [local launcher](conformance/meas02-run.py) uses the existing hidden-key
 helper and the same study controller. It does not change official requests,
 answer order, evaluator code or the application's version-neutral modules.
 A reviewed descriptor, account review and active shared authorization must be
-supplied first. No such live allocation has yet been approved for this study.
-The user's Standard/default project setting is confirmed; credentials, applicable
-account pricing and the new dollar/physical-attempt allowance still need binding.
+supplied first. The user has now approved the separate $15/120-attempt allocation
+below, with Standard/default processing and public pay-as-you-go pricing. The
+credential fingerprint is bound locally before the first request; no key is
+supplied in chat or saved in a file.
 
 The following are command forms for the reviewed files, **not instructions to
 start a paid run now**. `$studyPath`, `$descriptorPath`, `$authorizationPath` and
@@ -354,9 +355,9 @@ final checks and their limits. No synthetic response establishes the real
 judge's semantic accuracy or stability.
 
 
-## Proposed next live allocation
+## Earlier allocation proposal
 
-This is a concrete decision proposal, not authorization: **a new $5 shared cap
+The earlier proposal was **a new $5 shared cap
 and at most 120 physical API attempt records** for the 40 frozen judge targets,
 across all four occasions. Use the explicit `gpt-5.6-luna` partition profile,
 unchanged official requests and the user-confirmed Standard/default project
@@ -386,5 +387,96 @@ and the shared cap can stop them. Unknown payment stops further spending.
 Before creation or execution, confirm that public prices apply (custom/Scale
 terms need their own reviewed envelope), bind any required account headers or
 explicitly none, and produce the credential fingerprint locally through hidden
-entry. No raw key belongs in chat or a saved review. The new $5/120 allowance and
-acceptance of partial completion still require the user's approval.
+entry. No raw key belongs in chat or a saved review. That $5 suggestion was not
+allocated. The approved $15 allowance below supersedes it.
+
+
+## Approved $15 live audit
+
+The user approved **$15 shared across all four occasions**, asked the controller
+to choose the attempt cap, and explicitly accepted partial completion provided it
+is recorded as a partial result with the reason. The selected limit is **120
+physical attempt records** for the same 40 targets. SDK retries share that limit;
+it is separate from the nominal 120 semantic-fold allowance. No automatic top-up,
+new targets, generation, search or quality scoring is included. The
+[approval record](conformance/meas02-live-approval.json) preserves the exact scope.
+
+Of the 40 targets, 23 have resolved development expectations and 17 retain
+uncertainty, including repeated/order variants. The resolved targets contain
+377 expected-distinct and eight expected-equivalent pair appearances. These
+share answers and contexts; they are not independent observations or human
+gold labels. Agreement excludes uncertain expectations. All 40 still matter
+for native coverage and the declared repeat/order diagnostics.
+
+Public pay-as-you-go pricing and Standard/default project processing are
+user-confirmed. The conservative reservation remains $0.7554 per request: $15
+can cover 19 full worst-case reservations, so completion of 40 targets is not
+guaranteed. Short responses release unused money for later requests. Local
+recorded costs can exceed the invoice; existing reservations and unknown holds
+remain separately visible. Each native batch has a configured 15-minute worker
+limit; the host transport has a 60-second response timeout. A timeout can leave
+an unknown charge and stop the audit with its reservation retained.
+
+A separate existing authorization and immutable configuration are prepared under
+`runs/meas02-live-20261020`. Its four owners share one $15/120 allowance; they do
+not receive $15 each. Credential review and study preparation occur only through
+local hidden entry. The original $50 authorities, costs and unknown hold remain
+unchanged. The earlier native/proposal records remain historical evidence.
+
+The [single-session handoff](conformance/meas02-live.py) will check exact approved
+source/configuration and allocation before asking for a key. Use a project-scoped
+inference key from the Standard/default public-PAYG project you verified, with no
+organization/project override. The confirmation flag below records that manual
+assertion; a matching fingerprint alone does not authenticate the account or
+prove those account settings. If this is a legacy or ambiguously scoped key,
+stop and obtain an appropriate project-scoped key or an explicitly reviewed
+routing profile first. Never paste a key into a visible confirmation field.
+
+Local handoff verification passed: 1,025 tests, the confined 40-target study and actual-profile partial-stop/keyless-recovery proofs. The [handoff delivery](conformance/meas02-live-handoff-delivery.json) records the exact pins and limits; hosted PR checks are reported separately.
+From this project folder, in an ordinary interactive PowerShell window:
+
+```powershell
+python docs/conformance/meas02-live.py --handoff runs/meas02-live-20261020/handoff.json --live --prompt-keys --confirm-project-key
+```
+
+This runs once and can spend within the approved $15/120 shared allowance.
+`--live` enables unfinished work; `--prompt-keys` requests the missing OpenAI key
+without displaying it. `--confirm-project-key` confirms the project/key condition
+above. Paste once at the hidden key prompt and press Enter. The same process
+records only its fingerprint, prepares the original owners and runs the study,
+so there is one key entry. It restores/removes the temporary key on exit. A new
+PowerShell window is unnecessary. Progress appears immediately and repeats every
+ten seconds. Ctrl+C cancels; rerun this same command only when retained state
+permits recovery. It never creates another allocation or replaces an owner.
+
+On full completion, `study/report.json` records all four anchored batches.
+A clean stop or native interruption records an append-only observation in
+`study/observations/`, with `status: incomplete`, `result: partial`, explicit
+reason/codes, saved native evidence and accounting. Completed sealed targets are
+separate from validated rows in the stopped attempt; earlier unsealed observations
+remain separate references. A provider reply count is never target coverage.
+Money, attempt limit, unknown payment, protocol and execution failures are
+reported from evidence rather than guessed. If multiple blockers apply, retain
+all proven codes. Observation writes must succeed before a saved partial result
+is claimed. A hard process kill or invalid/corrupted source can prevent a final
+observation. A native output that claims completion but fails the host's
+coverage/content checks also stops as invalid evidence, retaining its native
+files and receipts without claiming a saved aggregate partial result. These
+records remain incomplete and are not promoted.
+
+The console prints a short JSON result and, for a partial result, the observation
+filename and reason. Send back "complete" or "partial" and that filename; the
+saved files here support the review without pasting keys or long terminal logs.
+I will check coverage, raw replies, costs/holds, repair paths, equivalent controls,
+repeats and order effects, preserving original benchmark scores.
+
+Optional accounting inspection:
+
+```powershell
+python -m buddha authorization-inspect --authorization runs/meas02-live-20261020/authorization.sqlite3
+```
+
+This runs once in either PowerShell window, prints this audit's cap, recorded
+attempts, spending and held money, asks for no key and makes no provider calls.
+It does not resume the audit. No command is needed while the foreground runner's
+progress output is sufficient.

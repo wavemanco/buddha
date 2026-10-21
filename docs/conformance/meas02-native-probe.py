@@ -45,6 +45,7 @@ PACK = ROOT / "docs/conformance/meas01-study/pack.json"
 PROPOSAL = ROOT / "docs/conformance/meas02-target-proposal.json"
 PROVENANCE = ROOT / "docs/conformance/meas01-adjudication-review.json"
 OPERATOR = ROOT / "docs/conformance/meas02-run.py"
+LIVE = ROOT / "docs/conformance/meas02-live.py"
 KEY = "offline-meas02-not-a-real-api-key"
 OCCASIONS = ("baseline", "same-order-repeat", "order-seed-0", "order-seed-20261020")
 STORAGE_SEALS = {
@@ -60,6 +61,20 @@ STORAGE_SEALS = {
     "runs/first-live-authorization-v2.sqlite3": (
         "52d293f04921af5418a46a0ce33b1ffd296ae3753cbd3aee7da5130f3dd2c06a"
     ),
+    "docs/conformance/meas02-native-proof.json": (
+        "85ef3e3723db792b78694ee8d12ba22d0e9a91bacc566ac2ff58bc41774164ea"
+    ),
+    "docs/conformance/meas02-operator-native-proof.json": (
+        "4ba9e6f39f14c934aaceb45c62c5f1e74745a5c0f53a438b3ea0b520315a6696"
+    ),
+}
+SOURCE_CHANGES = {
+    "buddha/doctor.py": {
+        "old_sha256": "80104522cb402a3a6ae35521bdc29c12a234f1a3249157127fbb4ebb3f6903e5",
+        "current_sha256": "afa511a747c4be2951ba53fea5cfe2822077a0f7a6f80a80a3255594d5b5d19b",
+        "commit": "a712eec",
+        "scope": "separately reviewed doctor integration; original preservation manifest unchanged",
+    }
 }
 
 
@@ -93,7 +108,12 @@ def preservation():
     assert len(preserved["input_sha256"]) == 287
     assert len(sources["source_sha256"]) == 36
     result.update(preserved["input_sha256"])
-    result.update(sources["source_sha256"])
+    assert set(SOURCE_CHANGES) <= set(sources["source_sha256"])
+    for name, expected in sources["source_sha256"].items():
+        if name in SOURCE_CHANGES:
+            assert expected == SOURCE_CHANGES[name]["old_sha256"]
+            expected = SOURCE_CHANGES[name]["current_sha256"]
+        result[name] = expected
     for name, expected in result.items():
         assert sha((ROOT / name).read_bytes()) == expected, name
     return result
@@ -497,6 +517,30 @@ def operation_summary(directory):
     ]
 
 
+def partial_observation(directory, result, targets, *, reason, measured):
+    assert result["status"] == "incomplete" and result["result"] == "partial"
+    assert result["stop"]["reason"] == reason
+    path = directory / result["observation"]
+    assert path.parent == directory / "observations"
+    raw = path.read_bytes()
+    assert json.loads(raw) == result
+    coverage = result["coverage"]
+    assert coverage["expected_count"] == 40
+    assert coverage["sealed_target_ids"] == []
+    assert len(coverage["partial_target_ids"]) == measured
+    assert len(coverage["missing_target_ids"]) == 40 - measured
+    assert not set(coverage["partial_target_ids"]) & set(coverage["missing_target_ids"])
+    assert set(coverage["partial_target_ids"] + coverage["missing_target_ids"]) == {
+        row["target_id"] for row in targets
+    }
+    assert "THIS attempt" in coverage["scope"]
+    for name, digest in result["evidence"]["files"].items():
+        assert sha((directory / name).read_bytes()) == digest
+    assert not (directory / "report.json").exists()
+    assert list((directory / "completed").iterdir()) == []
+    return {"path": result["observation"], "sha256": sha(raw), "report": result}
+
+
 def block_other_owner(directory, *, suffix):
     with (
         patch.dict(os.environ, {"OPENAI_API_KEY": "", "ANTHROPIC_API_KEY": ""}),
@@ -534,6 +578,7 @@ def main(target):
         for path in (
             SCRIPT,
             OPERATOR,
+            LIVE,
             controller_path,
             materializer_path,
             HELPER,
@@ -591,11 +636,28 @@ def main(target):
     before_resume = operations(directory / "owners/0")
     assert len(before_resume) == 1 and before_resume[0]["status"] == "completed"
     assert authority.summary()["spent_microusd"] == spec.cost_microusd(1, 2)
+    interrupted_files = inventory(directory / "observations")
+    assert len(interrupted_files) == 1
+    interrupted_name = next(iter(interrupted_files))
+    interrupted_raw = (directory / "observations" / interrupted_name).read_bytes()
+    interrupted_partial = partial_observation(
+        directory, json.loads(interrupted_raw), targets, reason="interrupted", measured=0
+    )
+    assert interrupted_partial["report"]["stop"]["native_reason"] is None
+    assert not (directory / "attempts/0-0/report.json").exists()
+    interrupted_operations = interrupted_partial["report"]["evidence"]["operations"]
+    assert len(interrupted_operations) == 1
+    assert interrupted_operations[0]["status"] == "completed"
+    assert interrupted_operations[0]["receipt_sha256"] == sha(
+        before_resume[0]["response_json"].encode()
+    )
     print(json.dumps({"status": "resuming", "known_receipts": 1}), flush=True)
     result = invoke(controller, directory, server)
     assert result["status"] == "complete" and result["target_count"] == 40
     assert len(server.sends) == 40
     assert operations(directory / "owners/0")[0] == before_resume[0]
+    assert inventory(directory / "observations") == interrupted_files
+    assert (directory / "observations" / interrupted_name).read_bytes() == interrupted_raw
     assert all(
         (directory / "owners" / str(index) / "manifest.json").read_bytes() == raw
         for index, raw in manifests.items()
@@ -643,6 +705,7 @@ def main(target):
             {"shared_budget": spec.reserve_microusd() + spec.cost_microusd(1, 2) - 1},
         ),
         ("unknown", {}),
+        ("attempt-cap", {"max_calls": 1}),
     ):
         recipe, control_authority, review, _ = setup(fixture / name, helper, **options)
         control = controller.prepare_native_audit(
@@ -657,6 +720,19 @@ def main(target):
         stopped = invoke(controller, control, control_server)
         assert stopped["status"] == "incomplete" and stopped["stopped_batch"] == 0
         assert len(control_server.sends) == 1
+        stop_reason = {
+            "shared-budget": "money",
+            "unknown": "unknown",
+            "attempt-cap": "attempt_limit",
+        }[name]
+        partial = partial_observation(
+            control, stopped, targets, reason=stop_reason, measured=0 if name == "unknown" else 1
+        )
+        assert stopped["stop"]["native_reason"] == ("unknown" if name == "unknown" else "authority")
+        if name != "unknown":
+            assert stopped["coverage"]["partial_target_ids"] == [
+                control_server.sends[0]["target_id"]
+            ]
         control_totals = control_authority.summary()
         assert control_totals["operation_count"] == 1
         assert control_totals["reserved_microusd"] == (
@@ -664,18 +740,20 @@ def main(target):
         )
         blocked = block_other_owner(control, suffix=name)
         assert control_authority.summary() == control_totals
+        assert sha((control / partial["path"]).read_bytes()) == partial["sha256"]
         controls.append(
             {
                 "name": name,
                 "report": stopped,
                 "other_owner_block": blocked,
                 "authorization": control_totals,
+                "saved_partial": partial,
             }
         )
     assert preservation() == protected
     assert sources == {name: sha((ROOT / name).read_bytes()) for name in sources}
     evidence = {
-        "format": "buddha.meas02-operator-native-proof.v1",
+        "format": "buddha.meas02-partial-native-proof.v1",
         "source_sha256": sources,
         "fixture": fixture.relative_to(ROOT).as_posix(),
         "actual_provider_calls": 0,
@@ -683,9 +761,11 @@ def main(target):
         "host_official_execution": False,
         "selected_function_paid_shortcut": False,
         "target_count": 40,
-        "mocked_physical_sends": 42,
+        "mocked_physical_sends": 43,
         "ordinary_owner_operation_counts": counts,
         "same_owner_received_reply_interruption": "completed/charged once then resumed exact owner",
+        "interrupted_partial": interrupted_partial,
+        "interrupted_partial_bytes_preserved_across_complete_resume": True,
         "keyless_completed_reuse_new_sends": 0,
         "six_fresh_repeat_HTTP_bodies_equal": True,
         "all40_proposal_scientific_render_hashes_equal": True,
@@ -700,13 +780,20 @@ def main(target):
         "controls": controls,
         "protected_file_count": len(protected),
         "protected_historical_inputs": 287,
-        "protected_source_files": 36,
-        "all_prior_seals_unchanged": True,
+        "protected_source_files": 35,
+        "current_source_files_checked": 36,
+        "historical_source_manifest_unchanged": True,
+        "explicit_current_source_changes": SOURCE_CHANGES,
+        "all_declared_preservation_checks_passed": True,
         "limits": [
             "Synthetic responses measure no judge accuracy, agreement or order stability.",
             "Short controls are study inputs, not C1 generated Answers or population scores.",
             "No score, generation, optimizer, live allocation or provider route is enabled.",
             "Inputs are immutable; dynamic partial-native-cache adoption is not supported.",
+            "Partial coverage separates sealed batches from this attempt's unsealed rows; "
+            "it is not a completion seal.",
+            "Interrupted observations are best effort after cleanup; "
+            "hard termination cannot guarantee a record.",
         ],
     }
     save(target, evidence)
@@ -716,7 +803,7 @@ def main(target):
                 "output": str(target),
                 "sha256": sha(target.read_bytes()),
                 "targets": 40,
-                "mocked_sends": 42,
+                "mocked_sends": 43,
                 "actual_provider_calls": 0,
             }
         ),
