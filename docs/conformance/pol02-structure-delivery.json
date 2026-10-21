@@ -1,0 +1,117 @@
+{
+  "actual_container_invocations_for_this_data_only_slice": 0,
+  "application_commit": "232dc3a83da278887cfcffe1619971aa5cb40581",
+  "format": "buddha.pol02-structure-delivery.v1",
+  "hosted_ci": "new slice PR/head not published yet; its fresh full Linux/Windows checks are required before merge",
+  "limitations": [
+    "declared family correctness and representativeness need review",
+    "full source artifacts remain trusted-host-only",
+    "schedule IDs do not prove fresh physical calls or independence",
+    "equal model/configuration ceilings do not establish equal actual cost",
+    "funded execution, full native judging reuse, partial observations and analysis remain open",
+    "no measured diversity, utility, transfer or improvement claim"
+  ],
+  "new_paid_authorizations": 0,
+  "new_study_owners": 0,
+  "next_engineering_step": "Reuse already anchored C1 answers through fresh full native partition/quality/summary occasions. Extract one shared stage primitive for prospective baseline/evaluation code, with an explicit new installed source identity. baseline.py belongs to the original 45 frozen live sources: retain their originals and owner pins; do not reseal or upgrade historical owners.",
+  "parent": "4a7b508ddb40eebf54d2dccce7b9cbd2baa94f5c",
+  "preservation": {
+    "baseline_fixed_seed_native_executor_finance_official_scoring_changed": false,
+    "existing_application_and_agent_files_byte_exact": 40,
+    "historical_delivery_records_changed": false,
+    "new_runtime_dependency": false,
+    "original_live_handoff_or_owner_resealed": false
+  },
+  "real_provider_calls": 0,
+  "scope": {
+    "execution_controller": false,
+    "frozen_factors": "empty/child instructions x regenerate/in-context",
+    "future_release_compatibility": "generic C1/release fields and counts; no benchmark algorithm/version dispatch",
+    "instrument_funding_analysis": false,
+    "population": "complete source plus explicit source-bound disjoint development/validation/final split and development-only selection",
+    "real_membership_frozen": false,
+    "repetitions": "explicit complete arm/generation grid; separately identified prospective judging occasions",
+    "scientific_preregistration_complete": false
+  },
+  "source_sha256": {
+    "buddha/policy_study.py": "a1d0c3d5d608312f1efe28c149190857b12ae031609e9ab217d96c8c9e3ed8ab",
+    "docs/POLICY-STUDY.md": "c6157aa6f4a664835eda13f2f6edb73767f407082e551d7914a610dccb22ab97",
+    "tests/test_policy_study.py": "9d1579874dd42fd8df0360be419100541ebbb46f04aee40d57f9fb91919dee97"
+  },
+  "status": "offline structural prerequisite complete; POL-02 controlled experiment remains open",
+  "validation": {
+    "bandit": "no issues; existing nosec diagnostics retained",
+    "compileall": "pass",
+    "focused": {
+      "log_sha256": "ebe09d9f30485ae91e83029100aaee644bf90a74d424af29036bef21c2324dd8",
+      "resource_warnings": "errors",
+      "seconds": 0.269,
+      "skips": 0,
+      "status": "pass",
+      "tests": 17
+    },
+    "full": {
+      "log_sha256": "8f4497f8e508d50bf055a81492714270d8eba276bf87e35ef000b9f023504d08",
+      "process": {
+        "exit_code": 0,
+        "finished_utc": "2026-10-21T06:06:09.0990513Z",
+        "started_utc": "2026-10-21T05:49:37.4652041Z"
+      },
+      "resource_warnings": "errors",
+      "retained_diagnostics": [
+        "expected RuntimeWarning from diagnostics failure fixture",
+        "asyncio slow-task diagnostic 0.144 seconds"
+      ],
+      "scope": "final frozen new application/tests; subsequent delivery/roadmap documentation only",
+      "seconds": 990.206,
+      "skip_scope": "ten existing local platform/private-history skips; focused new tests have none",
+      "skips": 10,
+      "status": "pass",
+      "tests": 1139
+    },
+    "independent_engineering_review": {
+      "additional_pure_probes_reported": 10,
+      "excluded_claims": [
+        "funding",
+        "instrument binding",
+        "complete preregistration",
+        "physical judging freshness",
+        "scientific conclusions"
+      ],
+      "files_modified_by_reviewer": 0,
+      "format": "buddha.pol02-structure-review.v1",
+      "outcome": "pass; no concrete defect found",
+      "probe_scope": [
+        "float/bool IDs rejected",
+        "Unicode casefold duplicate leakage rejected",
+        "bytearray/memoryview/str rejected with typed errors",
+        "model changes invalidate every cell identity",
+        "judge occasion count changes invalidate occasion identities",
+        "unchanged frozen_seed accepts all four arm configs for both providers at 4000 astral Unicode characters and output cap 2^63-1"
+      ],
+      "real_provider_calls": 0,
+      "reviewed_scope": [
+        "full actual source population",
+        "per-ID family coverage",
+        "complete disjoint split",
+        "selected development-only IDs",
+        "separate bounded generation and judging axes",
+        "exact complete arm/repeat grid",
+        "canonical frozen bytes and fresh views",
+        "no financial/SDK/legacy imports",
+        "guide claims and limitations"
+      ],
+      "reviewer": "separate native Codex subagent gateway_authority_review; engineering review, not independent scientific/human evaluation",
+      "source_sha256": "a1d0c3d5d608312f1efe28c149190857b12ae031609e9ab217d96c8c9e3ed8ab"
+    },
+    "mypy": "strict pass; 41 source files; new module also Linux and Win32 target checked",
+    "ruff": "lint and formatting pass; 117 files",
+    "runtime_dependency_audit": "no known vulnerabilities; empty unchanged runtime requirements",
+    "tests_first": {
+      "error": "ModuleNotFoundError: No module named buddha.policy_study",
+      "exit_code": 1,
+      "log_sha256": "569d9b852b4c34fe8b851e2ad622e4e7c56c948ef668ae9f636f5c5fc8e93319",
+      "result": "expected missing-module RED before implementation"
+    }
+  }
+}

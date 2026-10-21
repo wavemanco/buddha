@@ -48,7 +48,9 @@ fixtures do not supply fresh judge measurements.
 The [versioned proposer contract](docs/POLICY-CONTRACT.md) now explains which
 sampling mode sees earlier answers and preserves literal task requirements.
 Fixed policies reuse the native pipeline; legacy search keeps v1. Controlled
-policy comparisons remain open.
+policy comparisons remain open. The [offline comparison structure](docs/POLICY-STUDY.md)
+now checks the four fixed conditions, development-only selection and separate
+generation/judging repetitions; execution, funding and analysis remain open.
 
 The [source runtime](docs/SOURCE-RUNTIME.md) and [candidate execution boundary](docs/SOURCE-CANDIDATES.md)
 now pass composed isolation, model-channel, accounting and recovery checks.
