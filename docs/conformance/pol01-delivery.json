@@ -1,0 +1,135 @@
+{
+  "base_commit": "ba8059d7c10149a57b7fc3819afe9fd63b9885a6",
+  "checks": {
+    "bandit": "PASS zero findings; existing nosec warning messages retained",
+    "compileall": "PASS",
+    "focused": {
+      "resource_or_unraisable_warnings": 0,
+      "seconds": 12.126,
+      "skips": 0,
+      "status": "PASS",
+      "tests": 10
+    },
+    "format": "PASS109 files",
+    "frozen_seed": {
+      "seconds": 0.012,
+      "status": "PASS",
+      "tests": 15
+    },
+    "full_suite": {
+      "expected_runtime_warning": "The existing injected optional diagnostic-save failure emits RuntimeWarning; the full suite is not claimed warning-free.",
+      "resource_warnings": "errors; none observed; no unraisables",
+      "seconds": 854.791,
+      "skip_details": [
+        "test_symlinked_source_is_rejected_even_when_expected_bytes_match (test_agent_worker.AgentWorkerTests.test_symlinked_source_is_rejected_even_when_expected_bytes_match) ... skipped 'host does not permit symlinks; actual container probe covers it'",
+        "test_actual_original_nine_receipts_validate_read_only (test_continuation_source.ContinuationSourceTests.test_actual_original_nine_receipts_validate_read_only) ... skipped 'local incident evidence is not distributed in repository checkouts'",
+        "test_source_symlink_is_rejected_without_following_it (test_history.HistoryTests.test_source_symlink_is_rejected_without_following_it) ... skipped 'host does not permit creating symlinks'",
+        "test_replaced_artifact_root_cannot_export_another_tree (test_native_worker.NativeWorkerTests.test_replaced_artifact_root_cannot_export_another_tree) ... skipped 'host cannot create a directory link: OSError'",
+        "test_symlinked_file_or_parent_is_rejected (test_releases.ReleaseSelectionTests.test_symlinked_file_or_parent_is_rejected) ... skipped 'host cannot create symlinks'",
+        "test_symlink_is_rejected (test_search_evidence.SearchEvidenceTests.test_symlink_is_rejected) ... skipped 'host cannot create a symlink'"
+      ],
+      "skips": 6,
+      "status": "PASS",
+      "tests": 1065
+    },
+    "hosted_ci": "Pending exact-head publication; no hosted-green claim.",
+    "legacy_policy": {
+      "seconds": 0.003,
+      "status": "PASS",
+      "tests": 13
+    },
+    "mypy": "PASS38 application/agent sources, Linux and win32",
+    "ruff": "PASS",
+    "runtime_pip_audit": "PASS no known advisories for stdlib-only core runtime; not CPU evaluator-image clearance"
+  },
+  "combined_execution_commit": "b22b98b0d13f1e688a5551d5d233fd3130e95b1f",
+  "contract": {
+    "activation": "Explicit propose_call_v2 only; legacy propose_call and search stay v1.",
+    "binding": "Caller must explicitly bind contract record and actual executing proposer/helper sources as ordered Gateway inputs before a future funded invocation; this pure API performs no automatic binding or authority creation.",
+    "changed_request_fields": [
+      "system text only"
+    ],
+    "format": "buddha.proposer-contract.v2",
+    "policy_fields": [
+      "instructions",
+      "sampling"
+    ],
+    "record_sha256": "51e541e6a7d4fa8997d5616b59a1eca4899cfc954d6e6941d704478a37d70ccc",
+    "schema_sha256": "c7114823510ca143f2b18027aff226591229c2144864214176a7d4d6fbecf228",
+    "system_sha256": "dc0e45b849f9e9db61e151215a733b2ebbeb509b204310f3123f706c446a8f9e"
+  },
+  "format": "buddha.pol01-delivery.v1",
+  "implementation_commit": "02490f2270304418cec5cde43a309596ee275bf4",
+  "limits": [
+    "Contract/request checks do not establish policy compliance, transfer, meaningful diversity or improvement.",
+    "Bad task-specific policies and weak/duplicate answers remain eligible data; no semantic filter or repaired ranking.",
+    "Current legacy search does not use v2. Future funded callers must select and bind its contract/sources explicitly.",
+    "Controlled empty/child by independent/in-context treatments, varied prompts, repetitions, matched resources and funding remain POL-02.",
+    "No new actual-container proof, live judgment, human scientific validation, source evolution or held-out claim.",
+    "The reviewed REC-05D source revision is inherited explicitly; original primary live handoff pins remain frozen."
+  ],
+  "local_logs": {
+    "runs/reviews/pol01-bandit.log": "fede0f9f7011cb1b1986ae5a2a2874ecbe98b2d57eee56ee6d8f3c162e2513a4",
+    "runs/reviews/pol01-combined-audit.log": "e82148c0c30269ca5a2c35420ece6af011a4faf5a375325d750e243ffdb10625",
+    "runs/reviews/pol01-combined-bandit.log": "c20e0adab8afe02c6f11f69c703fbfbc12d6763fcbc4fefee63dd4d2725d534c",
+    "runs/reviews/pol01-combined-format.log": "78a8ef542a70a3fcd4c2bc92f315124863264c4ee03844fffedb1855f8d19ed8",
+    "runs/reviews/pol01-combined-full-suite.log": "0b337472712937fee4fcd3cf97939394d67bc31a000940d2832fd702c72ce776",
+    "runs/reviews/pol01-combined-mypy-linux.log": "1d0b00ad0473fd5bc2b62278f6fc097727a1561945844ab5bddd02cee1369dc2",
+    "runs/reviews/pol01-combined-mypy-win.log": "1d0b00ad0473fd5bc2b62278f6fc097727a1561945844ab5bddd02cee1369dc2",
+    "runs/reviews/pol01-combined-ruff.log": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+    "runs/reviews/pol01-format.log": "97d85b4b6c185a05396e2d09a3c304ff0f7cc77f8b7b7bb7989ec6cd875b3898",
+    "runs/reviews/pol01-mypy.log": "1d0b00ad0473fd5bc2b62278f6fc097727a1561945844ab5bddd02cee1369dc2",
+    "runs/reviews/pol01-proposer-final-focused.log": "3ca39a1b1ee7a2259ec3cccbf28e4a3e03563b7a0d50d869cc80edd145a2f796",
+    "runs/reviews/pol01-proposer-first-functional.log": "a091842375639d9bee7776e963da804fcac67c959fe3e2182bce01842455dbdd",
+    "runs/reviews/pol01-proposer-missing-api-red.log": "34e8a955b4119cfef85690f587f8cffa4ea1af8a44ec8459aa69aff176c3e4c7",
+    "runs/reviews/pol01-ruff.log": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+    "runs/reviews/pol01-seed-regression.log": "de2368ccf1648f2c164d0360758b36e2c008f18d68f85b721537cb012261b852",
+    "runs/reviews/pol01-v1-policy-regression.log": "922c056c79acf976a37b7716f98a1cb1e0225ed7ccb8aa00ae80d20e4a2006da",
+    "runs/reviews/pol01-win-mypy.log": "1d0b00ad0473fd5bc2b62278f6fc097727a1561945844ab5bddd02cee1369dc2"
+  },
+  "preservation": {
+    "actual_provider_calls": 0,
+    "existing_python_source_changes": 0,
+    "existing_python_sources_compared_to_reviewed_observer_ancestor": 37,
+    "financial_transition_changes": 0,
+    "frozen_seed_changes": 0,
+    "grant_databases_opened": 0,
+    "local_receipt": "runs/reviews/pol01-preservation.json",
+    "local_receipt_sha256": "9f9e7ac262ffd05f5c27438cb17266b5f902c6274f28cab1ae18b556026734c5",
+    "new_live_allocations": 0,
+    "official_instrument_changes": 0,
+    "primary_live_handoff_mismatches": 0,
+    "primary_live_handoff_source_pins_checked": 45
+  },
+  "recorded_at_utc": "2026-10-21T03:37:53.621767+00:00",
+  "reuse_evidence": {
+    "fixed_policy": "Existing frozen-generation descriptor instructions/sampling and baseline APIs; no new evaluator, gateway, controller, CLI or experiment runner.",
+    "new_composition": "Real host AgentSession/NativeSession/Gateway/shared accounting with simulated HTTPS and mocked container execution/official computations; both sampling modes preserve literal C1 handoff and fixed native selection.",
+    "prior_actual_pipeline": "docs/conformance/nb02c3c3-delivery.json",
+    "prior_actual_worker": "docs/conformance/nb02c3c2-agent-evidence.json",
+    "prior_scope": "Prior actual-container checks establish the earlier reused path only; they are not new v2 or controlled-comparison execution."
+  },
+  "reviewed_observer_ancestor": "040febd24d1c7b79d4ce9c547628f7b334448263",
+  "roadmap": {
+    "completed_leaf": "POL-01",
+    "controlled_comparison": "POL-02 remains planned; no budget assigned by this slice.",
+    "next": "MEAS-02",
+    "remaining_leaves": 9
+  },
+  "source_sha256": {
+    "buddha/proposer.py": "40e7ebf562966370f9f77c1e7f0e369b9fd34e37c0a0b88b246a7a630e4a40dd",
+    "docs/POLICY-CONTRACT.md": "809ea2c4a2072ad7d41cb770f83acda9c6a9a9a6c323872b18e931b247b092f9",
+    "tests/test_proposer.py": "0fe59da4708fadf094da944045fade3099fa0af3887066a586b66d1cf3cf5729"
+  },
+  "status": "local_validation_passed_explicit_v2_contract_no_controlled_experiment",
+  "tests_first": {
+    "fixture_review": "Composition explicitly checks actual worker initial.config as well as captured generation requests; its fake worker otherwise reads fixture config. A Ruff closure-binding warning was fixed without weakening assertions.",
+    "functional_scope": "All10 functional groups passed on their first implementation run; no per-behavior RED claim.",
+    "initial_red": "Missing buddha.proposer ImportError observed before production implementation."
+  },
+  "v1_request_vectors": {
+    "anthropic_sha256": "daa45e46a72ccad0b53b32f5b7fe5535fe74a2eea16614b228bade8e4b8be449",
+    "base": "ba8059d before implementation; fixed model/parent/feedback/archive request",
+    "openai_sha256": "0191a4148a1f71ff3d87cd10d730b591d6888087e5cc7720555d0ff4272b7b34"
+  }
+}
