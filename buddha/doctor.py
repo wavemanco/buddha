@@ -235,9 +235,12 @@ def _lock(capture: _Capture) -> tuple[dict[str, object], dict[str, object]]:
         return lock | {"status": "invalid"}, writer
     name = names[0]
     try:
+        if name == ".search.lock":
+            # This exclusion has no content. A Windows read handle can prevent
+            # its writer unlinking it; the tree's metadata bracket checks drift.
+            empty = _regular(capture.root / name).st_size == 0
+            return lock | {"status": "legacy_empty" if empty else "invalid", "name": name}, writer
         raw = capture.read(capture.root / name, 128)
-        if name == ".search.lock" and raw == b"":
-            return lock | {"status": "legacy_empty", "name": name}, writer
         text = raw.decode("ascii")
         if name != "running.lock" or not re.fullmatch(r"[1-9][0-9]{0,9}", text):
             raise ValidationError("invalid lock record")
