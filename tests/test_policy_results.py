@@ -7,14 +7,15 @@ import json
 import sqlite3
 import unittest
 from contextlib import ExitStack, contextmanager
+from dataclasses import replace
 from pathlib import Path
 from types import SimpleNamespace
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 import test_history as history_fixtures
 import test_policy_run as fixtures
 
-from buddha import native_evaluation
+from buddha import native_evaluation, policy_results
 from buddha.answers import TaskSet
 from buddha.authorization import Authorization
 from buddha.gateway import Gateway
@@ -433,6 +434,198 @@ class PolicyResultsTests(unittest.TestCase):
             result["analysis"]["coverage"], {"expected": 32, "observed": 2, "usable": 2}
         )
         self.assertIsNone(result["analysis"]["mean_contrasts"])
+
+    def test_shared_owner_scan_retains_controls_roots_and_local_ceiling_validation(self):
+        scan = policy_results._Reader.scheduled_owners
+        self.fixture.prepare()
+        directory = self.fixture.directory
+        before = self.files()
+        with self.readonly():
+            reader = policy_results._Reader(directory, self.fixture.authority.path)
+            path = directory / "cells/0/baseline/owners/0"
+            owner = reader.owner(path)
+            study, _execution = reader.definition(owner)
+            roles = ["grouping", "quality", "summary"]
+            coordinates, planned = scan(reader, study, roles)
+            self.assertEqual(planned, 56)
+            self.assertEqual(set(coordinates), {path})
+            self.assertEqual(coordinates[path]["stage_role"], "generation")
+            self.assertIsNone(coordinates[path]["judge_occasion"])
+            # Isolate the shared semantic checks after the real read-only history
+            # decoder. These fixture variants are not claims of newly sealed rows.
+            variants = []
+            manifest = copy.deepcopy(owner.manifest)
+            control = next(iter(reader.controls))
+            manifest["invocation"]["inputs"] = [
+                item for item in manifest["invocation"]["inputs"] if item["path"] != control
+            ]
+            variants.append(manifest)
+            manifest = copy.deepcopy(owner.manifest)
+            manifest["roots"]["agent"] = str(self.root / "foreign-agent")
+            variants.append(manifest)
+            manifest = copy.deepcopy(owner.manifest)
+            manifest["settings"]["max_calls"] += 1
+            variants.append(manifest)
+            for index, manifest in enumerate(variants):
+                with self.subTest(variant=index), self.assertRaises(PolicyResultsError):
+                    reader.owners[path] = replace(owner, manifest=manifest)
+                    scan(reader, study, roles)
+            reader.owners[path] = owner
+            reader.capture.finish()
+        self.assertEqual(self.files(), before)
+        self.assertEqual(self.fixture.fixture.physical_sends, 0)
+
+    def test_retained_owner_directory_requires_its_canonical_original_manifest(self):
+        for relative in (
+            "cells/0/baseline/owners/0",
+            "cells/0/baseline/owners/00",
+            "cells/0/judgments/1/owners/1",
+        ):
+            reader = SimpleNamespace(
+                root=self.fixture.directory,
+                template=self.fixture.fixture.record,
+                release=self.fixture.fixture.agent.release,
+                capture=SimpleNamespace(entries={relative: ()}),
+                funding=Mock(side_effect=AssertionError("funding reached malformed owner")),
+            )
+            reader.scheduled_owners = lambda study, roles, reader=reader: (
+                policy_results._Reader.scheduled_owners(reader, study, roles)
+            )
+            # Exercise the public reader's pre-funding path without constructing
+            # any owner or running a source-bound generation fixture.
+            with self.subTest(relative=relative):
+                with self.assertRaises(PolicyResultsError):
+                    policy_results._analyze(reader, self.fixture.study, {}, None)
+                reader.funding.assert_not_called()
+
+    def test_shared_generation_helpers_work_before_any_completed_child_publication(self):
+        cell_definition = policy_results._Reader.cell_definition
+        generation_reference = policy_results._Reader.generation_reference
+        self.fixture.prepare()
+        self.fixture.fixture.timeout_native_once = True
+        stopped = self.fixture.run_study()
+        self.assertEqual((stopped["cell_index"], stopped["occasion_index"]), (0, 0))
+        base = self.fixture.directory / "cells/0/baseline"
+        self.assertFalse((base / "report.json").exists())
+        before = self.files()
+        with self.readonly():
+            reader = policy_results._Reader(self.fixture.directory, self.fixture.authority.path)
+            owner = reader.owner(base / "owners/0")
+            study, execution = reader.definition(owner)
+            reader.scheduled_owners(study, ["grouping", "quality", "summary"])
+            reader.funding(execution, study)
+            cell_definition(reader, 0, study.schedule()[0])
+            reference = generation_reference(reader, base)
+            self.assertEqual(
+                reference,
+                {
+                    "baseline_directory": str(base),
+                    "stage_seal_sha256": sha(reader.raw(base / "completed/0.json")),
+                    "owner_manifest_sha256": owner.manifest_sha256,
+                    "owner_ledger_sha256": owner.ledger_sha256,
+                },
+            )
+            source = native_evaluation._read_generation(reference, self.fixture.authority.path)
+            self.assertEqual(source.tasks.fingerprint(), study.tasks.fingerprint())
+            for path, digest in source.files.items():
+                reader.raw(path, digest)
+            reader.capture.finish()
+        self.assertEqual(self.files(), before)
+        self.assertEqual(self.fixture.fixture.physical_sends, 5)
+        recipe = base.parent / "generation.json"
+        original = recipe.read_bytes()
+        try:
+            changed = json.loads(original)
+            changed["config"]["instructions"] = "unregistered per-cell policy"
+            recipe.write_bytes(_json(changed))
+            with self.readonly():
+                reader = policy_results._Reader(self.fixture.directory, self.fixture.authority.path)
+                study, _ = reader.definition(reader.owner(base / "owners/0"))
+                with self.assertRaises(PolicyResultsError):
+                    reader.cell_definition(0, study.schedule()[0])
+        finally:
+            recipe.write_bytes(original)
+
+    def test_cell_definition_joins_the_original_producer_paths_and_bound_bytes(self):
+        cell = self.fixture.study.schedule()[0]
+        cell_root = self.fixture.directory / "cells/0"
+        baseline_path = cell_root / "baseline.json"
+        recipe_path = cell_root / "generation.json"
+        context_path = cell_root / "baseline/context.json"
+        template = self.fixture.fixture.record
+        recipe = self.fixture.fixture.agent.record
+        expected_recipe = recipe | {"config": cell["generation_config"]}
+        expected_baseline = template | {
+            "generation": template["generation"] | {"descriptor": str(recipe_path)}
+        }
+        expected = {
+            context_path: {
+                "format": "buddha.baseline-context.v1",
+                "descriptor": str(baseline_path),
+            },
+            baseline_path: expected_baseline,
+            recipe_path: expected_recipe,
+        }
+        owner = object()
+        for variant in ("alternate_context", "unbound_recipe", "alternate_recipe", "wrong_config"):
+            consumed = copy.deepcopy(expected)
+            if variant == "alternate_context":
+                consumed[context_path]["descriptor"] = str(self.root / "alternate-baseline.json")
+            elif variant == "unbound_recipe":
+                del consumed[recipe_path]
+            elif variant == "alternate_recipe":
+                consumed[baseline_path]["generation"]["descriptor"] = str(
+                    self.root / "alternate-generation.json"
+                )
+            else:
+                consumed[recipe_path]["config"]["instructions"] = "alternate original treatment"
+
+            def bound(observed, path, consumed=consumed):
+                self.assertIs(observed, owner)
+                if path not in consumed:
+                    raise PolicyResultsError("not an original owner input")
+                return _json(consumed[path])
+
+            reader = SimpleNamespace(
+                root=self.fixture.directory,
+                recipe=recipe,
+                template=template,
+                record=lambda path: copy.deepcopy(expected[path]),
+                owner=Mock(return_value=owner),
+                bound=bound,
+            )
+            # Expected cell files are intact in every case. Only the producer's
+            # original context/descriptor/recipe binding is different.
+            with self.subTest(variant=variant), self.assertRaises(PolicyResultsError):
+                policy_results._Reader.cell_definition(reader, 0, cell)
+
+    def test_missing_funded_owner_cannot_hide_its_hold_from_an_old_observation(self):
+        self.fixture.prepare()
+        self.fixture.fixture.timeout_native_once = True
+        stopped = self.fixture.run_study()
+        self.assertEqual(stopped["reason"], "unknown")
+        self.assertEqual(self.fixture.fixture.physical_sends, 5)
+        observation = self.fixture.directory / stopped["observation"]
+        control = self.read(observation=observation)
+        accounting = control["accounting"]
+        self.assertEqual(accounting["current_study"], accounting["current_shared"])
+        self.assertGreater(accounting["current_study"]["reserved_microusd"], 0)
+        owner = self.fixture.directory / "cells/0/baseline/owners/1"
+        destination = self.root / "removed-owner-1-evidence"
+        fixture_root = self.root.resolve()
+        self.assertTrue(owner.resolve().is_relative_to(fixture_root))
+        self.assertTrue(destination.parent.resolve().is_relative_to(fixture_root))
+        self.assertFalse(destination.exists())
+        original_authority = self.fixture.authority.summary()
+        owner.rename(destination)
+        try:
+            with self.assertRaises(PolicyResultsError):
+                self.read(observation=observation)
+            self.assertEqual(self.fixture.authority.summary(), original_authority)
+        finally:
+            destination.rename(owner)
+        self.assertEqual(self.read(observation=observation)["accounting"], accounting)
+        self.assertEqual(self.fixture.fixture.physical_sends, 5)
 
 
 if __name__ == "__main__":

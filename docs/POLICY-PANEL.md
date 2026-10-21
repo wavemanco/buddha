@@ -1,4 +1,4 @@
-# Prepare the private policy-review mapping
+# Prepare the policy-review mapping and packet
 
 `buddha.policy_panel` fixes masked set and answer-position labels before any
 generated answer is inspected. It uses the frozen study and reviewed metadata;
@@ -6,11 +6,13 @@ it does not consume answers, scores or review outcomes. [PLAN.md](PLAN.md) owns
 scheduling, and the [comparison protocol](POLICY-COMPARISON.md) owns the scientific
 contract.
 
-This slice supplies the pre-answer mapping only. It does not materialize a
-reviewer packet, conduct reviews, create funding or establish live readiness.
-The packet materializer and tested protected handoff remain open. The actual
-answer packet and supplemental reviews follow real saved generation; the human
-scientific assessment remains separate.
+Two interfaces keep preparation separate from saved answers. The existing
+`plan_panel` helper creates the private mapping without reading generated text.
+The new `buddha.policy_panel_read.materialize_panel` reader uses that frozen map
+to assemble a reviewer packet from original saved generation. Neither conducts
+reviews, creates funding, executes an agent or establishes live readiness.
+Actual packet contents and supplemental reviews require saved generation; the
+tested protected handoff and human scientific assessment remain separate.
 
 ## Which coordinates are fixed
 
@@ -33,7 +35,7 @@ these literal string IDs. Do not remove their prefix or replace them with number
 Judging occasions do not create more panel sets. A planned position says nothing
 about whether generation has produced an answer there.
 
-## Python interface and input checks
+## Pure mapping interface and input checks
 
 ```python
 plan_panel(
@@ -118,12 +120,117 @@ Input records and the returned canonical JSON are bounded at 32 MiB. More than
 100,000 planned answer appearances is rejected before labels are expanded; the
 helper never samples or truncates the panel. The registered study uses 240.
 
-The later materializer must bind these fixed positions to the original saved
-generation and preserve missing panel slots without substituting another task,
-repetition or arm. A partial generation must not be padded into a complete
-review set. Actual empty/refused effective answers stay literal answers.
-Those bindings and availability decisions are not made by this mapping helper.
+The pure mapping helper makes no generation-availability decisions. The saved
+generation reader below supplies those bindings without changing the mapping.
+
+## Materialize original saved generation
+
+`materialize_panel` returns two separate dictionaries: `packet` for reviewers
+and `private` for the host. It writes neither. It does not run producers or
+judges, make provider calls, request keys, resume work or release held money.
+This is another Python library interface; no operator command is added.
+
+The reader checks the original study, generation settings, owners, seals and
+shared accounting. A generation is usable once its complete C1 answer record
+has its original completion seal and authority anchor. Later judging can have
+failed or left an unknown request without making those original answers
+unavailable. Final study/baseline publications and downstream judge caches are
+not prerequisites for using that anchored generation.
+
+Generation without a completion seal stays unavailable. The private receipt
+distinguishes generation not prepared, not started and unsealed generation.
+It retains every planned slot and position, without padding a partial set or
+substituting another task, repetition or arm. Actual empty/refused effective
+answers remain literal answers. Missing output is not an empty answer.
+
+Contradictory anchored evidence is an error, not another missing slot. Examples
+include a changed answer file, an authority completion anchor whose generation
+seal has disappeared, or a retained funded owner whose original evidence is
+missing. The reader raises `PolicyPanelReadError`, a subtype of `ReleaseError`,
+and leaves the original records intact. It also validates retained generation
+outside the smaller panel instead of silently discarding contradictory custody.
+
+Old agent, controller and benchmark program identities are retained as hashes;
+their original executable bytes are neither loaded nor run. Original data,
+configuration, owners, seals and ledgers remain necessary. Validation can read
+raw provider receipts while checking scheduled owners and shared accounting,
+including later judging owners. It does not choose or omit answers using the
+contents of official score artifacts. An unresolved later hold remains recorded
+and does not turn the reader into permission to spend.
+
+## Reviewer packet and private receipt
+
+`packet` contains only its format, the fixed equivalence rule and rubric, and
+complete available items. Each item has a masked set ID, the unchanged literal
+task prompt and masked answer IDs with their literal text in the frozen order.
+It contains no source coordinates, availability flags, planned coverage,
+missing reasons, provenance, model metadata, scores or costs. Give reviewers
+only this dictionary, never the combined return value.
+
+`private` retains all planned sets and positions, including unavailable ones,
+with their reasons, original coordinates and answer hashes where available.
+It also retains original generation bindings, consumed-file/owner identities,
+current shared accounting and the packet hash. Its coverage reports planned,
+available and unavailable sets and positions. An empty or partial public packet
+therefore does not erase missing work from the private denominator.
+
+Private `status = complete` means that every planned panel set has an available
+original generation. It does not mean that judging, reviews, the controlled
+study or human assessment is complete. Keep this receipt and the original map
+in private ignored storage, outside reviewer and adjudicator inputs.
+
+## Materializer inputs and bounds
+
+```python
+materialize_panel(
+    directory,
+    *,
+    intent,
+    protocol,
+    source_review,
+    expected_intent_sha256,
+    expected_protocol_sha256,
+    expected_source_review_sha256,
+    authorization,
+    plan_raw,
+    expected_plan_sha256,
+    review_materials_raw,
+    expected_review_materials_sha256,
+)
+```
+
+The directory, intent, protocol, source-review and original authorization inputs
+are explicit `Path` objects. The plan and review materials are original raw
+bytes supplied with their trusted hashes. Unlike the pure planner, this reader
+loads the protocol file and other retained evidence. It recomputes the plan from
+the original study/publication inputs and requires the saved plan to match.
+
+The caller supplies reviewed materials containing the fixed rule text/hash and
+upstream revision, plus the fixed rubric text and its exact protocol byte range.
+The reader checks their raw pin, release/protocol identities, rule hash and
+literal rubric slice. Selecting the reviewed rule and rubric remains the
+caller's responsibility; the reader does not extract or execute an official
+parser. [The materials record](conformance/pol02-panel-review-materials.json)
+contains these data for the registered study.
+The official rule is reused under MIT; its full upstream notice is retained in
+[the third-party notices](../THIRD_PARTY_NOTICES.md).
+
+This reader supports the registered three-stage grouping, quality and summary
+layout. Existing observation bounds apply: 10,000 tree entries, 1 GiB of captured
+input bytes, bounded metadata/JSON and ledgers, and 100,000 recorded study
+operations. The entire returned `packet` plus `private` record must fit the
+32 MiB canonical JSON ceiling. Excess input/output is rejected rather than
+silently sampled or truncated.
+
+Consumed bytes and tree metadata are checked again before returning. Changing
+evidence or an active SQLite journal prevents a stable observation. This is not
+an atomic live snapshot, provider attestation or authentication that publication
+preceded generation. Trusted pins establish identity, not timestamps or
+authenticity.
+
 The two fresh model reviews, masked adjudication, unresolved judgments, separate
 unpriced subscription usage, approved funding and actual comparison remain
-outside this slice. No scientific gain or human-validation claim follows from
-creating a map.
+outside these interfaces. No review-completion, scientific-gain or human
+validation claim follows from preparing a packet.
+
+[Offline delivery](conformance/pol02-panel-materializer-delivery.json) and [retained adversarial findings](conformance/pol02-panel-materializer-review.json) record the implemented gate and its limits.

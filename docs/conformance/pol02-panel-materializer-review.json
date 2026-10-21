@@ -1,0 +1,517 @@
+{
+  "base": "c6483ff52b68ddfe949157e580b178190db54084",
+  "findings": [
+    {
+      "evidence": "Four-subcase metadata RED; shared fix; actual alternate producer rejected after fix.",
+      "id": "POL2-PANEL-1",
+      "observation": "Expected cell files alone did not join the actual bound producer context/descriptor/recipe to the scheduled treatment.",
+      "resolution": "Shared cell_definition consumes original bound context plus expected recipe/baseline paths and bytes; both reader and materializer use it."
+    },
+    {
+      "evidence": "Actual two-case boundary cohort: alternate producer GREEN, outer/inner anchor assertion RED; after guard both cases GREEN in 11.518s.",
+      "id": "POL2-PANEL-2",
+      "observation": "A transient inner authority snapshot supplied a completion anchor missing from the stable outer snapshot.",
+      "resolution": "Require the exact original generation seal anchor in the outer captured authority before independent generation validation."
+    },
+    {
+      "evidence": "Three metadata subcases reached funding before fix; final regression rejects canonical/alias orphan owner directories.",
+      "id": "POL2-PANEL-3",
+      "observation": "The earlier schedule scan ignored retained owner directories without a manifest.",
+      "resolution": "Shared bounded captured-entry guard rejects retained owner directories lacking their original manifests."
+    },
+    {
+      "evidence": "Genuine five-mocked-call unknown stop:300microusd held remained shared; removal of the original owner changed current_study held to0 and operations5to4. Actual RED and one new regression RED/GREEN are preserved.",
+      "id": "POL2-PANEL-4",
+      "observation": "An original partial report accepted a deleted later funded owner and omitted its held money from current_study, while current_shared retained it.",
+      "resolution": "Move the packet reverse join into shared funding, deriving stages from the template. Both consumers reject missing current-root scheduled funded owners; unrelated authority rows are not followed. No money is released or rewritten."
+    }
+  ],
+  "focused": {
+    "boundary_review_at_pre_centralization_pins": {
+      "created_utc": "2026-10-21T18:38:36.606213+00:00",
+      "format": "buddha.policy-panel-boundaries-final-review.v1",
+      "limits": [
+        "Synthetic fixture/mockHTTPS operations only; no actual study outputs,actual authorities,real keys,network or Docker.",
+        "Temporary fixture authority bytes are deliberately changed/restored to prove a snapshot substitution boundary; production reader guards remain enabled.",
+        "Original prior test methods AST retained; no claim of a single final4method cohort from this reviewer.",
+        "No source mutation,financing/API/officialalgorithm changes or scientific review performed."
+      ],
+      "new_tests": [
+        "test_retained_authority_owner_cannot_become_missing_after_directory_removal",
+        "test_unanchored_unsealed_complete_looking_attempt_does_not_become_public"
+      ],
+      "phases": {
+        "after_outer_fix_parent_run": {
+          "provenance": "parent-reported separate run, not rerun by this reviewer",
+          "result": "prior2cases GREEN11.518s"
+        },
+        "before_outer_fix": {
+          "observed": "2tests12.342s; real alternate producer rejected by already-applied sharedjoin; transient inner authority anchor accepted although outer lacked it, so actual1failure.",
+          "receipt_sha256": "d1a019340fbae9ce4e15cd185ac1ec226b167ffc5504b1ab92f802d682ae50a2"
+        },
+        "final_two_added_cases": {
+          "observed": "Only2newcases GREEN13.265s,0skips,ResourceWarnings as errors, all recorded source/test bytes unchanged.",
+          "receipt_sha256": "03cfc7e6c07f6186221260153e07625fc431eadba2bb181d7e5e5b9035b74f47"
+        }
+      },
+      "source_sha256": {
+        "buddha/policy_panel_read.py": "9a48965f7361c9a329823498abbe964ca732d8bb1ee590a1ad6fe8c9a549fa56",
+        "buddha/policy_results.py": "f8c47103d18ace9765e5bcadaeab6f28801d9c0faa23d0da0be3a2fc3c4f84ce",
+        "tests/test_policy_panel_boundaries.py": "3601d4d3b6520d20ad1c193cdf61e362e857dcbcf1ab0111a8f70a54a7dd5eea"
+      },
+      "static_final_guard": "Captured outer authority deactivation reason list must equal exactly baseline completed:+originalstage0sealSHA before entering independently captured _read_generation; source-owner configuration is joined through original bound context/descriptor/recipe to expected cell.",
+      "status": "PASS"
+    },
+    "corrected_export_case": "1GREEN in4.931s:expect typed stop, then validate surviving anchored C1 without native cache/owners/publications.",
+    "materializer_first_cohort": "12 tests in166.066s:11pass,1test expectation error; export I/O escaped as typed PolicyRunError. This is retained tool evidence, not a claim of12GREEN.",
+    "new_api_red": "One missing-module loader error; not12 behavioral REDs.",
+    "prior_shared_reader_at_original_pins": {
+      "added_test_methods": [
+        "test_cell_definition_joins_the_original_producer_paths_and_bound_bytes",
+        "test_retained_owner_directory_requires_its_canonical_original_manifest",
+        "test_shared_generation_helpers_work_before_any_completed_child_publication",
+        "test_shared_owner_scan_retains_controls_roots_and_local_ceiling_validation"
+      ],
+      "base": "c6483ff",
+      "cohort": {
+        "exit": {
+          "path": "runs/reviews/pol02-panel-shared-reader-final12.exit.txt",
+          "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+        },
+        "exit_code": 0,
+        "log": {
+          "path": "runs/reviews/pol02-panel-shared-reader-final12.log",
+          "sha256": "55be8cda66b3e0221a64bc0df9ee8f66ec7effd00b6a52ad5656d625b0839c90"
+        },
+        "resource_warnings": "errors",
+        "seconds": 653.84,
+        "skips": 0,
+        "tests": 12,
+        "warning_or_unraisable_output": false
+      },
+      "evidence": {
+        "pol02-panel-cell-producer-join-green.log": "156fa314a0b08754ca72e1374b86989ab0da9b770cc3a3b8a7e6fcb6b86a0c3a",
+        "pol02-panel-cell-producer-join-red.log": "14bb88bc727280c4cf279c136c736ae2c4ba53f8a7eb59abc4fffe48052170f9",
+        "pol02-panel-reader-extraction-ast-gateway.json": "e3be4fb7bdd2c4f3d5b7b30309e33ca117b2618d8a72932bd2364a75000d3451",
+        "pol02-panel-reader-producer-join-addendum.json": "8177be927d6588ad98f11722e3769d8a5dc093dc1821eefc41ee700f3d87bbf9",
+        "pol02-panel-retained-owner-directory-red-v2.log": "90e76929e51b3dde08ab7d13e3553bcc86da9111fa33263d5cf602ae3aa4de8e",
+        "pol02-panel-shared-reader-missing-api-red.log": "3fb473257d8bfacc521dbdabbf7fa24ea9c4e785b5e03d8e95f4e88201c9c027"
+      },
+      "format": "buddha.panel-shared-reader-focused.v1",
+      "limits": [
+        "No full repository test claim.",
+        "Reference construction is not generation eligibility; the consumer must validate passive generation evidence and its own captured authority anchor.",
+        "Outer authority capture guard is parent-owned and not claimed by this helper cohort."
+      ],
+      "original_test_methods_unchanged": {
+        "test_actual_generation_error_is_a_retained_incomplete_observation": true,
+        "test_complete_native_study_retains_typed_population_and_registered_metrics": true,
+        "test_explicit_genuine_partial_keeps_full_grid_without_a_headline": true,
+        "test_partial_fresh_judge_keeps_original_primary_without_filling_missing_occasions": true,
+        "test_publication_pins_and_original_registered_controls_are_required": true,
+        "test_reader_reuses_bounded_capture_instead_of_an_unbounded_second_walk": true,
+        "test_retired_original_programs_are_not_needed_but_retained_data_is": true,
+        "test_saved_seals_reports_summaries_and_authority_anchors_are_verified": true
+      },
+      "quality": {
+        "bandit": "pass",
+        "ruff_format": "pass",
+        "ruff_lint": "pass",
+        "strict_mypy_linux": "pass",
+        "strict_mypy_win32": "pass"
+      },
+      "scope": [
+        "All original eight reader tests remained AST-identical.",
+        "Four added tests cover retained-owner semantic guards, canonical owner-directory population, generation proof before child report publication, and original producer context/descriptor/recipe joins.",
+        "Only synthetic isolated fixture records and mocked provider sends were used; no actual study outputs, grants, keys, providers or containers were accessed.",
+        "policy_panel_read.py and its own test file are outside this cohort imports and explicit producer source inventories; parent-only edits there do not change this source bracket."
+      ],
+      "source_after": {
+        "buddha/policy_results.py": "f8c47103d18ace9765e5bcadaeab6f28801d9c0faa23d0da0be3a2fc3c4f84ce",
+        "tests/test_policy_results.py": "ff6e68dc4b8de52170ea5279267e5a16cb1a194d2a394e8272e0575043d1b969"
+      },
+      "source_before": {
+        "buddha/policy_results.py": "f8c47103d18ace9765e5bcadaeab6f28801d9c0faa23d0da0be3a2fc3c4f84ce",
+        "tests/test_policy_results.py": "ff6e68dc4b8de52170ea5279267e5a16cb1a194d2a394e8272e0575043d1b969"
+      }
+    },
+    "shared_custody_fix": {
+      "evidence": {
+        "pol02-panel-shared-reader-focused-final.json": "da0ba02ff06ba6126ebdda6749c0b119dcea12cf85c850aae5634b6398fdf089",
+        "pol02-reader-missing-funded-owner-probe.py": "ebe639b2217432870659a558e5eac75784ece18ff779373ada549642a0ebd003",
+        "pol02-reader-missing-funded-owner-red.json": "85cdc6c30a917764bed88e60faa89fb07dafecf546424c9d5e372cc8310cfddb",
+        "pol02-reader-missing-funded-owner-red.log": "53b00d2930c4dfd176553bb0c9ce1285d0d9f3fb8d9aff92939be7799f51d2bd",
+        "pol02-reader-missing-funded-owner-test-green-final.log": "d924546397bac4a3feb24ffb7bd81ed8353f09c7b3b1538bdf2faef7750312c4",
+        "pol02-reader-missing-funded-owner-test-green.log": "4fde12dfa4d1e9ec07e2116be30c343212032b449ac0ae09304b0164c04470b1",
+        "pol02-reader-missing-funded-owner-test-red.log": "2ebd585cf9799f43172b48403289245122c2c57c5b51756b84f30e0d6d25a944"
+      },
+      "files": {
+        "buddha/policy_results.py": "42e5e47d71c18184a4b8b66934942674ce70873c23160e76fd4ada1f14ae2377",
+        "tests/test_policy_results.py": "2c11d814a7b0a7c8ab05cee13af9b8f7be7a6268fd34a25669c5c43d5292ddb6"
+      },
+      "format": "buddha.panel-reader-custody-fix.v1",
+      "guard": "For every captured authority row whose directory is an exact current-root scheduled owner path, require retained decoded original owner and matching run_id; derive indices from declared native stage count. Unrelated authority rows are not followed or rejected.",
+      "limits": [
+        "Only new regression was rerun at these final pins, as requested; parent full-suite v2 covers the original twelve.",
+        "The earlier full12 pass remains bound to f8c471 source, not relabeled as a pass for this revision.",
+        "All fixtures were synthetic; no actual grant, outcomes, keys, paid calls or containers used."
+      ],
+      "observed_red": {
+        "authority_mutation": false,
+        "current_shared_unchanged": {
+          "operation_count": 5,
+          "reserved_microusd": 300,
+          "spent_microusd": 44
+        },
+        "current_study_after_evidence_removal": {
+          "operation_count": 4,
+          "reserved_microusd": 0,
+          "spent_microusd": 44
+        },
+        "current_study_before": {
+          "operation_count": 5,
+          "reserved_microusd": 300,
+          "spent_microusd": 44
+        },
+        "mocked_sends": 5
+      },
+      "original_eight_methods_ast_unchanged": {
+        "test_actual_generation_error_is_a_retained_incomplete_observation": true,
+        "test_complete_native_study_retains_typed_population_and_registered_metrics": true,
+        "test_explicit_genuine_partial_keeps_full_grid_without_a_headline": true,
+        "test_partial_fresh_judge_keeps_original_primary_without_filling_missing_occasions": true,
+        "test_publication_pins_and_original_registered_controls_are_required": true,
+        "test_reader_reuses_bounded_capture_instead_of_an_unbounded_second_walk": true,
+        "test_retired_original_programs_are_not_needed_but_retained_data_is": true,
+        "test_saved_seals_reports_summaries_and_authority_anchors_are_verified": true
+      },
+      "prior_twelve_test_source_restored_by_removing_only_new_method": {
+        "line_ranges": [
+          [
+            601,
+            628
+          ],
+          [
+            602,
+            629
+          ]
+        ],
+        "sha256": "ff6e68dc4b8de52170ea5279267e5a16cb1a194d2a394e8272e0575043d1b969"
+      },
+      "quality": {
+        "bandit": "pass",
+        "ruff_check": "pass",
+        "ruff_format": "pass",
+        "strict_mypy_linux": "pass",
+        "strict_mypy_win32": "pass"
+      },
+      "test_first": {
+        "development_attempt": {
+          "path": "pol02-reader-missing-funded-owner-test-green.log",
+          "status": "error before control read due missing _text import; not a pass"
+        },
+        "green_exit_code": 0,
+        "green_seconds": 6.958,
+        "red_exit_code": 1,
+        "red_seconds": 6.588,
+        "resource_warnings": "errors",
+        "skips": 0,
+        "tests": 1
+      },
+      "test_methods": 13
+    }
+  },
+  "format": "buddha.policy-panel-materializer-review.v1",
+  "independent_closing_source_review": {
+    "base_commit": "c6483ff52b68ddfe949157e580b178190db54084",
+    "changed_original_top_level_functions": [
+      "_analyze",
+      "_child"
+    ],
+    "checks": {
+      "all8_original_results_tests_AST_exact": true,
+      "canonical_manifest_required_for_every_retained_owner_directory": true,
+      "cell_definition_uses_original_owner_bound_context_descriptor_recipe_and_scheduled_config": true,
+      "funding_reverse_joins_all_scheduled_retained_authority_rows_without_following_other_paths": true,
+      "inner_generation_files_reconsumed_at_expected_hash_in_outer_capture": true,
+      "missing_coverage_paths_owners_money_private_only": true,
+      "outer_captured_completion_anchor_exact_before_inner_generation_reader": true,
+      "precommitted_mask_order_and_original_position_text_join_preserved": true,
+      "public_packet_exact_keys_only_rule_rubric_complete_literal_items": true,
+      "scheduled_owner_scan_preserves_controls_selection_roots_caps_operation_bounds": true,
+      "sealed_generation_available_without_native_cache_or_judge_success": true,
+      "typed_errors_and_bounded_snapshot_finish_no_writes": true,
+      "unsealed_complete_looking_C1_not_promoted": true,
+      "untouched_top_level_results_functions_AST_exact_except_declared_analyze_child_extraction": true
+    },
+    "format": "buddha.policy-panel-materializer-closing-source-review.v1",
+    "known_findings_closed": [
+      "Canonical retained-owner manifest/directory guard.",
+      "Actual producer context/descriptor/recipe binding, rather than separately valid expected cell files.",
+      "Outer versus inner authority completion-anchor snapshot join.",
+      "Reverse authority-to-retained-owner custody including unknown native holds."
+    ],
+    "reviewed_test_methods": {
+      "custody_boundaries": 4,
+      "materializer": 12,
+      "shared_results": 13
+    },
+    "reviewed_utc": "2026-10-21T19:56:40.991896+00:00",
+    "scope_limits": [
+      "Read-only final implementation/test-source review; no fixtures,tests,databases,real run data,keys,network or provider access in this review.",
+      "Earlier focused RED/GREEN artifacts remain separate; no full-suite completion inferred from its currently running process.",
+      "Observed stable snapshots and trusted input pins are not atomic observation or publication/provider authentication.",
+      "Materialization covers original sealed generation,not native assessment completeness,review execution,scientific truth or funding/readiness.",
+      "Private map/provenance remains confidential to reviewers by custody convention; deterministic public masks are not cryptographic blinding."
+    ],
+    "source_sha256": {
+      "buddha/policy_panel_read.py": "a86a76da4e06df25e070e88420d837096302acca1cab2d75e7ef040b2bf87123",
+      "buddha/policy_results.py": "42e5e47d71c18184a4b8b66934942674ce70873c23160e76fd4ada1f14ae2377",
+      "docs/POLICY-PANEL.md": "20f9aee71f5ad9a2f639f07d61d86a42a658b3d493b6f59d5732565700107541",
+      "docs/conformance/pol02-panel-review-materials.json": "b623e7763cb2ebcd74c4399f95f68239a58ba656f4d36893b2a244154e1491d0",
+      "tests/test_policy_panel_boundaries.py": "3601d4d3b6520d20ad1c193cdf61e362e857dcbcf1ab0111a8f70a54a7dd5eea",
+      "tests/test_policy_panel_read.py": "5da60171c49364225da346d92c5e7ec9bef15ad84fb5ff266fa4c2ef88d0c997",
+      "tests/test_policy_results.py": "2c11d814a7b0a7c8ab05cee13af9b8f7be7a6268fd34a25669c5c43d5292ddb6"
+    },
+    "status": "PASS",
+    "unchanged_original_top_level_functions": [
+      "_sha",
+      "_same",
+      "_rows",
+      "_bindings",
+      "_reply_status",
+      "_operation_evidence",
+      "_cost_summary",
+      "_cost_report",
+      "analyze_study"
+    ]
+  },
+  "interrupted_development_regression": {
+    "format": "buddha.interrupted-development-regression.v1",
+    "owned_process_stop": "PID41576 creation time and unittest command verified before Stop-Process; wrapper session81646 then returned terminal exit1.",
+    "reason": "A separate genuine partial-study probe reproduced missing funded-owner custody and omitted current-study held money. Centralize the existing packet guard in the shared reader before final validation.",
+    "red_probe": "pol02-reader-missing-funded-owner-red.json",
+    "status": "intentionally_stopped_before_source_fix; not a complete test result",
+    "terminal_process_evidence": {
+      "exit_code": 4294967295,
+      "finished_utc": "2026-10-21T18:59:33.704833+00:00",
+      "format": "buddha.policy-panel-materializer-full-suite.v1",
+      "inputs_unchanged": true,
+      "log_sha256": "b3d95fd6291dc1704740ccce6ab094f17721555cfb09f683a610b287c5c79b3a",
+      "source_sha256": {
+        "agents/frozen_seed.py": "2b87bfe0d3c97ee45db2d45260985ffe0234eca93967f4689fb7c59f82603921",
+        "buddha/__init__.py": "0857bd60619c1e1c8538fe768cbe82c781bb4e302abc6cf59130f1b17d052230",
+        "buddha/__main__.py": "17a7af599e4d7b79094b806e01cedb765b560063bbcf82367f59e9f8e04005d7",
+        "buddha/agent_run.py": "3f7f8ff3cb9965216f19c6564da1e830f0f629a346ec1cc29e2583c119bea88d",
+        "buddha/agent_worker.py": "c6f86105c0a42304687f857209bb17172f2f38fda26699d25e2618f6e01a745f",
+        "buddha/answers.py": "be860546b2692ea4a710d93855f487dd49d9c8e28eb3f2ec757df697cefb8d0b",
+        "buddha/archive.py": "9549deb0f347cf6114ef3f802b9dfef8a94e0db7cbbd3497697987d5e21ba2ee",
+        "buddha/authorization.py": "06d8615f8b301285a951b08bece0570e5b1b89467fc99fa4e994c7e5e5f30c47",
+        "buddha/baseline.py": "13661931c95b676d95c724fba1e3db490a4a0c4374adec1e8ee4d1193579ca4a",
+        "buddha/benchmark.py": "7ef7e26b2ef3cbf4119118a985334048fd30b68a5629f3e3196fa77e8200c49f",
+        "buddha/candidate_run.py": "99bd61eb7f92cb323918459f2fde19108a9511483154d42a03fe500dd7db07df",
+        "buddha/candidate_worker.py": "be39d7d7ed57a202d3b1362f279ccd40e9407a44219be8298831857d2ce6b7c6",
+        "buddha/channel.py": "c46d236865b15f1918efa23d961ed7163533c9bbef2b0cec7f61d6f8e95d6e5f",
+        "buddha/common.py": "3a0a693a0f4a0f2eed3b858d0b3ac42148871dbca284e56e0e368726309393c0",
+        "buddha/continuation.py": "b0136052472868aee379d7ac78dfd11bcfa40e91aedcd6916d30f9a334003414",
+        "buddha/diagnostics.py": "ca0af1304e3fbe99569f0b027f99269b151e08265785b39ed53c39f820097e24",
+        "buddha/doctor.py": "afa511a747c4be2951ba53fea5cfe2822077a0f7a6f80a80a3255594d5b5d19b",
+        "buddha/evaluation.py": "4cabb1a48689a140fc6f6129ed8d9eae1d047d3e09eae794170c74479413b8d6",
+        "buddha/executor.py": "b5e84f2dbcdc436aee23272e7d96b567cb5b16ead256a34d08bccc70b480d186",
+        "buddha/gateway.py": "e844fcb695b97c76ecb7432ece6b8d96416806554038e202fd6b0f7f3da57a2e",
+        "buddha/gateway_history.py": "a773ae6066e5b8a4f503e4b346b73570ace2ebeb811017f7b656cc211fded57c",
+        "buddha/history.py": "d42e92a7e6c88a2f72090eaaa50de39dc355957e7c61f5b89dd97162d8b0eefa",
+        "buddha/ledger.py": "5c7e56f1e2c5e68046d6380ebacc03110300eae34d348d7dca683a0591d64130",
+        "buddha/native_context.py": "47a488b8d731617bda21380232e5e49801e0c0b4261f69b71c24fb9eae0ba298",
+        "buddha/native_evaluation.py": "a9b96389659b356ac663e53ffaf4e2765ff247290f4c7c3b98a4259305529a09",
+        "buddha/native_pipeline.py": "6f01a09976bbc2614fb0de5a744479cebbba8b60da6d9e10cd46fe3071b77b97",
+        "buddha/native_run.py": "60aafd5ef9e355e82faae2dc12397c6b0b2b649c3273c1bda9c0c757e0775a19",
+        "buddha/native_transport.py": "ccd4917132939630231b8b8c69540189cd52f60951fa08d467d90b9571ccb6c0",
+        "buddha/native_worker.py": "8fa4b85ae6e75202de4b345302cb70253b6c0c5b47f004490f8d9a09750ecaa1",
+        "buddha/noveltybench_results.py": "8411c0bfa4819013613036eac60d677a52eeaaa920241c6f6e541b391c150ed2",
+        "buddha/policy.py": "717f6fdad1e880d83326d6a314e0dfa604be1044f8209f27061380e16cfebb3e",
+        "buddha/policy_analysis.py": "1f472dee2bb3ae7efd56ac78bff6e9983e92f96dd2a863561b951613e311e52f",
+        "buddha/policy_panel.py": "d8fe6d5253b688cd376a47343e0d1377407008ca5d50b4a228a88031d6b8e264",
+        "buddha/policy_panel_read.py": "9a48965f7361c9a329823498abbe964ca732d8bb1ee590a1ad6fe8c9a549fa56",
+        "buddha/policy_results.py": "f8c47103d18ace9765e5bcadaeab6f28801d9c0faa23d0da0be3a2fc3c4f84ce",
+        "buddha/policy_run.py": "7b3d1da3a209d4b49a76c3b5d766e11a66f29b5d243fdcec38933eb0e4c8f811",
+        "buddha/policy_study.py": "9b5c1633b3202b1cea0eb37bff051c2cafa25e83a4ae227393e07593791e13a2",
+        "buddha/process_observation.py": "28ad4b424ae0bec10aa2d3bf145cb62e1b26eb088db5e83fb6900fab6d5495a8",
+        "buddha/progress.py": "47d21dada88347e63c01b05cf5c31db8e2cc157e501b812b58a2650d078393ba",
+        "buddha/proposer.py": "40e7ebf562966370f9f77c1e7f0e369b9fd34e37c0a0b88b246a7a630e4a40dd",
+        "buddha/provider.py": "17de071c1416afa32f9da32eb627e24264d8a0a848862fdf4853057125f18a02",
+        "buddha/reference.py": "36356c8a25dae3501014513095cb6f838c4ae54b02a129bdffc4a5cb2dfa6f35",
+        "buddha/releases.py": "33361cf5b0923b373ee53dd73597063195c2c0d519baead50d40fb4bcfab44f5",
+        "buddha/run.py": "a972cb8d1a04bef7abad7efdf7f1eec803bb88cd55c30cf64148119a3d7c6dbb",
+        "buddha/search.py": "ac7b3648355b139797773cbe2bb8b67abbc8533eefd987cd7692275692a9a95c",
+        "buddha/search_evidence.py": "1d89ed7ae541f52b79cc643edd2615955104cceb8508036d3b288e646fa30a34",
+        "buddha/search_verify.py": "41bdc2689d2b64e93765fe4572017a6c4264d5c3c6df49bba2a63e74b9ab6a63",
+        "buddha/splits.py": "419fa286d812b43e3095fbb41a62844b40477f880d94c8d60de069a52c324a2a",
+        "buddha/wire.py": "48f40a71bf10c84dfd1d15f0baef50198cce8a229748355f116ad6a25cab12b4",
+        "docs/conformance/meas01-pack.py": "6328f94c4280c29992cbdd87c205e45950406c00f6af636d4392fb7a6777e4fc",
+        "docs/conformance/meas02-compare.py": "be070ef7b9339bbe7f0d94a65a27f504bcb75f7b992e594692342e307dd9772c",
+        "docs/conformance/meas02-live-probe.py": "8ac36e9fd7e3fb3e419e683e9cc758756561691628df3e95be10b40aab5a51a7",
+        "docs/conformance/meas02-live.py": "7d2bf9f8f5536fdb82272a373f93e8d95fda503340609e71c93a80965d9f8e47",
+        "docs/conformance/meas02-materialize.py": "361ec95b56802eb018681113f012d0f4efaec48d587e556bc6df9993aae26c7d",
+        "docs/conformance/meas02-native-audit.py": "ac7cddb5021507712206352cd95fc1264f061e55a3c5fa0b298b8428c5ca23f1",
+        "docs/conformance/meas02-native-probe.py": "a4ace837f4c82c53bcfb824eef5dc8fb105a2100f6881053358aa789d9acec9d",
+        "docs/conformance/meas02-official-replay.py": "ea6e8ad1a33353bb9bfdb00ffac69555033eb17fc6322aeea785fcccbd6057b8",
+        "docs/conformance/meas02-results-probe.py": "fcce111a1613031481fafa4a74274f6f7eb2b280756a91cc984bcf229b9c75a7",
+        "docs/conformance/meas02-results.py": "a5c5ab7924b316a65645b33eb6aad466975c9e1cb26dd3e232a887736470effd",
+        "docs/conformance/meas02-run.py": "ff48850a2281bb4ded265654443730c2d43185fb0fbe45236710ee94e6eb7fb8",
+        "docs/conformance/nb02-wire-probe.py": "cb9d01dc088f07c2f35cb5149ddd9bbb59a710227a1521bc947e04be59ee0551",
+        "docs/conformance/nb02c-context-probe.py": "1ae1a0e84c92b3a26167d988b9873837927b284504c4c74cae87f191839c826d",
+        "docs/conformance/nb02c2-funded-sdk-probe.py": "1ee45bbebe39af5b2eb2e03171f9436a15571e6a3474d87523f96c5db7b32121",
+        "docs/conformance/nb02c3-direct-worker.py": "286b1b564f4095532b95c509aedd85001275b54b0da8a57dd72a506a23b96c63",
+        "docs/conformance/nb02c3-executor-probe.py": "d9fba9037c228b5b8f72c718f2245c65ef91cf955e6615c32a78bb1787d2d797",
+        "docs/conformance/nb02c3-funded-native-probe.py": "d9ca38d078b44a2ca670c663118fe0a54e8dc1e30ee3d8b739b429a13c566993",
+        "docs/conformance/nb02c3-runtime-prepare.py": "6c5cc5475dbd1f8d511fbc6e4adbcc20ca5c00ef770cc202874a3333d471eff4",
+        "docs/conformance/nb02c3b-cpu-prepare.py": "8e2a58261f79e8606bc8730c1b68fdf4347148aed5610cc819991d6b602ae8bb",
+        "docs/conformance/nb02c3b-direct-worker.py": "4a666e511387566738c65826717ea9f40fb54ed1ba4d7d28347a7a264d40c543",
+        "docs/conformance/nb02c3b-funded-native-probe.py": "0ca3605b2be6fb989682e22c3ba8c3a7873cbf7bdf698c86ec36dffdcbda62f6",
+        "docs/conformance/nb02c3b-rouge-build-worker.py": "b79ba7d48022c3538f6307c41c4a3c52c577e97489af512a38888f55cdf11bab",
+        "docs/conformance/nb02c3b-rouge-build.py": "7340aae3684d334cdb66746c4e7a9d5d3547e50f4f35c71187d2772aae2c5671",
+        "docs/conformance/nb02c3b-runtime-prepare.py": "aeed1d41ef1c47e3b665c767cbd7b2b971bdb98513d4e6aa5d46f7354b7058bf",
+        "docs/conformance/nb02c3c2-agent-probe.py": "a0e4ea567293eb4b48b36c8e266b875407c2d8782f59867704efe5d7189619b6",
+        "docs/conformance/nb02c3c3-baseline-probe.py": "d4eb66a332e6d54365cd30be0ea1189492e1742327dc828c5d60855b1fb4c1ea",
+        "docs/conformance/nb03c-compatible-releases-probe.py": "05af73e00dba85114d0ba7d2b785dabfc043c7683cc4b854fd8b4d02629af04a",
+        "docs/conformance/nb03c-direct-worker.py": "39932c41b67955e7db1f5a026df6fe195dfb6ac969d594110c8f03dc6d3776b7",
+        "docs/conformance/noveltybench-request-conformance.py": "721d47df2f3dadd9a2d66e4e9842ee2037da719bb1e918967d9f61468cc22520",
+        "docs/conformance/noveltybench-scoring-probe.py": "6694e4371d01b93cd38fdc4bf30173adc14b1d5df976d6ca54b929da93c6016a",
+        "docs/conformance/pol02-study-freeze.py": "a1a1ca07226855142241b6bee2f0bb1d82c5ce92e7cfc51482d8c1abf3bd8adf",
+        "docs/conformance/src01-candidate-probe.py": "2cb5543adbf1dfdb736887ac4ed856ae6bd9cddd27e598720accf0ba482d5074",
+        "docs/conformance/src01-runtime-audit.py": "7224d52eecb27f33bfcf9810af9f8d674d3646ed03fc958167149accd0bbad14",
+        "docs/conformance/src01-runtime-probe.py": "a3f37a59a4247d89abdca25d4b1de4ab1fdb79b9d9dc72170e01b3191772cf39",
+        "tests/authorization_helpers.py": "ae651b54afc4ab5a232051c730edadee53efb351038696b69662bb26204e4a3e",
+        "tests/doctor_helpers.py": "8232e33eb93083032970b5f0e2f782cf67428eda8a5faf0bda18d8f1e768fcca",
+        "tests/search_verify_helpers.py": "71ff939dd95f375bbc9259eb8391850e62ce74447f54ce77b6ee36d2c7c78618",
+        "tests/test_agent_run.py": "b859f368da7adf04249f77587605b6437c97f280876355b1f90fa9b44fb1c4d0",
+        "tests/test_agent_worker.py": "4c836810986b7121706c2b9827a8e51703d88c62a34db194ba871c3b930e5a77",
+        "tests/test_answers.py": "ab07d16a024a304245dd8432063354028f7cfd998520f82cb542ff0a7a3aaa4f",
+        "tests/test_archive.py": "742cc7b85bfd96aba2afc3910089ef604116623081d9629b0532fe0e6850e606",
+        "tests/test_authority_receipts.py": "564456eaa5c5d2691406ac29e2b753d57610cfffd06e662a5b042ca3e8e248b7",
+        "tests/test_authorization.py": "f3b82648741041d678828edd5d7ce553d4d9897e90bfde03dc403546968c5881",
+        "tests/test_authorization_continuation.py": "0f715525bcbb35ff86564db8235ff484b1edbd37aa6f47cca9fb52c6a92ec00b",
+        "tests/test_baseline.py": "cc140d9247c4f78fea70c30f6896aca64aff98ee49c529d5bb41c1381206870b",
+        "tests/test_benchmark.py": "14f4356d0c35d7f36b431a3448ceb77f1c3bdb6420f86444a586851f086d3723",
+        "tests/test_candidate_run.py": "1bf4917081a2e9d75dfabfafb5f4266e26493b50d20ff36d340ecf2cee1327d3",
+        "tests/test_candidate_worker.py": "abbb3f649455ae33c32912239e782a442d11e6401726429e162e12a8af0204bd",
+        "tests/test_cli.py": "a0c5c1a7b99e55e3cb9e6f1fe0c06539e9a4f953439655b3a99fd64621ff29ad",
+        "tests/test_common.py": "b270320e96d2fc4bdf91a9449346d22ae4a5b5ba975259301d95c07e59ef6bf6",
+        "tests/test_continuation.py": "73d9ae66663b74313fb9c0af6fdf160f4c7841711a8f3dc847d50c0bfc541567",
+        "tests/test_continuation_common.py": "d61b29db05270c919ffbf3f0970f9b479ea89a43ebff6e1cedf5356082c39786",
+        "tests/test_continuation_science.py": "673b84aa78259c43415dd5a89a9b24c3318ed68a1273c1cec7698629ca68b7c4",
+        "tests/test_continuation_source.py": "ab1b416299b8727b161ea1164400ea974ce1328bcc74ee624eaebe2fb45e3846",
+        "tests/test_diagnostics.py": "41eebf0f004259bf31f3041729d47d2760959ab6d0d62dfa35eaa1fd1a6e6f17",
+        "tests/test_doctor.py": "82239801319d60b9cbc681ff3a4545f25c0532fff8010aa8d52c9c308c261d6e",
+        "tests/test_doctor_search_lock.py": "fdcbe6143924bfd012d775956a340bab6c17bf05ad3efe6bf587742bdea23493",
+        "tests/test_engineering_helpers.py": "36dea0b391bfd72fac81f3dd6bdf6731495fc2e76b9bde2a85bbe69906788c8a",
+        "tests/test_evaluation.py": "1435de0c90889976c1737807a7585d5572447bfb620d33fd13c814ebc4d0de35",
+        "tests/test_evaluation_bytes.py": "60c0027bb227ada29f8e744a8f1a75af948ead27a7bb35ce1fec2faa4a974249",
+        "tests/test_executor.py": "5a9dff106a3323864bad3ef7be7bbbd9271d4e204b4d1d12dd8415e16d39a029",
+        "tests/test_frozen_seed.py": "b63605a7026a260167f1dd64bc217e5303ef364f0f485bccdad00ba32a4f1da8",
+        "tests/test_gateway.py": "80e9029bab1fd782d51c405bb875884d92bbf8744946d53993c7117556e824e9",
+        "tests/test_gateway_headers.py": "0f4a561aa1b4c5bf2dc3933e329337aff75c971c4cddafd9fbdd229310bef540",
+        "tests/test_gateway_history.py": "d4a9bb8aa930330425ef90320c9b18d2eb18cfef35d2f00dc7c839f345098059",
+        "tests/test_history.py": "74364404fe61018bfe3d90920d8b78d72a0ab2a9301cb74d16ae147888b17fcd",
+        "tests/test_history_reconciled.py": "23f09171a3a681ac17c1cc8c9fa6d0424f5da08e87648ea3db3499bf62dd3da0",
+        "tests/test_history_schema.py": "84e41b8b9a782297fce8168f84189f296647b6203c3d8b7369f09df604777ea9",
+        "tests/test_history_snapshot.py": "2c4789c8f272b120bb7e2baac06ce229f7dcdd5b98514f4f1fb8582d544fd2fc",
+        "tests/test_ledger.py": "5b6095adac0a7e8678f3a99ea6d83ddb40e5b215c8e07b4d82acceff4ae05df0",
+        "tests/test_linked_cli.py": "4ca218d3d18384b7f5ba8a03913d6a5cfa7824f1607a170f81d7df47178703f3",
+        "tests/test_meas01_adjudication.py": "8f8e34be108e521f47a5e101e42ee0c16624f0b7fc2338e48e7201b30c54d439",
+        "tests/test_meas01_pack.py": "aa2403eee11b0a47cb00e20c817b966f2790ff7a584d61a0a23338f10498ed6f",
+        "tests/test_meas02_compare.py": "d45368552944865e944a861240122da218ca6e584a6225c77e143079fe0986b0",
+        "tests/test_meas02_live.py": "e05761a579af3fb6f7ab1b6b57ba331129ea10a91133608e9bb07031190a958e",
+        "tests/test_meas02_live_diagnostics.py": "0b30a1c3b2e6eff6d0a1509d1eea171fe28a122421bdbe91545002f654d4384a",
+        "tests/test_meas02_materialize.py": "daed4f6aa20f9fbfde84fb4ef8b13041209749aec691c117de18aca1a27da2f2",
+        "tests/test_meas02_native_audit.py": "dcb70face780bd69982e5765706f8ac770fef5b597cb6fbc3debcb84453095d7",
+        "tests/test_meas02_native_binding.py": "a3b7f275d13487e76365f3b54bd30acaf9241f3f628d2c5a0dbbc1d4efccf057",
+        "tests/test_meas02_native_source.py": "f662d2c5b42080776d7cd930cd30cad33a88d3e3bcbe76256e208f5ad33241c6",
+        "tests/test_meas02_operator.py": "bd372112e401760922c078d1280606c07d270b02a7bc19841ed23c57185892b2",
+        "tests/test_meas02_partial.py": "7505aef73646b83e9f662beaa680e451ade224b78b4d63610d3aa33d6d6621d8",
+        "tests/test_meas02_partial_operator.py": "ed4a19aebfb0ba670cb974dc2b38d84102611fb7e2a4222c5f973c46b9839413",
+        "tests/test_meas02_preflight.py": "b71a5663152fecf9aefbbc09f5ac2719233bf815112ac176c789ec512c97d46b",
+        "tests/test_meas02_replay_cli.py": "72826e9d2d1f931056baf4a8f7fcb9f937722c4142ef8263f56536817c6aca62",
+        "tests/test_meas02_results.py": "d77219db1ff06f5e25e3d1e1ac758243e20520c12849894d0ccaaefc09522963",
+        "tests/test_native_context.py": "4ac72732dbca636c2345e41ae6de990003fa8ee1ff4bc6e4990fc4f9d023dad0",
+        "tests/test_native_evaluation.py": "709d2df718605de4618fb3a6fd24c39005d6faa3f79760658b2c8eca9bacc148",
+        "tests/test_native_pipeline.py": "918b75fdc1ad874b316247698f1699171db91909aa160b082928398477d8e510",
+        "tests/test_native_run.py": "69bd427891ffca2174570d767d5796948ec5ede0dd2a14dc3842706689c48c03",
+        "tests/test_native_run_adversarial.py": "c218e27a1a6a7928c87bb959ec7e923b17b19325234b593b7d4321db8c46aa2a",
+        "tests/test_native_transport.py": "dedc7abbd7096fb64542b1edd95257b91823d2e71eb965aacfe70a014049f590",
+        "tests/test_native_worker.py": "2efa4fb5fff6cb8ce9158a22720174c40f72118a69953321f76a0933cec90a6d",
+        "tests/test_noveltybench_results.py": "f08ef303340df4e8916c86aa92433211d8c0c6458140406cc86909b58a49a8f0",
+        "tests/test_observation_reads.py": "e326ee023dcecdc1e45e4f41eea2340e3d9082d5a7ae222c20c14b3a94260463",
+        "tests/test_paid_authority.py": "eaeb3bcfa0c6449cd7a2b1fb31f08d9d53ab3538dc06c86034b65618c4654fa7",
+        "tests/test_policy.py": "0190f80c53c685278b1cd9046ba350934db7888e482543ca1463703c69023ebe",
+        "tests/test_policy_analysis.py": "e2002ad1e9060223bee2fd3f10a64a32f74132c66cbc8f124c17e6d1d6a03ac7",
+        "tests/test_policy_costs.py": "2cda51b9b8311ad959987a0a2f877f804b3c818039adaade5940edffd1c72755",
+        "tests/test_policy_intent.py": "82a2e5b42a3a39f2b8100031bb39846c799eaeb50b0f8ee5ff0af87e5dbe02ab",
+        "tests/test_policy_panel.py": "8528bb38c6656573460572304939d86bf2cd3f902642913f653e5aa097a68f95",
+        "tests/test_policy_panel_boundaries.py": "3601d4d3b6520d20ad1c193cdf61e362e857dcbcf1ab0111a8f70a54a7dd5eea",
+        "tests/test_policy_panel_read.py": "5da60171c49364225da346d92c5e7ec9bef15ad84fb5ff266fa4c2ef88d0c997",
+        "tests/test_policy_reporting.py": "44e0375fada8a2d99c85a768d1d79c6e98e686b960e3fc12379043a5f630476d",
+        "tests/test_policy_results.py": "ff6e68dc4b8de52170ea5279267e5a16cb1a194d2a394e8272e0575043d1b969",
+        "tests/test_policy_run.py": "220024134719635fce7ae5de57dcaa87dfc36c360bb4f74f87baeaad31da3c63",
+        "tests/test_policy_study.py": "026ba4c2b3e3d64e1806dd7a337b2b4a2cbf6c7890a720ed4e19164320110ae5",
+        "tests/test_process_observation.py": "9c0f104da231cd3cb5b1bbbf4d0b78c240df847a51e37553b043088cad999f82",
+        "tests/test_progress.py": "aad3c80785f910df8031f6cbc88be840f72a70b23c856058274ddc1ca59b0e8e",
+        "tests/test_proposer.py": "0fe59da4708fadf094da944045fade3099fa0af3887066a586b66d1cf3cf5729",
+        "tests/test_provider.py": "3203babe8f19b649dd5eea645d40be7e082cb13c57a67783cfdd61b56a6c1810",
+        "tests/test_reference.py": "710daa7f7e6bfd578b44e0b6c4815552b0f7185484cf37dd30020a21b26889f2",
+        "tests/test_releases.py": "bea974f3e004343a3b7dee93a3d792e666ffa37c8c6917b37d79c2d0824d5c49",
+        "tests/test_run.py": "9e46d096b42c8b4c6671358f5720ce554887fcf4470512cdd79dfe0dde95f663",
+        "tests/test_search.py": "5d202735bac12097891e7eddff0eaac2af1ee6254616342eaed1ef6355633f6d",
+        "tests/test_search_evidence.py": "0b2d75f5865add33e46feb8a6578032efbbcc5e9f531a56733edde5a4f7354b5",
+        "tests/test_search_verify.py": "f9b2fa531c566041bdb43a08efd356271889951a06d0ac33f3e937d97de76f22",
+        "tests/test_search_verify_review.py": "dd117aa3bd8160a43949e4c2b8fdbabfbe702cd0ac7ff6d280ac595422d356c7",
+        "tests/test_splits.py": "cb75aa2f4a0a037f088c1adae37e0632ac94803a5de629e1a6b94b76cd9bd2a5",
+        "tests/test_src01_runtime.py": "0a50d567590e59779ac19cae6dd582e85a1a3cace5f84ad4b76bf050f8ccf586",
+        "tests/test_unsent_boundary.py": "01a9dbcaaf2d40f6c5768da689929d27a9d283bc0a1137ae8acd4d381475f78b",
+        "tests/test_wire.py": "9e947c7e48af4ed270859d205e3c6435e2ec256da43287e193d453548467704d"
+      },
+      "wall_seconds": 1254.9075559999328
+    }
+  },
+  "limits": [
+    "Synthetic fixture/mockHTTPS custody checks; no actual comparison answers or model reviews.",
+    "An export I/O error can escape before a study observation; the later operator handoff still needs a sanitized explicit stop record.",
+    "Supplied pins and stable bytes do not authenticate publication time, provider origin or perfect blinding.",
+    "Passive provenance identifies consumed data and original owners; delivery pins identify this materializer version."
+  ],
+  "review_materials": {
+    "created_utc": "2026-10-21T18:21:31.246383+00:00",
+    "format": "buddha.policy-panel-review-materials-preparation.v1",
+    "limits": [
+      "Only rule field inspected from old pack; no historical answer/outcome values inspected or copied.",
+      "No keys,databases,models,providers,containers,tests or program execution.",
+      "Original registration and source bytes bracket unchanged; this is metadata provenance, not authenticated publication time or semantic review."
+    ],
+    "materials_bytes": 2350,
+    "materials_sha256": "b623e7763cb2ebcd74c4399f95f68239a58ba656f4d36893b2a244154e1491d0",
+    "method": "Archived pack rule field under its original raw pin independently matched pinned official source JUDGE_SYSTEM via ast.literal_eval and synthetic captured SDK data; no source execution. Rubric is exact contiguous UTF8 protocol byte slice, five bullets and caveats only.",
+    "protocol_rubric_byte_span": [
+      12459,
+      13785
+    ],
+    "rubric_utf8_sha256": "733be657c9c72bdb6f66a04028f423b3f4a30e9ff8aaf8f9321296e6502f89bd",
+    "rule_utf8_sha256": "5df0b3a31c86ea37e15b17348a34ad064790b670be345dd93fcd0a4d18385eca",
+    "source_sha256": {
+      "C:\\Users\\arvik\\code\\buddha\\runs\\references\\noveltybench-conformance\\64a23be6b18ec1dacc298830aab276061b6e143c\\src\\partition.py": "263970891ff3ee1cc8df369a33beefe5cb5de618b5dd146a5234536d97954aca",
+      "docs/POLICY-COMPARISON.md": "a3cd4ee3011f0e269e0b2e66570953c847574497d8e8b02a359b247a59423ab0",
+      "docs/conformance/meas01-study/pack.json": "8a29cded45e11f62eaecba52e5d9c30a88e2733b28cc8138aa2fdb38d025bf15",
+      "docs/conformance/pol02-study-intent.json": "befcce0c56aaa86326e4ed5c116564e72488ad469f16ff53b9ad5390391bb01e",
+      "tests/fixtures/native_judges.json": "d4ca7e838e9d769abb44e5215c81aca52bfda4a99a9c5a2fff4722fc46d0da99"
+    },
+    "status": "PASS"
+  },
+  "source_sha256": {
+    "buddha/policy_panel_read.py": "a86a76da4e06df25e070e88420d837096302acca1cab2d75e7ef040b2bf87123",
+    "buddha/policy_results.py": "42e5e47d71c18184a4b8b66934942674ce70873c23160e76fd4ada1f14ae2377",
+    "tests/test_policy_panel_boundaries.py": "3601d4d3b6520d20ad1c193cdf61e362e857dcbcf1ab0111a8f70a54a7dd5eea",
+    "tests/test_policy_panel_read.py": "5da60171c49364225da346d92c5e7ec9bef15ad84fb5ff266fa4c2ef88d0c997",
+    "tests/test_policy_results.py": "2c11d814a7b0a7c8ab05cee13af9b8f7be7a6268fd34a25669c5c43d5292ddb6"
+  },
+  "status": "PASS"
+}

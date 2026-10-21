@@ -62,11 +62,13 @@ computes the primary comparisons, ranges by original category, each generation
 repetition and score/group disagreement between judging occasions. Its token/cost
 views keep unknown usage, recorded charges, holds and recovery metadata explicit.
 The [private panel mapping](docs/POLICY-PANEL.md) derives fixed masks from pinned
-study metadata before answers are inspected; it contains no answer text. The
-packet materializer, account/runtime checks, approved funding and a tested
-handoff remain open before launch. The actual answer packet and supplemental
-reviews follow real saved generation. The live comparison and human scientific assessment remain
-open; these reporting features do not complete the experiment.
+study metadata before answers are inspected; it contains no answer text. Its
+[passive materializer](docs/POLICY-PANEL.md#materialize-original-saved-generation)
+assembles a reviewer packet from anchored original generation, keeping missing
+coverage and provenance private. Account/runtime checks, approved funding and a
+tested handoff remain open before launch. Actual answers and supplemental
+reviews require real saved generation. The live comparison and human scientific
+assessment remain open; preparing a packet does not complete the experiment.
 
 The [source runtime](docs/SOURCE-RUNTIME.md) and [candidate execution boundary](docs/SOURCE-CANDIDATES.md)
 now pass composed isolation, model-channel, accounting and recovery checks.
