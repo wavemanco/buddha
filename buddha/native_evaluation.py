@@ -72,6 +72,11 @@ class _Generation:
 
 
 def _generation(value: object, authority: Authorization) -> _Generation:
+    return _read_generation(value, authority.path)
+
+
+def _read_generation(value: object, authority_path: Path) -> _Generation:
+    """Verify retained generation using an explicit authority file, without execution."""
     reference = _object(
         value,
         {"baseline_directory", "stage_seal_sha256", "owner_manifest_sha256", "owner_ledger_sha256"},
@@ -91,10 +96,10 @@ def _generation(value: object, authority: Authorization) -> _Generation:
         or observed.ledger_sha256 != history.ledger_sha256
     ):
         raise EvaluationError("source generation changed while observed")
-    funding = _authority(capture, authority.path, [observed])
+    funding = _authority(capture, authority_path, [observed])
     if (
         funding is None
-        or pipeline._absolute(history.manifest["authorization_path"]) != authority.path
+        or pipeline._absolute(history.manifest["authorization_path"]) != authority_path
     ):
         raise EvaluationError("source generation belongs to another shared authority")
     funded_sources = [
@@ -261,7 +266,7 @@ def _generation(value: object, authority: Authorization) -> _Generation:
     protected = {
         path: hashlib.sha256(raw).hexdigest()
         for path, raw in capture.raw.items()
-        if path != authority.path
+        if path != authority_path
     }
     return _Generation(tasks, answers, answers_path, protected, _object(funding["config"]))
 

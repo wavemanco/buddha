@@ -57,8 +57,10 @@ gate, including the full eight-cell actual-container schedule and keyless replay
 The [actual twelve-task protocol](docs/POLICY-COMPARISON.md) now declares
 membership, the unchanged official instrument, analysis and masked supplemental
 review; its [cost proposal](docs/POLICY-COMPARISON-COSTS.md) creates no funding.
-Account/runtime checks, a tested handoff, passive analysis and the live
-comparison remain open.
+The [passive results reader](docs/POLICY-RESULTS.md) checks saved evidence and
+computes the primary comparisons while keeping incomplete results explicit.
+The remaining registered reporting layer, account/runtime checks, a tested
+handoff and the live comparison remain open.
 
 The [source runtime](docs/SOURCE-RUNTIME.md) and [candidate execution boundary](docs/SOURCE-CANDIDATES.md)
 now pass composed isolation, model-channel, accounting and recovery checks.

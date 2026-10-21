@@ -394,6 +394,19 @@ def publish_complete(
     saved = _load(_read(path, digest))
     snapshot = _object(saved.get("authorization"))
     current = authority.summary()
+    validate_authorization_snapshot(snapshot, current, owner_ids)
+    if _json(saved) != _json(result | {"authorization": snapshot}):
+        raise PipelineError("stored complete publication changes its sealed source or outputs")
+    if file_hash(path) != digest:
+        raise PipelineError("stored complete publication changed during consumption")
+    return saved
+
+
+def validate_authorization_snapshot(
+    snapshot: object, current: dict[str, object], owner_ids: set[str]
+) -> None:
+    """Check a retained observation against decoded current state, without writes."""
+    snapshot = _object(snapshot)
     if set(snapshot) != set(current):
         raise PipelineError("stored authorization observation has different fields")
     for key in ("authorization_id", "budget_microusd", "max_calls", "scope", "terms_sha256"):
@@ -459,8 +472,3 @@ def publish_complete(
         sum(cast(int, row[key]) for row in old.values()) != snapshot[key] for key in amounts
     ):
         raise PipelineError("stored authorization observation omits or miscounts owners")
-    if _json(saved) != _json(result | {"authorization": snapshot}):
-        raise PipelineError("stored complete publication changes its sealed source or outputs")
-    if file_hash(path) != digest:
-        raise PipelineError("stored complete publication changed during consumption")
-    return saved

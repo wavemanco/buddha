@@ -83,8 +83,10 @@ and [intent](conformance/pol02-study-intent.json) now declare membership, the
 exact child, instrument, supplemental review and analysis. Their future
 launcher must verify the reviewed publication against the controller-bound
 inputs; direct controller calls do not automatically bind external analysis
-documents. Account/runtime checks, funding, passive analysis and a tested live
-handoff remain open. Structural validity does not establish scientific adequacy.
+documents. The separate [passive reader](POLICY-RESULTS.md) now checks saved
+evidence and primary arithmetic. Registered reporting, account/runtime checks,
+funding and a tested live handoff remain open. Structural validity does not
+establish scientific adequacy.
 
 ## Saved records and recovery
 
