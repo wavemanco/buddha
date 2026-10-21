@@ -459,6 +459,46 @@ def _profiles(selection: Selection, roots: Mapping[str, Path]) -> dict[str, obje
     return result
 
 
+def _input_hashes(value: Mapping[Path, str] | None) -> dict[Path, str]:
+    if value is None:
+        return {}
+    if not isinstance(value, Mapping) or len(value) > 1024:
+        raise GatewayError("expected inputs require a bounded Path-to-SHA mapping")
+    result: dict[Path, str] = {}
+    for path, digest in value.items():
+        if not isinstance(path, Path):
+            raise GatewayError("expected input paths must be Paths")
+        absolute = path.absolute()
+        checked = _digest(digest)
+        if absolute in result and result[absolute] != checked:
+            raise GatewayError("expected input aliases have conflicting digests")
+        result[absolute] = checked
+    return result
+
+
+def _input_records(
+    paths: Sequence[Path], expected: Mapping[Path, str] | None = None
+) -> list[dict[str, str]]:
+    if (
+        not isinstance(paths, (list, tuple))
+        or len(paths) > 1024
+        or any(not isinstance(path, Path) for path in paths)
+    ):
+        raise GatewayError("invocation needs a bounded ordered Path list")
+    pins = _input_hashes(expected)
+    if not pins.keys() <= {path.absolute() for path in paths}:
+        raise GatewayError("expected input is not an invocation member")
+    result = []
+    for path in paths:
+        absolute = path.absolute()
+        digest = file_hash(path, max_bytes=256 * 1024**2)
+        required = pins.get(absolute, digest)
+        if digest != required:
+            raise GatewayError("invocation input differs from its expected digest")
+        result.append({"path": str(absolute), "sha256": required})
+    return result
+
+
 @_checked
 def prepare_gateway(
     directory: Path,
@@ -471,6 +511,7 @@ def prepare_gateway(
     input_files: Sequence[Path],
     review: dict[str, object],
     run_id: str | None = None,
+    expected_input_hashes: Mapping[Path, str] | None = None,
 ) -> Path:
     """Prepare and bind an empty allocation; this never reads a key or contacts a provider."""
     directory = directory.absolute()
@@ -479,10 +520,7 @@ def prepare_gateway(
     if not isinstance(input_files, (list, tuple)) or not 1 <= len(input_files) <= 1024:
         raise GatewayError("invocation needs a bounded ordered input list")
     verify_selection(selection, roots, expected_sha256=selection.fingerprint())
-    inputs = [
-        {"path": str(path.absolute()), "sha256": file_hash(path, max_bytes=256 * 1024**2)}
-        for path in input_files
-    ]
+    inputs = _input_records(input_files, expected_input_hashes)
     record: dict[str, object] = {
         "format": FORMAT,
         "run_id": run_id or uuid.uuid4().hex,

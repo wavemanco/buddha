@@ -5,7 +5,7 @@ New occasions use new owners; recovery retains this occasion's original owners.
 """
 
 import hashlib
-from collections.abc import Callable, Sequence
+from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass
 from functools import partial, wraps
 from pathlib import Path
@@ -19,6 +19,7 @@ from buddha.doctor import _authority, _Busy, _Capture, _owner
 from buddha.gateway import (
     Gateway,
     RawHTTPTransport,
+    _input_records,
     _read_manifest,
     execution_identity,
     prepare_gateway,
@@ -370,6 +371,9 @@ def _owner_stage(
             budget_microusd=cast(int, settings["budget_microusd"]),
             max_calls=cast(int, settings["max_calls"]),
             input_files=paths,
+            expected_input_hashes={
+                Path(_text(row["path"])): _text(row["sha256"]) for row in expected_inputs
+            },
             review=review,
         )
     record = _read_manifest(owner)
@@ -393,6 +397,7 @@ def prepare_evaluation(
     authorization: Authorization,
     review: dict[str, object],
     input_files: Sequence[Path] = (),
+    expected_input_hashes: Mapping[Path, str] | None = None,
 ) -> Path:
     """Verify original generation and prepare a fresh native owner; no API calls."""
     if (
@@ -407,8 +412,7 @@ def prepare_evaluation(
         or any(not isinstance(path, Path) for path in input_files)
     ):
         raise EvaluationError("evaluation controls require a bounded ordered Path list")
-    for path in input_files:
-        file_hash(path, max_bytes=256 * 1024**2)
+    controls = _input_records(input_files, expected_input_hashes)
     definition, source, release = _definition(descriptor, authorization)
     directory = directory.absolute()
     _root(directory.parent)
@@ -449,6 +453,7 @@ def prepare_evaluation(
         frozen,
         [],
         input_files,
+        {row["path"]: row["sha256"] for row in controls},
     )
     return directory
 

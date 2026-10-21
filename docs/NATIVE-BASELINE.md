@@ -19,6 +19,12 @@ and inherited by every native stage, including on recovery. Resuming does not
 require resupplying them. The [policy controller](POLICY-EXECUTION.md) uses this
 to retain the complete study's original inputs.
 
+Optional `expected_input_hashes` supplies previously checked SHA256 values for
+members of `input_files`. Preparation compares these before creating an owner
+and passes its captured input values to the Gateway, preventing a changed file
+from being adopted between the two checks. Later native owners inherit the
+original values. This makes no provider calls or spending allocation.
+
 These are library interfaces, not a newly enabled paid command. Preparing a
 baseline does not create or extend the user's authorization. The historical
 $50 experiment and its inactive allocations remain unchanged.

@@ -7,7 +7,7 @@ module neither allocates funding nor computes a benchmark score or ranking.
 import copy
 import hashlib
 import sqlite3
-from collections.abc import Callable
+from collections.abc import Callable, Mapping
 from dataclasses import dataclass
 from functools import wraps
 from pathlib import Path
@@ -18,7 +18,14 @@ from buddha import native_pipeline as pipeline
 from buddha.answers import TaskSet
 from buddha.authorization import Authorization
 from buddha.doctor import _authority, _Busy, _Capture, _owner, _Unsupported
-from buddha.gateway import Gateway, RawHTTPTransport, _read_manifest, execution_identity
+from buddha.gateway import (
+    Gateway,
+    RawHTTPTransport,
+    _input_hashes,
+    _input_records,
+    _read_manifest,
+    execution_identity,
+)
 from buddha.gateway_history import MAX_LEDGER_BYTES
 from buddha.policy_study import PolicyStudy
 from buddha.releases import ReleaseError, _digest, _json, _load, _object, _root, _text, file_hash
@@ -454,7 +461,12 @@ def _partial(
 
 @_checked
 def prepare_study(
-    directory: Path, *, descriptor: Path, authorization: Authorization, review: dict[str, object]
+    directory: Path,
+    *,
+    descriptor: Path,
+    authorization: Authorization,
+    review: dict[str, object],
+    input_bindings: Mapping[Path, str] | None = None,
 ) -> Path:
     """Bind the declared study and first baseline owner, without keys or calls."""
     if (
@@ -466,6 +478,20 @@ def prepare_study(
     descriptor = descriptor.absolute()
     execution = _definition(descriptor, authorization)
     directory = directory.absolute()
+    pins = _input_hashes(input_bindings)
+    if any(path.is_relative_to(directory) for path in pins):
+        raise PolicyRunError("publication inputs must be outside the study output")
+    extra = _input_records(list(pins), pins)
+    if any(
+        path in execution.files and digest != execution.files[path] for path, digest in pins.items()
+    ):
+        raise PolicyRunError("publication pin conflicts with an original execution control")
+    execution = _Execution(
+        execution.study,
+        execution.template,
+        execution.recipe,
+        execution.files | {Path(row["path"]): row["sha256"] for row in extra},
+    )
     _root(directory.parent)
     for role in ("generation", "native"):
         for value in _object(_object(execution.template[role])["roots"]).values():
@@ -485,6 +511,8 @@ def prepare_study(
         authorization=authorization,
         review=review,
         input_files=_controls(directory, execution),
+        expected_input_hashes=execution.files
+        | {directory / "context.json": pipeline._sha(context)},
     )
     initial = _read_manifest(first.parent / "baseline/owners/0")
     bound = {
@@ -553,7 +581,15 @@ def _run(directory: Path, transport: RawHTTPTransport) -> dict[str, object]:
     authority = Authorization(pipeline._absolute(initial["authorization_path"]))
     execution = _definition(pipeline._absolute(context["descriptor"]), authority, bound)
     schedule = execution.study.schedule()
-    controls = _controls(directory, execution)
+    controls = list(
+        dict.fromkeys(
+            [
+                *_controls(directory, execution),
+                *(Path(path) for path in bound if not Path(path).is_relative_to(directory)),
+            ]
+        )
+    )
+    expected_controls = {path: _digest(bound[str(path)]) for path in controls}
     _population(directory, schedule, cast(int, execution.study.to_record()["judge_occasions"]))
     _preflight(
         directory, execution, authority, _object(initial["review"]), controls, bound, transport
@@ -582,6 +618,7 @@ def _run(directory: Path, transport: RawHTTPTransport) -> dict[str, object]:
                         authorization=authority,
                         review=_object(initial["review"]),
                         input_files=controls,
+                        expected_input_hashes=expected_controls,
                     )
                 run = baseline.run_baseline
             else:
@@ -595,6 +632,7 @@ def _run(directory: Path, transport: RawHTTPTransport) -> dict[str, object]:
                         authorization=authority,
                         review=_object(initial["review"]),
                         input_files=controls,
+                        expected_input_hashes=expected_controls,
                     )
                 run = native_evaluation.run_evaluation
             execution_identity(anchor)

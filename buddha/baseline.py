@@ -7,7 +7,7 @@ This module derives files/coverage, never benchmark scores or optimization polic
 import hashlib
 import json
 import os
-from collections.abc import Callable, Iterator, Sequence
+from collections.abc import Callable, Iterator, Mapping, Sequence
 from contextlib import contextmanager
 from functools import partial, wraps
 from pathlib import Path
@@ -19,6 +19,7 @@ from buddha.authorization import Authorization
 from buddha.gateway import (
     Gateway,
     RawHTTPTransport,
+    _input_records,
     _read_manifest,
     execution_identity,
     prepare_gateway,
@@ -178,6 +179,7 @@ def prepare_baseline(
     authorization: Authorization,
     review: dict[str, object],
     input_files: Sequence[Path] = (),
+    expected_input_hashes: Mapping[Path, str] | None = None,
 ) -> Path:
     """Freeze an offline baseline intent and its generation owner; never send a request."""
     if not isinstance(directory, Path) or not isinstance(descriptor, Path):
@@ -188,8 +190,7 @@ def prepare_baseline(
         or any(not isinstance(path, Path) for path in input_files)
     ):
         raise BaselineError("baseline controls require a bounded ordered Path list")
-    for path in input_files:
-        file_hash(path, max_bytes=256 * 1024**2)
+    controls = _input_records(input_files, expected_input_hashes)
     definition, _, _ = _definition(descriptor)
     directory = directory.absolute()
     _root(directory.parent)
@@ -208,6 +209,20 @@ def prepare_baseline(
     )
     generation = _object(definition["generation"])
     selection, roots = _component(generation)
+    paths = list(
+        dict.fromkeys(
+            path.absolute()
+            for path in [
+                context,
+                descriptor,
+                _absolute(definition["tasks"]),
+                _absolute(generation["descriptor"]),
+                *_sources(),
+                *input_files,
+            ]
+        )
+    )
+    expected = _input_records(paths, {Path(row["path"]): row["sha256"] for row in controls})
     prepare_gateway(
         directory / "owners/0",
         selection=selection,
@@ -215,19 +230,8 @@ def prepare_baseline(
         authorization=authorization,
         budget_microusd=cast(int, generation["budget_microusd"]),
         max_calls=cast(int, generation["max_calls"]),
-        input_files=list(
-            dict.fromkeys(
-                path.absolute()
-                for path in [
-                    context,
-                    descriptor,
-                    _absolute(definition["tasks"]),
-                    _absolute(generation["descriptor"]),
-                    *_sources(),
-                    *input_files,
-                ]
-            )
-        ),
+        input_files=paths,
+        expected_input_hashes={Path(row["path"]): row["sha256"] for row in expected},
         review=review,
     )
     return directory
@@ -409,6 +413,9 @@ def _run(directory: Path, transport: RawHTTPTransport) -> dict[str, object]:
                     budget_microusd=1 if no_model else cast(int, native["budget_microusd"]),
                     max_calls=1 if no_model else cast(int, native["max_calls"]),
                     input_files=bound_inputs,
+                    expected_input_hashes={
+                        Path(_text(row["path"])): _text(row["sha256"]) for row in expected_inputs
+                    },
                     review=_object(initial["review"]),
                 )
             owned = _read_manifest(owner)
