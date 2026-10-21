@@ -531,6 +531,11 @@ observation filename is enough for me to do the analysis here.
 
 ## If the launcher stops before key entry
 
+The corrected launcher prints a fixed `reason_code` and plain-English `action`
+for terminal, input, credential and command-option problems. Unknown failures
+stay redacted. These messages never include keys or arbitrary exception text;
+they do not replace the study's saved partial-result or accounting records.
+
 If the absolute-path command above still stops without an explained reason,
 run this optional diagnostic in the same PowerShell window that showed the error:
 

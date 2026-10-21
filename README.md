@@ -69,8 +69,11 @@ capability limits and the bounded upgrade/retirement evidence.
 The prepared study launcher requires an explicit live flag, a reviewed account
 profile and an existing active allocation before unfinished work can run. The
 user has now approved a separate **$15 / 120-attempt judge audit**, allowing a
-partial result with its reason recorded. Its allocation has zero calls and is
-ready for local key binding after 1,025 local tests and confined native proofs. The original $50 experiment
+partial result with its reason recorded. At preparation, its allocation had zero
+calls and passed local key-binding checks after 1,025 local tests and confined
+native proofs. The original audit has since completed with verified saved
+accounting and four completion anchors; scientific review remains separate. The
+original $50 experiment
 remains closed, with its unknown-request hold preserved. See the
 [approved audit handoff](docs/MEASUREMENT-JUDGE-AUDIT.md#approved-15-live-audit). [API key guidance](docs/API-KEYS.md) explains process-only
 key entry; never paste keys into chat or commit them.
