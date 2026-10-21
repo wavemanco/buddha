@@ -29,6 +29,37 @@ def _pinned(raw: bytes, expected: str) -> dict[str, object]:
     return _load(raw)
 
 
+def _sha(raw: bytes) -> str:
+    return hashlib.sha256(raw).hexdigest()
+
+
+def _materials(
+    raw: bytes, expected: str, protocol: bytes, protocol_sha256: str, release: dict[str, object]
+) -> tuple[dict[str, object], str]:
+    record = _object(
+        _pinned(raw, expected),
+        {"format", "release_sha256", "protocol_sha256", "rule", "rubric"},
+    )
+    rule = _object(record["rule"], {"text", "sha256", "upstream_revision"})
+    rubric = _object(record["rubric"], {"text", "protocol_start", "protocol_end"})
+    text = _utf8(_text(rule["text"]))
+    rubric_text = _utf8(_text(rubric["text"]))
+    start, end = rubric["protocol_start"], rubric["protocol_end"]
+    if (
+        record["format"] != "buddha.policy-panel-review.v1"
+        or _digest(record["release_sha256"]) != _sha(_json(release))
+        or _digest(record["protocol_sha256"]) != protocol_sha256
+        or _digest(rule["sha256"]) != _sha(text.encode())
+        or rule["upstream_revision"] != _object(release["upstream"])["revision"]
+        or type(start) is not int
+        or type(end) is not int
+        or not 0 <= start < end <= len(protocol)
+        or protocol[start:end] != rubric_text.encode()
+    ):
+        raise PolicyPanelError("review materials differ from their reviewed release/protocol")
+    return {"text": text, "sha256": rule["sha256"]}, rubric_text
+
+
 def _label(vector: list[object]) -> str:
     return hashlib.sha256(_json(vector)).hexdigest()
 
