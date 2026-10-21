@@ -11,7 +11,7 @@ from unittest.mock import patch
 import test_continuation as continuation
 from doctor_helpers import legacy
 
-from buddha import doctor, search
+from buddha import doctor, search, search_evidence
 from buddha.__main__ import main
 
 
@@ -20,16 +20,25 @@ class DoctorSearchLockTests(unittest.TestCase):
         fixture = legacy(self)
         lock = fixture.directory / ".search.lock"
         opened = Path.open
+        observational_open = search_evidence._open_binary
 
         def unrelated_only(path, *args, **kwargs):
             if path == lock:
                 raise AssertionError("observer opened the writer's content-free lock")
             return opened(path, *args, **kwargs)
 
+        def unrelated_observation(path):
+            if path == lock:
+                raise AssertionError("observer opened the writer's content-free lock")
+            return observational_open(path)
+
         for raw, expected in ((b"", "legacy_empty"), (b"invalid", "invalid")):
             with self.subTest(raw=raw):
                 lock.write_bytes(raw)
-                with patch.object(Path, "open", unrelated_only):
+                with (
+                    patch.object(Path, "open", unrelated_only),
+                    patch.object(search_evidence, "_open_binary", unrelated_observation),
+                ):
                     result = doctor.observe(fixture.directory)
                 self.assertEqual(result["status"], "observed")
                 self.assertEqual(result["lock"]["status"], expected)

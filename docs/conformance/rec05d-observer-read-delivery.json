@@ -1,0 +1,171 @@
+{
+  "base_commit": "ba8059d7c10149a57b7fc3819afe9fd63b9885a6",
+  "change": "The existing shared reader uses a read-only, noninheritable Windows handle with FILE_SHARE_READ|WRITE|DELETE. Its sole descriptor ownership survives stream-construction failure and interruption. Non-Windows ordinary binary reading remains unchanged.",
+  "checked_on": "2026-10-21T03:18:39.826671+00:00",
+  "finding": "REC5-CI2",
+  "format": "buddha.rec05d-observer-read-delivery.v1",
+  "hosted_ci": {
+    "required": "both PR/push Windows/Linux jobs on the exact submitted head; no claim from local type targets",
+    "status": "pending separate publication"
+  },
+  "ignored_evidence_sha256": {
+    "runs/reviews/rec05d-compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/reviews/rec05d-discovery-order.json": "7f4058c65781518e49a764aa2d8f6943994cd77cfb0079eae1f2ed8b8f65ccaf",
+    "runs/reviews/rec05d-fd-transfer-green.log": "6030f1499aeca415b7c64c6e65241a3abb97be7c93450f90978d8ba37e22dce6",
+    "runs/reviews/rec05d-fd-transfer-red.log": "a38e9c3a310a493c038609d0cc97688861de86ed4750db77493454b83fcdbab4",
+    "runs/reviews/rec05d-full-suite.log": "dd1674d2d27c4adc9171671ade82b25214e38f0c5d24bbd409c5800a9a90c3d0",
+    "runs/reviews/rec05d-independent-opener-review.json": "c208777351c2da1873a908e178c0c4dd55370ef9783681c12b59e27b6793be9a",
+    "runs/reviews/rec05d-observation-tests-final.log": "4f337844020fb37f5983c9dda296876b0d9f6b04013124bdaa4481af8d05f1e7",
+    "runs/reviews/rec05d-pid-read-green.log": "8563fdd65c27d8a7ad60fea29cf93a44c643dff3982c767ed83f2507edf46e8f",
+    "runs/reviews/rec05d-pid-read-red.log": "b38ed19e3c9999a3bf644bfb8d0a042d1859050dc1737c0e8eac43e0024a68a9",
+    "runs/reviews/rec05d-runtime-audit.log": "e82148c0c30269ca5a2c35420ece6af011a4faf5a375325d750e243ffdb10625",
+    "runs/reviews/rec05d-search-evidence-tests.log": "aca5acf93cd1717e198bfb8ec6e192eeda8a70f7c297d1019127855e564f1a2b",
+    "runs/reviews/rec05d-shared-read-focused.log": "02437f9a127572a0b15c6bc05a11f61c43478eff3326575de95d07123637884c"
+  },
+  "preservation": {
+    "base_application_files": 36,
+    "changed_from_base": {
+      "buddha/search_evidence.py": {
+        "after": "1d89ed7ae541f52b79cc643edd2615955104cceb8508036d3b288e646fa30a34",
+        "before": "7f9c014bb61e2fc06691db9ec5a832fe803966715011d94ea34618b1df753ae3"
+      }
+    },
+    "current_application_sha256": {
+      "buddha/__init__.py": "0857bd60619c1e1c8538fe768cbe82c781bb4e302abc6cf59130f1b17d052230",
+      "buddha/__main__.py": "749379d618f14efefaef35eddad73720c77ab30f4494d85253fd1a756d969617",
+      "buddha/agent_run.py": "3f7f8ff3cb9965216f19c6564da1e830f0f629a346ec1cc29e2583c119bea88d",
+      "buddha/agent_worker.py": "c6f86105c0a42304687f857209bb17172f2f38fda26699d25e2618f6e01a745f",
+      "buddha/answers.py": "be860546b2692ea4a710d93855f487dd49d9c8e28eb3f2ec757df697cefb8d0b",
+      "buddha/archive.py": "9549deb0f347cf6114ef3f802b9dfef8a94e0db7cbbd3497697987d5e21ba2ee",
+      "buddha/authorization.py": "06d8615f8b301285a951b08bece0570e5b1b89467fc99fa4e994c7e5e5f30c47",
+      "buddha/baseline.py": "c988e823d9890b712a4b50a58a3d808c6630fdcf3e6fb94227ee9e591d04a432",
+      "buddha/benchmark.py": "7ef7e26b2ef3cbf4119118a985334048fd30b68a5629f3e3196fa77e8200c49f",
+      "buddha/channel.py": "c46d236865b15f1918efa23d961ed7163533c9bbef2b0cec7f61d6f8e95d6e5f",
+      "buddha/common.py": "3a0a693a0f4a0f2eed3b858d0b3ac42148871dbca284e56e0e368726309393c0",
+      "buddha/continuation.py": "b0136052472868aee379d7ac78dfd11bcfa40e91aedcd6916d30f9a334003414",
+      "buddha/diagnostics.py": "ca0af1304e3fbe99569f0b027f99269b151e08265785b39ed53c39f820097e24",
+      "buddha/doctor.py": "afa511a747c4be2951ba53fea5cfe2822077a0f7a6f80a80a3255594d5b5d19b",
+      "buddha/evaluation.py": "4cabb1a48689a140fc6f6129ed8d9eae1d047d3e09eae794170c74479413b8d6",
+      "buddha/executor.py": "b5e84f2dbcdc436aee23272e7d96b567cb5b16ead256a34d08bccc70b480d186",
+      "buddha/gateway.py": "e844fcb695b97c76ecb7432ece6b8d96416806554038e202fd6b0f7f3da57a2e",
+      "buddha/gateway_history.py": "a773ae6066e5b8a4f503e4b346b73570ace2ebeb811017f7b656cc211fded57c",
+      "buddha/history.py": "d42e92a7e6c88a2f72090eaaa50de39dc355957e7c61f5b89dd97162d8b0eefa",
+      "buddha/ledger.py": "5c7e56f1e2c5e68046d6380ebacc03110300eae34d348d7dca683a0591d64130",
+      "buddha/native_context.py": "47a488b8d731617bda21380232e5e49801e0c0b4261f69b71c24fb9eae0ba298",
+      "buddha/native_run.py": "60aafd5ef9e355e82faae2dc12397c6b0b2b649c3273c1bda9c0c757e0775a19",
+      "buddha/native_transport.py": "ccd4917132939630231b8b8c69540189cd52f60951fa08d467d90b9571ccb6c0",
+      "buddha/native_worker.py": "8fa4b85ae6e75202de4b345302cb70253b6c0c5b47f004490f8d9a09750ecaa1",
+      "buddha/policy.py": "717f6fdad1e880d83326d6a314e0dfa604be1044f8209f27061380e16cfebb3e",
+      "buddha/process_observation.py": "28ad4b424ae0bec10aa2d3bf145cb62e1b26eb088db5e83fb6900fab6d5495a8",
+      "buddha/progress.py": "47d21dada88347e63c01b05cf5c31db8e2cc157e501b812b58a2650d078393ba",
+      "buddha/provider.py": "17de071c1416afa32f9da32eb627e24264d8a0a848862fdf4853057125f18a02",
+      "buddha/reference.py": "36356c8a25dae3501014513095cb6f838c4ae54b02a129bdffc4a5cb2dfa6f35",
+      "buddha/releases.py": "33361cf5b0923b373ee53dd73597063195c2c0d519baead50d40fb4bcfab44f5",
+      "buddha/run.py": "a972cb8d1a04bef7abad7efdf7f1eec803bb88cd55c30cf64148119a3d7c6dbb",
+      "buddha/search.py": "ac7b3648355b139797773cbe2bb8b67abbc8533eefd987cd7692275692a9a95c",
+      "buddha/search_evidence.py": "1d89ed7ae541f52b79cc643edd2615955104cceb8508036d3b288e646fa30a34",
+      "buddha/search_verify.py": "41bdc2689d2b64e93765fe4572017a6c4264d5c3c6df49bba2a63e74b9ab6a63",
+      "buddha/splits.py": "419fa286d812b43e3095fbb41a62844b40477f880d94c8d60de069a52c324a2a",
+      "buddha/wire.py": "48f40a71bf10c84dfd1d15f0baef50198cce8a229748355f116ad6a25cab12b4"
+    },
+    "historical_evidence": "Existing conformance records, archives, raw receipts and source pins remain historical records. This new source revision does not silently adopt or re-seal an existing live owner.",
+    "original_rec05c_map": {
+      "intentional_revisions": [
+        "buddha/doctor.py (earlier PR29)",
+        "buddha/search_evidence.py (this REC-05D)"
+      ],
+      "matching_files": 34,
+      "total": 36
+    },
+    "primary_checkout": "All changes are in the isolated worktree. The primary live handoff's 45-file manifest and historical seals are not rewritten or replaced; no primary application or real-run files are edited here.",
+    "unchanged_from_base": 35
+  },
+  "primary_sources": [
+    "https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-createfilew",
+    "https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/open-osfhandle?view=msvc-170",
+    "https://docs.python.org/3.13/library/msvcrt.html#msvcrt.open_osfhandle",
+    "https://raw.githubusercontent.com/python/cpython/v3.13.12/Modules/_io/fileio.c",
+    "https://raw.githubusercontent.com/python/cpython/v3.13.12/Modules/_io/_iomodule.c"
+  ],
+  "root_cause": "An ordinary Windows read handle on PID-bearing running.lock denied the native writer its normal deletion while observation was in progress.",
+  "scope": {
+    "covered": [
+      "doctor captured PID/content reads",
+      "watch observations",
+      "failure summaries",
+      "sealed search-evidence capture"
+    ],
+    "limits": [
+      "No atomic filesystem snapshot, authenticated writer ownership, healthy-process or resume-permission claim.",
+      "Actual concurrency and ownership probes ran on Windows; the non-Windows branch has a portable test and type checks but no independent Linux runtime result until hosted CI.",
+      "Before/after path, regular-file, reparse, hard-link, opened-identity and actual-byte bounds remain; this is not a claim about every application file open.",
+      "No real provider call, real credential entry, live allocation creation/change or real-run modification was part of this slice. Controlled race fixtures use fresh temporary directories and any synthetic fixture authorities remain test-only."
+    ],
+    "unchanged": [
+      "strict ASCII PID codec",
+      "metadata-only legacy .search.lock",
+      "writer/unlink/retry paths",
+      "financial schemas and transitions",
+      "benchmark/scientific algorithms",
+      "separate sealed-history and source-inventory openers"
+    ]
+  },
+  "status": "complete at the shared active-observer opener scope; hosted CI pending",
+  "tests_first": {
+    "descriptor_transfer": {
+      "after": "closefd=False wrapper and one helper-owned descriptor cleanup preserve unrelated descriptor; 3 groups pass",
+      "before": "3 groups, 1 error: injected failure after real raw-wrapper creation closed a newly reused unrelated descriptor",
+      "limit": "Deterministic failure-path injection informed by exact CPython 3.13.12 source; no genuine memory-exhaustion event was induced."
+    },
+    "pid_race": {
+      "after": "Actual writer unlinks while actual doctor stream remains open; observation refuses the changed/disappeared input.",
+      "before": "2 groups, 1 failure: actual native writer PermissionError WinError32 and retained lock; stable PID control passed"
+    }
+  },
+  "validation": {
+    "focused_composition": {
+      "seconds": 128.071,
+      "skip": "existing Windows symlink privilege limitation",
+      "skipped": 1,
+      "tests": 136
+    },
+    "full_suite": {
+      "command": "python -W error::ResourceWarning -m unittest discover -s tests",
+      "exit_code": 0,
+      "seconds": 815.53,
+      "skip_name_method": "All 1055 ordered terminal progress markers matched to frozen unittest discovery metadata; no tests rerun. Null means output interleaving prevented an exact mapping.",
+      "skip_names": [
+        "test_agent_worker.AgentWorkerTests.test_symlinked_source_is_rejected_even_when_expected_bytes_match",
+        "test_continuation_source.ContinuationSourceTests.test_actual_original_nine_receipts_validate_read_only",
+        "test_history.HistoryTests.test_source_symlink_is_rejected_without_following_it",
+        "test_native_worker.NativeWorkerTests.test_replaced_artifact_root_cannot_export_another_tree",
+        "test_releases.ReleaseSelectionTests.test_symlinked_file_or_parent_is_rejected",
+        "test_search_evidence.SearchEvidenceTests.test_symlink_is_rejected"
+      ],
+      "skip_reasons": "Five host symlink-creation privilege limitations; the isolated checkout does not distribute the actual original-nine-receipts local incident fixture. Earlier actual-data preservation evidence remains separate.",
+      "skipped": 6,
+      "tests": 1055
+    },
+    "independent_review": {
+      "actual_windows_ownership_paths": 4,
+      "evidence_sha256": "c208777351c2da1873a908e178c0c4dd55370ef9783681c12b59e27b6793be9a",
+      "remaining_concrete_defects": [],
+      "source_sha256": "1d89ed7ae541f52b79cc643edd2615955104cceb8508036d3b288e646fa30a34"
+    },
+    "new_observation_tests": {
+      "seconds": 0.029,
+      "skipped": 0,
+      "tests": 16
+    },
+    "quality": {
+      "bandit": "no issues in buddha/agents",
+      "compileall": "pass",
+      "diff_whitespace": "pass",
+      "pip_audit_runtime": "no known vulnerabilities found",
+      "ruff_format": "107 files pass",
+      "ruff_lint": "pass",
+      "strict_mypy_linux_target": "37 source files pass",
+      "strict_mypy_win32_target": "37 source files pass"
+    }
+  }
+}
