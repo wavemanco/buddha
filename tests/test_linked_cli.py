@@ -109,7 +109,8 @@ class LinkedCLITests(unittest.TestCase):
             redirect_stdout(io.StringIO()) as output,
             redirect_stderr(io.StringIO()) as progress,
         ):
-            self.assertEqual(main(arguments), 0)
+            result = main(arguments)
+            self.assertEqual(result, 0, output.getvalue() + progress.getvalue())
         report = json.loads(output.getvalue())["report"]
         self.assertEqual(report["costs"]["operation_count"], 55)
         self.assertEqual(report["inherited_costs"]["operation_count"], 9)

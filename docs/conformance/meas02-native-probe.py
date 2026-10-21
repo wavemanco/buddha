@@ -44,6 +44,7 @@ HEADER_EVIDENCE = ROOT / "docs/conformance/nb02c3b-funded-native-evidence.json"
 PACK = ROOT / "docs/conformance/meas01-study/pack.json"
 PROPOSAL = ROOT / "docs/conformance/meas02-target-proposal.json"
 PROVENANCE = ROOT / "docs/conformance/meas01-adjudication-review.json"
+OPERATOR = ROOT / "docs/conformance/meas02-run.py"
 KEY = "offline-meas02-not-a-real-api-key"
 OCCASIONS = ("baseline", "same-order-repeat", "order-seed-0", "order-seed-20261020")
 STORAGE_SEALS = {
@@ -250,6 +251,7 @@ class Server:
         self.observed = []
         self.requests = []
         self.current = None
+        self.operator_launches = []
 
     def observe(self, frame, index):
         request = frame["request"]
@@ -401,18 +403,28 @@ class InterruptAfterReceipt(RawHTTPTransport):
 
 
 def invoke(controller, directory, server, *, keyless=False, transport=None):
-    class ObservedSession(NativeSession):
-        def handle(self, frame):
-            if frame.get("type") == "request":
-                server.observe(frame, self.command["index"])
-                try:
-                    return super().handle(frame)
-                finally:
-                    server.current = None
-            return super().handle(frame)
+    operator = controller.__operator__
+    actual_loader = operator._controller
+
+    def observed_controller():
+        # Each operator launch still invokes its actual source-pinned loader.
+        actual = actual_loader()
+
+        class ObservedSession(actual.NativeSession):
+            def handle(self, frame):
+                if frame.get("type") == "request":
+                    server.observe(frame, self.command["index"])
+                    try:
+                        return super().handle(frame)
+                    finally:
+                        server.current = None
+                return super().handle(frame)
+
+        actual.NativeSession = ObservedSession
+        return actual
 
     with (
-        patch.dict(os.environ, {"OPENAI_API_KEY": "" if keyless else KEY, "ANTHROPIC_API_KEY": ""}),
+        patch.dict(os.environ, {"OPENAI_API_KEY": "", "ANTHROPIC_API_KEY": ""}),
         patch(
             "http.client.HTTPSConnection",
             side_effect=(
@@ -422,12 +434,29 @@ def invoke(controller, directory, server, *, keyless=False, transport=None):
             ),
         ),
         patch.object(socket, "create_connection", side_effect=AssertionError("network forbidden")),
-        patch.object(controller, "NativeSession", ObservedSession),
+        patch.object(operator, "_controller", side_effect=observed_controller),
+        patch("buddha.__main__.sys.stdin.isatty", return_value=True),
+        patch("buddha.__main__.sys.stderr.isatty", return_value=True),
+        patch("buddha.__main__.getpass.getpass", return_value=KEY) as hidden,
     ):
-        return controller.run_native_audit(
-            directory,
-            transport=transport or RawHTTPTransport(allow_paid=not keyless, timeout_seconds=2),
-        )
+        try:
+            return operator.execute(
+                directory,
+                live=not keyless,
+                prompt_keys=not keyless,
+                transport=transport or RawHTTPTransport(allow_paid=not keyless, timeout_seconds=2),
+                heartbeat_seconds=1.0,
+            )
+        finally:
+            assert os.environ["OPENAI_API_KEY"] == ""
+            assert hidden.call_count == (0 if keyless else 1)
+            server.operator_launches.append(
+                {
+                    "keyless": keyless,
+                    "hidden_key_entries": hidden.call_count,
+                    "temporary_environment_restored": True,
+                }
+            )
 
 
 def native_rows(directory):
@@ -496,11 +525,15 @@ def main(target):
     materializer = load_engineering(
         materializer_path, "361ec95b56802eb018681113f012d0f4efaec48d587e556bc6df9993aae26c7d"
     )
-    controller = load_engineering(controller_path)
+    operator = load_engineering(OPERATOR)
+    controller = operator._controller()
+    controller.__consumed_source_sha256__ = operator.CONTROLLER_SHA256
+    controller.__operator__ = operator
     sources = {
         path.relative_to(ROOT).as_posix(): sha(path.read_bytes())
         for path in (
             SCRIPT,
+            OPERATOR,
             controller_path,
             materializer_path,
             HELPER,
@@ -512,6 +545,7 @@ def main(target):
         controller.__consumed_source_sha256__
         == sources[controller_path.relative_to(ROOT).as_posix()]
     )
+    assert operator.__consumed_source_sha256__ == sources[OPERATOR.relative_to(ROOT).as_posix()]
     batches = materializer.materialize(PACK.read_bytes(), PROPOSAL.read_bytes())
     targets = [row for batch in batches for row in batch["targets"]]
     assert len(targets) == len({row["target_id"] for row in targets}) == 40
@@ -641,7 +675,7 @@ def main(target):
     assert preservation() == protected
     assert sources == {name: sha((ROOT / name).read_bytes()) for name in sources}
     evidence = {
-        "format": "buddha.meas02-native-audit-proof.v1",
+        "format": "buddha.meas02-operator-native-proof.v1",
         "source_sha256": sources,
         "fixture": fixture.relative_to(ROOT).as_posix(),
         "actual_provider_calls": 0,
@@ -661,6 +695,7 @@ def main(target):
         "authorization": totals,
         "requests": server.sends,
         "native_request_frames": server.requests,
+        "operator_launches": server.operator_launches,
         "operations": [operation_summary(directory / "owners" / str(i)) for i in range(4)],
         "controls": controls,
         "protected_file_count": len(protected),

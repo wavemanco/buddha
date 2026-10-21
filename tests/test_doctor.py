@@ -93,9 +93,7 @@ class DoctorTests(unittest.TestCase):
                 "unknown_count": 1,
             },
         )
-        self.assertEqual(
-            set(result["observed_sha256"]), {"manifest.json", "operations.sqlite3", ".search.lock"}
-        )
+        self.assertEqual(set(result["observed_sha256"]), {"manifest.json", "operations.sqlite3"})
         self.assertTrue(all(len(value) == 64 for value in result["observed_sha256"].values()))
         result["accounting"]["spent_microusd"] = 0
         result["operations"][0]["status"] = "FORGED"

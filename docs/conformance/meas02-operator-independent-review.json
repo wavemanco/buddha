@@ -1,0 +1,128 @@
+{
+  "evidence_log_sha256": {
+    "runs/reviews/meas02-operator-final-11-green.log": "ff0e82112a4b5c832605fc6f97a16d6ec297588beb42411f1b849315b10b608f",
+    "runs/reviews/meas02-operator-key-length-red.log": "499b4bed89d2cac733e78e2c10172e4316fcadb35eb6e747b3c5aff947406cdc",
+    "runs/reviews/meas02-preflight-final-focused.log": "1381dcb2e379544cc1257a06b1ad03daa3eca9b4b5302e11918653f035215da2",
+    "runs/reviews/meas02-preflight-finance-owner-red.log": "5b72ed54300a1bfe5eef38b5f3b3a77972e5e8527607ef3b5f1453a6e6bc9406",
+    "runs/reviews/meas02-preflight-first.log": "cbfb3afbed03a74510b40bef2f4b78614a166efd654927cc814b2fe1ed663be2",
+    "runs/reviews/meas02-preflight-missing-api-red.log": "47e65ff6c2234f1ab87232fc38c75ef92e45765a70f81d6e7502e906eb7a1c47",
+    "runs/reviews/meas02-preflight-zero-price-red.log": "a91de9cd5be4d847883a061acd2600a927984feb74c13d31e10b812ee5c99eec"
+  },
+  "format": "buddha.meas02-operator-independent-review.v1",
+  "limits": [
+    "Checking this live prepared study acquires its exclusive lock and validates current bound sources, selections and shared SQLite state. It is not the sealed immutable historical-reader API; no generally read-only historical claim is made.",
+    "A ready result means the next unfinished owner has no known preflight stop and possibly reusable or new capacity. It is not a completion, pricing guarantee, proof of exact reservation reuse or permission to spend beyond the supplied authority.",
+    "A current review date and profile seal bind caller-reviewed account/bounds data; this entry does not independently authenticate provider pricing/account settings or grant a new allocation.",
+    "A PID-only retained lock gives refusal, not process ownership/health or permission to delete/recover it. Unknown liabilities and unanchored states remain blocked; no replacement owner or hold release is introduced.",
+    "Focused tests use temporary artifacts, mocked keys/HTTPS/execution and real shared accounting; this review made no provider call, created no real allocation and assigned no semantic rating.",
+    "Native Codex engineering/review model computation is outside the experiment API ledger; exact inherited model identifiers and platform cost are unavailable and not claimed universally free.",
+    "Useful-diversity improvement, fresh judge accuracy/order stability, human EVAL02, a fully identified independent scientific audit and generalization remain open."
+  ],
+  "pending_evidence": [
+    "New actual 40-target native proof through the final operator/controller wrapper; historical PR28 proof is not that run.",
+    "Aggregate 67 focused and full 992 suite outcomes and hostedCI, to be recorded separately by delivery after terminal completion."
+  ],
+  "preservation": {
+    "prior287_input_seals_match_before_and_after": true,
+    "prior36_package_source_seals_match_before_and_after": true,
+    "prior_PR28_native_proof": {
+      "path": "docs/conformance/meas02-native-proof.json",
+      "scope": "Preserved earlier controller proof, not silently rebound to this new operator/controller source.",
+      "sha256": "85ef3e3723db792b78694ee8d12ba22d0e9a91bacc566ac2ff58bc41774164ea"
+    },
+    "prior_runtime_zip_sha256": "bd32c4d50339e2f2e1cadf01f5872fa3c1cdf12c196e7676a18d6fe96bd534e0",
+    "prior_v2_authority_sha256": "52d293f04921af5418a46a0ce33b1ffd296ae3753cbd3aee7da5130f3dd2c06a"
+  },
+  "reviewed_at_utc": "2026-10-21T00:53:02.513269+00:00",
+  "reviewed_operator_gates": [
+    "Controller executes from bounded exact bytes matching its fixed SHA, ignoring adjacent pyc. The controller likewise consumes the pinned materializer bytes.",
+    "Unfinished work requires explicit --live before hidden key entry. The existing __main__ key helper is reused through a minimal profile view; ModelSpec/provider/account fingerprints and the limit of 4,096 characters bound are checked before launching work.",
+    "Environment keys are restored by the existing finally cleanup; neither pasted keys nor arbitrary provider exception strings are printed by the operator path.",
+    "A flushed numeric heartbeat observes shared attempt/spent/held/cap totals. Observation failures do not decide execution state, and no heartbeat health/ownership claim is made.",
+    "Complete-only replay uses an explicitly unpaid transport. Cancellation/incomplete states retain original owners and liabilities and never print a success claim."
+  ],
+  "reviewed_preflight_gates": [
+    "The same _state path validates all original owner/source/input identities, exact completion prefixes/anchors and report/coverage seals for both check and actual run; source validation repeats after key entry.",
+    "An unfinished study requires every unsealed owner active. Before prompting, next-owner authorize_dispatch rejects inactive, unknown, outstanding-dispatch and overrun stops; account/bounds review must be fresh.",
+    "Mapped profiles are returned as actual frozen ModelSpec objects. Credential fingerprints/review/source-file records are defensive data; no raw key is returned.",
+    "Without a sufficiently sized potential own unsent hold, new attempt capacity must fit local/shared money and physical-call caps. Another owner's hold is not reusable credit.",
+    "A full-size own unsent reservation can remain potentially reusable at zero new capacity. This does not prove the next native request will have the same logical identity or that the whole study can finish; exact Gateway guards still decide.",
+    "All four anchored completions can be checked/reused keylessly with inactive owners and without fresh-review/dispatch gates. Existing current-runtime/source requirements still apply."
+  ],
+  "ruled_out_hypotheses": [
+    {
+      "case": "zero_price_live_profile_skips_call_cap",
+      "classification": "not_a_reachable_bug_in_this_route",
+      "evidence": "runs/reviews/meas02-preflight-zero-price-red.log",
+      "explanation": "Attempted fixture was rejected by public ModelSpec before preparation: OpenAI/Anthropic rates must be>=1. Only replay permits zero rates, and this audit route requires OpenAI. The attempted 15th test was removed, 14-test bytes restored exactly, and no public guard or controller logic was relaxed."
+    }
+  ],
+  "scope": "Independent source/finance preflight review and tests-first regressions for the small operator launcher. This validates current live owner state and frozen runtime sources; it is not a generally read-only historical reader.",
+  "source_closure": {
+    "all36_prior_package_sources_unchanged": true,
+    "key_entry_helper_explicitly_bound": "buddha/__main__.py",
+    "key_entry_helper_sha256": "749379d618f14efefaef35eddad73720c77ab30f4494d85253fd1a756d969617",
+    "materializer_sha256": "361ec95b56802eb018681113f012d0f4efaec48d587e556bc6df9993aae26c7d",
+    "operator_explicitly_bound_in_invocation": true,
+    "remaining_financial_core": "Existing Gateway/shared-authority/native worker guard paths remain unchanged; no new ledger schema, account allocation or billing algorithm."
+  },
+  "source_sha256": {
+    "docs/conformance/meas02-materialize.py": "361ec95b56802eb018681113f012d0f4efaec48d587e556bc6df9993aae26c7d",
+    "docs/conformance/meas02-native-audit.py": "3c3e7e791c68414c97ebbac4c985661e818ebfab7bf97a8a1180ac2714a4df15",
+    "docs/conformance/meas02-run.py": "cd4fcb388b2c1ef05e81557cc5f5d72a15478c8849da8b506b2ffcea2dba1df3",
+    "tests/test_meas02_operator.py": "0e8130117a6b0b86a41ff9e5cdd8d0524ea326fd87e50c54e7052297f86e6879",
+    "tests/test_meas02_preflight.py": "b71a5663152fecf9aefbbc09f5ac2719233bf815112ac176c789ec512c97d46b"
+  },
+  "status": "focused_checks_verified_integration_and_full_suite_not_claimed",
+  "tests_first_history": [
+    {
+      "case": "missing_public_check_API",
+      "classification": "expected_missing_implementation_RED",
+      "log": "runs/reviews/meas02-preflight-missing-api-red.log",
+      "observed": "Fresh-state test reached prepared valid fixture, then AttributeError because check_native_audit was absent."
+    },
+    {
+      "case": "source_file_list_decode",
+      "classification": "actual_implementation_failure_closed",
+      "fix": "Defensive per-record list copies preserve the declared list shape.",
+      "log": "runs/reviews/meas02-preflight-first.log",
+      "observed": "Initial 12-group implementation run had 6 errors because object-only _load was applied to a list of source-file records."
+    },
+    {
+      "case": "tiny_own_reservation",
+      "classification": "actual_finance_preflight_RED_closed",
+      "fix": "Potential reuse requires own held total at least the minimum mapped reservation; otherwise local/shared money and physical-call capacity are checked.",
+      "log": "runs/reviews/meas02-preflight-finance-owner-red.log",
+      "observed": "A 1 microusd held reservation with a 300 microusd minimum native reservation and no fresh call/money capacity incorrectly returnedready."
+    },
+    {
+      "case": "future_inactive_owner_without_completion",
+      "classification": "actual_state_preflight_and_library_RED_closed",
+      "fix": "Shared _state requires every unfinished owner to remain active before any batch can execute; anchored completed inactive owners remain reusable.",
+      "log": "runs/reviews/meas02-preflight-finance-owner-red.log",
+      "observed": "Fourth owner manually deactivated without a completion anchor; check returnedready and libraryrun issued 3 mocked requests before reaching that stop."
+    },
+    {
+      "case": "review_matched_overlong_key",
+      "classification": "actual_operator_RED_closed",
+      "fix": "Reject keys longer than4096 printableASCII characters before worker launch, matching the existing transport bound.",
+      "log": "runs/reviews/meas02-operator-key-length-red.log",
+      "observed": "Operator author test showed a fingerprint-matched overlong key was accepted; expected stopped exit 2 but observed complete exit 0 in the mocked fixture."
+    }
+  ],
+  "verified_focused_results": {
+    "attribution": "Preflight regressions independently authored and REDs observed by this reviewer; parent ran the final14 and operator author ran11, with exact terminal logs/source pins checked here. No duplicate full-suite or new native-proof execution claimed.",
+    "operator": {
+      "groups": 11,
+      "log": "runs/reviews/meas02-operator-final-11-green.log",
+      "result": "pass",
+      "seconds": 0.199
+    },
+    "preflight": {
+      "groups": 14,
+      "log": "runs/reviews/meas02-preflight-final-focused.log",
+      "result": "pass",
+      "seconds": 49.654
+    }
+  }
+}

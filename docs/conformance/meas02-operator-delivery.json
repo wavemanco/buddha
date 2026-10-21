@@ -1,0 +1,193 @@
+{
+  "checked_at_utc": "2026-10-21T01:05:32.826806+00:00",
+  "code_sha256": {
+    "docs/conformance/meas02-materialize.py": "361ec95b56802eb018681113f012d0f4efaec48d587e556bc6df9993aae26c7d",
+    "docs/conformance/meas02-native-audit.py": "3c3e7e791c68414c97ebbac4c985661e818ebfab7bf97a8a1180ac2714a4df15",
+    "docs/conformance/meas02-native-probe.py": "14d3b7ad068db7d76e5b5dac268a439f03a9a1111d798b8bc5ae36047313d3af",
+    "docs/conformance/meas02-run.py": "cd4fcb388b2c1ef05e81557cc5f5d72a15478c8849da8b506b2ffcea2dba1df3",
+    "tests/test_meas02_operator.py": "0e8130117a6b0b86a41ff9e5cdd8d0524ea326fd87e50c54e7052297f86e6879",
+    "tests/test_meas02_preflight.py": "b71a5663152fecf9aefbbc09f5ac2719233bf815112ac176c789ec512c97d46b"
+  },
+  "date": "2026-10-20",
+  "engineering_failures_retained": [
+    {
+      "log": "runs/reviews/meas02-preflight-first.log",
+      "result": "Six errors: initial preflight attempted strict JSON object-only _load on a list. Defensive list/dict copies fixed the actual API."
+    },
+    {
+      "log": "runs/reviews/meas02-preflight-zero-price-red.log",
+      "result": "Ruled-out hypothesis, not a product regression RED: existing live ModelSpec rejects zero input/output prices before preparation. The impossible fixture was removed without weakening the guard."
+    },
+    {
+      "log": "runs/reviews/meas02-operator-red.log",
+      "result": "Missing operator file/API RED before implementation."
+    }
+  ],
+  "evidence_sha256": {
+    "docs/conformance/meas02-operator-independent-review.json": "c934758dbd7e0068ef3d391239e7abda32ca3262c5f27cdd632bdc785ea1e3ff",
+    "docs/conformance/meas02-operator-native-proof.json": "4ba9e6f39f14c934aaceb45c62c5f1e74745a5c0f53a438b3ea0b520315a6696"
+  },
+  "execution_contract": {
+    "before_keys": "Check frozen original inputs, all original owners, bound host/controller/operator/__main__ source bytes, completed prefix/authority anchors, next account review, unknown liability and immediate dispatch funding.",
+    "completion": "Only complete four-batch anchored result prints completion. Keyless completed-only reuse opens no paid transport. Ctrl+C130; incomplete run3; stopped2; successful prepare/check or completed run0.",
+    "credentials": "Established hidden-entry helper through narrow ModelSpec profile facade; reviewed printable ASCII fingerprint and4096-character bound before worker. No fake RunSettings. Prompted environment restored in finally.",
+    "execution": "Explicit --live for unfinished work; original owners and Gateway guards are rechecked under lock after key entry. No new authority creation or owner replacement.",
+    "observation": "Immediate flushed starting notice/numeric shared accounting plus10-second heartbeat. Observer failure does not mutate execution/accounting. Attempt records may precede transmission; held is not additional billed money."
+  },
+  "format": "buddha.meas02-operator-delivery.v1",
+  "funding": {
+    "actual_provider_calls": 0,
+    "concrete_proposal": {
+      "conditional_public_standard_reservation_microusd": 755400,
+      "expected_actual_bill": "unmeasured;no completion guarantee",
+      "generation_quality_search": false,
+      "max_physical_attempt_records": 120,
+      "model": "gpt-5.6-luna",
+      "occasions": [
+        22,
+        6,
+        6,
+        6
+      ],
+      "partial_stop_accepted_if_approved": true,
+      "review": "runs/reviews/meas02-operator-budget-review.json",
+      "review_sha256": "b671dcd48a8e4c30d448a3daba6ee5f7c4fc554602c8f677b226f1193cb0b73d",
+      "shared_usd_cap": "5.00",
+      "status": "requires_user_decision_no_grant",
+      "targets": 40
+    },
+    "confirmation_source": "User reply in this chat2026-10-20; no account endpoint was queried.",
+    "engineering_usage": "Native Codex engineering/review usage is outside experiment API ledger; exact host usage cost and inherited model identities unknown.",
+    "historical_50_is_not_new_permission": true,
+    "live_profile_bound": false,
+    "new_live_allocation_approved": false,
+    "new_live_allocation_created": false,
+    "remaining_private_facts": [
+      "Applicable public pay-as-you-go vs custom/Scale contract pricing",
+      "Local credential/account/header binding, no raw key in chat or records",
+      "New shared dollar cap and explicit physical-attempt allowance"
+    ],
+    "user_confirmed_processing_tier": "Standard/default (verified)"
+  },
+  "hosted_ci": {
+    "pr27": "Merged36783c5b1f00e54134c855662e6cd9ad0cfd515c after four terminal green PR/push Windows/Linux checks at9ab755148bb8d04efaa9954f89574e9be3393c9e.",
+    "pr28": "At2414a4b3c5fa976452dcbb4970b502231281fa31, both Linux and pull-request Windows checks pass; push Windows remains running.",
+    "this_slice": "not_published_yet"
+  },
+  "limits": [
+    "Synthetic replies measure no judge accuracy, equivalence sensitivity, meaningful semantic diversity, real order stability or new rating.",
+    "Supplied2/4/10-answer cards are not generated C1 populations; no generation/score/summary candidate result.",
+    "Immediate readiness is not guaranteed full completion or a promise the scheduler next requests an existing unsent operation. Original Gateway funding/identity checks remain authoritative.",
+    "Known optional CPU evaluator license/advisory limits remain unchanged; no arbitrary evolved-agent execution clearance.",
+    "No original score, ranking, receipt, financial authority, unknown hold or scientific expectation was changed.",
+    "Earlier native preparation source/proof pins remain historical, not rewritten to the operator source."
+  ],
+  "plan": {
+    "remaining_leaf_slices": 10,
+    "revision": 28,
+    "sole_next": "MEAS-02"
+  },
+  "preservation": {
+    "historical_native_proof_bytes": 303203,
+    "historical_native_proof_sha256": "85ef3e3723db792b78694ee8d12ba22d0e9a91bacc566ac2ff58bc41774164ea",
+    "package_source_files": 36,
+    "pilot_zip_and_v2_authority_unchanged": true,
+    "prior_historical_files": 287,
+    "record": "runs/reviews/meas02-operator-preservation.json",
+    "record_sha256": "c403acf4121c5a3b55d5fb39c5be685cfe2f76fe30348676eb583ae39dca30b8",
+    "same_prior_seals": true
+  },
+  "reproduced_findings": [
+    {
+      "failure": "A tiny reservation let preflight overlook inadequate fresh funding.",
+      "fix": "Require immediate funds/call allowance unless this owner already holds at least the minimum full reservation; another owner reservation is no credit.",
+      "id": "MEAS2-O1",
+      "red_log": "runs/reviews/meas02-preflight-finance-owner-red.log"
+    },
+    {
+      "failure": "Inactive later owner was discovered only after earlier owner mock spending.",
+      "fix": "Shared _state validates every unfinished owner before earliest dispatch.",
+      "id": "MEAS2-O2",
+      "red_log": "runs/reviews/meas02-preflight-finance-owner-red.log"
+    },
+    {
+      "failure": "Matching4097-character key reached mocked worker.",
+      "fix": "Bound key length4096 before worker, in addition to fingerprint/printable validation.",
+      "id": "MEAS2-O3",
+      "red_log": "runs/reviews/meas02-operator-key-length-red.log"
+    }
+  ],
+  "scope": "Local operator entry over unchanged official supplied-control native study. No application-core changes, new dependency, live allocation or real model call.",
+  "status": "complete_offline_operator_slice_meas02_semantics_open",
+  "validation": {
+    "actual_saved_native_stops": {
+      "checks": "Retained money/unknown state rejects actual operator before key access, Gateway.execute, new allocation, worker or network; all50files per fixture unchanged.",
+      "log": "runs/reviews/meas02-operator-native-stops-review.json",
+      "sha256": "0d3485179a911a40fc2eaaf8fa88468a76d131a82e72d2ec7ad3ca858b7f0c54",
+      "status": "pass"
+    },
+    "all_meas02": {
+      "log": "runs/reviews/meas02-operator-all-focused.log",
+      "log_sha256": "bc5fd2bc72515a64704eda4fa1a0a446e6df0d19176a9fff1960060f4bf7d51c",
+      "resource_warnings": "errors",
+      "seconds": 125.365,
+      "status": "pass",
+      "tests": 67
+    },
+    "bandit_core": "pass;no findings; existing nosec/comment parser warnings retained",
+    "bandit_scripts": "pass; materializer/controller/operator normal; native assertion-based proof scoped B101 excluded, other tests enabled",
+    "compileall": "pass;core/tests/agents and changed scripts",
+    "full_suite": {
+      "console_note": "One RuntimeWarning: diagnostic outcome could not be saved; existing diagnostic failure paths are exercised. No ResourceWarning, Traceback or Exception ignored output found; terminal suite OK.",
+      "log": "runs/reviews/meas02-operator-full-suite.log",
+      "log_sha256": "c1cf7c26213e81aca138ab528cf82f1d631d02efcafd3f933936ce94972ae747",
+      "resource_warnings": "errors",
+      "seconds": 737.773,
+      "skip_reason": "Windows symlink-creation permission unavailable in existing guarded tests",
+      "skipped": 5,
+      "status": "pass",
+      "tests": 992
+    },
+    "markdown_links": {
+      "documents": 42,
+      "limits": "Tracked Markdown local file targets only;remote URLs and anchors excluded.",
+      "local_file_targets": 377,
+      "missing": [],
+      "status": "pass"
+    },
+    "native": {
+      "fixture_key_absent_from_console_log": true,
+      "funding_and_unknown_cross_owner_stops": true,
+      "hidden_entry_calls": 2,
+      "keyless_complete_new_sends": 0,
+      "log": "runs/reviews/meas02-operator-native-proof.log",
+      "mocked_physical_sends": 42,
+      "ordinary_charged_operations": 40,
+      "ordinary_held_microusd": 0,
+      "ordinary_synthetic_spent_microusd": 200,
+      "owners": 4,
+      "real_provider_calls": 0,
+      "same_owner_received_reply_interruption": true,
+      "status": "pass",
+      "targets": 40,
+      "temporary_environment_restored": true
+    },
+    "operator": {
+      "log": "runs/reviews/meas02-operator-final-11-green.log",
+      "seconds": 0.199,
+      "status": "pass",
+      "test_groups": 11
+    },
+    "optimized_proof": "pass;actual -O and -OO fail before external imports with MEAS02_NATIVE_PROBE_OPTIMIZED_MODE_UNSUPPORTED",
+    "pip_audit_core": "pass;no known vulnerabilities in requirements.txt;does not clear optional evaluator environment",
+    "preflight": {
+      "log": "runs/reviews/meas02-preflight-final-focused.log",
+      "seconds": 49.654,
+      "status": "pass",
+      "test_groups": 14
+    },
+    "ruff_format": "pass;105files",
+    "ruff_lint": "pass;core/tests/agents plus four MEAS02 preparation/operator scripts",
+    "strict_mypy": "pass;37sources each Linux/default and win32"
+  }
+}

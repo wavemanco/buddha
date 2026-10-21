@@ -1,0 +1,67 @@
+{
+  "base_commit": "8d1dca9119f9b691995759494f549d24f844e66d",
+  "change": {
+    "doctor_after_sha256": "afa511a747c4be2951ba53fea5cfe2822077a0f7a6f80a80a3255594d5b5d19b",
+    "doctor_before_sha256": "80104522cb402a3a6ae35521bdc29c12a234f1a3249157127fbb4ebb3f6903e5",
+    "old_source_preserved_at": "8d1dca9119f9b691995759494f549d24f844e66d:buddha/doctor.py",
+    "scope": "metadata-only legacy .search.lock observation; no content handle or content digest; native PID lock still read and validated",
+    "writer_accounting_science_changed": false
+  },
+  "checks": {
+    "bandit": "pass:0issues",
+    "compile": "pass",
+    "full_suite": "pending candidate freeze; no full-pass claim",
+    "ruff_format": "pass",
+    "ruff_lint": "pass",
+    "runtime_pip_audit": "pass:0known",
+    "strict_mypy": "pass:37sourcefiles"
+  },
+  "ci_failure": {
+    "assertion": "first main(arguments) returned 2 instead of 0",
+    "exact_exception_in_ci": "unavailable: test suppressed captured stdout/stderr",
+    "job_id": 118978599526,
+    "other_three_checks": "success",
+    "run_id": 39525364268,
+    "test": "test_linked_cli.LinkedCLITests.test_cli_uses_shared_authority_for_synthetic_execution_and_cached_restart"
+  },
+  "format": "buddha.meas02-windows-observation-fix.v1",
+  "limits": [
+    "Synchronized reproduction demonstrates a real Windows race matching the CI assertion, not the unavailable original CI exception.",
+    "Lock metadata remains bracketed; this observation never establishes writer identity or authorizes retries.",
+    "Old 36-source seals and old native evidence remain unchanged historical pins."
+  ],
+  "observed_at": "2026-10-21T01:50:35.452789+00:00",
+  "observed_windows_reproduction": {
+    "before": "ordinary actual read of .search.lock held across actual search exit causes CLI code 2 and leaves lock",
+    "controlled_interleaving_only": true,
+    "green": {
+      "failures": 0,
+      "groups": 6,
+      "seconds": 10.81
+    },
+    "platform": "win32",
+    "python": "3.13.12",
+    "red": {
+      "failures": 4,
+      "groups": 6,
+      "seconds": 10.757
+    },
+    "uncontrolled_isolated_run": "passed"
+  },
+  "preservation": {
+    "all_other_frozen_inputs_matched": true,
+    "exact_sources_unchanged": 35,
+    "historical_expected_hashes_matched": true,
+    "historical_files": 287,
+    "intentionally_revised": [
+      "buddha/doctor.py"
+    ],
+    "old_source_count": 36,
+    "other_frozen_inputs_sha256": {
+      "docs/conformance/meas02-native-proof.json": "85ef3e3723db792b78694ee8d12ba22d0e9a91bacc566ac2ff58bc41774164ea",
+      "docs/conformance/meas02-operator-native-proof.json": "4ba9e6f39f14c934aaceb45c62c5f1e74745a5c0f53a438b3ea0b520315a6696",
+      "docs/snapshots/pilot-runtime-2026-10-19.zip": "bd32c4d50339e2f2e1cadf01f5872fa3c1cdf12c196e7676a18d6fe96bd534e0",
+      "runs/first-live-authorization-v2.sqlite3": "52d293f04921af5418a46a0ce33b1ffd296ae3753cbd3aee7da5130f3dd2c06a"
+    }
+  }
+}
