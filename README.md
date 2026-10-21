@@ -65,7 +65,9 @@ The [private panel mapping](docs/POLICY-PANEL.md) derives fixed masks from pinne
 study metadata before answers are inspected; it contains no answer text. Its
 [passive materializer](docs/POLICY-PANEL.md#materialize-original-saved-generation)
 assembles a reviewer packet from anchored original generation, keeping missing
-coverage and provenance private. Account/runtime checks, approved funding and a
+coverage and provenance private. The [study controller](docs/POLICY-EXECUTION.md)
+also preserves reviewed external file hashes across preparation and recovery.
+Account/runtime checks, approved funding and a
 tested handoff remain open before launch. Actual answers and supplemental
 reviews require real saved generation. The live comparison and human scientific
 assessment remain open; preparing a packet does not complete the experiment.
