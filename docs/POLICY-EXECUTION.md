@@ -100,6 +100,11 @@ may leave partial files pinned to the original values, which fail the existing
 execution-identity check. Retain those files as evidence. This interface is not
 the passive configuration/readiness checker or the live operator launcher.
 
+The [offline input-binding delivery](conformance/pol02-publication-bindings-delivery.json)
+records the original regression, full synthetic owner propagation and final
+validation; the [review](conformance/pol02-publication-bindings-review.json)
+retains their exact scope and failure timing.
+
 These are library functions. There is no new operator command or live handoff
 in this execution slice. The separate [actual protocol](POLICY-COMPARISON.md)
 and [intent](conformance/pol02-study-intent.json) now declare membership, the
