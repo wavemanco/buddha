@@ -113,7 +113,14 @@ class SearchEvidenceTests(unittest.TestCase):
 
     def test_only_explicitly_listed_roots_can_be_looked_up_without_filesystem_io(self):
         result = read_search_evidence(self.directory, evidence=self.record())
-        with patch.object(Path, "open", side_effect=AssertionError("lookup cannot perform IO")):
+        with (
+            patch.object(Path, "open", side_effect=AssertionError("lookup cannot perform IO")),
+            patch.object(
+                search_evidence,
+                "_open_binary",
+                side_effect=AssertionError("lookup cannot perform IO"),
+            ),
+        ):
             self.assertIs(result.run(self.directory), result.runs[0])
             with self.assertRaises(ValidationError):
                 result.run(self.root / "unlisted")
@@ -298,15 +305,14 @@ class SearchEvidenceTests(unittest.TestCase):
         record = self.record()
         target = self.directory / "dataset.jsonl"
         original = target.read_bytes()
-        original_open = Path.open
+        original_open = search_evidence._open_binary
 
         class RestoreOnClose:
             def __init__(reader, stream):
                 reader.stream = stream
 
             def __enter__(reader):
-                reader.stream.__enter__()
-                return reader.stream
+                return reader.stream.__enter__()
 
             def __exit__(reader, *arguments):
                 try:
@@ -314,14 +320,16 @@ class SearchEvidenceTests(unittest.TestCase):
                 finally:
                     target.write_bytes(original)
 
-        def open_file(path, *args, **kwargs):
+        def open_file(path):
             if path == target:
-                with original_open(path, "wb") as output:
-                    output.write(b"transient substituted bytes")
-                return RestoreOnClose(original_open(path, *args, **kwargs))
-            return original_open(path, *args, **kwargs)
+                target.write_bytes(b"transient substituted bytes")
+                return RestoreOnClose(original_open(path))
+            return original_open(path)
 
-        with patch.object(Path, "open", open_file), self.assertRaises(ValidationError):
+        with (
+            patch.object(search_evidence, "_open_binary", open_file),
+            self.assertRaises(ValidationError),
+        ):
             read_search_evidence(self.directory, evidence=record)
         self.assertEqual(target.read_bytes(), original)
 
@@ -380,6 +388,11 @@ class SearchEvidenceTests(unittest.TestCase):
             with (
                 patch("buddha.search_evidence.sqlite3.connect", side_effect=connect),
                 patch.object(Path, "open", side_effect=AssertionError("financial decode IO")),
+                patch.object(
+                    search_evidence,
+                    "_open_binary",
+                    side_effect=AssertionError("financial decode IO"),
+                ),
             ):
                 record = read_authority(snapshot.authorization)
             self.assertEqual(record["totals"]["spent_microusd"], 1710)
@@ -511,7 +524,14 @@ class SearchEvidenceTests(unittest.TestCase):
             (r"Z:\retired\run", r"Z:\retired\run\operations.sqlite3"),
         )
         raw = path.read_bytes()
-        with patch.object(Path, "open", side_effect=AssertionError("recorded owner path IO")):
+        with (
+            patch.object(Path, "open", side_effect=AssertionError("recorded owner path IO")),
+            patch.object(
+                search_evidence,
+                "_open_binary",
+                side_effect=AssertionError("recorded owner path IO"),
+            ),
+        ):
             result = read_authority(raw)
         self.assertEqual(result["auth_runs"][0]["directory"], r"Z:\retired\run")
         self.assertEqual(path.read_bytes(), raw)

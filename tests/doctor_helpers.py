@@ -19,6 +19,7 @@ from search_verify_helpers import (
     setup_fixture,
 )
 
+from buddha import search_evidence
 from buddha.authorization import Authorization
 from buddha.baseline import BaselineError
 from buddha.doctor import observe
@@ -120,6 +121,15 @@ def protected(directory, authorization=None, *, cli=False):
             return opened(path, *args, **kwargs)
 
         stack.enter_context(patch.object(Path, "open", selected))
+        observational_open = search_evidence._open_binary
+
+        def selected_observation(path):
+            resolved = path.resolve()
+            if not resolved.is_relative_to(directory) and resolved != authority:
+                forbidden()
+            return observational_open(path)
+
+        stack.enter_context(patch.object(search_evidence, "_open_binary", selected_observation))
         yield
 
 

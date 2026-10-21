@@ -103,6 +103,32 @@ queried only from captured bytes in memory. Before/after comparisons detect
 observed change; they do not prove an atomic view under arbitrary concurrent writes.
 Byte ceilings are not universal memory or execution-time guarantees.
 
+### Windows file sharing
+
+The shared live-observation reader opens Windows files for reading while allowing
+other processes to read, write, rename or delete them. This prevents a PID-lock
+read from blocking the writer's normal cleanup. It grants the observer no write
+or delete access and never deletes a file on close. The empty legacy search lock
+continues to use metadata only; native PID locks still use their strict ASCII
+codec. A disappearing or changing file remains an unavailable or changing
+observation, not proof of a healthy writer or permission to resume.
+
+Regular-file, link, opened-file identity, byte-limit and before/after checks still
+apply. The Windows handle is noninheritable and becomes a descriptor owned by the
+reader; its stream wrapper does not independently own that descriptor. One
+cleanup path therefore closes it after success, failure or interruption. Other
+platforms retain the existing ordinary binary read.
+
+This covers the shared reader used by doctor, watch, failure summaries and search
+verification. The separate sealed historical readers and executable/source
+inventory readers retain their existing contracts; this is not a claim about
+every file open in the application or an atomic filesystem snapshot. It changes
+no writer, retry, financial transition, PID rule or benchmark behavior.
+
+The implementation follows Microsoft's [file sharing flags](https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-createfilew)
+and [handle ownership transfer](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/open-osfhandle?view=msvc-170),
+using Python's [descriptor adapter](https://docs.python.org/3.13/library/msvcrt.html#msvcrt.open_osfhandle).
+
 The PID query uses read-only operating-system facilities: Python's
 [Linux PID descriptor](https://docs.python.org/3/library/os.html#os.pidfd_open), or
 Windows [process handles](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-openprocess)
