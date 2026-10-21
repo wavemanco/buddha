@@ -326,8 +326,9 @@ general improvement; comparing scores from different prompts, resources or
 judging settings would be misleading.
 
 The larger goal also includes changing actual task-agent and improvement code.
-That source-evolution path is still being implemented behind isolation and
-host-owned model access. Improving the task agent and improving its ability to
+The [restricted candidate runner](SOURCE-CANDIDATES.md) now supplies isolated
+task execution and host-owned model access. Inherited source changes and the
+improvement procedure are still being implemented. Improving the task agent and improving its ability to
 produce better descendants are separate experiments. Neither follows merely
 from a higher score on one development prompt.
 
