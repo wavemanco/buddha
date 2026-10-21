@@ -4,15 +4,19 @@ Every consumed byte belongs to a caller-listed file. Filesystem observations
 bracket verification; archived programs and recorded authority paths stay data.
 """
 
+import ctypes
 import hashlib
 import os
 import sqlite3
 import stat
-from collections.abc import Mapping
-from contextlib import closing
+import sys
+from collections.abc import Iterator, Mapping
+from contextlib import closing, contextmanager
+from ctypes import wintypes
 from dataclasses import dataclass, field
 from pathlib import Path, PurePosixPath, PureWindowsPath
 from types import MappingProxyType
+from typing import BinaryIO
 
 from buddha.authorization import _totals, _validate
 from buddha.common import ValidationError, _canonical, _hex, _object, _parse, _text
@@ -47,14 +51,70 @@ def _regular(path: Path) -> os.stat_result:
     return information
 
 
+@contextmanager
+def _open_binary(path: Path) -> Iterator[BinaryIO]:
+    """Read without denying a Windows writer's rename or deletion.
+
+    The caller still validates identity, links, byte bounds and before/after
+    observations. Share-delete is not delete-on-close or permission to write.
+    """
+    if sys.platform != "win32":
+        with path.open("rb") as stream:
+            yield stream
+        return
+    import msvcrt
+
+    loader = getattr(ctypes, "WinDLL", None)
+    last_error = getattr(ctypes, "get_last_error", None)
+    if loader is None or last_error is None:
+        raise OSError("Windows shared observational reads are unavailable")
+    kernel = loader("kernel32", use_last_error=True)
+    kernel.CreateFileW.argtypes = [
+        wintypes.LPCWSTR,
+        wintypes.DWORD,
+        wintypes.DWORD,
+        wintypes.LPVOID,
+        wintypes.DWORD,
+        wintypes.DWORD,
+        wintypes.HANDLE,
+    ]
+    kernel.CreateFileW.restype = wintypes.HANDLE
+    kernel.CloseHandle.argtypes = [wintypes.HANDLE]
+    kernel.CloseHandle.restype = wintypes.BOOL
+    # GENERIC_READ, shares READ|WRITE|DELETE, OPEN_EXISTING, OPEN_REPARSE_POINT.
+    invalid = ctypes.c_void_p(-1).value
+    handle = kernel.CreateFileW(str(path), 0x80000000, 7, None, 3, 0x00200000, None)
+    if handle == invalid:
+        error = last_error()
+        raise OSError(0, "Windows observational file open failed", None, error)
+    descriptor = None
+    try:
+        descriptor = msvcrt.open_osfhandle(handle, os.O_RDONLY | os.O_BINARY | os.O_NOINHERIT)
+        # Keep descriptor ownership here even if stream construction fails after
+        # creating its raw wrapper; otherwise cleanup can close a reused fd.
+        with os.fdopen(descriptor, "rb", closefd=False) as stream:
+            yield stream
+    finally:
+        if descriptor is None:
+            if not kernel.CloseHandle(handle):
+                raise OSError("Windows observational handle cleanup failed") from None
+        else:
+            os.close(descriptor)
+
+
 def _read(path: Path, maximum: int) -> bytes:
     before = _regular(path)
     if before.st_size > maximum:
         raise ValidationError("evidence file exceeds its byte ceiling")
     chunks = bytearray()
-    with path.open("rb") as stream:
+    with _open_binary(path) as stream:
         opened = os.fstat(stream.fileno())
-        if (opened.st_dev, opened.st_ino) != (before.st_dev, before.st_ino):
+        if (
+            not stat.S_ISREG(opened.st_mode)
+            or opened.st_nlink != 1
+            or getattr(opened, "st_file_attributes", 0) & 0x400
+            or (opened.st_dev, opened.st_ino) != (before.st_dev, before.st_ino)
+        ):
             raise ValidationError("opened evidence differs from its selected file")
         while block := stream.read(min(1024**2, maximum - len(chunks) + 1)):
             chunks.extend(block)
