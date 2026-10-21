@@ -1,0 +1,303 @@
+{
+  "code_sha256": {
+    "docs/conformance/meas02-materialize.py": "361ec95b56802eb018681113f012d0f4efaec48d587e556bc6df9993aae26c7d",
+    "docs/conformance/meas02-native-audit.py": "13f38bc23ebf528bf789d574f785b2d77de1678ca793f557727193cc87461d1b",
+    "docs/conformance/meas02-native-probe.py": "97c7e0edab43b8e004bf2a9486127ce221c4d802fde0fdcf8accdb57952f47ea",
+    "tests/test_meas02_materialize.py": "daed4f6aa20f9fbfde84fb4ef8b13041209749aec691c117de18aca1a27da2f2",
+    "tests/test_meas02_native_audit.py": "dcb70face780bd69982e5765706f8ac770fef5b597cb6fbc3debcb84453095d7",
+    "tests/test_meas02_native_binding.py": "a3b7f275d13487e76365f3b54bd30acaf9241f3f628d2c5a0dbbc1d4efccf057",
+    "tests/test_meas02_native_source.py": "f662d2c5b42080776d7cd930cd30cad33a88d3e3bcbe76256e208f5ad33241c6"
+  },
+  "concrete_remaining_live_inputs": [
+    "Project processing tier and allowed-tier policy or a reviewed conditional price envelope",
+    "Applicable public/contract rates, response model/tier/header allowlists and credential/account review",
+    "Explicit new shared dollar cap and physical-attempt allowance",
+    "API keys entered locally only after preparation; no key in chat or files"
+  ],
+  "date": "2026-10-20",
+  "evidence_sha256": {
+    "docs/conformance/meas02-native-independent-review.json": "b1b2e81b94cb16499e651490ba10885a5b089882d5f45e3110e106f1027e5aa2",
+    "docs/conformance/meas02-native-proof.json": "85ef3e3723db792b78694ee8d12ba22d0e9a91bacc566ac2ff58bc41774164ea"
+  },
+  "format": "buddha.meas02-native-delivery.v1",
+  "funding": {
+    "engineering_usage": "Native Codex engineering/review model usage is outside the experiment API ledger; exact platform cost and inherited model identities are not established here.",
+    "historical_balance_is_not_permission": true,
+    "live_profile_verified": false,
+    "new_allocation_created": false,
+    "provider_calls": 0
+  },
+  "judge_scope": "Proposed live partition judge is explicit gpt-5.6-luna reference profile used in historical diagnostics, not the bare CLI Opus default. Exact model/settings must be frozen before comparison; this preparation adds no benchmark score.",
+  "limits": [
+    "Native and portable synthetic replies provide no judge-accuracy, equivalence sensitivity, repeatability or order-stability measurement.",
+    "No new quality score, official ranking, independent semantic label, human sample, held-out claim or source evolution.",
+    "Public model prices are conditional research; project/contract settings and credential/account ownership are unverified.",
+    "Existing CPU dependency/license/advisory and trusted evaluator scope remain unchanged."
+  ],
+  "native_assumptions": "Concurrency one does not establish physical request order. Target identity is bound by native context and unique rendering, never receipt ordinal.",
+  "plan": {
+    "remaining_leaf_slices": 10,
+    "revision": 27,
+    "sole_next": "MEAS-02"
+  },
+  "population": {
+    "answer_counts": [
+      2,
+      4,
+      10
+    ],
+    "fresh_repeat_requires_new_owner": true,
+    "occasion_sizes": [
+      22,
+      6,
+      6,
+      6
+    ],
+    "resume_preserves_original_owner": true,
+    "targets": 40
+  },
+  "preservation": {
+    "all_prior_seals_match": true,
+    "package_sources": 36,
+    "pilot_zip_and_V2_unchanged": true,
+    "prior_historical_files": 287,
+    "total_distinct_protected_entries": 327
+  },
+  "research_price_evidence": {
+    "checked_at_UTC": "2026-10-21T00:21:51.593008+00:00",
+    "conditional_public_price_ceilings": {
+      "fast": {
+        "120_attempts_USD": "181.2960",
+        "240_attempts_USD": "362.5920",
+        "40_attempts_USD": "60.4320",
+        "input_token_ceiling": 1050000,
+        "max_input_USD_per_million": "1.00",
+        "max_output_USD_per_million": "3.60",
+        "max_output_tokens": 128000,
+        "per_attempt_USD": "1.5108"
+      },
+      "standard": {
+        "120_attempts_USD": "90.6480",
+        "240_attempts_USD": "181.2960",
+        "40_attempts_USD": "30.2160",
+        "input_token_ceiling": 1050000,
+        "max_input_USD_per_million": "0.50",
+        "max_output_USD_per_million": "1.80",
+        "max_output_tokens": 128000,
+        "per_attempt_USD": "0.7554"
+      }
+    },
+    "format": "buddha.meas02-openai-profile-research.v1",
+    "illustrative_usage_scenarios": [
+      {
+        "120_attempts_USD": "0.1320",
+        "40_attempts_USD": "0.0440",
+        "assumed_each_input_tokens": 2000,
+        "assumed_each_total_completion_tokens_including_reasoning": 500,
+        "short_context_standard_all_input_cachewrite_upper_rate": true,
+        "status": "illustration_not_measured_forecast_or_ceiling"
+      },
+      {
+        "120_attempts_USD": "0.5280",
+        "40_attempts_USD": "0.1760",
+        "assumed_each_input_tokens": 8000,
+        "assumed_each_total_completion_tokens_including_reasoning": 2000,
+        "short_context_standard_all_input_cachewrite_upper_rate": true,
+        "status": "illustration_not_measured_forecast_or_ceiling"
+      },
+      {
+        "120_attempts_USD": "1.680",
+        "40_attempts_USD": "0.560",
+        "assumed_each_input_tokens": 8000,
+        "assumed_each_total_completion_tokens_including_reasoning": 10000,
+        "short_context_standard_all_input_cachewrite_upper_rate": true,
+        "status": "illustration_not_measured_forecast_or_ceiling"
+      }
+    ],
+    "model": "gpt-5.6-luna",
+    "scope": [
+      "Native ChatCompletions omits tier and output cap; no wire field is injected",
+      "Default30m cachewrites are billed at total1.25x input;12h2.5x applies Responses-only, outside this ChatCompletions request",
+      "Exact Gateway host api.openai.com excludes regional/FedRAMP endpoints; no10percent uplift included in these conditional global-host examples",
+      "Whole context input plus independent full output is intentionally over-conservative because these maxima cannot both coexist in one context",
+      "Current Gateway has no pre-send tokenizer or enforced short-input bound; input ceiling checked after receipt",
+      "Upper-rate ledger amounts can exceed actual provider bill when cache discounts or lower context/tier prices apply",
+      "40targets and120native semantic folds do not bound SDK attempts; use explicit physical cap N and reserve N times per-attempt if guaranteed worst-case completion is desired",
+      "A response-tier allowlist cannot prevent higher-tier billing after dispatch; rejected tier leaves uncertain hold, so operator account review must precede dispatch"
+    ],
+    "sources": {
+      "caching": {
+        "bytes": 55725,
+        "path": "runs/reviews/meas02-openai-caching-20261020.md",
+        "sha256": "715eacd5f0fe6bd7b238b74b770a6eb5b9a5260f464b5d54066b0bf580d3e995",
+        "url": "https://developers.openai.com/api/docs/guides/prompt-caching.md"
+      },
+      "chat": {
+        "status": "verified_web_open_raw_HTML_over2MiB_not_saved_md404",
+        "url": "https://developers.openai.com/api/reference/resources/chat/subresources/completions/methods/create"
+      },
+      "model": {
+        "bytes": 3658,
+        "path": "runs/reviews/meas02-openai-model-20261020.md",
+        "sha256": "bf9fdb1c3b6466c37fb856e5f8e5973ff088164b6c7792d3fb15e0d9927bd781",
+        "url": "https://developers.openai.com/api/docs/models/gpt-5.6-luna.md"
+      },
+      "pricing": {
+        "bytes": 22634,
+        "path": "runs/reviews/meas02-openai-pricing-20261020.md",
+        "sha256": "129d6019819379a6f30edc0811d4631ddb085dcd4b3b1d0012a945cd1af1bfbf",
+        "url": "https://developers.openai.com/api/docs/pricing.md"
+      },
+      "tier_policy": {
+        "bytes": 32170,
+        "path": "runs/reviews/meas02-openai-tier_policy-20261020.md",
+        "sha256": "ca56d0600fdfd00b2c48011233317c3eb7a8e8e5e6aeb958bb2777ea8a042982",
+        "url": "https://developers.openai.com/api/docs/guides/error-codes.md"
+      },
+      "tiers": {
+        "bytes": 8771,
+        "path": "runs/reviews/meas02-openai-tiers-20261020.md",
+        "sha256": "254e31b60552520d7f8567ca3f0de086f3a64f8d53c5be3a04292b55bbd2d720",
+        "url": "https://developers.openai.com/api/docs/guides/fast-mode.md"
+      },
+      "token_counting": {
+        "bytes": 22672,
+        "path": "runs/reviews/meas02-openai-token_counting-20261020.md",
+        "sha256": "a446c08afd6dca0e252e69a3ebf82c117d45b8f60b304dc09a21340e3b6a07f6",
+        "url": "https://developers.openai.com/api/docs/guides/token-counting.md"
+      }
+    },
+    "status": "research_only_no_live_profile_or_allocation",
+    "unverified": [
+      "Actual project processing tier/allowed-tier policy and any Scale/contract applicability",
+      "Credential/account ownership and exact account/project header values",
+      "New shared budget and physical-attempt allowance",
+      "Any paid run; no model or account endpoint called"
+    ]
+  },
+  "scope": "Supplied development controls through unchanged full official partition CLI; no C1 generation or benchmark score claim",
+  "status": "complete_offline_native_preparation_MEAS02_open",
+  "verification": {
+    "actual_full_native_proof": {
+      "actual_provider_calls": 0,
+      "all40_actual_scientific_render_hashes_equal": true,
+      "file": "docs/conformance/meas02-native-proof.json",
+      "financial_controls": [
+        "shared monetary exhaustion",
+        "unknown response usage"
+      ],
+      "keyless_complete_reuse_sends": 0,
+      "mocked_sends": 42,
+      "ordinary_owner_calls": [
+        22,
+        6,
+        6,
+        6
+      ],
+      "other_owner_blocks": "actual native owner blocked before credential access",
+      "same_owner_prefix_receipt_reuse": true,
+      "sha256": "85ef3e3723db792b78694ee8d12ba22d0e9a91bacc566ac2ff58bc41774164ea",
+      "six_fresh_same_body_repeats_new_operations": true,
+      "source_sha256": {
+        "docs/conformance/meas02-materialize.py": "361ec95b56802eb018681113f012d0f4efaec48d587e556bc6df9993aae26c7d",
+        "docs/conformance/meas02-native-audit.py": "13f38bc23ebf528bf789d574f785b2d77de1678ca793f557727193cc87461d1b",
+        "docs/conformance/meas02-native-probe.py": "97c7e0edab43b8e004bf2a9486127ce221c4d802fde0fdcf8accdb57952f47ea",
+        "docs/conformance/nb02c3b-funded-native-evidence.json": "260e3396983b01ba6333d5e5bac7f41e45685eb51f342593c376558fa8d26205",
+        "docs/conformance/nb02c3b-runtime-environment.json": "90e905e2fc381e62adc0553a8e195b7d120886fa597743297e5032dbbfd0eedf",
+        "docs/conformance/nb02c3c3-baseline-probe.py": "d4eb66a332e6d54365cd30be0ea1189492e1742327dc828c5d60855b1fb4c1ea"
+      },
+      "status": "pass",
+      "targets": 40
+    },
+    "bandit": {
+      "core": "pass",
+      "global_ignores_changed": false,
+      "limits": "Existing inline review/no-finding parser warnings retained. Probe uses mandatory assertion-mode guard and scoped B101 exclusion.",
+      "materializer_and_controller": "pass",
+      "probe": "pass; scoped B101 exclusion only; both optimized-mode stop controls pass; reviewed hash-bound first-party compile B102"
+    },
+    "compile": "pass",
+    "core_dependency_audit": "pass; no known vulnerabilities in requirements.txt scope; reviewed native CPU closure limitations unchanged",
+    "failures_retained": [
+      {
+        "cause": "Research responder assumed input order equals native HTTP arrival order; asyncio.as_completed does not guarantee that, even at concurrency one.",
+        "fix": "Probe only: use observed batch plus unique frozen scientific-render hash and retain native logical identity/attempt separately. Official code and shared application unchanged.",
+        "path": "runs/reviews/meas02-native-proof-first.log",
+        "result": "Synthetic unknown hold and attempts preserved; no final pass JSON; no real requests."
+      }
+    ],
+    "final_MEAS02_focus": {
+      "groups": 42,
+      "log": "runs/reviews/meas02-native-all-focused.log",
+      "seconds": 63.67,
+      "status": "pass"
+    },
+    "full_suite": {
+      "log": "runs/reviews/meas02-native-full-suite.log",
+      "log_sha256": "ae26700a089b44d7eb011955c79139280b97a637f352b022afa90c579f97293b",
+      "resource_warnings": "errors; no traceback/ResourceWarning/ignored exception in terminal log",
+      "runtime_seconds": 781.066,
+      "skip_scope": "Windows symlink permissions",
+      "skipped": 5,
+      "status": "pass",
+      "tested_sources_and_scientific_inputs_frozen_during_execution": true,
+      "tests": 967
+    },
+    "hosted_CI": "not yet published",
+    "local_markdown_links": {
+      "anchors_and_remote_targets_checked": false,
+      "files": 41,
+      "status": "pass",
+      "targets": 368
+    },
+    "logs": {
+      "runs/reviews/meas02-materialize-final-green.log": "8e2f6ebf5d21b09817b6a7ea77dd1deb2575e8896c77ae03ec14e86877c9a7f1",
+      "runs/reviews/meas02-materialize-red.log": "3754ac408cae45bae3f2a368ff2dd3446f8d010d76a8d1408a430bb4ff842dda",
+      "runs/reviews/meas02-native-all-focused.log": "7b34c9de28bc783b9b3f8a5969e2e6e56dfac9ce0061e145fa39096d8c9ff3a4",
+      "runs/reviews/meas02-native-audit-red.log": "8e7222d86185c576f449a1bc57c5e1de85be9be8af6f2eed9f9f7cb2eccc860a",
+      "runs/reviews/meas02-native-binding-expanded-red.log": "d3db07c2d09c7cd3d9b467c85bc65b18ff791151161ed479d9930cd854b9b469",
+      "runs/reviews/meas02-native-proof-first.log": "ab176c18ac64d129f7c053a8041edd720a620a0d981230c93fad5a5c39d64418",
+      "runs/reviews/meas02-native-proof-second.log": "2163391a0d810ae6efcbd31bcbf4b2ff31cb764cf8c0c2dbc161b269996e23c6",
+      "runs/reviews/meas02-native-source-red.log": "45ddfb5dcbba7b1924acb8a56024a1f2b6d40e9e0da2319e4fc7ea237d56a12b"
+    },
+    "mypy": {
+      "platforms": [
+        "Linux",
+        "win32"
+      ],
+      "result": "pass",
+      "strict_sources": 37
+    },
+    "optimized_probe_modes": [
+      {
+        "exit_code": 1,
+        "guard": "MEAS02_NATIVE_PROBE_OPTIMIZED_MODE_UNSUPPORTED",
+        "mode": "-O",
+        "output_created": false
+      },
+      {
+        "exit_code": 1,
+        "guard": "MEAS02_NATIVE_PROBE_OPTIMIZED_MODE_UNSUPPORTED",
+        "mode": "-OO",
+        "output_created": false
+      }
+    ],
+    "post_suite_preservation": {
+      "historical_inputs": 287,
+      "package_sources": 36,
+      "pass": true,
+      "pilot_zip": true,
+      "preservation_manifests_sha256": {
+        "docs/conformance/nb01-preservation.json": "29a0f3e272e6bd19b8b94c3a090c38b3403a95ef71a124b847cab3d8e90f46d4",
+        "docs/conformance/rec05c-code-preservation.json": "f6d89868c5a45c3bef2d91f7d5a7d0c7bac81dd7c69f8f7158dcc35a623af331"
+      },
+      "sealed_entries": 327,
+      "v2_authority": true
+    },
+    "ruff": {
+      "files": 102,
+      "format": "pass",
+      "lint": "pass"
+    }
+  }
+}

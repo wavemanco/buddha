@@ -159,3 +159,99 @@ resources, declared coverage, uncertainty and the human sample retained by
 [DESIGN section 11](DESIGN.md#11-failure-modes-and-acceptance-gates).
 This offline replay and model-only development comparison do not establish human
 agreement, generalization, useful-diversity improvement or scientific validity.
+
+## Prepared native study interface
+
+The [materializer](conformance/meas02-materialize.py) turns the exact frozen pack
+and target proposal into four batches: 22 baseline items, six fresh same-order
+repeats, six full sets under seed 0 and six under seed 20261020. Native input
+contains each literal prompt and its original answer order. The official code
+applies the display permutation; the host never pre-shuffles or unshuffles twice.
+Each native row uses its unique target ID, avoiding collisions between the many
+historical cases with the same original task ID. The bound target table and
+development provenance retain original item/answer/source identities separately.
+Review labels and expected classes are not sent to the judge.
+
+The [study controller](conformance/meas02-native-audit.py) uses the existing
+`Gateway`, `NativeSession` and shared `Authorization`. Its two library functions
+are deliberately separate from the old pilot command:
+
+| Interface | Function |
+| --- | --- |
+| `prepare_native_audit(directory, descriptor=..., authorization=..., review=...)` | Validate the frozen controls and source selection, materialize the four native inputs and bind four original request owners to an existing authorization. Reads no keys and makes no provider calls. Partial preparation remains incomplete. |
+| `run_native_audit(directory, transport=...)` | Run or recover those original owners. Retain raw replies, every physical attempt, partial artifacts and unknown-charge holds. Actual spending requires an explicitly paid transport, reviewed profiles, keys and active shared authorization. |
+
+The descriptor's exact fields are `format` (`buddha.meas02-native-audit.v1`),
+absolute `pack`, `proposal` and `provenance` paths, and `native`. The latter
+contains the existing Selection, five component roots, installed environment,
+native hooks, executor settings without mounts, model/profile mapping and local
+monetary/call ceilings. Its Release lists the four official partition commands
+in that occasion order, with concurrency one. Inputs, source bytes, descriptor,
+profile and runtime inventories are frozen before dispatch. No source change to
+the official evaluator or the version-neutral application is required.
+
+The proposed live judge is the explicit Luna partition profile used by the
+reference configurations and historical diagnostics. It is not the bare CLI's
+Opus default; see the [conformance distinction](NOVELTYBENCH-CONFORMANCE.md#nb-c3-request-and-execution-differences-remain-open).
+Freeze the exact model and account profile before paid comparisons. A different
+judge is a different instrument. This preparation reports no benchmark score.
+
+These are **supplied audit controls**, not agent-generated C1 Answers. Short
+two/four-answer cards exercise a CLI that accepts variable response counts; they
+are not ten-answer benchmark scores. The Release's ten-answer TaskSet contract
+does not certify these supplied controls as a generated population. This path
+performs no generation, quality scoring or benchmark aggregation.
+
+The four owners share one authorization: their local ceilings do not multiply
+its dollar or physical-attempt limit. A fresh repeat has an empty native cache
+and a distinct owner; its scientific body matches baseline. Recovery preserves
+the original owner, rebuilding an interrupted attempt from completed raw
+receipts without charging again. Completed batches bind literal artifact/report
+inventories and an authority completion anchor. Missing or changed evidence,
+unanchored completion, outstanding uncertainty or insufficient verified funding
+stops progression. Hard interruption may retain the exclusive running lock;
+the controller never assumes that a process is dead or replaces its owner.
+
+The portable checks can run once in this PowerShell window:
+
+```powershell
+python -W error::ResourceWarning -m unittest discover -s tests -p 'test_meas02_*.py'
+```
+
+This uses temporary fixtures and simulated containers/HTTPS, needs no Docker or
+API keys and spends no provider money. It checks materialization, accounting,
+source binding, output coverage and recovery. Ctrl+C stops it; temporary test
+files may remain after a hard interruption.
+
+The separate full-module proof requires the preserved reference files and the
+previously reviewed local CPU Docker image:
+
+```powershell
+python docs/conformance/meas02-native-probe.py --out runs/reviews/meas02-native-proof-copy.json
+```
+
+This runs once in the same window, uses synthetic credentials and simulated
+provider replies, and spends no provider money. It runs the unchanged official
+CLI and SDK in network-disabled containers, writes new proof artifacts under
+`runs/reviews`, and refuses to replace an existing output file. Choose a new
+filename whose parent exists. It can take several minutes. Ctrl+C stops the
+foreground process; retain interrupted evidence as incomplete. A fresh clone
+lacks the prepared image, private history and reference environment. Simulated
+reply groups test mapping and execution, not semantic accuracy or equivalence
+detection by a real model.
+
+No paid command, new allocation or account-specific price profile is supplied
+by this preparation. The original target proposal and readiness note remain
+historical proposals rather than being rewritten as approvals.
+
+The [actual native proof](conformance/meas02-native-proof.json) passes all 40
+target mappings and request-render hashes, six fresh identical-body repeats,
+interruption/resume and keyless completion reuse, plus shared-money and unknown
+stops. Its 42 physical sends are simulated; real provider calls are zero. The
+first failed proof assumed native requests arrived in input order. It is
+retained; the corrected fixture identifies targets by their bound batch and
+unique scientific-render hash. Concurrency one does not promise row arrival
+order. The official code and controller required no change for this fixture fix.
+The [independent boundary review](conformance/meas02-native-independent-review.json)
+and [delivery record](conformance/meas02-native-delivery.json) retain source pins,
+negative controls, completed checks and their exact limits.

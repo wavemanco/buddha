@@ -1,0 +1,125 @@
+{
+  "date": "2026-10-20",
+  "findings": [
+    {
+      "fix": "Compile and execute exact bounded-read materializer bytes matching the reviewed fixed SHA; recheck that source SHA before invocation binding.",
+      "id": "MEAS2-N1",
+      "problem": "SourceFileLoader.exec_module consumed adjacent valid bytecode although the raw materializer source was the bound input; source could also drift between import and invocation binding.",
+      "red": "Two fresh subprocess/temp-copy regressions: same-size/timestamp POISON bytecode loaded; later materializer source mutation accepted by _sources. No protected or official source edits/execution.",
+      "severity": "blocking_closed",
+      "tests": [
+        "NativeAuditSourceTests.test_adjacent_valid_bytecode_cannot_replace_sealed_materializer_source",
+        "NativeAuditSourceTests.test_consumed_source_cannot_change_before_invocation_binding"
+      ]
+    },
+    {
+      "fix": "Construct original anchor Gateway first, obtain immutable invocation bindings, verify consumed context/descriptor/source bytes before dereferencing each pointer.",
+      "id": "MEAS2-N2",
+      "problem": "Resume followed a changed context pointer or changed descriptor to unlisted harmless files before verifying original owner input bindings.",
+      "red": "Two temporary fixture tests observed unlisted descriptor/pack reads, although no provider send occurred.",
+      "severity": "blocking_closed",
+      "tests": [
+        "NativeAuditBindingTests.test_changed_context_cannot_dereference_an_unlisted_descriptor",
+        "NativeAuditBindingTests.test_changed_descriptor_cannot_read_an_unlisted_pack"
+      ]
+    },
+    {
+      "copied_owner_control": "Already passed after deterministic owner-ID guard; not claimed an observed RED.",
+      "fix": "Validate all four Gateway/authority/ledger bindings before any unfinished batch; deterministic expected owner IDs prevent owner adoption across batch positions.",
+      "id": "MEAS2-N3",
+      "problem": "Later owner ledger validity was deferred until its batch, allowing earlier batches to issue three mocked requests before refusing a corrupt fourth ledger.",
+      "red": "Fourth ledger user_version=999 in an ephemeral fixture; three mocked sends before rejection.",
+      "severity": "blocking_closed",
+      "tests": [
+        "NativeAuditBindingTests.test_corrupt_later_ledger_is_rejected_before_an_earlier_owner_spends",
+        "NativeAuditBindingTests.test_copied_later_owner_is_rejected_before_an_earlier_owner_spends"
+      ]
+    },
+    {
+      "fix": "Require the exact flat ordered completion prefix, require four retained seals before accepting any existing final report, and prevalidate every retained completion owner anchor, inventory and exact source/output coverage before unfinished work.",
+      "id": "MEAS2-N4",
+      "problem": "An orphan completion was ignored; a premature final report or later unanchored completion could be detected only after earlier mocked requests.",
+      "red": "completed/4.json was accepted; premature final report allowed four mocked sends; active/unanchored completed/3.json allowed three.",
+      "severity": "blocking_closed",
+      "tests": [
+        "NativeAuditBindingTests.test_unknown_completion_filename_prevents_any_dispatch",
+        "NativeAuditBindingTests.test_final_report_without_complete_seals_prevents_any_dispatch",
+        "NativeAuditBindingTests.test_later_unanchored_completion_is_rejected_before_first_batch_dispatch"
+      ]
+    }
+  ],
+  "format": "buddha.meas02-native-independent-review.v1",
+  "limits": [
+    "This record is portable boundary verification and read-only source review, not yet the actual full native forty-target proof or a terminal full-suite/CI claim.",
+    "Synthetic responses, including parity groups, measure no judge accuracy, reliability, order stability or human agreement. These controls do not supply new semantic labels.",
+    "The controller is a version-bound research artifact using reviewed supplied controls and caller-provided Selection, authorization and transport, not a new generic agent/baseline platform or a paid command.",
+    "_reference checks the declared revision and three core official source pins. Remaining selected source/environment integrity is caller-reviewed and Gateway/NativeSession-sealed; no repository-origin attestation is inferred from a declared revision string alone.",
+    "The reviewed CPU environment and existing native security/import closure retain their documented bounded trusted-evaluator scope; arbitrary evolved agent or driver safety is not established.",
+    "Unknowns and unanchored interruption states are retained rather than automatically repaired. A hard-kill lock remains a refusal requiring separate observation/review.",
+    "Private runs/reference inputs and approved existing CPU image are prerequisites for the actual synthetic integration proof; no new installation, provider allocation or live profile was enabled.",
+    "Broader EVAL02 human sample, fully identified independent scientific audit, held-out improvement and generalization gates remain open."
+  ],
+  "log_sha256": {
+    "runs/reviews/meas02-native-binding-expanded-red.log": "d3db07c2d09c7cd3d9b467c85bc65b18ff791151161ed479d9930cd854b9b469",
+    "runs/reviews/meas02-native-binding-red.log": "1d5ca8ad6efce6de09202d1a3d0730801a8e21549274da7e272e14c0577d735b",
+    "runs/reviews/meas02-native-final-focused.log": "098cf68227ac8acb587d0b8d99e007ea88ed97664c4e5f487bc967889fdb41ae",
+    "runs/reviews/meas02-native-source-red.log": "45ddfb5dcbba7b1924acb8a56024a1f2b6d40e9e0da2319e4fc7ea237d56a12b"
+  },
+  "portable_verification": {
+    "composition_groups": 9,
+    "execution_attribution": "Parent ran final combined suite; this review checked exact frozen source and terminal log, authored and observed original REDs. No duplicate final suite claim.",
+    "groups": 18,
+    "independently_authored_binding_groups": 7,
+    "independently_authored_source_groups": 2,
+    "result": "pass",
+    "runtime_seconds": 63.371,
+    "subsequent_broader_focus": "42-group broader focused run pending at review publication; no terminal result claimed here."
+  },
+  "preservation": {
+    "actual_provider_calls_by_this_review": 0,
+    "actual_provider_credentials_used": false,
+    "all_prior_seals_match": true,
+    "new_semantic_ratings": 0,
+    "official_source_executed_by_this_review": false,
+    "package_source_files": 36,
+    "prior_runtime_zip_sha256": "bd32c4d50339e2f2e1cadf01f5872fa3c1cdf12c196e7676a18d6fe96bd534e0",
+    "prior_v2_authority_sha256": "52d293f04921af5418a46a0ce33b1ffd296ae3753cbd3aee7da5130f3dd2c06a",
+    "protected_original_files": 287
+  },
+  "read_only_probe_review": {
+    "actual_execution": "First attempted synthetic native proof failed in the mock-server assertion before parsed reply; synthetic unknown hold retained, no final proof JSON and no real provider calls. Corrected fixture/full final-source proof remains pending.",
+    "file": "docs/conformance/meas02-native-probe.py",
+    "loader_note": "Before actual launch, consumed controller engineering source SHA must match the recorded proof source pin; exact-byte compile avoids adjacent pyc.",
+    "reviewed_checks": [
+      "all40 proposal scientific-render hashes matched to actual SDK requests",
+      "2/4/10 literal supplied populations and known shown-index parity folding",
+      "received completed raw receipt interrupted and resumed with original owner",
+      "six fresh-repeat body matches with distinct physical operations",
+      "keyless completed reuse adds no sends or ledger changes",
+      "shared-budget and unknown holds prevent cross-owner dispatch"
+    ],
+    "source_pin_scope": "Probe SHA records the reviewed frozen candidate before its synthetic responder correction; it is not a final passing-proof source claim."
+  },
+  "reviewed_controller_contract": {
+    "batch_identity": "Distinct occasion/target SHA IDs become native row.id. Repeat bodies can be identical while ownership/request identities remain separate. No body hash or HTTP arrival ordinal alone identifies a sample.",
+    "completion": "Actual report and full artifact inventory are sealed and tied to original owner; deactivation reason anchors the seal SHA. A seal with active owner is an interrupted/unanchored refusal, not automatically adopted.",
+    "locking": "Existing exclusive PID-only running.lock pattern refuses concurrent or retained interrupted execution. It does not establish writer ownership, process health or permission to delete a stale lock.",
+    "outputs": "Complete NativeSession status is insufficient by itself: require exact once-only target population, literal task/answer preservation, matching per-target 2/4/10 partition cardinality, nonboolean nonnegative labels and matching distinct count.",
+    "prepare": "Four deterministic original owners under the supplied shared authority. All batch metadata, supplied native bytes, descriptors, actual source files and selected components are frozen before execution; prepare itself does not read keys or send requests.",
+    "recovery": "New attempt directories use original generations only and fresh native scratch/cache. Same owner replays exact retained raw receipts; a fresh occasion uses a separate owner. No owner replacement, unknown hold release or dynamic native-cache adoption.",
+    "shared_finance": "Global atomic authority budget and physical-attempt limits cover all owners. Owner ceilings are not additive funds; pending/unknown liability or an overrun blocks new dispatch. Known completed receipt replay remains reusable."
+  },
+  "scope": "Independent read-only controller/probe review and tests-first adversarial boundary regressions. Supplied model-review controls, not generated C1 Answers, new ratings or a full benchmark result.",
+  "source_sha256": {
+    "docs/conformance/meas01-adjudication-review.json": "31a8ed84887cf85a391b2729e8cb0ea656fa331e82b413d8b954c7c9f0c294a3",
+    "docs/conformance/meas01-study/pack.json": "8a29cded45e11f62eaecba52e5d9c30a88e2733b28cc8138aa2fdb38d025bf15",
+    "docs/conformance/meas02-materialize.py": "361ec95b56802eb018681113f012d0f4efaec48d587e556bc6df9993aae26c7d",
+    "docs/conformance/meas02-native-audit.py": "13f38bc23ebf528bf789d574f785b2d77de1678ca793f557727193cc87461d1b",
+    "docs/conformance/meas02-native-probe.py": "ec0643ecaa93bdc8f315598426d058e18999801325b59d9bf4d4d543fa2183c8",
+    "docs/conformance/meas02-target-proposal.json": "efa7071f37ffa18d5d7909969258b4fb378939cc768537de10a9555599213cce",
+    "tests/test_meas02_native_audit.py": "dcb70face780bd69982e5765706f8ac770fef5b597cb6fbc3debcb84453095d7",
+    "tests/test_meas02_native_binding.py": "a3b7f275d13487e76365f3b54bd30acaf9241f3f628d2c5a0dbbc1d4efccf057",
+    "tests/test_meas02_native_source.py": "f662d2c5b42080776d7cd930cd30cad33a88d3e3bcbe76256e208f5ad33241c6"
+  },
+  "status": "portable_verified_native_proof_pending"
+}
