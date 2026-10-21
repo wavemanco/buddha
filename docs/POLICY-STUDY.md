@@ -153,7 +153,8 @@ The [composed controller](POLICY-EXECUTION.md) now connects those routes under
 an existing study-scoped authority. The separate [actual comparison protocol](POLICY-COMPARISON.md) now declares
 the twelve-task screen, exact child, official instrument, supplemental review
 and analysis; its [intent](conformance/pol02-study-intent.json) reconstructs this
-existing artifact without redistributing the raw corpus. Account/runtime and
-funding checks, a tested handoff, passive analysis and live results remain open.
+existing artifact without redistributing the raw corpus. The [passive reader](POLICY-RESULTS.md)
+checks saved evidence and primary arithmetic. Remaining registered reporting,
+account/runtime and funding checks, a tested handoff and live results stay open.
 The original $50 experiment and $15 judge audit do not authorize this study.
 The structure helper itself supplies no allocation or improvement result.

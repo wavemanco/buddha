@@ -1,0 +1,709 @@
+{
+  "base_commit": "94acc89ddec4c3fcbafca893c8526ed0e4ee451b",
+  "bounded_entry_patch": {
+    "bounded_snapshot_membership": "attempt-relative prefix over existing capture.entries; no second recursive traversal",
+    "filter": "stat.S_ISREG(lstat().st_mode), no followed replacement links",
+    "prior_reader_sha256": "093dc5a1269ff60b470735247740492b368202963288a5a4c46e71ea692992c5",
+    "retained": "exact sealed file-set/report membership, each-file digest checks, final capture.finish byte/tree drift detection",
+    "reverse_only_import_stat_and_captured_entry_set_restores_exact_prior_reader_sha256": "093dc5a1269ff60b470735247740492b368202963288a5a4c46e71ea692992c5"
+  },
+  "documentation_review": {
+    "checkout": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-analysis",
+    "corrected": [
+      {
+        "file": "docs/POLICY-RESULTS.md",
+        "line": 59,
+        "meaning": "Positive exit/cleanup claim applies to completed stages; partial failed reports remain supported."
+      },
+      {
+        "file": "docs/POLICY-RESULTS.md",
+        "line": 74,
+        "meaning": "Native row adapter is separate host-side parsing, not an isolated container execution."
+      }
+    ],
+    "format": "buddha.policy-results-documentation-review.v1",
+    "local_links": [
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 5,
+        "target": "docs/PLAN.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 7,
+        "target": "docs/HOW-IT-WORKS.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 18,
+        "target": "docs/NATIVE-BASELINE.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 19,
+        "target": "docs/RELEASE-UPGRADES.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 21,
+        "target": "docs/RECOVERY-CONTRACT.md#rec-05a-retained-receipts-and-sealed-reads"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 23,
+        "target": "docs/SEARCH-VERIFICATION.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 25,
+        "target": "docs/DOCTOR.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 27,
+        "target": "docs/MEASUREMENT-AUDIT.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 29,
+        "target": "docs/MEASUREMENT-AUDIT-RESULTS.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 31,
+        "target": "docs/MEASUREMENT-JUDGE-AUDIT.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 33,
+        "target": "docs/MEASUREMENT-LIVE-RESULTS.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 39,
+        "target": "docs/MEASUREMENT-JUDGE-AUDIT.md#prepared-native-study-interface"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 42,
+        "target": "docs/MEASUREMENT-JUDGE-AUDIT.md#operator-commands"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 44,
+        "target": "docs/MEASUREMENT-JUDGE-AUDIT.md#offline-target-reports"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 48,
+        "target": "docs/POLICY-CONTRACT.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 51,
+        "target": "docs/POLICY-STUDY.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 53,
+        "target": "docs/NATIVE-EVALUATION.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 55,
+        "target": "docs/POLICY-EXECUTION.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 57,
+        "target": "docs/POLICY-COMPARISON.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 59,
+        "target": "docs/POLICY-COMPARISON-COSTS.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 60,
+        "target": "docs/POLICY-RESULTS.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 65,
+        "target": "docs/SOURCE-RUNTIME.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 65,
+        "target": "docs/SOURCE-CANDIDATES.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 75,
+        "target": "docs/PILOT-REVIEW.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 75,
+        "target": "docs/FIRST-LIVE-RESULTS.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 76,
+        "target": "docs/LINKED-CONTINUATION-RESULTS.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 80,
+        "target": "docs/DOCTOR.md#windows-file-sharing"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 85,
+        "target": "docs/PLAN.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 92,
+        "target": "docs/BENCHMARK-INTEGRATION.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 97,
+        "target": "docs/MEASUREMENT-LIVE-RESULTS.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 100,
+        "target": "docs/API-KEYS.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 105,
+        "target": "docs/FROZEN-SEED.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 106,
+        "target": "docs/CONFINED-NATIVE-EVALUATION.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 107,
+        "target": "docs/NOVELTYBENCH-CONFORMANCE.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 145,
+        "target": "docs/LINKED-CONTINUATION-RESULTS.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 145,
+        "target": "docs/FIRST-LIVE-CONTINUATION.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 154,
+        "target": "docs/API-KEYS.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 169,
+        "target": "docs/SLICE2.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 169,
+        "target": "docs/FIRST-LIVE-CONTINUATION.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 194,
+        "target": "docs/SLICE2-BENCHMARK-NOTES.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 202,
+        "target": "docs/PLAN.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 203,
+        "target": "docs/DESIGN.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 204,
+        "target": "docs/BENCHMARK-INTEGRATION.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 205,
+        "target": "docs/FROZEN-SEED.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 206,
+        "target": "docs/NATIVE-BASELINE.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 207,
+        "target": "docs/DOCTOR.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 208,
+        "target": "docs/MEASUREMENT-AUDIT.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 209,
+        "target": "docs/CONFINED-NATIVE-EVALUATION.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 210,
+        "target": "docs/NOVELTYBENCH.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 211,
+        "target": "docs/RESEARCH.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 212,
+        "target": "docs/SLICE2.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 213,
+        "target": "docs/SLICE3.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 214,
+        "target": "docs/API-KEYS.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 215,
+        "target": "docs/VERIFICATION.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "docs/POLICY-STUDY.md",
+        "line": 9,
+        "target": "PLAN.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "docs/POLICY-STUDY.md",
+        "line": 11,
+        "target": "POLICY-EXECUTION.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "docs/POLICY-STUDY.md",
+        "line": 90,
+        "target": "MEASUREMENT-LIVE-RESULTS.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "docs/POLICY-STUDY.md",
+        "line": 93,
+        "target": "POLICY-EXECUTION.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "docs/POLICY-STUDY.md",
+        "line": 149,
+        "target": "NATIVE-EVALUATION.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "docs/POLICY-STUDY.md",
+        "line": 152,
+        "target": "POLICY-EXECUTION.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "docs/POLICY-STUDY.md",
+        "line": 153,
+        "target": "POLICY-COMPARISON.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "docs/POLICY-STUDY.md",
+        "line": 155,
+        "target": "conformance/pol02-study-intent.json"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "docs/POLICY-STUDY.md",
+        "line": 156,
+        "target": "POLICY-RESULTS.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "docs/POLICY-EXECUTION.md",
+        "line": 3,
+        "target": "POLICY-STUDY.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "docs/POLICY-EXECUTION.md",
+        "line": 4,
+        "target": "NATIVE-BASELINE.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "docs/POLICY-EXECUTION.md",
+        "line": 5,
+        "target": "NATIVE-EVALUATION.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "docs/POLICY-EXECUTION.md",
+        "line": 5,
+        "target": "PLAN.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "docs/POLICY-EXECUTION.md",
+        "line": 81,
+        "target": "POLICY-COMPARISON.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "docs/POLICY-EXECUTION.md",
+        "line": 82,
+        "target": "conformance/pol02-study-intent.json"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "docs/POLICY-EXECUTION.md",
+        "line": 86,
+        "target": "POLICY-RESULTS.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "docs/POLICY-EXECUTION.md",
+        "line": 139,
+        "target": "DOCTOR.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "docs/POLICY-EXECUTION.md",
+        "line": 143,
+        "target": "conformance/pol02-policy-execution-delivery.json"
+      }
+    ],
+    "local_targets_checked": 72,
+    "new_results_links": [
+      {
+        "exists_in_this_checkout": true,
+        "file": "README.md",
+        "line": 60,
+        "target": "docs/POLICY-RESULTS.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "docs/POLICY-STUDY.md",
+        "line": 156,
+        "target": "POLICY-RESULTS.md"
+      },
+      {
+        "exists_in_this_checkout": true,
+        "file": "docs/POLICY-EXECUTION.md",
+        "line": 86,
+        "target": "POLICY-RESULTS.md"
+      }
+    ],
+    "not_verified": [
+      "No tests, full suite, live run, providers, Docker, keys or grants accessed for this documentation check.",
+      "No hosted CI, publication readiness, full scientific report, supplemental judgments or paid-profile capability claim.",
+      "External URLs and Markdown fragment anchor names were not checked; local filesystem target existence was checked.",
+      "No requirement that new guide files exist in the preserved primary checkout; current isolated checkout is the scope."
+    ],
+    "reviewed": [
+      "Publication versus numerical completeness and fixed J0/Rmean/equal-prompt contrasts against actual APIs and frozen comparison protocol.",
+      "The192-task-assessment registered denominator and no replacement of missing primary judgments.",
+      "Primary arithmetic is not represented as the full category/agreement/token/cost/recovery report, supplemental review, funding or live readiness.",
+      "Retired programs remain data; trusted publication hashes do not authenticate pre-outcome publication/capture time; missing repair/fallback flags remain unknown.",
+      "Updated README/POLICY-STUDY/POLICY-EXECUTION cross-references and72 local target paths in the current isolated checkout."
+    ],
+    "sha256": {
+      "README.md": "3f54943794bdceb729f4c532a759160dcfc70fbf4efad751b6e000df2823178f",
+      "buddha/noveltybench_results.py": "01b8eba36d8f2c52d80869af642d243b669f95e2c60a9129481dc091c8e554c3",
+      "buddha/policy_analysis.py": "d486ad9cf10769b76581ff030cb6f8b83ce690706f887f3ad7542b140d7d588c",
+      "buddha/policy_results.py": "4f083a416e278994cd94be9a5345988b8873361c9a6b8b4f45319f913dd8552f",
+      "docs/POLICY-COMPARISON.md": "a3cd4ee3011f0e269e0b2e66570953c847574497d8e8b02a359b247a59423ab0",
+      "docs/POLICY-EXECUTION.md": "98977111aab35704ac20bf5af35b185876b935ea4ec3dac6359825b8cd74fb82",
+      "docs/POLICY-RESULTS.md": "df4b722833c64c9693604efede62eb8f0ee2f7dece586b172ffb19e8e27a3ae7",
+      "docs/POLICY-STUDY.md": "d5dad380041b98dbb9f8fcfd23b7b0b23f03c367717563962697cb81e940ffe2"
+    },
+    "verdict": "No blocking overclaim found within reviewed scope; two clarity corrections applied by parent and verified."
+  },
+  "findings": [
+    {
+      "correction": "Read the declared terms_sha256 at that join; keep full configuration identity bound separately.",
+      "evidence": "Unwrapped actual controller trace, followed by final unknown-partial regression; not a separately isolated pre-fix test pass.",
+      "id": "POL2-R1",
+      "observation": "A genuine five-send unknown partial failed before analysis because the reader compared a full funding-config hash to the descriptor's terms hash."
+    },
+    {
+      "correction": "Match the original relative-path spelling without resealing or normalizing historical records.",
+      "evidence": "One ERROR in122.633s, then the valid complete fixture and final complete-reader checks pass; that earlier run did not reach snapshot negatives.",
+      "id": "POL2-R2",
+      "observation": "The initial complete positive-control test errored on Windows before its negative mutations: stored native report seal-map keys use the producer's native path spelling."
+    },
+    {
+      "correction": "Accept this existing controller stop reason while retaining missing coverage and suppressing headline comparisons.",
+      "evidence": "One ERROR4.490s, then one PASS4.431s on the actual generation-error partial.",
+      "id": "POL2-R3",
+      "observation": "A genuine three-completed-send generation failure had agent_error as its saved stop reason; the reader rejected that truthful partial state."
+    },
+    {
+      "correction": "Extract and reuse the original publisher's snapshot guard for complete child owners and the explicitly selected completed prefix; preserve compatible older shared totals.",
+      "evidence": "The same valid fixture remains accepted; all three malformed snapshots are rejected after the fix with no additional sends. AST review proves the15 original guard statements and inlined publisher behavior unchanged.",
+      "id": "POL2-R4",
+      "observation": "On one completed64-send fixture, the first reader accepted False authorization, changed terms and a boolean event counter in historical snapshots."
+    },
+    {
+      "correction": "Keep official utility unscored, expose quality status/head positions and preserve exact raw artifacts; retain legitimate null non-head scores and explicit refusals.",
+      "evidence": "One regression group produced11 pre-fix subcase errors;13 final adapter tests pass. NaN/Inf coverage was added with the fix, without a separate claimed RED.",
+      "id": "POL2-R5",
+      "observation": "Missing or malformed required head quality values must be numerical incompleteness rather than a fabricated usable utility or an unrelated structural failure."
+    },
+    {
+      "correction": "Enumerate only the already captured bounded entries and test regular files with lstat; retain exact sealed membership/digests and final drift checks.",
+      "evidence": "An actual seven-send fixture forbids a second rglob only during public reading: one FAIL11.331s, then one PASS11.538s. Reversing only this patch reproduces the exact prior reader hash.",
+      "id": "POL2-R6",
+      "observation": "Source review found a second recursive stage walk after the bounded evidence capture."
+    }
+  ],
+  "format": "buddha.policy-analysis-review.v1",
+  "independent_receipts_local_sha256": {
+    "pol02-noveltybench-projection-focused-delivery-gateway.json": "3416d7d40b331560b331d8fde0e5e9562a74195548201da736038f0957c45216",
+    "pol02-noveltybench-projection-heads-addendum-gateway.json": "fd1e1c25c779098f228367b11fecd1135b45d67c31e036da13288ba4334826b6",
+    "pol02-policy-analysis-focused-delivery-gateway.json": "db7ac3c70b05657ba327acac2c2b78616ac6ac1032a8f9a656d42bf5254fcb12",
+    "pol02-policy-results-bounded-entry-closing-review-gateway.json": "cd889c73f83825eac1e5636fe0ba868917b196f5dba352f04f1c543a903a3d23",
+    "pol02-policy-results-extraction-independent-review-gateway.json": "3551827059cbeccbe77b19db5171bfb84e6e8a74ee54498b915c838f59a98b55",
+    "pol02-policy-results-independent-source-review-closure-gateway.json": "8954d2e0f3e3d4f2935784372ee17f435da555a8c95816cc40978d8d9a725fda",
+    "pol02-policy-results-independent-source-review-gateway.json": "34fa96ee2bd551abd1598c2d5f0f10543f8a8077adf50de56de6a815cc51482c",
+    "pol02-study-results-docs-review-d.json": "a68fcdf129945d19269ddff4df4988e3f0e94b43a1b42337cca62026907c4494",
+    "pol02-study-results-independent-final-d.json": "2ed367da5a1164dae08e62b3fb9b4aec77cd1d709860d58f53b79c1e5d61768c",
+    "pol02-study-results-preservation-d.json": "f2e3ac5ddf7cc69a849a86efec9a5cf3ac427a33b043caf5525a94686aaa7266"
+  },
+  "limits": [
+    "The seven-method cohort predates the final bounded-stage enumeration change; only the eighth targeted case was rerun on final reader. These are not a single eight-method passing cohort.",
+    "Parent-owned final full repository suite and hosted CI are separate and not claimed passed here.",
+    "Synthetic worker/HTTPS fixtures only; no actual Docker/provider/new judgments or grant allocation.",
+    "Known native1.1 saved-row projection and descriptive arithmetic are not semantic accuracy, full registered reporting, supplemental review or live readiness.",
+    "Caller-trusted publication pins and compatible financial snapshots do not authenticate pre-outcome publication or capture time.",
+    "Missing native repair/fallback metadata remains unknown; owner request models do not establish per-row attribution.",
+    "This committed package separately records the final whole-repository test at final source pins; it does not retroactively turn the earlier seven-method cohort into a final-source eight-method cohort.",
+    "No actual native container or provider execution is claimed for this slice's mocked worker/HTTPS fixtures."
+  ],
+  "loader_reds": "All three new modules had missing-module loader errors before implementation; these are not executed behavioral failures.",
+  "preservation": {
+    "all_existing_python_changed": [
+      "buddha/native_evaluation.py",
+      "buddha/native_pipeline.py"
+    ],
+    "all_existing_python_programs": 158,
+    "base_commit": "94acc89ddec4c3fcbafca893c8526ed0e4ee451b",
+    "existing_app_agent_changed": [
+      "buddha/native_evaluation.py",
+      "buddha/native_pipeline.py"
+    ],
+    "existing_app_agent_files": 44,
+    "historical_conformance_changed": [],
+    "historical_conformance_files": 158
+  },
+  "projection": {
+    "actual_red": {
+      "errors": 11,
+      "exit_code": 1,
+      "groups": 1,
+      "method": "test_missing_or_invalid_head_scores_are_explicit_incomplete_utility",
+      "scope": "None/bool/out-of-range/float head values, coherent per-class list or empty list, and allNone unmarked scores"
+    },
+    "additional_coverage": "NaN/Inf quality values added with fix; no claimed observed RED for these additional subcases. Their diagnostic numeric slots become None with invalid quality status; caller retains exact raw bytes.",
+    "final": {
+      "resource_warnings": "error",
+      "seconds": 0.082,
+      "skips": 0,
+      "status": "pass",
+      "tests": 13
+    }
+  },
+  "pure_arithmetic": {
+    "functional": {
+      "final": {
+        "resource_warnings": "error",
+        "seconds": 0.199,
+        "skips": 0,
+        "tests": 14
+      },
+      "first": {
+        "seconds": 0.185,
+        "skips": 0,
+        "tests": 13
+      }
+    },
+    "oracle": "Two task-level arm vectors and deliberately different J1 values independently fix all five D/U contrast signs; complete planned coverage is required for a headline.",
+    "tests": [
+      "test_means_are_within_prompt_before_equal_prompt_contrasts_with_all_five_signs",
+      "test_all_judging_occasions_are_retained_and_input_order_does_not_choose_primary",
+      "test_missing_primary_is_never_replaced_by_favorable_second_occasion",
+      "test_missing_nonprimary_still_suppresses_complete_study_headline",
+      "test_missing_population_is_explicit_and_never_zero_filled",
+      "test_nonfinite_boolean_out_of_range_or_missing_metrics_stay_incomplete_json_safe",
+      "test_valid_zero_utility_and_one_distinct_remain_real_observations",
+      "test_duplicate_coordinates_reject_identical_and_conflicting_records",
+      "test_closed_row_schema_and_coordinate_identity_errors_are_typed",
+      "test_missing_status_requires_both_metrics_none",
+      "test_declared_repetitions_and_occasions_are_not_hardcoded",
+      "test_oversized_declared_matrix_is_rejected_without_silent_sampling",
+      "test_result_views_are_independent_no_io_and_no_scientific_claim_is_invented",
+      "test_pure_module_import_does_not_load_finance_native_or_legacy_science"
+    ]
+  },
+  "reader_checks": [
+    "Real composed synthetic Gateway/attached-authority/session records; fixed native metric rows are explicit fixture data.",
+    "Complete32-assessment typed-ID grid and five zero contrasts; all original seals/reports/configs/summaries/anchors checked.",
+    "Every public reader call forbids spending constructors, workers, transport/credential paths, source-SQLite connections, writes and executable-source file reads; fixture file bytes+mtime and send count bracket reads.",
+    "Original copied program files physically retired while retained data remains readable; required data tampering rejected.",
+    "Genuine unknown and agent-error partials retain full planned grid without a headline and retain current liabilities/costs.",
+    "After same-owner recovery, original partial bytes remain identical and coverage stays2/32 while complete publication reads32/32.",
+    "Final stage traversal reuses bounded captured entries; no second unbounded rglob is permitted."
+  ],
+  "reader_development_phases": [
+    {
+      "log": "pol02-study-results-missing-module-red-d.log",
+      "name": "missing-module RED",
+      "result": "import failure, no test methods executed"
+    },
+    {
+      "log": "pol02-study-results-first-functional-d.log",
+      "name": "initial cohort",
+      "receipt": "pol02-study-results-first-functional-d.stopped.json",
+      "result": "deliberately stopped unfinished, not a pass"
+    },
+    {
+      "log": "pol02-study-results-direct-diagnostic-d.log",
+      "name": "direct actual unknown partial diagnostic",
+      "result": "confirmed funding terms-digest mismatch before analysis,5 synthetic sends"
+    },
+    {
+      "log": "pol02-study-results-snapshot-red-d.log",
+      "name": "first full positive control",
+      "result": "ERROR,122.633s, before snapshot negatives; Windows stored seal-map spelling mismatch"
+    },
+    {
+      "green": "pol02-study-results-agent-error-green-d.log",
+      "name": "agent-error partial RED/GREEN",
+      "red": "pol02-study-results-agent-error-red-d.log",
+      "result": "1ERROR4.490s then1PASS4.431s; genuine3-completed-send partial"
+    },
+    {
+      "green": "pol02-study-results-snapshot-cycle-d-2.json",
+      "name": "snapshot RED/GREEN on same complete fixture",
+      "red": "pol02-study-results-snapshot-cycle-d-1.json",
+      "result": "valid completed record accepted; False summary,changed terms,bool event counter accepted before fix and rejected after;64 synthetic sends unchanged; process quit exit0"
+    },
+    {
+      "log": "pol02-study-results-final-functional-d.log",
+      "name": "seven-method source-bound cohort",
+      "pins": {
+        "buddha/native_evaluation.py": "a9b96389659b356ac663e53ffaf4e2765ff247290f4c7c3b98a4259305529a09",
+        "buddha/native_pipeline.py": "6f01a09976bbc2614fb0de5a744479cebbba8b60da6d9e10cd46fe3071b77b97",
+        "buddha/noveltybench_results.py": "01b8eba36d8f2c52d80869af642d243b669f95e2c60a9129481dc091c8e554c3",
+        "buddha/policy_analysis.py": "d486ad9cf10769b76581ff030cb6f8b83ce690706f887f3ad7542b140d7d588c",
+        "buddha/policy_results.py": "093dc5a1269ff60b470735247740492b368202963288a5a4c46e71ea692992c5",
+        "tests/test_policy_results.py": "def3b849a6ae76f2dc103e107b6c4ee08398fae7617b94ab91b9fb8f24e16b21"
+      },
+      "receipt": "pol02-study-results-final-functional-d.exit.json",
+      "result": "PASS7/654.995s/0skips/ResourceWarnings as errors",
+      "source_inputs_unchanged": true
+    },
+    {
+      "green": "pol02-study-results-second-walk-green-d.log",
+      "name": "eighth bounded-second-walk RED/GREEN",
+      "reader_sha256": "4f083a416e278994cd94be9a5345988b8873361c9a6b8b4f45319f913dd8552f",
+      "receipt": "pol02-study-results-second-walk-green-d.exit.json",
+      "red": "pol02-study-results-second-walk-red-d.log",
+      "result": "1FAIL11.331s then1PASS11.538s/0skips/ResourceWarnings as errors"
+    }
+  ],
+  "shared_extraction": {
+    "authority_path_substitutions": 3,
+    "generation_validation_body_identical_after_exact_authority_path_substitution": true,
+    "new_helper_only_prefix": "docstring plus snapshot=_object(snapshot)",
+    "original_generation_entrypoint_exact_path_forwarder": true,
+    "publisher_full_body_identical_after_inlining_extracted_guard": true,
+    "snapshot_guard_statement_body_identical": true,
+    "snapshot_validation_statement_count": 15
+  },
+  "status": "bounded offline reader and primary-arithmetic gate passed",
+  "unfinished_validation": "The first reader cohort was deliberately stopped after a confirmed common funding-identity error. Neither it nor incidental negative-test outcomes are counted as successful validation. There was no stopped final full-repository run in this slice."
+}
