@@ -1,0 +1,265 @@
+{
+  "approval": {
+    "bytes": 4485,
+    "path": "docs/conformance/meas02-live-approval.json",
+    "sha256": "2bdc7d0f5e3b4d6cfa9d551102c1cf14be4658d9d81abe798d84b7da47336bfa"
+  },
+  "base_commit": "a712eec36e615b8cd5e203b389612aac0eb2548a",
+  "checks": {
+    "bandit": "PASS: application/agents; engineering probes skip B101 assertions only",
+    "compile": "PASS",
+    "document_links": "PASS: 150 local targets in four touched guides at capture",
+    "focused": "33 controller/native/preflight + 5 operator partial + 11 existing operator + 12 live handoff groups passed; missing functionality and two pre-key refusal paths failed first.",
+    "format": "PASS",
+    "full_suite": {
+      "resource_warnings": "error",
+      "seconds": 841.735,
+      "skipped": 5,
+      "status": "PASS",
+      "tests": 1025
+    },
+    "hosted_ci": "Separate PR checks; pending at local candidate capture, no hosted-green claim here",
+    "mypy": "PASS: strict default and win32, 37 application/agent sources",
+    "ruff": "PASS: application, tests, agents and changed engineering scripts",
+    "runtime_pip_audit": "PASS: standard-library-only requirements, zero known vulnerabilities; not a new CPU-image advisory claim"
+  },
+  "format": "buddha.meas02-live-handoff-delivery.v1",
+  "independent_engineering_review": {
+    "consumed_sources": {
+      "docs/conformance/meas02-live.py": "c4c325c98ca0433e7ad77a7a86df0defb924a91a38112d54d5597bab527ff2d4",
+      "docs/conformance/meas02-native-audit.py": "ac7cddb5021507712206352cd95fc1264f061e55a3c5fa0b298b8428c5ca23f1",
+      "docs/conformance/meas02-run.py": "ff48850a2281bb4ded265654443730c2d43185fb0fbe45236710ee94e6eb7fb8"
+    },
+    "invalid_complete_output": "Existing adversarial tests require rejection of missing/changed complete rows. This invalid-evidence stop retains native evidence but does not claim a saved aggregate partial result.",
+    "outcome": "No additional consequential defect found in frozen credential, authority, recovery, partial coverage and completion flow.",
+    "reviewer": "Separate native Codex sub-agent gateway_acceptance; same-model independence is not claimed"
+  },
+  "limits": [
+    "No paid API call, new semantic rating, utility rescore or scientific improvement result.",
+    "Hard process kill, failed observation writes or invalid source/output evidence can prevent a final aggregate observation; never claim completion or saved partial in that case.",
+    "Synthetic proof transport does not authenticate real accounts, demonstrate judge accuracy or reconcile provider invoices.",
+    "The original $50 experiment stays inactive with its unknown hold unchanged; the new $15 allowance is separate.",
+    "MEAS-02 remains next; ten remaining roadmap leaves, source evolution and human scientific validation remain open."
+  ],
+  "live_handoff": {
+    "account_facts": "User-confirmed Standard/default public PAYG; project-scoped key condition is a local manual assertion, not provider API attestation.",
+    "authorization": {
+      "authorization_id": "meas02-live-20261020-15usd-120attempts",
+      "available_microusd": 15000000,
+      "budget_microusd": 15000000,
+      "committed_microusd": 0,
+      "event_count": 1,
+      "max_calls": 120,
+      "operation_count": 0,
+      "remaining_calls": 120,
+      "reserved_microusd": 0,
+      "runs": [],
+      "scope": "MEAS-02 only: 40 frozen v1.1 supplied-control partition targets, gpt-5.6-luna, public Standard/default; USD15 shared/120 physical attempt records, partial result allowed with durable status/reason; no generation, quality, search, extra targets or top-up. User approval SHA256 2bdc7d0f5e3b4d6cfa9d551102c1cf14be4658d9d81abe798d84b7da47336bfa",
+      "spent_microusd": 0,
+      "terms_sha256": "4327fdab9c5d7ef8ddde7ea64321fa553d4ac3c6e857debe88d95dfe8350f89e"
+    },
+    "authorization_sha256": "bd369ce7e5d79a19e27142bdb3420cdf610446d7ccf778c7819d75ee69fe8019",
+    "bytes": 7208,
+    "descriptor_sha256": "4461d0edd17e2ceab019b323f62305110293ecd5ac8b6be65b77d437a49b5acf",
+    "keys_read": false,
+    "owners_prepared": false,
+    "path": "runs/meas02-live-20261020/handoff.json",
+    "provider_calls": 0,
+    "sha256": "2be0e3e19471db19eb928d120a0c9238d7587e673ed6d2f45cb16c61bab43d70",
+    "source_count": 45
+  },
+  "local_log_evidence": [
+    {
+      "bytes": 8562,
+      "path": "runs/reviews/meas02-partial-red.log",
+      "sha256": "d2db1d60e29336da374e40234624bf208fa8cfe59e9a5db665734cf3ce6481bd"
+    },
+    {
+      "bytes": 6294,
+      "path": "runs/reviews/meas02-partial-final-focused.log",
+      "sha256": "3d5c1cac58450f665fb9e10c031ecfa8e80ae6cc548c5639d44804287b2fbd6e"
+    },
+    {
+      "bytes": 1415,
+      "path": "runs/reviews/meas02-partial-operator-five-red.log",
+      "sha256": "2e8eb213c0ec8797a03110c4802bf40bb0335dad986ca77a9f675fa360e03746"
+    },
+    {
+      "bytes": 108,
+      "path": "runs/reviews/meas02-partial-operator-five-green.log",
+      "sha256": "65b21a755ad7251eb49220c0ec648e2120d7c37117e0cd5edaf4cfe4adc5b7b2"
+    },
+    {
+      "bytes": 115,
+      "path": "runs/reviews/meas02-partial-operator-legacy11.log",
+      "sha256": "544d408ed2035971890206d3e1e75457c1b5a078c701c852ee3c8d774a177275"
+    },
+    {
+      "bytes": 1487,
+      "path": "runs/reviews/meas02-live-red.log",
+      "sha256": "d6242fc5ac4cbe29be9d21c737c2dce50e92e583f2ffb37533d0f910c614014c"
+    },
+    {
+      "bytes": 2168,
+      "path": "runs/reviews/meas02-live-prekey-refusal-red.log",
+      "sha256": "a33a683b31c3f240a5ac1582bee0eebb31c9fc6afd471897ab9206cb05c54653"
+    },
+    {
+      "bytes": 2347,
+      "path": "runs/reviews/meas02-live-12-green.log",
+      "sha256": "f5b0713323733ff18aa6530327bd89d7f056f6b4bfe3ec3cd28282dfe47f3e3b"
+    },
+    {
+      "bytes": 32116,
+      "path": "runs/reviews/meas02-partial-native-proof-final.log",
+      "sha256": "8e0294207b1b20a1006e780fb07461a7fac680bb007178916523220b77d9ef06"
+    },
+    {
+      "bytes": 170,
+      "path": "runs/reviews/meas02-live-launch-native-proof-v2.log",
+      "sha256": "58f666ab3052998392d0f9eb1025063470b43ef9a64eaccbcb5967e412024fd9"
+    },
+    {
+      "bytes": 2594,
+      "path": "runs/reviews/meas02-live-handoff-full-suite.log",
+      "sha256": "88a845c6970acb4d8e284f2151add7605a6cd5580135037737fa3004e9b2fd5a"
+    },
+    {
+      "bytes": 20,
+      "path": "runs/reviews/meas02-live-handoff-lint.log",
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+    },
+    {
+      "bytes": 29,
+      "path": "runs/reviews/meas02-live-handoff-format.log",
+      "sha256": "78a8ef542a70a3fcd4c2bc92f315124863264c4ee03844fffedb1855f8d19ed8"
+    },
+    {
+      "bytes": 45,
+      "path": "runs/reviews/meas02-live-handoff-types.log",
+      "sha256": "706935f02fed95e8e0241ec13fa86be727783ee491ba3e8e4470ceaeed6232d8"
+    },
+    {
+      "bytes": 45,
+      "path": "runs/reviews/meas02-live-handoff-win_types.log",
+      "sha256": "706935f02fed95e8e0241ec13fa86be727783ee491ba3e8e4470ceaeed6232d8"
+    },
+    {
+      "bytes": 3326,
+      "path": "runs/reviews/meas02-live-handoff-security.log",
+      "sha256": "a3dcb79e137efb4807edad298f69db270aa311697ee0f53e5dbf49e5765b1b01"
+    },
+    {
+      "bytes": 1004,
+      "path": "runs/reviews/meas02-live-handoff-script-security.log",
+      "sha256": "c2494fcba0cfd145d15216101bd5cafe6455788eb8cf6a6ddec73e59f30e1c10"
+    },
+    {
+      "bytes": 268,
+      "path": "runs/reviews/meas02-live-handoff-audit.log",
+      "sha256": "e82148c0c30269ca5a2c35420ece6af011a4faf5a375325d750e243ffdb10625"
+    },
+    {
+      "bytes": 0,
+      "path": "runs/reviews/meas02-live-handoff-compile.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 61,
+      "path": "runs/reviews/meas02-live-handoff-links.json",
+      "sha256": "d3905f19b52ad5a9381b4e4d35b3cce966c84713d7f028c9ecc28c208febd0c9"
+    }
+  ],
+  "native_proofs": [
+    {
+      "bytes": 396001,
+      "path": "docs/conformance/meas02-partial-native-proof.json",
+      "sha256": "05559e8a1e9ce9d308f041524772de5564dc48e436f50899387e91c874548d38"
+    },
+    {
+      "bytes": 32461,
+      "path": "docs/conformance/meas02-live-launch-native-proof-v2.json",
+      "sha256": "40676e32a12c64484d92ab7fcde7422bd9b2dcc1beaa85684292108be574c908"
+    }
+  ],
+  "partial_contract": {
+    "coverage": "Completed sealed targets, this attempt's validated unsealed rows and missing targets are separate; earlier observations are referenced, not adopted.",
+    "native_unchanged": true,
+    "reason": "Evidence-derived money, attempt_limit, unknown, interrupted, protocol/native/execution failure; retain all proven codes if multiple apply.",
+    "result": "partial",
+    "retention": "Original owners, native files, raw replies, shared authority and unknown holds; no top-up, new grant or replacement owner.",
+    "status": "incomplete",
+    "storage": "study/observations/<unique-id>.json, append-only; complete-only study/report.json remains separate"
+  },
+  "premeasurement_population": {
+    "distinct_pair_appearances": 377,
+    "equivalent_pair_appearances": 8,
+    "limits": "Frozen model-development expectations; dependent/repeated answers and contexts, not human gold or population accuracy.",
+    "resolved_target_comparisons": 23,
+    "targets": 40,
+    "uncertain_target_variants": 17
+  },
+  "preservation": {
+    "current_sources_checked": 36,
+    "explicit_source_revision": {
+      "buddha/doctor.py": {
+        "commit": "a712eec",
+        "current_sha256": "afa511a747c4be2951ba53fea5cfe2822077a0f7a6f80a80a3255594d5b5d19b",
+        "old_sha256": "80104522cb402a3a6ae35521bdc29c12a234f1a3249157127fbb4ebb3f6903e5",
+        "scope": "separately reviewed doctor integration; original preservation manifest unchanged"
+      }
+    },
+    "historical_files": 287,
+    "old_source_manifest_unchanged": true,
+    "old_sources_unchanged": 35,
+    "zip_old_authority_old_native_proofs": "Original seals all matched; no liability or historical measurement changed."
+  },
+  "recorded_at_utc": "2026-10-21T02:09:12.821933+00:00",
+  "source_sha256": {
+    "buddha/__init__.py": "0857bd60619c1e1c8538fe768cbe82c781bb4e302abc6cf59130f1b17d052230",
+    "buddha/__main__.py": "749379d618f14efefaef35eddad73720c77ab30f4494d85253fd1a756d969617",
+    "buddha/agent_run.py": "3f7f8ff3cb9965216f19c6564da1e830f0f629a346ec1cc29e2583c119bea88d",
+    "buddha/agent_worker.py": "c6f86105c0a42304687f857209bb17172f2f38fda26699d25e2618f6e01a745f",
+    "buddha/answers.py": "be860546b2692ea4a710d93855f487dd49d9c8e28eb3f2ec757df697cefb8d0b",
+    "buddha/archive.py": "9549deb0f347cf6114ef3f802b9dfef8a94e0db7cbbd3497697987d5e21ba2ee",
+    "buddha/authorization.py": "06d8615f8b301285a951b08bece0570e5b1b89467fc99fa4e994c7e5e5f30c47",
+    "buddha/baseline.py": "c988e823d9890b712a4b50a58a3d808c6630fdcf3e6fb94227ee9e591d04a432",
+    "buddha/benchmark.py": "7ef7e26b2ef3cbf4119118a985334048fd30b68a5629f3e3196fa77e8200c49f",
+    "buddha/channel.py": "c46d236865b15f1918efa23d961ed7163533c9bbef2b0cec7f61d6f8e95d6e5f",
+    "buddha/common.py": "3a0a693a0f4a0f2eed3b858d0b3ac42148871dbca284e56e0e368726309393c0",
+    "buddha/continuation.py": "b0136052472868aee379d7ac78dfd11bcfa40e91aedcd6916d30f9a334003414",
+    "buddha/diagnostics.py": "ca0af1304e3fbe99569f0b027f99269b151e08265785b39ed53c39f820097e24",
+    "buddha/doctor.py": "afa511a747c4be2951ba53fea5cfe2822077a0f7a6f80a80a3255594d5b5d19b",
+    "buddha/evaluation.py": "4cabb1a48689a140fc6f6129ed8d9eae1d047d3e09eae794170c74479413b8d6",
+    "buddha/executor.py": "b5e84f2dbcdc436aee23272e7d96b567cb5b16ead256a34d08bccc70b480d186",
+    "buddha/gateway.py": "e844fcb695b97c76ecb7432ece6b8d96416806554038e202fd6b0f7f3da57a2e",
+    "buddha/gateway_history.py": "a773ae6066e5b8a4f503e4b346b73570ace2ebeb811017f7b656cc211fded57c",
+    "buddha/history.py": "d42e92a7e6c88a2f72090eaaa50de39dc355957e7c61f5b89dd97162d8b0eefa",
+    "buddha/ledger.py": "5c7e56f1e2c5e68046d6380ebacc03110300eae34d348d7dca683a0591d64130",
+    "buddha/native_context.py": "47a488b8d731617bda21380232e5e49801e0c0b4261f69b71c24fb9eae0ba298",
+    "buddha/native_run.py": "60aafd5ef9e355e82faae2dc12397c6b0b2b649c3273c1bda9c0c757e0775a19",
+    "buddha/native_transport.py": "ccd4917132939630231b8b8c69540189cd52f60951fa08d467d90b9571ccb6c0",
+    "buddha/native_worker.py": "8fa4b85ae6e75202de4b345302cb70253b6c0c5b47f004490f8d9a09750ecaa1",
+    "buddha/policy.py": "717f6fdad1e880d83326d6a314e0dfa604be1044f8209f27061380e16cfebb3e",
+    "buddha/process_observation.py": "28ad4b424ae0bec10aa2d3bf145cb62e1b26eb088db5e83fb6900fab6d5495a8",
+    "buddha/progress.py": "47d21dada88347e63c01b05cf5c31db8e2cc157e501b812b58a2650d078393ba",
+    "buddha/provider.py": "17de071c1416afa32f9da32eb627e24264d8a0a848862fdf4853057125f18a02",
+    "buddha/reference.py": "36356c8a25dae3501014513095cb6f838c4ae54b02a129bdffc4a5cb2dfa6f35",
+    "buddha/releases.py": "33361cf5b0923b373ee53dd73597063195c2c0d519baead50d40fb4bcfab44f5",
+    "buddha/run.py": "a972cb8d1a04bef7abad7efdf7f1eec803bb88cd55c30cf64148119a3d7c6dbb",
+    "buddha/search.py": "ac7b3648355b139797773cbe2bb8b67abbc8533eefd987cd7692275692a9a95c",
+    "buddha/search_evidence.py": "7f9c014bb61e2fc06691db9ec5a832fe803966715011d94ea34618b1df753ae3",
+    "buddha/search_verify.py": "41bdc2689d2b64e93765fe4572017a6c4264d5c3c6df49bba2a63e74b9ab6a63",
+    "buddha/splits.py": "419fa286d812b43e3095fbb41a62844b40477f880d94c8d60de069a52c324a2a",
+    "buddha/wire.py": "48f40a71bf10c84dfd1d15f0baef50198cce8a229748355f116ad6a25cab12b4",
+    "docs/conformance/meas01-adjudication-review.json": "31a8ed84887cf85a391b2729e8cb0ea656fa331e82b413d8b954c7c9f0c294a3",
+    "docs/conformance/meas01-study/pack.json": "8a29cded45e11f62eaecba52e5d9c30a88e2733b28cc8138aa2fdb38d025bf15",
+    "docs/conformance/meas02-live-approval.json": "2bdc7d0f5e3b4d6cfa9d551102c1cf14be4658d9d81abe798d84b7da47336bfa",
+    "docs/conformance/meas02-live.py": "c4c325c98ca0433e7ad77a7a86df0defb924a91a38112d54d5597bab527ff2d4",
+    "docs/conformance/meas02-materialize.py": "361ec95b56802eb018681113f012d0f4efaec48d587e556bc6df9993aae26c7d",
+    "docs/conformance/meas02-native-audit.py": "ac7cddb5021507712206352cd95fc1264f061e55a3c5fa0b298b8428c5ca23f1",
+    "docs/conformance/meas02-run.py": "ff48850a2281bb4ded265654443730c2d43185fb0fbe45236710ee94e6eb7fb8",
+    "docs/conformance/meas02-target-proposal.json": "efa7071f37ffa18d5d7909969258b4fb378939cc768537de10a9555599213cce"
+  },
+  "status": "local_validation_passed_live_run_pending_operator_key_entry"
+}

@@ -8,6 +8,7 @@ reviewed Selection, shared authority and transport. There is no paid CLI shortcu
 import hashlib
 import importlib.util
 import sys
+import uuid
 from functools import wraps
 from pathlib import Path
 
@@ -113,7 +114,12 @@ def _sources():
     if file_hash(MATERIALIZER) != MATERIALIZER_SHA256:
         raise NativeAuditError("consumed materializer source changed before invocation binding")
     package = ROOT / "buddha"
-    return [Path(__file__).resolve(), MATERIALIZER, Path(__file__).with_name("meas02-run.py")] + [
+    return [
+        Path(__file__).resolve(),
+        MATERIALIZER,
+        Path(__file__).with_name("meas02-run.py"),
+        Path(__file__).with_name("meas02-live.py"),
+    ] + [
         package / (name + ".py")
         for name in (*RUNNER_FILES, "executor", "native_run", "baseline", "__main__")
     ]
@@ -301,11 +307,8 @@ def prepare_native_audit(directory, *, descriptor, authorization, review):
     return directory
 
 
-def _coverage(attempt, report, batch):
-    if report["status"] != "complete":
-        raise NativeAuditError("an incomplete native command cannot publish study coverage")
-    name = "v1.1/partitions.jsonl"
-    raw = _read(attempt / "artifacts" / name, report["artifacts"][name])
+def _partition_ids(raw, batch, *, complete):
+    """Validate literal native rows; a partial file never establishes batch completion."""
     rows = [_load(line) for line in raw.splitlines()]
     expected = {_load(line)["id"]: _load(line) for line in batch["native_bytes"].splitlines()}
     found = set()
@@ -327,8 +330,18 @@ def _coverage(attempt, report, batch):
         ):
             raise NativeAuditError("native study output changes source bytes or partition coverage")
         found.add(identity)
-    if found != set(expected):
+    if complete and found != set(expected):
         raise NativeAuditError("native study output omits selected targets")
+    return [identity for identity in expected if identity in found]
+
+
+def _coverage(attempt, report, batch):
+    if report["status"] != "complete":
+        raise NativeAuditError("an incomplete native command cannot publish study coverage")
+    name = "v1.1/partitions.jsonl"
+    return _partition_ids(
+        _read(attempt / "artifacts" / name, report["artifacts"][name]), batch, complete=True
+    )
 
 
 @checked
@@ -505,6 +518,200 @@ def _result(reports, seals):
     }
 
 
+def _operations(state):
+    """Reference existing receipts without decoding, importing or changing them."""
+    result = []
+    for index, gateway in enumerate(state["gateways"]):
+        identities = dict.fromkeys(
+            row["operation_id"]
+            for row in gateway.ledger.events()
+            if row["operation_id"] is not None
+        )
+        for identity in identities:
+            operation = gateway.ledger.get(identity)
+            if operation is None:
+                raise NativeAuditError("observed operation is missing from its original ledger")
+            result.append(
+                {
+                    "owner": index,
+                    "operation_id": identity,
+                    "request_sha256": operation.request_sha256,
+                    "status": operation.status,
+                    "reserve_microusd": operation.reserve_microusd,
+                    "actual_microusd": operation.actual_microusd,
+                    "receipt_sha256": (
+                        hashlib.sha256(_json(operation.response)).hexdigest()
+                        if operation.response is not None
+                        else None
+                    ),
+                }
+            )
+    return result
+
+
+def _stop(state, index, report, operations, summary, reason):
+    native = report["worker"]["reason"] if report else None
+    execution = report.get("execution", {}).get("reason") if report else None
+    codes = []
+    if any(row["status"] in {"unknown", "dispatched"} for row in operations):
+        codes.append("unknown")
+    if any(
+        row["actual_microusd"] is not None and row["actual_microusd"] > row["reserve_microusd"]
+        for row in operations
+    ):
+        codes.append("bounds")
+    record = state["records"][index]
+    local = state["gateways"][index].ledger.totals()
+    settings = record["settings"]
+    if summary["remaining_calls"] == 0 or local["operation_count"] >= settings["max_calls"]:
+        codes.append("attempt_limit")
+    mapping = state["definition"]["native"]["profiles"]["openai"]
+    profile_name = next(iter(mapping.values()))
+    profile = record["profiles"]["openai.chat-completions.v1"]["profiles"][profile_name]
+    reserve = _spec(profile["spec"]).reserve_microusd()
+    if (
+        summary["available_microusd"] < reserve
+        or settings["budget_microusd"] - local["committed_microusd"] < reserve
+    ):
+        codes.append("money")
+    if reason == "interrupted" or native == "cancelled":
+        primary = "interrupted"
+    elif native == "unknown" or "unknown" in codes:
+        primary = "unknown"
+    elif native in {"protocol", "native_error"}:
+        primary = native
+    elif execution is not None:
+        primary = execution
+    elif report is not None and native == "complete":
+        primary = "execution"
+    elif native == "authority" or reason == "preflight":
+        primary = codes[0] if len(codes) == 1 else "authority_undetermined"
+    else:
+        primary = reason
+    return {
+        "reason": primary,
+        "codes": list(dict.fromkeys([primary, *codes])),
+        "native_reason": native,
+        "execution_reason": execution,
+    }
+
+
+def _partial(directory, state, index, *, attempt=None, report=None, reason="preflight"):
+    """Append diagnostic evidence outside native inventories; never a completion seal."""
+    batch = state["batches"][index]
+    sealed_ids, reports, seals = [], [], {}
+    for number, (completed, path, digest) in sorted(state["completions"].items()):
+        sealed_ids.extend(_coverage(path, completed, state["batches"][number]))
+        reports.append(completed)
+        seals[str(number)] = digest
+    files, partial_ids, partial_status = {}, [], "unavailable"
+    if attempt is not None:
+        files = inventory(attempt)
+        if report is not None:
+            if _read(attempt / "report.json", files["report.json"]) != _json(report) + b"\n":
+                raise NativeAuditError("native partial report changed before observation")
+            if any(
+                files.get("artifacts/" + name) != digest
+                for name, digest in report["artifacts"].items()
+            ):
+                raise NativeAuditError("native partial artifact differs from its report")
+        names = [
+            "artifacts/v1.1/partitions.jsonl",
+            "artifacts/v1.1/partitions.jsonl.partial",
+        ]
+        present = [name for name in names if name in files]
+        if present:
+            try:
+                if len(present) != 1:
+                    raise NativeAuditError("native attempt has ambiguous result files")
+                name = present[0]
+                partial_ids = _partition_ids(
+                    _read(attempt / name, files[name]), batch, complete=False
+                )
+                partial_status = "valid"
+            except (ReleaseError, ValueError, KeyError, TypeError):
+                partial_status = "invalid"
+        for name, digest in files.items():
+            _read(attempt / name, digest)
+        if inventory(attempt) != files:
+            raise NativeAuditError("partial attempt changed while observed")
+        files = {
+            (attempt / name).relative_to(directory).as_posix(): digest
+            for name, digest in files.items()
+        }
+    expected = [target["target_id"] for group in state["batches"] for target in group["targets"]]
+    operations = _operations(state)
+    summary = state["authority"].summary()
+    observed = set(sealed_ids + partial_ids)
+    folder = directory / "observations"
+    prior = {}
+    if folder.exists():
+        _root(folder)
+        prior = {
+            "observations/" + name: digest
+            for name, digest in inventory(folder).items()
+            if len(name) == 37
+            and name.endswith(".json")
+            and all(char in "0123456789abcdef" for char in name[:32])
+        }
+    observation = "observations/" + uuid.uuid4().hex + ".json"
+    result = {
+        "format": "buddha.meas02-native-study-report.v1",
+        "status": "incomplete",
+        "result": "partial",
+        "observation": observation,
+        "input_kind": "supplied audit controls",
+        "target_count": 40,
+        "stopped_batch": index,
+        "stopped_occasion": batch["occasion"],
+        "stop": _stop(state, index, report, operations, summary, reason),
+        "coverage": {
+            "expected_count": 40,
+            "sealed_target_ids": sealed_ids,
+            "partial_target_ids": partial_ids,
+            "missing_target_ids": [identity for identity in expected if identity not in observed],
+            "partial_status": partial_status,
+            "scope": (
+                "sealed batches plus THIS attempt's validated unsealed rows only; "
+                "missing IDs are absent from this observation, not necessarily earlier "
+                "unsealed attempts; API receipts are not target coverage"
+            ),
+        },
+        "batches": reports + ([report] if report else []),
+        "batch_seals": seals,
+        "evidence": {
+            "attempt": attempt.relative_to(directory).as_posix() if attempt else None,
+            "files": files,
+            "operations": operations,
+            "prior_observations": prior,
+            "receipt_hash_scope": (
+                "canonical response record retained in each original owner ledger"
+            ),
+        },
+        "authorization": summary,
+        "claim": CLAIM,
+    }
+    if not folder.exists():
+        folder.mkdir()
+    _root(folder)
+    _write(directory / observation, _json(result))
+    return result
+
+
+@checked
+def record_stopped_audit(directory, *, reason="preflight"):
+    """Record an actual run refusal after exact original-state validation; no key/call."""
+    if not isinstance(directory, Path) or reason not in {"preflight", "interrupted", "protocol"}:
+        raise NativeAuditError("invalid stopped-study observation")
+    directory = directory.absolute()
+    with _exclusive(directory):
+        state = _state(directory, RawHTTPTransport(allow_paid=False))
+        remaining = [index for index in range(4) if index not in state["completions"]]
+        if not remaining:
+            raise NativeAuditError("a complete study cannot be recorded as partial")
+        return _partial(directory, state, remaining[0], reason=reason)
+
+
 def _run(directory, transport):
     state = _state(directory, transport)
     descriptors, batches = state["descriptors"], state["batches"]
@@ -524,16 +731,21 @@ def _run(directory, transport):
             while (directory / "attempts" / f"{index}-{ordinal}").exists():
                 ordinal += 1
             attempt = directory / "attempts" / f"{index}-{ordinal}"
-            report = NativeSession(gateway, descriptor=recipe, output=attempt).run()
+            try:
+                report = NativeSession(gateway, descriptor=recipe, output=attempt).run()
+            except KeyboardInterrupt:
+                _partial(
+                    directory,
+                    _state(directory, transport),
+                    index,
+                    attempt=attempt if attempt.exists() else None,
+                    reason="interrupted",
+                )
+                raise
             if report["status"] != "complete":
-                return {
-                    "format": "buddha.meas02-native-study-report.v1",
-                    "status": "incomplete",
-                    "stopped_batch": index,
-                    "batches": reports + [report],
-                    "authorization": authority.summary(),
-                    "claim": CLAIM,
-                }
+                return _partial(
+                    directory, _state(directory, transport), index, attempt=attempt, report=report
+                )
             _coverage(attempt, report, batch)
             files = inventory(attempt)
             if _read(attempt / "report.json", files["report.json"]) != _json(report) + b"\n":

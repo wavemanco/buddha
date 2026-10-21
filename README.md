@@ -6,7 +6,8 @@ Build agents that improve their own procedures for producing useful, meaningfull
 
 ## Current state
 
-The implementation checkpoint is **MEAS-01**. The project has auditable API
+The completed measurement checkpoint is **MEAS-01**; the next gate is the
+**MEAS-02 official-judge audit**. The project has auditable API
 accounting, linked recovery, bounded policy search, replaceable release selection,
 and isolated fixed-seed generation. The unchanged official LLM partition, score
 and summary commands now compose with generated C1 answers in a complete
@@ -57,11 +58,12 @@ agent; [the modularity contract](docs/BENCHMARK-INTEGRATION.md) states the exact
 capability limits and the bounded upgrade/retirement evidence.
 
 The prepared study launcher requires an explicit live flag, a reviewed account
-profile and an existing active allocation before unfinished work can run. No new
-allocation has been created or approved. The original $50 authorization belongs
-only to the historical experiment; its completed allocations are inactive and
-its unknown-request hold remains recorded. Establish a concrete new allocation
-before another paid experiment. [API key guidance](docs/API-KEYS.md) explains process-only
+profile and an existing active allocation before unfinished work can run. The
+user has now approved a separate **$15 / 120-attempt judge audit**, allowing a
+partial result with its reason recorded. Its allocation has zero calls and is
+ready for local key binding after 1,025 local tests and confined native proofs. The original $50 experiment
+remains closed, with its unknown-request hold preserved. See the
+[approved audit handoff](docs/MEASUREMENT-JUDGE-AUDIT.md#approved-15-live-audit). [API key guidance](docs/API-KEYS.md) explains process-only
 key entry; never paste keys into chat or commit them.
 
 Slice-specific commits and PRs are maintained in

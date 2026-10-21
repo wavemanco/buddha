@@ -23,10 +23,10 @@ from buddha.authorization import Authorization  # noqa: E402
 from buddha.baseline import _read  # noqa: E402
 from buddha.gateway import RawHTTPTransport  # noqa: E402
 from buddha.provider import ModelSpec  # noqa: E402
-from buddha.releases import _load  # noqa: E402
+from buddha.releases import _load, _path  # noqa: E402
 
 CONTROLLER = Path(__file__).with_name("meas02-native-audit.py")
-CONTROLLER_SHA256 = "3c3e7e791c68414c97ebbac4c985661e818ebfab7bf97a8a1180ac2714a4df15"
+CONTROLLER_SHA256 = "ac7cddb5021507712206352cd95fc1264f061e55a3c5fa0b298b8428c5ca23f1"
 
 
 class OperatorError(ValueError):
@@ -141,7 +141,14 @@ def execute(directory, *, live=False, prompt_keys=False, transport=None, heartbe
         raise OperatorError("invalid operator execution options")
     controller = _controller()
     directory = directory.absolute()
-    checked = controller.check_native_audit(directory)
+    try:
+        checked = controller.check_native_audit(directory)
+    except Exception as error:
+        if not live or not isinstance(error, getattr(controller, "NativeAuditError", ())):
+            raise
+        # A real run refusal is an observation, never an altered completion or
+        # authorization. The controller must revalidate original state to save it.
+        return _finish(controller.record_stopped_audit(directory, reason="preflight"))
     if checked["status"] == "complete":
         _notice("Rechecking stored completion; no keys or provider calls are needed.")
         result = controller.run_native_audit(
@@ -165,12 +172,53 @@ def execute(directory, *, live=False, prompt_keys=False, transport=None, heartbe
             _notice("Starting frozen study. Provider calls and native startup can take time.")
             with _heartbeat(Path(checked["authorization_path"]), heartbeat_seconds):
                 result = controller.run_native_audit(directory, transport=transport)
+    return _finish(result)
+
+
+def public_result(result):
+    """Safe CLI fields; partial output must name its durable controller observation."""
     if not isinstance(result, dict) or result.get("status") not in {"complete", "incomplete"}:
         raise OperatorError("study returned no supported completion state; saved evidence retained")
+    record = {"status": result["status"]}
+    if result["status"] == "incomplete":
+        stop = result.get("stop")
+        if (
+            result.get("result") != "partial"
+            or not isinstance(stop, dict)
+            or not isinstance(stop.get("reason"), str)
+            or not stop["reason"]
+            or not isinstance(stop.get("codes"), list)
+            or not stop["codes"]
+            or any(
+                not isinstance(code, str)
+                or not code
+                or len(code) > 64
+                or any(char not in "abcdefghijklmnopqrstuvwxyz_" for char in code)
+                for code in [stop["reason"], *stop["codes"]]
+            )
+            or not isinstance(result.get("observation"), str)
+            or not _path(result["observation"]).startswith("observations/")
+        ):
+            raise OperatorError("study returned no supported durable partial observation")
+        record |= {
+            "result": "partial",
+            "reason": stop["reason"],
+            "reason_codes": list(stop["codes"]),
+            "observation": result["observation"],
+        }
+    return record
+
+
+def _finish(result):
+    record = public_result(result)
     _notice(
         "Run complete (four saved, authority-anchored batches)."
-        if result["status"] == "complete"
-        else "Run incomplete; original owners, replies and outstanding holds are retained."
+        if record["status"] == "complete"
+        else "Run partial (incomplete); reason "
+        + record["reason"]
+        + "; saved "
+        + record["observation"]
+        + ". Original owners, replies and holds retained."
     )
     return result
 
@@ -198,7 +246,7 @@ def main(argv=None):
         args = parser.parse_args(argv)
         if args.command == "run":
             result = execute(args.run, live=args.live, prompt_keys=args.prompt_keys)
-            record = {"status": result["status"]}
+            record = public_result(result)
             code = 0 if result["status"] == "complete" else 3
         else:
             controller = _controller()
