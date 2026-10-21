@@ -804,6 +804,124 @@ class _Reader:
             raise PolicyResultsError("native command/configuration lineage differs")
 
 
+def inspect_prepared_study(
+    directory: Path,
+    *,
+    authorization: Path,
+    descriptor: Path,
+    expected_inputs: dict[Path, str],
+    review: dict[str, object],
+) -> dict[str, object]:
+    """Passively check current execution custody; never select a past observation.
+
+    Unlike retrospective analysis, future execution also requires the original
+    installed sources/runtime. No key, spending interface or source DB is opened.
+    """
+    from buddha.gateway import execution_identity
+
+    reader = _Reader(directory, authorization)
+    anchor = reader.owner(directory / "cells/0/baseline/owners/0")
+    study, execution = reader.definition(anchor)
+    if reader.descriptor != descriptor or any(
+        reader.controls.get(str(path)) != digest for path, digest in expected_inputs.items()
+    ):
+        raise PolicyResultsError("original launch or descriptor binding differs")
+    stages = _rows(reader.template["stages"])
+    reader.scheduled_owners(study, ["native"] * len(stages))
+    reader.funding(execution, study)
+    inactive = {row["run_id"] for row in _rows(reader.funded["auth_deactivations"])}
+    inactive_pending = any(
+        owner.run_id in inactive
+        and (owner.directory.parent.parent / "completed" / (owner.directory.name + ".json"))
+        .relative_to(directory)
+        .as_posix()
+        not in reader.capture.entries
+        for owner in reader.owners.values()
+    )
+    for owner in reader.owners.values():
+        if not _same(owner.manifest["review"], review):
+            raise PolicyResultsError("original owner review differs")
+        execution_identity(owner.directory, owner.manifest)
+    complete = "report.json" in reader.capture.entries
+    published = _publication(reader, study, None)[1] if complete else None
+    next_owner: Path | None = None
+    unfinished = False
+    for i, cell in enumerate(study.schedule()):
+        base = directory / "cells" / str(i) / "baseline"
+        if base / "owners/0" in reader.owners:
+            reader.cell_definition(i, cell)
+        for j, plan in enumerate(_rows(cell["judge_occasions"])):
+            child = base if j == 0 else directory / "cells" / str(i) / "judgments" / str(j)
+            first = 0 if j == 0 else 1
+            owners = [reader.owners[p] for p in reader.owners if p.parent == child / "owners"]
+            if {owner.directory.name for owner in owners} != {
+                str(k) for k in range(first, first + len(owners))
+            }:
+                raise PolicyResultsError("pending child has noncontiguous owner coverage")
+            if unfinished and any(owner.operations for owner in owners):
+                raise PolicyResultsError("retained work skips an unfinished scheduled predecessor")
+            report_path = child / "report.json"
+            if report_path.relative_to(directory).as_posix() in reader.capture.entries:
+                report = reader.record(report_path)
+                occasion = plan | {
+                    "directory": str(child),
+                    "report_sha256": _sha(reader.raw(report_path)),
+                    "summary": report["summary"],
+                }
+                source_reference = reader.generation_reference(base)
+                if published is not None:
+                    occasion = _rows(published[i]["occasions"])[j]
+                    source_reference = _object(published[i]["source_generation"])
+                _child(reader, study, i, j, cell, occasion, source_reference, [], [], project=False)
+                continue
+            unfinished = True
+            if complete:
+                raise PolicyResultsError("root completion lacks an anchored child publication")
+            missing = False
+            available: dict[str, Path] = {}
+            answers_path = base / "native-answers.jsonl"
+            if (base / "completed/0.json").relative_to(
+                directory
+            ).as_posix() in reader.capture.entries:
+                source = _read_generation(reader.generation_reference(base), authorization)
+                for source_path, digest in source.files.items():
+                    reader.raw(source_path, digest)
+                answers_path = source.answers_path
+                native = child / "native-answers.jsonl"
+                if native.relative_to(directory).as_posix() in reader.capture.entries:
+                    if reader.raw(native) != source.answers.native_bytes():
+                        raise PolicyResultsError("pending occasion changes literal answers")
+                    available[
+                        _path(_object(reader.release.to_record()["artifacts"])["answers"])
+                    ] = native
+            for index in range(first, len(stages) + 1):
+                seal = child / "completed" / (str(index) + ".json")
+                present = seal.relative_to(directory).as_posix() in reader.capture.entries
+                if not present:
+                    missing = True
+                    if next_owner is None:
+                        next_owner = child / "owners" / str(index)
+                    continue
+                if missing:
+                    raise PolicyResultsError("sealed stage skips a missing predecessor")
+                report, attempt = reader.stage(child, index, baseline=j == 0)
+                if index:
+                    reader.native(child, index, report, answers_path, available)
+                    for output in _rows(stages[index - 1]["outputs"]):
+                        name = _path(output["path"])
+                        available[name] = attempt / "artifacts" / name
+    reader.capture.finish()
+    return {
+        "state": "complete" if complete else "partial",
+        "next_owner": None if next_owner is None else str(next_owner),
+        "inactive_pending": inactive_pending,
+        "busy": any(
+            name == "running.lock" or name.endswith("/running.lock")
+            for name in reader.capture.entries
+        ),
+    }
+
+
 def analyze_study(
     directory: Path,
     *,
@@ -855,24 +973,11 @@ def analyze_study(
         ) from None
 
 
-def _analyze(
-    reader: _Reader, study: PolicyStudy, execution: dict[str, object], observation: Path | None
-) -> dict[str, object]:
-    from buddha.noveltybench_results import reporting_configuration
-    from buddha.policy_analysis import describe_observations
-
-    # Read only schedule-derived owner paths, including incomplete original owners.
+def _publication(
+    reader: _Reader, study: PolicyStudy, observation: Path | None
+) -> tuple[dict[str, object], list[dict[str, object]], bool]:
+    """Validate saved root identity/coverage independently of metric projection."""
     schedule = study.schedule()
-    # Enforce the pure analysis ceiling before traversing a potentially large grid.
-    analyze_metrics(study, [])
-    stages = _rows(reader.template["stages"])
-    if len(stages) != 3:
-        raise PolicyResultsError("this scientific projection requires the three-stage schema")
-    reporting = reporting_configuration(reader.release, stages)
-    roles = cast(list[str], reporting["stage_roles"])
-    fallback_model = cast(str | None, reporting["fallback_model"])
-    coordinates, planned_owner_count = reader.scheduled_owners(study, roles)
-    reader.funding(execution, study)
     publication = reader.root / "report.json" if observation is None else observation.absolute()
     if observation is not None:
         relative = publication.relative_to(reader.root).as_posix()
@@ -895,8 +1000,6 @@ def _analyze(
         reader.current,
         {owner.run_id for owner in reader.owners.values()} if complete else set(),
     )
-    assessments: list[dict[str, object]] = []
-    provenance: list[dict[str, object]] = []
     for i, cell in enumerate(cells):
         expected = schedule[i]
         identity = {k: expected[k] for k in ("cell_id", "arm_id", "arm_index", "generation_repeat")}
@@ -905,6 +1008,34 @@ def _analyze(
         occasions = _rows(cell["occasions"])
         if len(occasions) != len(_rows(expected["judge_occasions"])):
             raise PolicyResultsError("completed cell lacks declared judging coverage")
+    return saved, cells, complete
+
+
+def _analyze(
+    reader: _Reader, study: PolicyStudy, execution: dict[str, object], observation: Path | None
+) -> dict[str, object]:
+    from buddha.noveltybench_results import reporting_configuration
+    from buddha.policy_analysis import describe_observations
+
+    # Read only schedule-derived owner paths, including incomplete original owners.
+    schedule = study.schedule()
+    # Enforce the pure analysis ceiling before traversing a potentially large grid.
+    analyze_metrics(study, [])
+    stages = _rows(reader.template["stages"])
+    if len(stages) != 3:
+        raise PolicyResultsError("this scientific projection requires the three-stage schema")
+    reporting = reporting_configuration(reader.release, stages)
+    roles = cast(list[str], reporting["stage_roles"])
+    fallback_model = cast(str | None, reporting["fallback_model"])
+    coordinates, planned_owner_count = reader.scheduled_owners(study, roles)
+    reader.funding(execution, study)
+    saved, cells, complete = _publication(reader, study, observation)
+    publication = reader.root / "report.json" if observation is None else observation.absolute()
+    assessments: list[dict[str, object]] = []
+    provenance: list[dict[str, object]] = []
+    for i, cell in enumerate(cells):
+        expected = schedule[i]
+        occasions = _rows(cell["occasions"])
         for j, occasion in enumerate(occasions):
             _child(
                 reader,
@@ -1066,8 +1197,9 @@ def _child(
     source_reference: object,
     assessments: list[dict[str, object]],
     provenance: list[dict[str, object]],
+    *,
+    project: bool = True,
 ) -> None:
-    from buddha.noveltybench_results import project_rows
 
     base = reader.root / "cells" / str(i) / "baseline"
     source = _read_generation(source_reference, reader.authorization)
@@ -1157,6 +1289,10 @@ def _child(
         report["summary"], summary_reference
     ):
         raise PolicyResultsError("native summary reference differs")
+    if not project:
+        return
+    from buddha.noveltybench_results import project_rows
+
     results = cast(list[str], artifacts["results"])
     if len(results) != 2:
         raise PolicyResultsError("native metric projection requires separate partitions and scores")

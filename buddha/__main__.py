@@ -1,16 +1,13 @@
 """Local CLI; model network access requires the explicit run --live option."""
 
 import argparse
-import getpass
 import hashlib
 import http.client
 import json
-import os
 import re
 import sys
 import tempfile
 import uuid
-import warnings
 from collections.abc import Iterator, Sequence
 from contextlib import contextmanager, suppress
 from dataclasses import asdict
@@ -27,6 +24,10 @@ from buddha.benchmark import (
     load_prompts,
     prompt_manifest,
 )
+from buddha.credentials import KeyInputError as KeyInputError
+from buddha.credentials import getpass as getpass
+from buddha.credentials import key_environment as _shared_key_environment
+from buddha.credentials import os as os
 from buddha.diagnostics import DiagnosticHTTPTransport, failure_summary
 from buddha.evaluation import ValidationError
 from buddha.history import _plain
@@ -34,20 +35,6 @@ from buddha.ledger import Ledger
 from buddha.policy import Policy
 from buddha.provider import Call, ModelSpec, Reply
 from buddha.run import DATASETS, ReplayTransport, RunSettings, load_run, prepare_run, run_baseline
-
-
-class KeyInputError(ValidationError):
-    """A fixed credential-input guard reason, without credential contents."""
-
-    def __init__(self, code: str) -> None:
-        self.code = code
-        super().__init__(
-            {
-                "key_terminal_required": "hidden key entry requires an interactive terminal",
-                "key_input_unavailable": "hidden key entry was unavailable or cancelled",
-                "key_input_invalid": "provider credential is missing or invalid",
-            }[code]
-        )
 
 
 def _notice(message: str) -> None:
@@ -103,38 +90,8 @@ def _key_environment(settings: RunSettings, *, prompt_keys: bool) -> Iterator[No
     Only the trusted host runs in this process. These temporary environment values
     must never be inherited by a future generated-source executor.
     """
-    previous: dict[str, str | None] = {}
-    try:
-        if prompt_keys:
-            names = {
-                "openai": "OPENAI_API_KEY",
-                "anthropic": "ANTHROPIC_API_KEY",
-            }
-            for provider in dict.fromkeys(spec.provider for spec in settings.profiles()):
-                name = names.get(provider)
-                if name is None or os.environ.get(name):
-                    continue
-                if not sys.stdin.isatty() or not sys.stderr.isatty():
-                    raise KeyInputError("key_terminal_required")
-                _notice("Key input is hidden. Paste once, then press Enter; no characters appear.")
-                try:
-                    with warnings.catch_warnings():
-                        warnings.simplefilter("error", getpass.GetPassWarning)
-                        value = getpass.getpass(f"{name} (hidden, this process only): ")
-                except (EOFError, getpass.GetPassWarning):
-                    raise KeyInputError("key_input_unavailable") from None
-                if not value or any(not 33 <= ord(char) <= 126 for char in value):
-                    raise KeyInputError("key_input_invalid")
-                previous[name] = os.environ.get(name)
-                os.environ[name] = value
-                _notice(f"{name} received (hidden; provider access is checked during execution).")
+    with _shared_key_environment(settings, prompt_keys=prompt_keys, notice=_notice):
         yield
-    finally:
-        for name, old_value in previous.items():
-            if old_value is None:
-                os.environ.pop(name, None)
-            else:
-                os.environ[name] = old_value
 
 
 def _fetch(dataset: str, destination: Path) -> None:
