@@ -1,0 +1,320 @@
+{
+  "actual_provider_calls": 0,
+  "before_after_file_sha256_equal": true,
+  "cases": [
+    {
+      "exit_code": 0,
+      "measured": 40,
+      "missing": 0,
+      "name": "complete",
+      "occasions": [
+        {
+          "agreeing_relations": 65,
+          "disagreeing_relations": 50,
+          "measured_targets": 22,
+          "missing_relations": 0,
+          "missing_targets": 0,
+          "occasion": "baseline",
+          "resolved_targets": 17,
+          "target_count": 22,
+          "uncertain_relations": 181,
+          "uncertain_targets": 5
+        },
+        {
+          "agreeing_relations": 50,
+          "disagreeing_relations": 40,
+          "measured_targets": 6,
+          "missing_relations": 0,
+          "missing_targets": 0,
+          "occasion": "same-order-repeat",
+          "resolved_targets": 2,
+          "target_count": 6,
+          "uncertain_relations": 180,
+          "uncertain_targets": 4
+        },
+        {
+          "agreeing_relations": 50,
+          "disagreeing_relations": 40,
+          "measured_targets": 6,
+          "missing_relations": 0,
+          "missing_targets": 0,
+          "occasion": "order-seed-0",
+          "resolved_targets": 2,
+          "target_count": 6,
+          "uncertain_relations": 180,
+          "uncertain_targets": 4
+        },
+        {
+          "agreeing_relations": 50,
+          "disagreeing_relations": 40,
+          "measured_targets": 6,
+          "missing_relations": 0,
+          "missing_targets": 0,
+          "occasion": "order-seed-20261020",
+          "resolved_targets": 2,
+          "target_count": 6,
+          "uncertain_relations": 180,
+          "uncertain_targets": 4
+        }
+      ],
+      "report": "runs/reviews/meas02-results-smoke-08172c3039f0499f9068c18ccd95bc3d/complete.json",
+      "scope": "complete",
+      "sha256": "8c8b8ac56b936735e6c80f5e819aeff81f36102d4bffd2026125b22088fb0270"
+    },
+    {
+      "exit_code": 3,
+      "measured": 0,
+      "missing": 40,
+      "name": "interrupted",
+      "occasions": [
+        {
+          "agreeing_relations": 0,
+          "disagreeing_relations": 0,
+          "measured_targets": 0,
+          "missing_relations": 296,
+          "missing_targets": 22,
+          "occasion": "baseline",
+          "resolved_targets": 17,
+          "target_count": 22,
+          "uncertain_relations": 0,
+          "uncertain_targets": 5
+        },
+        {
+          "agreeing_relations": 0,
+          "disagreeing_relations": 0,
+          "measured_targets": 0,
+          "missing_relations": 270,
+          "missing_targets": 6,
+          "occasion": "same-order-repeat",
+          "resolved_targets": 2,
+          "target_count": 6,
+          "uncertain_relations": 0,
+          "uncertain_targets": 4
+        },
+        {
+          "agreeing_relations": 0,
+          "disagreeing_relations": 0,
+          "measured_targets": 0,
+          "missing_relations": 270,
+          "missing_targets": 6,
+          "occasion": "order-seed-0",
+          "resolved_targets": 2,
+          "target_count": 6,
+          "uncertain_relations": 0,
+          "uncertain_targets": 4
+        },
+        {
+          "agreeing_relations": 0,
+          "disagreeing_relations": 0,
+          "measured_targets": 0,
+          "missing_relations": 270,
+          "missing_targets": 6,
+          "occasion": "order-seed-20261020",
+          "resolved_targets": 2,
+          "target_count": 6,
+          "uncertain_relations": 0,
+          "uncertain_targets": 4
+        }
+      ],
+      "report": "runs/reviews/meas02-results-smoke-08172c3039f0499f9068c18ccd95bc3d/interrupted.json",
+      "scope": "partial",
+      "sha256": "0cf8e9d14d2faa7e97039fd1723f28db58fb8e925a5b506e6c19825d3b8895c0"
+    },
+    {
+      "exit_code": 3,
+      "measured": 1,
+      "missing": 39,
+      "name": "shared-budget",
+      "occasions": [
+        {
+          "agreeing_relations": 1,
+          "disagreeing_relations": 0,
+          "measured_targets": 1,
+          "missing_relations": 295,
+          "missing_targets": 21,
+          "occasion": "baseline",
+          "resolved_targets": 17,
+          "target_count": 22,
+          "uncertain_relations": 0,
+          "uncertain_targets": 5
+        },
+        {
+          "agreeing_relations": 0,
+          "disagreeing_relations": 0,
+          "measured_targets": 0,
+          "missing_relations": 270,
+          "missing_targets": 6,
+          "occasion": "same-order-repeat",
+          "resolved_targets": 2,
+          "target_count": 6,
+          "uncertain_relations": 0,
+          "uncertain_targets": 4
+        },
+        {
+          "agreeing_relations": 0,
+          "disagreeing_relations": 0,
+          "measured_targets": 0,
+          "missing_relations": 270,
+          "missing_targets": 6,
+          "occasion": "order-seed-0",
+          "resolved_targets": 2,
+          "target_count": 6,
+          "uncertain_relations": 0,
+          "uncertain_targets": 4
+        },
+        {
+          "agreeing_relations": 0,
+          "disagreeing_relations": 0,
+          "measured_targets": 0,
+          "missing_relations": 270,
+          "missing_targets": 6,
+          "occasion": "order-seed-20261020",
+          "resolved_targets": 2,
+          "target_count": 6,
+          "uncertain_relations": 0,
+          "uncertain_targets": 4
+        }
+      ],
+      "report": "runs/reviews/meas02-results-smoke-08172c3039f0499f9068c18ccd95bc3d/shared-budget.json",
+      "scope": "partial",
+      "sha256": "e6fb648dbbae38e1f9f98e0ff4fc718798055cb0a415062e2580c8b1ea23c307"
+    },
+    {
+      "exit_code": 3,
+      "measured": 0,
+      "missing": 40,
+      "name": "unknown",
+      "occasions": [
+        {
+          "agreeing_relations": 0,
+          "disagreeing_relations": 0,
+          "measured_targets": 0,
+          "missing_relations": 296,
+          "missing_targets": 22,
+          "occasion": "baseline",
+          "resolved_targets": 17,
+          "target_count": 22,
+          "uncertain_relations": 0,
+          "uncertain_targets": 5
+        },
+        {
+          "agreeing_relations": 0,
+          "disagreeing_relations": 0,
+          "measured_targets": 0,
+          "missing_relations": 270,
+          "missing_targets": 6,
+          "occasion": "same-order-repeat",
+          "resolved_targets": 2,
+          "target_count": 6,
+          "uncertain_relations": 0,
+          "uncertain_targets": 4
+        },
+        {
+          "agreeing_relations": 0,
+          "disagreeing_relations": 0,
+          "measured_targets": 0,
+          "missing_relations": 270,
+          "missing_targets": 6,
+          "occasion": "order-seed-0",
+          "resolved_targets": 2,
+          "target_count": 6,
+          "uncertain_relations": 0,
+          "uncertain_targets": 4
+        },
+        {
+          "agreeing_relations": 0,
+          "disagreeing_relations": 0,
+          "measured_targets": 0,
+          "missing_relations": 270,
+          "missing_targets": 6,
+          "occasion": "order-seed-20261020",
+          "resolved_targets": 2,
+          "target_count": 6,
+          "uncertain_relations": 0,
+          "uncertain_targets": 4
+        }
+      ],
+      "report": "runs/reviews/meas02-results-smoke-08172c3039f0499f9068c18ccd95bc3d/unknown.json",
+      "scope": "partial",
+      "sha256": "091576b1a9b070dfefbd70e53a3ef7a8783eb3455a0e3e8320081623dc3826bf"
+    },
+    {
+      "exit_code": 3,
+      "measured": 1,
+      "missing": 39,
+      "name": "attempt-cap",
+      "occasions": [
+        {
+          "agreeing_relations": 1,
+          "disagreeing_relations": 0,
+          "measured_targets": 1,
+          "missing_relations": 295,
+          "missing_targets": 21,
+          "occasion": "baseline",
+          "resolved_targets": 17,
+          "target_count": 22,
+          "uncertain_relations": 0,
+          "uncertain_targets": 5
+        },
+        {
+          "agreeing_relations": 0,
+          "disagreeing_relations": 0,
+          "measured_targets": 0,
+          "missing_relations": 270,
+          "missing_targets": 6,
+          "occasion": "same-order-repeat",
+          "resolved_targets": 2,
+          "target_count": 6,
+          "uncertain_relations": 0,
+          "uncertain_targets": 4
+        },
+        {
+          "agreeing_relations": 0,
+          "disagreeing_relations": 0,
+          "measured_targets": 0,
+          "missing_relations": 270,
+          "missing_targets": 6,
+          "occasion": "order-seed-0",
+          "resolved_targets": 2,
+          "target_count": 6,
+          "uncertain_relations": 0,
+          "uncertain_targets": 4
+        },
+        {
+          "agreeing_relations": 0,
+          "disagreeing_relations": 0,
+          "measured_targets": 0,
+          "missing_relations": 270,
+          "missing_targets": 6,
+          "occasion": "order-seed-20261020",
+          "resolved_targets": 2,
+          "target_count": 6,
+          "uncertain_relations": 0,
+          "uncertain_targets": 4
+        }
+      ],
+      "report": "runs/reviews/meas02-results-smoke-08172c3039f0499f9068c18ccd95bc3d/attempt-cap.json",
+      "scope": "partial",
+      "sha256": "6ae00c0d39d0453f63df7052492e6b1a7984e697ae7268ca7f67017a0b414802"
+    }
+  ],
+  "defensive_result_replay": true,
+  "format": "buddha.meas02-target-reader-native-proof.v1",
+  "input_files_unchanged": 220,
+  "keys_read": false,
+  "limits": [
+    "Responses are mechanical shown-index parity, not semantic judgments.",
+    "Disagreements are synthetic engineering outputs, not observed judge accuracy.",
+    "No actual approved live grant, real run or credential is opened by this probe."
+  ],
+  "native_input": {
+    "path": "docs/conformance/meas02-partial-native-proof.json",
+    "sha256": "05559e8a1e9ce9d308f041524772de5564dc48e436f50899387e91c874548d38"
+  },
+  "new_reports_only": true,
+  "probe_sha256": "fcce111a1613031481fafa4a74274f6f7eb2b280756a91cc984bcf229b9c75a7",
+  "reader_sha256": "a5c5ab7924b316a65645b33eb6aad466975c9e1cb26dd3e232a887736470effd",
+  "source_fixture": "runs/reviews/meas02-native-fixture-a8feba3e354f451b9f0867dbc6d30eac",
+  "state_or_authority_writes": 0,
+  "status": "PASS"
+}

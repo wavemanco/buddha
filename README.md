@@ -32,7 +32,10 @@ now binds those 40 supplied controls to separate accounting occasions; its
 offline execution checks do not supply new model judgments. Its
 [operator launcher](docs/MEASUREMENT-JUDGE-AUDIT.md#operator-commands) checks
 source and shared funding before hidden key entry, then shows progress and
-retains the original owners when interrupted.
+retains the original owners when interrupted. A separate [offline target reader](docs/MEASUREMENT-JUDGE-AUDIT.md#offline-target-reports)
+compares complete or explicitly selected partial outputs with frozen development
+judgments while keeping uncertain and missing cases visible. Its engineering
+fixtures do not supply fresh judge measurements.
 
 These are distinct from scientific success. Meaningful diversity, held-out
 improvement, genuine task/improver source evolution and an improved improver have
@@ -42,9 +45,11 @@ others uncertain; original benchmark scores and raw evidence remain unchanged. S
 [pilot review](docs/PILOT-REVIEW.md), [recovery results](docs/FIRST-LIVE-RESULTS.md)
 and [linked continuation results](docs/LINKED-CONTINUATION-RESULTS.md).
 
-At this checkpoint the living plan contains **10 remaining leaf slices**.
+At this checkpoint the living plan contains **11 remaining leaf slices**.
+One new Windows PID-lock observer follow-up was added after a controlled
+reproduction; it is tracked as REC-05D.
 The native pipeline is complete at its declared offline scope. Umbrella milestones
-are not counted again. They cover measurement (1),
+are not counted again. They cover recovery/observation (1), measurement (1),
 policy/search (3), source evolution (3), held-out evaluation (2) and the
 improver comparison (1). This is a checkpoint count, not a promise that research
 findings will never require a smaller slice; [PLAN.md](docs/PLAN.md) determines
