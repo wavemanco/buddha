@@ -50,10 +50,10 @@ sampling mode sees earlier answers and preserves literal task requirements.
 Fixed policies reuse the native pipeline; legacy search keeps v1. Controlled
 policy comparisons remain open.
 
-A separate [source-agent runtime prerequisite](docs/SOURCE-RUNTIME.md) now passes
-actual filesystem, network, resource and cleanup checks on a pinned minimal
-Python image. Production candidate execution and its model channel still need
-their composed checks; the existing fixed-seed route is unchanged.
+The [source runtime](docs/SOURCE-RUNTIME.md) and [candidate execution boundary](docs/SOURCE-CANDIDATES.md)
+now pass composed isolation, model-channel, accounting and recovery checks.
+Selected task code runs only in the pinned container; the host controls paid
+calls and completion. Inherited source mutation and improvement remain open.
 
 These are distinct from scientific success. Meaningful diversity, held-out
 improvement, genuine task/improver source evolution and an improved improver have
@@ -63,12 +63,12 @@ others uncertain; original benchmark scores and raw evidence remain unchanged. S
 [pilot review](docs/PILOT-REVIEW.md), [recovery results](docs/FIRST-LIVE-RESULTS.md)
 and [linked continuation results](docs/LINKED-CONTINUATION-RESULTS.md).
 
-At this checkpoint the living plan contains **8 remaining leaf slices**.
+At this checkpoint the living plan contains **7 remaining leaf slices**.
 The Windows PID-lock observer follow-up is complete at its shared-reader scope;
 [the guide](docs/DOCTOR.md#windows-file-sharing) states its boundaries.
 The native pipeline is complete at its declared offline scope. Umbrella milestones
 are not counted again. They cover
-policy/search (2), source evolution (3), held-out evaluation (2) and the
+policy/search (2), source evolution (2), held-out evaluation (2) and the
 improver comparison (1). This is a checkpoint count, not a promise that research
 findings will never require a smaller slice; [PLAN.md](docs/PLAN.md) determines
 the current status and order.

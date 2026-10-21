@@ -1,0 +1,3150 @@
+{
+  "actual_candidate_proof": {
+    "cases": [
+      {
+        "answers": [
+          {
+            "answers": [
+              " local \n",
+              ""
+            ],
+            "task_id": "1"
+          }
+        ],
+        "fixture": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-runner\\runs\\reviews\\src01-candidate-proof-gmpiu04f\\openai-0-calls",
+        "frames": [
+          {
+            "agent_sha256": "8ed124b0d8f41d0d765e7b7092baf7f6b31aa9e41f66dd34dc50909255480b32",
+            "runtime_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+            "task_sha256": "7b5af61abba651fcb109931b98d56026e3e15de8fa1a5b605f7bb46aa4366c2b",
+            "type": "ready"
+          },
+          {
+            "answers": [
+              " local \n",
+              ""
+            ],
+            "reason": "complete",
+            "status": "complete",
+            "type": "done"
+          }
+        ],
+        "interrupted": false,
+        "label": "openai-0-calls",
+        "ledger": {
+          "committed_microusd": 0,
+          "operation_count": 0,
+          "reserved_microusd": 0,
+          "spent_microusd": 0
+        },
+        "native_bytes_sha256": "8d32d483bab0ff250a792b02ce8359101a3176591b1da7afec073587a732cf3b",
+        "new_sends": [],
+        "operations": [],
+        "owned_containers_after": [
+          "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+        ],
+        "owned_containers_before": [
+          "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+        ],
+        "report": {
+          "agent_sha256": "8ed124b0d8f41d0d765e7b7092baf7f6b31aa9e41f66dd34dc50909255480b32",
+          "artifacts": {
+            "answers.json": "7cb967366767bc68b87e0c5fdb0baaf8d85f213e9fcb245d236f6188fcb6560b"
+          },
+          "call_counter_scope": "delivered replies include same-owner receipt replay",
+          "calls": {
+            "completed": 0,
+            "requested": 0,
+            "stopped": 0
+          },
+          "claim": "single source-task execution; no source evolution or improvement claim",
+          "config_sha256": "31baf9315ca78f9884fc33d9b8d18501bd35838516df69f1de32620103f76742",
+          "descriptor_sha256": "fa328c4c9c3cc27768f26c386e64cce829fdcd6e16b615eb3cd796d9eaa2745a",
+          "execution": {
+            "cleanup_status": "removed",
+            "configuration": {
+              "engine_endpoint_sha256": "30341252ca9aa2b298da11cd8527fdfbf8ab30a2f3b5a3c871188c778b20af30",
+              "host": {
+                "CapDrop": [
+                  "ALL"
+                ],
+                "CgroupnsMode": "private",
+                "IpcMode": "none",
+                "LogConfig": {
+                  "Config": {},
+                  "Type": "none"
+                },
+                "Memory": 268435456,
+                "MemorySwap": 268435456,
+                "NanoCpus": 1000000000,
+                "NetworkMode": "none",
+                "PidMode": "",
+                "PidsLimit": 64,
+                "Privileged": false,
+                "ReadonlyRootfs": true,
+                "SecurityOpt": [
+                  "no-new-privileges:true"
+                ],
+                "Tmpfs": {
+                  "/scratch": "rw,size=128m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700",
+                  "/tmp": "rw,size=16m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700"
+                },
+                "UTSMode": ""
+              },
+              "image": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+              "mounts": {
+                "/agent": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-runner\\runs\\reviews\\src01-candidate-proof-gmpiu04f\\openai-0-calls\\agent",
+                "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-runner\\runs\\reviews\\src01-candidate-proof-gmpiu04f\\openai-0-calls\\runner"
+              },
+              "role": "agent"
+            },
+            "container_id": "3d1b883981885fc6848ab8648bfe5c6ebd7e365f86454cd4cf4e14bf3abfda0d",
+            "elapsed_seconds": 1.428120099939406,
+            "exit_code": 0,
+            "frame_count": 2,
+            "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+            "stderr_bytes": 23,
+            "stderr_sha256": "b94bcb47899f094b6e65b8f296eba1d525fad93c654d469ef86d38eae575e83a",
+            "stdout_bytes": 347
+          },
+          "format": "buddha.candidate-generation-report.v1",
+          "gateway_manifest_sha256": "df2924bafd3e1ea5ff8fc24473405ee749e36b53f6257df56a2d94cf4a349b62",
+          "gateway_totals": {
+            "committed_microusd": 0,
+            "operation_count": 0,
+            "reserved_microusd": 0,
+            "spent_microusd": 0
+          },
+          "gateway_totals_scope": "entire original owner, including earlier operations/holds",
+          "host_stop_reason": null,
+          "max_callbacks": 3,
+          "owner_operation_coverage_complete": true,
+          "reason": "complete",
+          "runtime_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+          "status": "complete",
+          "tasks_sha256": "74c04f3695681092e711600ac3a2126ea9242634122217232a67826227bd856f"
+        }
+      },
+      {
+        "answers": [
+          {
+            "answers": [
+              " raw literal \n",
+              " raw literal \n",
+              " raw literal \n",
+              " raw literal \n",
+              " raw literal \n",
+              " raw literal \n",
+              " raw literal \n",
+              " raw literal \n",
+              " raw literal \n",
+              " raw literal \n"
+            ],
+            "task_id": "1"
+          }
+        ],
+        "fixture": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-runner\\runs\\reviews\\src01-candidate-proof-gmpiu04f\\openai-1-calls",
+        "frames": [
+          {
+            "agent_sha256": "d449cf3775b75fe28451682f69da1a71a698d41ada42c9de5d70adf7573b6f68",
+            "runtime_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+            "task_sha256": "78184bb9ffed6583cbdfc61df772985f16f2ad3b2469b34044e6f976a5f0beca",
+            "type": "ready"
+          },
+          {
+            "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjEwMCwibWVzc2FnZXMiOlt7ImNvbnRlbnQiOiJPbmUgbGl0ZXJhbCByZXNwb25zZSBjYWZcdTAwZTkgXHVkODNjXHVkZjMxLiIsInJvbGUiOiJ1c2VyIn1dLCJtb2RlbCI6ImNhbmRpZGF0ZS1vcGVuYWktZml4dHVyZSJ9",
+            "provider": "openai",
+            "sequence": 0,
+            "type": "request"
+          },
+          {
+            "answers": [
+              " raw literal \n",
+              " raw literal \n",
+              " raw literal \n",
+              " raw literal \n",
+              " raw literal \n",
+              " raw literal \n",
+              " raw literal \n",
+              " raw literal \n",
+              " raw literal \n",
+              " raw literal \n"
+            ],
+            "reason": "complete",
+            "status": "complete",
+            "type": "done"
+          }
+        ],
+        "interrupted": false,
+        "label": "openai-1-calls",
+        "ledger": {
+          "committed_microusd": 11,
+          "operation_count": 1,
+          "reserved_microusd": 0,
+          "spent_microusd": 11
+        },
+        "native_bytes_sha256": "8c59bb814ffb3c5466991eacef89fdd57d58c32d31afeccc6b59b33103b825c0",
+        "new_sends": [
+          {
+            "body": {
+              "max_completion_tokens": 100,
+              "messages": [
+                {
+                  "content": "One literal response caf\u00e9 \ud83c\udf31.",
+                  "role": "user"
+                }
+              ],
+              "model": "candidate-openai-fixture"
+            },
+            "body_sha256": "bc9f194e88d923f282e1c6a5b7cce223abfa30fc61575b2e71f8c89b7bae20d4"
+          }
+        ],
+        "operations": [
+          {
+            "actual_microusd": 11,
+            "operation_id": "24141fa604a07144985e572ed28cf66b07f6c26da1bb6a5608c84ffaf6fb665a",
+            "receipt_sha256": "d23baef3cd2340ea98030c322896b9d2bcf59fdeaf88eb6e48c56fa09132a08d",
+            "request": {
+              "attempt": 0,
+              "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjEwMCwibWVzc2FnZXMiOlt7ImNvbnRlbnQiOiJPbmUgbGl0ZXJhbCByZXNwb25zZSBjYWZcdTAwZTkgXHVkODNjXHVkZjMxLiIsInJvbGUiOiJ1c2VyIn1dLCJtb2RlbCI6ImNhbmRpZGF0ZS1vcGVuYWktZml4dHVyZSJ9",
+              "capability": "openai.chat-completions.v1",
+              "logical_id": "d2abfdf4796e58208684f7a7806d7681e8f5d19c6124ebbf5026ef439215f84d",
+              "profile_id": "candidate"
+            },
+            "reserve_microusd": 10200,
+            "status": "completed"
+          }
+        ],
+        "owned_containers_after": [
+          "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+        ],
+        "owned_containers_before": [
+          "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+        ],
+        "report": {
+          "agent_sha256": "d449cf3775b75fe28451682f69da1a71a698d41ada42c9de5d70adf7573b6f68",
+          "artifacts": {
+            "answers.json": "93dab7735e7137174aaa9df67b581fe9f7d122d1f74f52f737a0e51b185feefb"
+          },
+          "call_counter_scope": "delivered replies include same-owner receipt replay",
+          "calls": {
+            "completed": 1,
+            "requested": 1,
+            "stopped": 0
+          },
+          "claim": "single source-task execution; no source evolution or improvement claim",
+          "config_sha256": "31baf9315ca78f9884fc33d9b8d18501bd35838516df69f1de32620103f76742",
+          "descriptor_sha256": "33d7e1652544ba315cca57cc43d788e8e4e98957a01ad728e42e9beb706ea3c3",
+          "execution": {
+            "cleanup_status": "removed",
+            "configuration": {
+              "engine_endpoint_sha256": "30341252ca9aa2b298da11cd8527fdfbf8ab30a2f3b5a3c871188c778b20af30",
+              "host": {
+                "CapDrop": [
+                  "ALL"
+                ],
+                "CgroupnsMode": "private",
+                "IpcMode": "none",
+                "LogConfig": {
+                  "Config": {},
+                  "Type": "none"
+                },
+                "Memory": 268435456,
+                "MemorySwap": 268435456,
+                "NanoCpus": 1000000000,
+                "NetworkMode": "none",
+                "PidMode": "",
+                "PidsLimit": 64,
+                "Privileged": false,
+                "ReadonlyRootfs": true,
+                "SecurityOpt": [
+                  "no-new-privileges:true"
+                ],
+                "Tmpfs": {
+                  "/scratch": "rw,size=128m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700",
+                  "/tmp": "rw,size=16m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700"
+                },
+                "UTSMode": ""
+              },
+              "image": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+              "mounts": {
+                "/agent": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-runner\\runs\\reviews\\src01-candidate-proof-gmpiu04f\\openai-1-calls\\agent",
+                "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-runner\\runs\\reviews\\src01-candidate-proof-gmpiu04f\\openai-1-calls\\runner"
+              },
+              "role": "agent"
+            },
+            "container_id": "07923a0a5924d7766029d9dc905965a5048d682d2fc62e242a77af3c9ec54289",
+            "elapsed_seconds": 1.5090291999513283,
+            "exit_code": 0,
+            "frame_count": 3,
+            "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+            "stderr_bytes": 23,
+            "stderr_sha256": "b94bcb47899f094b6e65b8f296eba1d525fad93c654d469ef86d38eae575e83a",
+            "stdout_bytes": 781
+          },
+          "format": "buddha.candidate-generation-report.v1",
+          "gateway_manifest_sha256": "86b15ddd3d367d4cf52c4d74ab1d79b9555643ac3291b9941ea5203fa2f72aba",
+          "gateway_totals": {
+            "committed_microusd": 11,
+            "operation_count": 1,
+            "reserved_microusd": 0,
+            "spent_microusd": 11
+          },
+          "gateway_totals_scope": "entire original owner, including earlier operations/holds",
+          "host_stop_reason": null,
+          "max_callbacks": 3,
+          "owner_operation_coverage_complete": true,
+          "reason": "complete",
+          "runtime_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+          "status": "complete",
+          "tasks_sha256": "8c1c40ad44c8bd1d526169e99cadb670c55962010a256752a887ba035ab5fa0d"
+        }
+      },
+      {
+        "answers": [
+          {
+            "answers": [
+              "poor duplicate",
+              "poor duplicate"
+            ],
+            "task_id": "1"
+          }
+        ],
+        "fixture": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-runner\\runs\\reviews\\src01-candidate-proof-gmpiu04f\\openai-3-calls",
+        "frames": [
+          {
+            "agent_sha256": "932634b67581e49a7a959bea80ca9d119431b966f5883352521e73cc25041b7e",
+            "runtime_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+            "task_sha256": "7b5af61abba651fcb109931b98d56026e3e15de8fa1a5b605f7bb46aa4366c2b",
+            "type": "ready"
+          },
+          {
+            "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjEwMCwibWVzc2FnZXMiOlt7ImNvbnRlbnQiOiJPbmUgbGl0ZXJhbCByZXNwb25zZSBjYWZcdTAwZTkgXHVkODNjXHVkZjMxLiIsInJvbGUiOiJ1c2VyIn1dLCJtb2RlbCI6ImNhbmRpZGF0ZS1vcGVuYWktZml4dHVyZSJ9",
+            "provider": "openai",
+            "sequence": 0,
+            "type": "request"
+          },
+          {
+            "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjUwLCJtZXNzYWdlcyI6W3siY29udGVudCI6Ik9uZSBsaXRlcmFsIHJlc3BvbnNlIGNhZlx1MDBlOSBcdWQ4M2NcdWRmMzEuIiwicm9sZSI6InVzZXIifV0sIm1vZGVsIjoiY2FuZGlkYXRlLW9wZW5haS1maXh0dXJlIn0=",
+            "provider": "openai",
+            "sequence": 1,
+            "type": "request"
+          },
+          {
+            "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjMzLCJtZXNzYWdlcyI6W3siY29udGVudCI6Ik9uZSBsaXRlcmFsIHJlc3BvbnNlIGNhZlx1MDBlOSBcdWQ4M2NcdWRmMzEuIiwicm9sZSI6InVzZXIifV0sIm1vZGVsIjoiY2FuZGlkYXRlLW9wZW5haS1maXh0dXJlIn0=",
+            "provider": "openai",
+            "sequence": 2,
+            "type": "request"
+          },
+          {
+            "answers": [
+              "poor duplicate",
+              "poor duplicate"
+            ],
+            "reason": "complete",
+            "status": "complete",
+            "type": "done"
+          }
+        ],
+        "interrupted": false,
+        "label": "openai-3-calls",
+        "ledger": {
+          "committed_microusd": 33,
+          "operation_count": 3,
+          "reserved_microusd": 0,
+          "spent_microusd": 33
+        },
+        "native_bytes_sha256": "591b159522b348b7fe2d9850fdd98275acf8c72bce2deeb3ca2ebf7fb948bae9",
+        "new_sends": [
+          {
+            "body": {
+              "max_completion_tokens": 100,
+              "messages": [
+                {
+                  "content": "One literal response caf\u00e9 \ud83c\udf31.",
+                  "role": "user"
+                }
+              ],
+              "model": "candidate-openai-fixture"
+            },
+            "body_sha256": "bc9f194e88d923f282e1c6a5b7cce223abfa30fc61575b2e71f8c89b7bae20d4"
+          },
+          {
+            "body": {
+              "max_completion_tokens": 50,
+              "messages": [
+                {
+                  "content": "One literal response caf\u00e9 \ud83c\udf31.",
+                  "role": "user"
+                }
+              ],
+              "model": "candidate-openai-fixture"
+            },
+            "body_sha256": "0a5014fc0da56ab43c951761cd3a7e3f4b6d8c761eea8872bf5dca66b23e61ef"
+          },
+          {
+            "body": {
+              "max_completion_tokens": 33,
+              "messages": [
+                {
+                  "content": "One literal response caf\u00e9 \ud83c\udf31.",
+                  "role": "user"
+                }
+              ],
+              "model": "candidate-openai-fixture"
+            },
+            "body_sha256": "9b96e94af4418d14acc1408bff3859e99c02cec86e06c8b2584a79c01fba102a"
+          }
+        ],
+        "operations": [
+          {
+            "actual_microusd": 11,
+            "operation_id": "1c312f5c4cd45b2cec20ac34e84389be702322efb7f727250bee1dd1185941d0",
+            "receipt_sha256": "a406d1879965ef8a39eb2dd8ecd276b99d40b54156631505c604cdc5ce0ac979",
+            "request": {
+              "attempt": 0,
+              "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjMzLCJtZXNzYWdlcyI6W3siY29udGVudCI6Ik9uZSBsaXRlcmFsIHJlc3BvbnNlIGNhZlx1MDBlOSBcdWQ4M2NcdWRmMzEuIiwicm9sZSI6InVzZXIifV0sIm1vZGVsIjoiY2FuZGlkYXRlLW9wZW5haS1maXh0dXJlIn0=",
+              "capability": "openai.chat-completions.v1",
+              "logical_id": "441ba180f6d3090e61f5843e81e4b558bf6117b6b8f6f65bdb2bcaf3b6d6efe5",
+              "profile_id": "candidate"
+            },
+            "reserve_microusd": 10066,
+            "status": "completed"
+          },
+          {
+            "actual_microusd": 11,
+            "operation_id": "25ad7ae13cf59dceb067e02134a31725dc32ce192c8b11b65a27eeb9030c60bf",
+            "receipt_sha256": "2398071bcd827c9febe150a08e324959a8506a3fed11484568808f67e15689de",
+            "request": {
+              "attempt": 0,
+              "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjUwLCJtZXNzYWdlcyI6W3siY29udGVudCI6Ik9uZSBsaXRlcmFsIHJlc3BvbnNlIGNhZlx1MDBlOSBcdWQ4M2NcdWRmMzEuIiwicm9sZSI6InVzZXIifV0sIm1vZGVsIjoiY2FuZGlkYXRlLW9wZW5haS1maXh0dXJlIn0=",
+              "capability": "openai.chat-completions.v1",
+              "logical_id": "c6dae926bec9441a5c71011cead7dde8dd47e71f042f1f062af055462b4191a5",
+              "profile_id": "candidate"
+            },
+            "reserve_microusd": 10100,
+            "status": "completed"
+          },
+          {
+            "actual_microusd": 11,
+            "operation_id": "3c6493315ac86c334908c622328494d82be6be58616092f9ec7d1502cc3f8d95",
+            "receipt_sha256": "011526edc59537a445dee93831941fd42f94c6d99942c80511f51b4958da13cb",
+            "request": {
+              "attempt": 0,
+              "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjEwMCwibWVzc2FnZXMiOlt7ImNvbnRlbnQiOiJPbmUgbGl0ZXJhbCByZXNwb25zZSBjYWZcdTAwZTkgXHVkODNjXHVkZjMxLiIsInJvbGUiOiJ1c2VyIn1dLCJtb2RlbCI6ImNhbmRpZGF0ZS1vcGVuYWktZml4dHVyZSJ9",
+              "capability": "openai.chat-completions.v1",
+              "logical_id": "cc4f0bcd1c51653fc88506d0524c0d619285e2af94e521b75bf562320b11e14f",
+              "profile_id": "candidate"
+            },
+            "reserve_microusd": 10200,
+            "status": "completed"
+          }
+        ],
+        "owned_containers_after": [
+          "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+        ],
+        "owned_containers_before": [
+          "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+        ],
+        "report": {
+          "agent_sha256": "932634b67581e49a7a959bea80ca9d119431b966f5883352521e73cc25041b7e",
+          "artifacts": {
+            "answers.json": "a7af0c846c649b60aa855db262820e396741db4d8e80576314a469ad0ee26272"
+          },
+          "call_counter_scope": "delivered replies include same-owner receipt replay",
+          "calls": {
+            "completed": 3,
+            "requested": 3,
+            "stopped": 0
+          },
+          "claim": "single source-task execution; no source evolution or improvement claim",
+          "config_sha256": "31baf9315ca78f9884fc33d9b8d18501bd35838516df69f1de32620103f76742",
+          "descriptor_sha256": "d27fd6b0c0db1a5cbbc74bffebd77eb0c1de56691c063d49d97c264001d12c39",
+          "execution": {
+            "cleanup_status": "removed",
+            "configuration": {
+              "engine_endpoint_sha256": "30341252ca9aa2b298da11cd8527fdfbf8ab30a2f3b5a3c871188c778b20af30",
+              "host": {
+                "CapDrop": [
+                  "ALL"
+                ],
+                "CgroupnsMode": "private",
+                "IpcMode": "none",
+                "LogConfig": {
+                  "Config": {},
+                  "Type": "none"
+                },
+                "Memory": 268435456,
+                "MemorySwap": 268435456,
+                "NanoCpus": 1000000000,
+                "NetworkMode": "none",
+                "PidMode": "",
+                "PidsLimit": 64,
+                "Privileged": false,
+                "ReadonlyRootfs": true,
+                "SecurityOpt": [
+                  "no-new-privileges:true"
+                ],
+                "Tmpfs": {
+                  "/scratch": "rw,size=128m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700",
+                  "/tmp": "rw,size=16m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700"
+                },
+                "UTSMode": ""
+              },
+              "image": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+              "mounts": {
+                "/agent": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-runner\\runs\\reviews\\src01-candidate-proof-gmpiu04f\\openai-3-calls\\agent",
+                "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-runner\\runs\\reviews\\src01-candidate-proof-gmpiu04f\\openai-3-calls\\runner"
+              },
+              "role": "agent"
+            },
+            "container_id": "f396eb98c5985a334e691194a2ec563473c6f19b34946ce7e0c84af4d6dc23a2",
+            "elapsed_seconds": 2.3990166999865323,
+            "exit_code": 0,
+            "frame_count": 5,
+            "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+            "stderr_bytes": 23,
+            "stderr_sha256": "b94bcb47899f094b6e65b8f296eba1d525fad93c654d469ef86d38eae575e83a",
+            "stdout_bytes": 1173
+          },
+          "format": "buddha.candidate-generation-report.v1",
+          "gateway_manifest_sha256": "8185eae152fa1e66d49be2affbe9bb789d30b2bd5cd4c865ddca24e4ef0da34f",
+          "gateway_totals": {
+            "committed_microusd": 33,
+            "operation_count": 3,
+            "reserved_microusd": 0,
+            "spent_microusd": 33
+          },
+          "gateway_totals_scope": "entire original owner, including earlier operations/holds",
+          "host_stop_reason": null,
+          "max_callbacks": 3,
+          "owner_operation_coverage_complete": true,
+          "reason": "complete",
+          "runtime_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+          "status": "complete",
+          "tasks_sha256": "74c04f3695681092e711600ac3a2126ea9242634122217232a67826227bd856f"
+        }
+      },
+      {
+        "answers": [
+          {
+            "answers": [
+              " local \n",
+              "",
+              "poor duplicate",
+              "poor duplicate",
+              " local \n",
+              "",
+              "poor duplicate",
+              "poor duplicate",
+              " local \n",
+              ""
+            ],
+            "task_id": "1"
+          }
+        ],
+        "fixture": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-runner\\runs\\reviews\\src01-candidate-proof-gmpiu04f\\anthropic-0-calls",
+        "frames": [
+          {
+            "agent_sha256": "8ed124b0d8f41d0d765e7b7092baf7f6b31aa9e41f66dd34dc50909255480b32",
+            "runtime_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+            "task_sha256": "78184bb9ffed6583cbdfc61df772985f16f2ad3b2469b34044e6f976a5f0beca",
+            "type": "ready"
+          },
+          {
+            "answers": [
+              " local \n",
+              "",
+              "poor duplicate",
+              "poor duplicate",
+              " local \n",
+              "",
+              "poor duplicate",
+              "poor duplicate",
+              " local \n",
+              ""
+            ],
+            "reason": "complete",
+            "status": "complete",
+            "type": "done"
+          }
+        ],
+        "interrupted": false,
+        "label": "anthropic-0-calls",
+        "ledger": {
+          "committed_microusd": 0,
+          "operation_count": 0,
+          "reserved_microusd": 0,
+          "spent_microusd": 0
+        },
+        "native_bytes_sha256": "5945149bc09736d762ea65e52dd633482d19e67c04b69878a6a29e33b4531b63",
+        "new_sends": [],
+        "operations": [],
+        "owned_containers_after": [
+          "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+        ],
+        "owned_containers_before": [
+          "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+        ],
+        "report": {
+          "agent_sha256": "8ed124b0d8f41d0d765e7b7092baf7f6b31aa9e41f66dd34dc50909255480b32",
+          "artifacts": {
+            "answers.json": "9b58ac2674bf49a4d228909498548b525cd4094da48099d693e25e52eebb21ca"
+          },
+          "call_counter_scope": "delivered replies include same-owner receipt replay",
+          "calls": {
+            "completed": 0,
+            "requested": 0,
+            "stopped": 0
+          },
+          "claim": "single source-task execution; no source evolution or improvement claim",
+          "config_sha256": "a329791d8f97a62d44f29e1e001d3bfd5171adcda61174680c5dcfa0a124e6a4",
+          "descriptor_sha256": "a76090663b13c661fc54a97731b77535ff9521eb00cd51d1a670c34c2ab5d695",
+          "execution": {
+            "cleanup_status": "removed",
+            "configuration": {
+              "engine_endpoint_sha256": "30341252ca9aa2b298da11cd8527fdfbf8ab30a2f3b5a3c871188c778b20af30",
+              "host": {
+                "CapDrop": [
+                  "ALL"
+                ],
+                "CgroupnsMode": "private",
+                "IpcMode": "none",
+                "LogConfig": {
+                  "Config": {},
+                  "Type": "none"
+                },
+                "Memory": 268435456,
+                "MemorySwap": 268435456,
+                "NanoCpus": 1000000000,
+                "NetworkMode": "none",
+                "PidMode": "",
+                "PidsLimit": 64,
+                "Privileged": false,
+                "ReadonlyRootfs": true,
+                "SecurityOpt": [
+                  "no-new-privileges:true"
+                ],
+                "Tmpfs": {
+                  "/scratch": "rw,size=128m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700",
+                  "/tmp": "rw,size=16m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700"
+                },
+                "UTSMode": ""
+              },
+              "image": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+              "mounts": {
+                "/agent": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-runner\\runs\\reviews\\src01-candidate-proof-gmpiu04f\\anthropic-0-calls\\agent",
+                "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-runner\\runs\\reviews\\src01-candidate-proof-gmpiu04f\\anthropic-0-calls\\runner"
+              },
+              "role": "agent"
+            },
+            "container_id": "950ea5d89a613624b9823469e6a84420b36730d3a67bc8f0fb6b03b60adddfce",
+            "elapsed_seconds": 1.0727149000158533,
+            "exit_code": 0,
+            "frame_count": 2,
+            "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+            "stderr_bytes": 23,
+            "stderr_sha256": "b94bcb47899f094b6e65b8f296eba1d525fad93c654d469ef86d38eae575e83a",
+            "stdout_bytes": 445
+          },
+          "format": "buddha.candidate-generation-report.v1",
+          "gateway_manifest_sha256": "e97a9d639535855b911f87d5a71bd1146dc8a8e0b613f91ee1c0d36bf250fe91",
+          "gateway_totals": {
+            "committed_microusd": 0,
+            "operation_count": 0,
+            "reserved_microusd": 0,
+            "spent_microusd": 0
+          },
+          "gateway_totals_scope": "entire original owner, including earlier operations/holds",
+          "host_stop_reason": null,
+          "max_callbacks": 3,
+          "owner_operation_coverage_complete": true,
+          "reason": "complete",
+          "runtime_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+          "status": "complete",
+          "tasks_sha256": "c53657b3ec0f4b6d9e537fe401428b3a0d716d89dce3c37034db8ff3f1c14631"
+        }
+      },
+      {
+        "answers": [
+          {
+            "answers": [
+              " raw literal \n",
+              " raw literal \n"
+            ],
+            "task_id": "1"
+          }
+        ],
+        "fixture": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-runner\\runs\\reviews\\src01-candidate-proof-gmpiu04f\\anthropic-1-calls",
+        "frames": [
+          {
+            "agent_sha256": "d449cf3775b75fe28451682f69da1a71a698d41ada42c9de5d70adf7573b6f68",
+            "runtime_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+            "task_sha256": "7b5af61abba651fcb109931b98d56026e3e15de8fa1a5b605f7bb46aa4366c2b",
+            "type": "ready"
+          },
+          {
+            "body_base64": "eyJtYXhfdG9rZW5zIjoxMDAsIm1lc3NhZ2VzIjpbeyJjb250ZW50IjoiT25lIGxpdGVyYWwgcmVzcG9uc2UgY2FmXHUwMGU5IFx1ZDgzY1x1ZGYzMS4iLCJyb2xlIjoidXNlciJ9XSwibW9kZWwiOiJjYW5kaWRhdGUtYW50aHJvcGljLWZpeHR1cmUifQ==",
+            "provider": "anthropic",
+            "sequence": 0,
+            "type": "request"
+          },
+          {
+            "answers": [
+              " raw literal \n",
+              " raw literal \n"
+            ],
+            "reason": "complete",
+            "status": "complete",
+            "type": "done"
+          }
+        ],
+        "interrupted": false,
+        "label": "anthropic-1-calls",
+        "ledger": {
+          "committed_microusd": 11,
+          "operation_count": 1,
+          "reserved_microusd": 0,
+          "spent_microusd": 11
+        },
+        "native_bytes_sha256": "d4beb444fdcc81ed85aac521395ee8ffc15c0c8f36614639da25b98bbfe40c27",
+        "new_sends": [
+          {
+            "body": {
+              "max_tokens": 100,
+              "messages": [
+                {
+                  "content": "One literal response caf\u00e9 \ud83c\udf31.",
+                  "role": "user"
+                }
+              ],
+              "model": "candidate-anthropic-fixture"
+            },
+            "body_sha256": "55cd2a15b8efed3615b5e29daaa81255134e3b4497a4f1b519c73be2b47e150f"
+          }
+        ],
+        "operations": [
+          {
+            "actual_microusd": 11,
+            "operation_id": "f4f7353e74620edc50f1383c97b77372f0ec341a524920da6870b7d2f35df1ec",
+            "receipt_sha256": "9b89a1c4e6ee9df02b60d55d0da0e0c9a095735f598ed48b59dbd89f582c8610",
+            "request": {
+              "attempt": 0,
+              "body_base64": "eyJtYXhfdG9rZW5zIjoxMDAsIm1lc3NhZ2VzIjpbeyJjb250ZW50IjoiT25lIGxpdGVyYWwgcmVzcG9uc2UgY2FmXHUwMGU5IFx1ZDgzY1x1ZGYzMS4iLCJyb2xlIjoidXNlciJ9XSwibW9kZWwiOiJjYW5kaWRhdGUtYW50aHJvcGljLWZpeHR1cmUifQ==",
+              "capability": "anthropic.messages.v1",
+              "logical_id": "c5206cbc0892f7f7f7ceb3fed383d74158d18d281435c8fd88e172daedc38aed",
+              "profile_id": "candidate"
+            },
+            "reserve_microusd": 10200,
+            "status": "completed"
+          }
+        ],
+        "owned_containers_after": [
+          "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+        ],
+        "owned_containers_before": [
+          "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+        ],
+        "report": {
+          "agent_sha256": "d449cf3775b75fe28451682f69da1a71a698d41ada42c9de5d70adf7573b6f68",
+          "artifacts": {
+            "answers.json": "2651860f2a69dd9e56593fa24e4a874bbae463e191a483bb7d0dbf29e3a25cac"
+          },
+          "call_counter_scope": "delivered replies include same-owner receipt replay",
+          "calls": {
+            "completed": 1,
+            "requested": 1,
+            "stopped": 0
+          },
+          "claim": "single source-task execution; no source evolution or improvement claim",
+          "config_sha256": "a329791d8f97a62d44f29e1e001d3bfd5171adcda61174680c5dcfa0a124e6a4",
+          "descriptor_sha256": "1c7f0884e8af8f8d8029ab7a0a2254f9acd2ce5a1e2495ccd9423c33fcde62d8",
+          "execution": {
+            "cleanup_status": "removed",
+            "configuration": {
+              "engine_endpoint_sha256": "30341252ca9aa2b298da11cd8527fdfbf8ab30a2f3b5a3c871188c778b20af30",
+              "host": {
+                "CapDrop": [
+                  "ALL"
+                ],
+                "CgroupnsMode": "private",
+                "IpcMode": "none",
+                "LogConfig": {
+                  "Config": {},
+                  "Type": "none"
+                },
+                "Memory": 268435456,
+                "MemorySwap": 268435456,
+                "NanoCpus": 1000000000,
+                "NetworkMode": "none",
+                "PidMode": "",
+                "PidsLimit": 64,
+                "Privileged": false,
+                "ReadonlyRootfs": true,
+                "SecurityOpt": [
+                  "no-new-privileges:true"
+                ],
+                "Tmpfs": {
+                  "/scratch": "rw,size=128m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700",
+                  "/tmp": "rw,size=16m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700"
+                },
+                "UTSMode": ""
+              },
+              "image": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+              "mounts": {
+                "/agent": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-runner\\runs\\reviews\\src01-candidate-proof-gmpiu04f\\anthropic-1-calls\\agent",
+                "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-runner\\runs\\reviews\\src01-candidate-proof-gmpiu04f\\anthropic-1-calls\\runner"
+              },
+              "role": "agent"
+            },
+            "container_id": "bae8f37b04a187b28ecfa0abdd7d8702bbf0a47b7c315cb6558429a1cc49aab6",
+            "elapsed_seconds": 1.4335705999983475,
+            "exit_code": 0,
+            "frame_count": 3,
+            "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+            "stderr_bytes": 23,
+            "stderr_sha256": "b94bcb47899f094b6e65b8f296eba1d525fad93c654d469ef86d38eae575e83a",
+            "stdout_bytes": 632
+          },
+          "format": "buddha.candidate-generation-report.v1",
+          "gateway_manifest_sha256": "244b9c5ad48613469bb92a165805758ec09e534cf015ccbcde46dae96aa9f4f6",
+          "gateway_totals": {
+            "committed_microusd": 11,
+            "operation_count": 1,
+            "reserved_microusd": 0,
+            "spent_microusd": 11
+          },
+          "gateway_totals_scope": "entire original owner, including earlier operations/holds",
+          "host_stop_reason": null,
+          "max_callbacks": 3,
+          "owner_operation_coverage_complete": true,
+          "reason": "complete",
+          "runtime_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+          "status": "complete",
+          "tasks_sha256": "0dc323ebb35044e89cc70835fd395e3acd9f857158123e832e9fc7e66974eaaa"
+        }
+      },
+      {
+        "answers": [
+          {
+            "answers": [
+              "poor duplicate",
+              "poor duplicate",
+              "poor duplicate",
+              "poor duplicate",
+              "poor duplicate",
+              "poor duplicate",
+              "poor duplicate",
+              "poor duplicate",
+              "poor duplicate",
+              "poor duplicate"
+            ],
+            "task_id": "1"
+          }
+        ],
+        "fixture": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-runner\\runs\\reviews\\src01-candidate-proof-gmpiu04f\\anthropic-3-calls",
+        "frames": [
+          {
+            "agent_sha256": "932634b67581e49a7a959bea80ca9d119431b966f5883352521e73cc25041b7e",
+            "runtime_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+            "task_sha256": "78184bb9ffed6583cbdfc61df772985f16f2ad3b2469b34044e6f976a5f0beca",
+            "type": "ready"
+          },
+          {
+            "body_base64": "eyJtYXhfdG9rZW5zIjoxMDAsIm1lc3NhZ2VzIjpbeyJjb250ZW50IjoiT25lIGxpdGVyYWwgcmVzcG9uc2UgY2FmXHUwMGU5IFx1ZDgzY1x1ZGYzMS4iLCJyb2xlIjoidXNlciJ9XSwibW9kZWwiOiJjYW5kaWRhdGUtYW50aHJvcGljLWZpeHR1cmUifQ==",
+            "provider": "anthropic",
+            "sequence": 0,
+            "type": "request"
+          },
+          {
+            "body_base64": "eyJtYXhfdG9rZW5zIjo1MCwibWVzc2FnZXMiOlt7ImNvbnRlbnQiOiJPbmUgbGl0ZXJhbCByZXNwb25zZSBjYWZcdTAwZTkgXHVkODNjXHVkZjMxLiIsInJvbGUiOiJ1c2VyIn1dLCJtb2RlbCI6ImNhbmRpZGF0ZS1hbnRocm9waWMtZml4dHVyZSJ9",
+            "provider": "anthropic",
+            "sequence": 1,
+            "type": "request"
+          },
+          {
+            "body_base64": "eyJtYXhfdG9rZW5zIjozMywibWVzc2FnZXMiOlt7ImNvbnRlbnQiOiJPbmUgbGl0ZXJhbCByZXNwb25zZSBjYWZcdTAwZTkgXHVkODNjXHVkZjMxLiIsInJvbGUiOiJ1c2VyIn1dLCJtb2RlbCI6ImNhbmRpZGF0ZS1hbnRocm9waWMtZml4dHVyZSJ9",
+            "provider": "anthropic",
+            "sequence": 2,
+            "type": "request"
+          },
+          {
+            "answers": [
+              "poor duplicate",
+              "poor duplicate",
+              "poor duplicate",
+              "poor duplicate",
+              "poor duplicate",
+              "poor duplicate",
+              "poor duplicate",
+              "poor duplicate",
+              "poor duplicate",
+              "poor duplicate"
+            ],
+            "reason": "complete",
+            "status": "complete",
+            "type": "done"
+          }
+        ],
+        "interrupted": false,
+        "label": "anthropic-3-calls",
+        "ledger": {
+          "committed_microusd": 33,
+          "operation_count": 3,
+          "reserved_microusd": 0,
+          "spent_microusd": 33
+        },
+        "native_bytes_sha256": "8e31f0e763d6547f6484289701a973c1f6d777c02fd5e01fe0200733a6872d93",
+        "new_sends": [
+          {
+            "body": {
+              "max_tokens": 100,
+              "messages": [
+                {
+                  "content": "One literal response caf\u00e9 \ud83c\udf31.",
+                  "role": "user"
+                }
+              ],
+              "model": "candidate-anthropic-fixture"
+            },
+            "body_sha256": "55cd2a15b8efed3615b5e29daaa81255134e3b4497a4f1b519c73be2b47e150f"
+          },
+          {
+            "body": {
+              "max_tokens": 50,
+              "messages": [
+                {
+                  "content": "One literal response caf\u00e9 \ud83c\udf31.",
+                  "role": "user"
+                }
+              ],
+              "model": "candidate-anthropic-fixture"
+            },
+            "body_sha256": "981bb1cc87dd429c9099f50984bcef9d865704c85a98b009e4174f2f254cbfee"
+          },
+          {
+            "body": {
+              "max_tokens": 33,
+              "messages": [
+                {
+                  "content": "One literal response caf\u00e9 \ud83c\udf31.",
+                  "role": "user"
+                }
+              ],
+              "model": "candidate-anthropic-fixture"
+            },
+            "body_sha256": "b93204d03a313b3dfa4ee95782308796e9bc36304f1804ca049eec7a0154a776"
+          }
+        ],
+        "operations": [
+          {
+            "actual_microusd": 11,
+            "operation_id": "46f4728c27679c8c613b47fdab76add8585a374eb575ba7f6143bf87a67607a0",
+            "receipt_sha256": "3b1624977d455e2ba6953e7a1a60a8e00674a45877a83ba9300aef23d81c73a5",
+            "request": {
+              "attempt": 0,
+              "body_base64": "eyJtYXhfdG9rZW5zIjo1MCwibWVzc2FnZXMiOlt7ImNvbnRlbnQiOiJPbmUgbGl0ZXJhbCByZXNwb25zZSBjYWZcdTAwZTkgXHVkODNjXHVkZjMxLiIsInJvbGUiOiJ1c2VyIn1dLCJtb2RlbCI6ImNhbmRpZGF0ZS1hbnRocm9waWMtZml4dHVyZSJ9",
+              "capability": "anthropic.messages.v1",
+              "logical_id": "8ac19a795f33c84bec85387af1c93f44bc20c827a238ae864b7ee8cec0b3dc79",
+              "profile_id": "candidate"
+            },
+            "reserve_microusd": 10100,
+            "status": "completed"
+          },
+          {
+            "actual_microusd": 11,
+            "operation_id": "59733e9769763a97c00e3118af5b88246d5835d2ab9d6aa31503c0712f41613f",
+            "receipt_sha256": "59333ebedb44843f8b438427b76ffdeab0a1f71ade3fa10c910347a8b1569059",
+            "request": {
+              "attempt": 0,
+              "body_base64": "eyJtYXhfdG9rZW5zIjozMywibWVzc2FnZXMiOlt7ImNvbnRlbnQiOiJPbmUgbGl0ZXJhbCByZXNwb25zZSBjYWZcdTAwZTkgXHVkODNjXHVkZjMxLiIsInJvbGUiOiJ1c2VyIn1dLCJtb2RlbCI6ImNhbmRpZGF0ZS1hbnRocm9waWMtZml4dHVyZSJ9",
+              "capability": "anthropic.messages.v1",
+              "logical_id": "78216a9eca6e11cc463d398495659eabb02bf7ae768d3c1abe7ecd95b4da5d21",
+              "profile_id": "candidate"
+            },
+            "reserve_microusd": 10066,
+            "status": "completed"
+          },
+          {
+            "actual_microusd": 11,
+            "operation_id": "c78445158c6408e66f79201885b0a9b329b8dd49db23d45341c38c23ec387db5",
+            "receipt_sha256": "fcb0316509133d1fa3ff7c0a06167b6adba4371cb71baffc49c9f4c1c3378e15",
+            "request": {
+              "attempt": 0,
+              "body_base64": "eyJtYXhfdG9rZW5zIjoxMDAsIm1lc3NhZ2VzIjpbeyJjb250ZW50IjoiT25lIGxpdGVyYWwgcmVzcG9uc2UgY2FmXHUwMGU5IFx1ZDgzY1x1ZGYzMS4iLCJyb2xlIjoidXNlciJ9XSwibW9kZWwiOiJjYW5kaWRhdGUtYW50aHJvcGljLWZpeHR1cmUifQ==",
+              "capability": "anthropic.messages.v1",
+              "logical_id": "91becf595fe9d2c8f054430bc9d18be11bc52138aba0dd14ad783ef5df88b273",
+              "profile_id": "candidate"
+            },
+            "reserve_microusd": 10200,
+            "status": "completed"
+          }
+        ],
+        "owned_containers_after": [
+          "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+        ],
+        "owned_containers_before": [
+          "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+        ],
+        "report": {
+          "agent_sha256": "932634b67581e49a7a959bea80ca9d119431b966f5883352521e73cc25041b7e",
+          "artifacts": {
+            "answers.json": "c216fd2a5747736252e76b42bf433352e6139c6c4d9112dbfc55b5208e5bc3e6"
+          },
+          "call_counter_scope": "delivered replies include same-owner receipt replay",
+          "calls": {
+            "completed": 3,
+            "requested": 3,
+            "stopped": 0
+          },
+          "claim": "single source-task execution; no source evolution or improvement claim",
+          "config_sha256": "a329791d8f97a62d44f29e1e001d3bfd5171adcda61174680c5dcfa0a124e6a4",
+          "descriptor_sha256": "482febc9a8426e0979cd9ecb91e4709bcddd9b59dde03fc26fd3fbde97145f11",
+          "execution": {
+            "cleanup_status": "removed",
+            "configuration": {
+              "engine_endpoint_sha256": "30341252ca9aa2b298da11cd8527fdfbf8ab30a2f3b5a3c871188c778b20af30",
+              "host": {
+                "CapDrop": [
+                  "ALL"
+                ],
+                "CgroupnsMode": "private",
+                "IpcMode": "none",
+                "LogConfig": {
+                  "Config": {},
+                  "Type": "none"
+                },
+                "Memory": 268435456,
+                "MemorySwap": 268435456,
+                "NanoCpus": 1000000000,
+                "NetworkMode": "none",
+                "PidMode": "",
+                "PidsLimit": 64,
+                "Privileged": false,
+                "ReadonlyRootfs": true,
+                "SecurityOpt": [
+                  "no-new-privileges:true"
+                ],
+                "Tmpfs": {
+                  "/scratch": "rw,size=128m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700",
+                  "/tmp": "rw,size=16m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700"
+                },
+                "UTSMode": ""
+              },
+              "image": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+              "mounts": {
+                "/agent": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-runner\\runs\\reviews\\src01-candidate-proof-gmpiu04f\\anthropic-3-calls\\agent",
+                "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-runner\\runs\\reviews\\src01-candidate-proof-gmpiu04f\\anthropic-3-calls\\runner"
+              },
+              "role": "agent"
+            },
+            "container_id": "a7120e6ba39044a255361a20caee71d878620dad30c3f880152e23d47a8da766",
+            "elapsed_seconds": 2.2142609999282286,
+            "exit_code": 0,
+            "frame_count": 5,
+            "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+            "stderr_bytes": 23,
+            "stderr_sha256": "b94bcb47899f094b6e65b8f296eba1d525fad93c654d469ef86d38eae575e83a",
+            "stdout_bytes": 1286
+          },
+          "format": "buddha.candidate-generation-report.v1",
+          "gateway_manifest_sha256": "8e414bf6d55e51296a7607a5ea5b8f6b685e907744bb737d855e332f1c6890de",
+          "gateway_totals": {
+            "committed_microusd": 33,
+            "operation_count": 3,
+            "reserved_microusd": 0,
+            "spent_microusd": 33
+          },
+          "gateway_totals_scope": "entire original owner, including earlier operations/holds",
+          "host_stop_reason": null,
+          "max_callbacks": 3,
+          "owner_operation_coverage_complete": true,
+          "reason": "complete",
+          "runtime_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+          "status": "complete",
+          "tasks_sha256": "c53657b3ec0f4b6d9e537fe401428b3a0d716d89dce3c37034db8ff3f1c14631"
+        }
+      },
+      {
+        "fixture": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-runner\\runs\\reviews\\src01-candidate-proof-gmpiu04f\\quota-hostile",
+        "frames": [
+          {
+            "agent_sha256": "73932eb3b4db45dd58e7323097195e4b05316ab3fd39c9dff18b7be2e2aecc85",
+            "runtime_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+            "task_sha256": "7b5af61abba651fcb109931b98d56026e3e15de8fa1a5b605f7bb46aa4366c2b",
+            "type": "ready"
+          },
+          {
+            "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjEwMCwibWVzc2FnZXMiOlt7ImNvbnRlbnQiOiJPbmUgbGl0ZXJhbCByZXNwb25zZSBjYWZcdTAwZTkgXHVkODNjXHVkZjMxLiIsInJvbGUiOiJ1c2VyIn1dLCJtb2RlbCI6ImNhbmRpZGF0ZS1vcGVuYWktZml4dHVyZSJ9",
+            "provider": "openai",
+            "sequence": 0,
+            "type": "request"
+          },
+          {
+            "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjUwLCJtZXNzYWdlcyI6W3siY29udGVudCI6Ik9uZSBsaXRlcmFsIHJlc3BvbnNlIGNhZlx1MDBlOSBcdWQ4M2NcdWRmMzEuIiwicm9sZSI6InVzZXIifV0sIm1vZGVsIjoiY2FuZGlkYXRlLW9wZW5haS1maXh0dXJlIn0=",
+            "provider": "openai",
+            "sequence": 1,
+            "type": "request"
+          },
+          {
+            "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjMzLCJtZXNzYWdlcyI6W3siY29udGVudCI6Ik9uZSBsaXRlcmFsIHJlc3BvbnNlIGNhZlx1MDBlOSBcdWQ4M2NcdWRmMzEuIiwicm9sZSI6InVzZXIifV0sIm1vZGVsIjoiY2FuZGlkYXRlLW9wZW5haS1maXh0dXJlIn0=",
+            "provider": "openai",
+            "sequence": 2,
+            "type": "request"
+          },
+          {
+            "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjMzLCJtZXNzYWdlcyI6W3siY29udGVudCI6Ik9uZSBsaXRlcmFsIHJlc3BvbnNlIGNhZlx1MDBlOSBcdWQ4M2NcdWRmMzEuIiwicm9sZSI6InVzZXIifV0sIm1vZGVsIjoiY2FuZGlkYXRlLW9wZW5haS1maXh0dXJlIn0=",
+            "provider": "openai",
+            "sequence": 3,
+            "type": "request"
+          },
+          {
+            "answers": [
+              "forged",
+              "forged"
+            ],
+            "reason": "complete",
+            "status": "complete",
+            "type": "done"
+          }
+        ],
+        "interrupted": false,
+        "label": "quota-hostile",
+        "ledger": {
+          "committed_microusd": 22,
+          "operation_count": 2,
+          "reserved_microusd": 0,
+          "spent_microusd": 22
+        },
+        "new_sends": [
+          {
+            "body": {
+              "max_completion_tokens": 100,
+              "messages": [
+                {
+                  "content": "One literal response caf\u00e9 \ud83c\udf31.",
+                  "role": "user"
+                }
+              ],
+              "model": "candidate-openai-fixture"
+            },
+            "body_sha256": "bc9f194e88d923f282e1c6a5b7cce223abfa30fc61575b2e71f8c89b7bae20d4"
+          },
+          {
+            "body": {
+              "max_completion_tokens": 50,
+              "messages": [
+                {
+                  "content": "One literal response caf\u00e9 \ud83c\udf31.",
+                  "role": "user"
+                }
+              ],
+              "model": "candidate-openai-fixture"
+            },
+            "body_sha256": "0a5014fc0da56ab43c951761cd3a7e3f4b6d8c761eea8872bf5dca66b23e61ef"
+          }
+        ],
+        "operations": [
+          {
+            "actual_microusd": 11,
+            "operation_id": "183a42fe98f4eeb8eca1e217634af92e5903fd6aa77a18eee22d3fe7e12bf4c7",
+            "receipt_sha256": "7a017523bd9da3ac7063f3e1e8fb4ee8a52ecac742108f639159b032b3a4d109",
+            "request": {
+              "attempt": 0,
+              "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjEwMCwibWVzc2FnZXMiOlt7ImNvbnRlbnQiOiJPbmUgbGl0ZXJhbCByZXNwb25zZSBjYWZcdTAwZTkgXHVkODNjXHVkZjMxLiIsInJvbGUiOiJ1c2VyIn1dLCJtb2RlbCI6ImNhbmRpZGF0ZS1vcGVuYWktZml4dHVyZSJ9",
+              "capability": "openai.chat-completions.v1",
+              "logical_id": "abc3fd297524d3c9214847b96e40a42f99dc237ca1f829b214598f87c4780956",
+              "profile_id": "candidate"
+            },
+            "reserve_microusd": 10200,
+            "status": "completed"
+          },
+          {
+            "actual_microusd": 11,
+            "operation_id": "7cb1fe9d4358124e6b12fd0c0c60a0392b40df33db269581e4379357bde8afa1",
+            "receipt_sha256": "1c3e38df858b022a222f81ea69a31be9d517184896053b2e1709077eb539228f",
+            "request": {
+              "attempt": 0,
+              "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjUwLCJtZXNzYWdlcyI6W3siY29udGVudCI6Ik9uZSBsaXRlcmFsIHJlc3BvbnNlIGNhZlx1MDBlOSBcdWQ4M2NcdWRmMzEuIiwicm9sZSI6InVzZXIifV0sIm1vZGVsIjoiY2FuZGlkYXRlLW9wZW5haS1maXh0dXJlIn0=",
+              "capability": "openai.chat-completions.v1",
+              "logical_id": "2f267977236353d3817edaf2fa2352daaa4f7610e16f0f264f71c930c9dc9cd6",
+              "profile_id": "candidate"
+            },
+            "reserve_microusd": 10100,
+            "status": "completed"
+          }
+        ],
+        "owned_containers_after": [
+          "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+        ],
+        "owned_containers_before": [
+          "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+        ],
+        "report": {
+          "agent_sha256": "73932eb3b4db45dd58e7323097195e4b05316ab3fd39c9dff18b7be2e2aecc85",
+          "artifacts": {},
+          "call_counter_scope": "delivered replies include same-owner receipt replay",
+          "calls": {
+            "completed": 2,
+            "requested": 4,
+            "stopped": 2
+          },
+          "claim": "single source-task execution; no source evolution or improvement claim",
+          "config_sha256": "31baf9315ca78f9884fc33d9b8d18501bd35838516df69f1de32620103f76742",
+          "descriptor_sha256": "6aa25b5b915b808a362fcf68f477a87b9e398d8a1cb24e5a80669347d18ac6ed",
+          "execution": {
+            "cleanup_status": "removed",
+            "container_id": "a1ec0d3397ae19c8e2ea66960b6b622fbe822350f51492c647e2d13951e16448",
+            "reason": "host"
+          },
+          "format": "buddha.candidate-generation-report.v1",
+          "gateway_manifest_sha256": "20b26dc51464d8486867dc3e1db19eb5a60197201759b00ca5989f7363f58f32",
+          "gateway_totals": {
+            "committed_microusd": 22,
+            "operation_count": 2,
+            "reserved_microusd": 0,
+            "spent_microusd": 22
+          },
+          "gateway_totals_scope": "entire original owner, including earlier operations/holds",
+          "host_stop_reason": "quota",
+          "max_callbacks": 2,
+          "owner_operation_coverage_complete": true,
+          "reason": "quota",
+          "runtime_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+          "status": "stopped",
+          "tasks_sha256": "74c04f3695681092e711600ac3a2126ea9242634122217232a67826227bd856f"
+        }
+      },
+      {
+        "fixture": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-runner\\runs\\reviews\\src01-candidate-proof-gmpiu04f\\unknown-hostile",
+        "frames": [
+          {
+            "agent_sha256": "73932eb3b4db45dd58e7323097195e4b05316ab3fd39c9dff18b7be2e2aecc85",
+            "runtime_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+            "task_sha256": "7b5af61abba651fcb109931b98d56026e3e15de8fa1a5b605f7bb46aa4366c2b",
+            "type": "ready"
+          },
+          {
+            "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjEwMCwibWVzc2FnZXMiOlt7ImNvbnRlbnQiOiJPbmUgbGl0ZXJhbCByZXNwb25zZSBjYWZcdTAwZTkgXHVkODNjXHVkZjMxLiIsInJvbGUiOiJ1c2VyIn1dLCJtb2RlbCI6ImNhbmRpZGF0ZS1vcGVuYWktZml4dHVyZSJ9",
+            "provider": "openai",
+            "sequence": 0,
+            "type": "request"
+          },
+          {
+            "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjEwMCwibWVzc2FnZXMiOlt7ImNvbnRlbnQiOiJPbmUgbGl0ZXJhbCByZXNwb25zZSBjYWZcdTAwZTkgXHVkODNjXHVkZjMxLiIsInJvbGUiOiJ1c2VyIn1dLCJtb2RlbCI6ImNhbmRpZGF0ZS1vcGVuYWktZml4dHVyZSJ9",
+            "provider": "openai",
+            "sequence": 1,
+            "type": "request"
+          },
+          {
+            "answers": [
+              "forged",
+              "forged"
+            ],
+            "reason": "complete",
+            "status": "complete",
+            "type": "done"
+          }
+        ],
+        "interrupted": false,
+        "label": "unknown-hostile",
+        "ledger": {
+          "committed_microusd": 10200,
+          "operation_count": 1,
+          "reserved_microusd": 10200,
+          "spent_microusd": 0
+        },
+        "new_sends": [
+          {
+            "body": {
+              "max_completion_tokens": 100,
+              "messages": [
+                {
+                  "content": "One literal response caf\u00e9 \ud83c\udf31.",
+                  "role": "user"
+                }
+              ],
+              "model": "candidate-openai-fixture"
+            },
+            "body_sha256": "bc9f194e88d923f282e1c6a5b7cce223abfa30fc61575b2e71f8c89b7bae20d4"
+          }
+        ],
+        "operations": [
+          {
+            "actual_microusd": null,
+            "operation_id": "8b86214a862b4a8b541b654f180f84cb8b8e548a2dc2193447891f59a0f1da8f",
+            "receipt_sha256": "18fe2d40b5f589b6e5d4057bebb55904a0b0799bf0ae5d5a29a2217efae7a5ae",
+            "request": {
+              "attempt": 0,
+              "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjEwMCwibWVzc2FnZXMiOlt7ImNvbnRlbnQiOiJPbmUgbGl0ZXJhbCByZXNwb25zZSBjYWZcdTAwZTkgXHVkODNjXHVkZjMxLiIsInJvbGUiOiJ1c2VyIn1dLCJtb2RlbCI6ImNhbmRpZGF0ZS1vcGVuYWktZml4dHVyZSJ9",
+              "capability": "openai.chat-completions.v1",
+              "logical_id": "7c8fecf7c5a2a93b0ebf6c5d1722a14cf9d14bb4418d099149cd2104d8cdf031",
+              "profile_id": "candidate"
+            },
+            "reserve_microusd": 10200,
+            "status": "unknown"
+          }
+        ],
+        "owned_containers_after": [
+          "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+        ],
+        "owned_containers_before": [
+          "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+        ],
+        "report": {
+          "agent_sha256": "73932eb3b4db45dd58e7323097195e4b05316ab3fd39c9dff18b7be2e2aecc85",
+          "artifacts": {},
+          "call_counter_scope": "delivered replies include same-owner receipt replay",
+          "calls": {
+            "completed": 0,
+            "requested": 2,
+            "stopped": 2
+          },
+          "claim": "single source-task execution; no source evolution or improvement claim",
+          "config_sha256": "31baf9315ca78f9884fc33d9b8d18501bd35838516df69f1de32620103f76742",
+          "descriptor_sha256": "fc3a00baf05b8664807e0de8dd936fc2145f5b7a10c42eddb5c5b41b653f9e38",
+          "execution": {
+            "cleanup_status": "removed",
+            "container_id": "4f9738d417a597b04ecd0975f35041769f7c56abbc80648e64a0aa3a3f002fc3",
+            "reason": "host"
+          },
+          "format": "buddha.candidate-generation-report.v1",
+          "gateway_manifest_sha256": "de5b3a2731d1ce4ce3ef713dc81d62e08ebd28d1805e7cfb0ce21373fa8ff99d",
+          "gateway_totals": {
+            "committed_microusd": 10200,
+            "operation_count": 1,
+            "reserved_microusd": 10200,
+            "spent_microusd": 0
+          },
+          "gateway_totals_scope": "entire original owner, including earlier operations/holds",
+          "host_stop_reason": "unknown",
+          "max_callbacks": 3,
+          "owner_operation_coverage_complete": false,
+          "reason": "unknown",
+          "runtime_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+          "status": "stopped",
+          "tasks_sha256": "74c04f3695681092e711600ac3a2126ea9242634122217232a67826227bd856f"
+        }
+      },
+      {
+        "fixture": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-runner\\runs\\reviews\\src01-candidate-proof-gmpiu04f\\timeout",
+        "frames": [
+          {
+            "agent_sha256": "932634b67581e49a7a959bea80ca9d119431b966f5883352521e73cc25041b7e",
+            "runtime_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+            "task_sha256": "7b5af61abba651fcb109931b98d56026e3e15de8fa1a5b605f7bb46aa4366c2b",
+            "type": "ready"
+          },
+          {
+            "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjEwMCwibWVzc2FnZXMiOlt7ImNvbnRlbnQiOiJPbmUgbGl0ZXJhbCByZXNwb25zZSBjYWZcdTAwZTkgXHVkODNjXHVkZjMxLiIsInJvbGUiOiJ1c2VyIn1dLCJtb2RlbCI6ImNhbmRpZGF0ZS1vcGVuYWktZml4dHVyZSJ9",
+            "provider": "openai",
+            "sequence": 0,
+            "type": "request"
+          },
+          {
+            "answers": [],
+            "reason": "unknown",
+            "status": "stopped",
+            "type": "done"
+          }
+        ],
+        "interrupted": false,
+        "label": "timeout",
+        "ledger": {
+          "committed_microusd": 10200,
+          "operation_count": 1,
+          "reserved_microusd": 10200,
+          "spent_microusd": 0
+        },
+        "new_sends": [
+          {
+            "body": {
+              "max_completion_tokens": 100,
+              "messages": [
+                {
+                  "content": "One literal response caf\u00e9 \ud83c\udf31.",
+                  "role": "user"
+                }
+              ],
+              "model": "candidate-openai-fixture"
+            },
+            "body_sha256": "bc9f194e88d923f282e1c6a5b7cce223abfa30fc61575b2e71f8c89b7bae20d4"
+          }
+        ],
+        "operations": [
+          {
+            "actual_microusd": null,
+            "operation_id": "273d6d1c3b6e870df2012167009d692a7bddc217d6535233e354efee43d8285a",
+            "receipt_sha256": null,
+            "request": null,
+            "reserve_microusd": 10200,
+            "status": "unknown"
+          }
+        ],
+        "owned_containers_after": [
+          "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+        ],
+        "owned_containers_before": [
+          "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+        ],
+        "report": {
+          "agent_sha256": "932634b67581e49a7a959bea80ca9d119431b966f5883352521e73cc25041b7e",
+          "artifacts": {},
+          "call_counter_scope": "delivered replies include same-owner receipt replay",
+          "calls": {
+            "completed": 0,
+            "requested": 1,
+            "stopped": 1
+          },
+          "claim": "single source-task execution; no source evolution or improvement claim",
+          "config_sha256": "31baf9315ca78f9884fc33d9b8d18501bd35838516df69f1de32620103f76742",
+          "descriptor_sha256": "58e050d66162a721267df92c3a7d9a464ef0dae52b5378d424fcd04e9ad7c1f7",
+          "execution": {
+            "cleanup_status": "removed",
+            "configuration": {
+              "engine_endpoint_sha256": "30341252ca9aa2b298da11cd8527fdfbf8ab30a2f3b5a3c871188c778b20af30",
+              "host": {
+                "CapDrop": [
+                  "ALL"
+                ],
+                "CgroupnsMode": "private",
+                "IpcMode": "none",
+                "LogConfig": {
+                  "Config": {},
+                  "Type": "none"
+                },
+                "Memory": 268435456,
+                "MemorySwap": 268435456,
+                "NanoCpus": 1000000000,
+                "NetworkMode": "none",
+                "PidMode": "",
+                "PidsLimit": 64,
+                "Privileged": false,
+                "ReadonlyRootfs": true,
+                "SecurityOpt": [
+                  "no-new-privileges:true"
+                ],
+                "Tmpfs": {
+                  "/scratch": "rw,size=128m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700",
+                  "/tmp": "rw,size=16m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700"
+                },
+                "UTSMode": ""
+              },
+              "image": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+              "mounts": {
+                "/agent": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-runner\\runs\\reviews\\src01-candidate-proof-gmpiu04f\\timeout\\agent",
+                "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-runner\\runs\\reviews\\src01-candidate-proof-gmpiu04f\\timeout\\runner"
+              },
+              "role": "agent"
+            },
+            "container_id": "853f139fc52f52e76c6dd07e7301d5bcf98bd2e6a55a2fc9f6c05b384fe7cb48",
+            "elapsed_seconds": 1.3546631999779493,
+            "exit_code": 0,
+            "frame_count": 3,
+            "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+            "stderr_bytes": 23,
+            "stderr_sha256": "b94bcb47899f094b6e65b8f296eba1d525fad93c654d469ef86d38eae575e83a",
+            "stdout_bytes": 600
+          },
+          "format": "buddha.candidate-generation-report.v1",
+          "gateway_manifest_sha256": "e09784ad523a82e11857ccaecc6f967fa3a34753ab5b62a4547e0f5b4db65b2d",
+          "gateway_totals": {
+            "committed_microusd": 10200,
+            "operation_count": 1,
+            "reserved_microusd": 10200,
+            "spent_microusd": 0
+          },
+          "gateway_totals_scope": "entire original owner, including earlier operations/holds",
+          "host_stop_reason": "unknown",
+          "max_callbacks": 3,
+          "owner_operation_coverage_complete": false,
+          "reason": "unknown",
+          "runtime_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+          "status": "stopped",
+          "tasks_sha256": "74c04f3695681092e711600ac3a2126ea9242634122217232a67826227bd856f"
+        }
+      }
+    ],
+    "checks": [
+      {
+        "answers": [
+          {
+            "answers": [
+              "poor duplicate",
+              "poor duplicate"
+            ],
+            "task_id": "1"
+          }
+        ],
+        "fixture": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-runner\\runs\\reviews\\src01-candidate-proof-gmpiu04f\\openai-3-calls",
+        "frames": [
+          {
+            "agent_sha256": "932634b67581e49a7a959bea80ca9d119431b966f5883352521e73cc25041b7e",
+            "runtime_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+            "task_sha256": "7b5af61abba651fcb109931b98d56026e3e15de8fa1a5b605f7bb46aa4366c2b",
+            "type": "ready"
+          },
+          {
+            "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjEwMCwibWVzc2FnZXMiOlt7ImNvbnRlbnQiOiJPbmUgbGl0ZXJhbCByZXNwb25zZSBjYWZcdTAwZTkgXHVkODNjXHVkZjMxLiIsInJvbGUiOiJ1c2VyIn1dLCJtb2RlbCI6ImNhbmRpZGF0ZS1vcGVuYWktZml4dHVyZSJ9",
+            "provider": "openai",
+            "sequence": 0,
+            "type": "request"
+          },
+          {
+            "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjUwLCJtZXNzYWdlcyI6W3siY29udGVudCI6Ik9uZSBsaXRlcmFsIHJlc3BvbnNlIGNhZlx1MDBlOSBcdWQ4M2NcdWRmMzEuIiwicm9sZSI6InVzZXIifV0sIm1vZGVsIjoiY2FuZGlkYXRlLW9wZW5haS1maXh0dXJlIn0=",
+            "provider": "openai",
+            "sequence": 1,
+            "type": "request"
+          },
+          {
+            "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjMzLCJtZXNzYWdlcyI6W3siY29udGVudCI6Ik9uZSBsaXRlcmFsIHJlc3BvbnNlIGNhZlx1MDBlOSBcdWQ4M2NcdWRmMzEuIiwicm9sZSI6InVzZXIifV0sIm1vZGVsIjoiY2FuZGlkYXRlLW9wZW5haS1maXh0dXJlIn0=",
+            "provider": "openai",
+            "sequence": 2,
+            "type": "request"
+          },
+          {
+            "answers": [
+              "poor duplicate",
+              "poor duplicate"
+            ],
+            "reason": "complete",
+            "status": "complete",
+            "type": "done"
+          }
+        ],
+        "interrupted": false,
+        "kind": "inactive-keyless-receipt-replay",
+        "label": "openai-3-calls",
+        "ledger": {
+          "committed_microusd": 33,
+          "operation_count": 3,
+          "reserved_microusd": 0,
+          "spent_microusd": 33
+        },
+        "native_bytes_sha256": "591b159522b348b7fe2d9850fdd98275acf8c72bce2deeb3ca2ebf7fb948bae9",
+        "new_sends": [],
+        "operations": [
+          {
+            "actual_microusd": 11,
+            "operation_id": "1c312f5c4cd45b2cec20ac34e84389be702322efb7f727250bee1dd1185941d0",
+            "receipt_sha256": "a406d1879965ef8a39eb2dd8ecd276b99d40b54156631505c604cdc5ce0ac979",
+            "request": {
+              "attempt": 0,
+              "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjMzLCJtZXNzYWdlcyI6W3siY29udGVudCI6Ik9uZSBsaXRlcmFsIHJlc3BvbnNlIGNhZlx1MDBlOSBcdWQ4M2NcdWRmMzEuIiwicm9sZSI6InVzZXIifV0sIm1vZGVsIjoiY2FuZGlkYXRlLW9wZW5haS1maXh0dXJlIn0=",
+              "capability": "openai.chat-completions.v1",
+              "logical_id": "441ba180f6d3090e61f5843e81e4b558bf6117b6b8f6f65bdb2bcaf3b6d6efe5",
+              "profile_id": "candidate"
+            },
+            "reserve_microusd": 10066,
+            "status": "completed"
+          },
+          {
+            "actual_microusd": 11,
+            "operation_id": "25ad7ae13cf59dceb067e02134a31725dc32ce192c8b11b65a27eeb9030c60bf",
+            "receipt_sha256": "2398071bcd827c9febe150a08e324959a8506a3fed11484568808f67e15689de",
+            "request": {
+              "attempt": 0,
+              "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjUwLCJtZXNzYWdlcyI6W3siY29udGVudCI6Ik9uZSBsaXRlcmFsIHJlc3BvbnNlIGNhZlx1MDBlOSBcdWQ4M2NcdWRmMzEuIiwicm9sZSI6InVzZXIifV0sIm1vZGVsIjoiY2FuZGlkYXRlLW9wZW5haS1maXh0dXJlIn0=",
+              "capability": "openai.chat-completions.v1",
+              "logical_id": "c6dae926bec9441a5c71011cead7dde8dd47e71f042f1f062af055462b4191a5",
+              "profile_id": "candidate"
+            },
+            "reserve_microusd": 10100,
+            "status": "completed"
+          },
+          {
+            "actual_microusd": 11,
+            "operation_id": "3c6493315ac86c334908c622328494d82be6be58616092f9ec7d1502cc3f8d95",
+            "receipt_sha256": "011526edc59537a445dee93831941fd42f94c6d99942c80511f51b4958da13cb",
+            "request": {
+              "attempt": 0,
+              "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjEwMCwibWVzc2FnZXMiOlt7ImNvbnRlbnQiOiJPbmUgbGl0ZXJhbCByZXNwb25zZSBjYWZcdTAwZTkgXHVkODNjXHVkZjMxLiIsInJvbGUiOiJ1c2VyIn1dLCJtb2RlbCI6ImNhbmRpZGF0ZS1vcGVuYWktZml4dHVyZSJ9",
+              "capability": "openai.chat-completions.v1",
+              "logical_id": "cc4f0bcd1c51653fc88506d0524c0d619285e2af94e521b75bf562320b11e14f",
+              "profile_id": "candidate"
+            },
+            "reserve_microusd": 10200,
+            "status": "completed"
+          }
+        ],
+        "owned_containers_after": [
+          "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+        ],
+        "owned_containers_before": [
+          "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+        ],
+        "report": {
+          "agent_sha256": "932634b67581e49a7a959bea80ca9d119431b966f5883352521e73cc25041b7e",
+          "artifacts": {
+            "answers.json": "a7af0c846c649b60aa855db262820e396741db4d8e80576314a469ad0ee26272"
+          },
+          "call_counter_scope": "delivered replies include same-owner receipt replay",
+          "calls": {
+            "completed": 3,
+            "requested": 3,
+            "stopped": 0
+          },
+          "claim": "single source-task execution; no source evolution or improvement claim",
+          "config_sha256": "31baf9315ca78f9884fc33d9b8d18501bd35838516df69f1de32620103f76742",
+          "descriptor_sha256": "d27fd6b0c0db1a5cbbc74bffebd77eb0c1de56691c063d49d97c264001d12c39",
+          "execution": {
+            "cleanup_status": "removed",
+            "configuration": {
+              "engine_endpoint_sha256": "30341252ca9aa2b298da11cd8527fdfbf8ab30a2f3b5a3c871188c778b20af30",
+              "host": {
+                "CapDrop": [
+                  "ALL"
+                ],
+                "CgroupnsMode": "private",
+                "IpcMode": "none",
+                "LogConfig": {
+                  "Config": {},
+                  "Type": "none"
+                },
+                "Memory": 268435456,
+                "MemorySwap": 268435456,
+                "NanoCpus": 1000000000,
+                "NetworkMode": "none",
+                "PidMode": "",
+                "PidsLimit": 64,
+                "Privileged": false,
+                "ReadonlyRootfs": true,
+                "SecurityOpt": [
+                  "no-new-privileges:true"
+                ],
+                "Tmpfs": {
+                  "/scratch": "rw,size=128m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700",
+                  "/tmp": "rw,size=16m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700"
+                },
+                "UTSMode": ""
+              },
+              "image": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+              "mounts": {
+                "/agent": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-runner\\runs\\reviews\\src01-candidate-proof-gmpiu04f\\openai-3-calls\\agent",
+                "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-runner\\runs\\reviews\\src01-candidate-proof-gmpiu04f\\openai-3-calls\\runner"
+              },
+              "role": "agent"
+            },
+            "container_id": "38330386d38cf2ea1340c51bcdc77e7dfd213cac7e99433f10b2eb2d7a6499df",
+            "elapsed_seconds": 1.5709463000530377,
+            "exit_code": 0,
+            "frame_count": 5,
+            "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+            "stderr_bytes": 23,
+            "stderr_sha256": "b94bcb47899f094b6e65b8f296eba1d525fad93c654d469ef86d38eae575e83a",
+            "stdout_bytes": 1173
+          },
+          "format": "buddha.candidate-generation-report.v1",
+          "gateway_manifest_sha256": "8185eae152fa1e66d49be2affbe9bb789d30b2bd5cd4c865ddca24e4ef0da34f",
+          "gateway_totals": {
+            "committed_microusd": 33,
+            "operation_count": 3,
+            "reserved_microusd": 0,
+            "spent_microusd": 33
+          },
+          "gateway_totals_scope": "entire original owner, including earlier operations/holds",
+          "host_stop_reason": null,
+          "max_callbacks": 3,
+          "owner_operation_coverage_complete": true,
+          "reason": "complete",
+          "runtime_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+          "status": "complete",
+          "tasks_sha256": "74c04f3695681092e711600ac3a2126ea9242634122217232a67826227bd856f"
+        }
+      },
+      {
+        "conflict": {
+          "fixture": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-runner\\runs\\reviews\\src01-candidate-proof-gmpiu04f\\changed-request-replay",
+          "frames": [
+            {
+              "agent_sha256": "93849c37d863bb191b71ee62e12c1c6207ff5f602e808b4ec09697c68e745379",
+              "runtime_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+              "task_sha256": "7b5af61abba651fcb109931b98d56026e3e15de8fa1a5b605f7bb46aa4366c2b",
+              "type": "ready"
+            },
+            {
+              "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjEwMCwibWVzc2FnZXMiOlt7ImNvbnRlbnQiOiJPbmUgbGl0ZXJhbCByZXNwb25zZSBjYWZcdTAwZTkgXHVkODNjXHVkZjMxLjkyZTJhY2Q5YzcyN2ZhOGMzNTczY2JiOTE4MmZlNTZmIiwicm9sZSI6InVzZXIifV0sIm1vZGVsIjoiY2FuZGlkYXRlLW9wZW5haS1maXh0dXJlIn0=",
+              "provider": "openai",
+              "sequence": 0,
+              "type": "request"
+            },
+            {
+              "answers": [],
+              "reason": "protocol",
+              "status": "stopped",
+              "type": "done"
+            }
+          ],
+          "interrupted": false,
+          "label": "changed-request-replay",
+          "ledger": {
+            "committed_microusd": 11,
+            "operation_count": 1,
+            "reserved_microusd": 0,
+            "spent_microusd": 11
+          },
+          "new_sends": [],
+          "operations": [
+            {
+              "actual_microusd": 11,
+              "operation_id": "99a80ac755dc2ad77e1b33d0949df2fe37890076665dbd7a2fe3deaeccfcb77a",
+              "receipt_sha256": "106da93e2c3294930d9e3c3f15f1c86d37da052d9cf4540f19c5ba117ae8a916",
+              "request": {
+                "attempt": 0,
+                "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjEwMCwibWVzc2FnZXMiOlt7ImNvbnRlbnQiOiJPbmUgbGl0ZXJhbCByZXNwb25zZSBjYWZcdTAwZTkgXHVkODNjXHVkZjMxLmNiYjk5NzY2ZWJiZmIzOGU1MTRlYWIwM2Y0NDcyM2M4Iiwicm9sZSI6InVzZXIifV0sIm1vZGVsIjoiY2FuZGlkYXRlLW9wZW5haS1maXh0dXJlIn0=",
+                "capability": "openai.chat-completions.v1",
+                "logical_id": "3207eae891600e1e7c4d9f338c3264debec9999c5c3d0481e5e7a89c82383316",
+                "profile_id": "candidate"
+              },
+              "reserve_microusd": 10200,
+              "status": "completed"
+            }
+          ],
+          "owned_containers_after": [
+            "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+          ],
+          "owned_containers_before": [
+            "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+          ],
+          "report": {
+            "agent_sha256": "93849c37d863bb191b71ee62e12c1c6207ff5f602e808b4ec09697c68e745379",
+            "artifacts": {},
+            "call_counter_scope": "delivered replies include same-owner receipt replay",
+            "calls": {
+              "completed": 0,
+              "requested": 1,
+              "stopped": 1
+            },
+            "claim": "single source-task execution; no source evolution or improvement claim",
+            "config_sha256": "31baf9315ca78f9884fc33d9b8d18501bd35838516df69f1de32620103f76742",
+            "descriptor_sha256": "21acbe21ac6c8043e9c3982b271f28cae2e35ac248d2d4f386c28d76143e5792",
+            "execution": {
+              "cleanup_status": "removed",
+              "configuration": {
+                "engine_endpoint_sha256": "30341252ca9aa2b298da11cd8527fdfbf8ab30a2f3b5a3c871188c778b20af30",
+                "host": {
+                  "CapDrop": [
+                    "ALL"
+                  ],
+                  "CgroupnsMode": "private",
+                  "IpcMode": "none",
+                  "LogConfig": {
+                    "Config": {},
+                    "Type": "none"
+                  },
+                  "Memory": 268435456,
+                  "MemorySwap": 268435456,
+                  "NanoCpus": 1000000000,
+                  "NetworkMode": "none",
+                  "PidMode": "",
+                  "PidsLimit": 64,
+                  "Privileged": false,
+                  "ReadonlyRootfs": true,
+                  "SecurityOpt": [
+                    "no-new-privileges:true"
+                  ],
+                  "Tmpfs": {
+                    "/scratch": "rw,size=128m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700",
+                    "/tmp": "rw,size=16m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700"
+                  },
+                  "UTSMode": ""
+                },
+                "image": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+                "mounts": {
+                  "/agent": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-runner\\runs\\reviews\\src01-candidate-proof-gmpiu04f\\changed-request-replay\\agent",
+                  "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-runner\\runs\\reviews\\src01-candidate-proof-gmpiu04f\\changed-request-replay\\runner"
+                },
+                "role": "agent"
+              },
+              "container_id": "1a27ac9f2a912fb4919d8b13cc292c813d7e85a11d7e87d1782d0c4f64309494",
+              "elapsed_seconds": 1.2537381000583991,
+              "exit_code": 0,
+              "frame_count": 3,
+              "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+              "stderr_bytes": 23,
+              "stderr_sha256": "b94bcb47899f094b6e65b8f296eba1d525fad93c654d469ef86d38eae575e83a",
+              "stdout_bytes": 645
+            },
+            "format": "buddha.candidate-generation-report.v1",
+            "gateway_manifest_sha256": "37f3a0719f4569dd9eb44b336877ff5945c4d426a23fa9585ab9de93f51bf42b",
+            "gateway_totals": {
+              "committed_microusd": 11,
+              "operation_count": 1,
+              "reserved_microusd": 0,
+              "spent_microusd": 11
+            },
+            "gateway_totals_scope": "entire original owner, including earlier operations/holds",
+            "host_stop_reason": "protocol",
+            "max_callbacks": 3,
+            "owner_operation_coverage_complete": false,
+            "reason": "protocol",
+            "runtime_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+            "status": "stopped",
+            "tasks_sha256": "74c04f3695681092e711600ac3a2126ea9242634122217232a67826227bd856f"
+          }
+        },
+        "first": {
+          "answers": [
+            {
+              "answers": [
+                " raw literal \n",
+                " raw literal \n"
+              ],
+              "task_id": "1"
+            }
+          ],
+          "fixture": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-runner\\runs\\reviews\\src01-candidate-proof-gmpiu04f\\changed-request-replay",
+          "frames": [
+            {
+              "agent_sha256": "93849c37d863bb191b71ee62e12c1c6207ff5f602e808b4ec09697c68e745379",
+              "runtime_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+              "task_sha256": "7b5af61abba651fcb109931b98d56026e3e15de8fa1a5b605f7bb46aa4366c2b",
+              "type": "ready"
+            },
+            {
+              "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjEwMCwibWVzc2FnZXMiOlt7ImNvbnRlbnQiOiJPbmUgbGl0ZXJhbCByZXNwb25zZSBjYWZcdTAwZTkgXHVkODNjXHVkZjMxLmNiYjk5NzY2ZWJiZmIzOGU1MTRlYWIwM2Y0NDcyM2M4Iiwicm9sZSI6InVzZXIifV0sIm1vZGVsIjoiY2FuZGlkYXRlLW9wZW5haS1maXh0dXJlIn0=",
+              "provider": "openai",
+              "sequence": 0,
+              "type": "request"
+            },
+            {
+              "answers": [
+                " raw literal \n",
+                " raw literal \n"
+              ],
+              "reason": "complete",
+              "status": "complete",
+              "type": "done"
+            }
+          ],
+          "interrupted": false,
+          "label": "changed-request-replay",
+          "ledger": {
+            "committed_microusd": 11,
+            "operation_count": 1,
+            "reserved_microusd": 0,
+            "spent_microusd": 11
+          },
+          "native_bytes_sha256": "d4beb444fdcc81ed85aac521395ee8ffc15c0c8f36614639da25b98bbfe40c27",
+          "new_sends": [
+            {
+              "body": {
+                "max_completion_tokens": 100,
+                "messages": [
+                  {
+                    "content": "One literal response caf\u00e9 \ud83c\udf31.cbb99766ebbfb38e514eab03f44723c8",
+                    "role": "user"
+                  }
+                ],
+                "model": "candidate-openai-fixture"
+              },
+              "body_sha256": "bdcedbbe026088faffb327ce94d63c834c46d07a0c3ddecb03728a2e5cf7a5cb"
+            }
+          ],
+          "operations": [
+            {
+              "actual_microusd": 11,
+              "operation_id": "99a80ac755dc2ad77e1b33d0949df2fe37890076665dbd7a2fe3deaeccfcb77a",
+              "receipt_sha256": "106da93e2c3294930d9e3c3f15f1c86d37da052d9cf4540f19c5ba117ae8a916",
+              "request": {
+                "attempt": 0,
+                "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjEwMCwibWVzc2FnZXMiOlt7ImNvbnRlbnQiOiJPbmUgbGl0ZXJhbCByZXNwb25zZSBjYWZcdTAwZTkgXHVkODNjXHVkZjMxLmNiYjk5NzY2ZWJiZmIzOGU1MTRlYWIwM2Y0NDcyM2M4Iiwicm9sZSI6InVzZXIifV0sIm1vZGVsIjoiY2FuZGlkYXRlLW9wZW5haS1maXh0dXJlIn0=",
+                "capability": "openai.chat-completions.v1",
+                "logical_id": "3207eae891600e1e7c4d9f338c3264debec9999c5c3d0481e5e7a89c82383316",
+                "profile_id": "candidate"
+              },
+              "reserve_microusd": 10200,
+              "status": "completed"
+            }
+          ],
+          "owned_containers_after": [
+            "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+          ],
+          "owned_containers_before": [
+            "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+          ],
+          "report": {
+            "agent_sha256": "93849c37d863bb191b71ee62e12c1c6207ff5f602e808b4ec09697c68e745379",
+            "artifacts": {
+              "answers.json": "b8b2686bdb5d32899eaafd810bbc57ed8af8f66484df802849e4f249be8faaab"
+            },
+            "call_counter_scope": "delivered replies include same-owner receipt replay",
+            "calls": {
+              "completed": 1,
+              "requested": 1,
+              "stopped": 0
+            },
+            "claim": "single source-task execution; no source evolution or improvement claim",
+            "config_sha256": "31baf9315ca78f9884fc33d9b8d18501bd35838516df69f1de32620103f76742",
+            "descriptor_sha256": "21acbe21ac6c8043e9c3982b271f28cae2e35ac248d2d4f386c28d76143e5792",
+            "execution": {
+              "cleanup_status": "removed",
+              "configuration": {
+                "engine_endpoint_sha256": "30341252ca9aa2b298da11cd8527fdfbf8ab30a2f3b5a3c871188c778b20af30",
+                "host": {
+                  "CapDrop": [
+                    "ALL"
+                  ],
+                  "CgroupnsMode": "private",
+                  "IpcMode": "none",
+                  "LogConfig": {
+                    "Config": {},
+                    "Type": "none"
+                  },
+                  "Memory": 268435456,
+                  "MemorySwap": 268435456,
+                  "NanoCpus": 1000000000,
+                  "NetworkMode": "none",
+                  "PidMode": "",
+                  "PidsLimit": 64,
+                  "Privileged": false,
+                  "ReadonlyRootfs": true,
+                  "SecurityOpt": [
+                    "no-new-privileges:true"
+                  ],
+                  "Tmpfs": {
+                    "/scratch": "rw,size=128m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700",
+                    "/tmp": "rw,size=16m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700"
+                  },
+                  "UTSMode": ""
+                },
+                "image": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+                "mounts": {
+                  "/agent": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-runner\\runs\\reviews\\src01-candidate-proof-gmpiu04f\\changed-request-replay\\agent",
+                  "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-runner\\runs\\reviews\\src01-candidate-proof-gmpiu04f\\changed-request-replay\\runner"
+                },
+                "role": "agent"
+              },
+              "container_id": "3b1b3d9e0acdbcc44a9261e609e6e6bccb0cdc241a99c17d2df55dbe0d228202",
+              "elapsed_seconds": 1.4008895000442863,
+              "exit_code": 0,
+              "frame_count": 3,
+              "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+              "stderr_bytes": 23,
+              "stderr_sha256": "b94bcb47899f094b6e65b8f296eba1d525fad93c654d469ef86d38eae575e83a",
+              "stdout_bytes": 681
+            },
+            "format": "buddha.candidate-generation-report.v1",
+            "gateway_manifest_sha256": "37f3a0719f4569dd9eb44b336877ff5945c4d426a23fa9585ab9de93f51bf42b",
+            "gateway_totals": {
+              "committed_microusd": 11,
+              "operation_count": 1,
+              "reserved_microusd": 0,
+              "spent_microusd": 11
+            },
+            "gateway_totals_scope": "entire original owner, including earlier operations/holds",
+            "host_stop_reason": null,
+            "max_callbacks": 3,
+            "owner_operation_coverage_complete": true,
+            "reason": "complete",
+            "runtime_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+            "status": "complete",
+            "tasks_sha256": "74c04f3695681092e711600ac3a2126ea9242634122217232a67826227bd856f"
+          }
+        },
+        "kind": "same-owner-body-conflict"
+      },
+      {
+        "kind": "received-interruption-same-owner-resume",
+        "prefix": {
+          "fixture": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-runner\\runs\\reviews\\src01-candidate-proof-gmpiu04f\\received-interruption",
+          "frames": [
+            {
+              "agent_sha256": "932634b67581e49a7a959bea80ca9d119431b966f5883352521e73cc25041b7e",
+              "runtime_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+              "task_sha256": "7b5af61abba651fcb109931b98d56026e3e15de8fa1a5b605f7bb46aa4366c2b",
+              "type": "ready"
+            },
+            {
+              "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjEwMCwibWVzc2FnZXMiOlt7ImNvbnRlbnQiOiJPbmUgbGl0ZXJhbCByZXNwb25zZSBjYWZcdTAwZTkgXHVkODNjXHVkZjMxLiIsInJvbGUiOiJ1c2VyIn1dLCJtb2RlbCI6ImNhbmRpZGF0ZS1vcGVuYWktZml4dHVyZSJ9",
+              "provider": "openai",
+              "sequence": 0,
+              "type": "request"
+            }
+          ],
+          "interrupted": true,
+          "label": "received-interruption",
+          "ledger": {
+            "committed_microusd": 11,
+            "operation_count": 1,
+            "reserved_microusd": 0,
+            "spent_microusd": 11
+          },
+          "new_sends": [
+            {
+              "body": {
+                "max_completion_tokens": 100,
+                "messages": [
+                  {
+                    "content": "One literal response caf\u00e9 \ud83c\udf31.",
+                    "role": "user"
+                  }
+                ],
+                "model": "candidate-openai-fixture"
+              },
+              "body_sha256": "bc9f194e88d923f282e1c6a5b7cce223abfa30fc61575b2e71f8c89b7bae20d4"
+            }
+          ],
+          "operations": [
+            {
+              "actual_microusd": 11,
+              "operation_id": "396d5ebbf3716ce31d85d69e7e07bff82018ef8d4671b9cbacc45a6d8b83e833",
+              "receipt_sha256": "a631d7ee2c766e58700cc1356db82b25ec77b2a3b228955dbb882b0d003e0d19",
+              "request": {
+                "attempt": 0,
+                "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjEwMCwibWVzc2FnZXMiOlt7ImNvbnRlbnQiOiJPbmUgbGl0ZXJhbCByZXNwb25zZSBjYWZcdTAwZTkgXHVkODNjXHVkZjMxLiIsInJvbGUiOiJ1c2VyIn1dLCJtb2RlbCI6ImNhbmRpZGF0ZS1vcGVuYWktZml4dHVyZSJ9",
+                "capability": "openai.chat-completions.v1",
+                "logical_id": "8135769ca66aea875ac0dfd41a1608d3b69ba5bff4e01208a05d2a5c9d8b41a3",
+                "profile_id": "candidate"
+              },
+              "reserve_microusd": 10200,
+              "status": "completed"
+            }
+          ],
+          "owned_containers_after": [
+            "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+          ],
+          "owned_containers_before": [
+            "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+          ],
+          "report": {
+            "agent_sha256": "932634b67581e49a7a959bea80ca9d119431b966f5883352521e73cc25041b7e",
+            "artifacts": {},
+            "call_counter_scope": "delivered replies include same-owner receipt replay",
+            "calls": {
+              "completed": 0,
+              "requested": 1,
+              "stopped": 0
+            },
+            "claim": "single source-task execution; no source evolution or improvement claim",
+            "config_sha256": "31baf9315ca78f9884fc33d9b8d18501bd35838516df69f1de32620103f76742",
+            "descriptor_sha256": "7c13c743aa6a851d7f734212f85360dfd2481b44d2f2a4cb2ddb9676a3e7717c",
+            "execution": null,
+            "format": "buddha.candidate-generation-report.v1",
+            "gateway_manifest_sha256": "cd1b2ebc01ae1e65e0e0e075cc8d051ff6af973f79a4d7e1b5bb26efb40bb710",
+            "gateway_totals": {
+              "committed_microusd": 11,
+              "operation_count": 1,
+              "reserved_microusd": 0,
+              "spent_microusd": 11
+            },
+            "gateway_totals_scope": "entire original owner, including earlier operations/holds",
+            "host_stop_reason": null,
+            "max_callbacks": 3,
+            "owner_operation_coverage_complete": false,
+            "reason": "cancelled",
+            "runtime_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+            "status": "stopped",
+            "tasks_sha256": "74c04f3695681092e711600ac3a2126ea9242634122217232a67826227bd856f"
+          }
+        },
+        "resumed": {
+          "answers": [
+            {
+              "answers": [
+                "poor duplicate",
+                "poor duplicate"
+              ],
+              "task_id": "1"
+            }
+          ],
+          "fixture": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-runner\\runs\\reviews\\src01-candidate-proof-gmpiu04f\\received-interruption",
+          "frames": [
+            {
+              "agent_sha256": "932634b67581e49a7a959bea80ca9d119431b966f5883352521e73cc25041b7e",
+              "runtime_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+              "task_sha256": "7b5af61abba651fcb109931b98d56026e3e15de8fa1a5b605f7bb46aa4366c2b",
+              "type": "ready"
+            },
+            {
+              "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjEwMCwibWVzc2FnZXMiOlt7ImNvbnRlbnQiOiJPbmUgbGl0ZXJhbCByZXNwb25zZSBjYWZcdTAwZTkgXHVkODNjXHVkZjMxLiIsInJvbGUiOiJ1c2VyIn1dLCJtb2RlbCI6ImNhbmRpZGF0ZS1vcGVuYWktZml4dHVyZSJ9",
+              "provider": "openai",
+              "sequence": 0,
+              "type": "request"
+            },
+            {
+              "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjUwLCJtZXNzYWdlcyI6W3siY29udGVudCI6Ik9uZSBsaXRlcmFsIHJlc3BvbnNlIGNhZlx1MDBlOSBcdWQ4M2NcdWRmMzEuIiwicm9sZSI6InVzZXIifV0sIm1vZGVsIjoiY2FuZGlkYXRlLW9wZW5haS1maXh0dXJlIn0=",
+              "provider": "openai",
+              "sequence": 1,
+              "type": "request"
+            },
+            {
+              "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjMzLCJtZXNzYWdlcyI6W3siY29udGVudCI6Ik9uZSBsaXRlcmFsIHJlc3BvbnNlIGNhZlx1MDBlOSBcdWQ4M2NcdWRmMzEuIiwicm9sZSI6InVzZXIifV0sIm1vZGVsIjoiY2FuZGlkYXRlLW9wZW5haS1maXh0dXJlIn0=",
+              "provider": "openai",
+              "sequence": 2,
+              "type": "request"
+            },
+            {
+              "answers": [
+                "poor duplicate",
+                "poor duplicate"
+              ],
+              "reason": "complete",
+              "status": "complete",
+              "type": "done"
+            }
+          ],
+          "interrupted": false,
+          "label": "received-interruption",
+          "ledger": {
+            "committed_microusd": 33,
+            "operation_count": 3,
+            "reserved_microusd": 0,
+            "spent_microusd": 33
+          },
+          "native_bytes_sha256": "591b159522b348b7fe2d9850fdd98275acf8c72bce2deeb3ca2ebf7fb948bae9",
+          "new_sends": [
+            {
+              "body": {
+                "max_completion_tokens": 50,
+                "messages": [
+                  {
+                    "content": "One literal response caf\u00e9 \ud83c\udf31.",
+                    "role": "user"
+                  }
+                ],
+                "model": "candidate-openai-fixture"
+              },
+              "body_sha256": "0a5014fc0da56ab43c951761cd3a7e3f4b6d8c761eea8872bf5dca66b23e61ef"
+            },
+            {
+              "body": {
+                "max_completion_tokens": 33,
+                "messages": [
+                  {
+                    "content": "One literal response caf\u00e9 \ud83c\udf31.",
+                    "role": "user"
+                  }
+                ],
+                "model": "candidate-openai-fixture"
+              },
+              "body_sha256": "9b96e94af4418d14acc1408bff3859e99c02cec86e06c8b2584a79c01fba102a"
+            }
+          ],
+          "operations": [
+            {
+              "actual_microusd": 11,
+              "operation_id": "396d5ebbf3716ce31d85d69e7e07bff82018ef8d4671b9cbacc45a6d8b83e833",
+              "receipt_sha256": "a631d7ee2c766e58700cc1356db82b25ec77b2a3b228955dbb882b0d003e0d19",
+              "request": {
+                "attempt": 0,
+                "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjEwMCwibWVzc2FnZXMiOlt7ImNvbnRlbnQiOiJPbmUgbGl0ZXJhbCByZXNwb25zZSBjYWZcdTAwZTkgXHVkODNjXHVkZjMxLiIsInJvbGUiOiJ1c2VyIn1dLCJtb2RlbCI6ImNhbmRpZGF0ZS1vcGVuYWktZml4dHVyZSJ9",
+                "capability": "openai.chat-completions.v1",
+                "logical_id": "8135769ca66aea875ac0dfd41a1608d3b69ba5bff4e01208a05d2a5c9d8b41a3",
+                "profile_id": "candidate"
+              },
+              "reserve_microusd": 10200,
+              "status": "completed"
+            },
+            {
+              "actual_microusd": 11,
+              "operation_id": "54b793c9c91b317bc8c7adc58db12ae61e9d8a4b9ec2cc1ed61f16ea77c33837",
+              "receipt_sha256": "cc5ed8a61ae91bf1eaf7e4c6c9f1abd0540e3c29243577d0efa6b2598ea40f37",
+              "request": {
+                "attempt": 0,
+                "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjMzLCJtZXNzYWdlcyI6W3siY29udGVudCI6Ik9uZSBsaXRlcmFsIHJlc3BvbnNlIGNhZlx1MDBlOSBcdWQ4M2NcdWRmMzEuIiwicm9sZSI6InVzZXIifV0sIm1vZGVsIjoiY2FuZGlkYXRlLW9wZW5haS1maXh0dXJlIn0=",
+                "capability": "openai.chat-completions.v1",
+                "logical_id": "ffc258fc78400761e25dad9d6b824e0066dcc75a7a23cb504f60133bf1148c33",
+                "profile_id": "candidate"
+              },
+              "reserve_microusd": 10066,
+              "status": "completed"
+            },
+            {
+              "actual_microusd": 11,
+              "operation_id": "be40e6efedd0e53934d2f167aa8de4283dac655c62b99230decf3423b8730502",
+              "receipt_sha256": "57df868130631429adcedd4fd8f0e41343c17116cfd4a6e0885fa1336b4bf920",
+              "request": {
+                "attempt": 0,
+                "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjUwLCJtZXNzYWdlcyI6W3siY29udGVudCI6Ik9uZSBsaXRlcmFsIHJlc3BvbnNlIGNhZlx1MDBlOSBcdWQ4M2NcdWRmMzEuIiwicm9sZSI6InVzZXIifV0sIm1vZGVsIjoiY2FuZGlkYXRlLW9wZW5haS1maXh0dXJlIn0=",
+                "capability": "openai.chat-completions.v1",
+                "logical_id": "bec218668a5b3da3c50b2c6b36e97e8a9136a36b449590c21e8f2a9b2d6e4648",
+                "profile_id": "candidate"
+              },
+              "reserve_microusd": 10100,
+              "status": "completed"
+            }
+          ],
+          "owned_containers_after": [
+            "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+          ],
+          "owned_containers_before": [
+            "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+          ],
+          "report": {
+            "agent_sha256": "932634b67581e49a7a959bea80ca9d119431b966f5883352521e73cc25041b7e",
+            "artifacts": {
+              "answers.json": "a7af0c846c649b60aa855db262820e396741db4d8e80576314a469ad0ee26272"
+            },
+            "call_counter_scope": "delivered replies include same-owner receipt replay",
+            "calls": {
+              "completed": 3,
+              "requested": 3,
+              "stopped": 0
+            },
+            "claim": "single source-task execution; no source evolution or improvement claim",
+            "config_sha256": "31baf9315ca78f9884fc33d9b8d18501bd35838516df69f1de32620103f76742",
+            "descriptor_sha256": "7c13c743aa6a851d7f734212f85360dfd2481b44d2f2a4cb2ddb9676a3e7717c",
+            "execution": {
+              "cleanup_status": "removed",
+              "configuration": {
+                "engine_endpoint_sha256": "30341252ca9aa2b298da11cd8527fdfbf8ab30a2f3b5a3c871188c778b20af30",
+                "host": {
+                  "CapDrop": [
+                    "ALL"
+                  ],
+                  "CgroupnsMode": "private",
+                  "IpcMode": "none",
+                  "LogConfig": {
+                    "Config": {},
+                    "Type": "none"
+                  },
+                  "Memory": 268435456,
+                  "MemorySwap": 268435456,
+                  "NanoCpus": 1000000000,
+                  "NetworkMode": "none",
+                  "PidMode": "",
+                  "PidsLimit": 64,
+                  "Privileged": false,
+                  "ReadonlyRootfs": true,
+                  "SecurityOpt": [
+                    "no-new-privileges:true"
+                  ],
+                  "Tmpfs": {
+                    "/scratch": "rw,size=128m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700",
+                    "/tmp": "rw,size=16m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700"
+                  },
+                  "UTSMode": ""
+                },
+                "image": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+                "mounts": {
+                  "/agent": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-runner\\runs\\reviews\\src01-candidate-proof-gmpiu04f\\received-interruption\\agent",
+                  "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-runner\\runs\\reviews\\src01-candidate-proof-gmpiu04f\\received-interruption\\runner"
+                },
+                "role": "agent"
+              },
+              "container_id": "304ce58fef041676739c20727f3224505af3c4dc11bf77e9d154aa55122f6cd0",
+              "elapsed_seconds": 1.9230623999610543,
+              "exit_code": 0,
+              "frame_count": 5,
+              "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+              "stderr_bytes": 23,
+              "stderr_sha256": "b94bcb47899f094b6e65b8f296eba1d525fad93c654d469ef86d38eae575e83a",
+              "stdout_bytes": 1173
+            },
+            "format": "buddha.candidate-generation-report.v1",
+            "gateway_manifest_sha256": "cd1b2ebc01ae1e65e0e0e075cc8d051ff6af973f79a4d7e1b5bb26efb40bb710",
+            "gateway_totals": {
+              "committed_microusd": 33,
+              "operation_count": 3,
+              "reserved_microusd": 0,
+              "spent_microusd": 33
+            },
+            "gateway_totals_scope": "entire original owner, including earlier operations/holds",
+            "host_stop_reason": null,
+            "max_callbacks": 3,
+            "owner_operation_coverage_complete": true,
+            "reason": "complete",
+            "runtime_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+            "status": "complete",
+            "tasks_sha256": "74c04f3695681092e711600ac3a2126ea9242634122217232a67826227bd856f"
+          }
+        }
+      },
+      {
+        "kind": "reject-skipped-unknown-prefix",
+        "prefix": {
+          "frames": [
+            {
+              "agent_sha256": "8ed124b0d8f41d0d765e7b7092baf7f6b31aa9e41f66dd34dc50909255480b32",
+              "runtime_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+              "task_sha256": "7b5af61abba651fcb109931b98d56026e3e15de8fa1a5b605f7bb46aa4366c2b",
+              "type": "ready"
+            },
+            {
+              "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjEwMCwibWVzc2FnZXMiOlt7ImNvbnRlbnQiOiJzeW50aGV0aWMgcHJlZml4IDAiLCJyb2xlIjoidXNlciJ9XSwibW9kZWwiOiJjYW5kaWRhdGUtb3BlbmFpLWZpeHR1cmUifQ==",
+              "provider": "openai",
+              "sequence": 0,
+              "type": "request"
+            }
+          ],
+          "ledger": {
+            "committed_microusd": 10200,
+            "operation_count": 1,
+            "reserved_microusd": 10200,
+            "spent_microusd": 0
+          },
+          "origin": "synthetic host.handle prefix; no earlier candidate execution",
+          "replies": [
+            {
+              "reason": "unknown",
+              "sequence": 0,
+              "type": "stop"
+            }
+          ]
+        },
+        "recovery": {
+          "fixture": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-runner\\runs\\reviews\\src01-candidate-proof-gmpiu04f\\skipped-unknown-prefix",
+          "frames": [
+            {
+              "agent_sha256": "8ed124b0d8f41d0d765e7b7092baf7f6b31aa9e41f66dd34dc50909255480b32",
+              "runtime_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+              "task_sha256": "7b5af61abba651fcb109931b98d56026e3e15de8fa1a5b605f7bb46aa4366c2b",
+              "type": "ready"
+            },
+            {
+              "answers": [
+                " local \n",
+                ""
+              ],
+              "reason": "complete",
+              "status": "complete",
+              "type": "done"
+            }
+          ],
+          "interrupted": false,
+          "label": "skipped-unknown-prefix",
+          "ledger": {
+            "committed_microusd": 10200,
+            "operation_count": 1,
+            "reserved_microusd": 10200,
+            "spent_microusd": 0
+          },
+          "new_sends": [],
+          "operations": [
+            {
+              "actual_microusd": null,
+              "operation_id": "a28a351101526e1a33faf1edd2db06e861b06e9fa5534d1d6feaeba620526e45",
+              "receipt_sha256": "b4f2752eb2ebe72543f28d84da21951322f8a2cfc6a6bac73d6385e81dd8e439",
+              "request": {
+                "attempt": 0,
+                "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjEwMCwibWVzc2FnZXMiOlt7ImNvbnRlbnQiOiJzeW50aGV0aWMgcHJlZml4IDAiLCJyb2xlIjoidXNlciJ9XSwibW9kZWwiOiJjYW5kaWRhdGUtb3BlbmFpLWZpeHR1cmUifQ==",
+                "capability": "openai.chat-completions.v1",
+                "logical_id": "02caf1c18ec6f9e3dfc34ab9160d9342f28640fc57ef5d5245833be4c9edf9bc",
+                "profile_id": "candidate"
+              },
+              "reserve_microusd": 10200,
+              "status": "unknown"
+            }
+          ],
+          "owned_containers_after": [
+            "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+          ],
+          "owned_containers_before": [
+            "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+          ],
+          "report": {
+            "agent_sha256": "8ed124b0d8f41d0d765e7b7092baf7f6b31aa9e41f66dd34dc50909255480b32",
+            "artifacts": {},
+            "call_counter_scope": "delivered replies include same-owner receipt replay",
+            "calls": {
+              "completed": 0,
+              "requested": 0,
+              "stopped": 0
+            },
+            "claim": "single source-task execution; no source evolution or improvement claim",
+            "config_sha256": "31baf9315ca78f9884fc33d9b8d18501bd35838516df69f1de32620103f76742",
+            "descriptor_sha256": "630dcd915ad01421346d434b7974d5d5e495b440df9a0e53b6ee7e0cdb389e92",
+            "execution": {
+              "cleanup_status": "removed",
+              "container_id": "965639f7d96385b47cdf17199a197a4c7b611898b77a6d35564a19098432d2e8",
+              "reason": "host"
+            },
+            "format": "buddha.candidate-generation-report.v1",
+            "gateway_manifest_sha256": "1d45ffa8e3a223e5f107cfa674a592e7101b478ba8981b146a0ab2656562a7b1",
+            "gateway_totals": {
+              "committed_microusd": 10200,
+              "operation_count": 1,
+              "reserved_microusd": 10200,
+              "spent_microusd": 0
+            },
+            "gateway_totals_scope": "entire original owner, including earlier operations/holds",
+            "host_stop_reason": null,
+            "max_callbacks": 3,
+            "owner_operation_coverage_complete": false,
+            "reason": "execution",
+            "runtime_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+            "status": "failed",
+            "tasks_sha256": "74c04f3695681092e711600ac3a2126ea9242634122217232a67826227bd856f"
+          }
+        }
+      },
+      {
+        "kind": "reject-skipped-valid-prefix",
+        "prefix": {
+          "frames": [
+            {
+              "agent_sha256": "8ed124b0d8f41d0d765e7b7092baf7f6b31aa9e41f66dd34dc50909255480b32",
+              "runtime_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+              "task_sha256": "7b5af61abba651fcb109931b98d56026e3e15de8fa1a5b605f7bb46aa4366c2b",
+              "type": "ready"
+            },
+            {
+              "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjEwMCwibWVzc2FnZXMiOlt7ImNvbnRlbnQiOiJzeW50aGV0aWMgcHJlZml4IDAiLCJyb2xlIjoidXNlciJ9XSwibW9kZWwiOiJjYW5kaWRhdGUtb3BlbmFpLWZpeHR1cmUifQ==",
+              "provider": "openai",
+              "sequence": 0,
+              "type": "request"
+            },
+            {
+              "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjEwMCwibWVzc2FnZXMiOlt7ImNvbnRlbnQiOiJzeW50aGV0aWMgcHJlZml4IDEiLCJyb2xlIjoidXNlciJ9XSwibW9kZWwiOiJjYW5kaWRhdGUtb3BlbmFpLWZpeHR1cmUifQ==",
+              "provider": "openai",
+              "sequence": 1,
+              "type": "request"
+            },
+            {
+              "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjEwMCwibWVzc2FnZXMiOlt7ImNvbnRlbnQiOiJzeW50aGV0aWMgcHJlZml4IDIiLCJyb2xlIjoidXNlciJ9XSwibW9kZWwiOiJjYW5kaWRhdGUtb3BlbmFpLWZpeHR1cmUifQ==",
+              "provider": "openai",
+              "sequence": 2,
+              "type": "request"
+            }
+          ],
+          "ledger": {
+            "committed_microusd": 33,
+            "operation_count": 3,
+            "reserved_microusd": 0,
+            "spent_microusd": 33
+          },
+          "origin": "synthetic host.handle prefix; no earlier candidate execution",
+          "replies": [
+            {
+              "envelope": {
+                "body_base64": "eyJjaG9pY2VzIjpbeyJmaW5pc2hfcmVhc29uIjoic3RvcCIsIm1lc3NhZ2UiOnsiY29udGVudCI6IiByYXcgbGl0ZXJhbCBcbiIsInJlZnVzYWwiOm51bGx9fV0sIm1vZGVsIjoiY2FuZGlkYXRlLW9wZW5haS1maXh0dXJlIiwic2VydmljZV90aWVyIjoiZGVmYXVsdCIsInVzYWdlIjp7ImNvbXBsZXRpb25fdG9rZW5zIjozLCJwcm9tcHRfdG9rZW5zIjo1fX0=",
+                "format": "buddha.raw-envelope.v1",
+                "headers": [
+                  [
+                    "content-type",
+                    "application/json"
+                  ],
+                  [
+                    "x-request-id",
+                    "synthetic-src-candidate-0"
+                  ]
+                ],
+                "headers_complete": true,
+                "provider": "openai",
+                "received_sha256": "a065b893650c35047f0bd468a030c18600fcd56290fb5ab714b8d5cb05c811d7",
+                "status": 200,
+                "truncated": false,
+                "withheld": false
+              },
+              "sequence": 0,
+              "type": "response"
+            },
+            {
+              "envelope": {
+                "body_base64": "eyJjaG9pY2VzIjpbeyJmaW5pc2hfcmVhc29uIjoic3RvcCIsIm1lc3NhZ2UiOnsiY29udGVudCI6IiIsInJlZnVzYWwiOm51bGx9fV0sIm1vZGVsIjoiY2FuZGlkYXRlLW9wZW5haS1maXh0dXJlIiwic2VydmljZV90aWVyIjoiZGVmYXVsdCIsInVzYWdlIjp7ImNvbXBsZXRpb25fdG9rZW5zIjozLCJwcm9tcHRfdG9rZW5zIjo1fX0=",
+                "format": "buddha.raw-envelope.v1",
+                "headers": [
+                  [
+                    "content-type",
+                    "application/json"
+                  ],
+                  [
+                    "x-request-id",
+                    "synthetic-src-candidate-1"
+                  ]
+                ],
+                "headers_complete": true,
+                "provider": "openai",
+                "received_sha256": "5af3286292eed76ec53574e0112483ea951f482d3959e5395ce0efdec060abb7",
+                "status": 200,
+                "truncated": false,
+                "withheld": false
+              },
+              "sequence": 1,
+              "type": "response"
+            },
+            {
+              "envelope": {
+                "body_base64": "eyJjaG9pY2VzIjpbeyJmaW5pc2hfcmVhc29uIjoic3RvcCIsIm1lc3NhZ2UiOnsiY29udGVudCI6InBvb3IgZHVwbGljYXRlIiwicmVmdXNhbCI6bnVsbH19XSwibW9kZWwiOiJjYW5kaWRhdGUtb3BlbmFpLWZpeHR1cmUiLCJzZXJ2aWNlX3RpZXIiOiJkZWZhdWx0IiwidXNhZ2UiOnsiY29tcGxldGlvbl90b2tlbnMiOjMsInByb21wdF90b2tlbnMiOjV9fQ==",
+                "format": "buddha.raw-envelope.v1",
+                "headers": [
+                  [
+                    "content-type",
+                    "application/json"
+                  ],
+                  [
+                    "x-request-id",
+                    "synthetic-src-candidate-2"
+                  ]
+                ],
+                "headers_complete": true,
+                "provider": "openai",
+                "received_sha256": "5f07c07a9e8a5dc5dce7199c1ac10bcc906f2b65107bec39ef4c35f356e4a91d",
+                "status": 200,
+                "truncated": false,
+                "withheld": false
+              },
+              "sequence": 2,
+              "type": "response"
+            }
+          ]
+        },
+        "recovery": {
+          "fixture": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-runner\\runs\\reviews\\src01-candidate-proof-gmpiu04f\\skipped-valid-prefix",
+          "frames": [
+            {
+              "agent_sha256": "8ed124b0d8f41d0d765e7b7092baf7f6b31aa9e41f66dd34dc50909255480b32",
+              "runtime_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+              "task_sha256": "7b5af61abba651fcb109931b98d56026e3e15de8fa1a5b605f7bb46aa4366c2b",
+              "type": "ready"
+            },
+            {
+              "answers": [
+                " local \n",
+                ""
+              ],
+              "reason": "complete",
+              "status": "complete",
+              "type": "done"
+            }
+          ],
+          "interrupted": false,
+          "label": "skipped-valid-prefix",
+          "ledger": {
+            "committed_microusd": 33,
+            "operation_count": 3,
+            "reserved_microusd": 0,
+            "spent_microusd": 33
+          },
+          "new_sends": [],
+          "operations": [
+            {
+              "actual_microusd": 11,
+              "operation_id": "d35be9217730807063b2bbf1229323da57ded04cde3729f755e2e165d187d81c",
+              "receipt_sha256": "aaf07fe0bd4cb19d92bab7cd120ba575926acd43fff16c21f8aad9a9532c4c70",
+              "request": {
+                "attempt": 0,
+                "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjEwMCwibWVzc2FnZXMiOlt7ImNvbnRlbnQiOiJzeW50aGV0aWMgcHJlZml4IDAiLCJyb2xlIjoidXNlciJ9XSwibW9kZWwiOiJjYW5kaWRhdGUtb3BlbmFpLWZpeHR1cmUifQ==",
+                "capability": "openai.chat-completions.v1",
+                "logical_id": "eb7b4e744045c9da33eaf77bb1a81f38dbffa6a7c136c6521b8ad6ec9f5ba8f4",
+                "profile_id": "candidate"
+              },
+              "reserve_microusd": 10200,
+              "status": "completed"
+            },
+            {
+              "actual_microusd": 11,
+              "operation_id": "deb6101538eab99dfc553009f68614c945b76f6b45f7f2f438990d978224a2c5",
+              "receipt_sha256": "84bc16ab2df2047cf05865119f712d12e0b7dd7437acfa031e3db0d051576391",
+              "request": {
+                "attempt": 0,
+                "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjEwMCwibWVzc2FnZXMiOlt7ImNvbnRlbnQiOiJzeW50aGV0aWMgcHJlZml4IDIiLCJyb2xlIjoidXNlciJ9XSwibW9kZWwiOiJjYW5kaWRhdGUtb3BlbmFpLWZpeHR1cmUifQ==",
+                "capability": "openai.chat-completions.v1",
+                "logical_id": "314ecc3cb6c16917b364f6e2a691198dfd5c51906363b79bd1400f9bb9e5c0f7",
+                "profile_id": "candidate"
+              },
+              "reserve_microusd": 10200,
+              "status": "completed"
+            },
+            {
+              "actual_microusd": 11,
+              "operation_id": "f1a2ab9267b58f6cbe41027e330b420d293ef8bcf71c0b03696886ab8433d297",
+              "receipt_sha256": "5a09e772e7b6847e57ba69fd80bd2645d1c80fd9330691e16380dab61308c6a5",
+              "request": {
+                "attempt": 0,
+                "body_base64": "eyJtYXhfY29tcGxldGlvbl90b2tlbnMiOjEwMCwibWVzc2FnZXMiOlt7ImNvbnRlbnQiOiJzeW50aGV0aWMgcHJlZml4IDEiLCJyb2xlIjoidXNlciJ9XSwibW9kZWwiOiJjYW5kaWRhdGUtb3BlbmFpLWZpeHR1cmUifQ==",
+                "capability": "openai.chat-completions.v1",
+                "logical_id": "36320b106a7c3575eea721a707125430497cb8ffa0415a2447d638a6a46dc7f7",
+                "profile_id": "candidate"
+              },
+              "reserve_microusd": 10200,
+              "status": "completed"
+            }
+          ],
+          "owned_containers_after": [
+            "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+          ],
+          "owned_containers_before": [
+            "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380"
+          ],
+          "report": {
+            "agent_sha256": "8ed124b0d8f41d0d765e7b7092baf7f6b31aa9e41f66dd34dc50909255480b32",
+            "artifacts": {},
+            "call_counter_scope": "delivered replies include same-owner receipt replay",
+            "calls": {
+              "completed": 0,
+              "requested": 0,
+              "stopped": 0
+            },
+            "claim": "single source-task execution; no source evolution or improvement claim",
+            "config_sha256": "31baf9315ca78f9884fc33d9b8d18501bd35838516df69f1de32620103f76742",
+            "descriptor_sha256": "50f82ec36e831b24f330f7b092ed9d71243e022714e11d169dad5d246839d3a5",
+            "execution": {
+              "cleanup_status": "removed",
+              "container_id": "7f8f83ba2d92d8da106c2f3f7c145579ef29457011e68e5cf9cf0648499b07ce",
+              "reason": "host"
+            },
+            "format": "buddha.candidate-generation-report.v1",
+            "gateway_manifest_sha256": "a52770c708f04c3733188e12918b98cdf2c121dc234589cad94b7274c9a9430c",
+            "gateway_totals": {
+              "committed_microusd": 33,
+              "operation_count": 3,
+              "reserved_microusd": 0,
+              "spent_microusd": 33
+            },
+            "gateway_totals_scope": "entire original owner, including earlier operations/holds",
+            "host_stop_reason": null,
+            "max_callbacks": 3,
+            "owner_operation_coverage_complete": false,
+            "reason": "execution",
+            "runtime_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+            "status": "failed",
+            "tasks_sha256": "74c04f3695681092e711600ac3a2126ea9242634122217232a67826227bd856f"
+          }
+        }
+      }
+    ],
+    "environment_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+    "fixture_directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-runner\\runs\\reviews\\src01-candidate-proof-gmpiu04f",
+    "format": "buddha.src01-candidate-proof.v1",
+    "gateway_core_sha256": {
+      "buddha": "0857bd60619c1e1c8538fe768cbe82c781bb4e302abc6cf59130f1b17d052230",
+      "buddha.authorization": "06d8615f8b301285a951b08bece0570e5b1b89467fc99fa4e994c7e5e5f30c47",
+      "buddha.common": "3a0a693a0f4a0f2eed3b858d0b3ac42148871dbca284e56e0e368726309393c0",
+      "buddha.gateway": "e844fcb695b97c76ecb7432ece6b8d96416806554038e202fd6b0f7f3da57a2e",
+      "buddha.history": "d42e92a7e6c88a2f72090eaaa50de39dc355957e7c61f5b89dd97162d8b0eefa",
+      "buddha.ledger": "5c7e56f1e2c5e68046d6380ebacc03110300eae34d348d7dca683a0591d64130",
+      "buddha.provider": "17de071c1416afa32f9da32eb627e24264d8a0a848862fdf4853057125f18a02",
+      "buddha.releases": "33361cf5b0923b373ee53dd73597063195c2c0d519baead50d40fb4bcfab44f5",
+      "buddha.wire": "48f40a71bf10c84dfd1d15f0baef50198cce8a229748355f116ad6a25cab12b4"
+    },
+    "host_candidate_execution": false,
+    "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+    "limits": [
+      "Synthetic HTTPS and fixture models only; zero real provider calls.",
+      "Selected single-file task code only; no inherited bundles/improver/evolution claim.",
+      "The separate runtime proof supplies eleven OS confinement cases; these prove this channel composition.",
+      "Random-nonce fixture deliberately changes a request body to exercise same-owner replay conflict.",
+      "No official evaluator, useful-diversity improvement or universal host/kernel escape claim."
+    ],
+    "official_evaluator_execution": false,
+    "real_provider_calls": 0,
+    "source_sha256": {
+      "buddha\\__init__.py": "0857bd60619c1e1c8538fe768cbe82c781bb4e302abc6cf59130f1b17d052230",
+      "buddha\\answers.py": "be860546b2692ea4a710d93855f487dd49d9c8e28eb3f2ec757df697cefb8d0b",
+      "buddha\\candidate_run.py": "99bd61eb7f92cb323918459f2fde19108a9511483154d42a03fe500dd7db07df",
+      "buddha\\candidate_worker.py": "be39d7d7ed57a202d3b1362f279ccd40e9407a44219be8298831857d2ce6b7c6",
+      "buddha\\channel.py": "c46d236865b15f1918efa23d961ed7163533c9bbef2b0cec7f61d6f8e95d6e5f",
+      "buddha\\executor.py": "b5e84f2dbcdc436aee23272e7d96b567cb5b16ead256a34d08bccc70b480d186",
+      "buddha\\releases.py": "33361cf5b0923b373ee53dd73597063195c2c0d519baead50d40fb4bcfab44f5",
+      "buddha\\wire.py": "48f40a71bf10c84dfd1d15f0baef50198cce8a229748355f116ad6a25cab12b4",
+      "docs\\conformance\\src01-candidate-probe.py": "2cb5543adbf1dfdb736887ac4ed856ae6bd9cddd27e598720accf0ba482d5074",
+      "docs\\conformance\\src01-runtime-environment.json": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951"
+    },
+    "status": "pass"
+  },
+  "actual_candidate_proof_sha256": "94d2b3e936d60cccb5769e3849172c576666f45cb15f824250964b580a7df2a0",
+  "actual_execution_counts": {
+    "completed": 17,
+    "containers": 16,
+    "mocked_https_operations": 20,
+    "real_provider_calls": 0,
+    "synthetic_owners": 13,
+    "synthetic_reserved_microusd": 30600,
+    "synthetic_spent_microusd": 187,
+    "unknown": 3
+  },
+  "checked_on": "2026-10-21T05:18:36.172396+00:00",
+  "claim": "One selected source task in confinement with a host-owned model channel; not source evolution or scientific improvement.",
+  "format": "buddha.src01-candidate-delivery.v1",
+  "hosted_ci": "Pending all exact-head push/PR Linux/Windows jobs; separate from local evidence.",
+  "ignored_evidence_sha256": {
+    "runs/reviews/src01-candidate-compile-final.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/reviews/src01-candidate-final-publication-green.log": "fada69f1a6094b04fcc97a7c4dd04e1055350c52a0449c4bcb00a98142c88c00",
+    "runs/reviews/src01-candidate-format-final.log": "851525eff975bafe4a122ba91f37c0c8e53baf279af6b14d74f1ce4df28684a5",
+    "runs/reviews/src01-candidate-full-suite-attempt1-aborted.exit": "186a919b8c7cb84aebf4e53c70cd1cc028a93a1d183ee29dd6e10cd18a714577",
+    "runs/reviews/src01-candidate-full-suite-attempt1-aborted.log": "6c30d9d27fc334a3a54b9a1ef722cb8f3f62bd8ffb0cdd79bfceed1e890b1f5f",
+    "runs/reviews/src01-candidate-full-suite-attempt2-aborted.exit": "186a919b8c7cb84aebf4e53c70cd1cc028a93a1d183ee29dd6e10cd18a714577",
+    "runs/reviews/src01-candidate-full-suite-attempt2-aborted.log": "ae5f184a4bb8575e526099c832be4f250c335c40d4011911759fc18b98e300ec",
+    "runs/reviews/src01-candidate-full-suite.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "runs/reviews/src01-candidate-full-suite.log": "9b26b21bad030b459430300da8d667d6716cde70445d3d9410ac9b68f68caeec",
+    "runs/reviews/src01-candidate-host-green-final.log": "107d5d6b45d68bf6b649d0feebce02f7b46033ad45f28176f2184facd13696ad",
+    "runs/reviews/src01-candidate-host-green.log": "e66a2f9b627a3b6dfaabaac73bf3509074f8805e3bc7c5a05aaa084327b3528d",
+    "runs/reviews/src01-candidate-independent-review.md": "57a12ef4c3e959ee5dfa8d66924c863bc5369488cf5a54baf275b4c29ad6df8a",
+    "runs/reviews/src01-candidate-lint-final.log": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+    "runs/reviews/src01-candidate-pr-body.md": "4407b178d44c68a4538a671fc008bb6df774ff2de634d5a172f979baa4ca1d6b",
+    "runs/reviews/src01-candidate-prefix-red.log": "9a49029dcf921bc679a27f4277de94d37fbd23d25a0a64c0342ed358ce32b442",
+    "runs/reviews/src01-candidate-probe-security-final.log": "74c852ea8786cfef70f7958e0ccb6e5220ba5f8dff35c13c14f625869774cd95",
+    "runs/reviews/src01-candidate-proof-independent-review.json": "25b7e033bff4c8e2fe3e478931ad993b4efb87d7f5c621c995c613e3cb51a5cf",
+    "runs/reviews/src01-candidate-proof.exit": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+    "runs/reviews/src01-candidate-proof.json": "94d2b3e936d60cccb5769e3849172c576666f45cb15f824250964b580a7df2a0",
+    "runs/reviews/src01-candidate-proof.log": "b86810e843944d964efd01a3bf610ff8655ba2019062f0b07579eefab9456527",
+    "runs/reviews/src01-candidate-security-final.log": "9b78006a6df8c870e5abc4be5297dd65d6e3a28ebcd4fb2da3ce279d350a1492",
+    "runs/reviews/src01-candidate-types-final.log": "ee3a12df8b76d14e26acc8e630f53f2fa25ac3235e6bdd46c6ec61ea827f83ad",
+    "runs/reviews/src01-candidate-types-linux-final.log": "0c37c4158c91ef55c724ba017bf6465f26018199badb08e3ff13f98acdf056c2",
+    "runs/reviews/src01-candidate-worker-first-functional.log": "e9858310df028db8d6330de6a057387621f160cd677ec45a22d4932a6f3a4897",
+    "runs/reviews/src01-candidate-worker-green.log": "89adfa861b5072a32bf251e99fe89017af00dbdf562ce90d54a5cbec4112a6d4",
+    "runs/reviews/src01-candidate-worker-red.log": "d3789fb4658d451aa6a4f86554bee944977afa4a580d09add160fd6948356121"
+  },
+  "independent_proof_review": {
+    "actual_candidate_invocation_records": 16,
+    "all_observed_before_after_owned_container_sets_equal": true,
+    "cancelled_execution_without_terminal_execution_record": 1,
+    "distinct_recorded_container_ids": 15,
+    "exception_execution_records_without_success_configuration": 4,
+    "execution_rows": [
+      {
+        "cleanup": "removed",
+        "interrupted": false,
+        "label": "openai-0-calls",
+        "new_sends": 0,
+        "operation_count": 0,
+        "output": "output",
+        "reason": "complete",
+        "status": "complete"
+      },
+      {
+        "cleanup": "removed",
+        "interrupted": false,
+        "label": "openai-1-calls",
+        "new_sends": 1,
+        "operation_count": 1,
+        "output": "output",
+        "reason": "complete",
+        "status": "complete"
+      },
+      {
+        "cleanup": "removed",
+        "interrupted": false,
+        "label": "openai-3-calls",
+        "new_sends": 3,
+        "operation_count": 3,
+        "output": "output",
+        "reason": "complete",
+        "status": "complete"
+      },
+      {
+        "cleanup": "removed",
+        "interrupted": false,
+        "label": "anthropic-0-calls",
+        "new_sends": 0,
+        "operation_count": 0,
+        "output": "output",
+        "reason": "complete",
+        "status": "complete"
+      },
+      {
+        "cleanup": "removed",
+        "interrupted": false,
+        "label": "anthropic-1-calls",
+        "new_sends": 1,
+        "operation_count": 1,
+        "output": "output",
+        "reason": "complete",
+        "status": "complete"
+      },
+      {
+        "cleanup": "removed",
+        "interrupted": false,
+        "label": "anthropic-3-calls",
+        "new_sends": 3,
+        "operation_count": 3,
+        "output": "output",
+        "reason": "complete",
+        "status": "complete"
+      },
+      {
+        "cleanup": "removed",
+        "interrupted": false,
+        "label": "quota-hostile",
+        "new_sends": 2,
+        "operation_count": 2,
+        "output": "output",
+        "reason": "quota",
+        "status": "stopped"
+      },
+      {
+        "cleanup": "removed",
+        "interrupted": false,
+        "label": "unknown-hostile",
+        "new_sends": 1,
+        "operation_count": 1,
+        "output": "output",
+        "reason": "unknown",
+        "status": "stopped"
+      },
+      {
+        "cleanup": "removed",
+        "interrupted": false,
+        "label": "timeout",
+        "new_sends": 1,
+        "operation_count": 1,
+        "output": "output",
+        "reason": "unknown",
+        "status": "stopped"
+      },
+      {
+        "cleanup": "removed",
+        "interrupted": false,
+        "label": "openai-3-calls",
+        "new_sends": 0,
+        "operation_count": 3,
+        "output": "replay",
+        "reason": "complete",
+        "status": "complete"
+      },
+      {
+        "cleanup": "removed",
+        "interrupted": false,
+        "label": "changed-request-replay",
+        "new_sends": 0,
+        "operation_count": 1,
+        "output": "conflicting-replay",
+        "reason": "protocol",
+        "status": "stopped"
+      },
+      {
+        "cleanup": "removed",
+        "interrupted": false,
+        "label": "changed-request-replay",
+        "new_sends": 1,
+        "operation_count": 1,
+        "output": "output",
+        "reason": "complete",
+        "status": "complete"
+      },
+      {
+        "cleanup": null,
+        "interrupted": true,
+        "label": "received-interruption",
+        "new_sends": 1,
+        "operation_count": 1,
+        "output": "interrupted",
+        "reason": "cancelled",
+        "status": "stopped"
+      },
+      {
+        "cleanup": "removed",
+        "interrupted": false,
+        "label": "received-interruption",
+        "new_sends": 2,
+        "operation_count": 3,
+        "output": "resumed",
+        "reason": "complete",
+        "status": "complete"
+      },
+      {
+        "cleanup": "removed",
+        "interrupted": false,
+        "label": "skipped-unknown-prefix",
+        "new_sends": 0,
+        "operation_count": 1,
+        "output": "zero-callback-recovery",
+        "reason": "execution",
+        "status": "failed"
+      },
+      {
+        "cleanup": "removed",
+        "interrupted": false,
+        "label": "skipped-valid-prefix",
+        "new_sends": 0,
+        "operation_count": 3,
+        "output": "zero-callback-recovery",
+        "reason": "execution",
+        "status": "failed"
+      }
+    ],
+    "format": "buddha.src01-candidate-independent-review.v1",
+    "gateway_core_sha256": {
+      "buddha": "0857bd60619c1e1c8538fe768cbe82c781bb4e302abc6cf59130f1b17d052230",
+      "buddha.authorization": "06d8615f8b301285a951b08bece0570e5b1b89467fc99fa4e994c7e5e5f30c47",
+      "buddha.common": "3a0a693a0f4a0f2eed3b858d0b3ac42148871dbca284e56e0e368726309393c0",
+      "buddha.gateway": "e844fcb695b97c76ecb7432ece6b8d96416806554038e202fd6b0f7f3da57a2e",
+      "buddha.history": "d42e92a7e6c88a2f72090eaaa50de39dc355957e7c61f5b89dd97162d8b0eefa",
+      "buddha.ledger": "5c7e56f1e2c5e68046d6380ebacc03110300eae34d348d7dca683a0591d64130",
+      "buddha.provider": "17de071c1416afa32f9da32eb627e24264d8a0a848862fdf4853057125f18a02",
+      "buddha.releases": "33361cf5b0923b373ee53dd73597063195c2c0d519baead50d40fb4bcfab44f5",
+      "buddha.wire": "48f40a71bf10c84dfd1d15f0baef50198cce8a229748355f116ad6a25cab12b4"
+    },
+    "guide_sha256": "5e4ecc03ad8a56caff0a9d57aa5cbbbdba97f6cb1d06f64a8bab9033ccc7ee7d",
+    "limitations": [
+      "Recorded synthetic proof and source consistency are not provider invoice or real-model semantic evidence.",
+      "The interrupted attempt has no terminal execution object; observed container-set equality and actual executor exception cleanup supply its bounded cleanup evidence.",
+      "Four rejected/hostile executions retain executor-error container IDs and removed cleanup, rather than a successful configuration report; unchanged executor source enforces pre-start image/mount checks.",
+      "Unrelated containers observed in these records remained unchanged; this is not a universal concurrency/host escape guarantee.",
+      "The operation-count guard assumes the documented dedicated serial owner; it is not a cross-process completion transaction or deactivation seal.",
+      "Aggregate source evolution, inherited source bundles, improver evolution and scientific improvement remain outside SRC-01.",
+      "Final 1122-test suite was still running at review time; this report does not assert its result."
+    ],
+    "matching_complete_c1_artifacts": 9,
+    "matching_retained_reports": 16,
+    "operation_status_counts": {
+      "completed": 17,
+      "unknown": 3
+    },
+    "prefix_guard": "both unknown and completed primed prefixes rejected without new send, C1 or financial change",
+    "proof_sha256": "94d2b3e936d60cccb5769e3849172c576666f45cb15f824250964b580a7df2a0",
+    "review_mode": "read-only source review and retained-evidence consistency; no new Docker/test/provider execution",
+    "source_and_core_pins_match_current_bytes": true,
+    "source_review": [
+      "Candidate source is fixture data on host and compiled only by actual container worker.",
+      "Actual HTTPSConnection is replaced by synthetic responder, socket.create_connection is denied, and keys are explicit fake fixtures under a cleared environment.",
+      "Approved runtime, five runner files, eight host-route files, nine financial-core files and one sanitized typed task are joined by frozen hashes.",
+      "Guide correctly limits completion to literal C1 shape and serial dedicated-owner prefix coverage; no evolution or benchmark gain claim."
+    ],
+    "source_sha256": {
+      "buddha\\__init__.py": "0857bd60619c1e1c8538fe768cbe82c781bb4e302abc6cf59130f1b17d052230",
+      "buddha\\answers.py": "be860546b2692ea4a710d93855f487dd49d9c8e28eb3f2ec757df697cefb8d0b",
+      "buddha\\candidate_run.py": "99bd61eb7f92cb323918459f2fde19108a9511483154d42a03fe500dd7db07df",
+      "buddha\\candidate_worker.py": "be39d7d7ed57a202d3b1362f279ccd40e9407a44219be8298831857d2ce6b7c6",
+      "buddha\\channel.py": "c46d236865b15f1918efa23d961ed7163533c9bbef2b0cec7f61d6f8e95d6e5f",
+      "buddha\\executor.py": "b5e84f2dbcdc436aee23272e7d96b567cb5b16ead256a34d08bccc70b480d186",
+      "buddha\\releases.py": "33361cf5b0923b373ee53dd73597063195c2c0d519baead50d40fb4bcfab44f5",
+      "buddha\\wire.py": "48f40a71bf10c84dfd1d15f0baef50198cce8a229748355f116ad6a25cab12b4",
+      "docs\\conformance\\src01-candidate-probe.py": "2cb5543adbf1dfdb736887ac4ed856ae6bd9cddd27e598720accf0ba482d5074",
+      "docs\\conformance\\src01-runtime-environment.json": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951"
+    },
+    "status": "pass",
+    "synthetic_held_microusd": 30600,
+    "synthetic_owners": 13,
+    "synthetic_spent_microusd": 187,
+    "unique_operations": 20
+  },
+  "independent_proof_review_sha256": "25b7e033bff4c8e2fe3e478931ad993b4efb87d7f5c621c995c613e3cb51a5cf",
+  "limits": [
+    "Synthetic HTTPS and fixture models only; zero real provider calls.",
+    "Selected single-file task code only; no inherited bundles/improver/evolution claim.",
+    "The separate runtime proof supplies eleven OS confinement cases; these prove this channel composition.",
+    "Random-nonce fixture deliberately changes a request body to exercise same-owner replay conflict.",
+    "No official evaluator, useful-diversity improvement or universal host/kernel escape claim.",
+    "Single UTF-8 task source only; versioned inherited bundles remain SRC-02.",
+    "Dedicated serial Gateway owner; operation-count checks are snapshots, not a concurrency or finalization controller.",
+    "Runtime approval is host-supplied and independent of candidate data; ready hashes are consistency evidence, not worker attestation.",
+    "Complete source execution does not establish answer usefulness, compliance, originality or benchmark gains.",
+    "No new live CLI/allocation, SDK dependency or paid search is enabled."
+  ],
+  "live_allocation_changes": 0,
+  "new_dependencies": 0,
+  "official_scoring_changes": false,
+  "preservation": {
+    "all_unchanged": true,
+    "base": "445bce337f586ef4b13a0db4cb74fa4795b19ca6",
+    "existing_application_and_agent_files": 38,
+    "files": {
+      "agents/frozen_seed.py": {
+        "after": "2b87bfe0d3c97ee45db2d45260985ffe0234eca93967f4689fb7c59f82603921",
+        "before": "2b87bfe0d3c97ee45db2d45260985ffe0234eca93967f4689fb7c59f82603921"
+      },
+      "buddha/__init__.py": {
+        "after": "0857bd60619c1e1c8538fe768cbe82c781bb4e302abc6cf59130f1b17d052230",
+        "before": "0857bd60619c1e1c8538fe768cbe82c781bb4e302abc6cf59130f1b17d052230"
+      },
+      "buddha/__main__.py": {
+        "after": "17a7af599e4d7b79094b806e01cedb765b560063bbcf82367f59e9f8e04005d7",
+        "before": "17a7af599e4d7b79094b806e01cedb765b560063bbcf82367f59e9f8e04005d7"
+      },
+      "buddha/agent_run.py": {
+        "after": "3f7f8ff3cb9965216f19c6564da1e830f0f629a346ec1cc29e2583c119bea88d",
+        "before": "3f7f8ff3cb9965216f19c6564da1e830f0f629a346ec1cc29e2583c119bea88d"
+      },
+      "buddha/agent_worker.py": {
+        "after": "c6f86105c0a42304687f857209bb17172f2f38fda26699d25e2618f6e01a745f",
+        "before": "c6f86105c0a42304687f857209bb17172f2f38fda26699d25e2618f6e01a745f"
+      },
+      "buddha/answers.py": {
+        "after": "be860546b2692ea4a710d93855f487dd49d9c8e28eb3f2ec757df697cefb8d0b",
+        "before": "be860546b2692ea4a710d93855f487dd49d9c8e28eb3f2ec757df697cefb8d0b"
+      },
+      "buddha/archive.py": {
+        "after": "9549deb0f347cf6114ef3f802b9dfef8a94e0db7cbbd3497697987d5e21ba2ee",
+        "before": "9549deb0f347cf6114ef3f802b9dfef8a94e0db7cbbd3497697987d5e21ba2ee"
+      },
+      "buddha/authorization.py": {
+        "after": "06d8615f8b301285a951b08bece0570e5b1b89467fc99fa4e994c7e5e5f30c47",
+        "before": "06d8615f8b301285a951b08bece0570e5b1b89467fc99fa4e994c7e5e5f30c47"
+      },
+      "buddha/baseline.py": {
+        "after": "c988e823d9890b712a4b50a58a3d808c6630fdcf3e6fb94227ee9e591d04a432",
+        "before": "c988e823d9890b712a4b50a58a3d808c6630fdcf3e6fb94227ee9e591d04a432"
+      },
+      "buddha/benchmark.py": {
+        "after": "7ef7e26b2ef3cbf4119118a985334048fd30b68a5629f3e3196fa77e8200c49f",
+        "before": "7ef7e26b2ef3cbf4119118a985334048fd30b68a5629f3e3196fa77e8200c49f"
+      },
+      "buddha/channel.py": {
+        "after": "c46d236865b15f1918efa23d961ed7163533c9bbef2b0cec7f61d6f8e95d6e5f",
+        "before": "c46d236865b15f1918efa23d961ed7163533c9bbef2b0cec7f61d6f8e95d6e5f"
+      },
+      "buddha/common.py": {
+        "after": "3a0a693a0f4a0f2eed3b858d0b3ac42148871dbca284e56e0e368726309393c0",
+        "before": "3a0a693a0f4a0f2eed3b858d0b3ac42148871dbca284e56e0e368726309393c0"
+      },
+      "buddha/continuation.py": {
+        "after": "b0136052472868aee379d7ac78dfd11bcfa40e91aedcd6916d30f9a334003414",
+        "before": "b0136052472868aee379d7ac78dfd11bcfa40e91aedcd6916d30f9a334003414"
+      },
+      "buddha/diagnostics.py": {
+        "after": "ca0af1304e3fbe99569f0b027f99269b151e08265785b39ed53c39f820097e24",
+        "before": "ca0af1304e3fbe99569f0b027f99269b151e08265785b39ed53c39f820097e24"
+      },
+      "buddha/doctor.py": {
+        "after": "afa511a747c4be2951ba53fea5cfe2822077a0f7a6f80a80a3255594d5b5d19b",
+        "before": "afa511a747c4be2951ba53fea5cfe2822077a0f7a6f80a80a3255594d5b5d19b"
+      },
+      "buddha/evaluation.py": {
+        "after": "4cabb1a48689a140fc6f6129ed8d9eae1d047d3e09eae794170c74479413b8d6",
+        "before": "4cabb1a48689a140fc6f6129ed8d9eae1d047d3e09eae794170c74479413b8d6"
+      },
+      "buddha/executor.py": {
+        "after": "b5e84f2dbcdc436aee23272e7d96b567cb5b16ead256a34d08bccc70b480d186",
+        "before": "b5e84f2dbcdc436aee23272e7d96b567cb5b16ead256a34d08bccc70b480d186"
+      },
+      "buddha/gateway.py": {
+        "after": "e844fcb695b97c76ecb7432ece6b8d96416806554038e202fd6b0f7f3da57a2e",
+        "before": "e844fcb695b97c76ecb7432ece6b8d96416806554038e202fd6b0f7f3da57a2e"
+      },
+      "buddha/gateway_history.py": {
+        "after": "a773ae6066e5b8a4f503e4b346b73570ace2ebeb811017f7b656cc211fded57c",
+        "before": "a773ae6066e5b8a4f503e4b346b73570ace2ebeb811017f7b656cc211fded57c"
+      },
+      "buddha/history.py": {
+        "after": "d42e92a7e6c88a2f72090eaaa50de39dc355957e7c61f5b89dd97162d8b0eefa",
+        "before": "d42e92a7e6c88a2f72090eaaa50de39dc355957e7c61f5b89dd97162d8b0eefa"
+      },
+      "buddha/ledger.py": {
+        "after": "5c7e56f1e2c5e68046d6380ebacc03110300eae34d348d7dca683a0591d64130",
+        "before": "5c7e56f1e2c5e68046d6380ebacc03110300eae34d348d7dca683a0591d64130"
+      },
+      "buddha/native_context.py": {
+        "after": "47a488b8d731617bda21380232e5e49801e0c0b4261f69b71c24fb9eae0ba298",
+        "before": "47a488b8d731617bda21380232e5e49801e0c0b4261f69b71c24fb9eae0ba298"
+      },
+      "buddha/native_run.py": {
+        "after": "60aafd5ef9e355e82faae2dc12397c6b0b2b649c3273c1bda9c0c757e0775a19",
+        "before": "60aafd5ef9e355e82faae2dc12397c6b0b2b649c3273c1bda9c0c757e0775a19"
+      },
+      "buddha/native_transport.py": {
+        "after": "ccd4917132939630231b8b8c69540189cd52f60951fa08d467d90b9571ccb6c0",
+        "before": "ccd4917132939630231b8b8c69540189cd52f60951fa08d467d90b9571ccb6c0"
+      },
+      "buddha/native_worker.py": {
+        "after": "8fa4b85ae6e75202de4b345302cb70253b6c0c5b47f004490f8d9a09750ecaa1",
+        "before": "8fa4b85ae6e75202de4b345302cb70253b6c0c5b47f004490f8d9a09750ecaa1"
+      },
+      "buddha/policy.py": {
+        "after": "717f6fdad1e880d83326d6a314e0dfa604be1044f8209f27061380e16cfebb3e",
+        "before": "717f6fdad1e880d83326d6a314e0dfa604be1044f8209f27061380e16cfebb3e"
+      },
+      "buddha/process_observation.py": {
+        "after": "28ad4b424ae0bec10aa2d3bf145cb62e1b26eb088db5e83fb6900fab6d5495a8",
+        "before": "28ad4b424ae0bec10aa2d3bf145cb62e1b26eb088db5e83fb6900fab6d5495a8"
+      },
+      "buddha/progress.py": {
+        "after": "47d21dada88347e63c01b05cf5c31db8e2cc157e501b812b58a2650d078393ba",
+        "before": "47d21dada88347e63c01b05cf5c31db8e2cc157e501b812b58a2650d078393ba"
+      },
+      "buddha/proposer.py": {
+        "after": "40e7ebf562966370f9f77c1e7f0e369b9fd34e37c0a0b88b246a7a630e4a40dd",
+        "before": "40e7ebf562966370f9f77c1e7f0e369b9fd34e37c0a0b88b246a7a630e4a40dd"
+      },
+      "buddha/provider.py": {
+        "after": "17de071c1416afa32f9da32eb627e24264d8a0a848862fdf4853057125f18a02",
+        "before": "17de071c1416afa32f9da32eb627e24264d8a0a848862fdf4853057125f18a02"
+      },
+      "buddha/reference.py": {
+        "after": "36356c8a25dae3501014513095cb6f838c4ae54b02a129bdffc4a5cb2dfa6f35",
+        "before": "36356c8a25dae3501014513095cb6f838c4ae54b02a129bdffc4a5cb2dfa6f35"
+      },
+      "buddha/releases.py": {
+        "after": "33361cf5b0923b373ee53dd73597063195c2c0d519baead50d40fb4bcfab44f5",
+        "before": "33361cf5b0923b373ee53dd73597063195c2c0d519baead50d40fb4bcfab44f5"
+      },
+      "buddha/run.py": {
+        "after": "a972cb8d1a04bef7abad7efdf7f1eec803bb88cd55c30cf64148119a3d7c6dbb",
+        "before": "a972cb8d1a04bef7abad7efdf7f1eec803bb88cd55c30cf64148119a3d7c6dbb"
+      },
+      "buddha/search.py": {
+        "after": "ac7b3648355b139797773cbe2bb8b67abbc8533eefd987cd7692275692a9a95c",
+        "before": "ac7b3648355b139797773cbe2bb8b67abbc8533eefd987cd7692275692a9a95c"
+      },
+      "buddha/search_evidence.py": {
+        "after": "1d89ed7ae541f52b79cc643edd2615955104cceb8508036d3b288e646fa30a34",
+        "before": "1d89ed7ae541f52b79cc643edd2615955104cceb8508036d3b288e646fa30a34"
+      },
+      "buddha/search_verify.py": {
+        "after": "41bdc2689d2b64e93765fe4572017a6c4264d5c3c6df49bba2a63e74b9ab6a63",
+        "before": "41bdc2689d2b64e93765fe4572017a6c4264d5c3c6df49bba2a63e74b9ab6a63"
+      },
+      "buddha/splits.py": {
+        "after": "419fa286d812b43e3095fbb41a62844b40477f880d94c8d60de069a52c324a2a",
+        "before": "419fa286d812b43e3095fbb41a62844b40477f880d94c8d60de069a52c324a2a"
+      },
+      "buddha/wire.py": {
+        "after": "48f40a71bf10c84dfd1d15f0baef50198cce8a229748355f116ad6a25cab12b4",
+        "before": "48f40a71bf10c84dfd1d15f0baef50198cce8a229748355f116ad6a25cab12b4"
+      }
+    }
+  },
+  "runtime_prerequisite": {
+    "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+    "path": "docs/conformance/src01-runtime-delivery.json",
+    "sha256": "6a45841018a7ae4509bd35d0dbba2a2db37a61b72f11dcb353e7b7cde55f8eaf"
+  },
+  "source_sha256": {
+    "README.md": "2adf7cce6cea72f4848d185a7d84771da8864eba7726df345214b2eb7c5f07f9",
+    "buddha/candidate_run.py": "99bd61eb7f92cb323918459f2fde19108a9511483154d42a03fe500dd7db07df",
+    "buddha/candidate_worker.py": "be39d7d7ed57a202d3b1362f279ccd40e9407a44219be8298831857d2ce6b7c6",
+    "docs/HOW-IT-WORKS.md": "09dedd9f998f9fb6210b1b1e513b2dd651040be17ae25bff950e6447fdb4665c",
+    "docs/PLAN.md": "4bd6e965332336440d0c75403368e77dfba83e8e7de72cf49dca14c2b6bf74d0",
+    "docs/SOURCE-CANDIDATES.md": "5e4ecc03ad8a56caff0a9d57aa5cbbbdba97f6cb1d06f64a8bab9033ccc7ee7d",
+    "docs/conformance/src01-candidate-probe.py": "2cb5543adbf1dfdb736887ac4ed856ae6bd9cddd27e598720accf0ba482d5074",
+    "tests/test_candidate_run.py": "1bf4917081a2e9d75dfabfafb5f4266e26493b50d20ff36d340ecf2cee1327d3",
+    "tests/test_candidate_worker.py": "abbb3f649455ae33c32912239e782a442d11e6401726429e162e12a8af0204bd"
+  },
+  "status": "bounded local SRC-01 acceptance complete; hosted CI pending",
+  "tests_first": {
+    "host": "Initial missing candidate_run module error before implementation; observed in tool history.",
+    "recovery_prefix": {
+      "final_publication_race_check": "An operation inserted by a trusted host after Done is detected before C1 publication.",
+      "fix": "Require original-owner operation_count == delivered distinct completed ordinals at Done and before publication.",
+      "old_observation": "Same original owner could skip retained completed/unknown callbacks and publish C1. Holds stayed intact; this was a completion flaw, not a spending-cap escape.",
+      "red_tests": 2
+    },
+    "worker": "Missing-module RED retained in ignored source-bound worker log."
+  },
+  "validation": {
+    "bandit": "Application/agents and separate proof script pass; scoped nosec diagnostics remain, not a warning-free claim.",
+    "compileall": "pass",
+    "format": "pass",
+    "full_suite": {
+      "command": "python -B -W error::ResourceWarning -m unittest discover -s tests",
+      "diagnostics": "Expected diagnostics.py RuntimeWarning and asyncio slow-task diagnostic retained; not a warning-free claim.",
+      "exit_code": 0,
+      "seconds": 1058.309,
+      "skip_names": [
+        "test_agent_worker.AgentWorkerTests.test_symlinked_source_is_rejected_even_when_expected_bytes_match",
+        "test_continuation_source.ContinuationSourceTests.test_actual_original_nine_receipts_validate_read_only",
+        "test_history.HistoryTests.test_source_symlink_is_rejected_without_following_it",
+        "test_native_worker.NativeWorkerTests.test_replaced_artifact_root_cannot_export_another_tree",
+        "test_releases.ReleaseSelectionTests.test_symlinked_file_or_parent_is_rejected",
+        "test_search_evidence.SearchEvidenceTests.test_symlink_is_rejected",
+        "test_src01_runtime.SourceRuntimeTests.test_site_root_and_unexpected_nested_symlinks_are_rejected",
+        "test_src01_runtime.SourceRuntimeTests.test_supported_interpreter_alias_is_bound_to_actual_binary",
+        "test_src01_runtime.SourceRuntimeTests.test_unknown_tree_symlink_is_rejected_even_with_safe_target",
+        "test_src01_runtime.SourceRuntimeTests.test_venv_interpreter_cannot_escape_the_pinned_base"
+      ],
+      "skip_scope": "Nine Windows symlink-privilege cases and the unavailable private original-nine-receipt fixture; runtime delivery names the existing tests.",
+      "skipped": 10,
+      "tests": 1122
+    },
+    "host_groups": 25,
+    "lint": "pass",
+    "runtime_dependency_audit": "python -m pip_audit --no-deps -r requirements.txt: exit0, no known vulnerabilities; standard-library-only runtime requirements. Not a whole-OS or development-dependency clearance.",
+    "strict_mypy": "40 application/agent sources on Windows; both new modules also pass Linux target",
+    "unfinished_full_runs": [
+      {
+        "attempt": 1,
+        "reason": "Stop owned unfinished run before final type annotations; log retained.",
+        "status": "aborted"
+      },
+      {
+        "attempt": 2,
+        "reason": "Stop owned unfinished run before fixing independently reproduced recovery-prefix completion defect; log retained.",
+        "status": "aborted"
+      }
+    ],
+    "worker_groups": 13,
+    "worker_unit_scope": "Portable protocol checks use reviewed literal fixtures in isolated Python subprocesses; subprocesses are not confinement evidence. The separate sixteen-container proof exercises the production candidate route."
+  }
+}
