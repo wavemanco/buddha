@@ -39,10 +39,11 @@ statistical significance, held-out improvement or a successful promotion.
 The report also describes the original categories, generation repetitions,
 judging disagreement, saved recovery metadata and recorded tokens/costs.
 `analysis.status = complete` describes numerical coverage. It does not mean the
-supplemental review or the controlled experiment is complete. Before launch,
-freeze the panel's masked mapping and implement/test its packet materializer,
-then complete the tested live handoff, account/runtime checks and approved
-funding. Materialize the actual answer packet and obtain its reviews only after
+supplemental review or the controlled experiment is complete. The
+[pre-answer mapping](POLICY-PANEL.md) fixes masked coordinates from pinned study
+metadata. Before launch, its packet materializer must be implemented/tested, then
+the tested live handoff, account/runtime checks and approved funding completed.
+Materialize the actual answer packet and obtain its reviews only after
 real generation has saved the original answers. Actual results and the later
 human scientific assessment remain open.
 

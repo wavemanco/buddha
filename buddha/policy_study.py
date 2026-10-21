@@ -205,3 +205,37 @@ class PolicyStudy(_Artifact):
                 }
             )
         return result
+
+
+def validate_intent(study: PolicyStudy, value: object, protocol_sha256: str) -> None:
+    """Join reviewed publication data to the complete study, without reading files.
+
+    The caller verifies original byte pins; this check establishes data consistency,
+    not publication time or authenticity.
+    """
+    try:
+        if not isinstance(study, PolicyStudy):
+            raise PolicyStudyError("a frozen study is required")
+        _digest(protocol_sha256)
+        record = _object(value, {"format", "protocol_sha256", "release", "study", "expected"})
+        source = TaskSet.from_bytes(_json(study.to_record()["source"]))
+        declaration = study.to_record()
+        del declaration["source"]
+        expected = {
+            "release_sha256": source.release_sha256,
+            "source_tasks_sha256": source.fingerprint(),
+            "selected_tasks_sha256": study.tasks.fingerprint(),
+            "study_sha256": study.fingerprint(),
+            "arm_ids": [row["arm_id"] for row in study.arms],
+            "cell_ids": [row["cell_id"] for row in study.schedule()],
+        }
+        if (
+            record["format"] != "buddha.policy-study-intent.v1"
+            or record["protocol_sha256"] != protocol_sha256
+            or _json(record["release"]) != _json(source.to_record()["release"])
+            or _json(record["study"]) != _json(declaration)
+            or _json(record["expected"]) != _json(expected)
+        ):
+            raise PolicyStudyError("reviewed intent differs from the frozen study")
+    except (ReleaseError, TypeError, KeyError, ValueError, RecursionError):
+        raise PolicyStudyError("reviewed intent differs from the frozen study") from None

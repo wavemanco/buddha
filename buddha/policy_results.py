@@ -20,7 +20,7 @@ from buddha.gateway_history import HistoricalGatewayOperation
 from buddha.native_evaluation import _read_generation
 from buddha.native_pipeline import validate_authorization_snapshot
 from buddha.policy_analysis import PolicyResultsError, analyze_metrics
-from buddha.policy_study import PolicyStudy
+from buddha.policy_study import PolicyStudy, validate_intent
 from buddha.releases import (
     MAX_JSON_BYTES,
     Release,
@@ -686,29 +686,6 @@ class _Reader:
             raise PolicyResultsError("native command/configuration lineage differs")
 
 
-def _intent(reader: _Reader, study: PolicyStudy, raw: bytes, protocol_sha256: str) -> None:
-    record = _object(_load(raw), {"format", "protocol_sha256", "release", "study", "expected"})
-    source = TaskSet.from_bytes(_json(study.to_record()["source"]))
-    declaration = study.to_record()
-    del declaration["source"]
-    expected = {
-        "release_sha256": reader.release.fingerprint(),
-        "source_tasks_sha256": source.fingerprint(),
-        "selected_tasks_sha256": study.tasks.fingerprint(),
-        "study_sha256": study.fingerprint(),
-        "arm_ids": [row["arm_id"] for row in study.arms],
-        "cell_ids": [row["cell_id"] for row in study.schedule()],
-    }
-    if (
-        record["format"] != "buddha.policy-study-intent.v1"
-        or record["protocol_sha256"] != protocol_sha256
-        or not _same(record["release"], reader.release.to_record())
-        or not _same(record["study"], declaration)
-        or not _same(record["expected"], expected)
-    ):
-        raise PolicyResultsError("original execution differs from its reviewed publication")
-
-
 def analyze_study(
     directory: Path,
     *,
@@ -738,7 +715,7 @@ def analyze_study(
         reader.raw(protocol.absolute(), _digest(expected_protocol_sha256))
         anchor = reader.owner(directory / "cells/0/baseline/owners/0")
         study, execution = reader.definition(anchor)
-        _intent(reader, study, intent_raw, expected_protocol_sha256)
+        validate_intent(study, _load(intent_raw), expected_protocol_sha256)
         result = _analyze(reader, study, execution, observation)
         _object(result["provenance"])["publication_pins"] = {
             "intent_sha256": expected_intent_sha256,

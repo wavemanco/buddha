@@ -402,6 +402,68 @@ class PolicyStudyTests(unittest.TestCase):
         ):
             self.assertEqual(len(self.study().schedule()), 8)
 
+    def test_reviewed_intent_validation_binds_all_original_identity_fields(self):
+        from buddha.policy_study import validate_intent
+
+        study = self.study()
+        declaration = study.to_record()
+        del declaration["source"]
+        intent = {
+            "format": "buddha.policy-study-intent.v1",
+            "protocol_sha256": "d" * 64,
+            "release": self.release.to_record(),
+            "study": declaration,
+            "expected": {
+                "release_sha256": self.release.fingerprint(),
+                "source_tasks_sha256": self.source.fingerprint(),
+                "selected_tasks_sha256": study.tasks.fingerprint(),
+                "study_sha256": study.fingerprint(),
+                "arm_ids": [row["arm_id"] for row in study.arms],
+                "cell_ids": [row["cell_id"] for row in study.schedule()],
+            },
+        }
+        original = copy.deepcopy(intent)
+        with (
+            patch.object(Path, "open", side_effect=AssertionError("file access")),
+            patch("socket.socket", side_effect=AssertionError("network access")),
+        ):
+            self.assertIsNone(validate_intent(study, intent, "d" * 64))
+        self.assertEqual(intent, original)
+        variants = []
+        for key in intent:
+            altered = copy.deepcopy(intent)
+            altered[key] = None
+            variants.append(altered)
+        for key in intent["expected"]:
+            altered = copy.deepcopy(intent)
+            altered["expected"][key] = None
+            variants.append(altered)
+        altered = copy.deepcopy(intent)
+        altered["study"]["execution_order"][1]["arm"] = False
+        variants.append(altered)
+        altered = copy.deepcopy(intent)
+        altered["study"]["generation_repeats"] = 2.0
+        variants.append(altered)
+        altered = copy.deepcopy(intent)
+        altered["study"]["selected_ids"] = [1, "1", "d2"]
+        variants.append(altered)
+        for index, altered in enumerate(variants):
+            with self.subTest(index=index), self.assertRaises(PolicyStudyError):
+                validate_intent(study, altered, "d" * 64)
+
+    def test_reviewed_intent_validation_rejects_untyped_trust_inputs(self):
+        from buddha.policy_study import validate_intent
+
+        for study, intent, pin in (
+            (None, {}, "d" * 64),
+            (self.study(), [], "d" * 64),
+            (self.study(), {}, True),
+            (self.study(), {}, "D" * 64),
+        ):
+            with self.subTest(study=type(study), intent=type(intent), pin=pin):
+                with self.assertRaises(PolicyStudyError):
+                    validate_intent(study, intent, pin)
+
     def test_contract_imports_without_legacy_benchmark_sdk_or_financial_modules(self):
         program = """
 import importlib.abc, sys
