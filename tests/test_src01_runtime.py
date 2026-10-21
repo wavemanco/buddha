@@ -2,6 +2,7 @@
 
 import hashlib
 import json
+import os
 import tempfile
 import unittest
 from pathlib import Path
@@ -24,6 +25,13 @@ class SourceRuntimeTests(unittest.TestCase):
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name).resolve()
+        # Windows readlink returns the verbatim namespace. Keep the entire
+        # fixture in that namespace; the Linux audit's raw-target check stays exact.
+        if os.name == "nt" and not str(self.root).startswith("\\\\?\\"):
+            name = str(self.root)
+            self.root = Path(
+                "\\\\?\\UNC\\" + name[2:] if name.startswith("\\\\") else "\\\\?\\" + name
+            )
         self.base = self.root / "base"
         self.prefix = self.root / "venv"
         for root in (self.base, self.prefix):
@@ -135,6 +143,7 @@ class SourceRuntimeTests(unittest.TestCase):
     def test_supported_interpreter_alias_is_bound_to_actual_binary(self):
         (self.prefix / "bin/python").unlink()
         self.symlink(self.base / "bin/python3.13", self.prefix / "bin/python")
+        self.assertEqual(os.readlink(self.prefix / "bin/python"), str(self.base / "bin/python3.13"))
         value = self.helper.audit_layout(self.prefix, self.base)
         self.assertEqual(
             value["venv_inventory"]["bin/python"]["target_sha256"],
