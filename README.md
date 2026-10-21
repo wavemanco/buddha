@@ -4,6 +4,10 @@ Build agents that improve their own procedures for producing useful, meaningfull
 
 **Start with [the consolidated living plan](docs/PLAN.md)** for the complete original objective, completed work, new findings, dependencies and the next slice. It is the sole current roadmap; design and review documents supply specifications and evidence.
 
+[How Buddha works](docs/HOW-IT-WORKS.md) explains the workflow in plain English:
+how answers are generated, grouped and scored; what the 4/5/9 result means; how
+parser recovery differs from a judge's decision; and where self-improvement fits.
+
 ## Current state
 
 The bounded **MEAS-01/MEAS-02 measurement audit is complete**; next is the
