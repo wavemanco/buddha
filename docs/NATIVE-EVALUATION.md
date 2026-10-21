@@ -69,6 +69,12 @@ owner and inherited by later owners, including on recovery. Callers need not
 resupply them when resuming. The [policy controller](POLICY-EXECUTION.md) uses
 this existing provenance boundary to bind the whole frozen study.
 
+Optional `expected_input_hashes` supplies previously checked SHA256 values for
+members of `input_files`. The first native owner and every later stage receive
+the captured original values before their Gateway manifests are created.
+Changed inputs cause an error; current contents do not replace the old hashes.
+These checks make no provider calls and add no spending permission.
+
 These are library interfaces. This slice supplies no new paid CLI command,
 funding allocation or actual study membership. The historical $50 experiment
 and $15 judge audit do not authorize another comparison.

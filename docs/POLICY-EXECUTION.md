@@ -83,6 +83,23 @@ to the generator.
 | `prepare_study(directory, descriptor=..., authorization=..., review=...)` | Validate the frozen comparison and existing funding, create a fresh directory and bind its first generation owner. Reads no API keys and makes no provider calls. |
 | `run_study(directory, transport=...)` | Run or recover the declared schedule through its original children. Unfinished paid work still needs active authority, reviewed profiles, a paid transport and locally supplied keys. |
 
+`prepare_study` accepts optional `input_bindings`: a bounded mapping from `Path`
+objects to previously reviewed SHA256 values for external publication files.
+These files must be outside the study output directory. The first generation
+owner binds them alongside the study's captured configuration and source hashes.
+On recovery, the controller inherits their original paths and values from that
+first owner; callers do not resupply them. Every later generation and judging
+owner retains them. Changed or missing files stop execution rather than being
+accepted with fresh hashes. These host checks do not add publication text or
+private panel coordinates to model requests.
+
+The values must come from a trusted earlier check. Matching caller-supplied
+hashes alone do not establish that a scientific registration preceded the run.
+A change detected before owner publication creates no new owner; a later change
+may leave partial files pinned to the original values, which fail the existing
+execution-identity check. Retain those files as evidence. This interface is not
+the passive configuration/readiness checker or the live operator launcher.
+
 These are library functions. There is no new operator command or live handoff
 in this execution slice. The separate [actual protocol](POLICY-COMPARISON.md)
 and [intent](conformance/pol02-study-intent.json) now declare membership, the
@@ -95,9 +112,10 @@ repetitions, score/group disagreement between judging occasions, and
 token/cost/recovery views.
 It keeps missing usage and uncertain liabilities explicit; a saved attempt is
 not automatically a confirmed wire call, and observed retries/fallback models
-do not prove parser repair or its cause. Before actual execution, freeze the
-masked panel mapping, implement/test its packet materializer, and complete
-account/runtime checks, approved funding and a tested live handoff. Materialize
+do not prove parser repair or its cause. The
+[panel mapping and packet materializer](POLICY-PANEL.md) now pass their offline
+checks. Before actual execution, complete account/runtime checks, approved
+funding and a tested live handoff. Materialize
 the actual answer packet and obtain supplemental reviews only after real
 generation saves the original answers. Reporting features do not complete the
 experiment or the later human scientific assessment.

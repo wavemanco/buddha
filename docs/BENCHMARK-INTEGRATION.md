@@ -137,6 +137,15 @@ It tests configuration validation, immutable round trips, real selected-file dri
 | `Gateway.execute(...)` | Check the frozen owner and request, use the real shared allocation, reserve the applicable maximum, prepare credentials/connection, claim one dispatch, capture raw evidence and record billing. Each call sends at most once. Completed matching evidence replays without credentials, an active allocation or a paid transport. |
 | `RawEnvelope` / `extract_usage(...)` | Preserve bounded immutable body bytes and selected response headers; extract billing counters independently of assistant-content parsing. A malformed assistant answer can still have known billable usage. Missing/ambiguous billing evidence retains uncertainty. |
 
+`prepare_gateway` also accepts optional `expected_input_hashes`: a mapping of
+at most 1,024 `Path` keys to previously reviewed SHA256 values. Each path must
+belong to `input_files`. It checks those values before creating the owner;
+changed contents cannot become a newly accepted hash. Omitting the mapping
+keeps the existing ordered input format and captures current file hashes.
+If a file changes later during preparation, retained files keep its original
+hash and the existing execution-identity check refuses execution. Preparation
+failure does not guarantee an empty output directory.
+
 The two supported paid capabilities are OpenAI Chat Completions and Anthropic Messages over fixed HTTPS endpoints. They fund text only, one non-streamed completion, and explicitly supported text/cache fields. Unsupported tools, media, streaming, multiple completions, providers and tiers fail before credentials or sends. Capability extensions remain explicit host changes, separate from ordinary benchmark release configuration. HTTP request bodies are sent byte-for-byte; header, SDK and evaluator parity belong to BENCH-02C's differential checks.
 
 Capability profiles are separately selected host files with format `buddha.gateway-profiles.v1`. Each profile contains a `ModelSpec` (provider, request model, documented input/output maxima, conservative input/output rates and HTTPS bounds source), allowed response model IDs, request/response tiers and explicit permission for an omitted tier. The rates must bound every applicable account tier, cache operation and other supported billing feature. Omitted OpenAI output caps reserve the configured documented model maximum; an explicit cap may lower that reservation. Anthropic requires its native explicit output allowance. The gateway never estimates a smaller input bound from prompt length.
