@@ -54,7 +54,11 @@ generation/judging repetitions. [Fresh native assessment](docs/NATIVE-EVALUATION
 can judge anchored generated answers again without generating again; a composed
 [study controller](docs/POLICY-EXECUTION.md) now passes its offline engineering
 gate, including the full eight-cell actual-container schedule and keyless replay.
-Actual membership, funding, analysis and the live comparison remain open.
+The [actual twelve-task protocol](docs/POLICY-COMPARISON.md) now declares
+membership, the unchanged official instrument, analysis and masked supplemental
+review; its [cost proposal](docs/POLICY-COMPARISON-COSTS.md) creates no funding.
+Account/runtime checks, a tested handoff, passive analysis and the live
+comparison remain open.
 
 The [source runtime](docs/SOURCE-RUNTIME.md) and [candidate execution boundary](docs/SOURCE-CANDIDATES.md)
 now pass composed isolation, model-channel, accounting and recovery checks.
@@ -136,7 +140,7 @@ This synthetic example evaluates independent-sampling and in-context seeds, prop
 
 The first live experiment was authorized for **up to $50 combined**, covering both providers and all search stages. The initial attempt was interrupted while awaiting answer 10. Its nine replies and full uncertain reservation remain intact. The completed recovery restart used a **$49.465918 cap and 118-call allowance**, accounting for the original $0.534082 committed liability and ten attempted calls. It repeated the same one-prompt, two-seed, one-proposal engineering pilot with fresh evidence. Both attempts are now historical inputs. Shared authorization imports their sealed liabilities once and enforces the combined dollar/call cap. The linked continuation reuses nine saved replies as evidence, sends a separately identified replacement for the unknown tenth, then completes the remaining search stages. Its new report separates new cost, inherited evidence cost and shared experiment accounting.
 
-The corrected linked run completed and was verified: nine saved replies reused, 51 new calls for $0.274533, with the original unknown still held. [Linked results and concerns](docs/LINKED-CONTINUATION-RESULTS.md) record the three candidate scores, repeated plots, literal/craft failures and shared accounting. The completed run is closed to new paid calls; its [execution handoff](docs/FIRST-LIVE-CONTINUATION.md) remains historical evidence. Benchmark conformance now passes at its declared offline scope; REC-05's bounded read-only verification and diagnostic gates are complete; the blinded model-development review is complete, and auditing the official judge against those judgments is next.
+The corrected linked run completed and was verified: nine saved replies reused, 51 new calls for $0.274533, with the original unknown still held. [Linked results and concerns](docs/LINKED-CONTINUATION-RESULTS.md) record the three candidate scores, repeated plots, literal/craft failures and shared accounting. The completed run is closed to new paid calls; its [execution handoff](docs/FIRST-LIVE-CONTINUATION.md) remains historical evidence. Benchmark conformance now passes at its declared offline scope; REC-05's bounded read-only verification and diagnostic gates are complete; both the blinded model-development review and bounded official-judge audit are complete; the controlled policy comparison remains open.
 
 This command prints the saved completed report once in this window. It needs no
 keys, makes no changes and spends nothing:

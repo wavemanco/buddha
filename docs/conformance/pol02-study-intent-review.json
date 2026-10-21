@@ -1,0 +1,650 @@
+{
+  "base_commit": "af1829f631e31f2e40b6276ceede6fc60dac807b",
+  "boundaries": [
+    "This does not create a shared authorization, paid route, owner, new model output or measured improvement.",
+    "Reviewed identity and trusted publication custody do not authenticate publication time or stop jointly rewritten untrusted intent/protocol records.",
+    "Launch preflight and later passive analysis must join the reviewed publication to actual controller-bound inputs; direct policy_run calls do not bind arbitrary analysis documents.",
+    "No source evolution, human evaluation, held-out gain or matched actual-token superiority established.",
+    "All existing application/agent programs and earlier conformance evidence remain byte-exact."
+  ],
+  "development_checks": [
+    {
+      "id": "POL2-S1",
+      "kind": "observed source overlap",
+      "observation": "Among1100 normalized literal Curated primary/paraphrase strings, IDs47/48 share one cross-ID variant; both kept in the same development custody block. Not a semantic paraphrase completeness claim."
+    },
+    {
+      "fix": "At the public CLI boundary use existing releases._path on output basename before the existing exclusive/fsynced writer; shared writer and all core source unchanged.",
+      "green": "Seven final focused methods pass; separate reviewer checks eight unsafe name variants never reach writer and static failure messages reveal no injected private exception detail.",
+      "id": "POL2-S2",
+      "kind": "reproduced new CLI output boundary defect",
+      "red": "Actual Windows optional export accepted ADS, trailing-dot and device outputs; four regression subtests failed, with trailing-space alias also seeing the earlier created base. All evidence was synthetic temporary source data."
+    },
+    {
+      "fix": "Equal scheduled generation/occasions/model access/ceilings; physical quality, repair, retry and fallback counts can differ and remain reported.",
+      "id": "POL2-S3",
+      "kind": "protocol wording correction before outcomes",
+      "red": "Original prose described all request counts as equal, although official quality calls depend on class heads and recovery."
+    }
+  ],
+  "format": "buddha.policy-study-intent-review.v1",
+  "independent_reviews": [
+    {
+      "path": "runs/reviews/pol02-study-intent-independent-review-gateway.json",
+      "record": {
+        "accepted_custody_blocks": 72,
+        "finding": [
+          {
+            "issue": "Equal request counts is true for generation only. Pinned score.py scores one request per class head; quality and recovery request counts can vary by outcomes.",
+            "line": 146,
+            "path": "docs/POLICY-COMPARISON.md",
+            "recommendation": "Restrict equality claim to generation request counts; retain variable quality/recovery calls.",
+            "severity": "wording"
+          }
+        ],
+        "first_eligible_seed": 0,
+        "format": "buddha.pol02-study-intent-independent-review.v1",
+        "historical_child": {
+          "file_sha256": "eb3fdc647d0ca558159cb864d5ec6f15efa2a2f8b02db9f04901b2fad304c50a",
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\first-live-recovery\\candidates\\34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b\\policy.json",
+          "policy_sha256": "34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b"
+        },
+        "known_exposure_closure": [
+          "curated-0",
+          "curated-1",
+          "curated-47",
+          "curated-48",
+          "curated-94",
+          "curated-95",
+          "curated-96",
+          "curated-97",
+          "curated-98",
+          "curated-99"
+        ],
+        "literal_variant_strings": 1100,
+        "metadata_joins": 100,
+        "multirow_blocks": 17,
+        "narrow_tests": {
+          "command": "python -B -W error::ResourceWarning -m unittest discover -s tests -p test_policy_intent.py -v",
+          "exit_code": 0,
+          "groups": 7,
+          "log": "runs\\reviews\\pol02-study-intent-independent-tests-gateway.log",
+          "log_sha256": "4a24e810ef5ef100e36cf796b6b3c41592d88041ec349e3041397b219d5b8a84",
+          "skips": 0
+        },
+        "normalized_overlap": [
+          [
+            "curated-47",
+            "curated-48"
+          ]
+        ],
+        "not_done": [
+          "No new output or outcome inspection",
+          "No model/API/network/Docker execution",
+          "No keys, grants, authority or ledger opened",
+          "No independent temporal price verification",
+          "No full-suite run",
+          "No scientific-independence, quality improvement, final eligibility or live readiness claim"
+        ],
+        "null_display_seed_verified_by_static_ast": true,
+        "official_cli_commands": [
+          {
+            "argv": [
+              "--eval-dir",
+              "{artifacts}",
+              "--version",
+              "1.1",
+              "--alg",
+              "llm",
+              "--judge-model",
+              "gpt-5.6-luna",
+              "--concurrency",
+              "2"
+            ],
+            "module": "src.partition"
+          },
+          {
+            "argv": [
+              "--eval-dir",
+              "{artifacts}",
+              "--version",
+              "1.1",
+              "--scorer",
+              "llm",
+              "--judge-model",
+              "claude-opus-5",
+              "--fallback-judge",
+              "claude-sonnet-5",
+              "--patience",
+              "0.8",
+              "--concurrency",
+              "2"
+            ],
+            "module": "src.score"
+          },
+          {
+            "argv": [
+              "--eval-dir",
+              "{artifacts}",
+              "--version",
+              "1.1"
+            ],
+            "module": "src.summarize"
+          }
+        ],
+        "panel_ids": [
+          "curated-0",
+          "curated-20",
+          "curated-33",
+          "curated-47",
+          "curated-71",
+          "curated-97"
+        ],
+        "panel_repeats": [
+          0,
+          1,
+          0,
+          1,
+          0,
+          1
+        ],
+        "protocol_sha256": "fb67f226f03aa5394981138103f365a263cc00f461685c91f21d96c406ffa668",
+        "reconstructed_study_expected": {
+          "arm_ids": [
+            "2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525",
+            "68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06",
+            "34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b",
+            "aee29a38192002bdc8c4b11921acc354d93afdc0ba69c01ff43924864e075db6"
+          ],
+          "cell_ids": [
+            "8a488533798671a61243091bdc0b175a4a3bf73f8411817ab048241f3e4d3e94",
+            "7a747c755b5ec0a218872eba0e1c4d7fd7b1a54176db6e26ecd2ce2b8185c733",
+            "ab6014aa407f73df2813248f1ba5ccb16ec89fa9017d3b66e8556afc780f8de6",
+            "6197aa2bd956bd7c80db6dafda4f65408589d84db71831edaf10350a8483e64f",
+            "8ab465f375d0c45558d0bfe5554c1a762e96a8cb47d408dc3e32d22a6b6b54df",
+            "193d673eaaa0ff5543740b9f7a6aeda4b0bc4aed04e2d5595a479480e1011a75",
+            "633d86cf548ab4a9cf33222c1645e0b3eb3487eab1ca063ac614c5beadb030eb",
+            "aa46a31dfc80debcdd594327340cd5f445231d36864b26c0b5dcb24c8230ea78"
+          ],
+          "release_sha256": "8fd676bd8b25c6bcfd66664b1179473703a343fd7dc94833a1dea8dd5f9e39fb",
+          "selected_tasks_sha256": "c37501adec3fcb95d8e5463a1de489a6bf129a0b048f952ab27794815a62c547",
+          "source_tasks_sha256": "1abe00411ec98183ed278399215e88e334a4825345b324f971bb0eb47e2e6eba",
+          "study_sha256": "897db6a13c2a3f35bf5dd11e99e5aac20173c1a556f7e55aea9ccfa63a3c19de"
+        },
+        "recorded_utc": "2026-10-21T13:57:06.951134+00:00",
+        "retained_original_reviews_sha256": {
+          "pol02-candidate-split-selection-gateway.json": "f70f2173bf3400a2a27002e6868ef772bbb9879a8172d3ef5234291f87062f83",
+          "pol02-curated-families-independent-d.json": "bafda886ce046d826643fd35ad4cf473341b65702db67edc5db740382476e2c7",
+          "pol02-curated-family-proposal-gateway.json": "affc0a5232d0de33de7237a35f3bffa8d5bedf7213362dc312fc0fc9bc513c2a",
+          "pol02-custody-coarsening-mechanical-audit-gateway.json": "6ddcefff298e660c7c7e7ea950df49455f4f0d443d9bc220c110d2b99bbc929c",
+          "pol02-protocol-binding-review-d.md": "34b46c7975b3420e21c3a73f75f3adebad60af709c8077789b8f80d6b8c15002",
+          "pol02-supplemental-panel-review-gateway.json": "cc1aac7076a31148e8e05fa45083cec599da29362799feffd10ccc4250adedb3"
+        },
+        "reviewed_file_hashes_unchanged": true,
+        "reviewed_file_sha256": {
+          "docs/POLICY-COMPARISON-COSTS.md": "8fb4adeaa161f7b48239acd4aab44cb788e7b815f2818f1d7338c0e852892c48",
+          "docs/POLICY-COMPARISON.md": "fb67f226f03aa5394981138103f365a263cc00f461685c91f21d96c406ffa668",
+          "docs/conformance/pol02-study-freeze.py": "481d31f4e38a563c641314197d390d09cba7d740a503db31697d641f5739dbb7",
+          "docs/conformance/pol02-study-intent.json": "9f3b44b95aefe93fc13254695730ce6ecfc9565faa29226f07b92e1924ad9cb0",
+          "docs/conformance/pol02-study-source-review.json": "6bcf52430668d06456d31e14629dd0ad7093d1656099faba8a8c75cd7a51fcc0",
+          "tests/test_policy_intent.py": "b3543026e8b1e4ad4a6836d2d356c9675cf54652ac0652edad4eaa0d4bec3f66"
+        },
+        "reviewer": "/root/gateway_acceptance",
+        "scientific_review": {
+          "contrasts": "2-0,3-1,1-0,3-2,interaction (3-1)-(2-0), equal-weight12-prompt descriptive mean",
+          "generation_repetition_and_judgment_occasion": "separate axes, repeated judgment preserves same ordered C1 answers",
+          "limitations": "public exposure and1000 paraphrase semantic equivalence are not ruled out; custody blocks are conservative",
+          "no_promotion_inference": "explicit; no significance, independent-sample or matched-actual-token superiority claim",
+          "primary_judgment_occasion": "ordinal0, never substituted after failure",
+          "supplemental_review": "two fresh model sessions, third masked review of disagreement/uncertainty, not human EVAL-02"
+        },
+        "selected_category_counts": {
+          "Character & Entity Naming": 2,
+          "Creativity": 2,
+          "Factual Knowledge": 2,
+          "Product & Purchase Recommendations": 2,
+          "Random Generation & Selection": 2,
+          "Subjective Rankings & Opinions": 2
+        },
+        "selected_ids": [
+          "curated-0",
+          "curated-47",
+          "curated-97",
+          "curated-15",
+          "curated-20",
+          "curated-26",
+          "curated-33",
+          "curated-30",
+          "curated-50",
+          "curated-71",
+          "curated-65",
+          "curated-86"
+        ],
+        "singleton_blocks": 55,
+        "source_file_sha256": {
+          "LICENSE": "14e69e7fbb2f8fd0aa8ccf17d7d4ddd54665555c613a0336767f7a5fa477895c",
+          "data/curated.jsonl": "ca9b6f470e5d7f7e34a281e2fdaa6f6e51c38bdae075ea580d184139ec391fa7",
+          "src/common.py": "ba60bf0f2a409c3774d75880f305325a28ed34320610667542a4596c41f424af",
+          "src/evaluation_io.py": "8a34e01308677469d984dd59e36412c2994baf2554fd3a5f026be9ef98a3a5c7",
+          "src/judge.py": "4decf04790b90a03368eb792dfe29045435914a73ab83a52185d9dd0d1613902",
+          "src/partition.py": "263970891ff3ee1cc8df369a33beefe5cb5de618b5dd146a5234536d97954aca",
+          "src/score.py": "418985a40e9e159cfeffe9a43ab2c727010d7a7a29407f4e14cab3c81b77cbae",
+          "src/summarize.py": "0a8bd1eb7f317584f579eaa827e580f9cefe4177a1abdc35b2cb06ef96eeea9e",
+          "uv.lock": "ff6d5b15b77e4ca46a33604586eb7d99666d2802752ab962af9baa2924a50758"
+        },
+        "source_rows": 100,
+        "split_blocks": {
+          "development": 42,
+          "final": 17,
+          "validation": 13
+        },
+        "split_rows": {
+          "development": 58,
+          "final": 26,
+          "validation": 16
+        },
+        "status": "pass_with_wording_correction",
+        "worktree_head": "af1829f631e31f2e40b6276ceede6fc60dac807b"
+      },
+      "sha256": "4b3b866c246526671f2a6c5358602ee68da9213642660fa62fa25e72b05b5920"
+    },
+    {
+      "path": "runs/reviews/pol02-study-intent-independent-review-addendum-gateway.json",
+      "record": {
+        "closed_finding": "Equal count claim now applies to scheduled generation and judging occasions; variable physical quality/repair/retry/fallback retained.",
+        "cost_clarification": "Current native exchange holds async lock through synchronous Gateway execute; native instance concurrency is not simultaneous head-call reservations. Account confirmations are user facts, not API/invoice verification.",
+        "format": "buddha.pol02-study-intent-independent-review-addendum.v1",
+        "historical_child_policy_file_unchanged": true,
+        "intent_only_change_from_original": "exact original bytes recovered by replacing new protocol hash with original protocol hash",
+        "intent_sha256": "befcce0c56aaa86326e4ed5c116564e72488ad469f16ff53b9ad5390391bb01e",
+        "new_helper_review": {
+          "error_output": "allowlisted static stage names only; no raw exception strings",
+          "output_guard": "existing releases._path(args.output.name) precedes existing exclusive _write; four actual nonportable test names directly rejected",
+          "scope": "no execution, authority or pricing logic added"
+        },
+        "no_new_defects": true,
+        "not_done": [
+          "No tracked edits",
+          "No fullsuite/Docker/model/network",
+          "No outcomes or authority/ledger/key reads",
+          "No independent temporal price check",
+          "No live readiness or funding approval claim"
+        ],
+        "original_receipt": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-review\\runs\\reviews\\pol02-study-intent-independent-review-gateway.json",
+          "preserved": true,
+          "sha256": "4b3b866c246526671f2a6c5358602ee68da9213642660fa62fa25e72b05b5920"
+        },
+        "original_source9_sha256_unchanged": {
+          "LICENSE": "14e69e7fbb2f8fd0aa8ccf17d7d4ddd54665555c613a0336767f7a5fa477895c",
+          "data/curated.jsonl": "ca9b6f470e5d7f7e34a281e2fdaa6f6e51c38bdae075ea580d184139ec391fa7",
+          "src/common.py": "ba60bf0f2a409c3774d75880f305325a28ed34320610667542a4596c41f424af",
+          "src/evaluation_io.py": "8a34e01308677469d984dd59e36412c2994baf2554fd3a5f026be9ef98a3a5c7",
+          "src/judge.py": "4decf04790b90a03368eb792dfe29045435914a73ab83a52185d9dd0d1613902",
+          "src/partition.py": "263970891ff3ee1cc8df369a33beefe5cb5de618b5dd146a5234536d97954aca",
+          "src/score.py": "418985a40e9e159cfeffe9a43ab2c727010d7a7a29407f4e14cab3c81b77cbae",
+          "src/summarize.py": "0a8bd1eb7f317584f579eaa827e580f9cefe4177a1abdc35b2cb06ef96eeea9e",
+          "uv.lock": "ff6d5b15b77e4ca46a33604586eb7d99666d2802752ab962af9baa2924a50758"
+        },
+        "raw_protocol_sha256": "a3cd4ee3011f0e269e0b2e66570953c847574497d8e8b02a359b247a59423ab0",
+        "reconstructed_study_expected": {
+          "arm_ids": [
+            "2cad4fc7a6fa24def0c19d64d35eaff985c1770e1434084bfcdd6206077be525",
+            "68608e691190ffda9ea6c52f78d16fb9c67bca735201c9c91a880bdee48f7e06",
+            "34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b",
+            "aee29a38192002bdc8c4b11921acc354d93afdc0ba69c01ff43924864e075db6"
+          ],
+          "cell_ids": [
+            "8a488533798671a61243091bdc0b175a4a3bf73f8411817ab048241f3e4d3e94",
+            "7a747c755b5ec0a218872eba0e1c4d7fd7b1a54176db6e26ecd2ce2b8185c733",
+            "ab6014aa407f73df2813248f1ba5ccb16ec89fa9017d3b66e8556afc780f8de6",
+            "6197aa2bd956bd7c80db6dafda4f65408589d84db71831edaf10350a8483e64f",
+            "8ab465f375d0c45558d0bfe5554c1a762e96a8cb47d408dc3e32d22a6b6b54df",
+            "193d673eaaa0ff5543740b9f7a6aeda4b0bc4aed04e2d5595a479480e1011a75",
+            "633d86cf548ab4a9cf33222c1645e0b3eb3487eab1ca063ac614c5beadb030eb",
+            "aa46a31dfc80debcdd594327340cd5f445231d36864b26c0b5dcb24c8230ea78"
+          ],
+          "release_sha256": "8fd676bd8b25c6bcfd66664b1179473703a343fd7dc94833a1dea8dd5f9e39fb",
+          "selected_tasks_sha256": "c37501adec3fcb95d8e5463a1de489a6bf129a0b048f952ab27794815a62c547",
+          "source_tasks_sha256": "1abe00411ec98183ed278399215e88e334a4825345b324f971bb0eb47e2e6eba",
+          "study_sha256": "897db6a13c2a3f35bf5dd11e99e5aac20173c1a556f7e55aea9ccfa63a3c19de"
+        },
+        "recorded_utc": "2026-10-21T14:04:27.475220+00:00",
+        "reviewed_file_sha256": {
+          "docs/POLICY-COMPARISON-COSTS.md": "945a3b1a43aedd06747f63154e7eac5dbab020941f1f9ffc3a26882dde5756f8",
+          "docs/POLICY-COMPARISON.md": "a3cd4ee3011f0e269e0b2e66570953c847574497d8e8b02a359b247a59423ab0",
+          "docs/conformance/pol02-study-freeze.py": "a1a1ca07226855142241b6bee2f0bb1d82c5ce92e7cfc51482d8c1abf3bd8adf",
+          "docs/conformance/pol02-study-intent.json": "befcce0c56aaa86326e4ed5c116564e72488ad469f16ff53b9ad5390391bb01e",
+          "docs/conformance/pol02-study-source-review.json": "6bcf52430668d06456d31e14629dd0ad7093d1656099faba8a8c75cd7a51fcc0",
+          "tests/test_policy_intent.py": "82a2e5b42a3a39f2b8100031bb39846c799eaeb50b0f8ee5ff0af87e5dbe02ab"
+        },
+        "reviewed_files_unchanged_during_closing_check": true,
+        "scientific_membership_and_schedule": "original reviewed study fingerprint unchanged; no repeat semantic family review performed",
+        "source_review_and_all_original_notes_unchanged": true,
+        "status": "pass",
+        "tests_scope": {
+          "closing": "no test cohort rerun; source/data joins and direct four portable-name guards only",
+          "earlier_independent_cohort": "7 passed0.845s0skips at original reviewed bytes; preserved original log",
+          "parent_reported_final_focused": "7 passed; parent owns final log and full suite"
+        }
+      },
+      "sha256": "d9bf38cf75477e9e54b24490d8de16d3f3f108f19c7cf1796a1217cf8208eb60"
+    },
+    {
+      "path": "runs/reviews/pol02-intent-independent-review-d.json",
+      "record": {
+        "additional_mechanical_checks": {
+          "all_known_exposure_closure_is_development": true,
+          "all_nine_selected_official_source_hashes_match": true,
+          "blocks_disjoint_between_partitions": true,
+          "custody_blocks": 72,
+          "literal_source_rows_joined_by_id_category_prompt_sha256": 100,
+          "partition_rows": {
+            "development": 58,
+            "final": 26,
+            "validation": 16
+          },
+          "protocol_intent_source_review_digests_match": true,
+          "source_dataset_sha256": "ca9b6f470e5d7f7e34a281e2fdaa6f6e51c38bdae075ea580d184139ec391fa7"
+        },
+        "adversarial_checks": {
+          "artifact": "pol02-intent-independent-boundaries-d.json",
+          "cases": 20,
+          "denied": [
+            "socket/socket.create_connection/HTTPSConnection/urlopen",
+            "sqlite3.connect",
+            "Authorization constructor",
+            "Gateway constructor",
+            "executor.run_container",
+            "subprocess.Popen",
+            "OpenAI/Anthropic credential environment lookup"
+          ],
+          "forbidden_boundary_attempts": 0,
+          "note": "Boundary checks consume original data or disposable synthetic fixtures only; the executable-looking selected fixture source is hashed and never executed. Earlier artifact retains its exact cost-document pin before the parent account-paragraph update.",
+          "script": "pol02-intent-independent-boundaries-d.py",
+          "script_sha256": "e8b3c8372aed08d5f924ef65203793121a9f07d9586af98f64eb0a7eca7e00ac",
+          "sha256": "22b4144cd0040f210e13eae1d5d191237b04408553e5862d615ea52ca961b696",
+          "status": "passed"
+        },
+        "base_commit": "af1829f631e31f2e40b6276ceede6fc60dac807b",
+        "cost_scope": {
+          "account_confirmation": "Parent reports new user confirmation; current cost doc treats account assertions separately from provider verification.",
+          "completion_guarantee": false,
+          "illustrative_quality_cost_arithmetic_checked": [
+            2.88,
+            33.6,
+            57.6
+          ],
+          "new_allocation_created": false,
+          "normal_path_calls": {
+            "generation": 960,
+            "grouping": 192,
+            "quality_upper": 1920,
+            "total_upper_before_retries_fallback": 3072
+          },
+          "physical_attempt_proposal": 4096,
+          "physical_send_concurrency": "Existing host exchange serializes physical sends per native worker despite official prompt concurrency; do not infer twenty simultaneous Opus holds from ten heads and concurrency2.",
+          "public_prices_or_real_accounts_independently_reverified_by_this_review": false,
+          "shared_budget_proposal_usd": 50
+        },
+        "findings": [
+          {
+            "file": "docs/POLICY-COMPARISON.md",
+            "finding": "Equal request counts overstates the matched design: native quality counts depend on partition heads, and repairs/retries/fallbacks can differ.",
+            "id": "POL02-PREP-D1",
+            "line": 146,
+            "minimum_correction": "Equal scheduled generation counts and judging occasions/model access/per-request ceilings; actual physical request counts vary and are reported.",
+            "parent_disposition": "Accepted. Parent will update protocol and intent.protocol_sha256 only after current full-suite terminal, then rerun focused intent/hydration checks."
+          }
+        ],
+        "focused_tests": {
+          "exit_code": 0,
+          "log": "pol02-intent-review-focused-d.log",
+          "log_sha256": "9ca076126256c4c22bf08aff266a3d11884174c5bf58e0180ef4601c5643c13f",
+          "methods": 7,
+          "resource_warnings": "errors",
+          "seconds": 0.911,
+          "skips": 0
+        },
+        "format": "buddha.pol02-intent-independent-review.v1",
+        "limits": [
+          "No live readiness, model access/profile validation, provider account verification, funding authority, or scientific result is established.",
+          "Hash equality establishes input consistency, not independent timestamp authentication; future launch and passive analysis still need the explicit reviewed intent-to-execution join.",
+          "Selected source hashing does not execute or audit the official evaluator runtime.",
+          "No full-suite, Docker, model/API call, key access or actual authority read was performed by this reviewer. No tracked files were edited by this reviewer.",
+          "The current parent full-suite result and post-correction protocol/intent pins remain separate future evidence."
+        ],
+        "recorded_utc": "2026-10-21T13:57:10.927960+00:00",
+        "source_sha256": {
+          "docs/POLICY-COMPARISON-COSTS.md": "8fb4adeaa161f7b48239acd4aab44cb788e7b815f2818f1d7338c0e852892c48",
+          "docs/POLICY-COMPARISON.md": "fb67f226f03aa5394981138103f365a263cc00f461685c91f21d96c406ffa668",
+          "docs/conformance/pol02-study-freeze.py": "481d31f4e38a563c641314197d390d09cba7d740a503db31697d641f5739dbb7",
+          "docs/conformance/pol02-study-intent.json": "9f3b44b95aefe93fc13254695730ce6ecfc9565faa29226f07b92e1924ad9cb0",
+          "docs/conformance/pol02-study-source-review.json": "6bcf52430668d06456d31e14629dd0ad7093d1656099faba8a8c75cd7a51fcc0",
+          "tests/test_policy_intent.py": "b3543026e8b1e4ad4a6836d2d356c9675cf54652ac0652edad4eaa0d4bec3f66"
+        },
+        "status": "helper boundary checks pass; accepted protocol request-count wording correction pending after parent full-suite freeze"
+      },
+      "sha256": "7c4473b2056849aec406a7f2eda47541721a4765497442b2e73b5d937ee7b661"
+    },
+    {
+      "path": "runs/reviews/pol02-intent-independent-review-final-d.json",
+      "record": {
+        "closed_findings": [
+          {
+            "closure": "Protocol146-153 now distinguishes equal scheduled generation/assessment access from variable physical quality/repair/retry/fallback request counts; protocol raw digest matches final intent.",
+            "id": "POL02-PREP-D1",
+            "topic": "request-count wording"
+          },
+          {
+            "closure": "Helper95 validates public output basename with existing releases._path before shared _write. Independent sentinel checks establish ADS/trailing-dot/space/reserved/wildcard names never reach writer. Existing output still remains unchanged and missing parent is not created.",
+            "evidence_owner": "parent",
+            "id": "POL02-PREP-ROOT1",
+            "topic": "Windows output basename"
+          },
+          {
+            "closure": "Stages are fixed local literals; an injected private-detail OSError yields only the static output-stage diagnostic, without exception text.",
+            "id": "POL02-PREP-ROOT2",
+            "topic": "actionable redacted failures"
+          }
+        ],
+        "final_boundary_checks": {
+          "actual_nine_source_cli": "checked study897db6a13c2a3f35bf5dd11e99e5aac20173c1a556f7e55aea9ccfa63a3c19de",
+          "artifact": "pol02-intent-independent-boundaries-final-d.json",
+          "cases": 30,
+          "exit_code": 0,
+          "forbidden_paid_database_process_credential_boundary_calls": 0,
+          "invalid_basename_cases_before_writer": 8,
+          "invalid_basename_writer_calls": 0,
+          "resource_warnings": "errors",
+          "script": "pol02-intent-independent-boundaries-final-d.py",
+          "script_sha256": "aa20893003ac5989d099a259c39ca192f8fb8fb279a38851cea49fe81736c6c5",
+          "sha256": "5da96e3cdec88f6d5f525c3bb94d93a2cbfc8c2e577394f1bce068abdc493d0c"
+        },
+        "financial_scope": {
+          "account_terms": "Cost paragraph records both provider user assertions; actual access/credential-project joins still require future protected handoff. This review did not inspect accounts or authority.",
+          "allocated": false,
+          "completion_guaranteed": false,
+          "normal_path_upper_before_retry_fallback": 3072,
+          "per_native_worker_physical_sends": "host-serialized; official concurrency2 is not twenty simultaneous head reservations",
+          "proposed_attempt_ceiling": 4096,
+          "proposed_usd": 50
+        },
+        "format": "buddha.pol02-intent-independent-review-final.v1",
+        "preservation_and_limits": [
+          "No tracked edits by this reviewer; no app/agent diff relative to af1829f.",
+          "Original review and20-case receipt retained byte-exact; they record their then-current scope and pins.",
+          "No full suite, Docker, model/API call, key access or real authority read performed by this reviewer.",
+          "Intent hydration verifies declared bytes/identities; future launch/analysis joins and pre-outcome publication custody remain required.",
+          "No new allocation, live-readiness, runtime-conformance, timestamp-attestation or scientific-gain claim.",
+          "Parent reports the initial unfinished full-suite was stopped before source changes and is not a pass; final full suite is still separate active evidence."
+        ],
+        "preserved_prior_receipts": {
+          "runs/reviews/pol02-intent-independent-boundaries-d.json": "22b4144cd0040f210e13eae1d5d191237b04408553e5862d615ea52ca961b696",
+          "runs/reviews/pol02-intent-independent-review-d.json": "7c4473b2056849aec406a7f2eda47541721a4765497442b2e73b5d937ee7b661"
+        },
+        "recorded_utc": "2026-10-21T14:05:01.765882+00:00",
+        "source_sha256": {
+          "docs/POLICY-COMPARISON-COSTS.md": "945a3b1a43aedd06747f63154e7eac5dbab020941f1f9ffc3a26882dde5756f8",
+          "docs/POLICY-COMPARISON.md": "a3cd4ee3011f0e269e0b2e66570953c847574497d8e8b02a359b247a59423ab0",
+          "docs/conformance/pol02-study-freeze.py": "a1a1ca07226855142241b6bee2f0bb1d82c5ce92e7cfc51482d8c1abf3bd8adf",
+          "docs/conformance/pol02-study-intent.json": "befcce0c56aaa86326e4ed5c116564e72488ad469f16ff53b9ad5390391bb01e",
+          "docs/conformance/pol02-study-source-review.json": "6bcf52430668d06456d31e14629dd0ad7093d1656099faba8a8c75cd7a51fcc0",
+          "tests/test_policy_intent.py": "82a2e5b42a3a39f2b8100031bb39846c799eaeb50b0f8ee5ff0af87e5dbe02ab"
+        },
+        "status": "final targeted helper/protocol/cost review passed; parent full-suite and hosted validation remain separate"
+      },
+      "sha256": "428bea5d456ae54981b6ab839e8672689a5f6d6e4c47ab237bb2618c6937d0e1"
+    }
+  ],
+  "scope": "actual development study intent, offline reconstruction, declared scientific analysis and unallocated cost proposal",
+  "test_history": {
+    "final_focused": "seven methods pass after output guard and static stage diagnostics",
+    "final_full_suite": "tracked separately in final delivery after its actual terminal",
+    "first_focused_cohort": "five methods passed, followed by two additional input/actual-registration methods",
+    "initial_missing_helper": "one unittest import error before helper implementation; the original five test methods did not execute in that RED",
+    "pre_correction_full_suite": {
+      "reason": "verified owned childPID57624 under wrapper57468 stopped to fix reproduced public Windows output-name defect",
+      "result": "unfinished; not a pass",
+      "terminal": {
+        "exit_code": 4294967295,
+        "finished_utc": "2026-10-21T13:59:14.028404+00:00",
+        "format": "buddha.policy-intent-full-suite.v1",
+        "inputs_unchanged": true,
+        "log_sha256": "0b13148a3c6cba5f5b438e66c87e707e3d7def13ac9919fb36aaf3a130a9ca39",
+        "source_sha256": {
+          "agents\\frozen_seed.py": "2b87bfe0d3c97ee45db2d45260985ffe0234eca93967f4689fb7c59f82603921",
+          "buddha\\__init__.py": "0857bd60619c1e1c8538fe768cbe82c781bb4e302abc6cf59130f1b17d052230",
+          "buddha\\__main__.py": "17a7af599e4d7b79094b806e01cedb765b560063bbcf82367f59e9f8e04005d7",
+          "buddha\\agent_run.py": "3f7f8ff3cb9965216f19c6564da1e830f0f629a346ec1cc29e2583c119bea88d",
+          "buddha\\agent_worker.py": "c6f86105c0a42304687f857209bb17172f2f38fda26699d25e2618f6e01a745f",
+          "buddha\\answers.py": "be860546b2692ea4a710d93855f487dd49d9c8e28eb3f2ec757df697cefb8d0b",
+          "buddha\\archive.py": "9549deb0f347cf6114ef3f802b9dfef8a94e0db7cbbd3497697987d5e21ba2ee",
+          "buddha\\authorization.py": "06d8615f8b301285a951b08bece0570e5b1b89467fc99fa4e994c7e5e5f30c47",
+          "buddha\\baseline.py": "13661931c95b676d95c724fba1e3db490a4a0c4374adec1e8ee4d1193579ca4a",
+          "buddha\\benchmark.py": "7ef7e26b2ef3cbf4119118a985334048fd30b68a5629f3e3196fa77e8200c49f",
+          "buddha\\candidate_run.py": "99bd61eb7f92cb323918459f2fde19108a9511483154d42a03fe500dd7db07df",
+          "buddha\\candidate_worker.py": "be39d7d7ed57a202d3b1362f279ccd40e9407a44219be8298831857d2ce6b7c6",
+          "buddha\\channel.py": "c46d236865b15f1918efa23d961ed7163533c9bbef2b0cec7f61d6f8e95d6e5f",
+          "buddha\\common.py": "3a0a693a0f4a0f2eed3b858d0b3ac42148871dbca284e56e0e368726309393c0",
+          "buddha\\continuation.py": "b0136052472868aee379d7ac78dfd11bcfa40e91aedcd6916d30f9a334003414",
+          "buddha\\diagnostics.py": "ca0af1304e3fbe99569f0b027f99269b151e08265785b39ed53c39f820097e24",
+          "buddha\\doctor.py": "afa511a747c4be2951ba53fea5cfe2822077a0f7a6f80a80a3255594d5b5d19b",
+          "buddha\\evaluation.py": "4cabb1a48689a140fc6f6129ed8d9eae1d047d3e09eae794170c74479413b8d6",
+          "buddha\\executor.py": "b5e84f2dbcdc436aee23272e7d96b567cb5b16ead256a34d08bccc70b480d186",
+          "buddha\\gateway.py": "e844fcb695b97c76ecb7432ece6b8d96416806554038e202fd6b0f7f3da57a2e",
+          "buddha\\gateway_history.py": "a773ae6066e5b8a4f503e4b346b73570ace2ebeb811017f7b656cc211fded57c",
+          "buddha\\history.py": "d42e92a7e6c88a2f72090eaaa50de39dc355957e7c61f5b89dd97162d8b0eefa",
+          "buddha\\ledger.py": "5c7e56f1e2c5e68046d6380ebacc03110300eae34d348d7dca683a0591d64130",
+          "buddha\\native_context.py": "47a488b8d731617bda21380232e5e49801e0c0b4261f69b71c24fb9eae0ba298",
+          "buddha\\native_evaluation.py": "79f726146de257ce801d8cf9aa273a58fb154b6f66fa6570b6ed29b008d780ab",
+          "buddha\\native_pipeline.py": "9a8fe6b5d85380494e73426928f0c5344493d203de5f4f53866d5f2c9baeeaa0",
+          "buddha\\native_run.py": "60aafd5ef9e355e82faae2dc12397c6b0b2b649c3273c1bda9c0c757e0775a19",
+          "buddha\\native_transport.py": "ccd4917132939630231b8b8c69540189cd52f60951fa08d467d90b9571ccb6c0",
+          "buddha\\native_worker.py": "8fa4b85ae6e75202de4b345302cb70253b6c0c5b47f004490f8d9a09750ecaa1",
+          "buddha\\policy.py": "717f6fdad1e880d83326d6a314e0dfa604be1044f8209f27061380e16cfebb3e",
+          "buddha\\policy_run.py": "7b3d1da3a209d4b49a76c3b5d766e11a66f29b5d243fdcec38933eb0e4c8f811",
+          "buddha\\policy_study.py": "a1d0c3d5d608312f1efe28c149190857b12ae031609e9ab217d96c8c9e3ed8ab",
+          "buddha\\process_observation.py": "28ad4b424ae0bec10aa2d3bf145cb62e1b26eb088db5e83fb6900fab6d5495a8",
+          "buddha\\progress.py": "47d21dada88347e63c01b05cf5c31db8e2cc157e501b812b58a2650d078393ba",
+          "buddha\\proposer.py": "40e7ebf562966370f9f77c1e7f0e369b9fd34e37c0a0b88b246a7a630e4a40dd",
+          "buddha\\provider.py": "17de071c1416afa32f9da32eb627e24264d8a0a848862fdf4853057125f18a02",
+          "buddha\\reference.py": "36356c8a25dae3501014513095cb6f838c4ae54b02a129bdffc4a5cb2dfa6f35",
+          "buddha\\releases.py": "33361cf5b0923b373ee53dd73597063195c2c0d519baead50d40fb4bcfab44f5",
+          "buddha\\run.py": "a972cb8d1a04bef7abad7efdf7f1eec803bb88cd55c30cf64148119a3d7c6dbb",
+          "buddha\\search.py": "ac7b3648355b139797773cbe2bb8b67abbc8533eefd987cd7692275692a9a95c",
+          "buddha\\search_evidence.py": "1d89ed7ae541f52b79cc643edd2615955104cceb8508036d3b288e646fa30a34",
+          "buddha\\search_verify.py": "41bdc2689d2b64e93765fe4572017a6c4264d5c3c6df49bba2a63e74b9ab6a63",
+          "buddha\\splits.py": "419fa286d812b43e3095fbb41a62844b40477f880d94c8d60de069a52c324a2a",
+          "buddha\\wire.py": "48f40a71bf10c84dfd1d15f0baef50198cce8a229748355f116ad6a25cab12b4",
+          "docs\\POLICY-COMPARISON.md": "fb67f226f03aa5394981138103f365a263cc00f461685c91f21d96c406ffa668",
+          "docs\\conformance\\pol02-study-freeze.py": "481d31f4e38a563c641314197d390d09cba7d740a503db31697d641f5739dbb7",
+          "docs\\conformance\\pol02-study-intent.json": "9f3b44b95aefe93fc13254695730ce6ecfc9565faa29226f07b92e1924ad9cb0",
+          "docs\\conformance\\pol02-study-source-review.json": "6bcf52430668d06456d31e14629dd0ad7093d1656099faba8a8c75cd7a51fcc0",
+          "tests\\authorization_helpers.py": "ae651b54afc4ab5a232051c730edadee53efb351038696b69662bb26204e4a3e",
+          "tests\\doctor_helpers.py": "8232e33eb93083032970b5f0e2f782cf67428eda8a5faf0bda18d8f1e768fcca",
+          "tests\\search_verify_helpers.py": "71ff939dd95f375bbc9259eb8391850e62ce74447f54ce77b6ee36d2c7c78618",
+          "tests\\test_agent_run.py": "b859f368da7adf04249f77587605b6437c97f280876355b1f90fa9b44fb1c4d0",
+          "tests\\test_agent_worker.py": "4c836810986b7121706c2b9827a8e51703d88c62a34db194ba871c3b930e5a77",
+          "tests\\test_answers.py": "ab07d16a024a304245dd8432063354028f7cfd998520f82cb542ff0a7a3aaa4f",
+          "tests\\test_archive.py": "742cc7b85bfd96aba2afc3910089ef604116623081d9629b0532fe0e6850e606",
+          "tests\\test_authority_receipts.py": "564456eaa5c5d2691406ac29e2b753d57610cfffd06e662a5b042ca3e8e248b7",
+          "tests\\test_authorization.py": "f3b82648741041d678828edd5d7ce553d4d9897e90bfde03dc403546968c5881",
+          "tests\\test_authorization_continuation.py": "0f715525bcbb35ff86564db8235ff484b1edbd37aa6f47cca9fb52c6a92ec00b",
+          "tests\\test_baseline.py": "cc140d9247c4f78fea70c30f6896aca64aff98ee49c529d5bb41c1381206870b",
+          "tests\\test_benchmark.py": "14f4356d0c35d7f36b431a3448ceb77f1c3bdb6420f86444a586851f086d3723",
+          "tests\\test_candidate_run.py": "1bf4917081a2e9d75dfabfafb5f4266e26493b50d20ff36d340ecf2cee1327d3",
+          "tests\\test_candidate_worker.py": "abbb3f649455ae33c32912239e782a442d11e6401726429e162e12a8af0204bd",
+          "tests\\test_cli.py": "a0c5c1a7b99e55e3cb9e6f1fe0c06539e9a4f953439655b3a99fd64621ff29ad",
+          "tests\\test_common.py": "b270320e96d2fc4bdf91a9449346d22ae4a5b5ba975259301d95c07e59ef6bf6",
+          "tests\\test_continuation.py": "73d9ae66663b74313fb9c0af6fdf160f4c7841711a8f3dc847d50c0bfc541567",
+          "tests\\test_continuation_common.py": "d61b29db05270c919ffbf3f0970f9b479ea89a43ebff6e1cedf5356082c39786",
+          "tests\\test_continuation_science.py": "673b84aa78259c43415dd5a89a9b24c3318ed68a1273c1cec7698629ca68b7c4",
+          "tests\\test_continuation_source.py": "ab1b416299b8727b161ea1164400ea974ce1328bcc74ee624eaebe2fb45e3846",
+          "tests\\test_diagnostics.py": "41eebf0f004259bf31f3041729d47d2760959ab6d0d62dfa35eaa1fd1a6e6f17",
+          "tests\\test_doctor.py": "82239801319d60b9cbc681ff3a4545f25c0532fff8010aa8d52c9c308c261d6e",
+          "tests\\test_doctor_search_lock.py": "fdcbe6143924bfd012d775956a340bab6c17bf05ad3efe6bf587742bdea23493",
+          "tests\\test_engineering_helpers.py": "36dea0b391bfd72fac81f3dd6bdf6731495fc2e76b9bde2a85bbe69906788c8a",
+          "tests\\test_evaluation.py": "1435de0c90889976c1737807a7585d5572447bfb620d33fd13c814ebc4d0de35",
+          "tests\\test_evaluation_bytes.py": "60c0027bb227ada29f8e744a8f1a75af948ead27a7bb35ce1fec2faa4a974249",
+          "tests\\test_executor.py": "5a9dff106a3323864bad3ef7be7bbbd9271d4e204b4d1d12dd8415e16d39a029",
+          "tests\\test_frozen_seed.py": "b63605a7026a260167f1dd64bc217e5303ef364f0f485bccdad00ba32a4f1da8",
+          "tests\\test_gateway.py": "80e9029bab1fd782d51c405bb875884d92bbf8744946d53993c7117556e824e9",
+          "tests\\test_gateway_headers.py": "0f4a561aa1b4c5bf2dc3933e329337aff75c971c4cddafd9fbdd229310bef540",
+          "tests\\test_gateway_history.py": "d4a9bb8aa930330425ef90320c9b18d2eb18cfef35d2f00dc7c839f345098059",
+          "tests\\test_history.py": "74364404fe61018bfe3d90920d8b78d72a0ab2a9301cb74d16ae147888b17fcd",
+          "tests\\test_history_reconciled.py": "23f09171a3a681ac17c1cc8c9fa6d0424f5da08e87648ea3db3499bf62dd3da0",
+          "tests\\test_history_schema.py": "84e41b8b9a782297fce8168f84189f296647b6203c3d8b7369f09df604777ea9",
+          "tests\\test_history_snapshot.py": "2c4789c8f272b120bb7e2baac06ce229f7dcdd5b98514f4f1fb8582d544fd2fc",
+          "tests\\test_ledger.py": "5b6095adac0a7e8678f3a99ea6d83ddb40e5b215c8e07b4d82acceff4ae05df0",
+          "tests\\test_linked_cli.py": "4ca218d3d18384b7f5ba8a03913d6a5cfa7824f1607a170f81d7df47178703f3",
+          "tests\\test_meas01_adjudication.py": "8f8e34be108e521f47a5e101e42ee0c16624f0b7fc2338e48e7201b30c54d439",
+          "tests\\test_meas01_pack.py": "aa2403eee11b0a47cb00e20c817b966f2790ff7a584d61a0a23338f10498ed6f",
+          "tests\\test_meas02_compare.py": "d45368552944865e944a861240122da218ca6e584a6225c77e143079fe0986b0",
+          "tests\\test_meas02_live.py": "e05761a579af3fb6f7ab1b6b57ba331129ea10a91133608e9bb07031190a958e",
+          "tests\\test_meas02_live_diagnostics.py": "0b30a1c3b2e6eff6d0a1509d1eea171fe28a122421bdbe91545002f654d4384a",
+          "tests\\test_meas02_materialize.py": "daed4f6aa20f9fbfde84fb4ef8b13041209749aec691c117de18aca1a27da2f2",
+          "tests\\test_meas02_native_audit.py": "dcb70face780bd69982e5765706f8ac770fef5b597cb6fbc3debcb84453095d7",
+          "tests\\test_meas02_native_binding.py": "a3b7f275d13487e76365f3b54bd30acaf9241f3f628d2c5a0dbbc1d4efccf057",
+          "tests\\test_meas02_native_source.py": "f662d2c5b42080776d7cd930cd30cad33a88d3e3bcbe76256e208f5ad33241c6",
+          "tests\\test_meas02_operator.py": "bd372112e401760922c078d1280606c07d270b02a7bc19841ed23c57185892b2",
+          "tests\\test_meas02_partial.py": "7505aef73646b83e9f662beaa680e451ade224b78b4d63610d3aa33d6d6621d8",
+          "tests\\test_meas02_partial_operator.py": "ed4a19aebfb0ba670cb974dc2b38d84102611fb7e2a4222c5f973c46b9839413",
+          "tests\\test_meas02_preflight.py": "b71a5663152fecf9aefbbc09f5ac2719233bf815112ac176c789ec512c97d46b",
+          "tests\\test_meas02_replay_cli.py": "72826e9d2d1f931056baf4a8f7fcb9f937722c4142ef8263f56536817c6aca62",
+          "tests\\test_meas02_results.py": "d77219db1ff06f5e25e3d1e1ac758243e20520c12849894d0ccaaefc09522963",
+          "tests\\test_native_context.py": "4ac72732dbca636c2345e41ae6de990003fa8ee1ff4bc6e4990fc4f9d023dad0",
+          "tests\\test_native_evaluation.py": "709d2df718605de4618fb3a6fd24c39005d6faa3f79760658b2c8eca9bacc148",
+          "tests\\test_native_pipeline.py": "918b75fdc1ad874b316247698f1699171db91909aa160b082928398477d8e510",
+          "tests\\test_native_run.py": "69bd427891ffca2174570d767d5796948ec5ede0dd2a14dc3842706689c48c03",
+          "tests\\test_native_run_adversarial.py": "c218e27a1a6a7928c87bb959ec7e923b17b19325234b593b7d4321db8c46aa2a",
+          "tests\\test_native_transport.py": "dedc7abbd7096fb64542b1edd95257b91823d2e71eb965aacfe70a014049f590",
+          "tests\\test_native_worker.py": "2efa4fb5fff6cb8ce9158a22720174c40f72118a69953321f76a0933cec90a6d",
+          "tests\\test_observation_reads.py": "e326ee023dcecdc1e45e4f41eea2340e3d9082d5a7ae222c20c14b3a94260463",
+          "tests\\test_paid_authority.py": "eaeb3bcfa0c6449cd7a2b1fb31f08d9d53ab3538dc06c86034b65618c4654fa7",
+          "tests\\test_policy.py": "0190f80c53c685278b1cd9046ba350934db7888e482543ca1463703c69023ebe",
+          "tests\\test_policy_intent.py": "b3543026e8b1e4ad4a6836d2d356c9675cf54652ac0652edad4eaa0d4bec3f66",
+          "tests\\test_policy_run.py": "220024134719635fce7ae5de57dcaa87dfc36c360bb4f74f87baeaad31da3c63",
+          "tests\\test_policy_study.py": "9d1579874dd42fd8df0360be419100541ebbb46f04aee40d57f9fb91919dee97",
+          "tests\\test_process_observation.py": "9c0f104da231cd3cb5b1bbbf4d0b78c240df847a51e37553b043088cad999f82",
+          "tests\\test_progress.py": "aad3c80785f910df8031f6cbc88be840f72a70b23c856058274ddc1ca59b0e8e",
+          "tests\\test_proposer.py": "0fe59da4708fadf094da944045fade3099fa0af3887066a586b66d1cf3cf5729",
+          "tests\\test_provider.py": "3203babe8f19b649dd5eea645d40be7e082cb13c57a67783cfdd61b56a6c1810",
+          "tests\\test_reference.py": "710daa7f7e6bfd578b44e0b6c4815552b0f7185484cf37dd30020a21b26889f2",
+          "tests\\test_releases.py": "bea974f3e004343a3b7dee93a3d792e666ffa37c8c6917b37d79c2d0824d5c49",
+          "tests\\test_run.py": "9e46d096b42c8b4c6671358f5720ce554887fcf4470512cdd79dfe0dde95f663",
+          "tests\\test_search.py": "5d202735bac12097891e7eddff0eaac2af1ee6254616342eaed1ef6355633f6d",
+          "tests\\test_search_evidence.py": "0b2d75f5865add33e46feb8a6578032efbbcc5e9f531a56733edde5a4f7354b5",
+          "tests\\test_search_verify.py": "f9b2fa531c566041bdb43a08efd356271889951a06d0ac33f3e937d97de76f22",
+          "tests\\test_search_verify_review.py": "dd117aa3bd8160a43949e4c2b8fdbabfbe702cd0ac7ff6d280ac595422d356c7",
+          "tests\\test_splits.py": "cb75aa2f4a0a037f088c1adae37e0632ac94803a5de629e1a6b94b76cd9bd2a5",
+          "tests\\test_src01_runtime.py": "0a50d567590e59779ac19cae6dd582e85a1a3cace5f84ad4b76bf050f8ccf586",
+          "tests\\test_unsent_boundary.py": "01a9dbcaaf2d40f6c5768da689929d27a9d283bc0a1137ae8acd4d381475f78b",
+          "tests\\test_wire.py": "9e947c7e48af4ed270859d205e3c6435e2ec256da43287e193d453548467704d"
+        },
+        "started_utc": "2026-10-21T13:50:52.127092+00:00",
+        "wall_seconds": 501.90131440002006
+      }
+    }
+  }
+}

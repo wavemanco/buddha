@@ -1,0 +1,1490 @@
+{
+  "coarsening": {
+    "basis": "transitive closure of both declared maps, then four conservative custody merges; blocks are not answer-equivalence labels",
+    "cross_category_blocks": [
+      {
+        "family": "curated-family-026-culture-conditioned-baby-boy-name",
+        "members": [
+          "curated-26",
+          "curated-61"
+        ],
+        "original_category_counts": {
+          "Character & Entity Naming": 1,
+          "Factual Knowledge": 1
+        },
+        "primary_stratum": "Character & Entity Naming"
+      },
+      {
+        "family": "reconciled-gift-recommendations",
+        "members": [
+          "curated-27",
+          "curated-29",
+          "curated-56"
+        ],
+        "original_category_counts": {
+          "Product & Purchase Recommendations": 2,
+          "Subjective Rankings & Opinions": 1
+        },
+        "primary_stratum": "Product & Purchase Recommendations"
+      },
+      {
+        "family": "curated-family-038-travel-destination-recommendation",
+        "members": [
+          "curated-38",
+          "curated-39",
+          "curated-64"
+        ],
+        "original_category_counts": {
+          "Factual Knowledge": 1,
+          "Subjective Rankings & Opinions": 2
+        },
+        "primary_stratum": "Subjective Rankings & Opinions"
+      },
+      {
+        "family": "reconciled-book-title-selection",
+        "members": [
+          "curated-52",
+          "curated-74",
+          "curated-80",
+          "curated-81"
+        ],
+        "original_category_counts": {
+          "Factual Knowledge": 3,
+          "Subjective Rankings & Opinions": 1
+        },
+        "primary_stratum": "Factual Knowledge"
+      },
+      {
+        "family": "curated-family-069-animal-example-selection",
+        "members": [
+          "curated-69",
+          "curated-93"
+        ],
+        "original_category_counts": {
+          "Factual Knowledge": 1,
+          "Random Generation & Selection": 1
+        },
+        "primary_stratum": "Factual Knowledge"
+      }
+    ],
+    "final_blocks": 72,
+    "merges": [
+      {
+        "members": [
+          "curated-21",
+          "curated-22",
+          "curated-23",
+          "curated-24"
+        ],
+        "merge": "pet-names",
+        "old_family_count": 3,
+        "reduction": 2
+      },
+      {
+        "members": [
+          "curated-27",
+          "curated-29",
+          "curated-56"
+        ],
+        "merge": "gift-recommendations",
+        "old_family_count": 2,
+        "reduction": 1
+      },
+      {
+        "members": [
+          "curated-52",
+          "curated-74",
+          "curated-80",
+          "curated-81"
+        ],
+        "merge": "book-title-selection",
+        "old_family_count": 3,
+        "reduction": 2
+      },
+      {
+        "members": [
+          "curated-94",
+          "curated-95",
+          "curated-96",
+          "curated-97",
+          "curated-98",
+          "curated-99"
+        ],
+        "merge": "security-credential-selection",
+        "old_family_count": 4,
+        "reduction": 3
+      }
+    ],
+    "multirow_blocks": 17,
+    "singleton_blocks": 55
+  },
+  "coverage": {
+    "all1100_normalized_exact_variants_checked": true,
+    "all_source_rows_joined_by_id_original_category_prompt_sha256": true,
+    "literal_primary_prompts_reviewed_per_reviewer": 100,
+    "paraphrase_semantic_review": false
+  },
+  "exact_variant_overlap": {
+    "cross_id_groups": [
+      {
+        "ids": [
+          "curated-47",
+          "curated-48"
+        ],
+        "normalized_text_sha256": "9028084ecbaa0953133cf0dc694665c2f3f79c01e7b1ce921d818bbc55b2acf9",
+        "partition": "development"
+      }
+    ],
+    "cross_partition_groups": 0,
+    "normalization": "Unicode split/join whitespace followed by casefold"
+  },
+  "first_eligible_seed": 0,
+  "format": "buddha.policy-study-source-review.v1",
+  "known_outcome_exposure": {
+    "all_development": true,
+    "family_closure": [
+      "curated-0",
+      "curated-1",
+      "curated-47",
+      "curated-48",
+      "curated-94",
+      "curated-95",
+      "curated-96",
+      "curated-97",
+      "curated-98",
+      "curated-99"
+    ],
+    "given_ids": [
+      "curated-0",
+      "curated-47",
+      "curated-48",
+      "curated-97"
+    ]
+  },
+  "limits": [
+    "Conservative operational custody, not a validated equivalence relation or independent-population certificate.",
+    "The two source reviews cover literal primary prompts; the1100-string check is exact normalization only, not a semantic paraphrase audit.",
+    "Original categories are retained even where a label seems debatable. Cross-category blocks use majority category solely for split allocation, ties broken by source first appearance.",
+    "Known inspected outcomes and their whole custody blocks are development-only. Other public-source/model-training exposure is not ruled out.",
+    "Validation/final names reserve prospective custody only. EVAL-01 must separately establish actual eligibility before any access or claims.",
+    "Raw dataset and fullTaskSet are not redistributed by this record. Code MIT does not settle separate dataset rights."
+  ],
+  "partition_counts": {
+    "development": {
+      "blocks": 42,
+      "original_categories": {
+        "Character & Entity Naming": 2,
+        "Creativity": 12,
+        "Factual Knowledge": 17,
+        "Product & Purchase Recommendations": 4,
+        "Random Generation & Selection": 9,
+        "Subjective Rankings & Opinions": 14
+      },
+      "primary_strata_rows": {
+        "Character & Entity Naming": 3,
+        "Creativity": 12,
+        "Factual Knowledge": 15,
+        "Product & Purchase Recommendations": 4,
+        "Random Generation & Selection": 9,
+        "Subjective Rankings & Opinions": 15
+      },
+      "rows": 58
+    },
+    "final": {
+      "blocks": 17,
+      "original_categories": {
+        "Character & Entity Naming": 1,
+        "Creativity": 5,
+        "Factual Knowledge": 7,
+        "Product & Purchase Recommendations": 2,
+        "Random Generation & Selection": 5,
+        "Subjective Rankings & Opinions": 6
+      },
+      "primary_strata_rows": {
+        "Character & Entity Naming": 1,
+        "Creativity": 5,
+        "Factual Knowledge": 9,
+        "Product & Purchase Recommendations": 3,
+        "Random Generation & Selection": 4,
+        "Subjective Rankings & Opinions": 4
+      },
+      "rows": 26
+    },
+    "validation": {
+      "blocks": 13,
+      "original_categories": {
+        "Character & Entity Naming": 4,
+        "Creativity": 3,
+        "Factual Knowledge": 4,
+        "Product & Purchase Recommendations": 1,
+        "Random Generation & Selection": 1,
+        "Subjective Rankings & Opinions": 3
+      },
+      "primary_strata_rows": {
+        "Character & Entity Naming": 4,
+        "Creativity": 3,
+        "Factual Knowledge": 4,
+        "Product & Purchase Recommendations": 1,
+        "Random Generation & Selection": 1,
+        "Subjective Rankings & Opinions": 3
+      },
+      "rows": 16
+    }
+  },
+  "retained_original_reviews": {
+    "pol02-candidate-split-selection-gateway.json": {
+      "sha256": "f70f2173bf3400a2a27002e6868ef772bbb9879a8172d3ef5234291f87062f83",
+      "storage": "ignored local research evidence; original unchanged"
+    },
+    "pol02-curated-families-independent-d.json": {
+      "sha256": "bafda886ce046d826643fd35ad4cf473341b65702db67edc5db740382476e2c7",
+      "storage": "ignored local research evidence; original unchanged"
+    },
+    "pol02-curated-family-proposal-gateway.json": {
+      "sha256": "affc0a5232d0de33de7237a35f3bffa8d5bedf7213362dc312fc0fc9bc513c2a",
+      "storage": "ignored local research evidence; original unchanged"
+    },
+    "pol02-custody-coarsening-mechanical-audit-gateway.json": {
+      "sha256": "6ddcefff298e660c7c7e7ea950df49455f4f0d443d9bc220c110d2b99bbc929c",
+      "storage": "ignored local research evidence; original unchanged"
+    },
+    "pol02-protocol-binding-review-d.md": {
+      "sha256": "34b46c7975b3420e21c3a73f75f3adebad60af709c8077789b8f80d6b8c15002",
+      "storage": "ignored local research evidence; original unchanged"
+    },
+    "pol02-supplemental-panel-review-gateway.json": {
+      "sha256": "cc1aac7076a31148e8e05fa45083cec599da29362799feffd10ccc4250adedb3",
+      "storage": "ignored local research evidence; original unchanged"
+    }
+  },
+  "reviewer_A_boundary_notes": [
+    {
+      "ids": [
+        "curated-0",
+        "curated-1",
+        "curated-2",
+        "curated-6",
+        "curated-10"
+      ],
+      "proposed": "Only0/1merged",
+      "rationale": "Shared fiction-writing is broad; romcom plot outline, fable and named-character free story differ in central subject/genre/output demands."
+    },
+    {
+      "ids": [
+        "curated-3",
+        "curated-4",
+        "curated-5"
+      ],
+      "proposed": "4/5merged;3separate",
+      "rationale": "Haiku adds a particular poetic form and required whale/tree subject, not only the matched four-line affect-poem variant."
+    },
+    {
+      "ids": [
+        "curated-11",
+        "curated-12",
+        "curated-13"
+      ],
+      "proposed": "11/12merged;13separate",
+      "rationale": "A riddle elicits a puzzle; a humorous joke is a different central output. Ambiguous humorous riddles do not make all such prompts near duplicates."
+    },
+    {
+      "ids": [
+        "curated-20",
+        "curated-21",
+        "curated-22",
+        "curated-23",
+        "curated-24"
+      ],
+      "proposed": "Only21/22merged",
+      "rationale": "Naming output form is common, but D&D character, filly and puffle have different entity/fiction domains. This deliberately narrow boundary needs reconciliation if pet naming is considered one task family; do not claim these singletons are proven independent."
+    },
+    {
+      "ids": [
+        "curated-25",
+        "curated-26",
+        "curated-61"
+      ],
+      "proposed": "26/61merged;25separate",
+      "rationale": "Name an existing Indian-origin person asks for a real entity, unlike choosing a baby given name. Source category does not override that intent distinction."
+    },
+    {
+      "ids": [
+        "curated-27",
+        "curated-29",
+        "curated-56"
+      ],
+      "proposed": "29/56merged;27separate",
+      "rationale": "Open gift idea versus choosing a specific handbag product. This narrower product-domain boundary is debatable; conservative reconciliation could expand the gift cluster."
+    },
+    {
+      "ids": [
+        "curated-36",
+        "curated-38",
+        "curated-39",
+        "curated-41",
+        "curated-64"
+      ],
+      "proposed": "38/39/64merged;36/41separate",
+      "rationale": "Travel destination recommendation differs from describing a vacation benefit or naming a bad place to live."
+    },
+    {
+      "ids": [
+        "curated-51",
+        "curated-53"
+      ],
+      "proposed": "separate",
+      "rationale": "Interesting unsolved problem versus personally difficult type of problem is not a mere paraphrase; the intended respondent/capability criterion differs. The ambiguity of personally is retained."
+    },
+    {
+      "ids": [
+        "curated-52",
+        "curated-74",
+        "curated-80",
+        "curated-81"
+      ],
+      "proposed": "52/80merged;74/81separate",
+      "rationale": "Acclaim query is matched; a specific book series and a dystopian bestseller domain are narrower factual selection tasks.81couldjoin under a looser acclaimed-book family, so this boundary is explicit for reconciliation."
+    },
+    {
+      "ids": [
+        "curated-43",
+        "curated-69",
+        "curated-93"
+      ],
+      "proposed": "69/93merged;43separate",
+      "rationale": "Breed suitability advice is not simply naming an animal, despite shared animal vocabulary."
+    },
+    {
+      "ids": [
+        "curated-57",
+        "curated-63",
+        "curated-68",
+        "curated-70",
+        "curated-71",
+        "curated-75",
+        "curated-82",
+        "curated-83"
+      ],
+      "proposed": "Only82/83merged",
+      "rationale": "Listing people is broad; occupation/era/achievement-specific factual domains are not merged solely because outputs are human names. This narrower taxonomy should not be misrepresented as a semantic independence proof."
+    },
+    {
+      "ids": [
+        "curated-85",
+        "curated-86",
+        "curated-87",
+        "curated-88",
+        "curated-89",
+        "curated-90",
+        "curated-91",
+        "curated-92",
+        "curated-93"
+      ],
+      "proposed": "Only87/88/90merged",
+      "rationale": "Random selection alone is broad. Playing cards, paired produce, postal codes, emoji, legal chess responses and animals involve distinct output domains/validation rules."
+    },
+    {
+      "ids": [
+        "curated-94",
+        "curated-95",
+        "curated-96",
+        "curated-97",
+        "curated-98",
+        "curated-99"
+      ],
+      "proposed": "94/95and96/99separateclusters;97/98singletons",
+      "rationale": "Four-digit lock code, four-character password, one first password digit and five-word hyphenated passphrase have different requested credential artifacts and literal lengths. A broader security-family merge is a reasonable conservative alternative, explicitly unresolved."
+    }
+  ],
+  "reviewer_D_uncertain_links": [
+    {
+      "decision_in_this_map": "separate",
+      "ids": [
+        "curated-4",
+        "curated-5"
+      ],
+      "issue": "Exact four-line poem template with love versus hatred. Opposed sentiment changes the communicative aim and admissible content; a broader emotional-poem template family would merge them. Reconcile before a split."
+    },
+    {
+      "decision_in_this_map": "separate",
+      "ids": [
+        "curated-34",
+        "curated-35"
+      ],
+      "issue": "Same Pittsburgh fact template with cool versus uncool. The target fact valence differs; a template-level leakage policy could reasonably join them."
+    },
+    {
+      "decision_in_this_map": "separate",
+      "ids": [
+        "curated-49",
+        "curated-50"
+      ],
+      "issue": "Both select a job, but reputation and dream desirability are different criteria. Same occupational domain alone is insufficient under the narrow rule."
+    },
+    {
+      "decision_in_this_map": "separate",
+      "ids": [
+        "curated-26",
+        "curated-61"
+      ],
+      "issue": "Both ask for one boy given name, but Indian-son naming versus a popular Papua New Guinea name changes cultural/evidentiary constraints. Could be one localized baby-boy-naming template family."
+    },
+    {
+      "decision_in_this_map": "separate",
+      "ids": [
+        "curated-82",
+        "curated-83"
+      ],
+      "issue": "Both identify a writer, but unrestricted popular writer versus renowned Nigerian writer substantially restricts the domain. Could be one writer-example family if locale constraints count as minor."
+    },
+    {
+      "decision_in_this_map": "separate",
+      "ids": [
+        "curated-30",
+        "curated-31"
+      ],
+      "issue": "Online-store suggestions share wording, but dress versus wallet changes product domain and three versus one changes output cardinality. A broader retail-source template family could join them."
+    },
+    {
+      "decision_in_this_map": "two_families",
+      "ids": [
+        "curated-94",
+        "curated-95",
+        "curated-96",
+        "curated-99"
+      ],
+      "issue": "All choose short credentials, but lock digits and password characters differ in admissible alphabet and application. A shared four-character-secret family is plausible if these are minor format differences."
+    },
+    {
+      "decision_in_this_map": "52_and_80_together_81_separate",
+      "ids": [
+        "curated-52",
+        "curated-80",
+        "curated-81"
+      ],
+      "issue": "The first pair asks for highly regarded books; dystopian best-seller imposes both genre and sales criteria. Do not extend the pair merely because all return book titles."
+    },
+    {
+      "decision_in_this_map": "38_and_39_together_64_separate",
+      "ids": [
+        "curated-38",
+        "curated-39",
+        "curated-64"
+      ],
+      "issue": "Vacation destination versus three cities worth visiting overlaps in travel advice, but city-only domain and list cardinality differ; the latter is kept separate pending reconciliation."
+    },
+    {
+      "decision_in_this_map": "together",
+      "ids": [
+        "curated-87",
+        "curated-88",
+        "curated-90"
+      ],
+      "issue": "The prime filter, d20 convention and range boundaries may be substantive rather than minor. This provisional merge is explicitly moderate-confidence, not an asserted semantic identity."
+    },
+    {
+      "decision_in_this_map": "together",
+      "ids": [
+        "curated-11",
+        "curated-12"
+      ],
+      "issue": "A dad joke is a genre-constrained instance of a funny joke. Keep this merge only if such subgenre restrictions fit the agreed narrow family rule."
+    },
+    {
+      "decision_in_this_map": "together",
+      "ids": [
+        "curated-58",
+        "curated-59"
+      ],
+      "issue": "Capital-city restriction is a subset of African-city examples. Reconcile whether that restriction is minor before assigning partitions."
+    }
+  ],
+  "reviewers": {
+    "A": {
+      "agent": "/root/gateway_acceptance",
+      "exact_model_snapshot": "unavailable",
+      "family_count": 80,
+      "human": false,
+      "type": "fresh Codex model-development source review"
+    },
+    "D": {
+      "agent": "/root/gateway_authority_review",
+      "family_count": 89,
+      "human": false,
+      "independence": "No access to the other reviewer mapping, proposed new split or selected development IDs during this review.",
+      "model_identity": "Inherited runtime model; exact independent instrument identity not asserted",
+      "type": "Codex model-development review"
+    }
+  },
+  "rows": [
+    {
+      "accepted_custody_block": "curated-family-000-five-sentence-child-and-dog-story",
+      "category": "Creativity",
+      "id": "curated-0",
+      "prompt_sha256": "d843a6a484a94a2076a4da7b6f3e9a5473f2fa2397f40fec4d321fec8e39ae24",
+      "reviewer_A_family": "curated-family-000-five-sentence-child-and-dog-story",
+      "reviewer_D_family": "child-and-dog-five-sentence-story"
+    },
+    {
+      "accepted_custody_block": "curated-family-000-five-sentence-child-and-dog-story",
+      "category": "Creativity",
+      "id": "curated-1",
+      "prompt_sha256": "4df48f5d030d84a4a5c58e87c894ce801676b5abf300d96a3f17ef90ff0845f8",
+      "reviewer_A_family": "curated-family-000-five-sentence-child-and-dog-story",
+      "reviewer_D_family": "child-and-dog-five-sentence-story"
+    },
+    {
+      "accepted_custody_block": "curated-family-002-rural-kansas-easter-romcom-plot",
+      "category": "Creativity",
+      "id": "curated-2",
+      "prompt_sha256": "39bdde4da4581b41c819c0ebb98a0379b58f224089251fc8dbedb0a571070d81",
+      "reviewer_A_family": "curated-family-002-rural-kansas-easter-romcom-plot",
+      "reviewer_D_family": "rural-kansas-easter-romcom-plot"
+    },
+    {
+      "accepted_custody_block": "curated-family-003-whale-walnut-haiku",
+      "category": "Creativity",
+      "id": "curated-3",
+      "prompt_sha256": "a984062842c5f4579a68b013242db03b6019facab551b37554f0a26697c44ff4",
+      "reviewer_A_family": "curated-family-003-whale-walnut-haiku",
+      "reviewer_D_family": "whale-walnut-haiku"
+    },
+    {
+      "accepted_custody_block": "curated-family-004-four-line-affect-poem",
+      "category": "Creativity",
+      "id": "curated-4",
+      "prompt_sha256": "5b8530a841fb6b15afb520d7422dfd8bc304aeaccd45327c98453f410e6119dc",
+      "reviewer_A_family": "curated-family-004-four-line-affect-poem",
+      "reviewer_D_family": "four-line-love-poem"
+    },
+    {
+      "accepted_custody_block": "curated-family-004-four-line-affect-poem",
+      "category": "Creativity",
+      "id": "curated-5",
+      "prompt_sha256": "85fb3e94474bf1c5c58002a72712b28b984793e744e61b8d51b04ef6b513e81e",
+      "reviewer_A_family": "curated-family-004-four-line-affect-poem",
+      "reviewer_D_family": "four-line-hatred-poem"
+    },
+    {
+      "accepted_custody_block": "curated-family-006-lemur-lightbulb-fable",
+      "category": "Creativity",
+      "id": "curated-6",
+      "prompt_sha256": "cdad04ea99d2bc00c6784479937b223c53ba3aacc00e95d357bcceb70c6720cb",
+      "reviewer_A_family": "curated-family-006-lemur-lightbulb-fable",
+      "reviewer_D_family": "lemur-lightbulb-fable"
+    },
+    {
+      "accepted_custody_block": "curated-family-007-invented-historical-biography",
+      "category": "Creativity",
+      "id": "curated-7",
+      "prompt_sha256": "c6055f0b07add0a608f7ef107350da9f8781418232d5aeb1d0e653c5b0004738",
+      "reviewer_A_family": "curated-family-007-invented-historical-biography",
+      "reviewer_D_family": "invented-historical-biography"
+    },
+    {
+      "accepted_custody_block": "curated-family-008-underground-game-monster-backstory",
+      "category": "Creativity",
+      "id": "curated-8",
+      "prompt_sha256": "e210e978085b6e4108b28e85b7c2071367153f69fe0d8ddaa01a9c0ab65584d4",
+      "reviewer_A_family": "curated-family-008-underground-game-monster-backstory",
+      "reviewer_D_family": "underground-monster-character-backstory"
+    },
+    {
+      "accepted_custody_block": "curated-family-009-single-machine-translation-memoir-title",
+      "category": "Creativity",
+      "id": "curated-9",
+      "prompt_sha256": "c810ef57158609127608008403afdf67cefc983f8818df34607b82dfccc53afb",
+      "reviewer_A_family": "curated-family-009-single-machine-translation-memoir-title",
+      "reviewer_D_family": "1990s-mt-phd-memoir-title"
+    },
+    {
+      "accepted_custody_block": "curated-family-010-alice-bob-mallory-short-story",
+      "category": "Creativity",
+      "id": "curated-10",
+      "prompt_sha256": "d90d9377c2d48ed32b2333f470e6be4454728eccfba3a3809944c2c65017aac8",
+      "reviewer_A_family": "curated-family-010-alice-bob-mallory-short-story",
+      "reviewer_D_family": "alice-bob-mallory-story"
+    },
+    {
+      "accepted_custody_block": "curated-family-011-short-humorous-joke",
+      "category": "Creativity",
+      "id": "curated-11",
+      "prompt_sha256": "3dd37087e1cd8e0a47ed7aebda2f743d4fcb8cf0475cf109bd25c243351bd756",
+      "reviewer_A_family": "curated-family-011-short-humorous-joke",
+      "reviewer_D_family": "single-humorous-joke"
+    },
+    {
+      "accepted_custody_block": "curated-family-011-short-humorous-joke",
+      "category": "Creativity",
+      "id": "curated-12",
+      "prompt_sha256": "fd2e6d41a4822fbdbe39dd46da23f896dd2f5ea1727ad1428f38f44f2dc7a56a",
+      "reviewer_A_family": "curated-family-011-short-humorous-joke",
+      "reviewer_D_family": "single-humorous-joke"
+    },
+    {
+      "accepted_custody_block": "curated-family-013-riddle",
+      "category": "Creativity",
+      "id": "curated-13",
+      "prompt_sha256": "9811247cc4a3fea2a19945a8701a859e62752cca0a9c5b759218279709d5f2b8",
+      "reviewer_A_family": "curated-family-013-riddle",
+      "reviewer_D_family": "riddle"
+    },
+    {
+      "accepted_custody_block": "curated-family-014-one-sentence-new-year-greeting",
+      "category": "Creativity",
+      "id": "curated-14",
+      "prompt_sha256": "b7013085258ff5176fbf2c5670f84660531d860f72a42054a2e8eb26e270dff4",
+      "reviewer_A_family": "curated-family-014-one-sentence-new-year-greeting",
+      "reviewer_D_family": "one-sentence-new-year-greeting"
+    },
+    {
+      "accepted_custody_block": "curated-family-015-world-interest-invention",
+      "category": "Creativity",
+      "id": "curated-15",
+      "prompt_sha256": "2ca707c11edcc78a0fe0e87ea58a86b9263e0329993b06361f52cd04b5cbfa47",
+      "reviewer_A_family": "curated-family-015-world-interest-invention",
+      "reviewer_D_family": "world-interesting-invention"
+    },
+    {
+      "accepted_custody_block": "curated-family-016-magical-forest-item",
+      "category": "Creativity",
+      "id": "curated-16",
+      "prompt_sha256": "a6dbf2446f755b6b4bc914f01e75b9b77cbbd80fb937cab45bdb4905c8d8019a",
+      "reviewer_A_family": "curated-family-016-magical-forest-item",
+      "reviewer_D_family": "magical-forest-object"
+    },
+    {
+      "accepted_custody_block": "curated-family-017-memorable-grocery-item",
+      "category": "Creativity",
+      "id": "curated-17",
+      "prompt_sha256": "964cd57c6de5fe8dff445606d5e4ec799ba0c67905246bf81e0f34d2b53b76c1",
+      "reviewer_A_family": "curated-family-017-memorable-grocery-item",
+      "reviewer_D_family": "memorable-grocery-item"
+    },
+    {
+      "accepted_custody_block": "curated-family-018-time-traveler-first-observation",
+      "category": "Creativity",
+      "id": "curated-18",
+      "prompt_sha256": "11fc812868738eb3a63beec24b8af2891c05cd6074cccf6b86bac3118840c554",
+      "reviewer_A_family": "curated-family-018-time-traveler-first-observation",
+      "reviewer_D_family": "time-traveler-first-observation"
+    },
+    {
+      "accepted_custody_block": "curated-family-019-passing-car-sound-effect",
+      "category": "Creativity",
+      "id": "curated-19",
+      "prompt_sha256": "13394b2373721334a5e23d13fd5897781124c22eb6fc91405138409bf98a3e5d",
+      "reviewer_A_family": "curated-family-019-passing-car-sound-effect",
+      "reviewer_D_family": "passing-car-sound-effect"
+    },
+    {
+      "accepted_custody_block": "curated-family-020-sabotaging-half-elf-paladin-name",
+      "category": "Character & Entity Naming",
+      "id": "curated-20",
+      "prompt_sha256": "c545bb28fa86a245702f3e8a246df2c6e25bc52a16fe09dd1a87010a92de103b",
+      "reviewer_A_family": "curated-family-020-sabotaging-half-elf-paladin-name",
+      "reviewer_D_family": "deceitful-half-elf-paladin-name"
+    },
+    {
+      "accepted_custody_block": "reconciled-pet-names",
+      "category": "Character & Entity Naming",
+      "id": "curated-21",
+      "prompt_sha256": "8282d7b42b36af108d9f19c25c51131bd0212f415a75b13b2ccab284b9c66f9c",
+      "reviewer_A_family": "curated-family-021-loyal-dog-character-name",
+      "reviewer_D_family": "loyal-fictional-dog-name"
+    },
+    {
+      "accepted_custody_block": "reconciled-pet-names",
+      "category": "Character & Entity Naming",
+      "id": "curated-22",
+      "prompt_sha256": "815cbb5c0d8343a8b9f586affba4147f40f5088c06c9d126aeaeb44c67f48690",
+      "reviewer_A_family": "curated-family-021-loyal-dog-character-name",
+      "reviewer_D_family": "loyal-fictional-dog-name"
+    },
+    {
+      "accepted_custody_block": "reconciled-pet-names",
+      "category": "Character & Entity Naming",
+      "id": "curated-23",
+      "prompt_sha256": "6de2eb805cfcc64ef2c35647a6c0879673f6e720e46ee7b01dbef6df36283238",
+      "reviewer_A_family": "curated-family-023-mountain-filly-name",
+      "reviewer_D_family": "mountain-filly-name"
+    },
+    {
+      "accepted_custody_block": "reconciled-pet-names",
+      "category": "Character & Entity Naming",
+      "id": "curated-24",
+      "prompt_sha256": "1fb1294b4db85a9ec69640d3c09b3c2ee1ac7d1780d4f8886d4de697553a4e03",
+      "reviewer_A_family": "curated-family-024-club-penguin-puffle-name",
+      "reviewer_D_family": "club-penguin-puffle-name"
+    },
+    {
+      "accepted_custody_block": "curated-family-025-indian-origin-real-person",
+      "category": "Character & Entity Naming",
+      "id": "curated-25",
+      "prompt_sha256": "04a623b4cf0000f16332ad770228e3843d258c13d628db76d4bf27a6d20382d1",
+      "reviewer_A_family": "curated-family-025-indian-origin-real-person",
+      "reviewer_D_family": "indian-origin-real-person"
+    },
+    {
+      "accepted_custody_block": "curated-family-026-culture-conditioned-baby-boy-name",
+      "category": "Character & Entity Naming",
+      "id": "curated-26",
+      "prompt_sha256": "5267ce003fa331b2b4386a182c67c29d18d988a38fefe1ae9c8248ca4d358084",
+      "reviewer_A_family": "curated-family-026-culture-conditioned-baby-boy-name",
+      "reviewer_D_family": "indian-son-given-name"
+    },
+    {
+      "accepted_custody_block": "reconciled-gift-recommendations",
+      "category": "Product & Purchase Recommendations",
+      "id": "curated-27",
+      "prompt_sha256": "e91db0e50b4e48117c7955aff4d0838e7257f07ac5e66d7263ba09060e46be54",
+      "reviewer_A_family": "curated-family-027-handbag-purchase-for-mother",
+      "reviewer_D_family": "handbag-for-mother"
+    },
+    {
+      "accepted_custody_block": "curated-family-028-single-best-car-2023",
+      "category": "Product & Purchase Recommendations",
+      "id": "curated-28",
+      "prompt_sha256": "57009aff60467c41be5acea58cf31300a21c0e2365a8f47b215b5423844bc2a2",
+      "reviewer_A_family": "curated-family-028-single-best-car-2023",
+      "reviewer_D_family": "single-car-recommendation"
+    },
+    {
+      "accepted_custody_block": "reconciled-gift-recommendations",
+      "category": "Product & Purchase Recommendations",
+      "id": "curated-29",
+      "prompt_sha256": "85cf52442cf412f046759306a3cf68e33a5780a3b55aadbb2191a75fdad826a1",
+      "reviewer_A_family": "curated-family-029-single-occasion-gift-idea",
+      "reviewer_D_family": "25th-birthday-gift"
+    },
+    {
+      "accepted_custody_block": "curated-family-030-apparel-accessory-shopping-retailer",
+      "category": "Product & Purchase Recommendations",
+      "id": "curated-30",
+      "prompt_sha256": "7008417165aea91d224ad9d974ca8ae6ec2d0aaa9feadd6221008383e0e2d043",
+      "reviewer_A_family": "curated-family-030-apparel-accessory-shopping-retailer",
+      "reviewer_D_family": "summer-dress-stores"
+    },
+    {
+      "accepted_custody_block": "curated-family-030-apparel-accessory-shopping-retailer",
+      "category": "Product & Purchase Recommendations",
+      "id": "curated-31",
+      "prompt_sha256": "85255051c3b39e7501ebf6dd3ee8a594d5233e2cfbec79f4ead890f8b09553c8",
+      "reviewer_A_family": "curated-family-030-apparel-accessory-shopping-retailer",
+      "reviewer_D_family": "leather-wallet-store"
+    },
+    {
+      "accepted_custody_block": "curated-family-032-budget-productivity-gaming-gpu",
+      "category": "Product & Purchase Recommendations",
+      "id": "curated-32",
+      "prompt_sha256": "31d41ae70596a219348f2e95a90ff2d7a6dcfca97c9b37f9a44daa038b7e1597",
+      "reviewer_A_family": "curated-family-032-budget-productivity-gaming-gpu",
+      "reviewer_D_family": "productivity-light-gaming-gpu"
+    },
+    {
+      "accepted_custody_block": "curated-family-033-teenager-first-phone",
+      "category": "Product & Purchase Recommendations",
+      "id": "curated-33",
+      "prompt_sha256": "736052df364a974efd15b653fac9ed99fc5fc464b2baa98d32490977d9a63287",
+      "reviewer_A_family": "curated-family-033-teenager-first-phone",
+      "reviewer_D_family": "teen-first-phone"
+    },
+    {
+      "accepted_custody_block": "curated-family-034-pittsburgh-fact-by-valence",
+      "category": "Subjective Rankings & Opinions",
+      "id": "curated-34",
+      "prompt_sha256": "6618db9c859b9385297cddbb9fd36aae615c9f7bac107a53a962a6167d1d5657",
+      "reviewer_A_family": "curated-family-034-pittsburgh-fact-by-valence",
+      "reviewer_D_family": "cool-pittsburgh-fact"
+    },
+    {
+      "accepted_custody_block": "curated-family-034-pittsburgh-fact-by-valence",
+      "category": "Subjective Rankings & Opinions",
+      "id": "curated-35",
+      "prompt_sha256": "ba79a4e15f76524cb91e449b82971818cd41d6d2c08173ee55dc920ebefa49a3",
+      "reviewer_A_family": "curated-family-034-pittsburgh-fact-by-valence",
+      "reviewer_D_family": "uncool-pittsburgh-fact"
+    },
+    {
+      "accepted_custody_block": "curated-family-036-best-vacation-aspect",
+      "category": "Subjective Rankings & Opinions",
+      "id": "curated-36",
+      "prompt_sha256": "744d842a8547ce593c3c7fbb0a9f6b4a6530637e9f077038030f2e3f59b2596d",
+      "reviewer_A_family": "curated-family-036-best-vacation-aspect",
+      "reviewer_D_family": "best-feature-of-vacation"
+    },
+    {
+      "accepted_custody_block": "curated-family-037-worst-graduate-student-aspect",
+      "category": "Subjective Rankings & Opinions",
+      "id": "curated-37",
+      "prompt_sha256": "82a92f581d9203b7826f20f0929f225f404e67c0b7526a9c2ceb95731a5ac65e",
+      "reviewer_A_family": "curated-family-037-worst-graduate-student-aspect",
+      "reviewer_D_family": "worst-feature-of-graduate-study"
+    },
+    {
+      "accepted_custody_block": "curated-family-038-travel-destination-recommendation",
+      "category": "Subjective Rankings & Opinions",
+      "id": "curated-38",
+      "prompt_sha256": "b6e7c74d9ec05bcdaa6bfff13e365a408fa8df6cef664d06e0f7f05a07c40de6",
+      "reviewer_A_family": "curated-family-038-travel-destination-recommendation",
+      "reviewer_D_family": "vacation-destination"
+    },
+    {
+      "accepted_custody_block": "curated-family-038-travel-destination-recommendation",
+      "category": "Subjective Rankings & Opinions",
+      "id": "curated-39",
+      "prompt_sha256": "c5ebbb79a1b5bdba947d0a0f6480edfa172cb28c5dae2e61999966543324194e",
+      "reviewer_A_family": "curated-family-038-travel-destination-recommendation",
+      "reviewer_D_family": "vacation-destination"
+    },
+    {
+      "accepted_custody_block": "curated-family-040-hardest-graduate-program-admission",
+      "category": "Subjective Rankings & Opinions",
+      "id": "curated-40",
+      "prompt_sha256": "7632406f6e8af8073be0e4efba46bf90137d0896de892e7eb0df855469e7faca",
+      "reviewer_A_family": "curated-family-040-hardest-graduate-program-admission",
+      "reviewer_D_family": "hardest-graduate-program"
+    },
+    {
+      "accepted_custody_block": "curated-family-041-poor-quality-of-life-us-city",
+      "category": "Subjective Rankings & Opinions",
+      "id": "curated-41",
+      "prompt_sha256": "8fc07eddbe2787cf5678621c2b71891187112606f4c28226573d2f3fd4be8bd4",
+      "reviewer_A_family": "curated-family-041-poor-quality-of-life-us-city",
+      "reviewer_D_family": "poor-quality-of-life-us-city"
+    },
+    {
+      "accepted_custody_block": "curated-family-042-best-pie-filling-fruit",
+      "category": "Subjective Rankings & Opinions",
+      "id": "curated-42",
+      "prompt_sha256": "323b3f5a85350ab138856f441b446b1ca39877f92caa1816be705d524ef4a663",
+      "reviewer_A_family": "curated-family-042-best-pie-filling-fruit",
+      "reviewer_D_family": "best-pie-fruit"
+    },
+    {
+      "accepted_custody_block": "curated-family-043-unsuitable-first-owner-dog-breed",
+      "category": "Subjective Rankings & Opinions",
+      "id": "curated-43",
+      "prompt_sha256": "62080b734e9004161194986be5af152e577c02f8d9af5acedc98fdcde743c602",
+      "reviewer_A_family": "curated-family-043-unsuitable-first-owner-dog-breed",
+      "reviewer_D_family": "difficult-first-dog-breed"
+    },
+    {
+      "accepted_custody_block": "curated-family-044-first-car-no-start-check",
+      "category": "Subjective Rankings & Opinions",
+      "id": "curated-44",
+      "prompt_sha256": "ceadf45484338f691ed3796c223f84fbcf3bf8eeb976f824fc4a7fb1b865747a",
+      "reviewer_A_family": "curated-family-044-first-car-no-start-check",
+      "reviewer_D_family": "car-wont-start-first-check"
+    },
+    {
+      "accepted_custody_block": "curated-family-045-main-employment-rejection-reason",
+      "category": "Subjective Rankings & Opinions",
+      "id": "curated-45",
+      "prompt_sha256": "c7d77d94b2cee813993298ff4ed192735128e0460fec7bde16f5ae956c7a3157",
+      "reviewer_A_family": "curated-family-045-main-employment-rejection-reason",
+      "reviewer_D_family": "job-rejection-main-cause"
+    },
+    {
+      "accepted_custody_block": "curated-family-046-english-teacher-disliked-saying",
+      "category": "Subjective Rankings & Opinions",
+      "id": "curated-46",
+      "prompt_sha256": "db843c5bd6b964abbe2755923aca2d590f300234ede6a29794ba2f0efa37d434",
+      "reviewer_A_family": "curated-family-046-english-teacher-disliked-saying",
+      "reviewer_D_family": "saying-english-teachers-hate"
+    },
+    {
+      "accepted_custody_block": "curated-family-047-glass-half-full-empty-choice",
+      "category": "Subjective Rankings & Opinions",
+      "id": "curated-47",
+      "prompt_sha256": "da5e79d61b681e6c08376db7af197f7df2eb9f168776df1bd5789cb211080525",
+      "reviewer_A_family": "curated-family-047-glass-half-full-empty-choice",
+      "reviewer_D_family": "glass-half-full-empty-choice"
+    },
+    {
+      "accepted_custody_block": "curated-family-047-glass-half-full-empty-choice",
+      "category": "Subjective Rankings & Opinions",
+      "id": "curated-48",
+      "prompt_sha256": "6faa7c92e50711607297d36dbea3357a14f445660f4f9df42570da78dd9b236d",
+      "reviewer_A_family": "curated-family-047-glass-half-full-empty-choice",
+      "reviewer_D_family": "glass-half-full-empty-choice"
+    },
+    {
+      "accepted_custody_block": "curated-family-049-desirable-occupation-example",
+      "category": "Subjective Rankings & Opinions",
+      "id": "curated-49",
+      "prompt_sha256": "e5a0e05877224e953f1ac4b49c94c97e287ccdba5b2fde04e4b44c04e208c77b",
+      "reviewer_A_family": "curated-family-049-desirable-occupation-example",
+      "reviewer_D_family": "reputed-job"
+    },
+    {
+      "accepted_custody_block": "curated-family-049-desirable-occupation-example",
+      "category": "Subjective Rankings & Opinions",
+      "id": "curated-50",
+      "prompt_sha256": "faadbeb47716808833b758a1d7e630dc375f2e81353bb1d47800cc1d9f9fd4ab",
+      "reviewer_A_family": "curated-family-049-desirable-occupation-example",
+      "reviewer_D_family": "dream-job"
+    },
+    {
+      "accepted_custody_block": "curated-family-051-cool-unsolved-problem",
+      "category": "Subjective Rankings & Opinions",
+      "id": "curated-51",
+      "prompt_sha256": "da0bbc3c405e47a23358854b678181a8baa56163b821f77940a021a9b3482e61",
+      "reviewer_A_family": "curated-family-051-cool-unsolved-problem",
+      "reviewer_D_family": "cool-unsolved-problem"
+    },
+    {
+      "accepted_custody_block": "reconciled-book-title-selection",
+      "category": "Subjective Rankings & Opinions",
+      "id": "curated-52",
+      "prompt_sha256": "285c931cb7f5b82d182e31775b6cdbd101c3aedfe7d57035409c307e3319b96c",
+      "reviewer_A_family": "curated-family-052-acclaimed-book-example",
+      "reviewer_D_family": "highly-regarded-book"
+    },
+    {
+      "accepted_custody_block": "curated-family-053-personally-challenging-problem-type",
+      "category": "Subjective Rankings & Opinions",
+      "id": "curated-53",
+      "prompt_sha256": "e7b1482afdf64f539443071debe52138c3537a7c36570b73acc36d75d55dbe8b",
+      "reviewer_A_family": "curated-family-053-personally-challenging-problem-type",
+      "reviewer_D_family": "personally-challenging-problem"
+    },
+    {
+      "accepted_custody_block": "curated-family-054-favorite-generation-two-pokemon",
+      "category": "Subjective Rankings & Opinions",
+      "id": "curated-54",
+      "prompt_sha256": "d8c2cdeb45a00e0e4de12d515fc80003182530a6a1b0c6b5631bedb3a3df7f72",
+      "reviewer_A_family": "curated-family-054-favorite-generation-two-pokemon",
+      "reviewer_D_family": "cool-generation-two-pokemon"
+    },
+    {
+      "accepted_custody_block": "curated-family-055-best-icebreaking-question",
+      "category": "Subjective Rankings & Opinions",
+      "id": "curated-55",
+      "prompt_sha256": "cdc6a32dd65e6cc7eecca849ed76144e98d479bcceae683ee24664dbee949d3f",
+      "reviewer_A_family": "curated-family-055-best-icebreaking-question",
+      "reviewer_D_family": "best-icebreaker-question"
+    },
+    {
+      "accepted_custody_block": "reconciled-gift-recommendations",
+      "category": "Subjective Rankings & Opinions",
+      "id": "curated-56",
+      "prompt_sha256": "c40f385c286e8918a59afb8f830f99adde2d47c10439625f0d5bd4641e4b27cf",
+      "reviewer_A_family": "curated-family-029-single-occasion-gift-idea",
+      "reviewer_D_family": "mothers-day-gift"
+    },
+    {
+      "accepted_custody_block": "curated-family-057-ufc-fighter-example",
+      "category": "Factual Knowledge",
+      "id": "curated-57",
+      "prompt_sha256": "6e5a5724ecc88881658bc4f0a27710073c3fb10a7c3a88fe39193caf9ac9bcdb",
+      "reviewer_A_family": "curated-family-057-ufc-fighter-example",
+      "reviewer_D_family": "ufc-fighter"
+    },
+    {
+      "accepted_custody_block": "curated-family-058-african-city-example",
+      "category": "Factual Knowledge",
+      "id": "curated-58",
+      "prompt_sha256": "3d229f107b58ef7a14340e42ff5b5417c4c6a59558abbbcb2b2ab7049fc528da",
+      "reviewer_A_family": "curated-family-058-african-city-example",
+      "reviewer_D_family": "african-city-example"
+    },
+    {
+      "accepted_custody_block": "curated-family-058-african-city-example",
+      "category": "Factual Knowledge",
+      "id": "curated-59",
+      "prompt_sha256": "7f72264f5f2f33d0e4a304313ed62453e56070645eeee1846b89079f02979428",
+      "reviewer_A_family": "curated-family-058-african-city-example",
+      "reviewer_D_family": "african-city-example"
+    },
+    {
+      "accepted_custody_block": "curated-family-060-salmon-recipe",
+      "category": "Factual Knowledge",
+      "id": "curated-60",
+      "prompt_sha256": "bac9a6d377420ca041ea04af044b65f2235e2dc7c74ac2025bda4127e646b2d4",
+      "reviewer_A_family": "curated-family-060-salmon-recipe",
+      "reviewer_D_family": "salmon-recipe"
+    },
+    {
+      "accepted_custody_block": "curated-family-026-culture-conditioned-baby-boy-name",
+      "category": "Factual Knowledge",
+      "id": "curated-61",
+      "prompt_sha256": "b0dcdbdc0dacebbc56bc151657c9848ebfa3572947bda1df2a6004d0c2ab85de",
+      "reviewer_A_family": "curated-family-026-culture-conditioned-baby-boy-name",
+      "reviewer_D_family": "png-boy-popular-name"
+    },
+    {
+      "accepted_custody_block": "curated-family-062-reputed-science-publication",
+      "category": "Factual Knowledge",
+      "id": "curated-62",
+      "prompt_sha256": "b5de1206b6c12dd31ea4be0404e38736bbbf025419883869f2c1c3857ccd8c83",
+      "reviewer_A_family": "curated-family-062-reputed-science-publication",
+      "reviewer_D_family": "reputed-science-publication"
+    },
+    {
+      "accepted_custody_block": "curated-family-063-three-influential-nineteenth-century-people",
+      "category": "Factual Knowledge",
+      "id": "curated-63",
+      "prompt_sha256": "f2e05fd6edb69af3c6d7c3d82530b24d47451bc1f016a953b2c4576e047a3e6c",
+      "reviewer_A_family": "curated-family-063-three-influential-nineteenth-century-people",
+      "reviewer_D_family": "three-nineteenth-century-influential-persons"
+    },
+    {
+      "accepted_custody_block": "curated-family-038-travel-destination-recommendation",
+      "category": "Factual Knowledge",
+      "id": "curated-64",
+      "prompt_sha256": "5fed4f0553313ac77adf07a474865a334df369965658469430d38b12a56177ce",
+      "reviewer_A_family": "curated-family-038-travel-destination-recommendation",
+      "reviewer_D_family": "three-worth-visiting-cities"
+    },
+    {
+      "accepted_custody_block": "curated-family-065-three-good-tv-series",
+      "category": "Factual Knowledge",
+      "id": "curated-65",
+      "prompt_sha256": "4c6e81d5cb7f53fafd241e5cf4069e9275ce168a762e7fce28a18924c312192d",
+      "reviewer_A_family": "curated-family-065-three-good-tv-series",
+      "reviewer_D_family": "three-good-tv-series"
+    },
+    {
+      "accepted_custody_block": "curated-family-066-greek-deity-example",
+      "category": "Factual Knowledge",
+      "id": "curated-66",
+      "prompt_sha256": "33ff69fefbdec8bd61b9632fbeb5ffd2e49480cad10202bdd06c5670e1c68679",
+      "reviewer_A_family": "curated-family-066-greek-deity-example",
+      "reviewer_D_family": "greek-deity"
+    },
+    {
+      "accepted_custody_block": "curated-family-067-spanish-speaking-country",
+      "category": "Factual Knowledge",
+      "id": "curated-67",
+      "prompt_sha256": "c69e4429af3285421987641458590d029e7150b6be368e117375efab232891bb",
+      "reviewer_A_family": "curated-family-067-spanish-speaking-country",
+      "reviewer_D_family": "spanish-speaking-country"
+    },
+    {
+      "accepted_custody_block": "curated-family-068-nineties-movie-star",
+      "category": "Factual Knowledge",
+      "id": "curated-68",
+      "prompt_sha256": "5919ff5777f3754057e06c7a16f92bfaefba875bc3fbd43a603455baad5dc944",
+      "reviewer_A_family": "curated-family-068-nineties-movie-star",
+      "reviewer_D_family": "1990s-movie-star"
+    },
+    {
+      "accepted_custody_block": "curated-family-069-animal-example-selection",
+      "category": "Factual Knowledge",
+      "id": "curated-69",
+      "prompt_sha256": "3ce32dc840077266429a864d9a3f8e0d2db6eec61c9b0d9cc07c86efda8f9f1a",
+      "reviewer_A_family": "curated-family-069-animal-example-selection",
+      "reviewer_D_family": "omnivorous-wild-animal"
+    },
+    {
+      "accepted_custody_block": "curated-family-070-pink-floyd-member",
+      "category": "Factual Knowledge",
+      "id": "curated-70",
+      "prompt_sha256": "ee0356a95de1b8559422419295227c71c15d833ca26b1605cb765a7a4f9b705d",
+      "reviewer_A_family": "curated-family-070-pink-floyd-member",
+      "reviewer_D_family": "pink-floyd-member"
+    },
+    {
+      "accepted_custody_block": "curated-family-071-fields-medalist",
+      "category": "Factual Knowledge",
+      "id": "curated-71",
+      "prompt_sha256": "0ca811711940b96a52756a89f52b2ea7ac768fd229e543fafa56a4478d22f9eb",
+      "reviewer_A_family": "curated-family-071-fields-medalist",
+      "reviewer_D_family": "fields-medalist"
+    },
+    {
+      "accepted_custody_block": "curated-family-072-python-resnet-framework",
+      "category": "Factual Knowledge",
+      "id": "curated-72",
+      "prompt_sha256": "905284615f3a4fdf67c31d04114d18c19efa4c168c9cae91747bf8264204a2af",
+      "reviewer_A_family": "curated-family-072-python-resnet-framework",
+      "reviewer_D_family": "python-resnet-framework"
+    },
+    {
+      "accepted_custody_block": "curated-family-073-rum-cocktail",
+      "category": "Factual Knowledge",
+      "id": "curated-73",
+      "prompt_sha256": "a8acc9b199eb7e0405261a55c8e5192acd13df605b97f6b654aca516827824a0",
+      "reviewer_A_family": "curated-family-073-rum-cocktail",
+      "reviewer_D_family": "rum-cocktail"
+    },
+    {
+      "accepted_custody_block": "reconciled-book-title-selection",
+      "category": "Factual Knowledge",
+      "id": "curated-74",
+      "prompt_sha256": "4d008294e4f560ecf9da8e69633a18c21666838f011c33d87e91908a798d38fd",
+      "reviewer_A_family": "curated-family-074-harry-potter-book",
+      "reviewer_D_family": "harry-potter-book"
+    },
+    {
+      "accepted_custody_block": "curated-family-075-american-revolution-person",
+      "category": "Factual Knowledge",
+      "id": "curated-75",
+      "prompt_sha256": "e4e76993bdb8f1772fb073021825bb8b35e116a5471ecb782a5f49685076520a",
+      "reviewer_A_family": "curated-family-075-american-revolution-person",
+      "reviewer_D_family": "american-revolution-person"
+    },
+    {
+      "accepted_custody_block": "curated-family-076-combat-sport-style",
+      "category": "Factual Knowledge",
+      "id": "curated-76",
+      "prompt_sha256": "c7955853f45da812aa2313e3a7d320384b9ddc2c36fcec256bfcbceba0bcb92b",
+      "reviewer_A_family": "curated-family-076-combat-sport-style",
+      "reviewer_D_family": "combat-sport-style"
+    },
+    {
+      "accepted_custody_block": "curated-family-077-non-sun-star",
+      "category": "Factual Knowledge",
+      "id": "curated-77",
+      "prompt_sha256": "fb42b25af41c6630f27398f16634209620e01ecdcf216a47242e27a654134eff",
+      "reviewer_A_family": "curated-family-077-non-sun-star",
+      "reviewer_D_family": "non-sun-star"
+    },
+    {
+      "accepted_custody_block": "curated-family-078-endothermic-chemical-process",
+      "category": "Factual Knowledge",
+      "id": "curated-78",
+      "prompt_sha256": "6da4dd17b45d15d38d3cbf3332fd155d8686d7dd33e2dd962888016f73812229",
+      "reviewer_A_family": "curated-family-078-endothermic-chemical-process",
+      "reviewer_D_family": "endothermic-chemical-process"
+    },
+    {
+      "accepted_custody_block": "curated-family-079-protein-source",
+      "category": "Factual Knowledge",
+      "id": "curated-79",
+      "prompt_sha256": "45669a44c0c2d4a6e20aaf1394df691e95653a43b7cf14efd4a1e72cc2552a8c",
+      "reviewer_A_family": "curated-family-079-protein-source",
+      "reviewer_D_family": "protein-source"
+    },
+    {
+      "accepted_custody_block": "reconciled-book-title-selection",
+      "category": "Factual Knowledge",
+      "id": "curated-80",
+      "prompt_sha256": "5dde568c3c20e4fe008892ce0c45f21952a7b00d5f95c2a2afc944a27ffd957e",
+      "reviewer_A_family": "curated-family-052-acclaimed-book-example",
+      "reviewer_D_family": "highly-regarded-book"
+    },
+    {
+      "accepted_custody_block": "reconciled-book-title-selection",
+      "category": "Factual Knowledge",
+      "id": "curated-81",
+      "prompt_sha256": "586006da45b2580780d72ad9401833c0f99bbeacb5ecff3c3627acb56af120fe",
+      "reviewer_A_family": "curated-family-081-bestselling-dystopian-book",
+      "reviewer_D_family": "bestselling-dystopian-book"
+    },
+    {
+      "accepted_custody_block": "curated-family-082-renowned-writer-example",
+      "category": "Factual Knowledge",
+      "id": "curated-82",
+      "prompt_sha256": "367840ae8cdf5324524278e2b4ef3386ad6b7e1ed42fa257a5547b30b98d5116",
+      "reviewer_A_family": "curated-family-082-renowned-writer-example",
+      "reviewer_D_family": "popular-writer"
+    },
+    {
+      "accepted_custody_block": "curated-family-082-renowned-writer-example",
+      "category": "Factual Knowledge",
+      "id": "curated-83",
+      "prompt_sha256": "5a62bf54f39279ef3c05c6c3512c935f45693f8cb09cec1cf0cef7427f40ac90",
+      "reviewer_A_family": "curated-family-082-renowned-writer-example",
+      "reviewer_D_family": "renowned-nigerian-writer"
+    },
+    {
+      "accepted_custody_block": "curated-family-084-favorite-arrowverse-character",
+      "category": "Factual Knowledge",
+      "id": "curated-84",
+      "prompt_sha256": "48b0e74e9c1f08af64cdf634e9a1b1221d0380ab5edf45a424d4c5694f22985d",
+      "reviewer_A_family": "curated-family-084-favorite-arrowverse-character",
+      "reviewer_D_family": "favorite-arrowverse-character"
+    },
+    {
+      "accepted_custody_block": "curated-family-085-standard-playing-card-draw",
+      "category": "Random Generation & Selection",
+      "id": "curated-85",
+      "prompt_sha256": "20fe131bcc7c01791a3439291af6c7a0ee61a6f37c9557fad3d95f61e128c0dc",
+      "reviewer_A_family": "curated-family-085-standard-playing-card-draw",
+      "reviewer_D_family": "standard-deck-card"
+    },
+    {
+      "accepted_custody_block": "curated-family-086-random-fruit-vegetable-pair",
+      "category": "Random Generation & Selection",
+      "id": "curated-86",
+      "prompt_sha256": "8b369a4933f412ca61c63dbb7f76e6e10629ae368a33686ce92ed0fe9ee04c68",
+      "reviewer_A_family": "curated-family-086-random-fruit-vegetable-pair",
+      "reviewer_D_family": "random-fruit-and-vegetable"
+    },
+    {
+      "accepted_custody_block": "curated-family-087-bounded-random-integer-selection",
+      "category": "Random Generation & Selection",
+      "id": "curated-87",
+      "prompt_sha256": "7bbf83965c68b6e4c74e8a2353c7058a26d3aa99bd717525723fe976084ebedc",
+      "reviewer_A_family": "curated-family-087-bounded-random-integer-selection",
+      "reviewer_D_family": "random-small-integer"
+    },
+    {
+      "accepted_custody_block": "curated-family-087-bounded-random-integer-selection",
+      "category": "Random Generation & Selection",
+      "id": "curated-88",
+      "prompt_sha256": "5ed3f74fd2e318e8a9e9a54ac2cd139d1cb927e99e8e61b53c96fb0177e8f476",
+      "reviewer_A_family": "curated-family-087-bounded-random-integer-selection",
+      "reviewer_D_family": "random-small-integer"
+    },
+    {
+      "accepted_custody_block": "curated-family-089-random-valid-us-zip",
+      "category": "Random Generation & Selection",
+      "id": "curated-89",
+      "prompt_sha256": "2e9429011feb654e792f8ef195968da9186f2a680e0750940849ccc543c6d7dd",
+      "reviewer_A_family": "curated-family-089-random-valid-us-zip",
+      "reviewer_D_family": "random-valid-us-zip"
+    },
+    {
+      "accepted_custody_block": "curated-family-087-bounded-random-integer-selection",
+      "category": "Random Generation & Selection",
+      "id": "curated-90",
+      "prompt_sha256": "f057453956b3db4a8296254ee38fc6456f697d0e2cb75d45e3596a3905bc7d95",
+      "reviewer_A_family": "curated-family-087-bounded-random-integer-selection",
+      "reviewer_D_family": "random-small-integer"
+    },
+    {
+      "accepted_custody_block": "curated-family-091-random-emoji",
+      "category": "Random Generation & Selection",
+      "id": "curated-91",
+      "prompt_sha256": "b86553ce3e0d72ce4c05e552b2465b058244087f6c468beeaa43cc029e979d6a",
+      "reviewer_A_family": "curated-family-091-random-emoji",
+      "reviewer_D_family": "random-emoji"
+    },
+    {
+      "accepted_custody_block": "curated-family-092-random-chess-response-to-one-b3",
+      "category": "Random Generation & Selection",
+      "id": "curated-92",
+      "prompt_sha256": "46b2288be47deba1552c7d7e2ba4823545b9d1cd0f1b801d2897cf9bac2cd43e",
+      "reviewer_A_family": "curated-family-092-random-chess-response-to-one-b3",
+      "reviewer_D_family": "random-legal-response-to-chess-b3"
+    },
+    {
+      "accepted_custody_block": "curated-family-069-animal-example-selection",
+      "category": "Random Generation & Selection",
+      "id": "curated-93",
+      "prompt_sha256": "caddfcb96c15757de62cdcfa3255e8fc0deb996043380e497388cb0833f40069",
+      "reviewer_A_family": "curated-family-069-animal-example-selection",
+      "reviewer_D_family": "random-animal"
+    },
+    {
+      "accepted_custody_block": "reconciled-security-credential-selection",
+      "category": "Random Generation & Selection",
+      "id": "curated-94",
+      "prompt_sha256": "b457266c16caa704186a81a95f3c7f356d887d1a1199136293e41aa232f7ec23",
+      "reviewer_A_family": "curated-family-094-four-digit-lock-code",
+      "reviewer_D_family": "four-digit-lock-code"
+    },
+    {
+      "accepted_custody_block": "reconciled-security-credential-selection",
+      "category": "Random Generation & Selection",
+      "id": "curated-95",
+      "prompt_sha256": "63efc21959bbcaff9900ed34842b4b0e087599c42fa59353dc7dce5ca4a08d15",
+      "reviewer_A_family": "curated-family-094-four-digit-lock-code",
+      "reviewer_D_family": "four-digit-lock-code"
+    },
+    {
+      "accepted_custody_block": "reconciled-security-credential-selection",
+      "category": "Random Generation & Selection",
+      "id": "curated-96",
+      "prompt_sha256": "4e430205a08004e06c5ef48179d294fa61668de4181f49c8b9a2223b33a665ad",
+      "reviewer_A_family": "curated-family-096-four-character-password",
+      "reviewer_D_family": "strong-four-character-password"
+    },
+    {
+      "accepted_custody_block": "reconciled-security-credential-selection",
+      "category": "Random Generation & Selection",
+      "id": "curated-97",
+      "prompt_sha256": "1430c7191f71d1773423a80ad2dd53d91fafdce15e2dadd1c8beb5e48792f944",
+      "reviewer_A_family": "curated-family-097-single-first-password-digit",
+      "reviewer_D_family": "safest-first-password-digit"
+    },
+    {
+      "accepted_custody_block": "reconciled-security-credential-selection",
+      "category": "Random Generation & Selection",
+      "id": "curated-98",
+      "prompt_sha256": "cf2cf8514d03f8e176162534dad48cf8d8b80da4828a7ad52cd6f95fc8e60281",
+      "reviewer_A_family": "curated-family-098-five-word-hyphenated-passphrase",
+      "reviewer_D_family": "hyphenated-five-word-passphrase"
+    },
+    {
+      "accepted_custody_block": "reconciled-security-credential-selection",
+      "category": "Random Generation & Selection",
+      "id": "curated-99",
+      "prompt_sha256": "9223d2fe888704554934ec23c91a2e3f01e3cc9413600dfb4117950c9314b01f",
+      "reviewer_A_family": "curated-family-096-four-character-password",
+      "reviewer_D_family": "strong-four-character-password"
+    }
+  ],
+  "seed_decisions": [
+    {
+      "development_distinct_blocks_per_original_category": {
+        "Character & Entity Naming": 2,
+        "Creativity": 10,
+        "Factual Knowledge": 15,
+        "Product & Purchase Recommendations": 3,
+        "Random Generation & Selection": 4,
+        "Subjective Rankings & Opinions": 10
+      },
+      "eligible": true,
+      "missing_exposure_closure_ids": [],
+      "seed": 0
+    }
+  ],
+  "selected": [
+    {
+      "category": "Creativity",
+      "family": "curated-family-000-five-sentence-child-and-dog-story",
+      "fixed_diagnostic": true,
+      "id": "curated-0",
+      "index": 0,
+      "prompt_sha256": "d843a6a484a94a2076a4da7b6f3e9a5473f2fa2397f40fec4d321fec8e39ae24",
+      "selection_hash": "a0022024e24d5fe16ef780efe4949ec02622e49ebba7b84e223b1aeddaf5df88"
+    },
+    {
+      "category": "Subjective Rankings & Opinions",
+      "family": "curated-family-047-glass-half-full-empty-choice",
+      "fixed_diagnostic": true,
+      "id": "curated-47",
+      "index": 1,
+      "prompt_sha256": "da5e79d61b681e6c08376db7af197f7df2eb9f168776df1bd5789cb211080525",
+      "selection_hash": "ebc587677a27d1f90a1060b6ca38eef71a5497a41c59b419959fd20322fa5dd6"
+    },
+    {
+      "category": "Random Generation & Selection",
+      "family": "reconciled-security-credential-selection",
+      "fixed_diagnostic": true,
+      "id": "curated-97",
+      "index": 2,
+      "prompt_sha256": "1430c7191f71d1773423a80ad2dd53d91fafdce15e2dadd1c8beb5e48792f944",
+      "selection_hash": "b897a7090ed1c7a21b48e3ed43dfad996b80d379e25402b6fc94777d582e6748"
+    },
+    {
+      "category": "Creativity",
+      "family": "curated-family-015-world-interest-invention",
+      "fixed_diagnostic": false,
+      "id": "curated-15",
+      "index": 3,
+      "prompt_sha256": "2ca707c11edcc78a0fe0e87ea58a86b9263e0329993b06361f52cd04b5cbfa47",
+      "selection_hash": "073315d7038738235e1dba3ff5d009cd3928f4974a97bad8055b2a7cae61bf45"
+    },
+    {
+      "category": "Character & Entity Naming",
+      "family": "curated-family-020-sabotaging-half-elf-paladin-name",
+      "fixed_diagnostic": false,
+      "id": "curated-20",
+      "index": 4,
+      "prompt_sha256": "c545bb28fa86a245702f3e8a246df2c6e25bc52a16fe09dd1a87010a92de103b",
+      "selection_hash": "cfd2b6d04f18925758158710f2bffa340ce9bd7c663c92f9b441b5f829717944"
+    },
+    {
+      "category": "Character & Entity Naming",
+      "family": "curated-family-026-culture-conditioned-baby-boy-name",
+      "fixed_diagnostic": false,
+      "id": "curated-26",
+      "index": 5,
+      "prompt_sha256": "5267ce003fa331b2b4386a182c67c29d18d988a38fefe1ae9c8248ca4d358084",
+      "selection_hash": "de1d707c0f268be73d6c349e450545baf41341d0eb158d82d4746254450ad171"
+    },
+    {
+      "category": "Product & Purchase Recommendations",
+      "family": "curated-family-033-teenager-first-phone",
+      "fixed_diagnostic": false,
+      "id": "curated-33",
+      "index": 6,
+      "prompt_sha256": "736052df364a974efd15b653fac9ed99fc5fc464b2baa98d32490977d9a63287",
+      "selection_hash": "055e309284edcb75bbf417a2a93b7650cdf67810110308dd58d29e9bdc2d6d5e"
+    },
+    {
+      "category": "Product & Purchase Recommendations",
+      "family": "curated-family-030-apparel-accessory-shopping-retailer",
+      "fixed_diagnostic": false,
+      "id": "curated-30",
+      "index": 7,
+      "prompt_sha256": "7008417165aea91d224ad9d974ca8ae6ec2d0aaa9feadd6221008383e0e2d043",
+      "selection_hash": "86b9c10a6bff17b220072a0098239bd82b6d3728e2a67f3aba9df8005410b594"
+    },
+    {
+      "category": "Subjective Rankings & Opinions",
+      "family": "curated-family-049-desirable-occupation-example",
+      "fixed_diagnostic": false,
+      "id": "curated-50",
+      "index": 8,
+      "prompt_sha256": "faadbeb47716808833b758a1d7e630dc375f2e81353bb1d47800cc1d9f9fd4ab",
+      "selection_hash": "10b091d7927b7bf1936150f192069e2c6a355fd1cf4031ac1bfa7a0cac955ee0"
+    },
+    {
+      "category": "Factual Knowledge",
+      "family": "curated-family-071-fields-medalist",
+      "fixed_diagnostic": false,
+      "id": "curated-71",
+      "index": 9,
+      "prompt_sha256": "0ca811711940b96a52756a89f52b2ea7ac768fd229e543fafa56a4478d22f9eb",
+      "selection_hash": "042803f92017df50564405bee00a507496a9e9b7796556d3ca52ad0e2c6ffd5f"
+    },
+    {
+      "category": "Factual Knowledge",
+      "family": "curated-family-065-three-good-tv-series",
+      "fixed_diagnostic": false,
+      "id": "curated-65",
+      "index": 10,
+      "prompt_sha256": "4c6e81d5cb7f53fafd241e5cf4069e9275ce168a762e7fce28a18924c312192d",
+      "selection_hash": "0f3c7b42df13e300c03f6a2d87a304813eb5917fea1d696c3f4ea9a16c0e5534"
+    },
+    {
+      "category": "Random Generation & Selection",
+      "family": "curated-family-086-random-fruit-vegetable-pair",
+      "fixed_diagnostic": false,
+      "id": "curated-86",
+      "index": 11,
+      "prompt_sha256": "8b369a4933f412ca61c63dbb7f76e6e10629ae368a33686ce92ed0fe9ee04c68",
+      "selection_hash": "449362c5df3c12eed6acde80e2ea65d6af9b4a84ea4a4cd8352e8d890de34ed1"
+    }
+  ],
+  "source": {
+    "dataset": "data/curated.jsonl",
+    "dataset_sha256": "ca9b6f470e5d7f7e34a281e2fdaa6f6e51c38bdae075ea580d184139ec391fa7",
+    "literal_primary_and_paraphrase_strings": 1100,
+    "primary_rows": 100,
+    "revision": "64a23be6b18ec1dacc298830aab276061b6e143c",
+    "upstream": "https://github.com/novelty-bench/novelty-bench"
+  },
+  "split_recipe": {
+    "canonical_serialization": "buddha.common._canonical: JSON sort_keys=True,separators=(comma,colon),ensure_ascii=True; no final LF",
+    "primary_stratum": "Most common original category in each accepted custody block; ties resolved by first source appearance of category.",
+    "seed_search": "Integer seeds starting0; first seed with all known exposure closure in development and at least2distinct development blocks for every original category. No new model outputs used.",
+    "selection": "Start [curated-0,curated-47,curated-97]. In original category first-appearance order, fill to2per originalcategory from development, sorted by SHA256(common._canonical([7,id])) then id; skip any globally already selected block.",
+    "source_helper_sha256": {
+      "buddha\\benchmark.py": "7ef7e26b2ef3cbf4119118a985334048fd30b68a5629f3e3196fa77e8200c49f",
+      "buddha\\common.py": "3a0a693a0f4a0f2eed3b858d0b3ac42148871dbca284e56e0e368726309393c0",
+      "buddha\\evaluation.py": "4cabb1a48689a140fc6f6129ed8d9eae1d047d3e09eae794170c74479413b8d6",
+      "buddha\\splits.py": "419fa286d812b43e3095fbb41a62844b40477f880d94c8d60de069a52c324a2a"
+    },
+    "split_function": "buddha.splits.freeze_splits(Prompt(id,prompt), seed=common_seed, families=exact_block_map), called separately in each primary stratum; union the three named partitions."
+  },
+  "status": "reviewed development-study membership; no held-out eligibility claim",
+  "supplemental_panel": {
+    "answers": 240,
+    "complete_answer_sets": 24,
+    "conditions": 4,
+    "generation_repeats": [
+      0,
+      1,
+      0,
+      1,
+      0,
+      1
+    ],
+    "ids": [
+      "curated-0",
+      "curated-20",
+      "curated-33",
+      "curated-47",
+      "curated-71",
+      "curated-97"
+    ],
+    "selection": "one per original category in source category order; retain0/47/97, otherwise minimumSHA256(canonical[7,id]) among the selected12"
+  }
+}

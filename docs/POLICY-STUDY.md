@@ -150,9 +150,10 @@ The separate [native evaluation route](NATIVE-EVALUATION.md) now reuses anchored
 generated answers for fresh full judging occasions and retains interruption and
 partial-result evidence. This structure artifact does not execute that route.
 The [composed controller](POLICY-EXECUTION.md) now connects those routes under
-an existing study-scoped authority. Before a live comparison, POL-02 still
-needs reviewed actual task/family membership, the exact child,
-model/instrument/source bindings, costs and spending authority, and frozen
-supplemental review and analysis rules. The original $50 experiment and $15
-judge audit do not authorize this study. This artifact closes none of those
-remaining gates and reports no improvement result.
+an existing study-scoped authority. The separate [actual comparison protocol](POLICY-COMPARISON.md) now declares
+the twelve-task screen, exact child, official instrument, supplemental review
+and analysis; its [intent](conformance/pol02-study-intent.json) reconstructs this
+existing artifact without redistributing the raw corpus. Account/runtime and
+funding checks, a tested handoff, passive analysis and live results remain open.
+The original $50 experiment and $15 judge audit do not authorize this study.
+The structure helper itself supplies no allocation or improvement result.

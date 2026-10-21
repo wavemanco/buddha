@@ -78,10 +78,13 @@ to the generator.
 | `run_study(directory, transport=...)` | Run or recover the declared schedule through its original children. Unfinished paid work still needs active authority, reviewed profiles, a paid transport and locally supplied keys. |
 
 These are library functions. There is no new operator command or live handoff
-in this slice. Before a real comparison, actual task/family membership, the
-exact child text, instrument, cost allocation, supplemental review and analysis
-must be reviewed and frozen. Structural validity does not establish that those
-scientific choices are adequate.
+in this execution slice. The separate [actual protocol](POLICY-COMPARISON.md)
+and [intent](conformance/pol02-study-intent.json) now declare membership, the
+exact child, instrument, supplemental review and analysis. Their future
+launcher must verify the reviewed publication against the controller-bound
+inputs; direct controller calls do not automatically bind external analysis
+documents. Account/runtime checks, funding, passive analysis and a tested live
+handoff remain open. Structural validity does not establish scientific adequacy.
 
 ## Saved records and recovery
 
