@@ -36,6 +36,10 @@ retains the original owners when interrupted. A separate [offline target reader]
 compares complete or explicitly selected partial outputs with frozen development
 judgments while keeping uncertain and missing cases visible. Its engineering
 fixtures do not supply fresh judge measurements.
+The [versioned proposer contract](docs/POLICY-CONTRACT.md) now explains which
+sampling mode sees earlier answers and preserves literal task requirements.
+Fixed policies reuse the native pipeline; legacy search keeps v1. Controlled
+policy comparisons remain open.
 
 These are distinct from scientific success. Meaningful diversity, held-out
 improvement, genuine task/improver source evolution and an improved improver have
@@ -45,12 +49,12 @@ others uncertain; original benchmark scores and raw evidence remain unchanged. S
 [pilot review](docs/PILOT-REVIEW.md), [recovery results](docs/FIRST-LIVE-RESULTS.md)
 and [linked continuation results](docs/LINKED-CONTINUATION-RESULTS.md).
 
-At this checkpoint the living plan contains **11 remaining leaf slices**.
-One new Windows PID-lock observer follow-up was added after a controlled
-reproduction; it is tracked as REC-05D.
+At this checkpoint the living plan contains **9 remaining leaf slices**.
+The Windows PID-lock observer follow-up is complete at its shared-reader scope;
+[the guide](docs/DOCTOR.md#windows-file-sharing) states its boundaries.
 The native pipeline is complete at its declared offline scope. Umbrella milestones
-are not counted again. They cover recovery/observation (1), measurement (1),
-policy/search (3), source evolution (3), held-out evaluation (2) and the
+are not counted again. They cover measurement (1),
+policy/search (2), source evolution (3), held-out evaluation (2) and the
 improver comparison (1). This is a checkpoint count, not a promise that research
 findings will never require a smaller slice; [PLAN.md](docs/PLAN.md) determines
 the current status and order.
