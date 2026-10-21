@@ -1,0 +1,1096 @@
+{
+  "actual_runtime_proof": {
+    "audit_execution": {
+      "cleanup_status": "removed",
+      "configuration": {
+        "engine_endpoint_sha256": "30341252ca9aa2b298da11cd8527fdfbf8ab30a2f3b5a3c871188c778b20af30",
+        "host": {
+          "CapDrop": [
+            "ALL"
+          ],
+          "CgroupnsMode": "private",
+          "IpcMode": "none",
+          "LogConfig": {
+            "Config": {},
+            "Type": "none"
+          },
+          "Memory": 134217728,
+          "MemorySwap": 134217728,
+          "NanoCpus": 500000000,
+          "NetworkMode": "none",
+          "PidMode": "",
+          "PidsLimit": 16,
+          "Privileged": false,
+          "ReadonlyRootfs": true,
+          "SecurityOpt": [
+            "no-new-privileges:true"
+          ],
+          "Tmpfs": {
+            "/scratch": "rw,size=16m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700",
+            "/tmp": "rw,size=16m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700"
+          },
+          "UTSMode": ""
+        },
+        "image": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+        "mounts": {
+          "/runner": "C:\\Users\\arvik\\AppData\\Local\\Temp\\buddha-src-audit-l_ss0ckd"
+        },
+        "role": "agent"
+      },
+      "container_id": "a2bb70b70f5557d88d3f61d2955d0af04d07852d1cad5d77b7bad46436f42026",
+      "elapsed_seconds": 1.0027101000305265,
+      "exit_code": 0,
+      "frame_count": 1,
+      "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 149837
+    },
+    "environment_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+    "extra_cases": [
+      {
+        "execution": {
+          "cleanup_status": "removed",
+          "configuration": {
+            "engine_endpoint_sha256": "30341252ca9aa2b298da11cd8527fdfbf8ab30a2f3b5a3c871188c778b20af30",
+            "host": {
+              "CapDrop": [
+                "ALL"
+              ],
+              "CgroupnsMode": "private",
+              "IpcMode": "none",
+              "LogConfig": {
+                "Config": {},
+                "Type": "none"
+              },
+              "Memory": 134217728,
+              "MemorySwap": 134217728,
+              "NanoCpus": 500000000,
+              "NetworkMode": "none",
+              "PidMode": "",
+              "PidsLimit": 16,
+              "Privileged": false,
+              "ReadonlyRootfs": true,
+              "SecurityOpt": [
+                "no-new-privileges:true"
+              ],
+              "Tmpfs": {
+                "/scratch": "rw,size=16m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700",
+                "/tmp": "rw,size=16m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700"
+              },
+              "UTSMode": ""
+            },
+            "image": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+            "mounts": {
+              "/runner": "C:\\Users\\arvik\\AppData\\Local\\Temp\\buddha-src-source-p2aqyfrg\\runner"
+            },
+            "role": "agent"
+          },
+          "container_id": "4ba3050479b4dbf28bb3d5245dd06576aaf0aa4e200828ce947e494f21908d11",
+          "elapsed_seconds": 1.1893012000946328,
+          "exit_code": 0,
+          "frame_count": 1,
+          "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+          "stderr_bytes": 0,
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_bytes": 56
+        },
+        "name": "actual_linux_audit_tests",
+        "observations": {
+          "errors": 0,
+          "failures": 0,
+          "skipped": 0,
+          "tests": 10
+        }
+      },
+      {
+        "execution": {
+          "cleanup_status": "removed",
+          "configuration": {
+            "engine_endpoint_sha256": "30341252ca9aa2b298da11cd8527fdfbf8ab30a2f3b5a3c871188c778b20af30",
+            "host": {
+              "CapDrop": [
+                "ALL"
+              ],
+              "CgroupnsMode": "private",
+              "IpcMode": "none",
+              "LogConfig": {
+                "Config": {},
+                "Type": "none"
+              },
+              "Memory": 134217728,
+              "MemorySwap": 134217728,
+              "NanoCpus": 500000000,
+              "NetworkMode": "none",
+              "PidMode": "",
+              "PidsLimit": 16,
+              "Privileged": false,
+              "ReadonlyRootfs": true,
+              "SecurityOpt": [
+                "no-new-privileges:true"
+              ],
+              "Tmpfs": {
+                "/scratch": "rw,size=16m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700",
+                "/tmp": "rw,size=16m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700"
+              },
+              "UTSMode": ""
+            },
+            "image": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+            "mounts": {
+              "/agent": "C:\\Users\\arvik\\AppData\\Local\\Temp\\buddha-src-source-p2aqyfrg\\agent",
+              "/inputs": "C:\\Users\\arvik\\AppData\\Local\\Temp\\buddha-src-source-p2aqyfrg\\inputs",
+              "/runner": "C:\\Users\\arvik\\AppData\\Local\\Temp\\buddha-src-source-p2aqyfrg\\runner"
+            },
+            "role": "agent"
+          },
+          "container_id": "ddd965d887856f2469c2e66c64ce5e77755839f02a85b9f9a5ebb9b0548d1a1d",
+          "elapsed_seconds": 0.6899772000033408,
+          "exit_code": 0,
+          "frame_count": 1,
+          "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+          "stderr_bytes": 0,
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_bytes": 229
+        },
+        "name": "literal_source_0",
+        "observations": {
+          "answer": "RUNTIME FIXTURE",
+          "selected_task": {
+            "count": 1,
+            "id": "single-offline-task",
+            "prompt": "runtime fixture"
+          },
+          "source_sha256": "a50928a9b0381597f9b529abb46e2dae456a8a1ab1e56a315967dc5bc7b376a3",
+          "third_party_found": []
+        }
+      },
+      {
+        "execution": {
+          "cleanup_status": "removed",
+          "configuration": {
+            "engine_endpoint_sha256": "30341252ca9aa2b298da11cd8527fdfbf8ab30a2f3b5a3c871188c778b20af30",
+            "host": {
+              "CapDrop": [
+                "ALL"
+              ],
+              "CgroupnsMode": "private",
+              "IpcMode": "none",
+              "LogConfig": {
+                "Config": {},
+                "Type": "none"
+              },
+              "Memory": 134217728,
+              "MemorySwap": 134217728,
+              "NanoCpus": 500000000,
+              "NetworkMode": "none",
+              "PidMode": "",
+              "PidsLimit": 16,
+              "Privileged": false,
+              "ReadonlyRootfs": true,
+              "SecurityOpt": [
+                "no-new-privileges:true"
+              ],
+              "Tmpfs": {
+                "/scratch": "rw,size=16m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700",
+                "/tmp": "rw,size=16m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700"
+              },
+              "UTSMode": ""
+            },
+            "image": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+            "mounts": {
+              "/agent": "C:\\Users\\arvik\\AppData\\Local\\Temp\\buddha-src-source-p2aqyfrg\\agent",
+              "/inputs": "C:\\Users\\arvik\\AppData\\Local\\Temp\\buddha-src-source-p2aqyfrg\\inputs",
+              "/runner": "C:\\Users\\arvik\\AppData\\Local\\Temp\\buddha-src-source-p2aqyfrg\\runner"
+            },
+            "role": "agent"
+          },
+          "container_id": "93b080da96a57091463641e812c764828f35c0d8e77c2f739cf11a005620d2bf",
+          "elapsed_seconds": 0.7281239000149071,
+          "exit_code": 0,
+          "frame_count": 1,
+          "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+          "stderr_bytes": 0,
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_bytes": 229
+        },
+        "name": "literal_source_1",
+        "observations": {
+          "answer": "erutxif emitnur",
+          "selected_task": {
+            "count": 1,
+            "id": "single-offline-task",
+            "prompt": "runtime fixture"
+          },
+          "source_sha256": "4525baf912572a16d4bd9fbecae87af25a2a05ab93404530a405b7119a54813a",
+          "third_party_found": []
+        }
+      }
+    ],
+    "format": "buddha.src01-runtime-proof.v1",
+    "hostile": {
+      "case_count": 11,
+      "evidence": {
+        "canary": {
+          "final_cleanup": "removed",
+          "id": "2cc1166f2cae63adac44387bc8a9cae774648820c060901793678b6a894328ce",
+          "untouched_during_cases": true
+        },
+        "case_count": 11,
+        "cases": [
+          {
+            "cleanup_status": "removed",
+            "configuration_sha256": "66914c0f490bb1619df0de01ead2fa985c961b806fe76f76c34c3eb2aa8b9ca9",
+            "container_id": "20abf698aca095474bc3b5c9aefc21785c0316934eb5bdcac341af29c07175c1",
+            "elapsed_seconds": 0.8240232999669388,
+            "exit_code": 0,
+            "frame_count": 1,
+            "limits": {
+              "cpus": 0.5,
+              "max_frames": 100,
+              "max_stderr_bytes": 8192,
+              "max_stdout_bytes": 2097152,
+              "memory_mib": 128,
+              "pids": 16,
+              "scratch_mib": 8,
+              "wall_seconds": 8
+            },
+            "name": "evaluator_boundary",
+            "observations": [
+              {
+                "caps_effective": 0,
+                "case": "evaluator_boundary",
+                "cpu_max": [
+                  "50000",
+                  "100000"
+                ],
+                "cwd": "/scratch",
+                "docker_socket_absent": true,
+                "gid": 65532,
+                "home_is_private_scratch": true,
+                "host_mounts_absent": true,
+                "host_paths_absent": true,
+                "input_is_single_task": true,
+                "inputs_write_denied": true,
+                "memory_max": 134217728,
+                "mount_targets": [
+                  "/",
+                  "/dev",
+                  "/dev/mqueue",
+                  "/dev/pts",
+                  "/etc/hostname",
+                  "/etc/hosts",
+                  "/etc/resolv.conf",
+                  "/inputs",
+                  "/official",
+                  "/proc",
+                  "/proc/acpi",
+                  "/proc/bus",
+                  "/proc/fs",
+                  "/proc/interrupts",
+                  "/proc/irq",
+                  "/proc/kcore",
+                  "/proc/keys",
+                  "/proc/latency_stats",
+                  "/proc/scsi",
+                  "/proc/sys",
+                  "/proc/sysrq-trigger",
+                  "/proc/timer_list",
+                  "/runner",
+                  "/scratch",
+                  "/sys",
+                  "/sys/firmware",
+                  "/sys/fs/cgroup",
+                  "/tmp"
+                ],
+                "no_new_privileges": 1,
+                "opposite_role_absent": true,
+                "pids_max": 16,
+                "private_env_absent": true,
+                "proxy_values_empty": true,
+                "role_write_denied": true,
+                "root_write_denied": true,
+                "runner_write_denied": true,
+                "seccomp": 2,
+                "selected_role_fixture_readable": true,
+                "swap_max": 0,
+                "uid": 65532
+              }
+            ],
+            "owned_container_absent": true,
+            "role": "evaluator",
+            "stderr_bytes": 0,
+            "stdout_bytes": 945,
+            "unrelated_canary_alive": true
+          },
+          {
+            "cleanup_status": "removed",
+            "configuration_sha256": "48811bde20c7aa9eb9fd1923354ae1559c597b48ec0501dabaafba0365e7e25e",
+            "container_id": "84916285228b94da340af1c1666e132f8142cdebe7ac0b058f239c5df84e201d",
+            "elapsed_seconds": 0.8351034999359399,
+            "exit_code": 0,
+            "frame_count": 1,
+            "limits": {
+              "cpus": 0.5,
+              "max_frames": 100,
+              "max_stderr_bytes": 8192,
+              "max_stdout_bytes": 2097152,
+              "memory_mib": 128,
+              "pids": 16,
+              "scratch_mib": 8,
+              "wall_seconds": 8
+            },
+            "name": "agent_boundary",
+            "observations": [
+              {
+                "caps_effective": 0,
+                "case": "agent_boundary",
+                "cpu_max": [
+                  "50000",
+                  "100000"
+                ],
+                "cwd": "/scratch",
+                "docker_socket_absent": true,
+                "gid": 65532,
+                "home_is_private_scratch": true,
+                "host_mounts_absent": true,
+                "host_paths_absent": true,
+                "input_is_single_task": true,
+                "inputs_write_denied": true,
+                "memory_max": 134217728,
+                "mount_targets": [
+                  "/",
+                  "/agent",
+                  "/dev",
+                  "/dev/mqueue",
+                  "/dev/pts",
+                  "/etc/hostname",
+                  "/etc/hosts",
+                  "/etc/resolv.conf",
+                  "/inputs",
+                  "/proc",
+                  "/proc/acpi",
+                  "/proc/bus",
+                  "/proc/fs",
+                  "/proc/interrupts",
+                  "/proc/irq",
+                  "/proc/kcore",
+                  "/proc/keys",
+                  "/proc/latency_stats",
+                  "/proc/scsi",
+                  "/proc/sys",
+                  "/proc/sysrq-trigger",
+                  "/proc/timer_list",
+                  "/runner",
+                  "/scratch",
+                  "/sys",
+                  "/sys/firmware",
+                  "/sys/fs/cgroup",
+                  "/tmp"
+                ],
+                "no_new_privileges": 1,
+                "opposite_role_absent": true,
+                "pids_max": 16,
+                "private_env_absent": true,
+                "proxy_values_empty": true,
+                "role_write_denied": true,
+                "root_write_denied": true,
+                "runner_write_denied": true,
+                "seccomp": 2,
+                "selected_role_fixture_readable": true,
+                "swap_max": 0,
+                "uid": 65532
+              }
+            ],
+            "owned_container_absent": true,
+            "role": "agent",
+            "stderr_bytes": 0,
+            "stdout_bytes": 938,
+            "unrelated_canary_alive": true
+          },
+          {
+            "cleanup_status": "removed",
+            "configuration_sha256": "66914c0f490bb1619df0de01ead2fa985c961b806fe76f76c34c3eb2aa8b9ca9",
+            "container_id": "24da2ed57ff95de8af362cb2483b4b069c2e4816bf8294f8048118d52bccbbb8",
+            "elapsed_seconds": 0.8971826999913901,
+            "exit_code": 0,
+            "frame_count": 1,
+            "limits": {
+              "cpus": 0.5,
+              "max_frames": 100,
+              "max_stderr_bytes": 8192,
+              "max_stdout_bytes": 2097152,
+              "memory_mib": 128,
+              "pids": 16,
+              "scratch_mib": 8,
+              "wall_seconds": 8
+            },
+            "name": "source_bytecode",
+            "observations": [
+              {
+                "adjacent_poison_cache_present": true,
+                "cache_tag": "cpython-313",
+                "cached_path": "/__absent_bytecode_cache/runner/helper.cpython-313.pyc",
+                "case": "source_bytecode",
+                "prefix": "/__absent_bytecode_cache",
+                "prefix_absent": true,
+                "source_value": "source"
+              }
+            ],
+            "owned_container_absent": true,
+            "role": "evaluator",
+            "stderr_bytes": 0,
+            "stdout_bytes": 242,
+            "unrelated_canary_alive": true
+          },
+          {
+            "cleanup_status": "removed",
+            "configuration_sha256": "66914c0f490bb1619df0de01ead2fa985c961b806fe76f76c34c3eb2aa8b9ca9",
+            "container_id": "5ec31d2b1f7b439b77ea0164e670f2b80999a66aa0a63b6b5f92e7ba2e7911ef",
+            "elapsed_seconds": 0.9245220000157133,
+            "exit_code": 0,
+            "frame_count": 1,
+            "limits": {
+              "cpus": 0.5,
+              "max_frames": 100,
+              "max_stderr_bytes": 8192,
+              "max_stdout_bytes": 2097152,
+              "memory_mib": 128,
+              "pids": 16,
+              "scratch_mib": 8,
+              "wall_seconds": 8
+            },
+            "name": "network",
+            "observations": [
+              {
+                "case": "network",
+                "interfaces": [
+                  "lo"
+                ],
+                "outcomes": {
+                  "alternate_http": {
+                    "denied": true,
+                    "errno": 101
+                  },
+                  "alternate_https": {
+                    "denied": true,
+                    "errno": 101
+                  },
+                  "dns": {
+                    "denied": true,
+                    "errno": -3
+                  },
+                  "ipv4_tcp": {
+                    "denied": true,
+                    "errno": 101
+                  },
+                  "ipv4_udp": {
+                    "denied": true,
+                    "errno": 101
+                  },
+                  "ipv6_tcp": {
+                    "denied": true,
+                    "errno": 101
+                  },
+                  "ipv6_udp": {
+                    "denied": true,
+                    "errno": 101
+                  }
+                }
+              }
+            ],
+            "owned_container_absent": true,
+            "role": "evaluator",
+            "stderr_bytes": 0,
+            "stdout_bytes": 332,
+            "unrelated_canary_alive": true
+          },
+          {
+            "cleanup_status": "removed",
+            "configuration_sha256": "66914c0f490bb1619df0de01ead2fa985c961b806fe76f76c34c3eb2aa8b9ca9",
+            "container_id": "4734d0b91d3ab5bd3db2b835313d458f152826fcb69d3a9ee2fd48be065b8741",
+            "elapsed_seconds": 0.8689798000268638,
+            "exit_code": 0,
+            "frame_count": 1,
+            "limits": {
+              "cpus": 0.5,
+              "max_frames": 100,
+              "max_stderr_bytes": 8192,
+              "max_stdout_bytes": 2097152,
+              "memory_mib": 128,
+              "pids": 16,
+              "scratch_mib": 8,
+              "wall_seconds": 8
+            },
+            "name": "scratch",
+            "observations": [
+              {
+                "case": "scratch",
+                "noexec": true,
+                "space_denied": true,
+                "written": 8388608
+              }
+            ],
+            "owned_container_absent": true,
+            "role": "evaluator",
+            "stderr_bytes": 0,
+            "stdout_bytes": 71,
+            "unrelated_canary_alive": true
+          },
+          {
+            "cleanup_status": "removed",
+            "configuration_sha256": "66914c0f490bb1619df0de01ead2fa985c961b806fe76f76c34c3eb2aa8b9ca9",
+            "container_id": "2a89b5bb206626712aa095aaaf6e5f1c869f188b347ad51bdfc9ff7ff2b14793",
+            "elapsed_seconds": 2.1267222000751644,
+            "exit_code": 0,
+            "frame_count": 1,
+            "limits": {
+              "cpus": 0.5,
+              "max_frames": 100,
+              "max_stderr_bytes": 8192,
+              "max_stdout_bytes": 2097152,
+              "memory_mib": 128,
+              "pids": 16,
+              "scratch_mib": 8,
+              "wall_seconds": 8
+            },
+            "name": "cpu_throttle",
+            "observations": [
+              {
+                "case": "cpu_throttle",
+                "throttled_periods": 13,
+                "usage_usec": 625379
+              }
+            ],
+            "owned_container_absent": true,
+            "role": "evaluator",
+            "stderr_bytes": 0,
+            "stdout_bytes": 67,
+            "unrelated_canary_alive": true
+          },
+          {
+            "cleanup_status": "removed",
+            "container_id": "b7708f7a90fe6b24ddd4773675c893fcc2dd5b7309d69e286c7f5f5e158f4339",
+            "error": "timeout",
+            "limits": {
+              "cpus": 0.5,
+              "max_frames": 100000,
+              "max_stderr_bytes": 65536,
+              "max_stdout_bytes": 134217728,
+              "memory_mib": 64,
+              "pids": 8,
+              "scratch_mib": 4,
+              "wall_seconds": 1.5
+            },
+            "name": "descendant_timeout",
+            "observations": [
+              {
+                "case": "descendant_timeout",
+                "descendant_created": true,
+                "pid": 7
+              }
+            ],
+            "owned_container_absent": true,
+            "role": "evaluator",
+            "unrelated_canary_alive": true
+          },
+          {
+            "cleanup_status": "removed",
+            "container_id": "f7369b53bed3889b3466f74f4ef7ef600d9fface0b0724e73d9da3b7989cdfa3",
+            "error": "output",
+            "limits": {
+              "cpus": 0.5,
+              "max_frames": 100,
+              "max_stderr_bytes": 8192,
+              "max_stdout_bytes": 2097152,
+              "memory_mib": 128,
+              "pids": 16,
+              "scratch_mib": 8,
+              "wall_seconds": 8
+            },
+            "name": "stdout_unterminated",
+            "observations": [],
+            "owned_container_absent": true,
+            "role": "evaluator",
+            "unrelated_canary_alive": true
+          },
+          {
+            "cleanup_status": "removed",
+            "container_id": "0d52b8221cd6b1f65329bed9ff2fc181e38913f965044188ad3ddabdf3b3e57c",
+            "error": "diagnostics",
+            "limits": {
+              "cpus": 0.5,
+              "max_frames": 100,
+              "max_stderr_bytes": 8192,
+              "max_stdout_bytes": 2097152,
+              "memory_mib": 128,
+              "pids": 16,
+              "scratch_mib": 8,
+              "wall_seconds": 8
+            },
+            "name": "stderr_flood",
+            "observations": [],
+            "owned_container_absent": true,
+            "role": "evaluator",
+            "unrelated_canary_alive": true
+          },
+          {
+            "cleanup_status": "removed",
+            "configuration_sha256": "66914c0f490bb1619df0de01ead2fa985c961b806fe76f76c34c3eb2aa8b9ca9",
+            "container_id": "2fb9e7cb7aa55372dd5b4af7e97c62f51220b8773c8338844372e1987a1978e4",
+            "elapsed_seconds": 1.0043512000702322,
+            "exit_code": 0,
+            "frame_count": 2,
+            "limits": {
+              "cpus": 0.5,
+              "max_frames": 100,
+              "max_stderr_bytes": 8192,
+              "max_stdout_bytes": 2097152,
+              "memory_mib": 128,
+              "pids": 16,
+              "scratch_mib": 8,
+              "wall_seconds": 8
+            },
+            "name": "memory_pressure",
+            "observations": [
+              {
+                "case": "memory_pressure",
+                "started": true
+              },
+              {
+                "case": "memory_pressure",
+                "child_exit": -9,
+                "memory_limit_events": 42,
+                "oom_kills": 1
+              }
+            ],
+            "owned_container_absent": true,
+            "role": "evaluator",
+            "stderr_bytes": 0,
+            "stdout_bytes": 124,
+            "unrelated_canary_alive": true
+          },
+          {
+            "cleanup_status": "removed",
+            "configuration_sha256": "66914c0f490bb1619df0de01ead2fa985c961b806fe76f76c34c3eb2aa8b9ca9",
+            "container_id": "82fc0c3a0a070d909b4e21280b75cf43b66db4686f7c99c900bd320228a6260b",
+            "elapsed_seconds": 0.9066461999900639,
+            "exit_code": 0,
+            "frame_count": 1,
+            "limits": {
+              "cpus": 0.5,
+              "max_frames": 100,
+              "max_stderr_bytes": 8192,
+              "max_stdout_bytes": 2097152,
+              "memory_mib": 128,
+              "pids": 16,
+              "scratch_mib": 8,
+              "wall_seconds": 8
+            },
+            "name": "pid_pressure",
+            "observations": [
+              {
+                "case": "pid_pressure",
+                "denied": true,
+                "spawned": 14
+              }
+            ],
+            "owned_container_absent": true,
+            "role": "evaluator",
+            "stderr_bytes": 0,
+            "stdout_bytes": 51,
+            "unrelated_canary_alive": true
+          }
+        ],
+        "checked_at": "2026-10-21T04:28:47.648694+00:00",
+        "docker_sha256": "c0e4f0379277708eea93b39fcbbfb9bad6f4ee97cc3eb7d326bf5d534fbf1762",
+        "endpoint_sha256": "30341252ca9aa2b298da11cd8527fdfbf8ab30a2f3b5a3c871188c778b20af30",
+        "engine": {
+          "Architecture": "x86_64",
+          "CgroupVersion": "2",
+          "ID": "9294f051-80f5-4c40-9c56-d49491d25ed8",
+          "KernelVersion": "6.18.33.1-microsoft-standard-WSL2",
+          "OSType": "linux",
+          "SecurityOptions": [
+            "name=seccomp,profile=builtin",
+            "name=cgroupns"
+          ],
+          "ServerVersion": "29.5.3"
+        },
+        "format": "buddha.review.nb02c3-executor-confinement.v1",
+        "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+        "limitations": [
+          "Docker daemon/CLI and host kernel trusted",
+          "network failures plus loopback-only interfaces, not an exploit audit",
+          "worker wall time does not bound synchronous host financial finalization",
+          "resource cases exercise cgroup limits, not exhaustive denial-of-service resistance"
+        ],
+        "scope": "real bounded Linux Docker executor fixtures; no paid calls, native evaluator/agent conformance, full scientific readiness or universal host-escape claim",
+        "source_cache_fixture": {
+          "adjacent_cache_sha256": "641ab5947962f082f20d44fce7f2d0b6dc737f2fe4e878f84177f32a60c9dbaf",
+          "host_cache_tag": "cpython-313",
+          "scope": "trusted literal compiled only; no host import or execution",
+          "source_sha256": "b8439ff7763f266957694e07f25d45aa951a8b02ea198595519cf3b409d800a7",
+          "timestamp_and_size_collide": true
+        },
+        "sources": {
+          "buddha\\channel.py": "c46d236865b15f1918efa23d961ed7163533c9bbef2b0cec7f61d6f8e95d6e5f",
+          "buddha\\executor.py": "b5e84f2dbcdc436aee23272e7d96b567cb5b16ead256a34d08bccc70b480d186",
+          "docs\\conformance\\nb02c3-executor-probe.py": "d9fba9037c228b5b8f72c718f2245c65ef91cf955e6615c32a78bb1787d2d797",
+          "runs\\src01-runtime-v1\\environment.json": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951"
+        },
+        "status": "pass",
+        "worker_sha256": "130fa278f1e98234231b1897f8c75c979f9630fa21e8928a96e9c6b9e425bbad"
+      },
+      "evidence_sha256": "844ca9c44ad1fd92307f9a03bc36b7ebdef2c62f8a7eb92ec6b49217c4614b4d",
+      "source_sha256": "d9fba9037c228b5b8f72c718f2245c65ef91cf955e6615c32a78bb1787d2d797"
+    },
+    "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+    "installed_manifest_sha256": "3da67017216e00138f3ba69dad28ec9214ece8a504920bf3720801e57c22b782",
+    "real_model_calls": 0,
+    "scope": "Runtime prerequisite only: no model gateway, production arbitrary-agent route, source evolution or universal host/kernel escape claim.",
+    "sources": {
+      "buddha/channel.py": "c46d236865b15f1918efa23d961ed7163533c9bbef2b0cec7f61d6f8e95d6e5f",
+      "buddha/executor.py": "b5e84f2dbcdc436aee23272e7d96b567cb5b16ead256a34d08bccc70b480d186",
+      "buddha/releases.py": "33361cf5b0923b373ee53dd73597063195c2c0d519baead50d40fb4bcfab44f5",
+      "docs/conformance/src01-runtime-audit.py": "7224d52eecb27f33bfcf9810af9f8d674d3646ed03fc958167149accd0bbad14",
+      "docs/conformance/src01-runtime-probe.py": "a3f37a59a4247d89abdca25d4b1de4ab1fdb79b9d9dc72170e01b3191772cf39",
+      "docs/conformance/src01-runtime.Dockerfile": "c7528ef310b5ae043622cd7945cf8e642d6a9a39d584e154f5c35ff74273a62b",
+      "tests/test_src01_runtime.py": "b41ab2017585bc2d0e9fee8144df7f3460eaddd68b216ed1d70bbaa36c61ce3f"
+    },
+    "status": "pass"
+  },
+  "actual_runtime_proof_sha256": "32828b8d114a396595d2ad2fcd98a9d7d3c3c0d6f13eb7f113e51a55cd00e0fa",
+  "build": {
+    "base_inspect_sha256": "9ea6be7228f5bcb96baff78c4291e01cc4acfb223e8d30d942ff63795ddd5cb1",
+    "base_layers_match": true,
+    "clean_client_config_sha256": "abd59ec09c2f7a27a5443c2f627ac453aa81769fdfeeb04b1d72a6d6ea34da67",
+    "context_files": [
+      ".dockerignore",
+      "Dockerfile",
+      "runtime-audit.py"
+    ],
+    "context_sha256": {
+      ".dockerignore": "e326e03f527fef8a60aa735cf29f769f3de0e19aae6428852373ea67dc8296b1",
+      "Dockerfile": "c7528ef310b5ae043622cd7945cf8e642d6a9a39d584e154f5c35ff74273a62b",
+      "runtime-audit.py": "7224d52eecb27f33bfcf9810af9f8d674d3646ed03fc958167149accd0bbad14"
+    },
+    "dependency_downloads": 0,
+    "dependency_installs": 0,
+    "image_inspect_sha256": "fa96ed870966659b4fee8bdb7a83056388210fb828110990efc2e2dc1501824e",
+    "logs": {
+      "audit-execution.json": "7026f787616d32df13d3ba7d6242dde5153cb8fe3018b6536a80c82383646175",
+      "build-exit.json": "d24219f6de94b955cf36d25bd2aca88e2d35eef45b9317b7083f55ec8fe9653c",
+      "build.stderr": "45e32ea699c322f99a25b00417f8468524d2dad9c6f18592ea95c121c873e355",
+      "build.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "installed-runtime.json": "3da67017216e00138f3ba69dad28ec9214ece8a504920bf3720801e57c22b782"
+    },
+    "network": "none",
+    "preliminary_attempt": "Initial invocation rejected an absent required parent before any Docker build; log retained. Parent created, then offline build passed.",
+    "pull": false
+  },
+  "checked_on": "2026-10-21T04:48:25.072624+00:00",
+  "claim": "SRC-01 runtime-only prerequisite. No production arbitrary-candidate route, model gateway, source mutation/evolution or aggregate SRC-01 completion.",
+  "environment": {
+    "audit_helper": {
+      "path": "/opt/runtime-audit.py",
+      "sha256": "7224d52eecb27f33bfcf9810af9f8d674d3646ed03fc958167149accd0bbad14"
+    },
+    "base": "python@sha256:3121f8b0804aa3698ab750d9a39ea4a42657a385c9b133722b915e55c51551a6",
+    "build_context_sha256": {
+      "Dockerfile": "c7528ef310b5ae043622cd7945cf8e642d6a9a39d584e154f5c35ff74273a62b",
+      "runtime-audit.py": "7224d52eecb27f33bfcf9810af9f8d674d3646ed03fc958167149accd0bbad14"
+    },
+    "build_network": "none",
+    "config": {
+      "ArgsEscaped": true,
+      "Cmd": [
+        "/opt/venv/bin/python"
+      ],
+      "Env": [
+        "PATH=/opt/venv/bin:/usr/local/bin:/usr/bin:/bin",
+        "GPG_KEY=7169605F62C751356D054A26A821E680E5FA6305",
+        "PYTHON_VERSION=3.13.12",
+        "PYTHON_SHA256=2a84cd31dd8d8ea8aaff75de66fc1b4b0127dd5799aa50a64ae9a313885b4593",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "PYTHONUNBUFFERED=1"
+      ],
+      "User": "65532:65532"
+    },
+    "docker_sha256": "c0e4f0379277708eea93b39fcbbfb9bad6f4ee97cc3eb7d326bf5d534fbf1762",
+    "endpoint_sha256": "30341252ca9aa2b298da11cd8527fdfbf8ab30a2f3b5a3c871188c778b20af30",
+    "format": "buddha.src01-runtime-environment.v1",
+    "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+    "installed_manifest": {
+      "base_entries": 1120,
+      "bytes": 144159,
+      "sha256": "3da67017216e00138f3ba69dad28ec9214ece8a504920bf3720801e57c22b782",
+      "venv_entries": 16
+    },
+    "model_calls": 0
+  },
+  "existing_execution_apis_changed": false,
+  "format": "buddha.src01-runtime-delivery.v1",
+  "historical_proof_v1": {
+    "sha256": "2bfaa6e36a270332d3aaf0b84c8ee57c00a4c331a4162643db52fcd16df68ed7",
+    "unchanged": "Original new-image execution before the recipe-provenance guard; retained, not relabeled as final source."
+  },
+  "hosted_ci": "Pending exact-head Windows/Linux PR and push checks; local results are separate.",
+  "ignored_evidence_sha256": {
+    "runs/reviews/src01-runtime-artifacts-red.log": "9813f9ad3ae5165399312acba7b3cc8b1fc2d1e7c5f10d9dc0b7b51129ff3eb3",
+    "runs/reviews/src01-runtime-build-v1-retry.log": "0e345972e58810ff6ce5b23c4a73dfbc6dcb69c111824b24feb5119632e41d5e",
+    "runs/reviews/src01-runtime-build-v1.log": "88dbc0267ddc36eafefc9effdb2b8fead787c1e9969a7307da9adcd5b11a2148",
+    "runs/reviews/src01-runtime-code-preservation.json": "70b7e8e7359e60f3df145deb723d6d3190ce5c060601f532ed98b2c3b74e1139",
+    "runs/reviews/src01-runtime-compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/reviews/src01-runtime-dependencies.log": "e82148c0c30269ca5a2c35420ece6af011a4faf5a375325d750e243ffdb10625",
+    "runs/reviews/src01-runtime-discovery.json": "592910aa3c7ab7c79106e502f953aee86c009c5be8dd33e8a71f656abe33af34",
+    "runs/reviews/src01-runtime-format.log": "9bfcfb42f120ad843312fddfdd5a5ad4018fc800ea4c997a5f8e907656949701",
+    "runs/reviews/src01-runtime-full-suite.log": "88885ae4240bb07fb8534e5a82d5975b194559daca7774de0942a1d145ee4b25",
+    "runs/reviews/src01-runtime-helper-security.log": "4bf15d88ff96107176010c1f14cc2a1e08bd2aa274f4f5cabe125e9869df4575",
+    "runs/reviews/src01-runtime-lint.log": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+    "runs/reviews/src01-runtime-proof-v1.log": "bda68f9401b4b06748783fb48c2ed92267d4cafd53ecfa56d4052e2a3e440f45",
+    "runs/reviews/src01-runtime-proof-v2.log": "4f231db3cdc98be37832a7b53b5f30dc671ace42f6d316829be9ed62bfd06dc5",
+    "runs/reviews/src01-runtime-recipe-red.log": "519466e7d930b966ddb13f94ca5f8586c4789f500a709db52d57092b7c1927cf",
+    "runs/reviews/src01-runtime-red.log": "00078a1090b520e59146685fbefac9171a87795c94075d72aaf4dd69541bbb17",
+    "runs/reviews/src01-runtime-security.log": "9367484e8f766d3b08143723aa3ad0d9c59890f1567ab8fe05cd1a2cd81ce97d",
+    "runs/reviews/src01-runtime-types.log": "1d0b00ad0473fd5bc2b62278f6fc097727a1561945844ab5bddd02cee1369dc2",
+    "runs/reviews/src01-runtime-unit-final.log": "1d5eb12449aaa0ddd2f4d42c13ad9eed9f81c1e17455661640d9b5f06922d0a2"
+  },
+  "live_allocation_changes": 0,
+  "next_boundary": "Independent candidate worker/model channel/source and replay/quota/accounting gates remain; aggregate SRC-01 remains open in the living plan.",
+  "official_scientific_code_changed": false,
+  "preservation": {
+    "all_unchanged": true,
+    "base": "4433ff28894d6b785eaa3f7f16cc4d88856f6bae",
+    "existing_application_and_agent_files": 38,
+    "files": {
+      "agents/frozen_seed.py": {
+        "after": "2b87bfe0d3c97ee45db2d45260985ffe0234eca93967f4689fb7c59f82603921",
+        "before": "2b87bfe0d3c97ee45db2d45260985ffe0234eca93967f4689fb7c59f82603921"
+      },
+      "buddha/__init__.py": {
+        "after": "0857bd60619c1e1c8538fe768cbe82c781bb4e302abc6cf59130f1b17d052230",
+        "before": "0857bd60619c1e1c8538fe768cbe82c781bb4e302abc6cf59130f1b17d052230"
+      },
+      "buddha/__main__.py": {
+        "after": "17a7af599e4d7b79094b806e01cedb765b560063bbcf82367f59e9f8e04005d7",
+        "before": "17a7af599e4d7b79094b806e01cedb765b560063bbcf82367f59e9f8e04005d7"
+      },
+      "buddha/agent_run.py": {
+        "after": "3f7f8ff3cb9965216f19c6564da1e830f0f629a346ec1cc29e2583c119bea88d",
+        "before": "3f7f8ff3cb9965216f19c6564da1e830f0f629a346ec1cc29e2583c119bea88d"
+      },
+      "buddha/agent_worker.py": {
+        "after": "c6f86105c0a42304687f857209bb17172f2f38fda26699d25e2618f6e01a745f",
+        "before": "c6f86105c0a42304687f857209bb17172f2f38fda26699d25e2618f6e01a745f"
+      },
+      "buddha/answers.py": {
+        "after": "be860546b2692ea4a710d93855f487dd49d9c8e28eb3f2ec757df697cefb8d0b",
+        "before": "be860546b2692ea4a710d93855f487dd49d9c8e28eb3f2ec757df697cefb8d0b"
+      },
+      "buddha/archive.py": {
+        "after": "9549deb0f347cf6114ef3f802b9dfef8a94e0db7cbbd3497697987d5e21ba2ee",
+        "before": "9549deb0f347cf6114ef3f802b9dfef8a94e0db7cbbd3497697987d5e21ba2ee"
+      },
+      "buddha/authorization.py": {
+        "after": "06d8615f8b301285a951b08bece0570e5b1b89467fc99fa4e994c7e5e5f30c47",
+        "before": "06d8615f8b301285a951b08bece0570e5b1b89467fc99fa4e994c7e5e5f30c47"
+      },
+      "buddha/baseline.py": {
+        "after": "c988e823d9890b712a4b50a58a3d808c6630fdcf3e6fb94227ee9e591d04a432",
+        "before": "c988e823d9890b712a4b50a58a3d808c6630fdcf3e6fb94227ee9e591d04a432"
+      },
+      "buddha/benchmark.py": {
+        "after": "7ef7e26b2ef3cbf4119118a985334048fd30b68a5629f3e3196fa77e8200c49f",
+        "before": "7ef7e26b2ef3cbf4119118a985334048fd30b68a5629f3e3196fa77e8200c49f"
+      },
+      "buddha/channel.py": {
+        "after": "c46d236865b15f1918efa23d961ed7163533c9bbef2b0cec7f61d6f8e95d6e5f",
+        "before": "c46d236865b15f1918efa23d961ed7163533c9bbef2b0cec7f61d6f8e95d6e5f"
+      },
+      "buddha/common.py": {
+        "after": "3a0a693a0f4a0f2eed3b858d0b3ac42148871dbca284e56e0e368726309393c0",
+        "before": "3a0a693a0f4a0f2eed3b858d0b3ac42148871dbca284e56e0e368726309393c0"
+      },
+      "buddha/continuation.py": {
+        "after": "b0136052472868aee379d7ac78dfd11bcfa40e91aedcd6916d30f9a334003414",
+        "before": "b0136052472868aee379d7ac78dfd11bcfa40e91aedcd6916d30f9a334003414"
+      },
+      "buddha/diagnostics.py": {
+        "after": "ca0af1304e3fbe99569f0b027f99269b151e08265785b39ed53c39f820097e24",
+        "before": "ca0af1304e3fbe99569f0b027f99269b151e08265785b39ed53c39f820097e24"
+      },
+      "buddha/doctor.py": {
+        "after": "afa511a747c4be2951ba53fea5cfe2822077a0f7a6f80a80a3255594d5b5d19b",
+        "before": "afa511a747c4be2951ba53fea5cfe2822077a0f7a6f80a80a3255594d5b5d19b"
+      },
+      "buddha/evaluation.py": {
+        "after": "4cabb1a48689a140fc6f6129ed8d9eae1d047d3e09eae794170c74479413b8d6",
+        "before": "4cabb1a48689a140fc6f6129ed8d9eae1d047d3e09eae794170c74479413b8d6"
+      },
+      "buddha/executor.py": {
+        "after": "b5e84f2dbcdc436aee23272e7d96b567cb5b16ead256a34d08bccc70b480d186",
+        "before": "b5e84f2dbcdc436aee23272e7d96b567cb5b16ead256a34d08bccc70b480d186"
+      },
+      "buddha/gateway.py": {
+        "after": "e844fcb695b97c76ecb7432ece6b8d96416806554038e202fd6b0f7f3da57a2e",
+        "before": "e844fcb695b97c76ecb7432ece6b8d96416806554038e202fd6b0f7f3da57a2e"
+      },
+      "buddha/gateway_history.py": {
+        "after": "a773ae6066e5b8a4f503e4b346b73570ace2ebeb811017f7b656cc211fded57c",
+        "before": "a773ae6066e5b8a4f503e4b346b73570ace2ebeb811017f7b656cc211fded57c"
+      },
+      "buddha/history.py": {
+        "after": "d42e92a7e6c88a2f72090eaaa50de39dc355957e7c61f5b89dd97162d8b0eefa",
+        "before": "d42e92a7e6c88a2f72090eaaa50de39dc355957e7c61f5b89dd97162d8b0eefa"
+      },
+      "buddha/ledger.py": {
+        "after": "5c7e56f1e2c5e68046d6380ebacc03110300eae34d348d7dca683a0591d64130",
+        "before": "5c7e56f1e2c5e68046d6380ebacc03110300eae34d348d7dca683a0591d64130"
+      },
+      "buddha/native_context.py": {
+        "after": "47a488b8d731617bda21380232e5e49801e0c0b4261f69b71c24fb9eae0ba298",
+        "before": "47a488b8d731617bda21380232e5e49801e0c0b4261f69b71c24fb9eae0ba298"
+      },
+      "buddha/native_run.py": {
+        "after": "60aafd5ef9e355e82faae2dc12397c6b0b2b649c3273c1bda9c0c757e0775a19",
+        "before": "60aafd5ef9e355e82faae2dc12397c6b0b2b649c3273c1bda9c0c757e0775a19"
+      },
+      "buddha/native_transport.py": {
+        "after": "ccd4917132939630231b8b8c69540189cd52f60951fa08d467d90b9571ccb6c0",
+        "before": "ccd4917132939630231b8b8c69540189cd52f60951fa08d467d90b9571ccb6c0"
+      },
+      "buddha/native_worker.py": {
+        "after": "8fa4b85ae6e75202de4b345302cb70253b6c0c5b47f004490f8d9a09750ecaa1",
+        "before": "8fa4b85ae6e75202de4b345302cb70253b6c0c5b47f004490f8d9a09750ecaa1"
+      },
+      "buddha/policy.py": {
+        "after": "717f6fdad1e880d83326d6a314e0dfa604be1044f8209f27061380e16cfebb3e",
+        "before": "717f6fdad1e880d83326d6a314e0dfa604be1044f8209f27061380e16cfebb3e"
+      },
+      "buddha/process_observation.py": {
+        "after": "28ad4b424ae0bec10aa2d3bf145cb62e1b26eb088db5e83fb6900fab6d5495a8",
+        "before": "28ad4b424ae0bec10aa2d3bf145cb62e1b26eb088db5e83fb6900fab6d5495a8"
+      },
+      "buddha/progress.py": {
+        "after": "47d21dada88347e63c01b05cf5c31db8e2cc157e501b812b58a2650d078393ba",
+        "before": "47d21dada88347e63c01b05cf5c31db8e2cc157e501b812b58a2650d078393ba"
+      },
+      "buddha/proposer.py": {
+        "after": "40e7ebf562966370f9f77c1e7f0e369b9fd34e37c0a0b88b246a7a630e4a40dd",
+        "before": "40e7ebf562966370f9f77c1e7f0e369b9fd34e37c0a0b88b246a7a630e4a40dd"
+      },
+      "buddha/provider.py": {
+        "after": "17de071c1416afa32f9da32eb627e24264d8a0a848862fdf4853057125f18a02",
+        "before": "17de071c1416afa32f9da32eb627e24264d8a0a848862fdf4853057125f18a02"
+      },
+      "buddha/reference.py": {
+        "after": "36356c8a25dae3501014513095cb6f838c4ae54b02a129bdffc4a5cb2dfa6f35",
+        "before": "36356c8a25dae3501014513095cb6f838c4ae54b02a129bdffc4a5cb2dfa6f35"
+      },
+      "buddha/releases.py": {
+        "after": "33361cf5b0923b373ee53dd73597063195c2c0d519baead50d40fb4bcfab44f5",
+        "before": "33361cf5b0923b373ee53dd73597063195c2c0d519baead50d40fb4bcfab44f5"
+      },
+      "buddha/run.py": {
+        "after": "a972cb8d1a04bef7abad7efdf7f1eec803bb88cd55c30cf64148119a3d7c6dbb",
+        "before": "a972cb8d1a04bef7abad7efdf7f1eec803bb88cd55c30cf64148119a3d7c6dbb"
+      },
+      "buddha/search.py": {
+        "after": "ac7b3648355b139797773cbe2bb8b67abbc8533eefd987cd7692275692a9a95c",
+        "before": "ac7b3648355b139797773cbe2bb8b67abbc8533eefd987cd7692275692a9a95c"
+      },
+      "buddha/search_evidence.py": {
+        "after": "1d89ed7ae541f52b79cc643edd2615955104cceb8508036d3b288e646fa30a34",
+        "before": "1d89ed7ae541f52b79cc643edd2615955104cceb8508036d3b288e646fa30a34"
+      },
+      "buddha/search_verify.py": {
+        "after": "41bdc2689d2b64e93765fe4572017a6c4264d5c3c6df49bba2a63e74b9ab6a63",
+        "before": "41bdc2689d2b64e93765fe4572017a6c4264d5c3c6df49bba2a63e74b9ab6a63"
+      },
+      "buddha/splits.py": {
+        "after": "419fa286d812b43e3095fbb41a62844b40477f880d94c8d60de069a52c324a2a",
+        "before": "419fa286d812b43e3095fbb41a62844b40477f880d94c8d60de069a52c324a2a"
+      },
+      "buddha/wire.py": {
+        "after": "48f40a71bf10c84dfd1d15f0baef50198cce8a229748355f116ad6a25cab12b4",
+        "before": "48f40a71bf10c84dfd1d15f0baef50198cce8a229748355f116ad6a25cab12b4"
+      }
+    },
+    "format": "buddha.src01-code-preservation.v1",
+    "proof_sha256": "32828b8d114a396595d2ad2fcd98a9d7d3c3c0d6f13eb7f113e51a55cd00e0fa",
+    "scope": "Isolated checkout only; no actual study/grant/files accessed."
+  },
+  "raw_primary_study_or_grant_access": false,
+  "real_provider_calls": 0,
+  "runtime_limits": [
+    "Docker local daemon/CLI and host kernel trusted; no universal escape claim.",
+    "Actual network/resource probes are bounded demonstrations, not exhaustive attacks.",
+    "Wall timeout stops owned container; synchronous host callback finalization can extend return time.",
+    "Docker control metadata capture is size-checked after allocation.",
+    "Immutable base OS and utilities remain; physical package deletion applies to active merged container filesystem, not erasure of inherited image layers.",
+    "Existing base GNU/LGPL notice scope is retained; image not published/distributed; no all-permissive or legal-clearance claim."
+  ],
+  "source_sha256": {
+    "docs/SOURCE-RUNTIME.md": "74646a51ce8a0947685ceaad4089b645c442d3ad88e7e85014756f0e8a368c00",
+    "docs/conformance/src01-runtime-audit.py": "7224d52eecb27f33bfcf9810af9f8d674d3646ed03fc958167149accd0bbad14",
+    "docs/conformance/src01-runtime-environment.json": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+    "docs/conformance/src01-runtime-probe.py": "a3f37a59a4247d89abdca25d4b1de4ab1fdb79b9d9dc72170e01b3191772cf39",
+    "docs/conformance/src01-runtime.Dockerfile": "c7528ef310b5ae043622cd7945cf8e642d6a9a39d584e154f5c35ff74273a62b",
+    "tests/test_src01_runtime.py": "b41ab2017585bc2d0e9fee8144df7f3460eaddd68b216ed1d70bbaa36c61ce3f"
+  },
+  "status": "local runtime prerequisite acceptance complete; hosted CI pending",
+  "tests_first": {
+    "final_focused": {
+      "result": "pass",
+      "seconds": 0.185,
+      "skip_scope": "Windows symlink-creation privileges; actual Linux source-audit class has 10 tests and zero skips.",
+      "skipped": 4,
+      "tests": 11
+    },
+    "missing_helper": {
+      "errors": 9,
+      "tests": 9
+    },
+    "physical_artifacts": {
+      "failing_subcases": 4,
+      "skipped": 4,
+      "tests": 10
+    },
+    "recipe_provenance": {
+      "failures": 1,
+      "observed": "A changed stored Dockerfile hash reached the forbidden fresh-audit/container seam before the guard.",
+      "skipped": 4,
+      "tests": 11
+    }
+  },
+  "validation": {
+    "bandit": "Application/agents and separate helper scans: no issues; existing/scoped nosec warnings retained. B102 is limited to the exact SHA-sealed reviewed engineering harness, never arbitrary candidate source.",
+    "compileall": "pass",
+    "full_suite": {
+      "command": "python -W error::ResourceWarning -m unittest discover -s tests",
+      "exit_code": 0,
+      "seconds": 946.967,
+      "skip_names": [
+        "test_agent_worker.AgentWorkerTests.test_symlinked_source_is_rejected_even_when_expected_bytes_match",
+        "test_continuation_source.ContinuationSourceTests.test_actual_original_nine_receipts_validate_read_only",
+        "test_history.HistoryTests.test_source_symlink_is_rejected_without_following_it",
+        "test_native_worker.NativeWorkerTests.test_replaced_artifact_root_cannot_export_another_tree",
+        "test_releases.ReleaseSelectionTests.test_symlinked_file_or_parent_is_rejected",
+        "test_search_evidence.SearchEvidenceTests.test_symlink_is_rejected",
+        "test_src01_runtime.SourceRuntimeTests.test_site_root_and_unexpected_nested_symlinks_are_rejected",
+        "test_src01_runtime.SourceRuntimeTests.test_supported_interpreter_alias_is_bound_to_actual_binary",
+        "test_src01_runtime.SourceRuntimeTests.test_unknown_tree_symlink_is_rejected_even_with_safe_target",
+        "test_src01_runtime.SourceRuntimeTests.test_venv_interpreter_cannot_escape_the_pinned_base"
+      ],
+      "skip_names_method": "Ordered progress matched to frozen discovery only if all 1084 markers align; no test rerun. Null means exact alignment unavailable.",
+      "skip_reasons": "Nine Windows symlink-creation privilege limits and one undistributed original-nine-receipts private fixture absent from the isolated checkout. The actual Linux source-audit class passed all 10 cases with zero skips; prior actual incident-history evidence remains separate.",
+      "skipped": 10,
+      "tests": 1084
+    },
+    "independent_review": "Root and sibling read-only review passed final code/guard/canonicalized fixtures. The sibling identified the recipe-provenance join; the implementation owner then reproduced RED before its fix. No edits/tests by reviewer.",
+    "ruff_format": "113 files pass",
+    "ruff_lint": "pass",
+    "runtime_requirements_audit": "No known vulnerabilities found for declared host application runtime requirements; no whole-OS/base vulnerability attestation.",
+    "strict_mypy": "38 source files pass"
+  }
+}
