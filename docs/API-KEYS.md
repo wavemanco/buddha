@@ -38,6 +38,12 @@ No characters or asterisks appear during Python's hidden entry. Paste once, then
 
 Existing nonempty environment values take precedence, so an invalid existing key needs to be removed or replaced in the launching terminal first. A baseline uses `run` with the same `--authorization` and `--prompt-keys` options. Authorization and runtime checks happen before any key prompt.
 
+The [proposed policy comparison](POLICY-COMPARISON-COSTS.md) needs a new
+reviewed allocation for both OpenAI generation/grouping and Anthropic quality
+judging. Its preparation creates no authority and supplies no live command.
+Use the eventual dedicated handoff, rather than rerunning a historical command
+with new keys or treating an unused old balance as permission.
+
 ## Alternative: inject environment variables from a secret manager
 
 The runner reads `OPENAI_API_KEY` and `ANTHROPIC_API_KEY` from the environment of the process that launches it. Supply them through your secret manager if you already use one. Setting variables in a different PowerShell window does not update a running Codex process. The supplied `.env.example` has placeholders only; Buddha does not automatically load `.env` files. Avoid `setx` for temporary experiments because it persists credentials for future processes.
