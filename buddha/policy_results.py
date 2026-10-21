@@ -31,6 +31,7 @@ from buddha.releases import (
     _object,
     _path,
     _root,
+    _text,
 )
 from buddha.search_evidence import MAX_FILE_BYTES, _absolute
 from buddha.wire import RawEnvelope, WireError, decoded_body, extract_usage
@@ -473,6 +474,104 @@ class _Reader:
                 raise PolicyResultsError("original selections differ from the study release")
         return study, execution
 
+    def scheduled_owners(
+        self, study: PolicyStudy, roles: list[str]
+    ) -> tuple[dict[Path, dict[str, object]], int]:
+        """Validate every retained schedule owner before any source projection."""
+        stages = _rows(self.template["stages"])
+        if len(roles) != len(stages):
+            raise PolicyResultsError("declared stage roles differ from the native flow")
+        coordinates: dict[Path, dict[str, object]] = {}
+        planned_owner_count = 0
+        operation_count = 0
+        allowed_owners: set[str] = set()
+        for i, cell in enumerate(study.schedule()):
+            for j, _occasion in enumerate(_rows(cell["judge_occasions"])):
+                child = self.root / "cells" / str(i) / ("baseline" if j == 0 else f"judgments/{j}")
+                for index in range(0 if j == 0 else 1, len(stages) + 1):
+                    planned_owner_count += 1
+                    path = child / "owners" / str(index)
+                    allowed_owners.add((path / "manifest.json").relative_to(self.root).as_posix())
+                    if (path / "manifest.json").exists():
+                        owner = self.owner(path)
+                        operation_count += len(owner.operations)
+                        if operation_count > MAX_OPERATIONS:
+                            raise PolicyResultsError(
+                                "study operation population exceeds the reporting ceiling"
+                            )
+                        coordinates[path] = {
+                            **{
+                                key: cell[key]
+                                for key in ("cell_id", "arm_id", "arm_index", "generation_repeat")
+                            },
+                            "judge_occasion": None if index == 0 else j,
+                            "stage_index": index,
+                            "stage_role": "generation" if index == 0 else roles[index - 1],
+                        }
+                        bindings = _bindings(owner)
+                        if any(
+                            bindings.get(name) != digest for name, digest in self.controls.items()
+                        ):
+                            raise PolicyResultsError("child changes an original study control")
+                        section = "generation" if index == 0 else "native"
+                        template = _object(self.template[section])
+                        if not _same(
+                            owner.manifest["selection"], template["selection"]
+                        ) or not _same(owner.manifest["roots"], template["roots"]):
+                            raise PolicyResultsError(
+                                "child changes the selected release/agent components"
+                            )
+                        settings = {
+                            "budget_microusd": 1
+                            if index == len(stages)
+                            else template["budget_microusd"],
+                            "max_calls": 1 if index == len(stages) else template["max_calls"],
+                        }
+                        if not _same(owner.manifest["settings"], settings):
+                            raise PolicyResultsError("child changes its declared local ceilings")
+        for name in self.capture.entries:
+            manifest = (
+                name + "/manifest.json"
+                if re.fullmatch(r"cells/[^/]+/(?:baseline|judgments/[^/]+)/owners/[^/]+", name)
+                else name
+            )
+            if re.fullmatch(
+                r"cells/[^/]+/(?:baseline|judgments/[^/]+)/owners/[^/]+/manifest\.json", manifest
+            ) and (manifest not in allowed_owners or manifest not in self.capture.entries):
+                raise PolicyResultsError("study contains an owner outside its declared schedule")
+        return coordinates, planned_owner_count
+
+    def cell_definition(self, i: int, cell: dict[str, object]) -> None:
+        """Join a cell's literal generation recipe and original baseline template."""
+        cell_root = self.root / "cells" / str(i)
+        owner = self.owner(cell_root / "baseline/owners/0")
+        baseline_path = cell_root / "baseline.json"
+        context = _load(self.bound(owner, cell_root / "baseline/context.json"))
+        if not _same(
+            context,
+            {"format": "buddha.baseline-context.v1", "descriptor": str(baseline_path)},
+        ):
+            raise PolicyResultsError("cell producer uses another original baseline descriptor")
+        recipe = _load(self.bound(owner, cell_root / "generation.json"))
+        if not _same(recipe, self.recipe | {"config": cell["generation_config"]}):
+            raise PolicyResultsError("cell generation changes its declared treatment")
+        producer = _object(self.template["generation"]) | {
+            "descriptor": str(cell_root / "generation.json")
+        }
+        baseline = self.template | {"generation": producer}
+        if not _same(_load(self.bound(owner, baseline_path)), baseline):
+            raise PolicyResultsError("cell baseline differs from the original template")
+
+    def generation_reference(self, base: Path) -> dict[str, object]:
+        """Construct the existing reference from captured bytes, not a new owner."""
+        original = self.owner(base / "owners/0")
+        return {
+            "baseline_directory": str(base),
+            "stage_seal_sha256": _sha(self.raw(base / "completed/0.json")),
+            "owner_manifest_sha256": original.manifest_sha256,
+            "owner_ledger_sha256": original.ledger_sha256,
+        }
+
     def funding(self, execution: dict[str, object], study: PolicyStudy) -> None:
         funding = _authority(self.capture, self.authorization, list(self.owners.values()))
         if funding is None:
@@ -488,6 +587,25 @@ class _Reader:
         if not _same(execution["authorization"], expected) or config["scope"] != expected["scope"]:
             raise PolicyResultsError("study belongs to another original authority")
         self.funded_runs = {str(row["run_id"]): row for row in _rows(funding["auth_runs"])}
+        planned_paths = {
+            self.root
+            / "cells"
+            / str(i)
+            / ("baseline" if j == 0 else f"judgments/{j}")
+            / "owners"
+            / str(index)
+            for i, cell in enumerate(study.schedule())
+            for j in range(len(_rows(cell["judge_occasions"])))
+            for index in range(0 if j == 0 else 1, len(_rows(self.template["stages"])) + 1)
+        }
+        # A recorded scheduled owner remains required custody even when its
+        # entire directory has disappeared. Other shared rows are not followed.
+        for row in self.funded_runs.values():
+            path = Path(_text(row["directory"]))
+            if path in planned_paths and (
+                path not in self.owners or self.owners[path].run_id != row["run_id"]
+            ):
+                raise PolicyResultsError("retained funded owner is missing its original evidence")
         for owner in self.owners.values():
             row = self.funded_runs[owner.run_id]
             if (
@@ -753,62 +871,7 @@ def _analyze(
     reporting = reporting_configuration(reader.release, stages)
     roles = cast(list[str], reporting["stage_roles"])
     fallback_model = cast(str | None, reporting["fallback_model"])
-    coordinates: dict[Path, dict[str, object]] = {}
-    planned_owner_count = 0
-    operation_count = 0
-    allowed_owners: set[str] = set()
-    for i, cell in enumerate(schedule):
-        for j, _occasion in enumerate(_rows(cell["judge_occasions"])):
-            child = reader.root / "cells" / str(i) / ("baseline" if j == 0 else f"judgments/{j}")
-            for index in range(0 if j == 0 else 1, len(stages) + 1):
-                planned_owner_count += 1
-                path = child / "owners" / str(index)
-                allowed_owners.add((path / "manifest.json").relative_to(reader.root).as_posix())
-                if (path / "manifest.json").exists():
-                    owner = reader.owner(path)
-                    operation_count += len(owner.operations)
-                    if operation_count > MAX_OPERATIONS:
-                        raise PolicyResultsError(
-                            "study operation population exceeds the reporting ceiling"
-                        )
-                    coordinates[path] = {
-                        **{
-                            key: cell[key]
-                            for key in ("cell_id", "arm_id", "arm_index", "generation_repeat")
-                        },
-                        "judge_occasion": None if index == 0 else j,
-                        "stage_index": index,
-                        "stage_role": "generation" if index == 0 else roles[index - 1],
-                    }
-                    bindings = _bindings(owner)
-                    if any(
-                        bindings.get(name) != digest for name, digest in reader.controls.items()
-                    ):
-                        raise PolicyResultsError("child changes an original study control")
-                    section = "generation" if index == 0 else "native"
-                    template = _object(reader.template[section])
-                    if not _same(owner.manifest["selection"], template["selection"]) or not _same(
-                        owner.manifest["roots"], template["roots"]
-                    ):
-                        raise PolicyResultsError(
-                            "child changes the selected release/agent components"
-                        )
-                    settings = {
-                        "budget_microusd": 1
-                        if index == len(stages)
-                        else template["budget_microusd"],
-                        "max_calls": 1 if index == len(stages) else template["max_calls"],
-                    }
-                    if not _same(owner.manifest["settings"], settings):
-                        raise PolicyResultsError("child changes its declared local ceilings")
-    for name in reader.capture.entries:
-        if (
-            re.fullmatch(
-                r"cells/[^/]+/(?:baseline|judgments/[^/]+)/owners/[^/]+/manifest\.json", name
-            )
-            and name not in allowed_owners
-        ):
-            raise PolicyResultsError("study contains an owner outside its declared schedule")
+    coordinates, planned_owner_count = reader.scheduled_owners(study, roles)
     reader.funding(execution, study)
     publication = reader.root / "report.json" if observation is None else observation.absolute()
     if observation is not None:
@@ -893,13 +956,7 @@ def _analyze(
             raise PolicyResultsError("partial observation has an unsupported stop reason")
         if len(cells) == stopped_i and stopped_j:
             base = reader.root / "cells" / str(stopped_i) / "baseline"
-            original = reader.owner(base / "owners/0")
-            reference = {
-                "baseline_directory": str(base),
-                "stage_seal_sha256": _sha(reader.raw(base / "completed/0.json")),
-                "owner_manifest_sha256": original.manifest_sha256,
-                "owner_ledger_sha256": original.ledger_sha256,
-            }
+            reference = reader.generation_reference(base)
             # The saved serial stop coordinate declares these earlier occasions.
             # Later recovered occasions and unsealed attempts remain excluded.
             for earlier in range(stopped_j):
@@ -1027,16 +1084,8 @@ def _child(
         "directory"
     ] != str(child):
         raise PolicyResultsError("judging occasion identity differs")
+    reader.cell_definition(i, cell)
     cell_root = reader.root / "cells" / str(i)
-    recipe = reader.record(cell_root / "generation.json")
-    if not _same(recipe, reader.recipe | {"config": cell["generation_config"]}):
-        raise PolicyResultsError("cell generation changes its declared treatment")
-    producer = _object(reader.template["generation"]) | {
-        "descriptor": str(cell_root / "generation.json")
-    }
-    baseline = reader.template | {"generation": producer}
-    if not _same(reader.record(cell_root / "baseline.json"), baseline):
-        raise PolicyResultsError("cell baseline differs from the original template")
     native_raw = source.answers.native_bytes()
     if reader.raw(child / "native-answers.jsonl") != native_raw:
         raise PolicyResultsError("occasion changes the original native answers")

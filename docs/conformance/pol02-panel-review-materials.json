@@ -1,0 +1,15 @@
+{
+  "format": "buddha.policy-panel-review.v1",
+  "protocol_sha256": "a3cd4ee3011f0e269e0b2e66570953c847574497d8e8b02a359b247a59423ab0",
+  "release_sha256": "8fd676bd8b25c6bcfd66664b1179473703a343fd7dc94833a1dea8dd5f9e39fb",
+  "rubric": {
+    "protocol_end": 13785,
+    "protocol_start": 12459,
+    "text": "Apply this fixed rubric to every answer and full set:\n\n- Literal task compliance: yes/no/uncertain, with the exact unmet constraint.\n  Respect count, form, perspective and task-specific requirements; do not add\n  a stricter one-word rule where the task did not request one.\n- Official-rule equivalence: group the full set under the pinned official\n  definition, including repeated central plots with minor variants. Record\n  uncertain relations and reasons rather than guessing missing groups.\n- Coherence and craft: adequate/inadequate/uncertain where applicable,\n  otherwise not applicable. Check whether actions, causes and resolutions fit.\n- Broader premise concentration: present/absent/uncertain with examples.\n  Shared required subjects alone are not equivalence or a failure.\n- Factual support: supported/contradicted/unverified where applicable.\n  Reviewers may cite primary sources; preserve URLs/access dates and distinguish\n  those checks from model recollection. Without evidence, retain unverified.\n\nPhone/product advice is task content, not current purchasing guidance. Password\ncontrols are literal-form diagnostics, not proof of secure randomness or safe\ncredential advice. Closed answer spaces do not make a higher distinct count\nautomatically desirable. Report compliance and judge disagreements separately."
+  },
+  "rule": {
+    "sha256": "5df0b3a31c86ea37e15b17348a34ad064790b670be345dd93fcd0a4d18385eca",
+    "text": "A language model was asked the same prompt several times. Partition its responses into groups of equivalent answers.\n\nTwo responses are equivalent if a user who had read one would gain essentially nothing from the other: the same central answer, recommendation, plot, argument or image, differing only in wording, formatting, length, ordering or minor detail. They are distinct if the central content differs, even when structure or register is shared. A list is distinct only if most of its items differ.",
+    "upstream_revision": "64a23be6b18ec1dacc298830aab276061b6e143c"
+  }
+}

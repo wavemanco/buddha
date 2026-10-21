@@ -41,11 +41,13 @@ judging disagreement, saved recovery metadata and recorded tokens/costs.
 `analysis.status = complete` describes numerical coverage. It does not mean the
 supplemental review or the controlled experiment is complete. The
 [pre-answer mapping](POLICY-PANEL.md) fixes masked coordinates from pinned study
-metadata. Before launch, its packet materializer must be implemented/tested, then
-the tested live handoff, account/runtime checks and approved funding completed.
-Materialize the actual answer packet and obtain its reviews only after
-real generation has saved the original answers. Actual results and the later
-human scientific assessment remain open.
+metadata. Its separate [passive materializer](POLICY-PANEL.md#materialize-original-saved-generation)
+assembles complete available answer sets from anchored original generation,
+even if later judging is unfinished. Missing coverage and provenance stay in a
+private receipt. The tested live handoff, account/runtime checks and approved
+funding remain open before launch. Actual packet contents and reviews require
+real saved generation. Actual results and the later human scientific assessment
+remain open.
 
 ## Categories, repetitions and judging disagreement
 
@@ -154,6 +156,10 @@ the current shared authority and the old report's authorization observation.
 An old observation is retained historical data, not current permission to spend
 or authenticated evidence of when capture occurred. Original receipts and
 uncertain holds remain unchanged.
+
+A known funded study owner with missing original records makes the evidence
+invalid; it does not indicate zero cost or work that has not started.
+The results reader and packet reader share this check.
 
 `registered.accounting` describes every operation under the study's present
 owners, including stopped owners and operations with no saved response. It
