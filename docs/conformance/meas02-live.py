@@ -18,6 +18,7 @@ from types import ModuleType
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
+from buddha.__main__ import KeyInputError  # noqa: E402
 from buddha.authorization import Authorization  # noqa: E402
 from buddha.baseline import _read, _write  # noqa: E402
 from buddha.gateway import RawHTTPTransport, _core_sources, _profiles, _spec  # noqa: E402
@@ -27,10 +28,49 @@ from buddha.releases import _digest, _json, _load, _object, _root, _text  # noqa
 SCRIPT = Path(__file__).resolve()
 OPERATOR = SCRIPT.with_name("meas02-run.py")
 OPERATOR_SHA256 = "ff48850a2281bb4ded265654443730c2d43185fb0fbe45236710ee94e6eb7fb8"
+FAILURES = {
+    "key_terminal_required": (
+        "Hidden key entry needs an interactive terminal.",
+        "Use the documented command in an interactive Windows Terminal/PowerShell window "
+        "with input and error output attached; do not redirect those streams.",
+    ),
+    "key_input_unavailable": (
+        "Hidden key entry was unavailable or ended before a key was received.",
+        "Use hidden entry in an interactive terminal; Ctrl+C stops it. "
+        "Keep the original study and owners.",
+    ),
+    "key_input_invalid": (
+        "The entered credential did not pass the local input check.",
+        "Paste the approved key locally without surrounding spaces, then press Enter. "
+        "Never paste a key into chat.",
+    ),
+    "key_credentials_rejected": (
+        "The local credential does not match this study's approved credential requirements.",
+        "Check the local key against the approved account. An existing study requires "
+        "its original key; do not replace its owners or account review.",
+    ),
+    "live_confirmation_required": (
+        "The live-run confirmations are missing.",
+        "Use the documented command with --live and --confirm-project-key.",
+    ),
+    "invalid_options": (
+        "The launch options are missing or invalid.",
+        "Use the documented command and its required options.",
+    ),
+    "handoff_stopped": (
+        "Handoff checks or execution stopped; original evidence retained.",
+        "Keep the original study and saved evidence for review; "
+        "this message does not authorize another run or replacement owners.",
+    ),
+}
 
 
 class LiveHandoffError(ValueError):
     """The approved handoff cannot safely prepare or reuse its original owners."""
+
+    def __init__(self, message, *, code="handoff_stopped"):
+        self.code = code
+        super().__init__(message)
 
 
 def _path(value):
@@ -194,7 +234,10 @@ def launch(handoff, *, live=False, prompt_keys=False, confirm_project_key=False)
             or confirm_project_key is not True
             or type(prompt_keys) is not bool
         ):
-            raise LiveHandoffError("--live and --confirm-project-key are required before key entry")
+            raise LiveHandoffError(
+                "--live and --confirm-project-key are required before key entry",
+                code="live_confirmation_required",
+            )
         record, operator, controller, authority, spec, checked = _configuration(handoff)
         study = _path(record["study"])
         if checked is not None and checked["status"] == "complete":
@@ -208,7 +251,12 @@ def launch(handoff, *, live=False, prompt_keys=False, confirm_project_key=False)
             key = os.environ.get("OPENAI_API_KEY", "")
             fingerprint = hashlib.sha256(key.encode("utf-8")).hexdigest()
             expected = {"openai": fingerprint} if checked is None else checked["credential_sha256"]
-            operator._credentials(profiles, expected)
+            try:
+                operator._credentials(profiles, expected)
+            except operator.OperatorError:
+                raise LiveHandoffError(
+                    "local credential validation stopped", code="key_credentials_rejected"
+                ) from None
             # Repeat source/terms/state checks after the operator's key-entry delay.
             current = _configuration(handoff)
             if current[0] != record or (current[-1] is None) != (checked is None):
@@ -233,6 +281,17 @@ def launch(handoff, *, live=False, prompt_keys=False, confirm_project_key=False)
                     review=review,
                 )
             return operator.execute(study, live=True, prompt_keys=False)
+    except KeyInputError as error:
+        code = error.code
+        if type(code) is not str or code not in {
+            "key_terminal_required",
+            "key_input_unavailable",
+            "key_input_invalid",
+        }:
+            code = "handoff_stopped"
+        raise LiveHandoffError("local key input stopped", code=code) from None
+    except LiveHandoffError:
+        raise
     except Exception:
         raise LiveHandoffError(
             "live handoff checks or execution stopped; original evidence retained"
@@ -241,7 +300,7 @@ def launch(handoff, *, live=False, prompt_keys=False, confirm_project_key=False)
 
 class _Parser(argparse.ArgumentParser):
     def error(self, message):
-        raise LiveHandoffError("invalid handoff options")
+        raise LiveHandoffError("invalid handoff options", code="invalid_options")
 
 
 def main(argv=None):
@@ -253,7 +312,7 @@ def main(argv=None):
         parser.add_argument("--confirm-project-key", action="store_true")
         args = parser.parse_args(argv)
         result = launch(
-            args.handoff,
+            args.handoff.absolute(),
             live=args.live,
             prompt_keys=args.prompt_keys,
             confirm_project_key=args.confirm_project_key,
@@ -267,10 +326,14 @@ def main(argv=None):
             file=sys.stderr,
             flush=True,
         )
-    except Exception:
-        record, code = {"status": "stopped"}, 2
+    except Exception as error:
+        reason = error.code if isinstance(error, LiveHandoffError) else "handoff_stopped"
+        if type(reason) is not str or reason not in FAILURES:
+            reason = "handoff_stopped"
+        message, action = FAILURES[reason]
+        record, code = {"status": "stopped", "reason_code": reason, "action": action}, 2
         print(
-            "[meas02] Handoff checks or execution stopped; original evidence retained.",
+            f"[meas02] {reason}: {message} {action}",
             file=sys.stderr,
             flush=True,
         )

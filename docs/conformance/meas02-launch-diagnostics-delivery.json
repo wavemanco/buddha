@@ -1,0 +1,114 @@
+{
+  "actual_user_context": "The root reproduced the original relative-command failure and verified that the original absolute command reaches hidden entry without changing its sources. The original audit subsequently completed; root separately passively verified 40 saved operations, 32213 microusd recorded spending, no reserved money, full 40-target coverage and four completion anchors, with 68 existing files unchanged. These are root-reported saved execution/accounting facts, not invoice reconciliation or this owner's independent data observation. Scientific/raw-parser review remains a separate slice. This implementation does not inspect or change the actual run, grant, key, owners or outputs.",
+  "checked_on": "2026-10-21T04:09:48.581942+00:00",
+  "deployment_boundary": "Only two production sources change in the isolated checkout. The original handoff, its 45 source pins and actual grant/owners/review are not rewritten or resealed. Root separately copied only the corrected guide in doc-only 718a081 and checked 45 pins before/after. This commit does not deploy new code to the original audit or prepare a new actual handoff. Any later source integration requires an explicit safe version transition, not blessing changed files for old owners.",
+  "findings": {
+    "MEAS2-L1": "The documented CLI supplied a relative handoff path while the frozen internal path validator requires canonical absolute paths. Earlier preflight checked an absolute path rather than the published invocation. The public CLI now normalizes its supplied handoff to an absolute path; recorded internal path guards remain unchanged.",
+    "MEAS2-L2": "A broad launcher catch concealed fixed key-input failures behind an unexplained generic stop. The shared helper now raises typed ValidationError subclasses at the same three guards, preserving their old constant messages. The launcher publishes only allowlisted reason codes, fixed messages and actions; credentials are classified only at the known local validation call. Unknown failures remain redacted."
+  },
+  "format": "buddha.meas02-launch-diagnostics-delivery.v1",
+  "hosted_ci": "Pending exact-head PR/push Windows/Linux checks after publication; local success is separate.",
+  "ignored_evidence_sha256": {
+    "runs/reviews/meas02-launch-diagnostics-audit.log": "e82148c0c30269ca5a2c35420ece6af011a4faf5a375325d750e243ffdb10625",
+    "runs/reviews/meas02-launch-diagnostics-compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/reviews/meas02-launch-diagnostics-discovery.json": "e084dc70091cc3a78117da0569a60ace8ce8e652406161e7606fd3d0482d9fea",
+    "runs/reviews/meas02-launch-diagnostics-focused-final.log": "3726848355d386cd56a0a58055b2f30b178f4b293abdf4a2ba20a5997b07f331",
+    "runs/reviews/meas02-launch-diagnostics-format.log": "d76199cd6e65736dca474f2b8d8a296ab076d89bcfab218ab5d0029cbece4f71",
+    "runs/reviews/meas02-launch-diagnostics-full-suite.log": "a72bca14f9694453dafcd8df059b201e84090cf0663e0aaa38c28ba8acbfbb4d",
+    "runs/reviews/meas02-launch-diagnostics-lint.log": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+    "runs/reviews/meas02-launch-diagnostics-preservation.json": "a098d34cd6075d9018d9d20f8f89618b98cddd85afcecfbbad21f9151f2f9831",
+    "runs/reviews/meas02-launch-diagnostics-red.log": "440a3e6be5406f45d7e569206e47efc6db0094abc3398d56af1b3e34f83df83e",
+    "runs/reviews/meas02-launch-diagnostics-script-security.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/reviews/meas02-launch-diagnostics-security.log": "a3dcb79e137efb4807edad298f69db270aa311697ee0f53e5dbf49e5765b1b01",
+    "runs/reviews/meas02-launch-diagnostics-types.log": "1d0b00ad0473fd5bc2b62278f6fc097727a1561945844ab5bddd02cee1369dc2",
+    "runs/reviews/meas02-relative-launch-diagnostics-red.log": "2119cb59c764f0b92a58239d96a5fd2b8f5503326c8783ce08a2a3c37b1f36ce"
+  },
+  "new_or_changed_live_allocations_by_this_engineering_slice": 0,
+  "preservation": {
+    "application_files": 37,
+    "base_commit": "c5bd91f6985951df72452c75aa63fca236977a05",
+    "changed_application_files": {
+      "buddha/__main__.py": {
+        "after": "17a7af599e4d7b79094b806e01cedb765b560063bbcf82367f59e9f8e04005d7",
+        "before": "749379d618f14efefaef35eddad73720c77ab30f4494d85253fd1a756d969617"
+      }
+    },
+    "checks": {
+      "controller_and_operator_bytes_unchanged": true,
+      "entire_cli_ast_exact_after_only_new_exception_class_and_three_typed_raise_normalizations": true,
+      "handoff_path_operator_configuration_function_asts_exact": [
+        "_configuration",
+        "_operator",
+        "_path"
+      ],
+      "paid_launch_ast_exact_after_only_one_credentials_wrapper_two_typed_catches_one_constant_guard_code_normalization": true
+    },
+    "format": "buddha.meas02-launch-diagnostics-preservation.v1",
+    "helper_script": {
+      "after": "7d2bf9f8f5536fdb82272a373f93e8d95fda503340609e71c93a80965d9f8e47",
+      "before": "c4c325c98ca0433e7ad77a7a86df0defb924a91a38112d54d5597bab527ff2d4",
+      "path": "docs/conformance/meas02-live.py"
+    },
+    "limits": "Static preservation evidence, not execution proof. Only trusted Git/source bytes parsed as AST data; no archived/candidate programs or credentials/grants accessed. Actual primary frozen sources and handoff are not replaced or resealed.",
+    "status": "pass",
+    "unchanged_application_files": 36
+  },
+  "real_provider_calls_by_this_engineering_slice": 0,
+  "scientific_instrument": "Official evaluator, request bodies, partition/scoring algorithms and original outcomes are unchanged. These are startup engineering checks, not new judgments, measurement accuracy or improvement evidence.",
+  "source_sha256": {
+    "buddha/__main__.py": "17a7af599e4d7b79094b806e01cedb765b560063bbcf82367f59e9f8e04005d7",
+    "docs/conformance/meas02-live.py": "7d2bf9f8f5536fdb82272a373f93e8d95fda503340609e71c93a80965d9f8e47",
+    "tests/test_meas02_live_diagnostics.py": "0b30a1c3b2e6eff6d0a1509d1eea171fe28a122421bdbe91545002f654d4384a"
+  },
+  "status": "local acceptance complete; isolated source correction, hosted CI pending",
+  "tests_first": {
+    "focused": {
+      "result": "pass",
+      "scope": "Public terminal/unavailable/invalid/credential/flags/options/redaction/relative-path cases, shared exception identity/messages, environment cleanup and existing-key bypass.",
+      "seconds": 7.701,
+      "skipped": 0,
+      "tests": 8
+    },
+    "generic_input_mask": {
+      "failures": 1,
+      "observed": "Public CLI omitted key_terminal_required for missing key and noninteractive input.",
+      "seconds": 1.086,
+      "tests": 1
+    },
+    "relative_cli": {
+      "failures": 1,
+      "observed": "Public relative-path invocation returned 2 before hidden entry; expected intercepted-entry cancellation 130.",
+      "seconds": 0.76,
+      "tests": 1
+    }
+  },
+  "validation": {
+    "full_suite": {
+      "command": "python -W error::ResourceWarning -m unittest discover -s tests",
+      "exit_code": 0,
+      "seconds": 797.307,
+      "skip_name_method": "Ordered progress markers matched to frozen discovery metadata only if all 1073 align; no tests rerun. Null indicates unavailable exact mapping.",
+      "skip_names": [
+        "test_agent_worker.AgentWorkerTests.test_symlinked_source_is_rejected_even_when_expected_bytes_match",
+        "test_continuation_source.ContinuationSourceTests.test_actual_original_nine_receipts_validate_read_only",
+        "test_history.HistoryTests.test_source_symlink_is_rejected_without_following_it",
+        "test_native_worker.NativeWorkerTests.test_replaced_artifact_root_cannot_export_another_tree",
+        "test_releases.ReleaseSelectionTests.test_symlinked_file_or_parent_is_rejected",
+        "test_search_evidence.SearchEvidenceTests.test_symlink_is_rejected"
+      ],
+      "skip_reasons": "Five Windows symlink-creation privilege limitations and the undistributed original-nine-receipts incident fixture in this isolated checkout; prior primary actual-data proofs remain separate.",
+      "skipped": 6,
+      "tests": 1073
+    },
+    "independent_source_review": "Sibling read-only review passed the exact 17a7/7d2 production pair and eight tests, including path-boundary placement, exception identity, allowlists, credential-call scope, cleanup and secret canaries. No source/test changes by reviewer.",
+    "quality": {
+      "bandit_application_and_launcher": "no issues; existing unused nosec warnings retained",
+      "compileall": "pass",
+      "diff_check": "pass",
+      "ruff_format": "110 files pass",
+      "ruff_lint": "pass",
+      "runtime_pip_audit": "no known vulnerabilities found",
+      "strict_mypy": "38 source files pass on the Windows host"
+    }
+  }
+}
