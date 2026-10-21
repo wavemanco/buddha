@@ -1,0 +1,88 @@
+{
+  "base": "f4668b1663c58a2d3f1f30a69196b108496e1355",
+  "candidate_evidence_sha256": "7901d2a7f3e9a090aa7b6f87491e3c2605c98d21538f6a189a8a96f83dc56964",
+  "candidate_results": [
+    {
+      "exit_code": 1,
+      "loader_errors": 1,
+      "name": "missing API",
+      "scope": "ImportError for absent policy_handoff; initial eleven acceptance methods were written, not behaviorally executed. First logging attempt failed because the ignored log directory was absent; only the subsequent recorded run is claimed.",
+      "seconds": 0.0,
+      "tests": 1
+    },
+    {
+      "exit_code": 1,
+      "fixture_failure": 1,
+      "name": "first functional",
+      "passed": 11,
+      "scope": "The drift injector used the write method blocked by its own passivity spy. It was corrected to use the fixture saved raw opener; no production guard was relaxed.",
+      "seconds": 20.028,
+      "tests": 12
+    },
+    {
+      "exit_code": 1,
+      "failures": 1,
+      "name": "selected-component late drift",
+      "scope": "Mutating selected runner bytes after the initial inventory/profile reads was wrongly accepted. Reused original Selection verification at return closes this genuine behavioral failure.",
+      "seconds": 1.525,
+      "tests": 1
+    },
+    {
+      "exit_code": 0,
+      "name": "final new tests",
+      "resource_warnings": 0,
+      "scope": "Real synthetic Selection/profile/configuration/publication files; no study preparation or execution inside the checker.",
+      "seconds": 27.405,
+      "skips": 0,
+      "tests": 12
+    },
+    {
+      "exit_code": 0,
+      "name": "existing shared regressions",
+      "resource_warnings": 0,
+      "scope": "Twelve original pure panel methods, two original materials public-boundary methods, four original funded authority/task/config preowner methods.",
+      "seconds": 9.611,
+      "skips": 0,
+      "tests": 18
+    }
+  ],
+  "format": "buddha.policy-handoff-config-review.v1",
+  "historical_candidate_limits": [
+    "Configuration consistency only; no execution readiness, authority matching, provider access, current pricing, installed-container or dispatch-capacity proof.",
+    "Synthetic fixture setup creates its own metadata authorities before checking; check_handoff constructs/queries no authority or DB, reads no credentials and writes no file.",
+    "No actual user grant, live study, model outputs, account/profile artifact, provider call, Docker invocation or CLI was used or created.",
+    "No null/dummy execution descriptor is accepted. Actual prepare/run still requires the existing authority path/id/terms/scope.",
+    "Selected profile joins compare declared provider/model/capability/cap and native mappings; this is not every AgentSession/NativeSession constructor or serialized-request check.",
+    "Caller-trusted raw pins establish reviewed identity, not authenticity or publication time. No source/filesystem attestation is claimed.",
+    "Component trees retain existing per-selection inventory/byte ceilings; controls plus handoff remain within the unchanged Gateway 1024-input ceiling.",
+    "No full suite, commit, PR, PLAN, README or conformance artifact was produced by this agent."
+  ],
+  "limitations": [
+    "Configuration consistency only; provider access/pricing, complete executor readiness and real installed containers are not certified.",
+    "The archived full regression is one exact push/Linux job, with five Linux skips; no local Windows full-suite or aggregate/final-head success is inferred.",
+    "Focused cohorts and historical candidate limitations retain their original source pins and execution scope; later operator work is separate.",
+    "Caller-trusted fingerprints establish reviewed bytes, not authenticity or publication time.",
+    "No approved allocation or scientific improvement follows; closed historical grants cannot fund this comparison."
+  ],
+  "logs": {
+    "runs/reviews/pol02-handoff-component-drift-red.log": "612afb6bb3cb9b9bd1cf552b744475858df5f55708b60ec204133349b2b213f6",
+    "runs/reviews/pol02-handoff-first-functional.log": "92456fb339733782d882e74709503d010e308110f6f5ab5a8038f554080be26f",
+    "runs/reviews/pol02-handoff-focused-green.log": "7a1de69de73c1ce4c8a1048ce3ec2aa10d932f4f14d0fbc91b4df5e8515ff039",
+    "runs/reviews/pol02-handoff-missing-api-red.log": "5815f25bc907541d94d188fbe80b981caadd49f06dec475b42716fa91489b269",
+    "runs/reviews/pol02-handoff-shared-regression.log": "48ff6fa5af969c79a70644a5dbfbaa77a7315f4c660b9b51d24789850067c431"
+  },
+  "source_reviews": {
+    "runs/reviews/pol02-handoff-extraction-review.json": "8be0c676a37b6ee54c3dd3c6bb0bdcf1e117a01614dc6c193289b20428043749",
+    "runs/reviews/policy-handoff-independent-source-review.json": "96d42f3fe3869b42aa4ac23f786a4dbd397fe081dbb8357d16b672af5d25d078"
+  },
+  "source_sha256": {
+    "buddha/policy_handoff.py": "541299a67753e03d2fc35864351e0c0e79e3950d8f7fac00427aa3356cd423f1",
+    "buddha/policy_panel.py": "46f0749c64cf973b5251778dbb064fd3d8e47472a5d069b257482f518f9450a0",
+    "buddha/policy_panel_read.py": "444dbc0518ca778c60b675139909763f25f672f05281b9412d8c04b22436e032",
+    "buddha/policy_run.py": "4683eff328dae71d96796712047203f4b58b1ab005fb0228d5807109189343ff"
+  },
+  "status": "configuration-only gate passed",
+  "test_sha256": {
+    "tests/test_policy_handoff.py": "c06d5855e4e3ce26c029206d573bc1141a72414bb627f5f7103505f39dc9b14f"
+  }
+}

@@ -67,6 +67,8 @@ study metadata before answers are inspected; it contains no answer text. Its
 assembles a reviewer packet from anchored original generation, keeping missing
 coverage and provenance private. The [study controller](docs/POLICY-EXECUTION.md)
 also preserves reviewed external file hashes across preparation and recovery.
+The [keyless proposal checker](docs/POLICY-HANDOFF.md) joins original publications,
+selected files and model profiles without creating a run or allocating money.
 Account/runtime checks, approved funding and a
 tested handoff remain open before launch. Actual answers and supplemental
 reviews require real saved generation. The live comparison and human scientific

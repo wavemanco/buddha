@@ -109,3 +109,12 @@ The historical experiments' closed grants supply no new allocation.
 The [cost envelope](POLICY-COMPARISON-COSTS.md) remains a proposal. A protected,
 tested operator handoff is required before providing a live command. Actual
 comparison outputs, blinded reviews and scientific conclusions remain open.
+
+## Validation evidence
+
+The [configuration-only delivery](conformance/pol02-handoff-config-delivery.json)
+and [review](conformance/pol02-handoff-config-review.json) retain the actual
+focused failures/checks and exact source pins. The full hosted Linux regression
+passes 1,302 tests with five skips; local quality checks include both platform
+type checks. Windows and final-commit hosted checks remain separate merge gates.
+These checks do not certify the later protected launcher or a live allocation.
