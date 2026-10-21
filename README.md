@@ -50,7 +50,9 @@ sampling mode sees earlier answers and preserves literal task requirements.
 Fixed policies reuse the native pipeline; legacy search keeps v1. Controlled
 policy comparisons remain open. The [offline comparison structure](docs/POLICY-STUDY.md)
 now checks the four fixed conditions, development-only selection and separate
-generation/judging repetitions; execution, funding and analysis remain open.
+generation/judging repetitions. [Fresh native assessment](docs/NATIVE-EVALUATION.md)
+can judge anchored generated answers again without generating again; a composed
+study controller, actual membership, funding and analysis remain open.
 
 The [source runtime](docs/SOURCE-RUNTIME.md) and [candidate execution boundary](docs/SOURCE-CANDIDATES.md)
 now pass composed isolation, model-channel, accounting and recovery checks.

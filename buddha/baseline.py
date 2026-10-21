@@ -9,11 +9,11 @@ import json
 import os
 from collections.abc import Callable, Iterator
 from contextlib import contextmanager
-from functools import wraps
+from functools import partial, wraps
 from pathlib import Path
-from typing import Any, cast
+from typing import cast
 
-from buddha import agent_run, executor, native_run
+from buddha import agent_run, native_pipeline, native_run
 from buddha.answers import Answers, TaskSet, _id
 from buddha.authorization import Authorization
 from buddha.gateway import (
@@ -24,7 +24,6 @@ from buddha.gateway import (
     prepare_gateway,
 )
 from buddha.releases import (
-    MAX_JSON_BYTES,
     ROLES,
     Release,
     ReleaseError,
@@ -34,16 +33,22 @@ from buddha.releases import (
     _object,
     _pairs,
     _path,
-    _paths,
     _root,
     _text,
     file_hash,
-    inventory,
     verify_selection,
 )
 
 HOST_FILES = tuple(
-    dict.fromkeys((*agent_run.HOST_FILES, *native_run.RUNNER_FILES, "native_run", "baseline"))
+    dict.fromkeys(
+        (
+            *agent_run.HOST_FILES,
+            *native_run.RUNNER_FILES,
+            "native_run",
+            "native_pipeline",
+            "baseline",
+        )
+    )
 )
 
 
@@ -71,11 +76,7 @@ def _sha(value: object) -> str:
 
 
 def _read(path: Path, expected: object = None) -> bytes:
-    digest = file_hash(path, max_bytes=MAX_JSON_BYTES)
-    raw = path.read_bytes()
-    if hashlib.sha256(raw).hexdigest() != digest or (expected is not None and digest != expected):
-        raise BaselineError("baseline input changed while consumed")
-    return raw
+    return native_pipeline._read(path, expected)
 
 
 def _write(path: Path, raw: bytes) -> None:
@@ -153,71 +154,7 @@ def _definition(
     if _absolute(recipe["tasks"]) != _absolute(definition["tasks"]):
         raise BaselineError("generation descriptor names a different TaskSet")
     release = Release.from_record(selected.to_record()["release"])
-    record = release.to_record()
-    artifacts = _object(record["artifacts"])
-    commands = cast(list[dict[str, object]], record["commands"])
-    stages = definition["stages"]
-    if type(stages) is not list or len(stages) != len(commands):
-        raise BaselineError("each configured native command needs one stage")
-    available = {_path(artifacts["answers"])}
-    expected = {*cast(list[str], artifacts["results"]), _path(artifacts["summary"])}
-    produced: set[str] = set()
-    for index, value in enumerate(stages):
-        stage = _object(value, {"inputs", "outputs", "allow_model"})
-        inputs = _paths(stage["inputs"])
-        outputs = stage["outputs"]
-        if (
-            not set(inputs) <= available
-            or type(outputs) is not list
-            or not outputs
-            or type(stage["allow_model"]) is not bool
-            or stage["allow_model"] != (index < len(stages) - 1)
-        ):
-            raise BaselineError("stage flow or final no-model role is invalid")
-        names = []
-        for output in outputs:
-            output = _object(output, {"path", "id_field"})
-            name = _path(output["path"])
-            if output["id_field"] is not None:
-                _text(output["id_field"])
-            elif name != artifacts["summary"]:
-                raise BaselineError("result artifacts require selected-population coverage")
-            names.append(name)
-        _paths(names)
-        if set(names) & available or not set(names) <= expected:
-            raise BaselineError("outputs must be new declared release artifacts")
-        if (artifacts["summary"] in names) != (index == len(stages) - 1):
-            raise BaselineError("the native summary must be the final output")
-        available.update(names)
-        produced.update(names)
-    if produced != expected:
-        raise BaselineError("stage flow omits declared release outputs")
-    _object(native["environment"])
-    _object(native["hooks"], {"modules", "cache", "calls", "sdk"})
-    _object(native["profiles"])
-    runtime = _object(
-        native["executor"],
-        {"image_id", "role", "runner_entrypoint", "image_environment", "limits", "docker_endpoint"},
-    )
-    _, native_roots = _component(native)
-    pairs = runtime["image_environment"]
-    if type(pairs) is not list or any(type(pair) is not list or len(pair) != 2 for pair in pairs):
-        raise BaselineError("invalid native image environment")
-    spec = executor.ContainerSpec(
-        _text(runtime["image_id"]),
-        _text(runtime["role"]),
-        (("/official", native_roots["official"]), ("/runner", native_roots["runner"])),
-        _path(runtime["runner_entrypoint"]),
-        tuple((_text(pair[0]), _text(pair[1])) for pair in pairs),
-    )
-    if spec.role != "evaluator" or spec.runner_entrypoint != "buddha/native_worker.py":
-        raise BaselineError("native baseline requires the bound evaluator worker")
-    executor.Limits(
-        **cast(
-            dict[str, Any], _object(runtime["limits"], set(executor.Limits.__dataclass_fields__))
-        )
-    )
-    executor._local_endpoint(runtime["docker_endpoint"])
+    native_pipeline.validate_native(native, definition["stages"], release)
     return definition, tasks, release
 
 
@@ -324,18 +261,7 @@ def _outputs(
         ):
             raise BaselineError("generation report differs from frozen treatment")
         return {"answers": path}
-    stage = _object(cast(list[object], definition["stages"])[index - 1])
-    outputs = {}
-    for value in cast(list[object], stage["outputs"]):
-        item = _object(value)
-        name = _path(item["path"])
-        path = attempt / "artifacts" / name
-        if file_hash(path) != declared.get(name):
-            raise BaselineError("required native artifact is missing or differs from report")
-        if item["id_field"] is not None:
-            _coverage(path, _text(item["id_field"]), tasks, declared[name])
-        outputs[name] = path
-    return outputs
+    return native_pipeline.native_outputs(attempt, report, index, definition, tasks)
 
 
 @contextmanager
@@ -366,71 +292,9 @@ def _native_descriptor(
     available: dict[str, Path],
     frozen_files: dict[Path, str],
 ) -> tuple[Path, list[Path]]:
-    native = _object(definition["native"])
-    selected, roots = _component(native)
-    flow = _object(cast(list[object], definition["stages"])[index - 1])
-    staging = directory / "staging" / str(index)
-    if not staging.exists():
-        staging.mkdir()
-    _root(staging)
-    inputs = []
-    paths = []
-    for ordinal, name in enumerate(cast(list[str], flow["inputs"])):
-        path = staging / (str(ordinal) + ".bin")
-        _same_or_write(path, _read(available[name], frozen_files[available[name]]))
-        paths.append(path)
-        inputs.append({"source": path.name, "destination": name, "sha256": file_hash(path)})
-    if inventory(staging) != {path.name: file_hash(path) for path in paths}:
-        raise BaselineError("unexpected files in native input staging")
-    command = cast(list[dict[str, object]], release.to_record()["commands"])[index - 1]
-    configured = {
-        "index": index - 1,
-        "module": command["module"],
-        "argv": [
-            "/scratch/artifacts" if argument == "{artifacts}" else argument
-            for argument in cast(list[str], command["argv"])
-        ],
-    }
-    configured["sha256"] = _sha(configured)
-    components = _object(selected.to_record()["components"])
-    record = {
-        "format": "buddha.native-command.v1",
-        "worker": {
-            "type": "configure",
-            "format": "buddha.native-worker.v1",
-            "command": configured,
-            "release_sha256": release.fingerprint(),
-            # This is the exact exported C1 file digest, distinct from its logical
-            # canonical artifact digest and the separately materialized native bytes.
-            "answers_sha256": file_hash(answers),
-            "roots": {
-                "official": "/official",
-                "runner": "/runner",
-                "environment": "/opt/venv",
-                "inputs": "/inputs",
-                "artifacts": "/scratch/artifacts",
-            },
-            "inventories": {
-                "official": components["official"],
-                "runner": components["runner"],
-                "environment": native["environment"],
-            },
-            "inputs": inputs,
-            "hooks": native["hooks"],
-        },
-        "executor": _object(native["executor"])
-        | {
-            "mounts": [
-                ["/official", str(roots["official"])],
-                ["/runner", str(roots["runner"])],
-                ["/inputs", str(staging)],
-            ],
-        },
-        "profiles": native["profiles"] if flow["allow_model"] else {},
-    }
-    descriptor = directory / ("command-" + str(index) + ".json")
-    _same_or_write(descriptor, _json(record))
-    return descriptor, paths
+    return native_pipeline._native_descriptor(
+        directory, index, definition, release, answers, available, frozen_files
+    )
 
 
 @_checked
@@ -441,6 +305,14 @@ def run_baseline(directory: Path, *, transport: RawHTTPTransport) -> dict[str, o
     directory = directory.absolute()
     with _exclusive(directory):
         return _run(directory, transport)
+
+
+def _session(gateway: Gateway, descriptor: Path, index: int, attempt: Path) -> dict[str, object]:
+    return (
+        agent_run.AgentSession(gateway, descriptor=descriptor, output=attempt)
+        if index == 0
+        else native_run.NativeSession(gateway, descriptor=descriptor, output=attempt)
+    ).run()
 
 
 def _run(directory: Path, transport: RawHTTPTransport) -> dict[str, object]:
@@ -539,76 +411,27 @@ def _run(directory: Path, transport: RawHTTPTransport) -> dict[str, object]:
                 owner, transport=RawHTTPTransport(allow_paid=False) if no_model else transport
             )
         )
-        sealed = directory / "completed" / (str(index) + ".json")
-        if sealed.exists():
-            seal_digest = file_hash(sealed)
-            owner_id = _read_manifest(owner)["run_id"]
-            if any(
-                run["run_id"] == owner_id and run["active"]
-                for run in cast(list[dict[str, object]], authority.summary()["runs"])
-            ):
-                raise BaselineError(
-                    "existing completion lacks its authority anchor; interrupted state retained"
-                )
-            authority.deactivate(_text(owner_id), "baseline completed: " + seal_digest)
-            seal = _object(
-                _load(_read(sealed, seal_digest)),
-                {"format", "index", "owner_sha256", "attempt", "files"},
-            )
-            attempt = directory / _path(seal["attempt"])
-            if (
-                seal["format"] != "buddha.baseline-stage.v1"
-                or seal["index"] != index
-                or seal["owner_sha256"] != stage_gateway.manifest_sha256
-                or not attempt.is_relative_to(directory / "attempts")
-                or inventory(attempt) != seal["files"]
-            ):
-                raise BaselineError("completed stage seal or literal outputs changed")
-            report = _load(_read(attempt / "report.json", _object(seal["files"])["report.json"]))
-            outputs = _outputs(attempt, report, index, definition, tasks, bindings)
-            files = cast(dict[str, str], seal["files"])
-        else:
-            ordinal = 0
-            while (directory / "attempts" / f"{index}-{ordinal}").exists():
-                ordinal += 1
-            attempt = directory / "attempts" / f"{index}-{ordinal}"
-            session = (
-                agent_run.AgentSession(stage_gateway, descriptor=descriptor, output=attempt)
-                if index == 0
-                else native_run.NativeSession(stage_gateway, descriptor=descriptor, output=attempt)
-            )
-            report = session.run()
-            if report["status"] != "complete":
-                return {
-                    "format": "buddha.native-baseline-report.v1",
-                    "status": "incomplete",
-                    "stopped_stage": index,
-                    "stages": reports + [report],
-                    "authorization": authority.summary(),
-                    "claim": "incomplete baseline; original owners, attempts and holds retained",
-                }
-            outputs = _outputs(attempt, report, index, definition, tasks, bindings)
-            files = inventory(attempt)
-            if _read(attempt / "report.json", files["report.json"]) != _json(report) + b"\n":
-                raise BaselineError("stored stage report differs from the actual session")
-            for name, artifact_digest in _object(report["artifacts"]).items():
-                relative = name if index == 0 else "artifacts/" + name
-                if files.get(relative) != artifact_digest:
-                    raise BaselineError("stage artifact changed before completion sealing")
-            seal_bytes = _json(
-                {
-                    "format": "buddha.baseline-stage.v1",
-                    "index": index,
-                    "owner_sha256": stage_gateway.manifest_sha256,
-                    "attempt": attempt.relative_to(directory).as_posix(),
-                    "files": files,
-                }
-            )
-            seal_digest = hashlib.sha256(seal_bytes).hexdigest()
-            _write(sealed, seal_bytes)
-        authority.deactivate(
-            _text(_read_manifest(owner)["run_id"]), "baseline completed: " + seal_digest
+        report, outputs, files, sealed, attempt = native_pipeline.execute_stage(
+            directory,
+            index,
+            stage_gateway,
+            authority,
+            run=partial(_session, stage_gateway, descriptor, index),
+            validate=partial(
+                _outputs, index=index, definition=definition, tasks=tasks, bindings=bindings
+            ),
+            read=_read,
         )
+        if sealed is None:
+            return {
+                "format": "buddha.native-baseline-report.v1",
+                "status": "incomplete",
+                "stopped_stage": index,
+                "stages": reports + [report],
+                "authorization": authority.summary(),
+                "claim": "incomplete baseline; original owners, attempts and holds retained",
+            }
+        seal_digest = file_hash(sealed)
         frozen_files.update({attempt / name: digest for name, digest in files.items()})
         frozen_files[sealed] = seal_digest
         if index == 0:
@@ -637,5 +460,12 @@ def _run(directory: Path, transport: RawHTTPTransport) -> dict[str, object]:
         "authorization": authority.summary(),
         "claim": "complete selected native baseline; no optimizer projection or improvement claim",
     }
-    _same_or_write(directory / "report.json", _json(result))
-    return result
+    return native_pipeline.publish_complete(
+        directory / "report.json",
+        result,
+        authority,
+        {
+            _text(_read_manifest(directory / "owners" / str(index))["run_id"])
+            for index in range(len(reports))
+        },
+    )

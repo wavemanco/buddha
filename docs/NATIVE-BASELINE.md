@@ -32,7 +32,7 @@ must agree on the Release and frozen agent identity, while retaining separate
 runner/environment identities. Field names, answer count, module paths, CLI
 arguments, artifact paths and hooks are data supplied by the selected driver.
 This implementation supports the existing text/Python/JSONL capability envelope
-and a separate final native summary command. Unsupported outer capabilities
+and a final native command that emits the summary. Unsupported outer capabilities
 remain explicit compatibility failures, not silent instrument changes.
 
 ## Exact inputs and ordered stages
@@ -80,6 +80,15 @@ completion in the shared authorization record.
 | `native-answers.jsonl` | Exact source-derived native generation rows. |
 | `staging/<stage>` | Only the configured input files mounted into that native stage. Opaque host source filenames map to declared native destination paths. |
 | `report.json` | Published after the entire selected baseline succeeds. References native summary bytes and distinct stage evidence; makes no optimization or improvement claim. |
+
+The prospective baseline now shares stage validation, sealing and publication
+with the [evaluation-only route](NATIVE-EVALUATION.md). The original baseline
+delivery and old executing source pins remain historical. A completed report
+retains its original accounting snapshot when other owners legitimately advance
+the shared authorization; replay validates its own result and current authority
+without rewriting that observation. This fixes a reproduced no-cost replay
+failure after a second baseline completed on the same grant. The shared snapshot
+check establishes consistency, not the historical capture time of that snapshot.
 
 Recovery reopens each existing owner and validates completed stages. An
 interrupted stage rebuilds its output through a fresh attempt, reusing already

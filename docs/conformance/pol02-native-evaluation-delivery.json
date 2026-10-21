@@ -1,0 +1,200 @@
+{
+  "findings": [
+    {
+      "basis": "actual old-baseline RED",
+      "fix": "preserve compatible original snapshot while reconstructing its scientific/stage evidence",
+      "id": "POL2-E1",
+      "issue": "completed baseline replay failed after legitimate shared-grant advances"
+    },
+    {
+      "basis": "source review then runnable regression; no spending escape observed",
+      "fix": "final-stage priority plus empty profiles",
+      "id": "POL2-E2",
+      "issue": "first-and-final native command missed second payment-disabled transport guard"
+    },
+    {
+      "basis": "actual RED before new owner; exact schema restored",
+      "fix": "strict nonhistorical original runtime identity equality",
+      "id": "POL2-E3",
+      "issue": "source stored authority runtime not joined to original manifest"
+    },
+    {
+      "basis": "actual RED bool-index/anchor conflict",
+      "fix": "typed invalid-evidence error without invented attempt/result",
+      "id": "POL2-E4",
+      "issue": "changed completed seal misreported as authority stop"
+    },
+    {
+      "basis": "actual RED after received reply",
+      "fix": "protocol observation with actual attempt then typed error",
+      "id": "POL2-E5",
+      "issue": "paid native coverage failure lacked durable incomplete observation"
+    },
+    {
+      "basis": "source review then bounded consumption regression; no allocation bomb executed",
+      "fix": "capped actual read and consumed-byte hash validation",
+      "id": "POL2-E6",
+      "issue": "bounded hash followed by unbounded growing-file read"
+    },
+    {
+      "basis": "independent32-case probe and actual public-API RED",
+      "fix": "necessary creation-plus-known-owner event minimum; no timestamp authentication claim",
+      "id": "POL2-E7",
+      "issue": "impossible zero historical event count accepted with known owners"
+    }
+  ],
+  "format": "buddha.pol02-native-evaluation-delivery.v1",
+  "limits": [
+    "trusted host/filesystem/local daemon and sealed images",
+    "original baseline-format producer only; original accounting/data still required",
+    "same C1 release; no silent release/schema relabeling",
+    "compatible top-level authorization observation does not authenticate capture time",
+    "opaque summary does not establish complete valid scientific metrics",
+    "actual study membership, instrument, cost/allocation, supplemental review and analysis remain open",
+    "cooperative interruption proof; no arbitrary hard-kill/disk-failure journaling guarantee"
+  ],
+  "plan_item": "POL-02 prerequisite only; seven open leaves and POL-02 sole Next",
+  "preservation": {
+    "financial_schema_official_worker_fixed_seed_dependencies_changed": false,
+    "historical_delivery_records_changed": false,
+    "historical_revision_rows_exact": 39,
+    "intentional_prospective_baseline_revision": true,
+    "original_live_handoff_pins_exact": 45,
+    "other_existing_application_and_agent_files_exact": 40,
+    "primary_checkout_changed": "PLAN documentation mirror only; executable sources and branch retained"
+  },
+  "real_keys_used": false,
+  "real_provider_calls": 0,
+  "recorded_utc": "2026-10-21T07:25:44.394541+00:00",
+  "scope": {
+    "actual_study_or_scientific_result": false,
+    "benchmark_specific_algorithm_added": false,
+    "fresh_native_judging_from_anchored_c1": true,
+    "native_partition_quality_summary": "own complete occasion, unchanged selected commands",
+    "new_funding": false,
+    "new_paid_cli": false,
+    "original_producer_execution": false,
+    "same_owner_recovery": true
+  },
+  "source_sha256": {
+    "README.md": "1f9783681f42a69240d772130b66c9a7154620829f648a1b06b3961094907719",
+    "buddha/baseline.py": "98b6970e1fd2d086d1723656fbd92931ce2f94e77ff68cfc73e06105c6c2e52a",
+    "buddha/native_evaluation.py": "86f242fa70f9bf830ab3ca09b311ec110ea18a1a86bcaf1f942f6c3ebefb3d5f",
+    "buddha/native_pipeline.py": "9a9d91f28734eeb59564499fe49169e8218da6870b2156cea6838dea44573f49",
+    "docs/NATIVE-BASELINE.md": "27f8d06016b6178254eac98f3a4e4dc93f653df6f951da70135dea240b7378f5",
+    "docs/NATIVE-EVALUATION.md": "99b5fdec65747bfd8cd6df13a4f176a82e9adfead97eaea9c27d2ab1711cecce",
+    "docs/PLAN.md": "30966da40d490b92896376942cd17df32b4f6c657d9f4f5ac874cc6e0da46fe9",
+    "docs/POLICY-STUDY.md": "096e8120d42eaac8abdd6f64317caf0215632ccc98b16e1263e965fb4e96aee3",
+    "tests/test_baseline.py": "91a39902bafe15bf054145de6d85e2faf595f8e62b0ecc18ca6f5387dabf9896",
+    "tests/test_native_evaluation.py": "6065e56b92cdf318f147a3d0b90a0545c5e7a86b2439b8c23fa6f6e8ddc3fb1e"
+  },
+  "status": "offline engineering checks complete; new hosted CI pending publication",
+  "validation": {
+    "actual_native": {
+      "actual_new_judge_measurements": false,
+      "baseline_native_sends": 6,
+      "distinct_inactive_owners": 10,
+      "evidence": "pol02-native-evaluation-evidence.json",
+      "fresh_judging_sends": 12,
+      "generation_sends": 20,
+      "held_microusd": 0,
+      "keyless_replay_new_workers_and_sends": 0,
+      "oracles": "new routes compare literal native artifact families and scientific request-body multisets with the composed baseline; broad existing differential source unchanged; no new direct oracle rerun",
+      "sha256": "cc516123735161bcd211794fb40cdf29f5fbcc3b3fae3b32f188a6b819b72575",
+      "shared_synthetic_spent_microusd": 310,
+      "synthetic_physical_sends": 38
+    },
+    "closing_independent_review": {
+      "current_markdown_links_verified": 177,
+      "current_source_doc_pins_verified": 10,
+      "evidence_and_financial_arithmetic_verified": true,
+      "full_suite_terminal_verified": 1154,
+      "prior_revision_rows_exact": 39,
+      "status": "pass; no material correction"
+    },
+    "focused_baseline": {
+      "resource_warnings": "errors",
+      "scope": "functional extraction; subsequent LF-only normalization and minimal publication floor covered by final full suite",
+      "seconds": 121.466,
+      "skips": 0,
+      "tests": 19
+    },
+    "focused_evaluation": {
+      "log_sha256": "ec59ddce22cd9434fa4e14630961ca13c57a48a66ad190373f54e7362a1d947e",
+      "resource_warnings": "errors",
+      "seconds": 112.158,
+      "skips": 0,
+      "tests": 14
+    },
+    "full": {
+      "log_sha256": "14e7505d94bcb8f0589991986801a366e917d48358d99db11519d50b84b8efcf",
+      "process": {
+        "exit_code": 0,
+        "finished_utc": "2026-10-21T07:21:20.7355356Z",
+        "started_utc": "2026-10-21T07:04:32.1564024Z"
+      },
+      "resource_warnings": "errors",
+      "retained_diagnostics": [
+        "expected RuntimeWarning from diagnostics failure fixture",
+        "asyncio 0.134 second slow-task diagnostic"
+      ],
+      "seconds": 1008.114,
+      "skip_scope": "existing local platform/privilege/private-history skips; new focused checks have none",
+      "skips": 10,
+      "tests": 1154
+    },
+    "independent_review_and_retirement": {
+      "evidence": "pol02-native-evaluation-review.json",
+      "guide_core_reviewed": "final guide and appended actual-proof paragraph independently reviewed after terminal native/full evidence",
+      "mock_native_sends": 2,
+      "original_data_config_owner_files_exact": 39,
+      "original_gateway_or_generation_constructors": 0,
+      "retired_program_trees": 7,
+      "sha256": "67c966c74ec7c2006dcc3512024e319621f4eb073ddb6c06c2d388d53e9cc9c5",
+      "source_files_exact": 46,
+      "two_isolated_processes": true
+    },
+    "interrupted_full_attempt": {
+      "log_sha256": "5ae7220240eae76585969b0b01a94acc4acc4c8d3a117da48950e39ec4753231",
+      "process_exit_code": 1,
+      "reason": "independent actual probe accepted impossible saved event_count=0; new source guard and regression required",
+      "status": "interrupted_for_reproduced_publication_consistency_defect",
+      "stopped_utc": "2026-10-21T07:03:18.087863+00:00",
+      "test_result": "not a pass; no completed full-suite claim"
+    },
+    "new_hosted_ci": "pending; no rerun/skip/bypass or green claim",
+    "predecessor_hosted_ci": [
+      {
+        "pr": "https://github.com/wavemanco/buddha/pull/37",
+        "receipt": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-runtime-pr37-green-ci.json",
+        "scope": "exact-head four Linux/Windows checks passed and normal merge; raw receipt retained",
+        "sha256": "75c2a2f89f0cc079e5f36abb8b1f87e954475b4263cd176e3e893527956b149e"
+      },
+      {
+        "pr": "https://github.com/wavemanco/buddha/pull/38",
+        "receipt": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src01-candidate-pr38-green-ci.json",
+        "scope": "exact-head four Linux/Windows checks passed and normal merge; raw receipt retained",
+        "sha256": "b0038701fe834416159348302bf10041068974194c5c53696577dc46a8d88457"
+      },
+      {
+        "pr": "https://github.com/wavemanco/buddha/pull/39",
+        "receipt": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-pr39-green-ci.json",
+        "scope": "exact-head four Linux/Windows checks passed and normal merge; raw receipt retained",
+        "sha256": "7a5ce5db652c5778ac90b4a2919dfd8fad3bbc99f7400de5a0660cc150959e48"
+      }
+    ],
+    "publication_adversarial": {
+      "accepted_valid_original_snapshot": 1,
+      "cases": 32,
+      "new_sends_or_publisher_writes": 0,
+      "rejected_malformed": 31
+    },
+    "quality": {
+      "bandit": "zero findings; existing nosec diagnostics retained",
+      "compileall": "pass",
+      "mypy": "strict pass;43 files; changed modules also Linux and win32 targeted",
+      "ruff": "lint and formatting pass;120 files",
+      "runtime_dependency_audit": "unchanged empty runtime requirements; zero known vulnerabilities"
+    }
+  }
+}
