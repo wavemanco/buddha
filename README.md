@@ -52,7 +52,9 @@ policy comparisons remain open. The [offline comparison structure](docs/POLICY-S
 now checks the four fixed conditions, development-only selection and separate
 generation/judging repetitions. [Fresh native assessment](docs/NATIVE-EVALUATION.md)
 can judge anchored generated answers again without generating again; a composed
-study controller, actual membership, funding and analysis remain open.
+[study controller](docs/POLICY-EXECUTION.md) now passes its offline engineering
+gate, including the full eight-cell actual-container schedule and keyless replay.
+Actual membership, funding, analysis and the live comparison remain open.
 
 The [source runtime](docs/SOURCE-RUNTIME.md) and [candidate execution boundary](docs/SOURCE-CANDIDATES.md)
 now pass composed isolation, model-channel, accounting and recovery checks.
@@ -84,19 +86,13 @@ to use installation, configuration and checks before running the same frozen
 agent; [the modularity contract](docs/BENCHMARK-INTEGRATION.md) states the exact
 capability limits and the bounded upgrade/retirement evidence.
 
-The prepared study launcher requires an explicit live flag, a reviewed account
-profile and an existing active allocation before unfinished work can run. The
-user has now approved a separate **$15 / 120-attempt judge audit**, allowing a
-partial result with its reason recorded. At preparation, its allocation had zero
-calls and passed local key-binding checks after 1,025 local tests and confined
-native proofs. The original audit has since completed with verified saved
-accounting and four completion anchors: 40 attempts, $0.032213 recorded cost
-and zero held. [The results](docs/MEASUREMENT-LIVE-RESULTS.md) retain judge
-variability and broader scientific limits. No further audit command is needed. The
-original $50 experiment
-remains closed, with its unknown-request hold preserved. See the
-[approved audit handoff](docs/MEASUREMENT-JUDGE-AUDIT.md#approved-15-live-audit). [API key guidance](docs/API-KEYS.md) explains process-only
-key entry; never paste keys into chat or commit them.
+The completed judge audit used a separate **$15 / 120-attempt allocation**:
+40 attempts, $0.032213 recorded cost and zero held.
+[Its results](docs/MEASUREMENT-LIVE-RESULTS.md) retain judge variability and
+broader scientific limits. Both historical experiment allowances are closed;
+the original unknown-request hold remains preserved. A new comparison needs
+its own reviewed allocation and handoff. [API key guidance](docs/API-KEYS.md)
+explains hidden local key entry; never paste keys into chat or commit them.
 
 Slice-specific commits and PRs are maintained in
 [wavemanco/buddha](https://github.com/wavemanco/buddha). See the

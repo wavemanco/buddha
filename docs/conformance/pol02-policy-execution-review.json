@@ -1,0 +1,1378 @@
+{
+  "accepted_findings": [
+    {
+      "basis": "new API unsupported-argument RED then propagation checks",
+      "id": "POL2-X1",
+      "issue": "supplemental original controls omitted from later owners"
+    },
+    {
+      "basis": "baseline5 vs4 and fresh evaluation2 vs1 mocked sends",
+      "id": "POL2-X2",
+      "issue": "later native stage could adopt changed control bytes before drift detection"
+    },
+    {
+      "basis": "14 vs8 mocked sends before root drift detection",
+      "id": "POL2-X3",
+      "issue": "later cell first owner could adopt changed original study bytes"
+    },
+    {
+      "basis": "three later retained calls then three new earlier calls,6 vs3",
+      "id": "POL2-X4",
+      "issue": "retained later work accepted after an unfinished execution prefix"
+    },
+    {
+      "basis": "reserved amount0 changed toFalse and fresh partition sent,7 vs6",
+      "id": "POL2-X5",
+      "issue": "child report handoff used Python bool/int equality"
+    },
+    {
+      "basis": "64 mocked calls and root report written despite changed prior file",
+      "id": "POL2-X6",
+      "issue": "prior child report changed after capture could enter a complete study publication"
+    },
+    {
+      "basis": "actual public publisher failed to reject nested arm_index0 changed toFalse",
+      "id": "POL2-X7",
+      "issue": "shared complete replay accepted boolean substitution outside authorization fields"
+    },
+    {
+      "basis": "focused15 had14pass and1reason failure; actual exact-owner/local-shared corroboration; final targeted unknown regression passes with original holds/owners/call counts",
+      "id": "POL2-X8",
+      "issue": "new study diagnostic retained only the immediate broad authority stop when the same stopped owner still had an unknown operation",
+      "scope": "new top-level passive diagnostic only; original native reason, financial guards and worker contract preserved"
+    }
+  ],
+  "format": "buddha.pol02-policy-execution-review.v1",
+  "full_suite": {
+    "diagnostics_retained": [
+      "existing native-worker asyncio0.144second slow-task message",
+      "expected diagnostic-save RuntimeWarning fixture"
+    ],
+    "existing_local_skips": 10,
+    "exit_code": 0,
+    "log_sha256": "2ebc1557aa732a3f62df1f1c5d407eab8f8aebee3379217a7eac627e03b99d96",
+    "resource_warnings": "errors",
+    "seconds": 1378.427,
+    "tail": "as made.\r\n............................................s.............................................................................................................................................................................................................................................................s.......................................................................................................................................................................................................................................................................................................................s.Executing <Task finished name='Task-231' coro=<NativeWorkerTests.test_script_startup_creates_scratch_and_resets_safe_environment() done, defined at C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-execution\\tests\\test_native_worker.py:747> result=None created at C:\\Program Files\\Python313\\Lib\\asyncio\\runners.py:100> took 0.144 seconds\r\n.........................................................................................................................................................................s..................................................................s..........................................ss.ss.........C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-execution\\buddha\\diagnostics.py:277: RuntimeWarning: diagnostic outcome could not be saved\r\n  outcome(\"response_received\", None)\r\n........................................\r\n----------------------------------------------------------------------\r\nRan 1173 tests in 1378.427s\r\n\r\nOK (skipped=10)\r\n",
+    "tests": 1173
+  },
+  "native_investigation": {
+    "actual_provider_calls": 0,
+    "actual_success_claim": "All8cells/16occasions,256mockedsends,56inactiveowners,64successfulremovedworkers; complete keyless replay adds0workers/sends/accountingwrites or persistentreport/controlchanges; transientwriterlocks remain.",
+    "current_full_probe": {
+      "cells": 8,
+      "fixture": "C:\\Users\\arvik\\code\\buddha\\runs\\pol02-full-lrkc7kg5",
+      "mock_cap": 300,
+      "occasions": 16,
+      "script_sha256": "ac2504bc1cbdedcdef4c787aad4f03fb9b736bad32c07b7718966d36eee005b7",
+      "status": "passed"
+    },
+    "full_evidence": {
+      "bytes": 669114,
+      "path": "pol02-policy-execution-native-evidence.json",
+      "sha256": "8146a6d92e73f5256b892d75f0f36b740951be1fb4f896efb7fd0fdbd6e829a2"
+    },
+    "observed": "NativeWorker.prepare encounters EIO at original direct /inputs bind before readiness/official imports/model requests. Same pinned runtime/source/config prepares with baseline bind and parent-bind reader. No guard/code/permissions changed. Exactly one original-route recovery after the parent canary remains not_proved with zero new sends. A separate same-layout short-location prepare passes; no root-cause or original-repair claim.",
+    "retained_artifacts": {
+      "pol02-short-location-prepare-diagnostic.json": {
+        "bytes": 4231,
+        "observed_status": null,
+        "record_format": "buddha.native-preparation-only-diagnostic.v1",
+        "retained": true,
+        "sha256": "56155737ea2c6a98aa22efe4649843ce3cc86c7bc8c38555fde662c2907a772f"
+      },
+      "pol02-study-baseline-prepare-diagnostic.json": {
+        "bytes": 3523,
+        "observed_status": null,
+        "record_format": "buddha.native-preparation-only-diagnostic.v1",
+        "retained": true,
+        "sha256": "3a9603f27b914e4437dc107c82ddfb14afdc004a4997a3d9a9948c092020d2b3"
+      },
+      "pol02-study-native-diagnostic.json": {
+        "bytes": 19752,
+        "observed_status": "incomplete",
+        "record_format": "buddha.original-native-owner-diagnostic.v1",
+        "retained": true,
+        "sha256": "7d87640f3b964658a9c472efc575005bb38a2b929e16f9ef75ee028a8e140a72"
+      },
+      "pol02-study-native-diagnostic2.json": {
+        "bytes": 21114,
+        "observed_status": "incomplete",
+        "record_format": "buddha.original-native-owner-diagnostic.v1",
+        "retained": true,
+        "sha256": "eac39c7873158afeddc70947e2cad2167819443e8860629b3852cae523846081"
+      },
+      "pol02-study-native-infrastructure-review.json": {
+        "bytes": 14020,
+        "observed_status": "not_proved",
+        "record_format": "buddha.policy-native-infrastructure-observation.v1",
+        "retained": true,
+        "sha256": "1d3ceacd36844fe101b70f85bcb4b19fbf44fabfda98eac124571f1450989535"
+      },
+      "pol02-study-native-proof.json": {
+        "bytes": 12409,
+        "observed_status": "failed",
+        "record_format": "buddha.policy-study-native-prefix-proof.v1",
+        "retained": true,
+        "sha256": "de719fc6599f15cf65a3ddd78ceb46ccab99d2d283a5288e1cfe06049915c610"
+      },
+      "pol02-study-native-recovery-proof.json": {
+        "bytes": 27674,
+        "observed_status": "not_proved",
+        "record_format": "buddha.policy-study-native-recovery-proof.v1",
+        "retained": true,
+        "sha256": "904d57926cb291ed9779823e14d7dd4175b80a3e5d98a84499a8e102a2f267fd"
+      },
+      "pol02-study-prepare-diagnostic2.json": {
+        "bytes": 4824,
+        "observed_status": null,
+        "record_format": "buddha.native-preparation-only-diagnostic.v1",
+        "retained": true,
+        "sha256": "c1e424e1d685004def40ebaffe30db3e42d7f00d65bf263366c26d9b210336c2"
+      }
+    },
+    "status": "Original failed route remains not_proved; separate full8 actual-native study passes at tested location."
+  },
+  "original_test_methods": {
+    "tests\\test_baseline.py": {
+      "changed_original_methods": [],
+      "new_methods": [
+        "BaselineTests.test_additional_control_inputs_are_bound_to_every_generation_and_native_owner",
+        "BaselineTests.test_changed_external_control_cannot_be_adopted_when_a_later_owner_is_bound"
+      ],
+      "original_methods": 27
+    },
+    "tests\\test_native_evaluation.py": {
+      "changed_original_methods": [],
+      "new_methods": [
+        "NativeEvaluationTests.test_additional_study_controls_are_bound_to_every_native_owner",
+        "NativeEvaluationTests.test_changed_control_cannot_be_adopted_while_preparing_a_later_judging_owner"
+      ],
+      "original_methods": 22
+    }
+  },
+  "raw_reds": {
+    "pol02-bound-control-inputs-red.log": {
+      "bytes": 2311,
+      "sha256": "8469b47e3cc93b677d67a8efc333aa429aba554afcaa631d18c5f9d67826edee",
+      "text": "EE\r\n======================================================================\r\nERROR: test_additional_control_inputs_are_bound_to_every_generation_and_native_owner (test_baseline.BaselineTests.test_additional_control_inputs_are_bound_to_every_generation_and_native_owner)\r\n----------------------------------------------------------------------\r\nTraceback (most recent call last):\r\n  File \"C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-execution\\tests\\test_baseline.py\", line 349, in test_additional_control_inputs_are_bound_to_every_generation_and_native_owner\r\n    prepare_baseline(\r\n    ~~~~~~~~~~~~~~~~^\r\n        self.directory,\r\n        ^^^^^^^^^^^^^^^\r\n    ...<3 lines>...\r\n        input_files=(control,),\r\n        ^^^^^^^^^^^^^^^^^^^^^^^\r\n    )\r\n    ^\r\n  File \"C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-execution\\buddha\\baseline.py\", line 67, in checked\r\n    raise BaselineError(\r\n        \"baseline configuration or evidence is invalid; original state retained\"\r\n    ) from None\r\nbuddha.baseline.BaselineError: baseline configuration or evidence is invalid; original state retained\r\n\r\n======================================================================\r\nERROR: test_additional_study_controls_are_bound_to_every_native_owner (test_native_evaluation.NativeEvaluationTests.test_additional_study_controls_are_bound_to_every_native_owner)\r\n----------------------------------------------------------------------\r\nTraceback (most recent call last):\r\n  File \"C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-execution\\tests\\test_native_evaluation.py\", line 114, in test_additional_study_controls_are_bound_to_every_native_owner\r\n    prepare_evaluation(\r\n    ~~~~~~~~~~~~~~~~~~^\r\n        self.directory,\r\n        ^^^^^^^^^^^^^^^\r\n    ...<3 lines>...\r\n        input_files=(control,),\r\n        ^^^^^^^^^^^^^^^^^^^^^^^\r\n    )\r\n    ^\r\n  File \"C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-execution\\buddha\\native_evaluation.py\", line 58, in checked\r\n    raise EvaluationError(\r\n        \"native evaluation evidence is invalid; original state retained\"\r\n    ) from None\r\nbuddha.native_evaluation.EvaluationError: native evaluation evidence is invalid; original state retained\r\n\r\n----------------------------------------------------------------------\r\nRan 2 tests in 6.352s\r\n\r\nFAILED (errors=2)\r\n"
+    },
+    "pol02-child-report-type-red.log": {
+      "bytes": 798,
+      "sha256": "8c13285c7e9523f49a4b3f964af21e2b8ce430da8609d41019ce7c7f3b25ba1c",
+      "text": "F\r\n======================================================================\r\nFAIL: test_child_report_typed_amount_change_is_rejected_before_fresh_judging (test_policy_run.PolicyRunTests.test_child_report_typed_amount_change_is_rejected_before_fresh_judging)\r\n----------------------------------------------------------------------\r\nTraceback (most recent call last):\r\n  File \"C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-execution\\tests\\test_policy_run.py\", line 302, in test_child_report_typed_amount_change_is_rejected_before_fresh_judging\r\n    self.assertEqual(self.fixture.physical_sends, 6)\r\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nAssertionError: 7 != 6\r\n\r\n----------------------------------------------------------------------\r\nRan 1 test in 8.537s\r\n\r\nFAILED (failures=1)\r\n"
+    },
+    "pol02-control-rebinding-race-red.log": {
+      "bytes": 1552,
+      "sha256": "255e927b0932fc1dbf6d249c9865eae67f7c52ca1ddfcd505ea3849c584604bd",
+      "text": "FF\r\n======================================================================\r\nFAIL: test_changed_external_control_cannot_be_adopted_when_a_later_owner_is_bound (test_baseline.BaselineTests.test_changed_external_control_cannot_be_adopted_when_a_later_owner_is_bound)\r\n----------------------------------------------------------------------\r\nTraceback (most recent call last):\r\n  File \"C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-execution\\tests\\test_baseline.py\", line 396, in test_changed_external_control_cannot_be_adopted_when_a_later_owner_is_bound\r\n    self.assertEqual(self.physical_sends, 4)\r\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\r\nAssertionError: 5 != 4\r\n\r\n======================================================================\r\nFAIL: test_changed_control_cannot_be_adopted_while_preparing_a_later_judging_owner (test_native_evaluation.NativeEvaluationTests.test_changed_control_cannot_be_adopted_while_preparing_a_later_judging_owner)\r\n----------------------------------------------------------------------\r\nTraceback (most recent call last):\r\n  File \"C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-execution\\tests\\test_native_evaluation.py\", line 135, in test_changed_control_cannot_be_adopted_while_preparing_a_later_judging_owner\r\n    self.assertEqual(self.fixture.physical_sends - self.before_sends, 1)\r\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nAssertionError: 2 != 1\r\n\r\n----------------------------------------------------------------------\r\nRan 2 tests in 11.789s\r\n\r\nFAILED (failures=2)\r\n"
+    },
+    "pol02-cross-child-controls-red.log": {
+      "bytes": 770,
+      "sha256": "87bdb429a94434879249f8e5e2fbd0d02a1d128cdacdab2a63148be30b8e6dce",
+      "text": "F\r\n======================================================================\r\nFAIL: test_later_cell_cannot_adopt_changed_original_study_controls (test_policy_run.PolicyRunTests.test_later_cell_cannot_adopt_changed_original_study_controls)\r\n----------------------------------------------------------------------\r\nTraceback (most recent call last):\r\n  File \"C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-execution\\tests\\test_policy_run.py\", line 276, in test_later_cell_cannot_adopt_changed_original_study_controls\r\n    self.assertEqual(self.fixture.physical_sends, 8)\r\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nAssertionError: 14 != 8\r\n\r\n----------------------------------------------------------------------\r\nRan 1 test in 16.509s\r\n\r\nFAILED (failures=1)\r\n"
+    },
+    "pol02-policy-run-missing-module-red.log": {
+      "bytes": 962,
+      "sha256": "3377ed0e56733f71f9dba1f20b13f8e1034fdb3b9b540d653ebf79cc5f710e6f",
+      "text": "E\r\n======================================================================\r\nERROR: test_policy_run (unittest.loader._FailedTest.test_policy_run)\r\n----------------------------------------------------------------------\r\nImportError: Failed to import test module: test_policy_run\r\nTraceback (most recent call last):\r\n  File \"C:\\Program Files\\Python313\\Lib\\unittest\\loader.py\", line 396, in _find_test_path\r\n    module = self._get_module_from_name(name)\r\n  File \"C:\\Program Files\\Python313\\Lib\\unittest\\loader.py\", line 339, in _get_module_from_name\r\n    __import__(name)\r\n    ~~~~~~~~~~^^^^^^\r\n  File \"C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-execution\\tests\\test_policy_run.py\", line 12, in <module>\r\n    from buddha.policy_run import PolicyRunError, prepare_study, run_study\r\nModuleNotFoundError: No module named 'buddha.policy_run'\r\n\r\n\r\n----------------------------------------------------------------------\r\nRan 1 test in 0.000s\r\n\r\nFAILED (errors=1)\r\n"
+    },
+    "pol02-prior-child-publication-red.log": {
+      "bytes": 808,
+      "sha256": "b8e7ebc1eddf3f8f9f931eb433978e31b25505009a994e8ca35f0008ecb8c414",
+      "text": "F\r\n======================================================================\r\nFAIL: test_changed_prior_child_report_blocks_final_study_publication (test_policy_run.PolicyRunTests.test_changed_prior_child_report_blocks_final_study_publication)\r\n----------------------------------------------------------------------\r\nTraceback (most recent call last):\r\n  File \"C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-execution\\tests\\test_policy_run.py\", line 328, in test_changed_prior_child_report_blocks_final_study_publication\r\n    self.assertFalse((self.directory / \"report.json\").exists())\r\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nAssertionError: True is not false\r\n\r\n----------------------------------------------------------------------\r\nRan 1 test in 81.428s\r\n\r\nFAILED (failures=1)\r\n"
+    },
+    "pol02-retained-execution-prefix-red.log": {
+      "bytes": 798,
+      "sha256": "c335128f7299d5401421ba2e2e42c8b9fbad193304187f6a88d1359885c3d358",
+      "text": "F\r\n======================================================================\r\nFAIL: test_retained_future_work_cannot_skip_an_incomplete_execution_prefix (test_policy_run.PolicyRunTests.test_retained_future_work_cannot_skip_an_incomplete_execution_prefix)\r\n----------------------------------------------------------------------\r\nTraceback (most recent call last):\r\n  File \"C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-execution\\tests\\test_policy_run.py\", line 323, in test_retained_future_work_cannot_skip_an_incomplete_execution_prefix\r\n    self.assertEqual(self.fixture.physical_sends, sent)\r\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nAssertionError: 6 != 3\r\n\r\n----------------------------------------------------------------------\r\nRan 1 test in 6.261s\r\n\r\nFAILED (failures=1)\r\n"
+    },
+    "pol02-shared-publication-type-red.log": {
+      "bytes": 815,
+      "sha256": "f813b9dd5142b1ac57233cd5f50c6e8db2ec925ff561cb3aa252553679378db2",
+      "text": "F\r\n======================================================================\r\nFAIL: test_replay_rejects_boolean_substitution_in_original_nonfinancial_payload (test_native_pipeline.PublicationTests.test_replay_rejects_boolean_substitution_in_original_nonfinancial_payload)\r\n----------------------------------------------------------------------\r\nTraceback (most recent call last):\r\n  File \"C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-execution\\tests\\test_native_pipeline.py\", line 30, in test_replay_rejects_boolean_substitution_in_original_nonfinancial_payload\r\n    with self.assertRaises(PipelineError):\r\n         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^\r\nAssertionError: PipelineError not raised\r\n\r\n----------------------------------------------------------------------\r\nRan 1 test in 0.030s\r\n\r\nFAILED (failures=1)\r\n"
+    }
+  },
+  "real_keys_used": false,
+  "real_provider_calls": 0,
+  "recorded_utc": "2026-10-21T12:54:33.248082+00:00",
+  "review_correction": {
+    "accepted_as_defect": false,
+    "initial_stricter_probe": "pol02-schedule-prefix-red.log",
+    "reason": "Zero-operation future preparation is not execution; refined test requires actual retained work. No accepted zero-operation ban was weakened."
+  },
+  "review_records": {
+    "pol02-policy-execution-closing-record.json": {
+      "bytes": 37989,
+      "record": {
+        "base_commit": "5c8460acd711d6ce0b879a5378b61e1b66cdddbd",
+        "existing_application_preservation": {
+          "base_python_files": 43,
+          "deliberately_changed_existing_files": {
+            "buddha/baseline.py": {
+              "base_sha256": "98b6970e1fd2d086d1723656fbd92931ce2f94e77ff68cfc73e06105c6c2e52a",
+              "byte_identical": false,
+              "current_sha256": "13661931c95b676d95c724fba1e3db490a4a0c4374adec1e8ee4d1193579ca4a"
+            },
+            "buddha/native_evaluation.py": {
+              "base_sha256": "86f242fa70f9bf830ab3ca09b311ec110ea18a1a86bcaf1f942f6c3ebefb3d5f",
+              "byte_identical": false,
+              "current_sha256": "79f726146de257ce801d8cf9aa273a58fb154b6f66fa6570b6ed29b008d780ab"
+            },
+            "buddha/native_pipeline.py": {
+              "base_sha256": "9a9d91f28734eeb59564499fe49169e8218da6870b2156cea6838dea44573f49",
+              "byte_identical": false,
+              "current_sha256": "9a8fe6b5d85380494e73426928f0c5344493d203de5f4f53866d5f2c9baeeaa0"
+            }
+          },
+          "new_file": "buddha/policy_run.py",
+          "scope": "All 40 other tracked application/agent Python files are byte-identical to base. This includes financial, legacy scientific, fixed seed/agent, native worker/session and confined executor sources. No real run/authorization/key records were read for this evidence.",
+          "unchanged_count": 40,
+          "unchanged_files": {
+            "agents/frozen_seed.py": {
+              "base_sha256": "2b87bfe0d3c97ee45db2d45260985ffe0234eca93967f4689fb7c59f82603921",
+              "byte_identical": true,
+              "current_sha256": "2b87bfe0d3c97ee45db2d45260985ffe0234eca93967f4689fb7c59f82603921"
+            },
+            "buddha/__init__.py": {
+              "base_sha256": "0857bd60619c1e1c8538fe768cbe82c781bb4e302abc6cf59130f1b17d052230",
+              "byte_identical": true,
+              "current_sha256": "0857bd60619c1e1c8538fe768cbe82c781bb4e302abc6cf59130f1b17d052230"
+            },
+            "buddha/__main__.py": {
+              "base_sha256": "17a7af599e4d7b79094b806e01cedb765b560063bbcf82367f59e9f8e04005d7",
+              "byte_identical": true,
+              "current_sha256": "17a7af599e4d7b79094b806e01cedb765b560063bbcf82367f59e9f8e04005d7"
+            },
+            "buddha/agent_run.py": {
+              "base_sha256": "3f7f8ff3cb9965216f19c6564da1e830f0f629a346ec1cc29e2583c119bea88d",
+              "byte_identical": true,
+              "current_sha256": "3f7f8ff3cb9965216f19c6564da1e830f0f629a346ec1cc29e2583c119bea88d"
+            },
+            "buddha/agent_worker.py": {
+              "base_sha256": "c6f86105c0a42304687f857209bb17172f2f38fda26699d25e2618f6e01a745f",
+              "byte_identical": true,
+              "current_sha256": "c6f86105c0a42304687f857209bb17172f2f38fda26699d25e2618f6e01a745f"
+            },
+            "buddha/answers.py": {
+              "base_sha256": "be860546b2692ea4a710d93855f487dd49d9c8e28eb3f2ec757df697cefb8d0b",
+              "byte_identical": true,
+              "current_sha256": "be860546b2692ea4a710d93855f487dd49d9c8e28eb3f2ec757df697cefb8d0b"
+            },
+            "buddha/archive.py": {
+              "base_sha256": "9549deb0f347cf6114ef3f802b9dfef8a94e0db7cbbd3497697987d5e21ba2ee",
+              "byte_identical": true,
+              "current_sha256": "9549deb0f347cf6114ef3f802b9dfef8a94e0db7cbbd3497697987d5e21ba2ee"
+            },
+            "buddha/authorization.py": {
+              "base_sha256": "06d8615f8b301285a951b08bece0570e5b1b89467fc99fa4e994c7e5e5f30c47",
+              "byte_identical": true,
+              "current_sha256": "06d8615f8b301285a951b08bece0570e5b1b89467fc99fa4e994c7e5e5f30c47"
+            },
+            "buddha/benchmark.py": {
+              "base_sha256": "7ef7e26b2ef3cbf4119118a985334048fd30b68a5629f3e3196fa77e8200c49f",
+              "byte_identical": true,
+              "current_sha256": "7ef7e26b2ef3cbf4119118a985334048fd30b68a5629f3e3196fa77e8200c49f"
+            },
+            "buddha/candidate_run.py": {
+              "base_sha256": "99bd61eb7f92cb323918459f2fde19108a9511483154d42a03fe500dd7db07df",
+              "byte_identical": true,
+              "current_sha256": "99bd61eb7f92cb323918459f2fde19108a9511483154d42a03fe500dd7db07df"
+            },
+            "buddha/candidate_worker.py": {
+              "base_sha256": "be39d7d7ed57a202d3b1362f279ccd40e9407a44219be8298831857d2ce6b7c6",
+              "byte_identical": true,
+              "current_sha256": "be39d7d7ed57a202d3b1362f279ccd40e9407a44219be8298831857d2ce6b7c6"
+            },
+            "buddha/channel.py": {
+              "base_sha256": "c46d236865b15f1918efa23d961ed7163533c9bbef2b0cec7f61d6f8e95d6e5f",
+              "byte_identical": true,
+              "current_sha256": "c46d236865b15f1918efa23d961ed7163533c9bbef2b0cec7f61d6f8e95d6e5f"
+            },
+            "buddha/common.py": {
+              "base_sha256": "3a0a693a0f4a0f2eed3b858d0b3ac42148871dbca284e56e0e368726309393c0",
+              "byte_identical": true,
+              "current_sha256": "3a0a693a0f4a0f2eed3b858d0b3ac42148871dbca284e56e0e368726309393c0"
+            },
+            "buddha/continuation.py": {
+              "base_sha256": "b0136052472868aee379d7ac78dfd11bcfa40e91aedcd6916d30f9a334003414",
+              "byte_identical": true,
+              "current_sha256": "b0136052472868aee379d7ac78dfd11bcfa40e91aedcd6916d30f9a334003414"
+            },
+            "buddha/diagnostics.py": {
+              "base_sha256": "ca0af1304e3fbe99569f0b027f99269b151e08265785b39ed53c39f820097e24",
+              "byte_identical": true,
+              "current_sha256": "ca0af1304e3fbe99569f0b027f99269b151e08265785b39ed53c39f820097e24"
+            },
+            "buddha/doctor.py": {
+              "base_sha256": "afa511a747c4be2951ba53fea5cfe2822077a0f7a6f80a80a3255594d5b5d19b",
+              "byte_identical": true,
+              "current_sha256": "afa511a747c4be2951ba53fea5cfe2822077a0f7a6f80a80a3255594d5b5d19b"
+            },
+            "buddha/evaluation.py": {
+              "base_sha256": "4cabb1a48689a140fc6f6129ed8d9eae1d047d3e09eae794170c74479413b8d6",
+              "byte_identical": true,
+              "current_sha256": "4cabb1a48689a140fc6f6129ed8d9eae1d047d3e09eae794170c74479413b8d6"
+            },
+            "buddha/executor.py": {
+              "base_sha256": "b5e84f2dbcdc436aee23272e7d96b567cb5b16ead256a34d08bccc70b480d186",
+              "byte_identical": true,
+              "current_sha256": "b5e84f2dbcdc436aee23272e7d96b567cb5b16ead256a34d08bccc70b480d186"
+            },
+            "buddha/gateway.py": {
+              "base_sha256": "e844fcb695b97c76ecb7432ece6b8d96416806554038e202fd6b0f7f3da57a2e",
+              "byte_identical": true,
+              "current_sha256": "e844fcb695b97c76ecb7432ece6b8d96416806554038e202fd6b0f7f3da57a2e"
+            },
+            "buddha/gateway_history.py": {
+              "base_sha256": "a773ae6066e5b8a4f503e4b346b73570ace2ebeb811017f7b656cc211fded57c",
+              "byte_identical": true,
+              "current_sha256": "a773ae6066e5b8a4f503e4b346b73570ace2ebeb811017f7b656cc211fded57c"
+            },
+            "buddha/history.py": {
+              "base_sha256": "d42e92a7e6c88a2f72090eaaa50de39dc355957e7c61f5b89dd97162d8b0eefa",
+              "byte_identical": true,
+              "current_sha256": "d42e92a7e6c88a2f72090eaaa50de39dc355957e7c61f5b89dd97162d8b0eefa"
+            },
+            "buddha/ledger.py": {
+              "base_sha256": "5c7e56f1e2c5e68046d6380ebacc03110300eae34d348d7dca683a0591d64130",
+              "byte_identical": true,
+              "current_sha256": "5c7e56f1e2c5e68046d6380ebacc03110300eae34d348d7dca683a0591d64130"
+            },
+            "buddha/native_context.py": {
+              "base_sha256": "47a488b8d731617bda21380232e5e49801e0c0b4261f69b71c24fb9eae0ba298",
+              "byte_identical": true,
+              "current_sha256": "47a488b8d731617bda21380232e5e49801e0c0b4261f69b71c24fb9eae0ba298"
+            },
+            "buddha/native_run.py": {
+              "base_sha256": "60aafd5ef9e355e82faae2dc12397c6b0b2b649c3273c1bda9c0c757e0775a19",
+              "byte_identical": true,
+              "current_sha256": "60aafd5ef9e355e82faae2dc12397c6b0b2b649c3273c1bda9c0c757e0775a19"
+            },
+            "buddha/native_transport.py": {
+              "base_sha256": "ccd4917132939630231b8b8c69540189cd52f60951fa08d467d90b9571ccb6c0",
+              "byte_identical": true,
+              "current_sha256": "ccd4917132939630231b8b8c69540189cd52f60951fa08d467d90b9571ccb6c0"
+            },
+            "buddha/native_worker.py": {
+              "base_sha256": "8fa4b85ae6e75202de4b345302cb70253b6c0c5b47f004490f8d9a09750ecaa1",
+              "byte_identical": true,
+              "current_sha256": "8fa4b85ae6e75202de4b345302cb70253b6c0c5b47f004490f8d9a09750ecaa1"
+            },
+            "buddha/policy.py": {
+              "base_sha256": "717f6fdad1e880d83326d6a314e0dfa604be1044f8209f27061380e16cfebb3e",
+              "byte_identical": true,
+              "current_sha256": "717f6fdad1e880d83326d6a314e0dfa604be1044f8209f27061380e16cfebb3e"
+            },
+            "buddha/policy_study.py": {
+              "base_sha256": "a1d0c3d5d608312f1efe28c149190857b12ae031609e9ab217d96c8c9e3ed8ab",
+              "byte_identical": true,
+              "current_sha256": "a1d0c3d5d608312f1efe28c149190857b12ae031609e9ab217d96c8c9e3ed8ab"
+            },
+            "buddha/process_observation.py": {
+              "base_sha256": "28ad4b424ae0bec10aa2d3bf145cb62e1b26eb088db5e83fb6900fab6d5495a8",
+              "byte_identical": true,
+              "current_sha256": "28ad4b424ae0bec10aa2d3bf145cb62e1b26eb088db5e83fb6900fab6d5495a8"
+            },
+            "buddha/progress.py": {
+              "base_sha256": "47d21dada88347e63c01b05cf5c31db8e2cc157e501b812b58a2650d078393ba",
+              "byte_identical": true,
+              "current_sha256": "47d21dada88347e63c01b05cf5c31db8e2cc157e501b812b58a2650d078393ba"
+            },
+            "buddha/proposer.py": {
+              "base_sha256": "40e7ebf562966370f9f77c1e7f0e369b9fd34e37c0a0b88b246a7a630e4a40dd",
+              "byte_identical": true,
+              "current_sha256": "40e7ebf562966370f9f77c1e7f0e369b9fd34e37c0a0b88b246a7a630e4a40dd"
+            },
+            "buddha/provider.py": {
+              "base_sha256": "17de071c1416afa32f9da32eb627e24264d8a0a848862fdf4853057125f18a02",
+              "byte_identical": true,
+              "current_sha256": "17de071c1416afa32f9da32eb627e24264d8a0a848862fdf4853057125f18a02"
+            },
+            "buddha/reference.py": {
+              "base_sha256": "36356c8a25dae3501014513095cb6f838c4ae54b02a129bdffc4a5cb2dfa6f35",
+              "byte_identical": true,
+              "current_sha256": "36356c8a25dae3501014513095cb6f838c4ae54b02a129bdffc4a5cb2dfa6f35"
+            },
+            "buddha/releases.py": {
+              "base_sha256": "33361cf5b0923b373ee53dd73597063195c2c0d519baead50d40fb4bcfab44f5",
+              "byte_identical": true,
+              "current_sha256": "33361cf5b0923b373ee53dd73597063195c2c0d519baead50d40fb4bcfab44f5"
+            },
+            "buddha/run.py": {
+              "base_sha256": "a972cb8d1a04bef7abad7efdf7f1eec803bb88cd55c30cf64148119a3d7c6dbb",
+              "byte_identical": true,
+              "current_sha256": "a972cb8d1a04bef7abad7efdf7f1eec803bb88cd55c30cf64148119a3d7c6dbb"
+            },
+            "buddha/search.py": {
+              "base_sha256": "ac7b3648355b139797773cbe2bb8b67abbc8533eefd987cd7692275692a9a95c",
+              "byte_identical": true,
+              "current_sha256": "ac7b3648355b139797773cbe2bb8b67abbc8533eefd987cd7692275692a9a95c"
+            },
+            "buddha/search_evidence.py": {
+              "base_sha256": "1d89ed7ae541f52b79cc643edd2615955104cceb8508036d3b288e646fa30a34",
+              "byte_identical": true,
+              "current_sha256": "1d89ed7ae541f52b79cc643edd2615955104cceb8508036d3b288e646fa30a34"
+            },
+            "buddha/search_verify.py": {
+              "base_sha256": "41bdc2689d2b64e93765fe4572017a6c4264d5c3c6df49bba2a63e74b9ab6a63",
+              "byte_identical": true,
+              "current_sha256": "41bdc2689d2b64e93765fe4572017a6c4264d5c3c6df49bba2a63e74b9ab6a63"
+            },
+            "buddha/splits.py": {
+              "base_sha256": "419fa286d812b43e3095fbb41a62844b40477f880d94c8d60de069a52c324a2a",
+              "byte_identical": true,
+              "current_sha256": "419fa286d812b43e3095fbb41a62844b40477f880d94c8d60de069a52c324a2a"
+            },
+            "buddha/wire.py": {
+              "base_sha256": "48f40a71bf10c84dfd1d15f0baef50198cce8a229748355f116ad6a25cab12b4",
+              "byte_identical": true,
+              "current_sha256": "48f40a71bf10c84dfd1d15f0baef50198cce8a229748355f116ad6a25cab12b4"
+            }
+          }
+        },
+        "final_focused_distinction": {
+          "final_diagnostic_target": {
+            "failed": 0,
+            "passed": 1,
+            "resource_warnings": 0,
+            "source_policy_run_sha256": "7b3d1da3a209d4b49a76c3b5d766e11a66f29b5d243fdcec38933eb0e4c8f811",
+            "test_seconds": 7.151,
+            "tests": 1
+          },
+          "full15_rerun": false,
+          "initial_cohort": {
+            "failed": 1,
+            "failure": "retained unknown resume top reasonauthority rather thanunknown",
+            "passed": 14,
+            "resource_warnings": 0,
+            "source_policy_run_sha256": "eb8293d2fcdbd212b5a75263642b963490f884c827cecfbe7a9a77b73f87997a",
+            "test_seconds": 294.201,
+            "tests": 15
+          },
+          "reason": "Parent chose one targeted final diagnostic test plus the full suite, avoiding redundant five-minute cohort. Other14 passed on the immediately preceding source; only diagnostic branch changed afterward."
+        },
+        "format": "buddha.policy-execution-closing-record.v1",
+        "limits": [
+          "Offline engineering controller, not a funded study or improvement result.",
+          "No grant creation, key entry, paid model call, scoring formula, averaging or ranking.",
+          "Original child owners, literal reports, C1/native bytes, raw replies, summaries and holds retained; fresh occasion owners differ from same-owner replay.",
+          "Current prefix and immutable digest joins do not authenticate historical chronology or prove semantic/scientific validity."
+        ],
+        "new_test_count": 19,
+        "new_tests": [
+          {
+            "ast_sha256": "7936ecf14e52d0398ed5cf5fff3dbbf090475ecec889149564514381f22f233d",
+            "file": "tests/test_baseline.py",
+            "file_sha256": "cc140d9247c4f78fea70c30f6896aca64aff98ee49c529d5bb41c1381206870b",
+            "line": 345,
+            "method": "BaselineTests.test_additional_control_inputs_are_bound_to_every_generation_and_native_owner"
+          },
+          {
+            "ast_sha256": "ed5016b1cb8f4ad8ee79dea892546927177ca8ebcf1fe4b23e8a853659eff8b2",
+            "file": "tests/test_baseline.py",
+            "file_sha256": "cc140d9247c4f78fea70c30f6896aca64aff98ee49c529d5bb41c1381206870b",
+            "line": 374,
+            "method": "BaselineTests.test_changed_external_control_cannot_be_adopted_when_a_later_owner_is_bound"
+          },
+          {
+            "ast_sha256": "1b8bb586e3c0cd453c0dc9dda516e5ff01bac5d999932f98e42df4f1ba121f04",
+            "file": "tests/test_native_evaluation.py",
+            "file_sha256": "709d2df718605de4618fb3a6fd24c39005d6faa3f79760658b2c8eca9bacc148",
+            "line": 110,
+            "method": "NativeEvaluationTests.test_changed_control_cannot_be_adopted_while_preparing_a_later_judging_owner"
+          },
+          {
+            "ast_sha256": "092d3c456a866b24a72616446eb435abf24036238d15328bda24f51017e1c75c",
+            "file": "tests/test_native_evaluation.py",
+            "file_sha256": "709d2df718605de4618fb3a6fd24c39005d6faa3f79760658b2c8eca9bacc148",
+            "line": 140,
+            "method": "NativeEvaluationTests.test_additional_study_controls_are_bound_to_every_native_owner"
+          },
+          {
+            "ast_sha256": "527eb485cdc95bd4cc17b4820426eba82c98522f0ebc4ccbb0ebad724d4f5e38",
+            "file": "tests/test_policy_run.py",
+            "file_sha256": "220024134719635fce7ae5de57dcaa87dfc36c360bb4f74f87baeaad31da3c63",
+            "line": 132,
+            "method": "PolicyRunTests.test_declared_eight_cells_generate_once_and_rejudge_same_answers_in_new_owners"
+          },
+          {
+            "ast_sha256": "8c8f6328ad1691d153edc2a02b754b56e296551ecbaef06eccc1200dab659da5",
+            "file": "tests/test_policy_run.py",
+            "file_sha256": "220024134719635fce7ae5de57dcaa87dfc36c360bb4f74f87baeaad31da3c63",
+            "line": 198,
+            "method": "PolicyRunTests.test_wrong_study_scope_is_rejected_before_creating_any_owner"
+          },
+          {
+            "ast_sha256": "1d79a6dc43d8ff546910664073aaf444e24ca4f8456b88adceca4e0b347ed70f",
+            "file": "tests/test_policy_run.py",
+            "file_sha256": "220024134719635fce7ae5de57dcaa87dfc36c360bb4f74f87baeaad31da3c63",
+            "line": 212,
+            "method": "PolicyRunTests.test_declared_file_and_authority_pins_fail_before_any_new_owner"
+          },
+          {
+            "ast_sha256": "245a147f21f101b73f59c3fe1473bbe762b0e32db91a73be03a0fa8355a05f68",
+            "file": "tests/test_policy_run.py",
+            "file_sha256": "220024134719635fce7ae5de57dcaa87dfc36c360bb4f74f87baeaad31da3c63",
+            "line": 230,
+            "method": "PolicyRunTests.test_first_template_config_must_equal_the_declared_first_condition"
+          },
+          {
+            "ast_sha256": "9f98020754e35e211e15826212bd7cf8d5dbc0859694218767ff3e13de9cd120",
+            "file": "tests/test_policy_run.py",
+            "file_sha256": "220024134719635fce7ae5de57dcaa87dfc36c360bb4f74f87baeaad31da3c63",
+            "line": 238,
+            "method": "PolicyRunTests.test_first_template_tasks_must_equal_the_study_selection"
+          },
+          {
+            "ast_sha256": "fe623a6692403a7ed60f792a816f79cd6f234727e6b4b9138e2ab68de48bb0f6",
+            "file": "tests/test_policy_run.py",
+            "file_sha256": "220024134719635fce7ae5de57dcaa87dfc36c360bb4f74f87baeaad31da3c63",
+            "line": 245,
+            "method": "PolicyRunTests.test_template_change_after_preparation_stops_before_a_provider_send"
+          },
+          {
+            "ast_sha256": "3e700f70ae49b458c0d38b6e070ed6b0b2423a583538a7eb94f92561936f6181",
+            "file": "tests/test_policy_run.py",
+            "file_sha256": "220024134719635fce7ae5de57dcaa87dfc36c360bb4f74f87baeaad31da3c63",
+            "line": 255,
+            "method": "PolicyRunTests.test_later_cell_cannot_adopt_changed_original_study_controls"
+          },
+          {
+            "ast_sha256": "7c7c65eeaedf3cf7fc1e0096ae80129a2284d5213b97f7e8496c9cb9f3ce173b",
+            "file": "tests/test_policy_run.py",
+            "file_sha256": "220024134719635fce7ae5de57dcaa87dfc36c360bb4f74f87baeaad31da3c63",
+            "line": 282,
+            "method": "PolicyRunTests.test_child_report_typed_amount_change_is_rejected_before_fresh_judging"
+          },
+          {
+            "ast_sha256": "efcfe765d56bbb023f7fdd47e426cc151268e7ccc88886aef81000b272f9d0cd",
+            "file": "tests/test_policy_run.py",
+            "file_sha256": "220024134719635fce7ae5de57dcaa87dfc36c360bb4f74f87baeaad31da3c63",
+            "line": 305,
+            "method": "PolicyRunTests.test_changed_prior_child_report_blocks_final_study_publication"
+          },
+          {
+            "ast_sha256": "092b1180ba0b5b4bbf22c518280363f11b7f4d707e873de4c6ed6b6aadd9759f",
+            "file": "tests/test_policy_run.py",
+            "file_sha256": "220024134719635fce7ae5de57dcaa87dfc36c360bb4f74f87baeaad31da3c63",
+            "line": 333,
+            "method": "PolicyRunTests.test_foreign_future_cells_or_occasions_fail_before_starting_earlier_generation"
+          },
+          {
+            "ast_sha256": "9acdab332e3df4650a4967d0306609edadf2b70fdca0fefed102a4862eed8ac3",
+            "file": "tests/test_policy_run.py",
+            "file_sha256": "220024134719635fce7ae5de57dcaa87dfc36c360bb4f74f87baeaad31da3c63",
+            "line": 344,
+            "method": "PolicyRunTests.test_retained_future_work_cannot_skip_an_incomplete_execution_prefix"
+          },
+          {
+            "ast_sha256": "22b3ff9bb266234bd18ade805f254a8665f1cfdfc86e879786731e75c2f980b4",
+            "file": "tests/test_policy_run.py",
+            "file_sha256": "220024134719635fce7ae5de57dcaa87dfc36c360bb4f74f87baeaad31da3c63",
+            "line": 377,
+            "method": "PolicyRunTests.test_unknown_baseline_judging_stops_resume_without_releasing_or_replacing_work"
+          },
+          {
+            "ast_sha256": "2cf04e79d4152e4eb1636bb46170d74949ef9e9475899bbe24e893cd4eca08ca",
+            "file": "tests/test_policy_run.py",
+            "file_sha256": "220024134719635fce7ae5de57dcaa87dfc36c360bb4f74f87baeaad31da3c63",
+            "line": 399,
+            "method": "PolicyRunTests.test_fresh_judgment_failure_resumes_original_receipt_and_keeps_completed_generation"
+          },
+          {
+            "ast_sha256": "83248433c2642db2657023393dfcb81a135bf55dcba933d2ee01abb05b330b62",
+            "file": "tests/test_policy_run.py",
+            "file_sha256": "220024134719635fce7ae5de57dcaa87dfc36c360bb4f74f87baeaad31da3c63",
+            "line": 436,
+            "method": "PolicyRunTests.test_cancellation_keeps_known_child_without_inventing_a_returned_report"
+          },
+          {
+            "ast_sha256": "f9c4fd2b3bf68c3030571075762ea3859af569d6fd2b7909cca7d9c1eccbb8de",
+            "file": "tests/test_native_pipeline.py",
+            "file_sha256": "918b75fdc1ad874b316247698f1699171db91909aa160b082928398477d8e510",
+            "line": 14,
+            "method": "PublicationTests.test_replay_rejects_boolean_substitution_in_original_nonfinancial_payload"
+          }
+        ],
+        "original_test_methods": {
+          "tests/test_baseline.py": {
+            "base_count": 19,
+            "current_count": 21,
+            "file_sha256": "cc140d9247c4f78fea70c30f6896aca64aff98ee49c529d5bb41c1381206870b",
+            "methods": {
+              "BaselineTests.test_altered_c1_artifact_or_derived_native_bytes_cannot_resume_downstream": "8aba11452c7573ab3ed4817aaaae8e5b1c4a7572bd1758328442d5cd29c6eeae",
+              "BaselineTests.test_complete_composes_distinct_owners_c1_links_typed_ids_and_literal_summary": "a15356a5914a931c4109fb78e1e01e5e6cce868a64e916ae70f484d85f38511b",
+              "BaselineTests.test_completed_pipeline_reuses_all_stages_without_keys_new_calls_or_execution": "4672feedc739f4834e405eb98e5111df8a5079b391573ca18b211343af080f4b",
+              "BaselineTests.test_completed_report_reuse_survives_other_completed_baseline_on_shared_grant": "c7dcb0b4d349918fcc4611e2bda974fadc47c4d4f0cf803abd3d02be64109331",
+              "BaselineTests.test_consumed_seal_and_report_replacements_fail_even_when_original_files_are_restored": "01213ef81c5b89cd87e95c85a094a3abef9f51f4e6ffc10972ee03241ba10a0a",
+              "BaselineTests.test_descriptor_tasks_and_selected_source_drift_are_denied_before_spending": "0d2cd60993afe86d1ef20448e2943d1701d8d08c8adea2601e4e4d1f583c59e6",
+              "BaselineTests.test_existing_completion_with_still_active_owner_cannot_be_blessed_on_resume": "66e85c9d155942d415502bc756e07ee3b863e97d705b483c80578f585ee43368",
+              "BaselineTests.test_foreign_authority_cannot_attach_the_prepared_stage_owner": "9fb79713171edb65cc4fa0fc5d71e91ecf9acd5103a358cb06e4caba400266c9",
+              "BaselineTests.test_generation_failure_replays_original_owner_receipts_in_a_fresh_attempt": "0facd4da68d975e9104ca9f122051b3b053130c6cb29cff0016ab94732fdc8fb",
+              "BaselineTests.test_invalid_stage_flows_reject_before_allocation_or_spending": "3f3af9bab9d74428dcbc3c37b5eaac3c487e6891e8f1deb014a49605ba559e56",
+              "BaselineTests.test_missing_declared_artifact_prevents_downstream_owner_or_final_report": "ecfae6d30e5337bc40b46ed8e3a65f89c6a7dec14dd2228a0efd2cc07b1dd021",
+              "BaselineTests.test_native_failure_reuses_generation_and_same_native_owner_without_double_billing": "76ae9b68218e995f1ca757473b1bafc7c54275e3d107257a820acf5b953436b8",
+              "BaselineTests.test_output_population_rejects_missing_duplicate_foreign_and_boolean_ids_before_next_owner": "1781b5ccea1a3433e8b30fb00e49aa6fe81c4d055db7dfda5adf910d7faa9243",
+              "BaselineTests.test_prepare_binds_only_first_owner_without_keys_calls_or_replacing_existing_data": "6c6ed3cd85c3a7264e81cb14f464a3ec0fb33ce9a6ff63913820dd1516c000be",
+              "BaselineTests.test_shared_call_cap_refuses_sixth_attempt_without_summary_allocation": "4fedccd08e0d40b98d360c86e0d6256a3d016551d1c2036626c17eede54f2ee3",
+              "BaselineTests.test_summary_change_after_deactivation_cannot_receive_a_new_final_digest": "526ed42e2d03e4b1bc928d893a105976d76ff1e9c07ce7dc49b09e4a95869415",
+              "BaselineTests.test_summary_has_no_model_mapping_and_cannot_reach_gateway_or_https": "961a2bae47a6589b751825b3e8248a08a71d753dbd4f5202793410710060a554",
+              "BaselineTests.test_temporary_definition_replacement_cannot_hide_behind_restored_bound_bytes": "302ad3b3979f3a68e5243b2444b7c25327cebed854b9ecee8e031f1df188e528",
+              "BaselineTests.test_unknown_native_attempt_retains_shared_hold_and_same_owner_stops_on_resume": "47852ee35bd4b8c2456a6b26a0b3f702a7f2c6e53f45411d38bfbd7e43b50dd9"
+            },
+            "original_methods_ast_identical": true
+          },
+          "tests/test_native_evaluation.py": {
+            "base_count": 14,
+            "current_count": 16,
+            "file_sha256": "709d2df718605de4618fb3a6fd24c39005d6faa3f79760658b2c8eca9bacc148",
+            "methods": {
+              "NativeEvaluationTests.test_changed_completed_stage_is_invalid_evidence_rather_than_a_funding_stop": "f5fc8e133efb34dc2b1fd592ec4c57626da73c24d4ccf8645b6ae17c2f54e852",
+              "NativeEvaluationTests.test_changed_literal_c1_is_rejected_before_any_new_owner": "8e996969e57d4c6688d11c5dc0167ca2abad88cb36d012205b717b6396bd7a87",
+              "NativeEvaluationTests.test_completed_snapshot_cannot_claim_zero_events_for_existing_owners": "436bfee6e90ef99fdd195a5d3fdf7c5229ee250d4c37b8640ebc3bb1a66452b4",
+              "NativeEvaluationTests.test_corrupt_source_bindings_fail_before_creating_a_new_owner": "6bcbeb5d31c608c6215e6bc45922ef8287f19ee7603c68b382687c4ba8e340b2",
+              "NativeEvaluationTests.test_first_partition_coverage_failure_cannot_start_quality_or_complete": "6bdf5646de6c64271f19e91cf0952e782d1ece6a0bf6e4727f7c5b5296ad13bc",
+              "NativeEvaluationTests.test_interrupt_after_reply_records_actual_attempt_without_inventing_a_native_report": "98a95ee399fe6779ed4ff765aff20bb3cab8f70302706c12851dcb4197f4d715",
+              "NativeEvaluationTests.test_known_received_reply_recovery_reuses_original_owner_then_completes": "2fb24138088b9c4a0d01dd2586b06b4385349044067014eedb0765ce87c2acdb",
+              "NativeEvaluationTests.test_native_selection_needs_no_retired_producer_agent_code": "7f32de73bf3afed9e6b37148ef044fa34a5dfe4e126dde456f1e69060ae54560",
+              "NativeEvaluationTests.test_source_authority_runtime_identity_must_match_its_original_manifest": "a9a8ef642c79738145e61d844deff5e88918b66cd9855a1799a7f5e2a3d86451",
+              "NativeEvaluationTests.test_summary_request_never_reaches_paid_gateway_or_https": "1c23da66b99c23c458e29fcca5f9a503fba6ff2873b8253d58da0a69e3231eb6",
+              "NativeEvaluationTests.test_two_fresh_occasions_reuse_exact_anchored_c1_and_create_distinct_paid_identities": "18d2a282238d0523841777542e96bfad6c34db12c1664eb1e1f889565e350c1e",
+              "NativeEvaluationTests.test_unknown_request_stops_recovery_and_other_fresh_occasion_without_releasing_hold": "0873e50a99e7806ad0c0cba1edb5cedd3960538838e99b17932fd4440ba1db13",
+              "PipelineInputTests.test_growth_after_hash_is_rejected_with_bounded_byte_consumption": "434b7770305e1147538c50b251b7525f6a911476f3c193957d5e8d94d1aaf4b5",
+              "SingleCommandEvaluationTests.test_single_first_and_final_native_command_has_two_independent_no_payment_guards": "599acfd414be56903382ced6595def7c15c2c881e78f0d0443c8a257d99652ab"
+            },
+            "original_methods_ast_identical": true
+          }
+        },
+        "pending_validation": {
+          "actual_container_proof": {
+            "owner": "native_full_conformance",
+            "status": "pending parent-owned terminal assessment; this record does not infer pass from partial or newly appearing proof files"
+          },
+          "full_suite": {
+            "expected_count": 1173,
+            "owner": "root",
+            "status": "pending at closing-record commission; no full-pass claim here"
+          }
+        },
+        "recorded_utc": "2026-10-21T08:34:50.477353+00:00",
+        "rejected_hypothesis": {
+          "description": "A stricter ban on correctly prepared future children with zero operations was rejected as unnecessary. Zero-operation preallocation remains allowed. Accepted regression gives future child three real retained synthetic calls while an earlier predecessor is incomplete; no additional earlier calls may proceed. This is current retained-prefix consistency, not authenticated historical event chronology.",
+          "log": "pol02-schedule-prefix-red.log"
+        },
+        "source_files": {
+          "buddha/baseline.py": {
+            "bytes": 19341,
+            "crlf_count": 0,
+            "sha256": "13661931c95b676d95c724fba1e3db490a4a0c4374adec1e8ee4d1193579ca4a"
+          },
+          "buddha/native_evaluation.py": {
+            "bytes": 25796,
+            "crlf_count": 0,
+            "sha256": "79f726146de257ce801d8cf9aa273a58fb154b6f66fa6570b6ed29b008d780ab"
+          },
+          "buddha/native_pipeline.py": {
+            "bytes": 19248,
+            "crlf_count": 0,
+            "sha256": "9a8fe6b5d85380494e73426928f0c5344493d203de5f4f53866d5f2c9baeeaa0"
+          },
+          "buddha/policy_run.py": {
+            "bytes": 28907,
+            "crlf_count": 0,
+            "sha256": "7b3d1da3a209d4b49a76c3b5d766e11a66f29b5d243fdcec38933eb0e4c8f811"
+          }
+        },
+        "test_evidence": {
+          "pol02-bound-control-inputs-final-4.log": {
+            "bytes": 878,
+            "error_count": 0,
+            "exit_receipt": {
+              "path": "runs/reviews/pol02-bound-control-inputs-final-4.exit",
+              "record": "0",
+              "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+            },
+            "failure_count": 0,
+            "outcome": "green",
+            "path": "runs/reviews/pol02-bound-control-inputs-final-4.log",
+            "resource_warning_present": false,
+            "sha256": "885aa91a05ceea40527748ee0b674c338943432e8e49a57faf601508ff05e8dc",
+            "skip_count": 0,
+            "test_count": 4,
+            "test_seconds": 24.595
+          },
+          "pol02-bound-control-inputs-green.log": {
+            "bytes": 479,
+            "error_count": 0,
+            "exit_receipt": {
+              "path": "runs/reviews/pol02-bound-control-inputs-green.exit",
+              "record": "0",
+              "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+            },
+            "failure_count": 0,
+            "outcome": "green",
+            "path": "runs/reviews/pol02-bound-control-inputs-green.log",
+            "resource_warning_present": false,
+            "sha256": "00b4c13dbb8753c3078e8e9238d0cde867aabaf715e910cdc0fab08859b78b1a",
+            "skip_count": 0,
+            "test_count": 2,
+            "test_seconds": 14.179
+          },
+          "pol02-bound-control-inputs-red.log": {
+            "bytes": 2311,
+            "error_count": 2,
+            "failure_count": 0,
+            "outcome": "red",
+            "path": "runs/reviews/pol02-bound-control-inputs-red.log",
+            "resource_warning_present": false,
+            "sha256": "8469b47e3cc93b677d67a8efc333aa429aba554afcaa631d18c5f9d67826edee",
+            "skip_count": 0,
+            "test_count": 2,
+            "test_seconds": 6.352
+          },
+          "pol02-child-report-type-red.log": {
+            "bytes": 798,
+            "error_count": 0,
+            "exit_receipt": {
+              "path": "runs/reviews/pol02-child-report-type-red.exit.json",
+              "record": {
+                "exit_code": 1
+              },
+              "sha256": "50d7caf03dd967e4363a5bc7babbf450452b31dd1ec7fb605b2abc6465759571"
+            },
+            "failure_count": 1,
+            "outcome": "red",
+            "path": "runs/reviews/pol02-child-report-type-red.log",
+            "resource_warning_present": false,
+            "sha256": "8c13285c7e9523f49a4b3f964af21e2b8ce430da8609d41019ce7c7f3b25ba1c",
+            "skip_count": 0,
+            "test_count": 1,
+            "test_seconds": 8.537
+          },
+          "pol02-control-rebinding-race-red.log": {
+            "bytes": 1552,
+            "error_count": 0,
+            "failure_count": 2,
+            "outcome": "red",
+            "path": "runs/reviews/pol02-control-rebinding-race-red.log",
+            "resource_warning_present": false,
+            "sha256": "255e927b0932fc1dbf6d249c9865eae67f7c52ca1ddfcd505ea3849c584604bd",
+            "skip_count": 0,
+            "test_count": 2,
+            "test_seconds": 11.789
+          },
+          "pol02-cross-child-controls-red.log": {
+            "bytes": 770,
+            "error_count": 0,
+            "exit_receipt": {
+              "path": "runs/reviews/pol02-cross-child-controls-red.exit.json",
+              "record": {
+                "exit_code": 1
+              },
+              "sha256": "50d7caf03dd967e4363a5bc7babbf450452b31dd1ec7fb605b2abc6465759571"
+            },
+            "failure_count": 1,
+            "outcome": "red",
+            "path": "runs/reviews/pol02-cross-child-controls-red.log",
+            "resource_warning_present": false,
+            "sha256": "87bdb429a94434879249f8e5e2fbd0d02a1d128cdacdab2a63148be30b8e6dce",
+            "skip_count": 0,
+            "test_count": 1,
+            "test_seconds": 16.509
+          },
+          "pol02-policy-run-final-15.log": {
+            "bytes": 3583,
+            "error_count": 0,
+            "exit_receipt": {
+              "path": "runs/reviews/pol02-policy-run-final-15.exit.json",
+              "record": {
+                "command": [
+                  "C:\\Program Files\\Python313\\python.exe",
+                  "-B",
+                  "-W",
+                  "error::ResourceWarning",
+                  "-m",
+                  "unittest",
+                  "-v",
+                  "test_policy_run",
+                  "test_native_pipeline"
+                ],
+                "elapsed_seconds": 294.509,
+                "exit_code": 1,
+                "log": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-execution\\runs\\reviews\\pol02-policy-run-final-15.log"
+              },
+              "sha256": "49530ff17ad357a95bd763e8c3cdc14b1e71c9f87cb156c7d90ca4a143afbaca"
+            },
+            "failure_count": 1,
+            "outcome": "red",
+            "path": "runs/reviews/pol02-policy-run-final-15.log",
+            "resource_warning_present": false,
+            "sha256": "5b11d430d44ebbe641692357c7e94bc67e442f73d3c3fd50f26522089376bd05",
+            "skip_count": 0,
+            "test_count": 15,
+            "test_seconds": 294.201
+          },
+          "pol02-policy-run-first-positive.log": {
+            "bytes": 303,
+            "error_count": 0,
+            "exit_receipt": {
+              "path": "runs/reviews/pol02-policy-run-first-positive.exit",
+              "record": "0",
+              "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+            },
+            "failure_count": 0,
+            "outcome": "green",
+            "path": "runs/reviews/pol02-policy-run-first-positive.log",
+            "resource_warning_present": false,
+            "sha256": "a836c1eb401a79afc3ce2ec7a06ce9abd12ca57bd4998567af4cd6a916489299",
+            "skip_count": 0,
+            "test_count": 1,
+            "test_seconds": 129.371
+          },
+          "pol02-policy-run-missing-module-red.log": {
+            "bytes": 962,
+            "error_count": 1,
+            "failure_count": 0,
+            "outcome": "red",
+            "path": "runs/reviews/pol02-policy-run-missing-module-red.log",
+            "resource_warning_present": false,
+            "sha256": "3377ed0e56733f71f9dba1f20b13f8e1034fdb3b9b540d653ebf79cc5f710e6f",
+            "skip_count": 0,
+            "test_count": 1,
+            "test_seconds": 0.0
+          },
+          "pol02-policy-run-unknown-diagnostic-green.log": {
+            "bytes": 301,
+            "error_count": 0,
+            "exit_receipt": {
+              "path": "runs/reviews/pol02-policy-run-unknown-diagnostic-green.exit.json",
+              "record": {
+                "command": [
+                  "C:\\Program Files\\Python313\\python.exe",
+                  "-B",
+                  "-W",
+                  "error::ResourceWarning",
+                  "-m",
+                  "unittest",
+                  "-v",
+                  "test_policy_run.PolicyRunTests.test_unknown_baseline_judging_stops_resume_without_releasing_or_replacing_work"
+                ],
+                "elapsed_seconds": 7.437,
+                "exit_code": 0,
+                "log": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-execution\\runs\\reviews\\pol02-policy-run-unknown-diagnostic-green.log"
+              },
+              "sha256": "999f52bf8bdc662a7f856674ba0a99eeac947d700c15311c14aa47fd53bd7e0d"
+            },
+            "failure_count": 0,
+            "outcome": "green",
+            "path": "runs/reviews/pol02-policy-run-unknown-diagnostic-green.log",
+            "resource_warning_present": false,
+            "sha256": "ba039dfe7c866ea01dce5e3bbfea0f3fbd09faafe95ad253cb52f326ff15f1f6",
+            "skip_count": 0,
+            "test_count": 1,
+            "test_seconds": 7.151
+          },
+          "pol02-prior-child-publication-red.log": {
+            "bytes": 808,
+            "error_count": 0,
+            "exit_receipt": {
+              "path": "runs/reviews/pol02-prior-child-publication-red.exit.json",
+              "record": {
+                "exit_code": 1
+              },
+              "sha256": "50d7caf03dd967e4363a5bc7babbf450452b31dd1ec7fb605b2abc6465759571"
+            },
+            "failure_count": 1,
+            "outcome": "red",
+            "path": "runs/reviews/pol02-prior-child-publication-red.log",
+            "resource_warning_present": false,
+            "sha256": "b8e7ebc1eddf3f8f9f931eb433978e31b25505009a994e8ca35f0008ecb8c414",
+            "skip_count": 0,
+            "test_count": 1,
+            "test_seconds": 81.428
+          },
+          "pol02-retained-execution-prefix-red.log": {
+            "bytes": 798,
+            "error_count": 0,
+            "exit_receipt": {
+              "path": "runs/reviews/pol02-retained-execution-prefix-red.exit.json",
+              "record": {
+                "exit_code": 1
+              },
+              "sha256": "50d7caf03dd967e4363a5bc7babbf450452b31dd1ec7fb605b2abc6465759571"
+            },
+            "failure_count": 1,
+            "outcome": "red",
+            "path": "runs/reviews/pol02-retained-execution-prefix-red.log",
+            "resource_warning_present": false,
+            "sha256": "c335128f7299d5401421ba2e2e42c8b9fbad193304187f6a88d1359885c3d358",
+            "skip_count": 0,
+            "test_count": 1,
+            "test_seconds": 6.261
+          },
+          "pol02-schedule-prefix-red.log": {
+            "bytes": 792,
+            "error_count": 0,
+            "exit_receipt": {
+              "path": "runs/reviews/pol02-schedule-prefix-red.exit.json",
+              "record": {
+                "exit_code": 1
+              },
+              "sha256": "50d7caf03dd967e4363a5bc7babbf450452b31dd1ec7fb605b2abc6465759571"
+            },
+            "failure_count": 1,
+            "outcome": "red",
+            "path": "runs/reviews/pol02-schedule-prefix-red.log",
+            "resource_warning_present": false,
+            "sha256": "e89dad529c8689491ad19c3609ae56d2b7b27346e77f7b5685e27843ca40bf57",
+            "skip_count": 0,
+            "test_count": 1,
+            "test_seconds": 4.584
+          },
+          "pol02-shared-publication-type-red.log": {
+            "bytes": 815,
+            "error_count": 0,
+            "exit_receipt": {
+              "path": "runs/reviews/pol02-shared-publication-type-red.exit.json",
+              "record": {
+                "exit_code": 1
+              },
+              "sha256": "50d7caf03dd967e4363a5bc7babbf450452b31dd1ec7fb605b2abc6465759571"
+            },
+            "failure_count": 1,
+            "outcome": "red",
+            "path": "runs/reviews/pol02-shared-publication-type-red.log",
+            "resource_warning_present": false,
+            "sha256": "f813b9dd5142b1ac57233cd5f50c6e8db2ec925ff561cb3aa252553679378db2",
+            "skip_count": 0,
+            "test_count": 1,
+            "test_seconds": 0.03
+          }
+        },
+        "test_first_scope": "Missing new module API and optional input seams were observed RED before implementation. Later concrete trust-boundary defects have retained actual REDs. Initial positive matrix test was a functional pass, not a claimed preimplementation behavioral RED. No claim all19 methods were red before implementation.",
+        "unknown_classification_evidence": {
+          "path": "runs/reviews/pol02-unknown-stop-classification.json",
+          "scope": "Synthetic exact stopped-owner UNKNOWN300, first reasonunknown/resume broad childauthority, five total sends and unchanged held/accounting/owners. Final controller derives topunknown only from validated exact nonhistorical owner+sharedmirror; literal child is retained.",
+          "sha256": "1da48d479995bccae4b3df336240b5579bbe0c7eb6d437bea7c8849cf0f2306c"
+        },
+        "worktree": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-execution"
+      },
+      "sha256": "da61d3d0533219668baef31019d1f2ea04efc50cefe70a05e65868443a9470e0"
+    },
+    "pol02-policy-execution-independent-review-final-v2.json": {
+      "bytes": 4122,
+      "record": {
+        "diagnostic_review": {
+          "exact_stopped_owner": "Strict integer nonnegative stopped_stage joins owners/<stage> under the known actual child directory; no reported external path followed.",
+          "fallback": "Unavailable, unsupported or changing diagnostic evidence retains the original authority stop code.",
+          "function": "policy_run._reason",
+          "limits": [
+            "Unknown is an explanation of verified retained liability, not a claim it was the only funding guard.",
+            "No liability release, replacement owner, new dispatch, native protocol change, exception-string matching or invoice attestation."
+          ],
+          "literal_child_report_preserved": true,
+          "only_broad_authority_branch_refined": true,
+          "passive_checks": [
+            "bounded _Capture/_owner snapshot",
+            "explicit _authority exact directory, ledger, manifest and local authorization/terms binding",
+            "independent operation mirror equality",
+            "one strict nonhistorical integer0 owner binding",
+            "stored runtime SHA equals original owner manifest execution SHA",
+            "manifest authority path equals supplied authority",
+            "retained operation status unknown",
+            "capture.finish source-change bracket before returning unknown"
+          ]
+        },
+        "docs_review": {
+          "checked": [
+            "During child execution Ctrl+C journals cancellation; preparation/final publication may retain state without a new observation.",
+            "Root unknown explanation preserves the literal child authority report.",
+            "No new funding, paid CLI, actual scientific study, improvement or external chronology attestation is claimed.",
+            "Previously reviewed local documentation links and plain-English offline command explanation remain applicable."
+          ],
+          "file": {
+            "bytes": 8282,
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-execution\\docs\\POLICY-EXECUTION.md",
+            "sha256": "1e53a242b0eac2e70b84dec8e95cf0269ead0634002510c033c240d699ec8ed4"
+          },
+          "status": "pass"
+        },
+        "format": "buddha.pol02-policy-execution-independent-review.v2",
+        "parent_execution_evidence": {
+          "corroboration": {
+            "bytes": 5533,
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-execution\\runs\\reviews\\pol02-unknown-stop-classification.json",
+            "sha256": "1da48d479995bccae4b3df336240b5579bbe0c7eb6d437bea7c8849cf0f2306c"
+          },
+          "full_and_native_proof": "Parent full1173 and actual native prefix proof were active when this review was recorded; no completion claim here.",
+          "initial_cohort": "15 focused:14 passed/1 broad authority-versus-unknown classification failure; preserved, not claimed all green.",
+          "target_log": {
+            "bytes": 301,
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-execution\\runs\\reviews\\pol02-policy-run-unknown-diagnostic-green.log",
+            "sha256": "ba039dfe7c866ea01dce5e3bbfea0f3fbd09faafe95ad253cb52f326ff15f1f6"
+          },
+          "targeted_final": "Parent/A reported1 final unknown-recovery check passed in7.151s with original held/call/owner assertions unchanged."
+        },
+        "prior_review_preserved": {
+          "bytes": 11214,
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-execution\\runs\\reviews\\pol02-policy-execution-independent-review.json",
+          "sha256": "1f35a59a80020d40b2dc827687ca2a5ce78c16ed0e8a337bb134ff8eb788f09a"
+        },
+        "remaining_review_blockers": [],
+        "scope": "Only final diagnostic addition and corresponding guide qualification reviewed here; prior accepted guard review remains separately preserved. No new tests/probes/source edits or real provider/credential access by this reviewer.",
+        "source_sha256": {
+          "buddha/baseline.py": "13661931c95b676d95c724fba1e3db490a4a0c4374adec1e8ee4d1193579ca4a",
+          "buddha/native_evaluation.py": "79f726146de257ce801d8cf9aa273a58fb154b6f66fa6570b6ed29b008d780ab",
+          "buddha/native_pipeline.py": "9a8fe6b5d85380494e73426928f0c5344493d203de5f4f53866d5f2c9baeeaa0",
+          "buddha/policy_run.py": "7b3d1da3a209d4b49a76c3b5d766e11a66f29b5d243fdcec38933eb0e4c8f811"
+        },
+        "status": "bounded_final_source_and_docs_review_pass"
+      },
+      "sha256": "9e9670cb45766ed3017a71ed7cb7e81eb28a32aec9b3bed344bc70001261b0cc"
+    },
+    "pol02-policy-execution-independent-review.json": {
+      "bytes": 11214,
+      "record": {
+        "accepted_guards": [
+          {
+            "fix_review": "Later-stage expected input records use original first-owner binding SHA and sealed-predecessor SHA before creation, then exact returned/stored manifest comparison. Fresh file hashes cannot redefine originals.",
+            "id": "POL2-R1",
+            "observed_red": "Parent logs: baseline5sends versus4 permitted; native evaluation2versus1.",
+            "scope": "same-child later-stage inherited input identities",
+            "source": [
+              "buddha/baseline.py",
+              "buddha/native_evaluation.py"
+            ],
+            "tests": [
+              "test_changed_external_control_cannot_be_adopted_when_a_later_owner_is_bound",
+              "test_changed_control_cannot_be_adopted_while_preparing_a_later_judging_owner"
+            ]
+          },
+          {
+            "fix_review": "All future baseline/evaluator helper sources are in the first generation root control union. Every childrun is preceded by original ROOT execution identity check and child first-owner input map comparison against the immutable original root binding map. _preflight also consumes original hashes.",
+            "id": "POL2-R2",
+            "observed_red": "Parent log: mutated original study file inside latercell1 first-owner preparation allowed14mocked sends versus8.",
+            "scope": "cross-child root control identities",
+            "source": [
+              "policy_run._sources",
+              "policy_run._preflight",
+              "policy_run._child_controls",
+              "policy_run._run"
+            ],
+            "tests": [
+              "test_later_cell_cannot_adopt_changed_original_study_controls"
+            ]
+          },
+          {
+            "ceiling": "Current snapshot prefix consistency only; no external historical event chronology authentication. Operation_count is retained attempt records, not proof all records were physically sent.",
+            "fix_review": "Numerically ordered scheduled children permit zero-operation prepared owners, but retained attempt records after an unfinished predecessor reject before dispatch. Completed predecessor check requires full owner population, retained report, inactive owners, exact existing deactivation reason and stage-seal map. It never newly anchors active work.",
+            "id": "POL2-R3",
+            "observed_red": "Parent log: latercell1 real synthetic partialgeneration3sends followed by3additional earliercell0 sends; observed6versus3.",
+            "scope": "current retained-work execution prefix",
+            "source": [
+              "policy_run._preflight",
+              "policy_run._completed_child"
+            ],
+            "tests": [
+              "test_retained_future_work_cannot_skip_an_incomplete_execution_prefix"
+            ]
+          },
+          {
+            "fix_review": "Canonical JSON comparisons distinguish bool/int/float in _occasion and shared publish_complete while retaining acceptable original whitespace. Literal accepted report bytes receive their own SHA.",
+            "id": "POL2-R4",
+            "observed_red": "Parent log: numeric0 tobooleanfalse childreport mutation allowed7sends versus6; separate shared-publisher test did not raise on nonfinancial bool substitution.",
+            "scope": "strict child completion/publication handoff",
+            "source": [
+              "policy_run._occasion",
+              "native_pipeline.publish_complete"
+            ],
+            "tests": [
+              "test_child_report_typed_amount_change_is_rejected_before_fresh_judging",
+              "test_replay_rejects_boolean_substitution_in_original_nonfinancial_payload"
+            ]
+          },
+          {
+            "fix_review": "Each accepted occasion pins literal report and contained summary hashes; final root publication rechecks every accumulated digest. If actual work occurred, late protocol failure retains a root observation with the known child/report instead of publishing complete.",
+            "id": "POL2-R5",
+            "observed_red": "Parent fullmatrix log: changing a prior childreport after final child return still created root report before fix.",
+            "scope": "accumulated prior child evidence at root publication",
+            "source": [
+              "policy_run._occasion",
+              "policy_run._run"
+            ],
+            "tests": [
+              "test_changed_prior_child_report_blocks_final_study_publication"
+            ]
+          }
+        ],
+        "base_commit": "5c8460acd711d6ce0b879a5378b61e1b66cdddbd",
+        "execution_validation": "No claim that parent final15/37 cohorts, native proof, full suite or hosted CI have completed; they were still separate/in progress when this source review was recorded.",
+        "format": "buddha.pol02-policy-execution-independent-review.v1",
+        "limitations": [
+          "Trusted host/filesystem/local authority and single-writer controller remain assumptions.",
+          "Current snapshot/prefix/compatible-report validation is not authentication of externally completed historical child execution order or authorization capture time.",
+          "Actual study membership, instrument/funding/analysis freeze, live comparison and scientific improvement are not delivered by this source review.",
+          "No real keys, real provider calls, actual historical study data or primary handoff/owners were accessed or changed.",
+          "No new benchmark algorithm, financial schema, grant or paid CLI is introduced by the reviewed composition."
+        ],
+        "other_scope_checks": [
+          "literal first template task/config agreement to PolicyStudy and exact authority path/id/terms/scope",
+          "fixedordinal child paths and source-bound complete schedule; no untrusted root-context discovery",
+          "fresh baseline generation once per cell, K-1 native evaluations reuse original C1",
+          "model transport/summary role restrictions delegated to original child routes",
+          "incomplete child reports preserved literally; cancellation may retain null report rather than fabricate one",
+          "root completion includes all ordered cell/occasion IDs and own summaries with no best-outcome selection or private score",
+          "same-owner recovery and old completed authorization observation compatibility remain delegated to existing primitives"
+        ],
+        "parent_owned_red_log_seals": [
+          {
+            "bytes": 1552,
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-execution\\runs\\reviews\\pol02-control-rebinding-race-red.log",
+            "sha256": "255e927b0932fc1dbf6d249c9865eae67f7c52ca1ddfcd505ea3849c584604bd"
+          },
+          {
+            "bytes": 770,
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-execution\\runs\\reviews\\pol02-cross-child-controls-red.log",
+            "sha256": "87bdb429a94434879249f8e5e2fbd0d02a1d128cdacdab2a63148be30b8e6dce"
+          },
+          {
+            "bytes": 798,
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-execution\\runs\\reviews\\pol02-retained-execution-prefix-red.log",
+            "sha256": "c335128f7299d5401421ba2e2e42c8b9fbad193304187f6a88d1359885c3d358"
+          },
+          {
+            "bytes": 798,
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-execution\\runs\\reviews\\pol02-child-report-type-red.log",
+            "sha256": "8c13285c7e9523f49a4b3f964af21e2b8ce430da8609d41019ce7c7f3b25ba1c"
+          },
+          {
+            "bytes": 808,
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-execution\\runs\\reviews\\pol02-prior-child-publication-red.log",
+            "sha256": "b8e7ebc1eddf3f8f9f931eb433978e31b25505009a994e8ca35f0008ecb8c414"
+          },
+          {
+            "bytes": 815,
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-execution\\runs\\reviews\\pol02-shared-publication-type-red.log",
+            "sha256": "f813b9dd5142b1ac57233cd5f50c6e8db2ec925ff561cb3aa252553679378db2"
+          }
+        ],
+        "rejected_test_hypotheses": [
+          {
+            "file": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-execution\\runs\\reviews\\pol02-schedule-prefix-red.log",
+            "scope": "Stricter ban on correct future ZERO-operation preallocation was rejected. Its failure is not claimed as an accepted defect; the retained-work regression supersedes it."
+          }
+        ],
+        "review_method": "Read actual controller, child preparation/input propagation and publisher end to end; inspect parent-owned synthetic RED logs. No probes/tests/providers or tracked edits by this reviewer. Parent execution cohorts remain separate evidence.",
+        "source_files": [
+          {
+            "bytes": 26937,
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-execution\\buddha\\policy_run.py",
+            "sha256": "eb8293d2fcdbd212b5a75263642b963490f884c827cecfbe7a9a77b73f87997a"
+          },
+          {
+            "bytes": 19341,
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-execution\\buddha\\baseline.py",
+            "sha256": "13661931c95b676d95c724fba1e3db490a4a0c4374adec1e8ee4d1193579ca4a"
+          },
+          {
+            "bytes": 25796,
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-execution\\buddha\\native_evaluation.py",
+            "sha256": "79f726146de257ce801d8cf9aa273a58fb154b6f66fa6570b6ed29b008d780ab"
+          },
+          {
+            "bytes": 19248,
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-execution\\buddha\\native_pipeline.py",
+            "sha256": "9a8fe6b5d85380494e73426928f0c5344493d203de5f4f53866d5f2c9baeeaa0"
+          }
+        ],
+        "source_sha256": {
+          "buddha/baseline.py": "13661931c95b676d95c724fba1e3db490a4a0c4374adec1e8ee4d1193579ca4a",
+          "buddha/native_evaluation.py": "79f726146de257ce801d8cf9aa273a58fb154b6f66fa6570b6ed29b008d780ab",
+          "buddha/native_pipeline.py": "9a8fe6b5d85380494e73426928f0c5344493d203de5f4f53866d5f2c9baeeaa0",
+          "buddha/policy_run.py": "eb8293d2fcdbd212b5a75263642b963490f884c827cecfbe7a9a77b73f87997a"
+        },
+        "status": "bounded_source_review_pass",
+        "unchanged_existing_sources": {
+          "agents/frozen_seed.py": "2b87bfe0d3c97ee45db2d45260985ffe0234eca93967f4689fb7c59f82603921",
+          "buddha/agent_run.py": "3f7f8ff3cb9965216f19c6564da1e830f0f629a346ec1cc29e2583c119bea88d",
+          "buddha/agent_worker.py": "c6f86105c0a42304687f857209bb17172f2f38fda26699d25e2618f6e01a745f",
+          "buddha/authorization.py": "06d8615f8b301285a951b08bece0570e5b1b89467fc99fa4e994c7e5e5f30c47",
+          "buddha/benchmark.py": "7ef7e26b2ef3cbf4119118a985334048fd30b68a5629f3e3196fa77e8200c49f",
+          "buddha/common.py": "3a0a693a0f4a0f2eed3b858d0b3ac42148871dbca284e56e0e368726309393c0",
+          "buddha/evaluation.py": "4cabb1a48689a140fc6f6129ed8d9eae1d047d3e09eae794170c74479413b8d6",
+          "buddha/executor.py": "b5e84f2dbcdc436aee23272e7d96b567cb5b16ead256a34d08bccc70b480d186",
+          "buddha/gateway.py": "e844fcb695b97c76ecb7432ece6b8d96416806554038e202fd6b0f7f3da57a2e",
+          "buddha/history.py": "d42e92a7e6c88a2f72090eaaa50de39dc355957e7c61f5b89dd97162d8b0eefa",
+          "buddha/ledger.py": "5c7e56f1e2c5e68046d6380ebacc03110300eae34d348d7dca683a0591d64130",
+          "buddha/native_run.py": "60aafd5ef9e355e82faae2dc12397c6b0b2b649c3273c1bda9c0c757e0775a19",
+          "buddha/native_worker.py": "8fa4b85ae6e75202de4b345302cb70253b6c0c5b47f004490f8d9a09750ecaa1",
+          "buddha/policy_study.py": "a1d0c3d5d608312f1efe28c149190857b12ae031609e9ab217d96c8c9e3ed8ab",
+          "buddha/provider.py": "17de071c1416afa32f9da32eb627e24264d8a0a848862fdf4853057125f18a02",
+          "buddha/releases.py": "33361cf5b0923b373ee53dd73597063195c2c0d519baead50d40fb4bcfab44f5",
+          "buddha/wire.py": "48f40a71bf10c84dfd1d15f0baef50198cce8a229748355f116ad6a25cab12b4"
+        },
+        "worktree": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-execution"
+      },
+      "sha256": "1f35a59a80020d40b2dc827687ca2a5ce78c16ed0e8a337bb134ff8eb788f09a"
+    },
+    "pol02-unknown-stop-classification.json": {
+      "bytes": 5533,
+      "record": {
+        "authority_after": {
+          "authorization_id": "controlled-policy-synthetic",
+          "available_microusd": 999656,
+          "budget_microusd": 1000000,
+          "committed_microusd": 344,
+          "event_count": 23,
+          "max_calls": 1000,
+          "operation_count": 5,
+          "remaining_calls": 995,
+          "reserved_microusd": 300,
+          "runs": [
+            {
+              "active": false,
+              "committed_microusd": 44,
+              "directory": "C:\\Users\\arvik\\AppData\\Local\\Temp\\tmp972ui93w\\comparison\\cells\\0\\baseline\\owners\\0",
+              "historical": 0,
+              "historical_ledger_sha256": null,
+              "ledger_path": "C:\\Users\\arvik\\AppData\\Local\\Temp\\tmp972ui93w\\comparison\\cells\\0\\baseline\\owners\\0\\operations.sqlite3",
+              "manifest_sha256": "49ef558a288e1d87b8010d02f988128736bca9cbf0868e26ef35200b03169656",
+              "operation_count": 4,
+              "reserved_microusd": 0,
+              "run_id": "4441fd43188a42acb507d006a1ceaaa9",
+              "runtime_sha256": "9a25f7d46cb7b5b2d4e50070cf015d00c4d7ab32f6bfb762e96b8079c9096dae",
+              "spent_microusd": 44
+            },
+            {
+              "active": true,
+              "committed_microusd": 300,
+              "directory": "C:\\Users\\arvik\\AppData\\Local\\Temp\\tmp972ui93w\\comparison\\cells\\0\\baseline\\owners\\1",
+              "historical": 0,
+              "historical_ledger_sha256": null,
+              "ledger_path": "C:\\Users\\arvik\\AppData\\Local\\Temp\\tmp972ui93w\\comparison\\cells\\0\\baseline\\owners\\1\\operations.sqlite3",
+              "manifest_sha256": "dac536b696d07f433988c9e0d9eb730ae2865b737c5799ec5e47501db7947c73",
+              "operation_count": 1,
+              "reserved_microusd": 300,
+              "run_id": "ac78d7a50adc45768469316840b83e63",
+              "runtime_sha256": "024644a7c73d240b8ebe926f671e022cb341d51c097c9d468771e28b4828db5a",
+              "spent_microusd": 0
+            }
+          ],
+          "scope": "policy study: 5544d40bb546c9f02d1205276402d7e5cad08c3bbde5401c18736dae9a1e1cfe",
+          "spent_microusd": 44,
+          "terms_sha256": "485fc73e1a5ac1945a00eb71d9c01a4e8cb6c54088db4628b5e0d045993fa64a"
+        },
+        "authority_before": {
+          "authorization_id": "controlled-policy-synthetic",
+          "available_microusd": 999656,
+          "budget_microusd": 1000000,
+          "committed_microusd": 344,
+          "event_count": 23,
+          "max_calls": 1000,
+          "operation_count": 5,
+          "remaining_calls": 995,
+          "reserved_microusd": 300,
+          "runs": [
+            {
+              "active": false,
+              "committed_microusd": 44,
+              "directory": "C:\\Users\\arvik\\AppData\\Local\\Temp\\tmp972ui93w\\comparison\\cells\\0\\baseline\\owners\\0",
+              "historical": 0,
+              "historical_ledger_sha256": null,
+              "ledger_path": "C:\\Users\\arvik\\AppData\\Local\\Temp\\tmp972ui93w\\comparison\\cells\\0\\baseline\\owners\\0\\operations.sqlite3",
+              "manifest_sha256": "49ef558a288e1d87b8010d02f988128736bca9cbf0868e26ef35200b03169656",
+              "operation_count": 4,
+              "reserved_microusd": 0,
+              "run_id": "4441fd43188a42acb507d006a1ceaaa9",
+              "runtime_sha256": "9a25f7d46cb7b5b2d4e50070cf015d00c4d7ab32f6bfb762e96b8079c9096dae",
+              "spent_microusd": 44
+            },
+            {
+              "active": true,
+              "committed_microusd": 300,
+              "directory": "C:\\Users\\arvik\\AppData\\Local\\Temp\\tmp972ui93w\\comparison\\cells\\0\\baseline\\owners\\1",
+              "historical": 0,
+              "historical_ledger_sha256": null,
+              "ledger_path": "C:\\Users\\arvik\\AppData\\Local\\Temp\\tmp972ui93w\\comparison\\cells\\0\\baseline\\owners\\1\\operations.sqlite3",
+              "manifest_sha256": "dac536b696d07f433988c9e0d9eb730ae2865b737c5799ec5e47501db7947c73",
+              "operation_count": 1,
+              "reserved_microusd": 300,
+              "run_id": "ac78d7a50adc45768469316840b83e63",
+              "runtime_sha256": "024644a7c73d240b8ebe926f671e022cb341d51c097c9d468771e28b4828db5a",
+              "spent_microusd": 0
+            }
+          ],
+          "scope": "policy study: 5544d40bb546c9f02d1205276402d7e5cad08c3bbde5401c18736dae9a1e1cfe",
+          "spent_microusd": 44,
+          "terms_sha256": "485fc73e1a5ac1945a00eb71d9c01a4e8cb6c54088db4628b5e0d045993fa64a"
+        },
+        "first": {
+          "calls": {
+            "completed": 0,
+            "requested": 1,
+            "stopped": 1
+          },
+          "child_status": "incomplete",
+          "gateway_totals": {
+            "committed_microusd": 300,
+            "operation_count": 1,
+            "reserved_microusd": 300,
+            "spent_microusd": 0
+          },
+          "observation": "observations/0.json",
+          "reason": "unknown",
+          "stopped_stage": 1,
+          "worker": {
+            "audit_sha256": "e8bfe3d571cb88e211116bdde01138ecb3afd77703e649b240fa900fff0af6e9",
+            "reason": "unknown",
+            "status": "stopped"
+          }
+        },
+        "known_cause": "retained unknown goes through Gateway.authorize_dispatch and becomes BudgetExceeded before PendingOperation; NativeSession reports authority",
+        "owner_operations": [
+          [
+            "78fff93bc4b924b9d93eabf92ae92f6ead7e2d9fea5cf1e083c2852c671def51",
+            "cc8817e599fbaca610a1432dbd9d7b85d078509f274ff498fa3a26420fae38e7",
+            "unknown",
+            300,
+            null
+          ]
+        ],
+        "physical_sends": 5,
+        "second": {
+          "calls": {
+            "completed": 0,
+            "requested": 1,
+            "stopped": 1
+          },
+          "child_status": "incomplete",
+          "gateway_totals": {
+            "committed_microusd": 300,
+            "operation_count": 1,
+            "reserved_microusd": 300,
+            "spent_microusd": 0
+          },
+          "observation": "observations/1.json",
+          "reason": "authority",
+          "stopped_stage": 1,
+          "worker": {
+            "audit_sha256": "e8bfe3d571cb88e211116bdde01138ecb3afd77703e649b240fa900fff0af6e9",
+            "reason": "authority",
+            "status": "stopped"
+          }
+        }
+      },
+      "sha256": "1da48d479995bccae4b3df336240b5579bbe0c7eb6d437bea7c8849cf0f2306c"
+    }
+  },
+  "scope": "New development path, not evidence of an incident in historical live runs",
+  "status": "Final source, full1173 suite, local quality checks and complete actual-native engineering study pass; new hosted CI pending.",
+  "validation_limits": [
+    "Initial15 cohort is14pass1fail, not an all-green run. Final targeted unknown regression green; integrated full1173 suite subsequently passes at final source pins.",
+    "Zero-operation future preparation was not accepted as a defect; retained execution work after an unfinished predecessor is the actual guard.",
+    "Current prefix consistency is not authenticated historical chronology for externally completed children.",
+    "A top-level unknown diagnosis identifies retained liability in the exact owner; it does not assert a unique cause or release authority.",
+    "Actual first container proof stopped at fresh readiness; its failed evidence and bounded original-owner diagnostic are retained, not counted as a pass."
+  ]
+}

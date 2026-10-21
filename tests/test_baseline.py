@@ -342,6 +342,23 @@ class BaselineTests(unittest.TestCase):
             self.prepare()
         self.assertEqual((self.directory / "owners/0/manifest.json").read_bytes(), before)
 
+    def test_additional_control_inputs_are_bound_to_every_generation_and_native_owner(self):
+        control = self.root / "external-study-control.json"
+        control.write_bytes(b'{"frozen":"study-control"}')
+        self.descriptor.write_bytes(_json(self.record))
+        prepare_baseline(
+            self.directory,
+            descriptor=self.descriptor,
+            authorization=self.authority,
+            review=self.fixture.review,
+            input_files=(control,),
+        )
+        self.assertEqual(self.run_pipeline()["status"], "complete")
+        expected = {"path": str(control), "sha256": sha(control.read_bytes())}
+        for index in range(4):
+            with self.subTest(index=index):
+                self.assertIn(expected, self.manifest(index)["invocation"]["inputs"])
+
     def test_completed_report_reuse_survives_other_completed_baseline_on_shared_grant(self):
         self.prepare()
         first = self.run_pipeline()
@@ -353,6 +370,32 @@ class BaselineTests(unittest.TestCase):
         self.assertEqual(self.run_pipeline(paid=False), first)
         self.assertEqual((self.directory / "report.json").read_bytes(), stored)
         self.assertEqual(self.physical_sends, sent)
+
+    def test_changed_external_control_cannot_be_adopted_when_a_later_owner_is_bound(self):
+        control = self.root / "external-control-race.json"
+        control.write_bytes(b'{"frozen":"original"}')
+        self.descriptor.write_bytes(_json(self.record))
+        prepare_baseline(
+            self.directory,
+            descriptor=self.descriptor,
+            authorization=self.authority,
+            review=self.fixture.review,
+            input_files=(control,),
+        )
+        original_prepare = baseline_module.prepare_gateway
+
+        def change_before_new_binding(directory, **kwargs):
+            if directory == self.directory / "owners/1":
+                control.write_bytes(b'{"frozen":"changed-between-check-and-binding"}')
+            return original_prepare(directory, **kwargs)
+
+        with (
+            patch.object(baseline_module, "prepare_gateway", side_effect=change_before_new_binding),
+            self.assertRaises(BaselineError),
+        ):
+            self.run_pipeline()
+        self.assertEqual(self.physical_sends, 4)
+        self.assertFalse(any(event["role"] == "evaluator" for event in self.events))
 
     def test_complete_composes_distinct_owners_c1_links_typed_ids_and_literal_summary(self):
         self.prepare()

@@ -5,7 +5,7 @@ New occasions use new owners; recovery retains this occasion's original owners.
 """
 
 import hashlib
-from collections.abc import Callable
+from collections.abc import Callable, Sequence
 from dataclasses import dataclass
 from functools import partial, wraps
 from pathlib import Path
@@ -318,6 +318,8 @@ def _owner_stage(
     available: dict[str, Path],
     frozen: dict[Path, str],
     seals: list[Path],
+    control_inputs: Sequence[Path] = (),
+    control_hashes: dict[str, object] | None = None,
 ) -> tuple[Path, Path]:
     descriptor, inputs = pipeline._native_descriptor(
         directory, index, definition, release, source.answers_path, available, frozen
@@ -334,10 +336,18 @@ def _owner_stage(
         *available.values(),
         *inputs,
         *_sources(),
+        *control_inputs,
     ]
     if index > 1:
         paths.append(directory / "owners/1/manifest.json")
-    paths = list(dict.fromkeys(paths))
+    paths = list(dict.fromkeys(path.absolute() for path in paths))
+    expected_inputs = []
+    for path in paths:
+        digest = file_hash(path)
+        expected = (control_hashes or {}).get(str(path), frozen.get(path, digest))
+        if digest != expected:
+            raise EvaluationError("an original control or sealed predecessor changed")
+        expected_inputs.append({"path": str(path), "sha256": expected})
     for path, digest in frozen.items():
         if file_hash(path) != digest:
             raise EvaluationError("sealed predecessor changed before native owner preparation")
@@ -364,8 +374,7 @@ def _owner_stage(
         or record["roots"] != {key: str(path) for key, path in roots.items()}
         or record["settings"] != settings
         or record["review"] != review
-        or _object(record["invocation"])["inputs"]
-        != [{"path": str(path.absolute()), "sha256": file_hash(path)} for path in paths]
+        or _object(record["invocation"])["inputs"] != expected_inputs
     ):
         raise EvaluationError("existing native owner differs from the original occasion")
     return owner, descriptor
@@ -373,7 +382,12 @@ def _owner_stage(
 
 @_checked
 def prepare_evaluation(
-    directory: Path, *, descriptor: Path, authorization: Authorization, review: dict[str, object]
+    directory: Path,
+    *,
+    descriptor: Path,
+    authorization: Authorization,
+    review: dict[str, object],
+    input_files: Sequence[Path] = (),
 ) -> Path:
     """Verify original generation and prepare a fresh native owner; no API calls."""
     if (
@@ -382,6 +396,14 @@ def prepare_evaluation(
         or not isinstance(authorization, Authorization)
     ):
         raise EvaluationError("evaluation requires explicit paths and an existing shared authority")
+    if (
+        not isinstance(input_files, (list, tuple))
+        or len(input_files) > 1024
+        or any(not isinstance(path, Path) for path in input_files)
+    ):
+        raise EvaluationError("evaluation controls require a bounded ordered Path list")
+    for path in input_files:
+        file_hash(path, max_bytes=256 * 1024**2)
     definition, source, release = _definition(descriptor, authorization)
     directory = directory.absolute()
     _root(directory.parent)
@@ -421,6 +443,7 @@ def prepare_evaluation(
         available,
         frozen,
         [],
+        input_files,
     )
     return directory
 
@@ -523,6 +546,8 @@ def _run(directory: Path, transport: RawHTTPTransport) -> dict[str, object]:
             available,
             frozen,
             seals,
+            [Path(path) for path in bound],
+            bound,
         )
         gateway = (
             Gateway(owner, transport=RawHTTPTransport(allow_paid=False))

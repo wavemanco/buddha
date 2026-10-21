@@ -459,7 +459,7 @@ def publish_complete(
         sum(cast(int, row[key]) for row in old.values()) != snapshot[key] for key in amounts
     ):
         raise PipelineError("stored authorization observation omits or miscounts owners")
-    if saved != result | {"authorization": snapshot}:
+    if _json(saved) != _json(result | {"authorization": snapshot}):
         raise PipelineError("stored complete publication changes its sealed source or outputs")
     if file_hash(path) != digest:
         raise PipelineError("stored complete publication changed during consumption")

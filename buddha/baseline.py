@@ -7,7 +7,7 @@ This module derives files/coverage, never benchmark scores or optimization polic
 import hashlib
 import json
 import os
-from collections.abc import Callable, Iterator
+from collections.abc import Callable, Iterator, Sequence
 from contextlib import contextmanager
 from functools import partial, wraps
 from pathlib import Path
@@ -172,11 +172,24 @@ def _sources() -> list[Path]:
 
 @_checked
 def prepare_baseline(
-    directory: Path, *, descriptor: Path, authorization: Authorization, review: dict[str, object]
+    directory: Path,
+    *,
+    descriptor: Path,
+    authorization: Authorization,
+    review: dict[str, object],
+    input_files: Sequence[Path] = (),
 ) -> Path:
     """Freeze an offline baseline intent and its generation owner; never send a request."""
     if not isinstance(directory, Path) or not isinstance(descriptor, Path):
         raise BaselineError("baseline needs Path destinations and configuration")
+    if (
+        not isinstance(input_files, (list, tuple))
+        or len(input_files) > 1024
+        or any(not isinstance(path, Path) for path in input_files)
+    ):
+        raise BaselineError("baseline controls require a bounded ordered Path list")
+    for path in input_files:
+        file_hash(path, max_bytes=256 * 1024**2)
     definition, _, _ = _definition(descriptor)
     directory = directory.absolute()
     _root(directory.parent)
@@ -202,13 +215,19 @@ def prepare_baseline(
         authorization=authorization,
         budget_microusd=cast(int, generation["budget_microusd"]),
         max_calls=cast(int, generation["max_calls"]),
-        input_files=[
-            context,
-            descriptor,
-            _absolute(definition["tasks"]),
-            _absolute(generation["descriptor"]),
-            *_sources(),
-        ],
+        input_files=list(
+            dict.fromkeys(
+                path.absolute()
+                for path in [
+                    context,
+                    descriptor,
+                    _absolute(definition["tasks"]),
+                    _absolute(generation["descriptor"]),
+                    *_sources(),
+                    *input_files,
+                ]
+            )
+        ),
         review=review,
     )
     return directory
@@ -368,7 +387,16 @@ def _run(directory: Path, transport: RawHTTPTransport) -> dict[str, object]:
                 *available.values(),
                 *inputs,
                 *_sources(),
+                *(Path(path) for path in bindings),
             ]
+            bound_inputs = list(dict.fromkeys(bound_inputs))
+            expected_inputs = []
+            for path in bound_inputs:
+                digest = file_hash(path)
+                expected = bindings.get(str(path), frozen_files.get(path, digest))
+                if digest != expected:
+                    raise BaselineError("an original control or sealed predecessor changed")
+                expected_inputs.append({"path": str(path.absolute()), "sha256": expected})
             for path, digest in frozen_files.items():
                 if file_hash(path) != digest:
                     raise BaselineError("a sealed predecessor changed during input staging")
@@ -393,11 +421,7 @@ def _run(directory: Path, transport: RawHTTPTransport) -> dict[str, object]:
                     "budget_microusd": 1 if no_model else native["budget_microusd"],
                     "max_calls": 1 if no_model else native["max_calls"],
                 }
-                or _object(owned["invocation"])["inputs"]
-                != [
-                    {"path": str(path.absolute()), "sha256": file_hash(path)}
-                    for path in bound_inputs
-                ]
+                or _object(owned["invocation"])["inputs"] != expected_inputs
             ):
                 raise BaselineError(
                     "existing stage owner differs from the original pipeline authority or inputs"
