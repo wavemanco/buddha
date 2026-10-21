@@ -33,8 +33,21 @@ from buddha.releases import (
     _root,
 )
 from buddha.search_evidence import MAX_FILE_BYTES, _absolute
+from buddha.wire import RawEnvelope, WireError, decoded_body, extract_usage
+from buddha.wire import _text as _wire_text
 
 _AMOUNTS = ("committed_microusd", "spent_microusd", "reserved_microusd", "operation_count")
+_COORDINATES = (
+    "cell_id",
+    "arm_id",
+    "arm_index",
+    "generation_repeat",
+    "judge_occasion",
+    "stage_index",
+    "stage_role",
+)
+_STAGE_ROLES = ("generation", "grouping", "quality", "summary")
+MAX_OPERATIONS = 100_000
 
 
 def _sha(raw: bytes) -> str:
@@ -55,6 +68,332 @@ def _bindings(owner: _Owner) -> dict[str, str]:
     return {
         str(row["path"]): _digest(row["sha256"])
         for row in _rows(_object(owner.manifest["invocation"])["inputs"])
+    }
+
+
+def _reply_status(envelope: RawEnvelope | None) -> dict[str, object]:
+    """Project literal provider statuses; content and refusal text are not exported."""
+    result: dict[str, object] = {
+        "availability": "unavailable",
+        "reason": "missing_evidence",
+        "finish_reasons": None,
+        "stop_reason": None,
+        "refusals": None,
+        "refusal_applicability": "unknown",
+    }
+    if envelope is None:
+        return result
+    if envelope.status != 200:
+        return result | {"reason": "http_status"}
+    try:
+        body = _load(decoded_body(envelope))
+    except (ValueError, TypeError, UnicodeError, RecursionError):
+        return result | {"reason": "unavailable_response_status"}
+
+    def status(value: object) -> str | None:
+        try:
+            return _wire_text(value)
+        except WireError:
+            return None
+
+    if envelope.provider == "anthropic":
+        stop = status(body.get("stop_reason"))
+        return result | {
+            "stop_reason": stop,
+            "refusal_applicability": "stop_reason",
+            "availability": "available" if stop is not None else "unavailable",
+            "reason": "available" if stop is not None else "missing_or_invalid_status",
+        }
+    choices = body.get("choices")
+    if type(choices) is not list or not 1 <= len(choices) <= 128:
+        return result | {"reason": "unsupported_choice_population"}
+    finishes, refusals = [], []
+    complete = True
+    for choice in choices:
+        record = choice if type(choice) is dict else {}
+        finish = status(record.get("finish_reason"))
+        finishes.append(finish)
+        complete = complete and finish is not None
+        message = record.get("message")
+        refusal: dict[str, object] = {
+            "present": None,
+            "is_null": None,
+            "nonempty": None,
+            "sha256": None,
+        }
+        if type(message) is dict:
+            refusal["present"] = "refusal" in message
+            if "refusal" in message:
+                value = message["refusal"]
+                refusal["is_null"] = value is None
+                if value is None:
+                    refusal["nonempty"] = False
+                elif type(value) is str:
+                    try:
+                        refusal["sha256"] = _sha(value.encode("utf-8"))
+                        refusal["nonempty"] = bool(value)
+                    except UnicodeError:
+                        complete = False
+                else:
+                    complete = False
+        else:
+            complete = False
+        refusals.append(refusal)
+    return result | {
+        "availability": "available" if complete else "partial",
+        "reason": "available" if complete else "missing_or_invalid_status",
+        "finish_reasons": finishes,
+        "refusals": refusals,
+        "refusal_applicability": "message_field",
+    }
+
+
+def _operation_evidence(
+    owner: _Owner, coordinates: dict[str, object], fallback_model: str | None
+) -> list[dict[str, object]]:
+    """Describe captured attempts without repairing or rebilling their records."""
+    if len(owner.operations) > MAX_OPERATIONS:
+        raise PolicyResultsError("study operation population exceeds the reporting ceiling")
+    result = []
+    for operation in owner.operations:
+        if not isinstance(operation, HistoricalGatewayOperation):
+            raise PolicyResultsError("study requires original Gateway evidence")
+        completed = operation.status == "completed"
+        receipt = operation.receipt if completed else operation.checkpoint
+        held = 0 if completed else operation.reserve_microusd
+        row: dict[str, object] = {
+            **coordinates,
+            "operation_id": operation.operation_id,
+            "request_sha256": operation.request_sha256,
+            "run_id": owner.run_id,
+            "status": operation.status,
+            "reserve_microusd": operation.reserve_microusd,
+            "actual_microusd": operation.actual_microusd,
+            "held_microusd": held,
+            "committed_microusd": operation.actual_microusd if completed else held,
+            "evidence_source": "receipt" if completed else "checkpoint" if receipt else "missing",
+            "receipt_sha256": None if receipt is None else _sha(_canonical(receipt)),
+            "checkpoint_present": operation.checkpoint_json is not None,
+            "checkpoint_sha256": None
+            if operation.checkpoint_json is None
+            else _sha(operation.checkpoint_json.encode()),
+            "capability": None,
+            "profile_id": None,
+            "logical_id": None,
+            "attempt": None,
+            "requested_model": None,
+            "metadata_reason": "missing_evidence",
+            "provider_request_id": operation.provider_request_id
+            if completed
+            else operation.checkpoint_request_id,
+            "provider": None,
+            "http_status": None,
+            "response_sha256": None,
+            "raw_flags": None,
+            "usage": None,
+            "usage_reason": "missing_evidence",
+            "physical_retry": None,
+            "fallback_model_requested": None,
+            "causal_fallback": "unknown",
+            "row_attribution": "unknown",
+            "parser_recovery": "unknown",
+            "reply_status": _reply_status(None),
+        }
+        if receipt is not None:
+            request = _object(receipt["request"])
+            row.update(
+                {
+                    name: request[name]
+                    for name in ("capability", "profile_id", "logical_id", "attempt")
+                }
+            )
+            row["physical_retry"] = cast(int, request["attempt"]) > 0
+            try:
+                body = _load(base64.b64decode(cast(str, request["body_base64"]), validate=True))
+                model = body.get("model")
+                if (
+                    type(model) is not str
+                    or not model.strip()
+                    or len(model.encode()) > 4096
+                    or "\x00" in model
+                ):
+                    raise ValueError("unavailable request model")
+                row["requested_model"] = model
+                row["metadata_reason"] = "available"
+            except (ValueError, TypeError, UnicodeError, RecursionError):
+                row["metadata_reason"] = "unavailable_request_model"
+            if (
+                coordinates["stage_role"] == "quality"
+                and fallback_model is not None
+                and row["requested_model"] is not None
+            ):
+                row["fallback_model_requested"] = row["requested_model"] == fallback_model
+            envelope = RawEnvelope.from_record(receipt["envelope"])
+            row["reply_status"] = _reply_status(envelope)
+            row.update(
+                {
+                    "provider": envelope.provider,
+                    "http_status": envelope.status,
+                    "response_sha256": envelope.received_sha256,
+                    "raw_flags": {
+                        "truncated": envelope.truncated,
+                        "withheld": envelope.withheld,
+                        "headers_complete": envelope.headers_complete,
+                    },
+                }
+            )
+            try:
+                usage = extract_usage(envelope)
+                row["usage"] = {
+                    "model": usage.model,
+                    "input_tokens": usage.input_tokens,
+                    "output_tokens": usage.output_tokens,
+                    "service_tier": usage.service_tier,
+                }
+                row["usage_reason"] = "available"
+            except WireError:
+                row["usage_reason"] = (
+                    "incomplete_evidence"
+                    if envelope.truncated or envelope.withheld or not envelope.headers_complete
+                    else "http_status"
+                    if envelope.status != 200
+                    else "unavailable_usage"
+                )
+        result.append(row)
+    return result
+
+
+def _cost_summary(rows: list[dict[str, object]]) -> dict[str, object]:
+    usages = [_object(row["usage"]) for row in rows if row["usage"] is not None]
+    inputs = sum(cast(int, usage["input_tokens"]) for usage in usages)
+    outputs = sum(cast(int, usage["output_tokens"]) for usage in usages)
+    spent = sum(cast(int, row["actual_microusd"]) for row in rows if row["status"] == "completed")
+    held = sum(cast(int, row["held_microusd"]) for row in rows)
+    return {
+        "committed_microusd": spent + held,
+        "spent_microusd": spent,
+        "reserved_microusd": held,
+        "operation_count": len(rows),
+        "status_counts": {
+            state: sum(row["status"] == state for row in rows)
+            for state in ("reserved", "dispatched", "unknown", "completed")
+        },
+        "response_count": sum(row["evidence_source"] != "missing" for row in rows),
+        "receipt_count": sum(row["evidence_source"] == "receipt" for row in rows),
+        "checkpoint_count": sum(row["evidence_source"] == "checkpoint" for row in rows),
+        "missing_evidence_count": sum(row["evidence_source"] == "missing" for row in rows),
+        "tokens": {
+            "known_operations": len(usages),
+            "unknown_operations": len(rows) - len(usages),
+            "known_input_tokens": inputs,
+            "known_output_tokens": outputs,
+            "input_tokens": inputs if len(usages) == len(rows) else None,
+            "output_tokens": outputs if len(usages) == len(rows) else None,
+        },
+    }
+
+
+def _cost_report(
+    owners: list[dict[str, object]],
+    operations: list[dict[str, object]],
+    arm_ids: list[str],
+    planned_owner_count: int,
+    fallback_model: str | None,
+) -> dict[str, object]:
+    if len(operations) > MAX_OPERATIONS:
+        raise PolicyResultsError("study operation population exceeds the reporting ceiling")
+    by_owner = {str(owner["run_id"]): owner for owner in owners}
+    if len(by_owner) != len(owners) or len(owners) > planned_owner_count:
+        raise PolicyResultsError("reporting owner population differs")
+    seen = set()
+    models: dict[str | None, list[dict[str, object]]] = {}
+    for row in operations:
+        owner = by_owner[str(row["run_id"])]
+        arm = row["arm_index"]
+        if (
+            row["operation_id"] in seen
+            or type(arm) is not int
+            or not 0 <= arm < len(arm_ids)
+            or row["arm_id"] != arm_ids[arm]
+            or row["stage_role"] not in _STAGE_ROLES
+            or not _same(
+                {key: row[key] for key in _COORDINATES}, {key: owner[key] for key in _COORDINATES}
+            )
+        ):
+            raise PolicyResultsError("reporting operation identity or coordinates differ")
+        seen.add(row["operation_id"])
+        models.setdefault(cast(str | None, row["requested_model"]), []).append(row)
+    summary = _cost_summary(operations)
+    expected = {
+        key: sum(cast(int, _object(owner["accounting"])[key]) for owner in owners)
+        for key in _AMOUNTS
+    }
+    if not _same({key: summary[key] for key in _AMOUNTS}, expected):
+        raise PolicyResultsError("reporting amounts differ from original owner accounting")
+    quality = [row for row in operations if row["stage_role"] == "quality"]
+    return {
+        "operations": operations,
+        "owner_coverage": {"planned": planned_owner_count, "present": len(owners)},
+        "current_study": summary,
+        "by_arm": [
+            {
+                "arm_index": index,
+                "arm_id": identifier,
+                "summary": _cost_summary([row for row in operations if row["arm_index"] == index]),
+            }
+            for index, identifier in enumerate(arm_ids)
+        ],
+        "by_stage": [
+            {
+                "stage_role": role,
+                "summary": _cost_summary([row for row in operations if row["stage_role"] == role]),
+            }
+            for role in _STAGE_ROLES
+        ],
+        "by_arm_stage": [
+            {
+                "arm_index": index,
+                "arm_id": identifier,
+                "stage_role": role,
+                "summary": _cost_summary(
+                    [
+                        row
+                        for row in operations
+                        if row["arm_index"] == index and row["stage_role"] == role
+                    ]
+                ),
+            }
+            for index, identifier in enumerate(arm_ids)
+            for role in _STAGE_ROLES
+        ],
+        "by_requested_model": [
+            {"requested_model": model, "summary": _cost_summary(models[model])}
+            for model in sorted(models, key=lambda value: (value is None, value or ""))
+        ],
+        "physical_retry": {
+            name: _cost_summary([row for row in operations if row["physical_retry"] is value])
+            for name, value in (("known", True), ("not_retry", False), ("unknown", None))
+        },
+        "quality_fallback": {
+            "declared_model": fallback_model,
+            "status": "explicit" if fallback_model is not None else "unknown",
+            **{
+                name: _cost_summary(
+                    [row for row in quality if row["fallback_model_requested"] is value]
+                )
+                for name, value in (
+                    ("requested_fallback", True),
+                    ("other_quality", False),
+                    ("unclassified", None),
+                )
+            },
+        },
+        "limitations": [
+            "Recorded attempts and saved responses do not establish a count of network sends.",
+            "Retry and fallback views overlap arm/stage totals; they are not extra expenditure.",
+            "Usage is inclusive; unknown usage leaves complete totals null and money intact.",
+            "Requested models and attempt indices do not establish repair or causal fallback.",
+        ],
     }
 
 
@@ -424,6 +763,9 @@ def analyze_study(
 def _analyze(
     reader: _Reader, study: PolicyStudy, execution: dict[str, object], observation: Path | None
 ) -> dict[str, object]:
+    from buddha.noveltybench_results import reporting_configuration
+    from buddha.policy_analysis import describe_observations
+
     # Read only schedule-derived owner paths, including incomplete original owners.
     schedule = study.schedule()
     # Enforce the pure analysis ceiling before traversing a potentially large grid.
@@ -431,15 +773,36 @@ def _analyze(
     stages = _rows(reader.template["stages"])
     if len(stages) != 3:
         raise PolicyResultsError("this scientific projection requires the three-stage schema")
+    reporting = reporting_configuration(reader.release, stages)
+    roles = cast(list[str], reporting["stage_roles"])
+    fallback_model = cast(str | None, reporting["fallback_model"])
+    coordinates: dict[Path, dict[str, object]] = {}
+    planned_owner_count = 0
+    operation_count = 0
     allowed_owners: set[str] = set()
     for i, cell in enumerate(schedule):
         for j, _occasion in enumerate(_rows(cell["judge_occasions"])):
             child = reader.root / "cells" / str(i) / ("baseline" if j == 0 else f"judgments/{j}")
             for index in range(0 if j == 0 else 1, len(stages) + 1):
+                planned_owner_count += 1
                 path = child / "owners" / str(index)
                 allowed_owners.add((path / "manifest.json").relative_to(reader.root).as_posix())
                 if (path / "manifest.json").exists():
                     owner = reader.owner(path)
+                    operation_count += len(owner.operations)
+                    if operation_count > MAX_OPERATIONS:
+                        raise PolicyResultsError(
+                            "study operation population exceeds the reporting ceiling"
+                        )
+                    coordinates[path] = {
+                        **{
+                            key: cell[key]
+                            for key in ("cell_id", "arm_id", "arm_index", "generation_repeat")
+                        },
+                        "judge_occasion": None if index == 0 else j,
+                        "stage_index": index,
+                        "stage_role": "generation" if index == 0 else roles[index - 1],
+                    }
                     bindings = _bindings(owner)
                     if any(
                         bindings.get(name) != digest for name, digest in reader.controls.items()
@@ -592,26 +955,22 @@ def _analyze(
         analysis["mean_contrasts"] = None
         analysis["status"] = "incomplete"
     owner_rows = []
+    operation_rows = []
     for path, owner in reader.owners.items():
-        receipts = []
-        for op in owner.operations:
-            if not isinstance(op, HistoricalGatewayOperation):
-                raise PolicyResultsError("study requires original Gateway evidence")
-            receipt = op.receipt if op.status == "completed" else op.checkpoint
-            if receipt is not None:
-                request = _object(receipt["request"])
-                body = _load(base64.b64decode(cast(str, request["body_base64"]), validate=True))
-                receipts.append(
-                    {
-                        "operation_id": op.operation_id,
-                        "request_sha256": op.request_sha256,
-                        "receipt_sha256": _sha(_canonical(receipt)),
-                        "model": body.get("model"),
-                        "status": op.status,
-                    }
-                )
+        rows = _operation_evidence(owner, coordinates[path], fallback_model)
+        operation_rows.extend(rows)
+        receipts = [
+            {
+                key: row[key]
+                for key in ("operation_id", "request_sha256", "receipt_sha256", "status")
+            }
+            | {"model": row["requested_model"]}
+            for row in rows
+            if row["evidence_source"] != "missing"
+        ]
         owner_rows.append(
             {
+                **coordinates[path],
                 "directory": str(path),
                 "run_id": owner.run_id,
                 "manifest_sha256": owner.manifest_sha256,
@@ -620,12 +979,21 @@ def _analyze(
                 "receipts": receipts,
             }
         )
+    registered = describe_observations(study, analysis, provenance)
+    registered["accounting"] = _cost_report(
+        owner_rows,
+        operation_rows,
+        [cast(str, arm["arm_id"]) for arm in study.arms],
+        planned_owner_count,
+        fallback_model,
+    )
     reader.capture.finish()
     return {
         "format": "buddha.policy-results.v1",
         "publication_status": "complete" if complete else "incomplete",
         "reason": saved.get("reason"),
         "analysis": analysis,
+        "registered": registered,
         "provenance": {
             "study_sha256": study.fingerprint(),
             "release_sha256": reader.release.fingerprint(),

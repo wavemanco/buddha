@@ -91,8 +91,9 @@ This distinction responds to the [live audit](MEASUREMENT-LIVE-RESULTS.md): one
 fixed ten-story set received partitions with 4, 5, 9 and 9 groups on separate
 occasions. Generating again and judging again measure different sources of
 variation. The [execution controller](POLICY-EXECUTION.md) preserves every
-official result; an actual study still needs its analysis rule fixed before
-observation.
+official result. The [actual comparison protocol](POLICY-COMPARISON.md) fixes
+this study's analysis before observation; other studies must declare their own
+rule before inspecting results.
 
 An occasion ID here does not select a new display order or seed, change the
 official evaluator, create a funding owner or ensure a fresh provider request.
@@ -154,7 +155,15 @@ an existing study-scoped authority. The separate [actual comparison protocol](PO
 the twelve-task screen, exact child, official instrument, supplemental review
 and analysis; its [intent](conformance/pol02-study-intent.json) reconstructs this
 existing artifact without redistributing the raw corpus. The [passive reader](POLICY-RESULTS.md)
-checks saved evidence and primary arithmetic. Remaining registered reporting,
-account/runtime and funding checks, a tested handoff and live results stay open.
+checks saved evidence and primary arithmetic, then describes ranges by original
+category, both generation repetitions, J1 minus J0 judging results and
+changed group relations. Its token/cost views distinguish known usage from
+incomplete totals and recorded charges from held reservations. Parser/recovery
+causes and missing metadata remain unknown. Before launch, freeze the masked
+panel mapping, implement/test the packet materializer, and complete
+account/runtime checks, approved funding and a tested handoff. The actual answer
+packet and supplemental reviews follow real saved generation. Live results stay
+open, and model development review does not close the later human scientific
+assessment.
 The original $50 experiment and $15 judge audit do not authorize this study.
 The structure helper itself supplies no allocation or improvement result.

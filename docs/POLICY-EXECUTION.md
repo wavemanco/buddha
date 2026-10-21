@@ -53,6 +53,12 @@ The controller checks that scope and the existing terms; it does not allocate
 money. The historical $50 experiment and $15 judge audit are closed and do not
 fund this comparison.
 
+The user has confirmed standard/default processing and public pay-as-you-go
+pricing for both OpenAI and Anthropic. These are recorded account assertions,
+not proof of model access or a credential's reviewed project. The protected local
+handoff must still check those joins and current profile bounds. The separate
+[cost proposal](POLICY-COMPARISON-COSTS.md) remains unallocated.
+
 The baseline template supplies the selected release, generator, evaluator,
 profiles, model access, command sequence, seeds, runtime limits and local
 spending ceilings. Only the declared instruction/sampling factors and derived
@@ -84,9 +90,17 @@ exact child, instrument, supplemental review and analysis. Their future
 launcher must verify the reviewed publication against the controller-bound
 inputs; direct controller calls do not automatically bind external analysis
 documents. The separate [passive reader](POLICY-RESULTS.md) now checks saved
-evidence and primary arithmetic. Registered reporting, account/runtime checks,
-funding and a tested live handoff remain open. Structural validity does not
-establish scientific adequacy.
+evidence and primary arithmetic, and adds ranges by original category, generation
+repetitions, score/group disagreement between judging occasions, and
+token/cost/recovery views.
+It keeps missing usage and uncertain liabilities explicit; a saved attempt is
+not automatically a confirmed wire call, and observed retries/fallback models
+do not prove parser repair or its cause. Before actual execution, freeze the
+masked panel mapping, implement/test its packet materializer, and complete
+account/runtime checks, approved funding and a tested live handoff. Materialize
+the actual answer packet and obtain supplemental reviews only after real
+generation saves the original answers. Reporting features do not complete the
+experiment or the later human scientific assessment.
 
 ## Saved records and recovery
 

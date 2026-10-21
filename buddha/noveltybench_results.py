@@ -11,7 +11,7 @@ import math
 from typing import cast
 
 from buddha.answers import Answers, TaskSet, _id
-from buddha.releases import MAX_JSON_BYTES, ReleaseError, _json, _object, _pairs
+from buddha.releases import MAX_JSON_BYTES, Release, ReleaseError, _json, _object, _pairs
 
 MAX_ROWS = 100_000
 _DIAGNOSTIC_FIELDS = (
@@ -29,6 +29,56 @@ _DIAGNOSTIC_FIELDS = (
 
 class NoveltyBenchResultsError(ReleaseError):
     """Saved rows contradict their literal answers or the supported row structure."""
+
+
+def reporting_configuration(release: Release, stages: list[dict[str, object]]) -> dict[str, object]:
+    """Read this adapter's artifact roles and a uniquely explicit fallback model.
+
+    Absent or ambiguous CLI metadata does not establish the official defaults.
+    This neither executes the original parser nor claims a fallback occurred.
+    """
+    try:
+        if not isinstance(release, Release) or type(stages) is not list:
+            raise NoveltyBenchResultsError("explicit saved release and stage list required")
+        record = release.to_record()
+        artifacts = _object(record["artifacts"])
+        results = cast(list[str], artifacts["results"])
+        commands = cast(list[dict[str, object]], record["commands"])
+        if len(results) != 2 or len(stages) != 3 or len(commands) != len(stages):
+            raise NoveltyBenchResultsError("reporting requires three declared native stages")
+        expected = {results[0]: "grouping", results[1]: "quality", artifacts["summary"]: "summary"}
+        roles = []
+        for stage in stages:
+            outputs = _object(stage)["outputs"]
+            if type(outputs) is not list:
+                raise NoveltyBenchResultsError("stage outputs must be declared")
+            matches = {
+                expected[path]
+                for output in outputs
+                if (path := _object(output)["path"]) in expected
+            }
+            if len(matches) != 1:
+                raise NoveltyBenchResultsError("native stage artifact role is ambiguous")
+            roles.append(matches.pop())
+        if set(roles) != {"grouping", "quality", "summary"}:
+            raise NoveltyBenchResultsError("native stage roles are incomplete")
+        argv = cast(list[str], commands[roles.index("quality")]["argv"])
+        values = []
+        for index, argument in enumerate(argv):
+            if argument == "--fallback-judge":
+                values.append(argv[index + 1] if index + 1 < len(argv) else "")
+            elif argument.startswith("--fallback-judge="):
+                values.append(argument.split("=", 1)[1])
+        fallback = values[0] if len(values) == 1 else None
+        if fallback is not None and (
+            not fallback.strip() or fallback.startswith("--") or len(fallback.encode()) > 4096
+        ):
+            fallback = None
+        return {"stage_roles": roles, "fallback_model": fallback}
+    except (ReleaseError, ValueError, TypeError, KeyError, UnicodeError, RecursionError):
+        raise NoveltyBenchResultsError(
+            "saved reporting configuration contradicts the supported projection"
+        ) from None
 
 
 def _rows(raw: bytes) -> list[dict[str, object]]:
