@@ -1,0 +1,116 @@
+{
+  "base_commit": "55cd26ae09371e4f8c2d7c1a9cab983566d814e9",
+  "checks": {
+    "bandit": "PASS application/agents and reader; probe assertions excludedB101 only",
+    "compile": "PASS",
+    "focused": {
+      "seconds": 63.9,
+      "skips": 0,
+      "status": "PASS",
+      "tests": 14,
+      "warnings": 0
+    },
+    "full_suite": {
+      "resource_warnings": "errors; no unraisables observed",
+      "seconds": 805.801,
+      "skip_scope": "five existing Windows symlink-permission checks",
+      "skips": 5,
+      "status": "PASS",
+      "tests": 1039
+    },
+    "hosted_ci": "Separate exact-head PR checks; pending at local candidate capture, no hosted-green claim.",
+    "ruff_format": "PASS",
+    "runtime_pip_audit": "PASS zero known advisories for standard-library-only runtime requirements; not CPU-image clearance",
+    "strict_mypy": "PASS default+win32,37 application/agent sources"
+  },
+  "contract": {
+    "diagnostics": "Each target retains pack-order answer IDs and native partition; each target/occasion has agreement, disagreement, uncertain and missing counts. No pooled accuracy.",
+    "exit_codes": {
+      "0": "complete-input report saved",
+      "130": "cancelled",
+      "2": "invalid/unavailable evidence or output",
+      "3": "partial-input report saved; study remains incomplete"
+    },
+    "format": "buddha.meas02-target-results.v1",
+    "inputs": "Explicit study + existing authority; complete anchored report or one explicit partial observation.",
+    "partial": "Selected historical coverage stays selected after later resume; captured financial totals stay separate from current totals. Forty observed rows cannot supply missing completion anchors.",
+    "read_only": "Existing bounded passive capture/financial readers; no mutable Gateway, authority, worker, keys, model calls, locks, reconciliation or migrations.",
+    "writes": "CLI creates only a new output outside study and selected components; canonical parent/root validation includes actual Windows short-path aliases."
+  },
+  "format": "buddha.meas02-target-reader-delivery.v1",
+  "implementation_commit": "35a0706d21e7b191387523074079fd45eeb65e92",
+  "limits": [
+    "Synthetic shown-index parity responses are not semantic ratings or observed judge accuracy.",
+    "Frozen model-development expectations are not human gold; repeated/shared pairs and contexts are dependent.",
+    "Final partitions alone do not establish raw parser/repair behavior, provider billing or authentication.",
+    "This exact frozen-study reader requires its retained bound inputs/selected components; passive retirement history readers remain separate.",
+    "No revised official ranking, held-out improvement, source evolution or scientific gate completion.",
+    "Eleven current planned/next leaves include newly proven REC-05D; MEAS-02 remains soleNext."
+  ],
+  "local_logs": {
+    "runs/reviews/meas02-result-consumer/runs/reviews/meas02-results-counts-path-red.log": "c11a00f721e32903f7433b1c75ab93151d78dafd115bc55c54249555a63a64a8",
+    "runs/reviews/meas02-result-consumer/runs/reviews/meas02-results-final-14-green.log": "38ec4e1800535d156f4a85793959afbb224e4cb3aee5cea065c1abcac54f9beb",
+    "runs/reviews/meas02-result-consumer/runs/reviews/meas02-results-first-functional.log": "6590baf55cbc4cec415a824097b81716e040d615f4d69a35f370e0c446e31af5",
+    "runs/reviews/meas02-result-consumer/runs/reviews/meas02-results-red.log": "bf1df2c0aad152bfbc029f25b7e0a2d83d3059cdcc4c20da8b4d13dcbf37c313",
+    "runs/reviews/meas02-result-consumer/runs/reviews/meas02-results-types-red.log": "6dbffef49da55701e518e2645d229dc1bfd47eaf6ac00bf3893c0ebfb7f239a5",
+    "runs/reviews/meas02-results-audit.log": "e82148c0c30269ca5a2c35420ece6af011a4faf5a375325d750e243ffdb10625",
+    "runs/reviews/meas02-results-compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/reviews/meas02-results-format.log": "e333cad605dae1c5c76aa4590f5b96b5bc8b4c36989df2d0e78b7a6ac045f689",
+    "runs/reviews/meas02-results-full-suite.log": "c264627a0f4afe7f17a85249b2896217ab1b2a3044f5d18d018d0c104762f65b",
+    "runs/reviews/meas02-results-lint.log": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+    "runs/reviews/meas02-results-native-proof-final.log": "96debecda0390ea27011cd882a9515efb85c67cf9b4b35a4026e0ee38c446c93",
+    "runs/reviews/meas02-results-numeric-probe-red.log": "2da018ff478b840805a3f43b88781023fb575cea11486c21feafff419118064f",
+    "runs/reviews/meas02-results-script-security.log": "7f5692201459bedb6d629b8f6338953d073834b033a902fccb6175df48b8d960",
+    "runs/reviews/meas02-results-security.log": "a3dcb79e137efb4807edad298f69db270aa311697ee0f53e5dbf49e5765b1b01",
+    "runs/reviews/meas02-results-types.log": "706935f02fed95e8e0241ec13fa86be727783ee491ba3e8e4470ceaeed6232d8",
+    "runs/reviews/meas02-results-win-types.log": "706935f02fed95e8e0241ec13fa86be727783ee491ba3e8e4470ceaeed6232d8"
+  },
+  "new_followup": {
+    "finding": "REC5-CI2",
+    "observed": "Fresh-temp actual baseline exclusive writer plus actual doctor PID reader reproduces Windows WinError32 and retained running.lock.",
+    "plan_item": "REC-05D",
+    "scope": "Earlier legacy empty-lock fix was narrower. Shared active-observer opener follow-up must preserve PID and evidence guards; no original writer or root pinned source changed here.",
+    "status": "planned, isolated implementation under separate review"
+  },
+  "preservation": {
+    "all_live_source_pins_unchanged": true,
+    "application_changes": 0,
+    "current_live_grant": "Not opened by the fixture proof; no model operation or new authorization. User live execution is separate.",
+    "financial_transition_changes": 0,
+    "live_handoff_source_files": 45,
+    "official_instrument_changes": 0,
+    "score_changes": 0
+  },
+  "recorded_at_utc": "2026-10-21T02:53:38.876882+00:00",
+  "retained_native_smoke": {
+    "actual_provider_calls": 0,
+    "cases": 5,
+    "defensive_result_replay": true,
+    "input_files_unchanged": 220,
+    "interrupted_after_resume": "Captured1 operation remains separate from current40; zero selected target rows remain zero.",
+    "measured_by_case": [
+      40,
+      0,
+      1,
+      0,
+      1
+    ],
+    "proof": "docs/conformance/meas02-results-native-proof.json",
+    "real_keys_used": false,
+    "sha256": "77bcd5510f075f3ea4bf2bcd036a56c87dbb8acd4f880e11b4013eb186b45a77",
+    "state_authority_writes": 0
+  },
+  "source_sha256": {
+    "docs/conformance/meas02-results-native-proof.json": "77bcd5510f075f3ea4bf2bcd036a56c87dbb8acd4f880e11b4013eb186b45a77",
+    "docs/conformance/meas02-results-probe.py": "fcce111a1613031481fafa4a74274f6f7eb2b280756a91cc984bcf229b9c75a7",
+    "docs/conformance/meas02-results.py": "a5c5ab7924b316a65645b33eb6aad466975c9e1cb26dd3e232a887736470effd",
+    "tests/test_meas02_results.py": "d77219db1ff06f5e25e3d1e1ac758243e20520c12849894d0ccaaefc09522963"
+  },
+  "status": "local_validation_passed_fresh_judge_results_pending",
+  "tests_first": {
+    "counts_red": "Missing per-target derived counts failed before addition. Label numbers remain arbitrary equality classes.",
+    "initial_red": "Missing reader helper caused import failure; original12 functional methods passed first run but a fixture SQLite connection leaked. Explicit closing fixed the fixture before a clean12 pass.",
+    "numeric_red": "Actual root probe accepted False instead of recorded0; controlled tests also accepted booleans as reservation/count and re-sealedexit0. Six actual failures preceded strict existing amount/exact-int guards.",
+    "output_alias_red": "Actual Windows GetShortPathNameW alias wrote a new report inside a selected component. Existing canonical path validation now precedes containment; protected source/financial paths are unchanged."
+  }
+}

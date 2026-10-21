@@ -480,3 +480,48 @@ This runs once in either PowerShell window, prints this audit's cap, recorded
 attempts, spending and held money, asks for no key and makes no provider calls.
 It does not resume the audit. No command is needed while the foreground runner's
 progress output is sufficient.
+
+## Offline target reports
+
+The target reader compares saved native partitions with the frozen development
+judgments. It keeps each target and occasion separate, labels uncertain and
+missing cases, and reports equivalent/distinct pair disagreements. It does not
+change official partitions, benchmark scores or the study's completion status.
+The older six-history comparator remains a separate diagnostic.
+
+After the live audit has stopped, a complete study can be inspected with:
+
+```powershell
+python docs/conformance/meas02-results.py --run runs/meas02-live-20261020/study --authorization runs/meas02-live-20261020/authorization.sqlite3 --out runs/meas02-live-20261020/target-report.json
+```
+
+This runs once, makes no provider calls and asks for no key. It checks the saved
+sources, completion anchors, native rows and financial records, then creates the
+new report file named by `--out`. It reads the study without changing it; it
+does not resume the run or release held money. Use a new output filename for
+another report. Running it while files are still changing can refuse the
+snapshot; wait until the foreground audit has stopped.
+
+For a partial study, select the exact observation filename printed by the
+runner. Replace `OBSERVATION.json` below with that filename:
+
+```powershell
+python docs/conformance/meas02-results.py --run runs/meas02-live-20261020/study --authorization runs/meas02-live-20261020/authorization.sqlite3 --observation runs/meas02-live-20261020/study/observations/OBSERVATION.json --out runs/meas02-live-20261020/partial-target-report.json
+```
+
+This has the same read-only behavior and creates a new report. It uses only that
+observation's sealed batches and validated rows from its stopped attempt. It
+does not choose the newest file or combine earlier attempts. A later successful
+resume does not enlarge this selected observation's coverage. Its captured
+accounting and current financial snapshot are reported separately. Even 40
+observed rows remain a partial result if the required completion anchors are
+missing. No extra PowerShell window is needed; either command can be stopped
+with Ctrl+C. The partial command returns exit code 3 after saving the report;
+this means the selected study is incomplete.
+
+These reports describe local evidence and model-reviewed expectations. They do
+not establish human truth, independent population accuracy, provider invoice
+accuracy or whether a native repair path caused a disagreement. Raw replies and
+the official parser/repair behavior need separate review. This report-writing
+step is optional for you; sending back the run's completion/partial status and
+observation filename is enough for me to do the analysis here.
