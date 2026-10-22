@@ -92,8 +92,8 @@ existing evaluator, with separate generation and judging owners. It keeps zero,
 one or many model callbacks distinct from answer count and preserves original
 source/accounting identities. Its confined proof passes with 23 synthetic
 replies, two fresh official judging occasions and keyless replay; the second
-occasion consumes saved C1 after producer retirement. Final hosted checks remain
-pending. The separate [common development screen](docs/SOURCE-SCREEN.md) now
+occasion consumes saved C1 after producer retirement. Its hosted Linux and Windows
+regressions pass. The separate [common development screen](docs/SOURCE-SCREEN.md) now
 compares source candidates on the same ordered development tasks, verifies saved
 official results and admits only complete usable measurements to exploratory
 parent selection. It preserves official scores and records unusable results

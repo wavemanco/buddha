@@ -1,8 +1,10 @@
 {
   "evidence_sha256": {
+    "runs/reviews/native-assessment-bothos-guide-status-receipt.json": "6c3cbdec741f47a83987816904261aa8970e265d0fd68a8144bef9c0cf2f5a98",
     "runs/reviews/native-evidence-extraction-receipt.json": "c8d398db9b75ea727b61648d9cb89b239120fb166a3d084203f5a0feb20284c5",
     "runs/reviews/native-flow-ast-equivalence.json": "7e4edfc35367304959fa523c38bd0c0112418b032d9dfb4146fda08520c50cde",
     "runs/reviews/native-flow-original-acceptance.json": "b43322a08c45a0dd838295619536bdadf6944dda85112d4345eb277c74ffacd1",
+    "runs/reviews/pr54-e27-bothos-final-ci-source-join.json": "a194968f6f99a0dc069fcdef5c21e0d3d5b2734303b8f748320ed28a5cee2d22",
     "runs/reviews/pr54-e27-linux-ci-source-join.json": "4c9438f9c80788b96430a5121db0bc36cb87dc61383d2444fd0af71107a2a2c2",
     "runs/reviews/source-screen-controller-scoped-review.json": "aa59c1596904f79c586d03d8b06b220ccf2695d660962a4e9f202797d3bc3014",
     "runs/reviews/source-screen-final-guide-receipt.json": "8a49a844a0568b2ccc31b06325dc7652323460b7d533b8d1d32b25b1ca914a4a",
@@ -11,6 +13,7 @@
     "runs/reviews/source-screen-launch-native-evidence-focused.json": "e09f113eb3bc3db9832b5280261ab92103f911f5c06a81a2139185177eefb828",
     "runs/reviews/source-screen-native-independent-join.json": "93b63cb8a1c8676addc7a7c0098a69f30f7cca2843bc753d794f44cead03fdbe",
     "runs/reviews/source-screen-plan55-update.json": "e872bf2c96885622206d85ce57576d017c8a2677b66c590450253210259e144f",
+    "runs/reviews/source-screen-pr54-merge.json": "f6c0b2f1329c4e8fd1612abeed2da9c873f9e30bf2a640008a7bd0d4b5ddd2e0",
     "runs/reviews/source-screen-preservation-independent-review.json": "3bcd45070a2b229fbd1d7ccd6e097b5088ab13936eb3afee5ef8a7277b4bc97f",
     "runs/reviews/source-screen-proof-evidence.json": "6b70cb3ffcbe7a386dcd963dfaf33fbef4ff44cfed194db64a587b2220e2fad5",
     "runs/reviews/source-screen-proof-exit.json": "2bc7f1eac964ed08db7bcbaf94cde0482015b7d129240a3bb272bbbc24856b67",

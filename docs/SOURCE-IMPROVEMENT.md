@@ -180,7 +180,7 @@ assessment. It does not rerun the improver, replace this guide's original chain
 evidence, authenticate feedback notes or grant archive eligibility. Its confined
 proof uses the actual child retained from this guide's original chain, with 23
 synthetic replies and two fresh official judging occasions; the second consumes
-saved answers after producer retirement. Its hosted Linux regression passes;
-Windows remains a merge gate. The separate [common development screen](SOURCE-SCREEN.md)
+saved answers after producer retirement. Its hosted Linux and Windows regressions
+pass. The separate [common development screen](SOURCE-SCREEN.md)
 now verifies matched task coverage and exploratory source-parent eligibility.
 Full source-search integration and an actual model-authored experiment remain open.

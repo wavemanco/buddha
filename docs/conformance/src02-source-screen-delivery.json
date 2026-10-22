@@ -57,9 +57,11 @@
     "unique_test_ids": 1413
   },
   "evidence_sha256": {
+    "runs/reviews/native-assessment-bothos-guide-status-receipt.json": "6c3cbdec741f47a83987816904261aa8970e265d0fd68a8144bef9c0cf2f5a98",
     "runs/reviews/native-evidence-extraction-receipt.json": "c8d398db9b75ea727b61648d9cb89b239120fb166a3d084203f5a0feb20284c5",
     "runs/reviews/native-flow-ast-equivalence.json": "7e4edfc35367304959fa523c38bd0c0112418b032d9dfb4146fda08520c50cde",
     "runs/reviews/native-flow-original-acceptance.json": "b43322a08c45a0dd838295619536bdadf6944dda85112d4345eb277c74ffacd1",
+    "runs/reviews/pr54-e27-bothos-final-ci-source-join.json": "a194968f6f99a0dc069fcdef5c21e0d3d5b2734303b8f748320ed28a5cee2d22",
     "runs/reviews/pr54-e27-linux-ci-source-join.json": "4c9438f9c80788b96430a5121db0bc36cb87dc61383d2444fd0af71107a2a2c2",
     "runs/reviews/source-screen-controller-scoped-review.json": "aa59c1596904f79c586d03d8b06b220ccf2695d660962a4e9f202797d3bc3014",
     "runs/reviews/source-screen-final-guide-receipt.json": "8a49a844a0568b2ccc31b06325dc7652323460b7d533b8d1d32b25b1ca914a4a",
@@ -68,6 +70,7 @@
     "runs/reviews/source-screen-launch-native-evidence-focused.json": "e09f113eb3bc3db9832b5280261ab92103f911f5c06a81a2139185177eefb828",
     "runs/reviews/source-screen-native-independent-join.json": "93b63cb8a1c8676addc7a7c0098a69f30f7cca2843bc753d794f44cead03fdbe",
     "runs/reviews/source-screen-plan55-update.json": "e872bf2c96885622206d85ce57576d017c8a2677b66c590450253210259e144f",
+    "runs/reviews/source-screen-pr54-merge.json": "f6c0b2f1329c4e8fd1612abeed2da9c873f9e30bf2a640008a7bd0d4b5ddd2e0",
     "runs/reviews/source-screen-preservation-independent-review.json": "3bcd45070a2b229fbd1d7ccd6e097b5088ab13936eb3afee5ef8a7277b4bc97f",
     "runs/reviews/source-screen-proof-evidence.json": "6b70cb3ffcbe7a386dcd963dfaf33fbef4ff44cfed194db64a587b2220e2fad5",
     "runs/reviews/source-screen-proof-exit.json": "2bc7f1eac964ed08db7bcbaf94cde0482015b7d129240a3bb272bbbc24856b67",
@@ -110,13 +113,13 @@
   },
   "format": "buddha.source-screen-delivery.v1",
   "guides_sha256": {
-    "README.md": "fba60ca15f8a469629148e6e4deb375aabca1204ff475a6637fa32534edfe0c8",
-    "docs/BACKLOG.md": "ec6b644002aa4056bf696586ae66507c6ecf1b6632fa148bf9833fb9c85a4680",
+    "README.md": "7363af73c91a9adcb664f245a05b300eb83ecf7b44d358a59ea1abf47e09fd91",
+    "docs/BACKLOG.md": "7bd603b9e732434391292c544167021200fcbdbefe829be44853f4ffde3facb8",
     "docs/DESIGN.md": "1185db5b14f82c64fdf31cc5969c319cb620f8dd97bc9a50eec73f4ffdba7882",
     "docs/PLAN.md": "071d7424f9e9c12b52874a7c802832551e6ccd8030f54f658fc7cbbb50961166",
-    "docs/SOURCE-ASSESSMENT.md": "b588f208d8497b7ffd2686a190f37b20c268efe4d649a239b39fe51036843a69",
-    "docs/SOURCE-IMPROVEMENT.md": "ab5142ecc913b20165b4a9ab3bafc167f6c694b490c5f13b6daef80af779e433",
-    "docs/SOURCE-SCREEN.md": "07ed131e96bc4400a5fa7000576c1e307d0e035910a338d066afced6bb46584d"
+    "docs/SOURCE-ASSESSMENT.md": "484c5b3bbe2fc870ef1483fa33d519820ac5652c14b7c46d243c20cd1afc0bc5",
+    "docs/SOURCE-IMPROVEMENT.md": "9c10ac37e57707dcf1900a5818d9e977053309a86cf6a8fa89a2bce2ec81da48",
+    "docs/SOURCE-SCREEN.md": "279b7f572002e490afa1f25550ea1ed359de773d8812651a52ec9ae4c6ad36e4"
   },
   "interfaces": [
     "SourceScreen",
@@ -142,6 +145,29 @@
   ],
   "plan_item": "SRC-02 remains In progress; full inherited search/model-authored experiment open",
   "plan_sha256": "071d7424f9e9c12b52874a7c802832551e6ccd8030f54f658fc7cbbb50961166",
+  "prior_pr54_full_ci": {
+    "actual_checkout": "eb8160c62f70c13b3324b400b3b8c90b3ebebd03",
+    "head": "e27d371ddc1d46a4aaba1b66a2e040fa78a769c1",
+    "linux": {
+      "job": 119602770279,
+      "quality_steps_passed": 6,
+      "seconds": 418.232,
+      "skips": 5,
+      "tests": 1386
+    },
+    "merge_commit": "ff38c90c52bea2ca77bb9a7865ba1c925e8cc9e1",
+    "new_slice_1413_full_regression_claim": false,
+    "run": 39711224732,
+    "source_files_joined": 185,
+    "status": "both OS passed and merged",
+    "windows": {
+      "job": 119602770052,
+      "quality_steps_passed": 6,
+      "seconds": 3687.973,
+      "skips": 1,
+      "tests": 1386
+    }
+  },
   "prior_pr54_linux": {
     "actual_checkout": "eb8160c62f70c13b3324b400b3b8c90b3ebebd03",
     "head": "e27d371ddc1d46a4aaba1b66a2e040fa78a769c1",
@@ -160,7 +186,7 @@
     "python_inputs_unchanged": 191,
     "seconds": 25.144
   },
-  "review_sha256": "db341103b6ac4361b9e0a532ecdffadfb458f485d1e87d1541eca3dd0c6efa70",
+  "review_sha256": "ecd497038863da1e78f04db0fe124d6399a0a3aaa4872642712e9baa661a8de7",
   "source_sha256": {
     "agents/frozen_seed.py": "2b87bfe0d3c97ee45db2d45260985ffe0234eca93967f4689fb7c59f82603921",
     "buddha/__init__.py": "0857bd60619c1e1c8538fe768cbe82c781bb4e302abc6cf59130f1b17d052230",

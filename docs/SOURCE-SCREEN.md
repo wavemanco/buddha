@@ -141,9 +141,10 @@ suite. All seven final quality checks pass in 25.144 seconds with all 191 Python
 files unchanged. Collection finds 1,413 unique test IDs, with no duplicates and
 zero test bodies executed. The new slice's full hosted Linux and Windows
 regressions remain pending; no full local regression is claimed. Separately, the
-earlier native-assessment Linux regression passes 1,386 tests in 418.232 seconds
-with five existing skips and all six hosted quality steps passing; its Windows
-gate remains pending.
+earlier native-assessment regressions pass on both platforms: Linux runs 1,386
+tests in 418.232 seconds with five existing skips; Windows runs 1,386 tests in
+3,687.973 seconds with one existing skip. All six hosted quality steps pass on
+both. These are separate source-head results, not this new slice's full run.
 
 The [two-source confined probe](conformance/src02-source-screen-probe.py) is an
 engineering driver that needs separately reviewed script and complete source-map

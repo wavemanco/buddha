@@ -193,11 +193,12 @@ separate pinned images; there are no real provider calls or keys.
 
 All seven final quality checks pass in 26.318 seconds with all 185 Python inputs
 unchanged: lint, format, strict Linux and Windows typing, Bandit, runtime dependency
-audit and compile. The published native-assessment Linux regression now passes
-1,386 tests in 418.232 seconds with five existing skips and all six hosted quality
-steps passing. Its Windows gate remains pending; no full local regression was
-claimed or substituted. These results concern that native-assessment source,
-separately from the newer screen's pending 1,413-test hosted regressions. See the
+audit and compile. Published native-assessment regressions pass on both Linux
+and Windows: 1,386 tests in 418.232 seconds with five existing skips on Linux, and
+1,386 tests in 3,687.973 seconds with one existing skip on Windows. All six hosted
+quality steps pass on both. No full local regression was claimed or substituted.
+These results concern that native-assessment source, separately from the newer
+screen's pending 1,413-test hosted regressions. See the
 [delivery record](conformance/src02-native-assessment-delivery.json) for the pinned
 evidence and its limits. No pending outcome is a pass.
 
