@@ -1,0 +1,462 @@
+{
+  "base": "a0564e9177d77adadf7d0ecc091e826c0f601061",
+  "focused": {
+    "cohorts": [
+      {
+        "exit_code": 0,
+        "log": {
+          "path": "core-source-cache-8-green.log",
+          "sha256": "d151f089ac629fdb4edc134708662643ff8d58c4cf827caa4b40974f32033b96"
+        },
+        "name": "core-source-cache-8-green",
+        "seconds": 0.562,
+        "skipped": 0,
+        "tests": 8
+      },
+      {
+        "exit_code": 0,
+        "log": {
+          "path": "core-source-cache-existing-gateway.log",
+          "sha256": "430347988dffe7f6ea73faa8bb7ddfaddf069fde86d7349e50c50f643c002801"
+        },
+        "name": "core-source-cache-existing-gateway",
+        "seconds": 56.146,
+        "skipped": 0,
+        "tests": 77
+      },
+      {
+        "exit_code": 0,
+        "log": {
+          "path": "core-source-cache-existing-authorization.log",
+          "sha256": "db7a6f726fa2a347a91897de116542522e7656c66f6af7f82e5f014f3d8f3048"
+        },
+        "name": "core-source-cache-existing-authorization",
+        "seconds": 19.543,
+        "skipped": 0,
+        "tests": 41
+      },
+      {
+        "exit_code": 0,
+        "log": {
+          "path": "core-source-cache-existing-history.log",
+          "sha256": "b4663a5582eceab06ead3448537717316ace5e68c19c4c8bbcbc19456f1191e6"
+        },
+        "name": "core-source-cache-existing-history",
+        "seconds": 27.086,
+        "skipped": 1,
+        "tests": 46
+      }
+    ],
+    "existing_skips": 1,
+    "new_tests": 8,
+    "related_existing_tests": 164,
+    "scope_note": "The owner-drift new test calls execution_identity directly; unchanged real dispatch guards are covered by existing gateway regressions."
+  },
+  "format": "buddha.core-source-cache-review.v1",
+  "full_suite": {
+    "collection": {
+      "path": "core-source-cache-collection.json",
+      "sha256": "39307fd8f72790b64a2cbec6fc26bcda07053dc17412cb28a6c1194e1b9e33d8"
+    },
+    "collection_duplicate_ids": 0,
+    "collection_unique": 1338,
+    "expected_inputs": 180,
+    "expected_tests": 1338,
+    "inputs": {
+      "path": "core-source-cache-full-suite-inputs.json",
+      "sha256": "82dfaad09a4afc6571a3534ae85cea4d31759d83bd2804b921233875de3360e6"
+    },
+    "observed_terminal_metrics": {
+      "seconds": 2418.036,
+      "skips": [
+        {
+          "result": "skipped 'host does not permit symlinks; actual container probe covers it'",
+          "test_id": "test_agent_worker.AgentWorkerTests.test_symlinked_source_is_rejected_even_when_expected_bytes_match"
+        },
+        {
+          "result": "skipped 'local incident evidence is not distributed in repository checkouts'",
+          "test_id": "test_continuation_source.ContinuationSourceTests.test_actual_original_nine_receipts_validate_read_only"
+        },
+        {
+          "result": "skipped 'host does not permit creating symlinks'",
+          "test_id": "test_history.HistoryTests.test_source_symlink_is_rejected_without_following_it"
+        },
+        {
+          "result": "skipped 'host cannot create a directory link: OSError'",
+          "test_id": "test_native_worker.NativeWorkerTests.test_replaced_artifact_root_cannot_export_another_tree"
+        },
+        {
+          "result": "skipped 'host cannot create symlinks'",
+          "test_id": "test_releases.ReleaseSelectionTests.test_symlinked_file_or_parent_is_rejected"
+        },
+        {
+          "result": "skipped 'host cannot create a symlink'",
+          "test_id": "test_search_evidence.SearchEvidenceTests.test_symlink_is_rejected"
+        },
+        {
+          "result": "skipped 'symlink creation requires platform privileges'",
+          "test_id": "test_src01_runtime.SourceRuntimeTests.test_site_root_and_unexpected_nested_symlinks_are_rejected"
+        },
+        {
+          "result": "skipped 'symlink creation requires platform privileges'",
+          "test_id": "test_src01_runtime.SourceRuntimeTests.test_supported_interpreter_alias_is_bound_to_actual_binary"
+        },
+        {
+          "result": "skipped 'symlink creation requires platform privileges'",
+          "test_id": "test_src01_runtime.SourceRuntimeTests.test_unknown_tree_symlink_is_rejected_even_with_safe_target"
+        },
+        {
+          "result": "skipped 'symlink creation requires platform privileges'",
+          "test_id": "test_src01_runtime.SourceRuntimeTests.test_venv_interpreter_cannot_escape_the_pinned_base"
+        }
+      ],
+      "summary": [
+        "Ran 1338 tests in 2418.036s",
+        "OK (skipped=10)"
+      ],
+      "tests": 1338,
+      "unique_ids": 1338,
+      "wrapper_wall_seconds": 2418.905889799935
+    },
+    "pid": 68004,
+    "process": {
+      "path": "core-source-cache-full-suite-process.json",
+      "sha256": "d20c20cae115ae0119653d72b882f2280a5991981d9cfafc5f924a8c2284bf4a"
+    },
+    "publication_gate": "Final source suite and seven local checks passed; tracked delivery remains pending parent metadata and explicit old-proof/new-source bridge.",
+    "required_terminal_path": "runs/reviews/core-source-cache-full-suite-exit.json",
+    "started_utc": "2026-10-21T22:33:18.183319+00:00",
+    "status": "terminal_pass_local_windows",
+    "terminal_sha256": "ce4a222a988f30018c6599c775b3bc591581aec2860188a35d97fec7f95d61ad"
+  },
+  "hosted_ci": {
+    "actual_merge_checkout": [
+      "084dcc641fb3bcc0cecc193a0c37ee1e51fd3c45"
+    ],
+    "gate": "Final metadata or rebased heads require their own green checks. Separate runners and OS results are observations, not guaranteed speedups.",
+    "linux": {
+      "job_id": 119525165720,
+      "summary": [
+        "Ran 1338 tests in 703.004s",
+        "OK (skipped=5)"
+      ],
+      "terminal": {
+        "bytes": 8708,
+        "path": "pol02-pr52-linux-duration-terminal.json",
+        "sha256": "6e979f1d24f0142b2089670c9732695468a51032a22f5162b892aac4f4ba9515"
+      }
+    },
+    "source_head": "b4e9cf106dd6fc501920f7c8c73aa3254685c222",
+    "status": "both_source_head_jobs_passed",
+    "windows": {
+      "job_id": 119525166198,
+      "provenance_addendum": {
+        "bytes": 1091,
+        "path": "pol02-pr52-windows-log-provenance.json",
+        "sha256": "f29000cb47e88bfbeb9ec51cbf0fa239989aff4ed83fc67d29f2c99f872b599e"
+      },
+      "summary": [
+        "Ran 1338 tests in 2476.284s",
+        "OK (skipped=1)"
+      ],
+      "terminal": {
+        "bytes": 8533,
+        "path": "pol02-pr52-windows-duration-terminal.json",
+        "sha256": "a29f5de1607a52b90e4d792312c88bf46fc9ffa48f8b81dd1d0463b113b5e7ae"
+      }
+    }
+  },
+  "independent_final_join": {
+    "bytes": 32059,
+    "path": "core-source-cache-independent-final-join.json",
+    "sha256": "a1bd0f3ff575c7aa65c0bea936d8c4d9fb4c90ff540ac823692ce0b79751487c"
+  },
+  "limits": [
+    "No provider access, approved allocation, paid execution, held-out result, semantic judge accuracy or scientific/source improvement claim.",
+    "Later metadata/rebased heads require their own green hosted checks. Observed runner times do not establish a controlled speedup.",
+    "Only exact raw bytes plus frozen allowed CORE form cache identity. No path/stat/file-hash/runtime/profile/request/authorization/execution-identity cache.",
+    "At most16 production cache entries of at most512KiB each:8MiB retained raw-key payload, plus object/cache overhead and in-flight work. Larger sources validate uncached; failures are not retained; concurrent cold misses may duplicate pure work.",
+    "New gateway bytes deliberately change installed-core identity. Old frozen operator owners and the actual33-file unallocated proposal are not silently resealed or rebound.",
+    "No actual authority DB, grant, credential, provider access, paid call, Docker/runtime result or scientific improvement is established by this candidate.",
+    "The explicit old-proof/new-host resource and source bridge is required before using the new source for the first paid comparison; it is not evidence of a new full-size proof or a condition invented for publishing this pure cache slice."
+  ],
+  "local_quality": {
+    "checks": [
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-m",
+          "ruff",
+          "check",
+          "buddha",
+          "tests",
+          "agents"
+        ],
+        "exit_code": 0,
+        "log": {
+          "path": "core-source-cache-quality-lint.log",
+          "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+        },
+        "name": "lint",
+        "terminal": {
+          "path": "core-source-cache-quality-lint-exit.json",
+          "sha256": "4c83789c1b05674fc16ba7739336f14af3f0a5f92f166ee46c79c31e7e031562"
+        }
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-m",
+          "ruff",
+          "format",
+          "--check",
+          "buddha",
+          "tests",
+          "agents"
+        ],
+        "exit_code": 0,
+        "log": {
+          "path": "core-source-cache-quality-format.log",
+          "sha256": "80e3689d562bbda67627034f54468d4cf3dfc637953d57d33acae620be3028c9"
+        },
+        "name": "format",
+        "terminal": {
+          "path": "core-source-cache-quality-format-exit.json",
+          "sha256": "6a9bea9a7e84451cad98f3bff91c3545b9610334f9de132b48b9665cb4b56764"
+        }
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-m",
+          "mypy",
+          "--strict",
+          "--platform",
+          "linux",
+          "buddha",
+          "agents"
+        ],
+        "exit_code": 0,
+        "log": {
+          "path": "core-source-cache-quality-types_linux.log",
+          "sha256": "5b7719d776158805d48502fa63fafddaa81ec23574853bf8e45b4e33ec46ac1b"
+        },
+        "name": "types_linux",
+        "terminal": {
+          "path": "core-source-cache-quality-types_linux-exit.json",
+          "sha256": "7378cc0218bdae8ecce4631838d76b321fa99e94766bcd1ea33f6aa7be886e89"
+        }
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-m",
+          "mypy",
+          "--strict",
+          "--platform",
+          "win32",
+          "buddha",
+          "agents"
+        ],
+        "exit_code": 0,
+        "log": {
+          "path": "core-source-cache-quality-types_windows.log",
+          "sha256": "5b7719d776158805d48502fa63fafddaa81ec23574853bf8e45b4e33ec46ac1b"
+        },
+        "name": "types_windows",
+        "terminal": {
+          "path": "core-source-cache-quality-types_windows-exit.json",
+          "sha256": "135b09344f02a04dae345743e59e332e25cee5bce23b4439061be39371d435ed"
+        }
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-m",
+          "bandit",
+          "-r",
+          "buddha",
+          "agents"
+        ],
+        "exit_code": 0,
+        "log": {
+          "path": "core-source-cache-quality-security.log",
+          "sha256": "4dcf1432e368a8d839e15bfc2152e9dc2f23bf6c58a76ed15bf2237b481dd511"
+        },
+        "name": "security",
+        "terminal": {
+          "path": "core-source-cache-quality-security-exit.json",
+          "sha256": "2a03ebf8608ae85465653b8e44137de039c59ab81d6aa72836c1b644ce8794bd"
+        }
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-m",
+          "pip_audit",
+          "--no-deps",
+          "-r",
+          "requirements.txt"
+        ],
+        "exit_code": 0,
+        "log": {
+          "path": "core-source-cache-quality-runtime_dependencies.log",
+          "sha256": "e82148c0c30269ca5a2c35420ece6af011a4faf5a375325d750e243ffdb10625"
+        },
+        "name": "runtime_dependencies",
+        "terminal": {
+          "path": "core-source-cache-quality-runtime_dependencies-exit.json",
+          "sha256": "34caa79623c37892acf1ad422ee909990d112ec61c546ff491423025ea41cc98"
+        }
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-m",
+          "compileall",
+          "-q",
+          "buddha",
+          "tests",
+          "agents"
+        ],
+        "exit_code": 0,
+        "log": {
+          "path": "core-source-cache-quality-compile.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "name": "compile",
+        "terminal": {
+          "path": "core-source-cache-quality-compile-exit.json",
+          "sha256": "468c0b30d693ee37d6a3c090ad84787d639bd8630aacbf2ede04d8f5b6784068"
+        }
+      }
+    ],
+    "input_count": 180,
+    "scope_note": "Seven local checks; Linux and win32 mypy targets are not hosted OS full regressions.",
+    "status": "passed",
+    "summary": {
+      "path": "core-source-cache-quality.json",
+      "sha256": "aa27d824eba1d6bbf2f03167ad285ad3caae328409d6a14809e19c34a5f8c428"
+    }
+  },
+  "parent_plan_sha256": "0953b3b490e47e32645d09d697cd26d516f7103c1f554fdefef0a588376c3721",
+  "post_terminal_source_and_resource_bridge": {
+    "known_json_and_proposal_growth_bytes": 12362,
+    "limits": [
+      "Original old-source full-size evidence, not an executed cached-source full-size run.",
+      "Only exact quoted JSON source/proposal-reference substitutions are projected; no valid manifest is rewritten/resealed.",
+      "Old capture maxima are per-snapshot maxima, never sums; final descendant-tree bytes exclude external capture inputs.",
+      "No per-file capture membership exists in the original measurement; the illustrative sum is NOT a certified new capture or SQLite/page/layout bound.",
+      "Future funded launch/review/authority/destination names and output-provenance growth remain separate layout inputs.",
+      "Database files were statted only: fresh UUID/hash/index/page allocation cannot be inferred from equal serialized widths.",
+      "Cache8MiB raw-key retention plus overhead/in-flight work is separate process memory, not capture bytes.",
+      "No4096-attempt/unlimited-recovery, latency, access, funding, pricing/invoice, semantic or live-readiness guarantee.",
+      "No repository imports, SQL/database reads, provider/key/network/container/test/proof execution."
+    ],
+    "original_proof_sha256": "c33cb45e04643a401731b8568984e721e06f7e08c868da93f6beb426385a2ea5",
+    "owner_manifests": 56,
+    "sha256": "e03720b8923d682ecc5eb5aa6e4da79d0bcd179002ed6bc94a4558bfa7c5c69f",
+    "status": "known_metadata_fits_observed_margin"
+  },
+  "preservation": {
+    "original_49_rows_exact": true,
+    "parent_history_rows": 51,
+    "parent_plan_body_unchanged_except_header_and_appended_row": true
+  },
+  "profile": {
+    "all_ast_parse_calls": {
+      "after": 10,
+      "before": 13843
+    },
+    "ast_walk_profile_frame_counts": {
+      "after": 24230,
+      "before": 37185764,
+      "meaning": "Generator-frame resumes/yields, not top-level walk invocations."
+    },
+    "comparison": {
+      "path": "core-source-cache-profile-independent-comparison.json",
+      "sha256": "b8881a3158e293d02a5301cac5df42281825fd726f82d6ed7e53ab268ff2c2d2"
+    },
+    "core_ast_parse_calls": {
+      "after": 9,
+      "before": 13842
+    },
+    "profile_total_seconds": {
+      "after": 227.38028410000038,
+      "before": 388.5745404000003
+    },
+    "scope_note": "Observed local Windows one-case cProfile runs under concurrent load. No causal whole-suite, Ubuntu or hosted-CI speedup estimate.",
+    "status": "two_saved_one_case_profiles_verified",
+    "test_file_sha256": "220024134719635fce7ae5de57dcaa87dfc36c360bb4f74f87baeaad31da3c63",
+    "testcase_bytes_equal": true,
+    "unchanged_observed_counts": {
+      "core_sources": 1538,
+      "direct_core_file_hashes": 13842,
+      "direct_core_fresh_reads": 13842,
+      "direct_core_path_comparisons": 13842,
+      "direct_core_sha256": 13842,
+      "execution_identity": 1480,
+      "file_hash": 136171,
+      "inventory": 12200,
+      "verify_selection": 2334
+    },
+    "unittest_seconds": {
+      "after": 227.146,
+      "before": 388.412
+    }
+  },
+  "prospective_runtime_limit_review": {
+    "generation_worker_seconds": 7200,
+    "limit": "The unallocated proposal does not activate transport600; a separately approved launch must bind it. Socket timeout is not total call duration. Worker wall limits and synchronous paid-call unwind do not promise overall completion.",
+    "native_stage_worker_seconds": 14400,
+    "proposed_socket_timeout_seconds": 600,
+    "sha256": "f3e02dbdaa62f0eaf51ab15f50a4a37f21767290d4911667d6877b61ea6bcc55"
+  },
+  "readme_delta": "No new user command or runtime control; no additional README edit proposed.",
+  "red": {
+    "exit_code": 1,
+    "failure": "Repeated identical core check parsed nine ASTs instead of zero; fresh hash/read assertions passed. Future helper-dependent methods were not claimed run.",
+    "kind": "genuine_behavioral_failure",
+    "log": {
+      "path": "core-source-cache-warm-red.log",
+      "sha256": "79541170dbe2fb82dc508e29ef66f2e968916d247d9971d5abc9b4c5c3f9b782"
+    },
+    "seconds": 0.078,
+    "source_sha256": "9c473880b3a2a3f93eb892995810163d2fc8a498d3b2ac80c9a7fbdbba766808",
+    "test_sha256": "6baa7a8eefb0ba513f04d8a41a6300fc93958240d21ffa381daf6c6b806d63eb",
+    "tests_executed": 1
+  },
+  "scope": "Reuse only successful exact-byte installed-core AST predicates; retain fresh source and execution identity verification.",
+  "skip_identity_join": {
+    "bytes": 2024,
+    "path": "core-source-cache-skip-population-join.json",
+    "sha256": "e7b4b284ffd475b4d7034de3cb21333e7e716de95e8c00f0ba6247b55531ff87"
+  },
+  "source_commit": "b4e9cf106dd6fc501920f7c8c73aa3254685c222",
+  "source_reviews": [
+    {
+      "path": "core-source-cache-extraction-review.json",
+      "sha256": "0d24922755797d12f9588a280debcc8f3f30b8514c1735c0d04da709e7bbfe9b"
+    },
+    {
+      "path": "core-source-cache-independent-static-review.json",
+      "sha256": "3177268045f0997327d441a7a75478afc96bd79832b7267b4bf90c28c90afb10"
+    },
+    {
+      "path": "core-source-cache-profile-independent-comparison.json",
+      "sha256": "b8881a3158e293d02a5301cac5df42281825fd726f82d6ed7e53ab268ff2c2d2"
+    }
+  ],
+  "spec_map": {
+    "buddha/gateway.py": [
+      "docs/DESIGN.md: 2. What changes and what remains authoritative",
+      "docs/DESIGN.md: 9. Paid-operation integrity",
+      "docs/PLAN.md: BENCH-03B/C selected and installed source identity"
+    ],
+    "tests/test_core_source_cache.py": [
+      "AGENTS.md: spec-defined failing checks and trust-boundary regression verification"
+    ]
+  },
+  "status": "bounded pure-source cache gate passed",
+  "validation_source_count": 180
+}
