@@ -1,4 +1,4 @@
-"""One selected task program inside the SRC runtime; the host enforces authority.
+"""One selected source program inside the SRC runtime; the host enforces authority.
 
 Source and environment checks provide consistency, not a Python security sandbox.
 The candidate can be hostile. Its frames, counters and completion remain untrusted
@@ -17,9 +17,11 @@ sys.dont_write_bytecode = True
 if not __package__:
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from buddha.channel import read_frame, write_frame  # noqa: E402
+from buddha.channel import ChannelError, _depth, read_frame, write_frame  # noqa: E402
 from buddha.releases import (  # noqa: E402
+    MAX_FEEDBACK_BYTES,
     MAX_JSON_BYTES,
+    MAX_SOURCE_BYTES,
     ReleaseError,
     _digest,
     _inventory,
@@ -27,7 +29,9 @@ from buddha.releases import (  # noqa: E402
     _load,
     _object,
     _path,
+    _proposal_capture,
     _root,
+    _source_proposal,
     _text,
     file_hash,
     inventory,
@@ -88,8 +92,10 @@ class CandidateWorker:
     def __init__(self, initial: dict[str, object], reader: BinaryIO, writer: BinaryIO) -> None:
         try:
             self._initial = _json(initial)
+            record = _load(self._initial)
+            self.improvement = record.get("format") == "buddha.candidate-improvement-worker.v1"
             record = _object(
-                _load(self._initial),
+                record,
                 {
                     "type",
                     "format",
@@ -98,12 +104,15 @@ class CandidateWorker:
                     "entrypoint",
                     "agent_sha256",
                     "config",
-                    "task",
                     "max_callbacks",
                     "runtime",
-                },
+                }
+                | ({"feedback"} if self.improvement else {"task"}),
             )
-            if record["type"] != "configure" or record["format"] != "buddha.candidate-worker.v1":
+            if record["type"] != "configure" or record["format"] not in {
+                "buddha.candidate-worker.v1",
+                "buddha.candidate-improvement-worker.v1",
+            }:
                 raise CandidateWorkerError("unsupported worker configuration")
             roots = _object(record["roots"], {"agent", "runner"})
             self.roots = {name: Path(_text(value)) for name, value in roots.items()}
@@ -141,14 +150,41 @@ class CandidateWorker:
                 "in-context",
             ):
                 raise CandidateWorkerError("unsupported candidate configuration")
-            self.task = _object(record["task"], {"id", "prompt", "count"})
-            identifier = self.task["id"]
-            if type(identifier) is int:
-                _integer(identifier, -(2**63))
+            if self.improvement:
+                feedback = record["feedback"]
+                if (
+                    type(feedback) is not list
+                    or not 1 <= len(feedback) <= 1000
+                    or len(_json(feedback)) > MAX_FEEDBACK_BYTES
+                ):
+                    raise CandidateWorkerError("invalid improvement feedback")
+                seen: set[str | int] = set()
+                for value in feedback:
+                    item = _object(value, {"task", "note"})
+                    task = _object(item["task"], {"id", "prompt", "count"})
+                    identifier = task["id"]
+                    if type(identifier) is int:
+                        checked_id: str | int = _integer(identifier, -(2**63), 2**63 - 1)
+                    else:
+                        checked_id = _text(identifier)
+                    if checked_id in seen:
+                        raise CandidateWorkerError("feedback repeats a task")
+                    seen.add(checked_id)
+                    _literal(task["prompt"])
+                    _integer(task["count"], 1, 1000)
+                    note = _literal(item["note"])
+                    if not note.strip() or len(note.encode()) > 4096:
+                        raise CandidateWorkerError("invalid feedback note")
+                self.feedback = feedback
             else:
-                _text(identifier)
-            _literal(self.task["prompt"])
-            self.count = _integer(self.task["count"], 1, 1000)
+                self.task = _object(record["task"], {"id", "prompt", "count"})
+                identifier = self.task["id"]
+                if type(identifier) is int:
+                    _integer(identifier, -(2**63))
+                else:
+                    _text(identifier)
+                _literal(self.task["prompt"])
+                self.count = _integer(self.task["count"], 1, 1000)
             self.max_callbacks = _integer(record["max_callbacks"])
             self.runtime = _object(
                 record["runtime"], {"sha256", "helper_sha256", "manifest_sha256"}
@@ -182,7 +218,11 @@ class CandidateWorker:
                 or record["roots"] != {name: str(path) for name, path in self.roots.items()}
                 or record["inventories"] != self.inventories
                 or record["config"] != self.config
-                or record["task"] != self.task
+                or (
+                    record["feedback"] != self.feedback
+                    if self.improvement
+                    else record["task"] != self.task
+                )
                 or record["entrypoint"] != self.entrypoint
                 or record["max_callbacks"] != self.max_callbacks
                 or record["runtime"] != self.runtime
@@ -271,12 +311,20 @@ class CandidateWorker:
             raise CandidateWorkerError("worker may execute only one task")
         self.started = True
         answers: list[str] = []
+        proposal: dict[str, object] = {
+            "status": "not_returned",
+            "value": None,
+            "sha256": None,
+            "bytes": None,
+        }
         status, reason = "failed", "protocol"
         try:
             self._sources()
             self._runtime()
             path = self.roots["agent"] / self.entrypoint
             source = _consume(path, _object(self.inventories["agent"])[self.entrypoint])
+            if self.improvement and len(source) > MAX_SOURCE_BYTES:
+                raise CandidateWorkerError("parent source exceeds its byte ceiling")
             try:
                 source.decode("utf-8")
             except UnicodeError:
@@ -287,29 +335,60 @@ class CandidateWorker:
             # Candidate bytes are executed only in the separately confined worker.
             exec(compile(source, str(path), "exec"), vars(candidate))  # nosec B102
             self._sources()
+            input_key = "feedback_sha256" if self.improvement else "task_sha256"
             write_frame(
                 self.writer,
                 {
                     "type": "ready",
                     "agent_sha256": self.initial["agent_sha256"],
-                    "task_sha256": hashlib.sha256(_json(self.task)).hexdigest(),
+                    input_key: hashlib.sha256(
+                        _json(self.feedback if self.improvement else self.task)
+                    ).hexdigest(),
                     "runtime_sha256": self.runtime["sha256"],
                 },
             )
-            generate = vars(candidate).get("generate")
-            if not callable(generate):
-                raise ValueError("candidate entry point is not callable")
-            value: object = generate(
-                _load(_json(self.task)), _load(_json(self.config)), self._complete
-            )
+            if self.improvement:
+                improve = vars(candidate).get("propose_improvement")
+                if not callable(improve) or not callable(vars(candidate).get("generate")):
+                    raise ValueError("inherited entry points are unavailable")
+                detached = _load(_json({"feedback": self.feedback, "config": self.config}))
+                value: object = improve(
+                    {
+                        "entrypoint": self.entrypoint,
+                        "source": source.decode("utf-8"),
+                        "agent_sha256": self.initial["agent_sha256"],
+                    },
+                    detached["feedback"],
+                    detached["config"],
+                    self._complete,
+                )
+                proposal = _proposal_capture(value)
+            else:
+                generate = vars(candidate).get("generate")
+                if not callable(generate):
+                    raise ValueError("candidate entry point is not callable")
+                value = generate(_load(_json(self.task)), _load(_json(self.config)), self._complete)
             if self.stopped is not None:
                 raise _Stop(self.stopped)
             if self.poisoned:
                 raise CandidateWorkerError("candidate channel failed")
-            if type(value) is not list or len(value) != self.count:
-                raise ValueError("candidate did not return exact answer count")
-            answers = [_literal(item) for item in value]
-            status, reason = "complete", "complete"
+            if self.improvement:
+                if proposal["status"] != "captured":
+                    status, reason = "failed", "proposal_" + str(proposal["status"])
+                else:
+                    try:
+                        # Check the actual Python return before JSON normalizes subclasses.
+                        checked = _source_proposal(value)
+                        if checked["source"].encode("utf-8") == source:
+                            raise ReleaseError("unchanged source")
+                        status, reason = "complete", "complete"
+                    except ReleaseError:
+                        status, reason = "failed", "invalid_proposal"
+            else:
+                if type(value) is not list or len(value) != self.count:
+                    raise ValueError("candidate did not return exact answer count")
+                answers = [_literal(item) for item in value]
+                status, reason = "complete", "complete"
         except _Stop as stop:
             status, reason = "stopped", stop.reason
         except CandidateWorkerError:
@@ -328,8 +407,21 @@ class CandidateWorker:
             "type": "done",
             "status": status,
             "reason": reason,
-            "answers": answers if status == "complete" else [],
+            **(
+                {"proposal": proposal}
+                if self.improvement
+                else {"answers": answers if status == "complete" else []}
+            ),
         }
+        if self.improvement:
+            try:
+                _depth(done)
+            except ChannelError:
+                # Preserve known serialization identity, but omit a value the framed
+                # channel cannot carry. Omitted-body metadata stays worker-declared.
+                done["proposal"] = proposal | {"status": "omitted", "value": None}
+                if reason in {"complete", "invalid_proposal"}:
+                    done.update(status="failed", reason="proposal_unavailable")
         write_frame(self.writer, done)
         return done
 

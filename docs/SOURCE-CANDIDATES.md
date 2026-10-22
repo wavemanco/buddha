@@ -200,3 +200,9 @@ declared scope. They do not show a parent authoring a child, an improved
 improver, benchmark gains or resistance to every host/kernel exploit. The
 benchmark integration remains in the existing replaceable release/C1 boundary;
 there are no NoveltyBench-version conditions in the candidate runner.
+
+## Separate inherited-source operation
+
+The [one-file improvement route](SOURCE-IMPROVEMENT.md) runs a selected parent's
+`propose_improvement` procedure and retains its proposed child and lineage. The
+SRC-01 generation-v1 contract and evidence above remain unchanged.

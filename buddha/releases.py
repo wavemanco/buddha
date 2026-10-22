@@ -20,6 +20,9 @@ MAX_JSON_BYTES = 32 * 1024 * 1024
 MAX_FILES = 100_000
 MAX_FILE_BYTES = 8 * 1024**3
 MAX_TREE_BYTES = 64 * 1024**3
+MAX_SOURCE_BYTES = 1024**2
+MAX_PROPOSAL_BYTES = 8 * 1024**2
+MAX_FEEDBACK_BYTES = 1024**2
 ROLES = frozenset({"official", "environment", "runner", "host", "agent"})
 
 
@@ -60,6 +63,78 @@ def _object(value: object, keys: set[str] | None = None) -> dict[str, object]:
     if keys is not None and set(value) != keys:
         raise ReleaseError("missing or unexpected release fields")
     return cast(dict[str, object], value)
+
+
+def _source_proposal(value: object) -> dict[str, str]:
+    """One literal source replacement; materialization is not execution competence."""
+    if type(value) is not dict:
+        raise ReleaseError("source proposals require an exact literal object")
+    record = _object(value, {"source", "hypothesis"})
+    result = {}
+    for name, maximum in (("source", MAX_SOURCE_BYTES), ("hypothesis", 4096)):
+        text = record[name]
+        if type(text) is not str:
+            raise ReleaseError("source proposals require literal UTF-8 text")
+        try:
+            raw = text.encode("utf-8")
+        except UnicodeError:
+            raise ReleaseError("source proposal text is not UTF-8") from None
+        if not raw or len(raw) > maximum or (name == "hypothesis" and not text.strip()):
+            raise ReleaseError("source proposal text exceeds its bounds")
+        result[name] = text
+    return result
+
+
+def _proposal_capture(value: object) -> dict[str, object]:
+    """Capture a returned JSON value, never claim bytes for an unavailable value.
+
+    Serialization itself runs under the worker's existing process limits. A hard
+    stop can prevent any frame; oversized metadata describes only bytes actually
+    serialized, not the original Python object or an authenticated missing body.
+    """
+    try:
+        raw = json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False).encode()
+    except Exception:
+        return {"status": "unavailable", "value": None, "sha256": None, "bytes": None}
+    return {
+        "status": "captured" if len(raw) <= MAX_PROPOSAL_BYTES else "oversized",
+        "value": json.loads(raw) if len(raw) <= MAX_PROPOSAL_BYTES else None,
+        "sha256": hashlib.sha256(raw).hexdigest(),
+        "bytes": len(raw),
+    }
+
+
+def _checked_proposal_capture(value: object) -> dict[str, object]:
+    """Verify available JSON; omitted-body size/digest remain worker declarations."""
+    record = _object(value, {"status", "value", "sha256", "bytes"})
+    status = record["status"]
+    if type(status) is not str:
+        raise ReleaseError("proposal capture status must be literal text")
+    if status == "captured":
+        raw = _json(record["value"])
+        if (
+            len(raw) > MAX_PROPOSAL_BYTES
+            or type(record["bytes"]) is not int
+            or record["bytes"] != len(raw)
+            or record["sha256"] != hashlib.sha256(raw).hexdigest()
+        ):
+            raise ReleaseError("captured proposal differs from its declared JSON")
+    elif status in {"oversized", "omitted"}:
+        if (
+            record["value"] is not None
+            or type(record["bytes"]) is not int
+            or not 0 < record["bytes"] < 2**63
+            or (status == "oversized" and record["bytes"] <= MAX_PROPOSAL_BYTES)
+            or (status == "omitted" and record["bytes"] > MAX_PROPOSAL_BYTES)
+        ):
+            raise ReleaseError("invalid omitted proposal declaration")
+        _digest(record["sha256"])
+    elif status in {"unavailable", "not_returned"}:
+        if any(record[key] is not None for key in ("value", "sha256", "bytes")):
+            raise ReleaseError("unavailable proposal cannot claim content")
+    else:
+        raise ReleaseError("unsupported proposal capture status")
+    return _load(_json(record))
 
 
 def _text(value: object) -> str:
