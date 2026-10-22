@@ -1,0 +1,97 @@
+{
+  "evidence_sha256": {
+    "runs/reviews/native-evidence-extraction-receipt.json": "c8d398db9b75ea727b61648d9cb89b239120fb166a3d084203f5a0feb20284c5",
+    "runs/reviews/native-flow-ast-equivalence.json": "7e4edfc35367304959fa523c38bd0c0112418b032d9dfb4146fda08520c50cde",
+    "runs/reviews/native-flow-original-acceptance.json": "b43322a08c45a0dd838295619536bdadf6944dda85112d4345eb277c74ffacd1",
+    "runs/reviews/pr54-e27-linux-ci-source-join.json": "4c9438f9c80788b96430a5121db0bc36cb87dc61383d2444fd0af71107a2a2c2",
+    "runs/reviews/source-screen-controller-scoped-review.json": "aa59c1596904f79c586d03d8b06b220ccf2695d660962a4e9f202797d3bc3014",
+    "runs/reviews/source-screen-final-guide-receipt.json": "8a49a844a0568b2ccc31b06325dc7652323460b7d533b8d1d32b25b1ca914a4a",
+    "runs/reviews/source-screen-final-metadata-corrections.json": "ad1a29b2c143612a1ac208c4a0f96c65c4c7f3d1742dd0fb5ea7aab51ff98e76",
+    "runs/reviews/source-screen-final-owner-wording.json": "f616709b5cfeabaaa9dd807590f76f0f9f8315896040df7c112e5ca6af9d6a6c",
+    "runs/reviews/source-screen-launch-native-evidence-focused.json": "e09f113eb3bc3db9832b5280261ab92103f911f5c06a81a2139185177eefb828",
+    "runs/reviews/source-screen-native-independent-join.json": "93b63cb8a1c8676addc7a7c0098a69f30f7cca2843bc753d794f44cead03fdbe",
+    "runs/reviews/source-screen-plan55-update.json": "e872bf2c96885622206d85ce57576d017c8a2677b66c590450253210259e144f",
+    "runs/reviews/source-screen-preservation-independent-review.json": "3bcd45070a2b229fbd1d7ccd6e097b5088ab13936eb3afee5ef8a7277b4bc97f",
+    "runs/reviews/source-screen-proof-evidence.json": "6b70cb3ffcbe7a386dcd963dfaf33fbef4ff44cfed194db64a587b2220e2fad5",
+    "runs/reviews/source-screen-proof-exit.json": "2bc7f1eac964ed08db7bcbaf94cde0482015b7d129240a3bb272bbbc24856b67",
+    "runs/reviews/source-screen-proof-inputs.json": "728ce42e2f3bf3701aae58154b1b1190d4862e97339808c3d9baa871442279f5",
+    "runs/reviews/source-screen-proof-preflight-independent-review.json": "a24d76927a13f84c7a9ae09bddfd21b366e02ce083d2ef523b93b7abeb167496",
+    "runs/reviews/source-screen-proof-prepared.json": "7733b891d0b66880f964b42c89202ddef1dbbbf63050c08aabefe92359b24f0d",
+    "runs/reviews/source-screen-proof-process.json": "47f365903ace919b91fa192e8229d4d10793082330e9cdf0b4b62027e9d10fb3",
+    "runs/reviews/source-screen-proof-source-map.json": "3b7dba8da20d04df48d028becaac211da85a61dd4c038f25776f8ea1efb8ecce",
+    "runs/reviews/source-screen-proof.log": "979be8393beeaaf42b2bccdeaee0c85685c7d94f74b60ccfe741f3d089802778",
+    "runs/reviews/src02-source-screen-collection-exit.json": "b379b7f3665336ac7f2d89b432c34e12119a5a84bc335af4f0cb8da16bd51369",
+    "runs/reviews/src02-source-screen-final-quality-exit.json": "fcb1a203a91f3eeb67f3294425fd02118ceb5c98c50863ecde082efda0901ca2",
+    "runs/reviews/src02-source-screen-first-handoff-red.json": "8d0c0866808d153b385db60a218d3fbc473907839f5c5ea6b2fc039c6d443218",
+    "runs/reviews/src02-source-screen-first-positive.json": "8011ec6bbcb62a9a840d52ad8233ffbb5e108c231fa40c0f55db1f2eed7297ce",
+    "runs/reviews/src02-source-screen-focused-closing-review.json": "214334ad53914039ca6e513d43a15a8d76181e5702917de1435ab0b1471dda48",
+    "runs/reviews/src02-source-screen-focused.json": "6305960495d318dc322db98aee3465e4f24a77d8d1c8e2644333582e61823464",
+    "runs/reviews/src02-source-screen-handoff-green.json": "a94378c68664a66e4b90f03939f1afd3cb9723206f502d9007bb925b9511dfc4",
+    "runs/reviews/src02-source-screen-probe-independent-review.json": "4a6aeb67f76f26d615d74c8564c6ecbd4bef1d650e3fc9af22d241208e044f23",
+    "runs/reviews/src02-source-screen-quality-and-collection-closing.json": "239917098894756829497be6a24929b55e2859f7a4c36532b340ef9cdf7da78c"
+  },
+  "findings": [
+    {
+      "evidence": "Focused generated-recipe mutation subcases pass; initial finding was static, not a fabricated RED.",
+      "id": "SC1",
+      "issue": "New controller-derived task/recipe bytes could be freshly adopted before final preflight.",
+      "resolution": "Supply canonical screen-derived expected hashes before first/later source and native owner preparation."
+    },
+    {
+      "id": "SC2",
+      "issue": "Artifact-identical screens could pool under different original helper/external versions.",
+      "resolution": "Verify source-role and external bindings, original core/runtime, and compare the independently reconstructed controls digest."
+    },
+    {
+      "evidence": "Actual handoff RED followed by GREEN with zero later calls.",
+      "id": "SC3",
+      "issue": "Saved report 0-to-False mutation after child return allowed four later mock requests before final rejection.",
+      "resolution": "Shared exact canonical stored-versus-returned bytes check at both complete child handoffs."
+    },
+    {
+      "evidence": "Actual omission RED followed by valid/omitted/wrong-hash GREEN; cached live checkout unchanged.",
+      "id": "SC4",
+      "issue": "New shared native reader was omitted from launcher's pre-key installed-source closure.",
+      "resolution": "Add native_evidence to the shared launcher inventory."
+    }
+  ],
+  "format": "buddha.source-screen-review.v1",
+  "independent_actual_proof": {
+    "approved_source_assets_unchanged": 208,
+    "blocked_constructor_session_network_attempts": 0,
+    "completed_operations": 46,
+    "fixture_bytes_unchanged": 108647737,
+    "fixture_files_unchanged": 221,
+    "held_microusd": 0,
+    "limits": "Independent stored-byte/accounting join; no new Docker run, model judgments or metric oracle.",
+    "productive_owners": 16,
+    "public_parent_selections": 3,
+    "public_passive_inspections": 2,
+    "receipt_derived_synthetic_spent_microusd": 230,
+    "sealed_worker_completions": 16,
+    "status": "pass",
+    "synthetic_only": true
+  },
+  "preservation": {
+    "added_python": 6,
+    "changed_prior_python": [
+      "buddha/native_pipeline.py",
+      "buddha/policy_launch.py",
+      "buddha/policy_results.py",
+      "tests/test_policy_launch.py"
+    ],
+    "prior_plan_history_rows_exact": 54,
+    "prior_python": 185,
+    "prior_test_ast_preserved": true,
+    "prior_test_files": 95,
+    "raw_unchanged_prior_test_files": 94,
+    "unchanged_prior_python": 181
+  },
+  "qualifications": [
+    "The 20-test cohort had unchanged 153 package/agent/test entries; the unused new probe changed in the broader 191-file map. Its raw before/after evidence is preserved, no rerun claimed.",
+    "Shared-reader extraction's six new and thirteen original tests precede the later pure-flow/controller changes; their exact original scopes and hashes are retained.",
+    "The new actual proof covers complete replay and retirement, not injected interrupted recovery; focused cases and the prior source-to-native proof provide separate interruption evidence.",
+    "No full local regression rerun; collection is not test execution and final-head hosted Linux/Windows checks remain merge gates."
+  ],
+  "scope": "PLAN SRC-02 common screening and exploratory parent allocation; DESIGN sections 3,4,6,10"
+}

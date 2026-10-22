@@ -83,7 +83,7 @@ generate(task, config, complete) -> ordered_list_of_answers
 propose_improvement(parent_bundle, development_feedback, config, complete) -> proposal
 ```
 
-The proposal has exactly `source` and `hypothesis` string fields. The [source guide](SOURCE-IMPROVEMENT.md) defines byte ceilings, development custody, materialization, lineage and recovery. The separate [source assessment guide](SOURCE-ASSESSMENT.md) defines how one selected candidate's anchored C1 reaches the existing native evaluator; it does not supply a common development screen, archive admission or a scientific improvement claim.
+The proposal has exactly `source` and `hypothesis` string fields. The [source guide](SOURCE-IMPROVEMENT.md) defines byte ceilings, development custody, materialization, lineage and recovery. The separate [source assessment guide](SOURCE-ASSESSMENT.md) defines how one selected candidate's anchored C1 reaches the existing native evaluator. The [common development screen](SOURCE-SCREEN.md) now composes fixed-task native assessment, complete scalar eligibility and guarded exploratory parent selection. Its bounded two-source/two-task synthetic confined proof passes; final hosted checks remain pending. The full proposal/feedback/source-search loop and scientific improvement claims remain open.
 
 `task` contains only `id`, `prompt` and `count`; `config` separately supplies the fixed resources. Improvement receives selected development tasks and reviewed notes, separately from the literal parent bundle. Each answer is a complete independent response to the original prompt. Private plans, candidate lists, probabilities, rationales for selection, and critiques are not automatically appended to answers. An answer to a request for one digit should be one digit.
 
@@ -136,7 +136,7 @@ Optimize mean utility and mean distinctiveness separately, subject to validity, 
 
 Proposed pilot defaults, to freeze before a live run: at most 64 active parents, at least 10% parent probability reserved for exploration, and a 20% reserve of viable candidates outside the frontier. These are engineering starting values, not research-backed optima; tune them only on development evidence and version changes. Store the exact rule and RNG state in the manifest. Parent probability can combine rank, an exploration floor, and inverse descendant count, without calling the latter semantic novelty.
 
-Archive admission is exploratory and is not a statistical improvement claim. Champion promotion uses a different rule on a fixed validation occasion:
+Archive admission is exploratory and is not a statistical improvement claim. The implemented source screen admits only complete common-task metrics under the same original evaluator, resource controls, helper versions, host runtime and external control-file identities. It reuses official native results and the existing optional projection without changing the benchmark yardstick. A missing compatible projection or any unusable task metric prevents parent eligibility; native completion and literal evidence remain recorded. This is not the complete source-search loop. Champion promotion uses a different rule on a fixed validation occasion:
 
 \[
 \operatorname{LCB}(\Delta U)>\delta_U,\quad
@@ -155,7 +155,7 @@ Freeze deduplication and near-duplicate prompt families before assigning develop
 
 A proposed initial allocation is 60% development, 20% validation, 20% final, separately within each benchmark source. This is approximately 60/20/20 Curated prompts and 600/200/200 WildChat prompts before family grouping. Exact membership is not created until the data preparation slice. Do not publish a supposedly frozen split with placeholder hashes.
 
-Implemented slice 3 scope is narrower: one source per experiment, normalized exact-duplicate groups plus optional explicitly declared families, and deterministic approximately 60/20/20 allocation by group count. It does not implement semantic near-duplicate detection or task/source stratification. The common development screen takes the first sorted IDs from the frozen development split; it is an engineering screen, not a representative sample. Actual source hashes and every split ID are frozen. Validation/final evaluation and statistical promotion remain unimplemented.
+Implemented slice 3 scope is narrower: one source per experiment, normalized exact-duplicate groups plus optional explicitly declared families, and deterministic approximately 60/20/20 allocation by group count. It does not implement semantic near-duplicate detection or task/source stratification. That policy development screen takes the first sorted IDs from the frozen development split; it is an engineering screen, not a representative sample. Actual source hashes and every split ID are frozen. The source-code screen takes an explicitly declared ordered development-ID list and checks it against the complete source split; it does not claim representative sampling. Validation/final evaluation and statistical promotion remain unimplemented.
 
 The generator necessarily sees its current task during final inference. The improver, long-term memory, proposer, retrieval index, archive feedback, and human optimization decisions must not see final prompts/results through the experiment pipeline. Final evaluation is one-way: return a final report and stop the run.
 

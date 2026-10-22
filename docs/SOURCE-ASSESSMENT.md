@@ -9,6 +9,9 @@ The host supplies no replacement score or grouping formula.
 This is a library route within SRC-02. [PLAN.md](PLAN.md) remains the roadmap.
 It does not choose parents, run source search, admit candidates to an archive,
 create funding or establish that a source change improves answers.
+The separate [common development screen](SOURCE-SCREEN.md) now composes this route
+over fixed development tasks and provides guarded exploratory parent eligibility
+and selection. It does not complete the inherited source-search loop.
 
 ## Prepare and run the original producer
 
@@ -190,9 +193,11 @@ separate pinned images; there are no real provider calls or keys.
 
 All seven final quality checks pass in 26.318 seconds with all 185 Python inputs
 unchanged: lint, format, strict Linux and Windows typing, Bandit, runtime dependency
-audit and compile. The full 1,386-test hosted Linux and Windows regressions at the
-published final head remain pending; no full local regression is claimed or
-planned in their place. See the
+audit and compile. The published native-assessment Linux regression now passes
+1,386 tests in 418.232 seconds with five existing skips and all six hosted quality
+steps passing. Its Windows gate remains pending; no full local regression was
+claimed or substituted. These results concern that native-assessment source,
+separately from the newer screen's pending 1,413-test hosted regressions. See the
 [delivery record](conformance/src02-native-assessment-delivery.json) for the pinned
 evidence and its limits. No pending outcome is a pass.
 
@@ -202,7 +207,9 @@ connection gap. Full SRC-02 stays open, POL-02 remains the sole Next, and the se
 major remaining leaves retain their existing gates in the living plan.
 
 This route does not establish real provider access, semantic judge accuracy,
-development/final eligibility, a common comparison screen, archive admission,
-source-search efficiency, model-authored improvement, edited-improver competence
-or effectiveness. Those gates remain in the living plan. It creates no paid CLI,
+final eligibility, scientific promotion, source-search efficiency, model-authored
+improvement, edited-improver competence or effectiveness. Common development
+screening and exploratory admission now use the separately checked
+[screen interface](SOURCE-SCREEN.md); they are not claims supplied by one native
+occasion. Remaining gates stay in the living plan. This route creates no paid CLI,
 allocation or actual experiment result.
