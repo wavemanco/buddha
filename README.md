@@ -11,8 +11,8 @@ parser recovery differs from a judge's decision; and where self-improvement fits
 ## Current state
 
 The bounded **MEAS-01/MEAS-02 measurement audit is complete**. The
-**POL-02 controlled policy comparison has finished locally**, according to the
-user's completion output; saved-result verification is pending. Further
+**POL-02 controlled policy comparison is complete at its registered scope**:
+saved results and the planned masked model reviews have been checked. Further
 development focuses on Buddha's agent and improvement procedures
 against fixed NoveltyBench 1.1; no new general judge audit is scheduled. The project has auditable API
 accounting, linked recovery, bounded policy search, replaceable release selection,
@@ -48,39 +48,22 @@ retains the original owners when interrupted. A separate [offline target reader]
 compares complete or explicitly selected partial outputs with frozen development
 judgments while keeping uncertain and missing cases visible. Its engineering
 fixtures do not supply fresh judge measurements.
-The [versioned proposer contract](docs/POLICY-CONTRACT.md) now explains which
-sampling mode sees earlier answers and preserves literal task requirements.
-Fixed policies reuse the native pipeline; legacy search keeps v1. Controlled
-policy comparisons remain open. The [offline comparison structure](docs/POLICY-STUDY.md)
-now checks the four fixed conditions, development-only selection and separate
-generation/judging repetitions. [Fresh native assessment](docs/NATIVE-EVALUATION.md)
-can judge anchored generated answers again without generating again; a composed
-[study controller](docs/POLICY-EXECUTION.md) now passes its offline engineering
-gate, including the full eight-cell actual-container schedule and keyless replay.
-The [actual twelve-task protocol](docs/POLICY-COMPARISON.md) now declares
-membership, the unchanged official instrument, analysis and masked supplemental
-review; its [cost proposal](docs/POLICY-COMPARISON-COSTS.md) creates no funding.
-The [passive results reader](docs/POLICY-RESULTS.md) checks saved evidence and
-computes the primary comparisons, ranges by original category, each generation
-repetition and score/group disagreement between judging occasions. Its token/cost
-views keep unknown usage, recorded charges, holds and recovery metadata explicit.
-The [private panel mapping](docs/POLICY-PANEL.md) derives fixed masks from pinned
-study metadata before answers are inspected; it contains no answer text. Its
-[passive materializer](docs/POLICY-PANEL.md#materialize-original-saved-generation)
-assembles a reviewer packet from anchored original generation, keeping missing
-coverage and provenance private. The [study controller](docs/POLICY-EXECUTION.md)
-also preserves reviewed external file hashes across preparation and recovery.
-The [keyless proposal checker](docs/POLICY-HANDOFF.md) joins original
-publications, selected files and model profiles without creating a run or
-allocating money. The [protected launcher](docs/POLICY-LAUNCH.md) checks the
-approved destination and funding before hidden key entry, then prepares or
-recovers the original study and owners. The user has separately approved the
-new $50 / 4,096-attempt POL-02 comparison, and its frozen cached-checkout handoff
-was prepared. The user has supplied its completion output; saved results
-have not yet been verified. Configuration and key entry do not
-confirm provider access. Actual answers and supplemental reviews require real
-saved generation. Saved-result verification and human scientific assessment
-remain open.
+The [controlled policy comparison](docs/POLICY-COMPARISON-RESULTS.md) now retains
+960 answers, all 192 usable assessments, five registered primary contrasts and
+$14.459518 recorded cost with zero held. Seeing earlier answers produced the
+larger observed score gains. The predeclared review of 24 masked sets also found
+11 compliance failures and retained nine uncertain adjudications. Higher scores
+therefore do not establish that every answer stayed within the task or avoided
+recurring plots. Original official scores remain unchanged.
+
+The [policy contract](docs/POLICY-CONTRACT.md), [study controller](docs/POLICY-EXECUTION.md),
+[passive results reader](docs/POLICY-RESULTS.md), [masked panel](docs/POLICY-PANEL.md)
+and [protected launcher](docs/POLICY-LAUNCH.md) preserve the frozen conditions,
+original owners and separate scientific and accounting records. The comparison
+uses selected development tasks; held-out and human assessment remain open.
+The next work applies these findings to the inherited Python improvement loop,
+including literal task compliance and practical verification cost. A new source
+experiment needs its own reviewed handoff and spending authorization.
 
 The [source runtime](docs/SOURCE-RUNTIME.md) and [candidate execution boundary](docs/SOURCE-CANDIDATES.md)
 now pass composed isolation, model-channel, accounting and recovery checks.
@@ -127,12 +110,12 @@ others uncertain; original benchmark scores and raw evidence remain unchanged. S
 [pilot review](docs/PILOT-REVIEW.md), [recovery results](docs/FIRST-LIVE-RESULTS.md)
 and [linked continuation results](docs/LINKED-CONTINUATION-RESULTS.md).
 
-At this checkpoint the living plan contains **7 remaining leaf slices**.
+At this checkpoint the living plan contains **6 remaining leaf slices**.
 The Windows PID-lock observer follow-up is complete at its shared-reader scope;
 [the guide](docs/DOCTOR.md#windows-file-sharing) states its boundaries.
 The native pipeline is complete at its declared offline scope. Umbrella milestones
 are not counted again. They cover
-policy/search (2), source evolution (2), held-out evaluation (2) and the
+policy/search (1), source evolution (2), held-out evaluation (2) and the
 improver comparison (1). This is a checkpoint count, not a promise that research
 findings will never require a smaller slice; [PLAN.md](docs/PLAN.md) determines
 the current status and order.
