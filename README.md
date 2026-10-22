@@ -104,6 +104,8 @@ creates a self-contained starting agent without choosing a run or allocating
 money. A child replaces the whole file and inherits its own improvement function.
 The actual starter now passes a six-worker confined chain and keyless replay
 with supplied descendants and fake replies; model-authored evolution remains open.
+A [read-only source handoff check](docs/SOURCE-HANDOFF.md) validates a proposed
+initial experiment without creating spending authority or execution records.
 The [source-evolution backlog context](docs/BACKLOG.md) records the intended Python
 code and inherited-improver endpoint, the current gap and its existing plan gates.
 
