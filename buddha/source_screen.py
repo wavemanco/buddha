@@ -6,6 +6,7 @@ complete execution, archive admission and confirmed improvement are separate.
 
 import hashlib
 from collections.abc import Callable, Mapping, Sequence
+from dataclasses import dataclass, field
 from functools import wraps
 from pathlib import Path
 from typing import cast
@@ -67,8 +68,11 @@ def _checked[**P, T](function: Callable[P, T]) -> Callable[P, T]:
     return checked
 
 
+@dataclass(frozen=True)
 class SourceScreen(_Artifact):
     """Immutable screen declaration; parsing and comparison never read components."""
+
+    _format_version: str = field(init=False, repr=False, compare=False)
 
     @_checked
     def __post_init__(self) -> None:
@@ -169,6 +173,7 @@ class SourceScreen(_Artifact):
             pipeline._absolute(lineage["path"])
             _digest(lineage["sha256"])
         object.__setattr__(self, "data", _json(record))
+        object.__setattr__(self, "_format_version", _text(record["format"]).rsplit(".", 1)[1])
 
     @property
     def tasks(self) -> TaskSet:
@@ -233,7 +238,7 @@ def _roots(section: dict[str, object]) -> dict[str, Path]:
 
 
 def _version(screen: SourceScreen, stem: str) -> str:
-    return "buddha." + stem + "." + _text(screen.to_record()["format"]).rsplit(".", 1)[1]
+    return "buddha." + stem + "." + screen._format_version
 
 
 def _generation_formats(screen: SourceScreen) -> dict[str, str]:
