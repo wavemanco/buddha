@@ -66,13 +66,13 @@
     "sha256": "e03720b8923d682ecc5eb5aa6e4da79d0bcd179002ed6bc94a4558bfa7c5c69f",
     "status": "known_metadata_fits_observed_margin"
   },
-  "review_sha256": "0b660e41688f5329df7c5439d81d7948d8bcda43cc1debd956f978a2f9cb230a",
+  "review_sha256": "440cd734c344e36c3dd4cfade1f42991883aa7fed5e68e5b7bdfb0fa6492124b",
   "source_commit": "b4e9cf106dd6fc501920f7c8c73aa3254685c222",
   "source_sha256": {
     "README.md": "3c5db2831b4802c989c44c449be4c3315d604515b039dcf195529f2df2813ce7",
     "buddha/gateway.py": "f5653b00fb3abdf4b30c8388f44323d83879f9d24924156cf363782528b4f99f",
     "docs/PLAN.md": "9167a33376a8d34b7845636c96161cccf58dd79962323cdb9d93f6c7522b6553",
-    "docs/conformance/core-source-cache-review.json": "0b660e41688f5329df7c5439d81d7948d8bcda43cc1debd956f978a2f9cb230a",
+    "docs/conformance/core-source-cache-review.json": "440cd734c344e36c3dd4cfade1f42991883aa7fed5e68e5b7bdfb0fa6492124b",
     "tests/test_core_source_cache.py": "5fa821e74fdfe2de03e093204ceb3735e8a0dbc67157b109b83494280fce67b0"
   },
   "spec_map": {

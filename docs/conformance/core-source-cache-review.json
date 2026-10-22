@@ -123,7 +123,7 @@
       "path": "core-source-cache-full-suite-process.json",
       "sha256": "d20c20cae115ae0119653d72b882f2280a5991981d9cfafc5f924a8c2284bf4a"
     },
-    "publication_gate": "Final source suite and seven local checks passed; tracked delivery remains pending parent metadata and explicit old-proof/new-source bridge.",
+    "publication_gate": "Bounded cache delivery and the explicit post-terminal source/JSON-size bridge are published. Final-head hosted checks and separately approved live preparation remain open.",
     "required_terminal_path": "runs/reviews/core-source-cache-full-suite-exit.json",
     "started_utc": "2026-10-21T22:33:18.183319+00:00",
     "status": "terminal_pass_local_windows",
