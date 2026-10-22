@@ -95,8 +95,13 @@ these stages. A confined three-iteration rehearsal retains a failed child,
 feeds its failure into a repair, and runs the repaired child's changed improver
 to produce another descendant. It uses supplied programs and synthetic replies,
 with no real provider calls. Complete keyless replay and passive verification
-preserve its original records. An actual model-authored source experiment and
-mutation competence remain open; the new loop's hosted checks are pending.
+preserve its original records. The loop and format-reuse slices have passed
+Linux and Windows CI and merged. An actual model-authored source experiment
+and mutation competence remain open.
+The [starter source factory](docs/SOURCE-SEED.md) now combines the unchanged
+generation recipe with a versioned, one-callback Python source proposer. It
+creates a self-contained starting agent without choosing a run or allocating
+money. A child replaces the whole file and inherits its own improvement function.
 The [source-evolution backlog context](docs/BACKLOG.md) records the intended Python
 code and inherited-improver endpoint, the current gap and its existing plan gates.
 
