@@ -152,12 +152,13 @@ later proposes a descendant; a missing or broken improver can stop the run with
 its original evidence retained. The source-experiment and improver-competence
 gates therefore remain separate from task-screen admission.
 
-Forty-one new acceptance methods and 92 original regressions pass across their
-recorded source scopes. These are separate cohorts, not a full local suite or one
-final-source test run. Final lint, format, types for both platforms, security,
-dependency and compilation checks pass. Collection finds 1,480 unique test IDs;
-the 99 original test files and all 1,439 existing test methods are preserved.
-Full hosted Linux and Windows checks for this slice remain pending.
+For the original source-loop delivery, 41 new acceptance methods and 92 original
+regressions passed across their recorded source scopes. These were separate
+cohorts, not a full local suite or one final-source test run. Its final lint,
+format, types for both platforms, security, dependency and compilation checks
+passed at the 204-Python source cut. Collection then found 1,480 unique test IDs;
+the 99 test files and 1,439 methods from that delivery's parent were preserved.
+Hosted results for that loop cut are tracked in [PR #58](https://github.com/wavemanco/buddha/pull/58).
 
 The [confined rehearsal](conformance/src02-source-loop-delivery.json) also passes
 with real isolated Python and the pinned official evaluator. Supplied programs
@@ -175,9 +176,37 @@ inspection, including after retiring copied producer paths, add no work or
 persistent changes. The starting source and retired files remain retained.
 
 The rehearsal took 2,795.86 seconds, about 47 minutes, on this host. That includes
-execution and repeated saved-record checks; no isolated cause or speedup has been
-measured. Record and improve practical verification latency before a live source
-handoff. This small run does not establish feasibility at every maximum bound.
+execution and repeated saved-record checks; the cause of its total wall time has
+not been isolated. The separate profile below does not establish a speedup for
+the full rehearsal. Practical verification latency and visible progress require
+review before a live source handoff. This small run does not establish feasibility
+at every maximum bound.
+
+## Saved-record verification cost
+
+The screen now retains its validated format suffix as one immutable value.
+Reading that value preserves the existing version 1 and version 2 recipe,
+context, seal, anchor and report strings. For the same input declaration, saved
+JSON, fingerprints, constructor validation and detached data views remain
+unchanged. Prospective installed source identities change; existing artifacts
+retain their original source pins. Generic Python dataclass reflection now
+includes one private field.
+
+Thirty focused methods pass: five new format/immutability checks and 25 original
+screen, outcome and replay checks. Seven quality checks pass at 205 unchanged
+Python inputs and four configurations. A separate guarded inspection of the
+same saved synthetic run reproduces its original report without keys, workers,
+provider calls, original-database SQL or persistent changes.
+
+The profile retains 336 format reads and removes their 336 full-document decodes.
+Screen inspections (44), history reads (173), buffered reads (31,231) and file-stat
+calls (1,067,379) stay equal in the two observed profiles. Total recorded function
+calls fall from 204,818,675 to 180,285,607. Profiled target time is 210.543 seconds
+before and 204.910 after; full wrapper time is 222.720 before and 225.389 after.
+These separate instrumented observations do not establish a stable speedup.
+Repeated verification remains expensive; this slice closes only the redundant
+format decoding. Practical latency and visible progress remain live-handoff
+requirements. [Exact evidence and limits](conformance/src02-screen-format-delivery.json).
 
 This evidence establishes the exercised engineering mechanism. It does not
 establish model-authored improvement, better unseen-task performance, or an

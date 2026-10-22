@@ -1,0 +1,261 @@
+{
+  "acceptance": {
+    "elapsed_seconds": 458.1112706999993,
+    "errors": 0,
+    "failures": 0,
+    "ordered_test_ids": [
+      "test_source_screen_format.SourceScreenFormatTests.test_canonical_bytes_equality_hash_and_v1_v2_identities_are_preserved",
+      "test_source_screen_format.SourceScreenFormatTests.test_derived_scalar_and_data_are_immutable_and_not_constructor_inputs",
+      "test_source_screen_format.SourceScreenFormatTests.test_invalid_formats_and_controls_still_fail_full_artifact_validation",
+      "test_source_screen_format.SourceScreenFormatTests.test_record_views_still_decode_fresh_and_cannot_change_formats_or_identity",
+      "test_source_screen_format.SourceScreenFormatTests.test_repeated_format_reads_do_not_decode_the_full_validated_artifact",
+      "test_source_screen.SourceScreenTests.test_callback_quota_is_independent_of_answer_count_and_never_becomes_admission",
+      "test_source_screen.SourceScreenTests.test_cancellation_keeps_completed_reply_and_actual_partial_before_same_owner_resume",
+      "test_source_screen.SourceScreenTests.test_comparison_changes_controls_but_excludes_agent_identity_and_bound_root_locations",
+      "test_source_screen.SourceScreenTests.test_complete_unscored_or_opaque_results_are_recorded_but_not_admitted",
+      "test_source_screen.SourceScreenTests.test_control_changed_inside_later_owner_preparation_cannot_be_adopted",
+      "test_source_screen.SourceScreenTests.test_development_screen_preserves_typed_order_literal_source_and_fresh_views",
+      "test_source_screen.SourceScreenTests.test_distinct_sources_share_common_evidence_and_existing_parent_rules",
+      "test_source_screen.SourceScreenTests.test_final_publication_rechecks_prior_native_report_after_later_task_return",
+      "test_source_screen.SourceScreenTests.test_full_source_split_and_development_membership_are_not_scalar_claims",
+      "test_source_screen.SourceScreenTests.test_generated_recipe_changes_before_real_child_preparation_are_not_adopted",
+      "test_source_screen.SourceScreenTests.test_genuine_complete_references_with_different_controls_cannot_share_a_parent_pool",
+      "test_source_screen.SourceScreenTests.test_known_native_stop_retains_observation_and_resumes_same_owners_without_rebilling",
+      "test_source_screen.SourceScreenTests.test_missing_retained_funded_owner_is_corruption_not_partial_coverage",
+      "test_source_screen.SourceScreenTests.test_passive_inspection_survives_retired_programs_and_rejects_saved_scalar_forgery",
+      "test_source_screen.SourceScreenTests.test_recorded_lineage_parent_is_retained_and_changed_raw_bytes_are_not_adopted",
+      "test_source_screen.SourceScreenTests.test_returned_child_matches_typed_saved_report_before_next_paid_stage",
+      "test_source_screen.SourceScreenTests.test_same_artifact_comparison_with_different_external_controls_cannot_share_a_pool",
+      "test_source_screen.SourceScreenTests.test_two_task_screen_binds_all_owners_and_admits_only_verified_complete_native_means",
+      "test_source_screen.SourceScreenTests.test_unknown_source_hold_blocks_resume_and_other_candidate_without_admission",
+      "test_source_screen.SourceScreenTests.test_wrong_authority_scope_and_unapproved_runtime_reject_before_original_owner",
+      "test_source_screen_outcome.SourceScreenOutcomeTests.test_clean_first_task_failure_has_no_numeric_score_or_native_assessment",
+      "test_source_screen_outcome.SourceScreenOutcomeTests.test_complete_v2_screen_preserves_native_metrics_and_eligibility",
+      "test_source_screen_outcome.SourceScreenOutcomeTests.test_explicit_failure_aware_screen_keeps_a_separate_comparison",
+      "test_source_screen_outcome.SourceScreenOutcomeTests.test_later_failure_retains_completed_task_measurements_without_partial_means",
+      "test_source_search.SourceSearchTests.test_completed_replay_and_retired_producer_passive_read_preserve_original_snapshot"
+    ],
+    "scope": "5new+20originalscreen+4screenoutcome+1originalsearchretirement/replay; realGateway/syntheticAuthority with mocked workers/HTTPS, notzero simulated work.",
+    "selected_methods": 30,
+    "skips": 0,
+    "successful": true,
+    "tests_run": 30
+  },
+  "base_commit": "3d8fe28e8b57c72ac2384687d1b94005027a9682",
+  "change": {
+    "all17_format_callers_unchanged": true,
+    "artifact_data_serialization_and_fingerprints_unchanged": true,
+    "constructor_validation_ast_unchanged": true,
+    "file": "buddha/source_screen.py",
+    "private_field": "_format_version",
+    "reflection_limit": "Generic dataclass reflection and pickle state gain a private field; durable artifacts remain JSON/from_bytes. No old-pickle compatibility claim."
+  },
+  "date": "2026-10-22",
+  "format": "buddha.src02-screen-format-delivery.v1",
+  "limits": [
+    "Thirty focused methods are not a fresh full-suite pass; hosted checks for the new head remain pending.",
+    "Observed profiler call reduction does not establish stable wall-time speedup, Ubuntu timing or a cause for the entire 47-minute rehearsal.",
+    "This is pure immutable-value reuse, not a file, hash, report or authorization cache. Task/candidate/comparison accessors and _Artifact.to_record remain unchanged.",
+    "No actual POL02 observation, source-proof replay, live readiness, model-authored mutation, human judgment or scientific gain is established. Larger verification latency, visible progress and the concrete live-source handoff remain open."
+  ],
+  "local_evidence_sha256": {
+    "source-loop-inspect-profile-v3.receipt.json": "e98d0e0df8405dcdce56288bce2df3355b8a9f50b46e31420636ae5b60e0e507",
+    "source-screen-derived-format-final-static-review.json": "fcbec3fb565d78215d13ed5b868cbe649eb48e57697aece018deb802dc4d477a",
+    "source-screen-format-green-receipt.json": "38b9f277030742da47822517497a088e4591760e1b7dd6d14300a0121b2c2df3",
+    "source-screen-format-profile-comparison.json": "892b36613d58f36f14c1f0b3708abf6ef172753986b78001c804088bc9bfadf6",
+    "source-screen-format-profile-v3-independent-review.json": "6683615137faf0c89994171fe0ae4cab9dc0af232583b75d7a6d35d66f1030c5",
+    "source-screen-format-quality.json": "77ce868212783cfdb80165c706a4bf1e3384ac6b411ee6ebc7cca0fe9b0038a5",
+    "source-screen-format-red-receipt.json": "bcb4ae8c5392511f9f7391840d87254b9794d9c0956863d2f012010e02b2e9ea"
+  },
+  "profile": {
+    "baseline": {
+      "primitive_calls": 201658452,
+      "profile_version": "v2",
+      "profiled_wall_seconds": 210.54319439991377,
+      "source_head": "239bd6139248dc94838d40c897a1da22b6d4ac0f",
+      "total_calls": 204818675,
+      "wrapper_wall_seconds": 222.7198024999816
+    },
+    "custody": {
+      "both_source_sets_unchanged": true,
+      "fixture_before_after_sha256": "b1a564adb86b23439346060b56735b3e6073141041f632e79c0673bbcfb41f6c",
+      "fixture_unchanged": true,
+      "full_fixture_files": 356,
+      "historical_source_pins": 208,
+      "new_test_sha256": "003dacc573e0bfa4bc9003009ffca383eb4bcb1f4ba9a82aeb68e702f34a957b",
+      "original_report_sha256": "bd5155e4746ac602079b0f74e5f33729185243a90ee5db513cfbcf71768b7a9f",
+      "prospective_configs": 4,
+      "prospective_python": 205,
+      "prospective_source_inputs": 209,
+      "raw_database_files": 29,
+      "raw_databases_unchanged": true,
+      "returned_original_report": true,
+      "source_screen_sha256": "c0217474f56a59af984d9b91fa00c4bea32476a8dd26ddc6e422745ab4a07390"
+    },
+    "format_to_full_decode_edge": {
+      "baseline_calls": 336,
+      "baseline_cumulative_seconds": 22.4467429,
+      "callee": "buddha/answers.py::_Artifact.to_record",
+      "caller": "buddha/source_screen.py::_version",
+      "matching": "Filename/function identity; line offsets recorded only as provenance. Artifact variant identified by its comparison_key caller, distinct from Task.to_record.",
+      "prospective_calls": 0,
+      "prospective_cumulative_seconds": 0
+    },
+    "function_call_counts": [
+      {
+        "after_calls": 336,
+        "before_calls": 336,
+        "function": "_version",
+        "module": "source_screen.py"
+      },
+      {
+        "after_calls": 3966,
+        "before_calls": 4302,
+        "function": "_Artifact.to_record",
+        "module": "answers.py"
+      },
+      {
+        "after_calls": 252104,
+        "before_calls": 252440,
+        "function": "_load",
+        "module": "releases.py"
+      },
+      {
+        "after_calls": 513461,
+        "before_calls": 513797,
+        "function": "_json",
+        "module": "releases.py"
+      },
+      {
+        "after_calls": 21487947,
+        "before_calls": 29660954,
+        "function": "_pairs",
+        "module": "releases.py"
+      },
+      {
+        "after_calls": 44,
+        "before_calls": 44,
+        "function": "inspect_source_screen",
+        "module": "source_screen.py"
+      },
+      {
+        "after_calls": 173,
+        "before_calls": 173,
+        "function": "read_gateway_history",
+        "module": "gateway_history.py"
+      },
+      {
+        "after_calls": 275819,
+        "before_calls": 276155,
+        "function": "loads",
+        "module": "json/__init__.py"
+      },
+      {
+        "after_calls": 526216,
+        "before_calls": 526552,
+        "function": "dumps",
+        "module": "json/__init__.py"
+      },
+      {
+        "after_calls": 31231,
+        "before_calls": 31231,
+        "function": "<method 'read' of '_io.BufferedReader' objects>",
+        "module": "~"
+      },
+      {
+        "after_calls": 1067379,
+        "before_calls": 1067379,
+        "function": "<built-in method nt.stat>",
+        "module": "~"
+      }
+    ],
+    "keys_read": false,
+    "limits": [
+      "Both values are one cProfile-instrumented local Windows observation, not unprofiled/controlled/repeated benchmarks. Profiling overhead, scheduling/cache/concurrent-host differences and differing checkout paths confound wall times.",
+      "204.910s versus210.543s is an observed timing pair, not a causal speedup or forecast. Wrapper totals include source/synthetic snapshot work outside the target and are not directly comparable runtime savings.",
+      "Cumulative times overlap. The earlier46.6-minute actual rehearsal is not isolated by this pair. No new-source actual-container proof or whole local suite is claimed.",
+      "No additional test/profile commands, actual POL02 access, keys, provider calls, original database SQL, workers, proof replay, production/test edits, or restart occurred.",
+      "The failed v1 overbroad hostname guard and separately authorized successfulv2 remain historical; this is only the authorized prospectivev3 run."
+    ],
+    "new_provider_calls": 0,
+    "original_database_SQL": false,
+    "prospective": {
+      "primitive_calls": 177125384,
+      "profile_version": "v3",
+      "profiled_wall_seconds": 204.91026729997247,
+      "source_head": "3d8fe28e8b57c72ac2384687d1b94005027a9682",
+      "total_calls": 180285607,
+      "wrapper_wall_seconds": 225.38930849998724
+    },
+    "scope": "One prospective passive inspect of the same retired-producer synthetic fixture; separate prior baseline observation.",
+    "workers_or_network": false
+  },
+  "purpose": "Reuse an already validated immutable screen-format scalar; reduce pure decoding before the source experiment without changing verification or official metrics.",
+  "quality": {
+    "before_after_equal": true,
+    "checks": [
+      {
+        "exit_code": 0,
+        "failure_type": null,
+        "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "name": "ruff-check",
+        "wall_seconds": 0.18985550000797957
+      },
+      {
+        "exit_code": 0,
+        "failure_type": null,
+        "log_sha256": "df313bb2dd82ede55e9189716f0a80f1e99fc400a8370039e0014a31cd333739",
+        "name": "ruff-format",
+        "wall_seconds": 0.18782369990367442
+      },
+      {
+        "exit_code": 0,
+        "failure_type": null,
+        "log_sha256": "f2c0a78a361515e287b9871149317ddfad33de792623439f83d567993996bcb2",
+        "name": "mypy-win32",
+        "wall_seconds": 5.117704899981618
+      },
+      {
+        "exit_code": 0,
+        "failure_type": null,
+        "log_sha256": "f2c0a78a361515e287b9871149317ddfad33de792623439f83d567993996bcb2",
+        "name": "mypy-linux",
+        "wall_seconds": 5.172805100097321
+      },
+      {
+        "exit_code": 0,
+        "failure_type": null,
+        "log_sha256": "c5b47977f000b0069c5570a90f0bc6eae298927c787aa8a75621f70254b4f6ba",
+        "name": "bandit",
+        "wall_seconds": 2.6093643000349402
+      },
+      {
+        "exit_code": 0,
+        "failure_type": null,
+        "log_sha256": "e82148c0c30269ca5a2c35420ece6af011a4faf5a375325d750e243ffdb10625",
+        "name": "pip-audit",
+        "wall_seconds": 23.40858869999647
+      },
+      {
+        "exit_code": 0,
+        "failure_type": null,
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "name": "compileall",
+        "wall_seconds": 0.8352461999747902
+      }
+    ],
+    "config_inputs": 4,
+    "python_inputs": 205,
+    "wall_seconds": 23.7294922999572
+  },
+  "red": {
+    "errors": 0,
+    "failed_subtests": 4,
+    "full_decodes_per_version": 12,
+    "scope": "Original five-method test cut before two optional assertions were appended; exact format strings already passed but full-decode count and scalar freezing failed.",
+    "tests_run": 5
+  },
+  "source": "c0217474f56a59af984d9b91fa00c4bea32476a8dd26ddc6e422745ab4a07390",
+  "status": "bounded_engineering_checks_passed_hosted_ci_pending",
+  "test": "003dacc573e0bfa4bc9003009ffca383eb4bcb1f4ba9a82aeb68e702f34a957b"
+}
