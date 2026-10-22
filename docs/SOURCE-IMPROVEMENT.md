@@ -61,10 +61,14 @@ The worker receives a list of `{task, note}` records; each task contains only
 `id`, `prompt` and `count`. Both the original feedback file and this projection
 have explicit, different hash fields.
 
-This checks source and development membership. Caller-reviewed notes are not
-authenticated evaluator measurements, and an ID check cannot prove that a human
-has never copied held-out text into a note. Opaque native reports are not passed
-through as feedback. The complete dataset and split stay on the host.
+This checks source and development membership. The separate
+[verified screen-feedback bridge](SOURCE-FEEDBACK.md) constructs bounded notes from
+a caller-pinned complete native screen, retaining literal excerpts, measurements
+and omissions. The generic interface still accepts caller-reviewed notes; it
+does not require that bridge or independently authenticate arbitrary note text.
+An ID check also cannot prove that a human has never copied held-out text into a
+note. Opaque native reports are not passed through as feedback. The complete
+dataset and split stay on the host.
 
 The descriptor, feedback, referenced source/split, runtime artifact and existing
 eight host-route source files must be original inputs of that owner. Improvement

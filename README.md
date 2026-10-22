@@ -97,8 +97,11 @@ regressions pass. The separate [common development screen](docs/SOURCE-SCREEN.md
 compares source candidates on the same ordered development tasks, verifies saved
 official results and admits only complete usable measurements to exploratory
 parent selection. It preserves official scores and records unusable results
-without selecting them. The complete proposal/feedback/source-search loop and
-an actual model-authored experiment remain open.
+without selecting them. The [verified feedback bridge](docs/SOURCE-FEEDBACK.md)
+can now turn a pinned complete screen into bounded development notes accepted by
+the existing improver, with literal answer excerpts and explicit omissions.
+Durable proposal recovery, the complete repeated source-search loop and an actual
+model-authored experiment remain open.
 The [source-evolution backlog context](docs/BACKLOG.md) records the intended Python
 code and inherited-improver endpoint, the current gap and its existing plan gates.
 

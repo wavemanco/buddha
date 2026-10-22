@@ -1,6 +1,5 @@
 """Common source screening: real saved custody, mocked workers and HTTPS only."""
 
-import base64
 import copy
 import hashlib
 import json
@@ -186,7 +185,6 @@ class SourceScreenTests(unittest.TestCase):
             e.callbacks, e.weak_answers = program["callbacks"], program["answers"]
             return e.execute(spec, initial=initial, handle=handle, **kwargs)
         e.directory = session.gateway.directory.parents[2] / "generation"
-        original_file = session._file
         answer_record = e.answers().to_record()
         program = self.programs[answer_record["agent_sha256"]]
         task_id = answer_record["outputs"][0]["task_id"]
@@ -194,32 +192,20 @@ class SourceScreenTests(unittest.TestCase):
             (answer_record["agent_sha256"], task_id, initial["command"]["index"])
         )
 
-        def finite_file(frame):
-            frame = copy.deepcopy(frame)
-            if frame["path"] in {"partitions.jsonl", "scores.jsonl"}:
-                rows = [
-                    json.loads(line) for line in base64.b64decode(frame["data_base64"]).splitlines()
-                ]
-                for row in rows:
-                    # Synthetic literal saved measurements, not host benchmark math.
-                    row["partition"] = [0, 1] if program["distinct"] == 2 else [0, 0]
-                    row["distinct"] = program["distinct"]
-                    row.pop("score", None)
-                    if frame["path"] == "scores.jsonl":
-                        row["generation_scores"] = [7, 7] if program["distinct"] == 2 else [7, None]
-                        row["partition_scores"] = [7, 7] if program["distinct"] == 2 else [7]
-                        row["utility"] = program["utility"]
-                        if row["id"] == self.unusable_task:
-                            row["utility"] = float("nan")
-                body = b"".join(
-                    json.dumps(row, sort_keys=True, separators=(",", ":"), allow_nan=True).encode()
-                    + b"\n"
-                    for row in rows
-                )
-                frame["data_base64"] = base64.b64encode(body).decode()
-            return original_file(frame)
+        def finite_row(row, index):
+            # Synthetic literal saved measurements, not host benchmark math.
+            row["partition"] = [0, 1] if program["distinct"] == 2 else [0, 0]
+            row["distinct"] = program["distinct"]
+            row.pop("score", None)
+            if index == 1:
+                row["generation_scores"] = [7, 7] if program["distinct"] == 2 else [7, None]
+                row["partition_scores"] = [7, 7] if program["distinct"] == 2 else [7]
+                row["utility"] = program["utility"]
+                if row["id"] == self.unusable_task:
+                    row["utility"] = float("nan")
+            return row
 
-        with patch.object(session, "_file", side_effect=finite_file):
+        with patch.object(e, "native_row", side_effect=finite_row):
             return e.execute(spec, initial=initial, handle=handle, **kwargs)
 
     def run_screen(self, directory, *, paid=True):
