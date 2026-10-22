@@ -3,8 +3,12 @@
 The launcher checks one declared study destination before asking for a key, then
 uses the existing [policy study controller](POLICY-EXECUTION.md). It does not
 create an allocation, change the frozen policies or interpret benchmark scores.
-The current $50 / 4,096-attempt envelope is still a proposal. This slice does not
-create a real funded launch file or confirm access to either provider.
+POL-02 completed under its separately approved $50 / 4,096-attempt cap, with
+$14.459518 recorded cost and zero held. [The results](POLICY-COMPARISON-RESULTS.md)
+retain its evidence and limits. This guide documents that historical launch
+interface; its command does not authorize new work or launch source evolution.
+The [source-experiment proposal](SOURCE-EXPERIMENT.md) remains unallocated and
+needs its own reviewed funded handoff.
 
 ## What must be approved first
 

@@ -1,0 +1,145 @@
+{
+  "actual_keys_or_API_calls_or_grants_or_workers": false,
+  "actual_profile_review": {
+    "adversarial_request_cases": [
+      {
+        "case": "unapproved_model",
+        "refused_before_any_owner_or_attempt": true
+      },
+      {
+        "case": "larger_output",
+        "refused_before_any_owner_or_attempt": true
+      },
+      {
+        "case": "premium_tier",
+        "refused_before_any_owner_or_attempt": true
+      },
+      {
+        "case": "extended_cache_options",
+        "refused_before_any_owner_or_attempt": true
+      },
+      {
+        "case": "tools",
+        "refused_before_any_owner_or_attempt": true
+      },
+      {
+        "case": "streaming",
+        "refused_before_any_owner_or_attempt": true
+      },
+      {
+        "case": "multiple_completions",
+        "refused_before_any_owner_or_attempt": true
+      },
+      {
+        "case": "ambiguous_output_limits",
+        "refused_before_any_owner_or_attempt": true
+      }
+    ],
+    "bounded_text_only_proposal_request_accepted": true,
+    "format": "buddha.source-experiment-profile-review.v1",
+    "intent_sha256": "d9d83fb1d27ac76b0864d1409dd67a38329abb840acf617b593680039839a465",
+    "limitations": "Pure actual-profile/request validation; not a provider response, tokenizer, account-access or full-search capacity test.",
+    "native_runner_all7_match_existing_actual_loop_proof": true,
+    "preparation_v1_all26_files_retained_unchanged": true,
+    "proposal_sha256": "0d577ed6c91f131a92b8d8b654a5c8ee4d82d6ae562221cbc364f9c54c1f2895",
+    "rate_reservations_microusd": {
+      "fallback": 4576000,
+      "grouping": 830940,
+      "proposal": 6315672,
+      "quality": 11440000,
+      "seed": 585611
+    },
+    "real_provider_or_SQL_or_container_calls": 0,
+    "source_proposal_request_bytes": 14427,
+    "trusted_release_added_top_level_nodes": 6,
+    "trusted_release_original_AST_nodes_preserved": 39
+  },
+  "base_commit": "9f5a42fd730ebf7b46340c82233dd5992437d526",
+  "comparison_key": "2cb0e12ed2200e9a02ce99b017cf929d6b0e62f6191e327e2fd10a5f5e9a2df5",
+  "configuration_check_sha256": "dc3f196894858c27e9126f1b6081fc1ed5edf16a5186b76e6fe3acc2221a013c",
+  "date": "2026-10-22",
+  "format": "buddha.src02-source-experiment-delivery.v1",
+  "funding_status": "unallocated",
+  "intent_sha256": "d9d83fb1d27ac76b0864d1409dd67a38329abb840acf617b593680039839a465",
+  "keyless_actual_review": {
+    "actual_readonly_check_matches_saved": true,
+    "all_bundle_files_unchanged": true,
+    "blocked_SQL_provider_worker_and_authority_access": true,
+    "bundle_files": 38,
+    "check_sha256": "dc3f196894858c27e9126f1b6081fc1ed5edf16a5186b76e6fe3acc2221a013c",
+    "databases_in_bundle": 0,
+    "format": "buddha.source-experiment-keyless-actual-check.v1",
+    "keys_absent_in_check_environment": true,
+    "proposal_sha256": "0d577ed6c91f131a92b8d8b654a5c8ee4d82d6ae562221cbc364f9c54c1f2895",
+    "unallocated": true,
+    "wall_seconds": 1.3285214999923483
+  },
+  "local_image_id_observation": [
+    "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+    "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83"
+  ],
+  "planned": {
+    "iterations": 3,
+    "maximum_answer_positions": 120,
+    "maximum_candidate_screens": 4,
+    "maximum_native_task_assessments": 12,
+    "maximum_stage_owners": 51,
+    "method": "latest",
+    "selected_ids": [
+      "curated-0",
+      "curated-47",
+      "curated-97"
+    ]
+  },
+  "preparation_stop": {
+    "current_runner_sha256": "2285f5417be9caba5c8aa675e417dcf7ce0310de77dbfd290ad76bc76ec68c1a",
+    "original_runner_sha256": "33361cf5b0923b373ee53dd73597063195c2c0d519baead50d40fb4bcfab44f5",
+    "reason": "POL02 releases.py differs from current reviewed source-proposal helper; original copy assumption refused",
+    "recovery": "Retain the partial unallocated configuration and prepare v2 with the reviewed current runner; no paid operation is replaced.",
+    "status": "stopped_before_authority"
+  },
+  "preservation": {
+    "all210_python_and4_configuration_inputs_match_prior_passed_quality_cut": true,
+    "all26_preparation_v1_files_retained": true,
+    "new_local_full_suite_or_quality_cohort": false,
+    "original_configuration_files_unchanged": 28,
+    "prior_quality_receipt_sha256": "3322e13dad1526fdb0cf96c475fe0885c2a0bc0d599143ffee829d54d1806802"
+  },
+  "proposal_sha256": "0d577ed6c91f131a92b8d8b654a5c8ee4d82d6ae562221cbc364f9c54c1f2895",
+  "protocol_sha256": "2d307560e312c721c014a6016f69276a369da260b2d72473a6d4f6b73be3497c",
+  "rate_scope": "OpenAI default 30m writes at1.25x, long-context and10percent regional uplifts covered. Extended cache controls, premium tiers and tools are outside the current Gateway allowlist. Anthropic bounds cover1h cache writes and10percent US-only uplift. No live account or invoice verification.",
+  "rate_sources": [
+    "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+    "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+    "https://developers.openai.com/api/docs/guides/prompt-caching",
+    "https://platform.claude.com/docs/en/models/opus-5/overview",
+    "https://platform.claude.com/docs/en/models/sonnet-5/overview",
+    "https://platform.claude.com/docs/en/about-claude/pricing"
+  ],
+  "remaining": [
+    "protected funded launcher, confirmation and original-owner recovery",
+    "actual schedule input/storage/latency checks and progress before keys/checks",
+    "new approval and allocation; prior scopes remain closed",
+    "live model/account and full-source token capacity observations",
+    "actual model-authored inherited chain and substantive-procedure review",
+    "universal mutation-competence gate and scientific/held-out/improved-improver claims"
+  ],
+  "requested_terms": {
+    "budget_microusd": 25000000,
+    "max_calls": 512
+  },
+  "retained_evidence_sha256": {
+    "source-experiment-actual-keyless-review.json": "3d2fcad8f563ff84a7cc6321200d537ef286553eb844d57f05ad8fb0187e1649",
+    "source-experiment-preparation-v1-stop.json": "69f920b4c1e8383fd5599657358889b41b0870fb14d1f365f52d4302e53d8295",
+    "source-experiment-profile-review.json": "370a2d16ab29cdce92ebee4379712e6831b289fe3a842f8765cf16f0d16dba65",
+    "source-experiment-proposal-build-v2.json": "74c91f40d5e4dbd05468331fc539ab3ee78673d6a737cd560c0c537c61298d23"
+  },
+  "status": "unallocated_configuration_checked",
+  "upstream_head_observation": {
+    "commit_date": "2026-09-10T13:44:41Z",
+    "method": "GitHub commits API, one latest-head result; same as pinned reference",
+    "observed_on": "2026-10-22",
+    "sha": "64a23be6b18ec1dacc298830aab276061b6e143c",
+    "source": "https://github.com/novelty-bench/novelty-bench/commit/64a23be6b18ec1dacc298830aab276061b6e143c"
+  }
+}
