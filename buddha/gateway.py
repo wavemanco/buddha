@@ -7,6 +7,7 @@ identity from HTTP arrival order, run a benchmark, or certify dependency closure
 import ast
 import base64
 import hashlib
+import hmac
 import http.client
 import os
 import platform
@@ -335,8 +336,55 @@ def _runtime() -> dict[str, str]:
     }
 
 
+_ACCOUNT_REVIEW_V2 = "buddha.account-review.v2"
+
+
+def _credential(provider: str) -> str:
+    key = os.environ.get("OPENAI_API_KEY" if provider == "openai" else "ANTHROPIC_API_KEY")
+    if not key or len(key) > 4096 or any(not 33 <= ord(char) <= 126 for char in key):
+        raise GatewayError("provider credential is missing or invalid")
+    return key
+
+
+def _credential_fingerprint(provider: str, key: str, context: str | None) -> str:
+    if context is None:
+        return hashlib.sha256(key.encode()).hexdigest()
+    message = (_ACCOUNT_REVIEW_V2 + "\0" + provider + "\0" + context).encode("ascii")
+    return hmac.new(key.encode("ascii"), message, hashlib.sha256).hexdigest()
+
+
+@_checked
+def credential_fingerprints(
+    providers: list[str] | tuple[str, ...], *, context: str
+) -> dict[str, str]:
+    """Keyed, provider/context-separated fingerprints; no additional secret or I/O.
+
+    The already supplied high-entropy API key is the HMAC key and stays outside
+    artifacts. Context is a caller-approved SHA256, not a source of authority.
+    Validate all requested roles before reading any credential environment value.
+    """
+    context = _digest(context)
+    if type(providers) not in (list, tuple):
+        raise GatewayError("credential roles need a literal list or tuple")
+    names = _texts(list(providers))
+    if set(names) - {"openai", "anthropic"}:
+        raise GatewayError("unsupported credential provider")
+    return {name: _credential_fingerprint(name, _credential(name), context) for name in names}
+
+
 def _review(value: object, *, fresh: bool = False) -> dict[str, object]:
-    record = _object(value, {"checked_on", "credential_sha256", "account_scope"})
+    record = _object(value)
+    keyed = "format" in record
+    if keyed and _text(record["format"]) != _ACCOUNT_REVIEW_V2:
+        raise GatewayError("unsupported account review format")
+    fingerprint_field = "credential_fingerprints" if keyed else "credential_sha256"
+    _object(
+        record,
+        {"checked_on", fingerprint_field, "account_scope"}
+        | ({"format", "credential_context"} if keyed else set()),
+    )
+    if keyed:
+        _digest(record["credential_context"])
     _text(record["account_scope"])
     try:
         checked = date.fromisoformat(_text(record["checked_on"]))
@@ -344,7 +392,7 @@ def _review(value: object, *, fresh: bool = False) -> dict[str, object]:
         raise GatewayError("account/bounds review needs an ISO date") from None
     if fresh and not -1 <= (datetime.now(UTC).date() - checked).days <= 7:
         raise GatewayError("account and applicable bounds need a current review")
-    credentials = _object(record["credential_sha256"])
+    credentials = _object(record[fingerprint_field])
     if not credentials or set(credentials) - {"openai", "anthropic"}:
         raise GatewayError("review needs supported credential fingerprints")
     for digest in credentials.values():
@@ -803,16 +851,25 @@ class RawHTTPTransport:
         self.allow_paid, self.timeout_seconds = checked.allow_paid, checked.timeout_seconds
 
     def prepare(
-        self, operation_id: str, call: GatewayCall, spec: ModelSpec, review_fingerprint: str
+        self,
+        operation_id: str,
+        call: GatewayCall,
+        spec: ModelSpec,
+        review_fingerprint: str,
+        *,
+        credential_context: str | None = None,
     ) -> PreparedHTTP:
         _text(operation_id)
         if not self.allow_paid:
             raise GatewayError("explicit paid transport permission is required")
         provider, host, path = CAPABILITIES[call.capability]
-        key = os.environ.get("OPENAI_API_KEY" if provider == "openai" else "ANTHROPIC_API_KEY")
-        if not key or len(key) > 4096 or any(not 33 <= ord(char) <= 126 for char in key):
-            raise GatewayError("provider credential is missing or invalid")
-        if hashlib.sha256(key.encode()).hexdigest() != review_fingerprint:
+        _digest(review_fingerprint)
+        if credential_context is not None:
+            _digest(credential_context)
+        key = _credential(provider)
+        if not hmac.compare_digest(
+            _credential_fingerprint(provider, key, credential_context), review_fingerprint
+        ):
             raise GatewayError("provider credential differs from the reviewed account binding")
         header_bytes = b"\n".join(
             name.encode() + b":" + value.encode() for name, value in call.headers
@@ -977,9 +1034,20 @@ class Gateway:
         operation = self.ledger.reserve(operation_id, request_hash, spec.reserve_microusd())
         if operation.status != "reserved":
             raise PendingOperation("attempt may already be billed; no automatic retry")
-        reviewed = _object(_object(current["review"])["credential_sha256"])
-        prepared = self.transport.prepare(
-            operation_id, replace(call, headers=headers), spec, _text(reviewed.get(spec.provider))
+        review = _object(current["review"])
+        keyed = review.get("format") == _ACCOUNT_REVIEW_V2
+        reviewed = _object(review["credential_fingerprints" if keyed else "credential_sha256"])
+        args = (
+            operation_id,
+            replace(call, headers=headers),
+            spec,
+            _text(reviewed.get(spec.provider)),
+        )
+        # Keep the original four-argument route for legacy transports/reviews.
+        prepared = (
+            self.transport.prepare(*args, credential_context=_digest(review["credential_context"]))
+            if keyed
+            else self.transport.prepare(*args)
         )
         try:
             if not self.ledger.dispatch(operation_id):

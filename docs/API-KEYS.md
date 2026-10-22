@@ -33,6 +33,11 @@ check does not grant permission to spend. A separately reviewed funded launcher
 and a clear local command are still required. Do not reuse a historical command
 or an unused balance to start source evolution.
 
+The new Gateway/source path supports [keyed account reviews](KEYED-REVIEWS.md),
+using the API key already supplied locally; no extra secret is needed. The
+source launcher must still bind the approved launch context. Historical policy
+commands keep their original review format and frozen runtime requirements.
+
 ## Historical pilot: two dedicated keys
 
 Create an application API key in a dedicated OpenAI project and an Anthropic key scoped to the intended workspace. Use ordinary inference credentials, not organization administration credentials. This implementation calls OpenAI Chat Completions for generation, partitioning and policy proposals, and Anthropic Messages for quality judging. The accounts need billing enabled and access to the configured reference models. ChatGPT/Codex access does not supply these credentials to Buddha.

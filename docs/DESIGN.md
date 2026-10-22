@@ -195,6 +195,14 @@ Use SQLite transactions and append-only run events for the first local implement
 
 Read credentials only in the broker from the selected secret source. Do not print or persist raw keys. If key identity must be audited, use a keyed one-way fingerprint, with the fingerprinting secret outside artifacts. Redact credentials and personal data from structured logs; retain only necessary source text under user-controlled local storage.
 
+The prospective source path uses explicitly tagged account-review v2: HMAC-SHA256
+with the locally supplied API key as its secret and a provider/context-separated
+message. The caller must bind that context to the approved launch configuration.
+No additional secret is required. Historical implicit v1 reviews retain their
+original SHA256 semantics and frozen execution identities. Fingerprints do not
+attest account settings or authorize spending. [The keyed-review contract](KEYED-REVIEWS.md)
+records the exact construction, scope and recovery behavior.
+
 ## 10. Source-execution boundary
 
 The [source runtime](SOURCE-RUNTIME.md), [candidate model channel](SOURCE-CANDIDATES.md) and [inherited proposal route](SOURCE-IMPROVEMENT.md) pass their declared confinement and accounting checks, including actual containers. Selected agent source executes only through that pinned runtime, never in the host Python process. These bounded checks do not establish protection against every host/kernel exploit or authorize other execution paths.

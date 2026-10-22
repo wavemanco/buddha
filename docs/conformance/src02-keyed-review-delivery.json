@@ -1,0 +1,317 @@
+{
+  "base_commit": "3599fca2c83ddc0789fcb94979c673f837eb39c4",
+  "contract": {
+    "algorithm": "HMAC-SHA256",
+    "context_is_authority": false,
+    "historical_policy_launcher_migrated": false,
+    "legacy_implicit_v1": "Original credential_sha256 fields and semantics retained",
+    "message": "ASCII(format + NUL + provider + NUL + caller-approved context SHA256)",
+    "review_format": "buddha.account-review.v2",
+    "secret": "Already locally supplied API key; not recorded",
+    "source_launcher_implemented_by_this_slice": false
+  },
+  "date": "2026-10-22",
+  "earlier_reds": {
+    "initial_schema_rejection": {
+      "errors": 1,
+      "exception": "buddha.releases.ReleaseError",
+      "failures": 0,
+      "format": "buddha.keyed-review-red.v1",
+      "kind": "behavioral validation rejection",
+      "raw_log_scope": "Tool-captured console result; no separately saved raw log claimed",
+      "reason": "existing exact v1 review schema rejects the valid proposed tagged v2 review",
+      "source_sha256": "f5653b00fb3abdf4b30c8388f44323d83879f9d24924156cf363782528b4f99f",
+      "test": "test_keyed_review.KeyedReviewTests.test_tagged_review_validates_without_reading_a_key",
+      "test_body_entered": true,
+      "test_sha256": "2ba9c31f1c930b9636383cbdaca662012ad35fdcec88c96bc0ae0a7cdee9c3b7",
+      "tests_run": 1
+    },
+    "strict_format_marker": {
+      "behavior": "Literal v2 tag carried in a string subclass was accepted; strict shared text validator now rejects it",
+      "errors": 0,
+      "failures": 1,
+      "raw_log_scope": "Direct tool-captured console; no separately saved log claimed",
+      "test": "test_format_requires_literal_version_text",
+      "tests_run": 1
+    }
+  },
+  "format": "buddha.src02-keyed-review-delivery.v1",
+  "limits": [
+    "No full local suite rerun; hosted Linux/Windows checks reported separately.",
+    "Composed source search uses mocked workers and synthetic provider replies, not new actual container or paid evidence.",
+    "Changed Gateway bytes require a new prospective runtime/input identity; old frozen owners are not resealed.",
+    "Future launcher must bind v2 context to approved launch bytes and implement original-owner pre-key validation/progress/partial recovery.",
+    "No new spending allocation, model-authored evolution, universal mutation-competence admission or scientific improvement claim."
+  ],
+  "new_tests": {
+    "errors": 0,
+    "evidence": "Direct tool-captured unittest console; no separately saved raw log claimed",
+    "failures": 0,
+    "ordered_test_ids": [
+      "test_keyed_review.KeyedReviewTests.test_both_providers_dispatch_once_and_replay_keylessly_from_original_owner",
+      "test_keyed_review.KeyedReviewTests.test_fingerprints_use_existing_keys_and_separate_context_and_provider",
+      "test_keyed_review.KeyedReviewTests.test_format_requires_literal_version_text",
+      "test_keyed_review.KeyedReviewTests.test_invalid_or_missing_keys_never_leave_a_fingerprint",
+      "test_keyed_review.KeyedReviewTests.test_invalid_provider_or_context_refuses_before_reading_credentials",
+      "test_keyed_review.KeyedReviewTests.test_source_search_carries_keyed_review_through_descendants_native_evidence_and_replay",
+      "test_keyed_review.KeyedReviewTests.test_tagged_review_validates_without_reading_a_key",
+      "test_keyed_review.KeyedReviewTests.test_v2_freshness_matches_original_review_rule",
+      "test_keyed_review.KeyedReviewTests.test_v2_rejects_mixed_unknown_and_incomplete_formats",
+      "test_keyed_review.KeyedReviewTests.test_wrong_context_or_plain_sha_cannot_downgrade_the_keyed_binding",
+      "test_keyed_review.KeyedReviewTests.test_wrong_key_keeps_unsent_original_reservation_and_correct_key_recovers"
+    ],
+    "skips": 0,
+    "source_sha256": {
+      "buddha/gateway.py": "6a7dafaef79cf3678e4c87814a3e7ae6005e6ed7c0cd1d0f25dfe63f09f740d9",
+      "tests/test_keyed_review.py": "2d22cd13321b84bd20841a674e3230cba24855cf4ffd89e3a989c3b8d6dd9067"
+    },
+    "successful": true,
+    "tests_run": 11,
+    "wall_seconds": 153.238
+  },
+  "preservation": {
+    "all209_other_old_python_raw_unchanged": true,
+    "all_historical_conformance_raw_unchanged": true,
+    "changed_production_file": "buddha/gateway.py",
+    "historical_conformance_files": 203,
+    "new_test_file": "tests/test_keyed_review.py"
+  },
+  "quality": {
+    "checks": [
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "ruff",
+          "check",
+          "buddha",
+          "tests",
+          "agents"
+        ],
+        "exit_code": 0,
+        "failure_type": null,
+        "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "name": "ruff-check",
+        "wall_seconds": 0.20155540003906935
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "ruff",
+          "format",
+          "--check",
+          "buddha",
+          "tests",
+          "agents"
+        ],
+        "exit_code": 0,
+        "failure_type": null,
+        "log_sha256": "c3ac60a207092b7f89b7655ce3a74c2ff381e396335170c20b61328b3a33bce9",
+        "name": "ruff-format",
+        "wall_seconds": 0.18953510001301765
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "mypy",
+          "--strict",
+          "--platform",
+          "win32",
+          "--cache-dir",
+          "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-keyed-reviews\\runs\\reviews\\keyed-review-quality-v1-mypy-win32-cache",
+          "buddha",
+          "agents"
+        ],
+        "exit_code": 0,
+        "failure_type": null,
+        "log_sha256": "1ae1a89d54d420cace381d4367eb85674ac10663afe0766641917ac6d36ebbd0",
+        "name": "mypy-win32",
+        "wall_seconds": 5.31199319998268
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "mypy",
+          "--strict",
+          "--platform",
+          "linux",
+          "--cache-dir",
+          "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-keyed-reviews\\runs\\reviews\\keyed-review-quality-v1-mypy-linux-cache",
+          "buddha",
+          "agents"
+        ],
+        "exit_code": 0,
+        "failure_type": null,
+        "log_sha256": "1ae1a89d54d420cace381d4367eb85674ac10663afe0766641917ac6d36ebbd0",
+        "name": "mypy-linux",
+        "wall_seconds": 5.316510200034827
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "bandit",
+          "-r",
+          "buddha",
+          "agents"
+        ],
+        "exit_code": 0,
+        "failure_type": null,
+        "log_sha256": "8bfff421584f13287b52f5e87f3a9ad4af71abb63ba04f582aeffe55bbc05da8",
+        "name": "bandit",
+        "wall_seconds": 3.3404330000048503
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "pip_audit",
+          "--no-deps",
+          "-r",
+          "requirements.txt"
+        ],
+        "exit_code": 0,
+        "failure_type": null,
+        "log_sha256": "e82148c0c30269ca5a2c35420ece6af011a4faf5a375325d750e243ffdb10625",
+        "name": "pip-audit",
+        "wall_seconds": 19.943619500030763
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "compileall",
+          "-q",
+          "buddha",
+          "tests",
+          "agents"
+        ],
+        "exit_code": 0,
+        "failure_type": null,
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "name": "compileall",
+        "wall_seconds": 0.7998102999990806
+      }
+    ],
+    "configuration_inputs": 4,
+    "input_map_sha256": "3e40871716ca9591635adb8331571889a873b3a7fada486f1ed8b732cee601dd",
+    "inputs_unchanged": true,
+    "passed": true,
+    "python_inputs": 211,
+    "receipt_sha256": "8f9013508833c5aaf2c0ee160e94fcb9286ea3c0000963bde6a7a63ebb9caad3"
+  },
+  "regressions": {
+    "first_cohort": {
+      "errors": 1,
+      "failures": 0,
+      "ordered_test_ids": [
+        "test_gateway.GatewayTests.test_actual_executing_core_drift_is_rejected_before_reservation",
+        "test_gateway.GatewayTests.test_anthropic_cache_inclusive_usage_through_real_funded_gateway",
+        "test_gateway.GatewayTests.test_bad_assistant_json_is_billed_without_benchmark_parsing",
+        "test_gateway.GatewayTests.test_cached_completed_reply_needs_no_key_live_permission_or_active_run",
+        "test_gateway.GatewayTests.test_cap_omission_reserves_documented_maximum_and_wire_bytes_are_unchanged",
+        "test_gateway.GatewayTests.test_consistent_local_profile_and_manifest_rewrite_cannot_replace_authority_owner",
+        "test_gateway.GatewayTests.test_credential_failure_leaves_reusable_reserved_unsent_attempt",
+        "test_gateway.GatewayTests.test_dependency_drift_after_send_does_not_block_terminal_receipt",
+        "test_gateway.GatewayTests.test_escaped_credentials_are_withheld_despite_malformed_envelope_or_header",
+        "test_gateway.GatewayTests.test_expired_review_blocks_new_spend_before_keys_but_keeps_cached_replay",
+        "test_gateway.GatewayTests.test_failure_after_both_reservation_mirrors_rolls_back_both",
+        "test_gateway.GatewayTests.test_http_error_and_retry_headers_are_preserved_without_automatic_retry",
+        "test_gateway.GatewayTests.test_identical_bodies_with_different_attempts_or_slots_are_independent_calls",
+        "test_gateway.GatewayTests.test_incomplete_http_read_retains_partial_body_and_unknown_hold",
+        "test_gateway.GatewayTests.test_input_inventory_is_bounded_before_files_or_allocation_are_created",
+        "test_gateway.GatewayTests.test_interrupt_after_full_body_read_retains_received_bytes",
+        "test_gateway.GatewayTests.test_interrupted_secret_screen_still_filters_received_credentials",
+        "test_gateway.GatewayTests.test_invalid_request_types_and_unicode_fail_before_reservation",
+        "test_gateway.GatewayTests.test_invalid_selected_header_keeps_body_and_marks_incomplete_headers",
+        "test_gateway.GatewayTests.test_keyboard_interrupt_during_usage_keeps_received_raw_evidence",
+        "test_gateway.GatewayTests.test_known_cost_overrun_records_true_charge_before_stopping_every_run",
+        "test_gateway.GatewayTests.test_known_overrun_cached_replay_raises_without_key_or_another_send",
+        "test_gateway.GatewayTests.test_legacy_and_gateway_share_the_last_call_slot",
+        "test_gateway.GatewayTests.test_legacy_hold_and_gateway_share_one_dollar_envelope",
+        "test_gateway.GatewayTests.test_local_checkpoint_interruptions_before_and_after_commit_preserve_one_charge",
+        "test_gateway.GatewayTests.test_missing_usage_keeps_raw_reply_and_full_unknown_hold",
+        "test_gateway.GatewayTests.test_other_configured_provider_key_is_never_sent_or_saved",
+        "test_gateway.GatewayTests.test_raw_receipt_is_durable_before_billing_extraction",
+        "test_gateway.GatewayTests.test_raw_serialization_interrupt_records_and_bills_before_reraising",
+        "test_gateway.GatewayTests.test_real_authority_and_actual_core_are_frozen_separately_from_host_profiles",
+        "test_gateway.GatewayTests.test_run_budget_and_call_caps_fail_before_credential_access",
+        "test_gateway.GatewayTests.test_same_logical_attempt_conflicts_for_changed_body",
+        "test_gateway.GatewayTests.test_secret_echo_is_withheld_and_secret_in_request_is_denied_unsent",
+        "test_gateway.GatewayTests.test_selected_dependency_profile_and_input_drift_fail_before_reservation",
+        "test_gateway.GatewayTests.test_timeout_is_one_dispatch_unknown_and_stops_shared_authority",
+        "test_gateway.GatewayTests.test_token_bound_breach_below_reserve_retains_raw_unknown_and_stops_all_runs",
+        "test_gateway.GatewayTests.test_two_runners_have_one_physical_dispatch_winner",
+        "test_gateway.GatewayTests.test_unexpected_response_model_keeps_raw_unknown_and_stops_shared_spending",
+        "test_gateway.GatewayTests.test_unexpected_response_tier_keeps_raw_unknown_and_stops_shared_spending",
+        "test_gateway.GatewayTests.test_unknown_capability_profile_model_or_paid_feature_fails_unsent",
+        "test_gateway.GatewayTests.test_unsent_connection_preparation_failure_can_reuse_reserved_identity",
+        "test_credentials.CredentialTests.test_actual_getpass_warning_is_an_error_and_never_echoes",
+        "test_credentials.CredentialTests.test_both_providers_deduplicate_and_notice_before_hidden_entry",
+        "test_credentials.CredentialTests.test_clean_import_needs_only_generic_host_code",
+        "test_credentials.CredentialTests.test_default_is_lazy_and_existing_keys_bypass_terminal_input",
+        "test_credentials.CredentialTests.test_interrupt_during_entry_or_body_restores_every_new_value",
+        "test_credentials.CredentialTests.test_legacy_exports_and_late_notice_patch_remain_compatible",
+        "test_credentials.CredentialTests.test_nonterminal_refuses_without_prompt_or_body",
+        "test_credentials.CredentialTests.test_partial_entry_errors_keep_fixed_codes_and_restore_environment",
+        "test_policy_launch.PolicyLaunchTests.test_actual_controller_cancel_preserves_exact_partial_when_receipt_write_fails",
+        "test_policy_launch.PolicyLaunchTests.test_completed_child_custody_does_not_import_or_project_scientific_metrics",
+        "test_policy_launch.PolicyLaunchTests.test_conflicting_checked_binding_and_late_selected_drift_are_rejected",
+        "test_policy_launch.PolicyLaunchTests.test_console_and_receipt_failure_preserve_completed_outcome",
+        "test_policy_launch.PolicyLaunchTests.test_controller_interruption_carries_exact_saved_observation",
+        "test_policy_launch.PolicyLaunchTests.test_existing_review_is_not_replaced_and_completed_state_is_keyless",
+        "test_policy_launch.PolicyLaunchTests.test_external_pin_destination_and_actual_terms_cannot_be_rebound",
+        "test_policy_launch.PolicyLaunchTests.test_extracted_native_custody_helper_requires_its_original_launch_pin",
+        "test_policy_launch.PolicyLaunchTests.test_fresh_check_is_passive_and_binds_destination_terms_and_original_proposal",
+        "test_policy_launch.PolicyLaunchTests.test_heartbeat_starts_during_slow_check_with_unknown_accounting",
+        "test_policy_launch.PolicyLaunchTests.test_hidden_key_feedback_cleanup_and_post_prompt_drift_stop_before_prepare",
+        "test_policy_launch.PolicyLaunchTests.test_live_and_manual_account_confirmation_gate_precede_key_entry",
+        "test_policy_launch.PolicyLaunchTests.test_nonpaying_summary_is_not_blocked_by_exhausted_attempt_capacity",
+        "test_policy_launch.PolicyLaunchTests.test_pre_key_stop_has_independent_new_receipt_and_immediate_phase",
+        "test_policy_launch.PolicyLaunchTests.test_real_unknown_stop_and_passive_resume_preserve_original_owners_and_holds",
+        "test_policy_launch.PolicyLaunchTests.test_required_launch_source_and_partial_preparation_are_not_adopted",
+        "test_policy_launch.PolicyLaunchTests.test_retired_unsealed_future_owner_stops_before_keys_without_banning_zero_op_preallocation",
+        "test_policy_launch.PolicyLaunchTests.test_same_grant_at_another_root_rejects_before_keys",
+        "test_policy_launch.PolicyLaunchTests.test_second_provider_cancellation_removes_first_key_and_does_not_prepare",
+        "test_policy_launch.PolicyLaunchTests.test_transport_pin_and_nonfinite_timeout_stop_before_keys_or_preparation",
+        "test_policy_launch.PolicyLaunchTests.test_untrusted_handoff_cannot_choose_receipt_or_leak_parser_text"
+      ],
+      "skips": 0,
+      "successful": false,
+      "tests_run": 70,
+      "wall_seconds": 97.71982180001214
+    },
+    "first_cohort_log_sha256": "e2a8b78f6abde5c3d67dd623c171e0b5f44d1b804f5f92acda477efa9fa75fe4",
+    "followup_log_sha256": "770eb06c98e6a7d2206c6934ceb9a4471b07fc29078d519d730fea417de0d1ee",
+    "followup_scope": "Permit that known clean-import subprocess; keep socket denial, isolated parent, scrubbed environment and all test assertions. Not a reclassification of the first cohort as successful.",
+    "harness_error": "The import-isolation test intentionally starts a clean Python subprocess; the additional wrapper denied it before that subprocess ran. No product or test change was made.",
+    "one_test_followup": {
+      "errors": 0,
+      "failures": 0,
+      "ordered_test_ids": [
+        "test_credentials.CredentialTests.test_clean_import_needs_only_generic_host_code"
+      ],
+      "skips": 0,
+      "successful": true,
+      "tests_run": 1,
+      "wall_seconds": 0.12605199997778982
+    },
+    "passed_unchanged_under_network_and_worker_denial": 69,
+    "unique_methods": 70
+  },
+  "review": {
+    "finding": "Strict literal format marker gap reproduced and fixed",
+    "mode": "Read-only independent subagent review of actual diff and composed consumers",
+    "other_concrete_accounting_or_downgrade_defects_found": 0
+  }
+}
