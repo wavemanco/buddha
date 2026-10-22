@@ -15,6 +15,15 @@ provenance pin, without changing it. The builder and writer still require a new
 directory. The [durable proposal stage](SOURCE-PROPOSAL-STAGE.md) uses this check
 before preparing or executing the selected parent's inherited improver.
 
+An optional `failure_history` adds version 2 host provenance for checked
+materialized-child execution failures. Each entry pins the actual parent screen,
+proposal and failed child screen, including the proposal's original measured
+parent occasion. A different occasion for the same source cannot replace it.
+Empty history keeps the original version 1 derivation. The worker still receives
+the existing development-task and text-note format. [Source search](SOURCE-SEARCH.md)
+explains which failures enter these notes, the excerpt limits and the separate
+incomplete states that stop execution.
+
 ## What the agent learns
 
 For each selected development task, the note gives the recorded distinctiveness
@@ -121,8 +130,8 @@ this packet.
 The public functions are in `buddha.source_feedback`:
 
 ```text
-build_source_feedback(directory, *, reference) -> dict
-write_source_feedback(directory, *, reference) -> dict
+build_source_feedback(directory, *, reference, failure_history=()) -> dict
+write_source_feedback(directory, *, reference, failure_history=()) -> dict
 ```
 
 These are Python API signatures, not PowerShell commands. `directory` is an
@@ -154,6 +163,10 @@ no key or paid call. Ctrl+C stops the foreground checks. These checks test the
 engineering contract; they do not measure an agent's creative performance.
 
 ## Validation at this slice
+
+This section retains the original feedback-bridge delivery's validation. The
+later failure-aware feedback and composed loop have separate
+[validation and limits](SOURCE-SEARCH.md#python-interface-and-present-scope).
 
 Thirteen new methods pass across their recorded focused runs. The first cohort
 also retained a large-artifact simulator failure; correcting the shared simulator

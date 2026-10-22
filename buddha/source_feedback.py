@@ -8,16 +8,18 @@ not authenticated judgments, semantic compliance or scientific improvement.
 import hashlib
 import os
 import stat
+from collections.abc import Sequence
 from pathlib import Path
 from typing import cast
 
 from buddha import candidate_generation, source_screen
 from buddha import native_pipeline as pipeline
-from buddha.answers import TaskSet
+from buddha.answers import TaskSet, _utf8
 from buddha.releases import (
     MAX_FEEDBACK_BYTES,
     MAX_JSON_BYTES,
     ReleaseError,
+    _checked_proposal_capture,
     _digest,
     _information,
     _json,
@@ -25,6 +27,7 @@ from buddha.releases import (
     _object,
     _path,
     _root,
+    _source_proposal,
 )
 
 _POLICY = {
@@ -35,6 +38,21 @@ _POLICY = {
     "max_note_utf8_bytes": 4096,
     "max_feedback_bytes": MAX_FEEDBACK_BYTES,
     "max_projected_bytes": MAX_FEEDBACK_BYTES,
+}
+_FAILURE_POLICY = {
+    **_POLICY,
+    "version": "measured-failed-children-v2",
+    "max_answer_positions": 1,
+    "max_excerpt_utf8_bytes": 16,
+    "max_excerpt_json_bytes": 32,
+    "max_failures": 8,
+    "newest_source_utf8_bytes": 768,
+    "newest_source_json_bytes": 1536,
+    "minimum_source_utf8_bytes": 128,
+    "newest_hypothesis_utf8_bytes": 128,
+    "newest_hypothesis_json_bytes": 256,
+    "older_source_and_hypothesis_excerpts": 0,
+    "cost_scope": "original proposal and failed-generation owners separately",
 }
 
 
@@ -58,11 +76,11 @@ def _amount(value: object) -> int:
     return value
 
 
-def _prefix(text: str) -> str:
+def _prefix(text: str, *, utf8_bytes: int = 64, json_bytes: int = 128) -> str:
     result = ""
     for character in text:
         proposed = result + character
-        if len(proposed.encode("utf-8")) > 64 or len(_json(proposed)) > 128:
+        if len(proposed.encode("utf-8")) > utf8_bytes or len(_json(proposed)) > json_bytes:
             break
         result = proposed
     return result
@@ -260,17 +278,342 @@ def _build(
     return _load(_json(result))
 
 
-def build_source_feedback(directory: Path, *, reference: dict[str, object]) -> dict[str, object]:
+def _build_failures(
+    directory: Path,
+    reference: dict[str, object],
+    history: Sequence[dict[str, object]],
+    *,
+    existing: bool = False,
+) -> dict[str, object]:
+    """Rebuild checked history, including at a private partial-write destination."""
+    if type(history) not in {list, tuple} or not 1 <= len(history) <= 8:
+        raise SourceFeedbackError("failure history requires 1..8 ordered original edges")
+    directory = _destination(directory, existing=existing)
+    if existing:
+        _packet_files(directory, partial=True)
+    base = _build(directory, reference, existing=existing)
+    provenance = _object(base["provenance"])
+    measured_sha256 = _sha(_json(provenance))
+    original_ref = _object(provenance["reference"])
+    authorization = pipeline._absolute(original_ref["authorization"])
+    observed: dict[Path, str] = {}
+
+    def consume(path: Path, expected: object) -> bytes:
+        raw = pipeline._read(path, expected)
+        digest = _sha(raw)
+        if path in observed and observed[path] != digest:
+            raise SourceFeedbackError("failure evidence changed during derivation")
+        observed[path] = digest
+        return raw
+
+    def checked_ref(value: object) -> dict[str, object]:
+        item = _object(value, {"directory", "authorization", "report_sha256"})
+        location = pipeline._absolute(item["directory"])
+        authority = pipeline._absolute(item["authorization"])
+        if ".." in location.parts or ".." in authority.parts or authority != authorization:
+            raise SourceFeedbackError("failure history changes its original shared authority")
+        if directory.is_relative_to(location):
+            raise SourceFeedbackError("failure feedback overlaps its original evidence")
+        return {
+            "directory": str(location),
+            "authorization": str(authority),
+            "report_sha256": _digest(item["report_sha256"]),
+        }
+
+    def screen_input(
+        value: object,
+    ) -> tuple[dict[str, object], dict[str, object], dict[str, object]]:
+        ref = checked_ref(value)
+        location = pipeline._absolute(ref["directory"])
+        raw = consume(location / "report.json", ref["report_sha256"])
+        report = source_screen.inspect_source_screen(
+            location,
+            authorization=authorization,
+            expected_report_sha256=_digest(ref["report_sha256"]),
+        )
+        record = source_screen.SourceScreen.from_bytes(
+            consume(location / "screen.json", _digest(report["screen_sha256"]))
+        ).to_record()
+        if (
+            raw != _json(report)
+            or any(report[key] != provenance[key] for key in ("comparison_key", "controls_sha256"))
+            or any(_json(record[key]) != _json(base[key]) for key in ("source", "split"))
+        ):
+            raise SourceFeedbackError("failed children change the original common screen")
+        selected_ids = [
+            task.id for task in source_screen.SourceScreen.from_bytes(_json(record)).tasks.tasks
+        ]
+        if _json(selected_ids) != _json(
+            [_object(row)["task_id"] for row in _list(_object(base["feedback"])["records"])]
+        ):
+            raise SourceFeedbackError("failed children change the ordered development population")
+        for section in ("generation", "native"):
+            if any(
+                directory.is_relative_to(pipeline._absolute(path))
+                for path in _object(_object(record[section])["roots"]).values()
+            ):
+                raise SourceFeedbackError("failure feedback overlaps original selected components")
+        return ref, report, record
+
+    from buddha import candidate_improvement
+    from buddha.gateway import _read_manifest
+
+    edges, failures, summaries = [], [], []
+    seen_proposals: set[str] = set()
+    seen_screens: set[str] = set()
+    latest_source = latest_hypothesis = ""
+    tasks = TaskSet.from_bytes(_json(base["source"]))
+    for ordinal, value in enumerate(history):
+        edge = _object(value, {"parent", "proposal", "screen"})
+        parent_ref, parent, parent_record = screen_input(edge["parent"])
+        failed_ref, failed, failed_record = screen_input(edge["screen"])
+        proposal_ref = checked_ref(edge["proposal"])
+        if parent.get("disposition", "screened") != "screened" or (
+            failed.get("disposition") != "candidate_execution_failed"
+        ):
+            raise SourceFeedbackError(
+                "failure history needs a complete parent and terminal failed child"
+            )
+        proposal_path = pipeline._absolute(proposal_ref["directory"])
+        proposal_raw = consume(proposal_path / "report.json", proposal_ref["report_sha256"])
+        proposal = candidate_improvement.inspect_candidate_improvement(
+            proposal_path,
+            authorization=authorization,
+            expected_report_sha256=_digest(proposal_ref["report_sha256"]),
+        )
+        if proposal_raw != _json(proposal) or proposal["disposition"] != "materialized":
+            raise SourceFeedbackError("failed child lacks an original materialized proposal")
+        child = _object(proposal["child"])
+        if (
+            proposal["parent_agent_sha256"] != parent["candidate_id"]
+            or failed["parent_id"] != parent["candidate_id"]
+            or failed["candidate_id"] != child["agent_sha256"]
+            or _json(failed_record["lineage"]) != _json(child["lineage"])
+            or str(proposal_ref["directory"]) in seen_proposals
+            or str(failed_ref["directory"]) in seen_screens
+        ):
+            raise SourceFeedbackError(
+                "failure history repeats or changes an original parent-child edge"
+            )
+        owner_ref = _object(_object(proposal["provenance"])["owner"])
+        owner = _read_manifest(pipeline._absolute(owner_ref["directory"]))
+        if pipeline._sha(owner) != owner_ref["manifest_sha256"] or (
+            _json(owner["selection"]) != _json(_object(parent_record["generation"])["selection"])
+        ):
+            raise SourceFeedbackError("proposal changes its parent's protected selection")
+        inputs = _object(_object(proposal["provenance"])["original_inputs"])
+        context_path = proposal_path / "context.json"
+        context = _load(consume(context_path, inputs[str(context_path)]))
+        descriptor_path = pipeline._absolute(context["descriptor"])
+        recipe = _load(consume(descriptor_path, inputs[str(descriptor_path)]))
+        feedback_path = pipeline._absolute(_object(recipe["feedback"])["path"])
+        provenance_path = feedback_path.parent / "provenance.json"
+        measured_provenance = _load(consume(provenance_path, inputs[str(provenance_path)]))
+        if _json(measured_provenance["reference"]) != _json(parent_ref):
+            raise SourceFeedbackError("proposal feedback names another original parent occasion")
+        lineage_ref = _object(child["lineage"])
+        lineage_path = pipeline._absolute(lineage_ref["path"])
+        lineage = _load(consume(lineage_path, lineage_ref["sha256"]))
+        frame = _load(consume(lineage_path.parent / "proposal.json", lineage["proposal_sha256"]))
+        returned = _source_proposal(_checked_proposal_capture(frame["proposal"])["value"])
+        child_source = returned["source"].encode("utf-8")
+        if _sha(child_source) != child["source_sha256"] or (
+            consume(pipeline._absolute(child["directory"]) / "candidate.py", child["source_sha256"])
+            != child_source
+        ):
+            raise SourceFeedbackError("failed source differs from its retained original proposal")
+        failure = _object(failed["failure"])
+        task_ids = _list(_object(base["feedback"])["records"])
+        index = failure["task_index"]
+        if (
+            type(index) is not int
+            or not 0 <= index < len(task_ids)
+            or (_json(failure["task_id"]) != _json(_object(task_ids[index])["task_id"]))
+        ):
+            raise SourceFeedbackError("failed source is not its original development task")
+        generation_ref = _object(failure["source_generation"])
+        generation = _load(
+            consume(
+                pipeline._absolute(generation_ref["generation_directory"]) / "report.json",
+                _digest(failure["generation_report_sha256"]),
+            )
+        )
+        terminal = _object(failure["terminal"])
+        if generation["disposition"] != "candidate_execution_failed" or (
+            _json(_object(generation["outcome"])["terminal"]) != _json(terminal)
+            or _object(generation["generation"])["agent_sha256"] != child["agent_sha256"]
+            or type(terminal["ready_seen"]) is not bool
+            or terminal["done_reason"] != "agent_error"
+        ):
+            raise SourceFeedbackError("failed child has no checked original worker outcome")
+        summary = {
+            "ordinal": ordinal,
+            "parent_id": parent["candidate_id"],
+            "child_id": child["agent_sha256"],
+            "task_id": failure["task_id"],
+            "reason": terminal["done_reason"],
+            "ready_seen": terminal["ready_seen"],
+            "completed_callbacks": _amount(terminal["operation_count"]),
+            "recorded_cost_microusd": _amount(terminal["recorded_cost_microusd"]),
+            "proposal_cost_microusd": _amount(
+                _object(_object(proposal["improvement"])["gateway_totals"])["spent_microusd"]
+            ),
+        }
+        edges.append({"parent": parent_ref, "proposal": proposal_ref, "screen": failed_ref})
+        summaries.append(summary)
+        failures.append(
+            summary
+            | {
+                "source_generation": generation_ref,
+                "generation_report_sha256": failure["generation_report_sha256"],
+                "source": {"sha256": _sha(child_source), "utf8_bytes": len(child_source)},
+                "hypothesis": {
+                    "sha256": _sha(returned["hypothesis"].encode()),
+                    "utf8_bytes": len(returned["hypothesis"].encode()),
+                },
+            }
+        )
+        seen_proposals.add(str(proposal_ref["directory"]))
+        seen_screens.add(str(failed_ref["directory"]))
+        latest_source, latest_hypothesis = returned["source"], returned["hypothesis"]
+    source_prefix = _prefix(latest_source, utf8_bytes=768, json_bytes=1536)
+    hypothesis_prefix = _prefix(latest_hypothesis, utf8_bytes=128, json_bytes=256)
+    measured = [
+        _load(_utf8(_object(row)["note"]).encode())
+        for row in _list(_object(base["feedback"])["records"])
+    ]
+    for note, task_provenance in zip(measured, _list(provenance["tasks"]), strict=True):
+        answers = _list(note["answers"])
+        shown = (
+            [
+                {
+                    "position": 0,
+                    "text": _prefix(
+                        _utf8(_object(answers[0])["text"]), utf8_bytes=16, json_bytes=32
+                    ),
+                }
+            ]
+            if answers
+            else []
+        )
+        note["answers"] = shown
+        originals = _list(_object(task_provenance)["answers"])
+        note["omitted_answer_positions"] = max(0, len(originals) - len(shown))
+        for position, answer in enumerate(originals):
+            item = _object(answer)
+            included = len(_utf8(shown[0]["text"]).encode()) if position == 0 and shown else 0
+            item.update(
+                excerpt_utf8_bytes=included,
+                omitted_utf8_bytes=cast(int, item["utf8_bytes"]) - included,
+                omission="answer_positions"
+                if position >= 1
+                else "excerpt_bytes"
+                if item["utf8_bytes"] != included
+                else None,
+            )
+
+    def notes(prefix: str) -> list[bytes]:
+        return [
+            _json(
+                {
+                    "kind": "saved_native_measurements_and_failed_children",
+                    "measurements": note,
+                    "failures": summaries,
+                    "newest_failure": {
+                        "ordinal": len(failures) - 1,
+                        "source_sha256": _sha(latest_source.encode()),
+                        "hypothesis_sha256": _sha(latest_hypothesis.encode()),
+                        "source": prefix,
+                        "hypothesis": hypothesis_prefix,
+                        "source_omitted_utf8_bytes": len(latest_source.encode())
+                        - len(prefix.encode()),
+                        "hypothesis_omitted_utf8_bytes": len(latest_hypothesis.encode())
+                        - len(hypothesis_prefix.encode()),
+                    },
+                    "older_failure_excerpts_omitted": len(failures) - 1,
+                }
+            )
+            for note in measured
+        ]
+
+    minimum = _prefix(source_prefix, utf8_bytes=128, json_bytes=1536)
+    if any(len(raw) > 4096 for raw in notes(minimum)):
+        raise SourceFeedbackError(
+            "all failed-child summaries and minimum source context exceed note ceiling"
+        )
+    low, high = len(minimum), len(source_prefix)
+    while low < high:
+        middle = (low + high + 1) // 2
+        if all(len(raw) <= 4096 for raw in notes(source_prefix[:middle])):
+            low = middle
+        else:
+            high = middle - 1
+    source_prefix = source_prefix[:low]
+    raw_notes = notes(source_prefix)
+    feedback = _object(base["feedback"])
+    for row, raw, task_provenance in zip(
+        _list(feedback["records"]), raw_notes, _list(provenance["tasks"]), strict=True
+    ):
+        _object(row)["note"] = raw.decode()
+        _object(task_provenance).update(note_sha256=_sha(raw), note_utf8_bytes=len(raw))
+    for index, failure in enumerate(failures):
+        for key, excerpt in (("source", source_prefix), ("hypothesis", hypothesis_prefix)):
+            item = _object(failure[key])
+            included = len(excerpt.encode()) if index == len(failures) - 1 else 0
+            item.update(
+                excerpt_utf8_bytes=included,
+                omitted_utf8_bytes=cast(int, item["utf8_bytes"]) - included,
+            )
+    provenance.update(
+        format="buddha.source-screen-feedback.v2",
+        policy=dict(_FAILURE_POLICY),
+        measured_base_sha256=measured_sha256,
+        failure_history=edges,
+        failures=failures,
+        feedback_sha256=_sha(_json(feedback)),
+        claim=(
+            "descriptive native measurements and worker-declared source failures; "
+            "no invalidity oracle or improvement claim"
+        ),
+    )
+    projected = [
+        {
+            "task": tasks.select([_object(row)["task_id"]]).tasks[0].to_record(),
+            "note": _object(row)["note"],
+        }
+        for row in _list(feedback["records"])
+    ]
+    if len(_json(feedback)) > MAX_FEEDBACK_BYTES or len(_json(projected)) > MAX_FEEDBACK_BYTES:
+        raise SourceFeedbackError("failure feedback packet or full task projection exceeds 1 MiB")
+    if len(_json(base)) > MAX_JSON_BYTES:
+        raise SourceFeedbackError("failure feedback host bundle exceeds its byte ceiling")
+    for path, digest in observed.items():
+        pipeline._read(path, digest)
+    return _load(_json(base))
+
+
+def build_source_feedback(
+    directory: Path,
+    *,
+    reference: dict[str, object],
+    failure_history: Sequence[dict[str, object]] = (),
+) -> dict[str, object]:
     """Build detached prospective records, without writing or creating owners."""
     try:
-        return _build(directory, reference)
+        if type(failure_history) not in {list, tuple}:
+            raise SourceFeedbackError("failure history requires an ordered literal sequence")
+        return (
+            _build_failures(directory, reference, failure_history)
+            if failure_history
+            else _build(directory, reference)
+        )
     except (ValueError, TypeError, KeyError, OSError, RecursionError, OverflowError) as error:
         if isinstance(error, SourceFeedbackError):
             raise
         raise SourceFeedbackError("source feedback evidence or destination is invalid") from None
 
 
-def _packet_files(directory: Path) -> None:
+def _packet_files(directory: Path, *, partial: bool = False) -> None:
     expected = {"source.json", "split.json", "feedback.json", "provenance.json"}
     found = set()
     with os.scandir(directory) as entries:
@@ -281,7 +624,7 @@ def _packet_files(directory: Path) -> None:
             if not stat.S_ISREG(information.st_mode) or information.st_nlink != 1:
                 raise SourceFeedbackError("feedback packet files must be regular without aliases")
             found.add(entry.name)
-    if found != expected:
+    if not partial and found != expected:
         raise SourceFeedbackError("feedback packet requires exactly four original files")
 
 
@@ -295,8 +638,18 @@ def inspect_source_feedback(
         provenance_raw = pipeline._read(
             directory / "provenance.json", _digest(expected_provenance_sha256)
         )
-        reference = _object(_load(provenance_raw)["reference"])
-        bundle = _build(directory, reference, existing=True)
+        original = _load(provenance_raw)
+        reference = _object(original["reference"])
+        bundle = (
+            _build_failures(
+                directory,
+                reference,
+                cast(list[dict[str, object]], _list(original["failure_history"])),
+                existing=True,
+            )
+            if original.get("format") == "buddha.source-screen-feedback.v2"
+            else _build(directory, reference, existing=True)
+        )
         records = {
             name + ".json": _json(bundle[name])
             for name in ("source", "split", "feedback", "provenance")
@@ -318,9 +671,14 @@ def inspect_source_feedback(
         raise SourceFeedbackError("saved source feedback evidence is invalid") from None
 
 
-def write_source_feedback(directory: Path, *, reference: dict[str, object]) -> dict[str, object]:
+def write_source_feedback(
+    directory: Path,
+    *,
+    reference: dict[str, object],
+    failure_history: Sequence[dict[str, object]] = (),
+) -> dict[str, object]:
     """Exclusively write four checked records; preserve any partial failure."""
-    bundle = build_source_feedback(directory, reference=reference)
+    bundle = build_source_feedback(directory, reference=reference, failure_history=failure_history)
     try:
         directory = _destination(directory)
         records = {

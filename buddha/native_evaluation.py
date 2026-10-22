@@ -78,7 +78,10 @@ def _generation(value: object, authority: Authorization) -> _Generation:
 
 def _read_generation(value: object, authority_path: Path) -> _Generation:
     reference = _object(value)
-    if reference.get("format") == "buddha.candidate-generation-source.v1":
+    if reference.get("format") in {
+        "buddha.candidate-generation-source.v1",
+        "buddha.candidate-generation-source.v2",
+    }:
         from buddha import candidate_generation
 
         if (
@@ -96,7 +99,11 @@ def _generation_directory(value: object) -> Path:
     reference = _object(value)
     field = (
         "generation_directory"
-        if reference.get("format") == "buddha.candidate-generation-source.v1"
+        if reference.get("format")
+        in {
+            "buddha.candidate-generation-source.v1",
+            "buddha.candidate-generation-source.v2",
+        }
         else "baseline_directory"
     )
     return pipeline._absolute(reference[field])

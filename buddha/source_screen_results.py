@@ -60,6 +60,8 @@ def _owners(
     record: dict[str, object],
     count: int,
     controls: dict[str, str],
+    *,
+    failed_index: int | None = None,
 ) -> dict[str, object]:
     stages = _rows(record["stages"])
     planned = {
@@ -70,6 +72,7 @@ def _owners(
             ("evaluation", list(range(1, len(stages) + 1)), "native"),
         )
         for index in indexes
+        if not (i == failed_index and section == "native")
     }
     observed_tasks = {
         name.split("/")[1] for name in reader.capture.entries if name.startswith("tasks/")
@@ -139,6 +142,9 @@ def _source(
     runtime_sha256: str,
     current: dict[str, object],
 ) -> tuple[_Generation, dict[str, object], str]:
+    from buddha.source_screen import SourceScreen, _generation_formats, _version
+
+    screen = SourceScreen.from_bytes(_json(record))
     root = location / "generation"
     owner = reader.owner(root / "owners/0")
     task_path, descriptor = location / "task.json", location / "generation.json"
@@ -146,7 +152,7 @@ def _source(
         raise reader.error_type("source task differs from its original common screen")
     generation = _object(record["generation"])
     recipe = {
-        "format": "buddha.candidate-generation.v1",
+        "format": _version(screen, "candidate-generation"),
         "tasks": str(task_path),
         **{
             key: generation[key]
@@ -156,14 +162,14 @@ def _source(
     if not _same(_load(reader.bound(owner, descriptor)), recipe) or not _same(
         _load(reader.bound(owner, root / "context.json")),
         {
-            "format": "buddha.candidate-generation-context.v1",
+            "format": _generation_formats(screen)["context"],
             "descriptor": str(descriptor),
             "expected_runtime_sha256": runtime_sha256,
         },
     ):
         raise reader.error_type("source recipe differs from its original common screen")
     reference: dict[str, object] = {
-        "format": "buddha.candidate-generation-source.v1",
+        "format": _generation_formats(screen)["source"],
         "generation_directory": str(root),
         "stage_seal_sha256": _sha(reader.raw(root / "completed/0.json")),
         "owner_manifest_sha256": owner.manifest_sha256,
@@ -179,6 +185,18 @@ def _source(
     seal = reader.record(root / "completed/0.json")
     attempt = root / _path(seal["attempt"])
     report = reader.record(attempt / "report.json")
+    if record["format"] == "buddha.source-screen.v2":
+        from buddha.candidate_generation import inspect_candidate_generation
+
+        prospective_report = inspect_candidate_generation(
+            root,
+            authorization=reader.authorization,
+            expected_report_sha256=_sha(reader.raw(root / "report.json")),
+        )
+        _, digest = _publication(
+            reader, root / "report.json", prospective_report, current, {owner.run_id}
+        )
+        return source, reference, digest
     expected: dict[str, object] = {
         "format": "buddha.candidate-generation-stage-report.v1",
         "status": "complete",
@@ -189,6 +207,68 @@ def _source(
     }
     _, digest = _publication(reader, root / "report.json", expected, current, {owner.run_id})
     return source, reference, digest
+
+
+def _failed_source(
+    reader: NativeEvidence,
+    screen: object,
+    index: int,
+    runtime_sha256: str,
+    current: dict[str, object],
+) -> dict[str, object]:
+    from buddha.candidate_generation import inspect_candidate_generation
+    from buddha.source_screen import SourceScreen, _generation_formats, _generation_recipe
+
+    if not isinstance(screen, SourceScreen):
+        raise reader.error_type("failed source needs its original screen")
+    location = reader.root / "tasks" / str(index)
+    root = location / "generation"
+    owner = reader.owner(root / "owners/0")
+    task = screen.tasks.tasks[index]
+    if reader.bound(owner, location / "task.json") != screen.tasks.select([task.id]).to_bytes():
+        raise reader.error_type("failed source changes the original task")
+    descriptor = location / "generation.json"
+    if reader.bound(owner, descriptor) != _json(_generation_recipe(location, screen)) or (
+        reader.bound(owner, root / "context.json")
+        != _json(
+            {
+                "format": _generation_formats(screen)["context"],
+                "descriptor": str(descriptor),
+                "expected_runtime_sha256": runtime_sha256,
+            }
+        )
+    ):
+        raise reader.error_type("failed source changes an original screen control")
+    raw = reader.raw(root / "report.json")
+    report = inspect_candidate_generation(
+        root, authorization=reader.authorization, expected_report_sha256=_sha(raw)
+    )
+    if raw != _json(report) or report["disposition"] != "candidate_execution_failed":
+        raise reader.error_type("failed source lacks a checked terminal outcome")
+    reference = _object(report["source_generation"])
+    if reference != {
+        "format": _generation_formats(screen)["source"],
+        "generation_directory": str(root),
+        "stage_seal_sha256": _sha(reader.raw(root / "completed/0.json")),
+        "owner_manifest_sha256": owner.manifest_sha256,
+        "owner_ledger_sha256": owner.ledger_sha256,
+    }:
+        raise reader.error_type("failed source reference changes its original owner")
+    anchors = [
+        row["reason"]
+        for row in reader._rows(reader.funded["auth_deactivations"])
+        if row["run_id"] == owner.run_id
+    ]
+    if anchors != [_generation_formats(screen)["anchor"] + _text(reference["stage_seal_sha256"])]:
+        raise reader.error_type("failed source lacks its original captured completion anchor")
+    _publication(reader, root / "report.json", report, current, {owner.run_id}, _sha(raw))
+    return {
+        "task_index": index,
+        "task_id": task.id,
+        "source_generation": reference,
+        "generation_report_sha256": _sha(raw),
+        "terminal": _object(_object(report["outcome"])["terminal"]),
+    }
 
 
 def _native(
@@ -272,7 +352,13 @@ def collect_source_screen(
     directory: Path, *, authorization: Path, expected_report_sha256: str | None = None
 ) -> dict[str, object]:
     """Reconstruct complete custody or verify an explicitly pinned publication."""
-    from buddha.source_screen import SourceScreen, SourceScreenError, _comparison_controls, _lineage
+    from buddha.source_screen import (
+        SourceScreen,
+        SourceScreenError,
+        _comparison_controls,
+        _lineage,
+        _version,
+    )
 
     try:
         if not isinstance(directory, Path) or not isinstance(authorization, Path):
@@ -301,7 +387,7 @@ def collect_source_screen(
         generation = _object(record["generation"])
         runtime = _object(generation["runtime"])
         if (
-            context["format"] != "buddha.source-screen-context.v1"
+            context["format"] != _version(screen, "source-screen-context")
             or context["screen_sha256"] != screen.fingerprint()
             or runtime["sha256"] != runtime_sha256
             or screen_raw != screen.to_bytes()
@@ -335,7 +421,30 @@ def collect_source_screen(
         reader.release = Release.from_record(_object(record["source"])["release"])
         reader.template = {"native": record["native"], "stages": record["stages"]}
         pipeline.validate_native_flow(record["stages"], reader.release)
-        reader.funded = _owners(reader, record, len(tasks.tasks), controls)
+        failed_index: int | None = None
+        count = len(tasks.tasks)
+        if record["format"] == "buddha.source-screen.v2":
+            observed = {
+                name.split("/")[1] for name in reader.capture.entries if name.startswith("tasks/")
+            }
+            if (
+                not observed
+                or observed != {str(i) for i in range(len(observed))}
+                or (len(observed) > count)
+            ):
+                raise SourceScreenError("prospective screen has an invalid task prefix")
+            for index in range(len(observed)):
+                published = reader.record(
+                    directory / "tasks" / str(index) / "generation/report.json"
+                )
+                if published.get("disposition") == "candidate_execution_failed":
+                    if index != len(observed) - 1:
+                        raise SourceScreenError("screen work follows a failed candidate")
+                    failed_index = index
+            if failed_index is None and len(observed) != count:
+                raise SourceScreenError("complete screen omits scheduled tasks")
+            count = len(observed)
+        reader.funded = _owners(reader, record, count, controls, failed_index=failed_index)
         config = _object(reader.funded["config"])
         if config["scope"] != "source screen: " + screen.comparison_key():
             raise SourceScreenError("saved screen belongs to another authority scope")
@@ -347,8 +456,22 @@ def collect_source_screen(
         parent_id = _lineage(screen, lambda path, digest: reader.raw(path, digest))
         rows: list[dict[str, object]] = []
         seals: dict[str, str] = {}
-        for index, task in enumerate(tasks.tasks):
+        failure: dict[str, object] | None = None
+        for index, task in enumerate(tasks.tasks[:count]):
             location = directory / "tasks" / str(index)
+            if index == failed_index:
+                failure = _failed_source(reader, screen, index, runtime_sha256, current)
+                if any(
+                    name.startswith(
+                        (location / "evaluation").relative_to(directory).as_posix() + "/"
+                    )
+                    for name in reader.capture.entries
+                ):
+                    raise SourceScreenError("failed candidate has unexpected native work")
+                seals[
+                    (location / "generation/completed/0.json").relative_to(directory).as_posix()
+                ] = _digest(_object(failure["source_generation"])["stage_seal_sha256"])
+                break
             for role, names in (
                 ("generation", {"0.json"}),
                 (
@@ -401,27 +524,31 @@ def collect_source_screen(
             seals[(location / "generation/completed/0.json").relative_to(directory).as_posix()] = (
                 cast(str, reference["stage_seal_sha256"])
             )
-        reasons = []
+        reasons = ["candidate_execution_failed"] if failure is not None else []
         means: dict[str, object] = {}
         for metric, minimum in (("distinct", 1), ("utility", 0)):
             values = [row[metric] for row in rows]
-            usable = all(
-                type(value) in (int, float)
-                and minimum <= cast(float, value) <= 10
-                and math.isfinite(cast(float, value))
-                for value in values
+            usable = (
+                failure is None
+                and bool(values)
+                and all(
+                    type(value) in (int, float)
+                    and minimum <= cast(float, value) <= 10
+                    and math.isfinite(cast(float, value))
+                    for value in values
+                )
             )
             means["mean_" + metric] = (
                 math.fsum(cast(list[float], values)) / len(rows) if usable else None
             )
-            if not usable:
+            if not usable and failure is None:
                 reasons.append("unavailable_or_invalid_" + metric)
         if record["projection"] is None:
             reasons.append("projection_unavailable")
         if any(task.count > 10 for task in tasks.tasks):
             reasons.append("answer_count_outside_archive_domain")
         result: dict[str, object] = {
-            "format": "buddha.source-screen-report.v1",
+            "format": _version(screen, "source-screen-report"),
             "status": "complete",
             "screen_sha256": screen.fingerprint(),
             "candidate_id": screen.candidate_id,
@@ -451,6 +578,22 @@ def collect_source_screen(
             },
             "claim": _CLAIM,
         }
+        if record["format"] == "buddha.source-screen.v2":
+            result.update(
+                {
+                    "disposition": "screened" if failure is None else "candidate_execution_failed",
+                    "failure": failure,
+                    "unattempted": {
+                        "generation_task_ids": [task.id for task in tasks.tasks[count:]],
+                        "native_task_ids": [task.id for task in tasks.tasks[count - 1 :]]
+                        if failure is not None
+                        else [],
+                    },
+                    "claim": _CLAIM
+                    if failure is None
+                    else "checked candidate execution failure; no complete screen or numeric score",
+                }
+            )
         if expected_report_sha256 is not None:
             result, _ = _publication(
                 reader,
