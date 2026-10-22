@@ -1,0 +1,56 @@
+{
+  "base": "8f2f4371be3e7bebf24200e4ce929a075eb64e2d",
+  "development_history_qualifications": [
+    "Missing API RED was one setup/import error, not one behavioral execution.",
+    "First long-request ERROR was blocked earlier by nonexistent active field; corrected active guard then short positive control and distinct long-body RED establish actual byte-size boundary.",
+    "Runtime image and environment preparation each had a genuine subtest RED before source fix.",
+    "The focused acceptance fixtures used no full local suite, actual containers, real provider calls, credentials or real authority. They used synthetic authority/SQLite and mocked HTTP/containers; the separate actual-container composition is recorded below and in the delivery.",
+    "Focused20 and additional1 remain separate runs/test-file pins; no21-method combined run is claimed.",
+    "The first two independent proof-checker attempts failed on copied literal escaping and an overbroad normalization set. They are retained in the final independent join; no product, proof or test rerun was needed."
+  ],
+  "evidence_sha256": {
+    "runs/reviews/src02-candidate-generation-final-source-review.json": "27b2b8f87712f8b5e885088b36c094fb76d791e81a3138a5f4aa2246b1e4fea1",
+    "runs/reviews/src02-candidate-generation-focused-closing.json": "035b1682438b759a2f3598241d5eb05a5acd1e92810a2c729e83e12c642be9da",
+    "runs/reviews/src02-candidate-native-final-quality-exit.json": "b3876769b59acc77ce01dad456b2e4c0a33e06851d9340fab6140e38d21774d5",
+    "runs/reviews/src02-candidate-native-independent-join.json": "bd8763b8dedb161a8e415faf0ffce4874ae0483a475dc86b0d0f825bfaea5d90",
+    "runs/reviews/src02-candidate-native-probe-independent-review.json": "55a555f2c716e5ba5b9fad545bd714572d8246e24b0dec17dbd6c5b84d8ebb46",
+    "runs/reviews/src02-candidate-native-source-review-final.json": "3360960222e1bf5d8e29f3a24d103f9328c978173ec81df72dbe2fb4e27e60b3",
+    "runs/reviews/src02-native-assessment-docs-applied-receipt.json": "b9517b7108597b0774e9e12f864ac3e4ea2dc8d8313cb697028d5e074187d442",
+    "runs/reviews/src02-native-competence-evidence.json": "6039fccbbeca2a5038df73c28e11ff604500aa4f73b82c11eacb745e091a6125",
+    "runs/reviews/src02-native-competence-exit.json": "eee2509b55b6be0e1911f7e7ead87b23e64e0b149b5aceb2b5fe90e71e4309cf",
+    "runs/reviews/src02-native-competence.log": "6536a79de08923748ec5f5a2dd0922f699cdaf80d32319328254344fff360097",
+    "runs/reviews/src02-native-proof-preparation.json": "1e992c98748f94b2a36e0710bd7a12a3e3938b4be10f62b3434c91c2a0b5d9e9",
+    "runs/reviews/src02-native-proof-source-map.json": "dd088177ff0c6b2349608850b2944adfb0fcc6a4093d270bb8535b1d9646851e",
+    "runs/reviews/src02-validation-collection.json": "ac2d237ab5be0684527c1c994bbb3e08a4859601a017722bdc41ac75c4cdcbfa",
+    "runs/reviews/src02-validation-inputs.json": "5d6c171fe2894a136d775c86fc5f871e0e3afe206b15d5e15ccbdb1ff223c2f2"
+  },
+  "findings_closed": [
+    "Explicit candidate producer/reference permits zero/one/many callbacks independently of C1 answer count; legacy baseline parser body remains exact.",
+    "External runtime artifact hash joins actual selected environment/image/Env before preparing the original owner.",
+    "Passive consumer validates original inactive owner, exact independent anchor, bounded literal C1/report/context/runtime data, completed callback prefix and accounting without constructing the producer Gateway.",
+    "Long valid request bodies use the already-validated wire bound rather than the short identifier text bound.",
+    "Actual-attempt cancellation/protocol observations preserve available reports; absent reports are not invented.",
+    "Actual saved-child generation composes with official native assessment, original-owner recovery, component retirement and keyless reuse."
+  ],
+  "format": "buddha.src02-native-assessment-review.v1",
+  "limits": [
+    "Synthetic replies, prices and usage only; zero real providers or funding allocation.",
+    "One saved synthetic child; no new model-authored source, improvement or search claim.",
+    "Completed-reply host interruption is RuntimeError/ExecutorError, not Ctrl+C evidence.",
+    "Singleton partitions/score-seven replies are controls, not semantic judgments.",
+    "Full official entrypoints run only in B; no independent numerical oracle.",
+    "Opaque summaries are preserved; no host metrics or scientific ranking.",
+    "Keyless replay can create transient locks; no persistent byte/accounting changes.",
+    "Cleanup checks only reported owned IDs; unrelated containers are not enumerated.",
+    "No full local suite was repeated. Full 1386-test final published-head Linux/Windows CI is pending.",
+    "Common development screening, source archive/search, real model-authored source improvement, SRC-03, EVAL and IMP gates remain open."
+  ],
+  "source_commit": "b0b924ee148c49123b2906fae60478d4154b852a",
+  "source_sha256": {
+    "buddha/candidate_generation.py": "27c4d925b59bb13ecd5d5a7f1fcf7847bb7917192ea8bf7c1315413ea01749e9",
+    "buddha/native_evaluation.py": "85c12ccf1f12510ee9ab53e178616205f9eec656449cb98df155a9f010487174",
+    "docs/conformance/src02-candidate-native-probe.py": "1e25ec9c889791140cc721238f72281921d0042077838bed54971878b04b0c08",
+    "tests/test_candidate_generation.py": "43a09db3a6160dd5131d9915cbbf507e8db10d84acb42a3c31f4a582882fdfae"
+  },
+  "status": "bounded composition passed; full SRC-02 remains open"
+}

@@ -206,3 +206,14 @@ there are no NoveltyBench-version conditions in the candidate runner.
 The [one-file improvement route](SOURCE-IMPROVEMENT.md) runs a selected parent's
 `propose_improvement` procedure and retains its proposed child and lineage. The
 SRC-01 generation-v1 contract and evidence above remain unchanged.
+
+## Anchored generation for native assessment
+
+The [source-to-native adapter](SOURCE-ASSESSMENT.md) adds a separate owner/seal
+wrapper around this same one-task generation-v1 session, so the existing native
+evaluator can assess its literal C1 again. It does not alter the SRC-01 interface
+or historical evidence above. Direct CandidateSession replay still starts a new
+worker; completed adapter replay reuses its validated seal without one. The
+source-to-native confined proof passes with synthetic replies; final hosted
+checks remain pending. This does not establish semantic quality or archive
+eligibility.
