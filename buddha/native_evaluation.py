@@ -77,6 +77,32 @@ def _generation(value: object, authority: Authorization) -> _Generation:
 
 
 def _read_generation(value: object, authority_path: Path) -> _Generation:
+    reference = _object(value)
+    if reference.get("format") == "buddha.candidate-generation-source.v1":
+        from buddha import candidate_generation
+
+        if (
+            Path(candidate_generation.__file__).absolute()
+            != Path(__file__).with_name("candidate_generation.py").absolute()
+        ):
+            raise EvaluationError("a different candidate source reader was imported")
+        return _Generation(
+            *candidate_generation.read_candidate_generation_source(reference, authority_path)
+        )
+    return _read_baseline_generation(value, authority_path)
+
+
+def _generation_directory(value: object) -> Path:
+    reference = _object(value)
+    field = (
+        "generation_directory"
+        if reference.get("format") == "buddha.candidate-generation-source.v1"
+        else "baseline_directory"
+    )
+    return pipeline._absolute(reference[field])
+
+
+def _read_baseline_generation(value: object, authority_path: Path) -> _Generation:
     """Verify retained generation using an explicit authority file, without execution."""
     reference = _object(
         value,
@@ -301,6 +327,7 @@ def _sources() -> list[Path]:
                 "answers",
                 "native_pipeline",
                 "native_evaluation",
+                "candidate_generation",
                 "doctor",
                 "process_observation",
                 "gateway_history",
@@ -421,7 +448,7 @@ def prepare_evaluation(
         pipeline._absolute(path)
         for path in _object(_object(definition["native"])["roots"]).values()
     ]
-    roots.append(pipeline._absolute(_object(definition["source_generation"])["baseline_directory"]))
+    roots.append(_generation_directory(definition["source_generation"]))
     if any(directory.is_relative_to(root) or root.is_relative_to(directory) for root in roots):
         raise EvaluationError("evaluation output overlaps selected inputs or original generation")
     directory.mkdir()
