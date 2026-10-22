@@ -1,0 +1,174 @@
+{
+  "actual_workers": 6,
+  "base_commit": "c7f72e2d51bf9907b48def8489ea4e127139aa81",
+  "checks": {
+    "actual_starter_identity": true,
+    "all213_pinned_inputs_unchanged": true,
+    "earlier_output_raw_hashes_unchanged": true,
+    "full_suite_rerun": false,
+    "keyless_same_owner_replay_unchanged_lineage_and_authority": true,
+    "literal_child_and_grandchild_materialization": true,
+    "preflight_refusals": [
+      {
+        "case": "wrong-script",
+        "diagnostic_sha256": "c6cd5d582c44510fca63d000d7493ae923034f0c60020ad1db801402eaaa244b",
+        "exit_code": 1,
+        "fixture_or_owner_created": false
+      },
+      {
+        "case": "wrong-map",
+        "diagnostic_sha256": "3f9cb94cf5e69f2525ab13373208c6dceb9cc4eae1983294c567c59b281f50a8",
+        "exit_code": 1,
+        "fixture_or_owner_created": false
+      },
+      {
+        "case": "existing-output",
+        "diagnostic_sha256": "3f79c83d8820aa1a5a130295d4cf7cdf188e99a9d63b8c940d5e6184e40c74c0",
+        "exit_code": 1,
+        "fixture_or_owner_created": false
+      }
+    ],
+    "primary45_cached180_launch_and_plan61_unchanged": true,
+    "review_scope": "root artifact and prerequisite review; not an independent agent review",
+    "same_inherited_improver_executed_in_child": true,
+    "scoped_static_checks": [
+      "Ruff lint",
+      "Ruff formatting",
+      "Bandit",
+      "host parse of trusted probe only"
+    ],
+    "substantive_supplied_generation_control_flow_changes": [
+      "overgenerate and select alternating drafts",
+      "one planning call followed by two drafts"
+    ]
+  },
+  "claim": "actual composed starter with supplied descendants executes the inherited interface in confinement; no model authorship or universal admission gate",
+  "date": "2026-10-22",
+  "delivered_replies_including_replay": 11,
+  "format": "buddha.src02-source-seed-confined-delivery.v1",
+  "host_candidate_execution": false,
+  "inherited_fragment_sha256": "3ce8b36db69a009d087ebbc0de8bd1f67234c1c090a0443feea2d80700557032",
+  "limits": [
+    "Supplied children and synthetic usage; no model-authorship or token-capacity claim.",
+    "Actual starter chain only; no universal admission, official scoring or quality claim.",
+    "The unchanged inherited improver does not establish edited-improver efficacy.",
+    "The 27-second single rehearsal does not estimate full native-search verification or live provider latency.",
+    "Synthetic token usage does not verify real source proposal token capacity or live account access.",
+    "Dedicated original owners remain active within this synthetic-only fixture; no completion-anchor, financial closeout or universal recovery claim.",
+    "New probe is outside production strict-mypy/CI invocation paths; full hosted checks are a separate gate."
+  ],
+  "mocked_physical_replies": 10,
+  "observed_schedule": [
+    {
+      "calls": {
+        "completed": 2,
+        "requested": 2,
+        "stopped": 0
+      },
+      "new_sends": 2,
+      "phase": "parent-generate",
+      "status": "complete"
+    },
+    {
+      "calls": {
+        "completed": 1,
+        "requested": 1,
+        "stopped": 0
+      },
+      "new_sends": 1,
+      "phase": "parent-improve",
+      "status": "complete"
+    },
+    {
+      "calls": {
+        "completed": 3,
+        "requested": 3,
+        "stopped": 0
+      },
+      "new_sends": 3,
+      "phase": "child-generate",
+      "status": "complete"
+    },
+    {
+      "calls": {
+        "completed": 1,
+        "requested": 1,
+        "stopped": 0
+      },
+      "new_sends": 1,
+      "phase": "child-improve",
+      "status": "complete"
+    },
+    {
+      "calls": {
+        "completed": 3,
+        "requested": 3,
+        "stopped": 0
+      },
+      "new_sends": 3,
+      "phase": "grandchild-generate",
+      "status": "complete"
+    },
+    {
+      "calls": {
+        "completed": 1,
+        "requested": 1,
+        "stopped": 0
+      },
+      "new_sends": 0,
+      "phase": "parent-replay",
+      "status": "complete"
+    }
+  ],
+  "observed_wall_seconds": 27.070872699958272,
+  "probe_sha256": "758397cfcdbdd58936f63879642616da11e0fdfdce73ef4314c40b1818e288e2",
+  "proof_sha256": "505005896322041e9e01d5872de99776fc7a0544c2332013951fcb9cb9b5d7c8",
+  "real_provider_calls": 0,
+  "reply_bytes": [
+    195,
+    195,
+    15486,
+    194,
+    201,
+    194,
+    15791,
+    201,
+    199,
+    199
+  ],
+  "request_bytes": [
+    252,
+    361,
+    17728,
+    252,
+    360,
+    475,
+    17477,
+    300,
+    294,
+    407
+  ],
+  "root_review_sha256": "b29fe009222ccf10eaf5b5515033eead26f0cacf00a78c3d43dbec80702cc0f3",
+  "runtime_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+  "selected_task": "one synthetic development task, two ordered answers; no official evaluator execution",
+  "source_bytes": [
+    13452,
+    13225,
+    13504
+  ],
+  "source_hashes": [
+    "d7ba10ac6d4786cf22d7447242fa9188830f40ba5a5bf9d30c26681f7377491e",
+    "86b8f08f532c148bcffce69ff7563887e929d154141639fa2a933d40e749743e",
+    "ba20e190eaf6bb8ef869d39abf320d667eab58b11666495f2002e834a8297613"
+  ],
+  "source_map_sha256": "8b81b7125769a43b6478da96733ccffa28e95e5b0bac69d977c2bd015e4e6a58",
+  "source_sha256": "492d3c7e599b5032526a96aa5f2582822d0d49cd836e2d3418f9dfb355ea82d1",
+  "synthetic_accounting": {
+    "operation_count": 10,
+    "reserved_microusd": 0,
+    "spent_microusd": 110
+  },
+  "synthetic_owners": 5,
+  "unique_owned_containers_removed": 6,
+  "wrapper_sha256": "f134babb4f5b16ece68b2a06f435e6a2e5a03f980f5805bf816af2f5a7898268"
+}

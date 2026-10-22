@@ -102,6 +102,8 @@ The [starter source factory](docs/SOURCE-SEED.md) now combines the unchanged
 generation recipe with a versioned, one-callback Python source proposer. It
 creates a self-contained starting agent without choosing a run or allocating
 money. A child replaces the whole file and inherits its own improvement function.
+The actual starter now passes a six-worker confined chain and keyless replay
+with supplied descendants and fake replies; model-authored evolution remains open.
 The [source-evolution backlog context](docs/BACKLOG.md) records the intended Python
 code and inherited-improver endpoint, the current gap and its existing plan gates.
 

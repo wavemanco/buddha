@@ -95,14 +95,83 @@ formatting preserves the frozen prefix and the complete program's syntax tree.
 retain the earlier failures, independent review and final checks separately.
 
 Unit fixtures execute only the trusted composed repository seed. They never
-compile or execute model-returned child text. This slice runs no containers or
+compile or execute model-returned child text. The factory slice ran no containers or
 paid models and makes no full-suite or live-account claim.
 
-The factory does not integrate a mutation-competence admission gate. Actual
-confined child generation, the child's own improvement call and a runnable
-grandchild remain necessary evidence for an inherited-source experiment.
-Model authorship, useful-diversity gains and improved-improver effectiveness
-remain separate claims. A future handoff must check the actual full-source
+The factory does not integrate a mutation-competence admission gate. The
+separate check below now exercises its actual composed file and supplied
+descendants in confinement. Actual model authorship, useful-diversity gains
+and improved-improver effectiveness remain separate open claims. A future handoff must check the actual full-source
 proposal size, output allowance, runtime, account/profile settings and budget;
 the 1 MiB source ceiling is not a promise that any selected token cap can
 reproduce that file.
+
+
+## Actual starter in confinement
+
+The [companion engineering check](conformance/src02-source-seed-probe.py) uses
+the existing `CandidateSession`, Gateway and reviewed standard-library runtime.
+It executes the actual 13,452-byte starter, its supplied child and supplied
+grandchild only inside containers. It creates no production execution route.
+
+Six distinct owned workers completed and were removed:
+
+| Phase | Observed behavior | New synthetic replies |
+| --- | --- | ---: |
+| Starter generation | Two ordered drafts, with history | 2 |
+| Starter improvement | One proposal containing the complete supplied child | 1 |
+| Child generation | Three drafts; select the first and third | 3 |
+| Child improvement | Its own inherited function proposes the complete grandchild | 1 |
+| Grandchild generation | One planning call, then two drafts | 3 |
+| Starter improvement replay | Original owner supplies its saved reply without a key | 0 |
+
+The child and grandchild retain the literal improvement fragment. The host
+materializes each complete proposal unchanged; it adds no replacement improver.
+Both full-source proposal requests carried the correct literal proposing parent
+and ordered development feedback. The selected task and note were visible;
+validation/final sentinels, source metadata, price data and credentials were not.
+Generation outputs and parent/child lineage were checked against their originals.
+
+Ten physical fake replies and eleven delivered callbacks are separate counts:
+replay delivered an existing reply without another send. Five synthetic owners
+recorded 110 microdollars and no hold; these are fixture values, not an API bill.
+Those dedicated owners remain active inside the synthetic fixture. This check
+does not claim financial closeout or the stronger completion-anchor contract of
+the source-search controller. All 213 pinned inputs and the protected historical
+executable sources, launch declaration and current plan stayed unchanged.
+
+The largest observed request/reply was 17,728/15,791 bytes. The one rehearsal
+took 27.1 seconds. These measure this six-worker interface check, not full
+native evaluation or saved-search verification. Synthetic usage does not prove
+that any particular live model or output-token allowance can reproduce the
+file. Supplied programs do not establish model-authored evolution. The unchanged
+improver does not establish edited-improver ability or effectiveness. There is
+still no universal mutation-competence admission gate.
+
+Three prerequisite checks also refused before creating a fixture or owner:
+wrong script hash, wrong source-map hash and an existing receipt destination.
+Ruff lint/format and Bandit pass for the probe. The production package and all
+old tests/helpers remain unchanged; no new full-suite run is claimed here.
+[The delivery record](conformance/src02-source-seed-confined-delivery.json)
+binds the actual source cuts, sizes, counts, root review and retained receipts.
+
+### Optional engineering reproduction
+
+This is not your next paid-run command. A reviewer must first supply an exact
+source map and the two approved hashes. The source map lists absolute input
+filenames and their SHA256 hashes, including the new probe, existing competence
+and candidate helpers, runtime record, frozen seed and installed package files.
+The pinned map used in the recorded check additionally includes every repository
+Python file and the four workflow/tool/dependency configurations.
+
+After replacing the variables with that reviewed handoff and new absolute
+output paths, this runs once in the same PowerShell window. It needs Python
+3.13, Docker Desktop's Linux engine and the already reviewed runtime image.
+It uses fake credentials and replies, spends no API money, and retains a new
+separate fixture and receipt. It leaves existing runs alone. Ctrl+C asks the
+executor to remove its owned worker and retains failure/partial evidence;
+it does not turn an interrupted check into a pass.
+
+```powershell
+python -B docs/conformance/src02-source-seed-probe.py --directory $newFixture --out $newReceipt --sources $reviewedSourceMap --sources-sha256 $reviewedSourceMapSha --script-sha256 $reviewedProbeSha
+```
