@@ -18,7 +18,7 @@ import uuid
 from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass, field, replace
 from datetime import UTC, date, datetime
-from functools import wraps
+from functools import lru_cache, wraps
 from pathlib import Path
 from typing import cast
 
@@ -250,6 +250,34 @@ def _spec(value: object) -> ModelSpec:
     )
 
 
+def _validate_core_source(raw: bytes, allowed: frozenset[str]) -> None:
+    for node in ast.walk(ast.parse(raw)):
+        if isinstance(node, ast.Import):
+            names = [alias.name for alias in node.names]
+        elif isinstance(node, ast.ImportFrom):
+            if node.level:
+                raise GatewayError("relative core imports require a reviewed closure update")
+            names = (
+                ["buddha." + alias.name for alias in node.names]
+                if node.module == "buddha"
+                else [node.module or ""]
+            )
+        else:
+            names = []
+        if any(item.startswith("buddha") and item not in allowed for item in names):
+            raise GatewayError("executing core imports an unbound package module")
+        if isinstance(node, ast.Call) and (
+            isinstance(node.func, ast.Name)
+            and node.func.id in {"exec", "eval", "__import__"}
+            or isinstance(node.func, ast.Attribute)
+            and node.func.attr in {"import_module", "exec_module", "load_module"}
+        ):
+            raise GatewayError("dynamic core loading is outside the supported closure")
+
+
+_cached_core_source = lru_cache(maxsize=16)(_validate_core_source)
+
+
 def _core_sources() -> dict[str, str]:
     """Bind the actual installed core, separately from operator-selected input trees."""
     import buddha
@@ -286,28 +314,10 @@ def _core_sources() -> dict[str, str]:
         raw = path.read_bytes()
         if hashlib.sha256(raw).hexdigest() != digest:
             raise GatewayError("executing core changed during verification")
-        for node in ast.walk(ast.parse(raw)):
-            if isinstance(node, ast.Import):
-                names = [alias.name for alias in node.names]
-            elif isinstance(node, ast.ImportFrom):
-                if node.level:
-                    raise GatewayError("relative core imports require a reviewed closure update")
-                names = (
-                    ["buddha." + alias.name for alias in node.names]
-                    if node.module == "buddha"
-                    else [node.module or ""]
-                )
-            else:
-                names = []
-            if any(item.startswith("buddha") and item not in CORE for item in names):
-                raise GatewayError("executing core imports an unbound package module")
-            if isinstance(node, ast.Call) and (
-                isinstance(node.func, ast.Name)
-                and node.func.id in {"exec", "eval", "__import__"}
-                or isinstance(node.func, ast.Attribute)
-                and node.func.attr in {"import_module", "exec_module", "load_module"}
-            ):
-                raise GatewayError("dynamic core loading is outside the supported closure")
+        # Only successful exact-byte predicates are reused: <=8 MiB raw keys,
+        # plus cache overhead and in-flight work. File identity is always fresh.
+        validate = _cached_core_source if len(raw) <= 512 * 1024 else _validate_core_source
+        validate(raw, CORE)
         result[name] = digest
     if set(result) != CORE:
         raise GatewayError("executing core inventory is incomplete")
