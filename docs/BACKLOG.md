@@ -12,8 +12,9 @@ and **SRC-02, SRC-03 and IMP-01** in [PLAN.md](PLAN.md); it is not a new milesto
 Those items remain open. The [bounded inherited source-search loop](SOURCE-SEARCH.md)
 now has supplied-program confined execution evidence. The actual model-authored
 source experiment and mutation competence remain open; the formal SRC-03 checks
-and IMP-01 effectiveness experiment are not implemented. POL-02 saved-result
-review remains next.
+and IMP-01 effectiveness experiment are not implemented. The
+[POL-02 results and registered model review](POLICY-COMPARISON-RESULTS.md) are
+complete; preparing the actual model-authored source experiment is next.
 
 **Intended end state: yes, Buddha evolves the agent's Python code.** A parent
 agent should author a child implementation, which can change how answers are

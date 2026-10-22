@@ -2,8 +2,10 @@
 
 This reader checks saved evidence and produces descriptive comparisons. It does
 not run an agent or a judge, request keys, spend money, resume work, repair files,
-or release money held for an uncertain request. The live launch guide is still
-being prepared; there is no new command for you to run in this slice.
+or release money held for an uncertain request. The
+[first actual comparison](POLICY-COMPARISON-RESULTS.md) has been read and its
+registered masked model review completed. No further operator command is needed
+to read that result.
 
 ## Two different kinds of completeness
 
@@ -44,10 +46,10 @@ supplemental review or the controlled experiment is complete. The
 metadata. Its separate [passive materializer](POLICY-PANEL.md#materialize-original-saved-generation)
 assembles complete available answer sets from anchored original generation,
 even if later judging is unfinished. Missing coverage and provenance stay in a
-private receipt. The tested live handoff, account/runtime checks and approved
-funding remain open before launch. Actual packet contents and reviews require
-real saved generation. Actual results and the later human scientific assessment
-remain open.
+private receipt. The actual POL-02 handoff, account checks, allocation, execution,
+saved-result analysis and registered model review have now completed at their
+stated scope. The result report preserves uncertainty and task failures; it
+does not close the later human scientific assessment or held-out gates.
 
 ## Categories, repetitions and judging disagreement
 

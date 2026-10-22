@@ -338,11 +338,13 @@ source experiment and formal mutation-competence checks remain open; the separat
 experiment testing whether an evolved improver produces better descendants is
 not implemented. A higher score on one development prompt establishes none of these.
 
-The sequence remains in the [living plan](PLAN.md). The user reports that the
-current POL-02 comparison completed; saved-result review is pending. That review
-must account for the observed judge variation. Source-executor work can proceed
-independently without starting paid evolutionary search. No new experiment
-spending is authorized by this guide or by the audit's unused cap.
+The [completed policy comparison](POLICY-COMPARISON-RESULTS.md) now supplies the
+registered scores and masked review. Seeing earlier answers produced larger
+score gains, while some responses escaped literal constraints or repeated
+broader plots. The next source-loop work must address those agent behaviors
+under the fixed official evaluator. The [living plan](PLAN.md) retains the
+remaining source, held-out and human gates. A live source experiment needs its
+own reviewed handoff and allocation; unused balances do not authorize it.
 
 ## 12. What is frozen, and what an upgrade changes
 
