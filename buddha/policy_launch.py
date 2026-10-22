@@ -48,6 +48,7 @@ def _sources() -> list[Path]:
                     for name in (
                         "credentials.py",
                         "policy_results.py",
+                        "native_evidence.py",
                         "doctor.py",
                         "search_evidence.py",
                         "gateway_history.py",

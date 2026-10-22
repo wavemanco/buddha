@@ -195,21 +195,8 @@ def _native_descriptor(
     return descriptor, paths
 
 
-def validate_native(native: dict[str, object], stages: object, release: Release) -> None:
-    _object(
-        native,
-        {
-            "selection",
-            "roots",
-            "environment",
-            "hooks",
-            "executor",
-            "profiles",
-            "budget_microusd",
-            "max_calls",
-        },
-    )
-    _component(native)
+def validate_native_flow(stages: object, release: Release) -> None:
+    """Validate declared artifact flow without reading component paths."""
     record = release.to_record()
     artifacts = _object(record["artifacts"])
     commands = cast(list[dict[str, object]], record["commands"])
@@ -248,6 +235,24 @@ def validate_native(native: dict[str, object], stages: object, release: Release)
         produced.update(names)
     if produced != expected:
         raise PipelineError("stage flow omits declared release outputs")
+
+
+def validate_native(native: dict[str, object], stages: object, release: Release) -> None:
+    _object(
+        native,
+        {
+            "selection",
+            "roots",
+            "environment",
+            "hooks",
+            "executor",
+            "profiles",
+            "budget_microusd",
+            "max_calls",
+        },
+    )
+    _component(native)
+    validate_native_flow(stages, release)
     _object(native["environment"])
     _object(native["hooks"], {"modules", "cache", "calls", "sdk"})
     _object(native["profiles"])
