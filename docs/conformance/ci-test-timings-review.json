@@ -1,0 +1,137 @@
+{
+  "base": "18c9c2f6fac9ea59a7c9d53c56447ccc495f8f0b",
+  "changes": [
+    "Push-triggered workflow limited to main; pull requests retain both OS jobs.",
+    "Same full serial discovery appends verbose output and the 30 slowest durations; no test selection, assertion, timeout, dependency or budget change."
+  ],
+  "format": "buddha.ci-test-timings-review.v2",
+  "historical_candidate": {
+    "base": "18c9c2f6fac9ea59a7c9d53c56447ccc495f8f0b",
+    "branch": "codex/ci-test-timings",
+    "changes": [
+      "push filter only main; pull_request unchanged",
+      "same full serial unittest discovery with -v --durations30",
+      "existing README testing explanation"
+    ],
+    "diff_check": "pass",
+    "files": {
+      ".github/workflows/ci.yml": "ff6fa037cdb37f26adaf52f5637f5fd3399efc72a1304b9421198fa78680d937",
+      "README.md": "7e2f9d6d7cebcc14f2a784f534db1f125441d1c146018f7df45b2ba3d90e972d",
+      "runs/reviews/ci-test-timings-green.log": "c5397aaf65d559c930685cae51890a36a36b217dbbe336319f7a9fce6844212b",
+      "runs/reviews/ci-test-timings-red.log": "db89cb1ea9cd4462e4de3a27646cfbc7423cb7ab6e8b2192df56fe83f7087021",
+      "runs/reviews/ci-test-timings-shape.md": "90fc1f98fab4d80296654d98b20ed7e14a47645cfe79799eab1a18ba086dca24",
+      "runs/reviews/validate-ci-test-timings.py": "45464f3b38c5240e3b39b74e32aa4a6c63bfbf68aeada5d6d3057238bc091e16"
+    },
+    "format": "buddha.ci-test-timings-review.v1",
+    "green_exit_code": 0,
+    "limits": [
+      "Standalone feature-branch push checks intentionally removed; open PRs retain checks.",
+      "No measured per-job speedup, sharding, caching or bottleneck conclusion."
+    ],
+    "new_hosted_ci_claim": false,
+    "preserved": [
+      "both operating systems and job names",
+      "all other workflow/tool/dependency commands and permissions",
+      "normal default PR checkout",
+      "179 tracked Python files and existing test/data/tool inventory",
+      "PLAN/BACKLOG and active operator worktree/runs"
+    ],
+    "red_exit_code": 1,
+    "red_scope": "Metadata shape check failed on original push-all-branches / no-duration workflow; not a failing repository test.",
+    "repository_tests_rerun": false,
+    "status": "candidate_for_parent_review_not_committed",
+    "validation": {
+      "active_runs_changed": false,
+      "base": "18c9c2f6fac9ea59a7c9d53c56447ccc495f8f0b",
+      "changed_files": [
+        ".github/workflows/ci.yml",
+        "README.md"
+      ],
+      "preserved_inventory_sha256": "8dc042ab89d8e57297ce891d0c51ecfff7a70808c54c9f864589dd56cb82423e",
+      "python_source_test_files": 179,
+      "readme_sha256": "7e2f9d6d7cebcc14f2a784f534db1f125441d1c146018f7df45b2ba3d90e972d",
+      "repository_tests_run": false,
+      "source_test_tool_files_byte_identical": 186,
+      "status": "pass",
+      "workflow_sha256": "ff6fa037cdb37f26adaf52f5637f5fd3399efc72a1304b9421198fa78680d937",
+      "yaml_loader": "PyYAML BaseLoader",
+      "yaml_version": "6.0.3"
+    }
+  },
+  "hosted_validation": [
+    {
+      "actual_merge_checkout": "a6698c532551faec4c96248da71384441736279d",
+      "conclusion": "success",
+      "event": "pull_request",
+      "job_id": 119517443537,
+      "job_url": "https://github.com/wavemanco/buddha/actions/runs/39685221343/job/119517443537",
+      "log_sha256": "485814f480d92eb638e8d4b2faddb70d982dc1be0ce7c7e8141870640e61ff59",
+      "metadata_sha256": "a695b5e2dc74ec3a9914d20c44b1eab710964325a26e36a3488145c904a00f2f",
+      "os": "linux",
+      "run_id": 39685221343,
+      "seconds": 2027.513,
+      "skipped": 5,
+      "source_head": "a0564e9177d77adadf7d0ecc091e826c0f601061",
+      "status": "completed",
+      "terminal_sha256": "5b6a18ebf25fc16025b6be08aef836a8ce605323372f081d2abc541c35322725",
+      "tests": 1330,
+      "workflow_quality_steps": [
+        "Lint",
+        "Formatting",
+        "Types",
+        "Code security",
+        "Runtime dependency vulnerabilities",
+        "Compile"
+      ]
+    },
+    {
+      "actual_merge_checkout": "a6698c532551faec4c96248da71384441736279d",
+      "conclusion": "success",
+      "event": "pull_request",
+      "job_id": 119517443226,
+      "job_url": "https://github.com/wavemanco/buddha/actions/runs/39685221343/job/119517443226",
+      "log_sha256": "5bdfec7aadb198282bed79824860e37aeec0a896b64333e7b6c71e6ef851d313",
+      "metadata_sha256": "a5b2ce2a63c786900c8015b8f22572211966b2b0ca3abe617db7693ccef7eefc",
+      "os": "windows",
+      "run_id": 39685221343,
+      "seconds": 6184.785,
+      "skipped": 1,
+      "source_head": "a0564e9177d77adadf7d0ecc091e826c0f601061",
+      "status": "completed",
+      "terminal_sha256": "c823a25c7d83d0dd40fb1cc531efa273f2e40b1f229c1d71968dfd6a450914e3",
+      "tests": 1330,
+      "workflow_quality_steps": [
+        "Lint",
+        "Formatting",
+        "Types",
+        "Code security",
+        "Runtime dependency vulnerabilities",
+        "Compile"
+      ]
+    }
+  ],
+  "limits": [
+    "No provider access, approved allocation, paid execution, held-out result, semantic judge accuracy or scientific/source improvement claim.",
+    "Later metadata/rebased heads require their own green hosted checks. Observed runner times do not establish a controlled speedup.",
+    "The standalone validator RED/GREEN checked metadata shape and186 preserved input bytes; it did not execute repository tests. Historical candidate status is not current publication status."
+  ],
+  "parent_plan_sha256": "6039a45bbbed2f9ce06a0dbdabde04a3517195033c8c28f76d072b93a9d32dca",
+  "preservation": {
+    "original_49_rows_exact": true,
+    "parent_history_rows": 50,
+    "parent_plan_body_unchanged_except_header_and_appended_row": true
+  },
+  "readme_delta": "Existing trigger/output explanation is sufficient; no additional README edit proposed.",
+  "source_commit": "a0564e9177d77adadf7d0ecc091e826c0f601061",
+  "spec_map": {
+    ".github/workflows/ci.yml": [
+      "AGENTS.md: Testing & verification",
+      "docs/PLAN.md: Benchmark, research and delivery requirements that apply throughout"
+    ],
+    "README.md": [
+      "AGENTS.md: user-facing command documentation"
+    ]
+  },
+  "status": "bounded CI trigger/output source gate passed",
+  "validation_source_count": 179
+}

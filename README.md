@@ -233,7 +233,7 @@ payment stops new spending. Arbitrary evolved source and publication remain gate
 - [Historical slice 1 checks](docs/VERIFICATION.md)
 
 ```powershell
-python -m unittest discover -s tests -v
+python -m unittest discover -s tests -v --durations 30
 python -m ruff check buddha tests agents
 python -m ruff format --check buddha tests agents
 python -m mypy --strict buddha agents
@@ -243,7 +243,9 @@ python -m compileall -q buddha tests agents
 ```
 
 These checks run once in the current window and make no model calls. `unittest`
-runs portable tests with temporary fixtures; Ruff checks style and formatting;
+runs the full portable suite with temporary fixtures, prints each test name and
+lists the 30 slowest test durations; these output options do not select or skip
+tests. Ruff checks style and formatting;
 Mypy checks types; Bandit checks common source-security mistakes; `pip_audit`
 checks the core dependency list for known advisories and may access its advisory
 service; `compileall` checks Python compilation and writes local bytecode caches.
@@ -251,4 +253,10 @@ Ctrl+C stops a foreground check. Real-container proofs are separate optional
 checks documented in their guides; the core audit does not clear the larger
 native evaluator environment.
 
-CI is configured on Windows/Linux, Python 3.13, using the pinned tools in `requirements-dev.txt`; application runtime dependencies remain empty. Development auditing includes certifi (MPL-2.0), recorded in the recovery contract, without adding it to the application runtime. Local verification is reported separately from hosted CI. The user authorizes continued implementation with a summary and PR per slice, pausing for live execution or a required decision. Genuine source self-modification requires the separately gated source-evolution work. HyperAgents contributes conceptual inspiration only; its source is excluded. Earlier dated handoffs describing absent Git/CI are historical.
+CI runs the full serial suite on Windows and Linux for pull requests and pushes
+to `main`. Feature-branch pushes alone do not start CI runs; open a pull request
+to check that branch. Pull-request jobs keep the normal merge-tree checkout;
+main-push jobs check `main`. Verbose names show test progress, and the duration
+summary helps identify slow cases without reducing coverage.
+
+Both jobs use Python 3.13 and the pinned tools in `requirements-dev.txt`; application runtime dependencies remain empty. Development auditing includes certifi (MPL-2.0), recorded in the recovery contract, without adding it to the application runtime. Local verification is reported separately from hosted CI. The user authorizes continued implementation with a summary and PR per slice, pausing for live execution or a required decision. Genuine source self-modification requires the separately gated source-evolution work. HyperAgents contributes conceptual inspiration only; its source is excluded. Earlier dated handoffs describing absent Git/CI are historical.
