@@ -202,6 +202,9 @@ No additional secret is required. Historical implicit v1 reviews retain their
 original SHA256 semantics and frozen execution identities. Fingerprints do not
 attest account settings or authorize spending. [The keyed-review contract](KEYED-REVIEWS.md)
 records the exact construction, scope and recovery behavior.
+The [protected source launcher](SOURCE-LAUNCH.md) binds v2 fingerprints to the
+trusted raw launch hash and checks original owners before key entry. Its
+existence does not allocate funds or establish full-experiment readiness.
 
 ## 10. Source-execution boundary
 

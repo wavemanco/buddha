@@ -7,23 +7,19 @@ dispatch requests. Reviewed hashes/manual approval do not authenticate accounts.
 import hashlib
 import math
 import os
-import sys
-import threading
-import time
 from collections.abc import Callable, Iterator
 from contextlib import contextmanager
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import cast
 
-from buddha import credentials, gateway, policy_handoff, policy_results, policy_run
+from buddha import credentials, gateway, launch_common, policy_handoff, policy_results, policy_run
 from buddha import native_pipeline as pipeline
 from buddha.authorization import Authorization
 from buddha.gateway import RawHTTPTransport
-from buddha.gateway_history import MAX_LEDGER_BYTES
+from buddha.launch_common import _emit, _snapshot
 from buddha.provider import ModelSpec
 from buddha.releases import ReleaseError, _digest, _json, _load, _object, _root, _text, file_hash
-from buddha.search_evidence import _read, _sidecars, read_authority
 
 
 class PolicyLaunchError(ReleaseError):
@@ -47,6 +43,7 @@ def _sources() -> list[Path]:
                     package / name
                     for name in (
                         "credentials.py",
+                        "launch_common.py",
                         "policy_results.py",
                         "native_evidence.py",
                         "doctor.py",
@@ -66,27 +63,11 @@ def _sha(raw: bytes) -> str:
 
 
 def _path(value: object) -> Path:
-    # Destinations/receipt leaves need not exist yet. Existing input reads and
-    # output parents separately enforce the shared no-link filesystem guards.
-    path = pipeline._absolute(value)
-    if str(path) != value or ".." in path.parts or str(value).startswith(("//", "\\\\")):
-        raise PolicyLaunchError("launch paths must have one canonical spelling")
-    return path
-
-
-def _snapshot(path: Path) -> tuple[dict[str, object], bytes]:
-    _sidecars(path)
-    raw = _read(path, MAX_LEDGER_BYTES)
-    result = read_authority(raw)
-    _sidecars(path)
-    return result, raw
+    return launch_common._path(value, error=PolicyLaunchError)
 
 
 def _finish_snapshot(path: Path, raw: bytes) -> None:
-    _sidecars(path)
-    if _read(path, len(raw)) != raw:
-        raise PolicyLaunchError("funding changed while checking")
-    _sidecars(path)
+    launch_common._finish_snapshot(path, raw, error=PolicyLaunchError)
 
 
 def _rows(value: object) -> list[dict[str, object]]:
@@ -357,67 +338,19 @@ def check_launch(path: Path, *, expected_sha256: str) -> dict[str, object]:
 
 
 def _notice(message: str) -> None:
-    print("[policy] " + message, file=sys.stderr, flush=True)
-
-
-def _emit(notice: Callable[[str], None], message: str) -> None:
-    try:
-        notice(message)
-    except Exception:
-        # Console/callback failures must not alter paid execution or leak a
-        # background traceback containing unrelated application data.
-        return
+    launch_common._notice("policy", message)
 
 
 @contextmanager
 def _heartbeat(
     notice: Callable[[str], None], phase: list[str], authority: list[Path | None], seconds: float
 ) -> Iterator[None]:
-    stop = threading.Event()
-    started = time.monotonic()
-
-    def accounting() -> str:
-        if authority[0] is None:
-            return "recorded accounting unknown"
-        try:
-            funding, raw = _snapshot(authority[0])
-            _finish_snapshot(authority[0], raw)
-            config, totals = _object(funding["config"]), _object(funding["totals"])
-            return (
-                f"recorded attempts {totals['operation_count']}; "
-                f"recorded cost ${cast(int, totals['spent_microusd']) / 1_000_000:.6f}; "
-                f"held ${cast(int, totals['reserved_microusd']) / 1_000_000:.6f}; "
-                f"cap ${cast(int, config['budget_microusd']) / 1_000_000:.6f}"
-            )
-        except Exception:
-            return "recorded accounting unavailable"
-
-    def tick() -> None:
-        while not stop.wait(seconds):
-            if phase[0] != "keys":
-                _emit(
-                    notice,
-                    f"Phase: {phase[0]}; elapsed {int(time.monotonic() - started)}s; "
-                    + accounting(),
-                )
-
-    worker = threading.Thread(target=tick, name="policy-progress", daemon=True)
-    worker.start()
-    try:
+    with launch_common._heartbeat(notice, phase, authority, seconds, thread_name="policy-progress"):
         yield
-    finally:
-        stop.set()
-        worker.join(timeout=0.5)
 
 
 def _receipt_path(path: Path) -> Path:
-    if not isinstance(path, Path):
-        raise PolicyLaunchError("receipt needs an explicit new Path")
-    result = _path(str(path.absolute()))
-    _root(result.parent)
-    if result.exists():
-        raise PolicyLaunchError("receipt already exists; nothing overwritten")
-    return result
+    return launch_common._receipt_path(path, error=PolicyLaunchError)
 
 
 def _key_fingerprints(
@@ -460,20 +393,25 @@ def launch(
     if (
         any(type(value) is not bool for value in (live, prompt_keys, confirm_project_keys))
         or type(heartbeat_seconds) not in (int, float)
-        or not math.isfinite(heartbeat_seconds)
         or not 0 < heartbeat_seconds <= 60
         or not callable(notice)
         or transport is not None
         and not isinstance(transport, RawHTTPTransport)
     ):
         raise PolicyLaunchError("invalid launch options")
-    output = None if receipt is None else _receipt_path(receipt)
+    requested = None if receipt is None else _receipt_path(receipt)
+    output = None
     phase = ["checking"]
     progress_authority: list[Path | None] = [None]
     public: dict[str, object] = {"format": "buddha.policy-launch-receipt.v1"}
     try:
         _emit(notice, "Checking approved configuration and original saved state; no keys read yet.")
         with _heartbeat(notice, phase, progress_authority, heartbeat_seconds):
+            if requested is not None:
+                exclusions = launch_common._receipt_roots(path, expected_sha256)
+                if any(requested.is_relative_to(root) for root in exclusions):
+                    raise PolicyLaunchError("receipt overlaps declared original controls or output")
+                output = requested
             checked = check_launch(path, expected_sha256=expected_sha256)
             if "authorization_path" in checked:
                 progress_authority[0] = _path(checked["authorization_path"])
@@ -567,6 +505,9 @@ def launch(
             raise
         raise PolicyLaunchError("launch stopped; original records retained") from None
     finally:
+        if requested is not None and output is None:
+            public["receipt_saved"] = False
+            _emit(notice, "Launch receipt not saved: protected output checks did not pass.")
         if output is not None:
             try:
                 pipeline._write(output, _json(public))

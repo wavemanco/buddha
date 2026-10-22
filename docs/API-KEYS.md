@@ -29,13 +29,14 @@ and limitations. That scope is also closed for new work.
 The [first source experiment](SOURCE-EXPERIMENT.md) currently proposes a new
 **$25 / 512-attempt** shared cap. It is unallocated: no approval, grant, key
 entry or paid execution has been created for it. The keyless configuration
-check does not grant permission to spend. A separately reviewed funded launcher
-and a clear local command are still required. Do not reuse a historical command
+check does not grant permission to spend. The [protected launcher](SOURCE-LAUNCH.md)
+now exists; its concrete capacity/recovery rehearsal, separately approved funded
+handoff and clear local command are still required. Do not reuse a historical command
 or an unused balance to start source evolution.
 
 The new Gateway/source path supports [keyed account reviews](KEYED-REVIEWS.md),
 using the API key already supplied locally; no extra secret is needed. The
-source launcher must still bind the approved launch context. Historical policy
+source launcher binds the approved launch context. Historical policy
 commands keep their original review format and frozen runtime requirements.
 
 ## Historical pilot: two dedicated keys
