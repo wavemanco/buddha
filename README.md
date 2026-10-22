@@ -126,6 +126,12 @@ others uncertain; original benchmark scores and raw evidence remain unchanged. S
 [pilot review](docs/PILOT-REVIEW.md), [recovery results](docs/FIRST-LIVE-RESULTS.md)
 and [linked continuation results](docs/LINKED-CONTINUATION-RESULTS.md).
 
+The [numerical improvement rule](docs/EVALUATION-RULE.md) now implements the
+fixed-primary gain/loss comparisons for future held-out decisions. Its
+thirteen focused checks pass. It consumes supplied bounds and a coverage
+assertion; uncertainty estimation, verified evidence, limited evaluation
+occasions and finalization remain part of the open EVAL-01 controller.
+
 At this checkpoint the living plan contains **6 remaining leaf slices**.
 The Windows PID-lock observer follow-up is complete at its shared-reader scope;
 [the guide](docs/DOCTOR.md#windows-file-sharing) states its boundaries.
