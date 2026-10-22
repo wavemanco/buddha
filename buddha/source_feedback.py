@@ -6,6 +6,8 @@ not authenticated judgments, semantic compliance or scientific improvement.
 """
 
 import hashlib
+import os
+import stat
 from pathlib import Path
 from typing import cast
 
@@ -17,6 +19,7 @@ from buddha.releases import (
     MAX_JSON_BYTES,
     ReleaseError,
     _digest,
+    _information,
     _json,
     _load,
     _object,
@@ -65,20 +68,24 @@ def _prefix(text: str) -> str:
     return result
 
 
-def _destination(directory: Path) -> Path:
+def _destination(directory: Path, *, existing: bool = False) -> Path:
     if not isinstance(directory, Path) or not directory.is_absolute() or ".." in directory.parts:
         raise SourceFeedbackError("feedback destination needs an absolute nontraversing Path")
     _root(directory.parent)
     _path(directory.name)
     # Resolve only the checked existing parent, never require retired programs.
     directory = directory.parent.resolve(strict=True) / directory.name
+    if existing:
+        return _root(directory)
     if directory.exists() or directory.is_symlink():
         raise SourceFeedbackError("feedback destination must be NEW")
     return directory
 
 
-def _build(directory: Path, reference: dict[str, object]) -> dict[str, object]:
-    directory = _destination(directory)
+def _build(
+    directory: Path, reference: dict[str, object], *, existing: bool = False
+) -> dict[str, object]:
+    directory = _destination(directory, existing=existing)
     ref = _object(reference, {"directory", "authorization", "report_sha256"})
     original = pipeline._absolute(ref["directory"])
     authorization = pipeline._absolute(ref["authorization"])
@@ -261,6 +268,54 @@ def build_source_feedback(directory: Path, *, reference: dict[str, object]) -> d
         if isinstance(error, SourceFeedbackError):
             raise
         raise SourceFeedbackError("source feedback evidence or destination is invalid") from None
+
+
+def _packet_files(directory: Path) -> None:
+    expected = {"source.json", "split.json", "feedback.json", "provenance.json"}
+    found = set()
+    with os.scandir(directory) as entries:
+        for entry in entries:
+            if entry.name not in expected or entry.name in found:
+                raise SourceFeedbackError("feedback packet requires exactly four original files")
+            information = _information(Path(entry.path))
+            if not stat.S_ISREG(information.st_mode) or information.st_nlink != 1:
+                raise SourceFeedbackError("feedback packet files must be regular without aliases")
+            found.add(entry.name)
+    if found != expected:
+        raise SourceFeedbackError("feedback packet requires exactly four original files")
+
+
+def inspect_source_feedback(
+    directory: Path, *, expected_provenance_sha256: str
+) -> dict[str, object]:
+    """Verify an existing measured packet against its original screen, without writes."""
+    try:
+        directory = _destination(directory, existing=True)
+        _packet_files(directory)
+        provenance_raw = pipeline._read(
+            directory / "provenance.json", _digest(expected_provenance_sha256)
+        )
+        reference = _object(_load(provenance_raw)["reference"])
+        bundle = _build(directory, reference, existing=True)
+        records = {
+            name + ".json": _json(bundle[name])
+            for name in ("source", "split", "feedback", "provenance")
+        }
+        if records["provenance.json"] != provenance_raw:
+            raise SourceFeedbackError("saved provenance differs from its original derivation")
+        for name, raw in records.items():
+            if pipeline._read(directory / name, _sha(raw)) != raw:
+                raise SourceFeedbackError("saved feedback differs from its original derivation")
+        _packet_files(directory)
+        for name, raw in records.items():
+            if pipeline._read(directory / name, _sha(raw)) != raw:
+                raise SourceFeedbackError("saved feedback changed during inspection")
+        _packet_files(directory)
+        return bundle
+    except (ValueError, TypeError, KeyError, OSError, RecursionError, OverflowError) as error:
+        if isinstance(error, SourceFeedbackError):
+            raise
+        raise SourceFeedbackError("saved source feedback evidence is invalid") from None
 
 
 def write_source_feedback(directory: Path, *, reference: dict[str, object]) -> dict[str, object]:

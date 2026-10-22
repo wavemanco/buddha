@@ -73,7 +73,8 @@ allocating money. The [protected launcher](docs/POLICY-LAUNCH.md) checks the
 approved destination and funding before hidden key entry, then prepares or
 recovers the original study and owners. The user has separately approved the
 new $50 / 4,096-attempt POL-02 comparison, and its frozen cached-checkout handoff
-is prepared. Actual results await the user's local execution. Configuration and key entry do not
+is prepared. The user reports that the local run is underway; completed output
+has not yet been reviewed. Configuration and key entry do not
 confirm provider access. Actual answers and supplemental reviews require real
 saved generation. The live comparison and human scientific assessment remain
 open.
@@ -86,6 +87,10 @@ can run a parent's proposal procedure and materialize a separate child. A confin
 synthetic chain exercises child generation, the child's inherited improver and
 a runnable grandchild. Materialization alone does not establish competence;
 its broader search and scientific gates remain open.
+The [durable proposal stage](docs/SOURCE-PROPOSAL-STAGE.md) now joins measured
+parent feedback to its original proposal owner, preserving child materialization,
+clean rejection and incomplete recovery as separate outcomes. Its scoped checks
+and full source-search integration remain separate gates.
 The [source-to-native connection](docs/SOURCE-ASSESSMENT.md) now anchors one
 candidate's literal C1 answers for fresh official native assessment through the
 existing evaluator, with separate generation and judging owners. It keeps zero,
@@ -100,7 +105,8 @@ parent selection. It preserves official scores and records unusable results
 without selecting them. The [verified feedback bridge](docs/SOURCE-FEEDBACK.md)
 can now turn a pinned complete screen into bounded development notes accepted by
 the existing improver, with literal answer excerpts and explicit omissions.
-Durable proposal recovery, the complete repeated source-search loop and an actual
+The durable proposal stage now retains original-owner recovery and separately
+verifiable outcomes. The complete repeated source-search loop and an actual
 model-authored experiment remain open.
 The [source-evolution backlog context](docs/BACKLOG.md) records the intended Python
 code and inherited-improver endpoint, the current gap and its existing plan gates.

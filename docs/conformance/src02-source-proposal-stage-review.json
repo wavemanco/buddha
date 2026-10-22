@@ -1,0 +1,134 @@
+{
+  "baseline_head": "6f3631a55c6796ffbb846e733ae753bc5279c3e5",
+  "date": "2026-10-21",
+  "findings": [
+    {
+      "id": "SRC02-PROP-1",
+      "resolution": "Require original measured screen packet, independent provenance pin and exact selected parent before preparing one owner; generic reviewed-note Session remains unchanged."
+    },
+    {
+      "id": "SRC02-PROP-2",
+      "resolution": "Clean accepted worker failures have a terminal rejected lifecycle while retaining their raw failed report. Broken, missing, stopped, uncertain, incomplete-prefix and unsuccessful cleanup/materialization outcomes do not seal."
+    },
+    {
+      "id": "SRC02-PROP-3",
+      "resolution": "Known replies reuse original callback identities and owner; unknown liabilities preserve holds and block dispatch. Interrupted raw evidence and append-only observation remain available."
+    },
+    {
+      "id": "SRC02-PROP-4",
+      "resolution": "One original inactive-owner authority anchor, exact sealed artifacts, parent/child lineage, request prefix/model contract and original data bindings precede passive publication acceptance."
+    },
+    {
+      "id": "SRC02-PROP-5",
+      "resolution": "Public inspector rejects altered publication hashes, child bytes and seal references even with a caller-supplied new outer hash. Retired-producer passive inspection and executable replay have distinct requirements."
+    },
+    {
+      "id": "SRC02-PROP-6",
+      "resolution": "Four documentation corrections distinguish host-only full source from worker-selected tasks, clean protocol rejection from broken exchanges, retained outcomes from measured screens, and executable replay from passive retirement."
+    }
+  ],
+  "format": "buddha.src02-source-proposal-stage-review.v1",
+  "limits": [
+    "Saved consistency is not authentication against control of the host and all original authority records.",
+    "A completion seal written before its independent authority closure remains a refused state requiring review; no arbitrary hard-kill recovery claim.",
+    "Worker-declared invalidity is preserved as observed failure, not independent proof of unseen Python values.",
+    "Materialized source is not child competence, archive eligibility, promotion, scientific gain or improved-improver effectiveness.",
+    "The actual POL-02 run was not inspected; user-reported underway status only. No paid call, real grant inspection or key read.",
+    "The later confined rehearsal and added driver are outside the earlier 196-file test/quality cohorts; 196 prior files remain exact.",
+    "The first driver attempt failed during synthetic authorization setup on a test-only SQLite URI guard. It started no owner, worker or provider operation; the absent final full-tree bracket is not claimed.",
+    "The corrected URI helper has a separate pure RED/GREEN scope; an earlier isolated-tool invocation failed before static tools were found and remains retained.",
+    "No new generation, native judging or execution of the materialized child occurred in the actual rehearsal."
+  ],
+  "local_evidence": {
+    "acceptance": {
+      "path": "runs/reviews/candidate-improvement-stage-acceptance-closing.json",
+      "sha256": "b34a163bc38df2519d72e79c9fecf3133fdfc1e8a658ceadb154407917de61e5"
+    },
+    "collection": {
+      "path": "runs/reviews/source-proposal-collection.json",
+      "sha256": "33f11495f7c13baa2524f6ae489253218506c07222e9c0cb4f58eb1de1afa1dd"
+    },
+    "confined_v2": {
+      "path": "runs/reviews/source-proposal-actual-evidence-v2.json",
+      "sha256": "dd89935639939a0253bd0ef45dffbf41cc01a61e8ffcedc30edb6289f59cf6a8"
+    },
+    "confined_v2_exit": {
+      "path": "runs/reviews/source-proposal-actual-exit-v2.json",
+      "sha256": "c4613a707c9342d959a56f2cdea6040735112efa7f3a7a5da931a4d85f49d934"
+    },
+    "confined_v2_independent": {
+      "path": "runs/reviews/source-proposal-actual-v2-independent-review.json",
+      "sha256": "df5c31c0be077a2af736a0cc0e08511b15bfa22a052ca9b1727ded08282058ec"
+    },
+    "failed_v1_independent": {
+      "path": "runs/reviews/source-proposal-actual-v1-failure-independent-review.json",
+      "sha256": "766967c23a8f5abb75dcd0a4bd8dc61284b1727023634344b5d664f3a3de66aa"
+    },
+    "failed_v1_review": {
+      "path": "runs/reviews/source-proposal-actual-v1-failure-review.json",
+      "sha256": "4beb99879d4c97efd1dd070dff9fb7e728c4a10c5b7c78bd04c926bfcd7a4a3d"
+    },
+    "final_collection": {
+      "path": "runs/reviews/source-proposal-final-collection.json",
+      "sha256": "edce0d2b25850ff9b41a4e6031754eba011e4ef508d47c08433e53dba6cf1176"
+    },
+    "final_probe_static": {
+      "path": "runs/reviews/candidate-improvement-stage-probe-static-v3.json",
+      "sha256": "e959c308c0cc8699c07bb9383c2f65d1f2bd6d80267b23bb01387f656e78487d"
+    },
+    "independent_evidence_join": {
+      "path": "runs/reviews/candidate-improvement-final-evidence-independent-review.json",
+      "sha256": "50709710e0516e7b954bb2d8a82ed5dbe6939879e9ff035b76cac6f556b9fea5"
+    },
+    "initial_docs_review": {
+      "path": "runs/reviews/candidate-improvement-docs-independent-review.json",
+      "sha256": "5c6cb4689c39e39b66f4e4a0ec05585f49635239cb9179326a424bc880f65ddf"
+    },
+    "original_regression": {
+      "path": "runs/reviews/candidate-improvement-original-forty-review.json",
+      "sha256": "403454ac905d324fab6906a4bbabd977038b52462ef524c987378a06fc29852e"
+    },
+    "pr55_merge": {
+      "path": "runs/reviews/pr55-merge-record.json",
+      "sha256": "c0b1c5a3dd6ae463821092b2c88b956c1ad7abc0ca24e9bdbd8a481c41a683f0"
+    },
+    "preservation": {
+      "path": "runs/reviews/source-proposal-preservation.json",
+      "sha256": "b14e6302020e0728122f86400be97236109f2ecf35822ac72c441b5bbcf2e6d0"
+    },
+    "quality": {
+      "path": "runs/reviews/source-proposal-final-quality.json",
+      "sha256": "9658ac9a79e140b7d06e313e6eac8584f049567bd2946474a60de209a28f6da0"
+    },
+    "static_review": {
+      "path": "runs/reviews/candidate-improvement-static-preparation-review.json",
+      "sha256": "5d55ead156751f0a8f154bfa600d5c83513589d8d251bf7a8eb3767cabcb9459"
+    },
+    "uri_guard_green": {
+      "path": "runs/reviews/source-proposal-uri-guard-green.json",
+      "sha256": "a7730039fc578016f634500ecaaef3f7b63141a966e1f451e26a14310f42815d"
+    },
+    "uri_guard_red": {
+      "path": "runs/reviews/source-proposal-uri-guard-red.json",
+      "sha256": "ac8922ebb25308d2ec4ac8642acdff8a00b78b8272997c682cb2c19467b53a82"
+    }
+  },
+  "observed_scope": {
+    "actual_improver_workers": 1,
+    "collected_unique_ids": 1439,
+    "collection_bodies_executed": 0,
+    "full_suite_rerun": false,
+    "later_probe_python_inputs": 197,
+    "mocked_physical_replies": 1,
+    "new_methods": 13,
+    "old_proof_source_pins": 208,
+    "original_fixture_entries_preserved": 380,
+    "original_methods": 40,
+    "python_inputs": 196,
+    "quality_checks": 7,
+    "real_provider_calls": 0,
+    "synthetic_held_microusd": 0,
+    "synthetic_microusd": 11
+  },
+  "scope": "Independent source, evidence and command review of the bounded durable measured-feedback proposal stage; no full-loop or scientific completion claim."
+}
