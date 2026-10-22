@@ -1,0 +1,223 @@
+{
+  "baseline_head": "6f3631a55c6796ffbb846e733ae753bc5279c3e5",
+  "behavior": {
+    "execution": "Actual CandidateSession preserves raw reports inside a separate lifecycle envelope; stable identities and original owner on recovery.",
+    "feedback_inspector": "Verify existing exact four-file packet; public build/write NEW-only semantics unchanged.",
+    "incomplete": "Preserve owner, partial artifacts, observations and uncertain liability; no terminal seal.",
+    "passive": "Caller-pinned original publication, raw session, exact artifacts, request prefix, original accounting and independent inactive-owner authority anchor; no execution/constructors required.",
+    "preparation": "Verify original measured packet and selected-parent match before one owner under an existing grant; forward reviewed hashes.",
+    "terminal_materialized": "Clean accepted changed source and lineage; no competence or admission claim.",
+    "terminal_rejected": "Clean accepted worker-declared failure with complete known prefix; raw failed status and capture remain unchanged."
+  },
+  "collection": {
+    "bodies_executed": 0,
+    "earlier_196_unchanged": true,
+    "full_suite_rerun": false,
+    "loader_errors": 0,
+    "python_inputs": 197,
+    "unique_ids": 1439
+  },
+  "confined_rehearsal": {
+    "failed_v1": {
+      "actual_workers": 0,
+      "failed_records_retained": true,
+      "probe_sha256": "0316634a5214f063c3cdd0a0d8380f0e6e5d3c149e0401e761e08b126705e760",
+      "production_bug": false,
+      "provider_operations": 0,
+      "reason": "test guard treated canonical SQLite file URI as a plain path",
+      "synthetic_owners": 0
+    },
+    "guard_correction": {
+      "behavior": "Exact two known synthetic DB paths/canonical rw URIs, authority ro URI and memory; other paths/aliases/query changes/types refused.",
+      "green_methods": 4,
+      "red": "One pure AST-extracted method reproduces two canonical-URI refusals.",
+      "scope": "Only probe guard changed; rest of probe AST and original196 Python inputs exact.",
+      "static": "Ruff, format, Bandit and syntax/AST pass at197 unchanged inputs. Earlier -I static tool-invocation failure retained."
+    },
+    "passed_v2": {
+      "actual_workers": 1,
+      "current_source_asset_pins_unchanged": 200,
+      "host_candidate_execution": false,
+      "keyless_replay_and_passive_inspection_extra_work": 0,
+      "materialized_child_executed": false,
+      "mocked_physical_replies": 1,
+      "new_generation_or_native_judging": false,
+      "old_source_pins_unchanged": 208,
+      "original_fixture_bytes_unchanged": true,
+      "original_fixture_entries": 380,
+      "probe_sha256": "d592d9ba0fbd3bd86712f8545a7590096cd2f9ceaf05ee182aa1146f64659635",
+      "productive_owners": 1,
+      "python_source_count": 197,
+      "real_provider_calls": 0,
+      "selected_measured_tasks": 2,
+      "synthetic_reserved_microusd": 0,
+      "synthetic_spent_microusd": 11,
+      "wall_seconds": 42.20561689999886
+    },
+    "status": "pass after separately retained pre-worker test-guard failure"
+  },
+  "date": "2026-10-21",
+  "focused_acceptance": {
+    "cohorts": [
+      {
+        "methods": 2,
+        "seconds": 31.645,
+        "test_sha256": "4b32bfd7969fd6159801602ce87c9a48e6f1e17079731bea87c81b50f9b4638b"
+      },
+      {
+        "methods": 10,
+        "seconds": 264.379,
+        "test_sha256": "4b32bfd7969fd6159801602ce87c9a48e6f1e17079731bea87c81b50f9b4638b"
+      },
+      {
+        "methods": 1,
+        "seconds": 25.706,
+        "test_sha256": "1ab9e1b2f290ef0f6e476606138e25d82bca832611efc724ab1f3f3c95d4c26c"
+      }
+    ],
+    "coverage": [
+      "Existing measured packet inspection and NEW-only builders",
+      "Child source, lineage, exact original-owner completion anchor",
+      "Clean declared invalid/omitted/unavailable/oversized/agent-error outcomes",
+      "Received-reply recovery and shortened-prefix refusal on same owner",
+      "Unknown holds, quota, broken protocol, cleanup/materialization, cancellation",
+      "Edited measurement provenance, wrong parent and original hash drift",
+      "Typed stored-versus-returned report corruption",
+      "Keyless replay and passive retired-producer inspection with compatible original grant snapshot",
+      "Public child hash/byte and seal substitution even with new caller publication hash"
+    ],
+    "executor_and_https": "simulated; actual CandidateSession/Gateway and original measured two-task screen fixture",
+    "initial_reds": "Two missing-API imports failed before fixture setup; not behavioral REDs.",
+    "prior_12_method_AST_exact_after_append": true,
+    "python_inputs_per_cohort": 196,
+    "source_inputs_unchanged_within_each": true,
+    "unique_methods": 13
+  },
+  "format": "buddha.src02-source-proposal-stage-delivery.v1",
+  "limits": [
+    "No full local 1439-test execution; hosted final-head CI is a separate gate.",
+    "No actual model-authored source experiment, full repeated source-search loop, child competence, archive admission, promotion, held-out gain or improved-improver claim.",
+    "Existing unanchored completion seal remains fail-closed rather than automatically repaired.",
+    "Rejected worker declarations do not prove the invalidity of an unseen original Python value.",
+    "Official NoveltyBench instrument, scoring math and frozen POL-02 execution stay fixed. No new general benchmark-validation project."
+  ],
+  "local_evidence": {
+    "collection": {
+      "path": "runs/reviews/source-proposal-collection.json",
+      "sha256": "33f11495f7c13baa2524f6ae489253218506c07222e9c0cb4f58eb1de1afa1dd"
+    },
+    "confined_v2": {
+      "path": "runs/reviews/source-proposal-actual-evidence-v2.json",
+      "sha256": "dd89935639939a0253bd0ef45dffbf41cc01a61e8ffcedc30edb6289f59cf6a8"
+    },
+    "confined_v2_exit": {
+      "path": "runs/reviews/source-proposal-actual-exit-v2.json",
+      "sha256": "c4613a707c9342d959a56f2cdea6040735112efa7f3a7a5da931a4d85f49d934"
+    },
+    "confined_v2_independent": {
+      "path": "runs/reviews/source-proposal-actual-v2-independent-review.json",
+      "sha256": "df5c31c0be077a2af736a0cc0e08511b15bfa22a052ca9b1727ded08282058ec"
+    },
+    "failed_probe_v1": {
+      "path": "runs/reviews/source-proposal-actual-v1-failure-review.json",
+      "sha256": "4beb99879d4c97efd1dd070dff9fb7e728c4a10c5b7c78bd04c926bfcd7a4a3d"
+    },
+    "failed_probe_v1_independent": {
+      "path": "runs/reviews/source-proposal-actual-v1-failure-independent-review.json",
+      "sha256": "766967c23a8f5abb75dcd0a4bd8dc61284b1727023634344b5d664f3a3de66aa"
+    },
+    "final_collection": {
+      "path": "runs/reviews/source-proposal-final-collection.json",
+      "sha256": "edce0d2b25850ff9b41a4e6031754eba011e4ef508d47c08433e53dba6cf1176"
+    },
+    "focused": {
+      "path": "runs/reviews/candidate-improvement-stage-acceptance-closing.json",
+      "sha256": "b34a163bc38df2519d72e79c9fecf3133fdfc1e8a658ceadb154407917de61e5"
+    },
+    "guard_green": {
+      "path": "runs/reviews/source-proposal-uri-guard-green.json",
+      "sha256": "a7730039fc578016f634500ecaaef3f7b63141a966e1f451e26a14310f42815d"
+    },
+    "guard_red": {
+      "path": "runs/reviews/source-proposal-uri-guard-red.json",
+      "sha256": "ac8922ebb25308d2ec4ac8642acdff8a00b78b8272997c682cb2c19467b53a82"
+    },
+    "independent_evidence": {
+      "path": "runs/reviews/candidate-improvement-final-evidence-independent-review.json",
+      "sha256": "50709710e0516e7b954bb2d8a82ed5dbe6939879e9ff035b76cac6f556b9fea5"
+    },
+    "initial_static_review": {
+      "path": "runs/reviews/candidate-improvement-static-preparation-review.json",
+      "sha256": "5d55ead156751f0a8f154bfa600d5c83513589d8d251bf7a8eb3767cabcb9459"
+    },
+    "merge55": {
+      "path": "runs/reviews/pr55-merge-record.json",
+      "sha256": "c0b1c5a3dd6ae463821092b2c88b956c1ad7abc0ca24e9bdbd8a481c41a683f0"
+    },
+    "original_regression": {
+      "path": "runs/reviews/candidate-improvement-original-forty-review.json",
+      "sha256": "403454ac905d324fab6906a4bbabd977038b52462ef524c987378a06fc29852e"
+    },
+    "preservation": {
+      "path": "runs/reviews/source-proposal-preservation.json",
+      "sha256": "b14e6302020e0728122f86400be97236109f2ecf35822ac72c441b5bbcf2e6d0"
+    },
+    "probe_final_static": {
+      "path": "runs/reviews/candidate-improvement-stage-probe-static-v3.json",
+      "sha256": "e959c308c0cc8699c07bb9383c2f65d1f2bd6d80267b23bb01387f656e78487d"
+    },
+    "quality": {
+      "path": "runs/reviews/source-proposal-final-quality.json",
+      "sha256": "9658ac9a79e140b7d06e313e6eac8584f049567bd2946474a60de209a28f6da0"
+    }
+  },
+  "original_regression": {
+    "errors": 0,
+    "failures": 0,
+    "feedback": 13,
+    "improvement": 27,
+    "methods": 40,
+    "python_inputs": 196,
+    "resource_warning_messages": 0,
+    "seconds": 247.262,
+    "skips": 0,
+    "unchanged": true
+  },
+  "preservation": {
+    "baseline_python": 193,
+    "changed_old_python": [
+      "buddha/source_feedback.py"
+    ],
+    "current_pol02_source_or_protocol_change": false,
+    "existing_public_feedback_builder_writer_AST_exact": true,
+    "old_test_files_raw_exact": 98,
+    "original_revision_rows_retained": 56,
+    "real_grant_or_key_read": false,
+    "real_provider_calls": 0,
+    "unchanged_old_python": 192
+  },
+  "quality": {
+    "checks": 7,
+    "python_inputs": 196,
+    "scope": "Lint, format, strict Windows/Linux types, Bandit, runtime vulnerability audit, compile; later added probe separately checked.",
+    "seconds": 31.03005729999859,
+    "unchanged": true
+  },
+  "review": {
+    "path": "docs/conformance/src02-source-proposal-stage-review.json",
+    "sha256": "ff5f187a9f5252af0166aeb77eb1d990f417cdf5e05d44467a87f4741611e480"
+  },
+  "source_sha256": {
+    "buddha/candidate_improvement.py": "ed14d716d57401c9b80ad1afc66e407b622b637481bb00d93276874402b280a1",
+    "buddha/candidate_improvement_results.py": "365dd466e2b8e775b909ff7b836f426d3974d828145e376145ade4d4b247d34b",
+    "buddha/source_feedback.py": "1162a9b035f43937afa1b1b834d414c0e7efee072240a7ece0ecd9337f63c79a",
+    "docs/conformance/src02-source-proposal-stage-probe.py": "d592d9ba0fbd3bd86712f8545a7590096cd2f9ceaf05ee182aa1146f64659635",
+    "tests/test_candidate_improvement_stage.py": "1ab9e1b2f290ef0f6e476606138e25d82bca832611efc724ab1f3f3c95d4c26c"
+  },
+  "spec_sections": [
+    "DESIGN main loop: inherited development feedback and versioned child source/lineage",
+    "SOURCE-IMPROVEMENT: original input binding, projected feedback and isolated proposal",
+    "PLAN SRC-02: durable proposal connection; full inherited search and scientific gates open"
+  ],
+  "status": "bounded host and confined proposal engineering checks passed; final-head hosted CI pending"
+}

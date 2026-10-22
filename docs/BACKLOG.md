@@ -28,16 +28,24 @@ The implemented parts are separate:
 | Part | What it does today | What it does not yet do |
 | --- | --- | --- |
 | [Policy search](../buddha/search.py) and [policy schema](../buddha/policy.py) | A fixed proposer changes `instructions` and `sampling`, evaluates policies and retains lineage. The completed live pilots exercised this restricted path. | Author or inherit changed Python implementations. |
-| [Source candidate runner](../buddha/candidate_run.py) | Runs selected generation and inherited proposal procedures in isolation; materializes a separate child with lineage under host-owned accounting. A synthetic parent/child/grandchild chain passes. The [source-to-native adapter](SOURCE-ASSESSMENT.md) connects one-task C1 to existing native assessment and passes a bounded synthetic confined proof; its hosted Linux and Windows regressions pass. The [common development screen](SOURCE-SCREEN.md) now checks fixed-task native results and guarded exploratory parent eligibility/selection; its two-source/two-task confined proof passes, while final hosted checks remain pending. The [verified feedback bridge](SOURCE-FEEDBACK.md) extracts bounded native measurements and literal answer excerpts into the unchanged improvement packet; it does not yet provide durable proposal/search orchestration. See [generation](SOURCE-CANDIDATES.md) and [improvement](SOURCE-IMPROVEMENT.md). | Connect source proposal, feedback, evaluation and selection into the inherited search loop, promote children scientifically, run a model-authored source experiment, or demonstrate a competent changed improver and its effectiveness. |
+| [Source candidate runner](../buddha/candidate_run.py) | Runs selected generation and inherited proposal procedures in isolation; materializes a separate child with lineage under host-owned accounting. A synthetic parent/child/grandchild chain passes. The [source-to-native adapter](SOURCE-ASSESSMENT.md) connects one-task C1 to existing native assessment and passes a bounded synthetic confined proof; its hosted Linux and Windows regressions pass. The [common development screen](SOURCE-SCREEN.md) now checks fixed-task native results and guarded exploratory parent eligibility/selection; its two-source/two-task confined proof and both hosted OS checks pass, and PR55 is merged. The [verified feedback bridge](SOURCE-FEEDBACK.md) extracts bounded native measurements and literal answer excerpts into the unchanged improvement packet; the durable proposal stage now preserves original-owner execution and recovery; the full search orchestration remains open. See [generation](SOURCE-CANDIDATES.md) and [improvement](SOURCE-IMPROVEMENT.md). | Connect source proposal, feedback, evaluation and selection into the inherited search loop, promote children scientifically, run a model-authored source experiment, or demonstrate a competent changed improver and its effectiveness. |
 | [Native policy study controller](../buddha/policy_run.py) | Runs the frozen policy conditions through the baseline and official native assessment pipeline. | Propose children or invoke the source candidate runner as an evolutionary loop. |
 
 The one-file inherited execution path, single-task native connection and common
 development screen with exploratory parent selection are implemented at their
-stated scope. The screen's bounded synthetic confined proof passes; its final
-hosted checks remain pending. The earlier native connection's Linux and Windows
-regressions pass.
-Connecting source proposals to screened feedback and subsequent inherited mutations, scientific
-promotion, source search and a model-authored experiment remain open.
+stated scope. The screen's bounded synthetic confined proof and both hosted OS
+checks pass; PR55 is merged. The feedback bridge's Windows check remains pending.
+The earlier native connection's Linux and Windows regressions pass.
+The [durable proposal stage](SOURCE-PROPOSAL-STAGE.md) now checks measured parent
+feedback before isolated execution and preserves completed child materialization,
+clean rejections and incomplete recovery separately. Connecting those outcomes
+to child screening and subsequent inherited mutations, scientific promotion,
+source search and a model-authored experiment remains open.
+The loop must expose retained failures to later proposals. It must distinguish a
+finished worker-declared child-generation failure from an interrupted or uncertain
+execution, without inventing answers, metrics or archive eligibility. The current
+generation-v1 path deliberately leaves those failures incomplete; a prospective
+failure-aware contract is needed before claiming a failure-aware search loop.
 Python execution support alone is not source self-improvement; changing prompt
 text alone is policy optimization. Neither demonstrates a better improver.
 

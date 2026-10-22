@@ -9,6 +9,12 @@ This is an offline library operation. It needs no API key, starts no worker and
 spends nothing. The approved POL-02 comparison keeps its frozen handoff and
 source code. [PLAN.md](PLAN.md) remains the roadmap.
 
+`inspect_source_feedback(directory, expected_provenance_sha256=...)` verifies
+an existing packet against its original measured screen and independent
+provenance pin, without changing it. The builder and writer still require a new
+directory. The [durable proposal stage](SOURCE-PROPOSAL-STAGE.md) uses this check
+before preparing or executing the selected parent's inherited improver.
+
 ## What the agent learns
 
 For each selected development task, the note gives the recorded distinctiveness
@@ -101,10 +107,11 @@ the original quality status in the note and unusable head positions in host
 provenance. The original reports retain the complete diagnostic records.
 
 This bridge accepts complete screens, including complete screens with unusable
-metrics. An interrupted screen or failed proposal needs the future controller's
-separately verified failure record; it is not converted into a measured complete
-screen. Those failures, repeated proposal execution, child screening and later
-parent selection remain part of the open inherited search loop under SRC-02.
+metrics. Interrupted screens and failed proposals are not converted into measured
+complete screens. The durable proposal stage now records clean rejections and
+incomplete attempts separately. Using those failures alongside measured feedback,
+repeated proposals, child screening and later parent selection remains part of
+the open inherited search loop under SRC-02.
 Changed-improver competence and improved-improver effectiveness remain separate
 gates. No useful-diversity or held-out improvement claim follows from producing
 this packet.

@@ -188,3 +188,11 @@ saved answers after producer retirement. Its hosted Linux and Windows regression
 pass. The separate [common development screen](SOURCE-SCREEN.md)
 now verifies matched task coverage and exploratory source-parent eligibility.
 Full source-search integration and an actual model-authored experiment remain open.
+
+The [durable proposal stage](SOURCE-PROPOSAL-STAGE.md) connects a selected
+parent's verified measured feedback to the existing isolated proposal session.
+It records materialized children, clean worker-declared rejections and incomplete
+attempts separately, retaining original-owner recovery and passive completion
+verification. The generic session still accepts caller-reviewed notes; this
+stronger measured-feedback join belongs to the new stage. These lifecycle
+outcomes do not establish child competence or scientific improvement.
