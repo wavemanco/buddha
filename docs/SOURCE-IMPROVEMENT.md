@@ -171,3 +171,15 @@ archive admission or promotion, authenticate feedback judgments or establish
 source-search efficiency. This probe preserves the inherited improver body; it
 does not establish edited-improver competence or effectiveness, or demonstrate
 useful-diversity gains, held-out improvement or improved-improver effectiveness.
+
+## Assess a materialized child's saved answers
+
+The [source-to-native connection](SOURCE-ASSESSMENT.md) can anchor a selected
+child's one-task generation and pass its literal C1 to fresh official native
+assessment. It does not rerun the improver, replace this guide's original chain
+evidence, authenticate feedback notes or grant archive eligibility. Its confined
+proof uses the actual child retained from this guide's original chain, with 23
+synthetic replies and two fresh official judging occasions; the second consumes
+saved answers after producer retirement. Final hosted checks remain pending;
+common screening, source-search integration and a model-authored experiment remain
+open.

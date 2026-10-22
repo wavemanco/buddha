@@ -86,6 +86,15 @@ can run a parent's proposal procedure and materialize a separate child. A confin
 synthetic chain exercises child generation, the child's inherited improver and
 a runnable grandchild. Materialization alone does not establish competence;
 parent selection, archive admission and measured improvement remain open.
+The [source-to-native connection](docs/SOURCE-ASSESSMENT.md) now anchors one
+candidate's literal C1 answers for fresh official native assessment through the
+existing evaluator, with separate generation and judging owners. It keeps zero,
+one or many model callbacks distinct from answer count and preserves original
+source/accounting identities. Its confined proof passes with 23 synthetic
+replies, two fresh official judging occasions and keyless replay; the second
+occasion consumes saved C1 after producer retirement. Final hosted checks remain
+pending. Common screening, archive integration, source search and a model-authored
+experiment remain open.
 The [source-evolution backlog context](docs/BACKLOG.md) records the intended Python
 code and inherited-improver endpoint, the current gap and its existing plan gates.
 

@@ -27,10 +27,14 @@ benchmark formula or corrected ranking.
 
 ## What the host verifies
 
-The source must be a completed generation from the existing native baseline
-format. Its original generation owner must be inactive and independently
-anchored to its stage-completion digest in the same shared authorization used
-for the new occasion. All original physical operations must be completed.
+The source must be a supported completed generation: the original frozen-native
+baseline reference or the explicit candidate-producer reference described in
+[SOURCE-ASSESSMENT.md](SOURCE-ASSESSMENT.md). Its original generation owner must
+be inactive and independently anchored to its stage-completion digest in the
+same shared authorization used for the new occasion. All original physical
+operations must be completed. The original baseline reader and its strict
+one-operation-per-answer contract remain unchanged; candidate callback count
+is independent of answer count.
 
 The host joins the exact stage seal, attempt inventory, C1 answer file, generation
 report, task source, configuration, selection, original invocation inputs and
@@ -79,7 +83,11 @@ These are library interfaces. This slice supplies no new paid CLI command,
 funding allocation or actual study membership. The historical $50 experiment
 and $15 judge audit do not authorize another comparison.
 
-The descriptor has format `buddha.native-evaluation.v1` and these fields:
+The descriptor has format `buddha.native-evaluation.v1`. The table below retains
+the original untyped frozen-baseline source reference. A candidate source instead
+uses the [explicit five-field reference](SOURCE-ASSESSMENT.md#assess-the-same-c1-on-fresh-occasions);
+`native` and `stages` retain the same contract. Historical evidence below remains
+about its original frozen-seed producer.
 
 | Field | Meaning |
 | --- | --- |

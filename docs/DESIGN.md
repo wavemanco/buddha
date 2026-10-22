@@ -83,7 +83,7 @@ generate(task, config, complete) -> ordered_list_of_answers
 propose_improvement(parent_bundle, development_feedback, config, complete) -> proposal
 ```
 
-The proposal has exactly `source` and `hypothesis` string fields. The [source guide](SOURCE-IMPROVEMENT.md) defines byte ceilings, development custody, materialization, lineage and recovery.
+The proposal has exactly `source` and `hypothesis` string fields. The [source guide](SOURCE-IMPROVEMENT.md) defines byte ceilings, development custody, materialization, lineage and recovery. The separate [source assessment guide](SOURCE-ASSESSMENT.md) defines how one selected candidate's anchored C1 reaches the existing native evaluator; it does not supply a common development screen, archive admission or a scientific improvement claim.
 
 `task` contains only `id`, `prompt` and `count`; `config` separately supplies the fixed resources. Improvement receives selected development tasks and reviewed notes, separately from the literal parent bundle. Each answer is a complete independent response to the original prompt. Private plans, candidate lists, probabilities, rationales for selection, and critiques are not automatically appended to answers. An answer to a request for one digit should be one digit.
 
