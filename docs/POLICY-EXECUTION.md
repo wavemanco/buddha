@@ -60,7 +60,7 @@ handoff must still check those joins and current profile bounds. The separate
 [cost proposal](POLICY-COMPARISON-COSTS.md) remains unallocated.
 
 The baseline template supplies the selected release, generator, evaluator,
-profiles, model access, command sequence, seeds, runtime limits and local
+profiles, provider/model mappings, command sequence, seeds, runtime limits and local
 spending ceilings. Only the declared instruction/sampling factors and derived
 output paths change between conditions. Raw file hashes and canonical study
 identities have separate roles: even a whitespace-only edit to a frozen file
@@ -105,12 +105,13 @@ records the original regression, full synthetic owner propagation and final
 validation; the [review](conformance/pol02-publication-bindings-review.json)
 retains their exact scope and failure timing.
 
-These are library functions. There is no new operator command or live handoff
-in this execution slice. The separate [actual protocol](POLICY-COMPARISON.md)
-and [intent](conformance/pol02-study-intent.json) now declare membership, the
-exact child, instrument, supplemental review and analysis. Their future
-launcher must verify the reviewed publication against the controller-bound
-inputs; direct controller calls do not automatically bind external analysis
+These remain library functions. The separate
+[protected launcher](POLICY-LAUNCH.md) provides the preparation/recovery
+command. The [actual protocol](POLICY-COMPARISON.md) and
+[intent](conformance/pol02-study-intent.json) declare membership, the exact
+child, instrument, supplemental review and analysis. The launcher checks those
+reviewed publications and carries their original hashes into controller-bound
+inputs. Direct controller calls do not automatically bind external analysis
 documents. The separate [passive reader](POLICY-RESULTS.md) now checks saved
 evidence and primary arithmetic, and adds ranges by original category, generation
 repetitions, score/group disagreement between judging occasions, and
@@ -119,8 +120,8 @@ It keeps missing usage and uncertain liabilities explicit; a saved attempt is
 not automatically a confirmed wire call, and observed retries/fallback models
 do not prove parser repair or its cause. The
 [panel mapping and packet materializer](POLICY-PANEL.md) now pass their offline
-checks. Before actual execution, complete account/runtime checks, approved
-funding and a tested live handoff. Materialize
+checks. Before actual execution, complete the concrete account/runtime review, obtain
+separately approved funding and use the [protected launcher](POLICY-LAUNCH.md). Materialize
 the actual answer packet and obtain supplemental reviews only after real
 generation saves the original answers. Reporting features do not complete the
 experiment or the later human scientific assessment.

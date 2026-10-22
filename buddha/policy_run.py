@@ -35,6 +35,30 @@ class PolicyRunError(ReleaseError):
     """The frozen study, original execution or retained child evidence is invalid."""
 
 
+class PolicyRunStopped(PolicyRunError):
+    """A protocol stop whose exact partial record was successfully persisted."""
+
+    def __init__(self, partial: dict[str, object]):
+        self._partial = _json(partial)
+        super().__init__("policy execution stopped; original saved observation retained")
+
+    @property
+    def partial(self) -> dict[str, object]:
+        return _load(self._partial)
+
+
+class PolicyRunInterrupted(KeyboardInterrupt):
+    """Cancellation carrying the exact persisted observation, without log scans."""
+
+    def __init__(self, partial: dict[str, object]):
+        self._partial = _json(partial)
+        super().__init__("policy execution cancelled; original saved observation retained")
+
+    @property
+    def partial(self) -> dict[str, object]:
+        return _load(self._partial)
+
+
 def _checked[**P, T](function: Callable[P, T]) -> Callable[P, T]:
     @wraps(function)
     def checked(*args: P.args, **kwargs: P.kwargs) -> T:
@@ -676,7 +700,7 @@ def _run(directory: Path, transport: RawHTTPTransport) -> dict[str, object]:
                     )
                 occasions.append(_occasion(occasion_index, plan, child, report, frozen))
             except KeyboardInterrupt:
-                _partial(
+                stopped = _partial(
                     directory,
                     execution,
                     authority,
@@ -688,10 +712,10 @@ def _run(directory: Path, transport: RawHTTPTransport) -> dict[str, object]:
                     "cancelled",
                     report,
                 )
-                raise
+                raise PolicyRunInterrupted(stopped) from None
             except (ValueError, TypeError, KeyError, OSError, RecursionError):
                 if {path.name for path in (child / "attempts").iterdir()} - attempts:
-                    _partial(
+                    stopped = _partial(
                         directory,
                         execution,
                         authority,
@@ -703,6 +727,7 @@ def _run(directory: Path, transport: RawHTTPTransport) -> dict[str, object]:
                         "protocol",
                         report,
                     )
+                    raise PolicyRunStopped(stopped) from None
                 raise
             if occasion_index == 0:
                 source = _source_generation(child)
@@ -737,7 +762,7 @@ def _run(directory: Path, transport: RawHTTPTransport) -> dict[str, object]:
         return pipeline.publish_complete(directory / "report.json", result, authority, owners)
     except (ValueError, TypeError, KeyError, OSError, RecursionError):
         if executed:
-            _partial(
+            stopped = _partial(
                 directory,
                 execution,
                 authority,
@@ -749,4 +774,5 @@ def _run(directory: Path, transport: RawHTTPTransport) -> dict[str, object]:
                 "protocol",
                 report,
             )
+            raise PolicyRunStopped(stopped) from None
         raise

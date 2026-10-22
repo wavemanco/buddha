@@ -54,14 +54,31 @@ applicable charges. Newer model names are not permission to change the judge.
 The current broker reserves against documented model context capacity, not a
 host estimate of the actual prompt's tokens. It also preserves the official
 grouping request's omitted output cap, reserving the documented maximum rather
-than inserting a private cheaper cap. Illustrative conservative profiles would
-reserve about $0.532373 per generation call, $0.755400 per grouping call and
-$10.400000 per Opus quality call. These are temporarily held maxima, not charges
-or measured estimates. They must be reverified and bound into the actual
-account-reviewed profiles before live preparation.
+than inserting a private cheaper cap. Illustrative conservative profiles are
+below. The OpenAI rates cover the documented large-context and cache-write
+multipliers. For Anthropic, they cover the documented one-hour cache-write
+ceiling and the 10% US-only inference uplift, including output. The official
+request omits `inference_geo`, so it inherits the workspace setting;
+standard/default processing alone does not establish global routing. See
+[Anthropic's residency pricing](https://platform.claude.com/docs/en/manage-claude/data-residency).
 
-Consequently a $50 cap may stop at roughly $39.60 already spent when the next
-quality call needs a $10.40 reservation. The current native channel serializes
+| Role | Input ceiling | Output ceiling | Upper input/output USD per million tokens | Maximum reservation |
+| --- | --- | --- | --- | --- |
+| Generation | 1,050,000 | 4,096 | $0.50 / $1.80 | $0.532373 |
+| Official grouping | 1,050,000 | 128,000 | $0.50 / $1.80 | $0.755400 |
+| Official Opus quality | 1,000,000 | 16,000 | $11 / $27.50 | $11.440000 |
+| Prescribed Sonnet fallback | 1,000,000 | 16,000 | $4.40 / $11 | $4.576000 |
+
+These upper rates deliberately cover more than ordinary uncached global
+requests; they are not a prediction of their charges. The quality output
+ceiling matches the prescribed request limit rather than the model's larger
+general capacity. Reservations are temporarily held maxima, not charges or
+measured estimates. They must be bound into the actual reviewed profiles and
+checked against accepted request fields before live preparation. These
+prospective bounds do not reprice any historical experiment.
+
+Consequently a $50 cap may stop at roughly $38.56 already spent when the next
+quality call needs an $11.44 reservation. The current native channel serializes
 provider exchanges even while two native prompt instances are active.
 Unused capacity is not evidence that the guard should be bypassed. A local
 native owner also needs a ceiling large enough for one prescribed request;

@@ -14,7 +14,9 @@ no provider calls. It writes no files; the caller receives an in-memory result.
 `check_handoff(path, expected_sha256=...)` reads one proposal file and returns
 its checked identities, planned counts, model profiles and original file
 bindings. It raises `PolicyHandoffError` when the proposal fails a check.
-This is a library interface; an operator launcher remains future work.
+This remains a configuration-only library interface. The separate
+[protected launcher](POLICY-LAUNCH.md) consumes independently approved funded
+artifacts; this checker never creates funding.
 
 `expected_sha256` is the proposal's previously reviewed fingerprint, supplied
 separately by the caller. A SHA256 fingerprint changes when file contents
@@ -88,9 +90,10 @@ scheduled cell. For the twelve-task protocol, eight cells and two occasions
 mean sixteen such passes and 192 task assessments. The generation schedule
 contains 96 ten-answer sets: 960 answers. These are different units.
 
-The returned bindings fit the existing preparation input limit. The trusted
-launcher will still need to combine them with the preparation owner's own
-generated controls and respect the complete invocation limit.
+The [protected launcher](POLICY-LAUNCH.md) combines these original bindings
+with its launch, approval and review controls. Preparation still enforces the
+complete invocation-input limit; a detached proposal check does not promise
+that every additional caller control will fit.
 
 ## What remains before execution
 
@@ -106,9 +109,11 @@ authorization with the exact path, ID, terms and study scope. The
 does not substitute a dummy grant or a partially valid execution descriptor.
 The historical experiments' closed grants supply no new allocation.
 
-The [cost envelope](POLICY-COMPARISON-COSTS.md) remains a proposal. A protected,
-tested operator handoff is required before providing a live command. Actual
-comparison outputs, blinded reviews and scientific conclusions remain open.
+The [cost envelope](POLICY-COMPARISON-COSTS.md) remains a proposal. The
+[protected launcher](POLICY-LAUNCH.md) implements the separate operational
+handoff, but using it still requires a newly approved allocation and its actual
+funded launch artifacts. Actual comparison outputs, blinded reviews and
+scientific conclusions remain open.
 
 ## Validation evidence
 
