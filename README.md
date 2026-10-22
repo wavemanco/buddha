@@ -67,12 +67,16 @@ study metadata before answers are inspected; it contains no answer text. Its
 assembles a reviewer packet from anchored original generation, keeping missing
 coverage and provenance private. The [study controller](docs/POLICY-EXECUTION.md)
 also preserves reviewed external file hashes across preparation and recovery.
-The [keyless proposal checker](docs/POLICY-HANDOFF.md) joins original publications,
-selected files and model profiles without creating a run or allocating money.
-Account/runtime checks, approved funding and a
-tested handoff remain open before launch. Actual answers and supplemental
-reviews require real saved generation. The live comparison and human scientific
-assessment remain open; preparing a packet does not complete the experiment.
+The [keyless proposal checker](docs/POLICY-HANDOFF.md) joins original
+publications, selected files and model profiles without creating a run or
+allocating money. The [protected launcher](docs/POLICY-LAUNCH.md) checks the
+approved destination and funding before hidden key entry, then prepares or
+recovers the original study and owners. Concrete account/runtime review and
+separately approved funding remain required before actual execution; the
+current cost envelope is unallocated. Configuration and key entry do not
+confirm provider access. Actual answers and supplemental reviews require real
+saved generation. The live comparison and human scientific assessment remain
+open.
 
 The [source runtime](docs/SOURCE-RUNTIME.md) and [candidate execution boundary](docs/SOURCE-CANDIDATES.md)
 now pass composed isolation, model-channel, accounting and recovery checks.

@@ -56,6 +56,12 @@ owners. Otherwise it checks and recovers the original prepared study. Press
 Ctrl+C to cancel; saved replies, original owners and outstanding holds remain.
 It never starts a replacement experiment automatically.
 
+For recovery, keep the same `--handoff` file, original `--sha256` and declared
+study destination. Change only the external receipt filename, for example to
+`C:\path\to\launch-2.json`; never reuse `launch-1.json`. The new receipt records
+this invocation. Changing the receipt does not replace the original study,
+grant, review or retained owners.
+
 `--confirm-project-keys` affirms that the supplied inference keys belong to the
 manually reviewed provider accounts and billing scope, with the approved account
 headers/tier bounds. It is not a provider authentication check. `--live` and this
@@ -69,10 +75,13 @@ exist only in this process's temporary environment and are removed on every
 exit, including failure during the second key. Keys are not written to files,
 printed, passed as command arguments or included in worker environments.
 
-The first successful entry creates one local review containing credential hashes
-and manual account facts. Recovery uses that same review and its original date;
-it does not replace keys, refresh an expired unfinished review or silently
-reapprove bounds. Changed fingerprints or incomplete preparation stop explicitly.
+For this study, fresh or resumable unfinished execution validates both OpenAI
+and Anthropic keys. Hidden input asks only for keys missing from the current
+process. A known pre-key refusal does not ask for either key. On a fresh launch,
+the review is saved only after the required keys validate and the post-entry
+configuration check passes. Recovery keeps that same review and date; it does
+not refresh an expired review, change credential fingerprints or silently
+reapprove bounds. Invalid or incomplete preparation stops explicitly.
 
 Choose a known-safe `--receipt` location outside the study and selected input
 components. It must name a NEW file whose parent already exists; a sibling of
@@ -87,12 +96,12 @@ before the study exists. Invalid command/receipt paths cannot guarantee a durabl
 receipt. Receipt-write failure produces a safe warning and does not replace an
 already-known execution result or cancellation observation.
 
-To inspect an already completed study, the same command can omit the three
-execution/key flags and use a new receipt filename. Complete means the entire
-stored, authority-anchored cell/occasion grid and root publication validate. The
-check reads no key, starts no worker and does not call the execution controller.
-Omitting flags for unfinished work stops before key entry; it is not a dry run
-of that unfinished execution.
+To check an already completed study, use the same handoff and original hash,
+choose another NEW receipt filename, and omit `--live`,
+`--confirm-project-keys` and `--prompt-keys`. This reads no key, starts no worker,
+spends nothing and validates the full stored, authority-anchored cell/occasion
+grid and root publication. Omitting those flags for unfinished work stops
+before key entry; it is not a dry run of unfinished execution.
 
 ## Progress and stops
 
@@ -143,6 +152,12 @@ observation; the external receipt records only the phase and facts actually
 known. Cancellation likewise carries an exact study observation only if that
 write succeeded.
 
+An `observation` path is relative to the declared study directory. Keep that
+original study and all earlier receipts. A pre-key refusal can have an external
+receipt and reason without a new study observation, because no child ran.
+The receipt is an invocation summary; it does not replace the original child
+report or authorize retrying an unknown request.
+
 Readiness validates custody and configuration rather than scientific metric
 projection. A different reviewed release is not rejected merely because the
 separate 1.1 analysis adapter cannot interpret its scores. No result is ranked,
@@ -163,6 +178,23 @@ all-heads sizing scenario rather than an expected attempt count.
 Its normal worker count is 144: eight cells times twelve generation task workers
 plus three baseline-native and three fresh-occasion workers. Quality/repair/
 fallback paths can vary the attempt count. The earlier two-task, 64-worker
-engineering fixture is separate evidence. The full intended composition and
-passive-reader/materializer resource envelope still need their own proof before
-a concrete paid launch is described as prepared.
+engineering fixture is separate evidence. The [separate full-size engineering delivery](conformance/pol02-operator-handoff-delivery.json)
+records the twelve-task schedule through the actual selected containers and
+SDKs with short fixed synthetic HTTPS replies. It retains the original-owner
+interruption/replay, keyless completion and passive analysis/panel checks,
+together with observed file/count/byte bounds. This is not a worst-case answer
+size, 4,096-attempt, provider-access, latency or unlimited-recovery guarantee.
+Repair/fallback behavior and real scientific outcomes remain separate evidence.
+
+The HTTP timeout limits socket waits, rather than total request duration.
+The worker has its own wall limit. The host waits for an in-flight model
+callback before unwinding so its financial outcome can be recorded; cancellation
+and cleanup may therefore finish later than the worker limit.
+
+The original-source proof completed 3,072 simulated replies, 56 retained owners,
+144 successful workers plus one interrupted worker, 192 task assessments and
+a complete 24-set/240-position panel. Its recorded synthetic charge is 274,176
+microusd with zero held; this is not an invoice or a new allocation. The local
+Windows repository regression passes 1,330 tests in 3,425.973 seconds with ten
+existing skips; all seven local quality checks pass. Hosted final-head Linux
+and Windows checks remain separate merge gates. The [review](conformance/pol02-operator-handoff-review.json) retains historical cohort/source limits.

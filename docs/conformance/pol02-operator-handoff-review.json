@@ -1,0 +1,334 @@
+{
+  "actual_original_source_proof": {
+    "capture_maxima_not_sum": {
+      "consumed_bytes": 421688333,
+      "consumed_files": 610,
+      "entries": 1018
+    },
+    "capture_snapshot_count": 10,
+    "driver_sha256": "7b9ec45d3aea263e17786fe5352b2be591d1faee845e560b05d720bf19cc9dcb",
+    "final_charge_microusd": 274176,
+    "final_held_microusd": 0,
+    "final_panel_positions": 240,
+    "final_panel_sets": 24,
+    "final_tree": {
+      "entries": 1018,
+      "file_bytes": 403670830,
+      "files": 605
+    },
+    "generation_sets": 96,
+    "interrupted_workers": 1,
+    "interruption_charge_microusd": 17624,
+    "interruption_completed_operations": 253,
+    "judging_occasions": 16,
+    "keyless_no_new_work": true,
+    "mock_replies": 3072,
+    "owners": 56,
+    "partial_panel_sets": 3,
+    "process_sha256": "a0d92710d198b00be230c04e27a7cbc8752030104514b8b510b30509d126d212",
+    "proof_sha256": "c33cb45e04643a401731b8568984e721e06f7e08c868da93f6beb426385a2ea5",
+    "raw_log_sha256": "4e302c4a747b707acd92b3914e1c616c81aa9f8b152e34621c44bbf213de8466",
+    "stage_counts": {
+      "generation": 960,
+      "grouping": 192,
+      "quality": 1920
+    },
+    "successful_workers": 144,
+    "task_assessments": 192,
+    "wrapper_exit_sha256": "b6923597cc9beb4a87b125995493b596130173291f0e51f797c6fbbfd2c8aa4b",
+    "wrapper_sha256": "5957fde5eb69d30444f4131488ee1f37b30f1df1a9a37807b79bc47a3c23e158"
+  },
+  "base": "0a742e85fbc1c14db7d0e58ccd8cff5a47414862",
+  "credentials": {
+    "api": "buddha.credentials.key_environment(settings: ProfileSource, *, prompt_keys: bool, notice: Callable[[str], None])",
+    "ast_proof": {
+      "path": "runs/reviews/credentials-source-proof.json",
+      "sha256": "a016a014554071e4e7a2d380ca27501c65567ac335b8c29a545c7bf01070b071"
+    },
+    "base": "a3d47aa2ac8bff14722de42a6694d12a399fcca7",
+    "checks": {
+      "focused_final": {
+        "exit_code": 0,
+        "log": "runs/reviews/credentials-focused-final.log",
+        "log_sha256": "996b7a17dc3039284fa4ef414260fc9801895ca053cfd68dd5e32292c18b6a63",
+        "seconds": 0.213,
+        "tests_reported": 8
+      },
+      "legacy_compatibility": {
+        "exit_code": 0,
+        "log": "runs/reviews/credentials-legacy-compatibility.log",
+        "log_sha256": "daba3c69686e9600964fcd97cf03e37b6eacc9404c0a16f51f50b49a3c782654",
+        "seconds": 25.21,
+        "tests_reported": 25
+      },
+      "missing_api_red": {
+        "exit_code": 1,
+        "log": "runs/reviews/credentials-missing-api-red.log",
+        "log_sha256": "5188c42760539ab9e95517f90b71180a2aa431119b840e3726ec7634bcc3de71",
+        "seconds": 0.0,
+        "tests_reported": 1
+      }
+    },
+    "format": "buddha.operator-credentials-extraction.v1",
+    "limits": [
+      "Synthetic scoped/restored environments and fake key strings only; no actual key, authority, provider or container use.",
+      "No original test edits, full suite, documentation, conformance, commit or PR work.",
+      "Historical MEAS source unchanged; CLI wrapper/error/getpass and os module compatibility retained."
+    ],
+    "quality": [
+      {
+        "arguments": [
+          "-m",
+          "ruff",
+          "check",
+          "buddha/credentials.py",
+          "buddha/__main__.py",
+          "tests/test_credentials.py"
+        ],
+        "exit_code": 0,
+        "log_sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+        "name": "lint"
+      },
+      {
+        "arguments": [
+          "-m",
+          "ruff",
+          "format",
+          "--check",
+          "buddha/credentials.py",
+          "buddha/__main__.py",
+          "tests/test_credentials.py"
+        ],
+        "exit_code": 0,
+        "log_sha256": "81e0708af79a682467b0ecbd3453a0a33cfcbbe2812201b4d4f405f78ded2976",
+        "name": "format"
+      },
+      {
+        "arguments": [
+          "-m",
+          "mypy",
+          "--strict",
+          "--platform",
+          "linux",
+          "buddha/credentials.py",
+          "buddha/__main__.py"
+        ],
+        "exit_code": 0,
+        "log_sha256": "0c37c4158c91ef55c724ba017bf6465f26018199badb08e3ff13f98acdf056c2",
+        "name": "types_linux"
+      },
+      {
+        "arguments": [
+          "-m",
+          "mypy",
+          "--strict",
+          "--platform",
+          "win32",
+          "buddha/credentials.py",
+          "buddha/__main__.py"
+        ],
+        "exit_code": 0,
+        "log_sha256": "0c37c4158c91ef55c724ba017bf6465f26018199badb08e3ff13f98acdf056c2",
+        "name": "types_windows"
+      },
+      {
+        "arguments": [
+          "-m",
+          "bandit",
+          "-r",
+          "buddha/credentials.py",
+          "buddha/__main__.py"
+        ],
+        "exit_code": 0,
+        "log_sha256": "d618f17797c1ec33b1c5f972008002866eaf287b620e106a8baccfcd4c844e95",
+        "name": "security"
+      },
+      {
+        "arguments": [
+          "-m",
+          "compileall",
+          "-q",
+          "buddha/credentials.py",
+          "buddha/__main__.py",
+          "tests/test_credentials.py"
+        ],
+        "exit_code": 0,
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "name": "compile"
+      }
+    ],
+    "red_scope": "One missing-module discovery loader error; none of eight behavioral methods ran before implementation.",
+    "scope": "Shared key-entry portion of concrete operator vertical; not a standalone feature or live-readiness delivery.",
+    "source_sha256": {
+      "buddha/__main__.py": "3b810ad75c05462bb5574fb80f3839ab1bf93b9fe949ef06c40e5cc9cc2e0a46",
+      "buddha/credentials.py": "7a7eb0a2ad9075ef242df5c207bc505d5103213c0b119661b5b51b75634d4d9a",
+      "tests/test_credentials.py": "5bb348f1ed99cdfdb9bf557496212a3f012e36f8948f8eeb5bf1fb8940ba019b"
+    }
+  },
+  "evidence_sha256": {
+    "credentials-extraction-receipt.json": "7b5ed6e707be36e27ca7ad4b0d300fd874464b2e765dda26b7ca048a5395040b",
+    "credentials-source-proof.json": "a016a014554071e4e7a2d380ca27501c65567ac335b8c29a545c7bf01070b071",
+    "pol02-launch-extraction-review.json": "0596f031fb24fbb1bd9cbe0320e3a55e0578684f9e27968d3541235272176e86",
+    "pol02-launch-first-focused-record.json": "358cf854c6d44367dbbe8ba6e4315d2e142456e6a8bf746af6c309b3fce6d8dd",
+    "pol02-launch-focused-closing.json": "3afa6c84342a4734226fd1824bcd917a60dcf98d7fd1480bedb68e526f41858f",
+    "pol02-operator-closing-package-shape.md": "ad729a009fb9c0b203a3a0790a4e39ff5a86c005cead2907cae76366932fa326",
+    "pol02-operator-doc-candidates.json": "d403f1cc65b57e7c496151b4a9131bfe91f030d92ebb1d00d1568fb5f7a686bf",
+    "pol02-operator-original-science-exit.json": "a058d6e9a1cccc4f51b796762e0419d76a968e81d81cb430b6fefcefa517b81e",
+    "pol02-operator-regression-quality-independent-review.json": "b1016b7a01fc74d20683ea6713a4030bd0bd15da942db1cd49a4ebe20ea89117",
+    "policy-operator-independent-source-review-v1.json": "7935bb92c2d14e830f50f6b205b93c38d4be5487ddcbd4ac5a8ea40a31e57799",
+    "policy-operator-independent-source-review-v2.json": "af6e2bdba3640e033d55cc0ff1db491595b632a5647d860ae201fa611b038a91"
+  },
+  "first_launcher_cohorts_historical": {
+    "count": 19,
+    "format": "buddha.policy-launch-first-focused-record.v1",
+    "logs": {
+      "pol02-launch-first-functional.log": "1f41efeefca8290f21738e56559f9774ce0e98e4c414322ad440b7eee4e512c3",
+      "pol02-launch-functional-16.log": "2a51b6a8f1735579bd37a3d4fd397270345faf13969a1d4a2a0456b04e7eb614",
+      "pol02-launch-functional-19.log": "38e7f57ab8c3ef4c76c8695a96ba09e8afa45ed142fd6346e9da250c42294329",
+      "pol02-launch-missing-api-red.log": "b8dc684e778e3e963d9edb7166abdd7a9854bbcdef5bff229b40ee08188a5c5c",
+      "pol02-launch-second-functional.log": "ae3793e386bd515be37ba4e2ea7b0ea233e6056049436f46b8397e1c26a22e7c"
+    },
+    "methods": [
+      "test_fresh_check_is_passive_and_binds_destination_terms_and_original_proposal",
+      "test_external_pin_destination_and_actual_terms_cannot_be_rebound",
+      "test_required_launch_source_and_partial_preparation_are_not_adopted",
+      "test_live_and_manual_account_confirmation_gate_precede_key_entry",
+      "test_pre_key_stop_has_independent_new_receipt_and_immediate_phase",
+      "test_untrusted_handoff_cannot_choose_receipt_or_leak_parser_text",
+      "test_hidden_key_feedback_cleanup_and_post_prompt_drift_stop_before_prepare",
+      "test_existing_review_is_not_replaced_and_completed_state_is_keyless",
+      "test_controller_interruption_carries_exact_saved_observation",
+      "test_real_unknown_stop_and_passive_resume_preserve_original_owners_and_holds",
+      "test_same_grant_at_another_root_rejects_before_keys",
+      "test_second_provider_cancellation_removes_first_key_and_does_not_prepare",
+      "test_conflicting_checked_binding_and_late_selected_drift_are_rejected",
+      "test_transport_pin_and_nonfinite_timeout_stop_before_keys_or_preparation",
+      "test_console_and_receipt_failure_preserve_completed_outcome",
+      "test_completed_child_custody_does_not_import_or_project_scientific_metrics",
+      "test_nonpaying_summary_is_not_blocked_by_exhausted_attempt_capacity",
+      "test_actual_controller_cancel_preserves_exact_partial_when_receipt_write_fails",
+      "test_heartbeat_starts_during_slow_check_with_unknown_accounting"
+    ],
+    "parent": "a3d47aa",
+    "pending": [
+      "Parent original3scientific-regression cohort currently running; no result claimed here.",
+      "Concrete inactive unfinished-owner pre-key guard awaits cohort terminal and regression.",
+      "No heavy8-cell/full12-task launcher proof or provider-access test performed.",
+      "No actual profiles, approval, allocation, keys, provider calls or Docker run."
+    ],
+    "quality": [
+      "Ruff format/check pass on5ownedsource/testfiles",
+      "Strict Mypy win32+linux pass on3ownedpackagefiles"
+    ],
+    "results": {
+      "first_functional": "9methods,5pass4errors (absent future leaf validation)",
+      "functional16": "16pass68.580s/0skips/ResourceWarnings-as-errors",
+      "functional19": "19pass71.237s/0skips/ResourceWarnings-as-errors",
+      "missing_api": "one loader ImportError, exit1; no behavioral method executed",
+      "second_functional": "9methods,8pass1 incorrect test setup consistently repinned approval+destination"
+    },
+    "sources": {
+      "buddha/policy_launch.py": "9247a93872cab1c30f80672b5cad759be1ae209e76ea861a599939321801702f",
+      "buddha/policy_results.py": "08e0358c15d3c76b0390c62f01257e751c285ace837e79b1aa51c4b70549748f",
+      "buddha/policy_run.py": "c009d60c720946db2512b2ce7e9e208f69d3b80a4c2483f16bed930aa1eaaafd",
+      "docs/conformance/pol02-run.py": "331f370f941c373a6a6f3f51fc98e4246b3ed8dfb2ad25cf5ad9174b1cdbe9c2",
+      "tests/test_policy_launch.py": "ebd5f767379d66378a7ee0958b25342e8a25c763a28d3880f5d2e21340cc7a77"
+    }
+  },
+  "focused_closing_historical": {
+    "format": "buddha.policy-launch-focused-closing.v1",
+    "limits": [
+      "Only loader missing-API RED is initialtests-first evidence; specific later inactive regression is behavioralRED.",
+      "No relabeling19priorGREEN as20atfinalpins; root fullregression remains separate.",
+      "Complete anchored launcher path still requires composed engineering proof; no full12task/3072attempt/144worker proof run.",
+      "Early NEW receipt path is caller-authorized; declared component overlap checked only after launch validates.",
+      "No real profiles, grants, keys, provider calls, model outcomes or Docker.",
+      "No commits, remoteoperations, PLAN/README changes or editsoutside ownedfiles (other agents own their recorded changes)."
+    ],
+    "logs": {
+      "pol02-launch-functional-19.log": "38e7f57ab8c3ef4c76c8695a96ba09e8afa45ed142fd6346e9da250c42294329",
+      "pol02-launch-inactive-owner-green.log": "6c8e7388a606122d39a89935b2a55abc34abb4a54de7d9e5e9ed25e6139fc580",
+      "pol02-launch-inactive-owner-red.log": "f2cc8449f31699acc155612a65bb8bb1a1d798f440c5fdd58b8527a61f3e04b5",
+      "pol02-launch-missing-api-red.log": "b8dc684e778e3e963d9edb7166abdd7a9854bbcdef5bff229b40ee08188a5c5c"
+    },
+    "owned_method_count": 20,
+    "owned_methods": [
+      "test_fresh_check_is_passive_and_binds_destination_terms_and_original_proposal",
+      "test_external_pin_destination_and_actual_terms_cannot_be_rebound",
+      "test_required_launch_source_and_partial_preparation_are_not_adopted",
+      "test_live_and_manual_account_confirmation_gate_precede_key_entry",
+      "test_pre_key_stop_has_independent_new_receipt_and_immediate_phase",
+      "test_untrusted_handoff_cannot_choose_receipt_or_leak_parser_text",
+      "test_hidden_key_feedback_cleanup_and_post_prompt_drift_stop_before_prepare",
+      "test_existing_review_is_not_replaced_and_completed_state_is_keyless",
+      "test_controller_interruption_carries_exact_saved_observation",
+      "test_real_unknown_stop_and_passive_resume_preserve_original_owners_and_holds",
+      "test_same_grant_at_another_root_rejects_before_keys",
+      "test_second_provider_cancellation_removes_first_key_and_does_not_prepare",
+      "test_conflicting_checked_binding_and_late_selected_drift_are_rejected",
+      "test_transport_pin_and_nonfinite_timeout_stop_before_keys_or_preparation",
+      "test_console_and_receipt_failure_preserve_completed_outcome",
+      "test_completed_child_custody_does_not_import_or_project_scientific_metrics",
+      "test_nonpaying_summary_is_not_blocked_by_exhausted_attempt_capacity",
+      "test_actual_controller_cancel_preserves_exact_partial_when_receipt_write_fails",
+      "test_heartbeat_starts_during_slow_check_with_unknown_accounting",
+      "test_retired_unsealed_future_owner_stops_before_keys_without_banning_zero_op_preallocation"
+    ],
+    "parent": "a3d47aa2ac8bff14722de42a6694d12a399fcca7",
+    "preservation": {
+      "child_default_body_exact_excluding_relocated_import_and_explicit_projection_guard": true,
+      "old_run_changed_definitions": [
+        "_run"
+      ],
+      "old_run_unchanged_definitions": [
+        "PolicyRunError",
+        "_checked",
+        "_sources",
+        "_Execution",
+        "_configuration",
+        "_definition",
+        "_controls",
+        "_materialize",
+        "_source_generation",
+        "_evaluation_descriptor",
+        "_population",
+        "_preflight",
+        "_completed_child",
+        "_child_controls",
+        "_reason",
+        "_partial",
+        "prepare_study",
+        "_occasion",
+        "run_study"
+      ],
+      "publication_extraction_receipt": "pol02-launch-extraction-review.json"
+    },
+    "sources": {
+      "buddha/policy_launch.py": "208812dab29bea7e4f50b800333971bc8df926eed1394aca8bde97b843c55015",
+      "buddha/policy_results.py": "42a988ec75a6a8ce192999f275cc3d313a7c0ea2252d1de6e0d8b8630c520b01",
+      "buddha/policy_run.py": "c009d60c720946db2512b2ce7e9e208f69d3b80a4c2483f16bed930aa1eaaafd",
+      "docs/POLICY-LAUNCH.md": "8a89a5a8c3b0554bd75d57c511b97bcd4b10ff10e87446129ec382b4d6c83347",
+      "docs/conformance/pol02-run.py": "331f370f941c373a6a6f3f51fc98e4246b3ed8dfb2ad25cf5ad9174b1cdbe9c2",
+      "tests/test_policy_launch.py": "bf07ed0b41eedd2d835d99b9d56f36e0d57a141aab29093d1d6e775aac5c3bb7"
+    },
+    "validation": {
+      "final_inactive_guard_green": "1PASS6.406s/0skips/0sends/ResourceWarnings-as-errors at finalpins",
+      "first19": "19PASS71.237s/0skips/ResourceWarnings-as-errors at historical9247/c009/08e0 pins",
+      "inactive_guard_red": "1FAIL4.951s/0sends; future zero-op valid control allowed then retired owner falselyaccepted",
+      "narrow_quality": "Ruff lint+format5files, strictMypy win32/linux3packagefiles, Bandit4productionfiles PASS; toolf752cd finalquality beforetargetedGREEN",
+      "original_scientific_callers": "parent3PASS261.675s/0skips before inactive flag; all179Python inputs stable, default custody/projection bodies unchanged afterward"
+    }
+  },
+  "format": "buddha.policy-operator-handoff-review.v1",
+  "limitations": [
+    "Short fixed synthetic HTTPS replies and one cooperative known-reply interruption only; no real provider access, invoice, funding, latency, repair/fallback or scientific claim.",
+    "Original operator179/old Gateway source identity only; the later exact-byte cache is a separate revision and is not the source executed by this proof.",
+    "Capture maxima are maxima across snapshots, not sums; tree entries include directories and tree bytes exclude external consumed inputs. Unique consumed bytes are a separate1GiB domain, with32MiB default JSON,64MiB ordinary-file and512MiB database ceilings.",
+    "Observed payload/cardinality success is not a worst-case output,4096-attempt, unlimited-recovery, total-memory or new SQLite/layout guarantee; unchanged guards remain fail-closed. Socket timeouts are not total-request deadlines; a synchronous paid callback may outlast the worker wall limit during unwind.",
+    "Historical focused/source receipts preserve their original pins and pending statements; final-source coverage comes from the179-input full regression.",
+    "Final-head hosted CI, concrete account/runtime/source review and approved allocation remain separate gates; existing closed grants are not reused."
+  ],
+  "regression_quality_independent_join_sha256": "b1016b7a01fc74d20683ea6713a4030bd0bd15da942db1cd49a4ebe20ea89117",
+  "source_commit": "18c9c2f6fac9ea59a7c9d53c56447ccc495f8f0b",
+  "status": "bounded original-source offline gate passed"
+}
