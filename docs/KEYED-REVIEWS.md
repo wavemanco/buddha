@@ -3,8 +3,9 @@
 A saved account review lets Buddha check that a request uses the key intended
 for that experiment. The review contains a fingerprint, never the key itself.
 This slice adds the keyed review required by [DESIGN section 9](DESIGN.md#9-paid-operation-integrity)
-to the existing Gateway and source-search path. It does not yet provide a
-funded source launcher or a command to start a new experiment.
+to the existing Gateway and source-search path. The [source launcher](SOURCE-LAUNCH.md)
+now binds it to the approved launch. A concrete funded source handoff remains
+unprepared and no new spending is allocated.
 
 ## What changes for the operator
 
@@ -13,8 +14,8 @@ already supplied locally. Key entry and cleanup continue to use the existing
 hidden-input mechanism. No key file, persistent environment setting or new
 dependency is introduced.
 
-The future source launcher must bind the fingerprint to its exact approved
-launch configuration. Changing that configuration or using a different key
+The source launcher binds the fingerprint to the exact approved launch bytes.
+Changing that configuration or using a different key
 must stop execution before a request is sent. A launch-context hash is a
 consistency check; it does not grant spending permission.
 
@@ -68,8 +69,9 @@ checks remain separate regression evidence.
 eleven new checks, 70 legacy methods, seven quality checks, earlier failures
 and exact scope. Full hosted Linux/Windows results remain separate.
 
-The source launcher must still bind the approved context, validate original
-owners before key entry, provide progress and partial-result receipts, and
-complete its capacity/recovery checks. The [living plan](PLAN.md) remains the
+The launcher now checks the approved context and original owners before key
+entry and supplies progress and partial-result receipts. The concrete full
+experiment still needs its capacity/recovery rehearsal and funded handoff.
+The [living plan](PLAN.md) remains the
 scheduling authority. This slice allocates no money and changes no benchmark
 rules, official scores or historical run records.

@@ -109,6 +109,10 @@ initial experiment without creating spending authority or execution records.
 The [first source-experiment proposal](docs/SOURCE-EXPERIMENT.md) now fixes
 three development tasks and a three-iteration inherited-source study. Its
 proposed $25 / 512-attempt cap remains unallocated; no live command is ready.
+The [protected source launcher](docs/SOURCE-LAUNCH.md) now joins approved funding,
+original-owner checks, hidden keys, progress and explicit partial results through
+the existing controller. The concrete full-schedule rehearsal and separately
+approved funded handoff remain required before a live source run.
 The [source-evolution backlog context](docs/BACKLOG.md) records the intended Python
 code and inherited-improver endpoint, the current gap and its existing plan gates.
 

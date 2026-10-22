@@ -45,6 +45,30 @@ class SourceSearchError(ReleaseError):
     """The original search, fixed comparison or retained custody is invalid."""
 
 
+class SourceSearchStopped(SourceSearchError):
+    """Protocol stop carrying the exact durably saved partial observation."""
+
+    def __init__(self, partial: dict[str, object]):
+        self._partial = _json(partial)
+        super().__init__("source execution stopped; original saved observation retained")
+
+    @property
+    def partial(self) -> dict[str, object]:
+        return _load(self._partial)
+
+
+class SourceSearchInterrupted(KeyboardInterrupt):
+    """Cancellation carrying saved evidence without scanning a latest log."""
+
+    def __init__(self, partial: dict[str, object]):
+        self._partial = _json(partial)
+        super().__init__("source execution cancelled; original saved observation retained")
+
+    @property
+    def partial(self) -> dict[str, object]:
+        return _load(self._partial)
+
+
 def _checked[**P, T](function: Callable[P, T]) -> Callable[P, T]:
     @wraps(function)
     def checked(*args: P.args, **kwargs: P.kwargs) -> T:
@@ -874,11 +898,9 @@ def run_source_search(directory: Path, *, transport: RawHTTPTransport) -> dict[s
                 {row["run_id"] for row in state["owners"]},
             )
         except KeyboardInterrupt:
-            observe("cancelled", child)
-            raise
+            raise SourceSearchInterrupted(observe("cancelled", child)) from None
         except (ValueError, TypeError, KeyError, OSError, RecursionError):
-            observe("protocol", child)
-            raise
+            raise SourceSearchStopped(observe("protocol", child)) from None
 
 
 @_checked

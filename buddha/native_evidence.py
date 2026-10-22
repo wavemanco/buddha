@@ -174,6 +174,22 @@ class NativeEvidence:
         answers: Path,
         available: dict[str, Path],
     ) -> None:
+        expected = self.native_configuration(child, index, answers, available)
+        if (
+            report["descriptor_sha256"] != expected["descriptor_sha256"]
+            or report["command_sha256"] != expected["command_sha256"]
+            or _object(report["execution"])["image_id"] != expected["image_id"]
+        ):
+            raise self.error_type("native command/configuration lineage differs")
+
+    def native_configuration(
+        self,
+        child: Path,
+        index: int,
+        answers: Path,
+        available: dict[str, Path],
+    ) -> dict[str, object]:
+        """Check an original command and inputs, including an unsealed owner."""
         owner = self.owner(child / "owners" / str(index))
         descriptor = child / ("command-" + str(index) + ".json")
         raw = self.bound(owner, descriptor)
@@ -236,11 +252,13 @@ class NativeEvidence:
             or not _same(worker, expected_worker)
             or not _same(description["executor"], expected_executor)
             or not _same(description["profiles"], {} if last else native["profiles"])
-            or report["descriptor_sha256"] != _sha(raw)
-            or report["command_sha256"] != expected_command["sha256"]
-            or _object(report["execution"])["image_id"] != expected_executor["image_id"]
         ):
             raise self.error_type("native command/configuration lineage differs")
+        return {
+            "descriptor_sha256": _sha(raw),
+            "command_sha256": expected_command["sha256"],
+            "image_id": expected_executor["image_id"],
+        }
 
 
 def authority_observation(
