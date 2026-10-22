@@ -71,9 +71,9 @@ The [keyless proposal checker](docs/POLICY-HANDOFF.md) joins original
 publications, selected files and model profiles without creating a run or
 allocating money. The [protected launcher](docs/POLICY-LAUNCH.md) checks the
 approved destination and funding before hidden key entry, then prepares or
-recovers the original study and owners. Concrete account/runtime review and
-separately approved funding remain required before actual execution; the
-current cost envelope is unallocated. Configuration and key entry do not
+recovers the original study and owners. The user has separately approved the
+new $50 / 4,096-attempt POL-02 comparison, and its frozen cached-checkout handoff
+is prepared. Actual results await the user's local execution. Configuration and key entry do not
 confirm provider access. Actual answers and supplemental reviews require real
 saved generation. The live comparison and human scientific assessment remain
 open.
@@ -85,16 +85,20 @@ calls and completion. The [inherited source route](docs/SOURCE-IMPROVEMENT.md)
 can run a parent's proposal procedure and materialize a separate child. A confined
 synthetic chain exercises child generation, the child's inherited improver and
 a runnable grandchild. Materialization alone does not establish competence;
-parent selection, archive admission and measured improvement remain open.
+its broader search and scientific gates remain open.
 The [source-to-native connection](docs/SOURCE-ASSESSMENT.md) now anchors one
 candidate's literal C1 answers for fresh official native assessment through the
 existing evaluator, with separate generation and judging owners. It keeps zero,
 one or many model callbacks distinct from answer count and preserves original
 source/accounting identities. Its confined proof passes with 23 synthetic
 replies, two fresh official judging occasions and keyless replay; the second
-occasion consumes saved C1 after producer retirement. Final hosted checks remain
-pending. Common screening, archive integration, source search and a model-authored
-experiment remain open.
+occasion consumes saved C1 after producer retirement. Its hosted Linux and Windows
+regressions pass. The separate [common development screen](docs/SOURCE-SCREEN.md) now
+compares source candidates on the same ordered development tasks, verifies saved
+official results and admits only complete usable measurements to exploratory
+parent selection. It preserves official scores and records unusable results
+without selecting them. The complete proposal/feedback/source-search loop and
+an actual model-authored experiment remain open.
 The [source-evolution backlog context](docs/BACKLOG.md) records the intended Python
 code and inherited-improver endpoint, the current gap and its existing plan gates.
 

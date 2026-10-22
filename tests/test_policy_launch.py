@@ -136,6 +136,30 @@ class PolicyLaunchTests(unittest.TestCase):
             self.check()
         self.assertEqual(list(self.f.directory.iterdir()), [])
 
+    def test_extracted_native_custody_helper_requires_its_original_launch_pin(self):
+        helper = (
+            Path(policy_launch.policy_results.__file__).absolute().with_name("native_evidence.py")
+        )
+        expected = sha(helper.read_bytes())
+        self.record["source_sha256"][str(helper)] = expected
+        self.assertEqual(self.check()["state"], "fresh")
+        for supplied in (None, "0" * 64):
+            with self.subTest(supplied=supplied):
+                if supplied is None:
+                    self.record["source_sha256"].pop(str(helper))
+                else:
+                    self.record["source_sha256"][str(helper)] = supplied
+                try:
+                    with self.assertRaises(PolicyLaunchError):
+                        self.check()
+                finally:
+                    self.record["source_sha256"][str(helper)] = expected
+        checked = self.check()
+        self.assertEqual(checked["bindings"][str(helper)], expected)
+        self.assertEqual(self.f.fixture.physical_sends, 0)
+        self.assertFalse(self.review.exists())
+        self.assertFalse(self.f.directory.exists())
+
     def test_live_and_manual_account_confirmation_gate_precede_key_entry(self):
         pin = self.save()
         for options in ({}, {"live": True}):

@@ -28,13 +28,16 @@ The implemented parts are separate:
 | Part | What it does today | What it does not yet do |
 | --- | --- | --- |
 | [Policy search](../buddha/search.py) and [policy schema](../buddha/policy.py) | A fixed proposer changes `instructions` and `sampling`, evaluates policies and retains lineage. The completed live pilots exercised this restricted path. | Author or inherit changed Python implementations. |
-| [Source candidate runner](../buddha/candidate_run.py) | Runs selected generation and inherited proposal procedures in isolation; materializes a separate child with lineage under host-owned accounting. A synthetic parent/child/grandchild chain passes. The [source-to-native adapter](SOURCE-ASSESSMENT.md) connects one-task C1 to existing native assessment and passes a bounded synthetic confined proof; final hosted checks remain pending. See [generation](SOURCE-CANDIDATES.md) and [improvement](SOURCE-IMPROVEMENT.md). | Select parents, apply a common development screen, admit/promote children to an archive, run source search, or demonstrate an effective changed improver or model-authored improvement. |
+| [Source candidate runner](../buddha/candidate_run.py) | Runs selected generation and inherited proposal procedures in isolation; materializes a separate child with lineage under host-owned accounting. A synthetic parent/child/grandchild chain passes. The [source-to-native adapter](SOURCE-ASSESSMENT.md) connects one-task C1 to existing native assessment and passes a bounded synthetic confined proof; its hosted Linux and Windows regressions pass. The [common development screen](SOURCE-SCREEN.md) now checks fixed-task native results and guarded exploratory parent eligibility/selection; its two-source/two-task confined proof passes, while final hosted checks remain pending. See [generation](SOURCE-CANDIDATES.md) and [improvement](SOURCE-IMPROVEMENT.md). | Connect source proposal, feedback, evaluation and selection into the inherited search loop, promote children scientifically, run a model-authored source experiment, or demonstrate a competent changed improver and its effectiveness. |
 | [Native policy study controller](../buddha/policy_run.py) | Runs the frozen policy conditions through the baseline and official native assessment pipeline. | Propose children or invoke the source candidate runner as an evolutionary loop. |
 
-The one-file inherited execution path and single-task native connection are
-implemented at their stated scope. Parent selection, a common development screen,
-archive admission/promotion, source search and a model-authored experiment remain
-open; the native connection still requires its final hosted checks.
+The one-file inherited execution path, single-task native connection and common
+development screen with exploratory parent selection are implemented at their
+stated scope. The screen's bounded synthetic confined proof passes; its final
+hosted checks remain pending. The earlier native connection's Linux and Windows
+regressions pass.
+Connecting source proposals to screened feedback and subsequent inherited mutations, scientific
+promotion, source search and a model-authored experiment remain open.
 Python execution support alone is not source self-improvement; changing prompt
 text alone is policy optimization. Neither demonstrates a better improver.
 

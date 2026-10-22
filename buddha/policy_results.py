@@ -8,21 +8,19 @@ import base64
 import hashlib
 import re
 import sqlite3
-import stat
-from contextlib import closing
 from pathlib import Path
 from typing import cast
 
 from buddha.answers import TaskSet
 from buddha.common import _canonical
-from buddha.doctor import _authority, _Busy, _Capture, _Owner, _owner, _Unsupported
+from buddha.doctor import _authority, _Busy, _Owner, _Unsupported
 from buddha.gateway_history import HistoricalGatewayOperation
 from buddha.native_evaluation import _read_generation
+from buddha.native_evidence import NativeEvidence, authority_observation
 from buddha.native_pipeline import validate_authorization_snapshot
 from buddha.policy_analysis import PolicyResultsError, analyze_metrics
 from buddha.policy_study import PolicyStudy, validate_intent
 from buddha.releases import (
-    MAX_JSON_BYTES,
     Release,
     Selection,
     _digest,
@@ -33,7 +31,7 @@ from buddha.releases import (
     _root,
     _text,
 )
-from buddha.search_evidence import MAX_FILE_BYTES, _absolute
+from buddha.search_evidence import _absolute
 from buddha.wire import RawEnvelope, WireError, decoded_body, extract_usage
 from buddha.wire import _text as _wire_text
 
@@ -398,32 +396,9 @@ def _cost_report(
     }
 
 
-class _Reader:
+class _Reader(NativeEvidence):
     def __init__(self, directory: Path, authorization: Path):
-        self.root, self.authorization = directory, authorization
-        self.capture = _Capture(directory)
-        self.owners: dict[Path, _Owner] = {}
-        self.seals: dict[Path, str] = {}
-
-    def raw(self, path: Path, expected: object = None) -> bytes:
-        raw = self.capture.read(path, MAX_JSON_BYTES)
-        if expected is not None and _sha(raw) != _digest(expected):
-            raise PolicyResultsError("retained input differs from its original digest")
-        return raw
-
-    def record(self, path: Path, expected: object = None) -> dict[str, object]:
-        return _load(self.raw(path, expected))
-
-    def owner(self, path: Path) -> _Owner:
-        if path not in self.owners:
-            self.owners[path] = _owner(self.capture, path)
-        return self.owners[path]
-
-    def bound(self, owner: _Owner, path: Path) -> bytes:
-        bindings = _bindings(owner)
-        if str(path) not in bindings:
-            raise PolicyResultsError("required data was not an original invocation input")
-        return self.raw(path, bindings[str(path)])
+        super().__init__(directory, authorization, error_type=PolicyResultsError)
 
     def definition(self, anchor: _Owner) -> tuple[PolicyStudy, dict[str, object]]:
         context = _object(
@@ -615,193 +590,7 @@ class _Reader:
                 or owner.manifest["authorization_path"] != str(self.authorization)
             ):
                 raise PolicyResultsError("study owner runtime or authority differs")
-        inactive = {row["run_id"] for row in _rows(funding["auth_deactivations"])}
-        amounts = {identifier: dict.fromkeys(_AMOUNTS, 0) for identifier in self.funded_runs}
-        for operation in _rows(funding["auth_operations"]):
-            values = amounts[str(operation["run_id"])]
-            values["operation_count"] += 1
-            key = "spent_microusd" if operation["status"] == "completed" else "reserved_microusd"
-            value = (
-                operation["actual_microusd"]
-                if operation["status"] == "completed"
-                else operation["reserve_microusd"]
-            )
-            values[key] += cast(int, value)
-            values["committed_microusd"] += cast(int, value)
-        # The source database is never opened. Its exact schema/rows were already
-        # validated by _authority; this memory connection supplies only the event count.
-        with closing(sqlite3.connect(":memory:")) as connection:
-            connection.deserialize(self.capture.raw[self.authorization])
-            connection.execute("PRAGMA query_only=ON")
-            connection.execute("PRAGMA trusted_schema=OFF")
-            events = connection.execute("SELECT COUNT(*) FROM auth_events").fetchone()[0]
-        totals = _object(funding["totals"])
-        self.current = {
-            **{
-                key: config[key]
-                for key in (
-                    "authorization_id",
-                    "budget_microusd",
-                    "max_calls",
-                    "scope",
-                    "terms_sha256",
-                )
-            },
-            **totals,
-            "available_microusd": max(
-                0, cast(int, config["budget_microusd"]) - cast(int, totals["committed_microusd"])
-            ),
-            "remaining_calls": max(
-                0, cast(int, config["max_calls"]) - cast(int, totals["operation_count"])
-            ),
-            "runs": [
-                row
-                | {"active": not row["historical"] and identifier not in inactive}
-                | amounts[identifier]
-                for identifier, row in sorted(self.funded_runs.items())
-            ],
-            "event_count": events,
-        }
-
-    def stage(self, child: Path, index: int, *, baseline: bool) -> tuple[dict[str, object], Path]:
-        owner = self.owner(child / "owners" / str(index))
-        path = child / "completed" / (str(index) + ".json")
-        raw = self.raw(path)
-        digest = _sha(raw)
-        seal = _object(_load(raw), {"format", "index", "owner_sha256", "attempt", "files"})
-        prefix = "baseline" if baseline else "native evaluation"
-        anchors = [
-            row["reason"]
-            for row in _rows(self.funded["auth_deactivations"])
-            if row["run_id"] == owner.run_id
-        ]
-        if (
-            seal["format"]
-            != ("buddha.baseline-stage.v1" if baseline else "buddha.native-evaluation-stage.v1")
-            or type(seal["index"]) is not int
-            or seal["index"] != index
-            or seal["owner_sha256"] != owner.manifest_sha256
-            or anchors != [prefix + " completed: " + digest]
-            or any(op.status != "completed" for op in owner.operations)
-        ):
-            raise PolicyResultsError("stage lacks its original completion anchor")
-        relative = _path(seal["attempt"])
-        if not re.fullmatch(rf"attempts/{index}-(?:0|[1-9][0-9]*)", relative):
-            raise PolicyResultsError("sealed attempt belongs to another stage")
-        attempt = child / relative
-        files = _object(seal["files"])
-        prefix = attempt.relative_to(self.root).as_posix() + "/"
-        actual = {
-            name[len(prefix) :]
-            for name in self.capture.entries
-            if name.startswith(prefix) and stat.S_ISREG((self.root / name).lstat().st_mode)
-        }
-        if set(files) != actual or "report.json" not in files:
-            raise PolicyResultsError("sealed attempt inventory differs")
-        for name, expected in files.items():
-            value = self.capture.read(attempt / _path(name), MAX_FILE_BYTES)
-            if _sha(value) != _digest(expected):
-                raise PolicyResultsError("sealed attempt file differs")
-        report = self.record(attempt / "report.json")
-        if (
-            report.get("format")
-            != ("buddha.generation-report.v1" if index == 0 else "buddha.native-command-report.v1")
-            or report.get("status") != "complete"
-            or report.get("gateway_manifest_sha256") != owner.manifest_sha256
-            or not _same(report.get("gateway_totals"), {k: owner.accounting()[k] for k in _AMOUNTS})
-        ):
-            raise PolicyResultsError("stage report differs from its original owner")
-        for name, expected in _object(report["artifacts"]).items():
-            key = _path(name) if index == 0 else "artifacts/" + _path(name)
-            if files.get(key) != expected:
-                raise PolicyResultsError("reported artifact differs from its sealed bytes")
-        if index:
-            execution = _object(report["execution"])
-            if (
-                type(execution.get("exit_code")) is not int
-                or execution["exit_code"] != 0
-                or execution.get("cleanup_status") != "removed"
-                or _object(report["worker"]).get("status") != "complete"
-            ):
-                raise PolicyResultsError("native completion lacks successful owned cleanup")
-        self.seals[path] = digest
-        return report, attempt
-
-    def native(
-        self,
-        child: Path,
-        index: int,
-        report: dict[str, object],
-        answers: Path,
-        available: dict[str, Path],
-    ) -> None:
-        owner = self.owner(child / "owners" / str(index))
-        descriptor = child / ("command-" + str(index) + ".json")
-        raw = self.bound(owner, descriptor)
-        description = _object(_load(raw), {"format", "worker", "executor", "profiles"})
-        worker = _object(description["worker"])
-        command = _rows(self.release.to_record()["commands"])[index - 1]
-        expected_command = {
-            "index": index - 1,
-            "module": command["module"],
-            "argv": [
-                "/scratch/artifacts" if x == "{artifacts}" else x
-                for x in cast(list[str], command["argv"])
-            ],
-        }
-        expected_command["sha256"] = _sha(_json(expected_command))
-        native = _object(self.template["native"])
-        selected = Selection.from_bytes(_json(native["selection"]))
-        components = _object(selected.to_record()["components"])
-        inputs = _object(_rows(self.template["stages"])[index - 1])["inputs"]
-        expected_inputs = []
-        for ordinal, name in enumerate(cast(list[str], inputs)):
-            source = child / "staging" / str(index) / (str(ordinal) + ".bin")
-            source_raw = self.bound(owner, source)
-            if source_raw != self.raw(available[name]):
-                raise PolicyResultsError("native stage consumed another input")
-            expected_inputs.append(
-                {"source": source.name, "destination": name, "sha256": _sha(source_raw)}
-            )
-        expected_worker = {
-            "type": "configure",
-            "format": "buddha.native-worker.v1",
-            "command": expected_command,
-            "release_sha256": self.release.fingerprint(),
-            "answers_sha256": _sha(self.raw(answers)),
-            "roots": {
-                "official": "/official",
-                "runner": "/runner",
-                "environment": "/opt/venv",
-                "inputs": "/inputs",
-                "artifacts": "/scratch/artifacts",
-            },
-            "inventories": {
-                "official": components["official"],
-                "runner": components["runner"],
-                "environment": native["environment"],
-            },
-            "inputs": expected_inputs,
-            "hooks": native["hooks"],
-        }
-        last = index == len(_rows(self.template["stages"]))
-        expected_executor = _object(native["executor"]) | {
-            "mounts": [
-                ["/official", _object(native["roots"])["official"]],
-                ["/runner", _object(native["roots"])["runner"]],
-                ["/inputs", str(child / "staging" / str(index))],
-            ]
-        }
-        if (
-            description["format"] != "buddha.native-command.v1"
-            or not _same(worker, expected_worker)
-            or not _same(description["executor"], expected_executor)
-            or not _same(description["profiles"], {} if last else native["profiles"])
-            or report["descriptor_sha256"] != _sha(raw)
-            or report["command_sha256"] != expected_command["sha256"]
-            or _object(report["execution"])["image_id"] != expected_executor["image_id"]
-        ):
-            raise PolicyResultsError("native command/configuration lineage differs")
+        self.current = authority_observation(self.capture, self.authorization, funding)
 
 
 def inspect_prepared_study(
