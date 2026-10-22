@@ -14,7 +14,7 @@ from typing import cast
 from buddha import native_pipeline as pipeline
 from buddha.answers import Answers, TaskSet, _utf8
 from buddha.authorization import Authorization
-from buddha.doctor import _authority, _Busy, _Capture, _owner
+from buddha.doctor import _authority, _Busy, _Capture, _owner, _Unsupported
 from buddha.gateway import (
     Gateway,
     RawHTTPTransport,
@@ -54,7 +54,15 @@ def _checked[**P, T](function: Callable[P, T]) -> Callable[P, T]:
     def checked(*args: P.args, **kwargs: P.kwargs) -> T:
         try:
             return function(*args, **kwargs)
-        except (ValueError, TypeError, KeyError, OSError, RecursionError, _Busy) as error:
+        except (
+            ValueError,
+            TypeError,
+            KeyError,
+            OSError,
+            RecursionError,
+            _Busy,
+            _Unsupported,
+        ) as error:
             if isinstance(error, CandidateGenerationError):
                 raise
             raise CandidateGenerationError("candidate generation evidence is invalid") from None

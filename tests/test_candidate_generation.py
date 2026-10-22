@@ -19,6 +19,7 @@ from buddha.answers import Answers
 from buddha.executor import ExecutionResult, ExecutorError
 from buddha.gateway import Gateway, RawHTTPTransport
 from buddha.native_evaluation import EvaluationError, prepare_evaluation, run_evaluation
+from buddha.native_run import CHUNK_BYTES
 from buddha.releases import Release, ReleaseError, Selection, _json, inventory, prepare_selection
 
 
@@ -207,6 +208,9 @@ class CandidateGenerationTests(unittest.TestCase):
         self.physical_sends += connection.request.call_count
         return reply
 
+    def native_row(self, row, index):
+        return row
+
     def execute_native(self, spec, initial, handle):
         self.native_workers += 1
         index = initial["command"]["index"]
@@ -279,23 +283,34 @@ class CandidateGenerationTests(unittest.TestCase):
             ]
             for row in rows:
                 row["partition" if index == 0 else "score"] = [0, 1] if index == 0 else 7.0
+            # Preserve native diagnostic NaN controls formerly inserted by SourceScreen._file.
+            # Application finite-JSON and native framing guards remain unchanged.
             outputs = {
                 "partitions.jsonl" if index == 0 else "scores.jsonl": b"".join(
-                    _json(row) + b"\n" for row in rows
+                    json.dumps(
+                        self.native_row(row, index),
+                        sort_keys=True,
+                        separators=(",", ":"),
+                        allow_nan=True,
+                    ).encode()
+                    + b"\n"
+                    for row in rows
                 )
             }
         else:
             outputs = {"summary.json": self.summary}
         for name, body in outputs.items():
-            handle(
-                {
-                    "type": "file",
-                    "path": name,
-                    "offset": 0,
-                    "eof": True,
-                    "data_base64": base64.b64encode(body).decode(),
-                }
-            )
+            for offset in range(0, len(body) or 1, CHUNK_BYTES):
+                part = body[offset : offset + CHUNK_BYTES]
+                handle(
+                    {
+                        "type": "file",
+                        "path": name,
+                        "offset": offset,
+                        "eof": offset + len(part) == len(body),
+                        "data_base64": base64.b64encode(part).decode(),
+                    }
+                )
         handle({"type": "done", "status": "complete", "reason": "complete", "audit": audit})
         return self.execution(spec)
 

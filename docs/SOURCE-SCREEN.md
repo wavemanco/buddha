@@ -169,8 +169,11 @@ replies are mechanism controls, not an independent metric oracle, real model
 authorship, judge-accuracy or scientific improvement result. They do not establish
 maximum-output capacity or real provider access.
 
-Common screening does not yet connect proposal, feedback, mutation and parent
-selection into the complete inherited source-search loop. That remaining work and
+The separate [verified feedback bridge](SOURCE-FEEDBACK.md) can now extract a
+bounded development packet from an explicitly pinned complete screen, including
+complete screens with unusable metrics. Common screening and that extraction do
+not yet connect durable proposal execution, mutation and parent selection into
+the complete inherited source-search loop. That remaining work and
 the actual model-authored experiment stay under SRC-02 in the consolidated plan.
 Changed-improver competence and effectiveness remain separate open gates. POL-02
 remains the sole Next; the seven major remaining leaves keep their existing gates.

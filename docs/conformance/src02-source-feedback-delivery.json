@@ -1,0 +1,173 @@
+{
+  "format": "buddha.src02-source-feedback-delivery.v1",
+  "date": "2026-10-21",
+  "baseline_head": "b8fcdbdee76e6f3f418c87b754453f2d96d153fc",
+  "spec_sections": [
+    "DESIGN.md: main loop step 2; inherited development-feedback interface",
+    "SOURCE-IMPROVEMENT.md: development packet, original input binding and projected byte limits",
+    "PLAN.md: SRC-02 engineering prerequisite; scientific gates retained"
+  ],
+  "behavior": {
+    "builder": "Passively verify caller-pinned complete screen, original C1/native custody and dedicated owner totals; return detached prospective records.",
+    "writer": "Validate first; write NEW source/split/feedback/provenance files exclusively, retain failures and return refs only after checks.",
+    "projection": "Explicit noveltybench-1.1 only; no official regrouping, utility recomputation or semantic critique.",
+    "note_policy": {
+      "max_positions": 10,
+      "excerpt_utf8_bytes": 64,
+      "excerpt_canonical_json_bytes": 128,
+      "note_utf8_bytes": 4096,
+      "feedback_bytes": 1048576,
+      "projected_task_and_notes_bytes": 1048576,
+      "host_bundle_bytes": 33554432
+    },
+    "omissions": "Every original answer ordinal retains UTF8 hash/length and omitted bytes; quality/partition omissions explicit.",
+    "cost_scope": "Original per-task generation and native owner totals, not shared-grant total.",
+    "generic_consumer": "Existing CandidateSession accepts caller-reviewed notes; bridge/helper/provenance are not automatically enforced. Caller must bind exact inputs before execution."
+  },
+  "source_sha256": {
+    "buddha/source_feedback.py": "e911ec8f4fa72cbf3099db40c645c50edf6960d87966d1ff7dc2992fdfb185fa",
+    "buddha/candidate_generation.py": "f03d4f7fcdd9a33b359db53e2b67d9a29c5bc30375b0f5cffa20db8798ca59d0",
+    "tests/test_source_feedback.py": "851c77b1313c7a86c44af31b79cc6dc8e33ebc9a0fabd4a634195422a5141324",
+    "tests/test_candidate_generation.py": "c54b5843b055e0682a7308a050af5d35eb48a08cfa0245d61df5ef99cb44b5a9",
+    "tests/test_source_screen.py": "d80248e0822bf1323ebda03ff85d31afa8459cda209db0a0bd68b837cf73e205"
+  },
+  "focused_acceptance": {
+    "new_unique_methods": 13,
+    "scope": "Separate cohorts at their recorded source pins, not a final combined 13-method run.",
+    "first_cohort": {
+      "executed": 11,
+      "passed": 10,
+      "failed_setup": 1,
+      "unexecuted_writer_method": 1,
+      "runner_seconds": 176.665,
+      "evidence": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-source-search\\runs\\reviews\\source-feedback-focused-first.json",
+        "sha256": "c616d1676bdd3c9dd9688bfa8be9f669f2fe4916dc75ebdab9451e6cb99c0e62"
+      }
+    },
+    "fixture_correction": "Fake native emitter exceeded the existing 64KiB frame ceiling; one shared emitter now chunks literal artifacts, and its row transform occurs before emission. Production protocol guards unchanged.",
+    "corrected_targets": {
+      "passed": 2,
+      "runner_seconds": 40.165,
+      "evidence": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-source-search\\runs\\reviews\\source-feedback-targeted-fixture-corrections.json",
+        "sha256": "83c788ff4c7f8cbd9209fae225b5fca013b8801c542a60f7b7caa37d1c61c50c"
+      }
+    },
+    "typed_reader_regression": {
+      "red": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-source-search\\runs\\reviews\\source-feedback-unsupported-red.json",
+        "sha256": "5b2056dedb0beedb6e99f6a47f6d0694a841458053cc8171f4ed12ece5fbdd6b"
+      },
+      "red_runner_seconds": 10.945,
+      "fix": "Only add _Unsupported to existing candidate_generation shared error boundary/import.",
+      "green_passed": 1,
+      "green_runner_seconds": 14.721,
+      "green_boundaries": [
+        "public source reader",
+        "bridge after genuine inspection, third capture asserted"
+      ],
+      "green": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-source-search\\runs\\reviews\\source-feedback-unsupported-green.json",
+        "sha256": "508249a05bd20f38124cf8b8c00d8009c766af4675576ac2a7c853ea26ffb599"
+      },
+      "red_result": "Injected second-capture unsupported schema observation escapes public reader; failfast stopped before the bridge subtest."
+    },
+    "closing": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-source-search\\runs\\reviews\\source-feedback-acceptance-closing-review.json",
+      "sha256": "22a80c2cc0d8c67d3428d34adf34096ce0f33ee9afbcaae7a807b443946dafce"
+    },
+    "original_missing_api": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-source-search\\runs\\reviews\\source-feedback-missing-api-red.json",
+      "sha256": "33bc2fd0c7d5c5e458dc96ebe9636bfc790da18808e518fe2cdb7984f10e016e"
+    },
+    "candidate_session_scope": "Construction/validation and worker-input projection only; zero new improver execution."
+  },
+  "original_regression": {
+    "methods": 41,
+    "candidate_generation_runner_seconds": 58.265,
+    "source_screen_runner_seconds": 212.56,
+    "concurrent_process_wall_seconds": 212.975,
+    "source_count": 193,
+    "all_raw_sources_unchanged": true,
+    "evidence": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-source-search\\runs\\reviews\\source-feedback-original-regression.json",
+      "sha256": "490beecfcc61ce42500eedaead32cb47547d6602aa73c8f165cc513ec9d3972a"
+    }
+  },
+  "saved_synthetic_evidence": {
+    "screens": 2,
+    "tasks": 4,
+    "literal_answers": 40,
+    "original_files": 221,
+    "original_entries": 380,
+    "original_bytes_unchanged": true,
+    "new_packet_files": 8,
+    "new_workers": 0,
+    "new_calls": 0,
+    "accounting_writes": 0,
+    "recorded_task_costs_microusd": [
+      [
+        60,
+        60
+      ],
+      [
+        55,
+        55
+      ]
+    ],
+    "source_scope": "Proof before the later typed-error/import and test-fixture changes; exact pins retained in its own record.",
+    "proof": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-source-search\\runs\\reviews\\source-feedback-saved-synthetic-proof-v2.json",
+      "sha256": "4851b6ba16a01f7a10b0a193a51308371b426205403145e737122dfa2aca0a2b"
+    },
+    "initial_checker_failure": "First comparator used ensure_ascii=False rather than repository canonical JSON; retained failed harness and first new packet. No product defect or full post-bracket claimed for that attempt.",
+    "initial_exit": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-source-search\\runs\\reviews\\source-feedback-saved-synthetic-proof-exit.json",
+      "sha256": "0335b207fae5833477e8f6d4a866f6cabb076eda218dc9c74b899d83e8460e1a"
+    }
+  },
+  "quality": {
+    "checks": 7,
+    "passed": 7,
+    "wall_seconds": 19.018,
+    "python_inputs": 193,
+    "unchanged": true,
+    "evidence": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-source-search\\runs\\reviews\\source-feedback-final-quality.json",
+      "sha256": "d5d63bec9adc403a2db19c9098e7d73e40855cf419995978584454025d9798b6"
+    },
+    "earlier_quality_scope": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-source-search\\runs\\reviews\\source-feedback-quality.json",
+      "sha256": "f8f244f7c0dddc93ab2bc6a041f425535a0b3008e3db5f3d56d7473f279a9aff"
+    }
+  },
+  "collection": {
+    "unique_tests": 1426,
+    "loader_errors": 0,
+    "executed_test_bodies": 0,
+    "evidence": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-source-search\\runs\\reviews\\source-feedback-test-collection.json",
+      "sha256": "4265bc4fd956ece4f29df608840a5be927ec1dc3e15a814a72ca47a4bae0776d"
+    }
+  },
+  "preservation": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-source-search\\runs\\reviews\\source-feedback-preservation.json",
+    "sha256": "114743aad58443981028720e9500582b3e2d673ea9ef3eb71df308748903e69e"
+  },
+  "independent_review": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-source-search\\runs\\reviews\\source-feedback-final-diff-independent-review.json",
+    "sha256": "5c1a3b69ae0be82421356a0bb2a8e2d60600b6384c0c1c665f995103b4c2bbaa"
+  },
+  "fixture_assertion_preservation": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-source-search\\runs\\reviews\\source-feedback-shared-fixture-final-ast-review.json",
+    "sha256": "f591493c3069fd84c313180b574d52c50b2a76a53c8b7b76edf4892396ee2e44"
+  },
+  "limits": [
+    "No full final local repository suite; hosted final-head Linux/Windows pending.",
+    "No paid call, new actual allocation, key read or actual POL02 grant-state read.",
+    "No fresh improver execution, durable proposal controller, full inherited source-search loop, model-authored experiment or scientific improvement.",
+    "Earlier synthetic proof and scoped cohorts retain their actual source pins; resource ceilings are not maximum-size runtime guarantees.",
+    "POL-02 remains sole Next; SRC-02 remains In progress; seven major leaves remain."
+  ]
+}
