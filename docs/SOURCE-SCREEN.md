@@ -13,6 +13,13 @@ This is a library interface for the source-evolution controller. It does not add
 a command for starting another funded experiment. The separately approved POL-02
 handoff keeps using its original frozen checkout.
 
+The prospective `buddha.source-screen.v2` also supports the
+[bounded source-search controller](SOURCE-SEARCH.md). It records a checked
+candidate execution failure as a separate terminal outcome, with no invented
+answers or numeric score. Its explicit generation version 2 and original
+completion anchors keep that outcome separate from incomplete requests. Version
+1 keeps its original strict behavior; old evidence is not reclassified.
+
 ## What happens in a screen
 
 1. Check the complete dataset, its development/validation/final split, the selected
@@ -120,6 +127,10 @@ bytes; supplying a new hash for a forged scalar does not make it valid evidence.
 
 ## Limits and current validation
 
+The figures below retain the original common-screen delivery's validation.
+The later failure-aware screen and composed loop have separate
+[validation and limits](SOURCE-SEARCH.md#python-interface-and-present-scope).
+
 A declaration permits at most 64 selected development tasks, 16 native stages
 and 256 planned owners. Each source remains one selected Python file under the
 existing 1 MiB source ceiling and 0–1,000 callback ceiling. Parent selection accepts
@@ -169,11 +180,15 @@ replies are mechanism controls, not an independent metric oracle, real model
 authorship, judge-accuracy or scientific improvement result. They do not establish
 maximum-output capacity or real provider access.
 
-The separate [verified feedback bridge](SOURCE-FEEDBACK.md) can now extract a
-bounded development packet from an explicitly pinned complete screen, including
-complete screens with unusable metrics. Common screening and that extraction do
-not yet connect durable proposal execution, mutation and parent selection into
-the complete inherited source-search loop. That remaining work and
-the actual model-authored experiment stay under SRC-02 in the consolidated plan.
+The separate [verified feedback bridge](SOURCE-FEEDBACK.md) extracts a bounded
+development packet from an explicitly pinned complete screen, including complete
+screens with unusable metrics. The [bounded source-search loop](SOURCE-SEARCH.md)
+now connects screening, measured feedback, durable proposal execution and parent
+selection. Its prospective screen v2 can also retain a checked failed child
+without inventing answers or metrics. Its own acceptance and confined rehearsal
+are recorded separately from the historical validation above.
+
+The actual model-authored experiment stays under SRC-02 in the consolidated plan.
 Changed-improver competence and effectiveness remain separate open gates. POL-02
-remains the sole Next; the seven major remaining leaves keep their existing gates.
+result review remains the sole Next; the seven major remaining leaves keep their
+existing gates.

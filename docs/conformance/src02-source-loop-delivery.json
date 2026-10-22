@@ -1,0 +1,341 @@
+{
+  "acceptance": {
+    "groups": {
+      "candidate_generation_outcome": 11,
+      "controller": 19,
+      "failure_feedback": 6,
+      "outer_failure_custody": 1,
+      "screen_outcome": 4
+    },
+    "original_groups": {
+      "feedback_and_proposal_stage": 26,
+      "session_and_generation": 46,
+      "source_screen": 20
+    },
+    "original_regression_methods": 92,
+    "original_scope": "Three scoped consumed-input windows, not one92-method or full-suite run. Broader unconsumed source changes and historical source differences remain in the engineering index.",
+    "single_final_pin_41_method_cohort": false,
+    "source_scopes": "Recorded disjoint cohorts at their own source/test pins. CGen5+1+5; screen3 lifecycle plus one final pure-format; custody1; feedback2+3+1; controller18 across1+7+2+7+1 then one final prewrite guard. Final-source composed behavior is separately covered by the actual rehearsal.",
+    "unique_new_methods": 41
+  },
+  "baseline_head": "0406723e0674769b404fadc97c4c5f776b072dd8",
+  "behavior": {
+    "candidate_generation": "Explicit prospective v2 distinguishes generated literal C1 from a clean checked worker-declared agent_error terminal. Existing v1 interpretation and worker protocol remain unchanged.",
+    "controller": "One fixed comparison, immutable iteration plans and packets, inherited selected-parent source, original-owner proposals/screens/decisions, checked archive admission and bounded iterations.",
+    "dispatch_guards": "Original grant path, review, local ceilings, source/control hashes and expected seed/child treatment are joined before dispatch; future/replaced owners and foreign common controls refuse.",
+    "feedback": "Ordered verified parent/proposal/failed-screen edges reach bounded literal notes with original hashes, costs and explicit omissions; original measured parent occasion is bound.",
+    "inspection": "Canonical original reports, literal artifacts, typed values, owner mirrors and inactive-owner anchors precede passive acceptance. Saved consistency is not provider or semantic attestation.",
+    "recovery": "Known replies reuse original owners; unknown liabilities, stopped/missing frames, cleanup and incomplete prefixes remain incomplete. Durable cancellation resumes the same root.",
+    "screening": "Ordered common development tasks retain complete original native results or a checked failed task and explicit unattempted suffix; incomplete/failed coverage cannot become a mean or eligible parent."
+  },
+  "collection": {
+    "bodies_executed": 0,
+    "duplicates": 0,
+    "full_local_suite": false,
+    "loader_errors": 0,
+    "new_ids": 41,
+    "original_ids": 1439,
+    "unique_ids": 1480
+  },
+  "confined_rehearsal": {
+    "accounting": {
+      "committed_microusd": 825,
+      "reserved_microusd": 0,
+      "same_total_across28_original_owners": true,
+      "spent_microusd": 825,
+      "unit": "synthetic ledger-recorded microusd under fixture profiles; not a live provider invoice or real grant charge"
+    },
+    "actual_workers": 28,
+    "answers_per_task": 10,
+    "approximately_minutes": 46.6,
+    "canned_official_measurements": {
+      "distinct": 10,
+      "intended_quality_score_controls_by_ordered_task": [
+        7,
+        3
+      ],
+      "same_controls_for_all_three_complete_candidates": true,
+      "saved_native_utility_by_ordered_task": [
+        7.0,
+        3.0000000000000004
+      ]
+    },
+    "current_proof_pin_domain": {
+      "additional_runtime_and_historical_controls": {
+        "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-source-loop\\docs\\conformance\\src01-runtime-environment.json": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+        "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-source-screen\\runs\\reviews\\source-screen-proof-evidence.json": "6b70cb3ffcbe7a386dcd963dfaf33fbef4ff44cfed194db64a587b2220e2fad5",
+        "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-source-screen\\runs\\reviews\\source-screen-proof-exit.json": "2bc7f1eac964ed08db7bcbaf94cde0482015b7d129240a3bb272bbbc24856b67",
+        "C:\\Users\\arvik\\code\\buddha\\runs\\src02-common-screen-proof-20261022\\screen-0\\screen.json": "1e4b2d2aa89717a8600f5ad7b2e4b3ff1bf9e1513d9623e69f9762f2ea5d0943"
+      },
+      "all_unchanged": true,
+      "count": 208,
+      "python_sources": 204
+    },
+    "development_tasks": 2,
+    "distinct_owned_container_ids": 28,
+    "driver": {
+      "path": "docs/conformance/src02-source-loop-probe.py",
+      "sha256": "cf471c0445d7d3d45d5ff0ec922fdc3494e87da5f9d4faea817cacaa9ffeaf82"
+    },
+    "finished_utc": "2026-10-22T08:50:12.913079+00:00",
+    "generation_procedures": [
+      "literal original order",
+      "rotate answers",
+      "interleave even and odd positions"
+    ],
+    "historical_distinct_proof_source_pins_unchanged": 208,
+    "host_candidate_execution": false,
+    "host_official_execution": false,
+    "improvement_procedure": "Later repaired source computes its target from parsed notes and forwards exact parent plus measured failure history in its actual callback. This is a procedural toy control, not improved-improver efficacy.",
+    "independent_actual_review": {
+      "reference": {
+        "path": "runs/reviews/source-loop-terminal-independent-review.json",
+        "sha256": "f13004a67f7722b036b282e9dd547126db9e2750ed6d4cffe287b69301218261"
+      },
+      "status": "pass_bounded_synthetic_actual_evidence"
+    },
+    "interruption": "Existing decision write completes, then one controlled host KeyboardInterrupt; original cancellation observation and completed prefix retained on continuation. No arbitrary hard-kill guarantee.",
+    "iterations": 3,
+    "keyless_complete_replay_extra_replies_workers": [
+      0,
+      0
+    ],
+    "mocked_physical_replies": 75,
+    "original_owners": 28,
+    "original_saved_synthetic_fixture_tree_unchanged": true,
+    "owned_cleanup_status": "all28 removed",
+    "owners_with_operations": 21,
+    "passive_inspection_extra_replies_workers": [
+      0,
+      0
+    ],
+    "phases": [
+      {
+        "new_replies": 25,
+        "new_workers": 10,
+        "phase": "interrupted-prefix"
+      },
+      {
+        "new_replies": 50,
+        "new_workers": 18,
+        "phase": "same-root-continuation"
+      },
+      {
+        "new_replies": 0,
+        "new_workers": 0,
+        "phase": "keyless-complete-replay"
+      },
+      {
+        "new_replies": 0,
+        "new_workers": 0,
+        "phase": "passive-inspection"
+      }
+    ],
+    "real_provider_calls": 0,
+    "replies_by_stage": {
+      "generation": 6,
+      "partition": 6,
+      "proposal": 3,
+      "score": 60
+    },
+    "retired_new_producer_programs_passive_read": "passed with literal retained program hashes and unchanged evidence; sealed descendant artifacts retained",
+    "sequence": [
+      "seed measured; proposed child fails before readiness",
+      "same eligible seed consumes verified failed-child history; repaired child measured",
+      "repaired child parses measured utilities, chooses weaker second task and proposes measured grandchild"
+    ],
+    "started_utc": "2026-10-22T08:03:56.158853+00:00",
+    "status": "pass",
+    "wrapper": {
+      "path": "runs/reviews/run-source-loop-actual-v2.py",
+      "sha256": "5d89fa611d7b3b836766e2653fa3ee493887d93ca4ed54734c3d9c82f49bff83"
+    },
+    "wrapper_wall_seconds": 2795.8625188999576,
+    "zero_operation_owners": 7,
+    "zero_operation_scope": "Six nonpaying summary owners and the failed-generation owner remain in the full census."
+  },
+  "date": "2026-10-22",
+  "failures_and_corrections": {
+    "actual_behavioral_findings": [
+      "Prospective host pre-ready failure and literal counter acceptance boundaries; later exact guards.",
+      "Passive source raw-manifest hash versus manifest-content seal mismatch.",
+      "Failed source outer captured authority anchor/publication join.",
+      "Failure history must bind exact measured parent occasion, not only equal source identity.",
+      "Five controller return/control/prefix guards and separate wrong-grant dispatch guard.",
+      "Prepared seed/child expected treatment joined before spending; rejection after callbacks was too late.",
+      "Redundant initial-lineage common binding refuses before directory creation."
+    ],
+    "harness_limits": [
+      "CGen extended-five child passed while broad wrapper map changed only two disjoint unconsumed feedback files; no all-final-map claim.",
+      "Early collector replaced socket class before SSL import, causing import errors; retained and corrected; no test bodies ran.",
+      "An unchanged-current-parent duplicate fixture was unreachable under the original mutation guard; corrected ancestor-duplicate fixture without weakening production.",
+      "Final pure-format test passed once; outer post-test newline parser failed. Qualified record uses separately durable pre-target collection map and actual current after-map.",
+      "Borrowed historical SQLite URI RED is a pure prior-probe guard control, not a new application bug.",
+      "Draft probe review-schema/callback-bytes/native-profile/owner-label mismatches were corrected before execution; draft static passes were not runtime passes."
+    ],
+    "setup_reds": "Missing modules, unsupported prospective formats and missing history keyword are API/setup errors, not implemented behavioral regression claims."
+  },
+  "format": "buddha.src02-source-loop-delivery.v1",
+  "limits": [
+    "No full local 1480-test execution; final-head hosted CI is pending and separate from collection/scoped regressions.",
+    "The 46.6-minute rehearsal demonstrates a practical latency limit in this environment; no isolated cause or completion forecast is established.",
+    "All proposal replies, failures and native judgments were scripted synthetic controls. No real model-authored source experiment, useful-diversity improvement or improved-improver scientific result.",
+    "The synthetic authorization and 825 microusd accounting establish no real funding allocation, live readiness, provider access or real grant usage.",
+    "One fixed two-task/three-iteration/count-ten execution is not a universal capacity or arbitrary recovery guarantee. Existing note, projection, file/tree, callback and allocation bounds still apply.",
+    "Clean worker-declared agent_error is preserved as observed failure; no independent exception or invalidity oracle.",
+    "Native official code and formulas remain unchanged and execute only inside the evaluator image. Synthetic requests do not establish semantic judging accuracy.",
+    "Passive evidence establishes bounded saved-byte consistency, not authenticity against a host controlling every original authority/artifact.",
+    "The earlier engineering index is a historical pre-proof index. This delivery adds the completed actual rehearsal and its separately scoped independent raw-evidence review.",
+    "Host imports used ordinary isolated Python with -B; imported bytecode was not separately sealed. The evidence checks raw source bytes and reviewed-driver outcomes, not an imported-bytecode map or host-compromise resistance."
+  ],
+  "local_evidence": {
+    "actual_exit": {
+      "path": "runs/reviews/source-loop-actual-exit-v2.json",
+      "sha256": "ee1ca2c5e9b9f5ed7a3020a837ee03a2913699f7989e8dbc00645234b6daa3a5"
+    },
+    "actual_process": {
+      "path": "runs/reviews/source-loop-actual-process-v2.json",
+      "sha256": "39f8c236d4ab685421e2b03af29d390ed38731d91b6372e81531b902ad881ee0"
+    },
+    "actual_proof": {
+      "path": "runs/reviews/source-loop-actual-evidence-v2.json",
+      "sha256": "88c18f7d52ec70475eda7c6cc70a4e8fc6c74c00ad2749cdf2eb5e820bc5a19b"
+    },
+    "actual_raw_log": {
+      "path": "runs/reviews/source-loop-actual-v2.log",
+      "sha256": "b59f6da8445baa330f5f0964b40502b22190b9d81fc128cbae911792e189a3cf"
+    },
+    "actual_source_map": {
+      "path": "runs/reviews/source-loop-actual-sources-v2.json",
+      "sha256": "c969a4c27f2c0e9ee7ea34100e49035aa0c091bb5c0062193abe5ea44b9a1545"
+    },
+    "collection_preservation": {
+      "path": "runs/reviews/source-loop-collection-preservation-final-v2.json",
+      "sha256": "9d42afe11d1c1b937d00460563779734f2c868eaac050c3b4522c4c4746026dd"
+    },
+    "controller_first18": {
+      "path": "runs/reviews/source-search-acceptance-closing.json",
+      "sha256": "3dc0af7629ca21b0f174314bfa5cdf1aa3893a4f95abf62027113a19b8623ec3"
+    },
+    "controller_guard19": {
+      "path": "runs/reviews/source-search-lineage-common-acceptance.json",
+      "sha256": "303e8569c2ef966fa1a9e99430ba14a4ac051b0eec3ec12dc2763df52ad8e12f"
+    },
+    "engineering_index": {
+      "path": "runs/reviews/source-loop-engineering-evidence-index.json",
+      "sha256": "8e1fa7100a3901d4baf46c9cb66c08aa30265bbbe3ec734653baa728e4267d0c"
+    },
+    "failure_feedback": {
+      "path": "runs/reviews/source-failure-feedback-final-scoped.json",
+      "sha256": "0d8e36f532de3f23b7b246c16210c06db25228400e1c9442c9c9db3fa5255a0b"
+    },
+    "generation_acceptance": {
+      "path": "runs/reviews/candidate-generation-v2-acceptance-closing.json",
+      "sha256": "294fb53df9f715bcb27657c6427cccba9593bc55d5dd7405d185b9a3a33b4230"
+    },
+    "original_feedback_stage_regressions": {
+      "path": "runs/reviews/source-loop-original-feedback-stage-independent-join.json",
+      "sha256": "a981d0edaee8867d5e49e4b527abaa848ac8bb327228464e1e97210068e3e438"
+    },
+    "original_generation_regressions": {
+      "path": "runs/reviews/source-loop-original-generation-regressions.json",
+      "sha256": "47380997ad00585b447a7a6356ce480f956225eda452668bede28510da924f28"
+    },
+    "original_screen_regressions": {
+      "path": "runs/reviews/source-loop-original-screen-regressions.json",
+      "sha256": "90b3d49a0e5348fac05424fe15b78316b40e27229702ac7f05609e9fd21c0a81"
+    },
+    "outer_failure_custody": {
+      "path": "runs/reviews/source-failure-outer-custody-green.json",
+      "sha256": "c33631165a4ff5e58b4c3751b620c4bf68ea61207c4d592bfe8aed3724baff05"
+    },
+    "prelaunch": {
+      "path": "runs/reviews/source-loop-actual-prelaunch-v2.json",
+      "sha256": "8cfb5f305250e627e1a52126698f71b48188672b6f2949cdb4e9b7ab762afcb2"
+    },
+    "prelaunch_independent_review": {
+      "path": "runs/reviews/source-loop-final-v2-prelaunch-independent-review.json",
+      "sha256": "e3e28d04fedb0a44558c2c64049512ac463e579987c687e4b599197136142305"
+    },
+    "quality": {
+      "path": "runs/reviews/source-loop-final-quality-v2.json",
+      "sha256": "e5e5feb12038898a65795af2d2bab3023f87aac55357ecf063bff5864098f8b8"
+    },
+    "screen_format_final": {
+      "path": "runs/reviews/source-screen-format-final.json",
+      "sha256": "dacfb05a8f63cfaec22997f62fafaffd96ccbab78e156e4bcfb6f0290c9fae5f"
+    },
+    "screen_lifecycle": {
+      "path": "runs/reviews/source-screen-outcome-three.json",
+      "sha256": "5b380e8c5bb82a5735fcae0259a5b76ef2e15c7ad5842185b8ede4012b29e9f4"
+    },
+    "terminal_independent_review": {
+      "path": "runs/reviews/source-loop-terminal-independent-review.json",
+      "sha256": "f13004a67f7722b036b282e9dd547126db9e2750ed6d4cffe287b69301218261"
+    }
+  },
+  "preservation": {
+    "actual_POL02_state_or_keys_read": false,
+    "changed_existing_app_files": [
+      "buddha/candidate_generation.py",
+      "buddha/candidate_run.py",
+      "buddha/native_evaluation.py",
+      "buddha/source_feedback.py",
+      "buddha/source_screen.py",
+      "buddha/source_screen_results.py"
+    ],
+    "existing_v1_worker_bytes_unchanged": true,
+    "historical_conformance_files_raw_exact": 192,
+    "new_python_files": [
+      "buddha/source_search.py",
+      "docs/conformance/src02-source-loop-probe.py",
+      "tests/test_candidate_generation_outcome.py",
+      "tests/test_source_failure_custody.py",
+      "tests/test_source_failure_feedback.py",
+      "tests/test_source_screen_outcome.py",
+      "tests/test_source_search.py"
+    ],
+    "original_python": 197,
+    "original_test_files_raw_exact": 99,
+    "original_test_method_AST_exact": 1439,
+    "unchanged_original_python": 191
+  },
+  "quality": {
+    "additional_configs": [
+      ".github/workflows/ci.yml",
+      "pyproject.toml",
+      "requirements.txt",
+      "requirements-dev.txt"
+    ],
+    "all208_quality_inputs_unchanged": true,
+    "all_exit_zero": true,
+    "conformance_probe_scope": "Ruff, format and Bandit separately; conformance drivers are outside the main workflow lint/type/security targets.",
+    "main_checks": 7,
+    "python_inputs": 204,
+    "separate_probe_checks": 3,
+    "strict_type_platforms": [
+      "win32",
+      "linux"
+    ]
+  },
+  "source_sha256": {
+    "buddha/candidate_generation.py": "67c8d2a8ac813db083f1f3aafe64b0dc2083fd77d4adad439437ccbcbbf49abf",
+    "buddha/candidate_run.py": "4f735b2613a54e5486f47d0f81dae76c57eda71896b50b73241a6d099f520fa4",
+    "buddha/native_evaluation.py": "b8f7ca3bf63e1088317d14cfaba6fcde96d3c43e44599f3b45d66124a3b974a2",
+    "buddha/source_feedback.py": "3350cf9f9c2b0ae00ad465dcaff45701501b951fb6d9edbb981b278165718e82",
+    "buddha/source_screen.py": "7bc8e1d1bcabd98eeb0c1bc6ce0c4fac42b227418dbed52af5d4ae7ad5aec350",
+    "buddha/source_screen_results.py": "d9f062527eaf1716fb130d9a4dcaf375486dfb17b9295006feb7dbe90643ade8",
+    "buddha/source_search.py": "6cdb36ac390d6a0c8991ce18b892354154e39fb2d234d3666ce9338e04f07fc4",
+    "docs/conformance/src02-source-loop-probe.py": "cf471c0445d7d3d45d5ff0ec922fdc3494e87da5f9d4faea817cacaa9ffeaf82",
+    "tests/test_candidate_generation_outcome.py": "80fe8a4f317625af219becd07a105635336213cb3924517f03701f09fc8ecb8f",
+    "tests/test_source_failure_custody.py": "e8f226650143620fca80a3592a9c75ba1c52d7104fe9b77a2a19588c0fc14c37",
+    "tests/test_source_failure_feedback.py": "e349a0657768b531472be195e474a1d57c6f8e50fa8bcbb025c5fb5311748b6a",
+    "tests/test_source_screen_outcome.py": "f7b78d59937852788091a11bcdd0b311e2ffea34b064a182440043ff3dd046e6",
+    "tests/test_source_search.py": "e5122a09f359c4541ecbbd5fe400836ea73c536207369c34c904b362a79d08e9"
+  },
+  "spec_sections": [
+    "DESIGN inherited main loop, development-only common comparison and retained failure feedback",
+    "PLAN SRC-02 bounded durable loop connection; broader model-authored and scientific goals remain open"
+  ],
+  "status": "bounded inherited-source loop engineering checks and synthetic actual-container rehearsal passed; final-head hosted CI pending"
+}

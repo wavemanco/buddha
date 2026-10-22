@@ -10,8 +10,11 @@ parser recovery differs from a judge's decision; and where self-improvement fits
 
 ## Current state
 
-The bounded **MEAS-01/MEAS-02 measurement audit is complete**; next is the
-**POL-02 controlled policy comparison**. The project has auditable API
+The bounded **MEAS-01/MEAS-02 measurement audit is complete**. The
+**POL-02 controlled policy comparison has finished locally**, according to the
+user's completion output; saved-result verification is pending. Further
+development focuses on Buddha's agent and improvement procedures
+against fixed NoveltyBench 1.1; no new general judge audit is scheduled. The project has auditable API
 accounting, linked recovery, bounded policy search, replaceable release selection,
 and isolated fixed-seed generation. The unchanged official LLM partition, score
 and summary commands now compose with generated C1 answers in a complete
@@ -73,11 +76,11 @@ allocating money. The [protected launcher](docs/POLICY-LAUNCH.md) checks the
 approved destination and funding before hidden key entry, then prepares or
 recovers the original study and owners. The user has separately approved the
 new $50 / 4,096-attempt POL-02 comparison, and its frozen cached-checkout handoff
-is prepared. The user reports that the local run is underway; completed output
-has not yet been reviewed. Configuration and key entry do not
+was prepared. The user has supplied its completion output; saved results
+have not yet been verified. Configuration and key entry do not
 confirm provider access. Actual answers and supplemental reviews require real
-saved generation. The live comparison and human scientific assessment remain
-open.
+saved generation. Saved-result verification and human scientific assessment
+remain open.
 
 The [source runtime](docs/SOURCE-RUNTIME.md) and [candidate execution boundary](docs/SOURCE-CANDIDATES.md)
 now pass composed isolation, model-channel, accounting and recovery checks.
@@ -89,8 +92,7 @@ a runnable grandchild. Materialization alone does not establish competence;
 its broader search and scientific gates remain open.
 The [durable proposal stage](docs/SOURCE-PROPOSAL-STAGE.md) now joins measured
 parent feedback to its original proposal owner, preserving child materialization,
-clean rejection and incomplete recovery as separate outcomes. Its scoped checks
-and full source-search integration remain separate gates.
+clean rejection and incomplete recovery as separate outcomes.
 The [source-to-native connection](docs/SOURCE-ASSESSMENT.md) now anchors one
 candidate's literal C1 answers for fresh official native assessment through the
 existing evaluator, with separate generation and judging owners. It keeps zero,
@@ -105,9 +107,13 @@ parent selection. It preserves official scores and records unusable results
 without selecting them. The [verified feedback bridge](docs/SOURCE-FEEDBACK.md)
 can now turn a pinned complete screen into bounded development notes accepted by
 the existing improver, with literal answer excerpts and explicit omissions.
-The durable proposal stage now retains original-owner recovery and separately
-verifiable outcomes. The complete repeated source-search loop and an actual
-model-authored experiment remain open.
+The [bounded inherited source-search loop](docs/SOURCE-SEARCH.md) now connects
+these stages. A confined three-iteration rehearsal retains a failed child,
+feeds its failure into a repair, and runs the repaired child's changed improver
+to produce another descendant. It uses supplied programs and synthetic replies,
+with no real provider calls. Complete keyless replay and passive verification
+preserve its original records. An actual model-authored source experiment and
+mutation competence remain open; the new loop's hosted checks are pending.
 The [source-evolution backlog context](docs/BACKLOG.md) records the intended Python
 code and inherited-improver endpoint, the current gap and its existing plan gates.
 

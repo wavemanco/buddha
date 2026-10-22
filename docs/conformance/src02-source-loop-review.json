@@ -1,0 +1,75 @@
+{
+  "ci": {
+    "full_local_suite_executed": false,
+    "merge_gate": "Exact-head hosted Linux and Windows unit/quality jobs must pass and be reviewed before merge.",
+    "status_at_publication": "pending"
+  },
+  "date": "2026-10-22",
+  "delivery": {
+    "path": "docs/conformance/src02-source-loop-delivery.json",
+    "sha256": "db07a73aa3c62c198ac44666243c04b7605b5a4af69d8ee5ce6b0563e5914051"
+  },
+  "documentation": {
+    "expected_missing_review_link_closed_by_this_file": true,
+    "later_delivery_delta": "Join independent terminal review; distinguish intended quality controls from literal folded metrics; retain unsealed bytecode scope.",
+    "reviewed_original_reference": {
+      "path": "runs/reviews/source-loop-final-documentation-review.json",
+      "sha256": "f0b3c68f22f82c66bf5819c5bf7a8a82a3e8054b7b7c336d081ed6ae58fa6fbb"
+    }
+  },
+  "format": "buddha.src02-source-loop-review.v1",
+  "independent_actual_review": {
+    "path": "runs/reviews/source-loop-terminal-independent-review.json",
+    "sha256": "f13004a67f7722b036b282e9dd547126db9e2750ed6d4cffe287b69301218261"
+  },
+  "other_review_references": {
+    "source-loop-engineering-evidence-index.json": {
+      "path": "runs/reviews/source-loop-engineering-evidence-index.json",
+      "sha256": "8e1fa7100a3901d4baf46c9cb66c08aa30265bbbe3ec734653baa728e4267d0c"
+    },
+    "source-loop-final-documentation-review.json": {
+      "path": "runs/reviews/source-loop-final-documentation-review.json",
+      "sha256": "f0b3c68f22f82c66bf5819c5bf7a8a82a3e8054b7b7c336d081ed6ae58fa6fbb"
+    },
+    "source-loop-plan58-primary-sync.json": {
+      "path": "runs/reviews/source-loop-plan58-primary-sync.json",
+      "sha256": "6ee362e042a170dbcbd036c43e2ab97ecc3a530c23b434eab73dec65c4397023"
+    }
+  },
+  "preservation": {
+    "historical_conformance_files_raw_exact": 192,
+    "old_test_files_raw_exact": 99,
+    "old_test_method_AST_exact": 1439,
+    "primary45_cached180_source_controls_and_launch_unchanged": true,
+    "primary_plan_only_sync": true,
+    "prior57_plan_revision_rows_byte_exact": true
+  },
+  "retained_review_limitations": [
+    "Original fixture preservation before/after is the reviewed driver in-memory check; independent postchecks do not invent a prior full tree export.",
+    "The independent reviewer first stopped on an exact-[7,3] assumption after its successful SQL/accounting segment; the failure and remaining literal-artifact segment are separately preserved. No product/proof rerun.",
+    "Raw source hashes are checked; imported bytecode is not separately sealed.",
+    "Host verification took2795.86seconds; no isolated performance cause or universal maximum-bound feasibility claim.",
+    "Task-screen eligibility does not establish arbitrary improver competence.",
+    "No real model-authored experiment, new spending allocation, human validation, held-out gain, scientific promotion or improved-improver effect is established."
+  ],
+  "roadmap": {
+    "SRC-02": "in progress; actual model-authored experiment remains open",
+    "major_open_leaves": 7,
+    "sole_next": "POL-02 saved-result and registered supplemental review"
+  },
+  "scope": [
+    "41 new acceptance methods and92 original regressions retain disjoint recorded source windows; not one final full cohort.",
+    "Final seven quality checks and three probe checks pass;1480 unique tests collected without executing their bodies.",
+    "Real isolated supplied programs and unchanged pinned official evaluator with75 canned provider replies:28 original owners,21 productive,28 removed workers,825 synthetic microusd and zero held.",
+    "Literal metrics preserve7.0 and3.0000000000000004;7/3 are intended quality controls, not exact folded-utility claims.",
+    "Controlled saved-decision interruption retains123 prefix file hashes;25 replies/10 workers then50/18. No interrupted-container or uncertain-liability proof.",
+    "Keyless complete replay and passive/retired-producer inspection create no new work or persistent changes."
+  ],
+  "source_pin_domain": {
+    "additional": "one runtime configuration plus three historical proof controls; distinct from quality204+4 domain",
+    "all_raw_exact": true,
+    "current_sources": 208,
+    "python": 204
+  },
+  "status": "bounded local engineering and actual synthetic evidence reviewed; final-head hosted CI pending"
+}

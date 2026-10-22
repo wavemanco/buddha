@@ -1,0 +1,904 @@
+"""Bounded inherited source search over one fixed development comparison.
+
+Nested screens and proposal stages retain their original owners and anchors.
+This controller allocates work; it introduces no broker or scientific score.
+"""
+
+import re
+import sqlite3
+from collections.abc import Callable, Mapping
+from functools import wraps
+from pathlib import Path
+from typing import Any, cast
+
+from buddha import candidate_improvement, source_feedback, source_screen
+from buddha import native_pipeline as pipeline
+from buddha.answers import _Artifact
+from buddha.authorization import Authorization
+from buddha.doctor import _authority, _Busy, _Unsupported
+from buddha.gateway import RawHTTPTransport, _input_records, _review
+from buddha.native_evidence import NativeEvidence, authority_observation
+from buddha.releases import (
+    ReleaseError,
+    Selection,
+    _digest,
+    _json,
+    _load,
+    _object,
+    _path,
+    _root,
+    file_hash,
+)
+from buddha.wire import _integer
+
+_FORMAT = "buddha.source-search.v1"
+_MANIFEST = "buddha.source-search-manifest.v1"
+_CONTEXT = "buddha.source-search-context.v1"
+_PLAN = "buddha.source-search-plan.v1"
+_REPORT = "buddha.source-search-report.v1"
+_CLAIM = "bounded development source allocation only; no semantic or scientific improvement claim"
+_FILES = ("source", "split", "feedback", "provenance")
+_TOTALS = ("spent_microusd", "reserved_microusd", "committed_microusd", "operation_count")
+
+
+class SourceSearchError(ReleaseError):
+    """The original search, fixed comparison or retained custody is invalid."""
+
+
+def _checked[**P, T](function: Callable[P, T]) -> Callable[P, T]:
+    @wraps(function)
+    def checked(*args: P.args, **kwargs: P.kwargs) -> T:
+        try:
+            return function(*args, **kwargs)
+        except (
+            ValueError,
+            TypeError,
+            KeyError,
+            OSError,
+            RecursionError,
+            OverflowError,
+            sqlite3.Error,
+            _Busy,
+            _Unsupported,
+        ) as error:
+            if isinstance(error, SourceSearchError):
+                raise
+            raise SourceSearchError(
+                "source search configuration or retained evidence is invalid"
+            ) from None
+
+    return checked
+
+
+class SourceSearchSpec(_Artifact):
+    """Immutable bounded allocation parameters, using existing archive methods."""
+
+    @_checked
+    def __post_init__(self) -> None:
+        record = _object(_load(self.data), {"format", "iterations", "method", "seed", "max_active"})
+        if record["format"] != _FORMAT or record["method"] not in {
+            "archive",
+            "latest",
+            "uninformed",
+        }:
+            raise SourceSearchError("unsupported source search specification")
+        _integer(record["iterations"], 1, 8)
+        _integer(record["seed"], 0)
+        _integer(record["max_active"], 2, 64)
+        object.__setattr__(self, "data", _json(record))
+
+
+def _sources() -> list[Path]:
+    return sorted(
+        set(
+            source_screen._sources()
+            + candidate_improvement._sources()
+            + [
+                Path(__file__).absolute(),
+                Path(source_feedback.__file__).absolute(),
+            ]
+        )
+    )
+
+
+def _template(value: object) -> dict[str, Any]:
+    record = _object(value, {"config", "profile", "max_callbacks", "budget_microusd", "max_calls"})
+    _object(
+        record["config"], {"provider", "model", "max_output_tokens", "instructions", "sampling"}
+    )
+    _object(record["profile"], {"capability", "profile_id"})
+    _integer(record["max_callbacks"], 0, 1000)
+    _integer(record["budget_microusd"], 1)
+    _integer(record["max_calls"], 1)
+    return record
+
+
+def _template_screen(
+    screen: source_screen.SourceScreen, template: dict[str, Any]
+) -> source_screen.SourceScreen:
+    record = screen.to_record()
+    _object(record["generation"]).update(template)
+    return source_screen.SourceScreen.from_bytes(_json(record))
+
+
+def _ref(directory: Path, authorization: Path) -> dict[str, object]:
+    return {
+        "directory": str(directory),
+        "authorization": str(authorization),
+        "report_sha256": file_hash(directory / "report.json"),
+    }
+
+
+def _read_ref(reader: NativeEvidence, value: object, *, proposal: bool = False) -> dict[str, Any]:
+    reference = _object(value, {"directory", "authorization", "report_sha256"})
+    directory = pipeline._absolute(reference["directory"])
+    if reference["authorization"] != str(reader.authorization) or not directory.is_relative_to(
+        reader.root
+    ):
+        raise SourceSearchError("a nested result belongs to another search or authority")
+    expected = _digest(reference["report_sha256"])
+    function = (
+        candidate_improvement.inspect_candidate_improvement
+        if proposal
+        else source_screen.inspect_source_screen
+    )
+    result = function(
+        directory, authorization=reader.authorization, expected_report_sha256=expected
+    )
+    if _json(result) != reader.raw(directory / "report.json", expected):
+        raise SourceSearchError("returned nested result differs from its saved canonical report")
+    return result
+
+
+def _controls(
+    record: dict[str, Any], directory: Path, manifest_raw: bytes, context_raw: bytes
+) -> dict[Path, str]:
+    values = {pipeline._absolute(p): _digest(h) for p, h in _object(record["controls"]).items()}
+    return values | {
+        directory / "manifest.json": pipeline._sha(_load(manifest_raw)),
+        directory / "context.json": pipeline._sha(_load(context_raw)),
+    }
+
+
+def _original(reader: NativeEvidence) -> dict[str, Any]:
+    anchor = reader.owner(reader.root / "seed/tasks/0/generation/owners/0")
+    manifest_raw = reader.bound(anchor, reader.root / "manifest.json")
+    record = _object(
+        _load(manifest_raw),
+        {
+            "format",
+            "seed_screen",
+            "proposal_template",
+            "spec",
+            "authorization",
+            "review",
+            "expected_runtime_sha256",
+            "controls",
+        },
+    )
+    context_raw = reader.bound(anchor, reader.root / "context.json")
+    context = _object(_load(context_raw), {"format", "manifest_sha256"})
+    if (
+        record["format"] != _MANIFEST
+        or context["format"] != _CONTEXT
+        or context["manifest_sha256"] != pipeline._sha(record)
+        or manifest_raw != _json(record)
+        or context_raw != _json(context)
+        or record["authorization"] != str(reader.authorization)
+    ):
+        raise SourceSearchError("search differs from its original first-owner declaration")
+    if _json(_review(_object(record["review"]))) != _json(anchor.manifest["review"]):
+        raise SourceSearchError("search review differs from its original first owner")
+    screen = source_screen.SourceScreen.from_bytes(_json(record["seed_screen"]))
+    if (
+        screen.to_record()["format"] != "buddha.source-screen.v2"
+        or _object(screen.to_record()["generation"])["entrypoint"] != "candidate.py"
+    ):
+        raise SourceSearchError("search requires its prospective one-file failure-aware seed")
+    spec = SourceSearchSpec.from_bytes(_json(record["spec"]))
+    _template_screen(screen, _template(record["proposal_template"]))
+    controls = _controls(record, reader.root, manifest_raw, context_raw)
+    original = reader._bindings(anchor)
+    if any(original.get(str(path)) != expected for path, expected in controls.items()):
+        raise SourceSearchError("first owner omitted an original search control")
+    # Installed helpers are identities in original metadata, never retired code reads.
+    names = {path.name for path in _sources()}
+    candidates = {p.parent for p in controls if p.name == "source_search.py"}
+    if len(candidates) != 1 or not all(next(iter(candidates)) / name in controls for name in names):
+        raise SourceSearchError("original search controls omit the installed helper closure")
+    return {
+        "record": record,
+        "screen": screen,
+        "spec": spec.to_record(),
+        "controls": controls,
+        "manifest_sha256": pipeline._sha(record),
+        "context_sha256": pipeline._sha(context),
+    }
+
+
+def _census(
+    reader: NativeEvidence, state: dict[str, Any]
+) -> tuple[dict[str, Any], list[dict[str, object]]]:
+    count = len(state["screen"].tasks.tasks)
+    stages = len(state["screen"].to_record()["stages"])
+    owner_paths = []
+    for name in reader.capture.entries:
+        if not name.endswith("/owners/0/manifest.json") and not re.search(
+            r"/owners/[1-9][0-9]*/manifest.json$", name
+        ):
+            continue
+        ordinal = r"(0|[1-9][0-9]*)"
+        match = re.fullmatch(
+            rf"(?:seed|iterations/{ordinal}/screen)/tasks/{ordinal}/(generation|evaluation)/owners/{ordinal}/manifest.json",
+            name,
+        )
+        proposal = re.fullmatch(rf"iterations/{ordinal}/proposal/owners/0/manifest.json", name)
+        if match:
+            iteration, task, role, index = match.groups()
+            if (
+                iteration is not None
+                and int(iteration) >= state["spec"]["iterations"]
+                or int(task) >= count
+                or (role == "generation" and int(index) != 0)
+                or (role == "evaluation" and not 1 <= int(index) <= stages)
+            ):
+                raise SourceSearchError("retained owner is outside the fixed search schedule")
+        elif not proposal or int(proposal.group(1)) >= state["spec"]["iterations"]:
+            raise SourceSearchError("retained owner is outside the fixed search schedule")
+        owner_paths.append(reader.root / name.removesuffix("/manifest.json"))
+    owner_paths.sort()
+    owners = [reader.owner(path) for path in owner_paths]
+    funded = _authority(reader.capture, reader.authorization, owners)
+    if funded is None:
+        raise SourceSearchError("search lacks its existing shared authority")
+    for value in reader._rows(funded["auth_runs"]):
+        path = pipeline._absolute(value["directory"])
+        if path.is_relative_to(reader.root) and not any(
+            path == owner.directory and value["run_id"] == owner.run_id for owner in owners
+        ):
+            raise SourceSearchError("a retained funded search owner is missing or replaced")
+    current = authority_observation(reader.capture, reader.authorization, funded)
+    if current["scope"] != "source screen: " + state["screen"].comparison_key():
+        raise SourceSearchError("shared authority belongs to another fixed source comparison")
+    refs: list[dict[str, object]] = [
+        {
+            "directory": str(path),
+            "run_id": owner.run_id,
+            "manifest_sha256": owner.manifest_sha256,
+            "ledger_sha256": owner.ledger_sha256,
+            "totals": {name: owner.accounting()[name] for name in _TOTALS},
+        }
+        for path, owner in zip(owner_paths, owners, strict=True)
+    ]
+    return current, refs
+
+
+def _select(refs: list[dict[str, object]], spec: dict[str, Any], iteration: int) -> dict[str, Any]:
+    return source_screen.select_source_parent(
+        refs,
+        method=spec["method"],
+        max_active=spec["max_active"],
+        seed=spec["seed"],
+        iteration=iteration,
+    )
+
+
+def _bundle(
+    directory: Path, parent: dict[str, object], failures: list[dict[str, object]]
+) -> dict[str, Any]:
+    if failures:
+        return source_feedback._build_failures(
+            directory, parent, failures, existing=directory.exists()
+        )
+    return source_feedback._build(directory, parent, existing=directory.exists())
+
+
+def _parent_screen(
+    reader: NativeEvidence, reference: dict[str, object]
+) -> source_screen.SourceScreen:
+    root = pipeline._absolute(reference["directory"])
+    report = _read_ref(reader, reference)
+    raw = reader.raw(root / "screen.json", report["screen_sha256"])
+    return source_screen.SourceScreen.from_bytes(raw)
+
+
+def _plan(
+    reader: NativeEvidence,
+    state: dict[str, Any],
+    iteration: int,
+    refs: list[dict[str, object]],
+    failures: list[dict[str, object]],
+) -> dict[str, Any]:
+    selection = _select(refs, state["spec"], iteration)
+    selected = selection["selected_id"]
+    parents = [ref for ref in refs if _read_ref(reader, ref)["candidate_id"] == selected]
+    if len(parents) != 1:
+        raise SourceSearchError("search has no unique eligible selected parent")
+    parent = parents[0]
+    generation = _object(_parent_screen(reader, parent).to_record()["generation"])
+    location = reader.root / "iterations" / str(iteration)
+    bundle = _bundle(location / "feedback", parent, failures)
+    hashes = {name + ".json": pipeline._sha(bundle[name]) for name in _FILES}
+    template = state["record"]["proposal_template"]
+    descriptor = {
+        "format": "buddha.candidate-improvement.v1",
+        **{name: generation[name] for name in ("entrypoint", "runtime", "executor")},
+        **{name: template[name] for name in ("config", "profile", "max_callbacks")},
+        "parent_agent_sha256": selected,
+        "feedback": {
+            "path": str(location / "feedback/feedback.json"),
+            "sha256": hashes["feedback.json"],
+        },
+    }
+    return {
+        "format": _PLAN,
+        "iteration": iteration,
+        "prior_pool": refs,
+        "selection": selection,
+        "parent": parent,
+        "failures": failures,
+        "feedback_sha256": hashes,
+        "proposal_descriptor": descriptor,
+    }
+
+
+def _child_screen(state: dict[str, Any], proposal: dict[str, Any]) -> source_screen.SourceScreen:
+    record = state["screen"].to_record()
+    child = _object(proposal["child"])
+    generation = _object(record["generation"])
+    selection = _object(generation["selection"])
+    _object(selection["components"])["agent"] = {"candidate.py": child["source_sha256"]}
+    _object(generation["roots"])["agent"] = child["directory"]
+    _object(generation["executor"])["mounts"] = [
+        ["/agent", child["directory"]],
+        ["/runner", _object(generation["roots"])["runner"]],
+    ]
+    record["lineage"] = child["lineage"]
+    screen = source_screen.SourceScreen.from_bytes(_json(record))
+    if (
+        screen.candidate_id != child["agent_sha256"]
+        or screen.comparison_key() != state["screen"].comparison_key()
+    ):
+        raise SourceSearchError("materialized child changes the fixed source comparison")
+    return screen
+
+
+def _proposal_controls(
+    state: dict[str, Any], location: Path, plan: dict[str, Any]
+) -> dict[Path, str]:
+    return (
+        cast(dict[Path, str], state["controls"])
+        | {
+            location / "plan.json": pipeline._sha(plan),
+            location / "proposal.json": pipeline._sha(plan["proposal_descriptor"]),
+        }
+        | {
+            location / "feedback" / name: _digest(value)
+            for name, value in plan["feedback_sha256"].items()
+        }
+    )
+
+
+def _screen_owner(
+    reader: NativeEvidence,
+    state: dict[str, Any],
+    directory: Path,
+    expected: source_screen.SourceScreen,
+) -> None:
+    """Join the prepared screen to the original search before any nested call."""
+    owner = reader.owner(directory / "tasks/0/generation/owners/0")
+    context = _object(
+        _load(reader.bound(owner, directory / "context.json")),
+        {
+            "format",
+            "screen_sha256",
+            "expected_runtime_sha256",
+            "controls",
+            "comparison_controls",
+        },
+    )
+    controls = {str(path): digest for path, digest in state["controls"].items()}
+    lineage = expected.to_record()["lineage"]
+    if lineage is not None:
+        reference = _object(lineage)
+        path, digest = str(pipeline._absolute(reference["path"])), _digest(reference["sha256"])
+        if path in controls and controls[path] != digest:
+            raise SourceSearchError("screen lineage conflicts with an original search control")
+        controls[path] = digest
+    if (
+        reader.bound(owner, directory / "screen.json") != expected.to_bytes()
+        or context["format"] != source_screen._version(expected, "source-screen-context")
+        or context["screen_sha256"] != expected.fingerprint()
+        or context["expected_runtime_sha256"] != state["record"]["expected_runtime_sha256"]
+        or _json(_object(context["controls"])) != _json(controls)
+        or owner.manifest["authorization_path"] != str(reader.authorization)
+        or _json(owner.manifest["review"]) != _json(state["record"]["review"])
+    ):
+        raise SourceSearchError("prepared screen differs from its original search treatment")
+
+
+def _proposal_owner(
+    reader: NativeEvidence, state: dict[str, Any], location: Path, plan: dict[str, Any]
+) -> None:
+    """Join allocation and selected components before execution and on passive read."""
+    parent = _parent_screen(reader, plan["parent"])
+    generation = _object(parent.to_record()["generation"])
+    manifest = reader.owner(location / "proposal/owners/0").manifest
+    template = state["record"]["proposal_template"]
+    expected = {
+        "authorization_path": str(reader.authorization),
+        "selection": generation["selection"],
+        "roots": generation["roots"],
+        "review": state["record"]["review"],
+        "settings": {name: template[name] for name in ("budget_microusd", "max_calls")},
+    }
+    if any(_json(manifest[name]) != _json(value) for name, value in expected.items()):
+        raise SourceSearchError("proposal owner changes its selected parent or frozen allocation")
+    original = reader._bindings(reader.owner(location / "proposal/owners/0"))
+    if any(original.get(str(p)) != h for p, h in _proposal_controls(state, location, plan).items()):
+        raise SourceSearchError(
+            "proposal owner omitted original plan or measured feedback controls"
+        )
+
+
+def _decision(
+    reader: NativeEvidence, state: dict[str, Any], plan: dict[str, Any], known_ids: set[str]
+) -> tuple[dict[str, Any], dict[str, object] | None]:
+    iteration = plan["iteration"]
+    location = reader.root / "iterations" / str(iteration)
+    _proposal_owner(reader, state, location, plan)
+    proposal_ref = _ref(location / "proposal", reader.authorization)
+    proposal = _read_ref(reader, proposal_ref, proposal=True)
+    if proposal["parent_agent_sha256"] != plan["selection"]["selected_id"]:
+        raise SourceSearchError("proposal belongs to another original selected parent")
+    original = _object(_object(proposal["provenance"])["original_inputs"])
+    if any(original.get(str(p)) != h for p, h in _proposal_controls(state, location, plan).items()):
+        raise SourceSearchError("proposal omitted its original plan or measured feedback controls")
+    if reader.raw(location / "proposal.json") != _json(plan["proposal_descriptor"]):
+        raise SourceSearchError("proposal descriptor changes its immutable iteration plan")
+    child_id, screen_ref, failed = None, None, None
+    if proposal["disposition"] == "rejected":
+        status = "rejected"
+    else:
+        child_id = _object(proposal["child"])["agent_sha256"]
+        if child_id in known_ids:
+            status = "duplicate"
+        else:
+            screen_ref = _ref(location / "screen", reader.authorization)
+            report = _read_ref(reader, screen_ref)
+            expected = _child_screen(state, proposal)
+            _screen_owner(reader, state, location / "screen", expected)
+            if (
+                report["comparison_key"] != state["screen"].comparison_key()
+                or report["controls_sha256"] != state["controls_sha256"]
+            ):
+                raise SourceSearchError("child screen changes the original comparison pool")
+            if report.get("disposition") == "candidate_execution_failed":
+                status = "candidate_execution_failed"
+                failed = {"parent": plan["parent"], "proposal": proposal_ref, "screen": screen_ref}
+            else:
+                status = (
+                    "admitted" if _object(report["admission"])["eligible"] is True else "ineligible"
+                )
+    return {
+        "iteration": iteration,
+        "parent_id": plan["selection"]["selected_id"],
+        "proposal": proposal_ref,
+        "child_id": child_id,
+        "screen": screen_ref,
+        "status": status,
+    }, failed
+
+
+def _restore(
+    directory: Path,
+    authorization: Path,
+    *,
+    complete: bool = False,
+    reader: NativeEvidence | None = None,
+) -> dict[str, Any]:
+    reader = reader or NativeEvidence(directory, authorization, error_type=SourceSearchError)
+    if reader.root != directory or reader.authorization != authorization:
+        raise SourceSearchError("retained reader belongs to another search or authority")
+    state = _original(reader)
+    current, owners = _census(reader, state)
+    state.update(
+        authorization=current,
+        owners=owners,
+        screens=[],
+        decisions=[],
+        failures=[],
+        plan_sha256={},
+        decision_sha256={},
+    )
+    first = directory / "seed/report.json"
+    if first.relative_to(directory).as_posix() not in reader.capture.entries:
+        state["seed"] = None
+    else:
+        seed_ref = _ref(directory / "seed", authorization)
+        seed = _read_ref(reader, seed_ref)
+        _screen_owner(reader, state, directory / "seed", state["screen"])
+        state.update(seed=seed_ref, screens=[seed_ref], controls_sha256=seed["controls_sha256"])
+        if _object(seed["admission"])["eligible"] is not True:
+            state["seed_ineligible"] = True
+    known_ids = {state["screen"].candidate_id}
+    for iteration in range(state["spec"]["iterations"]):
+        location = directory / "iterations" / str(iteration)
+        plan_name = (location / "plan.json").relative_to(directory).as_posix()
+        decision_name = (location / "decision.json").relative_to(directory).as_posix()
+        if plan_name not in reader.capture.entries:
+            if decision_name in reader.capture.entries:
+                raise SourceSearchError("decision precedes its original iteration plan")
+            break
+        if state["seed"] is None or state.get("seed_ineligible"):
+            raise SourceSearchError("proposal work precedes an eligible fixed seed screen")
+        plan = _plan(reader, state, iteration, state["screens"], state["failures"])
+        raw = reader.raw(location / "plan.json")
+        if raw != _json(plan):
+            raise SourceSearchError(
+                "retained iteration plan changes its original parent or feedback"
+            )
+        state["plan_sha256"][str(iteration)] = pipeline._sha(plan)
+        if decision_name not in reader.capture.entries:
+            break
+        decision, failed = _decision(reader, state, plan, known_ids)
+        if reader.raw(location / "decision.json") != _json(decision):
+            raise SourceSearchError("retained iteration decision changes its anchored outcome")
+        state["decision_sha256"][str(iteration)] = pipeline._sha(decision)
+        state["decisions"].append(decision)
+        if decision["child_id"] is not None:
+            known_ids.add(decision["child_id"])
+        if decision["screen"] is not None:
+            state["screens"].append(decision["screen"])
+        if failed is not None:
+            state["failures"].append(failed)
+    cursor = len(state["decisions"])
+    for name in reader.capture.entries:
+        if not name.startswith("iterations/"):
+            continue
+        parts = name.split("/")
+        if (
+            len(parts) < 2
+            or not re.fullmatch(r"0|[1-9][0-9]*", parts[1])
+            or int(parts[1]) >= state["spec"]["iterations"]
+        ):
+            raise SourceSearchError("retained iteration is outside the bounded schedule")
+        if state["seed"] is None or state.get("seed_ineligible") or int(parts[1]) > cursor:
+            raise SourceSearchError("future iteration entries precede the eligible verified prefix")
+        if len(parts) == 3 and parts[2] == "decision.json" and int(parts[1]) >= cursor:
+            raise SourceSearchError("future decision precedes the verified search prefix")
+    if complete and (cursor != state["spec"]["iterations"] or state["seed"] is None):
+        raise SourceSearchError("search has no complete bounded decision sequence")
+    state["known_ids"] = known_ids
+    reader.capture.finish()
+    return state
+
+
+def _check_current(state: dict[str, Any]) -> None:
+    for path, expected in state["controls"].items():
+        pipeline._read(path, expected)
+
+
+def _write_packet(directory: Path, plan: dict[str, Any], bundle: dict[str, Any]) -> None:
+    if not directory.exists():
+        directory.mkdir()
+    _root(directory)
+    expected = {name + ".json" for name in _FILES}
+    if any(
+        path.name not in expected or not path.is_file() or path.is_symlink()
+        for path in directory.iterdir()
+    ):
+        raise SourceSearchError("partial feedback packet has foreign entries")
+    for name in _FILES:
+        raw = _json(bundle[name])
+        if pipeline._sha(bundle[name]) != plan["feedback_sha256"][name + ".json"]:
+            raise SourceSearchError("feedback changes its pre-write planned hash")
+        pipeline._same_or_write(directory / (name + ".json"), raw)
+
+
+def _result(state: dict[str, Any]) -> dict[str, object]:
+    return {
+        "format": _REPORT,
+        "status": "complete",
+        "reason": "bounded_iterations_complete",
+        "spec": state["spec"],
+        "seed": state["seed"],
+        "comparison_key": state["screen"].comparison_key(),
+        "controls_sha256": state["controls_sha256"],
+        "screens": state["screens"],
+        "decisions": state["decisions"],
+        "selection": _select(state["screens"], state["spec"], state["spec"]["iterations"]),
+        "failures": state["failures"],
+        "authorization": state["authorization"],
+        "provenance": {
+            "manifest_sha256": state["manifest_sha256"],
+            "context_sha256": state["context_sha256"],
+            "original_controls": {str(p): h for p, h in state["controls"].items()},
+            "owners": state["owners"],
+            "plan_sha256": state["plan_sha256"],
+            "decision_sha256": state["decision_sha256"],
+            "scoped_totals": {
+                name: sum(cast(int, _object(row["totals"])[name]) for row in state["owners"])
+                for name in _TOTALS
+            },
+        },
+        "claim": _CLAIM,
+    }
+
+
+@_checked
+def prepare_source_search(
+    directory: Path,
+    *,
+    seed_screen: source_screen.SourceScreen,
+    proposal_template: dict[str, object],
+    spec: SourceSearchSpec,
+    authorization: Authorization,
+    review: dict[str, object],
+    expected_runtime_sha256: str,
+    input_bindings: Mapping[Path, str] | None = None,
+) -> Path:
+    if (
+        type(seed_screen) is not source_screen.SourceScreen
+        or type(spec) is not SourceSearchSpec
+        or not isinstance(authorization, Authorization)
+    ):
+        raise SourceSearchError("search requires its explicit artifacts and existing authority")
+    directory = pipeline._absolute(str(directory))
+    seed = seed_screen.to_record()
+    generation = _object(seed["generation"])
+    if seed["format"] != "buddha.source-screen.v2" or generation["entrypoint"] != "candidate.py":
+        raise SourceSearchError("search needs a prospective failure-aware one-file seed")
+    runtime = _digest(expected_runtime_sha256)
+    checked_review = _review(review, fresh=True)
+    template = _template(proposal_template)
+    source_screen._configuration(seed_screen, runtime)
+    source_screen._configuration(_template_screen(seed_screen, template), runtime)
+    if authorization.summary()["scope"] != "source screen: " + seed_screen.comparison_key():
+        raise SourceSearchError("authority scope differs from this fixed source comparison")
+    external = dict(input_bindings or {})
+    inputs = _input_records(list(external), external)
+    controls = {Path(row["path"]): _digest(row["sha256"]) for row in inputs}
+    if seed["lineage"] is not None and (
+        pipeline._absolute(_object(seed["lineage"])["path"]) in controls
+    ):
+        raise SourceSearchError("seed lineage is automatically bound, not a common search control")
+    for path in _sources():
+        actual = file_hash(path)
+        if path in controls and controls[path] != actual:
+            raise SourceSearchError("installed helper differs from caller's original expectation")
+        controls[path] = actual
+    runtime_path = pipeline._absolute(_object(generation["runtime"])["path"])
+    if runtime_path in controls and controls[runtime_path] != runtime:
+        raise SourceSearchError("runtime differs from original input expectation")
+    controls[runtime_path] = runtime
+    protected = [authorization.path, *controls]
+    for role in ("generation", "native"):
+        protected.extend(source_screen._roots(_object(seed[role])).values())
+    if any(directory.is_relative_to(p) or p.is_relative_to(directory) for p in protected):
+        raise SourceSearchError("search destination overlaps its original controls or components")
+    _root(directory.parent)
+    _path(directory.name)
+    directory.mkdir()
+    (directory / "iterations").mkdir()
+    (directory / "observations").mkdir()
+    manifest = {
+        "format": _MANIFEST,
+        "seed_screen": seed,
+        "proposal_template": template,
+        "spec": spec.to_record(),
+        "authorization": str(authorization.path),
+        "review": checked_review,
+        "expected_runtime_sha256": runtime,
+        "controls": {str(p): h for p, h in controls.items()},
+    }
+    context = {"format": _CONTEXT, "manifest_sha256": pipeline._sha(manifest)}
+    pipeline._write(directory / "manifest.json", _json(manifest))
+    pipeline._write(directory / "context.json", _json(context))
+    controls |= {
+        directory / "manifest.json": pipeline._sha(manifest),
+        directory / "context.json": pipeline._sha(context),
+    }
+    source_screen.prepare_source_screen(
+        directory / "seed",
+        screen=seed_screen,
+        authorization=authorization,
+        review=checked_review,
+        expected_runtime_sha256=runtime,
+        input_bindings=controls,
+    )
+    return directory
+
+
+@_checked
+def run_source_search(directory: Path, *, transport: RawHTTPTransport) -> dict[str, object]:
+    if not isinstance(directory, Path) or not isinstance(transport, RawHTTPTransport):
+        raise SourceSearchError("search execution requires explicit paths and raw transport")
+    directory = pipeline._absolute(str(directory))
+    first = pipeline._read(directory / "manifest.json")
+    authorization_path = pipeline._absolute(_load(first)["authorization"])
+    with pipeline._exclusive(directory):
+        state = _restore(directory, authorization_path)
+        _check_current(state)
+        authority = Authorization(authorization_path)
+        iteration, stage, child = 0, "seed", None
+
+        def observe(reason: str, result: dict[str, object] | None) -> dict[str, object]:
+            ordinal = 0
+            while (directory / "observations" / (str(ordinal) + ".json")).exists():
+                ordinal += 1
+            path = directory / "observations" / (str(ordinal) + ".json")
+            value = {
+                "format": "buddha.source-search-observation.v1",
+                "status": "incomplete",
+                "reason": reason,
+                "iteration": iteration,
+                "stage": stage,
+                "child": result,
+                "authorization": authority.summary(),
+                "observation": path.relative_to(directory).as_posix(),
+                "claim": "incomplete search; original evidence and liabilities retained",
+            }
+            pipeline._write(path, _json(value))
+            return value
+
+        try:
+            if (directory / "report.json").exists():
+                return inspect_source_search(
+                    directory,
+                    authorization=authorization_path,
+                    expected_report_sha256=file_hash(directory / "report.json"),
+                )
+            if state["seed"] is None:
+                reader = NativeEvidence(directory, authorization_path, error_type=SourceSearchError)
+                _screen_owner(reader, state, directory / "seed", state["screen"])
+                reader.capture.finish()
+                child = source_screen.run_source_screen(directory / "seed", transport=transport)
+                if child["status"] != "complete":
+                    return observe(cast(str, child["reason"]), child)
+                source_screen._accepted(directory / "seed", child)
+            state = _restore(directory, authorization_path)
+            if state.get("seed_ineligible"):
+                return observe(
+                    "seed_ineligible",
+                    source_screen.inspect_source_screen(
+                        directory / "seed",
+                        authorization=authorization_path,
+                        expected_report_sha256=file_hash(directory / "seed/report.json"),
+                    ),
+                )
+            for iteration in range(len(state["decisions"]), state["spec"]["iterations"]):
+                _check_current(state)
+                location = directory / "iterations" / str(iteration)
+                if not location.exists():
+                    location.mkdir()
+                _root(location)
+                reader = NativeEvidence(directory, authorization_path, error_type=SourceSearchError)
+                plan = _plan(reader, state, iteration, state["screens"], state["failures"])
+                reader.capture.finish()
+                pipeline._same_or_write(location / "plan.json", _json(plan))
+                stage, child = "feedback", None
+                bundle = _bundle(location / "feedback", plan["parent"], state["failures"])
+                _write_packet(location / "feedback", plan, bundle)
+                pipeline._same_or_write(
+                    location / "proposal.json", _json(plan["proposal_descriptor"])
+                )
+                stage = "proposal"
+                reader = NativeEvidence(directory, authorization_path, error_type=SourceSearchError)
+                parent = _parent_screen(reader, plan["parent"])
+                reader.capture.finish()
+                generation = _object(parent.to_record()["generation"])
+                if not (location / "proposal").exists():
+                    inputs = _proposal_controls(state, location, plan)
+                    template = state["record"]["proposal_template"]
+                    candidate_improvement.prepare_candidate_improvement(
+                        location / "proposal",
+                        descriptor=location / "proposal.json",
+                        selection=Selection.from_bytes(_json(generation["selection"])),
+                        roots=source_screen._roots(generation),
+                        authorization=authority,
+                        review=state["record"]["review"],
+                        budget_microusd=template["budget_microusd"],
+                        max_calls=template["max_calls"],
+                        expected_runtime_sha256=state["record"]["expected_runtime_sha256"],
+                        expected_feedback_provenance_sha256=plan["feedback_sha256"][
+                            "provenance.json"
+                        ],
+                        input_files=list(inputs),
+                        expected_input_hashes=inputs,
+                    )
+                _check_current(state)
+                reader = NativeEvidence(directory, authorization_path, error_type=SourceSearchError)
+                _proposal_owner(reader, state, location, plan)
+                reader.capture.finish()
+                child = candidate_improvement.run_candidate_improvement(
+                    location / "proposal", transport=transport
+                )
+                if child["status"] != "complete":
+                    return observe(cast(str, child["reason"]), child)
+                proposal_digest = source_screen._accepted(location / "proposal", child)
+                reader = NativeEvidence(directory, authorization_path, error_type=SourceSearchError)
+                verified = _read_ref(
+                    reader,
+                    {
+                        "directory": str(location / "proposal"),
+                        "authorization": str(authorization_path),
+                        "report_sha256": proposal_digest,
+                    },
+                    proposal=True,
+                )
+                if _json(child) != _json(verified):
+                    raise SourceSearchError(
+                        "returned proposal differs from its anchored publication"
+                    )
+                reader.capture.finish()
+                if (
+                    child["disposition"] == "materialized"
+                    and _object(child["child"])["agent_sha256"] not in state["known_ids"]
+                ):
+                    stage = "screen"
+                    screen = _child_screen(state, child)
+                    if not (location / "screen").exists():
+                        _check_current(state)
+                        source_screen.prepare_source_screen(
+                            location / "screen",
+                            screen=screen,
+                            authorization=authority,
+                            review=state["record"]["review"],
+                            expected_runtime_sha256=state["record"]["expected_runtime_sha256"],
+                            input_bindings=state["controls"],
+                        )
+                    _check_current(state)
+                    reader = NativeEvidence(
+                        directory, authorization_path, error_type=SourceSearchError
+                    )
+                    _screen_owner(reader, state, location / "screen", screen)
+                    reader.capture.finish()
+                    child = source_screen.run_source_screen(
+                        location / "screen", transport=transport
+                    )
+                    if child["status"] != "complete":
+                        return observe(cast(str, child["reason"]), child)
+                    source_screen._accepted(location / "screen", child)
+                reader = NativeEvidence(directory, authorization_path, error_type=SourceSearchError)
+                decision, _ = _decision(reader, state, plan, state["known_ids"])
+                reader.capture.finish()
+                pipeline._same_or_write(location / "decision.json", _json(decision))
+                state = _restore(directory, authorization_path)
+            state = _restore(directory, authorization_path, complete=True)
+            result = _result(state)
+            return pipeline.publish_complete(
+                directory / "report.json",
+                result,
+                authority,
+                {row["run_id"] for row in state["owners"]},
+            )
+        except KeyboardInterrupt:
+            observe("cancelled", child)
+            raise
+        except (ValueError, TypeError, KeyError, OSError, RecursionError):
+            observe("protocol", child)
+            raise
+
+
+@_checked
+def inspect_source_search(
+    directory: Path, *, authorization: Path, expected_report_sha256: str
+) -> dict[str, object]:
+    directory, authorization = (
+        pipeline._absolute(str(directory)),
+        pipeline._absolute(str(authorization)),
+    )
+    reader = NativeEvidence(directory, authorization, error_type=SourceSearchError)
+    state = _restore(directory, authorization, complete=True, reader=reader)
+    result = _result(state)
+    raw = reader.raw(directory / "report.json", _digest(expected_report_sha256))
+    saved = _load(raw)
+    snapshot = _object(saved["authorization"])
+    pipeline.validate_authorization_snapshot(
+        snapshot, state["authorization"], {row["run_id"] for row in state["owners"]}
+    )
+    if raw != _json(saved) or raw != _json(result | {"authorization": snapshot}):
+        raise SourceSearchError("search publication differs from its original anchored outcomes")
+    reader.capture.finish()
+    return saved

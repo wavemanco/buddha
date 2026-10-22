@@ -43,6 +43,12 @@ SOURCE_FORMAT = "buddha.candidate-generation-source.v1"
 CONTEXT_FORMAT = "buddha.candidate-generation-context.v1"
 SEAL_FORMAT = "buddha.candidate-generation-stage.v1"
 ANCHOR_PREFIX = "candidate generation completed: "
+SOURCE_FORMAT_V2 = "buddha.candidate-generation-source.v2"
+CONTEXT_FORMAT_V2 = "buddha.candidate-generation-context.v2"
+SEAL_FORMAT_V2 = "buddha.candidate-generation-stage.v2"
+ANCHOR_PREFIX_V2 = "candidate generation outcome completed: "
+OUTCOME_FORMAT = "buddha.candidate-generation-outcome.v2"
+CLAIM_V2 = "anchored source execution outcome only; no competence, eligibility or improvement claim"
 
 
 class CandidateGenerationError(ReleaseError):
@@ -70,7 +76,26 @@ def _checked[**P, T](function: Callable[P, T]) -> Callable[P, T]:
     return checked
 
 
-def _sources() -> list[Path]:
+def generation_formats(recipe_format: object) -> dict[str, str]:
+    """Select explicit producer identities without reading files or guessing context."""
+    if recipe_format == "buddha.candidate-generation.v1":
+        return {
+            "context": CONTEXT_FORMAT,
+            "seal": SEAL_FORMAT,
+            "anchor": ANCHOR_PREFIX,
+            "source": SOURCE_FORMAT,
+        }
+    if recipe_format == "buddha.candidate-generation.v2":
+        return {
+            "context": CONTEXT_FORMAT_V2,
+            "seal": SEAL_FORMAT_V2,
+            "anchor": ANCHOR_PREFIX_V2,
+            "source": SOURCE_FORMAT_V2,
+        }
+    raise CandidateGenerationError("only explicit candidate generation is supported")
+
+
+def _sources(recipe_format: object = "buddha.candidate-generation.v1") -> list[Path]:
     # The generation-v1 host closure is fixed without importing its worker on a
     # passive read. These eight names are the SOURCE-CANDIDATES contract.
     names = (
@@ -91,7 +116,11 @@ def _sources() -> list[Path]:
         "search_evidence",
     )
     package = Path(__file__).absolute().parent
-    return [package / (name + ".py") for name in names]
+    return [package / (name + ".py") for name in names] + (
+        [package / "native_evidence.py"]
+        if recipe_format == "buddha.candidate-generation.v2"
+        else []
+    )
 
 
 def _recipe(
@@ -112,8 +141,7 @@ def _recipe(
             "max_callbacks",
         },
     )
-    if recipe["format"] != "buddha.candidate-generation.v1":
-        raise CandidateGenerationError("only explicit candidate generation is supported")
+    generation_formats(recipe["format"])
     _integer(recipe["max_callbacks"], 0, 1000)
     tasks = TaskSet.from_bytes(consume(pipeline._absolute(recipe["tasks"])))
     runtime = _object(recipe["runtime"], {"path", "sha256"})
@@ -201,7 +229,7 @@ def prepare_candidate_generation(
     _runtime_selection(recipe, selection, roots, consume, runtime_sha256)
     if tasks.release_sha256 != selection.release_sha256:
         raise CandidateGenerationError("source task differs from selected release")
-    for path in _sources():
+    for path in _sources(recipe["format"]):
         consume(path)
     protected = [*roots.values(), descriptor, *expected, authorization.path]
     if any(directory.is_relative_to(path) or path.is_relative_to(directory) for path in protected):
@@ -214,7 +242,7 @@ def prepare_candidate_generation(
     context = directory / "context.json"
     context_raw = _json(
         {
-            "format": CONTEXT_FORMAT,
+            "format": generation_formats(recipe["format"])["context"],
             "descriptor": str(descriptor),
             "expected_runtime_sha256": runtime_sha256,
         }
@@ -281,6 +309,242 @@ def _outputs(
     return {"answers": path}
 
 
+def _wrap_outcome(attempt: Path, session: object, report: dict[str, object]) -> dict[str, object]:
+    from buddha.candidate_run import CandidateSession
+
+    if not isinstance(session, CandidateSession):
+        raise CandidateGenerationError("generation outcome needs the actual source session")
+    raw = pipeline._read(attempt / "session/report.json")
+    if raw != _json(report) + b"\n":
+        raise CandidateGenerationError("raw generation report differs from its actual return")
+    done = session.done
+    totals = session.gateway.ledger.totals()
+    terminal = {
+        "ready_seen": session.ready,
+        "broken": session.broken,
+        "sequence": session.sequence,
+        "delivered": session.delivered,
+        "stop_reason": session.stop_reason,
+        "done_sha256": None if done is None else pipeline._sha(done),
+        "done_status": None if done is None else done["status"],
+        "done_reason": None if done is None else done["reason"],
+        "operation_count": totals["operation_count"],
+        "recorded_cost_microusd": totals["spent_microusd"],
+    }
+    if done is not None:
+        pipeline._write(attempt / "session/done.json", _json(done) + b"\n")
+    execution = report["execution"]
+    calls = _object(report["calls"])
+    accepted = (
+        type(terminal["ready_seen"]) is bool
+        and terminal["broken"] is False
+        and done is not None
+        and session.stop_reason is None
+        and report["host_stop_reason"] is None
+        and type(execution) is dict
+        and type(execution.get("exit_code")) is int
+        and execution["exit_code"] == 0
+        and execution.get("cleanup_status") == "removed"
+        and execution.get("image_id") == session.spec.image_id
+        and report["owner_operation_coverage_complete"] is True
+        and _json(report["gateway_totals"]) == _json(totals)
+        and type(session.sequence) is int
+        and type(session.delivered) is int
+        and session.sequence == session.delivered == totals["operation_count"]
+        and all(type(value) is int for value in calls.values())
+        and calls == {"requested": session.delivered, "completed": session.delivered, "stopped": 0}
+        and report["status"] == done["status"]
+        and report["reason"] == done["reason"]
+    )
+    disposition = None
+    if accepted:
+        if session.ready and report["status"] == report["reason"] == "complete":
+            disposition = "generated"
+        elif report["status"] == "failed" and report["reason"] == "agent_error":
+            if session.ready or session.delivered == 0:
+                disposition = "candidate_execution_failed"
+    reason = report["reason"]
+    if disposition is None and session.stop_reason is None:
+        if session.broken or done is None:
+            reason = "protocol"
+        elif report["owner_operation_coverage_complete"] is not True:
+            reason = "owner_prefix"
+    artifacts = {"session/report.json": hashlib.sha256(raw).hexdigest()} | {
+        "session/" + _path(name): _digest(digest)
+        for name, digest in _object(report["artifacts"]).items()
+    }
+    if done is not None:
+        artifacts["session/done.json"] = file_hash(attempt / "session/done.json")
+    result = {
+        "format": OUTCOME_FORMAT,
+        "status": "complete" if disposition is not None else "incomplete",
+        "disposition": disposition,
+        "reason": reason,
+        "session_report_sha256": hashlib.sha256(raw).hexdigest(),
+        "terminal": terminal,
+        "artifacts": artifacts,
+        "claim": CLAIM_V2,
+    }
+    pipeline._write(attempt / "report.json", _json(result) + b"\n")
+    return result
+
+
+def _validate_outcome(
+    attempt: Path,
+    outcome: dict[str, object],
+    recipe: dict[str, object],
+    tasks: TaskSet,
+    descriptor_raw: bytes,
+    runtime_sha256: str,
+    owner: dict[str, object],
+    totals: dict[str, int],
+    read: Callable[[Path], bytes],
+) -> dict[str, Path]:
+    _object(
+        outcome,
+        {
+            "format",
+            "status",
+            "disposition",
+            "reason",
+            "session_report_sha256",
+            "terminal",
+            "artifacts",
+            "claim",
+        },
+    )
+    terminal = _object(
+        outcome["terminal"],
+        {
+            "ready_seen",
+            "broken",
+            "sequence",
+            "delivered",
+            "stop_reason",
+            "done_sha256",
+            "done_status",
+            "done_reason",
+            "operation_count",
+            "recorded_cost_microusd",
+        },
+    )
+    raw = read(attempt / "session/report.json")
+    report = _load(raw)
+    done_raw = read(attempt / "session/done.json")
+    done = _object(_load(done_raw), {"type", "status", "reason", "answers"})
+    calls = _object(report["calls"], {"requested", "completed", "stopped"})
+    count = _integer(totals["operation_count"], 0, cast(int, recipe["max_callbacks"]))
+    execution = _object(report["execution"])
+    if (
+        outcome["format"] != OUTCOME_FORMAT
+        or outcome["status"] != "complete"
+        or outcome["claim"] != CLAIM_V2
+        or outcome["disposition"] not in {"generated", "candidate_execution_failed"}
+        or raw != _json(report) + b"\n"
+        or hashlib.sha256(raw).hexdigest() != _digest(outcome["session_report_sha256"])
+        or done_raw != _json(done) + b"\n"
+        or pipeline._sha(done) != _digest(terminal["done_sha256"])
+        or done["type"] != "done"
+        or done["status"] != report["status"]
+        or done["reason"] != report["reason"]
+        or terminal["done_status"] != done["status"]
+        or terminal["done_reason"] != done["reason"]
+        or outcome["reason"] != report["reason"]
+        or type(terminal["ready_seen"]) is not bool
+        or terminal["broken"] is not False
+        or terminal["stop_reason"] is not None
+        or any(
+            type(terminal[key]) is not int
+            for key in ("sequence", "delivered", "operation_count", "recorded_cost_microusd")
+        )
+        or terminal["sequence"] != count
+        or terminal["delivered"] != count
+        or terminal["operation_count"] != count
+        or terminal["recorded_cost_microusd"] != totals["spent_microusd"]
+        or _json(report["gateway_totals"]) != _json(totals)
+        or report["owner_operation_coverage_complete"] is not True
+        or any(type(value) is not int for value in calls.values())
+        or calls != {"requested": count, "completed": count, "stopped": 0}
+        or type(execution.get("exit_code")) is not int
+        or execution["exit_code"] != 0
+        or execution.get("cleanup_status") != "removed"
+        or execution.get("image_id") != _object(recipe["executor"])["image_id"]
+        or report["host_stop_reason"] is not None
+        or report["format"] != "buddha.candidate-generation-report.v1"
+        or report["gateway_manifest_sha256"] != pipeline._sha(owner)
+        or report["descriptor_sha256"] != hashlib.sha256(descriptor_raw).hexdigest()
+        or report["runtime_sha256"] != runtime_sha256
+        or report["config_sha256"] != pipeline._sha(recipe["config"])
+        or report["tasks_sha256"] != tasks.fingerprint()
+        or report["agent_sha256"] != Selection.from_bytes(_json(owner["selection"])).agent_sha256
+        or type(report["max_callbacks"]) is not int
+        or report["max_callbacks"] != recipe["max_callbacks"]
+    ):
+        raise CandidateGenerationError("generation outcome identity, terminal or prefix differs")
+    declared = _object(outcome["artifacts"])
+    for name, digest in declared.items():
+        if hashlib.sha256(read(attempt / _path(name))).hexdigest() != _digest(digest):
+            raise CandidateGenerationError("generation outcome artifact differs")
+    expected = {"session/report.json", "session/done.json"}
+    outputs = {}
+    if outcome["disposition"] == "generated":
+        if terminal["ready_seen"] is not True or done["status"] != "complete":
+            raise CandidateGenerationError("generated C1 has no ready completed terminal")
+        outputs = _outputs(
+            attempt / "session", report, recipe, tasks, descriptor_raw, runtime_sha256, owner
+        )
+        answers = Answers.from_bytes(read(attempt / "session/answers.json"))
+        if _json(
+            cast(list[dict[str, object]], answers.to_record()["outputs"])[0]["answers"]
+        ) != _json(done["answers"]):
+            raise CandidateGenerationError("generated C1 differs from accepted literal answers")
+        expected.add("session/answers.json")
+    elif (
+        report["status"] != "failed"
+        or report["reason"] != "agent_error"
+        or type(done["answers"]) is not list
+        or done["answers"]
+        or report["artifacts"] != {}
+        or (terminal["ready_seen"] is False and count != 0)
+    ):
+        raise CandidateGenerationError("source failure is not a clean accepted agent_error")
+    if set(declared) != expected:
+        raise CandidateGenerationError("generation outcome output population differs")
+    return outputs
+
+
+def _source_reference(
+    directory: Path, seal: Path, owner: dict[str, object], recipe_format: object
+) -> dict[str, object]:
+    return {
+        "format": generation_formats(recipe_format)["source"],
+        "generation_directory": str(directory),
+        "stage_seal_sha256": file_hash(seal),
+        "owner_manifest_sha256": pipeline._sha(owner),
+        "owner_ledger_sha256": file_hash(directory / "owners/0/operations.sqlite3"),
+    }
+
+
+def _v2_report(
+    outcome: dict[str, object],
+    generation: dict[str, object],
+    reference: dict[str, object],
+    authorization: dict[str, object],
+) -> dict[str, object]:
+    return {
+        "format": "buddha.candidate-generation-stage-report.v2",
+        "status": "complete",
+        "disposition": outcome["disposition"],
+        "reason": outcome["reason"],
+        "stage_seal_sha256": reference["stage_seal_sha256"],
+        "generation": generation,
+        "outcome": outcome,
+        "source_generation": reference,
+        "authorization": authorization,
+        "claim": CLAIM_V2,
+    }
+
+
 @_checked
 def run_candidate_generation(directory: Path, *, transport: RawHTTPTransport) -> dict[str, object]:
     """Execute or replay the same original source owner and retain partial work."""
@@ -308,11 +572,15 @@ def run_candidate_generation(directory: Path, *, transport: RawHTTPTransport) ->
                 "expected_runtime_sha256",
             },
         )
-        if context["format"] != CONTEXT_FORMAT:
+        if context["format"] not in {CONTEXT_FORMAT, CONTEXT_FORMAT_V2}:
             raise CandidateGenerationError("unsupported candidate producer context")
         descriptor = pipeline._absolute(context["descriptor"])
         runtime_sha256 = _digest(context["expected_runtime_sha256"])
         recipe, tasks = _recipe(consume, descriptor, runtime_sha256)
+        formats = generation_formats(recipe["format"])
+        prospective = recipe["format"] == "buddha.candidate-generation.v2"
+        if context["format"] != formats["context"]:
+            raise CandidateGenerationError("candidate descriptor/context modes differ")
         _runtime_selection(
             recipe,
             Selection.from_bytes(_json(owner["selection"])),
@@ -320,7 +588,7 @@ def run_candidate_generation(directory: Path, *, transport: RawHTTPTransport) ->
             consume,
             runtime_sha256,
         )
-        for path in _sources():
+        for path in _sources(recipe["format"]):
             consume(path)
         authority = Authorization(pipeline._absolute(owner["authorization_path"]))
         actual_attempt: Path | None = None
@@ -336,17 +604,33 @@ def run_candidate_generation(directory: Path, *, transport: RawHTTPTransport) ->
                 != Path(__file__).with_name("candidate_run.py").absolute()
             ):
                 raise CandidateGenerationError("a different source session was imported")
-            return candidate_run.CandidateSession(
+            if prospective:
+                attempt.mkdir()
+            session = candidate_run.CandidateSession(
                 gateway,
                 descriptor=descriptor,
-                output=attempt,
+                output=attempt / "session" if prospective else attempt,
                 expected_runtime_sha256=runtime_sha256,
-            ).run()
+            )
+            report = session.run()
+            return _wrap_outcome(attempt, session, report) if prospective else report
 
         def validate(attempt: Path, report: dict[str, object]) -> dict[str, Path]:
             execution_identity(gateway.directory)
-            for path in _sources():
+            for path in _sources(recipe["format"]):
                 consume(path)
+            if prospective:
+                return _validate_outcome(
+                    attempt,
+                    report,
+                    recipe,
+                    tasks,
+                    consume(descriptor),
+                    runtime_sha256,
+                    owner,
+                    gateway.ledger.totals(),
+                    lambda path: pipeline._read(path),
+                )
             result = _outputs(
                 attempt, report, recipe, tasks, consume(descriptor), runtime_sha256, owner
             )
@@ -360,17 +644,21 @@ def run_candidate_generation(directory: Path, *, transport: RawHTTPTransport) ->
                 ordinal += 1
             path = directory / "observations" / f"{ordinal}.json"
             value: dict[str, object] = {
-                "format": "buddha.candidate-generation-observation.v1",
+                "format": "buddha.candidate-generation-observation.v2"
+                if prospective
+                else "buddha.candidate-generation-observation.v1",
                 "status": "incomplete",
                 "reason": reason,
                 "owner": str(gateway.directory),
                 "attempt": None
                 if actual_attempt is None or not actual_attempt.is_dir()
                 else str(actual_attempt),
-                "generation": report,
+                "generation": saved_session() if prospective else report,
                 "authorization": authority.summary(),
                 "observation": path.relative_to(directory).as_posix(),
             }
+            if prospective:
+                value.update(disposition=None, outcome=report)
             pipeline._write(path, _json(value))
             return value
 
@@ -383,6 +671,14 @@ def run_candidate_generation(directory: Path, *, transport: RawHTTPTransport) ->
                     return None
             return None
 
+        def saved_session() -> dict[str, object] | None:
+            if actual_attempt is not None and (actual_attempt / "session/report.json").is_file():
+                try:
+                    return _load(pipeline._read(actual_attempt / "session/report.json"))
+                except (ReleaseError, OSError):
+                    return None
+            return None
+
         try:
             report, _, _, sealed, _ = pipeline.execute_stage(
                 directory,
@@ -391,8 +687,8 @@ def run_candidate_generation(directory: Path, *, transport: RawHTTPTransport) ->
                 authority,
                 run=run,
                 validate=validate,
-                seal_format=SEAL_FORMAT,
-                anchor_prefix=ANCHOR_PREFIX,
+                seal_format=formats["seal"],
+                anchor_prefix=formats["anchor"],
             )
         except KeyboardInterrupt:
             observation("cancelled", saved_report())
@@ -403,6 +699,21 @@ def run_candidate_generation(directory: Path, *, transport: RawHTTPTransport) ->
             raise
         if sealed is None:
             return observation(_text(report["reason"]), report)
+        if prospective:
+            seal = _load(pipeline._read(sealed))
+            attempt = directory / _path(seal["attempt"])
+            raw_report = _load(pipeline._read(attempt / "session/report.json"))
+            return pipeline.publish_complete(
+                directory / "report.json",
+                _v2_report(
+                    report,
+                    raw_report,
+                    _source_reference(directory, sealed, owner, recipe["format"]),
+                    authority.summary(),
+                ),
+                authority,
+                {_text(owner["run_id"])},
+            )
         return pipeline.publish_complete(
             directory / "report.json",
             {
@@ -421,11 +732,12 @@ def run_candidate_generation(directory: Path, *, transport: RawHTTPTransport) ->
         )
 
 
-@_checked
-def read_candidate_generation_source(
+def _read_evidence(
     value: object,
     authority_path: Path,
-) -> tuple[TaskSet, Answers, Path, dict[Path, str], dict[str, object]]:
+    *,
+    capture: _Capture | None = None,
+) -> dict[str, object]:
     """Read original inactive evidence without the producer's source or Gateway."""
     reference = _object(
         value,
@@ -437,11 +749,15 @@ def read_candidate_generation_source(
             "owner_ledger_sha256",
         },
     )
-    if reference["format"] != SOURCE_FORMAT:
+    if reference["format"] not in {SOURCE_FORMAT, SOURCE_FORMAT_V2}:
         raise CandidateGenerationError("unsupported candidate source reference")
+    prospective = reference["format"] == SOURCE_FORMAT_V2
+    formats = generation_formats(
+        "buddha.candidate-generation.v2" if prospective else "buddha.candidate-generation.v1"
+    )
     root = pipeline._absolute(reference["generation_directory"])
     _root(root)
-    capture = _Capture(root)
+    capture = capture if capture is not None else _Capture(root)
     owner_path = root / "owners/0"
     history = read_gateway_history(
         owner_path,
@@ -460,6 +776,17 @@ def read_candidate_generation_source(
         or pipeline._absolute(history.manifest["authorization_path"]) != authority_path
     ):
         raise CandidateGenerationError("candidate source belongs to another authority")
+    if prospective:
+        owner_names = {name.split("/")[1] for name in capture.entries if name.startswith("owners/")}
+        seals = {name for name in capture.entries if name.startswith("completed/")}
+        if owner_names != {"0"} or seals != {"completed/0.json"}:
+            raise CandidateGenerationError("generation outcome has foreign owners or seals")
+        for row in cast(list[dict[str, object]], funding["auth_runs"]):
+            path = pipeline._absolute(row["directory"])
+            if path.is_relative_to(root) and (
+                path != owner_path or row["run_id"] != history.run_id
+            ):
+                raise CandidateGenerationError("a retained funded generation owner is missing")
     rows = [
         row
         for row in cast(list[dict[str, object]], funding["auth_runs"])
@@ -485,13 +812,13 @@ def read_candidate_generation_source(
     if (
         seal_sha256 != _digest(reference["stage_seal_sha256"])
         or len(anchors) != 1
-        or anchors[0]["reason"] != ANCHOR_PREFIX + seal_sha256
+        or anchors[0]["reason"] != formats["anchor"] + seal_sha256
     ):
         raise CandidateGenerationError("candidate source lacks its original independent anchor")
     seal = _object(_load(seal_raw), {"format", "index", "owner_sha256", "attempt", "files"})
     relative = Path(_path(seal["attempt"]))
     if (
-        seal["format"] != SEAL_FORMAT
+        seal["format"] != formats["seal"]
         or type(seal["index"]) is not int
         or seal["index"] != 0
         or seal["owner_sha256"] != history.manifest_sha256
@@ -501,12 +828,25 @@ def read_candidate_generation_source(
     ):
         raise CandidateGenerationError("candidate source completion identity differs")
     attempt = root / relative
-    expected_files = {"report.json", "answers.json"}
+    outcome = _load(capture.read(attempt / "report.json")) if prospective else None
+    expected_files = (
+        {"report.json", "session/report.json", "session/done.json"}
+        | (
+            {"session/answers.json"}
+            if outcome is not None and outcome.get("disposition") == "generated"
+            else set()
+        )
+        if prospective
+        else {"report.json", "answers.json"}
+    )
     prefix = attempt.relative_to(root).as_posix() + "/"
     actual_entries = {
         name.removeprefix(prefix) for name in capture.entries if name.startswith(prefix)
     }
-    if actual_entries != expected_files or set(_object(seal["files"])) != expected_files:
+    if (
+        actual_entries != expected_files | ({"session"} if prospective else set())
+        or set(_object(seal["files"])) != expected_files
+    ):
         raise CandidateGenerationError("candidate source output inventory differs")
     for name, digest in _object(seal["files"]).items():
         if hashlib.sha256(capture.read(attempt / _path(name))).hexdigest() != _digest(digest):
@@ -525,11 +865,23 @@ def read_candidate_generation_source(
     context = _object(
         _load(bound(root / "context.json")), {"format", "descriptor", "expected_runtime_sha256"}
     )
-    if context["format"] != CONTEXT_FORMAT:
+    if context["format"] != formats["context"]:
         raise CandidateGenerationError("candidate source context differs")
     runtime_sha256 = _digest(context["expected_runtime_sha256"])
     descriptor = pipeline._absolute(context["descriptor"])
     recipe, tasks = _recipe(bound, descriptor, runtime_sha256)
+    if generation_formats(recipe["format"]) != formats:
+        raise CandidateGenerationError("candidate source modes differ")
+    if prospective:
+        names = {path.name for path in _sources(recipe["format"])}
+        prefixes = {
+            path.parent
+            for path in bindings
+            if path.name == "candidate_generation.py"
+            and all(path.parent / name in bindings for name in names)
+        }
+        if len(prefixes) != 1:
+            raise CandidateGenerationError("generation outcome omits original installed sources")
     owner = history.manifest
     selection = Selection.from_bytes(_json(owner["selection"]))
     _runtime_selection(recipe, selection, _object(owner["roots"]), bound, runtime_sha256)
@@ -556,8 +908,23 @@ def read_candidate_generation_source(
     spec = _object(_object(profile)["spec"])
     if any(spec[key] != config[key] for key in ("provider", "model", "max_output_tokens")):
         raise CandidateGenerationError("candidate source profile differs")
-    report = _load(capture.read(attempt / "report.json"))
-    _outputs(attempt, report, recipe, tasks, bound(descriptor), runtime_sha256, owner)
+    report = _load(
+        capture.read(attempt / ("session/report.json" if prospective else "report.json"))
+    )
+    if prospective:
+        _validate_outcome(
+            attempt,
+            cast(dict[str, object], outcome),
+            recipe,
+            tasks,
+            bound(descriptor),
+            runtime_sha256,
+            owner,
+            history.totals(),
+            capture.read,
+        )
+    else:
+        _outputs(attempt, report, recipe, tasks, bound(descriptor), runtime_sha256, owner)
     totals = _object(report["gateway_totals"])
     if (
         any(type(item) is not int for item in totals.values())
@@ -597,17 +964,93 @@ def read_candidate_generation_source(
         observed_ids.add(_text(request["logical_id"]))
     if observed_ids != expected_ids or len(observed_ids) != len(history.operations):
         raise CandidateGenerationError("candidate source skipped its original callback prefix")
-    answers_path = attempt / "answers.json"
-    answers = Answers.from_bytes(capture.read(answers_path))
+    generated = not prospective or cast(dict[str, object], outcome)["disposition"] == "generated"
+    answers_path = (
+        attempt / ("session/answers.json" if prospective else "answers.json") if generated else None
+    )
+    answers = Answers.from_bytes(capture.read(answers_path)) if answers_path is not None else None
     capture.finish()
-    return (
-        tasks,
-        answers,
-        answers_path,
-        {
+    return {
+        "tasks": tasks,
+        "answers": answers,
+        "answers_path": answers_path,
+        "files": {
             path: hashlib.sha256(raw).hexdigest()
             for path, raw in capture.raw.items()
             if path != authority_path
         },
-        _object(funding["config"]),
+        "terms": _object(funding["config"]),
+        "generation": report,
+        "outcome": outcome,
+        "reference": reference,
+        "funding": funding,
+        "owner": owner,
+        "capture": capture,
+    }
+
+
+@_checked
+def read_candidate_generation_source(
+    value: object,
+    authority_path: Path,
+) -> tuple[TaskSet, Answers, Path, dict[Path, str], dict[str, object]]:
+    """Read only generated C1; a checked failed execution is never an answer source."""
+    evidence = _read_evidence(value, authority_path)
+    if evidence["answers"] is None or evidence["answers_path"] is None:
+        raise CandidateGenerationError("a checked source failure has no C1 answers")
+    return (
+        cast(TaskSet, evidence["tasks"]),
+        cast(Answers, evidence["answers"]),
+        cast(Path, evidence["answers_path"]),
+        cast(dict[Path, str], evidence["files"]),
+        cast(dict[str, object], evidence["terms"]),
     )
+
+
+@_checked
+def inspect_candidate_generation(
+    directory: Path, *, authorization: Path, expected_report_sha256: str
+) -> dict[str, object]:
+    """Passively check a published v2 outcome, including original independent anchor."""
+    from buddha.native_evidence import authority_observation
+
+    if not isinstance(directory, Path) or not isinstance(authorization, Path):
+        raise CandidateGenerationError("generation inspection needs explicit Paths")
+    directory, authorization = (
+        pipeline._absolute(str(directory)),
+        pipeline._absolute(str(authorization)),
+    )
+    capture = _Capture(directory)
+    raw = capture.read(directory / "report.json")
+    if hashlib.sha256(raw).hexdigest() != _digest(expected_report_sha256):
+        raise CandidateGenerationError("generation publication differs from caller approval")
+    saved = _load(raw)
+    owner_path = directory / "owners/0"
+    observed = _owner(capture, owner_path)
+    reference: dict[str, object] = {
+        "format": SOURCE_FORMAT_V2,
+        "generation_directory": str(directory),
+        "stage_seal_sha256": hashlib.sha256(
+            capture.read(directory / "completed/0.json")
+        ).hexdigest(),
+        "owner_manifest_sha256": observed.manifest_sha256,
+        "owner_ledger_sha256": observed.ledger_sha256,
+    }
+    evidence = _read_evidence(reference, authorization, capture=capture)
+    current = authority_observation(
+        capture, authorization, cast(dict[str, object], evidence["funding"])
+    )
+    snapshot = _object(saved.get("authorization"))
+    pipeline.validate_authorization_snapshot(
+        snapshot, current, {_text(_object(evidence["owner"])["run_id"])}
+    )
+    reconstructed = _v2_report(
+        _object(evidence["outcome"]),
+        _object(evidence["generation"]),
+        reference,
+        snapshot,
+    )
+    if raw != _json(saved) or _json(saved) != _json(reconstructed):
+        raise CandidateGenerationError("generation publication differs from its sealed outcome")
+    capture.finish()
+    return saved

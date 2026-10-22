@@ -325,17 +325,24 @@ worth further investigation under that search rule. It does not establish
 general improvement; comparing scores from different prompts, resources or
 judging settings would be misleading.
 
-The larger goal also includes changing actual task-agent and improvement code.
-The [restricted candidate runner](SOURCE-CANDIDATES.md) now supplies isolated
-task execution and host-owned model access. Inherited source changes and the
-improvement procedure are still being implemented. Improving the task agent and improving its ability to
-produce better descendants are separate experiments. Neither follows merely
-from a higher score on one development prompt.
+The [bounded source-search loop](SOURCE-SEARCH.md) now connects changes to actual
+agent Python code: choose a parent, run its improvement procedure, test its child,
+and use measured results and checked failures in later proposals. A child can
+later run its own changed improvement procedure. NoveltyBench 1.1 stays fixed.
 
-The sequence remains in the [living plan](PLAN.md). The next controlled policy
-comparison must account for the observed judge variation; source-executor work
-can proceed independently without starting paid evolutionary search. No new
-experiment spending is authorized by this guide or by the audit's unused cap.
+The engineering rehearsal ran supplied Python programs in real isolation with
+fake model replies. It showed the code and recovery paths working, not a model
+inventing better code or a scientific gain. Passing the answer-generation screen
+does not certify every child's improvement procedure. The actual model-authored
+source experiment and formal mutation-competence checks remain open; the separate
+experiment testing whether an evolved improver produces better descendants is
+not implemented. A higher score on one development prompt establishes none of these.
+
+The sequence remains in the [living plan](PLAN.md). The user reports that the
+current POL-02 comparison completed; saved-result review is pending. That review
+must account for the observed judge variation. Source-executor work can proceed
+independently without starting paid evolutionary search. No new experiment
+spending is authorized by this guide or by the audit's unused cap.
 
 ## 12. What is frozen, and what an upgrade changes
 

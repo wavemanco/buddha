@@ -109,6 +109,7 @@ class CandidateSession:
             description = _load(raw)
             self.improvement = description.get("format") == "buddha.candidate-improvement.v1"
             self._improvement = self.improvement
+            self.generation_v2 = description.get("format") == "buddha.candidate-generation.v2"
             _object(
                 description,
                 {
@@ -124,6 +125,7 @@ class CandidateSession:
             )
             if description["format"] not in {
                 "buddha.candidate-generation.v1",
+                "buddha.candidate-generation.v2",
                 "buddha.candidate-improvement.v1",
             }:
                 raise CandidateRunError("unsupported candidate descriptor")
@@ -382,6 +384,7 @@ class CandidateSession:
                 "gateway": [str(self.gateway.directory), self.gateway.manifest_sha256],
                 "descriptor": self.descriptor_sha256,
                 "runtime": self.runtime_sha256,
+                **({"generation_mode": "v2"} if self.generation_v2 else {}),
                 **(
                     {
                         "mode": "improve",
@@ -508,7 +511,21 @@ class CandidateSession:
                     [_utf8(value) for value in values]
                 elif (
                     values
-                    or not self.ready
+                    or (
+                        not self.ready
+                        and not (
+                            self.generation_v2
+                            and status == "failed"
+                            and reason == "agent_error"
+                            and self.stop_reason is None
+                            and type(self.sequence) is int
+                            and type(self.delivered) is int
+                            and self.sequence == self.delivered == 0
+                            and all(type(value) is int for value in self.calls.values())
+                            and self.calls == {"requested": 0, "completed": 0, "stopped": 0}
+                            and self._operation_coverage()
+                        )
+                    )
                     or (status == "stopped" and (reason != self.stop_reason or reason is None))
                     or (status == "failed" and reason not in {"protocol", "agent_error"})
                     or status not in {"failed", "stopped"}

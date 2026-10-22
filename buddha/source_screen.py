@@ -86,7 +86,7 @@ class SourceScreen(_Artifact):
                 "lineage",
             },
         )
-        if record["format"] != "buddha.source-screen.v1":
+        if record["format"] not in {"buddha.source-screen.v1", "buddha.source-screen.v2"}:
             raise SourceScreenError("unsupported source screen")
         source = TaskSet.from_bytes(_json(record["source"]))
         release, dataset = _source(source.to_record())
@@ -230,6 +230,14 @@ def _sources() -> list[Path]:
 
 def _roots(section: dict[str, object]) -> dict[str, Path]:
     return {name: pipeline._absolute(path) for name, path in _object(section["roots"]).items()}
+
+
+def _version(screen: SourceScreen, stem: str) -> str:
+    return "buddha." + stem + "." + _text(screen.to_record()["format"]).rsplit(".", 1)[1]
+
+
+def _generation_formats(screen: SourceScreen) -> dict[str, str]:
+    return candidate_generation.generation_formats(_version(screen, "candidate-generation"))
 
 
 def _comparison_controls(
@@ -387,7 +395,7 @@ def _configuration(screen: SourceScreen, runtime_sha256: str) -> None:
 def _generation_recipe(location: Path, screen: SourceScreen) -> dict[str, object]:
     generation = _object(screen.to_record()["generation"])
     return {
-        "format": "buddha.candidate-generation.v1",
+        "format": _version(screen, "candidate-generation"),
         "tasks": str(location / "task.json"),
         **{
             key: generation[key]
@@ -423,10 +431,10 @@ def _materialize(directory: Path, screen: SourceScreen, index: int) -> tuple[Pat
     return location, descriptor
 
 
-def _source_reference(directory: Path) -> dict[str, object]:
+def _source_reference(directory: Path, screen: SourceScreen) -> dict[str, object]:
     owner = directory / "owners/0"
     return {
-        "format": candidate_generation.SOURCE_FORMAT,
+        "format": _generation_formats(screen)["source"],
         "generation_directory": str(directory),
         "stage_seal_sha256": file_hash(directory / "completed/0.json"),
         "owner_manifest_sha256": pipeline._sha(_read_manifest(owner)),
@@ -438,7 +446,7 @@ def _evaluation_record(location: Path, screen: SourceScreen) -> dict[str, object
     record = screen.to_record()
     return {
         "format": "buddha.native-evaluation.v1",
-        "source_generation": _source_reference(location / "generation"),
+        "source_generation": _source_reference(location / "generation", screen),
         "native": record["native"],
         "stages": record["stages"],
     }
@@ -499,7 +507,7 @@ def prepare_source_screen(
         (directory / name).mkdir()
     pipeline._write(directory / "screen.json", screen.to_bytes())
     context: dict[str, object] = {
-        "format": "buddha.source-screen-context.v1",
+        "format": _version(screen, "source-screen-context"),
         "screen_sha256": screen.fingerprint(),
         "expected_runtime_sha256": runtime_sha256,
         "controls": {str(path): digest for path, digest in expected.items()},
@@ -566,7 +574,7 @@ def _original(
         },
     )
     screen = SourceScreen.from_bytes(consume(directory / "screen.json"))
-    if context["format"] != "buddha.source-screen-context.v1" or (
+    if context["format"] != _version(screen, "source-screen-context") or (
         context["screen_sha256"] != screen.fingerprint()
     ):
         raise SourceScreenError("screen differs from its original context")
@@ -598,6 +606,7 @@ def _seal(
     funding: dict[str, object],
     *,
     source: bool,
+    screen: SourceScreen,
 ) -> bool:
     path = child / "completed" / (str(index) + ".json")
     if not path.exists():
@@ -619,7 +628,7 @@ def _seal(
     if (
         funding["active"] is not False
         or seal["format"]
-        != (candidate_generation.SEAL_FORMAT if source else "buddha.native-evaluation-stage.v1")
+        != (_generation_formats(screen)["seal"] if source else "buddha.native-evaluation-stage.v1")
         or type(seal["index"]) is not int
         or seal["index"] != index
         or seal["owner_sha256"] != gateway.manifest_sha256
@@ -635,7 +644,7 @@ def _seal(
     # Existing inactive anchors are checked; this never closes an active owner.
     authority.deactivate(
         _text(_read_manifest(gateway.directory)["run_id"]),
-        (candidate_generation.ANCHOR_PREFIX if source else "native evaluation completed: ")
+        (_generation_formats(screen)["anchor"] if source else "native evaluation completed: ")
         + digest,
     )
     return True
@@ -660,6 +669,7 @@ def _preflight(
     }
     identifiers: set[str] = set()
     unfinished = False
+    terminal_failure = False
     record = screen.to_record()
     stages = cast(list[object], record["stages"])
     for task in sorted(tasks, key=lambda path: int(path.name)):
@@ -673,6 +683,10 @@ def _preflight(
         if pipeline._read(task / "generation.json") != _json(recipe):
             raise SourceScreenError("original source recipe changed")
         for child, source in ((task / "generation", True), (task / "evaluation", False)):
+            if not source and terminal_failure:
+                if child.exists() or index != len(tasks) - 1:
+                    raise SourceScreenError("work follows a terminal candidate failure")
+                continue
             if not child.exists():
                 unfinished = True
                 continue
@@ -684,7 +698,7 @@ def _preflight(
                     raise SourceScreenError("original native recipe changed")
             context_path = child / "context.json"
             context: dict[str, object] = {
-                "format": candidate_generation.CONTEXT_FORMAT
+                "format": _generation_formats(screen)["context"]
                 if source
                 else "buddha.native-evaluation-context.v1",
                 "descriptor": str(descriptor),
@@ -742,7 +756,15 @@ def _preflight(
                     )
                 ):
                     raise SourceScreenError("retained owner differs from its original screen")
-                complete = _seal(child, int(owner.name), gateway, authority, funding, source=source)
+                complete = _seal(
+                    child,
+                    int(owner.name),
+                    gateway,
+                    authority,
+                    funding,
+                    source=source,
+                    screen=screen,
+                )
                 if unfinished and (gateway.ledger.totals()["operation_count"] or complete):
                     raise SourceScreenError("retained work skips an unfinished predecessor")
                 unfinished = unfinished or not complete
@@ -751,6 +773,18 @@ def _preflight(
             report_path = child / "report.json"
             if report_path.exists() and not all_complete:
                 raise SourceScreenError("published child lacks its complete original owners")
+            if (
+                source
+                and all_complete
+                and report_path.exists()
+                and (record["format"] == "buddha.source-screen.v2")
+            ):
+                observed = candidate_generation.inspect_candidate_generation(
+                    child,
+                    authorization=authority.path,
+                    expected_report_sha256=file_hash(report_path),
+                )
+                terminal_failure = observed["disposition"] == "candidate_execution_failed"
             unfinished = unfinished or not all_complete or not report_path.exists()
     if any(
         pipeline._absolute(row["directory"]).is_relative_to(directory)
@@ -759,7 +793,7 @@ def _preflight(
     ):
         raise SourceScreenError("known funded owner is missing; replacement is not recovery")
     if (directory / "report.json").exists() and (
-        unfinished or len(tasks) != len(screen.tasks.tasks)
+        unfinished or (len(tasks) != len(screen.tasks.tasks) and not terminal_failure)
     ):
         raise SourceScreenError("root completion lacks its complete original schedule")
     return identifiers
@@ -837,6 +871,10 @@ def run_source_screen(directory: Path, *, transport: RawHTTPTransport) -> dict[s
                 if child["status"] != "complete":
                     return observe(_text(child["reason"]), child)
                 retained[source / "report.json"] = _accepted(source, child)
+                if screen.to_record()["format"] == "buddha.source-screen.v2" and (
+                    child["disposition"] == "candidate_execution_failed"
+                ):
+                    break
                 current_stage = "native"
                 descriptor = _evaluation_recipe(location, screen)
                 evaluation = location / "evaluation"
