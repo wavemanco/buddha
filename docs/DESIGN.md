@@ -4,7 +4,7 @@ The [consolidated living plan](PLAN.md) owns current sequence, status, dependenc
 
 The [replaceable benchmark contract](BENCHMARK-INTEGRATION.md) supplies the confirmed upgrade/retirement boundary: pin a new official evaluator through release configuration, run the existing frozen agent after compatibility/funding checks, then use development results for later self-improvement. Agent treatment, benchmark driver and shared paid gateway have separate identities and responsibilities. Release selection, the funded gateway, frozen answers and native SDK transport seams are implemented at their declared bounds. [Confined full-module LLM partitioning, scoring and summary](CONFINED-NATIVE-EVALUATION.md) now run through that boundary. [Isolated fixed-seed generation](FROZEN-SEED.md#isolated-fixed-seed-generation) now derives source-bound C1 Answers through host-owned accounting; [complete selected native baselines](NATIVE-BASELINE.md) now pass generated-data direct-oracle checks offline; [configuration-only upgrades and retirement](RELEASE-UPGRADES.md) now pass controlled cross-release and actual pinned-official regression checks; the historical v1.1-specific interfaces described below remain frozen evidence, not a universal integration API.
 
-Design date: October 18, 2026; implementation status updated October 20. Slices 1–3 and bounded linked recovery are implemented; source evolution remains proposed. The interrupted first attempt now has a verified linked result reusing its nine replies, while the original missing request stays unknown and held. The fresh restart also completed its one-prompt pilot. Observed score differences do not establish meaningful diversity or general improvement. The latest official code and protocol checked for these experiments, v1.1, are normative; the paper supplies historical context. See [the incident review](FIRST-LIVE-REVIEW.md), [fresh-pilot results](FIRST-LIVE-RESULTS.md), [linked results](LINKED-CONTINUATION-RESULTS.md), and [pilot concerns](PILOT-REVIEW.md). No leaderboard submission has occurred.
+Design date: October 18, 2026; implementation status updated October 21. Slices 1–3 and bounded linked recovery are implemented. The [one-file inherited proposal route](SOURCE-IMPROVEMENT.md) now materializes children and passes a synthetic confined parent/child/grandchild chain; the full source-search loop, actual model-authored source experiment and improvement claims remain open. The interrupted first attempt now has a verified linked result reusing its nine replies, while the original missing request stays unknown and held. The fresh restart also completed its one-prompt pilot. Observed score differences do not establish meaningful diversity or general improvement. The latest official code and protocol checked for these experiments, v1.1, are normative; the paper supplies historical context. See [the incident review](FIRST-LIVE-REVIEW.md), [fresh-pilot results](FIRST-LIVE-RESULTS.md), [linked results](LINKED-CONTINUATION-RESULTS.md), and [pilot concerns](PILOT-REVIEW.md). No leaderboard submission has occurred.
 
 ## 1. Objective and claims
 
@@ -76,16 +76,18 @@ The primary loop is:
 
 ## 4. Agent interface and search space
 
-Conceptual interface, to be implemented in the source-evolution slice:
+Implemented one-file interface; the surrounding source-search loop remains open:
 
 ```python
-generate(task, gateway) -> ordered_list_of_answers
-propose_improvement(parent_bundle, development_feedback, gateway) -> child_bundle
+generate(task, config, complete) -> ordered_list_of_answers
+propose_improvement(parent_bundle, development_feedback, config, complete) -> proposal
 ```
 
-`task` contains the current prompt, required answer count, and allowed resources. Each answer is a complete independent response to the original prompt. Private plans, candidate lists, probabilities, rationales for selection, and critiques are not automatically appended to answers. An answer to a request for one digit should be one digit.
+The proposal has exactly `source` and `hypothesis` string fields. The [source guide](SOURCE-IMPROVEMENT.md) defines byte ceilings, development custody, materialization, lineage and recovery.
 
-The gateway exposes bounded, typed model requests and development-only artifact retrieval. It cannot expose raw credentials, arbitrary URLs, arbitrary subprocesses, final data, judge internals as mutable resources, or host storage. Tool and output schemas are validated on both sides. Candidate text remains untrusted data when inserted into judging prompts.
+`task` contains only `id`, `prompt` and `count`; `config` separately supplies the fixed resources. Improvement receives selected development tasks and reviewed notes, separately from the literal parent bundle. Each answer is a complete independent response to the original prompt. Private plans, candidate lists, probabilities, rationales for selection, and critiques are not automatically appended to answers. An answer to a request for one digit should be one digit.
+
+`complete(provider, body)` carries bounded model requests as UTF-8 JSON bytes and returns decoded raw provider JSON. Development feedback is a separate validated input; there is no artifact-retrieval API. The callback exposes no raw credentials, arbitrary URLs, arbitrary subprocesses, final data, judge internals as mutable resources, or host storage. Tool and output schemas are validated on both sides. Candidate text remains untrusted data when inserted into judging prompts.
 
 Seed procedures should be few and deliberately different:
 
@@ -195,7 +197,7 @@ Read credentials only in the broker from the selected secret source. Do not prin
 
 ## 10. Source-execution boundary
 
-The host has a Docker Linux server available, observed as version 29.5.3. This is an availability check, not a validated sandbox. Arbitrary source execution remains disabled until integration checks prove the intended restrictions.
+The [source runtime](SOURCE-RUNTIME.md), [candidate model channel](SOURCE-CANDIDATES.md) and [inherited proposal route](SOURCE-IMPROVEMENT.md) pass their declared confinement and accounting checks, including actual containers. Selected agent source executes only through that pinned runtime, never in the host Python process. These bounded checks do not establish protection against every host/kernel exploit or authorize other execution paths.
 
 Use a disposable Linux container or stronger isolation with a pinned image digest, non-root user, read-only root filesystem and input mounts, bounded scratch space, dropped capabilities, no-new-privileges, process/memory/CPU/wall-clock limits, and no outbound network. Supply model access through an authenticated, narrowly scoped broker channel; never mount the Docker socket, home directory, repository credentials, API keys, or final artifacts. The child bundle is a data input to the executor, not an import into the host Python process.
 

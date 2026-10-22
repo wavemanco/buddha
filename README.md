@@ -81,13 +81,19 @@ open.
 The [source runtime](docs/SOURCE-RUNTIME.md) and [candidate execution boundary](docs/SOURCE-CANDIDATES.md)
 now pass composed isolation, model-channel, accounting and recovery checks.
 Selected task code runs only in the pinned container; the host controls paid
-calls and completion. Inherited source mutation and improvement remain open.
+calls and completion. The [inherited source route](docs/SOURCE-IMPROVEMENT.md)
+can run a parent's proposal procedure and materialize a separate child. A confined
+synthetic chain exercises child generation, the child's inherited improver and
+a runnable grandchild. Materialization alone does not establish competence;
+parent selection, archive admission and measured improvement remain open.
 The [source-evolution backlog context](docs/BACKLOG.md) records the intended Python
 code and inherited-improver endpoint, the current gap and its existing plan gates.
 
-These are distinct from scientific success. Meaningful diversity, held-out
-improvement, genuine task/improver source evolution and an improved improver have
-**not been established**. Earlier pilot reviews flagged recurring premises and
+Useful-diversity gains, held-out improvement and improved-improver effectiveness
+remain **not established**. The source-chain fixture uses synthetic replies and
+supplied programs; it is engineering evidence of inherited code execution, not
+evidence that a model discovered a better agent or improver. Earlier pilot
+reviews flagged recurring premises and
 possible plot overlap. Blinded model review resolves some as distinct and leaves
 others uncertain; original benchmark scores and raw evidence remain unchanged. See the
 [pilot review](docs/PILOT-REVIEW.md), [recovery results](docs/FIRST-LIVE-RESULTS.md)

@@ -9,7 +9,9 @@ unfinished commitments; it does not create another implementation schedule.
 Recorded October 21, 2026 after the comparison with Darwin Gödel Machine (DGM).
 This records existing scope in [DESIGN sections 1–4](DESIGN.md#1-objective-and-claims)
 and **SRC-02, SRC-03 and IMP-01** in [PLAN.md](PLAN.md); it is not a new milestone.
-Those items remain planned. The current next slice remains under POL-02.
+Those items remain open. The first SRC-02 mechanism now has bounded synthetic
+execution evidence; the full inherited search loop and actual model-authored
+source experiment remain unfinished. The current next slice remains POL-02.
 
 **Intended end state: yes, Buddha evolves the agent's Python code.** A parent
 agent should author a child implementation, which can change how answers are
@@ -26,10 +28,11 @@ The implemented parts are separate:
 | Part | What it does today | What it does not yet do |
 | --- | --- | --- |
 | [Policy search](../buddha/search.py) and [policy schema](../buddha/policy.py) | A fixed proposer changes `instructions` and `sampling`, evaluates policies and retains lineage. The completed live pilots exercised this restricted path. | Author or inherit changed Python implementations. |
-| [Source candidate runner](../buddha/candidate_run.py) | Runs one supplied, sealed Python source against one selected task in the isolated executor, with host-owned model calls, accounting and completion checks. See [scope](SOURCE-CANDIDATES.md). | Select parents, author children or evolve an inherited improver. |
+| [Source candidate runner](../buddha/candidate_run.py) | Runs selected generation and inherited proposal procedures in isolation; materializes a separate child with lineage under host-owned accounting. A synthetic parent/child/grandchild chain passes. See [generation](SOURCE-CANDIDATES.md) and [improvement](SOURCE-IMPROVEMENT.md). | Select parents, connect source search to native assessment/archive promotion, or demonstrate an effective changed improver. |
 | [Native policy study controller](../buddha/policy_run.py) | Runs the frozen policy conditions through the baseline and official native assessment pipeline. | Propose children or invoke the source candidate runner as an evolutionary loop. |
 
-Connecting these parts requires a real inherited bundle and execution path.
+The one-file inherited execution path is implemented. Connecting it to parent
+selection, native assessment and archive promotion remains open.
 Python execution support alone is not source self-improvement; changing prompt
 text alone is policy optimization. Neither demonstrates a better improver.
 
