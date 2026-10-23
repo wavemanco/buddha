@@ -107,3 +107,14 @@ composed checks can take many minutes, especially on Windows. Ctrl+C stops the
 foreground checks. Passing them checks implementation behavior, not agent
 improvement. The [delivery](conformance/eval01-final-controller-delivery.json)
 records the actual checked source cuts and limitations separately.
+
+## Infrastructure completion
+
+EVAL-01 is complete for the supported prospective one-source library. At PR #89
+head `572bf75837841162de32c4941c8c2096dfe45d96`, both hosted jobs pass 1,714
+tests and every configured quality check. The [completion record](conformance/eval01-hosted-completion.json)
+joins those jobs to the original delivery and checked source bytes. Later
+commits need their own applicable checks.
+
+Actual held-out results, independent human review and transfer evidence remain
+EVAL-02. This completion creates no allocation or live experiment.
