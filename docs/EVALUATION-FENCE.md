@@ -95,3 +95,12 @@ The proof uses memory-only database reads and does not execute retired source.
 The regression cohorts use simulated workers and replies with fresh temporary
 accounting files. They do not establish a full-suite or hosted-CI pass, repair
 the separate Docker startup fault, or close the finalization/scientific gates.
+
+## Generic-core test compatibility
+
+The safeguard is deliberately part of the portable installed core. Its independent
+exact-core test now expects that module while retaining both exact-set comparisons
+and all checks that scientific modules stay outside the generic path. The one
+affected method and targeted lint/format checks pass. The original hosted failure
+and its source cut remain in the [delivery record](conformance/eval01-core-ci-compat-delivery.json);
+hosted checks for the correction are still pending. No user command is needed.
