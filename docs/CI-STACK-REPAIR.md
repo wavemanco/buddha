@@ -67,8 +67,10 @@ Use draft status for unfinished implementation. A completed slice can be ready
 for review while its parent PR, a live experiment or a broader research claim
 remains pending. Green checks are recorded against an exact commit. Ready for
 review does not authorize merging; dependent PRs remain stacked for review.
-The remaining repaired draft PRs will be marked ready after their own fresh
-checks pass.
+The remaining eight completed PRs—#71, #73, #74 and #78–#82—were marked ready on
+October 23 after verifying their unchanged repaired heads. All their Ubuntu
+jobs have passed; Windows remains in progress at the latest retained snapshot.
+Ready status does not assert those pending jobs have passed. No PR was merged.
 
 ## Effect on experiments and the roadmap
 
@@ -81,3 +83,22 @@ The [living plan](PLAN.md) still has the same six open leaf slices, with SRC-02
 as the sole next slice. Concrete model-context and replacement-code output
 headroom, broader mutation competence, finalization and scientific improvement
 remain open. CI repair neither closes those gates nor requires a user run.
+
+## PR #85: relative test paths across Windows drives
+
+The later PR #85 Windows job finished with three errors in the two history-path
+tests: its temporary files were on `C:`, while the checkout was on `D:`. The test
+fixture asked `relpath` to span those drives, which Windows does not support. The
+error occurred before the history-import checks ran; it does not identify a
+capacity-driver or accounting failure.
+
+The fixture now enters the temporary run's parent before supplying its relative
+path. Cleanup restores the previous working directory before deleting that
+temporary fixture. The actual import, exact ledger/totals and poisoned-trial
+refusal assertions remain unchanged. Application code and the capacity request,
+protocol and launcher stay at their original bytes. Both focused methods pass
+locally, with zero model calls or workers. Separate controls reproduce the
+Windows cross-drive `relpath` error and check that the repaired fixture supplies
+a real relative path without calling `relpath`, then restores its working
+directory. Targeted lint and formatting checks pass. The new exact-head hosted
+outcome remains separate; this correction does not assert a fresh Windows pass.
