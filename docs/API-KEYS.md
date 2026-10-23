@@ -28,6 +28,23 @@ and limitations. That scope is also closed for new work.
 
 The [first source experiment](SOURCE-FIRST-LIVE-RESULTS.md) completed within its separately approved **$25 combined OpenAI/Anthropic cap and 512-attempt limit**: 170 completed records, $1.158996 spent/committed, zero held and 51 inactive original owners. This scope is closed for new work. The unused $23.841004 and 342 attempts do not authorize another experiment. Recorded costs use the confirmed Standard/default public pay-as-you-go profiles; they are not reconciled invoices. Its [historical handoff](SOURCE-FIRST-LIVE.md) retains the exact command and hidden-key explanation; do not repeat it or reuse an earlier balance for new source evolution.
 
+## Approved one-request capacity observation
+
+On October 23, 2026, the user separately approved **$7 total and one attempt**,
+allowing partial results with their stage, reason, usable evidence, costs and
+unresolved holds retained. The [approval record](conformance/src02-capacity-approval.json)
+binds the exact [proposal](conformance/src02-capacity-funding-proposal.json),
+request and executing code. This covers one OpenAI request containing complete
+historical feedback; returned Python stays text. It buys no answer generation,
+benchmark judging, search or code execution. No Anthropic key is needed.
+
+Immutable inputs are prepared in a separate local copy. The dedicated authority
+has not been created and no provider call has been made. The exact executing
+code must pass its remaining hosted Windows check before funding/handoff
+completion and a live command. Ubuntu has passed. No further budget approval
+is needed for this unchanged scope. The [living plan](PLAN.md) tracks readiness;
+the [capacity guide](SOURCE-CAPACITY-REHEARSAL.md) explains the observation.
+
 The new Gateway/source path supports [keyed account reviews](KEYED-REVIEWS.md),
 using the API key already supplied locally; no extra secret is needed. The
 source launcher binds the approved launch context. Historical policy

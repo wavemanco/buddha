@@ -1,10 +1,11 @@
-# Exact request rehearsal and proposed live observation
+# Exact request rehearsal and approved live observation
 
 The [capacity driver](SOURCE-CAPACITY-DRIVER.md) has now transported the exact
 retained 25,209-byte request through the real Gateway/accounting path with one
 mocked HTTPS response. It then verified the same original result without keys
 or another send. **This is offline engineering evidence, not a model token
-measurement. No new live allowance or funded handoff exists.**
+measurement. The observation is now approved; its dedicated allocation and live
+command still await the executing-code CI gate.**
 
 The request hash is `e258ae8166c518ccd8e8a799139e35c7fa609b74fe10fcba0c8c23d1e401a838`.
 The parent is recovered as literal data from the retained request's input JSON:
@@ -30,11 +31,13 @@ profile wrapper said v1 while containing v2 profile fields. The successful fresh
 fixture corrects that wrapper; application code is unchanged. Both records are
 retained in the [delivery](conformance/src02-capacity-rehearsal-delivery.json).
 
-## Proposed next observation: $7, one attempt
+## Approved next observation: $7, one attempt
 
-The [funding proposal](conformance/src02-capacity-funding-proposal.json) asks for
-one separately authorized OpenAI request under a **$7 total cap and one-attempt
-limit**, allowing an explicitly recorded partial result. It sends the same full
+The user has approved the [funding proposal](conformance/src02-capacity-funding-proposal.json)
+for one OpenAI request under a **$7 total cap and one-attempt limit**, allowing
+an explicitly recorded partial result. The [approval record](conformance/src02-capacity-approval.json)
+retains that decision; the frozen proposal keeps its original pre-approval status.
+It sends the same full
 body under the [frozen protocol](SOURCE-CAPACITY-PROTOCOL.md), saves actual usage
 and checks for complete changed-source text plus both declared cushions.
 It does not execute or adopt returned code or buy generation, judging or search.
@@ -42,7 +45,7 @@ It does not execute or adopt returned code or buy generation, judging or search.
 The maximum reservation is **$6.315672**, not a prediction of the bill. The
 profile reserves the whole 1,050,000-token input ceiling and selected
 32,768-token output allowance at conservative rates. This leaves $0.684328 below
-the proposed cap. No unused balance from an earlier experiment funds this scope;
+the approved cap. No unused balance from an earlier experiment funds this scope;
 [API-KEYS.md](API-KEYS.md) records those closed allowances.
 
 The price review on October 23, 2026 uses the official
@@ -57,8 +60,12 @@ This unchanged Chat body has no extended-cache, tool or nontext option. The
 Responses-only 12-hour write rate is outside this request's scope.
 
 Before any live command is supplied, the driver must pass hosted CI on its exact
-executing cut, the account/profile assertions must still apply, and the separate
-allocation must be approved and prepared. Approval alone does not start a call.
+executing cut, the account/profile assertions must still apply, and the approved
+allocation must be prepared. Ubuntu has passed; Windows is still running at the
+current checkpoint. The immutable local inputs have passed an independent
+file/hash review, with no authority or owner created; see the
+[approval checkpoint](conformance/src02-capacity-approval-delivery.json).
+Approval alone does not start a call.
 Only an OpenAI key will be needed, entered locally; no Anthropic key is involved.
 The handoff will provide the exact path, hash and command. There is nothing to run
 from this document now. [PLAN.md](PLAN.md) retains the open capacity gate until
