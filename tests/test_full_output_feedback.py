@@ -110,7 +110,7 @@ class FullOutputFeedbackTests(unittest.TestCase):
         case = search_fixtures.SourceSearchTests("runTest").fixture(iterations=2)
         self.addCleanup(case.doCleanups)
         case.proposals = [search_fixtures.BROKEN, search_fixtures.REPAIRED]
-        with patch.object(source_search, "_MANIFEST", source_search._LEGACY_MANIFEST):
+        with patch.object(source_search, "_FULL_MANIFEST", source_search._LEGACY_MANIFEST):
             case.prepare()
         self.assertEqual(case.run_search()["status"], "complete")
         first = case.directory / "iterations/0/feedback/provenance.json"

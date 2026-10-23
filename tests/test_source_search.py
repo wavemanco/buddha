@@ -124,6 +124,7 @@ class SourceSearchTests(unittest.TestCase):
             "authorization": self.authority,
             "review": self.engine.fixture.review,
             "expected_runtime_sha256": self.engine.candidate.expected_runtime,
+            "mutation_witness": getattr(self, "mutation_witness", False),
         }
         return self.prepare_api(self.directory, **(values | changes))
 

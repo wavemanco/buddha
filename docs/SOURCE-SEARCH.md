@@ -46,7 +46,7 @@ NoveltyBench release remains 1.1 for the current study.
 
 | Outcome | What Buddha records | What happens next |
 | --- | --- | --- |
-| Complete, usable screen | Original answers, native results and common-task metrics | The child may enter the exploratory parent pool |
+| Complete, usable screen | Original answers, native results and common-task metrics | New searches also require the separate mutation witness before parent selection; historical task-only searches keep their original rule |
 | Complete screen with unusable metrics | Literal native results and the reason eligibility failed | The child stays out of the parent pool |
 | Checked candidate execution failure | Original worker declaration, task, source, receipts and cleanup evidence | No answers or numeric score are invented; the failure can inform a later proposal |
 | Incomplete or uncertain execution | Original owner, attempt, replies and any financial hold | The iteration stops; later work cannot replace the unfinished owner |
@@ -81,7 +81,7 @@ Rejected proposals and duplicates remain in the decision and cost history; this
 packet does not yet describe them to later improvers. Interrupted or uncertain
 operations stop the loop and cannot become a failure note.
 
-The 1 MiB packet and full task-projection limits and 32 MiB host-bundle limit still apply. The new v2 improvement channel has no additional 4,096-byte note cap. Source-search manifest v2 fixes this full-output policy; original manifest v1 fixes historical extraction. If the required information
+The 1 MiB packet and full task-projection limits and 32 MiB host-bundle limit still apply. The new v2 improvement channel has no additional 4,096-byte note cap. Source-search manifests v2/v3 fix this full-output policy; original manifest v1 fixes historical extraction. If the required information
 cannot fit, construction refuses before writing the packet or creating its
 proposal owner. Search saves a `feedback_capacity` partial at the `feedback` stage when complete information cannot fit. Byte limits do not prove model context fit; the concrete full request still needs that pre-live check. Feedback describes observations; it supplies no invented score,
 automatic penalty or independent diagnosis of the code.
@@ -141,11 +141,15 @@ the actual experiment, verify its profiles and processing tiers, obtain its
 specific spending authorization, and explain the operator commands. The current
 POL-02 comparison and its authorization remain separate.
 
-Task-screen eligibility checks generation and assessment. It does not pre-run
-every child's improvement function. That function is checked when the child
-later proposes a descendant; a missing or broken improver can stop the run with
-its original evidence retained. The source-experiment and improver-competence
-gates therefore remain separate from task-screen admission.
+New manifest v3 searches add a [bounded mutation witness](SOURCE-MUTATION-WITNESS.md)
+after each eligible common screen, including the starter. The candidate receives
+its complete measured outputs, makes a changed further child, and that child
+must generate on the first ordered development task before the candidate can
+be selected as a parent. This evidence child stays outside the search archive.
+A checked failure retains the native scores and excludes only parent eligibility;
+uncertain execution stops as incomplete. Historical manifest v1/v2 task-only
+searches retain their original eligibility and replay semantics. One successful
+mutation does not establish improved effectiveness or indefinite competence.
 
 For the original source-loop delivery, 41 new acceptance methods and 92 original
 regressions passed across their recorded source scopes. These were separate
