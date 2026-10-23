@@ -138,3 +138,17 @@ Unavailable or denied queries remain explicit. No signal is sent.
 See the [recovery contract](RECOVERY-CONTRACT.md) and [living plan](PLAN.md).
 This observer does not reconcile invoices, authenticate providers, judge story
 distinctiveness or establish scientific improvement.
+
+### Separate hosted-CI investigation
+
+PR #71's Windows suite completed with one linked-CLI failure after twelve
+synthetic replies. Its generic CLI message did not reveal the underlying
+exception. The original test and cached restart pass in the isolated local
+Windows check; no cause or production fix is established. The test now retains
+the original chained traceback in its failure assertion while leaving public
+CLI redaction, progress observation and every existing accounting/restart check
+unchanged. A deliberate synthetic exception confirms those diagnostics work;
+it is not a reproduction of the CI defect. The
+[delivery record](conformance/ciwin01-linked-cli-diagnostic-delivery.json)
+separates these observations. Earlier bounded file-sharing proofs above remain
+historical evidence; they do not explain this later failure.
