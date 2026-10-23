@@ -32,7 +32,8 @@ from buddha.releases import (
 from buddha.wire import _integer
 
 _FORMAT = "buddha.source-search.v1"
-_MANIFEST = "buddha.source-search-manifest.v1"
+_MANIFEST = "buddha.source-search-manifest.v2"
+_LEGACY_MANIFEST = "buddha.source-search-manifest.v1"
 _CONTEXT = "buddha.source-search-context.v1"
 _PLAN = "buddha.source-search-plan.v1"
 _REPORT = "buddha.source-search-report.v1"
@@ -203,7 +204,7 @@ def _original(reader: NativeEvidence) -> dict[str, Any]:
     context_raw = reader.bound(anchor, reader.root / "context.json")
     context = _object(_load(context_raw), {"format", "manifest_sha256"})
     if (
-        record["format"] != _MANIFEST
+        record["format"] not in {_MANIFEST, _LEGACY_MANIFEST}
         or context["format"] != _CONTEXT
         or context["manifest_sha256"] != pipeline._sha(record)
         or manifest_raw != _json(record)
@@ -308,13 +309,19 @@ def _select(refs: list[dict[str, object]], spec: dict[str, Any], iteration: int)
 
 
 def _bundle(
-    directory: Path, parent: dict[str, object], failures: list[dict[str, object]]
+    directory: Path,
+    parent: dict[str, object],
+    failures: list[dict[str, object]],
+    *,
+    full_answers: bool,
 ) -> dict[str, Any]:
     if failures:
         return source_feedback._build_failures(
-            directory, parent, failures, existing=directory.exists()
+            directory, parent, failures, existing=directory.exists(), full_answers=full_answers
         )
-    return source_feedback._build(directory, parent, existing=directory.exists())
+    return source_feedback._build(
+        directory, parent, existing=directory.exists(), full_answers=full_answers
+    )
 
 
 def _parent_screen(
@@ -341,7 +348,9 @@ def _plan(
     parent = parents[0]
     generation = _object(_parent_screen(reader, parent).to_record()["generation"])
     location = reader.root / "iterations" / str(iteration)
-    bundle = _bundle(location / "feedback", parent, failures)
+    bundle = _bundle(
+        location / "feedback", parent, failures, full_answers=state["record"]["format"] == _MANIFEST
+    )
     hashes = {name + ".json": pipeline._sha(bundle[name]) for name in _FILES}
     template = state["record"]["proposal_template"]
     descriptor = {
@@ -797,12 +806,17 @@ def run_source_search(directory: Path, *, transport: RawHTTPTransport) -> dict[s
                 if not location.exists():
                     location.mkdir()
                 _root(location)
+                stage, child = "feedback", None
                 reader = NativeEvidence(directory, authorization_path, error_type=SourceSearchError)
                 plan = _plan(reader, state, iteration, state["screens"], state["failures"])
                 reader.capture.finish()
                 pipeline._same_or_write(location / "plan.json", _json(plan))
-                stage, child = "feedback", None
-                bundle = _bundle(location / "feedback", plan["parent"], state["failures"])
+                bundle = _bundle(
+                    location / "feedback",
+                    plan["parent"],
+                    state["failures"],
+                    full_answers=state["record"]["format"] == _MANIFEST,
+                )
                 _write_packet(location / "feedback", plan, bundle)
                 pipeline._same_or_write(
                     location / "proposal.json", _json(plan["proposal_descriptor"])
@@ -899,6 +913,8 @@ def run_source_search(directory: Path, *, transport: RawHTTPTransport) -> dict[s
             )
         except KeyboardInterrupt:
             raise SourceSearchInterrupted(observe("cancelled", child)) from None
+        except source_feedback.SourceFeedbackTooLarge:
+            raise SourceSearchStopped(observe("feedback_capacity", child)) from None
         except (ValueError, TypeError, KeyError, OSError, RecursionError):
             raise SourceSearchStopped(observe("protocol", child)) from None
 

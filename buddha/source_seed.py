@@ -7,10 +7,11 @@ The controller still owns confinement, provenance, quotas and child admission.
 import hashlib
 
 FROZEN_SEED_SHA256 = "2b87bfe0d3c97ee45db2d45260985ffe0234eca93967f4689fb7c59f82603921"
-FRAGMENT_VERSION = "buddha.source-seed-improver.v1"
+LEGACY_FRAGMENT_VERSION = "buddha.source-seed-improver.v1"
+FRAGMENT_VERSION = "buddha.source-seed-improver.v2"
 MAX_SOURCE_BYTES = 1024**2
 
-FRAGMENT = r'''# buddha.source-seed-improver.v1: appended to the unchanged frozen seed.
+LEGACY_FRAGMENT = r'''# buddha.source-seed-improver.v1: appended to the unchanged frozen seed.
 _SOURCE_SEED_PROMPT = """Return only a JSON object with exactly source and hypothesis string fields.
 source must be the complete replacement Python file, not a patch or fenced text.
 Make a substantive change to the generation procedure or improvement procedure:
@@ -128,13 +129,35 @@ def propose_improvement(parent_bundle, development_feedback, config, complete):
     return {"source": child, "hypothesis": hypothesis}
 '''
 
+# Preserve the historical fragment literally; only the versioned feedback contract
+# changes. Both versions retain the same aggregate projection and callback bounds.
+FRAGMENT = (
+    LEGACY_FRAGMENT.replace(
+        "# buddha.source-seed-improver.v1:", "# buddha.source-seed-improver.v2:", 1
+    )
+    .replace('len(note.encode("utf-8")) > 4096', 'len(note.encode("utf-8")) > 1024**2', 1)
+    .replace(
+        '"format": "buddha.source-seed-improver.v1"',
+        '"format": "buddha.source-seed-improver.v2"',
+        1,
+    )
+    .replace('"id": "source-seed-improvement-v1"', '"id": "source-seed-improvement-v2"', 1)
+)
+
 
 class SourceSeedError(ValueError):
     """The supplied seed does not match the exact bounded composition contract."""
 
 
-def compose_source_seed(frozen_seed_raw: bytes) -> bytes:
+def compose_source_seed(
+    frozen_seed_raw: bytes, *, fragment_version: str = FRAGMENT_VERSION
+) -> bytes:
     """Return exact seed prefix plus the versioned fragment, without any execution."""
+    if type(fragment_version) is not str or fragment_version not in {
+        LEGACY_FRAGMENT_VERSION,
+        FRAGMENT_VERSION,
+    }:
+        raise SourceSeedError("unsupported source improvement fragment")
     if type(frozen_seed_raw) is not bytes or not 0 < len(frozen_seed_raw) <= MAX_SOURCE_BYTES:
         raise SourceSeedError("expected bounded frozen seed bytes")
     try:
@@ -143,7 +166,8 @@ def compose_source_seed(frozen_seed_raw: bytes) -> bytes:
         raise SourceSeedError("frozen seed must be UTF-8") from None
     if hashlib.sha256(frozen_seed_raw).hexdigest() != FROZEN_SEED_SHA256:
         raise SourceSeedError("frozen seed identity differs")
-    result = frozen_seed_raw + b"\n\n" + FRAGMENT.encode("utf-8")
+    fragment = LEGACY_FRAGMENT if fragment_version == LEGACY_FRAGMENT_VERSION else FRAGMENT
+    result = frozen_seed_raw + b"\n\n" + fragment.encode("utf-8")
     if len(result) > MAX_SOURCE_BYTES:
         raise SourceSeedError("composed source exceeds its byte bound")
     return result

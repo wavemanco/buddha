@@ -331,11 +331,17 @@ class SourceSeedTests(unittest.TestCase):
         ]
         for index, feedback in enumerate(values):
             with self.subTest(case=index):
-                complete = Mock()
-                with self.assertRaises(self.module.SeedError):
-                    self.module.propose_improvement(
-                        self.parent, feedback, configuration(), complete
+                module = self.module
+                if index == 4:
+                    # This specific 4096-byte ceiling belongs to the historical fragment.
+                    module = ModuleType("_trusted_legacy_source_seed")
+                    source = compose_source_seed(
+                        self.frozen, fragment_version="buddha.source-seed-improver.v1"
                     )
+                    exec(compile(source, "<trusted-legacy-seed>", "exec"), vars(module))  # nosec B102
+                complete = Mock()
+                with self.assertRaises(module.SeedError):
+                    module.propose_improvement(self.parent, feedback, configuration(), complete)
                 complete.assert_not_called()
 
     def test_full_feedback_projection_bound_refuses_before_callback(self):

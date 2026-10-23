@@ -68,27 +68,22 @@ tasks that were not attempted.
 ## How failure feedback reaches the improver
 
 The worker still receives the existing list of development tasks and text notes.
-The host's version 2 feedback provenance binds the selected parent's measured
+The host's version 4 full-output feedback provenance binds the selected parent's measured
 screen and each original parent → proposal → failed-child edge. It retains the
 actual task identity, source identity, worker readiness, completed callbacks and
 costs of the relevant original owners.
 
 Every retained failure is represented in the notes, including failures descended
-from a different earlier parent. The newest failure also includes bounded literal
-source and hypothesis excerpts. Original hashes, lengths and explicit omissions
-remain in host provenance. Earlier source excerpts may be omitted; earlier
-failures are not silently removed. Base measurements remain unchanged, while
-their displayed answer excerpts shrink under the declared version 2 policy.
+from a different earlier parent. The newest failure includes its complete literal source and hypothesis. Every parent answer and all diagnostic positions remain intact; failure metadata never buys room by cutting outputs. Older failed-source text is not repeated, with hashes, lengths and omissions explicit. Legacy provenance v2 keeps its original prefix policy only for original inspection/replay.
 
 This feedback history covers checked execution failures of materialized children.
 Rejected proposals and duplicates remain in the decision and cost history; this
 packet does not yet describe them to later improvers. Interrupted or uncertain
 operations stop the loop and cannot become a failure note.
 
-The existing 4,096-byte limit per note, 1 MiB packet and full task-projection
-limits, and 32 MiB host-bundle limit still apply. If the required information
+The 1 MiB packet and full task-projection limits and 32 MiB host-bundle limit still apply. The new v2 improvement channel has no additional 4,096-byte note cap. Source-search manifest v2 fixes this full-output policy; original manifest v1 fixes historical extraction. If the required information
 cannot fit, construction refuses before writing the packet or creating its
-proposal owner. Feedback describes observations; it supplies no invented score,
+proposal owner. Search saves a `feedback_capacity` partial at the `feedback` stage when complete information cannot fit. Byte limits do not prove model context fit; the concrete full request still needs that pre-live check. Feedback describes observations; it supplies no invented score,
 automatic penalty or independent diagnosis of the code.
 
 ## Resume, accounting and inspection

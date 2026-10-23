@@ -93,7 +93,10 @@ class CandidateWorker:
         try:
             self._initial = _json(initial)
             record = _load(self._initial)
-            self.improvement = record.get("format") == "buddha.candidate-improvement-worker.v1"
+            self.improvement = record.get("format") in {
+                "buddha.candidate-improvement-worker.v1",
+                "buddha.candidate-improvement-worker.v2",
+            }
             record = _object(
                 record,
                 {
@@ -112,6 +115,7 @@ class CandidateWorker:
             if record["type"] != "configure" or record["format"] not in {
                 "buddha.candidate-worker.v1",
                 "buddha.candidate-improvement-worker.v1",
+                "buddha.candidate-improvement-worker.v2",
             }:
                 raise CandidateWorkerError("unsupported worker configuration")
             roots = _object(record["roots"], {"agent", "runner"})
@@ -158,6 +162,11 @@ class CandidateWorker:
                     or len(_json(feedback)) > MAX_FEEDBACK_BYTES
                 ):
                     raise CandidateWorkerError("invalid improvement feedback")
+                note_limit = (
+                    MAX_FEEDBACK_BYTES
+                    if record["format"] == "buddha.candidate-improvement-worker.v2"
+                    else 4096
+                )
                 seen: set[str | int] = set()
                 for value in feedback:
                     item = _object(value, {"task", "note"})
@@ -173,7 +182,7 @@ class CandidateWorker:
                     _literal(task["prompt"])
                     _integer(task["count"], 1, 1000)
                     note = _literal(item["note"])
-                    if not note.strip() or len(note.encode()) > 4096:
+                    if not note.strip() or len(note.encode()) > note_limit:
                         raise CandidateWorkerError("invalid feedback note")
                 self.feedback = feedback
             else:
