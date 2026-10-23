@@ -9,7 +9,7 @@ command. [PLAN.md](PLAN.md) remains the roadmap.
 ## Pure factory
 
 ```python
-compose_source_seed(frozen_seed_raw: bytes) -> bytes
+compose_source_seed(frozen_seed_raw: bytes, *, fragment_version=FRAGMENT_VERSION) -> bytes
 ```
 
 The caller supplies the original file bytes. The factory accepts only literal
@@ -19,7 +19,7 @@ checks UTF-8 and the 1 MiB ceiling, and returns that unchanged byte prefix,
 two newlines and the fixed `FRAGMENT` string encoded as UTF-8. The complete
 result must also fit in 1 MiB. Invalid input raises `SourceSeedError`.
 
-`FRAGMENT_VERSION` is `buddha.source-seed-improver.v1`. Its prompt and parsing
+`FRAGMENT_VERSION` now defaults to `buddha.source-seed-improver.v2`, which forwards complete notes within the existing 1 MiB aggregate projection. Explicit `fragment_version="buddha.source-seed-improver.v1"` returns the exact historical fragment and its 4,096-byte note ceiling; this is a pure factory option, not an operator command or run. Its prompt and parsing
 behavior are part of the returned source. The factory performs no file access,
 execution, imports of the old generation module, environment lookup or network
 operation. Its supplied bytes are checked, not treated as executable input.
@@ -53,7 +53,7 @@ host remains responsible for joining it to the actual Selection and source.
 Each task retains its original typed ID, prompt and count. Duplicate IDs,
 invalid task/configuration fields, oversized notes and feedback exceeding the
 existing 1 MiB escaped-JSON projection ceiling refuse before a callback. Notes
-have the existing 4,096 UTF-8 byte bound. These checks do not authenticate
+may exceed 4,096 UTF-8 bytes in v2; the complete escaped projection must still fit 1 MiB. The historical fragment keeps its original smaller bound. These checks do not authenticate
 arbitrary note claims or replace the [measured feedback](SOURCE-FEEDBACK.md)
 and [proposal-stage](SOURCE-PROPOSAL-STAGE.md) custody checks.
 

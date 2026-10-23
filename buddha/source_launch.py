@@ -433,6 +433,7 @@ def _public_result(result: dict[str, object]) -> dict[str, object]:
             "native_error",
             "agent_error",
             "seed_ineligible",
+            "feedback_capacity",
             "owner_prefix",
             "quota",
         }

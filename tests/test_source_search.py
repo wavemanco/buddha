@@ -138,7 +138,10 @@ class SourceSearchTests(unittest.TestCase):
         self.assertNotIn(b"dataset_base64", _json(initial))
         source = (dict(spec.mounts)["/agent"] / "candidate.py").read_bytes()
         self.assertEqual(initial["agent_sha256"], sha(_json({"candidate.py": sha(source)})))
-        if initial["format"] == "buddha.candidate-improvement-worker.v1":
+        if initial["format"] in {
+            "buddha.candidate-improvement-worker.v1",
+            "buddha.candidate-improvement-worker.v2",
+        }:
             return self.execute_improvement(spec, initial, handle, source)
         label, callbacks = self.programs[sha(source)]
         if label == "checked-failure":
@@ -369,6 +372,14 @@ class SourceSearchTests(unittest.TestCase):
             for record in event["feedback"]:
                 note = json.loads(record["note"])
                 self.assertEqual(note["kind"], "saved_native_measurements_and_failed_children")
+                self.assertEqual(
+                    note["measurements"]["answers"],
+                    [
+                        {"position": 0, "text": "  unchanged weak text  "},
+                        {"position": 1, "text": ""},
+                    ],
+                )
+                self.assertEqual(note["measurements"]["omitted_answer_positions"], 0)
                 failure = note["failures"][0]
                 self.assertEqual(
                     (failure["parent_id"], failure["child_id"], failure["task_id"]),

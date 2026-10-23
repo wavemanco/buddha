@@ -182,8 +182,12 @@ class CandidateSession:
                 ):
                     raise CandidateRunError("feedback differs from its reviewed bytes")
                 packet = _object(_load(feedback_raw), {"format", "source", "split", "records"})
-                if packet["format"] != "buddha.candidate-development-feedback.v1":
+                if packet["format"] not in {
+                    "buddha.candidate-development-feedback.v1",
+                    "buddha.candidate-development-feedback.v2",
+                }:
                     raise CandidateRunError("unsupported development feedback")
+                self.feedback_v2 = packet["format"] == "buddha.candidate-development-feedback.v2"
                 values = {}
                 for name in ("source", "split"):
                     ref = _object(packet[name], {"path", "sha256"})
@@ -215,7 +219,7 @@ class CandidateSession:
                         identifier not in development
                         or identifier in seen
                         or not note.strip()
-                        or len(note.encode()) > 4096
+                        or len(note.encode()) > (MAX_FEEDBACK_BYTES if self.feedback_v2 else 4096)
                     ):
                         raise CandidateRunError("feedback is not unique bounded development data")
                     seen.add(identifier)
@@ -366,7 +370,12 @@ class CandidateSession:
             }
             if self.improvement:
                 self.worker.update(
-                    format="buddha.candidate-improvement-worker.v1", feedback=self.feedback
+                    format=(
+                        "buddha.candidate-improvement-worker.v2"
+                        if self.feedback_v2
+                        else "buddha.candidate-improvement-worker.v1"
+                    ),
+                    feedback=self.feedback,
                 )
             else:
                 self.worker["task"] = self.task.to_record()
@@ -388,6 +397,7 @@ class CandidateSession:
                 **(
                     {
                         "mode": "improve",
+                        **({"feedback_mode": "v2"} if self.feedback_v2 else {}),
                         "feedback": self.feedback,
                         "feedback_file": self.feedback_file_sha256,
                         "feedback_sha256": self.feedback_sha256,

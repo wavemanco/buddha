@@ -89,7 +89,7 @@ official results and admits only complete usable measurements to exploratory
 parent selection. It preserves official scores and records unusable results
 without selecting them. The [verified feedback bridge](docs/SOURCE-FEEDBACK.md)
 can now turn a pinned complete screen into bounded development notes accepted by
-the existing improver, with literal answer excerpts and explicit omissions.
+the existing improver, with every selected output in full. The versioned host, worker and default starter preserve complete notes; oversized packets refuse before a proposal instead of truncating outputs. Historical prefix packets remain readable under their original policy.
 The [bounded inherited source-search loop](docs/SOURCE-SEARCH.md) now connects
 these stages. A confined three-iteration rehearsal retains a failed child,
 feeds its failure into a repair, and runs the repaired child's changed improver

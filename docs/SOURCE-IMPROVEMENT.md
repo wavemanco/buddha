@@ -48,11 +48,11 @@ and the existing `config`, `executor`, `profile`, `runtime` and `max_callbacks`
 It uses its own dedicated, serial Gateway owner. The original generation-v1
 descriptor and behavior remain separate.
 
-The feedback file has format `buddha.candidate-development-feedback.v1`, pinned
+The feedback file has format `buddha.candidate-development-feedback.v2` for new full-output packets (historical v1 remains accepted), pinned
 `source` and `split` references containing absolute `path` and raw `sha256`, and
 a `records` list. Each record has exactly `task_id` and `note`. It names the
 complete sealed source TaskSet, not a selected subset. Notes must be nonblank
-UTF-8, at most 4,096 bytes each. There must be 1 through 1,000 unique records;
+UTF-8. V2 notes use the existing 1 MiB aggregate allowance; v1 retains its 4,096-byte individual ceiling. There must be 1 through 1,000 unique records;
 both the feedback file and its projected worker input must fit in 1 MiB.
 The host validates complete source membership, disjoint partitions, family and
 normalized-duplicate custody, then requires every feedback ID to belong to
@@ -63,8 +63,7 @@ have explicit, different hash fields.
 
 This checks source and development membership. The separate
 [verified screen-feedback bridge](SOURCE-FEEDBACK.md) constructs bounded notes from
-a caller-pinned complete native screen, retaining literal excerpts, measurements
-and omissions. The generic interface still accepts caller-reviewed notes; it
+a caller-pinned complete native screen, retaining every selected output in full alongside complete measurement arrays. Historical prefix packets remain separately versioned for original inspection/replay. The generic interface still accepts caller-reviewed notes; it
 does not require that bridge or independently authenticate arbitrary note text.
 An ID check also cannot prove that a human has never copied held-out text into a
 note. Opaque native reports are not passed through as feedback. The complete
