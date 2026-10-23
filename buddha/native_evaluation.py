@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import cast
 
 from buddha import native_pipeline as pipeline
-from buddha import native_run
+from buddha import native_run, trial_fence
 from buddha.answers import Answers, TaskSet, _utf8
 from buddha.authorization import Authorization
 from buddha.doctor import _authority, _Busy, _Capture, _owner
@@ -334,6 +334,7 @@ def _sources() -> list[Path]:
                 "answers",
                 "native_pipeline",
                 "native_evaluation",
+                "trial_fence",
                 "candidate_generation",
                 "doctor",
                 "process_observation",
@@ -446,9 +447,12 @@ def prepare_evaluation(
         or any(not isinstance(path, Path) for path in input_files)
     ):
         raise EvaluationError("evaluation controls require a bounded ordered Path list")
-    controls = _input_records(input_files, expected_input_hashes)
-    definition, source, release = _definition(descriptor, authorization)
     directory = directory.absolute()
+    controls = _input_records(input_files, expected_input_hashes)
+    expected = trial_fence._include_controls(
+        directory, {Path(row["path"]): row["sha256"] for row in controls}
+    )
+    definition, source, release = _definition(descriptor, authorization)
     _root(directory.parent)
     _path(directory.name)
     roots = [
@@ -458,37 +462,45 @@ def prepare_evaluation(
     roots.append(_generation_directory(definition["source_generation"]))
     if any(directory.is_relative_to(root) or root.is_relative_to(directory) for root in roots):
         raise EvaluationError("evaluation output overlaps selected inputs or original generation")
-    directory.mkdir()
-    for name in ("owners", "completed", "attempts", "staging", "observations"):
-        (directory / name).mkdir()
-    pipeline._write(
-        directory / "context.json",
-        _json(
-            {
-                "format": "buddha.native-evaluation-context.v1",
-                "descriptor": str(descriptor.absolute()),
-            }
-        ),
-    )
-    native_answers = directory / "native-answers.jsonl"
-    pipeline._write(native_answers, source.answers.native_bytes())
-    frozen = source.files | {native_answers: file_hash(native_answers)}
-    available = {_path(_object(release.to_record()["artifacts"])["answers"]): native_answers}
-    _owner_stage(
-        directory,
-        descriptor.absolute(),
-        1,
-        definition,
-        source,
-        release,
-        authorization,
-        review,
-        available,
-        frozen,
-        [],
-        input_files,
-        {row["path"]: row["sha256"] for row in controls},
-    )
+    with trial_fence.work(
+        authorization.path, authorization._terms(), directory=directory, kind="native"
+    ) as trial_controls:
+        for path, digest in trial_controls.items():
+            if path in expected and expected[path] != digest:
+                raise EvaluationError("original trial controls changed before preparation")
+            expected[path] = digest
+        _input_records(list(expected), expected)
+        directory.mkdir()
+        for name in ("owners", "completed", "attempts", "staging", "observations"):
+            (directory / name).mkdir()
+        pipeline._write(
+            directory / "context.json",
+            _json(
+                {
+                    "format": "buddha.native-evaluation-context.v1",
+                    "descriptor": str(descriptor.absolute()),
+                }
+            ),
+        )
+        native_answers = directory / "native-answers.jsonl"
+        pipeline._write(native_answers, source.answers.native_bytes())
+        frozen = source.files | {native_answers: file_hash(native_answers)}
+        available = {_path(_object(release.to_record()["artifacts"])["answers"]): native_answers}
+        _owner_stage(
+            directory,
+            descriptor.absolute(),
+            1,
+            definition,
+            source,
+            release,
+            authorization,
+            review,
+            available,
+            frozen,
+            [],
+            list(expected),
+            {str(path): digest for path, digest in expected.items()},
+        )
     return directory
 
 
@@ -536,7 +548,19 @@ def run_evaluation(directory: Path, *, transport: RawHTTPTransport) -> dict[str,
     if not isinstance(directory, Path) or not isinstance(transport, RawHTTPTransport):
         raise EvaluationError("evaluation requires its original directory and raw transport")
     directory = directory.absolute()
-    with pipeline._exclusive(directory):
+    original = _read_manifest(directory / "owners/1")
+    authority_path = pipeline._absolute(original["authorization_path"])
+    if trial_fence.is_closed(directory):
+        raise EvaluationError("closed trial native work requires passive parent inspection")
+    with (
+        trial_fence.work(
+            authority_path,
+            Authorization(authority_path)._terms(),
+            directory=directory,
+            kind="native",
+        ),
+        pipeline._exclusive(directory),
+    ):
         return _run(directory, transport)
 
 

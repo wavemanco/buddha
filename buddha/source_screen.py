@@ -11,7 +11,7 @@ from functools import wraps
 from pathlib import Path
 from typing import cast
 
-from buddha import candidate_generation, native_evaluation
+from buddha import candidate_generation, native_evaluation, trial_fence
 from buddha import native_pipeline as pipeline
 from buddha.answers import TaskSet, _Artifact, _source, _utf8
 from buddha.authorization import Authorization
@@ -249,11 +249,16 @@ def _comparison_controls(
     context: dict[str, object],
     controls: dict[Path, str],
     screen: SourceScreen,
+    *,
+    core: object | None = None,
 ) -> str:
     """Compare original helper roles and conservative external pins, without IO."""
     comparison = _object(context["comparison_controls"], {"sources", "external"})
     sources = _object(comparison["sources"])
-    if set(sources) != {"buddha/" + path.name for path in _sources()}:
+    paths = _sources()
+    if core is not None:
+        paths = candidate_generation._recorded_sources(paths, core)
+    if set(sources) != {"buddha/" + path.name for path in paths}:
         raise SourceScreenError("comparison helper coverage differs from the screen contract")
     package: Path | None = None
     source_paths: set[Path] = set()
@@ -478,9 +483,13 @@ def prepare_source_screen(
     directory = pipeline._absolute(str(directory))
     runtime_sha256 = _digest(expected_runtime_sha256)
     _configuration(screen, runtime_sha256)
-    if authorization.summary()["scope"] != "source screen: " + screen.comparison_key():
-        raise SourceScreenError("authority scope differs from this fixed source screen")
-    external = dict(input_bindings or {})
+    trial_fence.require_purpose(
+        authorization.path,
+        authorization._terms(),
+        directory=directory,
+        expected="source screen: " + screen.comparison_key(),
+    )
+    external = trial_fence._include_controls(directory, dict(input_bindings or {}))
     inputs = _input_records(list(external), external)
     expected = {Path(row["path"]): row["sha256"] for row in inputs}
     for source in _sources():
@@ -507,49 +516,62 @@ def prepare_source_screen(
         raise SourceScreenError("screen output overlaps original inputs or funding")
     _root(directory.parent)
     _path(directory.name)
-    directory.mkdir()
-    for name in ("tasks", "observations"):
-        (directory / name).mkdir()
-    pipeline._write(directory / "screen.json", screen.to_bytes())
-    context: dict[str, object] = {
-        "format": _version(screen, "source-screen-context"),
-        "screen_sha256": screen.fingerprint(),
-        "expected_runtime_sha256": runtime_sha256,
-        "controls": {str(path): digest for path, digest in expected.items()},
-        "comparison_controls": {
-            "sources": {
-                "buddha/" + source.name: {"path": str(source), "sha256": expected[source]}
-                for source in _sources()
+    with trial_fence.work(
+        authorization.path, authorization._terms(), directory=directory, kind="screen"
+    ) as trial_controls:
+        if any(expected.get(path) != digest for path, digest in trial_controls.items()):
+            raise SourceScreenError("original trial controls changed before screen preparation")
+        trial_fence.require_purpose(
+            authorization.path,
+            authorization._terms(),
+            directory=directory,
+            expected="source screen: " + screen.comparison_key(),
+        )
+        directory.mkdir()
+        for name in ("tasks", "observations"):
+            (directory / name).mkdir()
+        pipeline._write(directory / "screen.json", screen.to_bytes())
+        context: dict[str, object] = {
+            "format": _version(screen, "source-screen-context"),
+            "screen_sha256": screen.fingerprint(),
+            "expected_runtime_sha256": runtime_sha256,
+            "controls": {str(path): digest for path, digest in expected.items()},
+            "comparison_controls": {
+                "sources": {
+                    "buddha/" + source.name: {"path": str(source), "sha256": expected[source]}
+                    for source in _sources()
+                },
+                "external": {
+                    str(path): digest
+                    for path, digest in external.items()
+                    if path not in _sources()
+                    and path != runtime_path
+                    and (
+                        record["lineage"] is None or str(path) != _object(record["lineage"])["path"]
+                    )
+                },
             },
-            "external": {
-                str(path): digest
-                for path, digest in external.items()
-                if path not in _sources()
-                and path != runtime_path
-                and (record["lineage"] is None or str(path) != _object(record["lineage"])["path"])
-            },
-        },
-    }
-    _comparison_controls(context, expected, screen)
-    pipeline._write(directory / "context.json", _json(context))
-    expected[directory / "screen.json"] = screen.fingerprint()
-    expected[directory / "context.json"] = pipeline._sha(context)
-    location, descriptor = _materialize(directory, screen, 0)
-    expected |= _task_controls(location, screen, 0)
-    generation = _object(record["generation"])
-    candidate_generation.prepare_candidate_generation(
-        location / "generation",
-        descriptor=descriptor,
-        selection=Selection.from_bytes(_json(generation["selection"])),
-        roots=_roots(generation),
-        authorization=authorization,
-        review=review,
-        budget_microusd=cast(int, generation["budget_microusd"]),
-        max_calls=cast(int, generation["max_calls"]),
-        expected_runtime_sha256=runtime_sha256,
-        input_files=list(expected),
-        expected_input_hashes=expected,
-    )
+        }
+        _comparison_controls(context, expected, screen)
+        pipeline._write(directory / "context.json", _json(context))
+        expected[directory / "screen.json"] = screen.fingerprint()
+        expected[directory / "context.json"] = pipeline._sha(context)
+        location, descriptor = _materialize(directory, screen, 0)
+        expected |= _task_controls(location, screen, 0)
+        generation = _object(record["generation"])
+        candidate_generation.prepare_candidate_generation(
+            location / "generation",
+            descriptor=descriptor,
+            selection=Selection.from_bytes(_json(generation["selection"])),
+            roots=_roots(generation),
+            authorization=authorization,
+            review=review,
+            budget_microusd=cast(int, generation["budget_microusd"]),
+            max_calls=cast(int, generation["max_calls"]),
+            expected_runtime_sha256=runtime_sha256,
+            input_files=list(expected),
+            expected_input_hashes=expected,
+        )
     return directory
 
 
@@ -817,14 +839,34 @@ def run_source_screen(directory: Path, *, transport: RawHTTPTransport) -> dict[s
     if not isinstance(directory, Path) or not isinstance(transport, RawHTTPTransport):
         raise SourceScreenError("screen requires its original Path and raw transport")
     directory = pipeline._absolute(str(directory))
-    with pipeline._exclusive(directory):
-        anchor = directory / "tasks/0/generation/owners/0"
+    anchor = directory / "tasks/0/generation/owners/0"
+    original = _read_manifest(anchor)
+    authority_path = pipeline._absolute(original["authorization_path"])
+    if trial_fence.is_closed(directory):
+        return inspect_source_screen(
+            directory,
+            authorization=authority_path,
+            expected_report_sha256=file_hash(directory / "report.json"),
+        )
+    with (
+        trial_fence.work(
+            authority_path,
+            Authorization(authority_path)._terms(),
+            directory=directory,
+            kind="screen",
+        ),
+        pipeline._exclusive(directory),
+    ):
         Gateway(anchor, transport=RawHTTPTransport(allow_paid=False))
         first = _read_manifest(anchor)
         screen, controls, runtime = _original(directory, first)
         authority = Authorization(pipeline._absolute(first["authorization_path"]))
-        if authority.summary()["scope"] != "source screen: " + screen.comparison_key():
-            raise SourceScreenError("existing authority scope differs from the original screen")
+        trial_fence.require_purpose(
+            authority.path,
+            authority._terms(),
+            directory=directory,
+            expected="source screen: " + screen.comparison_key(),
+        )
         review = _object(first["review"])
         _preflight(directory, screen, authority, review, controls)
         generation = _object(screen.to_record()["generation"])

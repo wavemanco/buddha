@@ -19,6 +19,7 @@ from buddha import (
     gateway,
     source_feedback,
     source_screen,
+    trial_fence,
 )
 from buddha import native_pipeline as pipeline
 from buddha.answers import _Artifact
@@ -256,7 +257,10 @@ def _original(reader: NativeEvidence) -> dict[str, Any]:
     if any(original.get(str(path)) != expected for path, expected in controls.items()):
         raise SourceSearchError("first owner omitted an original search control")
     # Installed helpers are identities in original metadata, never retired code reads.
-    names = {path.name for path in _sources()}
+    names = {
+        path.name
+        for path in candidate_generation._recorded_sources(_sources(), anchor.manifest["core"])
+    }
     candidates = {p.parent for p in controls if p.name == "source_search.py"}
     if len(candidates) != 1 or not all(next(iter(candidates)) / name in controls for name in names):
         raise SourceSearchError("original search controls omit the installed helper closure")
@@ -322,8 +326,12 @@ def _census(
         ):
             raise SourceSearchError("a retained funded search owner is missing or replaced")
     current = authority_observation(reader.capture, reader.authorization, funded)
-    if current["scope"] != "source screen: " + state["screen"].comparison_key():
-        raise SourceSearchError("shared authority belongs to another fixed source comparison")
+    trial_fence.require_purpose(
+        reader.authorization,
+        _object(funded["config"]),
+        directory=reader.root,
+        expected="source screen: " + state["screen"].comparison_key(),
+    )
     refs: list[dict[str, object]] = [
         {
             "directory": str(path),
@@ -543,7 +551,8 @@ def _stage_owner(
     bindings = reader._bindings(owner)
     if any(bindings.get(str(p)) != digest for p, digest in controls.items()):
         raise SourceSearchError("prepared owner omits an original input")
-    gateway.execution_identity(path, owner.manifest, verify_files=verify_files)
+    if verify_files:
+        gateway.execution_identity(path, owner.manifest)
     funded = [row for row in state["funding"]["auth_runs"] if row["run_id"] == owner.run_id]
     if (
         len(funded) != 1
@@ -1281,9 +1290,13 @@ def prepare_source_search(
     template = _template(proposal_template)
     source_screen._configuration(seed_screen, runtime)
     source_screen._configuration(_template_screen(seed_screen, template), runtime)
-    if authorization.summary()["scope"] != "source screen: " + seed_screen.comparison_key():
-        raise SourceSearchError("authority scope differs from this fixed source comparison")
-    external = dict(input_bindings or {})
+    trial_fence.require_purpose(
+        authorization.path,
+        authorization._terms(),
+        directory=directory,
+        expected="source screen: " + seed_screen.comparison_key(),
+    )
+    external = trial_fence._include_controls(directory, dict(input_bindings or {}))
     inputs = _input_records(list(external), external)
     controls = {Path(row["path"]): _digest(row["sha256"]) for row in inputs}
     if seed["lineage"] is not None and (
@@ -1306,35 +1319,46 @@ def prepare_source_search(
         raise SourceSearchError("search destination overlaps its original controls or components")
     _root(directory.parent)
     _path(directory.name)
-    directory.mkdir()
-    (directory / "iterations").mkdir()
-    (directory / "observations").mkdir()
-    manifest = {
-        "format": _MANIFEST if mutation_witness else _FULL_MANIFEST,
-        "seed_screen": seed,
-        "proposal_template": template,
-        "spec": spec.to_record(),
-        "authorization": str(authorization.path),
-        "review": checked_review,
-        "expected_runtime_sha256": runtime,
-        "controls": {str(p): h for p, h in controls.items()},
-        **({"mutation_witness": dict(MUTATION_WITNESS_POLICY)} if mutation_witness else {}),
-    }
-    context = {"format": _CONTEXT, "manifest_sha256": pipeline._sha(manifest)}
-    pipeline._write(directory / "manifest.json", _json(manifest))
-    pipeline._write(directory / "context.json", _json(context))
-    controls |= {
-        directory / "manifest.json": pipeline._sha(manifest),
-        directory / "context.json": pipeline._sha(context),
-    }
-    source_screen.prepare_source_screen(
-        directory / "seed",
-        screen=seed_screen,
-        authorization=authorization,
-        review=checked_review,
-        expected_runtime_sha256=runtime,
-        input_bindings=controls,
-    )
+    with trial_fence.work(
+        authorization.path, authorization._terms(), directory=directory, kind="search"
+    ) as trial_controls:
+        if any(controls.get(path) != digest for path, digest in trial_controls.items()):
+            raise SourceSearchError("original trial controls changed before search preparation")
+        trial_fence.require_purpose(
+            authorization.path,
+            authorization._terms(),
+            directory=directory,
+            expected="source screen: " + seed_screen.comparison_key(),
+        )
+        directory.mkdir()
+        (directory / "iterations").mkdir()
+        (directory / "observations").mkdir()
+        manifest = {
+            "format": _MANIFEST if mutation_witness else _FULL_MANIFEST,
+            "seed_screen": seed,
+            "proposal_template": template,
+            "spec": spec.to_record(),
+            "authorization": str(authorization.path),
+            "review": checked_review,
+            "expected_runtime_sha256": runtime,
+            "controls": {str(p): h for p, h in controls.items()},
+            **({"mutation_witness": dict(MUTATION_WITNESS_POLICY)} if mutation_witness else {}),
+        }
+        context = {"format": _CONTEXT, "manifest_sha256": pipeline._sha(manifest)}
+        pipeline._write(directory / "manifest.json", _json(manifest))
+        pipeline._write(directory / "context.json", _json(context))
+        controls |= {
+            directory / "manifest.json": pipeline._sha(manifest),
+            directory / "context.json": pipeline._sha(context),
+        }
+        source_screen.prepare_source_screen(
+            directory / "seed",
+            screen=seed_screen,
+            authorization=authorization,
+            review=checked_review,
+            expected_runtime_sha256=runtime,
+            input_bindings=controls,
+        )
     return directory
 
 
@@ -1345,7 +1369,21 @@ def run_source_search(directory: Path, *, transport: RawHTTPTransport) -> dict[s
     directory = pipeline._absolute(str(directory))
     first = pipeline._read(directory / "manifest.json")
     authorization_path = pipeline._absolute(_load(first)["authorization"])
-    with pipeline._exclusive(directory):
+    if (directory / "report.json").exists():
+        return inspect_source_search(
+            directory,
+            authorization=authorization_path,
+            expected_report_sha256=file_hash(directory / "report.json"),
+        )
+    with (
+        trial_fence.work(
+            authorization_path,
+            Authorization(authorization_path)._terms(),
+            directory=directory,
+            kind="search",
+        ),
+        pipeline._exclusive(directory),
+    ):
         state = _restore(directory, authorization_path)
         _check_current(state)
         authority = Authorization(authorization_path)

@@ -12,6 +12,7 @@ from contextlib import closing, contextmanager
 from pathlib import Path
 from typing import cast
 
+from buddha import trial_fence
 from buddha.common import ValidationError, _canonical, _hex, _object, _parse, _text
 from buddha.history import HistoricalOperation, _plain, read_history
 from buddha.ledger import (
@@ -44,6 +45,14 @@ _TABLES = {
     "auth_deactivations",
     "auth_events",
 }
+_TERM_FIELDS = (
+    "authorization_id",
+    "currency",
+    "budget_microusd",
+    "max_calls",
+    "scope",
+    "terms_sha256",
+)
 _SCHEMA = (
     """CREATE TABLE main.auth_config (
         singleton INTEGER PRIMARY KEY CHECK(singleton=1), authorization_id TEXT NOT NULL,
@@ -401,7 +410,16 @@ class Authorization:
         if not self.path.is_file():
             raise ValidationError("authorization database is missing")
         with self._connection() as connection:
-            _validate(connection, "main")
+            config = _validate(connection, "main")
+            self._original_terms = {key: config[key] for key in _TERM_FIELDS}
+
+    def _terms(self) -> dict[str, object]:
+        """Original immutable terms, rechecked against SQLite before mutation."""
+        return dict(self._original_terms)
+
+    def _reject_trial_history(self) -> None:
+        if trial_fence._parse_scope(cast(str, self._terms()["scope"])) is not None:
+            raise OperationConflict("trial grants require original owners, not imported history")
 
     @classmethod
     def create(
@@ -475,7 +493,11 @@ class Authorization:
                     connection.execute("PRAGMA query_only=ON")
                     connection.execute("BEGIN")
                 with connection:
-                    _validate(connection, "main")
+                    config = _validate(connection, "main")
+                    if write and {key: config[key] for key in _TERM_FIELDS} != self._terms():
+                        raise OperationConflict(
+                            "original authorization terms changed before mutation"
+                        )
                     yield connection
         except (sqlite3.Error, OSError, ValueError) as error:
             if isinstance(error, ValidationError):
@@ -483,10 +505,13 @@ class Authorization:
             raise ValidationError("authorization storage transaction failed") from None
 
     def import_history(self, directory: Path, *, manifest_sha256: str, ledger_sha256: str) -> None:
+        self._reject_trial_history()
+        directory = _path(directory)
+        if trial_fence.required_controls(directory):
+            raise OperationConflict("trial-owned history cannot become an unrelated allocation")
         source = read_history(
             directory, manifest_sha256=manifest_sha256, ledger_sha256=ledger_sha256
         )
-        directory = _path(directory)
         ledger = _path(directory / "operations.sqlite3")
         authority_path = _path(self.path)
         if ledger.samefile(authority_path):
@@ -549,6 +574,23 @@ class Authorization:
         runtime_sha256: str,
         claim: tuple[str, str, str, str] | None = None,
     ) -> None:
+        if claim is not None:
+            self._reject_trial_history()
+        directory = _path(directory)
+        terms = self._terms()
+        with trial_fence.lease(self.path, terms, directory=directory, settlement=True):
+            self._bind_current(
+                directory, runtime_sha256=runtime_sha256, claim=claim, expected_terms=terms
+            )
+
+    def _bind_current(
+        self,
+        directory: Path,
+        *,
+        runtime_sha256: str,
+        claim: tuple[str, str, str, str] | None,
+        expected_terms: dict[str, object],
+    ) -> None:
         _hex(runtime_sha256, "runtime hash")
         directory = _path(directory)
         record, config = _manifest_record(directory)
@@ -606,6 +648,10 @@ class Authorization:
                     if _manifest(directory) != config:
                         raise OperationConflict("run manifest changed during authorization binding")
                     terms = _validate(connection, "funding")
+                    if {key: terms[key] for key in _TERM_FIELDS} != expected_terms:
+                        raise OperationConflict(
+                            "original authorization terms changed before binding"
+                        )
                     has_binding = connection.execute(
                         "SELECT 1 FROM main.sqlite_master WHERE type='table' "
                         "AND name='authorization_binding'"
@@ -629,6 +675,9 @@ class Authorization:
                                 require_existing=True,
                             )
                         return
+                    trial_fence.assert_work(
+                        self.path, expected_terms, directory=directory, manifest=record
+                    )
                     if (
                         has_binding
                         or connection.execute("SELECT 1 FROM main.operations LIMIT 1").fetchone()
@@ -671,6 +720,7 @@ class Authorization:
         evidence_sha256: str,
         reason: str,
     ) -> None:
+        self._reject_trial_history()
         values = (source_run_id, operation_id, continuation_run_id, evidence_sha256, reason)
         with self._connection(write=True) as connection:
             _accept_unknown(connection, "main", values)
@@ -678,7 +728,19 @@ class Authorization:
     def deactivate(self, run_id: str, reason: str) -> None:
         _text(run_id, "run ID")
         _text(reason, "deactivation reason")
+        terms = self._terms()
+        scope = trial_fence._parse_scope(cast(str, terms["scope"]))
+        directory = self.path if scope is None else scope.root
+        with trial_fence.lease(self.path, terms, directory=directory, settlement=True):
+            self._deactivate_current(run_id, reason, terms)
+
+    def _deactivate_current(
+        self, run_id: str, reason: str, expected_terms: dict[str, object]
+    ) -> None:
         with self._connection(write=True) as connection:
+            config = _validate(connection, "main")
+            if {key: config[key] for key in _TERM_FIELDS} != expected_terms:
+                raise OperationConflict("original authorization terms changed before deactivation")
             if (
                 connection.execute(
                     "SELECT 1 FROM main.auth_runs WHERE run_id=?", (run_id,)
@@ -756,6 +818,13 @@ class AuthorizedLedger(Ledger):
             raise OperationConflict("bound run manifest or executable runtime changed")
 
     def _guard(self, connection: sqlite3.Connection) -> None:
+        record, _ = _manifest_record(self.directory)
+        trial_fence.assert_work(
+            self.authority.path,
+            self.authority._terms(),
+            directory=self.directory,
+            manifest=record,
+        )
         binding = connection.execute(
             "SELECT historical FROM funding.auth_runs WHERE run_id=?", (self.run_id,)
         ).fetchone()
@@ -785,13 +854,39 @@ class AuthorizedLedger(Ledger):
 
     def authorize_dispatch(self) -> None:
         """Fail closed before credential prompting or paid transport preflight."""
-        with self._transaction() as connection:
+        with (
+            trial_fence.lease(
+                self.authority.path, self.authority._terms(), directory=self.directory
+            ),
+            self._transaction() as connection,
+        ):
             self._execution_contract()
             self._guard(connection)
 
     @contextmanager
     def _transaction(
         self, action: str = "read", operation_id: str | None = None
+    ) -> Iterator[sqlite3.Connection]:
+        if action == "read":
+            with self._transaction_current(action, operation_id) as connection:
+                yield connection
+            return
+        if action not in {"reserve", "dispatch", "complete", "unknown"}:
+            raise ValidationError("unsupported shared ledger action")
+        with (
+            trial_fence.lease(
+                self.authority.path,
+                self.authority._terms(),
+                directory=self.directory,
+                settlement=action in {"complete", "unknown"},
+            ),
+            self._transaction_current(action, operation_id) as connection,
+        ):
+            yield connection
+
+    @contextmanager
+    def _transaction_current(
+        self, action: str, operation_id: str | None
     ) -> Iterator[sqlite3.Connection]:
         if action not in {"read", "reserve", "dispatch", "complete", "unknown"}:
             raise ValidationError("unsupported shared ledger action")
@@ -819,6 +914,10 @@ class AuthorizedLedger(Ledger):
                 connection.execute("BEGIN IMMEDIATE")
                 with connection:
                     config = _validate(connection, "funding")
+                    if {key: config[key] for key in _TERM_FIELDS} != self.authority._terms():
+                        raise OperationConflict(
+                            "original authorization terms changed before transition"
+                        )
                     _local_config(connection, self.config)
                     _check_binding(connection, self.authority, config)
                     binding = connection.execute(

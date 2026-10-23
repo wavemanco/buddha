@@ -13,6 +13,7 @@ from pathlib import Path
 from typing import cast
 
 from buddha import native_pipeline as pipeline
+from buddha.candidate_generation import _recorded_sources
 from buddha.doctor import _authority, _Busy, _Unsupported
 from buddha.gateway_history import read_gateway_history
 from buddha.native_evidence import NativeEvidence, authority_observation
@@ -165,7 +166,9 @@ def collect_candidate_improvement(
         bindings = reader._bindings(owner)
         # Require the complete original installed helper closure as metadata;
         # retired producer/helper paths are never opened or re-inventoried here.
-        source_names = {path.name for path in stage._sources()}
+        source_names = {
+            path.name for path in _recorded_sources(stage._sources(), owner.manifest["core"])
+        }
         source_prefixes = {
             Path(path).parent
             for path in bindings

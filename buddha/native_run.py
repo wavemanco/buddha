@@ -281,9 +281,10 @@ class NativeSession:
             self._frozen_configuration = self._configuration()
             _root(self.output.parent)
             _path(self.output.name)
-            self.output.mkdir()
-            (self.output / "artifacts").mkdir()
-            (self.output / ".receive").mkdir()
+            with gateway.work(directory=self.output, kind="native"):
+                self.output.mkdir()
+                (self.output / "artifacts").mkdir()
+                (self.output / ".receive").mkdir()
         except (ReleaseError, KeyError, TypeError, ValueError, OSError):
             raise NativeRunError("native owner, configuration or destination is invalid") from None
 
@@ -574,6 +575,7 @@ class NativeSession:
             self.pending[2].close()
 
     def handle(self, frame: dict[str, object]) -> dict[str, object] | None:
+        self.gateway.assert_work(directory=self.output, kind="native")
         try:
             self._unchanged()
             if self.broken or self.done is not None:
@@ -646,6 +648,10 @@ class NativeSession:
             os.fsync(stream.fileno())
 
     def run(self) -> dict[str, object]:
+        with self.gateway.work(directory=self.output, kind="native"):
+            return self._run()
+
+    def _run(self) -> dict[str, object]:
         if self.ran or self.ready or self.broken:
             raise NativeRunError("native session has already started")
         self._unchanged()

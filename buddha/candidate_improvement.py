@@ -10,7 +10,7 @@ from functools import wraps
 from pathlib import Path
 from typing import cast
 
-from buddha import candidate_generation, source_screen
+from buddha import candidate_generation, source_screen, trial_fence
 from buddha import native_pipeline as pipeline
 from buddha.answers import TaskSet, _utf8
 from buddha.authorization import Authorization
@@ -404,7 +404,9 @@ def prepare_candidate_improvement(
         _digest(expected_feedback_provenance_sha256),
     )
     supplied = _input_records(input_files, expected_input_hashes)
-    expected = {Path(row["path"]): row["sha256"] for row in supplied}
+    expected = trial_fence._include_controls(
+        directory, {Path(row["path"]): row["sha256"] for row in supplied}
+    )
 
     def consume(path: Path) -> bytes:
         raw = pipeline._read(path, expected.get(path))
@@ -430,31 +432,43 @@ def prepare_candidate_improvement(
         raise CandidateImprovementError("proposal output overlaps original inputs")
     _root(directory.parent)
     _path(directory.name)
-    directory.mkdir()
-    for name in ("owners", "attempts", "completed", "observations"):
-        (directory / name).mkdir()
-    context = directory / "context.json"
-    context_raw = _json(
-        {
-            "format": CONTEXT_FORMAT,
-            "descriptor": str(descriptor),
-            "expected_runtime_sha256": runtime,
-            "expected_feedback_provenance_sha256": provenance,
-        }
-    )
-    pipeline._write(context, context_raw)
-    expected[context] = _sha(context_raw)
-    prepare_gateway(
-        directory / "owners/0",
-        selection=selection,
-        roots=roots,
-        authorization=authorization,
-        review=review,
-        budget_microusd=budget_microusd,
-        max_calls=max_calls,
-        input_files=list(expected),
-        expected_input_hashes=expected,
-    )
+    with trial_fence.work(
+        authorization.path, authorization._terms(), directory=directory, kind="improvement"
+    ) as trial_controls:
+        for path, digest in trial_controls.items():
+            if path in expected and expected[path] != digest:
+                raise CandidateImprovementError(
+                    "original trial controls changed before preparation"
+                )
+            expected[path] = digest
+        _input_records(list(expected), expected)
+        context = directory / "context.json"
+        if len(set(expected) | {context}) > 1024:
+            raise CandidateImprovementError("proposal controls exceed the owner input limit")
+        directory.mkdir()
+        for name in ("owners", "attempts", "completed", "observations"):
+            (directory / name).mkdir()
+        context_raw = _json(
+            {
+                "format": CONTEXT_FORMAT,
+                "descriptor": str(descriptor),
+                "expected_runtime_sha256": runtime,
+                "expected_feedback_provenance_sha256": provenance,
+            }
+        )
+        pipeline._write(context, context_raw)
+        expected[context] = _sha(context_raw)
+        prepare_gateway(
+            directory / "owners/0",
+            selection=selection,
+            roots=roots,
+            authorization=authorization,
+            review=review,
+            budget_microusd=budget_microusd,
+            max_calls=max_calls,
+            input_files=list(expected),
+            expected_input_hashes=expected,
+        )
     return directory
 
 
@@ -537,7 +551,23 @@ def run_candidate_improvement(directory: Path, *, transport: RawHTTPTransport) -
             "proposal execution needs its original Path and raw transport"
         )
     directory = pipeline._absolute(str(directory))
-    with pipeline._exclusive(directory):
+    original_manifest = _read_manifest(directory / "owners/0")
+    authority_path = pipeline._absolute(original_manifest["authorization_path"])
+    if trial_fence.is_closed(directory):
+        return inspect_candidate_improvement(
+            directory,
+            authorization=authority_path,
+            expected_report_sha256=file_hash(directory / "report.json"),
+        )
+    with (
+        trial_fence.work(
+            authority_path,
+            Authorization(authority_path)._terms(),
+            directory=directory,
+            kind="improvement",
+        ),
+        pipeline._exclusive(directory),
+    ):
         if {path.name for path in (directory / "owners").iterdir()} != {"0"}:
             raise CandidateImprovementError("proposal owner population differs")
         if not {path.name for path in (directory / "completed").iterdir()} <= {"0.json"}:
