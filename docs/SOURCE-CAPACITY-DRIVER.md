@@ -1,11 +1,10 @@
 # The one-request capacity driver
 
-This implements the [frozen protocol](SOURCE-CAPACITY-PROTOCOL.md). It has only
-been checked offline with synthetic replies and mocked HTTPS. **There is no
-actual model measurement yet.** The approved dedicated allocation and exact
-executing-code CI now pass; [the live guide](SOURCE-CAPACITY-LIVE.md) supplies
-the checked user-started command. No actual token count or replacement
-output margin has been measured. [PLAN.md](PLAN.md) owns the next step.
+This implements the [frozen protocol](SOURCE-CAPACITY-PROTOCOL.md). The
+[actual observation](SOURCE-CAPACITY-RESULTS.md) now passes both margins with
+one settled request and no held liability. The original offline rehearsal and
+executing-code checks retain their own scopes; [PLAN.md](PLAN.md) owns the next
+step. No further command is needed for that completed observation.
 
 The driver sends one already saved request through Buddha's existing Gateway.
 That request contains the complete historical answers. It saves the literal

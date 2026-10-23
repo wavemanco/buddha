@@ -1,6 +1,11 @@
 # Approved $7 full-output capacity observation
 
-**Ready to run once.** The copied executing code passes its exact Linux and
+**Completed; no further command is needed.** [The results](SOURCE-CAPACITY-RESULTS.md)
+record one completed request, $0.080856 cost and zero held. The text below
+retains the original operator handoff as history. Its fresh-state figures
+describe the prelaunch checkpoint.
+
+At handoff: The copied executing code passes its exact Linux and
 Windows CI checks. The dedicated $7, one-attempt allocation and the actual
 keyless handoff check pass; an independent read-only review confirms zero
 owners, attempts, spending and holds before launch. The [handoff record](conformance/src02-capacity-funded-handoff.json)
@@ -12,9 +17,9 @@ text with the declared input and output room. The returned code stays text:
 this command does not execute it, generate benchmark answers or judge them.
 The historical measurements remain attached to their original parent.
 
-## Run this command
+## Original command: historical reference
 
-Use one normal PowerShell window. You can use your current window or open a
+For the original launch, use one normal PowerShell window. You can use your current window or open a
 new one; no second window or project-folder change is needed for this absolute
 command. It uses the frozen local code copy, independently of your checkout's
 current branch.
