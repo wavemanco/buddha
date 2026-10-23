@@ -152,3 +152,11 @@ it is not a reproduction of the CI defect. The
 [delivery record](conformance/ciwin01-linked-cli-diagnostic-delivery.json)
 separates these observations. Earlier bounded file-sharing proofs above remain
 historical evidence; they do not explain this later failure.
+
+A later snapshot found both PR #72 operating-system jobs successful. PRs #73
+and #74 instead failed on Linux in a shared test fixture that still demanded
+worker v1 after receiving a full-output worker v2 packet. The separate
+[test-only compatibility repair](conformance/src02-full-feedback-ci-compat-delivery.json)
+addresses that exact assertion. Those failures do not identify the cause of
+PR #71's earlier linked-CLI failure. Hosted status is always tied to an exact
+head; a local focused pass is not a green full hosted suite.

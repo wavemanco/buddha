@@ -241,3 +241,20 @@ its selected tasks and notes in the host check. This slice does not run a fresh
 improver worker with that packet or demonstrate a repeated search loop. Collection
 finds 1,426 unique repository tests without executing their bodies; full hosted
 Linux and Windows checks for this slice remain separate pending gates.
+
+## Shared tests for both feedback versions
+
+Full-output packets use worker protocol v2; retained prefix packets use worker
+protocol v1. The common simulated-worker fixture now checks the exact version
+from the session's validated feedback packet. A bound-packet regression exercises
+both versions through real session custody with a simulated response. This keeps
+legacy checks useful without requiring a new packet to impersonate the old
+protocol. Production source and historical packets are unchanged by this
+test-only repair. See the [compatibility delivery](conformance/src02-full-feedback-ci-compat-delivery.json)
+for the original hosted failures, local reproduction and verification limits.
+
+One older failure-feedback test also pins the historical v2/v1 extraction and
+its 4 KiB note/excerpt limits. It now explicitly reconstructs that synthetic
+historical packet and checks it through the real inspector. Every original
+assertion stays intact; the public builders remain full-output only. The
+prospective full-output failure-history path is checked separately.
