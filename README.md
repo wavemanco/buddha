@@ -8,6 +8,11 @@ Build agents that improve their own procedures for producing useful, meaningfull
 how answers are generated, grouped and scored; what the 4/5/9 result means; how
 parser recovery differs from a judge's decision; and where self-improvement fits.
 
+The separately approved **$7, one-request full-output capacity observation is
+ready for the user to start**. [The live guide](docs/SOURCE-CAPACITY-LIVE.md)
+gives the exact command and a plain-English explanation. No model capacity
+result is available yet.
+
 ## Current state
 
 The bounded **MEAS-01/MEAS-02 measurement audit is complete**. The
@@ -165,7 +170,9 @@ unseen-task improvement. Seven focused methods and seven quality checks pass.
 The [final-evaluation controller](docs/FINAL-EVALUATION.md) now fixes every
 assigned final task, the finalist count and selection policy, original phase
 allocations and the one-way freeze before running the complete comparison.
-Its verification and hosted CI remain in progress. Actual held-out, human and
+Its exact executing head now passes both complete hosted suites and all
+configured checks; [the scoped completion record](docs/conformance/eval01-hosted-completion.json)
+closes EVAL-01 infrastructure. Actual held-out, human and
 transfer evidence remains separate under EVAL-02; no agent is promoted here.
 
 The [trial work safeguard](docs/EVALUATION-FENCE.md) now connects the original
