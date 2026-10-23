@@ -19,7 +19,9 @@ class HistoryPathCompatibilityTests(unittest.TestCase):
 
     def spelling(self, directory, kind):
         if kind == "relative":
-            return Path(os.path.relpath(directory, Path.cwd()))
+            self.addCleanup(os.chdir, Path.cwd())
+            os.chdir(directory.parent)
+            return Path(directory.name)
         alias = directory.parent / "existing-parent"
         alias.mkdir()
         return alias / ".." / directory.name
