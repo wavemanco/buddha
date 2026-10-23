@@ -562,6 +562,39 @@ def _input_records(
     return result
 
 
+@contextmanager
+def _final_producer_contract(
+    directory: Path,
+    *,
+    selection: Selection,
+    roots: Mapping[str, Path],
+    authorization: Authorization,
+    settings: dict[str, object],
+    review: dict[str, object],
+    inputs: list[dict[str, str]],
+) -> Iterator[None]:
+    """Private trusted-producer seam; unrelated legacy work has no new permission."""
+    terms = authorization._terms()
+    binding = trial_fence._parse_scope(cast(str, terms["scope"]))
+    if binding is None or binding.phase != "final":
+        yield
+        return
+    with trial_fence._final_owner_contract(
+        authorization.path,
+        terms,
+        directory=directory,
+        selection=selection.to_record(),
+        roots={key: str(path) for key, path in roots.items()},
+        settings=settings,
+        review=_review(review, fresh=True),
+        profiles=_profiles(selection, roots),
+        core=_core_sources(),
+        runtime=_runtime(),
+        inputs=inputs,
+    ):
+        yield
+
+
 @_checked
 def prepare_gateway(
     directory: Path,

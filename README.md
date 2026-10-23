@@ -151,15 +151,20 @@ conservative bounds for both metrics and applying the fixed improvement rule.
 Missing required scores remain inconclusive. Its fixed-panel conclusions
 depend on declared family-independence assumptions; they do not establish
 unseen-task improvement. Seven focused methods and seven quality checks pass.
-Full prospective final populations/finalists, one-way finalization, promotion
-and the held-out scientific gate remain open under EVAL-01.
+The [final-evaluation controller](docs/FINAL-EVALUATION.md) now fixes every
+assigned final task, the finalist count and selection policy, original phase
+allocations and the one-way freeze before running the complete comparison.
+Its verification and hosted CI remain in progress. Actual held-out, human and
+transfer evidence remains separate under EVAL-02; no agent is promoted here.
 
 The [trial work safeguard](docs/EVALUATION-FENCE.md) now connects the original
 phase grants and a shared writer lock to source search, feedback, validation,
 direct Gateway calls and worker Sessions. Closing a trial blocks new adaptive
 work while preserving receipt settlement and passive reads of older results.
-Complete-output feedback stays intact. The final evaluation controller is still
-unimplemented; this safeguard does not enable a final run or establish improvement.
+Complete-output feedback stays intact. Final execution requires the checked
+current cell inside the actual frozen-schedule consumer; direct calls and a
+fabricated confirmation file cannot enable it. No funded final experiment or
+scientific improvement is established by this implementation.
 
 At this checkpoint the living plan contains **6 remaining leaf slices**.
 The Windows PID-lock observer follow-up is complete at its shared-reader scope;

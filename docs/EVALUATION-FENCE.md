@@ -3,9 +3,10 @@
 This EVAL-01 foundation connects a trial-wide writer check to the existing source
 search, feedback, generation, improvement, native assessment and validation
 controllers. It makes closing improvement work enforceable at those entry points.
-It does not yet supply the finalization controller, a final task schedule or a
-command for starting a scientific trial. [PLAN.md](PLAN.md) owns the remaining
-sequence.
+The [final-evaluation controller](FINAL-EVALUATION.md) now consumes this
+foundation with a complete frozen schedule. Neither component supplies spending
+permission or a command for a scientific trial. [PLAN.md](PLAN.md) owns the
+remaining sequence.
 
 ## What the check protects
 
@@ -36,14 +37,16 @@ Calling those public interfaces directly cannot bypass the controller's check.
 | Valid search or validation grant, open trial | Only the operations allowed for that phase can prepare or continue work. |
 | A marker is malformed, missing or inconsistent with a trial-scoped grant | New work stops before creating its destination or acquiring its local writer lock. |
 | Any entry exists at the trial's `freeze` path | New adaptive work stops. A partial or malformed freeze entry closes it too. |
-| Final-phase grant | New execution remains disabled until the actual final-schedule consumer is implemented. A fabricated ready file cannot enable it. |
+| Final-phase grant | New execution requires the confirmed full schedule and checked current cell inside the actual final consumer. Public calls and a fabricated ready file cannot enable it. |
 | A complete result already exists | The supported passive reader can verify and return it without obtaining a key or starting a worker. |
 | A dispatched request still needs its known result recorded | Settlement retains its original accounting route; closing work does not erase a reply or release an unknown hold. |
 
-The future finalization controller must consume the full prospectively declared
-schedule, populations, finalists, numerical rule and original funding before it
-can permit final work. This foundation does not implement that consumer or make
-a finalization or improvement claim.
+The final consumer checks the prospectively declared populations, finalists,
+numerical rule and original funding before permitting a scheduled cell. Its
+private execution context binds the exact owner and inputs while the original
+trial lease is held. A matching path or final grant alone grants no permission.
+The [consumer guide](FINAL-EVALUATION.md) describes its separate verification and
+recovery scope; this foundation alone does not establish finalization or gain.
 
 ## Feedback and historical runs
 

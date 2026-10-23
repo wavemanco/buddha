@@ -8,7 +8,7 @@ Trusted host source access is distinct from projecting a task to a candidate.
 import hashlib
 import re
 import sqlite3
-from collections.abc import Callable, Iterator, Sequence
+from collections.abc import Callable, Iterator, Mapping, Sequence
 from contextlib import ExitStack
 from functools import wraps
 from pathlib import Path
@@ -637,9 +637,7 @@ def _location(
     state: dict[str, Any], occasion: dict[str, Any], arm: int, task: int, repetition: int
 ) -> Path:
     return (
-        cast(Path, state["directory"])
-        / "validation"
-        / str(occasion["ordinal"])
+        Path(occasion["directory"])
         / "arms"
         / str(arm)
         / ("tasks")
@@ -1296,14 +1294,7 @@ def _arm_generation(
     state: dict[str, Any], occasion: dict[str, Any], arm: dict[str, Any]
 ) -> tuple[dict[str, Any], dict[str, Path], Selection]:
     generation = _obj(_load(_json(state["record"]["generation"])))
-    agent = (
-        state["directory"]
-        / "validation"
-        / str(occasion["ordinal"])
-        / "arms"
-        / str(arm["arm_index"])
-        / "agent"
-    )
+    agent = Path(occasion["directory"]) / "arms" / str(arm["arm_index"]) / "agent"
     roots = {key: Path(value) for key, value in generation["roots"].items()}
     roots["agent"] = agent
     selected_record = _obj(generation["selection"])
@@ -1479,7 +1470,12 @@ def _occasion(
     return value
 
 
-def _capacity(state: dict[str, Any], occasion: dict[str, Any]) -> None:
+def _capacity(
+    state: dict[str, Any],
+    occasion: dict[str, Any],
+    *,
+    receipts: Mapping[Path, str] | None = None,
+) -> None:
     """Project current v2/native input sets without reading future files.
 
     Each cell has the same disjoint layout. Actual attempt ordinals change path
@@ -1492,12 +1488,22 @@ def _capacity(state: dict[str, Any], occasion: dict[str, Any]) -> None:
     generated = generation / "attempts/0-0"
     evaluation = location / "evaluation"
     runtime = Path(state["record"]["generation"]["runtime"]["path"])
-    common = {Path(path) for path in occasion["controls"]} | {
-        Path(occasion["directory"]) / "occasion.json",
-        Path(occasion["directory"]) / "reservation.json",
-        location / "task.json",
-        location / "generation.json",
-    }
+    reservation_paths = (
+        set(receipts)
+        if receipts is not None
+        else {
+            Path(occasion["directory"]) / "occasion.json",
+            Path(occasion["directory"]) / "reservation.json",
+        }
+    )
+    common = (
+        {Path(path) for path in occasion["controls"]}
+        | reservation_paths
+        | {
+            location / "task.json",
+            location / "generation.json",
+        }
+    )
     source = {
         generation / "owners/0/manifest.json",
         generation / "owners/0/operations.sqlite3",
@@ -1562,6 +1568,8 @@ def _materialize(
     arm: dict[str, Any],
     identifier: str | int,
     location: Path,
+    *,
+    receipts: Mapping[Path, str] | None = None,
 ) -> tuple[dict[str, Any], Selection, dict[Path, str]]:
     generation, roots, expected = _arm_generation(state, occasion, arm)
     arm_root = roots["agent"].parent
@@ -1590,9 +1598,15 @@ def _materialize(
     pipeline._same_or_write(location / "generation.json", _json(recipe))
     controls = {_absolute(path): _digest(pin) for path, pin in occasion["controls"].items()}
     controls.update(
-        {
+        receipts
+        if receipts is not None
+        else {
             Path(occasion["directory"]) / "occasion.json": pipeline._sha(occasion),
             Path(occasion["directory"]) / "reservation.json": pipeline._sha(_reservation(occasion)),
+        }
+    )
+    controls.update(
+        {
             location / "task.json": task.fingerprint(),
             location / "generation.json": pipeline._sha(recipe),
         }
