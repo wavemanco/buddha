@@ -2,7 +2,9 @@
 
 This implements the [frozen protocol](SOURCE-CAPACITY-PROTOCOL.md). It has only
 been checked offline with synthetic replies and mocked HTTPS. **There is no
-funded handoff or live command to run yet.** No actual token count or replacement
+actual model measurement yet.** The approved dedicated allocation and exact
+executing-code CI now pass; [the live guide](SOURCE-CAPACITY-LIVE.md) supplies
+the checked user-started command. No actual token count or replacement
 output margin has been measured. [PLAN.md](PLAN.md) owns the next step.
 
 The driver sends one already saved request through Buddha's existing Gateway.

@@ -4,8 +4,8 @@ The [capacity driver](SOURCE-CAPACITY-DRIVER.md) has now transported the exact
 retained 25,209-byte request through the real Gateway/accounting path with one
 mocked HTTPS response. It then verified the same original result without keys
 or another send. **This is offline engineering evidence, not a model token
-measurement. The observation is now approved; its dedicated allocation and live
-command still await the executing-code CI gate.**
+measurement. The approved observation now has a dedicated allocation, passing
+executing-code CI and a checked [live command](SOURCE-CAPACITY-LIVE.md).**
 
 The request hash is `e258ae8166c518ccd8e8a799139e35c7fa609b74fe10fcba0c8c23d1e401a838`.
 The parent is recovered as literal data from the retained request's input JSON:
@@ -59,14 +59,12 @@ rate. The resulting upper rates are $5.50 input and $16.50 output per million.
 This unchanged Chat body has no extended-cache, tool or nontext option. The
 Responses-only 12-hour write rate is outside this request's scope.
 
-Before any live command is supplied, the driver must pass hosted CI on its exact
-executing cut, the account/profile assertions must still apply, and the approved
-allocation must be prepared. Ubuntu has passed; Windows is still running at the
-current checkpoint. The immutable local inputs have passed an independent
-file/hash review, with no authority or owner created; see the
-[approval checkpoint](conformance/src02-capacity-approval-delivery.json).
-Approval alone does not start a call.
-Only an OpenAI key will be needed, entered locally; no Anthropic key is involved.
-The handoff will provide the exact path, hash and command. There is nothing to run
-from this document now. [PLAN.md](PLAN.md) retains the open capacity gate until
-actual model evidence exists.
+Both exact executing-code hosted checks now pass. The dedicated $7/one-attempt
+allocation and actual keyless copied-CLI check pass, with an independent
+post-funding review and zero owners, attempts, spending or holds at that
+checkpoint. The [funded handoff](conformance/src02-capacity-funded-handoff.json)
+retains those checks; the earlier unfunded approval checkpoint remains history.
+Only an OpenAI key is needed, entered locally; no Anthropic key is involved.
+Use the exact command in [the live guide](SOURCE-CAPACITY-LIVE.md). Approval
+and preparation have not started a call. [PLAN.md](PLAN.md) retains the open
+capacity gate until actual model evidence exists.

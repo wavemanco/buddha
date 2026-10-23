@@ -38,12 +38,14 @@ request and executing code. This covers one OpenAI request containing complete
 historical feedback; returned Python stays text. It buys no answer generation,
 benchmark judging, search or code execution. No Anthropic key is needed.
 
-Immutable inputs are prepared in a separate local copy. The dedicated authority
-has not been created and no provider call has been made. The exact executing
-code must pass its remaining hosted Windows check before funding/handoff
-completion and a live command. Ubuntu has passed. No further budget approval
-is needed for this unchanged scope. The [living plan](PLAN.md) tracks readiness;
-the [capacity guide](SOURCE-CAPACITY-REHEARSAL.md) explains the observation.
+Immutable inputs and the dedicated $7/one-attempt authority are prepared in a
+separate local copy. Both exact executing-code hosted checks and the actual
+keyless handoff check pass; independent review confirms zero owners, attempts,
+spending and holds before launch. No provider call has been made. No further
+budget approval is needed within this unchanged scope. The [live guide](SOURCE-CAPACITY-LIVE.md)
+supplies the exact command; the [funded record](conformance/src02-capacity-funded-handoff.json)
+retains the readiness evidence. The [living plan](PLAN.md) tracks the open
+measurement and source-evolution gates.
 
 The new Gateway/source path supports [keyed account reviews](KEYED-REVIEWS.md),
 using the API key already supplied locally; no extra secret is needed. The
