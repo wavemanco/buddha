@@ -1,0 +1,59 @@
+{
+  "base_commit": "8f97d61781b09df96adf132e2f7f8b57edb3c782",
+  "checks": {
+    "application_test_config_changes": false,
+    "authority_created": false,
+    "new_runtime_or_ci_claim": false,
+    "open_major_leaves": 6,
+    "original_owner_changes": false,
+    "original_pol03_acceptance_retained": true,
+    "original_src03_acceptance_retained": true,
+    "prior_revision_rows_preserved_raw_exact": 88,
+    "provider_calls": 0,
+    "sole_next": "SRC-02"
+  },
+  "evidence": {
+    "actual_model_chain": {
+      "path": "docs/conformance/src02-live-results.json",
+      "sha256": "423cfaac923e00f666653b138d3f46c1e5f0394b80c30cf87566a04b37c75706"
+    },
+    "full_output_channel": {
+      "path": "docs/conformance/src02-full-output-feedback-delivery.json",
+      "sha256": "dac3457bf67df35e9d1c1b1f702fa76f97d87d383ad27788dc66896ffbbfa0ca"
+    },
+    "pol03_gap_audit": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol03-gap-audit-20261023\\pol03-evidence-gap-note-v1.md",
+      "sha256": "a0e114c15d4f34b84c10acfcda5d413da179ea468a70b46490da5c45357c6e29"
+    },
+    "pol03_scope_addendum": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol03-gap-audit-20261023\\pol03-scope-and-conditional-shape-addendum-v1.md",
+      "sha256": "95251081ce53da9d86929cb27755b72686d9a7430b28a1bc959169b6539a1f78"
+    },
+    "source_loop_delivery": {
+      "path": "docs/conformance/src02-source-loop-delivery.json",
+      "sha256": "db07a73aa3c62c198ac44666243c04b7605b5a4af69d8ee5ce6b0563e5914051"
+    },
+    "src03_evidence_map": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src03-evidence-map-20261023-v1\\src03-evidence-map-v1.md",
+      "sha256": "d51c9e67b6f015b1049edbf6e67230da7cd6dd7f276c450ca9143ecc53c60c79"
+    },
+    "verified_source_copy": {
+      "path": "docs/conformance/src02-verified-source-copy-delivery.json",
+      "sha256": "b057b04f0cee8c65c49eb2ac35a29fc779dc581d1b283a46a28a5c3150aaecd6"
+    }
+  },
+  "finding_id": "PLAN-S1",
+  "format": "buddha.plan-source-evidence-reconciliation.v1",
+  "interpretation": {
+    "imp01": "A changed and exercised improver does not establish improved effectiveness; the controlled comparison remains planned.",
+    "pol03": "Existing source-loop engineering advances the original acceptance. Concrete request/output feasibility remains pending. Optional JSON-policy invalid-outcome feedback is conditional, not another required controller.",
+    "src03": "Original model-authored changed-improver result and later supplied-program full-output witness proof are separate observed cuts. Bounded checks exist; current-parent model-authored full-output/witness evidence remains pending."
+  },
+  "limitations": [
+    "Each historical proof retains its original source cut; no current-tip whole-suite or same-cut model-witness claim.",
+    "No task/source/improver improvement, human validity or universal source competence is established.",
+    "Approved capacity allocation and exact executing-code Windows CI/command gates remain separately pending."
+  ],
+  "method": "Bounded source, test-description and retained-delivery reading only. No new runtime evidence, imports, SQL, keys, workers or calls.",
+  "status": "documentation_correction_no_gate_closed"
+}
