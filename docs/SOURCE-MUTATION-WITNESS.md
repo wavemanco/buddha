@@ -149,10 +149,19 @@ This localizes the fault for that invocation; it does not identify a Docker or
 filesystem cause or repair a source-search owner.
 
 The trusted host created and fsynced the returned child after the parent
-container finished. A next proposed control is a verified fresh host-source
-snapshot with the same diagnostic runner and configuration, changing only the
-agent's source location. Any later production route must bind its source
-location when preparing a fresh owner and preserve historical reconstruction.
+container finished. A separate [source-copy control](conformance/src02-startup-snapshot-control.json)
+now uses that same 299-byte child at a fresh verified host location, keeping the
+existing diagnostic runner, worker input and limits. It reaches readiness and
+returns the expected `hello` and `goodbye`, with no stderr, model request or SQL.
+Both sources and all 244 input pins remain unchanged, and the owned container is
+removed. Restoring only the source path reproduces the prior configuration.
+The raw Docker environment array has a different order; its 24 unique key/value
+pairs match exactly.
+
+This supports a prospective verified-copy route. One separately timed control
+does not identify the filesystem cause, repair the original owner or complete a
+source search. Next version that route before preparing fresh owners, preserve
+historical source locations/reconstruction, and require a fresh composed proof.
 No paid calls were made. The actual composed positive gate remains open.
 
 ## Versions and library settings
