@@ -117,7 +117,8 @@ interrupted continuation and completed keyless reuse. Independent passive
 review verifies the saved replies, source lineage and original owners.
 This is engineering evidence; the supplied children keep their improver
 unchanged. The proposed $25 / 512-attempt live handoff still needs separate
-approval and applicable hosted checks before a model-authored source run.
+approval and a funded local handoff before a model-authored source run.
+The protected launcher's exact-head Linux and Windows checks have passed.
 The [source-evolution backlog context](docs/BACKLOG.md) records the intended Python
 code and inherited-improver endpoint, the current gap and its existing plan gates.
 
@@ -134,8 +135,12 @@ and [linked continuation results](docs/LINKED-CONTINUATION-RESULTS.md).
 The [numerical improvement rule](docs/EVALUATION-RULE.md) now implements the
 fixed-primary gain/loss comparisons for future held-out decisions. Its
 thirteen focused checks pass. It consumes supplied bounds and a coverage
-assertion; uncertainty estimation, verified evidence, limited evaluation
-occasions and finalization remain part of the open EVAL-01 controller.
+assertion. The [limited validation controller](docs/VALIDATION-STUDY.md)
+connects prospectively reserved rounds to the existing isolated generation and
+native-evaluation paths, preserving original owners and explicit partial
+evidence. It collects measurements without computing confidence bounds or
+promoting a candidate. Uncertainty estimation, finalization and the full
+held-out scientific gate remain part of the open EVAL-01 controller.
 
 At this checkpoint the living plan contains **6 remaining leaf slices**.
 The Windows PID-lock observer follow-up is complete at its shared-reader scope;
