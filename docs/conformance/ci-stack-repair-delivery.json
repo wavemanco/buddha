@@ -1,0 +1,664 @@
+{
+  "format": "buddha.ci-stack-repair-delivery.v1",
+  "status": "local_repairs_complete_hosted_ci_pending",
+  "snapshot_utc": "2026-10-23T13:54:39Z",
+  "scope": "Repair originating PR branches, propagate bases without rewriting history, correct draft metadata and retain exact verification scopes.",
+  "final_stack_tip": "ac0f2045a14f83b92dfee095285ffed935144d2b",
+  "corrections": [
+    {
+      "pr": 71,
+      "commit": "99f3262ba1c5de33d2b796ea38578ee05bdbb222",
+      "kind": "test_diagnostics_only",
+      "description": "Preserve original linked-CLI traceback and suppressed unknown-resume exception context with a deliberate cycle-safe control. Neither old hosted event reproduced or explained."
+    },
+    {
+      "pr": 73,
+      "commit": "088ec2b81435a668128529799626f8fec773dfbe",
+      "kind": "fixture_compatibility",
+      "description": "Backport exact worker-version and historical prefix-packet fixtures from PR75; production and both fixed test modules match its already-checked cut."
+    },
+    {
+      "pr": 78,
+      "commit": "661a1d479c7561901e39df46dee9615c78276bc9",
+      "kind": "production_path_order_and_fixture_compatibility",
+      "description": "Run existing legacy path validation/canonicalization before strict trial probing in import_history. Preserve initial trial-history refusal and all link/reparse guards. Resolve exact legacy expected path; include missing literal trial_fence core expectation originally in PR81."
+    }
+  ],
+  "path_repair": {
+    "delivery": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\ci-trial-fence-paths\\runs\\reviews\\history-paths-delivery-v1.json",
+      "sha256": "059acde46ac3e53686c4eb8fc8a59694894a7ccb1dd3f93809c5158bfcb768e9"
+    },
+    "red": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\ci-trial-fence-paths\\runs\\reviews\\history-paths-red-v1.json",
+      "sha256": "2fe93e91965cfbc3de1c3c179fc701269e5da9d2ae37b54730b181d3eb7f086e"
+    },
+    "red_scope": "Two methods; equivalent and relative successful-import cases raise actual TrialFenceError. Poisoned-marker controls pass. No missing interface.",
+    "green": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\ci-trial-fence-paths\\runs\\reviews\\history-paths-green-v1.json",
+      "sha256": "c7a801bf50ab5f17444a485978cc465cd26b7554024f504a60efb516c02215bf"
+    },
+    "green_scope": "Two new methods, fourteen existing trial-fence methods and three affected actual history-import methods; 19 pass, zero failures/errors/guard denials/model calls/workers.",
+    "passing_methods": [
+      "test_history_path_compat.HistoryPathCompatibilityTests.test_equivalent_and_relative_history_cannot_launder_poisoned_trial_markers",
+      "test_history_path_compat.HistoryPathCompatibilityTests.test_legacy_history_import_normalizes_equivalent_and_relative_paths",
+      "test_trial_fence.TrialFenceTests.test_cached_raw_reply_after_freeze_needs_no_key_transport_or_new_accounting",
+      "test_trial_fence.TrialFenceTests.test_closed_phase_denies_bind_reserve_dispatch_but_records_known_result",
+      "test_trial_fence.TrialFenceTests.test_final_grant_stays_disabled_even_with_caller_written_ready",
+      "test_trial_fence.TrialFenceTests.test_gateway_under_poisoned_trial_marker_refuses_before_destination",
+      "test_trial_fence.TrialFenceTests.test_legacy_bind_under_poisoned_trial_marker_is_readonly",
+      "test_trial_fence.TrialFenceTests.test_missing_trial_input_is_refused_before_gateway_destination",
+      "test_trial_fence.TrialFenceTests.test_original_completion_deactivation_works_with_grant_outside_closed_tree",
+      "test_trial_fence.TrialFenceTests.test_original_phase_grant_cannot_bind_legacy_manifest_without_trial_inputs",
+      "test_trial_fence.TrialFenceTests.test_original_purpose_and_work_kind_are_not_caller_permissions",
+      "test_trial_fence.TrialFenceTests.test_phase_scope_controls_and_original_gateway_bindings",
+      "test_trial_fence.TrialFenceTests.test_poisoned_freeze_does_not_erase_unknown_or_prevent_received_truth",
+      "test_trial_fence.TrialFenceTests.test_same_scope_imposter_and_identical_database_copy_cannot_prepare",
+      "test_trial_fence.TrialFenceTests.test_scope_codec_rejects_invalid_identity_and_public_reserved_scope_adoption",
+      "test_trial_fence.TrialFenceTests.test_trial_historical_routes_refuse_before_evidence_or_acceptance_reads",
+      "test_authorization.AuthorizationTests.test_historical_import_is_idempotent_and_preserves_exact_pilot_totals",
+      "test_authorization.AuthorizationTests.test_historical_unknown_requires_exact_explicit_continuation_acceptance",
+      "test_authorization.AuthorizationTests.test_unknown_received_billing_evidence_is_preserved_and_cannot_be_whitelisted"
+    ],
+    "elapsed_seconds": 14.22015680000186,
+    "source_control_pin_count": 244,
+    "static_v1": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\ci-trial-fence-paths\\runs\\reviews\\history-paths-static-v1.json",
+      "sha256": "cbdb4aadaa463e21bfe7fc570daaa06596d80af5b2715397ca0e35b9a0e0ef24"
+    },
+    "static_v1_scope": "Setup failure only: child -I excluded installed user-site Ruff/mypy/Bandit. No code analyzed, no installation or source edit.",
+    "static_v2": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\ci-trial-fence-paths\\runs\\reviews\\history-paths-static-v2.json",
+      "sha256": "45dce23849264d693350174223f61dd62696a6c6a7890c67c094fec2f0819fdd"
+    },
+    "static_v2_scope": "Changed-file Ruff/format plus authorization strict mypy win32/linux and Bandit pass; sanitized ordinary child invocation. Not full seven-command or full-suite validation.",
+    "file_sha256": {
+      "buddha/authorization.py": "9c2c1bfaf76e0f4d8108d75363b07d2f591edff7fa8247d69594a5a8bbd01270",
+      "buddha/trial_fence.py": "c94616b67cb6a4f24ec6fb77c37b701e0737463f4ca6b5802b87b21c0bef218c",
+      "tests/test_common.py": "e0d44cead3aeac9cad7bbd02d81fa2b7b7e3d042b2a35fa9eda5a5bc1bfd5f65",
+      "tests/test_trial_fence.py": "83c303a506eeadd2516d8e9aaea5cb99140814a5f49ebf483fb5d6dede468d2a",
+      "tests/test_history_path_compat.py": "553469bc8c438aa3d9b6280b23602d9c15c476680868872784d86c911a2ff411"
+    },
+    "guard_implementation_unchanged": "buddha/trial_fence.py"
+  },
+  "recovery_diagnostics": {
+    "summary": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\ci-recovery-diagnostics\\runs\\reviews\\recovery-diagnostics-summary-v1.json",
+      "sha256": "f146e4b5a13b9e0891eef5c94781a9b48df69d7c20697ed18b0a6098848113be"
+    },
+    "independent_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\ci-recovery-diagnostics\\runs\\reviews\\recovery-diagnostics-independent-review-v1.json",
+      "sha256": "d5d4a265d72b6621e8681d1eaf84ef22d0f7d496fd0f3e2ee16233b3b31c8717"
+    },
+    "results": [
+      {
+        "denied_events": [],
+        "elapsed_seconds": 77.51742379995994,
+        "errors": 0,
+        "failures": 0,
+        "fresh_sql_target_count": 35,
+        "log_sha256": "acab6bd5e326368029c0e61ec908b8b8b4945c36909feac77b8014b80a5cf5bc",
+        "path": "recovery-diagnostics-result-v1.json",
+        "sha256": "698d7b35587b2243bfcd690e16a8904ba5a016dccafbe68bca7b9bb00721db47",
+        "source_pins_unchanged": true,
+        "tests": 3
+      },
+      {
+        "denied_events": [],
+        "elapsed_seconds": 0.309230100014247,
+        "errors": 0,
+        "failures": 0,
+        "fresh_sql_target_count": 0,
+        "log_sha256": "e260f8105d932fa75215135ecc26a606e0b3703f8bdc4ad7fb8996296e8619a7",
+        "path": "recovery-cycle-control-result-v1.json",
+        "sha256": "81d577273bb4ef989375cdf1e25f412051f668d657263c646a4d2ea7ceed90ba",
+        "source_pins_unchanged": true,
+        "tests": 1
+      }
+    ],
+    "unique_method_count": 3,
+    "scope": "Two affected recovery methods and first nested-error control pass once. Only the tightened retained-cycle control is checked again; helper and affected method AST stay unchanged. No hosted reproduction or production-cause claim.",
+    "file_sha256": {
+      "tests/test_linked_cli.py": "177afc1cf496cc6bc627add78e3607a4377537fbdcfa09d7f81cd861a53a7db2",
+      "tests/test_source_search.py": "b1cb232e9006b7ecd5f2766e5f769aa77d519ecbb1d5f8faa2ea7a722819ce32"
+    }
+  },
+  "final_tip_quality": {
+    "receipt": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-request-capacity\\runs\\reviews\\ci-stack-quality-v1.json",
+      "sha256": "bab867292a9c83d3cb7af6b61447a0fc9b01d46b043a766c2d76d999071cc55a"
+    },
+    "inputs": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-request-capacity\\runs\\reviews\\ci-stack-quality-v1-inputs.json",
+      "sha256": "e86508856d94da95b1957c17d37da8aefd8cfd79e5d400418d50b4e87c80d7d5"
+    },
+    "observed_utc": "2026-10-23T13:47:41.988549+00:00",
+    "source_and_controls_count": 245,
+    "python_count": 241,
+    "source_and_controls_unchanged": true,
+    "runner_sha256": "c258d8fd206d271b7a492b2f831b204f87f40c2662f3d250c19c4e6e3ac34025",
+    "commands": [
+      {
+        "name": "ruff-check",
+        "exit_code": 0,
+        "elapsed_seconds": 0.29452620004303753,
+        "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+      },
+      {
+        "name": "ruff-format",
+        "exit_code": 0,
+        "elapsed_seconds": 0.20505119999870658,
+        "log_sha256": "82a96897c2e32e25d0c331f67fd0e62f0a1bdf2d0ea1cddaa49079d4f6c6396b"
+      },
+      {
+        "name": "mypy-windows",
+        "exit_code": 0,
+        "elapsed_seconds": 4.004691699985415,
+        "log_sha256": "983e45a1573bdc3dc4ac842170891e6f013874a8cadda16fde2fbe3b7b5c6021"
+      },
+      {
+        "name": "bandit",
+        "exit_code": 0,
+        "elapsed_seconds": 4.1481759999878705,
+        "log_sha256": "785dd19a72c75108f157b2c4185e06571317f5b4dff76bb50d63d0dbcc4add4b"
+      },
+      {
+        "name": "pip-audit",
+        "exit_code": 0,
+        "elapsed_seconds": 23.34411970002111,
+        "log_sha256": "e82148c0c30269ca5a2c35420ece6af011a4faf5a375325d750e243ffdb10625"
+      },
+      {
+        "name": "compile",
+        "exit_code": 0,
+        "elapsed_seconds": 0.904293300001882,
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "mypy-linux",
+        "exit_code": 0,
+        "elapsed_seconds": 2.5494140000082552,
+        "log_sha256": "983e45a1573bdc3dc4ac842170891e6f013874a8cadda16fde2fbe3b7b5c6021"
+      }
+    ],
+    "scope": "Seven quality commands on the updated final tip; no local full-suite claim. Focused method cohorts belong to their separately pinned cuts."
+  },
+  "hosted_original_log_pins": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\ci-stack-repair-20261023\\pr78-windows-job-120352145519.log",
+      "sha256": "9498839fee589cefca48786877b5236769cf784db08064c95cbb19137da91cdc"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\ci-stack-repair-20261023\\pr79-linux-job-120355566988.log",
+      "sha256": "0911bfec13736ed50b9b51709dddead05e3247e44ae98b6b4b64a07417220581"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\ci-stack-repair-20261023\\pr79-windows-job-120355566635.log",
+      "sha256": "f38266c23c6958dbb87f8ee8deb2973b4057ed48456224ed15f504e1859fd260"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\ci-stack-repair-20261023\\pr80-linux-job-120382263717.log",
+      "sha256": "b57b307548be234e7e25dc7eeb6bbf1928ce88f21dafe2a955aa7d17a2607cdc"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\ci-stack-repair-20261023\\pr80-windows-job-120382263870.log",
+      "sha256": "ee5532377f794407d120acd9d8ee85d6f53c68f87cabd13055a47e312f782f60"
+    }
+  ],
+  "fresh_hosted_snapshot": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\ci-stack-repair-20261023\\fresh-status-1355.json",
+    "sha256": "2e888078b196b903ec78a9b52bf74093741330ecb826b330c0200261ef1e66eb"
+  },
+  "updated_heads_and_live_handles": [
+    {
+      "pr": 71,
+      "head": "99f3262ba1c5de33d2b796ea38578ee05bdbb222",
+      "branch": "codex/eval-01-analysis",
+      "base": "codex/src-02-funded-handoff",
+      "draft_at_snapshot": true,
+      "checks": [
+        {
+          "name": "checks (ubuntu-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964570247/job/120450954231",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        },
+        {
+          "name": "checks (windows-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964570247/job/120450954623",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        }
+      ]
+    },
+    {
+      "pr": 72,
+      "head": "6f13b6c23b9f925838bb01dead98d498cbd06eb9",
+      "branch": "codex/src-02-live-results",
+      "base": "codex/eval-01-analysis",
+      "draft_at_snapshot": false,
+      "checks": [
+        {
+          "name": "checks (ubuntu-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964440299/job/120450513540",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        },
+        {
+          "name": "checks (ubuntu-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964523472/job/120450798179",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        },
+        {
+          "name": "checks (windows-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964440299/job/120450513939",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        },
+        {
+          "name": "checks (windows-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964523472/job/120450797771",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        }
+      ]
+    },
+    {
+      "pr": 73,
+      "head": "d737ca44b95fff2124803f97721ed2c29ac9076f",
+      "branch": "codex/src-02-full-output-feedback",
+      "base": "codex/src-02-live-results",
+      "draft_at_snapshot": true,
+      "checks": [
+        {
+          "name": "checks (ubuntu-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964488041/job/120450679474",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        },
+        {
+          "name": "checks (ubuntu-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964564037/job/120450934413",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        },
+        {
+          "name": "checks (windows-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964488041/job/120450678988",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        },
+        {
+          "name": "checks (windows-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964564037/job/120450934938",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        }
+      ]
+    },
+    {
+      "pr": 74,
+      "head": "d9d647f45acd2af5825640cfadbeff01f1ee966e",
+      "branch": "codex/windows-linked-export",
+      "base": "codex/src-02-full-output-feedback",
+      "draft_at_snapshot": true,
+      "checks": [
+        {
+          "name": "checks (ubuntu-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964517433/job/120450778460",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        },
+        {
+          "name": "checks (ubuntu-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964544012/job/120450867758",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        },
+        {
+          "name": "checks (windows-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964517433/job/120450778048",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        },
+        {
+          "name": "checks (windows-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964544012/job/120450868236",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        }
+      ]
+    },
+    {
+      "pr": 75,
+      "head": "a1c30cfcb26fb7a8c3ff9ba307d1b9aae3c9f426",
+      "branch": "codex/full-feedback-ci-compat",
+      "base": "codex/windows-linked-export",
+      "draft_at_snapshot": false,
+      "checks": [
+        {
+          "name": "checks (ubuntu-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964467545/job/120450610985",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        },
+        {
+          "name": "checks (ubuntu-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964569329/job/120450951112",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        },
+        {
+          "name": "checks (windows-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964467545/job/120450610698",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        },
+        {
+          "name": "checks (windows-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964569329/job/120450950722",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        }
+      ]
+    },
+    {
+      "pr": 76,
+      "head": "a3d9d6d3d85a56cdf03eb92af27def36b77f15db",
+      "branch": "codex/src-02-mutation-competence",
+      "base": "codex/full-feedback-ci-compat",
+      "draft_at_snapshot": false,
+      "checks": [
+        {
+          "name": "checks (ubuntu-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964467224/job/120450609450",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        },
+        {
+          "name": "checks (ubuntu-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964560697/job/120450921554",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        },
+        {
+          "name": "checks (windows-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964467224/job/120450609278",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        },
+        {
+          "name": "checks (windows-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964560697/job/120450922184",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        }
+      ]
+    },
+    {
+      "pr": 77,
+      "head": "2bc0c28ad2dc242a616f92c2184da9fdf6096903",
+      "branch": "codex/src-02-startup-followup",
+      "base": "codex/src-02-mutation-competence",
+      "draft_at_snapshot": false,
+      "checks": [
+        {
+          "name": "checks (ubuntu-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964541251/job/120450857606",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        },
+        {
+          "name": "checks (ubuntu-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964558646/job/120450915325",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        },
+        {
+          "name": "checks (windows-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964541251/job/120450857192",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        },
+        {
+          "name": "checks (windows-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964558646/job/120450916677",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        }
+      ]
+    },
+    {
+      "pr": 78,
+      "head": "6b8972e4c566b98d14329ae569a9e5fb5d8d8d81",
+      "branch": "codex/eval-01-adaptive-fence",
+      "base": "codex/src-02-startup-followup",
+      "draft_at_snapshot": true,
+      "checks": [
+        {
+          "name": "checks (ubuntu-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964500906/job/120450721788",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        },
+        {
+          "name": "checks (windows-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964500906/job/120450721677",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        }
+      ]
+    },
+    {
+      "pr": 79,
+      "head": "1a627b7217baff6834e0db68f664e0771e81c0aa",
+      "branch": "codex/src02-snapshot-control",
+      "base": "codex/eval-01-adaptive-fence",
+      "draft_at_snapshot": true,
+      "checks": [
+        {
+          "name": "checks (ubuntu-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964488559/job/120450681443",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        },
+        {
+          "name": "checks (ubuntu-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964558829/job/120450915521",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        },
+        {
+          "name": "checks (windows-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964488559/job/120450681121",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        },
+        {
+          "name": "checks (windows-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964558829/job/120450915824",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        }
+      ]
+    },
+    {
+      "pr": 80,
+      "head": "6fab719912f717c27e7bd82d883fae5f70bd804c",
+      "branch": "codex/src02-verified-source-copy",
+      "base": "codex/src02-snapshot-control",
+      "draft_at_snapshot": true,
+      "checks": [
+        {
+          "name": "checks (ubuntu-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964486457/job/120450674683",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        },
+        {
+          "name": "checks (ubuntu-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964547877/job/120450880834",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        },
+        {
+          "name": "checks (windows-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964486457/job/120450674107",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        },
+        {
+          "name": "checks (windows-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964547877/job/120450880535",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        }
+      ]
+    },
+    {
+      "pr": 81,
+      "head": "d08a72562e1aa7cbd4390ac47f259de6108d1158",
+      "branch": "codex/eval01-core-ci-compat",
+      "base": "codex/src02-verified-source-copy",
+      "draft_at_snapshot": true,
+      "checks": [
+        {
+          "name": "checks (ubuntu-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964440866/job/120450515693",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        },
+        {
+          "name": "checks (ubuntu-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964559958/job/120450920013",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        },
+        {
+          "name": "checks (windows-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964440866/job/120450515973",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        },
+        {
+          "name": "checks (windows-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964559958/job/120450920591",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        }
+      ]
+    },
+    {
+      "pr": 82,
+      "head": "ac0f2045a14f83b92dfee095285ffed935144d2b",
+      "branch": "codex/src02-request-capacity",
+      "base": "codex/eval01-core-ci-compat",
+      "draft_at_snapshot": true,
+      "checks": [
+        {
+          "name": "checks (ubuntu-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964518513/job/120450781277",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        },
+        {
+          "name": "checks (ubuntu-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964544972/job/120450871087",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        },
+        {
+          "name": "checks (windows-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964518513/job/120450781503",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        },
+        {
+          "name": "checks (windows-latest)",
+          "url": "https://github.com/wavemanco/buddha/actions/runs/39964544972/job/120450870779",
+          "status": "IN_PROGRESS",
+          "conclusion": ""
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "marked_ready_after_own_two_job_success": [
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      72,
+      75,
+      76,
+      77
+    ],
+    "pre_readiness_snapshot": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\ci-stack-repair-20261023\\before-readiness.json",
+      "sha256": "da9b3b30b097757e638f72093bfb1ea31169e1ed1ef9b57625ae92a1fbd3224a"
+    },
+    "original_bodies": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\ci-stack-repair-20261023\\pr-descriptions-before.json",
+      "sha256": "4cd48e61a776ebfe59dba2c5ed53a6c842a296e727d0375db5db436279a859bc"
+    },
+    "updated_body_proposals": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\ci-stack-repair-20261023\\pr-descriptions-proposed-v1.json",
+      "sha256": "22a9fd6918f0b2e8f6d5ddd4c5e5fa4db819b15b90ee6180cc36be984775d6fe"
+    },
+    "policy": "Completed slices are ready for review; draft is reserved for unfinished implementation. Readiness does not close broader scientific gates or authorize merging.",
+    "retained_docs_only_prs_after_backport": [
+      74,
+      75,
+      81
+    ],
+    "published_bodies": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\ci-stack-repair-20261023\\pr-descriptions-published-v1.json",
+      "sha256": "ee3b07dcc85781aaa513f3151b366c1ec63e94f5a4cdad1a871415ca5c44f7fd"
+    }
+  },
+  "history": {
+    "force_pushes": 0,
+    "pr_merges": 0,
+    "base_updates": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\ci-stack-repair-20261023\\base-updates.json",
+      "sha256": "d339c0f006c4233450fb8e8f6a95d7fc42fb39cce875f741b9dde4d802740092"
+    },
+    "method": "Ordinary base merges and one atomic push of 12 existing branch refs; all original commits retained."
+  },
+  "limits": [
+    "Fresh hosted checks were in progress at the saved snapshot. This delivery does not assert all red PRs resolved.",
+    "Earlier Windows linked-CLI and unknown-resume underlying errors remain unidentified. A later green run would establish non-reproduction at its own cut only.",
+    "No official evaluator, model settings, experiment outcome or financial limit changed; no provider calls, keys, original paid-owner writes or new allowance.",
+    "Several updated heads have multiple pull-request runs; all observed job IDs are retained. This slice does not change the workflow, shorten its checks or restart a timed-out observation as a new run.",
+    "Source-copy/runtime and scientific evidence retain original source cuts; merged CI repairs do not retroactively upgrade old owners or prove task improvement."
+  ],
+  "final_stack_merge_retention_review": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\ci-stack-repair-20261023\\final-stack-static-review-ac0f204-v1.json",
+    "sha256": "817ce3168a51f182e77c41e8cbe34266895c08b0bb60045c5644c1a08ee563f8"
+  },
+  "final_stack_merge_retention_review_scope": "Read-only final-byte/ancestry/fixture-composition review, not runtime evidence. Reviewer authored path repair, so this is merge-retention verification rather than independent certification of that change.",
+  "later_completed_original_pr80_windows": {
+    "job": 120382263870,
+    "pr": 80,
+    "head": "92e02810c8d758a661a7392e60a191772ab74460",
+    "log": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\ci-stack-repair-20261023\\pr80-windows-job-120382263870.log",
+      "sha256": "ee5532377f794407d120acd9d8ee85d6f53c68f87cabd13055a47e312f782f60"
+    },
+    "summary": "1683 tests in 10008.435 seconds; failures=3, errors=41, skipped=1",
+    "error_methods_exact_pr78": true,
+    "error_count": 41,
+    "unique_error_roots": [
+      "trial paths require their resolved long spelling"
+    ],
+    "scope": "Retained old Windows job completed after the original snapshot. Same 41 error methods and path root as PR78; this is no fresh corrected-head result.",
+    "join_receipt_sha256": "89cbaa931fb879e05ac0706572e6e228ab86211241074d0f87f5a5dd2143407e"
+  }
+}
