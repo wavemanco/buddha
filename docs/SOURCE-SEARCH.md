@@ -157,7 +157,8 @@ lineage; subsequent proposals use that checked root. Original source stays
 retained. Existing owners are never repaired by copying or remounting. Explicit
 `source_copy=False` preserves v3 witnessed behavior; task-only historical modes
 remain unchanged. The [version and recovery rules](SOURCE-MUTATION-WITNESS.md#verified-source-copies-for-new-owners)
-state the exact scope and pending actual composed proof.
+state the exact scope and passing bounded actual composed check; model context
+and output headroom remain pre-live requirements.
 
 For the original source-loop delivery, 41 new acceptance methods and 92 original
 regressions passed across their recorded source scopes. These were separate

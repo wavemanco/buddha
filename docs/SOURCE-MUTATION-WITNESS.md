@@ -95,7 +95,7 @@ Before another live handoff, verify the concrete full requests, model context,
 output headroom, schedule capacity, processing terms and new allocation. This
 implementation does not fund another run or reuse an older closed allowance.
 
-## Verification and current limit
+## Original verification and limit
 
 Forty-six focused test methods pass across separate recorded offline cohorts.
 Seven quality checks also pass on the publication branch. The production code
@@ -110,9 +110,10 @@ incomplete. The original fixture and its pending owner remain unchanged.
 
 A separate fresh-location control runs those same child bytes successfully with
 the unchanged production worker and original configuration. This does not repair
-the original owner or establish the cause of the mount failure. A fresh actual
-composed positive witness still needs to pass before a live handoff. The native
-stages in this proof are simulated and make no scoring-conformance claim.
+the original owner or establish the cause of the mount failure. At that
+checkpoint a fresh actual composed positive witness still needed to pass before
+a live handoff. The native stages in this proof are simulated and make no
+scoring-conformance claim.
 
 The [delivery record](conformance/src02-mutation-witness-delivery.json) retains
 the passing cohorts, original failed proof, bounded diagnostics and these limits.
@@ -158,11 +159,11 @@ removed. Restoring only the source path reproduces the prior configuration.
 The raw Docker environment array has a different order; its 24 unique key/value
 pairs match exactly.
 
-This supports a prospective verified-copy route. One separately timed control
+This supported a prospective verified-copy route. One separately timed control
 does not identify the filesystem cause, repair the original owner or complete a
-source search. Next version that route before preparing fresh owners, preserve
-historical source locations/reconstruction, and require a fresh composed proof.
-No paid calls were made. The actual composed positive gate remains open.
+source search. At that checkpoint the actual composed positive gate remained
+open. The later versioned route and fresh proof below address that next step;
+no paid calls were made and no historical owner was repaired.
 
 ## Verified source copies for new owners
 
@@ -180,9 +181,28 @@ can reuse only exact bytes at the same planned location. Once its owner exists,
 a missing or changed copy is refused; it is never recreated or remounted as a
 recovery shortcut. The original returned source and proposal remain retained.
 
-The standalone source-copy control above supports this route. Its actual
-composed production proof is still pending; focused offline checks do not close
-that gate or identify the Docker/filesystem cause.
+The fresh actual composed check now passes all three expected cases with
+14 real isolated Python workers and 24 simulated native workers. A capable
+parent consumes the complete measured answers, creates a changed further child
+and runs it on the first task. Missing or raising improvers are excluded; the
+ordinary child without an improver is also excluded as expected. All original
+owners finish with zero model operations or held funds, owned containers are
+removed, and two passive reads per case preserve file names and bytes.
+
+Eleven new acceptance methods, four existing regressions and seven quality
+checks pass at their recorded fixed cuts. Six genuine older publications remain
+readable with all 429 original file names and bytes unchanged, without opening
+original databases or running retired source. All 245 actual-proof inputs stay
+fixed; its 244 common project/configuration files match the verification checkout
+byte for byte.
+The [delivery record](conformance/src02-verified-source-copy-delivery.json) keeps
+the exact receipts, source bridge, initial failures and qualifications.
+
+The check uses supplied programs and request-free simulated judging. It proves
+this bounded engineering path; it does not establish model-authored improvement,
+universal mutation competence, official scoring semantics or a filesystem cause.
+Concrete model context and output headroom remain checks before any new live
+handoff. Earlier failed searches remain incomplete with their original owners.
 
 ## Versions and library settings
 
