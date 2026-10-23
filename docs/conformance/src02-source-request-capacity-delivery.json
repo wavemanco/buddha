@@ -1,0 +1,270 @@
+{
+  "byte_limits": {
+    "callback_frame_with_newline": 33554432,
+    "feedback_packet": 1048576,
+    "http_body": 16777216,
+    "parent_source": 1048576,
+    "projected_task_notes": 1048576
+  },
+  "changes_in_this_slice": [
+    "Documentation and a retained offline projection only."
+  ],
+  "evidence": {
+    "driver": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-verified-source-copy\\runs\\reviews\\starter-full-output-projection-v2.py",
+      "sha256": "313fb100d1b67f6eb538c8dedb03704d8a253ed9aeeaf76818fc286883f4c590"
+    },
+    "launch_wrapper": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-verified-source-copy\\runs\\reviews\\run-starter-projection-v1.ps1",
+      "sha256": "bbbf7359a148c750b5ea14586a25cefff501829600ccd01fc2e901c07d04c0ec"
+    },
+    "raw_evidence_location": "Local retained artifacts; this delivery does not bundle all raw inputs in Git.",
+    "receipt": {
+      "format": "buddha.starter-full-output-projection.v1",
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-verified-source-copy\\runs\\reviews\\starter-full-output-projection-result-v2.json",
+      "sha256": "1c1f87e7e923220d4b09118b53864fd1c765f48c400700d8944e652fb0878986"
+    },
+    "source_map": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-verified-source-copy\\runs\\reviews\\starter-full-output-projection-sources-v2.json",
+      "pin_count": 941,
+      "sha256": "07ee3f532df0ae024f6b5e3bb85e8bde58f1871c03d957d50495bb407894e134"
+    }
+  },
+  "excluded_claims": [
+    "No new source/evaluator integration, model call, active original-owner recovery, account access verification, funding authorization or user run command.",
+    "No newly measured starter, useful-diversity gain, maximum-packet capacity, future-parent fit or end-to-end improver execution proof."
+  ],
+  "format": "buddha.source-request-capacity-delivery.v1",
+  "frozen_profile": {
+    "input_token_ceiling": 1050000,
+    "max_output_tokens": 32768,
+    "meaning": "Historical conservative financial bounds, not an input token measurement or current-account verification.",
+    "model": "gpt-6.1-sol",
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-proposal-v3\\components\\host\\profiles.json",
+    "sha256": "c2068ec8dccc0662f8d8a6ebe8a966a01fc6236447bed219e0befa2a80bed9f2"
+  },
+  "full_output": {
+    "answer_counts": [
+      10,
+      10,
+      10
+    ],
+    "feedback_packet_format": "buddha.candidate-development-feedback.v2",
+    "full_source_split_provenance_not_in_provider_request": true,
+    "omitted_answer_positions": 0,
+    "omitted_answer_utf8_bytes": 0,
+    "provenance_format": "buddha.source-screen-feedback.v3",
+    "provenance_sha256": "e491f7e627cf9a38c7924baf947adaa4dbd1681fae435474f41339b49404b331",
+    "selected_task_ids": [
+      "curated-0",
+      "curated-47",
+      "curated-97"
+    ],
+    "story_note_exceeds_historical_4096_byte_ceiling": true,
+    "total_literal_answers": 30
+  },
+  "guide": "docs/SOURCE-REQUEST-CAPACITY.md",
+  "historical_reference": {
+    "authorization": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-handoff-v1\\authorization.sqlite3",
+    "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\seed",
+    "report_sha256": "a6629e081149f41e1ac00b1bd9abadcfb1b727e58a15c7ac91f8738c77c5a7a7"
+  },
+  "measured_serializations": {
+    "callback_frame_with_newline": {
+      "bytes": 33681,
+      "sha256": "48275a1c5f6d3da12529bfcb55452653aadbda29b15dd4f2ed310fc2797a2ecc"
+    },
+    "feedback_packet": {
+      "bytes": 7270,
+      "sha256": "5a01b3b2194cb3b82b3d188df8b36fd553238b673d25d19981fb37a888458f28"
+    },
+    "host_bundle": {
+      "bytes": 153749,
+      "sha256": "a953c6a4e11ae522415e9603017c6fdb7ecab68695bc90dd23fa755d50112be6"
+    },
+    "http_body": {
+      "bytes": 25209,
+      "sha256": "e258ae8166c518ccd8e8a799139e35c7fa609b74fe10fcba0c8c23d1e401a838"
+    },
+    "parent_source": {
+      "bytes": 13455,
+      "sha256": "77cfa68f6b3c6996fd503e1ce6f7a964eb57abdb8bde98f6761de5f6e298ff4f"
+    },
+    "payload": {
+      "bytes": 21434,
+      "sha256": "71f8845b2ed32fb07e6f876ab28b956318f12823e3518c10ed3fcfa9bab6dbca"
+    },
+    "projected_task_notes": {
+      "bytes": 6998,
+      "sha256": "bf9518f818b089a1bfc98bc8bd2dda6fa1ffc001f10077c480811425251915af"
+    },
+    "prompt": {
+      "bytes": 23068,
+      "sha256": "7ae0162261865be81b1df56d7c74ef2382aa0645259dad4ea43d90532200cc56"
+    }
+  },
+  "observation": {
+    "controlled_internal_attaches": 68,
+    "controlled_main_deserializations": 68,
+    "created_owner_or_grant": false,
+    "created_packet": false,
+    "elapsed_post_preflight_seconds": 8.410347700002603,
+    "file_backed_sql_connections": 0,
+    "guard_denials": [],
+    "memory_sql_connections": 70,
+    "model_operations": 0,
+    "process_write_scope": "Only the new result receipt was writable inside the projection process. The reviewed launcher separately wrote new stdout/stderr/process/exit evidence; no original artifact was written.",
+    "provider_calls": 0,
+    "raw_api_key_values_read": 0,
+    "worker_processes": 0
+  },
+  "observer_history": {
+    "v1": {
+      "driver_sha256": "717ebc5642fb57db2def900508c4044187fdce1a61016e97b3c29ed6a6e89673",
+      "original_and_source_pins_unchanged": true,
+      "reason": "Absent redirected .pyc read lookup was outside the original strict whitelist.",
+      "receipt": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-verified-source-copy\\runs\\reviews\\starter-full-output-projection-result-v1.json",
+        "sha256": "a90bf356e4a34d9d3010d73cc5d75d88c6c26483e7bd067d13311fc6576c723b"
+      },
+      "status": "setup_guard_refusal_before_feedback_or_request_projection"
+    },
+    "v2": {
+      "admitted_missing_lookup_count": 61,
+      "cache_prefix_absent_at_completion": true,
+      "change": "Permit only missing .pyc read lookups below the distinct fresh caller-selected sys.pycache_prefix. Existing cached content and cache writes remain refused.",
+      "existing_unpinned_cache_content_allowed": false,
+      "status": "complete"
+    }
+  },
+  "planned_publication_path": "docs/conformance/src02-source-request-capacity-delivery.json",
+  "preservation": {
+    "actual_projection_phase_unique_original_paths_read": 25,
+    "all_original_file_inventories_unchanged": true,
+    "all_pins_unchanged": true,
+    "counts_overlap": "Frozen source pins overlap the protected root inventories. Do not add 56 to 651 as an independent population.",
+    "original_frozen_source_pins": 56,
+    "original_root_file_total": 651,
+    "original_roots": [
+      {
+        "file_count": 606,
+        "role": "completed_source_run"
+      },
+      {
+        "file_count": 7,
+        "role": "original_handoff"
+      },
+      {
+        "file_count": 38,
+        "role": "original_proposal_bundle"
+      }
+    ],
+    "pin_count_not_artifact_read_count": true,
+    "scope": "Retained before/after file names, byte lengths and content hashes; no directory/stat identity attestation."
+  },
+  "prospective_parent": {
+    "agent_sha256": "22cd302a8c12e05c5fd9bb95389f5880e713a027e60a0206799e9c4fa2f48eeb",
+    "different_source_identity": true,
+    "fragment_version": "buddha.source-seed-improver.v2",
+    "historical_measured_candidate_id": "b54a8e60ab93b7fc680af430ed7883d4176181d511a57b2efccd3dfe5f13efb8",
+    "prospective_combination_only": true,
+    "source": {
+      "bytes": 13455,
+      "sha256": "77cfa68f6b3c6996fd503e1ce6f7a964eb57abdb8bde98f6761de5f6e298ff4f"
+    }
+  },
+  "publication_source_bridge": {
+    "base_commit": "6a86f1ef19a12d502b80b3af706e7f9c97813a6b",
+    "change_scope": "Only the literal expected trial_fence name from the separate CI compatibility repair; no app/constructor/config bytes changed. Projection is not rerun at this publication cut.",
+    "changed_from_projection": [
+      "tests/test_common.py"
+    ],
+    "production_and_trusted_constructor_unchanged": true,
+    "project_python_and_config_count": 244
+  },
+  "request": {
+    "body": {
+      "bytes": 25209,
+      "sha256": "e258ae8166c518ccd8e8a799139e35c7fa609b74fe10fcba0c8c23d1e401a838"
+    },
+    "config": {
+      "instructions": "",
+      "max_output_tokens": 32768,
+      "model": "gpt-6.1-sol",
+      "provider": "openai",
+      "sampling": "regenerate"
+    },
+    "endpoint": "Chat Completions",
+    "frame": {
+      "bytes": 33681,
+      "sha256": "48275a1c5f6d3da12529bfcb55452653aadbda29b15dd4f2ed310fc2797a2ecc"
+    },
+    "full_replacement_source_and_hypothesis_required": true,
+    "message_count": 1,
+    "message_roles": [
+      "user"
+    ],
+    "reasoning_effort": "low",
+    "service_tier": "default"
+  },
+  "review": {
+    "independent_receipt_check": "Scoped PASS by a separate reviewer: recomputed all 8 serialization counts/hashes, matched all 30 complete literal answers to retained C1/report data, trusted source/prompt/identity, configuration,941 pins and original inventory joins. No app imports, SQL, workers or rerun during review. Does not certify composed improver execution or token fit.",
+    "root": "Checked retained v1 refusal/v2 guard correction, exact byte records and official model/counting/Chat parameter documentation. No benchmark changes or new model calls."
+  },
+  "scope": "Manually reconstructed fixed trusted starter-v2 request using historical seed-screen measurements and the actual frozen_seed.request constructor. Prospective recombination only; no composed improver execution, old-owner upgrade, new measured parent, token-fit or scientific-gain claim.",
+  "selected_development_notes": [
+    {
+      "bytes": 4769,
+      "sha256": "c1be9b2d04d4c8e54576aaf34bd409fb7717682f4783cec50d2f8228790d7b23",
+      "task_id": "curated-0"
+    },
+    {
+      "bytes": 849,
+      "sha256": "f8a2f47cdce6b2eca83b134cb7183c64fc1d79e4d33b3996d4c1db1e1e089cc6",
+      "task_id": "curated-47"
+    },
+    {
+      "bytes": 672,
+      "sha256": "8471746c7fdf393eb0f801933280aae5776224225d507a935922d8ba912f47f5",
+      "task_id": "curated-97"
+    }
+  ],
+  "status": "complete_offline_request_projection_only",
+  "token_context_gate": {
+    "incompleteness_reason": "model_specific_input_token_count_and_replacement_output_margin_not_measured",
+    "input_token_count": null,
+    "next_gate": [
+      "Establish supported model-specific counting or a clearly bounded measurement for the actual Chat Completions endpoint and complete request, including framing.",
+      "Check context and a declared output margin for complete replacement-source JSON; do not treat a Responses count as exact chat parity.",
+      "Recheck changed parent source, full feedback and request logic before their future use."
+    ],
+    "no_byte_to_token_conversion": true,
+    "official_sources": [
+      {
+        "supports": "Published model context and maximum output limits; does not measure this request.",
+        "url": "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+      },
+      {
+        "supports": "Responses-format input counting includes structural formatting; endpoint mismatch remains explicit.",
+        "url": "https://developers.openai.com/api/docs/guides/token-counting"
+      },
+      {
+        "supports": "max_completion_tokens includes visible and reasoning tokens.",
+        "url": "https://developers.openai.com/api/reference/resources/chat/subresources/completions/methods/create"
+      }
+    ],
+    "output_allowance_meaning": "max_completion_tokens includes visible output and reasoning; 32768 is not a visible-code-token promise or a guarantee that a 1 MiB replacement source fits.",
+    "output_headroom_tokens": null,
+    "published_limits": {
+      "checked_date": "2026-10-23",
+      "context_window_tokens": 1050000,
+      "max_output_tokens": 128000,
+      "model": "gpt-6.1-sol",
+      "source": "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+    },
+    "responses_count_establishes_chat_parity": false,
+    "status": "open",
+    "tiktoken_available_in_reviewed_environment": false,
+    "token_fit": "unavailable"
+  }
+}
