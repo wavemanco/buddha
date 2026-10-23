@@ -3,6 +3,7 @@
 import hashlib
 import io
 import json
+import traceback
 import unittest
 from contextlib import redirect_stderr, redirect_stdout
 from unittest.mock import patch
@@ -97,6 +98,16 @@ class LinkedCLITests(unittest.TestCase):
     def test_cli_uses_shared_authority_for_synthetic_execution_and_cached_restart(self):
         fixture = self.fixture
         fixture.prepare()
+        execution_errors = []
+
+        def execute(*args, **kwargs):
+            try:
+                return run_search(*args, **kwargs)
+            except (OSError, ValueError):
+                # Synthetic-only diagnostics precede the public CLI's error redaction.
+                execution_errors.append(traceback.format_exc())
+                raise
+
         arguments = [
             "search-run",
             "--run",
@@ -106,11 +117,14 @@ class LinkedCLITests(unittest.TestCase):
         ]
         with (
             patch("buddha.__main__._SearchReplay", return_value=fixtures.SyntheticTransport()),
+            patch("buddha.search.run_search", side_effect=execute),
             redirect_stdout(io.StringIO()) as output,
             redirect_stderr(io.StringIO()) as progress,
         ):
             result = main(arguments)
-            self.assertEqual(result, 0, output.getvalue() + progress.getvalue())
+            self.assertEqual(
+                result, 0, output.getvalue() + progress.getvalue() + "".join(execution_errors)
+            )
         report = json.loads(output.getvalue())["report"]
         self.assertEqual(report["costs"]["operation_count"], 55)
         self.assertEqual(report["inherited_costs"]["operation_count"], 9)
