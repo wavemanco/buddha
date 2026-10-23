@@ -144,7 +144,11 @@ parent outputs and refusing another improver's history. The [bounded mutation
 check](docs/SOURCE-MUTATION-WITNESS.md#reuse-the-check-while-keeping-an-experimental-improver-fixed)
 can also use a study's own locations, returning after each owner preparation or
 execution so the study can check all of its records before continuing. The
-repeated comparison under equal budgets and its sealed assessment remain open.
+[finite comparison controller](docs/IMPROVER-STUDY.md) now connects common
+starting measurements, two fixed improvers, repeated conditions, equal resource
+limits, retained failures and descendant selection. Its engineering checks use
+supplied programs and replies. Separate sealed assessment, paired analysis and
+the actual controlled experiment remain open.
 
 Useful-diversity gains, held-out improvement and improved-improver effectiveness
 remain **not established**. The source-chain fixture uses synthetic replies and
