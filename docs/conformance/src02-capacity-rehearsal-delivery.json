@@ -1,0 +1,123 @@
+{
+  "format": "buddha.source-capacity-rehearsal-delivery.v1",
+  "status": "exact_offline_rehearsal_pass_funding_proposed_not_approved",
+  "executing_code_commit": "3848ac964cf49aafb35ef2bb79253867e1a8f89a",
+  "rehearsal": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\exact-rehearsal-v2.json",
+    "sha256": "5f2f7b619d1fe9332db3b4f286e1266dd2877c7b8959833a5495549fe95d3d2b"
+  },
+  "rehearsal_log": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\exact-rehearsal-v2.log",
+    "sha256": "3d00c203defc8fea3e9675f6599910af750c4b2206403190cb7064aac47dd40b"
+  },
+  "retained_initial_failure": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\exact-rehearsal-v1.json",
+    "sha256": "a8078f90fba5d463b558a759c371c2a37155e0143b77063bffcda0586f153f27"
+  },
+  "initial_failure_interpretation": "Synthetic v1 profile wrapper contained v2 profile fields. Original failed fixture retained without creating a capacity owner. Fresh v2 corrects only wrapper format and observation paths; application code unchanged.",
+  "independent_review": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\exact-rehearsal-independent-review-v1.json",
+    "sha256": "f4ea2ca9e4e37865681e4ed6309f22eb6b387267f59ba3c77070d843f57a7c80"
+  },
+  "independent_review_scope": "Static/script/raw-artifact/hash inspection, not independent execution or SQLite row queries. Stored original report/accounting joins checked; original DB bytes hashed only.",
+  "exact_request": {
+    "bytes": 25209,
+    "sha256": "e258ae8166c518ccd8e8a799139e35c7fa609b74fe10fcba0c8c23d1e401a838"
+  },
+  "parent_source": {
+    "bytes": 13455,
+    "sha256": "77cfa68f6b3c6996fd503e1ce6f7a964eb57abdb8bde98f6761de5f6e298ff4f",
+    "agent_sha256": "22cd302a8c12e05c5fd9bb95389f5880e713a027e60a0206799e9c4fa2f48eeb"
+  },
+  "source_pin_count": 208,
+  "source_pins_unchanged": true,
+  "synthetic_accounting": {
+    "authorization_id": "synthetic-exact-capacity-one",
+    "budget_microusd": 7000000,
+    "max_calls": 1,
+    "scope": "OFFLINE SYNTHETIC ONLY; no live allowance",
+    "terms_sha256": "7c9aad56d48ff4b286927bec800bf480ea54c86a3700d6d73f58fab15237c364",
+    "committed_microusd": 22000,
+    "spent_microusd": 22000,
+    "reserved_microusd": 0,
+    "operation_count": 1,
+    "available_microusd": 6978000,
+    "remaining_calls": 0,
+    "runs": [
+      {
+        "run_id": "source-capacity-fcebc78ebaebde7339bf53b636b22b9845ec606d0759d40e95c6ca41bdae4307",
+        "manifest_sha256": "e5cdfb1358688827f114a32420ce550d4c3baab20fe229ea22e96e23138b02bc",
+        "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\exact-rehearsal-v2-fixtures\\original-fixture\\capacity-study\\owner",
+        "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\exact-rehearsal-v2-fixtures\\original-fixture\\capacity-study\\owner\\operations.sqlite3",
+        "runtime_sha256": "372e4a5aa2d14322ccf6fc9b84551dc3dbd63195b6cd802a590c02781e2fce63",
+        "historical_ledger_sha256": null,
+        "historical": 0,
+        "active": false,
+        "committed_microusd": 22000,
+        "spent_microusd": 22000,
+        "reserved_microusd": 0,
+        "operation_count": 1
+      }
+    ],
+    "event_count": 7
+  },
+  "scope": "One retained request byte-exact through real Gateway/shared accounting and one mocked HTTPS send; keyless same-original replay and paid-transport rejection. Benchmark fixture components and reply/usage are synthetic. No token measurement, source execution, actual account verification, live funding or provider call. Fixture retained at original paths; original paid owners not opened for SQL.",
+  "funding_proposal": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-rehearsal\\docs\\conformance\\src02-capacity-funding-proposal.json",
+    "sha256": "7c995d967a6fb6977571c1936482624bd51da1c1e60c41f9b2f1386c2e321a0a"
+  },
+  "price_math_review": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-driver\\runs\\reviews\\capacity-profile-math-review-v1.json",
+    "sha256": "7d9a3d9e4439153a11a59082878471bed0e7f6ff256d2a7ad372ad919823bd38"
+  },
+  "price_review": "Root browsed official model, pricing and prompt-caching pages on2026-10-23; independent reviewer checked arithmetic and local scope against those supplied observations, not independent browsing. Standard/default aggregate bounds include long input, default total30m cache writes and a regional uplift; Responses extended caching is outside the exact request. Manual public-price/account assertions remain required and invoice reconciliation is not claimed.",
+  "quality_bridge": "No application, test, CLI, configuration or frozen protocol JSON changes from3848ac9. The existing driver quality/functional evidence retains its original scope; do not count the inherited method as a new unique regression or claim another whole-suite run.",
+  "ci": {
+    "snapshot": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\ci-stack-repair-20261023\\continued-ci-status-v7.json",
+      "sha256": "737936636fcf055809a9010e919d51444ab528075edc0bff4713c3d1a58bcf2b"
+    },
+    "observed_utc": "2026-10-23T15:32:56.758778+00:00",
+    "repaired_ubuntu_success": 22,
+    "repaired_windows_success": 2,
+    "repaired_windows_pending": 20,
+    "pr71_both_os_success": true,
+    "all_open_prs_ready": true,
+    "driver_pr85": {
+      "headRefOid": "3848ac964cf49aafb35ef2bb79253867e1a8f89a",
+      "isDraft": false,
+      "number": 85,
+      "statusCheckRollup": [
+        {
+          "__typename": "CheckRun",
+          "completedAt": "0001-01-01T00:00:00Z",
+          "conclusion": "",
+          "detailsUrl": "https://github.com/wavemanco/buddha/actions/runs/39978095457/job/120497900951",
+          "name": "checks (ubuntu-latest)",
+          "startedAt": "2026-10-23T15:25:12Z",
+          "status": "IN_PROGRESS",
+          "workflowName": "checks"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "0001-01-01T00:00:00Z",
+          "conclusion": "",
+          "detailsUrl": "https://github.com/wavemanco/buddha/actions/runs/39978095457/job/120497901748",
+          "name": "checks (windows-latest)",
+          "startedAt": "2026-10-23T15:25:14Z",
+          "status": "IN_PROGRESS",
+          "workflowName": "checks"
+        }
+      ]
+    },
+    "claim": "PR71 is green at repaired exact head; one of PR72's Windows jobs also passed. Other Windows checks and driver checks remain pending. Historical hidden causes are not explained."
+  },
+  "not_delivered": [
+    "new live allocation or funded handoff",
+    "actual provider/input/output token observation",
+    "source execution/adoption/competence",
+    "new benchmark or utility/distinctiveness result",
+    "all pending hosted checks passing"
+  ],
+  "next": "Await separate7USD/one-attempt decision and hosted executing-code success before preparing a live handoff. No user command yet."
+}
