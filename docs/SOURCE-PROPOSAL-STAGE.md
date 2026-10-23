@@ -112,6 +112,14 @@ lineage are not a measurement certificate. The protected stage additionally
 reconstructs the original screen evidence and authenticates the parent/packet
 relationship.
 
+The [fixed-improver failure packet](SOURCE-FEEDBACK.md#a-fixed-improver-learns-from-its-own-failed-children)
+adds provenance v5 when checked failed children inform later proposals. It
+retains complete measured parent answers and checks that all included failures
+belong to the same frozen improver. This protected stage accepts that packet
+only through descriptor v2 under that same selected improver. A valid packet
+from a different improver cannot be borrowed by changing its local file hashes.
+The lower-level reviewed-note Session keeps its existing scope.
+
 This connection does not yet choose initial/evolved improvers, allocate equal
 descendant budgets, select descendants, run a repeated comparison, or assess
 them on sealed tasks. A frozen comparison must keep invoking its declared

@@ -1,0 +1,84 @@
+{
+  "format": "buddha.imp01-frozen-failure-feedback-delivery.v1",
+  "status": "implemented_offline_verified_hosted_ci_pending",
+  "scope": "Full checked failed-child history for a separately fixed improver and protected same-improver consumption; prerequisite to the repeated equal-budget/sealed comparison.",
+  "spec_sections": {
+    "DESIGN3": "Checked failures inform later development proposals.",
+    "DESIGN4": "Existing protected source/full-feedback interface and isolated worker.",
+    "DESIGN8": "Keep the improver fixed while measured task parents differ; full controlled comparison remains open."
+  },
+  "held_cut": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-failure-held-cut-v1.json",
+    "sha256": "3e0fa68e5f95c2174dbb7a540c62bdd8ecab887d95b7abcd4a67ab747f8f6029"
+  },
+  "implementation_and_test_pins": {
+    "buddha/source_feedback.py": "dfef385090378e99fa0a12685806af1b87110a630ea3c15caa6ee4a9182dceb2",
+    "buddha/candidate_improvement.py": "21e55aa377676ddd7a3cb593d2755d45cd0ac2c5aad1aa11903ebd3e4bc8c6a3",
+    "tests/test_frozen_failure_feedback.py": "c44307d4df385206ea5c012b36171595bc620539e650f4de61efda7017021945"
+  },
+  "contract": {
+    "provenance": "buddha.source-screen-feedback.v5",
+    "feedback": "buddha.candidate-development-feedback.v2",
+    "selector": "Optional improver_agent_sha256 requires1..8 original failure edges and full outputs. None preserves old defaults.",
+    "identities": "Original descriptor2/stage-report2/selected I matches explicit I; exact S measured occasion, literal child/lineage, shared authority, typed task order and separately recorded costs keep original checks.",
+    "protected_selection": "Normalize only agent inventory in a fresh record; all release/capability/non-agent fields still match measured parent.",
+    "protected_consumer": "Shared definition requires descriptor2 and provenance5 I equal current selected I for preparation, continuation and passive reconstruction. Generic Session remains reviewed notes.",
+    "limits": "Validates included edges; the future study controller must enforce its own complete ordered per-cell census.",
+    "legacy": "V1-v4 raw reconstruction and inherited defaults unchanged; no source_search/Gateway/schema/helper-basename/benchmark algorithm change."
+  },
+  "initial_red": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-failure-red-v1.json",
+    "sha256": "cc4dedb5732461110f1f5e4d99c1e2dba2333758df01b44ccaeb174ff79bd3c7",
+    "methods": 2,
+    "errors": 2,
+    "failures": 0,
+    "elapsed_seconds": 63.09584039996844,
+    "interpretation": "Unsupported public keyword after genuine measured parent/detached proposal/failed-child setup; no fixture failure or behavior finding.",
+    "test_evolution": "After RED, two _build interception controls require empty-history/prefix refusals before base derivation, and the test is formatted. Production had not changed before RED."
+  },
+  "new_acceptance": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-failure-green-v1.json",
+    "sha256": "73bd8325f56824c66c69675d7a3b65f22a4711260a61ff769036dea84ac78ea1",
+    "methods": 2,
+    "errors": 0,
+    "failures": 0,
+    "elapsed_seconds": 198.9217180000851,
+    "scope": "Full parent outputs/newest failed source and hypothesis, I/S/C/cost joins, same-I protected continuation, genuine other-I builder/consumer and compatible other-S refusals, pre-derivation refusals and old1-4 controls. Supplied workers/replies and real fresh custody/accounting."
+  },
+  "existing_regressions": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-failure-regressions-v1.json",
+    "sha256": "af312680daa38f792ebe42ed4ed8478671a0898770a0b9ba3edcdcf5a09fa21d",
+    "methods": 21,
+    "errors": 0,
+    "failures": 0,
+    "elapsed_seconds": 867.8454453999875,
+    "scope": "Original failure history/custody, outer funding anchor, full outputs/historical search replay, frozen-improver seam and two protected-stage refusal/passive methods; separate from new acceptance."
+  },
+  "quality": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\imp01-frozen-study\\runs\\reviews\\imp01-failure-quality-v1.json",
+    "sha256": "c818bbe51283ad96ac8337f33f5cbce1855b5277854eacc721e0ce55565ac0d1",
+    "commands": 7,
+    "source_and_controls_count": 254,
+    "scope": "Ruff check/format, strict Windows/Linux mypy, Bandit, runtime dependency audit and compilation. No tests; inputs unchanged."
+  },
+  "production_static_review": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-failure-independent-review-v1.json",
+    "sha256": "a72fb26122332c42876d5db86fad3c445921797f5023e05c2075cf53bcfec348",
+    "scope": "Independent of production authorship; reviewer authored acceptance shape/tests. Static only, no independent runtime observation."
+  },
+  "plan_preservation": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-failure-plan-preservation-v1.json",
+    "sha256": "1d3a78155075ab13450792554f18ff0843921b476f4ea89107e9fadeff720d91"
+  },
+  "hosted_checkpoint": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-failure-hosted-checkpoint-v1.json",
+    "sha256": "58958c15233d0ef7998120a5a2dbead2210798a0105ec532779ec9fa3edf3cc6",
+    "scope": "Prior exact-head statuses only: PR85 Ubuntu success/Windows pending, PR89/90 both OS pending. No future-head or broad hosted success inferred."
+  },
+  "limits": [
+    "No actual provider request, model-authored source, new container run or old paid-owner change.",
+    "No new authority, allowance or reuse of closed funds.",
+    "No repeated study/census/selection, equal-resource comparison, sealed assessment or improved-effectiveness claim.",
+    "Focused cohorts/static review do not establish full-suite or hosted CI success."
+  ]
+}

@@ -132,7 +132,9 @@ code and inherited-improver endpoint, the current gap and its existing plan gate
 The [separate frozen-improver proposal path](docs/SOURCE-PROPOSAL-STAGE.md#keep-an-improver-fixed-while-changing-its-starting-agent)
 lets different improvement procedures receive the same measured starting agent
 and complete development feedback. It records the executing improver and task
-parent separately. This is the first IMP-01 connection; the repeated comparison
+parent separately. Its [checked failure feedback](docs/SOURCE-FEEDBACK.md#a-fixed-improver-learns-from-its-own-failed-children)
+also lets a fixed improver learn from its own failed children, preserving full
+parent outputs and refusing another improver's history. The repeated comparison
 under equal budgets and its sealed assessment remain open.
 
 Useful-diversity gains, held-out improvement and improved-improver effectiveness
