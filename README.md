@@ -96,20 +96,19 @@ feeds its failure into a repair, and runs the repaired child's changed improver
 to produce another descendant. It uses supplied programs and synthetic replies,
 with no real provider calls. Complete keyless replay and passive verification
 preserve its original records. The loop and format-reuse slices have passed
-Linux and Windows CI and merged. An actual model-authored source experiment
-and mutation competence remain open.
+Linux and Windows CI and merged. The [first actual model-authored source run](docs/SOURCE-FIRST-LIVE-RESULTS.md) now completes a three-link chain; broader mutation competence remains open.
 The [starter source factory](docs/SOURCE-SEED.md) now combines the unchanged
 generation recipe with a versioned, one-callback Python source proposer. It
 creates a self-contained starting agent without choosing a run or allocating
 money. A child replaces the whole file and inherits its own improvement function.
 The actual starter now passes a six-worker confined chain and keyless replay
-with supplied descendants and fake replies; model-authored evolution remains open.
+with supplied descendants and fake replies; the later actual model-authored run is recorded separately below.
 A [read-only source handoff check](docs/SOURCE-HANDOFF.md) validates a proposed
 initial experiment without creating spending authority or execution records.
 The [first source-experiment proposal](docs/SOURCE-EXPERIMENT.md) now fixes
 three development tasks and a three-iteration inherited-source study. Its
-$25 / 512-attempt cap is now separately approved; the
-[local handoff](docs/SOURCE-FIRST-LIVE.md) supplies the exact command and both hidden-key prompts.
+$25 / 512-attempt allowance funded the completed first source run; the
+[historical handoff](docs/SOURCE-FIRST-LIVE.md) retains the command and both hidden-key explanations.
 The [protected source launcher](docs/SOURCE-LAUNCH.md) now joins approved funding,
 original-owner checks, hidden keys, progress and explicit partial results through
 the existing controller. The [concrete full-schedule rehearsal](docs/SOURCE-REHEARSAL.md)
@@ -117,8 +116,7 @@ now passes with 51 isolated workers and 267 simulated replies, including an
 interrupted continuation and completed keyless reuse. Independent passive
 review verifies the saved replies, source lineage and original owners.
 This is engineering evidence; the supplied children keep their improver
-unchanged. The separately funded first model-authored source run is ready
-for the user to start locally; no provider call was needed to prepare it.
+unchanged. The [actual model-authored run](docs/SOURCE-FIRST-LIVE-RESULTS.md) now retains three successive Python descendants, including a changed and used improvement function. It completed 120 answers and 170 attempts for $1.158996 recorded, with zero held and 51 inactive original owners. The starter led every child on both mean official metrics; no score improvement was observed. No further user command is needed now.
 The protected launcher's exact-head Linux and Windows checks have passed.
 The [source-evolution backlog context](docs/BACKLOG.md) records the intended Python
 code and inherited-improver endpoint, the current gap and its existing plan gates.

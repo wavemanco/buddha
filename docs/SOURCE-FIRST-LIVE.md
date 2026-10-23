@@ -1,10 +1,12 @@
 # First approved source-evolution run
 
-**Ready to start locally.** The user approved a new **$25 combined OpenAI/Anthropic cap and 512-attempt limit**, allowing partial results with their reason and stage. This funds the frozen [three-task, three-iteration source experiment](SOURCE-EXPERIMENT.md), using unchanged NoveltyBench 1.1. It is separate from the closed pilot, judge-audit and policy-comparison allowances.
+**Completed and reviewed.** The October 22 run recorded 170 completed attempts, $1.158996 and zero held; all 51 original owners are inactive. Three real Python descendants ran, but the starter led both mean official metrics. [Read the results](SOURCE-FIRST-LIVE-RESULTS.md). No new run or command is needed now. The command below is retained as historical evidence; do not run it again automatically.
 
-## Run this once
+**Original authorization.** The user approved a new **$25 combined OpenAI/Anthropic cap and 512-attempt limit**, allowing partial results with their reason and stage. This funds the frozen [three-task, three-iteration source experiment](SOURCE-EXPERIMENT.md), using unchanged NoveltyBench 1.1. It is separate from the closed pilot, judge-audit and policy-comparison allowances.
 
-Open one ordinary PowerShell window and run this complete command. Its paths are absolute, so you do not need to change folders or Git branches:
+## Historical launch command (already completed)
+
+The original instruction was to open one ordinary PowerShell window and run this complete command once. Its paths are absolute, so you do not need to change folders or Git branches:
 
 ```powershell
 python "C:\Users\arvik\code\buddha\runs\reviews\src02-full-rehearsal\docs\conformance\src02-run.py" --handoff "C:\Users\arvik\code\buddha\runs\src02-first-source-20261022-handoff-v1\launch.json" --sha256 "ceb9ea34b3cf5ece43ba2add281e08b2571da594f37dea6427e3847cb69f139b" --receipt "C:\Users\arvik\code\buddha\runs\src02-first-source-20261022-handoff-v1\invocations\launch-1.json" --live --prompt-keys --confirm-project-keys
@@ -25,7 +27,7 @@ There are at most three proposal iterations and four candidate screens including
 
 ## What to do afterward
 
-Paste the final terminal result here, or the error/stop text if it stops. Never include keys. I will inspect the saved records, actual source changes and lineage, official scores, failures and accounting before recommending the next step.
+The user supplied the final terminal result and the saved records have been reviewed. [The results](SOURCE-FIRST-LIVE-RESULTS.md) document actual source changes, lineage, scores, concerns and accounting. Keep the original directory and runtime intact. No additional user command is requested; offline work continues under [the living plan](PLAN.md). The outcome table below explains the historical launcher responses.
 
 The original search destination is `C:\Users\arvik\code\buddha\runs\src02-first-source-20261022-live-v1`. Completion saves `report.json`; a controller partial saves an `observations/N.json` record with its reason, iteration and stage. The separate invocation receipt is `invocations\launch-1.json` under the full handoff path in the command.
 
@@ -42,7 +44,7 @@ Do not run the command a second time automatically. Recovery keeps the same laun
 
 ## Prepared records and checks
 
-The dedicated authorization ID is `a165a7718a064e2489afafa15dfe0e40`, with immutable terms hash `481c419e35be959288b52e51ed5040e0ee176d6717e8008799d4213e44bae9a8`. The prepared state has zero owners, attempts, spending and held charges. The search and account-review file remain absent until local launch; the launcher creates the keyed review after hidden entry. No API key, provider call or worker was needed for preparation.
+The dedicated authorization ID is `a165a7718a064e2489afafa15dfe0e40`, with immutable terms hash `481c419e35be959288b52e51ed5040e0ee176d6717e8008799d4213e44bae9a8`. At preparation, the state had zero owners, attempts, spending and held charges; that historical observation is superseded by the completed-run accounting above. The search and account-review file were absent before local launch; the launcher created the keyed review after hidden entry. No API key, provider call or worker was needed for preparation.
 
 The exact proposal SHA is `58201cb25ae027a24549f4153fcdf2bb82cdca8783c93cc687034cd5629bffa9`. The 56 original proposal pins, 42 launcher/helper files and both pinned local images were checked. The existing full-schedule rehearsal and exact source-launcher Linux/Windows checks supply the applicable engineering evidence; unrelated evaluation-component CI is not a prerequisite for this run.
 
