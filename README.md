@@ -102,7 +102,8 @@ to create a changed further child and run it on the first development task.
 [Verified private source copies](docs/SOURCE-MUTATION-WITNESS.md#verified-source-copies-for-new-owners)
 now bind returned code before fresh execution records are prepared. The bounded
 real-worker check passes with supplied programs and simulated judging; original
-failed owners remain unchanged. Model context and output headroom still need
+failed owners remain unchanged. A [complete request-size check](docs/SOURCE-REQUEST-CAPACITY.md)
+now retains all 30 seed answers; model token fit and output headroom still need
 checking before another live experiment.
 The [starter source factory](docs/SOURCE-SEED.md) now combines the unchanged
 generation recipe with a versioned, one-callback Python source proposer. It

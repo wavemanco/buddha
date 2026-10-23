@@ -258,3 +258,11 @@ its 4 KiB note/excerpt limits. It now explicitly reconstructs that synthetic
 historical packet and checks it through the real inspector. Every original
 assertion stays intact; the public builders remain full-output only. The
 prospective full-output failure-history path is checked separately.
+
+## Concrete request size
+
+The [saved request projection](SOURCE-REQUEST-CAPACITY.md) now reconstructs one
+complete trusted-starter request from all 30 original seed answers. Its body is
+25,209 bytes, with no shortened answers. This measures serialized size; model
+token fit and replacement-code output headroom remain open checks before live
+execution. The projection creates no new measured parent or spending authority.
