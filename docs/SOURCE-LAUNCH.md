@@ -2,8 +2,8 @@
 
 This launcher connects the approved experiment to the existing source-search
 controller. It does not create a budget or change NoveltyBench. The proposed
-first source experiment is still unallocated; this document describes the
-interface, not an instruction to start that experiment now.
+first source experiment now has its own approved allowance and
+[concrete local command](SOURCE-FIRST-LIVE.md). This page explains the interface.
 
 ## What happens in the terminal
 
@@ -106,9 +106,9 @@ accounting and progress helpers do not migrate historical owners.
 
 The checker projects the exact initial generation invocation's control paths
 against the existing 1,024-input boundary. That is not a full-schedule capacity
-or cost guarantee. The concrete experiment still needs its proposal/native
-input highwater, storage, latency, progress and recovery rehearsal before a
-funded handoff is ready. Model-authored evolution and mutation-competence gates
+or cost guarantee. The first concrete experiment now has its
+[full-schedule rehearsal](SOURCE-REHEARSAL.md) and a separately approved
+[funded local handoff](SOURCE-FIRST-LIVE.md). Model-authored evolution and mutation-competence gates
 also remain open in the [living plan](PLAN.md).
 
 [The delivery record](conformance/src02-source-launch-delivery.json) records

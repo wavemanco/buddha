@@ -26,13 +26,7 @@ completed 960 answers and 192 task assessments with $14.459518 recorded cost
 and zero held. [The results](POLICY-COMPARISON-RESULTS.md) preserve its evidence
 and limitations. That scope is also closed for new work.
 
-The [first source experiment](SOURCE-EXPERIMENT.md) currently proposes a new
-**$25 / 512-attempt** shared cap. It is unallocated: no approval, grant, key
-entry or paid execution has been created for it. The keyless configuration
-check does not grant permission to spend. The [protected launcher](SOURCE-LAUNCH.md)
-now exists; its concrete capacity/recovery rehearsal, separately approved funded
-handoff and clear local command are still required. Do not reuse a historical command
-or an unused balance to start source evolution.
+The [first source experiment](SOURCE-EXPERIMENT.md) now has its own approved **$25 combined OpenAI/Anthropic cap and 512-attempt limit**, with partial results retained with their reason and stage. Its [prepared local handoff](SOURCE-FIRST-LIVE.md) gives the exact command and both hidden-key prompts. The fresh dedicated authorization has zero attempts, spending and held charges at preparation; this is an allocation, not a completed run. Both accounts use the already confirmed Standard/default processing and public pay-as-you-go prices. Do not reuse a historical command or an unused earlier balance to start source evolution.
 
 The new Gateway/source path supports [keyed account reviews](KEYED-REVIEWS.md),
 using the API key already supplied locally; no extra secret is needed. The
@@ -62,7 +56,7 @@ Existing nonempty environment values take precedence, so an invalid existing key
 The completed policy comparison used its [dedicated handoff](POLICY-LAUNCH.md)
 for OpenAI generation/grouping and Anthropic quality judging. Its historical
 command does not launch the new Python source experiment. Source evolution
-will have a separately reviewed handoff and command after its new allocation.
+uses its separately approved [source handoff](SOURCE-FIRST-LIVE.md).
 
 ## Alternative: inject environment variables from a secret manager
 

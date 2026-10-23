@@ -108,7 +108,8 @@ A [read-only source handoff check](docs/SOURCE-HANDOFF.md) validates a proposed
 initial experiment without creating spending authority or execution records.
 The [first source-experiment proposal](docs/SOURCE-EXPERIMENT.md) now fixes
 three development tasks and a three-iteration inherited-source study. Its
-proposed $25 / 512-attempt cap remains unallocated; no live command is ready.
+$25 / 512-attempt cap is now separately approved; the
+[local handoff](docs/SOURCE-FIRST-LIVE.md) supplies the exact command and both hidden-key prompts.
 The [protected source launcher](docs/SOURCE-LAUNCH.md) now joins approved funding,
 original-owner checks, hidden keys, progress and explicit partial results through
 the existing controller. The [concrete full-schedule rehearsal](docs/SOURCE-REHEARSAL.md)
@@ -116,8 +117,8 @@ now passes with 51 isolated workers and 267 simulated replies, including an
 interrupted continuation and completed keyless reuse. Independent passive
 review verifies the saved replies, source lineage and original owners.
 This is engineering evidence; the supplied children keep their improver
-unchanged. The proposed $25 / 512-attempt live handoff still needs separate
-approval and a funded local handoff before a model-authored source run.
+unchanged. The separately funded first model-authored source run is ready
+for the user to start locally; no provider call was needed to prepare it.
 The protected launcher's exact-head Linux and Windows checks have passed.
 The [source-evolution backlog context](docs/BACKLOG.md) records the intended Python
 code and inherited-improver endpoint, the current gap and its existing plan gates.
@@ -209,7 +210,7 @@ This synthetic example evaluates independent-sampling and in-context seeds, prop
 
 The first live experiment was authorized for **up to $50 combined**, covering both providers and all search stages. The initial attempt was interrupted while awaiting answer 10. Its nine replies and full uncertain reservation remain intact. The completed recovery restart used a **$49.465918 cap and 118-call allowance**, accounting for the original $0.534082 committed liability and ten attempted calls. It repeated the same one-prompt, two-seed, one-proposal engineering pilot with fresh evidence. Both attempts are now historical inputs. Shared authorization imports their sealed liabilities once and enforces the combined dollar/call cap. The linked continuation reuses nine saved replies as evidence, sends a separately identified replacement for the unknown tenth, then completes the remaining search stages. Its new report separates new cost, inherited evidence cost and shared experiment accounting.
 
-The corrected linked run completed and was verified: nine saved replies reused, 51 new calls for $0.274533, with the original unknown still held. [Linked results and concerns](docs/LINKED-CONTINUATION-RESULTS.md) record the three candidate scores, repeated plots, literal/craft failures and shared accounting. The completed run is closed to new paid calls; its [execution handoff](docs/FIRST-LIVE-CONTINUATION.md) remains historical evidence. Benchmark conformance now passes at its declared offline scope; REC-05's bounded read-only verification and diagnostic gates are complete; both the blinded model-development review and bounded official-judge audit are complete; the controlled policy comparison remains open.
+The corrected linked run completed and was verified: nine saved replies reused, 51 new calls for $0.274533, with the original unknown still held. [Linked results and concerns](docs/LINKED-CONTINUATION-RESULTS.md) record the three candidate scores, repeated plots, literal/craft failures and shared accounting. The completed run is closed to new paid calls; its [execution handoff](docs/FIRST-LIVE-CONTINUATION.md) remains historical evidence. Benchmark conformance now passes at its declared offline scope; REC-05's bounded read-only verification and diagnostic gates are complete; both the blinded model-development review and bounded official-judge audit are complete; the controlled policy comparison is complete at its registered development scope.
 
 This command prints the saved completed report once in this window. It needs no
 keys, makes no changes and spends nothing:
