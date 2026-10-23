@@ -31,7 +31,7 @@ The implemented parts are separate:
 | Part | What it does today | What it does not yet do |
 | --- | --- | --- |
 | [Policy search](../buddha/search.py) and [policy schema](../buddha/policy.py) | A fixed proposer changes `instructions` and `sampling`, evaluates policies and retains lineage. The completed live pilots exercised this restricted path. | Author or inherit changed Python implementations. |
-| [Source candidate runner](../buddha/candidate_run.py) | Runs selected generation and inherited proposal procedures in isolation; materializes a separate child with lineage under host-owned accounting. A synthetic parent/child/grandchild chain passes. The [source-to-native adapter](SOURCE-ASSESSMENT.md) connects one-task C1 to existing native assessment and passes a bounded synthetic confined proof; its hosted Linux and Windows regressions pass. The [common development screen](SOURCE-SCREEN.md) now checks fixed-task native results and guarded exploratory parent eligibility/selection; its two-source/two-task confined proof and both hosted OS checks pass, and PR55 is merged. The [verified feedback bridge](SOURCE-FEEDBACK.md) extracts bounded native measurements and literal answer excerpts into the unchanged improvement packet; the durable proposal stage preserves original-owner execution and recovery. The [bounded search controller](SOURCE-SEARCH.md) connects these stages, including failed-child feedback and later inherited mutations. See [generation](SOURCE-CANDIDATES.md) and [improvement](SOURCE-IMPROVEMENT.md). | Promote children scientifically, run an actual model-authored source experiment, or establish mutation competence and improved-improver effectiveness. |
+| [Source candidate runner](../buddha/candidate_run.py) | Runs selected generation and inherited proposal procedures in isolation; materializes a separate child with lineage under host-owned accounting. A synthetic parent/child/grandchild chain passes. The [source-to-native adapter](SOURCE-ASSESSMENT.md) connects one-task C1 to existing native assessment and passes a bounded synthetic confined proof; its hosted Linux and Windows regressions pass. The [common development screen](SOURCE-SCREEN.md) now checks fixed-task native results and guarded exploratory parent eligibility/selection; its two-source/two-task confined proof and both hosted OS checks pass, and PR55 is merged. The [verified feedback bridge](SOURCE-FEEDBACK.md) extracts bounded native measurements and literal answer excerpts into the unchanged improvement packet; the durable proposal stage preserves original-owner execution and recovery. The [bounded search controller](SOURCE-SEARCH.md) connects these stages, including failed-child feedback and later inherited mutations. See [generation](SOURCE-CANDIDATES.md) and [improvement](SOURCE-IMPROVEMENT.md). | Promote children scientifically, certify every child's mutation competence, or establish improved-improver effectiveness. The [first actual model-authored run](SOURCE-FIRST-LIVE-RESULTS.md) now demonstrates a three-child chain and a changed, used improver; all child mean scores remain below the starter. |
 | [Native policy study controller](../buddha/policy_run.py) | Runs the frozen policy conditions through the baseline and official native assessment pipeline. | Propose children or invoke the source candidate runner as an evolutionary loop. |
 
 The one-file inherited execution path, single-task native connection and common
@@ -50,7 +50,7 @@ generation/screen v2 distinguishes checked worker-declared child-generation
 failure from interrupted or uncertain execution, preserving v1 evidence. Failed
 children can inform later proposals without invented answers, metrics or eligibility.
 Task-screen eligibility does not certify every child's improvement procedure;
-scientific promotion, the actual source experiment and competence gates remain open.
+scientific promotion and broader competence gates remain open. The actual source experiment has completed; its negative development-score results and changed-improver evidence are [recorded separately](SOURCE-FIRST-LIVE-RESULTS.md).
 Python execution support alone is not source self-improvement; changing prompt
 text alone is policy optimization. Neither demonstrates a better improver.
 
@@ -98,5 +98,4 @@ run the unchanged agent first, then use authorized development feedback for late
 optimization. It does not grant a candidate permission to rewrite the yardstick.
 
 The implementation sequence and dependencies remain in [PLAN.md](PLAN.md).
-This entry grants no new funding, enables no paid execution and claims no
-completed source-evolution experiment.
+This entry grants no new funding and enables no paid execution. The completed first source experiment is evidence of the observed chain, not general competence or a better agent/improver.

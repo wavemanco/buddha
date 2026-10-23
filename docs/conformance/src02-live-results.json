@@ -1,0 +1,2198 @@
+{
+  "all51_owners_inactive": true,
+  "all56_original_source_pins_unchanged": true,
+  "authority": {
+    "authorization_id": "a165a7718a064e2489afafa15dfe0e40",
+    "available_microusd": 23841004,
+    "budget_microusd": 25000000,
+    "committed_microusd": 1158996,
+    "max_calls": 512,
+    "operation_count": 170,
+    "remaining_calls": 342,
+    "reserved_microusd": 0,
+    "spent_microusd": 1158996,
+    "terms_sha256": "481c419e35be959288b52e51ed5040e0ee176d6717e8008799d4213e44bae9a8"
+  },
+  "bounded_task_source_details": {
+    "bounded_task_outputs": [
+      {
+        "candidate_id": "b54a8e60ab93b7fc680af430ed7883d4176181d511a57b2efccd3dfe5f13efb8",
+        "literal_unique": 2,
+        "official_distinct": 2,
+        "official_partition": [
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0
+        ],
+        "outputs": [
+          "Glass half full.",
+          "Glass half full.",
+          "Glass half empty.",
+          "Glass half full.",
+          "Glass half empty.",
+          "Glass half full.",
+          "Glass half empty.",
+          "Glass half full.",
+          "Glass half empty.",
+          "Glass half full."
+        ],
+        "source": "seed",
+        "task_id": "curated-47",
+        "utility": 2.7962444630057717
+      },
+      {
+        "candidate_id": "b54a8e60ab93b7fc680af430ed7883d4176181d511a57b2efccd3dfe5f13efb8",
+        "literal_unique": 10,
+        "official_distinct": 10,
+        "official_partition": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "outputs": [
+          "7",
+          "3",
+          "8",
+          "5",
+          "1",
+          "6",
+          "2",
+          "4",
+          "9",
+          "0"
+        ],
+        "source": "seed",
+        "task_id": "curated-97",
+        "utility": 7.258206532967752
+      },
+      {
+        "candidate_id": "e539878b88f8be21b1034a52de0fc1a067c4e622c8877545894b15d40c92e059",
+        "literal_unique": 2,
+        "official_distinct": 2,
+        "official_partition": [
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1
+        ],
+        "outputs": [
+          "Glass half full.",
+          "Glass half empty.",
+          "Glass half full.",
+          "Glass half empty.",
+          "Glass half full.",
+          "Glass half empty.",
+          "Glass half full.",
+          "Glass half empty.",
+          "Glass half full.",
+          "Glass half empty."
+        ],
+        "source": "child0",
+        "task_id": "curated-47",
+        "utility": 3.0471894789165463
+      },
+      {
+        "candidate_id": "e539878b88f8be21b1034a52de0fc1a067c4e622c8877545894b15d40c92e059",
+        "literal_unique": 5,
+        "official_distinct": 5,
+        "official_partition": [
+          0,
+          1,
+          2,
+          0,
+          3,
+          4,
+          1,
+          2,
+          0,
+          3
+        ],
+        "outputs": [
+          "7",
+          "0",
+          "3",
+          "7",
+          "9",
+          "4",
+          "0",
+          "3",
+          "7",
+          "9"
+        ],
+        "source": "child0",
+        "task_id": "curated-97",
+        "utility": 5.695161286807038
+      },
+      {
+        "candidate_id": "ba7c38202c9eb3e9ad5adc09c5c32a8591f3c51d89c1c208011d9304c0f6d336",
+        "literal_unique": 2,
+        "official_distinct": 2,
+        "official_partition": [
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0
+        ],
+        "outputs": [
+          "Glass half full.",
+          "Glass half empty.",
+          "Glass half full.",
+          "Glass half empty.",
+          "Glass half full.",
+          "Glass half full.",
+          "Glass half empty.",
+          "Glass half full.",
+          "Glass half empty.",
+          "Glass half full."
+        ],
+        "source": "child1",
+        "task_id": "curated-47",
+        "utility": 3.2264359188528133
+      },
+      {
+        "candidate_id": "ba7c38202c9eb3e9ad5adc09c5c32a8591f3c51d89c1c208011d9304c0f6d336",
+        "literal_unique": 5,
+        "official_distinct": 5,
+        "official_partition": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "outputs": [
+          "7",
+          "7",
+          "7",
+          "7",
+          "7",
+          "7",
+          "3",
+          "8",
+          "1",
+          "5"
+        ],
+        "source": "child1",
+        "task_id": "curated-97",
+        "utility": 2.5810824282391898
+      },
+      {
+        "candidate_id": "8e8935b01456d61f4066241cc5823eb5e5656c371233d67c66a637638a670fde",
+        "literal_unique": 2,
+        "official_distinct": 2,
+        "official_partition": [
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0
+        ],
+        "outputs": [
+          "Glass half full.",
+          "Glass half full.",
+          "Glass half empty.",
+          "Glass half full.",
+          "Glass half empty.",
+          "Glass half full.",
+          "Glass half empty.",
+          "Glass half full.",
+          "Glass half empty.",
+          "Glass half full."
+        ],
+        "source": "child2",
+        "task_id": "curated-47",
+        "utility": 2.9396416149547857
+      },
+      {
+        "candidate_id": "8e8935b01456d61f4066241cc5823eb5e5656c371233d67c66a637638a670fde",
+        "literal_unique": 9,
+        "official_distinct": 9,
+        "official_partition": [
+          0,
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "outputs": [
+          "7",
+          "7",
+          "3",
+          "8",
+          "1",
+          "5",
+          "9",
+          "4",
+          "6",
+          "2"
+        ],
+        "source": "child2",
+        "task_id": "curated-97",
+        "utility": 5.736131803320138
+      }
+    ],
+    "consumed_files_stable_on_final_reread": true,
+    "consumed_raw_sha256": {
+      "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-live-results\\runs\\reviews\\src02-live-independent-review-v1.json": "2550983ced633315542710fbfcffdf7056c3247855a099624953f935efe15702",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\0\\proposal\\report.json": "a018484700b4bb2684d10f1d238f8ce6c8ad5ca8959b593df26b197d0fe9a4fa",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\0\\screen\\tasks\\1\\generation\\attempts\\0-0\\session\\answers.json": "b1fd616cc5a48a073b1efb7037fed63b9a16b36b44193e9e9c47d6c05a38e1f3",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\0\\screen\\tasks\\2\\generation\\attempts\\0-0\\session\\answers.json": "ecdc88cb4fec216e34b0eff91314f6dc3b7fca774601579c8d005db48281fd43",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\0\\screen\\tasks\\2\\generation\\owners\\0\\operations.sqlite3": "b47948a39626fb220b28550f59dacc2c42a7ad124c7cd05f06802a7e8124a535",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\1\\proposal\\report.json": "f149732403f040c2c71b6a0996543f7cf5e9d945de8a509fc1e3ab7d255091bc",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\1\\screen\\tasks\\1\\generation\\attempts\\0-0\\session\\answers.json": "d1d54b40682b282a4416a6520c5f7d96ef851cf91df644456c541e8be8a95672",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\1\\screen\\tasks\\2\\generation\\attempts\\0-0\\session\\answers.json": "e2512d4b0d2adc9d526643caaa46be6550cd37bc4f08b68f3a262c2024dc2554",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\2\\proposal\\report.json": "db6d5f2a159558a9210f080190753a1b1206e0ab55a5c8aea6ed015339221edc",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\2\\screen\\tasks\\1\\generation\\attempts\\0-0\\session\\answers.json": "fa5e4456c03e372d8168463f06a25e7bb547de8f0ac5d613fd63e6f2ef13f0ac",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\2\\screen\\tasks\\2\\generation\\attempts\\0-0\\session\\answers.json": "ba6bcd0050fed8c4f38d2c79316f76a9a1a90cd1f7658cc600d5cc21c5aa4ba2",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\seed\\tasks\\1\\generation\\attempts\\0-0\\session\\answers.json": "dc22d12223f48aa8694a90faef6ea12524cd425f1a8477021128dd712339ddf2",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\seed\\tasks\\2\\generation\\attempts\\0-0\\session\\answers.json": "44c97dd4aa3830924660fb0bf4a800bc144f48d7c5d0b6895f925a01c4a27731"
+    },
+    "digit_generation_details": {
+      "child0_code_cycles_plans": true,
+      "child0_plan_count": 5,
+      "child0_planning_briefs": [
+        "Output exactly one randomly selected digit, with no explanation or surrounding text.",
+        "Choose 0 as an arbitrary legal digit and output only that single character.",
+        "Choose 3 as an arbitrary legal digit and output only that single character.",
+        "Choose 7 as an arbitrary legal digit and output only that single character.",
+        "Choose 9 as an arbitrary legal digit and output only that single character."
+      ],
+      "child1_first_batch": [
+        "7",
+        "7",
+        "7",
+        "7",
+        "7"
+      ],
+      "child2_missing_digits": [
+        "0"
+      ],
+      "child2_repeated_digit": "7",
+      "interpretation": "Generator-level repetition with correct literal grouping; no parser-repair anomaly, illegal output, revised official score, or matched-budget causal claim.",
+      "starter_covers_all_ten_digits": true
+    },
+    "format": "buddha.src02-live-independent-source-details.v1",
+    "limits": [
+      "Worker exits/mounts/cleanup are recorded execution evidence; no new process or lifetime cleanup check was performed.",
+      "Changed inherited improver was used to propose further runnable children. No claim of improved improver effectiveness or universal/final-child mutation competence."
+    ],
+    "main_review_sha256": "2550983ced633315542710fbfcffdf7056c3247855a099624953f935efe15702",
+    "recorded_parent_improver_executions": [
+      {
+        "actual_proposing_parent": "b54a8e60ab93b7fc680af430ed7883d4176181d511a57b2efccd3dfe5f13efb8",
+        "cleanup_status": "removed",
+        "container_id": "70216438c7bc747e5f6c80d366ac352fca5aa3448a8f6ae767095be972531f43",
+        "exit_code": 0,
+        "iteration": 0,
+        "mounted_source": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-proposal-v3\\components\\source-agent\\candidate.py",
+        "observed_elapsed_seconds": 69.69801429996733,
+        "report_sha256": "a018484700b4bb2684d10f1d238f8ce6c8ad5ca8959b593df26b197d0fe9a4fa"
+      },
+      {
+        "actual_proposing_parent": "e539878b88f8be21b1034a52de0fc1a067c4e622c8877545894b15d40c92e059",
+        "cleanup_status": "removed",
+        "container_id": "795db5852a3ddcb31e4c4ebd338bcd55cbebe62b91dbb76847457053b88a62c2",
+        "exit_code": 0,
+        "iteration": 1,
+        "mounted_source": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\0\\proposal\\attempts\\0-0\\session\\child\\candidate.py",
+        "observed_elapsed_seconds": 50.625450500054285,
+        "report_sha256": "f149732403f040c2c71b6a0996543f7cf5e9d945de8a509fc1e3ab7d255091bc"
+      },
+      {
+        "actual_proposing_parent": "ba7c38202c9eb3e9ad5adc09c5c32a8591f3c51d89c1c208011d9304c0f6d336",
+        "cleanup_status": "removed",
+        "container_id": "4402d02be1042423be72d377cb7475b83714f6c926f2cb39ec383e25cc6f1e89",
+        "exit_code": 0,
+        "iteration": 2,
+        "mounted_source": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\1\\proposal\\attempts\\0-0\\session\\child\\candidate.py",
+        "observed_elapsed_seconds": 57.75717210001312,
+        "report_sha256": "db6d5f2a159558a9210f080190753a1b1206e0ab55a5c8aea6ed015339221edc"
+      }
+    ],
+    "scope": "Supplemental literal bounded outputs, recorded proposing-worker mounts and digit planner evidence; all source data only, one memory-only SQL connection, no generated imports, model/worker/provider/key or original writes.",
+    "status": "pass"
+  },
+  "candidate_screens": [
+    {
+      "candidate_id": "b54a8e60ab93b7fc680af430ed7883d4176181d511a57b2efccd3dfe5f13efb8",
+      "mean_distinct": 7.333333333333333,
+      "mean_utility": 5.917220762821608,
+      "name": "seed",
+      "source_bytes": 13452,
+      "source_sha256": "d7ba10ac6d4786cf22d7447242fa9188830f40ba5a5bf9d30c26681f7377491e",
+      "tasks": [
+        {
+          "answers_sha256": "ec5968f3156c9700b3f6bccea1eb7a1ba7e77baf7d334f850af224dc0c56a972",
+          "distinct": 10,
+          "generation_scores": [
+            8,
+            8,
+            8,
+            7,
+            8,
+            7,
+            8,
+            7,
+            7,
+            7
+          ],
+          "literal_unique_answers": 10,
+          "partition": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "prompt": "Tell me a story in five sentences about a girl and her dog.",
+          "task_id": "curated-0",
+          "utility": 7.697211292491301
+        },
+        {
+          "answers_sha256": "dc22d12223f48aa8694a90faef6ea12524cd425f1a8477021128dd712339ddf2",
+          "distinct": 2,
+          "generation_scores": [
+            8,
+            null,
+            7,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "literal_unique_answers": 2,
+          "partition": [
+            0,
+            0,
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            1,
+            0
+          ],
+          "prompt": "Pick one: glass half full or glass half empty?",
+          "task_id": "curated-47",
+          "utility": 2.7962444630057717
+        },
+        {
+          "answers_sha256": "44c97dd4aa3830924660fb0bf4a800bc144f48d7c5d0b6895f925a01c4a27731",
+          "distinct": 10,
+          "generation_scores": [
+            6,
+            8,
+            8,
+            8,
+            4,
+            9,
+            8,
+            8,
+            8,
+            8
+          ],
+          "literal_unique_answers": 10,
+          "partition": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "prompt": "Generate the safest first digit for my 12 digit password? Give me exactly one digit.",
+          "task_id": "curated-97",
+          "utility": 7.258206532967752
+        }
+      ]
+    },
+    {
+      "candidate_id": "e539878b88f8be21b1034a52de0fc1a067c4e622c8877545894b15d40c92e059",
+      "mean_distinct": 5.666666666666667,
+      "mean_utility": 5.20216275790886,
+      "name": "child0",
+      "source_bytes": 9508,
+      "source_sha256": "0d19588863ad47c7e117f9099cc17a87a52e2ca8320e811cae00011199f02abf",
+      "tasks": [
+        {
+          "answers_sha256": "eec552c1effde408014266cd5bfe4d004c4bca11a0a6b040d7b285c38ab7e66a",
+          "distinct": 10,
+          "generation_scores": [
+            7,
+            7,
+            7,
+            6,
+            7,
+            7,
+            6,
+            7,
+            8,
+            7
+          ],
+          "literal_unique_answers": 10,
+          "partition": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "prompt": "Tell me a story in five sentences about a girl and her dog.",
+          "task_id": "curated-0",
+          "utility": 6.864137508002996
+        },
+        {
+          "answers_sha256": "b1fd616cc5a48a073b1efb7037fed63b9a16b36b44193e9e9c47d6c05a38e1f3",
+          "distinct": 2,
+          "generation_scores": [
+            8,
+            7,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "literal_unique_answers": 2,
+          "partition": [
+            0,
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            1
+          ],
+          "prompt": "Pick one: glass half full or glass half empty?",
+          "task_id": "curated-47",
+          "utility": 3.0471894789165463
+        },
+        {
+          "answers_sha256": "ecdc88cb4fec216e34b0eff91314f6dc3b7fca774601579c8d005db48281fd43",
+          "distinct": 5,
+          "generation_scores": [
+            8,
+            8,
+            8,
+            null,
+            8,
+            8,
+            null,
+            null,
+            null,
+            null
+          ],
+          "literal_unique_answers": 5,
+          "partition": [
+            0,
+            1,
+            2,
+            0,
+            3,
+            4,
+            1,
+            2,
+            0,
+            3
+          ],
+          "prompt": "Generate the safest first digit for my 12 digit password? Give me exactly one digit.",
+          "task_id": "curated-97",
+          "utility": 5.695161286807038
+        }
+      ]
+    },
+    {
+      "candidate_id": "ba7c38202c9eb3e9ad5adc09c5c32a8591f3c51d89c1c208011d9304c0f6d336",
+      "mean_distinct": 5.666666666666667,
+      "mean_utility": 4.132361613048942,
+      "name": "child1",
+      "source_bytes": 9435,
+      "source_sha256": "48da8771d111e8f1a9b8b706c9485c3ed7117eb4c6766c13c1b8c0453003612c",
+      "tasks": [
+        {
+          "answers_sha256": "2c2836afef23d48c0dd8c068eea41ac8cd088bd841a2e7ff7bb83f051a6d457d",
+          "distinct": 10,
+          "generation_scores": [
+            6,
+            6,
+            7,
+            8,
+            6,
+            7,
+            7,
+            7,
+            7,
+            6
+          ],
+          "literal_unique_answers": 10,
+          "partition": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "prompt": "Tell me a story in five sentences about a girl and her dog.",
+          "task_id": "curated-0",
+          "utility": 6.589566492054823
+        },
+        {
+          "answers_sha256": "d1d54b40682b282a4416a6520c5f7d96ef851cf91df644456c541e8be8a95672",
+          "distinct": 2,
+          "generation_scores": [
+            8,
+            8,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "literal_unique_answers": 2,
+          "partition": [
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            1,
+            0
+          ],
+          "prompt": "Pick one: glass half full or glass half empty?",
+          "task_id": "curated-47",
+          "utility": 3.2264359188528133
+        },
+        {
+          "answers_sha256": "e2512d4b0d2adc9d526643caaa46be6550cd37bc4f08b68f3a262c2024dc2554",
+          "distinct": 5,
+          "generation_scores": [
+            6,
+            null,
+            null,
+            null,
+            null,
+            null,
+            8,
+            8,
+            4,
+            8
+          ],
+          "literal_unique_answers": 5,
+          "partition": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "prompt": "Generate the safest first digit for my 12 digit password? Give me exactly one digit.",
+          "task_id": "curated-97",
+          "utility": 2.5810824282391898
+        }
+      ]
+    },
+    {
+      "candidate_id": "8e8935b01456d61f4066241cc5823eb5e5656c371233d67c66a637638a670fde",
+      "mean_distinct": 7.0,
+      "mean_utility": 5.045539111534954,
+      "name": "child2",
+      "source_bytes": 10340,
+      "source_sha256": "b2ea1ecd01a5168a3338e925ddf5d8876d58e20071e7b4e6df028cc45ce1b0d4",
+      "tasks": [
+        {
+          "answers_sha256": "387ba01d5eebf7e4fa641c77da0f31d3f25207b2da3d46e615fc305dbc49c6b1",
+          "distinct": 10,
+          "generation_scores": [
+            5,
+            7,
+            7,
+            7,
+            7,
+            8,
+            5,
+            6,
+            7,
+            7
+          ],
+          "literal_unique_answers": 10,
+          "partition": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "prompt": "Tell me a story in five sentences about a girl and her dog.",
+          "task_id": "curated-0",
+          "utility": 6.460843916329941
+        },
+        {
+          "answers_sha256": "fa5e4456c03e372d8168463f06a25e7bb547de8f0ac5d613fd63e6f2ef13f0ac",
+          "distinct": 2,
+          "generation_scores": [
+            8,
+            null,
+            8,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "literal_unique_answers": 2,
+          "partition": [
+            0,
+            0,
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            1,
+            0
+          ],
+          "prompt": "Pick one: glass half full or glass half empty?",
+          "task_id": "curated-47",
+          "utility": 2.9396416149547857
+        },
+        {
+          "answers_sha256": "ba6bcd0050fed8c4f38d2c79316f76a9a1a90cd1f7658cc600d5cc21c5aa4ba2",
+          "distinct": 9,
+          "generation_scores": [
+            6,
+            null,
+            8,
+            8,
+            4,
+            7,
+            9,
+            8,
+            8,
+            8
+          ],
+          "literal_unique_answers": 9,
+          "partition": [
+            0,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "prompt": "Generate the safest first digit for my 12 digit password? Give me exactly one digit.",
+          "task_id": "curated-97",
+          "utility": 5.736131803320138
+        }
+      ]
+    }
+  ],
+  "claim": "Observed model-authored source/improver execution; negative three-task development-score result; no held-out or improved-improver claim.",
+  "cost_microusd_by_stage": {
+    "generation": 29648,
+    "partition": 5397,
+    "proposal": 205283,
+    "score": 918668
+  },
+  "date": "2026-10-22",
+  "findings": {
+    "SRC2-L1": "64-byte answer openings limit feedback about causal developments/endings; full position coverage is not full answer-text coverage.",
+    "SRC2-L2": "Actual digit repetition; literal equality matches official partitions.",
+    "SRC2-L3": "Unblinded within-set story mechanism concerns; official D10 unchanged; no revised classes or judge-error claim.",
+    "SRC2-L4": "Unblinded coherence concerns; sentence count alone does not establish quality.",
+    "SRC2-L5": "Latest/eligible is not best/promoted; lower inference usage alone is not cost-adjusted useful-diversity superiority."
+  },
+  "format": "buddha.src02-live-results.v1",
+  "generation_resource_observations": [
+    {
+      "calls_per_task": [
+        10,
+        10,
+        10
+      ],
+      "calls_total": 30,
+      "local_recorded_generation_microusd": 8751,
+      "reply_shapes_unordered_by_task": [
+        [
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ]
+        ],
+        [
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ]
+        ],
+        [
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ]
+        ]
+      ],
+      "source": "seed"
+    },
+    {
+      "calls_per_task": [
+        11,
+        11,
+        11
+      ],
+      "calls_total": 33,
+      "local_recorded_generation_microusd": 13132,
+      "reply_shapes_unordered_by_task": [
+        [
+          [
+            "plans",
+            10
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ]
+        ],
+        [
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "plans",
+            2
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ]
+        ],
+        [
+          [
+            "single",
+            1
+          ],
+          [
+            "plans",
+            5
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ]
+        ]
+      ],
+      "source": "child0"
+    },
+    {
+      "calls_per_task": [
+        2,
+        2,
+        2
+      ],
+      "calls_total": 6,
+      "local_recorded_generation_microusd": 3377,
+      "reply_shapes_unordered_by_task": [
+        [
+          [
+            "answers",
+            5
+          ],
+          [
+            "answers",
+            5
+          ]
+        ],
+        [
+          [
+            "answers",
+            5
+          ],
+          [
+            "answers",
+            5
+          ]
+        ],
+        [
+          [
+            "answers",
+            5
+          ],
+          [
+            "answers",
+            5
+          ]
+        ]
+      ],
+      "source": "child1"
+    },
+    {
+      "calls_per_task": [
+        3,
+        3,
+        3
+      ],
+      "calls_total": 9,
+      "local_recorded_generation_microusd": 4388,
+      "reply_shapes_unordered_by_task": [
+        [
+          [
+            "answers",
+            5
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "answers",
+            4
+          ]
+        ],
+        [
+          [
+            "single",
+            1
+          ],
+          [
+            "single",
+            1
+          ],
+          [
+            "answers",
+            8
+          ]
+        ],
+        [
+          [
+            "single",
+            1
+          ],
+          [
+            "answers",
+            8
+          ],
+          [
+            "single",
+            1
+          ]
+        ]
+      ],
+      "source": "child2"
+    }
+  ],
+  "handoff": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-handoff-v1",
+  "launch_receipt_sha256": "2ca7b832ac9cc31bc78f84e45787f7a5c1bd7376c6992b930bd2ee5c67ce9adb",
+  "limits": [
+    "Local stored provider replies and custody joins are evidence of the recorded model-authored source path, not cryptographically signed provider/invoice attestation. Root independently verifies the full shared authority/evidence chain.",
+    "One fixed three-task development panel and one native occasion per source cannot support causal/general improvement claims; two prompts have tightly bounded legal outputs.",
+    "Shared girl/dog subject is required. Repetition across separate source candidates is not jointly scored by NoveltyBench; listed concerns refer to within-set narrative mechanisms. No official group/score was changed.",
+    "Manual qualitative observations are not blinded human labels or an independent model judgment.",
+    "Callback counts and retained source/native cleanup records are observed engineering facts, not lifetime absence or universal safety/competence proof.",
+    "Initial schema inspections assumed a top-level hypothesis and full task objects in feedback.records. The exploratory read and guarded v1 stopped without writes; corrected to proposal.value and the existing task_id/note projection joined to original Task records. No product run was repeated."
+  ],
+  "literal_checks": {
+    "all_glass_and_digit_partition_equality_matches_literal_equality": true,
+    "answers": 120,
+    "digit_answers_all_exactly_one_ASCII_digit": true,
+    "glass_answers_all_legal_choices": true,
+    "mechanical_five_sentence_counts": [
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5
+    ],
+    "native_sets": 12,
+    "no_screen_missing_or_unusable_scalar": true,
+    "raw_native_metrics_match_saved_screen_rows": true,
+    "story_answers": 40
+  },
+  "next_gates": [
+    "Preserve this completed engineering/source-lineage result and its negative development-score outcome; admission and latest allocation are not promotion.",
+    "Address the prospectively versioned harness feedback bottleneck: story notes expose openings, not full causal developments/resolutions, within the existing bounded feedback contract. Do not rewrite this run.",
+    "Before another paid efficacy claim, declare a controlled comparison of the candidate generation procedures with matched resources, broader development coverage and repeated complete sets. Preserve current official scores; no new benchmark/judge audit is proposed.",
+    "Universal mutation competence, last-child improver competence, actual improved-improver effectiveness and held-out/human gains remain open. A new live scope requires its own concrete authorization."
+  ],
+  "outcome": {
+    "all_12_generation_and_36_native_reports_record_exit0_cleanup_removed": true,
+    "final_selected_id_is_latest_not_the_best_scoring_seed": true,
+    "seed_strictly_dominates_each_child_on_this_recorded_panel": true,
+    "selection_method": "latest",
+    "sole_official_development_frontier": "b54a8e60ab93b7fc680af430ed7883d4176181d511a57b2efccd3dfe5f13efb8",
+    "three_admitted_children_are_eligible_not_improved": true
+  },
+  "physical_attempts_by_stage": {
+    "generation": 78,
+    "partition": 12,
+    "proposal": 3,
+    "score": 77
+  },
+  "proposal_lineage_proofs": [
+    {
+      "changed_or_new_functions_AST": [
+        "_text",
+        "_task",
+        "_config",
+        "request",
+        "normalize",
+        "_finished",
+        "_pairs",
+        "_constant",
+        "_json",
+        "generate",
+        "propose_improvement"
+      ],
+      "child_id": "e539878b88f8be21b1034a52de0fc1a067c4e622c8877545894b15d40c92e059",
+      "child_source_sha256": "0d19588863ad47c7e117f9099cc17a87a52e2ca8320e811cae00011199f02abf",
+      "hypothesis": "Introduce one bounded semantic-planning callback before multi-answer generation, then realize each brief in a separate answer call. Plans target differences in conflict, causes, actions and outcomes rather than cosmetic substitutions; limited legal spaces explicitly permit repeated briefs. Truncated or malformed plans are discarded without repair calls. Original-task constraints remain authoritative during realization. This may improve substantive diversity while avoiding forced extra choices, at the cost of one additional callback for multi-answer tasks.",
+      "iteration": 0,
+      "ledger_sha256": "bc05aec2c049e8d8db6d72adb2d26355e4b0b9ee5cf99e6cbb0f470c15b1dd74",
+      "local_recorded_cost_microusd": 71033,
+      "model": "gpt-6.1-sol",
+      "operation_id": "bc0023930bfd92e3cffacf292a26ba2b4f8e0471ce6ae13e6cb4c28f923a3cc7",
+      "owner_parent_source_exact": true,
+      "parent_id": "b54a8e60ab93b7fc680af430ed7883d4176181d511a57b2efccd3dfe5f13efb8",
+      "removed_functions": [
+        "_integer",
+        "_object",
+        "_provider",
+        "_source_seed_constant",
+        "_source_seed_pairs"
+      ],
+      "reply_hypothesis_exact": true,
+      "reply_source_exact": true,
+      "request_full_parent_exact": true,
+      "request_ordered_feedback_exact": true,
+      "usage": {
+        "completion_tokens": 2661,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 56,
+          "rejected_prediction_tokens": 0
+        },
+        "prompt_tokens": 4932,
+        "prompt_tokens_details": {
+          "audio_tokens": 0,
+          "cache_write_tokens": 4929,
+          "cached_tokens": 0
+        },
+        "total_tokens": 7593
+      }
+    },
+    {
+      "changed_or_new_functions_AST": [
+        "_task",
+        "_config",
+        "request",
+        "normalize",
+        "_finished",
+        "_pairs",
+        "generate"
+      ],
+      "child_id": "ba7c38202c9eb3e9ad5adc09c5c32a8591f3c51d89c1c208011d9304c0f6d336",
+      "child_source_sha256": "48da8771d111e8f1a9b8b706c9485c3ed7117eb4c6766c13c1b8c0453003612c",
+      "hypothesis": "Replace the shared brief planner and per-answer realization loop with bounded batches of complete independent answers. Joint realization may improve substantive variation while reducing planning overhead, particularly for short constrained outputs. Batch size depends on the configured output allowance; malformed or truncated batches are discarded atomically and trigger smaller requests, eventually reverting to individual generation. In-context sampling retains prior accepted answers, while regenerate sampling omits them. Structural validation does not guarantee semantic compliance, so the batch instructions explicitly retain each original constraint inside every answer.",
+      "iteration": 1,
+      "ledger_sha256": "19bc9e8feddd64fd97c1cb58acbb5819b4b248d2b0e1916d7a4375ca7cdaf88f",
+      "local_recorded_cost_microusd": 65621,
+      "model": "gpt-6.1-sol",
+      "operation_id": "ec10782fc6ca09c30e1de8f9178eee131cf9797a8049796104afb328f5102171",
+      "owner_parent_source_exact": true,
+      "parent_id": "e539878b88f8be21b1034a52de0fc1a067c4e622c8877545894b15d40c92e059",
+      "removed_functions": [],
+      "reply_hypothesis_exact": true,
+      "reply_source_exact": true,
+      "request_full_parent_exact": true,
+      "request_ordered_feedback_exact": true,
+      "usage": {
+        "completion_tokens": 2709,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 104,
+          "rejected_prediction_tokens": 0
+        },
+        "prompt_tokens": 3804,
+        "prompt_tokens_details": {
+          "audio_tokens": 0,
+          "cache_write_tokens": 3801,
+          "cached_tokens": 0
+        },
+        "total_tokens": 6513
+      }
+    },
+    {
+      "changed_or_new_functions_AST": [
+        "_width",
+        "generate"
+      ],
+      "child_id": "8e8935b01456d61f4066241cc5823eb5e5656c371233d67c66a637638a670fde",
+      "child_source_sha256": "b2ea1ecd01a5168a3338e925ddf5d8876d58e20071e7b4e6df028cc45ce1b0d4",
+      "hypothesis": "Replace fixed batch sizing with a complete single-answer pilot followed by batches sized from the largest serialized answer observed. This may reserve more room for longer creative answers while reducing callback overhead for short constrained outputs. Failed batches lower a persistent batch ceiling, and incomplete single answers receive only one retry. Generation guidance also distinguishes lawful choice variation from creative variation and factual invariance, aiming to reduce avoidable repetition without inventing options or alternative facts.",
+      "iteration": 2,
+      "ledger_sha256": "d206b056aba7b0f7ae8445e7c33e01c62b5572f2c87da4392f76c97559d69bd0",
+      "local_recorded_cost_microusd": 68629,
+      "model": "gpt-6.1-sol",
+      "operation_id": "830eb9323e5699499764e3e9c57cb88e10be44cb6a7c705d15367b86c563cac0",
+      "owner_parent_source_exact": true,
+      "parent_id": "ba7c38202c9eb3e9ad5adc09c5c32a8591f3c51d89c1c208011d9304c0f6d336",
+      "removed_functions": [],
+      "reply_hypothesis_exact": true,
+      "reply_source_exact": true,
+      "request_full_parent_exact": true,
+      "request_ordered_feedback_exact": true,
+      "usage": {
+        "completion_tokens": 2903,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 99,
+          "rejected_prediction_tokens": 0
+        },
+        "prompt_tokens": 3769,
+        "prompt_tokens_details": {
+          "audio_tokens": 0,
+          "cache_write_tokens": 3766,
+          "cached_tokens": 0
+        },
+        "total_tokens": 6672
+      }
+    }
+  ],
+  "proposal_sha256": "58201cb25ae027a24549f4153fcdf2bb82cdca8783c93cc687034cd5629bffa9",
+  "proposal_usage_cost_joins": [
+    {
+      "child_id": "e539878b88f8be21b1034a52de0fc1a067c4e622c8877545894b15d40c92e059",
+      "cost_microusd": 71033,
+      "hypothesis": "Introduce one bounded semantic-planning callback before multi-answer generation, then realize each brief in a separate answer call. Plans target differences in conflict, causes, actions and outcomes rather than cosmetic substitutions; limited legal spaces explicitly permit repeated briefs. Truncated or malformed plans are discarded without repair calls. Original-task constraints remain authoritative during realization. This may improve substantive diversity while avoiding forced extra choices, at the cost of one additional callback for multi-answer tasks.",
+      "input_tokens": 4932,
+      "iteration": 0,
+      "operation_id": "bc0023930bfd92e3cffacf292a26ba2b4f8e0471ce6ae13e6cb4c28f923a3cc7",
+      "output_tokens": 2661,
+      "parent_id": "b54a8e60ab93b7fc680af430ed7883d4176181d511a57b2efccd3dfe5f13efb8",
+      "raw_reply_sha256": "59a8f535f7a0090165da61d26981898ccea731d49df5e85081a885f3c3493e66",
+      "request_body_sha256": "001e9f9f2514c3ac586a1a0eeb9ab9e7c3a2e889de2762dccc09ca154b24f04f"
+    },
+    {
+      "child_id": "ba7c38202c9eb3e9ad5adc09c5c32a8591f3c51d89c1c208011d9304c0f6d336",
+      "cost_microusd": 65621,
+      "hypothesis": "Replace the shared brief planner and per-answer realization loop with bounded batches of complete independent answers. Joint realization may improve substantive variation while reducing planning overhead, particularly for short constrained outputs. Batch size depends on the configured output allowance; malformed or truncated batches are discarded atomically and trigger smaller requests, eventually reverting to individual generation. In-context sampling retains prior accepted answers, while regenerate sampling omits them. Structural validation does not guarantee semantic compliance, so the batch instructions explicitly retain each original constraint inside every answer.",
+      "input_tokens": 3804,
+      "iteration": 1,
+      "operation_id": "ec10782fc6ca09c30e1de8f9178eee131cf9797a8049796104afb328f5102171",
+      "output_tokens": 2709,
+      "parent_id": "e539878b88f8be21b1034a52de0fc1a067c4e622c8877545894b15d40c92e059",
+      "raw_reply_sha256": "91993c5e202eeddf607cc58c9c741938e8ee91a0d1ae1804b5a076e50bc441a8",
+      "request_body_sha256": "0a811b5d22c5ebb6e4afd77f9f61ed6ae9cf4cd5a92c6dd3ef7e850fce76cdea"
+    },
+    {
+      "child_id": "8e8935b01456d61f4066241cc5823eb5e5656c371233d67c66a637638a670fde",
+      "cost_microusd": 68629,
+      "hypothesis": "Replace fixed batch sizing with a complete single-answer pilot followed by batches sized from the largest serialized answer observed. This may reserve more room for longer creative answers while reducing callback overhead for short constrained outputs. Failed batches lower a persistent batch ceiling, and incomplete single answers receive only one retry. Generation guidance also distinguishes lawful choice variation from creative variation and factual invariance, aiming to reduce avoidable repetition without inventing options or alternative facts.",
+      "input_tokens": 3769,
+      "iteration": 2,
+      "operation_id": "830eb9323e5699499764e3e9c57cb88e10be44cb6a7c705d15367b86c563cac0",
+      "output_tokens": 2903,
+      "parent_id": "ba7c38202c9eb3e9ad5adc09c5c32a8591f3c51d89c1c208011d9304c0f6d336",
+      "raw_reply_sha256": "5982cc007b5fb601df13e1d7f8be75d8056aa74d57305b92657dc0ffd405fd3d",
+      "request_body_sha256": "3f804b544142e6360c2a630f95108fe11d97181e4f30806bbe1337eaa228c403"
+    }
+  ],
+  "publication_base": "e453c43e2c41644e23b47da6f3d8eb0cfe18f216",
+  "qualitative_observations": [
+    {
+      "concern": "Thunderstorm/blanket-fort comfort and fireworks/blanket comfort both resolve fear of loud noise through girl/dog companionship. This is a candidate repeated central mechanism, not a revised equivalence class.",
+      "official_distinct": 10,
+      "source": "child0",
+      "task": "curated-0",
+      "zero_based_answer_positions": [
+        1,
+        9
+      ]
+    },
+    {
+      "concern": "Dog draws girl to a child's displaced toy; girl recovers boat/kite and the child thanks them. Setting/object differ, while the recovery arc recurs.",
+      "official_distinct": 10,
+      "source": "child1",
+      "task": "curated-0",
+      "zero_based_answer_positions": [
+        1,
+        7
+      ]
+    },
+    {
+      "concern": "Girl finds and cares for a stray dog, the dog goes to another family/original owner, and she maintains the bond through regular visits. Different middle events, similar premise and resolution.",
+      "official_distinct": 10,
+      "source": "child2",
+      "task": "curated-0",
+      "zero_based_answer_positions": [
+        0,
+        1
+      ]
+    },
+    {
+      "concern": "After returning the toy boat to its grateful child, the final sentence has the dog carry the toy home; the object's custody is unclear. Coherence concern only.",
+      "source": "child1",
+      "task": "curated-0",
+      "zero_based_answer_positions": [
+        1
+      ]
+    },
+    {
+      "concern": "Finding an abandoned hiker backpack suddenly becomes guiding its hiker back to the trail; the hiker is not introduced before that transition. Coherence concern only.",
+      "source": "child2",
+      "task": "curated-0",
+      "zero_based_answer_positions": [
+        6
+      ]
+    }
+  ],
+  "reason": "bounded_iterations_complete",
+  "report_sha256": "cb267c7cd98feddd33b9acc9e1d6a22900c35b40619af968a45056a2f5fb4809",
+  "review": {
+    "additional_provider_calls": 0,
+    "candidate_source_sha256": [
+      "d7ba10ac6d4786cf22d7447242fa9188830f40ba5a5bf9d30c26681f7377491e",
+      "0d19588863ad47c7e117f9099cc17a87a52e2ca8320e811cae00011199f02abf",
+      "48da8771d111e8f1a9b8b706c9485c3ed7117eb4c6766c13c1b8c0453003612c",
+      "b2ea1ecd01a5168a3338e925ddf5d8876d58e20071e7b4e6df028cc45ce1b0d4"
+    ],
+    "directories_unchanged": true,
+    "file_backed_sql_connections": 0,
+    "guard_counters": {
+      "memory_sql_connections": 54
+    },
+    "handoff_file_count": 7,
+    "independent_consumed_files": 135,
+    "independent_consumed_files_stable": true,
+    "independent_guard_observations": {
+      "denied_events": [],
+      "memory_sql_connections": 15
+    },
+    "keys_read": false,
+    "observed_utc": "2026-10-23T03:21:45.493964+00:00",
+    "original_files_written": false,
+    "original_proposal_source_pin_count": 56,
+    "passive_raw_join_status": "pass",
+    "raw_artifacts_bundled_in_git": false,
+    "retained_local_review_sha256": {
+      "source-live-passive-review-setup-failure-v1.json": "ae572581e590bfc0d06ac286ddc1930cccfb33df85dbfe9f16b6472176ba32f6",
+      "source-live-passive-verification-v2-failure.json": "cd2653544c65e0c5b52ccfac347d1debe3719bb698bb6d3c1446962de5c90c77",
+      "source-live-passive-verification-v3-failure.json": "e79045302d105b2dfb5ee54ca22583f1c71cf4c7cbed1b6ff321948467ac8d68",
+      "source-live-passive-verification-v4.json": "94a1c31e0f186ca5eb84e6be9d99bd0d477c529c052acdd18d3983092e0b2c27",
+      "src02-live-independent-review-v1.json": "2550983ced633315542710fbfcffdf7056c3247855a099624953f935efe15702",
+      "src02-live-independent-review-v1.md": "124091b9ebf7faca8b6cbf4a7184fac2bf0d5e073bfd1a720dd820166a2ceefa",
+      "src02-live-independent-source-details-v1.json": "5e1bf180f8c66d67f4c49c4b50353546a7d9b34d2cd6c389288dc28823ac586f",
+      "verify-source-live-v1.py": "f26048c54c5a61eaabee4df9e039801da0e8443ab6c45319eeb1f4faaebb57f5",
+      "verify-source-live-v2.py": "9d71822131b41bfc2e9086a9131446b26f643459c55f2c048d1ee519efa878a7",
+      "verify-source-live-v3.py": "42bc8f72b8c451cc418889c57254fc4e7eae0cb782ff6e8fd00b2c2ea0914f51",
+      "verify-source-live-v4.py": "8228a85127fea9195398d51a5743ba8583940a504fc8d9f8b70b185eb0841c5f"
+    },
+    "retained_original_inspector_observation": {
+      "earlier_guarded_invocation_failure_sha256": "cd2653544c65e0c5b52ccfac347d1debe3719bb698bb6d3c1446962de5c90c77",
+      "earlier_helper_sha256": "9d71822131b41bfc2e9086a9131446b26f643459c55f2c048d1ee519efa878a7",
+      "invoked_again_during_this_raw_join_pass": false,
+      "observed_pass_before_downstream_wrapper_failure": true
+    },
+    "scope_limits": [
+      "Current original passive inspector and original raw/financial/native/source joins; no source execution or worker created during review.",
+      "Recorded vendor/model/usage/cost provenance is not independent provider invoice reconciliation.",
+      "One three-task development screen per source, no matched fixed-source replicate or held-out/human improvement inference.",
+      "Worker exit/cleanup facts are retained original execution reports, not a new Docker daemon inspection."
+    ],
+    "search_file_count": 606,
+    "unique_worker_ids": 51,
+    "worker_report_count": 51,
+    "worker_reports": [
+      {
+        "cleanup_status": "removed",
+        "container_id": "70216438c7bc747e5f6c80d366ac352fca5aa3448a8f6ae767095be972531f43",
+        "elapsed_seconds": 69.69801429996733,
+        "exit_code": 0,
+        "frame_count": 3,
+        "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\0\\proposal\\owners\\0",
+        "stage": "proposal",
+        "stderr_bytes": 0,
+        "stdout_bytes": 39621
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "b34081f50c111c6f53897dea4dd9178f980b2469ffa9ebd67df8b64d90f52b81",
+        "elapsed_seconds": 29.323024500044994,
+        "exit_code": 0,
+        "frame_count": 5,
+        "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\0\\screen\\tasks\\0\\evaluation\\owners\\1",
+        "stage": "partition",
+        "stderr_bytes": 236,
+        "stdout_bytes": 2359441
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "4a82247d12107a650c690a11cf28aebaf2e2c1d4ccd5ea95acdcb7549c2f3404",
+        "elapsed_seconds": 85.39371770003345,
+        "exit_code": 0,
+        "frame_count": 14,
+        "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\0\\screen\\tasks\\0\\evaluation\\owners\\2",
+        "stage": "score",
+        "stderr_bytes": 232,
+        "stdout_bytes": 2321976
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "a07927ad9e4ffb7a6dfaca04f253442460e102ef9412363ce2b678ca99756343",
+        "elapsed_seconds": 23.767438600072637,
+        "exit_code": 0,
+        "frame_count": 4,
+        "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\0\\screen\\tasks\\0\\evaluation\\owners\\3",
+        "stage": "summary",
+        "stderr_bytes": 0,
+        "stdout_bytes": 2288079
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "b230ac864f477be4e1899e1a7185dcd668df65b52afd9b38c0b530d821e5f94f",
+        "elapsed_seconds": 27.86650040000677,
+        "exit_code": 0,
+        "frame_count": 13,
+        "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\0\\screen\\tasks\\0\\generation\\owners\\0",
+        "stage": "generation",
+        "stderr_bytes": 0,
+        "stdout_bytes": 64006
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "ebbec356b2e70c80b22b615fab4ccb7ff3daa11c3b473d98b5a972bd761b559e",
+        "elapsed_seconds": 28.32645659998525,
+        "exit_code": 0,
+        "frame_count": 5,
+        "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\0\\screen\\tasks\\1\\evaluation\\owners\\1",
+        "stage": "partition",
+        "stderr_bytes": 236,
+        "stdout_bytes": 2342693
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "23d2b72a7fe7d87d046f04c6ce70614a24255b85c012e258b03ac4f217ea2ee4",
+        "elapsed_seconds": 40.296385499997996,
+        "exit_code": 0,
+        "frame_count": 6,
+        "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\0\\screen\\tasks\\1\\evaluation\\owners\\2",
+        "stage": "score",
+        "stderr_bytes": 232,
+        "stdout_bytes": 2288304
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "49237843bb7715d9fa4dd689bc8c46320f47bf045316d30b709b5471c2955a05",
+        "elapsed_seconds": 23.389851899934,
+        "exit_code": 0,
+        "frame_count": 4,
+        "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\0\\screen\\tasks\\1\\evaluation\\owners\\3",
+        "stage": "summary",
+        "stderr_bytes": 0,
+        "stdout_bytes": 2282395
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "a06727032c1292ed06b359c4484b5eecdd80643ab03e96738473b870d7f51cd6",
+        "elapsed_seconds": 18.178405500017107,
+        "exit_code": 0,
+        "frame_count": 13,
+        "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\0\\screen\\tasks\\1\\generation\\owners\\0",
+        "stage": "generation",
+        "stderr_bytes": 0,
+        "stdout_bytes": 35039
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "a9b49fea209acd619dabfab037e252aad1417b4b895324c3ca533491f70f76e5",
+        "elapsed_seconds": 27.29023749998305,
+        "exit_code": 0,
+        "frame_count": 5,
+        "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\0\\screen\\tasks\\2\\evaluation\\owners\\1",
+        "stage": "partition",
+        "stderr_bytes": 236,
+        "stdout_bytes": 2342921
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "b81e0de61ae198bb72949ea58c8eec6991bb3ae1becf16a794810ba92e8592d4",
+        "elapsed_seconds": 73.28323639999144,
+        "exit_code": 0,
+        "frame_count": 9,
+        "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\0\\screen\\tasks\\2\\evaluation\\owners\\2",
+        "stage": "score",
+        "stderr_bytes": 232,
+        "stdout_bytes": 2295106
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "247d8448eaf5461cf471b77118a7c0e211a8c605f934b7d18b82517b30e77314",
+        "elapsed_seconds": 28.863330299966037,
+        "exit_code": 0,
+        "frame_count": 4,
+        "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\0\\screen\\tasks\\2\\evaluation\\owners\\3",
+        "stage": "summary",
+        "stderr_bytes": 0,
+        "stdout_bytes": 2282583
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "8869e5b726cb1df984ce3f706f8d2f94f070a8a4c37a06c0140a76fe4e6efb39",
+        "elapsed_seconds": 17.533875800087117,
+        "exit_code": 0,
+        "frame_count": 13,
+        "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\0\\screen\\tasks\\2\\generation\\owners\\0",
+        "stage": "generation",
+        "stderr_bytes": 0,
+        "stdout_bytes": 34708
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "795db5852a3ddcb31e4c4ebd338bcd55cbebe62b91dbb76847457053b88a62c2",
+        "elapsed_seconds": 50.625450500054285,
+        "exit_code": 0,
+        "frame_count": 3,
+        "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\1\\proposal\\owners\\0",
+        "stage": "proposal",
+        "stderr_bytes": 0,
+        "stdout_bytes": 31799
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "5d076446952103b24b4e9a4c8983e4838f9d9b57c94dd8797cd61ba4033ec516",
+        "elapsed_seconds": 35.589845700073056,
+        "exit_code": 0,
+        "frame_count": 5,
+        "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\1\\screen\\tasks\\0\\evaluation\\owners\\1",
+        "stage": "partition",
+        "stderr_bytes": 236,
+        "stdout_bytes": 2357241
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "78ff514700c5842a2855303d93aebdc27fc4f05b0d4b80afb612bdffc88a60f1",
+        "elapsed_seconds": 105.08788350003306,
+        "exit_code": 0,
+        "frame_count": 14,
+        "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\1\\screen\\tasks\\0\\evaluation\\owners\\2",
+        "stage": "score",
+        "stderr_bytes": 232,
+        "stdout_bytes": 2319780
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "4352daf66c51b0aed1a29d9400beca876dc5791395c0628923c1354a2e4c2075",
+        "elapsed_seconds": 30.06559249991551,
+        "exit_code": 0,
+        "frame_count": 4,
+        "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\1\\screen\\tasks\\0\\evaluation\\owners\\3",
+        "stage": "summary",
+        "stderr_bytes": 0,
+        "stdout_bytes": 2287339
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "6d0d4bc5fad1d08ea2d73b87b837f68934e486f7c2cfa7d3cb1aa7deb88a9b09",
+        "elapsed_seconds": 12.951545399962924,
+        "exit_code": 0,
+        "frame_count": 4,
+        "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\1\\screen\\tasks\\0\\generation\\owners\\0",
+        "stage": "generation",
+        "stderr_bytes": 0,
+        "stdout_bytes": 11892
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "992b8a4e6be86d6ea7e097d119daf2a028a33efa9014030189b71ad99cd2e645",
+        "elapsed_seconds": 34.13386039994657,
+        "exit_code": 0,
+        "frame_count": 5,
+        "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\1\\screen\\tasks\\1\\evaluation\\owners\\1",
+        "stage": "partition",
+        "stderr_bytes": 236,
+        "stdout_bytes": 2342693
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "9d8cffdfa3d5484794182ddea562478acca237b55955179f6dcbddeb3b9d7d11",
+        "elapsed_seconds": 42.03513489989564,
+        "exit_code": 0,
+        "frame_count": 6,
+        "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\1\\screen\\tasks\\1\\evaluation\\owners\\2",
+        "stage": "score",
+        "stderr_bytes": 232,
+        "stdout_bytes": 2288300
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "cf352285215f6022a2e3fe8a9d8e7241e70290562f98ade3fd5c90fc1fe6111f",
+        "elapsed_seconds": 27.484105699928477,
+        "exit_code": 0,
+        "frame_count": 4,
+        "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\1\\screen\\tasks\\1\\evaluation\\owners\\3",
+        "stage": "summary",
+        "stderr_bytes": 0,
+        "stdout_bytes": 2282391
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "6d35dd03a18075caa39d0fa9347d8a3f00408c9aea3e5b8c26edfc96ec9b481b",
+        "elapsed_seconds": 5.800947000039741,
+        "exit_code": 0,
+        "frame_count": 4,
+        "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\1\\screen\\tasks\\1\\generation\\owners\\0",
+        "stage": "generation",
+        "stderr_bytes": 0,
+        "stdout_bytes": 6040
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "1072c859330b47cfdf0afe1f5ab3630611ede3cb2e04fe17da711f680ee40bb7",
+        "elapsed_seconds": 30.36112730007153,
+        "exit_code": 0,
+        "frame_count": 5,
+        "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\1\\screen\\tasks\\2\\evaluation\\owners\\1",
+        "stage": "partition",
+        "stderr_bytes": 236,
+        "stdout_bytes": 2342921
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "dfd0fd67865bc442c47d5df9313191d0a101f5f2fd54d171a78f8f1aede2f360",
+        "elapsed_seconds": 74.75221679999959,
+        "exit_code": 0,
+        "frame_count": 9,
+        "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\1\\screen\\tasks\\2\\evaluation\\owners\\2",
+        "stage": "score",
+        "stderr_bytes": 232,
+        "stdout_bytes": 2295110
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "2a6555a6772213e82c2e55588d560f12a981828f488c4b9c8b6163994cdad23d",
+        "elapsed_seconds": 23.452130499994382,
+        "exit_code": 0,
+        "frame_count": 4,
+        "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\1\\screen\\tasks\\2\\evaluation\\owners\\3",
+        "stage": "summary",
+        "stderr_bytes": 0,
+        "stdout_bytes": 2282587
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "4cd46551471edc82c7ef260f5d5e056cab3336b7a62055780e261af396eb0e60",
+        "elapsed_seconds": 5.426193100051023,
+        "exit_code": 0,
+        "frame_count": 4,
+        "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\1\\screen\\tasks\\2\\generation\\owners\\0",
+        "stage": "generation",
+        "stderr_bytes": 0,
+        "stdout_bytes": 5886
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "4402d02be1042423be72d377cb7475b83714f6c926f2cb39ec383e25cc6f1e89",
+        "elapsed_seconds": 57.75717210001312,
+        "exit_code": 0,
+        "frame_count": 3,
+        "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\2\\proposal\\owners\\0",
+        "stage": "proposal",
+        "stderr_bytes": 0,
+        "stdout_bytes": 32322
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "d62b64a033a1c40511ee811fcfc5e61b29e4442670db40c15af2d280187f166f",
+        "elapsed_seconds": 35.85506259999238,
+        "exit_code": 0,
+        "frame_count": 5,
+        "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\2\\screen\\tasks\\0\\evaluation\\owners\\1",
+        "stage": "partition",
+        "stderr_bytes": 236,
+        "stdout_bytes": 2359205
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "f68980f498e14f4b53eca0343f0e2c84e85a78079168dbd5ef2e3638d52d8b8f",
+        "elapsed_seconds": 129.77473199996166,
+        "exit_code": 0,
+        "frame_count": 14,
+        "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\2\\screen\\tasks\\0\\evaluation\\owners\\2",
+        "stage": "score",
+        "stderr_bytes": 232,
+        "stdout_bytes": 2321744
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "e88db5d0b6ebad02cff79ed2c671feaee47180bf0af204f67045aed9f5fa9146",
+        "elapsed_seconds": 47.47212340007536,
+        "exit_code": 0,
+        "frame_count": 4,
+        "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\2\\screen\\tasks\\0\\evaluation\\owners\\3",
+        "stage": "summary",
+        "stderr_bytes": 0,
+        "stdout_bytes": 2287991
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "e9f3d157b9fbbb019fd7f38d4864b815f03ed9c476f26ad7094fe2cd90f0da80",
+        "elapsed_seconds": 15.890655700000934,
+        "exit_code": 0,
+        "frame_count": 5,
+        "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\2\\screen\\tasks\\0\\generation\\owners\\0",
+        "stage": "generation",
+        "stderr_bytes": 0,
+        "stdout_bytes": 16991
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "6adf2ce6a2b4df385b437b3968c3ea8e14259097c74323a846ea03021b0d7d0b",
+        "elapsed_seconds": 31.81521619996056,
+        "exit_code": 0,
+        "frame_count": 5,
+        "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\2\\screen\\tasks\\1\\evaluation\\owners\\1",
+        "stage": "partition",
+        "stderr_bytes": 236,
+        "stdout_bytes": 2342693
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "645138f57e65d5f2549a9d3a3badc7de662e2bd962d0403fd0325b729cb1d6a2",
+        "elapsed_seconds": 40.36721669998951,
+        "exit_code": 0,
+        "frame_count": 6,
+        "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\2\\screen\\tasks\\1\\evaluation\\owners\\2",
+        "stage": "score",
+        "stderr_bytes": 232,
+        "stdout_bytes": 2288300
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "508560039ad782cd11c507891f69a5b7b01d85fd596017f647faab0326ef25fa",
+        "elapsed_seconds": 24.000795100000687,
+        "exit_code": 0,
+        "frame_count": 4,
+        "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\2\\screen\\tasks\\1\\evaluation\\owners\\3",
+        "stage": "summary",
+        "stderr_bytes": 0,
+        "stdout_bytes": 2282391
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "6ba9af15233bdd287c56ec6cf3025493cddb3e24340e44fcd0d7fcf8e55d45e1",
+        "elapsed_seconds": 7.24211219989229,
+        "exit_code": 0,
+        "frame_count": 5,
+        "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\2\\screen\\tasks\\1\\generation\\owners\\0",
+        "stage": "generation",
+        "stderr_bytes": 0,
+        "stdout_bytes": 9613
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "07a31522870aee318d5d7e6d69b1eef65df4f569a3d0aaf66ecb43757d99935b",
+        "elapsed_seconds": 35.222005299991,
+        "exit_code": 0,
+        "frame_count": 5,
+        "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\2\\screen\\tasks\\2\\evaluation\\owners\\1",
+        "stage": "partition",
+        "stderr_bytes": 236,
+        "stdout_bytes": 2342921
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "1b2aec7f326444966640648aae41d8b84e9f27c37fbff4ff0a7334e25eb3bbce",
+        "elapsed_seconds": 99.66308550001122,
+        "exit_code": 0,
+        "frame_count": 13,
+        "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\2\\screen\\tasks\\2\\evaluation\\owners\\2",
+        "stage": "score",
+        "stderr_bytes": 232,
+        "stdout_bytes": 2303594
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "2d45261553b708bb4283c15645807f5993aca41f3f57bcf4a178ffeaca82f13c",
+        "elapsed_seconds": 22.815824300050735,
+        "exit_code": 0,
+        "frame_count": 4,
+        "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\2\\screen\\tasks\\2\\evaluation\\owners\\3",
+        "stage": "summary",
+        "stderr_bytes": 0,
+        "stdout_bytes": 2282583
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "9c43197d53e86a0c11a42a8fc3b6dd4eadb4a9807ed9ac3b283c64e176848d70",
+        "elapsed_seconds": 6.9881539000198245,
+        "exit_code": 0,
+        "frame_count": 5,
+        "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\iterations\\2\\screen\\tasks\\2\\generation\\owners\\0",
+        "stage": "generation",
+        "stderr_bytes": 0,
+        "stdout_bytes": 9403
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "d1e18e2582ee175d36c09415e9eff024ea9403d4dd91070adcd48b0ec73b86a3",
+        "elapsed_seconds": 52.016202999977395,
+        "exit_code": 0,
+        "frame_count": 5,
+        "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\seed\\tasks\\0\\evaluation\\owners\\1",
+        "stage": "partition",
+        "stderr_bytes": 236,
+        "stdout_bytes": 2358949
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "435bb1c70e74b6a24eecee22f51bc743c822701e35bf10678964a6c173f50851",
+        "elapsed_seconds": 88.55010789993685,
+        "exit_code": 0,
+        "frame_count": 14,
+        "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\seed\\tasks\\0\\evaluation\\owners\\2",
+        "stage": "score",
+        "stderr_bytes": 232,
+        "stdout_bytes": 2321492
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "453d12dd743e6a6df669d5ab0bba392e1d8926ac94b0104ab95de27462f72a89",
+        "elapsed_seconds": 27.90852050005924,
+        "exit_code": 0,
+        "frame_count": 4,
+        "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\seed\\tasks\\0\\evaluation\\owners\\3",
+        "stage": "summary",
+        "stderr_bytes": 0,
+        "stdout_bytes": 2287907
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "c2cb1e1dbbccdbfb80dc37957f3a72fb177934d68c444958551d35ac98283b04",
+        "elapsed_seconds": 28.296682400046848,
+        "exit_code": 0,
+        "frame_count": 12,
+        "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\seed\\tasks\\0\\generation\\owners\\0",
+        "stage": "generation",
+        "stderr_bytes": 0,
+        "stdout_bytes": 46183
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "e6ea2e5c5944f2ee20b67ab79e25f7099c9a8a418a4226571e8676abb5e197cf",
+        "elapsed_seconds": 28.4095458999509,
+        "exit_code": 0,
+        "frame_count": 5,
+        "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\seed\\tasks\\1\\evaluation\\owners\\1",
+        "stage": "partition",
+        "stderr_bytes": 236,
+        "stdout_bytes": 2342693
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "73f3d55e2bbe1cacfa26198ac7288ffa82beae2814baa9dfcd7b96c49c82ed70",
+        "elapsed_seconds": 43.48945790005382,
+        "exit_code": 0,
+        "frame_count": 6,
+        "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\seed\\tasks\\1\\evaluation\\owners\\2",
+        "stage": "score",
+        "stderr_bytes": 232,
+        "stdout_bytes": 2288300
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "a78f2d7599902bc26e0cf3cad3680948651de19c9da606eab2b793073e364952",
+        "elapsed_seconds": 23.29776889993809,
+        "exit_code": 0,
+        "frame_count": 4,
+        "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\seed\\tasks\\1\\evaluation\\owners\\3",
+        "stage": "summary",
+        "stderr_bytes": 0,
+        "stdout_bytes": 2282391
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "49615338fd5451c2377d4d22ebbe178bcb6c1ea125c0a6138db54b8baf4659ac",
+        "elapsed_seconds": 17.555122999940068,
+        "exit_code": 0,
+        "frame_count": 12,
+        "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\seed\\tasks\\1\\generation\\owners\\0",
+        "stage": "generation",
+        "stderr_bytes": 0,
+        "stdout_bytes": 18320
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "5e796d90dc73bf6b58f324782e62e1722d089aa692f3fae7cc505de6ec8e527f",
+        "elapsed_seconds": 26.52528339996934,
+        "exit_code": 0,
+        "frame_count": 5,
+        "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\seed\\tasks\\2\\evaluation\\owners\\1",
+        "stage": "partition",
+        "stderr_bytes": 236,
+        "stdout_bytes": 2342925
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "5f02a6a4d144fe5263345c5f09f6d761d678fb02a821e220b2d786a5a01c7f12",
+        "elapsed_seconds": 111.03617269999813,
+        "exit_code": 0,
+        "frame_count": 14,
+        "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\seed\\tasks\\2\\evaluation\\owners\\2",
+        "stage": "score",
+        "stderr_bytes": 232,
+        "stdout_bytes": 2305724
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "182dfe1001ac2d0e214941e5fb1d62b430de79b1d51c3161f323df14ad18e255",
+        "elapsed_seconds": 22.28660549991764,
+        "exit_code": 0,
+        "frame_count": 4,
+        "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\seed\\tasks\\2\\evaluation\\owners\\3",
+        "stage": "summary",
+        "stderr_bytes": 0,
+        "stdout_bytes": 2282587
+      },
+      {
+        "cleanup_status": "removed",
+        "container_id": "e740a088edd31a277e9481a6fde9bc992a29e0b3ce9a0f14a5c5c7e1ee21ea80",
+        "elapsed_seconds": 15.474858599947765,
+        "exit_code": 0,
+        "frame_count": 12,
+        "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1\\seed\\tasks\\2\\generation\\owners\\0",
+        "stage": "generation",
+        "stderr_bytes": 0,
+        "stdout_bytes": 17754
+      }
+    ],
+    "wrapper_failures": "Retained review-tool schema/separator assumptions failed after earlier positive stages; no original execution was repeated or modified. Final v4 reuses the original-inspector pass from v2, rather than invoking that inspector again."
+  },
+  "run_status": "complete",
+  "search": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1",
+  "source_generation_labels": {
+    "child0": "First child",
+    "child1": "Second child",
+    "child2": "Third child",
+    "seed": "Starter"
+  },
+  "source_observations": {
+    "all_sources_parse_as_AST_only": true,
+    "child0_child1_child2_improver_function_text_identical": true,
+    "child1_changes_improver_prompt_constant": true,
+    "child2_improver_function_not_invoked_by_this_bounded_run": true,
+    "first_child_rewrites_improver_function": true,
+    "source_specific_semantic_feedback_prefix_limits": [
+      {
+        "max_prefix_bytes": 64,
+        "proposal": 0,
+        "source_story_bytes": 4052,
+        "supplied_prefix_bytes": 640
+      },
+      {
+        "max_prefix_bytes": 64,
+        "proposal": 1,
+        "source_story_bytes": 4163,
+        "supplied_prefix_bytes": 639
+      },
+      {
+        "max_prefix_bytes": 64,
+        "proposal": 2,
+        "source_story_bytes": 3665,
+        "supplied_prefix_bytes": 640
+      }
+    ],
+    "three_API_source_replies_match_literal_children": true,
+    "three_literal_latest_parent_links": true
+  },
+  "source_runtime": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-full-rehearsal",
+  "source_runtime_commit": "d4b548292b202ac20bad61d5476d5dacf8e938b0"
+}

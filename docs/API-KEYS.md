@@ -19,14 +19,14 @@ stores only a fingerprint; account settings are manual assertions, not
 evidence obtained from the provider API. A new live study needs its own
 reviewed configuration, allocation and command.
 
-## Completed policy comparison and proposed source experiment
+## Completed policy comparison and first source experiment
 
 POL-02 had its own approved **$50 shared cap and 4,096-attempt limit**. It
 completed 960 answers and 192 task assessments with $14.459518 recorded cost
 and zero held. [The results](POLICY-COMPARISON-RESULTS.md) preserve its evidence
 and limitations. That scope is also closed for new work.
 
-The [first source experiment](SOURCE-EXPERIMENT.md) now has its own approved **$25 combined OpenAI/Anthropic cap and 512-attempt limit**, with partial results retained with their reason and stage. Its [prepared local handoff](SOURCE-FIRST-LIVE.md) gives the exact command and both hidden-key prompts. The fresh dedicated authorization has zero attempts, spending and held charges at preparation; this is an allocation, not a completed run. Both accounts use the already confirmed Standard/default processing and public pay-as-you-go prices. Do not reuse a historical command or an unused earlier balance to start source evolution.
+The [first source experiment](SOURCE-FIRST-LIVE-RESULTS.md) completed within its separately approved **$25 combined OpenAI/Anthropic cap and 512-attempt limit**: 170 completed records, $1.158996 spent/committed, zero held and 51 inactive original owners. This scope is closed for new work. The unused $23.841004 and 342 attempts do not authorize another experiment. Recorded costs use the confirmed Standard/default public pay-as-you-go profiles; they are not reconciled invoices. Its [historical handoff](SOURCE-FIRST-LIVE.md) retains the exact command and hidden-key explanation; do not repeat it or reuse an earlier balance for new source evolution.
 
 The new Gateway/source path supports [keyed account reviews](KEYED-REVIEWS.md),
 using the API key already supplied locally; no extra secret is needed. The
