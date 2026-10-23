@@ -7,8 +7,9 @@ import unittest
 from unittest.mock import patch
 
 import test_source_search
+from test_source_mutation_witness import _Harness
 
-from buddha import native_pipeline
+from buddha import candidate_generation, native_pipeline
 from buddha.gateway import execution_identity
 from buddha.releases import _json
 from buddha.source_launch_state import inspect_prepared_search
@@ -30,6 +31,7 @@ class SourceLaunchStateTests(unittest.TestCase):
             "review": h.engine.fixture.review,
             "expected_runtime_sha256": h.engine.candidate.expected_runtime,
             "input_bindings": {},
+            "mutation_witness": getattr(h, "mutation_witness", False),
         }
         before = h.h.files(h.directory), h.authority.path.read_bytes(), h.engine.physical_sends
         with (
@@ -160,6 +162,237 @@ class SourceLaunchStateTests(unittest.TestCase):
         self.assertEqual(h.engine.physical_sends, 2)
         with self.assertRaises(SourceSearchError):
             self.inspect(h)
+
+    def test_witness_policy_requires_the_explicit_original_approval(self):
+        legacy = self.fixture()
+        legacy.prepare()
+        with self.assertRaises(SourceSearchError):
+            self.inspect(legacy, mutation_witness=True)
+        for value in (None, 0, 1, "true"):
+            with self.subTest(value=value), self.assertRaises(SourceSearchError):
+                self.inspect(legacy, mutation_witness=value)
+        witness = _Harness(self)
+        witness.prepare()
+        self.assertEqual(self.inspect(witness.case)["next_role"], "generation")
+        with self.assertRaises(SourceSearchError):
+            self.inspect(witness.case, mutation_witness=False)
+
+    def test_pending_seed_witness_retains_original_owner_and_inactive_stop(self):
+        witness = _Harness(self)
+        witness.witness_callbacks, witness.interrupt_once = 1, True
+        witness.prepare()
+        witness.case.partial(witness.run())
+        owner_path = witness.case.directory / "seed-witness/proposal/owners/0"
+        result = self.inspect(witness.case)
+        self.assertEqual((result["next_owner"], result["next_role"]), (str(owner_path), "proposal"))
+        self.assertFalse(result["inactive_pending"])
+        owner = next(
+            row
+            for row in witness.case.authority.summary()["runs"]
+            if row["directory"] == str(owner_path)
+        )
+        witness.case.authority.deactivate(owner["run_id"], "test-only unfinished witness stop")
+        stopped = self.inspect(witness.case)
+        self.assertTrue(stopped["inactive_pending"])
+        self.assertEqual(stopped["next_owner"], str(owner_path))
+        self.assertFalse((witness.case.directory / "iterations/0").exists())
+
+    def test_sealed_witness_publication_does_not_require_another_paid_attempt(self):
+        witness = _Harness(self)
+        witness.prepare()
+        proposal = witness.case.directory / "seed-witness/proposal"
+        generation = witness.case.directory / "seed-witness/generation"
+        publish = native_pipeline.publish_complete
+
+        def before_publication(path, *args, **kwargs):
+            if path == proposal / "report.json":
+                raise KeyboardInterrupt("synthetic sealed witness publication stop")
+            return publish(path, *args, **kwargs)
+
+        with (
+            patch("buddha.native_pipeline.publish_complete", side_effect=before_publication),
+            self.assertRaises(KeyboardInterrupt),
+        ):
+            witness.run()
+        self.assertTrue((proposal / "completed/0.json").is_file())
+        self.assertFalse((proposal / "report.json").exists())
+        pending_publication = self.inspect(witness.case)
+        self.assertEqual(
+            (pending_publication["next_owner"], pending_publication["next_role"]), (None, None)
+        )
+        self.assertFalse(pending_publication["inactive_pending"])
+        run_generation = candidate_generation.run_candidate_generation
+
+        def before_generation(path, **kwargs):
+            if path == generation:
+                raise KeyboardInterrupt("synthetic original witness generation stop")
+            return run_generation(path, **kwargs)
+
+        with (
+            patch(
+                "buddha.candidate_generation.run_candidate_generation",
+                side_effect=before_generation,
+            ),
+            self.assertRaises(KeyboardInterrupt),
+        ):
+            witness.run()
+        ready = self.inspect(witness.case)
+        self.assertEqual(
+            (ready["next_owner"], ready["next_role"]),
+            (str(generation / "owners/0"), "generation"),
+        )
+        self.assertFalse(ready["inactive_pending"])
+        self.assertFalse((witness.case.directory / "iterations/0").exists())
+
+    def test_current_child_witness_precedes_decision_and_later_parent_selection(self):
+        witness = _Harness(self, iterations=2)
+        witness.prepare()
+        improve = witness.case.execute_improvement
+        owner_path = witness.case.directory / "iterations/0/witness/proposal/owners/0"
+
+        def stop_child_witness(spec, initial, handle, source):
+            if handle.__self__.gateway.directory == owner_path:
+                witness.witness_callbacks, witness.interrupt_once = 1, True
+            return improve(spec, initial, handle, source)
+
+        witness.case.execute_improvement = stop_child_witness
+        witness.case.partial(witness.run())
+        self.assertTrue((witness.case.directory / "iterations/0/screen/report.json").is_file())
+        self.assertFalse((witness.case.directory / "iterations/0/decision.json").exists())
+        result = self.inspect(witness.case)
+        self.assertEqual((result["next_owner"], result["next_role"]), (str(owner_path), "proposal"))
+        self.assertFalse((witness.case.directory / "iterations/1").exists())
+
+    def test_failed_seed_witness_has_no_later_paid_hint_before_final_publication(self):
+        witness = _Harness(self)
+        witness.modes[witness.case.seed.candidate_id] = "agent_error"
+        witness.prepare()
+        publish = native_pipeline.publish_complete
+
+        def before_publication(path, *args, **kwargs):
+            if path == witness.case.directory / "report.json":
+                raise KeyboardInterrupt("synthetic no-parent final publication stop")
+            return publish(path, *args, **kwargs)
+
+        with (
+            patch("buddha.native_pipeline.publish_complete", side_effect=before_publication),
+            self.assertRaises(KeyboardInterrupt),
+        ):
+            witness.run()
+        self.assertTrue((witness.case.directory / "seed-witness/report.json").is_file())
+        self.assertFalse((witness.case.directory / "report.json").exists())
+        result = self.inspect(witness.case)
+        self.assertEqual((result["next_owner"], result["next_role"]), (None, None))
+        self.assertFalse(result["inactive_pending"])
+        self.assertFalse((witness.case.directory / "iterations/0").exists())
+        sends = witness.case.engine.physical_sends
+        completed = witness.run()
+        self.assertEqual(
+            (completed["status"], completed["reason"]), ("complete", "no_parent_eligible")
+        )
+        ready = self.inspect(witness.case)
+        self.assertEqual((ready["state"], ready["reason"]), ("complete", "no_parent_eligible"))
+        self.assertEqual(witness.case.engine.physical_sends, sends)
+
+    def test_retained_witness_owner_keeps_its_exact_allocation_and_funded_manifest(self):
+        from buddha import candidate_improvement
+        from buddha.source_search import SourceSearchInterrupted
+
+        def check(mode):
+            witness = _Harness(self)
+            case = witness.case
+            witness.prepare()
+            proposal = case.directory / "seed-witness/proposal"
+            owner_path = proposal / "owners/0"
+            prepare = candidate_improvement.prepare_candidate_improvement
+            prepared = []
+
+            def pause_after_original_prepare(path, **kwargs):
+                if path != proposal:
+                    return prepare(path, **kwargs)
+                if mode == "wrong_allocation":
+                    kwargs["budget_microusd"] += 1
+                result = prepare(path, **kwargs)
+                prepared.append(result)
+                raise KeyboardInterrupt("synthetic original witness preparation stop")
+
+            with (
+                patch(
+                    "buddha.candidate_improvement.prepare_candidate_improvement",
+                    side_effect=pause_after_original_prepare,
+                ),
+                self.assertRaises(SourceSearchInterrupted) as stopped,
+            ):
+                witness.run()
+            self.assertEqual(prepared, [proposal])
+            self.assertEqual(stopped.exception.partial["stage"], "witness_proposal")
+            self.assertTrue((owner_path / "manifest.json").is_file())
+            self.assertFalse((proposal / "report.json").exists())
+            self.assertFalse((case.directory / "iterations/0").exists())
+            self.assertEqual(witness.improvements, [])
+            # The real lower helper created a coherent original owner and
+            # funding binding; no financial record or manifest was edited.
+            execution_identity(owner_path)
+            manifest = json.loads((owner_path / "manifest.json").read_bytes())
+            if mode == "wrong_allocation":
+                self.assertEqual(
+                    manifest["settings"]["budget_microusd"],
+                    case.template["budget_microusd"] + 1,
+                )
+                reason = "prepared owner changes its original treatment"
+            else:
+                # Positive control: the correctly prepared original owner
+                # is accepted before only its temporary files are moved.
+                ready = self.inspect(case)
+                self.assertEqual(
+                    (ready["next_owner"], ready["next_role"]),
+                    (str(owner_path), "proposal"),
+                )
+                backup = case.root / "original-witness-owner-preserved"
+                owner_path.rename(backup)
+                self.assertTrue((backup / "manifest.json").is_file())
+                self.assertTrue(
+                    any(
+                        row["directory"] == str(owner_path)
+                        for row in case.authority.summary()["runs"]
+                    )
+                )
+                reason = "a retained funded search owner is missing or replaced"
+            before = (
+                case.h.files(case.directory),
+                case.authority.path.read_bytes(),
+                case.engine.physical_sends,
+                case.engine.workers,
+            )
+            with self.assertRaisesRegex(SourceSearchError, reason):
+                self.inspect(case)
+
+            def forbidden_worker(*args, **kwargs):
+                raise AssertionError("retained witness failure reached a worker")
+
+            case.execute = forbidden_worker
+            with (
+                patch(
+                    "buddha.gateway.RawHTTPTransport.send_prepared",
+                    side_effect=AssertionError("retained witness failure reached a send"),
+                ) as send,
+                self.assertRaisesRegex(SourceSearchError, reason),
+            ):
+                case.run_search()
+            send.assert_not_called()
+            self.assertEqual(
+                (
+                    case.h.files(case.directory),
+                    case.authority.path.read_bytes(),
+                    case.engine.physical_sends,
+                    case.engine.workers,
+                ),
+                before,
+            )
+
+        for mode in ("wrong_allocation", "missing_owner"):
+            with self.subTest(mode=mode):
+                check(mode)
 
 
 if __name__ == "__main__":

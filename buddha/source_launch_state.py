@@ -6,14 +6,12 @@ spend. The launcher separately binds approval, grant membership and live scope.
 
 import hashlib
 import re
-import stat
 from pathlib import Path
 from typing import Any, cast
 
 from buddha import (
     candidate_generation,
     candidate_improvement,
-    gateway,
     source_screen,
     source_search,
 )
@@ -54,78 +52,14 @@ def _owner(
     *,
     no_model: bool = False,
 ) -> None:
-    owner = reader.owner(path)
-    expected = {
-        "selection": section["selection"],
-        "roots": section["roots"],
-        "review": state["record"]["review"],
-        "authorization_path": str(reader.authorization),
-        "settings": {
-            "budget_microusd": 1 if no_model else section["budget_microusd"],
-            "max_calls": 1 if no_model else section["max_calls"],
-        },
-    }
-    if any(_json(owner.manifest[name]) != _json(value) for name, value in expected.items()):
-        raise source_search.SourceSearchError("prepared owner changes its original treatment")
-    bindings = reader._bindings(owner)
-    if any(bindings.get(str(path)) != digest for path, digest in controls.items()):
-        raise source_search.SourceSearchError("prepared owner omits an original input")
-    gateway.execution_identity(path, owner.manifest)
-    funded = [row for row in state["funding"]["auth_runs"] if row["run_id"] == owner.run_id]
-    if (
-        len(funded) != 1
-        or type(funded[0]["historical"]) is not int
-        or funded[0]["historical"] != 0
-        or funded[0]["runtime_sha256"] != owner.manifest["execution_sha256"]
-    ):
-        raise source_search.SourceSearchError("prepared owner changes its original runtime")
+    source_search._stage_owner(
+        reader, state, path, section, controls, no_model=no_model, verify_files=True
+    )
     state["checked_owners"].add(path)
 
 
 def _seal(reader: NativeEvidence, state: dict[str, Any], path: Path, *, role: str) -> bool:
-    owner = reader.owner(path)
-    child, index = path.parent.parent, int(path.name)
-    sealed = child / "completed" / (str(index) + ".json")
-    anchors = [
-        row["reason"]
-        for row in state["funding"]["auth_deactivations"]
-        if row["run_id"] == owner.run_id
-    ]
-    if not _present(reader, sealed):
-        state["inactive_pending"] |= bool(anchors)
-        return False
-    raw = reader.raw(sealed)
-    seal = _object(_load(raw), {"format", "index", "owner_sha256", "attempt", "files"})
-    formats = {
-        "generation": (candidate_generation.SEAL_FORMAT_V2, candidate_generation.ANCHOR_PREFIX_V2),
-        "proposal": (candidate_improvement.SEAL_FORMAT, candidate_improvement.ANCHOR_PREFIX),
-        "native": ("buddha.native-evaluation-stage.v1", "native evaluation completed: "),
-    }
-    kind, prefix = formats[role]
-    relative = _path(seal["attempt"])
-    if (
-        seal["format"] != kind
-        or type(seal["index"]) is not int
-        or seal["index"] != index
-        or seal["owner_sha256"] != owner.manifest_sha256
-        or not re.fullmatch(rf"attempts/{index}-(?:0|[1-9][0-9]*)", relative)
-        or anchors != [prefix + _sha(raw)]
-        or any(op.status != "completed" for op in owner.operations)
-    ):
-        raise source_search.SourceSearchError("prepared completion lacks its original anchor")
-    attempt = child / relative
-    files = _object(seal["files"])
-    prefix_path = attempt.relative_to(reader.root).as_posix() + "/"
-    actual = {
-        name.removeprefix(prefix_path)
-        for name in reader.capture.entries
-        if name.startswith(prefix_path) and stat.S_ISREG((reader.root / name).lstat().st_mode)
-    }
-    if set(files) != actual or "report.json" not in files:
-        raise source_search.SourceSearchError("prepared completion inventory differs")
-    for name, digest in files.items():
-        reader.raw(attempt / _path(name), _digest(digest))
-    return True
+    return source_search._stage_seal(reader, state, path, role=role)
 
 
 def _screen(
@@ -316,6 +250,27 @@ def _screen(
     return next_owner, next_role
 
 
+def _after_screen(
+    reader: NativeEvidence,
+    state: dict[str, Any],
+    directory: Path,
+    next_owner: Path | None,
+    next_role: str | None,
+) -> tuple[Path | None, str | None, bool]:
+    if next_role is not None:
+        return next_owner, next_role, False
+    if not _present(reader, directory / "report.json"):
+        # Sealed lower stages can still need original local publication.
+        return None, None, False
+    report = reader.record(directory / "report.json")
+    if _object(report["admission"])["eligible"] is not True:
+        return None, None, True
+    progress = state["mutation_progress"].get(str(directory))
+    if progress is None:
+        raise source_search.SourceSearchError("eligible screen lacks its mutation witness state")
+    return progress["next_owner"], progress["next_role"], progress["result"] is not None
+
+
 @source_search._checked
 def inspect_prepared_search(
     directory: Path,
@@ -327,6 +282,7 @@ def inspect_prepared_search(
     review: dict[str, object],
     expected_runtime_sha256: str,
     input_bindings: dict[Path, str],
+    mutation_witness: bool = False,
 ) -> dict[str, object]:
     """Check retained execution custody without keys or writable owner objects."""
     if (
@@ -335,6 +291,7 @@ def inspect_prepared_search(
         or type(seed_screen) is not source_screen.SourceScreen
         or type(spec) is not source_search.SourceSearchSpec
         or type(input_bindings) is not dict
+        or type(mutation_witness) is not bool
     ):
         raise source_search.SourceSearchError("prepared custody needs explicit Paths")
     reader = NativeEvidence(directory, authorization, error_type=source_search.SourceSearchError)
@@ -364,16 +321,40 @@ def inspect_prepared_search(
     }
     if any(_json(state["record"][name]) != _json(value) for name, value in expected.items()):
         raise source_search.SourceSearchError("original search differs from its approved launch")
+    if mutation_witness:
+        if state["record"]["format"] != source_search._WITNESS_MANIFEST or _json(
+            state["record"].get("mutation_witness")
+        ) != _json(source_search.MUTATION_WITNESS_POLICY):
+            raise source_search.SourceSearchError("approved search requires its mutation witness")
+        for path, treatment in state["witness_treatments"].items():
+            _owner(reader, state, path, treatment["section"], treatment["controls"])
+        for progress in state["mutation_progress"].values():
+            state["inactive_pending"] |= progress["inactive_pending"]
+    elif (
+        state["record"]["format"]
+        not in {
+            source_search._LEGACY_MANIFEST,
+            source_search._FULL_MANIFEST,
+        }
+        or "mutation_witness" in state["record"]
+    ):
+        raise source_search.SourceSearchError("approved legacy search changes its witness policy")
     next_owner, next_role = _screen(reader, state, directory / "seed", seed_screen)
+    can_advance = True
+    if mutation_witness:
+        next_owner, next_role, can_advance = _after_screen(
+            reader, state, directory / "seed", next_owner, next_role
+        )
+        can_advance &= not state.get("seed_parent_ineligible", False)
     for iteration in range(state["spec"]["iterations"]):
         location = directory / "iterations" / str(iteration)
         if not _present(reader, location / "plan.json"):
-            if next_owner is None and not state.get("seed_ineligible"):
+            if next_owner is None and can_advance and not state.get("seed_ineligible"):
                 next_owner, next_role = location / "proposal/owners/0", "proposal"
             break
         plan = cast(dict[str, Any], _load(reader.raw(location / "plan.json")))
         if not _present(reader, location / "proposal"):
-            if next_owner is None:
+            if next_owner is None and can_advance:
                 next_owner, next_role = location / "proposal/owners/0", "proposal"
             continue
         parent = source_screen.SourceScreen.from_bytes(
@@ -402,7 +383,7 @@ def inspect_prepared_search(
             | {proposal / "context.json": pipeline._sha(context)},
         )
         if not _seal(reader, state, owner_path, role="proposal"):
-            if next_owner is None:
+            if next_owner is None and can_advance:
                 next_owner, next_role = owner_path, "proposal"
             continue
         if iteration < len(state["decisions"]):
@@ -420,12 +401,16 @@ def inspect_prepared_search(
         if observed["disposition"] == "materialized" and _present(reader, location / "screen"):
             screen = source_search._child_screen(state, observed)
             pending, role = _screen(reader, state, location / "screen", screen)
+            if mutation_witness:
+                pending, role, can_advance = _after_screen(
+                    reader, state, location / "screen", pending, role
+                )
             if next_owner is None:
                 next_owner, next_role = pending, role
         elif observed["disposition"] == "materialized" and (
             _object(observed["child"])["agent_sha256"] not in state["known_ids"]
         ):
-            if next_owner is None:
+            if next_owner is None and can_advance:
                 next_owner, next_role = (
                     location / "screen/tasks/0/generation/owners/0",
                     "generation",
@@ -436,12 +421,15 @@ def inspect_prepared_search(
         if re.search(r"/owners/[^/]+$", name) and reader.root / name not in state["checked_owners"]:
             raise source_search.SourceSearchError("prepared owner lacks its original manifest")
     complete = _present(reader, directory / "report.json")
+    completion_reason = {}
     if complete:
-        source_search.inspect_source_search(
+        report = source_search.inspect_source_search(
             directory,
             authorization=authorization,
             expected_report_sha256=_sha(reader.raw(directory / "report.json")),
         )
+        if mutation_witness and report["reason"] == "no_parent_eligible":
+            completion_reason["reason"] = "no_parent_eligible"
         next_owner, next_role = None, None
     digests = reader.capture.finish()
     return {
@@ -454,4 +442,4 @@ def inspect_prepared_search(
         "next_owner": None if next_owner is None else str(next_owner),
         "next_role": next_role,
         "state_sha256": pipeline._sha({"files": digests, "entries": reader.capture.entries}),
-    }
+    } | completion_reason

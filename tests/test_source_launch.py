@@ -16,6 +16,12 @@ import test_source_search as search_fixtures
 from buddha.gateway import RawHTTPTransport
 from buddha.releases import _json
 
+WITNESS_POLICY = {
+    "format": "buddha.source-mutation-witness.v1",
+    "task_policy": "first_ordered_development_task",
+    "depth": 1,
+}
+
 
 def sha(raw):
     return hashlib.sha256(raw).hexdigest()
@@ -38,6 +44,19 @@ class SourcePublicResultTests(unittest.TestCase):
                 self.assertEqual(_public_result(record), record)
         with self.assertRaises(SourceLaunchError):
             _public_result(record | {"reason": "UNTRUSTED-RAW-ERROR"})
+
+    def test_no_eligible_parent_is_explicit_without_changing_old_completion_receipts(self):
+        from buddha.source_launch import _public_result
+
+        self.assertEqual(_public_result({"status": "complete"}), {"status": "complete"})
+        self.assertEqual(
+            _public_result({"status": "complete", "reason": "bounded_iterations_complete"}),
+            {"status": "complete"},
+        )
+        self.assertEqual(
+            _public_result({"status": "complete", "reason": "no_parent_eligible"}),
+            {"status": "complete", "reason": "no_parent_eligible"},
+        )
 
 
 class SourceInterruptionTests(unittest.TestCase):
@@ -153,6 +172,15 @@ class SourceLaunchTests(unittest.TestCase):
         self.record["approval"] = self.reference(self.approval_path)
         self.launch_path.write_bytes(_json(self.record))
         return sha(self.launch_path.read_bytes())
+
+    def witness_handoff(self):
+        self.proposal.update(
+            format="buddha.source-handoff.v2", mutation_witness=copy.deepcopy(WITNESS_POLICY)
+        )
+        self.proposal_path.write_bytes(_json(self.proposal))
+        self.proposal_sha = sha(self.proposal_path.read_bytes())
+        self.approval["proposal_sha256"] = self.proposal_sha
+        self.record["proposal"] = self.reference(self.proposal_path)
 
     def snapshot(self):
         return {
@@ -500,6 +528,108 @@ class SourceLaunchTests(unittest.TestCase):
         after = self.f.authority.summary()
         for field in ("operation_count", "spent_microusd", "reserved_microusd", "runs"):
             self.assertEqual(after[field], summary[field])
+
+    def test_witness_handoff_check_uses_existing_approval_and_launch_schema(self):
+        self.witness_handoff()
+        pin = self.save()
+        before = self.snapshot()
+        with self.passive():
+            checked = self.api.check_launch(self.launch_path, expected_sha256=pin)
+        self.assertEqual(checked["state"], "fresh")
+        self.assertEqual(checked["proposal"]["format"], "buddha.source-handoff.v2")
+        self.assertEqual(checked["proposal"]["mutation_witness"], WITNESS_POLICY)
+        self.assertEqual(checked["bindings"][str(self.proposal_path)], self.proposal_sha)
+        self.assertEqual(self.record["format"], "buddha.source-launch.v1")
+        self.assertEqual(self.approval["format"], "buddha.source-approval.v1")
+        self.assertEqual(self.snapshot(), before)
+
+    def test_planned_witness_owners_are_exact_siblings_and_legacy_default_is_unchanged(self):
+        directory, seed, iterations = self.f.directory, self.f.seed, 3
+        legacy = self.api._planned_owners(directory, seed, iterations)
+        self.assertEqual(
+            self.api._planned_owners(directory, seed, iterations, mutation_witness=False), legacy
+        )
+        witnessed = self.api._planned_owners(directory, seed, iterations, mutation_witness=True)
+        locations = [directory / "seed-witness"] + [
+            directory / "iterations" / str(i) / "witness" for i in range(iterations)
+        ]
+        extra = {
+            path / role / "owners/0" for path in locations for role in ("proposal", "generation")
+        }
+        self.assertEqual(witnessed, legacy | extra)
+        self.assertEqual(len(witnessed) - len(legacy), 8)
+        stages = len(seed.to_record()["stages"])
+        self.assertEqual(len(legacy), 4 * len(seed.tasks.tasks) * (1 + stages) + 3)
+        self.assertFalse(any("screen/witness" in path.as_posix() for path in witnessed))
+        for value in (None, 0, 1, "true"):
+            with self.subTest(value=value), self.assertRaises(self.Error):
+                self.api._planned_owners(directory, seed, iterations, mutation_witness=value)
+
+    def test_new_handoff_rejoins_actual_required_preparation_before_execution(self):
+        from buddha import source_launch_state, source_search
+
+        self.witness_handoff()
+        pin = self.save()
+        with (
+            patch(
+                "buddha.source_search.prepare_source_search",
+                wraps=source_search.prepare_source_search,
+            ) as prepared,
+            patch(
+                "buddha.source_launch_state.inspect_prepared_search",
+                wraps=source_launch_state.inspect_prepared_search,
+            ) as inspected,
+            patch("buddha.source_search.run_source_search", side_effect=KeyboardInterrupt) as run,
+            self.assertRaises(KeyboardInterrupt),
+        ):
+            self.run_launch(pin)
+        self.assertIs(prepared.call_args.kwargs["mutation_witness"], True)
+        self.assertIs(inspected.call_args.kwargs["mutation_witness"], True)
+        run.assert_called_once()
+        manifest = json.loads((self.f.directory / "manifest.json").read_bytes())
+        self.assertEqual(manifest["format"], "buddha.source-search-manifest.v3")
+        self.assertEqual(manifest["mutation_witness"], WITNESS_POLICY)
+        self.assertEqual(self.f.engine.physical_sends, 0)
+        before = self.snapshot()
+        with self.passive():
+            checked = self.api.check_launch(self.launch_path, expected_sha256=pin)
+        self.assertEqual(checked["state"], "prepared")
+        self.assertEqual(self.snapshot(), before)
+
+    def test_new_handoff_cannot_dispatch_coherently_prepared_task_only_downgrade(self):
+        from buddha import source_search
+
+        self.witness_handoff()
+        pin = self.save()
+        original = source_search.prepare_source_search
+
+        def downgrade(*args, **kwargs):
+            self.assertIs(kwargs["mutation_witness"], True)
+            kwargs["mutation_witness"] = False
+            return original(*args, **kwargs)
+
+        with (
+            patch("buddha.source_search.prepare_source_search", side_effect=downgrade),
+            patch(
+                "buddha.source_search.run_source_search",
+                side_effect=AssertionError("no execution of downgraded preparation"),
+            ) as run,
+            self.assertRaises(self.Error),
+        ):
+            self.run_launch(pin)
+        run.assert_not_called()
+        self.assertEqual(self.f.engine.physical_sends, 0)
+        self.assertTrue(
+            (self.f.directory / "seed/tasks/0/generation/owners/0/manifest.json").is_file()
+        )
+        manifest = json.loads((self.f.directory / "manifest.json").read_bytes())
+        self.assertEqual(manifest["format"], "buddha.source-search-manifest.v2")
+        self.assertNotIn("mutation_witness", manifest)
+        self.assertEqual(self.f.authority.summary()["operation_count"], 0)
+        before = self.snapshot()
+        with self.passive(), self.assertRaises(self.Error):
+            self.api.check_launch(self.launch_path, expected_sha256=pin)
+        self.assertEqual(self.snapshot(), before)
 
 
 if __name__ == "__main__":

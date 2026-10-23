@@ -20,6 +20,16 @@ def _sources() -> list[Path]:
     return list(dict.fromkeys([*source_search._sources(), Path(__file__).absolute()]))
 
 
+def _mutation_witness(record: dict[str, object]) -> bool:
+    if record["format"] == "buddha.source-handoff.v1":
+        return False
+    if record["format"] == "buddha.source-handoff.v2" and _json(
+        record["mutation_witness"]
+    ) == _json(source_search.MUTATION_WITNESS_POLICY):
+        return True
+    raise SourceHandoffError("unsupported source proposal or fixed mutation-witness policy")
+
+
 def check_source_handoff(path: Path, *, expected_sha256: str) -> dict[str, object]:
     """Check a new initial source experiment, without keys, databases or execution.
 
@@ -34,8 +44,10 @@ def check_source_handoff(path: Path, *, expected_sha256: str) -> dict[str, objec
         path = pipeline._absolute(str(path.absolute()))
         expected_sha256 = _digest(expected_sha256)
         raw = pipeline._read(path, expected_sha256)
+        record = _load(raw)
+        mutation_witness = _mutation_witness(record)
         record = _object(
-            _load(raw),
+            record,
             {
                 "format",
                 "seed_screen",
@@ -44,10 +56,9 @@ def check_source_handoff(path: Path, *, expected_sha256: str) -> dict[str, objec
                 "expected_runtime_sha256",
                 "source_sha256",
                 "requested_terms",
-            },
+            }
+            | ({"mutation_witness"} if mutation_witness else set()),
         )
-        if record["format"] != "buddha.source-handoff.v1":
-            raise SourceHandoffError("unsupported unallocated source proposal")
         pins = _object(record["source_sha256"])
         if not 1 <= len(pins) <= 1023:
             raise SourceHandoffError("source controls exceed the existing preparation boundary")
@@ -97,8 +108,10 @@ def check_source_handoff(path: Path, *, expected_sha256: str) -> dict[str, objec
         tasks = screen.tasks.tasks
         maximum_screens = cast(int, spec.to_record()["iterations"]) + 1
         stages = cast(list[object], seed["stages"])
-        result = {
-            "format": "buddha.source-handoff-check.v1",
+        result: dict[str, object] = {
+            "format": "buddha.source-handoff-check.v2"
+            if mutation_witness
+            else "buddha.source-handoff-check.v1",
             "status": "configuration_checked",
             "seed_screen_sha256": screen.fingerprint(),
             "candidate_id": screen.candidate_id,
@@ -109,7 +122,8 @@ def check_source_handoff(path: Path, *, expected_sha256: str) -> dict[str, objec
                 "maximum_candidate_screens": maximum_screens,
                 "maximum_stage_owners": maximum_screens * len(tasks) * (1 + len(stages))
                 + maximum_screens
-                - 1,
+                - 1
+                + (2 * maximum_screens if mutation_witness else 0),
             },
             "requested_terms": terms,
             "funding": {
@@ -122,9 +136,16 @@ def check_source_handoff(path: Path, *, expected_sha256: str) -> dict[str, objec
                 "Selected image records do not prove a locally running or available runtime.",
                 "Profile bounds do not verify current prices, token capacity or account access.",
                 "Stage-owner ceiling excludes recovery attempts; it is not an API-call estimate.",
-                "No mutation-competence gate, semantic review or scientific improvement claim.",
+                "Requires one bounded witness per task-eligible parent; no useful mutation, "
+                "general competence, semantic review or scientific improvement claim."
+                if mutation_witness
+                else (
+                    "No mutation-competence gate, semantic review or scientific improvement claim."
+                ),
             ],
         }
+        if mutation_witness:
+            result["mutation_witness"] = record["mutation_witness"]
         return _load(_json(result))
     except (ValueError, TypeError, KeyError, OSError, RecursionError):
         raise SourceHandoffError(

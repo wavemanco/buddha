@@ -106,19 +106,35 @@ def _specs(
 
 
 def _planned_owners(
-    directory: Path, seed: source_screen.SourceScreen, iterations: int
+    directory: Path,
+    seed: source_screen.SourceScreen,
+    iterations: int,
+    *,
+    mutation_witness: bool = False,
 ) -> set[Path]:
+    if type(mutation_witness) is not bool:
+        raise SourceLaunchError("mutation witness must be an explicit boolean")
     screens = [directory / "seed"] + [
         directory / "iterations" / str(i) / "screen" for i in range(iterations)
     ]
     stages = len(cast(list[object], seed.to_record()["stages"]))
-    return {
+    owners = {
         screen / "tasks" / str(i) / role / "owners" / str(j)
         for screen in screens
         for i in range(len(seed.tasks.tasks))
         for role, ordinals in (("generation", range(1)), ("evaluation", range(1, stages + 1)))
         for j in ordinals
     } | {directory / "iterations" / str(i) / "proposal/owners/0" for i in range(iterations)}
+    if mutation_witness:
+        witnesses = [directory / "seed-witness"] + [
+            directory / "iterations" / str(i) / "witness" for i in range(iterations)
+        ]
+        owners |= {
+            witness / role / "owners/0"
+            for witness in witnesses
+            for role in ("proposal", "generation")
+        }
+    return owners
 
 
 def check_launch(path: Path, *, expected_sha256: str) -> dict[str, object]:
@@ -163,6 +179,7 @@ def check_launch(path: Path, *, expected_sha256: str) -> dict[str, object]:
         checked = source_handoff.check_source_handoff(
             proposal_path, expected_sha256=bindings[str(proposal_path)]
         )
+        mutation_witness = source_handoff._mutation_witness(proposal)
         for name, digest in _object(checked["reviewed_bindings"]).items():
             expected = _digest(digest)
             if name in bindings and bindings[name] != expected:
@@ -239,7 +256,12 @@ def check_launch(path: Path, *, expected_sha256: str) -> dict[str, object]:
             raise SourceLaunchError(
                 "review overlaps search, selected components or original controls"
             )
-        planned = _planned_owners(directory, seed, cast(int, spec.to_record()["iterations"]))
+        planned = _planned_owners(
+            directory,
+            seed,
+            cast(int, spec.to_record()["iterations"]),
+            mutation_witness=mutation_witness,
+        )
         runs, operations = _rows(funding["auth_runs"]), _rows(funding["auth_operations"])
         if any(_path(row["directory"]) not in planned for row in runs):
             raise SourceLaunchError("dedicated allocation contains another destination or owner")
@@ -288,6 +310,7 @@ def check_launch(path: Path, *, expected_sha256: str) -> dict[str, object]:
                 review=review,
                 expected_runtime_sha256=_digest(proposal["expected_runtime_sha256"]),
                 input_bindings={Path(name): digest for name, digest in bindings.items()},
+                mutation_witness=mutation_witness,
             )
         elif review_path.exists() or review_path.is_symlink() or runs or totals["operation_count"]:
             raise SourceLaunchError("partial preparation or retained work cannot be replaced")
@@ -357,7 +380,7 @@ def check_launch(path: Path, *, expected_sha256: str) -> dict[str, object]:
             if file_hash(Path(name), max_bytes=256 * 1024**2) != digest:
                 raise SourceLaunchError("approved launch control changed during checking")
         common._finish_snapshot(authority_path, authority_raw, error=SourceLaunchError)
-        return {
+        result = {
             "format": "buddha.source-launch-check.v1",
             "state": retained["state"],
             "stop_code": stop,
@@ -386,6 +409,9 @@ def check_launch(path: Path, *, expected_sha256: str) -> dict[str, object]:
             "claim": "passive identity/funding checks; "
             "no account authentication or completion-cost guarantee",
         }
+        if mutation_witness and retained.get("reason") == "no_parent_eligible":
+            result["reason"] = "no_parent_eligible"
+        return result
     except (
         ValueError,
         TypeError,
@@ -417,7 +443,11 @@ class _Profiles:
 
 def _public_result(result: dict[str, object]) -> dict[str, object]:
     if result.get("status") == "complete":
-        return {"status": "complete"}
+        return (
+            {"status": "complete", "reason": "no_parent_eligible"}
+            if result.get("reason") == "no_parent_eligible"
+            else {"status": "complete"}
+        )
     from buddha.releases import _path as relative_path
 
     observation = relative_path(result["observation"])
@@ -496,6 +526,8 @@ def launch(
                 raise SourceLaunchError("receipt overlaps original controls or output")
             if checked["state"] == "complete" and checked["stop_code"] is None:
                 public.update(status="complete", phase="complete")
+                if checked.get("reason") == "no_parent_eligible":
+                    public["reason"] = "no_parent_eligible"
                 return public
             if checked["stop_code"] is not None:
                 public.update(status="stopped", phase="funding", reason=checked["stop_code"])
@@ -555,6 +587,7 @@ def launch(
                     }
                     pins[review_path] = hashlib.sha256(review_raw).hexdigest()
                     proposal = _object(checked["proposal"])
+                    mutation_witness = source_handoff._mutation_witness(proposal)
                     phase[0] = "preparing"
                     source_search.prepare_source_search(
                         _path(checked["directory"]),
@@ -567,6 +600,20 @@ def launch(
                         review=review,
                         expected_runtime_sha256=_digest(proposal["expected_runtime_sha256"]),
                         input_bindings=pins,
+                        mutation_witness=mutation_witness,
+                    )
+                    source_launch_state.inspect_prepared_search(
+                        _path(checked["directory"]),
+                        authority.path,
+                        seed_screen=source_screen.SourceScreen.from_bytes(
+                            _json(proposal["seed_screen"])
+                        ),
+                        proposal_template=_object(proposal["proposal_template"]),
+                        spec=source_search.SourceSearchSpec.from_bytes(_json(proposal["spec"])),
+                        review=review,
+                        expected_runtime_sha256=_digest(proposal["expected_runtime_sha256"]),
+                        input_bindings=pins,
+                        mutation_witness=mutation_witness,
                     )
                 phase[0] = "executing"
                 common._emit(

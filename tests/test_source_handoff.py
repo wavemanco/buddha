@@ -11,6 +11,12 @@ import test_source_screen as screen_fixtures
 
 from buddha.releases import _json
 
+WITNESS_POLICY = {
+    "format": "buddha.source-mutation-witness.v1",
+    "task_policy": "first_ordered_development_task",
+    "depth": 1,
+}
+
 
 def sha(raw):
     return hashlib.sha256(raw).hexdigest()
@@ -246,6 +252,85 @@ class SourceHandoffTests(unittest.TestCase):
         expected = self.write(values)
         with self.assertRaises(self.Error):
             self.check(self.path, expected_sha256=expected)
+
+    def test_witness_proposal_is_keyless_fixed_and_adds_only_two_owners_per_candidate(self):
+        legacy_pin = self.write()
+        legacy = self.check(self.path, expected_sha256=legacy_pin)
+        self.assertEqual(legacy["format"], "buddha.source-handoff-check.v1")
+        self.assertEqual(legacy["planned"]["maximum_stage_owners"], 26)
+        self.assertNotIn("mutation_witness", legacy)
+        values = self.record | {
+            "format": "buddha.source-handoff.v2",
+            "mutation_witness": copy.deepcopy(WITNESS_POLICY),
+        }
+        pin = self.write(values)
+        before = self.snapshot()
+        with (
+            patch.dict(os.environ, {}, clear=True),
+            patch("sqlite3.connect", side_effect=AssertionError("no database access")),
+            patch("http.client.HTTPSConnection", side_effect=AssertionError("no provider")),
+            patch("buddha.executor.run_container", side_effect=AssertionError("no worker")),
+            patch(
+                "buddha.authorization.Authorization.create", side_effect=AssertionError("no grant")
+            ),
+            patch(
+                "buddha.source_search.prepare_source_search", side_effect=AssertionError("no owner")
+            ),
+        ):
+            checked = self.check(self.path, expected_sha256=pin)
+        self.assertEqual(self.snapshot(), before)
+        self.assertEqual(checked["format"], "buddha.source-handoff-check.v2")
+        self.assertEqual(checked["mutation_witness"], WITNESS_POLICY)
+        self.assertEqual(checked["planned"]["maximum_stage_owners"], 32)
+        self.assertEqual(checked["planned"]["task_ids"], ["1", 1])
+        self.assertEqual(checked["planned"]["maximum_candidate_screens"], 3)
+        self.assertEqual(checked["funding"], legacy["funding"])
+        self.assertEqual(checked["requested_terms"], legacy["requested_terms"])
+        checked["mutation_witness"]["depth"] = 99
+        self.assertEqual(
+            self.check(self.path, expected_sha256=pin)["mutation_witness"], WITNESS_POLICY
+        )
+        self.assertEqual(self.write(), legacy_pin)
+        self.assertEqual(_json(self.check(self.path, expected_sha256=legacy_pin)), _json(legacy))
+
+    def test_witness_policy_cannot_change_type_depth_task_or_closed_fields(self):
+        policies = [
+            None,
+            False,
+            {key: value for key, value in WITNESS_POLICY.items() if key != "depth"},
+            WITNESS_POLICY | {"depth": True},
+            WITNESS_POLICY | {"depth": 1.0},
+            WITNESS_POLICY | {"depth": 0},
+            WITNESS_POLICY | {"depth": 2},
+            WITNESS_POLICY | {"task_policy": "caller_selected_task"},
+            WITNESS_POLICY | {"format": "buddha.source-mutation-witness.v2"},
+            WITNESS_POLICY | {"optional": False},
+        ]
+        for policy in policies:
+            with self.subTest(policy=policy):
+                values = self.record | {
+                    "format": "buddha.source-handoff.v2",
+                    "mutation_witness": policy,
+                }
+                pin = self.write(values)
+                before = self.snapshot()
+                with self.assertRaises(self.Error):
+                    self.check(self.path, expected_sha256=pin)
+                self.assertEqual(self.snapshot(), before)
+
+    def test_handoff_version_cannot_omit_or_optionally_enable_the_fixed_policy(self):
+        for values in (
+            self.record | {"format": "buddha.source-handoff.v2"},
+            self.record | {"mutation_witness": WITNESS_POLICY},
+            self.record
+            | {"format": "buddha.source-handoff.v3", "mutation_witness": WITNESS_POLICY},
+        ):
+            with self.subTest(format=values["format"]):
+                pin = self.write(values)
+                before = self.snapshot()
+                with self.assertRaises(self.Error):
+                    self.check(self.path, expected_sha256=pin)
+                self.assertEqual(self.snapshot(), before)
 
 
 if __name__ == "__main__":

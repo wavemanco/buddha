@@ -78,7 +78,7 @@ The generic improvement interface still permits caller-reviewed notes. It does
 not automatically require this bridge or validate an arbitrary note as an
 official measurement. The bridge verifies the extraction when it builds the
 packet; the caller's original input bindings must then prevent edits before
-execution. The existing source controller enforces that connection for each original proposal owner. New source-search manifest v2 selects complete-output extraction; manifest v1 fixes historical prefix extraction even when reconstructing an iteration before its packet exists.
+execution. The existing source controller enforces that connection for each original proposal owner. New source-search manifests v2/v3 select complete-output extraction; manifest v1 fixes historical prefix extraction even when reconstructing an iteration before its packet exists.
 
 The writer validates the complete packet before creating its destination. An
 existing directory is refused. A failure during writing retains the partial new
