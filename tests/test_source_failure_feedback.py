@@ -202,13 +202,14 @@ class SourceFailureFeedbackTests(unittest.TestCase):
                 self.assertFalse(destination.exists())
 
     def test_original_failed_child_reaches_each_task_note_and_rebuilds_passively(self):
+        """Inspect historical v2/v1 prefix extraction; public builders remain full-only."""
+        from buddha.source_feedback import _build_failures
+
         destination = self.edge()
         h = self.h
         before = h.files(h.root), self.authority.summary(), h.engine.physical_sends
         with h.readonly():
-            result = build_source_feedback(
-                destination, reference=self.reference, failure_history=self.history
-            )
+            result = _build_failures(destination, self.reference, self.history, full_answers=False)
         self.assertEqual(
             (h.files(h.root), self.authority.summary(), h.engine.physical_sends), before
         )
@@ -241,12 +242,14 @@ class SourceFailureFeedbackTests(unittest.TestCase):
                 newest["source_omitted_utf8_bytes"],
                 len(self.returned["source"].encode()) - len(newest["source"].encode()),
             )
+        # This is a synthetic historical packet, not a new public writer result.
+        provenance_pin = sha(_json(result["provenance"]))
+        destination.mkdir()
+        for name in ("source", "split", "feedback", "provenance"):
+            (destination / (name + ".json")).write_bytes(_json(result[name]))
         with h.readonly():
-            written = write_source_feedback(
-                destination, reference=self.reference, failure_history=self.history
-            )
             inspected = inspect_source_feedback(
-                destination, expected_provenance_sha256=written["provenance"]["sha256"]
+                destination, expected_provenance_sha256=provenance_pin
             )
         self.assertEqual(inspected, result)
 

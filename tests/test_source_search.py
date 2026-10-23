@@ -5,7 +5,9 @@ import hashlib
 import json
 import os
 import shutil
+import traceback
 import unittest
+from contextlib import contextmanager
 from pathlib import Path
 from unittest.mock import patch
 
@@ -54,6 +56,25 @@ GRANDCHILD = (
 
 def sha(raw):
     return hashlib.sha256(raw).hexdigest()
+
+
+@contextmanager
+def _synthetic_recovery_errors():
+    try:
+        yield
+    except Exception as error:
+        pending, seen = [error], {id(error)}
+        while pending:
+            current = pending.pop()
+            for related in (current.__cause__, current.__context__):
+                if related is not None and id(related) not in seen:
+                    seen.add(id(related))
+                    error.add_note(
+                        "Synthetic recovery exception context:\n"
+                        + "".join(traceback.format_exception(related, chain=False))
+                    )
+                    pending.append(related)
+        raise
 
 
 class SourceSearchTests(unittest.TestCase):
@@ -486,9 +507,12 @@ class SourceSearchTests(unittest.TestCase):
         self.assertGreater(summary["reserved_microusd"], 0)
         owners = {row["directory"]: row["run_id"] for row in summary["runs"]}
         sends = self.engine.physical_sends
-        with patch(
-            "buddha.gateway.RawHTTPTransport.send_prepared",
-            side_effect=AssertionError("unknown resend"),
+        with (
+            _synthetic_recovery_errors(),
+            patch(
+                "buddha.gateway.RawHTTPTransport.send_prepared",
+                side_effect=AssertionError("unknown resend"),
+            ),
         ):
             resumed = self.run_search()
         self.partial(resumed)
@@ -501,6 +525,32 @@ class SourceSearchTests(unittest.TestCase):
         )
         self.assertFalse((self.directory / "iterations/0/decision.json").exists())
         self.assertFalse((self.directory / "iterations/1").exists())
+
+    def test_synthetic_recovery_diagnostic_retains_suppressed_errno_and_original_error(self):
+        from buddha.source_search import SourceSearchError
+
+        original = PermissionError(13, "SYNTHETIC_RECOVERY_CANARY")
+        failure = SourceSearchError("synthetic redacted recovery failure")
+        with self.assertRaises(SourceSearchError) as captured:
+            with _synthetic_recovery_errors():
+                try:
+                    raise original
+                except OSError as cause:
+                    try:
+                        raise ValueError("synthetic middle error") from cause
+                    except ValueError:
+                        try:
+                            raise failure from None
+                        except SourceSearchError:
+                            original.__context__ = failure
+                            raise
+        self.assertIs(captured.exception, failure)
+        self.assertTrue(failure.__suppress_context__)
+        self.assertIs(original.__context__, failure)
+        rendered = "".join(traceback.format_exception(failure))
+        self.assertIn("PermissionError: [Errno 13] SYNTHETIC_RECOVERY_CANARY", rendered)
+        self.assertIn("ValueError: synthetic middle error", rendered)
+        self.assertEqual(len(failure.__notes__), 2)
 
     def test_late_common_control_drift_cannot_be_adopted_at_new_proposal_owner(self):
         from buddha import candidate_improvement
