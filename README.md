@@ -129,6 +129,12 @@ The protected launcher's exact-head Linux and Windows checks have passed.
 The [source-evolution backlog context](docs/BACKLOG.md) records the intended Python
 code and inherited-improver endpoint, the current gap and its existing plan gates.
 
+The [separate frozen-improver proposal path](docs/SOURCE-PROPOSAL-STAGE.md#keep-an-improver-fixed-while-changing-its-starting-agent)
+lets different improvement procedures receive the same measured starting agent
+and complete development feedback. It records the executing improver and task
+parent separately. This is the first IMP-01 connection; the repeated comparison
+under equal budgets and its sealed assessment remain open.
+
 Useful-diversity gains, held-out improvement and improved-improver effectiveness
 remain **not established**. The source-chain fixture uses synthetic replies and
 supplied programs; it is engineering evidence of inherited code execution, not

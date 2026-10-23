@@ -107,8 +107,12 @@ class CandidateSession:
             raw = consume(descriptor)
             self.descriptor_sha256 = hashlib.sha256(raw).hexdigest()
             description = _load(raw)
-            self.improvement = description.get("format") == "buddha.candidate-improvement.v1"
+            self.improvement = description.get("format") in {
+                "buddha.candidate-improvement.v1",
+                "buddha.candidate-improvement.v2",
+            }
             self._improvement = self.improvement
+            self.detached_parent = description.get("format") == "buddha.candidate-improvement.v2"
             self.generation_v2 = description.get("format") == "buddha.candidate-generation.v2"
             _object(
                 description,
@@ -121,12 +125,14 @@ class CandidateSession:
                     "runtime",
                     "max_callbacks",
                 }
-                | ({"parent_agent_sha256", "feedback"} if self.improvement else {"tasks"}),
+                | ({"parent_agent_sha256", "feedback"} if self.improvement else {"tasks"})
+                | ({"task_parent"} if self.detached_parent else set()),
             )
             if description["format"] not in {
                 "buddha.candidate-generation.v1",
                 "buddha.candidate-generation.v2",
                 "buddha.candidate-improvement.v1",
+                "buddha.candidate-improvement.v2",
             }:
                 raise CandidateRunError("unsupported candidate descriptor")
             self.max_callbacks = wire._integer(description["max_callbacks"], 0, MAX_CALLBACKS)
@@ -146,6 +152,7 @@ class CandidateSession:
             )
             parent_source.decode("utf-8")
             self.parent_source_sha256 = hashlib.sha256(parent_source).hexdigest()
+            self.improver_source_sha256 = self.parent_source_sha256
             self.agent_sha256 = selected.agent_sha256
             package = Path(__file__).absolute().parent
             for module in (answer_module, channel, executor, releases, wire):
@@ -163,7 +170,30 @@ class CandidateSession:
                 raise CandidateRunError("candidate runner differs from installed source")
             self.release = Release.from_record(selection["release"])
             if self.improvement:
-                if _digest(description["parent_agent_sha256"]) != self.agent_sha256:
+                self.parent_agent_sha256 = _digest(description["parent_agent_sha256"])
+                if self.detached_parent:
+                    target = _object(description["task_parent"], {"path", "sha256"})
+                    target_path = Path(_text(target["path"]))
+                    if not target_path.is_absolute() or ".." in target_path.parts:
+                        raise CandidateRunError(
+                            "detached parent needs an absolute source reference"
+                        )
+                    parent_source = consume(target_path)
+                    self.parent_source_sha256 = _digest(target["sha256"])
+                    if (
+                        not parent_source
+                        or len(parent_source) > MAX_SOURCE_BYTES
+                        or hashlib.sha256(parent_source).hexdigest() != self.parent_source_sha256
+                        or _sha({"candidate.py": self.parent_source_sha256})
+                        != self.parent_agent_sha256
+                    ):
+                        raise CandidateRunError("detached parent differs from its bound source")
+                    self.parent_bundle = {
+                        "entrypoint": "candidate.py",
+                        "source": parent_source.decode("utf-8"),
+                        "agent_sha256": self.parent_agent_sha256,
+                    }
+                elif self.parent_agent_sha256 != self.agent_sha256:
                     raise CandidateRunError("improvement parent differs from selected source")
                 # Bind the improvement-only helper before importing it; v1 has no new import.
                 consume(package / "policy_study.py")
@@ -188,6 +218,8 @@ class CandidateSession:
                 }:
                     raise CandidateRunError("unsupported development feedback")
                 self.feedback_v2 = packet["format"] == "buddha.candidate-development-feedback.v2"
+                if self.detached_parent and not self.feedback_v2:
+                    raise CandidateRunError("detached improvement requires complete feedback")
                 values = {}
                 for name in ("source", "split"):
                     ref = _object(packet[name], {"path", "sha256"})
@@ -371,12 +403,16 @@ class CandidateSession:
             if self.improvement:
                 self.worker.update(
                     format=(
-                        "buddha.candidate-improvement-worker.v2"
+                        "buddha.candidate-improvement-worker.v3"
+                        if self.detached_parent
+                        else "buddha.candidate-improvement-worker.v2"
                         if self.feedback_v2
                         else "buddha.candidate-improvement-worker.v1"
                     ),
                     feedback=self.feedback,
                 )
+                if self.detached_parent:
+                    self.worker["parent_bundle"] = self.parent_bundle
             else:
                 self.worker["task"] = self.task.to_record()
             self._worker_bytes = _json(self.worker)
@@ -406,6 +442,16 @@ class CandidateSession:
                         "feedback_file": self.feedback_file_sha256,
                         "feedback_sha256": self.feedback_sha256,
                         "parent_source_sha256": self.parent_source_sha256,
+                        **(
+                            {
+                                "parent_mode": "detached-v2",
+                                "parent_bundle": self.parent_bundle,
+                                "parent_agent_sha256": self.parent_agent_sha256,
+                                "improver_source_sha256": self.improver_source_sha256,
+                            }
+                            if self.detached_parent
+                            else {}
+                        ),
                     }
                     if self.improvement
                     else {"tasks": self.tasks.fingerprint()}
@@ -465,13 +511,21 @@ class CandidateSession:
                 raise CandidateRunError("candidate worker already ended")
             if frame.get("type") == "ready":
                 input_key = "feedback_sha256" if self.improvement else "task_sha256"
-                _object(frame, {"type", "agent_sha256", input_key, "runtime_sha256"})
+                _object(
+                    frame,
+                    {"type", "agent_sha256", input_key, "runtime_sha256"}
+                    | ({"parent_agent_sha256"} if self.detached_parent else set()),
+                )
                 if (
                     self.ready
                     or frame["agent_sha256"] != self.agent_sha256
                     or frame[input_key]
                     != (self.feedback_sha256 if self.improvement else _sha(self.task.to_record()))
                     or frame["runtime_sha256"] != self.runtime_sha256
+                    or (
+                        self.detached_parent
+                        and frame["parent_agent_sha256"] != self.parent_agent_sha256
+                    )
                 ):
                     raise CandidateRunError("candidate ready identity differs")
                 self.ready = True
@@ -588,11 +642,14 @@ class CandidateSession:
                     _text(self.profile["profile_id"]),
                     _sha(
                         [
-                            "buddha.candidate-improvement-call.v1"
+                            "buddha.candidate-improvement-call.v2"
+                            if self.detached_parent
+                            else "buddha.candidate-improvement-call.v1"
                             if self.improvement
                             else "buddha.candidate-call.v1",
                             self.descriptor_sha256,
                             self.agent_sha256,
+                            *([self.parent_agent_sha256] if self.detached_parent else []),
                             self.feedback_sha256 if self.improvement else self.tasks.fingerprint(),
                             sequence,
                         ]
@@ -716,12 +773,27 @@ class CandidateSession:
                     self._write(
                         "lineage.json",
                         {
-                            "format": "buddha.source-lineage.v1",
+                            "format": "buddha.source-lineage.v2"
+                            if self.detached_parent
+                            else "buddha.source-lineage.v1",
                             "parent": {
-                                "entrypoint": self.entrypoint,
+                                "entrypoint": "candidate.py"
+                                if self.detached_parent
+                                else self.entrypoint,
                                 "source_sha256": self.parent_source_sha256,
-                                "agent_sha256": self.agent_sha256,
+                                "agent_sha256": self.parent_agent_sha256,
                             },
+                            **(
+                                {
+                                    "improver": {
+                                        "entrypoint": self.entrypoint,
+                                        "source_sha256": self.improver_source_sha256,
+                                        "agent_sha256": self.agent_sha256,
+                                    }
+                                }
+                                if self.detached_parent
+                                else {}
+                            ),
                             "child": {
                                 "entrypoint": "candidate.py",
                                 "source_sha256": expected["candidate.py"],
@@ -745,7 +817,9 @@ class CandidateSession:
                 status, reason = "failed", "materialization"
         totals = self.gateway.ledger.totals()
         report: dict[str, object] = {
-            "format": "buddha.candidate-improvement-report.v1"
+            "format": "buddha.candidate-improvement-report.v2"
+            if self.detached_parent
+            else "buddha.candidate-improvement-report.v1"
             if self.improvement
             else "buddha.candidate-generation-report.v1",
             "status": status,
@@ -755,7 +829,10 @@ class CandidateSession:
             "runtime_sha256": self.runtime_sha256,
             **(
                 {
-                    "parent_agent_sha256": self.agent_sha256,
+                    "parent_agent_sha256": self.parent_agent_sha256,
+                    **(
+                        {"improver_agent_sha256": self.agent_sha256} if self.detached_parent else {}
+                    ),
                     "feedback_file_sha256": self.feedback_file_sha256,
                     "feedback_sha256": self.feedback_sha256,
                 }

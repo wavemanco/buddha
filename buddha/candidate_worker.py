@@ -96,7 +96,9 @@ class CandidateWorker:
             self.improvement = record.get("format") in {
                 "buddha.candidate-improvement-worker.v1",
                 "buddha.candidate-improvement-worker.v2",
+                "buddha.candidate-improvement-worker.v3",
             }
+            self.detached_parent = record.get("format") == "buddha.candidate-improvement-worker.v3"
             record = _object(
                 record,
                 {
@@ -110,12 +112,14 @@ class CandidateWorker:
                     "max_callbacks",
                     "runtime",
                 }
-                | ({"feedback"} if self.improvement else {"task"}),
+                | ({"feedback"} if self.improvement else {"task"})
+                | ({"parent_bundle"} if self.detached_parent else set()),
             )
             if record["type"] != "configure" or record["format"] not in {
                 "buddha.candidate-worker.v1",
                 "buddha.candidate-improvement-worker.v1",
                 "buddha.candidate-improvement-worker.v2",
+                "buddha.candidate-improvement-worker.v3",
             }:
                 raise CandidateWorkerError("unsupported worker configuration")
             roots = _object(record["roots"], {"agent", "runner"})
@@ -155,6 +159,24 @@ class CandidateWorker:
             ):
                 raise CandidateWorkerError("unsupported candidate configuration")
             if self.improvement:
+                if self.detached_parent:
+                    parent = _object(
+                        record["parent_bundle"], {"entrypoint", "source", "agent_sha256"}
+                    )
+                    raw_parent = _literal(parent["source"]).encode("utf-8")
+                    if (
+                        parent["entrypoint"] != "candidate.py"
+                        or not raw_parent
+                        or len(raw_parent) > MAX_SOURCE_BYTES
+                        or _digest(parent["agent_sha256"])
+                        != hashlib.sha256(
+                            _json({"candidate.py": hashlib.sha256(raw_parent).hexdigest()})
+                        ).hexdigest()
+                    ):
+                        raise CandidateWorkerError(
+                            "detached task parent differs from its inventory"
+                        )
+                    self.parent_bundle = parent
                 feedback = record["feedback"]
                 if (
                     type(feedback) is not list
@@ -164,7 +186,11 @@ class CandidateWorker:
                     raise CandidateWorkerError("invalid improvement feedback")
                 note_limit = (
                     MAX_FEEDBACK_BYTES
-                    if record["format"] == "buddha.candidate-improvement-worker.v2"
+                    if record["format"]
+                    in {
+                        "buddha.candidate-improvement-worker.v2",
+                        "buddha.candidate-improvement-worker.v3",
+                    }
                     else 4096
                 )
                 seen: set[str | int] = set()
@@ -235,6 +261,7 @@ class CandidateWorker:
                 or record["entrypoint"] != self.entrypoint
                 or record["max_callbacks"] != self.max_callbacks
                 or record["runtime"] != self.runtime
+                or (self.detached_parent and record["parent_bundle"] != self.parent_bundle)
             ):
                 raise CandidateWorkerError("private environment or selected configuration changed")
             for name, root in self.roots.items():
@@ -354,19 +381,33 @@ class CandidateWorker:
                         _json(self.feedback if self.improvement else self.task)
                     ).hexdigest(),
                     "runtime_sha256": self.runtime["sha256"],
+                    **(
+                        {"parent_agent_sha256": self.parent_bundle["agent_sha256"]}
+                        if self.detached_parent
+                        else {}
+                    ),
                 },
             )
             if self.improvement:
                 improve = vars(candidate).get("propose_improvement")
                 if not callable(improve) or not callable(vars(candidate).get("generate")):
                     raise ValueError("inherited entry points are unavailable")
-                detached = _load(_json({"feedback": self.feedback, "config": self.config}))
-                value: object = improve(
-                    {
+                parent_bundle = (
+                    self.parent_bundle
+                    if self.detached_parent
+                    else {
                         "entrypoint": self.entrypoint,
                         "source": source.decode("utf-8"),
                         "agent_sha256": self.initial["agent_sha256"],
-                    },
+                    }
+                )
+                detached = _load(
+                    _json(
+                        {"parent": parent_bundle, "feedback": self.feedback, "config": self.config}
+                    )
+                )
+                value: object = improve(
+                    detached["parent"],
                     detached["feedback"],
                     detached["config"],
                     self._complete,
@@ -388,7 +429,12 @@ class CandidateWorker:
                     try:
                         # Check the actual Python return before JSON normalizes subclasses.
                         checked = _source_proposal(value)
-                        if checked["source"].encode("utf-8") == source:
+                        target = (
+                            _literal(self.parent_bundle["source"]).encode("utf-8")
+                            if self.detached_parent
+                            else source
+                        )
+                        if checked["source"].encode("utf-8") == target:
                             raise ReleaseError("unchanged source")
                         status, reason = "complete", "complete"
                     except ReleaseError:
