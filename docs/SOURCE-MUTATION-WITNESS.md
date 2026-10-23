@@ -66,7 +66,7 @@ be relabeled as a checked failure merely to let the loop continue.
 
 ## Original records, recovery and costs
 
-The starting check lives in `seed-witness/`. Each later check lives in
+In inherited search, the starting check lives in `seed-witness/`. Each later check lives in
 `iterations/<index>/witness/`, beside its common screen. Each contains its own
 plan, full feedback packet, proposal, optional generation stage and final
 witness publication. These locations keep the common screen's original
@@ -94,6 +94,35 @@ or promise that every maximum-size input fits.
 Before another live handoff, verify the concrete full requests, model context,
 output headroom, schedule capacity, processing terms and new allocation. This
 implementation does not fund another run or reuse an older closed allowance.
+
+## Reuse the check while keeping an experimental improver fixed
+
+The controlled comparison keeps its chosen improver fixed for every counted
+proposal. It can still use this capability check: the counted child's own
+improver authors one further child solely for assessment. That further child
+does not become another counted proposal or replace the experimental improver.
+
+The shared library connection in `buddha.source_search` takes an explicit
+immutable declaration of the real study scope, output directory, measured
+parent, common controls, limits and source-copy policy. It does not require a
+SourceSearch manifest or its `seed/iterations` layout.
+
+| Function | Purpose and effect |
+| --- | --- |
+| `_witness_declaration(...)` | Validate and freeze the planned settings in memory. It creates no files, spending owner or request. |
+| `_witness_progress_at(reader, treatment)` | Read and verify the original local owners, measured inputs, funding and saved outcomes. It starts no worker and changes nothing. |
+| `_advance_witness(reader, treatment, ...)` | Prepare one owner, execute one already prepared stage, or publish checked results. Preparation returns before any worker starts. Execution can spend the original approved allowance. A completed result can be returned passively without credentials or an executing authority object. |
+
+The caller must serialize its actual study scope and check its full schedule,
+controls and owner census between advances. The shared helper verifies the
+individual witness; it cannot establish that another study cell is complete.
+It enters the existing phase guard before local writes or execution. Uncertain
+lower stages keep their actual incomplete result, original owner and holds.
+Historical search paths and formats retain their existing interpretation.
+The [delivery record](conformance/imp01-shared-mutation-witness-delivery.json)
+records31 focused methods in three separate cohorts, seven quality commands
+and six genuine older-publication checks. This is local bounded verification;
+published-head CI, the finite comparison and scientific claims remain open.
 
 ## Original verification and limit
 
@@ -232,3 +261,15 @@ PowerShell commands.
 Full outputs remain subject to explicit packet and request capacity limits.
 Buddha stops and records a partial result when complete required information
 cannot fit. It does not shorten outputs to make this check pass.
+
+## Optional local check
+
+From this checkout's project folder, run this in your current PowerShell window
+to check the shared helper and inherited-search capacity handling once. It uses
+temporary fixtures and simulated workers and replies, needs no keys or Docker,
+and spends no API money. It does not inspect or resume a live run. Allow several
+minutes; wait for `OK` or a failure. Ctrl+C stops it. No separate window is needed.
+
+```powershell
+python -m unittest discover -s tests -p test_shared_mutation_witness.py -v
+```
