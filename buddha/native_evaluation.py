@@ -19,6 +19,7 @@ from buddha.doctor import _authority, _Busy, _Capture, _owner
 from buddha.gateway import (
     Gateway,
     RawHTTPTransport,
+    _final_producer_contract,
     _input_records,
     _read_manifest,
     execution_identity,
@@ -398,19 +399,28 @@ def _owner_stage(
         "max_calls": 1 if no_model else native["max_calls"],
     }
     if not owner.exists():
-        prepare_gateway(
+        with _final_producer_contract(
             owner,
             selection=selected,
             roots=roots,
             authorization=authority,
-            budget_microusd=cast(int, settings["budget_microusd"]),
-            max_calls=cast(int, settings["max_calls"]),
-            input_files=paths,
-            expected_input_hashes={
-                Path(_text(row["path"])): _text(row["sha256"]) for row in expected_inputs
-            },
+            settings=settings,
             review=review,
-        )
+            inputs=expected_inputs,
+        ):
+            prepare_gateway(
+                owner,
+                selection=selected,
+                roots=roots,
+                authorization=authority,
+                budget_microusd=cast(int, settings["budget_microusd"]),
+                max_calls=cast(int, settings["max_calls"]),
+                input_files=paths,
+                expected_input_hashes={
+                    Path(_text(row["path"])): _text(row["sha256"]) for row in expected_inputs
+                },
+                review=review,
+            )
     record = _read_manifest(owner)
     if (
         record["authorization_path"] != str(authority.path)

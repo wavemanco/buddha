@@ -330,13 +330,27 @@ agent Python code: choose a parent, run its improvement procedure, test its chil
 and use measured results and checked failures in later proposals. A child can
 later run its own changed improvement procedure. NoveltyBench 1.1 stays fixed.
 
-The engineering rehearsal ran supplied Python programs in real isolation with
-fake model replies. It showed the code and recovery paths working, not a model
-inventing better code or a scientific gain. Passing the answer-generation screen
-does not certify every child's improvement procedure. The actual model-authored
-source experiment and formal mutation-competence checks remain open; the separate
-experiment testing whether an evolved improver produces better descendants is
-not implemented. A higher score on one development prompt establishes none of these.
+Engineering rehearsals ran supplied Python programs in real isolation with
+fake model replies. The [first actual source experiment](SOURCE-FIRST-LIVE-RESULTS.md)
+separately produced three model-authored children, including a changed improvement
+function used to author another child. The starter led every child on both mean
+official metrics. That run used the historical short feedback; its evidence is
+not upgraded by later full-output work.
+
+For new witnessed searches, [bounded mutation checks](SOURCE-MUTATION-WITNESS.md)
+require a parent to invoke its own improvement code with complete feedback to author
+a changed further child, then run that child on the first development task.
+Verified source copies and a supplied-program proof establish that bounded
+engineering path. A current-version model demonstration and concrete capacity
+evidence remain open. The separate experiment testing whether an evolved
+improver produces better descendants is still planned. Neither changed code nor
+a higher development score establishes that claim.
+
+The [final-evaluation controller](FINAL-EVALUATION.md) handles a later stage:
+freeze the declared finalists once, close adaptive work and run every final task
+against the fixed comparison agents. Its final results stay outside the
+improvement feedback. A completed comparison can still be negative or
+inconclusive; the official evaluator and both native metrics remain unchanged.
 
 The [completed policy comparison](POLICY-COMPARISON-RESULTS.md) now supplies the
 registered scores and masked review. Seeing earlier answers produced larger

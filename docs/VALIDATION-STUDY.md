@@ -2,7 +2,7 @@
 
 Validation checks a frozen agent after development. Each look at validation results can influence later choices, so the number of checking rounds must be limited in advance. This controller records and consumes those rounds; having money left does not buy extra rounds.
 
-This is an engineering component of EVAL-01. It collects generation and unchanged native benchmark evidence. It does not calculate confidence bounds, promote a champion, finalize an experiment or establish that an agent improved. Those parts of the [living plan](PLAN.md) remain open. No paid validation run or operator launch command is supplied by this slice.
+This EVAL-01 component collects generation and unchanged native benchmark evidence. The separate [saved analysis](VALIDATION-ANALYSIS.md) calculates bounds; the [final controller](FINAL-EVALUATION.md) freezes and evaluates the complete final schedule. This collector does not promote an agent or establish improvement. The scientific gates remain in the [living plan](PLAN.md). No paid validation run or operator launch command is supplied by this library.
 
 Here, **native evaluation** means running the official evaluator's own code. An **owner** is the original accounting record for an execution stage. An **anchor** links a saved completion to that record and its exact inputs. The round's **ordinal** is its number, starting at zero.
 

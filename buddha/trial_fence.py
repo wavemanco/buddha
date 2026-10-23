@@ -310,6 +310,202 @@ class _Held:
 _HELD: ContextVar[_Held | None] = ContextVar("buddha_trial_writer", default=None)
 
 
+@dataclass
+class _FinalEpisode:
+    """Private consumed-cell capability; individual owner contracts are immutable bytes."""
+
+    binding: _TrialScope
+    cell: bytes
+    owners: dict[Path, bytes]
+    pid: int
+    thread: int
+    active: bool = True
+
+
+_FINAL: ContextVar[_FinalEpisode | None] = ContextVar("buddha_final_cell", default=None)
+
+
+def _final_current(binding: _TrialScope) -> tuple[_FinalEpisode, dict[str, object]]:
+    episode = _FINAL.get()
+    if (
+        episode is None
+        or not episode.active
+        or episode.binding != binding
+        or episode.pid != os.getpid()
+        or episode.thread != threading.get_ident()
+    ):
+        raise TrialFenceError("final work requires the checked original consumer episode")
+    _assert_held(binding)
+    cell = _load(episode.cell)
+    for name, digest in _object(cell["controls"]).items():
+        if _read(_checked_path(name))[1] != _digest(digest):
+            raise TrialFenceError("checked final episode inputs changed")
+    return episode, cell
+
+
+def _final_directory(cell: dict[str, object], directory: Path, kind: str) -> None:
+    root = _checked_path(cell["directory"])
+    role = _text(cell["kind"])
+    if kind not in {role, "gateway"} or not directory.is_relative_to(root):
+        raise TrialFenceError("final operation differs from its exact current cell")
+    relative = directory.relative_to(root).parts
+    if relative:
+        import re
+
+        if relative[0] == "owners":
+            if len(relative) != 2 or not re.fullmatch(r"0|[1-9][0-9]*", relative[1]):
+                raise TrialFenceError("final owner path differs from its schedule")
+            index = int(relative[1])
+            if (role == "generation" and index != 0) or (
+                role == "native" and not 1 <= index <= _amount(cell["stage_count"])
+            ):
+                raise TrialFenceError("final owner stage differs from its schedule")
+        elif relative[0] == "attempts":
+            if (
+                not 2 <= len(relative) <= 3
+                or not re.fullmatch(r"(0|[1-9][0-9]*)-(0|[1-9][0-9]*)", relative[1])
+                or (len(relative) == 3 and (role != "generation" or relative[2] != "session"))
+            ):
+                raise TrialFenceError("final session output differs from its original owner")
+            stage = int(relative[1].split("-", 1)[0])
+            if (role == "generation" and stage != 0) or (
+                role == "native" and not 1 <= stage <= _amount(cell["stage_count"])
+            ):
+                raise TrialFenceError("final session stage differs from its schedule")
+        else:
+            raise TrialFenceError("final work output is outside its current cell")
+
+
+def _final_projection(record: dict[str, object]) -> dict[str, object]:
+    return {
+        name: record[name]
+        for name in (
+            "settings",
+            "selection",
+            "selection_sha256",
+            "roots",
+            "profiles",
+            "core",
+            "runtime",
+            "review",
+            "authorization_path",
+        )
+    } | {"inputs": _object(record["invocation"])["inputs"]}
+
+
+@contextmanager
+def _final_episode(
+    authority_path: Path,
+    terms: Mapping[str, object],
+    *,
+    cell: dict[str, object],
+    owners: Mapping[Path, dict[str, object]],
+) -> Iterator[None]:
+    """Only the final consumer supplies a fully checked frozen cell and retained owners."""
+    directory = _checked_path(cell["directory"])
+    binding, _, _ = _original(authority_path, terms, directory)
+    if binding is None or binding.phase != "final" or _FINAL.get() is not None:
+        raise TrialFenceError("a final episode needs its original final grant")
+    _assert_held(binding)
+    required = {binding.root / "freeze" / name for name in ("schedule.json", "ready.json")}
+    if not required <= {Path(name) for name in _object(cell["controls"])}:
+        raise TrialFenceError("final episode omits original confirmed freeze evidence")
+    episode = _FinalEpisode(binding, _json(cell), {}, os.getpid(), threading.get_ident())
+    token = _FINAL.set(episode)
+    try:
+        _final_current(binding)
+        for path, manifest in owners.items():
+            _final_directory(cell, _checked_path(path), "gateway")
+            episode.owners[_checked_path(path)] = _json(_final_projection(manifest))
+        yield
+    finally:
+        episode.active = False
+        _FINAL.reset(token)
+
+
+@contextmanager
+def _final_owner_contract(
+    authority_path: Path,
+    terms: Mapping[str, object],
+    *,
+    directory: Path,
+    selection: object,
+    roots: object,
+    settings: object,
+    review: object,
+    profiles: object,
+    core: object,
+    runtime: object,
+    inputs: object,
+) -> Iterator[None]:
+    """Capture validated producer inputs before generic preparation/SQLite begins.
+
+    This private seam is called only by the real generation/native producers,
+    after their descriptor/C1/staging checks, within the consumer's checked cell.
+    It creates no grant, owner or permission outside that existing episode.
+    """
+    binding, _, _ = _original(authority_path, terms, directory)
+    if binding is not None and binding.phase == "final":
+        episode, cell = _final_current(binding)
+        _final_directory(cell, directory, "gateway")
+        expected = _object(cell["owner"])
+        actual = {
+            "selection": selection,
+            "roots": roots,
+            "review": review,
+            "profiles": profiles,
+            "core": core,
+            "runtime": runtime,
+        }
+        if any(actual[key] != expected[key] for key in actual):
+            raise TrialFenceError("final producer changes its frozen owner projection")
+        index = int(directory.name)
+        allowed = expected["settings"]
+        if cell["kind"] == "native" and index == cell["stage_count"]:
+            allowed = {"budget_microusd": 1, "max_calls": 1}
+        if settings != allowed:
+            raise TrialFenceError("final producer changes its frozen owner ceilings")
+        if type(inputs) is not list or len(inputs) > 1024:
+            raise TrialFenceError("final producer requires bounded literal input records")
+        observed = {}
+        for value in inputs:
+            row = _object(value, {"path", "sha256"})
+            path, digest = _checked_path(row["path"]), _digest(row["sha256"])
+            if path in observed or file_hash(path, max_bytes=256 * 1024**2) != digest:
+                raise TrialFenceError("final producer inputs changed or repeat")
+            observed[path] = digest
+        if any(observed.get(Path(name)) != pin for name, pin in _object(cell["controls"]).items()):
+            raise TrialFenceError("final producer omits frozen cell inputs")
+        if observed.get(_checked_path(cell["descriptor_path"])) != cell["descriptor_sha256"]:
+            raise TrialFenceError("final producer changes its exact frozen descriptor")
+        context_path = _checked_path(cell["directory"]) / "context.json"
+        context = {
+            "format": "buddha.candidate-generation-context.v2"
+            if cell["kind"] == "generation"
+            else "buddha.native-evaluation-context.v1",
+            "descriptor": cell["descriptor_path"],
+        }
+        if cell["kind"] == "generation":
+            context["expected_runtime_sha256"] = cell["runtime_sha256"]
+        context_raw = _json(context)
+        if (
+            observed.get(context_path) != hashlib.sha256(context_raw).hexdigest()
+            or _read(context_path)[0] != context_raw
+        ):
+            raise TrialFenceError("final producer substituted its active descriptor context")
+        projection = actual | {
+            "settings": settings,
+            "selection_sha256": hashlib.sha256(_json(selection)).hexdigest(),
+            "authorization_path": str(authority_path),
+            "inputs": inputs,
+        }
+        raw = _json(projection)
+        if directory in episode.owners and episode.owners[directory] != raw:
+            raise TrialFenceError("final producer replaces an original owner contract")
+        episode.owners[directory] = raw
+    yield
+
+
 def _assert_held(binding: _TrialScope) -> None:
     held = _HELD.get()
     if (
@@ -437,6 +633,18 @@ def assert_work(
         if binding is None:
             return controls
         _assert_held(binding)
+        if binding.phase == "final":
+            episode, cell = _final_current(binding)
+            _final_directory(cell, _checked_path(directory), kind)
+            if manifest is not None:
+                record = _object(manifest)
+                _manifest_controls(record, controls)
+                expected = episode.owners.get(_checked_path(directory))
+                if expected is None or _json(_final_projection(record)) != expected:
+                    raise TrialFenceError("final owner lacks its exact checked producer contract")
+            elif kind == "gateway" and _checked_path(directory) not in episode.owners:
+                raise TrialFenceError("direct final gateway work has no checked original owner")
+            return controls
         if type(kind) is not str or kind not in _KINDS[binding.phase]:
             raise TrialFenceError("this phase cannot execute the requested work kind")
         try:
@@ -458,7 +666,7 @@ def assert_work(
 def work(
     authority_path: Path, terms: Mapping[str, object], *, directory: Path, kind: str = "gateway"
 ) -> Iterator[dict[Path, str]]:
-    """Own one new-work episode; final new work is deliberately unsupported."""
+    """Own new work; final work requires a checked private consumer episode."""
     with lease(authority_path, terms, directory=directory):
         yield assert_work(authority_path, terms, directory=directory, kind=kind)
 
@@ -493,7 +701,12 @@ def is_closed(directory: Path) -> bool:
         _funding(*marker)
         relative = _checked_path(directory).relative_to(marker[0])
         if relative.parts and relative.parts[0] == "final":
-            return True
+            episode = _FINAL.get()
+            if episode is None:
+                return True
+            _, cell = _final_current(episode.binding)
+            _final_directory(cell, _checked_path(directory), _text(cell["kind"]))
+            return False
         try:
             (marker[0] / "freeze").lstat()
         except FileNotFoundError:

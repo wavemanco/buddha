@@ -19,6 +19,7 @@ from buddha.doctor import _authority, _Busy, _Capture, _owner, _Unsupported
 from buddha.gateway import (
     Gateway,
     RawHTTPTransport,
+    _final_producer_contract,
     _input_records,
     _read_manifest,
     execution_identity,
@@ -289,17 +290,26 @@ def prepare_candidate_generation(
         )
         pipeline._write(context, context_raw)
         expected[context] = hashlib.sha256(context_raw).hexdigest()
-        prepare_gateway(
+        with _final_producer_contract(
             directory / "owners/0",
             selection=selection,
             roots=roots,
             authorization=authorization,
-            budget_microusd=budget_microusd,
-            max_calls=max_calls,
-            input_files=list(expected),
-            expected_input_hashes=expected,
+            settings={"budget_microusd": budget_microusd, "max_calls": max_calls},
             review=review,
-        )
+            inputs=_input_records(list(expected), expected),
+        ):
+            prepare_gateway(
+                directory / "owners/0",
+                selection=selection,
+                roots=roots,
+                authorization=authorization,
+                budget_microusd=budget_microusd,
+                max_calls=max_calls,
+                input_files=list(expected),
+                expected_input_hashes=expected,
+                review=review,
+            )
     return directory
 
 
