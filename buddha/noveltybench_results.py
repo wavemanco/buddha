@@ -10,7 +10,7 @@ import json
 import math
 from typing import cast
 
-from buddha.answers import Answers, TaskSet, _id
+from buddha.answers import Answers, TaskSet, _count, _id
 from buddha.releases import MAX_JSON_BYTES, Release, ReleaseError, _json, _object, _pairs
 
 MAX_ROWS = 100_000
@@ -29,6 +29,14 @@ _DIAGNOSTIC_FIELDS = (
 
 class NoveltyBenchResultsError(ReleaseError):
     """Saved rows contradict their literal answers or the supported row structure."""
+
+
+def metric_support(count: int) -> dict[str, tuple[int, int]]:
+    """Expose the scalar ranges already required by this projection, without scoring."""
+    try:
+        return {"utility": (0, 10), "distinct": (1, _count(count))}
+    except ReleaseError:
+        raise NoveltyBenchResultsError("metric support requires a valid answer count") from None
 
 
 def reporting_configuration(release: Release, stages: list[dict[str, object]]) -> dict[str, object]:

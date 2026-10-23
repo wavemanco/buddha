@@ -139,9 +139,14 @@ thirteen focused checks pass. It consumes supplied bounds and a coverage
 assertion. The [limited validation controller](docs/VALIDATION-STUDY.md)
 connects prospectively reserved rounds to the existing isolated generation and
 native-evaluation paths, preserving original owners and explicit partial
-evidence. It collects measurements without computing confidence bounds or
-promoting a candidate. Uncertainty estimation, finalization and the full
-held-out scientific gate remain part of the open EVAL-01 controller.
+evidence. The [saved validation analysis](docs/VALIDATION-ANALYSIS.md) now
+checks the original plan and complete native results before computing
+conservative bounds for both metrics and applying the fixed improvement rule.
+Missing required scores remain inconclusive. Its fixed-panel conclusions
+depend on declared family-independence assumptions; they do not establish
+unseen-task improvement. Seven focused methods and seven quality checks pass.
+Full prospective final populations/finalists, one-way finalization, promotion
+and the held-out scientific gate remain open under EVAL-01.
 
 At this checkpoint the living plan contains **6 remaining leaf slices**.
 The Windows PID-lock observer follow-up is complete at its shared-reader scope;
