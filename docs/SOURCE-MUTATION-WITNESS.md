@@ -95,7 +95,7 @@ Before another live handoff, verify the concrete full requests, model context,
 output headroom, schedule capacity, processing terms and new allocation. This
 implementation does not fund another run or reuse an older closed allowance.
 
-## Verification and current limit
+## Original verification and limit
 
 Forty-six focused test methods pass across separate recorded offline cohorts.
 Seven quality checks also pass on the publication branch. The production code
@@ -110,9 +110,10 @@ incomplete. The original fixture and its pending owner remain unchanged.
 
 A separate fresh-location control runs those same child bytes successfully with
 the unchanged production worker and original configuration. This does not repair
-the original owner or establish the cause of the mount failure. A fresh actual
-composed positive witness still needs to pass before a live handoff. The native
-stages in this proof are simulated and make no scoring-conformance claim.
+the original owner or establish the cause of the mount failure. At that
+checkpoint a fresh actual composed positive witness still needed to pass before
+a live handoff. The native stages in this proof are simulated and make no
+scoring-conformance claim.
 
 The [delivery record](conformance/src02-mutation-witness-delivery.json) retains
 the passing cohorts, original failed proof, bounded diagnostics and these limits.
@@ -158,29 +159,73 @@ removed. Restoring only the source path reproduces the prior configuration.
 The raw Docker environment array has a different order; its 24 unique key/value
 pairs match exactly.
 
-This supports a prospective verified-copy route. One separately timed control
+This supported a prospective verified-copy route. One separately timed control
 does not identify the filesystem cause, repair the original owner or complete a
-source search. Next version that route before preparing fresh owners, preserve
-historical source locations/reconstruction, and require a fresh composed proof.
-No paid calls were made. The actual composed positive gate remains open.
+source search. At that checkpoint the actual composed positive gate remained
+open. The later versioned route and fresh proof below address that next step;
+no paid calls were made and no historical owner was repaired.
+
+## Verified source copies for new owners
+
+New manifest v4 searches copy each materialized returned child's `candidate.py`
+to a deterministic private directory beside its next screen or generation stage.
+The host checks the original hash, byte limit, UTF-8 and exact file inventory,
+then checks the copy and its selected components before preparing that owner.
+The copy has the same code identity and lineage. Runtime, non-agent components,
+resource limits, comparison controls and official scores keep their meanings.
+Later improvement proposals use the checked source root from that child's screen.
+
+This applies to returned children. The initial caller-supplied seed keeps its
+reviewed root. The copy adds no model call or stage owner. A partial preparation
+can reuse only exact bytes at the same planned location. Once its owner exists,
+a missing or changed copy is refused; it is never recreated or remounted as a
+recovery shortcut. The original returned source and proposal remain retained.
+
+The fresh actual composed check now passes all three expected cases with
+14 real isolated Python workers and 24 simulated native workers. A capable
+parent consumes the complete measured answers, creates a changed further child
+and runs it on the first task. Missing or raising improvers are excluded; the
+ordinary child without an improver is also excluded as expected. All original
+owners finish with zero model operations or held funds, owned containers are
+removed, and two passive reads per case preserve file names and bytes.
+
+Eleven new acceptance methods, four existing regressions and seven quality
+checks pass at their recorded fixed cuts. Six genuine older publications remain
+readable with all 429 original file names and bytes unchanged, without opening
+original databases or running retired source. All 245 actual-proof inputs stay
+fixed; its 244 common project/configuration files match the verification checkout
+byte for byte.
+The [delivery record](conformance/src02-verified-source-copy-delivery.json) keeps
+the exact receipts, source bridge, initial failures and qualifications.
+
+The check uses supplied programs and request-free simulated judging. It proves
+this bounded engineering path; it does not establish model-authored improvement,
+universal mutation competence, official scoring semantics or a filesystem cause.
+Concrete model context and output headroom remain checks before any new live
+handoff. Earlier failed searches remain incomplete with their original owners.
 
 ## Versions and library settings
 
 New `prepare_source_search(...)` calls default to `mutation_witness=True` and
-write source-search manifest v3. The fixed policy is
+`source_copy=None`, writing source-search manifest v4. The fixed witness policy is
 `buddha.source-mutation-witness.v1`: one further mutation and generation on the
 first ordered development task. New complete publications use search-report
 v2 and bind this policy.
 
-New live proposals use source-handoff v2. The launcher derives the required
-check from that originally reviewed proposal and verifies the actual prepared
-search before dispatch. A coherently prepared task-only search cannot satisfy
-an approval that requires this check.
+New live proposals use source-handoff v3, which requires the fixed witness and
+`buddha.source-copy.v1` policies. The launcher derives both from the originally
+reviewed proposal and verifies the prepared search before dispatch. A coherent
+older search cannot satisfy a new approval requiring source copies.
+
+`source_copy=False` with the witness enabled explicitly prepares historical
+manifest v3. `source_copy=True` requires the witness and selects v4. `None`
+follows the witnessed default; other types are refused. Historical handoffs v1/v2
+explicitly select no copy, retaining their original preparation/replay policy.
 
 Explicit `mutation_witness=False` retains full-output task-only manifest v2 for
 reviewed compatibility callers. Historical manifest v1 retains its original
 prefix-feedback meaning; manifest v2 retains its task-only meaning. Existing
-handoff v1 records and completed reports are not upgraded, resealed or assigned
+handoff v1/v2 records and completed reports are not upgraded, resealed or assigned
 new competence claims. These are Python library settings, not additional
 PowerShell commands.
 

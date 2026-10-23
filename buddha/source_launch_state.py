@@ -283,6 +283,7 @@ def inspect_prepared_search(
     expected_runtime_sha256: str,
     input_bindings: dict[Path, str],
     mutation_witness: bool = False,
+    source_copy: bool | None = None,
 ) -> dict[str, object]:
     """Check retained execution custody without keys or writable owner objects."""
     if (
@@ -294,6 +295,7 @@ def inspect_prepared_search(
         or type(mutation_witness) is not bool
     ):
         raise source_search.SourceSearchError("prepared custody needs explicit Paths")
+    copy_source = source_search._source_copy_choice(mutation_witness, source_copy)
     reader = NativeEvidence(directory, authorization, error_type=source_search.SourceSearchError)
     state = source_search._restore(directory, authorization, reader=reader)
     from buddha.search_evidence import read_authority
@@ -322,10 +324,17 @@ def inspect_prepared_search(
     if any(_json(state["record"][name]) != _json(value) for name, value in expected.items()):
         raise source_search.SourceSearchError("original search differs from its approved launch")
     if mutation_witness:
-        if state["record"]["format"] != source_search._WITNESS_MANIFEST or _json(
+        expected_format = (
+            source_search._COPY_MANIFEST if copy_source else source_search._WITNESS_MANIFEST
+        )
+        if state["record"]["format"] != expected_format or _json(
             state["record"].get("mutation_witness")
         ) != _json(source_search.MUTATION_WITNESS_POLICY):
             raise source_search.SourceSearchError("approved search requires its mutation witness")
+        if copy_source and _json(state["record"].get("source_copy")) != _json(
+            source_search.SOURCE_COPY_POLICY
+        ):
+            raise source_search.SourceSearchError("approved search requires its source-copy policy")
         for path, treatment in state["witness_treatments"].items():
             _owner(reader, state, path, treatment["section"], treatment["controls"])
         for progress in state["mutation_progress"].values():
@@ -399,7 +408,7 @@ def inspect_prepared_search(
                 ),
             )
         if observed["disposition"] == "materialized" and _present(reader, location / "screen"):
-            screen = source_search._child_screen(state, observed)
+            screen = source_search._child_screen(state, observed, location)
             pending, role = _screen(reader, state, location / "screen", screen)
             if mutation_witness:
                 pending, role, can_advance = _after_screen(

@@ -28,6 +28,8 @@ from buddha.doctor import _authority, _Busy, _Unsupported
 from buddha.gateway import RawHTTPTransport, _input_records, _review
 from buddha.native_evidence import NativeEvidence, authority_observation
 from buddha.releases import (
+    MAX_SOURCE_BYTES,
+    Release,
     ReleaseError,
     Selection,
     _digest,
@@ -37,11 +39,14 @@ from buddha.releases import (
     _path,
     _root,
     file_hash,
+    inventory,
+    prepare_selection,
 )
 from buddha.wire import _integer
 
 _FORMAT = "buddha.source-search.v1"
-_MANIFEST = "buddha.source-search-manifest.v3"
+_COPY_MANIFEST = "buddha.source-search-manifest.v4"
+_MANIFEST = _COPY_MANIFEST
 _WITNESS_MANIFEST = "buddha.source-search-manifest.v3"
 _FULL_MANIFEST = "buddha.source-search-manifest.v2"
 _LEGACY_MANIFEST = "buddha.source-search-manifest.v1"
@@ -56,10 +61,29 @@ MUTATION_WITNESS_POLICY = {
     "task_policy": "first_ordered_development_task",
     "depth": 1,
 }
+SOURCE_COPY_POLICY = {
+    "format": "buddha.source-copy.v1",
+    "method": "verified_private_snapshot_before_owner",
+}
 
 
 def _has_witness(state: dict[str, Any]) -> bool:
-    return bool(state["record"]["format"] == _WITNESS_MANIFEST)
+    return bool(state["record"]["format"] in {_COPY_MANIFEST, _WITNESS_MANIFEST})
+
+
+def _has_source_copy(state: dict[str, Any]) -> bool:
+    return bool(state["record"]["format"] == _COPY_MANIFEST)
+
+
+def _source_copy_choice(mutation_witness: bool, source_copy: bool | None) -> bool:
+    if type(mutation_witness) is not bool or (
+        source_copy is not None and type(source_copy) is not bool
+    ):
+        raise SourceSearchError("source copy requires a literal boolean or the witnessed default")
+    enabled = mutation_witness if source_copy is None else source_copy
+    if enabled and not mutation_witness:
+        raise SourceSearchError("source copy requires the fixed bounded mutation witness")
+    return enabled
 
 
 def _full_answers(state: dict[str, Any]) -> bool:
@@ -225,12 +249,18 @@ def _original(reader: NativeEvidence) -> dict[str, Any]:
             "expected_runtime_sha256",
             "controls",
         }
-        | ({"mutation_witness"} if value.get("format") == _WITNESS_MANIFEST else set()),
+        | (
+            {"mutation_witness"}
+            if value.get("format") in {_COPY_MANIFEST, _WITNESS_MANIFEST}
+            else set()
+        )
+        | ({"source_copy"} if value.get("format") == _COPY_MANIFEST else set()),
     )
     context_raw = reader.bound(anchor, reader.root / "context.json")
     context = _object(_load(context_raw), {"format", "manifest_sha256"})
     if (
-        record["format"] not in {_WITNESS_MANIFEST, _FULL_MANIFEST, _LEGACY_MANIFEST}
+        record["format"]
+        not in {_COPY_MANIFEST, _WITNESS_MANIFEST, _FULL_MANIFEST, _LEGACY_MANIFEST}
         or context["format"] != _CONTEXT
         or context["manifest_sha256"] != pipeline._sha(record)
         or manifest_raw != _json(record)
@@ -238,10 +268,14 @@ def _original(reader: NativeEvidence) -> dict[str, Any]:
         or record["authorization"] != str(reader.authorization)
     ):
         raise SourceSearchError("search differs from its original first-owner declaration")
-    if record["format"] == _WITNESS_MANIFEST and _json(record["mutation_witness"]) != _json(
-        MUTATION_WITNESS_POLICY
-    ):
+    if record["format"] in {_COPY_MANIFEST, _WITNESS_MANIFEST} and _json(
+        record["mutation_witness"]
+    ) != _json(MUTATION_WITNESS_POLICY):
         raise SourceSearchError("search changes its fixed bounded mutation witness")
+    if record["format"] == _COPY_MANIFEST and _json(record["source_copy"]) != _json(
+        SOURCE_COPY_POLICY
+    ):
+        raise SourceSearchError("search changes its fixed verified source-copy policy")
     if _json(_review(_object(record["review"]))) != _json(anchor.manifest["review"]):
         raise SourceSearchError("search review differs from its original first owner")
     screen = source_screen.SourceScreen.from_bytes(_json(record["seed_screen"]))
@@ -425,15 +459,18 @@ def _plan(
     }
 
 
-def _child_screen(state: dict[str, Any], proposal: dict[str, Any]) -> source_screen.SourceScreen:
+def _child_screen(
+    state: dict[str, Any], proposal: dict[str, Any], location: Path
+) -> source_screen.SourceScreen:
     record = state["screen"].to_record()
     child = _object(proposal["child"])
     generation = _object(record["generation"])
     selection = _object(generation["selection"])
     _object(selection["components"])["agent"] = {"candidate.py": child["source_sha256"]}
-    _object(generation["roots"])["agent"] = child["directory"]
+    agent = str(location / "agent") if _has_source_copy(state) else child["directory"]
+    _object(generation["roots"])["agent"] = agent
     _object(generation["executor"])["mounts"] = [
-        ["/agent", child["directory"]],
+        ["/agent", agent],
         ["/runner", _object(generation["roots"])["runner"]],
     ]
     record["lineage"] = child["lineage"]
@@ -444,6 +481,65 @@ def _child_screen(state: dict[str, Any], proposal: dict[str, Any]) -> source_scr
     ):
         raise SourceSearchError("materialized child changes the fixed source comparison")
     return screen
+
+
+def _materialize_child_source(
+    state: dict[str, Any],
+    proposal: dict[str, Any],
+    location: Path,
+    *,
+    owner_directory: Path,
+) -> None:
+    """Copy checked returned bytes before a new owner; retained owners are never repaired."""
+    if not _has_source_copy(state):
+        return
+    _root(location)
+    if owner_directory not in {location / "screen", location / "generation"}:
+        raise SourceSearchError("source snapshot belongs to another stage")
+    child = _object(proposal["child"])
+    if child["entrypoint"] != "candidate.py":
+        raise SourceSearchError("source snapshot requires the original one-file child")
+    original = _root(pipeline._absolute(child["directory"]))
+    expected = {"candidate.py": _digest(child["source_sha256"])}
+    if inventory(original) != expected:
+        raise SourceSearchError("returned source inventory differs before copying")
+    path = original / "candidate.py"
+    if file_hash(path, max_bytes=MAX_SOURCE_BYTES) != expected["candidate.py"]:
+        raise SourceSearchError("returned source differs or exceeds its byte ceiling")
+    raw = pipeline._read(path, expected["candidate.py"])
+    if len(raw) > MAX_SOURCE_BYTES:
+        raise SourceSearchError("returned source exceeds its byte ceiling")
+    try:
+        raw.decode("utf-8")
+    except UnicodeError:
+        raise SourceSearchError("returned source must be complete UTF-8") from None
+    copied = location / "agent"
+    if copied == original:
+        raise SourceSearchError("a private source snapshot must differ from its original root")
+    present = copied.exists() or copied.is_symlink()
+    copied_inventory = inventory(copied) if present else {}
+    if copied_inventory not in ({}, expected):
+        raise SourceSearchError("an existing source snapshot differs; no files replaced")
+    bound = owner_directory.exists() or owner_directory.is_symlink()
+    if bound:
+        _root(owner_directory)
+        if not present or copied_inventory != expected:
+            raise SourceSearchError("original owner source snapshot is missing; no repair")
+    else:
+        if not present:
+            copied.mkdir()
+        pipeline._same_or_write(copied / "candidate.py", raw)
+    if inventory(copied) != expected:
+        raise SourceSearchError("copied child differs from its verified source inventory")
+    generation = _object(_child_screen(state, proposal, location).to_record()["generation"])
+    selected = Selection.from_bytes(_json(generation["selection"]))
+    actual = prepare_selection(
+        Release.from_record(selected.to_record()["release"]),
+        source_screen._roots(generation),
+        capabilities=cast(dict[str, str], _object(selected.to_record()["capabilities"])),
+    )
+    if actual.to_bytes() != selected.to_bytes():
+        raise SourceSearchError("copied child changes a fixed non-agent selection")
 
 
 def _proposal_controls(
@@ -653,7 +749,7 @@ def _witness_plan(
 def _witness_generation(
     state: dict[str, Any], location: Path, plan: dict[str, Any], proposal: dict[str, Any]
 ) -> tuple[source_screen.SourceScreen, dict[str, object], dict[Path, str]]:
-    child = _child_screen(state, proposal)
+    child = _child_screen(state, proposal, location)
     task = child.tasks.select([child.tasks.tasks[0].id])
     if task.to_record() != plan["task"]:
         raise SourceSearchError("witness changes its first ordered development task")
@@ -895,6 +991,9 @@ def _execute_witness(
     reader.capture.finish()
     if result["disposition"] == "materialized":
         phase("witness_generation")
+        _materialize_child_source(
+            state, verified, location, owner_directory=location / "generation"
+        )
         child, recipe, inputs = _witness_generation(state, location, plan, verified)
         task = child.tasks.select([child.tasks.tasks[0].id])
         pipeline._same_or_write(location / "task.json", task.to_bytes())
@@ -958,7 +1057,7 @@ def _decision(
         else:
             screen_ref = _ref(location / "screen", reader.authorization)
             report = _read_ref(reader, screen_ref)
-            expected = _child_screen(state, proposal)
+            expected = _child_screen(state, proposal, location)
             _screen_owner(reader, state, location / "screen", expected)
             if (
                 report["comparison_key"] != state["screen"].comparison_key()
@@ -1016,7 +1115,7 @@ def _pending_witness(
         raise SourceSearchError("child screen precedes a new materialized original proposal")
     reference = _ref(location / "screen", reader.authorization)
     report = _read_ref(reader, reference)
-    _screen_owner(reader, state, location / "screen", _child_screen(state, proposal))
+    _screen_owner(reader, state, location / "screen", _child_screen(state, proposal, location))
     if (
         report["comparison_key"] != state["screen"].comparison_key()
         or report["controls_sha256"] != state["controls_sha256"]
@@ -1272,6 +1371,7 @@ def prepare_source_search(
     expected_runtime_sha256: str,
     input_bindings: Mapping[Path, str] | None = None,
     mutation_witness: bool = True,
+    source_copy: bool | None = None,
 ) -> Path:
     if (
         type(seed_screen) is not source_screen.SourceScreen
@@ -1280,6 +1380,7 @@ def prepare_source_search(
         or type(mutation_witness) is not bool
     ):
         raise SourceSearchError("search requires its explicit artifacts and existing authority")
+    copy_source = _source_copy_choice(mutation_witness, source_copy)
     directory = pipeline._absolute(str(directory))
     seed = seed_screen.to_record()
     generation = _object(seed["generation"])
@@ -1334,7 +1435,9 @@ def prepare_source_search(
         (directory / "iterations").mkdir()
         (directory / "observations").mkdir()
         manifest = {
-            "format": _MANIFEST if mutation_witness else _FULL_MANIFEST,
+            "format": (_MANIFEST if copy_source else _WITNESS_MANIFEST)
+            if mutation_witness
+            else _FULL_MANIFEST,
             "seed_screen": seed,
             "proposal_template": template,
             "spec": spec.to_record(),
@@ -1343,6 +1446,7 @@ def prepare_source_search(
             "expected_runtime_sha256": runtime,
             "controls": {str(p): h for p, h in controls.items()},
             **({"mutation_witness": dict(MUTATION_WITNESS_POLICY)} if mutation_witness else {}),
+            **({"source_copy": dict(SOURCE_COPY_POLICY)} if copy_source else {}),
         }
         context = {"format": _CONTEXT, "manifest_sha256": pipeline._sha(manifest)}
         pipeline._write(directory / "manifest.json", _json(manifest))
@@ -1536,7 +1640,10 @@ def run_source_search(directory: Path, *, transport: RawHTTPTransport) -> dict[s
                     and _object(child["child"])["agent_sha256"] not in state["known_ids"]
                 ):
                     stage = "screen"
-                    screen = _child_screen(state, child)
+                    _materialize_child_source(
+                        state, verified, location, owner_directory=location / "screen"
+                    )
+                    screen = _child_screen(state, verified, location)
                     if not (location / "screen").exists():
                         _check_current(state)
                         source_screen.prepare_source_screen(

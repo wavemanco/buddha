@@ -97,6 +97,13 @@ to produce another descendant. It uses supplied programs and synthetic replies,
 with no real provider calls. Complete keyless replay and passive verification
 preserve its original records. The loop and format-reuse slices have passed
 Linux and Windows CI and merged. The [first actual model-authored source run](docs/SOURCE-FIRST-LIVE-RESULTS.md) now completes a three-link chain; broader mutation competence remains open.
+For new witnessed searches, a parent must first use its own improvement code
+to create a changed further child and run it on the first development task.
+[Verified private source copies](docs/SOURCE-MUTATION-WITNESS.md#verified-source-copies-for-new-owners)
+now bind returned code before fresh execution records are prepared. The bounded
+real-worker check passes with supplied programs and simulated judging; original
+failed owners remain unchanged. Model context and output headroom still need
+checking before another live experiment.
 The [starter source factory](docs/SOURCE-SEED.md) now combines the unchanged
 generation recipe with a versioned, one-callback Python source proposer. It
 creates a self-contained starting agent without choosing a run or allocating

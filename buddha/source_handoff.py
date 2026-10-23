@@ -23,11 +23,21 @@ def _sources() -> list[Path]:
 def _mutation_witness(record: dict[str, object]) -> bool:
     if record["format"] == "buddha.source-handoff.v1":
         return False
-    if record["format"] == "buddha.source-handoff.v2" and _json(
+    if record["format"] in {"buddha.source-handoff.v2", "buddha.source-handoff.v3"} and _json(
         record["mutation_witness"]
     ) == _json(source_search.MUTATION_WITNESS_POLICY):
         return True
     raise SourceHandoffError("unsupported source proposal or fixed mutation-witness policy")
+
+
+def _source_copy(record: dict[str, object]) -> bool:
+    if record["format"] in {"buddha.source-handoff.v1", "buddha.source-handoff.v2"}:
+        return False
+    if record["format"] == "buddha.source-handoff.v3" and _json(record["source_copy"]) == _json(
+        source_search.SOURCE_COPY_POLICY
+    ):
+        return True
+    raise SourceHandoffError("unsupported source proposal or fixed source-copy policy")
 
 
 def check_source_handoff(path: Path, *, expected_sha256: str) -> dict[str, object]:
@@ -46,6 +56,7 @@ def check_source_handoff(path: Path, *, expected_sha256: str) -> dict[str, objec
         raw = pipeline._read(path, expected_sha256)
         record = _load(raw)
         mutation_witness = _mutation_witness(record)
+        source_copy = _source_copy(record)
         record = _object(
             record,
             {
@@ -57,7 +68,8 @@ def check_source_handoff(path: Path, *, expected_sha256: str) -> dict[str, objec
                 "source_sha256",
                 "requested_terms",
             }
-            | ({"mutation_witness"} if mutation_witness else set()),
+            | ({"mutation_witness"} if mutation_witness else set())
+            | ({"source_copy"} if source_copy else set()),
         )
         pins = _object(record["source_sha256"])
         if not 1 <= len(pins) <= 1023:
@@ -109,7 +121,9 @@ def check_source_handoff(path: Path, *, expected_sha256: str) -> dict[str, objec
         maximum_screens = cast(int, spec.to_record()["iterations"]) + 1
         stages = cast(list[object], seed["stages"])
         result: dict[str, object] = {
-            "format": "buddha.source-handoff-check.v2"
+            "format": "buddha.source-handoff-check.v3"
+            if source_copy
+            else "buddha.source-handoff-check.v2"
             if mutation_witness
             else "buddha.source-handoff-check.v1",
             "status": "configuration_checked",
@@ -146,6 +160,8 @@ def check_source_handoff(path: Path, *, expected_sha256: str) -> dict[str, objec
         }
         if mutation_witness:
             result["mutation_witness"] = record["mutation_witness"]
+        if source_copy:
+            result["source_copy"] = record["source_copy"]
         return _load(_json(result))
     except (ValueError, TypeError, KeyError, OSError, RecursionError):
         raise SourceHandoffError(
