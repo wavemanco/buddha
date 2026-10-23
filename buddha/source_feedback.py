@@ -10,10 +10,11 @@ import json
 import os
 import stat
 from collections.abc import Iterator, Sequence
+from contextlib import ExitStack
 from pathlib import Path
 from typing import cast
 
-from buddha import candidate_generation, source_screen
+from buddha import candidate_generation, source_screen, trial_fence
 from buddha import native_pipeline as pipeline
 from buddha.answers import TaskSet, _utf8
 from buddha.releases import (
@@ -788,19 +789,51 @@ def write_source_feedback(
             name + ".json": _json(bundle[name])
             for name in ("source", "split", "feedback", "provenance")
         }
-        directory.mkdir()
-        for name, raw in records.items():
-            pipeline._write(directory / name, raw)
-        for name, raw in records.items():
-            if pipeline._read(directory / name, _sha(raw)) != raw:
-                raise SourceFeedbackError("written feedback changed before handoff")
-        return {
-            name: {
-                "path": str(directory / (name + ".json")),
-                "sha256": _sha(records[name + ".json"]),
+        provenance = _object(bundle["provenance"])
+        references = [_object(provenance["reference"])]
+        for value in _list(provenance.get("failure_history", [])):
+            edge = _object(value, {"parent", "proposal", "screen"})
+            references.extend(_object(edge[name]) for name in ("parent", "proposal", "screen"))
+        authority_path = pipeline._absolute(references[0]["authorization"])
+        original_terms = None
+        with ExitStack() as stack:
+            for item in references:
+                if pipeline._absolute(item["authorization"]) != authority_path:
+                    raise SourceFeedbackError("feedback history changes its original grant")
+                location = pipeline._absolute(item["directory"])
+                report = _object(
+                    _load(pipeline._read(location / "report.json", _digest(item["report_sha256"])))
+                )
+                # The builder verified this exact report against original custody.
+                # Reuse its immutable terms without opening a financial database.
+                terms = _object(report["authorization"])
+                if original_terms is None:
+                    original_terms = terms
+                elif trial_fence._actual_terms(terms) != trial_fence._actual_terms(original_terms):
+                    raise SourceFeedbackError("feedback history changes original grant terms")
+                stack.enter_context(
+                    trial_fence.work(authority_path, terms, directory=location, kind="feedback")
+                )
+            if original_terms is None:
+                raise SourceFeedbackError("feedback requires its original measured grant")
+            stack.enter_context(
+                trial_fence.work(
+                    authority_path, original_terms, directory=directory, kind="feedback"
+                )
+            )
+            directory.mkdir()
+            for name, raw in records.items():
+                pipeline._write(directory / name, raw)
+            for name, raw in records.items():
+                if pipeline._read(directory / name, _sha(raw)) != raw:
+                    raise SourceFeedbackError("written feedback changed before handoff")
+            return {
+                name: {
+                    "path": str(directory / (name + ".json")),
+                    "sha256": _sha(records[name + ".json"]),
+                }
+                for name in ("feedback", "provenance")
             }
-            for name in ("feedback", "provenance")
-        }
     except (ValueError, TypeError, KeyError, OSError, RecursionError) as error:
         if isinstance(error, SourceFeedbackError):
             raise

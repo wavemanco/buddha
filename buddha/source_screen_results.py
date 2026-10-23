@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import cast
 
 from buddha import native_pipeline as pipeline
+from buddha import trial_fence
 from buddha.answers import TaskSet
 from buddha.doctor import _authority, _Busy, _Unsupported
 from buddha.native_evaluation import _Generation, _read_generation
@@ -406,7 +407,10 @@ def collect_source_screen(
         controls_sha256 = pipeline._sha(
             {
                 "files": _comparison_controls(
-                    context, {Path(path): digest for path, digest in controls.items()}, screen
+                    context,
+                    {Path(path): digest for path, digest in controls.items()},
+                    screen,
+                    core=anchor.manifest["core"],
                 ),
                 "core": anchor.manifest["core"],
                 "runtime": anchor.manifest["runtime"],
@@ -446,8 +450,12 @@ def collect_source_screen(
             count = len(observed)
         reader.funded = _owners(reader, record, count, controls, failed_index=failed_index)
         config = _object(reader.funded["config"])
-        if config["scope"] != "source screen: " + screen.comparison_key():
-            raise SourceScreenError("saved screen belongs to another authority scope")
+        trial_fence.require_purpose(
+            authorization,
+            config,
+            directory=directory,
+            expected="source screen: " + screen.comparison_key(),
+        )
         current = authority_observation(reader.capture, authorization, reader.funded)
         if record["lineage"] is not None:
             lineage = _object(record["lineage"])

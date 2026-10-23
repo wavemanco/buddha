@@ -16,13 +16,15 @@ import sqlite3
 import ssl
 import sys
 import uuid
-from collections.abc import Callable, Mapping, Sequence
+from collections.abc import Callable, Iterator, Mapping, Sequence
+from contextlib import contextmanager
 from dataclasses import dataclass, field, replace
 from datetime import UTC, date, datetime
 from functools import lru_cache, wraps
 from pathlib import Path
 from typing import cast
 
+from buddha import trial_fence
 from buddha.authorization import Authorization, AuthorizedLedger
 from buddha.common import ValidationError
 from buddha.ledger import Ledger, OperationConflict
@@ -100,6 +102,7 @@ CORE = frozenset(
                 "history",
                 "provider",
                 "common",
+                "trial_fence",
             )
         ),
     }
@@ -289,6 +292,7 @@ def _core_sources() -> dict[str, str]:
         ledger,
         provider,
         releases,
+        trial_fence,
         wire,
     )
 
@@ -301,6 +305,7 @@ def _core_sources() -> dict[str, str]:
         ledger,
         provider,
         releases,
+        trial_fence,
         wire,
     )
     package = Path(__file__).absolute().parent
@@ -598,17 +603,20 @@ def prepare_gateway(
     )
     validate_manifest(record)
     digest = _sha(record)
-    directory.mkdir(parents=True, exist_ok=False)
-    with (directory / "manifest.json").open("xb") as stream:
-        stream.write(_json(record | {"record_sha256": digest}) + b"\n")
-    Ledger(
-        directory / "operations.sqlite3",
-        run_id=_text(record["run_id"]),
-        manifest_sha256=digest,
-        budget_microusd=budget_microusd,
-        max_calls=max_calls,
-    )
-    authorization.bind_run(directory, runtime_sha256=execution_identity(directory))
+    terms = authorization._terms()
+    with trial_fence.work(authorization.path, terms, directory=directory):
+        trial_fence.assert_work(authorization.path, terms, directory=directory, manifest=record)
+        directory.mkdir(parents=True, exist_ok=False)
+        with (directory / "manifest.json").open("xb") as stream:
+            stream.write(_json(record | {"record_sha256": digest}) + b"\n")
+        Ledger(
+            directory / "operations.sqlite3",
+            run_id=_text(record["run_id"]),
+            manifest_sha256=digest,
+            budget_microusd=budget_microusd,
+            max_calls=max_calls,
+        )
+        authorization.bind_run(directory, runtime_sha256=execution_identity(directory))
     return directory
 
 
@@ -966,6 +974,38 @@ class Gateway:
         ).for_run(self.directory)
         self.transport = transport
 
+    def assert_work(self, *, directory: Path, kind: str) -> None:
+        """Check original owner and output under an already held scoped lease."""
+        if not isinstance(directory, Path):
+            raise GatewayError("owned work requires an explicit output Path")
+        current = _read_manifest(self.directory)
+        if _sha(current) != self.manifest_sha256:
+            raise GatewayError("gateway owner manifest changed")
+        authority = self.ledger.authority
+        trial_fence.assert_work(
+            authority.path,
+            authority._terms(),
+            directory=self.directory,
+            kind=kind,
+            manifest=current,
+        )
+        trial_fence.assert_work(
+            authority.path,
+            authority._terms(),
+            directory=directory,
+            kind=kind,
+        )
+
+    @contextmanager
+    def work(self, *, directory: Path, kind: str) -> Iterator[None]:
+        """Own one complete host operation, including request send and settlement."""
+        authority = self.ledger.authority
+        with trial_fence.work(
+            authority.path, authority._terms(), directory=self.directory, kind=kind
+        ):
+            self.assert_work(directory=directory, kind=kind)
+            yield
+
     def operation_id(self, call: GatewayCall) -> str:
         record = _load(self._record_bytes)
         return _sha(
@@ -1029,106 +1069,113 @@ class Gateway:
             ):
                 raise OperationConflict("cached billing evidence differs")
             return envelope
-        _review(current["review"], fresh=True)
-        self.ledger.authorize_dispatch()
-        operation = self.ledger.reserve(operation_id, request_hash, spec.reserve_microusd())
-        if operation.status != "reserved":
-            raise PendingOperation("attempt may already be billed; no automatic retry")
-        review = _object(current["review"])
-        keyed = review.get("format") == _ACCOUNT_REVIEW_V2
-        reviewed = _object(review["credential_fingerprints" if keyed else "credential_sha256"])
-        args = (
-            operation_id,
-            replace(call, headers=headers),
-            spec,
-            _text(reviewed.get(spec.provider)),
-        )
-        # Keep the original four-argument route for legacy transports/reviews.
-        prepared = (
-            self.transport.prepare(*args, credential_context=_digest(review["credential_context"]))
-            if keyed
-            else self.transport.prepare(*args)
-        )
-        try:
-            if not self.ledger.dispatch(operation_id):
-                raise PendingOperation("another caller already claimed this physical attempt")
-            interruption: KeyboardInterrupt | SystemExit | None = None
-            try:
-                envelope = self.transport.send_prepared(prepared)
-                if not isinstance(envelope, RawEnvelope) or envelope.provider != spec.provider:
-                    raise ProviderUncertain("transport returned unsupported raw evidence")
-            except ReceivedReply as received:
-                envelope = received.envelope
-                interruption = received.interruption
-            except BaseException as error:
-                self.ledger.mark_unknown(operation_id)
-                if isinstance(error, (KeyboardInterrupt, SystemExit)):
-                    raise
-                raise ProviderUncertain("dispatched attempt has an uncertain outcome") from None
-
-            def make_receipt() -> dict[str, object]:
-                return {
-                    "format": "buddha.gateway-receipt.v1",
-                    "request": call.to_record(),
-                    "envelope": envelope.to_record(),
-                }
-
-            try:
-                receipt = make_receipt()
-            except (KeyboardInterrupt, SystemExit) as error:
-                receipt = make_receipt()
-                interruption = error
-            try:
-                request_id = envelope.provider_request_id or None
-            except WireError:
-                request_id = None
-            except (KeyboardInterrupt, SystemExit) as error:
-                request_id = None
-                interruption = error
-            try:
-                self.ledger.mark_unknown(
-                    operation_id, response=receipt, provider_request_id=request_id
+        with self.work(directory=self.directory, kind="gateway"):
+            _review(current["review"], fresh=True)
+            self.ledger.authorize_dispatch()
+            operation = self.ledger.reserve(operation_id, request_hash, spec.reserve_microusd())
+            if operation.status != "reserved":
+                raise PendingOperation("attempt may already be billed; no automatic retry")
+            review = _object(current["review"])
+            keyed = review.get("format") == _ACCOUNT_REVIEW_V2
+            reviewed = _object(review["credential_fingerprints" if keyed else "credential_sha256"])
+            args = (
+                operation_id,
+                replace(call, headers=headers),
+                spec,
+                _text(reviewed.get(spec.provider)),
+            )
+            # Keep the original four-argument route for legacy transports/reviews.
+            prepared = (
+                self.transport.prepare(
+                    *args, credential_context=_digest(review["credential_context"])
                 )
-            except (KeyboardInterrupt, SystemExit) as error:
-                self.ledger.mark_unknown(
-                    operation_id, response=receipt, provider_request_id=request_id
-                )
-                interruption = error
+                if keyed
+                else self.transport.prepare(*args)
+            )
             try:
-                usage = extract_usage(envelope)
-                if (
-                    not usage.provider_request_id
-                    or usage.model not in _texts(profile["response_models"])
-                    or usage.service_tier not in _texts(profile["response_tiers"], blank=True)
+                if not self.ledger.dispatch(operation_id):
+                    raise PendingOperation("another caller already claimed this physical attempt")
+                interruption: KeyboardInterrupt | SystemExit | None = None
+                try:
+                    envelope = self.transport.send_prepared(prepared)
+                    if not isinstance(envelope, RawEnvelope) or envelope.provider != spec.provider:
+                        raise ProviderUncertain("transport returned unsupported raw evidence")
+                except ReceivedReply as received:
+                    envelope = received.envelope
+                    interruption = received.interruption
+                except BaseException as error:
+                    self.ledger.mark_unknown(operation_id)
+                    if isinstance(error, (KeyboardInterrupt, SystemExit)):
+                        raise
+                    raise ProviderUncertain("dispatched attempt has an uncertain outcome") from None
+
+                def make_receipt() -> dict[str, object]:
+                    return {
+                        "format": "buddha.gateway-receipt.v1",
+                        "request": call.to_record(),
+                        "envelope": envelope.to_record(),
+                    }
+
+                try:
+                    receipt = make_receipt()
+                except (KeyboardInterrupt, SystemExit) as error:
+                    receipt = make_receipt()
+                    interruption = error
+                try:
+                    request_id = envelope.provider_request_id or None
+                except WireError:
+                    request_id = None
+                except (KeyboardInterrupt, SystemExit) as error:
+                    request_id = None
+                    interruption = error
+                try:
+                    self.ledger.mark_unknown(
+                        operation_id, response=receipt, provider_request_id=request_id
+                    )
+                except (KeyboardInterrupt, SystemExit) as error:
+                    self.ledger.mark_unknown(
+                        operation_id, response=receipt, provider_request_id=request_id
+                    )
+                    interruption = error
+                try:
+                    usage = extract_usage(envelope)
+                    if (
+                        not usage.provider_request_id
+                        or usage.model not in _texts(profile["response_models"])
+                        or usage.service_tier not in _texts(profile["response_tiers"], blank=True)
+                    ):
+                        raise WireError("received model/tier is outside the verified profile")
+                except WireError:
+                    if interruption is not None:
+                        raise interruption from None
+                    raise ProviderUncertain(
+                        "raw receipt retained; billing remains uncertain"
+                    ) from None
+                actual = spec.cost_microusd(usage.input_tokens, usage.output_tokens)
+                if actual <= spec.reserve_microusd() and (
+                    usage.input_tokens > spec.input_token_ceiling
+                    or usage.output_tokens > spec.max_output_tokens
                 ):
-                    raise WireError("received model/tier is outside the verified profile")
-            except WireError:
+                    raise BoundBreach(
+                        "raw usage exceeds verified token bounds; reservation retained"
+                    )
+                try:
+                    self.ledger.complete(
+                        operation_id,
+                        response=receipt,
+                        actual_microusd=actual,
+                        provider_request_id=usage.provider_request_id,
+                    )
+                except (KeyboardInterrupt, SystemExit) as error:
+                    self.ledger.complete(
+                        operation_id,
+                        response=receipt,
+                        actual_microusd=actual,
+                        provider_request_id=usage.provider_request_id,
+                    )
+                    interruption = error
                 if interruption is not None:
-                    raise interruption from None
-                raise ProviderUncertain("raw receipt retained; billing remains uncertain") from None
-            actual = spec.cost_microusd(usage.input_tokens, usage.output_tokens)
-            if actual <= spec.reserve_microusd() and (
-                usage.input_tokens > spec.input_token_ceiling
-                or usage.output_tokens > spec.max_output_tokens
-            ):
-                raise BoundBreach("raw usage exceeds verified token bounds; reservation retained")
-            try:
-                self.ledger.complete(
-                    operation_id,
-                    response=receipt,
-                    actual_microusd=actual,
-                    provider_request_id=usage.provider_request_id,
-                )
-            except (KeyboardInterrupt, SystemExit) as error:
-                self.ledger.complete(
-                    operation_id,
-                    response=receipt,
-                    actual_microusd=actual,
-                    provider_request_id=usage.provider_request_id,
-                )
-                interruption = error
-            if interruption is not None:
-                raise interruption
-            return envelope
-        finally:
-            prepared.close()
+                    raise interruption
+                return envelope
+            finally:
+                prepared.close()

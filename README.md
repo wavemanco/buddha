@@ -146,6 +146,13 @@ unseen-task improvement. Seven focused methods and seven quality checks pass.
 Full prospective final populations/finalists, one-way finalization, promotion
 and the held-out scientific gate remain open under EVAL-01.
 
+The [trial work safeguard](docs/EVALUATION-FENCE.md) now connects the original
+phase grants and a shared writer lock to source search, feedback, validation,
+direct Gateway calls and worker Sessions. Closing a trial blocks new adaptive
+work while preserving receipt settlement and passive reads of older results.
+Complete-output feedback stays intact. The final evaluation controller is still
+unimplemented; this safeguard does not enable a final run or establish improvement.
+
 At this checkpoint the living plan contains **6 remaining leaf slices**.
 The Windows PID-lock observer follow-up is complete at its shared-reader scope;
 [the guide](docs/DOCTOR.md#windows-file-sharing) states its boundaries.

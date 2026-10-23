@@ -229,8 +229,9 @@ class AgentSession:
             self._activate(0)
             _root(self.output.parent)
             _path(self.output.name)
-            self.output.mkdir()
-            self.partial = (self.output / "partial.jsonl").open("xb")
+            with gateway.work(directory=self.output, kind="generation"):
+                self.output.mkdir()
+                self.partial = (self.output / "partial.jsonl").open("xb")
         except (ReleaseError, KeyError, TypeError, ValueError, OSError):
             raise AgentRunError(
                 "generation owner, configuration or destination is invalid"
@@ -293,6 +294,7 @@ class AgentSession:
         execution_identity(self.gateway.directory)
 
     def handle(self, frame: dict[str, object]) -> dict[str, object] | None:
+        self.gateway.assert_work(directory=self.output, kind="generation")
         try:
             self._unchanged()
             _object(frame)
@@ -425,6 +427,10 @@ class AgentSession:
             self.partial = None
 
     def run(self) -> dict[str, object]:
+        with self.gateway.work(directory=self.output, kind="generation"):
+            return self._run()
+
+    def _run(self) -> dict[str, object]:
         if self.ran or self.ready or self.broken or self.done is not None:
             raise AgentRunError("generation session already started")
         self._unchanged()

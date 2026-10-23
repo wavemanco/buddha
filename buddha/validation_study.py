@@ -9,11 +9,12 @@ import hashlib
 import re
 import sqlite3
 from collections.abc import Callable, Iterator, Sequence
+from contextlib import ExitStack
 from functools import wraps
 from pathlib import Path
 from typing import Any, cast
 
-from buddha import candidate_generation, executor, native_evaluation
+from buddha import candidate_generation, executor, native_evaluation, trial_fence
 from buddha import native_pipeline as pipeline
 from buddha import source_screen_results as saved_native
 from buddha.answers import TaskSet, _id, _source, _utf8
@@ -405,7 +406,12 @@ def _definition(raw: bytes, runtime: str) -> dict[str, Any]:
 
 @_checked
 def prepare_validation_study(
-    directory: Path, *, declaration: Path, expected_sha256: str, expected_runtime_sha256: str
+    directory: Path,
+    *,
+    declaration: Path,
+    expected_sha256: str,
+    expected_runtime_sha256: str,
+    authorization: Authorization | None = None,
 ) -> Path:
     """Freeze original metadata/controls; create no financial authority or worker.
 
@@ -415,7 +421,13 @@ def prepare_validation_study(
     directory, declaration = _absolute(str(directory)), _absolute(str(declaration))
     raw = pipeline._read(declaration, _digest(expected_sha256))
     state = _definition(raw, _digest(expected_runtime_sha256))
-    originals = state["controls"] | {declaration: _digest(expected_sha256)}
+    originals = trial_fence._include_controls(
+        directory, state["controls"] | {declaration: _digest(expected_sha256)}
+    )
+    if authorization is None and trial_fence.required_controls(directory):
+        raise ValidationStudyError("trial validation preparation needs its explicit original grant")
+    if authorization is not None and not isinstance(authorization, Authorization):
+        raise ValidationStudyError("validation preparation needs an original Authorization")
     record = state["record"]
     internal = {
         "declaration.json": _json(record),
@@ -444,11 +456,29 @@ def prepare_validation_study(
         "internal_controls": {name: _sha(value) for name, value in internal.items()},
     }
     _json(context)
-    directory.mkdir()
-    for name, value in internal.items():
-        pipeline._write(directory / name, value)
-    pipeline._write(directory / "context.json", _json(context))
-    (directory / "validation").mkdir()
+    with ExitStack() as stack:
+        if authorization is not None:
+            controls = stack.enter_context(
+                trial_fence.work(
+                    authorization.path,
+                    authorization._terms(),
+                    directory=directory,
+                    kind="validation",
+                )
+            )
+            if any(originals.get(path) != pin for path, pin in controls.items()):
+                raise ValidationStudyError("original trial controls changed before preparation")
+            trial_fence.require_purpose(
+                authorization.path,
+                authorization._terms(),
+                directory=directory,
+                expected="validation study: " + _sha(internal["declaration.json"]),
+            )
+        directory.mkdir()
+        for name, value in internal.items():
+            pipeline._write(directory / name, value)
+        pipeline._write(directory / "context.json", _json(context))
+        (directory / "validation").mkdir()
     return directory
 
 
@@ -881,8 +911,12 @@ def _census(
         raise ValidationStudyError("validation lacks original financial authority")
     reader.funded = funded
     current = cast(dict[str, Any], authority_observation(reader.capture, authorization, funded))
-    if current["scope"] != "validation study: " + state["declaration_sha256"]:
-        raise ValidationStudyError("grant scope differs from the canonical copied declaration")
+    trial_fence.require_purpose(
+        authorization,
+        _obj(funded["config"]),
+        directory=state["directory"],
+        expected="validation study: " + state["declaration_sha256"],
+    )
     for row in reader._rows(funded["auth_runs"]):
         path = _absolute(row["directory"])
         if not any(path == owner.directory and row["run_id"] == owner.run_id for owner in owners):
@@ -1707,7 +1741,12 @@ def run_validation_occasion(
     state, slots, occasion, _, _, completed = check()
     if ordinal in completed:
         return completed[ordinal]
-    with pipeline._exclusive(directory):
+    with (
+        trial_fence.work(
+            authority_path, authorization._terms(), directory=directory, kind="validation"
+        ),
+        pipeline._exclusive(directory),
+    ):
         state, slots, occasion, _, _, completed = check()
         if ordinal in completed:
             return completed[ordinal]

@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import cast
 
 from buddha import native_pipeline as pipeline
+from buddha import trial_fence
 from buddha.answers import Answers, TaskSet, _utf8
 from buddha.authorization import Authorization
 from buddha.doctor import _authority, _Busy, _Capture, _owner, _Unsupported
@@ -108,6 +109,7 @@ def _sources(recipe_format: object = "buddha.candidate-generation.v1") -> list[P
         "answers",
         "candidate_run",
         "candidate_generation",
+        "trial_fence",
         "native_pipeline",
         "doctor",
         "process_observation",
@@ -121,6 +123,32 @@ def _sources(recipe_format: object = "buddha.candidate-generation.v1") -> list[P
         if recipe_format == "buddha.candidate-generation.v2"
         else []
     )
+
+
+@_checked
+def _recorded_sources(paths: Sequence[Path], core: object) -> list[Path]:
+    """Select a closed original candidate closure without opening retired sources."""
+    recorded = _object(core)
+    legacy = {
+        "buddha",
+        "buddha.gateway",
+        "buddha.wire",
+        "buddha.releases",
+        "buddha.authorization",
+        "buddha.ledger",
+        "buddha.history",
+        "buddha.provider",
+        "buddha.common",
+    }
+    if set(recorded) not in (legacy, legacy | {"buddha.trial_fence"}):
+        raise CandidateGenerationError("unsupported original candidate core profile")
+    for digest in recorded.values():
+        _digest(digest)
+    if "buddha.trial_fence" in recorded:
+        if sum(path.name == "trial_fence.py" for path in paths) != 1:
+            raise CandidateGenerationError("original fenced closure requires its helper")
+        return list(paths)
+    return [path for path in paths if path.name != "trial_fence.py"]
 
 
 def _recipe(
@@ -218,7 +246,9 @@ def prepare_candidate_generation(
     runtime_sha256 = _digest(expected_runtime_sha256)
     verify_selection(selection, roots, expected_sha256=selection.fingerprint())
     controls = _input_records(input_files, expected_input_hashes)
-    expected = {Path(row["path"]): row["sha256"] for row in controls}
+    expected = trial_fence._include_controls(
+        directory, {Path(row["path"]): row["sha256"] for row in controls}
+    )
 
     def consume(path: Path) -> bytes:
         raw = pipeline._read(path, expected.get(path))
@@ -236,30 +266,40 @@ def prepare_candidate_generation(
         raise CandidateGenerationError("generation output overlaps original inputs")
     _root(directory.parent)
     _path(directory.name)
-    directory.mkdir()
-    for name in ("owners", "attempts", "completed", "observations"):
-        (directory / name).mkdir()
-    context = directory / "context.json"
-    context_raw = _json(
-        {
-            "format": generation_formats(recipe["format"])["context"],
-            "descriptor": str(descriptor),
-            "expected_runtime_sha256": runtime_sha256,
-        }
-    )
-    pipeline._write(context, context_raw)
-    expected[context] = hashlib.sha256(context_raw).hexdigest()
-    prepare_gateway(
-        directory / "owners/0",
-        selection=selection,
-        roots=roots,
-        authorization=authorization,
-        budget_microusd=budget_microusd,
-        max_calls=max_calls,
-        input_files=list(expected),
-        expected_input_hashes=expected,
-        review=review,
-    )
+    with trial_fence.work(
+        authorization.path, authorization._terms(), directory=directory, kind="generation"
+    ) as trial_controls:
+        for path, digest in trial_controls.items():
+            if path in expected and expected[path] != digest:
+                raise CandidateGenerationError("original trial controls changed before preparation")
+            expected[path] = digest
+        _input_records(list(expected), expected)
+        context = directory / "context.json"
+        if len(set(expected) | {context}) > 1024:
+            raise CandidateGenerationError("generation controls exceed the owner input limit")
+        directory.mkdir()
+        for name in ("owners", "attempts", "completed", "observations"):
+            (directory / name).mkdir()
+        context_raw = _json(
+            {
+                "format": generation_formats(recipe["format"])["context"],
+                "descriptor": str(descriptor),
+                "expected_runtime_sha256": runtime_sha256,
+            }
+        )
+        pipeline._write(context, context_raw)
+        expected[context] = hashlib.sha256(context_raw).hexdigest()
+        prepare_gateway(
+            directory / "owners/0",
+            selection=selection,
+            roots=roots,
+            authorization=authorization,
+            budget_microusd=budget_microusd,
+            max_calls=max_calls,
+            input_files=list(expected),
+            expected_input_hashes=expected,
+            review=review,
+        )
     return directory
 
 
@@ -548,10 +588,26 @@ def _v2_report(
 @_checked
 def run_candidate_generation(directory: Path, *, transport: RawHTTPTransport) -> dict[str, object]:
     """Execute or replay the same original source owner and retain partial work."""
-    if not isinstance(directory, Path):
-        raise CandidateGenerationError("generation needs an explicit Path")
+    if not isinstance(directory, Path) or not isinstance(transport, RawHTTPTransport):
+        raise CandidateGenerationError("generation needs its explicit Path and raw transport")
     directory = pipeline._absolute(str(directory))
-    with pipeline._exclusive(directory):
+    original = _read_manifest(directory / "owners/0")
+    authority_path = pipeline._absolute(original["authorization_path"])
+    if trial_fence.is_closed(directory):
+        return inspect_candidate_generation(
+            directory,
+            authorization=authority_path,
+            expected_report_sha256=file_hash(directory / "report.json"),
+        )
+    with (
+        trial_fence.work(
+            authority_path,
+            Authorization(authority_path)._terms(),
+            directory=directory,
+            kind="generation",
+        ),
+        pipeline._exclusive(directory),
+    ):
         gateway = Gateway(directory / "owners/0", transport=transport)
         owner = _read_manifest(gateway.directory)
         bindings = {
@@ -873,7 +929,10 @@ def _read_evidence(
     if generation_formats(recipe["format"]) != formats:
         raise CandidateGenerationError("candidate source modes differ")
     if prospective:
-        names = {path.name for path in _sources(recipe["format"])}
+        names = {
+            path.name
+            for path in _recorded_sources(_sources(recipe["format"]), history.manifest["core"])
+        }
         prefixes = {
             path.parent
             for path in bindings

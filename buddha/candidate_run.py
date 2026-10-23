@@ -381,7 +381,11 @@ class CandidateSession:
                 self.worker["task"] = self.task.to_record()
             self._worker_bytes = _json(self.worker)
             self._frozen = self._configuration()
-            self.output.mkdir()
+            with gateway.work(
+                directory=self.output,
+                kind="improvement" if self._improvement else "generation",
+            ):
+                self.output.mkdir()
         except (ReleaseError, KeyError, TypeError, ValueError, OSError):
             raise CandidateRunError(
                 "candidate contract, source, runtime or destination is invalid"
@@ -438,6 +442,10 @@ class CandidateSession:
         return self.gateway.ledger.totals()["operation_count"] == self.delivered
 
     def handle(self, frame: dict[str, object]) -> dict[str, object] | None:
+        self.gateway.assert_work(
+            directory=self.output,
+            kind="improvement" if self._improvement else "generation",
+        )
         try:
             if (
                 self.improvement
@@ -618,6 +626,13 @@ class CandidateSession:
             os.fsync(stream.fileno())
 
     def run(self) -> dict[str, object]:
+        with self.gateway.work(
+            directory=self.output,
+            kind="improvement" if self._improvement else "generation",
+        ):
+            return self._run()
+
+    def _run(self) -> dict[str, object]:
         if self.ran or self.ready or self.broken or self.done is not None:
             raise CandidateRunError("candidate session already started")
         self._unchanged()
