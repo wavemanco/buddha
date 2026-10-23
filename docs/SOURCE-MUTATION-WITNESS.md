@@ -118,6 +118,28 @@ The [delivery record](conformance/src02-mutation-witness-delivery.json) retains
 the passing cohorts, original failed proof, bounded diagnostics and these limits.
 No model calls, new allocation or operator run is required for this publication.
 
+### Fresh startup checks
+
+Two later, separately identified composed searches also stop before the further
+child becomes ready: one uses a fresh folder in the original layout, and one uses
+a shorter checkout and output path. Each observes ten real agent workers and
+eighteen simulated native workers. Neither completes the required positive
+witness. The shorter location does not resolve the failure.
+
+Both new attempts use the same child, worker, runtime and canonical generation
+input as the successful standalone control. Their receipts do not capture the
+underlying startup exception. The earlier diagnostic's input/output error cannot
+therefore be assigned to these attempts, and a Windows path-limit cause is not
+established. All 236 pinned inputs in each producer checkout still match after
+execution.
+
+The next useful check is a bounded diagnostic on the retained short-path child
+folder, recording the original startup exception and Docker's actual mount
+mapping. Repeating the whole search adds little information. The failed owners
+remain incomplete with their original evidence; no owner is replaced or retried.
+The [follow-up record](conformance/src02-startup-followup.json) keeps the exact
+proof hashes, observed counts and limits. No paid calls were made.
+
 ## Versions and library settings
 
 New `prepare_source_search(...)` calls default to `mutation_witness=True` and
