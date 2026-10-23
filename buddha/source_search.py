@@ -134,7 +134,7 @@ def _checked[**P, T](function: Callable[P, T]) -> Callable[P, T]:
             _Busy,
             _Unsupported,
         ) as error:
-            if isinstance(error, SourceSearchError):
+            if isinstance(error, (SourceSearchError, source_feedback.SourceFeedbackTooLarge)):
                 raise
             raise SourceSearchError(
                 "source search configuration or retained evidence is invalid"
@@ -159,6 +159,153 @@ class SourceSearchSpec(_Artifact):
         _integer(record["seed"], 0)
         _integer(record["max_active"], 2, 64)
         object.__setattr__(self, "data", _json(record))
+
+
+def _witness_path(value: object) -> Path:
+    path = pipeline._absolute(value)
+    if str(path) != value or ".." in path.parts:
+        raise SourceSearchError("witness paths must be canonical without traversal")
+    for part in path.parts[1:]:
+        _path(part)
+    return path
+
+
+class _WitnessTreatment(_Artifact):
+    """Immutable witness inputs; construction inspects no filesystem or owner."""
+
+    @_checked
+    def __post_init__(self) -> None:
+        record = _object(
+            _load(self.data),
+            {
+                "format",
+                "scope",
+                "directory",
+                "parent",
+                "base_screen",
+                "proposal_template",
+                "review",
+                "expected_runtime_sha256",
+                "controls",
+                "source_copy",
+                "policy",
+            },
+        )
+        if record["format"] != "buddha.source-mutation-witness-treatment.v1" or (
+            _json(record["policy"]) != _json(MUTATION_WITNESS_POLICY)
+            or type(record["source_copy"]) is not bool
+        ):
+            raise SourceSearchError("unsupported bounded witness treatment")
+        scope, directory = _witness_path(record["scope"]), _witness_path(record["directory"])
+        parent = _object(record["parent"], {"directory", "authorization", "report_sha256"})
+        parent_directory = _witness_path(parent["directory"])
+        authority = _witness_path(parent["authorization"])
+        _digest(parent["report_sha256"])
+        if (
+            directory == scope
+            or not directory.is_relative_to(scope)
+            or (
+                not parent_directory.is_relative_to(scope)
+                or directory.is_relative_to(parent_directory)
+                or parent_directory.is_relative_to(directory)
+                or directory.is_relative_to(authority)
+                or authority.is_relative_to(directory)
+            )
+        ):
+            raise SourceSearchError("witness output overlaps its original scope or evidence")
+        base = source_screen.SourceScreen.from_bytes(_json(record["base_screen"]))
+        generation = _object(base.to_record()["generation"])
+        if base.to_record()["format"] != "buddha.source-screen.v2" or (
+            generation["entrypoint"] != "candidate.py"
+        ):
+            raise SourceSearchError("witness needs a failure-aware one-file comparison")
+        _template_screen(base, _template(record["proposal_template"]))
+        _review(_object(record["review"]))
+        runtime = _digest(record["expected_runtime_sha256"])
+        controls = _object(record["controls"])
+        if not 1 <= len(controls) <= 1024:
+            raise SourceSearchError("witness needs bounded original common controls")
+        paths = [_witness_path(path) for path in controls]
+        if len(set(paths)) != len(paths):
+            raise SourceSearchError("witness controls repeat an aliased path")
+        for digest in controls.values():
+            _digest(digest)
+        if _object(generation["runtime"])["sha256"] != runtime or (
+            controls.get(str(_witness_path(_object(generation["runtime"])["path"]))) != runtime
+        ):
+            raise SourceSearchError("witness controls omit independent runtime approval")
+        protected = [*paths, authority]
+        for role in ("generation", "native"):
+            protected.extend(source_screen._roots(_object(base.to_record()[role])).values())
+        if any(
+            directory.is_relative_to(path) or path.is_relative_to(directory) for path in protected
+        ):
+            raise SourceSearchError("witness output overlaps an original selected input")
+        object.__setattr__(self, "data", _json(record))
+
+
+@_checked
+def _witness_declaration(
+    *,
+    scope: Path,
+    directory: Path,
+    parent: dict[str, object],
+    base_screen: source_screen.SourceScreen,
+    proposal_template: dict[str, object],
+    review: dict[str, object],
+    expected_runtime_sha256: str,
+    controls: Mapping[Path, str],
+    source_copy: bool,
+) -> _WitnessTreatment:
+    if (
+        not isinstance(scope, Path)
+        or not isinstance(directory, Path)
+        or (
+            type(base_screen) is not source_screen.SourceScreen
+            or any(not isinstance(path, Path) for path in controls)
+        )
+    ):
+        raise SourceSearchError("witness requires explicit paths and immutable comparison")
+    return _WitnessTreatment.from_bytes(
+        _json(
+            {
+                "format": "buddha.source-mutation-witness-treatment.v1",
+                "scope": str(scope),
+                "directory": str(directory),
+                "parent": parent,
+                "base_screen": base_screen.to_record(),
+                "proposal_template": proposal_template,
+                "review": review,
+                "expected_runtime_sha256": expected_runtime_sha256,
+                "controls": {str(path): digest for path, digest in controls.items()},
+                "source_copy": source_copy,
+                "policy": dict(MUTATION_WITNESS_POLICY),
+            }
+        )
+    )
+
+
+def _search_witness_treatment(
+    reader: NativeEvidence, state: dict[str, Any], reference: dict[str, object]
+) -> _WitnessTreatment:
+    return _witness_declaration(
+        scope=reader.root,
+        directory=_witness_location(reader, reference),
+        parent=reference,
+        base_screen=state["screen"],
+        proposal_template=state["record"]["proposal_template"],
+        review=state["record"]["review"],
+        expected_runtime_sha256=state["record"]["expected_runtime_sha256"],
+        controls=state["controls"],
+        source_copy=_has_source_copy(state),
+    )
+
+
+def _witness_controls(treatment: _WitnessTreatment) -> dict[Path, str]:
+    return {
+        Path(path): _digest(digest)
+        for path, digest in _object(treatment.to_record()["controls"]).items()
+    }
 
 
 def _sources() -> list[Path]:
@@ -405,13 +552,19 @@ def _bundle(
     )
 
 
-def _parent_screen(
+def _parent_evidence(
     reader: NativeEvidence, reference: dict[str, object]
-) -> source_screen.SourceScreen:
+) -> tuple[dict[str, Any], source_screen.SourceScreen]:
     root = pipeline._absolute(reference["directory"])
     report = _read_ref(reader, reference)
     raw = reader.raw(root / "screen.json", report["screen_sha256"])
-    return source_screen.SourceScreen.from_bytes(raw)
+    return report, source_screen.SourceScreen.from_bytes(raw)
+
+
+def _parent_screen(
+    reader: NativeEvidence, reference: dict[str, object]
+) -> source_screen.SourceScreen:
+    return _parent_evidence(reader, reference)[1]
 
 
 def _plan(
@@ -459,15 +612,19 @@ def _plan(
     }
 
 
-def _child_screen(
-    state: dict[str, Any], proposal: dict[str, Any], location: Path
+def _child_screen_for(
+    base_screen: source_screen.SourceScreen,
+    proposal: dict[str, Any],
+    location: Path,
+    *,
+    source_copy: bool,
 ) -> source_screen.SourceScreen:
-    record = state["screen"].to_record()
+    record = base_screen.to_record()
     child = _object(proposal["child"])
     generation = _object(record["generation"])
     selection = _object(generation["selection"])
     _object(selection["components"])["agent"] = {"candidate.py": child["source_sha256"]}
-    agent = str(location / "agent") if _has_source_copy(state) else child["directory"]
+    agent = str(location / "agent") if source_copy else child["directory"]
     _object(generation["roots"])["agent"] = agent
     _object(generation["executor"])["mounts"] = [
         ["/agent", agent],
@@ -477,21 +634,30 @@ def _child_screen(
     screen = source_screen.SourceScreen.from_bytes(_json(record))
     if (
         screen.candidate_id != child["agent_sha256"]
-        or screen.comparison_key() != state["screen"].comparison_key()
+        or screen.comparison_key() != base_screen.comparison_key()
     ):
         raise SourceSearchError("materialized child changes the fixed source comparison")
     return screen
 
 
-def _materialize_child_source(
-    state: dict[str, Any],
+def _child_screen(
+    state: dict[str, Any], proposal: dict[str, Any], location: Path
+) -> source_screen.SourceScreen:
+    return _child_screen_for(
+        state["screen"], proposal, location, source_copy=_has_source_copy(state)
+    )
+
+
+def _materialize_child_source_for(
+    base_screen: source_screen.SourceScreen,
     proposal: dict[str, Any],
     location: Path,
     *,
     owner_directory: Path,
+    source_copy: bool,
 ) -> None:
     """Copy checked returned bytes before a new owner; retained owners are never repaired."""
-    if not _has_source_copy(state):
+    if not source_copy:
         return
     _root(location)
     if owner_directory not in {location / "screen", location / "generation"}:
@@ -531,7 +697,11 @@ def _materialize_child_source(
         pipeline._same_or_write(copied / "candidate.py", raw)
     if inventory(copied) != expected:
         raise SourceSearchError("copied child differs from its verified source inventory")
-    generation = _object(_child_screen(state, proposal, location).to_record()["generation"])
+    generation = _object(
+        _child_screen_for(base_screen, proposal, location, source_copy=source_copy).to_record()[
+            "generation"
+        ]
+    )
     selected = Selection.from_bytes(_json(generation["selection"]))
     actual = prepare_selection(
         Release.from_record(selected.to_record()["release"]),
@@ -542,11 +712,27 @@ def _materialize_child_source(
         raise SourceSearchError("copied child changes a fixed non-agent selection")
 
 
-def _proposal_controls(
-    state: dict[str, Any], location: Path, plan: dict[str, Any]
+def _materialize_child_source(
+    state: dict[str, Any],
+    proposal: dict[str, Any],
+    location: Path,
+    *,
+    owner_directory: Path,
+) -> None:
+    _materialize_child_source_for(
+        state["screen"],
+        proposal,
+        location,
+        owner_directory=owner_directory,
+        source_copy=_has_source_copy(state),
+    )
+
+
+def _proposal_controls_for(
+    controls: Mapping[Path, str], location: Path, plan: dict[str, Any]
 ) -> dict[Path, str]:
     return (
-        cast(dict[Path, str], state["controls"])
+        dict(controls)
         | {
             location / "plan.json": pipeline._sha(plan),
             location / "proposal.json": pipeline._sha(plan["proposal_descriptor"]),
@@ -558,9 +744,17 @@ def _proposal_controls(
     )
 
 
-def _screen_owner(
+def _proposal_controls(
+    state: dict[str, Any], location: Path, plan: dict[str, Any]
+) -> dict[Path, str]:
+    return _proposal_controls_for(state["controls"], location, plan)
+
+
+def _screen_owner_for(
     reader: NativeEvidence,
-    state: dict[str, Any],
+    common_controls: Mapping[Path, str],
+    review: dict[str, object],
+    runtime_sha256: str,
     directory: Path,
     expected: source_screen.SourceScreen,
 ) -> None:
@@ -576,7 +770,7 @@ def _screen_owner(
             "comparison_controls",
         },
     )
-    controls = {str(path): digest for path, digest in state["controls"].items()}
+    controls = {str(path): digest for path, digest in common_controls.items()}
     lineage = expected.to_record()["lineage"]
     if lineage is not None:
         reference = _object(lineage)
@@ -588,12 +782,28 @@ def _screen_owner(
         reader.bound(owner, directory / "screen.json") != expected.to_bytes()
         or context["format"] != source_screen._version(expected, "source-screen-context")
         or context["screen_sha256"] != expected.fingerprint()
-        or context["expected_runtime_sha256"] != state["record"]["expected_runtime_sha256"]
+        or context["expected_runtime_sha256"] != runtime_sha256
         or _json(_object(context["controls"])) != _json(controls)
         or owner.manifest["authorization_path"] != str(reader.authorization)
-        or _json(owner.manifest["review"]) != _json(state["record"]["review"])
+        or _json(owner.manifest["review"]) != _json(review)
     ):
         raise SourceSearchError("prepared screen differs from its original search treatment")
+
+
+def _screen_owner(
+    reader: NativeEvidence,
+    state: dict[str, Any],
+    directory: Path,
+    expected: source_screen.SourceScreen,
+) -> None:
+    _screen_owner_for(
+        reader,
+        state["controls"],
+        state["record"]["review"],
+        state["record"]["expected_runtime_sha256"],
+        directory,
+        expected,
+    )
 
 
 def _proposal_owner(
@@ -620,13 +830,14 @@ def _proposal_owner(
         )
 
 
-def _stage_owner(
+def _stage_owner_for(
     reader: NativeEvidence,
-    state: dict[str, Any],
     path: Path,
     section: dict[str, Any],
     controls: dict[Path, str],
     *,
+    review: dict[str, object],
+    funding: dict[str, Any],
     no_model: bool = False,
     verify_files: bool = False,
 ) -> None:
@@ -635,7 +846,7 @@ def _stage_owner(
     expected = {
         "selection": section["selection"],
         "roots": section["roots"],
-        "review": state["record"]["review"],
+        "review": review,
         "authorization_path": str(reader.authorization),
         "settings": {
             "budget_microusd": 1 if no_model else section["budget_microusd"],
@@ -649,7 +860,7 @@ def _stage_owner(
         raise SourceSearchError("prepared owner omits an original input")
     if verify_files:
         gateway.execution_identity(path, owner.manifest)
-    funded = [row for row in state["funding"]["auth_runs"] if row["run_id"] == owner.run_id]
+    funded = [row for row in funding["auth_runs"] if row["run_id"] == owner.run_id]
     if (
         len(funded) != 1
         or type(funded[0]["historical"]) is not int
@@ -659,23 +870,44 @@ def _stage_owner(
         raise SourceSearchError("prepared owner changes its original runtime")
 
 
+def _stage_owner(
+    reader: NativeEvidence,
+    state: dict[str, Any],
+    path: Path,
+    section: dict[str, Any],
+    controls: dict[Path, str],
+    *,
+    no_model: bool = False,
+    verify_files: bool = False,
+) -> None:
+    _stage_owner_for(
+        reader,
+        path,
+        section,
+        controls,
+        review=state["record"]["review"],
+        funding=state["funding"],
+        no_model=no_model,
+        verify_files=verify_files,
+    )
+
+
 def _present(reader: NativeEvidence, path: Path) -> bool:
     return path.relative_to(reader.root).as_posix() in reader.capture.entries
 
 
-def _stage_seal(reader: NativeEvidence, state: dict[str, Any], path: Path, *, role: str) -> bool:
+def _stage_seal_for(
+    reader: NativeEvidence, path: Path, *, funding: dict[str, Any], role: str
+) -> tuple[bool, bool]:
     """Check the existing stage anchor without reading retired producer programs."""
     owner = reader.owner(path)
     child, index = path.parent.parent, int(path.name)
     sealed = child / "completed" / (str(index) + ".json")
     anchors = [
-        row["reason"]
-        for row in state["funding"]["auth_deactivations"]
-        if row["run_id"] == owner.run_id
+        row["reason"] for row in funding["auth_deactivations"] if row["run_id"] == owner.run_id
     ]
     if not _present(reader, sealed):
-        state["inactive_pending"] |= bool(anchors)
-        return False
+        return False, bool(anchors)
     raw = reader.raw(sealed)
     seal = _object(_load(raw), {"format", "index", "owner_sha256", "attempt", "files"})
     formats = {
@@ -707,7 +939,13 @@ def _stage_seal(reader: NativeEvidence, state: dict[str, Any], path: Path, *, ro
         raise SourceSearchError("prepared completion inventory differs")
     for name, digest in files.items():
         reader.raw(attempt / _path(name), _digest(digest))
-    return True
+    return True, False
+
+
+def _stage_seal(reader: NativeEvidence, state: dict[str, Any], path: Path, *, role: str) -> bool:
+    sealed, inactive = _stage_seal_for(reader, path, funding=state["funding"], role=role)
+    state["inactive_pending"] |= inactive
+    return sealed
 
 
 def _witness_location(reader: NativeEvidence, reference: dict[str, object]) -> Path:
@@ -719,43 +957,101 @@ def _witness_location(reader: NativeEvidence, reference: dict[str, object]) -> P
     raise SourceSearchError("witness needs an original search candidate screen")
 
 
-def _witness_plan(
-    reader: NativeEvidence, state: dict[str, Any], parent: dict[str, object], location: Path
-) -> tuple[dict[str, Any], dict[str, Any]]:
-    screen = _parent_screen(reader, parent)
-    generation = _object(screen.to_record()["generation"])
-    bundle = _bundle(location / "feedback", parent, [], full_answers=True)
+def _witness_parent(
+    reader: NativeEvidence, treatment: _WitnessTreatment
+) -> source_screen.SourceScreen:
+    record = treatment.to_record()
+    if reader.root != _witness_path(record["scope"]) or reader.authorization != _witness_path(
+        _object(record["parent"])["authorization"]
+    ):
+        raise SourceSearchError("witness reader belongs to another original scope or authority")
+    reference = _object(record["parent"])
+    report, parent = _parent_evidence(reader, reference)
+    base = source_screen.SourceScreen.from_bytes(_json(record["base_screen"]))
+    if parent.comparison_key() != base.comparison_key() or (
+        _object(report["admission"])["eligible"] is not True
+    ):
+        raise SourceSearchError("witness needs its complete eligible common comparison")
+    controls = _witness_controls(treatment)
+    _screen_owner_for(
+        reader,
+        controls,
+        _object(record["review"]),
+        _digest(record["expected_runtime_sha256"]),
+        _witness_path(reference["directory"]),
+        parent,
+    )
+    owner = reader.owner(_witness_path(reference["directory"]) / "tasks/0/generation/owners/0")
+    names = {
+        path.name
+        for path in candidate_generation._recorded_sources(_sources(), owner.manifest["core"])
+    }
+    prefixes = {
+        path.parent
+        for path in controls
+        if path.name == "source_search.py" and all(path.parent / name in controls for name in names)
+    }
+    if len(prefixes) != 1:
+        raise SourceSearchError("witness original controls omit the closed helper inventory")
+    return parent
+
+
+def _witness_materials(
+    treatment: _WitnessTreatment, parent: source_screen.SourceScreen
+) -> tuple[source_screen.SourceScreen, dict[str, Any], dict[str, Any]]:
+    record = treatment.to_record()
+    reference = _object(record["parent"])
+    location = _witness_path(record["directory"])
+    generation = _object(parent.to_record()["generation"])
+    bundle = _bundle(location / "feedback", reference, [], full_answers=True)
     hashes = {name + ".json": pipeline._sha(bundle[name]) for name in _FILES}
-    template = state["record"]["proposal_template"]
-    return {
+    template = _object(record["proposal_template"])
+    plan = {
         "format": "buddha.source-mutation-witness-plan.v1",
         "policy": dict(MUTATION_WITNESS_POLICY),
-        "parent": parent,
-        "task": screen.tasks.select([screen.tasks.tasks[0].id]).to_record(),
+        "parent": reference,
+        "task": parent.tasks.select([parent.tasks.tasks[0].id]).to_record(),
         "feedback_sha256": hashes,
         "proposal_descriptor": {
             "format": "buddha.candidate-improvement.v1",
             **{name: generation[name] for name in ("entrypoint", "runtime", "executor")},
             **{name: template[name] for name in ("config", "profile", "max_callbacks")},
-            "parent_agent_sha256": screen.candidate_id,
+            "parent_agent_sha256": parent.candidate_id,
             "feedback": {
                 "path": str(location / "feedback/feedback.json"),
                 "sha256": hashes["feedback.json"],
             },
         },
-    }, bundle
+    }
+    return parent, plan, bundle
 
 
-def _witness_generation(
-    state: dict[str, Any], location: Path, plan: dict[str, Any], proposal: dict[str, Any]
+def _witness_plan(
+    reader: NativeEvidence, state: dict[str, Any], parent: dict[str, object], location: Path
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    treatment = _search_witness_treatment(reader, state, parent)
+    if _witness_path(treatment.to_record()["directory"]) != location:
+        raise SourceSearchError("witness plan belongs to another original location")
+    checked_parent = _witness_parent(reader, treatment)
+    _, plan, bundle = _witness_materials(treatment, checked_parent)
+    return plan, bundle
+
+
+def _witness_generation_inputs(
+    base_screen: source_screen.SourceScreen,
+    controls: Mapping[Path, str],
+    source_copy: bool,
+    location: Path,
+    plan: dict[str, Any],
+    proposal: dict[str, Any],
 ) -> tuple[source_screen.SourceScreen, dict[str, object], dict[Path, str]]:
-    child = _child_screen(state, proposal, location)
+    child = _child_screen_for(base_screen, proposal, location, source_copy=source_copy)
     task = child.tasks.select([child.tasks.tasks[0].id])
     if task.to_record() != plan["task"]:
         raise SourceSearchError("witness changes its first ordered development task")
     recipe = source_screen._generation_recipe(location, child)
     lineage = _object(child.to_record()["lineage"])
-    inputs = _proposal_controls(state, location, plan) | {
+    inputs = _proposal_controls_for(controls, location, plan) | {
         location / "task.json": task.fingerprint(),
         location / "generation.json": pipeline._sha(recipe),
         location / "proposal/report.json": file_hash(location / "proposal/report.json"),
@@ -765,25 +1061,91 @@ def _witness_generation(
     return child, recipe, inputs
 
 
-def _witness_progress(
-    reader: NativeEvidence, state: dict[str, Any], reference: dict[str, object]
-) -> dict[str, Any]:
+def _witness_generation_for(
+    treatment: _WitnessTreatment, plan: dict[str, Any], proposal: dict[str, Any]
+) -> tuple[source_screen.SourceScreen, dict[str, object], dict[Path, str]]:
+    record = treatment.to_record()
+    return _witness_generation_inputs(
+        source_screen.SourceScreen.from_bytes(_json(record["base_screen"])),
+        _witness_controls(treatment),
+        cast(bool, record["source_copy"]),
+        _witness_path(record["directory"]),
+        plan,
+        proposal,
+    )
+
+
+def _witness_generation(
+    state: dict[str, Any], location: Path, plan: dict[str, Any], proposal: dict[str, Any]
+) -> tuple[source_screen.SourceScreen, dict[str, object], dict[Path, str]]:
+    return _witness_generation_inputs(
+        state["screen"], state["controls"], _has_source_copy(state), location, plan, proposal
+    )
+
+
+def _witness_funding(reader: NativeEvidence, location: Path) -> dict[str, Any]:
+    prefix = location.relative_to(reader.root).as_posix() + "/"
+    allowed = {location / role / "owners/0" for role in ("proposal", "generation")}
+    observed = set()
+    for name in reader.capture.entries:
+        if not name.startswith(prefix):
+            continue
+        relative = name.removeprefix(prefix)
+        parts = relative.split("/")
+        if "owners" in parts:
+            index = parts.index("owners")
+            if parts[:index] not in (["proposal"], ["generation"]) or (
+                len(parts) > index + 1 and parts[index + 1] != "0"
+            ):
+                raise SourceSearchError("witness contains a foreign original owner")
+        if name.endswith("/manifest.json") and "/owners/" in relative:
+            path = reader.root / name.removesuffix("/manifest.json")
+            if path not in allowed:
+                raise SourceSearchError("witness contains a foreign original owner")
+            observed.add(path)
+            reader.owner(path)
+    for role in ("proposal", "generation"):
+        if _present(reader, location / role):
+            path = location / role / "owners/0"
+            reader.owner(path)
+            observed.add(path)
+    funding = _authority(reader.capture, reader.authorization, list(reader.owners.values()))
+    if funding is None:
+        raise SourceSearchError("witness lacks its original authority")
+    for row in reader._rows(funding["auth_runs"]):
+        path = pipeline._absolute(row["directory"])
+        if path.is_relative_to(location) and path not in observed:
+            raise SourceSearchError("a funded original witness owner is missing or replaced")
+    return funding
+
+
+@_checked
+def _witness_progress_at(reader: NativeEvidence, treatment: _WitnessTreatment) -> dict[str, Any]:
     """Reconstruct one nonrecursive witness, including every original pending owner."""
-    location = _witness_location(reader, reference)
+    if type(treatment) is not _WitnessTreatment or not isinstance(reader, NativeEvidence):
+        raise SourceSearchError("witness needs immutable treatment and original evidence")
+    record = treatment.to_record()
+    reference = _object(record["parent"])
+    location = _witness_path(record["directory"])
+    parent = _witness_parent(reader, treatment)
+    funding = _witness_funding(reader, location)
+    current = authority_observation(reader.capture, reader.authorization, funding)
     progress: dict[str, Any] = {
         "result": None,
         "publication": None,
         "next_owner": location / "proposal/owners/0",
         "next_role": "proposal",
         "inactive_pending": False,
+        "lower_role": "proposal",
+        "needs_prepare": True,
+        "owner_treatments": {},
     }
-    state["mutation_progress"][str(reference["directory"])] = progress
     if not _present(reader, location / "plan.json"):
         prefix = location.relative_to(reader.root).as_posix() + "/"
         if any(name.startswith(prefix) for name in reader.capture.entries):
             raise SourceSearchError("witness entries precede the original plan")
         return progress
-    plan, bundle = _witness_plan(reader, state, reference, location)
+    _, plan, bundle = _witness_materials(treatment, parent)
     if reader.raw(location / "plan.json") != _json(plan):
         raise SourceSearchError("witness changes its original candidate or measured feedback")
     required = {location / "proposal.json": _json(plan["proposal_descriptor"])} | {
@@ -798,27 +1160,34 @@ def _witness_progress(
         if _present(reader, location / "generation") or _present(reader, location / "report.json"):
             raise SourceSearchError("witness outcome precedes its original proposal")
         return progress
-    parent = _parent_screen(reader, reference)
-    section = _object(parent.to_record()["generation"]) | state["record"]["proposal_template"]
+    progress["needs_prepare"] = False
+    section = _object(parent.to_record()["generation"]) | _object(record["proposal_template"])
     context = {
         "format": candidate_improvement.CONTEXT_FORMAT,
         "descriptor": str(location / "proposal.json"),
-        "expected_runtime_sha256": state["record"]["expected_runtime_sha256"],
+        "expected_runtime_sha256": record["expected_runtime_sha256"],
         "expected_feedback_provenance_sha256": plan["feedback_sha256"]["provenance.json"],
     }
     if reader.raw(proposal_dir / "context.json") != _json(context):
         raise SourceSearchError("witness proposal context changes its original treatment")
-    proposal_controls = _proposal_controls(state, location, plan) | {
+    proposal_controls = _proposal_controls_for(_witness_controls(treatment), location, plan) | {
         proposal_dir / "context.json": pipeline._sha(context)
     }
     proposal_owner = proposal_dir / "owners/0"
-    state["witness_treatments"][proposal_owner] = {
+    progress["owner_treatments"][proposal_owner] = {
         "section": section,
         "controls": proposal_controls,
     }
-    _stage_owner(reader, state, proposal_owner, section, proposal_controls)
-    sealed = _stage_seal(reader, state, proposal_owner, role="proposal")
-    progress["inactive_pending"] = state["inactive_pending"]
+    _stage_owner_for(
+        reader,
+        proposal_owner,
+        section,
+        proposal_controls,
+        review=_object(record["review"]),
+        funding=funding,
+    )
+    sealed, inactive = _stage_seal_for(reader, proposal_owner, funding=funding, role="proposal")
+    progress["inactive_pending"] |= inactive
     if not sealed or not _present(reader, proposal_dir / "report.json"):
         if _present(reader, location / "generation") or _present(reader, location / "report.json"):
             raise SourceSearchError("witness work skips its unfinished original proposal")
@@ -832,32 +1201,47 @@ def _witness_progress(
     reason, status = proposal["reason"], "failed"
     progress.update(next_owner=None, next_role=None)
     if proposal["disposition"] == "materialized":
-        child, recipe, inputs = _witness_generation(state, location, plan, proposal)
+        child, recipe, inputs = _witness_generation_for(treatment, plan, proposal)
         generation_dir = location / "generation"
-        progress.update(next_owner=generation_dir / "owners/0", next_role="generation")
+        progress.update(
+            next_owner=generation_dir / "owners/0",
+            next_role="generation",
+            lower_role="generation",
+            needs_prepare=True,
+        )
         if not _present(reader, generation_dir):
             if _present(reader, location / "report.json"):
                 raise SourceSearchError("witness publication precedes further-child execution")
             return progress
+        progress["needs_prepare"] = False
         for path, expected in inputs.items():
             reader.raw(path, expected)
         generation_context = {
             "format": candidate_generation.generation_formats(recipe["format"])["context"],
             "descriptor": str(location / "generation.json"),
-            "expected_runtime_sha256": state["record"]["expected_runtime_sha256"],
+            "expected_runtime_sha256": record["expected_runtime_sha256"],
         }
         if reader.raw(generation_dir / "context.json") != _json(generation_context):
             raise SourceSearchError("witness generation context changes its original child")
         inputs |= {generation_dir / "context.json": pipeline._sha(generation_context)}
         generation_owner = generation_dir / "owners/0"
         generation_section = _object(child.to_record()["generation"])
-        state["witness_treatments"][generation_owner] = {
+        progress["owner_treatments"][generation_owner] = {
             "section": generation_section,
             "controls": inputs,
         }
-        _stage_owner(reader, state, generation_owner, generation_section, inputs)
-        sealed = _stage_seal(reader, state, generation_owner, role="generation")
-        progress["inactive_pending"] = state["inactive_pending"]
+        _stage_owner_for(
+            reader,
+            generation_owner,
+            generation_section,
+            inputs,
+            review=_object(record["review"]),
+            funding=funding,
+        )
+        sealed, inactive = _stage_seal_for(
+            reader, generation_owner, funding=funding, role="generation"
+        )
+        progress["inactive_pending"] |= inactive
         if not sealed or not _present(reader, generation_dir / "report.json"):
             if _present(reader, location / "report.json"):
                 raise SourceSearchError("witness publication skips unfinished generation")
@@ -877,6 +1261,7 @@ def _witness_progress(
         status = "passed" if generated["disposition"] == "generated" else "failed"
     elif _present(reader, location / "generation"):
         raise SourceSearchError("a rejected witness proposal cannot execute a further child")
+    progress.update(lower_role=None, needs_prepare=False)
     expected_result = {
         "format": "buddha.source-mutation-witness-report.v1",
         "candidate_id": parent.candidate_id,
@@ -886,7 +1271,7 @@ def _witness_progress(
         "reason": reason,
         "proposal": proposal_ref,
         "generation": generation_ref,
-        "authorization": state["authorization"],
+        "authorization": current,
         "costs": {
             name: sum(reader.owner(path).accounting()[name] for path in owner_paths)
             for name in _TOTALS
@@ -902,12 +1287,28 @@ def _witness_progress(
         saved = _load(raw)
         pipeline.validate_authorization_snapshot(
             saved["authorization"],
-            state["authorization"],
+            current,
             {reader.owner(path).run_id for path in owner_paths},
         )
         if raw != _json(expected_result | {"authorization": saved["authorization"]}):
             raise SourceSearchError("saved witness changes its original anchored outcome")
         progress["result"] = saved
+    return progress
+
+
+def _witness_progress(
+    reader: NativeEvidence, state: dict[str, Any], reference: dict[str, object]
+) -> dict[str, Any]:
+    current = _witness_progress_at(reader, _search_witness_treatment(reader, state, reference))
+    progress = {
+        name: current[name]
+        for name in ("result", "publication", "next_owner", "next_role", "inactive_pending")
+    }
+    state["witness_treatments"].update(current["owner_treatments"])
+    if current["owner_treatments"]:
+        state["inactive_pending"] |= progress["inactive_pending"]
+        progress["inactive_pending"] = state["inactive_pending"]
+    state["mutation_progress"][str(reference["directory"])] = progress
     return progress
 
 
@@ -920,6 +1321,143 @@ def _witness_reference(
     return _ref(_witness_location(reader, reference), reader.authorization)
 
 
+def _write_witness_inputs(
+    treatment: _WitnessTreatment, plan: dict[str, Any], bundle: dict[str, Any]
+) -> None:
+    location = _witness_path(treatment.to_record()["directory"])
+    if not location.exists():
+        location.mkdir()
+    _root(location)
+    pipeline._same_or_write(location / "plan.json", _json(plan))
+    _write_packet(location / "feedback", plan, bundle)
+    pipeline._same_or_write(location / "proposal.json", _json(plan["proposal_descriptor"]))
+
+
+@_checked
+def _advance_witness(
+    reader: NativeEvidence,
+    treatment: _WitnessTreatment,
+    *,
+    authorization: Authorization | None = None,
+    transport: RawHTTPTransport | None = None,
+) -> dict[str, object]:
+    """Prepare OR execute one original role; caller censuses between invocations."""
+    progress = _witness_progress_at(reader, treatment)
+    if progress["result"] is not None:
+        reader.capture.finish()
+        return {"action": "complete", "role": None, "result": progress["result"]}
+    record = treatment.to_record()
+    location = _witness_path(record["directory"])
+    if not isinstance(authorization, Authorization) or authorization.path != reader.authorization:
+        raise SourceSearchError("witness advancement needs its original authority")
+    if progress["inactive_pending"]:
+        raise SourceSearchError("witness has an inactive original pending owner")
+    role = progress["lower_role"]
+    reader.capture.finish()
+    base = source_screen.SourceScreen.from_bytes(_json(record["base_screen"]))
+    purpose = "source screen: " + base.comparison_key()
+    with trial_fence.work(
+        authorization.path, authorization._terms(), directory=location, kind="search"
+    ):
+        trial_fence.require_purpose(
+            authorization.path, authorization._terms(), directory=location, expected=purpose
+        )
+        for path, digest in _witness_controls(treatment).items():
+            pipeline._read(path, digest)
+        if progress["publication"] is not None:
+            owners = {reader.owner(path).run_id for path in progress["owner_treatments"]}
+            result = pipeline.publish_complete(
+                location / "report.json", progress["publication"], authorization, owners
+            )
+            return {"action": "published", "role": None, "result": result}
+        if role not in {"proposal", "generation"}:
+            raise SourceSearchError("witness has no checked next lower role")
+        if not location.exists():
+            location.mkdir()
+        _root(location)
+        fresh = NativeEvidence(reader.root, reader.authorization, error_type=SourceSearchError)
+        parent = _witness_parent(fresh, treatment)
+        _, plan, bundle = _witness_materials(treatment, parent)
+        proposal = None
+        if role == "generation":
+            proposal = _read_ref(
+                fresh, _ref(location / "proposal", reader.authorization), proposal=True
+            )
+        fresh.capture.finish()
+        if progress["needs_prepare"]:
+            _write_witness_inputs(treatment, plan, bundle)
+            if role == "proposal":
+                generation = _object(parent.to_record()["generation"])
+                template = _object(record["proposal_template"])
+                inputs = _proposal_controls_for(_witness_controls(treatment), location, plan)
+                candidate_improvement.prepare_candidate_improvement(
+                    location / "proposal",
+                    descriptor=location / "proposal.json",
+                    selection=Selection.from_bytes(_json(generation["selection"])),
+                    roots=source_screen._roots(generation),
+                    authorization=authorization,
+                    review=_object(record["review"]),
+                    budget_microusd=cast(int, template["budget_microusd"]),
+                    max_calls=cast(int, template["max_calls"]),
+                    expected_runtime_sha256=_digest(record["expected_runtime_sha256"]),
+                    expected_feedback_provenance_sha256=plan["feedback_sha256"]["provenance.json"],
+                    input_files=list(inputs),
+                    expected_input_hashes=inputs,
+                )
+            else:
+                if proposal is None:
+                    raise SourceSearchError("further generation lacks its original proposal")
+                _materialize_child_source_for(
+                    base,
+                    proposal,
+                    location,
+                    owner_directory=location / "generation",
+                    source_copy=cast(bool, record["source_copy"]),
+                )
+                child, recipe, inputs = _witness_generation_for(treatment, plan, proposal)
+                task = child.tasks.select([child.tasks.tasks[0].id])
+                pipeline._same_or_write(location / "task.json", task.to_bytes())
+                pipeline._same_or_write(location / "generation.json", _json(recipe))
+                generation = _object(child.to_record()["generation"])
+                candidate_generation.prepare_candidate_generation(
+                    location / "generation",
+                    descriptor=location / "generation.json",
+                    selection=Selection.from_bytes(_json(generation["selection"])),
+                    roots=source_screen._roots(generation),
+                    authorization=authorization,
+                    review=_object(record["review"]),
+                    budget_microusd=cast(int, generation["budget_microusd"]),
+                    max_calls=cast(int, generation["max_calls"]),
+                    expected_runtime_sha256=_digest(record["expected_runtime_sha256"]),
+                    input_files=list(inputs),
+                    expected_input_hashes=inputs,
+                )
+            return {"action": "prepared", "role": role, "result": None}
+        if not isinstance(transport, RawHTTPTransport):
+            raise SourceSearchError("witness execution needs its original raw transport")
+        if role == "generation":
+            if proposal is None:
+                raise SourceSearchError("further generation lacks its original proposal")
+            _materialize_child_source_for(
+                base,
+                proposal,
+                location,
+                owner_directory=location / "generation",
+                source_copy=cast(bool, record["source_copy"]),
+            )
+            result = candidate_generation.run_candidate_generation(
+                location / role, transport=transport
+            )
+        else:
+            result = candidate_improvement.run_candidate_improvement(
+                location / role, transport=transport
+            )
+        if result["status"] != "complete":
+            return {"action": "incomplete", "role": role, "result": result}
+        source_screen._accepted(location / role, result)
+        return {"action": "executed", "role": role, "result": result}
+
+
 def _execute_witness(
     directory: Path,
     state: dict[str, Any],
@@ -928,108 +1466,53 @@ def _execute_witness(
     transport: RawHTTPTransport,
     phase: Callable[[str], None],
 ) -> dict[str, object]:
-    """Use the two existing stages, with fresh passive custody before dispatch."""
-    authorization = authority.path
-    reader = NativeEvidence(directory, authorization, error_type=SourceSearchError)
-    location = _witness_location(reader, reference)
+    """Adapt explicit witness steps, preserving full search checks before dispatch."""
+    reader = NativeEvidence(directory, authority.path, error_type=SourceSearchError)
+    treatment = _search_witness_treatment(reader, state, reference)
     progress = state["mutation_progress"][str(reference["directory"])]
     if progress["result"] is not None:
+        reader.capture.finish()
         return cast(dict[str, object], progress["result"])
     reader.capture.finish()
     phase("witness_feedback")
-    if not location.exists():
-        location.mkdir()
-    _root(location)
-    reader = NativeEvidence(directory, authorization, error_type=SourceSearchError)
-    plan, bundle = _witness_plan(reader, state, reference, location)
-    reader.capture.finish()
-    pipeline._same_or_write(location / "plan.json", _json(plan))
-    _write_packet(location / "feedback", plan, bundle)
-    pipeline._same_or_write(location / "proposal.json", _json(plan["proposal_descriptor"]))
-    reader = NativeEvidence(directory, authorization, error_type=SourceSearchError)
-    parent = _parent_screen(reader, reference)
-    reader.capture.finish()
-    generation = _object(parent.to_record()["generation"])
-    template = state["record"]["proposal_template"]
-    phase("witness_proposal")
-    if not (location / "proposal").exists():
-        inputs = _proposal_controls(state, location, plan)
-        candidate_improvement.prepare_candidate_improvement(
-            location / "proposal",
-            descriptor=location / "proposal.json",
-            selection=Selection.from_bytes(_json(generation["selection"])),
-            roots=source_screen._roots(generation),
-            authorization=authority,
-            review=state["record"]["review"],
-            budget_microusd=template["budget_microusd"],
-            max_calls=template["max_calls"],
-            expected_runtime_sha256=state["record"]["expected_runtime_sha256"],
-            expected_feedback_provenance_sha256=plan["feedback_sha256"]["provenance.json"],
-            input_files=list(inputs),
-            expected_input_hashes=inputs,
+    location = _witness_path(treatment.to_record()["directory"])
+    with trial_fence.work(authority.path, authority._terms(), directory=location, kind="search"):
+        trial_fence.require_purpose(
+            authority.path,
+            authority._terms(),
+            directory=location,
+            expected="source screen: " + state["screen"].comparison_key(),
         )
-    state = _restore(directory, authorization)
-    _check_current(state)
-    result = candidate_improvement.run_candidate_improvement(
-        location / "proposal", transport=transport
-    )
-    if result["status"] != "complete":
-        return result
-    digest = source_screen._accepted(location / "proposal", result)
-    reader = NativeEvidence(directory, authorization, error_type=SourceSearchError)
-    verified = _read_ref(
-        reader,
-        {
-            "directory": str(location / "proposal"),
-            "authorization": str(authorization),
-            "report_sha256": digest,
-        },
-        proposal=True,
-    )
-    if _json(result) != _json(verified):
-        raise SourceSearchError("returned witness proposal changes its anchored publication")
-    reader.capture.finish()
-    if result["disposition"] == "materialized":
-        phase("witness_generation")
-        _materialize_child_source(
-            state, verified, location, owner_directory=location / "generation"
-        )
-        child, recipe, inputs = _witness_generation(state, location, plan, verified)
-        task = child.tasks.select([child.tasks.tasks[0].id])
-        pipeline._same_or_write(location / "task.json", task.to_bytes())
-        pipeline._same_or_write(location / "generation.json", _json(recipe))
-        child_generation = _object(child.to_record()["generation"])
-        if not (location / "generation").exists():
-            candidate_generation.prepare_candidate_generation(
-                location / "generation",
-                descriptor=location / "generation.json",
-                selection=Selection.from_bytes(_json(child_generation["selection"])),
-                roots=source_screen._roots(child_generation),
-                authorization=authority,
-                review=state["record"]["review"],
-                budget_microusd=cast(int, child_generation["budget_microusd"]),
-                max_calls=cast(int, child_generation["max_calls"]),
-                expected_runtime_sha256=state["record"]["expected_runtime_sha256"],
-                input_files=list(inputs),
-                expected_input_hashes=inputs,
-            )
-        state = _restore(directory, authorization)
         _check_current(state)
-        result = candidate_generation.run_candidate_generation(
-            location / "generation", transport=transport
-        )
-        if result["status"] != "complete":
-            return result
-        source_screen._accepted(location / "generation", result)
-    state = _restore(directory, authorization)
-    progress = state["mutation_progress"][str(reference["directory"])]
-    publication = progress["publication"]
-    if publication is None:
-        raise SourceSearchError("completed witness lacks its anchored stage outcomes")
-    owners = {
-        row["run_id"] for row in state["owners"] if Path(row["directory"]).is_relative_to(location)
-    }
-    return pipeline.publish_complete(location / "report.json", publication, authority, owners)
+        if not location.exists():
+            location.mkdir()
+        _root(location)
+        fresh = NativeEvidence(directory, authority.path, error_type=SourceSearchError)
+        parent = _witness_parent(fresh, treatment)
+        _, plan, bundle = _witness_materials(treatment, parent)
+        fresh.capture.finish()
+        _write_witness_inputs(treatment, plan, bundle)
+    observed_phase = "witness_feedback"
+    while True:
+        reader = NativeEvidence(directory, authority.path, error_type=SourceSearchError)
+        state = _restore(directory, authority.path, reader=reader)
+        _check_current(state)
+        treatment = _search_witness_treatment(reader, state, reference)
+        current = state["mutation_progress"][str(reference["directory"])]
+        role = current["next_role"]
+        if role is None and current["result"] is None:
+            if location / "generation/owners/0" in state["witness_treatments"]:
+                role = "generation"
+            elif location / "proposal/owners/0" in state["witness_treatments"]:
+                role = "proposal"
+            else:
+                raise SourceSearchError("witness phase lacks its checked original owner")
+        if role is not None and observed_phase != "witness_" + role:
+            observed_phase = "witness_" + role
+            phase(observed_phase)
+        action = _advance_witness(reader, treatment, authorization=authority, transport=transport)
+        if action["action"] in {"incomplete", "published", "complete"}:
+            return cast(dict[str, object], action["result"])
 
 
 def _decision(

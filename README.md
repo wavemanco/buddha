@@ -134,8 +134,11 @@ lets different improvement procedures receive the same measured starting agent
 and complete development feedback. It records the executing improver and task
 parent separately. Its [checked failure feedback](docs/SOURCE-FEEDBACK.md#a-fixed-improver-learns-from-its-own-failed-children)
 also lets a fixed improver learn from its own failed children, preserving full
-parent outputs and refusing another improver's history. The repeated comparison
-under equal budgets and its sealed assessment remain open.
+parent outputs and refusing another improver's history. The [bounded mutation
+check](docs/SOURCE-MUTATION-WITNESS.md#reuse-the-check-while-keeping-an-experimental-improver-fixed)
+can also use a study's own locations, returning after each owner preparation or
+execution so the study can check all of its records before continuing. The
+repeated comparison under equal budgets and its sealed assessment remain open.
 
 Useful-diversity gains, held-out improvement and improved-improver effectiveness
 remain **not established**. The source-chain fixture uses synthetic replies and
@@ -174,15 +177,15 @@ current cell inside the actual frozen-schedule consumer; direct calls and a
 fabricated confirmation file cannot enable it. No funded final experiment or
 scientific improvement is established by this implementation.
 
-At this checkpoint the living plan contains **6 remaining leaf slices**.
+At this checkpoint the living plan contains **6 remaining completion gates**.
 The Windows PID-lock observer follow-up is complete at its shared-reader scope;
 [the guide](docs/DOCTOR.md#windows-file-sharing) states its boundaries.
 The native pipeline is complete at its declared offline scope. Umbrella milestones
 are not counted again. They cover
 policy/search (1), source evolution (2), held-out evaluation (2) and the
-improver comparison (1). This is a checkpoint count, not a promise that research
-findings will never require a smaller slice; [PLAN.md](docs/PLAN.md) determines
-the current status and order.
+improver comparison (1). Each gate can require several small implementation
+slices or live experiments. [PLAN.md](docs/PLAN.md) determines the current
+status and order.
 
 The normative benchmark reference is the inspected official **NoveltyBench v1.1**,
 commit `64a23be6b18ec1dacc298830aab276061b6e143c`. The paper is historical context.
