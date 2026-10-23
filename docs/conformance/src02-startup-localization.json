@@ -1,0 +1,61 @@
+{
+  "format": "buddha.source-startup-localization.v1",
+  "status": "localized_before_ready_not_fixed",
+  "proof_sha256": "123d75f2219358474c7ebbcb80bfbda41c1a1d3759897f029acc9db435e60f58",
+  "driver_sha256": "fae206c1a034671e074004bba1c9cec88a60210687a4ce5d0fd51d05d7935ca5",
+  "source_map_sha256": "8b74c5a6489651a81707c9e6775a91e75b0524f2084e61fe2eba91c45739cede",
+  "input_count": 238,
+  "elapsed_seconds": 42.868182500009425,
+  "actual_executor_calls": 1,
+  "observed_ready": false,
+  "stderr_bytes": 2556,
+  "stderr_sha256": "4440f2221b58225c5c285056f03dec49ac5c2c2eb8a2d587e42a53fbf0702c44",
+  "stderr_truncated": false,
+  "observed_error": {
+    "type": "OSError",
+    "errno": 5,
+    "operation": "lstat",
+    "path": "/agent",
+    "location": "source inventory before runtime/candidate execution",
+    "occurrences_within_one_worker": 2
+  },
+  "owned_mount_inspections": [
+    {
+      "phase": "before_start",
+      "agent_source_matches_retained_child": true,
+      "read_only": true,
+      "non_recursive": true,
+      "raw_inspect_sha256": "0346952537514c260624f03620f14674aa088aef62dfa6ffce71b36092b753c2"
+    },
+    {
+      "phase": "after_start_attempt",
+      "agent_source_matches_retained_child": true,
+      "read_only": true,
+      "non_recursive": true,
+      "raw_inspect_sha256": "f7db02cf5e69ff430e61b1fa6d023c392758afd83044fa4f720378bbfec210b3"
+    }
+  ],
+  "cleanup_status": "removed",
+  "original_agent_and_inputs_unchanged": true,
+  "instrumentation": {
+    "scope": "Two copied trusted runner files add bounded exception diagnostics only; production files unchanged.",
+    "worker_original_ast_sha256": "ad134dede243e6747db41cc76f560568450c98a7e615a1068b7ff58d72bda289",
+    "worker_stripped_ast_sha256": "ad134dede243e6747db41cc76f560568450c98a7e615a1068b7ff58d72bda289",
+    "releases_original_ast_sha256": "e95155c37f5d97d0bca6ff0b20b2d4703effa3bc850cb6803c4c14550703c959",
+    "releases_stripped_ast_sha256": "e95155c37f5d97d0bca6ff0b20b2d4703effa3bc850cb6803c4c14550703c959"
+  },
+  "original_child_sha256": "8ce70fb96dba6d32ed48c497913f043ace23651b248e4092511540dbe70a7704",
+  "source_creation_trace": "The trusted host materializes and fsyncs session/child after the parent container returns/cleans up. This is not evidence of a child folder created inside the worker.",
+  "next_proposed_check": "One fresh verified host-source snapshot with the same retained diagnostic runner/configuration, isolating the source location; no owner retry or remount.",
+  "limits": [
+    "This observation establishes EIO for this retained short folder during the diagnostic only; earlier composed receipts retain their original lack of stderr.",
+    "Correct mount metadata does not establish a readable mount or identify Docker/filesystem root cause.",
+    "No original owner, C1, seal, admission, positive composed witness or scientific gain is produced."
+  ],
+  "guard": {
+    "denied_events": [],
+    "sql_connections": 0,
+    "request_frames": 0,
+    "real_paid_calls": 0
+  }
+}

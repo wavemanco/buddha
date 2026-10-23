@@ -133,12 +133,27 @@ therefore be assigned to these attempts, and a Windows path-limit cause is not
 established. All 236 pinned inputs in each producer checkout still match after
 execution.
 
-The next useful check is a bounded diagnostic on the retained short-path child
-folder, recording the original startup exception and Docker's actual mount
-mapping. Repeating the whole search adds little information. The failed owners
-remain incomplete with their original evidence; no owner is replaced or retried.
 The [follow-up record](conformance/src02-startup-followup.json) keeps the exact
-proof hashes, observed counts and limits. No paid calls were made.
+proof hashes, observed counts and limits. The failed owners remain incomplete
+with their original evidence; no owner is replaced or retried.
+
+A later [bounded diagnostic](conformance/src02-startup-localization.json) on
+that retained short folder captures an input/output error at `/agent` during
+source inventory, before runtime or candidate execution. Docker's before-start
+and cleanup inspections both identify the intended read-only, non-recursive
+source mount. The worker still cannot read it. The diagnostic uses two copied
+trusted runner files with bounded exception reporting; removing that reporting
+reproduces their original parsed statements. It performs one executor call,
+removes its owned container and leaves the retained child and inputs unchanged.
+This localizes the fault for that invocation; it does not identify a Docker or
+filesystem cause or repair a source-search owner.
+
+The trusted host created and fsynced the returned child after the parent
+container finished. A next proposed control is a verified fresh host-source
+snapshot with the same diagnostic runner and configuration, changing only the
+agent's source location. Any later production route must bind its source
+location when preparing a fresh owner and preserve historical reconstruction.
+No paid calls were made. The actual composed positive gate remains open.
 
 ## Versions and library settings
 
