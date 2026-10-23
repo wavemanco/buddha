@@ -1,0 +1,199 @@
+{
+  "format": "buddha.imp01-finite-study-implementation.v1",
+  "status": "implemented_verification_in_progress",
+  "spec_sections": [
+    "DESIGN3",
+    "DESIGN4",
+    "DESIGN8",
+    "PLAN:IMP-01"
+  ],
+  "base_commit": "e5ba59e2351f532bdfc205e77b3f52d8a448ef78",
+  "working_tree": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\imp01-study-delivery",
+  "branch": "codex/imp01-finite-development-controller",
+  "source_pins": {
+    "buddha/improver_study.py": "9790fa31ebbad2fb6f05c3a52a011e88b580f0f6b0b0b4ea834db7037558182f",
+    "tests/test_improver_study.py": "5356ee31f17717b065bfa4811963250cba0371b4e502309552a4df15ca6aa2c3"
+  },
+  "implementation": [
+    "Finite two-fixed-improver development declaration; all common measurements/witnesses first, then fixed alternating serial start/repetition/arm opportunities.",
+    "Same measured S/full P in both arms; own-cell parents, duplicates and complete supported failed-generation history. No adoption of counted children as treatment I.",
+    "Equal prospective per-cell and whole-grid ceilings include every selected task. Every terminal negative consumes its original opportunity and retains costs.",
+    "Whole original-owner census between preparation, execution and publication; partial/unknown/capacity records retain exact attempted/completed/in-flight/unattempted coverage.",
+    "All eligible counted descendants enter final selection; starter and validity-only children excluded before ranking. Explicit no_valid_descendant, never substitute the starter.",
+    "Passive complete inspection and original-owner known-reply recovery; current assessment intentionally not_ready, target repair not_assessed."
+  ],
+  "accepted_contract": {
+    "shape": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-finite-controller-shape-v2.md",
+      "sha256": "3c38dd8d269cde5107b43746c8f5a27462ae8573a6ef835c754f10a0d13f56fc"
+    },
+    "api_example": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-finite-controller-api-example-v2.md",
+      "sha256": "89bde531125f68bae1065271eeed75d56a8afff4e5e12b57c8c21c075a966426"
+    },
+    "acceptance_amendment": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-finite-controller-acceptance-amendment-v4.md",
+      "sha256": "4bebe7f6e5c8ff235ebfe985aa076e0cb3dbbd03e35eb5d5c55176824498ab74"
+    },
+    "note": "Historical API example expects execution at the public envelope; amendment preserves existing protected protocol classification while requiring raw session execution cause. No lower API semantics changed."
+  },
+  "behavior": {
+    "passed": {
+      "receipt": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-finite-review-green-v2.json",
+        "sha256": "632bef4f9db0615cb49f944323ef2d21b5fd39860ea6795c17b0048686e71f69"
+      },
+      "log": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-finite-review-green-v2.log",
+        "sha256": "da13e9dc243ec02913ae816fda841c96db223fa5f0522698dfc1a425cba50cfe"
+      },
+      "methods": 2,
+      "seconds": 199.76564120000694,
+      "scope": "Exact two-task ceilings before owner creation; historical coverage and numerically coherent omitted-owner corruptions refuse before lower replay; authentic interrupted owner completes once and deactivates, preserving original manifest and observations.",
+      "source_cut": "1d4c88ef23590adb9476d2e1072f090aeb6107c809488ab10e0647220392584b",
+      "test_cut": "5356ee31f17717b065bfa4811963250cba0371b4e502309552a4df15ca6aa2c3"
+    },
+    "pending": [
+      {
+        "receipt_label": "imp01-finite-matrix-green-v3",
+        "methods": 1,
+        "scope": "Full two-start/two-repetition/two-arm/two-slot16-opportunity matrix, fixed order, negatives, recovery, entire report/custody/selection and tamper refusals.",
+        "runner": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\run-imp01-finite-matrix-v3.py",
+          "sha256": "dc79287f91f6381d591a060d5bff3c2311aaf6af0fb6afaf2ada104c68d5fc9f"
+        }
+      },
+      {
+        "receipt_label": "imp01-finite-extra-green-v2",
+        "methods": 3,
+        "scope": "Multiple prior failed edges, absent descendant, selection despite dominant starter, fenced passive replay; sufficient-authority/full-grid pre-owner refusals; full-feedback overflow and phase fences.",
+        "runner": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\run-imp01-finite-extra-v2.py",
+          "sha256": "896e1687d476873cdd2c3dee674f9d1763532dcffde1c3fff32951a79b312e23"
+        }
+      }
+    ],
+    "limits": "The pending cohorts retain original source1d4/test535 in imp01-study-fixed. They are not passes or hosted/full-suite evidence. The separate final delivery979 differs only by the explicitly checked standard-library typing cast."
+  },
+  "quality": {
+    "receipt": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-finite-quality-v4.json",
+      "sha256": "dae2923bd35f625e0a7148d7404d7b339ba7571161c5c785fb20e27422ed2250"
+    },
+    "receipt_self_check": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-finite-quality-v4-receipt-check.json",
+      "sha256": "97bcc8fff3d24b81c545cea81239db6c816e0c7389408ce004b491a7f7b7b456"
+    },
+    "log": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-finite-quality-v4.log",
+      "sha256": "c77485f585a8c733116c016740842cf0b6899fd826b167ddcc573820d9036155"
+    },
+    "fresh_commands": 7,
+    "unchanged_source_config_inputs": 212,
+    "staged_diff_check": "passed over all six staged files before commit; separate from the earlier tracked-only check",
+    "hosted_ci": "pending at publication"
+  },
+  "separate_typing_correction": {
+    "draft_ast_equivalence": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-finite-typing-draft-v1.json",
+      "sha256": "652203823adc81ceba99bce32082ba66d59504589b3e3d73add4ef748fe16125"
+    },
+    "actual_shadow_types_lint_format": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-finite-typing-shadow-v1.json",
+      "sha256": "c747c2f266da2d29438cbbc8702f520268d2de1841e1b4b3dcaf1822bbb3ee70"
+    },
+    "separate_checkout_transfer": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-finite-delivery-transfer-v1.json",
+      "sha256": "af8c644ab30345124bc89c2da1b919a6ebc99665a8ca992633c4e665ccdf967a"
+    },
+    "scope": "Remove precisely one typing.cast(dict[str, Any], value[authorization]) and the entire module AST equals behavior source1d4. Source/test inputs of running cohorts remain unchanged. Fresh seven-command delivery quality runs on actual979 bytes."
+  },
+  "retained_history": [
+    {
+      "record": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-finite-red-v1.json",
+        "sha256": "ae6c773dce05f2b0fd6872d4baaabad5e418591b4c944a707edf6eb1c4d6a737"
+      },
+      "interpretation": "Initial genuine measured screen/full feedback and detached-I proposal precede missing-module interface RED; not behavioral pass."
+    },
+    {
+      "record": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-finite-matrix-green-v1.json",
+        "sha256": "b2ae024f32a2adb1897e5a6d41fb3f788f95ee8d4539bfc92d901d2db423416a"
+      },
+      "interpretation": "Failed at original incorrect public reason expectation. Fixture cleanup means raw attempt unavailable; do not claim independent raw reconstruction."
+    },
+    {
+      "record": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-finite-review-red-v1.json",
+        "sha256": "8d5f5aa6033c7c76e46ba8cac0a13238c6744053068b99629286524962493aa8"
+      },
+      "interpretation": "Two actual review REDs: stale one-task caps accepted for two tasks; canonical historical completed-common coverage corruption accepted."
+    },
+    {
+      "record": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-finite-matrix-green-v2.json",
+        "sha256": "4a93e24d1c6584a938dd2a4e10732a91684af6c515d1f487602ab472bf61fa0b"
+      },
+      "interpretation": "One failure before expected witness injection. Retained426-file diagnostic copy, not a replacement owner or successful rerun."
+    },
+    {
+      "record": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-matrix-known-reply-prefix-diagnostic-v1.json",
+        "sha256": "fb8397625e2960ac6a6710fbf233cc1699cbbb7d3ead49f775a915a22baacf01"
+      },
+      "interpretation": "Static exact retained evidence isolates shared validator use requiring old active owner to equal current inactive owner. Earlier swallowed exception itself was not captured. Focused final behavior subsequently proves authentic continuation."
+    },
+    {
+      "record": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-finite-extra-green-v1.json",
+        "sha256": "ee9d7fd360197740e433b6fbcd0f8a61ae17bfa8c7d5f746a89e5d6000d47b39"
+      },
+      "interpretation": "Earlier three-method pass at source024/testb4 remains earlier-cut evidence only, not final six-method completion."
+    },
+    {
+      "record": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-finite-quality-v2.json",
+        "sha256": "b93c04568d3a31f90fb63df5394f3c5de8282589bab21529faeabbae64afee86"
+      },
+      "interpretation": "Isolated scanner launch cannot find user-site tools; preserved tooling failure. Compile/diff passed."
+    },
+    {
+      "record": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-finite-quality-v3.json",
+        "sha256": "a9e6543a3817e419cdb2e297925541f8e4e7dbc22a70c0c6c6bb68eea5c4fc97"
+      },
+      "interpretation": "Six actual successful checks plus one mypy object-indexability error. Its combined_successful_check_count field incorrectly counts attempted checks; per-command exits and failed top-level status are authoritative. Final v4 runs all seven freshly."
+    }
+  ],
+  "independent_review": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-finite-consumer-independent-static-review-v1.json",
+      "sha256": "81157a8433b22f6a3ded5c36a4d0e25bc480e22cdf83137ba672ae2ad04df048"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-finite-consumer-fix-review-v2.json",
+      "sha256": "3b2415f9ce0d00d7eb3e34c32b7e107dc590afcdeb8f4db190f079600c666c73"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-finite-recovery-minimal-diff-review-v1.json",
+      "sha256": "19e0f26358b2e0104586a04bb3774a11627a9006b79a74cfa96bba2cccbb0dc8"
+    }
+  ],
+  "plan_preservation": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-finite-plan98-preservation-v2.json",
+    "sha256": "f9107fa107a155e6c2a17259bf70ce3c45374266bc453126b0858500a75aff87"
+  },
+  "original_interface_checkpoint": {
+    "path": "docs/conformance/imp01-finite-study-delivery.json",
+    "sha256": "2cc8868c61b208e66ce40dfe376c0048983a9f9997ab31de7f021c5b012bd0c1",
+    "status": "historical; unchanged"
+  },
+  "limits": [
+    "No completed full behavior/full-suite/hosted-CI claim at this checkpoint.",
+    "Supplied workers/replies and fresh synthetic accounting only; no provider calls, keys, actual container execution or selected-source execution on host.",
+    "No official benchmark, old producer/paid owner, protected source, financial schema, runtime dependency or allowance changes.",
+    "No sealed descendant assessment, target-repair result, actual controlled comparison or improved-improver effectiveness. IMP-01 remains open. Four plan gates remain.",
+    "A new current-source demonstration needs fresh protocol/rehearsal/allocation; completed7USD capacity scope is closed for new work."
+  ]
+}
