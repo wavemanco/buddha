@@ -153,7 +153,9 @@ class TrialFenceTests(unittest.TestCase):
                 # Positive control: the actual legacy manifest and Ledger bind outside a trial.
                 outside, ledger, _ = fixture.prepare("outside")
                 self.assertEqual(ledger.totals()["operation_count"], 0)
-                self.assertEqual(fixture.authority.summary()["runs"][0]["directory"], str(outside))
+                self.assertEqual(
+                    fixture.authority.summary()["runs"][0]["directory"], str(outside.resolve())
+                )
 
                 marked = original_root / "trial"
                 marked.mkdir()
