@@ -67,8 +67,10 @@ Use draft status for unfinished implementation. A completed slice can be ready
 for review while its parent PR, a live experiment or a broader research claim
 remains pending. Green checks are recorded against an exact commit. Ready for
 review does not authorize merging; dependent PRs remain stacked for review.
-The remaining repaired draft PRs will be marked ready after their own fresh
-checks pass.
+The remaining eight completed PRs—#71, #73, #74 and #78–#82—were marked ready on
+October 23 after verifying their unchanged repaired heads. All their Ubuntu
+jobs have passed; Windows remains in progress at the latest retained snapshot.
+Ready status does not assert those pending jobs have passed. No PR was merged.
 
 ## Effect on experiments and the roadmap
 

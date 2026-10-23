@@ -1,0 +1,219 @@
+{
+  "format": "buddha.source-capacity-driver-delivery.v1",
+  "base_commit": "b2ee67738bdfa943471111168017a986f2933e9e",
+  "status": "focused_offline_implementation_checked_not_funded",
+  "sources_sha256": {
+    "buddha/capacity_launch.py": "f6fe752b2969f283e5a1fb3afd2fd9b1475f70bb0a32bd55cd44ce8f674cb764",
+    "buddha/source_capacity.py": "388c09e02be8209430c667974c3e0d248295a6ffc355648f20120b23285cefcc",
+    "docs/conformance/src02-capacity-run.py": "c57114e897d906eeee0c3fac8f6871968bea1ce7c42f87188c836291747e018a",
+    "tests/test_capacity_launch.py": "6cad5306e60c2ee383e3324d0018bf792db579a54fa20b5033c724dd14f8c0e0",
+    "tests/test_source_capacity.py": "298301ab4a33e336a2cfa5b25c183a900b97f390961a568f532d497933a8ab33"
+  },
+  "contract": "docs/SOURCE-CAPACITY-DRIVER.md",
+  "frozen_protocol": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-driver\\docs\\conformance\\src02-capacity-protocol.json",
+    "sha256": "154482138a5a687eb6db6c7dbab4a84a29cfa2e88ee26e3b655b87eb2264d669"
+  },
+  "pure": {
+    "unique_methods": 6,
+    "red": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\pure-red-v1.json",
+      "sha256": "ab162f930ce8e60670e16600495d5a0424a41cc3ccdbf5c3dcf6f1e431ba75dd"
+    },
+    "green": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\pure-green-v1.json",
+      "sha256": "609f8526d2924f625285d2d6e091ecd640414e9dec9f144e7a417c9967b68d23"
+    },
+    "format_ast_bridge": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-driver\\runs\\reviews\\source-capacity-static-v1.json",
+      "sha256": "bc08449171031366920dfc8b52f6abb9c8e6b45c22d7938ec33d16fadbff1fab"
+    },
+    "limit": "Original RED was missing interface. GREEN precedes formatting; exact whole-file AST bridge retains its scope. No application I/O, SQL, process or network allowed."
+  },
+  "launch": {
+    "unique_methods": 10,
+    "final": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\launch-functional-v12.json",
+      "sha256": "f90f69a312b86fdcd03dc26babe721dbb8800fb8e45ecc7c7f046e059eef8c3d"
+    },
+    "log": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\launch-functional-v12.log",
+      "sha256": "e26bc7f0335399cafe25b7bab32ac9efbada97cff4d0938bc267138d062c1fe3"
+    },
+    "history": [
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\launch-functional-v1.json",
+        "sha256": "c4b5fef1fe8daba1e68aae7cdd9dfa981ace4fdd9741ba390b228eafcdaef6a1"
+      },
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\launch-functional-v2.json",
+        "sha256": "7d6bf3adbbc0cc27709162da6f99844b0e8205ae4ff093c9a55157a39e968c18"
+      },
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\launch-functional-v3.json",
+        "sha256": "f43bdc1179378de8d093fdf932c57f321dc39f47b0e8107e6a3bfe25e790a906"
+      },
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\launch-functional-v4.json",
+        "sha256": "1b619eedd76e5f46bf32ae9a4f83b81ec073337e8817b644249ac0cdfb1b8863"
+      },
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\launch-functional-v5.json",
+        "sha256": "4c47b956a6d027f6f86d019fda689be77d7b70cd23c7688c95e7928575859d81"
+      },
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\launch-functional-v6.json",
+        "sha256": "5ebef253607cfac25210014d8011965c311e8c2a15254d0e9d4f94b66e4383bb"
+      },
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\launch-functional-v7.json",
+        "sha256": "405b153da77668799c08f517d53ea2f4442185bfb83edb7395509080c741e4cd"
+      },
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\launch-functional-v8.json",
+        "sha256": "a648dfe668b1026f58f91dcd4bcc6a2d39e0c8c15cac11745f50efaf8e06a18d"
+      },
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\launch-functional-v9.json",
+        "sha256": "4216034b1c8fc0c0461a4f9141e75f4a96c686c90c8ad2429a5b973fc0547003"
+      },
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\launch-functional-v10.json",
+        "sha256": "fd2ceca908547bba81c7982c442619ecfd68194426fd929ac122ba609b45363f"
+      },
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\launch-functional-v11.json",
+        "sha256": "0d578b5fab88d3d6d1e17216fdef252a82035c13ed0a1d1715949ba597a7d4b6"
+      },
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\launch-functional-v12.json",
+        "sha256": "f90f69a312b86fdcd03dc26babe721dbb8800fb8e45ecc7c7f046e059eef8c3d"
+      }
+    ],
+    "missing_interface_red": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\launch-red-v1.json",
+      "sha256": "8abde9a2206a69f4e39ad8b24cc7d97f73132ab37a9ffce09e04a58ee50c4e23"
+    },
+    "explanation": "v1 guard rejected local SQLite file URIs; guard corrected without permitting outside fixtures. v2/v3 reveal missing stage ceiling arguments at helper reuse; v4 synthetic parent newline mismatch; these are retained setup/API errors. v5 five methods pass; v6/v7 seven pass. v8 reproduces unsupported pinned-body preflight gap. v9/v10 expose preflight, cached-transport, CLI-redaction and unsent-observation gaps; strengthened v10 supplies required CLI arguments so unknown canary really reaches rejection. v11 ten pass after fixes; v12 ten pass after typing-only cleanup.",
+    "scope": "Real Gateway and shared accounting with mocked HTTPS; writes/SQL restricted to fresh synthetic fixtures; network/processes denied; all pinned source/control bytes stable. No original owner SQL, provider call or generated-source execution."
+  },
+  "quality": {
+    "initial": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-driver\\runs\\reviews\\source-capacity-quality-v1.json",
+      "sha256": "fa99aa7211d2580f4a1616e2620727b5fd960bf4c4624d2bdf87fe8b8e7f1496"
+    },
+    "final": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-driver\\runs\\reviews\\source-capacity-quality-v2.json",
+      "sha256": "4b9b920fbfc0b39c598f03e576165b2217e2a558b9dc68687c3c1863134e80e1"
+    },
+    "commands": [
+      {
+        "name": "ruff-check",
+        "exit_code": 0
+      },
+      {
+        "name": "ruff-format",
+        "exit_code": 0
+      },
+      {
+        "name": "mypy-windows",
+        "exit_code": 0
+      },
+      {
+        "name": "bandit",
+        "exit_code": 0
+      },
+      {
+        "name": "pip-audit",
+        "exit_code": 0
+      },
+      {
+        "name": "compile",
+        "exit_code": 0
+      },
+      {
+        "name": "mypy-linux",
+        "exit_code": 0
+      }
+    ],
+    "source_and_controls_count": 250,
+    "explanation": "Initial Bandit flags three typing-only asserts; construct the nonnullable plan only after successful validation, removing unreachable narrowing asserts. No runtime check or security suppression removed. Final seven quality commands pass at 250 stable Python/config inputs. CLI has separate focused lint/format checks and behavioral parser-redaction control. No full local suite claim."
+  },
+  "independent_review": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\capacity-launch-independent-review-v2-final.json",
+    "sha256": "3097327677f3d796f218e0649d1361a36cbfb26625daef4548fa320e97b7a082"
+  },
+  "ci_readiness": {
+    "snapshot": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\ci-stack-repair-20261023\\continued-ci-status-v6.json",
+      "sha256": "bfda34a1fe67b2ebc494150cfa22c743aa09abdee8c158a14afa1256eb25fcdd"
+    },
+    "observed_utc": "2026-10-23T15:22:04.531225+00:00",
+    "readiness_change": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\ci-stack-repair-20261023\\remaining-ready-v1.json",
+      "sha256": "e471240c6dd031fbfd76747793d4106b48c82f786403bc080a29942cdc499335"
+    },
+    "repaired_heads": [
+      {
+        "number": 82,
+        "head": "ac0f2045a14f83b92dfee095285ffed935144d2b"
+      },
+      {
+        "number": 81,
+        "head": "d08a72562e1aa7cbd4390ac47f259de6108d1158"
+      },
+      {
+        "number": 80,
+        "head": "6fab719912f717c27e7bd82d883fae5f70bd804c"
+      },
+      {
+        "number": 79,
+        "head": "1a627b7217baff6834e0db68f664e0771e81c0aa"
+      },
+      {
+        "number": 78,
+        "head": "6b8972e4c566b98d14329ae569a9e5fb5d8d8d81"
+      },
+      {
+        "number": 77,
+        "head": "2bc0c28ad2dc242a616f92c2184da9fdf6096903"
+      },
+      {
+        "number": 76,
+        "head": "a3d9d6d3d85a56cdf03eb92af27def36b77f15db"
+      },
+      {
+        "number": 75,
+        "head": "a1c30cfcb26fb7a8c3ff9ba307d1b9aae3c9f426"
+      },
+      {
+        "number": 74,
+        "head": "d9d647f45acd2af5825640cfadbeff01f1ee966e"
+      },
+      {
+        "number": 73,
+        "head": "d737ca44b95fff2124803f97721ed2c29ac9076f"
+      },
+      {
+        "number": 72,
+        "head": "6f13b6c23b9f925838bb01dead98d498cbd06eb9"
+      },
+      {
+        "number": 71,
+        "head": "99f3262ba1c5de33d2b796ea38578ee05bdbb222"
+      }
+    ],
+    "ubuntu_success_jobs": 22,
+    "windows_pending_jobs": 22,
+    "claim": "All open PRs ready for review; no PR merged. Fresh repaired-head Ubuntu checks pass, Windows pending. This is not hosted-green or historical-cause attribution. New driver PR does not yet exist at this snapshot."
+  },
+  "not_delivered": [
+    "actual input/output token count or model observation",
+    "exact retained-body offline rehearsal",
+    "fresh driver hosted full-suite success",
+    "new allowance/authority or funded handoff",
+    "current-price certification",
+    "generated Python competence, adoption or benchmark-score improvement"
+  ],
+  "unchanged": "All preexisting application/test/config files, frozen protocol JSON, benchmark algorithms, historical runtime proofs, original paid owners and financial limits. Only new modules/tests/CLI and current documentation are delivered."
+}

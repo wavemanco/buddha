@@ -1,8 +1,9 @@
 # One complete proposal request: frozen capacity protocol
 
-This is the next SRC-02 capacity check. Its decision rules are fixed before
-observation. **It is not implemented, funded or scheduled for live execution.**
-There is no command to run yet. [PLAN.md](PLAN.md) owns the roadmap.
+This SRC-02 protocol was frozen before implementation or observation. The
+[narrow driver](SOURCE-CAPACITY-DRIVER.md) is now implemented and checked offline;
+**there is no funded handoff or live observation yet**. The machine-readable
+record retains its original freeze-time status. [PLAN.md](PLAN.md) owns the roadmap.
 
 ## The question
 
