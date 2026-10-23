@@ -96,7 +96,8 @@ paid-enabled cached transport, unsent-failure reporting and argument redaction
 gaps. Static review and seven quality checks are recorded separately in the
 [delivery](conformance/src02-capacity-driver-delivery.json).
 
-This is focused engineering evidence. The exact retained-body offline rehearsal,
-fresh hosted full-suite results, current-price/account review, new allocation and
-actual model observation remain separate prerequisites. None of these checks
-establishes useful-diversity improvement, child competence or future request fit.
+The later [exact retained-body rehearsal](SOURCE-CAPACITY-REHEARSAL.md) also passes
+with mocked HTTPS and retained original synthetic files. Fresh hosted full-suite
+results, applicable account review, separate allocation and actual model
+observation remain prerequisites. None of these checks establishes
+useful-diversity improvement, child competence or future request fit.
