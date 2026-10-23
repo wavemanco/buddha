@@ -116,8 +116,10 @@ def _definition(
     profiles: dict[str, object],
 ) -> tuple[dict[str, object], dict[str, object], str]:
     """Check original descriptor/data only; never open or execute producer programs."""
-    recipe = _object(
-        _load(consume(descriptor)),
+    recipe = _object(_load(consume(descriptor)))
+    detached = recipe.get("format") == "buddha.candidate-improvement.v2"
+    _object(
+        recipe,
         {
             "format",
             "config",
@@ -128,17 +130,32 @@ def _definition(
             "max_callbacks",
             "parent_agent_sha256",
             "feedback",
-        },
+        }
+        | ({"task_parent"} if detached else set()),
     )
     agent = _object(_object(selection.to_record()["components"])["agent"])
     entrypoint = _path(recipe["entrypoint"])
     if (
-        recipe["format"] != "buddha.candidate-improvement.v1"
-        or _digest(recipe["parent_agent_sha256"]) != selection.agent_sha256
+        recipe["format"]
+        not in {"buddha.candidate-improvement.v1", "buddha.candidate-improvement.v2"}
+        or (not detached and _digest(recipe["parent_agent_sha256"]) != selection.agent_sha256)
         or set(agent) != {entrypoint}
         or not entrypoint.endswith(".py")
     ):
         raise CandidateImprovementError("proposal parent differs from selected one-file source")
+    parent_id = _digest(recipe["parent_agent_sha256"])
+    if detached:
+        target = _object(recipe["task_parent"], {"path", "sha256"})
+        target_raw = consume(pipeline._absolute(target["path"]))
+        target_sha256 = _digest(target["sha256"])
+        if (
+            not target_raw
+            or len(target_raw) > MAX_SOURCE_BYTES
+            or _sha(target_raw) != target_sha256
+            or _sha(_json({"candidate.py": target_sha256})) != parent_id
+        ):
+            raise CandidateImprovementError("detached task parent differs from its source identity")
+        target_raw.decode("utf-8")
     _integer(recipe["max_callbacks"], 0, 1000)
     config = _object(
         recipe["config"], {"provider", "model", "max_output_tokens", "instructions", "sampling"}
@@ -177,13 +194,20 @@ def _definition(
     bundle = source_feedback.inspect_source_feedback(
         path.parent, expected_provenance_sha256=provenance_sha256
     )
+    if (
+        detached
+        and _object(bundle["feedback"])["format"] != "buddha.candidate-development-feedback.v2"
+    ):
+        raise CandidateImprovementError(
+            "detached improvement requires complete development feedback"
+        )
     for name in ("source", "split", "feedback", "provenance"):
         if consume(path.parent / (name + ".json")) != _json(bundle[name]):
             raise CandidateImprovementError(
                 "feedback changed after original measurement inspection"
             )
     if _sha(_json(bundle["feedback"])) != _digest(feedback["sha256"]) or (
-        _object(bundle["provenance"])["candidate_id"] != selection.agent_sha256
+        _object(bundle["provenance"])["candidate_id"] != parent_id
     ):
         raise CandidateImprovementError("measured feedback belongs to another parent or packet")
     source = TaskSet.from_bytes(_json(bundle["source"]))
@@ -242,6 +266,7 @@ def _validate_outcome(
     if raw != _json(report) + b"\n":
         raise CandidateImprovementError("original session report is not canonical")
     selected = Selection.from_bytes(_json(owner["selection"]))
+    detached = recipe["format"] == "buddha.candidate-improvement.v2"
     descriptor_sha256 = _digest(report["descriptor_sha256"])
     context_inputs = {
         _text(row["path"]): _digest(row["sha256"])
@@ -269,8 +294,14 @@ def _validate_outcome(
         or envelope["status"] != "complete"
         or envelope["disposition"] not in {"materialized", "rejected"}
         or envelope["claim"] != CLAIM
-        or report["format"] != "buddha.candidate-improvement-report.v1"
-        or report["parent_agent_sha256"] != selected.agent_sha256
+        or report["format"]
+        != (
+            "buddha.candidate-improvement-report.v2"
+            if detached
+            else "buddha.candidate-improvement-report.v1"
+        )
+        or report["parent_agent_sha256"] != recipe["parent_agent_sha256"]
+        or (detached and report.get("improver_agent_sha256") != selected.agent_sha256)
         or report["gateway_manifest_sha256"] != pipeline._sha(owner)
         or report["runtime_sha256"] != runtime_sha256
         or report["config_sha256"] != pipeline._sha(recipe["config"])
@@ -322,20 +353,32 @@ def _validate_outcome(
         proposal = _source_proposal(capture["value"])
         child_raw = proposal["source"].encode("utf-8")
         child_sha = _sha(child_raw)
-        parent_sha = _object(_object(selected.to_record()["components"])["agent"])[
+        improver_sha = _object(_object(selected.to_record()["components"])["agent"])[
             _path(recipe["entrypoint"])
         ]
+        parent_sha = _object(recipe["task_parent"])["sha256"] if detached else improver_sha
         if child_sha == parent_sha or read(session / "child/candidate.py", child_sha) != child_raw:
             raise CandidateImprovementError("child is unchanged or differs from accepted source")
         lineage_path = session / "lineage.json"
         lineage_raw = read(lineage_path, declared["lineage.json"])
         lineage = {
-            "format": "buddha.source-lineage.v1",
+            "format": "buddha.source-lineage.v2" if detached else "buddha.source-lineage.v1",
             "parent": {
-                "entrypoint": recipe["entrypoint"],
+                "entrypoint": "candidate.py" if detached else recipe["entrypoint"],
                 "source_sha256": parent_sha,
-                "agent_sha256": selected.agent_sha256,
+                "agent_sha256": recipe["parent_agent_sha256"],
             },
+            **(
+                {
+                    "improver": {
+                        "entrypoint": recipe["entrypoint"],
+                        "source_sha256": improver_sha,
+                        "agent_sha256": selected.agent_sha256,
+                    }
+                }
+                if detached
+                else {}
+            ),
             "child": {
                 "entrypoint": "candidate.py",
                 "source_sha256": child_sha,

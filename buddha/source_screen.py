@@ -304,8 +304,10 @@ def _lineage(screen: SourceScreen, consume: Callable[[Path, object], bytes]) -> 
         return None
     reference = _object(record["lineage"])
     raw = consume(pipeline._absolute(reference["path"]), reference["sha256"])
-    lineage = _object(
-        _load(raw),
+    lineage = _object(_load(raw))
+    detached = lineage.get("format") == "buddha.source-lineage.v2"
+    _object(
+        lineage,
         {
             "format",
             "parent",
@@ -314,7 +316,8 @@ def _lineage(screen: SourceScreen, consume: Callable[[Path, object], bytes]) -> 
             "feedback",
             "owner",
             "proposal_sha256",
-        },
+        }
+        | ({"improver"} if detached else set()),
     )
     generation = _object(record["generation"])
     selected = Selection.from_bytes(_json(generation["selection"]))
@@ -325,7 +328,7 @@ def _lineage(screen: SourceScreen, consume: Callable[[Path, object], bytes]) -> 
     _digest(parent["source_sha256"])
     _path(parent["entrypoint"])
     if (
-        lineage["format"] != "buddha.source-lineage.v1"
+        lineage["format"] not in {"buddha.source-lineage.v1", "buddha.source-lineage.v2"}
         or child
         != {
             "agent_sha256": screen.candidate_id,
@@ -337,6 +340,17 @@ def _lineage(screen: SourceScreen, consume: Callable[[Path, object], bytes]) -> 
         or parent_id == screen.candidate_id
     ):
         raise SourceScreenError("retained lineage differs from the selected child")
+    if detached:
+        improver = _object(lineage["improver"], {"agent_sha256", "source_sha256", "entrypoint"})
+        improver_entrypoint = _path(improver["entrypoint"])
+        if (
+            parent["entrypoint"] != "candidate.py"
+            or parent_id != pipeline._sha({"candidate.py": _digest(parent["source_sha256"])})
+            or not improver_entrypoint.endswith(".py")
+            or _digest(improver["agent_sha256"])
+            != pipeline._sha({improver_entrypoint: _digest(improver["source_sha256"])})
+        ):
+            raise SourceScreenError("detached lineage changes parent or improver source identity")
     _digest(lineage["descriptor_sha256"])
     _digest(lineage["proposal_sha256"])
     feedback = _object(lineage["feedback"], {"file_sha256", "input_sha256"})

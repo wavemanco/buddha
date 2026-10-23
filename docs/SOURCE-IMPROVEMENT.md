@@ -8,6 +8,14 @@ The source route can run a selected parent's improvement procedure and save its
 proposed child as a new file. The parent stays unchanged. This is an execution
 mechanism, not evidence of better answers or a better improver.
 
+For a controlled comparison, the [measured proposal stage's v2
+descriptor](SOURCE-PROPOSAL-STAGE.md#keep-an-improver-fixed-while-changing-its-starting-agent)
+also lets a frozen selected improver work on a separately pinned starting agent.
+It requires full-output feedback and records both source roles. The inherited
+v1 operation described below retains its existing meaning. The generic session
+still accepts caller-reviewed notes; the measured stage supplies the stronger
+original-screen provenance check.
+
 Each selected agent contains one regular UTF-8 `.py` file, at most 1 MiB. The
 inherited file contains both functions:
 

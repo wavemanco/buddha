@@ -54,9 +54,16 @@ def _prefix(
     expected = {
         pipeline._sha(
             [
-                "buddha.candidate-improvement-call.v1",
+                "buddha.candidate-improvement-call.v2"
+                if recipe["format"] == "buddha.candidate-improvement.v2"
+                else "buddha.candidate-improvement-call.v1",
                 descriptor_sha256,
                 parent,
+                *(
+                    [recipe["parent_agent_sha256"]]
+                    if recipe["format"] == "buddha.candidate-improvement.v2"
+                    else []
+                ),
                 feedback_sha256,
                 ordinal,
             ]
@@ -255,12 +262,16 @@ def collect_candidate_improvement(
                 },
             }
         current = authority_observation(reader.capture, authorization, funding)
+        detached = recipe["format"] == "buddha.candidate-improvement.v2"
         result: dict[str, object] = {
-            "format": "buddha.candidate-improvement-stage-report.v1",
+            "format": "buddha.candidate-improvement-stage-report.v2"
+            if detached
+            else "buddha.candidate-improvement-stage-report.v1",
             "status": "complete",
             "disposition": outcome["disposition"],
             "reason": outcome["reason"],
-            "parent_agent_sha256": selection.agent_sha256,
+            "parent_agent_sha256": recipe["parent_agent_sha256"],
+            **({"improver_agent_sha256": selection.agent_sha256} if detached else {}),
             "stage_seal_sha256": seal_sha256,
             "outcome": outcome,
             "improvement": improvement,
