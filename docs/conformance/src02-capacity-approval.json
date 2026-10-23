@@ -1,0 +1,25 @@
+{
+  "format": "buddha.source-capacity-approval.v1",
+  "status": "approved_before_allocation_and_live_execution",
+  "approved_on": "2026-10-23",
+  "user_reply": "Approve $7 / one attempt; partial results allowed",
+  "funding_proposal_sha256": "7c995d967a6fb6977571c1936482624bd51da1c1e60c41f9b2f1386c2e321a0a",
+  "currency": "USD",
+  "budget_microusd": 7000000,
+  "max_calls": 1,
+  "partial_results_allowed": true,
+  "request_sha256": "e258ae8166c518ccd8e8a799139e35c7fa609b74fe10fcba0c8c23d1e401a838",
+  "executing_code_commit": "3848ac964cf49aafb35ef2bb79253867e1a8f89a",
+  "scope": "One OpenAI full-output request capacity observation under the frozen protocol; returned Python remains data. No answer generation, benchmark judging, search or code execution.",
+  "retained_conditions": [
+    "Original partial outcomes retain stage, reason, usable evidence, costs and unresolved holds.",
+    "Exact executing code must pass hosted Windows and Ubuntu checks before allocation/handoff completion.",
+    "Original public Standard/default account assertions and current verified price bounds still apply.",
+    "Separate dedicated original authority; no older scope or balance reused.",
+    "User enters the OpenAI key and starts locally after the exact checked command is supplied."
+  ],
+  "authority_created_at_recording": false,
+  "provider_calls_at_recording": 0,
+  "live_command_supplied_at_recording": false,
+  "claim": "Records explicit approval only; not CI success, allocation completion or model capacity evidence."
+}
