@@ -506,12 +506,12 @@ class Authorization:
 
     def import_history(self, directory: Path, *, manifest_sha256: str, ledger_sha256: str) -> None:
         self._reject_trial_history()
+        directory = _path(directory)
         if trial_fence.required_controls(directory):
             raise OperationConflict("trial-owned history cannot become an unrelated allocation")
         source = read_history(
             directory, manifest_sha256=manifest_sha256, ledger_sha256=ledger_sha256
         )
-        directory = _path(directory)
         ledger = _path(directory / "operations.sqlite3")
         authority_path = _path(self.path)
         if ledger.samefile(authority_path):
