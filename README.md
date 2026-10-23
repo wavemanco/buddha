@@ -8,10 +8,11 @@ Build agents that improve their own procedures for producing useful, meaningfull
 how answers are generated, grouped and scored; what the 4/5/9 result means; how
 parser recovery differs from a judge's decision; and where self-improvement fits.
 
-The separately approved **$7, one-request full-output capacity observation is
-ready for the user to start**. [The live guide](docs/SOURCE-CAPACITY-LIVE.md)
-gives the exact command and a plain-English explanation. No model capacity
-result is available yet.
+The separately approved **full-output capacity observation is complete**:
+one request, $0.080856 recorded cost, zero held, and both predeclared margins
+pass. [The results](docs/SOURCE-CAPACITY-RESULTS.md) close POL-03's bounded-loop
+engineering gate. Current-parent source evolution and improved effectiveness
+remain open; no further user command is needed now.
 
 ## Current state
 
@@ -184,14 +185,14 @@ current cell inside the actual frozen-schedule consumer; direct calls and a
 fabricated confirmation file cannot enable it. No funded final experiment or
 scientific improvement is established by this implementation.
 
-At this checkpoint the living plan contains **5 remaining completion gates**.
+At this checkpoint the living plan contains **4 remaining completion gates**.
 The [validation/finalization infrastructure](docs/conformance/eval01-hosted-completion.json)
 now passes both exact published-head hosted jobs; independent evaluation remains open.
 The Windows PID-lock observer follow-up is complete at its shared-reader scope;
 [the guide](docs/DOCTOR.md#windows-file-sharing) states its boundaries.
 The native pipeline is complete at its declared offline scope. Umbrella milestones
 are not counted again. They cover
-policy/search (1), source evolution (2), held-out evaluation (1) and the
+source evolution (2), held-out evaluation (1) and the
 improver comparison (1). Each gate can require several small implementation
 slices or live experiments. [PLAN.md](docs/PLAN.md) determines the current
 status and order.

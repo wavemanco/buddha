@@ -4,8 +4,8 @@ The [capacity driver](SOURCE-CAPACITY-DRIVER.md) has now transported the exact
 retained 25,209-byte request through the real Gateway/accounting path with one
 mocked HTTPS response. It then verified the same original result without keys
 or another send. **This is offline engineering evidence, not a model token
-measurement. The approved observation now has a dedicated allocation, passing
-executing-code CI and a checked [live command](SOURCE-CAPACITY-LIVE.md).**
+measurement. The separate [actual observation](SOURCE-CAPACITY-RESULTS.md)
+subsequently completed with both margins passing, one request and zero held.**
 
 The request hash is `e258ae8166c518ccd8e8a799139e35c7fa609b74fe10fcba0c8c23d1e401a838`.
 The parent is recovered as literal data from the retained request's input JSON:
@@ -31,7 +31,7 @@ profile wrapper said v1 while containing v2 profile fields. The successful fresh
 fixture corrects that wrapper; application code is unchanged. Both records are
 retained in the [delivery](conformance/src02-capacity-rehearsal-delivery.json).
 
-## Approved next observation: $7, one attempt
+## Approved scope and original prelaunch checks: $7, one attempt
 
 The user has approved the [funding proposal](conformance/src02-capacity-funding-proposal.json)
 for one OpenAI request under a **$7 total cap and one-attempt limit**, allowing
@@ -65,6 +65,7 @@ post-funding review and zero owners, attempts, spending or holds at that
 checkpoint. The [funded handoff](conformance/src02-capacity-funded-handoff.json)
 retains those checks; the earlier unfunded approval checkpoint remains history.
 Only an OpenAI key is needed, entered locally; no Anthropic key is involved.
-Use the exact command in [the live guide](SOURCE-CAPACITY-LIVE.md). Approval
-and preparation have not started a call. [PLAN.md](PLAN.md) retains the open
-capacity gate until actual model evidence exists.
+That paragraph describes the prelaunch checkpoint. The [actual result](SOURCE-CAPACITY-RESULTS.md)
+is now complete and the allowance is closed for new work. No command is needed
+now; [the live guide](SOURCE-CAPACITY-LIVE.md) retains the original handoff.
+[PLAN.md](PLAN.md) keeps the separate current-source and scientific gates open.

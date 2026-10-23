@@ -28,7 +28,7 @@ and limitations. That scope is also closed for new work.
 
 The [first source experiment](SOURCE-FIRST-LIVE-RESULTS.md) completed within its separately approved **$25 combined OpenAI/Anthropic cap and 512-attempt limit**: 170 completed records, $1.158996 spent/committed, zero held and 51 inactive original owners. This scope is closed for new work. The unused $23.841004 and 342 attempts do not authorize another experiment. Recorded costs use the confirmed Standard/default public pay-as-you-go profiles; they are not reconciled invoices. Its [historical handoff](SOURCE-FIRST-LIVE.md) retains the exact command and hidden-key explanation; do not repeat it or reuse an earlier balance for new source evolution.
 
-## Approved one-request capacity observation
+## Completed one-request capacity observation
 
 On October 23, 2026, the user separately approved **$7 total and one attempt**,
 allowing partial results with their stage, reason, usable evidence, costs and
@@ -38,14 +38,14 @@ request and executing code. This covers one OpenAI request containing complete
 historical feedback; returned Python stays text. It buys no answer generation,
 benchmark judging, search or code execution. No Anthropic key is needed.
 
-Immutable inputs and the dedicated $7/one-attempt authority are prepared in a
-separate local copy. Both exact executing-code hosted checks and the actual
-keyless handoff check pass; independent review confirms zero owners, attempts,
-spending and holds before launch. No provider call has been made. No further
-budget approval is needed within this unchanged scope. The [live guide](SOURCE-CAPACITY-LIVE.md)
-supplies the exact command; the [funded record](conformance/src02-capacity-funded-handoff.json)
-retains the readiness evidence. The [living plan](PLAN.md) tracks the open
-measurement and source-evolution gates.
+The [actual observation](SOURCE-CAPACITY-RESULTS.md) completed with one request,
+$0.080856 recorded cost and zero held. The original owner is inactive and no
+attempt remains. This allowance is closed for new work; unused dollars do not
+authorize another experiment. Recorded costs are not reconciled invoices.
+The [funded record](conformance/src02-capacity-funded-handoff.json) preserves
+the prelaunch checks; the [result record](conformance/src02-capacity-live-results.json)
+binds the actual receipt, assessment and accounting. The [original live guide](SOURCE-CAPACITY-LIVE.md)
+retains its historical command. No key or command is needed from the user now.
 
 The new Gateway/source path supports [keyed account reviews](KEYED-REVIEWS.md),
 using the API key already supplied locally; no extra secret is needed. The
