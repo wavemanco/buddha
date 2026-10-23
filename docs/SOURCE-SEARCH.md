@@ -141,7 +141,7 @@ the actual experiment, verify its profiles and processing tiers, obtain its
 specific spending authorization, and explain the operator commands. The current
 POL-02 comparison and its authorization remain separate.
 
-New manifest v3 searches add a [bounded mutation witness](SOURCE-MUTATION-WITNESS.md)
+Manifest v3/v4 searches add a [bounded mutation witness](SOURCE-MUTATION-WITNESS.md)
 after each eligible common screen, including the starter. The candidate receives
 its complete measured outputs, makes a changed further child, and that child
 must generate on the first ordered development task before the candidate can
@@ -150,6 +150,14 @@ A checked failure retains the native scores and excludes only parent eligibility
 uncertain execution stops as incomplete. Historical manifest v1/v2 task-only
 searches retain their original eligibility and replay semantics. One successful
 mutation does not establish improved effectiveness or indefinite competence.
+
+New default manifest v4 searches also require verified private copies of returned
+child source before preparing their next owner. The copy preserves identity and
+lineage; subsequent proposals use that checked root. Original source stays
+retained. Existing owners are never repaired by copying or remounting. Explicit
+`source_copy=False` preserves v3 witnessed behavior; task-only historical modes
+remain unchanged. The [version and recovery rules](SOURCE-MUTATION-WITNESS.md#verified-source-copies-for-new-owners)
+state the exact scope and pending actual composed proof.
 
 For the original source-loop delivery, 41 new acceptance methods and 92 original
 regressions passed across their recorded source scopes. These were separate

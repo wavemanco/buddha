@@ -180,6 +180,7 @@ def check_launch(path: Path, *, expected_sha256: str) -> dict[str, object]:
             proposal_path, expected_sha256=bindings[str(proposal_path)]
         )
         mutation_witness = source_handoff._mutation_witness(proposal)
+        source_copy = source_handoff._source_copy(proposal)
         for name, digest in _object(checked["reviewed_bindings"]).items():
             expected = _digest(digest)
             if name in bindings and bindings[name] != expected:
@@ -311,6 +312,7 @@ def check_launch(path: Path, *, expected_sha256: str) -> dict[str, object]:
                 expected_runtime_sha256=_digest(proposal["expected_runtime_sha256"]),
                 input_bindings={Path(name): digest for name, digest in bindings.items()},
                 mutation_witness=mutation_witness,
+                source_copy=source_copy,
             )
         elif review_path.exists() or review_path.is_symlink() or runs or totals["operation_count"]:
             raise SourceLaunchError("partial preparation or retained work cannot be replaced")
@@ -588,6 +590,7 @@ def launch(
                     pins[review_path] = hashlib.sha256(review_raw).hexdigest()
                     proposal = _object(checked["proposal"])
                     mutation_witness = source_handoff._mutation_witness(proposal)
+                    source_copy = source_handoff._source_copy(proposal)
                     phase[0] = "preparing"
                     source_search.prepare_source_search(
                         _path(checked["directory"]),
@@ -601,6 +604,7 @@ def launch(
                         expected_runtime_sha256=_digest(proposal["expected_runtime_sha256"]),
                         input_bindings=pins,
                         mutation_witness=mutation_witness,
+                        source_copy=source_copy,
                     )
                     source_launch_state.inspect_prepared_search(
                         _path(checked["directory"]),
@@ -614,6 +618,7 @@ def launch(
                         expected_runtime_sha256=_digest(proposal["expected_runtime_sha256"]),
                         input_bindings=pins,
                         mutation_witness=mutation_witness,
+                        source_copy=source_copy,
                     )
                 phase[0] = "executing"
                 common._emit(

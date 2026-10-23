@@ -166,7 +166,7 @@ class _Harness:
         return case.engine.execution(spec)
 
     def prepare(self):
-        self.case.prepare()
+        self.case.prepare(source_copy=False)
 
     def run(self, *, paid=True):
         return self.case.run_search(paid=paid)

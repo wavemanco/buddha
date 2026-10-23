@@ -32,6 +32,7 @@ class SourceLaunchStateTests(unittest.TestCase):
             "expected_runtime_sha256": h.engine.candidate.expected_runtime,
             "input_bindings": {},
             "mutation_witness": getattr(h, "mutation_witness", False),
+            "source_copy": False,
         }
         before = h.h.files(h.directory), h.authority.path.read_bytes(), h.engine.physical_sends
         with (

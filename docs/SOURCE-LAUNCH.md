@@ -1,9 +1,16 @@
 # Launching a reviewed source experiment
 
 This launcher connects the approved experiment to the existing source-search
-controller. It does not create a budget or change NoveltyBench. The proposed
-first source experiment now has its own approved allowance and
-[concrete local command](SOURCE-FIRST-LIVE.md). This page explains the interface.
+controller. It does not create a budget or change NoveltyBench. The first source
+experiment is complete; its [local command](SOURCE-FIRST-LIVE.md) remains a
+historical handoff. Another experiment requires its own reviewed allocation.
+This page explains the interface.
+
+New handoff v3 proposals require both the bounded mutation witness and verified
+copies of returned source. The launcher checks the same choice during fresh
+preparation and retained-state inspection. Older handoffs explicitly keep their
+original no-copy behavior. Changing the source policy requires a new reviewed
+handoff; it cannot silently alter an existing owner or approval.
 
 ## What happens in the terminal
 
