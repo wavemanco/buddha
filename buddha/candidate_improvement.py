@@ -201,6 +201,12 @@ def _definition(
         raise CandidateImprovementError(
             "detached improvement requires complete development feedback"
         )
+    provenance_record = _object(bundle["provenance"])
+    if provenance_record["format"] == "buddha.source-screen-feedback.v5" and (
+        not detached
+        or _digest(provenance_record["improver_agent_sha256"]) != selection.agent_sha256
+    ):
+        raise CandidateImprovementError("frozen failure feedback belongs to another improver")
     for name in ("source", "split", "feedback", "provenance"):
         if consume(path.parent / (name + ".json")) != _json(bundle[name]):
             raise CandidateImprovementError(

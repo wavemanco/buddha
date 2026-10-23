@@ -21,6 +21,7 @@ from buddha.releases import (
     MAX_FEEDBACK_BYTES,
     MAX_JSON_BYTES,
     ReleaseError,
+    Selection,
     _checked_proposal_capture,
     _digest,
     _information,
@@ -72,6 +73,10 @@ _FULL_FAILURE_POLICY = {
     "newest_source_and_hypothesis": "complete",
     "older_source_and_hypothesis_excerpts": 0,
     "cost_scope": "original proposal and failed-generation owners separately",
+}
+_FROZEN_FAILURE_POLICY = {
+    **_FULL_FAILURE_POLICY,
+    "version": "complete-outputs-and-frozen-improver-failures-v5",
 }
 
 
@@ -352,10 +357,14 @@ def _build_failures(
     *,
     existing: bool = False,
     full_answers: bool = True,
+    improver_agent_sha256: str | None = None,
 ) -> dict[str, object]:
     """Rebuild checked history, including at a private partial-write destination."""
     if type(history) not in {list, tuple} or not 1 <= len(history) <= 8:
         raise SourceFeedbackError("failure history requires 1..8 ordered original edges")
+    improver = _digest(improver_agent_sha256) if improver_agent_sha256 is not None else None
+    if improver is not None and full_answers is not True:
+        raise SourceFeedbackError("frozen-improver failures require complete development outputs")
     directory = _destination(directory, existing=existing)
     if existing:
         _packet_files(directory, partial=True)
@@ -465,8 +474,22 @@ def _build_failures(
             )
         owner_ref = _object(_object(proposal["provenance"])["owner"])
         owner = _read_manifest(pipeline._absolute(owner_ref["directory"]))
+        protected_selection = owner["selection"]
+        parent_selection = _object(_object(parent_record["generation"])["selection"])
+        if improver is not None:
+            selected = Selection.from_bytes(_json(protected_selection))
+            if (
+                proposal["format"] != "buddha.candidate-improvement-stage-report.v2"
+                or proposal.get("improver_agent_sha256") != improver
+                or selected.agent_sha256 != improver
+            ):
+                raise SourceFeedbackError("failed proposal belongs to another frozen improver")
+            protected_selection = selected.to_record()
+            _object(protected_selection["components"])["agent"] = _object(
+                parent_selection["components"]
+            )["agent"]
         if pipeline._sha(owner) != owner_ref["manifest_sha256"] or (
-            _json(owner["selection"]) != _json(_object(parent_record["generation"])["selection"])
+            _json(protected_selection) != _json(parent_selection)
         ):
             raise SourceFeedbackError("proposal changes its parent's protected selection")
         inputs = _object(_object(proposal["provenance"])["original_inputs"])
@@ -474,6 +497,8 @@ def _build_failures(
         context = _load(consume(context_path, inputs[str(context_path)]))
         descriptor_path = pipeline._absolute(context["descriptor"])
         recipe = _load(consume(descriptor_path, inputs[str(descriptor_path)]))
+        if improver is not None and recipe["format"] != "buddha.candidate-improvement.v2":
+            raise SourceFeedbackError("frozen-improver failures require the detached descriptor")
         feedback_path = pipeline._absolute(_object(recipe["feedback"])["path"])
         provenance_path = feedback_path.parent / "provenance.json"
         measured_provenance = _load(consume(provenance_path, inputs[str(provenance_path)]))
@@ -517,6 +542,7 @@ def _build_failures(
         summary = {
             "ordinal": ordinal,
             "parent_id": parent["candidate_id"],
+            **({"improver_id": improver} if improver is not None else {}),
             "child_id": child["agent_sha256"],
             "task_id": failure["task_id"],
             "reason": terminal["done_reason"],
@@ -658,10 +684,18 @@ def _build_failures(
                 omitted_utf8_bytes=cast(int, item["utf8_bytes"]) - included,
             )
     provenance.update(
-        format="buddha.source-screen-feedback.v4"
+        format="buddha.source-screen-feedback.v5"
+        if improver is not None
+        else "buddha.source-screen-feedback.v4"
         if full_answers
         else "buddha.source-screen-feedback.v2",
-        policy=dict(_FULL_FAILURE_POLICY if full_answers else _FAILURE_POLICY),
+        policy=dict(
+            _FROZEN_FAILURE_POLICY
+            if improver is not None
+            else _FULL_FAILURE_POLICY
+            if full_answers
+            else _FAILURE_POLICY
+        ),
         measured_base_sha256=measured_sha256,
         failure_history=edges,
         failures=failures,
@@ -671,6 +705,8 @@ def _build_failures(
             "no invalidity oracle or improvement claim"
         ),
     )
+    if improver is not None:
+        provenance["improver_agent_sha256"] = improver
     projected = [
         {
             "task": tasks.select([_object(row)["task_id"]]).tasks[0].to_record(),
@@ -693,14 +729,20 @@ def build_source_feedback(
     *,
     reference: dict[str, object],
     failure_history: Sequence[dict[str, object]] = (),
+    improver_agent_sha256: str | None = None,
 ) -> dict[str, object]:
     """Build detached prospective records, without writing or creating owners."""
     try:
         if type(failure_history) not in {list, tuple}:
             raise SourceFeedbackError("failure history requires an ordered literal sequence")
         return (
-            _build_failures(directory, reference, failure_history)
-            if failure_history
+            _build_failures(
+                directory,
+                reference,
+                failure_history,
+                improver_agent_sha256=improver_agent_sha256,
+            )
+            if failure_history or improver_agent_sha256 is not None
             else _build(directory, reference)
         )
     except (ValueError, TypeError, KeyError, OSError, RecursionError, OverflowError) as error:
@@ -736,11 +778,12 @@ def inspect_source_feedback(
         )
         original = _load(provenance_raw)
         version = original.get("format")
-        if version not in {"buddha.source-screen-feedback.v" + str(i) for i in range(1, 5)}:
+        if version not in {"buddha.source-screen-feedback.v" + str(i) for i in range(1, 6)}:
             raise SourceFeedbackError("unsupported saved feedback derivation")
         full_answers = version in {
             "buddha.source-screen-feedback.v3",
             "buddha.source-screen-feedback.v4",
+            "buddha.source-screen-feedback.v5",
         }
         reference = _object(original["reference"])
         bundle = (
@@ -750,8 +793,16 @@ def inspect_source_feedback(
                 cast(list[dict[str, object]], _list(original["failure_history"])),
                 existing=True,
                 full_answers=full_answers,
+                improver_agent_sha256=_digest(original["improver_agent_sha256"])
+                if version == "buddha.source-screen-feedback.v5"
+                else None,
             )
-            if version in {"buddha.source-screen-feedback.v2", "buddha.source-screen-feedback.v4"}
+            if version
+            in {
+                "buddha.source-screen-feedback.v2",
+                "buddha.source-screen-feedback.v4",
+                "buddha.source-screen-feedback.v5",
+            }
             else _build(directory, reference, existing=True, full_answers=full_answers)
         )
         records = {
@@ -780,9 +831,15 @@ def write_source_feedback(
     *,
     reference: dict[str, object],
     failure_history: Sequence[dict[str, object]] = (),
+    improver_agent_sha256: str | None = None,
 ) -> dict[str, object]:
     """Exclusively write four checked records; preserve any partial failure."""
-    bundle = build_source_feedback(directory, reference=reference, failure_history=failure_history)
+    bundle = build_source_feedback(
+        directory,
+        reference=reference,
+        failure_history=failure_history,
+        improver_agent_sha256=improver_agent_sha256,
+    )
     try:
         directory = _destination(directory)
         records = {

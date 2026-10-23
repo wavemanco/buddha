@@ -87,7 +87,8 @@ on retry. Choose a new destination after reviewing that failure.
 
 ## Current full-output contract
 
-Provenance v3 (measurements) and v4 (measurements plus failed-child history)
+Provenance v3 (measurements), v4 (inherited failed-child history) and v5
+(a fixed improver's failed-child history)
 retain every selected answer and diagnostic position. Empty answers, whitespace,
 Unicode, control characters, repeated answers and late endings are preserved.
 Every answer has zero omitted bytes. The inherited Python improvement function
@@ -114,6 +115,38 @@ fits. Verify the concrete parent, full feedback, request framing and output
 headroom before any next live handoff. No reviewed model tokenizer/context
 proof is supplied by this change. It neither funds a run nor changes the
 completed first experiment or its limited historical feedback.
+
+## A fixed improver learns from its own failed children
+
+A controlled improver comparison keeps the improvement procedure fixed while
+the agent being improved can change. The procedure and the starting agent
+therefore have separate source identities. A failed child still belongs to the
+procedure that proposed it and to the exact measured parent it tried to improve.
+
+Pass `improver_agent_sha256` with a nonempty `failure_history` to select
+provenance v5. Every edge must come from that same frozen improver through the
+protected v2 proposal stage. The original parent, proposal, failed screen,
+shared spending authorization and task order must all verify. Apart from the
+intentionally different agent source, the protected selections must match.
+The complete parent answers and newest failed source and hypothesis stay visible;
+each failure also names its improver and retains its separately recorded costs.
+
+The next protected proposal must select that same improver. A genuine packet
+from another improver is refused even when its files and hashes are valid.
+An empty history or a prefix-extraction request cannot silently select v5.
+Omitting this keyword, or passing `None`, preserves the existing v3/v4 behavior;
+saved v1–v4 packets keep their original reconstruction rules and fields.
+
+This validates the included history. It does not prove that a study included
+every attempt, enforce equal budgets, schedule repeated descendants or run a
+sealed assessment. Those remain responsibilities of the planned IMP-01 study
+controller. It does not change official NoveltyBench results or allocate money.
+
+The [delivery record](conformance/imp01-frozen-failure-feedback-delivery.json)
+retains two passing new acceptance methods, a separate passing 21-method
+regression cohort and seven quality checks at the held implementation cut.
+Workers and provider replies are supplied fixtures; these checks do not measure
+improver effectiveness. Full-suite hosted CI remains a separate gate.
 
 ## Historical v1/v2 prefix contracts (replay only)
 
@@ -157,8 +190,10 @@ this packet.
 The public functions are in `buddha.source_feedback`:
 
 ```text
-build_source_feedback(directory, *, reference, failure_history=()) -> dict
-write_source_feedback(directory, *, reference, failure_history=()) -> dict
+build_source_feedback(directory, *, reference, failure_history=(),
+                      improver_agent_sha256=None) -> dict
+write_source_feedback(directory, *, reference, failure_history=(),
+                      improver_agent_sha256=None) -> dict
 ```
 
 These are Python API signatures, not PowerShell commands. `directory` is an
@@ -188,6 +223,15 @@ This runs the bridge's checks once in the current PowerShell window, using
 temporary synthetic records and simulated workers/network responses. It needs
 no key or paid call. Ctrl+C stops the foreground checks. These checks test the
 engineering contract; they do not measure an agent's creative performance.
+
+The following checks the fixed-improver history connection once in the current
+PowerShell window. It uses temporary records and simulated workers and replies,
+needs no keys or Docker, and spends no API money. Allow several minutes; wait
+for `OK` or a failure. Ctrl+C stops the checks. It does not resume a live run.
+
+```powershell
+python -m unittest discover -s tests -p test_frozen_failure_feedback.py -v
+```
 
 ## Complete-output validation
 
