@@ -101,3 +101,7 @@ Repeat that assessment when parent source, full feedback or request logic
 changes. This one small request cannot certify future requests. Token fit,
 output completeness, local model/account access and any future funding stay
 separate pending checks; no benchmark re-audit or new allocation follows here.
+
+The next observation now has a [frozen decision protocol](SOURCE-CAPACITY-PROTOCOL.md).
+Its exact-body, margin and partial-result rules precede implementation and funding;
+no live command is available yet.
