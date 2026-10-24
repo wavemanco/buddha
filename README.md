@@ -1,6 +1,8 @@
 # Buddha
 
-Build agents that improve their own procedures for producing useful, meaningfully different answers on NoveltyBench.
+Build agents that improve their own procedures for producing useful, meaningfully different answers on [NoveltyBench](https://github.com/novelty-bench/novelty-bench).
+
+The design for evolving agent code draws on [DGM](https://github.com/jennyzzt/dgm).
 
 **Start with [the consolidated living plan](docs/PLAN.md)** for the complete original objective, completed work, new findings, dependencies and the next slice. It is the sole current roadmap; design and review documents supply specifications and evidence.
 

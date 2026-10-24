@@ -1,7 +1,7 @@
 # How Buddha works: answers, judges, scores and improvement
 
 This guide explains the experiment in ordinary language. It describes our pinned
-NoveltyBench **v1.1** reference and the completed October 20, 2026 judge audit.
+[NoveltyBench](https://github.com/novelty-bench/novelty-bench) **v1.1** reference and the completed October 20, 2026 judge audit.
 Future benchmark versions may change these rules. [PLAN.md](PLAN.md) remains the
 roadmap; this guide explains the machinery and what its results mean.
 
@@ -318,6 +318,9 @@ The older interrupted experiment's unresolved request and hold remain separate
 from this completed audit.
 
 ## 11. Where self-improvement fits
+
+The [DGM](https://github.com/jennyzzt/dgm) project informs our design for evolving
+agent code.
 
 Our existing search can propose changed instructions/sampling policies, evaluate
 them and retain candidates in an archive. Retaining a candidate says it is
