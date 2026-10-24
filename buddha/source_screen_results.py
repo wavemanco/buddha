@@ -14,7 +14,7 @@ from buddha import native_pipeline as pipeline
 from buddha import trial_fence
 from buddha.answers import TaskSet
 from buddha.doctor import _authority, _Busy, _Capture, _Unsupported
-from buddha.native_evaluation import _Generation, _read_generation
+from buddha.native_evaluation import _Generation, _read_generation, _read_published_generation
 from buddha.native_evidence import NativeEvidence, _adopt_capture, authority_observation
 from buddha.releases import MAX_JSON_BYTES, Release, _digest, _json, _load, _object, _path, _text
 
@@ -176,7 +176,18 @@ def _source(
         "owner_manifest_sha256": owner.manifest_sha256,
         "owner_ledger_sha256": owner.ledger_sha256,
     }
-    source = _read_generation(reference, reader.authorization)
+    prospective_report = None
+    if record["format"] == "buddha.source-screen.v2":
+        prospective_report, source, captured = _read_published_generation(
+            root,
+            authorization=reader.authorization,
+            expected_report_sha256=_sha(reader.raw(root / "report.json")),
+        )
+        if source is None or not _same(prospective_report["source_generation"], reference):
+            raise reader.error_type("source publication changes its original generation")
+        _adopt_capture(captured, reader.capture)
+    else:
+        source = _read_generation(reference, reader.authorization)
     if source.tasks.fingerprint() != tasks.fingerprint():
         raise reader.error_type("source C1 changes the declared screen task")
     for path, digest in source.files.items():
@@ -186,14 +197,7 @@ def _source(
     seal = reader.record(root / "completed/0.json")
     attempt = root / _path(seal["attempt"])
     report = reader.record(attempt / "report.json")
-    if record["format"] == "buddha.source-screen.v2":
-        from buddha.candidate_generation import inspect_candidate_generation
-
-        prospective_report = inspect_candidate_generation(
-            root,
-            authorization=reader.authorization,
-            expected_report_sha256=_sha(reader.raw(root / "report.json")),
-        )
+    if prospective_report is not None:
         _, digest = _publication(
             reader, root / "report.json", prospective_report, current, {owner.run_id}
         )
@@ -217,7 +221,6 @@ def _failed_source(
     runtime_sha256: str,
     current: dict[str, object],
 ) -> dict[str, object]:
-    from buddha.candidate_generation import inspect_candidate_generation
     from buddha.source_screen import SourceScreen, _generation_formats, _generation_recipe
 
     if not isinstance(screen, SourceScreen):
@@ -241,9 +244,10 @@ def _failed_source(
     ):
         raise reader.error_type("failed source changes an original screen control")
     raw = reader.raw(root / "report.json")
-    report = inspect_candidate_generation(
+    report, _, captured = _read_published_generation(
         root, authorization=reader.authorization, expected_report_sha256=_sha(raw)
     )
+    _adopt_capture(captured, reader.capture)
     if raw != _json(report) or report["disposition"] != "candidate_execution_failed":
         raise reader.error_type("failed source lacks a checked terminal outcome")
     reference = _object(report["source_generation"])

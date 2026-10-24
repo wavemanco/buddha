@@ -35,6 +35,9 @@ saved-result checks on a small six-cell fixture: about 23 seconds for developmen
 25 for the frozen schedule and 36 for the final assessment. The evidence remains
 unchanged. PR #102's full Ubuntu suite also passes; Windows and later revisions
 remain separate checks. Larger verification costs and any measured speedup remain open.
+The [shared generation check](docs/RECONSTRUCTION-COST.md#sharing-one-checked-generation)
+now removes a duplicated reconstruction in screen, validation and launch readers,
+while preserving original source bindings and complete integrity checks.
 
 ## Current state
 

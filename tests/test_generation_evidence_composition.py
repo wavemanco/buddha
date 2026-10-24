@@ -10,7 +10,13 @@ import test_source_launch_state as launch_fixtures
 import test_source_screen_outcome as screen_fixtures
 import test_validation_study as validation_fixtures
 
-from buddha import candidate_generation, doctor, source_screen_results, validation_study
+from buddha import (
+    candidate_generation,
+    doctor,
+    native_pipeline,
+    source_screen_results,
+    validation_study,
+)
 from buddha.gateway import RawHTTPTransport
 from buddha.releases import _json
 
@@ -204,6 +210,42 @@ class GenerationEvidenceCompositionTests(unittest.TestCase):
             ),
         ):
             self.assertEqual(h.inspect(directory, authority), report)
+
+    def test_sealed_unpublished_launch_keeps_bare_evidence_and_no_new_attempt(self):
+        fixture = launch_fixtures.SourceLaunchStateTests("runTest")
+        self.addCleanup(fixture.doCleanups)
+        h = fixture.fixture()
+        h.prepare()
+        generation = h.directory / "seed/tasks/0/generation"
+        publish = native_pipeline.publish_complete
+
+        def before_publication(path, *args, **kwargs):
+            if path == generation / "report.json":
+                self.assertTrue((generation / "completed/0.json").is_file())
+                raise KeyboardInterrupt("synthetic sealed generation publication stop")
+            return publish(path, *args, **kwargs)
+
+        with (
+            patch.object(native_pipeline, "publish_complete", side_effect=before_publication),
+            self.assertRaises(KeyboardInterrupt),
+        ):
+            h.run_search()
+        self.assertTrue((generation / "completed/0.json").is_file())
+        self.assertFalse((generation / "report.json").exists())
+        before = h.engine.workers, h.engine.native_workers
+        with patch.object(
+            candidate_generation, "_read_evidence", wraps=candidate_generation._read_evidence
+        ) as walks:
+            report = fixture.inspect(h)
+        self.assertEqual(walks.call_count, 1)
+        self.assertEqual(report["next_role"], "native")
+        self.assertEqual(
+            report["next_owner"], str(h.directory / "seed/tasks/0/evaluation/owners/1")
+        )
+        self.assertFalse(report["inactive_pending"])
+        self.assertEqual((h.engine.workers, h.engine.native_workers), before)
+        self.assertEqual([path.name for path in (generation / "attempts").iterdir()], ["0-0"])
+        self.assertFalse((generation / "report.json").exists())
 
 
 if __name__ == "__main__":

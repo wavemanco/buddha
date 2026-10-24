@@ -18,7 +18,8 @@ from buddha import (
 from buddha import native_pipeline as pipeline
 from buddha.answers import Answers
 from buddha.candidate_improvement_results import collect_candidate_improvement
-from buddha.native_evidence import NativeEvidence
+from buddha.doctor import _Capture
+from buddha.native_evidence import NativeEvidence, _adopt_capture
 from buddha.releases import Release, _digest, _json, _load, _object, _path, file_hash
 
 
@@ -162,19 +163,17 @@ def _screen(
             "owner_manifest_sha256": owner.manifest_sha256,
             "owner_ledger_sha256": owner.ledger_sha256,
         }
-        evidence = candidate_generation._read_evidence(reference, reader.authorization)
-        for path, digest in cast(dict[Path, str], evidence["files"]).items():
-            captured = reader.capture.raw.get(path)
-            if captured is None:
-                reader.raw(path, digest)
-            elif _sha(captured) != digest:
-                raise source_search.SourceSearchError("generation custody changed during checking")
         if _present(reader, generation / "report.json"):
-            candidate_generation.inspect_candidate_generation(
+            _, evidence = candidate_generation._read_published_evidence(
                 generation,
                 authorization=reader.authorization,
                 expected_report_sha256=_sha(reader.raw(generation / "report.json")),
             )
+            if _json(evidence["reference"]) != _json(reference):
+                raise source_search.SourceSearchError("generation publication changes its owner")
+        else:
+            evidence = candidate_generation._read_evidence(reference, reader.authorization)
+        _adopt_capture(cast(_Capture, evidence["capture"]), reader.capture)
         if evidence["answers"] is None:
             terminal_failure = True
             if _present(reader, location / "evaluation"):
