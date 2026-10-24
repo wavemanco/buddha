@@ -15,7 +15,7 @@ from buddha import candidate_generation, native_evaluation, trial_fence
 from buddha import native_pipeline as pipeline
 from buddha.answers import TaskSet, _Artifact, _source, _utf8
 from buddha.authorization import Authorization
-from buddha.doctor import _Busy, _Unsupported
+from buddha.doctor import _Busy, _Capture, _Unsupported
 from buddha.gateway import (
     CAPABILITIES,
     CORE,
@@ -983,9 +983,17 @@ def inspect_source_screen(
     *,
     authorization: Path,
     expected_report_sha256: str,
+    sink: _Capture | None = None,
 ) -> dict[str, object]:
     from buddha.source_screen_results import collect_source_screen
 
+    if sink is not None:
+        return collect_source_screen(
+            directory,
+            authorization=authorization,
+            expected_report_sha256=_digest(expected_report_sha256),
+            sink=sink,
+        )
     return collect_source_screen(
         directory,
         authorization=authorization,

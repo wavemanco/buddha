@@ -124,3 +124,27 @@ window. These checks use supplied replies, need no keys and spend no API money.
 They create temporary test data and can take tens of minutes or more. No second
 window is needed; Ctrl+C stops the checks. They do not run a live comparison or
 change historical experiment records.
+
+## Rechecking finished measurements
+
+Before choosing its next step, the controller rechecks earlier measurements
+using their saved records. Previously, it followed the same completed answer
+and judging trail twice: once in the controller and again in the full result
+inspector. That repeated local work grew as the study accumulated results.
+The revised route uses the full inspector once, then checks that every original
+run, funding record and task-specific input matches the controller's declared
+experiment. It also retains the check that no judging work follows a failed
+answer-generation step, including an empty judging directory. Unfinished work
+continues through the existing recovery checks.
+
+This is passive verification: it needs no API keys and makes no model calls.
+The full original evidence checks, exact owner identities, saved-file hashes
+and whole-study safeguards remain required; completed records are not simply
+trusted or reused without checking. The change removes one bounded piece of
+duplicate verification. Any measured elapsed-time improvement and full-suite
+test results must be reported separately once observed. It does not establish
+that either improvement procedure produces better descendants.
+
+The [delivery record](conformance/imp01-completed-screen-replay-delivery.json)
+retains baseline failures, the capture correction and passing focused checks.
+Larger verification runs are reported separately.

@@ -349,7 +349,11 @@ def _ref(directory: Path, authorization: Path) -> dict[str, object]:
     }
 
 
-def _read_ref(reader: NativeEvidence, value: object, *, proposal: bool = False) -> dict[str, Any]:
+def _read_ref(
+    reader: NativeEvidence, value: object, *, proposal: bool = False, capture: bool = False
+) -> dict[str, Any]:
+    if type(capture) is not bool or (capture and proposal):
+        raise SourceSearchError("nested byte capture requires a screen and explicit boolean")
     reference = _object(value, {"directory", "authorization", "report_sha256"})
     directory = pipeline._absolute(reference["directory"])
     if reference["authorization"] != str(reader.authorization) or not directory.is_relative_to(
@@ -362,9 +366,17 @@ def _read_ref(reader: NativeEvidence, value: object, *, proposal: bool = False) 
         if proposal
         else source_screen.inspect_source_screen
     )
-    result = function(
-        directory, authorization=reader.authorization, expected_report_sha256=expected
-    )
+    if capture:
+        result = source_screen.inspect_source_screen(
+            directory,
+            authorization=reader.authorization,
+            expected_report_sha256=expected,
+            sink=reader.capture,
+        )
+    else:
+        result = function(
+            directory, authorization=reader.authorization, expected_report_sha256=expected
+        )
     if _json(result) != reader.raw(directory / "report.json", expected):
         raise SourceSearchError("returned nested result differs from its saved canonical report")
     return result
