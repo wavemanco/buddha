@@ -49,6 +49,18 @@ def _rows(
     return [_object(row) for row in value]
 
 
+def _adopt_capture(source: _Capture, target: _Capture) -> None:
+    """Retain all consumed bytes/sidecars under the receiving aggregate limit."""
+    if type(source) is not _Capture or type(target) is not _Capture or source is target:
+        raise NativeEvidenceError("capture adoption needs two original bounded observations")
+    source.finish()
+    for path in source.databases:
+        target.database(path)
+    for path, raw in source.raw.items():
+        if target.read(path, len(raw)) != raw:
+            raise NativeEvidenceError("nested observation consumed conflicting original bytes")
+
+
 class NativeEvidence:
     """Read shared custody; callers supply checked release/template/funding.
 
@@ -72,6 +84,19 @@ class NativeEvidence:
         self.capture = _Capture(directory)
         self.owners: dict[Path, _Owner] = {}
         self.seals: dict[Path, str] = {}
+        self._retained: list[_Capture] = []
+
+    def retain_capture(self, capture: _Capture) -> None:
+        """Also preserve a sibling immutable tree's original metadata snapshot."""
+        _adopt_capture(capture, self.capture)
+        if capture not in self._retained:
+            self._retained.append(capture)
+
+    def finish(self) -> dict[str, str]:
+        result = self.capture.finish()
+        for capture in self._retained:
+            capture.finish()
+        return result
 
     def _rows(self, value: object) -> list[dict[str, object]]:
         return _rows(value, self.error_type)

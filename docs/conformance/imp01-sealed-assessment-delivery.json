@@ -1,0 +1,133 @@
+{
+  "format": "buddha.improver-assessment-delivery.v1",
+  "status": "implementation_under_verification",
+  "observed_utc": "2026-10-24T02:37:37.973069+00:00",
+  "design_sections": [
+    "DESIGN 5",
+    "DESIGN 6",
+    "DESIGN 7",
+    "DESIGN 8"
+  ],
+  "baseline": "318a704f6e72ff7923ff965574b859d68f90f099",
+  "source_sha256": {
+    "buddha/improver_assessment.py": "f3b6fbce08bfe1de18dcb631b297b0203cb43d5ec9359fabe517bbb71739db83",
+    "buddha/improver_study.py": "96d78a6078da6c6cfdc17db2dd55b3d732eed3594fa2460efdbdc3aa2de8f536",
+    "buddha/final_evaluation.py": "554998a0c00e7c1f3968970fa44887fddf489cf6be2170f75b34a3d96286abd3",
+    "buddha/validation_study.py": "d425e39da77e00ee5a4fd5296890f8fda141e75802809204b5a15e3669a061ce",
+    "buddha/source_screen_results.py": "9bcf3ceecf8579af9e454121a5c3bdf7f784d6c6ca8126de355fba492d373de5",
+    "buddha/native_evidence.py": "a0acdb4acd583fdddc9257556b7878cf926b1a354cc274fc2a9ecb73737d26c7",
+    "tests/test_improver_assessment.py": "28a0ce1fb210bd0ceb86414c3c350ca15b793dee2b76b93144cddb3ad471d8cd",
+    "tests/test_native_evidence.py": "f92f20d684aa33fecfcd122a21b681cad0b5c2dc9175484e41c090b6cf83b68c"
+  },
+  "implemented": [
+    "Prospective typed supported paired method, complete final custody and maximum phase/input limits before development owners",
+    "First-owner original outer controls, completed finite record reconstruction, selected/null slots and separate identical-source roles",
+    "Irreversible confirmed dense final grid through the existing physical runner and original confined producers",
+    "Original native scalar projection into shared-starter paired analysis; physical and scientific completeness remain separate",
+    "End-of-read original development/final byte, directory and database-sidecar guards"
+  ],
+  "verification": {
+    "initial_interface_red": {
+      "methods": 3,
+      "errors": 3,
+      "scope": "Missing module before fixture creation"
+    },
+    "retained_capture": {
+      "methods": 3,
+      "status": "passed",
+      "scope": "Pure temporary capture cases; not composed custody proof"
+    },
+    "review_control_red": {
+      "methods": 2,
+      "failures": 5,
+      "errors": 0,
+      "scope": "Four conflicting source pins reached writer; missing finite/frozen-copy inputs in prospective envelope"
+    },
+    "review_control_green": {
+      "methods": 2,
+      "failures": 0,
+      "errors": 0,
+      "status": "passed",
+      "scope": "Actual genuine-fixture pre-owner refusal/projection boundaries"
+    },
+    "quality": {
+      "successful": 7,
+      "attempted": 7,
+      "input_count": 217,
+      "all_pins_unchanged": true
+    },
+    "composed_and_legacy": {
+      "status": "pending",
+      "scope": "Three new composed methods at corrected cut and all12 original final-v1 methods have live bounded processes; no pass claimed before terminal results"
+    },
+    "hosted_ci": {
+      "status": "not_published_at_this_checkpoint"
+    }
+  },
+  "findings": [
+    {
+      "id": "IA-R1",
+      "problem": "Intrinsic insertion could overwrite conflicting explicit S/I/runtime pins",
+      "resolution": "One checked intrinsic union, then checked explicit merge before writer"
+    },
+    {
+      "id": "IA-R2",
+      "problem": "Sealed preflight omitted finite intrinsic/extra controls and outer frozen-source copies",
+      "resolution": "Share the actual intrinsic closure; project maximum3G copies before owners and actual dense copies at freeze"
+    }
+  ],
+  "independent_reviews": {
+    "shared_helpers": "No static blocker at its explicitly pinned earlier extraction cut",
+    "initial_consumer": "Two required corrections retained",
+    "correction": "IA-R1/R2 resolved by source inspection at final held cut; no runtime pass claimed by reviewer"
+  },
+  "evidence": [
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/improver-assessment-red-v1.json",
+      "sha256": "efce75968a3130276459ead2bcafb18fb24e46aea3e92fbcb2e5411a95e50721"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/improver-assessment-review-red-v1.json",
+      "sha256": "6816e78a563524a69c874f2d2560e7278d2d3777a83309f21dd95bbaef6cfa64"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/improver-assessment-review-green-v1.json",
+      "sha256": "b5b13ba45b528c387848ae9632f690f277185ace39a9512b9a2390cb803c5835"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/improver-assessment-capture-red-v1.json",
+      "sha256": "7858711374a29390b946bd6d8870b53b8f1e290d971e092c5b88bb9db83097e6"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/improver-assessment-capture-green-v1.json",
+      "sha256": "b38c99d57ace735e1b5956f56281c7039355d26ed3ebac7b1c439c7fe90d1e36"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/improver-assessment-quality-v1.json",
+      "sha256": "80f9b2de3364ab14f379d804bd1c2ea33b0c6b15353b376b65781035fe6b1b70"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/improver-assessment-quality-v1.inputs.json",
+      "sha256": "6403fdfdba8188430122025793fa9205016ad379a4401b9f6ea3ad8bea4a48cb"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/improver-assessment-shared-helper-review-v1.json",
+      "sha256": "95fe0fc68f032b64429a77f2eb9bc67b766537d1b0aa1cd3d16d87dfbf50d51c"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/improver-assessment-source-review-v1.json",
+      "sha256": "148ca772c68e782619b0bac29c62d674888348967d44615a8452db00888cd387"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/improver-assessment-source-correction-review-v1.json",
+      "sha256": "ac03477c62590d6b9d951e8a3d1f3641d6d323d2271a6f8fa5112661b3722a28"
+    }
+  ],
+  "limits": [
+    "Full composed, legacy, matrix and exact-head hosted outcomes remain pending or incomplete at this checkpoint",
+    "Supplied workers/replies do not establish model authorship, scientific effectiveness or new container-runtime guarantees",
+    "No paid allocation, provider request, live command, original paid-owner change, adoption or merge",
+    "Fixed-panel conditional lower bounds do not establish future-search effectiveness, independent human quality, target repair or unseen-task generalization"
+  ],
+  "next": "Finish terminal original-record and legacy verification, publish this slice, then freeze and fund the actual controlled comparison under the living plan"
+}

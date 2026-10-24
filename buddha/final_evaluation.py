@@ -150,27 +150,28 @@ def _purposes(record: dict[str, Any], identity: str, validation: dict[str, Any])
     }
 
 
-@_checked
-def prepare_evaluation_trial(
+def _prepare_trial_root(
     directory: Path,
     *,
     declaration: Path,
     expected_sha256: str,
     expected_runtime_sha256: str,
+    state: dict[str, Any],
     authorizations: dict[str, Authorization],
+    purposes: dict[str, str],
+    context_format: str,
+    extra_context: dict[str, object] | None = None,
 ) -> Path:
-    directory, declaration = _path(directory), _path(declaration)
-    raw = pipeline._read(declaration, _digest(expected_sha256))
-    state = _definition(raw, expected_runtime_sha256)
+    """Shared original three-phase reserve/root publication, before any lower owner."""
     record = state["definition"]
     identity = pipeline._sha(record)
     if type(authorizations) is not dict or set(authorizations) != {"search", "validation", "final"}:
         raise FinalEvaluationError("one explicit original grant per phase is required")
-    purposes = _purposes(record, identity, state["record"])
     phases, originals = {}, dict(state["controls"])
     originals[declaration] = _digest(expected_sha256)
     protected = [
         *originals,
+        *state.get("protected", []),
         *[Path(value) for value in state["record"]["generation"]["roots"].values()],
         *[Path(value) for value in state["record"]["native"]["roots"].values()],
     ]
@@ -222,14 +223,18 @@ def prepare_evaluation_trial(
     }
     for key in ("total_budget_microusd", "total_max_calls"):
         _integer(funding[key], 1)
-    context = {
-        "format": "buddha.evaluation-trial-context.v1",
+    context: dict[str, Any] = {
+        "format": context_format,
         "external_declaration": {"path": str(declaration), "sha256": expected_sha256},
         "expected_runtime_sha256": expected_runtime_sha256,
         "controls": {str(path): pin for path, pin in originals.items()},
         "host_core": gateway._core_sources(),
         "host_runtime": gateway._runtime(),
     }
+    if extra_context is not None:
+        if set(extra_context) & set(context):
+            raise FinalEvaluationError("extra trial context conflicts with fixed fields")
+        context.update(extra_context)
     marker = {
         "format": "buddha.evaluation-trial-root.v1",
         "root": str(directory),
@@ -244,6 +249,33 @@ def prepare_evaluation_trial(
     for phase in phases:
         (directory / phase).mkdir()
     pipeline._write(directory / "funding.json", _json(funding))
+    return directory
+
+
+@_checked
+def prepare_evaluation_trial(
+    directory: Path,
+    *,
+    declaration: Path,
+    expected_sha256: str,
+    expected_runtime_sha256: str,
+    authorizations: dict[str, Authorization],
+) -> Path:
+    directory, declaration = _path(directory), _path(declaration)
+    raw = pipeline._read(declaration, _digest(expected_sha256))
+    state = _definition(raw, expected_runtime_sha256)
+    record = state["definition"]
+    identity = pipeline._sha(record)
+    _prepare_trial_root(
+        directory,
+        declaration=declaration,
+        expected_sha256=expected_sha256,
+        expected_runtime_sha256=expected_runtime_sha256,
+        state=state,
+        authorizations=authorizations,
+        purposes=_purposes(record, identity, state["record"]),
+        context_format="buddha.evaluation-trial-context.v1",
+    )
     study.prepare_validation_study(
         directory / "validation/study",
         declaration=Path(record["validation"]["path"]),
@@ -299,8 +331,8 @@ def _phase_authority(state: dict[str, Any], phase: str) -> Path:
     return _path(state["funding"]["phases"][phase]["authorization_path"])
 
 
-def _quiescent(state: dict[str, Any], phase: str, *, fresh: bool = False) -> None:
-    path = _phase_authority(state, phase)
+def _quiescent_funding(path: Path, *, fresh: bool = False) -> tuple[dict[str, object], bytes]:
+    """Check a financial snapshot; caller joins its publication before finishing it."""
     funding, raw = launch._snapshot(path)
     inactive = {row["run_id"] for row in study._list(funding["auth_deactivations"])}
     if (
@@ -311,6 +343,12 @@ def _quiescent(state: dict[str, Any], phase: str, *, fresh: bool = False) -> Non
         raise FinalEvaluationError(
             "freeze cannot strand unfinished work or consume used final funding"
         )
+    return funding, raw
+
+
+def _quiescent(state: dict[str, Any], phase: str, *, fresh: bool = False) -> None:
+    path = _phase_authority(state, phase)
+    funding, raw = _quiescent_funding(path, fresh=fresh)
     if phase == "search" and funding["auth_runs"]:
         from buddha import source_search
 
@@ -567,6 +605,8 @@ def _census(
 ) -> tuple[NativeEvidence, dict[str, Any]]:
     authority = _phase_authority(state, "final")
     reader = NativeEvidence(state["directory"], authority, error_type=FinalEvaluationError)
+    if state.get("development_capture") is not None:
+        reader.retain_capture(state["development_capture"])
     owners, positions, touched = [], set(), set()
     stages = len(state["record"]["stages"])
     pattern = re.compile(
@@ -979,6 +1019,12 @@ def inspect_final_evaluation(directory: Path, *, expected_report_sha256: str) ->
     return saved
 
 
+def _restore_grid(directory: Path) -> tuple[dict[str, Any], dict[str, Any], dict[Path, str]]:
+    state = _state(directory)
+    occasion, pins = _schedule(state)
+    return state, occasion, pins
+
+
 @_checked
 def run_final_evaluation(
     directory: Path,
@@ -987,14 +1033,39 @@ def run_final_evaluation(
     review: dict[str, object],
     transport: gateway.RawHTTPTransport,
 ) -> dict[str, object]:
+    return _run_grid(
+        directory,
+        authorization=authorization,
+        review=review,
+        transport=transport,
+        restore=_restore_grid,
+        build_result=_result,
+        inspect_result=lambda path, digest: inspect_final_evaluation(
+            path, expected_report_sha256=digest
+        ),
+    )
+
+
+def _run_grid(
+    directory: Path,
+    *,
+    authorization: Authorization,
+    review: dict[str, object],
+    transport: gateway.RawHTTPTransport,
+    restore: Callable[[Path], tuple[dict[str, Any], dict[str, Any], dict[Path, str]]],
+    build_result: Callable[
+        [dict[str, Any], dict[str, Any], NativeEvidence, dict[str, Any]], dict[str, object]
+    ],
+    inspect_result: Callable[[Path, str], dict[str, object]],
+) -> dict[str, object]:
+    """Two trusted scientific consumers share the unchanged physical execution protocol."""
     if not isinstance(authorization, Authorization) or not isinstance(
         transport, gateway.RawHTTPTransport
     ):
         raise FinalEvaluationError(
             "final execution needs explicit original authorization and transport"
         )
-    state = _state(directory)
-    occasion, pins = _schedule(state)
+    state, occasion, pins = restore(directory)
     if (
         authorization.path != _phase_authority(state, "final")
         or gateway._review(review) != occasion["review"]
@@ -1002,17 +1073,16 @@ def run_final_evaluation(
         raise FinalEvaluationError("final execution cannot replace its original grant or review")
     report_path = state["directory"] / "report.json"
     if report_path.exists():
-        return inspect_final_evaluation(directory, expected_report_sha256=file_hash(report_path))
+        return inspect_result(directory, file_hash(report_path))
     reader, current = _census(state, occasion, pins)
     history = _partials(state, occasion, reader, current)
-    reader.capture.finish()
+    reader.finish()
     if history and history[-1]["reason"] == "candidate_execution_failed":
         return history[-1]
     with trial_fence.lease(
         authorization.path, authorization._terms(), directory=state["directory"]
     ):
-        state = _state(directory)
-        occasion, pins = _schedule(state)
+        state, occasion, pins = restore(directory)
         observations = state["directory"] / "observations"
         if not observations.exists():
             observations.mkdir()
@@ -1060,7 +1130,7 @@ def run_final_evaluation(
                 "schedule_sha256": pipeline._sha(occasion),
                 "claim": CLAIM,
             }
-            reader.capture.finish()
+            reader.finish()
             number = len(list(observations.iterdir()))
             pipeline._write(observations / (str(number) + ".json"), _json(result))
             return result
@@ -1073,12 +1143,12 @@ def run_final_evaluation(
                     "repetitions"
                 ] + repeat
                 if ordinal < len(complete):
-                    reader.capture.finish()
+                    reader.finish()
                     continue
                 if failed is not None:
-                    reader.capture.finish()
+                    reader.finish()
                     return partial("candidate_execution_failed")
-                reader.capture.finish()
+                reader.finish()
                 generation, selected, controls = study._materialize(
                     state, occasion, arm, identifier, cell, receipts=pins
                 )
@@ -1137,7 +1207,7 @@ def run_final_evaluation(
                     state["record"]["native"],
                     descriptor,
                 ):
-                    reader.capture.finish()
+                    reader.finish()
                     if not (cell / "evaluation").exists():
                         native_evaluation.prepare_evaluation(
                             cell / "evaluation",
@@ -1153,8 +1223,8 @@ def run_final_evaluation(
                 if child["status"] != "complete":
                     return partial(_text(child["reason"]))
             reader, current = _census(state, occasion, pins)
-            result = _result(state, occasion, reader, current)
-            reader.capture.finish()
+            result = build_result(state, occasion, reader, current)
+            reader.finish()
             pipeline._write(report_path, _json(result))
             return result
         except KeyboardInterrupt as error:

@@ -15,7 +15,7 @@ from buddha import trial_fence
 from buddha.answers import TaskSet
 from buddha.doctor import _authority, _Busy, _Capture, _Unsupported
 from buddha.native_evaluation import _Generation, _read_generation
-from buddha.native_evidence import NativeEvidence, authority_observation
+from buddha.native_evidence import NativeEvidence, _adopt_capture, authority_observation
 from buddha.releases import MAX_JSON_BYTES, Release, _digest, _json, _load, _object, _path, _text
 
 _CLAIM = (
@@ -621,15 +621,10 @@ def collect_source_screen(
             )
         if len(_json(result)) > MAX_JSON_BYTES:
             raise SourceScreenError("screen report exceeds its bounded output ceiling")
-        reader.capture.finish()
-        if sink is not None:
-            # Keep the independent finish, then retain every consumed byte in
-            # the caller's observation, including external inputs and ledgers.
-            for path in reader.capture.databases:
-                sink.database(path)
-            for path, raw in reader.capture.raw.items():
-                if sink.read(path, len(raw)) != raw:
-                    raise SourceScreenError("nested screen consumed different original bytes")
+        if sink is None:
+            reader.capture.finish()
+        else:
+            _adopt_capture(reader.capture, sink)
         return _load(_json(result))
     except (
         ValueError,

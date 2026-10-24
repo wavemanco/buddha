@@ -157,8 +157,11 @@ limits, retained failures and descendant selection. Its engineering checks use
 supplied programs and replies. The [paired numerical analyzer](docs/IMPROVER-ANALYSIS.md)
 now keeps both descendants' gains over the shared starter separate from their
 direct comparison, with conservative uncertainty and explicit missing outcomes.
-Its original-record connection, separate sealed execution and the actual
-controlled experiment remain open.
+The [sealed-assessment connection](docs/IMPROVER-ASSESSMENT.md) is implemented
+and undergoing composed checks. It freezes selected descendants from original
+development records, retains absent descendants and separate roles for identical
+code, and feeds verified official results to that analyzer. The actual controlled
+experiment and improved-effectiveness evidence remain open.
 
 Useful-diversity gains, held-out improvement and improved-improver effectiveness
 remain **not established**. The source-chain fixture uses synthetic replies and
