@@ -26,6 +26,38 @@ final assessment, along with their families and known exposure. The software
 checks that record and its evidence. This is not proof that a public task was
 absent from a model's training data, or that a custodian's statement is true.
 
+## Check the complete funding requirement
+
+IMP1-FEAS-02: the standalone source demonstration's broad per-owner ceilings
+cannot be copied into a matched study and treated as its combined budget.
+The current controller adds those ceilings across every planned development
+and final owner. Preparation requires the full derived phase allowances before
+creating the study; an expectation of cheap replies does not waive that check.
+
+The [source and arithmetic review](conformance/imp01-prospective-feasibility.json)
+retains two unadopted count examples using the existing three-task development
+screen and its unchanged broad owner ceilings:
+
+| Starts / development repetitions / opportunities per arm | Final tasks / sealed repetitions | Final task sets across three roles | Combined authorization ceiling | Call ceiling |
+| --- | --- | --- | --- | --- |
+| 2 / 1 / 1 | 2 / 1 | 12 | $2,650.000030 | 15,852 |
+| 3 / 2 / 2 | 6 / 2 | 216 | $25,050.000306 | 161,172 |
+
+These are conditional reserve requirements, not expected API bills, price
+estimates, recommended budgets or approved studies. They expose the consequence
+of reusing broad owner allowances. Neither grid has been adopted, and the
+separate $25 source demonstration stays unchanged.
+
+Choose the actual grid and affordable, verified request/owner limits before
+requesting an IMP-01 allocation. Recheck complete phase funding, fairness,
+capacity, evidence bindings and reader cost at that exact design. A different
+aggregate-budget contract would require a separately reviewed implementation;
+do not bypass the current full-grid funding guard.
+
+Permission to retain partial results covers incomplete execution. It does not
+turn a finished prefix into a complete matched comparison or waive preparation
+requirements. Keep its stage, reason, coverage, costs and outstanding holds.
+
 ## What freezes after development
 
 The freeze reader reconstructs the completed development study from its

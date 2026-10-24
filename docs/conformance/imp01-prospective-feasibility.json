@@ -1,0 +1,263 @@
+{
+  "actual_input_scope": {
+    "actual_final_population_adopted": false,
+    "curated_tasks": 100,
+    "declared_uneven_families": 72,
+    "family_independence_attested": false,
+    "squared_family_weight_sum": "97/5000",
+    "whole_benchmark": false
+  },
+  "basis_commit": "52b34add4c971eebaf51607defd5f6648582cf96",
+  "checks": {
+    "additional_development_dependency_audit": {
+      "command": "python -m pip_audit --no-deps -r requirements-dev.txt",
+      "exit_code": 1,
+      "fresh_cache_status": "Independent one-shot audit also exits1 with25 rows,16 unique alias sets/6 packages; primary advisory review being retained separately.",
+      "reported_advisory_rows": 25,
+      "reported_packages": 6,
+      "status": "Separate read-only fresh-cache/advisory verification in progress; no dependency change. CI audits runtime requirements only.",
+      "tool_chunk": "85336b"
+    },
+    "analyzer_tests": {
+      "command": "python -B -m unittest discover -s tests -p test_improver_analysis.py -v",
+      "exit_code": 0,
+      "seconds": 0.343,
+      "tests": 10,
+      "tool_chunk": "1e08dc"
+    },
+    "configured_local_quality": [
+      {
+        "command": "python -m ruff check buddha tests agents",
+        "exit_code": 0,
+        "tool_chunk": "2b195f"
+      },
+      {
+        "command": "python -m ruff format --check buddha tests agents",
+        "exit_code": 0,
+        "tool_chunk": "d063cd"
+      },
+      {
+        "command": "python -m mypy --strict buddha agents",
+        "exit_code": 0,
+        "tool_chunk": "23f32c"
+      },
+      {
+        "command": "python -m bandit -r buddha agents",
+        "exit_code": 0,
+        "tool_chunk": "aa8b9f"
+      },
+      {
+        "command": "python -m pip_audit --no-deps -r requirements.txt",
+        "exit_code": 0,
+        "tool_chunk": "04f05b"
+      },
+      {
+        "command": "python -m compileall -q buddha tests agents",
+        "exit_code": 0,
+        "tool_chunk": "f677cc"
+      }
+    ],
+    "full_suite_this_cut": "Not rerun for docs-only change; exact hosted jobs remain separately pending. No green-CI claim for this PR.",
+    "ruff_cache_warning": "Lint exit0 with cache-write warning during concurrent lint/format; no check weakened or rerun.",
+    "rule_tests": {
+      "command": "python -B -m unittest discover -s tests -p test_improvement_rule.py -v",
+      "exit_code": 0,
+      "seconds": 0.087,
+      "tests": 13,
+      "tool_chunk": "8e5fcd"
+    }
+  },
+  "conditional_unadopted_funding_examples": [
+    {
+      "combined_ceiling_microusd": 2650000030,
+      "combined_max_calls": 15852,
+      "development_repetitions": 1,
+      "final_task_sets": 12,
+      "final_tasks": 2,
+      "opportunities_per_arm": 1,
+      "sealed_repetitions": 1,
+      "starts": 2
+    },
+    {
+      "combined_ceiling_microusd": 25050000306,
+      "combined_max_calls": 161172,
+      "development_repetitions": 2,
+      "final_task_sets": 216,
+      "final_tasks": 6,
+      "opportunities_per_arm": 2,
+      "sealed_repetitions": 2,
+      "starts": 3
+    }
+  ],
+  "current_source_demonstration_user_decision": {
+    "approved_combined_usd": 25,
+    "approved_max_attempts": 512,
+    "funded_authority_created": false,
+    "launch_command_released": false,
+    "partial_results_allowed": true,
+    "remaining": "Selected Windows CI and actual final funding/input/account checks before launch.",
+    "scope": "Current-source three-task/one-counted-child/two-mutation-check demonstration from PR120. Separate from all IMP-01 illustrations.",
+    "verbatim_reply": "Approve $25 / 512 attempts; partial results allowed"
+  },
+  "evidence": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-unadopted-grid-authorization-envelope-review-v1.json",
+      "sha256": "244241ffcae0e35b852e8694643050ccc35c77ec227329f0739b8249c3749db8"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-family-bound-source-math-review-v1.json",
+      "sha256": "ee0f6118a80cffac598caba64a9c4ac2b01bb45fcaf07961589599056f4e5adc"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\observe-imp01-family-feasibility-v1.py",
+      "sha256": "1550d2d7b0997e18f513bcb94213a0d794c4cc2266b23dece8c04325cc3b988d"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-family-feasibility-recipe-v1-source-review-v1.json",
+      "sha256": "46ae2a7668f6928fd807ce8a32232ed132067cb71b583a67537221c376d0bdb6"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\observe-imp01-family-feasibility-v2.py",
+      "sha256": "37a472e56a7bebfdb65c77022e6e64f381cac6988d4ff2b8b651593d6fcb6480"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-family-feasibility-recipe-v2-source-review-v1.json",
+      "sha256": "a467ac1a61f67161059a8237fa6a01cf0a304de8bff23fde1950e09d838db8e5"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-family-feasibility-observation-v2.json",
+      "sha256": "1ebcb8760d3768b57079e70a970de60cac2e2f620f621e11c440ccd0e8541a19"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\ci-selected116-original111-latest121-checkpoint-20261024T145731Z.json",
+      "sha256": "6ac49c9ba7e97ea8f705ed8ab21931439a2d9dc4c3b32f60a23577778a99475c"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\pr111-ci-job-120825255648-terminal-v1.log",
+      "sha256": "ef0e83b1f467eaadba3afd32d02dfd4bcedd603da147a6ae2745f90476cccf33"
+    }
+  ],
+  "findings": {
+    "IMP1-FEAS-01": "Check the actual task/family weights and uncertainty method before funding; more starts/generations do not create independent family units in this method.",
+    "IMP1-FEAS-02": "Reusing broad standalone owner ceilings requires the complete derived development/final reserves, not merely an affordable aggregate cap or expectation of cheap responses."
+  },
+  "format": "buddha.imp01-prospective-feasibility-delivery.v1",
+  "funding_limits": "Conditional maximum reserves from retained broad owner ceilings, not expected bills, provider price estimates or recommended/approved budgets. Preparation requires full derived phase grants; partial-result permission does not waive that gate or establish complete matched coverage.",
+  "numerical_observation": {
+    "exit_code": 0,
+    "failure_history": "Original unexecuted v1 refused in source review: early-prefix preservation overclaims and generic caught-failure reasons. V2 earns census flags and retains bounded trusted diagnostics. No original recipe was rewritten or rerun.",
+    "illustrative_not_adopted": {
+      "alpha_total": "1/20",
+      "balanced_independent_families": "assumed only",
+      "each_of_six_tails": "1/120",
+      "max_other_loss": 0,
+      "minimum_gain": 0,
+      "primary": "utility"
+    },
+    "independent_oracle": "Decimal160/220 approximate cross-check, not a separate formal interval proof or actual-study power estimate.",
+    "no_candidate_or_generated_program_executed": true,
+    "no_numeric_call_io": true,
+    "once_only": true,
+    "original_invocation_tool_chunk": "732928",
+    "original_v1_recipe_executed": false,
+    "preservation_during_original_invocation": {
+      "access_time_excluded": true,
+      "draft_v2_and_v3_unchanged": true,
+      "future_paid_trees_absent": [
+        "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1",
+        "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-handoff-v1",
+        "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-receipts-v1"
+      ],
+      "new_pycache_prefix_still_absent": true,
+      "only_tracked_read_inputs_rawbytes_and_path_metadata_unchanged": true,
+      "project_input_pins_unchanged": true,
+      "protected_read_files_rechecked": 253,
+      "protection_census": {
+        "drafts": {
+          "expected": 2,
+          "verified": 2
+        },
+        "project": {
+          "expected": 80,
+          "verified": 80
+        },
+        "src02_map": {
+          "expected": 169,
+          "verified": 169
+        }
+      },
+      "src02_source_map_pins_unchanged": true,
+      "status": "complete",
+      "unverified_population_flags_mean": "null means incomplete initial verification, not unchanged or corrupt"
+    },
+    "row_count": 840,
+    "source_review_chronology": "V2 source conclusion communicated before root execution; its source-review receipt was published after execution. The original receipt freshness assertion stopped without writing and is disclosed in that receipt.",
+    "synthetic_cases": [
+      {
+        "case": "F2_extreme",
+        "distinct_radius_upper": "19.692303856211078827008000780494650046614716503418153555510454972417569536488061",
+        "rows": 6,
+        "rule_status": "rule_not_satisfied",
+        "utility_lower_bound": -10.0,
+        "utility_radius_upper": "21.880337618012309807786667533882944496238573892686837283900505524908410596097845"
+      },
+      {
+        "case": "F6_extreme",
+        "distinct_radius_upper": "11.369356932347371855233758177270277086345887607872149205794059788488279650516274",
+        "rows": 18,
+        "rule_status": "rule_not_satisfied",
+        "utility_lower_bound": -2.632618813719302,
+        "utility_radius_upper": "12.632618813719302061370842419189196762606541786524610228660066431653644056129193"
+      },
+      {
+        "case": "F100_extreme",
+        "distinct_radius_upper": "2.7849123187825706680056522094612030452694217334900396011702828792419445446699097",
+        "rows": 300,
+        "rule_status": "rule_satisfied",
+        "utility_lower_bound": 6.905652979130476,
+        "utility_radius_upper": "3.0943470208695229644507246771791144947438019261000440013003143102688272718554552"
+      },
+      {
+        "case": "F100_modest",
+        "distinct_radius_upper": "2.7849123187825706680056522094612030452694217334900396011702828792419445446699097",
+        "rows": 300,
+        "rule_status": "rule_not_satisfied",
+        "utility_lower_bound": -2.5943470208695234,
+        "utility_radius_upper": "3.0943470208695229644507246771791144947438019261000440013003143102688272718554552"
+      },
+      {
+        "case": "F6_repeated_extreme",
+        "distinct_radius_upper": "11.369356932347371855233758177270277086345887607872149205794059788488279650516274",
+        "rows": 216,
+        "rule_status": "rule_not_satisfied",
+        "utility_lower_bound": -2.632618813719302,
+        "utility_radius_upper": "12.632618813719302061370842419189196762606541786524610228660066431653644056129193"
+      }
+    ],
+    "wall_seconds": 1.0236419
+  },
+  "preservation": {
+    "allocation_field_meaning": "No funded Authorization created; the separate current-source user cap decision is recorded above.",
+    "application_tests_agents_profiles_changed": false,
+    "authority_or_owner_created": false,
+    "benchmark_scoring_changed": false,
+    "historical_revision_rows_required": 123,
+    "merged": false,
+    "new_allocation_created": false,
+    "new_live_command": false,
+    "old_run_mutated": false,
+    "open_completion_gates": [
+      "SRC-02",
+      "SRC-03",
+      "IMP-01",
+      "EVAL-02"
+    ],
+    "original_acceptance_tails_required": 10,
+    "provider_calls": 0,
+    "selected_source_demonstration_changed": false,
+    "sole_next": "SRC-02"
+  },
+  "recorded_at_utc": "2026-10-24T15:24:58.816355+00:00",
+  "remaining": "Adopt and check a scientifically adequate affordable actual study, request its separate funding, complete hosted verification/full-grid feasibility, execute matched comparison and independent evaluation. No scientific gate closes here.",
+  "scope": "Docs-only prospective study feasibility under existing IMP-01. Actual public numerical analyzer on synthetic panels; source-only conditional funding derivations. No adopted study or runtime change."
+}

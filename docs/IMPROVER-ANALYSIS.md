@@ -88,6 +88,47 @@ metric's minimum gain and the permitted loss on the other metric. It applies
 to the improver effect. Non-satisfaction or an inconclusive result does not
 prove that the improver has no effect. Target repair remains unassessed here.
 
+## Check what the planned comparison can establish
+
+IMP1-FEAS-01: choose the actual study only after checking its uncertainty
+calculation. More API calls do not necessarily make its conclusion stronger.
+The current method's uncertainty radius depends on task-family weights:
+`span * sqrt(2 * sum(family_weight^2) * ln(1 / tail_allowance))`.
+Repeating starting conditions or generations can change the average score, but
+does not add independent families to this formula.
+
+A [bounded numerical observation](conformance/imp01-prospective-feasibility.json)
+calls the public analyzer on five wholly synthetic panels. For illustration
+only, it allocates total error allowance 0.05 equally across six lower bounds,
+uses ten answers per task and assumes equally weighted independent families.
+The example rule requires a positive utility lower bound and no distinctiveness
+loss. None of these choices is an adopted study protocol.
+
+| Assumed families | Supplied utility difference | Utility uncertainty radius | Utility lower bound, rounded |
+| --- | --- | --- | --- |
+| 2 | +10 | 21.880338 | -10, clipped to support |
+| 6 | +10 | 12.632619 | -2.632619 |
+| 100 | +10 | 3.094347 | +6.905653 |
+| 100 | +0.5 | 3.094347 | -2.594347 |
+
+The six-family example cannot satisfy a positive utility bound even at the
+largest possible utility difference. Repeating it across three starts, two
+development repetitions and two sealed repetitions leaves its radius unchanged.
+The idealized 100-family example can satisfy the rule at extreme differences
+on both axes, but not at +0.5 on both. These are numerical feasibility findings,
+not measured agent effects, a power estimate or proof of no improvement.
+
+The current bundle contains 100 curated tasks, not the whole benchmark. Its
+split declares 72 uneven families, whose squared weights sum to `97/5000`.
+It is not the idealized 100-family panel above; an actual sealed subset needs
+its own weights. Family labels alone do not establish independence.
+
+Before funding IMP-01, freeze an adequate actual population, justified
+assumptions, practical margins, error allowances and complete grid, then check
+what that exact design could establish. If another uncertainty method is
+needed, review and adopt it prospectively as a separate harness change. Do not
+relax the rule after seeing results. Official NoveltyBench scoring is unchanged.
+
 ## Library and verification scope
 
 `ImproverAnalysisPlan.from_bytes` checks and freezes the supported prospective

@@ -2,7 +2,8 @@
 
 This implements the two-metric rule in [DESIGN section 6](DESIGN.md#6-archive-and-promotion).
 It is a small part of EVAL-01 in [the living plan](PLAN.md). The validation and
-final-evaluation controller remains unfinished.
+final-evaluation controllers are implemented at their supported infrastructure
+scope; actual independent scientific evaluation remains EVAL-02.
 
 An experiment must choose its main metric and acceptable tradeoff before
 seeing the comparison's results. For utility as the main metric, the rule asks:
