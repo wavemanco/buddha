@@ -745,9 +745,10 @@ def _result(
 
 
 @_checked
-def inspect_improver_assessment(
+def _read_improver_assessment(
     directory: Path, *, expected_report_sha256: str
-) -> dict[str, object]:
+) -> tuple[dict[str, object], dict[str, Any], dict[str, Any], NativeEvidence]:
+    """Retain the checked final/development observation for passive consumers."""
     state, schedule, pins = _restore_grid(directory, active=False)
     reader, current = final._census(state, schedule, pins)
     result = _result(state, schedule, reader, current)
@@ -761,7 +762,13 @@ def inspect_improver_assessment(
             "original complete report differs from original native evidence"
         )
     reader.finish()
-    return saved
+    return saved, state, schedule, reader
+
+
+def inspect_improver_assessment(
+    directory: Path, *, expected_report_sha256: str
+) -> dict[str, object]:
+    return _read_improver_assessment(directory, expected_report_sha256=expected_report_sha256)[0]
 
 
 @_checked
