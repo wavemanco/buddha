@@ -87,8 +87,8 @@ class CompletedImproverScreenReplayTests(unittest.TestCase):
         self.assertEqual(screens.call_count, 1, "retain the actual authoritative full inspector")
         self.assertEqual(
             sources.call_count,
-            2,
-            "the full v2 inspector reads C1 twice; do not add an outer third read",
+            1,
+            "share the full checked v2 generation; do not add another reconstruction",
         )
         self.assertNotIn(
             directory, stages, "completed screen must not repeat the outer native stage walk"

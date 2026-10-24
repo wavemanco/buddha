@@ -27,6 +27,10 @@ and these preparation checks remain separate from exact executing-code hosted CI
 The [unfunded launch draft](docs/conformance/src02-unfunded-launch-bindings.json)
 now fixes proposed destinations and approval/launch bindings without creating
 spending permission, owners or a runnable handoff.
+A [test-only follow-through](docs/conformance/imp01-shared-replay-expectation-delivery.json)
+corrects the stale finite-replay read count exposed by hosted CI. Sixteen related
+checks and seven quality commands pass locally; executing code and frozen inputs
+are unchanged. Fresh hosted verification remains pending.
 Final launch/input/account checks and a new allocation remain required; the
 proposed $25/512 attempts are unallocated and no live command is available.
 A negative or unavailable observation leaves an explicit partial result.

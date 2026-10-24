@@ -144,9 +144,10 @@ neither. The draft cannot spend money or start an agent.
 The selected executing head's original Ubuntu check has now finished with one
 read-count assertion failure among 1,789 tests; its
 [terminal checkpoint](conformance/src02-unfunded-launch-bindings.json) retains
-the original log. Windows is still running at that checkpoint. The assertion
-expects two reconstructions where source tracing finds the intended shared
-reconstruction. Targeted reproduction and a verified correction remain required.
+the original log. Windows is still running at that checkpoint. The [test-only follow-through](conformance/imp01-shared-replay-expectation-delivery.json)
+now reproduces that failure and corrects its expected count and message. Sixteen
+related checks and seven quality checks pass locally. The executing code and
+frozen experiment inputs are unchanged; fresh hosted verification is pending.
 
 No live command is available at this checkpoint. Remaining checks include the
 final launch bindings and actual input union, the exact selected executing
