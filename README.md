@@ -14,6 +14,11 @@ pass. [The results](docs/SOURCE-CAPACITY-RESULTS.md) close POL-03's bounded-loop
 engineering gate. Current-parent source evolution and improved effectiveness
 remain open; no further user command is needed now.
 
+The [fresh source rehearsal](docs/SOURCE-CURRENT-REHEARSAL.md) is prepared
+with complete measured feedback and explicit requests to change both Python
+procedures. Three focused rehearsal-guard checks pass; the full unpaid rehearsal
+is still under verification. No new live run or paid allowance is enabled.
+
 ## Current state
 
 The bounded **MEAS-01/MEAS-02 measurement audit is complete**. The
