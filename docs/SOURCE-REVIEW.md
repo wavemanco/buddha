@@ -11,10 +11,10 @@ roles, lineage, original positions, official scores and accounting stay in a
 separate private receipt. Blank and refused answers stay visible.
 
 This is the source-output review bridge in EVAL-02. Export and passive review
-import/reporting are implemented, including the offline export command below.
-A collection command, the explicit transfer phase and the actual independent
-human study remain open. Working review machinery does not establish human
-judgments or scientific improvement.
+import/reporting are implemented, including the offline export and collection
+commands below. The explicit transfer phase and actual independent human study
+remain open. Working review machinery does not establish human judgments or
+scientific improvement.
 
 ## Select the sample before generating answers
 
@@ -89,7 +89,7 @@ python -m buddha source-review-export `
   --report-sha256 REPLACE_WITH_64_HEX_REPORT_HASH `
   --plan "C:\replace\review-plan.json" `
   --plan-sha256 REPLACE_WITH_64_HEX_PLAN_HASH `
-  --out "C:\replace\review-exports\round-01" `
+  --out "C:\replace\review-work\export" `
   --reviewer declared-human human `
   --reviewer declared-model model
 ```
@@ -210,12 +210,110 @@ Leave an absent response absent; do not copy another response into its slot.
 Retain malformed originals when requesting a corrected form. Never rewrite a
 saved review to make it pass the validator.
 
+### Save a private collection report
+
+The collection command checks only the explicitly supplied forms against the
+frozen round and original source evidence, then saves a private report. It does
+not obtain reviews or send messages. Like export, it requires the current
+`source_review_handoff.py` and `source_review_results.py` as original custody
+controls before trial owners are prepared; it cannot retrofit old studies.
+
+Run this from the checkout containing the original pinned helpers:
+
+```powershell
+python -m buddha source-review-inspect --help
+```
+
+This prints the collection flags once. It writes nothing, spends no API money,
+needs no keys or separate window, and can be stopped with Ctrl+C.
+
+This is an illustrative template for a prospectively prepared study, not a new
+study or reviewer assignment. Replace every path, hash and reviewer ID with the
+actual frozen values. Use `final` or `improver` as appropriate. Keep `export`,
+`forms` and each collection output as separate sibling folders:
+
+```powershell
+python -m buddha source-review-inspect `
+  --run "C:\replace\trial" `
+  --kind final `
+  --report-sha256 REPLACE_WITH_64_HEX_REPORT_HASH `
+  --plan "C:\replace\review-plan.json" `
+  --plan-sha256 REPLACE_WITH_64_HEX_PLAN_HASH `
+  --round-plan "C:\replace\review-work\export\private\round.json" `
+  --round-plan-sha256 REPLACE_WITH_64_HEX_ROUND_HASH `
+  --submission declared-human "C:\replace\review-work\forms\human-original.json" REPLACE_WITH_64_HEX_FORM_HASH `
+  --out "C:\replace\review-work\collection-v1"
+```
+
+This runs once, reading the saved evidence and supplied forms and writing a new
+private collection folder. It spends no API money, needs no keys and uses the
+same window. Press Ctrl+C to stop; original forms, earlier collections and any
+unfinished output are retained. Integrity checks can take time.
+
+Repeat `--submission ID PATH SHA256` for each received form. The ID must belong
+to the frozen roster. Omit the whole flag for a missing response; with no flags,
+the command records every declared reviewer as missing. Never invent a file
+reference to fill an absent slot. The round and each referenced form use their
+exact original bytes and hashes, including malformed forms retained as evidence.
+
+The output parent must already exist, and the output must be a plain, canonical
+absolute path. In addition to the export's source/component protections, it
+cannot overlap the immediate parent folder of the checked round or any supplied
+form, including invalid forms. Both enclosing those folders and writing inside
+them are refused. When the round has the standard `export/private/round.json`
+layout, the entire export tree is protected even without its completion marker.
+Only explicitly referenced forms join the observation; an unrelated form arriving
+in the incoming folder does not alter this invocation's sample.
+
+The output contains two private files:
+
+- `report.json`: the existing `buddha.source-review-report.v1`, retaining full
+  valid judgments, disagreements, source/reviewer coverage and invalid raw-form
+  references. Keep it away from reviewers.
+- `complete.json`: the publication marker, written last, binding the report hash,
+  review status and reasons for incompleteness.
+
+The terminal prints only the compact `buddha.source-review-collection.v1` status
+and output/report/marker references, without judgment texts. A checked
+`publication_status: complete` means the two files were saved and verified.
+The separate review `status` can be `incomplete` because source sets are unavailable
+or forms are missing or invalid. Disagreements remain visible even when every
+declared form is valid; they are not automatically resolved or used to change
+official scores. Declared reviewer types do not prove identity or independence.
+
+An interrupted, unmarked identical prefix can resume with the exact same inputs
+and output. Conflict or unknown leftover files are refused, never overwritten or
+cleaned up. A completed marker permits only a full inventory and integrity check;
+missing published files are not repaired. When forms are added or corrected,
+preserve the earlier partial collection and raw invalid forms, then use a fresh
+output such as `collection-v2`. Keep the original round fixed.
+
+Exit codes are `0` for a complete review collection, `3` for a checked incomplete
+collection, `2` for refusal and `130` for interruption. A marker alone does not
+make a stopped invocation pass. No API call, new owner or independent human
+judgment is created by collecting files.
+
 `buddha.source_review_results.inspect_source_reviews` takes the same original
 trial and sample arguments as the exporter, plus `round_plan`, its
 `expected_round_plan_sha256`, and `submissions`. Each submission reference has
 exactly `reviewer_id`, absolute `path` and `sha256`; omit reviewers whose forms
 have not arrived. The function reconstructs the original export, reads each
 pinned response and returns a private report without writing anything.
+
+`buddha.source_review_handoff.collect_source_reviews` is the writing interface.
+It takes `directory: Path`, `kind`, `expected_report_sha256`, `plan: Path`,
+`expected_plan_sha256`, `round_plan: Path`, `expected_round_plan_sha256`, an explicit
+`submissions` list and `output: Path`. Submission entries have exactly
+`reviewer_id`, absolute `path` and `sha256`; an empty list is allowed. It returns
+the compact collection summary with `status`, `publication_status`, `output`,
+`complete` and `report` path/hash references. The public read-only inspector's
+dictionary and behavior remain unchanged.
+
+The collector retains the same original capture through report serialization
+and publication, checking consumed source, round and submission bytes again
+before the marker. Its `consumed_files` also includes the original writer-helper
+binding. It preserves the existing report schema and exact review encoding;
+the publication and output-protection rules above apply to this API too.
 
 | Outcome | How it appears |
 | --- | --- |
@@ -278,6 +376,6 @@ preparing and repeatedly checking original evaluation evidence. This is a whole
 test-cohort duration, not the time for one import; later runs can differ. Press
 Ctrl+C to stop; interruption is not a pass.
 
-There is no automated reviewer distribution or collection command in this slice.
-A collection CLI is a later step; the passive developer importer above is
-available now. The actual study still needs its own frozen protocol and evidence.
+There is no automatic reviewer messaging or review generation. The actual study
+still needs its own frozen human-review protocol, explicit transfer phase and
+independent evidence.
