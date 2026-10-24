@@ -118,6 +118,36 @@ the minimum seventy-four. This is a calculation under the declared flow, not
 an observed invocation count. The final funded launch must reconcile its actual
 input union against the existing limit before use.
 
+The [proposed launch bindings](conformance/src02-unfunded-launch-bindings.json)
+give this experiment concrete future destinations. They remain inside a separate
+unfunded draft; they are not an approval or a runnable handoff.
+
+| Proposed location under `runs/` | Purpose |
+| --- | --- |
+| `src02-current-live-20261024-run-v1/` | The original experiment's generated answers, child programs, results and accounting owners |
+| `src02-current-live-20261024-handoff-v1/` | The future approved launch, dedicated spending record and key-bound account review |
+| `src02-current-live-20261024-receipts-v1/launch-001.json` | The first launcher invocation's outcome, including an explicit stop or partial result |
+
+Those destinations have not been created. The draft fixes the proposed authority
+identity, account statement, three-hundred-second request timeout and exact
+approval/launch bytes. Its minimum fixed input union contains seventy-four
+distinct paths. The later account review adds one path already included in the
+conditional maximum of 108; it does not add another path on top of that maximum.
+Adding a new pinned support file changes the count and requires reconciliation.
+
+The account statement retains the user's existing Standard/default processing
+and public pay-as-you-go attestations for both providers. It does not verify
+provider access or current prices. Actual key fingerprints and the dated account
+review are created locally only after funding and key entry; the draft contains
+neither. The draft cannot spend money or start an agent.
+
+The selected executing head's original Ubuntu check has now finished with one
+read-count assertion failure among 1,789 tests; its
+[terminal checkpoint](conformance/src02-unfunded-launch-bindings.json) retains
+the original log. Windows is still running at that checkpoint. The assertion
+expects two reconstructions where source tracing finds the intended shared
+reconstruction. Targeted reproduction and a verified correction remain required.
+
 No live command is available at this checkpoint. Remaining checks include the
 final launch bindings and actual input union, the exact selected executing
 code's hosted CI, applicable account/pricing conditions, and a separately

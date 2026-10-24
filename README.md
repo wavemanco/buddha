@@ -24,6 +24,9 @@ checks; [the preparation record](docs/conformance/src02-corrected-live-preparati
 retains the earlier failed-head bundle unchanged. The
 [legacy progress correction](docs/SOURCE-PROPOSAL-CAPACITY.md#record-compatibility)
 and these preparation checks remain separate from exact executing-code hosted CI.
+The [unfunded launch draft](docs/conformance/src02-unfunded-launch-bindings.json)
+now fixes proposed destinations and approval/launch bindings without creating
+spending permission, owners or a runnable handoff.
 Final launch/input/account checks and a new allocation remain required; the
 proposed $25/512 attempts are unallocated and no live command is available.
 A negative or unavailable observation leaves an explicit partial result.
