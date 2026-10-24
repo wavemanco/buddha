@@ -16,7 +16,7 @@ source files. It reserves development and final allowances separately. Its
 unused validation phase has a zero allowance; this route does not select
 descendants using validation results.
 
-Preparation checks the supported numerical method and enough money, calls and
+Preparation checks the supported numerical method, versioned funding rules and
 input-binding capacity for the maximum declared grid. It does not accept a
 method name whose implementation will be supplied later. The original trial
 controls reach the first development owner and all subsequent execution owners.
@@ -30,7 +30,7 @@ absent from a model's training data, or that a custodian's statement is true.
 
 IMP1-FEAS-02: the standalone source demonstration's broad per-owner ceilings
 cannot be copied into a matched study and treated as its combined budget.
-The current controller adds those ceilings across every planned development
+The original v1 controller adds those ceilings across every planned development
 and final owner. Preparation requires the full derived phase allowances before
 creating the study; an expectation of cheap replies does not waive that check.
 
@@ -48,15 +48,39 @@ estimates, recommended budgets or approved studies. They expose the consequence
 of reusing broad owner allowances. Neither grid has been adopted, and the
 separate $25 source demonstration stays unchanged.
 
-Choose the actual grid and affordable, verified request/owner limits before
-requesting an IMP-01 allocation. Recheck complete phase funding, fairness,
-capacity, evidence bindings and reader cost at that exact design. A different
-aggregate-budget contract would require a separately reviewed implementation;
-do not bypass the current full-grid funding guard.
+Choose the actual grid and affordable, verified limits before requesting an
+IMP-01 allocation. Recheck phase funding, fairness, capacity, evidence bindings
+and reader cost at that exact design. The explicit v2 route below supplies a
+different funding contract; it does not bypass or reinterpret the v1 guard.
 
 Permission to retain partial results covers incomplete execution. It does not
 turn a finished prefix into a complete matched comparison or waive preparation
 requirements. Keep its stage, reason, coverage, costs and outstanding holds.
+
+### Explicit aggregate caps in v2
+
+`buddha.improver-assessment-trial.v2` requires a
+`buddha.improver-study.v2` development declaration. Both v1/v2 mixtures are
+rejected. Search funding must exactly match the development aggregate cap;
+validation remains zero. Final funding can be a positive dollar and attempt cap
+at most the complete derived final-grid ceiling. Each actual phase authority
+must match its declared cap exactly. These remain three phases; ordinary
+four-phase transfer-trial v2 is a separate interface.
+
+The grid, source copies, request bounds, native evaluator and analysis method
+remain fixed. The existing ledger enforces each combined phase cap. If funding
+runs out, the original execution records an incomplete result with its stage,
+reason, full expected coverage, costs and holds. Continuing checks and reuses
+original owners; it does not grant replacement money or duplicate paid calls.
+Full development is still required before freezing descendants. Full scheduled
+execution is still required before a complete final report; a finished prefix
+does not qualify. A partial panel cannot establish a matched comparison by
+dropping unfinished arms or tasks.
+
+The [development guide](IMPROVER-STUDY.md#versioned-funding-limits) explains the
+shared-cap fairness limit and its optional no-cost checks. This library route
+does not adopt an IMP-01 grid, method, allocation or live command. The separate
+approved source demonstration and its frozen inputs remain unchanged.
 
 ## What freezes after development
 

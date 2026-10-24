@@ -43,6 +43,7 @@ from buddha.search_evidence import MAX_FILES
 from buddha.wire import _integer
 
 _FORMAT = "buddha.improver-study.v1"
+_AGGREGATE_FORMAT = "buddha.improver-study.v2"
 _CONTEXT = "buddha.improver-study-context.v1"
 _PLAN = "buddha.improver-study-plan.v1"
 _DECISION = "buddha.improver-study-decision.v1"
@@ -124,6 +125,20 @@ def _caps(record: dict[str, Any], screen: source_screen.SourceScreen) -> dict[st
     return result
 
 
+def _bounded_limits(value: object, maximum: dict[str, Any]) -> None:
+    for key, amount in _object(value, {"budget_microusd", "max_calls"}).items():
+        _integer(amount, 1, maximum[key])
+
+
+def _check_funding(record: dict[str, Any], terms: dict[str, Any]) -> None:
+    limits = record["limits"]["study"]
+    if record["format"] == _AGGREGATE_FORMAT:
+        if any(terms[key] != limits[key] for key in ("budget_microusd", "max_calls")):
+            raise ImproverStudyError("original authority differs from declared aggregate limits")
+    elif any(terms[key] < limits[key] for key in ("budget_microusd", "max_calls")):
+        raise ImproverStudyError("original authority cannot cover the complete declared grid")
+
+
 def _operator(record: dict[str, Any], arm: int, base: source_screen.SourceScreen) -> dict[str, Any]:
     actor = record["improvers"][arm]
     generation = _object(base.to_record()["generation"])
@@ -160,7 +175,10 @@ def _declaration(
             "assessment",
         },
     )
-    if record["format"] != _FORMAT or type(record["experiment_id"]) is not str:
+    if (
+        record["format"] not in (_FORMAT, _AGGREGATE_FORMAT)
+        or type(record["experiment_id"]) is not str
+    ):
         raise ImproverStudyError("unsupported finite improver study")
     _path(record["experiment_id"])
     _integer(record["repetitions"], 1, 8)
@@ -240,7 +258,12 @@ def _declaration(
         raise ImproverStudyError(
             "finite study requires complete mutation witnesses and source copies"
         )
-    if _json(record["limits"]) != _json(_caps(record, base)):
+    caps = _caps(record, base)
+    if record["format"] == _AGGREGATE_FORMAT:
+        limits = _object(record["limits"], set(caps))
+        _bounded_limits(limits["study"], caps["study"])
+        caps["study"] = limits["study"]
+    if _json(record["limits"]) != _json(caps):
         raise ImproverStudyError("declared cell or whole-study ceilings are not derived exactly")
     consumers = _object(record["consumer_sources"])
     paths = [_path_value(path) for path in consumers]
@@ -424,9 +447,7 @@ def prepare_improver_study(
     terms = authorization._terms()
     purpose = "source screen: " + base.comparison_key()
     trial_fence.require_purpose(authorization.path, terms, directory=directory, expected=purpose)
-    limits = record["limits"]["study"]
-    if any(cast(int, terms[key]) < limits[key] for key in ("budget_microusd", "max_calls")):
-        raise ImproverStudyError("original authority cannot cover the complete declared grid")
+    _check_funding(record, terms)
     controls, sources, _ = _intrinsic_inputs(record, screens, declaration, expected_sha256, runtime)
     if input_bindings is not None:
         _bind_controls(controls, input_bindings)
@@ -728,6 +749,7 @@ def _census(reader: NativeEvidence, state: dict[str, Any]) -> None:
         directory=reader.root,
         expected="source screen: " + state["screens"][0].comparison_key(),
     )
+    _check_funding(state["record"], _object(funding["config"]))
     state.update(
         funding=funding,
         authorization=authority_observation(reader.capture, reader.authorization, funding),
