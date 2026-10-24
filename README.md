@@ -30,6 +30,12 @@ will use code written by the API model under the adopted protocol; funding and
 hosted checks remain pending. It will measure the current parent itself with
 complete outputs and retain negative or inconclusive descendant outcomes.
 
+The [first cost observation](docs/RECONSTRUCTION-COST.md) now measures complete
+saved-result checks on a small six-cell fixture: about 23 seconds for development,
+25 for the frozen schedule and 36 for the final assessment. The evidence remains
+unchanged. PR #102's full Ubuntu suite also passes; Windows and later revisions
+remain separate checks. Larger verification costs and any measured speedup remain open.
+
 ## Current state
 
 The bounded **MEAS-01/MEAS-02 measurement audit is complete**. The

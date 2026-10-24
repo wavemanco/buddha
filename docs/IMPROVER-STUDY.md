@@ -163,3 +163,14 @@ that either improvement procedure produces better descendants.
 The [delivery record](conformance/imp01-completed-screen-replay-delivery.json)
 retains baseline failures, the capture correction and passing focused checks.
 Larger verification runs are reported separately.
+
+The [first reader-cost observation](RECONSTRUCTION-COST.md) now measures complete
+development, freeze and final readers on one retained six-cell fixture. All six
+plain/profiled reads preserve the evidence and reproduce their saved results.
+This supplies an initial cost observation, rather than a measured speedup or
+the larger multi-condition cost result.
+
+The [hosted witness-replay verification](conformance/imp01-hosted-witness-replay-verification.json)
+also records the full Ubuntu pass at exact PR #102: 1,756 tests and every
+configured quality step, including the original full-matrix method and the new
+retirement regression. Windows and later source revisions need their own results.

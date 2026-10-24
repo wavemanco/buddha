@@ -1,0 +1,319 @@
+{
+  "format": "buddha.imp01-initial-reader-cost-delivery.v1",
+  "status": "complete_initial_six_cell_observation",
+  "source_commit": "da073ef15cc30d3e0d59d60f3825c6eab4731890",
+  "source_pin_count": 225,
+  "observation": {
+    "condition_count": 1,
+    "counted_development_opportunities": 2,
+    "selected_descendant_slots": 2,
+    "final_roles": 3,
+    "final_tasks": 2,
+    "final_repetitions": 1,
+    "final_cells": 6,
+    "final_owners": 24,
+    "fixture_root": "C:\\Users\\arvik\\code\\buddha\\runs\\q\\imp01-reader-cost-6cell-v1\\original-tda7jrid",
+    "physical_files": 640,
+    "physical_directories": 470,
+    "physical_bytes": 5285341,
+    "tree_sha256": "80bdea8f75728507b167bd3b68d2e2d7c5c947a5fb514b1ae4447f4e68e38b69",
+    "database_files": 56,
+    "database_breakdown": {
+      "shared_authorities": 5,
+      "owner_ledgers": 51
+    }
+  },
+  "passes": [
+    {
+      "after_tree_sha256": "80bdea8f75728507b167bd3b68d2e2d7c5c947a5fb514b1ae4447f4e68e38b69",
+      "before_tree_sha256": "80bdea8f75728507b167bd3b68d2e2d7c5c947a5fb514b1ae4447f4e68e38b69",
+      "bytes": 5285341,
+      "count_scope": "physical fixture inventory, not measured IO bytes",
+      "expected_result_sha256": "c82f2a3cc723a531d5feac082dfe33802255a31f3948e6d96c47db93f7f0ed02",
+      "file_count": 640,
+      "mode": "plain",
+      "original_evidence_unchanged": true,
+      "process_cpu_ns": 22390625000,
+      "reader": "development",
+      "report_hashes_unchanged": true,
+      "result_sha256": "c82f2a3cc723a531d5feac082dfe33802255a31f3948e6d96c47db93f7f0ed02",
+      "status": "complete",
+      "wall_ns": 22727596100
+    },
+    {
+      "after_tree_sha256": "80bdea8f75728507b167bd3b68d2e2d7c5c947a5fb514b1ae4447f4e68e38b69",
+      "before_tree_sha256": "80bdea8f75728507b167bd3b68d2e2d7c5c947a5fb514b1ae4447f4e68e38b69",
+      "bytes": 5285341,
+      "count_scope": "physical fixture inventory, not measured IO bytes",
+      "expected_result_sha256": "29961b6c2cf1b08166dd483dbf482b9434cb3a7cb213812187f844a0471db670",
+      "file_count": 640,
+      "mode": "plain",
+      "original_evidence_unchanged": true,
+      "process_cpu_ns": 24531250000,
+      "reader": "freeze",
+      "report_hashes_unchanged": true,
+      "result_sha256": "29961b6c2cf1b08166dd483dbf482b9434cb3a7cb213812187f844a0471db670",
+      "status": "complete",
+      "wall_ns": 25004805300
+    },
+    {
+      "after_tree_sha256": "80bdea8f75728507b167bd3b68d2e2d7c5c947a5fb514b1ae4447f4e68e38b69",
+      "before_tree_sha256": "80bdea8f75728507b167bd3b68d2e2d7c5c947a5fb514b1ae4447f4e68e38b69",
+      "bytes": 5285341,
+      "count_scope": "physical fixture inventory, not measured IO bytes",
+      "expected_result_sha256": "3b001369ef77798aeeb89e0179a316b58cf99dcf0a3451612a3e3243e75030e9",
+      "file_count": 640,
+      "mode": "plain",
+      "original_evidence_unchanged": true,
+      "process_cpu_ns": 36062500000,
+      "reader": "final",
+      "report_hashes_unchanged": true,
+      "result_sha256": "3b001369ef77798aeeb89e0179a316b58cf99dcf0a3451612a3e3243e75030e9",
+      "status": "complete",
+      "wall_ns": 36481434400
+    },
+    {
+      "after_tree_sha256": "80bdea8f75728507b167bd3b68d2e2d7c5c947a5fb514b1ae4447f4e68e38b69",
+      "before_tree_sha256": "80bdea8f75728507b167bd3b68d2e2d7c5c947a5fb514b1ae4447f4e68e38b69",
+      "bytes": 5285341,
+      "count_scope": "physical fixture inventory, not measured IO bytes",
+      "expected_result_sha256": "c82f2a3cc723a531d5feac082dfe33802255a31f3948e6d96c47db93f7f0ed02",
+      "file_count": 640,
+      "mode": "profile",
+      "original_evidence_unchanged": true,
+      "process_cpu_ns": 32015625000,
+      "reader": "development",
+      "report_hashes_unchanged": true,
+      "result_sha256": "c82f2a3cc723a531d5feac082dfe33802255a31f3948e6d96c47db93f7f0ed02",
+      "status": "complete",
+      "wall_ns": 32294154500
+    },
+    {
+      "after_tree_sha256": "80bdea8f75728507b167bd3b68d2e2d7c5c947a5fb514b1ae4447f4e68e38b69",
+      "before_tree_sha256": "80bdea8f75728507b167bd3b68d2e2d7c5c947a5fb514b1ae4447f4e68e38b69",
+      "bytes": 5285341,
+      "count_scope": "physical fixture inventory, not measured IO bytes",
+      "expected_result_sha256": "29961b6c2cf1b08166dd483dbf482b9434cb3a7cb213812187f844a0471db670",
+      "file_count": 640,
+      "mode": "profile",
+      "original_evidence_unchanged": true,
+      "process_cpu_ns": 35546875000,
+      "reader": "freeze",
+      "report_hashes_unchanged": true,
+      "result_sha256": "29961b6c2cf1b08166dd483dbf482b9434cb3a7cb213812187f844a0471db670",
+      "status": "complete",
+      "wall_ns": 35924869300
+    },
+    {
+      "after_tree_sha256": "80bdea8f75728507b167bd3b68d2e2d7c5c947a5fb514b1ae4447f4e68e38b69",
+      "before_tree_sha256": "80bdea8f75728507b167bd3b68d2e2d7c5c947a5fb514b1ae4447f4e68e38b69",
+      "bytes": 5285341,
+      "count_scope": "physical fixture inventory, not measured IO bytes",
+      "expected_result_sha256": "3b001369ef77798aeeb89e0179a316b58cf99dcf0a3451612a3e3243e75030e9",
+      "file_count": 640,
+      "mode": "profile",
+      "original_evidence_unchanged": true,
+      "process_cpu_ns": 51328125000,
+      "reader": "final",
+      "report_hashes_unchanged": true,
+      "result_sha256": "3b001369ef77798aeeb89e0179a316b58cf99dcf0a3451612a3e3243e75030e9",
+      "status": "complete",
+      "wall_ns": 52170453400
+    }
+  ],
+  "selected_profile_rows": {
+    "development": [
+      {
+        "file": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-actual-live-proposal\\buddha\\source_screen.py",
+        "line": 980,
+        "function": "inspect_source_screen",
+        "primitive_calls": 26,
+        "total_calls": 26,
+        "self_seconds": 0.0069668,
+        "cumulative_seconds": 23.9763695
+      },
+      {
+        "file": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-actual-live-proposal\\buddha\\candidate_generation.py",
+        "line": 801,
+        "function": "_read_evidence",
+        "primitive_calls": 65,
+        "total_calls": 65,
+        "self_seconds": 0.120078,
+        "cumulative_seconds": 14.1668418
+      },
+      {
+        "file": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-actual-live-proposal\\buddha\\doctor.py",
+        "line": 145,
+        "function": "finish",
+        "primitive_calls": 127,
+        "total_calls": 127,
+        "self_seconds": 0.017751600000000003,
+        "cumulative_seconds": 7.845636300000001
+      }
+    ],
+    "freeze": [
+      {
+        "file": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-actual-live-proposal\\buddha\\source_screen.py",
+        "line": 980,
+        "function": "inspect_source_screen",
+        "primitive_calls": 26,
+        "total_calls": 26,
+        "self_seconds": 0.0072297,
+        "cumulative_seconds": 23.8708792
+      },
+      {
+        "file": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-actual-live-proposal\\buddha\\candidate_generation.py",
+        "line": 801,
+        "function": "_read_evidence",
+        "primitive_calls": 65,
+        "total_calls": 65,
+        "self_seconds": 0.12079970000000001,
+        "cumulative_seconds": 14.2354798
+      },
+      {
+        "file": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-actual-live-proposal\\buddha\\doctor.py",
+        "line": 145,
+        "function": "finish",
+        "primitive_calls": 129,
+        "total_calls": 129,
+        "self_seconds": 0.021535600000000002,
+        "cumulative_seconds": 9.7554052
+      }
+    ],
+    "final": [
+      {
+        "file": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-actual-live-proposal\\buddha\\candidate_generation.py",
+        "line": 801,
+        "function": "_read_evidence",
+        "primitive_calls": 113,
+        "total_calls": 113,
+        "self_seconds": 0.2150691,
+        "cumulative_seconds": 24.878364
+      },
+      {
+        "file": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-actual-live-proposal\\buddha\\source_screen.py",
+        "line": 980,
+        "function": "inspect_source_screen",
+        "primitive_calls": 26,
+        "total_calls": 26,
+        "self_seconds": 0.0084706,
+        "cumulative_seconds": 24.1657572
+      },
+      {
+        "file": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-actual-live-proposal\\buddha\\doctor.py",
+        "line": 145,
+        "function": "finish",
+        "primitive_calls": 203,
+        "total_calls": 203,
+        "self_seconds": 0.0327211,
+        "cumulative_seconds": 13.681002600000001
+      }
+    ]
+  },
+  "final_profile_leaf_observations": [
+    {
+      "cumulative_seconds": 18.088043600000002,
+      "cumulative_seconds_per_primitive_call": 0.0008123980956658434,
+      "file": "~",
+      "function": "<method 'read' of '_io.BufferedReader' objects>",
+      "line": 0,
+      "primitive_calls": 22265,
+      "self_seconds": 18.088043600000002,
+      "self_seconds_per_total_call": 0.0008123980956658434,
+      "total_calls": 22265
+    },
+    {
+      "cumulative_seconds": 10.647860000000001,
+      "cumulative_seconds_per_primitive_call": 1.0367007402459958e-05,
+      "file": "~",
+      "function": "<built-in method nt.stat>",
+      "line": 0,
+      "primitive_calls": 1027091,
+      "self_seconds": 10.170342600000001,
+      "self_seconds_per_total_call": 9.902085209587078e-06,
+      "total_calls": 1027091
+    }
+  ],
+  "preservation": {
+    "all225_original_source_parameter_pins_match": true,
+    "all640_files470_directories_match_original_baseline": true,
+    "all56_original_database_images_unchanged": true,
+    "all_six_results_match_original_canonical_reports": true,
+    "denied_events": [],
+    "original_reports": {
+      "development": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\q\\imp01-reader-cost-6cell-v1\\original-tda7jrid\\assessment\\search\\study\\report.json",
+        "sha256": "c82f2a3cc723a531d5feac082dfe33802255a31f3948e6d96c47db93f7f0ed02"
+      },
+      "final": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\q\\imp01-reader-cost-6cell-v1\\original-tda7jrid\\assessment\\final\\report.json",
+        "sha256": "3b001369ef77798aeeb89e0179a316b58cf99dcf0a3451612a3e3243e75030e9"
+      },
+      "freeze": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\q\\imp01-reader-cost-6cell-v1\\original-tda7jrid\\assessment\\freeze\\schedule.json",
+        "sha256": "29961b6c2cf1b08166dd483dbf482b9434cb3a7cb213812187f844a0471db670"
+      }
+    },
+    "retention": "original canonical root retained; registered cleanup deliberately deferred; no move/copy/rebind"
+  },
+  "process": {
+    "session_id": 68257,
+    "terminal_tool_chunk": "8e94cd",
+    "exit_code": 0,
+    "total_end_to_end_monotonic_duration": "not captured; final tool wait is not total elapsed time"
+  },
+  "independent_review": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-reader-cost-independent-data-review-v1.json",
+    "sha256": "aec1e460ec2c07f554a29aae73232e42c4804bc81aae1e037d57b2dca2dbcbc9"
+  },
+  "evidence": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-reader-cost-invocation-v1.json",
+      "sha256": "9e5af86f443c3c4a81249b5f058d50dd505d4ef93fe39b65e4e814347745efde"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-reader-cost-process-result-v1.json",
+      "sha256": "c453535de5d555864f74a52afd5e7a38b5eb24313e32d4e73ca910b127195985"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\run-imp01-reader-cost-observation-v2.py",
+      "sha256": "30e784fd57d697aa0341c864425a1653532b0a6295fed45302f0fe6539c09ba9"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-reader-cost-observation-parameters-v2.json",
+      "sha256": "904c50eca7ed2623ae1cb23bb406eee3d211753e6207a82710b8fcc0e10692da"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-reader-cost-static-review-v2.json",
+      "sha256": "d418f5c40109fe3978cbf4c0f116510911920849b347fe686a8079be3febfd18"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-reader-cost-observation-v1.json",
+      "sha256": "e99574ada9bbe244992745026a1ee4cbd596227f0d1d671f39d08c6b088f0870"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-reader-cost-profiles-v1.json",
+      "sha256": "3505aa1981486ff5c3a8e04a92a522097c0b7fc23d9a7074393fbe7166cf8a23"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-reader-cost-observation-v1.outer.stdout.log",
+      "sha256": "7c20aa1cf36dbf45e474cff6fd8b25cf5ca73209394d7d31ee8422ef527e5e4b"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-reader-cost-observation-v1.outer.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "next_bounded_work": "Trace and remove the observed repeated prospective-generation reconstruction using shared checked evidence within one observation, preserving original source projection, publication and authority checks plus transitive end-byte custody; require meaningful failing integrity and duplicate-work checks before implementation.",
+  "full_multi_condition_cost_gate_closed": false,
+  "limitations": [
+    "Supplied workers/replies and synthetic accounts; no production NoveltyBench, paid model, scientific, full-suite or hosted result.",
+    "Fixture creation, baseline inspection and before/after hashing warm OS caches; fixed reader order is not randomized or cold-cache.",
+    "Nonexclusive machine; clocks and audit/API guards have uncalibrated overhead.",
+    "Profile passes include instrumentation and different cache state. Retain inclusive rows; never sum cumulative times or claim profile-minus-plain isolates causal overhead.",
+    "Outer wrapper must record preflight exceptions, timeout/termination and final stdout/stderr hashes; hard-kill publication is not guaranteed.",
+    "Audit/path-guard cost is not separately exposed by these profile rows; leaf timings describe guarded execution.",
+    "Cumulative profile intervals overlap and must not be added; the small physical inventory is not measured IO bytes or distinct-file read counts.",
+    "No actual provider call, paid allocation, owner replacement, original-evidence mutation, generated-source host execution, benchmark change, full-current-head hosted conclusion or scientific gain."
+  ]
+}
