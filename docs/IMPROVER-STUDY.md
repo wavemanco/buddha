@@ -91,8 +91,10 @@ to reinterpret retained evidence.
 
 The current declaration requires an engineering assessment marked `not_frozen`;
 the resulting assessment remains `not_ready`, with target repair unassessed.
-Separate sealed tasks, paired improver analysis, uncertainty and actual
-effectiveness remain later original IMP-01 work. Development completion does
+The [pure paired analyzer](IMPROVER-ANALYSIS.md) now implements the numerical
+method, including explicit empty/missing outcomes. Its protected original-record
+connection, separate sealed tasks and actual effectiveness remain IMP-01 work.
+Development completion does
 not enable a final grant or establish a scientific result.
 
 The original [tests-first checkpoint](conformance/imp01-finite-study-delivery.json)
