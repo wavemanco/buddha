@@ -5,6 +5,7 @@ from typing import Any, cast
 
 from buddha import source_review
 from buddha.doctor import _Busy, _Unsupported
+from buddha.native_evidence import NativeEvidence
 from buddha.releases import ReleaseError, _digest, _json, _load
 from buddha.validation_study import _absolute, _list, _obj
 
@@ -256,7 +257,7 @@ def _summarize(
     }
 
 
-def inspect_source_reviews(
+def _read_source_reviews(
     directory: Path,
     *,
     kind: str,
@@ -266,7 +267,7 @@ def inspect_source_reviews(
     round_plan: Path,
     expected_round_plan_sha256: str,
     submissions: list[dict[str, str]],
-) -> dict[str, object]:
+) -> tuple[dict[str, object], NativeEvidence, dict[Path, str]]:
     """Reconstruct source custody and compare pinned complete review forms, read-only.
 
     Freeze the round roster before distribution. Pins prove identity, not timing,
@@ -316,7 +317,7 @@ def inspect_source_reviews(
         }
         _json(result)
         reader.finish()
-        return cast(dict[str, object], result)
+        return cast(dict[str, object], result), reader, controls
     except (
         ReleaseError,
         ValueError,
@@ -335,3 +336,31 @@ def inspect_source_reviews(
         raise source_review.SourceReviewError(
             "invalid source-review collection or original evidence"
         ) from None
+
+
+def inspect_source_reviews(
+    directory: Path,
+    *,
+    kind: str,
+    expected_report_sha256: str,
+    plan: Path,
+    expected_plan_sha256: str,
+    round_plan: Path,
+    expected_round_plan_sha256: str,
+    submissions: list[dict[str, str]],
+) -> dict[str, object]:
+    """Check original source custody and pinned review forms without writing files.
+
+    Missing/invalid forms remain explicit; declared human/model types establish
+    neither identity nor independence. Keep the round fixed before distribution.
+    """
+    return _read_source_reviews(
+        directory,
+        kind=kind,
+        expected_report_sha256=expected_report_sha256,
+        plan=plan,
+        expected_plan_sha256=expected_plan_sha256,
+        round_plan=round_plan,
+        expected_round_plan_sha256=expected_round_plan_sha256,
+        submissions=submissions,
+    )[0]

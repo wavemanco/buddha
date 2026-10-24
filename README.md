@@ -57,7 +57,9 @@ now records missing or invalid review forms, separates declared human/model
 coverage and preserves grouping/compliance disagreements. It changes no official
 scores. The offline export command now writes separate reviewer files and a
 private frozen roster, with explicit partial coverage and safe retry/refusal.
-Review collection, transfer and the actual independent human study remain open.
+The offline collection command now saves full returned judgments, missing/invalid
+forms and disagreements in a separate private report. Earlier partial reports stay
+unchanged. Explicit transfer and the actual independent human study remain open.
 
 ## Current state
 

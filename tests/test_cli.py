@@ -24,6 +24,109 @@ from buddha.run import prepare_run
 
 
 class CLITests(unittest.TestCase):
+    def test_source_review_collection_forwards_explicit_and_empty_submissions(self):
+        from buddha import source_review_handoff
+
+        base = [
+            "source-review-inspect",
+            "--run",
+            "original",
+            "--kind",
+            "final",
+            "--report-sha256",
+            "a" * 64,
+            "--plan",
+            "plan.json",
+            "--plan-sha256",
+            "b" * 64,
+            "--round-plan",
+            "round.json",
+            "--round-plan-sha256",
+            "c" * 64,
+            "--out",
+            "collection",
+        ]
+        for extra, refs, status, code in (
+            ([], [], "incomplete", 3),
+            (
+                ["--submission", "human-a", "forms/a.json", "d" * 64],
+                [
+                    {
+                        "reviewer_id": "human-a",
+                        "path": str(Path("forms/a.json").absolute()),
+                        "sha256": "d" * 64,
+                    }
+                ],
+                "complete",
+                0,
+            ),
+        ):
+            summary = {"format": "buddha.source-review-collection.v1", "status": status}
+            with (
+                self.subTest(status=status),
+                patch.object(
+                    source_review_handoff, "collect_source_reviews", return_value=summary
+                ) as collect,
+                patch("buddha.__main__._key_environment") as keys,
+                patch("http.client.HTTPSConnection") as connection,
+                redirect_stdout(io.StringIO()) as output,
+                redirect_stderr(io.StringIO()),
+            ):
+                self.assertEqual(main(base + extra), code)
+            self.assertEqual(json.loads(output.getvalue()), summary)
+            collect.assert_called_once_with(
+                Path("original"),
+                kind="final",
+                expected_report_sha256="a" * 64,
+                plan=Path("plan.json"),
+                expected_plan_sha256="b" * 64,
+                round_plan=Path("round.json"),
+                expected_round_plan_sha256="c" * 64,
+                submissions=refs,
+                output=Path("collection"),
+            )
+            keys.assert_not_called()
+            connection.assert_not_called()
+
+    def test_source_review_collection_has_offline_refusal_and_interruption_output(self):
+        from buddha import source_review_handoff
+        from buddha.source_review import SourceReviewError
+
+        argv = [
+            "source-review-inspect",
+            "--run",
+            "original",
+            "--kind",
+            "improver",
+            "--report-sha256",
+            "a" * 64,
+            "--plan",
+            "plan.json",
+            "--plan-sha256",
+            "b" * 64,
+            "--round-plan",
+            "round.json",
+            "--round-plan-sha256",
+            "c" * 64,
+            "--out",
+            "collection",
+        ]
+        for error, code, reason in (
+            (SourceReviewError("changed form"), 2, "refused"),
+            (KeyboardInterrupt(), 130, "interrupted"),
+        ):
+            with (
+                self.subTest(reason=reason),
+                patch.object(source_review_handoff, "collect_source_reviews", side_effect=error),
+                redirect_stdout(io.StringIO()) as output,
+                redirect_stderr(io.StringIO()) as notice,
+            ):
+                self.assertEqual(main(argv), code)
+            record = json.loads(output.getvalue())
+            self.assertEqual(record["format"], "buddha.source-review-collection.v1")
+            self.assertEqual((record["stage"], record["reason"]), ("collection", reason))
+            self.assertNotIn("reservation", notice.getvalue())
+
     def test_source_review_export_is_keyless_and_retains_incomplete_status(self):
         from buddha import source_review_handoff
 

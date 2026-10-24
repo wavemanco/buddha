@@ -11,7 +11,7 @@ from buddha.doctor import _Busy, _entries, _Unsupported
 from buddha.native_evidence import NativeEvidence
 from buddha.releases import MAX_JSON_BYTES, ReleaseError, _json, _root
 from buddha.source_review import SourceReviewError, _sha, encode_review
-from buddha.validation_study import _absolute, _obj
+from buddha.validation_study import _absolute, _list, _obj
 
 
 def _publish(path: Path, raw: bytes) -> None:
@@ -64,12 +64,18 @@ def _check_tree(output: Path, expected: dict[str, bytes]) -> set[str]:
 
 
 def _destination(
-    output: Path, directory: Path, reader: NativeEvidence, controls: dict[Path, str]
+    output: Path,
+    directory: Path,
+    reader: NativeEvidence,
+    controls: dict[Path, str],
+    *,
+    extra_roots: tuple[Path, ...] = (),
 ) -> Path:
     if not isinstance(output, Path):
         raise SourceReviewError("review output requires an explicit Path")
     output = _absolute(str(output.absolute()))
     roots = {directory.absolute(), reader.root, reader.capture.root}
+    roots.update(extra_roots)
     roots.update(capture.root for capture in reader._retained)
     for owner in reader.owners.values():
         roots.update(Path(str(value)) for value in _obj(owner.manifest["roots"]).values())
@@ -79,6 +85,27 @@ def _destination(
     ):
         raise SourceReviewError("review output overlaps original evidence or component roots")
     return output
+
+
+def _save(output: Path, artifacts: dict[str, bytes], marker: bytes, reader: NativeEvidence) -> None:
+    if any(len(raw) > MAX_JSON_BYTES for raw in (*artifacts.values(), marker)):
+        raise SourceReviewError("review artifact exceeds its byte ceiling")
+    expected = artifacts | {"complete.json": marker}
+    present = _check_tree(output, expected)
+    reader.finish()
+    if "complete.json" not in present:
+        output.mkdir(exist_ok=True)
+        for parent in sorted({Path(name).parent for name in artifacts}):
+            (output / parent).mkdir(exist_ok=True)
+        for name, raw in artifacts.items():
+            _publish(output / name, raw)
+        # Source drift and unexpected output bytes must fail before publication.
+        if _check_tree(output, expected) != set(artifacts):
+            raise SourceReviewError("review output lost an artifact before publication")
+        reader.finish()
+        _publish(output / "complete.json", marker)
+    _check_tree(output, expected)
+    reader.finish()
 
 
 def export_source_review(
@@ -135,8 +162,6 @@ def export_source_review(
                     "reviewer/review.md": materialization["review"].encode("utf-8"),
                 }
             )
-        if any(len(raw) > MAX_JSON_BYTES for raw in artifacts.values()):
-            raise SourceReviewError("review artifact exceeds its byte ceiling")
         marker = encode_review(
             {
                 "format": "buddha.source-review-export.v1",
@@ -146,22 +171,7 @@ def export_source_review(
                 "artifacts": {name: _sha(raw) for name, raw in artifacts.items()},
             }
         )
-        expected = artifacts | {"complete.json": marker}
-        present = _check_tree(output, expected)
-        reader.finish()
-        if "complete.json" not in present:
-            output.mkdir(exist_ok=True)
-            for parent in sorted({Path(name).parent for name in artifacts}):
-                (output / parent).mkdir(exist_ok=True)
-            for name, raw in artifacts.items():
-                _publish(output / name, raw)
-            # Source drift and unexpected output bytes must fail before publication.
-            if _check_tree(output, expected) != set(artifacts):
-                raise SourceReviewError("review output lost an artifact before publication")
-            reader.finish()
-            _publish(output / "complete.json", marker)
-        _check_tree(output, expected)
-        reader.finish()
+        _save(output, artifacts, marker, reader)
         return {
             "format": "buddha.source-review-export.v1",
             "status": private["status"],
@@ -188,4 +198,87 @@ def export_source_review(
             raise
         raise SourceReviewError(
             "review export refused; original and output files retained"
+        ) from None
+
+
+def collect_source_reviews(
+    directory: Path,
+    *,
+    kind: str,
+    expected_report_sha256: str,
+    plan: Path,
+    expected_plan_sha256: str,
+    round_plan: Path,
+    expected_round_plan_sha256: str,
+    submissions: list[dict[str, str]],
+    output: Path,
+) -> dict[str, object]:
+    """Save one private comparison of explicit forms, retaining missing/invalid rows.
+
+    Additions or corrections require a fresh output directory. Keep original
+    forms, prior collections and the frozen round; never rewrite them in place.
+    This does not obtain reviews, verify identities or change official scores.
+    """
+    try:
+        if not isinstance(round_plan, Path):
+            raise SourceReviewError("review round requires an explicit Path")
+        result, reader, controls = source_review_results._read_source_reviews(
+            directory,
+            kind=kind,
+            expected_report_sha256=expected_report_sha256,
+            plan=plan,
+            expected_plan_sha256=expected_plan_sha256,
+            round_plan=round_plan.absolute(),
+            expected_round_plan_sha256=expected_round_plan_sha256,
+            submissions=submissions,
+        )
+        module = Path(__file__).absolute()
+        if module not in controls:
+            raise SourceReviewError("review handoff helper lacks its original approval pin")
+        source_review._bound(reader, controls, module, controls[module])
+        round_path = Path(_obj(result["round_plan"])["path"])
+        protected = {round_path.parent}
+        if round_path.name == "round.json" and round_path.parent.name == "private":
+            protected.add(round_path.parent.parent)
+        for row in _list(result["reviews"]):
+            submission = _obj(row)["submission"]
+            if submission is not None:
+                protected.add(Path(_obj(submission)["path"]).parent)
+        output = _destination(output, directory, reader, controls, extra_roots=tuple(protected))
+        result["consumed_files"] = {
+            str(path): _sha(raw) for path, raw in reader.capture.raw.items()
+        }
+        report = encode_review(result)
+        marker = encode_review(
+            {
+                "format": "buddha.source-review-collection.v1",
+                "publication_status": "complete",
+                "review_status": result["status"],
+                "reasons": result["reasons"],
+                "artifacts": {"report.json": _sha(report)},
+            }
+        )
+        _save(output, {"report.json": report}, marker, reader)
+        return {
+            "format": "buddha.source-review-collection.v1",
+            "status": result["status"],
+            "publication_status": "complete",
+            "output": str(output),
+            "complete": {"path": str(output / "complete.json"), "sha256": _sha(marker)},
+            "report": {"path": str(output / "report.json"), "sha256": _sha(report)},
+        }
+    except (
+        ReleaseError,
+        OSError,
+        ValueError,
+        TypeError,
+        KeyError,
+        UnicodeError,
+        _Busy,
+        _Unsupported,
+    ) as error:
+        if isinstance(error, SourceReviewError):
+            raise
+        raise SourceReviewError(
+            "review collection refused; original and output files retained"
         ) from None

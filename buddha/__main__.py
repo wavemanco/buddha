@@ -241,35 +241,55 @@ def _search_demo(destination: Path) -> None:
     print(json.dumps({"mode": "synthetic_replay", "paid_calls": 0, "report": report}))
 
 
-def _export_review(args: argparse.Namespace) -> int:
+def _review_command(args: argparse.Namespace) -> int:
     from buddha.source_review import SourceReviewError
-    from buddha.source_review_handoff import export_source_review
+    from buddha.source_review_handoff import collect_source_reviews, export_source_review
 
+    stage = "export" if args.command == "source-review-export" else "collection"
     try:
         _notice("Checking saved evaluation and writing review files. Reading can take time.")
-        result = export_source_review(
-            args.run,
-            kind=args.kind,
-            expected_report_sha256=args.report_sha256,
-            plan=args.plan,
-            expected_plan_sha256=args.plan_sha256,
-            output=args.out,
-            reviewers=[{"id": identifier, "type": kind} for identifier, kind in args.reviewer],
-        )
+        common = {
+            "kind": args.kind,
+            "expected_report_sha256": args.report_sha256,
+            "plan": args.plan,
+            "expected_plan_sha256": args.plan_sha256,
+            "output": args.out,
+        }
+        if stage == "export":
+            result = export_source_review(
+                args.run,
+                **common,
+                reviewers=[{"id": identifier, "type": kind} for identifier, kind in args.reviewer],
+            )
+        else:
+            result = collect_source_reviews(
+                args.run,
+                **common,
+                round_plan=args.round_plan,
+                expected_round_plan_sha256=args.round_plan_sha256,
+                submissions=[
+                    {
+                        "reviewer_id": identifier,
+                        "path": str(Path(path).absolute()),
+                        "sha256": digest,
+                    }
+                    for identifier, path, digest in args.submission
+                ],
+            )
         print(json.dumps(result))
         return 0 if result["status"] == "complete" else 3
     except (OSError, ValueError) as error:
-        reason = str(error) if isinstance(error, SourceReviewError) else "review export refused"
+        reason = str(error) if isinstance(error, SourceReviewError) else f"review {stage} refused"
         status, code = "refused", 2
     except KeyboardInterrupt:
-        reason, status, code = "review export interrupted", "interrupted", 130
-    _notice("Review export stopped; original files and unfinished output are retained.")
+        reason, status, code = f"review {stage} interrupted", "interrupted", 130
+    _notice(f"Review {stage} stopped; original files and unfinished output are retained.")
     print(
         json.dumps(
             {
-                "format": "buddha.source-review-export.v1",
+                "format": f"buddha.source-review-{stage}.v1",
                 "status": "stopped",
-                "stage": "export",
+                "stage": stage,
                 "reason": status,
                 "error": reason,
                 "output": str(args.out),
@@ -285,14 +305,23 @@ def main(argv: Sequence[str] | None = None) -> int:
     review_export = commands.add_parser(
         "source-review-export", help="write checked reviewer files and a private round offline"
     )
-    review_export.add_argument("--run", type=Path, required=True)
-    review_export.add_argument("--kind", choices=("final", "improver"), required=True)
-    review_export.add_argument("--report-sha256", required=True)
-    review_export.add_argument("--plan", type=Path, required=True)
-    review_export.add_argument("--plan-sha256", required=True)
-    review_export.add_argument("--out", type=Path, required=True)
+    review_inspect = commands.add_parser(
+        "source-review-inspect", help="save a private comparison of supplied review forms offline"
+    )
+    for command in (review_export, review_inspect):
+        command.add_argument("--run", type=Path, required=True)
+        command.add_argument("--kind", choices=("final", "improver"), required=True)
+        command.add_argument("--report-sha256", required=True)
+        command.add_argument("--plan", type=Path, required=True)
+        command.add_argument("--plan-sha256", required=True)
+        command.add_argument("--out", type=Path, required=True)
     review_export.add_argument(
         "--reviewer", nargs=2, action="append", required=True, metavar=("ID", "TYPE")
+    )
+    review_inspect.add_argument("--round-plan", type=Path, required=True)
+    review_inspect.add_argument("--round-plan-sha256", required=True)
+    review_inspect.add_argument(
+        "--submission", nargs=3, action="append", default=[], metavar=("ID", "PATH", "SHA256")
     )
     continuation_source = commands.add_parser(
         "continuation-source", help="verify original receipt slots and saved science offline"
@@ -414,8 +443,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         )
         command.add_argument("--run", type=Path, required=True)
     args = parser.parse_args(argv)
-    if args.command == "source-review-export":
-        return _export_review(args)
+    if args.command in {"source-review-export", "source-review-inspect"}:
+        return _review_command(args)
     try:
         authorization = None
         if args.command in {"run", "search-run"}:
