@@ -482,6 +482,150 @@ class ImproverAssessmentTests(unittest.TestCase):
         self.assertFalse((self.trial / "final/foreign").exists())
         self.assertEqual((files(self.root), self.engine.physical_sends), before)
 
+    def test_completed_assessment_replays_after_original_producer_sources_retire(self):
+        from buddha import candidate_generation
+        from buddha.gateway import RawHTTPTransport
+
+        self.fixture()
+        self.f.outcomes.update({(0, 0, arm, 0): "rejected" for arm in range(2)})
+        original = self.trial, self.study, self.declaration, self.bound_definition, self.authorities
+        self.bind("fresh-retirement-assessment")
+        fresh_root, fresh_declaration, fresh_authorities = (
+            self.trial,
+            self.declaration,
+            self.authorities,
+        )
+        self.trial, self.study, self.declaration, self.bound_definition, self.authorities = original
+        self.prepare()
+        self.develop()
+        schedule = self.freeze()
+        self.assertEqual(schedule["selected_ids"], [1, "final"])
+        self.assertEqual(schedule["counts"]["cells"], 2)
+        self.assertEqual(schedule["counts"]["maximum_cells"], 6)
+        self.assertEqual([arm["role"] for arm in schedule["arms"]], ["starter"])
+        self.assertEqual(
+            [slot["status"] for slot in schedule["slots"]], ["no_valid_descendant"] * 2
+        )
+
+        def snapshot():
+            return (
+                files(self.root),
+                tuple(sorted(str(path.relative_to(self.root)) for path in self.root.rglob("*"))),
+                [
+                    authority.summary()
+                    for group in (self.authorities, fresh_authorities)
+                    for authority in group.values()
+                ],
+                self.engine.physical_sends,
+                self.engine.workers,
+                len(self.f.events),
+                len(self.f.improvements),
+                len(self.f.generated),
+                len(self.final_events),
+            )
+
+        @contextmanager
+        def retired_producers():
+            retired = []
+            try:
+                for name in ("I0", "I1", "S0", "S1"):
+                    source, destination = self.root / name, self.root / (name + "-retired")
+                    source.rename(destination)
+                    retired.append((source, destination))
+                before = snapshot()
+                with (
+                    self.f.h.readonly(),
+                    patch.dict(os.environ, {}, clear=True),
+                    ExitStack() as stack,
+                ):
+                    for target in (
+                        "buddha.trial_fence.lease",
+                        "buddha.trial_fence.work",
+                        "buddha.native_pipeline._exclusive",
+                    ):
+                        stack.enter_context(
+                            patch(target, side_effect=AssertionError("retirement reached writer"))
+                        )
+                    yield
+                self.assertEqual(snapshot(), before)
+            finally:
+                for source, destination in reversed(retired):
+                    destination.rename(source)
+
+        original_generation = candidate_generation.run_candidate_generation
+        stopped = []
+
+        def stop_after_first_final_generation(*args, **kwargs):
+            result = original_generation(*args, **kwargs)
+            if not stopped and Path(args[0]).is_relative_to(self.trial / "final"):
+                self.assertEqual(result["status"], "complete")
+                stopped.append(True)
+                raise KeyboardInterrupt
+            return result
+
+        with (
+            self.supplied(),
+            patch.object(
+                candidate_generation,
+                "run_candidate_generation",
+                side_effect=stop_after_first_final_generation,
+            ),
+            self.assertRaises(KeyboardInterrupt),
+        ):
+            self.run_assessment()
+        self.assertTrue(stopped)
+        self.assertFalse((self.trial / "final/report.json").exists())
+        with retired_producers():
+            # Missing original controls still stop unfinished and fresh work.
+            with self.assertRaises(self.Error):
+                self.run_assessment()
+            with self.assertRaises(self.Error):
+                self.api.prepare_improver_assessment_trial(
+                    fresh_root,
+                    declaration=fresh_declaration,
+                    expected_sha256=sha(fresh_declaration.read_bytes()),
+                    expected_runtime_sha256=self.engine.candidate.expected_runtime,
+                    authorizations=fresh_authorities,
+                    development_review=self.engine.fixture.review,
+                )
+            self.assertFalse(fresh_root.exists())
+
+        with self.supplied():
+            result = self.run_assessment()
+        self.assertEqual(result["status"], "complete")
+        self.assertEqual(result["coverage"]["evaluated"], 2)
+        self.assertEqual(result["analysis"]["coverage"]["null_slots"], 2)
+        self.assertEqual(result["analysis"]["rule"]["status"], "inconclusive")
+        with retired_producers():
+            self.assertEqual(self.inspect(), result)
+            self.assertEqual(
+                self.api.inspect_improver_assessment_freeze(
+                    self.trial,
+                    expected_schedule_sha256=sha(
+                        (self.trial / "freeze/schedule.json").read_bytes()
+                    ),
+                ),
+                schedule,
+            )
+            self.assertEqual(self.freeze(), schedule)
+            self.assertEqual(
+                self.api.run_improver_assessment(
+                    self.trial,
+                    authorization=self.authorities["final"],
+                    review=self.engine.fixture.review,
+                    transport=RawHTTPTransport(allow_paid=False),
+                ),
+                result,
+            )
+            retained_source = self.trial / "freeze/sources/0.py"
+            raw = retained_source.read_bytes()
+            try:
+                retained_source.write_bytes(raw + b"\n# changed retained source\n")
+                with self.assertRaises(self.Error):
+                    self.inspect()
+            finally:
+                retained_source.write_bytes(raw)
+
     def test_genuine_null_descendant_and_undefined_scalar_preserve_planned_comparison(self):
         self.fixture()
         self.f.outcomes[(0, 0, 0, 0)] = "failed"
