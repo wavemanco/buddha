@@ -14,6 +14,12 @@ pass. [The results](docs/SOURCE-CAPACITY-RESULTS.md) close POL-03's bounded-loop
 engineering gate. Current-parent source evolution and improved effectiveness
 remain open; no further user command is needed now.
 
+The [actual-proposal capacity route](docs/SOURCE-PROPOSAL-CAPACITY.md) now
+checks original model replies before the host proceeds with returned children.
+It needs no duplicate probe. Integrated supplied-response recovery and retirement
+checks pass; hosted CI, a separate actual-live protocol and funding remain open.
+A negative or unavailable observation leaves an explicit partial result.
+
 The [fresh source rehearsal](docs/SOURCE-CURRENT-REHEARSAL.md) now passes:
 29 isolated workers, 154 supplied replies, complete parent and child outputs,
 and a changed improver producing a further runnable child. It also checks
@@ -158,10 +164,13 @@ supplied programs and replies. The [paired numerical analyzer](docs/IMPROVER-ANA
 now keeps both descendants' gains over the shared starter separate from their
 direct comparison, with conservative uncertainty and explicit missing outcomes.
 The [sealed-assessment connection](docs/IMPROVER-ASSESSMENT.md) is implemented
-and undergoing composed checks. It freezes selected descendants from original
+with five new assessment methods and twelve final-v1 regressions passing at
+the recorded corrected cut. It freezes selected descendants from original
 development records, retains absent descendants and separate roles for identical
 code, and feeds verified official results to that analyzer. The actual controlled
-experiment and improved-effectiveness evidence remain open.
+experiment, full/hosted verification and improved-effectiveness evidence remain
+open. A separate archival regression is checking replay after the original
+producer programs are retired.
 
 Useful-diversity gains, held-out improvement and improved-improver effectiveness
 remain **not established**. The source-chain fixture uses synthetic replies and
