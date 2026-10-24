@@ -18,12 +18,16 @@ The [actual-proposal capacity route](docs/SOURCE-PROPOSAL-CAPACITY.md) now
 checks original model replies before the host proceeds with returned children.
 It needs no duplicate probe. Integrated supplied-response recovery and retirement
 checks pass. The separate [actual-live protocol and unfunded bundle](docs/SOURCE-CURRENT-LIVE.md)
-are now checked and independently reviewed; hosted CI and separate funding remain open.
+are now checked and independently reviewed. A fresh corrected-source bundle
+contains forty-three files and passes its passive configuration and saved-data
+checks; [the preparation record](docs/conformance/src02-corrected-live-preparation.json)
+retains the earlier failed-head bundle unchanged. The
+[legacy progress correction](docs/SOURCE-PROPOSAL-CAPACITY.md#record-compatibility)
+and these preparation checks remain separate from exact executing-code hosted CI.
+Final launch/input/account checks and a new allocation remain required; the
+proposed $25/512 attempts are unallocated and no live command is available.
 A negative or unavailable observation leaves an explicit partial result.
-The [legacy progress compatibility correction](docs/SOURCE-PROPOSAL-CAPACITY.md#record-compatibility)
-addresses three failures from the first selected producer. Its local checks are
-separate from hosted CI; a fresh corrected-source input bundle is required
-before funding or a live command.
+This engineering progress closes no scientific gate.
 
 The [fresh source rehearsal](docs/SOURCE-CURRENT-REHEARSAL.md) now passes:
 29 isolated workers, 154 supplied replies, complete parent and child outputs,
