@@ -98,7 +98,7 @@ def _selectors(
             "comparator": len(state["comparators"]),
             "candidate": state["definition"]["finalist_count"],
         }
-        if kind == "final"
+        if kind in {"final", "transfer"}
         else dict.fromkeys(
             ("starter", "initial", "evolved"),
             len(state["screens"]) * state["development"]["repetitions"],
@@ -175,14 +175,16 @@ def _read_source_review(
     try:
         if not isinstance(directory, Path) or not isinstance(plan, Path):
             raise SourceReviewError("review requires explicit original Paths")
-        if type(kind) is not str or kind not in {"final", "improver"}:
+        if type(kind) is not str or kind not in {"final", "improver", "transfer"}:
             raise SourceReviewError("unsupported source-review trial kind")
         directory, plan = directory.absolute(), plan.absolute()
         expected_report_sha256 = _digest(expected_report_sha256)
         expected_plan_sha256 = _digest(expected_plan_sha256)
-        inspect = (
-            final._read_final_evaluation if kind == "final" else improver._read_improver_assessment
-        )
+        inspect = {
+            "final": final._read_final_evaluation,
+            "improver": improver._read_improver_assessment,
+            "transfer": final._read_transfer_evaluation,
+        }[kind]
         saved, state, schedule, reader = inspect(
             directory, expected_report_sha256=expected_report_sha256
         )

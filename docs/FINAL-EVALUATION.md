@@ -170,9 +170,10 @@ improvement or a guarantee about unseen prompts.
 
 This slice supplies the ordinary-trial transfer route. It does not complete an
 actual held-out study, choose or certify a human-review protocol, establish
-independent authorship or close EVAL-02. Transfer-specific reviewer export/import
-and the improved-improver assessment bridge are not yet supported. The existing
-final-only and IMP-01 interfaces do not acquire transfer support automatically.
+independent authorship or close EVAL-02. The [review workflow](SOURCE-REVIEW.md)
+accepts `kind="transfer"` for a separate prospectively pinned transfer sample,
+including full-text export and collection of supplied forms. The
+improved-improver assessment does not acquire transfer support automatically.
 
 ## Optional offline transfer check
 

@@ -1,9 +1,10 @@
 # Reviewing current source-agent outputs
 
-This bridge prepares complete answer sets from a saved final evaluation for
-independent review. It supports the ordinary final controller and the matched
-improver assessment. It does not generate answers, contact a provider, resume a
-run or change an official NoveltyBench score.
+This bridge prepares complete answer sets from a saved final or transfer
+evaluation for independent review. It supports the ordinary trial's final and
+transfer panels and the matched improver assessment's final panel. It does not
+generate answers, contact a provider, resume a run or change an official
+NoveltyBench score.
 
 The reviewer sees the task, every literal answer in each selected set, the
 pinned equivalence rule and the pinned task-quality rubric. Source identities,
@@ -12,9 +13,9 @@ separate private receipt. Blank and refused answers stay visible.
 
 This is the source-output review bridge in EVAL-02. Export and passive review
 import/reporting are implemented, including the offline export and collection
-commands below. The explicit transfer phase and actual independent human study
-remain open. Working review machinery does not establish human judgments or
-scientific improvement.
+commands below, for final, transfer and improver outputs. The actual independent
+transfer/human study remains open. Working review machinery does not establish
+human judgments or scientific improvement.
 
 ## Select the sample before generating answers
 
@@ -23,7 +24,7 @@ with these exact fields:
 
 | Field | Meaning |
 | --- | --- |
-| `experiment_id`, `kind` | The original experiment ID and either `final` or `improver`. |
+| `experiment_id`, `kind` | The original experiment ID and `final`, `transfer` or `improver`. |
 | `tasks_sha256` | The complete original TaskSet fingerprint, including typed IDs and counts. |
 | `seed` | A nonnegative integer used to mask display order reproducibly. |
 | `protocol`, `materials` | Original absolute `path`/`sha256` references to the protocol bytes and reviewed rule/rubric material. |
@@ -36,12 +37,19 @@ preparation. Existing trial machinery carries those pins into frozen controls
 and original owner inputs. The exporter rejects missing or changed controls.
 Existing completed runs cannot acquire a prospective sample afterward.
 
-For ordinary finals, roles are `candidate` and `comparator`; `role_index` is the
-zero-based position within that role. For improver assessments, roles are
+For ordinary final and transfer panels, roles are `candidate` and `comparator`;
+`role_index` is the zero-based position within that role. For improver assessments, roles are
 `starter`, `initial` and `evolved`; the index is
 `start * development_repetitions + development_repetition`. `repetition` selects
 the sealed generation repetition. Integer task ID `1` and string ID `"1"` remain
 different tasks.
+
+A transfer plan must name the transfer TaskSet, and its materials must bind that
+source's release. The TaskSet fingerprint already includes the full release and
+typed task population; the review format stays v1. Pin the plan and helpers in
+the original custody evidence before any trial owners exist. Keep final and
+transfer plans, export folders and review rounds separate. The same raw task ID
+in two sources does not make their plans, reports or forms interchangeable.
 
 These logical coordinates stay stable when an improver fails to produce a valid
 descendant. The private receipt maps them to the actual frozen arm numbers.
@@ -77,7 +85,10 @@ needs no keys or separate window, and can be stopped with Ctrl+C.
 
 The following is a template, not an instruction to start a study. Replace every
 path, hash and reviewer ID with the frozen study's actual values. Use `final`
-for an ordinary final evaluation or `improver` for a matched improver assessment.
+for an ordinary final evaluation, `transfer` for its separately declared transfer
+panel, or `improver` for a matched improver assessment.
+For transfer, supply the hash of `transfer/report.json`; the trial root stays the
+same. Choosing `transfer` reads that saved panel and does not run it again.
 The example roster does not prescribe a sample size or authorize human review.
 Each repeated `--reviewer ID TYPE` declares one distinct reviewer; `TYPE` must
 be `human` or `model`.
@@ -139,7 +150,7 @@ publication and reviewer files exist.
 ## Developer interface and files
 
 `buddha.source_review.materialize_source_review` takes the original trial root,
-trial kind, exact saved final-report hash, original plan path and its exact hash.
+trial kind, exact saved panel-report hash, original plan path and its exact hash.
 It returns four separate values:
 
 - `packet`: the existing `buddha.meas01-pack.v1` reviewer schema, with complete
@@ -376,6 +387,18 @@ preparing and repeatedly checking original evaluation evidence. This is a whole
 test-cohort duration, not the time for one import; later runs can differ. Press
 Ctrl+C to stop; interruption is not a pass.
 
+To check the transfer review connection, run from the checkout containing it:
+
+```powershell
+python -m unittest discover -s tests -p test_transfer_review.py -v
+```
+
+This runs the transfer review checks once in the current window. It uses
+temporary tasks and accounting files, simulated workers and supplied review
+forms. It needs no key or Docker worker and spends no API money. The composed
+method took about six minutes in the recorded local check; runtime can vary.
+Ctrl+C stops it; interruption is not a pass.
+
 There is no automatic reviewer messaging or review generation. The actual study
-still needs its own frozen human-review protocol, explicit transfer phase and
-independent evidence.
+still needs its own frozen review protocol, independent human judgments and
+actual transfer evidence.
