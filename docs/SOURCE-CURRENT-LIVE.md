@@ -112,13 +112,14 @@ with no unexpected event. Preparation created no original owners or databases
 and made no provider call. These are trusted preparation checks, not a general
 security claim or an observation of the planned twenty-nine-owner execution.
 
-The input review retains the conditional `108+K` bound, including permitted
+The refreshed input review retains the conditional `111+K` bound, including permitted
 empty database sidecars; `K` counts additional distinct final bindings beyond
-the minimum seventy-four. This is a calculation under the declared flow, not
+the new minimum seventy-seven. The three price-evidence additions are already
+included in that minimum. This is a calculation under the declared flow, not
 an observed invocation count. The final funded launch must reconcile its actual
 input union against the existing limit before use.
 
-The [proposed launch bindings](conformance/src02-unfunded-launch-bindings.json)
+The [refreshed proposed launch bindings](conformance/src02-refreshed-launch-bindings.json)
 give this experiment concrete future destinations. They remain inside a separate
 unfunded draft; they are not an approval or a runnable handoff.
 
@@ -131,9 +132,12 @@ unfunded draft; they are not an approval or a runnable handoff.
 Those destinations have not been created. The draft fixes the proposed authority
 identity, account statement, three-hundred-second request timeout and exact
 approval/launch bytes. Its minimum fixed input union contains seventy-four
-distinct paths. The later account review adds one path already included in the
-conditional maximum of 108; it does not add another path on top of that maximum.
-Adding a new pinned support file changes the count and requires reconciliation.
+distinct paths in the preserved earlier draft v2. The new draft v3 adds three
+price-evidence bindings, giving seventy-seven fixed paths. The later account
+review makes seventy-eight and is already included in the conditional maximum
+of 111. Adding another distinct pinned support file changes `K` and requires
+reconciliation. The [earlier draft record](conformance/src02-unfunded-launch-bindings.json)
+and its 74/108 calculation remain unchanged.
 
 The account statement retains the user's existing Standard/default processing
 and public pay-as-you-go attestations for both providers. It does not verify
@@ -182,10 +186,22 @@ the accepted request features; account access and actual combined request fit
 remain separate checks.
 
 The existing launcher accepts the three additional support pins without a code
-or proposal-bundle change. If adopted in a new proposed launch version, the
-fixed input union becomes 77 paths, or 78 with the future key-bound review;
-the conditional maximum becomes 111, including permitted empty sidecars.
-These remain projections. The original draft v2 and its 74/108 calculation
-stay unchanged. Recompute the new launch hash and bind the future account
-review to that hash, then reconcile the actual funded input union. No new
-launch, funding or user command is supplied by this documentation.
+or proposal-bundle change. The [saved draft v3](conformance/src02-refreshed-launch-bindings.json)
+now binds the refresh record, its independent review and its preparation recipe.
+The original data-only preparation completed in 34.670 seconds. Independent
+saved-data review checks the exact additions, new launch hash, unchanged approval,
+all 181 protected inputs and the original forty-three-file bundle. The proposed
+run, handoff and receipt folders remain absent.
+
+The fixed input union is now 77 paths, or 78 with the future key-bound review;
+the conditional maximum is 111, including permitted empty sidecars. These are
+still calculations, not an observed twenty-nine-owner invocation. The future
+account review must bind the new launch hash; the real funded input union must
+still be reconciled. No actual launch, approval, funding or user command was
+created.
+
+A separate read-only Docker check confirms both pinned images meet the selected
+executor's image-identity requirements. An earlier diagnostic formatter failed;
+the direct inspection succeeds and reproducing that formatter gives the same
+error. Both outcomes are retained in the new record. Image identity alone does
+not verify worker execution, account access, request capacity or live readiness.
