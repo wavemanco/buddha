@@ -55,7 +55,9 @@ prospectively selected final answer sets in the existing blinded reviewer format
 Original scores and identities stay in a private receipt. Its passive importer
 now records missing or invalid review forms, separates declared human/model
 coverage and preserves grouping/compliance disagreements. It changes no official
-scores. The operator handoff and actual independent human study remain open.
+scores. The offline export command now writes separate reviewer files and a
+private frozen roster, with explicit partial coverage and safe retry/refusal.
+Review collection, transfer and the actual independent human study remain open.
 
 ## Current state
 

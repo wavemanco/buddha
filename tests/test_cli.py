@@ -24,6 +24,99 @@ from buddha.run import prepare_run
 
 
 class CLITests(unittest.TestCase):
+    def test_source_review_export_is_keyless_and_retains_incomplete_status(self):
+        from buddha import source_review_handoff
+
+        argv = [
+            "source-review-export",
+            "--run",
+            "original",
+            "--kind",
+            "final",
+            "--report-sha256",
+            "a" * 64,
+            "--plan",
+            "plan.json",
+            "--plan-sha256",
+            "b" * 64,
+            "--out",
+            "review-output",
+            "--reviewer",
+            "reviewer-a",
+            "human",
+            "--reviewer",
+            "reviewer-b",
+            "model",
+        ]
+        for status, expected_code in (("complete", 0), ("incomplete", 3)):
+            summary = {"format": "buddha.source-review-export.v1", "status": status}
+            with (
+                self.subTest(status=status),
+                patch.object(
+                    source_review_handoff, "export_source_review", return_value=summary
+                ) as export,
+                patch("buddha.__main__._key_environment") as keys,
+                patch("http.client.HTTPSConnection") as connection,
+                redirect_stdout(io.StringIO()) as output,
+                redirect_stderr(io.StringIO()),
+            ):
+                self.assertEqual(main(argv), expected_code)
+            self.assertEqual(json.loads(output.getvalue()), summary)
+            export.assert_called_once_with(
+                Path("original"),
+                kind="final",
+                expected_report_sha256="a" * 64,
+                plan=Path("plan.json"),
+                expected_plan_sha256="b" * 64,
+                output=Path("review-output"),
+                reviewers=[
+                    {"id": "reviewer-a", "type": "human"},
+                    {"id": "reviewer-b", "type": "model"},
+                ],
+            )
+            keys.assert_not_called()
+            connection.assert_not_called()
+
+    def test_source_review_export_has_specific_refusal_and_interruption_output(self):
+        from buddha import source_review_handoff
+        from buddha.source_review import SourceReviewError
+
+        argv = [
+            "source-review-export",
+            "--run",
+            "original",
+            "--kind",
+            "improver",
+            "--report-sha256",
+            "a" * 64,
+            "--plan",
+            "plan.json",
+            "--plan-sha256",
+            "b" * 64,
+            "--out",
+            "review-output",
+            "--reviewer",
+            "reviewer-a",
+            "human",
+        ]
+        for error, code, reason in (
+            (SourceReviewError("review output conflict"), 2, "refused"),
+            (KeyboardInterrupt(), 130, "interrupted"),
+        ):
+            with (
+                self.subTest(reason=reason),
+                patch.object(source_review_handoff, "export_source_review", side_effect=error),
+                redirect_stdout(io.StringIO()) as output,
+                redirect_stderr(io.StringIO()) as notices,
+            ):
+                self.assertEqual(main(argv), code)
+            record = json.loads(output.getvalue())
+            self.assertEqual(
+                (record["status"], record["stage"], record["reason"]), ("stopped", "export", reason)
+            )
+            self.assertEqual(record["output"], "review-output")
+            self.assertNotIn("reservation", notices.getvalue())
+
     def test_continuation_source_is_read_only_and_requires_no_keys(self):
         source = SimpleNamespace(
             history=SimpleNamespace(

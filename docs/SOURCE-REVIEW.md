@@ -11,9 +11,10 @@ roles, lineage, original positions, official scores and accounting stay in a
 separate private receipt. Blank and refused answers stay visible.
 
 This is the source-output review bridge in EVAL-02. Export and passive review
-import/reporting are implemented. The operator handoff, explicit transfer phase
-and actual independent human study remain open. Working review machinery does
-not establish human judgments or scientific improvement.
+import/reporting are implemented, including the offline export command below.
+A collection command, the explicit transfer phase and the actual independent
+human study remain open. Working review machinery does not establish human
+judgments or scientific improvement.
 
 ## Select the sample before generating answers
 
@@ -57,6 +58,84 @@ sample alone does not establish representative sampling, publication time or a
 reviewer's independence. The actual study must freeze its sampling and review
 protocol before execution; this implementation invents no sample-size threshold.
 
+## Export files for reviewers
+
+The operator command checks the original saved evaluation, then writes a separate
+review folder. Before trial owners are prepared, also pin the current
+`buddha/source_review_handoff.py` and `buddha/source_review_results.py` in the
+original `custody.evidence`, alongside the sample controls above. The new command
+cannot retrofit these control pins or a prospective sample into an old completed trial.
+
+Run this from the checkout containing the approved trial's pinned helpers:
+
+```powershell
+python -m buddha source-review-export --help
+```
+
+This prints the available flags once. It writes nothing, spends no API money,
+needs no keys or separate window, and can be stopped with Ctrl+C.
+
+The following is a template, not an instruction to start a study. Replace every
+path, hash and reviewer ID with the frozen study's actual values. Use `final`
+for an ordinary final evaluation or `improver` for a matched improver assessment.
+The example roster does not prescribe a sample size or authorize human review.
+Each repeated `--reviewer ID TYPE` declares one distinct reviewer; `TYPE` must
+be `human` or `model`.
+
+```powershell
+python -m buddha source-review-export `
+  --run "C:\replace\trial" `
+  --kind final `
+  --report-sha256 REPLACE_WITH_64_HEX_REPORT_HASH `
+  --plan "C:\replace\review-plan.json" `
+  --plan-sha256 REPLACE_WITH_64_HEX_PLAN_HASH `
+  --out "C:\replace\review-exports\round-01" `
+  --reviewer declared-human human `
+  --reviewer declared-model model
+```
+
+This runs once, reading saved evidence and writing review files. It spends no API
+money, needs no keys and runs in the same window. Integrity checks can take time.
+Press Ctrl+C to stop; original evidence and any unfinished output are retained.
+
+The output's parent folder must already exist. Use an absolute, plain, resolved
+path without `..`, links or aliases, separate from the original trial, retained
+validation/development trees, selected components and control files. The command
+creates the output folder; it does not create missing parent folders.
+
+| File | Who receives it |
+| --- | --- |
+| `reviewer/pack.json` | Reviewers: tasks, masked IDs, every complete literal answer and the equivalence rule. |
+| `reviewer/response-template.json` | Reviewers: a blank form to fill in and return separately. |
+| `reviewer/review.md` | Reviewers: instructions and the task-quality rubric. |
+| `private/materialization.json` | Coordinator only: source mappings, availability, provenance and original accounting. |
+| `private/round.json` | Coordinator only: exact sample hashes and the declared reviewer roster. |
+| `complete.json` | Coordinator only: final publication marker and artifact hashes, written last. |
+
+Distribute only the `reviewer` folder, manually. Keep the private plan, round,
+source mappings and official scores away from reviewers. This command sends no
+messages and performs no automated distribution or collection. Keep the emitted
+round fixed before distribution; hashes and declared reviewer types alone do not
+prove publication time, identity or independence.
+
+The terminal prints a compact status and file references, not the private payload
+or answer texts. `publication_status: complete` means the declared output files
+were saved and checked. The separate `status` can still be `incomplete` when
+selected source sets are unavailable. If all sets are unavailable, only the two
+private files and `complete.json` are written; there is no reviewer folder.
+
+An unmarked, byte-identical prefix can resume with the same invocation. Conflicting
+bytes, unknown files or crash leftovers are refused and retained; nothing is
+automatically overwritten or cleaned up. A valid existing marker triggers a
+read-only check of the entire expected inventory. A missing published artifact
+is refused rather than refilled. JSON uses the existing review encoding,
+including UTF-8 text and its final newline; literal answer whitespace is preserved.
+
+Exit codes are `0` for a complete source sample, `3` for a checked incomplete
+sample, `2` for refusal and `130` for interruption. A marker alone does not make
+a stopped invocation pass. Distribute only after the command reports a checked
+publication and reviewer files exist.
+
 ## Developer interface and files
 
 `buddha.source_review.materialize_source_review` takes the original trial root,
@@ -76,6 +155,18 @@ from reviewers. Serialize reviewer JSON with `encode_review`, which preserves
 the historical pack encoding, including its final newline. Hashing compact JSON
 instead would produce a different pack identity and fail the existing submission
 validator. The template deliberately fails validation until someone fills it in.
+
+`buddha.source_review_handoff.export_source_review` is the writing interface.
+It takes `directory: Path`, `kind`, `expected_report_sha256`, `plan: Path`,
+`expected_plan_sha256`, `output: Path` and an explicit `reviewers` list whose
+entries contain exactly `id` and `type`. It returns the compact
+`buddha.source-review-export.v1` summary: source `status`, `publication_status`,
+output path, `complete` and `round_plan` path/hash references, and
+`reviewer_directory` (or `null`). It retains the original checked observation
+through serialization and publication, checks inputs again before the final
+marker and returns only after checking both source evidence and output inventory.
+The filesystem, retry, availability and original-helper requirements are the same
+as for the command above. Calling this API makes no provider request.
 
 The exporter reconstructs the complete original report through its existing
 checked reader, then keeps that observation alive while extracting selected C1.
@@ -97,8 +188,10 @@ afterward. The historical `meas01-pack.py` helper stays byte-for-byte unchanged;
 the runtime importer carries its review schema, checked against the old validator.
 It does not run that documentation script or selected agent source.
 
-After export and before distributing the packet, freeze a separate review-round
-JSON file with these exact fields:
+The operator command writes `private/round.json` with the explicit roster supplied
+on the command line. Keep it fixed before distributing the packet. If using the
+read-only materializer directly, freeze a separate review-round JSON file after
+export and before distribution with these exact fields:
 
 | Field | Meaning |
 | --- | --- |
@@ -185,5 +278,6 @@ preparing and repeatedly checking original evaluation evidence. This is a whole
 test-cohort duration, not the time for one import; later runs can differ. Press
 Ctrl+C to stop; interruption is not a pass.
 
-There is no live-run or reviewer-distribution command in this slice. The operator
-handoff will document exact commands when the actual study protocol is ready.
+There is no automated reviewer distribution or collection command in this slice.
+A collection CLI is a later step; the passive developer importer above is
+available now. The actual study still needs its own frozen protocol and evidence.
