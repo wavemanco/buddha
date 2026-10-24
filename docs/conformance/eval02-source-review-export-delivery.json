@@ -1,0 +1,184 @@
+{
+  "base_commit": "13974ce16ab92c23e69de038e128fd8696ac5f7d",
+  "behavior": [
+    "Prospective whole-set coordinates and original plan/protocol/material/helper controls; no retrofitted historical sample.",
+    "Current complete final and improver-assessment reports reconstruct through original checked readers, retaining their observations through literal C1 extraction and final finish.",
+    "Logical roles/indexes remain distinct for equal source code and absent descendants; typed task identities, all positions, Unicode, whitespace and blanks stay literal.",
+    "Existing meas01 pack/submission schemas and exact historical byte encoding; original helper remains unchanged. Public packet masks roles, scores, lineage, positions and accounting.",
+    "Explicit incomplete coverage/reasons for missing descendants; all-unavailable returns no reviewer artifacts, preserving every planned missing coordinate privately."
+  ],
+  "date": "2026-10-24",
+  "evidence": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-api-red-v1.json",
+      "sha256": "083235ad9ae899a1d7cb203b01852159a91cff623870c834c78d325ccf561dfc"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-api-red-v1.test.py.txt",
+      "sha256": "ba03285cb27fe4b3de618837b9162c6ce720726aa89f269bc72d55b3b5133359"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-export-check-v1.json",
+      "sha256": "53f55e7ac818f85aa618d008c6ccf5ca0f4e19bd23cf3d72bc70129bb96c2b44"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-export-check-v1.log",
+      "sha256": "dbea07377bb72d6fd4b8fbd0fdb8f2a1fe6427fe19ba99245e03c6cdea643daa"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-compatibility-check-v1.json",
+      "sha256": "5d310f800044411cdd2553ef9407189f4fd3d0ce8c7eef23e6ded772fe815a72"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-compatibility-check-v1.log",
+      "sha256": "490ed9f95a987c448db0fd6bf64624fe4f76dcdf3b9d0522ae94cbb9936ddc26"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-selectors-check-v1.json",
+      "sha256": "b503cd8a4e2bc63bf7dc46bedb4be0d54f11c72a50f17d441a1b6c9b717a7396"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-selectors-check-v1.log",
+      "sha256": "75e5762ef620d645d0814326704aab6f505c0389d5d825ceb8951ba3528e98a5"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-quality-v1.json",
+      "sha256": "512f79d93e31277abd2a40fc1fa9934dd24cb46ede04949744328f4686829418"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-quality-v1.inputs.json",
+      "sha256": "7f0c92d619c45d137d0b221a21a959cc8c4c28c96002afd26e30d913400e0c6e"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-quality-v1.log",
+      "sha256": "37d1266aa0f500bd097604554bfed9afa8adf073cd8ca05716ad91910a1741f9"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-test-extension-v1.json",
+      "sha256": "4af7a4129fb1037daa2107d67aac57f31ae2a140cb037c9263e375f57c8f4674"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-export-check-v1.test.py.txt",
+      "sha256": "441ad38482c0d1e78115ef616c5e5921976f639b6eaae16cb7b7472b5d76bb57"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-plan-update-v1.json",
+      "sha256": "e11565b693f3fa876edbce226d6dfc35a0d175378ebf597efa32121891ded772"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-plan-update-v2.json",
+      "sha256": "bbb2472f6d643462310ed991baf10026d6a5f2d1a83945f69904f180535bdc58"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-doc-check-v2.json",
+      "sha256": "b6024ad5fd618111d6463d453c68d2bb43383e1311ea331224e1b46eed7075fb"
+    }
+  ],
+  "format": "buddha.source-review-export-delivery.v1",
+  "implementation_files": {
+    "buddha/final_evaluation.py": "9429adfed6c7225df5bd505ff2b87b8c180876ecb55bfccbf7a3f2db587fdf54",
+    "buddha/improver_assessment.py": "3f5ad50116e23aba645184a473f2c5a59b6b9d364091e4c0f488ed8798ac3e40",
+    "buddha/source_review.py": "90c043d469de6b0b42faf2bcf3638c480c801f26dfb504086a8cd5a09a909ac5",
+    "tests/test_source_review.py": "9e1fdb77a69b40ed852c0ac20e8f973ad38e17e51c44ea2a0e3fed46a6e29c09"
+  },
+  "independent_review": {
+    "files": {
+      "buddha/final_evaluation.py": "9429adfed6c7225df5bd505ff2b87b8c180876ecb55bfccbf7a3f2db587fdf54",
+      "buddha/improver_assessment.py": "3f5ad50116e23aba645184a473f2c5a59b6b9d364091e4c0f488ed8798ac3e40",
+      "buddha/source_review.py": "90c043d469de6b0b42faf2bcf3638c480c801f26dfb504086a8cd5a09a909ac5"
+    },
+    "result": "No remaining static blocker at the exact three-file cut after the recorded corrections.",
+    "scope": "Source-only review of all three production files and existing custody paths; reviewer authored none of them. No application imports, tests, SQL or writes by reviewer."
+  },
+  "limits": [
+    "Supplied workers/replies and synthetic review material, not fresh model-authored source, official judging or human judgment.",
+    "New composed cases cover ordinary-final full text/equal-code roles and genuine improver null descendants. Valid improver-descendant review export is source-traced, not separately exercised by this cohort.",
+    "Whole-test runtime includes fixture preparation and multiple reads, not export latency or a performance comparison.",
+    "Trusted test/audit guards are scoped controls, not a general hostile-Python confinement proof.",
+    "Focused cohorts and quality checks do not establish the full current-head suite or hosted CI.",
+    "Human/model identity declarations, masking and a pinned sample do not prove independence, representative sampling or prior publication time."
+  ],
+  "local_checks": [
+    {
+      "denied_events": [],
+      "elapsed_seconds": 884.0199561000336,
+      "errors": 0,
+      "failures": 0,
+      "skips": 0,
+      "source_inventory_unchanged": true,
+      "successful": true,
+      "tests_run": 2
+    },
+    {
+      "denied_events": [],
+      "elapsed_seconds": 658.0410131000681,
+      "errors": 0,
+      "failures": 0,
+      "skips": 0,
+      "source_inventory_unchanged": true,
+      "successful": true,
+      "tests_run": 20
+    },
+    {
+      "denied_events": [],
+      "elapsed_seconds": 0.23118530004285276,
+      "errors": 0,
+      "failures": 0,
+      "skips": 0,
+      "source_inventory_unchanged": true,
+      "successful": true,
+      "tests_run": 1
+    }
+  ],
+  "new_unique_test_methods": 3,
+  "pre_execution_review_corrections": [
+    "Exact legacy encoding for pack identity.",
+    "Required original pin for reused policy_panel helper.",
+    "No invalid empty review packet for all-unavailable selection.",
+    "Retain ordinary-final validation sibling capture for the extended export observation."
+  ],
+  "preservation": {
+    "legacy_helper_sha256": "6328f94c4280c29992cbdd87c205e45950406c00f6af636d4392fb7a6777e4fc",
+    "legacy_review_helper_raw_bytes_equal_to_original_base_checkout": true,
+    "new_authorization": false,
+    "official_score_change": false,
+    "original_live_handoff_changed": false,
+    "paid_calls": 0,
+    "plan": {
+      "after_sha256": "1d10cf21a0b542b206add275b693d70df2b7962590676a08b4ebeec5e388a3bf",
+      "before_sha256": "f47f6e8312f22c2eba74b8524a723c41489b8900f011816353921dc120a4a188",
+      "draft_plan_sha256": "aefc037769fb9f8c39d88383faee8c2c9ce186ca8ec7d5a45a25beeb03c14cbb",
+      "eval02_original_scientific_acceptance_tail_preserved": true,
+      "format": "buddha.source-review-plan-update.v1",
+      "formatting_correction": "Remove added blank line between revision109 and110 so the appended row stays in its Markdown table.",
+      "old_raw_revision_rows_preserved": 109,
+      "primary_mirror_equal": true,
+      "prior_update": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-plan-update-v1.json",
+        "sha256": "e11565b693f3fa876edbce226d6dfc35a0d175378ebf597efa32121891ded772"
+      },
+      "unchanged_complete_main_rows": 39
+    }
+  },
+  "quality": {
+    "all_pins_unchanged": true,
+    "attempted": 7,
+    "input_count": 222,
+    "status": "pass",
+    "successful": 7
+  },
+  "remaining": "Review import/reporting, operator handoff, explicit transfer phase, frozen actual evaluation/human protocol and results. Four gates remain; SRC-02 sole Next; no new allocation or user live command.",
+  "roadmap": "EVAL-02; export part only",
+  "test_extension": {
+    "earlier_composed_method_asts_unchanged": true,
+    "only_added_method": "test_selector_boundaries_keep_whole_sets_typed_tasks_and_declared_limits",
+    "production_files_unchanged": true
+  },
+  "test_first": {
+    "behavioral_or_confinement_claim": false,
+    "errors": 1,
+    "kind": "genuine missing-module API RED before fixture/owners",
+    "tests": 1
+  },
+  "unchanged_compatibility_methods": 20
+}

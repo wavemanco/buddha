@@ -39,6 +39,11 @@ The [shared generation check](docs/RECONSTRUCTION-COST.md#sharing-one-checked-ge
 now removes a duplicated reconstruction in screen, validation and launch readers,
 while preserving original source bindings and complete integrity checks.
 
+The [source-output review bridge](docs/SOURCE-REVIEW.md) prepares complete,
+prospectively selected final answer sets in the existing blinded reviewer format.
+Original scores and identities stay in a private receipt. Review import and the
+actual independent human study remain open.
+
 ## Current state
 
 The bounded **MEAS-01/MEAS-02 measurement audit is complete**. The

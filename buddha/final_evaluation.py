@@ -401,7 +401,8 @@ def _validation_pool(
                 eligible[arm["agent_sha256"]] = arm
         path = validation["directory"] / "validation" / str(occasion["ordinal"]) / "result.json"
         controls[path] = file_hash(path)
-    reader.capture.finish()
+    reader.finish()
+    state["validation_capture"] = reader.capture
     return eligible, controls
 
 
@@ -607,6 +608,8 @@ def _census(
     reader = NativeEvidence(state["directory"], authority, error_type=FinalEvaluationError)
     if state.get("development_capture") is not None:
         reader.retain_capture(state["development_capture"])
+    if state.get("validation_capture") is not None:
+        reader.retain_capture(state["validation_capture"])
     owners, positions, touched = [], set(), set()
     stages = len(state["record"]["stages"])
     pattern = re.compile(
@@ -1003,7 +1006,10 @@ def _result(
 
 
 @_checked
-def inspect_final_evaluation(directory: Path, *, expected_report_sha256: str) -> dict[str, object]:
+def _read_final_evaluation(
+    directory: Path, *, expected_report_sha256: str
+) -> tuple[dict[str, object], dict[str, Any], dict[str, Any], NativeEvidence]:
+    """Retain the checked observation for a passive downstream consumer."""
     state = _state(directory)
     occasion, pins = _schedule(state)
     reader, current = _census(state, occasion, pins)
@@ -1015,8 +1021,12 @@ def inspect_final_evaluation(directory: Path, *, expected_report_sha256: str) ->
     )
     if raw != _json(expected | {"authorization": saved["authorization"]}):
         raise FinalEvaluationError("saved final publication contradicts complete original evidence")
-    reader.capture.finish()
-    return saved
+    reader.finish()
+    return saved, state, occasion, reader
+
+
+def inspect_final_evaluation(directory: Path, *, expected_report_sha256: str) -> dict[str, object]:
+    return _read_final_evaluation(directory, expected_report_sha256=expected_report_sha256)[0]
 
 
 def _restore_grid(directory: Path) -> tuple[dict[str, Any], dict[str, Any], dict[Path, str]]:
