@@ -158,14 +158,14 @@ def _template(packet: dict[str, Any]) -> dict[str, object]:
     }
 
 
-def materialize_source_review(
+def _read_source_review(
     directory: Path,
     *,
     kind: str,
     expected_report_sha256: str,
     plan: Path,
     expected_plan_sha256: str,
-) -> dict[str, object]:
+) -> tuple[dict[str, Any], NativeEvidence, dict[Path, str]]:
     """Return reviewer pack/template/instructions and a separate private receipt.
 
     Before trial preparation, bind the plan, protocol, materials and this module
@@ -368,7 +368,7 @@ def materialize_source_review(
         }
         _json(result)
         reader.finish()
-        return result
+        return result, reader, controls
     except (
         ReleaseError,
         ValueError,
@@ -388,3 +388,21 @@ def materialize_source_review(
         raise SourceReviewError(
             "invalid prospective source review or original final evidence"
         ) from None
+
+
+def materialize_source_review(
+    directory: Path,
+    *,
+    kind: str,
+    expected_report_sha256: str,
+    plan: Path,
+    expected_plan_sha256: str,
+) -> dict[str, object]:
+    """Return a checked reviewer pack and separate private receipt; write nothing."""
+    return _read_source_review(
+        directory,
+        kind=kind,
+        expected_report_sha256=expected_report_sha256,
+        plan=plan,
+        expected_plan_sha256=expected_plan_sha256,
+    )[0]
