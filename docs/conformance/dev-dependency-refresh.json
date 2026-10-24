@@ -1,0 +1,335 @@
+{
+  "baseline": {
+    "affected_packages": 6,
+    "declared_and_audited_pins": 39,
+    "distinct_advisory_identities": 16,
+    "duplicate_rows": 9,
+    "fresh_cache_exit_code": 1,
+    "host_exploitability_established": false,
+    "primary_advisories_checked": 16,
+    "raw_advisory_rows": 25
+  },
+  "basis_commit": "7e40fcc065e9d0b6a4e25c08db6acdf77bdf315d",
+  "compatibility": {
+    "active_linux_edges": 37,
+    "active_windows_edges": 38,
+    "actual_installed_packages": 39,
+    "additional_closure_changes": 0,
+    "certifi_qualification": "Existing development-only MPL-2.0 exception retained.26.10.18 removes affected roots;26.10.19 restores unaffected roots and meets current advisory metadata. No new application copyleft dependency.",
+    "downloaded_wheels": 39,
+    "filelock_major_qualification": "MIT unchanged; Python floor3.11. SoftReadWriteLock disk-protocol change is separate from CacheControl default FileLock. Successful cached audits are bounded compatibility evidence, not broad filelock API certification.",
+    "install_seconds": 27.089491700055078,
+    "installation_target": "Fresh isolated runs/checks/dev-tools-20261024-v1 only; no global package upgrade requested.",
+    "installed_platform": "Windows CPython3.13.12",
+    "inventory_exactly_matches_all_pins": true,
+    "metadata_pin_count": 39,
+    "pip_check": "passed",
+    "pip_version_spelling": "26.2/26.2.0 PyPI bytes match; canonical26.2 selected.",
+    "source_distributions_built": 0,
+    "wheel_hashes_retained": true
+  },
+  "current_source_handoff": "User approval25USD/512attempts with explicit partial results persists. All44 selected helpers match eb71e3b. Windows job120852280737 remains in progress at15:44:34UTC; finish that exact hosted gate and existing final funding/input/account path before releasing the local command. No additional approval or new launcher mechanism is required.",
+  "evidence": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\dev-tools-original-advisory-review-v1.json",
+      "sha256": "796c1ddcc7a887fc1a5aa36d515b198290b782409aedb9633d4d61dda2dac142"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\dev-tools-original-audit-v1.json",
+      "sha256": "cad00ef260a0cd7ac849247247bc62032eaf6e9b5dcbbf5fecfc6532c585e0f3"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\dev-tools-metadata-prerequisite-v1.json",
+      "sha256": "06a9554aa942b4f664ac9021eb44dfaf1b44bc89d46bf11dd9e0fb29c3f25537"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\dev-tools-install-v1.result.json",
+      "sha256": "0ac3b29dc6754a28827d03333d43a3cc488fc18a37825c06d0431b3753d57085"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\dev-tools-install-v1.report.json",
+      "sha256": "1f6aad8a38e8d8ccc05f0486290734195bbcade68f97a61289607b708ea87c16"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\dev-tools-checks-v1.json",
+      "sha256": "3ccfdb7cf7f1ef272bca719868af24ee856c7640c1a22572a3b02a999c8628b0"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\dev-tools-remediation-verification-v2.json",
+      "sha256": "f743ad18d3ec44106a66e827290975ebbdb6d603f1e4f5ec4e50fc8f137bba36"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\dev-dependency-refresh-selected-ci-v1.json",
+      "sha256": "34607d860cab72a7244b2a2062053f10daddd11cc69217fe9184b2bb0364c0df"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-approved-handoff-source-trace-v1.json",
+      "sha256": "04ac2710ce4d692c2808a4bb9bcb7d338772424d6594e7a0fb95e88f21b46722"
+    }
+  ],
+  "format": "buddha.dev-dependency-refresh-delivery.v1",
+  "implemented": "Change exactly6 development versions, retain39 package names and their closure, add a strict development-list audit immediately after tool installation before the unchanged full suite, and document named-list versus installed-inventory scope.",
+  "limits": [
+    "Known advisory snapshots do not prove absence of every vulnerability or host exploitability.",
+    "Actual installation/tool execution is Windows-only; Linux compatibility is static metadata pending hosted execution.",
+    "Separate official evaluator dependencies, provider settings, agent experiment and official scoring are unchanged and not cleared by this audit.",
+    "No scientific gate closes or improvement claim follows from this maintenance."
+  ],
+  "plan_item": "ENG-DEV-DEPS-01",
+  "preservation": {
+    "application_agents_tests_native_profiles_unchanged": true,
+    "future_paid_trees_absent": true,
+    "merged": false,
+    "new_authority_or_owner_created": false,
+    "open_scientific_gates": [
+      "SRC-02",
+      "SRC-03",
+      "IMP-01",
+      "EVAL-02"
+    ],
+    "provider_calls": 0,
+    "runtime_requirements_unchanged": true,
+    "sole_next": "SRC-02",
+    "src02_source_map_pins_unchanged": 169,
+    "unfunded_drafts_v2_v3_unchanged": true
+  },
+  "primary_advisories": [
+    {
+      "ids": [
+        "GHSA-6q48-6c7w-9gw2",
+        "PYSEC-2026-4320"
+      ],
+      "original_pin_in_affected_range": true,
+      "package": "certifi",
+      "primary_url": "https://github.com/certifi/python-certifi/security/advisories/GHSA-6q48-6c7w-9gw2"
+    },
+    {
+      "ids": [
+        "CVE-2026-112940",
+        "GHSA-v4x8-3wr5-3wq8"
+      ],
+      "original_pin_in_affected_range": true,
+      "package": "filelock",
+      "primary_url": "https://github.com/tox-dev/filelock/security/advisories/GHSA-v4x8-3wr5-3wq8"
+    },
+    {
+      "ids": [
+        "CVE-2026-112913",
+        "GHSA-9vhv-jxww-xfm5"
+      ],
+      "original_pin_in_affected_range": true,
+      "package": "filelock",
+      "primary_url": "https://github.com/tox-dev/filelock/security/advisories/GHSA-9vhv-jxww-xfm5"
+    },
+    {
+      "ids": [
+        "CVE-2026-112907",
+        "GHSA-567q-5qvw-pf92"
+      ],
+      "original_pin_in_affected_range": true,
+      "package": "filelock",
+      "primary_url": "https://github.com/tox-dev/filelock/security/advisories/GHSA-567q-5qvw-pf92"
+    },
+    {
+      "ids": [
+        "CVE-2026-45409",
+        "GHSA-65pc-fj4g-8rjx",
+        "PYSEC-2026-215"
+      ],
+      "original_pin_in_affected_range": true,
+      "package": "idna",
+      "primary_url": "https://github.com/kjd/idna/security/advisories/GHSA-65pc-fj4g-8rjx"
+    },
+    {
+      "ids": [
+        "CVE-2026-1703",
+        "GHSA-6vgw-5pg2-w6jp",
+        "PYSEC-2026-1796"
+      ],
+      "original_pin_in_affected_range": true,
+      "package": "pip",
+      "primary_url": "https://cveawg.mitre.org/api/cve/CVE-2026-1703"
+    },
+    {
+      "ids": [
+        "CVE-2026-3219",
+        "GHSA-58qw-9mgm-455v",
+        "PYSEC-2026-2875"
+      ],
+      "original_pin_in_affected_range": true,
+      "package": "pip",
+      "primary_url": "https://cveawg.mitre.org/api/cve/CVE-2026-3219"
+    },
+    {
+      "ids": [
+        "CVE-2026-6357",
+        "GHSA-jp4c-xjxw-mgf9",
+        "PYSEC-2026-2876"
+      ],
+      "original_pin_in_affected_range": true,
+      "package": "pip",
+      "primary_url": "https://cveawg.mitre.org/api/cve/CVE-2026-6357"
+    },
+    {
+      "ids": [
+        "CVE-2026-8643",
+        "GHSA-wf93-45jw-7689",
+        "PYSEC-2026-196"
+      ],
+      "original_pin_in_affected_range": true,
+      "package": "pip",
+      "primary_url": "https://cveawg.mitre.org/api/cve/CVE-2026-8643"
+    },
+    {
+      "ids": [
+        "CVE-2026-13346",
+        "GHSA-qwm4-qh6w-59xr",
+        "PYSEC-2026-3721"
+      ],
+      "original_pin_in_affected_range": true,
+      "package": "pip",
+      "primary_url": "https://cveawg.mitre.org/api/cve/CVE-2026-13346"
+    },
+    {
+      "ids": [
+        "CVE-2026-4539",
+        "GHSA-5239-wwwm-4pmq",
+        "PYSEC-2026-2987"
+      ],
+      "original_pin_in_affected_range": true,
+      "package": "pygments",
+      "primary_url": "https://cveawg.mitre.org/api/cve/CVE-2026-4539"
+    },
+    {
+      "ids": [
+        "CVE-2026-44431",
+        "GHSA-qccp-gfcp-xxvc",
+        "PYSEC-2026-141"
+      ],
+      "original_pin_in_affected_range": true,
+      "package": "urllib3",
+      "primary_url": "https://github.com/urllib3/urllib3/security/advisories/GHSA-qccp-gfcp-xxvc"
+    },
+    {
+      "ids": [
+        "CVE-2026-44432",
+        "GHSA-mf9v-mfxr-j63j",
+        "PYSEC-2026-142"
+      ],
+      "original_pin_in_affected_range": true,
+      "package": "urllib3",
+      "primary_url": "https://github.com/urllib3/urllib3/security/advisories/GHSA-mf9v-mfxr-j63j"
+    },
+    {
+      "ids": [
+        "CVE-2026-97689",
+        "GHSA-vxq7-64xx-v4gw",
+        "PYSEC-2026-4177"
+      ],
+      "original_pin_in_affected_range": true,
+      "package": "urllib3",
+      "primary_url": "https://github.com/urllib3/urllib3/security/advisories/GHSA-vxq7-64xx-v4gw"
+    },
+    {
+      "ids": [
+        "CVE-2026-97688",
+        "GHSA-gh4c-6fx4-qh6g",
+        "PYSEC-2026-4176"
+      ],
+      "original_pin_in_affected_range": true,
+      "package": "urllib3",
+      "primary_url": "https://github.com/urllib3/urllib3/security/advisories/GHSA-gh4c-6fx4-qh6g"
+    },
+    {
+      "ids": [
+        "CVE-2026-97687",
+        "GHSA-8988-9cw3-xx77",
+        "PYSEC-2026-4175"
+      ],
+      "original_pin_in_affected_range": true,
+      "package": "urllib3",
+      "primary_url": "https://github.com/urllib3/urllib3/security/advisories/GHSA-8988-9cw3-xx77"
+    }
+  ],
+  "problem": "CI audited only the empty runtime list. A separate39-pin development audit reports25 advisory rows in6 packages; primary review identifies16 distinct advisory identities. Fresh-cache reproduction rules out the original cache warning as an explanation for the findings.",
+  "recorded_at_utc": "2026-10-24T15:49:56.423032+00:00",
+  "replacements": [
+    {
+      "after": "2026.10.19",
+      "before": "2026.1.4",
+      "license": "MPL-2.0",
+      "metadata_sha256": "ff912753725b147f8da6250d871b07cc801030bdee0b6e3ce1354ff8ddc6ed43",
+      "metadata_url": "https://pypi.org/pypi/certifi/2026.10.19/json",
+      "package": "certifi",
+      "requires_python": ">=3.7"
+    },
+    {
+      "after": "4.2.1",
+      "before": "3.29.4",
+      "license": "MIT",
+      "metadata_sha256": "26b5c358e98a3812b9e561b224f617d396d8fdb40c67b9644d8bde68d6ae8547",
+      "metadata_url": "https://pypi.org/pypi/filelock/4.2.1/json",
+      "package": "filelock",
+      "requires_python": ">=3.11"
+    },
+    {
+      "after": "3.15",
+      "before": "3.11",
+      "license": "BSD-3-Clause",
+      "metadata_sha256": "e939f2f3e7e1b302d6b8ade5553b713bf6ff3409ecb3fe0b98ab2eaf54965a60",
+      "metadata_url": "https://pypi.org/pypi/idna/3.15/json",
+      "package": "idna",
+      "requires_python": ">=3.8"
+    },
+    {
+      "after": "26.2",
+      "before": "25.3",
+      "license": "MIT",
+      "metadata_sha256": "305009445b7e5d0636dbfdcfec4f944d31e5ad08cf26c2c303873889158412ce",
+      "metadata_url": "https://pypi.org/pypi/pip/26.2/json",
+      "package": "pip",
+      "requires_python": ">=3.10"
+    },
+    {
+      "after": "2.20.0",
+      "before": "2.19.2",
+      "license": "BSD-2-Clause",
+      "metadata_sha256": "3af5974de77ad03c694dcae44382c922da63a2b3ae83153f12f5024465c813a1",
+      "metadata_url": "https://pypi.org/pypi/Pygments/2.20.0/json",
+      "package": "Pygments",
+      "requires_python": ">=3.9"
+    },
+    {
+      "after": "2.8.0",
+      "before": "2.6.3",
+      "license": "MIT",
+      "metadata_sha256": "5315e7401db3cacccd0c2ce5daf81f752a9cc3614b18c37f2b79930b7159ce2f",
+      "metadata_url": "https://pypi.org/pypi/urllib3/2.8.0/json",
+      "package": "urllib3",
+      "requires_python": ">=3.10"
+    }
+  ],
+  "verification": {
+    "all_isolated_commands_passed": 12,
+    "assembly_history": "Toold9f285 stopped before delivery publication because CNA records have no optional primary_api_url. All primary_url fields are present; only that optional projection was removed. Three source copies were preserved and rechecked, not overwritten.",
+    "ci_shape": "Removing exactly the added two-line audit step reproduces original workflow bytes. Both OS jobs, pinned actions, fail-fast:false, full verbose suite and all prior checks remain unchanged.",
+    "configured_quality": "Lint, formatting, strict types, source security, runtime audit and compilation pass in the fresh environment.",
+    "declared_development_audit": {
+      "known_advisory_rows": 0,
+      "packages": 39,
+      "skipped": 0
+    },
+    "existing_analyzer_tests": 10,
+    "existing_rule_tests": 13,
+    "external_verifier_history": "Toolf23166 expectedCRLF but both CI files areLF; diagnostic2ee792 and corrected exactLF verifier425e7b pass without product changes or install/audit reruns.",
+    "full_suite_at_this_cut": "Not repeated for manifest/workflow/docs maintenance; exact-head hosted CI remains pending, with no hosted pass claimed.",
+    "installed_inventory_audit": {
+      "known_advisory_rows": 0,
+      "packages": 39,
+      "skipped": 0
+    },
+    "installed_scope": "Separate actual inventory matches all39 pins. Auditing a file alone does not inventory installed software.",
+    "new_ci_command": "python -m pip_audit --disable-pip --no-deps --strict -r requirements-dev.txt",
+    "new_command_function": "Runs once in the current window; checks versions named in the file against advisory metadata, refuses skipped packages, makes no package changes or model calls, may access the advisory service; Ctrl+C stops it."
+  }
+}

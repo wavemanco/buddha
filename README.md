@@ -32,10 +32,10 @@ corrects the stale finite-replay read count exposed by hosted CI. Sixteen relate
 checks and seven quality commands pass locally; executing code and frozen inputs
 are unchanged. Exact PR #116's Ubuntu job now passes all 1,804 tests (zero
 failures, zero errors and five skips) and every configured check. Its Windows job
-and both jobs for PR #117/#118 remain pending at the October 24, 2026
-13:40:26 UTC checkpoint.
-Final launch/input/account checks and a new allocation remain required; the
-proposed $25/512 attempts are unallocated and no live command is available.
+is still running at the October 24, 2026 15:44:34 UTC checkpoint.
+The user approved the separate $25/512-attempt current-source demonstration,
+including explicit partial results. Funded handoff preparation and final
+launch/input/account checks remain pending; no live command is available yet.
 A negative or unavailable observation leaves an explicit partial result.
 This engineering progress closes no scientific gate.
 
@@ -424,6 +424,7 @@ python -m ruff format --check buddha tests agents
 python -m mypy --strict buddha agents
 python -m bandit -r buddha agents
 python -m pip_audit --no-deps -r requirements.txt
+python -m pip_audit --disable-pip --no-deps --strict -r requirements-dev.txt
 python -m compileall -q buddha tests agents
 ```
 
@@ -432,8 +433,12 @@ runs the full portable suite with temporary fixtures, prints each test name and
 lists the 30 slowest test durations; these output options do not select or skip
 tests. Ruff checks style and formatting;
 Mypy checks types; Bandit checks common source-security mistakes; `pip_audit`
-checks the core dependency list for known advisories and may access its advisory
-service; `compileall` checks Python compilation and writes local bytecode caches.
+checks the runtime and development dependency lists for known advisories and may
+access its advisory service. The development check covers the pinned tools and
+their dependencies, refuses skipped packages and makes no package changes;
+`compileall` checks Python compilation and writes local bytecode caches.
+The audits check versions named in the files, rather than inventorying or
+updating packages already installed on your computer.
 Ctrl+C stops a foreground check. Real-container proofs are separate optional
 checks documented in their guides; the core audit does not clear the larger
 native evaluator environment.
@@ -445,3 +450,8 @@ main-push jobs check `main`. Verbose names show test progress, and the duration
 summary helps identify slow cases without reducing coverage.
 
 Both jobs use Python 3.13 and the pinned tools in `requirements-dev.txt`; application runtime dependencies remain empty. Development auditing includes certifi (MPL-2.0), recorded in the recovery contract, without adding it to the application runtime. Local verification is reported separately from hosted CI. The user authorizes continued implementation with a summary and PR per slice, pausing for live execution or a required decision. Genuine source self-modification requires the separately gated source-evolution work. HyperAgents contributes conceptual inspiration only; its source is excluded. Earlier dated handoffs describing absent Git/CI are historical.
+
+CI checks development dependencies immediately after installing the tools,
+before starting the long test suite. The [development-tool refresh](docs/conformance/dev-dependency-refresh.json)
+records the affected pins, patched versions, licenses and isolated-environment
+checks. These checks do not audit the separate official evaluator environment.
