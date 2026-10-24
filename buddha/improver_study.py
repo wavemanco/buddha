@@ -340,8 +340,12 @@ def _intrinsic_inputs(
     declaration: Path,
     expected_sha256: str,
     runtime: str,
-) -> tuple[dict[Path, str], list[bytes]]:
+    *,
+    active: bool = True,
+) -> tuple[dict[Path, str], list[bytes], set[Path]]:
     """One original input closure for development preparation and final preflight."""
+    if type(active) is not bool:
+        raise ImproverStudyError("input reconstruction needs an explicit activity mode")
     controls = {
         _path_value(path): _digest(digest) for path, digest in record["consumer_sources"].items()
     }
@@ -351,40 +355,47 @@ def _intrinsic_inputs(
     _bind_controls(controls, {declaration: _digest(expected_sha256)})
     for path in shared._sources():
         _bind_controls(controls, {path: file_hash(path)})
+    consumed, producers = set(controls), set()
     sources: list[bytes] = []
     for screen in screens:
         generation = _object(screen.to_record()["generation"])
         path = _path_value(_object(generation["roots"])["agent"]) / "candidate.py"
-        source_raw = pipeline._read(
-            path,
+        digest = _digest(
             _object(_object(_object(generation["selection"])["components"])["agent"])[
                 "candidate.py"
-            ],
+            ]
         )
-        if len(source_raw) > MAX_SOURCE_BYTES:
-            raise ImproverStudyError("starting parent exceeds its literal source ceiling")
-        source_raw.decode("utf-8")
+        if active:
+            source_raw = pipeline._read(path, digest)
+            if len(source_raw) > MAX_SOURCE_BYTES:
+                raise ImproverStudyError("starting parent exceeds its literal source ceiling")
+            source_raw.decode("utf-8")
+            sources.append(source_raw)
+        runtime_path = _path_value(_object(generation["runtime"])["path"])
+        consumed.add(runtime_path)
+        producers.add(path)
         _bind_controls(
             controls,
             {
-                path: hashlib.sha256(source_raw).hexdigest(),
-                _path_value(_object(generation["runtime"])["path"]): runtime,
+                path: digest,
+                runtime_path: runtime,
             },
         )
-        sources.append(source_raw)
     for actor in record["improvers"]:
         path = _path_value(actor["roots"]["agent"]) / actor["entrypoint"]
-        raw_actor = pipeline._read(
-            path,
+        digest = _digest(
             _object(_object(_object(actor["selection"])["components"])["agent"])[
                 actor["entrypoint"]
             ],
         )
-        if len(raw_actor) > MAX_SOURCE_BYTES:
-            raise ImproverStudyError("frozen improver exceeds its literal source ceiling")
-        raw_actor.decode("utf-8")
-        _bind_controls(controls, {path: hashlib.sha256(raw_actor).hexdigest()})
-    return controls, sources
+        if active:
+            raw_actor = pipeline._read(path, digest)
+            if len(raw_actor) > MAX_SOURCE_BYTES:
+                raise ImproverStudyError("frozen improver exceeds its literal source ceiling")
+            raw_actor.decode("utf-8")
+        producers.add(path)
+        _bind_controls(controls, {path: digest})
+    return controls, sources, producers - consumed
 
 
 @_checked
@@ -416,7 +427,7 @@ def prepare_improver_study(
     limits = record["limits"]["study"]
     if any(cast(int, terms[key]) < limits[key] for key in ("budget_microusd", "max_calls")):
         raise ImproverStudyError("original authority cannot cover the complete declared grid")
-    controls, sources = _intrinsic_inputs(record, screens, declaration, expected_sha256, runtime)
+    controls, sources, _ = _intrinsic_inputs(record, screens, declaration, expected_sha256, runtime)
     if input_bindings is not None:
         _bind_controls(controls, input_bindings)
     controls = trial_fence._include_controls(directory, controls)

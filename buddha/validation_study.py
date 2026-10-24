@@ -262,8 +262,12 @@ def _custody(
     return record
 
 
-def _validate_execution(record: dict[str, Any], tasks: TaskSet, runtime: str) -> None:
+def _validate_execution(
+    record: dict[str, Any], tasks: TaskSet, runtime: str, *, active: bool = True
+) -> None:
     """Shared fixed source/native contract; no phase or scientific-plan interpretation."""
+    if type(active) is not bool:
+        raise ValidationStudyError("execution validation needs an explicit activity mode")
     release = Release.from_record(tasks.to_record()["release"])
     generation = _obj(
         record["generation"],
@@ -288,7 +292,8 @@ def _validate_execution(record: dict[str, Any], tasks: TaskSet, runtime: str) ->
         or selected_source.release_sha256 != tasks.release_sha256
     ):
         raise ValidationStudyError("generation must retain the one-file source/release interface")
-    verify_selection(selected_source, roots, expected_sha256=selected_source.fingerprint())
+    if active:
+        verify_selection(selected_source, roots, expected_sha256=selected_source.fingerprint())
     candidate_generation._runtime_selection(
         generation, selected_source, roots, lambda path: pipeline._read(path, runtime), runtime
     )
@@ -322,13 +327,17 @@ def _validate_execution(record: dict[str, Any], tasks: TaskSet, runtime: str) ->
     )
     if settings["mounts"] != [["/agent", str(roots["agent"])], ["/runner", str(roots["runner"])]]:
         raise ValidationStudyError("fixed source mounts differ from selected roots")
-    executor.ContainerSpec(
+    validate_spec = executor.ContainerSpec if active else executor._validate_container_fields
+    validate_spec(
         settings["image_id"],
         settings["role"],
         (("/agent", roots["agent"]), ("/runner", roots["runner"])),
         settings["runner_entrypoint"],
         tuple(tuple(pair) for pair in settings["image_environment"]),
     )
+    if not active:
+        _root(roots["runner"])
+        file_hash(roots["runner"] / settings["runner_entrypoint"])
     executor.Limits(**_obj(settings["limits"], set(executor.Limits.__dataclass_fields__)))
     executor._local_endpoint(settings["docker_endpoint"])
     if settings["role"] != "agent" or settings["runner_entrypoint"] != "buddha/candidate_worker.py":

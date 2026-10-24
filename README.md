@@ -169,8 +169,11 @@ the recorded corrected cut. It freezes selected descendants from original
 development records, retains absent descendants and separate roles for identical
 code, and feeds verified official results to that analyzer. The actual controlled
 experiment, full/hosted verification and improved-effectiveness evidence remain
-open. A separate archival regression is checking replay after the original
-producer programs are retired.
+open. The separate archival correction passes its final retirement lifecycle,
+consumed-data alias checks and strict unfinished-work controls. A further
+valid-descendant lifecycle is still running; the
+[delivery record](docs/conformance/imp01-sealed-passive-replay-delivery.json)
+keeps each verification cut separate.
 
 Useful-diversity gains, held-out improvement and improved-improver effectiveness
 remain **not established**. The source-chain fixture uses synthetic replies and

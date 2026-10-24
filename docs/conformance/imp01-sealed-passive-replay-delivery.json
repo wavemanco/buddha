@@ -1,0 +1,266 @@
+{
+  "format": "buddha.sealed-passive-replay-delivery.v1",
+  "status": "focused_final_cut_verified_additional_compatibility_running",
+  "checked_at_utc": "2026-10-24T04:18:28.134929+00:00",
+  "base_commit": "23e7be1f7b1dc8ab06a2ff79529e191e5c1b374a",
+  "test_first_commit": "51dfa3c26d22f90c8e2ee8b14071a59b170837eb",
+  "implementation_commit": "e54877a7dd65ef4d4b4f6f2be3241725927c126b",
+  "design_sections": [
+    8,
+    9,
+    10
+  ],
+  "claim": "At the matching approved software cut, original completed sealed assessment and confirmed freeze replay tolerate retirement of external producer-only source files. Original pins, owners, retained copies and all consumed data remain required. No full-suite, hosted or scientific claim.",
+  "delivered_sources": {
+    "buddha/improver_assessment.py": "e05de4fa580e9456e4057ee8e990c1898cb078138a5e3fa23288a110212c035d",
+    "tests/test_improver_assessment.py": "68cb8f400c6b59be4ca695c79dd9e169b701fe1744dec1665e86cdb480e73ad8",
+    "buddha/executor.py": "3eccc9827ff6729fe998aea703fda14dfad9b2114a811d97808bf0c1e506c2b1",
+    "buddha/improver_study.py": "986c65aee51ba071e426eda9e73423bf393fc026e42d3e949e7e9ce3c820cb3d",
+    "buddha/validation_study.py": "bc13d4b860621cd9ddc4315a86d789c1817bbcb93aae20ed69544bb8e2fe43ea",
+    "tests/test_executor.py": "eda45993b4b6cceb5020657affdae4d3478cc4cd4a6f209dfbcdc5b73c94fc07"
+  },
+  "behavior": {
+    "genuine_original_red": {
+      "record": {
+        "path": "runs/reviews/eval01-final-design-20261023/sealed-producer-retirement-red-v1.json",
+        "sha256": "34852ebbb15d3b416167281249c464dfc37bfa2de5250c895666d3d23a4bef3f"
+      },
+      "tests": 1,
+      "failures": 0,
+      "errors": 1,
+      "elapsed_seconds": 538.3513022999978,
+      "log": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\sealed-producer-retirement-red-v1.log",
+        "sha256": "86bd8caf3e45c257c42b8a566c78fa123da78ec0b3a81dd5ed57e731070e2911"
+      },
+      "scope": "One genuine sealed assessment lifecycle with two complete final tasks and explicit null descendants at the recorded cut; memory/scratch SQLite connection paths, canonical scratch writes, no network/child process/Docker/provider or host selected-source execution. Diagnostic copies do not replace original owner evidence."
+    },
+    "original_failure": "Complete report inspection reopened the missing original I0 root in active declaration/source-screen validation. The real fixture had already proved first/unfinished work refuses before writers when those roots are absent.",
+    "final_retirement_green": {
+      "record": {
+        "path": "runs/reviews/eval01-final-design-20261023/sealed-producer-retirement-green-v3.json",
+        "sha256": "f8f11f289ff51e30cd663b55acc360659aca26c982a9c13a4132163a3f76853e"
+      },
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "elapsed_seconds": 574.1439909999026,
+      "log": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\sealed-producer-retirement-green-v3.log",
+        "sha256": "c5174257803054af6e2e96b374ec8422ec8e35e8a20f7cb82947bd82920ce9e5"
+      },
+      "scope": "One genuine sealed assessment lifecycle with two complete final tasks and explicit null descendants at the recorded cut; memory/scratch SQLite connection paths, canonical scratch writes, no network/child process/Docker/provider or host selected-source execution. Diagnostic copies do not replace original owner evidence."
+    },
+    "positive_scope": "Two original final tasks, explicit absent descendant slots, genuine interrupted original-owner continuation, retained exact original private source copies and producer-root retirement. Keyless report/freeze/repeated-freeze/completed-run replay adds no worker/send/authority/write; corrupt retained copy still refuses.",
+    "active_boundary": "Fresh preparation and unfinished final execution still require original producer files before entering the writer, work lease or any further preparation. Complete/frozen read branches return or refuse and cannot fall through into writing if evidence vanishes.",
+    "consumed_role_red": {
+      "record": {
+        "path": "runs/reviews/eval01-final-design-20261023/sealed-consumed-role-red-v1.json",
+        "sha256": "506506125d012b616858f7b3e8b7171b86099c789cf3e730cf622bb60f052f98"
+      },
+      "tests": 1,
+      "failures": 4,
+      "errors": 0,
+      "elapsed_seconds": 25.94243070005905,
+      "log": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\sealed-consumed-role-red-v1.log",
+        "sha256": "e83d59c4a617038563cb4e12e3e1ab42ce5e91a2581b20de50e31540fe738608"
+      },
+      "scope": "One genuine passive-definition method with four actual outer runtime/runner/native role aliases, including native parent spelling; no finite or final grid and no end-capture completeness claim; memory/scratch SQLite connection paths, canonical scratch writes, no network/child process/Docker/provider or host selected-source execution. Diagnostic copies do not replace original owner evidence."
+    },
+    "consumed_role_green": {
+      "record": {
+        "path": "runs/reviews/eval01-final-design-20261023/sealed-consumed-role-green-v1.json",
+        "sha256": "469d55cf57c178c5f00b1fafc6dbd0d0b704eb378cc72c3bc0d6ef2d3e652a09"
+      },
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "elapsed_seconds": 17.530602500075474,
+      "log": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\sealed-consumed-role-green-v1.log",
+        "sha256": "585dde4056a20d5040703b419cf6efeb868cfa383b8d0f780d285110ca142434"
+      },
+      "scope": "One genuine passive-definition method with four actual outer runtime/runner/native role aliases, including native parent spelling; no finite or final grid and no end-capture completeness claim; memory/scratch SQLite connection paths, canonical scratch writes, no network/child process/Docker/provider or host selected-source execution. Diagnostic copies do not replace original owner evidence."
+    },
+    "consumed_role_scope": "One method, four actual validated aliases: outer generation runtime, generation runner, native runner and native runner with accepted parent spelling. Both paths/roots resolve for classification; original control keys/hashes stay exact. This test establishes role precedence, not an independent universal capture or historical physical-alias theorem.",
+    "prospective_existing_boundaries": {
+      "record": {
+        "path": "runs/reviews/eval01-final-design-20261023/sealed-producer-boundary-green-v2.json",
+        "sha256": "df4b9c672a1b84fde60d7107ab2aa48240fb37cae22bb05696676c4ddbccfa26"
+      },
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "elapsed_seconds": 41.58440310007427,
+      "log": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\sealed-producer-boundary-green-v2.log",
+        "sha256": "c37a97fe9a2fb836cb3555eda729004ebfec2d61dace75704ac5fdb2e758fc51"
+      },
+      "scope": "Two genuine prospective source-conflict refusal and full maximum input/copy projection checks at the recorded cut; memory/scratch SQLite connection paths, canonical scratch writes, no network/child process/Docker/provider or host selected-source execution. Diagnostic copies do not replace original owner evidence."
+    },
+    "all_executor_input_and_lifecycle_checks": {
+      "record": {
+        "path": "runs/reviews/eval01-final-design-20261023/executor-passive-regressions-green-v1.json",
+        "sha256": "a649d2204b14d3a4d5883444e67cf56fa40c9d054d10bef26b194d413171439a"
+      },
+      "tests": 21,
+      "failures": 0,
+      "errors": 0,
+      "elapsed_seconds": 0.5616480000317097,
+      "log": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\executor-passive-regressions-green-v1.log",
+        "sha256": "8b4871e774750b44dfd919c37fce4308d5ccc41d234956093692933a5debc106"
+      },
+      "scope": "All21 executor input and lifecycle checks using fake Docker at the recorded cut; memory/scratch SQLite connection paths, canonical scratch writes, no network/child process/Docker/provider or host selected-source execution. Diagnostic copies do not replace original owner evidence."
+    },
+    "focused_methods_total": 25
+  },
+  "retained_development_history": {
+    "first_draft_lifecycle_pass": {
+      "record": {
+        "path": "runs/reviews/eval01-final-design-20261023/sealed-producer-retirement-green-v2.json",
+        "sha256": "36369aa7f96c084fd4a55c20c313bf2bf477e6335ad0e381d3971ca2254af76f"
+      },
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "elapsed_seconds": 709.3252578000538,
+      "log": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\sealed-producer-retirement-green-v2.log",
+        "sha256": "ab8804ff95ea506afea56d3d21f89f2ccde2d2ee36dd7d12502544b883caf3d4"
+      },
+      "scope": "One genuine sealed assessment lifecycle with two complete final tasks and explicit null descendants at the recorded cut; memory/scratch SQLite connection paths, canonical scratch writes, no network/child process/Docker/provider or host selected-source execution. Diagnostic copies do not replace original owner evidence."
+    },
+    "first_draft_limit": "The709.325-second lifecycle pass belongs only to411715aa; it did not close the independently discovered consumed-role omission. The final574.144-second pass is separate at e05de4fa.",
+    "pure_executor_missing_api_red": {
+      "record": {
+        "path": "runs/reviews/eval01-final-design-20261023/executor-passive-fields-red-v1.json",
+        "sha256": "bfb1da91fa37855da434ccc60cbb8fb37ca2bfd4ed13cbfeac6bdde84da6a1de"
+      },
+      "tests": 2,
+      "failures": 0,
+      "errors": 13,
+      "elapsed_seconds": 0.41202479996718466,
+      "log": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\executor-passive-fields-red-v1.log",
+        "sha256": "17acef8f7e4dcf742a104d7d242c2b931c0fa59fbae8d6d67d10f2b53976813b"
+      },
+      "scope": "Two pure executor-field validation and strict live-constructor checks at the recorded cut; memory/scratch SQLite connection paths, canonical scratch writes, no network/child process/Docker/provider or host selected-source execution. Diagnostic copies do not replace original owner evidence."
+    },
+    "incorrect_new_test_exception_expectation": {
+      "record": {
+        "path": "runs/reviews/eval01-final-design-20261023/executor-passive-fields-green-v1.json",
+        "sha256": "6dc05d9567005d073f583db1a74c75e311eeea003a0dba30d5a0b2a4529e4acf"
+      },
+      "tests": 2,
+      "failures": 0,
+      "errors": 1,
+      "elapsed_seconds": 0.31033139990177006,
+      "log": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\executor-passive-fields-green-v1.log",
+        "sha256": "7b956cc69a4871bf1a5d081dc0e00d42882ab47255d9fa86e4021c7479cffb2c"
+      },
+      "scope": "Two pure executor-field validation and strict live-constructor checks at the recorded cut; memory/scratch SQLite connection paths, canonical scratch writes, no network/child process/Docker/provider or host selected-source execution. Diagnostic copies do not replace original owner evidence."
+    },
+    "correction": "The strict existing constructor correctly raised FileNotFoundError for a missing mount. Only the new test expectation changed; production exception behavior and filesystem guard stayed unchanged.",
+    "corrected_pure_executor_green": {
+      "record": {
+        "path": "runs/reviews/eval01-final-design-20261023/executor-passive-fields-green-v2.json",
+        "sha256": "b0fe40f7110a457e3b9398569bf0e0694d6614015db7db65376073fe98a17208"
+      },
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "elapsed_seconds": 0.25123679998796433,
+      "log": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\executor-passive-fields-green-v2.log",
+        "sha256": "9a741cbbd110439b4fb1b72abcb1769959331abe260f50293a8fd56f92870817"
+      },
+      "scope": "Two pure executor-field validation and strict live-constructor checks at the recorded cut; memory/scratch SQLite connection paths, canonical scratch writes, no network/child process/Docker/provider or host selected-source execution. Diagnostic copies do not replace original owner evidence."
+    },
+    "separately_completed_preceding_witness_regressions": {
+      "record": {
+        "path": "runs/reviews/eval01-final-design-20261023/finite-witness-regressions-green-v1.json",
+        "sha256": "3928647c5919867ef84a012da994a571d165f24a525893e055af8ebc8b4d4ce4"
+      },
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "elapsed_seconds": 2602.9370812000707,
+      "log": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\finite-witness-regressions-green-v1.log",
+        "sha256": "1331bd2ab147055d04fa1b8d78de16bdd28599afd7aabd5164ad0343621b79e4"
+      },
+      "scope": "Twelve existing shared and inherited witness checks at the recorded cut; memory/scratch SQLite connection paths, canonical scratch writes, no network/child process/Docker/provider or host selected-source execution. Diagnostic copies do not replace original owner evidence."
+    },
+    "witness_scope": "Twelve shared/inherited witness methods pass at original82ba34a. This terminal result updates that older checkpoint without relabelling its code cut as this four-file correction."
+  },
+  "quality": {
+    "record": {
+      "path": "runs/reviews/eval01-final-design-20261023/sealed-passive-replay-quality-v2.json",
+      "sha256": "55fab06e7cecf60aee48d7ed8ac75109c77727b339bb90845e1fd2900ce4643c"
+    },
+    "input_manifest": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\sealed-passive-replay-quality-v2.inputs.json",
+      "sha256": "d7a2c856f475d6fc4a8d33a95d764915e6ee687502561717dd95a543f7e45afa"
+    },
+    "log": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\sealed-passive-replay-quality-v2.log",
+      "sha256": "be75bf18a5952603bcca625e3c15fd7985b13c7e9a44be652b9de65f3548abc1"
+    },
+    "successful_checks": 7,
+    "python_files": 214,
+    "config_files": 4,
+    "input_count": 218,
+    "all_pins_unchanged": true
+  },
+  "independent_review": {
+    "path": "runs/reviews/eval01-final-design-20261023/sealed-passive-replay-applied-review-v2.json",
+    "sha256": "1643f2bdc2f54e88bc348e2f9bb7ebd63456a3ad7e864405b7478bc8bd523316"
+  },
+  "shape_review": {
+    "path": "runs/reviews/eval01-final-design-20261023/sealed-passive-replay-shape-review-v1.json",
+    "sha256": "26c9819768f0b0dd87d6ee6a2ff56c235382015715e5bae946075dcf7568b920"
+  },
+  "source_and_unchanged_test_bridge": {
+    "path": "runs/reviews/eval01-final-design-20261023/sealed-passive-replay-final-source-bridge-v1.json",
+    "sha256": "30d351a91c12b4a764e7cfc5357ac855c88a43635bc0c08fe8c912d005a9e8f4"
+  },
+  "implementation_boundary": [
+    "Shared private reconstruction helpers default active=True; older callers retain strict execution checks.",
+    "Pure executor field validation is extracted from the original constructor. Public dataclass fields/options and mount/runner filesystem checks remain unchanged; no bypass field enters public configuration.",
+    "Passive metadata reconstruction omits only physical reads of external producer-only files. All original pins remain in context/schedule/owner control comparisons.",
+    "Metadata, current consumers, fixed trial controls, owned files and overlapping outer consumed component roles override any producer exemption.",
+    "Capture finish still validates all actually consumed original development/final evidence and retained private copies."
+  ],
+  "additional_verification": {
+    "valid_selected_descendant_lifecycle": {
+      "status": "running",
+      "session": 31897,
+      "last_confirmed_live_utc": "2026-10-24T04:16:33Z",
+      "driver": {
+        "path": "runs/reviews/eval01-final-design-20261023/run-sealed-assessment-positive-v1.py",
+        "sha256": "bb7cc29a1859ba3e811acdcf39f03b25c5ecec4fb7e0f4bff0261e977641a69c"
+      },
+      "expected_record": "runs/reviews/eval01-final-design-20261023/sealed-assessment-positive-green-v1.json",
+      "scope": "Existing positive three-role final lifecycle on this same final six-file cut; no pass claimed yet."
+    },
+    "full_and_hosted": "No new full-suite or hosted pass is asserted. Earlier failed/pending heads and original unrecovered local full-matrix results retain their evidence. New published-head checks must be observed separately."
+  },
+  "no_effects": {
+    "real_provider_calls": 0,
+    "keys_read": false,
+    "historical_paid_owners_modified": false,
+    "generated_code_executed_on_host": false,
+    "funding_created": false,
+    "benchmark_changed": false,
+    "dependencies_added": false,
+    "merges": false
+  },
+  "limitations": [
+    "Behavioral checks use genuine temporary fixture accounting, supplied workers/replies and guarded scratch; executor lifecycle tests use fake Docker. They are not new real-container confinement proofs.",
+    "Public documentation/semantic model-quality and actual improver effectiveness are not assessed here. Four scientific/source gates remain open under PLAN.",
+    "Existing source-only paths can remain absent; current resolvable consumed aliases are retained. A vanished historical short-name mapping is not reconstructed."
+  ]
+}

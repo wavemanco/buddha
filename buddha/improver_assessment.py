@@ -87,7 +87,9 @@ def _population(state: dict[str, Any]) -> dict[str, object]:
     }
 
 
-def _definition(raw: bytes, runtime: str) -> dict[str, Any]:
+def _definition(raw: bytes, runtime: str, *, active: bool = True) -> dict[str, Any]:
+    if type(active) is not bool:
+        raise ImproverAssessmentError("assessment reconstruction needs an explicit activity mode")
     record = study._obj(
         _load(raw),
         {
@@ -120,7 +122,7 @@ def _definition(raw: bytes, runtime: str) -> dict[str, Any]:
     development, screens = improver_study._declaration(
         _load(pipeline._read(Path(refs["development"]["path"]))),
         runtime,
-        active=True,
+        active=active,
     )
     tasks = TaskSet.from_bytes(pipeline._read(Path(refs["tasks"]["path"])))
     release, data = _source(tasks.to_record())
@@ -156,7 +158,7 @@ def _definition(raw: bytes, runtime: str) -> dict[str, Any]:
             if row["task_id"] in study._list(base["selected_ids"])
         ):
             raise ImproverAssessmentError("development consumes a non-development custody member")
-    study._validate_execution(record, tasks, runtime)
+    study._validate_execution(record, tasks, runtime, active=active)
     rule = ImprovementRule.from_bytes(pipeline._read(Path(refs["improvement_rule"]["path"])))
     plan = improver_analysis.ImproverAnalysisPlan.from_bytes(
         pipeline._read(Path(refs["analysis_plan"]["path"]))
@@ -170,13 +172,16 @@ def _definition(raw: bytes, runtime: str) -> dict[str, Any]:
         "tasks": len(selected),
         "sealed_repetitions": repetitions,
     }
-    intrinsic, _ = improver_study._intrinsic_inputs(
+    intrinsic, _, producer_only = improver_study._intrinsic_inputs(
         development,
         screens,
         Path(refs["development"]["path"]),
         refs["development"]["sha256"],
         runtime,
+        active=active,
     )
+    # A file used as metadata must still be read even if it is also a program.
+    producer_only.difference_update(controls)
     improver_study._bind_controls(controls, intrinsic)
     state: dict[str, Any] = {
         "record": record,
@@ -189,6 +194,7 @@ def _definition(raw: bytes, runtime: str) -> dict[str, Any]:
         "development": development,
         "screens": screens,
         "controls": controls,
+        "active": active,
     }
     if (
         method["counts"] != counts
@@ -221,9 +227,21 @@ def _definition(raw: bytes, runtime: str) -> dict[str, Any]:
     }:
         raise ImproverAssessmentError("original reserves must cover the complete prospective grid")
     package = Path(__file__).absolute().parent.parent
-    improver_study._bind_controls(
-        controls, {package / name: _digest(pin) for name, pin in record["consumer_sources"].items()}
-    )
+    consumers = {package / name: _digest(pin) for name, pin in record["consumer_sources"].items()}
+    improver_study._bind_controls(controls, consumers)
+    # A producer also consumed by a selected runtime component remains required.
+    consumed_roots = [
+        Path(value).resolve()
+        for role in ("generation", "native")
+        for name, value in record[role]["roots"].items()
+        if role == "native" or name != "agent"
+    ]
+    retirable = set()
+    for path in producer_only - consumers.keys():
+        resolved = path.resolve()
+        if not any(resolved.is_relative_to(root) for root in consumed_roots):
+            retirable.add(path)
+    state["retirable_producers"] = retirable
     protected: list[Path] = []
     for screen in screens:
         for role in ("generation", "native"):
@@ -337,7 +355,7 @@ def prepare_improver_assessment_trial(
     return directory
 
 
-def _state(directory: Path) -> dict[str, Any]:
+def _state(directory: Path, *, active: bool = True) -> dict[str, Any]:
     root = final._path(directory)
     fixed = trial_fence.required_controls(root / "final")
     context = study._obj(
@@ -355,7 +373,7 @@ def _state(directory: Path) -> dict[str, Any]:
     if context["format"] != _CONTEXT:
         raise ImproverAssessmentError("unsupported original improver context")
     state = _definition(
-        pipeline._read(root / "definition.json"), context["expected_runtime_sha256"]
+        pipeline._read(root / "definition.json"), context["expected_runtime_sha256"], active=active
     )
     external = study._obj(context["external_declaration"], {"path", "sha256"})
     if (
@@ -375,8 +393,10 @@ def _state(directory: Path) -> dict[str, Any]:
             raise ImproverAssessmentError("original phase purpose or reserve changed")
     state.update(root=root, directory=root / "final", context=context, funding=funding)
     state["controls"] = controls | fixed | {root / "context.json": pipeline._sha(context)}
+    state["retirable_producers"].difference_update(fixed)
     for path, digest in state["controls"].items():
-        pipeline._read(path, digest)
+        if active or path not in state["retirable_producers"] or path.is_relative_to(root):
+            pipeline._read(path, digest)
     return state
 
 
@@ -547,7 +567,12 @@ def _schedule(state: dict[str, Any]) -> tuple[dict[str, Any], dict[Path, str]]:
         pins[Path(arm["path"])] = arm["sha256"]
     pins |= {freeze / "schedule.json": final.sha(raw), freeze / "ready.json": final.sha(ready_raw)}
     for path, digest in pins.items():
-        if final.sha(capture.read(path)) != digest:
+        consumed = (
+            state["active"]
+            or path not in state["retirable_producers"]
+            or path.is_relative_to(state["root"])
+        )
+        if consumed and final.sha(capture.read(path)) != digest:
             raise ImproverAssessmentError("frozen original input changed")
     capture.finish()
     state["development_capture"], state["development_report"] = capture, report
@@ -558,11 +583,13 @@ def _schedule(state: dict[str, Any]) -> tuple[dict[str, Any], dict[Path, str]]:
 def freeze_improver_descendants(
     directory: Path, *, expected_development_report_sha256: str, review: dict[str, object]
 ) -> dict[str, object]:
-    state = _state(directory)
+    directory = final._path(directory)
+    frozen = (directory / "freeze").exists()
+    state = _state(directory, active=not frozen)
     checked_review = gateway._review(review)
     expected = _digest(expected_development_report_sha256)
     freeze = state["root"] / "freeze"
-    if freeze.exists():
+    if frozen:
         schedule, _ = _schedule(state)
         if (
             schedule["development"]["report_sha256"] != expected
@@ -607,7 +634,7 @@ def freeze_improver_descendants(
 def inspect_improver_assessment_freeze(
     directory: Path, *, expected_schedule_sha256: str
 ) -> dict[str, object]:
-    state = _state(directory)
+    state = _state(directory, active=False)
     schedule, _ = _schedule(state)
     if pipeline._sha(schedule) != _digest(expected_schedule_sha256):
         raise ImproverAssessmentError("wrong original schedule digest")
@@ -615,8 +642,10 @@ def inspect_improver_assessment_freeze(
     return schedule
 
 
-def _restore_grid(directory: Path) -> tuple[dict[str, Any], dict[str, Any], dict[Path, str]]:
-    state = _state(directory)
+def _restore_grid(
+    directory: Path, *, active: bool = True
+) -> tuple[dict[str, Any], dict[str, Any], dict[Path, str]]:
+    state = _state(directory, active=active)
     schedule, pins = _schedule(state)
     return state, schedule, pins
 
@@ -719,7 +748,7 @@ def _result(
 def inspect_improver_assessment(
     directory: Path, *, expected_report_sha256: str
 ) -> dict[str, object]:
-    state, schedule, pins = _restore_grid(directory)
+    state, schedule, pins = _restore_grid(directory, active=False)
     reader, current = final._census(state, schedule, pins)
     result = _result(state, schedule, reader, current)
     raw = reader.raw(state["directory"] / "report.json", _digest(expected_report_sha256))
@@ -743,6 +772,25 @@ def run_improver_assessment(
     review: dict[str, object],
     transport: gateway.RawHTTPTransport,
 ) -> dict[str, object]:
+    if not isinstance(authorization, Authorization) or not isinstance(
+        transport, gateway.RawHTTPTransport
+    ):
+        raise final.FinalEvaluationError(
+            "final execution needs explicit original authorization and transport"
+        )
+    directory = final._path(directory)
+    report = directory / "final/report.json"
+    if report.exists():
+        state, schedule, _ = _restore_grid(directory, active=False)
+        if (
+            authorization.path != final._phase_authority(state, "final")
+            or gateway._review(review) != schedule["review"]
+        ):
+            raise final.FinalEvaluationError(
+                "final execution cannot replace its original grant or review"
+            )
+        # This branch returns or refuses; a vanished report cannot enter the writer.
+        return inspect_improver_assessment(directory, expected_report_sha256=file_hash(report))
     return final._run_grid(
         directory,
         authorization=authorization,

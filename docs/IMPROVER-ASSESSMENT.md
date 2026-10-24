@@ -70,6 +70,31 @@ It checks both final evidence and the retained development evidence through
 the end of the read, including changed bytes, new entries and database
 sidecars. It needs no API keys and makes no provider calls or record changes.
 
+
+## Rechecking archived assessments
+
+A finished assessment and a confirmed descendant freeze can be checked after
+external starting-agent and improver source folders have been retired. The
+reader keeps their original paths and hashes in the experiment's bindings,
+then reconstructs the original development, funding, selection and final
+records. It still requires the retained private source copies and all data
+needed to interpret the result, including runtime, profile and native
+components. A file that also serves one of those data roles remains required.
+The matching approved software and original accounting checks still apply.
+
+This is a read-only check: it needs no keys, starts no worker and spends no
+money. Repeating a completed run or a confirmed freeze returns the original
+checked result or refuses it; missing evidence cannot turn that request into
+fresh execution. Changed retained source copies or inconsistent records still
+stop verification.
+
+New preparation, the first freeze and unfinished execution still require the
+original current source files before entering a writer or creating further
+work. Archival inspection does not grant permission to resume an unfinished
+experiment with missing producers. The ordinary live container constructor
+also retains its filesystem checks; passive reconstruction validates only the
+source-mount metadata that it no longer executes.
+
 ## Library interface
 
 This is a Python library. A funded operator handoff and an actual controlled

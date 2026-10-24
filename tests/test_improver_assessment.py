@@ -482,6 +482,150 @@ class ImproverAssessmentTests(unittest.TestCase):
         self.assertFalse((self.trial / "final/foreign").exists())
         self.assertEqual((files(self.root), self.engine.physical_sends), before)
 
+    def test_completed_assessment_replays_after_original_producer_sources_retire(self):
+        from buddha import candidate_generation
+        from buddha.gateway import RawHTTPTransport
+
+        self.fixture()
+        self.f.outcomes.update({(0, 0, arm, 0): "rejected" for arm in range(2)})
+        original = self.trial, self.study, self.declaration, self.bound_definition, self.authorities
+        self.bind("fresh-retirement-assessment")
+        fresh_root, fresh_declaration, fresh_authorities = (
+            self.trial,
+            self.declaration,
+            self.authorities,
+        )
+        self.trial, self.study, self.declaration, self.bound_definition, self.authorities = original
+        self.prepare()
+        self.develop()
+        schedule = self.freeze()
+        self.assertEqual(schedule["selected_ids"], [1, "final"])
+        self.assertEqual(schedule["counts"]["cells"], 2)
+        self.assertEqual(schedule["counts"]["maximum_cells"], 6)
+        self.assertEqual([arm["role"] for arm in schedule["arms"]], ["starter"])
+        self.assertEqual(
+            [slot["status"] for slot in schedule["slots"]], ["no_valid_descendant"] * 2
+        )
+
+        def snapshot():
+            return (
+                files(self.root),
+                tuple(sorted(str(path.relative_to(self.root)) for path in self.root.rglob("*"))),
+                [
+                    authority.summary()
+                    for group in (self.authorities, fresh_authorities)
+                    for authority in group.values()
+                ],
+                self.engine.physical_sends,
+                self.engine.workers,
+                len(self.f.events),
+                len(self.f.improvements),
+                len(self.f.generated),
+                len(self.final_events),
+            )
+
+        @contextmanager
+        def retired_producers():
+            retired = []
+            try:
+                for name in ("I0", "I1", "S0", "S1"):
+                    source, destination = self.root / name, self.root / (name + "-retired")
+                    source.rename(destination)
+                    retired.append((source, destination))
+                before = snapshot()
+                with (
+                    self.f.h.readonly(),
+                    patch.dict(os.environ, {}, clear=True),
+                    ExitStack() as stack,
+                ):
+                    for target in (
+                        "buddha.trial_fence.lease",
+                        "buddha.trial_fence.work",
+                        "buddha.native_pipeline._exclusive",
+                    ):
+                        stack.enter_context(
+                            patch(target, side_effect=AssertionError("retirement reached writer"))
+                        )
+                    yield
+                self.assertEqual(snapshot(), before)
+            finally:
+                for source, destination in reversed(retired):
+                    destination.rename(source)
+
+        original_generation = candidate_generation.run_candidate_generation
+        stopped = []
+
+        def stop_after_first_final_generation(*args, **kwargs):
+            result = original_generation(*args, **kwargs)
+            if not stopped and Path(args[0]).is_relative_to(self.trial / "final"):
+                self.assertEqual(result["status"], "complete")
+                stopped.append(True)
+                raise KeyboardInterrupt
+            return result
+
+        with (
+            self.supplied(),
+            patch.object(
+                candidate_generation,
+                "run_candidate_generation",
+                side_effect=stop_after_first_final_generation,
+            ),
+            self.assertRaises(KeyboardInterrupt),
+        ):
+            self.run_assessment()
+        self.assertTrue(stopped)
+        self.assertFalse((self.trial / "final/report.json").exists())
+        with retired_producers():
+            # Missing original controls still stop unfinished and fresh work.
+            with self.assertRaises(self.Error):
+                self.run_assessment()
+            with self.assertRaises(self.Error):
+                self.api.prepare_improver_assessment_trial(
+                    fresh_root,
+                    declaration=fresh_declaration,
+                    expected_sha256=sha(fresh_declaration.read_bytes()),
+                    expected_runtime_sha256=self.engine.candidate.expected_runtime,
+                    authorizations=fresh_authorities,
+                    development_review=self.engine.fixture.review,
+                )
+            self.assertFalse(fresh_root.exists())
+
+        with self.supplied():
+            result = self.run_assessment()
+        self.assertEqual(result["status"], "complete")
+        self.assertEqual(result["coverage"]["evaluated"], 2)
+        self.assertEqual(result["analysis"]["coverage"]["null_slots"], 2)
+        self.assertEqual(result["analysis"]["rule"]["status"], "inconclusive")
+        with retired_producers():
+            self.assertEqual(self.inspect(), result)
+            self.assertEqual(
+                self.api.inspect_improver_assessment_freeze(
+                    self.trial,
+                    expected_schedule_sha256=sha(
+                        (self.trial / "freeze/schedule.json").read_bytes()
+                    ),
+                ),
+                schedule,
+            )
+            self.assertEqual(self.freeze(), schedule)
+            self.assertEqual(
+                self.api.run_improver_assessment(
+                    self.trial,
+                    authorization=self.authorities["final"],
+                    review=self.engine.fixture.review,
+                    transport=RawHTTPTransport(allow_paid=False),
+                ),
+                result,
+            )
+            retained_source = self.trial / "freeze/sources/0.py"
+            raw = retained_source.read_bytes()
+            try:
+                retained_source.write_bytes(raw + b"\n# changed retained source\n")
+                with self.assertRaises(self.Error):
+                    self.inspect()
+            finally:
+                retained_source.write_bytes(raw)
+
     def test_genuine_null_descendant_and_undefined_scalar_preserve_planned_comparison(self):
         self.fixture()
         self.f.outcomes[(0, 0, 0, 0)] = "failed"
@@ -666,6 +810,115 @@ class ImproverAssessmentTests(unittest.TestCase):
             )
         self.assertEqual((files(self.root), self.engine.physical_sends), before)
         self.assertEqual(self.authorities["final"].summary()["operation_count"], 0)
+
+    def test_outer_consumed_roles_override_retirable_producer_classification(self):
+        import copy
+        import hashlib
+        import shutil
+        from pathlib import Path
+        from tempfile import TemporaryDirectory
+
+        from buddha.releases import _json, prepare_selection
+
+        self.fixture()
+
+        def snapshot():
+            return (
+                {
+                    path: hashlib.sha256(path.read_bytes()).hexdigest()
+                    for path in self.root.rglob("*")
+                    if path.is_file()
+                },
+                tuple(sorted(str(path.relative_to(self.root)) for path in self.root.rglob("*"))),
+                [authority.summary() for authority in self.authorities.values()],
+                self.engine.physical_sends,
+                self.engine.workers,
+                len(self.f.events),
+                len(self.f.improvements),
+                len(self.f.generated),
+            )
+
+        before = snapshot()
+        release = self.engine.candidate.release
+        runtime = self.engine.candidate.expected_runtime
+        original_actor = self.finite["improvers"][0]
+        original_source = Path(original_actor["roots"]["agent"]) / original_actor["entrypoint"]
+        source_raw = original_source.read_bytes()
+        runtime_raw = Path(self.definition["generation"]["runtime"]["path"]).read_bytes()
+
+        for case in (
+            "generation-runtime",
+            "generation-runner",
+            "native-runner",
+            "native-runner-parent-spelling",
+        ):
+            with self.subTest(consumed_role=case), TemporaryDirectory(dir=self.root) as temporary:
+                temporary_root = Path(temporary)
+                definition = copy.deepcopy(self.definition)
+                finite = copy.deepcopy(self.finite)
+                if case == "generation-runtime":
+                    actor_root = temporary_root / "runtime-producer"
+                    actor_root.mkdir()
+                    alias = actor_root / "candidate.py"
+                    # Fixed-I source is permitted literal UTF-8 data here; no selected
+                    # program is imported, compiled or executed by this test.
+                    alias.write_bytes(runtime_raw)
+                    outer = definition["generation"]
+                    outer["roots"]["environment"] = str(actor_root)
+                    outer["runtime"] = {"path": str(alias), "sha256": runtime}
+                else:
+                    role = "generation" if case == "generation-runner" else "native"
+                    outer = definition[role]
+                    runner = temporary_root / "selected-runner"
+                    shutil.copytree(Path(outer["roots"]["runner"]), runner)
+                    actor_root = runner / "fixed-improver"
+                    actor_root.mkdir()
+                    alias = actor_root / "candidate.py"
+                    alias.write_bytes(source_raw)
+                    outer["roots"]["runner"] = str(runner)
+                    if case == "native-runner-parent-spelling":
+                        (runner / "existing").mkdir()
+                        outer["roots"]["runner"] = str(runner / "existing" / "..")
+
+                actor = finite["improvers"][0]
+                actor["roots"]["agent"] = str(actor_root)
+                actor["selection"] = prepare_selection(
+                    release,
+                    {key: Path(value) for key, value in actor["roots"].items()},
+                    capabilities=actor["selection"]["capabilities"],
+                ).to_record()
+                outer["selection"] = prepare_selection(
+                    release,
+                    {key: Path(value) for key, value in outer["roots"].items()},
+                    capabilities=outer["selection"]["capabilities"],
+                ).to_record()
+                if not case.startswith("native-runner"):
+                    outer["executor"]["mounts"] = [
+                        ["/agent", outer["roots"]["agent"]],
+                        ["/runner", outer["roots"]["runner"]],
+                    ]
+                declaration = temporary_root / "development.json"
+                declaration.write_bytes(_json(finite))
+                definition["development"] = {
+                    "path": str(declaration),
+                    "sha256": hashlib.sha256(declaration.read_bytes()).hexdigest(),
+                }
+
+                # All actual declaration, selection, runtime, profile and native
+                # checks remain enabled. No classification result is mocked.
+                with self.f.h.readonly():
+                    state = self.api._definition(_json(definition), runtime, active=False)
+                self.assertEqual(
+                    state["controls"][alias], hashlib.sha256(alias.read_bytes()).hexdigest()
+                )
+                self.assertNotIn(alias, state["retirable_producers"])
+                other_actor = self.finite["improvers"][1]
+                other_source = Path(other_actor["roots"]["agent"]) / other_actor["entrypoint"]
+                self.assertIn(other_source, state["retirable_producers"])
+                self.assertEqual(state["record"]["final_ids"], [1, "final"])
+                self.assertFalse(self.trial.exists())
+
+        self.assertEqual(snapshot(), before)
 
 
 if __name__ == "__main__":

@@ -236,6 +236,58 @@ class ExecutorFixture(unittest.TestCase):
 
 
 class ExecutorInputTests(ExecutorFixture):
+    def test_container_fields_validate_absent_mount_metadata_without_weakening_live_spec(self):
+        from buddha import executor
+
+        missing_agent = self.root / "retired-agent"
+        fields = {
+            "image_id": IMAGE,
+            "role": "agent",
+            "mounts": (("/runner", self.runner), ("/agent", missing_agent)),
+            "runner_entrypoint": "buddha/native_worker.py",
+            "image_environment": (("LANG", "C.UTF-8"),),
+        }
+        self.assertFalse(missing_agent.exists())
+        with (
+            patch.object(executor, "_root", side_effect=AssertionError("metadata opened root")),
+            patch.object(executor, "file_hash", side_effect=AssertionError("metadata read file")),
+        ):
+            executor._validate_container_fields(**fields)
+        # Constructing an executable specification still checks the actual roots.
+        with self.assertRaises(FileNotFoundError):
+            ContainerSpec(**fields)
+
+    def test_container_fields_reject_malformed_metadata_before_filesystem_access(self):
+        from buddha import executor
+
+        fields = {
+            "image_id": IMAGE,
+            "role": "agent",
+            "mounts": (("/runner", self.runner), ("/agent", self.root / "retired-agent")),
+            "runner_entrypoint": "buddha/native_worker.py",
+            "image_environment": (),
+        }
+        with (
+            patch.object(executor, "_root", side_effect=AssertionError("metadata opened root")),
+            patch.object(executor, "file_hash", side_effect=AssertionError("metadata read file")),
+        ):
+            for change in (
+                {"image_id": "python:latest"},
+                {"role": True},
+                {"mounts": [("/runner", self.runner)]},
+                {"mounts": (("/runner", Path("relative")),)},
+                {"mounts": (("/runner", self.runner), ("/official", self.inputs))},
+                {"mounts": (("/runner", self.runner), ("/runner", self.inputs))},
+                {"mounts": (("/agent", self.inputs),)},
+                {"runner_entrypoint": "../outside.py"},
+                {"image_environment": [("LANG", "C")]},
+                {"image_environment": (("LANG", "C"), ("LANG", "other"))},
+                {"image_environment": (("LD_PRELOAD", "value"),)},
+                {"image_environment": (("LANG", "line\nvalue"),)},
+            ):
+                with self.subTest(change=change), self.assertRaises(ReleaseError):
+                    executor._validate_container_fields(**(fields | change))
+
     def test_public_errors_are_release_errors_and_configuration_is_immutable(self):
         self.assertTrue(issubclass(ExecutorError, ReleaseError))
         spec = self.spec()

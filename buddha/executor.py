@@ -98,6 +98,53 @@ class Limits:
                 raise ExecutorError("configuration")
 
 
+def _validate_container_fields(
+    image_id: str,
+    role: str,
+    mounts: tuple[tuple[str, Path], ...],
+    runner_entrypoint: str = "buddha/native_worker.py",
+    image_environment: tuple[tuple[str, str], ...] = (),
+) -> None:
+    """Validate saved executor metadata without reopening retired mount roots."""
+    if type(image_id) is not str or not re.fullmatch("sha256:[0-9a-f]{64}", image_id):
+        raise ExecutorError("configuration")
+    if type(role) is not str or role not in {"evaluator", "agent"}:
+        raise ExecutorError("configuration")
+    _path(runner_entrypoint)
+    allowed = {"/runner", "/inputs", "/official" if role == "evaluator" else "/agent"}
+    if type(mounts) is not tuple or not 1 <= len(mounts) <= 3:
+        raise ExecutorError("configuration")
+    seen = set()
+    for pair in mounts:
+        if type(pair) is not tuple or len(pair) != 2:
+            raise ExecutorError("configuration")
+        target, source = pair
+        if type(target) is not str or target not in allowed or target in seen:
+            raise ExecutorError("configuration")
+        if not isinstance(source, Path) or not source.is_absolute() or "," in str(source):
+            raise ExecutorError("configuration")
+        seen.add(target)
+    if "/runner" not in seen:
+        raise ExecutorError("configuration")
+    if type(image_environment) is not tuple or len(image_environment) > 64:
+        raise ExecutorError("configuration")
+    names = set()
+    for env_pair in image_environment:
+        if type(env_pair) is not tuple or len(env_pair) != 2:
+            raise ExecutorError("configuration")
+        name, value = env_pair
+        if type(name) is not str or name not in IMAGE_ENV or name in names:
+            raise ExecutorError("configuration")
+        if (
+            type(value) is not str
+            or not value
+            or len(value) > 8192
+            or any(not 32 <= ord(char) <= 126 for char in value)
+        ):
+            raise ExecutorError("configuration")
+        names.add(name)
+
+
 @dataclass(frozen=True)
 class ContainerSpec:
     image_id: str
@@ -107,45 +154,12 @@ class ContainerSpec:
     image_environment: tuple[tuple[str, str], ...] = ()
 
     def __post_init__(self) -> None:
-        if type(self.image_id) is not str or not re.fullmatch("sha256:[0-9a-f]{64}", self.image_id):
-            raise ExecutorError("configuration")
-        if type(self.role) is not str or self.role not in {"evaluator", "agent"}:
-            raise ExecutorError("configuration")
-        _path(self.runner_entrypoint)
-        allowed = {"/runner", "/inputs", "/official" if self.role == "evaluator" else "/agent"}
-        if type(self.mounts) is not tuple or not 1 <= len(self.mounts) <= 3:
-            raise ExecutorError("configuration")
-        seen = set()
-        for pair in self.mounts:
-            if type(pair) is not tuple or len(pair) != 2:
-                raise ExecutorError("configuration")
-            target, source = pair
-            if type(target) is not str or target not in allowed or target in seen:
-                raise ExecutorError("configuration")
-            if not isinstance(source, Path) or not source.is_absolute() or "," in str(source):
-                raise ExecutorError("configuration")
+        _validate_container_fields(
+            self.image_id, self.role, self.mounts, self.runner_entrypoint, self.image_environment
+        )
+        for _, source in self.mounts:
             _root(source)
-            seen.add(target)
-        if "/runner" not in seen:
-            raise ExecutorError("configuration")
         file_hash(dict(self.mounts)["/runner"] / self.runner_entrypoint)
-        if type(self.image_environment) is not tuple or len(self.image_environment) > 64:
-            raise ExecutorError("configuration")
-        names = set()
-        for env_pair in self.image_environment:
-            if type(env_pair) is not tuple or len(env_pair) != 2:
-                raise ExecutorError("configuration")
-            name, value = env_pair
-            if type(name) is not str or name not in IMAGE_ENV or name in names:
-                raise ExecutorError("configuration")
-            if (
-                type(value) is not str
-                or not value
-                or len(value) > 8192
-                or any(not 32 <= ord(char) <= 126 for char in value)
-            ):
-                raise ExecutorError("configuration")
-            names.add(name)
 
 
 @dataclass(frozen=True)
