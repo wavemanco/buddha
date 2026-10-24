@@ -1,0 +1,214 @@
+{
+  "account_basis": {
+    "basis": "existing user attestations",
+    "credential_binding_created": false,
+    "price_review": "retained dated evidence only; applicability and final account review still pending",
+    "pricing": "public pay-as-you-go",
+    "processing_tier": "standard/default",
+    "provider_account_verified": false,
+    "providers": [
+      "openai",
+      "anthropic"
+    ]
+  },
+  "basis_commit": "a736e42cc1b88a69cc0ddf78858bfff696732e30",
+  "conditional_input_projection": {
+    "additional_K": 0,
+    "base_L": 77,
+    "conditional_maximum_including_permitted_empty_sidecars": 111,
+    "fixed_plus_future_keyed_review": 78,
+    "observed_29_owner_invocation": false,
+    "planned_owner_destinations": 29,
+    "runtime_limit_unchanged": 1024,
+    "scope": "Three known additions are included in L77. Later distinct support pins add K beyond77. The keyed review is already included in111; no extra plus1. Actual funded input reconciliation remains required."
+  },
+  "draft": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-unfunded-launch-draft-v3.json",
+    "sha256": "98df979dff780af463230587d00b051284e7e2c4a3e34072ec09359785ebc152"
+  },
+  "evidence": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\prepare-src02-refreshed-launch-draft-v1.py",
+      "sha256": "1b6e5a9637a92dccbe52ccc41c30ce6ed90740dc3db903132703e5158429b330"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-refreshed-launch-draft-source-review-v1.json",
+      "sha256": "886421e34f4a09ad5cfa7564de84a66efd2c2aed75a2d0da8ed69124bfd7e79d"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-refreshed-launch-draft-invocation-v1.json",
+      "sha256": "88b7a17ad63ad1d946d4f07f89ab488e554108dbaf064c32b14146c5399c9c9d"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-refreshed-launch-draft-stdout-v1.log",
+      "sha256": "c1b058f93def3737e71f8aeb01562df7ff209fe9114066547d2f5391e59be496"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-refreshed-launch-draft-stderr-v1.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-refreshed-launch-draft-process-result-v1.json",
+      "sha256": "61aa2f73166014633593cd674797f37e6e153741783ab456dbba29e4b2a82db6"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-refreshed-launch-draft-preparation-v1.json",
+      "sha256": "78bfb9f916b02012042c81e4e5f3244e258842b7ac859449feeccddf2022c1b4"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-unfunded-launch-draft-v2.json",
+      "sha256": "5d326d8e75037767b33a0c6483314d2302dc5d1aed92cafd300ba242de660d6b"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-unfunded-launch-draft-v3.json",
+      "sha256": "98df979dff780af463230587d00b051284e7e2c4a3e34072ec09359785ebc152"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\review-src02-refreshed-launch-author-v1.py",
+      "sha256": "8ef356e0caf5c5c298b85c8c484dcbdbb6180050c2c0f56e26ac9511a45f9a6d"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-refreshed-launch-bindings-author-reconciliation-v1.json",
+      "sha256": "451d9b2bca10397284aa2c80183292c4a6640bf0394cf5ebad30279ec39322ab"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-refreshed-launch-draft-data-review-v1.json",
+      "sha256": "887424ef15642ea9c852776a138b831b4852d5ea0b670c2b424088adb041059c"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-public-price-refresh-20261024-v1.json",
+      "sha256": "6059d4ba208e84f8334d9ac4593e4d5b97fb94ce700e50f1fd29c4e4117f495a"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-public-price-refresh-independent-review-20261024-v1.json",
+      "sha256": "fe770d213e4f81db63c7a581a5989d02cd8cf5bbc15bf5ba440b93845f862282"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\refresh-src02-public-price-record-v1.py",
+      "sha256": "61b78b77c8b08dd37c6d7945d78442db99e4fe8cf01294e476e70b9a1c528979"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-runtime-identity-refresh-20261024-v1.json",
+      "sha256": "7c654007c9870cddd822bc1fcecf2825244fff6fbbb3c7b2669b7762216bcf6d"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-docker-diagnostic-20261024-v1.json",
+      "sha256": "4a17fc825c7e3ed2e6d095fae60843ab90361fe9adf4ce75fbfe7b344ec93125"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-runtime-image-refresh-20261024-v3.json",
+      "sha256": "fd8d22703bd9e02283679ed96520a210293e9a44b3caa9d808191771d299f16d"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\ci-pr116-ubuntu-120852280296-terminal-evidence-v1.json",
+      "sha256": "f14fc5cda88ec43d887414d46d6aa53343f1264ff6386213b41ddd4bd8b4e262"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\ci-pr111-116-117-118-checkpoint-20261024T134026Z.json",
+      "sha256": "c20b56e58d7f407af36cbda1557a65c8051b4ea16e816b7923d56daadabc08e7"
+    }
+  ],
+  "execution": {
+    "actual_approval_or_launch_created": false,
+    "actual_authorities_created": 0,
+    "automatic_retry": false,
+    "credential_review_created": false,
+    "original_owners_created": 0,
+    "original_process_end_to_end_seconds": 34.669871099991724,
+    "original_process_exit_code": 0,
+    "provider_calls": 0,
+    "unexpected_guard_events": 0
+  },
+  "format": "buddha.src02-refreshed-launch-bindings.v1",
+  "future_account_review": {
+    "created": false,
+    "keys_used": false,
+    "must_bind_launch_sha256": "90fe9b6710171c6504f3ff99fd58808f697a6c1b8490ba67ba0f46c17c5dcece"
+  },
+  "launchable": false,
+  "limits": [
+    "No application, benchmark, agent, profile, runtime or scientific-acceptance change.",
+    "No real key, paid provider request, original-run/owner mutation, new allocation or user command.",
+    "Original v2 draft, previous failed diagnostics and frozen experiment history remain retained.",
+    "Preparation and image identity do not close SRC-02, SRC-03, IMP-01 or EVAL-02.",
+    "This delivery does not certify a full platform matrix, an actual funded input count or model-authored improvement."
+  ],
+  "preserved_previous_draft": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-unfunded-launch-draft-v2.json",
+    "sha256": "5d326d8e75037767b33a0c6483314d2302dc5d1aed92cafd300ba242de660d6b"
+  },
+  "proposed_approval_sha256_unchanged": "bddb217a14b7a817dc0c72a88d6b2abdd65a28ea269d7ec16a4ae7bb56d840bd",
+  "proposed_launch_sha256": "90fe9b6710171c6504f3ff99fd58808f697a6c1b8490ba67ba0f46c17c5dcece",
+  "remaining_requirements": [
+    "Selected executing-byte Windows/hosted verification and final source reconciliation",
+    "Actual funded input union and applicable account/pricing reconciliation",
+    "New user allocation; proposed25USD/512attempts remain unallocated",
+    "Real dedicated authority and exact approved launch files",
+    "Local key entry and new-launch-bound account review",
+    "Actual current-parent model-authored demonstration and original custody/mechanism review"
+  ],
+  "requested_terms": {
+    "allocation_status": "unallocated",
+    "budget_microusd": 25000000,
+    "max_calls": 512,
+    "partial_results_allowed": true
+  },
+  "retained_documentation_review_finding": {
+    "initial_issue": "One later sentence still used the previous current108+K/base74 calculation after v3 preparation.",
+    "location": "PLAN stable SRC-02 row",
+    "resolution": "Updated only the current sentence to111+K/base77 and clarified fresh public-price versus pending account checks. All historical rows and original acceptance tails remain unchanged.",
+    "scope": "Documentation correction; no protected source, launch draft or experiment change."
+  },
+  "runtime_observation": {
+    "containers_started": 0,
+    "direct_inspection_returncode": 0,
+    "original_formatter_returncode": 1,
+    "prior_unavailable_record_retained": true,
+    "record": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-runtime-image-refresh-20261024-v3.json",
+      "sha256": "fd8d22703bd9e02283679ed96520a210293e9a44b3caa9d808191771d299f16d"
+    },
+    "root_failed_probe_retained": {
+      "record_created": false,
+      "tool_chunk": "cb75b5"
+    },
+    "same_formatter_error_hash_reproduced": true,
+    "scope": "Read-only image metadata, not worker execution, account access, capacity or launch readiness. This dated observation is not automatically another launch input.",
+    "specific_missing_field_not_established": true,
+    "status": "required_executor_image_identity_checks_pass"
+  },
+  "saved_data_checks": {
+    "added_launch_sources": 3,
+    "bundle_directory_entries_including_root_unchanged": 15,
+    "bundle_files_unchanged": 43,
+    "exact_expected_v2_to_v3_delta": true,
+    "existing_launch_sources_unchanged": 73,
+    "future_run_handoff_receipt_trees_absent": true,
+    "independent_source_and_saved_data_reviews_pass": true,
+    "launch_helpers_unchanged": 44,
+    "new_launch_sources": 76,
+    "proposal_controls_unchanged": 71,
+    "proposal_protocol_criteria_profiles_and_model_ids_unchanged": true,
+    "protected_inputs_unchanged": 181,
+    "source_map_bindings_unchanged": 169
+  },
+  "selected_ci": {
+    "head": "eb71e3b93c5407e8670b5016143671fa2abf9728",
+    "scope": "Dated exact-head observations only; no pending matrix conclusion or spending permission.",
+    "ubuntu": {
+      "configured_quality_steps": "success",
+      "errors": 0,
+      "failures": 0,
+      "job_id": 120852280296,
+      "skips": 5,
+      "status": "success",
+      "tests": 1804
+    },
+    "windows": {
+      "job_id": 120852280737,
+      "retained_checkpoint_utc": "2026-10-24T13:40:26Z",
+      "status": "in_progress"
+    }
+  },
+  "status": "unallocated_data_preparation_complete"
+}
