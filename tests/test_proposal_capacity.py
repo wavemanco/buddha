@@ -270,6 +270,72 @@ class ProposalCapacityNumbersTests(unittest.TestCase):
 
 
 class ProposalCapacityTransitionsTests(unittest.TestCase):
+    def test_facade_projection_keeps_legacy_keys_and_opted_in_capacity_phase(self):
+        from buddha import source_capacity, source_search
+
+        # Projection-only unit check: the two mocked shared-core calls make no
+        # custody, owner, completion or provider-execution claim.
+        root = Path.cwd().absolute() / "projection-only"
+        reader, treatment = object(), object()
+        reference = {"directory": str(root / "seed")}
+        owner = root / "witness/proposal/owners/0"
+        previous_owner = root / "previous/owners/0"
+        original_treatment = {"section": {"synthetic": True}, "controls": {}}
+        previous_treatment = {"section": {"previous": True}, "controls": {}}
+        checkpoint = {"path": str(root / "witness/proposal-capacity.json"), "sha256": "a" * 64}
+        policy = source_capacity.proposal_capacity_policy()
+        original_keys = {"result", "publication", "next_owner", "next_role", "inactive_pending"}
+        for configured, capacity, role in (
+            (False, None, "proposal"),
+            (True, None, "proposal_capacity"),
+            (True, checkpoint, "generation"),
+        ):
+            current = {
+                "result": None,
+                "publication": None,
+                "next_owner": None
+                if role == "proposal_capacity"
+                else root / "witness" / role / "owners/0",
+                "next_role": None if role == "proposal_capacity" else role,
+                "inactive_pending": False,
+                "lower_role": role,
+                "proposal_capacity": capacity,
+                "needs_prepare": False,
+                "owner_treatments": {owner: original_treatment},
+            }
+            state = {
+                "record": {"proposal_capacity": policy} if configured else {},
+                "witness_treatments": {previous_owner: previous_treatment},
+                "mutation_progress": {},
+                "inactive_pending": True,
+            }
+            with (
+                self.subTest(configured=configured, capacity=capacity),
+                patch.object(
+                    source_search, "_search_witness_treatment", return_value=treatment
+                ) as declared,
+                patch.object(source_search, "_witness_progress_at", return_value=current) as core,
+            ):
+                progress = source_search._witness_progress(reader, state, reference)
+            declared.assert_called_once_with(reader, state, reference)
+            core.assert_called_once_with(reader, treatment)
+            self.assertEqual(
+                set(progress),
+                original_keys | ({"lower_role", "proposal_capacity"} if configured else set()),
+            )
+            for key in ("result", "publication", "next_owner", "next_role"):
+                self.assertEqual(progress[key], current[key])
+            if configured:
+                self.assertEqual(progress["lower_role"], role)
+                self.assertEqual(progress["proposal_capacity"], capacity)
+            self.assertIs(progress["inactive_pending"], True)
+            self.assertIs(current["inactive_pending"], False)
+            self.assertEqual(
+                state["witness_treatments"],
+                {previous_owner: previous_treatment, owner: original_treatment},
+            )
+            self.assertIs(state["mutation_progress"][reference["directory"]], progress)
+
     def fixture(self, *, fail_role=None, planning=False, unobserved=False):
         from buddha import source_capacity
 
@@ -438,6 +504,7 @@ class ProposalCapacityTransitionsTests(unittest.TestCase):
 
     def test_original_proposal_resumes_both_sides_of_checkpoint_publication(self):
         from buddha import source_capacity, source_launch_state, source_search
+        from buddha.native_evidence import NativeEvidence
 
         h = self.fixture(planning=True)
         c = h.case
@@ -446,6 +513,7 @@ class ProposalCapacityTransitionsTests(unittest.TestCase):
         prepare = source_search.candidate_improvement.prepare_candidate_improvement
         stopped = [False] * 6
         refused_copies = []
+        seed_capacity_reference = None
 
         def inspect():
             return source_launch_state.inspect_prepared_search(
@@ -541,10 +609,60 @@ class ProposalCapacityTransitionsTests(unittest.TestCase):
             else:
                 self.assertTrue((c.directory / "iterations/0/proposal-capacity.json").exists())
                 self.assertFalse((c.directory / "iterations/0/screen").exists())
+            if index in {2, 3}:
+                # Observe the genuine original retained cut, not a fabricated
+                # progress dictionary or a second paid/proposal execution.
+                with c.h.readonly():
+                    reader = NativeEvidence(
+                        c.directory, c.authority.path, error_type=source_search.SourceSearchError
+                    )
+                    restored = source_search._restore(c.directory, c.authority.path, reader=reader)
+                    progress = restored["mutation_progress"][str(c.directory / "seed")]
+                    reader.finish()
+                self.assertEqual(
+                    set(progress),
+                    {
+                        "result",
+                        "publication",
+                        "next_owner",
+                        "next_role",
+                        "inactive_pending",
+                        "lower_role",
+                        "proposal_capacity",
+                    },
+                )
+                self.assertIsNone(progress["next_owner"])
+                self.assertIsNone(progress["next_role"])
+                if index == 2:
+                    self.assertEqual(progress["lower_role"], "proposal_capacity")
+                    self.assertIsNone(progress["proposal_capacity"])
+                    self.assertFalse((c.directory / "seed-witness/proposal-capacity.json").exists())
+                else:
+                    path = c.directory / "seed-witness/proposal-capacity.json"
+                    seed_capacity_reference = {"path": str(path), "sha256": sha(path.read_bytes())}
+                    self.assertIsNone(progress["lower_role"])
+                    self.assertEqual(progress["proposal_capacity"], seed_capacity_reference)
+            if seed_capacity_reference is not None:
+                path = Path(seed_capacity_reference["path"])
+                self.assertEqual(sha(path.read_bytes()), seed_capacity_reference["sha256"])
         self.assertEqual(refused_copies, [0, 1, 3, 4], "premature private copies must be refused")
         report = h.run()
         self.assertEqual(report["status"], "complete")
+        self.assertEqual(report["format"], "buddha.source-search-report.v3")
         self.assertEqual(len(report["proposal_capacity"]["checkpoints"]), 3)
+        expected_checkpoints = [
+            {"path": str(path), "sha256": sha(path.read_bytes())}
+            for path in (
+                c.directory / "seed-witness/proposal-capacity.json",
+                c.directory / "iterations/0/proposal-capacity.json",
+                c.directory / "iterations/0/witness/proposal-capacity.json",
+            )
+        ]
+        self.assertEqual(
+            report["proposal_capacity"]["checkpoints"],
+            sorted(expected_checkpoints, key=lambda row: row["path"]),
+        )
+        self.assertIn(seed_capacity_reference, report["proposal_capacity"]["checkpoints"])
         self.assertEqual(len(h.improvements), 3)
         self.assertEqual(len({event["owner"] for event in h.improvements}), 3)
         self.assertEqual(c.authority.summary()["reserved_microusd"], 0)

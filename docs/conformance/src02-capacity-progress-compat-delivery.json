@@ -1,0 +1,151 @@
+{
+  "checks": {
+    "capacity_green": {
+      "errors": 0,
+      "failures": 0,
+      "seconds": 535.5778872000519,
+      "tests": 7
+    },
+    "green_denied_events": [],
+    "green_skips": 0,
+    "green_unique_methods": 10,
+    "legacy_green": {
+      "errors": 0,
+      "failures": 0,
+      "seconds": 347.4384880999569,
+      "tests": 3
+    },
+    "quality_commands_passed": 7,
+    "quality_input_count": 224,
+    "red": {
+      "errors": 0,
+      "failures": 3,
+      "same_methods_as_green": true,
+      "seconds": 184.77750930003822,
+      "tests": 3
+    },
+    "source_and_test_pins_unchanged_within_each_cohort": true
+  },
+  "date": "2026-10-24",
+  "evidence": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\run-capacity-progress-checks-v1.py",
+      "sha256": "7e26d0f7aeca37ccc0af71bffddb92c63404d64361187c39fc2b048e7455545e"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\capacity-progress-legacy-red-v1.json",
+      "sha256": "4591e146de224853c5f1bacb53bb41132166de871de4a29412f0d68d42625b13"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\capacity-progress-legacy-red-v1.log",
+      "sha256": "108cdd48d758eae5efef6dc47c8abb755c443440862fb7a7c45f80525e07bdaa"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\capacity-progress-legacy-green-v1.json",
+      "sha256": "7b1656ea8d77e8f5289a307c170d1423be426265334a64b7f39d2a138f4d1a1f"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\capacity-progress-legacy-green-v1.log",
+      "sha256": "50294ae25f15e60f0b9b5be678e8063a7bc2295263a2cb2c9ea4929e2760aa75"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\capacity-progress-enabled-green-v1.json",
+      "sha256": "97aa787f2ab3fd1608d58735abe259749de490ce23fa05d3ca65f1a8b82dd888"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\capacity-progress-enabled-green-v1.log",
+      "sha256": "d240dd0edd7283b318c07ab62f88440c2890c48574ef9d2ef4f54c4222d35bb6"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\run-capacity-progress-quality-v1.py",
+      "sha256": "20ca2eaf70cc422b70035af5ac3ef430b1a5713d6a9d33d0b60d8b5a67458312"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\capacity-progress-quality-v1.json",
+      "sha256": "fa42f5aa2d5779d53a3629f081b50a602a39126b8c9d9a9059de9d206dec9773"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\capacity-progress-quality-v1.inputs.json",
+      "sha256": "8c64da9da3aa4ff660d475fad84df23be7b2110e7aa51b4f8e6f6099c4eccc36"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\capacity-progress-quality-v1.log",
+      "sha256": "3dce93c05680730721647fe8ea9070114da5a98701e1e7a4b8197b2d9f67e864"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\capacity-progress-quality-app-v1.py.txt",
+      "sha256": "120414c46b4923aa5d5571ea1f355df45453232d085042e722d3981015573508"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\capacity-progress-quality-test-v1.py.txt",
+      "sha256": "5e53ba11eb8f7e59fc80d46d4521cbcafbac0d3ddad5a20092b8c946d4549e6c"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\capacity-progress-static-review-v1.json",
+      "sha256": "9d7ed2327d898f2896282cf8b4298b15a239c0347681983cab546225aa51d7a2"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\hosted-ci-pr105-108-109-refresh-20261024T075859483206Z-v1.json",
+      "sha256": "afeb3ecdadddf00817712d116e00f67ef67b9037210533101890cdafb46c184f"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\pr105-ci-job-120784568565-terminal-v1.log",
+      "sha256": "6c04cc1a7fbecd6d1f2a1097166acb05e1cc2cb3612848d9eaef24f86bae1588"
+    }
+  ],
+  "format": "buddha.capacity-progress-compat-delivery.v1",
+  "limits": [
+    "Local scoped checks, not a new full-suite or hosted-green claim.",
+    "Failed original CI remains failed; no job was restarted or cancelled.",
+    "The prepared actual-live bundle remains unchanged and unfunded; corrected executing code requires its own fresh bundle, exact hosted checks and launch/funding reconciliation.",
+    "Supplied-worker/reply tests supply no actual model authorship or scientific improvement."
+  ],
+  "preservation": {
+    "all112_prior_raw_plan_rows_preserved": true,
+    "conditional_boundaries_changed": 2,
+    "new_helper_dependency_financial_benchmark_change": false,
+    "new_paid_allocation": false,
+    "original_24_recovery_assertions_and_faults_retained": true,
+    "original_capacity_test_lines_preserved_in_order": true,
+    "original_live_inputs_changed": false,
+    "original_main_acceptance_tails_preserved": true,
+    "original_shared_tests_raw_bytes_unchanged": true,
+    "paid_calls": 0,
+    "plan_sha256": "b283721d6469e0a235c3707b01d4cb22af1eb71dd5479dac865dbe3a66f90cbf",
+    "primary_plan_mirror_equal": true,
+    "production_files_changed": 1
+  },
+  "remaining": "Four roadmap gates remain; SRC02 is sole Next. Actual model-authored demonstration, matched IMP01 experiment and independent EVAL02 transfer/human/scientific work remain open.",
+  "review": {
+    "findings": [
+      "Exactly two conditional metadata additions in one production file; core lower_role remains unconditional.",
+      "Legacy core8 and facade5 fields preserved; configured facade keeps actual capacity role and checkpointNone/ref.",
+      "Capacity policy, raw usage/billing/authority/capture, child-before-pass guards, publication and replay unchanged.",
+      "All other original test methods and24 original recovery assertions/fault functions retained; new projection test claims no custody.",
+      "Enhanced existing six-cut lifecycle checks genuine original pending/published checkpoints through readonly NativeEvidence and exact final v3refs."
+    ],
+    "format": "buddha.capacity-progress-static-review.v1",
+    "no_new_helper_dependency_financial_or_benchmark_change": true,
+    "scope": "Independent source-only review of the actual production/test diff and callers; no app/helper/test execution, SQL or edits by reviewer.",
+    "shared_legacy_tests": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-progress-compat\\tests\\test_shared_mutation_witness.py",
+      "sha256": "2aeed85a6b66de276443352ac6ac70461cd45fe64d2e8d64bc691e5276ae6a2d"
+    },
+    "source": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-progress-compat\\buddha\\source_search.py",
+      "sha256": "120414c46b4923aa5d5571ea1f355df45453232d085042e722d3981015573508"
+    },
+    "status": "no_blocker_at_held_cut",
+    "test": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-progress-compat\\tests\\test_proposal_capacity.py",
+      "sha256": "5e53ba11eb8f7e59fc80d46d4521cbcafbac0d3ddad5a20092b8c946d4549e6c"
+    }
+  },
+  "scope": "Restore original legacy progress-map compatibility while retaining explicitly configured actual-proposal capacity metadata.",
+  "source_files": {
+    "buddha\\source_search.py": "120414c46b4923aa5d5571ea1f355df45453232d085042e722d3981015573508",
+    "tests\\test_proposal_capacity.py": "5e53ba11eb8f7e59fc80d46d4521cbcafbac0d3ddad5a20092b8c946d4549e6c",
+    "tests\\test_shared_mutation_witness.py": "2aeed85a6b66de276443352ac6ac70461cd45fe64d2e8d64bc691e5276ae6a2d"
+  },
+  "status": "scoped_local_red_green_pass"
+}

@@ -11,6 +11,13 @@ measures the current parent itself and runs its model-written descendants.
 [Preparation evidence](conformance/src02-actual-live-preparation.json) records
 the new bundle, checks and remaining requirements.
 
+That prepared producer later failed three legacy progress-report compatibility
+checks in Ubuntu CI. The [shared correction](SOURCE-PROPOSAL-CAPACITY.md#record-compatibility)
+has its own checks and source cut. The original bundle remains unchanged and
+unfunded; a fresh bundle pinned to corrected executing code and its own hosted
+checks is required before funding or a user command. The adopted experiment
+protocol and criteria remain unchanged.
+
 ## What the experiment does
 
 The starting agent P is our fixed Python program. It can generate answers and
