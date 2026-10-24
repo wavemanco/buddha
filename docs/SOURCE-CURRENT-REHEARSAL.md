@@ -1,7 +1,7 @@
 # Current-source rehearsal
 
-Preparation is recorded; full rehearsal status at this checkpoint is `verification_in_progress`.
-[PLAN.md](PLAN.md) remains the roadmap. It owns current order and gate status; this guide records the preparation checkpoint.
+The full unpaid rehearsal passed on October 24 UTC (October 23 locally).
+[PLAN.md](PLAN.md) remains the roadmap. The [result record](conformance/src02-current-rehearsal-results.json) retains the observed counts, exact producer version, reviews and limits.
 
 ## Purpose
 
@@ -60,8 +60,8 @@ A separate later query found both original worker IDs absent. It observes absenc
 Ruff lint/format checks passed for the corrected helper cut. Bandit exited1 with two LOW B603 findings at fixed-argv process-denial controls; its raw scan and specific review remain retained. This is not a zero-findings, full-suite or hosted-CI-green claim.
 The [preparation record](conformance/src02-current-rehearsal-preparation.json) joins exact files and receipts, including the failure, guard regression and security scan.
 
-The corrected unpaid rehearsal has started under frozen command receipt `ade285192350a8d675193bb7b40c51b9b4b93c2d7fb7bc2b97d4c85bea6bebbe`. At this checkpoint root reports the first native-stage publication; the full result is still pending and this preparation record does not inspect the active fixture.
-Expected success-path counts remain29 owners (11 source/18 native) and154 supplied replies. Complete roles, both witnesses, recovery, final accounting, cleanup and keyless replay are not yet established.
+The preparation snapshot recorded a running rehearsal under command receipt `ade285192350a8d675193bb7b40c51b9b4b93c2d7fb7bc2b97d4c85bea6bebbe`. The completed observation below supersedes that running status. The original preparation record and failed predecessor remain unchanged.
+Actual success-path counts are 29 original owners/workers (11 source/18 native) and 154 supplied replies. Both witnesses, original-owner continuation, final accounting, owned cleanup and keyless replay pass at the observed producer version.
 The separate $7 capacity observation is closed. This rehearsal uses only synthetic local accounting; it neither reuses that allowance nor authorizes a live study. Paid readiness remains open.
 The named private receipts are retained under `runs/reviews/src02-capacity-design-20261023/` in the primary workspace.
 
@@ -110,12 +110,49 @@ python -I -B "<producer>\docs\conformance\src02-current-rehearsal.py" `
   --proposal-sha256 "<proposal-raw-sha256>"
 ```
 
-## Result section to fill only from the actual retained proof
+## Observed result and limits
 
-- Exact command/map are retained above; final execution receipt: **pending**.
-- Actual roles/replies, full P/C packet joins and both witness outcomes: **pending**.
-- Controlled interruption after counted-proposal publication and same-owner continuation: **pending**.
-- Original accounting/zero holds, cleanup, saved byte integrity and completed keyless replay: **pending**.
-- Runtime/frame/storage/timing observations and any setup/failure limits: **pending**.
+The actual rehearsal passed in 3,244.992 seconds (about 54 minutes), using real
+isolated workers and unchanged official native commands with supplied replies.
+It ran 8 generation, 3 proposal, 6 partition, 6 quality and 6 summary workers.
+The 154 supplied replies comprise 84 generation, 4 proposal, 6 partition and 60
+quality calls. Six measured sets retain 60 answers; two validity-only sets retain
+another 20 answers. All 29 workers completed successfully; cleanup and absence checks were recorded.
 
-A supplied-response pass would establish only its observed engineering scope. Model-authored current-source evolution, source-procedure interpretation and any effectiveness claim require their own retained actual evidence and, where applicable, a separate funded protocol.
+All 30 literal P answers reach both its validity and counted proposal. All 30 of
+C's own measured answers reach C's changed improver. C's unique weakest task is
+the nonfirst `curated-47`; its planning result is used in the further proposal.
+W1 is materialized from C's own improver and generates the first task. Only C is
+the counted admitted child; W0/W1 remain validity checks. These procedures and
+model replies are supplied controls, so this proves the execution/dataflow
+mechanism at this version. Model authorship and effectiveness require live evidence.
+
+The controlled interruption occurs after the counted proposal has been saved.
+Continuation preserves all 15 original owners and 186 sealed prefix files, adds
+14 legitimate later workers and 79 replies, and redispatches none of the first 75
+requests. A completed keyless repeat adds no request, worker or accounting entry.
+This checks that interruption point rather than every possible in-flight failure.
+
+The local synthetic ledger records 154 completed operations, 9,398 microusd and
+zero held; all 29 owners are inactive. Real API spend is zero. The supplied token
+usage and ledger amounts are engineering test values. The earlier actual $7
+capacity observation and its closed allowance remain separate.
+
+Root data review reproduces all 154 original/shared operation rows, raw-request/
+reply joins and fixed-profile integer usage quotes using only in-memory SQLite;
+662 read inputs remain unchanged. Independent data review reconstructs all four
+proposal bodies and checks private copies, 137 sealed files, 2,437 original input
+bindings and 1,049 unchanged inputs, including the preserved failed predecessor.
+
+The producer is base `e5ba59e` plus the five frozen preparation files, with 298
+source pins. Later finite-controller/replay changes in this PR stack are outside
+that observed producer. No runtime code changes in this result slice.
+
+The retained fixture is 163,479,911 bytes across 360 files. The largest initial
+worker message is 4,016,927 bytes and largest observed frame is 1,196,645 bytes.
+These are observations under configured limits. The 54-minute rehearsal does not
+measure live model latency or establish a general context/storage capacity.
+
+Current-source model-authored evolution remains the next source gate. A new live
+study needs its own concrete allocation and executing-source hosted checks.
+No live command is enabled here; no further key entry is needed now.
