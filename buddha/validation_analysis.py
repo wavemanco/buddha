@@ -53,6 +53,7 @@ _IDENTIFIERS = {
     "judge_policy": "single-native-occasion",
 }
 _COUNTS = ("max_looks", "max_candidates", "comparator_count", "repetitions", "finalist_count")
+_TRANSFER_FORMAT = "buddha.validation-analysis-plan.v2"
 _AXES = ("utility", "distinct")
 _CLAIM = (
     "Conditional fixed-panel native-metric bounds only; family independence and bounded "
@@ -116,13 +117,15 @@ def _ratio(value: Fraction) -> dict[str, int]:
 
 
 def _tails(record: dict[str, object]) -> dict[str, Fraction]:
-    alpha = _object(record["alpha"], {"total", "validation", "final"})
+    phases = {"validation", "final"}
+    if record.get("format") == _TRANSFER_FORMAT:
+        phases.add("transfer")
+    alpha = _object(record["alpha"], {"total"} | phases)
     portions = {name: _rational(value) for name, value in alpha.items()}
     if not (
         0 < portions["total"] < 1
-        and portions["validation"] > 0
-        and portions["final"] > 0
-        and portions["validation"] + portions["final"] <= portions["total"]
+        and all(portions[phase] > 0 for phase in phases)
+        and sum(portions[phase] for phase in phases) <= portions["total"]
     ):
         raise ValidationAnalysisError("positive allocated alpha must fit the original total")
     validation = portions["validation"] / (
@@ -135,6 +138,10 @@ def _tails(record: dict[str, object]) -> dict[str, Fraction]:
         2 * _integer(record["finalist_count"], 1) * _integer(record["comparator_count"], 1)
     )
     result = {"validation": validation, "final": final}
+    if "transfer" in phases:
+        result["transfer"] = portions["transfer"] / (
+            2 * _integer(record["finalist_count"], 1) * _integer(record["comparator_count"], 1)
+        )
     _json({name: _ratio(value) for name, value in result.items()})
     return result
 
@@ -145,8 +152,10 @@ class ValidationAnalysisPlan(_Artifact):
 
     def __post_init__(self) -> None:
         try:
+            raw_record = _object(_load(self.data))
+            transfer = raw_record.get("format") == _TRANSFER_FORMAT
             record = _object(
-                _load(self.data),
+                raw_record,
                 set(_IDENTIFIERS)
                 | set(_COUNTS)
                 | {
@@ -154,10 +163,16 @@ class ValidationAnalysisPlan(_Artifact):
                     "improvement_rule_sha256",
                     "projection_release_sha256",
                     "analyzer_sources",
-                },
+                }
+                | (
+                    {"transfer_projection_release_sha256", "transfer_repetitions"}
+                    if transfer
+                    else set()
+                ),
             )
             if any(
-                type(record[key]) is not str or record[key] != value
+                type(record[key]) is not str
+                or record[key] != (_TRANSFER_FORMAT if key == "format" and transfer else value)
                 for key, value in _IDENTIFIERS.items()
             ):
                 raise ValidationAnalysisError("unsupported prospective analysis semantics")
@@ -165,6 +180,9 @@ class ValidationAnalysisPlan(_Artifact):
                 _integer(record[key], 1)
             for key in ("improvement_rule_sha256", "projection_release_sha256"):
                 _digest(record[key])
+            if transfer:
+                _digest(record["transfer_projection_release_sha256"])
+                _integer(record["transfer_repetitions"], 1)
             sources = _object(record["analyzer_sources"], set(_source_paths()))
             for digest in sources.values():
                 _digest(digest)
@@ -351,7 +369,7 @@ def _supported_plan(raw: bytes) -> ValidationAnalysisPlan | None:
         record = _load(raw)
     except ReleaseError:
         return None
-    if record.get("format") != _IDENTIFIERS["format"]:
+    if record.get("format") not in {_IDENTIFIERS["format"], _TRANSFER_FORMAT}:
         return None
     if record.get("method") not in (None, _IDENTIFIERS["method"]) or record.get(
         "projection"

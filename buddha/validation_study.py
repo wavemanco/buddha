@@ -201,7 +201,7 @@ def _custody(
     *,
     phase: str = "validation",
 ) -> dict[str, Any]:
-    if type(phase) is not str or phase not in {"validation", "final"}:
+    if type(phase) is not str or phase not in {"validation", "final", "transfer"}:
         raise ValidationStudyError("unsupported selected custody phase")
     record = _obj(
         value,

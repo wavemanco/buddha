@@ -66,7 +66,10 @@ scores. The offline export command now writes separate reviewer files and a
 private frozen roster, with explicit partial coverage and safe retry/refusal.
 The offline collection command now saves full returned judgments, missing/invalid
 forms and disagreements in a separate private report. Earlier partial reports stay
-unchanged. Explicit transfer and the actual independent human study remain open.
+unchanged. The [transfer evaluation route](docs/FINAL-EVALUATION.md#a-separately-declared-transfer-comparison)
+now adds a separately declared sealed dataset to an ordinary trial, with its own
+allocation and the same frozen agents and official evaluator. Actual transfer
+results and the independent human study remain open.
 
 ## Current state
 
@@ -243,8 +246,11 @@ assigned final task, the finalist count and selection policy, original phase
 allocations and the one-way freeze before running the complete comparison.
 Its exact executing head now passes both complete hosted suites and all
 configured checks; [the scoped completion record](docs/conformance/eval01-hosted-completion.json)
-closes EVAL-01 infrastructure. Actual held-out, human and
-transfer evidence remains separate under EVAL-02; no agent is promoted here.
+closes EVAL-01 infrastructure. New ordinary trials can declare a separate transfer
+panel before observations; both panels share one irreversible finalist freeze.
+The original three-phase trial and improver-assessment interfaces retain their
+existing scopes. Actual held-out, human and transfer evidence remains separate
+under EVAL-02; no agent is promoted here.
 
 The [trial work safeguard](docs/EVALUATION-FENCE.md) now connects the original
 phase grants and a shared writer lock to source search, feedback, validation,

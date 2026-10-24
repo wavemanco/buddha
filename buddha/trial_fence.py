@@ -31,9 +31,11 @@ from buddha.releases import (
 )
 
 _PREFIX = "buddha.evaluation-trial.v1:"
+_PREFIX_V2 = "buddha.evaluation-trial.v2:"
 _MARKER = ".buddha-evaluation-trial.json"
 _LOCK = ".trial-running.lock"
 _PHASES = {"search", "validation", "final"}
+_SEALED = {"final", "transfer"}
 _KINDS = {
     "search": {"gateway", "generation", "native", "improvement", "screen", "search", "feedback"},
     "validation": {"gateway", "generation", "native", "validation"},
@@ -89,6 +91,7 @@ class _TrialScope:
     root: Path
     definition_sha256: str
     phase: str
+    version: int = 1
 
     def __post_init__(self) -> None:
         try:
@@ -96,7 +99,10 @@ class _TrialScope:
                 raise TrialFenceError("trial scope requires an explicit root Path")
             _absolute(self.root)
             _digest(self.definition_sha256)
-            if type(self.phase) is not str or self.phase not in _PHASES:
+            if type(self.version) is not int or self.version not in {1, 2}:
+                raise TrialFenceError("unsupported trial scope version")
+            phases = _PHASES | ({"transfer"} if self.version == 2 else set())
+            if type(self.phase) is not str or self.phase not in phases:
                 raise TrialFenceError("unsupported trial grant phase")
         except (ReleaseError, ValueError, TypeError, OSError):
             raise TrialFenceError("invalid trial scope identity") from None
@@ -105,7 +111,7 @@ class _TrialScope:
 def _scope_text(binding: _TrialScope) -> str:
     if type(binding) is not _TrialScope:
         raise TrialFenceError("trial scope requires its literal immutable identity")
-    return _PREFIX + _json(
+    return (_PREFIX if binding.version == 1 else _PREFIX_V2) + _json(
         {
             "root": str(binding.root),
             "definition_sha256": binding.definition_sha256,
@@ -117,14 +123,18 @@ def _scope_text(binding: _TrialScope) -> str:
 def _parse_scope(scope: str) -> _TrialScope | None:
     try:
         text = _text(scope)
-        if not text.startswith(_PREFIX):
+        prefix = next((value for value in (_PREFIX, _PREFIX_V2) if text.startswith(value)), None)
+        if prefix is None:
             return None
-        raw = text[len(_PREFIX) :].encode("utf-8")
+        raw = text[len(prefix) :].encode("utf-8")
         record = _object(_load(raw), {"root", "definition_sha256", "phase"})
         if raw != _json(record):
             raise TrialFenceError("trial scope must be canonical strict JSON")
         return _TrialScope(
-            _absolute(record["root"]), _digest(record["definition_sha256"]), _text(record["phase"])
+            _absolute(record["root"]),
+            _digest(record["definition_sha256"]),
+            _text(record["phase"]),
+            version=1 if prefix == _PREFIX else 2,
         )
     except (ReleaseError, ValueError, TypeError, OSError, RecursionError):
         raise TrialFenceError("invalid reserved trial scope") from None
@@ -158,9 +168,10 @@ def _marker(directory: Path) -> tuple[Path, dict[str, object], str] | None:
             continue
         raw, digest = _read(marker)
         record = _object(_load(raw), {"format", "root", "definition_sha256", "funding_sha256"})
-        if record["format"] != "buddha.evaluation-trial-root.v1" or (
-            _checked_path(record["root"]) != parent
-        ):
+        if record["format"] not in {
+            "buddha.evaluation-trial-root.v1",
+            "buddha.evaluation-trial-root.v2",
+        } or (_checked_path(record["root"]) != parent):
             raise TrialFenceError("trial marker differs from its containing root")
         _digest(record["definition_sha256"])
         _digest(record["funding_sha256"])
@@ -187,7 +198,7 @@ def _funding(
     root: Path, marker: dict[str, object], marker_sha256: str
 ) -> tuple[dict[str, object], dict[Path, str]]:
     definition_path, funding_path = root / "definition.json", root / "funding.json"
-    _, definition_digest = _read(definition_path)
+    definition_raw, definition_digest = _read(definition_path)
     raw, funding_digest = _read(funding_path)
     if (
         definition_digest != marker["definition_sha256"]
@@ -205,13 +216,22 @@ def _funding(
             "phases",
         },
     )
-    if funding["format"] != "buddha.evaluation-trial-funding.v1" or (
+    version = 2 if marker["format"] == "buddha.evaluation-trial-root.v2" else 1
+    if funding["format"] != f"buddha.evaluation-trial-funding.v{version}" or (
         _checked_path(funding["root"]) != root or funding["definition_sha256"] != definition_digest
     ):
         raise TrialFenceError("funding differs from the fixed trial identity")
     total_budget = _amount(funding["total_budget_microusd"])
     total_calls = _amount(funding["total_max_calls"])
-    phases = _object(funding["phases"], _PHASES)
+    # Legacy foundation definitions remain opaque, including non-object bytes.
+    definition_format = None
+    try:
+        definition_format = _object(_load(definition_raw)).get("format")
+    except (ReleaseError, ValueError, TypeError, RecursionError):
+        pass
+    if (definition_format == "buddha.evaluation-trial.v2") != (version == 2):
+        raise TrialFenceError("trial definition and funding versions differ")
+    phases = _object(funding["phases"], _PHASES | ({"transfer"} if version == 2 else set()))
     budgets = calls = 0
     for phase, value in phases.items():
         row = _object(
@@ -235,7 +255,7 @@ def _funding(
             _text(row["scope"]),
         )
         binding = _parse_scope(scope)
-        if binding != _TrialScope(root, definition_digest, phase) or (
+        if binding != _TrialScope(root, definition_digest, phase, version=version) or (
             _digest(row["terms_sha256"]) != _terms_hash(budget, count, scope)
         ):
             raise TrialFenceError("phase grant terms differ from its original trial identity")
@@ -404,12 +424,14 @@ def _final_episode(
     """Only the final consumer supplies a fully checked frozen cell and retained owners."""
     directory = _checked_path(cell["directory"])
     binding, _, _ = _original(authority_path, terms, directory)
-    if binding is None or binding.phase != "final" or _FINAL.get() is not None:
+    if binding is None or binding.phase not in _SEALED or _FINAL.get() is not None:
         raise TrialFenceError("a final episode needs its original final grant")
     _assert_held(binding)
     required = {binding.root / "freeze" / name for name in ("schedule.json", "ready.json")}
     if not required <= {Path(name) for name in _object(cell["controls"])}:
         raise TrialFenceError("final episode omits original confirmed freeze evidence")
+    if binding.version == 2 and cell.get("phase") != binding.phase:
+        raise TrialFenceError("sealed episode differs from its original panel phase")
     episode = _FinalEpisode(binding, _json(cell), {}, os.getpid(), threading.get_ident())
     token = _FINAL.set(episode)
     try:
@@ -445,7 +467,7 @@ def _final_owner_contract(
     It creates no grant, owner or permission outside that existing episode.
     """
     binding, _, _ = _original(authority_path, terms, directory)
-    if binding is not None and binding.phase == "final":
+    if binding is not None and binding.phase in _SEALED:
         episode, cell = _final_current(binding)
         _final_directory(cell, directory, "gateway")
         expected = _object(cell["owner"])
@@ -514,6 +536,7 @@ def _assert_held(binding: _TrialScope) -> None:
         or (
             held.binding.root != binding.root
             or held.binding.definition_sha256 != binding.definition_sha256
+            or held.binding.version != binding.version
             or held.pid != os.getpid()
             or held.thread != threading.get_ident()
         )
@@ -633,7 +656,7 @@ def assert_work(
         if binding is None:
             return controls
         _assert_held(binding)
-        if binding.phase == "final":
+        if binding.phase in _SEALED:
             episode, cell = _final_current(binding)
             _final_directory(cell, _checked_path(directory), kind)
             if manifest is not None:
@@ -700,7 +723,8 @@ def is_closed(directory: Path) -> bool:
             return False
         _funding(*marker)
         relative = _checked_path(directory).relative_to(marker[0])
-        if relative.parts and relative.parts[0] == "final":
+        sealed = _SEALED if marker[1]["format"] == "buddha.evaluation-trial-root.v2" else {"final"}
+        if relative.parts and relative.parts[0] in sealed:
             episode = _FINAL.get()
             if episode is None:
                 return True
