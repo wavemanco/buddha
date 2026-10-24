@@ -30,7 +30,10 @@ spending permission, owners or a runnable handoff.
 A [test-only follow-through](docs/conformance/imp01-shared-replay-expectation-delivery.json)
 corrects the stale finite-replay read count exposed by hosted CI. Sixteen related
 checks and seven quality commands pass locally; executing code and frozen inputs
-are unchanged. Fresh hosted verification remains pending.
+are unchanged. Exact PR #116's Ubuntu job now passes all 1,804 tests (zero
+failures, zero errors and five skips) and every configured check. Its Windows job
+and both jobs for PR #117/#118 remain pending at the October 24, 2026
+13:40:26 UTC checkpoint.
 Final launch/input/account checks and a new allocation remain required; the
 proposed $25/512 attempts are unallocated and no live command is available.
 A negative or unavailable observation leaves an explicit partial result.
@@ -52,7 +55,17 @@ unchanged. PR #102's full Ubuntu suite also passes; Windows and later revisions
 remain separate checks. A [small matched screen observation](docs/RECONSTRUCTION-COST.md#bounded-paired-screen-observation)
 now records 0.569 and 0.399 seconds at the exact old/shared source cuts, with
 matching treatment content and a reduction from two evidence reconstructions to one.
-Larger verification costs and production speed remain open.
+Costs for the full planned grid and production speed remain open.
+
+A [two-condition cost observation](docs/RECONSTRUCTION-COST.md#two-starting-conditions)
+now checks twelve sealed cells and forty-eight original final owners at source
+head `b551885`. Complete development, freeze and final readers took about
+29.5, 33.0 and 45.5 seconds, with all six plain/profiled reads preserving the
+original evidence. The whole construction and measurement process took about
+41 minutes 39 seconds. This supplied-response case retains 1,161 files and
+100 databases; it establishes no causal speedup, scaling law, paid-run readiness
+or scientific improvement. The full future-grid cost gate remains open.
+
 The [shared generation check](docs/RECONSTRUCTION-COST.md#sharing-one-checked-generation)
 now removes a duplicated reconstruction in screen, validation and launch readers,
 while preserving original source bindings and complete integrity checks.

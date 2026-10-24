@@ -166,3 +166,26 @@ outcome.
 The adopted protocol files retain their preparation-time statements and hashes.
 Later preparation, funding and results require separate records; they do not
 rewrite those files or the earlier supplied-response rehearsal.
+
+Exact corrected PR #116 now passes all 1,804 tests and configured quality steps
+on Ubuntu, with zero failures, zero errors and five explicit skips. At the
+October 24, 2026 13:40:26 UTC checkpoint its Windows job is still running. The
+[retained CI evidence](conformance/imp01-larger-reader-cost-observation.json)
+does not establish a complete platform matrix or grant spending permission.
+
+## Refreshed public price evidence
+
+The October 24 [price refresh](conformance/imp01-larger-reader-cost-observation.json)
+and independent review confirm the stored bounds for all five model roles.
+Profiles and model IDs remain unchanged. This checks public documentation and
+the accepted request features; account access and actual combined request fit
+remain separate checks.
+
+The existing launcher accepts the three additional support pins without a code
+or proposal-bundle change. If adopted in a new proposed launch version, the
+fixed input union becomes 77 paths, or 78 with the future key-bound review;
+the conditional maximum becomes 111, including permitted empty sidecars.
+These remain projections. The original draft v2 and its 74/108 calculation
+stay unchanged. Recompute the new launch hash and bind the future account
+review to that hash, then reconcile the actual funded input union. No new
+launch, funding or user command is supplied by this documentation.

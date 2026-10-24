@@ -12,7 +12,8 @@ prove ancestry or improvement; a live protocol must establish that separately.
 
 The separate [sealed-assessment consumer](IMPROVER-ASSESSMENT.md) connects
 completed original development records to a prospectively declared final grid
-and paired analysis. That connection is undergoing composed checks; this
+and paired analysis. That connection passes bounded composed checks and
+reader-cost observations; this
 development controller keeps its original scope and never consumes final
 scores as improvement feedback.
 
@@ -104,11 +105,12 @@ every current input file before new work can proceed.
 
 The current declaration requires an engineering assessment marked `not_frozen`;
 the resulting assessment remains `not_ready`, with target repair unassessed.
-The [pure paired analyzer](IMPROVER-ANALYSIS.md) now implements the numerical
-method, including explicit empty/missing outcomes. Its protected original-record
-connection, separate sealed tasks and actual effectiveness remain IMP-01 work.
-Development completion does
-not enable a final grant or establish a scientific result.
+The [paired analyzer](IMPROVER-ANALYSIS.md) implements the numerical method,
+including explicit empty/missing outcomes. The separate [sealed consumer](IMPROVER-ASSESSMENT.md)
+now connects original development records to protected final execution and
+analysis. Actual effectiveness and the prospectively defined targeted-repair
+assessment remain IMP-01 work. Development completion alone does not enable
+a final grant or establish a scientific result.
 
 The original [tests-first checkpoint](conformance/imp01-finite-study-delivery.json)
 remains historical evidence. The implementation checks cover the composed

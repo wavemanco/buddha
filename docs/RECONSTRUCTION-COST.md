@@ -108,8 +108,11 @@ and late byte/database-sidecar checks. Two separate observations still require
 two reconstructions. All seven quality checks pass; the implementation and
 prepared live inputs are unchanged. The [delivery](conformance/imp01-shared-replay-expectation-delivery.json)
 preserves the original failure, local RED/GREEN results, source trace and scope.
-Fresh hosted verification remains pending. These checks add no timing comparison
-or scientific improvement result.
+Exact PR #116's Ubuntu job now passes all 1,804 tests: zero failures, zero
+errors and five skips, with every configured check successful. At the October 24,
+2026 13:40:26 UTC checkpoint, its Windows job and both jobs for PR #117 and
+PR #118 remain pending. These checks add no timing comparison or scientific
+improvement result.
 
 ## Bounded paired-screen observation
 
@@ -152,22 +155,57 @@ observation. It does not establish a production speedup, a scaling law, the cost
 of the larger improver grid, or performance of the later PR #108 review bridge.
 No repeat campaign or larger performance experiment follows from this result.
 
+## Two starting conditions
+
+A separate observation at source head `b551885` now measures the same three
+complete public readers on two starting conditions. Four counted opportunities
+produce four selected descendant slots; the starter, initial and evolved roles
+in each condition give six arms, twelve sealed cells and forty-eight final owners.
+The [measurement record](conformance/imp01-larger-reader-cost-observation.json)
+binds the original invocation, process result, reports, profiles and independent
+saved-data review.
+
+| Complete reader | Plain wall seconds | Plain CPU seconds | Separate profiled wall seconds |
+| --- | ---: | ---: | ---: |
+| Development result | 29.498 | 29.266 | 46.027 |
+| Frozen schedule | 33.019 | 32.813 | 50.596 |
+| Final result | 45.470 | 45.219 | 75.008 |
+
+Seconds are rounded here; the record retains the original clock values. All six
+calls reproduce the original reports or schedule with unchanged evidence. The
+new retained tree has 1,161 files, 861 folders, 100 database files and 10,248,337
+bytes; all 236 source/parameter pins match. The earlier six-cell tree, including
+its 640 files and 56 databases, also remains unchanged.
+
+The entire outer process took 2,498.521 seconds, about 41 minutes 39 seconds.
+That includes fixture construction, hashing, complete reader calls and separate
+profiling. It is not an isolated preparation time. No paid API or real container
+worker was used.
+
+This is one warm, fixed-order supplied-response observation on a nonexclusive
+machine. Both the source and cohort differ from the first measurement, so their
+times do not isolate a speedup or establish scaling. Production latency, costs
+for the full future grid, improved-improver effectiveness and scientific results
+remain unestablished. The full future-grid cost gate stays open.
+
 ## Limits and next verification
 
-This is one small condition on a nonexclusive Windows machine running Python
-3.13.12. Fixture creation and snapshot hashing warmed operating-system caches.
+The first observation used one small condition on a nonexclusive Windows machine
+running Python 3.13.12. Fixture creation and snapshot hashing warmed operating-system caches.
 Reader order was fixed. Audit guards and clocks have uncalibrated overhead.
 Profiling adds instrumentation and uses a different cache state; subtracting
 plain from profiled times does not isolate a causal profiler overhead.
 Audit and path-guard costs are not separately exposed in the profile rows;
 the file-read and file-status times describe this guarded execution.
 
-There is no production NoveltyBench timing, scaling law, full multi-condition
-cost result or general optimization-speed claim here. Supplied programs and replies
-also establish no model-authored competence or scientific improvement. The
-larger IMP-01 cost and exact-current-head hosted checks remain open.
+There is no production NoveltyBench timing, scaling law, cost result for the
+full planned grid or general optimization-speed claim here. Supplied programs
+and replies also establish no model-authored competence or scientific improvement.
+Costs for the full planned IMP-01 grid and exact-current-head hosted checks
+remain open.
 
 The original cohort remains readable by its approved consumer. The bounded
-comparison completes the small duplicate-read observation; larger costs still
-need to be recorded for the planned matched improver work. This does not require
-changing the official benchmark or its scores.
+comparison completes the small duplicate-read observation; the two-condition
+observation records a larger engineering case. Costs for the full planned matched
+improver workload remain to be established. This does not require changing the
+official benchmark or its scores.
