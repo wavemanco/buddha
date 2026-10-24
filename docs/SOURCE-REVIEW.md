@@ -17,6 +17,12 @@ commands below, for final, transfer and improver outputs. The actual independent
 transfer/human study remains open. Working review machinery does not establish
 human judgments or scientific improvement.
 
+The matched-improver study's separate [target-repair method](IMPROVER-TARGET-REPAIR.md)
+compares each counted development child's outputs with its immediate parent's
+outputs and literal stated intention. This exporter covers sealed selected sets,
+and its existing forms/importer do not implement that supplementary worksheet.
+The worksheet leaves these review schemas and official scores unchanged.
+
 ## Select the sample before generating answers
 
 Before preparing trial owners, write a `buddha.source-review-plan.v1` JSON file

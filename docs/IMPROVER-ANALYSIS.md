@@ -127,7 +127,15 @@ supply that separate outcome.
 
 Before the actual study, its protocol must define the target-review method,
 the relevant parent and child task outputs, coverage and missing/uncertain
-outcomes. Existing review exports cover sealed starter and selected-descendant
+outcomes. The [descriptive method v1](IMPROVER-TARGET-REPAIR.md) supplies a separate
+two-stage worksheet: fix intended targets using the full hypothesis and parent
+sets before revealing child outcomes, then review the complete same-task child
+sets. It retains every counted opportunity, actual immediate parents, multiple
+targets, missing intentions, failed outcomes and disagreements. The actual
+study must prospectively adopt and pin the method, its coverage and its review
+arrangements; the method alone supplies no observed repair result.
+
+Existing review exports cover sealed starter and selected-descendant
 sets rather than every development proposal. A frozen supplementary review
 can report descriptive repair findings from the retained full outputs and
 lineage. A machine-checked extension is needed only if the adopted method
