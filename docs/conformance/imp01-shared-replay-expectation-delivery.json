@@ -1,0 +1,121 @@
+{
+  "basis_commit": "2f922252e913848d1bdee0392581787b0c72b8c4",
+  "evidence": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\pr111-ci-job-120825255853-terminal-v1.log",
+      "sha256": "ad7b3b59601d1a4f2920967dfd1fc9ca51b68b203b3a49d330dc4c783f1065a9"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-selected-producer-ci-terminal-checkpoint-v1.json",
+      "sha256": "3c7f6064e99168458f651886620cb26129997863ffc1e0ed80536057fff9b9af"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-shared-replay-red-v1.json",
+      "sha256": "5553e9868a4ac17b4ede2c739a896abcd2ed69b0aacc8426e5b537e079b0bfa6"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-shared-replay-red-v1.log",
+      "sha256": "b98b3774c45cc74cbcac77f837e2294c2e628ca2e4a2bae5ea53129af219502e"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-shared-replay-green-v1.json",
+      "sha256": "2b084849d82c8e92f11df269f13aafd0e3a397a9a9e40e59e67514d7d84acbcc"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-shared-replay-green-v1.log",
+      "sha256": "4ce3a68b9627149977ed7c12565abc93121609208d0f0b279712c13453ba5134"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\run-imp01-shared-replay-checks-v1.py",
+      "sha256": "52a3ea5e98af70d3de1a2173fd2916752123a41065a505f5f98f07578a840912"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-shared-replay-quality-v1.json",
+      "sha256": "9ae827f1e4678c0941837328ee695879fb91403f4c65f8f623bec6f4be5d257b"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-shared-replay-quality-v1.inputs.json",
+      "sha256": "63242703c25afe8281ff1baf7ba139b6a92369abc11033231b26dc5d2093a359"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-shared-replay-quality-v1.log",
+      "sha256": "07f9643659f1010549c64fd2783b3dbb4e1d48b250fe71f9c41cb6c0973703bb"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\run-imp01-shared-replay-quality-v1.py",
+      "sha256": "93c4f51db456aa32bae3c47683432a8629796e96bdd7b4920248a999045c1ca3"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-shared-replay-quality-app-v1.py.txt",
+      "sha256": "4bdcad408cd9c3258be597c2572b34750c1d15da0d931bac0e1f46c945b8a8f4"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-shared-replay-quality-test-v1.py.txt",
+      "sha256": "338fc33d41678b260e3c4f104a32f8c8318052885b75e700aac90ed681bcc715"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-shared-replay-expectation-source-review-v1.json",
+      "sha256": "6e34f8075d4e7ff86847504dd94ad82b26fb8da5a89f3351bfab63183e0d5cd6"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-shared-replay-expectation-independent-review-v1.json",
+      "sha256": "5443b219fe1e6357821097e74d68a20268e7f7b35ab3c976ee0880fb57849a09"
+    }
+  ],
+  "format": "buddha.imp01-shared-replay-expectation-delivery.v1",
+  "green": {
+    "denied_events": [],
+    "elapsed_seconds": 170.70089460001327,
+    "errors": 0,
+    "failures": 0,
+    "skips": 0,
+    "source_pins": 226,
+    "source_pins_unchanged": true,
+    "tests": 16
+  },
+  "limits": [
+    "Original failed hosted job is retained; local passing checks are not fresh hosted success.",
+    "No benchmark, accounting, runtime, source-evolution procedure, price or budget term changed.",
+    "No API key, paid model call, original-owner mutation, worker launch or actual source experiment.",
+    "Four gates remain open. New source-study allocation and final funded/account/pricing checks remain required.",
+    "Existing timing observations keep their original scope; no new performance or scientific improvement claim."
+  ],
+  "preservation": {
+    "all_production_code_unchanged": true,
+    "frozen_source_map_bindings_unchanged": 169,
+    "historical_plan_rows": 117,
+    "legitimate_two_observation_expectation_preserved": true,
+    "original_main_acceptance_tails": 10,
+    "other_test_methods_unchanged": true,
+    "plan_sha256": "e61f6a19a6495055e4e69eb5df6384816ada79e941a6bd96619c209c2657ec14",
+    "selected_launcher_helpers_unchanged": 44,
+    "unfunded_launch_draft": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-unfunded-launch-draft-v2.json",
+      "sha256": "5d326d8e75037767b33a0c6483314d2302dc5d1aed92cafd300ba242de660d6b"
+    }
+  },
+  "quality": {
+    "all_pins_unchanged": true,
+    "checks": 7,
+    "inputs": 227,
+    "passed": 7
+  },
+  "red": {
+    "elapsed_seconds": 22.663975600036792,
+    "errors": 0,
+    "failures": 1,
+    "skips": 0,
+    "source_pins": 226,
+    "source_pins_unchanged": true,
+    "tests": 1
+  },
+  "review_roles": "Historical paired-reader author supplies disclosed source trace; separate review checks current correction and saved evidence. Neither is human scientific evaluation.",
+  "scope": "Two-line performance-expectation correction; no production-code change",
+  "status": "local_checks_pass",
+  "test": {
+    "after_sha256": "338fc33d41678b260e3c4f104a32f8c8318052885b75e700aac90ed681bcc715",
+    "before_sha256": "508d83e39ef0f59ddc01d58b9d96e1ca88ae57e66c724b24aca0bb73b7f5a32c",
+    "change": "Expected one complete checked reconstruction instead of two, with updated message; all other assertions/methods preserved",
+    "path": "tests/test_improver_screen_replay.py"
+  }
+}

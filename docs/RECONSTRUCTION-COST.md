@@ -93,6 +93,24 @@ interruption between sealing and publication. These are correctness and work-cou
 results. The timing table above remains the original measured source cut.
 The separate bounded observation below now measures one affected screen reader.
 
+## Finite replay expectation follow-through
+
+The finite-study replay test still expected two complete reconstructions after
+the shared reader was implemented. PR #111's original Ubuntu job reports that
+assertion as its only failure among 1,789 tests. The unchanged test reproduces
+the same failure locally. The correction changes only the expected count and
+message, requiring one complete checked reconstruction.
+
+All sixteen existing finite replay, paired-reader and composed-reader checks
+pass after the correction. They retain canonical reports, exact original owner
+coverage, retired-producer replay, rejection of foreign or missing evidence,
+and late byte/database-sidecar checks. Two separate observations still require
+two reconstructions. All seven quality checks pass; the implementation and
+prepared live inputs are unchanged. The [delivery](conformance/imp01-shared-replay-expectation-delivery.json)
+preserves the original failure, local RED/GREEN results, source trace and scope.
+Fresh hosted verification remains pending. These checks add no timing comparison
+or scientific improvement result.
+
 ## Bounded paired-screen observation
 
 One small matched case now has a measured comparison at the exact PR #105 and
