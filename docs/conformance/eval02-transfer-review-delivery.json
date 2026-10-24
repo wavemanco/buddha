@@ -1,0 +1,211 @@
+{
+  "base_commit": "8c2c2732c35c2d6734f0e00157d235a7b4d48b4b",
+  "checks": {
+    "eval02-transfer-review-compatibility-v2": {
+      "denied_events": [],
+      "elapsed_seconds": 6.605711500043981,
+      "errors": 0,
+      "failures": 0,
+      "skips": 0,
+      "source_inventory_unchanged": true,
+      "tests_run": 55
+    },
+    "eval02-transfer-review-genuine-v2": {
+      "denied_events": [],
+      "elapsed_seconds": 380.57248440000694,
+      "errors": 0,
+      "failures": 0,
+      "skips": 0,
+      "source_inventory_unchanged": true,
+      "tests_run": 1
+    },
+    "eval02-transfer-review-small-v2": {
+      "denied_events": [],
+      "elapsed_seconds": 1.2024073000065982,
+      "errors": 0,
+      "failures": 0,
+      "skips": 0,
+      "source_inventory_unchanged": true,
+      "tests_run": 3
+    }
+  },
+  "evidence": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\eval02-transfer-review-held-v2.json",
+      "sha256": "a3af7df71b471a01d461ad7c23e8d616a78db576cdd9ecabeae02ed5183ce7e3"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\eval02-transfer-review-cli-red-v1.json",
+      "sha256": "d630539ab7f2bcefbd5a6748d286e1e822ee39e98bdc5376734dec3feb6953fb"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\eval02-transfer-review-cli-red-v1.log",
+      "sha256": "c9ba581b7368f9f0f24117dd6c29e6d86c1ecad03c54523e452902871295d65d"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\run-eval02-transfer-review-checks-v1.py",
+      "sha256": "3435bd8bd06fe8bd7f46a44d7f426ea2d8400e80669ac407fe22e51c801f9ba9"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\eval02-transfer-review-quality-v2.json",
+      "sha256": "937fe61a2023e4b7931a7befcb5cafbd90816e44e251acdcda07fd76eff04525"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\eval02-transfer-review-quality-v2.inputs.json",
+      "sha256": "e014f4f38de25d92797f13c5fa95a3dfab83027ec74186ab6453843ab6b4f10c"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\eval02-transfer-review-quality-v2.log",
+      "sha256": "da95f638993987e0100202d649c4530249bea94662e384936420601730f0d681"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\run-eval02-transfer-review-quality-v2.py",
+      "sha256": "3c92fef4b7619189d0424d67de699566840156c0683c879c2fc0f5e252f6ef09"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\eval02-transfer-review-source-review-v1.json",
+      "sha256": "00fad1589480e94de054eac01c03d254872c60551b0baf7d044de4a608d2c0f3"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\eval02-transfer-review-source-review-v2.json",
+      "sha256": "5bda623323aae88369b0204fd1a7b2a4e864d0126592173d6246db552e461544"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\eval02-transfer-review-genuine-v1.json",
+      "sha256": "3b8d9779012677070f1605dc4687414dddb7fa0f332ebf30bdd82abc6e6e1a5b"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\eval02-transfer-review-genuine-v1.log",
+      "sha256": "7f34f7e9809b2a694f02eee3f77bbf55fe8d2bf3fdb0bcef1e6b68ce0104a5b0"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\eval02-transfer-review-guard-red-v1.json",
+      "sha256": "479fe12d6d451fbd108d0a199b6187989fe69229fb2990d8bcdce509b8270933"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\eval02-transfer-review-guard-red-v1.log",
+      "sha256": "567f97e58597f8483e143470b75d7f49523a8bb3241a54b13cd5a1bb6e34aa8d"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\eval02-transfer-v1-compatibility-v1.json",
+      "sha256": "113d70531af813f4bd6a2d85cbd6347066a8138239046521082120bb68e9a92d"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\eval02-transfer-v1-compatibility-v1.log",
+      "sha256": "2d0340ee42f592b66006dd4c021354751ba2d7a611468ac2aa61c48d1d6dd4f5"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\eval02-transfer-review-small-v2.json",
+      "sha256": "dc649fe33301d44193c7ece673e6b70a55f7c032a31a5466c52ab84222ac8891"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\eval02-transfer-review-small-v2.log",
+      "sha256": "6f59d4a45d8ecebdbc4a6574c9c5e1beae107cb39637371033e035d10cf7f0d0"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\eval02-transfer-review-genuine-v2.json",
+      "sha256": "7c731b1fa56a8f0eb6d83ace53c6aa0831ae69e8e7bb81220077a773dec1b2c8"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\eval02-transfer-review-genuine-v2.log",
+      "sha256": "a01aeaa82e4e3b5fcfdacd3410d2f410eebb5ca68c558badba643f46a6b3a2ec"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\eval02-transfer-review-compatibility-v2.json",
+      "sha256": "1f8cdedc6c2c5fa346facc79e9c21c61abea3723b8b36f9f4b0f02c1639cdbca"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\eval02-transfer-review-compatibility-v2.log",
+      "sha256": "d72b00cace605051892e48b5471e383d13d7072343eee33e741cc879a235c15c"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\eval02-transfer-review-held-v2-buddha-source_review.py.txt",
+      "sha256": "e24f0f05438b5a39d80612b376eec454d3e91d6beacc4c27547fab7675f0a56c"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\eval02-transfer-review-held-v2-buddha-__main__.py.txt",
+      "sha256": "2f3f8157d313207c2c56b37c0de8ac834ab81b1b25708f2b2ea6c5d417e95a8e"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\eval02-transfer-review-held-v2-tests-test_transfer_review.py.txt",
+      "sha256": "843e7e2cdaed13dd50c9f97a6bdb4d438e7d6272ac9125b266dffc54254272a1"
+    }
+  ],
+  "format": "buddha.eval02-transfer-review-delivery.v1",
+  "guard_setup_correction": "Helper-first context preserves real Gateway initializer guard before trial replaces class; all prior three method ASTs and production unchanged. A cheap guard acceptance reproduces the error before correction.",
+  "initial_red_commit": "a002ab20b5a99e8baf0ed980d16ed3f18f2455a8",
+  "initial_red_method_ast_unchanged": true,
+  "limits": [
+    "Supplied-worker/provider/form engineering checks; no actual independent human judgment or scientific improvement evidence.",
+    "59 explicit methods across separate guarded cohorts; no current full-suite or hosted-CI success claim.",
+    "Existing v1 final/IMP scopes and official scores unchanged; paired IMP transfer not implemented.",
+    "Synthetic temporary grants/owners are created in tests. No paid API call, real key, new paid allocation, old-run mutation or generated-program execution on host.",
+    "Earlier original-cut 33-method terminal pass is related evidence, not reclassified as this held cut.",
+    "Proposed SRC02 $25/512 remains unallocated and all frozen launch inputs retain their original identity."
+  ],
+  "preservation": {
+    "four_gates_remain": true,
+    "historical_revision_rows_unchanged": 119,
+    "original_main_acceptance_tails_unchanged": 10,
+    "plan_sha256": "829fdef7367ebab9ec3439c797154b694a3d2b8055062001b233aa13cef9d99e",
+    "primary_plan_mirror_equal": true,
+    "src02_sole_next": true
+  },
+  "quality": {
+    "all_pins_unchanged": true,
+    "commands": [
+      {
+        "exit_code": 0,
+        "name": "lint"
+      },
+      {
+        "exit_code": 0,
+        "name": "format"
+      },
+      {
+        "exit_code": 0,
+        "name": "types"
+      },
+      {
+        "exit_code": 0,
+        "name": "security"
+      },
+      {
+        "exit_code": 0,
+        "name": "dependencies"
+      },
+      {
+        "exit_code": 0,
+        "name": "compile"
+      },
+      {
+        "exit_code": 0,
+        "name": "diff"
+      }
+    ],
+    "input_count": 229,
+    "status": "pass"
+  },
+  "retained_failed_guard_setup_checks": {
+    "eval02-transfer-review-genuine-v1": {
+      "elapsed_seconds": 274.39026909996755,
+      "errors": 1,
+      "failures": 0,
+      "source_inventory_unchanged": true,
+      "tests_run": 1
+    },
+    "eval02-transfer-review-guard-red-v1": {
+      "elapsed_seconds": 0.3556544000748545,
+      "errors": 1,
+      "failures": 0,
+      "source_inventory_unchanged": true,
+      "tests_run": 1
+    }
+  },
+  "source_test_pins": {
+    "buddha/__main__.py": "2f3f8157d313207c2c56b37c0de8ac834ab81b1b25708f2b2ea6c5d417e95a8e",
+    "buddha/source_review.py": "e24f0f05438b5a39d80612b376eec454d3e91d6beacc4c27547fab7675f0a56c",
+    "tests/test_transfer_review.py": "843e7e2cdaed13dd50c9f97a6bdb4d438e7d6272ac9125b266dffc54254272a1"
+  },
+  "status": "local_checks_pass"
+}

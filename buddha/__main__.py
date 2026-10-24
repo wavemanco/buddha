@@ -310,7 +310,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     for command in (review_export, review_inspect):
         command.add_argument("--run", type=Path, required=True)
-        command.add_argument("--kind", choices=("final", "improver"), required=True)
+        command.add_argument("--kind", choices=("final", "improver", "transfer"), required=True)
         command.add_argument("--report-sha256", required=True)
         command.add_argument("--plan", type=Path, required=True)
         command.add_argument("--plan-sha256", required=True)

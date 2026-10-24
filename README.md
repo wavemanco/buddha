@@ -69,7 +69,9 @@ forms and disagreements in a separate private report. Earlier partial reports st
 unchanged. The [transfer evaluation route](docs/FINAL-EVALUATION.md#a-separately-declared-transfer-comparison)
 now adds a separately declared sealed dataset to an ordinary trial, with its own
 allocation and the same frozen agents and official evaluator. Actual transfer
-results and the independent human study remain open.
+answers can use the same review workflow with a prospectively pinned `transfer`
+sample and separate review round. Actual transfer results and the independent
+human study remain open.
 
 ## Current state
 
