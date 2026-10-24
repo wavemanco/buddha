@@ -230,9 +230,16 @@ code, and feeds verified official results to that analyzer. The actual controlle
 experiment, full/hosted verification and improved-effectiveness evidence remain
 open. The separate archival correction passes its final retirement lifecycle,
 consumed-data alias checks and strict unfinished-work controls. A further
-valid-descendant lifecycle is still running; the
-[delivery record](docs/conformance/imp01-sealed-passive-replay-delivery.json)
-keeps each verification cut separate.
+valid-descendant lifecycle [passed at its recorded cut](docs/conformance/imp01-sealed-passive-replay-verification.json);
+the [delivery record](docs/conformance/imp01-sealed-passive-replay-delivery.json)
+keeps that evidence separate from later source versions.
+
+The [explicit aggregate-cap v2 declarations](docs/IMPROVER-ASSESSMENT.md#explicit-aggregate-caps-in-v2)
+let a separately approved improver study use combined phase limits below the
+sum of all owner ceilings. Original v1 funding rules remain available. A budget
+stop preserves a partial result and the full planned coverage; it cannot turn
+finished subsets into a completed comparison. This adds no IMP-01 allocation or
+live command and leaves the approved source demonstration unchanged.
 
 Useful-diversity gains, held-out improvement and improved-improver effectiveness
 remain **not established**. The source-chain fixture uses synthetic replies and

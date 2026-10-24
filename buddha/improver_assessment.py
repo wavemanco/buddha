@@ -27,6 +27,7 @@ from buddha.releases import ReleaseError, Selection, _digest, _json, _load, _tex
 from buddha.wire import _integer
 
 _FORMAT = "buddha.improver-assessment-trial.v1"
+_AGGREGATE_FORMAT = "buddha.improver-assessment-trial.v2"
 _CONTEXT = "buddha.improver-assessment-context.v1"
 _SCHEDULE = "buddha.improver-final-schedule.v1"
 _READY = "buddha.improver-final-freeze-ready.v1"
@@ -110,7 +111,10 @@ def _definition(raw: bytes, runtime: str, *, active: bool = True) -> dict[str, A
             "consumer_sources",
         },
     )
-    if record["format"] != _FORMAT or record["selection_policy"] != _POLICY:
+    if (
+        record["format"] not in (_FORMAT, _AGGREGATE_FORMAT)
+        or record["selection_policy"] != _POLICY
+    ):
         raise ImproverAssessmentError("unsupported prospective improver assessment")
     _text(record["experiment_id"])
     runtime = _digest(runtime)
@@ -124,6 +128,13 @@ def _definition(raw: bytes, runtime: str, *, active: bool = True) -> dict[str, A
         runtime,
         active=active,
     )
+    expected_development = (
+        improver_study._AGGREGATE_FORMAT
+        if record["format"] == _AGGREGATE_FORMAT
+        else improver_study._FORMAT
+    )
+    if development["format"] != expected_development:
+        raise ImproverAssessmentError("assessment and development funding versions must match")
     tasks = TaskSet.from_bytes(pipeline._read(Path(refs["tasks"]["path"])))
     release, data = _source(tasks.to_record())
     if tasks.to_bytes() != TaskSet.from_dataset(release, data).to_bytes():
@@ -220,6 +231,9 @@ def _definition(raw: bytes, runtime: str, *, active: bool = True) -> dict[str, A
     }
     for amount in expected_final.values():
         _integer(amount, 1)
+    if record["format"] == _AGGREGATE_FORMAT:
+        improver_study._bounded_limits(limits["final"], expected_final)
+        expected_final = limits["final"]
     if limits != {
         "search": development["limits"]["study"],
         "validation": {"budget_microusd": 0, "max_calls": 0},

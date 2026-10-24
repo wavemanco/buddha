@@ -77,6 +77,33 @@ charged once; arm costs include failed attempts. The validity-check total is an
 included subtotal, not an extra charge. Prospective screen limits include every
 selected task, while the validity check uses its first ordered task once.
 
+## Versioned funding limits
+
+The original `buddha.improver-study.v1` declaration retains its rules: common
+and arm ceilings, plus the whole-study ceiling, must equal the complete derived
+grid. Its existing spending authority must cover that whole ceiling.
+
+An explicitly selected `buddha.improver-study.v2` declaration keeps the same
+common and arm ceilings, tasks, opportunities, request limits and scoring. It
+allows `limits.study` to specify a smaller positive combined dollar and attempt
+cap. Each amount must be at most its full-grid ceiling. The actual spending
+authority must match both declared amounts exactly; preparation and passive
+reconstruction both check this. A larger authority cannot silently expand the
+declared allowance.
+
+The existing shared ledger reserves each request's verified maximum charge
+before sending it. If the next reservation would exceed either aggregate cap,
+execution stops with an incomplete observation, its position, original coverage,
+costs and unresolved holds. A cap does not guarantee that the grid will finish.
+These are authorization ceilings, not expected bills or guarantees of valid
+model outputs. No provider price or request bound is reduced by this version.
+
+Because traversal is fixed, a shared cap can stop before later arms or starting
+conditions run. Equal nominal arm ceilings do not imply equal realized resources
+in that prefix. Keep every planned denominator; do not analyze only the finished
+arms as a completed matched comparison. Final assessment still requires complete
+original development. Choosing this format does not fund or adopt a study.
+
 ## Saved results and remaining assessment
 
 The saved declaration and context bind the original inputs and authorization.
@@ -141,6 +168,15 @@ window. These checks use supplied replies, need no keys and spend no API money.
 They create temporary test data and can take tens of minutes or more. No second
 window is needed; Ctrl+C stops the checks. They do not run a live comparison or
 change historical experiment records.
+
+```powershell
+python -m unittest discover -s tests -p test_improver_phase_budget.py -v
+```
+
+Optional: run the aggregate-cap checks once from the matching checkout in this
+PowerShell window. They create temporary records and use supplied replies, need
+no keys and spend no API money. They can take tens of minutes; Ctrl+C stops them.
+No separate window is needed, and they do not launch a live study.
 
 ## Rechecking finished measurements
 
