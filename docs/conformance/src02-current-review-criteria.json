@@ -1,0 +1,60 @@
+{
+  "format": "buddha.current-source-procedure-review-draft.v2",
+  "status": "unfrozen_draft_for_review",
+  "scope": "Predeclare interpretation for a later actual model-authored current-source observation; rehearsal supplied programs cannot establish model authorship or scientific effectiveness.",
+  "separate_outcomes": {
+    "operational": "All declared roles/outcomes complete or explicit partial reason/accounting retained. Completion alone does not establish either source gate.",
+    "task_procedure_change": {
+      "required": "Literal source diff establishes a substantive change to an ACTUALLY EXECUTED generation procedure or its used helper/control flow/planning/selection/callback structure, beyond only instruction constants, names or comments.",
+      "evidence": [
+        "exact P/C/further-child source bytes and hashes",
+        "raw proposal text/hypothesis equals materialized child",
+        "actual generation owner/source/mount/task and callbacks/output evidence"
+      ],
+      "not_sufficient": [
+        "whole-file inequality",
+        "claimed hypothesis",
+        "callable name",
+        "compilation alone",
+        "a higher official score"
+      ]
+    },
+    "changed_used_improver": {
+      "required": "A parent-authored literal inherited improver implementation in C differs substantively from its predecessor, and C ACTUALLY executes that changed procedure to author another permitted changed child which successfully generates on the first ordered development task.",
+      "evidence": [
+        "initial and changed source plus exact inherited lineage",
+        "C own proposal owner executes C source and retains complete C measured feedback",
+        "raw callback/returned source and further-child private copy/generation joins"
+      ],
+      "not_sufficient": [
+        "changed prompt constant alone",
+        "changed improver only inside an unexercised further child",
+        "restoring a host improver into returned source",
+        "C generation success alone"
+      ]
+    },
+    "bounded_validity": "The host enforces both callable routes, original measured data, safe materialization, verified copy, runtime/protected source/control/model/callback/resource/funding limits. One witness does not prove universal competence or literal semantic compliance.",
+    "performance": "Report original official common-task utility/distinctiveness, literal compliance concerns, failures and all actual costs separately. A successful code/improver mechanism can have worse metrics. No useful-diversity, heldout, human-preference or improved-improver efficacy claim."
+  },
+  "adjudication": [
+    "established",
+    "not_established",
+    "inconclusive"
+  ],
+  "negative_rule": "Retain negative/uncertain evidence. Do not repair selected source, adopt a witness as counted descendant, extend iterations after outputs or rewrite old records to make a mechanism positive.",
+  "draft_rehearsal_supplied_control": "C adds an actual planning call/dataflow to generation and a measured-utility/planning-response-dependent improver before invoking its retained full-note parser. Its two real confined callback roles must produce W1 and W1 must generate. All provider replies/scores/usage are synthetic controls. P quality controls are [7,7,7]; C controls are [8,6,8] in curated-0/47/97 order. The actual C code still computes min over full measured utilities; the oracle requires unique weakest index1/curated-47. This discriminating synthetic dataflow check is not metric validity or performance-gain evidence.",
+  "starter_source_instruction_change_required": false,
+  "prospective_treatment": {
+    "format": "buddha.current-source-rehearsal-treatment.v2",
+    "configuration_change": "Only proposal_template.config.instructions changes. This declared supported configuration is a prospective effective-prompt change; neither seed/source/engine nor generation instructions nor official judge configuration changes.",
+    "proposal_instructions": {
+      "format": "buddha.current-source-proposal-instructions.v1",
+      "text": "Use the measured development feedback to propose substantive, evidence-grounded procedural changes to both generate and propose_improvement (or their actually used helpers). Preserve complete feedback, callable interfaces and all host/model/resource boundaries. Explain each proposed change in hypothesis without claiming success. Changes confined to prompt constants, names, comments or formatting do not meet this observation's aim.",
+      "utf8_bytes": 434,
+      "sha256": "356ecb5df0d5115c97f6b4afca7763b1a34f034d7d56691a127b0f446407da3a"
+    },
+    "seed_sha256": "77cfa68f6b3c6996fd503e1ce6f7a964eb57abdb8bde98f6761de5f6e298ff4f",
+    "seed_utf8_bytes": 13455,
+    "request_not_evidence": "The explicit both-procedure instruction is a request. Actual literal changes, executed use, descendant generation and legitimate negative/inconclusive outcomes remain separate frozen review criteria."
+  }
+}

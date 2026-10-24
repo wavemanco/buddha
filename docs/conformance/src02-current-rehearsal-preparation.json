@@ -1,0 +1,180 @@
+{
+  "format": "buddha.src02-current-rehearsal-preparation.v1",
+  "status": "verification_in_progress",
+  "claim": "Preparation/checks for one unpaid supplied-response rehearsal; no completed full-rehearsal or paid-readiness claim.",
+  "producer_base": "e5ba59e2351f532bdfc205e77b3f52d8a448ef78",
+  "source_engine_changed": false,
+  "producer_files_sha256": {
+    "src02-current-rehearsal.py": "75a8b34a450f7ae2f14625770441870f58aa130170daf70b0262c4b5314dbca9",
+    "src02-current-rehearsal-build.py": "080b3f0dc96b52ea1fe50d6c98de1f4a4af52b20e7bf7359dcee91108ef60cc7",
+    "src02-current-guard-check.py": "6dce5fd3a0755e41fd2866776f27f736d87bb86b66642c428ed635dc7be3e0f9",
+    "src02-current-rehearsal-protocol.md": "7ce51f373f893040d706eeb67bd2f0ef08f10a0c7d678d8d46020fd568d08c55",
+    "src02-current-review-criteria.json": "2dee64f3a4f1aa50f4c6869bd942f2011e777aef62b8aff9dde9e3460ac1a339"
+  },
+  "guide": {
+    "draft_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\SOURCE-CURRENT-REHEARSAL-draft-v2.md",
+    "adoption_target": "docs/SOURCE-CURRENT-REHEARSAL.md",
+    "sha256": "67addcf23d3272b331526fbffa243e90b8d84142af14be8f2beb849faff1df70",
+    "draft_sha256": "0f78fb5f8de1bd835751661533a5fbe88cd57ece867ae74d9fe39286f209dd3f",
+    "adopted_intro_only": true
+  },
+  "evidence": {
+    "unfunded_build": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\current-demo-build-v2.json",
+      "sha256": "f0b4d9c4e754b6cff93151854ef6ee8fc1023b24450df5839441c128a03f5a86"
+    },
+    "proposal": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-source-20261023-proposal-v2\\proposal.json",
+      "sha256": "cc31b22bc7dc2d915e3dcc539d99555153ca10e362c5624dafb1403ca4cda73b"
+    },
+    "configuration_check": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-source-20261023-proposal-v2\\configuration-check.json",
+      "sha256": "9c28af461270b7a9f4c33693cca4aac43a0f6f3be94c57a3135a29f7b866fca4"
+    },
+    "source_map": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\current-demo-build-v2-sources.json",
+      "sha256": "03d3f30145d76c20f46f737073bedb2a0ee3605827336cce3be8545d51a6e75d"
+    },
+    "guard_red_green": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\current-demo-v4-guard-regression-v1.json",
+      "sha256": "493462d0e36ce11fb20bf5d1563b31da91a7b1f483cd3670a24128e37c849a35"
+    },
+    "independent_static_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\current-demo-rehearsal-independent-static-review-v4.json",
+      "sha256": "4be076e1a18eb849338bc92862545f093e9631a46b7e5c8fde6380de73277ddc"
+    },
+    "original_actual_failure_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\current-demo-rehearsal-actual-failure-review-v1.json",
+      "sha256": "ca7d902a07856ab68fb1ce45369ed0c6161aae2918d3af655baf26c9b50ae55d"
+    },
+    "later_exact_worker_absence": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\current-demo-failed-worker-absence-v1.json",
+      "sha256": "08b7ca0577443751709c6f5b56bb9e0b0f9e1e8c23fb39c0e19ca72f6a165495"
+    },
+    "frozen_rehearsal_command": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\current-demo-rehearsal-command-v2.json",
+      "sha256": "ade285192350a8d675193bb7b40c51b9b4b93c2d7fb7bc2b97d4c85bea6bebbe"
+    },
+    "raw_bandit_scan": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\current-demo-v4-bandit-v1.json",
+      "sha256": "cca12cceea4afda77d4ec3de236058049268a4316f9241548a734e011df8e3e3"
+    },
+    "bandit_finding_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\current-demo-v4-bandit-review-v1.json",
+      "sha256": "513b47b9c1c0ff5a086d3d4f94892cc1c3f33360795f0cd9bc706fd82c398f7f"
+    },
+    "plan99_preservation": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\current-demo-plan99-preservation-v1.json",
+      "sha256": "3b2ce81da658cf9a77f004c4ef12a4ae720f59e2156fc5f80463c15c71ec51c7"
+    },
+    "finite_three_additional_methods": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-finite-extra-green-v2.json",
+      "sha256": "9b30b3a7b196487b5fb59f75785d4be71d218a6492ed86315592ae9d8bc85ecb"
+    },
+    "finite_read_amplification": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-finite-matrix-read-amplification-v1.json",
+      "sha256": "2ad03098dd2f14d3169823d46e9e5fa48c887f37720a0e46462d5989cd9ba72d"
+    },
+    "unexecuted_finite_replay_draft": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-replay-performance-draft-v1.json",
+      "sha256": "5ba3aa813e3a8b66c5e3b40c51474826a6e58c68fd9b5eb32c3a29e0047dcc8b"
+    }
+  },
+  "observed_preparation": {
+    "builder_status": "unfunded_configuration_checked",
+    "builder_guard_controls": 6,
+    "source_map_entries": 298,
+    "current_inputs_unchanged": 259,
+    "original_files_unchanged": 38,
+    "authority_created_by_builder": false,
+    "provider_calls_by_builder": 0,
+    "workers_by_builder": 0,
+    "guard_regression_red": {
+      "tests": 3,
+      "failures": 2,
+      "errors": 1
+    },
+    "guard_regression_green": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0
+    },
+    "static_review_unchanged_inputs": 388
+  },
+  "prior_full_attempt": {
+    "status": "failed_retained",
+    "attempted_workers": 2,
+    "supplied_replies": 11,
+    "primary_cause_scope": "Earlier unlink conflict reconstructed from source and retained nlink2 state; original callback exception was not captured.",
+    "secondary_cause": "Global process-registration state rejected overlapping watchdog cleanup.",
+    "later_cleanup_scope": "Both exact IDs absent at a separate later query; not proof of absence at failure time."
+  },
+  "security_scan": {
+    "exit_code": 1,
+    "findings": 2,
+    "severity": "LOW",
+    "test_id": "B603",
+    "assessment": "Two fixed-argv intentional process-denial controls; raw scan retained and reviewed specifically, not suppressed or called zero-findings."
+  },
+  "current_rehearsal": {
+    "status": "verification_in_progress",
+    "progress_source": "Root checkpoint; no active-fixture reads by this delivery author.",
+    "reported_progress": "First native-stage publication reached; complete run still pending.",
+    "expected_iterations": 1,
+    "task_ids": [
+      "curated-0",
+      "curated-47",
+      "curated-97"
+    ],
+    "answers_per_task": 10,
+    "expected_owner_slots": 29,
+    "expected_supplied_replies": 154,
+    "full_counts_observed": false,
+    "complete_proof": null,
+    "recovery_accounting_cleanup_keyless_result": null
+  },
+  "prospective_treatment": {
+    "proposal_instruction_version": "buddha.current-source-proposal-instructions.v1",
+    "proposal_instruction_sha256": "356ecb5df0d5115c97f6b4afca7763b1a34f034d7d56691a127b0f446407da3a",
+    "seed_generation_official_config_unchanged": true,
+    "criteria": "Substantive executed generation procedure AND changed-used improver; negative/inconclusive results remain legitimate."
+  },
+  "limits": [
+    "Supplied programs/replies/usage do not establish model authorship, semantic metric accuracy or scientific improvement.",
+    "Full29-owner/154-reply roles, both witnesses, controlled recovery, final zero holds/closure, cleanup and passive replay remain pending.",
+    "No full-suite, hosted-CI-green, vendor context-fit or live-price claim.",
+    "The completed $7 capacity allocation is not reused. No live funding or paid handoff is authorized.",
+    "Original v3 files, failed owners, producer, bundle and297-pin map remain retained; corrected work uses fresh paths."
+  ],
+  "delivery_author_actions": {
+    "saved_data_only": true,
+    "application_imports": 0,
+    "active_fixture_walks": 0,
+    "sql_connections": 0,
+    "tests_run": 0,
+    "provider_calls": 0,
+    "key_reads": 0,
+    "docker_calls": 0,
+    "protected_file_changes": false
+  },
+  "delivery_base": "12a749f1ff64d52a25e152e769a559c1d9093ff5",
+  "producer_directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-current-rehearsal-fixed",
+  "producer_delivery_source_bridge": {
+    "unchanged_common_app_test_agent_files": 206,
+    "unchanged_base_only_files": {
+      "buddha/improver_study.py": "9790fa31ebbad2fb6f05c3a52a011e88b580f0f6b0b0b4ea834db7037558182f",
+      "tests/test_improver_study.py": "5356ee31f17717b065bfa4811963250cba0371b4e502309552a4df15ca6aa2c3"
+    },
+    "exact_copied_helpers": 5,
+    "scope": "Actual rehearsal uses the retained PR95-based producer. Delivery is stacked on PR96; its additional finite-study source/test are not invoked by the source rehearsal. This file bridge is not an exact-head hosted CI pass."
+  },
+  "parallel_finite_verification": {
+    "focused_methods_passed": 5,
+    "full_matrix": "still_running_at_checkpoint",
+    "hosted_checks": "pending",
+    "finding_id": "IMP-PERF-01",
+    "finding": "Source/metadata trace shows repeated full-history reconstruction; not a measured timing attribution or speedup.",
+    "replay_draft": "unexecuted; no performance or invariant-equivalence runtime claim"
+  },
+  "protocol_scope": "Retained earlier design snapshot for the prospective task/proposal treatment. Later operation-specific guard corrections are explicit in this guide, v4 helper hash, regression and static-review records; no old protocol bytes are rewritten."
+}
