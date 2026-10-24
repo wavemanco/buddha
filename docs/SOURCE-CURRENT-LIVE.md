@@ -8,15 +8,16 @@ passive configuration checks; it has no spending permission or user run command.
 The earlier $7 observation checked whether one exact full-output request could
 return a complete source proposal with enough space left. This experiment
 measures the current parent itself and runs its model-written descendants.
-[Preparation evidence](conformance/src02-actual-live-preparation.json) records
-the new bundle, checks and remaining requirements.
+The [corrected preparation record](conformance/src02-corrected-live-preparation.json)
+records the fresh unfunded bundle and its remaining requirements.
 
-That prepared producer later failed three legacy progress-report compatibility
-checks in Ubuntu CI. The [shared correction](SOURCE-PROPOSAL-CAPACITY.md#record-compatibility)
-has its own checks and source cut. The original bundle remains unchanged and
-unfunded; a fresh bundle pinned to corrected executing code and its own hosted
-checks is required before funding or a user command. The adopted experiment
-protocol and criteria remain unchanged.
+The [earlier preparation](conformance/src02-actual-live-preparation.json) used a
+producer that later failed three legacy progress-report compatibility checks in
+Ubuntu CI. The [shared correction](SOURCE-PROPOSAL-CAPACITY.md#record-compatibility)
+now has a separate fresh bundle pinned to corrected executing code. The original
+bundle and failed-head evidence remain unchanged and unfunded. The adopted
+protocol, criteria and intent retain their original bytes; this preparation
+changes no scientific acceptance or benchmark rule.
 
 ## What the experiment does
 
@@ -97,25 +98,33 @@ these committed protocol files.
 
 ## Current handoff status
 
-The new bundle is separate from the supplied-response rehearsal. It contains
-the adopted actual-live protocol, unchanged starting-agent bytes, freshly
-selected current runners and the unchanged official evaluator and host profiles.
-The source handoff is v4, including original-proposal capacity checks. Its
-passive check reports unallocated funding and a maximum of twenty-nine original
-owner destinations. Preparation created no owners or database and made no
-provider call. All six filesystem, SQL, process and network guard controls pass;
-these are checks on this trusted preparation, not a general security claim.
+The fresh bundle is `runs/src02-current-live-20261024-proposal-v2`, prepared
+from corrected producer `87c041b207d54305ba30621bbf4b6b935d7d19b2`. It remains
+separate from the earlier bundle and supplied-response rehearsal. It retains
+the adopted protocol, unchanged starting agent, official evaluator and host
+profiles, with freshly selected current runners and source handoff v4.
 
-The input review gives a conditional bound for the planned owners, including
-permitted empty database sidecars. The final funded launch must confirm its
-actual file list fits the existing limit before use.
+The saved bundle has forty-three files. Its source map has 169 checked hashes;
+all 167 bindings from the previous map remain unchanged. The passive check binds
+seventy-one controls plus the proposal itself. Independent saved-data review
+confirms the configuration and all six expected preparation guard outcomes,
+with no unexpected event. Preparation created no original owners or databases
+and made no provider call. These are trusted preparation checks, not a general
+security claim or an observation of the planned twenty-nine-owner execution.
+
+The input review retains the conditional `108+K` bound, including permitted
+empty database sidecars; `K` counts additional distinct final bindings beyond
+the minimum seventy-four. This is a calculation under the declared flow, not
+an observed invocation count. The final funded launch must reconcile its actual
+input union against the existing limit before use.
 
 No live command is available at this checkpoint. Remaining checks include the
-final launch bindings, selected executing code and hosted CI, applicable
-account/pricing conditions, and a separately approved allocation. Public price
-and supported-request reviews do not authenticate keys or verify account
-settings. A later funded handoff will document the exact command, its function
-and expected output before asking the user to run anything.
+final launch bindings and actual input union, the exact selected executing
+code's hosted CI, applicable account/pricing conditions, and a separately
+approved allocation. The dated public-price and supported-request evidence is
+retained; this preparation does not recertify prices, authenticate keys or
+verify account settings. A later funded handoff will document the exact command,
+its function and expected output before asking the user to run anything.
 
 Interrupted work may continue only through supported recovery of the original
 owners and frozen requests. Known completed replies are reused without another
