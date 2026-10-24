@@ -1,9 +1,11 @@
 # Comparing improvement procedures
 
-The numerical part of the improver comparison is implemented. It does not yet
-read original experiment records or run the sealed assessment. Those connections
-remain IMP-01 work in [PLAN.md](PLAN.md). The [delivery record](conformance/imp01-paired-analysis-delivery.json)
-retains the exact checks and source versions.
+The numerical comparison is implemented. The [sealed assessment](IMPROVER-ASSESSMENT.md)
+now connects it to original development and final records through the protected
+executor. Bounded composed checks and [reader-cost observations](RECONSTRUCTION-COST.md)
+pass; the actual controlled study remains IMP-01 work in [PLAN.md](PLAN.md).
+The [original delivery](conformance/imp01-paired-analysis-delivery.json) retains
+its historical checks and source version.
 
 ## What is being compared?
 
@@ -115,3 +117,21 @@ Optional: runs the ten numerical tests once in your current PowerShell window
 from the matching checkout. It needs no keys, spends no API money and does not
 change experiment records. No second window is needed. Ctrl+C stops the tests;
 they normally finish in seconds. No live run is requested by this slice.
+
+## Targeted repair
+
+IMP1-TARGET-01: the analyzer still reports `target_repair: not_assessed`.
+A proposal hypothesis records what a change intends to fix; it does not show
+that the change fixed it. Overall utility or distinctiveness gains cannot
+supply that separate outcome.
+
+Before the actual study, its protocol must define the target-review method,
+the relevant parent and child task outputs, coverage and missing/uncertain
+outcomes. Existing review exports cover sealed starter and selected-descendant
+sets rather than every development proposal. A frozen supplementary review
+can report descriptive repair findings from the retained full outputs and
+lineage. A machine-checked extension is needed only if the adopted method
+requires one. Keep official scores and the original analysis report unchanged.
+The [scope record](conformance/imp01-larger-reader-cost-observation.json)
+retains the source trace; [DESIGN section 8](DESIGN.md#8-measuring-improvement-competence)
+keeps targeted repair within the original IMP-01 reporting requirement.
