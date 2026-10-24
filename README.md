@@ -44,8 +44,10 @@ while preserving original source bindings and complete integrity checks.
 
 The [source-output review bridge](docs/SOURCE-REVIEW.md) prepares complete,
 prospectively selected final answer sets in the existing blinded reviewer format.
-Original scores and identities stay in a private receipt. Review import and the
-actual independent human study remain open.
+Original scores and identities stay in a private receipt. Its passive importer
+now records missing or invalid review forms, separates declared human/model
+coverage and preserves grouping/compliance disagreements. It changes no official
+scores. The operator handoff and actual independent human study remain open.
 
 ## Current state
 
