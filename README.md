@@ -17,7 +17,8 @@ remain open; no further user command is needed now.
 The [actual-proposal capacity route](docs/SOURCE-PROPOSAL-CAPACITY.md) now
 checks original model replies before the host proceeds with returned children.
 It needs no duplicate probe. Integrated supplied-response recovery and retirement
-checks pass; hosted CI, a separate actual-live protocol and funding remain open.
+checks pass. The separate [actual-live protocol and unfunded bundle](docs/SOURCE-CURRENT-LIVE.md)
+are now checked and independently reviewed; hosted CI and separate funding remain open.
 A negative or unavailable observation leaves an explicit partial result.
 
 The [fresh source rehearsal](docs/SOURCE-CURRENT-REHEARSAL.md) now passes:
@@ -25,7 +26,9 @@ The [fresh source rehearsal](docs/SOURCE-CURRENT-REHEARSAL.md) now passes:
 and a changed improver producing a further runnable child. It also checks
 interruption recovery and verification without API keys. We supplied test
 programs and model replies for this engineering check. The next source experiment
-will use code written by the API model; funding and hosted checks remain pending.
+will use code written by the API model under the adopted protocol; funding and
+hosted checks remain pending. It will measure the current parent itself with
+complete outputs and retain negative or inconclusive descendant outcomes.
 
 ## Current state
 

@@ -7,7 +7,7 @@ The full unpaid rehearsal passed on October 24 UTC (October 23 locally).
 
 Exercise the current inherited-source route with a freshly measured current starter P, a counted child C, and a further child W1 authored by C's own changed improver.
 This rehearsal supplies the child programs and all provider replies. It checks execution, complete feedback, lineage, accounting and recovery; it cannot establish model authorship or useful improvement.
-The later actual source observation must retain model-returned source and assess it against the frozen [procedure criteria](conformance/src02-current-review-criteria.json).
+The separate [actual source observation](SOURCE-CURRENT-LIVE.md) must retain model-returned source and use its newly adopted [procedure criteria](conformance/src02-actual-live-criteria-v1.json). The earlier rehearsal criteria remain their original draft/supplied-response basis; they are not silently relabelled actual-live permission.
 
 The bounded sequence uses one counted iteration and three development tasks in order: `curated-0`, `curated-47`, `curated-97`, with ten answers each:
 
