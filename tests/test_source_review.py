@@ -310,7 +310,7 @@ class SourceReviewTests(unittest.TestCase):
         h = test_improver_assessment.ImproverAssessmentTests("runTest")
         h.setUp()
         self.addCleanup(h.doCleanups)
-        h.fixture()
+        h.fixture(observer=self)
         plan, controls = self.controls(
             h.root,
             kind="improver",

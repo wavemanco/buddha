@@ -17,6 +17,7 @@ class ImproverPhaseBudgetTests(unittest.TestCase):
         f = finite_fixtures.FiniteImproverStudyTests("runTest")
         self.addCleanup(f.doCleanups)
         f.fixture_before_new_api()
+        finite_fixtures.observe_fixture_workers(f, self)
         f.api = improver_study
         record = f.declaration(improver_study)
         record.update(starts=record["starts"][:1], repetitions=1, descendant_opportunities=1)
@@ -28,7 +29,7 @@ class ImproverPhaseBudgetTests(unittest.TestCase):
         f = assessment_fixtures.ImproverAssessmentTests("runTest")
         self.addCleanup(f.doCleanups)
         f.setUp()
-        f.fixture()
+        f.fixture(observer=self)
         f.finite["format"] = "buddha.improver-study.v2"
         for key in ("budget_microusd", "max_calls"):
             f.finite["limits"]["study"][key] -= 1

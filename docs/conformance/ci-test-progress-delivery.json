@@ -1,0 +1,221 @@
+{
+  "format": "buddha.ci-test-progress-delivery.v1",
+  "status": "local_checks_pass_hosted_verification_pending",
+  "plan_revision": 127,
+  "base_head": "3d5016bd86a7ead1ad1b0a40518c670191b95a80",
+  "observed_at": "2026-10-24T18:54:38.218928+00:00",
+  "scope": "CI-only process guard, exhaustive test assignment and truthful progress reporting; agent, evaluator and paid-operation code unchanged.",
+  "source_pins": {
+    "ci_test_shard.py": "3afa6e0d0e1d75172da7c76b30266c2a907bb4ebd115baad1059d0aa4bdaba7b",
+    "tests/test_ci_test_shard.py": "32a936e21b86b0e91bd0f20297b4f63edc6e01d44e265f23b37d82fcfdc8eebe",
+    "tests/test_improver_study.py": "56ec89deb88e795598ba84b5bdf3bcd33500826292697d16f995e8e0d26b4c18",
+    "tests/test_improver_assessment.py": "76dd720e7e80ee4153e6b05a7950b33e7611b1a909949365492f6f6df4174a08",
+    "tests/test_improver_phase_budget.py": "0fa16d74396d60db0c9ac8e5dea74997a2ab9b20b2a928cfed9fb702204b00a3",
+    "tests/test_improver_screen_replay.py": "9b72de7bf337f8bfd4904fb01e80627df6c39f4b212884d3a0794607f0ce1d83",
+    "tests/test_source_review.py": "f9491619c054dc4a30e0c6fdd3776f3797ff6b58a4deee552a3b8c2176060bdf",
+    ".github/workflows/ci.yml": "1181bcd86085258d16bc9453bc330463ee09fbdfeb60755ec34e115033c9493d",
+    "docs/CI-TESTS.md": "18c441a78645dde47cbc607911c3e4a9862c8f87a0ddb2a9fce26dad2840ac92",
+    "docs/PLAN.md": "a817582d47bd4279f74110d6a7e683263b6b7633e806e141ac37f11b0c5ddfad"
+  },
+  "changes": {
+    "idle_rule_seconds": 3600,
+    "progress": "Completed unittest tests, subtests and fixture outcomes; starts and arbitrary output cannot reset the clock.",
+    "normal_completion": "Exact terminal receipt required for zero-exit success; abrupt or altered completion stays incomplete.",
+    "cleanup": "Windows gated Job Object; Linux private process group with leader identity retained until cleanup.",
+    "inventory": "Every discovered occurrence exactly once per OS across four ordered groups; duplicate names preserved, unknown custom suites/discovery errors/empty groups refused.",
+    "real_case_progress": "One shared wrapper forwards the original fixture worker exactly once before an additional cleanup-status subtest. All manual finite/assessment constructors use the real active outer test; the assessment dispatcher is observed once for both development/final workers. Original execution exceptions propagate. Independent corruption probes retain existing assertions and restoration finally blocks.",
+    "other_steps": "All ten non-test setup/check steps have fixed60-minute limits; the test step has no fixed60-minute total limit."
+  },
+  "verification": {
+    "windows_helper_tests": {
+      "passed": 22,
+      "seconds": 10.638,
+      "scope": "Shared-helper staged exact source cut, copied unchanged into publication checkout."
+    },
+    "linux_helper_tests": {
+      "passed": 22,
+      "seconds": 16.018,
+      "network": "none",
+      "source_copies_unchanged": true,
+      "scope": "Exact copied helper/test/finite definitions; no application package or bodies."
+    },
+    "real_inventory": {
+      "occurrences": 1840,
+      "counts": [
+        1,
+        617,
+        610,
+        612
+      ],
+      "fingerprint": "d95197ef8d7d277a58f80c313bb0b986d24fa7641eddc282681eac9400fc2363",
+      "test_bodies_executed": 0,
+      "source_pins_checked_unchanged": 230
+    },
+    "configured_quality_command_types_passed": [
+      "lint",
+      "format",
+      "types",
+      "security",
+      "runtime_dependency_audit",
+      "development_dependency_audit",
+      "compile"
+    ],
+    "independent_ast_review": "The earlier two-method review preserves all original checks. Independent staged review reverses only explicit observation wiring to reproduce all original fixture modules; extracted wrapper is identical for fixture=self/observer=self. All18 old helper methods are unchanged; four new methods check forwarding, identity, exceptions, failed cleanup and active outer observer.",
+    "real_long_case": {
+      "status": "running",
+      "exec_session": 96333,
+      "observed_at": "2026-10-24T18:53:55Z",
+      "completed_outcomes": 71,
+      "largest_observed_gap_seconds": 287.6,
+      "source_cut": "Preserved earlier local closure, before equivalent shared extraction; source files remain unchanged.",
+      "start_record": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\ci-long-case-progress-v1.start.json",
+      "claim": "Not a completed long case or full-suite pass."
+    },
+    "protected_inputs": "Final publication recheck confirms all169 frozen target hashes, all126 raw historical revision rows, unchanged agent/application files, equal staged sources and absent future funded trees. Original mixed line endings remain115CRLF.",
+    "quality_scope": "Current publication checkout passes full lint/format/compile after changed test sources. Earlier passing type/security/dependency commands apply to unchanged exact targets/manifests; original cache warning is retained.",
+    "hosted_matrix": "Not triggered yet; all eight current-source OS/shard jobs remain required before the approved source handoff."
+  },
+  "limits": [
+    "Full current hosted Windows/Linux matrix remains unverified.",
+    "Full current composed caller behavior and maximum future outcome gaps remain unverified; small helper tests and structural equivalence do not establish those runtime bounds.",
+    "POSIX cleanup contains inherited process-group descendants, not a deliberately detached new session.",
+    "Older jobs are not retroactively guarded. Live logs remain inaccessible through available API/browser surfaces, so no cancellation was based on step age alone.",
+    "A checked inventory and helper suite do not establish complete application acceptance or scientific improvement."
+  ],
+  "license_and_access": {
+    "merged_pr": 125,
+    "main_merge": "1bdad29d6c7fabe3f3671af297cf1d40dd0344d1",
+    "license": "MIT for Buddha-authored code/documentation; original third-party notices retained",
+    "public_visibility": "User changed visibility; not changed by agent",
+    "pr_creation": "collaborators_only",
+    "main_updates": "Maintainer via PR; administrators enforced; force/deletion blocked",
+    "trusted_apps": "Existing app authorizations retained; administrators can change settings",
+    "readme_progress": "Unchanged until development stack is merged"
+  },
+  "paid_model_calls": 0,
+  "new_live_authority_or_owners": false,
+  "development_prs_merged": false,
+  "evidence": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\ci-test-shards-red-v1.json",
+      "bytes": 255,
+      "sha256": "e6de79f12279f6fb24f8f3f106c5f80958c37b2ecbd030803d0a70f326508e71"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\ci-test-shards-final-checks-v1.json",
+      "bytes": 3732,
+      "sha256": "d11cd96a0f1488354f2b29ce44fab49c5ed4bb14b0a633fabd04ec27c454b23d"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\ci-idle-watchdog-focused-checks-v1.json",
+      "bytes": 16299,
+      "sha256": "13bceda5c17f79fca41df2c5b5a14ce9b39b87e59f484c82c42cbd4c33d2f782"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\ci-idle-watchdog-terminal-receipt-checks-v1.json",
+      "bytes": 12188,
+      "sha256": "11f9b620e72763b8210e157f544323500dfdf142827c91ac00ff6c2e64fec3d4"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\ci-idle-watchdog-linux-v1.json",
+      "bytes": 1879,
+      "sha256": "f5a68b1dcccf0520ee549e232cddf626a0bab921cffdfad1ae1efeb65d7476d0"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\ci-idle-watchdog-linux-v2.json",
+      "bytes": 1992,
+      "sha256": "6430067444bae7f5281f4b3ca1ece9b55c88ddfa8ab2ba84906b8d926b370544"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\ci-real-census-v2.json",
+      "bytes": 5018,
+      "sha256": "ba158b967521081361ca4d92def31225dffe076c4fe7d7eb15c9a0291d3bc64a"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\ci-progress-independent-review-v1.json",
+      "bytes": 7761,
+      "sha256": "601fa00264aac6eb0b7e6bc31259b42665d1c6107dda1c6d8dd8f1e5441811f9"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\ci-workflow-bounds-check-v1.json",
+      "bytes": 407,
+      "sha256": "e528bafdb7c2d30e35c3c45ba361eccb361c01f841c37bacae7e07e492abc9ce"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\ci-progress-quality-checks-v1.json",
+      "bytes": 9456,
+      "sha256": "f8be8c9c2a4e483d98c94c621e153b5f7a928451286c38cf174838c93ff6ef2a"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\ci-progress-protected-inputs-v1.json",
+      "bytes": 744,
+      "sha256": "f6508f656e7eb53239a7bea53c2a302ad28f5652c80e1ad4edee1cd1870a9684"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\ci-idle-audit-20261024-1734-receipt.json",
+      "bytes": 4574,
+      "sha256": "55fbcf2e9b51fb9720e31dd12326ac7797eb0a40af5d194418fbc7f24a87d0be"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\ci-idle-audit-public-20261024-1758-receipt.json",
+      "bytes": 6523,
+      "sha256": "c2337d99e606cd961fa15089e0061427daf7ca2f8108e04714e04df42bc9ea33"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\ci-long-case-progress-v1.start.json",
+      "bytes": 1163,
+      "sha256": "611d51c465e89a5a0e195a4df15faf45bf02e7b59d5e88e7307cf8ee99a0071d"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\ci-fixture-progress-stage-v1\\delivery.json",
+      "bytes": 7577,
+      "sha256": "e239c2d459cc26f39efa6b7dfe085569a095aa932387dd2d5e2af9ff76a3a2c1"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\ci-fixture-progress-stage-v1\\structural-checks.json",
+      "bytes": 3025,
+      "sha256": "6d51da990373e27b4e6855154cd1f26644a9d0be7d0537c006a072aa6d6e6310"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\ci-fixture-progress-stage-v1\\linux-check-v1.json",
+      "bytes": 2138,
+      "sha256": "aa9621535f699c808810a0bef362f41d59bbe9bfb4c742e2c7c4820f95634b4b"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\ci-fixture-progress-independent-review-v1.json",
+      "bytes": 14950,
+      "sha256": "8fd71336bf94169682d5bf777f9ae373601bd94369d86e9e301d897926b16e61"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\ci-progress-publish-copy-v1.json",
+      "bytes": 3526,
+      "sha256": "b1d029c21584564dfc63a2643dd1727511cca77591d4744fe7c627c6774840d5"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\ci-progress-publish-quality-v1.json",
+      "bytes": 2419,
+      "sha256": "b330ca834a23662c41d25c9e78cdd3ca0f1802e886e3ad58f54dea0040c2690a"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\ci-progress-publication-docs-v1.json",
+      "bytes": 7810,
+      "sha256": "a93ffc3b0ab54c86300801e013f870b6139226aea7a621da29a7804ccc5212af"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\ci-real-census-v3.json",
+      "bytes": 30882,
+      "sha256": "7d578785f2126c1b8bfba166a073deec0d37624cb84aa97cea7c5e86430c6581"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\ci-idle-audit-bounded-20261024-1845-receipt.json",
+      "bytes": 9939,
+      "sha256": "a28ac3035839369126d935a2e3a71c3eea0a65c8a6f917faa05f5dfbf280d141"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\ci-progress-publication-preservation-v1.json",
+      "bytes": 1176,
+      "sha256": "5eaa93fb42ee52e4ba04e2d146d18be721b5667bb52ff437d009d2493224ee61"
+    }
+  ],
+  "publication_worktree": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\ci-test-progress"
+}

@@ -35,6 +35,19 @@ def source(label):
     ).encode()
 
 
+def observe_fixture_workers(fixture, observer):
+    original_execute = fixture.execute
+
+    def checked_execute(spec, *, initial, handle, **kwargs):
+        # Original input assertions and execution exceptions propagate unchanged.
+        execution = original_execute(spec, initial=initial, handle=handle, **kwargs)
+        with observer.subTest(contract="completed-fixture-worker", role=spec.role):
+            observer.assertEqual(execution.cleanup_status, "removed")
+        return execution
+
+    fixture.execute = checked_execute
+
+
 class FiniteImproverStudyTests(unittest.TestCase):
     def fixture_before_new_api(self):
         import test_source_screen_outcome
@@ -728,6 +741,7 @@ class FiniteImproverStudyTests(unittest.TestCase):
 
     def test_finite_fixed_operators_common_conditions_negative_slots_and_original_recovery(self):
         self.fixture_before_new_api()
+        observe_fixture_workers(self, self)
         # Actual initial RED belongs here, after genuine old measured/role APIs.
         from buddha import improver_study
         from buddha.releases import Selection, _json
@@ -1529,13 +1543,15 @@ class FiniteImproverStudyTests(unittest.TestCase):
         before = self.h.files(directory), authority.summary(), self.engine.physical_sends
         try:
             with self.h.readonly(), patch.dict(os.environ, {}, clear=True):
-                self.assertEqual(self.inspect(directory, authority), report)
-                self.assertEqual(
-                    self.api.run_improver_study(
-                        directory, transport=RawHTTPTransport(allow_paid=False)
-                    ),
-                    report,
-                )
+                with self.subTest(contract="retired-source-inspection"):
+                    self.assertEqual(self.inspect(directory, authority), report)
+                with self.subTest(contract="retired-source-replay"):
+                    self.assertEqual(
+                        self.api.run_improver_study(
+                            directory, transport=RawHTTPTransport(allow_paid=False)
+                        ),
+                        report,
+                    )
             self.assertEqual(
                 (self.h.files(directory), authority.summary(), self.engine.physical_sends), before
             )
@@ -1576,13 +1592,15 @@ class FiniteImproverStudyTests(unittest.TestCase):
         forged["reason"] = "forged-original-reason"
         forged["child"] = None
         corruptions.append(forged)
-        for forged in corruptions:
+        for index, forged in enumerate(corruptions):
             observation.write_bytes(_json(forged))
             try:
-                self.refused(lambda: self.inspect(directory, authority))
+                with self.subTest(contract="forged-observation", index=index):
+                    self.refused(lambda: self.inspect(directory, authority))
             finally:
                 observation.write_bytes(original_observation)
-        self.assertEqual(self.inspect(directory, authority), report)
+        with self.subTest(contract="restored-observation"):
+            self.assertEqual(self.inspect(directory, authority), report)
         # After completion, retired external source files are not re-opened.
         # These mutations instead target original retained host metadata that
         # remains evidence in the study tree. Fixed-I source drift was tested
@@ -1591,14 +1609,16 @@ class FiniteImproverStudyTests(unittest.TestCase):
             raw = path.read_bytes()
             path.write_bytes(raw + b" ")
             try:
-                self.refused(lambda: self.run_study(directory))
+                with self.subTest(contract="changed-retained-metadata", path=str(path)):
+                    self.refused(lambda: self.run_study(directory))
             finally:
                 path.write_bytes(raw)
         owner = directory / "cells/0/0/0/0/proposal/owners/0"
         hidden = owner.with_name("missing-original")
         owner.rename(hidden)
         try:
-            self.refused(lambda: self.inspect(directory, authority))
+            with self.subTest(contract="missing-original-owner"):
+                self.refused(lambda: self.inspect(directory, authority))
         finally:
             hidden.rename(owner)
         publication = directory / "report.json"
@@ -1607,7 +1627,8 @@ class FiniteImproverStudyTests(unittest.TestCase):
         forged["decisions"] = forged["decisions"][1:]
         publication.write_bytes(_json(forged))
         try:
-            self.refused(lambda: self.inspect(directory, authority))
+            with self.subTest(contract="truncated-publication"):
+                self.refused(lambda: self.inspect(directory, authority))
         finally:
             publication.write_bytes(raw)
 

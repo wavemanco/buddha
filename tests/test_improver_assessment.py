@@ -42,7 +42,7 @@ class ImproverAssessmentTests(unittest.TestCase):
         path.write_bytes(_json(value))
         return {"path": str(path), "sha256": sha(path.read_bytes())}
 
-    def fixture(self):
+    def fixture(self, *, observer=None):
         import test_improver_study as finite_fixtures
         import test_source_screen
 
@@ -168,6 +168,7 @@ class ImproverAssessmentTests(unittest.TestCase):
             "consumer_sources": self.api._source_hashes(),
         }
         self.bind("assessment")
+        finite_fixtures.observe_fixture_workers(self, self if observer is None else observer)
         return self
 
     def numerical_population(self, identifiers):
