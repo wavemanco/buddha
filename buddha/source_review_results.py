@@ -122,12 +122,11 @@ def validate_review_submission(packet: object, submission: object) -> None:
         raise source_review.SourceReviewError("invalid complete review submission") from error
 
 
-def _summarize(
+def _round_roster(
     materialization: dict[str, Any],
     round_record: dict[str, Any],
-    submission_records: dict[str, tuple[dict[str, str], bytes]],
-) -> dict[str, Any]:
-    """Summarize already captured data; this alone does not establish source custody."""
+) -> list[dict[str, Any]]:
+    """Share the exact round identity and explicit roster rules with publication."""
     round_record = _obj(
         round_record, {"format", "plan_sha256", "report_sha256", "packet_sha256", "reviewers"}
     )
@@ -143,9 +142,21 @@ def _summarize(
         not roster
         or len(set(identities)) != len(roster)
         or any(row["type"] not in ("human", "model") for row in roster)
-        or not set(submission_records) <= set(identities)
     ):
         raise source_review.SourceReviewError("review roster is empty, repeated or contradictory")
+    return roster
+
+
+def _summarize(
+    materialization: dict[str, Any],
+    round_record: dict[str, Any],
+    submission_records: dict[str, tuple[dict[str, str], bytes]],
+) -> dict[str, Any]:
+    """Summarize already captured data; this alone does not establish source custody."""
+    roster = _round_roster(materialization, round_record)
+    if not set(submission_records) <= {row["id"] for row in roster}:
+        raise source_review.SourceReviewError("review roster is empty, repeated or contradictory")
+    private = materialization["private"]
     packet = materialization["packet"]
     coverage: dict[str, Any] = {
         "planned": len(roster),
