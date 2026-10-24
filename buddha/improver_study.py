@@ -7,7 +7,7 @@ owns the complete condition/arm schedule and never evaluates selected Python.
 import hashlib
 import re
 import sqlite3
-from collections.abc import Callable, Iterator
+from collections.abc import Callable, Iterator, Mapping
 from functools import wraps
 from pathlib import Path
 from typing import Any, cast
@@ -23,9 +23,9 @@ from buddha import native_pipeline as pipeline
 from buddha import source_search as shared
 from buddha.answers import Answers
 from buddha.authorization import Authorization
-from buddha.doctor import _authority, _Busy, _Unsupported
+from buddha.doctor import _authority, _Busy, _Capture, _Unsupported
 from buddha.gateway import RawHTTPTransport, _input_records, _review
-from buddha.native_evidence import NativeEvidence, authority_observation
+from buddha.native_evidence import NativeEvidence, _adopt_capture, authority_observation
 from buddha.releases import (
     MAX_SOURCE_BYTES,
     Release,
@@ -322,6 +322,71 @@ def _check_current(state: dict[str, Any]) -> None:
         pipeline._read(path, digest)
 
 
+def _bind_controls(controls: dict[Path, str], bindings: Mapping[Path, str]) -> None:
+    if not isinstance(bindings, Mapping):
+        raise ImproverStudyError("explicit input bindings require a mapping")
+    for path, digest in bindings.items():
+        if not isinstance(path, Path):
+            raise ImproverStudyError("explicit input binding requires a canonical Path")
+        path, digest = _path_value(str(path)), _digest(digest)
+        if path in controls and controls[path] != digest:
+            raise ImproverStudyError("explicit binding conflicts with an original input")
+        controls[path] = digest
+
+
+def _intrinsic_inputs(
+    record: dict[str, Any],
+    screens: list[source_screen.SourceScreen],
+    declaration: Path,
+    expected_sha256: str,
+    runtime: str,
+) -> tuple[dict[Path, str], list[bytes]]:
+    """One original input closure for development preparation and final preflight."""
+    controls = {
+        _path_value(path): _digest(digest) for path, digest in record["consumer_sources"].items()
+    }
+    current_consumer = Path(__file__).absolute()
+    if controls.get(current_consumer) != file_hash(current_consumer):
+        raise ImproverStudyError("current finite producer lacks its original approval pin")
+    _bind_controls(controls, {declaration: _digest(expected_sha256)})
+    for path in shared._sources():
+        _bind_controls(controls, {path: file_hash(path)})
+    sources: list[bytes] = []
+    for screen in screens:
+        generation = _object(screen.to_record()["generation"])
+        path = _path_value(_object(generation["roots"])["agent"]) / "candidate.py"
+        source_raw = pipeline._read(
+            path,
+            _object(_object(_object(generation["selection"])["components"])["agent"])[
+                "candidate.py"
+            ],
+        )
+        if len(source_raw) > MAX_SOURCE_BYTES:
+            raise ImproverStudyError("starting parent exceeds its literal source ceiling")
+        source_raw.decode("utf-8")
+        _bind_controls(
+            controls,
+            {
+                path: hashlib.sha256(source_raw).hexdigest(),
+                _path_value(_object(generation["runtime"])["path"]): runtime,
+            },
+        )
+        sources.append(source_raw)
+    for actor in record["improvers"]:
+        path = _path_value(actor["roots"]["agent"]) / actor["entrypoint"]
+        raw_actor = pipeline._read(
+            path,
+            _object(_object(_object(actor["selection"])["components"])["agent"])[
+                actor["entrypoint"]
+            ],
+        )
+        if len(raw_actor) > MAX_SOURCE_BYTES:
+            raise ImproverStudyError("frozen improver exceeds its literal source ceiling")
+        raw_actor.decode("utf-8")
+        _bind_controls(controls, {path: hashlib.sha256(raw_actor).hexdigest()})
+    return controls, sources
+
+
 @_checked
 def prepare_improver_study(
     directory: Path,
@@ -331,6 +396,7 @@ def prepare_improver_study(
     authorization: Authorization,
     review: dict[str, object],
     expected_runtime_sha256: str,
+    input_bindings: Mapping[Path, str] | None = None,
 ) -> Path:
     if (
         not isinstance(directory, Path)
@@ -350,44 +416,10 @@ def prepare_improver_study(
     limits = record["limits"]["study"]
     if any(cast(int, terms[key]) < limits[key] for key in ("budget_microusd", "max_calls")):
         raise ImproverStudyError("original authority cannot cover the complete declared grid")
-    controls = {
-        _path_value(path): _digest(digest) for path, digest in record["consumer_sources"].items()
-    }
-    current_consumer = Path(__file__).absolute()
-    if controls.get(current_consumer) != file_hash(current_consumer):
-        raise ImproverStudyError("current finite producer lacks its original approval pin")
-    controls[declaration] = _digest(expected_sha256)
-    for path in shared._sources():
-        controls[path] = file_hash(path)
+    controls, sources = _intrinsic_inputs(record, screens, declaration, expected_sha256, runtime)
+    if input_bindings is not None:
+        _bind_controls(controls, input_bindings)
     controls = trial_fence._include_controls(directory, controls)
-    sources: list[bytes] = []
-    for screen in screens:
-        generation = _object(screen.to_record()["generation"])
-        path = _path_value(_object(generation["roots"])["agent"]) / "candidate.py"
-        source_raw = pipeline._read(
-            path,
-            _object(_object(_object(generation["selection"])["components"])["agent"])[
-                "candidate.py"
-            ],
-        )
-        if len(source_raw) > MAX_SOURCE_BYTES:
-            raise ImproverStudyError("starting parent exceeds its literal source ceiling")
-        source_raw.decode("utf-8")
-        controls[path] = file_hash(path, max_bytes=MAX_SOURCE_BYTES)
-        controls[_path_value(_object(generation["runtime"])["path"])] = runtime
-        sources.append(source_raw)
-    for actor in record["improvers"]:
-        path = _path_value(actor["roots"]["agent"]) / actor["entrypoint"]
-        raw_actor = pipeline._read(
-            path,
-            _object(_object(_object(actor["selection"])["components"])["agent"])[
-                actor["entrypoint"]
-            ],
-        )
-        if len(raw_actor) > MAX_SOURCE_BYTES:
-            raise ImproverStudyError("frozen improver exceeds its literal source ceiling")
-        raw_actor.decode("utf-8")
-        controls[path] = file_hash(path, max_bytes=MAX_SOURCE_BYTES)
     protected = [authorization.path, *controls]
     for screen in screens:
         for role in ("generation", "native"):
@@ -1917,11 +1949,17 @@ def _freeze(reader: NativeEvidence, state: dict[str, Any]) -> None:
 
 @_checked
 def inspect_improver_study(
-    directory: Path, *, authorization: Path, expected_report_sha256: str
+    directory: Path,
+    *,
+    authorization: Path,
+    expected_report_sha256: str,
+    sink: _Capture | None = None,
 ) -> dict[str, object]:
     if not isinstance(directory, Path) or not isinstance(authorization, Path):
         raise ImproverStudyError("inspection requires explicit original paths")
     directory, authorization = _path_value(str(directory)), _path_value(str(authorization))
+    if sink is not None and (type(sink) is not _Capture or not directory.is_relative_to(sink.root)):
+        raise ImproverStudyError("finite inspection sink must contain the original study")
     expected = _digest(expected_report_sha256)
     reader, state = _restore(directory, authorization)
     report = _result(reader, state)
@@ -1934,7 +1972,10 @@ def inspect_improver_study(
     )
     if raw != _json(report | {"authorization": saved["authorization"]}):
         raise ImproverStudyError("complete report differs from the original entire finite study")
-    reader.capture.finish()
+    if sink is None:
+        reader.capture.finish()
+    else:
+        _adopt_capture(reader.capture, sink)
     return saved
 
 

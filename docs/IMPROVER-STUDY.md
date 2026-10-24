@@ -10,6 +10,12 @@ that one improver is better follows from those checks.
 prove ancestry or improvement; a live protocol must establish that separately.
 [PLAN.md](PLAN.md) owns the remaining work and experiment sequence.
 
+The separate [sealed-assessment consumer](IMPROVER-ASSESSMENT.md) connects
+completed original development records to a prospectively declared final grid
+and paired analysis. That connection is undergoing composed checks; this
+development controller keeps its original scope and never consumes final
+scores as improvement feedback.
+
 ## What stays fixed
 
 The declaration fixes both improvement procedures, starting agents, development

@@ -194,8 +194,15 @@ def _sources() -> list[Path]:
 
 
 def _custody(
-    value: object, tasks: TaskSet, selected: list[str | int], controls: dict[Path, str]
+    value: object,
+    tasks: TaskSet,
+    selected: list[str | int],
+    controls: dict[Path, str],
+    *,
+    phase: str = "validation",
 ) -> dict[str, Any]:
+    if type(phase) is not str or phase not in {"validation", "final"}:
+        raise ValidationStudyError("unsupported selected custody phase")
     record = _obj(
         value,
         {"format", "process_id", "custodian", "basis", "evidence", "disclosures", "population"},
@@ -248,70 +255,16 @@ def _custody(
         if row["process_id"] == record["process_id"]:
             disclosed.add(identifier)
     if any(
-        members[key]["phase"] != "validation"
-        or members[key]["exposure"] != "eligible"
-        or key in disclosed
+        members[key]["phase"] != phase or members[key]["exposure"] != "eligible" or key in disclosed
         for key in selected
     ):
-        raise ValidationStudyError("selected tasks lack declared named-process validation custody")
+        raise ValidationStudyError(f"selected tasks lack declared named-process {phase} custody")
     return record
 
 
-def _definition(raw: bytes, runtime: str) -> dict[str, Any]:
-    record = _obj(
-        _load(raw),
-        {
-            "format",
-            "experiment_id",
-            "tasks",
-            "selected_ids",
-            "custody",
-            "improvement_rule",
-            "analysis_plan",
-            "comparators",
-            "max_candidates",
-            "max_looks",
-            "repetitions",
-            "comparator_policy",
-            "repetition_unit",
-            "bound_axes",
-            "generation",
-            "native",
-            "stages",
-        },
-    )
-    if (
-        record["format"] != _FORMAT
-        or record["comparator_policy"] != "fresh-each-occasion"
-        or (record["repetition_unit"] != "complete-task-answer-set")
-        or record["bound_axes"] != ["utility", "distinct"]
-    ):
-        raise ValidationStudyError("unsupported prospective validation declaration")
-    _text(record["experiment_id"])
-    for name in ("max_candidates", "max_looks", "repetitions"):
-        _integer(record[name], 1, 2**63 - 1)
-    controls: dict[Path, str] = {}
-    refs = {
-        name: _ref(record[name], controls)
-        for name in ("tasks", "custody", "improvement_rule", "analysis_plan")
-    }
-    tasks = TaskSet.from_bytes(pipeline._read(Path(refs["tasks"]["path"])))
-    release, data = _source(tasks.to_record())
-    full = TaskSet.from_dataset(release, data)
-    if tasks.to_bytes() != full.to_bytes():
-        raise ValidationStudyError("validation needs the complete trusted-host source")
-    selected = [_id(item) for item in _list(record["selected_ids"])]
-    if (
-        not selected
-        or len(set(selected)) != len(selected)
-        or not set(selected) <= {task.id for task in tasks.tasks}
-    ):
-        raise ValidationStudyError("validation selection repeats or changes typed task IDs")
-    custody = _custody(
-        _load(pipeline._read(Path(refs["custody"]["path"]))), tasks, selected, controls
-    )
-    rule = ImprovementRule.from_bytes(pipeline._read(Path(refs["improvement_rule"]["path"])))
-    comparators = _source_refs(record["comparators"], controls)
+def _validate_execution(record: dict[str, Any], tasks: TaskSet, runtime: str) -> None:
+    """Shared fixed source/native contract; no phase or scientific-plan interpretation."""
+    release = Release.from_record(tasks.to_record()["release"])
     generation = _obj(
         record["generation"],
         {
@@ -391,6 +344,64 @@ def _definition(raw: bytes, runtime: str) -> dict[str, Any]:
     if Selection.from_bytes(_json(native["selection"])).release_sha256 != tasks.release_sha256:
         raise ValidationStudyError("native release differs from the source")
     pipeline.validate_native(native, record["stages"], release)
+
+
+def _definition(raw: bytes, runtime: str) -> dict[str, Any]:
+    record = _obj(
+        _load(raw),
+        {
+            "format",
+            "experiment_id",
+            "tasks",
+            "selected_ids",
+            "custody",
+            "improvement_rule",
+            "analysis_plan",
+            "comparators",
+            "max_candidates",
+            "max_looks",
+            "repetitions",
+            "comparator_policy",
+            "repetition_unit",
+            "bound_axes",
+            "generation",
+            "native",
+            "stages",
+        },
+    )
+    if (
+        record["format"] != _FORMAT
+        or record["comparator_policy"] != "fresh-each-occasion"
+        or (record["repetition_unit"] != "complete-task-answer-set")
+        or record["bound_axes"] != ["utility", "distinct"]
+    ):
+        raise ValidationStudyError("unsupported prospective validation declaration")
+    _text(record["experiment_id"])
+    for name in ("max_candidates", "max_looks", "repetitions"):
+        _integer(record[name], 1, 2**63 - 1)
+    controls: dict[Path, str] = {}
+    refs = {
+        name: _ref(record[name], controls)
+        for name in ("tasks", "custody", "improvement_rule", "analysis_plan")
+    }
+    tasks = TaskSet.from_bytes(pipeline._read(Path(refs["tasks"]["path"])))
+    release, data = _source(tasks.to_record())
+    full = TaskSet.from_dataset(release, data)
+    if tasks.to_bytes() != full.to_bytes():
+        raise ValidationStudyError("validation needs the complete trusted-host source")
+    selected = [_id(item) for item in _list(record["selected_ids"])]
+    if (
+        not selected
+        or len(set(selected)) != len(selected)
+        or not set(selected) <= {task.id for task in tasks.tasks}
+    ):
+        raise ValidationStudyError("validation selection repeats or changes typed task IDs")
+    custody = _custody(
+        _load(pipeline._read(Path(refs["custody"]["path"]))), tasks, selected, controls
+    )
+    rule = ImprovementRule.from_bytes(pipeline._read(Path(refs["improvement_rule"]["path"])))
+    comparators = _source_refs(record["comparators"], controls)
+    _validate_execution(record, tasks, runtime)
     for path in _sources():
         controls[path] = file_hash(path)
     return {
