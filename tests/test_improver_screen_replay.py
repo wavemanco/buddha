@@ -16,6 +16,7 @@ class CompletedImproverScreenReplayTests(unittest.TestCase):
         f = test_improver_study.FiniteImproverStudyTests("runTest")
         self.addCleanup(f.doCleanups)
         f.fixture_before_new_api()
+        test_improver_study.observe_fixture_workers(f, self)
         f.api = improver_study
         record = f.declaration(improver_study)
         record.update(starts=record["starts"][:1], repetitions=1, descendant_opportunities=1)
