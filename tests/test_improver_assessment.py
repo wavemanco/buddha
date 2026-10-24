@@ -811,6 +811,115 @@ class ImproverAssessmentTests(unittest.TestCase):
         self.assertEqual((files(self.root), self.engine.physical_sends), before)
         self.assertEqual(self.authorities["final"].summary()["operation_count"], 0)
 
+    def test_outer_consumed_roles_override_retirable_producer_classification(self):
+        import copy
+        import hashlib
+        import shutil
+        from pathlib import Path
+        from tempfile import TemporaryDirectory
+
+        from buddha.releases import _json, prepare_selection
+
+        self.fixture()
+
+        def snapshot():
+            return (
+                {
+                    path: hashlib.sha256(path.read_bytes()).hexdigest()
+                    for path in self.root.rglob("*")
+                    if path.is_file()
+                },
+                tuple(sorted(str(path.relative_to(self.root)) for path in self.root.rglob("*"))),
+                [authority.summary() for authority in self.authorities.values()],
+                self.engine.physical_sends,
+                self.engine.workers,
+                len(self.f.events),
+                len(self.f.improvements),
+                len(self.f.generated),
+            )
+
+        before = snapshot()
+        release = self.engine.candidate.release
+        runtime = self.engine.candidate.expected_runtime
+        original_actor = self.finite["improvers"][0]
+        original_source = Path(original_actor["roots"]["agent"]) / original_actor["entrypoint"]
+        source_raw = original_source.read_bytes()
+        runtime_raw = Path(self.definition["generation"]["runtime"]["path"]).read_bytes()
+
+        for case in (
+            "generation-runtime",
+            "generation-runner",
+            "native-runner",
+            "native-runner-parent-spelling",
+        ):
+            with self.subTest(consumed_role=case), TemporaryDirectory(dir=self.root) as temporary:
+                temporary_root = Path(temporary)
+                definition = copy.deepcopy(self.definition)
+                finite = copy.deepcopy(self.finite)
+                if case == "generation-runtime":
+                    actor_root = temporary_root / "runtime-producer"
+                    actor_root.mkdir()
+                    alias = actor_root / "candidate.py"
+                    # Fixed-I source is permitted literal UTF-8 data here; no selected
+                    # program is imported, compiled or executed by this test.
+                    alias.write_bytes(runtime_raw)
+                    outer = definition["generation"]
+                    outer["roots"]["environment"] = str(actor_root)
+                    outer["runtime"] = {"path": str(alias), "sha256": runtime}
+                else:
+                    role = "generation" if case == "generation-runner" else "native"
+                    outer = definition[role]
+                    runner = temporary_root / "selected-runner"
+                    shutil.copytree(Path(outer["roots"]["runner"]), runner)
+                    actor_root = runner / "fixed-improver"
+                    actor_root.mkdir()
+                    alias = actor_root / "candidate.py"
+                    alias.write_bytes(source_raw)
+                    outer["roots"]["runner"] = str(runner)
+                    if case == "native-runner-parent-spelling":
+                        (runner / "existing").mkdir()
+                        outer["roots"]["runner"] = str(runner / "existing" / "..")
+
+                actor = finite["improvers"][0]
+                actor["roots"]["agent"] = str(actor_root)
+                actor["selection"] = prepare_selection(
+                    release,
+                    {key: Path(value) for key, value in actor["roots"].items()},
+                    capabilities=actor["selection"]["capabilities"],
+                ).to_record()
+                outer["selection"] = prepare_selection(
+                    release,
+                    {key: Path(value) for key, value in outer["roots"].items()},
+                    capabilities=outer["selection"]["capabilities"],
+                ).to_record()
+                if not case.startswith("native-runner"):
+                    outer["executor"]["mounts"] = [
+                        ["/agent", outer["roots"]["agent"]],
+                        ["/runner", outer["roots"]["runner"]],
+                    ]
+                declaration = temporary_root / "development.json"
+                declaration.write_bytes(_json(finite))
+                definition["development"] = {
+                    "path": str(declaration),
+                    "sha256": hashlib.sha256(declaration.read_bytes()).hexdigest(),
+                }
+
+                # All actual declaration, selection, runtime, profile and native
+                # checks remain enabled. No classification result is mocked.
+                with self.f.h.readonly():
+                    state = self.api._definition(_json(definition), runtime, active=False)
+                self.assertEqual(
+                    state["controls"][alias], hashlib.sha256(alias.read_bytes()).hexdigest()
+                )
+                self.assertNotIn(alias, state["retirable_producers"])
+                other_actor = self.finite["improvers"][1]
+                other_source = Path(other_actor["roots"]["agent"]) / other_actor["entrypoint"]
+                self.assertIn(other_source, state["retirable_producers"])
+                self.assertEqual(state["record"]["final_ids"], [1, "final"])
+                self.assertFalse(self.trial.exists())
+
+        self.assertEqual(snapshot(), before)
+
 
 if __name__ == "__main__":
     unittest.main()
