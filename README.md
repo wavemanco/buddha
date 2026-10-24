@@ -14,10 +14,12 @@ pass. [The results](docs/SOURCE-CAPACITY-RESULTS.md) close POL-03's bounded-loop
 engineering gate. Current-parent source evolution and improved effectiveness
 remain open; no further user command is needed now.
 
-The [fresh source rehearsal](docs/SOURCE-CURRENT-REHEARSAL.md) is prepared
-with complete measured feedback and explicit requests to change both Python
-procedures. Three focused rehearsal-guard checks pass; the full unpaid rehearsal
-is still under verification. No new live run or paid allowance is enabled.
+The [fresh source rehearsal](docs/SOURCE-CURRENT-REHEARSAL.md) now passes:
+29 isolated workers, 154 supplied replies, complete parent and child outputs,
+and a changed improver producing a further runnable child. It also checks
+interruption recovery and verification without API keys. We supplied test
+programs and model replies for this engineering check. The next source experiment
+will use code written by the API model; funding and hosted checks remain pending.
 
 ## Current state
 
