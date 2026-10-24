@@ -95,6 +95,13 @@ reconstructs it without keys, provider calls or a writer lock, including after
 the trial has been frozen. Retired external producer programs are not needed
 to reinterpret retained evidence.
 
+The [completed-witness replay fix](conformance/imp01-passive-witness-replay-delivery.json)
+corrects an earlier check that reopened those retired source files. A finished
+witness still needs its original owners, funding, completion seals and saved
+outputs. The reader also retains the task, generation recipe and runtime data
+through its final byte check. Fresh or unfinished execution still requires
+every current input file before new work can proceed.
+
 The current declaration requires an engineering assessment marked `not_frozen`;
 the resulting assessment remains `not_ready`, with target repair unassessed.
 The [pure paired analyzer](IMPROVER-ANALYSIS.md) now implements the numerical
