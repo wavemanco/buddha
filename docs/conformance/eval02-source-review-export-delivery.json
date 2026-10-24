@@ -140,7 +140,7 @@
   "preservation": {
     "legacy_helper_sha256": "6328f94c4280c29992cbdd87c205e45950406c00f6af636d4392fb7a6777e4fc",
     "legacy_review_helper_raw_bytes_equal_to_original_base_checkout": true,
-    "new_authorization": false,
+    "new_paid_allocation": false,
     "official_score_change": false,
     "original_live_handoff_changed": false,
     "paid_calls": 0,

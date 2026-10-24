@@ -34,7 +34,10 @@ The [first cost observation](docs/RECONSTRUCTION-COST.md) now measures complete
 saved-result checks on a small six-cell fixture: about 23 seconds for development,
 25 for the frozen schedule and 36 for the final assessment. The evidence remains
 unchanged. PR #102's full Ubuntu suite also passes; Windows and later revisions
-remain separate checks. Larger verification costs and any measured speedup remain open.
+remain separate checks. A [small matched screen observation](docs/RECONSTRUCTION-COST.md#bounded-paired-screen-observation)
+now records 0.569 and 0.399 seconds at the exact old/shared source cuts, with
+matching treatment content and a reduction from two evidence reconstructions to one.
+Larger verification costs and production speed remain open.
 The [shared generation check](docs/RECONSTRUCTION-COST.md#sharing-one-checked-generation)
 now removes a duplicated reconstruction in screen, validation and launch readers,
 while preserving original source bindings and complete integrity checks.
