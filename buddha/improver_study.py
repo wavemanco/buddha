@@ -760,6 +760,77 @@ def _screen(
     reader.release = Release.from_record(_object(record["source"])["release"])
     reader.template = {"native": record["native"], "stages": stages}
     reader.funded = state["funding"]
+    if _presence(reader, directory / "report.json"):
+        report = shared._read_ref(reader, _reference(reader, directory), capture=True)
+        expected = {path for path in state["owner_paths"] if path.is_relative_to(directory)}
+        checked: set[Path] = set()
+        for value in _rows(_object(report["provenance"])["owners"], 1, len(expected)):
+            row = _object(value, {"directory", "run_id", "manifest_sha256", "ledger_sha256"})
+            path = _path_value(row["directory"])
+            if path not in expected or path in checked:
+                raise ImproverStudyError(
+                    "complete screen has foreign or duplicate owner provenance"
+                )
+            owner = reader.owner(path)
+            if (
+                row["run_id"] != owner.run_id
+                or _digest(row["manifest_sha256"]) != owner.manifest_sha256
+                or _digest(row["ledger_sha256"]) != owner.ledger_sha256
+            ):
+                raise ImproverStudyError("complete screen provenance changes an original owner")
+            checked.add(path)
+        if checked != expected:
+            raise ImproverStudyError("complete screen provenance omits an original owner")
+        if report.get("disposition") == "candidate_execution_failed":
+            index = _integer(
+                _object(report["failure"])["task_index"], 0, len(screen.tasks.tasks) - 1
+            )
+            if _presence(reader, directory / "tasks" / str(index) / "evaluation"):
+                raise ImproverStudyError("native work follows a checked failed generation")
+        for path in sorted(checked):
+            parts = path.relative_to(directory).parts
+            index, role = int(parts[1]), parts[2]
+            location = directory / "tasks" / str(index)
+            task_controls = controls | source_screen._task_controls(location, screen, index)
+            if role == "generation":
+                context = {
+                    "format": source_screen._generation_formats(screen)["context"],
+                    "descriptor": str(location / "generation.json"),
+                    "expected_runtime_sha256": state["runtime"],
+                }
+                inputs = task_controls | {
+                    location / "generation/context.json": pipeline._sha(context)
+                }
+            else:
+                definition = {
+                    "format": "buddha.native-evaluation.v1",
+                    "source_generation": _object(_rows(report["tasks"])[index])[
+                        "source_generation"
+                    ],
+                    "native": record["native"],
+                    "stages": stages,
+                }
+                context = {
+                    "format": "buddha.native-evaluation-context.v1",
+                    "descriptor": str(location / "evaluation.json"),
+                }
+                inputs = task_controls | {
+                    location / "evaluation.json": pipeline._sha(definition),
+                    location / "evaluation/context.json": pipeline._sha(context),
+                }
+            # The full inspector proves completion; retain the finite caller's
+            # extra per-owner task/recipe bindings before marking custody checked.
+            shared._stage_owner_for(
+                reader,
+                path,
+                _object(record["generation" if role == "generation" else "native"]),
+                inputs,
+                review=state["review"],
+                funding=state["funding"],
+                no_model=role == "evaluation" and int(path.name) == len(stages),
+            )
+        state["checked"].update(checked)
+        return report
     unfinished, terminal = False, False
     for index, task in enumerate(screen.tasks.tasks):
         location = directory / "tasks" / str(index)

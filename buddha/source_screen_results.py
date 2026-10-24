@@ -13,7 +13,7 @@ from typing import cast
 from buddha import native_pipeline as pipeline
 from buddha import trial_fence
 from buddha.answers import TaskSet
-from buddha.doctor import _authority, _Busy, _Unsupported
+from buddha.doctor import _authority, _Busy, _Capture, _Unsupported
 from buddha.native_evaluation import _Generation, _read_generation
 from buddha.native_evidence import NativeEvidence, authority_observation
 from buddha.releases import MAX_JSON_BYTES, Release, _digest, _json, _load, _object, _path, _text
@@ -350,7 +350,11 @@ def _native(
 
 
 def collect_source_screen(
-    directory: Path, *, authorization: Path, expected_report_sha256: str | None = None
+    directory: Path,
+    *,
+    authorization: Path,
+    expected_report_sha256: str | None = None,
+    sink: _Capture | None = None,
 ) -> dict[str, object]:
     """Reconstruct complete custody or verify an explicitly pinned publication."""
     from buddha.source_screen import (
@@ -368,6 +372,10 @@ def collect_source_screen(
             pipeline._absolute(str(directory)),
             pipeline._absolute(str(authorization)),
         )
+        if sink is not None and (
+            type(sink) is not _Capture or not directory.is_relative_to(sink.root)
+        ):
+            raise SourceScreenError("screen capture requires its original containing observation")
         reader = NativeEvidence(directory, authorization, error_type=SourceScreenError)
         anchor = reader.owner(directory / "tasks/0/generation/owners/0")
         screen_raw = reader.bound(anchor, directory / "screen.json")
@@ -614,6 +622,14 @@ def collect_source_screen(
         if len(_json(result)) > MAX_JSON_BYTES:
             raise SourceScreenError("screen report exceeds its bounded output ceiling")
         reader.capture.finish()
+        if sink is not None:
+            # Keep the independent finish, then retain every consumed byte in
+            # the caller's observation, including external inputs and ledgers.
+            for path in reader.capture.databases:
+                sink.database(path)
+            for path, raw in reader.capture.raw.items():
+                if sink.read(path, len(raw)) != raw:
+                    raise SourceScreenError("nested screen consumed different original bytes")
         return _load(_json(result))
     except (
         ValueError,
