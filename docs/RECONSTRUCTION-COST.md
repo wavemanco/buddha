@@ -67,10 +67,31 @@ revisited many times; these call counts do not identify unique files or bytes.
 The source also shows a concrete duplicate: for a prospective generation, the
 source-screen reader reconstructs the generated answers, then the publication
 inspector reconstructs that same generation again to check its saved summary.
-Both checks matter. The next bounded optimization should reuse their common
-checked evidence within one observation while retaining publication, authority,
-accounting, consumed-byte and final integrity checks. It must still reject
-changed or missing evidence; a saved summary alone is insufficient.
+Both checks matter. The [shared generation reader](conformance/imp01-generation-pair-delivery.json)
+now uses their common checked evidence within one observation while retaining
+publication, authority, accounting, consumed-byte and final integrity checks.
+It still rejects changed or missing evidence; a saved summary alone is insufficient.
+
+## Sharing one checked generation
+
+The source-screen, validation/final-assessment and prepared-launch readers now
+obtain a checked publication and its generated answers from one reconstruction.
+The complete captured evidence, including database sidecar checks, joins the
+enclosing reader's final integrity check. Checked execution failures still
+supply no answers and cannot start native evaluation.
+
+The generated-source file list stays exactly the same. Publication-only summary
+files do not become new inputs to downstream native owners. Older source-only
+and baseline routes keep their existing behavior. A sealed generation whose
+summary was never published still uses its original recovery path.
+
+Genuine composed tests first observed two reconstructions per paired consumption
+in each of the three affected paths. The corrected paths use one and reproduce
+the same reports. New checks also retain rejection of late changed bytes and
+nonempty SQLite sidecars, original module identity, v1 compatibility and a real
+interruption between sealing and publication. These are correctness and work-count
+results. The timing table above remains the original measured source cut;
+the changed code has no elapsed-time improvement measurement yet.
 
 ## Limits and next verification
 

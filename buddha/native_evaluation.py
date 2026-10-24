@@ -77,6 +77,16 @@ def _generation(value: object, authority: Authorization) -> _Generation:
     return _read_generation(value, authority.path)
 
 
+def _check_candidate_reader() -> None:
+    from buddha import candidate_generation
+
+    if (
+        Path(candidate_generation.__file__).absolute()
+        != Path(__file__).with_name("candidate_generation.py").absolute()
+    ):
+        raise EvaluationError("a different candidate source reader was imported")
+
+
 def _read_generation(value: object, authority_path: Path) -> _Generation:
     reference = _object(value)
     if reference.get("format") in {
@@ -85,15 +95,30 @@ def _read_generation(value: object, authority_path: Path) -> _Generation:
     }:
         from buddha import candidate_generation
 
-        if (
-            Path(candidate_generation.__file__).absolute()
-            != Path(__file__).with_name("candidate_generation.py").absolute()
-        ):
-            raise EvaluationError("a different candidate source reader was imported")
+        _check_candidate_reader()
         return _Generation(
             *candidate_generation.read_candidate_generation_source(reference, authority_path)
         )
     return _read_baseline_generation(value, authority_path)
+
+
+@_checked
+def _read_published_generation(
+    directory: Path, *, authorization: Path, expected_report_sha256: str
+) -> tuple[dict[str, object], _Generation | None, _Capture]:
+    """Share one checked publication's evidence with its generated C1, if present."""
+    from buddha import candidate_generation
+
+    _check_candidate_reader()
+    report, evidence = candidate_generation._read_published_evidence(
+        directory, authorization=authorization, expected_report_sha256=expected_report_sha256
+    )
+    source = (
+        None
+        if evidence["answers"] is None
+        else _Generation(*candidate_generation._source_from_evidence(evidence))
+    )
+    return report, source, cast(_Capture, evidence["capture"])
 
 
 def _generation_directory(value: object) -> Path:

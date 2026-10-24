@@ -22,7 +22,7 @@ from buddha.authorization import Authorization
 from buddha.doctor import _authority, _Busy, _Owner, _Unsupported
 from buddha.gateway import CORE, RawHTTPTransport, _input_records, _profiles, _review
 from buddha.improvement_rule import ImprovementRule
-from buddha.native_evidence import NativeEvidence, authority_observation
+from buddha.native_evidence import NativeEvidence, _adopt_capture, authority_observation
 from buddha.releases import (
     MAX_SOURCE_BYTES,
     ROLES,
@@ -765,16 +765,16 @@ def _generation(
     task = _generation_identity(state, occasion, reader, arm, identifier, location)
     root = location / "generation"
     raw = reader.raw(root / "report.json")
-    report = candidate_generation.inspect_candidate_generation(
+    report, source, captured = native_evaluation._read_published_generation(
         root, authorization=reader.authorization, expected_report_sha256=_sha(raw)
     )
+    _adopt_capture(captured, reader.capture)
     if _json(report) != raw:
         raise ValidationStudyError("generation publication changed during consumption")
     if report["disposition"] == "candidate_execution_failed":
         return report, None
-    if report["disposition"] != "generated":
+    if report["disposition"] != "generated" or source is None:
         raise ValidationStudyError("unsupported original source execution outcome")
-    source = native_evaluation._read_generation(report["source_generation"], reader.authorization)
     if (
         source.tasks.to_bytes() != task.to_bytes()
         or source.answers.to_record()["agent_sha256"] != arm["agent_sha256"]

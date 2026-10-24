@@ -1058,29 +1058,40 @@ def _read_evidence(
     }
 
 
+def _source_from_evidence(
+    evidence: dict[str, object],
+) -> tuple[TaskSet, Answers, Path, dict[Path, str], dict[str, object]]:
+    """Project checked C1 without adding publication-only invocation bindings."""
+    if evidence["answers"] is None or evidence["answers_path"] is None:
+        raise CandidateGenerationError("a checked source failure has no C1 answers")
+    publication = cast(_Capture, evidence["capture"]).root / "report.json"
+    return (
+        cast(TaskSet, evidence["tasks"]),
+        cast(Answers, evidence["answers"]),
+        cast(Path, evidence["answers_path"]),
+        {
+            path: digest
+            for path, digest in cast(dict[Path, str], evidence["files"]).items()
+            if path != publication
+        },
+        cast(dict[str, object], evidence["terms"]),
+    )
+
+
 @_checked
 def read_candidate_generation_source(
     value: object,
     authority_path: Path,
 ) -> tuple[TaskSet, Answers, Path, dict[Path, str], dict[str, object]]:
     """Read only generated C1; a checked failed execution is never an answer source."""
-    evidence = _read_evidence(value, authority_path)
-    if evidence["answers"] is None or evidence["answers_path"] is None:
-        raise CandidateGenerationError("a checked source failure has no C1 answers")
-    return (
-        cast(TaskSet, evidence["tasks"]),
-        cast(Answers, evidence["answers"]),
-        cast(Path, evidence["answers_path"]),
-        cast(dict[Path, str], evidence["files"]),
-        cast(dict[str, object], evidence["terms"]),
-    )
+    return _source_from_evidence(_read_evidence(value, authority_path))
 
 
 @_checked
-def inspect_candidate_generation(
+def _read_published_evidence(
     directory: Path, *, authorization: Path, expected_report_sha256: str
-) -> dict[str, object]:
-    """Passively check a published v2 outcome, including original independent anchor."""
+) -> tuple[dict[str, object], dict[str, object]]:
+    """Check one published v2 outcome and retain the complete original observation."""
     from buddha.native_evidence import authority_observation
 
     if not isinstance(directory, Path) or not isinstance(authorization, Path):
@@ -1122,4 +1133,14 @@ def inspect_candidate_generation(
     if raw != _json(saved) or _json(saved) != _json(reconstructed):
         raise CandidateGenerationError("generation publication differs from its sealed outcome")
     capture.finish()
-    return saved
+    return saved, evidence
+
+
+@_checked
+def inspect_candidate_generation(
+    directory: Path, *, authorization: Path, expected_report_sha256: str
+) -> dict[str, object]:
+    """Passively check a published v2 outcome, including original independent anchor."""
+    return _read_published_evidence(
+        directory, authorization=authorization, expected_report_sha256=expected_report_sha256
+    )[0]
