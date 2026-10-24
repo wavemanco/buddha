@@ -1477,9 +1477,8 @@ def _witness_progress_at(reader: NativeEvidence, treatment: _WitnessTreatment) -
         location,
         child_directory=location / "generation",
     )
-    progress["proposal_capacity"] = (
-        None if capacity is None or not capacity["present"] else capacity["reference"]
-    )
+    if capacity is not None:
+        progress["proposal_capacity"] = capacity["reference"] if capacity["present"] else None
     if capacity is not None and (
         not capacity["present"] or capacity["record"]["decision"] != "pass"
     ):
@@ -1607,8 +1606,9 @@ def _witness_progress(
         name: current[name]
         for name in ("result", "publication", "next_owner", "next_role", "inactive_pending")
     }
-    progress["lower_role"] = current.get("lower_role")
-    progress["proposal_capacity"] = current.get("proposal_capacity")
+    if state["record"].get("proposal_capacity") is not None:
+        progress["lower_role"] = current.get("lower_role")
+        progress["proposal_capacity"] = current.get("proposal_capacity")
     state["witness_treatments"].update(current["owner_treatments"])
     if current["owner_treatments"]:
         state["inactive_pending"] |= progress["inactive_pending"]

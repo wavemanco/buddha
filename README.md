@@ -20,6 +20,10 @@ It needs no duplicate probe. Integrated supplied-response recovery and retiremen
 checks pass. The separate [actual-live protocol and unfunded bundle](docs/SOURCE-CURRENT-LIVE.md)
 are now checked and independently reviewed; hosted CI and separate funding remain open.
 A negative or unavailable observation leaves an explicit partial result.
+The [legacy progress compatibility correction](docs/SOURCE-PROPOSAL-CAPACITY.md#record-compatibility)
+addresses three failures from the first selected producer. Its local checks are
+separate from hosted CI; a fresh corrected-source input bundle is required
+before funding or a live command.
 
 The [fresh source rehearsal](docs/SOURCE-CURRENT-REHEARSAL.md) now passes:
 29 isolated workers, 154 supplied replies, complete parent and child outputs,

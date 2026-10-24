@@ -100,6 +100,20 @@ Older supported formats retain their meaning and helper inventories. The
 capacity helper is imported and added to controls only when the new policy is
 explicitly enabled; a new proposal builder must select that expanded inventory.
 
+Progress reports follow that same opt-in boundary. Older witness readers keep
+their original eight-field internal progress record and five-field search
+projection. Capacity-enabled search projections also expose the current lower
+role and the original capacity checkpoint reference (or `null` before it is
+published). This lets the launcher show the capacity stage without treating an
+unfinished capacity check as ready child execution. The internal lower-role
+field remains available to the shared witness and finite improver controllers.
+
+The first exact producer's Ubuntu suite exposed three places where new fields
+leaked into legacy reports. The [compatibility correction](conformance/src02-capacity-progress-compat-delivery.json)
+keeps the original tests unchanged and fixes the shared projection. It does not
+weaken capacity checks, rewrite old owners or turn that historical failed CI
+head into a passing result. The corrected head needs its own hosted checks.
+
 There is no new spending allowance, owner type, provider route, command-line
 switch or official NoveltyBench scoring rule. A future actual live handoff still
 needs its own reviewed intent, funding and current account/price checks.
