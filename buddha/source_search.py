@@ -1226,8 +1226,6 @@ def _witness_progress_at(reader: NativeEvidence, treatment: _WitnessTreatment) -
                 raise SourceSearchError("witness publication precedes further-child execution")
             return progress
         progress["needs_prepare"] = False
-        for path, expected in inputs.items():
-            reader.raw(path, expected)
         generation_context = {
             "format": candidate_generation.generation_formats(recipe["format"])["context"],
             "descriptor": str(location / "generation.json"),
@@ -1254,7 +1252,18 @@ def _witness_progress_at(reader: NativeEvidence, treatment: _WitnessTreatment) -
             reader, generation_owner, funding=funding, role="generation"
         )
         progress["inactive_pending"] |= inactive
-        if not sealed or not _present(reader, generation_dir / "report.json"):
+        published = sealed and _present(reader, generation_dir / "report.json")
+        # Completed custody retains all original bindings without old producer files.
+        # Keep the inputs consumed by the inspector in the outer byte capture too.
+        runtime = _object(recipe["runtime"])
+        consumed = {
+            location / "task.json": inputs[location / "task.json"],
+            location / "generation.json": inputs[location / "generation.json"],
+            pipeline._absolute(runtime["path"]): _digest(runtime["sha256"]),
+        }
+        for path, expected in (consumed if published else inputs).items():
+            reader.raw(path, expected)
+        if not published:
             if _present(reader, location / "report.json"):
                 raise SourceSearchError("witness publication skips unfinished generation")
             if sealed:

@@ -1,0 +1,170 @@
+{
+  "format": "buddha.passive-witness-replay-delivery.v1",
+  "status": "focused_fix_verified_regressions_running",
+  "base_commit": "c6eca1a07426cdbddf3ddd735be7b44f1fd38a3d",
+  "design_sections": [
+    8,
+    9,
+    10
+  ],
+  "claim": "Completed sealed witness replay survives retirement of external producer roots; original bindings, anchors and consumed-data byte checks remain required. No full-suite, hosted-CI or scientific claim.",
+  "delivered_sources": {
+    "buddha/source_search.py": "8935787fa10ca40ec46c25dc7030113c63715b7e83968730df055b8d33d0b4da",
+    "tests/test_improver_study.py": "ab4567dd3838555269a98fc5161c7ba1e542230b6c06ac0adc9dd0cec261b0d6"
+  },
+  "failure": {
+    "CI": "PR96 and PR97 Ubuntu jobs each completed 1732 tests with one error in the first passive source-retirement check; later quality steps were skipped.",
+    "original_CI_observation": {
+      "path": "runs/reviews/eval01-final-design-20261023/imp01-ci-failure-review-v1.json",
+      "sha256": "68dfc9d458f39c43f9652cd52d4b7445387f0e692275c8e083b1475f55a5d672"
+    },
+    "genuine_smaller_grid_diagnostic": {
+      "path": "runs/reviews/eval01-final-design-20261023/finite-retirement-minimal-grid-diagnostic-v1.json",
+      "sha256": "7d5f93443ce4859433477cd46702619baca1a9ee605603d33f9611a4fa3517e4"
+    },
+    "actual_lower_chain": "ImproverStudyError -> SourceSearchError -> FileNotFoundError reopening I0/candidate.py in _witness_progress_at.",
+    "scope": "The diagnostic completed a genuine supplied-worker 1-start/1-repetition/2-arm/1-slot study, verified inspect and completed-run replay before retiring only its own four producer roots, then observed the same lower failure in both. Its observation test records expected failures as data; the separate committed regression supplies the unit-test RED."
+  },
+  "behavior": {
+    "red": {
+      "record": {
+        "path": "runs/reviews/eval01-final-design-20261023/finite-witness-retirement-red-v1.json",
+        "sha256": "3271ef437a70cc89329e4781d479c0a1a258c9c1cf5bbba73ef5a19e9a54be41"
+      },
+      "tests": 1,
+      "errors": 1,
+      "failures": 0,
+      "seconds": 229.13644340005703,
+      "log": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\finite-witness-retirement-red-v1.log",
+        "sha256": "a698405c2c1a1203b0af667be979377f4492738d9782eb36d18f57ee558d559b"
+      },
+      "scope": "One genuine finite common-witness retirement check at the recorded cut; memory/scratch SQLite connection paths, canonical scratch writes, no network/child process/Docker/provider or host selected-source execution. Diagnostic copies do not replace original owner evidence."
+    },
+    "green": {
+      "record": {
+        "path": "runs/reviews/eval01-final-design-20261023/finite-witness-retirement-green-v1.json",
+        "sha256": "37eb9b8e407a7b63d3440e42bf9b806db1770a6c4dd624396bdb0abe2f5c2c2d"
+      },
+      "tests": 1,
+      "errors": 0,
+      "failures": 0,
+      "seconds": 241.41067179990932,
+      "log": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\finite-witness-retirement-green-v1.log",
+        "sha256": "5aae8989fb53e28e5709c68f286ac33d15792497ab6d62933b454fcf3496a372"
+      },
+      "scope": "One genuine finite common-witness retirement check at the recorded cut; memory/scratch SQLite connection paths, canonical scratch writes, no network/child process/Docker/provider or host selected-source execution. Diagnostic copies do not replace original owner evidence."
+    },
+    "positive": "Genuine complete common witness and two rejected counted proposals; original I0/I1/S0/S1 paths absent; keyless inspect and completed run return the same report without Gateway, authority, work lease, writer, worker or send.",
+    "negative": "Fresh preparation while producer roots are absent still refuses before any writer/lease/owner or filesystem/accounting/counter change.",
+    "legacy_witness_regressions": {
+      "status": "running",
+      "methods": 12,
+      "session_id": 61237,
+      "expected_record": "runs/reviews/eval01-final-design-20261023/finite-witness-regressions-green-v1.json"
+    }
+  },
+  "implementation": [
+    "Original owner treatment, every input digest binding and independently anchored completed generation seal are checked before the branch.",
+    "Pending or sealed-but-unpublished generation still reads every original input.",
+    "Only genuinely sealed and published generation avoids reopening external producer control files. Task, generation recipe and runtime remain in the parent byte capture; original context, authority, owner, output, feedback and lineage checks remain.",
+    "Both active controllers and _advance_witness retain their current-input checks before any new work.",
+    "Only _witness_progress_at changes in production; all prior test methods remain AST-identical. No schema, metric, accounting or dependency changes."
+  ],
+  "independent_review": {
+    "original_proposal_capture_caveat": {
+      "path": "runs/reviews/eval01-final-design-20261023/passive-witness-proposed-move-review-v1.json",
+      "sha256": "a8cef49c48922fe5d44a6c1da4863cfa4326bd9b86fe004a545c81cd7a305fc1"
+    },
+    "corrected_shape": {
+      "path": "runs/reviews/eval01-final-design-20261023/passive-witness-proposed-move-review-v2.json",
+      "sha256": "8f31679b4387952465dad4b8377102ec1d36862f6792d806080ff6245e0fc7eb"
+    },
+    "exact_applied_code": {
+      "path": "runs/reviews/eval01-final-design-20261023/passive-witness-applied-code-review-v1.json",
+      "sha256": "cb898bcc08846bbc51a1067550391aebe44f22dfd816a58fd70cc5a342ac8e21"
+    },
+    "result": "No static blockers at the exact delivered code/test cut. The first suggested all-input-loop move would have dropped three outer byte-capture dependencies; it was never applied. The reviewed completed branch explicitly retains them."
+  },
+  "quality": {
+    "record": {
+      "path": "runs/reviews/eval01-final-design-20261023/finite-witness-replay-quality-v1.json",
+      "sha256": "515343f1bb0a6fedb4e731142a74f469697ba69b14606157359f02b9267a319b"
+    },
+    "checks": [
+      {
+        "name": "lint",
+        "exit_code": 0,
+        "seconds": 0.164516199962236,
+        "inputs_unchanged": true
+      },
+      {
+        "name": "format",
+        "exit_code": 0,
+        "seconds": 0.13547940005082637,
+        "inputs_unchanged": true
+      },
+      {
+        "name": "types",
+        "exit_code": 0,
+        "seconds": 3.9020977000473067,
+        "inputs_unchanged": true
+      },
+      {
+        "name": "security",
+        "exit_code": 0,
+        "seconds": 2.859917699941434,
+        "inputs_unchanged": true
+      },
+      {
+        "name": "dependencies",
+        "exit_code": 0,
+        "seconds": 19.3519285999937,
+        "inputs_unchanged": true
+      },
+      {
+        "name": "compile",
+        "exit_code": 0,
+        "seconds": 1.1683800999308005,
+        "inputs_unchanged": true
+      },
+      {
+        "name": "diff",
+        "exit_code": 0,
+        "seconds": 0.09254990005865693,
+        "inputs_unchanged": true
+      }
+    ],
+    "input_count": 217,
+    "all_pins_unchanged": true
+  },
+  "remaining": [
+    "Finish the twelve running existing witness regression methods and exact published-head hosted checks; the earlier CI failures are not relabelled green.",
+    "The three corrected sealed-assessment composed checks still run separately at c6eca1a. All12 unchanged final-v1 regressions have now passed there; the three earlier pre-review composed passes are not substituted for the corrected cohort.",
+    "A source-only review finds a separate retired-producer dependency in the new sealed-assessment _definition/_state path. This fix does not address it or claim dynamic reproduction.",
+    "Actual current-source model-authored demonstration, controlled improver comparison and independent evaluation remain open under the same four gates."
+  ],
+  "separate_sealed_reader_source_review": {
+    "path": "runs/reviews/eval01-final-design-20261023/improver-assessment-passive-producer-dependency-v1.json",
+    "sha256": "cb9c12b6afef4fae5f145ad37f4a00c0ad0d099b5e969b93925793f6f773c083"
+  },
+  "safety": {
+    "real_provider_calls": 0,
+    "selected_source_host_execution": false,
+    "historical_paid_owners_changed": false,
+    "new_allowance": false,
+    "merges": false,
+    "official_benchmark_changed": false
+  },
+  "separate_shared_helper_regressions": {
+    "record": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\final-v1-compatibility-green-v2.json",
+    "sha256": "45d472b9a84c364826001c63b0fb0b93293e630ace6ce798e6221f5cfcd87d8e",
+    "tests": 12,
+    "failures": 0,
+    "errors": 0,
+    "seconds": 3044.8426642999984,
+    "all_pins_unchanged": true,
+    "scope": "Unchanged original final-v1 tests at corrected shared-helper cut c6eca1a, not the later witness fix or a full-suite result."
+  }
+}

@@ -653,6 +653,79 @@ class FiniteImproverStudyTests(unittest.TestCase):
                 {key: section[key] for key in ("budget_microusd", "max_calls")},
             )
 
+    def test_completed_common_witness_replays_after_external_sources_retire(self):
+        self.fixture_before_new_api()
+        from buddha import improver_study
+        from buddha.gateway import RawHTTPTransport
+
+        self.api = improver_study
+        record = self.declaration(improver_study)
+        record.update(starts=record["starts"][:1], repetitions=1, descendant_opportunities=1)
+        record["selection"]["finalist_iteration"] = 1
+        self.recompute_limits(record)
+        self.outcomes = {(0, 0, arm, 0): "rejected" for arm in range(2)}
+        directory, declaration, authority = self.prepare_study("retirement-study", record)
+        report = self.run_study(directory)
+        self.assertEqual(report["status"], "complete")
+        self.assertEqual(report["coverage"]["completed_common"], 1)
+        self.assertEqual([row["status"] for row in report["decisions"]], ["rejected"] * 2)
+        self.assertEqual(
+            json.loads((directory / "common/0/0/witness/report.json").read_bytes())["status"],
+            "passed",
+        )
+
+        def snapshot():
+            return (
+                self.h.files(self.root),
+                authority.summary(),
+                self.engine.physical_sends,
+                self.engine.workers,
+                len(self.events),
+                len(self.improvements),
+                len(self.generated),
+            )
+
+        retired = []
+        try:
+            for name in ("I0", "I1", "S0", "S1"):
+                original, destination = self.root / name, self.root / (name + "-retired")
+                original.rename(destination)
+                retired.append((original, destination))
+            before = snapshot()
+            destination = self.root / "fresh-retirement-study"
+            with (
+                self.h.readonly(),
+                patch.dict(os.environ, {}, clear=True),
+                patch("buddha.trial_fence.work", side_effect=AssertionError("trial work entered")),
+                patch(
+                    "buddha.native_pipeline._exclusive",
+                    side_effect=AssertionError("local writer lock"),
+                ),
+            ):
+                # Retired controls still prevent any fresh, active preparation.
+                with self.assertRaises(self.api.ImproverStudyError):
+                    self.api.prepare_improver_study(
+                        destination,
+                        declaration=declaration,
+                        expected_sha256=sha(declaration.read_bytes()),
+                        authorization=authority,
+                        review=self.engine.fixture.review,
+                        expected_runtime_sha256=self.engine.candidate.expected_runtime,
+                    )
+                self.assertFalse(destination.exists())
+                # Original completed custody is sufficient for passive replay.
+                self.assertEqual(self.inspect(directory, authority), report)
+                self.assertEqual(
+                    self.api.run_improver_study(
+                        directory, transport=RawHTTPTransport(allow_paid=False)
+                    ),
+                    report,
+                )
+            self.assertEqual(snapshot(), before)
+        finally:
+            for original, destination in reversed(retired):
+                destination.rename(original)
+
     def test_finite_fixed_operators_common_conditions_negative_slots_and_original_recovery(self):
         self.fixture_before_new_api()
         # Actual initial RED belongs here, after genuine old measured/role APIs.
