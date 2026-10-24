@@ -1,6 +1,8 @@
 # Buddha
 
-Build agents that improve their own procedures for producing useful, meaningfully different answers on NoveltyBench.
+Build agents that improve their own procedures for producing useful, meaningfully different answers on [NoveltyBench](https://github.com/novelty-bench/novelty-bench).
+
+The design for evolving agent code draws on [DGM](https://github.com/jennyzzt/dgm).
 
 **Start with [the consolidated living plan](docs/PLAN.md)** for the complete original objective, completed work, new findings, dependencies and the next slice. It is the sole current roadmap; design and review documents supply specifications and evidence.
 
@@ -277,3 +279,20 @@ main-push jobs check `main`. Verbose names show test progress, and the duration
 summary helps identify slow cases without reducing coverage.
 
 Both jobs use Python 3.13 and the pinned tools in `requirements-dev.txt`; application runtime dependencies remain empty. Development auditing includes certifi (MPL-2.0), recorded in the recovery contract, without adding it to the application runtime. Local verification is reported separately from hosted CI. The user authorizes continued implementation with a summary and PR per slice, pausing for live execution or a required decision. Genuine source self-modification requires the separately gated source-evolution work. HyperAgents contributes conceptual inspiration only; its source is excluded. Earlier dated handoffs describing absent Git/CI are historical.
+
+## License
+
+Buddha-authored code and documentation are available under the [MIT License](LICENSE).
+Reused third-party material retains its own license and attribution; see
+[third-party notices](THIRD_PARTY_NOTICES.md). External datasets and separately
+installed dependencies retain their applicable terms.
+
+## Contributions during development
+
+This repository is not accepting external contributions during the current
+development phase. New pull requests are restricted to collaborators. Public
+forks and independent use remain welcome under the license above.
+
+Changes to `main` must go through a pull request and can only be merged by the
+maintainer's account. Force pushes and deletion of `main` are blocked, including
+for administrators. Repository administrators can change these settings.
