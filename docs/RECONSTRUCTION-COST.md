@@ -90,8 +90,49 @@ in each of the three affected paths. The corrected paths use one and reproduce
 the same reports. New checks also retain rejection of late changed bytes and
 nonempty SQLite sidecars, original module identity, v1 compatibility and a real
 interruption between sealing and publication. These are correctness and work-count
-results. The timing table above remains the original measured source cut;
-the changed code has no elapsed-time improvement measurement yet.
+results. The timing table above remains the original measured source cut.
+The separate bounded observation below now measures one affected screen reader.
+
+## Bounded paired-screen observation
+
+One small matched case now has a measured comparison at the exact PR #105 and
+PR #107 source cuts. Each version created its own original one-task test run,
+with two supplied answers, one generation callback and three native stages.
+The complete public screen reader ran once; a separate untimed pass counted
+evidence reconstructions.
+
+| Complete screen check | PR #105 baseline | PR #107 shared evidence |
+| --- | ---: | ---: |
+| Wall seconds | 0.5694292 | 0.3986887 |
+| Process CPU seconds | 0.546875 | 0.390625 |
+| Reconstructions in separate counted pass | 2 | 1 |
+
+Both original reports were reproduced. Actual task, generation configuration,
+literal answers, runtime, stages and request/reply content matched across versions.
+Each retained test tree has 80 files, 49 folders and eight databases; all remained
+unchanged. The four screen owners contain three supplied API replies, with no
+provider call from the final summary stage. No real API or container was used.
+
+The original six-cell cohort could not provide this cross-worktree comparison:
+its declaration approves the old consumer's exact absolute path. Source and
+record inspection shows that the new path would be refused by that approval
+check. This was a static finding, not an observed application failure. The
+unexecuted comparison drafts remain retained. We kept the original declaration
+and source identity intact and prepared separate original matched fixtures.
+Their paths, run IDs and provenance differ; their full histories are not identical.
+
+The [bounded record](conformance/imp01-paired-screen-cost-observation.json) retains
+the prospective invocation, both exact source inventories, completed child exits,
+raw logs, receipts and independent data review. It distinguishes **450 file pins**
+from the two repository directory roots. Preparation and hashing warm the cache
+and sit outside the timed reader calls. The full child processes took about
+10.9 and 9.1 seconds, including those other activities.
+
+This is one warm, guarded observation in a fixed order on a nonexclusive machine.
+It is evidence of the specific duplicated-work reduction, with a local timing
+observation. It does not establish a production speedup, a scaling law, the cost
+of the larger improver grid, or performance of the later PR #108 review bridge.
+No repeat campaign or larger performance experiment follows from this result.
 
 ## Limits and next verification
 
@@ -104,11 +145,11 @@ Audit and path-guard costs are not separately exposed in the profile rows;
 the file-read and file-status times describe this guarded execution.
 
 There is no production NoveltyBench timing, scaling law, full multi-condition
-cost result or measured optimization speedup here. Supplied programs and replies
+cost result or general optimization-speed claim here. Supplied programs and replies
 also establish no model-authored competence or scientific improvement. The
 larger IMP-01 cost and exact-current-head hosted checks remain open.
 
-The retained original cohort allows the next change to be checked against the
-same evidence. A correct optimization needs failing checks for duplicate work
-and evidence corruption, then passing correctness checks and a separate measured
-comparison. The official benchmark and its scores remain fixed.
+The original cohort remains readable by its approved consumer. The bounded
+comparison completes the small duplicate-read observation; larger costs still
+need to be recorded for the planned matched improver work. This does not require
+changing the official benchmark or its scores.
