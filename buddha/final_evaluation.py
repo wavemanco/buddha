@@ -20,9 +20,9 @@ from buddha import noveltybench_results as projection
 from buddha import source_screen_results as saved_native
 from buddha import validation_analysis as analysis
 from buddha import validation_study as study
-from buddha.answers import _id
+from buddha.answers import TaskSet, _id, _source
 from buddha.authorization import Authorization
-from buddha.doctor import _authority
+from buddha.doctor import _authority, _Busy, _Unsupported
 from buddha.improvement_rule import evaluate_improvement_rule
 from buddha.native_evidence import NativeEvidence, authority_observation
 from buddha.releases import (
@@ -38,11 +38,15 @@ from buddha.releases import (
 from buddha.wire import _integer
 
 FORMAT = "buddha.evaluation-trial.v1"
+TRANSFER_FORMAT = "buddha.evaluation-trial.v2"
 POLICY = {
     "method": "explicit_ordered_finalists",
     "eligible_pool": "complete-original-validation-candidates",
 }
 CLAIM = "One frozen fixed-panel final comparison; no ranking, promotion or unseen-task claim."
+_SEALED_CLAIM = (
+    "One frozen fixed-panel sealed comparison; no ranking, promotion or unseen-task claim."
+)
 
 
 class FinalEvaluationError(ReleaseError):
@@ -54,7 +58,16 @@ def _checked[**P, T](function: Callable[P, T]) -> Callable[P, T]:
     def checked(*args: P.args, **kwargs: P.kwargs) -> T:
         try:
             return function(*args, **kwargs)
-        except (ValueError, TypeError, KeyError, OSError, RecursionError, OverflowError) as error:
+        except (
+            ValueError,
+            TypeError,
+            KeyError,
+            OSError,
+            RecursionError,
+            OverflowError,
+            _Busy,
+            _Unsupported,
+        ) as error:
             if isinstance(error, FinalEvaluationError):
                 raise
             raise FinalEvaluationError(
@@ -73,9 +86,134 @@ def _path(value: object) -> Path:
     return trial_fence._checked_path(value)
 
 
-def _definition(raw: bytes, runtime: str) -> dict[str, Any]:
+def _version(record: dict[str, Any]) -> int:
+    return 2 if record["format"] == TRANSFER_FORMAT else 1
+
+
+def _phase(state: dict[str, Any]) -> str:
+    phase = state.get("sealed_phase", "final")
+    if (
+        type(phase) is not str
+        or phase not in {"final", "transfer"}
+        or (phase == "transfer" and _version(state["definition"]) != 2)
+    ):
+        raise FinalEvaluationError("unsupported original sealed panel")
+    return phase
+
+
+def _execution_projection(record: dict[str, Any]) -> dict[str, Any]:
+    """Compare executable/resource identities, allowing separately verified locations."""
+    projected = study._obj(
+        _load(_json({key: record[key] for key in ("generation", "native", "stages")}))
+    )
+    for role in ("generation", "native"):
+        member = projected[role]
+        member.pop("roots")
+        member["selection"].pop("release")
+        member["selection"]["components"].pop("official")
+    projected["generation"]["executor"].pop("mounts")
+    projected["generation"]["runtime"].pop("path")
+    return projected
+
+
+def _transfer(value: object, primary: dict[str, Any], controls: dict[Path, str]) -> dict[str, Any]:
     record = study._obj(
-        _load(raw),
+        value,
+        {"tasks", "custody", "selected_ids", "repetitions", "generation", "native", "stages"},
+    )
+    refs = {key: study._ref(record[key], controls) for key in ("tasks", "custody")}
+    tasks = TaskSet.from_bytes(pipeline._read(Path(refs["tasks"]["path"])))
+    release, data = _source(tasks.to_record())
+    if tasks.to_bytes() != TaskSet.from_dataset(release, data).to_bytes():
+        raise FinalEvaluationError("transfer requires its complete separately declared source")
+    selected = [_id(key) for key in study._list(record["selected_ids"])]
+    if not selected or len(set(selected)) != len(selected):
+        raise FinalEvaluationError("transfer task IDs must be nonempty and unique")
+    custody = study._custody(
+        _load(pipeline._read(Path(refs["custody"]["path"]))),
+        tasks,
+        selected,
+        controls,
+        phase="transfer",
+    )
+    if (
+        set(selected)
+        != {row["task_id"] for row in custody["population"] if row["phase"] == "transfer"}
+        or custody["process_id"] != primary["custody"]["process_id"]
+    ):
+        raise FinalEvaluationError("transfer must retain every assigned named-process member")
+    _integer(record["repetitions"], 1)
+    base = primary["tasks"].to_record()["release"]
+    other = study._obj(release.to_record())
+    dataset = other["task"]["dataset"]
+    if (
+        (other["benchmark"], other["release"]) == (base["benchmark"], base["release"])
+        or dataset in base["source"]
+        or not dataset.casefold().endswith(".jsonl")
+        or other["source"][dataset] == base["source"][base["task"]["dataset"]]
+        or other["source"] != base["source"] | {dataset: other["source"][dataset]}
+        or other["task"] != base["task"] | {"dataset": dataset}
+        or any(
+            other[key] != member
+            for key, member in base.items()
+            if key not in {"benchmark", "release", "source", "task"}
+        )
+    ):
+        raise FinalEvaluationError("transfer changes more than its declared added dataset/release")
+    if {row["family_id"] for row in custody["population"]} & {
+        row["family_id"] for row in primary["custody"]["population"]
+    } or {" ".join(task.prompt.split()).casefold() for task in tasks.tasks} & {
+        " ".join(task.prompt.split()).casefold() for task in primary["tasks"].tasks
+    }:
+        raise FinalEvaluationError("complete transfer and primary populations overlap")
+    study._validate_execution(record, tasks, primary["runtime"])
+    if _execution_projection(record) != _execution_projection(primary["record"]):
+        raise FinalEvaluationError("transfer changes frozen executable or resource settings")
+    return {"record": record, "tasks": tasks, "custody": custody}
+
+
+def _panel_state(state: dict[str, Any], phase: str) -> dict[str, Any]:
+    if type(phase) is not str or phase not in {"final", "transfer"}:
+        raise FinalEvaluationError("unsupported selected sealed panel")
+    if phase == "transfer" and _version(state["definition"]) != 2:
+        raise FinalEvaluationError("the original trial has no transfer panel")
+    selected = study._obj(state["transfer"] if phase == "transfer" else state["primary"])
+    return state | selected | {"sealed_phase": phase, "directory": state["root"] / phase}
+
+
+def _metadata(state: dict[str, Any]) -> dict[str, object]:
+    return (
+        {}
+        if _version(state["definition"]) == 1
+        else {
+            "phase": _phase(state),
+            "release_sha256": state["tasks"].release_sha256,
+            "tasks_sha256": state["tasks"].fingerprint(),
+        }
+    )
+
+
+def _claim(state: dict[str, Any]) -> str:
+    return CLAIM if _version(state["definition"]) == 1 else _SEALED_CLAIM
+
+
+def _result_format(state: dict[str, Any], kind: str) -> str:
+    return (
+        f"buddha.final-evaluation-{kind}.v1"
+        if _version(state["definition"]) == 1
+        else f"buddha.sealed-evaluation-{kind}.v2"
+    )
+
+
+def _schedule_hash(occasion: dict[str, Any]) -> str:
+    return occasion["freeze_sha256"] if "freeze_sha256" in occasion else pipeline._sha(occasion)
+
+
+def _definition(raw: bytes, runtime: str) -> dict[str, Any]:
+    original_record = study._obj(_load(raw))
+    version = _version(original_record)
+    record = study._obj(
+        original_record,
         {
             "format",
             "experiment_id",
@@ -86,9 +224,10 @@ def _definition(raw: bytes, runtime: str) -> dict[str, Any]:
             "search_purpose",
             "phase_limits",
             "consumer_sources",
-        },
+        }
+        | ({"transfer"} if version == 2 else set()),
     )
-    if record["format"] != FORMAT or record["finalist_policy"] != POLICY:
+    if record["format"] not in {FORMAT, TRANSFER_FORMAT} or record["finalist_policy"] != POLICY:
         raise FinalEvaluationError("unsupported explicit prospective finalist policy")
     _text(record["experiment_id"])
     _text(record["search_purpose"])
@@ -96,6 +235,7 @@ def _definition(raw: bytes, runtime: str) -> dict[str, Any]:
     validation = study._ref(record["validation"], controls)
     original = pipeline._read(Path(validation["path"]), validation["sha256"])
     state = study._definition(original, _digest(runtime))
+    transfer = _transfer(record["transfer"], state, controls) if version == 2 else None
     count = _integer(record["finalist_count"], 1)
     selected = [_id(item) for item in study._list(record["final_ids"])]
     population = {row["task_id"]: row for row in state["custody"]["population"]}
@@ -121,13 +261,24 @@ def _definition(raw: bytes, runtime: str) -> dict[str, Any]:
     counts = {key: state["record"][key] for key in ("max_looks", "max_candidates", "repetitions")}
     counts.update(finalist_count=count, comparator_count=len(state["comparators"]))
     if any(method[key] != value for key, value in counts.items()) or (
-        method["improvement_rule_sha256"] != state["rule"].fingerprint()
+        method["format"] != f"buddha.validation-analysis-plan.v{version}"
+        or (
+            transfer is not None
+            and (
+                method["transfer_projection_release_sha256"] != transfer["tasks"].release_sha256
+                or method["transfer_repetitions"] != transfer["record"]["repetitions"]
+            )
+        )
+        or method["improvement_rule_sha256"] != state["rule"].fingerprint()
         or method["projection_release_sha256"] != state["tasks"].release_sha256
         or method["analyzer_sources"] != analysis._source_hashes()
         or record["consumer_sources"] != _source_hashes()
     ):
         raise FinalEvaluationError("trial changes prospective method, rule or consumed sources")
-    limits = study._obj(record["phase_limits"], {"search", "validation", "final"})
+    limits = study._obj(
+        record["phase_limits"],
+        {"search", "validation", "final"} | ({"transfer"} if version == 2 else set()),
+    )
     for value in limits.values():
         row = study._obj(value, {"budget_microusd", "max_calls"})
         for amount in row.values():
@@ -139,15 +290,29 @@ def _definition(raw: bytes, runtime: str) -> dict[str, Any]:
         if file_hash(path) != digest:
             raise FinalEvaluationError("prospective final helper source changed")
         controls[path] = digest
-    return state | {"definition": record, "plan": plan, "controls": controls}
+    result = state | {"definition": record, "plan": plan, "controls": controls}
+    if transfer is not None:
+        result.update(
+            transfer=transfer,
+            primary={key: state[key] for key in ("record", "tasks", "custody")},
+        )
+        result["protected"] = [
+            Path(path)
+            for role in ("generation", "native")
+            for path in transfer["record"][role]["roots"].values()
+        ]
+    return result
 
 
 def _purposes(record: dict[str, Any], identity: str, validation: dict[str, Any]) -> dict[str, str]:
-    return {
+    purposes = {
         "search": record["search_purpose"],
         "validation": "validation study: " + pipeline._sha(validation),
         "final": "final evaluation: " + identity,
     }
+    if _version(record) == 2:
+        purposes["transfer"] = "transfer evaluation: " + identity
+    return purposes
 
 
 def _prepare_trial_root(
@@ -162,10 +327,12 @@ def _prepare_trial_root(
     context_format: str,
     extra_context: dict[str, object] | None = None,
 ) -> Path:
-    """Shared original three-phase reserve/root publication, before any lower owner."""
+    """Publish original versioned reserves/root before any lower owner."""
     record = state["definition"]
+    version = _version(record)
+    expected_phases = {"search", "validation", "final"} | ({"transfer"} if version == 2 else set())
     identity = pipeline._sha(record)
-    if type(authorizations) is not dict or set(authorizations) != {"search", "validation", "final"}:
+    if type(authorizations) is not dict or set(authorizations) != expected_phases:
         raise FinalEvaluationError("one explicit original grant per phase is required")
     phases, originals = {}, dict(state["controls"])
     originals[declaration] = _digest(expected_sha256)
@@ -181,7 +348,7 @@ def _prepare_trial_root(
         funding, before = launch._snapshot(authority.path)
         terms = study._obj(funding["config"])
         expected_scope = trial_fence._scope_text(
-            trial_fence._TrialScope(directory, identity, phase)
+            trial_fence._TrialScope(directory, identity, phase, version=version)
         )
         if (
             terms["scope"] != expected_scope
@@ -207,14 +374,14 @@ def _prepare_trial_root(
         }
         launch._finish_snapshot(authority.path, before)
         protected.append(authority.path)
-    if len({row["authorization_path"] for row in phases.values()}) != 3:
+    if len({row["authorization_path"] for row in phases.values()}) != len(expected_phases):
         raise FinalEvaluationError("phase grants must be distinct original reserves")
     if directory.exists() or any(
         path.is_relative_to(directory) or directory.is_relative_to(path) for path in protected
     ):
         raise FinalEvaluationError("new trial overlaps original controls or funding")
     funding = {
-        "format": "buddha.evaluation-trial-funding.v1",
+        "format": f"buddha.evaluation-trial-funding.v{version}",
         "root": str(directory),
         "definition_sha256": identity,
         "total_budget_microusd": sum(row["budget_microusd"] for row in phases.values()),
@@ -236,7 +403,7 @@ def _prepare_trial_root(
             raise FinalEvaluationError("extra trial context conflicts with fixed fields")
         context.update(extra_context)
     marker = {
-        "format": "buddha.evaluation-trial-root.v1",
+        "format": f"buddha.evaluation-trial-root.v{version}",
         "root": str(directory),
         "definition_sha256": identity,
         "funding_sha256": pipeline._sha(funding),
@@ -274,7 +441,7 @@ def prepare_evaluation_trial(
         state=state,
         authorizations=authorizations,
         purposes=_purposes(record, identity, state["record"]),
-        context_format="buddha.evaluation-trial-context.v1",
+        context_format=f"buddha.evaluation-trial-context.v{_version(record)}",
     )
     study.prepare_validation_study(
         directory / "validation/study",
@@ -286,9 +453,11 @@ def prepare_evaluation_trial(
     return directory
 
 
-def _state(directory: Path) -> dict[str, Any]:
+def _state(directory: Path, *, phase: str = "final") -> dict[str, Any]:
+    if type(phase) is not str or phase not in {"final", "transfer"}:
+        raise FinalEvaluationError("unsupported selected sealed panel")
     directory = _path(directory)
-    fixed = trial_fence.required_controls(directory / "final")
+    fixed = trial_fence.required_controls(directory / phase)
     context = study._obj(
         _load(pipeline._read(directory / "context.json")),
         {
@@ -300,11 +469,16 @@ def _state(directory: Path) -> dict[str, Any]:
             "host_runtime",
         },
     )
-    if context["format"] != "buddha.evaluation-trial-context.v1":
+    if context["format"] not in {
+        "buddha.evaluation-trial-context.v1",
+        "buddha.evaluation-trial-context.v2",
+    }:
         raise FinalEvaluationError("unsupported original trial context")
     state = _definition(
         pipeline._read(directory / "definition.json"), context["expected_runtime_sha256"]
     )
+    if context["format"] != f"buddha.evaluation-trial-context.v{_version(state['definition'])}":
+        raise FinalEvaluationError("original context and trial versions differ")
     external = study._obj(context["external_declaration"], {"path", "sha256"})
     if _json(_load(pipeline._read(Path(external["path"]), external["sha256"]))) != _json(
         state["definition"]
@@ -316,14 +490,21 @@ def _state(directory: Path) -> dict[str, Any]:
     for path, digest in expected.items():
         pipeline._read(path, digest)
     funding = study._obj(_load(pipeline._read(directory / "funding.json")))
+    if funding["format"] != f"buddha.evaluation-trial-funding.v{_version(state['definition'])}":
+        raise FinalEvaluationError("original trial and funding versions differ")
     purposes = _purposes(state["definition"], pipeline._sha(state["definition"]), state["record"])
-    for phase, row in funding["phases"].items():
-        if row["purpose"] != purposes[phase] or any(
-            row[key] != value for key, value in state["definition"]["phase_limits"][phase].items()
+    for funding_phase, row in funding["phases"].items():
+        if row["purpose"] != purposes[funding_phase] or any(
+            row[key] != value
+            for key, value in state["definition"]["phase_limits"][funding_phase].items()
         ):
             raise FinalEvaluationError("funding changed original phase purposes or limits")
     state.update(root=directory, directory=directory / "final", context=context, funding=funding)
     state["controls"] = expected | fixed | {directory / "context.json": pipeline._sha(context)}
+    if _version(state["definition"]) == 2:
+        return _panel_state(state, phase)
+    if phase != "final":
+        raise FinalEvaluationError("the original trial has no transfer panel")
     return state
 
 
@@ -406,40 +587,97 @@ def _validation_pool(
     return eligible, controls
 
 
+def _panels(state: dict[str, Any], arms: list[dict[str, Any]]) -> dict[str, Any]:
+    panels = {}
+    for phase in ("final", "transfer"):
+        panel = _panel_state(state, phase)
+        ids = (
+            state["definition"]["final_ids"]
+            if phase == "final"
+            else panel["record"]["selected_ids"]
+        )
+        repetitions = panel["record"]["repetitions"]
+        authority = _phase_authority(state, phase)
+        panels[phase] = {
+            "directory": str(panel["directory"]),
+            "tasks_sha256": panel["tasks"].fingerprint(),
+            "selected_ids": ids,
+            "repetitions": repetitions,
+            "counts": {"cells": _integer(len(arms) * len(ids) * repetitions, 1)},
+            "grant": study._grant(study._obj(launch._snapshot(authority)[0]["config"]), authority),
+        }
+    return panels
+
+
+def _panel_occasion(schedule: dict[str, Any], phase: str, digest: str) -> dict[str, Any]:
+    return (
+        {
+            key: schedule[key]
+            for key in (
+                "definition_sha256",
+                "finalist_refs",
+                "validation_results",
+                "arms",
+                "review",
+                "controls",
+            )
+        }
+        | study._obj(schedule["panels"][phase])
+        | {
+            "format": "buddha.sealed-panel.v2",
+            "phase": phase,
+            "freeze_sha256": digest,
+        }
+    )
+
+
 def _schedule(state: dict[str, Any]) -> tuple[dict[str, Any], dict[Path, str]]:
     root = state["root"]
+    version = _version(state["definition"])
     schedule_raw = pipeline._read(root / "freeze/schedule.json")
     schedule = study._obj(
         _load(schedule_raw),
         {
             "format",
-            "directory",
             "definition_sha256",
             "finalist_refs",
             "validation_results",
             "arms",
-            "selected_ids",
-            "repetitions",
-            "counts",
             "review",
             "controls",
-            "grant",
-        },
+        }
+        | (
+            {"directory", "selected_ids", "repetitions", "counts", "grant"}
+            if version == 1
+            else {"panels"}
+        ),
     )
     gateway._review(schedule["review"])
-    _integer(schedule["repetitions"], 1)
-    _integer(study._obj(schedule["counts"], {"cells"})["cells"], 1)
+    if version == 1:
+        _integer(schedule["repetitions"], 1)
+        _integer(study._obj(schedule["counts"], {"cells"})["cells"], 1)
     ready_raw = pipeline._read(root / "freeze/ready.json")
-    ready = {"format": "buddha.final-freeze-ready.v1", "schedule_sha256": sha(schedule_raw)}
+    ready = {
+        "format": (
+            "buddha.final-freeze-ready.v1" if version == 1 else "buddha.sealed-freeze-ready.v2"
+        ),
+        "schedule_sha256": sha(schedule_raw),
+    }
     if (
         ready_raw != _json(ready)
         or schedule_raw != _json(schedule)
         or (
-            schedule["format"] != "buddha.final-schedule.v1"
-            or schedule["directory"] != str(root / "final")
+            schedule["format"]
+            != ("buddha.final-schedule.v1" if version == 1 else "buddha.sealed-schedule.v2")
             or schedule["definition_sha256"] != pipeline._sha(state["definition"])
-            or _json(schedule["selected_ids"]) != _json(state["definition"]["final_ids"])
-            or schedule["repetitions"] != state["record"]["repetitions"]
+            or (
+                version == 1
+                and (
+                    schedule["directory"] != str(root / "final")
+                    or _json(schedule["selected_ids"]) != _json(state["definition"]["final_ids"])
+                    or schedule["repetitions"] != state["record"]["repetitions"]
+                )
+            )
         )
     ):
         raise FinalEvaluationError("original final freeze lacks exact positive confirmation")
@@ -485,20 +723,27 @@ def _schedule(state: dict[str, Any]) -> tuple[dict[str, Any], dict[Path, str]]:
         str(path): pin for path, pin in common.items()
     }:
         raise FinalEvaluationError("frozen sources or original controls changed")
-    count = len(arms) * len(schedule["selected_ids"]) * schedule["repetitions"]
-    if schedule["counts"] != {"cells": count} or _json(schedule["grant"]) != _json(
-        study._grant(
-            study._obj(launch._snapshot(_phase_authority(state, "final"))[0]["config"]),
-            _phase_authority(state, "final"),
-        )
-    ):
-        raise FinalEvaluationError("final schedule coverage or original grant changed")
+    if version == 2:
+        if _json(schedule["panels"]) != _json(_panels(state, arms)):
+            raise FinalEvaluationError("sealed panels change original coverage or grants")
+    else:
+        count = len(arms) * len(schedule["selected_ids"]) * schedule["repetitions"]
+        if schedule["counts"] != {"cells": count} or _json(schedule["grant"]) != _json(
+            study._grant(
+                study._obj(launch._snapshot(_phase_authority(state, "final"))[0]["config"]),
+                _phase_authority(state, "final"),
+            )
+        ):
+            raise FinalEvaluationError("final schedule coverage or original grant changed")
     pins = common | {
         root / "freeze/schedule.json": sha(schedule_raw),
         root / "freeze/ready.json": sha(ready_raw),
     }
     for path, digest in pins.items():
         pipeline._read(path, digest)
+    if version == 2:
+        state["global_schedule"] = schedule
+        return _panel_occasion(schedule, _phase(state), sha(schedule_raw)), pins
     return schedule, pins
 
 
@@ -526,7 +771,7 @@ def freeze_finalists(
             or schedule["review"] != checked_review
         ):
             raise FinalEvaluationError("final identities cannot be reselected")
-        return schedule
+        return study._obj(state.get("global_schedule", schedule))
     with trial_fence.lease(authority.path, authority._terms(), directory=state["root"] / "final"):
         state = _state(directory)
         if (state["root"] / "freeze").exists():
@@ -536,8 +781,11 @@ def freeze_finalists(
             ref["agent_sha256"] not in eligible for ref in refs
         ):
             raise FinalEvaluationError("exactly F unique original eligible finalists are required")
-        for phase in ("search", "validation", "final"):
-            _quiescent(state, phase, fresh=phase == "final")
+        phases = ("search", "validation", "final") + (
+            ("transfer",) if _version(state["definition"]) == 2 else ()
+        )
+        for phase in phases:
+            _quiescent(state, phase, fresh=phase in {"final", "transfer"})
         common = state["controls"] | original
         arms: list[dict[str, Any]] = []
         for role, sources in (("comparator", state["comparators"]), ("candidate", refs)):
@@ -573,12 +821,34 @@ def freeze_finalists(
                 study._obj(launch._snapshot(authority.path)[0]["config"]), authority.path
             ),
         }
-        for value in schedule["counts"].values():
-            _integer(value, 1)
+        version = _version(state["definition"])
+        if version == 2:
+            schedule = {
+                key: schedule[key]
+                for key in (
+                    "definition_sha256",
+                    "finalist_refs",
+                    "validation_results",
+                    "arms",
+                    "review",
+                    "controls",
+                )
+            } | {"format": "buddha.sealed-schedule.v2", "panels": _panels(state, arms)}
+        else:
+            for value in schedule["counts"].values():
+                _integer(value, 1)
         receipt_paths = {
             state["root"] / "freeze" / name: "0" * 64 for name in ("schedule.json", "ready.json")
         }
-        study._capacity(state, schedule, receipts=receipt_paths)
+        if version == 2:
+            for phase in ("final", "transfer"):
+                study._capacity(
+                    _panel_state(state, phase),
+                    _panel_occasion(schedule, phase, pipeline._sha(schedule)),
+                    receipts=receipt_paths,
+                )
+        else:
+            study._capacity(state, schedule, receipts=receipt_paths)
         freeze = state["root"] / "freeze"
         freeze.mkdir()
         (freeze / "sources").mkdir()
@@ -592,7 +862,11 @@ def freeze_finalists(
             freeze / "ready.json",
             _json(
                 {
-                    "format": "buddha.final-freeze-ready.v1",
+                    "format": (
+                        "buddha.final-freeze-ready.v1"
+                        if version == 1
+                        else "buddha.sealed-freeze-ready.v2"
+                    ),
                     "schedule_sha256": sha(raw),
                 }
             ),
@@ -604,12 +878,17 @@ def freeze_finalists(
 def _census(
     state: dict[str, Any], occasion: dict[str, Any], pins: dict[Path, str]
 ) -> tuple[NativeEvidence, dict[str, Any]]:
-    authority = _phase_authority(state, "final")
+    authority = _phase_authority(state, _phase(state))
     reader = NativeEvidence(state["directory"], authority, error_type=FinalEvaluationError)
     if state.get("development_capture") is not None:
         reader.retain_capture(state["development_capture"])
     if state.get("validation_capture") is not None:
         reader.retain_capture(state["validation_capture"])
+    if _version(state["definition"]) == 2:
+        for path, digest in pins.items():
+            reader.raw(path, digest)
+        for arm in occasion["arms"]:
+            reader.raw(Path(arm["path"]), arm["sha256"])
     owners, positions, touched = [], set(), set()
     stages = len(state["record"]["stages"])
     pattern = re.compile(
@@ -758,7 +1037,8 @@ def _partials(
                 "schedule_sha256",
                 "claim",
                 "child_observation",
-            },
+            }
+            | set(_metadata(state)),
         )
         prefix = study._list(saved["cells"])
         coverage = study._obj(saved["coverage"], {"expected", "generated", "evaluated"})
@@ -766,10 +1046,11 @@ def _partials(
         count = _integer(coverage["generated"], size, size + 1)
         if (
             raw != _json(saved)
-            or saved["format"] != "buddha.final-evaluation-partial.v1"
+            or saved["format"] != _result_format(state, "partial")
             or saved["status"] != "incomplete"
-            or saved["claim"] != CLAIM
-            or saved["schedule_sha256"] != pipeline._sha(occasion)
+            or saved["claim"] != _claim(state)
+            or any(saved[key] != value for key, value in _metadata(state).items())
+            or saved["schedule_sha256"] != _schedule_hash(occasion)
             or prefix != cells[:size]
             or size > len(cells)
             or count > generated
@@ -881,7 +1162,9 @@ def _episode(
             "runtime": state["context"]["host_runtime"],
         },
     }
-    authority = Authorization(_phase_authority(state, "final"))
+    if _version(state["definition"]) == 2:
+        contract["phase"] = _phase(state)
+    authority = Authorization(_phase_authority(state, _phase(state)))
     return trial_fence._final_episode(
         authority.path,
         authority._terms(),
@@ -929,7 +1212,7 @@ def _analysis(
         )
     if len(matrix) != occasion["counts"]["cells"]:
         raise FinalEvaluationError("final analysis cannot drop any frozen cell")
-    tail = analysis._tails(state["plan"].to_record())["final"]
+    tail = analysis._tails(state["plan"].to_record())[_phase(state)]
     contrasts = []
     for candidate in occasion["arms"]:
         if candidate["role"] != "candidate":
@@ -991,26 +1274,26 @@ def _result(
     if failed is not None or len(cells) != expected or generated != expected:
         raise FinalEvaluationError("final publication needs every frozen original cell")
     return {
-        "format": "buddha.final-evaluation-report.v1",
+        "format": _result_format(state, "report"),
         "status": "complete",
         "definition_sha256": pipeline._sha(state["definition"]),
-        "schedule_sha256": pipeline._sha(occasion),
+        "schedule_sha256": _schedule_hash(occasion),
         "selected_ids": occasion["selected_ids"],
         "arms": occasion["arms"],
         "coverage": {"expected": expected, "generated": generated, "evaluated": len(cells)},
         "cells": cells,
         "analysis": _analysis(state, occasion, reader, current),
         "authorization": current,
-        "claim": CLAIM,
-    }
+        "claim": _claim(state),
+    } | _metadata(state)
 
 
 @_checked
-def _read_final_evaluation(
-    directory: Path, *, expected_report_sha256: str
+def _read_sealed_evaluation(
+    directory: Path, *, expected_report_sha256: str, phase: str
 ) -> tuple[dict[str, object], dict[str, Any], dict[str, Any], NativeEvidence]:
     """Retain the checked observation for a passive downstream consumer."""
-    state = _state(directory)
+    state = _state(directory, phase=phase)
     occasion, pins = _schedule(state)
     reader, current = _census(state, occasion, pins)
     expected = _result(state, occasion, reader, current)
@@ -1025,12 +1308,43 @@ def _read_final_evaluation(
     return saved, state, occasion, reader
 
 
+def _read_final_evaluation(
+    directory: Path, *, expected_report_sha256: str
+) -> tuple[dict[str, object], dict[str, Any], dict[str, Any], NativeEvidence]:
+    return _read_sealed_evaluation(
+        directory, expected_report_sha256=expected_report_sha256, phase="final"
+    )
+
+
+def _read_transfer_evaluation(
+    directory: Path, *, expected_report_sha256: str
+) -> tuple[dict[str, object], dict[str, Any], dict[str, Any], NativeEvidence]:
+    return _read_sealed_evaluation(
+        directory, expected_report_sha256=expected_report_sha256, phase="transfer"
+    )
+
+
 def inspect_final_evaluation(directory: Path, *, expected_report_sha256: str) -> dict[str, object]:
     return _read_final_evaluation(directory, expected_report_sha256=expected_report_sha256)[0]
 
 
+def inspect_transfer_evaluation(
+    directory: Path, *, expected_report_sha256: str
+) -> dict[str, object]:
+    """Verify the original complete transfer panel without keys, writes or workers."""
+    return _read_transfer_evaluation(directory, expected_report_sha256=expected_report_sha256)[0]
+
+
 def _restore_grid(directory: Path) -> tuple[dict[str, Any], dict[str, Any], dict[Path, str]]:
     state = _state(directory)
+    occasion, pins = _schedule(state)
+    return state, occasion, pins
+
+
+def _restore_transfer_grid(
+    directory: Path,
+) -> tuple[dict[str, Any], dict[str, Any], dict[Path, str]]:
+    state = _state(directory, phase="transfer")
     occasion, pins = _schedule(state)
     return state, occasion, pins
 
@@ -1051,6 +1365,28 @@ def run_final_evaluation(
         restore=_restore_grid,
         build_result=_result,
         inspect_result=lambda path, digest: inspect_final_evaluation(
+            path, expected_report_sha256=digest
+        ),
+    )
+
+
+@_checked
+def run_transfer_evaluation(
+    directory: Path,
+    *,
+    authorization: Authorization,
+    review: dict[str, object],
+    transport: gateway.RawHTTPTransport,
+) -> dict[str, object]:
+    """Run only the prospectively declared transfer panel from the shared freeze."""
+    return _run_grid(
+        directory,
+        authorization=authorization,
+        review=review,
+        transport=transport,
+        restore=_restore_transfer_grid,
+        build_result=_result,
+        inspect_result=lambda path, digest: inspect_transfer_evaluation(
             path, expected_report_sha256=digest
         ),
     )
@@ -1077,7 +1413,7 @@ def _run_grid(
         )
     state, occasion, pins = restore(directory)
     if (
-        authorization.path != _phase_authority(state, "final")
+        authorization.path != _phase_authority(state, _phase(state))
         or gateway._review(review) != occasion["review"]
     ):
         raise FinalEvaluationError("final execution cannot replace its original grant or review")
@@ -1124,7 +1460,7 @@ def _run_grid(
                         if value.get("reason") == reason:
                             child_ref = {"path": str(path), "sha256": sha(raw)}
             result: dict[str, object] = {
-                "format": "buddha.final-evaluation-partial.v1",
+                "format": _result_format(state, "partial"),
                 "status": "incomplete",
                 "reason": reason,
                 "position": position,
@@ -1137,9 +1473,9 @@ def _run_grid(
                 "failed_generation": failed,
                 "child_observation": child_ref,
                 "authorization": current,
-                "schedule_sha256": pipeline._sha(occasion),
-                "claim": CLAIM,
-            }
+                "schedule_sha256": _schedule_hash(occasion),
+                "claim": _claim(state),
+            } | _metadata(state)
             reader.finish()
             number = len(list(observations.iterdir()))
             pipeline._write(observations / (str(number) + ".json"), _json(result))

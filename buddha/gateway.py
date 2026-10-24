@@ -576,7 +576,7 @@ def _final_producer_contract(
     """Private trusted-producer seam; unrelated legacy work has no new permission."""
     terms = authorization._terms()
     binding = trial_fence._parse_scope(cast(str, terms["scope"]))
-    if binding is None or binding.phase != "final":
+    if binding is None or binding.phase not in trial_fence._SEALED:
         yield
         return
     with trial_fence._final_owner_contract(
