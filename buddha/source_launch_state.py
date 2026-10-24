@@ -284,6 +284,7 @@ def inspect_prepared_search(
     input_bindings: dict[Path, str],
     mutation_witness: bool = False,
     source_copy: bool | None = None,
+    proposal_capacity: dict[str, object] | None = None,
 ) -> dict[str, object]:
     """Check retained execution custody without keys or writable owner objects."""
     if (
@@ -296,6 +297,10 @@ def inspect_prepared_search(
     ):
         raise source_search.SourceSearchError("prepared custody needs explicit Paths")
     copy_source = source_search._source_copy_choice(mutation_witness, source_copy)
+    if proposal_capacity is not None:
+        from buddha import source_capacity
+
+        source_capacity.check_proposal_capacity_policy(proposal_capacity)
     reader = NativeEvidence(directory, authorization, error_type=source_search.SourceSearchError)
     state = source_search._restore(directory, authorization, reader=reader)
     from buddha.search_evidence import read_authority
@@ -305,6 +310,9 @@ def inspect_prepared_search(
     expected_controls = dict(input_bindings)
     runtime = _object(_object(seed_screen.to_record()["generation"])["runtime"])
     automatic = {path: file_hash(path) for path in source_search._sources()}
+    if proposal_capacity is not None:
+        helper = Path(source_capacity.__file__).absolute()
+        automatic[helper] = file_hash(helper)
     automatic[pipeline._absolute(runtime["path"])] = _digest(expected_runtime_sha256)
     if any(
         path in expected_controls and expected_controls[path] != digest
@@ -321,11 +329,19 @@ def inspect_prepared_search(
         "expected_runtime_sha256": expected_runtime_sha256,
         "controls": {str(path): digest for path, digest in expected_controls.items()},
     }
+    if proposal_capacity is not None:
+        expected["proposal_capacity"] = proposal_capacity
+    elif "proposal_capacity" in state["record"]:
+        raise source_search.SourceSearchError("unapproved proposal capacity policy")
     if any(_json(state["record"][name]) != _json(value) for name, value in expected.items()):
         raise source_search.SourceSearchError("original search differs from its approved launch")
     if mutation_witness:
         expected_format = (
-            source_search._COPY_MANIFEST if copy_source else source_search._WITNESS_MANIFEST
+            source_search._CAPACITY_MANIFEST
+            if proposal_capacity is not None
+            else source_search._COPY_MANIFEST
+            if copy_source
+            else source_search._WITNESS_MANIFEST
         )
         if state["record"]["format"] != expected_format or _json(
             state["record"].get("mutation_witness")
@@ -407,6 +423,27 @@ def inspect_prepared_search(
                     else None
                 ),
             )
+        if proposal_capacity is not None:
+            if not _present(reader, proposal / "report.json"):
+                # The original sealed owner can publish its report on continuation.
+                # This local recovery step cannot schedule the returned child yet.
+                can_advance = False
+                continue
+            capacity = source_search._capacity_progress(
+                reader,
+                observed,
+                source_search._ref(proposal, authorization),
+                proposal_capacity,
+                location,
+                child_directory=location / "screen",
+            )
+            if (
+                capacity is None
+                or not capacity["present"]
+                or capacity["record"]["decision"] != "pass"
+            ):
+                can_advance = False
+                continue
         if observed["disposition"] == "materialized" and _present(reader, location / "screen"):
             screen = source_search._child_screen(state, observed, location)
             pending, role = _screen(reader, state, location / "screen", screen)
