@@ -5,7 +5,8 @@ from dataclasses import asdict
 
 from buddha.common import ValidationError
 from buddha.gateway import Gateway, GatewayCall
-from buddha.releases import ReleaseError, _digest, _load, _object, _source_proposal, _text
+from buddha.provider import ModelSpec
+from buddha.releases import ReleaseError, _digest, _json, _load, _object, _source_proposal, _text
 from buddha.wire import (
     MAX_BODY_BYTES,
     RawEnvelope,
@@ -18,6 +19,115 @@ from buddha.wire import (
 
 class SourceCapacityError(ValidationError, ReleaseError):
     """The frozen request or prospective assessment parameters are invalid."""
+
+
+def proposal_capacity_policy() -> dict[str, object]:
+    """Return detached supported rules for actual proposal-owner observations."""
+    return {
+        "format": "buddha.source-proposal-capacity-policy.v1",
+        "provider": "openai",
+        "context_tokens": 1_050_000,
+        "min_context_slack_tokens": 8_192,
+        "min_output_slack_tokens": 8_192,
+        "context_scope": "all_completed_proposal_calls",
+        "output_scope": "exact_returned_source_replacement",
+        "require_replacement": True,
+    }
+
+
+def check_proposal_capacity_policy(value: object) -> dict[str, object]:
+    expected = proposal_capacity_policy()
+    if type(value) is not dict or _json(value) != _json(expected):
+        raise SourceCapacityError("unsupported actual proposal capacity policy")
+    return expected
+
+
+def assess_proposal_call(
+    call: GatewayCall,
+    envelope: RawEnvelope,
+    *,
+    spec: ModelSpec,
+    child_source_sha256: str,
+    policy: object,
+) -> dict[str, object]:
+    """Observe one original text call; planning has no replacement-output test.
+
+    The caller supplies original custody and the complete call census. A pass
+    here does not establish that any call actually returned the selected source.
+    """
+    checked = check_proposal_capacity_policy(policy)
+    try:
+        child = _digest(child_source_sha256)
+        if (
+            type(call) is not GatewayCall
+            or type(spec) is not ModelSpec
+            or call.capability != "openai.chat-completions.v1"
+            or spec.provider != "openai"
+            or spec.input_token_ceiling != checked["context_tokens"]
+        ):
+            raise SourceCapacityError("capacity needs the original selected OpenAI bounds")
+        body = _load(call.body)
+        cap = _integer(body.get("max_completion_tokens"), 1, spec.max_output_tokens)
+        if body.get("model") != spec.model or "max_tokens" in body:
+            raise SourceCapacityError("capacity request changes its original model or cap")
+    except (ReleaseError, ValueError, TypeError):
+        raise SourceCapacityError("invalid original proposal capacity call") from None
+    result: dict[str, object] = {
+        "measurement_status": "partial",
+        "decision": "unavailable",
+        "reason": "usage_unavailable",
+        "replacement_source": False,
+        "output_cap_tokens": cap,
+        "usage": None,
+        "finish_reason": None,
+        "context_slack": None,
+        "output_slack": None,
+    }
+    try:
+        usage = extract_usage(envelope)
+        result["usage"] = asdict(usage)
+        if (
+            envelope.provider != "openai"
+            or usage.model != spec.model
+            or usage.service_tier not in {"", "default"}
+            or not usage.provider_request_id
+        ):
+            return result | {"reason": "response_mismatch"}
+        context = spec.input_token_ceiling - usage.input_tokens - cap
+        output = cap - usage.output_tokens
+        result.update(context_slack=context, output_slack=output)
+        if usage.input_tokens > spec.input_token_ceiling or usage.output_tokens > cap:
+            return result | {"reason": "usage_bound"}
+        raw = _load(decoded_body(envelope))
+        choices = raw.get("choices")
+        if type(choices) is not list or len(choices) != 1:
+            return result | {"reason": "invalid_response"}
+        choice = _object(choices[0])
+        message = _object(choice["message"])
+        finish = _text(choice["finish_reason"])
+        result["finish_reason"] = finish
+        if message.get("refusal") is not None and type(message["refusal"]) is not str:
+            return result | {"reason": "invalid_response"}
+        if message.get("refusal") or finish != "stop":
+            return result | {"reason": "refusal" if message.get("refusal") else "incomplete_reply"}
+        content = message["content"]
+        if type(content) is not str:
+            return result | {"reason": "invalid_response"}
+    except (ReleaseError, WireError, ValueError, TypeError, KeyError, UnicodeError):
+        return result
+    replacement = False
+    try:
+        proposal = _source_proposal(_load(content.encode("utf-8")))
+        replacement = hashlib.sha256(proposal["source"].encode("utf-8")).hexdigest() == child
+    except (ReleaseError, UnicodeError):
+        pass  # Complete planning text is not a replacement-source observation.
+    passed = context >= 8_192 and (not replacement or output >= 8_192)
+    return result | {
+        "measurement_status": "complete",
+        "decision": "pass" if passed else "fail",
+        "reason": "capacity_pass" if passed else "margin_failed",
+        "replacement_source": replacement,
+    }
 
 
 def guard_call(call: GatewayCall, expected: dict[str, object]) -> None:

@@ -16,16 +16,31 @@ class SourceHandoffError(ReleaseError):
     """The proposed source experiment differs from its pinned configuration."""
 
 
-def _sources() -> list[Path]:
-    return list(dict.fromkeys([*source_search._sources(), Path(__file__).absolute()]))
+def _sources(*, proposal_capacity: bool = False) -> list[Path]:
+    capacity = []
+    if proposal_capacity:
+        from buddha import source_capacity
+
+        capacity = [Path(source_capacity.__file__).absolute()]
+    return list(
+        dict.fromkeys(
+            [
+                *source_search._sources(),
+                *capacity,
+                Path(__file__).absolute(),
+            ]
+        )
+    )
 
 
 def _mutation_witness(record: dict[str, object]) -> bool:
     if record["format"] == "buddha.source-handoff.v1":
         return False
-    if record["format"] in {"buddha.source-handoff.v2", "buddha.source-handoff.v3"} and _json(
-        record["mutation_witness"]
-    ) == _json(source_search.MUTATION_WITNESS_POLICY):
+    if record["format"] in {
+        "buddha.source-handoff.v2",
+        "buddha.source-handoff.v3",
+        "buddha.source-handoff.v4",
+    } and _json(record["mutation_witness"]) == _json(source_search.MUTATION_WITNESS_POLICY):
         return True
     raise SourceHandoffError("unsupported source proposal or fixed mutation-witness policy")
 
@@ -33,9 +48,9 @@ def _mutation_witness(record: dict[str, object]) -> bool:
 def _source_copy(record: dict[str, object]) -> bool:
     if record["format"] in {"buddha.source-handoff.v1", "buddha.source-handoff.v2"}:
         return False
-    if record["format"] == "buddha.source-handoff.v3" and _json(record["source_copy"]) == _json(
-        source_search.SOURCE_COPY_POLICY
-    ):
+    if record["format"] in {"buddha.source-handoff.v3", "buddha.source-handoff.v4"} and _json(
+        record["source_copy"]
+    ) == _json(source_search.SOURCE_COPY_POLICY):
         return True
     raise SourceHandoffError("unsupported source proposal or fixed source-copy policy")
 
@@ -69,7 +84,8 @@ def check_source_handoff(path: Path, *, expected_sha256: str) -> dict[str, objec
                 "requested_terms",
             }
             | ({"mutation_witness"} if mutation_witness else set())
-            | ({"source_copy"} if source_copy else set()),
+            | ({"source_copy"} if source_copy else set())
+            | ({"proposal_capacity"} if record["format"] == "buddha.source-handoff.v4" else set()),
         )
         pins = _object(record["source_sha256"])
         if not 1 <= len(pins) <= 1023:
@@ -90,8 +106,14 @@ def check_source_handoff(path: Path, *, expected_sha256: str) -> dict[str, objec
             or seed["lineage"] is not None
         ):
             raise SourceHandoffError("initial proposal requires a prospective one-file seed")
+        capacity = record.get("proposal_capacity")
+        if record["format"] == "buddha.source-handoff.v4":
+            from buddha import source_capacity
+
+            source_capacity.check_proposal_capacity_policy(capacity)
         spec = source_search.SourceSearchSpec.from_bytes(_json(record["spec"]))
         template = source_search._template(record["proposal_template"])
+        source_search._capacity_configuration(screen, template, capacity)
         runtime_sha256 = _digest(record["expected_runtime_sha256"])
         # These are the same real validators used before source-search preparation.
         source_screen._configuration(screen, runtime_sha256)
@@ -99,7 +121,10 @@ def check_source_handoff(path: Path, *, expected_sha256: str) -> dict[str, objec
             source_search._template_screen(screen, template), runtime_sha256
         )
         gateway._core_sources()
-        required = {str(source): file_hash(source) for source in _sources()}
+        required = {
+            str(source): file_hash(source)
+            for source in _sources(proposal_capacity=record["format"] == "buddha.source-handoff.v4")
+        }
         runtime = _object(generation["runtime"])
         required[str(pipeline._absolute(runtime["path"]))] = runtime_sha256
         if any(pins.get(name) != digest for name, digest in required.items()):
@@ -121,7 +146,9 @@ def check_source_handoff(path: Path, *, expected_sha256: str) -> dict[str, objec
         maximum_screens = cast(int, spec.to_record()["iterations"]) + 1
         stages = cast(list[object], seed["stages"])
         result: dict[str, object] = {
-            "format": "buddha.source-handoff-check.v3"
+            "format": "buddha.source-handoff-check.v4"
+            if capacity is not None
+            else "buddha.source-handoff-check.v3"
             if source_copy
             else "buddha.source-handoff-check.v2"
             if mutation_witness
@@ -162,6 +189,8 @@ def check_source_handoff(path: Path, *, expected_sha256: str) -> dict[str, objec
             result["mutation_witness"] = record["mutation_witness"]
         if source_copy:
             result["source_copy"] = record["source_copy"]
+        if capacity is not None:
+            result["proposal_capacity"] = capacity
         return _load(_json(result))
     except (ValueError, TypeError, KeyError, OSError, RecursionError):
         raise SourceHandoffError(

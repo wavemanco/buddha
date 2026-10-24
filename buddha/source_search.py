@@ -4,6 +4,7 @@ Nested screens and proposal stages retain their original owners and anchors.
 This controller allocates work; it introduces no broker or scientific score.
 """
 
+import base64
 import hashlib
 import re
 import sqlite3
@@ -25,7 +26,8 @@ from buddha import native_pipeline as pipeline
 from buddha.answers import _Artifact
 from buddha.authorization import Authorization
 from buddha.doctor import _authority, _Busy, _Unsupported
-from buddha.gateway import RawHTTPTransport, _input_records, _review
+from buddha.gateway import GatewayCall, RawHTTPTransport, _input_records, _review
+from buddha.gateway_history import HistoricalGatewayOperation
 from buddha.native_evidence import NativeEvidence, authority_observation
 from buddha.releases import (
     MAX_SOURCE_BYTES,
@@ -42,9 +44,10 @@ from buddha.releases import (
     inventory,
     prepare_selection,
 )
-from buddha.wire import _integer
+from buddha.wire import RawEnvelope, WireError, _integer, extract_usage
 
 _FORMAT = "buddha.source-search.v1"
+_CAPACITY_MANIFEST = "buddha.source-search-manifest.v5"
 _COPY_MANIFEST = "buddha.source-search-manifest.v4"
 _MANIFEST = _COPY_MANIFEST
 _WITNESS_MANIFEST = "buddha.source-search-manifest.v3"
@@ -68,11 +71,13 @@ SOURCE_COPY_POLICY = {
 
 
 def _has_witness(state: dict[str, Any]) -> bool:
-    return bool(state["record"]["format"] in {_COPY_MANIFEST, _WITNESS_MANIFEST})
+    return bool(
+        state["record"]["format"] in {_CAPACITY_MANIFEST, _COPY_MANIFEST, _WITNESS_MANIFEST}
+    )
 
 
 def _has_source_copy(state: dict[str, Any]) -> bool:
-    return bool(state["record"]["format"] == _COPY_MANIFEST)
+    return bool(state["record"]["format"] in {_CAPACITY_MANIFEST, _COPY_MANIFEST})
 
 
 def _source_copy_choice(mutation_witness: bool, source_copy: bool | None) -> bool:
@@ -189,13 +194,25 @@ class _WitnessTreatment(_Artifact):
                 "controls",
                 "source_copy",
                 "policy",
-            },
+            }
+            | (
+                {"proposal_capacity"}
+                if _load(self.data).get("format") == "buddha.source-mutation-witness-treatment.v2"
+                else set()
+            ),
         )
-        if record["format"] != "buddha.source-mutation-witness-treatment.v1" or (
+        if record["format"] not in {
+            "buddha.source-mutation-witness-treatment.v1",
+            "buddha.source-mutation-witness-treatment.v2",
+        } or (
             _json(record["policy"]) != _json(MUTATION_WITNESS_POLICY)
             or type(record["source_copy"]) is not bool
         ):
             raise SourceSearchError("unsupported bounded witness treatment")
+        if "proposal_capacity" in record:
+            from buddha import source_capacity
+
+            source_capacity.check_proposal_capacity_policy(record["proposal_capacity"])
         scope, directory = _witness_path(record["scope"]), _witness_path(record["directory"])
         parent = _object(record["parent"], {"directory", "authorization", "report_sha256"})
         parent_directory = _witness_path(parent["directory"])
@@ -256,6 +273,7 @@ def _witness_declaration(
     expected_runtime_sha256: str,
     controls: Mapping[Path, str],
     source_copy: bool,
+    proposal_capacity: dict[str, object] | None = None,
 ) -> _WitnessTreatment:
     if (
         not isinstance(scope, Path)
@@ -266,10 +284,15 @@ def _witness_declaration(
         )
     ):
         raise SourceSearchError("witness requires explicit paths and immutable comparison")
+    if proposal_capacity is not None:
+        from buddha import source_capacity
+
     return _WitnessTreatment.from_bytes(
         _json(
             {
-                "format": "buddha.source-mutation-witness-treatment.v1",
+                "format": "buddha.source-mutation-witness-treatment.v2"
+                if proposal_capacity is not None
+                else "buddha.source-mutation-witness-treatment.v1",
                 "scope": str(scope),
                 "directory": str(directory),
                 "parent": parent,
@@ -280,6 +303,15 @@ def _witness_declaration(
                 "controls": {str(path): digest for path, digest in controls.items()},
                 "source_copy": source_copy,
                 "policy": dict(MUTATION_WITNESS_POLICY),
+                **(
+                    {
+                        "proposal_capacity": source_capacity.check_proposal_capacity_policy(
+                            proposal_capacity
+                        )
+                    }
+                    if proposal_capacity is not None
+                    else {}
+                ),
             }
         )
     )
@@ -298,6 +330,7 @@ def _search_witness_treatment(
         expected_runtime_sha256=state["record"]["expected_runtime_sha256"],
         controls=state["controls"],
         source_copy=_has_source_copy(state),
+        proposal_capacity=state["record"].get("proposal_capacity"),
     )
 
 
@@ -331,6 +364,37 @@ def _template(value: object) -> dict[str, Any]:
     _integer(record["budget_microusd"], 1)
     _integer(record["max_calls"], 1)
     return record
+
+
+def _capacity_configuration(
+    screen: source_screen.SourceScreen,
+    template: dict[str, Any],
+    policy: object,
+) -> None:
+    if policy is None:
+        return
+    from buddha import source_capacity
+
+    source_capacity.check_proposal_capacity_policy(policy)
+    generation = _object(screen.to_record()["generation"])
+    selected = gateway._profiles(
+        Selection.from_bytes(_json(generation["selection"])), source_screen._roots(generation)
+    )
+    role = _object(template["profile"])
+    profile = _object(
+        _object(_object(selected[cast(str, role["capability"])])["profiles"])[
+            cast(str, role["profile_id"])
+        ]
+    )
+    spec = gateway._spec(profile["spec"])
+    if (
+        spec.provider != "openai"
+        or spec.input_token_ceiling != 1_050_000
+        or template["config"]["max_output_tokens"] < 8_192
+    ):
+        raise SourceSearchError(
+            "proposal capacity requires supported context and replacement-output bounds"
+        )
 
 
 def _template_screen(
@@ -382,6 +446,166 @@ def _read_ref(
     return result
 
 
+class _ProposalCapacityStop(SourceSearchError):
+    def __init__(self, checkpoint: dict[str, object]):
+        self.checkpoint = checkpoint
+        super().__init__("original proposal capacity is negative or unavailable")
+
+
+def _capacity_progress(
+    reader: NativeEvidence,
+    proposal: dict[str, Any],
+    reference: dict[str, object],
+    policy: object,
+    location: Path,
+    *,
+    child_directory: Path,
+) -> dict[str, Any] | None:
+    """Derive the full original call census; never trust checkpoint scalars."""
+    if policy is None:
+        return None
+    from buddha import source_capacity
+
+    checked = source_capacity.check_proposal_capacity_policy(policy)
+    owner = reader.owner(location / "proposal/owners/0")
+    identity = {
+        "directory": str(owner.directory),
+        "run_id": owner.run_id,
+        "manifest_sha256": owner.manifest_sha256,
+        "ledger_sha256": owner.ledger_sha256,
+    }
+    if _json(proposal["provenance"]["owner"]) != _json(identity):
+        raise SourceSearchError("capacity observation differs from its original proposal owner")
+    rows: list[dict[str, Any]] = []
+    child_sha = (
+        _digest(_object(proposal["child"])["source_sha256"]) if proposal["child"] else "0" * 64
+    )
+    for operation in sorted(owner.operations, key=lambda item: item.operation_id):
+        if not isinstance(operation, HistoricalGatewayOperation) or operation.status != "completed":
+            raise SourceSearchError("proposal capacity needs every settled original operation")
+        receipt = _object(operation.receipt)
+        request = _object(receipt["request"])
+        call = GatewayCall(
+            cast(str, request["capability"]),
+            cast(str, request["profile_id"]),
+            cast(str, request["logical_id"]),
+            cast(int, request["attempt"]),
+            base64.b64decode(cast(str, request["body_base64"]), validate=True),
+            tuple((row[0], row[1]) for row in cast(list[list[str]], request.get("headers", []))),
+        )
+        profiles = _object(_object(owner.manifest["profiles"])[call.capability])
+        profile = _object(_object(profiles["profiles"])[call.profile_id])
+        # Historical custody checks identity and recorded sums, not rate arithmetic.
+        # Use the Gateway's actual request bounds and existing inclusive billing math.
+        try:
+            spec = gateway._request_spec(call, profile)
+            envelope = RawEnvelope.from_record(receipt["envelope"])
+            usage = extract_usage(envelope)
+        except (gateway.GatewayError, WireError):
+            raise SourceSearchError(
+                "completed proposal lacks coherent raw billing evidence"
+            ) from None
+        if (
+            operation.reserve_microusd != spec.reserve_microusd()
+            or envelope.provider != spec.provider
+            or usage.model not in gateway._texts(profile["response_models"])
+            or usage.service_tier not in gateway._texts(profile["response_tiers"], blank=True)
+            or not usage.provider_request_id
+            or usage.provider_request_id != operation.provider_request_id
+            or usage.input_tokens > spec.input_token_ceiling
+            or usage.output_tokens > spec.max_output_tokens
+            or operation.actual_microusd
+            != spec.cost_microusd(usage.input_tokens, usage.output_tokens)
+        ):
+            raise SourceSearchError("completed proposal contradicts its original usage or charge")
+        observed = source_capacity.assess_proposal_call(
+            call,
+            envelope,
+            spec=spec,
+            child_source_sha256=child_sha,
+            policy=checked,
+        )
+        rows.append(
+            {
+                "operation_id": operation.operation_id,
+                "logical_id": call.logical_id,
+                "request_sha256": operation.request_sha256,
+                "body_sha256": hashlib.sha256(call.body).hexdigest(),
+                "envelope_sha256": pipeline._sha(receipt["envelope"]),
+                "measurement": observed,
+            }
+        )
+    complete = bool(rows) and all(
+        row["measurement"]["measurement_status"] == "complete" for row in rows
+    )
+    replacements = sum(row["measurement"]["replacement_source"] is True for row in rows)
+    failed = any(row["measurement"]["decision"] == "fail" for row in rows)
+    passed = complete and replacements > 0 and not failed
+    checkpoint = {
+        "format": "buddha.source-proposal-capacity-checkpoint.v1",
+        "policy_sha256": pipeline._sha(checked),
+        "proposal": reference,
+        "owner": identity,
+        "operations": rows,
+        "replacement_count": replacements,
+        "measurement_status": "complete" if complete and replacements else "partial",
+        "decision": "pass" if passed else "fail" if failed else "unavailable",
+        "reason": "capacity_pass"
+        if passed
+        else "margin_failed"
+        if failed
+        else "replacement_source_unobserved"
+        if not replacements
+        else "reply_unavailable",
+        "settled_owner_accounting": owner.accounting(),
+    }
+    path = location / "proposal-capacity.json"
+    present = _present(reader, path)
+    if present and reader.raw(path) != _json(checkpoint):
+        raise SourceSearchError("capacity checkpoint differs from original raw request evidence")
+    if (_present(reader, child_directory) or _present(reader, location / "agent")) and not (
+        present and passed
+    ):
+        raise SourceSearchError("child work precedes its passing original capacity checkpoint")
+    return {
+        "record": checkpoint,
+        "present": present,
+        "path": path,
+        "reference": {"path": str(path), "sha256": pipeline._sha(checkpoint)},
+    }
+
+
+def _publish_capacity(
+    root: Path,
+    authorization: Path,
+    location: Path,
+    policy: object,
+    *,
+    child_directory: Path,
+) -> dict[str, object]:
+    reader = NativeEvidence(root, authorization, error_type=SourceSearchError)
+    reference = _ref(location / "proposal", authorization)
+    proposal = _read_ref(reader, reference, proposal=True)
+    progress = _capacity_progress(
+        reader, proposal, reference, policy, location, child_directory=child_directory
+    )
+    if progress is None:
+        raise SourceSearchError("capacity publication needs its original declared policy")
+    reader.capture.finish()
+    pipeline._same_or_write(progress["path"], _json(progress["record"]))
+    fresh = NativeEvidence(root, authorization, error_type=SourceSearchError)
+    proposal = _read_ref(fresh, reference, proposal=True)
+    retained = _capacity_progress(
+        fresh, proposal, reference, policy, location, child_directory=child_directory
+    )
+    fresh.capture.finish()
+    if retained is None or not retained["present"]:
+        raise SourceSearchError("capacity checkpoint was not published")
+    if retained["record"]["decision"] != "pass":
+        raise _ProposalCapacityStop(retained["record"])
+    return cast(dict[str, object], retained["reference"])
+
+
 def _controls(
     record: dict[str, Any], directory: Path, manifest_raw: bytes, context_raw: bytes
 ) -> dict[Path, str]:
@@ -410,16 +634,27 @@ def _original(reader: NativeEvidence) -> dict[str, Any]:
         }
         | (
             {"mutation_witness"}
-            if value.get("format") in {_COPY_MANIFEST, _WITNESS_MANIFEST}
+            if value.get("format") in {_CAPACITY_MANIFEST, _COPY_MANIFEST, _WITNESS_MANIFEST}
             else set()
         )
-        | ({"source_copy"} if value.get("format") == _COPY_MANIFEST else set()),
+        | (
+            {"source_copy"}
+            if value.get("format") in {_CAPACITY_MANIFEST, _COPY_MANIFEST}
+            else set()
+        )
+        | ({"proposal_capacity"} if value.get("format") == _CAPACITY_MANIFEST else set()),
     )
     context_raw = reader.bound(anchor, reader.root / "context.json")
     context = _object(_load(context_raw), {"format", "manifest_sha256"})
     if (
         record["format"]
-        not in {_COPY_MANIFEST, _WITNESS_MANIFEST, _FULL_MANIFEST, _LEGACY_MANIFEST}
+        not in {
+            _CAPACITY_MANIFEST,
+            _COPY_MANIFEST,
+            _WITNESS_MANIFEST,
+            _FULL_MANIFEST,
+            _LEGACY_MANIFEST,
+        }
         or context["format"] != _CONTEXT
         or context["manifest_sha256"] != pipeline._sha(record)
         or manifest_raw != _json(record)
@@ -427,14 +662,18 @@ def _original(reader: NativeEvidence) -> dict[str, Any]:
         or record["authorization"] != str(reader.authorization)
     ):
         raise SourceSearchError("search differs from its original first-owner declaration")
-    if record["format"] in {_COPY_MANIFEST, _WITNESS_MANIFEST} and _json(
+    if record["format"] in {_CAPACITY_MANIFEST, _COPY_MANIFEST, _WITNESS_MANIFEST} and _json(
         record["mutation_witness"]
     ) != _json(MUTATION_WITNESS_POLICY):
         raise SourceSearchError("search changes its fixed bounded mutation witness")
-    if record["format"] == _COPY_MANIFEST and _json(record["source_copy"]) != _json(
-        SOURCE_COPY_POLICY
-    ):
+    if record["format"] in {_CAPACITY_MANIFEST, _COPY_MANIFEST} and _json(
+        record["source_copy"]
+    ) != _json(SOURCE_COPY_POLICY):
         raise SourceSearchError("search changes its fixed verified source-copy policy")
+    if record["format"] == _CAPACITY_MANIFEST:
+        from buddha import source_capacity
+
+        source_capacity.check_proposal_capacity_policy(record["proposal_capacity"])
     if _json(_review(_object(record["review"]))) != _json(anchor.manifest["review"]):
         raise SourceSearchError("search review differs from its original first owner")
     screen = source_screen.SourceScreen.from_bytes(_json(record["seed_screen"]))
@@ -452,7 +691,15 @@ def _original(reader: NativeEvidence) -> dict[str, Any]:
     # Installed helpers are identities in original metadata, never retired code reads.
     names = {
         path.name
-        for path in candidate_generation._recorded_sources(_sources(), anchor.manifest["core"])
+        for path in candidate_generation._recorded_sources(
+            _sources()
+            + (
+                [Path(source_capacity.__file__).absolute()]
+                if record["format"] == _CAPACITY_MANIFEST
+                else []
+            ),
+            anchor.manifest["core"],
+        )
     }
     candidates = {p.parent for p in controls if p.name == "source_search.py"}
     if len(candidates) != 1 or not all(next(iter(candidates)) / name in controls for name in names):
@@ -994,9 +1241,18 @@ def _witness_parent(
         parent,
     )
     owner = reader.owner(_witness_path(reference["directory"]) / "tasks/0/generation/owners/0")
+    if "proposal_capacity" in record:
+        from buddha import source_capacity
+
     names = {
         path.name
-        for path in candidate_generation._recorded_sources(_sources(), owner.manifest["core"])
+        for path in candidate_generation._recorded_sources(
+            _sources()
+            + (
+                [Path(source_capacity.__file__).absolute()] if "proposal_capacity" in record else []
+            ),
+            owner.manifest["core"],
+        )
     }
     prefixes = {
         path.parent
@@ -1165,11 +1421,16 @@ def _witness_progress_at(reader: NativeEvidence, treatment: _WitnessTreatment) -
     }
     proposal_dir = location / "proposal"
     prepared = _present(reader, proposal_dir)
+    child_work = (
+        _present(reader, location / "generation")
+        or _present(reader, location / "report.json")
+        or ("proposal_capacity" in record and _present(reader, location / "agent"))
+    )
     for path, raw in required.items():
         if (prepared or _present(reader, path)) and reader.raw(path) != raw:
             raise SourceSearchError("witness changes a planned input")
     if not prepared:
-        if _present(reader, location / "generation") or _present(reader, location / "report.json"):
+        if child_work:
             raise SourceSearchError("witness outcome precedes its original proposal")
         return progress
     progress["needs_prepare"] = False
@@ -1201,13 +1462,31 @@ def _witness_progress_at(reader: NativeEvidence, treatment: _WitnessTreatment) -
     sealed, inactive = _stage_seal_for(reader, proposal_owner, funding=funding, role="proposal")
     progress["inactive_pending"] |= inactive
     if not sealed or not _present(reader, proposal_dir / "report.json"):
-        if _present(reader, location / "generation") or _present(reader, location / "report.json"):
+        if child_work:
             raise SourceSearchError("witness work skips its unfinished original proposal")
         if sealed:
             progress.update(next_owner=None, next_role=None)
         return progress
     proposal_ref = _ref(proposal_dir, reader.authorization)
     proposal = _read_ref(reader, proposal_ref, proposal=True)
+    capacity = _capacity_progress(
+        reader,
+        proposal,
+        proposal_ref,
+        record.get("proposal_capacity"),
+        location,
+        child_directory=location / "generation",
+    )
+    progress["proposal_capacity"] = (
+        None if capacity is None or not capacity["present"] else capacity["reference"]
+    )
+    if capacity is not None and (
+        not capacity["present"] or capacity["record"]["decision"] != "pass"
+    ):
+        progress.update(
+            next_owner=None, next_role=None, lower_role="proposal_capacity", needs_prepare=False
+        )
+        return progress
     generation_ref = None
     owner_paths = [proposal_owner]
     reason, status = proposal["reason"], "failed"
@@ -1284,7 +1563,10 @@ def _witness_progress_at(reader: NativeEvidence, treatment: _WitnessTreatment) -
         raise SourceSearchError("a rejected witness proposal cannot execute a further child")
     progress.update(lower_role=None, needs_prepare=False)
     expected_result = {
-        "format": "buddha.source-mutation-witness-report.v1",
+        "format": "buddha.source-mutation-witness-report.v2"
+        if capacity is not None
+        else "buddha.source-mutation-witness-report.v1",
+        **({"proposal_capacity": capacity["reference"]} if capacity is not None else {}),
         "candidate_id": parent.candidate_id,
         "screen": reference,
         "plan_sha256": pipeline._sha(plan),
@@ -1325,6 +1607,8 @@ def _witness_progress(
         name: current[name]
         for name in ("result", "publication", "next_owner", "next_role", "inactive_pending")
     }
+    progress["lower_role"] = current.get("lower_role")
+    progress["proposal_capacity"] = current.get("proposal_capacity")
     state["witness_treatments"].update(current["owner_treatments"])
     if current["owner_treatments"]:
         state["inactive_pending"] |= progress["inactive_pending"]
@@ -1391,6 +1675,15 @@ def _advance_witness(
                 location / "report.json", progress["publication"], authorization, owners
             )
             return {"action": "published", "role": None, "result": result}
+        if role == "proposal_capacity":
+            _publish_capacity(
+                reader.root,
+                reader.authorization,
+                location,
+                record["proposal_capacity"],
+                child_directory=location / "generation",
+            )
+            return {"action": "assessed", "role": role, "result": None}
         if role not in {"proposal", "generation"}:
             raise SourceSearchError("witness has no checked next lower role")
         if not location.exists():
@@ -1521,6 +1814,8 @@ def _execute_witness(
         treatment = _search_witness_treatment(reader, state, reference)
         current = state["mutation_progress"][str(reference["directory"])]
         role = current["next_role"]
+        if current.get("lower_role") == "proposal_capacity":
+            role = "proposal_capacity"
         if role is None and current["result"] is None:
             if location / "generation/owners/0" in state["witness_treatments"]:
                 role = "generation"
@@ -1544,6 +1839,18 @@ def _decision(
     _proposal_owner(reader, state, location, plan)
     proposal_ref = _ref(location / "proposal", reader.authorization)
     proposal = _read_ref(reader, proposal_ref, proposal=True)
+    capacity = _capacity_progress(
+        reader,
+        proposal,
+        proposal_ref,
+        state["record"].get("proposal_capacity"),
+        location,
+        child_directory=location / "screen",
+    )
+    if capacity is not None and (
+        not capacity["present"] or capacity["record"]["decision"] != "pass"
+    ):
+        raise SourceSearchError("decision precedes its passing original proposal capacity")
     if proposal["parent_agent_sha256"] != plan["selection"]["selected_id"]:
         raise SourceSearchError("proposal belongs to another original selected parent")
     original = _object(_object(proposal["provenance"])["original_inputs"])
@@ -1588,6 +1895,7 @@ def _decision(
         "iteration": iteration,
         "parent_id": plan["selection"]["selected_id"],
         "proposal": proposal_ref,
+        **({"proposal_capacity": capacity["reference"]} if capacity is not None else {}),
         "child_id": child_id,
         "screen": screen_ref,
         "status": status,
@@ -1611,6 +1919,19 @@ def _pending_witness(
     known_ids: set[str],
 ) -> None:
     """Check the current child before a decision exists, without skipping its proposal."""
+    if state["record"].get("proposal_capacity") is not None and _present(
+        reader, location / "proposal/report.json"
+    ):
+        reference = _ref(location / "proposal", reader.authorization)
+        original = _read_ref(reader, reference, proposal=True)
+        _capacity_progress(
+            reader,
+            original,
+            reference,
+            state["record"]["proposal_capacity"],
+            location,
+            child_directory=location / "screen",
+        )
     if not _has_witness(state) or not _present(reader, location / "screen/report.json"):
         return
     _proposal_owner(reader, state, location, plan)
@@ -1681,6 +2002,12 @@ def _restore(
     known_ids = {state["screen"].candidate_id}
     for iteration in range(state["spec"]["iterations"]):
         location = directory / "iterations" / str(iteration)
+        if (
+            state["record"].get("proposal_capacity") is not None
+            and not _present(reader, location / "proposal/report.json")
+            and (_present(reader, location / "screen") or _present(reader, location / "agent"))
+        ):
+            raise SourceSearchError("child work precedes its original proposal publication")
         plan_name = (location / "plan.json").relative_to(directory).as_posix()
         decision_name = (location / "decision.json").relative_to(directory).as_posix()
         if plan_name not in reader.capture.entries:
@@ -1766,6 +2093,19 @@ def _restore(
         (cursor != state["spec"]["iterations"] and not terminal_seed) or state["seed"] is None
     ):
         raise SourceSearchError("search has no complete bounded decision sequence")
+    if state["record"].get("proposal_capacity") is not None:
+        for name in reader.capture.entries:
+            if not name.endswith("proposal-capacity.json"):
+                continue
+            if not re.fullmatch(
+                r"(?:seed-witness|iterations/(?:0|[1-9][0-9]*)(?:/witness)?)/proposal-capacity\.json",
+                name,
+            ):
+                raise SourceSearchError("foreign proposal capacity checkpoint")
+            if not _present(reader, (directory / name).parent / "proposal/report.json"):
+                raise SourceSearchError(
+                    "capacity checkpoint precedes its original completed proposal"
+                )
     state["known_ids"] = known_ids
     reader.capture.finish()
     return state
@@ -1822,7 +2162,29 @@ def _result(state: dict[str, Any]) -> dict[str, object]:
         if progress["result"] is not None
     ]
     return {
-        "format": "buddha.source-search-report.v2" if witnessed else _REPORT,
+        "format": "buddha.source-search-report.v3"
+        if state["record"].get("proposal_capacity") is not None
+        else "buddha.source-search-report.v2"
+        if witnessed
+        else _REPORT,
+        **(
+            {
+                "proposal_capacity": {
+                    "policy": state["record"]["proposal_capacity"],
+                    "checkpoints": sorted(
+                        [row["proposal_capacity"] for row in state["decisions"]]
+                        + [
+                            progress["proposal_capacity"]
+                            for progress in state["mutation_progress"].values()
+                            if progress.get("proposal_capacity") is not None
+                        ],
+                        key=lambda value: value["path"],
+                    ),
+                }
+            }
+            if state["record"].get("proposal_capacity") is not None
+            else {}
+        ),
         "status": "complete",
         "reason": "no_parent_eligible"
         if witnessed and state.get("seed_parent_ineligible")
@@ -1876,6 +2238,7 @@ def prepare_source_search(
     input_bindings: Mapping[Path, str] | None = None,
     mutation_witness: bool = True,
     source_copy: bool | None = None,
+    proposal_capacity: dict[str, object] | None = None,
 ) -> Path:
     if (
         type(seed_screen) is not source_screen.SourceScreen
@@ -1885,6 +2248,12 @@ def prepare_source_search(
     ):
         raise SourceSearchError("search requires its explicit artifacts and existing authority")
     copy_source = _source_copy_choice(mutation_witness, source_copy)
+    if proposal_capacity is not None:
+        from buddha import source_capacity
+
+        source_capacity.check_proposal_capacity_policy(proposal_capacity)
+        if not copy_source:
+            raise SourceSearchError("proposal capacity requires protected witnessed source copies")
     directory = pipeline._absolute(str(directory))
     seed = seed_screen.to_record()
     generation = _object(seed["generation"])
@@ -1893,6 +2262,7 @@ def prepare_source_search(
     runtime = _digest(expected_runtime_sha256)
     checked_review = _review(review, fresh=True)
     template = _template(proposal_template)
+    _capacity_configuration(seed_screen, template, proposal_capacity)
     source_screen._configuration(seed_screen, runtime)
     source_screen._configuration(_template_screen(seed_screen, template), runtime)
     trial_fence.require_purpose(
@@ -1908,7 +2278,9 @@ def prepare_source_search(
         pipeline._absolute(_object(seed["lineage"])["path"]) in controls
     ):
         raise SourceSearchError("seed lineage is automatically bound, not a common search control")
-    for path in _sources():
+    for path in _sources() + (
+        [Path(source_capacity.__file__).absolute()] if proposal_capacity is not None else []
+    ):
         actual = file_hash(path)
         if path in controls and controls[path] != actual:
             raise SourceSearchError("installed helper differs from caller's original expectation")
@@ -1939,7 +2311,9 @@ def prepare_source_search(
         (directory / "iterations").mkdir()
         (directory / "observations").mkdir()
         manifest = {
-            "format": (_MANIFEST if copy_source else _WITNESS_MANIFEST)
+            "format": _CAPACITY_MANIFEST
+            if proposal_capacity is not None
+            else (_MANIFEST if copy_source else _WITNESS_MANIFEST)
             if mutation_witness
             else _FULL_MANIFEST,
             "seed_screen": seed,
@@ -1951,6 +2325,15 @@ def prepare_source_search(
             "controls": {str(p): h for p, h in controls.items()},
             **({"mutation_witness": dict(MUTATION_WITNESS_POLICY)} if mutation_witness else {}),
             **({"source_copy": dict(SOURCE_COPY_POLICY)} if copy_source else {}),
+            **(
+                {
+                    "proposal_capacity": source_capacity.check_proposal_capacity_policy(
+                        proposal_capacity
+                    )
+                }
+                if proposal_capacity is not None
+                else {}
+            ),
         }
         context = {"format": _CONTEXT, "manifest_sha256": pipeline._sha(manifest)}
         pipeline._write(directory / "manifest.json", _json(manifest))
@@ -2139,6 +2522,15 @@ def run_source_search(directory: Path, *, transport: RawHTTPTransport) -> dict[s
                         "returned proposal differs from its anchored publication"
                     )
                 reader.capture.finish()
+                if state["record"].get("proposal_capacity") is not None:
+                    stage = "proposal_capacity"
+                    _publish_capacity(
+                        directory,
+                        authorization_path,
+                        location,
+                        state["record"]["proposal_capacity"],
+                        child_directory=location / "screen",
+                    )
                 if (
                     child["disposition"] == "materialized"
                     and _object(child["child"])["agent_sha256"] not in state["known_ids"]
@@ -2192,6 +2584,8 @@ def run_source_search(directory: Path, *, transport: RawHTTPTransport) -> dict[s
             return finish(state)
         except KeyboardInterrupt:
             raise SourceSearchInterrupted(observe("cancelled", child)) from None
+        except _ProposalCapacityStop as error:
+            return observe("proposal_capacity", error.checkpoint)
         except source_feedback.SourceFeedbackTooLarge:
             raise SourceSearchStopped(observe("feedback_capacity", child)) from None
         except (ValueError, TypeError, KeyError, OSError, RecursionError):

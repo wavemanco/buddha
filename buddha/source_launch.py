@@ -48,11 +48,11 @@ def _entrypoint() -> Path:
     return Path(__file__).absolute().parent.parent / "docs/conformance/src02-run.py"
 
 
-def _sources() -> list[Path]:
+def _sources(*, proposal_capacity: bool = False) -> list[Path]:
     return list(
         dict.fromkeys(
             [
-                *source_handoff._sources(),
+                *source_handoff._sources(proposal_capacity=proposal_capacity),
                 Path(__file__).absolute(),
                 Path(source_launch_state.__file__).absolute(),
                 Path(common.__file__).absolute(),
@@ -236,7 +236,10 @@ def check_launch(path: Path, *, expected_sha256: str) -> dict[str, object]:
                 raise SourceLaunchError("source pins have aliases, self-reference or conflicts")
             seen.add(source)
             bindings[name] = expected
-        if any(str(source) not in pins for source in _sources()):
+        if any(
+            str(source) not in pins
+            for source in _sources(proposal_capacity="proposal_capacity" in checked)
+        ):
             raise SourceLaunchError("required launch source is not reviewed")
         seed = source_screen.SourceScreen.from_bytes(_json(proposal["seed_screen"]))
         template = source_search._template(proposal["proposal_template"])
@@ -313,6 +316,7 @@ def check_launch(path: Path, *, expected_sha256: str) -> dict[str, object]:
                 input_bindings={Path(name): digest for name, digest in bindings.items()},
                 mutation_witness=mutation_witness,
                 source_copy=source_copy,
+                proposal_capacity=cast(dict[str, object] | None, proposal.get("proposal_capacity")),
             )
         elif review_path.exists() or review_path.is_symlink() or runs or totals["operation_count"]:
             raise SourceLaunchError("partial preparation or retained work cannot be replaced")
@@ -466,6 +470,7 @@ def _public_result(result: dict[str, object]) -> dict[str, object]:
             "agent_error",
             "seed_ineligible",
             "feedback_capacity",
+            "proposal_capacity",
             "owner_prefix",
             "quota",
         }
@@ -605,6 +610,9 @@ def launch(
                         input_bindings=pins,
                         mutation_witness=mutation_witness,
                         source_copy=source_copy,
+                        proposal_capacity=cast(
+                            dict[str, object] | None, proposal.get("proposal_capacity")
+                        ),
                     )
                     source_launch_state.inspect_prepared_search(
                         _path(checked["directory"]),
@@ -619,6 +627,9 @@ def launch(
                         input_bindings=pins,
                         mutation_witness=mutation_witness,
                         source_copy=source_copy,
+                        proposal_capacity=cast(
+                            dict[str, object] | None, proposal.get("proposal_capacity")
+                        ),
                     )
                 phase[0] = "executing"
                 common._emit(

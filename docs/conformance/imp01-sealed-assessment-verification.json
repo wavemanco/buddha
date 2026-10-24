@@ -1,0 +1,82 @@
+{
+  "format": "buddha.improver-assessment-verification.v1",
+  "status": "recorded_cut_composed_and_legacy_pass",
+  "producing_commit": "c6eca1a07426cdbddf3ddd735be7b44f1fd38a3d",
+  "scope": "Five new assessment methods in separate 3/2-method cohorts and12 unchanged final-v1 methods at the corrected producer. This is not a current integrated full-suite or hosted-CI pass.",
+  "composed": {
+    "path": "runs/reviews/eval01-final-design-20261023/improver-assessment-green-v2.json",
+    "sha256": "26ef7f4cdb9030cb3d4d85a74e312a50f7ab961ba078c4e13dcd4ff54082b837",
+    "methods": [
+      "test_real_prospective_shared_starter_grid_recovery_and_passive_integrity",
+      "test_genuine_null_descendant_and_undefined_scalar_preserve_planned_comparison",
+      "test_unsupported_prospective_inputs_refuse_and_first_freeze_failure_stays_poisoned"
+    ],
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "seconds": 3492.6014779999387,
+    "log": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\improver-assessment-green-v2.log",
+      "sha256": "de80562dd46a24fcf5a8dcf9dd2352274ccb8dcd2e7c25dc719207ad1bc088ca"
+    },
+    "all_source_pins_unchanged": true
+  },
+  "boundary": {
+    "path": "runs/reviews/eval01-final-design-20261023/improver-assessment-review-green-v1.json",
+    "sha256": "b5b13ba45b528c387848ae9632f690f277185ace39a9512b9a2390cb803c5835",
+    "methods": [
+      "test_conflicting_explicit_source_pins_refuse_before_new_study_work",
+      "test_preparation_projects_finite_inputs_and_all_maximum_frozen_copies"
+    ],
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "seconds": 39.0723844000604,
+    "log": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\improver-assessment-review-green-v1.log",
+      "sha256": "a2e9f61e03aec3ea3726ac7dab58fb37eff9f9408afa521eb6952b91479336f9"
+    },
+    "all_source_pins_unchanged": true
+  },
+  "legacy_final_v1": {
+    "path": "runs/reviews/eval01-final-design-20261023/final-v1-compatibility-green-v2.json",
+    "sha256": "45d472b9a84c364826001c63b0fb0b93293e630ace6ce798e6221f5cfcd87d8e",
+    "methods": [
+      "test_full_grid_has_every_final_task_and_original_owner_then_passive_replay",
+      "test_omitted_final_member_and_changed_original_definition_refuse_before_use",
+      "test_final_direct_preparation_and_copied_ready_never_enable_public_gateway",
+      "test_freeze_confirmation_failure_is_irreversible_and_never_reselected",
+      "test_interrupted_native_keeps_original_owner_and_resumes_exact_full_grid",
+      "test_freeze_rejects_foreign_finalist_without_spending_or_consuming_freeze",
+      "test_original_owners_resume_at_each_durable_publication_boundary",
+      "test_every_later_orphan_is_refused_before_earlier_preparation_or_mutation",
+      "test_both_arms_missing_the_same_final_task_refuse_before_contrast_kernel",
+      "test_genuine_confirmed_freeze_and_exact_pins_do_not_enable_direct_gateway",
+      "test_missing_required_native_scalar_keeps_full_grid_final_tail_and_inconclusive_rule",
+      "test_cancel_after_checked_failed_generation_preserves_both_facts_and_original_owner"
+    ],
+    "tests": 12,
+    "failures": 0,
+    "errors": 0,
+    "seconds": 3044.8426642999984,
+    "log": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\final-v1-compatibility-green-v2.log",
+      "sha256": "91e7b9ed3a25b996debb2698ba38385472ddac2c76546c6bc820cf312cfbf9cd"
+    },
+    "all_source_pins_unchanged": true
+  },
+  "original_checkpoint": {
+    "path": "docs/conformance/imp01-sealed-assessment-delivery.json",
+    "sha256": "044f28a0fd5767a83a643c9cd25819a5ff8f83d91745bcf1bd060847264b525a",
+    "unchanged": true
+  },
+  "earlier_pre_review_cohort": "The original three-method pass is retained separately; it is not substituted for the corrected cohort.",
+  "remaining": [
+    "Hosted CI and the full finite matrix are not certified by these checks.",
+    "The separate retired-producer dependency in the new sealed reader has a genuine lifecycle regression running at82ba34a; no dynamic result or fix is claimed here.",
+    "Actual model-authored current-source demonstration, controlled improver experiment, target repair, held-out/human evidence and scientific improvement remain open."
+  ],
+  "real_provider_calls": 0,
+  "historical_paid_owners_changed": false,
+  "selected_source_host_execution": false
+}
