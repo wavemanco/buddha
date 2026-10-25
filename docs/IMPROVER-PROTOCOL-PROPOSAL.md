@@ -37,7 +37,7 @@ the current task from the generator or judges during final inference/scoring.
 
 ## Development comparison versus leaderboard submission
 
-The population choice below concerns the next bounded Buddha development
+The prepared population below concerns the next bounded Buddha development
 comparison. It is not a permanent choice of which NoveltyBench subset to use.
 The [official submission instructions](https://novelty-bench.github.io/submit.html)
 require both NB-Curated and NB-WildChat, ten responses per prompt, the v1.1
@@ -68,10 +68,10 @@ changing models within an arm. No old run is relabeled as a submission.
 | Initial improver P | Original 13,455-byte Python file; SHA256 `77cfa68f6b3c6996fd503e1ce6f7a964eb57abdb8bde98f6761de5f6e298ff4f` |
 | Evolved improver C | Original 13,084-byte Python file; SHA256 `4196cd29ffa76c6959e6f678a8286b1fde5b56e6a34a97dcf68787e1f22b3a43` |
 | Common starting task agents | The same original P and C bundles, each supplied to both improvers |
-| Development | Three tasks; two repeated occasions per start; two counted opportunities per arm and occasion |
+| Development | Three selected WildChat tasks; two repeated occasions per start; two counted opportunities per arm and occasion |
 | Feedback | Explicit study v3 comparison policy; full literal answers, actual-parent deltas, null common roots and retained failed-child history; witnesses retain absolute notes |
 | Selection | Existing archive method, `max_active=8`, selection seed 7, `finalist_iteration=2`; select only admitted descendants, never a replacement starter |
-| Final | Proposed 26 tasks, one answer-set occasion per frozen role/task; fresh starter plus initial/evolved descendants for each condition |
+| Final | Prepared 26 WildChat tasks in25families, one answer-set occasion per frozen role/task; fresh starter plus initial/evolved descendants for each condition |
 | Execution | Existing isolated source worker and unchanged official native evaluator; every callback and failed physical attempt remains accounted |
 
 The exact original files remain in the closed current-source experiment; their
@@ -86,57 +86,38 @@ not independent task families or controlled provider seeds. Selection seed 7
 controls the existing archive choice. This finite population does not establish
 performance across arbitrary starts, search seeds or future searches.
 
-## Choose the task population before declaring eligibility
+## Prepared WildChat population and prospective custody
 
-**The selected Curated separation check is complete at its bounded scope.**
-The [review](IMPROVER-CURATED-SEPARATION.md) finds development-only recorded
-improver requests and no demonstrated reserved-task leak, while complete
-historical host/source-author separation remains unknown. The original26
-are not certified eligible. No dataset switch is adopted by this finding.
+The user selected and reconfirmed official WildChat for this comparison. The
+[completed preparation](IMPROVER-WILDCHAT-PREPARATION.md) now binds the complete
+1,000-task source, an opaque family/type map, three selected development tasks
+and 26 final tasks in 25 families. Original text/IDs and official evaluator
+commands/settings remain unchanged. All assigned final members must be used.
 
-The recorded prompt inspection involved two AI source-review contexts grouping
-related tasks before split assignment. They were not independent human
-evaluators. Such preparation can legitimately involve reading every prompt.
-The important boundary is whether reserved prompt content or results then
-influenced the agent-improvement process. A family reviewer seeing a prompt does
-not, by itself, establish that boundary was crossed.
+A fresh custody-only role read every primary prompt, with no agent sources,
+answers, scores or optimization history. Descriptive notes stay in that role;
+only opaque metadata and generic method/coverage return to root. Root/source
+authors remain inside the optimization scope. Exact P/C predate this preparation.
+The saved declaration marks only those26finalmembers eligible for the exact
+documented prospective process; the other974members remain unknown. Its60
+pinned evidence files and1000data-role disclosures pass the existing custody
+validator and seven denial checks. Logical role separation does not establish
+universal historical/training invisibility or independent task families.
 
-The historical protocol explicitly declined to certify the reserved population
-as unseen or eligible. It did not report a demonstrated final-prompt disclosure
-to an improver callback or tuning using final results. Family maps and substantive
-boundary notes returned to the host, so fresh review contexts alone also do not
-prove complete separation. Check that information flow before adopting a named
-custody claim. Original [review roles and scope](POLICY-COMPARISON.md#which-prompts-are-included-and-why)
-remain unchanged.
+The [Curated check](IMPROVER-CURATED-SEPARATION.md) found development-only
+recorded callbacks and no demonstrated leak, but could not establish complete
+historical source-author separation. Preserve that result and original scores.
+Curated remains historical/qualified development evidence; no further Curated
+run or population question is scheduled here.
 
-This qualifies claims about held-out performance and generalization. It does
-not alter official NoveltyBench score calculations or prevent explicitly
-qualified development measurements. WildChat is an alternative official
-population, with its own unresolved exposure and task-separation checks; local
-availability is not evidence that its prompts are unseen.
-
-| Candidate | What is known | Consequence |
-| --- | --- | --- |
-| Existing Curated source | Ordered diagnostic development tasks are curated-0, curated-47, curated-97. The existing final partition has 26 tasks in 17 families. All 100 Curated prompt texts were previously read by two development source reviewers; known measured/feedback exposure is a separate, smaller population. | Neither prompt review nor lack of recorded final outcomes establishes eligibility. The bounded check supports actual development-only callbacks, but not complete historical source-author separation. Keep original26 eligibility unknown; Curated remains usable for qualified development measurements. It does not close the strict sealed-task requirement. No guard is bypassed. |
-| Entirely official WildChat source | The original wildchat-1k.jsonl is sealed at upstream 64a23be6b18ec1dacc298830aab276061b6e143c; its 645,466 bytes hash to 8534288089508df3f413c1151a58d5fa5bda9d8f8385ae2815384d4e310a54ca. Existing records identify 1,000 unique IDs. Prior research sealed its bytes and read published summaries/counts. No exhaustive per-ID exposure record or eligible family/split custody was established by this review. | Prepare a new prospective family map, three development IDs, 26 final IDs and exposure record without disclosing final prompts/results to optimization decision makers. Preserve original task text and typed IDs. Exact IDs are deliberately not adopted here. |
-
-The current assessment requires the **same complete original task source** for
-development and final assessment, and every assigned final member must be used.
-Keeping Curated development while using a separate WildChat final population is
-not supported by this interface. Do not concatenate two files and label the
-result an official combined dataset. Using WildChat for both phases changes
-configuration and experimental population, not the scoring algorithm.
-
-A custodian must document actual visibility, family separation and the eligible
-channel before freezing final IDs. Prior operator/reviewer visibility and
-model-training uncertainty stay explicit. A new process name is not evidence
-that exposure never happened. [DESIGN section 7](DESIGN.md)
-and the [custody checks](IMPROVER-ASSESSMENT.md#what-is-fixed-before-work-starts)
-remain binding. The check does not ask the user to attest missing historical
-context. The remaining choice is prospective official WildChat custody for a strict sealed
-comparison, or explicitly qualified Curated development work without closing
-the held-out gate. [The result and recommendation](IMPROVER-CURATED-SEPARATION.md#what-remains-usable)
-keep these different claims explicit.
+The source/family allocation is data preparation, not an adopted funded study.
+[Its recipe](conformance/imp01-wildchat-allocation-recipe.json) was originally recorded before
+root received the map; its explicit second version precedes the corrected allocation. Whole-family stratified assignment and deterministic
+selection preserve the full source; the three development tasks and26finaltasks
+have disclosed type-coverage limits. An independent implementation reproduces
+all three saved allocation outputs byte-for-byte. The current one-source
+interface uses WildChat for both development and final assessment; no dataset
+concatenation, prompt rewriting or change to NoveltyBench scoring is introduced.
 
 ## Planned workload and spending boundary
 
@@ -206,17 +187,15 @@ alpha 0.05, six equal positive tail allowances 1/120, utility as primary metric,
 minimum gain 0 and permitted distinct-count loss 0. Both official metrics and all
 three contrasts stay visible. These settings are proposed, not silently adopted.
 
-For the reserved Curated 26, equal task weighting gives squared family weights
-27/338. The independent formula check yields conservative radii 8.745659 utility
-and 7.871093 distinct count. With those margins, rule satisfaction would need an
-evolved-minus-initial mean difference above 8.745659 utility and at least 7.871093
-distinct answers. Even 26 equally weighted independent families would give radii
-6.068514 and5.461662. Repeating starts/generations does not shrink this method's
-family radius. It is poorly sensitive to modest effects; an inconclusive result
-would not establish absence of an effect. Family labels do not prove independent
-blocks. WildChat's actual calculation must use its adopted families and weights,
-not reuse the Curated figures. These are formula checks, not a power analysis
-or a fresh public-analyzer observation.
+For the prepared WildChat26, equal task weighting gives squared family weights
+7/169 (24singletonfamilies and one pair). The independent formula check yields
+conservative radii6.297594utility and5.667835distinct count. Even26equally
+weighted independent families would give6.068514and5.461662. Repeating
+starts/generations does not shrink this method's family radius. It is poorly
+sensitive to modest effects; an inconclusive result would not establish absence
+of an effect. Family labels do not prove independent blocks. These are formula
+checks, not a power analysis or a fresh public-analyzer observation. The earlier
+Curated calculation remains historical in the linked feasibility record.
 
 Adopt [target-repair method v1](IMPROVER-TARGET-REPAIR.md) over every counted
 opportunity, including rejected/unattempted slots. Two separately initialized
@@ -233,20 +212,19 @@ arrangements remain to be fixed. This finite comparison and its numerical rule
 do not by themselves establish general usefulness, generalization or that the
 improver improves indefinitely.
 
-## Readiness and the immediate decision
+## Readiness and next work
 
 The completed [v3 connection check](conformance/imp01-v3-sealed-rehearsal-delivery.json)
-remains useful engineering evidence. This proposal has not created a task split,
-release selection, eligibility attestation, study, authority, owner or launch
-command. No paid request or selected-source execution is performed by it.
+remains useful engineering evidence. WildChat release data, the complete task
+source, split and scoped prospective custody are now prepared. A live execution
+bundle, funded study, authority, owner and launch command still await the required
+checks. No paid request or selected-source execution is performed here.
 
-The user-selected Curated check now supports the actual callback boundary,
-but does not establish the missing historical host/source-author separation.
-No leak was demonstrated and the original26 remain uncertified. Choose
-prospective official WildChat preparation for the strict comparison (recommended),
-or explicitly qualified Curated development work; no switch or funding is
-adopted here. No further absence search is prescribed to fill the missing history.
-After that choice, freeze the actual source/tasks/custody, compatibility/capacity
-route, resources/runtime, statistical settings and review arrangements before
-requesting a new live allocation. This is experiment preparation under the existing IMP-01 gate;
-the DGM/Harness2 cross-check adds no redesign or new gate.
+The selected WildChat data/custody preparation is now complete at its bounded
+scope. No population decision remains pending. Next connect the existing exact
+full-output capacity policy to every counted and witness proposal through an
+explicit study/assessment version, then bind the actual configuration, resources,
+runtime, statistical settings and review arrangements. Request a new allocation
+only after those checks make a concrete live proposal reviewable. No new funds,
+owner or launch command follow from this preparation. This remains the original
+IMP-01 comparison; the DGM/Harness2 cross-check adds no redesign or new gate.
