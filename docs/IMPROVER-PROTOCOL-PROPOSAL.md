@@ -46,31 +46,135 @@ These roles remain separate even when two happen to use the same vendor/model.
 The reserved-task restriction concerns learning and selection, not withholding
 the current task from the generator or judges during final inference/scoring.
 
-## Development comparison versus leaderboard submission
+## Model roles and two separately recorded runs
 
-The prepared population below concerns the next bounded Buddha development
-comparison. It is not a permanent choice of which NoveltyBench subset to use.
-The [official submission instructions](https://novelty-bench.github.io/submit.html)
-require both NB-Curated and NB-WildChat, ten responses per prompt, the v1.1
-2048-token generation setting and low reasoning effort where applicable, with
-independent versus in-context sampling declared. Preserve the official
-provider-specific handling of those settings. The leaderboard also separates
-systems with different inference budgets; a scaffold is not one bare model.
+The user is comfortable with the proposed $150 ceiling and wants publication
+compatibility, while allowing another scientifically justified configuration.
+Model questions remain under discussion. This records scope and preparation,
+not a grant, model selection or permission to start.
 
-The [official metric description](https://github.com/novelty-bench/novelty-bench/blob/64a23be6b18ec1dacc298830aab276061b6e143c/README.md#metric-versions)
-uses GPT-5.6-luna to read all ten responses for partitioning and Claude Opus 5
-to score one representative per distinct group. Both need the original prompt.
-Those evaluation roles are separate from the configurable generation backbone
-and from the model authoring agent changes.
+The exact current official repository head is
+`64a23be6b18ec1dacc298830aab276061b6e143c`, checked October 25, 2026. Retain
+these model IDs and the actual request construction, not just display names:
 
-The earlier 4,096-token source configuration below is an inherited development
-setting, not a claim of leaderboard generation-protocol compliance. A later
-submission must adopt the published generation protocol and disclose the
-scaffold's actual calls/tokens/costs. Within a matched comparison, hold the
-backbone/settings fixed and check total-resource fairness, including the
-observed difference between P's separate calls and C's batched answers. Repeat
-across backbones as separately declared comparisons rather than silently
-changing models within an arm. No old run is relabeled as a submission.
+| Role | Model ID | Official settings to preserve |
+| --- | --- | --- |
+| Task generation in the Luna recipe | `gpt-5.6-luna` | CLI generation setting 2,048 with low effort; the official OpenAI builder sends `max_completion_tokens=4096`, `reasoning_effort="low"`, and omits temperature. Ten responses per prompt. |
+| Official distinctiveness judge | `gpt-5.6-luna` | Reads the prompt and all ten complete responses. The official OpenAI judging branch supplies neither an explicit reasoning-effort override nor an output-token override; preserve those omissions rather than inventing a low/high value. |
+| Official utility judge | `claude-opus-5` | `max_tokens=16000`, adaptive thinking and output effort `high`, with the official structured-output prompt/schema and first-response-per-group scoring. |
+| Existing official refusal fallback | `claude-sonnet-5` | Same official Anthropic judging constructor and effort, invoked after an Opus refusal; retain fallback provenance/costs. |
+
+Sources: [generation constructor](https://github.com/novelty-bench/novelty-bench/blob/64a23be6b18ec1dacc298830aab276061b6e143c/src/inference.py#L42-L94),
+[judging constructor](https://github.com/novelty-bench/novelty-bench/blob/64a23be6b18ec1dacc298830aab276061b6e143c/src/judge.py#L61-L118)
+and [metric description](https://github.com/novelty-bench/novelty-bench/blob/64a23be6b18ec1dacc298830aab276061b6e143c/README.md#metric-versions).
+If using Opus for **generation** in a later backbone comparison, its generation
+constructor doubles the 2,048 setting too and uses adaptive thinking with low
+effort, not the utility judge's high-effort settings. Luna remains the chosen
+generator here; NoveltyBench does not mandate one generator for every system.
+
+These are the official named model aliases, not invented dated snapshots. Bind
+the requested IDs and source revision and retain returned model metadata where
+available; a named alias alone does not attest to unchanged backend weights.
+The prepared numeric evaluator already selects Luna/Opus/Sonnet explicitly.
+That matters because the pinned bare partition CLI inherits an Opus default
+from `common.py` despite the documented Luna recipe. Keep the explicit selection,
+patience 0.8, declared concurrency and unmodified official prompts/folding rules.
+
+The earlier 4,096-versus-2,048 comparison was misleading: the first number is a
+host output allowance, while the second is an official CLI setting that becomes
+4,096 inclusive reasoning/output tokens on the wire. A larger token budget has
+**not** been established. Do not halve the current wire allowance to 2,048 and
+call that official compliance. Current metadata also does not establish that
+selected agents emit low effort, use the same token field or omit temperature.
+Those actual request semantics still need verification before a compliant run.
+
+Buddha's code-authoring model is separately configured as `gpt-6.1-sol` through
+the API; the proposed supplemental native reviewers are Codex
+`gpt-6.1-sol` / `ultra`. Neither replaces the official numerical judges, and
+NoveltyBench does not prescribe those improvement/review roles.
+
+### Development comparison versus leaderboard submission
+
+The publication-aligned configuration is the primary recommendation. First bind
+and verify the official effective generation parameters on Buddha's actual
+request path, retaining original agent sources and the fixed numerical judges.
+The Gateway can carry low effort, but closed generation/profile schemas expose
+no external setting that forces it; an actual-path check or narrow compatibility
+change may be necessary. No selected P/C/W source was inspected or executed in
+this audit, so whole-run compliance is not asserted from configuration alone.
+
+The prepared legacy P/C comparison remains unchanged evidence of a proposed
+reproduction environment: three development tasks, 26 final tasks, two starts,
+two occasions and fixed improvers. Preserving that environment was the reason
+for the earlier proposal, not evidence that a greater allowance is necessary or
+better. The user's requested additional configuration must have a prospectively
+stated question and a verified effective difference. If the two request paths
+are equivalent, do not spend money treating their different labels as different
+budgets. If they differ in effort or procedure, name those factors; a causal
+claim about token allowance alone requires a matched comparison holding them
+fixed. Full-feedback reading is an input/context requirement, separate from
+output limits, and remains required in either configuration.
+
+A [complete leaderboard submission](https://novelty-bench.github.io/submit.html)
+also needs both NB-Curated and NB-WildChat, ten responses per prompt, declared
+sampling and versioned generation/partition/score/summary artifacts. Before its
+execution, freeze the system, baseline, selection rule, model/settings, coverage
+and total-resource reporting. The [leaderboard](https://novelty-bench.github.io/)
+separates raw models and scaffolds by category/budget. A small protocol-aligned
+WildChat comparison is not that full submission. Disclose development exposure;
+a public-benchmark submission is not automatically wholly unseen or independent
+transfer evidence. Human/transfer requirements remain EVAL-02.
+
+The user is comfortable with the **$150 / 16,384-attempt ceiling** for the
+bounded comparison. Its concrete aligned configuration, native-reviewer choice,
+funded handoff and checks still need completion; no grant is created here. It
+does not fund an additional configuration, the full submission, human time or
+native Codex reviews. Preserve the earlier unfunded bundles and costing examples;
+prospectively bind any changed effective settings and their source identity,
+capacity/accounting consequences and authorization scope. Estimate a separate
+full submission once its system/baseline and coverage are concrete.
+
+## Native Codex review and provider cost split
+
+Native review means fresh subagents through this Codex desktop session under the
+proposed ChatGPT/Codex-plan route. They receive only their assigned staged review
+material, not the full development conversation. They are supplemental model
+reviewers, not official numerical judges or independent human reviewers. Native
+usage consumes the Codex allowance outside the experiment API ledgers; it is
+unpriced here, not zero. [Official Codex pricing](https://learn.chatgpt.com/docs/pricing)
+distinguishes plan usage from API-key billing. No reviewer API fallback is adopted.
+
+For orientation within the $150 ceiling, **about $35 OpenAI / $115 Anthropic**
+is a rough flexible planning split. It proportionally reflects the existing
+short-token examples below; it is not a completion forecast, separate enforced
+provider caps or a guarantee that those account balances suffice. The actual
+controls remain $50 development and $100 final across both providers.
+
+| Generation calls per ten-answer set | OpenAI, conservative accounting | Anthropic, conservative accounting | Combined |
+| --- | ---: | ---: | ---: |
+| 1 | $13.400688 | $74.474400 | $87.875088 |
+| 10 | $21.550368 | $74.474400 | $96.024768 |
+| 12 | $23.361408 | $74.474400 | $97.835808 |
+
+These reproduce the [existing sensitivity worksheet](IMPROVER-WILDCHAT-CONFIGURATION.md#runtime-and-resource-preparation),
+using its exact hypothetical token vectors and retained conservative profile
+rates. They assume 392 ten-answer sets, 372 partitions, 3,720 Opus calls, 72
+planning calls and 36 replacements; all scored sets have ten distinct groups,
+one judging pass and no refusal fallback/retry. Planning/replacement inputs are
+invented inclusive assumptions, not measured full-feedback/history requests.
+Output vectors include reasoning. Longer answers, growing histories, retries,
+fallbacks, fewer groups and unavailable descendants change the split and cost.
+
+At the freshly checked ordinary public short-input rates, those **same invented
+tokens** instead calculate to roughly $6-12 OpenAI plus $40 Anthropic, $46-52
+combined, before account/usage adjustments. That is a separate illustrative
+billing basis, not a prediction or guaranteed saving. The conservative profiles
+use higher price bounds; recorded costs/reservations are not reconciled invoices.
+Sources: [Luna pricing](https://developers.openai.com/api/docs/models/gpt-5.6-luna),
+[Sol pricing](https://developers.openai.com/api/docs/models/gpt-6.1-sol) and
+[Anthropic pricing](https://platform.claude.com/docs/en/about-claude/pricing).
+The largest native reservation still has to fit before dispatch; uncertain
+charges retain holds. A phase may stop with a properly marked partial result.
 
 ## Original treatments and proposed conditions
 
