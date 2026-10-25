@@ -174,5 +174,6 @@ matched starting conditions and resource ceilings, with a feasible declared
 grid and prospective uncertainty method. EVAL-02 must evaluate frozen agents
 on unseen tasks and obtain the required independent human sample. Working
 source evolution and this negative development result close neither scientific
-claim. The next slice prepares the concrete comparison and its decision/funding
-requirements; this report grants no new paid run.
+claim. The [regression diagnosis](SOURCE-REGRESSION-DIAGNOSIS.md) explains the
+observed decline and proposed remedies. The living plan owns the next treatment
+and comparison work; this report grants no new paid run.
