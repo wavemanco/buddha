@@ -178,13 +178,64 @@ Saved preparation bundles remain unchanged at their recorded source cuts. A
 future handoff must collect and validate a fresh trusted-source closure; retain
 the exact original P/C actors, data allocation and official evaluator.
 
-## What remains before a live proposal
+## Current launcher configuration refresh
 
-Bind the original-call observation mode, actual runtime/resources/fairness,
-enforceable aggregate dollar and attempt caps, numerical adoption and staged
-target-repair/human-review arrangements. Prepare and verify the concrete matched
-launcher before asking for its separate allocation. No human reviewers have been invented or
-contacted. A user-operated handoff must use the matched study/assessment route;
+The later matched-launcher implementation now has a fresh **98-file unfunded
+proposal bundle**, prepared against executing source cut
+`991ce73045995b28be37738ca5e07dde0037c643`.
+The [refresh record](conformance/imp01-study-proposal-delivery.json) pins the
+private file inventory and metadata-only checks. All 51 required trusted host
+helpers are collected from that cut. Original P/C bytes, the official release,
+WildChat allocation, task source, custody and profiles remain unchanged. The
+earlier 82-file and five-file bundles are preserved at their original cuts.
+
+Existing active-study, assessment and fresh-handoff validators pass without
+starting a trial. The actual handoff binds 126 input files. The existing launcher
+also checks both future development and final input projections with 129
+bindings, including three placeholder paths for a future launch, approval and
+keyed review. These placeholders check file-count capacity only; they are not
+real approvals or reviews. The full declared final grid remains 312 cells and
+the limit remains 1,024 paths. Adoption of the actual review materials can add
+bindings and must be checked again before a funded handoff.
+
+The public analyzer also runs on 312 explicitly synthetic metric rows using
+the actual proposed population and numerical files. It reproduces family-weight
+sum `7/169` and conservative radii about 6.297594 utility and 5.667835 distinct
+count. This establishes arithmetic and input compatibility, not measured agent
+improvement, statistical power or independent family blocks.
+
+The [current proposal](IMPROVER-PROTOCOL-PROPOSAL.md#planned-workload-and-spending-boundary)
+now recommends separate development $50/4,096-attempt and final
+$100/12,288-attempt caps, with unused validation at $0/0. They are written into
+the candidate declarations and checked as configuration; no financial authority
+exists. A recorded attempt can include an unsent reserved operation. Both arms
+share declared resources, not guaranteed equal consumption or completed work.
+The largest native request reservation is $11.44. No full-grid runtime or
+completion-cost prediction follows from the small supplied-worker tests or
+read-only Docker/image metadata checks.
+
+The bounded independent-human recommendation is 12 sets/up to 120 full answers.
+The separate all-opportunity target review needs up to 32 staged worksheets.
+Sampling/materials/helper pins and actual review arrangements still need their
+prospective freeze. No person, model identity, session or completed judgment is
+invented. In particular, the exact target-review model/access/cost route is
+unresolved; the earlier promise to arrange it before study outputs still holds.
+The numerical settings also remain proposed until the study is adopted.
+
+No application Python changed in this refresh. All 301 tracked Python files,
+451 captured original evidence files and 87 earlier configuration files pass
+byte-preservation checks. No old paid database was queried, selected agent
+executed, provider called, key requested, grant/owner created or old run changed.
+Hosted checks and the later funded-handoff check remain separate requirements.
+
+## What remains before a live run
+
+Preserve the original-call observation mode and the checked resource/fairness
+limits. Resolve and freeze the staged target-review route and actual sampling
+materials, explicitly adopt the numerical/protocol settings, and present the
+concrete separate allocation. Then verify actual funding, accounts, review and
+current executing-code checks before supplying the live command. No human
+reviewers have been invented or contacted. A user-operated handoff must use the matched study/assessment route;
 the old single-source launcher and closed allowances cannot fund it.
 
 The original two scientific gates remain open: IMP-01 and EVAL-02. These data

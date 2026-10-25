@@ -8,6 +8,8 @@ money, choose a different experiment or change NoveltyBench scoring.
 This implementation is not a funded handoff. The proposed WildChat resources
 and review arrangements still need adoption, followed by a separate allocation
 and final handoff checks. Wait for the exact reviewed command before live use.
+[The current proposal](IMPROVER-PROTOCOL-PROPOSAL.md) records the recommended
+execution caps, statistical limits and unresolved review arrangements;
 [PLAN.md](PLAN.md) owns that remaining work.
 
 ## Command and options

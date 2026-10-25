@@ -5,6 +5,15 @@ October 25, 2026. **Unfunded proposal, not a frozen study or a launch guide.**
 record](conformance/imp01-protocol-proposal-feasibility.json) supports this proposal;
 it does not establish scientific eligibility, live readiness or a spending cap.
 
+The [current configuration refresh](IMPROVER-WILDCHAT-CONFIGURATION.md#current-launcher-configuration-refresh)
+retains **WildChat, the exact original P/C and the full two-occasion design**.
+Curated stays historical/development evidence. The recommended execution limits
+are $50 for development and $100 for final assessment, with separate attempt
+limits below. These are unfunded recommendations, not approval or a promise that
+the whole study will finish. Target-review arrangements and independent human
+availability remain explicit prerequisites or evidence gaps; nobody has been
+invented or contacted on the user's behalf.
+
 ## What this would answer
 
 Does the original evolved improver C produce more useful, distinctive descendants
@@ -150,12 +159,37 @@ prices/account checks and feasible limits must be bound before any live handoff.
 **No new budget is requested or approved here.** Old per-owner $25 ceilings add
 to enormous theoretical maxima; these are not expected bills. Existing study v3
 supports smaller positive development/final aggregate caps while preserving
-individual ceilings. Choose the actual caps and attempt allocations after the
-population, request bounds and runtime are checked. Do not lower financial input
-ceilings merely to make the sum attractive. Equal nominal opportunities and
-per-arm limits do not guarantee equal consumed dollars when treatment behavior
-differs; report both. A shared-cap stop can leave unequal coverage and must be
-reported as partial with stage, reason, full denominator, costs and holds.
+individual ceilings. The refreshed v4 configuration now proposes:
+
+| Phase | Dollar cap | Recorded-attempt limit | Purpose |
+| --- | ---: | ---: | --- |
+| Development (`search`) | $50 | 4,096 | Common starting screens, fixed-improver proposals, mutation witnesses and child screens |
+| Validation | $0 | 0 | Unused in this comparison |
+| Final | $100 | 12,288 | Frozen starter/descendant generation and unchanged official scoring on all 26 final tasks |
+| Combined execution | **$150** | **16,384** | Sum of the separate phase caps; unused development funds do not increase the final cap |
+
+Each phase shares its cap across its original owners and both experimental
+arms; it does not grant that amount to every owner. Keep all existing per-owner,
+per-request, input and output ceilings. A recorded attempt can include an
+operation that was reserved but never sent; this is not a physical-send tally.
+The largest native quality reservation
+is $11.44, so a new request can stop before the displayed spending reaches the
+cap. Reservations cover outstanding possible charges; they are not extra money
+or the expected cost of that request. Unknown charges keep their holds.
+
+This is a bounded experiment with partial results allowed, not a completion-cost
+estimate. Earlier short-token examples fit conditionally; longer inputs,
+fallbacks and retries can exhaust a phase sooner. Do not lower financial input
+ceilings merely to make the total attractive. Equal opportunities and declared
+limits do not guarantee equal consumed dollars or completed coverage when P/C
+behave differently. Report each arm's actual calls, costs, valid-child rate,
+coverage and elapsed time. A cap stop remains partial with its stage, reason,
+full planned denominator, costs and holds. Do not rank unequal partial arms as
+though they completed a matched comparison.
+
+The $150 recommendation covers execution only. Human time and separately
+arranged model target reviews are outside these phase ledgers and must be
+reported separately. There is no authorization for paid reviews here either.
 
 Historical easy-task costs are a poor estimate for unknown final tasks: binary
 choices, collapsed integer answers and fewer distinct classes reduced judging
@@ -197,8 +231,24 @@ weighted independent families would give6.068514and5.461662. Repeating
 starts/generations does not shrink this method's family radius. It is poorly
 sensitive to modest effects; an inconclusive result would not establish absence
 of an effect. Family labels do not prove independent blocks. These are formula
-checks, not a power analysis or a fresh public-analyzer observation. The earlier
-Curated calculation remains historical in the linked feasibility record.
+checks, not a power analysis. The [later configuration refresh](IMPROVER-WILDCHAT-CONFIGURATION.md#current-launcher-configuration-refresh)
+also reproduces the exact directed bounds through the public analyzer with
+synthetic metrics only. The earlier Curated calculation remains historical in
+the linked feasibility record.
+
+In plain English, the planned rule subtracts a large uncertainty allowance from
+the measured difference before permitting a positive conclusion. With this
+panel it would need an improver-effect utility difference above about 6.30
+points and a distinct-count difference of about 5.67 before both lower bounds
+can meet the zero-margin rule. Use the analyzer's exact directed rounding, not
+these displayed approximations. These are conditional one-sided lower bounds,
+not two-sided confidence intervals. The repeated starts/occasions observe
+variation but do not supply more independent families to this calculation.
+Small or moderate gains can therefore leave improvement unestablished. A
+complete panel can return `rule_not_satisfied`; missing required coverage can
+return `inconclusive`. Neither establishes absence of an effect. We keep this limit
+visible rather than changing the rule after learning the results. Zero margins
+also do not establish that a positive result would be practically important.
 
 Adopt [target-repair method v1](IMPROVER-TARGET-REPAIR.md) over every counted
 opportunity, including rejected/unattempted slots. Two separately initialized
@@ -214,6 +264,28 @@ evidence. No human reviewers have been recruited or contacted; sample/reviewer
 arrangements remain to be fixed. This finite comparison and its numerical rule
 do not by themselves establish general usefulness, generalization or that the
 improver improves indefinitely.
+
+The bounded human recommendation is **one independent person, 12 answer sets,
+up to 120 complete answers**, drawn prospectively from four tasks in four
+families. The candidate covers the four starting conditions and three source
+roles, but tasks and conditions are not fully crossed; report it descriptively.
+Freeze the actual sample, rules, materials and helper pins before preparing
+owners. Bind the real reviewer roster before distributing any materials. A
+missing reviewer is recorded as unavailable, and EVAL-02 stays open. Exporting a
+blank template or importing a model-completed form is not human evidence;
+incomplete blank submissions are rejected.
+
+Target repair is a different review: two outcome-naive contexts across all 16
+opportunities, hence up to **32 two-stage worksheets**. Rejected and unattempted
+opportunities stay in the denominator. Existing manual worksheets suffice; no
+new scoring instrument or runtime driver is required merely to collect them.
+The model route, access and cost arrangement have **not yet been fixed**.
+Native review-context availability alone does not identify its exact model or
+prove independence. Preserve the pre-output promise above: arrange these
+details before generating study outputs, then capture actual session identities
+and exposure declarations before distribution. Stage A must be saved before
+that reviewer receives Stage B. No model reviewer or completed review is being
+claimed by this proposal.
 
 ## Readiness and next work
 
@@ -234,9 +306,10 @@ before sending it. The separate documented model input limit and absence of a
 pre-send counter remain known limitations, with full-feedback and partial-stop
 guards preserved. The [readiness supplement](conformance/imp01-wildchat-readiness.json)
 records standard-speed request exclusion, runtime metadata availability and
-conditional cost/headroom arithmetic. Bind actual runtime/resources/fairness,
-enforceable aggregate caps, statistical adoption and review arrangements, and
-verify the concrete matched launcher. Request a new allocation
-only after those checks make a concrete live proposal reviewable. No new funds,
+conditional cost/headroom arithmetic. The [matched launcher](IMPROVER-LAUNCH.md)
+and refreshed configuration now have bounded local checks. Retain the checked
+runtime/resources/fairness and proposed aggregate limits; finish statistical
+adoption and actual review arrangements. Request a new allocation only after
+those checks make a concrete live proposal reviewable. No new funds,
 owner or launch command follow from this preparation. This remains the original
 IMP-01 comparison; the DGM/Harness2 cross-check adds no redesign or new gate.
