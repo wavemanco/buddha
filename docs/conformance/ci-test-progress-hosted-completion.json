@@ -1,0 +1,382 @@
+{
+  "format": "buddha.ci-progress-hosted-verification.v1",
+  "observed_at": "2026-10-24T23:50:48.304082+00:00",
+  "status": "complete",
+  "run_id": 40123333122,
+  "run_url": "https://github.com/wavemanco/buddha/actions/runs/40123333122",
+  "head_sha": "42e5dd2d3d32c1f085c87aaa2de44cc1391587ce",
+  "test_merge_sha": "3f151e66599fc81c247c5a56b710130c73cedd12",
+  "same_reviewed_git_tree": "28f3770aa922004203191e331d9eedd1b2a88c0a",
+  "by_os": {
+    "ubuntu-latest": {
+      "tests": 1840,
+      "skips": 5
+    },
+    "windows-latest": {
+      "tests": 1840,
+      "skips": 1
+    }
+  },
+  "jobs": [
+    {
+      "job_id": 120959402507,
+      "name": "checks (ubuntu-latest, 0)",
+      "manifest": {
+        "format": "buddha.ci-test-shards.v1",
+        "total": 1840,
+        "count": 4,
+        "index": 0,
+        "selected": 1,
+        "counts": [
+          1,
+          617,
+          610,
+          612
+        ],
+        "isolated_test": "test_improver_study.FiniteImproverStudyTests.test_finite_fixed_operators_common_conditions_negative_slots_and_original_recovery",
+        "census_sha256": "d95197ef8d7d277a58f80c313bb0b986d24fa7641eddc282681eac9400fc2363"
+      },
+      "tests_run": 1,
+      "unittest_seconds": 4836.403,
+      "skipped": 0,
+      "quality_steps_passed": [
+        "Code security",
+        "Compile",
+        "Development dependency vulnerabilities",
+        "Formatting",
+        "Lint",
+        "Runtime dependency vulnerabilities",
+        "Types"
+      ],
+      "completed_progress_outcomes": 139,
+      "largest_between_outcome_gap_seconds": 258.993918442,
+      "synthetic_reader_control_records_excluded": [],
+      "actual_test_merge_sha_seen": true,
+      "log": {
+        "member": "0_checks (ubuntu-latest, 0).txt",
+        "bytes": 401128,
+        "sha256": "9987a2db86e5d434e823892cdefe5b8a6baef57dbd83a13c3a2dfdb45bd93557"
+      }
+    },
+    {
+      "job_id": 120959402468,
+      "name": "checks (ubuntu-latest, 1)",
+      "manifest": {
+        "format": "buddha.ci-test-shards.v1",
+        "total": 1840,
+        "count": 4,
+        "index": 1,
+        "selected": 617,
+        "counts": [
+          1,
+          617,
+          610,
+          612
+        ],
+        "isolated_test": "test_improver_study.FiniteImproverStudyTests.test_finite_fixed_operators_common_conditions_negative_slots_and_original_recovery",
+        "census_sha256": "d95197ef8d7d277a58f80c313bb0b986d24fa7641eddc282681eac9400fc2363"
+      },
+      "tests_run": 617,
+      "unittest_seconds": 1109.639,
+      "skipped": 2,
+      "quality_steps_passed": [
+        "Code security",
+        "Compile",
+        "Development dependency vulnerabilities",
+        "Formatting",
+        "Lint",
+        "Runtime dependency vulnerabilities",
+        "Types"
+      ],
+      "completed_progress_outcomes": 1781,
+      "largest_between_outcome_gap_seconds": 66.432339625,
+      "synthetic_reader_control_records_excluded": [],
+      "actual_test_merge_sha_seen": true,
+      "log": {
+        "member": "1_checks (ubuntu-latest, 1).txt",
+        "bytes": 953924,
+        "sha256": "90e4dcfbaa61e5d0af13ffa263b6346fe317b3d50ffdc05beaf71176fb0aa9c0"
+      }
+    },
+    {
+      "job_id": 120959402467,
+      "name": "checks (windows-latest, 0)",
+      "manifest": {
+        "format": "buddha.ci-test-shards.v1",
+        "total": 1840,
+        "count": 4,
+        "index": 0,
+        "selected": 1,
+        "counts": [
+          1,
+          617,
+          610,
+          612
+        ],
+        "isolated_test": "test_improver_study.FiniteImproverStudyTests.test_finite_fixed_operators_common_conditions_negative_slots_and_original_recovery",
+        "census_sha256": "d95197ef8d7d277a58f80c313bb0b986d24fa7641eddc282681eac9400fc2363"
+      },
+      "tests_run": 1,
+      "unittest_seconds": 12654.792,
+      "skipped": 0,
+      "quality_steps_passed": [
+        "Code security",
+        "Compile",
+        "Development dependency vulnerabilities",
+        "Formatting",
+        "Lint",
+        "Runtime dependency vulnerabilities",
+        "Types"
+      ],
+      "completed_progress_outcomes": 139,
+      "largest_between_outcome_gap_seconds": 657.9870955,
+      "synthetic_reader_control_records_excluded": [],
+      "actual_test_merge_sha_seen": true,
+      "log": {
+        "member": "2_checks (windows-latest, 0).txt",
+        "bytes": 401621,
+        "sha256": "c59f7dda90775ca11850cc693b23bde1133f18efdc67505fc888bcee64921925"
+      }
+    },
+    {
+      "job_id": 120959402439,
+      "name": "checks (windows-latest, 3)",
+      "manifest": {
+        "format": "buddha.ci-test-shards.v1",
+        "total": 1840,
+        "count": 4,
+        "index": 3,
+        "selected": 612,
+        "counts": [
+          1,
+          617,
+          610,
+          612
+        ],
+        "isolated_test": "test_improver_study.FiniteImproverStudyTests.test_finite_fixed_operators_common_conditions_negative_slots_and_original_recovery",
+        "census_sha256": "d95197ef8d7d277a58f80c313bb0b986d24fa7641eddc282681eac9400fc2363"
+      },
+      "tests_run": 612,
+      "unittest_seconds": 5606.76,
+      "skipped": 0,
+      "quality_steps_passed": [
+        "Code security",
+        "Compile",
+        "Development dependency vulnerabilities",
+        "Formatting",
+        "Lint",
+        "Runtime dependency vulnerabilities",
+        "Types"
+      ],
+      "completed_progress_outcomes": 2084,
+      "largest_between_outcome_gap_seconds": 989.2571601,
+      "synthetic_reader_control_records_excluded": [],
+      "actual_test_merge_sha_seen": true,
+      "log": {
+        "member": "3_checks (windows-latest, 3).txt",
+        "bytes": 1037568,
+        "sha256": "772b46512e9a4d5f7976be61b394f56a18177cf3d293675cd7959464090cc2c2"
+      }
+    },
+    {
+      "job_id": 120959402425,
+      "name": "checks (ubuntu-latest, 2)",
+      "manifest": {
+        "format": "buddha.ci-test-shards.v1",
+        "total": 1840,
+        "count": 4,
+        "index": 2,
+        "selected": 610,
+        "counts": [
+          1,
+          617,
+          610,
+          612
+        ],
+        "isolated_test": "test_improver_study.FiniteImproverStudyTests.test_finite_fixed_operators_common_conditions_negative_slots_and_original_recovery",
+        "census_sha256": "d95197ef8d7d277a58f80c313bb0b986d24fa7641eddc282681eac9400fc2363"
+      },
+      "tests_run": 610,
+      "unittest_seconds": 1234.654,
+      "skipped": 1,
+      "quality_steps_passed": [
+        "Code security",
+        "Compile",
+        "Development dependency vulnerabilities",
+        "Formatting",
+        "Lint",
+        "Runtime dependency vulnerabilities",
+        "Types"
+      ],
+      "completed_progress_outcomes": 1832,
+      "largest_between_outcome_gap_seconds": 121.957267687,
+      "synthetic_reader_control_records_excluded": [
+        {
+          "format": "buddha.ci-test-progress.v1",
+          "sequence": 2,
+          "kind": "subtest_success",
+          "test_id": "probe",
+          "time_ns": 102
+        }
+      ],
+      "actual_test_merge_sha_seen": true,
+      "log": {
+        "member": "4_checks (ubuntu-latest, 2).txt",
+        "bytes": 964737,
+        "sha256": "7c931ef357314cef476644244f97bf9f1bd3df4a65e2996b44f0643394a3ac6e"
+      }
+    },
+    {
+      "job_id": 120959402458,
+      "name": "checks (ubuntu-latest, 3)",
+      "manifest": {
+        "format": "buddha.ci-test-shards.v1",
+        "total": 1840,
+        "count": 4,
+        "index": 3,
+        "selected": 612,
+        "counts": [
+          1,
+          617,
+          610,
+          612
+        ],
+        "isolated_test": "test_improver_study.FiniteImproverStudyTests.test_finite_fixed_operators_common_conditions_negative_slots_and_original_recovery",
+        "census_sha256": "d95197ef8d7d277a58f80c313bb0b986d24fa7641eddc282681eac9400fc2363"
+      },
+      "tests_run": 612,
+      "unittest_seconds": 1805.112,
+      "skipped": 2,
+      "quality_steps_passed": [
+        "Code security",
+        "Compile",
+        "Development dependency vulnerabilities",
+        "Formatting",
+        "Lint",
+        "Runtime dependency vulnerabilities",
+        "Types"
+      ],
+      "completed_progress_outcomes": 2084,
+      "largest_between_outcome_gap_seconds": 420.731152711,
+      "synthetic_reader_control_records_excluded": [],
+      "actual_test_merge_sha_seen": true,
+      "log": {
+        "member": "5_checks (ubuntu-latest, 3).txt",
+        "bytes": 1033882,
+        "sha256": "a1db8f0dc25e1cc143852c9cb554bc4c8afd61d232f39b0cb51165cf706ee2be"
+      }
+    },
+    {
+      "job_id": 120959402264,
+      "name": "checks (windows-latest, 2)",
+      "manifest": {
+        "format": "buddha.ci-test-shards.v1",
+        "total": 1840,
+        "count": 4,
+        "index": 2,
+        "selected": 610,
+        "counts": [
+          1,
+          617,
+          610,
+          612
+        ],
+        "isolated_test": "test_improver_study.FiniteImproverStudyTests.test_finite_fixed_operators_common_conditions_negative_slots_and_original_recovery",
+        "census_sha256": "d95197ef8d7d277a58f80c313bb0b986d24fa7641eddc282681eac9400fc2363"
+      },
+      "tests_run": 610,
+      "unittest_seconds": 7587.099,
+      "skipped": 0,
+      "quality_steps_passed": [
+        "Code security",
+        "Compile",
+        "Development dependency vulnerabilities",
+        "Formatting",
+        "Lint",
+        "Runtime dependency vulnerabilities",
+        "Types"
+      ],
+      "completed_progress_outcomes": 1832,
+      "largest_between_outcome_gap_seconds": 645.6574936,
+      "synthetic_reader_control_records_excluded": [
+        {
+          "format": "buddha.ci-test-progress.v1",
+          "sequence": 2,
+          "kind": "subtest_success",
+          "test_id": "probe",
+          "time_ns": 102
+        }
+      ],
+      "actual_test_merge_sha_seen": true,
+      "log": {
+        "member": "6_checks (windows-latest, 2).txt",
+        "bytes": 968725,
+        "sha256": "06c03e17db6d8a5ca77f6319772e3bdb8915744994f4c35e652dc41ea3a8a8e5"
+      }
+    },
+    {
+      "job_id": 120959402358,
+      "name": "checks (windows-latest, 1)",
+      "manifest": {
+        "format": "buddha.ci-test-shards.v1",
+        "total": 1840,
+        "count": 4,
+        "index": 1,
+        "selected": 617,
+        "counts": [
+          1,
+          617,
+          610,
+          612
+        ],
+        "isolated_test": "test_improver_study.FiniteImproverStudyTests.test_finite_fixed_operators_common_conditions_negative_slots_and_original_recovery",
+        "census_sha256": "d95197ef8d7d277a58f80c313bb0b986d24fa7641eddc282681eac9400fc2363"
+      },
+      "tests_run": 617,
+      "unittest_seconds": 7916.015,
+      "skipped": 1,
+      "quality_steps_passed": [
+        "Code security",
+        "Compile",
+        "Development dependency vulnerabilities",
+        "Formatting",
+        "Lint",
+        "Runtime dependency vulnerabilities",
+        "Types"
+      ],
+      "completed_progress_outcomes": 1781,
+      "largest_between_outcome_gap_seconds": 368.5617825,
+      "synthetic_reader_control_records_excluded": [],
+      "actual_test_merge_sha_seen": true,
+      "log": {
+        "member": "7_checks (windows-latest, 1).txt",
+        "bytes": 957683,
+        "sha256": "52253e66ea24272e976e8865f80b15626af24b82afe1b9d50e94bdcf86be039d"
+      }
+    }
+  ],
+  "zip": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\ci-progress-hosted-completion-v1.logs.zip",
+    "bytes": 1009576,
+    "sha256": "9462d7306fdb369d466f3bd1da4162e68d5832a83dcd7339fd358547d35e81d8"
+  },
+  "separate_local_long_case": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\ci-long-case-progress-v1.json",
+    "sha256": "8143b2633046a0687329215e333524f08760df66c3a9e7f6560bbb96a3dc9279",
+    "exit_code": 0,
+    "wall_seconds": 13280.197987099993,
+    "source_pins_unchanged": true,
+    "scope": "Earlier local wrapper cut; shared extraction equivalence separately reviewed."
+  },
+  "initial_verifier_failure": {
+    "tool_chunk": "eb5d5c",
+    "cause": "Console scan included the helper-reader unit test literal probe, sequence2/time102. Source lines335-355 define it. Exactly that one non-census control per shard2 log is now explicitly checked/excluded; all real selected-test records retain strict order. Native watchdog uses its private channel and was unaffected."
+  },
+  "scope": "Complete current PR126 coverage and configured checks on both OSes with explicit skips; no scientific improvement or old differing launch-source identity claim.",
+  "model_calls_from_verification": 0,
+  "funded_handoff_created": false,
+  "actual_checkout_confirmation": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\ci-progress-hosted-checkout-confirmation-v1.json",
+    "sha256": "5676587196e595a6fda84b3afaa419e814e2c5f975bfa3a44d158270b20b4b90"
+  }
+}
