@@ -156,6 +156,10 @@ class _Capture:
             for path, raw in self.raw.items()
         }
 
+    def fingerprints(self) -> dict[str, str]:
+        self.finish()
+        return {str(path): _sha(raw) for path, raw in self.raw.items()}
+
 
 @dataclass(frozen=True)
 class _Owner:

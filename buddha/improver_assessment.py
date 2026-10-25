@@ -470,19 +470,7 @@ def _state(directory: Path, *, active: bool = True) -> dict[str, Any]:
     return state
 
 
-def _development(state: dict[str, Any], expected: str) -> tuple[dict[str, Any], _Capture]:
-    directory = state["root"] / "search/study"
-    capture = _Capture(directory)
-    report = study._obj(
-        improver_study.inspect_improver_study(
-            directory,
-            authorization=final._phase_authority(state, "search"),
-            expected_report_sha256=expected,
-            sink=capture,
-        )
-    )
-    raw = capture.read(directory / "context.json")
-    context = study._obj(_load(raw))
+def _development_context(state: dict[str, Any], context: dict[str, Any]) -> None:
     if (
         context["declaration"] != state["record"]["development"]["path"]
         or context["declaration_sha256"] != state["record"]["development"]["sha256"]
@@ -494,6 +482,20 @@ def _development(state: dict[str, Any], expected: str) -> tuple[dict[str, Any], 
     bindings = study._obj(context["controls"])
     if any(bindings.get(str(path)) != pin for path, pin in state["controls"].items()):
         raise ImproverAssessmentError("finite first owner omitted original outer trial controls")
+
+
+def _development(state: dict[str, Any], expected: str) -> tuple[dict[str, Any], _Capture]:
+    directory = state["root"] / "search/study"
+    capture = _Capture(directory)
+    report = study._obj(
+        improver_study.inspect_improver_study(
+            directory,
+            authorization=final._phase_authority(state, "search"),
+            expected_report_sha256=expected,
+            sink=capture,
+        )
+    )
+    _development_context(state, study._obj(_load(capture.read(directory / "context.json"))))
     if report["provenance"]["declaration_sha256"] != pipeline._sha(state["development"]):
         raise ImproverAssessmentError("finite study rebound its original declaration")
     return report, capture

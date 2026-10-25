@@ -2312,6 +2312,22 @@ def _freeze(reader: NativeEvidence, state: dict[str, Any]) -> None:
     )
 
 
+def _complete_report(
+    reader: NativeEvidence, state: dict[str, Any], expected: str
+) -> dict[str, object]:
+    report = _result(reader, state)
+    raw = reader.raw(reader.root / "report.json", _digest(expected))
+    saved = _load(raw)
+    pipeline.validate_authorization_snapshot(
+        saved["authorization"],
+        state["authorization"],
+        {reader.owner(path).run_id for path in state["owner_paths"]},
+    )
+    if raw != _json(report | {"authorization": saved["authorization"]}):
+        raise ImproverStudyError("complete report differs from the original entire finite study")
+    return saved
+
+
 @_checked
 def inspect_improver_study(
     directory: Path,
@@ -2327,16 +2343,7 @@ def inspect_improver_study(
         raise ImproverStudyError("finite inspection sink must contain the original study")
     expected = _digest(expected_report_sha256)
     reader, state = _restore(directory, authorization)
-    report = _result(reader, state)
-    raw = reader.raw(directory / "report.json", expected)
-    saved = _load(raw)
-    pipeline.validate_authorization_snapshot(
-        saved["authorization"],
-        state["authorization"],
-        {reader.owner(path).run_id for path in state["owner_paths"]},
-    )
-    if raw != _json(report | {"authorization": saved["authorization"]}):
-        raise ImproverStudyError("complete report differs from the original entire finite study")
+    saved = _complete_report(reader, state, expected)
     if sink is None:
         reader.capture.finish()
     else:
