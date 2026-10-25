@@ -476,7 +476,7 @@ def inspect_prepared_search(
         if mutation_witness and report["reason"] == "no_parent_eligible":
             completion_reason["reason"] = "no_parent_eligible"
         next_owner, next_role = None, None
-    digests = reader.capture.finish()
+    digests = reader.capture.fingerprints()
     return {
         "state": "complete" if complete else "prepared",
         "busy": any(

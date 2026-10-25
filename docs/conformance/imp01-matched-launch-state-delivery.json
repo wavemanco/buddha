@@ -1,0 +1,220 @@
+{
+  "format": "buddha.imp01-matched-launch-state-delivery.v1",
+  "recorded_utc": "2026-10-25T13:55:32.803081+00:00",
+  "base_head": "722d4d80885b371b8bc62e319a456041a1da6672",
+  "status": "focused_lifecycle_and_configured_local_checks_pass_launcher_and_hosted_pending",
+  "specification": "DESIGN4,7-10; original owner/input provenance, separate phase funding, retained partials and uncertainty",
+  "change": "Keyless original v4/bound-context-v2 matched trial observation reuses existing restore, first-owner join, typed censuses, durable schedule and complete-report checks. It reports search/freeze/final/complete phases, next position, each original grant, costs, holds and status counts without a writer or provider. Extract original complete joins without changing them. Share complete path fingerprints between source and improver state stamps while preserving historical diagnostic output.",
+  "source_sha256": {
+    "buddha/improver_assessment.py": "747a638614c6edc336e3c364d271e3aa50dc91b131e043f3eb4a622625508fb5",
+    "buddha/improver_study.py": "f1baf7440b23df09db3b0a59ebd59fc7de52273fdb2a3d79d883a1214d78acb7",
+    "buddha/improver_launch_state.py": "ed590cdc8773c4df727bbcfd3ce201aa4a3722734762a84d85220dface1cd769",
+    "buddha/doctor.py": "23545ca4ae302771e517f223cde93b3931ece58ccda56669b27ede2cda88116c",
+    "buddha/source_launch_state.py": "c467cac63ccd1fc6fcf2442913031a7b27516360ccadf42d365bfbadb82ebf18",
+    "tests/test_improver_launch_state.py": "8540a05be4e4d1f7a26b83cebb1ef415c4ddbe5e6753c2cc8f10bb0f21db51b9",
+    "tests/test_improver_launch_state_integration.py": "b56a468ed2eae167ef7b7694c2ef6fba8a45bc787699694d2b9cd8927c225251",
+    "tests/test_observation_fingerprints.py": "a46128178cb6486be05d9368eb5c53a64aac41695c399c696906c5214460b386"
+  },
+  "checks": {
+    "focused_methods": 12,
+    "focused_passed": 12,
+    "focused_skips": 0,
+    "focused_seconds": 60.362,
+    "genuine_lifecycle_methods": 1,
+    "genuine_lifecycle_passed": 1,
+    "genuine_lifecycle_seconds": 603.1947235000553,
+    "quality_commands_passed": 7
+  },
+  "tests_first_and_corrections": [
+    "Initial missing module is an interface-absence RED, not a pre-existing behavior regression.",
+    "Initial five-method run found one genuine missed legacy lock plus three malformed synthetic operation IDs. Existing history validator correctly refused the IDs. Test fixture alone changed to its required digest; refusal and custody assertions retained.",
+    "Four focused methods then demonstrate late external-input drift acceptance, authority-map order/external-file fingerprint collision and coherent recorded reservation overrun readiness. Corrected reserved/dispatched/unknown accounting control already passed. Preserve original raw runs and cut hashes.",
+    "Reader captures required outer controls, recognizes all three original lock names, preserves and blocks uncertain/overrun liability, and seals every external file separately.",
+    "Sibling trace finds the same legacy external-key collision in the source launcher stamp. Three missing-helper RED methods precede the shared additive fingerprints helper; existing finish output/guards remain unchanged. Both current validated readers use full-path fingerprints."
+  ],
+  "coverage": [
+    "Exact reviewed original declaration/runtime/account/outer controls and all three grant paths; original first-owner join rejects coordinated context rewrite.",
+    "Detached stable summary, each grant byte identity and caller mapping order; real synthetic Gateway overrun retains actual costs and blocks readiness.",
+    "Whole-trial owner membership, unused validation grant, inactive original owners, late external drift and retained locks.",
+    "Real supplied-worker v4 development with both declared opportunities and genuine failed child generations; original null-descendant freeze keeps maximum six cells and assesses two legitimate starter cells.",
+    "Prepared, developed, frozen, interrupted final after one completed generation, same-owner final resume and complete keyless reread. Retained completed-generation bytes remain identical; ready-file digest tampering refuses.",
+    "All passive inspections guard against original-file SQLite connections, keys, writers, leases, AST and selected worker/provider execution; captured SQLite is queried only in memory."
+  ],
+  "evidence": {
+    "imp01-matched-launch-state-interface-red-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-matched-launch-state-interface-red-v1.json",
+      "sha256": "a316b6e26e72295750b33aebf24488b7ae6214ddeb3fb6f9c5428f7a7ba678bc",
+      "bytes": 1371
+    },
+    "imp01-matched-launch-state-shape-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-matched-launch-state-shape-v1.json",
+      "sha256": "e8e259a1b52ea5fa9af89bc7acb06d5b5cd36b9b43a825175822e0757294d7fc",
+      "bytes": 18191
+    },
+    "imp01-matched-launch-state-fast-first-v1.log": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-matched-launch-state-fast-first-v1.log",
+      "sha256": "b3b357134cfb9e99bbd90ab0029a17070b16ef0b6310e2d74c1867aa1d580b9c",
+      "bytes": 6892
+    },
+    "imp01-launch-state-test-correction-and-red-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-launch-state-test-correction-and-red-v1.json",
+      "sha256": "7cf3aeb445eedaca598745a603b79bad0833e4b19514303347544ce4cdbf0cec",
+      "bytes": 2077
+    },
+    "imp01-launch-state-focused-red-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-launch-state-focused-red-v1.json",
+      "sha256": "35e273ecfdae35bd7b33ed984de73df0addcae3d61af60caae812ec2b08fd798",
+      "bytes": 1339
+    },
+    "imp01-matched-launch-state-fast-green-v1.log": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-matched-launch-state-fast-green-v1.log",
+      "sha256": "67846069d14af4fead007310d0240baa35ebc2a8f10e51018cc18ab9b450c68e",
+      "bytes": 1807
+    },
+    "imp01-observation-fingerprints-red-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-observation-fingerprints-red-v1.json",
+      "sha256": "642dddea43cd2bc958f843830bb2869a8b615d00a15ebf3bcc474f1184d484dd",
+      "bytes": 959
+    },
+    "imp01-state-fingerprint-sibling-source-trace-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-state-fingerprint-sibling-source-trace-v1.json",
+      "sha256": "21138542e5174c2acaca1adca7d8158dd3df61906d3e929e111c4a81736e7112",
+      "bytes": 4150
+    },
+    "imp01-matched-launch-state-independent-review-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-matched-launch-state-independent-review-v1.json",
+      "sha256": "7db3a892ad76855af4c9c01e58015020feb5a3c5e795e9b36326474eaa291777",
+      "bytes": 8209
+    },
+    "imp01-matched-launch-state-independent-review-v2.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-matched-launch-state-independent-review-v2.json",
+      "sha256": "c1c663bceae04c6d80f1c8b148ae485e4e53fb957f1a49998d8934e0cf568cfc",
+      "bytes": 10811
+    },
+    "imp01-matched-launch-state-independent-review-v3.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-matched-launch-state-independent-review-v3.json",
+      "sha256": "18e1a32052c51e4ce64be55cd0c54f81641d2d86dbe07e1a56982866aa9ecdd2",
+      "bytes": 9092
+    },
+    "imp01-matched-launch-state-local-checks-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-matched-launch-state-local-checks-v1.json",
+      "sha256": "c4138514b1377311f8c5ef46aca6da9b18f1ec3cbc026c9d3f913acddc6f09fc",
+      "bytes": 9191
+    },
+    "run-imp01-matched-launch-state-integration-v2.py": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\run-imp01-matched-launch-state-integration-v2.py",
+      "sha256": "2fc45cf7a90d1a2bc333ddac7290b7b48f79f5c4e1c4a000f77428df05fd317e",
+      "bytes": 4986
+    },
+    "imp01-matched-launch-state-integration-v2-result.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-matched-launch-state-integration-v2\\result.json",
+      "sha256": "12dc4765b3b5631543f852498513318667a05fbb4d452d75a2fa23f10ebfc165",
+      "bytes": 5441
+    }
+  },
+  "integration": {
+    "checkpoints": [
+      {
+        "elapsed_seconds": 13.960422100033611,
+        "actual_completed_checkpoint": {
+          "label": "prepared",
+          "phase": "search",
+          "root": "C:\\Users\\arvik\\AppData\\Local\\Temp\\tmpllgw0es3"
+        }
+      },
+      {
+        "elapsed_seconds": 254.00450540008023,
+        "actual_completed_checkpoint": {
+          "label": "development_complete",
+          "phase": "freeze",
+          "coverage": {
+            "expected_common": 1,
+            "completed_common": 1,
+            "expected_cells": 2,
+            "completed_cells": 2,
+            "expected_opportunities": 2,
+            "attempted_opportunities": 2,
+            "completed_opportunities": 2,
+            "in_flight_opportunities": 0,
+            "unattempted_opportunities": 0
+          },
+          "totals": {
+            "committed_microusd": 7,
+            "operation_count": 7,
+            "reserved_microusd": 0,
+            "spent_microusd": 7
+          }
+        }
+      },
+      {
+        "elapsed_seconds": 301.84159520000685,
+        "actual_completed_checkpoint": {
+          "label": "frozen",
+          "phase": "final",
+          "counts": {
+            "cells": 2,
+            "maximum_cells": 6,
+            "conditions": 1,
+            "descendant_slots": 2,
+            "no_valid_descendant_slots": 2
+          }
+        }
+      },
+      {
+        "elapsed_seconds": 381.2088315000292,
+        "actual_completed_checkpoint": {
+          "label": "final_partial",
+          "phase": "final",
+          "position": {
+            "arm_index": 0,
+            "repetition": 0,
+            "stage": "native",
+            "task_index": 0
+          }
+        }
+      },
+      {
+        "elapsed_seconds": 603.0163968000561,
+        "actual_completed_checkpoint": {
+          "label": "complete",
+          "phase": "complete",
+          "coverage": {
+            "expected": 2,
+            "generated": 2,
+            "evaluated": 2
+          },
+          "totals": {
+            "committed_microusd": 13,
+            "operation_count": 13,
+            "reserved_microusd": 0,
+            "spent_microusd": 13
+          }
+        }
+      }
+    ],
+    "source_unchanged": true,
+    "deadline_seconds": 900,
+    "automatic_restarts": 0,
+    "raw_worker_log": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-matched-launch-state-integration-v2\\worker.log",
+      "sha256": "085b2944985a7314caf499f54537cef18eca67f11b852f64f54b697c7f3f3106"
+    }
+  },
+  "preservation": {
+    "original_paid_SQL_queries": false,
+    "provider_model_calls": 0,
+    "new_live_authority_owner_allocation": false,
+    "new_user_command": false,
+    "selected_original_source_execution": false,
+    "main_README_or_development_merge": false
+  },
+  "limitations": [
+    "One supplied-worker path with two valid starter cells and null descendants is not a six-cell successful-descendant or full-grid runtime observation. Prior separate six-cell evidence remains unchanged.",
+    "Local synthetic costs are supplied fixture amounts, not provider invoices, prices or live-spending estimates.",
+    "Sequential captures are not atomic/live/signed/provider attestations. Lock presence does not establish process health; no lock or uncertain charge is removed.",
+    "State stamps compare the same pinned reader version. Historical diagnostics retain their schema and historical readers/source pins are preserved.",
+    "Trusted existing validators may decode retained Python as UTF-8 interface text; the passive reader does not parse it as Python, import, compile or execute it, or return task/answer/source text.",
+    "No account/model/price/current key/capacity/funding/full-study runtime certification, full-suite or hosted-green claim. The funded matched launcher and live resource/review arrangements remain pending."
+  ],
+  "remaining": "Connect the reviewed funded handoff/receipt graph and phase-aware matched launcher; adopt feasible resources/fairness plus numerical and independent-review arrangements before a separate live allocation. IMP01/EVAL02 remain open. WildChat remains selected; Curated stays historical/qualified development evidence."
+}
