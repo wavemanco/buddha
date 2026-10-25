@@ -1,0 +1,170 @@
+{
+  "format": "buddha.dependency-alert-scope.v1",
+  "recorded_utc": "2026-10-25T15:18:01.109044+00:00",
+  "plan_item": "ENG-REF-DEPS-01",
+  "plan_revision": 151,
+  "base_head": "62affa8fed991d2a40e0c050e1726654fbc7018f",
+  "status": "open_advisory_reconciliation_concern_metadata_only",
+  "repository": "https://github.com/wavemanco/buddha",
+  "default_branch_snapshot": {
+    "branch": "main",
+    "current_sha": "1bdad29d6c7fabe3f3671af297cf1d40dd0344d1",
+    "open_alert_rows": 150,
+    "distinct_GHSA_IDs": 79,
+    "API_severity_counts": {
+      "low": 12,
+      "high": 79,
+      "critical": 14,
+      "medium": 45
+    },
+    "medium_label_in_push_notice": "moderate",
+    "per_alert_analyzed_commit_unavailable": true
+  },
+  "development_stack": {
+    "head": "62affa8fed991d2a40e0c050e1726654fbc7018f",
+    "main_development_alert_rows": 16,
+    "all_16_GHSA_IDs_in_existing_remediation_record": true,
+    "manifest_differs_from_main": true,
+    "documented_fix": "ENG-DEV-DEPS-01; docs/conformance/dev-dependency-refresh.json",
+    "GitHub_alerts_on_main_closed_by_this_record": false
+  },
+  "frozen_reference_runtime_scope": {
+    "alert_rows": 134,
+    "distinct_GHSA_IDs": 67,
+    "four_manifest_bytes_same_on_main_and_stack": true,
+    "IDs_absent_from_single_Oct20_snapshot": [
+      "GHSA-5p39-cfhj-2xmp",
+      "GHSA-6hm5-jgcp-p838",
+      "GHSA-6q48-6c7w-9gw2",
+      "GHSA-82r6-8w77-94w6",
+      "GHSA-p4gq-832x-fm9v",
+      "GHSA-xmj3-9gf7-h52w"
+    ],
+    "delta_meaning": "Six IDs were not found in that one snapshot; this does not establish that they are new, exploitable, reachable or absent from every later review.",
+    "existing_exception": "BENCH-02C3B permits a narrowly confined official LLM partition/scoring CPU route, retains a CUDA hold and excludes arbitrary evolved-agent execution. It is not blanket advisory clearance."
+  },
+  "affected_manifests": [
+    {
+      "manifest": "docs/conformance/nb02-reference-requirements.txt",
+      "open_alerts": 3,
+      "severity_counts": {
+        "critical": 2,
+        "medium": 1
+      },
+      "ecosystems": [
+        "pip"
+      ],
+      "package_count": 2,
+      "current_stack_tracked": true,
+      "current_stack_manifest_sha256": "92b5e8a0fbef331ed95ad2ee4307ab051b0c234ed13bec3456730d7b2f9a7b2e",
+      "default_branch_manifest_sha256_from_existing_local_object": "92b5e8a0fbef331ed95ad2ee4307ab051b0c234ed13bec3456730d7b2f9a7b2e",
+      "byte_identity": "same"
+    },
+    {
+      "manifest": "docs/conformance/nb02c3-runtime-requirements.txt",
+      "open_alerts": 1,
+      "severity_counts": {
+        "critical": 1
+      },
+      "ecosystems": [
+        "pip"
+      ],
+      "package_count": 1,
+      "current_stack_tracked": true,
+      "current_stack_manifest_sha256": "afaf07a9bac1d73a5ef729de4a17815acb7082caaa761c9af18fca7a811c1b2d",
+      "default_branch_manifest_sha256_from_existing_local_object": "afaf07a9bac1d73a5ef729de4a17815acb7082caaa761c9af18fca7a811c1b2d",
+      "byte_identity": "same"
+    },
+    {
+      "manifest": "docs/conformance/nb02c3b-cpu-requirements.txt",
+      "open_alerts": 65,
+      "severity_counts": {
+        "low": 4,
+        "critical": 5,
+        "high": 37,
+        "medium": 19
+      },
+      "ecosystems": [
+        "pip"
+      ],
+      "package_count": 10,
+      "current_stack_tracked": true,
+      "current_stack_manifest_sha256": "ee91268b9adc20159fd79f8fa7f57208ff91842e706f3b21774e9c50a8f1f482",
+      "default_branch_manifest_sha256_from_existing_local_object": "ee91268b9adc20159fd79f8fa7f57208ff91842e706f3b21774e9c50a8f1f482",
+      "byte_identity": "same"
+    },
+    {
+      "manifest": "docs/conformance/nb02c3b-runtime-requirements.txt",
+      "open_alerts": 65,
+      "severity_counts": {
+        "low": 4,
+        "critical": 5,
+        "high": 37,
+        "medium": 19
+      },
+      "ecosystems": [
+        "pip"
+      ],
+      "package_count": 10,
+      "current_stack_tracked": true,
+      "current_stack_manifest_sha256": "c97223ac8937d444711fa157cbce86ec640d7bd784fc78f41dd25ab3ea5f56ee",
+      "default_branch_manifest_sha256_from_existing_local_object": "c97223ac8937d444711fa157cbce86ec640d7bd784fc78f41dd25ab3ea5f56ee",
+      "byte_identity": "same"
+    },
+    {
+      "manifest": "requirements-dev.txt",
+      "open_alerts": 16,
+      "severity_counts": {
+        "low": 4,
+        "high": 5,
+        "critical": 1,
+        "medium": 6
+      },
+      "ecosystems": [
+        "pip"
+      ],
+      "package_count": 6,
+      "current_stack_tracked": true,
+      "current_stack_manifest_sha256": "4adcb9f5490cd496d8e6af880ef8cdfe881fb9bb020f7e78f72409031f1e92ef",
+      "default_branch_manifest_sha256_from_existing_local_object": "addf392f8a645ef8dfb98ba1aafe0f0e44d8b5b1484c107b23ddfb969d0ef4ce",
+      "byte_identity": "different"
+    }
+  ],
+  "application_runtime_requirements_txt_alert_rows_in_snapshot": 0,
+  "next_action": "Reconcile current advisory identities and affected versions against the exact installed CPU environment and permitted official call paths before claiming the old exception covers every current alert. Record applicability or uncertainty with source evidence. Preserve frozen manifests/history; any necessary environment change needs its own reviewed identity and compatibility evidence.",
+  "roadmap_scope": "Engineering maintenance context only. IMP-01 remains the sole Next item; IMP-01 and EVAL-02 remain the two scientific gates. No new demonstrated exploit or scientific gate.",
+  "existing_public_references": [
+    "docs/conformance/dev-dependency-refresh.json",
+    "docs/conformance/nb02c3b-security-review.md",
+    "docs/conformance/nb02c3b-runtime-review.md",
+    "docs/conformance/nb02c3b-runtime-advisories.json"
+  ],
+  "evidence": {
+    "triage": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\default-branch-dependabot-triage-v1.json",
+      "sha256": "50b4d908c1226bb23468de8d0ea96393f1af4367d6baaaf5ecf8378e244f9cf9",
+      "bytes": 4728
+    },
+    "documentation_scope": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\default-branch-dependabot-documentation-scope-v1.json",
+      "sha256": "4eff74bdbfc97050eba1f08aeac157476a92675b21876a5e222ca9da56109279",
+      "bytes": 5733
+    },
+    "raw_alert_metadata": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\default-branch-dependabot-open-alerts-raw-v1.json",
+      "sha256": "82f5e0fba9a4379bf20e0755f40f9801b37c4fdbd05660e26399f440f8a15da1",
+      "bytes": 818202
+    },
+    "raw_branch_metadata": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\default-branch-dependabot-branch-raw-v1.json",
+      "sha256": "59ad89165ee400f20fd4868f6c5c5a7f34860308ed34928ede42e83b7d9b8134",
+      "bytes": 5249
+    }
+  },
+  "limitations": [
+    "Advisory records are not independent exploits or a reachability assessment. Counts are a dated snapshot, not a live claim.",
+    "Current default-branch SHA is a contemporaneous anchor; the API supplies no analyzed commit per alert.",
+    "Zero alerts on the empty application runtime manifest does not clear Python, images, development tools or the selected evaluator.",
+    "No fresh scan, package download/install, code/dependency/workflow change, original SQL, model/key, container, merge or paid operation."
+  ]
+}

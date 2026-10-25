@@ -99,3 +99,41 @@ optimization. It does not grant a candidate permission to rewrite the yardstick.
 
 The implementation sequence and dependencies remain in [PLAN.md](PLAN.md).
 This entry grants no new funding and enables no paid execution. The completed first source experiment is evidence of the observed chain, not general competence or a better agent/improver.
+
+## ENG-REF-DEPS-01: reconcile current reference dependency alerts
+
+Recorded October 25, 2026 after GitHub's default-branch dependency notice.
+The [dated metadata record](conformance/dependency-alert-scope.json) separates
+the published default branch from the unmerged development stack.
+
+At the snapshot, `main` is `1bdad29d6c7fabe3f3671af297cf1d40dd0344d1`.
+GitHub reports 150 open alert rows, representing 79 distinct GHSA advisory IDs:
+14 critical, 79 high, 45 moderate and 12 low. These counts describe advisory
+records, not confirmed reachable exploits. The API does not identify the exact
+analyzed commit for each alert.
+
+| Scope | Alert rows | Current context |
+| --- | ---: | --- |
+| `requirements-dev.txt` on `main` | 16 | All 16 advisory IDs are covered by [ENG-DEV-DEPS-01's documented fixes](conformance/dev-dependency-refresh.json). The development stack has the six replacement pins; those changes are unmerged. |
+| Four frozen benchmark/reference manifests | 134 | These represent 67 distinct GHSA IDs. The manifest bytes are the same on `main` and the development stack. |
+
+The [existing native security review](conformance/nb02c3b-security-review.md)
+documents a narrow research exception for the official LLM partition/scoring
+CPU route and keeps CUDA preparation held. It excludes arbitrary evolved-agent
+execution and does not clear every dependency or future advisory. Six current
+native advisory IDs are absent from its single October 20 snapshot. That
+absence alone does not establish that they are new or reachable, or that no
+later review discusses them.
+
+Reconcile the current advisory IDs and affected versions against the exact
+installed CPU environment and permitted official call paths before claiming
+the old exception covers all current alerts. Record applicability or uncertainty
+with source evidence. Preserve frozen manifests and historical evidence; any
+necessary environment change needs its own reviewed identity and compatibility
+evidence. Do not mass-update dependencies or rewrite the old locks to hide the
+notice. No fresh vulnerability scan or exploitability assessment occurred here.
+
+This is a separate engineering maintenance concern. [PLAN.md](PLAN.md) keeps
+IMP-01 as the sole Next item and retains the two existing scientific gates,
+IMP-01 and EVAL-02. Recording this concern authorizes no merge, installation,
+new execution capability or spending.
