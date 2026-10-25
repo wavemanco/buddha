@@ -112,26 +112,7 @@ def check_improver_handoff(path: Path, *, expected_sha256: str) -> dict[str, obj
                 directory / "freeze" / name: "0" * 64 for name in ("schedule.json", "ready.json")
             },
         )
-        development = state["development"]
-        study_root = directory / "search/study"
-        common_inputs = (
-            set(controls)
-            | {
-                directory / name
-                for name in (
-                    ".buddha-evaluation-trial.json",
-                    "definition.json",
-                    "context.json",
-                    "funding.json",
-                )
-            }
-            | {study_root / name for name in ("context.json", "declaration.json")}
-            | {
-                study_root / "inputs/starts" / str(index) / "candidate.py"
-                for index in range(len(state["screens"]))
-            }
-        )
-        improver_study._capacity(study_root, development, state["screens"][0], common_inputs)
+        assessment._development_capacity(state, directory, controls)
         _components(state, runtime)
         for source, digest in controls.items():
             if file_hash(source, max_bytes=256 * 1024**2) != digest:
@@ -140,6 +121,7 @@ def check_improver_handoff(path: Path, *, expected_sha256: str) -> dict[str, obj
             raise ImproverHandoffError("handoff changed during checking")
         _destination(directory)
         limits = _object(state["record"]["phase_limits"])
+        development = state["development"]
         starts, repetitions = len(state["screens"]), development["repetitions"]
         final_tasks = len(state["record"]["final_ids"])
         sealed = state["record"]["sealed_repetitions"]

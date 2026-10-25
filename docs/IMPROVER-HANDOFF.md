@@ -53,8 +53,9 @@ full-grid runtime. The original-call capacity policy still measures actual
 future proposals before child work; configuration checks do not guarantee that
 those requests will be accepted or produce usable changes.
 
-A funded launcher still needs its approved outer controls connected to original
-trial owners, checks of retained partial state before key entry, phase-aware
+A funded launcher can connect its approved outer controls through the
+[trial preparation bindings](IMPROVER-ASSESSMENT.md#bind-the-reviewed-launch-and-approval-files).
+It still needs checks of retained partial state before key entry, phase-aware
 progress and receipts, and three grants issued for this new study's approved
 scope: search, zero validation and final. Those are separate from
 this fresh, read-only configuration check. Scientific review, effectiveness and

@@ -1,0 +1,94 @@
+{
+  "format": "buddha.imp01-matched-launch-bindings-delivery.v1",
+  "recorded_utc": "2026-10-25T12:59:59.342278+00:00",
+  "base_head": "cd97e44ee891a279a50e68653b7bc5d79a71d2f1",
+  "status": "focused_and_configured_local_checks_pass_matched_launcher_and_hosted_pending",
+  "specification": "DESIGN4,7-10; original input provenance, prepublication capacity, separate original grants and passive custody",
+  "change": "Optional runtime input_bindings in trial preparation records the exact reviewed outer files in closed context v2, avoids declaration hash cycles and propagates them to original development/final records. Omitted/None preserves the exact existing context v1 schema. Extract the unchanged development path-capacity projection for reuse by both unfunded handoff checking and bound trial preparation.",
+  "source_sha256": {
+    "buddha/improver_assessment.py": "ec5cb429081da3f521b6412df7988f8dbdd9a1c658297c321677640e946b18d0",
+    "buddha/improver_handoff.py": "251c1cec96d6b60b3932e552e1167bc3859376333fe62cae3b92bcb34d2d1ceb",
+    "tests/test_improver_assessment_bindings.py": "74c322b0db8c6f4bd47232c110a2105ce8692bc659839b81697d3d90f64de75a",
+    "tests/test_improver_handoff.py": "ef83caa6a613dbcc35e71229a0556f0e634d1cc5f5106c6b40e66fdc5b94bfca"
+  },
+  "checks": {
+    "methods": 15,
+    "passed": 15,
+    "skips": 0,
+    "seconds": 56.511,
+    "new_binding_methods": 5,
+    "unchanged_handoff_methods": 10,
+    "quality_commands_passed": 7
+  },
+  "tests_first_and_corrections": {
+    "interface_red": "Exact unchanged old source signature lacks input_bindings; this is API absence, not a behavior regression.",
+    "targeted_public_call": "The decorator normalized the unsupported-keyword TypeError to ImproverAssessmentError. Preserve the external unexpected_red classification; do not reinterpret its raw result.",
+    "first_expanded_run": "15 methods in62.633s: four error-type mismatches within one new method. Existing guards had refused all malformed inputs; private _state raises ReleaseError subclasses rather than the public wrapper's normalized ImproverAssessmentError.",
+    "test_only_correction": "Import ReleaseError and change exactly two private-helper assertRaises expectations. Public preparation still strictly expects ImproverAssessmentError. Every refusal/propagation/capacity assertion and both production files unchanged."
+  },
+  "coverage": [
+    "Exact v1 field set for omission/None and closed v2 for explicit empty/nonempty mappings",
+    "Real first-owner invocation includes the reviewed outer pin; active and keyless private reconstruction verify bytes",
+    "Nine invalid/prepublication cases include canonical path, bad mapping/digest, missing/stale file, declaration conflict, own mutable grant and input/output overlap",
+    "Both actual future-capacity projections include extras before publication; overflow and late input drift refuse",
+    "Closed v2 fields and explicit selected-program pins remain required despite otherwise permitted passive producer retirement"
+  ],
+  "evidence": {
+    "imp01-matched-launch-bindings-shape-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-matched-launch-bindings-shape-v1.json",
+      "sha256": "21ca0a03f0092cc08bb06172aca3c0073030fe82c5d881a8051a3fefd5637520",
+      "bytes": 13884
+    },
+    "imp01-matched-launch-bindings-shape-v2.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-matched-launch-bindings-shape-v2.json",
+      "sha256": "b3a6ee7445a8da955afa33aa7f1018acef86a4492255a62d5fa06d81383cc90f",
+      "bytes": 2173
+    },
+    "imp01-matched-binding-interface-red-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-matched-binding-interface-red-v1.json",
+      "sha256": "9f93613aa13ffb3a8efa652b521a6d9290566f2948821962c0afb9eea6887965",
+      "bytes": 1096
+    },
+    "imp01-assessment-bindings-red-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-assessment-bindings-red-v1.json",
+      "sha256": "8dade2c021ed3fd49f021893ea1fd8079318e573c0f12f36ee1e9f67647c2323",
+      "bytes": 1873
+    },
+    "imp01-assessment-bindings-private-error-correction-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-assessment-bindings-private-error-correction-v1.json",
+      "sha256": "34d3a4e93abec358521153074166cdf4327643b45b8ebee38e13147419e340cc",
+      "bytes": 2266
+    },
+    "imp01-matched-launch-bindings-local-checks-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-matched-launch-bindings-local-checks-v1.json",
+      "sha256": "3dcb2692ca63aa32f6b26a0fdae5728e5b195cb1bb1c089b42fefe3da15d15c6",
+      "bytes": 7077
+    },
+    "imp01-matched-launch-bindings-independent-review-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-matched-launch-bindings-independent-review-v1.json",
+      "sha256": "1940f3e3259a3f7a6e549293241e199f1e33901a0ed8ddcc581b1c8177649a50",
+      "bytes": 9074
+    },
+    "imp01-matched-launch-bindings-independent-review-v2.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-matched-launch-bindings-independent-review-v2.json",
+      "sha256": "609d0774ad8dd2bc4746ace64bc0a3e3c2134192bc8684c09da455df0bf2b3ce",
+      "bytes": 9190
+    }
+  },
+  "limitations": [
+    "No full six-cell lifecycle/full suite, actual selected P/C execution, Docker, model call or hosted-green claim.",
+    "Synthetic preparation, first-owner and private reconstruction checks do not independently establish complete final lifecycle behavior; unchanged downstream public joins are source-reviewed.",
+    "Private _state reconstructs exact current bytes but alone does not authenticate coordinated context rewrites. Public freeze/final/inspection routes join original finite context and first-owner bindings. The future partial-state launcher must use restore/census.",
+    "Sequential observations are not an atomic snapshot. Matching old trusted code remains required for old saved source closures; no old declaration or evidence is upgraded."
+  ],
+  "preservation": {
+    "original_P_C": "Raw hashes only; no selected original decode/AST/import/compile/execution",
+    "official_benchmark_profiles_limits_dependencies": "Unchanged",
+    "original_paid_SQL_queries": false,
+    "model_provider_calls": 0,
+    "new_live_authority_owner_allocation": false,
+    "new_user_command": false,
+    "main_README_or_development_merge": false
+  },
+  "remaining": "Implement keyless original partial-state validation and phase-aware matched launch/progress/receipts. Bind fresh reviewed closure and adopt feasible resources/fairness plus numerical/review arrangements before separately approved live work. WildChat stays selected; Curated stays qualified historical/development evidence. IMP01 and EVAL02 remain open."
+}
