@@ -226,8 +226,10 @@ checks. No paid request or selected-source execution is performed here.
 The selected WildChat data/custody preparation is now complete at its bounded
 scope. No population decision remains pending. The explicit v4 capacity connection
 is implemented; executing-code verification remains separate from live readiness.
-Next bind the actual configuration, resources,
-runtime, statistical settings and review arrangements. Request a new allocation
+The [concrete configuration draft](IMPROVER-WILDCHAT-CONFIGURATION.md) now
+passes existing study/assessment and full-grid data checks. Next resolve its
+exact input/request envelope and bind actual runtime/resources, aggregate caps,
+statistical adoption and review arrangements. Request a new allocation
 only after those checks make a concrete live proposal reviewable. No new funds,
 owner or launch command follow from this preparation. This remains the original
 IMP-01 comparison; the DGM/Harness2 cross-check adds no redesign or new gate.

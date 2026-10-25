@@ -1,0 +1,139 @@
+{
+  "format": "buddha.imp01-wildchat-configuration-delivery.v1",
+  "date": "2026-10-25",
+  "recorded_utc": "2026-10-25T10:52:58.640525+00:00",
+  "status": "bounded_unfunded_configuration_checks_complete_live_readiness_open",
+  "base_head": "63f76315b29034dae687796ec207ca6c00aa04bd",
+  "guide": "../IMPROVER-WILDCHAT-CONFIGURATION.md",
+  "runtime_manifest": false,
+  "user_direction": "Follow recommended WildChat for next sealed comparison; retain Curated as historical/qualified development evidence, no extra Curated run or population question.",
+  "prepared": {
+    "v1_bundle": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-config-preparation-20261025-v1",
+    "v1_files": 82,
+    "v2_derivative": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-config-preparation-20261025-v2",
+    "v2_new_files": 5,
+    "sources": "Exact original P/C raw bytes only; current trusted runner/host closure. Source treatment and official NoveltyBench remain unchanged.",
+    "formats": [
+      "buddha.improver-study.v4",
+      "buddha.improver-assessment-trial.v4"
+    ],
+    "grid": {
+      "starts": 2,
+      "development_repetitions": 2,
+      "opportunities_per_arm": 2,
+      "counted_opportunities": 16,
+      "development_tasks": 3,
+      "final_tasks": 26,
+      "sealed_repetitions": 1,
+      "maximum_final_role_task_cells": 312
+    },
+    "v1_intrinsic_paths": 43,
+    "v2_original_controls": 113,
+    "v2_prospective_controls": 165,
+    "existing_future_path_limit": 1024,
+    "custody_evidence_bytehash_files": 60,
+    "private_semantic_contents_parsed_or_exposed": false
+  },
+  "draft_only": {
+    "financial_values": "Derived nominal maxima used only for parser validation; not adopted/requested budget, expected spend or new authority.",
+    "numerical_method": "fixed_panel_family_hoeffding_shared_starter.v1",
+    "alpha_total": {
+      "numerator": 1,
+      "denominator": 20
+    },
+    "each_six_tails": {
+      "numerator": 1,
+      "denominator": 120
+    },
+    "primary_metric": "utility",
+    "minimum_gain": 0,
+    "other_metric_permitted_loss": 0,
+    "adopted": false,
+    "outcome_analysis_performed": false,
+    "human_reviewers_arranged": false
+  },
+  "input_envelope_finding": {
+    "id": "IMP1-INPUT-01",
+    "classification": "Concrete documentation/code boundary observation; no oversized actual request or provider failure observed.",
+    "documented_maximum_input_tokens": 922000,
+    "context_tokens": 1050000,
+    "historical_financial_input_ceiling": 1050000,
+    "proposal_output_limit": 32768,
+    "closed_policy_context_margin": 8192,
+    "largest_input_passing_context_margin_alone": 1009040,
+    "difference_from_model_input_limit": 87040,
+    "gateway_pre_send_input_count": false,
+    "lowering_profile_alone_resolves_it": false,
+    "byte_limits_equal_token_limits": false,
+    "policy_or_profile_changed": false,
+    "next": "Quantify/resolve the exact supported request envelope with full feedback retained; do not assume Responses count equivalence or free extra calls. This remains existing live-readiness work, not a new scientific gate."
+  },
+  "price_review_scope": {
+    "unit_bounds": "Historical conservative token rates remain conditional upper bounds under the reviewed exact-model standard-speed scope. Account access/settings and actual whole-grid costs/runtime not certified.",
+    "anthropic_speed_scope": "standard_only service tier is independent of fast speed; verify fixed native body/header scope before binding rates.",
+    "new_rate_or_budget_adopted": false
+  },
+  "evidence": {
+    "imp01-next-configuration-feasibility-review-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-next-configuration-feasibility-review-v1.json",
+      "sha256": "1338bdd02ff8e1ff920c285e988062a26ca3c672fd8812771d725bc0d5d8e067",
+      "bytes": 11417
+    },
+    "imp01-wildchat-config-preparation-result-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-wildchat-config-preparation-result-v1.json",
+      "sha256": "74a2592156c4e0252f130991ccd3a4296884f41819632783a4058be69452e841",
+      "bytes": 23374
+    },
+    "imp01-wildchat-config-preparation-verification-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-wildchat-config-preparation-verification-v1.json",
+      "sha256": "46b4053ab031fa8071f298c1d60fd6628e01e8314dda599264821688f9cc1ca8",
+      "bytes": 1114
+    },
+    "imp01-wildchat-config-numerical-preparation-v2.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-wildchat-config-numerical-preparation-v2.json",
+      "sha256": "74833e47b3133102791f4ea46c80c25b8c1986a932d4ef909ab36ec1fa482771",
+      "bytes": 3396
+    },
+    "imp01-input-envelope-boundary-review-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-input-envelope-boundary-review-v1.json",
+      "sha256": "1d04e9df730938b01331fcd6c3aa2f306504e1d2f99bc413bfeefda5ff9454d0",
+      "bytes": 5114
+    },
+    "imp01-current-openai-price-review-v2.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-current-openai-price-review-v2.json",
+      "sha256": "b10c3a9255b9313969ac4a6bd87d019c5ede9efd0048bea10d443781f2ff7479",
+      "bytes": 6164
+    },
+    "imp01-current-anthropic-price-review-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-current-anthropic-price-review-v1.json",
+      "sha256": "27b3bdca18fd8e8c154f5e8d3d134bc9eca4835a947332b890664e02362b03ec",
+      "bytes": 7810
+    },
+    "imp01-current-anthropic-price-review-v2.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-current-anthropic-price-review-v2.json",
+      "sha256": "50fbbd0abd25d9b347d3dd612c92c95f87e8b0148c5368e62c46946c5d60866d",
+      "bytes": 2155
+    },
+    "imp01-input-count-options-review-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-input-count-options-review-v1.json",
+      "sha256": "0383243b491e69c7fa5c3e8427ddc4b9c837532c1353a339a9a8974131491f01",
+      "bytes": 1500
+    }
+  },
+  "limits": {
+    "trusted_configuration_validators_executed": true,
+    "selected_P_C_decoded_AST_import_compile_or_execution": false,
+    "Docker_or_selected_worker_launched": false,
+    "provider_API_calls": 0,
+    "real_key_used": false,
+    "original_paid_SQLite_queried": false,
+    "new_live_authority_owner_or_allocation": false,
+    "new_launch_command": false,
+    "new_app_test_or_dependency_code": false,
+    "new_full_suite_or_hosted_green_claim": false,
+    "effectiveness_or_generalization_claim": false,
+    "population_recommendation_changed": false,
+    "development_merge": false
+  },
+  "remaining": "Resolve exact input/request/speed envelope, runtime/resources/fairness, aggregate caps, prospective numerical/review adoption and user-operated handoff. Separate concrete live allocation and exact-head hosted verification required. IMP-01/EVAL-02 remain open."
+}
