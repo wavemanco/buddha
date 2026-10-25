@@ -1,23 +1,58 @@
 # Current-source live experiment
 
-This is the next actual code-evolution observation for SRC-02/03. The protocol
-and review criteria are adopted. A new unfunded input bundle passes the existing
-passive configuration checks; it has no spending permission or user run command.
+This is the approved code-evolution observation for SRC-02/03. The protocol and
+review criteria are adopted, current Windows/Linux CI passes, and the funded
+handoff is ready for the user to start locally. No model calls were made during
+preparation.
 [PLAN.md](PLAN.md) remains the current roadmap.
 
 The earlier $7 observation checked whether one exact full-output request could
 return a complete source proposal with enough space left. This experiment
 measures the current parent itself and runs its model-written descendants.
 The [corrected preparation record](conformance/src02-corrected-live-preparation.json)
-records the fresh unfunded bundle and its remaining requirements.
+retains an earlier unfunded checkpoint. Current readiness is described below.
 
 The [earlier preparation](conformance/src02-actual-live-preparation.json) used a
 producer that later failed three legacy progress-report compatibility checks in
 Ubuntu CI. The [shared correction](SOURCE-PROPOSAL-CAPACITY.md#record-compatibility)
-now has a separate fresh bundle pinned to corrected executing code. The original
+was delivered with a separate bundle pinned to corrected executing code. The original
 bundle and failed-head evidence remain unchanged and unfunded. The adopted
 protocol, criteria and intent retain their original bytes; this preparation
 changes no scientific acceptance or benchmark rule.
+
+## Run the approved experiment
+
+Open a fresh PowerShell window and run this one command. No `cd` command is
+needed because every path is absolute. Keep Docker Desktop running.
+
+```powershell
+python C:\Users\arvik\code\buddha\runs\reviews\ci-test-progress\docs\conformance\src02-run.py --handoff C:\Users\arvik\code\buddha\runs\src02-current-live-20261024-handoff-v1\launch.json --sha256 3a4186127d30ccf8a69cea65cfcc2ed5651661f14e3892f5ab5646c625a2c65d --receipt C:\Users\arvik\code\buddha\runs\src02-current-live-20261024-receipts-v1\launch-001.json --live --prompt-keys --confirm-project-keys
+```
+
+This runs the original experiment once and may spend up to the approved **$25
+combined OpenAI/Anthropic cap**, with at most **512 recorded attempts**. It asks
+for both API keys locally if they are not already set. Paste each key and press
+Enter; hidden input is normal. Never paste keys into chat or a repository file.
+
+The command checks the approved handoff and its fingerprint, saves this
+invocation result at the named receipt path, and enables the paid run. The last
+flag confirms that these keys belong to the previously attested Standard/default,
+public pay-as-you-go projects. A spending record does not add credit to either
+provider account.
+
+Use this same window while it runs; a second window is not required. Progress
+messages continue while provider calls or container startup take time. Ctrl+C
+stops the run; an unresolved request can retain a budget hold. Partial work
+keeps its stage, reason, recorded costs and unresolved holds. Run this first
+invocation command once. If it stops, keep the files and share the terminal
+output before choosing a continuation receipt.
+
+After it finishes, tell Codex the run is complete and share the final terminal
+output. Codex will inspect the saved records, assess actual source changes and
+update the plan. Source-change evidence and official development scores remain
+separate from later held-out improvement claims.
+
+[Prepared handoff and verification](conformance/src02-current-funded-handoff.json).
 
 ## What the experiment does
 
@@ -84,19 +119,48 @@ EVAL-02. No private score replaces NoveltyBench.
 
 ## Spending and keys
 
-The proposal requests a **new, currently unallocated $25 combined cap and
-512 physical-attempt limit**, allowing explicit partial results. Earlier
+The user approved a **$25 combined cap and 512-attempt limit**, with explicit
+partial results allowed. Its dedicated spending record is prepared and starts
+with zero spent, held or attempted. Earlier
 allowances cover closed experiments and cannot fund this one. The amount is
 a maximum, not a spending target or completion estimate. Conservative
 reservations can stop work before the cap is spent; unresolved requests retain
 their holds.
 
 OpenAI serves generation, source proposals and official grouping. Anthropic
-serves official quality scoring and its fallback. A later approved local launch
-will therefore need both keys. Keys are entered locally and are never part of
+serves official quality scoring and its fallback. The approved local launch
+therefore needs both keys. Keys are entered locally and are never part of
 these committed protocol files.
 
 ## Current handoff status
+
+The fresh bundle is `runs/src02-current-live-20261024-proposal-v3`, prepared
+from the exact CI-tested producer `42e5dd2d3d32c1f085c87aaa2de44cc1391587ce`.
+All 44 required live helper files match that commit. Its 43 files and 170 source
+hashes pass the saved-data reconstruction; the earlier 169-file map is intact.
+Tasks, starting program, proposal instructions, supported policies, official
+NoveltyBench 1.1 instrument, comparison key and approved terms are unchanged.
+
+The dedicated handoff lives at `runs/src02-current-live-20261024-handoff-v1`.
+At preparation it contains no account-key review or study owners, and records
+zero attempts, spend and holds. The 77 fixed bindings become 78 with the future
+keyed review; the first invocation projects 85 input paths. The existing 111+K
+declared-flow bound has K=0 here and remains conditional, not a measured full
+owner census. The user launch creates the original search and its owners.
+
+All eight [hosted jobs](https://github.com/wavemanco/buddha/actions/runs/40123333122)
+passed: 1,840 tests per OS, with five explicit Linux skips and one Windows skip,
+plus every configured quality check. Both required local images are present
+and match their declared configuration.
+
+The final public-rate check retains the same conservative profiles, using
+[OpenAI Sol](https://developers.openai.com/api/docs/models/gpt-6.1-sol),
+[OpenAI Luna](https://developers.openai.com/api/docs/models/gpt-5.6-luna),
+[Claude Opus 5](https://platform.claude.com/docs/en/models/opus-5/overview) and
+[Claude Sonnet 5](https://platform.claude.com/docs/en/models/sonnet-5/overview)
+documentation. It does not query project access, balances or invoices.
+
+## Earlier preparation checkpoints (historical)
 
 The fresh bundle is `runs/src02-current-live-20261024-proposal-v2`, prepared
 from corrected producer `87c041b207d54305ba30621bbf4b6b935d7d19b2`. It remains
@@ -177,7 +241,7 @@ October 24, 2026 13:40:26 UTC checkpoint its Windows job is still running. The
 [retained CI evidence](conformance/imp01-larger-reader-cost-observation.json)
 does not establish a complete platform matrix or grant spending permission.
 
-## Refreshed public price evidence
+### Public price evidence at the earlier checkpoint
 
 The October 24 [price refresh](conformance/imp01-larger-reader-cost-observation.json)
 and independent review confirm the stored bounds for all five model roles.
