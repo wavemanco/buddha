@@ -129,7 +129,7 @@ It supplies evidence for diagnosis; it does not guarantee that a model will
 diagnose correctly or produce a better child. Official NoveltyBench grouping,
 quality ratings and utility calculation remain unchanged.
 
-The `comparison` argument contains exactly `parent`, `proposal` and `screen`.
+For an actual parent edge, `comparison` contains exactly `parent`, `proposal` and `screen`.
 Each is the existing `{directory, authorization, report_sha256}` reference;
 `screen` must equal the current `reference`. The bridge verifies the original
 materialized proposal, returned source, child lineage and exact parent screening
@@ -161,13 +161,62 @@ edge checks within one observation. These request-local limits reset after
 success or failure. Retained screen/proposal observations are checked again
 before publication, including their original owner evidence and sidecars.
 
-This is an **opt-in library and protected-proposal connection**. Existing search
-and study manifests still use their original feedback policies. They do not
-automatically receive comparisons. Integrating this treatment into newly
-versioned controller manifests is the next separate slice; study arm membership,
-coverage and equal resources remain controller responsibilities. Historical
-v1-v5 packets and completed runs keep their original reconstruction rules.
-No new live run or spending allocation follows from this library change.
+This remains an **opt-in library and protected-proposal connection**. New
+[search manifest v6](SOURCE-SEARCH.md#explicit-parent-comparisons-in-new-searches)
+can now select it explicitly with `feedback_comparison=True`. Existing search
+manifests and study v1/v2 retain their original feedback policies and bytes.
+They do not automatically receive comparisons. Study arm membership, coverage
+and equal resources remain controller responsibilities; a prospective study v3
+and matching assessment treatment are not implemented here. Historical v1-v6
+packets and completed runs keep their original reconstruction rules. Thirteen
+new search/root/limit methods and nineteen existing feedback methods pass in
+separate supplied-response cohorts; the [delivery record](conformance/imp01-source-search-comparison-delivery.json)
+retains their scope and the substantial lifecycle runtimes. Current-head hosted
+verification remains pending. No live run or spending allocation follows from
+this library change.
+
+### A declared search root has no counted parent
+
+The separate `comparison={"root": {"directory": ..., "authorization": ...,
+"manifest_sha256": ...}}` variant selects root provenance v7. It verifies the
+exact measured seed against this search's original owner-bound manifest and
+context, using the shared original-custody checks without restoring the loop
+recursively. The original screen's complete answer/native leaves, owner evidence
+and sidecars are retained in the scope observation through publication.
+Paths and declaration records stay in host provenance.
+
+Each worker note keeps the whole original measurement note, including any
+complete counted failure history. It adds `parent_measurements: null` and an
+explicit unavailable comparison with reason `no_counted_parent_in_this_search`.
+The parent identity and all parent differences are null, never zero. External
+lineage on the starting source is allowed: this describes its role in this
+search, not its entire ancestry. Full byte ceilings still apply to the wrapper.
+
+Root v7 currently supports inherited search only. It refuses a fixed-improver
+identity or a detached proposal; there is no frozen-study root protocol here.
+Actual-edge v6 keeps its existing schema and original derivation bytes.
+
+The note is still text, but its JSON layout is different. An agent helper that
+looks only for top-level measurement fields will need to understand the
+`measurements` wrapper to index those values. The frozen live-run C helper does
+not: its `_evidence` function reads only top-level fields. Its model still
+receives every full note through `development_feedback`; this does not establish
+that its computed index understands the new treatment. IMP1-FB-CONSUMER-01
+records this static compatibility observation. Prospective study preparation
+must account for the actual frozen reader and verify its declared use; it must
+not silently rewrite C, old packets or historical results. The effect on future
+model replies has not been measured.
+
+During started execution, the new search distinguishes reconstruction work
+limits from byte limits: sixteen nested comparisons or sixty-four edge checks
+produce a saved
+`feedback_reconstruction_limit` partial, while oversized complete information
+produces `feedback_capacity`. Cycles and missing, altered or incompatible
+evidence remain protocol failures. A resource stop never permits truncated
+outputs, a substituted parent or an invented baseline.
+Initial resume validation may instead refuse before dispatch without creating
+a new observation, retaining the saved prefix and any earlier partial result;
+see the [search preflight rule](SOURCE-SEARCH.md#explicit-parent-comparisons-in-new-searches).
 
 ## A fixed improver learns from its own failed children
 
@@ -294,6 +343,17 @@ Ctrl+C stops it. It does not start or resume an experiment.
 
 ```powershell
 python -m unittest discover -s tests -p 'test_source_comparison*.py' -v
+```
+
+To check the root treatment's early input and work-limit boundaries once, run
+the following in your current PowerShell window from this checkout's project
+folder. It creates temporary test records, needs no keys or Docker and spends
+no API money. It does not inspect or resume a live run. Wait for `OK` or a
+failure; Ctrl+C stops it. No separate window is needed. The composed root-custody
+route is covered by the separate [search check](SOURCE-SEARCH.md#optional-local-comparison-check).
+
+```powershell
+python -m unittest discover -s tests -p test_source_root_feedback.py -v
 ```
 
 ## Complete-output validation

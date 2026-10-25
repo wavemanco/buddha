@@ -327,6 +327,8 @@ def collect_candidate_improvement(
         _Busy,
         _Unsupported,
     ) as error:
-        if isinstance(error, stage.CandidateImprovementError):
+        from buddha.source_feedback import SourceFeedbackTooLarge
+
+        if isinstance(error, (stage.CandidateImprovementError, SourceFeedbackTooLarge)):
             raise
         raise stage.CandidateImprovementError("proposal evidence is invalid or changed") from None

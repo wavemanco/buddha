@@ -1,0 +1,396 @@
+{
+  "format": "buddha.source-search-comparison-delivery.v1",
+  "status": "bounded_offline_delivery",
+  "date": "2026-10-24",
+  "base_commit": "c1cc14894dc147f2ffe07b06df8100f4dc9c516d",
+  "gate": "IMP-01",
+  "claim": "Versioned engineering delivery of complete immediate-parent comparisons; no model efficacy, generalization or improvement claim.",
+  "source_sha256": {
+    "buddha/source_feedback.py": "c57b812535185f9fad0bee56a90bc06a65df0be2858f99cbec2e027db6186b03",
+    "buddha/source_search.py": "30c11a191819fc31482d18abc43a7b5ae38c07775b0579c3368501ebba935de6",
+    "buddha/candidate_improvement.py": "114d3d43e291987938a807d8882f6d66d244e66f3a0f35b016f169da02cb1484",
+    "buddha/candidate_improvement_results.py": "6a4a4ef6140bdf69e7d2223e8e2677b423ed4466e7ad5d8e7a2f81371d650344",
+    "tests/test_source_search_comparison.py": "ab26407b9b9dbf636798dfc020501e19cd2aef9b93e8c18ddf53237c716dfd01",
+    "tests/test_source_root_feedback.py": "012b0a292508249bc4f9b00686f0e026086b8b6d9d02b284554478f4281f246c",
+    "tests/test_source_comparison_limits.py": "6dbcc2f06bf3f21fd421e9b4ae6b4e2be8bc31847ea9adf7ab9694378fed05b5"
+  },
+  "interfaces": {
+    "preparation": "prepare_source_search(..., feedback_comparison=True)",
+    "default": "False; existing v1-v5 choices and original bytes preserved",
+    "required": "mutation witnesses and verified private source copies",
+    "search_manifest": "buddha.source-search-manifest.v6",
+    "counted_plan": "buddha.source-search-plan.v3",
+    "witness_treatment": "buddha.source-mutation-witness-treatment.v3",
+    "witness_plan": "buddha.source-mutation-witness-plan.v2",
+    "actual_edge_feedback": "Existing v6 complete current/parent outputs, independent metric deltas, original hypothesis, task costs and separate proposal cost",
+    "root_feedback": "New v7 owner-bound declared seed; null baseline and differences; no_counted_parent_in_this_search, allowing external ancestry",
+    "failure_history": "Complete counted history remains in measured notes; mutation witnesses receive none",
+    "unchanged": "Official NoveltyBench 1.1, source selection/admission, fixed study v1/v2 and all closed live scopes"
+  },
+  "custody": [
+    "Resolve the selected original counted screen from this search, its independently checked plan and original proposal; source identity or latest decision alone is insufficient.",
+    "Pre-decision child witnesses use the already checked original plan/proposal plus complete eligible child screen, without requiring a decision that cannot yet exist.",
+    "Root proof reconstructs original manifest/context/seed owner rather than recursively restoring the search.",
+    "Retain complete original screen leaves and declaration observations through final pre-publication checks under existing trial fences."
+  ],
+  "resource_policy": {
+    "unchanged_bytes": {
+      "note_bytes": 1048576,
+      "feedback_bytes": 1048576,
+      "projected_tasks_bytes": 1048576,
+      "host_bundle_bytes": 33554432
+    },
+    "request_local": {
+      "nested_comparisons": 16,
+      "edge_checks": 64
+    },
+    "started_execution": "Save feedback_reconstruction_limit or feedback_capacity with stage/reason and retained evidence/liabilities; corruption remains protocol.",
+    "initial_resume_preflight": "Typed refusal can occur before dispatch and without a new observation; retain saved prefix and earlier partial records.",
+    "model_context": "Combined actual requests still require concrete context/output-headroom and funding checks before live adoption."
+  },
+  "findings": [
+    {
+      "id": "IMP1-FB-ROOT-01",
+      "kind": "reproduced_defect",
+      "observation": "A literal answer leaf changed after the base feedback walk escaped the later root-declaration-only capture.",
+      "fix": "Create root capture before the base walk and adopt its complete original screen observation; recheck before publication.",
+      "red": "Genuine mutation probe failed: SourceFeedbackError not raised, 27.075s.",
+      "green": "Root cohort: 3 methods, 28.387s, including rejection before destination creation and unchanged authority/send count."
+    },
+    {
+      "id": "IMP1-FB-RESTORE-01",
+      "kind": "source_identified_mutable_alias",
+      "observation": "Stored checked plans shared mutable prior_pool and failure lists with state; later archive/history appends changed the supposed original plan.",
+      "fix": "Store _load(raw) from the already verified original canonical plan bytes.",
+      "verification": "Final two-iteration lifecycle passes in 2451.003s, including a descendant selected on the next iteration and independent older-edge reconstruction/replay. The earlier leaf traceback remains unavailable."
+    },
+    {
+      "id": "IMP1-FB-LIMIT-01",
+      "kind": "reproduced_defect",
+      "observation": "Proposal collector and public decorator normalized typed resource limits into generic invalid-evidence errors.",
+      "fix": "Propagate only SourceFeedbackTooLarge subclasses through both catch layers; preserve ordinary normalization.",
+      "red": "Three methods in 0.002s: exactly two resource sentinel identity failures; ordinary normalization passed.",
+      "green": "Same 3 methods pass in 0.001s."
+    },
+    {
+      "id": "IMP1-FB-CONSUMER-01",
+      "kind": "static_compatibility_observation",
+      "frozen_C_sha256": "4196cd29ffa76c6959e6f678a8286b1fde5b56e6a34a97dcf68787e1f22b3a43",
+      "observation": "C indexes only top-level metric keys; v6/v7 nest measurements, so that computed index contains only task IDs. Existing v4/v5 wrappers have the same structural caveat.",
+      "nonfatal": "The unchanged complete notes still enter C model requests through development_feedback. No outcome effect measured; original flat-v3 C-to-W1 evidence stays valid.",
+      "prospective_gate": "Bind exact declared improvers/treatment and verify their emitted requests only through isolated execution with supplied replies. Prospectively study frozen C as-is or a separately versioned alternative; never rewrite frozen C or existing feedback semantics."
+    }
+  ],
+  "verification": {
+    "cohorts": [
+      {
+        "module": "test_source_search_comparison",
+        "selection": "preparation and flags",
+        "methods": 3,
+        "seconds": 2.323,
+        "result": "pass",
+        "command": [
+          "python",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_source_search_comparison.py",
+          "-k",
+          "preparation",
+          "-v"
+        ],
+        "source_cut": "Final pinned source map; no source/test edits during these final-cut cohorts.",
+        "exit_code": 0
+      },
+      {
+        "module": "test_source_search_comparison",
+        "selection": "omitted versus explicit False",
+        "methods": 1,
+        "seconds": 2.008,
+        "result": "pass",
+        "command": [
+          "python",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_source_search_comparison.py",
+          "-k",
+          "omitted",
+          "-v"
+        ],
+        "source_cut": "Final pinned source map; no source/test edits during these final-cut cohorts.",
+        "exit_code": 0
+      },
+      {
+        "module": "test_source_search_comparison",
+        "selection": "combined full-byte capacity partial",
+        "methods": 1,
+        "seconds": 217.298,
+        "result": "pass",
+        "command": [
+          "python",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_source_search_comparison.py",
+          "-k",
+          "parent_addition",
+          "-v"
+        ],
+        "source_cut": "Final pinned source map; no source/test edits during these final-cut cohorts.",
+        "exit_code": 0
+      },
+      {
+        "module": "test_source_search_comparison",
+        "selection": "two-iteration actual lifecycle",
+        "methods": 1,
+        "result": "pass",
+        "seconds": 2451.003,
+        "command": [
+          "python",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_source_search_comparison.py",
+          "-k",
+          "actual_root_and_child",
+          "-v"
+        ],
+        "source_cut": "Final pinned source map; no source/test edits during these final-cut cohorts.",
+        "exit_code": 0
+      },
+      {
+        "module": "test_source_search_comparison",
+        "selection": "root retains failed history",
+        "methods": 1,
+        "result": "pass",
+        "seconds": 1288.789,
+        "selector": "-k complete_failed",
+        "command": [
+          "python",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_source_search_comparison.py",
+          "-k",
+          "complete_failed",
+          "-v"
+        ],
+        "source_cut": "Final pinned source map; no source/test edits during these final-cut cohorts.",
+        "exit_code": 0
+      },
+      {
+        "module": "test_source_root_feedback",
+        "methods": 3,
+        "seconds": 28.387,
+        "result": "pass",
+        "command": [
+          "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-tools-20261024-v1\\Scripts\\python.exe",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_source_root_feedback.py",
+          "-v"
+        ],
+        "source_cut": "Final pinned source map; no source/test edits during these final-cut cohorts.",
+        "exit_code": 0
+      },
+      {
+        "module": "test_source_comparison_limits",
+        "methods": 3,
+        "seconds": 0.001,
+        "result": "pass",
+        "command": [
+          "python",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_source_comparison_limits.py",
+          "-v"
+        ],
+        "source_cut": "Final pinned source map; no source/test edits during these final-cut cohorts.",
+        "exit_code": 0
+      },
+      {
+        "module": "test_source_feedback",
+        "methods": 13,
+        "seconds": 224.176,
+        "result": "pass",
+        "command": [
+          "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-tools-20261024-v1\\Scripts\\python.exe",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_source_feedback.py",
+          "-v"
+        ],
+        "source_cut": "Final pinned source map; no source/test edits during these final-cut cohorts.",
+        "exit_code": 0
+      },
+      {
+        "module": "test_source_failure_feedback",
+        "methods": 6,
+        "seconds": 208.795,
+        "result": "pass",
+        "command": [
+          "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-tools-20261024-v1\\Scripts\\python.exe",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_source_failure_feedback.py",
+          "-v"
+        ],
+        "source_cut": "Final pinned source map; no source/test edits during these final-cut cohorts.",
+        "exit_code": 0
+      }
+    ],
+    "scope": "Separate supplied-worker/response cohorts, not a full suite, live judgment, confinement exercise or demonstrated repair.",
+    "fixture_change": "Main lifecycle uses zero proposal callbacks to avoid redundant feedback-echo receipt amplification; full protected original owner/worker notes, genuine supplied generation/native operations, two counted iterations, older-edge resolver and keyless replay remain required. Earlier PR130 separately exercised charged proposal callbacks.",
+    "quality": {
+      "commands": [
+        {
+          "name": "lint",
+          "seconds": 0.23,
+          "exit_code": 0
+        },
+        {
+          "name": "format",
+          "seconds": 0.217,
+          "exit_code": 0
+        },
+        {
+          "name": "types-windows",
+          "seconds": 4.14,
+          "exit_code": 0
+        },
+        {
+          "name": "types-linux",
+          "seconds": 3.887,
+          "exit_code": 0
+        },
+        {
+          "name": "security",
+          "seconds": 3.584,
+          "exit_code": 0
+        },
+        {
+          "name": "runtime-audit",
+          "seconds": 19.289,
+          "exit_code": 0
+        },
+        {
+          "name": "development-audit",
+          "seconds": 3.073,
+          "exit_code": 0
+        },
+        {
+          "name": "compile",
+          "seconds": 1.02,
+          "exit_code": 0
+        }
+      ],
+      "source_count": 234,
+      "all_sources_unchanged": true,
+      "evidence_file": "search-comparison-quality-v1.json"
+    },
+    "ci_inventory": {
+      "occurrences": 1865,
+      "shard_counts": [
+        1,
+        626,
+        618,
+        620
+      ],
+      "census_sha256": "19507f9e472c0bfcaecbc13090361420775f05f4ac3234c4c13bc14b1e58d7c9",
+      "test_bodies_executed": false
+    },
+    "hosted": "Current search cut awaits publication/hosted CI. Parent PR130 at c1cc148 has all four Ubuntu jobs passing; four Windows jobs remain running at this observation. No complete current-head or Windows pass claimed.",
+    "historical_checks": "One-iteration diagnostic completed at the prior source cut; legacy task-only method passed at its earlier cut in 113.661s. Neither substitutes for final-cut lifecycle checks.",
+    "passed_methods": 32,
+    "new_methods": 13,
+    "existing_methods": 19,
+    "main_lifecycle_seconds": 2451.003,
+    "practical_limit": "The supplied two-iteration lifecycle plus independent original-edge/read-only/keyless replay assertions took 40m51; the failed-history lifecycle took 21m29. These are bounded functionality results, not future-grid runtime feasibility.",
+    "source_scope_note": "All nine successful cohorts use the final seven-file pin map. Preparation 2.323s and omitted/False 2.008s are explicit final-cut rechecks; earlier 2.141s/2.356s observations are not counted."
+  },
+  "preservation": {
+    "format": "buddha.source-search-comparison-source-preservation.v1",
+    "checked_at_utc": "2026-10-25T04:46:42.279867+00:00",
+    "captured_file_count": 451,
+    "changed": 0,
+    "unchanged": true,
+    "input_evidence_sha256": "a00f60b16894b5ac725564e920ef0f27cc9f6f9ffdf3d2600f32a2888f674017",
+    "paid_calls": 0
+  },
+  "bounded_user_requested_research": {
+    "record": "docs/RESEARCH.md#8-bounded-cross-check-after-the-current-source-regression",
+    "DGM_revision": "a565fd2d1dca504ef5104a7cc0f3bdc4ab9b4fd2",
+    "Harness2_revision": "1cfe254e8d25b15f37048c3730134686abe60335",
+    "Harness2_paper": "https://arxiv.org/html/2610.14224v1",
+    "conclusion": "Supports current comparisons, negative-result retention and separation of exploration/adoption; no redesign or new required slice.",
+    "limits": "Selected README/core source/paper sections, not exhaustive audit or reproduction; no third-party code copied or executed."
+  },
+  "remaining": [
+    "Versioned own-cell fixed-improver study and matching assessment integration; preserve study/assessment v1/v2.",
+    "Actual consumer/request-capacity and concrete grid/resource/family/uncertainty/review feasibility, prospective adoption and dedicated funding.",
+    "Controlled IMP-01 experiment, independent held-out/transfer execution and human review under EVAL-02.",
+    "Long supplied-fixture timings do not establish practical full-grid feasibility."
+  ],
+  "paid_provider_calls": 0,
+  "new_authorization": false,
+  "live_run_command": false,
+  "historical_results_altered": false,
+  "official_scoring_altered": false,
+  "development_PR_merged": false,
+  "recorded_at_utc": "2026-10-25T04:46:41.795966+00:00",
+  "plan_preservation": {
+    "format": "buddha.source-search-comparison-plan-preservation.v1",
+    "revision": 132,
+    "before_sha256": "5cb62fa6bc762e27fb6f252434df2e58d6b76b28744d1b47c202b1928bd7278e",
+    "after_sha256": "7a37d5cac81e3f39dc05f7600fa1ea20381757a1d9b682d62cb1ec2811a890ea",
+    "prior_history_rows": 131,
+    "all_prior_history_rows_byte_preserved": true,
+    "all_unlisted_raw_bytes_preserved": true,
+    "changed_existing_lines": 3,
+    "added_finding_rows": 2,
+    "added_history_rows": 1,
+    "remaining_gates": [
+      "IMP-01",
+      "EVAL-02"
+    ],
+    "sole_next": "IMP-01"
+  }
+}

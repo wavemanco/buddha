@@ -74,7 +74,9 @@ def _checked[**P, T](function: Callable[P, T]) -> Callable[P, T]:
             _Busy,
             _Unsupported,
         ) as error:
-            if isinstance(error, CandidateImprovementError):
+            from buddha.source_feedback import SourceFeedbackTooLarge
+
+            if isinstance(error, (CandidateImprovementError, SourceFeedbackTooLarge)):
                 raise
             raise CandidateImprovementError(
                 "candidate improvement inputs or evidence are invalid"
@@ -202,6 +204,8 @@ def _definition(
             "detached improvement requires complete development feedback"
         )
     provenance_record = _object(bundle["provenance"])
+    if detached and provenance_record["format"] == "buddha.source-screen-feedback.v7":
+        raise CandidateImprovementError("root comparison supports inherited search only")
     if (
         provenance_record["format"]
         in {"buddha.source-screen-feedback.v5", "buddha.source-screen-feedback.v6"}

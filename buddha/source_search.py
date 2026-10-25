@@ -25,10 +25,10 @@ from buddha import (
 from buddha import native_pipeline as pipeline
 from buddha.answers import _Artifact
 from buddha.authorization import Authorization
-from buddha.doctor import _authority, _Busy, _Unsupported
+from buddha.doctor import _authority, _Busy, _Capture, _Unsupported
 from buddha.gateway import GatewayCall, RawHTTPTransport, _input_records, _review
 from buddha.gateway_history import HistoricalGatewayOperation
-from buddha.native_evidence import NativeEvidence, authority_observation
+from buddha.native_evidence import NativeEvidence, _adopt_capture, authority_observation
 from buddha.releases import (
     MAX_SOURCE_BYTES,
     Release,
@@ -47,6 +47,7 @@ from buddha.releases import (
 from buddha.wire import RawEnvelope, WireError, _integer, extract_usage
 
 _FORMAT = "buddha.source-search.v1"
+_COMPARISON_MANIFEST = "buddha.source-search-manifest.v6"
 _CAPACITY_MANIFEST = "buddha.source-search-manifest.v5"
 _COPY_MANIFEST = "buddha.source-search-manifest.v4"
 _MANIFEST = _COPY_MANIFEST
@@ -68,16 +69,59 @@ SOURCE_COPY_POLICY = {
     "format": "buddha.source-copy.v1",
     "method": "verified_private_snapshot_before_owner",
 }
+FEEDBACK_COMPARISON_POLICY = {
+    "format": "buddha.source-search-feedback-comparison.v1",
+    "measurements": "complete_literal_outputs",
+    "parent": "original_immediate_counted_edge",
+    "root": "no_counted_parent_in_this_search",
+    "counted_failures": "complete_original_history",
+    "witness_failures": "none",
+}
 
 
 def _has_witness(state: dict[str, Any]) -> bool:
     return bool(
-        state["record"]["format"] in {_CAPACITY_MANIFEST, _COPY_MANIFEST, _WITNESS_MANIFEST}
+        state["record"]["format"]
+        in {_COMPARISON_MANIFEST, _CAPACITY_MANIFEST, _COPY_MANIFEST, _WITNESS_MANIFEST}
     )
 
 
 def _has_source_copy(state: dict[str, Any]) -> bool:
-    return bool(state["record"]["format"] in {_CAPACITY_MANIFEST, _COPY_MANIFEST})
+    return bool(
+        state["record"]["format"] in {_COMPARISON_MANIFEST, _CAPACITY_MANIFEST, _COPY_MANIFEST}
+    )
+
+
+def _has_feedback_comparison(state: dict[str, Any]) -> bool:
+    return bool(state["record"]["format"] == _COMPARISON_MANIFEST)
+
+
+def _comparison_selector(
+    value: object, reference: dict[str, object], scope: Path
+) -> dict[str, object]:
+    """Check declaration shape only; original custody is checked before use."""
+    selector = _object(value)
+    if set(selector) == {"root"}:
+        root = _object(selector["root"], {"directory", "authorization", "manifest_sha256"})
+        if _witness_path(root["directory"]) != scope or (
+            root["authorization"] != reference["authorization"]
+        ):
+            raise SourceSearchError("root comparison changes its declared search scope")
+        _witness_path(root["authorization"])
+        _digest(root["manifest_sha256"])
+    else:
+        edge = _object(selector, {"parent", "proposal", "screen"})
+        for item in edge.values():
+            ref = _object(item, {"directory", "authorization", "report_sha256"})
+            if not _witness_path(ref["directory"]).is_relative_to(scope) or (
+                ref["authorization"] != reference["authorization"]
+            ):
+                raise SourceSearchError("comparison edge changes its declared search scope")
+            _witness_path(ref["authorization"])
+            _digest(ref["report_sha256"])
+        if _json(edge["screen"]) != _json(reference):
+            raise SourceSearchError("comparison edge names another selected screen")
+    return _load(_json(selector))
 
 
 def _source_copy_choice(mutation_witness: bool, source_copy: bool | None) -> bool:
@@ -198,12 +242,22 @@ class _WitnessTreatment(_Artifact):
             | (
                 {"proposal_capacity"}
                 if _load(self.data).get("format") == "buddha.source-mutation-witness-treatment.v2"
+                or (
+                    _load(self.data).get("format") == "buddha.source-mutation-witness-treatment.v3"
+                    and "proposal_capacity" in _load(self.data)
+                )
+                else set()
+            )
+            | (
+                {"feedback_comparison"}
+                if _load(self.data).get("format") == "buddha.source-mutation-witness-treatment.v3"
                 else set()
             ),
         )
         if record["format"] not in {
             "buddha.source-mutation-witness-treatment.v1",
             "buddha.source-mutation-witness-treatment.v2",
+            "buddha.source-mutation-witness-treatment.v3",
         } or (
             _json(record["policy"]) != _json(MUTATION_WITNESS_POLICY)
             or type(record["source_copy"]) is not bool
@@ -218,6 +272,10 @@ class _WitnessTreatment(_Artifact):
         parent_directory = _witness_path(parent["directory"])
         authority = _witness_path(parent["authorization"])
         _digest(parent["report_sha256"])
+        if "feedback_comparison" in record:
+            if record["source_copy"] is not True:
+                raise SourceSearchError("comparative witnesses require verified source copies")
+            _comparison_selector(record["feedback_comparison"], parent, scope)
         if (
             directory == scope
             or not directory.is_relative_to(scope)
@@ -274,6 +332,7 @@ def _witness_declaration(
     controls: Mapping[Path, str],
     source_copy: bool,
     proposal_capacity: dict[str, object] | None = None,
+    feedback_comparison: dict[str, object] | None = None,
 ) -> _WitnessTreatment:
     if (
         not isinstance(scope, Path)
@@ -290,7 +349,9 @@ def _witness_declaration(
     return _WitnessTreatment.from_bytes(
         _json(
             {
-                "format": "buddha.source-mutation-witness-treatment.v2"
+                "format": "buddha.source-mutation-witness-treatment.v3"
+                if feedback_comparison is not None
+                else "buddha.source-mutation-witness-treatment.v2"
                 if proposal_capacity is not None
                 else "buddha.source-mutation-witness-treatment.v1",
                 "scope": str(scope),
@@ -303,6 +364,11 @@ def _witness_declaration(
                 "controls": {str(path): digest for path, digest in controls.items()},
                 "source_copy": source_copy,
                 "policy": dict(MUTATION_WITNESS_POLICY),
+                **(
+                    {"feedback_comparison": feedback_comparison}
+                    if feedback_comparison is not None
+                    else {}
+                ),
                 **(
                     {
                         "proposal_capacity": source_capacity.check_proposal_capacity_policy(
@@ -331,6 +397,9 @@ def _search_witness_treatment(
         controls=state["controls"],
         source_copy=_has_source_copy(state),
         proposal_capacity=state["record"].get("proposal_capacity"),
+        feedback_comparison=_comparison_for(reader, state, reference, pending=True)
+        if _has_feedback_comparison(state)
+        else None,
     )
 
 
@@ -634,21 +703,29 @@ def _original(reader: NativeEvidence) -> dict[str, Any]:
         }
         | (
             {"mutation_witness"}
-            if value.get("format") in {_CAPACITY_MANIFEST, _COPY_MANIFEST, _WITNESS_MANIFEST}
+            if value.get("format")
+            in {_COMPARISON_MANIFEST, _CAPACITY_MANIFEST, _COPY_MANIFEST, _WITNESS_MANIFEST}
             else set()
         )
         | (
             {"source_copy"}
-            if value.get("format") in {_CAPACITY_MANIFEST, _COPY_MANIFEST}
+            if value.get("format") in {_COMPARISON_MANIFEST, _CAPACITY_MANIFEST, _COPY_MANIFEST}
             else set()
         )
-        | ({"proposal_capacity"} if value.get("format") == _CAPACITY_MANIFEST else set()),
+        | (
+            {"proposal_capacity"}
+            if value.get("format") == _CAPACITY_MANIFEST
+            or (value.get("format") == _COMPARISON_MANIFEST and "proposal_capacity" in value)
+            else set()
+        )
+        | ({"feedback_comparison"} if value.get("format") == _COMPARISON_MANIFEST else set()),
     )
     context_raw = reader.bound(anchor, reader.root / "context.json")
     context = _object(_load(context_raw), {"format", "manifest_sha256"})
     if (
         record["format"]
         not in {
+            _COMPARISON_MANIFEST,
             _CAPACITY_MANIFEST,
             _COPY_MANIFEST,
             _WITNESS_MANIFEST,
@@ -662,15 +739,22 @@ def _original(reader: NativeEvidence) -> dict[str, Any]:
         or record["authorization"] != str(reader.authorization)
     ):
         raise SourceSearchError("search differs from its original first-owner declaration")
-    if record["format"] in {_CAPACITY_MANIFEST, _COPY_MANIFEST, _WITNESS_MANIFEST} and _json(
-        record["mutation_witness"]
-    ) != _json(MUTATION_WITNESS_POLICY):
+    if record["format"] in {
+        _COMPARISON_MANIFEST,
+        _CAPACITY_MANIFEST,
+        _COPY_MANIFEST,
+        _WITNESS_MANIFEST,
+    } and _json(record["mutation_witness"]) != _json(MUTATION_WITNESS_POLICY):
         raise SourceSearchError("search changes its fixed bounded mutation witness")
-    if record["format"] in {_CAPACITY_MANIFEST, _COPY_MANIFEST} and _json(
+    if record["format"] in {_COMPARISON_MANIFEST, _CAPACITY_MANIFEST, _COPY_MANIFEST} and _json(
         record["source_copy"]
     ) != _json(SOURCE_COPY_POLICY):
         raise SourceSearchError("search changes its fixed verified source-copy policy")
-    if record["format"] == _CAPACITY_MANIFEST:
+    if record["format"] == _COMPARISON_MANIFEST and (
+        _json(record["feedback_comparison"]) != _json(FEEDBACK_COMPARISON_POLICY)
+    ):
+        raise SourceSearchError("search changes its original comparison feedback treatment")
+    if "proposal_capacity" in record:
         from buddha import source_capacity
 
         source_capacity.check_proposal_capacity_policy(record["proposal_capacity"])
@@ -694,9 +778,7 @@ def _original(reader: NativeEvidence) -> dict[str, Any]:
         for path in candidate_generation._recorded_sources(
             _sources()
             + (
-                [Path(source_capacity.__file__).absolute()]
-                if record["format"] == _CAPACITY_MANIFEST
-                else []
+                [Path(source_capacity.__file__).absolute()] if "proposal_capacity" in record else []
             ),
             anchor.manifest["core"],
         )
@@ -712,6 +794,54 @@ def _original(reader: NativeEvidence) -> dict[str, Any]:
         "manifest_sha256": pipeline._sha(record),
         "context_sha256": pipeline._sha(context),
     }
+
+
+@_checked
+def _read_comparison_root(
+    root: object,
+    reference: dict[str, object],
+    candidate_id: str,
+    *,
+    sink: _Capture | None = None,
+) -> dict[str, object]:
+    """Read the owner-bound declared seed without restoring the search prefix."""
+    value = _object(root, {"directory", "authorization", "manifest_sha256"})
+    scope, authority = _witness_path(value["directory"]), _witness_path(value["authorization"])
+    ref = _object(reference, {"directory", "authorization", "report_sha256"})
+    if ref["directory"] != str(scope / "seed") or ref["authorization"] != str(authority):
+        raise SourceSearchError("root feedback must name this search's exact declared seed")
+    if sink is not None and (type(sink) is not _Capture or sink.root != scope):
+        raise SourceSearchError("root feedback needs its original scope observation")
+    reader = NativeEvidence(scope, authority, error_type=SourceSearchError)
+    state = _original(reader)
+    screen = state["screen"]
+    if not _has_feedback_comparison(state) or (
+        _digest(value["manifest_sha256"]) != state["manifest_sha256"]
+        or _digest(candidate_id) != screen.candidate_id
+        or reader.raw(scope / "seed/screen.json") != screen.to_bytes()
+    ):
+        raise SourceSearchError("root feedback changes its original seed declaration")
+    report = _load(reader.raw(scope / "seed/report.json", _digest(ref["report_sha256"])))
+    if (
+        report["candidate_id"] != candidate_id
+        or report["screen_sha256"] != screen.fingerprint()
+        or report["comparison_key"] != screen.comparison_key()
+    ):
+        raise SourceSearchError("root feedback changes its declared measured occasion")
+    result: dict[str, object] = {
+        "directory": str(scope),
+        "authorization": str(authority),
+        "manifest_sha256": state["manifest_sha256"],
+        "context_sha256": state["context_sha256"],
+        "candidate_id": candidate_id,
+        "screen_sha256": screen.fingerprint(),
+        "reference": reference,
+    }
+    if sink is None:
+        reader.finish()
+    else:
+        _adopt_capture(reader.capture, sink)
+    return result
 
 
 def _census(
@@ -801,7 +931,18 @@ def _bundle(
     failures: list[dict[str, object]],
     *,
     full_answers: bool,
+    comparison: dict[str, object] | None = None,
 ) -> dict[str, Any]:
+    if comparison is not None:
+        if not full_answers:
+            raise SourceSearchError("parent comparisons require complete literal feedback")
+        if set(comparison) == {"root"}:
+            return source_feedback._build_root_comparison(
+                directory, parent, comparison, failures, existing=directory.exists()
+            )
+        return source_feedback._build_comparison(
+            directory, parent, comparison, failures, existing=directory.exists()
+        )
     if failures:
         return source_feedback._build_failures(
             directory, parent, failures, existing=directory.exists(), full_answers=full_answers
@@ -841,7 +982,18 @@ def _plan(
     parent = parents[0]
     generation = _object(_parent_screen(reader, parent).to_record()["generation"])
     location = reader.root / "iterations" / str(iteration)
-    bundle = _bundle(location / "feedback", parent, failures, full_answers=_full_answers(state))
+    comparison = _comparison_for(reader, state, parent) if _has_feedback_comparison(state) else None
+    bundle = (
+        _bundle(
+            location / "feedback",
+            parent,
+            failures,
+            full_answers=_full_answers(state),
+            comparison=comparison,
+        )
+        if comparison is not None
+        else _bundle(location / "feedback", parent, failures, full_answers=_full_answers(state))
+    )
     hashes = {name + ".json": pipeline._sha(bundle[name]) for name in _FILES}
     template = state["record"]["proposal_template"]
     descriptor = {
@@ -855,7 +1007,11 @@ def _plan(
         },
     }
     return {
-        "format": "buddha.source-search-plan.v2" if _has_witness(state) else _PLAN,
+        "format": "buddha.source-search-plan.v3"
+        if comparison is not None
+        else "buddha.source-search-plan.v2"
+        if _has_witness(state)
+        else _PLAN,
         "iteration": iteration,
         "prior_pool": refs,
         "selection": selection,
@@ -863,6 +1019,7 @@ def _plan(
         "failures": failures,
         "feedback_sha256": hashes,
         "proposal_descriptor": descriptor,
+        **({"feedback_comparison": comparison} if comparison is not None else {}),
         **(
             {"parent_witness": _witness_reference(reader, state, parent)}
             if _has_witness(state)
@@ -1227,6 +1384,14 @@ def _witness_parent(
     reference = _object(record["parent"])
     report, parent = _parent_evidence(reader, reference)
     base = source_screen.SourceScreen.from_bytes(_json(record["base_screen"]))
+    if "feedback_comparison" in record:
+        original = _original(reader)
+        if not _has_feedback_comparison(original) or (
+            base.to_bytes() != original["screen"].to_bytes()
+            or _json(record["controls"])
+            != _json({str(path): digest for path, digest in original["controls"].items()})
+        ):
+            raise SourceSearchError("comparative witness changes its original declared search")
     if parent.comparison_key() != base.comparison_key() or (
         _object(report["admission"])["eligible"] is not True
     ):
@@ -1271,15 +1436,23 @@ def _witness_materials(
     reference = _object(record["parent"])
     location = _witness_path(record["directory"])
     generation = _object(parent.to_record()["generation"])
-    bundle = _bundle(location / "feedback", reference, [], full_answers=True)
+    comparison = _object(record["feedback_comparison"]) if "feedback_comparison" in record else None
+    bundle = (
+        _bundle(location / "feedback", reference, [], full_answers=True, comparison=comparison)
+        if comparison is not None
+        else _bundle(location / "feedback", reference, [], full_answers=True)
+    )
     hashes = {name + ".json": pipeline._sha(bundle[name]) for name in _FILES}
     template = _object(record["proposal_template"])
     plan = {
-        "format": "buddha.source-mutation-witness-plan.v1",
+        "format": "buddha.source-mutation-witness-plan.v2"
+        if comparison is not None
+        else "buddha.source-mutation-witness-plan.v1",
         "policy": dict(MUTATION_WITNESS_POLICY),
         "parent": reference,
         "task": parent.tasks.select([parent.tasks.tasks[0].id]).to_record(),
         "feedback_sha256": hashes,
+        **({"feedback_comparison": comparison} if comparison is not None else {}),
         "proposal_descriptor": {
             "format": "buddha.candidate-improvement.v1",
             **{name: generation[name] for name in ("entrypoint", "runtime", "executor")},
@@ -1831,9 +2004,9 @@ def _execute_witness(
             return cast(dict[str, object], action["result"])
 
 
-def _decision(
-    reader: NativeEvidence, state: dict[str, Any], plan: dict[str, Any], known_ids: set[str]
-) -> tuple[dict[str, Any], dict[str, object] | None]:
+def _checked_proposal(
+    reader: NativeEvidence, state: dict[str, Any], plan: dict[str, Any]
+) -> tuple[dict[str, object], dict[str, Any], dict[str, Any] | None]:
     iteration = plan["iteration"]
     location = reader.root / "iterations" / str(iteration)
     _proposal_owner(reader, state, location, plan)
@@ -1858,6 +2031,83 @@ def _decision(
         raise SourceSearchError("proposal omitted its original plan or measured feedback controls")
     if reader.raw(location / "proposal.json") != _json(plan["proposal_descriptor"]):
         raise SourceSearchError("proposal descriptor changes its immutable iteration plan")
+    return proposal_ref, proposal, capacity
+
+
+def _checked_child(
+    reader: NativeEvidence, state: dict[str, Any], proposal: dict[str, Any], location: Path
+) -> tuple[dict[str, object], dict[str, Any]]:
+    reference = _ref(location / "screen", reader.authorization)
+    report = _read_ref(reader, reference)
+    _screen_owner(reader, state, location / "screen", _child_screen(state, proposal, location))
+    if report["comparison_key"] != state["screen"].comparison_key() or (
+        report["controls_sha256"] != state["controls_sha256"]
+    ):
+        raise SourceSearchError("child screen changes the original comparison pool")
+    return reference, report
+
+
+def _comparison_for(
+    reader: NativeEvidence,
+    state: dict[str, Any],
+    reference: dict[str, object],
+    *,
+    pending: bool = False,
+) -> dict[str, object]:
+    """Resolve one original counted edge, including a pre-decision child witness."""
+    if not _has_feedback_comparison(state):
+        raise SourceSearchError("comparison feedback was not declared by this search")
+    if _json(reference) == _json(state["seed"]):
+        return {
+            "root": {
+                "directory": str(reader.root),
+                "authorization": str(reader.authorization),
+                "manifest_sha256": state["manifest_sha256"],
+            }
+        }
+    location = pipeline._absolute(reference["directory"])
+    try:
+        relative = location.relative_to(reader.root).as_posix()
+    except ValueError:
+        raise SourceSearchError("comparison screen belongs to another search") from None
+    match = re.fullmatch(r"iterations/(0|[1-9][0-9]*)/screen", relative)
+    if match is None or reference["authorization"] != str(reader.authorization):
+        raise SourceSearchError("comparison needs an exact original counted child screen")
+    ordinal = int(match.group(1))
+    plan = state["checked_plans"].get(str(ordinal))
+    if plan is None or ordinal > len(state["decisions"]):
+        raise SourceSearchError("comparison precedes its verified original iteration plan")
+    if reader.raw(location.parent / "plan.json") != _json(plan):
+        raise SourceSearchError("comparison changes its original iteration plan")
+    if ordinal == len(state["decisions"]):
+        if not pending:
+            raise SourceSearchError("selected parent lacks its completed original decision")
+    else:
+        decision = state["decisions"][ordinal]
+        if decision["status"] != "admitted" or _json(decision["screen"]) != _json(reference):
+            raise SourceSearchError("comparison changes its admitted original screening occasion")
+    proposal_ref, proposal, _ = _checked_proposal(reader, state, plan)
+    if proposal["disposition"] != "materialized" or (
+        ordinal == len(state["decisions"])
+        and proposal["child"]["agent_sha256"] in state["known_ids"]
+    ):
+        raise SourceSearchError("comparison needs a new original materialized counted child")
+    screen_ref, report = _checked_child(reader, state, proposal, location.parent)
+    if _json(screen_ref) != _json(reference) or report["admission"]["eligible"] is not True:
+        raise SourceSearchError("comparison changes its eligible original child occasion")
+    if ordinal < len(state["decisions"]) and (
+        _json(state["decisions"][ordinal]["proposal"]) != _json(proposal_ref)
+    ):
+        raise SourceSearchError("comparison changes its original counted proposal")
+    return {"parent": plan["parent"], "proposal": proposal_ref, "screen": screen_ref}
+
+
+def _decision(
+    reader: NativeEvidence, state: dict[str, Any], plan: dict[str, Any], known_ids: set[str]
+) -> tuple[dict[str, Any], dict[str, object] | None]:
+    iteration = plan["iteration"]
+    location = reader.root / "iterations" / str(iteration)
+    proposal_ref, proposal, capacity = _checked_proposal(reader, state, plan)
     child_id, screen_ref, failed, witness_ref = None, None, None, None
     if proposal["disposition"] == "rejected":
         status = "rejected"
@@ -1866,15 +2116,7 @@ def _decision(
         if child_id in known_ids:
             status = "duplicate"
         else:
-            screen_ref = _ref(location / "screen", reader.authorization)
-            report = _read_ref(reader, screen_ref)
-            expected = _child_screen(state, proposal, location)
-            _screen_owner(reader, state, location / "screen", expected)
-            if (
-                report["comparison_key"] != state["screen"].comparison_key()
-                or report["controls_sha256"] != state["controls_sha256"]
-            ):
-                raise SourceSearchError("child screen changes the original comparison pool")
+            screen_ref, report = _checked_child(reader, state, proposal, location)
             if report.get("disposition") == "candidate_execution_failed":
                 status = "candidate_execution_failed"
                 failed = {"parent": plan["parent"], "proposal": proposal_ref, "screen": screen_ref}
@@ -1934,18 +2176,10 @@ def _pending_witness(
         )
     if not _has_witness(state) or not _present(reader, location / "screen/report.json"):
         return
-    _proposal_owner(reader, state, location, plan)
-    proposal = _read_ref(reader, _ref(location / "proposal", reader.authorization), proposal=True)
+    _, proposal, _ = _checked_proposal(reader, state, plan)
     if proposal["disposition"] != "materialized" or proposal["child"]["agent_sha256"] in known_ids:
         raise SourceSearchError("child screen precedes a new materialized original proposal")
-    reference = _ref(location / "screen", reader.authorization)
-    report = _read_ref(reader, reference)
-    _screen_owner(reader, state, location / "screen", _child_screen(state, proposal, location))
-    if (
-        report["comparison_key"] != state["screen"].comparison_key()
-        or report["controls_sha256"] != state["controls_sha256"]
-    ):
-        raise SourceSearchError("pending child changes the fixed comparison")
+    reference, report = _checked_child(reader, state, proposal, location)
     if report["admission"]["eligible"] is True:
         _witness_progress(reader, state, reference)
 
@@ -1977,6 +2211,7 @@ def _restore(
         parent_screens=[],
         mutation_progress={},
         witness_treatments={},
+        checked_plans={},
     )
     first = directory / "seed/report.json"
     if first.relative_to(directory).as_posix() not in reader.capture.entries:
@@ -2000,6 +2235,7 @@ def _restore(
         else:
             state["parent_screens"].append(seed_ref)
     known_ids = {state["screen"].candidate_id}
+    state["known_ids"] = known_ids
     for iteration in range(state["spec"]["iterations"]):
         location = directory / "iterations" / str(iteration)
         if (
@@ -2033,6 +2269,7 @@ def _restore(
                 "retained iteration plan changes its original parent or feedback"
             )
         state["plan_sha256"][str(iteration)] = pipeline._sha(plan)
+        state["checked_plans"][str(iteration)] = _load(raw)
         if decision_name not in reader.capture.entries:
             _pending_witness(reader, state, location, plan, known_ids)
             break
@@ -2239,15 +2476,19 @@ def prepare_source_search(
     mutation_witness: bool = True,
     source_copy: bool | None = None,
     proposal_capacity: dict[str, object] | None = None,
+    feedback_comparison: bool = False,
 ) -> Path:
     if (
         type(seed_screen) is not source_screen.SourceScreen
         or type(spec) is not SourceSearchSpec
         or not isinstance(authorization, Authorization)
         or type(mutation_witness) is not bool
+        or type(feedback_comparison) is not bool
     ):
         raise SourceSearchError("search requires its explicit artifacts and existing authority")
     copy_source = _source_copy_choice(mutation_witness, source_copy)
+    if feedback_comparison and not copy_source:
+        raise SourceSearchError("comparative feedback requires protected witnessed source copies")
     if proposal_capacity is not None:
         from buddha import source_capacity
 
@@ -2311,7 +2552,9 @@ def prepare_source_search(
         (directory / "iterations").mkdir()
         (directory / "observations").mkdir()
         manifest = {
-            "format": _CAPACITY_MANIFEST
+            "format": _COMPARISON_MANIFEST
+            if feedback_comparison
+            else _CAPACITY_MANIFEST
             if proposal_capacity is not None
             else (_MANIFEST if copy_source else _WITNESS_MANIFEST)
             if mutation_witness
@@ -2325,6 +2568,11 @@ def prepare_source_search(
             "controls": {str(p): h for p, h in controls.items()},
             **({"mutation_witness": dict(MUTATION_WITNESS_POLICY)} if mutation_witness else {}),
             **({"source_copy": dict(SOURCE_COPY_POLICY)} if copy_source else {}),
+            **(
+                {"feedback_comparison": dict(FEEDBACK_COMPARISON_POLICY)}
+                if feedback_comparison
+                else {}
+            ),
             **(
                 {
                     "proposal_capacity": source_capacity.check_proposal_capacity_policy(
@@ -2463,11 +2711,22 @@ def run_source_search(directory: Path, *, transport: RawHTTPTransport) -> dict[s
                 )
                 reader.capture.finish()
                 pipeline._same_or_write(location / "plan.json", _json(plan))
-                bundle = _bundle(
-                    location / "feedback",
-                    plan["parent"],
-                    state["failures"],
-                    full_answers=_full_answers(state),
+                comparison = plan.get("feedback_comparison")
+                bundle = (
+                    _bundle(
+                        location / "feedback",
+                        plan["parent"],
+                        state["failures"],
+                        full_answers=_full_answers(state),
+                        comparison=comparison,
+                    )
+                    if comparison is not None
+                    else _bundle(
+                        location / "feedback",
+                        plan["parent"],
+                        state["failures"],
+                        full_answers=_full_answers(state),
+                    )
                 )
                 _write_packet(location / "feedback", plan, bundle)
                 pipeline._same_or_write(
@@ -2586,6 +2845,8 @@ def run_source_search(directory: Path, *, transport: RawHTTPTransport) -> dict[s
             raise SourceSearchInterrupted(observe("cancelled", child)) from None
         except _ProposalCapacityStop as error:
             return observe("proposal_capacity", error.checkpoint)
+        except source_feedback.SourceFeedbackReconstructionLimit:
+            raise SourceSearchStopped(observe("feedback_reconstruction_limit", child)) from None
         except source_feedback.SourceFeedbackTooLarge:
             raise SourceSearchStopped(observe("feedback_capacity", child)) from None
         except (ValueError, TypeError, KeyError, OSError, RecursionError):

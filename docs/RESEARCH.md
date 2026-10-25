@@ -121,3 +121,38 @@ Separate three acceptance claims. **Engineering validity** establishes that acco
 The first experiment should compare a fixed generator, prompt-policy evolution, and archive search using the same backbone and total budget. Include archive and feedback ablations before attributing gains to open-endedness or reflection. A leaderboard claim additionally requires the official generation/evaluation protocol, compatible access conditions, and a verified contemporary baseline. Local proxy scores are useful diagnostics, but must remain labeled as proxies.
 
 The first slice should leave a reviewable design and runnable acceptance contract. It should stop before autonomous evolution, paid calls, unrestricted code execution, or any claim of competitive performance. Subsequent slices should implement only the approved boundary and collect evidence against the frozen claims.
+
+## 8. Bounded cross-check after the current source regression
+
+October 24, 2026. This user-requested follow-up checks selected primary-source
+documentation and loop code, rather than reopening the design. No third-party
+code was copied or executed; reported research gains were not independently
+reproduced. [PLAN.md](PLAN.md) remains the scheduling authority.
+
+**Observed DGM source:** At revision `a565fd2d1dca504ef5104a7cc0f3bdc4ab9b4fd2`,
+the outer loop defaults to keeping evaluated children in its archive. The optional
+`keep_better` rule compares against the original baseline minus a tolerance,
+rather than the immediate parent. Selected parent patches are inherited before
+the patched coding agent authors another change. Post-evaluation diagnosis is
+optional. These mechanisms permit exploration without guaranteeing that each
+child improves. [Outer loop](https://github.com/jennyzzt/dgm/blob/a565fd2d1dca504ef5104a7cc0f3bdc4ab9b4fd2/DGM_outer.py),
+[self-improvement step](https://github.com/jennyzzt/dgm/blob/a565fd2d1dca504ef5104a7cc0f3bdc4ab9b4fd2/self_improve_step.py).
+
+**Observed Harness2 source and paper:** The contrastive step executes a reference
+and candidates on the same task under matched configurations, then examines
+behavior and code differences. The authors explicitly distinguish this evidence
+from verified correctness. Sequential recursion carries a composed harness
+forward without a guaranteed score gain. Its persistent experience library is
+a related mechanism, not evidence that Buddha needs another library now.
+[Paper sections 2.2-2.3](https://arxiv.org/html/2610.14224v1#S2.SS2),
+[recursion source at revision 1cfe254](https://github.com/google-research/harness2/blob/1cfe254e8d25b15f37048c3730134686abe60335/harness2/core/recursion.py).
+
+**Inference for Buddha:** The cross-check supports the current exact-parent,
+complete-output feedback connection, retained negative attempts and separation
+between exploratory ancestry and measured best candidates. It supplies no reason
+to change NoveltyBench scoring or restart the architecture. A reusable lessons
+library or composition of multiple proposals can remain later experiments.
+Neither substitutes for the existing matched improver comparison and independent
+held-out evaluation. Full code-diff feedback could be assessed later if the
+current source, original hypothesis and paired outputs prove insufficient;
+it is not a requirement added by this spot-check.
