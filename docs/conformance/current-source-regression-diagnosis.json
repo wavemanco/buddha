@@ -1,0 +1,72 @@
+{
+  "format": "buddha.current-source-regression-response.v1",
+  "status": "observed_regression_with_proposed_remedies_not_demonstrated_fix",
+  "original_result": "src02-current-live-results.json",
+  "observed_loss_decomposition": {
+    "P_mean_utility": 5.993768036254777,
+    "C_mean_utility": 3.785857614581877,
+    "mean_utility_loss": 2.2079104216729006,
+    "digit_fraction_of_observed_utility_loss": 0.86332124395495,
+    "story_fraction_of_observed_utility_loss": 0.13667875604505,
+    "binary_fraction_of_observed_utility_loss": 0,
+    "all_mean_distinctiveness_loss_from_digit_task": true,
+    "interpretation": "Arithmetic description of this three-task observation, not a population estimate or causal intervention effect."
+  },
+  "raw_digit_outputs": {
+    "P": ["7", "3", "8", "4", "9", "1", "6", "2", "5", "0"],
+    "C": ["7", "7", "7", "7", "7", "7", "7", "7", "7", "7"]
+  },
+  "generation_controls": {
+    "same_model": "gpt-5.6-luna",
+    "same_system_instructions": true,
+    "same_reasoning_effort": "low",
+    "same_service_tier": "default",
+    "same_per_reply_completion_cap": 4096,
+    "temperature_top_p_seed": "absent",
+    "all_42_replies_finish_stop": true,
+    "parser_created_duplicates": false,
+    "truncation_or_malformed_batch_fallback": false
+  },
+  "simultaneous_generation_changes": [
+    "batch size",
+    "diversity wording",
+    "task wrapper",
+    "history representation",
+    "maximum aggregate output allowance"
+  ],
+  "findings": {
+    "SRC-REG-01": "Actual duplicate-digit collapse, weakened diversity instruction and stated repetition rationale; no parser-created repetition.",
+    "SRC-REG-02": "Multiple changes confounded; batching alone is not causally identified.",
+    "IMP1-FB-01": "C-to-W1 contains all30C answers and absolute measurements but no P baseline/P-to-C deltas. Existing failure feedback is for checked candidate_execution_failed outcomes, not complete low-score comparisons.",
+    "SRC-REG-03": "The one-iteration latest-child demonstration selected C; P remains the numerical frontier. Existing archive/frontier machinery is reusable; no confirmed champion was automatically replaced.",
+    "SRC-REG-04": "Byte-identical digit7 quality requests received5forP/7forC. Preserve original scores; declare repeats prospectively."
+  },
+  "identical_digit_quality_request_sha256": "bd5dee7bb7822d7fa17c1ee8082eb28a46f32ba49e9b67cfd884ca20bc0d34d5",
+  "read_only_reviews": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\current-source-regression-diagnosis-v1.json",
+      "sha256": "40950c9c0ed187450cb0d40ce83135bd0971d3fe287e7f6e2c2733c168770d1d",
+      "scope": "All42actualgeneration requests reconstructed as data; all60raw-derived P/C answers match saved outputs;41read inputs unchanged. No selected code execution."
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\current-regression-selection-review-v1.json",
+      "sha256": "295cdd915c1cf3fb362f6838291b18c73f1aad16e46816fb5572ee5fba39e100",
+      "scope": "Static end-to-end archive/selection/feedback/IMP-01 review; tests inspected, not run."
+    }
+  ],
+  "proposed_response": [
+    "Prepare a versioned comparative-feedback treatment using existing anchored compatible screens, lineage, full answers, provenance and capacity guards.",
+    "Reuse bounded archive exploration and retain the measured frontier separately from confirmed adoption; do not reject all weaker stepping stones.",
+    "Predeclare focused wording/batch comparisons with fixed history representation, varied tasks, repeats and matched declared resources; keep NoveltyBench unchanged.",
+    "Keep negative descendants visible; use existing paired/heldout/independent-review machinery before claiming gains."
+  ],
+  "no_historical_treatment_change": true,
+  "new_experiment_provider_calls": 0,
+  "selected_agent_execution": false,
+  "new_funding_or_live_command": false,
+  "host_model_review_usage": "unpriced Codex subscription usage; not human ratings",
+  "reference_paper": {
+    "url": "https://arxiv.org/html/2505.22954v3",
+    "scope": "DGM archive/stepping-stone rationale, not causal evidence for this run."
+  }
+}
