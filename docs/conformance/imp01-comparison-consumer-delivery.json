@@ -1,0 +1,282 @@
+{
+  "format": "buddha.improver-comparison-consumer-delivery.v1",
+  "status": "bounded_offline_observation_complete",
+  "date": "2026-10-24",
+  "base_commit": "b4b64a92ccd71ba5de6c483e232e8e9a54f1b2c6",
+  "gate": "IMP-01",
+  "claim": "Original frozen C forwards complete small v8-root and v6-own-parent packets through its actual isolated callback; no improved-improver or model-capacity claim.",
+  "driver": {
+    "path": "docs/conformance/imp01-comparison-consumer-rehearsal.py",
+    "sha256": "2d8fd5b5e4694618e07e990c1f2e37e6eca5135332d736518dd93911a4255b50"
+  },
+  "original_sources": {
+    "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-proposal-v3\\components\\source-agent\\candidate.py": "77cfa68f6b3c6996fd503e1ce6f7a964eb57abdb8bde98f6761de5f6e298ff4f",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\agent\\candidate.py": "4196cd29ffa76c6959e6f678a8286b1fde5b56e6a34a97dcf68787e1f22b3a43"
+  },
+  "runtime": {
+    "sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+    "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04"
+  },
+  "scope": "One supplied task, two literal answers, one start/occasion, two arms and two counted opportunities per arm. Only C's two proposal workers actually execute; P and all generation/native/witness roles are supplied.",
+  "observations": {
+    "requests": [
+      {
+        "bytes": 18561,
+        "feedback_escaped_bytes": 1207,
+        "feedback_sha256": "cf5b9e1497f7b30ba684c352be7ae300304f68c95970c7240e5f48ad70c3ae78",
+        "measurement_index": [
+          {
+            "task_id": "1"
+          }
+        ],
+        "notes": [
+          {
+            "bytes": 1023,
+            "sha256": "d97c8573498843b9ee3cd9f9b9c565cfe36df66d762b6a022ada9a41bf8edde8",
+            "task_id": "1"
+          }
+        ],
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-comparison-consumer-rehearsal-v3-fixture\\fixture\\consumer-study\\cells\\0\\0\\1\\0\\proposal\\owners\\0",
+        "parent_source_sha256": "77cfa68f6b3c6996fd503e1ce6f7a964eb57abdb8bde98f6761de5f6e298ff4f",
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-comparison-consumer-rehearsal-v3-fixture\\request-0.json",
+        "sha256": "ee457d7b354b1c27b100c557628f028841fcab834bdabbe808d09d0adbe53178",
+        "slot": 0
+      },
+      {
+        "bytes": 17893,
+        "feedback_escaped_bytes": 2185,
+        "feedback_sha256": "be31039990a31dbeef53f6e1681f57e4fb4ffcfe16af4d9feff638e8acef2826",
+        "measurement_index": [
+          {
+            "task_id": "1"
+          }
+        ],
+        "notes": [
+          {
+            "bytes": 1923,
+            "sha256": "677e08a1658b7d9c4ff0f8ee49d2cf01eb127b34ea928d480432a56bdf0ca500",
+            "task_id": "1"
+          }
+        ],
+        "owner": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-comparison-consumer-rehearsal-v3-fixture\\fixture\\consumer-study\\cells\\0\\0\\1\\1\\proposal\\owners\\0",
+        "parent_source_sha256": "4196cd29ffa76c6959e6f678a8286b1fde5b56e6a34a97dcf68787e1f22b3a43",
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-comparison-consumer-rehearsal-v3-fixture\\request-1.json",
+        "sha256": "dc1493d61eefffca21f6bd521972d605b99190d469ff98107e2c90be23282059",
+        "slot": 1
+      }
+    ],
+    "full_literal_parent_and_feedback_preserved": true,
+    "full_current_and_parent_answers_preserved": true,
+    "omitted_answer_positions": 0,
+    "root": {
+      "parent_measurements": null,
+      "deltas": null,
+      "reason": "no_counted_parent_in_this_cell"
+    },
+    "own_edge": {
+      "supplied_utility_delta": -3,
+      "supplied_distinct_delta": -1,
+      "direction": "current_minus_parent"
+    },
+    "measurement_index": [
+      {
+        "task_id": "1"
+      }
+    ],
+    "index_interpretation": "C reads old flat metric fields; nested metrics do not enter its convenience index. Complete notes and deltas remain in development_feedback. No model-attention or causal-use claim.",
+    "second_worker_terminal": {
+      "status": "failed",
+      "reason": "agent_error",
+      "cause": "Intentionally supplied malformed proposal JSON; original controller records a rejected opportunity."
+    },
+    "coverage": {
+      "attempted_opportunities": 4,
+      "completed_cells": 2,
+      "completed_common": 1,
+      "completed_opportunities": 4,
+      "expected_cells": 2,
+      "expected_common": 1,
+      "expected_opportunities": 4,
+      "in_flight_opportunities": 0,
+      "unattempted_opportunities": 0
+    },
+    "decisions": [
+      {
+        "arm": 0,
+        "slot": 0,
+        "status": "rejected"
+      },
+      {
+        "arm": 1,
+        "slot": 0,
+        "status": "admitted"
+      },
+      {
+        "arm": 1,
+        "slot": 1,
+        "status": "rejected"
+      },
+      {
+        "arm": 0,
+        "slot": 1,
+        "status": "rejected"
+      }
+    ],
+    "initial_arm_finalist": "no_valid_descendant; no starter substitution",
+    "keyless_complete_replay_unchanged": true
+  },
+  "actual_workers": [
+    {
+      "container_id": "63e5f71149b1fd622bd066686a681b31b9e3f909ee853a7bd6df828150d4ef3c",
+      "elapsed_seconds": 3.3738903999328613,
+      "exit_code": 0,
+      "cleanup_status": "removed",
+      "stdout_bytes": 38809,
+      "stderr_bytes": 0,
+      "stdout": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-comparison-consumer-rehearsal-v3-fixture\\worker-0-stdout.bin",
+        "sha256": "28419394ba2a11e4ba11256f1197fb931eddee44b437b699d58ea51ef1b7f1ec"
+      },
+      "stderr": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-comparison-consumer-rehearsal-v3-fixture\\worker-0-stderr.bin",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "provenance_sha256": "eb11333d3273ae54051808f0ec1d096c2a5bb959b81b7b38bd1f43103ddf2f1c"
+    },
+    {
+      "container_id": "6fcc0ee333ed9c6d9af3fafaa8bde0a36678b480b19a118cbae74f55c81c9900",
+      "elapsed_seconds": 2.604228400043212,
+      "exit_code": 0,
+      "cleanup_status": "removed",
+      "stdout_bytes": 24420,
+      "stderr_bytes": 0,
+      "stdout": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-comparison-consumer-rehearsal-v3-fixture\\worker-1-stdout.bin",
+        "sha256": "2f8e834ab0a05a324d897fbe3fed7dba1f4b4818f25b4fd5f09764f682a1c240"
+      },
+      "stderr": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-comparison-consumer-rehearsal-v3-fixture\\worker-1-stderr.bin",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "provenance_sha256": "5d2c9f4cd75b58cba65a68f489b901673d9a04e7e3dfb8a9211e1b0dcd251956"
+    }
+  ],
+  "guard": [
+    "Exact pinned Docker executable, local endpoint and minimal image; no pull/build.",
+    "Existing executor owns exact two actual C proposal paths; network-none, read-only mounts/root, unprivileged user, bounded resources, owned removal verified.",
+    "Inherited credentials cleared before app imports; fake key only, host sockets and unregistered processes refused.",
+    "Original inputs read-only; writes/SQLite attachments confined to fresh fixture; selected sources never imported/compiled/executed on host."
+  ],
+  "accounting": {
+    "synthetic_only": true,
+    "operation_count": 10,
+    "spent_microusd": 110,
+    "reserved_microusd": 0,
+    "owners": 16,
+    "all_inactive": true,
+    "real_provider_calls": 0,
+    "real_keys_inherited": false
+  },
+  "runtime_observation": {
+    "driver_seconds": 669.113,
+    "outer_seconds": 680.512,
+    "limit": "Small supplied study and passive replay only; full-grid runtime remains unmeasured."
+  },
+  "preservation": {
+    "executing_inputs": 242,
+    "changed_inputs": [],
+    "original_captured_files": 451,
+    "changed_originals": []
+  },
+  "earlier_incomplete_attempts": [
+    {
+      "attempt": 1,
+      "phase": "guarded_preparation",
+      "outer_seconds": 10.354,
+      "driver_seconds": 4.505,
+      "actual_workers": 0,
+      "actual_requests": 0,
+      "reason": "Driver audit guard omitted unlink=True for removal of a freshly published temporary hard link.",
+      "correction": "Reuse the existing checked_write_target unlink option only for os.remove; write/link guards unchanged.",
+      "receipt": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-comparison-consumer-rehearsal-v1-wrapper.json",
+        "sha256": "5817df3f255f6d359dc9de5dd650784f87d1f975f03daa10c3fc73b3a09bdc3d",
+        "bytes": 1546
+      }
+    },
+    {
+      "attempt": 2,
+      "phase": "actual_consumer",
+      "outer_seconds": 290.495,
+      "driver_seconds": 277.882,
+      "actual_workers": 1,
+      "actual_requests": 1,
+      "reason": "Supplied fixture mislabeled an in-cell validity witness as a counted proposal and rejected it. Controller correctly kept P, and the driver's exact-parent guard refused before a second worker.",
+      "correction": "Match the two supplied counted owner paths exactly; production selection and source bytes unchanged.",
+      "synthetic_accounting": {
+        "spent_microusd": 88,
+        "reserved_microusd": 0,
+        "active_original_owners": 1,
+        "explanation": "Prepared second proposal owner; no second worker or callback. Original partial evidence retained, not automatically resumed or closed.",
+        "method": "Immutable file bytes deserialized into SQLite memory; no application import or original file SQL/write."
+      },
+      "receipt": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-comparison-consumer-rehearsal-v2-wrapper.json",
+        "sha256": "732351d523a1f57bc50a8e67158b0ed93f66f65a5935997e702eb684a9901769",
+        "bytes": 1547
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-comparison-consumer-rehearsal-v3-driver.json",
+      "sha256": "396449acac56bde51d4a916befea62a5bf7512279640376b1e1a66cf7cd2a02a",
+      "bytes": 90877
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-comparison-consumer-rehearsal-v3-wrapper.json",
+      "sha256": "98597472528b8d53c56beba90238c2368a201da2cb3aebfd6dc9f0db8c0eb49a",
+      "bytes": 1547
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-comparison-consumer-rehearsal-v3-inputs.json",
+      "sha256": "17d48931d0497459be027c71d8ab3c506d6236a719ebfd9eba918277db4ecf2c",
+      "bytes": 43836
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-comparison-consumer-availability-v1.json",
+      "sha256": "89e50559c193e9ec720d39a48b0057a85f656006f19e35e40eb3f8f5e649bd27",
+      "bytes": 1103
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-comparison-consumer-independent-root-v1.json",
+      "sha256": "4ab14a5ca23d349b7baf8c3d9ef26fa9c0542ab8c980916ece0ac2c9a2b9c921",
+      "bytes": 2027
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-comparison-consumer-independent-edge-v1.json",
+      "sha256": "d20e68d711fd826a5ce048520add2810283f4f42d88d0526b00360ee6980d4cb",
+      "bytes": 2350
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-comparison-consumer-static-checks-v3.json",
+      "sha256": "c51e916c828ed1070d11012607acd1d09f90121b8ac0aefa5ee204f5b8c8ceed",
+      "bytes": 2269
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-comparison-consumer-observations-v1.json",
+      "sha256": "cd901193d8a9df4cbbbfc3aab0ee1e46c9d47cdc51836440c4afa11126f19b00",
+      "bytes": 22584
+    }
+  ],
+  "verification": "Completed pinned composed observation plus separate independent closed-artifact reads; Ruff, formatting and Bandit pass for final driver. No application/test module changed and no new full-suite or hosted-head pass is claimed.",
+  "treatment_inference": "The exact original P/C comparison may retain C as-is with its sparse-index limitation declared. A repaired C would be another treatment. This observation does not adopt a live protocol or show that C uses the deltas well.",
+  "remaining": [
+    "Actual P emitted-request compatibility at prospective settings; P is supplied here.",
+    "Adopt concrete original-source treatments, task grid, funding/fairness, runtime, uncertainty and review arrangements prospectively.",
+    "Verify both actors' actual future complete requests and output headroom under the declared capacity policy; synthetic test-model/100-token settings and 5+3 usage are not realistic vendor evidence.",
+    "Rehearse prospective v3 sealed assessment from its original trial controls; this standalone study cannot be attached retrospectively.",
+    "Exact hosted checks, separately approved live comparison and independent EVAL-02 evidence remain open."
+  ],
+  "unchanged": "Official NoveltyBench, historical P/C/answers/scores, production source, real financial authorizations, main README and unmerged development stack. No live command or allocation."
+}
