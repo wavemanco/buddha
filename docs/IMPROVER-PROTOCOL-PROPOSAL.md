@@ -227,9 +227,16 @@ The selected WildChat data/custody preparation is now complete at its bounded
 scope. No population decision remains pending. The explicit v4 capacity connection
 is implemented; executing-code verification remains separate from live readiness.
 The [concrete configuration draft](IMPROVER-WILDCHAT-CONFIGURATION.md) now
-passes existing study/assessment and full-grid data checks. Next resolve its
-exact input/request envelope and bind actual runtime/resources, aggregate caps,
-statistical adoption and review arrangements. Request a new allocation
+passes existing study/assessment and full-grid data checks. The next comparison
+will use the unchanged original-call capacity mode expressly allowed by DESIGN §4;
+there is no new requirement to guarantee acceptance of every future request
+before sending it. The separate documented model input limit and absence of a
+pre-send counter remain known limitations, with full-feedback and partial-stop
+guards preserved. The [readiness supplement](conformance/imp01-wildchat-readiness.json)
+records standard-speed request exclusion, runtime metadata availability and
+conditional cost/headroom arithmetic. Bind actual runtime/resources/fairness,
+enforceable aggregate caps, statistical adoption and review arrangements, and
+verify the concrete matched launcher. Request a new allocation
 only after those checks make a concrete live proposal reviewable. No new funds,
 owner or launch command follow from this preparation. This remains the original
 IMP-01 comparison; the DGM/Harness2 cross-check adds no redesign or new gate.
