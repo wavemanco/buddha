@@ -15,6 +15,26 @@ and keeps v2's aggregate funding rules, including an exactly matching declared
 development allowance and a separately bounded final allowance. It does not
 introduce a new analyzer, finalist rule or final-score feedback path.
 
+## Bounded v3 connection check
+
+The [recorded offline check](conformance/imp01-v3-sealed-rehearsal-delivery.json)
+starts a new v3 trial before development begins. Both improvers receive one
+opportunity from the same starting occasion; the controller then freezes the
+starter and two selected descendants and assesses all three roles on two final
+tasks. All six scheduled assessments, analysis and later read-only inspection
+complete. Original task text, full outputs, feedback, source identities, spending
+records and final-task boundaries stay connected throughout.
+
+This is a software check with supplied worker and judge responses. The two
+descendant roles intentionally contain identical source bytes, yet retain their
+separate histories and owners. Supplied role-specific scores exercise the
+analysis; they say nothing about which improver is better. No model or selected
+source runs in this check, no real API key is inherited and no API money is spent.
+The local test took 1,197.903 seconds. Actual frozen-P compatibility, both actors'
+model capacity, the future study's full-grid runtime, custody and prospective
+funding/statistical/review choices remain open. This check creates no live-run
+instruction or approval.
+
 ## What is fixed before work starts
 
 The prospective trial binds the complete task source, development declaration,
