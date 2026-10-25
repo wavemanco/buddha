@@ -7,7 +7,7 @@ owns the complete condition/arm schedule and never evaluates selected Python.
 import hashlib
 import re
 import sqlite3
-from collections.abc import Callable, Iterator, Mapping
+from collections.abc import Callable, Iterator, Mapping, Sequence
 from functools import wraps
 from pathlib import Path
 from typing import Any, cast
@@ -44,6 +44,7 @@ from buddha.wire import _integer
 
 _FORMAT = "buddha.improver-study.v1"
 _AGGREGATE_FORMAT = "buddha.improver-study.v2"
+_COMPARISON_FORMAT = "buddha.improver-study.v3"
 _CONTEXT = "buddha.improver-study-context.v1"
 _PLAN = "buddha.improver-study-plan.v1"
 _DECISION = "buddha.improver-study-decision.v1"
@@ -52,6 +53,14 @@ _OBSERVATION = "buddha.improver-study-observation.v1"
 _TOTALS = ("spent_microusd", "reserved_microusd", "committed_microusd", "operation_count")
 _CLAIM = "finite development comparison only; no improver effectiveness or sealed assessment claim"
 _COORD = ("start", "repetition", "arm", "slot")
+FEEDBACK_COMPARISON_POLICY = {
+    "format": "buddha.improver-study-feedback-comparison.v1",
+    "measurements": "complete_literal_outputs",
+    "parent": "original_immediate_counted_edge_in_same_cell",
+    "root": "no_counted_parent_in_this_cell",
+    "counted_failures": "complete_original_cell_history",
+    "mutation_witness": "complete_absolute_outputs",
+}
 
 
 class ImproverStudyError(ReleaseError):
@@ -132,7 +141,7 @@ def _bounded_limits(value: object, maximum: dict[str, Any]) -> None:
 
 def _check_funding(record: dict[str, Any], terms: dict[str, Any]) -> None:
     limits = record["limits"]["study"]
-    if record["format"] == _AGGREGATE_FORMAT:
+    if record["format"] in {_AGGREGATE_FORMAT, _COMPARISON_FORMAT}:
         if any(terms[key] != limits[key] for key in ("budget_microusd", "max_calls")):
             raise ImproverStudyError("original authority differs from declared aggregate limits")
     elif any(terms[key] < limits[key] for key in ("budget_microusd", "max_calls")):
@@ -173,13 +182,20 @@ def _declaration(
             "limits",
             "consumer_sources",
             "assessment",
-        },
+        }
+        | (
+            {"feedback_comparison"} if _object(value).get("format") == _COMPARISON_FORMAT else set()
+        ),
     )
     if (
-        record["format"] not in (_FORMAT, _AGGREGATE_FORMAT)
+        record["format"] not in (_FORMAT, _AGGREGATE_FORMAT, _COMPARISON_FORMAT)
         or type(record["experiment_id"]) is not str
     ):
         raise ImproverStudyError("unsupported finite improver study")
+    if record["format"] == _COMPARISON_FORMAT and (
+        _json(record["feedback_comparison"]) != _json(FEEDBACK_COMPARISON_POLICY)
+    ):
+        raise ImproverStudyError("finite study changes its fixed comparison feedback treatment")
     _path(record["experiment_id"])
     _integer(record["repetitions"], 1, 8)
     _integer(record["descendant_opportunities"], 1, 8)
@@ -259,7 +275,7 @@ def _declaration(
             "finite study requires complete mutation witnesses and source copies"
         )
     caps = _caps(record, base)
-    if record["format"] == _AGGREGATE_FORMAT:
+    if record["format"] in {_AGGREGATE_FORMAT, _COMPARISON_FORMAT}:
         limits = _object(record["limits"], set(caps))
         _bounded_limits(limits["study"], caps["study"])
         caps["study"] = limits["study"]
@@ -681,6 +697,114 @@ def _original(reader: NativeEvidence) -> dict[str, Any]:
     }
 
 
+@_checked
+def _read_comparison_root(
+    root: object,
+    reference: dict[str, object],
+    candidate_id: str,
+    improver_agent_sha256: str,
+    *,
+    sink: _Capture | None = None,
+    failure_history: Sequence[dict[str, object]] = (),
+) -> dict[str, object]:
+    """Bind the root and failure-edge scope; the controller owns complete ordered history."""
+    value = _object(
+        root, {"directory", "authorization", "declaration_sha256", "start", "repetition", "arm"}
+    )
+    scope, authority = _path_value(value["directory"]), _path_value(value["authorization"])
+    if sink is not None and (type(sink) is not _Capture or sink.root != scope):
+        raise ImproverStudyError("root feedback needs its original study observation")
+    reader = NativeEvidence(scope, authority, error_type=ImproverStudyError)
+    state = _original(reader)
+    record = state["record"]
+    if record["format"] != _COMPARISON_FORMAT or (
+        _digest(value["declaration_sha256"]) != pipeline._sha(record)
+    ):
+        raise ImproverStudyError("root feedback changes its original comparison declaration")
+    start = _integer(value["start"], 0, len(state["screens"]) - 1)
+    repetition = _integer(value["repetition"], 0, record["repetitions"] - 1)
+    arm = _integer(value["arm"], 0, 1)
+    screen = state["screens"][start]
+    actor = Selection.from_bytes(_json(record["improvers"][arm]["selection"])).agent_sha256
+    if _digest(candidate_id) != screen.candidate_id or _digest(improver_agent_sha256) != actor:
+        raise ImproverStudyError("root feedback changes its declared task parent or fixed improver")
+    directory = scope / "common" / str(start) / str(repetition) / "screen"
+    ref = _object(reference, {"directory", "authorization", "report_sha256"})
+    if ref["directory"] != str(directory) or ref["authorization"] != str(authority):
+        raise ImproverStudyError("root feedback needs its exact original common occasion")
+    owner = reader.owner(directory / "tasks/0/generation/owners/0")
+    bindings = reader._bindings(owner)
+    if any(bindings.get(str(path)) != digest for path, digest in state["controls"].items()):
+        raise ImproverStudyError("common root owner omitted original study controls")
+    if type(failure_history) not in {list, tuple} or len(failure_history) > 8:
+        raise ImproverStudyError("root feedback needs bounded original cell failure edges")
+    cell = scope / "cells" / str(start) / str(repetition) / str(arm)
+    for edge in failure_history:
+        checked = _object(edge, {"parent", "proposal", "screen"})
+        refs = {
+            name: _object(checked[name], {"directory", "authorization", "report_sha256"})
+            for name in ("parent", "proposal", "screen")
+        }
+        for item in refs.values():
+            if item["authorization"] != str(authority):
+                raise ImproverStudyError("failure history changes its original cell authority")
+            _digest(item["report_sha256"])
+        proposal = _path_value(refs["proposal"]["directory"])
+        try:
+            parts = proposal.relative_to(cell).parts
+        except ValueError:
+            raise ImproverStudyError("failure history changes its original cell") from None
+        if (
+            len(parts) != 2
+            or parts[1] != "proposal"
+            or not re.fullmatch(r"0|[1-9][0-9]*", parts[0])
+        ):
+            raise ImproverStudyError("failure history changes its original cell proposal")
+        slot = _integer(int(parts[0]), 0, record["descendant_opportunities"] - 1)
+        if refs["screen"]["directory"] != str(cell / str(slot) / "screen"):
+            raise ImproverStudyError("failure history changes its original cell screen")
+        parent = refs["parent"]
+        if _json(parent) != _json(ref):
+            try:
+                parts = _path_value(parent["directory"]).relative_to(cell).parts
+            except ValueError:
+                raise ImproverStudyError("failure history borrows another cell parent") from None
+            if (
+                len(parts) != 2
+                or parts[1] != "screen"
+                or not re.fullmatch(r"0|[1-9][0-9]*", parts[0])
+                or int(parts[0]) >= slot
+            ):
+                raise ImproverStudyError("failure history needs its exact earlier cell parent")
+    if reader.raw(directory / "screen.json") != screen.to_bytes():
+        raise ImproverStudyError("root feedback changes its original common screen")
+    report = _load(reader.raw(directory / "report.json", _digest(ref["report_sha256"])))
+    if (
+        report["candidate_id"] != candidate_id
+        or report["screen_sha256"] != screen.fingerprint()
+        or report["comparison_key"] != screen.comparison_key()
+    ):
+        raise ImproverStudyError("root feedback changes its declared measured occasion")
+    result = {
+        "directory": str(scope),
+        "authorization": str(authority),
+        "declaration_sha256": pipeline._sha(record),
+        "context_sha256": pipeline._sha(state["context"]),
+        "start": start,
+        "repetition": repetition,
+        "arm": arm,
+        "candidate_id": candidate_id,
+        "improver_agent_sha256": actor,
+        "screen_sha256": screen.fingerprint(),
+        "reference": ref,
+    }
+    if sink is None:
+        reader.finish()
+    else:
+        _adopt_capture(reader.capture, sink)
+    return _load(_json(result))
+
+
 def _census(reader: NativeEvidence, state: dict[str, Any]) -> None:
     record = state["record"]
     integer = r"(0|[1-9][0-9]*)"
@@ -1086,6 +1210,78 @@ def _parent_source(
     return path, digest
 
 
+@_checked
+def _comparison_for(
+    reader: NativeEvidence,
+    state: dict[str, Any],
+    coordinate: tuple[int, int, int, int],
+    reference: dict[str, object],
+    previous: list[dict[str, Any]],
+) -> dict[str, object]:
+    """Resolve the original selected parent only within its frozen study cell."""
+    record = state["record"]
+    if (
+        record["format"] != _COMPARISON_FORMAT
+        or type(coordinate) is not tuple
+        or len(coordinate) != 4
+    ):
+        raise ImproverStudyError("comparison feedback needs its declared original cell")
+    start = _integer(coordinate[0], 0, len(state["screens"]) - 1)
+    repetition = _integer(coordinate[1], 0, record["repetitions"] - 1)
+    arm = _integer(coordinate[2], 0, 1)
+    slot = _integer(coordinate[3], 0, record["descendant_opportunities"] - 1)
+    rows = _rows(previous, slot, slot)
+    actor = Selection.from_bytes(_json(record["improvers"][arm]["selection"])).agent_sha256
+    common = _object(state["common"][(start, repetition)])
+    known = [common]
+    matches = []
+    for ordinal, value in enumerate(rows):
+        row = _object(value)
+        if (
+            row.get("format") != _DECISION
+            or any(type(row.get(key)) is not int for key in _COORD)
+            or tuple(row[key] for key in _COORD) != (start, repetition, arm, ordinal)
+            or row.get("improver_agent_sha256") != actor
+        ):
+            raise ImproverStudyError("comparison changes its original earlier cell decision")
+        location = _location(reader.root, (start, repetition, arm, ordinal))
+        if reader.raw(location / "decision.json") != _json(row):
+            raise ImproverStudyError("comparison changes an original saved cell decision")
+        if not any(_json(row["parent"]) == _json(item) for item in known):
+            raise ImproverStudyError("comparison borrows a task parent from another cell")
+        proposal = _object(row["proposal"], {"directory", "authorization", "report_sha256"})
+        if proposal["directory"] != str(location / "proposal") or (
+            proposal["authorization"] != str(reader.authorization)
+        ):
+            raise ImproverStudyError("comparison changes the original counted proposal")
+        _digest(proposal["report_sha256"])
+        if row["status"] == "admitted":
+            screen = _object(row["screen"], {"directory", "authorization", "report_sha256"})
+            if screen["directory"] != str(location / "screen") or (
+                screen["authorization"] != str(reader.authorization)
+            ):
+                raise ImproverStudyError("comparison changes its admitted original screen")
+            _digest(screen["report_sha256"])
+            known.append(screen)
+            if _json(screen) == _json(reference):
+                matches.append(row)
+    if _json(reference) == _json(common):
+        return {
+            "study_root": {
+                "directory": str(reader.root),
+                "authorization": str(reader.authorization),
+                "declaration_sha256": pipeline._sha(record),
+                "start": start,
+                "repetition": repetition,
+                "arm": arm,
+            }
+        }
+    if len(matches) != 1:
+        raise ImproverStudyError("comparison has no unique earlier admitted parent in this cell")
+    selected = matches[0]
+    return {name: selected[name] for name in ("parent", "proposal", "screen")}
+
+
 def _plan(
     reader: NativeEvidence,
     state: dict[str, Any],
@@ -1109,17 +1305,35 @@ def _plan(
     improver = Selection.from_bytes(
         _json(state["record"]["improvers"][arm]["selection"])
     ).agent_sha256
+    comparison = (
+        _comparison_for(reader, state, coordinate, parent, previous)
+        if state["record"]["format"] == _COMPARISON_FORMAT
+        else None
+    )
     bundle = (
-        source_feedback._build_failures(
+        source_feedback.build_source_feedback(
             packet,
-            parent,
-            failures,
-            existing=packet.exists(),
-            full_answers=True,
+            reference=parent,
+            failure_history=failures,
             improver_agent_sha256=improver,
+            comparison=comparison,
+            existing=packet.exists(),
         )
-        if failures
-        else (source_feedback._build(packet, parent, existing=packet.exists(), full_answers=True))
+        if comparison is not None
+        else (
+            source_feedback._build_failures(
+                packet,
+                parent,
+                failures,
+                existing=packet.exists(),
+                full_answers=True,
+                improver_agent_sha256=improver,
+            )
+            if failures
+            else (
+                source_feedback._build(packet, parent, existing=packet.exists(), full_answers=True)
+            )
+        )
     )
     hashes = {name + ".json": pipeline._sha(bundle[name]) for name in shared._FILES}
     source_path, source_sha = _parent_source(reader, state, start, parent)
@@ -1135,7 +1349,7 @@ def _plan(
         "feedback": {"path": str(packet / "feedback.json"), "sha256": hashes["feedback.json"]},
     }
     plan = {
-        "format": _PLAN,
+        "format": "buddha.improver-study-plan.v2" if comparison is not None else _PLAN,
         **dict(zip(_COORD, coordinate, strict=True)),
         "improver_agent_sha256": improver,
         "prior_decisions": [pipeline._sha(row) for row in previous],
@@ -1144,6 +1358,7 @@ def _plan(
         "failures": failures,
         "feedback_sha256": hashes,
         "proposal_descriptor": descriptor,
+        **({"feedback_comparison": comparison} if comparison is not None else {}),
     }
     return plan, bundle
 
@@ -1731,6 +1946,10 @@ def _observations(reader: NativeEvidence, state: dict[str, Any]) -> None:
             )
         ):
             raise ImproverStudyError("partial observation changed its original study identity")
+        if value["reason"] == "feedback_reconstruction_limit" and (
+            state["record"]["format"] != _COMPARISON_FORMAT or value["child"] is not None
+        ):
+            raise ImproverStudyError("partial changes its versioned feedback resource stop")
         position = _object(value["position"], {*_COORD, "stage"})
         start = _integer(position["start"], 0, len(state["record"]["starts"]) - 1)
         repetition = _integer(position["repetition"], 0, state["record"]["repetitions"] - 1)
@@ -2112,6 +2331,15 @@ def run_improver_study(directory: Path, *, transport: RawHTTPTransport) -> dict[
                     return _observe(
                         directory, observed, authority, cast(str, child["reason"]), child
                     )
+            except source_feedback.SourceFeedbackReconstructionLimit:
+                _, observed = _restore(directory, authorization)
+                _check_current(observed)
+                reason = (
+                    "feedback_reconstruction_limit"
+                    if state["record"]["format"] == _COMPARISON_FORMAT
+                    else "feedback_capacity"
+                )
+                return _observe(directory, observed, authority, reason, None)
             except source_feedback.SourceFeedbackTooLarge:
                 _, observed = _restore(directory, authorization)
                 _check_current(observed)

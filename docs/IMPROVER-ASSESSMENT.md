@@ -7,6 +7,14 @@ chosen descendants on a separate, previously assigned final task set. The
 [paired analyzer](IMPROVER-ANALYSIS.md) calculates the resulting differences.
 The official evaluator and its metrics remain unchanged.
 
+Assessment declarations now pair explicitly with their development format:
+v1 with study v1, v2 with study v2, and v3 with study v3. Every mixed pair is
+refused before preparation. V3 adopts the
+[study's explicit comparison feedback](IMPROVER-STUDY.md#explicit-comparison-feedback-in-study-v3)
+and keeps v2's aggregate funding rules, including an exactly matching declared
+development allowance and a separately bounded final allowance. It does not
+introduce a new analyzer, finalist rule or final-score feedback path.
+
 ## What is fixed before work starts
 
 The prospective trial binds the complete task source, development declaration,
