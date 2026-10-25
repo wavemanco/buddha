@@ -42,7 +42,7 @@ class ImproverAssessmentTests(unittest.TestCase):
         path.write_bytes(_json(value))
         return {"path": str(path), "sha256": sha(path.read_bytes())}
 
-    def fixture(self, *, observer=None):
+    def fixture(self, *, observer=None, proposal_capacity=False):
         import test_improver_study as finite_fixtures
         import test_source_screen
 
@@ -63,7 +63,7 @@ class ImproverAssessmentTests(unittest.TestCase):
         self.f = f = finite_fixtures.FiniteImproverStudyTests("runTest")
         self.addCleanup(f.doCleanups)
         with patch.object(test_source_screen.SourceScreenTests, "setUp", sealed_split):
-            f.fixture_before_new_api()
+            f.fixture_before_new_api(proposal_capacity=proposal_capacity)
         f.api = improver_study
         self.root, self.engine = f.root, f.engine
         self.finite = f.declaration(improver_study)
@@ -920,6 +920,160 @@ class ImproverAssessmentTests(unittest.TestCase):
                 self.assertFalse(self.trial.exists())
 
         self.assertEqual(snapshot(), before)
+
+    def capacity_definition(self):
+        from buddha import source_capacity
+
+        self.fixture(proposal_capacity=True)
+        development = copy.deepcopy(self.finite)
+        development.update(
+            format="buddha.improver-study.v4",
+            feedback_comparison=dict(self.f.api.FEEDBACK_COMPARISON_POLICY),
+            proposal_capacity=source_capacity.proposal_capacity_policy(),
+        )
+        development["limits"]["study"] = {"budget_microusd": 1, "max_calls": 1}
+        definition = copy.deepcopy(self.definition)
+        definition["format"] = "buddha.improver-assessment-trial.v4"
+        definition["development"] = self.write("capacity-development.json", development)
+        for role in ("generation", "native"):
+            definition[role] = copy.deepcopy(development["starts"][0]["screen"][role])
+        definition["phase_limits"]["search"] = copy.deepcopy(development["limits"]["study"])
+        definition["phase_limits"]["final"] = {"budget_microusd": 1, "max_calls": 1}
+        return development, definition
+
+    def test_capacity_v4_assessment_accepts_explicit_policy_pair_and_aggregate_caps(self):
+        from buddha import source_capacity
+
+        development, definition = self.capacity_definition()
+        runtime = self.engine.candidate.expected_runtime
+        before = files(self.root), self.engine.physical_sends
+        with self.f.h.readonly():
+            parsed = self.api._definition(_json(definition), runtime, active=False)
+        self.assertEqual(parsed["record"], definition)
+        self.assertEqual(parsed["development"], development)
+        capacity_helper = Path(source_capacity.__file__).absolute()
+        self.assertEqual(parsed["controls"][capacity_helper], sha(capacity_helper.read_bytes()))
+        self.assertEqual(
+            parsed["record"]["phase_limits"]["final"], {"budget_microusd": 1, "max_calls": 1}
+        )
+        self.assertFalse(self.trial.exists())
+        self.assertEqual((files(self.root), self.engine.physical_sends), before)
+
+    def test_capacity_v4_assessment_requires_matching_versions_without_legacy_rewrite(self):
+        capacity, base = self.capacity_definition()
+        runtime = self.engine.candidate.expected_runtime
+        before = self.engine.physical_sends, len(self.f.events)
+        for assessment_version in (1, 2, 3, 4):
+            for study_version in (1, 2, 3, 4):
+                with self.subTest(assessment=assessment_version, study=study_version):
+                    development = copy.deepcopy(capacity)
+                    development["format"] = "buddha.improver-study.v" + str(study_version)
+                    if study_version < 4:
+                        development.pop("proposal_capacity")
+                    if study_version < 3:
+                        development.pop("feedback_comparison")
+                    if study_version == 1:
+                        development["limits"]["study"] = copy.deepcopy(
+                            self.finite["limits"]["study"]
+                        )
+                    self.assertEqual(self.f.api._declaration(development, runtime)[0], development)
+                    definition = copy.deepcopy(base)
+                    definition["format"] = "buddha.improver-assessment-trial.v" + str(
+                        assessment_version
+                    )
+                    definition["development"] = self.write(
+                        "capacity-pair-"
+                        + str(assessment_version)
+                        + "-"
+                        + str(study_version)
+                        + ".json",
+                        development,
+                    )
+                    definition["phase_limits"]["search"] = copy.deepcopy(
+                        development["limits"]["study"]
+                    )
+                    if assessment_version == 1:
+                        definition["phase_limits"]["final"] = copy.deepcopy(
+                            self.definition["phase_limits"]["final"]
+                        )
+                    if assessment_version == study_version:
+                        original = _json(definition)
+                        parsed = self.api._definition(original, runtime, active=False)
+                        self.assertEqual(_json(parsed["record"]), original)
+                    else:
+                        with self.assertRaisesRegex(ValueError, "versions must match"):
+                            self.api._definition(_json(definition), runtime, active=False)
+        self.assertFalse(self.trial.exists())
+        self.assertEqual((self.engine.physical_sends, len(self.f.events)), before)
+
+    def test_capacity_v4_assessment_final_limits_remain_positive_bounded_aggregates(self):
+        _, definition = self.capacity_definition()
+        runtime = self.engine.candidate.expected_runtime
+        before = self.engine.physical_sends, len(self.f.events)
+        for key in ("budget_microusd", "max_calls"):
+            maximum = self.definition["phase_limits"]["final"][key]
+            for amount in (0, -1, True, 1.0, "1", maximum + 1):
+                changed = copy.deepcopy(definition)
+                changed["phase_limits"]["final"][key] = amount
+                with self.subTest(key=key, amount=amount), self.assertRaises(ValueError):
+                    self.api._definition(_json(changed), runtime, active=False)
+        for phase in ("search", "validation"):
+            changed = copy.deepcopy(definition)
+            changed["phase_limits"][phase]["max_calls"] += 1
+            with self.subTest(phase=phase), self.assertRaises(ValueError):
+                self.api._definition(_json(changed), runtime, active=False)
+        self.assertFalse(self.trial.exists())
+        self.assertEqual((self.engine.physical_sends, len(self.f.events)), before)
+
+    def test_capacity_v4_original_checkpoints_guard_the_sealed_six_cell_grid(self):
+        import test_improver_study as finite_fixtures
+
+        self.fixture(proposal_capacity=True)
+        harness = finite_fixtures.ImproverStudyCapacityTests("runTest")
+        _, self.finite = harness.fixture(finite_fixture=self.f)
+        self.definition.update(
+            format="buddha.improver-assessment-trial.v4",
+            development=self.write("capacity-sealed-development.json", self.finite),
+        )
+        self.definition["phase_limits"]["search"] = copy.deepcopy(self.finite["limits"]["study"])
+        self.bind("capacity-sealed-v4")
+        self.prepare()
+        development = self.develop()
+        checkpoints = sorted(self.study.rglob("proposal-capacity.json"))
+        self.assertEqual(len(checkpoints), 5)
+        for path in checkpoints:
+            self.assertEqual(json.loads(path.read_bytes())["decision"], "pass")
+        schedule = self.freeze()
+        self.assertEqual(schedule["counts"]["cells"], 6)
+        self.assertEqual(
+            [row["role"] for row in schedule["arms"]], ["starter", "initial", "evolved"]
+        )
+        self.assertEqual(self.f.owner_paths(self.trial / "final"), set())
+        checkpoint = self.study / "cells/0/0/0/0/proposal-capacity.json"
+        self.assertIn(checkpoint, checkpoints)
+        original = checkpoint.read_bytes()
+        before = self.engine.physical_sends, len(self.f.improvements)
+        try:
+            changed = json.loads(original)
+            changed["operations"][0]["measurement"]["context_slack"] += 1
+            checkpoint.write_bytes(_json(changed))
+            with self.supplied(), self.assertRaises(self.Error):
+                self.run_assessment()
+            self.assertEqual(self.f.owner_paths(self.trial / "final"), set())
+            self.assertEqual((self.engine.physical_sends, len(self.f.improvements)), before)
+        finally:
+            checkpoint.write_bytes(original)
+        with self.supplied():
+            result = self.run_assessment()
+        self.assertEqual(result["status"], "complete")
+        self.assertEqual(result["coverage"], {"expected": 6, "generated": 6, "evaluated": 6})
+        self.assertEqual(result["development_costs"], development["costs"])
+        self.assertTrue(result["analysis"]["coverage"]["complete"])
+        self.assertEqual(len(self.f.improvements), before[1])
+        before_inspect = files(self.root), self.engine.physical_sends
+        with self.f.h.readonly(), patch.dict(os.environ, {}, clear=True):
+            self.assertEqual(self.inspect(), result)
+        self.assertEqual((files(self.root), self.engine.physical_sends), before_inspect)
 
 
 if __name__ == "__main__":

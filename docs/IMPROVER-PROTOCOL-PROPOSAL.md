@@ -69,7 +69,7 @@ changing models within an arm. No old run is relabeled as a submission.
 | Evolved improver C | Original 13,084-byte Python file; SHA256 `4196cd29ffa76c6959e6f678a8286b1fde5b56e6a34a97dcf68787e1f22b3a43` |
 | Common starting task agents | The same original P and C bundles, each supplied to both improvers |
 | Development | Three selected WildChat tasks; two repeated occasions per start; two counted opportunities per arm and occasion |
-| Feedback | Explicit study v3 comparison policy; full literal answers, actual-parent deltas, null common roots and retained failed-child history; witnesses retain absolute notes |
+| Feedback | Unchanged comparison policy through explicit study v4; full literal answers, actual-parent deltas, null common roots and retained failed-child history; witnesses retain absolute notes |
 | Selection | Existing archive method, `max_active=8`, selection seed 7, `finalist_iteration=2`; select only admitted descendants, never a replacement starter |
 | Final | Prepared 26 WildChat tasks in25families, one answer-set occasion per frozen role/task; fresh starter plus initial/evolved descendants for each condition |
 | Execution | Existing isolated source worker and unchanged official native evaluator; every callback and failed physical attempt remains accounted |
@@ -159,7 +159,7 @@ reported as partial with stage, reason, full denominator, costs and holds.
 
 Historical easy-task costs are a poor estimate for unknown final tasks: binary
 choices, collapsed integer answers and fewer distinct classes reduced judging
-work. The new bounded six-cell software check took 1,197.903 seconds; earlier local
+work. The earlier v3 six-cell software check took 1,197.903 seconds; other recorded local
 lifecycle checks took 20–41 minutes. These are measured software-check times, not
 an actual-grid runtime estimate or a promise of linear scaling.
 
@@ -172,13 +172,16 @@ and replacement-output headroom. The supplied fixtures do not establish model
 attention or certify a returned future replacement. Preserve full text; stop on capacity failure rather than
 truncating answers or feedback.
 
-There is a specific integration limit: study v3 does **not** currently carry the
-source-handoff v4 proposal-capacity policy or its before-child capacity barrier.
-Existing byte, token-usage, request and callback guards still apply. Reuse the
-existing capacity assessor and original-call evidence for the adopted route;
-if every future counted/witness proposal needs that barrier, connect those
-existing helpers in a small explicit slice before live use. Do not describe the
-handoff feature as already enforced by this study.
+Explicit study v4 and matching assessment v4 now connect the existing original-call
+capacity policy to counted proposals and both mutation-witness paths. Study v3
+keeps its original behavior and does not acquire this barrier. The next concrete
+comparison must explicitly use v4, bind its exact policies and pass configuration
+checks; no older declaration is silently upgraded. Missing or failed replacement
+evidence stops development as a recorded partial result before child work.
+This includes malformed, rejected and callback-free proposals under the closed
+`require_replacement` policy. It can therefore stop the whole comparison before
+all opportunities are used; retain that consequence when adopting the live design.
+The software checks do not certify actual future model capacity or source quality.
 
 Proposed numerical settings use the existing
 `fixed_panel_family_hoeffding_shared_starter.v1` method
@@ -221,9 +224,9 @@ bundle, funded study, authority, owner and launch command still await the requir
 checks. No paid request or selected-source execution is performed here.
 
 The selected WildChat data/custody preparation is now complete at its bounded
-scope. No population decision remains pending. Next connect the existing exact
-full-output capacity policy to every counted and witness proposal through an
-explicit study/assessment version, then bind the actual configuration, resources,
+scope. No population decision remains pending. The explicit v4 capacity connection
+is implemented; executing-code verification remains separate from live readiness.
+Next bind the actual configuration, resources,
 runtime, statistical settings and review arrangements. Request a new allocation
 only after those checks make a concrete live proposal reviewable. No new funds,
 owner or launch command follow from this preparation. This remains the original

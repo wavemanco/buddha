@@ -1,7 +1,7 @@
 {
   "format": "buddha.imp01-protocol-proposal-feasibility.v1",
   "date": "2026-10-25",
-  "status": "unfunded_wildchat_population_prepared_capacity_integration_next",
+  "status": "unfunded_wildchat_v4_capacity_implemented_live_configuration_next",
   "runtime_manifest": false,
   "proposal": "../IMPROVER-PROTOCOL-PROPOSAL.md",
   "proposed_treatment": "Exact original P and C as fixed improvers; both exact originals also used as common starting task agents. C index-only limitation retained. No C replacement or new scoring rule.",
@@ -152,7 +152,7 @@
     "distinct": 5.46166240658356
   },
   "population_choice": {
-    "recommended": "Follow the user-selected official WildChat recommendation: completed prospective population/custody preparation, then existing capacity integration and concrete live feasibility/funding checks.",
+    "recommended": "Follow the user-selected official WildChat recommendation: population/custody and explicit v4 capacity integration, then concrete configuration/resource/statistical/review/funding checks. No further population question or Curated run.",
     "alternative": "Curated remains historical/qualified development evidence; no further Curated run is scheduled.",
     "known_curated_visibility": "Two nonhuman AI source-review contexts read all100 original Curated prompts for family grouping before splitting; maps and substantive boundary notes returned to the host. Known outcome/feedback exposure13 IDs and familyclosure22 are separate disclosure classes.",
     "known_wildchat_visibility": "Earlier byte/hash/aggregate-only work remains disclosed. Current custody-only contexts read1000primaryprompts with no optimization inputs and returned only opaque metadata/genericmethod; descriptive notes remain private. Root/source-author decisions are in scope. Saved exact26final named-process eligibility is scoped to this documented prospective pipeline; modeltraining/outsideaccessunknown.",
@@ -170,7 +170,10 @@
     "study_v3_proposal_capacity_field": false,
     "study_v3_all_original_proposal_before_child_capacity_barrier": false,
     "existing_guards": "Request/byte/callback/usage/accounting/worker bounds remain.",
-    "available_reuse": "Existing original-call capacity assessor; explicitly choose/check route and connect existing barrier for both counted and witness owners if adopted. No new framework prescribed.",
+    "available_reuse": "Study v4 and assessment v4 now reuse the existing original-call assessor for every counted/common-witness/child-witness proposal. Versions1-3 remain unchanged; the next trial must explicitly adopt4/4 and exact policies.",
+    "study_v4_all_original_proposal_before_child_capacity_barrier": true,
+    "closed_policy_consequence": "Missing matching replacement, malformed/rejected or callback-free source can stop the whole comparison as explicit proposal_capacity partial before remaining opportunities. Preserve denominators/costs/holds; no silent skip, truncation or paid retry.",
+    "implementation_record": "imp01-study-capacity-delivery.json",
     "prior_c_observation": "Original P and default C both now pass small isolated root/own-edge request construction. Actual future model use, context/output headroom and larger settings remain unverified."
   },
   "historical_configuration_snapshot": {
@@ -214,6 +217,7 @@
     "independent_human_sample_arranged": false,
     "people_contacted": false
   },
+  "validation_scope": "Historical original unfunded proposal arithmetic/source-cut checks below. They do not describe active v4 code changes or execution; use imp01-study-capacity-delivery.json for those.",
   "validation": {
     "application_and_candidate_execution": false,
     "model_provider_calls": 0,
@@ -244,6 +248,7 @@
       "bytes": 28115
     }
   },
+  "code_evidence_scope": "Historical original proposal-cut source trace; active v4 source pins and bounded verification belong to imp01-study-capacity-delivery.json. Earlier source hashes are not rewritten.",
   "code_evidence": {
     "buddha/improver_study.py": "1b07734c85deb5a2458c582a148fe2d5e367ddd137006bb976bd4b125f39b713",
     "buddha/improver_assessment.py": "2ecea39dd103ebc446f67cf8049ee8fb1e860273ece731947c8c73fc18eaf308",
