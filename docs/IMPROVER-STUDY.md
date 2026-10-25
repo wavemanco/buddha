@@ -72,10 +72,26 @@ to improve a task score.
 This changes what feedback the harness supplies. It does not change either
 frozen improver's Python, guarantee that it uses the information well, change
 NoveltyBench scoring or establish improved performance. Before a live study,
-the actual actor and emitted request still need a compatible full-output
-rehearsal and capacity checks. The recorded frozen C indexing limitation remains
-in [PLAN.md](PLAN.md); forwarding a whole note does not prove its local metric
-index understands the wrapper.
+both actual actors and their prospective requests still need compatibility and
+capacity checks at the declared settings.
+
+The [bounded consumer rehearsal](conformance/imp01-comparison-consumer-delivery.json)
+executes the unchanged original C improver in isolation with a small root packet
+and a later child-versus-parent packet. Both emitted requests preserve the whole
+note, full parent source and every literal answer. The second includes supplied
+differences of minus three utility and minus one distinct answer. C's convenience
+`measurement_index` contains only the task ID: its older field lookup does not
+unpack the new notes. The complete notes remain in the emitted model request;
+this does not show that the model attends to or uses them well. Keep that limitation
+with the frozen treatment rather than silently editing C. An edited C would be
+a different treatment.
+
+Only C actually executes in that rehearsal. P's behavior, other workers, judging,
+provider replies and usage are supplied. It establishes neither a new actual-P
+request check nor model context capacity, realistic output headroom or improved
+performance. The dated conformance driver is a pinned engineering check, not a
+live-run launcher; it clears inherited credentials, uses a fake key and makes no
+paid provider calls. [PLAN.md](PLAN.md) retains the remaining checks.
 
 New comparison work distinguishes a reconstruction limit
 (`feedback_reconstruction_limit`, such as excessive nested edge checks) from
