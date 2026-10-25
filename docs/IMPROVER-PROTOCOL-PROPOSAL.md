@@ -10,9 +10,11 @@ retains **WildChat, the exact original P/C and the full two-occasion design**.
 Curated stays historical/development evidence. The recommended execution limits
 are $50 for development and $100 for final assessment, with separate attempt
 limits below. These are unfunded recommendations, not approval or a promise that
-the whole study will finish. Target-review arrangements and independent human
-availability remain explicit prerequisites or evidence gaps; nobody has been
-invented or contacted on the user's behalf.
+the whole study will finish. The [prospective review preparation](IMPROVER-WILDCHAT-CONFIGURATION.md#prospective-review-controls)
+now binds the human sample and proposes a native target-review route. Its named
+model selection and execution allocation still need the user's decision. Human
+availability remains unconfirmed; nobody has been invented or contacted on the
+user's behalf.
 
 ## What this would answer
 
@@ -187,9 +189,10 @@ coverage and elapsed time. A cap stop remains partial with its stage, reason,
 full planned denominator, costs and holds. Do not rank unequal partial arms as
 though they completed a matched comparison.
 
-The $150 recommendation covers execution only. Human time and separately
-arranged model target reviews are outside these phase ledgers and must be
-reported separately. There is no authorization for paid reviews here either.
+The $150 recommendation covers execution only. Human time and native Codex
+target-review usage are outside these phase ledgers and must be reported
+separately. Native usage is not priced here and must not be reported as zero.
+There is no separate model-review API allowance or automatic API fallback.
 
 Historical easy-task costs are a poor estimate for unknown final tasks: binary
 choices, collapsed integer answers and fewer distinct classes reduced judging
@@ -250,14 +253,42 @@ return `inconclusive`. Neither establishes absence of an effect. We keep this li
 visible rather than changing the rule after learning the results. Zero margins
 also do not establish that a positive result would be practically important.
 
-Adopt [target-repair method v1](IMPROVER-TARGET-REPAIR.md) over every counted
-opportunity, including rejected/unattempted slots. Two separately initialized
-outcome-naive review contexts are proposed; their identities, human/model type,
-model IDs where applicable, costs and access arrangements must be fixed before
-outputs. Stage A fixes target/parent judgments before Stage B reveals complete
-child sets. Preserve uncertainty, disagreement and unavailable evidence; no
-majority-vote repair or official rescore. Review cost outside the execution
-ledger must be reported separately, not hidden in a budget-efficiency claim.
+Use [target-repair method v1](IMPROVER-TARGET-REPAIR.md) over every counted
+opportunity, including rejected/unattempted slots. The current proposal makes
+an explicit prospective amendment to the earlier draft's instance-identity
+timing: fix two reviewer-stream labels, model/type, workload, method, access and
+cost-accounting scope before outputs; bind each actual ephemeral instance and
+its exposure declaration before showing it any material. This amendment is
+made before any study output, not after learning a result.
+
+The proposed streams are TR-A and TR-B. Each stream/opportunity receives its own
+fresh native Codex context: at most 32 contexts and 32 two-stage worksheets.
+The funding decision will explicitly include `gpt-6.1-sol` with Codex reasoning
+effort `ultra`; only after that selection is authorized may the coordinator use
+those exact model/effort arguments with `fork_turns=none`. Enroll each instance
+without study material, then save the assignment request and returned
+agent/session identity before sending Stage A.
+
+Stage A receives the full captured hypothesis, development prompts and complete
+parent sets. Withhold child answers/code/outcomes, official scores, source/arm
+identities, final material and the other stream's forms. Save the complete
+original Stage A form/hash before revealing Stage B. The same instance then
+compares full child sets against those fixed targets. Keep uncertainties,
+disagreements, regressions and unavailable evidence; no majority-vote repair or
+official rescore. There are at most 64 original stage judgments, not a promise
+of only 64 underlying Codex requests. No favorable reviewer reroll is allowed.
+
+Current local root metadata identifies the configured model. A separate generic
+canary identified its own real session, but its model/effort were not exposed.
+Therefore keep requested assignment separate from observed execution metadata;
+unavailable observations stay null. Tool requests do not attest to provider
+weights or a backend snapshot. Record known setting mismatches or unintended
+exposure as deviations. Fresh contexts and shared-file access provide procedural
+blinding, not a security sandbox or proof of independence. Both streams use the
+same named model as the proposal backbone, so correlated model preferences
+remain possible. The observed root
+context window is not a capacity certificate: inability to read complete texts
+leaves an incomplete review, without excerpts or automatic model/API switching.
 
 EVAL-02 still requires the independent human sample and matched final/transfer
 evidence. No human reviewers have been recruited or contacted; sample/reviewer
@@ -275,17 +306,21 @@ missing reviewer is recorded as unavailable, and EVAL-02 stays open. Exporting a
 blank template or importing a model-completed form is not human evidence;
 incomplete blank submissions are rejected.
 
-Target repair is a different review: two outcome-naive contexts across all 16
-opportunities, hence up to **32 two-stage worksheets**. Rejected and unattempted
-opportunities stay in the denominator. Existing manual worksheets suffice; no
-new scoring instrument or runtime driver is required merely to collect them.
-The model route, access and cost arrangement have **not yet been fixed**.
-Native review-context availability alone does not identify its exact model or
-prove independence. Preserve the pre-output promise above: arrange these
-details before generating study outputs, then capture actual session identities
-and exposure declarations before distribution. Stage A must be saved before
-that reviewer receives Stage B. No model reviewer or completed review is being
-claimed by this proposal.
+The prospective human plan, release-bound materials, protocol and four existing
+review helpers are now bound into the candidate's original custody controls.
+This prepares the sample; it creates no pack, roster, person or judgment. The
+literal official equivalence rule is preserved. The supplemental compliance,
+craft and factual-support rubric is Buddha's human-review rubric, not official
+numeric utility scoring or a new human quality scale.
+
+Target repair remains a different review of development opportunities. Existing
+manual worksheets suffice; no new schema, scoring instrument or runtime driver
+is needed merely to collect them. Native Codex usage consumes the user's Codex
+plan outside the experiment's API ledgers. Report available context/stage usage
+and its unpriced monetary component separately; label productivity calculations
+as execution-only, without claiming a priced total-research-cost advantage.
+Host limits leave explicit missing/incomplete review coverage. No actual study
+reviewer or completed judgment is being claimed by this preparation.
 
 ## Readiness and next work
 
@@ -307,9 +342,10 @@ pre-send counter remain known limitations, with full-feedback and partial-stop
 guards preserved. The [readiness supplement](conformance/imp01-wildchat-readiness.json)
 records standard-speed request exclusion, runtime metadata availability and
 conditional cost/headroom arithmetic. The [matched launcher](IMPROVER-LAUNCH.md)
-and refreshed configuration now have bounded local checks. Retain the checked
-runtime/resources/fairness and proposed aggregate limits; finish statistical
-adoption and actual review arrangements. Request a new allocation only after
-those checks make a concrete live proposal reviewable. No new funds,
+and refreshed configuration now have bounded local checks. The prospective
+review controls are prepared too. Present the combined decision on the separate
+execution allocation and named native-reviewer setup, then adopt the pinned
+protocol before any owners or outputs. Actual funding, keyed account review and
+current executing-code checks still precede a live command. No new funds,
 owner or launch command follow from this preparation. This remains the original
 IMP-01 comparison; the DGM/Harness2 cross-check adds no redesign or new gate.
