@@ -27,6 +27,13 @@ distinctiveness score or utility score. [PLAN.md](PLAN.md) owns scheduling;
 The starting agent goes through this check too. A function may succeed without
 calling a model. No callback minimum is imposed.
 
+When a new source search explicitly selects `feedback_comparison=True`, the
+witness also receives the candidate's actual counted-parent comparison, with
+both complete sets of outputs. The starting agent instead receives the explicit
+`no_counted_parent_in_this_search` state. This optional treatment is explained
+in [the search guide](SOURCE-SEARCH.md#explicit-parent-comparisons-in-new-searches).
+Existing searches and study v1/v2 keep their original witness feedback.
+
 ```mermaid
 flowchart LR
     S[Complete development screen] --> F[Full outputs and measured feedback]
@@ -261,6 +268,42 @@ PowerShell commands.
 Full outputs remain subject to explicit packet and request capacity limits.
 Buddha stops and records a partial result when complete required information
 cannot fit. It does not shorten outputs to make this check pass.
+
+Explicit `feedback_comparison=True` requires both the witness and verified
+source copies and selects search manifest v6. Its fixed comparison policy is
+bound into the original first owner. Counted plans use v3; the corresponding
+witness treatment uses v3 and its plan uses v2. The default `False` preserves
+the original v1-v5 search policies and packet derivations, including ordinary
+v4 and optional-capacity v5 preparation.
+
+For a child awaiting its counted decision, the witness derives its comparison
+from that child's checked original counted plan, materialized proposal and
+eligible screen in the same search. It cannot borrow a matching source from
+another run. A shared custody check verifies the original parent, proposal and
+child; the root route verifies the exact declared seed against the owner-bound
+manifest and context. A seed may retain earlier external lineage because the
+root claim concerns counted parents in this search only. Witness feedback
+still has no failed-child history; ordinary counted proposals retain their
+complete history.
+
+During started search execution, exceeding sixteen nested comparisons or
+sixty-four edge checks records an incomplete `feedback_reconstruction_limit`;
+exceeding full-output byte limits records `feedback_capacity`. Initial resume
+validation can instead refuse before dispatch without a new observation; the
+[search guide](SOURCE-SEARCH.md#explicit-parent-comparisons-in-new-searches)
+states that boundary. Corrupt, missing or incompatible evidence remains
+a protocol stop. Original records, costs and holds are retained. Neither limit
+allows shortened answers, skipped comparisons or fabricated parent scores.
+
+Study v1/v2 witness treatments remain unchanged. A prospective study v3 and
+matching assessment treatment are not implemented by this search option.
+Thirteen new search/root/limit methods and nineteen existing feedback methods
+pass in separate supplied-response cohorts. The [delivery record](conformance/imp01-source-search-comparison-delivery.json)
+retains their exact scopes and substantial runtimes; current-head hosted
+verification remains pending. Earlier verification records retain their original
+scope. Official scoring, selection,
+funding and live-run instructions are unchanged. Comparison feedback supplies
+diagnostic evidence, not demonstrated improvement.
 
 ## Optional local check
 

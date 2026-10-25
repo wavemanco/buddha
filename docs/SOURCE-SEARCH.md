@@ -86,6 +86,63 @@ cannot fit, construction refuses before writing the packet or creating its
 proposal owner. Search saves a `feedback_capacity` partial at the `feedback` stage when complete information cannot fit. Byte limits do not prove model context fit; the concrete full request still needs that pre-live check. Feedback describes observations; it supplies no invented score,
 automatic penalty or independent diagnosis of the code.
 
+## Explicit parent comparisons in new searches
+
+The optional Python setting `feedback_comparison=True` writes source-search
+manifest v6. It requires mutation witnesses and verified private source copies;
+preparation refuses settings that disable either. The default `False` preserves
+the existing preparation choices and the original v1-v5 manifest and feedback
+reconstruction rules. Existing searches do not acquire this treatment on resume.
+This option creates no spending allowance and makes no model request during
+preparation.
+
+For a selected descendant, the improver receives its complete outputs beside
+its actual parent's complete outputs, the original change hypothesis and the
+unchanged official measurements. Differences are **current minus parent**.
+The controller derives the edge from this search's checked original counted
+plan and proposal, with the exact screened occasion. It does not choose a
+comparison merely because another record has matching source code. Counted
+proposals keep the complete existing execution-failure history as well.
+
+The starting agent receives an explicit absence of a counted parent, rather
+than a made-up zero score. Root-feedback provenance v7 verifies the exact seed
+against this search's original owner-bound manifest and context. A starting
+source may have lineage from an earlier experiment; the reason is specifically
+`no_counted_parent_in_this_search`, not a claim that the source has no ancestors.
+Both outcomes use the existing protected proposal channel.
+
+The same declared treatment reaches the mutation witness. Before a child's
+counted decision exists, its witness comparison comes from the already checked
+counted plan, materialized proposal and eligible screen. Witnesses receive no
+execution-failure history. Their children remain outside the counted archive.
+Counted plans use v3, witness treatments v3 and witness plans v2; older formats
+retain their original meanings. [The feedback guide](SOURCE-FEEDBACK.md#compare-a-completed-child-with-its-actual-parent)
+explains v6 actual edges and v7 roots.
+
+Required information is never shortened. During started execution, exceeding
+sixteen nested comparisons or sixty-four edge checks saves an incomplete
+`feedback_reconstruction_limit` result. Exceeding a full-output byte ceiling
+saves `feedback_capacity`.
+Changed, missing or incompatible evidence is a protocol failure, not a resource
+limit and not permission to omit the comparison. Original records, costs and
+holds remain retained in each case.
+
+The initial resume check must verify the saved history before starting more
+work. If that check itself exceeds a feedback limit, it raises the specific
+resource error without creating a new observation, owner or provider call.
+The saved history and any earlier partial-result record stay intact. A failed
+preflight is not a completed or newly resumed search.
+
+This is an explicitly selected engineering treatment. It changes neither
+NoveltyBench scoring nor parent selection and does not establish better
+performance. Study v1/v2 and their witnesses remain unchanged; a prospective
+study v3 and matching assessment treatment are not implemented here. Seven new
+search methods, three root-packet methods and three resource-limit methods pass
+in separate supplied-response cohorts, alongside nineteen existing feedback
+methods. The [delivery record](conformance/imp01-source-search-comparison-delivery.json)
+retains source pins, exact timings and limits. Current-head hosted verification
+remains pending. No new funding or live-run command follows from this option.
+
 ## Resume, accounting and inspection
 
 The root manifest fixes the comparison and is bound into the starting owner and
@@ -219,3 +276,25 @@ requirements. [Exact evidence and limits](conformance/src02-screen-format-delive
 This evidence establishes the exercised engineering mechanism. It does not
 establish model-authored improvement, better unseen-task performance, or an
 improver that has itself become better. Those remain separate roadmap gates.
+
+## Optional local comparison check
+
+From this checkout's project folder, run this once in your current PowerShell
+window to check the new search comparison route with supplied workers and
+replies. It creates temporary test records, needs no API keys or Docker and
+spends no API money. It does not inspect or resume a live run. Allow an hour or
+more for its complete fixture runs. Wait for `OK` or a failure; Ctrl+C stops it.
+No separate window is needed.
+
+```powershell
+python -m unittest discover -s tests -p test_source_search_comparison.py -v
+```
+
+This separate quick check confirms that proposal inspection preserves feedback
+resource errors and still rejects invalid evidence. Run it once in the same
+window. It needs no keys or Docker, makes no provider calls and changes no run
+records; Ctrl+C stops it.
+
+```powershell
+python -m unittest discover -s tests -p test_source_comparison_limits.py -v
+```

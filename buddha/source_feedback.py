@@ -20,6 +20,7 @@ from typing import cast
 from buddha import candidate_generation, source_screen, trial_fence
 from buddha import native_pipeline as pipeline
 from buddha.answers import TaskSet, _utf8
+from buddha.doctor import _Capture
 from buddha.releases import (
     MAX_FEEDBACK_BYTES,
     MAX_JSON_BYTES,
@@ -90,6 +91,12 @@ _COMPARISON_POLICY = {
     "max_nested_comparisons": 16,
     "max_edge_checks": 64,
 }
+_ROOT_COMPARISON_POLICY = {
+    **_FULL_POLICY,
+    "version": "complete-outputs-and-declared-search-root-v7",
+    "delta_direction": "current_minus_parent",
+    "parent_state": "no_counted_parent_in_this_search",
+}
 
 
 class SourceFeedbackError(ReleaseError):
@@ -98,6 +105,10 @@ class SourceFeedbackError(ReleaseError):
 
 class SourceFeedbackTooLarge(SourceFeedbackError):
     """Complete feedback cannot fit its declared resource ceilings."""
+
+
+class SourceFeedbackReconstructionLimit(SourceFeedbackTooLarge):
+    """Original comparison reconstruction exceeds a declared work ceiling."""
 
 
 @dataclass
@@ -199,6 +210,7 @@ def _build(
     *,
     existing: bool = False,
     full_answers: bool = True,
+    sink: _Capture | None = None,
 ) -> dict[str, object]:
     directory = _destination(directory, existing=existing)
     ref = _object(reference, {"directory", "authorization", "report_sha256"})
@@ -211,9 +223,14 @@ def _build(
         raise SourceFeedbackError("feedback destination overlaps retained screen evidence")
     report_path = original / "report.json"
     report_raw = pipeline._read(report_path, expected)
-    report = source_screen.inspect_source_screen(
-        original, authorization=authorization, expected_report_sha256=expected
-    )
+    if sink is None:
+        report = source_screen.inspect_source_screen(
+            original, authorization=authorization, expected_report_sha256=expected
+        )
+    else:
+        report = source_screen.inspect_source_screen(
+            original, authorization=authorization, expected_report_sha256=expected, sink=sink
+        )
     if _json(report) != report_raw:
         raise SourceFeedbackError("screen publication changed during feedback observation")
     screen_path = original / "screen.json"
@@ -500,7 +517,9 @@ class _FeedbackEvidence:
         observation = _COMPARISON_OBSERVATION.get()
         if observation is not None:
             if observation.remaining_edges <= 0:
-                raise SourceFeedbackError("comparison reconstruction exceeds 64 edge checks")
+                raise SourceFeedbackReconstructionLimit(
+                    "comparison reconstruction exceeds 64 edge checks"
+                )
             observation.remaining_edges -= 1
         edge = _object(value, {"parent", "proposal", "screen"})
         parent_ref, parent, parent_record = self.screen_input(edge["parent"])
@@ -604,6 +623,7 @@ def _build_failures(
     existing: bool = False,
     full_answers: bool = True,
     improver_agent_sha256: str | None = None,
+    sink: _Capture | None = None,
 ) -> dict[str, object]:
     """Rebuild checked history, including at a private partial-write destination."""
     if type(history) not in {list, tuple} or not 1 <= len(history) <= 8:
@@ -614,7 +634,11 @@ def _build_failures(
     directory = _destination(directory, existing=existing)
     if existing:
         _packet_files(directory, partial=True)
-    base = _build(directory, reference, existing=existing, full_answers=full_answers)
+    base = (
+        _build(directory, reference, existing=existing, full_answers=full_answers, sink=sink)
+        if sink is not None
+        else _build(directory, reference, existing=existing, full_answers=full_answers)
+    )
     provenance = _object(base["provenance"])
     measured_sha256 = _sha(_json(provenance))
     evidence = _FeedbackEvidence(directory, base)
@@ -850,6 +874,121 @@ def _build_failures(
     return _load(raw_base)
 
 
+def _build_root_comparison(
+    directory: Path,
+    reference: dict[str, object],
+    comparison: dict[str, object],
+    history: Sequence[dict[str, object]] = (),
+    *,
+    existing: bool = False,
+    improver_agent_sha256: str | None = None,
+) -> dict[str, object]:
+    """Explicit absence of a counted parent, proved by the original search declaration."""
+    if improver_agent_sha256 is not None:
+        raise SourceFeedbackError("root comparison supports inherited search only")
+    root = _object(
+        _object(comparison, {"root"})["root"], {"directory", "authorization", "manifest_sha256"}
+    )
+    directory = _destination(directory, existing=existing)
+    scope = pipeline._absolute(root["directory"])
+    authorization = pipeline._absolute(root["authorization"])
+    checked_root: dict[str, object] = {
+        "directory": str(scope),
+        "authorization": str(authorization),
+        "manifest_sha256": _digest(root["manifest_sha256"]),
+    }
+    if ".." in scope.parts or ".." in authorization.parts or _json(root) != _json(checked_root):
+        raise SourceFeedbackError("root comparison requires canonical original paths")
+    with _comparison_observation() as observation:
+        if directory in observation.active:
+            raise SourceFeedbackError("comparison ancestry repeats a packet")
+        if len(observation.active) >= 16:
+            raise SourceFeedbackReconstructionLimit("comparison ancestry exceeds depth 16")
+        observation.active.add(directory)
+        try:
+            capture = _Capture(scope)
+            observation.checks.append(capture.finish)
+            base = (
+                _build_failures(directory, reference, history, existing=existing, sink=capture)
+                if history
+                else _build(directory, reference, existing=existing, sink=capture)
+            )
+            provenance = _object(base["provenance"])
+            if (
+                pipeline._absolute(_object(provenance["reference"])["authorization"])
+                != authorization
+            ):
+                raise SourceFeedbackError("root comparison changes the original shared authority")
+            from buddha import source_search
+
+            if Path(source_search.__file__).absolute() != Path(__file__).with_name(
+                "source_search.py"
+            ):
+                raise SourceFeedbackError("a different source search inspector was imported")
+            declaration = source_search._read_comparison_root(
+                checked_root, reference, _digest(provenance["candidate_id"]), sink=capture
+            )
+            base_format, base_sha256 = provenance["format"], _sha(_json(provenance))
+            feedback = _object(base["feedback"])
+            tasks = TaskSet.from_bytes(_json(base["source"]))
+            feedback_size = len(_bounded_json(feedback | {"records": []}, MAX_FEEDBACK_BYTES))
+            projected_size = 2
+            for index, (value, task_provenance) in enumerate(
+                zip(_list(feedback["records"]), _list(provenance["tasks"]), strict=True)
+            ):
+                row = _object(value)
+                note = {
+                    "kind": "saved_native_measurements_and_root_comparison",
+                    "measurements": _load(_utf8(row["note"]).encode()),
+                    "parent_measurements": None,
+                    "comparison": {
+                        "status": "unavailable",
+                        "reason": "no_counted_parent_in_this_search",
+                        "parent_id": None,
+                        "current_id": provenance["candidate_id"],
+                        "delta_direction": "current_minus_parent",
+                        "distinct_delta": None,
+                        "utility_delta": None,
+                        "recorded_cost_delta_microusd": None,
+                    },
+                }
+                raw = _bounded_json(note, MAX_FEEDBACK_BYTES)
+                final_row = row | {"note": raw.decode()}
+                comma = int(index > 0)
+                feedback_size += comma + len(
+                    _bounded_json(final_row, MAX_FEEDBACK_BYTES - feedback_size - comma)
+                )
+                projected_size += comma + len(
+                    _bounded_json(
+                        {
+                            "task": tasks.select([row["task_id"]]).tasks[0].to_record(),
+                            "note": final_row["note"],
+                        },
+                        MAX_FEEDBACK_BYTES - projected_size - comma,
+                    )
+                )
+                row.update(final_row)
+                _object(task_provenance).update(note_sha256=_sha(raw), note_utf8_bytes=len(raw))
+            provenance.update(
+                format="buddha.source-screen-feedback.v7",
+                policy=dict(_ROOT_COMPARISON_POLICY),
+                base_format=base_format,
+                base_provenance_sha256=base_sha256,
+                comparison={"root": checked_root},
+                root_declaration=declaration,
+                feedback_sha256=_sha(_bounded_json(feedback, MAX_FEEDBACK_BYTES)),
+                claim=(
+                    "explicit declared search root; no counted-parent baseline or improvement claim"
+                ),
+            )
+            result = _load(_bounded_json(base, MAX_JSON_BYTES))
+            if len(observation.active) == 1:
+                _finish_comparison(observation)
+            return result
+        finally:
+            observation.active.remove(directory)
+
+
 def _build_comparison(
     directory: Path,
     reference: dict[str, object],
@@ -866,8 +1005,10 @@ def _build_comparison(
     directory = _destination(directory, existing=existing)
     improver = _digest(improver_agent_sha256) if improver_agent_sha256 is not None else None
     with _comparison_observation() as observation:
-        if directory in observation.active or len(observation.active) >= 16:
-            raise SourceFeedbackError("comparison ancestry repeats a packet or exceeds depth 16")
+        if directory in observation.active:
+            raise SourceFeedbackError("comparison ancestry repeats a packet")
+        if len(observation.active) >= 16:
+            raise SourceFeedbackReconstructionLimit("comparison ancestry exceeds depth 16")
         observation.active.add(directory)
         try:
             base = (
@@ -1018,7 +1159,8 @@ def build_source_feedback(
         if type(failure_history) not in {list, tuple}:
             raise SourceFeedbackError("failure history requires an ordered literal sequence")
         if comparison is not None:
-            return _build_comparison(
+            builder = _build_root_comparison if "root" in _object(comparison) else _build_comparison
+            return builder(
                 directory,
                 reference,
                 comparison,
@@ -1068,18 +1210,21 @@ def inspect_source_feedback(
         )
         original = _load(provenance_raw)
         version = original.get("format")
-        if version not in {"buddha.source-screen-feedback.v" + str(i) for i in range(1, 7)}:
+        if version not in {"buddha.source-screen-feedback.v" + str(i) for i in range(1, 8)}:
             raise SourceFeedbackError("unsupported saved feedback derivation")
         full_answers = version in {
             "buddha.source-screen-feedback.v3",
             "buddha.source-screen-feedback.v4",
             "buddha.source-screen-feedback.v5",
             "buddha.source-screen-feedback.v6",
+            "buddha.source-screen-feedback.v7",
         }
         reference = _object(original["reference"])
-        if version == "buddha.source-screen-feedback.v6":
+        if version in {"buddha.source-screen-feedback.v6", "buddha.source-screen-feedback.v7"}:
             history = cast(list[dict[str, object]], _list(original.get("failure_history", [])))
             actor = original.get("improver_agent_sha256")
+            if version == "buddha.source-screen-feedback.v7" and actor is not None:
+                raise SourceFeedbackError("root comparison supports inherited search only")
             expected_base = (
                 "buddha.source-screen-feedback.v5"
                 if history and actor is not None
@@ -1089,7 +1234,12 @@ def inspect_source_feedback(
             )
             if original["base_format"] != expected_base:
                 raise SourceFeedbackError("comparison changes its full-output base derivation")
-            bundle = _build_comparison(
+            builder = (
+                _build_root_comparison
+                if version == "buddha.source-screen-feedback.v7"
+                else _build_comparison
+            )
+            bundle = builder(
                 directory,
                 reference,
                 _object(original["comparison"]),
@@ -1190,9 +1340,16 @@ def _write_source_feedback(
         for value in _list(provenance.get("failure_history", [])):
             edge = _object(value, {"parent", "proposal", "screen"})
             references.extend(_object(edge[name]) for name in ("parent", "proposal", "screen"))
+        root_scope = None
         if "comparison" in provenance:
-            edge = _object(provenance["comparison"], {"parent", "proposal", "screen"})
-            references.extend(_object(edge[name]) for name in ("parent", "proposal", "screen"))
+            if provenance["format"] == "buddha.source-screen-feedback.v7":
+                root = _object(_object(provenance["comparison"], {"root"})["root"])
+                root_scope = pipeline._absolute(root["directory"])
+                if root["authorization"] != references[0]["authorization"]:
+                    raise SourceFeedbackError("root comparison changes its original grant")
+            else:
+                edge = _object(provenance["comparison"], {"parent", "proposal", "screen"})
+                references.extend(_object(edge[name]) for name in ("parent", "proposal", "screen"))
         authority_path = pipeline._absolute(references[0]["authorization"])
         original_terms = None
         with ExitStack() as stack:
@@ -1215,6 +1372,12 @@ def _write_source_feedback(
                 )
             if original_terms is None:
                 raise SourceFeedbackError("feedback requires its original measured grant")
+            if root_scope is not None:
+                stack.enter_context(
+                    trial_fence.work(
+                        authority_path, original_terms, directory=root_scope, kind="feedback"
+                    )
+                )
             stack.enter_context(
                 trial_fence.work(
                     authority_path, original_terms, directory=directory, kind="feedback"
