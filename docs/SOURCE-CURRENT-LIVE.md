@@ -1,16 +1,18 @@
 # Current-source live experiment
 
-This is the approved code-evolution observation for SRC-02/03. The protocol and
-review criteria are adopted, current Windows/Linux CI passes, and the funded
-handoff is ready for the user to start locally. No model calls were made during
-preparation.
+**This experiment is complete. Do not repeat the launch command below.** The
+[verified results](SOURCE-CURRENT-LIVE-RESULTS.md) establish changed and used
+generation/improvement procedures, with lower official development scores.
+The original run records 90 completed attempts, $0.753206 spent and zero held.
+No further command is needed from the user now. The following preparation and
+launch instructions remain historical evidence.
 [PLAN.md](PLAN.md) remains the current roadmap.
 
 The earlier $7 observation checked whether one exact full-output request could
 return a complete source proposal with enough space left. This experiment
 measures the current parent itself and runs its model-written descendants.
 The [corrected preparation record](conformance/src02-corrected-live-preparation.json)
-retains an earlier unfunded checkpoint. Current readiness is described below.
+retains an earlier unfunded checkpoint. The final prelaunch checkpoint is retained below.
 
 The [earlier preparation](conformance/src02-actual-live-preparation.json) used a
 producer that later failed three legacy progress-report compatibility checks in
@@ -20,10 +22,11 @@ bundle and failed-head evidence remain unchanged and unfunded. The adopted
 protocol, criteria and intent retain their original bytes; this preparation
 changes no scientific acceptance or benchmark rule.
 
-## Run the approved experiment
+## Original launch command (historical; do not run again)
 
-Open a fresh PowerShell window and run this one command. No `cd` command is
-needed because every path is absolute. Keep Docker Desktop running.
+The original invocation used a fresh PowerShell window with Docker Desktop
+running. No `cd` command was needed because every path was absolute. This
+command is retained for traceability; the completed experiment must not be restarted.
 
 ```powershell
 python C:\Users\arvik\code\buddha\runs\reviews\ci-test-progress\docs\conformance\src02-run.py --handoff C:\Users\arvik\code\buddha\runs\src02-current-live-20261024-handoff-v1\launch.json --sha256 3a4186127d30ccf8a69cea65cfcc2ed5651661f14e3892f5ab5646c625a2c65d --receipt C:\Users\arvik\code\buddha\runs\src02-current-live-20261024-receipts-v1\launch-001.json --live --prompt-keys --confirm-project-keys
@@ -132,7 +135,7 @@ serves official quality scoring and its fallback. The approved local launch
 therefore needs both keys. Keys are entered locally and are never part of
 these committed protocol files.
 
-## Current handoff status
+## Final prelaunch checkpoint (historical)
 
 The fresh bundle is `runs/src02-current-live-20261024-proposal-v3`, prepared
 from the exact CI-tested producer `42e5dd2d3d32c1f085c87aaa2de44cc1391587ce`.
