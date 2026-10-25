@@ -1,0 +1,96 @@
+{
+  "format": "buddha.imp01-matched-handoff-delivery.v1",
+  "recorded_utc": "2026-10-25T12:35:56.935221+00:00",
+  "base_head": "32ce9e6a8910b2987781c7262e3dbc76ffcbbd3b",
+  "status": "focused_and_configured_local_checks_pass_hosted_and_funded_launcher_pending",
+  "specification": "DESIGN4,7-10; exact matched configuration, original control bindings, separate phase limits and truthful scope",
+  "finding": "IMP1-HANDOFF-01",
+  "change": "Fresh-only five-field unfunded checker composes original study/assessment v4 validators, both future file-input capacity projections, byte inventories/pins, all development/final protected roots and initial/final non-following destination checks. It creates no state or execution.",
+  "source_sha256": {
+    "buddha/improver_handoff.py": "6907ea2f3c6d6d6a97f8797eadd5fb1750c80819ac61f1f1cad723430b6c5f95",
+    "tests/test_improver_handoff.py": "ef83caa6a613dbcc35e71229a0556f0e634d1cc5f5106c6b40e66fdc5b94bfca"
+  },
+  "checks": {
+    "methods": 10,
+    "passed": 10,
+    "skips": 0,
+    "seconds": 25.281,
+    "quality_commands_passed": 7
+  },
+  "tests_first": {
+    "initial_missing_interface": "Preserved ImportError before fixture bootstrap; not a behavior failure.",
+    "genuine_draft_failures": [
+      "late destination appeared",
+      "late selected-inventory extra",
+      "distinct final generation root output overlap",
+      "late output-parent reparse",
+      "initial and delayed dangling output-leaf entries"
+    ],
+    "alias_control": "Existing validators already reject the distinct final-component alias; no manufactured RED.",
+    "construction_history": "Initial external parent-variant runner import error is retained separately and corrected only by its PYTHONPATH environment. Earlier lint/format findings were corrected before the final checked source cut.",
+    "limits": "Synthetic Windows reparse/junction metadata checks; no real junction or demonstrated live paid-execution bypass. All failures were in the unpublished new checker."
+  },
+  "evidence": {
+    "imp01-matched-launch-route-shape-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-matched-launch-route-shape-v1.json",
+      "sha256": "0a7d7543842e08f2501b271ad376566f57f87391e82a4ecdc357fcbd319503f3",
+      "bytes": 15604
+    },
+    "imp01-matched-handoff-tests-red-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-matched-handoff-tests-red-v1.json",
+      "sha256": "3ea6e69caec2c0a287580830171e65a767d4feb7bd5843f1ae1f8c1eb0e2ceda",
+      "bytes": 1248
+    },
+    "imp01-matched-handoff-adversarial-review-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-matched-handoff-adversarial-review-v1.json",
+      "sha256": "e2e09eb2720c1ced0f76cb04ae8f064364fb26212742eada6685cbd7c944ebf2",
+      "bytes": 8237
+    },
+    "imp01-matched-handoff-late-state-red-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-matched-handoff-late-state-red-v1.json",
+      "sha256": "203bcfa721bd7ae0164c564aeef7178aa771f1265f3f85ba4fd10743d73781a6",
+      "bytes": 2471
+    },
+    "imp01-matched-handoff-final-root-red-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-matched-handoff-final-root-red-v1.json",
+      "sha256": "e2e3651d1b3414414b8360d05f933ab54f1236b92b122dc0232d8120e1f7e5fc",
+      "bytes": 2167
+    },
+    "imp01-matched-handoff-parent-variants-red-v2.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-matched-handoff-parent-variants-red-v2.json",
+      "sha256": "3624721b16e2d2f1992e9032bba98750a6f2b8bcfc64a1679ae402803c4a69bf",
+      "bytes": 2870
+    },
+    "imp01-matched-handoff-dangling-leaf-red-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-matched-handoff-dangling-leaf-red-v1.json",
+      "sha256": "0aa2db88510e58488aa36e58134f5934470cb319c3768af176f26f7d0a1ca34e",
+      "bytes": 2756
+    },
+    "imp01-matched-handoff-local-checks-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-matched-handoff-local-checks-v1.json",
+      "sha256": "ae7d78693e6e798b1c8fcaec43c21322a900b7ff68c9f5649976e555a75f2b26",
+      "bytes": 5898
+    },
+    "imp01-matched-handoff-final-independent-review-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-matched-handoff-final-independent-review-v1.json",
+      "sha256": "40692af6a34ee18af5d1dfca1d1fa1da40fc8ee9ca03e3acea2b1245cf73fdc9",
+      "bytes": 8573
+    }
+  },
+  "preservation": {
+    "existing_source_and_benchmark_profiles": "Unchanged; only one new application module and one test module",
+    "selected_original_source": "Byte hashes only; no decode, AST, import, compile or execution",
+    "original_paid_SQL_queries": false,
+    "provider_model_calls": 0,
+    "new_live_authority_owner_allocation": false,
+    "new_user_command": false,
+    "main_README_or_development_merge": false
+  },
+  "limitations": [
+    "Read-only consistency checks are not an atomic snapshot or later immutability guarantee.",
+    "No retained-trial/recovery, account/price, full-grid runtime, future model capacity, scientific or hosted-green certification.",
+    "Limits are descriptive and funding is unallocated; three grants must be issued for a separately approved new study.",
+    "Funded preparation still needs additional launch/approval controls bound into original owners and all capacity checks repeated with those actual inputs."
+  ],
+  "remaining": "Connect approved outer controls into original trial owners, implement keyless retained-state/phase-aware matched launcher, and adopt feasible resources/fairness plus numerical/review arrangements before separately approved live work. IMP01 and EVAL02 remain open; WildChat remains selected, Curated stays qualified historical/development evidence."
+}
