@@ -1,0 +1,2441 @@
+{
+  "P_identity_check": {
+    "decision": "established",
+    "explanation": "Actual P literal source is13455 UTF-8 bytes, SHA77cfa68f..., matching adopted seed2. SHA256 of canonical inventory JSON mapping candidate.py to that source hash is22cd302a..., matching report/payload identity. Source and bundle identities are distinct, not discrepant.",
+    "trusted_identity_implementation": [
+      {
+        "lines": [
+          33,
+          39
+        ],
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\ci-test-progress\\buddha\\releases.py",
+        "sha256": "2285f5417be9caba5c8aa675e417dcf7ce0310de77dbfd290ad76bc76ec68c1a"
+      },
+      {
+        "lines": [
+          460,
+          461
+        ],
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\ci-test-progress\\buddha\\releases.py",
+        "sha256": "2285f5417be9caba5c8aa675e417dcf7ce0310de77dbfd290ad76bc76ec68c1a"
+      },
+      {
+        "lines": [
+          147,
+          156
+        ],
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\ci-test-progress\\buddha\\candidate_run.py",
+        "sha256": "888275b5c8d06ceb159385602dad2fb5a4b9a994f9075774b2cac5dd3f50a23e"
+      }
+    ]
+  },
+  "adopted_records": {
+    "criteria": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\ci-test-progress\\docs\\conformance\\src02-actual-live-criteria-v1.json",
+      "sha256": "93246d46ef9e3f9c156645d60a3e292bbaac8cb0b098d04917a5046461e80f82"
+    },
+    "design": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\ci-test-progress\\docs\\DESIGN.md",
+      "sha256": "9119cbe00e481b7159f9fc29615b17f471b19efe0075d057756883f3556c7ea5"
+    },
+    "intent": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\ci-test-progress\\docs\\conformance\\src02-actual-live-intent-v1.json",
+      "sha256": "9608b943760e752e67674a47e742f5fec254f722165aeb7d07b0d794e71d4dd0"
+    },
+    "protocol": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\ci-test-progress\\docs\\conformance\\src02-actual-live-protocol-v1.md",
+      "sha256": "aed1b01a4c068a006ca270b169a8aa9ac3d5e224f98a2b7ba96b1011aff4cfc8"
+    }
+  },
+  "declared_role_coverage": [
+    {
+      "generation_callbacks": [
+        10,
+        10,
+        10
+      ],
+      "observed": "Three original complete generation/native screens; separate one-call P->W0 and P->C proposals; host-authored seed, not claimed model-authored.",
+      "report": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\report.json",
+        "sha256": "a83e9608f27644863d877c6c0a45e2933c4ec5d84cf8ade6b1e619e1694acccf"
+      },
+      "role": "P"
+    },
+    {
+      "generation_callbacks": [
+        3
+      ],
+      "observed": "Validity witness passed/complete; raw source/private copy match; first-task10 answers via4/4/2 arrays. Own improver not invoked. Not counted C.",
+      "report": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed-witness\\report.json",
+        "sha256": "a11309ee47aa147890faa060136a41d6ff1808df0acaefa513ebf11df0f0d732"
+      },
+      "role": "W0"
+    },
+    {
+      "decision": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\decision.json",
+        "sha256": "fd7059e312db175e98e55a3b3f62e4d49ee6c8fa4e7f03603f9001b7942ca255"
+      },
+      "generation_callbacks": [
+        4,
+        4,
+        4
+      ],
+      "observed": "One counted P-authored child admitted; complete/eligible three-task screen; own inherited improver authors W1. P remains frontier despite latest allocation selectingC.",
+      "report": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\report.json",
+        "sha256": "2c0591be3117534eba5cb7763f28ac6e9b86f3c19655d807566ff5324e4778be"
+      },
+      "role": "C"
+    },
+    {
+      "generation_callbacks": [
+        1
+      ],
+      "observed": "Validity witness passed/complete; raw source/private copy match; first-task10 answers in one callback. Own improver not invoked. Not a second counted iteration. Semantic concern retained.",
+      "report": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\witness\\report.json",
+        "sha256": "0b7d39343f7c870a52978193b75e3db1779ae245a212026011af7ed44733937f"
+      },
+      "role": "W1"
+    }
+  ],
+  "format": "buddha.current-source-live-mechanism-review.v1",
+  "limitations": [
+    "Automated host subagent, not a human rater. Underlying model overlap with another role/source-authoring model is unknown; contexts are not statistically independent human ratings.",
+    "Local saved evidence only; root separately verifies full financial/authority/protected-control custody. This review does not externally authenticate provider replies or audit the whole sandbox.",
+    "No generated code executed/imported/compiled, model called, run launched/resumed, key/keyed account review read, source repaired, adaptive rerun/instrumentation performed, or original evidence changed.",
+    "C regenerate/count1/small-cap bypass and malformed/truncated-array fallback were unexercised.",
+    "C static any-function AST-difference guard retains constants and does not prove both roots change or reject all prompt-only/unrelated edits. It is not a substantive-change or safety oracle.",
+    "W1 own improver/stronger validator, digit/finite-choice branches were not executed. Its estimate update had no later callback in the one-batch witness. None counts as C executed-use evidence.",
+    "No scientific effectiveness, held-out, transfer, useful-diversity, human-preference or improved-improver conclusion."
+  ],
+  "mechanism_decisions": [
+    {
+      "changed_function_or_branch": "P generate appends one normalized response per callback. C generate uses min(3,remaining) at167, asks one batch at174, validates an array at176-182, and extends answers at189.",
+      "decision": "established",
+      "evidence_section": "original_generation_dataflow",
+      "limits": [
+        "Observed config is in-context/count10/max_output_tokens4096/modelgpt-5.6-luna.",
+        "Unexercised bypass/fallback branches remain unproved.",
+        "Lower development metrics do not negate mechanism use."
+      ],
+      "observable_executed_use_evidence": "All three C original owner populations return JSON arrays3/3/3/1. Earlier-answers data equals the saved prefixes at offsets0/3/6/9, and each returned array equals its saved output slice. All three P populations instead have ten per-answer callbacks whose assistant histories/output joins match. This proves changed callback/control/dataflow use, beyond source inequality, prompt constants, hypothesis or owner success.",
+      "outcome_name": "task_procedure_change",
+      "role": "C generation versus P",
+      "source_after": {
+        "lines": [
+          157,
+          190
+        ],
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\agent\\candidate.py",
+        "sha256": "4196cd29ffa76c6959e6f678a8286b1fde5b56e6a34a97dcf68787e1f22b3a43"
+      },
+      "source_before": {
+        "lines": [
+          196,
+          205
+        ],
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-proposal-v3\\components\\source-agent\\candidate.py",
+        "sha256": "77cfa68f6b3c6996fd503e1ce6f7a964eb57abdb8bde98f6761de5f6e298ff4f"
+      }
+    },
+    {
+      "changed_function_or_branch": "C adds _evidence196-216: parse full notes, retain metrics, count scored/missing positions and calculate range; propose_improvement249 actually includes _evidence(feedback) in measurement_index. P forwards full feedback without that derived-data procedure. C also adds replacement syntax/function/interface inspection263-274.",
+      "decision": "established",
+      "evidence_sections": [
+        "original_proposals_and_feedback[returned_role=W1]",
+        "original_generation_dataflow[stage=iterations/0/witness/generation]"
+      ],
+      "further_child_used_change": {
+        "description": "Recognized constraints, optional per-answer causal slots and output-cap-based batch sizing replace C fixed-width3 structure. Original W1 request shows all ten story allocations; ten-string output proves batch path use.",
+        "functions": "_constraints157-174, _valid_answer177-190, _allocation193-215, generate222-266",
+        "source": {
+          "lines": [
+            157,
+            266
+          ],
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\witness\\agent\\candidate.py",
+          "sha256": "1488d6348158dfe395f873ca2d830cbd1aa91c11b788900dd93f3ac5450d2e12"
+        },
+        "unexercised": "W1 own improver/validator is not invoked; adaptive next-batch sizing has no later request."
+      },
+      "limits": [
+        "Computed actual request data, not the hypothesis, proves _evidence use.",
+        "Successful C return supplies only the normal validation path, not rejection/error competence.",
+        "W1 first-task semantic compliance is not fully established: position8 has Caleb/he/him and no girl.",
+        "Changed and used does not mean improved effectiveness."
+      ],
+      "observable_executed_use_evidence": "Original C->W1 operation8dbde53ca04b31b8c04194c091db0db446e9ce02e92f4586753b742c1d468aee contains computed measurement_index, absent from both P proposal bodies. It matches C actual metrics, including scored/missing counts10/0,2/8,1/9 and ranges[6,8],[7,8],[7,7]. All complete original notes and30 literal C answers remain present. Raw W1 source field equals original materialized source and private copy; original capacity checkpoint passes. W1 generation operation9a6068290a2ccbe1eb6f69c15204175f87190fe937fa9debb1b88b2f7921987e requests ten causal allocation slots and its normal JSON array exactly matches ten saved first-task answers.",
+      "outcome_name": "changed_used_improver",
+      "role": "C inherited improver versus P, authoring changed W1",
+      "source_after": {
+        "lines": [
+          196,
+          275
+        ],
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\agent\\candidate.py",
+        "sha256": "4196cd29ffa76c6959e6f678a8286b1fde5b56e6a34a97dcf68787e1f22b3a43"
+      },
+      "source_before": {
+        "lines": [
+          243,
+          323
+        ],
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-proposal-v3\\components\\source-agent\\candidate.py",
+        "sha256": "77cfa68f6b3c6996fd503e1ce6f7a964eb57abdb8bde98f6761de5f6e298ff4f"
+      }
+    }
+  ],
+  "method": "Read trusted AGENTS/DESIGN/adopted protocol/criteria first and PLAN gate context, then literal P/C/W0/W1 source. Use passive stdlib JSON/base64/hash and read-only immutable SQLite SELECTs for original callbacks/replies, feedback, lineage, copied source and outputs. No selected/generated-code execution/import/compile.",
+  "negative_missing_and_unattempted_evidence": {
+    "feedback_projection_note": "Saved records use task_id while original callable projection uses matching full task. Every literal note and complete original output/metric join matches; differently shaped record objects are not asserted byte-identical.",
+    "missing_or_rejected_declared_roles": [],
+    "missing_score_interpretation": "All complete original scores/partitions are retained; null non-head scores (8 in binary,9 in repeated digit) are not imputed zero.",
+    "negative_observations": [
+      "C mean utility/distinct are lower than P.",
+      "C curated-97 repeats literal7 ten times; official partition has one class.",
+      "C stories retain rescue/helping structures. Position1 ties a rope to a roof kite without explaining access; position5 has Toby steady Jade by holding the strap of the still-floating basket. These are plausibility concerns, not replacement scores.",
+      "W1 first-task position8 begins Caleb's dog,Fern and uses He rewarded her; no girl is mentioned. Requested girl-and-her-dog compliance is not established for that output."
+    ],
+    "original_report_failures": [],
+    "unattempted_by_design": [
+      "W0/W1 tasks curated-47/curated-97",
+      "W0/W1 official native metrics",
+      "W0 own improver",
+      "W1 own improver",
+      "second counted iteration"
+    ]
+  },
+  "original_generation_dataflow": [
+    {
+      "agent_inventory_sha256": "22cd302a8c12e05c5fd9bb95389f5880e713a027e60a0206799e9c4fa2f48eeb",
+      "answer_count": 10,
+      "answers": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\0\\generation\\attempts\\0-0\\session\\answers.json",
+        "sha256": "96c7d9a71bfbe507596560d2685f388cfa534611778f5b4c6648f70bf6386881"
+      },
+      "calls": {
+        "completed": 10,
+        "requested": 10,
+        "stopped": 0
+      },
+      "exit_code": 0,
+      "operations_in_output_order": [
+        {
+          "answer_offset": 0,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "0a5bc3c774897cc6b4cb4214c77cccd9861a9a7ef12ebe6654a540deb360538d",
+          "operation_id": "7a4d95c98a9cc7203ff49603c338b313185dd12ada4302b8b4ca8e78078f0f86",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Tell me a story in five sentences about a girl and her dog.",
+          "provider_request_id": "req_fcd01c032f934dd782c530f9d754f77c",
+          "request_body_sha256": "011e31c70c22300b2849503df63e39c4afdecc0f8576f14d5cfe0cb3fa45d0df",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "7eb9f97f7a213a85597846313cc1d6585f0c9ddadba44e8892d4562051c52896",
+          "response_body_sha256": "555f7d68c6b9704e79d2d29710d7ee52210c4cabeff6734c1546ab0b9ffcac8d",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 1,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        },
+        {
+          "answer_offset": 1,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "22f29c3072d3b22936dc4397fa3685701a9d3dba048d2f376b72e2cbd0452fe3",
+          "operation_id": "bf9d5ec5a6127a163dd1a25108e80bf32c2be6e2db3b8e0c123dac9e5da74ea8",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Can you generate a different answer?",
+          "provider_request_id": "req_c2cf41158852486ca57b7e51c918cc34",
+          "request_body_sha256": "bce00c2ee4f6596f8551d9c7347b49bc290775d70461432aaaaf806712b9eb60",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "a667ce06b3d607843c1d317f7cdc52a8577eb1a4d09c8f49ac2154b8ac4f4565",
+          "response_body_sha256": "8dd3c1e35332de0293f574372186961e2633287c18bcf57d80f20fa4724e243a",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 1,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        },
+        {
+          "answer_offset": 2,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "0f6c67785080141d6b129467f511784bf00164336e3de7faf7a57cab6902f06f",
+          "operation_id": "5026c52d6672946a57485d81439b1790bfb3ef7fe0d7d9161a0134053cc5bdb1",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Can you generate a different answer?",
+          "provider_request_id": "req_c82cad6b777d4922b80045dfdf8b0982",
+          "request_body_sha256": "85e0fdbd2b1d4c08d84450339c8a9b9e92ada785d1a605fa979b81fe87a7cae1",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "76572f2b240eabf01514509ecdad37ee00c09d206d15812b1da50a53e0a3b343",
+          "response_body_sha256": "0e2816b3c6f9a1237fd11420826f16faf62d4da74c3be71d4135de037b4c66bc",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 1,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        },
+        {
+          "answer_offset": 3,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "254a66f1b8273f4164417d6e450831a74b41a1858b883f32620b16eeb581d7b5",
+          "operation_id": "154dc6f6bc2bf04e2d0b609837ebc391c803deae0d249a6117e54d09c6465295",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Can you generate a different answer?",
+          "provider_request_id": "req_fea1146370f241da9fb9c14c4014d1a3",
+          "request_body_sha256": "4983a398554c17670ca71197755687d7c51335806172613fb9a66780c179c84e",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "70cddb333c268afbde261a2293e9a18bf239ffc534522df8f552fe48fe3ccb08",
+          "response_body_sha256": "05c71a682c29107dd37798bd48d3159cb2e1f8e05145efbfc8a7aef116f13a46",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 1,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        },
+        {
+          "answer_offset": 4,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "7751b473a1651ff24754e41ca49294a09476e81f7e505fa05f99e2d1d8b2db41",
+          "operation_id": "0622ba273e2e2d266f591519db726dbb6efab18f3675cc16057875b1d8f6f4cf",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Can you generate a different answer?",
+          "provider_request_id": "req_95beb69c21524627af5ecea3722f6a3a",
+          "request_body_sha256": "f59d34b49192e314a88e0b663332a0928416baeb872de8298e8d06280d13a75b",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "248474c1b42a7989badd4ef31b8d2d9a9aa2b3a17e2a6583c8d224cd84c0026a",
+          "response_body_sha256": "ecfae92863d2d971f4826655f4052c43e8048adfaf3930d9cedf5b5082e7ffd6",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 1,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        },
+        {
+          "answer_offset": 5,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "aa8b3894b6d4404f0bea5912964e35813bd32fcedf41ed02bbc046fd88f15955",
+          "operation_id": "e69abfab0937cfb16b29227327d506cfd6e0063470701d104640559c36cb1a5f",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Can you generate a different answer?",
+          "provider_request_id": "req_86b94e9e05d447818e1d062c03b44bd7",
+          "request_body_sha256": "39082cdaf39a975164eba2f99c633c5ca5e0a214ede815fe990c67d0449b91ae",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "0a4635d4321ab9c5ca36f6accf33d0b51bfac12fbb75a273b4c900f5663eaedf",
+          "response_body_sha256": "8f0764ed9d5b41fced9c9c14d2d9d686500a3093c6d826f4d19a631857360ef9",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 1,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        },
+        {
+          "answer_offset": 6,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "d61309158919dee1e7d1d7ea5fa072afe6359589a47242baa1558534f7472d78",
+          "operation_id": "ad5851de34624b90c41d417a3f6f1a7c69781b93906f54de39a89d12eced9caf",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Can you generate a different answer?",
+          "provider_request_id": "req_d5cd7332f1ea49e089fcf59319f1fa12",
+          "request_body_sha256": "173d615a68ab213502f1926dace7fd1339d768e9e27f3fc6a3f7474e39600453",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "1fdc7d3e297ef7c81e348a37edd44509c9113e82620ec41308ebc282c2e0a513",
+          "response_body_sha256": "4f7d02dde4df37fc70f62ef618802dc65847acd37e046988b03de9a8ad6943ae",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 1,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        },
+        {
+          "answer_offset": 7,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "3c57e678cad8e11e5a55f4ce45365fbda0af29a12808d96b688d2f4afe6898e0",
+          "operation_id": "a0554bb94f760d9966468ecc5a881c8d04dec8526f73eec847197fdabfbf8710",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Can you generate a different answer?",
+          "provider_request_id": "req_1e7c544e86a7447fbde9534a83d72dcf",
+          "request_body_sha256": "34cf696ac123b135bc642af58bc9d0830d290c5809e9a31209049b6b0f86d454",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "c3df357e88049f64ee2a9652219825179bd31ce01ce9ef9a47033f0aa0aa3df9",
+          "response_body_sha256": "e97d0c2362db25445edabffa03f92660d5ba9566875edd9130a2b6470abe7c2a",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 1,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        },
+        {
+          "answer_offset": 8,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "a624dcb20d49de49322cb3b14b3e4feba7e81a34309c1cf8e2da2ef370608bcb",
+          "operation_id": "bb184b1ef1998cdcf4796505cce671f9348db39e23d2c316680fed3037c527ad",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Can you generate a different answer?",
+          "provider_request_id": "req_980ea4a169cc4add8968b6d6e8890550",
+          "request_body_sha256": "4c9c594b49d9fc16457ab0d337335d3f2e09603449f05ca0a31d33cc6072f287",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "30511f8e8de73b5637e4a3f0362ef4958a8d00d3d5dcc3f6643a3e47b783be1e",
+          "response_body_sha256": "8c5db66dcd63693239f3043f5907cc2f3ff7e0e33bf378c8764e740687ba55b6",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 1,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        },
+        {
+          "answer_offset": 9,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "375731ab1acf9180ffeea1a348e9286183b91c84ede21ad1fe7758b1aac51b9d",
+          "operation_id": "b81d0a26907378f68c47f9310b82fcaed9e12721f90d488c3a1af2ce2e79f979",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Can you generate a different answer?",
+          "provider_request_id": "req_4947082f651d408289b48f5315f32c4a",
+          "request_body_sha256": "2dc06f36775c354440344d065229d0f54f593afd4f58eeaf70c74ba3c72d8bf7",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "741849af9006c3ba2fbbe1369413fc53134576a7889f2aacd589e189f44e4c3c",
+          "response_body_sha256": "ace902e7644a1d2d0980f9533cb81599910ed528a2549df890e36ca052d8dd73",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 1,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        }
+      ],
+      "owner_ledger": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\0\\generation\\owners\\0\\operations.sqlite3",
+        "sha256": "bd02330fd2ea8376e6ca1ef641df797acce061174820466d0d05d4a798a3ecbc"
+      },
+      "owner_manifest": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\0\\generation\\owners\\0\\manifest.json",
+        "sha256": "5fcc29d9170f2cb32c685084b4c6539edc65b0de3de317f1094ad71d58da6450"
+      },
+      "owner_run_id": "11351299c61b43b99bb38e6dedde8743",
+      "reason": "complete",
+      "runtime_host_configuration": {
+        "CapDrop": [
+          "ALL"
+        ],
+        "CgroupnsMode": "private",
+        "IpcMode": "none",
+        "LogConfig": {
+          "Config": {},
+          "Type": "none"
+        },
+        "Memory": 268435456,
+        "MemorySwap": 268435456,
+        "NanoCpus": 1000000000,
+        "NetworkMode": "none",
+        "PidMode": "",
+        "PidsLimit": 64,
+        "Privileged": false,
+        "ReadonlyRootfs": true,
+        "SecurityOpt": [
+          "no-new-privileges:true"
+        ],
+        "Tmpfs": {
+          "/scratch": "rw,size=64m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700",
+          "/tmp": "rw,size=16m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700"
+        },
+        "UTSMode": ""
+      },
+      "runtime_image": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+      "session_report": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\0\\generation\\attempts\\0-0\\session\\report.json",
+        "sha256": "f730184416e4f17a2e4371e98b9edd9e5e121b0ea7707dc81c85607fdcdc979e"
+      },
+      "source_mount": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-proposal-v3\\components\\source-agent",
+      "stage": "seed/tasks/0/generation",
+      "status": "complete",
+      "task_id": "curated-0"
+    },
+    {
+      "agent_inventory_sha256": "22cd302a8c12e05c5fd9bb95389f5880e713a027e60a0206799e9c4fa2f48eeb",
+      "answer_count": 10,
+      "answers": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\1\\generation\\attempts\\0-0\\session\\answers.json",
+        "sha256": "26626470230be8b015f993c056bfd65014c68c2332f541e711231bdb84f1e8a4"
+      },
+      "calls": {
+        "completed": 10,
+        "requested": 10,
+        "stopped": 0
+      },
+      "exit_code": 0,
+      "operations_in_output_order": [
+        {
+          "answer_offset": 0,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "0595a46492357c71c30bf3ae19624fc8b981047b1331b4363ccae175d84163cb",
+          "operation_id": "628555c28e9113b59060e3d752c8203cea586878db0feee0b3ea429ddaea8800",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Pick one: glass half full or glass half empty?",
+          "provider_request_id": "req_2461a65a935b44b097a42f8d639c5fe6",
+          "request_body_sha256": "9e9ebe9b6648a519d6f8fd58e44b1be46f7dfa6c4e2e21eb2f4ec77b16ca45a0",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "8f147322cba8df70969dcce4ab8aeec8f71ca7bd039d15323cf562e5fb6de1e5",
+          "response_body_sha256": "250eee7b5d42e58c2e820c66526e7e38251291d11c4f1dcd1b7ff684591aeba3",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 1,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        },
+        {
+          "answer_offset": 1,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "ef42078fbdb6ac5b1ccbe3025efae774053d5bf16879a3d005d949c5250eab4b",
+          "operation_id": "dfb5f5868fdafe44e8913da14cff5886cc14ec5bcda793e800ba4dce640ffb99",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Can you generate a different answer?",
+          "provider_request_id": "req_2786b970bf374fb3a071f5137a7df6fe",
+          "request_body_sha256": "74903366b9f3b4380fa440194b0fe81882fc3da531c36779f9dcebb7bcb5af27",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "95d9d76bceba78004ec3db9ac19bb67c0bd1b171418c3878878410ab185612c2",
+          "response_body_sha256": "802e4b0c9f1073828838112300dece73fdab742aff90f15764bc3e41241d2bcd",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 1,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        },
+        {
+          "answer_offset": 2,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "9f16e94e6cc97afe3207dc07151e2bc14d4401ce03d75ce92b1a6737f6cea0c9",
+          "operation_id": "cd593ea247d27bdc67eacffc2f9e85a05a4580db85db1df4302a6cc4d9bcbfcc",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Can you generate a different answer?",
+          "provider_request_id": "req_e760e776f09c40268bef673a568722fc",
+          "request_body_sha256": "100b73b776292c0074aac1b4de1edde9e236e364c08708b4babbd67bdf4f503b",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "2212805f450d69110a35479b5e83c57f32baa4909b535134854edde374839917",
+          "response_body_sha256": "09101ee81c58f85fcc29c41edd58d6e3c8fe5209911529b82dbdde6c365019bd",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 1,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        },
+        {
+          "answer_offset": 3,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "e0d3e7c2bb38f734f5d70483b0f5a32ad36b6b92e5e4a308a3e7e1e058e00aa3",
+          "operation_id": "6b8c2ffae5491a0439796fcf21931399647615490548e9414cfd2dad66944552",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Can you generate a different answer?",
+          "provider_request_id": "req_cc5297a053c34f6c8d9709cdba75e53c",
+          "request_body_sha256": "d336cf2f1311283dac3c86ef48d08f31e3363d8fa5095006131f439de5747910",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "9c61ea93ac8890e92e382f1802f3881f6a220403991133b9a07ce1d6468e5b39",
+          "response_body_sha256": "9f287bb34fc61fea6186e5ec184834a6f01e3faa7ea4d32493de311353f4cc81",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 1,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        },
+        {
+          "answer_offset": 4,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "a709f48b95d76a754aa973157ac463f9b66628413957ce50c5313be9c3caef8b",
+          "operation_id": "c209d611a99d620d948e030e407716c9725084c39fdb8252fadb6f427b8b63b7",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Can you generate a different answer?",
+          "provider_request_id": "req_b22258b2a7e04d588d17cab9b6691a2e",
+          "request_body_sha256": "1ebce85b9da8de1a5d9e90861812978a6e98a0241c03a616dee5f284932b44b3",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "fa9481af95976acfc7a478a105cf7eb547a7f92eb0a3b805478631c3a1110405",
+          "response_body_sha256": "f4cbf3240be11b2cba8c918d1e65f2347a8342f7e2a979380bbdcab399a7bb1f",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 1,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        },
+        {
+          "answer_offset": 5,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "cd4f1b4dee1596eacd816cf9c6c76bbae93ccc782fa57e6b6e18cfec34b2f4fb",
+          "operation_id": "16fe367fe50b907acf063d76d07635e9f2def79988975ee62a23b9307c457f64",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Can you generate a different answer?",
+          "provider_request_id": "req_c7506266af854d4eb510ca8d69a7d76d",
+          "request_body_sha256": "703dc0769b7dd4e3cfcd83e791718240fb267e38d6f44f25ffa995fb2ed54396",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "e46807296fe570023e965aa770fe760bd9285fe0ceae1ace419ad0f36fb455ac",
+          "response_body_sha256": "fe73a9cd4c493740f5bbfdb44470c4161642f7a5b5672733aad68e8ef1731821",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 1,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        },
+        {
+          "answer_offset": 6,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "08ad97914846c42d4b37d9960665b1ef1cc7bb6dd649033f35d1a1f70d2a0410",
+          "operation_id": "cac923e3b9f4e1e8c1fe9723d58165778a15068cdd99f67efabbc408300da470",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Can you generate a different answer?",
+          "provider_request_id": "req_61c77857c21241a0819244378c840100",
+          "request_body_sha256": "90d20ca1b24b32e11211550e1adc895ada147dbe4b109be11095eddc963d31f1",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "6cae92c31243e6819933189356db1e6a5268bd09700089f1368c2209363e29b3",
+          "response_body_sha256": "fc00653d780114682d7ef954088bd90a858e82c261d786508926b27862f8c618",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 1,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        },
+        {
+          "answer_offset": 7,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "2bc96e87110692c8ab467f3d975a36d62725d9edbb1ee6f4d0cdc28b1dd57407",
+          "operation_id": "8a831edd57d0a669b5270c5a5ea415d6d5583ac5a3992eb9e67831add479db7a",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Can you generate a different answer?",
+          "provider_request_id": "req_d9ea7ae4c31d440388193e62c0fe70d7",
+          "request_body_sha256": "3458ba2d5b01df943ecdef338423e6adabef4f32a87ce80559520e47903482a0",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "65640508555f63e47b9c4187e85e2e296911102a196c8346bf9fa88a0a4c4620",
+          "response_body_sha256": "ef05e00c4090c1d4eb286271c0e8e56dd44d6a0303c918512f0679e3223268d8",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 1,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        },
+        {
+          "answer_offset": 8,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "b0291121bb66cdc1ce2f3ef4b87f0c32da5c31d19b37908c25f0df22b9a0f5c8",
+          "operation_id": "553ba2cbfb717cceb66a4a479746936c18373e215f7bfc60e179276d00d267da",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Can you generate a different answer?",
+          "provider_request_id": "req_8fb43db2ccce476fb5e13fcf26a0b10a",
+          "request_body_sha256": "7e81a6f2b1f91e2289db562ec59792ccd4ef102354d08e797cf5017d4b19cead",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "f9335686a53e28a99f4d6df0b123919b6560562a9875070f8fd170566b030495",
+          "response_body_sha256": "1678a1036b08695e569dcead86e32ed5488b7b0d10ad427ce839408b443082a3",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 1,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        },
+        {
+          "answer_offset": 9,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "e32940f852afd3e35426904e50efcd156a41e760e28f97b8cca726cd469a2513",
+          "operation_id": "62fcd07c86e4a3d91764cab1cfc96b2f7a973a63ffbe3c62b0bb44787111c5a1",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Can you generate a different answer?",
+          "provider_request_id": "req_d9693fe28e544430b69c6130e689ca83",
+          "request_body_sha256": "a0a8ac2d6d0dc2efbc6cb58d2f3b5674d02f0a241291adb1112bc22e777048ef",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "ad975d91d8f6feeecccef5584f971aa97d7063be358b68c7f70b9fa400c17a31",
+          "response_body_sha256": "6b3fb9f84063afed154ff2b01cc759851fa5dd7a6f12b96297e19db9605aa84a",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 1,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        }
+      ],
+      "owner_ledger": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\1\\generation\\owners\\0\\operations.sqlite3",
+        "sha256": "9d1b29d183e323f70a532edeae9b3319d7ffae6ea8aaa62482153d63449a81d0"
+      },
+      "owner_manifest": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\1\\generation\\owners\\0\\manifest.json",
+        "sha256": "4f2f60e0a621c28ffabd706375415db55f7b3b972dbd25c641fb0d085f190db2"
+      },
+      "owner_run_id": "bbf8381f31694324b8953ee080a9c4d8",
+      "reason": "complete",
+      "runtime_host_configuration": {
+        "CapDrop": [
+          "ALL"
+        ],
+        "CgroupnsMode": "private",
+        "IpcMode": "none",
+        "LogConfig": {
+          "Config": {},
+          "Type": "none"
+        },
+        "Memory": 268435456,
+        "MemorySwap": 268435456,
+        "NanoCpus": 1000000000,
+        "NetworkMode": "none",
+        "PidMode": "",
+        "PidsLimit": 64,
+        "Privileged": false,
+        "ReadonlyRootfs": true,
+        "SecurityOpt": [
+          "no-new-privileges:true"
+        ],
+        "Tmpfs": {
+          "/scratch": "rw,size=64m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700",
+          "/tmp": "rw,size=16m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700"
+        },
+        "UTSMode": ""
+      },
+      "runtime_image": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+      "session_report": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\1\\generation\\attempts\\0-0\\session\\report.json",
+        "sha256": "afecfe548fc2f34a24e10bb480b6a728a266937c61696ffd2fd68a3aa3766a6b"
+      },
+      "source_mount": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-proposal-v3\\components\\source-agent",
+      "stage": "seed/tasks/1/generation",
+      "status": "complete",
+      "task_id": "curated-47"
+    },
+    {
+      "agent_inventory_sha256": "22cd302a8c12e05c5fd9bb95389f5880e713a027e60a0206799e9c4fa2f48eeb",
+      "answer_count": 10,
+      "answers": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\2\\generation\\attempts\\0-0\\session\\answers.json",
+        "sha256": "2a52faf674e96bf2f221f01c4c404184da7ec4b7913679ed8443ec17ca07f3ac"
+      },
+      "calls": {
+        "completed": 10,
+        "requested": 10,
+        "stopped": 0
+      },
+      "exit_code": 0,
+      "operations_in_output_order": [
+        {
+          "answer_offset": 0,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "f1dbb8b02a2b11413431929f4a18f0b474a525fe07201001c17544d63e7dbb0b",
+          "operation_id": "702f7c04a1f9eb55b3b7e75d91901b9623d00f0145ff1bd604d5cf0ad06af12f",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Generate the safest first digit for my 12 digit password? Give me exactly one digit.",
+          "provider_request_id": "req_fa9871b703cc4b66860cdcd7bf744580",
+          "request_body_sha256": "039a6a67b8f34d366aba1faabab8729a161a1a656cd203089245391176b8b4a3",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "fbf6353341f789b901e6db7c41082eb1e50d03db1265d8dd1cf829d673f7e4cf",
+          "response_body_sha256": "8126c7def7ad7039e08dce642ec51f7519267f2f8ea658aca9a766787a6952c1",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 1,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        },
+        {
+          "answer_offset": 1,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "8bacb62a5b744ef53fcb9465dac1bf00aa9a6f2d1544d96bc560adab4cf0ae63",
+          "operation_id": "332dd9683a9992602473fbeac501eb519d0191d454968e9770a50db7cde732f0",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Can you generate a different answer?",
+          "provider_request_id": "req_04378e02b27c4f629f618f2ee614d8e2",
+          "request_body_sha256": "120bbaa17fc08be83a5227ff07311905721c2552b783a9ecbfef3598061c0a3e",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "e2dc095252e8974c82bdc460660e9d9b1fd0ac4529db32908cc2510eec4c065a",
+          "response_body_sha256": "bf02defe3bca4983b403faa58b0d94b9464fd8b43fd1a3e7e59cd54fdcb9ab17",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 1,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        },
+        {
+          "answer_offset": 2,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "fa308cfb8c85fc785350c1d466e1482b13d4d218825d7af9f09f2fd96eacf951",
+          "operation_id": "a6ee4d22e5e39df6c5197745618e93b4d1360eb18e2903635c137641cc442c83",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Can you generate a different answer?",
+          "provider_request_id": "req_8cc4fb74b02d49db8748477140a3d770",
+          "request_body_sha256": "82570b9984fb958eaa9abf84636d52a5791ecae86c47bb585eec4de34a360c10",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "f835fc1475fab85e85110095d79a98e2bdad0414747604a9dade65ebebebf133",
+          "response_body_sha256": "f6b0d8d4ba2aa44a98cb7ecfdecf9cebdad4bff1e8371bb68ab7ef44f9400e72",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 1,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        },
+        {
+          "answer_offset": 3,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "69784c0548b01647a7d3c20cc3f9bf2c9df115b4cd0fa81694d83e8c1ae2235b",
+          "operation_id": "e5f1eb9429810ba34f5e316745d7e872b98ba6c79d3ec1813580775d38078887",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Can you generate a different answer?",
+          "provider_request_id": "req_25e2045fd6274e9bab66fcf834a1923b",
+          "request_body_sha256": "0131cc15e40f36291a51a3bc4abec9563a94e3a0fe677bb7bc8c31194bbb27a0",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "f8a2642f066e0ae1f24798ac7f0c4cb940912e705fbfb6bf82a99c79ef7a336a",
+          "response_body_sha256": "6d413cd94fc36d0eebdcad100d4685ec65b988ec98026e0600e35132c46afdf9",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 1,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        },
+        {
+          "answer_offset": 4,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "ab9cb6335f6d05b6997b8b6c3939de1e90151075d684daf36b32c68aa7fcfc62",
+          "operation_id": "84e565591de7316a2c8126b9f8e142226e8ad9f741fec34fe308f6d9aaee1671",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Can you generate a different answer?",
+          "provider_request_id": "req_44668ac5992e41a78ec07861fd7221dd",
+          "request_body_sha256": "59e80afbe4ae9554b2e41039e00c655d0bc405c45e23286971655bce4fe8b202",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "8b540abb732b329575931d6a6a8b764264ba78927ef656da0449df8ce8da6cca",
+          "response_body_sha256": "1fc09d9c97ea6126af662259e8af95863f0c2f1ecee0d8e846cbacbdd7f90980",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 1,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        },
+        {
+          "answer_offset": 5,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "dc444c05dbf97675bef153a96496e9b1be718af8372665fee844ac84320f995a",
+          "operation_id": "ba13477b1f89e9ec462be2c429ff79b5741e7fadf12ceb477ea8d580acf0316e",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Can you generate a different answer?",
+          "provider_request_id": "req_bddd88b6991741b6a2bac73282372b88",
+          "request_body_sha256": "dc059677ed8b1c91ba0f55bb68ec1cded14c7637ec26dadbc00523c11d389701",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "16dc3fb70113dba77ca54a7e6738b8d40232e6d42c53dec7213a3a749ca9dd0a",
+          "response_body_sha256": "b1cced53169bc1dc1b4bf19aa90f8c5a32278a727fdf7e811b79d9fadb752c12",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 1,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        },
+        {
+          "answer_offset": 6,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "19e05c359b48d3a5755b7cdaff5785d6261e66f0d22c55b04d15c08d413d15b0",
+          "operation_id": "2803e7f5ba9be83506f8b17ee96ee72de8c60d211649c3253c8b6bbf61c84736",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Can you generate a different answer?",
+          "provider_request_id": "req_13875d200fe24245ad2165b0053d69a1",
+          "request_body_sha256": "3567ff5e784169153d6f87b1504636d87afbe7df48c8a0923a2dd8fd815866a6",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "37b57432be8008e0d0bb517f7c044cb7fb0233e2ef506de27134271dad020162",
+          "response_body_sha256": "9f920a55b298ef9bbd633b2aec292df5004d278128444956d36a6e9f6b8b6946",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 1,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        },
+        {
+          "answer_offset": 7,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "02a9bffad053ecef79b80420c81c02034a291f922a1767126fb3cdb2caf51d5d",
+          "operation_id": "310f18752a3988850d94b682130bd28509900315ff2a95a991b006f87b1739b9",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Can you generate a different answer?",
+          "provider_request_id": "req_77812b10af014dadace0725e0834e108",
+          "request_body_sha256": "ca73294472136a49d8ca12bf9743b281a73b7ef3ed0dba19cc8da9ddad44e175",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "12946cd397071796e1cfa92bb891a14ef6d9dd869df6b6636b621a0b43401e76",
+          "response_body_sha256": "d802f9138e73a0684e4a5db4eeec15ccc5073c6ac80a46927bff2c99f20c874f",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 1,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        },
+        {
+          "answer_offset": 8,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "6a405de28860b3c7e23977838932aee307144350ef59cecc01d01a768f3cc107",
+          "operation_id": "a50bc335e6f2caa44388b78d877a56b22c4a259eb3c346606a51c5c3ba930022",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Can you generate a different answer?",
+          "provider_request_id": "req_a355d55dc4004cae9247417a401c8592",
+          "request_body_sha256": "621201bd10c055843b3920788b3b5c45ed7810493ab346602a59d34f51a11fc9",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "5d7216e90029ab203fb8576ba4feb5d5aa4939391ff7f3e5ab7d17876106c62e",
+          "response_body_sha256": "bac044a730535536c6913134cdda307e1e6e0e03b1f4bb2d1c10dc8091e6b5e3",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 1,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        },
+        {
+          "answer_offset": 9,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "0bdc071cc7b2e42a8e3b1e3c68ebf14bb69dff95d7e79eca56be1b55c859148e",
+          "operation_id": "df775bd1eeb5819fb7d0046124a4e3f89231e7e3ccb87c205d1f5050822cc82a",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Can you generate a different answer?",
+          "provider_request_id": "req_b07beac937f94f888af4be123ef3725d",
+          "request_body_sha256": "8d01fc5f9af90f6f4390b7c9dea98d2d58b75765f567d10f7ff3512ea2f0d4a0",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "2a7bda35953da6e916c79d781a54a76a9818fb3225d65a5f8b412a294e7fd8d4",
+          "response_body_sha256": "203ac5a5eaea23743ef7041728c391643ed34e04b507603523008f1742b8421d",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 1,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        }
+      ],
+      "owner_ledger": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\2\\generation\\owners\\0\\operations.sqlite3",
+        "sha256": "ca18e83efb44423e5beabe35d20c707e9e24181cc3e84bd6f4fc0e22ca50071b"
+      },
+      "owner_manifest": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\2\\generation\\owners\\0\\manifest.json",
+        "sha256": "7b28c982dc6595133841ba60c392e0d02e619a9dc1be52d042cd3d5ba601c01e"
+      },
+      "owner_run_id": "f4b31c096a5840088bb10065e8ea1cdb",
+      "reason": "complete",
+      "runtime_host_configuration": {
+        "CapDrop": [
+          "ALL"
+        ],
+        "CgroupnsMode": "private",
+        "IpcMode": "none",
+        "LogConfig": {
+          "Config": {},
+          "Type": "none"
+        },
+        "Memory": 268435456,
+        "MemorySwap": 268435456,
+        "NanoCpus": 1000000000,
+        "NetworkMode": "none",
+        "PidMode": "",
+        "PidsLimit": 64,
+        "Privileged": false,
+        "ReadonlyRootfs": true,
+        "SecurityOpt": [
+          "no-new-privileges:true"
+        ],
+        "Tmpfs": {
+          "/scratch": "rw,size=64m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700",
+          "/tmp": "rw,size=16m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700"
+        },
+        "UTSMode": ""
+      },
+      "runtime_image": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+      "session_report": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\2\\generation\\attempts\\0-0\\session\\report.json",
+        "sha256": "98967e7d1355b36977cf7f5a4d343629feaa98e7214bd9e95b9ca1cdeb66eac2"
+      },
+      "source_mount": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-proposal-v3\\components\\source-agent",
+      "stage": "seed/tasks/2/generation",
+      "status": "complete",
+      "task_id": "curated-97"
+    },
+    {
+      "agent_inventory_sha256": "fb05dfb7df368418bda13c7db20f06846ea27d96b7bee7ed2b3eff6aef5c46fb",
+      "answer_count": 10,
+      "answers": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\0\\generation\\attempts\\0-0\\session\\answers.json",
+        "sha256": "1988b8d53b21829eec979644f42a29e5f3b1d96f1d379801592a0c694297305a"
+      },
+      "calls": {
+        "completed": 4,
+        "requested": 4,
+        "stopped": 0
+      },
+      "exit_code": 0,
+      "operations_in_output_order": [
+        {
+          "answer_offset": 0,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "0115e6e4fadb7454cec5167aa0f5bc75da0113e9daac537d02d2d5898e7ee707",
+          "operation_id": "f4eaa548fda639544d283038f7d2a933d9fe883a63d0f8ffbfb29302f228ce2c",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Produce a JSON array of exactly 3 strings, each an independent final answer to ORIGINAL_TASK. Silently allocate different central causes, actions and conse",
+          "provider_request_id": "req_aed39116e12b42669424bc027d493cf5",
+          "request_body_sha256": "186c0ef146e6812b4bffda0e744a8b7c081e335ba827b5dbb8990bdb255cd61b",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "ae0550bbffd6d1725fdcc67eab08ffb9fe74faa5534c150e32cb862b154c6cc9",
+          "response_body_sha256": "d8005aa6b573256771f50704f82b735704537e3a550f05c8d932e920e03a2125",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 3,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        },
+        {
+          "answer_offset": 3,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "45e60be8cd88cfd6965e301e4257b0e715089896e0692e03f4b7a67a5264cd24",
+          "operation_id": "55e52a99c2a97f0026846d0c0fa07e9e86cd29ee9dee38fc77b44334201d9918",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Produce a JSON array of exactly 3 strings, each an independent final answer to ORIGINAL_TASK. Silently allocate different central causes, actions and conse",
+          "provider_request_id": "req_207ec0a1fa184d3aa88551ee0b2f8364",
+          "request_body_sha256": "41c63db4ff2c53ebdc7ac15f8452e0634dde856a545c3c215732ae74c85e9278",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "b066ce60de2a6f74bff0a61a1f0c75eedd05ef59ac0e1554dd297d6ac72c6e45",
+          "response_body_sha256": "3b0cc5daa66f9a3f92df89c73937401e3bf1b08344fbbfc3e412c62ec66b8a89",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 3,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        },
+        {
+          "answer_offset": 6,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "398b42c022a10303b0ce1f8a3f17dfc02cb01aefa8c24b8cb115f861dacb1c7e",
+          "operation_id": "e6294fdee8a6e2926e765f827c2fdd10ff3178a77086d89dc940e339c22f391c",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Produce a JSON array of exactly 3 strings, each an independent final answer to ORIGINAL_TASK. Silently allocate different central causes, actions and conse",
+          "provider_request_id": "req_6959072392ee4a71a9412ba760fb7ff4",
+          "request_body_sha256": "d6dd19f0b1c18393f6d9adc522b5558603e914926e0a3c97a33c70efc673704a",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "6a83d659bc0b17b74e7e4bacd9e6250b952f3675d71f0f7051ab4b4dd5d9257f",
+          "response_body_sha256": "90b3bb422147262f5c4c9eda41b324fff663cd8854dd3836a89a0d1771142b95",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 3,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        },
+        {
+          "answer_offset": 9,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "efad0fa48d9bf1a6373bee7f208dfd1f6d7140dbdb9e7ad9a8049b1495e40def",
+          "operation_id": "954743c3f4ca4abf0265511e160e30235f4a10198e33f45a9febb6280c874102",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Produce a JSON array of exactly 1 strings, each an independent final answer to ORIGINAL_TASK. Silently allocate different central causes, actions and conse",
+          "provider_request_id": "req_2357757228d64536b4565f6f0d8360d7",
+          "request_body_sha256": "b6d7e271cff2ec2821c31f9abcd0014289ffd9c6448f684fe40475f6bfcab367",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "1ad60f94d03a2ec38b069bfeb6b515fc20c0e8ad5f64ec33d0a522621b0820ed",
+          "response_body_sha256": "6d60d57f4d48fb5ec9942e5c88ab47fc3211d2eaedbb3cfa047cc71feb0c4ae5",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 1,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        }
+      ],
+      "owner_ledger": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\0\\generation\\owners\\0\\operations.sqlite3",
+        "sha256": "499c968dace29799e60edb28c7a1ff1aead4e453806e663be96af0bf46285b53"
+      },
+      "owner_manifest": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\0\\generation\\owners\\0\\manifest.json",
+        "sha256": "e34848a4c2507c3f0f97d50a4dcb0e8da6ec81f9a5459ff2f10781381ebb2d43"
+      },
+      "owner_run_id": "ee3520835faf49e6bc2825607effe73c",
+      "reason": "complete",
+      "runtime_host_configuration": {
+        "CapDrop": [
+          "ALL"
+        ],
+        "CgroupnsMode": "private",
+        "IpcMode": "none",
+        "LogConfig": {
+          "Config": {},
+          "Type": "none"
+        },
+        "Memory": 268435456,
+        "MemorySwap": 268435456,
+        "NanoCpus": 1000000000,
+        "NetworkMode": "none",
+        "PidMode": "",
+        "PidsLimit": 64,
+        "Privileged": false,
+        "ReadonlyRootfs": true,
+        "SecurityOpt": [
+          "no-new-privileges:true"
+        ],
+        "Tmpfs": {
+          "/scratch": "rw,size=64m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700",
+          "/tmp": "rw,size=16m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700"
+        },
+        "UTSMode": ""
+      },
+      "runtime_image": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+      "session_report": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\0\\generation\\attempts\\0-0\\session\\report.json",
+        "sha256": "903b56751786c06e546884487309e2bcd8f704f95e87552863f5619fd31eca1e"
+      },
+      "source_mount": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\agent",
+      "stage": "iterations/0/screen/tasks/0/generation",
+      "status": "complete",
+      "task_id": "curated-0"
+    },
+    {
+      "agent_inventory_sha256": "fb05dfb7df368418bda13c7db20f06846ea27d96b7bee7ed2b3eff6aef5c46fb",
+      "answer_count": 10,
+      "answers": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\1\\generation\\attempts\\0-0\\session\\answers.json",
+        "sha256": "d842ec4d6bf01a467ccff27f38af3148263d34a1480d280310df5549c99e7927"
+      },
+      "calls": {
+        "completed": 4,
+        "requested": 4,
+        "stopped": 0
+      },
+      "exit_code": 0,
+      "operations_in_output_order": [
+        {
+          "answer_offset": 0,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "eb6b6ec71bb6346b7e4e4f2823168493ea677fd87ca5d3fb0eb3b4f7790118ee",
+          "operation_id": "77f9476798e61f21256a869d26513c75519f617292f07a35f6b737f9ec8c6754",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Produce a JSON array of exactly 3 strings, each an independent final answer to ORIGINAL_TASK. Silently allocate different central causes, actions and conse",
+          "provider_request_id": "req_429ad661d6454564af80706833e64bf3",
+          "request_body_sha256": "0f74efac382eb3e0eab7af0ec6f60e1ad01379c957c8602c19f8c32f17381230",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "0dfd8b41a1179697b7552d6f1db386b2f65750705b85d8b6dc22150e0c0540da",
+          "response_body_sha256": "baa8ad3c5ce1e49c104abb1c15bfc8fe681c5b2fb10a3ca0250783c78c5eeecc",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 3,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        },
+        {
+          "answer_offset": 3,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "4764426c36c8638a8de889782c4d33f7672e47348647f9bf6642b1858c6085a2",
+          "operation_id": "89a9f14d63df50d9c1c8e644ff70422653743fb765e16d2261794c6a5faa4c9d",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Produce a JSON array of exactly 3 strings, each an independent final answer to ORIGINAL_TASK. Silently allocate different central causes, actions and conse",
+          "provider_request_id": "req_058e627536fa4d99891ef063831084b4",
+          "request_body_sha256": "826981698474d26376474de44eb82ed734d95ab266c68bce365064a561f9c3fb",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "19564f4cfd9b5655b3bd7368659d24d1e3d9a9aa46538fa3f5f90c8e9bb4282c",
+          "response_body_sha256": "684a54888e69477e2e944e09ace09006f03a94d3b1c6bacd32b2fdeed552811f",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 3,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        },
+        {
+          "answer_offset": 6,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "9bcc954818632bc3a7dca7bbba7b80817495c1e398fe07e1efbd9b7bcd641bcc",
+          "operation_id": "18ba6a8fe265d4d288aa2b69d49ae4f3caa4310f4173b462a3ab0f3944fc9c9d",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Produce a JSON array of exactly 3 strings, each an independent final answer to ORIGINAL_TASK. Silently allocate different central causes, actions and conse",
+          "provider_request_id": "req_06b7dc7b291a43a9a6a5f50923c8f32c",
+          "request_body_sha256": "52e5a9afedc401cd1ed3b950fa006716fcb1d0e8796105d0f407df445c900aa6",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "793c331879447114529a5d0383f46101a54338046bae2e77fb6b7f09424b4a15",
+          "response_body_sha256": "44967d0e072dfc23500736c866d19aa361a83de7e1d11ac0b1f7050e3a6b49f9",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 3,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        },
+        {
+          "answer_offset": 9,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "9dc8168a16451afd5d1d18ad4297fc2aab5f8a0d3cc884499d3cfe9cc9afbd01",
+          "operation_id": "62158cae729174de1cc4436b7819883dd9431dcc89d64b3dd382223bfaf284c3",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Produce a JSON array of exactly 1 strings, each an independent final answer to ORIGINAL_TASK. Silently allocate different central causes, actions and conse",
+          "provider_request_id": "req_6627ca181436430f9958ae117cd4f764",
+          "request_body_sha256": "6598023f8af8cfea74ff18f65c897c4ecd48002076f9b85b1fbeca2df29eaa9a",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "4605f0343e661906015835d20f046ba0dbcdfae3d9009889b8f1cd544f720206",
+          "response_body_sha256": "279a3ebbccbf0d25e1f005b782519e100796b1e2c8e39cc5b292186776ddfc9e",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 1,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        }
+      ],
+      "owner_ledger": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\1\\generation\\owners\\0\\operations.sqlite3",
+        "sha256": "4e359f64b2af85075a638840bae487e1597dc58c9fcc995956e656c268614261"
+      },
+      "owner_manifest": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\1\\generation\\owners\\0\\manifest.json",
+        "sha256": "fa5f1e341e7ff3746142a3e1aebabf012c7e834996d9dec9f479518f92ff949f"
+      },
+      "owner_run_id": "5ec66a0388064674a5f24ed142f2b46f",
+      "reason": "complete",
+      "runtime_host_configuration": {
+        "CapDrop": [
+          "ALL"
+        ],
+        "CgroupnsMode": "private",
+        "IpcMode": "none",
+        "LogConfig": {
+          "Config": {},
+          "Type": "none"
+        },
+        "Memory": 268435456,
+        "MemorySwap": 268435456,
+        "NanoCpus": 1000000000,
+        "NetworkMode": "none",
+        "PidMode": "",
+        "PidsLimit": 64,
+        "Privileged": false,
+        "ReadonlyRootfs": true,
+        "SecurityOpt": [
+          "no-new-privileges:true"
+        ],
+        "Tmpfs": {
+          "/scratch": "rw,size=64m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700",
+          "/tmp": "rw,size=16m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700"
+        },
+        "UTSMode": ""
+      },
+      "runtime_image": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+      "session_report": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\1\\generation\\attempts\\0-0\\session\\report.json",
+        "sha256": "1fc13f46a52c9a09d2646510bddf1e6391f3c587b98956fd78e3ab17e1f482b8"
+      },
+      "source_mount": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\agent",
+      "stage": "iterations/0/screen/tasks/1/generation",
+      "status": "complete",
+      "task_id": "curated-47"
+    },
+    {
+      "agent_inventory_sha256": "fb05dfb7df368418bda13c7db20f06846ea27d96b7bee7ed2b3eff6aef5c46fb",
+      "answer_count": 10,
+      "answers": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\2\\generation\\attempts\\0-0\\session\\answers.json",
+        "sha256": "9d7a274ccd993dcfca614c286893deae96d9fe2c2c004fa8a6ac2e88b9714935"
+      },
+      "calls": {
+        "completed": 4,
+        "requested": 4,
+        "stopped": 0
+      },
+      "exit_code": 0,
+      "operations_in_output_order": [
+        {
+          "answer_offset": 0,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "2e2bb560bb19195525cfe9fb4e85d2e3133fd188bae177bcd089d8c2462abf12",
+          "operation_id": "1e176c0444a4553a3d4753c8245a21c2b5beb860cea372a1ed545cea72fac642",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Produce a JSON array of exactly 3 strings, each an independent final answer to ORIGINAL_TASK. Silently allocate different central causes, actions and conse",
+          "provider_request_id": "req_c735e4e29dc74cac9efab31deaf5364d",
+          "request_body_sha256": "d5a7dd51328f28cb0399a032990b1481a63cc166efc443b8fe8dd6c902f33ec5",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "7c262a98ed3827452e81c8f5e890eefca5074d5f6e8717e5a38c55193959d205",
+          "response_body_sha256": "ee193fe9b838763843bd056d5220b41560e55cb0be637d01509eb71ee9995589",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 3,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        },
+        {
+          "answer_offset": 3,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "9412849854032607bde121214a3934b221a83a67a7d8eaf9f9a9b59524a9e0d6",
+          "operation_id": "ff8a0cd217a65af1211ae41ca1653392fd527aa22948502c3ae05db78ce7993f",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Produce a JSON array of exactly 3 strings, each an independent final answer to ORIGINAL_TASK. Silently allocate different central causes, actions and conse",
+          "provider_request_id": "req_dea86fa0d6c04187ae06606b9cf361a7",
+          "request_body_sha256": "522b97bdc30f5369f684e252783d777bdf3293bd7955bebb8ecd1b31525e0855",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "8453a1a31b4517c71ce20d7f7e6d90d5bc03b997832b9e19e24bbe78c59787ec",
+          "response_body_sha256": "5c2920ca274afe382fd34ed6a875ba8287758db4103094a149f1361cc849ff57",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 3,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        },
+        {
+          "answer_offset": 6,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "f7088eefb9885122a1614f6cd12e6a4b902deedcabd67a5d91a5a4c5e5644a83",
+          "operation_id": "c1daeea00bd015f67cf780b85e3dad172f7e183a0317e614fab8ebdb34d7594b",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Produce a JSON array of exactly 3 strings, each an independent final answer to ORIGINAL_TASK. Silently allocate different central causes, actions and conse",
+          "provider_request_id": "req_e3df73cb03054d92b2b896a6fa71584b",
+          "request_body_sha256": "a16836056c3907bbd55399211287b3351bf17fdc81927cc53deb4e492f9e0dbd",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "37a2d29d34a395ed5d40537228fa9afc494b2bf8091dd1df3befc36e4c39b2d5",
+          "response_body_sha256": "952c6e309d46bd240969572ee2be5f6c3b6c01ffea6d393a57686438832d105f",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 3,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        },
+        {
+          "answer_offset": 9,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "843bf8074d671320181001195f1612f12408172202411c751ccb76d86f236db9",
+          "operation_id": "b085f5ef441d70bf123a6f4795a2425a8960b60b54671c18831025691318ea8b",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Produce a JSON array of exactly 1 strings, each an independent final answer to ORIGINAL_TASK. Silently allocate different central causes, actions and conse",
+          "provider_request_id": "req_3579b2794500460f9e81d2fc1c451b5a",
+          "request_body_sha256": "f688e1e93be4a371e855ebf761e060eecad3371efbf20a1441295e117e5de1f3",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "b6fc171a2a4f0828794f1ebca69649bc6c173005dab980f438631ba27e58c867",
+          "response_body_sha256": "cca22b36cc50e84fd18013f51a5bee093e99a2424216193a98de9d73ded0daca",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 1,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        }
+      ],
+      "owner_ledger": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\2\\generation\\owners\\0\\operations.sqlite3",
+        "sha256": "6721db2e8a2644f45ecbf27652a4dc575933a89a6ccb0d61a7c36c5585699f37"
+      },
+      "owner_manifest": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\2\\generation\\owners\\0\\manifest.json",
+        "sha256": "1e54662531a48de36f805542949f08760f1bcdd9fa5145e6eb1b39df46996468"
+      },
+      "owner_run_id": "71228d49ce7645f98e2a0f31c9b596e7",
+      "reason": "complete",
+      "runtime_host_configuration": {
+        "CapDrop": [
+          "ALL"
+        ],
+        "CgroupnsMode": "private",
+        "IpcMode": "none",
+        "LogConfig": {
+          "Config": {},
+          "Type": "none"
+        },
+        "Memory": 268435456,
+        "MemorySwap": 268435456,
+        "NanoCpus": 1000000000,
+        "NetworkMode": "none",
+        "PidMode": "",
+        "PidsLimit": 64,
+        "Privileged": false,
+        "ReadonlyRootfs": true,
+        "SecurityOpt": [
+          "no-new-privileges:true"
+        ],
+        "Tmpfs": {
+          "/scratch": "rw,size=64m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700",
+          "/tmp": "rw,size=16m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700"
+        },
+        "UTSMode": ""
+      },
+      "runtime_image": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+      "session_report": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\2\\generation\\attempts\\0-0\\session\\report.json",
+        "sha256": "ba64d1b49242ca2dbcdc4b45d4b7ba77fd2fca978f20dd6bff7d81177d382ddc"
+      },
+      "source_mount": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\agent",
+      "stage": "iterations/0/screen/tasks/2/generation",
+      "status": "complete",
+      "task_id": "curated-97"
+    },
+    {
+      "agent_inventory_sha256": "25b2802cdfcb1a81b70a89e255a2f4e60b2aec70b2942ebd76c99478e78040f0",
+      "answer_count": 10,
+      "answers": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed-witness\\generation\\attempts\\0-0\\session\\answers.json",
+        "sha256": "3847e8372f90fcfee0ac517ed67e26c4a5c81b3406492ed9096aea34490115d3"
+      },
+      "calls": {
+        "completed": 3,
+        "requested": 3,
+        "stopped": 0
+      },
+      "exit_code": 0,
+      "operations_in_output_order": [
+        {
+          "answer_offset": 0,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "0f3ab0d9b8f12a82927497b5316b336e492a8fd3bca487b419532211fcd5848c",
+          "operation_id": "ab8275be4052acce006289589444cbaecd7f59866d7fc84812e1a3ad599f3ca8",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Produce a JSON array of exactly 4 strings, each a complete independent answer to ORIGINAL_TASK. The array is a transport wrapper only. Each string must obe",
+          "provider_request_id": "req_ffb9adbfa4c24566825660eebfcbef81",
+          "request_body_sha256": "bf964159282e009cea32ab816b3c6543b1eca68b3f8280f53f6ab1f00c6ccb5d",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "116d3cbca9e71aa6d956cd6a53db8bc564aeaed248c9ac29c14679a2242c473e",
+          "response_body_sha256": "22de25491ee8ef2a5ca9a791d02318a7ddf32976e86c9b4b439478d5338c0c15",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 4,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        },
+        {
+          "answer_offset": 4,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "431874a96858afb75a6a7d3a80e9f03f554d6046a4f25ffb874fd16c7152e75f",
+          "operation_id": "b4c3a45bb6b65c134450b61633f477ecd5dd962faaf68d10574bf57c11b28110",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Produce a JSON array of exactly 4 strings, each a complete independent answer to ORIGINAL_TASK. The array is a transport wrapper only. Each string must obe",
+          "provider_request_id": "req_01c24eea3dfd4048be5fbac828a612ad",
+          "request_body_sha256": "c6ec0901901f9c972160b2f529f08142837a8e5dcd6f6c2967310fb7ba8a9548",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "3adab7b8a0f3313b2302f237aef4d4bb1e3a978c66a4c1257b2750deb537d0f6",
+          "response_body_sha256": "2957e9d4419293231525dcdd16e2aa49f0af6dad113275b11561a8faa20affa2",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 4,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        },
+        {
+          "answer_offset": 8,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "75db39a214a1dd3f0ef90de44232500910039e7ec84927fccc6934eac42d368f",
+          "operation_id": "4dabcd15b2bb56cc2395405b24496fa79e4354591bcfe57c5c7445646d8e9742",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Produce a JSON array of exactly 2 strings, each a complete independent answer to ORIGINAL_TASK. The array is a transport wrapper only. Each string must obe",
+          "provider_request_id": "req_8ff5ac611dab44f38122a42a75ee7c04",
+          "request_body_sha256": "9d20140e2b145a5b89f63d80911fa7841328252763adbda6eeb2c8eb12318670",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "157c60388c47447a2614d636b67bdac406b1548ceca8910c1bc936e0466dd478",
+          "response_body_sha256": "da4893b4868c46cbf77b6e62f6800952b1095f09aad8a098c20dcdd3dd1651f4",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 2,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        }
+      ],
+      "owner_ledger": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed-witness\\generation\\owners\\0\\operations.sqlite3",
+        "sha256": "26e8449442c6d76a5700211a8158c50d6c0a338e99d16665e8c47c2b0f3bf868"
+      },
+      "owner_manifest": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed-witness\\generation\\owners\\0\\manifest.json",
+        "sha256": "1bb57b098717fca9521faa9b2072d467301d1504f70cb78df0d016a18d2b64df"
+      },
+      "owner_run_id": "c7cfdb187cee472b808205b98ca83c09",
+      "reason": "complete",
+      "runtime_host_configuration": {
+        "CapDrop": [
+          "ALL"
+        ],
+        "CgroupnsMode": "private",
+        "IpcMode": "none",
+        "LogConfig": {
+          "Config": {},
+          "Type": "none"
+        },
+        "Memory": 268435456,
+        "MemorySwap": 268435456,
+        "NanoCpus": 1000000000,
+        "NetworkMode": "none",
+        "PidMode": "",
+        "PidsLimit": 64,
+        "Privileged": false,
+        "ReadonlyRootfs": true,
+        "SecurityOpt": [
+          "no-new-privileges:true"
+        ],
+        "Tmpfs": {
+          "/scratch": "rw,size=64m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700",
+          "/tmp": "rw,size=16m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700"
+        },
+        "UTSMode": ""
+      },
+      "runtime_image": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+      "session_report": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed-witness\\generation\\attempts\\0-0\\session\\report.json",
+        "sha256": "e62c73bf313e5c814db9ba8dc0e750c955d1ec9cb0666cbcd4d21c3bf690ee50"
+      },
+      "source_mount": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed-witness\\agent",
+      "stage": "seed-witness/generation",
+      "status": "complete",
+      "task_id": "curated-0"
+    },
+    {
+      "agent_inventory_sha256": "7826e629217a8f10877dd3f347a63e03bba7427882bbfe77ab7921666b725ce4",
+      "answer_count": 10,
+      "answers": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\witness\\generation\\attempts\\0-0\\session\\answers.json",
+        "sha256": "be2305e71d14bb617ccf6aacb485da60e4ca3a81f83daa932c6b42edb3544b74"
+      },
+      "calls": {
+        "completed": 1,
+        "requested": 1,
+        "stopped": 0
+      },
+      "exit_code": 0,
+      "operations_in_output_order": [
+        {
+          "answer_offset": 0,
+          "attempt": 0,
+          "finish_reason": "stop",
+          "http_status": 200,
+          "logical_id": "20f6a92129d8ef959065649ce59eb0ce6cbee68200d6a82e32743f8e91afe405",
+          "operation_id": "9a6068290a2ccbe1eb6f69c15204175f87190fe937fa9debb1b88b2f7921987e",
+          "prior_equals_saved_prefix": true,
+          "prompt_prefix": "Return a strict JSON array of exactly 10 strings. Each string must independently answer ORIGINAL_TASK, without plans, critiques, or references to other ans",
+          "provider_request_id": "req_41aac906aff74cabae280512f5e39a1f",
+          "request_body_sha256": "4369b89aceb9847abc738ee8c56ec759062b8d1b4d00a83d6752b2c39f8345d3",
+          "request_model": "gpt-5.6-luna",
+          "request_sha256": "95ce569485d0b89b973192ded5fe898be4b265b2c6a75527e8f4282acdeab77b",
+          "response_body_sha256": "0c5eb176bbca6cbc9fec5b0972d4c8792c8e7d85609af6cbba82d1452d044813",
+          "response_model": "gpt-5.6-luna",
+          "returned_count": 10,
+          "returned_equals_saved_slice": true,
+          "status": "completed",
+          "truncated": false,
+          "withheld": false
+        }
+      ],
+      "owner_ledger": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\witness\\generation\\owners\\0\\operations.sqlite3",
+        "sha256": "eabc28aef180ab51db34980c6f6bafa02582a25d0c04909c9141b7581389db2c"
+      },
+      "owner_manifest": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\witness\\generation\\owners\\0\\manifest.json",
+        "sha256": "1d8ea7c70c9d96ef3067c45177ce539b4fce94f5948285b73cce7c13f75714c4"
+      },
+      "owner_run_id": "c048c45d32c6409fafa3bffb82522025",
+      "reason": "complete",
+      "runtime_host_configuration": {
+        "CapDrop": [
+          "ALL"
+        ],
+        "CgroupnsMode": "private",
+        "IpcMode": "none",
+        "LogConfig": {
+          "Config": {},
+          "Type": "none"
+        },
+        "Memory": 268435456,
+        "MemorySwap": 268435456,
+        "NanoCpus": 1000000000,
+        "NetworkMode": "none",
+        "PidMode": "",
+        "PidsLimit": 64,
+        "Privileged": false,
+        "ReadonlyRootfs": true,
+        "SecurityOpt": [
+          "no-new-privileges:true"
+        ],
+        "Tmpfs": {
+          "/scratch": "rw,size=64m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700",
+          "/tmp": "rw,size=16m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700"
+        },
+        "UTSMode": ""
+      },
+      "runtime_image": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+      "session_report": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\witness\\generation\\attempts\\0-0\\session\\report.json",
+        "sha256": "4c59d57237d5c209deecd052a6d6b6b25a81b7c1bf6e113e4095f8351c2cb705"
+      },
+      "source_mount": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\witness\\agent",
+      "stage": "iterations/0/witness/generation",
+      "status": "complete",
+      "task_id": "curated-0"
+    }
+  ],
+  "original_proposals_and_feedback": [
+    {
+      "capacity_checkpoint": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed-witness\\proposal-capacity.json",
+        "sha256": "9cbd6c6865e6aec41d4ea17fb5eb01c7d1bd56d31ad3e6ee022d1275e927775d"
+      },
+      "capacity_decision": "pass",
+      "capacity_measurements": [
+        {
+          "context_slack": 1011340,
+          "decision": "pass",
+          "finish_reason": "stop",
+          "measurement_status": "complete",
+          "output_cap_tokens": 32768,
+          "output_slack": 29144,
+          "reason": "capacity_pass",
+          "replacement_source": true,
+          "usage": {
+            "input_tokens": 5892,
+            "model": "gpt-6.1-sol",
+            "output_tokens": 3624,
+            "provider_request_id": "req_f7a78dcb0dde4ef3b3c58d0f70b6addb",
+            "service_tier": "default"
+          }
+        }
+      ],
+      "exit_code": 0,
+      "feedback": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed-witness\\feedback\\feedback.json",
+        "sha256": "86ba1a3c930a598f86f1f51d486d1888a15466b118e3122e2959a09b2236f16d"
+      },
+      "feedback_checks": [
+        {
+          "answer_positions": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "distinct_matches": true,
+          "generation_scores_match": true,
+          "literal_answers_match_original": true,
+          "literal_note_matches": true,
+          "omitted_positions": {
+            "omitted_answer_positions": 0,
+            "omitted_partition_positions": 0,
+            "omitted_score_positions": 0
+          },
+          "partition_matches": true,
+          "saved_task_id_matches": true,
+          "task_id": "curated-0",
+          "utility_matches": true
+        },
+        {
+          "answer_positions": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "distinct_matches": true,
+          "generation_scores_match": true,
+          "literal_answers_match_original": true,
+          "literal_note_matches": true,
+          "omitted_positions": {
+            "omitted_answer_positions": 0,
+            "omitted_partition_positions": 0,
+            "omitted_score_positions": 0
+          },
+          "partition_matches": true,
+          "saved_task_id_matches": true,
+          "task_id": "curated-47",
+          "utility_matches": true
+        },
+        {
+          "answer_positions": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "distinct_matches": true,
+          "generation_scores_match": true,
+          "literal_answers_match_original": true,
+          "literal_note_matches": true,
+          "omitted_positions": {
+            "omitted_answer_positions": 0,
+            "omitted_partition_positions": 0,
+            "omitted_score_positions": 0
+          },
+          "partition_matches": true,
+          "saved_task_id_matches": true,
+          "task_id": "curated-97",
+          "utility_matches": true
+        }
+      ],
+      "lineage": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed-witness\\proposal\\attempts\\0-0\\session\\lineage.json",
+        "sha256": "d5407f2553140e73dcd47c91ff02cfec7a1605d8229f2d70be10db5e6d139ed6"
+      },
+      "lineage_record": {
+        "child": {
+          "agent_sha256": "25b2802cdfcb1a81b70a89e255a2f4e60b2aec70b2942ebd76c99478e78040f0",
+          "entrypoint": "candidate.py",
+          "source_sha256": "6aa4cd1f941a208ed473793874522d1356c58db2a60b77807d6805422164759e"
+        },
+        "descriptor_sha256": "154898b60475ffb8926231d3d40143bfb09d62225d85692f62077fe7e733f4e8",
+        "feedback": {
+          "file_sha256": "86ba1a3c930a598f86f1f51d486d1888a15466b118e3122e2959a09b2236f16d",
+          "input_sha256": "52222d651e42ba19b4a601391fe10eee84780488108e921755362bf6eef8774c"
+        },
+        "format": "buddha.source-lineage.v1",
+        "owner": {
+          "manifest_sha256": "8f495253e19c8c56e88220e626d40933ca0538ff754e43763dc1c2489f1eb802",
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed-witness\\proposal\\owners\\0"
+        },
+        "parent": {
+          "agent_sha256": "22cd302a8c12e05c5fd9bb95389f5880e713a027e60a0206799e9c4fa2f48eeb",
+          "entrypoint": "candidate.py",
+          "source_sha256": "77cfa68f6b3c6996fd503e1ce6f7a964eb57abdb8bde98f6761de5f6e298ff4f"
+        },
+        "proposal_sha256": "4264cb65a28e889c4c55a9204e89fe42a015e3040678e15995a912e984ad7e03"
+      },
+      "materialized_source": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed-witness\\proposal\\attempts\\0-0\\session\\child\\candidate.py",
+        "sha256": "6aa4cd1f941a208ed473793874522d1356c58db2a60b77807d6805422164759e"
+      },
+      "measurement_index": null,
+      "operation": {
+        "attempt": 0,
+        "finish_reason": "stop",
+        "http_status": 200,
+        "logical_id": "ab390956590957662bea6abae519327fe8e80b49190b8205ed29d37333c4c30b",
+        "operation_id": "65aef5e21e9dd7a341c86bc6ae3118fd64821546078cd18a7077ce2dae860af6",
+        "provider_request_id": "req_f7a78dcb0dde4ef3b3c58d0f70b6addb",
+        "request_body_sha256": "baf30ae51f658bb61a2d1b0da7638b6d507433c831ce12b7f08b3e9cf8000b19",
+        "request_model": "gpt-6.1-sol",
+        "request_sha256": "f0822f1a29e898790c4ad18c4a55ee4d0359cc2de47b846dde2116652f24deed",
+        "response_body_sha256": "59cd28e789f2ce83ba4fb8119b821a32209b5c961151c3ce9b414a40bb8a5119",
+        "response_model": "gpt-6.1-sol",
+        "status": "completed",
+        "truncated": false,
+        "withheld": false
+      },
+      "owner_ledger": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed-witness\\proposal\\owners\\0\\operations.sqlite3",
+        "sha256": "62238fb97111dc81d31e866d931b275f389c3075d3c2f9fce3e473a60f9f8a82"
+      },
+      "owner_manifest": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed-witness\\proposal\\owners\\0\\manifest.json",
+        "sha256": "3a76645675143483289b0ddae5fc08e33b84b2b27438e6d66417bc2b384f3bfb"
+      },
+      "owner_run_id": "07036308f1d64e95be6c12698cf48071",
+      "parent_inventory_sha256": "22cd302a8c12e05c5fd9bb95389f5880e713a027e60a0206799e9c4fa2f48eeb",
+      "parent_source_sha256": "77cfa68f6b3c6996fd503e1ce6f7a964eb57abdb8bde98f6761de5f6e298ff4f",
+      "payload_keys": [
+        "development_feedback",
+        "format",
+        "parent"
+      ],
+      "private_copy": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed-witness\\agent\\candidate.py",
+        "sha256": "6aa4cd1f941a208ed473793874522d1356c58db2a60b77807d6805422164759e"
+      },
+      "proposal": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed-witness\\proposal\\attempts\\0-0\\session\\proposal.json",
+        "sha256": "4264cb65a28e889c4c55a9204e89fe42a015e3040678e15995a912e984ad7e03"
+      },
+      "returned_role": "W0",
+      "session_report": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed-witness\\proposal\\attempts\\0-0\\session\\report.json",
+        "sha256": "ea372f3bc950b5f1dcd2486215814a1c19b93d0fece8641cbb01223d8c607312"
+      },
+      "source_field_matches_materialized_and_private_copy": true,
+      "source_mount": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-proposal-v3\\components\\source-agent",
+      "stage": "seed-witness/proposal",
+      "status": "complete"
+    },
+    {
+      "capacity_checkpoint": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\proposal-capacity.json",
+        "sha256": "d89a239b0edff7bd86624683dcc2cd7f69d999c5387573dc7ab932064578056c"
+      },
+      "capacity_decision": "pass",
+      "capacity_measurements": [
+        {
+          "context_slack": 1011340,
+          "decision": "pass",
+          "finish_reason": "stop",
+          "measurement_status": "complete",
+          "output_cap_tokens": 32768,
+          "output_slack": 28966,
+          "reason": "capacity_pass",
+          "replacement_source": true,
+          "usage": {
+            "input_tokens": 5892,
+            "model": "gpt-6.1-sol",
+            "output_tokens": 3802,
+            "provider_request_id": "req_e9fb4104da1a467da1a7160ceed7758b",
+            "service_tier": "default"
+          }
+        }
+      ],
+      "exit_code": 0,
+      "feedback": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\feedback\\feedback.json",
+        "sha256": "e5fd5ccb1b984dfdcb859ed29692c021ae99cf68181da23588ecdda2ffda7660"
+      },
+      "feedback_checks": [
+        {
+          "answer_positions": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "distinct_matches": true,
+          "generation_scores_match": true,
+          "literal_answers_match_original": true,
+          "literal_note_matches": true,
+          "omitted_positions": {
+            "omitted_answer_positions": 0,
+            "omitted_partition_positions": 0,
+            "omitted_score_positions": 0
+          },
+          "partition_matches": true,
+          "saved_task_id_matches": true,
+          "task_id": "curated-0",
+          "utility_matches": true
+        },
+        {
+          "answer_positions": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "distinct_matches": true,
+          "generation_scores_match": true,
+          "literal_answers_match_original": true,
+          "literal_note_matches": true,
+          "omitted_positions": {
+            "omitted_answer_positions": 0,
+            "omitted_partition_positions": 0,
+            "omitted_score_positions": 0
+          },
+          "partition_matches": true,
+          "saved_task_id_matches": true,
+          "task_id": "curated-47",
+          "utility_matches": true
+        },
+        {
+          "answer_positions": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "distinct_matches": true,
+          "generation_scores_match": true,
+          "literal_answers_match_original": true,
+          "literal_note_matches": true,
+          "omitted_positions": {
+            "omitted_answer_positions": 0,
+            "omitted_partition_positions": 0,
+            "omitted_score_positions": 0
+          },
+          "partition_matches": true,
+          "saved_task_id_matches": true,
+          "task_id": "curated-97",
+          "utility_matches": true
+        }
+      ],
+      "lineage": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\proposal\\attempts\\0-0\\session\\lineage.json",
+        "sha256": "ed50c3fc129dca92428a35b9e23297e7a40e2949951931507cd9794365a78973"
+      },
+      "lineage_record": {
+        "child": {
+          "agent_sha256": "fb05dfb7df368418bda13c7db20f06846ea27d96b7bee7ed2b3eff6aef5c46fb",
+          "entrypoint": "candidate.py",
+          "source_sha256": "4196cd29ffa76c6959e6f678a8286b1fde5b56e6a34a97dcf68787e1f22b3a43"
+        },
+        "descriptor_sha256": "f6ae51593a7f6b6d3f1910ed998b9232c81ab38e5a2761651fa8f6b22f828df9",
+        "feedback": {
+          "file_sha256": "e5fd5ccb1b984dfdcb859ed29692c021ae99cf68181da23588ecdda2ffda7660",
+          "input_sha256": "52222d651e42ba19b4a601391fe10eee84780488108e921755362bf6eef8774c"
+        },
+        "format": "buddha.source-lineage.v1",
+        "owner": {
+          "manifest_sha256": "ea5cac1b75c92b1187d011c257f1a53b03f9036edb5d867eff8e2b9534969a66",
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\proposal\\owners\\0"
+        },
+        "parent": {
+          "agent_sha256": "22cd302a8c12e05c5fd9bb95389f5880e713a027e60a0206799e9c4fa2f48eeb",
+          "entrypoint": "candidate.py",
+          "source_sha256": "77cfa68f6b3c6996fd503e1ce6f7a964eb57abdb8bde98f6761de5f6e298ff4f"
+        },
+        "proposal_sha256": "9dd978b42ee74ed2448daedc0ef1fa812dda32e866a236c72cb3bdd100a7cce8"
+      },
+      "materialized_source": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\proposal\\attempts\\0-0\\session\\child\\candidate.py",
+        "sha256": "4196cd29ffa76c6959e6f678a8286b1fde5b56e6a34a97dcf68787e1f22b3a43"
+      },
+      "measurement_index": null,
+      "operation": {
+        "attempt": 0,
+        "finish_reason": "stop",
+        "http_status": 200,
+        "logical_id": "1bea77b4549190c0b90bbb2b5b22299eccd991add5d350e40396845b1d1bf729",
+        "operation_id": "5b849be019b6bf0ce435b72584356fda8d6b980492bd7033bb516820e6868eb0",
+        "provider_request_id": "req_e9fb4104da1a467da1a7160ceed7758b",
+        "request_body_sha256": "baf30ae51f658bb61a2d1b0da7638b6d507433c831ce12b7f08b3e9cf8000b19",
+        "request_model": "gpt-6.1-sol",
+        "request_sha256": "2cef2382f8bdba45ecd35d9b9ccbe696350329e88df9ce3e9dcfd8fc935973ca",
+        "response_body_sha256": "e0c8b460881f1c14bfe2f9da2eadbffcdf02879e642d3d69399a9984ebd25176",
+        "response_model": "gpt-6.1-sol",
+        "status": "completed",
+        "truncated": false,
+        "withheld": false
+      },
+      "owner_ledger": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\proposal\\owners\\0\\operations.sqlite3",
+        "sha256": "84b41a3da344df46501ae9f729ac1c90325d0b2b9ffb9d387dba9f6e7f9e20a6"
+      },
+      "owner_manifest": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\proposal\\owners\\0\\manifest.json",
+        "sha256": "99b5949de8007e8828934269f7dceba925abea205762137ecac066e0d6c2953a"
+      },
+      "owner_run_id": "f71f2070027d43cc97dac55117a5c3c7",
+      "parent_inventory_sha256": "22cd302a8c12e05c5fd9bb95389f5880e713a027e60a0206799e9c4fa2f48eeb",
+      "parent_source_sha256": "77cfa68f6b3c6996fd503e1ce6f7a964eb57abdb8bde98f6761de5f6e298ff4f",
+      "payload_keys": [
+        "development_feedback",
+        "format",
+        "parent"
+      ],
+      "private_copy": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\agent\\candidate.py",
+        "sha256": "4196cd29ffa76c6959e6f678a8286b1fde5b56e6a34a97dcf68787e1f22b3a43"
+      },
+      "proposal": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\proposal\\attempts\\0-0\\session\\proposal.json",
+        "sha256": "9dd978b42ee74ed2448daedc0ef1fa812dda32e866a236c72cb3bdd100a7cce8"
+      },
+      "returned_role": "C",
+      "session_report": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\proposal\\attempts\\0-0\\session\\report.json",
+        "sha256": "bfd22c9657142c2c3edc277818d01c13b10b064dabc782cf1fd4c687840134b2"
+      },
+      "source_field_matches_materialized_and_private_copy": true,
+      "source_mount": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-proposal-v3\\components\\source-agent",
+      "stage": "iterations/0/proposal",
+      "status": "complete"
+    },
+    {
+      "capacity_checkpoint": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\witness\\proposal-capacity.json",
+        "sha256": "9adb56f6ffdb6fe9301f0186104c65fa1eecbcb04a97e001cdf611db8c7086d8"
+      },
+      "capacity_decision": "pass",
+      "capacity_measurements": [
+        {
+          "context_slack": 1011576,
+          "decision": "pass",
+          "finish_reason": "stop",
+          "measurement_status": "complete",
+          "output_cap_tokens": 32768,
+          "output_slack": 26762,
+          "reason": "capacity_pass",
+          "replacement_source": true,
+          "usage": {
+            "input_tokens": 5656,
+            "model": "gpt-6.1-sol",
+            "output_tokens": 6006,
+            "provider_request_id": "req_a4bfb4a6de49438ead23d76611b29931",
+            "service_tier": "default"
+          }
+        }
+      ],
+      "exit_code": 0,
+      "feedback": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\witness\\feedback\\feedback.json",
+        "sha256": "a97ad3223ca4f778a8226a5d5e3a68ee84cac94dbf95e79ae6ff708b92c71783"
+      },
+      "feedback_checks": [
+        {
+          "answer_positions": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "distinct_matches": true,
+          "generation_scores_match": true,
+          "literal_answers_match_original": true,
+          "literal_note_matches": true,
+          "omitted_positions": {
+            "omitted_answer_positions": 0,
+            "omitted_partition_positions": 0,
+            "omitted_score_positions": 0
+          },
+          "partition_matches": true,
+          "saved_task_id_matches": true,
+          "task_id": "curated-0",
+          "utility_matches": true
+        },
+        {
+          "answer_positions": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "distinct_matches": true,
+          "generation_scores_match": true,
+          "literal_answers_match_original": true,
+          "literal_note_matches": true,
+          "omitted_positions": {
+            "omitted_answer_positions": 0,
+            "omitted_partition_positions": 0,
+            "omitted_score_positions": 0
+          },
+          "partition_matches": true,
+          "saved_task_id_matches": true,
+          "task_id": "curated-47",
+          "utility_matches": true
+        },
+        {
+          "answer_positions": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "distinct_matches": true,
+          "generation_scores_match": true,
+          "literal_answers_match_original": true,
+          "literal_note_matches": true,
+          "omitted_positions": {
+            "omitted_answer_positions": 0,
+            "omitted_partition_positions": 0,
+            "omitted_score_positions": 0
+          },
+          "partition_matches": true,
+          "saved_task_id_matches": true,
+          "task_id": "curated-97",
+          "utility_matches": true
+        }
+      ],
+      "lineage": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\witness\\proposal\\attempts\\0-0\\session\\lineage.json",
+        "sha256": "286c29936361344bde932f893c26c10c9092654b5680378dae0ac0b8c3ac3978"
+      },
+      "lineage_record": {
+        "child": {
+          "agent_sha256": "7826e629217a8f10877dd3f347a63e03bba7427882bbfe77ab7921666b725ce4",
+          "entrypoint": "candidate.py",
+          "source_sha256": "1488d6348158dfe395f873ca2d830cbd1aa91c11b788900dd93f3ac5450d2e12"
+        },
+        "descriptor_sha256": "812ef18585fe765a8e3ff885e9482754eddd5a68430f2adb0dec87b377a9dcdc",
+        "feedback": {
+          "file_sha256": "a97ad3223ca4f778a8226a5d5e3a68ee84cac94dbf95e79ae6ff708b92c71783",
+          "input_sha256": "d97c3f9fc8c86d83c4af39f9bea97025f28d9dc463eaf54b281d3cdb0e9dc44f"
+        },
+        "format": "buddha.source-lineage.v1",
+        "owner": {
+          "manifest_sha256": "654903b3e4a304d3fb5fc1e2db3d9683afaa2195235d5d8964c0eeb49b4a4b06",
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\witness\\proposal\\owners\\0"
+        },
+        "parent": {
+          "agent_sha256": "fb05dfb7df368418bda13c7db20f06846ea27d96b7bee7ed2b3eff6aef5c46fb",
+          "entrypoint": "candidate.py",
+          "source_sha256": "4196cd29ffa76c6959e6f678a8286b1fde5b56e6a34a97dcf68787e1f22b3a43"
+        },
+        "proposal_sha256": "c6cb59cbec37c6b7b3a0d5cb80b79a9d0b2a6d6ae09af0425a10fc7cfa916c3e"
+      },
+      "materialized_source": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\witness\\proposal\\attempts\\0-0\\session\\child\\candidate.py",
+        "sha256": "1488d6348158dfe395f873ca2d830cbd1aa91c11b788900dd93f3ac5450d2e12"
+      },
+      "measurement_index": [
+        {
+          "distinct": 10,
+          "invalid_metrics": [],
+          "missing_scores": 0,
+          "quality_status": "scored",
+          "recorded_cost_microusd": 115507,
+          "score_range": [
+            6,
+            8
+          ],
+          "scored_answers": 10,
+          "task_id": "curated-0",
+          "utility": 6.741977015386745
+        },
+        {
+          "distinct": 2,
+          "invalid_metrics": [],
+          "missing_scores": 8,
+          "quality_status": "scored",
+          "recorded_cost_microusd": 26800,
+          "score_range": [
+            7,
+            8
+          ],
+          "scored_answers": 2,
+          "task_id": "curated-47",
+          "utility": 3.0471894789165463
+        },
+        {
+          "distinct": 1,
+          "invalid_metrics": [],
+          "missing_scores": 9,
+          "quality_status": "scored",
+          "recorded_cost_microusd": 14646,
+          "score_range": [
+            7,
+            7
+          ],
+          "scored_answers": 1,
+          "task_id": "curated-97",
+          "utility": 1.5684063494423397
+        }
+      ],
+      "operation": {
+        "attempt": 0,
+        "finish_reason": "stop",
+        "http_status": 200,
+        "logical_id": "7f328908bb30c54a23bae49b5e5369a97f38c7310aebb2ca52ef58f239cd8326",
+        "operation_id": "8dbde53ca04b31b8c04194c091db0db446e9ce02e92f4586753b742c1d468aee",
+        "provider_request_id": "req_a4bfb4a6de49438ead23d76611b29931",
+        "request_body_sha256": "ed24988ad2f6a43978628e3ba0ad9f7655a6a054d8b17f8dd49fb3b2ec762172",
+        "request_model": "gpt-6.1-sol",
+        "request_sha256": "ec397b11c3530246ead9ec2df58a2630fea784987add2c98cd204be99594eabf",
+        "response_body_sha256": "3a7a391af8c62f44bdd44ff297b96b777ac09a9ce02851beb53a18f67083a956",
+        "response_model": "gpt-6.1-sol",
+        "status": "completed",
+        "truncated": false,
+        "withheld": false
+      },
+      "owner_ledger": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\witness\\proposal\\owners\\0\\operations.sqlite3",
+        "sha256": "11e52eebfce8f65ad3042cbbb52971cfe1c9d1abb17902fd3fb74eb31eaa45ff"
+      },
+      "owner_manifest": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\witness\\proposal\\owners\\0\\manifest.json",
+        "sha256": "b565b095f445928f1d1fc7089f19da61aa9c0074421ce027a278de786972391a"
+      },
+      "owner_run_id": "a4f10fbc518743e681373278c8ec91dc",
+      "parent_inventory_sha256": "fb05dfb7df368418bda13c7db20f06846ea27d96b7bee7ed2b3eff6aef5c46fb",
+      "parent_source_sha256": "4196cd29ffa76c6959e6f678a8286b1fde5b56e6a34a97dcf68787e1f22b3a43",
+      "payload_keys": [
+        "development_feedback",
+        "format",
+        "measurement_index",
+        "parent"
+      ],
+      "private_copy": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\witness\\agent\\candidate.py",
+        "sha256": "1488d6348158dfe395f873ca2d830cbd1aa91c11b788900dd93f3ac5450d2e12"
+      },
+      "proposal": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\witness\\proposal\\attempts\\0-0\\session\\proposal.json",
+        "sha256": "c6cb59cbec37c6b7b3a0d5cb80b79a9d0b2a6d6ae09af0425a10fc7cfa916c3e"
+      },
+      "returned_role": "W1",
+      "session_report": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\witness\\proposal\\attempts\\0-0\\session\\report.json",
+        "sha256": "15fe6ac2fda9b6b3cc9a801aa576d25d8bdc74abae7e5d8a3b07b694a546ca91"
+      },
+      "source_field_matches_materialized_and_private_copy": true,
+      "source_mount": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\agent",
+      "stage": "iterations/0/witness/proposal",
+      "status": "complete"
+    }
+  ],
+  "original_roots": {
+    "authority_not_opened": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-handoff-v1",
+    "proposal": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-proposal-v3",
+    "run": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1"
+  },
+  "reconciliation_rule": "Preserve this individual record. A factual root custody mismatch prevents an established combined authorship/use finding. Unresolved semantic/executed-use disagreement is inconclusive, not majority-selected positive. Any clerical reconciliation must be new; do not rewrite this review.",
+  "recorded_at_utc": "2026-10-25T02:08:31.550912+00:00",
+  "review_id": "src02-current-live-mechanism-review-v1",
+  "reviewer_role_and_actual_identity": {
+    "authored_actual_provider_returned_code": false,
+    "context": "Separate delegated review context with project instructions/assignment and immutable original evidence; source identities, hypotheses and scores visible; not blinded.",
+    "exact_serving_model_identifier": null,
+    "human_reviewer": false,
+    "identity": "/root/src02_live_mechanism_review",
+    "independence_limit": "Automated host subagent, not a human rater. Underlying model overlap with another role/source-authoring model is unknown; contexts are not statistically independent human ratings.",
+    "model_family_as_host_described": "GPT-6",
+    "model_limitation": "Exact serving model/version is not exposed in this delegated context; do not infer it from source-authoring provider calls.",
+    "role": "fresh-context mechanism reviewer",
+    "type": "automated Codex host subagent"
+  },
+  "separate_outcome_observations": {
+    "actual_model_authorship": {
+      "scope": "C/W0/W1 original provider receipt source fields match materialized/private files and lineage; model IDs retained per operation. P is host seed. External provider authenticity/full custody not independently recertified here."
+    },
+    "official_development_performance": {
+      "W0_W1": "No official measurements by frozen validity-only design.",
+      "claim": "Descriptive previously seen development values only.",
+      "original_admissions": [
+        {
+          "candidate_id": "22cd302a8c12e05c5fd9bb95389f5880e713a027e60a0206799e9c4fa2f48eeb",
+          "eligible": true,
+          "mean_distinct": 7.333333333333333,
+          "mean_utility": 5.993768036254777,
+          "reasons": []
+        },
+        {
+          "candidate_id": "fb05dfb7df368418bda13c7db20f06846ea27d96b7bee7ed2b3eff6aef5c46fb",
+          "eligible": true,
+          "mean_distinct": 4.333333333333333,
+          "mean_utility": 3.785857614581877,
+          "reasons": []
+        }
+      ],
+      "per_task": [
+        {
+          "C": {
+            "distinct": 10,
+            "utility": 6.741977015386745
+          },
+          "P": {
+            "distinct": 10,
+            "utility": 7.647300365066206
+          },
+          "task_id": "curated-0"
+        },
+        {
+          "C": {
+            "distinct": 2,
+            "utility": 3.0471894789165463
+          },
+          "P": {
+            "distinct": 2,
+            "utility": 3.0471894789165463
+          },
+          "task_id": "curated-47"
+        },
+        {
+          "C": {
+            "distinct": 1,
+            "utility": 1.5684063494423397
+          },
+          "P": {
+            "distinct": 10,
+            "utility": 7.2868142647815795
+          },
+          "task_id": "curated-97"
+        }
+      ]
+    },
+    "operational": {
+      "recorded_reason": "bounded_iterations_complete",
+      "recorded_status": "complete",
+      "scope": "All declared source roles have original completion; global financial closure remains root responsibility."
+    },
+    "role_scoped_bounded_validity": {
+      "scope": "Eight generation and three proposal sessions report complete/exit0 with declared source mounts and fixed image/config. Witnesses deliver declared10-answer shape. Root separately adjudicates unchanged protected-control/funding custody. No broad semantic compliance, universal competence or new sandbox-security result."
+    },
+    "scientific_effectiveness": {
+      "decision": "not_established",
+      "reason": "No matched improver study, held-out/final/transfer evidence or independent human rating."
+    }
+  },
+  "source_identities": {
+    "C": {
+      "agent_inventory_sha256": "fb05dfb7df368418bda13c7db20f06846ea27d96b7bee7ed2b3eff6aef5c46fb",
+      "source": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\agent\\candidate.py",
+        "sha256": "4196cd29ffa76c6959e6f678a8286b1fde5b56e6a34a97dcf68787e1f22b3a43"
+      },
+      "source_sha256": "4196cd29ffa76c6959e6f678a8286b1fde5b56e6a34a97dcf68787e1f22b3a43",
+      "utf8_bytes": 13084
+    },
+    "P": {
+      "agent_inventory_sha256": "22cd302a8c12e05c5fd9bb95389f5880e713a027e60a0206799e9c4fa2f48eeb",
+      "source": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-proposal-v3\\components\\source-agent\\candidate.py",
+        "sha256": "77cfa68f6b3c6996fd503e1ce6f7a964eb57abdb8bde98f6761de5f6e298ff4f"
+      },
+      "source_sha256": "77cfa68f6b3c6996fd503e1ce6f7a964eb57abdb8bde98f6761de5f6e298ff4f",
+      "utf8_bytes": 13455
+    },
+    "W0": {
+      "agent_inventory_sha256": "25b2802cdfcb1a81b70a89e255a2f4e60b2aec70b2942ebd76c99478e78040f0",
+      "source": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed-witness\\agent\\candidate.py",
+        "sha256": "6aa4cd1f941a208ed473793874522d1356c58db2a60b77807d6805422164759e"
+      },
+      "source_sha256": "6aa4cd1f941a208ed473793874522d1356c58db2a60b77807d6805422164759e",
+      "utf8_bytes": 12487
+    },
+    "W1": {
+      "agent_inventory_sha256": "7826e629217a8f10877dd3f347a63e03bba7427882bbfe77ab7921666b725ce4",
+      "source": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\witness\\agent\\candidate.py",
+        "sha256": "1488d6348158dfe395f873ca2d830cbd1aa91c11b788900dd93f3ac5450d2e12"
+      },
+      "source_sha256": "1488d6348158dfe395f873ca2d830cbd1aa91c11b788900dd93f3ac5450d2e12",
+      "utf8_bytes": 20949
+    }
+  },
+  "status": "individual_review_frozen_before_reconciliation",
+  "trusted_checkout": {
+    "commit": "42e5dd2d3d32c1f085c87aaa2de44cc1391587ce",
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\ci-test-progress"
+  }
+}
