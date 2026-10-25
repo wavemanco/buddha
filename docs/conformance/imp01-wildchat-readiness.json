@@ -1,0 +1,165 @@
+{
+  "format": "buddha.imp01-wildchat-readiness-supplement.v1",
+  "recorded_utc": "2026-10-25T11:30:42.539852+00:00",
+  "base_head": "5b3d900135008cdf96661ec4ef528b9790d5fa4b",
+  "status": "bounded_readiness_preparation_unfunded_runtime_and_adoption_open",
+  "guide": "../IMPROVER-WILDCHAT-CONFIGURATION.md",
+  "prior_delivery_preserved": "imp01-wildchat-configuration.json",
+  "runtime_manifest": false,
+  "user_direction": "WildChat next sealed comparison; Curated historical/qualified development evidence; no extra Curated run/population question.",
+  "contract_correction": {
+    "finding": "IMP1-INPUT-01",
+    "basis": "DESIGN4 expressly permits observations from actual original proposal calls, blocking each child until its original census/full replacement satisfies unchanged fixed policy.",
+    "technical_facts_preserved": "922000 separate maximum input,1050000 context/financial ceiling; no presend token counter; byte caps not token proof; no actual oversized request or provider rejection observed.",
+    "mode_for_next_comparison": "Existing empirical original-call policy in explicit study4/assessment4; bind exact bytes before prospective live adoption.",
+    "correction": "Revision143's implication that guaranteed future input acceptance requires a new mandatory presend gate was stronger than the contract. No new counter, limiter, endpoint, source or profile change solely for this finding.",
+    "failure_semantics": "Non200/context rejection or missing usage leaves unknown with original hold. Coherent billed200 refusal/finish/margin failure may settle cost then stop capacity partial. No child or automatic controller reissue of uncertain original proposal operation. Native SDK retry policy is separate; every physical attempt needs its own reservation.",
+    "not_certified": "Neither the postreply context arithmetic nor this supplement independently certifies the separate922000 input maximum, future model attention, replacement quality, acceptance or completion."
+  },
+  "standard_speed_scope": {
+    "passed_pure_checks": 12,
+    "allow": 4,
+    "deny": 8,
+    "result": "Exact native scoring/refusal fallback omits fast optin; gateway rejects fast fields/headers before dispatch and transport introduces neither under reviewed official optin contract.",
+    "returned_billing_attestation": false,
+    "usage_speed_checked": false,
+    "rates_changed": false
+  },
+  "runtime_availability": {
+    "client_server": "29.5.3",
+    "platform": "Linux/amd64",
+    "both_exact_images_present": true,
+    "image_user": "65532:65532",
+    "same_runtime_environment_limits_across_starts": true,
+    "metadata_only": true,
+    "execution_isolation_fullgrid_sufficiency_established": false
+  },
+  "workload_arithmetic": {
+    "maximum_owners": 1544,
+    "development_owners": 296,
+    "final_owners": 1248,
+    "maximum_answer_positions": 3920,
+    "sum_broad_nominal_owner_caps_microusd": 29300000372,
+    "native_outstanding_physical_reservations_per_worker": 1,
+    "quality_single_reservation_microusd": 11440000,
+    "sequence_cap_formula": "max_i(sum of previous committed actual costs + full reservation_i), separately for each owner and phase; uncertain holds remain committed.",
+    "candidate_phase_caps_NOT_ADOPTED_OR_REQUESTED": {
+      "development": {
+        "budget_microusd": 50000000,
+        "max_attempts": 4096
+      },
+      "final": {
+        "budget_microusd": 100000000,
+        "max_attempts": 12288
+      }
+    },
+    "scope": "Only explicit hypothetical successful sequences in referenced worksheets fit; larger token/fallback/fold/hold cases may not. No expected bill, completeness guarantee, approved funding or aggregate preparation-gate result."
+  },
+  "runtime_diagnostic": {
+    "status": "deadline_incomplete",
+    "deadline_seconds": 240,
+    "prior_1196_second_test_not_linear_fullgrid_estimate": true,
+    "application_source_changes": false,
+    "supplied_worker_transport_replacements": true,
+    "reason": "strict_worker_wall_deadline",
+    "stopped_during": "normal_development",
+    "elapsed_seconds": 239.10544710000977,
+    "bootstrap_seconds": 14.660110800061375,
+    "preparation_seconds": 2.080228599952534,
+    "observed_development_seconds": 221.56646690005437,
+    "final_and_passive_phases_reached": false,
+    "tree_scan_count": 1422,
+    "capture_finish_count": 883,
+    "approximate_stat_calls": 5420000,
+    "synthetic_physical_sends": 14,
+    "application_failure_or_complete_study_claim": false,
+    "no_restart": true,
+    "interpretation": "Repeated host validation is materially expensive in this instrumented normal prefix, not explained by bootstrap or adversarial replay alone. Inclusive times overlap; profiler overhead included; no full-grid duration prediction.",
+    "next": "Diagnose narrow shared validation work without dropping stability, path/link, owner or accounting checks. No performance fix yet."
+  },
+  "evidence": {
+    "imp01-input-envelope-necessity-and-callpath-review-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-input-envelope-necessity-and-callpath-review-v1.json",
+      "sha256": "2b04bb9ead3661f19262d683b2faec5b4a8aa52c290ff5a1243d78fad36104c0",
+      "bytes": 16419
+    },
+    "imp01-chat-input-bound-research-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-chat-input-bound-research-v1.json",
+      "sha256": "cb3047a84f43333d1f9e68bf929e54d5210edaeb0e46cd8080a56b8f69bdbf73",
+      "bytes": 9385
+    },
+    "imp01-native-anthropic-standard-speed-review-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-native-anthropic-standard-speed-review-v1.json",
+      "sha256": "6b6cb26832c5e789c9b41a4605ffdfdc01ea9dcb096a9a6c60f8256e9572382d",
+      "bytes": 13144
+    },
+    "imp01-native-anthropic-standard-speed-probes-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-native-anthropic-standard-speed-probes-v1.json",
+      "sha256": "70a9d51a4c5fcb4de970f01627e6f37878ac031196ed9c06ef9f321bba72e8f1",
+      "bytes": 6796
+    },
+    "imp01-runtime-availability-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-runtime-availability-v1.json",
+      "sha256": "ed5f76c55955c0e6d08665372df3c4305a86ca709480ee510fb59aeb1dac89e0",
+      "bytes": 16615
+    },
+    "imp01-runtime-availability-v2.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-runtime-availability-v2.json",
+      "sha256": "6789f03aa7605d3694b5b64fcd00d1ce29cde7b5d4a9016d05649287f67db09f",
+      "bytes": 4857
+    },
+    "imp01-wildchat-resource-arithmetic-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-wildchat-resource-arithmetic-v1.json",
+      "sha256": "408f9759fb815efd2e89c98860522eaf85f4eb1447495ae9385bde99050fb66a",
+      "bytes": 79736
+    },
+    "imp01-wildchat-resource-arithmetic-supplement-v2.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-wildchat-resource-arithmetic-supplement-v2.json",
+      "sha256": "8f736d9b042c8d0728055fd8094c64078eda887f84be2c07cf45362226e33fb6",
+      "bytes": 23091
+    },
+    "imp01-runtime-feasibility-probe-shape-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-runtime-feasibility-probe-shape-v1.json",
+      "sha256": "ec8fb5f276810fba74428886b5e4908af84974b1d561bd8c303675f4eb183bc8",
+      "bytes": 13080
+    },
+    "imp01-empirical-capacity-independent-review-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-empirical-capacity-independent-review-v1.json",
+      "sha256": "33e4809602b998d9dc0f803a6e7902913950db7d8fb60a036861f4edc927dff8",
+      "bytes": 11589
+    },
+    "imp01-runtime-probe-result-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-runtime-probe-result-v1.json",
+      "sha256": "e8efa99a309678093360217699f94793933161f619bdbba1c3a2180180bcf51a",
+      "bytes": 17205
+    },
+    "ci-current-three-heads-20261025-v2.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\ci-current-three-heads-20261025-v2.json",
+      "sha256": "24ae0a03531905b0623684125aa97bb3924010b8387ccc7b15721b46b81d9449",
+      "bytes": 121226
+    }
+  },
+  "preservation": {
+    "original_revision_rows": 143,
+    "original_acceptance_tails": 10,
+    "application_test_agent_profile_dependency_changes": false,
+    "original_paid_SQL_queries": false,
+    "selected_P_C_decode_AST_import_compile_execute": false,
+    "provider_model_calls": 0,
+    "real_keys": false,
+    "live_authority_owners_or_allocation": false,
+    "read_only_Docker_metadata": true,
+    "unpaid_synthetic_fixture_owners": "Separate bounded diagnostic only; never original paid study owners.",
+    "merged": false,
+    "new_user_command": false,
+    "scientific_gates_closed": false,
+    "exact_executing_head_hosted_CI": "Separate pending evidence; no green claim in this docs slice."
+  },
+  "remaining": "Narrow shared runtime diagnosis, actual resources/fairness, enforceable aggregate caps, prospective numerical/review arrangements and tested matched launcher before separate live allocation. IMP01 and EVAL02 stay open.",
+  "hosted_metadata_checkpoint": {
+    "PR134": "8success",
+    "PR136": "7success_1Windowsrunning",
+    "PR139": "2Ubuntusuccess_6running",
+    "scope": "Exact current heads at referenced snapshot only. Metadata cannot establish test-progress idleness; no logs, cancellation, rerun or merge. No PR139 green claim."
+  }
+}

@@ -1,9 +1,9 @@
 {
   "format": "buddha.imp01-protocol-proposal-feasibility.v1",
   "date": "2026-10-25",
-  "status": "unfunded_wildchat_configuration_checked_input_envelope_and_adoption_next",
+  "status": "unfunded_wildchat_empirical_capacity_mode_confirmed_resources_and_adoption_next",
   "runtime_manifest": false,
-  "configuration_preparation": {"record": "imp01-wildchat-configuration.json", "status": "bounded_data_checks_passed_unfunded_unadopted", "next": "Exact input/request envelope; actual runtime/resources, aggregate caps and numerical/review adoption."},
+  "configuration_preparation": {"record": "imp01-wildchat-configuration.json", "status": "bounded_data_checks_passed_unfunded_unadopted", "next": "Existing empirical original-call capacity mode under DESIGN4; bounded runtime measurement, actual resources/fairness, enforceable caps, numerical/review arrangements and tested matched launcher before separate funding.", "readiness_supplement": "imp01-wildchat-readiness.json"},
   "proposal": "../IMPROVER-PROTOCOL-PROPOSAL.md",
   "proposed_treatment": "Exact original P and C as fixed improvers; both exact originals also used as common starting task agents. C index-only limitation retained. No C replacement or new scoring rule.",
   "source_sha256": {
