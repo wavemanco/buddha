@@ -1,7 +1,7 @@
 {
   "format": "buddha.imp01-protocol-proposal-feasibility.v1",
   "date": "2026-10-25",
-  "status": "unfunded_curated_separation_check_complete_followup_population_choice",
+  "status": "unfunded_wildchat_population_prepared_capacity_integration_next",
   "runtime_manifest": false,
   "proposal": "../IMPROVER-PROTOCOL-PROPOSAL.md",
   "proposed_treatment": "Exact original P and C as fixed improvers; both exact originals also used as common starting task agents. C index-only limitation retained. No C replacement or new scoring rule.",
@@ -152,18 +152,19 @@
     "distinct": 5.46166240658356
   },
   "population_choice": {
-    "recommended": "For a strict sealed comparison, prepare entirely official WildChat with prospective reviewer/optimizer separation and checked exposure. Curated remains valid for explicitly qualified development measurement; no automatic contamination finding or switch.",
-    "alternative": "Retain Curated for explicitly qualified development measurements, with original26 full-process eligibility unknown; this does not close IMP-01 sealed-task effectiveness and cannot bypass the protected custody guard.",
+    "recommended": "Follow the user-selected official WildChat recommendation: completed prospective population/custody preparation, then existing capacity integration and concrete live feasibility/funding checks.",
+    "alternative": "Curated remains historical/qualified development evidence; no further Curated run is scheduled.",
     "known_curated_visibility": "Two nonhuman AI source-review contexts read all100 original Curated prompts for family grouping before splitting; maps and substantive boundary notes returned to the host. Known outcome/feedback exposure13 IDs and familyclosure22 are separate disclosure classes.",
-    "known_wildchat_visibility": "Original bytes acquired/sealed and published summaries/counts inspected; no per-ID exhaustive visibility ledger or eligible custody established by the bounded review.",
+    "known_wildchat_visibility": "Earlier byte/hash/aggregate-only work remains disclosed. Current custody-only contexts read1000primaryprompts with no optimization inputs and returned only opaque metadata/genericmethod; descriptive notes remain private. Root/source-author decisions are in scope. Saved exact26final named-process eligibility is scoped to this documented prospective pipeline; modeltraining/outsideaccessunknown.",
     "existing_interface": "One complete original dataset; current improver assessment requires same TaskSet source bytes throughout. All-WildChat is configuration-compatible in principle; Curated-development/WildChat-final is not supported and no concat/union source is invented.",
     "public_training_contamination": "unknown",
     "user_attestation_requested": false,
     "what_not_certified_means": "Historical protocol expressly withheld held-out eligibility certification. The reviewed records do not demonstrate a reserved-final prompt entering an improver callback or tuning from final results; they also do not attest complete later separation. Check the actual information flow rather than infer a leak from reviewer access.",
-    "user_selected_preparation_direction": "Check Curated separation first: completed at bounded scope. No funds or eligibility attestation. Follow-up population/claim choice not yet selected.",
+    "user_selected_preparation_direction": "Official WildChat for next sealed comparison, explicitly selected and reconfirmed; follow recommendation without re-asking. Preparation only; no API funding.",
     "selected_check_result": "Bounded Curated review: actual three proposal callbacks contain only dev0/47/97; no demonstrated reserved-task leak. Full historical host/source-author influence from returned descriptions is unknown, so original26 are not certified eligible.",
-    "followup_choice_adopted": false,
-    "result_record": "imp01-curated-separation-review.json"
+    "followup_choice_adopted": true,
+    "result_record": "imp01-wildchat-preparation.json",
+    "user_choice_pending": false
   },
   "capacity_gap": {
     "study_v3_proposal_capacity_field": false,
@@ -254,8 +255,8 @@
     "buddha/source_search.py": "7b679374af7cfed723664cb5c582e0668f6c110ec7c650181fd0e40348c5aa0a"
   },
   "limits": [
-    "This is a decision-ready proposal, not an adopted prospective trial; exact WildChat tasks, families and custody are deliberately unset.",
-    "Neither Curated nor WildChat is certified unseen here. Classification review does not automatically contaminate a panel; process renaming or missing exposure hits does not establish separation either.",
+    "Complete WildChat source/families/split and scoped prospective custody are now prepared, not an adopted funded trial. Actual capacity, resource, review and live readiness checks remain.",
+    "WildChat eligibility concerns exact26reservedmembers in the documented prospective process, not global historical or training invisibility. Curated original26 remain uncertified; family review alone is not automatic contamination.",
     "No actual future-grid runtime, vendor capacity, final-task cost, statistical power, source effectiveness or human-quality claim.",
     "The original two-gate plan, frozen historical runs and official benchmark are unchanged."
   ],
@@ -301,5 +302,63 @@
       "sha256": "97a973dbe2f9ba813a86be567754bda4aef624f3f642750f6a524ccbd186eba2"
     },
     "old_runs_changed_or_rescored": false
+  },
+  "wildchat_panel_preparation": {
+    "status": "complete_prospective_data_custody_no_study",
+    "source_tasks": 1000,
+    "partition_counts": {
+      "development": 599,
+      "final": 26,
+      "validation": 375
+    },
+    "ordered_final_ids": [
+      "WildChat-09e2cb3909b3c726bb728b18d410c9a4",
+      "WildChat-24fe5ea324986bb07a06b779ad17e3c2",
+      "WildChat-263288a3677729bbf7c3537fd2d1f582",
+      "WildChat-292b1b4b1e567197240b19d35d2fd88b",
+      "WildChat-3d3987ae7312208327c352a4baf95393",
+      "WildChat-404b560a967fa3242d5c295f8dd1d935",
+      "WildChat-4119ae189ad757b57f4ca0159c745b63",
+      "WildChat-4d39bdd6bcb57d39848178c7bd7e02ac",
+      "WildChat-5dc762673f0b02a5728afd73e1269d82",
+      "WildChat-65411735abedc7b3fce11c2f3a557d48",
+      "WildChat-73a2c1f45b915614f368fa2e8839ca7c",
+      "WildChat-762705287b14a1246726fbe38fc4add2",
+      "WildChat-7f4f9350692f11e70e61604f31641add",
+      "WildChat-9641e5ce88864a0909df5ffc8d77c88f",
+      "WildChat-9cc52c4b7ace68aaa7d6ee35ddb1e23d",
+      "WildChat-a73ea890a9495093e3577deb5b207ee3",
+      "WildChat-bc7a7af6535ae8f5b14608e148f359cb",
+      "WildChat-cbbe448ba4f294db31d0dfb554991135",
+      "WildChat-cdee3ca4eb3e18028fc4b3a652cb35a4",
+      "WildChat-cf53a014db00314d6e68d8d2bd395a89",
+      "WildChat-d36e11467e2d4f69c3d522d0ebbc99e4",
+      "WildChat-d3da4ad03509c152fbb224d7f81565a4",
+      "WildChat-d63bac08f49848c43e12a3d0f8b39e28",
+      "WildChat-dbc377d89e58c0386f40fedb19d55a6a",
+      "WildChat-dd86e0b01f454b2456f2e5639c290e1c",
+      "WildChat-f461ac8f72ce59ac80b6cf5093330154"
+    ],
+    "ordered_development_ids": [
+      "WildChat-34a58684e220b6fc70ef19c009694426",
+      "WildChat-80db260e5cdf6d3953f3e3a8d087fe3a",
+      "WildChat-9c6d0c684a953e9cc1f8d6fc0daafbc9"
+    ],
+    "final_families": 25,
+    "squared_weight_sum": {
+      "numerator": 7,
+      "denominator": 169
+    },
+    "independent_formula_approximation": {
+      "utility": 6.297594374887963,
+      "distinct": 5.667834937399166
+    },
+    "public_analyzer_run": false,
+    "custody_scope": "Only exact26assignedfinal declaredeligible to documented fulloptimizationprocess;974othermembersunknown. Training/unrecordedoutsideaccessunknown;logicalisolationonly.",
+    "record": "imp01-wildchat-preparation.json",
+    "declared_families": 967,
+    "conservative_overlap_final_exclusions": 8,
+    "coarsened_families_cross_phases": 0,
+    "preparation_version": 2
   }
 }
