@@ -1,0 +1,206 @@
+{
+  "format": "buddha.imp01-matched-launch-delivery.v1",
+  "recorded_utc": "2026-10-25T14:37:54.774007+00:00",
+  "base_head": "e2848dc134f42ca10547ff6bba485c120c9d6e1d",
+  "status": "bounded_launcher_lifecycle_and_local_checks_pass_funded_handoff_and_hosted_pending",
+  "specification": "DESIGN4,7-10; caller-reviewed configuration, original phase scopes, bounded dispatch, durable recovery and separate sealed assessment",
+  "change": "Thin matched launcher checks closed launch/approval records and three original definition-bound phase grants before keys, then rechecks after temporary key entry and delegates original development/freeze/final work. Fresh grants cannot replace retained work; completed original records return keylessly with passive producer retirement. Verified partial/cancelled observations and all-phase costs/holds reach protected new receipts. Reuse original fresh handoff configuration and source-launch profile resolution rather than duplicate them.",
+  "source_sha256": {
+    "buddha/improver_launch.py": "adc41645f3ad90b0114d70978c2002439bd0dc526ae0209c86b8ac1575bbcad6",
+    "buddha/improver_handoff.py": "d0b6a32779c7d378088dc354f6c55550f01819cc2e130953db6c1efd4db69a65",
+    "buddha/launch_common.py": "f7ebb87bfa954a6ed4a02cbbb722cda36cb28a34fca74276bcd15b1776a6c058",
+    "buddha/source_launch.py": "1591c34309cb7242807b715b0e1d3dbd9036d6a7d620e383a20219759c6edad8",
+    "docs/conformance/imp01-run.py": "f32cebbd0a7112c45bbe98220ea1352023f0feb8d9ef1c03767c583b4cc7ec5f",
+    "tests/test_improver_launch.py": "a515364427dca7cd62eb7bd51044a7366cfe3dda48a752eb794a53f1a97e1caa",
+    "tests/test_improver_launch_receipt.py": "74b720ff741dc3fc6b990e47e3934d7478499df3c76a9cecdc56920de59f54c5",
+    "tests/test_improver_launch_integration.py": "0ee36d5e8cf0ba0caac9ef2f1b5317fec1804953a9588a645f63530360acd3aa",
+    "tests/test_improver_launch_cli.py": "b44e3ce8d0fa5693caaae4d96f9b6226ee7956898c1857eadf91daef3a3f90db"
+  },
+  "checks": {
+    "focused_methods": 25,
+    "focused_passed": 25,
+    "focused_skips": 0,
+    "focused_seconds": 63.583,
+    "CLI_methods": 2,
+    "CLI_passed": 2,
+    "CLI_seconds": 0.388,
+    "genuine_lifecycle_methods": 1,
+    "genuine_lifecycle_passed": 1,
+    "genuine_lifecycle_seconds": 617.0846953999717,
+    "quality_commands_passed": 7
+  },
+  "check_scope": "Six new launcher methods, seven direct receipt-graph methods, ten unchanged handoff methods and two existing source-launch methods. Seven configured quality commands pass at their exact source cut. Later separate CLI test addition passes actual subprocess help/error checks and targeted lint/format/compile; application sources remain unchanged. No full suite or hosted-green claim.",
+  "tests_first_and_corrections": [
+    "Honest missing launcher module RED precedes fixtures, SQL and implementation; separate missing receipt format RED precedes the minimal graph-map extension.",
+    "An unrun fast-test refinement adds missing-trial/used-grant and environment-read denial cases. It is not reclassified as an application RED.",
+    "Initial editor lint/type corrections precede the combined behavioral run. Source review identifies differing original final partial schema: unlike finite observations it has no path field. The launcher authenticates original recovery records before projecting a reference, without rewriting existing formats or controller exceptions.",
+    "The first combined 25-method run passes with no failures or skips. The genuine lifecycle is observed once with a declared 1200-second bound and no automatic restart."
+  ],
+  "coverage": [
+    "Exact three-grant approval, normalized definition scope version1, caps, distinct original paths/identities and unused zero-validation grant; reject substitutions, changed terms and used grants when the original trial/review are absent.",
+    "Passive checks forbid credentials/environment reads, original-file SQLite, AST and selected execution. Real retained first-owner context binds outer files and keyed review; original locks and unknown holds stop before key entry.",
+    "Both future file-capacity projections include actual outer inputs and the future keyed review path before root publication. Actual preparation repeats existing read/capacity checks with real reviewed bytes.",
+    "Pinned bounded receipt graph covers launch/proposal/approval/assessment and five scientific descriptor inputs; grant/component roots are exclusions. Wrong pins, conflicting references and the 16/17 descriptor boundary retain their existing stops.",
+    "Original supplied-worker study completes both declared failed-child opportunities, freezes real null descendant slots and executes two legitimate starter final cells within its unchanged six-cell maximum.",
+    "Launcher cancellation after one completed generation carries the verified original reason/position/coverage/observation and phase accounting. Same-launch resume preserves that generation, review, approval, grants and original cancellation. Completed keyless reuse works after implicit I/S producers are retired.",
+    "Actual CLI help exits without key entry or execution; invalid arguments never echo the canary. Documented progress reports active-phase accounting, while receipts preserve all-phase totals and unavailable states."
+  ],
+  "evidence": {
+    "imp01-matched-launch-interface-red-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-matched-launch-interface-red-v1.json",
+      "sha256": "275c07f7ac99ce25836735d2b3480fd44194bdd5e4a1610a6ab8fc910de2fec4",
+      "bytes": 381
+    },
+    "imp01-matched-funded-launch-shape-review-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-matched-funded-launch-shape-review-v1.json",
+      "sha256": "ca7956705363a6468a671f70ada57edc054141fe79f62f1c778186729963a78c",
+      "bytes": 13995
+    },
+    "imp01-matched-receipt-graph-red-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-matched-receipt-graph-red-v1.json",
+      "sha256": "d23d762190b0322ddb0b376378b5d64b3be56b418d80bb194a303ce719e1e9f9",
+      "bytes": 1366
+    },
+    "imp01-matched-receipt-graph-green-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-matched-receipt-graph-green-v1.json",
+      "sha256": "89ec2ae8cce922629df6864ecf66d52ee0dcd26179470faadad2a16e4ee0cba5",
+      "bytes": 1332
+    },
+    "imp01-matched-launch-unrun-test-refinement-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-matched-launch-unrun-test-refinement-v1.json",
+      "sha256": "6738a3ae542e9e8bd667ffe3ac7431873f4baabe2074660e8d0c1583e1000b6a",
+      "bytes": 600
+    },
+    "imp01-matched-launch-local-checks-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-matched-launch-local-checks-v1.json",
+      "sha256": "ca4115b29d801931d139390970138bdbc1a50712842ecb70eaf8c2a1948eaf89",
+      "bytes": 9196
+    },
+    "imp01-matched-launch-cli-checks-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-matched-launch-cli-checks-v1.json",
+      "sha256": "49edee1ee2575f3433debdd38133feda6ef42041ecfd8dba1784520d67e72dd1",
+      "bytes": 1173
+    },
+    "imp01-matched-launch-source-review-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-matched-launch-source-review-v1.json",
+      "sha256": "6f89d119248636d8efa2ea65ccc2617ad60648a8f0c1c319d2b768e245025353",
+      "bytes": 5010
+    },
+    "imp01-matched-launch-source-review-v2.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-matched-launch-source-review-v2.json",
+      "sha256": "5b36db0873c2753a578e82dfac4565cfd9c33c09341e1c59ccc4a75e3b070ed2",
+      "bytes": 7666
+    },
+    "run-imp01-matched-launch-integration-v1.py": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\run-imp01-matched-launch-integration-v1.py",
+      "sha256": "e38078ec4d19f1cf1888428329de6011296c5ed0033a99388d94a83085f06b61",
+      "bytes": 4991
+    },
+    "imp01-matched-launch-integration-v1-result.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-matched-launch-integration-v1\\result.json",
+      "sha256": "8f8733972380a317ce1fbe895e3244ebd98f2616e186928e63933499b6b0d501",
+      "bytes": 5166
+    }
+  },
+  "integration": {
+    "checkpoints": [
+      {
+        "elapsed_seconds": 11.665182000026107,
+        "actual_completed_checkpoint": {
+          "label": "fresh_fixture",
+          "root": "C:\\Users\\arvik\\AppData\\Local\\Temp\\tmprlslhjyt",
+          "phase": "search"
+        }
+      },
+      {
+        "elapsed_seconds": 292.15232420002576,
+        "actual_completed_checkpoint": {
+          "label": "original_final_worker",
+          "counts": {
+            "cells": 2,
+            "conditions": 1,
+            "descendant_slots": 2,
+            "maximum_cells": 6,
+            "no_valid_descendant_slots": 2
+          }
+        }
+      },
+      {
+        "elapsed_seconds": 300.50029250001535,
+        "actual_completed_checkpoint": {
+          "label": "original_final_generation_complete",
+          "directory": "C:\\Users\\arvik\\AppData\\Local\\Temp\\tmprlslhjyt\\launcher-runTest-1\\final\\arms\\0\\tasks\\0\\repetitions\\0\\generation"
+        }
+      },
+      {
+        "elapsed_seconds": 314.5245133000426,
+        "actual_completed_checkpoint": {
+          "label": "cancelled",
+          "phase": "final",
+          "position": {
+            "arm_index": 0,
+            "repetition": 0,
+            "stage": "native",
+            "task_index": 0
+          },
+          "totals": {
+            "committed_microusd": 8,
+            "operation_count": 8,
+            "reserved_microusd": 0,
+            "spent_microusd": 8
+          }
+        }
+      },
+      {
+        "elapsed_seconds": 537.6400344000431,
+        "actual_completed_checkpoint": {
+          "label": "resumed_complete",
+          "phase": "complete",
+          "coverage": {
+            "evaluated": 2,
+            "expected": 2,
+            "generated": 2
+          },
+          "totals": {
+            "spent_microusd": 13,
+            "reserved_microusd": 0,
+            "committed_microusd": 13,
+            "operation_count": 13
+          }
+        }
+      },
+      {
+        "elapsed_seconds": 616.7730145000387,
+        "actual_completed_checkpoint": {
+          "label": "keyless_retired_complete",
+          "phase": "complete",
+          "synthetic": true
+        }
+      }
+    ],
+    "source_unchanged": true,
+    "deadline_seconds": 1200,
+    "automatic_restarts": 0,
+    "raw_worker_log": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-matched-launch-integration-v1\\worker.log",
+      "sha256": "8711f1777a30f4ba68319e525b4e7168374bbe4be694690531fe416d30f1f2f7"
+    }
+  },
+  "preservation": {
+    "original_paid_SQL_queries": false,
+    "provider_model_calls": 0,
+    "new_live_authority_owner_allocation": false,
+    "selected_original_source_execution": false,
+    "main_README_or_development_merge": false,
+    "user_command": "New operator help documented; no funded handoff or exact live command supplied."
+  },
+  "limitations": [
+    "One synthetic two-starter/null-descendant path does not certify a six-cell successful-descendant path, full WildChat grid runtime, actual selected P/C execution, provider access or model capacity.",
+    "Fixture amounts and dummy credentials are synthetic; recorded local costs are not provider invoices or live-spending estimates.",
+    "Sequential checks are not atomic snapshots. Known original locks/unknowns/overruns stop without repair, reissue or release of held money. Partial first preparation may fail closed and is not automatically replaced.",
+    "Manual account assertions and credential fingerprints do not authenticate access, prices or funding. Three separately approved grants remain the actual financial authority.",
+    "Current assessment/study-v4 with bound context-v2 is the supported fresh launcher route; original formats and readers remain pinned. Existing benchmark scoring and source agents are unchanged.",
+    "No hosted-green, scientific improvement, human review, generalization or funded-readiness claim. Resources, numerical/review adoption and a separately funded current-source handoff remain open."
+  ],
+  "remaining": "Adopt feasible resources/fairness, numerical and independent-review arrangements; refresh the actual reviewed source/configuration closure, present a concrete separate allocation and verify its funded handoff before providing the live command. IMP01/EVAL02 remain open; WildChat selected, Curated historical/qualified development evidence."
+}
