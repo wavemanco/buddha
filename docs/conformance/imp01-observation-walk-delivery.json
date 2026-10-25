@@ -1,0 +1,83 @@
+{
+  "format": "buddha.imp01-observation-walk-delivery.v1",
+  "recorded_utc": "2026-10-25T11:49:24.176378+00:00",
+  "base_head": "107ad9d707e7f50ce84c8c9f893abe5e967f2327",
+  "status": "bounded_local_guard_and_metadata_checks_pass_hosted_and_fullgrid_pending",
+  "finding": "IMP1-RUNTIME-01",
+  "specification": "DESIGN4,9-10; bounded observation, original custody and truthful resource claims",
+  "change": "Remove only unconditional _plain(path) in doctor._entries. Files retain _regular and full ancestry/link/nlink checks; queued directories retain _plain(parent) immediately before scandir. All capture finishes, byte, sidecar, path/signature/entry limits and accounting checks stay unchanged.",
+  "source_sha256": {
+    "buddha/doctor.py": "19ac58521142da183759df7b53c13f5513909e870d389ba742dbb66a4d2aeb98",
+    "tests/test_doctor.py": "3ac7084e2c3205c883417933c42051de44f94ec65da9e8043155945c3f22a414"
+  },
+  "measured_scope": {
+    "workload": "465 metadata entries in the retained unpaid synthetic partial fixture;3unprofiled+1profiled scan per version, fresh processes, same frozen helper.",
+    "all_eight_signature_maps_equal": true,
+    "plain_calls": {
+      "before": 932,
+      "after": 467
+    },
+    "stat_calls": {
+      "before": 17832,
+      "after": 9298
+    },
+    "regular_file_checks": {
+      "before": 278,
+      "after": 278
+    },
+    "unprofiled_seconds_before": [
+      0.18136970000341535,
+      0.16516989993397146,
+      0.17089660000056028
+    ],
+    "unprofiled_seconds_after": [
+      0.12034949997905642,
+      0.11662819993216544,
+      0.10240500001236796
+    ],
+    "timing_qualification": "Raw small-workload samples, fixed version order/cache/system effects; no formal speedup or full-study runtime estimate. Full exact samples are in the paired receipt.",
+    "SQL_or_fixture_body_reads": false,
+    "full_lifecycle_rerun": false
+  },
+  "functional_checks": {
+    "methods": 55,
+    "skips": 1,
+    "seconds": 55.073,
+    "quality_commands_passed": 7,
+    "passed": 54
+  },
+  "guard_qualification": "Stable-path checks preserved; deleting an early observation can change transient race detection. Neither version is an atomic or race-proof snapshot. New tests cover Windows-style reparse file/directory/root/ancestor including a queued late reparse; actual host symlink test remains skipped.",
+  "evidence": {
+    "imp01-observation-walk-shape-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-observation-walk-shape-v1.json",
+      "sha256": "d6471847de194b48a0ca97c09f7d208135f1ea11d5a02df99808de5c9567fd62",
+      "bytes": 11835
+    },
+    "imp01-observation-walk-source-shape-review-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-observation-walk-source-shape-review-v1.json",
+      "sha256": "9ac090d839b39ea08489ac67063b2d55c472dc502ae2a0baa920ea0584ab3ff4",
+      "bytes": 8820
+    },
+    "imp01-observation-walk-paired-metadata-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-observation-walk-paired-metadata-v1.json",
+      "sha256": "8ff3df740e3cdecd2dcbb352f7e94b9208d09129c9e7b28de403ed8073468bbd",
+      "bytes": 10906
+    },
+    "imp01-observation-walk-local-checks-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-observation-walk-local-checks-v1.json",
+      "sha256": "2e22ee2fcebabe0cc8d2034de5e6e62f07ebde13a264fb5e306ee1ab00944aa9",
+      "bytes": 2967
+    }
+  },
+  "preservation": {
+    "original_P_C_sources": "Unchanged raw bytes, no decode/AST/import/compile/execution",
+    "benchmark_profiles_dependencies_and_saved_preparation": "Unchanged; fresh trusted closure required before future handoff",
+    "original_paid_SQL_queries": false,
+    "provider_model_calls": 0,
+    "live_owners_authority_or_funding": false,
+    "new_user_command": false,
+    "scientific_or_fullgrid_or_CI_success_claim": false,
+    "merged": false
+  },
+  "remaining": "Bind feasible runtime/resources/fairness, aggregate caps and prospective numerical/review arrangements; prepare and verify matched launcher/current trusted closure before separate live funding. IMP01 and EVAL02 remain open."
+}
