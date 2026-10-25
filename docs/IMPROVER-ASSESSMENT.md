@@ -58,6 +58,36 @@ input-binding capacity for the maximum declared grid. It does not accept a
 method name whose implementation will be supplied later. The original trial
 controls reach the first development owner and all subsequent execution owners.
 
+## Bind the reviewed launch and approval files
+
+`prepare_improver_assessment_trial` accepts optional `input_bindings`: a mapping
+from existing file paths to their independently reviewed SHA-256 fingerprints.
+This lets the trial retain the exact launch and approval files alongside its
+original experiment inputs. Static files that do not refer back to the trial
+can still use the development declaration's existing `consumer_sources` field.
+
+Supplying the mapping, including an empty one, selects a closed v2 trial context.
+Omitting it preserves the existing v1 context. The study and assessment
+declaration formats, phase limits and official scoring stay the same. Changed
+trusted code still needs a fresh source closure; old saved trials require their
+matching pinned code rather than a silent declaration upgrade.
+
+Preparation checks the additional paths and fingerprints, conflicting pins,
+output overlap and both development and final input capacities before publishing
+the new trial. The original phase databases are refused as file pins because
+enrolling owners changes those databases. The reviewed approval file and original
+grant terms carry the authorization information instead.
+
+The additional files reach the first development owner and later frozen controls.
+Both active work and read-only inspection require their original bytes, even
+when a file also serves as a selected program that could otherwise be retired.
+These checks are sequential observations, not an atomic snapshot.
+
+This remains a library interface, with no new command or live-run instruction.
+Preparation writes trial records and enrolls the first owner against existing
+grants; it makes no provider request. The complete funded launcher, recovery
+handling and phase-aware progress remain separate work.
+
 The custody record states which tasks belong to development, validation and
 final assessment, along with their families and known exposure. The software
 checks that record and its evidence. This is not proof that a public task was

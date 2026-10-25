@@ -6,7 +6,7 @@ separate from custody, numerical rule satisfaction and execution completion.
 """
 
 import sqlite3
-from collections.abc import Callable
+from collections.abc import Callable, Mapping
 from functools import wraps
 from pathlib import Path
 from typing import Any, cast
@@ -31,6 +31,7 @@ _AGGREGATE_FORMAT = "buddha.improver-assessment-trial.v2"
 _COMPARISON_FORMAT = "buddha.improver-assessment-trial.v3"
 _CAPACITY_FORMAT = "buddha.improver-assessment-trial.v4"
 _CONTEXT = "buddha.improver-assessment-context.v1"
+_BINDINGS_CONTEXT = "buddha.improver-assessment-context.v2"
 _SCHEDULE = "buddha.improver-final-schedule.v1"
 _READY = "buddha.improver-final-freeze-ready.v1"
 _POLICY = "confirmed_finite_c_only_slots.v1"
@@ -318,6 +319,28 @@ def _prospective_controls(state: dict[str, Any], root: Path) -> dict[Path, str]:
     return pins | dict.fromkeys(paths, "0" * 64)
 
 
+def _development_capacity(state: dict[str, Any], root: Path, controls: Mapping[Path, str]) -> None:
+    study_root = root / "search/study"
+    common = (
+        set(controls)
+        | {
+            root / name
+            for name in (
+                ".buddha-evaluation-trial.json",
+                "definition.json",
+                "context.json",
+                "funding.json",
+            )
+        }
+        | {study_root / name for name in ("context.json", "declaration.json")}
+        | {
+            study_root / "inputs/starts" / str(index) / "candidate.py"
+            for index in range(len(state["screens"]))
+        }
+    )
+    improver_study._capacity(study_root, state["development"], state["screens"][0], common)
+
+
 @_checked
 def prepare_improver_assessment_trial(
     directory: Path,
@@ -327,12 +350,28 @@ def prepare_improver_assessment_trial(
     expected_runtime_sha256: str,
     authorizations: dict[str, Authorization],
     development_review: dict[str, object],
+    input_bindings: Mapping[Path, str] | None = None,
 ) -> Path:
     directory, declaration = final._path(directory), final._path(declaration)
     state = _definition(
         pipeline._read(declaration, _digest(expected_sha256)), expected_runtime_sha256
     )
     review = gateway._review(development_review, fresh=True)
+    bindings: dict[Path, str] = {}
+    extra_context: dict[str, object] = {"development_review": review}
+    if input_bindings is not None:
+        improver_study._bind_controls(bindings, input_bindings)
+        bindings = {final._path(path): digest for path, digest in bindings.items()}
+        if isinstance(authorizations, dict) and any(
+            authority.path in bindings
+            for authority in authorizations.values()
+            if isinstance(authority, Authorization)
+        ):
+            raise ImproverAssessmentError("mutable original grants cannot be input file pins")
+        improver_study._bind_controls(state["controls"], {declaration: _digest(expected_sha256)})
+        improver_study._bind_controls(state["controls"], bindings)
+        gateway._input_records(list(state["controls"]), state["controls"])
+        extra_context["input_bindings"] = {str(path): pin for path, pin in bindings.items()}
     prospective = _prospective_controls(state, directory) | {declaration: _digest(expected_sha256)}
     study._capacity(
         state,
@@ -344,6 +383,9 @@ def prepare_improver_assessment_trial(
             directory / "freeze" / name: "0" * 64 for name in ("schedule.json", "ready.json")
         },
     )
+    if input_bindings is not None:
+        _development_capacity(state, directory, state["controls"])
+        gateway._input_records(list(state["controls"]), state["controls"])
     final._prepare_trial_root(
         directory,
         declaration=declaration,
@@ -352,8 +394,8 @@ def prepare_improver_assessment_trial(
         state=state,
         authorizations=authorizations,
         purposes=_purposes(state),
-        context_format=_CONTEXT,
-        extra_context={"development_review": review},
+        context_format=_CONTEXT if input_bindings is None else _BINDINGS_CONTEXT,
+        extra_context=extra_context,
     )
     controls = dict(state["controls"]) | {
         declaration: _digest(expected_sha256),
@@ -375,8 +417,9 @@ def prepare_improver_assessment_trial(
 def _state(directory: Path, *, active: bool = True) -> dict[str, Any]:
     root = final._path(directory)
     fixed = trial_fence.required_controls(root / "final")
+    raw_context = study._obj(_load(pipeline._read(root / "context.json")))
     context = study._obj(
-        _load(pipeline._read(root / "context.json")),
+        raw_context,
         {
             "format",
             "external_declaration",
@@ -385,9 +428,10 @@ def _state(directory: Path, *, active: bool = True) -> dict[str, Any]:
             "host_core",
             "host_runtime",
             "development_review",
-        },
+        }
+        | ({"input_bindings"} if raw_context.get("format") == _BINDINGS_CONTEXT else set()),
     )
-    if context["format"] != _CONTEXT:
+    if context["format"] not in {_CONTEXT, _BINDINGS_CONTEXT}:
         raise ImproverAssessmentError("unsupported original improver context")
     state = _definition(
         pipeline._read(root / "definition.json"), context["expected_runtime_sha256"], active=active
@@ -399,6 +443,15 @@ def _state(directory: Path, *, active: bool = True) -> dict[str, Any]:
     ):
         raise ImproverAssessmentError("original raw declaration changed")
     controls = state["controls"] | {Path(external["path"]): external["sha256"]}
+    if context["format"] == _BINDINGS_CONTEXT:
+        bindings = {
+            final._path(path): _digest(pin)
+            for path, pin in study._obj(context["input_bindings"]).items()
+        }
+        if context["input_bindings"] != {str(path): pin for path, pin in bindings.items()}:
+            raise ImproverAssessmentError("original outer input paths have aliases")
+        improver_study._bind_controls(controls, bindings)
+        state["retirable_producers"].difference_update(bindings)
     if context["controls"] != {str(path): pin for path, pin in controls.items()}:
         raise ImproverAssessmentError("original source/control population changed")
     funding = study._obj(_load(pipeline._read(root / "funding.json")))
