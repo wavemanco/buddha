@@ -93,6 +93,23 @@ performance. The dated conformance driver is a pinned engineering check, not a
 live-run launcher; it clears inherited credentials, uses a fake key and makes no
 paid provider calls. [PLAN.md](PLAN.md) retains the remaining checks.
 
+The [follow-up original P/C check](conformance/imp01-both-consumers-delivery.json)
+now executes each frozen improver's two proposal workers in separate supplied
+studies. P and C both forward the entire root/own-edge note and literal parent
+source. All four stdout callback bodies match the captured HTTP bytes exactly.
+P has no derived index; C keeps its task-ID-only index. Omitting the new actor
+option still selects C, whose two emitted request bodies are byte-identical to
+the earlier C-only captures. Original sources and earlier evidence stay unchanged.
+This closes the small actual-P construction check, not future request capacity,
+model use or improved performance.
+
+The internal rehearsal driver's optional `--actor initial` chooses original P;
+`--actor evolved`, or omitting the option, chooses original C. It runs once in
+its invoking terminal, writes new fixture/receipt files and starts local minimal
+containers with supplied provider replies. It needs no real API key and spends
+no API money. Ctrl+C stops it; retain the incomplete evidence and use new output
+paths for a new observation. It is an engineering check, not a live-run command.
+
 New comparison work distinguishes a reconstruction limit
 (`feedback_reconstruction_limit`, such as excessive nested edge checks) from
 a byte limit (`feedback_capacity`). A stop during started execution retains its

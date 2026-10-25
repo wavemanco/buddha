@@ -1,7 +1,7 @@
 {
   "format": "buddha.imp01-protocol-proposal-feasibility.v1",
   "date": "2026-10-25",
-  "status": "unfunded_population_choice_reasked_after_custody_scope_correction",
+  "status": "unfunded_curated_separation_check_selected",
   "runtime_manifest": false,
   "proposal": "../IMPROVER-PROTOCOL-PROPOSAL.md",
   "proposed_treatment": "Exact original P and C as fixed improvers; both exact originals also used as common starting task agents. C index-only limitation retained. No C replacement or new scoring rule.",
@@ -159,14 +159,15 @@
     "existing_interface": "One complete original dataset; current improver assessment requires same TaskSet source bytes throughout. All-WildChat is configuration-compatible in principle; Curated-development/WildChat-final is not supported and no concat/union source is invented.",
     "public_training_contamination": "unknown",
     "user_attestation_requested": false,
-    "what_not_certified_means": "Historical protocol expressly withheld held-out eligibility certification. The reviewed records do not demonstrate a reserved-final prompt entering an improver callback or tuning from final results; they also do not attest complete later separation. Check the actual information flow rather than infer a leak from reviewer access."
+    "what_not_certified_means": "Historical protocol expressly withheld held-out eligibility certification. The reviewed records do not demonstrate a reserved-final prompt entering an improver callback or tuning from final results; they also do not attest complete later separation. Check the actual information flow rather than infer a leak from reviewer access.",
+    "user_selected_preparation_direction": "Check Curated separation first; retain Curated only if supported. No funds or eligibility attestation."
   },
   "capacity_gap": {
     "study_v3_proposal_capacity_field": false,
     "study_v3_all_original_proposal_before_child_capacity_barrier": false,
     "existing_guards": "Request/byte/callback/usage/accounting/worker bounds remain.",
     "available_reuse": "Existing original-call capacity assessor; explicitly choose/check route and connect existing barrier for both counted and witness owners if adopted. No new framework prescribed.",
-    "prior_c_observation": "Root and own-edge request forwarding only, not actual future capacities or original P behavior."
+    "prior_c_observation": "Original P and default C both now pass small isolated root/own-edge request construction. Actual future model use, context/output headroom and larger settings remain unverified."
   },
   "historical_configuration_snapshot": {
     "generation": {
