@@ -14,9 +14,9 @@ from typing import cast
 
 from buddha import native_pipeline as pipeline
 from buddha.candidate_generation import _recorded_sources
-from buddha.doctor import _authority, _Busy, _Unsupported
+from buddha.doctor import _authority, _Busy, _Capture, _Unsupported
 from buddha.gateway_history import read_gateway_history
-from buddha.native_evidence import NativeEvidence, authority_observation
+from buddha.native_evidence import NativeEvidence, _adopt_capture, authority_observation
 from buddha.releases import MAX_JSON_BYTES, Selection, _digest, _json, _load, _object, _path
 
 _CLAIM = (
@@ -105,6 +105,7 @@ def collect_candidate_improvement(
     *,
     authorization: Path,
     expected_report_sha256: str | None = None,
+    sink: _Capture | None = None,
 ) -> dict[str, object]:
     """Reconstruct complete custody, or verify one explicitly pinned publication."""
     from buddha import candidate_improvement as stage
@@ -118,6 +119,12 @@ def collect_candidate_improvement(
             pipeline._absolute(str(directory)),
             pipeline._absolute(str(authorization)),
         )
+        if sink is not None and (
+            type(sink) is not _Capture or not directory.is_relative_to(sink.root)
+        ):
+            raise stage.CandidateImprovementError(
+                "proposal capture requires its original containing observation"
+            )
         reader = NativeEvidence(
             directory, authorization, error_type=stage.CandidateImprovementError
         )
@@ -304,7 +311,10 @@ def collect_candidate_improvement(
             raise stage.CandidateImprovementError(
                 "proposal result exceeds its bounded output ceiling"
             )
-        reader.capture.finish()
+        if sink is None:
+            reader.capture.finish()
+        else:
+            _adopt_capture(reader.capture, sink)
         return _load(_json(result))
     except (
         ValueError,

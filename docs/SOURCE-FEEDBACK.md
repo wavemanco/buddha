@@ -116,6 +116,59 @@ headroom before any next live handoff. No reviewed model tokenizer/context
 proof is supplied by this change. It neither funds a run nor changes the
 completed first experiment or its limited historical feedback.
 
+## Compare a completed child with its actual parent
+
+An optional `comparison` selects host provenance v6. It adds the immediate
+parent's complete answers and official measurements beside the current child's
+complete measurements. Each task shows **current minus parent** for distinct
+count, utility and recorded task cost. A negative value means the child lost
+that measured quantity. Lower cost is cheaper, rather than a worse score.
+
+This addresses the [current run's missing comparison](SOURCE-REGRESSION-DIAGNOSIS.md).
+It supplies evidence for diagnosis; it does not guarantee that a model will
+diagnose correctly or produce a better child. Official NoveltyBench grouping,
+quality ratings and utility calculation remain unchanged.
+
+The `comparison` argument contains exactly `parent`, `proposal` and `screen`.
+Each is the existing `{directory, authorization, report_sha256}` reference;
+`screen` must equal the current `reference`. The bridge verifies the original
+materialized proposal, returned source, child lineage and exact parent screening
+occasion. Matching source code alone is insufficient. Both screens must use the
+same task population in the same typed order, source data, split, comparison
+settings, external controls and shared spending authorization.
+
+Worker notes contain both complete measurements, answers and diagnostic arrays,
+the original full change hypothesis, and the comparison. Host paths and split
+contents stay in the separate provenance files. Utility and distinct count are
+independently available: a missing utility produces a null utility difference
+and an explicit reason while a valid distinct-count difference remains visible.
+A missing or incompatible supplied parent is an error, rather than an invented
+zero baseline. Task costs retain their original generation-and-assessment owner
+scope; proposal cost is shown separately and excluded from task-cost differences.
+
+Comparison can accompany existing checked failed-child history. Those notes
+and full outputs remain intact. Host provenance records the exact v3/v4/v5 base
+derivation and the new comparison separately. For a fixed improver, pass its
+`improver_agent_sha256` even when there is no failure history. The original edge
+and the next protected proposal must use that same detached improver. This
+slice supports inherited-produced edges or edges from one fixed improver;
+switching between those regimes requires a separately declared treatment.
+
+All full-output byte limits apply to the combined packet. Neither side is
+shortened to make it fit. New comparison reconstruction also refuses cycles,
+more than sixteen nested comparison packets or more than sixty-four original
+edge checks within one observation. These request-local limits reset after
+success or failure. Retained screen/proposal observations are checked again
+before publication, including their original owner evidence and sidecars.
+
+This is an **opt-in library and protected-proposal connection**. Existing search
+and study manifests still use their original feedback policies. They do not
+automatically receive comparisons. Integrating this treatment into newly
+versioned controller manifests is the next separate slice; study arm membership,
+coverage and equal resources remain controller responsibilities. Historical
+v1-v5 packets and completed runs keep their original reconstruction rules.
+No new live run or spending allocation follows from this library change.
+
 ## A fixed improver learns from its own failed children
 
 A controlled improver comparison keeps the improvement procedure fixed while
@@ -191,9 +244,9 @@ The public functions are in `buddha.source_feedback`:
 
 ```text
 build_source_feedback(directory, *, reference, failure_history=(),
-                      improver_agent_sha256=None) -> dict
+                      improver_agent_sha256=None, comparison=None) -> dict
 write_source_feedback(directory, *, reference, failure_history=(),
-                      improver_agent_sha256=None) -> dict
+                      improver_agent_sha256=None, comparison=None) -> dict
 ```
 
 These are Python API signatures, not PowerShell commands. `directory` is an
@@ -231,6 +284,16 @@ for `OK` or a failure. Ctrl+C stops the checks. It does not resume a live run.
 
 ```powershell
 python -m unittest discover -s tests -p test_frozen_failure_feedback.py -v
+```
+
+The following checks the optional parent comparison, complete-output delivery,
+fixed-improver binding and retained failure history once in the current window.
+It uses temporary records and simulated workers/replies, needs no keys or Docker,
+and spends no API money. Allow several minutes and wait for `OK` or a failure;
+Ctrl+C stops it. It does not start or resume an experiment.
+
+```powershell
+python -m unittest discover -s tests -p 'test_source_comparison*.py' -v
 ```
 
 ## Complete-output validation
