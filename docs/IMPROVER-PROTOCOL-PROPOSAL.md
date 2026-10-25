@@ -176,10 +176,11 @@ an actual-grid runtime estimate or a promise of linear scaling.
 
 ## Capacity, uncertainty and review
 
-Both actual P and C must be checked through isolated request construction at the
-chosen configuration. The completed C fixture proves literal forwarding only.
-It does not certify the actual future requests, returned replacement length or
-model attention. Preserve full text; stop on capacity failure rather than
+The [bounded original P/C checks](conformance/imp01-both-consumers-delivery.json)
+now verify each frozen actor's complete root/own-edge request forwarding. Actual
+future requests still need checks at the chosen configuration, including context
+and replacement-output headroom. The supplied fixtures do not establish model
+attention or certify a returned future replacement. Preserve full text; stop on capacity failure rather than
 truncating answers or feedback.
 
 There is a specific integration limit: study v3 does **not** currently carry the
@@ -231,10 +232,10 @@ remains useful engineering evidence. This proposal has not created a task split,
 release selection, eligibility attestation, study, authority, owner or launch
 command. No paid request or selected-source execution is performed by it.
 
-The immediate decision is whether first to check existing Curated custody and
-retain that population if the separation is defensible (recommended), or to
-prepare an entirely official WildChat population with its own custody checks.
-The earlier family review is not a reason by itself to require the switch.
+The user selected checking existing Curated custody first and retaining Curated
+if the reviewer-to-improver separation is defensible. This authorizes preparation
+only; it does not certify eligibility or fund API work. The earlier family review
+is not a reason by itself to require a dataset switch.
 After that choice, freeze the actual source/tasks/custody, compatibility/capacity
 route, resources/runtime, statistical settings and review arrangements before
 requesting a new live allocation. This is experiment preparation under the existing IMP-01 gate;

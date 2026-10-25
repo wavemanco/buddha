@@ -1,9 +1,10 @@
-"""Pinned, keyless observation of original C consuming study v8/v6 feedback.
+"""Pinned, keyless observation of an original P/C improver consuming v8/v6 feedback.
 
-Review and pin this driver before execution. Only two counted C proposal workers
-use the real minimal container. Every other worker and every provider reply is
-supplied. Original sources are data on the host; nothing here establishes model
-context capacity, useful diversity, authorship or an improvement in performance.
+Review and pin this driver before execution. The selected actor defaults to C;
+only its two counted proposal workers use the real minimal container. Every other
+worker and every provider reply is supplied. Original sources are data on the
+host; nothing here establishes model context capacity, useful diversity,
+authorship or an improvement in performance.
 """
 
 import argparse
@@ -164,6 +165,9 @@ def preflight(args):
 
 
 def main(args):
+    actor_role = getattr(args, "actor", "evolved")
+    require(actor_role in ("initial", "evolved"), "unsupported original actor")
+    actor_arm = ("initial", "evolved").index(actor_role)
     # Enumerate key names only, retaining safe OS values before any app import.
     ordinary = {name: os.environ[name] for name in SAFE_OS if name in os.environ}
     for name in list(os.environ):
@@ -174,7 +178,7 @@ def main(args):
     helper = trusted_module(helper_path, "_comparison_reviewed_docker_guard")
     runtime = {"passive": False, "active": None}
     evidence = {
-        "format": "buddha.improver-comparison-consumer-rehearsal.v1",
+        "format": "buddha.improver-comparison-consumer-rehearsal.v2",
         "status": "running",
         "started_utc": datetime.now(UTC).isoformat(),
         "directory": str(args.directory),
@@ -182,6 +186,11 @@ def main(args):
         "script_sha256": args.script_sha256,
         "source_map_sha256": args.sources_sha256,
         "original_sources": {str(PARENT): PARENT_SHA, str(EVOLVED): EVOLVED_SHA},
+        "actor": {
+            "role": actor_role,
+            "arm": actor_arm,
+            "source_sha256": (PARENT_SHA, EVOLVED_SHA)[actor_arm],
+        },
         "runtime_sha256": RUNTIME_SHA,
         "image_id": IMAGE,
         "real_provider_calls": 0,
@@ -193,12 +202,14 @@ def main(args):
         "phase": "guarded_preparation",
         "limitations": [
             "Synthetic benchmark/tasks, outcomes, replies, usage and charges; no model authorship.",
-            "Only the two counted C proposals run in actual isolated workers; "
+            "Only the selected frozen actor's two counted proposals run in isolated workers; "
             "all other roles supplied.",
             "Bounded consumer compatibility, not provider token fit/output headroom "
             "or full-grid feasibility.",
-            "Original C flat index is observed, not rewritten; no effectiveness claim.",
-            "C's own escaped-feedback guard is observed on the accepting path only; "
+            "Original C flat index is observed, not rewritten; no effectiveness claim."
+            if actor_role == "evolved"
+            else "Original P has no derived measurement index; no effectiveness claim.",
+            "The selected actor's escaped-feedback guard is observed on the accepting path only; "
             "this is not an oversized-feedback boundary test.",
         ],
     }
@@ -430,21 +441,25 @@ def main(args):
             )
             f.recompute_limits(record)
             directory, declaration, authority = f.prepare_study("consumer-study", record)
+            actor = actors[actor_arm]
+            actor_raw = (p_raw, c_raw)[actor_arm]
+            actor_cell = directory / "cells/0/0" / str(actor_arm)
+            child_location = actor_cell / "0"
             allowed_owners = {
-                directory / "cells/0/0/1" / str(slot) / "proposal/owners/0": slot
-                for slot in range(2)
+                actor_cell / str(slot) / "proposal/owners/0": slot for slot in range(2)
             }
             mock_counted_owners = {
-                directory / "cells/0/0/0" / str(slot) / "proposal/owners/0" for slot in range(2)
+                directory / "cells/0/0" / str(1 - actor_arm) / str(slot) / "proposal/owners/0"
+                for slot in range(2)
             }
             mock_proposals = mock_counted_owners | {
                 directory / "common/0/0/witness/proposal/owners/0",
-                directory / "cells/0/0/1/0/witness/proposal/owners/0",
+                child_location / "witness/proposal/owners/0",
             }
-            mock_screens = [directory / "common/0/0/screen", directory / "cells/0/0/1/0/screen"]
+            mock_screens = [directory / "common/0/0/screen", child_location / "screen"]
             mock_generations = {root / "tasks/0/generation/owners/0" for root in mock_screens} | {
                 directory / "common/0/0/witness/generation/owners/0",
-                directory / "cells/0/0/1/0/witness/generation/owners/0",
+                child_location / "witness/generation/owners/0",
             }
             mock_native = {
                 root / "tasks/0/evaluation/owners" / str(index)
@@ -455,7 +470,7 @@ def main(args):
             active, seen = {}, set()
             evidence["config"] = copy.deepcopy(record["proposal_template"])
             evidence["declaration"] = {"path": str(declaration), "sha256": sha(read(declaration))}
-            evidence["fixed_actor_sha256"] = f.actor_id(actors[1])
+            evidence["fixed_actor_sha256"] = f.actor_id(actor)
             evidence["profile"] = copy.deepcopy(f.engine.fixture.profiles)
 
             class Connection:
@@ -483,18 +498,38 @@ def main(args):
                     payload = decode(body)
                     prompt = payload["messages"][-1]["content"]
                     packet = decode(prompt.split("\nINPUT_JSON\n", 1)[1])
+                    fields = {"format", "parent", "development_feedback"}
+                    if actor_role == "evolved":
+                        fields.add("measurement_index")
+                    require(
+                        type(packet) is dict
+                        and set(packet) == fields
+                        and packet["format"] == "buddha.source-seed-improver.v2",
+                        "original actor packet fields differ",
+                    )
                     expected = active["initial"]
                     require(
                         packet["development_feedback"] == expected["feedback"],
                         "emitted complete feedback differs",
                     )
                     require(packet["parent"] == expected["parent_bundle"], "emitted parent differs")
-                    require(
-                        packet["measurement_index"] == [{"task_id": fixtures.TASK_ID}],
-                        "original C flat-index observation differs",
-                    )
-                    escaped = len(json.dumps(expected["feedback"], ensure_ascii=True).encode())
-                    require(escaped <= 1024**2, "fixture exceeds C's escaped feedback ceiling")
+                    if actor_role == "evolved":
+                        require(
+                            packet["measurement_index"] == [{"task_id": fixtures.TASK_ID}],
+                            "original C flat-index observation differs",
+                        )
+                        escaped = len(json.dumps(expected["feedback"], ensure_ascii=True).encode())
+                    else:
+                        escaped = len(
+                            json.dumps(
+                                expected["feedback"],
+                                sort_keys=True,
+                                separators=(",", ":"),
+                                ensure_ascii=True,
+                                allow_nan=False,
+                            ).encode("utf-8")
+                        )
+                    require(escaped <= 1024**2, "fixture exceeds selected actor's feedback ceiling")
                     evidence["requests"].append(
                         {
                             "slot": slot,
@@ -504,7 +539,15 @@ def main(args):
                             "bytes": len(body),
                             "feedback_sha256": sha(_json(expected["feedback"])),
                             "feedback_escaped_bytes": escaped,
-                            "measurement_index": packet["measurement_index"],
+                            "feedback_escaped_encoding": "default_separators_ascii"
+                            if actor_role == "evolved"
+                            else "compact_sorted_ascii",
+                            "measurement_index_present": actor_role == "evolved",
+                            **(
+                                {"measurement_index": packet["measurement_index"]}
+                                if actor_role == "evolved"
+                                else {}
+                            ),
                             "parent_source_sha256": sha(packet["parent"]["source"].encode()),
                             "notes": [
                                 {
@@ -600,15 +643,17 @@ def main(args):
                 owner = handle.__self__.gateway.directory
                 if owner in allowed_owners:
                     slot = allowed_owners[owner]
-                    require(owner not in seen and len(seen) < 2, "extra actual C worker")
+                    require(
+                        owner not in seen and len(seen) < 2, "extra actual selected actor worker"
+                    )
                     require(
                         initial["format"] == "buddha.candidate-improvement-worker.v3"
-                        and initial["agent_sha256"] == f.actor_id(actors[1]),
+                        and initial["agent_sha256"] == f.actor_id(actor),
                         "actual worker identity differs",
                     )
                     require(
-                        read(dict(spec.mounts)["/agent"] / "candidate.py") == c_raw,
-                        "actual selected C bytes differ",
+                        read(dict(spec.mounts)["/agent"] / "candidate.py") == actor_raw,
+                        "actual selected actor bytes differ",
                     )
                     require(
                         spec.role == "agent"
@@ -619,7 +664,7 @@ def main(args):
                     require(
                         dict(spec.mounts)
                         == {
-                            "/agent": Path(actors[1]["roots"]["agent"]),
+                            "/agent": Path(actor["roots"]["agent"]),
                             "/runner": base_roots["runner"],
                         },
                         "actual mounts differ",
@@ -639,7 +684,7 @@ def main(args):
                         if slot == 0
                         else "saved_native_measurements_and_parent_comparison"
                     )
-                    require(note["kind"] == kind, "actual C receives wrong comparison kind")
+                    require(note["kind"] == kind, "actual actor receives wrong comparison kind")
                     if slot == 0:
                         require(
                             note["comparison"]["reason"] == "no_counted_parent_in_this_cell",
@@ -670,8 +715,8 @@ def main(args):
                     require(
                         provenance["format"]
                         == "buddha.source-screen-feedback.v" + str(8 if slot == 0 else 6)
-                        and provenance["improver_agent_sha256"] == f.actor_id(actors[1]),
-                        "actual C packet version or fixed actor differs",
+                        and provenance["improver_agent_sha256"] == f.actor_id(actor),
+                        "actual packet version or fixed actor differs",
                     )
                     seen.add(owner)
                     active.update(slot=slot, owner=owner, initial=copy.deepcopy(initial))
@@ -714,6 +759,7 @@ def main(args):
                 )
                 result = supplied_generation(spec, initial=initial, handle=handle, **kwargs)
                 if spec.role == "agent":
+                    # The supplied child remains original C for either fixed improver.
                     f.h.programs[initial["agent_sha256"]].update(
                         distinct=1 if initial["agent_sha256"] == f.actor_id(actors[1]) else 2,
                         utility=4 if initial["agent_sha256"] == f.actor_id(actors[1]) else 7,
@@ -737,7 +783,11 @@ def main(args):
             decisions = {(row["arm"], row["slot"]): row["status"] for row in report["decisions"]}
             require(
                 decisions
-                == {(0, 0): "rejected", (0, 1): "rejected", (1, 0): "admitted", (1, 1): "rejected"},
+                == {
+                    (arm, slot): "admitted" if (arm, slot) == (actor_arm, 0) else "rejected"
+                    for arm in range(2)
+                    for slot in range(2)
+                },
                 "decisions differ",
             )
             before = f.h.files(args.directory)
@@ -790,6 +840,7 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--actor", choices=("initial", "evolved"), default="evolved")
     for name in ("repo", "directory", "out", "sources"):
         parser.add_argument("--" + name, type=Path, required=True)
     for name in ("script-sha256", "sources-sha256"):
