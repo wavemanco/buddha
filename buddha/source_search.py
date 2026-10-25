@@ -983,12 +983,16 @@ def _plan(
     generation = _object(_parent_screen(reader, parent).to_record()["generation"])
     location = reader.root / "iterations" / str(iteration)
     comparison = _comparison_for(reader, state, parent) if _has_feedback_comparison(state) else None
-    bundle = _bundle(
-        location / "feedback",
-        parent,
-        failures,
-        full_answers=_full_answers(state),
-        comparison=comparison,
+    bundle = (
+        _bundle(
+            location / "feedback",
+            parent,
+            failures,
+            full_answers=_full_answers(state),
+            comparison=comparison,
+        )
+        if comparison is not None
+        else _bundle(location / "feedback", parent, failures, full_answers=_full_answers(state))
     )
     hashes = {name + ".json": pipeline._sha(bundle[name]) for name in _FILES}
     template = state["record"]["proposal_template"]
@@ -1433,7 +1437,11 @@ def _witness_materials(
     location = _witness_path(record["directory"])
     generation = _object(parent.to_record()["generation"])
     comparison = _object(record["feedback_comparison"]) if "feedback_comparison" in record else None
-    bundle = _bundle(location / "feedback", reference, [], full_answers=True, comparison=comparison)
+    bundle = (
+        _bundle(location / "feedback", reference, [], full_answers=True, comparison=comparison)
+        if comparison is not None
+        else _bundle(location / "feedback", reference, [], full_answers=True)
+    )
     hashes = {name + ".json": pipeline._sha(bundle[name]) for name in _FILES}
     template = _object(record["proposal_template"])
     plan = {
@@ -2703,12 +2711,22 @@ def run_source_search(directory: Path, *, transport: RawHTTPTransport) -> dict[s
                 )
                 reader.capture.finish()
                 pipeline._same_or_write(location / "plan.json", _json(plan))
-                bundle = _bundle(
-                    location / "feedback",
-                    plan["parent"],
-                    state["failures"],
-                    full_answers=_full_answers(state),
-                    comparison=plan.get("feedback_comparison"),
+                comparison = plan.get("feedback_comparison")
+                bundle = (
+                    _bundle(
+                        location / "feedback",
+                        plan["parent"],
+                        state["failures"],
+                        full_answers=_full_answers(state),
+                        comparison=comparison,
+                    )
+                    if comparison is not None
+                    else _bundle(
+                        location / "feedback",
+                        plan["parent"],
+                        state["failures"],
+                        full_answers=_full_answers(state),
+                    )
                 )
                 _write_packet(location / "feedback", plan, bundle)
                 pipeline._same_or_write(
