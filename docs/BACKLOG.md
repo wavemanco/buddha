@@ -137,3 +137,28 @@ This is a separate engineering maintenance concern. [PLAN.md](PLAN.md) keeps
 IMP-01 as the sole Next item and retains the two existing scientific gates,
 IMP-01 and EVAL-02. Recording this concern authorizes no merge, installation,
 new execution capability or spending.
+
+### Six-advisory applicability supplement
+
+The [bounded follow-up](conformance/reference-six-advisory-applicability.json)
+checks the six IDs against the retained installed CPU inventory, fixed official
+LLM scoring path and primary maintainer advisories. It does not cover all 67
+native advisory identities or clear the 134 frozen-manifest alert rows.
+
+| Package / advisory scope | Finding for this exact route |
+| --- | --- |
+| AnyIO, two IDs | The installed 4.14.2 version contains both fixes. |
+| NLTK, two IDs | Installed 3.9.1 is affected and NLTK is eagerly imported. The fixed LLM path does not pass task/answer text to the affected corpus-reader or resource-loader operations. This is source-level route evidence, not a general exploitability clearance. |
+| Setuptools, one ID | Installed 79.0.1 is affected, but the selected Linux scoring route does not perform the advisory's Windows legacy wheel installation. |
+| Certifi, one ID | Installed 2025.8.3 is affected. The worker's custom transport does not use that CA bundle for provider TLS; the host makes the HTTPS connection. Host trust-store contents and applicability remain unassessed. |
+
+The [Certifi maintainer page](https://github.com/certifi/python-certifi/security/advisories/GHSA-6q48-6c7w-9gw2)
+lists a 2026.10.18 patch; [GitHub's global advisory metadata](https://github.com/advisories/GHSA-6q48-6c7w-9gw2)
+lists 2026.10.19. Both representations and the original report are retained;
+the old installed version is affected under either. The supplement corrects the
+original external report's source label without rewriting its evidence.
+
+ENG-REF-DEPS-01 remains open. Retain host TLS uncertainty and the other advisory
+coverage gaps before any broader exception claim. This source review runs no
+exploit, scan, package installation, container or provider request. It changes
+no dependency, frozen lock, benchmark setting, prepared study or scientific gate.
