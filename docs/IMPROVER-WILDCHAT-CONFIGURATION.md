@@ -166,6 +166,18 @@ the narrow shared validation path before running a larger experiment. Applicatio
 source, integrity guards and paid records were unchanged; the existing fixture
 supplied the worker transport. This was not an actual Docker or model run.
 
+The [later observation-walk change](conformance/imp01-observation-walk-delivery.json)
+removes one redundant ancestry check. On the same saved synthetic tree, all
+eight observed metadata maps match exactly; profiled stat calls fall from
+17,832 to 9,298, while all 278 required regular-file checks remain. Of 55 focused
+guard tests, 54 pass and one skips because this host cannot create symlinks. This measures one
+metadata walk, not complete-study speed or feasibility. The walk remains a
+bounded observation rather than an atomic filesystem snapshot.
+
+Saved preparation bundles remain unchanged at their recorded source cuts. A
+future handoff must collect and validate a fresh trusted-source closure; retain
+the exact original P/C actors, data allocation and official evaluator.
+
 ## What remains before a live proposal
 
 Bind the original-call observation mode, actual runtime/resources/fairness,

@@ -87,7 +87,6 @@ def _entries(root: Path) -> dict[str, tuple[int, int, int, int, int]]:
                 if len(result) >= MAX_FILES:
                     raise ValidationError("observation directory entry ceiling exceeded")
                 path = parent / entry.name
-                _plain(path)
                 information = path.lstat()
                 name = path.relative_to(root).as_posix()
                 _path(name)

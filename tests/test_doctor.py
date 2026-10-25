@@ -6,10 +6,12 @@ import io
 import json
 import os
 import shutil
+import stat
 import tempfile
 import unittest
-from contextlib import redirect_stderr, redirect_stdout
+from contextlib import contextmanager, redirect_stderr, redirect_stdout
 from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import patch
 
 from doctor_helpers import (
@@ -27,7 +29,7 @@ from search_verify_helpers import corrupt_database
 
 from buddha import doctor
 from buddha.__main__ import main
-from buddha.common import _canonical
+from buddha.common import ValidationError, _canonical
 
 
 class DoctorTests(unittest.TestCase):
@@ -422,6 +424,80 @@ class DoctorTests(unittest.TestCase):
         self.assertEqual(result["status"], "unsupported")
         self.assertIsNone(result["accounting"])
         self.assertEqual(result["stages"], [])
+
+
+class ObservationTreeTests(unittest.TestCase):
+    def setUp(self):
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        self.root = Path(temporary.name).resolve() / "run"
+        (self.root / "nested").mkdir(parents=True)
+        self.answer = self.root / "nested" / "answer.txt"
+        self.answer.write_text("saved answer", encoding="utf-8")
+
+    def test_metadata_walk_is_bounded_and_does_not_read_file_contents(self):
+        with patch("buddha.doctor._read", side_effect=AssertionError("content read")):
+            entries = doctor._entries(self.root)
+        self.assertEqual(set(entries), {"nested", "nested/answer.txt"})
+        self.assertEqual(entries["nested/answer.txt"][2], len(b"saved answer"))
+        with patch("buddha.doctor.MAX_FILES", 1), self.assertRaises(ValidationError):
+            doctor._entries(self.root)
+
+    def test_reparse_leaf_directory_root_and_ancestor_are_denied_before_traversal(self):
+        lstat, scandir = Path.lstat, os.scandir
+        cases = [
+            (path, False) for path in (self.answer, self.answer.parent, self.root, self.root.parent)
+        ] + [(self.answer.parent, True)]
+        for blocked, delayed in cases:
+            active = [not delayed]
+
+            def marked(path, blocked=blocked, active=active):
+                value = lstat(path)
+                if path != blocked or not active[0]:
+                    return value
+                fields = {
+                    name: getattr(value, name) for name in dir(value) if name.startswith("st_")
+                }
+                return SimpleNamespace(**(fields | {"st_file_attributes": 0x400}))
+
+            @contextmanager
+            def guarded(path, blocked=blocked, active=active):
+                if Path(path) == blocked and active[0]:
+                    raise AssertionError("reparse directory traversed")
+                with scandir(path) as children:
+                    yield children
+                if Path(path) == self.root:
+                    active[0] = True
+
+            with (
+                self.subTest(blocked=blocked, delayed=delayed),
+                patch.object(Path, "lstat", marked),
+                patch("os.scandir", side_effect=guarded),
+                self.assertRaises(ValidationError),
+            ):
+                doctor._entries(self.root)
+
+    def test_hardlink_alias_is_denied(self):
+        os.link(self.answer, self.root / "alias.txt")
+        with self.assertRaises(ValidationError):
+            doctor._entries(self.root)
+
+    def test_nonregular_leaf_is_denied_without_opening_it(self):
+        lstat = Path.lstat
+
+        def marked(path):
+            value = lstat(path)
+            if path != self.answer:
+                return value
+            fields = {name: getattr(value, name) for name in dir(value) if name.startswith("st_")}
+            return SimpleNamespace(**(fields | {"st_mode": stat.S_IFIFO}))
+
+        with (
+            patch.object(Path, "lstat", marked),
+            patch("buddha.doctor._read", side_effect=AssertionError("content read")),
+            self.assertRaises(ValidationError),
+        ):
+            doctor._entries(self.root)
 
 
 if __name__ == "__main__":
