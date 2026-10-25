@@ -1,7 +1,7 @@
 {
   "format": "buddha.imp01-protocol-proposal-feasibility.v1",
   "date": "2026-10-25",
-  "status": "unfunded_curated_separation_check_selected",
+  "status": "unfunded_curated_separation_check_complete_followup_population_choice",
   "runtime_manifest": false,
   "proposal": "../IMPROVER-PROTOCOL-PROPOSAL.md",
   "proposed_treatment": "Exact original P and C as fixed improvers; both exact originals also used as common starting task agents. C index-only limitation retained. No C replacement or new scoring rule.",
@@ -152,15 +152,18 @@
     "distinct": 5.46166240658356
   },
   "population_choice": {
-    "recommended": "First check the existing Curated reviewer-to-optimizer separation and retain Curated if truthful custody can be supported. Prompt classification review is not itself evidence of leakage.",
-    "alternative": "Prepare an entirely official WildChat1.1 population with its own exposure/family/split/custody checks; it is not presumed unseen.",
+    "recommended": "For a strict sealed comparison, prepare entirely official WildChat with prospective reviewer/optimizer separation and checked exposure. Curated remains valid for explicitly qualified development measurement; no automatic contamination finding or switch.",
+    "alternative": "Retain Curated for explicitly qualified development measurements, with original26 full-process eligibility unknown; this does not close IMP-01 sealed-task effectiveness and cannot bypass the protected custody guard.",
     "known_curated_visibility": "Two nonhuman AI source-review contexts read all100 original Curated prompts for family grouping before splitting; maps and substantive boundary notes returned to the host. Known outcome/feedback exposure13 IDs and familyclosure22 are separate disclosure classes.",
     "known_wildchat_visibility": "Original bytes acquired/sealed and published summaries/counts inspected; no per-ID exhaustive visibility ledger or eligible custody established by the bounded review.",
     "existing_interface": "One complete original dataset; current improver assessment requires same TaskSet source bytes throughout. All-WildChat is configuration-compatible in principle; Curated-development/WildChat-final is not supported and no concat/union source is invented.",
     "public_training_contamination": "unknown",
     "user_attestation_requested": false,
     "what_not_certified_means": "Historical protocol expressly withheld held-out eligibility certification. The reviewed records do not demonstrate a reserved-final prompt entering an improver callback or tuning from final results; they also do not attest complete later separation. Check the actual information flow rather than infer a leak from reviewer access.",
-    "user_selected_preparation_direction": "Check Curated separation first; retain Curated only if supported. No funds or eligibility attestation."
+    "user_selected_preparation_direction": "Check Curated separation first: completed at bounded scope. No funds or eligibility attestation. Follow-up population/claim choice not yet selected.",
+    "selected_check_result": "Bounded Curated review: actual three proposal callbacks contain only dev0/47/97; no demonstrated reserved-task leak. Full historical host/source-author influence from returned descriptions is unknown, so original26 are not certified eligible.",
+    "followup_choice_adopted": false,
+    "result_record": "imp01-curated-separation-review.json"
   },
   "capacity_gap": {
     "study_v3_proposal_capacity_field": false,
