@@ -18,6 +18,49 @@ partitioning and utility scoring remain the yardstick. Keep negative results,
 invalid children, repeated answers, failed witnesses and missing outcomes.
 A negative or inconclusive result is a valid experiment, not a failed milestone.
 
+## Who sees which information
+
+| Role | Information it needs |
+| --- | --- |
+| Generator | The current task prompt and any earlier answers permitted by the declared sampling procedure. It must see the task to answer it. |
+| Improver | Development task prompts, complete development answers, measured feedback and actual parent source. Reserved final tasks/results must not become tuning feedback before final assessment. |
+| Partition judge | The task prompt and generated answers, through the unchanged official distinctiveness procedure. |
+| Utility judge | The task prompt and generated answer material required by the unchanged official scoring procedure. |
+
+The selected generator model is configurable and can vary across separately
+recorded comparisons. Freeze it within a matched comparison so a model change
+is not confused with a harness change. Evaluation models/settings are separately
+pinned to the adopted official protocol and stay outside editable agent code.
+These roles remain separate even when two happen to use the same vendor/model.
+The reserved-task restriction concerns learning and selection, not withholding
+the current task from the generator or judges during final inference/scoring.
+
+## Development comparison versus leaderboard submission
+
+The population choice below concerns the next bounded Buddha development
+comparison. It is not a permanent choice of which NoveltyBench subset to use.
+The [official submission instructions](https://novelty-bench.github.io/submit.html)
+require both NB-Curated and NB-WildChat, ten responses per prompt, the v1.1
+2048-token generation setting and low reasoning effort where applicable, with
+independent versus in-context sampling declared. Preserve the official
+provider-specific handling of those settings. The leaderboard also separates
+systems with different inference budgets; a scaffold is not one bare model.
+
+The [official metric description](https://github.com/novelty-bench/novelty-bench/blob/64a23be6b18ec1dacc298830aab276061b6e143c/README.md#metric-versions)
+uses GPT-5.6-luna to read all ten responses for partitioning and Claude Opus 5
+to score one representative per distinct group. Both need the original prompt.
+Those evaluation roles are separate from the configurable generation backbone
+and from the model authoring agent changes.
+
+The earlier 4,096-token source configuration below is an inherited development
+setting, not a claim of leaderboard generation-protocol compliance. A later
+submission must adopt the published generation protocol and disclose the
+scaffold's actual calls/tokens/costs. Within a matched comparison, hold the
+backbone/settings fixed and check total-resource fairness, including the
+observed difference between P's separate calls and C's batched answers. Repeat
+across backbones as separately declared comparisons rather than silently
+changing models within an arm. No old run is relabeled as a submission.
+
 ## Original treatments and proposed conditions
 
 | Item | Proposal |
@@ -45,14 +88,31 @@ performance across arbitrary starts, search seeds or future searches.
 
 ## Choose the task population before declaring eligibility
 
-**Recommended direction: prepare an entirely official WildChat 1.1 population.**
-This preserves the official benchmark and uses the existing single-source
-interface. Its prior access and exposure still need a truthful custody record;
-local availability does not establish that its prompts are unseen.
+**Recommended first step: check the existing Curated custody before changing
+datasets.** The recorded prompt inspection was two AI source-review contexts
+grouping related tasks before split assignment. They were not independent human
+evaluators. Such preparation can legitimately involve reading every prompt.
+The important boundary is whether reserved prompt content or results then
+influenced the agent-improvement process. A family reviewer seeing a prompt does
+not, by itself, establish that boundary was crossed.
+
+The historical protocol explicitly declined to certify the reserved population
+as unseen or eligible. It did not report a demonstrated final-prompt disclosure
+to an improver callback or tuning using final results. Family maps and substantive
+boundary notes returned to the host, so fresh review contexts alone also do not
+prove complete separation. Check that information flow before adopting a named
+custody claim. Original [review roles and scope](POLICY-COMPARISON.md#which-prompts-are-included-and-why)
+remain unchanged.
+
+This qualifies claims about held-out performance and generalization. It does
+not alter official NoveltyBench score calculations or prevent explicitly
+qualified development measurements. WildChat is an alternative official
+population, with its own unresolved exposure and task-separation checks; local
+availability is not evidence that its prompts are unseen.
 
 | Candidate | What is known | Consequence |
 | --- | --- | --- |
-| Existing Curated source | Ordered diagnostic development tasks are curated-0, curated-47, curated-97. The existing final partition has 26 tasks in 17 families. All 100 Curated prompt texts were previously read by two development source reviewers; known measured/feedback exposure is a separate, smaller population. | Do not declare those 26 unseen merely because they have no recorded outcome exposure. Current unknown custody prevents using the sealed route as scientific evidence. An explicitly exposed diagnostic comparison would have weaker scope. |
+| Existing Curated source | Ordered diagnostic development tasks are curated-0, curated-47, curated-97. The existing final partition has 26 tasks in 17 families. All 100 Curated prompt texts were previously read by two development source reviewers; known measured/feedback exposure is a separate, smaller population. | Neither prompt review nor lack of recorded final outcomes establishes eligibility. Check the existing reviewer-to-optimizer separation first. If that check supports truthful custody, Curated may remain usable for a prospective sealed comparison; otherwise keep measurements explicitly qualified. No guard is bypassed. |
 | Entirely official WildChat source | The original wildchat-1k.jsonl is sealed at upstream 64a23be6b18ec1dacc298830aab276061b6e143c; its 645,466 bytes hash to 8534288089508df3f413c1151a58d5fa5bda9d8f8385ae2815384d4e310a54ca. Existing records identify 1,000 unique IDs. Prior research sealed its bytes and read published summaries/counts. No exhaustive per-ID exposure record or eligible family/split custody was established by this review. | Prepare a new prospective family map, three development IDs, 26 final IDs and exposure record without disclosing final prompts/results to optimization decision makers. Preserve original task text and typed IDs. Exact IDs are deliberately not adopted here. |
 
 The current assessment requires the **same complete original task source** for
@@ -171,10 +231,11 @@ remains useful engineering evidence. This proposal has not created a task split,
 release selection, eligibility attestation, study, authority, owner or launch
 command. No paid request or selected-source execution is performed by it.
 
-The immediate decision is whether to prepare the wholly official WildChat
-population, or keep work focused on the known-visible Curated diagnostic panel
-with its explicitly weaker scientific scope. After that choice, freeze the
-actual source/tasks/custody, compatibility/capacity route, resources/runtime,
-statistical settings and review arrangements before requesting a new live
-allocation. This is experiment preparation under the existing IMP-01 gate;
+The immediate decision is whether first to check existing Curated custody and
+retain that population if the separation is defensible (recommended), or to
+prepare an entirely official WildChat population with its own custody checks.
+The earlier family review is not a reason by itself to require the switch.
+After that choice, freeze the actual source/tasks/custody, compatibility/capacity
+route, resources/runtime, statistical settings and review arrangements before
+requesting a new live allocation. This is experiment preparation under the existing IMP-01 gate;
 the DGM/Harness2 cross-check adds no redesign or new gate.

@@ -1,7 +1,7 @@
 {
   "format": "buddha.imp01-protocol-proposal-feasibility.v1",
   "date": "2026-10-25",
-  "status": "unfunded_population_decision_pending",
+  "status": "unfunded_population_choice_reasked_after_custody_scope_correction",
   "runtime_manifest": false,
   "proposal": "../IMPROVER-PROTOCOL-PROPOSAL.md",
   "proposed_treatment": "Exact original P and C as fixed improvers; both exact originals also used as common starting task agents. C index-only limitation retained. No C replacement or new scoring rule.",
@@ -152,13 +152,14 @@
     "distinct": 5.46166240658356
   },
   "population_choice": {
-    "recommended": "Prepare a wholly official WildChat1.1 population under a new truthful family/split/exposure/custody record, not asserted eligible here.",
-    "alternative": "Remain focused on known-visible Curated diagnostic work with explicitly weaker scope; no unseen claim or protected sealed-route bypass.",
-    "known_curated_visibility": "Two development source reviewers read all100 original prompts. Known outcome/feedback exposure13 IDs and familyclosure22 are a different, smaller disclosure class.",
+    "recommended": "First check the existing Curated reviewer-to-optimizer separation and retain Curated if truthful custody can be supported. Prompt classification review is not itself evidence of leakage.",
+    "alternative": "Prepare an entirely official WildChat1.1 population with its own exposure/family/split/custody checks; it is not presumed unseen.",
+    "known_curated_visibility": "Two nonhuman AI source-review contexts read all100 original Curated prompts for family grouping before splitting; maps and substantive boundary notes returned to the host. Known outcome/feedback exposure13 IDs and familyclosure22 are separate disclosure classes.",
     "known_wildchat_visibility": "Original bytes acquired/sealed and published summaries/counts inspected; no per-ID exhaustive visibility ledger or eligible custody established by the bounded review.",
     "existing_interface": "One complete original dataset; current improver assessment requires same TaskSet source bytes throughout. All-WildChat is configuration-compatible in principle; Curated-development/WildChat-final is not supported and no concat/union source is invented.",
     "public_training_contamination": "unknown",
-    "user_attestation_requested": false
+    "user_attestation_requested": false,
+    "what_not_certified_means": "Historical protocol expressly withheld held-out eligibility certification. The reviewed records do not demonstrate a reserved-final prompt entering an improver callback or tuning from final results; they also do not attest complete later separation. Check the actual information flow rather than infer a leak from reviewer access."
   },
   "capacity_gap": {
     "study_v3_proposal_capacity_field": false,
@@ -250,7 +251,7 @@
   },
   "limits": [
     "This is a decision-ready proposal, not an adopted prospective trial; exact WildChat tasks, families and custody are deliberately unset.",
-    "Curated26 are not certified unseen; new process naming or missing exposure hits does not establish invisibility.",
+    "Neither Curated nor WildChat is certified unseen here. Classification review does not automatically contaminate a panel; process renaming or missing exposure hits does not establish separation either.",
     "No actual future-grid runtime, vendor capacity, final-task cost, statistical power, source effectiveness or human-quality claim.",
     "The original two-gate plan, frozen historical runs and official benchmark are unchanged."
   ],
@@ -260,5 +261,41 @@
     "reviewed_markdown_sha256": "4a83fa370970255257360ff1157a2d831c76f34dea721530cfb544a843881c1e",
     "reviewed_record_sha256": "9eb21a23ae9134f9753bf82d04bec2dbfb0333ebc81ff77d1ab8a8dd31495ba2",
     "later_editorial_clarification": "Add the already-correct JSON numerical method tag and existing assumptions-guide link to Markdown; no proposed parameter changes."
+  },
+  "scope_correction": {
+    "reason": "User asked the meaning/significance of development-reviewer visibility. Earlier proposal over-inferred the consequence and recommended a dataset switch without a demonstrated leak.",
+    "original_review_record": "pol02-study-source-review.json",
+    "original_review_record_sha256": "6bcf52430668d06456d31e14629dd0ad7093d1656099faba8a8c75cd7a51fcc0",
+    "human_reviewers": false,
+    "official_metrics_unchanged": true,
+    "frozen_history_unchanged": true,
+    "independent_read_only_review": "Corrected roles, classification-versus-leakage distinction, both-subset leaderboard scope and no forced migration reviewed; no blockers. No new tests or broader audit."
+  },
+  "leaderboard_scope_clarification": {
+    "website": "https://novelty-bench.github.io/",
+    "submission": "https://novelty-bench.github.io/submit.html",
+    "population_choice_applies_to": "Next bounded development comparison only; eventual leaderboard submission requires both official subsets.",
+    "evaluation": {
+      "partition_model": "gpt-5.6-luna",
+      "quality_model": "claude-opus-5",
+      "quality_unit": "One representative response per distinct group, with the original prompt.",
+      "original_prompt_visible_to_generator_and_judges_during_assessment": true,
+      "reserved_final_information_permitted_for_improvement_before_assessment": false
+    },
+    "generation_protocol": {
+      "answers_per_prompt": 10,
+      "max_tokens_setting": 2048,
+      "reasoning_effort": "low where applicable",
+      "sampling_declaration_required": true,
+      "follow_official_provider_specific_handling": true
+    },
+    "old_development_4096_setting_is_leaderboard_compliant_claim": false,
+    "scaffold_inference_budget_category_and_resources_must_be_reported": true,
+    "upstream_head_at_check": "64a23be6b18ec1dacc298830aab276061b6e143c",
+    "exact_code_byte_check": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\noveltybench-leaderboard-role-source-check-v1.json",
+      "sha256": "97a973dbe2f9ba813a86be567754bda4aef624f3f642750f6a524ccbd186eba2"
+    },
+    "old_runs_changed_or_rescored": false
   }
 }
