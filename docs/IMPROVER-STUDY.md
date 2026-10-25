@@ -131,13 +131,47 @@ force their actual spending to match: one may fail early or use fewer calls.
 The saved report retains those differences rather than buying extra attempts
 for the cheaper arm.
 
+## Original request capacity in study v4
+
+A prospective `buddha.improver-study.v4` declaration requires both the unchanged
+comparison-feedback policy and the exact existing
+`source_capacity.proposal_capacity_policy()`. Versions 1–3 reject the added
+capacity field and retain their original source inventories and behavior.
+Only assessment v4 can consume study v4.
+
+Before creating study owners, preparation checks that the declared proposal
+profile supports the existing context and output limits. After each completed
+proposal, the controller checks the original request, raw reply, token usage,
+finish status, source replacement and recorded charge. It writes a capacity
+checkpoint before making a counted child's private execution copy or starting
+its screen. The literal returned source is already retained as proposal data.
+The same rule applies to the common starting-agent check and each child's mutation check. This reuses
+the existing capacity mechanism; it makes no additional model request.
+
+All settled calls from that proposal count, including planning calls. A later
+usable reply cannot hide an earlier failed capacity check. A rejected, malformed
+or programmatically produced proposal with no observed full-source replacement
+does not establish capacity either. Under this declared policy, these cases
+stop as a **partial result** with reason `proposal_capacity`, its exact stage,
+complete planned denominators, costs and unresolved holds. The saved checkpoint
+explains whether room was insufficient or the required evidence was unavailable.
+They do not become completed rejected opportunities or trigger a new paid retry.
+
+Interrupted publication reuses the original settled replies. Passive inspection
+reconstructs checkpoints from those replies and refuses missing, altered,
+cross-cell or premature records and child work without a consistent saved
+passing checkpoint.
+An unresolved provider liability stays unresolved; it does not become a capacity
+measurement. Version 4 adds no request truncation, altered official score,
+scientific improvement claim, spending allocation or live launch command.
+
 ## Failures, selection and costs
 
 An opportunity is attempted when its original checked plan is durably saved.
 It is complete when its terminal decision is saved. Rejections, duplicates,
 checked generation failures, unusable scores and failed validity checks are
-completed negative outcomes. They consume their opportunity and retain their
-costs. An interrupted original owner remains in flight; it is not replaced by a
+completed negative outcomes once any required v4 capacity check has passed.
+They consume their opportunity and retain their costs. An interrupted original owner remains in flight; it is not replaced by a
 fresh owner or extra opportunity. Unknown liability stops later work.
 
 Later proposals receive all supported earlier failed-generation examples from

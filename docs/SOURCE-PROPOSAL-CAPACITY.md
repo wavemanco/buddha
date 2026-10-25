@@ -5,8 +5,10 @@ observations. It does not need to buy a second copy of the same request. This
 feature does not allocate money, prepare a live handoff or enable a user command.
 The [living plan](PLAN.md) retains the remaining source and scientific gates.
 
-The new policy applies only when explicitly selected in source handoff v4 and
-source-search manifest v5. Older records keep their original interpretation.
+The policy applies when explicitly selected in source handoff v4 and
+capacity-enabled source-search manifests v5/v6. Finite improver study v4 requires
+it too, paired only with assessment v4. Older records keep their original
+interpretation.
 The historical [one-request result](SOURCE-CAPACITY-RESULTS.md) remains evidence
 about its exact request; it does not certify future requests or evolved code.
 This prospective policy supersedes an early design draft that imposed the
@@ -56,6 +58,14 @@ The same rules cover the parent's validity child W0, the counted child C, and
 the further child W1 authored by C's own improver. The existing controller keeps
 its loop, confined workers, API gateway, official evaluator and accounting.
 
+In a [finite improver comparison](IMPROVER-STUDY.md#original-request-capacity-in-study-v4),
+the equivalent positions are the common starting-agent witness, every counted
+proposal and each child's mutation witness. A failed or unobserved replacement
+stops the whole study as a partial result with complete planned denominators;
+it does not become a completed rejected slot. Saved stage and billing evidence
+remain available. Matching assessment v4 rechecks development before freezing
+finalists or starting final work.
+
 A negative or unavailable capacity result records a partial search with reason
 `proposal_capacity`, the exact stage and the saved measurement. It does not
 prepare or execute that returned child's generation owner. Earlier charges,
@@ -93,9 +103,11 @@ substantive source changes, improved diversity, or improved ability to improve.
 
 ## Record compatibility
 
-The capacity-enabled route uses source handoff v4, search manifest v5,
-source-search report v3, witness treatment v2 and witness report v2. The fixed
-capacity policy and each capacity checkpoint have their own v1 record formats.
+The capacity-enabled source route uses source handoff v4, search manifest v5
+(or capacity-enabled comparison manifest v6), source-search report v3, witness
+treatment v2 and witness report v2. The finite route uses study v4 and assessment
+v4 with the same witness/checkpoint mechanism; its existing report formats remain.
+The fixed capacity policy and each capacity checkpoint have their own v1 record formats.
 Older supported formats retain their meaning and helper inventories. The
 capacity helper is imported and added to controls only when the new policy is
 explicitly enabled; a new proposal builder must select that expanded inventory.

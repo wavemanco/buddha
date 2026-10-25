@@ -49,7 +49,7 @@ def observe_fixture_workers(fixture, observer):
 
 
 class FiniteImproverStudyTests(unittest.TestCase):
-    def fixture_before_new_api(self):
+    def fixture_before_new_api(self, *, proposal_capacity=False, capacity_output_tokens=32_768):
         import test_source_screen_outcome
 
         from buddha import candidate_improvement, source_feedback, source_search
@@ -61,6 +61,25 @@ class FiniteImproverStudyTests(unittest.TestCase):
         self.addCleanup(self.outcome.doCleanups)
         self.h = h = self.outcome.fixture()
         self.root, self.engine = h.root, h.engine
+        if proposal_capacity:
+            # Configure the prospective fixture before selections or owners exist.
+            profile = self.engine.fixture.profiles["profiles"]["primary"]["spec"]
+            profile.update(
+                input_token_ceiling=1_050_000,
+                max_output_tokens=capacity_output_tokens,
+                input_microusd_per_million=1,
+                output_microusd_per_million=1,
+            )
+            self.engine.fixture.write(
+                "host", "profiles/openai.json", json.dumps(self.engine.fixture.profiles)
+            )
+            h.record["generation"]["config"]["max_output_tokens"] = capacity_output_tokens
+            for section in (h.record["native"], self.engine.native):
+                section["selection"] = prepare_selection(
+                    self.engine.candidate.release,
+                    {name: Path(value) for name, value in section["roots"].items()},
+                    capabilities=section["selection"]["capabilities"],
+                ).to_record()
         h.record["format"] = "buddha.source-screen.v2"
         h.record["selected_ids"] = [TASK_ID]
         h.record["generation"]["max_calls"] = 3
@@ -1899,6 +1918,527 @@ class FiniteImproverStudyTests(unittest.TestCase):
         self.assertEqual((owner / "manifest.json").read_bytes(), original_manifest)
         self.assertEqual(observation.read_bytes(), original_observation)
         self.assertEqual(lower_observation.read_bytes(), original_lower)
+
+
+class ImproverStudyCapacityTests(unittest.TestCase):
+    """Explicit v4 policies and original proposal capacity; supplied workers only."""
+
+    def fixture(
+        self,
+        *,
+        fail_role=None,
+        unobserved=False,
+        zero_calls=False,
+        finite_fixture=None,
+        output_tokens=32_768,
+    ):
+        from buddha import improver_study, source_capacity
+
+        fixture = finite_fixture
+        if fixture is None:
+            fixture = FiniteImproverStudyTests("runTest")
+            self.addCleanup(fixture.doCleanups)
+            fixture.fixture_before_new_api(
+                proposal_capacity=True, capacity_output_tokens=output_tokens
+            )
+            observe_fixture_workers(fixture, self)
+        fixture.api = improver_study
+        record = fixture.declaration(improver_study)
+        record.update(
+            format="buddha.improver-study.v4",
+            starts=record["starts"][:1],
+            repetitions=1,
+            descendant_opportunities=1,
+            feedback_comparison=copy.deepcopy(improver_study.FEEDBACK_COMPARISON_POLICY),
+            proposal_capacity=source_capacity.proposal_capacity_policy(),
+        )
+        record["selection"]["finalist_iteration"] = 1
+        fixture.recompute_limits(record)
+        fixture.outcomes = {}
+        original_improve = fixture.improve
+
+        def improve(spec, initial, handle):
+            import base64
+
+            from buddha.releases import _json
+
+            owner = handle.__self__.gateway.directory
+            role = (
+                "common"
+                if "common" in owner.parts
+                else "witness"
+                if "witness" in owner.parts
+                else "counted"
+            )
+            request, response = fixture.engine.candidate.request, fixture.engine.fixture.response
+
+            def requested(*args, **kwargs):
+                frame = request(*args, **kwargs)
+                body = json.loads(base64.b64decode(frame["body_base64"]))
+                body["max_completion_tokens"] = 32_768
+                frame["body_base64"] = base64.b64encode(_json(body)).decode()
+                return frame
+
+            def responded(**kwargs):
+                supplied = copy.deepcopy(kwargs)
+                supplied["choices"][0]["finish_reason"] = "stop"
+                if unobserved and role == "counted":
+                    supplied["choices"][0]["message"]["content"] = "Complete procedural advice."
+                supplied["usage"] = {
+                    "prompt_tokens": 5,
+                    "completion_tokens": 24_577 if role == fail_role else 3,
+                }
+                return response(**supplied)
+
+            if zero_calls and role == "counted":
+                # A worker can return source programmatically. This is not an
+                # observed full replacement in the original model receipts.
+                value = {
+                    "source": source("programmatic-counted").decode(),
+                    "hypothesis": "Supplied callback-free mutation.",
+                }
+                fixture.engine.workers += 1
+                handle(
+                    {
+                        "type": "ready",
+                        "agent_sha256": initial["agent_sha256"],
+                        "parent_agent_sha256": initial["parent_bundle"]["agent_sha256"],
+                        "feedback_sha256": sha(_json(initial["feedback"])),
+                        "runtime_sha256": fixture.engine.candidate.expected_runtime,
+                    }
+                )
+                handle(
+                    {
+                        "type": "done",
+                        "status": "complete",
+                        "reason": "complete",
+                        "proposal": {
+                            "status": "captured",
+                            "value": value,
+                            "sha256": sha(_json(value)),
+                            "bytes": len(_json(value)),
+                        },
+                    }
+                )
+                return fixture.engine.execution(spec)
+            with (
+                patch.object(fixture.engine.candidate, "request", side_effect=requested),
+                patch.object(fixture.engine.fixture, "response", side_effect=responded),
+            ):
+                return original_improve(spec, initial, handle)
+
+        fixture.improve = improve
+        return fixture, record
+
+    def test_v4_requires_both_exact_policies_and_preserves_legacy_schema_bytes(self):
+        from buddha import improver_study
+        from buddha.releases import ReleaseError, _json
+
+        f, record = self.fixture()
+        runtime = f.engine.candidate.expected_runtime
+        before = f.h.files(f.root), f.engine.physical_sends, len(f.events)
+        original = _json(record)
+        parsed, _ = improver_study._declaration(record, runtime)
+        self.assertEqual(_json(parsed), original)
+        invalid = []
+        for field in ("proposal_capacity", "feedback_comparison"):
+            missing = copy.deepcopy(record)
+            del missing[field]
+            invalid.append(missing)
+            for key in record[field]:
+                changed = copy.deepcopy(record)
+                changed[field][key] = "changed"
+                invalid.append(changed)
+            changed = copy.deepcopy(record)
+            changed[field]["extra"] = True
+            invalid.append(changed)
+        for changed in invalid:
+            with self.subTest(invalid=changed), self.assertRaises(ReleaseError):
+                improver_study._declaration(changed, runtime)
+        for version in (1, 2, 3):
+            old = copy.deepcopy(record)
+            old["format"] = "buddha.improver-study.v" + str(version)
+            del old["proposal_capacity"]
+            if version < 3:
+                del old["feedback_comparison"]
+            expected = _json(old)
+            self.assertEqual(_json(improver_study._declaration(old, runtime)[0]), expected)
+            with self.subTest(legacy=version), self.assertRaises(ReleaseError):
+                improver_study._declaration(
+                    old | {"proposal_capacity": copy.deepcopy(record["proposal_capacity"])}, runtime
+                )
+        self.assertEqual((f.h.files(f.root), f.engine.physical_sends, len(f.events)), before)
+
+    def test_v4_capacity_helper_is_bound_without_expanding_old_input_closures(self):
+        from buddha import improver_study, source_capacity
+        from buddha.releases import _json
+
+        f, record = self.fixture()
+        helper = Path(source_capacity.__file__).absolute()
+        self.assertNotIn(helper, f.shared._sources())
+        before = f.engine.physical_sends, len(f.events)
+        for version in (1, 2, 3, 4):
+            selected = copy.deepcopy(record)
+            selected["format"] = "buddha.improver-study.v" + str(version)
+            if version < 4:
+                del selected["proposal_capacity"]
+            if version < 3:
+                del selected["feedback_comparison"]
+            path = f.root / ("intrinsic-v" + str(version) + ".json")
+            path.write_bytes(_json(selected))
+            controls, sources, _ = improver_study._intrinsic_inputs(
+                selected,
+                [f.base],
+                path,
+                sha(path.read_bytes()),
+                f.engine.candidate.expected_runtime,
+                active=False,
+            )
+            with self.subTest(version=version):
+                self.assertEqual(helper in controls, version == 4)
+                self.assertEqual(sources, [])
+                if version == 4:
+                    self.assertEqual(controls[helper], sha(helper.read_bytes()))
+        self.assertEqual((f.engine.physical_sends, len(f.events)), before)
+
+    def test_v4_unsupported_capacity_configuration_refuses_before_any_owner_or_worker(self):
+        from buddha import improver_study
+        from buddha.authorization import Authorization
+        from buddha.releases import _json
+
+        f, record = self.fixture(output_tokens=8_191)
+        declaration, directory = f.root / "bad-capacity.json", f.root / "bad-capacity"
+        declaration.write_bytes(_json(record))
+        authority = Authorization.create(
+            f.root / "bad-capacity-authority.sqlite3",
+            authorization_id="offline-unsupported-capacity",
+            scope="source screen: " + f.base.comparison_key(),
+            **record["limits"]["study"],
+        )
+        before = authority.summary(), f.engine.physical_sends, len(f.events)
+        with self.assertRaisesRegex(improver_study.ImproverStudyError, "capacity"):
+            improver_study.prepare_improver_study(
+                directory,
+                declaration=declaration,
+                expected_sha256=sha(declaration.read_bytes()),
+                authorization=authority,
+                review=f.engine.fixture.review,
+                expected_runtime_sha256=f.engine.candidate.expected_runtime,
+            )
+        self.assertFalse(directory.exists())
+        self.assertEqual((authority.summary(), f.engine.physical_sends, len(f.events)), before)
+
+    def test_v4_all_three_capacity_failures_stop_before_child_and_reuse_original_receipts(self):
+        for role, suffix, stage in (
+            ("common", "common/0/0/witness", "common_witness_proposal_capacity"),
+            ("counted", "cells/0/0/0/0", "proposal_capacity"),
+            ("witness", "cells/0/0/0/0/witness", "witness_proposal_capacity"),
+        ):
+            with self.subTest(role=role):
+                f, record = self.fixture(fail_role=role)
+                directory, _, authority = f.prepare_study("capacity-" + role, record)
+                partial = f.run_study(directory)
+                self.assertEqual(
+                    (partial["status"], partial["reason"]), ("incomplete", "proposal_capacity")
+                )
+                self.assertEqual(partial["position"]["stage"], stage)
+                self.assertIsNone(partial["child"])
+                location = directory / suffix
+                checkpoint = json.loads((location / "proposal-capacity.json").read_bytes())
+                self.assertEqual(
+                    (checkpoint["measurement_status"], checkpoint["decision"]), ("complete", "fail")
+                )
+                self.assertFalse((location / "agent").exists())
+                self.assertFalse(
+                    (location / ("screen" if role == "counted" else "generation")).exists()
+                )
+                before = (
+                    f.engine.physical_sends,
+                    authority.summary()["spent_microusd"],
+                    f.owner_paths(directory),
+                )
+                resumed = f.run_study(directory)
+                self.assertEqual(resumed["reason"], "proposal_capacity")
+                self.assertEqual(
+                    (
+                        f.engine.physical_sends,
+                        authority.summary()["spent_microusd"],
+                        f.owner_paths(directory),
+                    ),
+                    before,
+                )
+                self.assertEqual(authority.summary()["reserved_microusd"], 0)
+
+    def test_v4_unobserved_and_callback_free_replacements_remain_incomplete(self):
+        for option in ("unobserved", "zero_calls"):
+            with self.subTest(option=option):
+                f, record = self.fixture(**{option: True})
+                directory, _, authority = f.prepare_study("capacity-" + option, record)
+                partial = f.run_study(directory)
+                self.assertEqual(
+                    (partial["status"], partial["reason"]), ("incomplete", "proposal_capacity")
+                )
+                self.assertEqual(partial["position"]["stage"], "proposal_capacity")
+                location = directory / "cells/0/0/0/0"
+                checkpoint = json.loads((location / "proposal-capacity.json").read_bytes())
+                self.assertEqual(
+                    (
+                        checkpoint["measurement_status"],
+                        checkpoint["decision"],
+                        checkpoint["replacement_count"],
+                    ),
+                    ("partial", "unavailable", 0),
+                )
+                self.assertFalse((location / "screen").exists())
+                self.assertFalse((location / "agent").exists())
+                self.assertFalse((location / "decision.json").exists())
+                self.assertEqual(partial["coverage"]["completed_opportunities"], 0)
+                before = f.engine.physical_sends, authority.summary()
+                self.assertEqual(f.run_study(directory)["reason"], "proposal_capacity")
+                self.assertEqual((f.engine.physical_sends, authority.summary()), before)
+
+    def test_v4_complete_capacity_history_is_replayed_and_tampering_refused_keylessly(self):
+        from buddha.releases import _json
+
+        f, record = self.fixture()
+        directory, _, authority = f.prepare_study("capacity-complete", record)
+        report = f.run_study(directory)
+        self.assertEqual(report["status"], "complete")
+        checkpoints = sorted(directory.rglob("proposal-capacity.json"))
+        self.assertEqual(len(checkpoints), 5)
+        for path in checkpoints:
+            checkpoint = json.loads(path.read_bytes())
+            self.assertEqual(checkpoint["decision"], "pass")
+            self.assertGreaterEqual(checkpoint["replacement_count"], 1)
+        before = f.engine.physical_sends, authority.summary()
+        with f.h.readonly(), patch.dict(os.environ, {}, clear=True):
+            self.assertEqual(f.inspect(directory, authority), report)
+        self.assertEqual((f.engine.physical_sends, authority.summary()), before)
+        for path in (
+            directory / "common/0/0/witness/proposal-capacity.json",
+            directory / "cells/0/0/0/0/proposal-capacity.json",
+            directory / "cells/0/0/0/0/witness/proposal-capacity.json",
+        ):
+            original = path.read_bytes()
+            try:
+                changed = json.loads(original)
+                changed["operations"][0]["measurement"]["context_slack"] += 1
+                path.write_bytes(_json(changed))
+                f.refused(lambda: f.inspect(directory, authority))
+                path.unlink()
+                f.refused(lambda: f.inspect(directory, authority))
+            finally:
+                path.write_bytes(original)
+        counted = directory / "cells/0/0/0/0/proposal-capacity.json"
+        other = directory / "cells/0/0/1/0/proposal-capacity.json"
+        original = other.read_bytes()
+        try:
+            other.write_bytes(counted.read_bytes())
+            f.refused(lambda: f.inspect(directory, authority))
+        finally:
+            other.write_bytes(original)
+        orphan = directory / "cells/0/0/0/99/proposal-capacity.json"
+        orphan.parent.mkdir()
+        try:
+            orphan.write_bytes(counted.read_bytes())
+            f.refused(lambda: f.inspect(directory, authority))
+        finally:
+            orphan.unlink()
+            orphan.parent.rmdir()
+        self.assertEqual(f.inspect(directory, authority), report)
+
+    def test_v4_counted_checkpoint_resume_blocks_premature_copy_without_new_proposal_send(self):
+        from buddha.native_evidence import NativeEvidence
+        from buddha.releases import _json
+
+        f, record = self.fixture()
+        directory, _, authority = f.prepare_study("capacity-resume", record)
+        location = directory / "cells/0/0/0/0"
+        publish = f.shared._publish_capacity
+        interrupted = []
+
+        def before_checkpoint(root, authorization, stage, policy, **kwargs):
+            if stage == location and not interrupted:
+                interrupted.append("before")
+                raise KeyboardInterrupt
+            return publish(root, authorization, stage, policy, **kwargs)
+
+        with patch.object(f.shared, "_publish_capacity", side_effect=before_checkpoint):
+            with self.assertRaises(KeyboardInterrupt):
+                f.run_study(directory)
+        self.assertEqual(interrupted, ["before"])
+        self.assertTrue((location / "proposal/report.json").is_file())
+        self.assertFalse((location / "proposal-capacity.json").exists())
+        self.assertFalse((location / "screen").exists())
+        original_proposal = f.h.files(location / "proposal")
+        before = f.engine.physical_sends, authority.summary(), f.owner_paths(directory)
+        private = location / "agent"
+        private.mkdir()
+        try:
+            with (
+                f.h.readonly(),
+                self.assertRaisesRegex(
+                    f.shared.SourceSearchError, "child work precedes.*capacity checkpoint"
+                ),
+            ):
+                f.api._restore(directory, authority.path)
+        finally:
+            private.rmdir()
+        self.assertEqual(
+            (f.engine.physical_sends, authority.summary(), f.owner_paths(directory)), before
+        )
+
+        def after_checkpoint(root, authorization, stage, policy, **kwargs):
+            result = publish(root, authorization, stage, policy, **kwargs)
+            if stage == location and interrupted == ["before"]:
+                interrupted.append("after")
+                raise KeyboardInterrupt
+            return result
+
+        with patch.object(f.shared, "_publish_capacity", side_effect=after_checkpoint):
+            with self.assertRaises(KeyboardInterrupt):
+                f.run_study(directory)
+        self.assertEqual(interrupted, ["before", "after"])
+        self.assertTrue((location / "proposal-capacity.json").is_file())
+        self.assertFalse((location / "screen").exists())
+        self.assertFalse((location / "agent").exists())
+        self.assertEqual(f.h.files(location / "proposal"), original_proposal)
+        self.assertEqual(
+            (f.engine.physical_sends, authority.summary(), f.owner_paths(directory)), before
+        )
+        reader, state = f.api._restore(directory, authority.path)
+        reader.capture.finish()
+        observation = directory / "observations/1.json"
+        original_observation = observation.read_bytes()
+        forged = json.loads(original_observation)
+        forged["reason"] = "proposal_capacity"
+        forged["position"]["stage"] = "proposal_capacity"
+        try:
+            observation.write_bytes(_json(forged))
+            observed = NativeEvidence(
+                directory, authority.path, error_type=f.api.ImproverStudyError
+            )
+            try:
+                with self.assertRaisesRegex(f.api.ImproverStudyError, "negative checkpoint"):
+                    f.api._observations(observed, dict(state, observations=[]))
+            finally:
+                observed.capture.finish()
+        finally:
+            observation.write_bytes(original_observation)
+        result = f.run_study(directory)
+        self.assertEqual(result["status"], "complete")
+        self.assertEqual(f.h.files(location / "proposal"), original_proposal)
+        self.assertEqual(len(result["provenance"]["observations"]), 2)
+
+    def test_v4_future_decisions_and_witnesses_cannot_hide_behind_capacity_action(self):
+        from buddha.native_evidence import NativeEvidence
+        from buddha.releases import ReleaseError, _json
+
+        f, record = self.fixture(fail_role="counted")
+        directory, _, authority = f.prepare_study("capacity-future", record)
+        location = directory / "cells/0/0/0/0"
+        prepare = f.api._prepare_proposal
+        interrupted = []
+
+        def before_proposal(state, action, authorization):
+            if action["directory"] == location and not interrupted:
+                interrupted.append(True)
+                raise KeyboardInterrupt
+            return prepare(state, action, authorization)
+
+        with patch.object(f.api, "_prepare_proposal", side_effect=before_proposal):
+            with self.assertRaises(KeyboardInterrupt):
+                f.run_study(directory)
+        self.assertEqual(interrupted, [True])
+        self.assertFalse((location / "proposal").exists())
+        with f.h.readonly():
+            reader, state = f.api._restore(directory, authority.path)
+            self.assertEqual(state["action"]["kind"], "prepare_proposal")
+            reader.capture.finish()
+        for artifact in ("agent", "screen", "witness", "decision.json"):
+            path = location / artifact
+            try:
+                if artifact == "decision.json":
+                    path.write_bytes(b"{}")
+                else:
+                    path.mkdir()
+                with (
+                    self.subTest(cut="before_proposal", artifact=artifact),
+                    f.h.readonly(),
+                    self.assertRaises(ReleaseError),
+                ):
+                    f.api._restore(directory, authority.path)
+            finally:
+                path.unlink() if artifact == "decision.json" else path.rmdir()
+
+        partial = f.run_study(directory)
+        self.assertEqual(
+            (partial["status"], partial["reason"]), ("incomplete", "proposal_capacity")
+        )
+        with f.h.readonly():
+            reader, state = f.api._restore(directory, authority.path)
+            self.assertEqual(state["action"]["kind"], "proposal_capacity")
+            reader.capture.finish()
+        before = f.engine.physical_sends, authority.summary(), f.owner_paths(directory)
+        for artifact in ("witness", "decision.json"):
+            path = location / artifact
+            try:
+                if artifact == "witness":
+                    path.mkdir()
+                else:
+                    path.write_bytes(b"{}")
+                with (
+                    self.subTest(artifact=artifact),
+                    f.h.readonly(),
+                    self.assertRaises(ReleaseError),
+                ):
+                    f.api._restore(directory, authority.path)
+            finally:
+                path.rmdir() if artifact == "witness" else path.unlink()
+        # Exercise the observation boundary directly on this genuine retained
+        # prefix; the complete controller has already established its custody.
+        observation = directory / partial["observation"]
+        original = observation.read_bytes()
+        for corruption in ("stage", "child"):
+            changed = copy.deepcopy(partial)
+            if corruption == "stage":
+                changed["position"]["stage"] = "screen"
+            else:
+                changed["child"] = {}
+            try:
+                observation.write_bytes(_json(changed))
+                observed = NativeEvidence(
+                    directory, authority.path, error_type=f.api.ImproverStudyError
+                )
+                try:
+                    with (
+                        self.subTest(observation=corruption),
+                        self.assertRaisesRegex(f.api.ImproverStudyError, "proposal capacity stop"),
+                    ):
+                        f.api._observations(observed, dict(state, observations=[]))
+                finally:
+                    observed.capture.finish()
+            finally:
+                observation.write_bytes(original)
+        self.assertEqual(
+            (f.engine.physical_sends, authority.summary(), f.owner_paths(directory)), before
+        )
+
+    def test_v4_unknown_original_liability_stops_before_capacity_or_child(self):
+        f, record = self.fixture()
+        directory, _, authority = f.prepare_study("capacity-unknown", record)
+        f.unknown_once, f.unknown_scope = True, directory / "common/0/0/witness"
+        partial = f.run_study(directory)
+        self.assertEqual((partial["status"], partial["reason"]), ("incomplete", "unknown"))
+        self.assertGreater(authority.summary()["reserved_microusd"], 0)
+        self.assertFalse((directory / "common/0/0/witness/proposal-capacity.json").exists())
+        self.assertFalse((directory / "common/0/0/witness/agent").exists())
+        self.assertFalse((directory / "common/0/0/witness/generation").exists())
+        before = f.engine.physical_sends, authority.summary(), f.owner_paths(directory)
+        self.assertEqual(f.run_study(directory)["reason"], "unknown")
+        self.assertEqual(
+            (f.engine.physical_sends, authority.summary(), f.owner_paths(directory)), before
+        )
 
 
 if __name__ == "__main__":
