@@ -14,7 +14,7 @@ from buddha import candidate_generation, source_screen, trial_fence
 from buddha import native_pipeline as pipeline
 from buddha.answers import TaskSet, _utf8
 from buddha.authorization import Authorization
-from buddha.doctor import _Busy, _Unsupported
+from buddha.doctor import _Busy, _Capture, _Unsupported
 from buddha.gateway import (
     CAPABILITIES,
     Gateway,
@@ -202,7 +202,11 @@ def _definition(
             "detached improvement requires complete development feedback"
         )
     provenance_record = _object(bundle["provenance"])
-    if provenance_record["format"] == "buddha.source-screen-feedback.v5" and (
+    if (
+        provenance_record["format"]
+        in {"buddha.source-screen-feedback.v5", "buddha.source-screen-feedback.v6"}
+        and "improver_agent_sha256" in provenance_record
+    ) and (
         not detached
         or _digest(provenance_record["improver_agent_sha256"]) != selection.agent_sha256
     ):
@@ -778,7 +782,11 @@ def run_candidate_improvement(directory: Path, *, transport: RawHTTPTransport) -
 
 @_checked
 def inspect_candidate_improvement(
-    directory: Path, *, authorization: Path, expected_report_sha256: str
+    directory: Path,
+    *,
+    authorization: Path,
+    expected_report_sha256: str,
+    sink: _Capture | None = None,
 ) -> dict[str, object]:
     from buddha.candidate_improvement_results import collect_candidate_improvement
 
@@ -786,4 +794,5 @@ def inspect_candidate_improvement(
         directory,
         authorization=authorization,
         expected_report_sha256=_digest(expected_report_sha256),
+        sink=sink,
     )

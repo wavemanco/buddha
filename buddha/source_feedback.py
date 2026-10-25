@@ -7,10 +7,13 @@ not authenticated judgments, semantic compliance or scientific improvement.
 
 import hashlib
 import json
+import math
 import os
 import stat
-from collections.abc import Iterator, Sequence
-from contextlib import ExitStack
+from collections.abc import Callable, Iterator, Sequence
+from contextlib import ExitStack, contextmanager
+from contextvars import ContextVar
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import cast
 
@@ -78,6 +81,15 @@ _FROZEN_FAILURE_POLICY = {
     **_FULL_FAILURE_POLICY,
     "version": "complete-outputs-and-frozen-improver-failures-v5",
 }
+_COMPARISON_POLICY = {
+    **_FULL_POLICY,
+    "version": "complete-outputs-and-immediate-parent-comparison-v6",
+    "delta_direction": "current_minus_parent",
+    "cost_scope": "original_task_generation_and_native_owners",
+    "proposal_cost_scope": "original_proposal_owner_excluded_from_task_cost_delta",
+    "max_nested_comparisons": 16,
+    "max_edge_checks": 64,
+}
 
 
 class SourceFeedbackError(ReleaseError):
@@ -86,6 +98,42 @@ class SourceFeedbackError(ReleaseError):
 
 class SourceFeedbackTooLarge(SourceFeedbackError):
     """Complete feedback cannot fit its declared resource ceilings."""
+
+
+@dataclass
+class _ComparisonObservation:
+    remaining_edges: int = 64
+    active: set[Path] = field(default_factory=set)
+    checks: list[Callable[[], object]] = field(default_factory=list)
+
+
+_COMPARISON_OBSERVATION: ContextVar[_ComparisonObservation | None] = ContextVar(
+    "source_feedback_comparison_observation", default=None
+)
+
+
+@contextmanager
+def _comparison_observation() -> Iterator[_ComparisonObservation]:
+    current = _COMPARISON_OBSERVATION.get()
+    token = None
+    if current is None:
+        current = _ComparisonObservation()
+        token = _COMPARISON_OBSERVATION.set(current)
+    try:
+        yield current
+    finally:
+        if token is not None:
+            _COMPARISON_OBSERVATION.reset(token)
+
+
+def _finish_comparison(observation: _ComparisonObservation) -> None:
+    from buddha.doctor import _Busy, _Unsupported
+
+    try:
+        for check in observation.checks:
+            check()
+    except (_Busy, _Unsupported):
+        raise SourceFeedbackError("comparison evidence changed during observation") from None
 
 
 def _bounded_json(value: object, maximum: int) -> bytes:
@@ -350,6 +398,204 @@ def _build(
     return _load(raw_result)
 
 
+class _FeedbackEvidence:
+    """Shared custody checks for original proposed parent-child edges."""
+
+    def __init__(self, directory: Path, base: dict[str, object]) -> None:
+        self.directory = directory
+        self.base = base
+        self.provenance = _object(base["provenance"])
+        self.authorization = pipeline._absolute(
+            _object(self.provenance["reference"])["authorization"]
+        )
+        self.observed: dict[Path, str] = {}
+        observation = _COMPARISON_OBSERVATION.get()
+        if observation is not None:
+            observation.checks.append(self.recheck)
+
+    def consume(self, path: Path, expected: object) -> bytes:
+        raw = pipeline._read(path, expected)
+        digest = _sha(raw)
+        if path in self.observed and self.observed[path] != digest:
+            raise SourceFeedbackError("feedback evidence changed during derivation")
+        self.observed[path] = digest
+        return raw
+
+    def checked_ref(self, value: object) -> dict[str, object]:
+        item = _object(value, {"directory", "authorization", "report_sha256"})
+        location = pipeline._absolute(item["directory"])
+        authority = pipeline._absolute(item["authorization"])
+        if ".." in location.parts or ".." in authority.parts or authority != self.authorization:
+            raise SourceFeedbackError("feedback changes its original shared authority")
+        if self.directory.is_relative_to(location):
+            raise SourceFeedbackError("feedback overlaps its original evidence")
+        return {
+            "directory": str(location),
+            "authorization": str(authority),
+            "report_sha256": _digest(item["report_sha256"]),
+        }
+
+    def screen_input(
+        self, value: object
+    ) -> tuple[dict[str, object], dict[str, object], dict[str, object]]:
+        ref = self.checked_ref(value)
+        location = pipeline._absolute(ref["directory"])
+        raw = self.consume(location / "report.json", ref["report_sha256"])
+        observation = _COMPARISON_OBSERVATION.get()
+        if observation is None:
+            report = source_screen.inspect_source_screen(
+                location,
+                authorization=self.authorization,
+                expected_report_sha256=_digest(ref["report_sha256"]),
+            )
+        else:
+            from buddha.doctor import _Capture
+
+            capture = _Capture(location)
+            report = source_screen.inspect_source_screen(
+                location,
+                authorization=self.authorization,
+                expected_report_sha256=_digest(ref["report_sha256"]),
+                sink=capture,
+            )
+            observation.checks.append(capture.finish)
+        record = source_screen.SourceScreen.from_bytes(
+            self.consume(location / "screen.json", _digest(report["screen_sha256"]))
+        ).to_record()
+        if (
+            raw != _json(report)
+            or any(
+                report[key] != self.provenance[key] for key in ("comparison_key", "controls_sha256")
+            )
+            or any(_json(record[key]) != _json(self.base[key]) for key in ("source", "split"))
+        ):
+            raise SourceFeedbackError("feedback edge changes the original common screen")
+        selected_ids = [
+            task.id for task in source_screen.SourceScreen.from_bytes(_json(record)).tasks.tasks
+        ]
+        if _json(selected_ids) != _json(
+            [_object(row)["task_id"] for row in _list(_object(self.base["feedback"])["records"])]
+        ):
+            raise SourceFeedbackError("feedback edge changes the ordered development population")
+        for section in ("generation", "native"):
+            if any(
+                self.directory.is_relative_to(pipeline._absolute(path))
+                for path in _object(_object(record[section])["roots"]).values()
+            ):
+                raise SourceFeedbackError("feedback overlaps original selected components")
+        return ref, report, record
+
+    def edge(
+        self, value: object, improver: str | None
+    ) -> tuple[
+        dict[str, object],
+        dict[str, object],
+        dict[str, object],
+        dict[str, object],
+        dict[str, str],
+    ]:
+        from buddha import candidate_improvement
+        from buddha.gateway import _read_manifest
+
+        observation = _COMPARISON_OBSERVATION.get()
+        if observation is not None:
+            if observation.remaining_edges <= 0:
+                raise SourceFeedbackError("comparison reconstruction exceeds 64 edge checks")
+            observation.remaining_edges -= 1
+        edge = _object(value, {"parent", "proposal", "screen"})
+        parent_ref, parent, parent_record = self.screen_input(edge["parent"])
+        child_ref, child, child_record = self.screen_input(edge["screen"])
+        proposal_ref = self.checked_ref(edge["proposal"])
+        proposal_path = pipeline._absolute(proposal_ref["directory"])
+        proposal_raw = self.consume(proposal_path / "report.json", proposal_ref["report_sha256"])
+        if observation is None:
+            proposal = candidate_improvement.inspect_candidate_improvement(
+                proposal_path,
+                authorization=self.authorization,
+                expected_report_sha256=_digest(proposal_ref["report_sha256"]),
+            )
+        else:
+            from buddha.doctor import _Capture
+
+            capture = _Capture(proposal_path)
+            proposal = candidate_improvement.inspect_candidate_improvement(
+                proposal_path,
+                authorization=self.authorization,
+                expected_report_sha256=_digest(proposal_ref["report_sha256"]),
+                sink=capture,
+            )
+            observation.checks.append(capture.finish)
+        if proposal_raw != _json(proposal) or proposal["disposition"] != "materialized":
+            raise SourceFeedbackError("child lacks an original materialized proposal")
+        materialized = _object(proposal["child"])
+        if (
+            proposal["parent_agent_sha256"] != parent["candidate_id"]
+            or child["parent_id"] != parent["candidate_id"]
+            or child["candidate_id"] != materialized["agent_sha256"]
+            or _json(child_record["lineage"]) != _json(materialized["lineage"])
+        ):
+            raise SourceFeedbackError("feedback changes an original parent-child edge")
+        owner_ref = _object(_object(proposal["provenance"])["owner"])
+        owner = _read_manifest(pipeline._absolute(owner_ref["directory"]))
+        protected_selection = owner["selection"]
+        parent_selection = _object(_object(parent_record["generation"])["selection"])
+        if improver is not None:
+            selected = Selection.from_bytes(_json(protected_selection))
+            if (
+                proposal["format"] != "buddha.candidate-improvement-stage-report.v2"
+                or proposal.get("improver_agent_sha256") != improver
+                or selected.agent_sha256 != improver
+            ):
+                raise SourceFeedbackError("proposal belongs to another frozen improver")
+            protected_selection = selected.to_record()
+            _object(protected_selection["components"])["agent"] = _object(
+                parent_selection["components"]
+            )["agent"]
+        if pipeline._sha(owner) != owner_ref["manifest_sha256"] or (
+            _json(protected_selection) != _json(parent_selection)
+        ):
+            raise SourceFeedbackError("proposal changes its parent's protected selection")
+        inputs = _object(_object(proposal["provenance"])["original_inputs"])
+        context_path = proposal_path / "context.json"
+        context = _load(self.consume(context_path, inputs[str(context_path)]))
+        descriptor_path = pipeline._absolute(context["descriptor"])
+        recipe = _load(self.consume(descriptor_path, inputs[str(descriptor_path)]))
+        if improver is not None and recipe["format"] != "buddha.candidate-improvement.v2":
+            raise SourceFeedbackError("frozen-improver feedback requires the detached descriptor")
+        feedback_path = pipeline._absolute(_object(recipe["feedback"])["path"])
+        provenance_path = feedback_path.parent / "provenance.json"
+        measured = _load(self.consume(provenance_path, inputs[str(provenance_path)]))
+        if _json(measured["reference"]) != _json(parent_ref):
+            raise SourceFeedbackError("proposal feedback names another original parent occasion")
+        lineage_ref = _object(materialized["lineage"])
+        lineage_path = pipeline._absolute(lineage_ref["path"])
+        lineage = _load(self.consume(lineage_path, lineage_ref["sha256"]))
+        frame = _load(
+            self.consume(lineage_path.parent / "proposal.json", lineage["proposal_sha256"])
+        )
+        returned = _source_proposal(_checked_proposal_capture(frame["proposal"])["value"])
+        child_source = returned["source"].encode("utf-8")
+        if _sha(child_source) != materialized["source_sha256"] or (
+            self.consume(
+                pipeline._absolute(materialized["directory"]) / "candidate.py",
+                materialized["source_sha256"],
+            )
+            != child_source
+        ):
+            raise SourceFeedbackError("child source differs from its retained original proposal")
+        return (
+            {"parent": parent_ref, "proposal": proposal_ref, "screen": child_ref},
+            parent,
+            child,
+            proposal,
+            returned,
+        )
+
+    def recheck(self) -> None:
+        for path, digest in self.observed.items():
+            pipeline._read(path, digest)
+
+
 def _build_failures(
     directory: Path,
     reference: dict[str, object],
@@ -371,69 +617,8 @@ def _build_failures(
     base = _build(directory, reference, existing=existing, full_answers=full_answers)
     provenance = _object(base["provenance"])
     measured_sha256 = _sha(_json(provenance))
-    original_ref = _object(provenance["reference"])
-    authorization = pipeline._absolute(original_ref["authorization"])
-    observed: dict[Path, str] = {}
-
-    def consume(path: Path, expected: object) -> bytes:
-        raw = pipeline._read(path, expected)
-        digest = _sha(raw)
-        if path in observed and observed[path] != digest:
-            raise SourceFeedbackError("failure evidence changed during derivation")
-        observed[path] = digest
-        return raw
-
-    def checked_ref(value: object) -> dict[str, object]:
-        item = _object(value, {"directory", "authorization", "report_sha256"})
-        location = pipeline._absolute(item["directory"])
-        authority = pipeline._absolute(item["authorization"])
-        if ".." in location.parts or ".." in authority.parts or authority != authorization:
-            raise SourceFeedbackError("failure history changes its original shared authority")
-        if directory.is_relative_to(location):
-            raise SourceFeedbackError("failure feedback overlaps its original evidence")
-        return {
-            "directory": str(location),
-            "authorization": str(authority),
-            "report_sha256": _digest(item["report_sha256"]),
-        }
-
-    def screen_input(
-        value: object,
-    ) -> tuple[dict[str, object], dict[str, object], dict[str, object]]:
-        ref = checked_ref(value)
-        location = pipeline._absolute(ref["directory"])
-        raw = consume(location / "report.json", ref["report_sha256"])
-        report = source_screen.inspect_source_screen(
-            location,
-            authorization=authorization,
-            expected_report_sha256=_digest(ref["report_sha256"]),
-        )
-        record = source_screen.SourceScreen.from_bytes(
-            consume(location / "screen.json", _digest(report["screen_sha256"]))
-        ).to_record()
-        if (
-            raw != _json(report)
-            or any(report[key] != provenance[key] for key in ("comparison_key", "controls_sha256"))
-            or any(_json(record[key]) != _json(base[key]) for key in ("source", "split"))
-        ):
-            raise SourceFeedbackError("failed children change the original common screen")
-        selected_ids = [
-            task.id for task in source_screen.SourceScreen.from_bytes(_json(record)).tasks.tasks
-        ]
-        if _json(selected_ids) != _json(
-            [_object(row)["task_id"] for row in _list(_object(base["feedback"])["records"])]
-        ):
-            raise SourceFeedbackError("failed children change the ordered development population")
-        for section in ("generation", "native"):
-            if any(
-                directory.is_relative_to(pipeline._absolute(path))
-                for path in _object(_object(record[section])["roots"]).values()
-            ):
-                raise SourceFeedbackError("failure feedback overlaps original selected components")
-        return ref, report, record
-
-    from buddha import candidate_improvement
-    from buddha.gateway import _read_manifest
+    evidence = _FeedbackEvidence(directory, base)
+    consume = evidence.consume
 
     edges, failures, summaries = [], [], []
     seen_proposals: set[str] = set()
@@ -441,80 +626,22 @@ def _build_failures(
     latest_source = latest_hypothesis = ""
     tasks = TaskSet.from_bytes(_json(base["source"]))
     for ordinal, value in enumerate(history):
-        edge = _object(value, {"parent", "proposal", "screen"})
-        parent_ref, parent, parent_record = screen_input(edge["parent"])
-        failed_ref, failed, failed_record = screen_input(edge["screen"])
-        proposal_ref = checked_ref(edge["proposal"])
+        edge, parent, failed, proposal, returned = evidence.edge(value, improver)
+        parent_ref = _object(edge["parent"])
+        proposal_ref = _object(edge["proposal"])
+        failed_ref = _object(edge["screen"])
         if parent.get("disposition", "screened") != "screened" or (
             failed.get("disposition") != "candidate_execution_failed"
         ):
             raise SourceFeedbackError(
                 "failure history needs a complete parent and terminal failed child"
             )
-        proposal_path = pipeline._absolute(proposal_ref["directory"])
-        proposal_raw = consume(proposal_path / "report.json", proposal_ref["report_sha256"])
-        proposal = candidate_improvement.inspect_candidate_improvement(
-            proposal_path,
-            authorization=authorization,
-            expected_report_sha256=_digest(proposal_ref["report_sha256"]),
-        )
-        if proposal_raw != _json(proposal) or proposal["disposition"] != "materialized":
-            raise SourceFeedbackError("failed child lacks an original materialized proposal")
+        if str(proposal_ref["directory"]) in seen_proposals or (
+            str(failed_ref["directory"]) in seen_screens
+        ):
+            raise SourceFeedbackError("failure history repeats an original parent-child edge")
         child = _object(proposal["child"])
-        if (
-            proposal["parent_agent_sha256"] != parent["candidate_id"]
-            or failed["parent_id"] != parent["candidate_id"]
-            or failed["candidate_id"] != child["agent_sha256"]
-            or _json(failed_record["lineage"]) != _json(child["lineage"])
-            or str(proposal_ref["directory"]) in seen_proposals
-            or str(failed_ref["directory"]) in seen_screens
-        ):
-            raise SourceFeedbackError(
-                "failure history repeats or changes an original parent-child edge"
-            )
-        owner_ref = _object(_object(proposal["provenance"])["owner"])
-        owner = _read_manifest(pipeline._absolute(owner_ref["directory"]))
-        protected_selection = owner["selection"]
-        parent_selection = _object(_object(parent_record["generation"])["selection"])
-        if improver is not None:
-            selected = Selection.from_bytes(_json(protected_selection))
-            if (
-                proposal["format"] != "buddha.candidate-improvement-stage-report.v2"
-                or proposal.get("improver_agent_sha256") != improver
-                or selected.agent_sha256 != improver
-            ):
-                raise SourceFeedbackError("failed proposal belongs to another frozen improver")
-            protected_selection = selected.to_record()
-            _object(protected_selection["components"])["agent"] = _object(
-                parent_selection["components"]
-            )["agent"]
-        if pipeline._sha(owner) != owner_ref["manifest_sha256"] or (
-            _json(protected_selection) != _json(parent_selection)
-        ):
-            raise SourceFeedbackError("proposal changes its parent's protected selection")
-        inputs = _object(_object(proposal["provenance"])["original_inputs"])
-        context_path = proposal_path / "context.json"
-        context = _load(consume(context_path, inputs[str(context_path)]))
-        descriptor_path = pipeline._absolute(context["descriptor"])
-        recipe = _load(consume(descriptor_path, inputs[str(descriptor_path)]))
-        if improver is not None and recipe["format"] != "buddha.candidate-improvement.v2":
-            raise SourceFeedbackError("frozen-improver failures require the detached descriptor")
-        feedback_path = pipeline._absolute(_object(recipe["feedback"])["path"])
-        provenance_path = feedback_path.parent / "provenance.json"
-        measured_provenance = _load(consume(provenance_path, inputs[str(provenance_path)]))
-        if _json(measured_provenance["reference"]) != _json(parent_ref):
-            raise SourceFeedbackError("proposal feedback names another original parent occasion")
-        lineage_ref = _object(child["lineage"])
-        lineage_path = pipeline._absolute(lineage_ref["path"])
-        lineage = _load(consume(lineage_path, lineage_ref["sha256"]))
-        frame = _load(consume(lineage_path.parent / "proposal.json", lineage["proposal_sha256"]))
-        returned = _source_proposal(_checked_proposal_capture(frame["proposal"])["value"])
         child_source = returned["source"].encode("utf-8")
-        if _sha(child_source) != child["source_sha256"] or (
-            consume(pipeline._absolute(child["directory"]) / "candidate.py", child["source_sha256"])
-            != child_source
-        ):
-            raise SourceFeedbackError("failed source differs from its retained original proposal")
         failure = _object(failed["failure"])
         task_ids = _list(_object(base["feedback"])["records"])
         index = failure["task_index"]
@@ -719,9 +846,163 @@ def _build_failures(
             "failure feedback packet or full task projection exceeds 1 MiB"
         )
     raw_base = _bounded_json(base, MAX_JSON_BYTES) if full_answers else _json(base)
-    for path, digest in observed.items():
-        pipeline._read(path, digest)
+    evidence.recheck()
     return _load(raw_base)
+
+
+def _build_comparison(
+    directory: Path,
+    reference: dict[str, object],
+    comparison: dict[str, object],
+    history: Sequence[dict[str, object]] = (),
+    *,
+    existing: bool = False,
+    improver_agent_sha256: str | None = None,
+) -> dict[str, object]:
+    """Opt-in complete current/parent evidence, without changing legacy derivation."""
+    edge = _object(comparison, {"parent", "proposal", "screen"})
+    if _json(edge["screen"]) != _json(reference):
+        raise SourceFeedbackError("comparison must name the exact current screen reference")
+    directory = _destination(directory, existing=existing)
+    improver = _digest(improver_agent_sha256) if improver_agent_sha256 is not None else None
+    with _comparison_observation() as observation:
+        if directory in observation.active or len(observation.active) >= 16:
+            raise SourceFeedbackError("comparison ancestry repeats a packet or exceeds depth 16")
+        observation.active.add(directory)
+        try:
+            base = (
+                _build_failures(
+                    directory,
+                    reference,
+                    history,
+                    existing=existing,
+                    improver_agent_sha256=improver,
+                )
+                if history
+                else _build(directory, reference, existing=existing)
+            )
+            provenance = _object(base["provenance"])
+            base_format = provenance["format"]
+            base_sha256 = _sha(_json(provenance))
+            evidence = _FeedbackEvidence(directory, base)
+            checked, parent, current, proposal, returned = evidence.edge(edge, improver)
+            if any(item.get("disposition", "screened") != "screened" for item in (parent, current)):
+                raise SourceFeedbackError("comparison needs two complete measured screens")
+            if improver is None and (
+                proposal["format"] != "buddha.candidate-improvement-stage-report.v1"
+            ):
+                raise SourceFeedbackError("a detached comparison requires its fixed improver")
+            original_terms = None
+            for value in checked.values():
+                ref = _object(value)
+                report = _load(
+                    evidence.consume(
+                        pipeline._absolute(ref["directory"]) / "report.json", ref["report_sha256"]
+                    )
+                )
+                terms = trial_fence._actual_terms(_object(report["authorization"]))
+                if original_terms is not None and terms != original_terms:
+                    raise SourceFeedbackError("comparison changes its original grant terms")
+                original_terms = terms
+            parent_base = _build(directory, _object(checked["parent"]), existing=existing)
+            parent_provenance = _object(parent_base["provenance"])
+            proposal_cost = _amount(
+                _object(_object(proposal["improvement"])["gateway_totals"])["spent_microusd"]
+            )
+            feedback = _object(base["feedback"])
+            rows = _list(feedback["records"])
+            parent_rows = _list(_object(parent_base["feedback"])["records"])
+            tasks = TaskSet.from_bytes(_json(base["source"]))
+            feedback_size = len(_bounded_json(feedback | {"records": []}, MAX_FEEDBACK_BYTES))
+            projected_size = 2
+            for index, (value, parent_value, task_provenance) in enumerate(
+                zip(rows, parent_rows, _list(provenance["tasks"]), strict=True)
+            ):
+                row, parent_row = _object(value), _object(parent_value)
+                if _json(row["task_id"]) != _json(parent_row["task_id"]):
+                    raise SourceFeedbackError("comparison changes the ordered typed tasks")
+                current_note = _load(_utf8(row["note"]).encode())
+                parent_note = _load(_utf8(parent_row["note"]).encode())
+                measurements = _object(current_note["measurements"]) if history else current_note
+                deltas: dict[str, object] = {}
+                unavailable: dict[str, object] = {}
+                for name in ("distinct", "utility"):
+                    reasons = [
+                        label + "_" + name + "_unavailable"
+                        for label, note in (("current", measurements), ("parent", parent_note))
+                        if note[name] is None
+                    ]
+                    delta: int | float | None = None
+                    if not reasons:
+                        left, right = measurements[name], parent_note[name]
+                        if type(left) not in {int, float} or type(right) not in {int, float}:
+                            raise SourceFeedbackError("comparison requires verified finite metrics")
+                        delta = cast(int | float, left) - cast(int | float, right)
+                        if not math.isfinite(delta):
+                            delta = None
+                            reasons.append("non_finite_difference")
+                    deltas[name + "_delta"] = delta
+                    unavailable[name] = ";".join(reasons) if reasons else None
+                note = {
+                    "kind": "saved_native_measurements_and_parent_comparison",
+                    "measurements": current_note,
+                    "parent_measurements": parent_note,
+                    "comparison": {
+                        "parent_id": parent["candidate_id"],
+                        "current_id": current["candidate_id"],
+                        "delta_direction": "current_minus_parent",
+                        **deltas,
+                        "unavailable": unavailable,
+                        "recorded_cost_delta_microusd": _amount(
+                            measurements["recorded_cost_microusd"]
+                        )
+                        - _amount(parent_note["recorded_cost_microusd"]),
+                        "cost_scope": _COMPARISON_POLICY["cost_scope"],
+                        "proposal_hypothesis": returned["hypothesis"],
+                        "proposal_cost_microusd": proposal_cost,
+                        "proposal_cost_scope": _COMPARISON_POLICY["proposal_cost_scope"],
+                    },
+                }
+                raw = _bounded_json(note, MAX_FEEDBACK_BYTES)
+                final_row = row | {"note": raw.decode()}
+                comma = int(index > 0)
+                feedback_size += comma + len(
+                    _bounded_json(final_row, MAX_FEEDBACK_BYTES - feedback_size - comma)
+                )
+                projected_size += comma + len(
+                    _bounded_json(
+                        {
+                            "task": tasks.select([row["task_id"]]).tasks[0].to_record(),
+                            "note": final_row["note"],
+                        },
+                        MAX_FEEDBACK_BYTES - projected_size - comma,
+                    )
+                )
+                row.update(final_row)
+                _object(task_provenance).update(note_sha256=_sha(raw), note_utf8_bytes=len(raw))
+            provenance.update(
+                format="buddha.source-screen-feedback.v6",
+                policy=dict(_COMPARISON_POLICY),
+                base_format=base_format,
+                base_provenance_sha256=base_sha256,
+                comparison=checked,
+                parent_candidate_id=parent["candidate_id"],
+                parent_provenance_sha256=_sha(_json(parent_provenance)),
+                parent_tasks=parent_provenance["tasks"],
+                feedback_sha256=_sha(_bounded_json(feedback, MAX_FEEDBACK_BYTES)),
+                claim=(
+                    "descriptive immediate-parent comparison of unchanged official measurements; "
+                    "no causal or improvement claim"
+                ),
+            )
+            if improver is not None:
+                provenance["improver_agent_sha256"] = improver
+            result = _load(_bounded_json(base, MAX_JSON_BYTES))
+            if len(observation.active) == 1:
+                _finish_comparison(observation)
+            return result
+        finally:
+            observation.active.remove(directory)
 
 
 def build_source_feedback(
@@ -730,11 +1011,20 @@ def build_source_feedback(
     reference: dict[str, object],
     failure_history: Sequence[dict[str, object]] = (),
     improver_agent_sha256: str | None = None,
+    comparison: dict[str, object] | None = None,
 ) -> dict[str, object]:
     """Build detached prospective records, without writing or creating owners."""
     try:
         if type(failure_history) not in {list, tuple}:
             raise SourceFeedbackError("failure history requires an ordered literal sequence")
+        if comparison is not None:
+            return _build_comparison(
+                directory,
+                reference,
+                comparison,
+                failure_history,
+                improver_agent_sha256=improver_agent_sha256,
+            )
         return (
             _build_failures(
                 directory,
@@ -778,33 +1068,55 @@ def inspect_source_feedback(
         )
         original = _load(provenance_raw)
         version = original.get("format")
-        if version not in {"buddha.source-screen-feedback.v" + str(i) for i in range(1, 6)}:
+        if version not in {"buddha.source-screen-feedback.v" + str(i) for i in range(1, 7)}:
             raise SourceFeedbackError("unsupported saved feedback derivation")
         full_answers = version in {
             "buddha.source-screen-feedback.v3",
             "buddha.source-screen-feedback.v4",
             "buddha.source-screen-feedback.v5",
+            "buddha.source-screen-feedback.v6",
         }
         reference = _object(original["reference"])
-        bundle = (
-            _build_failures(
+        if version == "buddha.source-screen-feedback.v6":
+            history = cast(list[dict[str, object]], _list(original.get("failure_history", [])))
+            actor = original.get("improver_agent_sha256")
+            expected_base = (
+                "buddha.source-screen-feedback.v5"
+                if history and actor is not None
+                else "buddha.source-screen-feedback.v4"
+                if history
+                else "buddha.source-screen-feedback.v3"
+            )
+            if original["base_format"] != expected_base:
+                raise SourceFeedbackError("comparison changes its full-output base derivation")
+            bundle = _build_comparison(
                 directory,
                 reference,
-                cast(list[dict[str, object]], _list(original["failure_history"])),
+                _object(original["comparison"]),
+                history,
                 existing=True,
-                full_answers=full_answers,
-                improver_agent_sha256=_digest(original["improver_agent_sha256"])
-                if version == "buddha.source-screen-feedback.v5"
-                else None,
+                improver_agent_sha256=_digest(actor) if actor is not None else None,
             )
-            if version
-            in {
-                "buddha.source-screen-feedback.v2",
-                "buddha.source-screen-feedback.v4",
-                "buddha.source-screen-feedback.v5",
-            }
-            else _build(directory, reference, existing=True, full_answers=full_answers)
-        )
+        else:
+            bundle = (
+                _build_failures(
+                    directory,
+                    reference,
+                    cast(list[dict[str, object]], _list(original["failure_history"])),
+                    existing=True,
+                    full_answers=full_answers,
+                    improver_agent_sha256=_digest(original["improver_agent_sha256"])
+                    if version == "buddha.source-screen-feedback.v5"
+                    else None,
+                )
+                if version
+                in {
+                    "buddha.source-screen-feedback.v2",
+                    "buddha.source-screen-feedback.v4",
+                    "buddha.source-screen-feedback.v5",
+                }
+                else _build(directory, reference, existing=True, full_answers=full_answers)
+            )
         records = {
             name + ".json": _json(bundle[name])
             for name in ("source", "split", "feedback", "provenance")
@@ -832,13 +1144,40 @@ def write_source_feedback(
     reference: dict[str, object],
     failure_history: Sequence[dict[str, object]] = (),
     improver_agent_sha256: str | None = None,
+    comparison: dict[str, object] | None = None,
 ) -> dict[str, object]:
     """Exclusively write four checked records; preserve any partial failure."""
+    if comparison is not None:
+        with _comparison_observation():
+            return _write_source_feedback(
+                directory,
+                reference=reference,
+                failure_history=failure_history,
+                improver_agent_sha256=improver_agent_sha256,
+                comparison=comparison,
+            )
+    return _write_source_feedback(
+        directory,
+        reference=reference,
+        failure_history=failure_history,
+        improver_agent_sha256=improver_agent_sha256,
+    )
+
+
+def _write_source_feedback(
+    directory: Path,
+    *,
+    reference: dict[str, object],
+    failure_history: Sequence[dict[str, object]],
+    improver_agent_sha256: str | None,
+    comparison: dict[str, object] | None = None,
+) -> dict[str, object]:
     bundle = build_source_feedback(
         directory,
         reference=reference,
         failure_history=failure_history,
         improver_agent_sha256=improver_agent_sha256,
+        comparison=comparison,
     )
     try:
         directory = _destination(directory)
@@ -850,6 +1189,9 @@ def write_source_feedback(
         references = [_object(provenance["reference"])]
         for value in _list(provenance.get("failure_history", [])):
             edge = _object(value, {"parent", "proposal", "screen"})
+            references.extend(_object(edge[name]) for name in ("parent", "proposal", "screen"))
+        if "comparison" in provenance:
+            edge = _object(provenance["comparison"], {"parent", "proposal", "screen"})
             references.extend(_object(edge[name]) for name in ("parent", "proposal", "screen"))
         authority_path = pipeline._absolute(references[0]["authorization"])
         original_terms = None
@@ -878,6 +1220,9 @@ def write_source_feedback(
                     authority_path, original_terms, directory=directory, kind="feedback"
                 )
             )
+            observation = _COMPARISON_OBSERVATION.get()
+            if observation is not None:
+                _finish_comparison(observation)
             directory.mkdir()
             for name, raw in records.items():
                 pipeline._write(directory / name, raw)
