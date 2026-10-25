@@ -42,6 +42,57 @@ def _destination(directory: Path) -> None:
     raise ImproverHandoffError("handoff needs a fresh trial destination")
 
 
+def _configuration(path: Path, expected_sha256: str, *, fresh: bool) -> dict[str, Any]:
+    if not isinstance(path, Path):
+        raise ImproverHandoffError("handoff needs an explicit Path")
+    path = common._path(str(path.absolute()), error=ImproverHandoffError)
+    expected = _digest(expected_sha256)
+    raw = pipeline._read(path, expected)
+    record = _object(
+        _load(raw),
+        {"format", "assessment", "expected_runtime_sha256", "directory", "source_sha256"},
+    )
+    if record["format"] != "buddha.improver-handoff.v1":
+        raise ImproverHandoffError("unsupported matched handoff")
+    reference = _object(record["assessment"], {"path", "sha256"})
+    declaration = common._path(reference["path"], error=ImproverHandoffError)
+    declared = _digest(reference["sha256"])
+    runtime = _digest(record["expected_runtime_sha256"])
+    directory = common._path(record["directory"], error=ImproverHandoffError)
+    if fresh:
+        _destination(directory)
+    pins = _object(record["source_sha256"])
+    if not 1 <= len(pins) <= 1023:
+        raise ImproverHandoffError("handoff controls exceed the preparation boundary")
+    controls: dict[Path, str] = {path: expected, declaration: declared}
+    aliases: set[Path] = set()
+    for name, digest in pins.items():
+        source = common._path(name, error=ImproverHandoffError)
+        if source == path or source in aliases:
+            raise ImproverHandoffError("handoff controls have aliases or self-reference")
+        aliases.add(source)
+        improver_study._bind_controls(controls, {source: _digest(digest)})
+    required = {source: file_hash(source) for source in _sources()}
+    if any(controls.get(source) != digest for source, digest in required.items()):
+        raise ImproverHandoffError("handoff omits or changes an installed helper pin")
+    definition_raw = pipeline._read(declaration, declared)
+    state = assessment._definition(definition_raw, runtime, active=False)
+    if state["record"]["format"] != assessment._CAPACITY_FORMAT:
+        raise ImproverHandoffError("fresh matched handoff requires assessment and study v4")
+    if fresh:
+        _components(state, runtime)
+    improver_study._bind_controls(controls, state["controls"])
+    return state | {
+        "handoff_path": path,
+        "handoff_raw": raw,
+        "handoff": record,
+        "declaration": declaration,
+        "declared_sha256": declared,
+        "directory": directory,
+        "controls": controls,
+    }
+
+
 def check_improver_handoff(path: Path, *, expected_sha256: str) -> dict[str, object]:
     """Read and recheck configuration; create no authority, owner, output or worker.
 
@@ -49,43 +100,11 @@ def check_improver_handoff(path: Path, *, expected_sha256: str) -> dict[str, obj
     Selected source is inventoried as bytes, never decoded or executed here.
     """
     try:
-        if not isinstance(path, Path):
-            raise ImproverHandoffError("handoff needs an explicit Path")
-        path = common._path(str(path.absolute()), error=ImproverHandoffError)
+        state = _configuration(path, expected_sha256, fresh=True)
+        path, raw = state["handoff_path"], state["handoff_raw"]
+        directory, runtime = state["directory"], state["runtime"]
+        declared, controls = state["declared_sha256"], state["controls"]
         expected = _digest(expected_sha256)
-        raw = pipeline._read(path, expected)
-        record = _object(
-            _load(raw),
-            {"format", "assessment", "expected_runtime_sha256", "directory", "source_sha256"},
-        )
-        if record["format"] != "buddha.improver-handoff.v1":
-            raise ImproverHandoffError("unsupported matched handoff")
-        reference = _object(record["assessment"], {"path", "sha256"})
-        declaration = common._path(reference["path"], error=ImproverHandoffError)
-        declared = _digest(reference["sha256"])
-        runtime = _digest(record["expected_runtime_sha256"])
-        directory = common._path(record["directory"], error=ImproverHandoffError)
-        _destination(directory)
-        pins = _object(record["source_sha256"])
-        if not 1 <= len(pins) <= 1023:
-            raise ImproverHandoffError("handoff controls exceed the preparation boundary")
-        controls: dict[Path, str] = {path: expected, declaration: declared}
-        aliases: set[Path] = set()
-        for name, digest in pins.items():
-            source = common._path(name, error=ImproverHandoffError)
-            if source == path or source in aliases:
-                raise ImproverHandoffError("handoff controls have aliases or self-reference")
-            aliases.add(source)
-            improver_study._bind_controls(controls, {source: _digest(digest)})
-        required = {source: file_hash(source) for source in _sources()}
-        if any(controls.get(source) != digest for source, digest in required.items()):
-            raise ImproverHandoffError("handoff omits or changes an installed helper pin")
-        definition_raw = pipeline._read(declaration, declared)
-        state = assessment._definition(definition_raw, runtime, active=False)
-        if state["record"]["format"] != assessment._CAPACITY_FORMAT:
-            raise ImproverHandoffError("fresh matched handoff requires assessment and study v4")
-        _components(state, runtime)
-        improver_study._bind_controls(controls, state["controls"])
         protected = [
             common._path(str(source), error=ImproverHandoffError)
             for source in (

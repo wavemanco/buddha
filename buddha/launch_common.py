@@ -8,9 +8,11 @@ from contextlib import contextmanager
 from pathlib import Path
 from typing import cast
 
+from buddha import gateway
 from buddha import native_pipeline as pipeline
 from buddha.gateway_history import MAX_LEDGER_BYTES
-from buddha.releases import ReleaseError, _digest, _load, _object, _root, _text
+from buddha.provider import ModelSpec
+from buddha.releases import ReleaseError, Selection, _digest, _json, _load, _object, _root, _text
 from buddha.search_evidence import _read, _sidecars, read_authority
 
 
@@ -117,10 +119,23 @@ def _receipt_roots(path: Path, expected_sha256: str) -> list[Path]:
         "buddha.policy-launch.v1": ("proposal", "approval", "execution"),
         "buddha.policy-handoff.v1": ("study", "baseline"),
         "buddha.policy-execution.v1": ("study", "baseline"),
+        "buddha.improver-launch.v1": ("proposal", "approval"),
+        "buddha.improver-handoff.v1": ("assessment",),
+        "buddha.improver-assessment-trial.v4": (
+            "development",
+            "tasks",
+            "custody",
+            "analysis_plan",
+            "improvement_rule",
+        ),
     }
     path, expected_sha256 = _path(str(path.absolute())), _digest(expected_sha256)
     first = _load(pipeline._read(path, expected_sha256))
-    if _text(first["format"]) not in {"buddha.source-launch.v1", "buddha.policy-launch.v1"}:
+    if _text(first["format"]) not in {
+        "buddha.source-launch.v1",
+        "buddha.policy-launch.v1",
+        "buddha.improver-launch.v1",
+    }:
         raise ReleaseError("receipt exclusions require a known pinned launch")
     roots, seen = {path}, {path: expected_sha256}
     pending = [first]
@@ -157,3 +172,38 @@ def _receipt_roots(path: Path, expected_sha256: str) -> list[Path]:
             seen[source] = digest
             pending.append(_load(pipeline._read(source, digest)))
     return sorted(roots)
+
+
+def _model_specs(
+    generation: dict[str, object],
+    native: dict[str, object],
+    template: dict[str, object] | None = None,
+) -> dict[str, list[ModelSpec]]:
+    selected = {
+        name: gateway._profiles(
+            Selection.from_bytes(_json(section["selection"])),
+            {name: pipeline._absolute(path) for name, path in _object(section["roots"]).items()},
+        )
+        for name, section in (("generation", generation), ("native", native))
+    }
+
+    def choice(section: dict[str, object]) -> ModelSpec:
+        role = _object(section["profile"])
+        choices = _object(
+            _object(selected["generation"][cast(str, role["capability"])])["profiles"]
+        )
+        return gateway._spec(_object(choices[cast(str, role["profile_id"])])["spec"])
+
+    result = {"generation": [choice(generation)], "native": []}
+    if template is not None:
+        result["proposal"] = [choice(template)]
+    for provider, models in _object(native["profiles"]).items():
+        capability = next(
+            key for key, value in gateway.CAPABILITIES.items() if value[0] == provider
+        )
+        choices = _object(_object(selected["native"][capability])["profiles"])
+        for profile_id in _object(models).values():
+            spec = gateway._spec(_object(choices[_text(profile_id)])["spec"])
+            if spec not in result["native"]:
+                result["native"].append(spec)
+    return result

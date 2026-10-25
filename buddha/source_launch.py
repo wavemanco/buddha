@@ -29,7 +29,6 @@ from buddha.gateway import RawHTTPTransport
 from buddha.provider import ModelSpec
 from buddha.releases import (
     ReleaseError,
-    Selection,
     _digest,
     _json,
     _load,
@@ -77,32 +76,7 @@ def _specs(
     screen: source_screen.SourceScreen, template: dict[str, object]
 ) -> dict[str, list[ModelSpec]]:
     record = screen.to_record()
-    generation, native = _object(record["generation"]), _object(record["native"])
-    selected = {
-        name: gateway._profiles(
-            Selection.from_bytes(_json(section["selection"])), source_screen._roots(section)
-        )
-        for name, section in (("generation", generation), ("native", native))
-    }
-
-    def choice(section: dict[str, object]) -> ModelSpec:
-        role = _object(section["profile"])
-        choices = _object(
-            _object(selected["generation"][cast(str, role["capability"])])["profiles"]
-        )
-        return gateway._spec(_object(choices[cast(str, role["profile_id"])])["spec"])
-
-    result = {"generation": [choice(generation)], "proposal": [choice(template)], "native": []}
-    for provider, models in _object(native["profiles"]).items():
-        capability = next(
-            key for key, value in gateway.CAPABILITIES.items() if value[0] == provider
-        )
-        choices = _object(_object(selected["native"][capability])["profiles"])
-        for profile_id in _object(models).values():
-            spec = gateway._spec(_object(choices[_text(profile_id)])["spec"])
-            if spec not in result["native"]:
-                result["native"].append(spec)
-    return result
+    return common._model_specs(_object(record["generation"]), _object(record["native"]), template)
 
 
 def _planned_owners(
