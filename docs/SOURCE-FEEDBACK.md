@@ -11,8 +11,10 @@ source code. [PLAN.md](PLAN.md) remains the roadmap.
 
 `inspect_source_feedback(directory, expected_provenance_sha256=...)` verifies
 an existing packet against its original measured screen and independent
-provenance pin, without changing it. The builder and writer still require a new
-directory. The [durable proposal stage](SOURCE-PROPOSAL-STAGE.md) uses this check
+provenance pin, without changing it. The builder normally requires a new
+directory; `existing=True` reconstructs an existing packet without writing or
+repairing it. The writer always requires a new directory. The
+[durable proposal stage](SOURCE-PROPOSAL-STAGE.md) uses this check
 before preparing or executing the selected parent's inherited improver.
 
 An optional `failure_history` adds version 4 host provenance for checked
@@ -166,8 +168,9 @@ This remains an **opt-in library and protected-proposal connection**. New
 can now select it explicitly with `feedback_comparison=True`. Existing search
 manifests and study v1/v2 retain their original feedback policies and bytes.
 They do not automatically receive comparisons. Study arm membership, coverage
-and equal resources remain controller responsibilities; a prospective study v3
-and matching assessment treatment are not implemented here. Historical v1-v6
+and equal resources remain controller responsibilities. The separate
+[study v3 connection](IMPROVER-STUDY.md#explicit-comparison-feedback-in-study-v3)
+now declares that treatment and its matching assessment. Historical v1-v6
 packets and completed runs keep their original reconstruction rules. Thirteen
 new search/root/limit methods and nineteen existing feedback methods pass in
 separate supplied-response cohorts; the [delivery record](conformance/imp01-source-search-comparison-delivery.json)
@@ -193,8 +196,32 @@ lineage on the starting source is allowed: this describes its role in this
 search, not its entire ancestry. Full byte ceilings still apply to the wrapper.
 
 Root v7 currently supports inherited search only. It refuses a fixed-improver
-identity or a detached proposal; there is no frozen-study root protocol here.
+identity or a detached proposal. The separate fixed-study protocol below does
+not relax that restriction.
 Actual-edge v6 keeps its existing schema and original derivation bytes.
+
+### A declared study cell root belongs to its fixed improver
+
+Provenance v8 uses `comparison={"study_root": ...}`. Its selector names the
+original study directory, shared authorization, declaration hash, starting-agent
+index, repetition and arm. The builder also requires that arm's
+`improver_agent_sha256`. It checks the original first-owner declaration and
+that exact common screen, without recursively reconstructing the whole study.
+That screen's own preparation record must bind the original study controls,
+including for later repetitions; a valid standalone screen in that folder does
+not prove study membership. Supplied failure edges must also belong to the
+declared cell. The controller checks that its history is complete and ordered.
+Complete answer leaves and the containing study observation remain checked
+through publication, including changes made after the measurements were read.
+
+The note has the same full-measurement wrapper as a search root. Its unavailable
+reason is `no_counted_parent_in_this_cell`; parent identity, measurements and
+differences are null. A complete fixed-improver failure-history note remains
+inside `measurements`, including its own measurement layer. Nothing is flattened
+or shortened. The next protected proposal must use this same fixed improver;
+an inherited proposal or another arm cannot adopt the packet. The study
+controller separately proves which exact earlier admitted child supplied each
+non-root v6 edge. This does not change the official evaluator or old packets.
 
 The note is still text, but its JSON layout is different. An agent helper that
 looks only for top-level measurement fields will need to understand the

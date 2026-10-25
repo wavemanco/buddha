@@ -1,0 +1,628 @@
+{
+  "format": "buddha.improver-study-comparison-delivery.v1",
+  "status": "bounded_offline_delivery",
+  "date": "2026-10-24",
+  "base_commit": "9bbb532c277e5fea8c478f9e9b9c5208aad68ab3",
+  "gate": "IMP-01",
+  "claim": "Versioned complete comparison feedback in finite fixed-improver development, with strict assessment preparation compatibility; no actual model-consumer, effectiveness or generalization claim.",
+  "source_sha256": {
+    "buddha/candidate_improvement.py": "05dd9baa4fcc0042ab11ceabef3fac9b6c5c9a343b6f568760ccaff2aa41e08a",
+    "buddha/improver_assessment.py": "2ecea39dd103ebc446f67cf8049ee8fb1e860273ece731947c8c73fc18eaf308",
+    "buddha/improver_study.py": "1b07734c85deb5a2458c582a148fe2d5e367ddd137006bb976bd4b125f39b713",
+    "buddha/source_feedback.py": "525f21681d44be5e927333c79be8fe429f787231a1d81e62cf802485e341c0f2",
+    "tests/test_improver_comparison_contract.py": "e96e02702e51a25ebabdca5e371e9cca3c257932e48feb5265f985f1e905023e",
+    "tests/test_improver_comparison_lifecycle.py": "5e4a5780199932327345efda2f1c4f4162bf8ac7fb98c1810c8876b2a8342a01",
+    "tests/test_improver_root_feedback.py": "cc1c129f231d211cb623a4117ebf9cf31ceaaf4c7571d7a3d4cb5bc08f03ea93",
+    "tests/test_improver_study_comparison.py": "9ece8e81ddd8fd2be6144e577a8c14470bf68403e2f148cf37a0a0ed3921c472"
+  },
+  "interfaces": {
+    "study": "buddha.improver-study.v3 with exact FEEDBACK_COMPARISON_POLICY; v2 exact aggregate funding semantics",
+    "counted_plan": "buddha.improver-study-plan.v2 with exact own-cell comparison selector",
+    "root": "buddha.source-screen-feedback.v8; study_root scope/auth/declaration/start/repetition/arm plus mandatory fixed actor",
+    "root_note": "Full original measured/failure note, null parent and differences, reason no_counted_parent_in_this_cell",
+    "descendant": "Existing v6 exact immediate parent/proposal/screen with full outputs, independent signed differences and separate proposal cost",
+    "witness": "Existing complete absolute feedback and no counted failure/comparison treatment",
+    "assessment": "Strict v1/v1, v2/v2, v3/v3 pairing; v3 retains existing bounded aggregate final cap; no new final/analysis schema",
+    "builder": "existing=False by default; literal existing=True reconstructs an existing destination without writes or repair; writer always exclusive",
+    "legacy": "Study v1/v2 reject the added field and retain original feedback/default rules. Search-only root v7 still rejects fixed/detached actors. Actual-edge v6 and official evaluator bytes unchanged."
+  },
+  "custody": [
+    "Resolve the exact selected common occasion or one earlier admitted decision in the same start/repetition/arm with the same fixed improver; candidate identity alone is insufficient.",
+    "Verify owner-bound original declaration/context and each common screen's own original study bindings, including later repetitions, without recursive whole-study restoration.",
+    "Create containing capture before full base reads; retain complete leaves/ledgers/sidecars through publication; verify fixed actor before protected detached preparation.",
+    "Public root failure edges are confined to the exact declared cell and earlier/common parent; the controller separately enforces complete ordered original failure history."
+  ],
+  "findings": [
+    {
+      "id": "IMP1-FB-STUDY-ROOT-01",
+      "kind": "reproduced_defect",
+      "observation": "A genuine standalone later-repetition screen under the same source/grant at the expected path could claim study-root membership without its own original study controls.",
+      "red": "SourceFeedbackError not raised; one method 26.406s, all 238 inputs unchanged.",
+      "fix": "Require its actual first generation owner's original bindings to contain every original study control; four lines, no second screen walk.",
+      "green": "Final three-method helper cohort includes valid standalone read plus refused v8 publication before destination creation and unchanged evidence/financial bytes."
+    }
+  ],
+  "verification": {
+    "composed_scope": "One task/two literal answers/one start/one repetition/two fixed arms/two opportunities per arm; supplied workers/native replies, no selected Python execution.",
+    "composed_checks": "Actual root-to-own-edge feedback, -3 utility/-1 distinct deltas, full Unicode/blank outputs on both sides, full v5 failure history inside v8, unchanged absolute witnesses, no starter fallback, original accounting and one keyless completed replay.",
+    "synthetic_resource_injection": "One typed limit at the first real counted plan writer persists incomplete stage/reason/full denominators/zero holds/no counted owner; unpatched continuation finishes the same study and preserves original observation bytes. Not actual depth exhaustion.",
+    "legacy_methods": 22,
+    "legacy_cohorts": [
+      {
+        "format": "buddha.local-focused-observation.v1",
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_source_root_feedback.py",
+          "-v"
+        ],
+        "worktree": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\improver-study-comparison",
+        "returncode": 0,
+        "seconds": 34.208,
+        "input_count": 238,
+        "inputs_sha256": "0ea9b567a93772be7718074cb217ff5799f1c7a92186be7d710645326a5a0cd9",
+        "inputs_unchanged": true,
+        "changed": [],
+        "log_sha256": "43d4ace179eedd9d192ab567754c8ed30df69d574752eae8819fe5fc54fa823d",
+        "methods": 3,
+        "unittest_seconds": 33.862,
+        "evidence_name": "improver-study-comparison-legacy-root-v1"
+      },
+      {
+        "format": "buddha.local-focused-observation.v1",
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_source_feedback.py",
+          "-v"
+        ],
+        "worktree": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\improver-study-comparison",
+        "returncode": 0,
+        "seconds": 223.923,
+        "input_count": 238,
+        "inputs_sha256": "0ea9b567a93772be7718074cb217ff5799f1c7a92186be7d710645326a5a0cd9",
+        "inputs_unchanged": true,
+        "changed": [],
+        "log_sha256": "f60c21202bfdd393ba1be8929be90453b39b7394dc39bd1845caafc2242aa128",
+        "methods": 13,
+        "unittest_seconds": 223.545,
+        "evidence_name": "improver-study-comparison-legacy-feedback-v1"
+      },
+      {
+        "format": "buddha.local-focused-observation.v1",
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_source_failure_feedback.py",
+          "-v"
+        ],
+        "worktree": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\improver-study-comparison",
+        "returncode": 0,
+        "seconds": 209.575,
+        "input_count": 238,
+        "inputs_sha256": "0ea9b567a93772be7718074cb217ff5799f1c7a92186be7d710645326a5a0cd9",
+        "inputs_unchanged": true,
+        "changed": [],
+        "log_sha256": "45de8a7e46b822ff2cfcc80171ed3ecb8e62bd263bc49387937dcbd48e2de955",
+        "methods": 6,
+        "unittest_seconds": 209.161,
+        "evidence_name": "improver-study-comparison-legacy-failures-v1"
+      }
+    ],
+    "legacy_scope": "Earlier passing source cut differs only in the new v3 study-owner guard and two new test files listed below; legacy-exercised feedback/root/failure and protected-proposal producers are unchanged. These are not a final-head full suite.",
+    "changes_after_legacy": [
+      "buddha/improver_study.py",
+      "tests/test_improver_comparison_lifecycle.py",
+      "tests/test_improver_study_comparison.py"
+    ],
+    "quality": [
+      {
+        "name": "lint",
+        "command": [
+          "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-tools-20261024-v1\\Scripts\\python.exe",
+          "-m",
+          "ruff",
+          "check",
+          "buddha",
+          "tests",
+          "agents",
+          "ci_test_shard.py"
+        ],
+        "seconds": 0.181,
+        "returncode": 0
+      },
+      {
+        "name": "format",
+        "command": [
+          "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-tools-20261024-v1\\Scripts\\python.exe",
+          "-m",
+          "ruff",
+          "format",
+          "--check",
+          "buddha",
+          "tests",
+          "agents",
+          "ci_test_shard.py"
+        ],
+        "seconds": 0.129,
+        "returncode": 0
+      },
+      {
+        "name": "types-windows",
+        "command": [
+          "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-tools-20261024-v1\\Scripts\\python.exe",
+          "-m",
+          "mypy",
+          "--strict",
+          "--platform",
+          "win32",
+          "buddha",
+          "agents",
+          "ci_test_shard.py"
+        ],
+        "seconds": 1.181,
+        "returncode": 0
+      },
+      {
+        "name": "types-linux",
+        "command": [
+          "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-tools-20261024-v1\\Scripts\\python.exe",
+          "-m",
+          "mypy",
+          "--strict",
+          "--platform",
+          "linux",
+          "buddha",
+          "agents",
+          "ci_test_shard.py"
+        ],
+        "seconds": 4.526,
+        "returncode": 0
+      },
+      {
+        "name": "security",
+        "command": [
+          "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-tools-20261024-v1\\Scripts\\python.exe",
+          "-m",
+          "bandit",
+          "-r",
+          "buddha",
+          "agents",
+          "ci_test_shard.py"
+        ],
+        "seconds": 4.323,
+        "returncode": 0
+      },
+      {
+        "name": "runtime-audit",
+        "command": [
+          "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-tools-20261024-v1\\Scripts\\python.exe",
+          "-m",
+          "pip_audit",
+          "--no-deps",
+          "-r",
+          "requirements.txt"
+        ],
+        "seconds": 19.309,
+        "returncode": 0
+      },
+      {
+        "name": "development-audit",
+        "command": [
+          "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-tools-20261024-v1\\Scripts\\python.exe",
+          "-m",
+          "pip_audit",
+          "--disable-pip",
+          "--no-deps",
+          "--strict",
+          "-r",
+          "requirements-dev.txt"
+        ],
+        "seconds": 2.783,
+        "returncode": 0
+      },
+      {
+        "name": "compile",
+        "command": [
+          "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-tools-20261024-v1\\Scripts\\python.exe",
+          "-m",
+          "compileall",
+          "-q",
+          "buddha",
+          "tests",
+          "agents",
+          "ci_test_shard.py"
+        ],
+        "seconds": 1.054,
+        "returncode": 0
+      }
+    ],
+    "quality_source_count": 238,
+    "quality_sources_unchanged": true,
+    "ci_inventory": {
+      "format": "buddha.ci-test-shards.v1",
+      "total": 1876,
+      "count": 4,
+      "index": 0,
+      "selected": 1,
+      "counts": [
+        1,
+        632,
+        621,
+        622
+      ],
+      "isolated_test": "test_improver_study.FiniteImproverStudyTests.test_finite_fixed_operators_common_conditions_negative_slots_and_original_recovery",
+      "census_sha256": "af21b8b0744616375240a908b56ae8c04812eafdf90f69a47849b7d0d42b5a3c",
+      "artifact_sha256": "7fade1104772afb99075a6b57ba09a4fe1f27914f8de06cc012171a68b364ebc",
+      "test_bodies_executed": false
+    },
+    "hosted": "New study head awaits publication and exact hosted matrix; local checks are not a full hosted pass.",
+    "sealed_scope_limit": "Genuine matching v3 assessment declaration/preparation and all nine format pairs checked. No newly completed v3 sealed final grid in this slice; existing v1/v2 sealed evidence is historical and unchanged.",
+    "runtime_limit": "One bounded supplied study/reconstruction/replay observation does not establish feasible future full-grid runtime.",
+    "study_implementation_cut_new_methods": 11,
+    "study_implementation_cohorts": [
+      {
+        "format": "buddha.local-focused-observation.v1",
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_improver_root_feedback.py",
+          "-v"
+        ],
+        "worktree": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\improver-study-comparison",
+        "returncode": 0,
+        "seconds": 61.853,
+        "input_count": 238,
+        "inputs_sha256": "0c9333772ef1df1bd1414bef49e483e2f51f91abc57f7a84d561ca0d45358289",
+        "inputs_unchanged": true,
+        "changed": [],
+        "log_sha256": "c3d25fd42073bb43ea974167c9ae00ef756ca57312d4ba881f6237e212c3c6d3",
+        "methods": 3,
+        "unittest_seconds": 61.476,
+        "evidence_name": "improver-study-comparison-root-green-v2"
+      },
+      {
+        "format": "buddha.local-focused-observation.v1",
+        "command": [
+          "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-tools-20261024-v1\\Scripts\\python.exe",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_improver_study_comparison.py",
+          "-v"
+        ],
+        "worktree": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\improver-study-comparison",
+        "returncode": 0,
+        "seconds": 67.45,
+        "input_count": 238,
+        "inputs_sha256": "0c9333772ef1df1bd1414bef49e483e2f51f91abc57f7a84d561ca0d45358289",
+        "inputs_unchanged": true,
+        "changed": [],
+        "log_sha256": "04df36a8ee340bdb3877b7045de5392af031085a7594d99cbe2c03c0c1663681",
+        "methods": 3,
+        "unittest_seconds": 67.111,
+        "evidence_name": "improver-study-comparison-helper-green-v3"
+      },
+      {
+        "format": "buddha.local-focused-observation.v1",
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_improver_comparison_contract.py",
+          "-v"
+        ],
+        "worktree": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\improver-study-comparison",
+        "returncode": 0,
+        "seconds": 66.179,
+        "input_count": 238,
+        "inputs_sha256": "0c9333772ef1df1bd1414bef49e483e2f51f91abc57f7a84d561ca0d45358289",
+        "inputs_unchanged": true,
+        "changed": [],
+        "log_sha256": "3d7f5168b259d4cc68f5bdae95c5045f4fba187131b6f6e8a2580a3b8a07db7c",
+        "methods": 4,
+        "unittest_seconds": 65.794,
+        "evidence_name": "improver-study-comparison-schema-green-v2"
+      },
+      {
+        "format": "buddha.local-focused-observation.v1",
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_improver_comparison_lifecycle.py",
+          "-v"
+        ],
+        "worktree": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\improver-study-comparison",
+        "returncode": 0,
+        "seconds": 1254.183,
+        "input_count": 238,
+        "inputs_sha256": "0c9333772ef1df1bd1414bef49e483e2f51f91abc57f7a84d561ca0d45358289",
+        "inputs_unchanged": true,
+        "changed": [],
+        "log_sha256": "0036225e3c7e7b09b6809ea8505d5b514e6aca9025e531a28a6251069640209c",
+        "methods": 1,
+        "unittest_seconds": 1253.483,
+        "evidence_name": "improver-study-comparison-lifecycle-green-v2"
+      }
+    ],
+    "retained_composed_artifacts": {
+      "index_sha256": "d90455955b77c714149d8bab333413774f05cba87fa9b5117800ef818bd8ca0c",
+      "artifact_count": 34,
+      "name": "improver-study-comparison-lifecycle-green-v2-evidence-index.json"
+    }
+  },
+  "retained_attempts": [
+    "Initial contract/helper preparation REDs retained, including two unattributed bootstrap errors in first schema run and an uncaptured initial invocation; no false clean-baseline claim.",
+    "Initial two-method root preparation failure ran while source edits began and cannot isolate unsupported format from changed source pins; root red observation records that limit.",
+    "First composed rehearsal deliberately stopped after 94.905s for the membership defect; wrapper recorded returncode4294967295 and unchanged238 inputs, never a pass.",
+    "Helper v2 passed all3 methods in64.853s but detected lifecycle-test input change and exited1; preserved, superseded by exact final-cut v3."
+  ],
+  "preservation": {
+    "format": "buddha.improver-study-comparison-preservation.v1",
+    "source_evidence_sha256": "a00f60b16894b5ac725564e920ef0f27cc9f6f9ffdf3d2600f32a2888f674017",
+    "captured_files": 451,
+    "changed": [],
+    "unchanged": true,
+    "paid_calls": 0
+  },
+  "remaining": [
+    "Actual frozen P/C isolated request compatibility with v8/v6, including C's flat-index limitation; no historical source rewrite or feedback flattening.",
+    "Prospective concrete treatment/grid/funding/fairness/runtime/capacity/uncertainty and independent review adoption before any live allocation.",
+    "Concrete v3 sealed-grid rehearsal and controlled effectiveness study; independent EVAL-02 scientific evidence remains open."
+  ],
+  "paid_api_calls": 0,
+  "live_authorizations_created": 0,
+  "original_runs_mutated": false,
+  "official_benchmark_changed": false,
+  "development_prs_merged": false,
+  "corrected_parent_integration": {
+    "parent_commit": "c306d6b2da95fdd38a8870a77baa20c74366a539",
+    "only_changed_python_since_lifecycle": [
+      "buddha/source_search.py"
+    ],
+    "unchanged_study_files": "All eight implementation/test file pins in source_sha256 remain exactly those of the completed lifecycle.",
+    "fix": "The separately tested PR131 correction preserves omitted-keyword legacy calls at three shared source-search callers; actual selectors remain explicit. No feedback/official measurement or study policy change.",
+    "repeated_fast_methods": 10,
+    "cohorts": [
+      {
+        "format": "buddha.local-focused-observation.v1",
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_improver_root_feedback.py",
+          "-v"
+        ],
+        "worktree": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\improver-study-comparison",
+        "returncode": 0,
+        "seconds": 64.851,
+        "input_count": 238,
+        "inputs_sha256": "c56ed464c8345b3cc5266e144455a3830fa6899d587fdcfa7784ee1a61760f98",
+        "inputs_unchanged": true,
+        "changed": [],
+        "log_sha256": "323a2845566d04b7cb47449d69b3305aad4898c4db32f57e96c54edd1c65bb05",
+        "methods": 3,
+        "unittest_seconds": 64.32
+      },
+      {
+        "format": "buddha.local-focused-observation.v1",
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_improver_study_comparison.py",
+          "-v"
+        ],
+        "worktree": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\improver-study-comparison",
+        "returncode": 0,
+        "seconds": 72.558,
+        "input_count": 238,
+        "inputs_sha256": "c56ed464c8345b3cc5266e144455a3830fa6899d587fdcfa7784ee1a61760f98",
+        "inputs_unchanged": true,
+        "changed": [],
+        "log_sha256": "fbd94425c4929f4ae59ee6d229f712c7a7cd9704d1e6dabcf6f70958f302777d",
+        "methods": 3,
+        "unittest_seconds": 72.08
+      },
+      {
+        "format": "buddha.local-focused-observation.v1",
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_improver_comparison_contract.py",
+          "-v"
+        ],
+        "worktree": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\improver-study-comparison",
+        "returncode": 0,
+        "seconds": 67.793,
+        "input_count": 238,
+        "inputs_sha256": "c56ed464c8345b3cc5266e144455a3830fa6899d587fdcfa7784ee1a61760f98",
+        "inputs_unchanged": true,
+        "changed": [],
+        "log_sha256": "91b9178e46c6d8d199cba38d6c9c6cc664d0d9cbaecf15634bd16cd36125fb26",
+        "methods": 4,
+        "unittest_seconds": 67.281
+      }
+    ],
+    "quality": [
+      {
+        "name": "lint",
+        "command": [
+          "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-tools-20261024-v1\\Scripts\\python.exe",
+          "-m",
+          "ruff",
+          "check",
+          "buddha",
+          "tests",
+          "agents",
+          "ci_test_shard.py"
+        ],
+        "seconds": 0.27,
+        "returncode": 0
+      },
+      {
+        "name": "format",
+        "command": [
+          "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-tools-20261024-v1\\Scripts\\python.exe",
+          "-m",
+          "ruff",
+          "format",
+          "--check",
+          "buddha",
+          "tests",
+          "agents",
+          "ci_test_shard.py"
+        ],
+        "seconds": 0.132,
+        "returncode": 0
+      },
+      {
+        "name": "types-windows",
+        "command": [
+          "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-tools-20261024-v1\\Scripts\\python.exe",
+          "-m",
+          "mypy",
+          "--strict",
+          "--platform",
+          "win32",
+          "buddha",
+          "agents",
+          "ci_test_shard.py"
+        ],
+        "seconds": 4.219,
+        "returncode": 0
+      },
+      {
+        "name": "types-linux",
+        "command": [
+          "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-tools-20261024-v1\\Scripts\\python.exe",
+          "-m",
+          "mypy",
+          "--strict",
+          "--platform",
+          "linux",
+          "buddha",
+          "agents",
+          "ci_test_shard.py"
+        ],
+        "seconds": 3.652,
+        "returncode": 0
+      },
+      {
+        "name": "security",
+        "command": [
+          "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-tools-20261024-v1\\Scripts\\python.exe",
+          "-m",
+          "bandit",
+          "-r",
+          "buddha",
+          "agents",
+          "ci_test_shard.py"
+        ],
+        "seconds": 3.651,
+        "returncode": 0
+      },
+      {
+        "name": "runtime-audit",
+        "command": [
+          "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-tools-20261024-v1\\Scripts\\python.exe",
+          "-m",
+          "pip_audit",
+          "--no-deps",
+          "-r",
+          "requirements.txt"
+        ],
+        "seconds": 20.773,
+        "returncode": 0
+      },
+      {
+        "name": "development-audit",
+        "command": [
+          "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-tools-20261024-v1\\Scripts\\python.exe",
+          "-m",
+          "pip_audit",
+          "--disable-pip",
+          "--no-deps",
+          "--strict",
+          "-r",
+          "requirements-dev.txt"
+        ],
+        "seconds": 1.565,
+        "returncode": 0
+      },
+      {
+        "name": "compile",
+        "command": [
+          "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-tools-20261024-v1\\Scripts\\python.exe",
+          "-m",
+          "compileall",
+          "-q",
+          "buddha",
+          "tests",
+          "agents",
+          "ci_test_shard.py"
+        ],
+        "seconds": 0.41,
+        "returncode": 0
+      }
+    ],
+    "source_count": 238,
+    "all_sources_unchanged_during_checks": true,
+    "scope": "The 1253.483s lifecycle is retained at its exact pre-integration cut, not rerun after this independently checked legacy call-form correction. Current-head full hosted execution remains pending."
+  }
+}

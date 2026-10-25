@@ -42,6 +42,52 @@ not itself establish statistical independence.
 | Task parent and counted child | Supply the current generation procedure and its measured development outcomes. Eligible earlier children can become later task parents within their own arm. |
 | Validity-only child | Shows that a parent can author a usable further child. It contributes costs and eligibility evidence, but never enters the counted descendant pool. |
 
+## Explicit comparison feedback in study v3
+
+A prospective `buddha.improver-study.v3` declaration requires the exact
+`FEEDBACK_COMPARISON_POLICY` from `buddha.improver_study`. It retains v2's
+explicit aggregate funding rules. Existing v1/v2 declarations reject the added
+field and keep their original absolute feedback and reconstruction rules.
+
+For each counted proposal, the controller records the exact selected parent's
+comparison in counted plan v2:
+
+- A common starting screen uses [fixed-study root provenance v8](SOURCE-FEEDBACK.md#a-declared-study-cell-root-belongs-to-its-fixed-improver).
+  It says there is no counted parent in this cell; missing parent differences
+  are null, rather than an invented zero score.
+- A previously admitted child uses comparison provenance v6. It includes that
+  child's full outputs beside the full outputs of its actual measured parent,
+  the original change hypothesis and **child minus parent** differences in
+  official distinct count, utility and recorded task cost. Negative results
+  stay visible. This is a descriptive comparison, not a diagnosis of cause.
+
+The controller derives that edge from one original earlier admitted decision
+in the same start, repetition and arm, made by the same fixed improver. An equal
+source hash, another arm's result or a different screening occasion cannot
+substitute for it. Each arm keeps its complete original failed-generation
+history. Mutation witnesses retain their existing complete absolute feedback;
+they do not receive the counted comparison treatment or become extra chances
+to improve a task score.
+
+This changes what feedback the harness supplies. It does not change either
+frozen improver's Python, guarantee that it uses the information well, change
+NoveltyBench scoring or establish improved performance. Before a live study,
+the actual actor and emitted request still need a compatible full-output
+rehearsal and capacity checks. The recorded frozen C indexing limitation remains
+in [PLAN.md](PLAN.md); forwarding a whole note does not prove its local metric
+index understands the wrapper.
+
+New comparison work distinguishes a reconstruction limit
+(`feedback_reconstruction_limit`, such as excessive nested edge checks) from
+a byte limit (`feedback_capacity`). A stop during started execution retains its
+stage, coverage, costs and original owners. An initial passive reconstruction
+can instead refuse before any new work or observation is created. Neither case
+shortens feedback or silently substitutes another parent.
+
+Only a matching assessment v3 can consume a study v3 declaration. Existing
+selection, final-task protection and descendant-only finalist rules remain in
+force. This library connection supplies no live command or spending allocation.
+
 Each arm's parent pool and duplicate history remain separate. Identical source
 from different arms is measured separately. Complete source/feedback custody,
 original funded owners and the shared trial safeguard are checked between

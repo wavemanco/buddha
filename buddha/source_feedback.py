@@ -36,6 +36,7 @@ from buddha.releases import (
     _root,
     _source_proposal,
 )
+from buddha.wire import _integer
 
 _POLICY = {
     "version": "literal-prefix-v1",
@@ -96,6 +97,12 @@ _ROOT_COMPARISON_POLICY = {
     "version": "complete-outputs-and-declared-search-root-v7",
     "delta_direction": "current_minus_parent",
     "parent_state": "no_counted_parent_in_this_search",
+}
+_STUDY_ROOT_COMPARISON_POLICY = {
+    **_FULL_POLICY,
+    "version": "complete-outputs-and-declared-study-cell-root-v8",
+    "delta_direction": "current_minus_parent",
+    "parent_state": "no_counted_parent_in_this_cell",
 }
 
 
@@ -874,6 +881,50 @@ def _build_failures(
     return _load(raw_base)
 
 
+def _root_comparison_notes(base: dict[str, object], reason: str) -> None:
+    """Wrap complete measured notes without inventing a parent or numeric delta."""
+    provenance, feedback = _object(base["provenance"]), _object(base["feedback"])
+    tasks = TaskSet.from_bytes(_json(base["source"]))
+    feedback_size = len(_bounded_json(feedback | {"records": []}, MAX_FEEDBACK_BYTES))
+    projected_size = 2
+    for index, (value, task_provenance) in enumerate(
+        zip(_list(feedback["records"]), _list(provenance["tasks"]), strict=True)
+    ):
+        row = _object(value)
+        note = {
+            "kind": "saved_native_measurements_and_root_comparison",
+            "measurements": _load(_utf8(row["note"]).encode()),
+            "parent_measurements": None,
+            "comparison": {
+                "status": "unavailable",
+                "reason": reason,
+                "parent_id": None,
+                "current_id": provenance["candidate_id"],
+                "delta_direction": "current_minus_parent",
+                "distinct_delta": None,
+                "utility_delta": None,
+                "recorded_cost_delta_microusd": None,
+            },
+        }
+        raw = _bounded_json(note, MAX_FEEDBACK_BYTES)
+        final_row = row | {"note": raw.decode()}
+        comma = int(index > 0)
+        feedback_size += comma + len(
+            _bounded_json(final_row, MAX_FEEDBACK_BYTES - feedback_size - comma)
+        )
+        projected_size += comma + len(
+            _bounded_json(
+                {
+                    "task": tasks.select([row["task_id"]]).tasks[0].to_record(),
+                    "note": final_row["note"],
+                },
+                MAX_FEEDBACK_BYTES - projected_size - comma,
+            )
+        )
+        row.update(final_row)
+        _object(task_provenance).update(note_sha256=_sha(raw), note_utf8_bytes=len(raw))
+
+
 def _build_root_comparison(
     directory: Path,
     reference: dict[str, object],
@@ -930,45 +981,7 @@ def _build_root_comparison(
             )
             base_format, base_sha256 = provenance["format"], _sha(_json(provenance))
             feedback = _object(base["feedback"])
-            tasks = TaskSet.from_bytes(_json(base["source"]))
-            feedback_size = len(_bounded_json(feedback | {"records": []}, MAX_FEEDBACK_BYTES))
-            projected_size = 2
-            for index, (value, task_provenance) in enumerate(
-                zip(_list(feedback["records"]), _list(provenance["tasks"]), strict=True)
-            ):
-                row = _object(value)
-                note = {
-                    "kind": "saved_native_measurements_and_root_comparison",
-                    "measurements": _load(_utf8(row["note"]).encode()),
-                    "parent_measurements": None,
-                    "comparison": {
-                        "status": "unavailable",
-                        "reason": "no_counted_parent_in_this_search",
-                        "parent_id": None,
-                        "current_id": provenance["candidate_id"],
-                        "delta_direction": "current_minus_parent",
-                        "distinct_delta": None,
-                        "utility_delta": None,
-                        "recorded_cost_delta_microusd": None,
-                    },
-                }
-                raw = _bounded_json(note, MAX_FEEDBACK_BYTES)
-                final_row = row | {"note": raw.decode()}
-                comma = int(index > 0)
-                feedback_size += comma + len(
-                    _bounded_json(final_row, MAX_FEEDBACK_BYTES - feedback_size - comma)
-                )
-                projected_size += comma + len(
-                    _bounded_json(
-                        {
-                            "task": tasks.select([row["task_id"]]).tasks[0].to_record(),
-                            "note": final_row["note"],
-                        },
-                        MAX_FEEDBACK_BYTES - projected_size - comma,
-                    )
-                )
-                row.update(final_row)
-                _object(task_provenance).update(note_sha256=_sha(raw), note_utf8_bytes=len(raw))
+            _root_comparison_notes(base, "no_counted_parent_in_this_search")
             provenance.update(
                 format="buddha.source-screen-feedback.v7",
                 policy=dict(_ROOT_COMPARISON_POLICY),
@@ -979,6 +992,108 @@ def _build_root_comparison(
                 feedback_sha256=_sha(_bounded_json(feedback, MAX_FEEDBACK_BYTES)),
                 claim=(
                     "explicit declared search root; no counted-parent baseline or improvement claim"
+                ),
+            )
+            result = _load(_bounded_json(base, MAX_JSON_BYTES))
+            if len(observation.active) == 1:
+                _finish_comparison(observation)
+            return result
+        finally:
+            observation.active.remove(directory)
+
+
+def _build_study_root_comparison(
+    directory: Path,
+    reference: dict[str, object],
+    comparison: dict[str, object],
+    history: Sequence[dict[str, object]] = (),
+    *,
+    existing: bool = False,
+    improver_agent_sha256: str | None = None,
+) -> dict[str, object]:
+    """A declared common occasion for one fixed study arm, not an inherited search root."""
+    if improver_agent_sha256 is None:
+        raise SourceFeedbackError("study root comparison requires its fixed improver")
+    improver = _digest(improver_agent_sha256)
+    root = _object(
+        _object(comparison, {"study_root"})["study_root"],
+        {"directory", "authorization", "declaration_sha256", "start", "repetition", "arm"},
+    )
+    directory = _destination(directory, existing=existing)
+    scope, authorization = (
+        pipeline._absolute(root["directory"]),
+        pipeline._absolute(root["authorization"]),
+    )
+    checked_root: dict[str, object] = {
+        "directory": str(scope),
+        "authorization": str(authorization),
+        "declaration_sha256": _digest(root["declaration_sha256"]),
+        **{
+            name: _integer(root[name], 0, 7 if name != "arm" else 1)
+            for name in ("start", "repetition", "arm")
+        },
+    }
+    if ".." in scope.parts or ".." in authorization.parts or _json(root) != _json(checked_root):
+        raise SourceFeedbackError("study root comparison requires canonical original coordinates")
+    with _comparison_observation() as observation:
+        if directory in observation.active:
+            raise SourceFeedbackError("comparison ancestry repeats a packet")
+        if len(observation.active) >= 16:
+            raise SourceFeedbackReconstructionLimit("comparison ancestry exceeds depth 16")
+        observation.active.add(directory)
+        try:
+            capture = _Capture(scope)
+            observation.checks.append(capture.finish)
+            base = (
+                _build_failures(
+                    directory,
+                    reference,
+                    history,
+                    existing=existing,
+                    improver_agent_sha256=improver,
+                    sink=capture,
+                )
+                if history
+                else _build(directory, reference, existing=existing, sink=capture)
+            )
+            provenance = _object(base["provenance"])
+            if (
+                pipeline._absolute(_object(provenance["reference"])["authorization"])
+                != authorization
+            ):
+                raise SourceFeedbackError(
+                    "study root comparison changes its original shared authority"
+                )
+            from buddha import improver_study
+
+            if Path(improver_study.__file__).absolute() != Path(__file__).with_name(
+                "improver_study.py"
+            ):
+                raise SourceFeedbackError("a different improver study inspector was imported")
+            declaration = improver_study._read_comparison_root(
+                checked_root,
+                reference,
+                _digest(provenance["candidate_id"]),
+                improver,
+                failure_history=cast(
+                    list[dict[str, object]], provenance.get("failure_history", [])
+                ),
+                sink=capture,
+            )
+            base_format, base_sha256 = provenance["format"], _sha(_json(provenance))
+            _root_comparison_notes(base, "no_counted_parent_in_this_cell")
+            provenance.update(
+                format="buddha.source-screen-feedback.v8",
+                policy=dict(_STUDY_ROOT_COMPARISON_POLICY),
+                base_format=base_format,
+                base_provenance_sha256=base_sha256,
+                comparison={"study_root": checked_root},
+                root_declaration=declaration,
+                improver_agent_sha256=improver,
+                feedback_sha256=_sha(_bounded_json(base["feedback"], MAX_FEEDBACK_BYTES)),
+                claim=(
+                    "explicit declared study cell root; "
+                    "no counted-parent baseline or improvement claim"
                 ),
             )
             result = _load(_bounded_json(base, MAX_JSON_BYTES))
@@ -1153,18 +1268,28 @@ def build_source_feedback(
     failure_history: Sequence[dict[str, object]] = (),
     improver_agent_sha256: str | None = None,
     comparison: dict[str, object] | None = None,
+    existing: bool = False,
 ) -> dict[str, object]:
     """Build detached prospective records, without writing or creating owners."""
     try:
+        if type(existing) is not bool:
+            raise SourceFeedbackError("feedback destination mode requires a literal boolean")
         if type(failure_history) not in {list, tuple}:
             raise SourceFeedbackError("failure history requires an ordered literal sequence")
         if comparison is not None:
-            builder = _build_root_comparison if "root" in _object(comparison) else _build_comparison
+            builder = (
+                _build_root_comparison
+                if "root" in _object(comparison)
+                else _build_study_root_comparison
+                if "study_root" in comparison
+                else _build_comparison
+            )
             return builder(
                 directory,
                 reference,
                 comparison,
                 failure_history,
+                existing=existing,
                 improver_agent_sha256=improver_agent_sha256,
             )
         return (
@@ -1172,10 +1297,11 @@ def build_source_feedback(
                 directory,
                 reference,
                 failure_history,
+                existing=existing,
                 improver_agent_sha256=improver_agent_sha256,
             )
             if failure_history or improver_agent_sha256 is not None
-            else _build(directory, reference)
+            else _build(directory, reference, existing=existing)
         )
     except (ValueError, TypeError, KeyError, OSError, RecursionError, OverflowError) as error:
         if isinstance(error, SourceFeedbackError):
@@ -1210,7 +1336,7 @@ def inspect_source_feedback(
         )
         original = _load(provenance_raw)
         version = original.get("format")
-        if version not in {"buddha.source-screen-feedback.v" + str(i) for i in range(1, 8)}:
+        if version not in {"buddha.source-screen-feedback.v" + str(i) for i in range(1, 9)}:
             raise SourceFeedbackError("unsupported saved feedback derivation")
         full_answers = version in {
             "buddha.source-screen-feedback.v3",
@@ -1218,9 +1344,14 @@ def inspect_source_feedback(
             "buddha.source-screen-feedback.v5",
             "buddha.source-screen-feedback.v6",
             "buddha.source-screen-feedback.v7",
+            "buddha.source-screen-feedback.v8",
         }
         reference = _object(original["reference"])
-        if version in {"buddha.source-screen-feedback.v6", "buddha.source-screen-feedback.v7"}:
+        if version in {
+            "buddha.source-screen-feedback.v6",
+            "buddha.source-screen-feedback.v7",
+            "buddha.source-screen-feedback.v8",
+        }:
             history = cast(list[dict[str, object]], _list(original.get("failure_history", [])))
             actor = original.get("improver_agent_sha256")
             if version == "buddha.source-screen-feedback.v7" and actor is not None:
@@ -1237,6 +1368,8 @@ def inspect_source_feedback(
             builder = (
                 _build_root_comparison
                 if version == "buddha.source-screen-feedback.v7"
+                else _build_study_root_comparison
+                if version == "buddha.source-screen-feedback.v8"
                 else _build_comparison
             )
             bundle = builder(
@@ -1342,8 +1475,16 @@ def _write_source_feedback(
             references.extend(_object(edge[name]) for name in ("parent", "proposal", "screen"))
         root_scope = None
         if "comparison" in provenance:
-            if provenance["format"] == "buddha.source-screen-feedback.v7":
-                root = _object(_object(provenance["comparison"], {"root"})["root"])
+            if provenance["format"] in {
+                "buddha.source-screen-feedback.v7",
+                "buddha.source-screen-feedback.v8",
+            }:
+                name = (
+                    "study_root"
+                    if provenance["format"] == "buddha.source-screen-feedback.v8"
+                    else "root"
+                )
+                root = _object(_object(provenance["comparison"], {name})[name])
                 root_scope = pipeline._absolute(root["directory"])
                 if root["authorization"] != references[0]["authorization"]:
                     raise SourceFeedbackError("root comparison changes its original grant")

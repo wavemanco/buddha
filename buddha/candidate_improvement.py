@@ -208,7 +208,11 @@ def _definition(
         raise CandidateImprovementError("root comparison supports inherited search only")
     if (
         provenance_record["format"]
-        in {"buddha.source-screen-feedback.v5", "buddha.source-screen-feedback.v6"}
+        in {
+            "buddha.source-screen-feedback.v5",
+            "buddha.source-screen-feedback.v6",
+            "buddha.source-screen-feedback.v8",
+        }
         and "improver_agent_sha256" in provenance_record
     ) and (
         not detached
