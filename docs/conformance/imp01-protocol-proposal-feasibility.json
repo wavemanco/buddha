@@ -1,0 +1,264 @@
+{
+  "format": "buddha.imp01-protocol-proposal-feasibility.v1",
+  "date": "2026-10-25",
+  "status": "unfunded_population_decision_pending",
+  "runtime_manifest": false,
+  "proposal": "../IMPROVER-PROTOCOL-PROPOSAL.md",
+  "proposed_treatment": "Exact original P and C as fixed improvers; both exact originals also used as common starting task agents. C index-only limitation retained. No C replacement or new scoring rule.",
+  "source_sha256": {
+    "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-proposal-v3\\inputs\\split.json": "8f12f6989a450bc247a5932c2478f270e79ecb5b489a904154686f21ceacd0b1",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-proposal-v3\\proposal.json": "9e12c35a4a585de39418c651f63e6e2fb251e19c44e2c9af8701395826f2cf97",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-proposal-v3\\components\\source-agent\\candidate.py": "77cfa68f6b3c6996fd503e1ce6f7a964eb57abdb8bde98f6761de5f6e298ff4f",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\agent\\candidate.py": "4196cd29ffa76c6959e6f678a8286b1fde5b56e6a34a97dcf68787e1f22b3a43",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-proposal-v3\\components\\host\\profiles.json": "c2068ec8dccc0662f8d8a6ebe8a966a01fc6236447bed219e0befa2a80bed9f2",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\references\\noveltybench-conformance\\64a23be6b18ec1dacc298830aab276061b6e143c\\data\\wildchat-1k.jsonl": "8534288089508df3f413c1151a58d5fa5bda9d8f8385ae2815384d4e310a54ca"
+  },
+  "proposed_primary_grid": {
+    "starts": 2,
+    "development_repetitions": 2,
+    "opportunities_per_arm": 2,
+    "development_tasks": 3,
+    "proposed_final_tasks": 26,
+    "sealed_repetitions": 1,
+    "conditions": 4,
+    "arm_cells": 8,
+    "counted_opportunities": 16,
+    "full_development_task_evaluations_max": 60,
+    "validity_generation_tasksets_max": 20,
+    "proposal_workers_max": 36,
+    "development_answer_positions_max": 800,
+    "final_role_slots_max": 12,
+    "final_task_evaluations_max": 312,
+    "combined_answer_positions_max": 3920
+  },
+  "resource_variant_not_adopted": {
+    "starts": 2,
+    "development_repetitions": 1,
+    "opportunities_per_arm": 2,
+    "development_tasks": 3,
+    "proposed_final_tasks": 26,
+    "sealed_repetitions": 1,
+    "conditions": 2,
+    "arm_cells": 4,
+    "counted_opportunities": 8,
+    "full_development_task_evaluations_max": 30,
+    "validity_generation_tasksets_max": 10,
+    "proposal_workers_max": 18,
+    "development_answer_positions_max": 400,
+    "final_role_slots_max": 6,
+    "final_task_evaluations_max": 156,
+    "combined_answer_positions_max": 1960
+  },
+  "proposed_selection": {
+    "method": "archive",
+    "max_active": 8,
+    "seed": 7,
+    "finalist_iteration": 2
+  },
+  "proposed_statistics": {
+    "method": "fixed_panel_family_hoeffding_shared_starter.v1",
+    "alpha_total": {
+      "numerator": 1,
+      "denominator": 20
+    },
+    "each_of_six_tails": {
+      "numerator": 1,
+      "denominator": 120
+    },
+    "primary_metric": "utility",
+    "minimum_gain": 0,
+    "other_metric_permitted_loss": 0,
+    "adopted": false
+  },
+  "curated_panel_feasibility": {
+    "ordered_ids": [
+      "curated-11",
+      "curated-12",
+      "curated-14",
+      "curated-2",
+      "curated-25",
+      "curated-27",
+      "curated-29",
+      "curated-37",
+      "curated-40",
+      "curated-52",
+      "curated-53",
+      "curated-55",
+      "curated-56",
+      "curated-6",
+      "curated-63",
+      "curated-66",
+      "curated-69",
+      "curated-72",
+      "curated-74",
+      "curated-80",
+      "curated-81",
+      "curated-87",
+      "curated-88",
+      "curated-89",
+      "curated-90",
+      "curated-93"
+    ],
+    "family_counts": {
+      "curated-family-002-rural-kansas-easter-romcom-plot": 1,
+      "curated-family-006-lemur-lightbulb-fable": 1,
+      "curated-family-011-short-humorous-joke": 2,
+      "curated-family-014-one-sentence-new-year-greeting": 1,
+      "curated-family-025-indian-origin-real-person": 1,
+      "curated-family-037-worst-graduate-student-aspect": 1,
+      "curated-family-040-hardest-graduate-program-admission": 1,
+      "curated-family-053-personally-challenging-problem-type": 1,
+      "curated-family-055-best-icebreaking-question": 1,
+      "curated-family-063-three-influential-nineteenth-century-people": 1,
+      "curated-family-066-greek-deity-example": 1,
+      "curated-family-069-animal-example-selection": 2,
+      "curated-family-072-python-resnet-framework": 1,
+      "curated-family-087-bounded-random-integer-selection": 3,
+      "curated-family-089-random-valid-us-zip": 1,
+      "reconciled-book-title-selection": 4,
+      "reconciled-gift-recommendations": 3
+    },
+    "squared_weight_sum": {
+      "numerator": 27,
+      "denominator": 338
+    },
+    "alpha_total": {
+      "numerator": 1,
+      "denominator": 20
+    },
+    "each_tail": {
+      "numerator": 1,
+      "denominator": 120
+    },
+    "independent_formula_approximation": {
+      "utility": 8.745659178728747,
+      "distinct": 7.871093260855873
+    },
+    "public_analyzer_run": false,
+    "custody_eligibility_attested": false
+  },
+  "derived_broad_ceiling_not_expected_bill_or_required_v3_funding": {
+    "microusd": {
+      "development": 5900000060,
+      "final": 23400000312
+    },
+    "calls": {
+      "development": 31848,
+      "final": 163800
+    }
+  },
+  "twenty_six_equal_independent_families_formula_only": {
+    "utility": 6.068513785092845,
+    "distinct": 5.46166240658356
+  },
+  "population_choice": {
+    "recommended": "Prepare a wholly official WildChat1.1 population under a new truthful family/split/exposure/custody record, not asserted eligible here.",
+    "alternative": "Remain focused on known-visible Curated diagnostic work with explicitly weaker scope; no unseen claim or protected sealed-route bypass.",
+    "known_curated_visibility": "Two development source reviewers read all100 original prompts. Known outcome/feedback exposure13 IDs and familyclosure22 are a different, smaller disclosure class.",
+    "known_wildchat_visibility": "Original bytes acquired/sealed and published summaries/counts inspected; no per-ID exhaustive visibility ledger or eligible custody established by the bounded review.",
+    "existing_interface": "One complete original dataset; current improver assessment requires same TaskSet source bytes throughout. All-WildChat is configuration-compatible in principle; Curated-development/WildChat-final is not supported and no concat/union source is invented.",
+    "public_training_contamination": "unknown",
+    "user_attestation_requested": false
+  },
+  "capacity_gap": {
+    "study_v3_proposal_capacity_field": false,
+    "study_v3_all_original_proposal_before_child_capacity_barrier": false,
+    "existing_guards": "Request/byte/callback/usage/accounting/worker bounds remain.",
+    "available_reuse": "Existing original-call capacity assessor; explicitly choose/check route and connect existing barrier for both counted and witness owners if adopted. No new framework prescribed.",
+    "prior_c_observation": "Root and own-edge request forwarding only, not actual future capacities or original P behavior."
+  },
+  "historical_configuration_snapshot": {
+    "generation": {
+      "model": "gpt-5.6-luna",
+      "output_tokens": 4096,
+      "callbacks_or_attempts": 12
+    },
+    "proposal": {
+      "model": "gpt-6.1-sol",
+      "output_tokens": 32768,
+      "callbacks_or_attempts": 3
+    },
+    "native": {
+      "partition": "gpt-5.6-luna",
+      "quality": "claude-opus-5",
+      "fallback": "claude-sonnet-5",
+      "patience": 0.8,
+      "concurrency": 2,
+      "max_calls_per_model_stage": 256
+    },
+    "input_financial_ceiling_tokens": {
+      "openai": 1050000,
+      "anthropic": 1000000
+    },
+    "prices_verified_this_slice": false,
+    "account_profiles_reverified_this_slice": false,
+    "instructions": "Retain original recorded compliance/generation/proposal instructions pending prospective binding. Exact source proposal/profile hashes above; no historical settings changed."
+  },
+  "budget": {
+    "new_allocation_requested": false,
+    "new_allocation_approved": false,
+    "proposed_dollar_or_attempt_caps": null,
+    "meaning": "Adopt actual population and check capacities/runtime/prices before funding. Nominal sums are not expected bills; no cheap-task extrapolation accepted as a final-task budget."
+  },
+  "review_arrangements": {
+    "target_method": "IMPROVER-TARGET-REPAIR.md descriptivev1, all counted opportunities including failed/unattempted slots",
+    "proposed_reviewers": 2,
+    "reviewer_identities_types_and_costs_frozen": false,
+    "stage_A_before_B_required": true,
+    "independent_human_sample_arranged": false,
+    "people_contacted": false
+  },
+  "validation": {
+    "application_and_candidate_execution": false,
+    "model_provider_calls": 0,
+    "real_keys_used": false,
+    "application_code_changed": false,
+    "trusted_python_files_compared_unchanged": 239,
+    "new_full_suite_or_public_analyzer_run": false,
+    "source_arithmetic_evidence": [
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-protocol-feasibility-check-v1.json",
+        "sha256": "20a9ba1a15bb4dc55289e5eb9dc9cea0d43d108db92543c6b2359fcd1ea3b57e",
+        "bytes": 4315
+      },
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-protocol-feasibility-full-grid-v1.json",
+        "sha256": "ba0a45290c80899d60c2d12f3afe1c78057876fed95601cc6d8da2c6df4f4c9b",
+        "bytes": 1768
+      },
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\check-imp01-protocol-feasibility-v1.py",
+        "sha256": "a9a4810ad00b5fe79a6e8738eb274a760d7957d3988b1b1e6e9f51b826ccc67b",
+        "bytes": 3612
+      }
+    ],
+    "inherited_quality_receipt": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\improver-v3-sealed-quality-v1.json",
+      "sha256": "d5494a3edd5e032d469d685f8f8e2c26654c9fd761e05f1715607f6591c9dcf0",
+      "bytes": 28115
+    }
+  },
+  "code_evidence": {
+    "buddha/improver_study.py": "1b07734c85deb5a2458c582a148fe2d5e367ddd137006bb976bd4b125f39b713",
+    "buddha/improver_assessment.py": "2ecea39dd103ebc446f67cf8049ee8fb1e860273ece731947c8c73fc18eaf308",
+    "buddha/improver_analysis.py": "bd8804e7e9bb2a83398aaa4cfcc3d98491eb517916e80c74a1e9e556d469587e",
+    "buddha/validation_study.py": "0e1168fb9174d1f10525a8322cf5ea8d27054836816feef288137b49c0fbd4f4",
+    "buddha/answers.py": "be860546b2692ea4a710d93855f487dd49d9c8e28eb3f2ec757df697cefb8d0b",
+    "buddha/releases.py": "2285f5417be9caba5c8aa675e417dcf7ce0310de77dbfd290ad76bc76ec68c1a",
+    "buddha/source_capacity.py": "4e0269eb1a734d7b233762c90f139f600ae0e4aee67fe9a23a11f1a40a8565de",
+    "buddha/source_search.py": "7b679374af7cfed723664cb5c582e0668f6c110ec7c650181fd0e40348c5aa0a"
+  },
+  "limits": [
+    "This is a decision-ready proposal, not an adopted prospective trial; exact WildChat tasks, families and custody are deliberately unset.",
+    "Curated26 are not certified unseen; new process naming or missing exposure hits does not establish invisibility.",
+    "No actual future-grid runtime, vendor capacity, final-task cost, statistical power, source effectiveness or human-quality claim.",
+    "The original two-gate plan, frozen historical runs and official benchmark are unchanged."
+  ],
+  "independent_read_only_review": {
+    "contract_review": "Counts/radii/source roles/exposure distinctions/single-source support and PLAN137 limits checked; no blockers.",
+    "resource_review": "Original P/C and C-index limit, model/callback snapshot, nominal counts/caps and missing capacity barrier checked; no blockers.",
+    "reviewed_markdown_sha256": "4a83fa370970255257360ff1157a2d831c76f34dea721530cfb544a843881c1e",
+    "reviewed_record_sha256": "9eb21a23ae9134f9753bf82d04bec2dbfb0333ebc81ff77d1ab8a8dd31495ba2",
+    "later_editorial_clarification": "Add the already-correct JSON numerical method tag and existing assumptions-guide link to Markdown; no proposed parameter changes."
+  }
+}

@@ -1,0 +1,180 @@
+# Proposed matched P/C improver experiment
+
+October 25, 2026. **Unfunded proposal, not a frozen study or a launch guide.**
+[PLAN.md](PLAN.md) remains the only roadmap. The [checked arithmetic and source
+record](conformance/imp01-protocol-proposal-feasibility.json) supports this proposal;
+it does not establish scientific eligibility, live readiness or a spending cap.
+
+## What this would answer
+
+Does the original evolved improver C produce more useful, distinctive descendants
+than the original improver P when both receive the same starting agents, complete
+development feedback, opportunities and resource limits? This studies Buddha's
+improvement procedure. It does not retest or modify NoveltyBench's evaluator.
+
+P and C stay frozen. Each may change the task agent it is improving, but a new
+child never replaces the fixed experimental improver. Official NoveltyBench 1.1
+partitioning and utility scoring remain the yardstick. Keep negative results,
+invalid children, repeated answers, failed witnesses and missing outcomes.
+A negative or inconclusive result is a valid experiment, not a failed milestone.
+
+## Original treatments and proposed conditions
+
+| Item | Proposal |
+| --- | --- |
+| Initial improver P | Original 13,455-byte Python file; SHA256 `77cfa68f6b3c6996fd503e1ce6f7a964eb57abdb8bde98f6761de5f6e298ff4f` |
+| Evolved improver C | Original 13,084-byte Python file; SHA256 `4196cd29ffa76c6959e6f678a8286b1fde5b56e6a34a97dcf68787e1f22b3a43` |
+| Common starting task agents | The same original P and C bundles, each supplied to both improvers |
+| Development | Three tasks; two repeated occasions per start; two counted opportunities per arm and occasion |
+| Feedback | Explicit study v3 comparison policy; full literal answers, actual-parent deltas, null common roots and retained failed-child history; witnesses retain absolute notes |
+| Selection | Existing archive method, `max_active=8`, selection seed 7, `finalist_iteration=2`; select only admitted descendants, never a replacement starter |
+| Final | Proposed 26 tasks, one answer-set occasion per frozen role/task; fresh starter plus initial/evolved descendants for each condition |
+| Execution | Existing isolated source worker and unchanged official native evaluator; every callback and failed physical attempt remains accounted |
+
+The exact original files remain in the closed current-source experiment; their
+paths and hashes are in the linked record. C's convenience index reads only the
+task ID from the new nested notes. Its complete original notes still enter the
+emitted model request, as the [actual isolated C check](conformance/imp01-comparison-consumer-delivery.json)
+shows. Retain that treatment limitation. Repairing C would create a different
+treatment, not a correction to this experiment.
+
+Two repeated occasions are proposed to observe stochastic variation; they are
+not independent task families or controlled provider seeds. Selection seed 7
+controls the existing archive choice. This finite population does not establish
+performance across arbitrary starts, search seeds or future searches.
+
+## Choose the task population before declaring eligibility
+
+**Recommended direction: prepare an entirely official WildChat 1.1 population.**
+This preserves the official benchmark and uses the existing single-source
+interface. Its prior access and exposure still need a truthful custody record;
+local availability does not establish that its prompts are unseen.
+
+| Candidate | What is known | Consequence |
+| --- | --- | --- |
+| Existing Curated source | Ordered diagnostic development tasks are curated-0, curated-47, curated-97. The existing final partition has 26 tasks in 17 families. All 100 Curated prompt texts were previously read by two development source reviewers; known measured/feedback exposure is a separate, smaller population. | Do not declare those 26 unseen merely because they have no recorded outcome exposure. Current unknown custody prevents using the sealed route as scientific evidence. An explicitly exposed diagnostic comparison would have weaker scope. |
+| Entirely official WildChat source | The original wildchat-1k.jsonl is sealed at upstream 64a23be6b18ec1dacc298830aab276061b6e143c; its 645,466 bytes hash to 8534288089508df3f413c1151a58d5fa5bda9d8f8385ae2815384d4e310a54ca. Existing records identify 1,000 unique IDs. Prior research sealed its bytes and read published summaries/counts. No exhaustive per-ID exposure record or eligible family/split custody was established by this review. | Prepare a new prospective family map, three development IDs, 26 final IDs and exposure record without disclosing final prompts/results to optimization decision makers. Preserve original task text and typed IDs. Exact IDs are deliberately not adopted here. |
+
+The current assessment requires the **same complete original task source** for
+development and final assessment, and every assigned final member must be used.
+Keeping Curated development while using a separate WildChat final population is
+not supported by this interface. Do not concatenate two files and label the
+result an official combined dataset. Using WildChat for both phases changes
+configuration and experimental population, not the scoring algorithm.
+
+A custodian must document actual visibility, family separation and the eligible
+channel before freezing final IDs. Prior operator/reviewer visibility and
+model-training uncertainty stay explicit. A new process name is not evidence
+that exposure never happened. [DESIGN section 7](DESIGN.md)
+and the [custody checks](IMPROVER-ASSESSMENT.md#what-is-fixed-before-work-starts)
+remain binding. This proposal requests a population choice, not an assertion
+from the user that historical exposure can be erased.
+
+## Planned workload and spending boundary
+
+| Maximum planned work | Two repeated occasions | Smaller one-occasion candidate |
+| --- | ---: | ---: |
+| Shared starting conditions |4|2|
+| Counted proposal opportunities |16|8|
+| Full development task assessments |60|30|
+| First-task validity-only generations |20|10|
+| Proposal workers, including witnesses |36|18|
+| Development answer positions |800|400|
+| Final source-role slots |12|6|
+| Final task assessments |312|156|
+| Total answer positions |3920|1960|
+
+Counts assume three development tasks, 26 final tasks and ten answers per task.
+Conditional downstream work may be skipped after a failure; the planned
+denominator never shrinks. Identical source bytes in different roles remain
+separate roles. The smaller candidate trades away repeated occasions and would
+need separate prospective adoption; it is not a quietly shortened completed run.
+
+Reuse the recorded source configuration as the starting point: generation uses
+gpt-5.6-luna with 4,096 output tokens and 12 callbacks/attempts; proposals use
+gpt-6.1-sol with 32,768 output tokens and three callbacks/attempts. Partitioning
+uses gpt-5.6-luna; quality uses claude-opus-5 with the official claude-sonnet-5
+fallback, patience 0.8 and concurrency 2. The linked record retains exact profile
+hashes, historical bounds and instructions. Fresh source/release identities,
+prices/account checks and feasible limits must be bound before any live handoff.
+
+**No new budget is requested or approved here.** Old per-owner $25 ceilings add
+to enormous theoretical maxima; these are not expected bills. Existing study v3
+supports smaller positive development/final aggregate caps while preserving
+individual ceilings. Choose the actual caps and attempt allocations after the
+population, request bounds and runtime are checked. Do not lower financial input
+ceilings merely to make the sum attractive. Equal nominal opportunities and
+per-arm limits do not guarantee equal consumed dollars when treatment behavior
+differs; report both. A shared-cap stop can leave unequal coverage and must be
+reported as partial with stage, reason, full denominator, costs and holds.
+
+Historical easy-task costs are a poor estimate for unknown final tasks: binary
+choices, collapsed integer answers and fewer distinct classes reduced judging
+work. The new bounded six-cell software check took 1,197.903 seconds; earlier local
+lifecycle checks took 20–41 minutes. These are measured software-check times, not
+an actual-grid runtime estimate or a promise of linear scaling.
+
+## Capacity, uncertainty and review
+
+Both actual P and C must be checked through isolated request construction at the
+chosen configuration. The completed C fixture proves literal forwarding only.
+It does not certify the actual future requests, returned replacement length or
+model attention. Preserve full text; stop on capacity failure rather than
+truncating answers or feedback.
+
+There is a specific integration limit: study v3 does **not** currently carry the
+source-handoff v4 proposal-capacity policy or its before-child capacity barrier.
+Existing byte, token-usage, request and callback guards still apply. Reuse the
+existing capacity assessor and original-call evidence for the adopted route;
+if every future counted/witness proposal needs that barrier, connect those
+existing helpers in a small explicit slice before live use. Do not describe the
+handoff feature as already enforced by this study.
+
+Proposed numerical settings use the existing
+`fixed_panel_family_hoeffding_shared_starter.v1` method
+([meaning and assumptions](IMPROVER-ANALYSIS.md#what-the-uncertainty-calculation-means)),
+alpha 0.05, six equal positive tail allowances 1/120, utility as primary metric,
+minimum gain 0 and permitted distinct-count loss 0. Both official metrics and all
+three contrasts stay visible. These settings are proposed, not silently adopted.
+
+For the reserved Curated 26, equal task weighting gives squared family weights
+27/338. The independent formula check yields conservative radii 8.745659 utility
+and 7.871093 distinct count. With those margins, rule satisfaction would need an
+evolved-minus-initial mean difference above 8.745659 utility and at least 7.871093
+distinct answers. Even 26 equally weighted independent families would give radii
+6.068514 and5.461662. Repeating starts/generations does not shrink this method's
+family radius. It is poorly sensitive to modest effects; an inconclusive result
+would not establish absence of an effect. Family labels do not prove independent
+blocks. WildChat's actual calculation must use its adopted families and weights,
+not reuse the Curated figures. These are formula checks, not a power analysis
+or a fresh public-analyzer observation.
+
+Adopt [target-repair method v1](IMPROVER-TARGET-REPAIR.md) over every counted
+opportunity, including rejected/unattempted slots. Two separately initialized
+outcome-naive review contexts are proposed; their identities, human/model type,
+model IDs where applicable, costs and access arrangements must be fixed before
+outputs. Stage A fixes target/parent judgments before Stage B reveals complete
+child sets. Preserve uncertainty, disagreement and unavailable evidence; no
+majority-vote repair or official rescore. Review cost outside the execution
+ledger must be reported separately, not hidden in a budget-efficiency claim.
+
+EVAL-02 still requires the independent human sample and matched final/transfer
+evidence. No human reviewers have been recruited or contacted; sample/reviewer
+arrangements remain to be fixed. This finite comparison and its numerical rule
+do not by themselves establish general usefulness, generalization or that the
+improver improves indefinitely.
+
+## Readiness and the immediate decision
+
+The completed [v3 connection check](conformance/imp01-v3-sealed-rehearsal-delivery.json)
+remains useful engineering evidence. This proposal has not created a task split,
+release selection, eligibility attestation, study, authority, owner or launch
+command. No paid request or selected-source execution is performed by it.
+
+The immediate decision is whether to prepare the wholly official WildChat
+population, or keep work focused on the known-visible Curated diagnostic panel
+with its explicitly weaker scientific scope. After that choice, freeze the
+actual source/tasks/custody, compatibility/capacity route, resources/runtime,
+statistical settings and review arrangements before requesting a new live
+allocation. This is experiment preparation under the existing IMP-01 gate;
+the DGM/Harness2 cross-check adds no redesign or new gate.
