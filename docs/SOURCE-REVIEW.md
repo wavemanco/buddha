@@ -74,6 +74,15 @@ protocol before execution; this implementation invents no sample-size threshold.
 
 ## Export files for reviewers
 
+The [current WildChat preparation](IMPROVER-WILDCHAT-CONFIGURATION.md#prospective-review-controls)
+now binds a proposed 12-set human sample, its full-text instructions, materials
+and the four existing review helpers before any trial owner. This is preparation
+only: no pack, person, roster or judgment exists. The human rubric supplements
+the official equivalence rule; it does not replace numeric utility scoring.
+The separate [target-repair review](IMPROVER-TARGET-REPAIR.md) concerns development
+parent/child evidence and uses its own staged worksheets, not this selected-final-set
+export. Native model forms do not count as independent human judgments.
+
 The operator command checks the original saved evaluation, then writes a separate
 review folder. Before trial owners are prepared, also pin the current
 `buddha/source_review_handoff.py` and `buddha/source_review_results.py` in the

@@ -214,13 +214,10 @@ The largest native request reservation is $11.44. No full-grid runtime or
 completion-cost prediction follows from the small supplied-worker tests or
 read-only Docker/image metadata checks.
 
-The bounded independent-human recommendation is 12 sets/up to 120 full answers.
-The separate all-opportunity target review needs up to 32 staged worksheets.
-Sampling/materials/helper pins and actual review arrangements still need their
-prospective freeze. No person, model identity, session or completed judgment is
-invented. In particular, the exact target-review model/access/cost route is
-unresolved; the earlier promise to arrange it before study outputs still holds.
-The numerical settings also remain proposed until the study is adopted.
+At that draft cut, the bounded human sample and separate target-review route
+still needed their prospective controls. The later preparation below supplies
+those candidate controls without inventing a person, session or judgment.
+Numerical settings remain proposed until the study is adopted.
 
 No application Python changed in this refresh. All 301 tracked Python files,
 451 captured original evidence files and 87 earlier configuration files pass
@@ -228,12 +225,56 @@ byte-preservation checks. No old paid database was queried, selected agent
 executed, provider called, key requested, grant/owner created or old run changed.
 Hosted checks and the later funded-handoff check remain separate requirements.
 
+## Prospective review controls
+
+A separate 24-file additive preparation now binds the proposed human sample and target
+review route before any owners exist. The [delivery record](conformance/imp01-review-controls-delivery.json)
+pins the evidence. It preserves the earlier 98-file bundle and every original
+agent, task, profile and numerical/resource setting. A small study derivative
+changes only the absolute trusted producer location to the current checkout,
+with identical producer bytes. The first location refusal and its partial
+preparation remain saved; no guard was weakened and no old file was overwritten.
+
+The human plan uses the existing `buddha.source-review-plan.v1` format: 12 whole
+sets, four tasks in four families and up to 120 full answer positions. It covers
+four conditions and three source roles, with the disclosed task/condition
+confounding. The literal official equivalence rule and supplemental human rubric
+are unchanged, in a new wrapper bound to the actual WildChat release and the
+new study-specific protocol. The old policy-comparison protocol is not adopted.
+
+The three human data files, four installed review helpers and native target-route
+file add eight prospective custody references, bringing the total to 68. The
+helper union is now 55. Existing material/selector checks accept all 12 sets
+and 120 positions; the assessment binds 121 controls and the fresh handoff 129
+inputs. Both future file-capacity projections pass with 132 bindings, including
+three future paths, for the unchanged maximum of 312 final cells. Eight negative
+metadata probes refuse their malformed inputs. Future
+launch/approval/keyed-review paths still represent capacity placeholders only;
+they are not actual approvals or reviews. Preparing these controls creates no
+review pack, reviewer round, roster or study output.
+
+The [current proposal](IMPROVER-PROTOCOL-PROPOSAL.md#capacity-uncertainty-and-review)
+specifies two native model-review streams, with a fresh instance per stream and
+counted opportunity, up to 32 staged worksheets. It explicitly amends the earlier
+identity timing before outputs: fixed roles/model/workload/method/cost scope now,
+actual instance IDs and exposure records before material. The required funding
+decision also names the proposed Codex model/effort. Actual assignment provenance
+is kept separate from unexposed backend details; full text, Stage A-before-B,
+missing evidence and no favorable reroll remain required. These model reviews
+do not satisfy the separate human requirement.
+
+Native usage is unpriced outside the $150 API execution cap, not zero or
+included in it. The route creates no separate reviewer API allowance. Human
+availability remains unconfirmed. Protocol adoption, named reviewer setup,
+financial approval, hosted verification and the actual funded handoff remain
+separate from these configuration checks, which make no provider request.
+
 ## What remains before a live run
 
 Preserve the original-call observation mode and the checked resource/fairness
-limits. Resolve and freeze the staged target-review route and actual sampling
-materials, explicitly adopt the numerical/protocol settings, and present the
-concrete separate allocation. Then verify actual funding, accounts, review and
+limits. Obtain the combined decision on the proposed allocation and named
+native reviewer setup, then adopt the pinned numerical/protocol settings before
+owners or outputs. Verify actual funding, accounts, review and
 current executing-code checks before supplying the live command. No human
 reviewers have been invented or contacted. A user-operated handoff must use the matched study/assessment route;
 the old single-source launcher and closed allowances cannot fund it.
