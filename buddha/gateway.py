@@ -209,9 +209,38 @@ def _profile_headers(profile: dict[str, object], provider: str) -> None:
         _header_value(account_value)
 
 
+def _request_fields(provider: str) -> set[str]:
+    return {"model", "messages", "max_tokens", "temperature", "top_p", "service_tier"} | (
+        {"max_completion_tokens", "response_format", "reasoning_effort", "stream", "n", "seed"}
+        if provider == "openai"
+        else {"system", "thinking", "output_config", "stop_sequences"}
+    )
+
+
+def _request_settings(value: object, provider: str) -> dict[str, object]:
+    settings = _object(value, {"required", "forbidden"})
+    required = _object(settings["required"])
+    forbidden = settings["forbidden"]
+    if (
+        type(forbidden) is not list
+        or any(type(name) is not str for name in forbidden)
+        or len(forbidden) != len(set(forbidden))
+        or (set(required) | set(forbidden)) - _request_fields(provider)
+        or set(required) & set(forbidden)
+        or {"max_tokens", "max_completion_tokens"} <= set(required)
+    ):
+        raise GatewayError("unsupported or conflicting profile request settings")
+    _json(required)
+    return settings
+
+
 def _profile_file(value: object) -> dict[str, object]:
     record = _object(value, {"format", "profiles"})
-    if _text(record["format"]) not in {"buddha.gateway-profiles.v1", "buddha.gateway-profiles.v2"}:
+    if _text(record["format"]) not in {
+        "buddha.gateway-profiles.v1",
+        "buddha.gateway-profiles.v2",
+        "buddha.gateway-profiles.v3",
+    }:
         raise GatewayError("unsupported gateway profile file")
     profiles = _object(record["profiles"])
     if not 1 <= len(profiles) <= 128:
@@ -225,8 +254,10 @@ def _profile_file(value: object) -> dict[str, object]:
             "response_tiers",
             "allow_omitted_tier",
         }
-        if record["format"] == "buddha.gateway-profiles.v2":
+        if record["format"] != "buddha.gateway-profiles.v1":
             fields |= {"headers", "account_headers"}
+        if record["format"] == "buddha.gateway-profiles.v3":
+            fields.add("request_settings")
         profile = _object(raw, fields)
         spec = _spec(profile["spec"])
         if spec.provider not in {"openai", "anthropic"}:
@@ -238,6 +269,11 @@ def _profile_file(value: object) -> dict[str, object]:
             raise GatewayError("omitted-tier permission must be boolean")
         if "headers" in profile:
             _profile_headers(profile, spec.provider)
+        if "request_settings" in profile:
+            settings = _request_settings(profile["request_settings"], spec.provider)
+            required = _object(settings["required"])
+            if "model" in required and required["model"] != spec.model:
+                raise GatewayError("profile request settings contradict the selected model")
     return record
 
 
@@ -710,12 +746,7 @@ def _request_spec(call: GatewayCall, profile: dict[str, object]) -> ModelSpec:
     provider = CAPABILITIES[call.capability][0]
     if provider != spec.provider or body.get("model") != spec.model:
         raise GatewayError("request model/provider differs from the selected profile")
-    allowed = {"model", "messages", "max_tokens", "temperature", "top_p", "service_tier"}
-    allowed |= (
-        {"max_completion_tokens", "response_format", "reasoning_effort", "stream", "n", "seed"}
-        if provider == "openai"
-        else {"system", "thinking", "output_config", "stop_sequences"}
-    )
+    allowed = _request_fields(provider)
     if (
         set(body) - allowed
         or body.get("stream", False) is not False
@@ -723,6 +754,14 @@ def _request_spec(call: GatewayCall, profile: dict[str, object]) -> ModelSpec:
         or body.get("n", 1) != 1
     ):
         raise GatewayError("unsupported request fields, streaming or multiple completions")
+    if "request_settings" in profile:
+        settings = _request_settings(profile["request_settings"], provider)
+        required = _object(settings["required"])
+        if any(
+            name not in body or _json(body[name]) != _json(value)
+            for name, value in required.items()
+        ) or set(cast(list[str], settings["forbidden"])) & set(body):
+            raise GatewayError("request differs from its frozen profile settings")
     messages = body.get("messages")
     if type(messages) is not list or not messages:
         raise GatewayError("text requests require messages")
