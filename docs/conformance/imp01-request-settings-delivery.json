@@ -1,0 +1,145 @@
+{
+  "format": "buddha.imp01-request-settings-delivery.v1",
+  "status": "bounded_checks_passed",
+  "upstream_revision": "64a23be6b18ec1dacc298830aab276061b6e143c",
+  "provider_network_calls": 0,
+  "paid_spending_usd": "0",
+  "implementation": {
+    "profile": "buddha.gateway-profiles.v3",
+    "assertions": [
+      "required literal top-level JSON fields",
+      "forbidden top-level fields"
+    ],
+    "enforced_before": [
+      "reservation",
+      "credential access",
+      "HTTP dispatch"
+    ],
+    "rewrites_requests": false,
+    "legacy_profiles_unchanged": [
+      "v1",
+      "v2"
+    ],
+    "generator_model_configurable": true,
+    "reasoning_default": "low in trusted starter and prospective generation profiles; no implicit migration or missing-field repair",
+    "benchmark_rules_in_gateway": false
+  },
+  "selected_generator_first_requests": [
+    {
+      "role": "P",
+      "source_sha256": "77cfa68f6b3c6996fd503e1ce6f7a964eb57abdb8bde98f6761de5f6e298ff4f",
+      "request_sha256": "d7f19ed5ad0a1a485db37ef6aa462bdbc60f7703052f90b04e8a44e8597e46ca",
+      "settings": {
+        "max_completion_tokens": 4096,
+        "model": "gpt-5.6-luna",
+        "reasoning_effort": "low",
+        "service_tier": "default"
+      },
+      "fields": [
+        "max_completion_tokens",
+        "messages",
+        "model",
+        "reasoning_effort",
+        "service_tier"
+      ],
+      "generation_status": "failed",
+      "generation_reason": "agent_error",
+      "cleanup": "removed"
+    },
+    {
+      "role": "C",
+      "source_sha256": "4196cd29ffa76c6959e6f678a8286b1fde5b56e6a34a97dcf68787e1f22b3a43",
+      "request_sha256": "97c2ac621f47951e70f8d8636da8fd8061bd901af883ebd9d28db3e12ecaeecb",
+      "settings": {
+        "max_completion_tokens": 4096,
+        "model": "gpt-5.6-luna",
+        "reasoning_effort": "low",
+        "service_tier": "default"
+      },
+      "fields": [
+        "max_completion_tokens",
+        "messages",
+        "model",
+        "reasoning_effort",
+        "service_tier"
+      ],
+      "generation_status": "failed",
+      "generation_reason": "agent_error",
+      "cleanup": "removed"
+    }
+  ],
+  "judges": {
+    "partition": {
+      "model": "gpt-5.6-luna",
+      "effort": "omitted",
+      "output_cap": "omitted",
+      "temperature": "omitted",
+      "structured_output": true,
+      "sdk_stream": false
+    },
+    "utility": {
+      "model": "claude-opus-5",
+      "effort": "high",
+      "thinking": "adaptive",
+      "max_tokens": 16000,
+      "structured_output": true
+    },
+    "fallback": {
+      "model": "claude-sonnet-5",
+      "settings": "utility request with model substitution only"
+    }
+  },
+  "checks": {
+    "composed_regressions": {
+      "count": 144,
+      "seconds": 78.555,
+      "status": "pass"
+    },
+    "final_judge_methods": {
+      "count": 5,
+      "seconds": 5.552,
+      "status": "pass"
+    },
+    "unique_methods": 146,
+    "quality": [
+      "ruff",
+      "format",
+      "strict mypy",
+      "bandit",
+      "runtime dependency audit",
+      "strict development dependency audit",
+      "compile"
+    ],
+    "quality_status": "pass",
+    "independent_review": "no blocking defect at reviewed bounded scope"
+  },
+  "preserved_partials": [
+    "v1/v2 dataset line-ending/hash setup refusals",
+    "v4 incorrectly changed input-directory suffix; file-not-found refusal",
+    "first v3-judge fixture lacked its explicitly reviewed user-agent header; corrected fixture, no application guard changed"
+  ],
+  "evidence": {
+    "selected-generator-first-request-probe-v5.py": "112c05d56e5b579bb7969fff62ca1ef8cd14fa39af869879d5d25f620a422f2e",
+    "selected-generator-first-request-observation-v3.json": "c48230b9fbd715baccf43e37be7030f72581b18882d52c01f3368a97cddc75b1",
+    "selected-generator-first-request-observation-v5.json": "ad4963c98af9587bbab635e202d9199a416f013d22007a48f9ee79dc9aae382d",
+    "official-generation-judge-constructor-checks-v3.json": "4793c0769cc830127f5aa981970f61166dae4ca38fc5f2b6885d80795a8c8d70",
+    "official-judge-current-wire-check-v1.json": "ea44fe71d2ef2ccc8dba7ce238e43848f703b27fde3ca2c18c5ab3aee2d5cb2d",
+    "request-settings-quality-checks-v1.json": "db338cf2249e7935c468167d01f50129981cf6fe2ea9a37cf1c12b3c3b02e895"
+  },
+  "limits": [
+    "Selected original sources executed only in pinned network-isolated runtime; host copy/hash only. Synthetic task and fake replies; each session retained failed/agent_error. First-request settings only, not complete generation or later-call evidence.",
+    "Judge tests send locked SDK-captured bodies through current native session and HTTP path. They do not rerun the complete native SDK worker pipeline; actual official leaf constructors have separate existing evidence.",
+    "Existing unfunded study bundles are unchanged. The next fresh preparation must actually bind the v3 profiles and changed trusted host before live use.",
+    "Legacy run.py judges differ and are outside native publication-compatibility scope.",
+    "No new authorization, grant, actual study owner, paid-model review, full local suite or hosted CI pass is claimed."
+  ],
+  "next": [
+    "Fresh unfunded v3-profile adoption with current host closure and original P/C",
+    "Resolve prospective reviewer/model arrangements and original concrete funding checks",
+    "Prepare separate same-model plain independent/in-context controls and joined harness comparison before observations; current IMP-01 only compares Buddha improvers"
+  ],
+  "scientific_gates_open": [
+    "IMP-01",
+    "EVAL-02"
+  ]
+}

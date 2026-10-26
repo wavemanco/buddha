@@ -64,8 +64,8 @@ these model IDs and the actual request construction, not just display names:
 | Official utility judge | `claude-opus-5` | `max_tokens=16000`, adaptive thinking and output effort `high`, with the official structured-output prompt/schema and first-response-per-group scoring. |
 | Existing official refusal fallback | `claude-sonnet-5` | Same official Anthropic judging constructor and effort, invoked after an Opus refusal; retain fallback provenance/costs. |
 
-Sources: [generation constructor](https://github.com/novelty-bench/novelty-bench/blob/64a23be6b18ec1dacc298830aab276061b6e143c/src/inference.py#L42-L94),
-[judging constructor](https://github.com/novelty-bench/novelty-bench/blob/64a23be6b18ec1dacc298830aab276061b6e143c/src/judge.py#L61-L118)
+Sources: [generation constructor](https://github.com/novelty-bench/novelty-bench/blob/64a23be6b18ec1dacc298830aab276061b6e143c/src/inference.py#L46-L97),
+[judging constructor](https://github.com/novelty-bench/novelty-bench/blob/64a23be6b18ec1dacc298830aab276061b6e143c/src/judge.py#L66-L113)
 and [metric description](https://github.com/novelty-bench/novelty-bench/blob/64a23be6b18ec1dacc298830aab276061b6e143c/README.md#metric-versions).
 If using Opus for **generation** in a later backbone comparison, its generation
 constructor doubles the 2,048 setting too and uses adaptive thinking with low
@@ -98,10 +98,14 @@ NoveltyBench does not prescribe those improvement/review roles.
 The publication-aligned configuration is the primary recommendation. First bind
 and verify the official effective generation parameters on Buddha's actual
 request path, retaining original agent sources and the fixed numerical judges.
-The Gateway can carry low effort, but closed generation/profile schemas expose
-no external setting that forces it; an actual-path check or narrow compatibility
-change may be necessary. No selected P/C/W source was inspected or executed in
-this audit, so whole-run compliance is not asserted from configuration alone.
+The [request-setting slice](REQUEST-SETTINGS.md) now supplies an explicit v3
+profile contract without rewriting requests. Both exact selected P/C first
+requests were observed inside the pinned sandbox with synthetic task/reply data:
+4096 inclusive output tokens, low effort and no temperature/top_p. Their source
+bytes stayed unchanged. Current native judge HTTP checks also pass. These are
+first-request and fixture observations, not complete-generation or later-call
+certificates. The next fresh preparation must bind the generation guard and
+separate official judge guards before any live handoff; old bundles stay frozen.
 
 The prepared legacy P/C comparison remains unchanged evidence of a proposed
 reproduction environment: three development tasks, 26 final tasks, two starts,
@@ -175,6 +179,28 @@ Sources: [Luna pricing](https://developers.openai.com/api/docs/models/gpt-5.6-lu
 [Anthropic pricing](https://platform.claude.com/docs/en/about-claude/pricing).
 The largest native reservation still has to fit before dispatch; uncertain
 charges retain holds. A phase may stop with a properly marked partial result.
+
+## Plain-model controls and the question this study answers
+
+Here, Luna names the common generator backbone used inside Buddha. The starter,
+initial-improver and evolved-improver roles all use Buddha. Their comparisons
+ask whether source evolution helps relative to the starter, and whether the
+evolved improver produces better descendants than the initial improver. They
+do not establish the harness's added value over plain Luna.
+
+The user explicitly requires plain independent and plain in-context controls
+for each generator backbone used to assess that added value. Use the existing
+baseline route with empty instructions, the same task IDs/repetitions, low
+reasoning effort, official allowance and fixed native judges. Give the model
+only the task and the sampling protocol's necessary history/continuation. It
+receives no Buddha planning, improvement instructions or answer selection.
+Report inference resources and total search/research expenditure separately.
+
+Prepare two separate baseline descriptors and a checked evidence join rather
+than changing the closed IMP-01 roles or analyzer. Freeze those controls and
+analysis before observing the comparison, then cost/adopt their concrete scope.
+They are not silently funded by the existing bounded $150 proposal. This is
+required EVAL-02 harness evaluation, not a new NoveltyBench-validation project.
 
 ## Original treatments and proposed conditions
 
