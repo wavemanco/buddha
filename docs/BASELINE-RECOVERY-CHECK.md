@@ -87,8 +87,9 @@ rechecking fresh intrinsic bytes fixes both cases. The final 17 new methods and
 44 existing regression methods pass; the delivery record keeps their scopes
 and timings separate.
 
-The next slice must save append-only partial observations with their actual
-stage, reason, costs and holds, then connect both checks and the original
-controllers into the combined launcher. The 166-file unfunded preparation stays
+The [partial-observation writer](COMPARISON-PARTIAL-OBSERVATIONS.md) now records
+launcher stop details separately from verified state and available accounting.
+The next slice connects these pieces and the original controllers into the
+combined launcher. The 166-file unfunded preparation stays
 unchanged at its recorded source cut; a fresh handoff must bind the final
 executing code before live use. No new user command is introduced here.

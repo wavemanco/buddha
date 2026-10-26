@@ -1,0 +1,135 @@
+{
+  "base_head": "926cbd4563979e71f904fab035ef60cd1b60f94c",
+  "constraints": {
+    "actual_P_C_or_private_prompt_semantics_read": false,
+    "actual_study_grants_or_owners_created": false,
+    "benchmark_scoring_changed": false,
+    "budget_or_study_grid_changed": false,
+    "fresh_synthetic_test_grants_and_owners_created": true,
+    "funding_adoption_or_native_reviewer_allocation_created": false,
+    "historical_paid_SQL_connections": 0,
+    "merged": false,
+    "real_credentials_read": false,
+    "real_provider_calls": 0,
+    "scientific_gate_closed": false
+  },
+  "contract": {
+    "bidirectional_overlap_protection": true,
+    "caller_arguments_frozen_for_observers_and_context_rechecked": true,
+    "combined_total_unavailable_unless_all_four_available": true,
+    "exclusive_create_flush_fsync_exact_readback": true,
+    "external_hash_and_strict_archival_schema_arithmetic": true,
+    "format_always_incomplete": true,
+    "four_original_grants_one_shared_raw_allowance": true,
+    "full_reports_exception_text_and_provider_replies_not_serialized": true,
+    "known_subtotal_labeled_partial": true,
+    "missing_changed_mismatched_ambiguous_costs_never_zeroed": true,
+    "no_fabricated_interrupted_report_or_stopped_stage": true,
+    "pinned_primary_plan_and_raw_definition_protection_before_output_armed": true,
+    "protected_run_artifact_grant_component_task_recipe_source_and_control_paths": true,
+    "readback_never_reopens_current_experiment": true,
+    "stop_source_launcher_reported": true,
+    "verified_primary_and_references_separate_from_reported_stop": true
+  },
+  "files": {
+    "buddha/comparison_observation.py": "c9c9d6d1ee7d997e111818f208b592a43baf4bbe961c6a91b7d236f93f6f3e1a",
+    "docs/BASELINE-RECOVERY-CHECK.md": "5391ca2e24c29ca963d65ca9f6e66bbfe0c722a57fdd4d80b7ff2768e5b46241",
+    "docs/COMPARISON-PARTIAL-OBSERVATIONS.md": "b4b3cc42f2f26dadbcb349b2d14b712312e9633b000ee82cd66e0774ae4670d7",
+    "tests/test_comparison_observation.py": "734c579d2a6780ebe6456bf9faba3dba84f504aaf5a54e21d03596c579d36481"
+  },
+  "format": "buddha.comparison-partial-observations-delivery.v1",
+  "limitations": [
+    "Diagnostic observation, not spending approval, invoice or complete scientific publication.",
+    "Sequential observations are not an atomic live snapshot.",
+    "Caller reports stop phase/reason; verified state can be unavailable.",
+    "A failed new output may remain for review; no repair or overwrite.",
+    "Original execution-error/cancellation preservation is required in the next combined launcher, not supplied by this writer alone.",
+    "The fresh executing handoff and exact CI/account/request/price/reviewer/funding gates still precede live use."
+  ],
+  "next": "Connect original controllers, both preflight checks and observations in one launcher; preserve original exceptions on observation failure; then rehearsal, hosted checks and final prospective funded handoff.",
+  "plan_revision": 163,
+  "preservation": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\comparison-observation-preservation-v1.json",
+    "sha256": "8422b9e3731ecc060168a519fdf2619f40487642ea1710a06da0a553c7355d90"
+  },
+  "preservation_summary": {
+    "existing_python_modified": 0,
+    "existing_tracked_python_preserved": 312,
+    "new_python_files": 2,
+    "original_acceptance_tails_preserved": 7,
+    "prepared_files_preserved": 166,
+    "prior_raw_plan_rows_preserved": 162
+  },
+  "recorded_date": "2026-10-26",
+  "review": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\comparison-partial-observations-independent-review-v1.json",
+    "sha256": "0a31613dbb922befbc24695d29c8fa84d67580276305ff6a7b1eb6ab5f5b626c"
+  },
+  "review_scope": "Agent authored tests and independently audited root-authored application source; no independent test-authorship, human or scientific target-review claim.",
+  "spec_sections": [
+    "DESIGN 5",
+    "DESIGN 7",
+    "DESIGN 9"
+  ],
+  "status": "implemented_diagnostic_scope_local_checks_pass_hosted_pending",
+  "verification": {
+    "author_agent_earlier_full_methods": 14,
+    "author_agent_earlier_full_seconds": 30.017,
+    "changed_head_hosted_status": "pending publication",
+    "composed_scope": "Actual original primary-launch checker plus actual raw-state reader with fresh synthetic grants and no execution/keys/writers beyond the new observation.",
+    "final_full_module_seconds": 33.536,
+    "final_full_module_status": "pass",
+    "final_source_adjustment": "Use canonical observer paths and copied extra-control pins from the frozen first-arm inputs; second arm still detects caller mutations.",
+    "fixture_or_app_test_failures": 0,
+    "focused_scope": "Real raw fixture, pinned closure, protection, grant bytes, readback and filesystem faults; only expensive primary context interpretation mocked.",
+    "formatting_note": "Initial formatting passed with a concurrent Ruff cache-write warning; a final no-cache check passed without that warning.",
+    "quality": [
+      {
+        "name": "ruff lint",
+        "status": "pass"
+      },
+      {
+        "name": "ruff formatting (264 files, final no-cache check)",
+        "status": "pass"
+      },
+      {
+        "name": "mypy strict (87 source files)",
+        "status": "pass"
+      },
+      {
+        "name": "bandit (zero issues)",
+        "status": "pass"
+      },
+      {
+        "name": "runtime dependency audit (no known vulnerabilities)",
+        "status": "pass"
+      },
+      {
+        "name": "strict development dependency audit (no known vulnerabilities)",
+        "status": "pass"
+      },
+      {
+        "name": "compileall",
+        "status": "pass"
+      }
+    ],
+    "unique_method_count": 14,
+    "unique_methods": [
+      "ComparisonObservationTests.test_write_once_incomplete_readback_is_detached_and_summary_only",
+      "ComparisonObservationTests.test_cancellation_has_reported_phase_and_unavailable_states_without_fake_report",
+      "ComparisonObservationTests.test_invalid_stop_metadata_and_untrusted_pins_never_arm_output",
+      "ComparisonObservationTests.test_protected_controls_grants_components_and_raw_artifact_roots_refuse",
+      "ComparisonObservationTests.test_output_cannot_be_ancestor_of_a_declared_missing_raw_root",
+      "ComparisonObservationTests.test_unknown_shared_raw_hold_counts_once_and_does_not_become_completion",
+      "ComparisonObservationTests.test_one_unreadable_grant_has_known_subtotal_but_no_combined_total",
+      "ComparisonObservationTests.test_mismatched_identity_and_ambiguous_declarations_never_guess_costs",
+      "ComparisonObservationTests.test_late_grant_drift_cannot_commit_an_observed_stale_row",
+      "ComparisonObservationTests.test_mutated_caller_grant_cannot_relabel_captured_rows",
+      "ComparisonObservationTests.test_archival_readback_survives_advancement_and_retired_live_inputs",
+      "ComparisonObservationTests.test_archival_reader_requires_hash_exact_schema_and_incomplete_status",
+      "ComparisonObservationTests.test_write_fsync_and_readback_errors_preserve_all_original_evidence",
+      "ComparisonObservationComposedTests.test_real_original_primary_and_real_raw_state_compose_without_execution"
+    ],
+    "whole_local_suite_run": false
+  }
+}
