@@ -722,9 +722,9 @@ def _restore_grid(
     return state, schedule, pins
 
 
-def _analysis(
+def _measurement_rows(
     state: dict[str, Any], schedule: dict[str, Any], reader: NativeEvidence, current: dict[str, Any]
-) -> dict[str, object]:
+) -> list[dict[str, Any]]:
     population = _population(state)
     artifacts = study._obj(reader.release.to_record()["artifacts"])
     projection.reporting_configuration(reader.release, state["record"]["stages"])
@@ -769,6 +769,14 @@ def _analysis(
                 },
             }
         )
+    return rows
+
+
+def _analysis(
+    state: dict[str, Any], schedule: dict[str, Any], reader: NativeEvidence, current: dict[str, Any]
+) -> dict[str, object]:
+    population = _population(state)
+    rows = _measurement_rows(state, schedule, reader, current)
     slots = [
         {
             key: row[key]

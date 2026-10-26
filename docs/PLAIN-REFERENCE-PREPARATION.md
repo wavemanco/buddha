@@ -73,10 +73,13 @@ resource use, and retain incomplete work with its reason. A report hash or
 caller-supplied scalar alone is insufficient. Reusing a reference across several
 Buddha starts does not create extra independent reference observations.
 
-Prepare that checked consumer and the funded operator handoff using the existing
-execution and scoring routes. The proposed descriptive comparison contract is
-[here](conformance/plain-reference-comparison-proposal.json). It is not yet an
-implemented importer or an adopted analysis. Existing human review samples cover
+The [checked consumer](PLAIN-COMPARISON-RESULTS.md) now joins complete original
+publications through the existing result readers and scoring projection. Its
+shared measurement-row helper requires fresh source pins and prospective
+bindings; no old preparation is rewritten. The funded operator handoff and
+partial-execution reporting remain pending. The original proposed descriptive
+contract is [here](conformance/plain-reference-comparison-proposal.json);
+implementation does not adopt or fund it. Existing human review samples cover
 Buddha roles; do not present them as human comparisons against new plain arms
 without a prospectively declared review extension.
 
