@@ -25,19 +25,14 @@ class _Baseline:
     reader: NativeEvidence
 
 
-def _observe(
-    directory: Path,
-    authorization: Path,
-    report_digest: str,
+def _context(
+    reader: NativeEvidence,
     definition_digest: str,
-) -> _Baseline:
-    if not isinstance(directory, Path) or not isinstance(authorization, Path):
-        raise BaselineResultsError("baseline observation needs explicit Path inputs")
-    root = pipeline._absolute(str(directory.absolute()))
-    authority = pipeline._absolute(str(authorization.absolute()))
-    reader = NativeEvidence(root, authority, error_type=BaselineResultsError)
-    report_raw = reader.raw(root / "report.json", _digest(report_digest))
-    report = _object(_load(report_raw))
+    *,
+    complete: bool = True,
+) -> tuple[dict[str, object], TaskSet]:
+    """Join frozen inputs and every existing owner to its original funding."""
+    root, authority = reader.root, reader.authorization
     anchor = reader.owner(root / "owners/0")
     context = _object(_load(reader.bound(anchor, root / "context.json")), {"format", "descriptor"})
     if context["format"] != "buddha.baseline-context.v1":
@@ -63,16 +58,18 @@ def _observe(
         raise BaselineResultsError("baseline source, evaluation and task lineage differ")
     pipeline.validate_native_flow(definition["stages"], reader.release)
     stages = reader._rows(definition["stages"])
-    planned = {root / "owners" / str(index) for index in range(len(stages) + 1)}
+    # Include empty/foreign owner directories, not just manifest-bearing paths.
     found = {
-        root / Path(name).parent
+        root / "owners" / name.split("/", 2)[1]
         for name in reader.capture.entries
-        if name.startswith("owners/") and name.endswith("/manifest.json")
+        if name.startswith("owners/")
     }
-    if found != planned:
+    count = len(stages) + 1 if complete else len(found)
+    planned = {root / "owners" / str(index) for index in range(count)}
+    if not 1 <= count <= len(stages) + 1 or found != planned:
         raise BaselineResultsError("baseline has missing or foreign owner evidence")
     controls = reader._bindings(anchor)
-    for index in range(len(stages) + 1):
+    for index in range(count):
         owner = reader.owner(root / "owners" / str(index))
         section = generation if index == 0 else native
         expected_settings = (
@@ -112,6 +109,25 @@ def _observe(
             or row["runtime_sha256"] != owner.manifest["execution_sha256"]
         ):
             raise BaselineResultsError("baseline owner differs from original funding")
+    return definition, tasks
+
+
+def _observe(
+    directory: Path,
+    authorization: Path,
+    report_digest: str,
+    definition_digest: str,
+) -> _Baseline:
+    if not isinstance(directory, Path) or not isinstance(authorization, Path):
+        raise BaselineResultsError("baseline observation needs explicit Path inputs")
+    root = pipeline._absolute(str(directory.absolute()))
+    authority = pipeline._absolute(str(authorization.absolute()))
+    reader = NativeEvidence(root, authority, error_type=BaselineResultsError)
+    report_raw = reader.raw(root / "report.json", _digest(report_digest))
+    report = _object(_load(report_raw))
+    definition, tasks = _context(reader, definition_digest)
+    anchor, funding = reader.owner(root / "owners/0"), reader.funded
+    stages = reader._rows(definition["stages"])
     source = _read_baseline_generation(
         {
             "baseline_directory": str(root),

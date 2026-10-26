@@ -73,7 +73,8 @@ provider/network execution, selected-source parsing and direct SQL connections
 to original files. Only copied in-memory database reads are allowed while
 checking. Files remain unchanged after each check.
 
-The next slice still needs the whole-baseline original-owner preflight and
+The [whole-baseline original-owner preflight](BASELINE-RECOVERY-CHECK.md) is now
+implemented at its passive inspection scope. The next slice still needs
 append-only partial observations, followed by coordinated execution through the
 existing primary and baseline controllers. The outer launcher must validate all
 original raw owners before entering keys or making another paid request. It must
