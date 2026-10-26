@@ -58,6 +58,16 @@ class RetainedCaptureTests(unittest.TestCase):
         self.assertEqual(reader.capture.raw, captured.raw)
         reader.finish()
 
+    def test_nested_hash_verification_preserves_capture_and_refuses_invalid_inputs(self):
+        reader, captured, data, ledger = self.fixture()
+        expected = {path: sha(raw) for path, raw in captured.raw.items()}
+        reader.verify_files(expected)
+        self.assertEqual(reader.capture.raw, captured.raw)
+        for hashes in (None, {str(data): expected[data]}, {ledger: "0" * 64}):
+            with self.subTest(hashes=hashes), self.assertRaises(NativeEvidenceError):
+                reader.verify_files(hashes)
+        reader.finish()
+
     def test_join_catches_new_entries_in_a_sibling_tree(self):
         from buddha.doctor import _Busy
 

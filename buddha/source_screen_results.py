@@ -190,10 +190,7 @@ def _source(
         source = _read_generation(reference, reader.authorization)
     if source.tasks.fingerprint() != tasks.fingerprint():
         raise reader.error_type("source C1 changes the declared screen task")
-    for path, digest in source.files.items():
-        raw = reader.capture.raw.get(path)
-        if _sha(reader.raw(path) if raw is None else raw) != digest:
-            raise reader.error_type("source evidence changed during screen observation")
+    reader.verify_files(source.files)
     seal = reader.record(root / "completed/0.json")
     attempt = root / _path(seal["attempt"])
     report = reader.record(attempt / "report.json")

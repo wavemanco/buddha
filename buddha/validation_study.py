@@ -780,8 +780,7 @@ def _generation(
         or source.answers.to_record()["agent_sha256"] != arm["agent_sha256"]
     ):
         raise ValidationStudyError("anchored C1 differs from its reserved source/task")
-    for path, pin in source.files.items():
-        reader.raw(path, pin)
+    reader.verify_files(source.files)
     return report, source
 
 

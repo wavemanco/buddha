@@ -21,6 +21,7 @@ from buddha.baseline import BaselineError, prepare_baseline, run_baseline
 from buddha.executor import ExecutorError
 from buddha.gateway import RawHTTPTransport
 from buddha.ledger import OperationConflict
+from buddha.native_run import CHUNK_BYTES
 from buddha.releases import ReleaseError, _json, inventory, prepare_selection
 
 
@@ -294,15 +295,17 @@ class BaselineTests(unittest.TestCase):
         if self.override_outputs is not None and index == 0:
             outputs = self.override_outputs
         for name, body in outputs.items():
-            handle(
-                {
-                    "type": "file",
-                    "path": name,
-                    "offset": 0,
-                    "eof": True,
-                    "data_base64": base64.b64encode(body).decode(),
-                }
-            )
+            for offset in range(0, max(1, len(body)), CHUNK_BYTES):
+                chunk = body[offset : offset + CHUNK_BYTES]
+                handle(
+                    {
+                        "type": "file",
+                        "path": name,
+                        "offset": offset,
+                        "eof": offset + CHUNK_BYTES >= len(body),
+                        "data_base64": base64.b64encode(chunk).decode(),
+                    }
+                )
         handle({"type": "done", "status": "complete", "reason": "complete", "audit": audit})
         return self.agent.execution()
 
