@@ -135,6 +135,38 @@ def _generation_directory(value: object) -> Path:
     return pipeline._absolute(reference[field])
 
 
+def _frozen_recipe(raw: bytes, tasks_path: Path, manifest: dict[str, object]) -> dict[str, object]:
+    """Validate the fixed generator's data/profile without an executing session."""
+    recipe = _object(_load(raw), {"format", "tasks", "config", "entrypoint", "executor", "profile"})
+    config = _object(
+        recipe["config"], {"provider", "model", "max_output_tokens", "instructions", "sampling"}
+    )
+    instructions = _utf8(config["instructions"])
+    cap = config["max_output_tokens"]
+    if (
+        recipe["format"] != "buddha.frozen-generation.v1"
+        or type(config["provider"]) is not str
+        or config["provider"] not in {"openai", "anthropic"}
+        or type(cap) is not int
+        or not 1 <= cap <= 2**63 - 1
+        or len(instructions) > 4000
+        or type(config["sampling"]) is not str
+        or config["sampling"] not in {"regenerate", "in-context"}
+    ):
+        raise EvaluationError("source generation configuration is unsupported")
+    _text(config["model"])
+    role = _object(recipe["profile"], {"capability", "profile_id"})
+    source_profile = _object(
+        _object(_object(manifest["profiles"])[_text(role["capability"])])["profiles"]
+    )
+    spec = _object(_object(source_profile[_text(role["profile_id"])])["spec"])
+    if any(spec[key] != config[key] for key in ("provider", "model", "max_output_tokens")):
+        raise EvaluationError("source generation profile differs from its treatment")
+    if pipeline._absolute(recipe["tasks"]) != tasks_path:
+        raise EvaluationError("source generation recipe changes task input")
+    return recipe
+
+
 def _read_baseline_generation(value: object, authority_path: Path) -> _Generation:
     """Verify retained generation using an explicit authority file, without execution."""
     reference = _object(
@@ -240,35 +272,7 @@ def _read_baseline_generation(value: object, authority_path: Path) -> _Generatio
     tasks = TaskSet.from_bytes(task_raw)
     recipe_path = pipeline._absolute(producer["descriptor"])
     recipe_raw = bound(recipe_path)
-    recipe = _object(
-        _load(recipe_raw), {"format", "tasks", "config", "entrypoint", "executor", "profile"}
-    )
-    config = _object(
-        recipe["config"], {"provider", "model", "max_output_tokens", "instructions", "sampling"}
-    )
-    instructions = _utf8(config["instructions"])
-    cap = config["max_output_tokens"]
-    if (
-        recipe["format"] != "buddha.frozen-generation.v1"
-        or type(config["provider"]) is not str
-        or config["provider"] not in {"openai", "anthropic"}
-        or type(cap) is not int
-        or not 1 <= cap <= 2**63 - 1
-        or len(instructions) > 4000
-        or type(config["sampling"]) is not str
-        or config["sampling"] not in {"regenerate", "in-context"}
-    ):
-        raise EvaluationError("source generation configuration is unsupported")
-    _text(config["model"])
-    role = _object(recipe["profile"], {"capability", "profile_id"})
-    source_profile = _object(
-        _object(_object(history.manifest["profiles"])[_text(role["capability"])])["profiles"]
-    )
-    spec = _object(_object(source_profile[_text(role["profile_id"])])["spec"])
-    if any(spec[key] != config[key] for key in ("provider", "model", "max_output_tokens")):
-        raise EvaluationError("source generation profile differs from its treatment")
-    if pipeline._absolute(recipe["tasks"]) != tasks_path:
-        raise EvaluationError("source generation recipe changes task input")
+    recipe = _frozen_recipe(recipe_raw, tasks_path, history.manifest)
     answers_path = attempt / "answers.json"
     answer_raw = capture.read(answers_path)
     answers = Answers.from_bytes(answer_raw)
