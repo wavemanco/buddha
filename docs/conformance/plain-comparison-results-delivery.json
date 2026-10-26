@@ -1,0 +1,118 @@
+{
+  "format": "buddha.plain-comparison-results-delivery.v1",
+  "status": "original_publication_join_verified_not_adopted_or_funded",
+  "plan_revision": 159,
+  "contract_sections": [
+    "DESIGN 5",
+    "DESIGN 7",
+    "DESIGN 8",
+    "DESIGN 9"
+  ],
+  "interface": "buddha.plain_comparison.compare_plain_references",
+  "method": "all_conditions_then_equal_prompts_descriptive.v1",
+  "scope": [
+    "original complete improver assessment and one/both declared ordinary baselines",
+    "static pre-output plan binding in every original owner; later publication pins separate",
+    "exact selected final TaskSet, typed IDs/order/count/source and dataset",
+    "common generator provider/model/allowance/full profile and native instrument; resource differences disclosed",
+    "shared unchanged original measurement rows and existing optional official-row projection",
+    "all planned starts/repetitions/roles; null descendants and unusable scalars suppress affected means",
+    "exact per-prompt condition averages then equally weighted descriptive prompt contrasts",
+    "original reference observations and owner/operation costs counted once",
+    "original development provenance owner list, captured receipts, token usage and accounting joins",
+    "final/reference and development API usage/cost totals with unknown usage explicit",
+    "all readers/captures checked for late changes after complete aggregation"
+  ],
+  "claims_excluded": [
+    "official score alteration or a replacement metric",
+    "causal sampling effect from mode labels",
+    "compute-isolated harness effect",
+    "significance, promotion, unseen-task generalization or human preference",
+    "historical experiment or native/human monetary totals inside current API usage"
+  ],
+  "verification": {
+    "unique_methods": 18,
+    "final_numerical_and_resource": {
+      "tests": 17,
+      "seconds": 5.869
+    },
+    "final_composed": {
+      "discovered_tests": 1,
+      "check_bodies": 4,
+      "seconds": 1147.487,
+      "buddha_final_cells": 6,
+      "plain_modes": 2,
+      "synthetic_final_tasks": 2,
+      "synthetic_answers_per_set": 2,
+      "actual_original_readers_and_projection": true,
+      "mocked_workers_and_https": true,
+      "strict_guards": [
+        "no producer/key/provider execution during join",
+        "SQL source connections forbidden; captured in-memory copies only",
+        "no evidence writes; inventories unchanged"
+      ],
+      "refusals": [
+        "sealed output corruption",
+        "retrospective unbound plan",
+        "missing original publication"
+      ]
+    },
+    "initial_composed_refusal": {
+      "tests_run": 0,
+      "seconds": 1042.888,
+      "reason": "supplied executor reported hardcoded image instead of requested native spec image",
+      "resolution": "fixture-only ExecutionResult correction, independently isolated with ordinary baseline/reader/projector; evidence guard unchanged"
+    },
+    "test_cost": "one composed method avoids repeating its expensive class fixture in four CI shards",
+    "row_and_analysis_tail_ast_unchanged": true,
+    "configured_quality_checks": 7,
+    "quality_status": "pass",
+    "independent_review": "bounded app/boundary review, source/test/helper-body pin checks and final guide/roadmap/evidence-claim review pass; narrow returned-diagnostics wording corrected without app changes",
+    "hosted_ci": "new changed head pending; no full-suite or hosted-green claim"
+  },
+  "evidence": {
+    "plain-comparison-numerical-tests-v2.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\plain-comparison-numerical-tests-v2.json",
+      "sha256": "502d7281ddc1260adb54f0a20fe72906c252bc02642c0e61d890242e9e8f76c4"
+    },
+    "plain-comparison-quality-checks-v2.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\plain-comparison-quality-checks-v2.json",
+      "sha256": "bd90f82f39f75c1f52a9eb053143a0edd4e94b3cafe5aec86311e8b9abd6cdb4"
+    },
+    "plain-comparison-row-extraction-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\plain-comparison-row-extraction-v1.json",
+      "sha256": "38f15bfb201152879aab834a8b41adc9a5b8f4e056b834d87e1e1a6a4073f13a"
+    },
+    "plain-comparison-integration-result-v2.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\plain-comparison-integration-result-v2.json",
+      "sha256": "190f1fde4cae816a071d0d750ed7ab20e3a7eeea8ce82196a35d480291e0b302"
+    },
+    "plain-comparison-integration-census-v2.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\plain-comparison-integration-census-v2.json",
+      "sha256": "f60d23823a561d4416b532f758a964c80ca05f542cda62145ade256924e57e58"
+    },
+    "plain-comparison-integration-v1-refusal.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\plain-comparison-integration-v1-refusal.json",
+      "sha256": "21d0f99a8cdeb2b7ea67aac3fa8c4857882542364fd401be4cad29df4c921d60"
+    },
+    "plain-comparison-baseline-probe-v2.log": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\plain-comparison-baseline-probe-v2.log",
+      "sha256": "24a389d73226450cd65fd4de128d391078927f11a73ae3c01376caf92dd011ea"
+    }
+  },
+  "incomplete_execution": "Original incomplete/invalid publications are refused without repair. Funded outer handoff still must retain original partial stage/reason/costs/holds. Incomplete numerical panels have analysis.status/reason, distinct from execution status.",
+  "next": "fresh prospective source/plan bindings, one consolidated scope/allocation within proposed150USD/16384attempt ceiling, exact capacity and partial-result/account/reviewer/funding/handoff checks",
+  "preserved_prior_plan_rows": 158,
+  "benchmark_or_dependency_or_workflow_changed": false,
+  "real_provider_calls": 0,
+  "real_keys": false,
+  "original_paid_source_sql": false,
+  "real_grants_or_owners_created": false,
+  "old_preparations_rewritten": false,
+  "main_readme_milestones_changed": false,
+  "merged": false,
+  "scientific_gates": [
+    "IMP-01 open",
+    "EVAL-02 open"
+  ]
+}
