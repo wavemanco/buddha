@@ -134,6 +134,8 @@ separates constructor checks, runtime evidence and independent review.
 ## Next work before a live command
 
 The current primary launcher is not a combined primary/reference operator.
+The [passive combined-funding check](UNIFIED-FUNDING-CHECK.md) now verifies the
+four original allocations against one declared ceiling without keys or writes.
 Complete the coordinated handoff using the existing primary and baseline
 execution routes: validate all allocations before keys, preserve original
 owners on resume, and save partial work with its stage, reason, costs and holds.
