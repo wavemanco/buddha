@@ -8,6 +8,7 @@ import hashlib
 import re
 import sqlite3
 import stat
+from collections.abc import Mapping
 from contextlib import closing
 from pathlib import Path
 from typing import cast
@@ -91,6 +92,20 @@ class NativeEvidence:
         _adopt_capture(capture, self.capture)
         if capture not in self._retained:
             self._retained.append(capture)
+
+    def verify_files(self, hashes: Mapping[Path, str]) -> None:
+        """Join nested evidence without narrowing an already validated file bound."""
+        if not isinstance(hashes, Mapping):
+            raise self.error_type("nested evidence needs a file-hash mapping")
+        for path, expected in hashes.items():
+            digest = _digest(expected)
+            if not isinstance(path, Path):
+                raise self.error_type("nested evidence needs explicit file Paths")
+            raw = self.capture.raw.get(path)
+            if raw is None:
+                raw = self.capture.read(path, MAX_FILE_BYTES)
+            if _sha(raw) != digest:
+                raise self.error_type("nested evidence changed during observation")
 
     def finish(self) -> dict[str, str]:
         result = self.capture.finish()
