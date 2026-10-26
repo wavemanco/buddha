@@ -1,0 +1,212 @@
+{
+  "format": "buddha.unified-comparison-preparation-delivery.v1",
+  "status": "fresh_bound_configuration_and_synthetic_runtime_checked_not_adopted_or_funded",
+  "plan_revision": 160,
+  "contract_sections": [
+    "DESIGN 5",
+    "DESIGN 7",
+    "DESIGN 8",
+    "DESIGN 9"
+  ],
+  "executing_source_head": "90b21a0e90b90136474ab0e9e8938610ceb9839c",
+  "application_python_changed": false,
+  "python_inventory_count": 308,
+  "fresh_files": {
+    "primary": 98,
+    "review": 15,
+    "plain": 46,
+    "combined": 7,
+    "total": 166
+  },
+  "prior_recent_configuration_files_preserved": 159,
+  "prior_raw_plan_rows_with_line_endings_preserved": 159,
+  "allocation_proposed_only": {
+    "combined": {
+      "budget_microusd": 150000000,
+      "max_calls": 16384
+    },
+    "development": {
+      "budget_microusd": 40000000,
+      "max_calls": 4096
+    },
+    "primary_final": {
+      "budget_microusd": 85000000,
+      "max_calls": 10240
+    },
+    "shared_both_plain_modes": {
+      "budget_microusd": 25000000,
+      "max_calls": 2048
+    },
+    "validation": {
+      "budget_microusd": 0,
+      "max_calls": 0
+    },
+    "primary_only_total": {
+      "budget_microusd": 125000000,
+      "max_calls": 14336
+    },
+    "raw_authority_unique_and_shared": true,
+    "approved_or_allocated": false,
+    "completion_forecast": null,
+    "historical_allowances_reused": false
+  },
+  "workload_preserved": {
+    "development_tasks": 3,
+    "starts": 2,
+    "development_repetitions": 2,
+    "opportunities_per_arm": 2,
+    "total_opportunities": 16,
+    "final_tasks": 26,
+    "final_families": 25,
+    "sealed_repetitions": 1,
+    "maximum_primary_final_sets": 312,
+    "maximum_primary_final_answers": 3120,
+    "two_reference_sets": 52,
+    "two_reference_answers": 520,
+    "original_human_sets": 12,
+    "maximum_original_human_positions": 120
+  },
+  "configuration_checks": {
+    "original_active_and_inactive_parsers": "pass",
+    "ordinary_baseline_definitions_both": "pass",
+    "exact_selected_tasksets_and_generator_native_controls": "pass",
+    "primary_handoff_bindings": 135,
+    "future_primary_bindings": 138,
+    "both_original_primary_capacity_projections": "pass",
+    "reference_input_files_prepared": 9,
+    "comparison_consumer_pins": 7,
+    "static_plan_later_handoff_and_future_publication_hashes_acyclic": true,
+    "independent_fresh_control_graph_nodes": 47,
+    "native_judge_and_official_instrument_unchanged": true
+  },
+  "runtime": {
+    "proof_scope": "actual configured generation image/environment/limits/selected-profile and reviewed fixed seed on synthetic tasks/replies/wallet; temporary mounts differ",
+    "successful_actual_containers": 4,
+    "removed_successful_containers": 4,
+    "physical_mock_https_requests": 40,
+    "selected_source_sha256": "2b87bfe0d3c97ee45db2d45260985ffe0234eca93967f4689fb7c59f82603921",
+    "memory_mib": 256,
+    "cpus": 1,
+    "pids": 64,
+    "scratch_mib": 64,
+    "wall_seconds": 900,
+    "low_and_wire4096_no_temperature_or_top_p": true,
+    "independent_message_lengths": "one per request",
+    "in_context_message_lengths": "1,3,5,...,19 then reset for next task",
+    "real_provider_calls": 0,
+    "real_keys": false,
+    "private_final_or_selected_P_C_runtime": false,
+    "synthetic_accounting_created": true,
+    "initial_probe_retained": "Existing tiny fake grant10000microusd could not reserve585611; stopped before HTTP. Correct only a fresh1USD/30-attempt synthetic grant; actual profile/budget guards unchanged.",
+    "limits": [
+      "not worst-case prompt memory/context certification",
+      "not provider-latency or full native-panel proof",
+      "not benchmark scores or generation quality",
+      "not a funded operator"
+    ]
+  },
+  "independent_review": "pass at bounded metadata/hash/request scope; exact capacity replay is builder evidence, not independent reexecution",
+  "source_hosted_ci": {
+    "baseline_reader_b64c58b": {
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 40281991816
+    },
+    "comparison90b21a0": {
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 40290887094
+    },
+    "new_documentation_head": "pending after publication"
+  },
+  "upstream_observation": {
+    "date": "2026-10-26",
+    "ref": "novelty-bench/novelty-bench main",
+    "sha": "64a23be6b18ec1dacc298830aab276061b6e143c",
+    "prepared_revision_unchanged": true
+  },
+  "evidence": {
+    "imp01-unified-source-baseline-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-unified-source-baseline-v1.json",
+      "sha256": "029ec041390eee458ec35cf72d306fdbfc69d318262c7839c18733d6d6f891e5"
+    },
+    "imp01-unified-primary-preparation-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-unified-primary-preparation-v1.json",
+      "sha256": "696d6ea905d46f6f87c7c20933710079a11f9cc228891cd112214aca19c2d1dd"
+    },
+    "imp01-unified-review-preparation-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-unified-review-preparation-v1.json",
+      "sha256": "9bcbb56adfe09995f4fba8f592dcd8d2350745b9c792d528959df74feef08357"
+    },
+    "imp01-unified-plain-preparation-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-unified-plain-preparation-v1.json",
+      "sha256": "52e7941b82978eb4c09cac23dff2d7ef995e7cc815f4fce5fc7f4984b06bdd2c"
+    },
+    "imp01-unified-comparison-preparation-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-unified-comparison-preparation-v1.json",
+      "sha256": "8785d5f399adc78ce89264e35a4dc4b42bc21d12b3e6ecf2de4deb08b8623a94"
+    },
+    "imp01-unified-independent-configuration-review-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-unified-independent-configuration-review-v1.json",
+      "sha256": "8322448a76188654bcbafcbd1ff9b358240880a168a8b29c664982a5084dd079"
+    },
+    "imp01-unified-primary-builder-derivation-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-unified-primary-builder-derivation-v1.json",
+      "sha256": "4d6cf254bb752351452039fadf71c8cfd69da6d1ea9bfa7246e6bbd7ded709a4"
+    },
+    "imp01-unified-review-builder-derivation-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-unified-review-builder-derivation-v1.json",
+      "sha256": "d7043e05a27013f4321ffaff8cce4c87d1ad24ec7606c92fe87e087f317d6e96"
+    },
+    "imp01-unified-plain-builder-derivation-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-unified-plain-builder-derivation-v1.json",
+      "sha256": "63746333514611a48c370d73dd3a928c4b96fd7d328347bbf46858d401c851f5"
+    },
+    "imp01-unified-runtime-probe-derivation-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-unified-runtime-probe-derivation-v1.json",
+      "sha256": "37398549eaf32822082777e3921906b50400997cdf589d952bdf1e2c89db33f1"
+    },
+    "imp01-unified-runtime-fixture-correction-v2.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-unified-runtime-fixture-correction-v2.json",
+      "sha256": "3c0cef70cfbc863a53b3167f940fb0074488c86a83f342933a4891aa4f21e97d"
+    },
+    "imp01-unified-plain-runtime-proof-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-unified-plain-runtime-proof-v1.json",
+      "sha256": "091137b4b320a7903f26b919517d6614b562c0bcdb2db28e4a1527cd8279cc40"
+    },
+    "imp01-unified-plain-runtime-proof-v2.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-unified-plain-runtime-proof-v2.json",
+      "sha256": "17c919902cb38eef63445dd33c8f2c32b88b60794b313f0e07a1f7a97e6ae45b"
+    },
+    "imp01-unified-source-ci-observation-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-unified-source-ci-observation-v1.json",
+      "sha256": "3a2755710fa3dab309c2e12655365b2ea5fbb96c359b075be565928b9def6112"
+    },
+    "imp01-unified-upstream-observation-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-unified-upstream-observation-v1.json",
+      "sha256": "16fe6e62b053e901f02641041ce74e30d2fb13d203685a88dff0072d45a67a48"
+    }
+  },
+  "not_created": [
+    "actual budget approval or grant",
+    "real experiment study or raw execution owners",
+    "keys or keyed review",
+    "reviewers/rosters/rounds/packets",
+    "paid model calls or real benchmark generations/scores",
+    "coordinated primary/reference operator or live command"
+  ],
+  "next": [
+    "coordinated original primary/reference operator and resume/partial accounting",
+    "prospective adoption and named native-reviewer decision",
+    "actual account/price/request/capacity/funding/hosted handoff checks",
+    "required independent human and scientific outcomes"
+  ],
+  "scientific_gates": [
+    "IMP-01 open",
+    "EVAL-02 open"
+  ],
+  "main_readme_milestones_changed": false,
+  "merge_performed": false,
+  "original_source_sql": false,
+  "selected_P_C_semantics_decoded_or_parsed": false
+}

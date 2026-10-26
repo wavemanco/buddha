@@ -312,6 +312,17 @@ prospectively compatible frozen Buddha results. Both questions can be studied
 without rerunning every Buddha mode. No workload or allocation is silently
 enlarged; added references need exact scope, cost, analysis and approval.
 
+## Fresh combined comparison preparation
+
+The [unified preparation](UNIFIED-COMPARISON-PREPARATION.md) refreshes the source
+pins after the original-result consumer and adds the same-model references to
+one draft allocation: $40 development, $85 primary final assessment and one
+shared $25 for both plain modes. The total remains $150/16,384 attempts. Its
+166 fresh files pass configuration checks and prospective binding projections;
+four actual containers also verify synthetic generation with the configured
+256 MiB limit and request profile. Earlier preparations remain unchanged.
+This prepares the controls and resource proposal, not a funded operator.
+
 ## What remains before a live run
 
 Preserve the original-call observation mode and the checked resource/fairness

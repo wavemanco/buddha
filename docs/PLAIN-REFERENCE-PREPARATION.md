@@ -39,8 +39,8 @@ and conservative local accounting.
 
 The reviewed fixed seed ran in the pinned network-isolated source runtime on
 two synthetic tasks for each sampling mode. Four actual containers completed
-and were removed. All 40 outgoing requests used low effort and 4,096 output
-tokens, with no temperature/top-p override or added system instructions.
+and were removed. All 40 outgoing requests used low effort and a 4,096-token
+output limit, with no temperature/top-p override or added system instructions.
 
 Independent generation used one user message for every request. In-context
 generation used 1, 3, 5, through 19 messages, including each earlier answer and
@@ -83,4 +83,9 @@ implementation does not adopt or fund it. Existing human review samples cover
 Buddha roles; do not present them as human comparisons against new plain arms
 without a prospectively declared review extension.
 
-No API key or user command is needed at this preparation checkpoint.
+The later [unified preparation](UNIFIED-COMPARISON-PREPARATION.md) supplies fresh
+descriptors, prospective plan/input bindings and one combined budget proposal.
+It also exercises the actual prepared 256 MiB executor/profile on synthetic
+tasks, resolving the older runtime-fixture limit mismatch above within that
+bounded scope. Original descriptors and evidence remain unchanged. No API key
+or live command is needed at this preparation checkpoint.
