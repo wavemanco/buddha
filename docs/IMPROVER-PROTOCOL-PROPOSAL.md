@@ -188,16 +188,24 @@ ask whether source evolution helps relative to the starter, and whether the
 evolved improver produces better descendants than the initial improver. They
 do not establish the harness's added value over plain Luna.
 
-The user explicitly requires plain independent and plain in-context controls
-for each generator backbone used to assess that added value. Use the existing
+The user requires a plain control matched to the generator and sampling mode
+to assess that added value. Independent and in-context are available options
+inside and outside Buddha; they do not commit the user to all four conditions.
+A first matched harness measurement can use one pair, with conclusions limited
+to its mode. This can accompany the original improver comparison using the same
+prospectively eligible frozen Buddha results. The user's questions did not
+request a priority change or replacement of that study. Additional reference
+conditions need a declared question and costed scope. Use the existing
 baseline route with empty instructions, the same task IDs/repetitions, low
 reasoning effort, official allowance and fixed native judges. Give the model
 only the task and the sampling protocol's necessary history/continuation. It
 receives no Buddha planning, improvement instructions or answer selection.
 Report inference resources and total search/research expenditure separately.
 
-Prepare two separate baseline descriptors and a checked evidence join rather
-than changing the closed IMP-01 roles or analyzer. Freeze those controls and
+Prepare the necessary plain baseline descriptor(s) and a checked evidence join
+rather than changing the closed IMP-01 roles or analyzer. One or both raw
+sampling references may accompany the fixed Buddha procedures; that does not
+require rerunning Buddha in every sampling mode. Freeze those controls and
 analysis before observing the comparison, then cost/adopt their concrete scope.
 They are not silently funded by the existing bounded $150 proposal. This is
 required EVAL-02 harness evaluation, not a new NoveltyBench-validation project.

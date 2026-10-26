@@ -269,6 +269,49 @@ availability remains unconfirmed. Protocol adoption, named reviewer setup,
 financial approval, hosted verification and the actual funded handoff remain
 separate from these configuration checks, which make no provider request.
 
+## Fresh candidate with checked request settings
+
+The [request-setting slice](REQUEST-SETTINGS.md) is published in PR #152 at
+`206eebfa6249082b7d010828aba937dd5ffed933`. A fresh unfunded candidate at
+`runs/imp01-wildchat-aligned-20261025-v1` now copies the immutable components
+and binds that current host code. Its 98 files preserve the original P/C,
+datasets, split, release, runtime and experiment grid. Only profile assertions,
+current producer bindings and their metadata descendants change.
+
+The five model profiles retain their models, prices, limits, tiers and headers.
+The generator profile requires 4,096 inclusive output tokens, low effort and
+no temperature/top-p override. Model choice remains configurable. The partition
+profile preserves the official omitted effort/cap/temperature and full schema.
+The utility/fallback profiles require adaptive thinking, high effort, 16,000
+tokens and the complete official output configuration. The separate code-author
+profile gains no generation-effort restriction. No request is rewritten.
+
+A fresh 15-file review layer at
+`runs/imp01-wildchat-aligned-review-20261025-v1` builds the same metadata graph
+directly, without copying old intermediate/partial preparations. Its
+`handoff-unfunded.json` is the checked candidate handoff. It retains 12 whole
+review sets/up to 120 positions, eight custody references, 55 helpers, 121
+assessment controls, 129 handoff bindings and both 132-binding capacity
+projections for the unchanged 312-cell maximum. All eight negative metadata
+checks refuse their malformed inputs.
+
+The [aligned delivery](conformance/imp01-aligned-request-preparation-delivery.json)
+records the construction and independent audits. All original 98+24 candidate
+files, 87 older configuration files and 451 captured originals remain unchanged.
+No SQL connection, provider call, key, financial authority, actual reviewer,
+owner, trial or live command is created. These are configuration checks, not
+an adopted experiment, a full current-head hosted pass or a scientific result.
+
+The current bounded study still compares two Buddha improvers. The separate
+[plain-model comparison specification](PLAIN-MODEL-COMPARISON.md) explains how
+to gauge harness added value, with a recommended first matched pair in one
+sampling mode and a separately costed optional four-condition expansion.
+The user clarified that questions did not request reprioritization: retain the
+bounded improver study and prepare necessary plain references alongside its
+prospectively compatible frozen Buddha results. Both questions can be studied
+without rerunning every Buddha mode. No workload or allocation is silently
+enlarged; added references need exact scope, cost, analysis and approval.
+
 ## What remains before a live run
 
 Preserve the original-call observation mode and the checked resource/fairness
