@@ -171,6 +171,17 @@ Required comparisons, staged to respect budget:
 | Does evolving the improver help? | Fixed initial improver with the same archive and task-agent space |
 | Does it transfer? | Frozen finalist on sealed prompts and an independent judgment audit |
 
+For harness added-value claims, use the same generator backbone in plain-model
+and Buddha conditions. The [prospective control specification](PLAIN-MODEL-COMPARISON.md)
+retains independent and in-context sampling as options for both, with matched
+declared resources and separate actual costs. A first comparison can use one
+matched pair and claim only that mode; a full four-condition expansion needs
+its own question and costed scope. Plain controls have no Buddha instructions,
+planning, improvement or selection. Standard generation supports both modes;
+arbitrary evolved source must demonstrate the declared request/history behavior.
+A mode label alone does not establish that behavior. The initial-versus-evolved
+improver comparison is a separate question and does not replace raw controls.
+
 Match inference budgets by model, total billed tokens including reasoning, total calls, candidate generation and selection, and declared output limits. Report search/proposer and judging costs separately, plus total research expenditure. Do not call an expensive scaffold superior to a ten-call raw model without disclosing the resource difference. Novamine's public scores are a contextual target; without its implementation and cost evidence, a matched-budget causal comparison is unresolved.
 
 ## 8. Measuring improvement competence
