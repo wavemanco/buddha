@@ -1,0 +1,233 @@
+{
+  "candidate_assessment_or_final_score_completed": false,
+  "completed_generation_replies_retained": 10,
+  "container_cleanup": "removed",
+  "date": "2026-10-26",
+  "diagnostic_metadata_qualifications": [
+    {
+      "field": "free-text short-deep length description",
+      "qualification": "Descriptive text says78; measured controlled_fixtures metadata is79characters. Use79; preserve original receipt.",
+      "receipt": "v7"
+    },
+    {
+      "field": "root_reported_UTC_approximate",
+      "qualification": "Approximate07:37Z conflicts with receipt recorded_utc07:27:49Z. It is not a verified action timestamp. The reported ancestor-read action preceded v8; exact time not established. Preserve original receipt.",
+      "receipt": "v8"
+    }
+  ],
+  "diagnostic_publication_failures_retained": {
+    "v10": "Ready audit passed; cleanup initially unknown and broad census changed by coordinator v9/delivery addition. Exact old inventory reconstructed; stopped owned container normally removed and absence verified. Clean v11 confirmation then passes.",
+    "v12": "Filesystem checks pass; original summary publisher fails on missing auxiliary ACL file after execution. Retain original driver/frame/failure; Docker die0/destroy events and later absence check independently reconcile lifecycle. No ACL equivalence claim or manufactured original receipt."
+  },
+  "environment_workaround": {
+    "fresh_plain_depth_fixture": "10components/107characters readable; no comparison-parent reexport, reserved raw roots remain absent.",
+    "host_projection": "same directory reexported with default drvfs rw as original Cdrive; actual original selected container mounts remain readonly/nonrecursive, nonroot, readonly root, network none",
+    "original_trial_root": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-unified-review-20261026-v2\\NOT-CREATED-trial-runtime",
+    "owned_mount_ids": {
+      "daemon": 650,
+      "self": 469
+    },
+    "retained_for_user_resume": true,
+    "temporary_until_Docker_restart_or_unmount": true,
+    "windows_mount_source_paths_unchanged": true
+  },
+  "existing_recovery_route": "Original same-owner recovery: reuse ten completed generation replies and retry native stage in a new attempt under original owner/grants. Environment repair passes original readiness; no runtime source upgrade or relocation is used.",
+  "finding_id": "IMP1-NATIVE-STARTUP-01",
+  "first_failed_position": {
+    "arm": null,
+    "repetition": 0,
+    "slot": null,
+    "stage": "common_screen",
+    "start": 0
+  },
+  "first_native_report": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-unified-review-20261026-v2\\NOT-CREATED-trial-runtime\\search\\study\\common\\0\\0\\screen\\tasks\\0\\evaluation\\attempts\\1-0\\report.json",
+    "sha256": "680d2d8e909dd42d81bba84369e56e8b0f8343f335d80f64cbc2bf7260b004ab"
+  },
+  "format": "buddha.unified-native-startup-incident.v1",
+  "handoff_sha256": "2e426de93d64d94e5060ad3b233ca05c98343832c68cd857b4dbf0b6c0efb522",
+  "human_availability_blocks_AI_only": false,
+  "native_answers_hash_only": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-unified-review-20261026-v2\\NOT-CREATED-trial-runtime\\search\\study\\common\\0\\0\\screen\\tasks\\0\\evaluation\\native-answers.jsonl",
+    "sha256": "67864110a7f495c9f6c35a6a13c97ef1fdebb487bc7de83bfc30fd96b7e5cfe4"
+  },
+  "native_descriptor": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-unified-review-20261026-v2\\NOT-CREATED-trial-runtime\\search\\study\\common\\0\\0\\screen\\tasks\\0\\evaluation\\command-1.json",
+    "sha256": "923a35d54de6900c1dec43274c0281efc2f85d91c731fae3ae6b2128c8919227"
+  },
+  "native_provider_requests": 0,
+  "native_review_model_selection_unchanged": "gpt-6.1-sol/ultra,44contexts maximum; none started.",
+  "next": "User resumes original live command. Verify actual original results or properly labeled partials, then conduct approved separate AI reviews. IMP-01/EVAL-02 remain open; human extension nonblocking.",
+  "observed_totals": {
+    "committed_microusd": 7795,
+    "operation_count": 10,
+    "reserved_microusd": 0,
+    "spent_microusd": 7795
+  },
+  "offline_diagnostic": {
+    "SQL_connections": 0,
+    "all_owned_containers_removed": true,
+    "containers": 13,
+    "credential_reads": 0,
+    "differences": "Earlier diagnostics retain declared shorter wall/entrypoint/instrumentation differences. Final v11 uses unchanged original native worker, all original limits and original audit/alias/container checks, without diagnostic Python tracing. Native entrypoint may start parsing after ready; coordinator inspects no task/answer semantics and forwards no provider request. All earlier failed invocations remain retained.",
+    "earlier_diagnostic_wall_seconds": 120,
+    "final_v11_wall_seconds": 1800,
+    "later_evidence": [
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-native-filesystem-diagnostic-v9\\delivery.json",
+        "sha256": "336a823f0c918107248450b331b98e91c99927a6d58f56792a4d86fd7abcbce4"
+      },
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-native-startup-diagnostic-v10\\receipt.json",
+        "sha256": "3f65ababd0e2b0a1104f98a8c961bb50aace93761d8879ad1059f1f94bf31472"
+      },
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-native-startup-diagnostic-v10\\evidence-reconciliation.json",
+        "sha256": "933ad8e2d941f577ac192e34d8bb8c8ed1c087501ffdb4e72d5c2ef46f84b39b"
+      },
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-native-startup-diagnostic-v10\\owned-container-cleanup-reconciliation.json",
+        "sha256": "d5279ea5b5165c2f748e77a9bdfa0f65f043820fad791f9b6363b92ac06fb151"
+      },
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-native-startup-diagnostic-v11\\receipt.json",
+        "sha256": "b99232cd731bda19756b37f26aded917bd06c444feea30af1974949de9a28bb4"
+      },
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-native-filesystem-diagnostic-v12\\reconciled-observation.json",
+        "sha256": "4dd80e68359179916370f94d7e4c0baebc3fda18974a5d693f96d48356ea0f45"
+      }
+    ],
+    "live_wall_seconds": 1800,
+    "private_task_answer_P_C_semantics_inspected": false,
+    "provider_calls": 0,
+    "receipts": [
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-native-startup-diagnostic-v1\\receipt.json",
+        "sha256": "30067637decb0a00cb2a23d88875fbb1262f7b2ca3dfedde48cb7f554452bb3b"
+      },
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-native-startup-diagnostic-v2\\receipt.json",
+        "sha256": "d48ec4780cb6eb7a95229c84366d8bb9f5a5740c5afb8f86c227ff00448b57ee"
+      },
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-native-filesystem-diagnostic-v3\\receipt.json",
+        "sha256": "c141db00d63814a7683aaf281a570ed90262822477f48be9f8f33b5935841fb0"
+      },
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-native-startup-diagnostic-v4\\receipt.json",
+        "sha256": "7bb6c791477d4c654e364724db6a832b2459a64aef4c2897d083b4a13401b95d"
+      },
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-native-filesystem-diagnostic-v5\\receipt.json",
+        "sha256": "b9d6b1e3d31cef9f37d952b80b70ee35c79ec7cabeafe1f29a746acd7834a8fb"
+      },
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-native-filesystem-diagnostic-v6\\receipt.json",
+        "sha256": "df7aa98d7a9a47bf8348d08b9fbf2417c92e4ccda2b976f0215ec01abea078a2"
+      },
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-native-filesystem-diagnostic-v7\\receipt.json",
+        "sha256": "29aa592d50eb65254ed7273460a5dd6f1a41d6112801dc560a0919d301a421fe"
+      },
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-native-startup-diagnostic-v8\\receipt.json",
+        "sha256": "152d7a35e09d0583040a795eec8f3d4b5ed6656cd4bcbdb19dcad594716fa54e"
+      }
+    ]
+  },
+  "original_grants": {
+    "final": {
+      "reason": null,
+      "status": "observed",
+      "totals": {
+        "committed_microusd": 0,
+        "operation_count": 0,
+        "reserved_microusd": 0,
+        "spent_microusd": 0
+      }
+    },
+    "search": {
+      "reason": null,
+      "status": "observed",
+      "totals": {
+        "committed_microusd": 7795,
+        "operation_count": 10,
+        "reserved_microusd": 0,
+        "spent_microusd": 7795
+      }
+    },
+    "shared_plain_references": {
+      "reason": null,
+      "status": "observed",
+      "totals": {
+        "committed_microusd": 0,
+        "operation_count": 0,
+        "reserved_microusd": 0,
+        "spent_microusd": 0
+      }
+    },
+    "validation": {
+      "reason": null,
+      "status": "observed",
+      "totals": {
+        "committed_microusd": 0,
+        "operation_count": 0,
+        "reserved_microusd": 0,
+        "spent_microusd": 0
+      }
+    }
+  },
+  "original_live_PID": 34252,
+  "original_process_confirmed_absent": true,
+  "partial_observation": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-unified-comparison-20261026-v2\\NOT-CREATED-unified-workspace\\observations\\b1c9f53231b44939839be6936b26e4ce.json",
+    "sha256": "f5501aedb670390a89ecb37ce11c3ff54d7fce757c1902973729a225daf01172"
+  },
+  "preservation": {
+    "active_static_files": 186,
+    "executing_Python_files": 318,
+    "frozen_files": 1121,
+    "historical_raw_hash_only": 451,
+    "older_prepared_files": 166,
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-native-recovery-preservation-v1.json",
+    "sha256": "72ae804a0f10faa7143af002d1eb6d1bf61324d3c2344c538f90ef286981fb74"
+  },
+  "protocol_and_metrics_changed": false,
+  "recorded_utc": "2026-10-27T06:40:41.270656+00:00",
+  "recovery_acceptance": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-native-recovery-acceptance-v1.json",
+    "sha256": "368f62b5bd28f30d8336c31afbc7981b37c181059be1bf4d5c91bc458609c3a8"
+  },
+  "recovery_instruction": "Resume the same original funded command in UNIFIED-LIVE.md while checked Docker session and exact original-root reexport remain running. Ten original generation replies reused; same grants include their7795microusd/10operations. After Docker restart stop for restored environment/readiness check; no hash edits, new budget or trial relocation.",
+  "retained_native_worker_reason": "host",
+  "retained_native_worker_status": "failed",
+  "same_original_CLI_check": {
+    "exit_code": 0,
+    "phase": "primary",
+    "proves_native_mount_readability": false,
+    "status": "checked",
+    "stop_code": null,
+    "terminal_chunk": "89b1ac"
+  },
+  "status": "original_run_incomplete_same_path_native_startup_recovered_ready_for_user_resume",
+  "underlying_cause": {
+    "Docker_WSL_defect_identified": false,
+    "WSL_ancestor_stat_warmup_restored_native_startup": false,
+    "controlled_pattern": "Deep sources tested at19parts fail, including79characters; shallow sources8/9parts succeed, including150characters; sameopaque7538byteinput/hash/WindowsACLs. Destination swap confirms source dependence.",
+    "direct_WSL_original_ancestor_metadata_reads": "All19ancestor paths readable; container startup still failed afterward.",
+    "immediate_failure": "Instrumented trusted runner copy: OSError errno5 in NativeWorker.prepare checking /inputs via releases._root/_information/pathlib.lstat; before ready/official evaluator import/provider dispatch.",
+    "restart_restored_native_startup": false,
+    "same_path_drvfs_reexport_restored_original_native_readiness": true,
+    "universal_depth_threshold_established": false
+  },
+  "unsupported_recovery_shortcuts": [
+    "Changing original trusted executor/helper hashes",
+    "Moving trial or replacing original mount source with short alias",
+    "Recreating original grants as fresh allowance",
+    "Calling legacy policy-search continuation for this native trial"
+  ],
+  "updated_utc": "2026-10-27T08:08:03.533094+00:00",
+  "user_reported_reason": "native_error",
+  "worker_ready_audit_recorded": false
+}

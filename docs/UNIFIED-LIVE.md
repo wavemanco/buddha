@@ -1,5 +1,11 @@
 # Run the approved Buddha and plain-model comparison
 
+**Recovery checked: resume the original command below. Keep Docker Desktop
+running.** The [startup incident and recovery](UNIFIED-NATIVE-STARTUP-INCIDENT.md)
+retain the first stopped attempt and the no-provider readiness proof. The
+current environment workaround is temporary. If Docker has restarted since
+that check, wait for a restored environment/readiness check before paid work.
+
 The user approved this study on October 26, 2026: **$150 combined OpenAI and
 Anthropic API cap, with 16,384 recorded attempts**. Partial work is retained with
 its stage, reason, costs and unresolved holds. The executing Python has passed
@@ -14,17 +20,21 @@ all eight Linux/Windows CI jobs and matches the checked source inventory.
 | Unused validation | $0 | 0 |
 | **Total** | **$150** | **16,384** |
 
-The four grants start with zero spending, holds and attempts. The two plain
-references share one grant; unused money cannot move between phase grants.
+At funding, all four grants had zero spending, holds and attempts. The first
+attempt now retains ten generation replies and $0.007795 spent, with zero held.
+Resuming reuses those ten replies and includes their cost in the same cap.
+The two plain references share one grant; unused money cannot move between
+phase grants.
 Earlier experiments remain closed. Recorded costs use conservative token-price
 bounds and are not reconciled provider invoices.
 
-## Start the run
+## Resume the stopped run
 
 Open a normal PowerShell window and run these two commands in order. The first
 changes this window's working folder; it spends nothing. The second starts the
-approved run once, can spend API money within the grants, and stays in this
-window until it finishes or stops. No second window is required.
+original run once, reuses its completed work, can spend API money within the
+remaining original grants, and stays in this window until it finishes or stops.
+No second window is required.
 
 ```powershell
 cd C:\Users\arvik\code\buddha
@@ -42,7 +52,8 @@ for missing OpenAI and Anthropic keys without showing their characters. Paste
 each key once and press Enter; an acknowledgement confirms receipt. Existing
 environment values skip the corresponding prompt. Use the reviewed
 Standard/default public pay-as-you-go projects. The confirmation flag asserts
-that these are those project keys. Do not send keys in chat.
+that these are those project keys. Use the same keys/projects as the stopped
+attempt; a changed identity can trigger a review stop. Do not send keys in chat.
 
 OpenAI supplies generation, source proposals and the official distinctiveness
 judge; Anthropic supplies the official utility judge and its fallback. Prompted
@@ -84,8 +95,9 @@ Saved incomplete observations use that workspace's `observations` folder.
 
 This command checks the same handoff and original state once. It spends no
 money, asks for no keys, creates no run owners or run records, needs no separate
-window and exits by itself. It does not authenticate provider accounts. It can
-also be run before resuming; share a stopped result rather than changing files.
+window and exits by itself. It does not authenticate provider accounts or test
+native Docker folder readiness. It can also be run before resuming; share a
+stopped result rather than changing files.
 
 ```powershell
 python C:\Users\arvik\code\buddha\runs\reviews\unified-live-configuration\docs\conformance\unified-run.py --handoff C:\Users\arvik\code\buddha\runs\imp01-unified-comparison-20261026-v2\NOT-CREATED-unified-launch.json --sha256 2e426de93d64d94e5060ad3b233ca05c98343832c68cd857b4dbf0b6c0efb522 --check
