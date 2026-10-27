@@ -3,6 +3,10 @@
 The user's October 26, 2026 instruction establishes two evidence tracks sharing
 one frozen experiment. Human availability does not block the AI-only work.
 [PLAN.md](PLAN.md) owns current status and scheduling.
+The user subsequently approved the exact comparison scope, $150 API cap and
+native reviewer setup on the same date. The [funded live guide](UNIFIED-LIVE.md)
+provides the command; the [approval record](conformance/imp01-unified-approval-decision.json)
+retains that explicit decision.
 
 | Track | Evidence | Completion and claims |
 | --- | --- | --- |
@@ -27,18 +31,18 @@ missing reviewers; a new round does not erase that history or turn reused AI
 forms into fresh reviews. Existing export and collection functions support
 model-only and human-only rosters and preserve earlier collections.
 
-For the AI-only whole-set review, propose one model-review procedure using one
+For the AI-only whole-set review, use the selected model-review procedure with one
 fresh context per answer set: at most twelve contexts and twelve whole-set
 judgments. Each receives its task, full answers and the fixed rubric with
 condition labels hidden. Preserve the per-set replies and provenance when
 assembling its model submission. Missing judgments remain missing.
 
-This supplements the earlier target-repair proposal of thirty-two contexts and
-sixty-four staged judgments. The combined proposal is at most forty-four fresh
+This supplements the target-repair setup of thirty-two contexts and
+sixty-four staged judgments. The approved maximum is forty-four fresh
 native reviewer contexts: sixty-four target-stage judgments plus twelve
-whole-set judgments. The proposed model remains `gpt-6.1-sol` with `ultra`
-reasoning, pending explicit selection. This consumes additional unpriced
-Codex-plan usage outside the unchanged $150 API proposal. A model review remains
+whole-set judgments. The explicitly selected model is `gpt-6.1-sol` with `ultra`
+reasoning. This consumes unpriced
+Codex-plan usage outside the approved $150 API cap. A model review remains
 model-dependent evidence; it does not establish human agreement.
 
 The current human sample covers Buddha's conditions. Comparisons with the two
@@ -53,8 +57,8 @@ the original outputs. Keep the earlier AI-only report and computational receipts
 unchanged. Human judgments supplement interpretation without replacing official
 NoveltyBench scores or feeding back into this run's frozen evaluation.
 
-The split creates no extra API allowance or reviewer-model selection. The
-proposed native AI review setup and its separate Codex-plan usage still need
-their own explicit selection; financial, benchmark, source and live-handoff
-checks remain required for the paid computation. Completion of either evidence
+The split itself creates no extra API allowance. The separate explicit approval
+selects the native setup and funds the one reviewed API scope; financial,
+benchmark, source and live-handoff checks remain required for paid computation.
+Completion of either evidence
 track does not automatically establish improvement or generalization.

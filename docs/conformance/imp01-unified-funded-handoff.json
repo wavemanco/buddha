@@ -1,0 +1,167 @@
+{
+  "actual_provider_calls_at_prelaunch": 0,
+  "actual_trial_owners_or_reviews_at_prelaunch": 0,
+  "approval_decision": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\unified-funded-handoff\\docs\\conformance\\imp01-unified-approval-decision.json",
+    "sha256": "f1f5c41faa6308fc4920486b06dd42fa06bbc496a0e96bc98a76d5077307b3ef"
+  },
+  "authority_totals_at_prelaunch": {
+    "committed_microusd": 0,
+    "operation_count": 0,
+    "reserved_microusd": 0,
+    "spent_microusd": 0
+  },
+  "date": "2026-10-26",
+  "document_sha256": {
+    "docs/API-KEYS.md": "813644f77d44d382fa08472fbe55ed5ee7e87b72b177458117bd0a94fe86dccb",
+    "docs/PLAN.md": "15724197505da67f75e86c2b08c815a30370e488c955a0624d9ab44c1d8f1a15",
+    "docs/REVIEW-TRACKS.md": "2f5dcf280daf8cb25afa8c646ecfb92f937a2169409aa45647085a669f082584",
+    "docs/UNIFIED-LAUNCH.md": "03538b5b6bc77b0cad299dd11944f69ed982c75f50deee352bed43876143122a",
+    "docs/UNIFIED-LIVE-CONFIGURATION.md": "6779a1a7f04d66ca85b43b32fd0889cc9fb747010c7fbf0370a046b67386b2d1",
+    "docs/UNIFIED-LIVE.md": "6fa5c5bc1155fcebc0c7008bbac510666383910363aab562c622fcbe86d201b8",
+    "docs/conformance/imp01-unified-approval-decision.json": "f1f5c41faa6308fc4920486b06dd42fa06bbc496a0e96bc98a76d5077307b3ef"
+  },
+  "evidence": {
+    "funded_preparation": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-funded-handoff-preparation-v1.json",
+      "sha256": "0afe149b96e103123f8f5ccecf39686ba7a40424dda88b6fbcd25e4755d09e0c"
+    },
+    "hosted_completion": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-executing-source-hosted-completion-v1.json",
+      "sha256": "6de6f8d672ed079ee018c73a46c7eb1308a3b12d5b412a092d27bd2075a17982"
+    },
+    "independent_funded_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-funded-handoff-independent-review-v1.json",
+      "sha256": "4bb583ee0322cb32b2615f555d32596980d36f304bf0486f5c52fa0a48928a69"
+    },
+    "request_price_refresh": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-approved-request-price-refresh-v1.json",
+      "sha256": "11cb86cd3ad8ef808461759965d8ac694aa61a328e0093cade203dbe0e963cf5"
+    }
+  },
+  "executing_code_commit": "ebce35e1ed4b375e05fe95a8601e159fdf9a9431",
+  "executing_worktree": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\unified-live-configuration",
+  "executing_worktree_control_commit": "9722d5d745d777222b2a102859c69d15f17524d3",
+  "existing_key_or_credential_fingerprint": false,
+  "format": "buddha.unified-funded-handoff.v1",
+  "grants": {
+    "final": {
+      "budget_microusd": 85000000,
+      "id": "imp01-unified-20261026-v1-final",
+      "max_calls": 10240,
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-unified-live-20261026-v1\\authorization-final.sqlite3",
+      "scope": "buddha.evaluation-trial.v1:{\"definition_sha256\":\"7af47009002a6dad6da0f5f2e08c94468bae4e3c10737009c311935d23eb210b\",\"phase\":\"final\",\"root\":\"C:\\\\Users\\\\arvik\\\\code\\\\buddha\\\\runs\\\\imp01-unified-review-20261026-v2\\\\NOT-CREATED-trial-runtime\"}",
+      "terms_sha256": "3abd8ad379bbcc72797a29383e5c7f185c3779eae2ac09623d513feec402e15d"
+    },
+    "search": {
+      "budget_microusd": 40000000,
+      "id": "imp01-unified-20261026-v1-search",
+      "max_calls": 4096,
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-unified-live-20261026-v1\\authorization-search.sqlite3",
+      "scope": "buddha.evaluation-trial.v1:{\"definition_sha256\":\"7af47009002a6dad6da0f5f2e08c94468bae4e3c10737009c311935d23eb210b\",\"phase\":\"search\",\"root\":\"C:\\\\Users\\\\arvik\\\\code\\\\buddha\\\\runs\\\\imp01-unified-review-20261026-v2\\\\NOT-CREATED-trial-runtime\"}",
+      "terms_sha256": "7c74bcfcd5d7ca745adb660a83562345dedb19d2a9261bb10bfc4230c7d389af"
+    },
+    "shared_plain_references": {
+      "budget_microusd": 25000000,
+      "id": "imp01-unified-20261026-v1-shared_plain_references",
+      "max_calls": 2048,
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-unified-comparison-20261026-v2\\NOT-CREATED-plain-authorization.sqlite3",
+      "scope": "buddha.plain-references.v1:666223f5ece3658bc6af556075dea85d43e52bd7b43aa2a2f1feb206af306ff2",
+      "terms_sha256": "610c2f555d1f60912f99ec6730e85fd5903058e7be832eba25c5b3d79c2080e4"
+    },
+    "validation": {
+      "budget_microusd": 0,
+      "id": "imp01-unified-20261026-v1-validation",
+      "max_calls": 0,
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-unified-live-20261026-v1\\authorization-validation.sqlite3",
+      "scope": "buddha.evaluation-trial.v1:{\"definition_sha256\":\"7af47009002a6dad6da0f5f2e08c94468bae4e3c10737009c311935d23eb210b\",\"phase\":\"validation\",\"root\":\"C:\\\\Users\\\\arvik\\\\code\\\\buddha\\\\runs\\\\imp01-unified-review-20261026-v2\\\\NOT-CREATED-trial-runtime\"}",
+      "terms_sha256": "45311cde72e418d3b393a8f8060ca803b105cc74f79c593524baaac35f553e74"
+    }
+  },
+  "handoff": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-unified-comparison-20261026-v2\\NOT-CREATED-unified-launch.json",
+    "sha256": "2e426de93d64d94e5060ad3b233ca05c98343832c68cd857b4dbf0b6c0efb522"
+  },
+  "hosted_checks": {
+    "Ubuntu_skips": 5,
+    "Windows_skips": 1,
+    "current_executing_Python_bytes_match": 318,
+    "errors": 0,
+    "failures": 0,
+    "jobs_success": 8,
+    "quality_checks": 7,
+    "receipt": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-executing-source-hosted-completion-v1.json",
+      "sha256": "6de6f8d672ed079ee018c73a46c7eb1308a3b12d5b412a092d27bd2075a17982"
+    },
+    "tests_per_OS": 2026
+  },
+  "human_extension": {
+    "Buddha_sample_sets": 12,
+    "actual_ratings": 0,
+    "blocks_AI_only": false,
+    "first_selected_human": "project owner",
+    "later_reports": "separate over same frozen outputs; preserve earlier reports and actual missing coverage",
+    "maximum_answers": 120,
+    "relationship_and_actual_prior_exposure_required": true
+  },
+  "limits": [
+    "This is prelaunch funding/configuration/CLI evidence, not a live scientific result or provider account authentication.",
+    "Both provider keys and project confirmation are supplied locally by the user at launch. No real key was requested or read during preparation.",
+    "The bounded three-development/26-final-task study is not a full leaderboard submission or generalization result.",
+    "Recorded costs are conservative usage calculations, not provider invoices; completion cost, duration and model fit are not guaranteed.",
+    "Frozen internal NOT-CREATED names remain; original launch/grant records now exist, runtime owner/review paths do not.",
+    "The executing-code CI pass is exact by318-file byte equality; documentation-only PR status remains separate.",
+    "All earlier experiment allowances and historical liabilities remain unchanged."
+  ],
+  "native_review": {
+    "contexts_maximum": 44,
+    "explicitly_selected": true,
+    "model": "gpt-6.1-sol",
+    "monetary_cost": "unpriced Codex-plan usage outside API cap",
+    "reasoning_effort": "ultra",
+    "reviewer_API_fallback": false,
+    "scientific_contexts_created": 0,
+    "target_contexts_maximum": 32,
+    "target_stage_judgments_maximum": 64,
+    "whole_set_contexts_and_judgments_maximum": 12,
+    "whole_set_model_procedures": 1
+  },
+  "next": "User starts exact documented command; verify original complete/partial outputs and then perform selected staged/whole-set native review. Human evidence follows independently.",
+  "operator_guide": "docs/UNIFIED-LIVE.md",
+  "plan_revision": 167,
+  "preflight": {
+    "actual_keyless_CLI_check": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-funded-cli-check-v1.json",
+      "sha256": "e2c5407b213ee1997feb7d20e52b70fa5e83f2b0b4e3b3f99c4eb788c6af1756"
+    },
+    "counts_are_not_intrinsic_inclusive_171_174_census": true,
+    "independent_fresh_funded_check": "pass; original schemas/scopes/sourcejoins preserved, all186active+166older+451raw+318Python files unchanged",
+    "original_capacity_projected_before_allocation": true,
+    "original_full_combined_preflight": "pass primary/fresh, references/fresh, stopnull, accountingzero",
+    "outer_controls_including_self": 91,
+    "primary_returned_explicit_bindings": 104,
+    "projected_explicit_bindings": 105
+  },
+  "preservation": {
+    "executing_Python_files": 318,
+    "existing_active_files_preserved": 186,
+    "files": 1121,
+    "historical_raw_hash_only": 451,
+    "inventory_sha256": "9dc38d12ea1d920254cab8af094b4e222f9995da9d9827b70a07796c014212e7",
+    "older_prepared_files": 166
+  },
+  "primary_approval": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-unified-comparison-20261026-v2\\NOT-CREATED-approval.json",
+    "sha256": "6af568537c96de08786c0cca333829d48205eb1ef5cf80c6e420133097299c14"
+  },
+  "primary_launch": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-unified-comparison-20261026-v2\\NOT-CREATED-launch.json",
+    "sha256": "5ef6cd57e01a4f05b2634f14e4c6ef4bbc7f61412f0e13225ac4447f077ab1a8"
+  },
+  "status": "ready_for_user_started_approved_comparison",
+  "total_limits": {
+    "budget_microusd": 150000000,
+    "max_calls": 16384
+  }
+}

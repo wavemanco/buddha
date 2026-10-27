@@ -5,11 +5,11 @@ controllers, the combined funding check, original-owner inspection and saved
 partial observations. It allocates no money and changes no benchmark settings.
 The [living plan](PLAN.md) remains the scheduling authority.
 
-This implementation is not a funded handoff. The [reduced no-cost execution
-rehearsal](UNIFIED-LAUNCH-REHEARSAL.md) now passes through the original controllers,
-interruption, same-owner resume and completed replay. A fresh configuration,
-hosted checks and the remaining prospective review/account/price/request/funding
-gates still precede the exact live command.
+The [funded handoff](UNIFIED-LIVE.md) now supplies the exact approved command.
+The [reduced no-cost execution rehearsal](UNIFIED-LAUNCH-REHEARSAL.md) separately
+passes through the original controllers, interruption, same-owner resume and
+completed replay. Its mocked runtime evidence is distinct from the current
+funding/configuration checks and the eventual real results.
 
 ## Order and what completion means
 
@@ -29,8 +29,9 @@ The terminal prints a compact status, the saved result's path and its SHA-256
 fingerprint. The full comparison stays in the saved file rather than filling
 the terminal.
 
-`complete` means computational completion. Native target-repair review and the
-required human sample remain separate. The primary compute loop has no native
+`complete` means computational completion. Native AI review remains separate;
+the parallel human extension is required only for human-augmented claims and
+does not block the AI-only track. The primary compute loop has no native
 target-review pause and cannot obtain desktop model judgments from PowerShell.
 The result explicitly records `pending_separate_review`; it supplies no
 scientific winner, human preference or useful-diversity improvement claim.
@@ -45,7 +46,8 @@ The launcher checks the exact primary/plan pins, original four grants, common
 panel, model profile, native instrument and source bindings. The same shared raw
 allowance funds both plain modes. The declared combined limits must equal the
 four allocation limits; this command cannot reallocate unused phase capacity.
-The current proposed $150/16,384-attempt split remains unapproved and unfunded.
+The current $150/16,384-attempt split is approved and funded; original grant
+terms and retained accounting are checked before execution.
 
 Both references' existing owners are inspected before key entry and checked
 again afterward. Existing raw work before primary completion, missing owners,
@@ -100,7 +102,7 @@ This optional help command runs once in the current PowerShell window. It spends
 nothing, changes no run records, needs no separate window and stops by itself:
 
 ```powershell
-python C:\Users\arvik\code\buddha\runs\reviews\unified-comparison-launch\docs\conformance\unified-run.py --help
+python C:\Users\arvik\code\buddha\runs\reviews\unified-live-configuration\docs\conformance\unified-run.py --help
 ```
 
 The live command also runs once in its current window. It can spend money; Ctrl+C
