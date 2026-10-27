@@ -73,8 +73,10 @@ The hash is a consistency check, not an independent attestation of the stop.
 
 The [funding check](UNIFIED-FUNDING-CHECK.md),
 [reference recovery check](BASELINE-RECOVERY-CHECK.md) and this writer are now
-separate implemented pieces. The next slice connects them with the existing
-controllers and handles observation failure at that execution boundary. Exact
+separate implemented pieces. The [combined launcher](UNIFIED-LAUNCH.md) now
+connects them with the existing controllers and handles observation failure at
+that execution boundary. Its full execution rehearsal and exact live handoff
+remain required. Exact
 review/adoption, account/price/request, hosted-CI and funding gates still precede
 a live command. The proposed budget and original study remain unchanged.
 No new user command is introduced here.

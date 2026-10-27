@@ -1,0 +1,99 @@
+{
+  "base_head": "848566a5fcfdb35a1bebb405bc86d243db6ee2ec",
+  "constraints": {
+    "actual_P_C_or_private_prompt_semantics_read": false,
+    "actual_study_grants_or_owners_created": false,
+    "benchmark_scoring_changed": false,
+    "budget_or_study_grid_changed": false,
+    "fresh_synthetic_test_grants_and_owners_created": true,
+    "funding_adoption_or_native_reviewer_allocation_created": false,
+    "historical_paid_SQL_connections": 0,
+    "merged": false,
+    "real_credentials_read": false,
+    "real_provider_calls": 0,
+    "scientific_gate_closed": false
+  },
+  "contract": {
+    "acyclic_static_source_control_bindings": true,
+    "complete_comparison_write_once_with_external_hash_join_before_compact_terminal_output": true,
+    "complete_is_computational_pending_separate_native_and_human_review": true,
+    "diagnostic_failure_never_replaces_original_exception": true,
+    "exact_funding_panel_profiles_source_and_whole_owner_checks": true,
+    "no_native_review_runtime_pause_invented": true,
+    "one_shared_raw_grant_original_owner_resume": true,
+    "one_temporary_union_provider_key_context": true,
+    "original_primary_and_outer_reference_credential_contexts_preserved": true,
+    "original_stop_reasons_errors_and_cancellations_preserved": true,
+    "partial_initialization_not_silently_repaired": true,
+    "pre_and_post_key_state_checks": true,
+    "primary_then_independent_then_in_context_original_controllers": true,
+    "serial_outer_lock_and_foreign_lock_refusal": true
+  },
+  "files": {
+    "buddha/unified_launch.py": "4b4afd31a8686c1d2ff57f6d556c5841d4acc11fd0a8e998e1385b790343d749",
+    "docs/COMPARISON-PARTIAL-OBSERVATIONS.md": "5cccfd20fb36452b661b6736e68b146d68f0b60de4146e9d279b3ac982364052",
+    "docs/UNIFIED-LAUNCH.md": "af7ff4bb561728aa8443d724c11ea435316ebf586d12ded247883c468e36b7dd",
+    "docs/conformance/unified-run.py": "bbe4f282fa80bc7fe16db794fde0ffc59edeb0906696c07d0fc021eec2323120",
+    "tests/test_unified_launch.py": "134f5969c42e64816da846180d741d7fd4e81d057cd986d81dcdc5811cb72154"
+  },
+  "format": "buddha.unified-comparison-launch-delivery.v1",
+  "independent_app_review": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-comparison-launch-independent-review-v1.json",
+    "role": "Independent app-source reviewer; authored original13 methods; root authored4 additions; not scientific review",
+    "sha256": "32cf986eab1adfcdef01a3412d5c8932b56df4c7beaa581ebb4872c9b0d6c7e3"
+  },
+  "limitations": [
+    "Original-controller execution, raw fresh-owner preparation and final comparison in one execution remain for the next no-cost rehearsal.",
+    "Supplied-controller seams are not live-provider or OS-container proof.",
+    "Partial observations remain sequential accounting rather than atomic snapshots or invoices.",
+    "Unfinished partial raw initialization remains an explicit stop without automatic repair.",
+    "Scientific native/human review, final allocation adoption and exact funded handoff remain separate."
+  ],
+  "next": "One full no-cost supplied-worker/mocked-HTTPS original-controller execution rehearsal with interruption, same-owner resume and complete keyless replay; then exact hosted checks and prospective funded handoff.",
+  "plan_revision": 164,
+  "preservation": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-comparison-launch-preservation-v1.json",
+    "sha256": "7b414b4881f82dbdb3fb981c09771a48dfbbb19c43de44058c84af1318e6d18f"
+  },
+  "preservation_summary": {
+    "existing_python_modified": 0,
+    "existing_tracked_python_preserved": 314,
+    "new_python_files": 3,
+    "original_acceptance_tails_preserved": 7,
+    "original_raw_roadmap_rows_preserved": 163,
+    "prepared_files_preserved": 166
+  },
+  "spec_sections": [
+    "DESIGN sections5/7/9",
+    "PLAN IMP-01/EVAL-02"
+  ],
+  "verification": {
+    "CLI_regression": "Observed wrong operator-format RED; corrected compact output is GREEN. Canonical result/file mismatch is refused before complete output.",
+    "elapsed_seconds": 21.669,
+    "exact_changed_head_hosted_checks": "required_after_publication",
+    "final_CLI_lint_format_security_compile_rechecked_after_hash_join_fix": true,
+    "final_unique_methods": 17,
+    "full_original_controller_execution": false,
+    "help_check": "Actual --help exits0 without check/controller/key access; command explained in guide",
+    "mypy_source_files": 88,
+    "quality_checks": 7,
+    "quality_commands": [
+      "python -m ruff check buddha tests agents ci_test_shard.py docs/conformance/unified-run.py",
+      "python -m ruff format --check --no-cache buddha tests agents ci_test_shard.py docs/conformance/unified-run.py",
+      "python -m mypy --strict buddha agents ci_test_shard.py",
+      "python -m bandit -q -r buddha agents ci_test_shard.py docs/conformance/unified-run.py",
+      "python -m pip_audit --no-deps -r requirements.txt",
+      "python -m pip_audit --disable-pip --no-deps --strict -r requirements-dev.txt",
+      "python -m compileall -q buddha tests agents ci_test_shard.py docs/conformance/unified-run.py"
+    ],
+    "quality_result": "pass",
+    "result": "pass",
+    "ruff_formatted_files": 267,
+    "scope": {
+      "CLI_methods": 3,
+      "actual_keyless_primary_raw_preflight_composition": 1,
+      "explicit_seam_lifecycle_and_guard_methods": 13
+    },
+    "session_id": 38670
+  }
+}
