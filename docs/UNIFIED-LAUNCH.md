@@ -5,7 +5,9 @@ controllers, the combined funding check, original-owner inspection and saved
 partial observations. It allocates no money and changes no benchmark settings.
 The [living plan](PLAN.md) remains the scheduling authority.
 
-This implementation is not a funded handoff. A full no-cost execution rehearsal,
+This implementation is not a funded handoff. The [reduced no-cost execution
+rehearsal](UNIFIED-LAUNCH-REHEARSAL.md) now passes through the original controllers,
+interruption, same-owner resume and completed replay. A fresh configuration,
 hosted checks and the remaining prospective review/account/price/request/funding
 gates still precede the exact live command.
 
@@ -32,6 +34,10 @@ required human sample remain separate. The primary compute loop has no native
 target-review pause and cannot obtain desktop model judgments from PowerShell.
 The result explicitly records `pending_separate_review`; it supplies no
 scientific winner, human preference or useful-diversity improvement claim.
+
+A `checking` progress message can show `accounting unknown` before the display
+has a selected allocation. The saved observation or report holds the verified
+costs and any unresolved requests.
 
 ## Before any paid request
 
