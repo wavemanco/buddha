@@ -161,6 +161,17 @@ The generator necessarily sees its current task during final inference. The impr
 
 The benchmark is public. Process separation cannot guarantee that base models have never seen its prompts. If optimizing on a subset, a later full 1,100-prompt score mixes development and held-out data and must disclose that fact. Use a separately authored, sealed transfer set to support generalization beyond NoveltyBench; do not call reworded benchmark items independent transfer.
 
+The user's October 26, 2026 [two-track decision](REVIEW-TRACKS.md) separates
+AI-only evaluation from a parallel AI + human extension on the same frozen
+outputs. AI-only computation, analysis and accurately labeled AI findings
+proceed without waiting for people. The original human sample and criteria
+remain required for human-augmented claims, with missing ratings explicit.
+The project owner is the first selected human reviewer; each human report
+discloses that relationship. Later ratings add
+separate evidence and reports without rewriting the earlier AI-only record or
+official scores. This changes review scheduling and claim scope, not the fixed
+benchmark, analysis, budget or experimental treatment.
+
 Required comparisons, staged to respect budget:
 
 | Question | Comparator |
@@ -235,7 +246,7 @@ Working-directory restrictions, Python subprocesses, source allowlists, AST chec
 | Long rationales inflate diversity or utility | Strict task-form checks and binary/single-digit counterexamples |
 | Judge order/model/prompt drift | Explicit protocol identity; order-sensitivity audit; no cache reuse |
 | Missing/refused rows flatter the mean | Complete expected-ID and prompt-hash coverage before promotion |
-| Search exploits official judge | Independent frozen audit instrument and human sample; disclose divergence |
+| Search exploits official judge | Separate frozen AI audit for the AI-only track; actual blinded human sample for human-augmented claims. Disclose reviewer relationships, coverage and divergence. |
 | Validation becomes training | Limited validation occasions and separate finalization controller |
 | “Better” only means more calls | Matched inference budget and total research-cost accounting |
 | Source mutation destroys improver | Mutation competence suite plus controlled improver experiment |

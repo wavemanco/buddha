@@ -1,5 +1,10 @@
 # One proposed budget for the Buddha study and plain references
 
+This document records the earlier v1 preparation. The [current source-bound
+configuration and two review tracks](UNIFIED-LIVE-CONFIGURATION.md) supersede
+its file census and review arrangements, while preserving the same study scope
+and proposed API cap. The earlier preparation remains retained evidence.
+
 The fresh configuration combines the original bounded improver study with two
 same-model plain references. It is **unfunded, unadopted and not launchable**.
 [PLAN.md](PLAN.md) remains the roadmap.
