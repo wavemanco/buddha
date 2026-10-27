@@ -133,15 +133,17 @@ separates constructor checks, runtime evidence and independent review.
 
 ## Next work before a live command
 
-The current primary launcher is not a combined primary/reference operator.
-The [passive combined-funding check](UNIFIED-FUNDING-CHECK.md) now verifies the
-four original allocations against one declared ceiling without keys or writes.
-Complete the coordinated handoff using the existing primary and baseline
-execution routes: validate all allocations before keys, preserve original
-owners on resume, and save partial work with its stage, reason, costs and holds.
-Then complete prospective adoption/reviewer decisions and the final
-account/price/request/CI checks before allocating funds and publishing the exact
-local command. Both IMP-01 and EVAL-02 remain open.
+The [combined launcher](UNIFIED-LAUNCH.md) now connects the existing primary and
+plain-reference controllers, funding checks and incomplete observations. Its
+focused checks and the [reduced execution rehearsal](UNIFIED-LAUNCH-REHEARSAL.md)
+have separate scopes. These prepared files still refer to source cut `90b21a0`;
+they remain preserved proposals and
+must not be used as a live handoff for changed code.
+
+[PLAN.md](PLAN.md) tracks the current rehearsal and remaining prospective
+adoption, reviewer, account, price, request, hosted-check and funding gates.
+The exact local command follows a fresh handoff bound to verified executing
+code. Both IMP-01 and EVAL-02 remain open.
 
 This optional command displays the saved proposal once in the current PowerShell
 window. It only reads a file, changes nothing and spends nothing. No separate
