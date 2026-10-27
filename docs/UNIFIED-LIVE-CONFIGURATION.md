@@ -1,4 +1,10 @@
-# Current comparison preparation and review tracks
+# Static comparison preparation and review tracks
+
+**Adopted on October 26, 2026:** the user approved this frozen scope, the $150
+API allocation and `gpt-6.1-sol` / `ultra` for up to forty-four native contexts.
+The [funded live guide](UNIFIED-LIVE.md) now supplies the command and current
+status. The preparation record below describes the earlier preallocation state;
+its immutable controls and creation-time labels remain preserved.
 
 The comparison is prepared at executing source `ebce35e1`, but it is still
 **unapproved, unadopted, unfunded and not ready to launch**. There is no command

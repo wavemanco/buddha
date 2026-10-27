@@ -1,0 +1,136 @@
+{
+  "actual_grants_created_at_recording": false,
+  "actual_paid_calls_at_recording": 0,
+  "actual_trial_or_owners_created_at_recording": false,
+  "adopted_static_controls": {
+    "comparison_plan": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-unified-comparison-20261026-v2\\comparison-plan.json",
+      "sha256": "666223f5ece3658bc6af556075dea85d43e52bd7b43aa2a2f1feb206af306ff2"
+    },
+    "native_target_route": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-unified-review-20261026-v2\\native-target-review-route-proposed.md",
+      "sha256": "b228cdcdbefe36766ef73562b4f338bf936582212d7985062af0d6917aed9c14"
+    },
+    "original_resource_proposal": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-unified-comparison-20261026-v2\\resource-proposal.json",
+      "sha256": "d0cb664d0989f7bf0ceae5026b77920b2f4e905dc40ecfd8bcf21118a9f130fb"
+    },
+    "primary_proposal": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-unified-review-tracks-20261026-v2\\handoff-primary-unfunded.json",
+      "sha256": "55ef2a98ccb734ce56d3075501c2cf16ba6bf6c329d6ec5acdbda24d5e9c7416"
+    },
+    "reference_inputs": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-unified-review-tracks-20261026-v2\\reference-input-bindings.json",
+      "sha256": "ec48bb128ebc0bfd243e2e1aba3469f39d0343ffe0e074fe04c46295d3bbbba4"
+    },
+    "review_plan": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-unified-review-20261026-v2\\review-plan.json",
+      "sha256": "d4dac94c0cf73112d787d2302e2272f0fcaa9e62451c53dead644ef82716a666"
+    },
+    "review_protocol": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-unified-review-20261026-v2\\protocol.md",
+      "sha256": "13a61878c1b24a5b7ba59bcbab5df371ddd1c23b4e450ce2d9e3faf7666a38d7"
+    },
+    "review_track_decision": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\unified-live-configuration\\docs\\conformance\\imp01-review-tracks-decision.json",
+      "sha256": "80cbedb398777a08208ac71c7fb9a6c5bf94b2d500d836529d31743ebe5c63cc"
+    },
+    "review_track_intent": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-unified-review-tracks-20261026-v2\\intent.json",
+      "sha256": "37c6e8ac5c5a77a1c60a5269b6ea776f01ecfd7a387fe184c40899ae45ef4acd"
+    },
+    "review_track_policy": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\unified-live-configuration\\docs\\REVIEW-TRACKS.md",
+      "sha256": "0a5f9e7fb919365c436ff6b872c79e11d4ee150b8916a66d481949c79f32ab54"
+    }
+  },
+  "adoption_interpretation": "Adopts the exact source-bound study, analysis, population, selection rule, resource split and official instrument already bound by these controls. Their creation-time proposed/unapproved labels and old target-only resource description remain historical; this approval selects the composite44-context scope and nonblocking tracks. No historical artifact rewritten.",
+  "allocations": {
+    "final": {
+      "budget_microusd": 85000000,
+      "max_calls": 10240
+    },
+    "search": {
+      "budget_microusd": 40000000,
+      "max_calls": 4096
+    },
+    "shared_plain_references": {
+      "budget_microusd": 25000000,
+      "max_calls": 2048
+    },
+    "validation": {
+      "budget_microusd": 0,
+      "max_calls": 0
+    }
+  },
+  "approved_on": "2026-10-26",
+  "claim": "Explicit approved allocation/prospective adoption/native selection only; not scientific success, human validation, account authentication or completed execution.",
+  "currency": "USD",
+  "executing_source_commit": "ebce35e1ed4b375e05fe95a8601e159fdf9a9431",
+  "format": "buddha.unified-comparison-approval-decision.v1",
+  "human_extension": {
+    "blocks_AI_only": false,
+    "first_selected_human": "project owner",
+    "maximum_answers": 120,
+    "plain_reference_human_preference_claim": false,
+    "ratings_collected_at_recording": 0,
+    "relationship_and_actual_prior_exposure_required": true,
+    "sample_sets": 12
+  },
+  "live_command_supplied_at_recording": false,
+  "native_review": {
+    "actual_contexts_launched_at_recording": 0,
+    "model": "gpt-6.1-sol",
+    "monetary_cost": "unpriced Codex-plan usage outside the150USD API cap",
+    "reasoning_effort": "ultra",
+    "reviewer_API_fallback": false,
+    "selected_explicitly": true,
+    "target_contexts_maximum": 32,
+    "target_stage_judgments_maximum": 64,
+    "total_fresh_contexts_maximum": 44,
+    "whole_set_contexts_maximum": 12,
+    "whole_set_judgments_maximum": 12,
+    "whole_set_model_review_procedures": 1
+  },
+  "partial_records_required": [
+    "stage",
+    "reason",
+    "usable_evidence_and_missing_work",
+    "known_costs",
+    "unresolved_holds"
+  ],
+  "partial_results_allowed": true,
+  "recorded_utc": "2026-10-27T05:31:40.272658+00:00",
+  "retained_conditions": [
+    "Exact executing Python must match the all-platform hosted pass before funded handoff.",
+    "Fresh current input/request/price/account checks remain necessary; account assertions are confirmed locally at key entry.",
+    "Use four original distinct grants, including zero validation, with one shared raw allowance; no previous balance reused.",
+    "No native scientific reviewer or API call starts during this preparation.",
+    "User supplies OpenAI and Anthropic keys locally and starts only after the exact final command is supplied.",
+    "Human availability is nonblocking; reports retain actual coverage and reviewer relationships/exposure."
+  ],
+  "reviewed_pull_request": "https://github.com/wavemanco/buddha/pull/163",
+  "source_control_commit": "9722d5d745d777222b2a102859c69d15f17524d3",
+  "status": "approved_and_prospectively_adopted_before_funding_and_execution",
+  "total_limits": {
+    "budget_microusd": 150000000,
+    "max_calls": 16384
+  },
+  "unchanged_workload": {
+    "descendant_opportunities_total": 16,
+    "development_repetitions": 2,
+    "development_tasks": 3,
+    "families": 25,
+    "final_tasks": 26,
+    "full_leaderboard_or_four_condition_Buddha_expansion": false,
+    "generator": "gpt-5.6-luna",
+    "generator_reasoning_effort": "low",
+    "generator_wire_max_completion_tokens": 4096,
+    "maximum_Buddha_final_sets": 312,
+    "official_NoveltyBench_version": "1.1",
+    "official_commit": "64a23be6b18ec1dacc298830aab276061b6e143c",
+    "plain_final_sets_total": 52,
+    "starts": 2
+  },
+  "user_reply": "Approve the frozen scope, cap and reviewer setup"
+}

@@ -2,6 +2,27 @@
 
 The user authorized **up to US$50 for one first live experiment** on 2026-10-19. That is a combined cap across OpenAI and Anthropic, including seed candidates, proposals, generation and judging. It does not authorize repeated $50 experiments. The original and completed recovery attempts are historical evidence. The [living plan](PLAN.md) governs their linked continuation; do not restart either historical directory under a fresh allowance.
 
+## Approved unified WildChat comparison
+
+On October 26, 2026, the user approved and prospectively adopted the frozen
+comparison with **$150 combined OpenAI/Anthropic API spending and 16,384 recorded
+attempts**, allowing partial results with stage, reason, costs and holds.
+Its four distinct grants are $40/4,096 development, $0/0 unused validation,
+$85/10,240 final assessment and one shared $25/2,048 for both plain references.
+No earlier balance is reused. All grants start unused.
+
+The selected native reviewer is `gpt-6.1-sol` with `ultra` reasoning, at most
+forty-four fresh contexts: sixty-four staged target judgments plus twelve
+whole-set judgments. This uses unpriced Codex-plan capacity outside the API cap,
+with no reviewer API fallback. Human participation remains nonblocking.
+
+The [funded live guide](UNIFIED-LIVE.md) gives the exact command and explains
+hidden entry of both provider keys. The [approval decision](conformance/imp01-unified-approval-decision.json)
+records the scope; the [funded handoff](conformance/imp01-unified-funded-handoff.json)
+records the prelaunch checks. No provider call or scientific reviewer is started
+by funding. Account settings are confirmed locally, not authenticated by this
+preparation. The ordinary Standard/default public pay-as-you-go assertions apply.
+
 ## Completed judge-audit allowance
 
 The separate MEAS-02 audit was approved for **$15 total and 120 physical
