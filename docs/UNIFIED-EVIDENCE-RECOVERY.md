@@ -221,6 +221,24 @@ python -B -m unittest discover -s tests -p test_cell_witness_continuation.py -v
 
 This runs the one offline counted-child rehearsal and creates disposable test files. It spends no API money and starts no real containers. It runs once in the same PowerShell window and can take about nine minutes on the measured machine; Ctrl+C stops it. No separate window is needed.
 
+### Comparing historical and continued screen records
+
+A screen records a fingerprint of its host files and settings. A repaired host can produce a different fingerprint while preserving the same task and scoring protocol. Parent selection and feedback reconstruction must recognize the exact approved pair without pretending those fingerprints are equal.
+
+The new internal comparison component accepts only two explicitly supplied, previously checked profiles within one study and original grant. It rejects a third profile, another study/grant, an unexpected screen location, nested scopes and use from a copied thread. Reading a saved reference never activates it. It supplies no execution or spending permission; verifying the actual old/new helper contexts and connecting the checked controller remains next work.
+
+A mixed parent selection lists each actual fingerprint and report reference. Uniform selections keep their original format and bytes. Feedback preserves its complete answers, official scores and existing actor checks. A versioned `policy.host_control_relation` records only comparisons that actually depend on the approved difference. It also follows failed-child history and earlier feedback used to author a proposal. An unrelated old packet rebuilt afterward remains byte-identical.
+
+Five new offline methods pass: four relation/provenance checks in203.360seconds and a genuine failed-child/history/comparison check in112.386seconds. Two existing strict-control methods pass in50.528seconds. The three-generation check first exposed a missing dependency marker and then passed after correction. Source/study-root wrapper propagation has helper checks; new declaration-level acceptance for those wrappers is not claimed. [Bound delivery](conformance/screen-control-relation-delivery.json).
+
+Optional developer check, from a checkout containing this slice:
+
+```powershell
+python -B -m unittest discover -s tests -p 'test_screen_control_*.py' -v
+```
+
+This runs the five offline comparison checks using disposable files and supplied replies. It spends no API money and starts no real containers. It runs once in the same PowerShell window and can take several minutes; Ctrl+C stops it. No separate window is needed.
+
 ## What must happen before another paid start
 
 The first [executed continuation mechanism](conformance/witness-continuation-delivery.json)
