@@ -8,6 +8,7 @@ All records and native output are bounded by the release JSON byte ceiling.
 import base64
 import binascii
 import hashlib
+import json
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Self, cast
@@ -76,7 +77,8 @@ class _Artifact:
         return cls(raw)
 
     def to_record(self) -> dict[str, object]:
-        return _load(self.data)
+        # Constructors strictly validate immutable bytes; each view still decodes afresh.
+        return _object(json.loads(self.data))
 
     def to_bytes(self) -> bytes:
         return self.data
