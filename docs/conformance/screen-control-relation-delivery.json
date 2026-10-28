@@ -1,0 +1,115 @@
+{
+  "format": "buddha.screen-control-relation-delivery.v1",
+  "recorded_utc": "2026-10-28T21:29:38.486344+00:00",
+  "implementation_commit": "71a2937",
+  "prerequisite_merge": "8e533f264385131e941a8c0185e28b4988590ef9",
+  "spec_sections": [
+    5,
+    7,
+    9,
+    10
+  ],
+  "scope": "Unbound private two-literal-profile comparison primitive; no actual helper-context verification or paid execution authority.",
+  "source_sha256": {
+    "buddha/source_screen.py": "d92d4eb00abd1b1ba11878bbecb57738585842ba025c3ff06aff99489f4da09f",
+    "buddha/source_feedback.py": "03b4323bf006ae6428d22dc2f247c7876d8d4c1a5f03a17fb7e1c6d5a1927ff0",
+    "tests/test_screen_control_relation.py": "5b701da24c355e243ffc7c6f9f8cb88bf146a8c575fa43dec18967f49cf50af7",
+    "tests/test_screen_control_failures.py": "1e9392a247ab96b70a28d7eac7d1389073cdf53d2a628357d75ac1b72c7853f4",
+    "docs/PLAN.md": "a00baae2106deda935943f03c2adceaf1bfe7fadf848eb984589a383d3eee89a",
+    "docs/UNIFIED-EVIDENCE-RECOVERY.md": "162b48e9de8a084bdb9a78701c87421a3614279db608595dd23f0f6bc517faa1"
+  },
+  "selection": {
+    "uniform": "byte-identical v1",
+    "mixed": "v2 with exact ordered references/candidate IDs/actual controls and explicit relation; no fabricated common fingerprint",
+    "science_comparison_key": "strict unchanged"
+  },
+  "feedback": {
+    "envelopes": "v1-v8 retained; original actor checks unchanged",
+    "extension": "versioned policy.host_control_relation, reconstructed from actual per-packet checks",
+    "dependencies": [
+      "direct mixed screen edges",
+      "failure histories",
+      "root wrapper base policies",
+      "checksum-bound recursively verified proposal feedback"
+    ],
+    "saved_reference_activates_scope": false,
+    "ambient_relation_used_flag": false
+  },
+  "checks": {
+    "initial_three_methods": {
+      "status": "passed",
+      "seconds": 126.085,
+      "cut": "before proposal-dependency fix; not final evidence"
+    },
+    "proposal_dependency_RED": {
+      "methods": 1,
+      "seconds": 80.427,
+      "reason": "Real A-old/B-new/C-new edge rebuilt without its required proposal-feedback marker."
+    },
+    "final_relation_methods": {
+      "methods": 4,
+      "seconds": 203.36,
+      "status": "passed"
+    },
+    "failed_history_comparison": {
+      "methods": 1,
+      "seconds": 112.386,
+      "status": "passed",
+      "scope": "Real frozen-improver v5 history into v6 comparison with uniform direct edge; exact rebuild and out-of-scope denial."
+    },
+    "failed_history_test_expectation": {
+      "methods": 1,
+      "seconds": 69.429,
+      "qualification": "Test compared literal provenance at different destination paths; corrected same-destination base, not a product defect or intended RED."
+    },
+    "initial_import_setup_error": "Running directly from tests without project import path failed; corrected discovery from project root, not intended RED.",
+    "legacy_strict_controls": {
+      "methods": 2,
+      "seconds": 50.528,
+      "status": "passed"
+    },
+    "independent_source_review": {
+      "reviewer": "authority_review",
+      "status": "passed exact d92d4e/03b432 app hashes",
+      "qualification": "Unbound primitive only; no actual continuation authority."
+    },
+    "merged_quality": {
+      "ruff": "passed",
+      "format_files": 279,
+      "strict_mypy_modules": 89,
+      "bandit": "passed, existing nosec warnings retained",
+      "in_memory_compile_files": 279,
+      "CORE_equal_original": 10,
+      "dependency_pins": "unchanged, fresh/cached strict maintenance audit reused"
+    },
+    "full_current_suite_and_hosted": "pending/not claimed"
+  },
+  "preservation": {
+    "raw_files": 3277,
+    "changed": 0,
+    "trial_file_names": 2149,
+    "membership_unchanged": true,
+    "check": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-evidence-repair-preservation-check-v5.json",
+      "sha256": "1286e85d6238ceded38fe50ea9da13218811a4c2ab1e8edc696b130cc2535c7f"
+    },
+    "prior_PLAN_rows": 178,
+    "acceptance_tails": 7
+  },
+  "activity": {
+    "real_keys": 0,
+    "provider_calls": 0,
+    "actual_containers": 0,
+    "original_on_disk_SQL": 0,
+    "actual_new_owners": 0,
+    "new_allocations": 0,
+    "PR_merges": 0
+  },
+  "limitations": [
+    "Scope is installed only by a caller after complete actual profile/custody checks; primitive alone supplies none.",
+    "New actual source/study-root declaration acceptance not exercised; propagation helper tested.",
+    "Actual frozen slot1 proposal feedback may remain old/old; mixed C-freeze remains required. No third opportunity added.",
+    "No production adapter binding or final/plain/publication/paid readiness."
+  ],
+  "next": "Explicit checked remaining-development continuation with real before/after derived contexts and normal two-slot scheduler/freeze, then final/plain/publication integration."
+}
