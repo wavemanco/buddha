@@ -6,6 +6,7 @@ import threading
 import time
 from collections.abc import Callable, Iterator, Mapping
 from contextlib import contextmanager
+from contextvars import ContextVar
 from pathlib import Path
 from typing import TYPE_CHECKING, cast
 
@@ -63,6 +64,42 @@ _UNIFIED_OUTER_V1 = (
 _UNIFIED_ROLES_V1 = frozenset("buddha/" + name for name in _UNIFIED_HELPERS_V1) | frozenset(
     _UNIFIED_OUTER_V1
 )
+
+_WITNESS_CONTINUATION: ContextVar[
+    Callable[[Path, Path, "SourceScreen", Mapping[Path, str], Path | None], dict[Path, str]] | None
+] = ContextVar("witness_continuation", default=None)
+
+
+@contextmanager
+def _witness_continuation(
+    resolver: Callable[
+        [Path, Path, "SourceScreen", Mapping[Path, str], Path | None], dict[Path, str]
+    ],
+) -> Iterator[None]:
+    """A pinned adapter explicitly scopes one checked witness; never discover one."""
+    if not callable(resolver) or _WITNESS_CONTINUATION.get() is not None:
+        raise ReleaseError("witness continuation needs one explicit unnested scope")
+    token = _WITNESS_CONTINUATION.set(resolver)
+    try:
+        yield
+    finally:
+        _WITNESS_CONTINUATION.reset(token)
+
+
+def _continued_witness_controls(
+    root: Path, directory: Path, screen: "SourceScreen", controls: Mapping[Path, str]
+) -> dict[Path, str]:
+    resolver = _WITNESS_CONTINUATION.get()
+    return dict(controls) if resolver is None else resolver(root, directory, screen, controls, None)
+
+
+def _continued_witness_parent_controls(
+    root: Path, directory: Path, screen: "SourceScreen", controls: Mapping[Path, str], parent: Path
+) -> dict[Path, str]:
+    resolver = _WITNESS_CONTINUATION.get()
+    return (
+        dict(controls) if resolver is None else resolver(root, directory, screen, controls, parent)
+    )
 
 
 def _stop_reason(error: BaseException) -> str:

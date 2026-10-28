@@ -1396,7 +1396,15 @@ def _witness_parent(
         _object(report["admission"])["eligible"] is not True
     ):
         raise SourceSearchError("witness needs its complete eligible common comparison")
-    controls = _witness_controls(treatment)
+    from buddha.launch_common import _continued_witness_parent_controls
+
+    controls = _continued_witness_parent_controls(
+        reader.root,
+        _witness_path(record["directory"]),
+        base,
+        _witness_controls(treatment),
+        _witness_path(reference["directory"]),
+    )
     _screen_owner_for(
         reader,
         controls,
