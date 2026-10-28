@@ -10,7 +10,7 @@ import json
 import math
 import os
 import stat
-from collections.abc import Callable, Iterator, Sequence
+from collections.abc import Callable, Iterator, Mapping, Sequence
 from contextlib import ExitStack, contextmanager
 from contextvars import ContextVar
 from dataclasses import dataclass, field
@@ -422,6 +422,28 @@ def _build(
     return _load(raw_result)
 
 
+def _relation_policy(
+    policy: Mapping[str, object],
+    *dependencies: dict[str, object],
+    relation: dict[str, object] | None = None,
+) -> dict[str, object]:
+    """Carry only actual per-packet derivation dependencies, never ambient use."""
+    markers = [
+        _object(item["policy"])["host_control_relation"]
+        for item in dependencies
+        if "host_control_relation" in _object(item["policy"])
+    ]
+    if relation is not None:
+        markers.append(relation)
+    result = dict(policy)
+    for value in markers:
+        marker = source_screen._checked_control_marker(value)
+        if "host_control_relation" in result and result["host_control_relation"] != marker:
+            raise SourceFeedbackError("feedback combines different host control relations")
+        result["host_control_relation"] = marker
+    return result
+
+
 class _FeedbackEvidence:
     """Shared custody checks for original proposed parent-child edges."""
 
@@ -433,6 +455,11 @@ class _FeedbackEvidence:
             _object(self.provenance["reference"])["authorization"]
         )
         self.observed: dict[Path, str] = {}
+        self.control_rows = [
+            (_object(self.provenance["reference"]), _digest(self.provenance["controls_sha256"]))
+        ]
+        self.control_relation: dict[str, object] | None = None
+        self.policy_dependencies: list[dict[str, object]] = []
         observation = _COMPARISON_OBSERVATION.get()
         if observation is not None:
             observation.checks.append(self.recheck)
@@ -488,12 +515,12 @@ class _FeedbackEvidence:
         ).to_record()
         if (
             raw != _json(report)
-            or any(
-                report[key] != self.provenance[key] for key in ("comparison_key", "controls_sha256")
-            )
+            or report["comparison_key"] != self.provenance["comparison_key"]
             or any(_json(record[key]) != _json(self.base[key]) for key in ("source", "split"))
         ):
             raise SourceFeedbackError("feedback edge changes the original common screen")
+        self.control_rows.append((ref, _digest(report["controls_sha256"])))
+        self.control_relation = source_screen._screen_control_relation(self.control_rows)
         selected_ids = [
             task.id for task in source_screen.SourceScreen.from_bytes(_json(record)).tasks.tasks
         ]
@@ -593,6 +620,17 @@ class _FeedbackEvidence:
         measured = _load(self.consume(provenance_path, inputs[str(provenance_path)]))
         if _json(measured["reference"]) != _json(parent_ref):
             raise SourceFeedbackError("proposal feedback names another original parent occasion")
+        measured_policy = _object(measured["policy"])
+        if "host_control_relation" in measured_policy:
+            self.policy_dependencies.append(
+                {
+                    "policy": {
+                        "host_control_relation": source_screen._checked_control_marker(
+                            measured_policy["host_control_relation"]
+                        )
+                    }
+                }
+            )
         lineage_ref = _object(materialized["lineage"])
         lineage_path = pipeline._absolute(lineage_ref["path"])
         lineage = _load(self.consume(lineage_path, lineage_ref["sha256"]))
@@ -847,12 +885,15 @@ def _build_failures(
         else "buddha.source-screen-feedback.v4"
         if full_answers
         else "buddha.source-screen-feedback.v2",
-        policy=dict(
+        policy=_relation_policy(
             _FROZEN_FAILURE_POLICY
             if improver is not None
             else _FULL_FAILURE_POLICY
             if full_answers
-            else _FAILURE_POLICY
+            else _FAILURE_POLICY,
+            provenance,
+            *evidence.policy_dependencies,
+            relation=evidence.control_relation,
         ),
         measured_base_sha256=measured_sha256,
         failure_history=edges,
@@ -984,7 +1025,7 @@ def _build_root_comparison(
             _root_comparison_notes(base, "no_counted_parent_in_this_search")
             provenance.update(
                 format="buddha.source-screen-feedback.v7",
-                policy=dict(_ROOT_COMPARISON_POLICY),
+                policy=_relation_policy(_ROOT_COMPARISON_POLICY, provenance),
                 base_format=base_format,
                 base_provenance_sha256=base_sha256,
                 comparison={"root": checked_root},
@@ -1084,7 +1125,7 @@ def _build_study_root_comparison(
             _root_comparison_notes(base, "no_counted_parent_in_this_cell")
             provenance.update(
                 format="buddha.source-screen-feedback.v8",
-                policy=dict(_STUDY_ROOT_COMPARISON_POLICY),
+                policy=_relation_policy(_STUDY_ROOT_COMPARISON_POLICY, provenance),
                 base_format=base_format,
                 base_provenance_sha256=base_sha256,
                 comparison={"study_root": checked_root},
@@ -1238,7 +1279,13 @@ def _build_comparison(
                 _object(task_provenance).update(note_sha256=_sha(raw), note_utf8_bytes=len(raw))
             provenance.update(
                 format="buddha.source-screen-feedback.v6",
-                policy=dict(_COMPARISON_POLICY),
+                policy=_relation_policy(
+                    _COMPARISON_POLICY,
+                    provenance,
+                    parent_provenance,
+                    *evidence.policy_dependencies,
+                    relation=evidence.control_relation,
+                ),
                 base_format=base_format,
                 base_provenance_sha256=base_sha256,
                 comparison=checked,

@@ -5,7 +5,12 @@ complete execution, archive admission and confirmed improvement are separate.
 """
 
 import hashlib
-from collections.abc import Callable, Mapping, Sequence
+import os
+import re
+import threading
+from collections.abc import Callable, Iterator, Mapping, Sequence
+from contextlib import contextmanager
+from contextvars import ContextVar
 from dataclasses import dataclass, field
 from functools import wraps
 from pathlib import Path
@@ -45,6 +50,118 @@ from buddha.wire import _integer
 
 class SourceScreenError(ReleaseError):
     """Screen configuration, custody or exploratory admission is invalid."""
+
+
+@dataclass(frozen=True)
+class _ScreenControlProfiles:
+    root: Path
+    authorization: Path
+    before: str
+    after: str
+    marker: bytes
+    process: int
+    thread: int
+
+
+_CONTROL_PROFILES: ContextVar[_ScreenControlProfiles | None] = ContextVar(
+    "screen_control_profiles", default=None
+)
+
+
+@contextmanager
+def _screen_control_profiles(
+    root: Path,
+    authorization: Path,
+    *,
+    before: str,
+    after: str,
+    continuation: dict[str, object],
+) -> Iterator[None]:
+    """Scope two already checked literal profiles; supplies no execution authority.
+
+    The caller must first verify its complete continuation and both actual screen
+    contexts. A saved marker never activates this scope or discovers a driver.
+    """
+    if not isinstance(root, Path) or not isinstance(authorization, Path):
+        raise SourceScreenError("control profiles need explicit study and grant paths")
+    root, authorization = pipeline._absolute(str(root)), pipeline._absolute(str(authorization))
+    before, after = _digest(before), _digest(after)
+    anchor = _object(continuation, {"path", "sha256"})
+    path = pipeline._absolute(anchor["path"])
+    if (
+        _CONTROL_PROFILES.get() is not None
+        or before == after
+        or ".." in root.parts
+        or ".." in authorization.parts
+        or ".." in path.parts
+        or str(path) != anchor["path"]
+        or path.is_relative_to(root)
+    ):
+        raise SourceScreenError("control profiles need one explicit external continuation")
+    marker = _json(
+        {
+            "format": "buddha.host-control-relation.v1",
+            "continuation": {"path": str(path), "sha256": _digest(anchor["sha256"])},
+            "before_controls_sha256": before,
+            "after_controls_sha256": after,
+        }
+    )
+    token = _CONTROL_PROFILES.set(
+        _ScreenControlProfiles(
+            root, authorization, before, after, marker, os.getpid(), threading.get_ident()
+        )
+    )
+    try:
+        yield
+    finally:
+        _CONTROL_PROFILES.reset(token)
+
+
+def _checked_control_marker(value: object) -> dict[str, object]:
+    profiles = _CONTROL_PROFILES.get()
+    if (
+        profiles is None
+        or profiles.process != os.getpid()
+        or profiles.thread != threading.get_ident()
+        or _json(value) != profiles.marker
+    ):
+        raise SourceScreenError("host control relation differs from its explicit checked scope")
+    return _load(profiles.marker)
+
+
+def _screen_control_relation(
+    rows: Sequence[tuple[dict[str, object], str]],
+) -> dict[str, object] | None:
+    """Keep uniform controls strict; admit only one explicit two-profile relation."""
+    if type(rows) not in {list, tuple} or not 1 <= len(rows) <= 256:
+        raise SourceScreenError("control comparison exceeds the bounded screen population")
+    hashes = {_digest(digest) for _, digest in rows}
+    if len(hashes) == 1:
+        return None
+    profiles = _CONTROL_PROFILES.get()
+    if profiles is None or hashes != {profiles.before, profiles.after}:
+        raise SourceScreenError("screens change their original common host controls")
+    for reference, _ in rows:
+        ref = _object(reference, {"directory", "authorization", "report_sha256"})
+        directory = pipeline._absolute(ref["directory"])
+        if (
+            str(directory) != ref["directory"]
+            or str(profiles.authorization) != ref["authorization"]
+        ):
+            raise SourceScreenError("control comparison changes its original grant or path")
+        try:
+            relative = directory.relative_to(profiles.root).as_posix()
+        except ValueError:
+            raise SourceScreenError("control comparison borrows another study") from None
+        if not re.fullmatch(
+            r"(?:common/(?:0|[1-9][0-9]*)/(?:0|[1-9][0-9]*)|"
+            r"cells/(?:0|[1-9][0-9]*)/(?:0|[1-9][0-9]*)/"
+            r"(?:0|1)/(?:0|[1-9][0-9]*))/screen",
+            relative,
+        ):
+            raise SourceScreenError("control comparison changes its scheduled screen location")
+        _digest(ref["report_sha256"])
+    return _checked_control_marker(_load(profiles.marker))
 
 
 def _checked[**P, T](function: Callable[P, T]) -> Callable[P, T]:
@@ -1021,6 +1138,8 @@ def select_source_parent(
     seen: set[str] = set()
     key: str | None = None
     controls_key: str | None = None
+    profiles: list[tuple[dict[str, object], str]] = []
+    control_records: list[dict[str, object]] = []
     eligible: list[dict[str, object]] = []
     for value in references:
         reference = _object(value, {"directory", "authorization", "report_sha256"})
@@ -1032,12 +1151,12 @@ def select_source_parent(
         identifier = _digest(report["candidate_id"])
         comparison = _digest(report["comparison_key"])
         control = _digest(report["controls_sha256"])
-        if (
-            identifier in seen
-            or (key is not None and comparison != key)
-            or (controls_key is not None and control != controls_key)
-        ):
+        if identifier in seen or (key is not None and comparison != key):
             raise SourceScreenError("parent pool repeats a source or changes the common comparison")
+        profiles.append((reference, control))
+        control_records.append(
+            {"reference": reference, "candidate_id": identifier, "controls_sha256": control}
+        )
         seen.add(identifier)
         key = comparison
         controls_key = control
@@ -1045,6 +1164,7 @@ def select_source_parent(
         admissions.append({"candidate_id": identifier, **admission})
         if admission["eligible"] is True:
             eligible.append(report)
+    relation = _screen_control_relation(profiles)
     result: dict[str, object] = {
         "format": "buddha.source-parent-selection.v1",
         "comparison_key": key,
@@ -1059,6 +1179,13 @@ def select_source_parent(
         "frontier_ids": [],
         "claim": "exploratory source parent allocation only; no improvement claim",
     }
+    if relation is not None:
+        del result["controls_sha256"]
+        result.update(
+            format="buddha.source-parent-selection.v2",
+            control_profiles=control_records,
+            host_control_relation=relation,
+        )
     if not eligible:
         return result | {"reason": "no complete source has usable common-task metrics"}
     from buddha.archive import Candidate, active_pool, frontier, select_parent
