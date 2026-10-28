@@ -169,6 +169,7 @@ class _CheckedState:
     entries: frozenset[str]
     directories: frozenset[str]
     grants: tuple[tuple[Path, str], ...]
+    witness_result: bytes | None = None
 
     def after_locks(self) -> None:
         """Fresh exact bytes/funding after normal leases, without a second replay."""
@@ -733,6 +734,8 @@ def _check(path: Path, expected: str) -> _CheckedState:
             "new_owner_count": len(state["owner_paths"] - known),
             "effective_control_count": len(projected),
             "continuation_sha256": expected,
+            "witness_complete": progress["result"] is not None,
+            "witness_status": None if progress["result"] is None else progress["result"]["status"],
             "scope": "one_witness_only_not_operator_ready",
         }
         complete = CheckedWitnessContinuation(
@@ -768,6 +771,7 @@ def _check(path: Path, expected: str) -> _CheckedState:
             frozenset(capture.entries),
             directories,
             tuple((p, _sha(b)) for p, b in snapshots.items()),
+            None if progress["result"] is None else _json(progress["result"]),
         )
 
 
@@ -821,6 +825,12 @@ def advance_witness(
             pipeline._exclusive(current.study),
         ):
             prepared.after_locks()
+            if prepared.witness_result is not None:
+                return {
+                    "action": "complete",
+                    "role": None,
+                    "result": _load(prepared.witness_result),
+                }
             action = prepared.action
             if action["kind"] != "witness" or action["directory"] != current.witness:
                 raise WitnessContinuationError(
