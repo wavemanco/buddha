@@ -1066,6 +1066,28 @@ def advance_study(
         raise WitnessContinuationError("development advancement needs its exact checked context")
     checked._check_thread(checked.study)
     prepared = _checked_state(checked.path, checked.sha256, study_continuation=True)
+    return _advance_prepared(prepared, transport=transport)
+
+
+def advance_study_descriptor(
+    path: Path, *, expected_sha256: str, transport: gateway.RawHTTPTransport
+) -> dict[str, object]:
+    """Check once, then advance one development action with fresh lease checks.
+
+    Unlike a separate preflight followed by checked-token advancement, this
+    descriptor entry avoids reconstructing the same history twice. It retains
+    the complete check and the identical post-lock file/grant verification.
+    """
+    if not isinstance(transport, gateway.RawHTTPTransport):
+        raise WitnessContinuationError("development advancement needs an explicit transport")
+    prepared = _checked_state(path, expected_sha256, study_continuation=True)
+    return _advance_prepared(prepared, transport=transport)
+
+
+def _advance_prepared(
+    prepared: _CheckedState, *, transport: gateway.RawHTTPTransport
+) -> dict[str, object]:
+    """Dispatch the same freshly checked state; never accept an unchecked token."""
     current = cast(CheckedStudyContinuation, prepared.checked)
     if prepared.state is None:
         raise WitnessContinuationError("development advancement lacks its validated state")
