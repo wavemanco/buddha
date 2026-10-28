@@ -951,6 +951,12 @@ def _ordinals(
         raise ImproverStudyError("nested role has foreign or noncontiguous original ordinals")
 
 
+def _controls_for(state: dict[str, Any], owner: Path) -> dict[Path, str]:
+    from buddha.launch_common import _continued_study_controls
+
+    return _continued_study_controls(state["directory"], owner, state["controls"])
+
+
 def _screen(
     reader: NativeEvidence,
     state: dict[str, Any],
@@ -958,7 +964,12 @@ def _screen(
     screen: source_screen.SourceScreen,
 ) -> dict[str, Any] | None:
     shared._screen_owner_for(
-        reader, state["controls"], state["review"], state["runtime"], directory, screen
+        reader,
+        _controls_for(state, directory / "tasks/0/generation/owners/0"),
+        state["review"],
+        state["runtime"],
+        directory,
+        screen,
     )
     record = screen.to_record()
     anchor = reader.owner(directory / "tasks/0/generation/owners/0")
@@ -1421,7 +1432,9 @@ def _proposal(
     ) != _json(expected_context):
         raise ImproverStudyError("counted proposal changes its original descriptor/context")
     section = _operator(state["record"], coordinate[2], state["screens"][coordinate[0]])
-    inputs = shared._proposal_controls_for(state["controls"], location, plan) | {
+    inputs = shared._proposal_controls_for(
+        _controls_for(state, location / "proposal/owners/0"), location, plan
+    ) | {
         root / "context.json": pipeline._sha(expected_context),
         _path_value(descriptor["task_parent"]["path"]): _digest(
             descriptor["task_parent"]["sha256"]
@@ -2260,7 +2273,9 @@ def _prepare_proposal(
     pipeline._same_or_write(location / "proposal.json", _json(plan["proposal_descriptor"]))
     coordinate = action["coordinate"]
     section = _operator(state["record"], coordinate[2], state["screens"][coordinate[0]])
-    inputs = shared._proposal_controls_for(state["controls"], location, plan)
+    inputs = shared._proposal_controls_for(
+        _controls_for(state, location / "proposal/owners/0"), location, plan
+    )
     candidate_improvement.prepare_candidate_improvement(
         location / "proposal",
         descriptor=location / "proposal.json",
@@ -2355,6 +2370,120 @@ def inspect_improver_study(
     return saved
 
 
+def _advance_action(
+    reader: NativeEvidence,
+    state: dict[str, Any],
+    authority: Authorization,
+    transport: RawHTTPTransport,
+) -> dict[str, object] | None:
+    """One normal scheduler action, including its original partial observations."""
+    action = state["action"]
+    kind, location = action["kind"], action["directory"]
+    directory, authorization = reader.root, authority.path
+    unknown = any(
+        row["status"] != "completed" for row in reader._rows(state["funding"]["auth_operations"])
+    )
+    if unknown:
+        if state["observations"] and state["observations"][-1]["reason"] == "unknown":
+            return cast(dict[str, object], state["observations"][-1])
+        raise ImproverStudyError("unresolved original liability lacks its recorded lower stop")
+    if kind == "common_ineligible":
+        return _observe(directory, state, authority, "common_ineligible", action["result"])
+    try:
+        child = None
+        if kind == "prepare_common":
+            location.parent.mkdir(parents=True, exist_ok=True)
+            _root(location.parent)
+            source_screen.prepare_source_screen(
+                location,
+                screen=action["screen"],
+                authorization=authority,
+                review=state["review"],
+                expected_runtime_sha256=state["runtime"],
+                input_bindings=_controls_for(state, location / "tasks/0/generation/owners/0"),
+            )
+        elif kind == "plan":
+            _write_plan(directory, state, action, authorization)
+        elif kind == "prepare_proposal":
+            _prepare_proposal(state, action, authority)
+        elif kind == "proposal":
+            child = candidate_improvement.run_candidate_improvement(location, transport=transport)
+        elif kind == "proposal_capacity":
+            shared._publish_capacity(
+                directory,
+                authorization,
+                location,
+                state["record"]["proposal_capacity"],
+                child_directory=location / "screen",
+            )
+        elif kind == "prepare_child":
+            shared._materialize_child_source_for(
+                state["screens"][action["position"]["start"]],
+                action["proposal"],
+                location,
+                owner_directory=location / "screen",
+                source_copy=True,
+            )
+            source_screen.prepare_source_screen(
+                location / "screen",
+                screen=action["child"],
+                authorization=authority,
+                review=state["review"],
+                expected_runtime_sha256=state["runtime"],
+                input_bindings=_controls_for(
+                    state, location / "screen/tasks/0/generation/owners/0"
+                ),
+            )
+        elif kind == "screen":
+            child = source_screen.run_source_screen(location, transport=transport)
+        elif kind == "witness":
+            step = shared._advance_witness(
+                reader, action["treatment"], authorization=authority, transport=transport
+            )
+            if step["action"] == "incomplete":
+                child = cast(dict[str, object], step["result"])
+        elif kind == "decision":
+            pipeline._same_or_write(location / "decision.json", _json(action["decision"]))
+        elif kind == "freeze":
+            _freeze(reader, state)
+        elif kind == "publish":
+            result = _result(reader, state)
+            return pipeline.publish_complete(
+                directory / "report.json",
+                result,
+                authority,
+                {reader.owner(path).run_id for path in state["owner_paths"]},
+            )
+        else:
+            raise ImproverStudyError("finite study has no checked next operation")
+        if child is not None and child["status"] != "complete":
+            _, observed = _restore(directory, authorization)
+            _check_current(observed)
+            return _observe(directory, observed, authority, cast(str, child["reason"]), child)
+    except shared._ProposalCapacityStop:
+        _, observed = _restore(directory, authorization)
+        _check_current(observed)
+        return _observe(directory, observed, authority, "proposal_capacity", None)
+    except source_feedback.SourceFeedbackReconstructionLimit:
+        _, observed = _restore(directory, authorization)
+        _check_current(observed)
+        reason = (
+            "feedback_reconstruction_limit"
+            if state["record"]["format"] in _COMPARATIVE_FORMATS
+            else "feedback_capacity"
+        )
+        return _observe(directory, observed, authority, reason, None)
+    except source_feedback.SourceFeedbackTooLarge:
+        _, observed = _restore(directory, authorization)
+        _check_current(observed)
+        return _observe(directory, observed, authority, "feedback_capacity", None)
+    except KeyboardInterrupt:
+        _, observed = _restore(directory, authorization)
+        _observe(directory, observed, authority, "cancelled", None)
+        raise
+    return None
+
+
 @_checked
 def run_improver_study(directory: Path, *, transport: RawHTTPTransport) -> dict[str, object]:
     if not isinstance(directory, Path) or not isinstance(transport, RawHTTPTransport):
@@ -2376,111 +2505,6 @@ def run_improver_study(directory: Path, *, transport: RawHTTPTransport) -> dict[
         while True:
             reader, state = _restore(directory, authorization)
             _check_current(state)
-            action = state["action"]
-            kind, location = action["kind"], action["directory"]
-            unknown = any(
-                row["status"] != "completed"
-                for row in reader._rows(state["funding"]["auth_operations"])
-            )
-            if unknown:
-                if state["observations"] and state["observations"][-1]["reason"] == "unknown":
-                    return cast(dict[str, object], state["observations"][-1])
-                raise ImproverStudyError(
-                    "unresolved original liability lacks its recorded lower stop"
-                )
-            if kind == "common_ineligible":
-                return _observe(directory, state, authority, "common_ineligible", action["result"])
-            try:
-                child = None
-                if kind == "prepare_common":
-                    location.parent.mkdir(parents=True, exist_ok=True)
-                    _root(location.parent)
-                    source_screen.prepare_source_screen(
-                        location,
-                        screen=action["screen"],
-                        authorization=authority,
-                        review=state["review"],
-                        expected_runtime_sha256=state["runtime"],
-                        input_bindings=state["controls"],
-                    )
-                elif kind == "plan":
-                    _write_plan(directory, state, action, authorization)
-                elif kind == "prepare_proposal":
-                    _prepare_proposal(state, action, authority)
-                elif kind == "proposal":
-                    child = candidate_improvement.run_candidate_improvement(
-                        location, transport=transport
-                    )
-                elif kind == "proposal_capacity":
-                    shared._publish_capacity(
-                        directory,
-                        authorization,
-                        location,
-                        state["record"]["proposal_capacity"],
-                        child_directory=location / "screen",
-                    )
-                elif kind == "prepare_child":
-                    shared._materialize_child_source_for(
-                        state["screens"][action["position"]["start"]],
-                        action["proposal"],
-                        location,
-                        owner_directory=location / "screen",
-                        source_copy=True,
-                    )
-                    source_screen.prepare_source_screen(
-                        location / "screen",
-                        screen=action["child"],
-                        authorization=authority,
-                        review=state["review"],
-                        expected_runtime_sha256=state["runtime"],
-                        input_bindings=state["controls"],
-                    )
-                elif kind == "screen":
-                    child = source_screen.run_source_screen(location, transport=transport)
-                elif kind == "witness":
-                    step = shared._advance_witness(
-                        reader, action["treatment"], authorization=authority, transport=transport
-                    )
-                    if step["action"] == "incomplete":
-                        child = cast(dict[str, object], step["result"])
-                elif kind == "decision":
-                    pipeline._same_or_write(location / "decision.json", _json(action["decision"]))
-                elif kind == "freeze":
-                    _freeze(reader, state)
-                elif kind == "publish":
-                    result = _result(reader, state)
-                    return pipeline.publish_complete(
-                        directory / "report.json",
-                        result,
-                        authority,
-                        {reader.owner(path).run_id for path in state["owner_paths"]},
-                    )
-                else:
-                    raise ImproverStudyError("finite study has no checked next operation")
-                if child is not None and child["status"] != "complete":
-                    _, observed = _restore(directory, authorization)
-                    _check_current(observed)
-                    return _observe(
-                        directory, observed, authority, cast(str, child["reason"]), child
-                    )
-            except shared._ProposalCapacityStop:
-                _, observed = _restore(directory, authorization)
-                _check_current(observed)
-                return _observe(directory, observed, authority, "proposal_capacity", None)
-            except source_feedback.SourceFeedbackReconstructionLimit:
-                _, observed = _restore(directory, authorization)
-                _check_current(observed)
-                reason = (
-                    "feedback_reconstruction_limit"
-                    if state["record"]["format"] in _COMPARATIVE_FORMATS
-                    else "feedback_capacity"
-                )
-                return _observe(directory, observed, authority, reason, None)
-            except source_feedback.SourceFeedbackTooLarge:
-                _, observed = _restore(directory, authorization)
-                _check_current(observed)
-                return _observe(directory, observed, authority, "feedback_capacity", None)
-            except KeyboardInterrupt:
-                _, observed = _restore(directory, authorization)
-                _observe(directory, observed, authority, "cancelled", None)
-                raise
+            result = _advance_action(reader, state, authority, transport)
+            if result is not None:
+                return result

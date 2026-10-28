@@ -1,4 +1,4 @@
-"""Checked, one-witness continuation; no operator CLI or later-phase execution.
+"""Checked witness and remaining-development continuations; no operator CLI.
 
 Original owners remain passive evidence. Only the cut's one absent witness may
 acquire new ordinary owners, with actual installed helper pins and this external
@@ -8,10 +8,11 @@ rewritten. A passing check is not a paid-run handoff or account certification.
 
 import hashlib
 import os
+import re
 import threading
 from collections.abc import Iterator, Mapping
 from contextlib import contextmanager
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Any, cast
 
@@ -158,6 +159,95 @@ class CheckedWitnessContinuation:
 
 
 @dataclass(frozen=True)
+class CheckedStudyContinuation(CheckedWitnessContinuation):
+    """A separate counted-cell-cut scope; historical v1 stays witness-only."""
+
+    _old_owners: frozenset[str]
+    _cells: tuple[Path, ...]
+    _screens: frozenset[str]
+    _authorization: Path
+    _profiles: tuple[str, str]
+
+    def _check_thread(self, root: Path) -> None:
+        if (
+            self._pid != os.getpid()
+            or self._thread != threading.get_ident()
+            or str(root) != str(self.study)
+        ):
+            raise WitnessContinuationError("study continuation differs from its root or thread")
+
+    def _owner_controls(self, owner: Path) -> dict[Path, str]:
+        relative = owner.relative_to(self.study).as_posix()
+        integer = r"(?:0|[1-9][0-9]*)"
+        if str(owner) != str(self.study / relative) or not re.fullmatch(
+            rf"(?:common/{integer}/{integer}/(?:screen/tasks/0/generation|witness/proposal)|"
+            rf"cells/{integer}/{integer}/(?:0|1)/{integer}/"
+            r"(?:proposal|screen/tasks/0/generation|witness/proposal))/owners/0",
+            relative,
+        ):
+            raise WitnessContinuationError("continuation owner has an undeclared control role")
+        if str(owner) in self._old_owners:
+            return dict(self._before)
+        if owner == self.witness / "proposal/owners/0" or any(
+            owner.is_relative_to(cell) for cell in self._cells
+        ):
+            return dict(self._after)
+        raise WitnessContinuationError("continuation cannot replace or invent an earlier owner")
+
+    def _controls(self, root: Path, owner: Path, controls: Mapping[Path, str]) -> dict[Path, str]:
+        self._check_thread(root)
+        if dict(controls) != dict(self._before):
+            raise WitnessContinuationError("continuation replaces original study controls")
+        return self._owner_controls(owner)
+
+    def _resolve(
+        self,
+        root: Path,
+        directory: Path,
+        screen: source_screen.SourceScreen,
+        controls: Mapping[Path, str],
+        parent: Path | None,
+    ) -> dict[Path, str]:
+        self._check_thread(root)
+        if screen.fingerprint() not in self._screens:
+            raise WitnessContinuationError("continuation changes an original witness base")
+        expected = self._owner_controls(directory / "proposal/owners/0")
+        if parent is not None:
+            if dict(controls) != expected:
+                raise WitnessContinuationError("witness differs from its actual helper profile")
+            return self._owner_controls(parent / "tasks/0/generation/owners/0")
+        if dict(controls) != dict(self._before):
+            raise WitnessContinuationError("continuation replaces original study controls")
+        return expected
+
+    def _relation(self) -> dict[str, object]:
+        return {
+            "format": "buddha.host-control-relation.v1",
+            "continuation": {"path": str(self.path), "sha256": self.sha256},
+            "before_controls_sha256": self._profiles[0],
+            "after_controls_sha256": self._profiles[1],
+        }
+
+    @contextmanager
+    def _scope(self) -> Iterator[None]:
+        self._check_thread(self.study)
+        with (
+            _observation_policy(_load(self._policy)),
+            common._study_continuation(self._controls),
+            common._witness_continuation(self._resolve),
+            source_screen._screen_control_profiles(
+                self.study,
+                self._authorization,
+                before=self._profiles[0],
+                after=self._profiles[1],
+                continuation={"path": str(self.path), "sha256": self.sha256},
+            ),
+        ):
+            source_screen._checked_control_marker(self._relation())
+            yield
+
+
+@dataclass(frozen=True)
 class _CheckedState:
     checked: CheckedWitnessContinuation
     trial: Path
@@ -170,6 +260,8 @@ class _CheckedState:
     directories: frozenset[str]
     grants: tuple[tuple[Path, str], ...]
     witness_result: bytes | None = None
+    state: dict[str, Any] | None = None
+    study_result: bytes | None = None
 
     def after_locks(self) -> None:
         """Fresh exact bytes/funding after normal leases, without a second replay."""
@@ -199,7 +291,7 @@ class _CheckedState:
         capture.finish()
 
 
-def _check(path: Path, expected: str) -> _CheckedState:
+def _check(path: Path, expected: str, *, study_continuation: bool = False) -> _CheckedState:
     path, expected = common._path(str(path.absolute())), _digest(expected)
     raw = pipeline._read(path, expected)
     record: dict[str, Any] = _object(
@@ -215,9 +307,11 @@ def _check(path: Path, expected: str) -> _CheckedState:
             "remaining_phases",
         },
     )
-    if record["format"] != "buddha.witness-continuation.v1" or record["remaining_phases"] != list(
-        _REMAINING
-    ):
+    wanted = (
+        "buddha.study-continuation.v1" if study_continuation else "buddha.witness-continuation.v1"
+    )
+    remaining = ("search", "freeze", "publication") if study_continuation else _REMAINING
+    if record["format"] != wanted or record["remaining_phases"] != list(remaining):
         raise WitnessContinuationError("unsupported bounded witness continuation")
     # Validate policy before constructing any capture in the actual reader thread.
     with _observation_policy(record["observation_policy"]):
@@ -585,7 +679,7 @@ def _check(path: Path, expected: str) -> _CheckedState:
         parent = common._path(
             _object(cut["parent"], {"directory", "authorization", "report_sha256"})["directory"]
         )
-        checked = CheckedWitnessContinuation(
+        checked: CheckedWitnessContinuation = CheckedWitnessContinuation(
             path,
             expected,
             study,
@@ -600,6 +694,103 @@ def _check(path: Path, expected: str) -> _CheckedState:
             os.getpid(),
             threading.get_ident(),
         )
+        component_paths = selected_paths | {
+            _ref(v)[0] for v in (*old_roles.values(), *new_roles.values())
+        }
+        if study_continuation:
+            if position["arm"] is None or position["slot"] is None:
+                raise WitnessContinuationError("study continuation needs a counted-cell cut")
+            owners = cut["owners"]
+            if type(owners) is not list or not 1 <= len(owners) <= 4096:
+                raise WitnessContinuationError("original owner cut exceeds its finite boundary")
+            old_paths = []
+            for value in owners:
+                row = _object(
+                    value,
+                    {
+                        "directory",
+                        "run_id",
+                        "manifest_sha256",
+                        "manifest_raw_sha256",
+                        "ledger_sha256",
+                    },
+                )
+                owner_path = common._path(row["directory"])
+                if not owner_path.is_relative_to(study):
+                    raise WitnessContinuationError("original owner is outside the study")
+                old_paths.append(owner_path)
+                for filename, key in (
+                    ("manifest.json", "manifest_raw_sha256"),
+                    ("operations.sqlite3", "ledger_sha256"),
+                ):
+                    if _object(_object(cut["files"]).get(str(owner_path / filename))).get(
+                        "sha256"
+                    ) != _digest(row[key]):
+                        raise WitnessContinuationError("cut omits an original owner raw anchor")
+            if len({str(p).casefold() for p in old_paths}) != len(old_paths):
+                raise WitnessContinuationError("original owner cut repeats an alias")
+            early_files = _object(cut["files"])
+            if not 1 <= len(early_files) <= 65_536:
+                raise WitnessContinuationError("original file cut exceeds its finite boundary")
+            old_databases = frozenset(p / "operations.sqlite3" for p in old_paths)
+            spellings = set()
+            for name, value in early_files.items():
+                source = common._path(name)
+                row = _object(value, {"bytes", "sha256"})
+                maximum = _field_limit(source, old_databases, frozenset(component_paths))
+                size = _integer(row["bytes"], 0, maximum)
+                alias = str(source).casefold()
+                if alias in spellings or source in snapshots or source.is_relative_to(witness):
+                    raise WitnessContinuationError("original cut aliases mutable or future data")
+                spellings.add(alias)
+                data = (
+                    capture.database(source)
+                    if source in old_databases
+                    else capture.read(source, maximum)
+                )
+                if len(data) != size or _sha(data) != _digest(row["sha256"]):
+                    raise WitnessContinuationError("an immutable original cut file changed")
+            anchor_reader = NativeEvidence(
+                study, paths["search"], error_type=WitnessContinuationError
+            )
+            anchor = anchor_reader.owner(improver_study._first(study))
+            if (
+                anchor.manifest["core"] != gateway._core_sources()
+                or anchor.manifest["runtime"] != gateway._runtime()
+            ):
+                raise WitnessContinuationError("continuation changes original CORE or host runtime")
+            profiles = tuple(
+                pipeline._sha(
+                    {
+                        "files": source_screen._comparison_controls(
+                            _context(base, pins, roles),
+                            dict(pins),
+                            base,
+                            core=anchor.manifest["core"],
+                        ),
+                        "core": anchor.manifest["core"],
+                        "runtime": anchor.manifest["runtime"],
+                    }
+                )
+                for pins, roles in ((before, old_roles), (projected, new_roles))
+            )
+            anchor_reader.finish()
+            capture.adopt(anchor_reader.capture)
+            capture.finish()
+            coordinates = list(improver_study._coordinates(development))
+            coordinate = cast(
+                tuple[int, int, int, int],
+                tuple(position[k] for k in ("start", "repetition", "arm", "slot")),
+            )
+            following = coordinates[coordinates.index(coordinate) + 1 :]
+            checked = CheckedStudyContinuation(
+                **vars(checked),
+                _old_owners=frozenset(str(p) for p in old_paths),
+                _cells=tuple(improver_study._location(study, c) for c in following),
+                _screens=frozenset(s.fingerprint() for s in screens),
+                _authorization=paths["search"],
+                _profiles=(profiles[0], profiles[1]),
+            )
         with checked._scope():
             reader, state = improver_study._restore(study, paths["search"])
         if (
@@ -608,8 +799,14 @@ def _check(path: Path, expected: str) -> _CheckedState:
             or state["controls"] != before
         ):
             raise WitnessContinuationError("continuation replaces the original study treatment")
-        if state["attempted"] != _integer(cut["attempted"]) or len(state["decisions"]) != _integer(
-            cut["decisions"]
+        if (
+            state["attempted"] < _integer(cut["attempted"])
+            or len(state["decisions"]) < _integer(cut["decisions"])
+            or not study_continuation
+            and (
+                state["attempted"] != cut["attempted"]
+                or len(state["decisions"]) != cut["decisions"]
+            )
         ):
             raise WitnessContinuationError("continuation advances beyond its one original witness")
         owners = cut["owners"]
@@ -645,15 +842,18 @@ def _check(path: Path, expected: str) -> _CheckedState:
         if totals != _object(cut["totals"], set(_TOTALS)) or totals["reserved_microusd"]:
             raise WitnessContinuationError("original cut accounting is incomplete or held")
         allowed = {witness / role / "owners/0" for role in ("proposal", "generation")}
-        if not known <= state["owner_paths"] or not state["owner_paths"] - known <= allowed:
+        if not known <= state["owner_paths"] or (
+            not study_continuation and not state["owner_paths"] - known <= allowed
+        ):
             raise WitnessContinuationError("continuation has an unscheduled or replaced owner")
+        if study_continuation and {
+            str(row["directory"]) for row in funding["search"]["auth_runs"]
+        } != {str(p) for p in state["owner_paths"]}:
+            raise WitnessContinuationError("development grant contains work outside its study")
         files: dict[str, Any] = _object(cut["files"])
         if not 1 <= len(files) <= 65_536:
             raise WitnessContinuationError("original file cut exceeds its finite boundary")
         names = set()
-        component_paths = selected_paths | {
-            _ref(v)[0] for v in (*old_roles.values(), *new_roles.values())
-        }
         for name, value in files.items():
             source = common._path(name)
             alias = str(source).casefold()
@@ -690,8 +890,25 @@ def _check(path: Path, expected: str) -> _CheckedState:
         if not {str(p) for p in required_files} <= files.keys():
             raise WitnessContinuationError("cut omits an original file or original control")
         prefix = witness.relative_to(study).as_posix()
+        roots = [prefix]
+        new_files: set[str] = set()
+        if isinstance(checked, CheckedStudyContinuation):
+            roots += [p.relative_to(study).as_posix() for p in checked._cells]
+            roots += ["freeze", "observations"]
+            new_files = {
+                "report.json",
+                str(Path(prefix).parent / "decision.json").replace("\\", "/"),
+            }
+        ancestors = {
+            parent.as_posix()
+            for root in roots
+            for parent in Path(root).parents
+            if parent.as_posix() != "."
+        }
         if any(
-            not (name == prefix or name.startswith(prefix + "/"))
+            name not in new_files
+            and not any(name == root or name.startswith(root + "/") for root in roots)
+            and not (study_continuation and name in ancestors and (study / name).is_dir())
             for name in reader.capture.entries.keys() - old_entries
         ):
             raise WitnessContinuationError("new work appears outside the one declared witness")
@@ -719,6 +936,33 @@ def _check(path: Path, expected: str) -> _CheckedState:
             or _json(action["treatment"].to_record()["parent"]) != _json(cut["parent"])
         ):
             raise WitnessContinuationError("cut is not the original next scheduled witness")
+        study_result = None
+        pools = []
+        if isinstance(checked, CheckedStudyContinuation):
+            with checked._scope():
+                if (study / "report.json").is_file():
+                    study_result = improver_study._complete_report(
+                        reader, state, _sha(reader.raw(study / "report.json"))
+                    )
+            for key, decisions in state["cell_decisions"].items():
+                pool = []
+                for decision in decisions:
+                    if decision["status"] == "admitted":
+                        reference = decision["screen"]
+                        report = reader.record(
+                            common._path(reference["directory"]) / "report.json",
+                            reference["report_sha256"],
+                        )
+                        pool.append(
+                            {
+                                "reference": reference,
+                                "candidate_id": decision["candidate_id"],
+                                "controls_sha256": _digest(report["controls_sha256"]),
+                            }
+                        )
+                pools.append(
+                    dict(zip(("start", "repetition", "arm"), key, strict=True)) | {"screens": pool}
+                )
         reader.finish()
         for authority, snapshot in snapshots.items():
             common._finish_snapshot(authority, snapshot, error=WitnessContinuationError)
@@ -738,21 +982,17 @@ def _check(path: Path, expected: str) -> _CheckedState:
             "witness_status": None if progress["result"] is None else progress["result"]["status"],
             "scope": "one_witness_only_not_operator_ready",
         }
-        complete = CheckedWitnessContinuation(
-            path,
-            expected,
-            study,
-            witness,
-            parent,
-            runtime,
-            tuple(before.items()),
-            tuple(projected.items()),
-            base.fingerprint(),
-            _json(record["observation_policy"]),
-            _json(summary),
-            os.getpid(),
-            threading.get_ident(),
-        )
+        if isinstance(checked, CheckedStudyContinuation):
+            summary.update(
+                format="buddha.study-continuation-check.v1",
+                scope="remaining_development_only_not_operator_ready",
+                continuation={"path": str(path), "sha256": expected},
+                host_control_relation=checked._relation(),
+                c_only_pools=pools,
+                coverage=state["coverage"],
+                study_complete=study_result is not None,
+            )
+        complete = replace(checked, _summary=_json(summary))
         directories = frozenset(name for name in capture.entries if (trial / name).is_dir())
         fingerprints = capture.fingerprints() | reader.fingerprints()
         grant_paths = set(snapshots)
@@ -772,14 +1012,22 @@ def _check(path: Path, expected: str) -> _CheckedState:
             directories,
             tuple((p, _sha(b)) for p, b in snapshots.items()),
             None if progress["result"] is None else _json(progress["result"]),
+            state if study_continuation else None,
+            None if study_result is None else _json(study_result),
         )
 
 
-def _checked_state(path: Path, expected_sha256: str) -> _CheckedState:
+def _checked_state(
+    path: Path, expected_sha256: str, *, study_continuation: bool = False
+) -> _CheckedState:
     if not isinstance(path, Path):
         raise WitnessContinuationError("continuation requires an explicit external Path")
     try:
-        return _check(path, expected_sha256)
+        return (
+            _check(path, expected_sha256, study_continuation=True)
+            if study_continuation
+            else _check(path, expected_sha256)
+        )
     except (
         ValueError,
         TypeError,
@@ -798,6 +1046,46 @@ def _checked_state(path: Path, expected_sha256: str) -> _CheckedState:
 def check_witness_continuation(path: Path, *, expected_sha256: str) -> CheckedWitnessContinuation:
     """Check exact original evidence without keys, writes, SQL on disk or workers."""
     return _checked_state(path, expected_sha256).checked
+
+
+def check_study_continuation(path: Path, *, expected_sha256: str) -> CheckedStudyContinuation:
+    """Check a separate development descriptor, with no keys, writes or workers."""
+    checked = _checked_state(path, expected_sha256, study_continuation=True).checked
+    if type(checked) is not CheckedStudyContinuation:
+        raise WitnessContinuationError("study continuation needs its distinct checked scope")
+    return checked
+
+
+def advance_study(
+    checked: CheckedStudyContinuation, *, transport: gateway.RawHTTPTransport
+) -> dict[str, object]:
+    """One ordinary development action; final/plain controllers are never routed."""
+    if type(checked) is not CheckedStudyContinuation or not isinstance(
+        transport, gateway.RawHTTPTransport
+    ):
+        raise WitnessContinuationError("development advancement needs its exact checked context")
+    checked._check_thread(checked.study)
+    prepared = _checked_state(checked.path, checked.sha256, study_continuation=True)
+    current = cast(CheckedStudyContinuation, prepared.checked)
+    if prepared.state is None:
+        raise WitnessContinuationError("development advancement lacks its validated state")
+    with current._scope():
+        authority = Authorization(prepared.search_grant)
+        with (
+            trial_fence.work(
+                authority.path, authority._terms(), directory=current.study, kind="search"
+            ),
+            pipeline._exclusive(current.study),
+        ):
+            prepared.after_locks()
+            if prepared.study_result is not None:
+                return {"action": "complete", "role": None, "result": _load(prepared.study_result)}
+            improver_study._check_current(prepared.state)
+            reader = NativeEvidence(
+                current.study, authority.path, error_type=WitnessContinuationError
+            )
+            result = improver_study._advance_action(reader, prepared.state, authority, transport)
+            return {"action": prepared.action["kind"], "role": None, "result": result}
 
 
 def advance_witness(
