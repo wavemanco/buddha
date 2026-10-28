@@ -1,18 +1,30 @@
 """Shared passive launch checks and observer-only progress reporting."""
 
+import hashlib
 import sys
 import threading
 import time
-from collections.abc import Callable, Iterator
+from collections.abc import Callable, Iterator, Mapping
 from contextlib import contextmanager
 from pathlib import Path
-from typing import cast
+from typing import TYPE_CHECKING, cast
 
 from buddha import credentials, gateway
 from buddha import native_pipeline as pipeline
 from buddha.gateway_history import MAX_LEDGER_BYTES
 from buddha.provider import ModelSpec
-from buddha.releases import ReleaseError, Selection, _digest, _json, _load, _object, _root, _text
+from buddha.releases import (
+    MAX_JSON_BYTES,
+    ROLES,
+    ReleaseError,
+    Selection,
+    _digest,
+    _json,
+    _load,
+    _object,
+    _root,
+    _text,
+)
 from buddha.search_evidence import (
     EvidenceFieldLimitError,
     EvidencePathLimitError,
@@ -20,6 +32,36 @@ from buddha.search_evidence import (
     _read,
     _sidecars,
     read_authority,
+)
+
+if TYPE_CHECKING:
+    from buddha.source_screen import SourceScreen
+
+# Frozen v1 coverage; future source-inventory additions cannot expand this profile.
+_UNIFIED_HELPERS_V1 = frozenset(
+    """__init__.py agent_run.py agent_worker.py answers.py archive.py authorization.py
+    baseline.py baseline_results.py baseline_state.py candidate_generation.py
+    candidate_improvement.py candidate_improvement_results.py candidate_run.py candidate_worker.py
+    channel.py common.py comparison_observation.py credentials.py doctor.py evaluation.py
+    executor.py
+    final_evaluation.py gateway.py gateway_history.py history.py improvement_rule.py
+    improver_analysis.py improver_assessment.py improver_handoff.py improver_launch.py
+    improver_launch_state.py improver_study.py launch_common.py ledger.py native_context.py
+    native_evaluation.py native_evidence.py native_pipeline.py native_run.py native_transport.py
+    native_worker.py noveltybench_results.py plain_comparison.py policy_panel.py policy_results.py
+    policy_study.py process_observation.py provider.py reference.py releases.py search_evidence.py
+    source_capacity.py source_feedback.py source_review.py source_review_handoff.py
+    source_review_results.py source_screen.py source_screen_results.py source_search.py
+    trial_fence.py unified_funding.py unified_launch.py validation_analysis.py validation_study.py
+    wire.py""".split()
+)
+_UNIFIED_OUTER_V1 = (
+    "agents/frozen_seed.py",
+    "docs/conformance/imp01-run.py",
+    "docs/conformance/unified-run.py",
+)
+_UNIFIED_ROLES_V1 = frozenset("buddha/" + name for name in _UNIFIED_HELPERS_V1) | frozenset(
+    _UNIFIED_OUTER_V1
 )
 
 
@@ -57,6 +99,220 @@ def _path(value: object, *, error: type[ReleaseError] = ReleaseError) -> Path:
     if str(path) != value or ".." in path.parts or str(value).startswith(("//", "\\\\")):
         raise error("launch paths must have one canonical spelling")
     return path
+
+
+def _helper_role_relation(
+    raw: bytes,
+    *,
+    original_source_manifest: bytes,
+    expected_overlay: Mapping[str, str],
+    screen: "SourceScreen",
+    before_context: object,
+    before_controls: Mapping[Path, str],
+    after_context: object,
+    after_controls: Mapping[Path, str],
+) -> dict[Path, str]:
+    """Check a bound handoff's frozen 68-role projection for one planned screen.
+
+    No I/O or launcher uses this relation. An outer loader must still join all
+    original actors, grants and the cut, verify actual files and review repair
+    semantics. Keeping metadata consistent does not establish those facts.
+    """
+    from buddha import candidate_generation, candidate_improvement
+    from buddha.source_screen import SourceScreen, _comparison_controls, _version
+
+    spellings: dict[str, str] = {}
+
+    def remember(path: Path) -> Path:
+        # Check before Windows Path keys can coalesce differently spelled inputs.
+        alias = str(path).casefold()
+        if alias in spellings and spellings[alias] != str(path):
+            raise ReleaseError("helper role paths have conflicting canonical spellings")
+        spellings[alias] = str(path)
+        return path
+
+    def reference(value: object) -> tuple[Path, str]:
+        row = _object(value, {"path", "sha256"})
+        return remember(_path(row["path"])), _digest(row["sha256"])
+
+    if not isinstance(expected_overlay, Mapping) or len(expected_overlay) != 2:
+        raise ReleaseError("helper relation requires an explicit overlay reference")
+    overlay, overlay_sha = reference(dict(expected_overlay))
+    if (
+        type(raw) is not bytes
+        or len(raw) > MAX_JSON_BYTES
+        or hashlib.sha256(raw).hexdigest() != overlay_sha
+    ):
+        raise ReleaseError("helper relation bytes differ from their explicit reference")
+    relation = _object(_load(raw), {"format", "source_manifest", "roles"})
+    if relation["format"] != "buddha.helper-role-relation.v1" or type(screen) is not SourceScreen:
+        raise ReleaseError("unsupported helper relation or planned screen")
+
+    def controls(value: object, *, strings: bool = False) -> dict[Path, str]:
+        if not isinstance(value, Mapping) or len(value) > 1024:
+            raise ReleaseError("helper relation controls exceed the original path boundary")
+        result: dict[Path, str] = {}
+        aliases = set()
+        for key, pin in value.items():
+            if not strings and not isinstance(key, Path):
+                raise ReleaseError("helper relation controls need explicit Paths")
+            path = remember(_path(key if strings else str(key)))
+            alias = str(path).casefold()
+            if alias in aliases:
+                raise ReleaseError("helper relation controls have path aliases")
+            aliases.add(alias)
+            result[path] = _digest(pin)
+        return result
+
+    planned = screen.to_record()
+    runtime = _object(_object(planned["generation"])["runtime"])
+    supplied = [controls(before_controls), controls(after_controls)]
+    source_path, source_sha = reference(relation["source_manifest"])
+    if (
+        supplied[0].get(source_path) != source_sha
+        or type(original_source_manifest) is not bytes
+        or len(original_source_manifest) > MAX_JSON_BYTES
+        or hashlib.sha256(original_source_manifest).hexdigest() != source_sha
+    ):
+        raise ReleaseError("original source manifest differs from its bound reference")
+    original = _object(
+        _load(original_source_manifest),
+        {"format", "assessment", "expected_runtime_sha256", "directory", "source_sha256"},
+    )
+    assessment_path, assessment_sha = reference(original["assessment"])
+    remember(_path(original["directory"]))
+    if (
+        original["format"] != "buddha.improver-handoff.v1"
+        or original["expected_runtime_sha256"] != runtime["sha256"]
+        or supplied[0].get(assessment_path) != assessment_sha
+    ):
+        raise ReleaseError("original source manifest changes its frozen handoff")
+    recorded = controls(_object(original["source_sha256"]), strings=True)
+    if (
+        not recorded
+        or len(recorded) > 1023
+        or any(supplied[0].get(path) != pin for path, pin in recorded.items())
+    ):
+        raise ReleaseError("original source manifest omitted bound source/control pins")
+    sources = []
+    for context, pins in zip((before_context, after_context), supplied, strict=True):
+        checked = _object(
+            context,
+            {
+                "format",
+                "screen_sha256",
+                "expected_runtime_sha256",
+                "controls",
+                "comparison_controls",
+            },
+        )
+        if (
+            checked["format"] != _version(screen, "source-screen-context")
+            or checked["screen_sha256"] != screen.fingerprint()
+            or checked["expected_runtime_sha256"] != runtime["sha256"]
+            or controls(_object(checked["controls"]), strings=True) != pins
+        ):
+            raise ReleaseError("helper context changes its exact planned screen or controls")
+        comparison = _object(checked["comparison_controls"], {"sources", "external"})
+        members = _object(comparison["sources"])
+        if len(members) > 1024 or len(_object(comparison["external"])) > 1024:
+            raise ReleaseError("helper context exceeds its original path boundary")
+        controls(_object(comparison["external"]), strings=True)
+        _comparison_controls(checked, pins, screen)
+        sources.append({name: reference(value) for name, value in members.items()})
+    screen_before, screen_after = sources
+    old_package = next(iter(screen_before.values()))[0].parent
+    new_package = next(iter(screen_after.values()))[0].parent
+    before = {}
+    for role in _UNIFIED_ROLES_V1:
+        path = remember(old_package.parent / role)
+        if path not in recorded:
+            raise ReleaseError("original source manifest lacks the frozen unified helper profile")
+        before[role] = (path, recorded[path])
+    if any(before.get(role) != ref for role, ref in screen_before.items()):
+        raise ReleaseError("original screen helpers differ from the anchored source manifest")
+    pairs = _object(relation["roles"])
+    if len(pairs) != len(before) or set(pairs) != set(before):
+        raise ReleaseError("helper relation omits or adds a closed source role")
+    after = {}
+    for name, value in pairs.items():
+        pair = _object(value, {"before", "after"})
+        after[name] = reference(pair["after"])
+        if (
+            reference(pair["before"]) != before[name]
+            or after[name][0] != remember(new_package.parent / name)
+            or supplied[1].get(after[name][0]) != after[name][1]
+        ):
+            raise ReleaseError("helper relation differs from its actual context roles")
+    if any(after.get(role) != ref for role, ref in screen_after.items()):
+        raise ReleaseError("new screen helpers differ from the complete source projection")
+    for name in gateway.CORE:
+        role = "buddha/" + ("__init__.py" if name == "buddha" else name.rsplit(".", 1)[1] + ".py")
+        if before[role][1] != after[role][1]:
+            raise ReleaseError("helper relation changes a core source role")
+
+    protected = {reference(runtime)[0]: _digest(runtime["sha256"])}
+    for role in _UNIFIED_OUTER_V1:
+        path, pin = before[role]
+        protected[path] = pin
+    if before["agents/frozen_seed.py"][1] != after["agents/frozen_seed.py"][1]:
+        raise ReleaseError("helper relation changes the frozen plain generator")
+    if planned["lineage"] is not None:
+        path, pin = reference(planned["lineage"])
+        protected[path] = pin
+    for kind in ("generation", "native"):
+        section = _object(planned[kind])
+        roots = _object(section["roots"], set(ROLES))
+        selected = Selection.from_bytes(_json(section["selection"])).to_record()
+        for component, component_files in _object(selected["components"]).items():
+            root = remember(_path(roots[component]))
+            for name, component_pin in _object(component_files).items():
+                path, digest = remember(root / name), _digest(component_pin)
+                if path in protected and protected[path] != digest:
+                    raise ReleaseError("selected inputs have conflicting immutable roles")
+                protected[path] = digest
+    for pins in supplied:
+        if any(path in pins and pins[path] != digest for path, digest in protected.items()):
+            raise ReleaseError("helper controls change a selected immutable input")
+    for path, pin in after.values():
+        if path in supplied[0] and supplied[0][path] != pin:
+            raise ReleaseError("helper replacement conflicts with an original input path")
+    if (
+        overlay in supplied[0]
+        or overlay in protected
+        or overlay in {path for path, _ in after.values()}
+    ):
+        raise ReleaseError("helper relation reference overlaps an original or source input")
+    expected = dict(supplied[0])
+    for path, _ in before.values():
+        if path not in protected:
+            del expected[path]
+    expected.update(after.values())
+    expected[overlay] = overlay_sha
+    closures = (
+        ("source_screen.py", _UNIFIED_HELPERS_V1),
+        (
+            "candidate_generation.py",
+            {
+                path.name
+                for path in candidate_generation._sources(_version(screen, "candidate-generation"))
+            },
+        ),
+        ("candidate_improvement.py", {path.name for path in candidate_improvement._sources()}),
+    )
+    for anchor, names in closures:
+        prefixes = {
+            path.parent
+            for path in expected
+            if path.name == anchor and all(path.parent / name in expected for name in names)
+        }
+        if not names <= _UNIFIED_HELPERS_V1 or prefixes != {new_package}:
+            raise ReleaseError("helper projection retains ambiguous producer source roles")
+    if len(expected) > 1024 or expected != supplied[1]:
+        raise ReleaseError(
+            "helper projection changes fixed inputs or retains ambiguous source roles"
+        )
+    return expected
 
 
 def _snapshot(path: Path) -> tuple[dict[str, object], bytes]:
