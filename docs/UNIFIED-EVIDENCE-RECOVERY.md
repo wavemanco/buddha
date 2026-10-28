@@ -207,6 +207,27 @@ owner checks required for a continuation.
 
 ## What must happen before another paid start
 
+The first [helper-transition component](conformance/helper-role-relation-delivery.json)
+now checks a precise list of 65 host helpers and three outer source files.
+It anchors the old source list to the already recorded handoff, keeps the
+original scientific inputs, selected components, runtime and CORE hashes, and
+checks the proposed new file bindings. The three old outer pins remain as
+historical provenance; the plain-generator source must keep the same hash.
+
+A check using the actual saved screen metadata succeeds with 185 original
+bindings and 189 proposed bindings. This is a counterfactual metadata check:
+no stage, owner, grant or original file was changed. It does not prove an
+executed transition. The complete continuation must also bind its own record
+and any named driver, join all original actors and accounting, and handle
+old and new stages throughout development, final assessment and plain use.
+
+The component returns a separate proposed map. Original reports and their
+actual fingerprints keep their meaning. It adds no launcher opt-in, discovers
+no transition automatically, and does not relax the existing parent-selection
+guard. Unknown helper names, changed fixed inputs, aliases and a second
+complete producer prefix are rejected. Source freshness, repair semantics and
+authority still require the outer checked continuation.
+
 The [owner-census repair](RECONSTRUCTION-COST.md#owner-census-work) now avoids
 decoding the same task population for every file belonging to one owner. Its
 work-count and adversarial tests preserve the original owner/funding checks;
