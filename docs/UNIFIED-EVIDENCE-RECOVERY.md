@@ -73,6 +73,48 @@ not complete study reconstruction, SQL interpretation or continuation. Its
 8.753-second raw-only timing cannot be compared with the 786.763-second full
 reconstruction as a speed improvement.
 
+## Specific stop reasons
+
+The repaired source, policy, improver and unified launchers now preserve these
+fixed codes in terminal output and new partial records:
+
+| Code | Plain-English meaning |
+| --- | --- |
+| `evidence_total_bytes_limit` | The combined files exceed the observation's byte allowance. |
+| `evidence_field_bytes_limit` | One file or field exceeds its individual allowance. |
+| `evidence_path_count_limit` | There are too many folder entries or consumed file paths. |
+
+Recognition follows a bounded chain of actual typed exceptions, including
+causes hidden by the redacted traceback. It never prints arbitrary exception
+text or accepts an arbitrary error's claimed code. Unknown errors still use
+`launch_stopped`; credential and cancellation results keep their existing
+meaning. The unified launcher prints its safe code before the potentially long
+recording check, then saves the partial observation and re-raises the original
+exception. Original saved observations keep their original labels.
+
+These are engineering changes in a separate checkout. They neither patch the
+old executing tree nor authorize starting a changed runtime against its owners.
+
+## Complete-grid capacity remains a gate
+
+The byte allowance is not the only limit. The existing checker also allows
+10,000 local entries, counting files and folders together. Current trial
+metadata has 2,149 files and 1,574 folders: 3,723 entries. An ordinary retained
+task unit has 45 files and 32 internal folders. The allowed 312 successful final
+cells therefore need at least 24,336 entries, or 28,059 including today's trial,
+before remaining development, higher parent folders and freeze records.
+
+Observed ordinary-unit sizes project about 7.34-7.66 GiB for the final cells
+alone. This is an extrapolation, not an upper bound. The existing prospective
+checks cover per-owner input sets and a rough development-owner count; they do
+not establish complete trial folder or byte capacity.
+
+A separate versioned capacity policy and full-layout rehearsal are required.
+Neither failed stage attempts nor local stop observations are fully bounded by
+the API-attempt cap, so any rehearsal must declare its recovery envelope.
+Exceeding a finite allowance must remain an explicit partial result, with the
+reason recorded. No larger folder policy is selected by these repairs.
+
 ## What must happen before another paid start
 
 The [owner-census repair](RECONSTRUCTION-COST.md#owner-census-work) now avoids

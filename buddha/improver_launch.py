@@ -586,7 +586,7 @@ def launch(
                 public["observation_status"] = "unavailable"
         raise
     except Exception as error:
-        reason = error.code if isinstance(error, credentials.KeyInputError) else "launch_stopped"
+        reason = common._stop_reason(error)
         public.update(status="stopped", phase=phase[0], reason=reason)
         if isinstance(error, credentials.KeyInputError):
             raise

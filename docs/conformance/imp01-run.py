@@ -14,7 +14,8 @@ from pathlib import Path
 if __package__ is None:
     sys.path.insert(0, str(Path(__file__).absolute().parents[2]))
 
-from buddha import credentials
+from buddha import credentials as credentials
+from buddha import launch_common
 from buddha.improver_launch import ImproverLaunchError, launch
 
 
@@ -45,7 +46,7 @@ def main(argv=None):
     except KeyboardInterrupt:
         record, code = {"status": "cancelled", "reason": "cancelled"}, 130
     except Exception as error:
-        reason = error.code if isinstance(error, credentials.KeyInputError) else "launch_stopped"
+        reason = launch_common._stop_reason(error)
         record, code = {"status": "stopped", "reason": reason}, 2
     print(json.dumps({"format": "buddha.improver-operator.v1", **record}), flush=True)
     return code

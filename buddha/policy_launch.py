@@ -499,7 +499,7 @@ def launch(
         public.update(status="cancelled", phase=phase[0], reason="cancelled")
         raise
     except Exception as error:
-        code = error.code if isinstance(error, credentials.KeyInputError) else "launch_stopped"
+        code = launch_common._stop_reason(error)
         public.update(status="stopped", phase=phase[0], reason=code)
         if isinstance(error, credentials.KeyInputError):
             raise
