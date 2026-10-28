@@ -1,0 +1,188 @@
+{
+  "format": "buddha.dev-msgpack-refresh.v1",
+  "recorded_utc": "2026-10-28T16:12:44.384405+00:00",
+  "base_head": "d1149cdbf9ceafdc4ea5e86bacf724d6d6fb138a",
+  "plan_revision": 169,
+  "scope": "Development tools only; one pin changes from msgpack 1.2.1 to 1.2.3. Application source, standard-library runtime, frozen experiment source, grants and records are unchanged by this maintenance work.",
+  "change": {
+    "file": "requirements-dev.txt",
+    "package": "msgpack",
+    "before": "1.2.1",
+    "after": "1.2.3",
+    "other_package_pin_changes": 0
+  },
+  "advisory": {
+    "id": "CVE-2026-114613",
+    "alias": "GHSA-j586-36cw-2gc2",
+    "maintainer_url": "https://github.com/msgpack/msgpack-python/security/advisories/GHSA-j586-36cw-2gc2",
+    "release_url": "https://github.com/msgpack/msgpack-python/releases/tag/v1.2.3",
+    "audit_before_exit_code": 1,
+    "audit_before_affected_package_count": 1,
+    "audit_before_pin_count": 39,
+    "fixed_version": "1.2.3",
+    "qualification": "The audit classifies 1.2.1 as affected. The maintainer report reproduces 1.2.2 and notes uncertainty about the earliest affected release. Host exploitability and an independent memory-safety proof are not established."
+  },
+  "license_and_metadata": {
+    "before_url": "https://pypi.org/pypi/msgpack/1.2.1/json",
+    "after_url": "https://pypi.org/pypi/msgpack/1.2.3/json",
+    "license_before": "Apache-2.0",
+    "license_after": "Apache-2.0",
+    "python_before": ">=3.10",
+    "python_after": ">=3.10",
+    "requires_dist_before": [],
+    "requires_dist_after": [],
+    "wheel_copying_and_metadata_checked": true,
+    "existing_development_certifi_MPL_exception": "Unchanged"
+  },
+  "binary_wheels": [
+    {
+      "filename": "msgpack-1.2.3-cp313-cp313-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/51/06/c3def9bc4db283103c5901b302ee2a4305cb1e69729244f94d9bd8f8e8e7/msgpack-1.2.3-cp313-cp313-win_amd64.whl",
+      "sha256": "bb89b5dc30469c84bbf8684826eb851d82412ca95690e111b9ac5e8fb343961a",
+      "size": 76569,
+      "license_file": "msgpack-1.2.3.dist-info/licenses/COPYING",
+      "license_sha256": "4fbdff42eba4593c16f7a7ea7078883b2b734870a1e2b636284ce2dce62bf4f7",
+      "metadata_requires_dist": []
+    },
+    {
+      "filename": "msgpack-1.2.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+      "url": "https://files.pythonhosted.org/packages/b0/30/c394d37898db9212d1693456cdf363c7e1a097d0b63e10664007f3df3ec1/msgpack-1.2.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+      "sha256": "07c9733089d1b176c3dd2f7fa268452f9d5d784d076473499d754a58e8d1fbbb",
+      "size": 466866,
+      "license_file": "msgpack-1.2.3.dist-info/licenses/COPYING",
+      "license_sha256": "492dedba85da5872f78e6091bcd1fea474d660d35acb4dee964b8aab3f007427",
+      "metadata_requires_dist": []
+    }
+  ],
+  "installation": {
+    "target": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-msgpack-20261028-v1\\venv",
+    "global_environment_changed": false,
+    "shared_dev_tools_environment_changed": false,
+    "python": "3.13.12",
+    "platform": "Windows",
+    "installed_and_pinned_packages": 39,
+    "all_pins_match": true,
+    "binary_only_installed_packages": 39,
+    "additional_closure_changes": 0,
+    "marker_closure": {
+      "Windows": {
+        "satisfied_active_edges": 37,
+        "actual_runtime_test": true
+      },
+      "Linux": {
+        "satisfied_active_edges": 36,
+        "actual_runtime_test": false
+      }
+    },
+    "linux_execution_performed": false,
+    "linux_scope": "Downloaded and hash-checked CPython 3.13 x86-64 wheel plus marker compatibility from installed metadata; hosted Linux execution remains pending."
+  },
+  "checks": [
+    {
+      "command": "python -m pip check",
+      "function": "Checks that the fresh development environment has compatible installed dependencies. Runs once without model API calls.",
+      "exit_code": 0
+    },
+    {
+      "command": "python -m pip_audit --disable-pip --no-deps --strict -r requirements-dev.txt",
+      "function": "Checks all 39 exact development pins against current advisory metadata. Runs once using public package-security services; no model API calls.",
+      "fresh_cache_exit_code": 0,
+      "cached_repeat_exit_code": 0,
+      "audited_package_count": 39,
+      "known_vulnerabilities": 0
+    },
+    {
+      "command": "python -m pip_audit --no-deps -r requirements.txt",
+      "function": "Checks the application runtime dependency list. Runs once without model API calls.",
+      "exit_code": 0,
+      "runtime_dependency_count": 0
+    },
+    {
+      "command": "python -m ruff check buddha tests agents ci_test_shard.py",
+      "function": "Checks Python source style and common mistakes. Runs once without provider calls.",
+      "exit_code": 0
+    },
+    {
+      "command": "python -m ruff format --check buddha tests agents ci_test_shard.py",
+      "function": "Checks formatting without changing files. Runs once without provider calls.",
+      "exit_code": 0,
+      "files": 267
+    },
+    {
+      "command": "python -m mypy --strict buddha agents ci_test_shard.py",
+      "function": "Checks Python type consistency. Runs once without provider calls.",
+      "exit_code": 0,
+      "source_files": 88
+    },
+    {
+      "command": "python -m bandit -r buddha agents ci_test_shard.py",
+      "function": "Checks application source for supported security patterns. Runs once without provider calls.",
+      "exit_code": 0,
+      "findings": 0,
+      "existing_warning_messages_retained": true
+    },
+    {
+      "command": "python -m compileall -q buddha tests agents ci_test_shard.py",
+      "function": "Checks that Python files compile; it creates local bytecode caches. Runs once without provider calls.",
+      "exit_code": 0
+    }
+  ],
+  "smoke_checks": {
+    "native_extension": "Windows CPython 3.13 extension loaded",
+    "pack_unpack_roundtrip": "passed",
+    "streaming_roundtrip": "passed",
+    "strict_map_key_rejections": 2,
+    "CacheControl_uses_installed_msgpack": true,
+    "scope": "API compatibility only; no independent vulnerability reproduction."
+  },
+  "preparation_notes": [
+    "A preliminary MIT-license expectation stopped; actual PyPI metadata and both downloaded wheel COPYING files confirm Apache-2.0, matching 1.2.1.",
+    "An assumed Linux filename ordering stopped; selection was corrected against the actual published wheel tags.",
+    "A metadata-inventory script stopped on the Windows default text encoding; its explicit UTF-8 rerun passed. These were preparation checks, not application regressions."
+  ],
+  "evidence": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-msgpack-20261028-v1\\metadata-review.json",
+      "sha256": "6ff0b95542db91dd8ad54dc09dfb0db65ef8beeb218dcc59bed1d33f83b82ed8"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-msgpack-20261028-v1\\install-report.json",
+      "sha256": "676880d948a5cc9a8fef230a1132062cee9349be24a2622922dd8bd86e7f16c2"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-msgpack-20261028-v1\\installed-inventory.json",
+      "sha256": "e3c4ebe3e5b82f4afef5bdd67b54e7dc9750155a6919836941e760a9e3ca1290"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-msgpack-20261028-v1\\audit-before.json",
+      "sha256": "65377d1d62c7f4a1a8c918c3efee1f0d9af0361e526e694db0db59885116d3a3"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-msgpack-20261028-v1\\audit-new.json",
+      "sha256": "0536d8681c9efd4d640c80f13b9f9fdb923075d5f7f9f30b85a89662a154dbb9"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-msgpack-20261028-v1\\audit-cached.json",
+      "sha256": "0536d8681c9efd4d640c80f13b9f9fdb923075d5f7f9f30b85a89662a154dbb9"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-msgpack-20261028-v1\\audit-runtime.json",
+      "sha256": "f40bd25e621fd0c37011964f7d26e9d91f8a2f277eb84e7b457829451491dc7d"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-msgpack-20261028-v1\\bandit.json",
+      "sha256": "c649574d3c20ef48c9b2ae4b276aeb3032efcc1bcdc2991b2a5f9d0e560e0cd8"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-msgpack-20261028-v1\\msgpack-smoke.json",
+      "sha256": "2f0be7d2d4f2fd626142db3c8445749e5e50cbc2a06d4bd477b5087aa008c130"
+    }
+  ],
+  "limits": {
+    "full_test_suite_run_for_this_pin": false,
+    "hosted_CI": "Not yet run for this commit; no hosted success claimed.",
+    "paid_API_calls": 0,
+    "containers_started": 0,
+    "live_resume_authorized_by_this_record": false
+  }
+}
