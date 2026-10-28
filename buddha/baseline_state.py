@@ -291,19 +291,19 @@ def inspect_references(
             for owner in reader.owners.values()
         ):
             reasons.append("inactive_original_owner")
-        files = {
-            str(path): _sha(raw) for reader in readers for path, raw in reader.capture.raw.items()
-        }
+        reference_files = {}
         for source, pin in (controls | definitions).items():
             if file_hash(source, max_bytes=256 * 1024**2) != pin:
                 raise BaselineStateError("reference control changed during observation")
-            files[str(source)] = pin
+            reference_files[str(source)] = pin
         for source, raw in fresh_files.items():
             if pipeline._read(source) != raw:
                 raise BaselineStateError("fresh reference input changed during observation")
-            files[str(source)] = _sha(raw)
-        for reader in readers:
-            reader.finish()
+            reference_files[str(source)] = _sha(raw)
+        files = {
+            path: digest for reader in readers for path, digest in reader.fingerprints().items()
+        }
+        files.update(reference_files)
         common._finish_snapshot(authority, funding_raw, error=BaselineStateError)
         if any(not _absent(root) for root in missing):
             raise BaselineStateError("reference appeared during observation")

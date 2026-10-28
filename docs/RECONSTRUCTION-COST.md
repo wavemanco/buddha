@@ -244,3 +244,82 @@ These are work-count and integrity checks, not a production timing profile or a
 measurement of the full twenty-hour run. The original executing code stays
 frozen. Restart remains blocked until the remaining error, reconstruction and
 explicit-continuation work in [PLAN.md](PLAN.md) passes its gates.
+
+
+## Verified receipt sharing and digest exports
+
+The next October 28 repair removes redundant rereads while keeping fresh final
+verification. Eight complete digest-map exports now obtain their fingerprints
+from the same pass that checks the bytes. Actual byte consumers, SQL/funding
+reads, early individual-file checks and original source-reader identity checks
+remain in place. Native readers still finish every retained sibling tree.
+
+Nested adoption now freshly finishes the source, validates the complete
+prospective receipt union, and only then changes the receiving capture. It
+rejects conflicting originals, byte/path overflow, missing database receipts
+and database receipts exceeding their individual field limit. It preserves
+legacy sidecar/database insertion order as well as complete absolute-path
+fingerprints. No cache or arbitrary external digest-map admission is added.
+
+This changes the observation cut: newly adopted paths were checked at the fresh
+source finish. The receiver's later fresh finish remains mandatory and rejects
+subsequent drift before active work. Neither version supplies an atomic
+filesystem snapshot. Work-count tests reduce adoption from three data reads to
+one fresh source pass, and eliminate twelve redundant file reads after the
+final candidate-generation verification. A genuine plain-generation case also
+preserves Path keys and the exact authority exclusion without a second pass.
+
+Independent review found and reproduced three edge cases before publication:
+legacy external-key collision ordering, a database marker without any receipt,
+and a previously read database that exceeded the narrower ledger field bound.
+The final union preflight rejects invalid sources and preserves the old order.
+The final 90-method cohort passes. A separate older 68-method cohort had 65
+passes and three obsolete test-double errors; replacing that duplicate fake
+reader with actual NativeEvidence and rerunning the affected cases resolves
+those fixture errors. The cuts remain separately recorded rather than being
+combined into a claimed 149-method final pass.
+
+These are work-count and custody results. Whole-study performance, full-layout
+capacity and explicit paid continuation remain separate gates in PLAN.md.
+
+## Fresh copies of validated artifacts
+
+The actual saved-run profile records 13,974 artifact-copy calls, 8,137 task-
+population reconstructions and over eight million metadata-row validations.
+Its cumulative timings overlap and include profiler overhead; they cannot be
+added or treated as a controlled speed comparison.
+
+One shared copy method was repeating strict input validation on immutable bytes
+that had already passed that validation at construction. It now uses the standard
+JSON decoder to return a fresh editable copy. All nine in-repository artifact
+types still validate new bytes strictly; canonical bytes and fingerprints stay
+unchanged. Callers can edit their copies without changing the original or a
+later copy. This introduces no raw-byte cache or parsed-object cache.
+
+A genuine 1,000-row synthetic workload makes twenty record copies. It reproduces
+twenty redundant strict decodes and validation serializations before the change;
+the new copy path performs zero of those extra passes. Sixty malformed-constructor
+subcases still reject. The original nested-copy, frozen-data, format and identity
+assertions remain; their two decoder-count proxies now count the actual decoder.
+
+Ninety-nine methods pass before the capacity merge. On the merged source, another
+29-method copy/answer/format cohort and the eight capacity methods pass; these
+overlapping cuts are recorded separately. Two hundred deterministic nested JSON
+cases also reproduce the old views exactly. Configured source checks pass.
+[The delivery](conformance/validated-artifact-views-delivery.json) records these
+cuts and the separate actual-run check; full hosted coverage remains separate.
+
+The merged repaired source also reconstructs the actual saved study under the
+finite v2 policy: 174 owners, 604 attempts, $4.845090 spent/committed, zero held,
+and the same absent witness at 1/1/1/0. That guarded check took 861.192 seconds
+locally. It used in-memory SQL snapshots and made no provider calls or writes
+to the run. This single observation is not a controlled before/after speed
+experiment, a whole-run duration estimate or paid continuation authority.
+
+```powershell
+python -B -m unittest discover -s tests -p test_validated_artifact_views.py -v
+```
+
+This optional developer command runs the five new synthetic checks once, with
+no API keys or paid calls. Use the checkout containing this test; no separate
+window is needed. Ctrl+C stops it.

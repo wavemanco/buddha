@@ -113,7 +113,97 @@ A separate versioned capacity policy and full-layout rehearsal are required.
 Neither failed stage attempts nor local stop observations are fully bounded by
 the API-attempt cap, so any rehearsal must declare its recovery envelope.
 Exceeding a finite allowance must remain an explicit partial result, with the
-reason recorded. No larger folder policy is selected by these repairs.
+reason recorded. No production launcher selects a larger folder policy yet.
+
+### Version 2: finite byte and count allowances
+
+The separate `buddha.evidence-observation-policy.v2` keeps the same byte and
+zero raw-cache fields, and requires two additional positive integer fields:
+
+| Field | Meaning |
+| --- | --- |
+| `max_tree_entries` | Files and folders in each observed tree; at most 100,000. |
+| `max_consumed_paths` | Distinct consumed files, including external inputs and adopted receipts; at most 65,536. |
+
+These allowances are fixed before the initial folder inventory and remain fixed
+for that capture's later checks. Defaults and version 1 keep the original count
+limits. Individual field limits, sidecars, changed-byte checks, link rejection,
+portable names and complete receipt-union checks still apply. Sixty-six final
+integration methods pass, including a real 10,001-file fixture and byte/count
+rejection during receipt adoption. This does not select a live policy.
+
+### The actual saved stopping point
+
+A guarded passive reconstruction now reaches the saved action instead of the
+old cumulative-byte failure. It reconciles 174 owners, 604 attempts, $4.845090
+spent/committed and zero held. Seven counted decisions are saved; the eighth
+counted proposal and screen have reached the next witness-feedback action at
+start 1, repetition 1, arm 1, slot 0. That witness folder does not exist yet.
+
+This observation used explicitly selected finite limits before the later
+receipt-sharing integration. It used in-memory SQL snapshots, with no on-disk
+SQL connections, keys, model calls, workers, writes to the run or interpretation
+or execution of generated Python. It identifies a prospective boundary; a
+continuation must still check that boundary and preserve every old owner.
+
+### Full-layout raw rehearsal
+
+The larger policy passes an actual local raw-reading rehearsal over **24 GiB,
+48,000 regular files and 81,920 total file/folder entries**. Every declared byte
+is read initially, checked again during adoption, and checked at final finish.
+No persistent raw cache is used. The exact layout and executing script/checker
+hashes are recorded in the [capacity delivery](conformance/evidence-capacity-policy-delivery.json).
+
+The layout accounts for the maximum 296 development owners, 1,248 final owners
+and eight shared plain-reference owners. Its 424 task-storage proxies cover
+60 development, 312 final and 52 plain task sets; plain tasks share owners.
+Each assessment proxy has a 52 MiB byte quota and a padded 90-file/64-folder
+geometry. One additional attempt footprint per actual owner is included inside
+the declared quotas. An opaque prior-prefix allowance and shared padding bring
+the total to 24 GiB. These are synthetic raw records, not completed benchmark
+evaluations or a proof that every possible valid history fits. Larger records
+or more failures can exceed the finite policy and must stop explicitly.
+
+These optional developer commands run once, make no model calls and need no
+separate PowerShell window. Start in the checkout containing the script:
+
+```powershell
+New-Item -ItemType Directory -Force runs\checks | Out-Null
+$buddhaWorkspace = (Get-Location).Path
+python -B docs/conformance/evidence-capacity-rehearsal.py --workspace $buddhaWorkspace --output "$buddhaWorkspace\runs\checks\evidence-capacity-opaque-local-v1"
+```
+
+The first line creates the local checks folder if needed, keeping its contents.
+The second remembers this checkout's absolute path. The third only prints the
+proposed layout, disk requirement and hash; it creates no rehearsal files and
+spends no API money. Ctrl+C stops it.
+
+```powershell
+python -B docs/conformance/evidence-capacity-rehearsal.py --workspace $buddhaWorkspace --output "$buddhaWorkspace\runs\checks\evidence-capacity-opaque-local-v1" --materialize
+```
+
+This optional second command creates and checks the 24 GiB synthetic fixture,
+requiring at least 30 GiB free disk space. It prints progress and saves its
+plan/result beneath that fresh output folder. Ctrl+C stops it and retains a
+marked partial result. Existing output folders are refused; use a fresh name
+for another materialization. The fixture remains on disk for review. This is
+not the paid experiment's continuation command.
+
+## Sharing freshly verified evidence
+
+The [verified-read repair](RECONSTRUCTION-COST.md#verified-receipt-sharing-and-digest-exports)
+now removes redundant byte passes from nested adoption and eight fingerprint
+exports. The source is freshly checked, the entire receipt union is validated
+before the receiver changes, and later outer verification remains required.
+Database field limits, legacy ordering and retained sibling-tree checks remain
+enforced. This is not a filesystem transaction or a live continuation.
+
+The [artifact-copy repair](RECONSTRUCTION-COST.md#fresh-copies-of-validated-artifacts)
+also removes repeated validation when a checked, immutable package is copied.
+Every new package still passes the strict constructor. Every copy is freshly
+decoded and can be edited independently. There is no new cache. This reduces
+specified repeated work; it does not remove the source-version and original-
+owner checks required for a continuation.
 
 ## What must happen before another paid start
 

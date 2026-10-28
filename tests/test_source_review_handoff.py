@@ -12,6 +12,7 @@ from unittest.mock import patch
 from test_source_review import files, reference, sha
 
 from buddha.doctor import _Capture
+from buddha.native_evidence import NativeEvidence
 from buddha.releases import MAX_JSON_BYTES, ReleaseError, _json
 
 
@@ -61,29 +62,11 @@ class SourceReviewHandoffTests(unittest.TestCase):
             }
             controls[plan] = sha(plan.read_bytes())
 
-            def raw(path, expected=None):
-                value = capture.read(path)
-                if expected is not None:
-                    self.assertEqual(sha(value), expected)
-                return value
-
-            def finish():
-                result = capture.finish()
-                retained.finish()
-                return result
-
-            reader = SimpleNamespace(
-                root=roots["reader"],
-                capture=capture,
-                _retained=[retained],
-                owners={
-                    "supplied": SimpleNamespace(
-                        manifest={"roots": {"agent": str(roots["component"])}}
-                    )
-                },
-                raw=raw,
-                finish=finish,
-            )
+            reader = NativeEvidence(roots["reader"], base / "unused-authorization.sqlite3")
+            reader.capture, reader._retained = capture, [retained]
+            reader.owners = {
+                "supplied": SimpleNamespace(manifest={"roots": {"agent": str(roots["component"])}})
+            }
             arguments = dict(
                 directory=roots["source"],
                 kind="final",

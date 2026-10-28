@@ -312,11 +312,8 @@ def _read_source_reviews(
         }
         result = _summarize(materialization, round_record, records)
         result["round_plan"] = {"path": str(path), "sha256": digest}
-        result["consumed_files"] = {
-            str(path): source_review._sha(raw) for path, raw in reader.capture.raw.items()
-        }
+        result["consumed_files"] = reader.fingerprints()
         _json(result)
-        reader.finish()
         return cast(dict[str, object], result), reader, controls
     except (
         ReleaseError,
