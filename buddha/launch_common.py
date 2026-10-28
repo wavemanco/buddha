@@ -8,7 +8,7 @@ from collections.abc import Callable, Iterator, Mapping
 from contextlib import contextmanager
 from contextvars import ContextVar
 from pathlib import Path
-from typing import TYPE_CHECKING, cast
+from typing import TYPE_CHECKING, Protocol, cast
 
 from buddha import credentials, gateway
 from buddha import native_pipeline as pipeline
@@ -72,6 +72,77 @@ _WITNESS_CONTINUATION: ContextVar[
 _STUDY_CONTINUATION: ContextVar[
     Callable[[Path, Path, Mapping[Path, str]], dict[Path, str]] | None
 ] = ContextVar("study_continuation", default=None)
+
+
+class _SourceResolver(Protocol):
+    def __call__(self, current: Mapping[str, str], *, relative: bool) -> dict[str, str]: ...
+
+
+_PHASE_CONTINUATION: ContextVar[
+    tuple[
+        _SourceResolver,
+        Callable[[Path, str, Mapping[Path, str]], dict[Path, str]],
+        Callable[[Path], None] | None,
+    ]
+    | None
+] = ContextVar("phase_continuation", default=None)
+
+
+@contextmanager
+def _phase_continuation(
+    source_resolver: _SourceResolver,
+    controls_resolver: Callable[[Path, str, Mapping[Path, str]], dict[Path, str]],
+    *,
+    before_start: Callable[[Path], None] | None = None,
+) -> Iterator[None]:
+    """Use explicit checked phase projections; this supplies no funding authority."""
+    if (
+        not callable(source_resolver)
+        or not callable(controls_resolver)
+        or before_start is not None
+        and not callable(before_start)
+        or _PHASE_CONTINUATION.get() is not None
+    ):
+        raise ReleaseError("phase continuation needs one explicit unnested scope")
+    token = _PHASE_CONTINUATION.set((source_resolver, controls_resolver, before_start))
+    try:
+        yield
+    finally:
+        _PHASE_CONTINUATION.reset(token)
+
+
+def _historical_sources(current: Mapping[str, str], *, relative: bool = False) -> dict[str, str]:
+    """Join actual installed roles to their exact original approval references."""
+    if type(relative) is not bool:
+        raise ReleaseError("source projection needs an explicit relative-key mode")
+    scope = _PHASE_CONTINUATION.get()
+    original = dict(current)
+    result = original if scope is None else dict(scope[0](original, relative=relative))
+    if len(result) != len(current):
+        raise ReleaseError("source projection changes its exact role coverage")
+    if relative and result.keys() != current.keys():
+        raise ReleaseError("relative source projection changes its exact role coverage")
+    return {name: _digest(pin) for name, pin in _object(result).items()}
+
+
+def _continued_phase_controls(
+    trial: Path, phase: str, controls: Mapping[Path, str]
+) -> dict[Path, str]:
+    """Project one complete collected final/plain union, preserving old state."""
+    scope = _PHASE_CONTINUATION.get()
+    pins = dict(controls)
+    if scope is None:
+        return pins
+    if phase not in {"final", "plain"}:
+        raise ReleaseError("phase continuation supports only final and plain controls")
+    return dict(scope[1](trial, phase, pins))
+
+
+def _phase_before_start(trial: Path) -> None:
+    """Rejoin checked continuation evidence at the coordinator's writer boundary."""
+    scope = _PHASE_CONTINUATION.get()
+    if scope is not None and scope[2] is not None:
+        scope[2](trial)
 
 
 @contextmanager

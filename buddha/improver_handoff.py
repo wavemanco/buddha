@@ -72,7 +72,12 @@ def _configuration(path: Path, expected_sha256: str, *, fresh: bool) -> dict[str
             raise ImproverHandoffError("handoff controls have aliases or self-reference")
         aliases.add(source)
         improver_study._bind_controls(controls, {source: _digest(digest)})
-    required = {source: file_hash(source) for source in _sources()}
+    required = {
+        common._path(source): pin
+        for source, pin in common._historical_sources(
+            {str(source): file_hash(source) for source in _sources()}
+        ).items()
+    }
     if any(controls.get(source) != digest for source, digest in required.items()):
         raise ImproverHandoffError("handoff omits or changes an installed helper pin")
     definition_raw = pipeline._read(declaration, declared)

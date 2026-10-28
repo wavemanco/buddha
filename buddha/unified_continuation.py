@@ -10,7 +10,7 @@ import hashlib
 import os
 import re
 import threading
-from collections.abc import Iterator, Mapping
+from collections.abc import Callable, Iterator, Mapping
 from contextlib import contextmanager
 from dataclasses import dataclass, replace
 from pathlib import Path
@@ -43,6 +43,17 @@ _TOTALS = ("spent_microusd", "reserved_microusd", "operation_count")
 # Existing Gateway._input_records and active control checks cap component files
 # at 256 MiB. JSON and ledgers retain their separate role-specific boundaries.
 _MAX_COMPONENT_BYTES = 256 * 1024**2
+_FIXED_SCIENCE = frozenset(
+    "buddha/" + name + ".py"
+    for name in (
+        "improvement_rule",
+        "improver_analysis",
+        "validation_analysis",
+        "noveltybench_results",
+        "source_screen_results",
+        "archive",
+    )
+)
 
 
 class WitnessContinuationError(ReleaseError):
@@ -248,6 +259,63 @@ class CheckedStudyContinuation(CheckedWitnessContinuation):
 
 
 @dataclass(frozen=True)
+class CheckedTrialContinuation(CheckedStudyContinuation):
+    """Original trial and plan identities with separately checked execution pins."""
+
+    _trial: Path
+    _launch: tuple[Path, str]
+    _roles: tuple[tuple[str, Path, str, Path, str], ...]
+
+    def _historical_sources(self, current: Mapping[str, str], *, relative: bool) -> dict[str, str]:
+        self._check_thread(self.study)
+        roles = {
+            name if relative else str(after_path): (before_path, before_sha, after_sha)
+            for name, before_path, before_sha, after_path, after_sha in self._roles
+        }
+        result: dict[str, str] = {}
+        for name, digest in current.items():
+            if name not in roles or _digest(digest) != roles[name][2]:
+                raise WitnessContinuationError(
+                    "phase source differs from its exact checked installed role"
+                )
+            before_path, before_sha, _ = roles[name]
+            original = name if relative else str(before_path)
+            if original in result:
+                raise WitnessContinuationError("phase sources repeat a historical role")
+            result[original] = before_sha
+        return result
+
+    def _phase_controls(
+        self, trial: Path, phase: str, controls: Mapping[Path, str]
+    ) -> dict[Path, str]:
+        self._check_thread(self.study)
+        if str(trial) != str(self._trial) or phase not in {"final", "plain"}:
+            raise WitnessContinuationError("phase controls change the original trial or role")
+        before, after = dict(self._before), dict(self._after)
+        result = dict(controls)
+        for path in before.keys() - after.keys():
+            if path in result and result.pop(path) != before[path]:
+                raise WitnessContinuationError("phase union changes a historical helper")
+        for path, digest in after.items():
+            if path in result and result[path] != digest:
+                raise WitnessContinuationError("phase union changes a checked execution input")
+            result[path] = digest
+        if len(result) > 1024:
+            raise WitnessContinuationError("phase union exceeds its original input boundary")
+        return result
+
+    @contextmanager
+    def _scope(self, *, before_start: Callable[[Path], None] | None = None) -> Iterator[None]:
+        with (
+            super()._scope(),
+            common._phase_continuation(
+                self._historical_sources, self._phase_controls, before_start=before_start
+            ),
+        ):
+            yield
+
+
+@dataclass(frozen=True)
 class _CheckedState:
     checked: CheckedWitnessContinuation
     trial: Path
@@ -263,11 +331,16 @@ class _CheckedState:
     state: dict[str, Any] | None = None
     study_result: bytes | None = None
 
-    def after_locks(self) -> None:
+    def after_locks(
+        self,
+        *,
+        owned_locks: frozenset[str] = frozenset(
+            {".trial-running.lock", "search/study/running.lock"}
+        ),
+    ) -> None:
         """Fresh exact bytes/funding after normal leases, without a second replay."""
         capture = _Capture(self.trial)
-        locks = {".trial-running.lock", "search/study/running.lock"}
-        if set(capture.entries) != self.entries | locks:
+        if set(capture.entries) != self.entries | owned_locks:
             raise WitnessContinuationError("original tree changed before the witness lease")
         if (
             frozenset(name for name in capture.entries if (self.trial / name).is_dir())
@@ -291,7 +364,14 @@ class _CheckedState:
         capture.finish()
 
 
-def _check(path: Path, expected: str, *, study_continuation: bool = False) -> _CheckedState:
+def _check(
+    path: Path,
+    expected: str,
+    *,
+    study_continuation: bool = False,
+    trial_continuation: bool = False,
+) -> _CheckedState:
+    study_continuation = study_continuation or trial_continuation
     path, expected = common._path(str(path.absolute())), _digest(expected)
     raw = pipeline._read(path, expected)
     record: dict[str, Any] = _object(
@@ -308,9 +388,19 @@ def _check(path: Path, expected: str, *, study_continuation: bool = False) -> _C
         },
     )
     wanted = (
-        "buddha.study-continuation.v1" if study_continuation else "buddha.witness-continuation.v1"
+        "buddha.trial-continuation.v1"
+        if trial_continuation
+        else (
+            "buddha.study-continuation.v1"
+            if study_continuation
+            else "buddha.witness-continuation.v1"
+        )
     )
-    remaining = ("search", "freeze", "publication") if study_continuation else _REMAINING
+    remaining = (
+        ("search", "freeze", "publication")
+        if study_continuation and not trial_continuation
+        else _REMAINING
+    )
     if record["format"] != wanted or record["remaining_phases"] != list(remaining):
         raise WitnessContinuationError("unsupported bounded witness continuation")
     # Validate policy before constructing any capture in the actual reader thread.
@@ -512,7 +602,7 @@ def _check(path: Path, expected: str, *, study_continuation: bool = False) -> _C
                 raise WitnessContinuationError(
                     "uncertain original or continuation liability blocks work"
                 )
-            if phase != "search" and any(
+            if (phase == "validation" or phase != "search" and not trial_continuation) and any(
                 observed[k]
                 for k in ("auth_runs", "auth_operations", "auth_acceptances", "auth_deactivations")
             ):
@@ -672,6 +762,15 @@ def _check(path: Path, expected: str, *, study_continuation: bool = False) -> _C
                     "continuation outer/driver reference overlaps protected inputs"
                 )
             projected[source] = digest
+        if trial_continuation:
+            if cut_path in projected:
+                raise WitnessContinuationError("continuation cut overlaps protected inputs")
+            projected[cut_path] = cut_sha
+            for name in sorted(_FIXED_SCIENCE):
+                if _ref(old_roles[name])[1] != _ref(new_roles[name])[1]:
+                    raise WitnessContinuationError(
+                        "continuation changes a fixed numerical or selection module"
+                    )
         if len(projected) > 1024 or len({str(p).casefold() for p in projected}) != len(projected):
             raise WitnessContinuationError(
                 "continuation effective inputs exceed their original boundary"
@@ -791,6 +890,16 @@ def _check(path: Path, expected: str, *, study_continuation: bool = False) -> _C
                 _authorization=paths["search"],
                 _profiles=(profiles[0], profiles[1]),
             )
+            if trial_continuation:
+                checked = CheckedTrialContinuation(
+                    **vars(checked),
+                    _trial=trial,
+                    _launch=(outer_path, outer_sha),
+                    _roles=tuple(
+                        (name, *_ref(old_roles[name]), *_ref(new_roles[name]))
+                        for name in sorted(old_roles)
+                    ),
+                )
         with checked._scope():
             reader, state = improver_study._restore(study, paths["search"])
         if (
@@ -963,6 +1072,12 @@ def _check(path: Path, expected: str, *, study_continuation: bool = False) -> _C
                 pools.append(
                     dict(zip(("start", "repetition", "arm"), key, strict=True)) | {"screens": pool}
                 )
+        trial_checked = None
+        if isinstance(checked, CheckedTrialContinuation):
+            from buddha import unified_launch
+
+            with checked._scope():
+                trial_checked = unified_launch.check_launch(outer_path, expected_sha256=outer_sha)
         reader.finish()
         for authority, snapshot in snapshots.items():
             common._finish_snapshot(authority, snapshot, error=WitnessContinuationError)
@@ -992,6 +1107,17 @@ def _check(path: Path, expected: str, *, study_continuation: bool = False) -> _C
                 coverage=state["coverage"],
                 study_complete=study_result is not None,
             )
+        if trial_checked is not None:
+            summary.update(
+                format="buddha.trial-continuation-check.v1",
+                scope="original_development_final_plain_comparison",
+                phase=trial_checked["phase"],
+                stop_code=trial_checked["stop_code"],
+                original_launch={"path": str(outer_path), "sha256": outer_sha},
+                original_plain_plan={"path": str(plan_path), "sha256": plan_sha},
+                ready_for_comparison=trial_checked["phase"] == "comparison"
+                and trial_checked["stop_code"] is None,
+            )
         complete = replace(checked, _summary=_json(summary))
         directories = frozenset(name for name in capture.entries if (trial / name).is_dir())
         fingerprints = capture.fingerprints() | reader.fingerprints()
@@ -1018,11 +1144,17 @@ def _check(path: Path, expected: str, *, study_continuation: bool = False) -> _C
 
 
 def _checked_state(
-    path: Path, expected_sha256: str, *, study_continuation: bool = False
+    path: Path,
+    expected_sha256: str,
+    *,
+    study_continuation: bool = False,
+    trial_continuation: bool = False,
 ) -> _CheckedState:
     if not isinstance(path, Path):
         raise WitnessContinuationError("continuation requires an explicit external Path")
     try:
+        if trial_continuation:
+            return _check(path, expected_sha256, trial_continuation=True)
         return (
             _check(path, expected_sha256, study_continuation=True)
             if study_continuation
@@ -1054,6 +1186,58 @@ def check_study_continuation(path: Path, *, expected_sha256: str) -> CheckedStud
     if type(checked) is not CheckedStudyContinuation:
         raise WitnessContinuationError("study continuation needs its distinct checked scope")
     return checked
+
+
+def check_trial_continuation(path: Path, *, expected_sha256: str) -> CheckedTrialContinuation:
+    """Check the unchanged funded trial and all phase joins, without keys or writes."""
+    checked = _checked_state(path, expected_sha256, trial_continuation=True).checked
+    if type(checked) is not CheckedTrialContinuation:
+        raise WitnessContinuationError("trial continuation needs its exact checked scope")
+    return checked
+
+
+def launch_trial_continuation(
+    path: Path,
+    *,
+    expected_sha256: str,
+    live: bool = False,
+    prompt_keys: bool = False,
+    confirm_project_keys: bool = False,
+    transport: gateway.RawHTTPTransport | None = None,
+    notice: Callable[[str], None] | None = None,
+    heartbeat_seconds: float = 10,
+) -> dict[str, object]:
+    """Run the original coordinator under its checked execution overlay.
+
+    Original key-review contexts, phase order, grants, partial observations and
+    canonical comparison publication stay owned by that coordinator.
+    """
+    from buddha import unified_launch
+
+    prepared = _checked_state(path, expected_sha256, trial_continuation=True)
+    checked = prepared.checked
+    if type(checked) is not CheckedTrialContinuation:
+        raise WitnessContinuationError("trial continuation needs its exact checked scope")
+
+    def before_start(trial: Path) -> None:
+        checked._check_thread(checked.study)
+        if str(trial) != str(checked._trial):
+            raise WitnessContinuationError("continuation writer changes the checked trial")
+        # The original coordinator owns its separate workspace lease here. Its
+        # phase controllers acquire the original trial/study leases themselves.
+        prepared.after_locks(owned_locks=frozenset())
+
+    with checked._scope(before_start=before_start):
+        return unified_launch.launch(
+            checked._launch[0],
+            expected_sha256=checked._launch[1],
+            live=live,
+            prompt_keys=prompt_keys,
+            confirm_project_keys=confirm_project_keys,
+            transport=transport,
+            notice=unified_launch._notice if notice is None else notice,
+            heartbeat_seconds=heartbeat_seconds,
+        )
 
 
 def advance_study(

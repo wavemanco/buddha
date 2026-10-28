@@ -129,7 +129,12 @@ def inspect_references(
         controls = {
             path: digest,
             **{common._path(p): d for p, d in record["consumer_sources"].items()},
-            Path(__file__).absolute(): file_hash(Path(__file__).absolute()),
+            **{
+                common._path(p): d
+                for p, d in common._historical_sources(
+                    {str(Path(__file__).absolute()): file_hash(Path(__file__).absolute())}
+                ).items()
+            },
         }
         if input_bindings is not None:
             if type(input_bindings) is not dict or len(input_bindings) > 1024:
@@ -141,6 +146,11 @@ def inspect_references(
                 if source in controls and controls[source] != pin:
                     raise BaselineStateError("conflicting reference controls")
                 controls[source] = pin
+        if len(controls) > 1024:
+            raise BaselineStateError("reference control inventory exceeds its boundary")
+        controls = common._continued_phase_controls(
+            pipeline._absolute(record["trial"]), "plain", controls
+        )
         if len(controls) > 1024:
             raise BaselineStateError("reference control inventory exceeds its boundary")
         references = cast(list[dict[str, Any]], record["references"])

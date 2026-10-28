@@ -408,17 +408,22 @@ def _intrinsic_inputs(
     active: bool = True,
 ) -> tuple[dict[Path, str], list[bytes], set[Path]]:
     """One original input closure for development preparation and final preflight."""
+    from buddha.launch_common import _historical_sources
+
     if type(active) is not bool:
         raise ImproverStudyError("input reconstruction needs an explicit activity mode")
     controls = {
         _path_value(path): _digest(digest) for path, digest in record["consumer_sources"].items()
     }
     current_consumer = Path(__file__).absolute()
-    if controls.get(current_consumer) != file_hash(current_consumer):
+    required_consumer = _historical_sources({str(current_consumer): file_hash(current_consumer)})
+    if any(controls.get(_path_value(path)) != pin for path, pin in required_consumer.items()):
         raise ImproverStudyError("current finite producer lacks its original approval pin")
     _bind_controls(controls, {declaration: _digest(expected_sha256)})
-    for path in _sources(record):
-        _bind_controls(controls, {path: file_hash(path)})
+    sources_installed = _historical_sources(
+        {str(path): file_hash(path) for path in _sources(record)}
+    )
+    _bind_controls(controls, {_path_value(path): pin for path, pin in sources_installed.items()})
     consumed, producers = set(controls), set()
     sources: list[bytes] = []
     for screen in screens:

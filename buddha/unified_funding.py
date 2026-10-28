@@ -56,7 +56,9 @@ def check_funding(
         controls = {
             str(plan_path): plan_digest,
             **cast(dict[str, str], plan["consumer_sources"]),
-            str(Path(__file__).absolute()): file_hash(Path(__file__).absolute()),
+            **common._historical_sources(
+                {str(Path(__file__).absolute()): file_hash(Path(__file__).absolute())}
+            ),
         }
         primary = improver_launch.check_launch(launch_path, expected_sha256=launch_digest)
         if (
