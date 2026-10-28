@@ -10,7 +10,9 @@ import os
 import re
 import sqlite3
 import stat
-from collections.abc import Callable
+from collections.abc import Callable, Iterator, Mapping
+from contextlib import contextmanager
+from contextvars import ContextVar
 from dataclasses import dataclass
 from pathlib import Path
 from typing import cast
@@ -101,22 +103,85 @@ def _entries(root: Path) -> dict[str, tuple[int, int, int, int, int]]:
     return result
 
 
+_OBSERVATION_LIMIT: ContextVar[int | None] = ContextVar("evidence_observation_limit", default=None)
+
+
+@contextmanager
+def _observation_policy(value: object) -> Iterator[None]:
+    """Opt into a finite consumed-byte limit, never an RSS or spending allowance.
+
+    Version one retains no raw-byte cache. Field and path ceilings still apply;
+    nested captures inherit this limit and keep it after the context exits.
+    """
+    record = _object(value)
+    if (
+        set(record) != {"format", "max_total_bytes", "max_resident_bytes"}
+        or record["format"] != "buddha.evidence-observation-policy.v1"
+        or type(record["max_total_bytes"]) is not int
+        or not 1 <= record["max_total_bytes"] <= 64 * 1024**3
+        or type(record["max_resident_bytes"]) is not int
+        or record["max_resident_bytes"] != 0
+    ):
+        raise ValidationError("unsupported bounded evidence observation policy")
+    token = _OBSERVATION_LIMIT.set(record["max_total_bytes"])
+    try:
+        yield
+    finally:
+        _OBSERVATION_LIMIT.reset(token)
+
+
+class _CapturedBytes(Mapping[Path, bytes]):
+    """Read-only access to original receipts, with verified bounded rereads."""
+
+    def __init__(self, capture: "_Capture") -> None:
+        self.capture = capture
+
+    def __getitem__(self, path: Path) -> bytes:
+        size, _ = self.capture._receipts[path]
+        return self.capture.read(path, size)
+
+    def __iter__(self) -> Iterator[Path]:
+        return iter(self.capture._receipts)
+
+    def __len__(self) -> int:
+        return len(self.capture._receipts)
+
+    def __contains__(self, path: object) -> bool:
+        return path in self.capture._receipts
+
+
 class _Capture:
+    """Retain size/digest receipts, not raw bytes; default logical limit is 1 GiB.
+
+    Each returned file remains bounded separately. The consumed-byte ceiling is
+    frozen at construction and includes external inputs and nested adoption.
+    It is not a process-memory limit or a total archive-size allowance.
+    """
+
     def __init__(self, root: Path) -> None:
         self.root = root
         self.entries = _entries(root)
-        self.raw: dict[Path, bytes] = {}
+        self._receipts: dict[Path, tuple[int, str]] = {}
+        self.raw: Mapping[Path, bytes] = _CapturedBytes(self)
+        limit = _OBSERVATION_LIMIT.get()
+        self._maximum = MAX_TOTAL_BYTES if limit is None else limit
         self.total = 0
         self.databases: set[Path] = set()
 
     def read(self, path: Path, maximum: int = MAX_MANIFEST_BYTES) -> bytes:
-        if path in self.raw:
-            if len(self.raw[path]) > maximum:
+        if path in self._receipts:
+            size, digest = self._receipts[path]
+            if size > maximum:
                 raise ValidationError("observed input exceeds this field's ceiling")
-            return self.raw[path]
-        raw = _read(path, min(maximum, MAX_TOTAL_BYTES - self.total))
+            raw = _read(path, size)
+            if len(raw) != size or _sha(raw) != digest:
+                raise _Busy("consumed input changed")
+            return raw
+        if len(self._receipts) >= MAX_FILES:
+            raise ValidationError("consumed evidence path ceiling exceeded")
+        raw = _read(path, min(maximum, self._maximum - self.total))
         self.total += len(raw)
-        self.raw[path] = raw
+        self._receipts[path] = (len(raw), _sha(raw))
         return raw
 
     def sidecars(self, path: Path) -> None:
@@ -144,21 +209,22 @@ class _Capture:
     def finish(self) -> dict[str, str]:
         for path in self.databases:
             self.sidecars(path)
-        for path, raw in tuple(self.raw.items()):
-            if _read(path, len(raw)) != raw:
-                raise _Busy("consumed input changed")
+        for path in tuple(self._receipts):
+            self.raw[path]
+        for path in self.databases:
+            self.sidecars(path)
         if _entries(self.root) != self.entries:
             raise _Busy("observed local tree changed")
         return {
             path.relative_to(self.root).as_posix()
             if path.is_relative_to(self.root)
-            else "authorization": _sha(raw)
-            for path, raw in self.raw.items()
+            else "authorization": digest
+            for path, (_, digest) in self._receipts.items()
         }
 
     def fingerprints(self) -> dict[str, str]:
         self.finish()
-        return {str(path): _sha(raw) for path, raw in self.raw.items()}
+        return {str(path): digest for path, (_, digest) in self._receipts.items()}
 
 
 @dataclass(frozen=True)

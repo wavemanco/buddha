@@ -1,10 +1,15 @@
 # Run the approved Buddha and plain-model comparison
 
-**Recovery checked: resume the original command below. Keep Docker Desktop
-running.** The [startup incident and recovery](UNIFIED-NATIVE-STARTUP-INCIDENT.md)
-retain the first stopped attempt and the no-provider readiness proof. The
-current environment workaround is temporary. If Docker has restarted since
-that check, wait for a restored environment/readiness check before paid work.
+**Stopped at the evidence limit: do not resume the command below yet.** The
+[evidence-limit incident and repair](UNIFIED-EVIDENCE-RECOVERY.md) record the
+604-attempt partial and the required checked continuation. The unchanged
+command would reach the same limit again. The commands below remain the
+original handoff record, not a newly cleared restart.
+
+The [startup incident and recovery](UNIFIED-NATIVE-STARTUP-INCIDENT.md) retain
+the earlier native-mount failure and no-provider readiness proof. That
+environment workaround is temporary; Docker restart requires another
+environment/readiness check before any later paid continuation.
 
 The user approved this study on October 26, 2026: **$150 combined OpenAI and
 Anthropic API cap, with 16,384 recorded attempts**. Partial work is retained with
@@ -20,17 +25,21 @@ all eight Linux/Windows CI jobs and matches the checked source inventory.
 | Unused validation | $0 | 0 |
 | **Total** | **$150** | **16,384** |
 
-At funding, all four grants had zero spending, holds and attempts. The first
-attempt now retains ten generation replies and $0.007795 spent, with zero held.
-Resuming reuses those ten replies and includes their cost in the same cap.
+At funding, all four grants had zero spending, holds and attempts. The earlier
+startup stop retained ten generation replies and $0.007795 spent, with zero
+held. The later evidence-limit stop records 604 attempts, $4.845090 spent and
+zero held; final assessment and both plain references had not started. Keep
+both observations and include all original charges in any checked continuation.
 The two plain references share one grant; unused money cannot move between
 phase grants.
 Earlier experiments remain closed. Recorded costs use conservative token-price
 bounds and are not reconciled provider invoices.
 
-## Resume the stopped run
+## Original launch command: restart currently blocked
 
-Open a normal PowerShell window and run these two commands in order. The first
+After a reviewed recovery handoff clears another start, its guide will identify
+the command to use. Do not run these historical commands now. Originally, the
+operator opened a normal PowerShell window and ran them in order. The first
 changes this window's working folder; it spends nothing. The second starts the
 original run once, reuses its completed work, can spend API money within the
 remaining original grants, and stays in this window until it finishes or stops.
