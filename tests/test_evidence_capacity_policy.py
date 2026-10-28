@@ -136,18 +136,24 @@ class EvidenceCapacityPolicyTests(unittest.TestCase):
                     capture.read(self.files[2])
 
     def test_adoption_enforces_the_frozen_external_receipt_union_limit(self):
-        with doctor._observation_policy(policy(paths=2)):
-            target = doctor._Capture(self.root)
         source_root = self.base / "sibling"
         source_root.mkdir()
-        with doctor._observation_policy(policy(paths=3)):
-            source = doctor._Capture(source_root)
-        target.read(self.files[0])
-        for path in self.files[1:]:
-            source.read(path)
-        with self.assertRaises(EvidencePathLimitError):
-            _adopt_capture(source, target)
-        self.assertNotIn(self.files[2], target.raw)
+        for selected, error in (
+            (policy(paths=2), EvidencePathLimitError),
+            (policy(total=10), EvidenceTotalLimitError),
+        ):
+            with self.subTest(selected=selected):
+                with doctor._observation_policy(selected):
+                    target = doctor._Capture(self.root)
+                with doctor._observation_policy(policy(paths=3)):
+                    source = doctor._Capture(source_root)
+                target.read(self.files[0])
+                for path in self.files[1:]:
+                    source.read(path)
+                with self.assertRaises(error):
+                    _adopt_capture(source, target)
+                self.assertEqual(set(target.raw), {self.files[0]})
+                self.assertEqual(target.total, 4)
 
     def test_v2_keeps_hardlink_sidecar_and_changed_byte_guards(self):
         alias = self.root / "alias.bin"
