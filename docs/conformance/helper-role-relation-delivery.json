@@ -1,0 +1,178 @@
+{
+  "format": "buddha.helper-role-relation-delivery.v1",
+  "recorded_utc": "2026-10-28T20:06:53.130956+00:00",
+  "base_head": "2e3ff59baafb2e85145826fd73db49670505e7fe",
+  "pre_delivery_head": "e3e179b8d13ecbaf80149477d7275d09cb3b172d",
+  "spec_sections": [
+    5,
+    7,
+    9,
+    10
+  ],
+  "scope": "Pure metadata projection for one planned SourceScreen. No production caller/launcher or execution authority.",
+  "source_sha256": {
+    "buddha/launch_common.py": "23c3d47cbf6c582e7cf6d4b8eb3533a4022f368601fb9287c1047f4db1fba84f",
+    "tests/test_helper_role_relation.py": "59528cf88a0073adbd628f5afa62419bc8a5ab1e8780b1a96b53d87a113e7636",
+    "docs/PLAN.md": "22c1413a1031e05c52ee5304311d2385f9b2088ff1120dbe84dab7753628abe5",
+    "docs/UNIFIED-EVIDENCE-RECOVERY.md": "e081e4501049d8512f622f1444881a9625eabf93f30abb3581dd980bece79537"
+  },
+  "component": {
+    "format": "buddha.helper-role-relation.v1",
+    "fields": [
+      "format",
+      "source_manifest",
+      "roles"
+    ],
+    "own_ref": "External expected_overlay; SHA256(raw) checked before parsing. No self-reference.",
+    "original_manifest": "Raw original improver-handoff.v1 must hash to its pre-existing before-control Ref before parsing exact schema. Assessment Ref/runtime/source inventory pins remain bound.",
+    "frozen_role_profile": {
+      "host_helpers": 65,
+      "outer_files": [
+        "agents/frozen_seed.py",
+        "docs/conformance/imp01-run.py",
+        "docs/conformance/unified-run.py"
+      ],
+      "future_source_list_additions": "Cannot expand this frozen profile automatically."
+    },
+    "context_schema_fields": 5,
+    "same_planned_screen": true,
+    "existing_comparison_controls_validation": true,
+    "old_three_outer_pins_retained": true,
+    "all_new_roles_directly_bound": 68,
+    "seed_hash_unchanged": true,
+    "CORE_role_hashes_unchanged": 10,
+    "runtime_and_selected_dualuse_preserved": true,
+    "fixed_other_inputs_preserved": true,
+    "path_spellings_checked_before_Path_key_coalescence": true,
+    "producer_prefix_closures_checked": [
+      17,
+      36,
+      65
+    ],
+    "max_union_paths": 1024,
+    "detached_result_no_input_mutation": true,
+    "hash_relabeling_or_report_rewrite": false
+  },
+  "development_evidence": {
+    "initial_33_role_prototype": {
+      "methods": 11,
+      "missing_API_errors_or_subcases": 47,
+      "seconds": 1.004,
+      "qualification": "Unused prototype; did not cover actual outer source closure and was not published."
+    },
+    "case_only_prefix_RED": {
+      "failures": 1,
+      "seconds": 0.121
+    },
+    "raw_spelling_RED": {
+      "methods": 2,
+      "subtest_failures": 4,
+      "seconds": 0.202
+    },
+    "full65_only_prefix_RED": {
+      "methods": 2,
+      "failures": 1,
+      "seconds": 0.249,
+      "qualification": "Positive185to189 passed, but a protected old17-name producer prefix escaped full65-only checking."
+    },
+    "final_before_prerequisite_merge": {
+      "methods": 25,
+      "new_methods": 18,
+      "existing_stop_methods": 7,
+      "seconds": 7.047,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    "final_after_merge": {
+      "methods": 30,
+      "relation_methods": 18,
+      "stop_methods": 7,
+      "artifact_view_methods": 5,
+      "seconds": 7.187,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    "cut_qualification": "Overlapping prototype/RED/premerge/postmerge cohorts are not aggregated into one final coverage count."
+  },
+  "independent_review": {
+    "status": "passed_within_metadata_scope",
+    "reviewed_common_sha256": "23c3d47cbf6c582e7cf6d4b8eb3533a4022f368601fb9287c1047f4db1fba84f",
+    "reviewed_test_sha256": "59528cf88a0073adbd628f5afa62419bc8a5ab1e8780b1a96b53d87a113e7636",
+    "finding": "Protected case aliases could coalesce before validation; fresh RED/fix retained. Full65-only closure needed actual smaller producer checks.",
+    "remaining_blocker_in_component": false,
+    "reviewer_actual_data_access": false,
+    "reviewer_tests_run": false
+  },
+  "actual_metadata_counterfactual": {
+    "observation": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-helper-projection-actual-metadata-v1.json",
+      "sha256": "4162220fd23edfb4a376b9e32b763dd1ab0fab76f8c28c638b5f449b54b8bffe"
+    },
+    "component": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-helper-projection-counterfactual-v1.json",
+      "sha256": "f00953effc4fff73842920104443e074f06f8b29171e774df9d64ffddf13410e"
+    },
+    "original_screen": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-unified-review-20261026-v2\\NOT-CREATED-trial-runtime\\search\\study\\common\\0\\0\\screen\\screen.json",
+      "sha256": "dbb90aa6ecab27da93f575db71fa55be2fceb7d9cec256cdd3126753ad03ed06"
+    },
+    "original_context": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-unified-review-20261026-v2\\NOT-CREATED-trial-runtime\\search\\study\\common\\0\\0\\screen\\context.json",
+      "sha256": "316d4114527f33e456fded2f6b9abbea846adfaa3c8485eb639c2b4fb4448cb5"
+    },
+    "original_handoff": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-unified-review-tracks-20261026-v2\\handoff-primary-unfunded.json",
+      "sha256": "55ef2a98ccb734ce56d3075501c2cf16ba6bf6c329d6ec5acdbda24d5e9c7416"
+    },
+    "status": "metadata_projection_pass",
+    "before_controls": 185,
+    "after_controls": 189,
+    "screen_source_roles": 33,
+    "other_fixed_inputs": 119,
+    "after_external_controls": 155,
+    "after_files_raw_hashed": 68,
+    "owners_created": 0,
+    "original_files_written": 0,
+    "SQL_connections": 0,
+    "provider_calls": 0,
+    "qualification": "Actual original metadata joined to current helper hashes; counterfactual only. Must prepare fresh final-source component and verify all original actors/grants/cut before real execution."
+  },
+  "quality": {
+    "ruff_check": "passed",
+    "ruff_format": "274 files passed",
+    "strict_mypy": "88 modules passed",
+    "bandit": "passed; existing nosec warnings retained, no findings",
+    "in_memory_compile": "274 files passed",
+    "dependency_audits": "Identical patched pins reuse maintenance strict audit.",
+    "hosted_CI": "Pending at publication.",
+    "full_suite": "No current-cut full-suite pass claimed; earlier local PR167 run remains separate."
+  },
+  "preservation": {
+    "all_ten_CORE_files_byte_equal_original": true,
+    "prior_PLAN_raw_rows": 175,
+    "original_acceptance_tails": 7,
+    "original_source_grants_owners_evidence_scientific_settings_untouched": true,
+    "global_existing_sources_names_added": 0
+  },
+  "activity": {
+    "keys_read": 0,
+    "real_provider_calls": 0,
+    "on_disk_original_or_historical_SQL": 0,
+    "actual_containers": 0,
+    "original_private_program_semantic_inspection_or_execution": 0,
+    "new_original_run_owners": 0,
+    "paid_restarts": 0,
+    "pull_requests_merged": 0
+  },
+  "not_established": [
+    "Source file freshness at eventual final execution cut",
+    "Semantic compatibility of arbitrary helper changes",
+    "Original complete four-actor/cut/grant join",
+    "Executed continuation or same-owner resume",
+    "Mixed parent selection/final/plain/publication adaptation",
+    "Scientific improvement"
+  ],
+  "next": "Explicit descriptor/root-thread scope and actual two-process source relocation with old replay/new witness/same-owner resume, followed by all remaining phases and original pre-live checks."
+}
