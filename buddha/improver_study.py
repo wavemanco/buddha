@@ -1180,6 +1180,8 @@ def _witness(
     directory: Path,
     base: source_screen.SourceScreen,
 ) -> tuple[Any, dict[str, Any]]:
+    from buddha.launch_common import _continued_witness_controls
+
     treatment = shared._witness_declaration(
         scope=reader.root,
         directory=directory,
@@ -1188,7 +1190,7 @@ def _witness(
         proposal_template=state["record"]["proposal_template"],
         review=state["review"],
         expected_runtime_sha256=state["runtime"],
-        controls=state["controls"],
+        controls=_continued_witness_controls(reader.root, directory, base, state["controls"]),
         source_copy=True,
         **(
             {"proposal_capacity": state["record"]["proposal_capacity"]}
