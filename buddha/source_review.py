@@ -349,9 +349,7 @@ def _read_source_review(
                 "template_sha256": None if template is None else _sha(encode_review(template)),
                 "sets": sorted(private_sets, key=lambda row: row["id"]),
                 "provenance": {
-                    "consumed_files": {
-                        str(path): _sha(raw) for path, raw in reader.capture.raw.items()
-                    },
+                    "consumed_files": reader.fingerprints(),
                     "owners": [
                         {
                             "directory": str(owner.directory),
@@ -369,7 +367,6 @@ def _read_source_review(
             },
         }
         _json(result)
-        reader.finish()
         return result, reader, controls
     except (
         ReleaseError,

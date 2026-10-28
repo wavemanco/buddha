@@ -41,6 +41,7 @@ from buddha.search_evidence import (
     MAX_TOTAL_BYTES,
     EvidenceFieldLimitError,
     EvidencePathLimitError,
+    EvidenceTotalLimitError,
     _absolute,
     _read,
     _regular,
@@ -168,6 +169,7 @@ class _Capture:
         self.raw: Mapping[Path, bytes] = _CapturedBytes(self)
         limit = _OBSERVATION_LIMIT.get()
         self._maximum = MAX_TOTAL_BYTES if limit is None else limit
+        self._maximum_paths = MAX_FILES
         self.total = 0
         self.databases: set[Path] = set()
 
@@ -180,7 +182,7 @@ class _Capture:
             if len(raw) != size or _sha(raw) != digest:
                 raise _Busy("consumed input changed")
             return raw
-        if len(self._receipts) >= MAX_FILES:
+        if len(self._receipts) >= self._maximum_paths:
             raise EvidencePathLimitError("consumed evidence path ceiling exceeded")
         raw = _total_read(path, maximum, self._maximum - self.total, read=_read)
         self.total += len(raw)
@@ -228,6 +230,47 @@ class _Capture:
     def fingerprints(self) -> dict[str, str]:
         self.finish()
         return {str(path): digest for path, (_, digest) in self._receipts.items()}
+
+    def adopt(self, source: "_Capture") -> None:
+        """Merge original receipts at a fresh source observation cut.
+
+        This is not an atomic file snapshot. The receiver's final fresh finish
+        remains necessary before active work, including for newly adopted paths.
+        """
+        if type(self) is not _Capture or type(source) is not _Capture or source is self:
+            raise ValidationError("capture adoption needs two original bounded observations")
+        source.finish()
+        # Preserve the legacy database/sidecar insertion order without rereads.
+        ordered = {}
+        for database in source.databases:
+            receipt = source._receipts.get(database)
+            if receipt is None:
+                raise ValidationError("database observation lacks its original byte receipt")
+            if receipt[0] > MAX_LEDGER_BYTES:
+                raise EvidenceFieldLimitError(
+                    "observed input exceeds this field's ceiling", receipt[0]
+                )
+            for suffix in ("-journal", "-wal", "-shm"):
+                sidecar = database.with_name(database.name + suffix)
+                if sidecar in source._receipts:
+                    ordered[sidecar] = source._receipts[sidecar]
+            ordered[database] = receipt
+        ordered.update(source._receipts)
+        receipts = dict(self._receipts)
+        for path, receipt in ordered.items():
+            if path in receipts and receipts[path] != receipt:
+                raise _Busy("consumed input changed")
+            receipts[path] = receipt
+        if len(receipts) > self._maximum_paths:
+            raise EvidencePathLimitError("consumed evidence path ceiling exceeded")
+        total = sum(size for size, _ in receipts.values())
+        if total > self._maximum:
+            raise EvidenceTotalLimitError("evidence observation exceeds its total byte ceiling")
+        self._receipts, self.total, self.databases = (
+            receipts,
+            total,
+            self.databases | source.databases,
+        )
 
 
 @dataclass(frozen=True)

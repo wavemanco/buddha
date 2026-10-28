@@ -1038,15 +1038,15 @@ def _read_evidence(
         attempt / ("session/answers.json" if prospective else "answers.json") if generated else None
     )
     answers = Answers.from_bytes(capture.read(answers_path)) if answers_path is not None else None
-    capture.finish()
+    fingerprints = capture.fingerprints()
     return {
         "tasks": tasks,
         "answers": answers,
         "answers_path": answers_path,
         "files": {
-            path: hashlib.sha256(raw).hexdigest()
-            for path, raw in capture.raw.items()
-            if path != authority_path
+            Path(path): digest
+            for path, digest in fingerprints.items()
+            if Path(path) != authority_path
         },
         "terms": _object(funding["config"]),
         "generation": report,

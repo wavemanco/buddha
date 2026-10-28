@@ -1,0 +1,118 @@
+{
+  "format": "buddha.verified-evidence-reads-delivery.v1",
+  "recorded_utc": "2026-10-28T18:15:07.795680+00:00",
+  "base_head": "9baffc342015300ab3afc9cf7a429abdb1481977",
+  "spec_sections": [
+    5,
+    7,
+    9
+  ],
+  "scope": "Receipt sharing and hash exports only; no launcher opt-in or paid continuation.",
+  "source_sha256": {
+    "buddha/baseline_state.py": "27b4b5bf98c9e3520feefc5774b33cf8ea4b16da38c5fdbc797aa58543a37657",
+    "buddha/candidate_generation.py": "599ec9c7a31bec585b8bf65cf8576098f0d76dbf5af7cf564682fa45546a8112",
+    "buddha/doctor.py": "8ae178cf82a1c22500923e58af77b3b392d616774bc2e26167b3a9eb8ef22b95",
+    "buddha/native_evaluation.py": "41295f93ea4322416c7d1a0196c07eacf1c9dfb005a513aef9013bee357e1d07",
+    "buddha/native_evidence.py": "3eded95ad93672616ad42b3b8b8b19a740821df5dc1398c4b920a2e086152950",
+    "buddha/policy_panel_read.py": "194c4c4d020b21accff7d6f44ed07ff305ca24e58644fe96e6387871fa5badc6",
+    "buddha/policy_results.py": "15f688826a0ae86c2240ae036a32ef117f9088738d0974bb7e818370ad1db4d9",
+    "buddha/source_review.py": "fa76fef7cba2bf97836a2a7a371248ca2685ec3ac5d52ab11d727a3b4747dccb",
+    "buddha/source_review_handoff.py": "ae883e0e3ebcbd11855a34abbc6ea746dd26cf2914bd4d5c8a7206d298e88d8d",
+    "buddha/source_review_results.py": "2c9f1d3f425d53fd07fbbe0df6f103100834bc10e5fee3eab96622e311171626",
+    "docs/PLAN.md": "08bf8ba358a95e0dfa6036b2c7f505f89e623af55651472b3b81bee03a733cd7",
+    "docs/RECONSTRUCTION-COST.md": "fcb8f869db250d5a89128d3a1f46e6eb101e2cc10440e318e42c6eef31b63ecd",
+    "docs/UNIFIED-EVIDENCE-RECOVERY.md": "9b23e6ddc8cbd3b2f95841ddcb8e31549849e517f5a6133bc469f209d07dc354",
+    "tests/test_source_review_handoff.py": "f7c4ccfe30f49508ed8f330157fde076483877926fe06a96b87f4801dc74a8a9",
+    "tests/test_verified_evidence_reads.py": "1c72cbdef6a4f8b919f9976bb1461af20ab6314a8e02684546a9c554ae48c4c6"
+  },
+  "receipt_adoption": {
+    "fresh_source_finish_required": true,
+    "whole_union_preflight_before_mutation": true,
+    "original_types_receipts_conflicts_checked": true,
+    "total_path_and_individual_ledger_limits_preserved": true,
+    "legacy_database_sidecar_order_preserved": true,
+    "receiver_later_fresh_finish_required": true,
+    "atomic_filesystem_snapshot": false,
+    "persistent_raw_cache": false
+  },
+  "exports": {
+    "hash_only_sites": 8,
+    "Path_keys_authority_exclusion_and_sibling_finishes_preserved": true,
+    "byte_SQL_and_early_checks_retained": true
+  },
+  "work_counts": {
+    "adoption": "Three reads reduced to one fresh source pass.",
+    "candidate_export": "Twelve post-verification reads removed.",
+    "plain_generation": "Actual NativeEvidence preserves Path keys and exact authority exclusion without second pass.",
+    "whole_run_speed_measurement": false
+  },
+  "checks": {
+    "initial_RED": {
+      "methods": 9,
+      "failures": 5,
+      "errors": 2,
+      "seconds": 2.487
+    },
+    "independent_edge_RED": {
+      "methods": 2,
+      "subtest_failures": 4,
+      "seconds": 0.047
+    },
+    "older_reader_cohort": {
+      "methods": 68,
+      "passes": 65,
+      "errors": 3,
+      "seconds": 2267.159,
+      "qualification": "Obsolete test doubles lacked fingerprints; replaced with actual NativeEvidence. Separate cut from final coverage."
+    },
+    "final_cohorts": [
+      {
+        "scope": "Receipt/bounded/paired generation/native reader",
+        "methods": 37,
+        "seconds": 28.606
+      },
+      {
+        "scope": "Composed generation/doctor/typed stops",
+        "methods": 38,
+        "seconds": 106.897
+      },
+      {
+        "scope": "Retired producer/screen replay/corrected publication",
+        "methods": 15,
+        "seconds": 141.667
+      }
+    ],
+    "final_total": {
+      "methods": 90,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    "quality": {
+      "ruff_check": "passed",
+      "ruff_format": "271 files unchanged",
+      "strict_mypy": "88 modules passed",
+      "bandit": "passed with existing nosec warnings, no findings",
+      "compileall": "passed",
+      "dependency_audits": "Unchanged patched pins reuse fresh and cached strict audit from dev-msgpack-refresh.json."
+    },
+    "full_local_suite": "Separately running on earlier PR167 cut; not final-cut full-suite coverage.",
+    "hosted_CI": "Pending at publication; not claimed green."
+  },
+  "preservation": {
+    "gateway_CORE_files_unchanged": 10,
+    "prior_raw_PLAN_rows_preserved": 172,
+    "original_acceptance_tails_preserved": 7,
+    "original_run_grants_source_controls_untouched": true
+  },
+  "activity": {
+    "API_keys_read": 0,
+    "provider_calls": 0,
+    "actual_run_SQL_connections": 0,
+    "containers": 0,
+    "generated_source_parsing_or_execution": 0,
+    "paid_restarts": 0,
+    "merges": 0
+  },
+  "next": "Finite full-layout capacity/recovery-envelope rehearsal, then explicit old/new-helper continuity. IMP-01 and EVAL-02 remain open."
+}

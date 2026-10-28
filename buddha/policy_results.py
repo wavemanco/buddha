@@ -940,7 +940,7 @@ def _analyze(
         planned_owner_count,
         fallback_model,
     )
-    reader.capture.finish()
+    fingerprints = reader.fingerprints()
     return {
         "format": "buddha.policy-results.v1",
         "publication_status": "complete" if complete else "incomplete",
@@ -952,8 +952,8 @@ def _analyze(
             "release_sha256": reader.release.fingerprint(),
             "original_control_hashes": reader.controls,
             "publication": str(publication),
-            "publication_sha256": _sha(reader.capture.raw[publication]),
-            "consumed_files": {str(path): _sha(raw) for path, raw in reader.capture.raw.items()},
+            "publication_sha256": fingerprints[str(publication)],
+            "consumed_files": fingerprints,
             "occasions": provenance,
             "owners": owner_rows,
         },
