@@ -245,9 +245,7 @@ def collect_source_reviews(
             if submission is not None:
                 protected.add(Path(_obj(submission)["path"]).parent)
         output = _destination(output, directory, reader, controls, extra_roots=tuple(protected))
-        result["consumed_files"] = {
-            str(path): _sha(raw) for path, raw in reader.capture.raw.items()
-        }
+        result["consumed_files"] = reader.fingerprints()
         report = encode_review(result)
         marker = encode_review(
             {

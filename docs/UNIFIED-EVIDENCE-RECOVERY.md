@@ -115,6 +115,15 @@ the API-attempt cap, so any rehearsal must declare its recovery envelope.
 Exceeding a finite allowance must remain an explicit partial result, with the
 reason recorded. No larger folder policy is selected by these repairs.
 
+## Sharing freshly verified evidence
+
+The [verified-read repair](RECONSTRUCTION-COST.md#verified-receipt-sharing-and-digest-exports)
+now removes redundant byte passes from nested adoption and eight fingerprint
+exports. The source is freshly checked, the entire receipt union is validated
+before the receiver changes, and later outer verification remains required.
+Database field limits, legacy ordering and retained sibling-tree checks remain
+enforced. This is not a filesystem transaction or a live continuation.
+
 ## What must happen before another paid start
 
 The [owner-census repair](RECONSTRUCTION-COST.md#owner-census-work) now avoids
