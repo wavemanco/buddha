@@ -207,6 +207,37 @@ owner checks required for a continuation.
 
 ## What must happen before another paid start
 
+The first [executed continuation mechanism](conformance/witness-continuation-delivery.json)
+now passes an offline test using two real source directories and separate Python
+processes. The first process completes one small task and leaves four inactive
+owners. The second creates one new witness-proposal owner, records a supplied
+reply, stops, and resumes the same owner and operation without sending again.
+The raw manifest and recorded cost stay identical across that replay.
+
+The new library checker binds the original launch chain, four grant identities,
+old owner/file anchors, scheduled witness, original key-review context and actual
+new helper/driver files. Its scope is explicit and limited to the checked root
+and thread. Historical parent records keep their old bindings; the new witness
+records its actual new bindings. It rechecks bytes, file/folder types, sidecars
+and grants after acquiring the normal writer locks. All old file contents stay
+anchored; directory timestamps and grant bytes may change through legitimate
+later work. New bytes are read with fixed field limits, never an arbitrary
+size supplied by metadata.
+
+This fixture uses simulated workers and provider replies, with no real API calls
+or containers. It proves the first common-witness proposal mechanism, not the
+actual interrupted counted-child witness or a complete comparison. Completing
+both witness roles, mixed parent selection, final assessment, plain references
+and publication still needs composed checks. No paid operator command is added.
+
+```powershell
+python -B -m unittest discover -s tests -p test_unified_continuation.py -v
+```
+
+This optional developer command runs five synthetic source-transition checks
+once, using temporary fixtures. It may take a few minutes. It needs no real API
+key, makes no paid calls and needs no separate window. Ctrl+C stops it.
+
 The first [helper-transition component](conformance/helper-role-relation-delivery.json)
 now checks a precise list of 65 host helpers and three outer source files.
 It anchors the old source list to the already recorded handoff, keeps the

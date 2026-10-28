@@ -1,0 +1,188 @@
+{
+  "format": "buddha.witness-continuation-delivery.v1",
+  "recorded_utc": "2026-10-28T20:53:09.520123+00:00",
+  "base_head": "53f90d3529bb22695b803843e48b155cc1e84d71",
+  "pre_delivery_head": "21e04fb3eb6bf2d97ebf72605a62fdb789b27a8c",
+  "spec_sections": [
+    5,
+    7,
+    9,
+    10
+  ],
+  "scope": "First common-witness proposal mechanism across actual host source roots; not an operator handoff, counted-cell completion or all-phase continuation.",
+  "source_sha256": {
+    "buddha/unified_continuation.py": "0e01340eb1b91f4c9f1b54328e64722cfa5142c50015a3bb5ff46f23bfc543a5",
+    "buddha/launch_common.py": "ac74f88c367b37b5786fb27e7f320be4503e0da078371a834f3411dc7fe04030",
+    "buddha/improver_study.py": "f64569f0b8db0cb7bb5736981a917a6dd80c7d5c04490d635258565213373b50",
+    "buddha/source_search.py": "45caafb0d0ed401b909434e5a3ce624e6618d6a66b77a80ac3bc500f89ed4ca8",
+    "tests/test_unified_continuation.py": "54835676793d581d3098a00727123d31b8319390599ce0986a58aab128723d14",
+    "docs/PLAN.md": "9ac36f4a11d56c804320d50e100aa43796bd717550eb5a881efdbc7d69a84853",
+    "docs/UNIFIED-EVIDENCE-RECOVERY.md": "53853d5bcb21670886bced66ed5bfeeea5f7286f06ec050fcec0a06d2752884d"
+  },
+  "engineering_receipt": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\witness-continuation-20261028-v1.json",
+    "sha256": "928af81e09cb1c51b5a72c6ca5a2324ed92ba5871cc4409f0011f19bd035e567"
+  },
+  "architecture": {
+    "new_module": "buddha/unified_continuation.py",
+    "legacy_continuation_module_untouched": true,
+    "global_existing_sources_names_added": 0,
+    "input_identity": "Original controls retained; exact witness gets effective after-controls plus exact named outer and driver refs. Historical parent receives exact inverse old controls. No digest relabeling.",
+    "context": "Explicit checked process/root/thread scope; never discovered from a filename.",
+    "bound_chain": "Original unified/primary/handoff/assessment/development/plain-plan/approval/review refs, all four original grant IDs/terms/scopes, selected actors, cut owner/file anchors, actual installed68roles+driver, finite policy.",
+    "credential_context": "Original primary launch hash; no new key-review context substitution.",
+    "locks": "Fresh names/kinds, immutable file bytes, database sidecars and grant snapshot digests after normal owned leases; snapshots expire after mutation.",
+    "grant_history": "Stable original IDs/terms/joins, not permanent whole-database byte equality after legitimate new calls.",
+    "directory_history": "Names/kinds preserved; legitimate ancestor timestamp/inode changes are not frozen."
+  },
+  "positive_fixture": {
+    "actual_api_spend_usd": 0,
+    "actual_package_roots": 2,
+    "answers_per_task": 2,
+    "executed_development_tasks": 1,
+    "file_or_module_identity_spoofing": false,
+    "first_supplied_https_sends": 1,
+    "identity_assertions_note": "Exact identity equality is asserted by the frozen final test; generated final fixture UUIDs were not archived.",
+    "new_witness_proposal_owners": 1,
+    "old_inactive_owners": 4,
+    "old_raw_file_and_owner_anchors_checked": true,
+    "original_grant_terms_preserved": true,
+    "real_containers": 0,
+    "real_gateway_authorization_manifests_stage_seals": true,
+    "real_provider_calls": 0,
+    "replay_supplied_https_sends": 0,
+    "same_accounting_asserted": true,
+    "same_owner_uuid_asserted": true,
+    "same_raw_manifest_hash_asserted": true,
+    "same_single_operation_id_asserted": true,
+    "selected_improvers": 2,
+    "selected_starting_actors": 2,
+    "separate_python_processes": true,
+    "source_list_mocks": false,
+    "synthetic_fixture_credentials_used": true
+  },
+  "denial_scenarios": {
+    "busy_unsupported_redaction": 2,
+    "child_parent_base_distinction": 1,
+    "count": 25,
+    "cut_path_coordinate_duplicate_owner_missing_file_raw_manifest_or_size": 6,
+    "descriptor_shape_driver_digest_policy_grant": 4,
+    "external_cut_or_component": 2,
+    "late_directory_kind_change": 1,
+    "late_original_manifest_byte_drift": 1,
+    "late_oversize_before_read": 1,
+    "legacy_default_rejection_after_new_owner": 1,
+    "qualification": "Unknown/active funding and late shared-grant observations are injected unit observations, not manufactured real ledger incidents. The positive Gateway identity and late raw-manifest/type drift checks are real fresh-fixture paths.",
+    "root_parent_or_copied_thread": 3,
+    "unit_late_shared_grant_snapshot_drift": 1,
+    "unit_observed_unknown_or_active_history": 2
+  },
+  "checks": {
+    "bandit_new_module": "passed",
+    "directory_kind_red": {
+      "methods": 1,
+      "reason": "A same-name empty-directory to regular-file replacement after normal leases did not raise the domain error. No dispatch occurred; fixture restored.",
+      "seconds": 38.385,
+      "status": "expected_failure"
+    },
+    "final_legacy_cohort": {
+      "command": "python -B -m unittest test_helper_role_relation test_evidence_stop_causes test_source_mutation_witness.SourceMutationWitnessTests.test_known_witness_reply_resumes_original_owner_then_replays_keylessly test_source_mutation_witness.SourceMutationWitnessTests.test_unknown_witness_keeps_hold_and_forbids_generation_or_later_parent_work -v",
+      "function": "Checks existing role-relation, safe-stop, known-reply and unknown-liability behavior offline.",
+      "methods": 27,
+      "seconds": 230.396,
+      "status": "passed"
+    },
+    "final_new_cohort": {
+      "command": "python -B -m unittest test_unified_continuation -v",
+      "function": "Runs five offline continuation checks; supplied workers and HTTPS replies, no real API or containers.",
+      "methods": 5,
+      "seconds": 108.324,
+      "status": "passed"
+    },
+    "full_suite": "not_run_by_this_agent",
+    "hosted_ci": "not_started_by_this_agent",
+    "independent_source_review": {
+      "reviewer": "authority_review",
+      "scope": "Frozen four application files; source-only, no execution or original-data inspection.",
+      "status": "passed"
+    },
+    "intended_missing_module_red": {
+      "methods": 1,
+      "reason": "The actual old-process cut was ready; importing the new adapter failed before implementation.",
+      "seconds": 38.333,
+      "status": "expected_failure"
+    },
+    "pre_type_fix_cohort": {
+      "methods": 4,
+      "not_final_kind_fix_evidence": true,
+      "seconds": 99.038,
+      "status": "passed"
+    },
+    "ruff_changed_files": "passed",
+    "strict_mypy_new_module": "passed"
+  },
+  "resource_bounds_bytes": {
+    "ledger": 536870912,
+    "ordinary_opaque_file": 67108864,
+    "protocol_json_or_jsonl": 33554432,
+    "selected_or_closed_component_file": 268435456
+  },
+  "final_source_quality": {
+    "ruff_check": "passed",
+    "ruff_format": "276 files pass",
+    "strict_mypy": "89 modules pass",
+    "bandit": "passed; existing nosec warnings retained, no findings",
+    "in_memory_compile": "276 files pass",
+    "dependency_audits": "Identical patched pins reuse fresh/cached strict maintenance audit.",
+    "hosted_CI": "Pending at publication; not claimed green.",
+    "full_suite": "No current-cut full-suite claim; earlier PR167 local suite separately tracked."
+  },
+  "independent_source_review": {
+    "status": "passed at corrected final source cut",
+    "module_sha256": "0e01340eb1b91f4c9f1b54328e64722cfa5142c50015a3bb5ff46f23bfc543a5",
+    "scope": "All four changed/new application files; source-only, no tests or original-data access.",
+    "accepted_findings_fixed": [
+      "scope lost during final witness check",
+      "external cut/component path overlap",
+      "Windows case-only witness spelling across fields",
+      "unbounded metadata-controlled read sizes",
+      "late same-name directory/file type substitution"
+    ],
+    "additional_parent_root_review": [
+      "exact historical-parent inverse controls",
+      "original base screen differs from child parent; preserve normal controller semantics",
+      "lineage comparison exclusion",
+      "named verified search grant",
+      "fresh old-file/grant checks after locks"
+    ]
+  },
+  "preservation": {
+    "protected_original_raw_files": 3277,
+    "check": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-evidence-repair-preservation-check-v4.json",
+      "sha256": "268741c9c1d82514144225532502e8ae01ab600796a9bd73a7dd690725265610"
+    },
+    "CORE_files_equal_original": 10,
+    "prior_PLAN_raw_rows": 176,
+    "original_acceptance_tails": 7,
+    "original_paid_run_owners_grants_science_untouched": true
+  },
+  "activity": {
+    "real_API_keys_read": 0,
+    "real_provider_calls": 0,
+    "actual_containers": 0,
+    "original_or_historical_SQL_connections": 0,
+    "original_private_program_semantic_inspection_or_execution": 0,
+    "new_actual_run_owners": 0,
+    "new_actual_allocations": 0,
+    "paid_CLI_added": false,
+    "pull_requests_merged": 0,
+    "synthetic_test_credentials_SQL_and_supplied_replies": "Used only in new disposable fixtures."
+  },
+  "limitations": [
+    "Engineering mechanism only, supplied workers and provider replies.",
+    "No atomic filesystem snapshot or generalized runtime upgrade claim.",
+    "The real interrupted cell witness 1/1/1/0, remaining development, mixed parent selection, final/plain phases and publication need later composed acceptance before any paid handoff."
+  ],
+  "next": "Actual counted-cell witness with child parent/lineage and both witness roles, then mixed selection/final/plain/publication integration, exact-source CI and original wire/account/confinement checks before any paid command."
+}
