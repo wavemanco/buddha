@@ -281,3 +281,45 @@ combined into a claimed 149-method final pass.
 
 These are work-count and custody results. Whole-study performance, full-layout
 capacity and explicit paid continuation remain separate gates in PLAN.md.
+
+## Fresh copies of validated artifacts
+
+The actual saved-run profile records 13,974 artifact-copy calls, 8,137 task-
+population reconstructions and over eight million metadata-row validations.
+Its cumulative timings overlap and include profiler overhead; they cannot be
+added or treated as a controlled speed comparison.
+
+One shared copy method was repeating strict input validation on immutable bytes
+that had already passed that validation at construction. It now uses the standard
+JSON decoder to return a fresh editable copy. All nine in-repository artifact
+types still validate new bytes strictly; canonical bytes and fingerprints stay
+unchanged. Callers can edit their copies without changing the original or a
+later copy. This introduces no raw-byte cache or parsed-object cache.
+
+A genuine 1,000-row synthetic workload makes twenty record copies. It reproduces
+twenty redundant strict decodes and validation serializations before the change;
+the new copy path performs zero of those extra passes. Sixty malformed-constructor
+subcases still reject. The original nested-copy, frozen-data, format and identity
+assertions remain; their two decoder-count proxies now count the actual decoder.
+
+Ninety-nine methods pass before the capacity merge. On the merged source, another
+29-method copy/answer/format cohort and the eight capacity methods pass; these
+overlapping cuts are recorded separately. Two hundred deterministic nested JSON
+cases also reproduce the old views exactly. Configured source checks pass.
+[The delivery](conformance/validated-artifact-views-delivery.json) records these
+cuts and the separate actual-run check; full hosted coverage remains separate.
+
+The merged repaired source also reconstructs the actual saved study under the
+finite v2 policy: 174 owners, 604 attempts, $4.845090 spent/committed, zero held,
+and the same absent witness at 1/1/1/0. That guarded check took 861.192 seconds
+locally. It used in-memory SQL snapshots and made no provider calls or writes
+to the run. This single observation is not a controlled before/after speed
+experiment, a whole-run duration estimate or paid continuation authority.
+
+```powershell
+python -B -m unittest discover -s tests -p test_validated_artifact_views.py -v
+```
+
+This optional developer command runs the five new synthetic checks once, with
+no API keys or paid calls. Use the checkout containing this test; no separate
+window is needed. Ctrl+C stops it.
