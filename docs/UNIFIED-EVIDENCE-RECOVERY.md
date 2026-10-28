@@ -198,6 +198,13 @@ before the receiver changes, and later outer verification remains required.
 Database field limits, legacy ordering and retained sibling-tree checks remain
 enforced. This is not a filesystem transaction or a live continuation.
 
+The [artifact-copy repair](RECONSTRUCTION-COST.md#fresh-copies-of-validated-artifacts)
+also removes repeated validation when a checked, immutable package is copied.
+Every new package still passes the strict constructor. Every copy is freshly
+decoded and can be edited independently. There is no new cache. This reduces
+specified repeated work; it does not remove the source-version and original-
+owner checks required for a continuation.
+
 ## What must happen before another paid start
 
 The [owner-census repair](RECONSTRUCTION-COST.md#owner-census-work) now avoids

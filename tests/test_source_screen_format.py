@@ -10,7 +10,7 @@ from unittest.mock import patch
 
 import test_source_screen as fixtures
 
-from buddha import answers, source_screen
+from buddha import source_screen
 from buddha.releases import _json
 
 
@@ -53,7 +53,7 @@ class SourceScreenFormatTests(unittest.TestCase):
         for version in ("v1", "v2"):
             with self.subTest(version=version):
                 screen, _ = self.screen(version)
-                with patch.object(answers, "_load", wraps=answers._load) as decoded:
+                with patch.object(json, "loads", wraps=json.loads) as decoded:
                     for _ in range(3):
                         for stem in (
                             "candidate-generation",
@@ -94,7 +94,7 @@ class SourceScreenFormatTests(unittest.TestCase):
                 saved, fingerprint = screen.to_bytes(), screen.fingerprint()
                 original["format"] = "buddha.source-screen.v3"
                 original["selected_ids"].reverse()
-                with patch.object(answers, "_load", wraps=answers._load) as decoded:
+                with patch.object(json, "loads", wraps=json.loads) as decoded:
                     first, second = screen.to_record(), screen.to_record()
                 self.assertEqual(decoded.call_count, 2)
                 first["format"] = "buddha.source-screen.v3"
