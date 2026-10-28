@@ -23,7 +23,7 @@ def ref(path):
     return {"path": str(path), "sha256": sha(path.read_bytes())}
 
 
-def old_fixture(destination):
+def old_fixture(destination, *, setup_only=False, starting_count=2):
     """Run the original preparation in its own real installed package."""
     import test_baseline as raw_fixtures
     import test_improver_launch as primary_fixtures
@@ -53,17 +53,19 @@ def old_fixture(destination):
         primary = primary_fixtures.ImproverLaunchTests("runTest")
         primary.setUp()
         development = json.loads(Path(primary.definition["development"]["path"]).read_bytes())
-        development["starts"] = copy.deepcopy(primary.f.f.starts)
+        development["starts"] = copy.deepcopy(primary.f.f.starts[:starting_count])
         primary.f.f.recompute_limits(development)
         primary.definition["development"] = primary.f.write(
-            "two-start-development.json", development
+            "selected-start-development.json", development
         )
         analysis = copy.deepcopy(primary.f.plan)
-        analysis["counts"]["starts"] = 2
-        primary.definition["analysis_plan"] = primary.f.write("two-start-analysis.json", analysis)
+        analysis["counts"]["starts"] = starting_count
+        primary.definition["analysis_plan"] = primary.f.write(
+            "selected-start-analysis.json", analysis
+        )
         primary.definition["phase_limits"]["search"] = development["limits"]["study"]
         primary.definition["phase_limits"]["final"] = {
-            k: 2 * v for k, v in primary.definition["phase_limits"]["final"].items()
+            k: starting_count * v for k, v in primary.definition["phase_limits"]["final"].items()
         }
         bundle = primary.bundle()
         compatible = type("Compatible", (), {"definition": primary.definition, "f": primary.f.f})()
@@ -130,6 +132,16 @@ def old_fixture(destination):
         outer_path = bundle["folder"] / "unified.json"
         outer_path.write_bytes(_json(outer))
         primary.prepare(bundle)
+        metadata = {
+            "original_launch": ref(outer_path),
+            "grants": grants,
+            "source_manifest": ref(bundle["proposal_path"]),
+            "runtime": primary.f.engine.candidate.expected_runtime,
+            "study": str(bundle["directory"] / "search/study"),
+        }
+        destination.joinpath("old-bootstrap.json").write_bytes(_json(metadata))
+        if setup_only:
+            return
         from test_improver_study import ImproverStudyCapacityTests
 
         ImproverStudyCapacityTests("runTest").fixture(finite_fixture=primary.f.f)
@@ -151,65 +163,71 @@ def old_fixture(destination):
             except KeyboardInterrupt:
                 pass
         (study / "opaque-unused.bin").write_bytes(b"unused opaque retained evidence")
-        reader, state = improver_study._restore(study, bundle["authorities"]["search"].path)
-        assert state["action"]["directory"] == target and not target.exists(), {
-            "kind": state["action"]["kind"],
-            "position": state["action"]["position"],
-            "target_present": target.exists(),
-        }
-        reader.finish()
-        grant_paths = {row["path"] for row in grants.values()}
-        files = {
-            p: {"bytes": Path(p).stat().st_size, "sha256": d}
-            for p, d in reader.fingerprints().items()
-            if p not in grant_paths
-        }
-        for p in {
-            *state["controls"],
-            *(study / name for name in reader.capture.entries if (study / name).is_file()),
-        }:
-            files[str(p)] = {"bytes": p.stat().st_size, "sha256": sha(p.read_bytes())}
-        cut = {
-            "format": "buddha.witness-continuation-cut.v1",
-            "trial": str(bundle["directory"]),
-            "study": str(study),
-            "witness": str(target),
-            "position": state["action"]["position"],
-            "parent": state["action"]["treatment"].to_record()["parent"],
-            "attempted": state["attempted"],
-            "decisions": len(state["decisions"]),
-            "owners": [
-                {
-                    "directory": str(p),
-                    "run_id": reader.owner(p).run_id,
-                    "manifest_sha256": reader.owner(p).manifest_sha256,
-                    "manifest_raw_sha256": files[str(p / "manifest.json")]["sha256"],
-                    "ledger_sha256": reader.owner(p).ledger_sha256,
-                }
-                for p in sorted(state["owner_paths"])
-            ],
-            "files": files,
-            "entries": sorted(reader.capture.entries),
-            "totals": {
-                k: state["authorization"][k]
-                for k in ("spent_microusd", "reserved_microusd", "operation_count")
-            },
-        }
-        cut_path = bundle["folder"] / "cut.json"
-        cut_path.write_bytes(_json(cut))
-        destination.joinpath("old.json").write_bytes(
-            _json(
-                {
-                    "original_launch": ref(outer_path),
-                    "cut": ref(cut_path),
-                    "grants": grants,
-                    "source_manifest": ref(bundle["proposal_path"]),
-                    "runtime": state["runtime"],
-                    "before_controls": {str(p): d for p, d in state["controls"].items()},
-                    "base_screen": state["screens"][0].to_record(),
-                }
-            )
+        save_cut(destination, metadata, target)
+
+
+def save_cut(destination, metadata, target):
+    """Freeze one actual absent witness after original scheduled predecessors."""
+    from buddha import improver_study
+    from buddha.releases import _json
+
+    study, target = Path(metadata["study"]), Path(target)
+    reader, state = improver_study._restore(study, Path(metadata["grants"]["search"]["path"]))
+    assert (
+        state["action"]["kind"] == "witness"
+        and state["action"]["directory"] == target
+        and not target.exists()
+    )
+    reader.finish()
+    grant_paths = {row["path"] for row in metadata["grants"].values()}
+    files = {
+        p: {"bytes": Path(p).stat().st_size, "sha256": d}
+        for p, d in reader.fingerprints().items()
+        if p not in grant_paths
+    }
+    for path in {
+        *state["controls"],
+        *(study / n for n in reader.capture.entries if (study / n).is_file()),
+    }:
+        files[str(path)] = {"bytes": path.stat().st_size, "sha256": sha(path.read_bytes())}
+    cut = {
+        "format": "buddha.witness-continuation-cut.v1",
+        "trial": str(study.parent.parent),
+        "study": str(study),
+        "witness": str(target),
+        "position": state["action"]["position"],
+        "parent": state["action"]["treatment"].to_record()["parent"],
+        "attempted": state["attempted"],
+        "decisions": len(state["decisions"]),
+        "owners": [
+            {
+                "directory": str(path),
+                "run_id": reader.owner(path).run_id,
+                "manifest_sha256": reader.owner(path).manifest_sha256,
+                "manifest_raw_sha256": files[str(path / "manifest.json")]["sha256"],
+                "ledger_sha256": reader.owner(path).ledger_sha256,
+            }
+            for path in sorted(state["owner_paths"])
+        ],
+        "files": files,
+        "entries": sorted(reader.capture.entries),
+        "totals": {
+            k: state["authorization"][k]
+            for k in ("spent_microusd", "reserved_microusd", "operation_count")
+        },
+    }
+    cut_path = destination / "cut.json"
+    cut_path.write_bytes(_json(cut))
+    destination.joinpath("old.json").write_bytes(
+        _json(
+            metadata
+            | {
+                "cut": ref(cut_path),
+                "before_controls": {str(path): d for path, d in state["controls"].items()},
+                "base_screen": state["screens"][state["action"]["position"]["start"]].to_record(),
+            }
         )
+    )
 
 
 def descriptor(destination):
