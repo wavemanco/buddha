@@ -8,12 +8,47 @@ from contextlib import contextmanager
 from pathlib import Path
 from typing import cast
 
-from buddha import gateway
+from buddha import credentials, gateway
 from buddha import native_pipeline as pipeline
 from buddha.gateway_history import MAX_LEDGER_BYTES
 from buddha.provider import ModelSpec
 from buddha.releases import ReleaseError, Selection, _digest, _json, _load, _object, _root, _text
-from buddha.search_evidence import _read, _sidecars, read_authority
+from buddha.search_evidence import (
+    EvidenceFieldLimitError,
+    EvidencePathLimitError,
+    EvidenceTotalLimitError,
+    _read,
+    _sidecars,
+    read_authority,
+)
+
+
+def _stop_reason(error: BaseException) -> str:
+    """Expose only fixed trusted reasons through bounded redacting error chains."""
+    reasons = {
+        EvidenceTotalLimitError: "evidence_total_bytes_limit",
+        EvidenceFieldLimitError: "evidence_field_bytes_limit",
+        EvidencePathLimitError: "evidence_path_count_limit",
+    }
+    keys = {"key_terminal_required", "key_input_unavailable", "key_input_invalid"}
+    pending = [error]
+    seen: set[int] = set()
+    while pending and len(seen) < 32:
+        current = pending.pop()
+        if id(current) in seen:
+            continue
+        seen.add(id(current))
+        reason = reasons.get(type(current))
+        if reason is not None:
+            return reason
+        if type(current) is credentials.KeyInputError:
+            code = current.code
+            if type(code) is str and code in keys:
+                return code
+        for nested in (current.__context__, current.__cause__):
+            if nested is not None:
+                pending.append(nested)
+    return "launch_stopped"
 
 
 def _path(value: object, *, error: type[ReleaseError] = ReleaseError) -> Path:

@@ -1,0 +1,204 @@
+{
+  "format": "buddha.evidence-stop-causes-delivery.v1",
+  "recorded_utc": "2026-10-28T16:52:04.590771+00:00",
+  "base_head": "ef176c12d1903fb428d16ce70a692554afd8b270",
+  "spec_sections": [
+    5,
+    7,
+    9
+  ],
+  "scope": "Specific redacted limit reasons only; no observation-policy opt-in or active continuation.",
+  "source_sha256": {
+    "buddha/doctor.py": "925a0be3256cc98405ed4f138a41f657c6b28bacdc5bf7f4eb73ba2798ad8813",
+    "buddha/search_evidence.py": "418fbbc6a253227a7b0e8ea4f489dccde24edeb192d8613f1dcdeea425706bf4",
+    "buddha/launch_common.py": "e122cf1ccc372f010ec01414096be5ba331030566027d9a6ce00b552487acff8",
+    "buddha/source_launch.py": "b737584601390885d4d80b1c5962dde2133c7cdea657991fadb7f608616797ca",
+    "buddha/policy_launch.py": "3a52084d26decde6f7097ce7eaa21be095ba306efa7608502e5e588c78789d39",
+    "buddha/improver_launch.py": "5301575f8b1bbd8f592d7b99a9cf37b6f5c2130e4e2d7a3a6f1f55da0db8025c",
+    "buddha/unified_launch.py": "17dde0011300f7f929b70484b437b8e296d1686111d4c11e45994aa6d4061323",
+    "docs/conformance/src02-run.py": "c7a972294acc35911d09c0940fbbfa67b972aa52c0a3698819160938f757ea2d",
+    "docs/conformance/pol02-run.py": "464acad8be37db35f4dd213a108dce5c12df79ef15f03c4d6695e8f37580671e",
+    "docs/conformance/imp01-run.py": "c161fd364ed33f26724a1f56d94a28d8e8a191378350c902d58176cfa454b292",
+    "docs/conformance/unified-run.py": "ac6e97af1a2ff78543f6ff5bc08fe1e97cd923c4c9857af7581747de6e3aece5",
+    "tests/test_evidence_stop_causes.py": "e59573369ff53d797f4f7afffa36dca2f19d0efb4ca235f338e5b30bfb9760ae",
+    "docs/PLAN.md": "42e609c3e77062f0d06dfeb4b487e84e7c4277571d2ccc563889637f8675b520",
+    "docs/UNIFIED-EVIDENCE-RECOVERY.md": "9ab4ceffd953e54b8863b95e103ac953fcbb6e3bb5795ec98c3bde5419cf011c"
+  },
+  "codes": [
+    "evidence_total_bytes_limit",
+    "evidence_field_bytes_limit",
+    "evidence_path_count_limit"
+  ],
+  "recognition": {
+    "exact_trusted_exception_types": true,
+    "maximum_visited_causes_or_contexts": 32,
+    "cycle_safe": true,
+    "arbitrary_error_text_or_codes_ignored": true,
+    "credential_codes": [
+      "key_terminal_required",
+      "key_input_unavailable",
+      "key_input_invalid"
+    ],
+    "unknown_fallback": "launch_stopped",
+    "cancellation_unchanged": true
+  },
+  "guards": {
+    "pre_read_field_and_aggregate_allowances_preserved": true,
+    "oversized_file_not_opened": true,
+    "field_limit_priority_when_both_exceeded": true,
+    "supplied_falsey_reader_respected": true,
+    "known_receipt_smaller_field_limit_preserved": true,
+    "Capture_and_all_four_legacy_aggregate_reads_share_classification": true
+  },
+  "operators": {
+    "launchers": [
+      "source_launch",
+      "policy_launch",
+      "improver_launch",
+      "unified_launch"
+    ],
+    "CLIs": [
+      "src02-run.py",
+      "pol02-run.py",
+      "imp01-run.py",
+      "unified-run.py"
+    ],
+    "unified_safe_notice_precedes_recording": true,
+    "original_exception_re_raised": true,
+    "original_saved_records_not_rewritten": true,
+    "comparison_observation_schema_changed": false
+  },
+  "tests": {
+    "initial_RED": {
+      "methods": 7,
+      "failures": 2,
+      "errors": 7,
+      "seconds": 0.196,
+      "qualification": "Early CLI/observation harness corrections were needed; initial CLI assertion alone did not establish the final propagation case."
+    },
+    "fixture_corrections": [
+      "The preflight seam now forwards no path arguments to the zero-argument genuine overflow.",
+      "The real observation assertion uses its existing stop.reason schema."
+    ],
+    "additional_RED": {
+      "command": "python -B -m unittest discover -s tests -p test_evidence_stop_causes.py -q",
+      "tests": 7,
+      "failures": 1,
+      "errors": 1,
+      "seconds": 0.133
+    },
+    "GREEN_methods": 59,
+    "GREEN_skipped": 1,
+    "GREEN_failures": 0,
+    "GREEN_errors": 0,
+    "cohorts": [
+      {
+        "command": "python -B -m unittest discover -s tests -p test_evidence_stop_causes.py -q",
+        "tests": 7,
+        "seconds": 1.537,
+        "exit_code": 0,
+        "function": "Runs local supplied-worker or passive-fixture regression checks once in this checkout; uses temporary records, no model API or keys; Ctrl+C stops it."
+      },
+      {
+        "command": "python -B -m unittest discover -s tests -p test_bounded_evidence_capture.py -q",
+        "tests": 10,
+        "seconds": 0.096,
+        "exit_code": 0,
+        "function": "Runs local supplied-worker or passive-fixture regression checks once in this checkout; uses temporary records, no model API or keys; Ctrl+C stops it."
+      },
+      {
+        "command": "python -B -m unittest discover -s tests -p test_observation_reads.py -q",
+        "tests": 16,
+        "seconds": 0.07,
+        "exit_code": 0,
+        "function": "Runs local supplied-worker or passive-fixture regression checks once in this checkout; uses temporary records, no model API or keys; Ctrl+C stops it."
+      },
+      {
+        "command": "python -B -m unittest discover -s tests -p test_search_evidence.py -v",
+        "tests": 21,
+        "seconds": 8.016,
+        "exit_code": 0,
+        "skipped": 1,
+        "skip": "test_symlink_is_rejected: host cannot create a symlink",
+        "function": "Runs local supplied-worker or passive-fixture regression checks once in this checkout; uses temporary records, no model API or keys; Ctrl+C stops it."
+      },
+      {
+        "command": "$env:PYTHONPATH = Join-Path (Get-Location) tests\npython -B -m unittest test_unified_launch.UnifiedLaunchCliTests test_unified_launch.UnifiedLaunchLifecycleTests.test_cancellation_and_original_error_survive_observation_failure test_improver_launch.ImproverLaunchInterfaceTests -q",
+        "tests": 5,
+        "seconds": 0.103,
+        "exit_code": 0,
+        "function": "Runs local supplied-worker or passive-fixture regression checks once in this checkout; uses temporary records, no model API or keys; Ctrl+C stops it."
+      }
+    ],
+    "final_focused_receipt": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\evidence-stop-causes-20261028-v2.json",
+      "sha256": "94f0c89520d8d2b64f3ec2b7f8d9d16ef99abecb59a44835c5e41be2d743f1cf"
+    },
+    "pre_format_receipt_retained": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\evidence-stop-causes-20261028-v1.json",
+      "sha256": "54ea8add97d0cc38a4909241a49b7fb20c89fd1161d020575349f930e265d91c",
+      "note": "Preserved pre-format test cut; final test-only format correction and rerun are recorded here."
+    }
+  },
+  "quality": {
+    "lint_including_four_operator_CLIs": 0,
+    "format_including_four_operator_CLIs": 0,
+    "format_files": 274,
+    "strict_types": 0,
+    "strict_type_source_files": 88,
+    "security_including_operator_CLIs": 0,
+    "existing_bandit_warnings_retained": true,
+    "compile_including_operator_CLIs": 0,
+    "unchanged_dependency_audit_passes": "Reused from bounded-evidence-capture-delivery.json at identical requirements hashes.",
+    "requirements_dev_sha256": "e1f8b9ddbda65e5492df9dcad1343feeea2632410419fa8c329cb27a87ffe253",
+    "requirements_runtime_sha256": "5a07ed89bde62d64082a9f44878fd9cff83a25ab44f5fb5436721302ab5b4551"
+  },
+  "independent_root_engineering_review": {
+    "scope": "Typed guard precision, bounded chain traversal, every sibling integration, fixed-code redaction and original CORE equality.",
+    "blocking_findings": 0,
+    "correction": "Explicit None selection and early safe notice were requested before the final cut."
+  },
+  "full_grid_capacity_review": {
+    "method": "Host-source review plus original file names/sizes only; no original SQL or private semantic inspection.",
+    "root_metadata_rechecked": {
+      "files": 2149,
+      "directories": 1574,
+      "entries": 3723,
+      "bytes": 1070277220
+    },
+    "ordinary_sampled_task_units": 35,
+    "ordinary_unit_files": 45,
+    "ordinary_unit_internal_directories": 32,
+    "allowed_final_cells": 312,
+    "normal_final_layout_entries": 24336,
+    "current_trial_plus_normal_final_entries": 28059,
+    "legacy_entry_limit": 10000,
+    "ordinary_final_size_extrapolation_bytes": [
+      7877621544,
+      8224148088
+    ],
+    "extrapolation_not_upper_bound": true,
+    "stage_attempts_and_stop_observations_not_bounded_by_paid_attempt_count": true,
+    "next": "A separate explicit finite topology/byte policy and full-layout opaque rehearsal with a declared recovery envelope; no policy selected in this slice."
+  },
+  "preservation": {
+    "Gateway_CORE_files_unchanged": 10,
+    "original_executing_tree_written": false,
+    "prior_plan_rows_preserved": 171,
+    "acceptance_tails_preserved": 7,
+    "provider_calls": 0,
+    "keys_read": 0,
+    "actual_original_SQL_connections": 0,
+    "containers_started": 0,
+    "scientific_settings_changed": false,
+    "owner_or_grant_changed": false
+  },
+  "limits": {
+    "full_local_suite": "First bounded-reader cut remains in progress; no full-suite pass for this newer cut claimed.",
+    "hosted_CI": "Pending for this new head.",
+    "full_grid_capacity_certified": false,
+    "live_restart_authorized": false,
+    "scientific_gate_closed": false,
+    "next": "Coalesce verified reads; explicit finite full-layout/recovery-envelope rehearsal; reviewed old/new helper continuity; original request/confinement/accounting checks before a paid handoff."
+  }
+}

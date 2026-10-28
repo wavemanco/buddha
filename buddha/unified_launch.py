@@ -593,5 +593,10 @@ def launch(
         partial("cancelled", cancelled=True)
         raise
     except Exception as error:
-        partial(error.code if isinstance(error, credentials.KeyInputError) else "launch_stopped")
+        reason = common._stop_reason(error)
+        common._emit(
+            notice,
+            "Launch stopped: " + reason + ". Recording saved evidence; no new provider requests.",
+        )
+        partial(reason)
         raise

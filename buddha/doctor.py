@@ -39,9 +39,12 @@ from buddha.search_evidence import (
     MAX_LEDGER_BYTES,
     MAX_MANIFEST_BYTES,
     MAX_TOTAL_BYTES,
+    EvidenceFieldLimitError,
+    EvidencePathLimitError,
     _absolute,
     _read,
     _regular,
+    _total_read,
     read_authority,
 )
 
@@ -87,7 +90,7 @@ def _entries(root: Path) -> dict[str, tuple[int, int, int, int, int]]:
         with os.scandir(parent) as children:
             for entry in children:
                 if len(result) >= MAX_FILES:
-                    raise ValidationError("observation directory entry ceiling exceeded")
+                    raise EvidencePathLimitError("observation directory entry ceiling exceeded")
                 path = parent / entry.name
                 information = path.lstat()
                 name = path.relative_to(root).as_posix()
@@ -172,14 +175,14 @@ class _Capture:
         if path in self._receipts:
             size, digest = self._receipts[path]
             if size > maximum:
-                raise ValidationError("observed input exceeds this field's ceiling")
+                raise EvidenceFieldLimitError("observed input exceeds this field's ceiling", size)
             raw = _read(path, size)
             if len(raw) != size or _sha(raw) != digest:
                 raise _Busy("consumed input changed")
             return raw
         if len(self._receipts) >= MAX_FILES:
-            raise ValidationError("consumed evidence path ceiling exceeded")
-        raw = _read(path, min(maximum, self._maximum - self.total))
+            raise EvidencePathLimitError("consumed evidence path ceiling exceeded")
+        raw = _total_read(path, maximum, self._maximum - self.total, read=_read)
         self.total += len(raw)
         self._receipts[path] = (len(raw), _sha(raw))
         return raw
