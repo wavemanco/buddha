@@ -209,3 +209,38 @@ comparison completes the small duplicate-read observation; the two-condition
 observation records a larger engineering case. Costs for the full planned matched
 improver workload remain to be established. This does not require changing the
 official benchmark or its scores.
+
+
+## Owner census work
+
+The October 28 [evidence-limit recovery](UNIFIED-EVIDENCE-RECOVERY.md) exposed
+another source of repeated work. The finite-study census decoded the full task
+population and screen record for each retained owner file, even when those files
+belonged to the same owner.
+
+The census now derives immutable task counts once per starting screen and the
+stage count once. It validates each exact owner-prefix spelling once, while
+still checking the complete folder inventory and the original owner-to-funding
+bijection. Deduplication uses exact text: Windows path equality must not hide a
+foreign or noncanonical prefix with different capitalization. The same changed-
+byte and database-sidecar checks still run afterward. No global mutable cache,
+old observation reuse, source-selection change or new producer input is added.
+
+A genuine supplied-worker fixture has eight owners. Adding twenty harmless
+files to each owner previously increased task-population reconstructions from
+24 to 184, screen decodes from 43 to 323 and schedule-pattern validations from
+96 to 736, without changing the result. The corrected census keeps the work
+counts constant; task-population reconstruction occurs once for this one-screen
+fixture. Separate adversarial cases retain rejection of foreign, orphaned,
+noncanonical and out-of-range owners, changed funding identities, missing or
+extra owners, late byte changes and active database journals.
+
+An intermediate Windows optimization compared Path objects and incorrectly
+skipped two differently capitalized late directory prefixes. The added failing
+cases exposed that error before publication. Exact-text deduplication fixes it;
+the failed intermediate check remains in the delivery history.
+
+These are work-count and integrity checks, not a production timing profile or a
+measurement of the full twenty-hour run. The original executing code stays
+frozen. Restart remains blocked until the remaining error, reconstruction and
+explicit-continuation work in [PLAN.md](PLAN.md) passes its gates.

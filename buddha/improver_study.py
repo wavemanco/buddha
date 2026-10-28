@@ -832,7 +832,10 @@ def _read_comparison_root(
 
 def _census(reader: NativeEvidence, state: dict[str, Any]) -> None:
     record = state["record"]
+    task_counts = tuple(len(screen.tasks.tasks) for screen in state["screens"])
+    stage_count = len(state["screens"][0].to_record()["stages"])
     integer = r"(0|[1-9][0-9]*)"
+    prefixes = set()
     paths = set()
     for name in reader.capture.entries:
         if "/owners/" not in name:
@@ -840,6 +843,8 @@ def _census(reader: NativeEvidence, state: dict[str, Any]) -> None:
         prefix = (
             name.split("/owners/", 1)[0] + "/owners/" + name.split("/owners/", 1)[1].split("/")[0]
         )
+        if prefix in prefixes:
+            continue
         common = re.fullmatch(rf"common/{integer}/{integer}/(.+)", prefix)
         cell = re.fullmatch(rf"cells/{integer}/{integer}/{integer}/{integer}/(.+)", prefix)
         if common:
@@ -864,20 +869,17 @@ def _census(reader: NativeEvidence, state: dict[str, Any]) -> None:
         if stage:
             task, role, index = stage.groups()
             if (
-                int(task) >= len(state["screens"][int(start)].tasks.tasks)
+                int(task) >= task_counts[int(start)]
                 or (role == "generation" and index != "0")
-                or (
-                    role == "evaluation"
-                    and not 1 <= int(index) <= len(state["screens"][0].to_record()["stages"])
-                )
+                or (role == "evaluation" and not 1 <= int(index) <= stage_count)
             ):
                 raise ImproverStudyError("screen owner changes its typed task/stage schedule")
         elif not witness and not proposal:
             raise ImproverStudyError("foreign role owner is not a declared stage")
-        path = reader.root / prefix
         if prefix + "/manifest.json" not in reader.capture.entries:
             raise ImproverStudyError("orphan original owner directory has no manifest")
-        paths.add(path)
+        prefixes.add(prefix)
+        paths.add(reader.root / prefix)
     for path in paths:
         reader.owner(path)
     funding = _authority(reader.capture, reader.authorization, list(reader.owners.values()))
