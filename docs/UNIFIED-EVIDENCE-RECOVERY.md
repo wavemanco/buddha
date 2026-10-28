@@ -239,6 +239,31 @@ python -B -m unittest discover -s tests -p 'test_screen_control_*.py' -v
 
 This runs the five offline comparison checks using disposable files and supplied replies. It spends no API money and starts no real containers. It runs once in the same PowerShell window and can take several minutes; Ctrl+C stops it. No separate window is needed.
 
+### Remaining development and the full comparison
+
+The new development entry point checks the pinned descriptor once per normal action, then takes the usual writer leases and freshly checks file bytes, entry types and grants. The checked-token entry remains available. This removes duplicate reconstruction; it does not relax the spending or evidence checks. Two whole development rehearsals exceeded the180-second child limit. The corrected test proved one reconstruction per completed normal action, then timed out after the last child's preparation; its exact internal timeout phase is unknown. Further performance investigation is required before claiming complete development recovery.
+
+The full-trial bridge reuses the existing coordinated launcher for remaining development, source freeze, sealed final assessment, both plain sampling references and comparison publication. Historical approval files keep their actual original paths and hashes. New owners receive a separate, complete execution-control map. Numerical/selection modules and the official benchmark remain fixed. The original launch hashes still identify the API-key reviews, and the original plain-plan hash still identifies its grant.
+
+The coordinator freshly rejoins the continuation evidence under its workspace lease before key entry and again before the first phase starts. New trial owners also bind the cut reference. Stopped and cancelled terminal records retain the validated continuation hash. The `--continuation` flag explicitly selects this route; reading a saved reference never activates it automatically.
+
+This work is still undergoing whole-trial verification. Wait for the exact funded handoff and command before starting paid work. The existing allocation is unchanged; unused money from earlier closed experiments is not transferred into it.
+
+Optional developer checks, from a checkout containing this slice:
+
+```powershell
+python -B -m unittest discover -s tests -p test_phase_continuation.py -v
+python -B -m unittest discover -s tests -p test_trial_freshness.py -v
+```
+
+The first command checks historical versus executing file bindings. The second checks late evidence changes and stopped/cancelled operator records. Both run once using disposable files and synthetic observations, spend no API money and start no real containers. Use the same PowerShell window; Ctrl+C stops either command. These focused checks do not prove the whole comparison completes.
+
+```powershell
+python -B -m unittest discover -s tests -p test_trial_continuation.py -v
+```
+
+This optional developer command rehearses recovery through development, final assessment, both plain-model modes and saved-result replay. It uses temporary records and supplied replies, spends no API money and starts no real containers. It runs once in the same PowerShell window and can take hours; Ctrl+C stops it. It does not resume the original paid run.
+
 ## What must happen before another paid start
 
 The first [executed continuation mechanism](conformance/witness-continuation-delivery.json)

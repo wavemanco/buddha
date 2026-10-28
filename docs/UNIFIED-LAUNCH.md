@@ -1,5 +1,8 @@
 # One launcher for the Buddha study and plain references
 
+The original run stopped at its evidence limit. Keep its historical command
+stopped until the [checked recovery handoff](UNIFIED-EVIDENCE-RECOVERY.md) is ready.
+
 The new launcher connects the original primary controller, both plain-reference
 controllers, the combined funding check, original-owner inspection and saved
 partial observations. It allocates no money and changes no benchmark settings.
@@ -90,8 +93,9 @@ The final command will name the exact reviewed source and funded handoff.
 
 | Option | Plain-English function |
 | --- | --- |
-| `--handoff` | Selects the frozen combined launch file; it points to existing approvals and grants. |
-| `--sha256` | Pins that exact launch file. A changed file is refused. |
+| `--handoff` | Selects the frozen combined launch file, or the checked recovery record when `--continuation` is used. Both retain the existing approvals and grants. |
+| `--sha256` | Pins that exact selected file. A changed file is refused. |
+| `--continuation` | Explicitly selects the reviewed recovery route for the original stopped run. It allocates no more money and does not activate automatically. |
 | `--check` | Checks configuration, original funding and saved state once; no keys, owners, run records or provider requests. Cannot be combined with live/key flags. |
 | `--live` | Allows unfinished paid work within the existing grants. It creates no new allowance. |
 | `--prompt-keys` | Asks only for missing keys, hidden, in this process. Paste once and press Enter. |
