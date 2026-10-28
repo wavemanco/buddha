@@ -1,0 +1,134 @@
+{
+  "format": "buddha.improver-census-work-delivery.v1",
+  "recorded_utc": "2026-10-28T16:33:20.602838+00:00",
+  "base_head": "eb41c17082d12da6d112eaf9724d1e23882a4e1d",
+  "spec_sections": [
+    5,
+    7,
+    9
+  ],
+  "source_sha256": {
+    "buddha/improver_study.py": "ae27f5612efc767b2dcfeaff7c9113821242c8799b1177f437ff2bf64b7e5723",
+    "tests/test_improver_census.py": "53fd18d27630b8f346c1884fb00616eb556416ecb7dfaa967edf346dfa9c7a7f",
+    "docs/PLAN.md": "3eccbadf8dbe7190cdc2c6dbb2e052438725c90bb44002d7b4efede8eea18082",
+    "docs/RECONSTRUCTION-COST.md": "69c92382129ded3bf2823ddf625aae09a4b9e2f8512dc7c9183fb110820c456c",
+    "docs/UNIFIED-EVIDENCE-RECOVERY.md": "dda52d8df09272bf74bb059bb94343cd376f9b2ba6e786b356adaae619317bc7"
+  },
+  "change": "Local immutable task/stage counts and exact-text owner-prefix deduplication; complete metadata census and original owner/funding bijection retained.",
+  "caller": "_restore is the sole internal caller; active controllers and passive readers share it.",
+  "red": {
+    "initial_methods": 4,
+    "failures": 1,
+    "seconds": 53.733,
+    "fixture_owners": 8,
+    "extra_leaves_per_owner": 20,
+    "original_task_reconstructions": [
+      24,
+      184
+    ],
+    "original_screen_decodes": [
+      43,
+      323
+    ],
+    "original_schedule_pattern_checks": [
+      96,
+      736
+    ]
+  },
+  "intermediate_failure": {
+    "status": "retained_and_fixed_before_publication",
+    "failing_method_count": 1,
+    "subtest_failures": 2,
+    "seconds": 13.919,
+    "cause": "Windows Path equality skipped late COMMON and TASKS directory-prefix aliases.",
+    "correction": "Deduplicate exact original prefix strings only after schedule and manifest validation.",
+    "intermediate_source_sha256": "51037a081eed9708832ae10f49109d0fe8cf2f58c1a662cb5807fedc8f17cfae"
+  },
+  "green": {
+    "unique_methods": 24,
+    "fixture_task_reconstructions_per_observation": 1,
+    "all_work_counts_invariant_after_extra_leaves": true,
+    "cohorts": [
+      {
+        "file": "test_improver_census.py",
+        "methods": 4,
+        "seconds": 56.383,
+        "exit_code": 0,
+        "command": "python -B -m unittest discover -s tests -p test_improver_census.py -v",
+        "function": "Runs this local supplied-worker or passive-fixture regression group once in this checkout; creates temporary test records, uses no model API, and stops with Ctrl+C."
+      },
+      {
+        "file": "test_improver_screen_replay.py",
+        "methods": 5,
+        "seconds": 116.662,
+        "exit_code": 0,
+        "command": "python -B -m unittest discover -s tests -p test_improver_screen_replay.py -v",
+        "function": "Runs this local supplied-worker or passive-fixture regression group once in this checkout; creates temporary test records, uses no model API, and stops with Ctrl+C."
+      },
+      {
+        "file": "test_generation_evidence_pair.py",
+        "methods": 5,
+        "seconds": 13.262,
+        "exit_code": 0,
+        "command": "python -B -m unittest discover -s tests -p test_generation_evidence_pair.py -v",
+        "function": "Runs this local supplied-worker or passive-fixture regression group once in this checkout; creates temporary test records, uses no model API, and stops with Ctrl+C."
+      },
+      {
+        "file": "test_native_evidence.py",
+        "methods": 10,
+        "seconds": 10.221,
+        "exit_code": 0,
+        "command": "python -B -m unittest discover -s tests -p test_native_evidence.py -v",
+        "function": "Runs this local supplied-worker or passive-fixture regression group once in this checkout; creates temporary test records, uses no model API, and stops with Ctrl+C."
+      }
+    ]
+  },
+  "guards_retained": [
+    "foreign and orphan owner rejection",
+    "canonical prefix and ordered schedule bounds",
+    "original owner/funding bijection and identity",
+    "same-size late byte drift rejection",
+    "nonempty late database sidecar rejection",
+    "complete local metadata inventory",
+    "original-source and paired-generation custody"
+  ],
+  "quality": {
+    "final_source_cut": "ae27f5612efc767b2dcfeaff7c9113821242c8799b1177f437ff2bf64b7e5723",
+    "lint": 0,
+    "format": 0,
+    "strict_types": 0,
+    "bandit": 0,
+    "compile": 0,
+    "format_files": 269,
+    "strict_type_source_files": 88,
+    "existing_bandit_warnings_retained": true,
+    "unchanged_development_pins_sha256": "e1f8b9ddbda65e5492df9dcad1343feeea2632410419fa8c329cb27a87ffe253",
+    "unchanged_runtime_manifest_sha256": "5a07ed89bde62d64082a9f44878fd9cff83a25ab44f5fb5436721302ab5b4551",
+    "dependency_audits": "Reuse unchanged-manifest passes recorded in bounded-evidence-capture-delivery.json; no dependency or environment change in this slice."
+  },
+  "review": {
+    "root_source_review": "Exact prefix validation precedes insertion; immutable counts derive from already validated SourceScreens; all owner and funding reads remain.",
+    "scope": "Engineering review only, not a selected independent scientific reviewer."
+  },
+  "preservation": {
+    "prior_plan_rows_unchanged": 170,
+    "acceptance_tails_unchanged": 7,
+    "original_paths_written": 0,
+    "frozen_executing_source_changed": false,
+    "scientific_settings_changed": false,
+    "actual_run_SQL_connections": 0,
+    "keys_read": 0,
+    "provider_calls": 0,
+    "containers_started": 0
+  },
+  "limits": {
+    "production_runtime_timing_measured": false,
+    "full_grid_capacity_certified": false,
+    "production_launcher_policy_opt_ins": 0,
+    "live_restart_authorized": false,
+    "scientific_gate_closed": false,
+    "full_local_suite": "First bounded-reader cut remains in progress; no full-suite pass for this new census cut claimed.",
+    "hosted_CI": "Pending for this head.",
+    "next": "Coalesce verified rereads, preserve safe stop causes, then explicit reviewed helper continuity and complete-grid/request/confinement/accounting checks."
+  }
+}

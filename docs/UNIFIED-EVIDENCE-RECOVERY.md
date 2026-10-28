@@ -75,6 +75,11 @@ reconstruction as a speed improvement.
 
 ## What must happen before another paid start
 
+The [owner-census repair](RECONSTRUCTION-COST.md#owner-census-work) now avoids
+decoding the same task population for every file belonging to one owner. Its
+work-count and adversarial tests preserve the original owner/funding checks;
+they do not establish an end-to-end runtime improvement or enable continuation.
+
 [PLAN.md](PLAN.md) owns the sequence: finish bounded-reader verification,
 repair repeated reconstruction and safe error reporting, then implement and
 rehearse an explicit continuation across the old and new helper versions.
