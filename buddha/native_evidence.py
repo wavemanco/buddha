@@ -54,12 +54,7 @@ def _adopt_capture(source: _Capture, target: _Capture) -> None:
     """Retain all consumed bytes/sidecars under the receiving aggregate limit."""
     if type(source) is not _Capture or type(target) is not _Capture or source is target:
         raise NativeEvidenceError("capture adoption needs two original bounded observations")
-    source.finish()
-    for path in source.databases:
-        target.database(path)
-    for path, raw in source.raw.items():
-        if target.read(path, len(raw)) != raw:
-            raise NativeEvidenceError("nested observation consumed conflicting original bytes")
+    target.adopt(source)
 
 
 class NativeEvidence:
@@ -109,6 +104,12 @@ class NativeEvidence:
 
     def finish(self) -> dict[str, str]:
         result = self.capture.finish()
+        for capture in self._retained:
+            capture.finish()
+        return result
+
+    def fingerprints(self) -> dict[str, str]:
+        result = self.capture.fingerprints()
         for capture in self._retained:
             capture.finish()
         return result

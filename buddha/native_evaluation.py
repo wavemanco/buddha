@@ -326,11 +326,9 @@ def _read_baseline_generation(value: object, authority_path: Path) -> _Generatio
         _object(selection.to_record()["components"])["agent"]
     ).get(entrypoint):
         raise EvaluationError("source generation program identity differs")
-    capture.finish()
+    fingerprints = capture.fingerprints()
     protected = {
-        path: hashlib.sha256(raw).hexdigest()
-        for path, raw in capture.raw.items()
-        if path != authority_path
+        Path(path): digest for path, digest in fingerprints.items() if Path(path) != authority_path
     }
     return _Generation(tasks, answers, answers_path, protected, _object(funding["config"]))
 
