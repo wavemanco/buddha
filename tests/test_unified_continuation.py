@@ -23,7 +23,7 @@ def ref(path):
     return {"path": str(path), "sha256": sha(path.read_bytes())}
 
 
-def old_fixture(destination, *, setup_only=False, starting_count=2):
+def old_fixture(destination, *, setup_only=False, starting_count=2, opportunities=1):
     """Run the original preparation in its own real installed package."""
     import test_baseline as raw_fixtures
     import test_improver_launch as primary_fixtures
@@ -54,12 +54,15 @@ def old_fixture(destination, *, setup_only=False, starting_count=2):
         primary.setUp()
         development = json.loads(Path(primary.definition["development"]["path"]).read_bytes())
         development["starts"] = copy.deepcopy(primary.f.f.starts[:starting_count])
+        development["descendant_opportunities"] = opportunities
+        development["selection"]["finalist_iteration"] = opportunities
         primary.f.f.recompute_limits(development)
         primary.definition["development"] = primary.f.write(
             "selected-start-development.json", development
         )
         analysis = copy.deepcopy(primary.f.plan)
         analysis["counts"]["starts"] = starting_count
+        analysis["counts"]["m"] = opportunities
         primary.definition["analysis_plan"] = primary.f.write(
             "selected-start-analysis.json", analysis
         )
@@ -569,6 +572,7 @@ class UnifiedContinuationTests(unittest.TestCase):
                     misplaced.unlink(missing_ok=True)
                     self.path.write_bytes(original)
             changes = [
+                cut | {"entries": [name for name in cut["entries"] if name != "common"]},
                 cut | {"witness": str(witness.with_name("WITNESS"))},
                 cut | {"position": cut["position"] | {"start": 1}},
                 cut | {"owners": cut["owners"] + [cut["owners"][0]]},
