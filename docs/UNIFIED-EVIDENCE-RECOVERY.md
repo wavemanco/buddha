@@ -205,6 +205,22 @@ decoded and can be edited independently. There is no new cache. This reduces
 specified repeated work; it does not remove the source-version and original-
 owner checks required for a continuation.
 
+### Counted-child witness rehearsal
+
+The next rehearsal reaches a measured child whose parent record has a real lineage link. Its original eleven owners are inactive. The changed host then completes both normal witness stages: ask that child to produce another child, and check that the returned child can generate answers.
+
+Each stage is interrupted after its supplied reply is saved. Restarting keeps the same owner, operation, raw manifest and recorded cost, and sends no duplicate request. The saved witness passes. A later check now reports completion, and another advance returns the saved result without changing the report or creating the next study decision. The completion result remains behind the ordinary leases and fresh file/grant checks.
+
+The counted-cell check passes in505.555seconds, and five earlier continuation methods pass in113.235seconds. The earlier444.913second failure exposed the missing completion-summary field; it is retained. This uses two actual host roots/processes with supplied workers and HTTPS replies. It does not execute original private programs, real containers or paid calls, and it does not yet resume the whole development study. [Bound delivery](conformance/cell-witness-continuation-delivery.json).
+
+Optional developer check, from a checkout containing this slice:
+
+```powershell
+python -B -m unittest discover -s tests -p test_cell_witness_continuation.py -v
+```
+
+This runs the one offline counted-child rehearsal and creates disposable test files. It spends no API money and starts no real containers. It runs once in the same PowerShell window and can take about nine minutes on the measured machine; Ctrl+C stops it. No separate window is needed.
+
 ## What must happen before another paid start
 
 The first [executed continuation mechanism](conformance/witness-continuation-delivery.json)
