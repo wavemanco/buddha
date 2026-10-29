@@ -294,6 +294,33 @@ observed Windows machine. Use a separate PowerShell window if you want to keep
 it visible; Ctrl+C stops it. The ordinary test cleans up its temporary folders;
 the retained external diagnostic observer is recorded separately.
 
+## Continuing the full comparison
+
+The full-trial bridge reuses the existing coordinated launcher for remaining development, source freeze, sealed final assessment, both plain sampling references and comparison publication. Historical approval files keep their actual original paths and hashes. New owners receive a separate, complete execution-control map. Numerical/selection modules and the official benchmark remain fixed. The original launch hashes still identify the API-key reviews, and the original plain-plan hash still identifies its grant.
+
+The coordinator freshly rejoins the continuation evidence under its workspace lease before key entry and again before the first phase starts. New trial owners also bind the cut reference. Stopped and cancelled terminal records retain the validated continuation hash. The `--continuation` flag explicitly selects this route; reading a saved reference never activates it automatically.
+
+The complete offline trial rehearsal passed on the earlier repair cut. The optimized source has separate focused checks and a successful check against the actual saved history. Its exact published-source CI remains pending; the [delivery record](conformance/trial-continuation-delivery.json) keeps those source cuts and limits separate.
+
+The actual-history check reconciles 174 inactive work units and 604 recorded calls: $4.845090 spent, zero held and no new work units. All 3,277 protected original file hashes and the trial's 2,149-file list remain unchanged. This was a passive inspection; it made no provider calls and did not resume the experiment.
+
+Wait for the exact checked handoff and command before starting paid work. The existing allocation is unchanged; unused money from earlier closed experiments is not transferred into it.
+
+Optional developer checks, from a checkout containing this slice:
+
+```powershell
+python -B -m unittest discover -s tests -p test_phase_continuation.py -v
+python -B -m unittest discover -s tests -p test_trial_freshness.py -v
+```
+
+The first command checks historical versus executing file bindings. The second checks late evidence changes and stopped/cancelled operator records. Both run once using disposable files and synthetic observations, spend no API money and start no real containers. Use the same PowerShell window; Ctrl+C stops either command. These focused checks do not prove the whole comparison completes.
+
+```powershell
+python -B -m unittest discover -s tests -p test_trial_continuation.py -v
+```
+
+This optional developer command rehearses recovery through development, final assessment, both plain-model modes and saved-result replay. It uses temporary records and supplied replies, spends no API money and starts no real containers. It runs once in the same PowerShell window and can take hours; Ctrl+C stops it. It does not resume the original paid run.
+
 ## What must happen before another paid start
 
 The first [executed continuation mechanism](conformance/witness-continuation-delivery.json)

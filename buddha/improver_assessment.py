@@ -211,13 +211,18 @@ def _definition(raw: bytes, runtime: str, *, active: bool = True) -> dict[str, A
         "controls": controls,
         "active": active,
     }
+    current_consumers = _source_hashes()
     if (
         method["counts"] != counts
         or method["projection_release_sha256"] != tasks.release_sha256
         or method["improvement_rule_sha256"] != rule.fingerprint()
         or method["population_sha256"] != pipeline._sha(_population(state))
-        or method["analyzer_sources"] != improver_analysis._source_hashes()
-        or record["consumer_sources"] != _source_hashes()
+        # The closure includes repaired I/O helpers. The checked phase scope
+        # preserves their original references and separately fixes numerical code.
+        or method["analyzer_sources"]
+        != launch._historical_sources(improver_analysis._source_hashes(), relative=True)
+        or record["consumer_sources"]
+        != launch._historical_sources(current_consumers, relative=True)
     ):
         raise ImproverAssessmentError(
             "prospective method, population, rule or source closure changed"
@@ -245,7 +250,12 @@ def _definition(raw: bytes, runtime: str, *, active: bool = True) -> dict[str, A
     }:
         raise ImproverAssessmentError("original reserves must cover the complete prospective grid")
     package = Path(__file__).absolute().parent.parent
-    consumers = {package / name: _digest(pin) for name, pin in record["consumer_sources"].items()}
+    consumers = {
+        Path(path): _digest(pin)
+        for path, pin in launch._historical_sources(
+            {str(package / name): pin for name, pin in current_consumers.items()}
+        ).items()
+    }
     improver_study._bind_controls(controls, consumers)
     # A producer also consumed by a selected runtime component remains required.
     consumed_roots = [
@@ -585,6 +595,7 @@ def _freeze_data(
     count = len(state["screens"]) * state["development"]["repetitions"]
     selected_count = sum(row["source"] is not None for row in slots)
     cells_per_arm = len(state["record"]["final_ids"]) * state["record"]["sealed_repetitions"]
+    controls = launch._continued_phase_controls(root, "final", controls)
     terms, snapshot = launch._snapshot(final._phase_authority(state, "final"))
     launch._finish_snapshot(final._phase_authority(state, "final"), snapshot)
     return {

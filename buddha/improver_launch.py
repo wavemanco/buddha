@@ -165,7 +165,13 @@ def check_launch(path: Path, *, expected_sha256: str) -> dict[str, object]:
                 if source == self_path:
                     raise ImproverLaunchError("source inventory references itself")
                 improver_study._bind_controls(bindings, {source: _digest(digest)})
-        if any(str(source) not in _object(record["source_sha256"]) for source in _sources()):
+        required_sources = common._historical_sources(
+            {str(source): file_hash(source) for source in _sources()}
+        )
+        if any(
+            _object(record["source_sha256"]).get(source) != pin
+            for source, pin in required_sources.items()
+        ):
             raise ImproverLaunchError("installed launch helper is not reviewed")
         declaration = state["declaration"]
         improver_study._bind_controls(bindings, {declaration: state["declared_sha256"]})

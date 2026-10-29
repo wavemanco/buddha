@@ -110,7 +110,12 @@ def _configuration(path: Path, digest: str) -> tuple[dict[str, Any], dict[Path, 
     if not 1 <= len(pins) <= 1023:
         raise UnifiedLaunchError("combined source inventory exceeds its boundary")
     controls = {common._path(p): _digest(d) for p, d in pins.items()}
-    if path in controls or any(controls.get(source) != file_hash(source) for source in _sources()):
+    required_sources = common._historical_sources(
+        {str(source): file_hash(source) for source in _sources()}
+    )
+    if path in controls or any(
+        controls.get(common._path(source)) != pin for source, pin in required_sources.items()
+    ):
         raise UnifiedLaunchError("combined runner sources are not reviewed")
     for source, expected in controls.items():
         if file_hash(source, max_bytes=256 * 1024**2) != expected:
@@ -301,7 +306,12 @@ def _check(path: Path, expected_sha256: str, *, owned_lock: bool = False) -> dic
     return {
         "format": "buddha.unified-launch-check.v1",
         "record": record,
-        "controls": {str(p): d for p, d in controls.items()},
+        "controls": {
+            str(p): d
+            for p, d in common._continued_phase_controls(
+                common._path(primary["directory"]), "plain", controls
+            ).items()
+        },
         "funding": funded,
         "primary": primary,
         "references": raw,
@@ -479,6 +489,7 @@ def launch(
             phase[0] = checked["phase"]
             if checked["stop_code"] is not None:
                 return partial(checked["stop_code"])
+            common._phase_before_start(common._path(checked["primary"]["directory"]))
             if phase[0] == "comparison":
                 with common._heartbeat(notice, phase, [None], heartbeat_seconds):
                     return _publication(checked, expected_sha256)
@@ -511,6 +522,7 @@ def launch(
                 repeated = inspect(owned=True)
                 if not _stable(checked, repeated):
                     raise UnifiedLaunchError("original comparison changed during key entry")
+                common._phase_before_start(common._path(checked["primary"]["directory"]))
                 phase[0] = checked["phase"]
                 active = transport or RawHTTPTransport(allow_paid=True, timeout_seconds=timeout)
                 if checked["primary"]["state"] != "complete":

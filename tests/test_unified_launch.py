@@ -299,6 +299,7 @@ class UnifiedLaunchLifecycleTests(unittest.TestCase):
                 "terms": copy.deepcopy(self.initial_terms),
             },
             "primary": {
+                "directory": str(self.primary_root),
                 "state": self.primary_state,
                 "account_scope": "synthetic shared account assertion",
                 "timeout_seconds": 30,
@@ -671,6 +672,7 @@ class UnifiedLaunchLifecycleTests(unittest.TestCase):
         controls = {Path(path): digest for path, digest in self.record["source_sha256"].items()}
         controls[self.path] = self.digest
         primary = {
+            "directory": str(self.primary_root),
             "state": primary_state,
             "stop_code": None,
             "account_scope": "synthetic shared account assertion",

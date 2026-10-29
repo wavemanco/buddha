@@ -12,6 +12,7 @@ from buddha import (
     policy_results,
     validation_analysis,
 )
+from buddha import launch_common as common
 from buddha import native_pipeline as pipeline
 from buddha import noveltybench_results as projection
 from buddha import validation_study as study
@@ -52,7 +53,7 @@ def _plan(raw: bytes) -> dict[str, Any]:
     if (
         record["format"] != "buddha.plain-comparison-plan.v1"
         or record["method"] != _METHOD
-        or record["consumer_sources"] != _source_hashes()
+        or record["consumer_sources"] != common._historical_sources(_source_hashes())
     ):
         raise PlainComparisonError("unsupported or changed prospective comparison method")
     trial = pipeline._absolute(record["trial"])
