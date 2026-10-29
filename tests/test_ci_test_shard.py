@@ -11,6 +11,7 @@ import time
 import unittest
 from pathlib import Path
 from types import SimpleNamespace
+from unittest.mock import call, patch
 
 
 def case(name, events):
@@ -25,6 +26,9 @@ def case(name, events):
 
 
 class CiTestShardTests(unittest.TestCase):
+    IDLE_SECONDS = 5.0
+    STARTUP_DELAY = 1.0
+
     def setUp(self):
         self.api = importlib.import_module("ci_test_shard")
 
@@ -46,12 +50,16 @@ class CiTestShardTests(unittest.TestCase):
         cases = [case("probe." + str(index), []) for index in range(40)]
         cases.append(case(cases[1].id(), []))
         self.assertEqual(self.api._partition(cases, 1, None), [list(range(41))])
-        groups = self.api._partition(cases, 4, cases[0].id())
-        self.assertEqual(groups[0], [0])
-        self.assertEqual(sorted(index for group in groups for index in group), list(range(41)))
-        self.assertTrue(all(group == sorted(group) and group for group in groups))
-        self.assertTrue(any(1 in group and 40 in group for group in groups))
-        self.assertEqual(groups, self.api._partition(cases, 4, cases[0].id()))
+        for count in (4, 5):
+            with self.subTest(count=count):
+                groups = self.api._partition(cases, count, cases[0].id())
+                self.assertEqual(groups[0], [0])
+                self.assertEqual(
+                    sorted(index for group in groups for index in group), list(range(41))
+                )
+                self.assertTrue(all(group == sorted(group) and group for group in groups))
+                self.assertTrue(any(1 in group and 40 in group for group in groups))
+                self.assertEqual(groups, self.api._partition(cases, count, cases[0].id()))
         for isolate in ("missing", cases[1].id()):
             with self.assertRaises(ValueError):
                 self.api._partition(cases, 4, isolate)
@@ -72,7 +80,7 @@ class CiTestShardTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.api._partition([], 1, None)
 
-    def command(self, root, *args, seed="1"):
+    def command(self, root, *args, seed="1", timeout=12):
         allowed = (
             "SYSTEMROOT",
             "WINDIR",
@@ -96,7 +104,20 @@ class CiTestShardTests(unittest.TestCase):
             capture_output=True,
             encoding="utf-8",
             check=False,
-            timeout=12,
+            timeout=timeout,
+        )
+
+    def watchdog_command(self, root):
+        # Startup/discovery shares the real idle window; leave CI scheduling room.
+        return self.command(
+            root,
+            "--count",
+            "1",
+            "--index",
+            "0",
+            "--idle-seconds",
+            str(self.IDLE_SECONDS),
+            timeout=30,
         )
 
     def fixture(self, root, *, body="pass", setup="pass"):
@@ -159,14 +180,14 @@ class CiTestShardTests(unittest.TestCase):
             self.assertFalse((root / "module-setup").exists())
 
     def test_each_of_four_shards_executes_exactly_its_manifest_in_original_order(self):
-        for index in range(4):
-            with self.subTest(index=index), tempfile.TemporaryDirectory() as temporary:
+        for count, index in ((size, position) for size in (4, 5) for position in range(size)):
+            with self.subTest(count=count, index=index), tempfile.TemporaryDirectory() as temporary:
                 root = Path(temporary)
                 self.fixture(root)
                 result = self.command(
                     root,
                     "--count",
-                    "4",
+                    str(count),
                     "--index",
                     str(index),
                     "--isolate",
@@ -197,6 +218,65 @@ class CiTestShardTests(unittest.TestCase):
             self.assertTrue((root / "body").exists())
             self.assertEqual((root / "setup").read_text(), "S")
             self.assertEqual((root / "cleanup").read_text(), "C")
+        self.check_watchdog_directory_cleanup()
+
+    def check_watchdog_directory_cleanup(self):
+        for platform, code, persistent, body_error in (
+            ("win32", 32, False, False),
+            ("win32", 32, True, False),
+            ("linux", 32, False, False),
+            ("win32", 5, False, False),
+            ("win32", 32, False, True),
+            ("win32", 32, True, True),
+        ):
+            with self.subTest(
+                cleanup_platform=platform, code=code, persistent=persistent, body_error=body_error
+            ):
+                failure = PermissionError("synthetic cleanup sharing violation")
+                failure.winerror = code
+                original = RuntimeError("original body failure")
+                calls = []
+
+                class Directory:
+                    def __init__(self, **kwargs):
+                        self.name = "unused-synthetic-owned-directory"
+
+                    def __enter__(self):
+                        return self.name
+
+                    def __exit__(self, *args):
+                        self.cleanup()
+
+                    def cleanup(self, calls=calls, persistent=persistent, failure=failure):
+                        calls.append("cleanup")
+                        if persistent or len(calls) == 1:
+                            raise failure
+
+                caught = None
+                with (
+                    patch.object(self.api.tempfile, "TemporaryDirectory", Directory),
+                    patch.object(self.api.sys, "platform", platform),
+                    patch.object(self.api.time, "monotonic", side_effect=(0.0, 0.0, 10.0)),
+                    patch.object(self.api.time, "sleep") as sleep,
+                ):
+                    factory = getattr(
+                        self.api, "_watch_directory", self.api.tempfile.TemporaryDirectory
+                    )
+                    try:
+                        with factory():
+                            if body_error:
+                                raise original
+                    except (PermissionError, RuntimeError) as error:
+                        caught = error
+                retries = platform == "win32" and code == 32
+                self.assertEqual(len(calls), 2 if retries else 1)
+                self.assertEqual(sleep.call_args_list, [call(0.05)] if retries else [])
+                if not retries or persistent:
+                    self.assertIs(caught, failure)
+                    if body_error:
+                        self.assertIs(failure.__context__, original)
+                else:
+                    self.assertIs(caught, original if body_error else None)
 
     def test_failures_errors_and_early_stop_return_nonzero_without_weakening_unittest(self):
         for body, setup in (
@@ -246,14 +326,17 @@ class CiTestShardTests(unittest.TestCase):
             self.fixture(
                 root,
                 body=(
-                    "import time\nfor _ in range(20):\n"
+                    f"import time\ntime.sleep({self.STARTUP_DELAY})\n"
+                    "Path('noise-entered').write_text('entered')\n"
+                    f"for _ in range({int(self.IDLE_SECONDS * 20)}):\n"
                     "    print('ordinary noise', flush=True)\n    time.sleep(0.1)"
                 ),
             )
-            result = self.command(root, "--count", "1", "--index", "0", "--idle-seconds", "0.5")
+            result = self.watchdog_command(root)
             self.assertEqual(result.returncode, 124, result.stderr)
             self.assertIn('"reason": "no_genuine_test_progress"', result.stderr)
             self.assertIn('"status": "incomplete"', result.stderr)
+            self.assertTrue((root / "noise-entered").is_file())
             self.assertIn("ordinary noise", result.stdout)
 
     def test_completed_subtests_keep_the_idle_watchdog_alive_without_fake_heartbeats(self):
@@ -262,14 +345,19 @@ class CiTestShardTests(unittest.TestCase):
             self.fixture(
                 root,
                 body=(
-                    "import time\nfor index in range(10):\n"
-                    "    with self.subTest(index=index):\n        time.sleep(0.18)"
+                    f"import time\ntime.sleep({self.STARTUP_DELAY})\n"
+                    "Path('subtests-entered').write_text('entered')\n"
+                    "for index in range(12):\n"
+                    "    with self.subTest(index=index):\n        time.sleep(0.5)\n"
+                    "Path('subtests-complete').write_text('complete')"
                 ),
             )
             started = time.monotonic()
-            result = self.command(root, "--count", "1", "--index", "0", "--idle-seconds", "0.8")
+            result = self.watchdog_command(root)
             self.assertEqual(result.returncode, 0, result.stderr)
-            self.assertGreater(time.monotonic() - started, 1.5)
+            self.assertGreater(time.monotonic() - started, self.IDLE_SECONDS)
+            self.assertTrue((root / "subtests-entered").is_file())
+            self.assertTrue((root / "subtests-complete").is_file())
             self.assertIn('"kind": "subtest_success"', result.stderr)
             self.assertNotIn('"status": "incomplete"', result.stderr)
 
@@ -280,19 +368,27 @@ class CiTestShardTests(unittest.TestCase):
                 self.fixture(root)
                 path = root / "tests/test_probe.py"
                 original = path.read_text(encoding="utf-8")
+                entered = f"Path({phase!r}).write_text('entered')"
+                pause = f"import time; time.sleep({self.IDLE_SECONDS * 2})"
                 if phase == "discovery":
-                    path.write_text("import time; time.sleep(2)\n" + original, encoding="utf-8")
+                    path.write_text(
+                        f"from pathlib import Path\n{entered}\n{pause}\n" + original,
+                        encoding="utf-8",
+                    )
                 else:
                     path.write_text(
                         original.replace(
                             "p = Path('setup')",
-                            "import time; time.sleep(2)\n        p = Path('setup')",
+                            f"{entered}\n        {pause}\n        p = Path('setup')",
                             1,
                         ),
                         encoding="utf-8",
                     )
-                result = self.command(root, "--count", "1", "--index", "0", "--idle-seconds", "0.5")
+                result = self.watchdog_command(root)
                 self.assertEqual(result.returncode, 124, result.stderr)
+                self.assertIn('"reason": "no_genuine_test_progress"', result.stderr)
+                self.assertIn('"status": "incomplete"', result.stderr)
+                self.assertTrue((root / phase).is_file())
                 self.assertFalse((root / "body").exists())
 
     def test_idle_timeout_stops_the_owned_descendant_process_tree(self):
@@ -300,7 +396,7 @@ class CiTestShardTests(unittest.TestCase):
             root = Path(temporary)
             child = (
                 "import time\nfrom pathlib import Path\n"
-                "for index in range(60):\n"
+                f"for index in range({int(self.IDLE_SECONDS * 80)}):\n"
                 "    Path('descendant').write_text(str(index))\n"
                 "    time.sleep(0.05)\n"
             )
@@ -309,13 +405,26 @@ class CiTestShardTests(unittest.TestCase):
                 f"subprocess.Popen([sys.executable, '-c', {child!r}], "
                 "stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)\n"
                 "while not Path('descendant').exists(): time.sleep(0.01)\n"
-                "time.sleep(2)"
+                "Path('descendant-entered').write_text('entered')\n"
+                f"time.sleep({self.IDLE_SECONDS * 2})"
             )
             self.fixture(root, body=body)
             started = time.monotonic()
-            result = self.command(root, "--count", "1", "--index", "0", "--idle-seconds", "0.8")
+            result = self.watchdog_command(root)
             self.assertEqual(result.returncode, 124, result.stderr)
-            self.assertLess(time.monotonic() - started, 2.5)
+            self.assertIn('"reason": "no_genuine_test_progress"', result.stderr)
+            self.assertIn('"status": "incomplete"', result.stderr)
+            marker = '{"format": "buddha.ci-test-watchdog.v1"'
+            records = [
+                json.loads(line[line.index(marker) :])
+                for line in result.stderr.splitlines()
+                if marker in line
+            ]
+            self.assertEqual(len(records), 1)
+            self.assertLess(records[0]["seconds_without_progress"], self.IDLE_SECONDS * 2)
+            self.assertLess(time.monotonic() - started, self.IDLE_SECONDS * 2 + 10)
+            self.assertTrue((root / "descendant-entered").is_file())
+            self.assertTrue((root / "descendant").is_file())
             before = (root / "descendant").read_bytes()
             time.sleep(0.25)
             self.assertEqual((root / "descendant").read_bytes(), before)

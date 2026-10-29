@@ -1,0 +1,311 @@
+{
+  "format": "buddha.ci-idle-fixture-timing-delivery.v1",
+  "status": "complete_at_local_ci_reliability_scope",
+  "spec": [
+    "DESIGN 9",
+    "DESIGN 10",
+    "User: stop after60minutes without genuine test progress"
+  ],
+  "base_commit": "e62515c5e88a433a424cf9b357f6fc51f5cbc680",
+  "code_commits": {
+    "timing": "c129ce512b5e5a7cade4d5254923d8a0001ba470",
+    "workflow": "d3a8660e159b0128df4c901fd1182909e68abf96",
+    "cleanup": "2440857a2d8cd5d8d3a5e2dfb85bbcd9e03a9415",
+    "termination_timing_assertion": "994c8d5fe372544b1fcd5c7759ff7c5c2bb4237e"
+  },
+  "changed_code": [
+    "tests/test_ci_test_shard.py",
+    ".github/workflows/ci.yml",
+    "ci_test_shard.py"
+  ],
+  "source_sha256": {
+    "tests/test_ci_test_shard.py": "7a6a42984e0b24ec8d8717d7d63ad4a98a5cb2b8d175437626ac9c071afc6f84",
+    "ci_test_shard.py": "1f0399d5ab9a923fb1b9bb90639ac48c5d0e79bdb19e64e38197974edb34daec",
+    ".github/workflows/ci.yml": "ac71700049724880f2e1a7b6ad41538e4d4ee7b89c43de678346684f5baaa4c7"
+  },
+  "ancestor_failure": {
+    "pr": 177,
+    "run_id": 40798182298,
+    "job_id": 123199625845,
+    "failed_method": "test_idle_watchdog_does_not_count_arbitrary_output_as_test_progress",
+    "assertion": "ordinary noise missing",
+    "nested_exit": 124,
+    "outer_exit": 1,
+    "reason": "no_genuine_test_progress",
+    "methods": 709,
+    "failures": 1,
+    "skipped": 1,
+    "seconds": 13167.681,
+    "receipt": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\pr177-windows-failure-20261029-v1\\receipt.json",
+    "receipt_sha256": "bc748b1d546ec90c6a056c92fcf7995e7da1a2d163c8a6f891ff28c0d4e953f0",
+    "limit": "Half-second window may expire before first print. Exact hosted scheduling point was not observed."
+  },
+  "timing": {
+    "synthetic_idle_seconds": 5,
+    "outer_timeout_seconds": 30,
+    "explicit_startup_delay_seconds": 1,
+    "noise_discovery_class_parent_seconds": 10,
+    "descendant_seconds": 20,
+    "genuine_subtests": 12,
+    "subtest_gap_seconds": 0.5,
+    "real_subtest_span_seconds": 6,
+    "descendant_update_seconds": 0.05,
+    "post_stop_observation_seconds": 0.25,
+    "entered_markers_and_all_prior_assertions": true,
+    "production_idle_seconds_unchanged": 3600,
+    "emitted_watchdog_stop_seconds_max_exclusive": 10,
+    "total_command_seconds_max_exclusive": 20
+  },
+  "distinct_evidence": [
+    {
+      "stage": "unchanged-original-noise-RED",
+      "methods": 1,
+      "failures": 1,
+      "runner_seconds": 0.6865963998716325,
+      "meaning": "External1second body delay reproduces original assertion, not a missing API."
+    },
+    {
+      "stage": "timing-only-GREEN",
+      "methods": 22,
+      "failures": 0,
+      "unittest_seconds": 39.618,
+      "runner_seconds": 39.64619869994931
+    },
+    {
+      "stage": "count5-before-cleanup-fix-FAIL",
+      "methods": 22,
+      "failures": 1,
+      "unittest_seconds": 43.281,
+      "runner_seconds": 43.30292190006003,
+      "meaning": "Correct timeout record followed by WinError32 deleting owned progress.jsonl."
+    },
+    {
+      "stage": "unchanged-helper-diagnostic",
+      "seconds": 5.17743010004051,
+      "exit": 124,
+      "meaning": "DELETE-access check reports error32 immediately after worker wait(exit1), then succeeds before original cleanup; Restart Manager reports no holder PID. Instrumentation adds delay; not an acceptance test or holder attribution."
+    },
+    {
+      "stage": "cleanup-RED",
+      "methods": 1,
+      "failures": 4,
+      "seconds": 0.808,
+      "meaning": "Six subcases in an existing method; original TemporaryDirectory fallback produces actual retry failures."
+    },
+    {
+      "stage": "cleanup-GREEN",
+      "methods": 1,
+      "failures": 0,
+      "seconds": 0.592
+    },
+    {
+      "stage": "cleanup-repaired-cut-GREEN",
+      "methods": 22,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "unittest_seconds": 44.133,
+      "runner_seconds": 44.21555750002153,
+      "source_stable": true
+    },
+    {
+      "stage": "final-termination-bound-aligned-GREEN",
+      "methods": 22,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "unittest_seconds": 41.949,
+      "runner_seconds": 42.05475259991363,
+      "source_stable": true
+    }
+  ],
+  "cleanup": {
+    "scope": "Only newly owned watchdog TemporaryDirectory.cleanup",
+    "retry_platform": "win32",
+    "retry_winerror": 32,
+    "interval_seconds": 0.05,
+    "deadline_seconds": 10,
+    "other_or_exhausted_errors": "re-raised",
+    "body_exception": "Preserved after transient cleanup; retained as context if cleanup exhausts.",
+    "ignored_failures": false,
+    "six_subcases": [
+      "transient32",
+      "persistent32",
+      "other OS",
+      "other code",
+      "body failure with transient32",
+      "body failure with persistent32"
+    ]
+  },
+  "workflow": {
+    "count": 5,
+    "indices": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "jobs_both_OS": 10,
+    "isolate_and_idle_unchanged": true,
+    "exact_two_literal_changes": true,
+    "workload_receipt": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\ci-workload-partition-assessment-v1.json",
+    "workload_receipt_sha256": "f589219bcea8220af3ea63028509edbdfbf2766cb881a530045d299a1c7cbc49",
+    "prior_occurrence_census": 2135,
+    "projected_counts": [
+      1,
+      558,
+      492,
+      540,
+      544
+    ],
+    "projected_assignment_sha256": "1c66140f3dd80cf29ba8806afffc450ae17edeb2bee15d6e902f731badaf0468",
+    "Finite_Trial_Study_groups": [
+      0,
+      2,
+      4
+    ],
+    "redistributed_prior_Linux_max_seconds": 3579.016,
+    "original_Linux_max_seconds": 4430.195,
+    "limit": "Assignment arithmetic and redistribution of prior completion intervals, not measured new configuration runtime. Repeated class/module fixtures may change costs."
+  },
+  "checks": {
+    "existing_methods": 22,
+    "method_names_and_order_preserved": true,
+    "partition_counts_tested": [
+      4,
+      5
+    ],
+    "real_synthetic_shard_executions": 9,
+    "six_cleanup_subcases_in_existing_method": true,
+    "raw_application_pins_equal": 90,
+    "ruff": "pass",
+    "format": "pass",
+    "configured_strict_mypy": "pass",
+    "configured_bandit": "pass",
+    "external_compile_files": 2,
+    "diff_check": "pass",
+    "independent_reviews": "Parent and source-only reviewers pass; reviewer execution/test authorship not claimed.",
+    "dependency_audit": "Not rerun; manifests unchanged.",
+    "quality_cut_note": "Helper mypy/Bandit remain at identical1f0399d5 bytes. Final changed-test Ruff/format/external compile pass; full helper22 pass at final7a6a4298 test bytes.",
+    "raw_public_source_superset_files_equal": 140,
+    "application_pins_are_subset_of_preserved_public_sources": true
+  },
+  "roadmap": {
+    "prior_revision": 187,
+    "prior_sha256": "4497ccff9898825e2e37257149fe131f5a26dbf80d51699acb3c4cc445bab07b",
+    "prior_full_raw_rows_preserved": 187,
+    "terminators_preserved": true,
+    "original_acceptance_tails_preserved": 7
+  },
+  "artifacts": {
+    "RED.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-idle-fixture-timing-20261029-v1\\RED.json",
+      "sha256": "2e106be9c1cac4dfabf6c6ba8324a581ee2ef1297182ba7bd16736b89556900c"
+    },
+    "RED.log": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-idle-fixture-timing-20261029-v1\\RED.log",
+      "sha256": "fe3553730d461b7006445932bf77d6ab73755f9d9d07a41137c72e74653fef55"
+    },
+    "GREEN.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-idle-fixture-timing-20261029-v1\\GREEN.json",
+      "sha256": "914c37eea0780fb3b431e81c58a125651d1d1171a4fafdd5ce73e017310dbdef"
+    },
+    "GREEN.log": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-idle-fixture-timing-20261029-v1\\GREEN.log",
+      "sha256": "20c96d3bcb91f59125baffbea5c0f16446e5e4abcea6a3c950b311727ce84349"
+    },
+    "FINAL-GREEN.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-idle-fixture-timing-20261029-v1\\FINAL-GREEN.json",
+      "sha256": "5f9f3438c117c16cbc8a7f8640068328c753b37549cafb8643c107f8406100c8"
+    },
+    "FINAL-GREEN.log": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-idle-fixture-timing-20261029-v1\\FINAL-GREEN.log",
+      "sha256": "165160c0ac37c9e21ee532510472d84deab8bc2302bcd05386828e9264100b76"
+    },
+    "final-check-failure.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-idle-fixture-timing-20261029-v1\\final-check-failure.json",
+      "sha256": "e6af63984ba6684a1adc8a18a3dcca97e2c401a7b8e3e8401bbb07e789659770"
+    },
+    "cleanup-diagnostic.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-idle-fixture-timing-20261029-v1\\cleanup-diagnostic.json",
+      "sha256": "d4a11f5693c1ce8aa6bf16f585932e3dc97006528d604cc71d922971a8b1ecd0"
+    },
+    "cleanup-diagnostic.stderr": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-idle-fixture-timing-20261029-v1\\cleanup-diagnostic.stderr",
+      "sha256": "304e5484333bd756e323c0a6e6635eef056612e07bc3e90438a6e47b0120ca6a"
+    },
+    "CLEANUP-RED.log": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-idle-fixture-timing-20261029-v1\\CLEANUP-RED.log",
+      "sha256": "87f653c70f3ba4c0c6328f4e0f10771bd520ce1a12e657f479cfef7d177767f6"
+    },
+    "CLEANUP-GREEN.log": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-idle-fixture-timing-20261029-v1\\CLEANUP-GREEN.log",
+      "sha256": "b1ecec07cff436c35161ea92dcf6daf77eeac8fa7b4bb7299ab78e48ec201ea0"
+    },
+    "REPAIRED-GREEN.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-idle-fixture-timing-20261029-v1\\REPAIRED-GREEN.json",
+      "sha256": "a4a4b23985a1b53c04975b104d1969f0c73071e5ec853e3ab4d5ae2154ab1e74"
+    },
+    "REPAIRED-GREEN.log": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-idle-fixture-timing-20261029-v1\\REPAIRED-GREEN.log",
+      "sha256": "187ecd06594d7b0c25baca7fde20fffc2ff6887d79bc3936c1f592d95e6511f4"
+    },
+    "repaired-quality.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-idle-fixture-timing-20261029-v1\\repaired-quality.json",
+      "sha256": "3a375ab86b3ec0c5bc4c09126c13ad06653afbfc4820c016ee86fb1876c88e42"
+    },
+    "repaired-preservation.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-idle-fixture-timing-20261029-v1\\repaired-preservation.json",
+      "sha256": "4653cbc02045c8b41532c82db5616723a2131b2adda6ecbb4f636b163284e143"
+    },
+    "ACCEPTED-GREEN.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-idle-fixture-timing-20261029-v1\\ACCEPTED-GREEN.json",
+      "sha256": "de82f533d832717e4f93b95deea42f5b1e1abdae9ebef79c7af0ef3e57f1336e"
+    },
+    "ACCEPTED-GREEN.log": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-idle-fixture-timing-20261029-v1\\ACCEPTED-GREEN.log",
+      "sha256": "b380c96807b66626c378ab8ecaf420debab301a8e1fb451288e46e77274bb8dc"
+    },
+    "accepted-quality.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-idle-fixture-timing-20261029-v1\\accepted-quality.json",
+      "sha256": "ec873ccbc7ef883ad1450ddfbeb509b563172fb1524b87998b0cd455af9c9c01"
+    },
+    "root-public-pins-review.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-idle-fixture-timing-20261029-v1\\root-public-pins-review.json",
+      "sha256": "21ffb39c8c870aabbb9d9fdd4cff0b05de8b26c5c144043feee795c06a7b4de6"
+    }
+  },
+  "commands": [
+    {
+      "command": "python -m unittest discover -s tests -p test_ci_test_shard.py -v",
+      "function": "Runs22 helper tests once in this checkout/window with temporary programs. No model calls or containers. Ctrl+C stops it."
+    },
+    {
+      "command": "$env:PYTHONPATH='tests'; python -B -m unittest test_ci_test_shard.CiTestShardTests.test_normal_class_setup_cleanup_and_class_skip_remain_successful -v",
+      "function": "Sets lookup to tests in this developer PowerShell window, then runs one test once. Close the window to discard the lookup setting. No paid calls; Ctrl+C stops it."
+    },
+    {
+      "command": "python -B -m ruff check --no-cache ci_test_shard.py tests/test_ci_test_shard.py",
+      "function": "Checks helper/test style once without changing files."
+    },
+    {
+      "command": "python -B -m ruff format --check ci_test_shard.py tests/test_ci_test_shard.py",
+      "function": "Checks formatting once without changing files."
+    },
+    {
+      "command": "python -B -m mypy --strict --cache-dir OUT/mypy-cache ci_test_shard.py",
+      "function": "Checks configured helper types once with an external cache; OUT denotes the recorded check folder."
+    },
+    {
+      "command": "python -B -m bandit -q ci_test_shard.py",
+      "function": "Scans the helper for common security mistakes once without changing source."
+    }
+  ],
+  "limits": [
+    "Focused localCI maintenance only; no full application suite or current-head hosted-matrix pass. PR179 outcomes are separate.",
+    "No scientific effect, original paid recovery, operator readiness, new allocation, merge, CI rerun or cancellation claimed.",
+    "No original run SQL/private program/answer semantics, credentials, model/provider calls or containers accessed.",
+    "All original failures/diagnostic cuts remain retained; later pass does not erase them."
+  ]
+}
