@@ -69,6 +69,35 @@ _WITNESS_CONTINUATION: ContextVar[
     Callable[[Path, Path, "SourceScreen", Mapping[Path, str], Path | None], dict[Path, str]] | None
 ] = ContextVar("witness_continuation", default=None)
 
+_STUDY_CONTINUATION: ContextVar[
+    Callable[[Path, Path, Mapping[Path, str]], dict[Path, str]] | None
+] = ContextVar("study_continuation", default=None)
+
+
+@contextmanager
+def _study_continuation(
+    resolver: Callable[[Path, Path, Mapping[Path, str]], dict[Path, str]],
+) -> Iterator[None]:
+    """Use one explicitly checked development adapter in its consuming thread."""
+    if (
+        not callable(resolver)
+        or _STUDY_CONTINUATION.get() is not None
+        or _WITNESS_CONTINUATION.get() is not None
+    ):
+        raise ReleaseError("study continuation needs one explicit unnested scope")
+    token = _STUDY_CONTINUATION.set(resolver)
+    try:
+        yield
+    finally:
+        _STUDY_CONTINUATION.reset(token)
+
+
+def _continued_study_controls(
+    root: Path, owner: Path, controls: Mapping[Path, str]
+) -> dict[Path, str]:
+    resolver = _STUDY_CONTINUATION.get()
+    return dict(controls) if resolver is None else resolver(root, owner, controls)
+
 
 @contextmanager
 def _witness_continuation(
