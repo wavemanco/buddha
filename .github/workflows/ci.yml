@@ -14,7 +14,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
-        shard: [0, 1, 2, 3]
+        shard: [0, 1, 2, 3, 4]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
@@ -31,7 +31,7 @@ jobs:
         run: python -m pip_audit --disable-pip --no-deps --strict -r requirements-dev.txt
       - name: Unit and composed acceptance tests
         run: >-
-          python -m ci_test_shard --count 4 --index ${{ matrix.shard }} --idle-seconds 3600
+          python -m ci_test_shard --count 5 --index ${{ matrix.shard }} --idle-seconds 3600
           --isolate test_improver_study.FiniteImproverStudyTests.test_finite_fixed_operators_common_conditions_negative_slots_and_original_recovery
       - name: Lint
         timeout-minutes: 60

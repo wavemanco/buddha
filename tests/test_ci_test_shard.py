@@ -49,12 +49,16 @@ class CiTestShardTests(unittest.TestCase):
         cases = [case("probe." + str(index), []) for index in range(40)]
         cases.append(case(cases[1].id(), []))
         self.assertEqual(self.api._partition(cases, 1, None), [list(range(41))])
-        groups = self.api._partition(cases, 4, cases[0].id())
-        self.assertEqual(groups[0], [0])
-        self.assertEqual(sorted(index for group in groups for index in group), list(range(41)))
-        self.assertTrue(all(group == sorted(group) and group for group in groups))
-        self.assertTrue(any(1 in group and 40 in group for group in groups))
-        self.assertEqual(groups, self.api._partition(cases, 4, cases[0].id()))
+        for count in (4, 5):
+            with self.subTest(count=count):
+                groups = self.api._partition(cases, count, cases[0].id())
+                self.assertEqual(groups[0], [0])
+                self.assertEqual(
+                    sorted(index for group in groups for index in group), list(range(41))
+                )
+                self.assertTrue(all(group == sorted(group) and group for group in groups))
+                self.assertTrue(any(1 in group and 40 in group for group in groups))
+                self.assertEqual(groups, self.api._partition(cases, count, cases[0].id()))
         for isolate in ("missing", cases[1].id()):
             with self.assertRaises(ValueError):
                 self.api._partition(cases, 4, isolate)
@@ -175,14 +179,14 @@ class CiTestShardTests(unittest.TestCase):
             self.assertFalse((root / "module-setup").exists())
 
     def test_each_of_four_shards_executes_exactly_its_manifest_in_original_order(self):
-        for index in range(4):
-            with self.subTest(index=index), tempfile.TemporaryDirectory() as temporary:
+        for count, index in ((size, position) for size in (4, 5) for position in range(size)):
+            with self.subTest(count=count, index=index), tempfile.TemporaryDirectory() as temporary:
                 root = Path(temporary)
                 self.fixture(root)
                 result = self.command(
                     root,
                     "--count",
-                    "4",
+                    str(count),
                     "--index",
                     str(index),
                     "--isolate",
