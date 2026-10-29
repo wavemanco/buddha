@@ -25,6 +25,9 @@ def case(name, events):
 
 
 class CiTestShardTests(unittest.TestCase):
+    IDLE_SECONDS = 5.0
+    STARTUP_DELAY = 1.0
+
     def setUp(self):
         self.api = importlib.import_module("ci_test_shard")
 
@@ -72,7 +75,7 @@ class CiTestShardTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.api._partition([], 1, None)
 
-    def command(self, root, *args, seed="1"):
+    def command(self, root, *args, seed="1", timeout=12):
         allowed = (
             "SYSTEMROOT",
             "WINDIR",
@@ -96,7 +99,20 @@ class CiTestShardTests(unittest.TestCase):
             capture_output=True,
             encoding="utf-8",
             check=False,
-            timeout=12,
+            timeout=timeout,
+        )
+
+    def watchdog_command(self, root):
+        # Startup/discovery shares the real idle window; leave CI scheduling room.
+        return self.command(
+            root,
+            "--count",
+            "1",
+            "--index",
+            "0",
+            "--idle-seconds",
+            str(self.IDLE_SECONDS),
+            timeout=30,
         )
 
     def fixture(self, root, *, body="pass", setup="pass"):
@@ -246,14 +262,17 @@ class CiTestShardTests(unittest.TestCase):
             self.fixture(
                 root,
                 body=(
-                    "import time\nfor _ in range(20):\n"
+                    f"import time\ntime.sleep({self.STARTUP_DELAY})\n"
+                    "Path('noise-entered').write_text('entered')\n"
+                    f"for _ in range({int(self.IDLE_SECONDS * 20)}):\n"
                     "    print('ordinary noise', flush=True)\n    time.sleep(0.1)"
                 ),
             )
-            result = self.command(root, "--count", "1", "--index", "0", "--idle-seconds", "0.5")
+            result = self.watchdog_command(root)
             self.assertEqual(result.returncode, 124, result.stderr)
             self.assertIn('"reason": "no_genuine_test_progress"', result.stderr)
             self.assertIn('"status": "incomplete"', result.stderr)
+            self.assertTrue((root / "noise-entered").is_file())
             self.assertIn("ordinary noise", result.stdout)
 
     def test_completed_subtests_keep_the_idle_watchdog_alive_without_fake_heartbeats(self):
@@ -262,14 +281,19 @@ class CiTestShardTests(unittest.TestCase):
             self.fixture(
                 root,
                 body=(
-                    "import time\nfor index in range(10):\n"
-                    "    with self.subTest(index=index):\n        time.sleep(0.18)"
+                    f"import time\ntime.sleep({self.STARTUP_DELAY})\n"
+                    "Path('subtests-entered').write_text('entered')\n"
+                    "for index in range(12):\n"
+                    "    with self.subTest(index=index):\n        time.sleep(0.5)\n"
+                    "Path('subtests-complete').write_text('complete')"
                 ),
             )
             started = time.monotonic()
-            result = self.command(root, "--count", "1", "--index", "0", "--idle-seconds", "0.8")
+            result = self.watchdog_command(root)
             self.assertEqual(result.returncode, 0, result.stderr)
-            self.assertGreater(time.monotonic() - started, 1.5)
+            self.assertGreater(time.monotonic() - started, self.IDLE_SECONDS)
+            self.assertTrue((root / "subtests-entered").is_file())
+            self.assertTrue((root / "subtests-complete").is_file())
             self.assertIn('"kind": "subtest_success"', result.stderr)
             self.assertNotIn('"status": "incomplete"', result.stderr)
 
@@ -280,19 +304,27 @@ class CiTestShardTests(unittest.TestCase):
                 self.fixture(root)
                 path = root / "tests/test_probe.py"
                 original = path.read_text(encoding="utf-8")
+                entered = f"Path({phase!r}).write_text('entered')"
+                pause = f"import time; time.sleep({self.IDLE_SECONDS * 2})"
                 if phase == "discovery":
-                    path.write_text("import time; time.sleep(2)\n" + original, encoding="utf-8")
+                    path.write_text(
+                        f"from pathlib import Path\n{entered}\n{pause}\n" + original,
+                        encoding="utf-8",
+                    )
                 else:
                     path.write_text(
                         original.replace(
                             "p = Path('setup')",
-                            "import time; time.sleep(2)\n        p = Path('setup')",
+                            f"{entered}\n        {pause}\n        p = Path('setup')",
                             1,
                         ),
                         encoding="utf-8",
                     )
-                result = self.command(root, "--count", "1", "--index", "0", "--idle-seconds", "0.5")
+                result = self.watchdog_command(root)
                 self.assertEqual(result.returncode, 124, result.stderr)
+                self.assertIn('"reason": "no_genuine_test_progress"', result.stderr)
+                self.assertIn('"status": "incomplete"', result.stderr)
+                self.assertTrue((root / phase).is_file())
                 self.assertFalse((root / "body").exists())
 
     def test_idle_timeout_stops_the_owned_descendant_process_tree(self):
@@ -300,7 +332,7 @@ class CiTestShardTests(unittest.TestCase):
             root = Path(temporary)
             child = (
                 "import time\nfrom pathlib import Path\n"
-                "for index in range(60):\n"
+                f"for index in range({int(self.IDLE_SECONDS * 80)}):\n"
                 "    Path('descendant').write_text(str(index))\n"
                 "    time.sleep(0.05)\n"
             )
@@ -309,13 +341,18 @@ class CiTestShardTests(unittest.TestCase):
                 f"subprocess.Popen([sys.executable, '-c', {child!r}], "
                 "stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)\n"
                 "while not Path('descendant').exists(): time.sleep(0.01)\n"
-                "time.sleep(2)"
+                "Path('descendant-entered').write_text('entered')\n"
+                f"time.sleep({self.IDLE_SECONDS * 2})"
             )
             self.fixture(root, body=body)
             started = time.monotonic()
-            result = self.command(root, "--count", "1", "--index", "0", "--idle-seconds", "0.8")
+            result = self.watchdog_command(root)
             self.assertEqual(result.returncode, 124, result.stderr)
-            self.assertLess(time.monotonic() - started, 2.5)
+            self.assertIn('"reason": "no_genuine_test_progress"', result.stderr)
+            self.assertIn('"status": "incomplete"', result.stderr)
+            self.assertLess(time.monotonic() - started, self.IDLE_SECONDS * 2)
+            self.assertTrue((root / "descendant-entered").is_file())
+            self.assertTrue((root / "descendant").is_file())
             before = (root / "descendant").read_bytes()
             time.sleep(0.25)
             self.assertEqual((root / "descendant").read_bytes(), before)
