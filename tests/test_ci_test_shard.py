@@ -414,7 +414,15 @@ class CiTestShardTests(unittest.TestCase):
             self.assertEqual(result.returncode, 124, result.stderr)
             self.assertIn('"reason": "no_genuine_test_progress"', result.stderr)
             self.assertIn('"status": "incomplete"', result.stderr)
-            self.assertLess(time.monotonic() - started, self.IDLE_SECONDS * 2)
+            marker = '{"format": "buddha.ci-test-watchdog.v1"'
+            records = [
+                json.loads(line[line.index(marker) :])
+                for line in result.stderr.splitlines()
+                if marker in line
+            ]
+            self.assertEqual(len(records), 1)
+            self.assertLess(records[0]["seconds_without_progress"], self.IDLE_SECONDS * 2)
+            self.assertLess(time.monotonic() - started, self.IDLE_SECONDS * 2 + 10)
             self.assertTrue((root / "descendant-entered").is_file())
             self.assertTrue((root / "descendant").is_file())
             before = (root / "descendant").read_bytes()
