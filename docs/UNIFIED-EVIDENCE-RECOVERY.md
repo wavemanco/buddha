@@ -300,7 +300,11 @@ The full-trial bridge reuses the existing coordinated launcher for remaining dev
 
 The coordinator freshly rejoins the continuation evidence under its workspace lease before key entry and again before the first phase starts. New trial owners also bind the cut reference. Stopped and cancelled terminal records retain the validated continuation hash. The `--continuation` flag explicitly selects this route; reading a saved reference never activates it automatically.
 
-This work is still undergoing whole-trial verification. Wait for the exact funded handoff and command before starting paid work. The existing allocation is unchanged; unused money from earlier closed experiments is not transferred into it.
+The complete offline trial rehearsal passed on the earlier repair cut. The optimized source has separate focused checks and a successful check against the actual saved history. Its exact published-source CI remains pending; the [delivery record](conformance/trial-continuation-delivery.json) keeps those source cuts and limits separate.
+
+The actual-history check reconciles 174 inactive work units and 604 recorded calls: $4.845090 spent, zero held and no new work units. All 3,277 protected original file hashes and the trial's 2,149-file list remain unchanged. This was a passive inspection; it made no provider calls and did not resume the experiment.
+
+Wait for the exact checked handoff and command before starting paid work. The existing allocation is unchanged; unused money from earlier closed experiments is not transferred into it.
 
 Optional developer checks, from a checkout containing this slice:
 

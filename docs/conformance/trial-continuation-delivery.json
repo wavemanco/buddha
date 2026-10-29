@@ -1,6 +1,6 @@
 {
   "format": "buddha.trial-continuation-delivery.v1",
-  "status": "offline_evidence_prepared_current_source_readiness_pending",
+  "status": "offline_and_actual_record_validation_complete_hosted_readiness_pending",
   "spec_sections": [
     3,
     5,
@@ -10,7 +10,7 @@
   ],
   "scope": "Explicit checked continuation through original development, sealed final assessment, both plain references and canonical publication. Original approvals, keys and grants retain their identities.",
   "current_head": "2349d9a5f051f8c246062018b2ea2a43b80f8fd7",
-  "base_study_head": "009ac89d",
+  "base_study_head": "7cb9ca0027828fbb772cc88b82b769c2c5f0b204",
   "changed_file_sha256": {
     "buddha/baseline_state.py": "b02c1b48d55edd7a8947a17592a26a3f81044ef68cacd8b7b47e468e01103b95",
     "buddha/improver_assessment.py": "c5c7f7c4a74b657042ee230081b2ab64b703b81531983fb57794fb841a538ffc",
@@ -22,13 +22,14 @@
     "buddha/unified_continuation.py": "636c45d070727edace3fec4f5eaf093c9455645475225308cc6260d906065139",
     "buddha/unified_funding.py": "2f608eaee16045fc3dfe93a19ebd0212de6711c2dae0c3a2dff0b39ae29ab146",
     "buddha/unified_launch.py": "131cc158e0053aafe1ee16bf82a3c9d2f7202e76bbe348435b48e4998e94fed5",
-    "docs/UNIFIED-EVIDENCE-RECOVERY.md": "7c7ee3aa92539eb36161dffbb7b187a8b7faf6041ce70f6fb84961ffdb27f7c5",
+    "docs/UNIFIED-EVIDENCE-RECOVERY.md": "a11851843e62ac58b10b3dada602f6ffcbb40f7d903e10475acd3968369ef45b",
     "docs/UNIFIED-LAUNCH.md": "b658ffb20e73e3bed1d7c9cd2b67ce121eb4750739f773e0496f342a639de6db",
     "docs/conformance/unified-run.py": "244bcf623dedcf74a90637c59c44913e19c38e985458f117f98625ea842ccce5",
     "tests/test_phase_continuation.py": "1b027a1013bbbec23f53ed3d85bb559150537f87be3a7c59d71d389a8b315c13",
     "tests/test_trial_continuation.py": "7738327605592714b4b277c0904c77b924c15ed036145c33f7fdef6e89a71321",
     "tests/test_trial_freshness.py": "d6479832c6d336770981fe07d6eede27221ea663f777239a373e27541c365d7a",
-    "tests/test_unified_launch.py": "4fb567105390b93f6d77ce1e2c2aba841c8ee27f145dc60814262063c02d680d"
+    "tests/test_unified_launch.py": "4fb567105390b93f6d77ce1e2c2aba841c8ee27f145dc60814262063c02d680d",
+    "docs/PLAN.md": "4497ccff9898825e2e37257149fe131f5a26dbf80d51699acb3c4cc445bab07b"
   },
   "composed_fixture": {
     "source_head": "93b024a107eaf11c32583abdd066abf2f02663df",
@@ -59,13 +60,47 @@
   "actual_saved_run": {
     "cut_sha256": "905179717d4582551fc50798f6f8a100d8a89352ee46bbe954a245f067a290d8",
     "descriptor_sha256": "fc2e4d8fe4b40b79b09aedc6ac869b5ec063d169912e8be12f61c2e2a0ce1785",
-    "state": "Provisional metadata only; actual guarded check not executed. Original604 attempts/$4.845090/zeroheld unchanged."
+    "state": "Guarded actual-record check passed at the unchanged90 application/entrypoint pins; actual paid continuation remains unstarted.",
+    "status": "checked",
+    "phase": "primary",
+    "stop_code": null,
+    "guarded_receipt_sha256": "2517e3992d272f11796b36bb161d1a91a6b2eb3d7cf018b5e2a5c90e1db4bf11",
+    "checker_sha256": "e37be77a975758df8d98386c03e6bb76a7cd386db9fc02a2c54b5156b324142b",
+    "external_checker_calls": 1,
+    "wall_seconds": 1833.526,
+    "cpu_seconds": 1752.406,
+    "old_owner_count": 174,
+    "all_old_owners_inactive": true,
+    "operation_count": 604,
+    "spent_microusd": 4845090,
+    "held_microusd": 0,
+    "new_owner_count": 0,
+    "coverage": {
+      "expected_opportunities": 16,
+      "completed_opportunities": 7,
+      "in_flight_opportunities": 1,
+      "unattempted_opportunities": 8
+    },
+    "public_source_pins": 90,
+    "external_input_pins": 3,
+    "guard_denials": [],
+    "memory_SQL_connections": 14195,
+    "deserialized_query_only_connections": 14193,
+    "provider_calls": 0,
+    "keys_read": 0,
+    "containers": 0,
+    "original_writes": 0,
+    "on_disk_SQL_connections": 0,
+    "private_program_AST_or_execution": 0,
+    "preservation_receipt_sha256": "52292fddcf02b56df8c1aed05b50057bad0c2ce04d00291a0e8175217c59af81",
+    "original_protected_files_unchanged": 3277,
+    "original_trial_file_membership_unchanged": 2149,
+    "independent_review": "Receipt, selfscript, guard basis, all90 current public source pins, all3 external input hashes, accounting, coverage and zero-activity counters verified without rerunning checker or opening SQL/private programs.",
+    "limit": "One guarded passive source/record check. No actual resumed controller or provider/runtime/account certification. Guard overhead and this data workload establish no production runtime forecast or controlled speed ratio."
   },
   "remaining": [
-    "Integration of the completed Study dependency evidence and exact combined-source hosted verification",
-    "Actual passive source/owner/liability check",
-    "Exact published-source hosted CI and provider/runtime/account checks",
-    "Cleared operator handoff",
+    "Exact published-source hosted CI for the integrated full-trial implementation",
+    "Final checked operator handoff with original allocation and current source/input binding; existing runtime checks run before paid dispatch",
     "Actual paid execution and separate scientific reviews"
   ],
   "real_provider_calls": 0,
@@ -94,6 +129,10 @@
       "https://developers.openai.com/api/docs/guides/prompt-caching",
       "https://platform.claude.com/docs/en/about-claude/pricing"
     ],
-    "limit": "Public documentation and static source/configuration checks only; no account, SDK/provider-default, access, actual billing or paid-readiness certification. No rates, settings or grants were changed."
-  }
+    "limit": "Public documentation and static source/configuration checks only; no account, SDK/provider-default, access, actual billing or paid-readiness certification. No rates, settings or grants were changed.",
+    "launch_boundary_review_sha256": "adf2565067ad4ba1b97233a860f08601fed447f41499de3b3a278c0d0b3dab36",
+    "launch_boundary": "Existing launcher validates owned-container confinement configuration and installed runtime before paid dispatch; account assertions and exact-source CI remain separate. Static trace only, no new container/paid probe."
+  },
+  "base_study_application_cut": "009ac89d15a6fea5f80421bb794638e2589ce0af",
+  "head_kind": "Last application-changing integration; subsequent commits update documentation only."
 }
