@@ -13,7 +13,7 @@
     "buddha/improver_study.py": "016a5096f87328decd2892974b8fca4ef134eca61abc889b30b71ecf74a9b55b",
     "tests/test_passive_capture_scope.py": "c67a0c33154bce7ff9e6af24f8123eb632068587911e8310c4d0171735c6f1c0",
     "tests/test_passive_tree_observation_review.py": "de3447797e864c095c13c643112c3f96ee2b6791dac91d9fafc7f71a4c0b3616",
-    "docs/PLAN.md": "ac93b18e3aaa040d57093f93013aa8dad7d949d89e6d89d2d12380f9c4c09661",
+    "docs/PLAN.md": "84d838d442e792b14162fb8ce936cecffdfc3997f99b173c69689f7e19d372d3",
     "docs/RECONSTRUCTION-COST.md": "f8afac503c00ea41c0b02c7d39edab86bdbe8a512236d37ab82bda86c58cec0d"
   },
   "mechanism": {
@@ -179,7 +179,8 @@
     "original_source_owners_grants_science_changed": false,
     "provider_calls": 0,
     "real_containers": 0,
-    "new_dependencies": 0
+    "new_dependencies": 0,
+    "comparison_includes_exact_line_terminators": true
   },
   "remaining": "Whole development still needs one complete unchanged180-second-per-action acceptance after merging this fix, with owned timeout evidence retained. Whole final/plain/publication and exact-source hosted/wire/account/confinement checks remain separate before paid handoff. IMP-01/EVAL-02 remain open.",
   "external_receipts": {
@@ -202,10 +203,18 @@
       "sha256": "08793421e9526e7403a7581b6d39a432cf9949b59d115332cc06efabb1e3ca1c"
     },
     "runs/checks/passive-constructor-quality-20261028-v1/plan184-preservation.json": {
-      "sha256": "101c92bc3dcb1b8bb2cfcf5fbb8f03de4890173ba05a40cd165c320b96260630"
+      "sha256": "ecb68360fa95775940ce979441828e67fb1eef33982f15d4d1d80f75e095804e"
     },
     "runs/checks/retained-trial-profile-20261028-v2/receipt.json": {
       "sha256": "0d1077b7a5ead8c7b5da38b871a049260a64c8b90462f3b4d7c14240bea0a4dd"
     }
+  },
+  "metadata_correction": {
+    "prior_published_head": "78948d550eea8ffac9ec635e433cc02652a1c76c",
+    "finding": "Revision183 content matched but its final LF was converted to CRLF; the first comparison excluded terminators.",
+    "repair": "Restore original LF and verify every complete prior raw row and acceptance tail including line terminators. App/test sources and test results unchanged.",
+    "superseded_CI_run": 40797688702,
+    "cancellation_reason": "Superseded documentation metadata; requested before corrected push to avoid duplicate CI cost.",
+    "previous_preservation_receipt_retained": "runs/checks/passive-constructor-quality-20261028-v1/plan184-preservation-before-line-ending-correction.json"
   }
 }
