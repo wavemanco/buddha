@@ -395,7 +395,7 @@ no additional funding is requested by these recovery slices.
 
 ## Operator handoff for the original comparison
 
-**Historical clearance superseded by the October 29 automatic stop. Do not rerun the command below pending diagnosis and a separately checked continuation. No new command or key entry is requested.**
+**Historical command superseded. Do not rerun this block. Use only the [current checked continuation](#current-checked-continuation) under its recorded operator clearance; the old command below is retained as evidence.**
 
 The executing PR179 source passed its complete Linux/Windows matrix and final
 source/input/runtime preflight; the [handoff record](conformance/trial-continuation-handoff-delivery.json)
@@ -529,7 +529,7 @@ It created no owners and made no API calls. Independent review also passes;
 This checks source/record compatibility before any writer lease or new model
 work. It does not exercise the held lease, witness materials or scheduler,
 explain the original stop, or establish that recovery works.
-The historical command remains on hold; no new command or key entry is requested.
+The historical command remains on hold; this passive check alone requested no new command or key entry.
 
 A separate native startup check passed the original import audit for 5,180
 modules and eight hook aliases in 44.694 seconds, using the original image,
@@ -543,3 +543,72 @@ cohort retained one fixture-setup error; a focused repeat also passed, but the
 initial cause remains unknown. These checks use temporary synthetic ledgers
 and mocked HTTPS. They verify recorded generator/judge settings at this source
 cut, without establishing provider access or permission to restart the run.
+
+
+### Current checked continuation
+
+**Ready for operator use under the original authorization.** The command below
+selects diagnostic-only `c54819f`
+source and continuation `da37a817`; the historical command above is superseded.
+All ten exact-source CI jobs now pass their saved-evidence checks: 2,141
+ordered/disjoint test occurrences per OS, all 70 quality steps and nine reader
+checks. Fresh read-only source, input, runtime, Docker-image metadata and
+original-file checks also pass with independent review. The
+[handoff record](conformance/diagnostic-continuation-handoff-delivery.json)
+links the exact evidence and recorded final operator clearance.
+
+This continues the same experiment at its next unfinished step.
+The combined **$150 / 16,384-attempt** limits remain: $40 / 4,096 development,
+$85 / 10,240 final assessment and $25 / 2,048 shared by the two plain-model
+references; validation stays $0 / 0. All earlier charges still count. The last
+verified saved checkpoint is 604 attempts, $4.845090 spent and zero held. No
+new allowance is created and money cannot move between these four grants.
+
+Keep Docker Desktop running and start only one copy. A new PowerShell window
+is optional. Use the same approved OpenAI and Anthropic project keys with the
+confirmed Standard/default public pricing. Missing keys are requested using
+hidden input: paste once and press Enter; no characters appear. An input
+acknowledgement does not establish provider authentication. Existing key,
+model, account and source checks remain in force.
+
+```powershell
+cd C:\Users\arvik\code\buddha
+Write-Host 'Checking the saved run before key prompts. This can take tens of minutes.'
+python -B "C:\Users\arvik\code\buddha\runs\reviews\launcher-safe-stop-diagnostics\docs\conformance\unified-run.py" --handoff "C:\Users\arvik\code\buddha\runs\checks\diagnostic-continuation-preparation-20261029-v1\PROVISIONAL-imp01-trial-continuation-c54819f-v1.json" --sha256 da37a8178d930d684b38518964e277030aa4567a4b4943d4835a8ad9468adfcc --continuation --live --prompt-keys --confirm-project-keys
+```
+
+The first line opens the project folder and spends nothing. The second prints
+one free notice and finishes. The third is one PowerShell line: it runs the
+checked continuation once, verifies the original records, obtains missing keys
+and may then spend money within the original grants. `--continuation` selects
+the checked recovery route; `--sha256` binds the exact continuation record;
+`--confirm-project-keys` confirms use of the approved project accounts. No API
+key is written into project files.
+
+The first full-history check may be quiet for tens of minutes before key entry.
+Checks repeat afterward, may reuse the `checking` label and may restart their
+elapsed clock. `recorded accounting unknown` means the display has no selected
+budget; a timer or heartbeat alone does not prove progress. During development,
+the amounts shown belong to the active phase. Keep Docker open through the run.
+
+If it stops, share the final status and any safe diagnostic lines or saved
+record path, never a key. The coordinator prints bounded public source
+locations and attempts to save the same safe record before the longer
+incomplete-observation check. Ctrl+C stops work and attempts to retain a marked
+partial result; recording may take time. Keep the files and any held or unknown
+requests. Do not reset a grant, delete locks or start another copy to force it.
+
+Earlier offline wire checks at this source passed all ten methods on repeat
+after one retained fixture-setup error whose cause remains unknown. They used
+synthetic records and mocked HTTPS, made no real API calls and retain their
+[initial and repeated evidence](conformance/diagnostic-continuation-handoff-delivery.json).
+The generator/judge settings and official NoveltyBench protocol are unchanged.
+The original search-stop cause also remains unknown: this is a controlled
+continuation with better diagnostics, not a demonstrated cause fix or promise
+of completion.
+
+Computational completion is followed by the separately approved native AI
+review: `gpt-6.1-sol` / `ultra`, at most 44 fresh contexts, using unpriced Codex
+capacity outside the API cap and no reviewer API fallback. Optional human
+ratings proceed separately and do not block the AI-only report. Completion
+alone establishes neither improved performance nor a completed scientific gate.
