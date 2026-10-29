@@ -23,7 +23,7 @@ from buddha import native_pipeline as pipeline
 from buddha import source_search as shared
 from buddha.answers import Answers
 from buddha.authorization import Authorization
-from buddha.doctor import _authority, _Busy, _Capture, _Unsupported
+from buddha.doctor import _authority, _Busy, _Capture, _passive_tree_observation, _Unsupported
 from buddha.gateway import RawHTTPTransport, _input_records, _review
 from buddha.native_evidence import NativeEvidence, _adopt_capture, authority_observation
 from buddha.releases import (
@@ -1498,6 +1498,13 @@ def _future(reader: NativeEvidence, path: Path) -> None:
 
 
 def _restore(directory: Path, authorization: Path) -> tuple[NativeEvidence, dict[str, Any]]:
+    with _passive_tree_observation():
+        return _restore_observed(directory, authorization)
+
+
+def _restore_observed(
+    directory: Path, authorization: Path
+) -> tuple[NativeEvidence, dict[str, Any]]:
     reader = NativeEvidence(directory, authorization, error_type=ImproverStudyError)
     state = _original(reader)
     _census(reader, state)
