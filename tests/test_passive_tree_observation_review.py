@@ -71,6 +71,18 @@ class PassiveTreeObservationReviewTests(unittest.TestCase):
             fresh.read(added)
             fresh.finish()
 
+    def test_unrelated_ancestor_lock_does_not_reject_an_unchanged_observation(self):
+        parent = self.root / "unrelated-parent"
+        observed = parent / "observation"
+        observed.mkdir(parents=True)
+        (observed / "data.bin").write_bytes(b"unchanged")
+        ordinary = doctor._Capture(observed)
+        with observation():
+            shared = doctor._Capture(observed)
+            (parent / ".search.lock").write_bytes(b"unrelated work")
+            ordinary.finish()
+            shared.finish()
+
 
 if __name__ == "__main__":
     unittest.main()
