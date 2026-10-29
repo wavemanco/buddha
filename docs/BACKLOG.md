@@ -163,7 +163,7 @@ coverage gaps before any broader exception claim. This source review runs no
 exploit, scan, package installation, container or provider request. It changes
 no dependency, frozen lock, benchmark setting, prepared study or scientific gate.
 
-## ENG-OBS-01: show progress before continuation key prompts
+## ENG-OBS-01: make continuation checks and stops understandable
 
 Recorded October 29, 2026 as an existing operator-observability follow-up under
 [DESIGN section 9](DESIGN.md#9-paid-operation-integrity), not a new scientific
@@ -172,12 +172,35 @@ gate or spending approval. In the frozen PR179 runtime,
 launcher's heartbeat. This full-history check can take tens of minutes with no
 terminal output, before any key prompt or provider call.
 
-The [current handoff](UNIFIED-EVIDENCE-RECOVERY.md#operator-handoff-for-the-original-comparison)
-prints one free notice before the unchanged Python command and tells the
-operator to wait for the prompt. It does not close the progress gap. A future
-reviewed runtime should reuse the existing progress callback/heartbeat around
-this initial passive check, retaining original exceptions, source/accounting
-guards and the no-provider-before-keys boundary. A delayed-check fixture should
-show the notice and periodic liveness without claiming completed work or
-printing credentials. Keep the currently frozen runtime unchanged; PLAN.md
-retains IMP-01 as Next and the two existing scientific gates.
+The [historical handoff](UNIFIED-EVIDENCE-RECOVERY.md#operator-handoff-for-the-original-comparison)
+prints one free notice before the unchanged Python command. It does not close
+the progress gap. During actual execution on October 29, repeated post-key
+checks also used ambiguous `checking` labels and `recorded accounting unknown`.
+That text means the display has no selected budget; it does not establish a
+missing ledger or failed key. Each inspection starts its own timer, and a
+heartbeat or increased CPU use does not prove completed checks or forward
+progress.
+
+The terminal later reached `rechecking`, `Starting original matched development`
+and `search`, then stopped automatically. The
+[stop observation](conformance/trial-continuation-stop-observation.json) retains
+outer phase `primary`, reason `launch_stopped`, the same 604 recorded attempts,
+$4.845090 spent and zero held, and the same unfinished witness-feedback step.
+The inner exception wrapper retains neither its specific failure stage nor
+cause in the operator result when the coordinator supplies no receipt path.
+The exact cause remains unknown; the generic code cannot diagnose credentials,
+Docker, source drift or a benchmark failure. Recorded cost is not an invoice
+reconciliation. The historical command is held for rerun pending diagnosis.
+
+A future reviewed runtime should reuse the existing progress callback around
+the initial passive check, distinguish repeated checking stages, and preserve
+fixed safe failure causes and stages through inner and outer wrappers. Keep
+raw exception text and credentials out of reports. Retain source/accounting,
+freshness, budget and isolation guards, the no-provider-before-keys boundary
+and explicit incomplete records. A delayed-check fixture should demonstrate
+periodic liveness without inventing completed work; a no-cost rehearsal against
+realistically sized retained history should exercise the actual stopped path
+and safe error propagation before any new paid handoff. Keep the frozen
+runtime unchanged and require separately checked repair/continuation evidence.
+PLAN.md retains IMP-01 as Next and the two existing scientific gates; this
+follow-up grants no new funding or execution authority.

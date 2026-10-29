@@ -304,7 +304,7 @@ The complete offline trial rehearsal passed on the earlier repair cut. The optim
 
 The actual-history check reconciles 174 inactive work units and 604 recorded calls: $4.845090 spent, zero held and no new work units. All 3,277 protected original file hashes and the trial's 2,149-file list remain unchanged. This was a passive inspection; it made no provider calls and did not resume the experiment.
 
-Use only the exact cleared handoff below. The existing allocation is unchanged; unused money from earlier closed experiments is not transferred into it.
+The historical cleared handoff below has since stopped automatically. **Do not rerun it while the stop is being diagnosed.** The existing allocation is unchanged; unused money from earlier closed experiments is not transferred into it.
 
 Optional developer checks, from a checkout containing this slice:
 
@@ -395,13 +395,40 @@ no additional funding is requested by these recovery slices.
 
 ## Operator handoff for the original comparison
 
-**Cleared for the operator to resume this original experiment under its existing allowance.**
+**Historical clearance superseded by the October 29 automatic stop. Do not rerun the command below pending diagnosis and a separately checked continuation. No new command or key entry is requested.**
 
-The executing PR179 source passes its complete Linux/Windows matrix. Final
-source/input/runtime preflight also passes; the [handoff record](conformance/trial-continuation-handoff-delivery.json)
-binds both checks. This documentation update has not started the run.
+The executing PR179 source passed its complete Linux/Windows matrix and final
+source/input/runtime preflight; the [handoff record](conformance/trial-continuation-handoff-delivery.json)
+retains that clearance. The operator then ran this exact handoff and entered
+both keys. Its later automatic stop is recorded separately in the
+[stop observation](conformance/trial-continuation-stop-observation.json);
+passing engineering checks did not establish that the actual continuation would complete.
 
-This resumes the original experiment at its next unfinished step. It keeps all
+The terminal reached `rechecking`, then printed `Starting original matched
+development` and reported `search` with the same 604 recorded attempts,
+$4.845090 recorded cost and zero held. It then stopped automatically with
+`launch_stopped`. The saved incomplete observation has outer phase `primary`;
+its inspection still finds the prepared study in `search` at the same next
+witness-feedback step, start 1 / repetition 1 / arm 1 / slot 0. No additional
+attempt or charge is recorded. This is retained accounting, not a provider
+invoice reconciliation.
+
+That sequence establishes entry into the development controller after its key
+and state rechecks. It does not identify the exact failing operation inside
+search. The current inner error wrapper discards the specific exception from
+the operator report. Earlier increasing CPU measurements established active
+computation, not completed validation or logical progress. Preserve this
+incomplete result and the original files; do not infer a key failure, a Docker
+failure or a benchmark result from the generic reason.
+
+The immediate target is to retain a fixed, safe failure stage and cause, then
+rehearse that path without paid calls against realistically sized retained
+history. Any repair needs separate checked source and continuation evidence;
+the frozen executing checkout will not be silently patched. See
+[ENG-OBS-01](BACKLOG.md#eng-obs-01-make-continuation-checks-and-stops-understandable).
+
+The historical command was intended to resume the original experiment at its
+next unfinished step. It keeps all
 604 recorded API attempts, their replies and the $4.845090 already spent, then
 continues development, final assessment, both plain-model references and saved
 comparison publication. It creates no new allowance or replacement experiment.
@@ -412,11 +439,12 @@ references. Validation remains $0/0. Earlier spending counts against these same
 four original grants. Separate native AI review uses the already approved
 Codex capacity outside this API cap; its monetary cost is unpriced, not zero.
 
-Keep Docker Desktop running and use only one running copy of the command.
-A new PowerShell window is optional. The existing Python installation needs
-no package installation. Keep the exact paths and fingerprint below, including
-their historical `PROVISIONAL` filename. The command executes the frozen
-PR #179 checkout at `e62515c5`.
+The historical operating instructions required Docker Desktop and only one
+running copy. A new PowerShell window was optional, with no package installation
+needed. The preserved paths and fingerprint below, including their historical
+`PROVISIONAL` filename, identify the command that executed the frozen PR #179
+checkout at `e62515c5`. **This block is retained as evidence, not a current
+instruction to run it.**
 
 ```powershell
 cd C:\Users\arvik\code\buddha
@@ -435,17 +463,18 @@ The program does not write API keys into project files.
 
 The first full-history check happens before the key prompts and progress
 display. It can take tens of minutes with no terminal output; it makes no
-provider calls. Leave that one command running and wait for the key prompt
-before pasting a key. Checks after key entry can
-also take time. Paste each key once and press Enter; no characters will appear.
-Subsequent progress lines show the active
-phase's attempts, recorded cost, held amount and cap. A held amount reserves a
-possible charge; it is not another completed payment. No separate watch window
-is needed. Do not start a second copy while checks or recording are running.
+provider calls. Checks repeat after key entry. Several checks use the same
+`checking` label, and each inspection starts its own elapsed clock. Their
+`recorded accounting unknown` text means that the display has no selected
+budget to show; it does not establish a missing ledger, failed key or stalled
+check. The timer and heartbeat alone establish neither completed work nor
+forward progress. Once the development controller selects its budget, progress
+lines show that phase's attempts, recorded cost, held amount and cap. A held
+amount reserves a possible charge; it is not another completed payment.
 
 Ctrl+C stops the command and attempts to save an incomplete observation. Keep
-all files and any held or uncertain requests intact. If it stops, share the
-final status/error here without keys; do not reset a budget or start a second
-copy. If it completes, share the final status. Computational completion is
-followed by separate AI review; optional human ratings do not block the AI-only
-report. A completed run does not by itself establish scientific improvement.
+all files and any held or uncertain requests intact; do not reset a budget or
+start a second copy. The automatic stop above is the current checkpoint.
+Eventual computational completion is followed by separate AI review; optional
+human ratings do not block the AI-only report. A completed run does not by
+itself establish scientific improvement.

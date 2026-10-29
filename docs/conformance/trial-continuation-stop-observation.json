@@ -1,0 +1,201 @@
+{
+  "format": "buddha.trial-continuation-stop-observation.v1",
+  "status": "incomplete_original_experiment",
+  "recorded_local_date": "2026-10-29",
+  "spec": [
+    "DESIGN3",
+    "DESIGN9",
+    "DESIGN10"
+  ],
+  "executing_checkout_head": "e62515c5e88a433a424cf9b357f6fc51f5cbc680",
+  "continuation_sha256": "fc2e4d8fe4b40b79b09aedc6ac869b5ec063d169912e8be12f61c2e2a0ce1785",
+  "original_observation": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-unified-comparison-20261026-v2\\NOT-CREATED-unified-workspace\\observations\\a3220bfbe63941b0bf363c21ee5295e9.json",
+    "sha256": "031660b2aaab860af93220ded579678f2fe2a2d00fe2955e98d60dc6c2e02612",
+    "recorded_at": "2026-10-29T15:34:41+00:00"
+  },
+  "stop": {
+    "cancelled": false,
+    "phase": "primary",
+    "reason": "launch_stopped",
+    "source": "launcher_reported"
+  },
+  "funding": {
+    "known_subtotal": {
+      "committed_microusd": 4845090,
+      "operation_count": 604,
+      "reserved_microusd": 0,
+      "spent_microusd": 4845090
+    },
+    "phases": {
+      "final": {
+        "reason": null,
+        "status": "observed",
+        "totals": {
+          "committed_microusd": 0,
+          "operation_count": 0,
+          "reserved_microusd": 0,
+          "spent_microusd": 0
+        }
+      },
+      "search": {
+        "reason": null,
+        "status": "observed",
+        "totals": {
+          "committed_microusd": 4845090,
+          "operation_count": 604,
+          "reserved_microusd": 0,
+          "spent_microusd": 4845090
+        }
+      },
+      "shared_plain_references": {
+        "reason": null,
+        "status": "observed",
+        "totals": {
+          "committed_microusd": 0,
+          "operation_count": 0,
+          "reserved_microusd": 0,
+          "spent_microusd": 0
+        }
+      },
+      "validation": {
+        "reason": null,
+        "status": "observed",
+        "totals": {
+          "committed_microusd": 0,
+          "operation_count": 0,
+          "reserved_microusd": 0,
+          "spent_microusd": 0
+        }
+      }
+    },
+    "status": "observed",
+    "totals": {
+      "committed_microusd": 4845090,
+      "operation_count": 604,
+      "reserved_microusd": 0,
+      "spent_microusd": 4845090
+    }
+  },
+  "primary": {
+    "reason": null,
+    "status": "observed",
+    "value": {
+      "next_position": {
+        "arm": 1,
+        "repetition": 1,
+        "slot": 0,
+        "stage": "witness_feedback",
+        "start": 1
+      },
+      "phase": "search",
+      "state": "prepared",
+      "state_sha256": "e4c367ab2725a237d66699c8f994a9bcb56252e551d893226073e72ce3c99dac",
+      "stop_code": null
+    }
+  },
+  "references": {
+    "reason": null,
+    "status": "observed",
+    "value": {
+      "blocked_reasons": [],
+      "ready": true,
+      "references": [
+        {
+          "completed_stages": 0,
+          "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-unified-comparison-20261026-v2\\NOT-CREATED-plain-regenerate",
+          "name": "regenerate",
+          "next_stage": 0,
+          "owner_count": 0,
+          "state": "fresh"
+        },
+        {
+          "completed_stages": 0,
+          "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-unified-comparison-20261026-v2\\NOT-CREATED-plain-in-context",
+          "name": "in-context",
+          "next_stage": 0,
+          "owner_count": 0,
+          "state": "fresh"
+        }
+      ],
+      "state": "fresh",
+      "state_sha256": "9141745d6b2f29cd1f2c44ff3874533c5d3741617ae501bc48d9442cb9be79f9"
+    }
+  },
+  "operator_terminal_evidence": {
+    "source": "User supplied terminal excerpt in this chat; not an independently retained complete console log.",
+    "last_rechecking_elapsed_seconds": 3574,
+    "development_started_notice": "Starting original matched development; progress accounting is for the active phase only.",
+    "first_supplied_search_elapsed_seconds": 3584,
+    "last_supplied_search_elapsed_seconds": 3781,
+    "stop_notice": "Launch stopped: launch_stopped. Recording saved evidence; no new provider requests.",
+    "last_supplied_recording_elapsed_seconds": 871,
+    "limitation": "Heartbeat clocks are scoped to their contexts. These values are not a measured whole-run duration or proof of completed work."
+  },
+  "findings": [
+    "The outer key/state rechecks completed and the inner launcher entered run_improver_study.",
+    "No additional API operation, recorded spending, hold or checkpoint advancement is present in the saved observation.",
+    "All 3277 protected file hashes, 90 frozen public source pins and exact 2149-file trial membership remain unchanged in a fresh raw-only check.",
+    "The original exception and precise failing operation were not retained; credential, Docker, source-drift and benchmark causes are not established.",
+    "The inner launcher computes a stopped record but rethrows a generic exception. The outer call supplies no inner receipt destination; the outer observation preserves only the generic reason.",
+    "Earlier observed CPU activity established activity only, not logical progress or successful completion."
+  ],
+  "source_references": {
+    "outer_primary_entry": "buddha/unified_launch.py:529",
+    "inner_development_entry": "buddha/improver_launch.py:540",
+    "study_startup": "buddha/improver_study.py:2500",
+    "inner_error_wrapper": "buddha/improver_launch.py:594",
+    "safe_reason_filter": "buddha/launch_common.py:205"
+  },
+  "preservation": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\trial-continuation-stop-20261029-v1\\preservation-v1.json",
+    "sha256": "b99c87001b3566b2594452e060a87a0c13a9af6b0973cd6085c90591a832fa26",
+    "result": {
+      "format": "buddha.trial-continuation-post-stop-preservation.v1",
+      "recorded_utc": "2026-10-29T15:48:49.570670+00:00",
+      "status": "pass",
+      "baseline_sha256": "114cb5ce084384350829045e0349355c4f50aa9a9c5afd04e132142750ea958a",
+      "protected_file_count": 3277,
+      "changed": [],
+      "public_source_pins": 90,
+      "source_changed": [],
+      "trial_file_count": 2149,
+      "trial_membership_unchanged": true,
+      "added_trial_names": [],
+      "missing_trial_names": [],
+      "observation_sha256": "031660b2aaab860af93220ded579678f2fe2a2d00fe2955e98d60dc6c2e02612",
+      "method": "Raw file hashing and file-name comparison only. Original actor programs are opaque bytes.",
+      "checker_correction": "Initial local check stopped on access-time metadata drift. Corrected the comparison to file identity, type, size, modification/change timestamps and attributes; SHA checks are unchanged. No original content drift was inferred from that checker failure.",
+      "SQL_connections": 0,
+      "private_program_parsing_or_execution": 0,
+      "keys_read": 0,
+      "provider_calls": 0,
+      "containers_started": 0,
+      "original_writes": 0,
+      "wall_seconds": 13.538630400085822
+    }
+  },
+  "current_operator_instruction": "Do not rerun the historical command or enter keys again pending diagnosis and separately checked continuation evidence.",
+  "next_work": "Narrow offline diagnosis at study startup, fixed safe failure stage/cause retention, then a no-cost realistic rehearsal before another live handoff.",
+  "original_scope": {
+    "combined_cap_usd": 150,
+    "recorded_attempt_limit": 16384,
+    "new_allocation": false,
+    "benchmark_or_scientific_settings_changed": false
+  },
+  "limits": [
+    "Saved accounting is not provider invoice reconciliation.",
+    "No new paid launch is approved by this report.",
+    "Passing historical CI and passive reconstruction did not establish actual continuation completion.",
+    "IMP-01 and EVAL-02 remain open."
+  ],
+  "work_performed_for_this_report": {
+    "application_changes": 0,
+    "SQL_connections": 0,
+    "private_program_parsing_or_execution": 0,
+    "keys_read": 0,
+    "provider_calls": 0,
+    "containers_started": 0,
+    "original_writes": 0
+  }
+}
