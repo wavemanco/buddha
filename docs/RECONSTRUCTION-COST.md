@@ -323,3 +323,56 @@ python -B -m unittest discover -s tests -p test_validated_artifact_views.py -v
 This optional developer command runs the five new synthetic checks once, with
 no API keys or paid calls. Use the checkout containing this test; no separate
 window is needed. Ctrl+C stops it.
+
+
+## One passive call's directory metadata
+
+The study reader can now share its initial directory listing within one passive
+reconstruction. Each capture receives its own editable listing. Different path
+spellings, observation limits, threads or held-writer identities do not reuse that
+listing. The metadata registry uses the selected entry and path limits; when full,
+it falls back to the ordinary fresh directory walk rather than rejecting valid work.
+It retains no file contents and disappears when the call ends.
+
+Every capture finish, fingerprint export and public adoption still checks original
+bytes, SQLite sidecars and its full directory tree freshly. A successful passive
+call also freshly checks every registered initial tree and its relevant held lease.
+Unrelated parent-folder locks are outside this optimization's scope. An existing
+failure stays primary and discards the invocation's metadata.
+
+Four actual captures of the same small directory previously made eight walks:
+four initial walks and four final checks. Sharing now makes six: one initial walk,
+the same four final checks and one fresh check when the passive call exits. This
+is a work-count result, not a measured production speedup. The original paid run,
+its source pins and its authorization are unchanged.
+
+A separate natural study check uses the existing supplied-worker fixture, first
+at its initial state, then after its common screen, mutation witness and first
+counted plan. The second state stops before any counted proposal. Both versions
+reproduce the same next action, coverage, authorization, owner accounting and
+complete fingerprints, without changing files or sending another request.
+
+| Natural reader state | Ordinary walks / returned entries | Shared walks / returned entries |
+| --- | ---: | ---: |
+| Initial one-shot state | 2 / 54 | 3 / 81 |
+| First counted plan | 65 / 2,824 | 51 / 2,102 |
+
+The initial state has an extra final walk; the optimization is not beneficial
+for every call. In the repeated state, constructor walks fall from 24 to five;
+all 41 strict capture finishes remain, followed by five fresh exit walks. Whole-
+study constructor walks fall from three to one. Smaller one-shot witness trees
+still incur exit-check overhead. These counts do not establish a runtime speedup
+or prove that the larger continuation meets its existing action timeout.
+
+The [delivery](conformance/passive-tree-observation-delivery.json) retains both
+genuine failures, final source cuts, natural counts and local checks. Remaining
+development/final/plain continuation acceptance and paid handoff stay open.
+
+```powershell
+python -B -m unittest discover -s tests -p "test_passive*.py" -v
+```
+
+This optional developer command runs the small supplied-study and file-integrity
+checks once in temporary test folders. It may take a few minutes, needs no API
+keys and makes no paid calls. Use this checkout; no separate window is needed.
+Ctrl+C stops it.
