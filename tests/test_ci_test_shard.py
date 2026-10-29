@@ -11,6 +11,7 @@ import time
 import unittest
 from pathlib import Path
 from types import SimpleNamespace
+from unittest.mock import call, patch
 
 
 def case(name, events):
@@ -217,6 +218,65 @@ class CiTestShardTests(unittest.TestCase):
             self.assertTrue((root / "body").exists())
             self.assertEqual((root / "setup").read_text(), "S")
             self.assertEqual((root / "cleanup").read_text(), "C")
+        self.check_watchdog_directory_cleanup()
+
+    def check_watchdog_directory_cleanup(self):
+        for platform, code, persistent, body_error in (
+            ("win32", 32, False, False),
+            ("win32", 32, True, False),
+            ("linux", 32, False, False),
+            ("win32", 5, False, False),
+            ("win32", 32, False, True),
+            ("win32", 32, True, True),
+        ):
+            with self.subTest(
+                cleanup_platform=platform, code=code, persistent=persistent, body_error=body_error
+            ):
+                failure = PermissionError("synthetic cleanup sharing violation")
+                failure.winerror = code
+                original = RuntimeError("original body failure")
+                calls = []
+
+                class Directory:
+                    def __init__(self, **kwargs):
+                        self.name = "unused-synthetic-owned-directory"
+
+                    def __enter__(self):
+                        return self.name
+
+                    def __exit__(self, *args):
+                        self.cleanup()
+
+                    def cleanup(self, calls=calls, persistent=persistent, failure=failure):
+                        calls.append("cleanup")
+                        if persistent or len(calls) == 1:
+                            raise failure
+
+                caught = None
+                with (
+                    patch.object(self.api.tempfile, "TemporaryDirectory", Directory),
+                    patch.object(self.api.sys, "platform", platform),
+                    patch.object(self.api.time, "monotonic", side_effect=(0.0, 0.0, 10.0)),
+                    patch.object(self.api.time, "sleep") as sleep,
+                ):
+                    factory = getattr(
+                        self.api, "_watch_directory", self.api.tempfile.TemporaryDirectory
+                    )
+                    try:
+                        with factory():
+                            if body_error:
+                                raise original
+                    except (PermissionError, RuntimeError) as error:
+                        caught = error
+                retries = platform == "win32" and code == 32
+                self.assertEqual(len(calls), 2 if retries else 1)
+                self.assertEqual(sleep.call_args_list, [call(0.05)] if retries else [])
+                if not retries or persistent:
+                    self.assertIs(caught, failure)
+                    if body_error:
+                        self.assertIs(failure.__context__, original)
+                else:
+                    self.assertIs(caught, original if body_error else None)
 
     def test_failures_errors_and_early_stop_return_nonzero_without_weakening_unittest(self):
         for body, setup in (

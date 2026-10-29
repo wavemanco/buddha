@@ -13,6 +13,8 @@ import sys
 import tempfile
 import time
 import unittest
+from collections.abc import Iterator
+from contextlib import contextmanager
 from functools import partial
 from pathlib import Path
 from typing import Any, BinaryIO
@@ -230,8 +232,29 @@ def _terminal_bytes(args: argparse.Namespace, code: int) -> bytes:
     ).encode()
 
 
+@contextmanager
+def _watch_directory() -> Iterator[str]:
+    directory = tempfile.TemporaryDirectory(prefix="buddha-ci-watchdog-")
+    try:
+        yield directory.name
+    finally:
+        deadline = time.monotonic() + 10
+        while True:
+            try:
+                directory.cleanup()
+                break
+            except OSError as error:
+                if (
+                    sys.platform != "win32"
+                    or getattr(error, "winerror", None) != 32
+                    or time.monotonic() >= deadline
+                ):
+                    raise
+                time.sleep(0.05)
+
+
 def _watch(args: argparse.Namespace) -> int:
-    with tempfile.TemporaryDirectory(prefix="buddha-ci-watchdog-") as temporary:
+    with _watch_directory() as temporary:
         directory = Path(temporary)
         channel = directory / "progress.jsonl"
         channel.touch()
