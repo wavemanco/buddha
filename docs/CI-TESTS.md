@@ -1,7 +1,7 @@
 # CI test progress and the 60-minute stop rule
 
 CI checks the complete discovered unittest suite on Windows and Linux. Each OS
-uses four separate test processes. Every discovered test occurrence belongs to
+uses five separate test processes. Every discovered test occurrence belongs to
 exactly one process on that OS; duplicate test names are retained. Each process
 keeps its selected tests in their original order. Class and module fixtures run
 separately in each process that needs them.
@@ -51,6 +51,44 @@ Existing hosted jobs do not gain this guard retroactively. Their elapsed time
 or current step's start time does not prove a stall. Cancellation under this
 rule needs actual evidence of the last genuine progress.
 
+## Timing checks use a separate short limit
+
+The temporary watchdog tests use a five-second inactivity limit and a
+30-second outer timeout. The production limit remains 3,600 seconds.
+The older half-second noise test could expire before its first print on
+Windows. PR #177 failed that assertion; the same fixture was still present
+in PR #179. An external one-second delay reproduces that failure without
+changing the production runner. The exact scheduling point in the hosted
+failure was not recorded.
+
+The repaired fixtures keep real processes and all timeout/progress assertions.
+Markers prove discovery, class setup, noise and descendant bodies were entered.
+Noise and hangs last longer than five seconds; real completed subtests span
+six seconds, with shorter gaps between outcomes. The descendant check still
+proves its output stops after cleanup. Printing text never counts as progress.
+
+The workflow now uses five groups to separate the three large finite-study
+fixtures under the existing assignment rule. The named isolated test stays
+isolated, and the assignment and 3,600-second rule are unchanged. This changes
+the workload per job; it does not predict future job runtime. The existing
+partition and actual-process checks cover both four and five groups without
+changing discovered test names.
+
+The final local check also exposed a Windows cleanup race: the worker had
+exited, but its temporary progress file briefly rejected deletion. A separate
+diagnostic observed that sharing violation; it did not identify the holder.
+Cleanup now retries only Windows sharing violations for up to ten seconds.
+Other errors, or a sharing violation that lasts beyond that limit, still fail.
+The original failure and diagnostic remain recorded; a later pass does not
+erase them.
+
+The [delivery record](conformance/ci-idle-fixture-timing-delivery.json) keeps the
+original failure, deliberate reproduction and focused local checks separate.
+All 22 helper tests pass locally in 41.949 seconds. The descendant test checks
+the emitted termination time separately from bounded directory cleanup, and
+still proves the descendant stops writing. These focused checks do not
+establish that the complete hosted matrix passes.
+
 ## Optional local commands
 
 Run these from the checkout that contains `ci_test_shard.py`. Each command runs
@@ -82,7 +120,7 @@ This runs the complete suite in one guarded process, with the same 60-minute
 inactivity limit. It can take several hours and create temporary test fixtures.
 It is an optional full local check, not needed merely to inspect the inventory.
 
-The workflow supplies four groups, the exact isolated test name and the same
+The workflow supplies five groups, the exact isolated test name and the same
 3,600-second limit. All existing lint, formatting, type, security, dependency
 and compilation checks remain required by the workflow. Local helper checks
 and an inventory are not a passing full hosted matrix. Current delivery and
