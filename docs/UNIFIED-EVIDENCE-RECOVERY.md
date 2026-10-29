@@ -225,7 +225,7 @@ This runs the one offline counted-child rehearsal and creates disposable test fi
 
 A screen records a fingerprint of its host files and settings. A repaired host can produce a different fingerprint while preserving the same task and scoring protocol. Parent selection and feedback reconstruction must recognize the exact approved pair without pretending those fingerprints are equal.
 
-The new internal comparison component accepts only two explicitly supplied, previously checked profiles within one study and original grant. It rejects a third profile, another study/grant, an unexpected screen location, nested scopes and use from a copied thread. Reading a saved reference never activates it. It supplies no execution or spending permission; verifying the actual old/new helper contexts and connecting the checked controller remains next work.
+The internal comparison component accepts only two explicitly supplied, previously checked profiles within one study and original grant. It rejects a third profile, another study/grant, an unexpected screen location, nested scopes and use from a copied thread. Reading a saved reference never activates it. The component supplies no execution or spending permission by itself; the checked development scope below now verifies and binds the actual old/new helper contexts.
 
 A mixed parent selection lists each actual fingerprint and report reference. Uniform selections keep their original format and bytes. Feedback preserves its complete answers, official scores and existing actor checks. A versioned `policy.host_control_relation` records only comparisons that actually depend on the approved difference. It also follows failed-child history and earlier feedback used to author a proposal. An unrelated old packet rebuilt afterward remains byte-identical.
 
@@ -238,6 +238,61 @@ python -B -m unittest discover -s tests -p 'test_screen_control_*.py' -v
 ```
 
 This runs the five offline comparison checks using disposable files and supplied replies. It spends no API money and starts no real containers. It runs once in the same PowerShell window and can take several minutes; Ctrl+C stops it. No separate window is needed.
+
+## Continuing the remaining development
+
+The witness-only scope keeps its original one-witness limit. A separate
+checked `buddha.study-continuation.v1` scope covers the exact cut witness, its
+decision and the strictly later declared development cells through the normal
+study freeze and publication. It adds no extra proposal opportunity and no
+final-assessment, plain-reference or paid-CLI permission. The historical Python
+module header still describes the first witness mechanism; its executable bytes
+are retained at this tested source cut.
+
+The checker preserves the original state controls and every old owner/file pin.
+An old owner's scheduled role gets its original controls; only an allowed new
+owner gets the actual new helper/driver bindings. Absence from the old-owner list
+alone is not permission. Witnesses use the actual old or new parent profile.
+The original scheduler and its partial-result handling are shared rather than
+reimplemented. The descriptor-entry API reconstructs the study once per normal
+action, then uses the same checked state with fresh under-lock file/grant checks
+and a newly constructed reader. The checked-token API still rechecks freshly.
+
+The completed rehearsal uses two real source directories/processes, one task,
+two supplied answers, two arms and two opportunities per arm. It stops the first
+source at the last slot-zero child witness, with eighteen inactive old owners,
+then completes the remaining work under the same original fixture grant. An
+interrupted proposal resumes the identical owner, operation, manifest and cost
+with no second send. All four decisions are admitted. Mixed C-only freeze keeps
+the two actual fingerprints, the explicit relation and the declared selection
+rule; the frozen files match the selected source bytes. Slot-one proposal
+feedback remains correctly old/old. Every old cut file hash remains unchanged.
+
+After publication, keyless replay passes with no new sends, workers or report,
+accounting or file changes. Final/plain work remains unused in this fixture.
+The [delivery](conformance/study-continuation-delivery.json) records the exact
+cuts, earlier failures, independent review and current limits.
+
+Two earlier full attempts timed out at the unchanged 180-second child limit;
+their results remain incomplete. The completed run takes 3,405.218 seconds for
+the one full test, with all sixty-nine children exiting successfully and the
+longest child taking 115.127 seconds. It uses the separately verified constructor
+repair. These are one local execution and work-count observations, not a speed
+ratio or a universal runtime bound. A reviewed external observer retained the
+original temporary paths on failure and requested frame-only stacks at 150
+seconds; it changed no shipped code, test, timeout or model setting. Successful
+ownership-checked cleanup removed the fixture.
+
+```powershell
+python -B -m unittest discover -s tests -p test_study_continuation.py -v
+```
+
+This optional developer command runs the descriptor-entry check and supplied
+two-slot rehearsal once in disposable test folders. It needs no API keys,
+makes no paid calls and starts no real containers. Allow about an hour on the
+observed Windows machine. Use a separate PowerShell window if you want to keep
+it visible; Ctrl+C stops it. The ordinary test cleans up its temporary folders;
+the retained external diagnostic observer is recorded separately.
 
 ## What must happen before another paid start
 
@@ -259,10 +314,12 @@ later work. New bytes are read with fixed field limits, never an arbitrary
 size supplied by metadata.
 
 This fixture uses simulated workers and provider replies, with no real API calls
-or containers. It proves the first common-witness proposal mechanism, not the
-actual interrupted counted-child witness or a complete comparison. Completing
-both witness roles, mixed parent selection, final assessment, plain references
-and publication still needs composed checks. No paid operator command is added.
+or containers. That first fixture proves only the common-witness proposal
+mechanism. The counted-child and remaining-development fixtures add their
+separately recorded scopes. Current-source final assessment, plain references
+and whole-trial publication remain separate verification gates; PLAN.md records
+the passing pre-generic full-trial fixture without relabeling it as a current-cut
+pass. These library slices add no paid operator command.
 
 ```powershell
 python -B -m unittest discover -s tests -p test_unified_continuation.py -v
@@ -298,14 +355,13 @@ decoding the same task population for every file belonging to one owner. Its
 work-count and adversarial tests preserve the original owner/funding checks;
 they do not establish an end-to-end runtime improvement or enable continuation.
 
-[PLAN.md](PLAN.md) owns the sequence: finish bounded-reader verification,
-repair repeated reconstruction and safe error reporting, then implement and
-rehearse an explicit continuation across the old and new helper versions.
-Recheck complete-grid file/byte capacity, original accounting, source identity,
-confinement and outgoing provider settings before a new local handoff.
+[PLAN.md](PLAN.md) owns the remaining sequence: reconcile the integrated
+current-source trial with its full-phase evidence, verify the actual retained
+record and current execution pins, then complete exact-source CI, accounting,
+confinement and outgoing-request checks before a new local handoff.
 
 The continuation must preserve original paths, grants, manifests, receipts,
 unknown requests and all charges. Editing frozen source hashes, deleting
 evidence, replacing owners or importing trial work into an unrelated grant is
-not recovery. No continuation or paid restart command is supplied by this
-first slice. No additional funding is requested.
+not recovery. This guide supplies no cleared paid restart command. No additional
+funding is requested by these recovery slices.
