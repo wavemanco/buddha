@@ -253,41 +253,53 @@ def selection_audit(checked):
 
 
 def new_step(destination, operation):
+    from buddha import improver_study
     from buddha import unified_continuation as api
     from buddha.doctor import _Capture, _owner
     from buddha.gateway import RawHTTPTransport
 
     metadata = json.loads((destination / "old.json").read_bytes())
     path = destination / "continuation.json"
-    checked = api.check_study_continuation(path, expected_sha256=sha(path.read_bytes()))
-    if operation == "check":
-        return checked.summary()
-    if operation == "negatives":
-        return metadata_negatives(destination, metadata, path)
-    if operation == "audit":
+    descriptor_sha256 = sha(path.read_bytes())
+    if operation in {"check", "negatives", "audit"}:
+        checked = api.check_study_continuation(path, expected_sha256=descriptor_sha256)
+        if operation == "check":
+            return checked.summary()
+        if operation == "negatives":
+            return metadata_negatives(destination, metadata, path)
         return selection_audit(checked)
     study = Path(metadata["study"])
     cut = json.loads(Path(metadata["cut"]["path"]).read_bytes())
     interrupt = operation.removeprefix("interrupt-") if operation.startswith("interrupt-") else None
-    complete = checked.summary()["study_complete"]
-    if operation == "replay":
-        assert complete
-    if complete and operation in {"step", "replay"}:
-        assert not any(os.environ.get(name) for name in ("OPENAI_API_KEY", "ANTHROPIC_API_KEY"))
-        with (
-            patch(
-                "buddha.executor.run_container", side_effect=AssertionError("worker forbidden")
-            ) as worker,
-            patch(
-                "http.client.HTTPSConnection", side_effect=AssertionError("network forbidden")
-            ) as network,
-        ):
-            result = api.advance_study(checked, transport=RawHTTPTransport(allow_paid=True))
-            assert worker.call_count == 0 and network.call_count == 0
-        sends, trace = [], []
-    else:
-        with workers(metadata, interrupt_role=interrupt) as (sends, trace):
-            result = api.advance_study(checked, transport=RawHTTPTransport(allow_paid=True))
+    # This is only a no-key routing hint. The real descriptor API validates the
+    # complete report and all evidence before it may return or dispatch.
+    replay = operation == "replay" or (operation == "step" and (study / "report.json").is_file())
+    with patch.object(improver_study, "_restore", wraps=improver_study._restore) as restore:
+        if replay:
+            assert not any(os.environ.get(name) for name in ("OPENAI_API_KEY", "ANTHROPIC_API_KEY"))
+            with (
+                patch(
+                    "buddha.executor.run_container", side_effect=AssertionError("worker forbidden")
+                ) as worker,
+                patch(
+                    "http.client.HTTPSConnection", side_effect=AssertionError("network forbidden")
+                ) as network,
+            ):
+                result = api.advance_study_descriptor(
+                    path,
+                    expected_sha256=descriptor_sha256,
+                    transport=RawHTTPTransport(allow_paid=True),
+                )
+                assert worker.call_count == 0 and network.call_count == 0
+            sends, trace = [], []
+        else:
+            with workers(metadata, interrupt_role=interrupt) as (sends, trace):
+                result = api.advance_study_descriptor(
+                    path,
+                    expected_sha256=descriptor_sha256,
+                    transport=RawHTTPTransport(allow_paid=True),
+                )
+        restore_count = restore.call_count
     capture = _Capture(study)
     owners = {}
     for role in ("proposal", "generation"):
@@ -310,7 +322,28 @@ def new_step(destination, operation):
         "owners": owners,
         "result_status": nested.get("status") if isinstance(nested, dict) else None,
         "published": (study / "report.json").exists(),
+        "restore_count": restore_count,
     }
+
+
+class StudyDescriptorEntryTests(unittest.TestCase):
+    def test_descriptor_entry_checks_once_then_dispatches_that_prepared_state(self):
+        """A unit seam check; the real two-root acceptance remains separate."""
+        from buddha import unified_continuation as api
+        from buddha.gateway import RawHTTPTransport
+
+        advance = api.advance_study_descriptor
+        path = Path(__file__).absolute().with_name("not-opened-continuation.json")
+        transport = RawHTTPTransport(allow_paid=True)
+        prepared = object()
+        result = {"action": "witness", "role": None, "result": None}
+        with (
+            patch.object(api, "_checked_state", return_value=prepared) as check,
+            patch.object(api, "_advance_prepared", return_value=result) as dispatch,
+        ):
+            self.assertIs(advance(path, expected_sha256="a" * 64, transport=transport), result)
+        check.assert_called_once_with(path, "a" * 64, study_continuation=True)
+        dispatch.assert_called_once_with(prepared, transport=transport)
 
 
 class StudyContinuationTests(unittest.TestCase):
@@ -390,6 +423,10 @@ class StudyContinuationTests(unittest.TestCase):
                 )
             )
             self.assertIs(type(step["at_cut"] if old else step["published"]), bool)
+            if not old:
+                self.assertEqual(
+                    step["restore_count"], 2 if operation.startswith("interrupt-") else 1
+                )
         return step
 
     def test_retained_last_slot_zero_cut_reaches_complete_development_and_replays_keylessly(self):
@@ -502,6 +539,7 @@ class StudyContinuationTests(unittest.TestCase):
         self.assertEqual(replay["action"], "complete")
         self.assertEqual(replay["sends"], [])
         self.assertEqual(replay["roles"], [])
+        self.assertEqual(replay["restore_count"], 1)
         self.assertEqual(
             {
                 str(p.relative_to(trial)): sha(p.read_bytes())
