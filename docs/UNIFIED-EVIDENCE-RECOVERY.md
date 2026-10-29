@@ -478,3 +478,36 @@ start a second copy. The automatic stop above is the current checkpoint.
 Eventual computational completion is followed by separate AI review; optional
 human ratings do not block the AI-only report. A completed run does not by
 itself establish scientific improvement.
+
+### Safe stop diagnostics in the repair checkout
+
+The separate repair adds a small diagnostic record before the coordinator's
+potentially long incomplete-observation collection. It keeps the existing stop
+reason and adds fixed exception categories and bounded source locations from
+the installed public Buddha package. A location contains only a permitted file
+name and line number. It contains no error message, key, local variable, task
+answer, private program text or outside file path. Nested wrappers can still
+be followed even when they suppress the normal Python traceback display.
+
+The coordinator prints the safe record and attempts to save the same record
+as a separate diagnostic JSON file in its existing observations folder. The
+ordinary incomplete-observation format and the accounting remain unchanged.
+If diagnostic collection or saving fails, the original failure and ordinary
+incomplete-recording attempt still take precedence.
+
+These locations help identify the failed check; they do not prove a diagnosis
+on their own. They cannot recover the exception from the already finished
+October 29 process. This repair does not establish the cause of that stop,
+close the earlier silent-start/repeated-label display issues, change a safety
+check or clear the historical command for rerun. Focused engineering evidence
+is recorded in [the diagnostic delivery](conformance/launcher-stop-diagnostics-delivery.json).
+
+Optional developer check, from the repair checkout:
+
+```powershell
+python -B -m unittest discover -s tests -p test_launch_stop_diagnostics.py -v
+```
+
+This runs the focused synthetic diagnostic checks once. It makes no paid calls
+and does not use the original experiment or ask for keys. Run it in an idle
+PowerShell window; no second window is needed. Ctrl+C stops the local check.

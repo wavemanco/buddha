@@ -204,3 +204,6 @@ and safe error propagation before any new paid handoff. Keep the frozen
 runtime unchanged and require separately checked repair/continuation evidence.
 PLAN.md retains IMP-01 as Next and the two existing scientific gates; this
 follow-up grants no new funding or execution authority.
+
+
+The [bounded diagnostic repair](conformance/launcher-stop-diagnostics-delivery.json) now passes 30 focused methods and configured local quality checks. It prints and attempts to save fixed categories and bounded installed-public source locations before slow observation collection, preserving existing reasons and stop behavior. It cannot recover the finished process's lost exception, establish the actual cause, or clear a rerun. Initial silent reconstruction and repeated ambiguous phase labels remain open. Exact-source hosted verification and a realistic no-cost study-start diagnosis/rehearsal remain next; keep the original executing checkout unchanged.
