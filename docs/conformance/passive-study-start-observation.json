@@ -1,0 +1,306 @@
+{
+  "format": "buddha.passive-study-start-observation.v1",
+  "status": "actual_passive_compatibility_independently_verified",
+  "spec": [
+    "DESIGN3",
+    "DESIGN9",
+    "DESIGN10"
+  ],
+  "last_verified_original_accounting": {
+    "committed_microusd": 4845090,
+    "operation_count": 604,
+    "reserved_microusd": 0,
+    "spent_microusd": 4845090,
+    "scope": "Actual V4 reconstructed authority totals; recorded accounting, not provider invoice reconciliation."
+  },
+  "v2_observer": {
+    "checker": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\study-start-passive-20261029-v1\\check-study-start-DRAFT-v2.py",
+      "sha256": "c3d18dcb50f59a44fa2b91fa5b03695b00dad5a489081f3521398f1aa46cd7d4"
+    },
+    "result": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\study-start-passive-20261029-v1\\study-start-passive-result-v2.json",
+      "sha256": "d30b88ce851553dde83e2272b0f9fabc85b6b406442049ab9323ae909f401863"
+    },
+    "status": "stopped",
+    "stage": "reconstruct",
+    "reason": "original_checkpoint_mismatch",
+    "history_reconstruction_returned_successfully": true,
+    "summary_totals": {
+      "operation_count": 604,
+      "reserved_microusd": 0,
+      "spent_microusd": 4845090
+    },
+    "error": "The observer compared the intentional three-field summary with four-field authority totals and rejected valid state. This is an observer defect, not the original search failure.",
+    "wall_seconds": 1806.547,
+    "memory_SQL_connections": 14195,
+    "deserialized_query_only_connections": 14193
+  },
+  "correction": {
+    "summary_schema": [
+      "spent_microusd",
+      "reserved_microusd",
+      "operation_count"
+    ],
+    "independent_authority_schema": [
+      "committed_microusd",
+      "spent_microusd",
+      "reserved_microusd",
+      "operation_count"
+    ],
+    "guards": "Both exact schemas and values remain checked with literal integer types; floats/bools, missing/extra fields and real drift reject. Fixed per-assertion booleans and sanitized counts/position are saved before a checkpoint stop.",
+    "regression_red": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\study-start-passive-20261029-v1\\checkpoint-regression-red-v3.json",
+      "sha256": "9d9c17a44cc367ac99e53873f7a984c0a91b6c1f8275a031a971428a417b33aa"
+    },
+    "regression_green": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\study-start-passive-20261029-v1\\checkpoint-regression-green-v3.json",
+      "sha256": "29e657c6a6c6ee3d6b7bb92dfea3ad1e7d75673e09f92ecd9a9be57520f819b1"
+    },
+    "synthetic_methods": {
+      "v3": 15,
+      "v4": 16,
+      "checkpoint_denial_variants": 51
+    },
+    "old_source_v3_actual_run": "not_executed"
+  },
+  "diagnostic_source_draft": {
+    "source_head": "c54819f8516cb6b50c1040d7f500c9ef12593f8b",
+    "metadata_preparation": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\diagnostic-continuation-preparation-20261029-v1\\metadata-preparation-v1.json",
+      "sha256": "18ac0e5e17a1758d122d653a6ec887f9db8808d8ca7231af5c38847da523e790"
+    },
+    "descriptor": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\diagnostic-continuation-preparation-20261029-v1\\PROVISIONAL-imp01-trial-continuation-c54819f-v1.json",
+      "sha256": "da37a8178d930d684b38518964e277030aa4567a4b4943d4835a8ad9468adfcc"
+    },
+    "helper_relation": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\diagnostic-continuation-preparation-20261029-v1\\PROVISIONAL-imp01-helper-relation-c54819f-v1.json",
+      "sha256": "75db820c10920c8f5e40c33c83a592b6256e6dba73651e6c789285b6cf885d7c"
+    },
+    "changed_public_sources": [
+      "buddha/launch_common.py",
+      "buddha/unified_launch.py"
+    ],
+    "unchanged_public_sources": 88,
+    "preserved": "All 68 before bindings, source manifest, CORE10/scientific6, cut, original launch, grants, policy and six phases."
+  },
+  "v4": {
+    "checker": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\study-start-passive-20261029-v1\\check-study-start-DRAFT-v4.py",
+      "sha256": "6581158970cbe7b018a7e963860672f4a5ec03c2d211cb659522db7e5718bb13"
+    },
+    "preparation": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\study-start-passive-20261029-v1\\draft-preparation-v4.json",
+      "sha256": "84fbdb6dab485786243806f236f31ba1ce40584eae71af5a15ebc5c14fe40f6e"
+    },
+    "expected_result_path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\study-start-passive-20261029-v1\\study-start-passive-result-v4.json",
+    "result": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\study-start-passive-20261029-v1\\study-start-passive-result-v4.json",
+      "sha256": "f16975ed4c9d5a87148ace2b76857fdd38132d6c1c4c822ed66043828d7b854e"
+    },
+    "independent_result_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\study-start-passive-20261029-v1\\independent-result-review-v4.json",
+      "sha256": "db41b2566ca32298bbdb5917cb281faa870f18e62e3b3cec4c6eb7903506183c"
+    },
+    "execution_status": "complete_passive_check_independently_verified",
+    "recorded_start_utc": "2026-10-29T17:13:53.711014+00:00",
+    "terminal_observation_utc": "2026-10-29T17:43:18+00:00",
+    "terminal_time_source": "Root observed the tool process exit; recorded_start_utc is the probe start time, not its completion time.",
+    "completed_stages": [
+      "reconstruct",
+      "checkpoint",
+      "current_controls",
+      "witness_absence",
+      "witness_progress",
+      "witness_parent",
+      "witness_purpose",
+      "passive_capture_finish"
+    ],
+    "checkpoint": {
+      "actual_action": {
+        "kind": "witness",
+        "position": {
+          "arm": 1,
+          "repetition": 1,
+          "slot": 0,
+          "stage": "witness_feedback",
+          "start": 1
+        }
+      },
+      "actual_funding_totals": {
+        "committed_microusd": 4845090,
+        "operation_count": 604,
+        "reserved_microusd": 0,
+        "spent_microusd": 4845090
+      },
+      "actual_new_owner_count": 0,
+      "actual_summary_totals": {
+        "operation_count": 604,
+        "reserved_microusd": 0,
+        "spent_microusd": 4845090
+      },
+      "checks": {
+        "action_kind": true,
+        "action_position_shape": true,
+        "action_position_values": true,
+        "funding_totals_shape": true,
+        "funding_totals_values": true,
+        "new_owner_count": true,
+        "state_present": true,
+        "summary_totals_shape": true,
+        "summary_totals_values": true
+      }
+    },
+    "witness_progress": {
+      "inactive_pending": false,
+      "lower_role": "proposal",
+      "needs_prepare": true,
+      "owner_count": 0
+    },
+    "parent_candidate_id": "bb025a41ec036a3ad56d25e13322aa84467b1ed75731b2412306d525f9148034",
+    "materials": {
+      "normal_controller_creates_directory_before_materials": true,
+      "reason": "witness_parent_directory_absent",
+      "status": "not_exercised"
+    },
+    "wall_seconds": 1753.039,
+    "cpu_seconds": 1711.594,
+    "memory_SQL_connections": 14287,
+    "deserialized_query_only_connections": 14285,
+    "guard_attempts": [],
+    "paid_readiness": false,
+    "owners": {
+      "old_owner_count": 174,
+      "all_old_owners_inactive": true,
+      "new_owner_count": 0
+    },
+    "recorded_zero_counters": {
+      "launch_calls": 0,
+      "provider_calls": 0,
+      "keys_read": 0,
+      "containers": 0,
+      "original_writes": 0,
+      "on_disk_SQL_connections": 0,
+      "private_program_AST_or_execution": 0
+    }
+  },
+  "scope": "Passive pre-writer source/record compatibility only. No genuine held lease, study lock, scheduler advancement, witness materials or owners are exercised.",
+  "limits": [
+    "V2 identified an observer error; the original automatic search-stop cause remains unknown.",
+    "Actual V4 passive compatibility and its independent result review pass at the declared pre-writer scope.",
+    "V4 does not exercise a genuine held work lease, witness materials, scheduler execution or owner creation; its materials field explicitly records not_exercised.",
+    "No paid handoff or rerun is cleared; the original $150/16384 scope remains unchanged.",
+    "This slice does not certify full hosted CI for the diagnostic source; Windows evidence remains unverified."
+  ],
+  "next": "Finish exact-source Windows CI and fresh source/input/runtime verification, then publish a separately checked continuation. Existing automatic original-state and work-lease checks still apply at operator launch; no new manual original-held-lease rehearsal is required. IMP-01/EVAL-02 remain open.",
+  "document_preparation": {
+    "application_changes": 0,
+    "original_SQL_connections": 0,
+    "private_actor_parsing_or_execution": 0,
+    "keys_read": 0,
+    "provider_calls": 0,
+    "containers": 0,
+    "original_writes": 0
+  },
+  "native_readiness": {
+    "status": "pass_at_single_no_provider_startup_scope",
+    "receipt": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\native-startup-readiness-20261029-v1\\receipt.json",
+      "sha256": "b40320d2f89ed6231f7eda9ce9eed3a3e395b03ac52c75db2fc229569492634b"
+    },
+    "independent_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\native-startup-readiness-20261029-v1\\independent-result-review-v1.json",
+      "sha256": "f09792138613ea4fd2d729414028821cc318579cb6db95798c9e03c46a426612"
+    },
+    "root_result_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\native-startup-readiness-20261029-v1\\root-result-review-v1.json",
+      "sha256": "cc9819f52aa0ac70ca22ef2395bb058e25d70c42e06af844efe5529e9e491d6b"
+    },
+    "elapsed_seconds": 44.694,
+    "audit_modules": 5180,
+    "hook_aliases": 8,
+    "watched_original_files_unchanged": 2487,
+    "container_attempts": 1,
+    "owned_cleanup": "removed",
+    "root_owned_container_absence": {
+      "container_id": "742232ffe6c44918164f0bbc841b85bbd9b2ddb08fdb6264612c89d0102701f6",
+      "method": "Read-only Docker inspect of this exact owned container after terminal probe",
+      "observed_exit_code": 1,
+      "observed_daemon_response": "No such container",
+      "tool_chunk": "c5822f"
+    },
+    "provider_calls": 0,
+    "keys_read": 0,
+    "original_SQL_connections": 0,
+    "owners_or_grants_created": 0,
+    "qualification": "Direct original executor and passive native audit only, without an active work lease or original-owner mutation; not paid readiness or recovery."
+  },
+  "outgoing_settings": {
+    "source_head": "c54819f8516cb6b50c1040d7f500c9ef12593f8b",
+    "initial": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\launcher-safe-stop-diagnostics-20261029-v1\\request-settings-current-initial-v1.json",
+      "sha256": "a64bc2a791df6c7227bf31577b4ad629a64664060a7264524e6ee90e0345a2aa"
+    },
+    "repeat": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\launcher-safe-stop-diagnostics-20261029-v1\\request-settings-current-repeat-v1.json",
+      "sha256": "075c29c079ef81c599fa31653aa0327fd2807e60591236932e261e2a58c4b36f"
+    },
+    "initial_observation": {
+      "status": "failed_fixture_setup_before_one_negative_subcase",
+      "methods": 10,
+      "errors": 1,
+      "seconds": 15.762
+    },
+    "focused_reproduction": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\request-settings-root-observation-20261029-v1\\observation-v1.json",
+      "sha256": "341efb0249d251c10ddc9ac50e8d724d12fa77e0d77378c4c02ac9da85ac2ee8",
+      "methods": 1,
+      "seconds": 3.719,
+      "status": "pass_all_four_original_subcases"
+    },
+    "repeat_observation": {
+      "status": "complete_pass",
+      "methods": 10,
+      "errors": 0,
+      "failures": 0,
+      "seconds": 15.163
+    },
+    "settings_checked": [
+      "Configurable reasoning generators retain low effort.",
+      "Partition requests omit explicit effort, token and temperature overrides.",
+      "Utility keeps high adaptive effort and16000 tokens; Sonnet is refusal-only fallback."
+    ],
+    "initial_fixture_error_cause": "unknown",
+    "ordinary_trace_events_establish_a_cause": false,
+    "production_edits_for_this_check": 0,
+    "scope": "Synthetic temporary ledgers and mocked HTTPS; no original experiment, real API keys, provider or container calls. A repeated pass does not replace the first failed observation or establish account access."
+  },
+  "diagnostic_source_hosted_CI": {
+    "status": "partial_parent_checkpoint_at_preparation",
+    "verified_linux_jobs": 5,
+    "windows_evidence": "unverified",
+    "full_hosted_green_claimed": false,
+    "root_verified_snapshot": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\launcher-diagnostics-hosted-20261029-v1\\root-linux-coverage-complete-v1.json",
+      "sha256": "d3d03cde3bbe7df4cf37e1af37651d50cef0a0951c80625b1c9bc530085db60d"
+    },
+    "ordered_disjoint_linux_occurrences": 2141,
+    "linux_outcomes": {
+      "success": 2136,
+      "skip": 5
+    },
+    "linux_quality_steps": 35,
+    "reader_self_checks": 9
+  },
+  "post_v4_original_preservation": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\trial-continuation-preservation-20261029-v2\\preservation-v1.json",
+    "sha256": "5a325f6d6094aeb709bbd89fc50883983109e8e559c4d3f1202fe8f064305731",
+    "protected_original_hashes": 3277,
+    "historical_public_source_pins": 90,
+    "trial_names": 2149,
+    "status": "all_unchanged",
+    "wall_seconds": 10.163,
+    "qualification": "These 90 source pins belong to the historical frozen checkout. The selected c548 source map is checked separately by V4."
+  }
+}

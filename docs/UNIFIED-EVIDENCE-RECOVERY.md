@@ -511,3 +511,35 @@ python -B -m unittest discover -s tests -p test_launch_stop_diagnostics.py -v
 This runs the focused synthetic diagnostic checks once. It makes no paid calls
 and does not use the original experiment or ask for keys. Run it in an idle
 PowerShell window; no second window is needed. Ctrl+C stops the local check.
+
+### Passive study-start diagnosis
+
+The first guarded observer restored the saved history, then stopped because
+its own check compared a three-field summary with four-field authority totals.
+That V2 result is retained. It does not explain the original search failure.
+The corrected check verifies the three summary fields and, separately, all
+four authority fields. It also rejects wrong types, extra or missing fields
+and changed amounts; synthetic regression checks cover those cases.
+
+V4 completed the passive check against diagnostic-only `c54819f` source in
+1,753.039 seconds. All eight stages and nine checkpoint checks passed, keeping
+174 inactive owners, 604 recorded attempts, $4.845090 spent and zero held.
+It created no owners and made no API calls. Independent review also passes;
+[the observer record](conformance/passive-study-start-observation.json) binds both results.
+This checks source/record compatibility before any writer lease or new model
+work. It does not exercise the held lease, witness materials or scheduler,
+explain the original stop, or establish that recovery works.
+The historical command remains on hold; no new command or key entry is requested.
+
+A separate native startup check passed the original import audit for 5,180
+modules and eight hook aliases in 44.694 seconds, using the original image,
+mounts and limits. Its 2,487 watched files remained unchanged. The one container
+was removed, and a separate check confirmed it was absent. No API calls,
+keys, original SQL connections or new owners were used. This checks startup;
+it does not exercise the real work lease or recover the experiment.
+
+Offline outgoing-request checks passed all ten methods on repeat. The first
+cohort retained one fixture-setup error; a focused repeat also passed, but the
+initial cause remains unknown. These checks use temporary synthetic ledgers
+and mocked HTTPS. They verify recorded generator/judge settings at this source
+cut, without establishing provider access or permission to restart the run.
