@@ -162,3 +162,22 @@ ENG-REF-DEPS-01 remains open. Retain host TLS uncertainty and the other advisory
 coverage gaps before any broader exception claim. This source review runs no
 exploit, scan, package installation, container or provider request. It changes
 no dependency, frozen lock, benchmark setting, prepared study or scientific gate.
+
+## ENG-OBS-01: show progress before continuation key prompts
+
+Recorded October 29, 2026 as an existing operator-observability follow-up under
+[DESIGN section 9](DESIGN.md#9-paid-operation-integrity), not a new scientific
+gate or spending approval. In the frozen PR179 runtime,
+`launch_trial_continuation` calls `_checked_state` before entering the ordinary
+launcher's heartbeat. This full-history check can take tens of minutes with no
+terminal output, before any key prompt or provider call.
+
+The [current handoff](UNIFIED-EVIDENCE-RECOVERY.md#operator-handoff-for-the-original-comparison)
+prints one free notice before the unchanged Python command and tells the
+operator to wait for the prompt. It does not close the progress gap. A future
+reviewed runtime should reuse the existing progress callback/heartbeat around
+this initial passive check, retaining original exceptions, source/accounting
+guards and the no-provider-before-keys boundary. A delayed-check fixture should
+show the notice and periodic liveness without claiming completed work or
+printing credentials. Keep the currently frozen runtime unchanged; PLAN.md
+retains IMP-01 as Next and the two existing scientific gates.

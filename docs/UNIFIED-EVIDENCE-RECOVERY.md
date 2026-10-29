@@ -300,11 +300,11 @@ The full-trial bridge reuses the existing coordinated launcher for remaining dev
 
 The coordinator freshly rejoins the continuation evidence under its workspace lease before key entry and again before the first phase starts. New trial owners also bind the cut reference. Stopped and cancelled terminal records retain the validated continuation hash. The `--continuation` flag explicitly selects this route; reading a saved reference never activates it automatically.
 
-The complete offline trial rehearsal passed on the earlier repair cut. The optimized source has separate focused checks and a successful check against the actual saved history. Its exact published-source CI remains pending; the [delivery record](conformance/trial-continuation-delivery.json) keeps those source cuts and limits separate.
+The complete offline trial rehearsal passed on the earlier repair cut. The optimized source has separate focused checks and a successful check against the actual saved history. Its exact published source now passes all eight Linux/Windows CI jobs: 2,135 test occurrences per OS, with five Linux skips and one Windows skip, no failures/errors, and all 56 quality steps successful. The [trial delivery](conformance/trial-continuation-delivery.json) retains the earlier evidence cuts; the [operator handoff record](conformance/trial-continuation-handoff-delivery.json) records this later hosted completion and final clearance separately.
 
 The actual-history check reconciles 174 inactive work units and 604 recorded calls: $4.845090 spent, zero held and no new work units. All 3,277 protected original file hashes and the trial's 2,149-file list remain unchanged. This was a passive inspection; it made no provider calls and did not resume the experiment.
 
-Wait for the exact checked handoff and command before starting paid work. The existing allocation is unchanged; unused money from earlier closed experiments is not transferred into it.
+Use only the exact cleared handoff below. The existing allocation is unchanged; unused money from earlier closed experiments is not transferred into it.
 
 Optional developer checks, from a checkout containing this slice:
 
@@ -321,7 +321,7 @@ python -B -m unittest discover -s tests -p test_trial_continuation.py -v
 
 This optional developer command rehearses recovery through development, final assessment, both plain-model modes and saved-result replay. It uses temporary records and supplied replies, spends no API money and starts no real containers. It runs once in the same PowerShell window and can take hours; Ctrl+C stops it. It does not resume the original paid run.
 
-## What must happen before another paid start
+## Earlier library acceptance
 
 The first [executed continuation mechanism](conformance/witness-continuation-delivery.json)
 now passes an offline test using two real source directories and separate Python
@@ -343,10 +343,10 @@ size supplied by metadata.
 This fixture uses simulated workers and provider replies, with no real API calls
 or containers. That first fixture proves only the common-witness proposal
 mechanism. The counted-child and remaining-development fixtures add their
-separately recorded scopes. Current-source final assessment, plain references
-and whole-trial publication remain separate verification gates; PLAN.md records
-the passing pre-generic full-trial fixture without relabeling it as a current-cut
-pass. These library slices add no paid operator command.
+separately recorded scopes. Those library checks alone do not establish final
+assessment, plain references or whole-trial publication. The later hosted
+completion and operator clearance below remain separate from their original
+evidence cuts. The library slices alone add no paid operator command.
 
 ```powershell
 python -B -m unittest discover -s tests -p test_unified_continuation.py -v
@@ -382,13 +382,70 @@ decoding the same task population for every file belonging to one owner. Its
 work-count and adversarial tests preserve the original owner/funding checks;
 they do not establish an end-to-end runtime improvement or enable continuation.
 
-[PLAN.md](PLAN.md) owns the remaining sequence: reconcile the integrated
-current-source trial with its full-phase evidence, verify the actual retained
-record and current execution pins, then complete exact-source CI, accounting,
-confinement and outgoing-request checks before a new local handoff.
+[PLAN.md](PLAN.md) owns the current sequence. The operator section below records
+the later exact-source CI, retained-record, execution-pin, accounting, runtime
+and outgoing-request checks separately from these earlier library mechanisms.
 
 The continuation must preserve original paths, grants, manifests, receipts,
 unknown requests and all charges. Editing frozen source hashes, deleting
 evidence, replacing owners or importing trial work into an unrelated grant is
-not recovery. This guide supplies no cleared paid restart command. No additional
-funding is requested by these recovery slices.
+not recovery. The earlier library slices alone supplied no cleared paid restart
+command. The operator section below separately records the checked handoff;
+no additional funding is requested by these recovery slices.
+
+## Operator handoff for the original comparison
+
+**Cleared for the operator to resume this original experiment under its existing allowance.**
+
+The executing PR179 source passes its complete Linux/Windows matrix. Final
+source/input/runtime preflight also passes; the [handoff record](conformance/trial-continuation-handoff-delivery.json)
+binds both checks. This documentation update has not started the run.
+
+This resumes the original experiment at its next unfinished step. It keeps all
+604 recorded API attempts, their replies and the $4.845090 already spent, then
+continues development, final assessment, both plain-model references and saved
+comparison publication. It creates no new allowance or replacement experiment.
+
+The same combined cap remains **$150 and 16,384 attempts**: $40/4,096 for
+development, $85/10,240 for final assessment and $25/2,048 shared by both plain
+references. Validation remains $0/0. Earlier spending counts against these same
+four original grants. Separate native AI review uses the already approved
+Codex capacity outside this API cap; its monetary cost is unpriced, not zero.
+
+Keep Docker Desktop running and use only one running copy of the command.
+A new PowerShell window is optional. The existing Python installation needs
+no package installation. Keep the exact paths and fingerprint below, including
+their historical `PROVISIONAL` filename. The command executes the frozen
+PR #179 checkout at `e62515c5`.
+
+```powershell
+cd C:\Users\arvik\code\buddha
+Write-Host 'Checking the saved run before key prompts. This can take tens of minutes.'
+python -B "C:\Users\arvik\code\buddha\runs\reviews\trial-continuation-capture\docs\conformance\unified-run.py" --handoff "C:\Users\arvik\code\buddha\runs\reviews\eval01-final-design-20261023\PROVISIONAL-imp01-trial-continuation-2349d9a-v1.json" --sha256 fc2e4d8fe4b40b79b09aedc6ac869b5ec063d169912e8be12f61c2e2a0ce1785 --continuation --live --prompt-keys --confirm-project-keys
+```
+
+The first command opens the project folder and spends nothing. The second
+prints one free notice in the same window; it does not keep running. The third
+runs the checked continuation once. It verifies the saved work, asks for missing
+OpenAI and Anthropic keys using hidden input, rechecks the records, then may
+spend money within the original limits. `--continuation` selects the checked
+recovery route; `--sha256` checks the chosen record's fingerprint.
+`--confirm-project-keys` confirms that the keys belong to the approved accounts.
+The program does not write API keys into project files.
+
+The first full-history check happens before the key prompts and progress
+display. It can take tens of minutes with no terminal output; it makes no
+provider calls. Leave that one command running and wait for the key prompt
+before pasting a key. Checks after key entry can
+also take time. Paste each key once and press Enter; no characters will appear.
+Subsequent progress lines show the active
+phase's attempts, recorded cost, held amount and cap. A held amount reserves a
+possible charge; it is not another completed payment. No separate watch window
+is needed. Do not start a second copy while checks or recording are running.
+
+Ctrl+C stops the command and attempts to save an incomplete observation. Keep
+all files and any held or uncertain requests intact. If it stops, share the
+final status/error here without keys; do not reset a budget or start a second
+copy. If it completes, share the final status. Computational completion is
+followed by separate AI review; optional human ratings do not block the AI-only
+report. A completed run does not by itself establish scientific improvement.

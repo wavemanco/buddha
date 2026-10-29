@@ -1,0 +1,191 @@
+{
+  "format": "buddha.trial-continuation-handoff-delivery.v1",
+  "status": "cleared_for_operator_resume_existing_scope",
+  "live_command_cleared": true,
+  "executed": false,
+  "spec": [
+    "DESIGN3",
+    "DESIGN5",
+    "DESIGN7",
+    "DESIGN9",
+    "DESIGN10"
+  ],
+  "documentation_base": "2d199b4ee59c36cd4e188678d4dcec77fdc3bc87",
+  "executing_source": {
+    "checkout": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\trial-continuation-capture",
+    "head": "e62515c5e88a433a424cf9b357f6fc51f5cbc680",
+    "pr": 179,
+    "ci_run": 40809819853,
+    "checkout_merge": "5eee365c369367f243212d31cf981ce6d5764034",
+    "tree": "62bcfa39ee830d7817e1aaac3d22083e296f89f7",
+    "driver_sha256": "244bcf623dedcf74a90637c59c44913e19c38e985458f117f98625ea842ccce5",
+    "continuation_library_sha256": "636c45d070727edace3fec4f5eaf093c9455645475225308cc6260d906065139",
+    "distinct_from_documentation_and_ci_maintenance_checkout": true
+  },
+  "descriptor": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\PROVISIONAL-imp01-trial-continuation-2349d9a-v1.json",
+    "sha256": "fc2e4d8fe4b40b79b09aedc6ac869b5ec063d169912e8be12f61c2e2a0ce1785"
+  },
+  "scope": {
+    "combined_cap_usd": 150,
+    "attempt_cap": 16384,
+    "phase_limits": {
+      "development": [
+        40,
+        4096
+      ],
+      "validation": [
+        0,
+        0
+      ],
+      "final": [
+        85,
+        10240
+      ],
+      "plain_both_modes_shared": [
+        25,
+        2048
+      ]
+    },
+    "original_grants": 4,
+    "new_allocation": false,
+    "old_attempts": 604,
+    "old_spent_microusd": 4845090,
+    "old_held_microusd": 0,
+    "costs_are_local_not_invoice_reconciliation": true,
+    "preserve_original_owners_receipts_and_science": true,
+    "native_review": {
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "ultra",
+      "max_contexts": 44,
+      "API_cap_includes_native_Codex_cost": false,
+      "native_monetary_cost": "unpriced, not zero"
+    },
+    "human_review": "optional, nonblocking for AI-only publication"
+  },
+  "hosted_verification": {
+    "receipt": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\trial-continuation-hosted-20261029-v1\\all-eight-complete-v1.json",
+    "sha256": "d290877d88f068dba0617820c2ce0b3a25fb3de229324a665df1247de6c876bc",
+    "source_head": "e62515c5e88a433a424cf9b357f6fc51f5cbc680",
+    "census_sha256": "e8964cf4c8f5ae45e716c305833cc4a08194a8256c6d16a3f243026041d1a527",
+    "per_OS": {
+      "ubuntu-latest": {
+        "completed_occurrences": 2135,
+        "outcomes": {
+          "success": 2130,
+          "skip": 5
+        },
+        "exact_disjoint_ordered_union": true,
+        "selected_counts": [
+          1,
+          717,
+          707,
+          710
+        ]
+      },
+      "windows-latest": {
+        "completed_occurrences": 2135,
+        "outcomes": {
+          "success": 2134,
+          "skip": 1
+        },
+        "exact_disjoint_ordered_union": true,
+        "selected_counts": [
+          1,
+          717,
+          707,
+          710
+        ]
+      }
+    },
+    "successful_jobs": 8,
+    "successful_quality_steps": 56,
+    "metadata_reader_adversarial_checks": 9,
+    "internal_worker_terminal_file": "Not separately downloaded; qualified console/job-step evidence retained.",
+    "scope": "Engineering coverage only, not scientific effectiveness or provider-account access."
+  },
+  "preparation": {
+    "record": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\trial-continuation-operator-preparation-v1.json",
+    "sha256": "c28c42d5fd58007f5916ff4783b6252c6e5a62fbde91b8183532bab8ca2f005a",
+    "runtime_fields_equal": true,
+    "host_dependencies": "Standard library only. Static transitive import trace found67 public modules and0 third-party imports. msgpack is development-only; no install required.",
+    "scope": "Historical preparation record remains draft; this later delivery supplies any final clearance."
+  },
+  "final_root_checks": {
+    "status": "pass",
+    "receipt": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\trial-continuation-final-preflight-v1.json",
+    "sha256": "c387870ce99993fcccd638f4aaaf1652685a9df196b9aacd320f313c2eeb2e17",
+    "preservation": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-evidence-repair-preservation-check-v9.json",
+      "sha256": "55a5778b5881d9c93857e91a3b663e8133b3ee96acc869c37d5541320e438cff",
+      "status": "pass",
+      "protected_raw_files": 3277,
+      "trial_membership_files": 2149,
+      "public_pins": 90,
+      "continuation_inputs": 3,
+      "runtime_fields_equal": 6,
+      "wall_seconds": 24.09
+    },
+    "runtime_scope": "Default Python six-field equality, Docker availability and pinned images; existing automatic installed-byte/runtime/confinement guards remain unchanged before paid dispatch. No new container or provider probe.",
+    "provider_access": "Not tested by preparation; manual project-key confirmation and original keyed checks apply at operator launch."
+  },
+  "operator": {
+    "commands": [
+      {
+        "command": "cd C:\\Users\\arvik\\code\\buddha",
+        "function": "Opens the project folder in the current PowerShell window; spends nothing."
+      },
+      {
+        "command": "Write-Host 'Checking the saved run before key prompts. This can take tens of minutes.'",
+        "function": "Prints one free notice in the same PowerShell window, once. It does not check the run or keep running."
+      },
+      {
+        "command": "python -B \"C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\trial-continuation-capture\\docs\\conformance\\unified-run.py\" --handoff \"C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\PROVISIONAL-imp01-trial-continuation-2349d9a-v1.json\" --sha256 fc2e4d8fe4b40b79b09aedc6ac869b5ec063d169912e8be12f61c2e2a0ce1785 --continuation --live --prompt-keys --confirm-project-keys",
+        "argv": [
+          "python",
+          "-B",
+          "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\trial-continuation-capture\\docs\\conformance\\unified-run.py",
+          "--handoff",
+          "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\PROVISIONAL-imp01-trial-continuation-2349d9a-v1.json",
+          "--sha256",
+          "fc2e4d8fe4b40b79b09aedc6ac869b5ec063d169912e8be12f61c2e2a0ce1785",
+          "--continuation",
+          "--live",
+          "--prompt-keys",
+          "--confirm-project-keys"
+        ],
+        "function": "Once cleared, checks old records, prompts for missing OpenAI/Anthropic keys with hidden input, rechecks, then runs the original continuation within its existing caps. Runs once; Ctrl+C attempts an incomplete observation. A new window is optional; only one running copy."
+      }
+    ],
+    "missing_keys_only": true,
+    "keys_written_to_project_files": false,
+    "keep_Docker_running": true,
+    "no_package_installation_required": true,
+    "command_not_executed_by_this_slice": true,
+    "partial_or_stop": "Keep all files/holds/unknowns; share final status without keys. Do not reset budgets or start another copy.",
+    "completion": "Share final status; separate AI review follows. Computational completion alone proves no scientific improvement.",
+    "initial_quiet_check": {
+      "location": "buddha/unified_continuation.py:1217, before unified_launch heartbeat",
+      "expectation": "Can take tens of minutes before a prompt or progress output. Wait for the actual prompt before pasting a key.",
+      "known_progress_gap_remains": true,
+      "backlog": "docs/BACKLOG.md#eng-obs-01-show-progress-before-continuation-key-prompts"
+    }
+  },
+  "repository_changes": [
+    "docs/UNIFIED-EVIDENCE-RECOVERY.md",
+    "docs/conformance/trial-continuation-handoff-delivery.json",
+    "docs/PLAN.md",
+    "docs/BACKLOG.md"
+  ],
+  "application_changes": 0,
+  "original_SQL_connections": 0,
+  "provider_calls": 0,
+  "keys_read": 0,
+  "containers_started": 0,
+  "funding_or_owner_mutations": 0,
+  "limits": [
+    "Operator command cleared for existing original scope; preparation has not executed it or read any credential.",
+    "PR180 CI maintenance is separate and not the executing checkout; its hosted outcome does not replace exactE625 proof.",
+    "No current scientific result, goal completion, new allowance, original source change, merge or actual resume is claimed."
+  ]
+}
