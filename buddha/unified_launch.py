@@ -1,5 +1,6 @@
 """One scoped operator for original primary work and matched plain references."""
 
+import hashlib
 from collections.abc import Callable
 from dataclasses import asdict
 from datetime import UTC, datetime
@@ -605,7 +606,26 @@ def launch(
         partial("cancelled", cancelled=True)
         raise
     except Exception as error:
-        reason = common._stop_reason(error)
+        reason = None
+        try:
+            details = common._stop_diagnostic(error)
+            reason = cast(str, details["reason"])
+            diagnostic = _json(details)
+            common._emit(notice, "Stop diagnostic: " + diagnostic.decode("utf-8"))
+            if observation_directory is not None:
+                saved = observation_directory / (uuid4().hex + ".diagnostic.json")
+                pipeline._write(saved, diagnostic)
+                common._emit(
+                    notice,
+                    "Stop diagnostic saved: "
+                    + str(saved)
+                    + "; SHA256 "
+                    + hashlib.sha256(diagnostic).hexdigest(),
+                )
+        except (Exception, KeyboardInterrupt):
+            pass  # A diagnostic must never replace the original stop or its observation.
+        if reason is None:
+            reason = common._stop_reason(error)
         common._emit(
             notice,
             "Launch stopped: " + reason + ". Recording saved evidence; no new provider requests.",

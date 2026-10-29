@@ -8,10 +8,12 @@ from collections.abc import Callable, Iterator, Mapping
 from contextlib import contextmanager
 from contextvars import ContextVar
 from pathlib import Path
+from types import GetSetDescriptorType, ModuleType, TracebackType
 from typing import TYPE_CHECKING, Protocol, cast
 
 from buddha import credentials, gateway
 from buddha import native_pipeline as pipeline
+from buddha.doctor import _Busy, _Unsupported
 from buddha.gateway_history import MAX_LEDGER_BYTES
 from buddha.provider import ModelSpec
 from buddha.releases import (
@@ -228,6 +230,71 @@ def _stop_reason(error: BaseException) -> str:
             if nested is not None:
                 pending.append(nested)
     return "launch_stopped"
+
+
+def _stop_diagnostic(error: BaseException) -> dict[str, object]:
+    """Bounded public-code locations only; never inspect exception text or locals."""
+    kinds = {
+        OSError: "os_error",
+        ValueError: "value_error",
+        TypeError: "type_error",
+        KeyError: "key_error",
+        RuntimeError: "runtime_error",
+        ReleaseError: "validation_error",
+        pipeline.PipelineError: "validation_error",
+        _Busy: "evidence_busy",
+        _Unsupported: "evidence_unsupported",
+        credentials.KeyInputError: "key_input",
+        EvidenceTotalLimitError: "evidence_total_limit",
+        EvidenceFieldLimitError: "evidence_field_limit",
+        EvidencePathLimitError: "evidence_path_limit",
+    }
+    package = Path(__file__).absolute().parent
+    sources = {
+        str(package / name): name for name in _UNIFIED_HELPERS_V1 | {"unified_continuation.py"}
+    }
+    chain: list[dict[str, object]] = []
+    pending = [error]
+    seen: set[int] = set()
+    while pending and len(seen) < 8:
+        current = pending.pop()
+        if id(current) in seen:
+            continue
+        seen.add(id(current))
+        frames: list[dict[str, object]] = []
+        traceback = cast(
+            TracebackType | None,
+            cast(GetSetDescriptorType, vars(BaseException)["__traceback__"]).__get__(current),
+        )
+        for _ in range(64):
+            if traceback is None:
+                break
+            frame = traceback.tb_frame
+            name = sources.get(frame.f_code.co_filename)
+            module = None if name is None else sys.modules.get("buddha." + name[:-3])
+            line = traceback.tb_lineno
+            if (
+                isinstance(module, ModuleType)
+                and frame.f_globals is vars(module)
+                and type(line) is int
+                and 0 < line <= 1_000_000
+            ):
+                frames.append({"file": name, "line": line})
+                frames = frames[-8:]
+            traceback = traceback.tb_next
+        chain.append({"kind": kinds.get(type(current), "other"), "frames": frames})
+        for attribute in ("__context__", "__cause__"):
+            nested = cast(
+                BaseException | None,
+                cast(GetSetDescriptorType, vars(BaseException)[attribute]).__get__(current),
+            )
+            if nested is not None and len(pending) < 16:
+                pending.append(nested)
+    return {
+        "format": "buddha.launch-stop-diagnostic.v1",
+        "reason": _stop_reason(error),
+        "chain": chain,
+    }
 
 
 def _path(value: object, *, error: type[ReleaseError] = ReleaseError) -> Path:
