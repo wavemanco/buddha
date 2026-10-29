@@ -50,7 +50,11 @@
     "format": "285 files passed",
     "strict_mypy": "89 files passed",
     "wire_source": "7 request/transport files raw-identical to original frozen run and earlier25-method audit",
-    "full_current_fixture": "not run"
+    "full_current_fixture": "not run",
+    "bandit": "passed; existing14 specific suppressions retained",
+    "strict_dependency_audit": "passed; development39 and runtime0 dependencies, no known vulnerabilities",
+    "external_compilation": "285 tracked public Python files passed",
+    "quality_receipt_sha256": "8aef5e75d62b5f2ec4b3b88874e0f4e1d4a303c1628fc0c8ac05614ae55cd075"
   },
   "actual_saved_run": {
     "cut_sha256": "905179717d4582551fc50798f6f8a100d8a89352ee46bbe954a245f067a290d8",
@@ -58,7 +62,7 @@
     "state": "Provisional metadata only; actual guarded check not executed. Original604 attempts/$4.845090/zeroheld unchanged."
   },
   "remaining": [
-    "Current timed development acceptance",
+    "Integration of the completed Study dependency evidence and exact combined-source hosted verification",
     "Actual passive source/owner/liability check",
     "Exact published-source hosted CI and provider/runtime/account checks",
     "Cleared operator handoff",
@@ -66,5 +70,30 @@
   ],
   "real_provider_calls": 0,
   "operator_handoff_ready": false,
-  "scientific_claim": false
+  "scientific_claim": false,
+  "development_dependency_acceptance": {
+    "source_head": "009ac89d",
+    "source_driver_sha256": "4c8acfd6e99e8c53d1ede37ceb801d52213aced7aac9f5f70128f63ec4ccbfc8",
+    "status": "passed",
+    "methods": 1,
+    "seconds": 3405.218,
+    "child_processes": 69,
+    "maximum_child_seconds": 115.127,
+    "unchanged_child_timeout_seconds": 180,
+    "terminal_receipt_sha256": "7ee34904fdd8f0d8a5e20eecf0b9123d141e53074f32a4932358879323ae8cf2",
+    "scope": "Separate frozen Study continuation cut: two slots, both arms, mixed C freeze, publication, old cut hashes, same-owner supplied-reply replay and keyless completed replay; no provider or container calls.",
+    "limit": "Not a full rehearsal of this integrated trial cut or the actual paid population."
+  },
+  "request_and_pricing_review": {
+    "published_rate_comparison_sha256": "da944ae21c51aee952801a6646bad884d6d976c62044e41f757ba1393ceeece1",
+    "independent_request_whitelist_review_sha256": "07c0a638631c274d0e4a4a757839325399df098fa6f97323446613f2566e9200",
+    "finding": "Selected frozen public standard-price maxima still cover the published rates. No explicit12h OpenAI cache override is admitted through the selected Gateway or native transport routes.",
+    "sources": [
+      "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+      "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+      "https://developers.openai.com/api/docs/guides/prompt-caching",
+      "https://platform.claude.com/docs/en/about-claude/pricing"
+    ],
+    "limit": "Public documentation and static source/configuration checks only; no account, SDK/provider-default, access, actual billing or paid-readiness certification. No rates, settings or grants were changed."
+  }
 }
