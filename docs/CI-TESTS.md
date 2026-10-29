@@ -89,6 +89,32 @@ the emitted termination time separately from bounded directory cleanup, and
 still proves the descendant stops writing. These focused checks do not
 establish that the complete hosted matrix passes.
 
+### Observed hosted completion for PR #180
+
+The complete [PR #180 CI run](https://github.com/wavemanco/buddha/actions/runs/40824333819)
+has now passed all ten jobs on its exact source head `2d199b4e`. Each OS
+completed the full 2,135-test inventory, assigned once across five groups and
+completed in the recorded order:
+
+| OS | Passed | Skipped | Failures or errors |
+| --- | ---: | ---: | ---: |
+| Linux | 2,130 | 5 | 0 |
+| Windows | 2,134 | 1 | 0 |
+
+All seven quality checks passed in every job: 70 successful steps in total.
+A separate evidence reader also passed nine checks that reject incomplete,
+misordered or conflicting records. The [hosted completion record](conformance/ci-idle-hosted-completion.json)
+binds the exact checkout, complete assignment coverage, all ten saved job
+receipts and log fingerprints. Its evidence comes from the completed job logs
+and step records; the worker's internal terminal files were not downloaded
+separately.
+
+This closes the full hosted verification of that CI maintenance change. The
+earlier PR #177 failure and local diagnostic results remain recorded. It does
+not establish that later source heads pass, predict future job duration, or
+show that the interrupted paid experiment has recovered. The production stop
+rule remains 60 minutes without genuine test progress.
+
 ## Optional local commands
 
 Run these from the checkout that contains `ci_test_shard.py`. Each command runs

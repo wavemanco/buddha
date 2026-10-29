@@ -1,0 +1,359 @@
+{
+  "format": "buddha.ci-idle-hosted-completion.v1",
+  "status": "complete_at_exact_pr180_hosted_scope",
+  "spec": [
+    "DESIGN 9",
+    "DESIGN 10",
+    "User: stop after 60 minutes without genuine test progress"
+  ],
+  "scope": "Documentation of the completed PR180 CI maintenance matrix only; later heads need their own evidence.",
+  "prior_local_delivery": {
+    "path": "docs/conformance/ci-idle-fixture-timing-delivery.json",
+    "sha256": "9ef0188250be4acd26de83a0e735dbb24ead226e15e86b6a45e7227749987d19",
+    "historical_record_unchanged": true
+  },
+  "maintenance_source_sha256": {
+    "tests/test_ci_test_shard.py": "7a6a42984e0b24ec8d8717d7d63ad4a98a5cb2b8d175437626ac9c071afc6f84",
+    "ci_test_shard.py": "1f0399d5ab9a923fb1b9bb90639ac48c5d0e79bdb19e64e38197974edb34daec",
+    ".github/workflows/ci.yml": "ac71700049724880f2e1a7b6ad41538e4d4ee7b89c43de678346684f5baaa4c7"
+  },
+  "run": {
+    "repository": "wavemanco/buddha",
+    "pr": 180,
+    "id": 40824333819,
+    "number": 339,
+    "attempt": 1,
+    "event": "pull_request",
+    "url": "https://github.com/wavemanco/buddha/actions/runs/40824333819",
+    "source_head": "2d199b4ee59c36cd4e188678d4dcec77fdc3bc87",
+    "checkout_merge": "4b4ac4e4048c9e846ca36e7b6255c5dad630019d",
+    "tree": "a84d15be7b336c181c1905993e095f36df08f489",
+    "census_sha256": "1c66140f3dd80cf29ba8806afffc450ae17edeb2bee15d6e902f731badaf0468",
+    "groups_per_os": 5,
+    "selected_counts": [
+      1,
+      558,
+      492,
+      540,
+      544
+    ],
+    "production_idle_seconds": 3600,
+    "rule": "Time since genuine completed test, subtest or fixture outcome; not total job duration."
+  },
+  "authoritative_snapshot": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-maintenance-hosted-20261029-v1\\root-all-ten-complete-v1.json",
+    "sha256": "3f209edf86b40a4a5f3255ab4025a0c0eb01393ff00cb648f1f1a0a22aa005a0",
+    "recorded_utc": "2026-10-29T16:39:39.085504+00:00",
+    "status": "complete",
+    "all_ten_jobs_verified": true,
+    "missing": [],
+    "errors": []
+  },
+  "second_retained_snapshot": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-maintenance-hosted-20261029-v1\\all-ten-complete-v1.json",
+    "sha256": "39f3e91a4655be288931923cf251e7a176116a9e81154b4a8b0b6a807a2e9a70",
+    "recorded_utc": "2026-10-29T16:38:58.794999+00:00",
+    "status": "complete",
+    "scope": "Earlier complete aggregation of the same retained ten-job evidence; not a second CI run."
+  },
+  "reader": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-maintenance-hosted-20261029-v1\\aggregate-pr180-hosted-v1.py",
+    "sha256": "6342834ff15bae4ba25a38024d6d29e424513aa64e2caefa3c879d83ba664cb2",
+    "limits": {
+      "log_bytes": 33554432,
+      "receipt_bytes": 262144,
+      "line_bytes": 1048576,
+      "log_lines": 250000
+    },
+    "self_check": {
+      "status": "passed",
+      "checks": [
+        "unknown foreign progress rejected",
+        "second exact probe control rejected",
+        "duplicate ordinal rejected",
+        "out-of-order ordinal rejected",
+        "wrong census rejected",
+        "wrong checkout rejected",
+        "missing Windows remains partial",
+        "conflicting same-line references rejected",
+        "float probe control rejected (sequence/time_ns subcases)"
+      ],
+      "count": 9,
+      "scope": "External reader only; real retained first-job data and copied metadata; no CI/app tests or new fixtures."
+    }
+  },
+  "per_os": {
+    "ubuntu-latest": {
+      "completed_occurrences": 2135,
+      "outcomes": {
+        "success": 2130,
+        "skip": 5
+      },
+      "selected_counts": [
+        1,
+        558,
+        492,
+        540,
+        544
+      ],
+      "exact_disjoint_ordered_union": true,
+      "jobs": [
+        {
+          "id": 123283780016,
+          "url": "https://github.com/wavemanco/buddha/actions/runs/40824333819/job/123283780016",
+          "shard": 0,
+          "selected": 1,
+          "outcomes": {
+            "success": 1
+          },
+          "receipt": {
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-maintenance-hosted-20261029-v1\\job-123283780016-receipt-v1.json",
+            "sha256": "918ab0ae3086113bca1385df1aee21e7dfad18e123f9346095df7b7ce858c7af"
+          },
+          "log": {
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-maintenance-hosted-20261029-v1\\job-123283780016.log",
+            "sha256": "a924b92a356ef6007488359ebb6a036ba99e9987d1e4fc41e889bb43c254e84c"
+          },
+          "quality_steps_successful": 7,
+          "exact_checkout_verified": true,
+          "ordered_completion_verified": true
+        },
+        {
+          "id": 123283780114,
+          "url": "https://github.com/wavemanco/buddha/actions/runs/40824333819/job/123283780114",
+          "shard": 1,
+          "selected": 558,
+          "outcomes": {
+            "success": 555,
+            "skip": 3
+          },
+          "receipt": {
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-maintenance-hosted-20261029-v1\\job-123283780114-receipt-v1.json",
+            "sha256": "12ee5b709a635bb0eea6f8df30e672c660d4b5dc945d02df882eeb74d68ad3ff"
+          },
+          "log": {
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-maintenance-hosted-20261029-v1\\job-123283780114.log",
+            "sha256": "a459191ac7d1363ec9d2299cdb3c006ef3090a4e2626cedd97dec0fad0379ee0"
+          },
+          "quality_steps_successful": 7,
+          "exact_checkout_verified": true,
+          "ordered_completion_verified": true
+        },
+        {
+          "id": 123283779948,
+          "url": "https://github.com/wavemanco/buddha/actions/runs/40824333819/job/123283779948",
+          "shard": 2,
+          "selected": 492,
+          "outcomes": {
+            "success": 491,
+            "skip": 1
+          },
+          "receipt": {
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-maintenance-hosted-20261029-v1\\job-123283779948-receipt-v1.json",
+            "sha256": "23c2def395314cd2d327bf1fa1139eefbf29e786d3bc3da26e88506bb0438d51"
+          },
+          "log": {
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-maintenance-hosted-20261029-v1\\job-123283779948.log",
+            "sha256": "d88d719e5a04573f4cc17dc70f17cfecad6e2e762026d2b82ae4592b27f654e3"
+          },
+          "quality_steps_successful": 7,
+          "exact_checkout_verified": true,
+          "ordered_completion_verified": true
+        },
+        {
+          "id": 123283780032,
+          "url": "https://github.com/wavemanco/buddha/actions/runs/40824333819/job/123283780032",
+          "shard": 3,
+          "selected": 540,
+          "outcomes": {
+            "success": 540
+          },
+          "receipt": {
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-maintenance-hosted-20261029-v1\\job-123283780032-receipt-v1.json",
+            "sha256": "d90e86988f6b8ab45812b06a20a6cd31fab9f67b5ee335e3d2e0c3d818804548"
+          },
+          "log": {
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-maintenance-hosted-20261029-v1\\job-123283780032.log",
+            "sha256": "0868a730cf3746163926089adec52c60b34c449d365d4d125240f42790eb6a45"
+          },
+          "quality_steps_successful": 7,
+          "exact_checkout_verified": true,
+          "ordered_completion_verified": true
+        },
+        {
+          "id": 123283779870,
+          "url": "https://github.com/wavemanco/buddha/actions/runs/40824333819/job/123283779870",
+          "shard": 4,
+          "selected": 544,
+          "outcomes": {
+            "success": 543,
+            "skip": 1
+          },
+          "receipt": {
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-maintenance-hosted-20261029-v1\\job-123283779870-receipt-v1.json",
+            "sha256": "bf98c757cae2003d2726a4b9e4c59380be3a0fd210af7f9ac7135532b840eb05"
+          },
+          "log": {
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-maintenance-hosted-20261029-v1\\job-123283779870.log",
+            "sha256": "6cad83116bea74a82635b133fc8a0c165db4da2932be4079108feca3f248f241"
+          },
+          "quality_steps_successful": 7,
+          "exact_checkout_verified": true,
+          "ordered_completion_verified": true
+        }
+      ]
+    },
+    "windows-latest": {
+      "completed_occurrences": 2135,
+      "outcomes": {
+        "success": 2134,
+        "skip": 1
+      },
+      "selected_counts": [
+        1,
+        558,
+        492,
+        540,
+        544
+      ],
+      "exact_disjoint_ordered_union": true,
+      "jobs": [
+        {
+          "id": 123283780307,
+          "url": "https://github.com/wavemanco/buddha/actions/runs/40824333819/job/123283780307",
+          "shard": 0,
+          "selected": 1,
+          "outcomes": {
+            "success": 1
+          },
+          "receipt": {
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-maintenance-hosted-20261029-v1\\job-123283780307-receipt-v1.json",
+            "sha256": "3ac731a00e467d430610ead6ece67ae11e539181ee1105f80fd026869dbb6838"
+          },
+          "log": {
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-maintenance-hosted-20261029-v1\\job-123283780307.log",
+            "sha256": "3245d47b350d0ae8e16ec19154d70a23e39e06bfb02f610b3c1d95b1a55c17c5"
+          },
+          "quality_steps_successful": 7,
+          "exact_checkout_verified": true,
+          "ordered_completion_verified": true
+        },
+        {
+          "id": 123283780041,
+          "url": "https://github.com/wavemanco/buddha/actions/runs/40824333819/job/123283780041",
+          "shard": 1,
+          "selected": 558,
+          "outcomes": {
+            "success": 557,
+            "skip": 1
+          },
+          "receipt": {
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-maintenance-hosted-20261029-v1\\job-123283780041-receipt-v1.json",
+            "sha256": "264056c00ef81a6e1c30cce36eb67a5fffe609cf8c768921bcaaedb239970bb2"
+          },
+          "log": {
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-maintenance-hosted-20261029-v1\\job-123283780041.log",
+            "sha256": "f01014f8333ed3ae6fc95f763c70bf762e7aad1f69e324d289e6b326342371c2"
+          },
+          "quality_steps_successful": 7,
+          "exact_checkout_verified": true,
+          "ordered_completion_verified": true
+        },
+        {
+          "id": 123283779950,
+          "url": "https://github.com/wavemanco/buddha/actions/runs/40824333819/job/123283779950",
+          "shard": 2,
+          "selected": 492,
+          "outcomes": {
+            "success": 492
+          },
+          "receipt": {
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-maintenance-hosted-20261029-v1\\job-123283779950-receipt-v1.json",
+            "sha256": "4792557604625f8515afe196ad2c3da6fd2d0708525e9274a2ff40c99d498571"
+          },
+          "log": {
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-maintenance-hosted-20261029-v1\\job-123283779950.log",
+            "sha256": "6dcea8edc1370e105d2ea6fc9df47c456ae15bb8665ca8cb86620c3d01dfcfcb"
+          },
+          "quality_steps_successful": 7,
+          "exact_checkout_verified": true,
+          "ordered_completion_verified": true
+        },
+        {
+          "id": 123283780207,
+          "url": "https://github.com/wavemanco/buddha/actions/runs/40824333819/job/123283780207",
+          "shard": 3,
+          "selected": 540,
+          "outcomes": {
+            "success": 540
+          },
+          "receipt": {
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-maintenance-hosted-20261029-v1\\job-123283780207-receipt-v1.json",
+            "sha256": "2523f6781a024e5e47f3867287a013ca61b1aa7618815aa236608f8f776773ce"
+          },
+          "log": {
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-maintenance-hosted-20261029-v1\\job-123283780207.log",
+            "sha256": "05707a882779edf2a984a366c83ccd9c709148d3be04879201aef2b66f0c9f27"
+          },
+          "quality_steps_successful": 7,
+          "exact_checkout_verified": true,
+          "ordered_completion_verified": true
+        },
+        {
+          "id": 123283780023,
+          "url": "https://github.com/wavemanco/buddha/actions/runs/40824333819/job/123283780023",
+          "shard": 4,
+          "selected": 544,
+          "outcomes": {
+            "success": 544
+          },
+          "receipt": {
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-maintenance-hosted-20261029-v1\\job-123283780023-receipt-v1.json",
+            "sha256": "0f2ec4baf30e49e59c58afbbcd4582af58233b5feb3649c053b23fd38448ef8f"
+          },
+          "log": {
+            "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-maintenance-hosted-20261029-v1\\job-123283780023.log",
+            "sha256": "ad789a03e51fc26a92c4d62b3c59ab48913fb19ac4c437181c229b49cbaf8e0f"
+          },
+          "quality_steps_successful": 7,
+          "exact_checkout_verified": true,
+          "ordered_completion_verified": true
+        }
+      ]
+    }
+  },
+  "quality": {
+    "successful_steps": 70,
+    "per_job": 7,
+    "names": [
+      "Development dependency vulnerabilities",
+      "Lint",
+      "Formatting",
+      "Types",
+      "Code security",
+      "Runtime dependency vulnerabilities",
+      "Compile"
+    ]
+  },
+  "historical_failure": {
+    "pr": 177,
+    "run_id": 40798182298,
+    "job_id": 123199625845,
+    "receipt": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\pr177-windows-failure-20261029-v1\\receipt.json",
+    "receipt_sha256": "bc748b1d546ec90c6a056c92fcf7995e7da1a2d163c8a6f891ff28c0d4e953f0",
+    "status": "retained failure; later passes do not replace it"
+  },
+  "limits": [
+    "Occurrence ordinals preserve duplicate IDs; subtests are progress, never additional methods.",
+    "Only retained terminal jobs can close their OS coverage; absent jobs are pending evidence, not inferred failures.",
+    "Private internal worker terminal.json was not separately downloaded; console terminal/order and successful job/quality steps are explicit qualified evidence.",
+    "No scientific/model performance, operator readiness, live runtime/account or spending authority follows.",
+    "This bounded reader performs no network, tests, app imports, original SQL/private actor access or source writes.",
+    "This record does not certify CI for PR183, its documentation descendants or any later source head.",
+    "The unchanged local timing delivery retains every earlier RED, diagnostic and focused acceptance cut.",
+    "No algorithm, benchmark, submission, model setting, grant, owner, source runtime or funding is changed by this documentation.",
+    "The interrupted original experiment remains incomplete at the separately recorded 604 attempts, $4.845090 and zero held; its historical command is not cleared for rerun by CI completion.",
+    "No guarantee about future scheduling, job duration, every possible stall or platform behavior follows.",
+    "Documentation assembly only: no application tests, network, original study records or SQL, private actors, credentials, providers or containers were accessed."
+  ]
+}
