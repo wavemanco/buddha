@@ -10,6 +10,7 @@ import os
 import re
 import sqlite3
 import stat
+import threading
 from collections.abc import Callable, Iterator, Mapping
 from contextlib import contextmanager
 from contextvars import ContextVar
@@ -154,6 +155,124 @@ def _observation_policy(value: object) -> Iterator[None]:
         _OBSERVATION_LIMIT.reset(token)
 
 
+def _observation_limits() -> tuple[int, int, int]:
+    selected = _OBSERVATION_LIMIT.get()
+    total, entries, paths = (MAX_TOTAL_BYTES, None, None) if selected is None else selected
+    return total, MAX_FILES if entries is None else entries, MAX_FILES if paths is None else paths
+
+
+def _tree_context(root: Path) -> tuple[tuple[object, ...], object] | None:
+    """Observe local locks and the actual held lease, never unrelated ancestors."""
+    from buddha import trial_fence
+
+    held = trial_fence._HELD.get()
+    identity: tuple[object, ...] = ()
+    if held is not None:
+        if not held.active or held.pid != os.getpid() or held.thread != threading.get_ident():
+            return None
+        try:
+            trial_fence._assert_held(held.binding)
+        except trial_fence.TrialFenceError:
+            return None
+        identity = (
+            id(held),
+            str(held.binding.root),
+            held.binding.definition_sha256,
+            held.binding.version,
+            held.device,
+            held.inode,
+        )
+    paths = [root / name for name in (".trial-running.lock", "running.lock", ".search.lock")]
+    if held is not None:
+        paths.append(held.binding.root / trial_fence._LOCK)
+    locks = []
+    try:
+        for path in paths:
+            try:
+                information = path.lstat()
+            except FileNotFoundError:
+                continue
+            locks.append((str(path), _signature(information), information.st_nlink))
+    except OSError:
+        return None  # Strict construction needs no optimization-only lock metadata.
+    return (identity, tuple(locks)), held
+
+
+class _TreeObservation:
+    """Bounded constructor metadata only; all receipt verification stays fresh."""
+
+    def __init__(self) -> None:
+        self.owner = os.getpid(), threading.get_ident()
+        _, self.maximum_entries, self.maximum_roots = _observation_limits()
+        self.roots: dict[
+            tuple[object, ...],
+            tuple[Path, int, dict[str, tuple[int, int, int, int, int]], object],
+        ] = {}
+        self.count = 0
+
+    def entries(self, capture: "_Capture") -> dict[str, tuple[int, int, int, int, int]]:
+        if self.owner != (os.getpid(), threading.get_ident()):
+            return capture._tree_entries()
+        context = _tree_context(capture.root)
+        if context is None:
+            return capture._tree_entries()
+        key = (
+            str(capture.root),
+            capture._maximum,
+            capture._maximum_entries,
+            capture._maximum_paths,
+            context[0],
+        )
+        if key in self.roots:
+            _plain(capture.root)
+            if not capture.root.is_dir():
+                raise ValidationError("observation requires a local directory")
+            return dict(self.roots[key][2])
+        entries = capture._tree_entries()
+        if (
+            len(self.roots) < self.maximum_roots
+            and self.count + len(entries) <= self.maximum_entries
+        ):
+            self.roots[key] = capture.root, capture._maximum_entries, dict(entries), context[1]
+            self.count += len(entries)
+        return entries
+
+    def finish(self) -> None:
+        for key, (root, maximum, entries, _) in self.roots.items():
+            context = _tree_context(root)
+            if context is None or context[0] != key[-1]:
+                raise _Busy("observed local tree or writer lease changed")
+            current = _entries(root) if maximum == MAX_FILES else _entries(root, maximum=maximum)
+            if current != entries:
+                raise _Busy("observed local tree or writer lease changed")
+
+
+_PASSIVE_TREES: ContextVar[_TreeObservation | None] = ContextVar(
+    "evidence_passive_tree_observation", default=None
+)
+
+
+@contextmanager
+def _passive_tree_observation() -> Iterator[None]:
+    """Share initial metadata within one trusted passive call, never raw bytes.
+
+    Finite registry exhaustion falls back to ordinary construction. Every
+    capture finish/adoption remains strict, and successful exit freshly checks
+    shared roots and their lease context. A failed call discards the registry.
+    """
+    current = _PASSIVE_TREES.get()
+    if current is not None and current.owner == (os.getpid(), threading.get_ident()):
+        yield
+        return
+    observation = _TreeObservation()
+    token = _PASSIVE_TREES.set(observation)
+    try:
+        yield
+        observation.finish()
+    finally:
+        _PASSIVE_TREES.reset(token)
+
+
 class _CapturedBytes(Mapping[Path, bytes]):
     """Read-only access to original receipts, with verified bounded rereads."""
 
@@ -184,12 +303,9 @@ class _Capture:
 
     def __init__(self, root: Path) -> None:
         self.root = root
-        limits = _OBSERVATION_LIMIT.get()
-        maximum, entries, paths = (MAX_TOTAL_BYTES, None, None) if limits is None else limits
-        self._maximum = maximum
-        self._maximum_entries = MAX_FILES if entries is None else entries
-        self._maximum_paths = MAX_FILES if paths is None else paths
-        self.entries = self._tree_entries()
+        self._maximum, self._maximum_entries, self._maximum_paths = _observation_limits()
+        observation = _PASSIVE_TREES.get()
+        self.entries = self._tree_entries() if observation is None else observation.entries(self)
         self._receipts: dict[Path, tuple[int, str]] = {}
         self.raw: Mapping[Path, bytes] = _CapturedBytes(self)
         self.total = 0
