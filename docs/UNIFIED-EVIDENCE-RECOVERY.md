@@ -621,3 +621,24 @@ review: `gpt-6.1-sol` / `ultra`, at most 44 fresh contexts, using unpriced Codex
 capacity outside the API cap and no reviewer API fallback. Optional human
 ratings proceed separately and do not block the AI-only report. Completion
 alone establishes neither improved performance nor a completed scientific gate.
+
+### Prospective returned-result reporting
+
+The [separately checked reporting repair](conformance/launch-result-diagnostics-delivery.json)
+adds a safe diagnostic for an incomplete result returned by the primary
+controller. It runs before the primary result is shortened and before the
+coordinator's later partial recording. It can expose inline cleanup, worker
+readiness and call-count fields without printing answers, keys or source text.
+It does not eliminate history reconstruction already done by the inner controller.
+
+Both development and final-assessment branches have the hook. Final assessment
+supplies only header/position details at that boundary; the diagnostic never
+opens its referenced child files. Diagnostic errors and interruptions preserve
+the original outcome. Existing canonical reports and the broad protocol reason
+remain unchanged.
+
+This is prospective code, not another cleared command. The retained experiment
+now contains original and c548 control profiles; changing host helpers again
+requires a checked compatibility case. No profile policy is widened, no lost
+Docker cause is recovered and no reconstruction speedup is established here.
+Keep the earlier command on hold until the next explicit handoff.
