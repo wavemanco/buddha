@@ -207,3 +207,37 @@ follow-up grants no new funding or execution authority.
 
 
 The [bounded diagnostic repair](conformance/launcher-stop-diagnostics-delivery.json) now passes 30 focused methods and configured local quality checks. It prints and attempts to save fixed categories and bounded installed-public source locations before slow observation collection, preserving existing reasons and stop behavior. It cannot recover the finished process's lost exception, establish the actual cause, or clear a rerun. Initial silent reconstruction and repeated ambiguous phase labels remain open. Exact-source hosted verification and a realistic no-cost study-start diagnosis/rehearsal remain next; keep the original executing checkout unchanged.
+
+### Active continuation observation: October 29, 2026
+
+The operator started the cleared diagnostic-source continuation. Its terminal
+still reported 604 recorded attempts, $4.845090 spent and zero held. A separate
+[read-only metadata observation](conformance/live-continuation-progress-observation.json)
+sampled the same process and four fixed next-witness paths twice, about
+20.588 seconds apart. CPU time rose 19.625 seconds and process read transfers
+rose 1,714,401,036 bytes. The witness directory, plan, proposal context and
+first-owner directory were absent in both samples. No process environment,
+credentials, stacks, task/output contents or original SQL was read; no
+provider/Docker call or frozen-source change was made by the observation.
+The accounting figures are the operator's report, not a reopened-ledger check.
+
+The public controller reconstructs and verifies the retained study before
+each scheduler action (`improver_study.py:2517`). Witness preparation checks
+progress and inputs before creating its directory, then rebuilds complete
+feedback and prepares an owner (`source_search.py:1831`). Preparation returns
+without a model call; execution follows on a later iteration after another
+restoration (`source_search.py:1930`). Completed witnesses also rebuild their
+feedback during restoration. The study loop has no elapsed-time or explicit
+no-progress detector; model-attempt and spending limits do not bound this
+local work. The displayed elapsed time starts with its heartbeat, before
+search, rather than measuring time spent solely in the search phase.
+
+These observations establish active work without a new preparation checkpoint.
+They do not identify the current internal operation, count reconstructions,
+prove an infinite loop, establish physical disk throughput or predict
+completion. Treat local reconstruction and ambiguous progress reporting as an
+unresolved harness bottleneck. Investigate redundant reconstruction and expose
+completed checkpoints in separately reviewed source while preserving fresh
+evidence, source, authority and budget checks. Keep the live executing source
+and original records unchanged; the existing CI-only stall rule does not
+authorize automatically terminating this live experiment.
