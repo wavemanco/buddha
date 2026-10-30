@@ -468,6 +468,23 @@ def launch(
             )
         return result
 
+    def publish_diagnostic(details: dict[str, object]) -> None:
+        try:
+            diagnostic = _json(details)
+            common._emit(notice, "Stop diagnostic: " + diagnostic.decode("utf-8"))
+            if observation_directory is not None:
+                saved = observation_directory / (uuid4().hex + ".diagnostic.json")
+                pipeline._write(saved, diagnostic)
+                common._emit(
+                    notice,
+                    "Stop diagnostic saved: "
+                    + str(saved)
+                    + "; SHA256 "
+                    + hashlib.sha256(diagnostic).hexdigest(),
+                )
+        except (Exception, KeyboardInterrupt):
+            pass  # A diagnostic must never replace the original stop or its observation.
+
     def inspect(*, owned: bool = False) -> dict[str, Any]:
         with common._heartbeat(notice, ["checking"], [None], heartbeat_seconds):
             return _check(path, expected_sha256, owned_lock=owned)
@@ -537,6 +554,7 @@ def launch(
                         transport=active,
                         notice=notice,
                         heartbeat_seconds=heartbeat_seconds,
+                        on_incomplete=publish_diagnostic,
                     )
                     if result["status"] != "complete":
                         return partial(_controller_reason(result, "primary_incomplete"))
@@ -610,18 +628,7 @@ def launch(
         try:
             details = common._stop_diagnostic(error)
             reason = cast(str, details["reason"])
-            diagnostic = _json(details)
-            common._emit(notice, "Stop diagnostic: " + diagnostic.decode("utf-8"))
-            if observation_directory is not None:
-                saved = observation_directory / (uuid4().hex + ".diagnostic.json")
-                pipeline._write(saved, diagnostic)
-                common._emit(
-                    notice,
-                    "Stop diagnostic saved: "
-                    + str(saved)
-                    + "; SHA256 "
-                    + hashlib.sha256(diagnostic).hexdigest(),
-                )
+            publish_diagnostic(details)
         except (Exception, KeyboardInterrupt):
             pass  # A diagnostic must never replace the original stop or its observation.
         if reason is None:

@@ -422,13 +422,20 @@ def launch(
     transport: RawHTTPTransport | None = None,
     notice: Callable[[str], None] = _notice,
     heartbeat_seconds: float = 10,
+    on_incomplete: Callable[[dict[str, object]], None] | None = None,
 ) -> dict[str, object]:
-    """Check, enter keys once, recheck, then use original phase controllers."""
+    """Check, enter keys once, recheck, then use original phase controllers.
+
+    An optional incomplete observer receives a fresh inline metadata projection
+    before saved-partial verification; it cannot change the canonical result.
+    """
     if (
         any(type(v) is not bool for v in (live, prompt_keys, confirm_project_keys))
         or type(heartbeat_seconds) not in (int, float)
         or not 0 < heartbeat_seconds <= 60
         or not callable(notice)
+        or on_incomplete is not None
+        and not callable(on_incomplete)
         or transport is not None
         and not isinstance(transport, RawHTTPTransport)
     ):
@@ -440,6 +447,14 @@ def launch(
     phase, current_grant = ["checking"], cast(list[Path | None], [None])
     paths: dict[str, Path] = {}
     public: dict[str, object] = {"format": "buddha.improver-launch-receipt.v1"}
+
+    def observe_incomplete(result: dict[str, object], stage: str) -> None:
+        if on_incomplete is not None:
+            try:
+                on_incomplete(common._result_diagnostic(result, phase=stage))
+            except (Exception, KeyboardInterrupt):
+                pass  # Observers cannot change the controller result or its normal saved partial.
+
     try:
         common._emit(
             notice, "Checking approved matched configuration and original state; no keys read yet."
@@ -548,6 +563,7 @@ def launch(
                         directory / "search/study", transport=active_transport
                     )
                     if developed["status"] != "complete":
+                        observe_incomplete(developed, "search")
                         public.update(
                             _saved_partial(directory, "search", paths, developed), phase="search"
                         )
@@ -575,6 +591,7 @@ def launch(
                 if result["status"] == "complete":
                     public.update(status="complete", phase="complete")
                 else:
+                    observe_incomplete(result, "final")
                     public.update(_saved_partial(directory, "final", paths, result), phase="final")
                 return public
     except KeyboardInterrupt:

@@ -297,6 +297,126 @@ def _stop_diagnostic(error: BaseException) -> dict[str, object]:
     }
 
 
+def _result_diagnostic(value: object, *, phase: str) -> dict[str, object]:
+    """Project inline controller metadata only; never read referenced files or outputs."""
+    reasons = {
+        "complete",
+        "protocol",
+        "execution",
+        "cleanup",
+        "configuration",
+        "control",
+        "ownership",
+        "launch",
+        "unavailable",
+        "host",
+        "timeout",
+        "cancelled",
+        "channel",
+        "diagnostics",
+        "stdout",
+        "frames",
+        "agent_error",
+        "native_error",
+        "authority",
+        "unknown",
+        "feedback_capacity",
+        "feedback_reconstruction_limit",
+    }
+    statuses = {"complete", "incomplete", "failed", "stopped", "cancelled", "prepared"}
+    stages = {
+        "search",
+        "final",
+        "screen",
+        "generation",
+        "native",
+        "publication",
+        "freeze",
+        "common_screen",
+        "proposal",
+        "witness_feedback",
+        "witness_proposal",
+        "witness_generation",
+        "witness_publication",
+        "decision",
+    }
+    kinds = {
+        "buddha.improver-study-observation.v1": "study",
+        "buddha.source-screen-observation.v1": "screen",
+        "buddha.candidate-generation-observation.v1": "generation",
+        "buddha.candidate-generation-observation.v2": "generation",
+    }
+
+    def row(item: object) -> dict[str, object]:
+        return cast(dict[str, object], item) if type(item) is dict else {}
+
+    def token(item: object, allowed: set[str]) -> str | None:
+        if item is None:
+            return None
+        return item if type(item) is str and len(item) <= 64 and item in allowed else "other"
+
+    def integers(item: object, names: tuple[str, ...]) -> dict[str, object]:
+        values = row(item)
+        return {
+            name: number
+            for name in names
+            if type(number := values.get(name)) is int and 0 <= number <= 2**63 - 1
+        }
+
+    chain: list[dict[str, object]] = []
+    seen: set[int] = set()
+    for _ in range(8):
+        if type(value) is not dict or id(value) in seen:
+            break
+        seen.add(id(value))
+        current = row(value)
+        form = current.get("format")
+        position = row(current.get("position"))
+        projected: dict[str, object] = {
+            "kind": kinds.get(form, "other") if type(form) is str and len(form) <= 80 else "other",
+            "status": token(current.get("status"), statuses),
+            "reason": token(current.get("reason"), reasons),
+            "stage": token(current.get("stage", position.get("stage")), stages),
+        }
+        coordinates = integers(
+            position, ("start", "repetition", "arm", "slot", "arm_index", "task_index")
+        )
+        if coordinates:
+            projected["position"] = coordinates
+        projected.update(integers(current, ("task_index",)))
+        generation = row(current.get("generation"))
+        if generation:
+            execution = row(generation.get("execution"))
+            projected["generation"] = {
+                "status": token(generation.get("status"), statuses),
+                "reason": token(generation.get("reason"), reasons),
+                "executor_reason": token(execution.get("reason"), reasons),
+                "cleanup_status": token(
+                    execution.get("cleanup_status"), {"not_created", "removed", "unknown"}
+                ),
+                "calls": integers(generation.get("calls"), ("requested", "completed", "stopped")),
+            }
+        terminal = row(row(current.get("outcome")).get("terminal"))
+        if terminal:
+            selected = integers(
+                terminal, ("sequence", "delivered", "operation_count", "recorded_cost_microusd")
+            )
+            for name in ("ready_seen", "broken"):
+                if type(item := terminal.get(name)) is bool:
+                    selected[name] = item
+            selected["done_status"] = token(terminal.get("done_status"), statuses)
+            selected["stop_reason"] = token(terminal.get("stop_reason"), reasons)
+            projected["terminal"] = selected
+        chain.append(projected)
+        value = current.get("child")
+    return {
+        "format": "buddha.launch-result-diagnostic.v1",
+        "phase": token(phase, {"search", "final"}),
+        "scope": "controller_reported_inline_fields_only",
+        "chain": chain,
+    }
+
+
 def _path(value: object, *, error: type[ReleaseError] = ReleaseError) -> Path:
     # Leaves need not exist yet; callers separately check input reads/parents.
     path = pipeline._absolute(value)
