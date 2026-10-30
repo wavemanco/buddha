@@ -646,7 +646,8 @@ Keep the earlier command on hold until the next explicit handoff.
 ## Bounded A/B-to-C continuation contract
 
 **Preparation only.** A means the original producer, B the frozen `c54819f`
-producer, and C the prospective repaired producer. The current registry contains
+producer, and C the prospective repaired producer. These identify versions of
+Buddha's host software, not AI model choices. The current registry contains
 174 inactive A owners and 19 B owners; the sole active B generation owner has
 zero operations. The [metadata census](conformance/current-owner-metadata-delivery.json)
 does not validate their owner files or authorize adoption. The original
@@ -671,12 +672,14 @@ Keep the original inactive-cut rule. The 19 retained B owners form a separate
 checked group, including the active owner's explicit unfinished state; they
 must not be inserted into v1's inactive original cut. C cannot resume the
 prepared B screen using C's installed helpers. Preserve B's exact owner,
-attempt history and receipts. If necessary, first complete that screen with
-literal B through a freshly checked one-action development descriptor; the
-existing `da37a817` trial descriptor is not that descriptor. Such an action may
-create the screen's remaining scheduled B owners, so refreeze their exact map
-afterward rather than pretending the current 193-owner count is permanent.
-This is an option requiring its own compatibility and cleanup clearance.
+attempt history and receipts. A new companion descriptor would itself change B's recorded control identity.
+The smallest later option is therefore a separately reviewed external
+one-action wrapper: import literal B, validate the existing `da37a817` trial
+descriptor through its trial path, then invoke B's existing prepared-screen
+action under that exact scope, leases and fresh checks. No such wrapper or
+command is cleared here. That action may create remaining scheduled B owners;
+refreeze their exact map afterward rather than treating 193 as permanent.
+Compatibility and cleanup clearance remain required.
 
 ### Keep host provenance out of model input
 
@@ -702,8 +705,8 @@ are not promised identical, and new measured data may legitimately change notes.
 | Public touchpoint | Required treatment |
 | --- | --- |
 | [Continuation scope and owner routing](../buddha/unified_continuation.py#L174), [original-cut check](../buddha/unified_continuation.py#L926) | Add a separate versioned finite map; preserve process/thread/root/grant binding and all inactive A checks. |
-| [Literal screen controls](../buddha/source_screen.py#L718), [generation owner](../buddha/candidate_generation.py#L599) | Check the owner's actual installed producer; keep active B and any prepared B screen under B. |
-| [Two-profile marker](../buddha/source_screen.py#L72), [dependency policy](../buddha/source_feedback.py#L425), [packet reconstruction](../buddha/source_feedback.py#L1374) | Route legacy v1 replay exactly; version only new host relations/provenance, not old packet bytes. |
+| [Literal screen controls](../buddha/source_screen.py#L888), [generation owner](../buddha/candidate_generation.py#L599) | Check the owner's actual installed producer; keep active B and any prepared B screen under B. |
+| [Two-profile scope](../buddha/source_screen.py#L84), [finite scope](../buddha/source_screen.py#L142), [dependency policy](../buddha/source_feedback.py#L425), [packet reconstruction](../buddha/source_feedback.py#L1390) | Route legacy v1 replay exactly; version only new host relations/provenance, not old packet bytes. |
 | [Feedback projection](../buddha/candidate_run.py#L214), [worker input](../buddha/candidate_worker.py#L198), [request identity](../buddha/gateway.py#L1106) | Keep model-visible projection/settings and distinguish body identity from owner/request identity. |
 | [Fresh post-lock checks](../buddha/unified_continuation.py#L334), [one-action dispatch](../buddha/unified_continuation.py#L1256) | Retain ordinary leases, after-lock freshness, execution identity, budget/attempt/model limits and phase fence. |
 
@@ -725,3 +728,74 @@ remain separate gates. Original $150/16,384 phase allocations and reviewer scope
 stay unchanged; preparation grants no extra API allocation or live clearance.
 The [delivery](conformance/three-profile-continuation-contract-delivery.json)
 records this design review, not an implemented compatibility result.
+
+## Finite relation primitive: first implementation
+
+The [delivery](conformance/finite-profile-relations-delivery.json) implements
+only the internal host-side relation layer. A separate v2 scope admits exactly
+three caller-checked control hashes. It cannot nest with v1 or another v2 scope.
+It preserves process, thread, study, grant and scheduled-screen checks; unknown
+hashes and conflicting hashes for the same exact evidence reference refuse.
+Identical references may repeat. No descriptor loader or owner-adoption route
+uses this scope yet. Marker pins are canonical byte/lexical checks, not proof
+of producer source roots, physical file identity or permission to dispatch.
+
+Old A/B-only derivations return the exact old v1 marker. A genuine supplied
+four-file A/B feedback packet replays unchanged, including the task/note bytes
+admitted to the worker. New A/C or B/C markers list only those controls; a
+three-control marker also retains the exact A/B compatibility proof. That
+proof does not claim an old packet was read. Dependency composition validates
+actual direct screen references/controls and inherited markers together; it adds
+no ambient third control. Their combined count is bounded at 256. No feedback payload, actor
+template, model, budget or NoveltyBench setting changes.
+
+Review also checked a supplied case where the current screen uses C and
+inherited metadata names A/B. Composition must include the directly used C
+controls even when the current screens are all C. This is a supported-input
+check, not evidence that the actual stopped run produced incorrect metadata.
+
+Nine final-cut methods and all seven configured local quality checks pass.
+The initial seven new methods and five v1 regression methods belong to an
+earlier source cut. A later seven-method cut passed before review identified
+the supplied direct-C case; its narrow failing check and repaired nine-method
+result remain separate. No normal-lineage reachability or actual-run error is
+established by that supplied case. Cross-root producer/owner checks, a full
+new-C packet pipeline, retained-history compatibility and hosted CI remain
+separate evidence. These checks establish engineering behavior with supplied
+data, not recovery or scientific improvement.
+
+### Preserve fixed scientific code and literal B
+
+`source_screen_results.py` is in the continuation's fixed-science set even
+though it is outside the Gateway CORE. Its original literal bytes must remain
+in the current experiment's eventual executing variant. Keep that set and its
+equality check intact. The general result-collector optimization in PR194 can
+serve future fresh studies; it is not admitted into this frozen run. The
+nonprotected screen-side reuse and host-only relation work remain prospective
+continuation candidates. A separately pinned execution variant is still needed.
+
+Descriptor paths and hashes are part of the recorded control identity. A new
+descriptor beside B would create a different profile, even with identical B
+helper files. Do not relabel it B. The external one-action option above must
+validate the old descriptor and run literal B; only later absent roles may
+use a separately bound C after the prepared B screen is cleanly complete.
+
+Optional local check, from the checkout containing this slice:
+
+```powershell
+python -B -m unittest discover -s tests -p test_finite_profile_relations.py -v
+```
+
+This runs the nine supplied-data checks once and exits. It spends no API
+money and changes no saved run; it creates temporary test files. Use an idle
+PowerShell window in that checkout, or a separate window while another command
+runs. Ctrl+C stops the checks. It is not a live continuation command.
+
+Next implement and rehearse the exact finite producer/retained-owner routing.
+Keep its two jobs separate: account for every registered owner, then route the
+smaller set of source-proposal/generation anchors. The 174/19 registration split
+does not establish one identical control hash for every owner. Existing native
+evaluation checks still validate their own role-specific inputs and settings.
+Keep the original live command on hold pending exact-source hosted results,
+a fresh full-current cut and owner/receipt reconstruction, and endpoint/cleanup
+reconciliation. No new grant, key input or user action is needed for this slice.
