@@ -1,0 +1,36 @@
+{
+  "format": "buddha.live-progress-metadata-follow-up.v1",
+  "sample_utc": "2026-10-30T03:15:26.8725591Z",
+  "previous_observation_sha256": "a49fa5ede557d07fb71ba675ec649b4b4333f95cd8bc9fda67a19f99279fd50a",
+  "pid": 9472,
+  "created": "2026-10-29T14:16:19.820645-07:00",
+  "process_present": true,
+  "markers": [
+    {
+      "marker": "witness_directory",
+      "exists": true,
+      "last_write_utc": "2026-10-30T03:09:50.9737814Z",
+      "is_directory": true
+    },
+    {
+      "marker": "plan.json",
+      "exists": true,
+      "last_write_utc": "2026-10-30T03:09:42.0803789Z",
+      "is_directory": false
+    },
+    {
+      "marker": "proposal\\context.json",
+      "exists": true,
+      "last_write_utc": "2026-10-30T03:09:50.9805265Z",
+      "is_directory": false
+    },
+    {
+      "marker": "proposal\\owners\\0",
+      "exists": true,
+      "last_write_utc": "2026-10-30T03:09:51.7942730Z",
+      "is_directory": true
+    }
+  ],
+  "scope": "Read-only OS process identity and four fixed path existence/metadata fields; no file contents, original SQL, process environment, credentials, stacks, provider or Docker calls, or running-source changes.",
+  "limits": "Directory creation proves this preparation milestone only. It does not prove owner preparation, a new API attempt, completion, or improved performance; accounting not reopened."
+}
