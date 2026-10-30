@@ -266,3 +266,27 @@ can be reconstructed from the retained record alone. Current default-context
 Docker availability and an old exited container do not reconcile the failed
 endpoint or establish an orphan. Hold the command for bounded reconciliation,
 separately checked host-helper diagnostics and reconstruction profiling.
+
+## ENG-INFRA-01: evaluate existing reliability infrastructure
+
+Recorded October 30, 2026 at the user's request to research reusable components
+around the self-improvement harness. Status: research complete; integration
+unselected and untested. This is optional maintenance/reuse within IMP-01, not
+another scientific completion gate. PLAN.md determines when it is scheduled;
+the stopped-run finite-owner recovery remains next.
+
+The [research note](HARNESS-RELIABILITY-RESEARCH.md) recommends Inspect AI as the
+first evaluation-platform candidate, a small DBOS workflow comparison, and
+Temporal only if distributed/versioned workers justify another service. Harbor
+and SWE-ReX provide useful failure-policy and runtime-lifecycle patterns.
+LangGraph's resume semantics and Restate's server license need special care.
+These recommendations do not authorize installing or adopting a platform.
+
+Any later offline comparison must preserve original operation/source identities,
+completed replies, shared authorization, uncertain-cost holds, immutable
+artifacts, confinement and unchanged official NoveltyBench assessment. Inject
+failures around simulated provider acceptance, receipts/checkpoints, executor
+startup/cleanup and software changes. Require explicit partial outcomes and
+Windows/Linux evidence; measure recovery work and maintenance removed. Reject a
+wrapper that merely duplicates the current coordinator. No real provider calls,
+old-record migration or frozen-run source changes are implied by this item.
