@@ -68,6 +68,18 @@ _CONTROL_PROFILES: ContextVar[_ScreenControlProfiles | None] = ContextVar(
 )
 
 
+@dataclass(frozen=True)
+class _ScreenControlProfilesV2:
+    legacy: _ScreenControlProfiles
+    current: str
+    continuation: bytes
+
+
+_CONTROL_PROFILES_V2: ContextVar[_ScreenControlProfilesV2 | None] = ContextVar(
+    "screen_control_profiles_v2", default=None
+)
+
+
 @contextmanager
 def _screen_control_profiles(
     root: Path,
@@ -90,6 +102,7 @@ def _screen_control_profiles(
     path = pipeline._absolute(anchor["path"])
     if (
         _CONTROL_PROFILES.get() is not None
+        or _CONTROL_PROFILES_V2.get() is not None
         or before == after
         or ".." in root.parts
         or ".." in authorization.parts
@@ -117,7 +130,125 @@ def _screen_control_profiles(
         _CONTROL_PROFILES.reset(token)
 
 
+def _external_control_anchor(root: Path, value: object) -> dict[str, object]:
+    anchor = _object(value, {"path", "sha256"})
+    path = pipeline._absolute(anchor["path"])
+    if ".." in path.parts or str(path) != anchor["path"] or path.is_relative_to(root):
+        raise SourceScreenError("control profiles need one explicit external continuation")
+    return {"path": str(path), "sha256": _digest(anchor["sha256"])}
+
+
+@contextmanager
+def _screen_control_profiles_v2(
+    root: Path,
+    authorization: Path,
+    *,
+    before: str,
+    after: str,
+    current: str,
+    continuation: dict[str, object],
+    legacy_relation: dict[str, object],
+    legacy_sha256: str,
+) -> Iterator[None]:
+    """Scope three caller-checked hashes, not owners or execution authority.
+
+    Pins and external paths are checked only for canonical byte/lexical
+    consistency. The later descriptor loader must prove physical identities.
+    """
+    if not isinstance(root, Path) or not isinstance(authorization, Path):
+        raise SourceScreenError("control profiles need explicit study and grant paths")
+    root, authorization = pipeline._absolute(str(root)), pipeline._absolute(str(authorization))
+    before, after, current = _digest(before), _digest(after), _digest(current)
+    if (
+        _CONTROL_PROFILES.get() is not None
+        or _CONTROL_PROFILES_V2.get() is not None
+        or len({before, after, current}) != 3
+        or ".." in root.parts
+        or ".." in authorization.parts
+    ):
+        raise SourceScreenError("control profiles need one explicit three-profile scope")
+    anchor = _external_control_anchor(root, continuation)
+    legacy = _object(
+        legacy_relation,
+        {"format", "continuation", "before_controls_sha256", "after_controls_sha256"},
+    )
+    legacy_anchor = _external_control_anchor(root, legacy["continuation"])
+    expected = _json(
+        {
+            "format": "buddha.host-control-relation.v1",
+            "continuation": legacy_anchor,
+            "before_controls_sha256": before,
+            "after_controls_sha256": after,
+        }
+    )
+    if (
+        _json(legacy) != expected
+        or hashlib.sha256(expected).hexdigest() != _digest(legacy_sha256)
+        or Path(cast(str, anchor["path"])) == Path(cast(str, legacy_anchor["path"]))
+        or authorization in {Path(cast(str, item["path"])) for item in (anchor, legacy_anchor)}
+    ):
+        raise SourceScreenError("three-profile scope changes its pinned legacy relation")
+    token = _CONTROL_PROFILES_V2.set(
+        _ScreenControlProfilesV2(
+            _ScreenControlProfiles(
+                root, authorization, before, after, expected, os.getpid(), threading.get_ident()
+            ),
+            current,
+            _json(anchor),
+        )
+    )
+    try:
+        yield
+    finally:
+        _CONTROL_PROFILES_V2.reset(token)
+
+
+def _checked_profiles_v2() -> _ScreenControlProfilesV2:
+    profiles = _CONTROL_PROFILES_V2.get()
+    if (
+        profiles is None
+        or profiles.legacy.process != os.getpid()
+        or profiles.legacy.thread != threading.get_ident()
+    ):
+        raise SourceScreenError("host control relation differs from its explicit checked scope")
+    return profiles
+
+
+def _finite_control_marker(
+    profiles: _ScreenControlProfilesV2, hashes: set[str]
+) -> dict[str, object]:
+    legacy = profiles.legacy
+    if hashes == {legacy.before, legacy.after}:
+        return _load(legacy.marker)
+    if (
+        not 2 <= len(hashes) <= 3
+        or profiles.current not in hashes
+        or not hashes <= {legacy.before, legacy.after, profiles.current}
+    ):
+        raise SourceScreenError("screens change their explicit three-profile controls")
+    marker: dict[str, object] = {
+        "format": "buddha.host-control-relation.v2",
+        "continuation": _load(profiles.continuation),
+        "controls_sha256": sorted(hashes),
+    }
+    if {legacy.before, legacy.after} <= hashes:
+        # This is the pinned AB compatibility proof, not an invented packet dependency.
+        marker["legacy_relation"] = _load(legacy.marker)
+    return marker
+
+
 def _checked_control_marker(value: object) -> dict[str, object]:
+    if _CONTROL_PROFILES_V2.get() is not None:
+        finite = _checked_profiles_v2()
+        if _json(value) == finite.legacy.marker:
+            return _load(finite.legacy.marker)
+        controls = _object(value).get("controls_sha256")
+        if type(controls) is not list or not 2 <= len(controls) <= 3:
+            raise SourceScreenError("invalid three-profile relation marker")
+        expected = _finite_control_marker(finite, {_digest(item) for item in controls})
+        if _json(value) != _json(expected):
+            raise SourceScreenError("host control relation differs from its explicit checked scope")
+        return expected
     profiles = _CONTROL_PROFILES.get()
     if (
         profiles is None
@@ -129,6 +260,52 @@ def _checked_control_marker(value: object) -> dict[str, object]:
     return _load(profiles.marker)
 
 
+def _compose_control_relations(
+    values: Sequence[object],
+    *,
+    rows: Sequence[tuple[dict[str, object], str]] = (),
+) -> dict[str, object] | None:
+    """Compose only actual dependencies inside the separate finite v2 scope."""
+    profiles = _checked_profiles_v2()
+    if (
+        type(values) not in {list, tuple}
+        or type(rows) not in {list, tuple}
+        or len(values) + len(rows) > 256
+    ):
+        raise SourceScreenError("control relation dependencies exceed their finite bound")
+    hashes: set[str] = set()
+    if rows:
+        _screen_control_relation(rows)
+        hashes.update(_digest(digest) for _, digest in rows)
+    for value in values:
+        marker = _checked_control_marker(value)
+        if marker["format"] == "buddha.host-control-relation.v1":
+            hashes.update((profiles.legacy.before, profiles.legacy.after))
+        else:
+            hashes.update(cast(list[str], marker["controls_sha256"]))
+    return _finite_control_marker(profiles, hashes) if len(hashes) > 1 else None
+
+
+def _control_reference(reference: object, profiles: _ScreenControlProfiles) -> dict[str, object]:
+    ref = _object(reference, {"directory", "authorization", "report_sha256"})
+    directory = pipeline._absolute(ref["directory"])
+    if str(directory) != ref["directory"] or str(profiles.authorization) != ref["authorization"]:
+        raise SourceScreenError("control comparison changes its original grant or path")
+    try:
+        relative = directory.relative_to(profiles.root).as_posix()
+    except ValueError:
+        raise SourceScreenError("control comparison borrows another study") from None
+    if not re.fullmatch(
+        r"(?:common/(?:0|[1-9][0-9]*)/(?:0|[1-9][0-9]*)|"
+        r"cells/(?:0|[1-9][0-9]*)/(?:0|[1-9][0-9]*)/"
+        r"(?:0|1)/(?:0|[1-9][0-9]*))/screen",
+        relative,
+    ):
+        raise SourceScreenError("control comparison changes its scheduled screen location")
+    _digest(ref["report_sha256"])
+    return ref
+
+
 def _screen_control_relation(
     rows: Sequence[tuple[dict[str, object], str]],
 ) -> dict[str, object] | None:
@@ -136,31 +313,24 @@ def _screen_control_relation(
     if type(rows) not in {list, tuple} or not 1 <= len(rows) <= 256:
         raise SourceScreenError("control comparison exceeds the bounded screen population")
     hashes = {_digest(digest) for _, digest in rows}
+    if _CONTROL_PROFILES_V2.get() is not None:
+        finite = _checked_profiles_v2()
+        if not hashes <= {finite.legacy.before, finite.legacy.after, finite.current}:
+            raise SourceScreenError("screens change their explicit three-profile controls")
+        references: dict[bytes, str] = {}
+        for reference, digest in rows:
+            key = _json(_control_reference(reference, finite.legacy))
+            if key in references and references[key] != digest:
+                raise SourceScreenError("one screen reference claims different host controls")
+            references[key] = digest
+        return _finite_control_marker(finite, hashes) if len(hashes) > 1 else None
     if len(hashes) == 1:
         return None
     profiles = _CONTROL_PROFILES.get()
     if profiles is None or hashes != {profiles.before, profiles.after}:
         raise SourceScreenError("screens change their original common host controls")
     for reference, _ in rows:
-        ref = _object(reference, {"directory", "authorization", "report_sha256"})
-        directory = pipeline._absolute(ref["directory"])
-        if (
-            str(directory) != ref["directory"]
-            or str(profiles.authorization) != ref["authorization"]
-        ):
-            raise SourceScreenError("control comparison changes its original grant or path")
-        try:
-            relative = directory.relative_to(profiles.root).as_posix()
-        except ValueError:
-            raise SourceScreenError("control comparison borrows another study") from None
-        if not re.fullmatch(
-            r"(?:common/(?:0|[1-9][0-9]*)/(?:0|[1-9][0-9]*)|"
-            r"cells/(?:0|[1-9][0-9]*)/(?:0|[1-9][0-9]*)/"
-            r"(?:0|1)/(?:0|[1-9][0-9]*))/screen",
-            relative,
-        ):
-            raise SourceScreenError("control comparison changes its scheduled screen location")
-        _digest(ref["report_sha256"])
+        _control_reference(reference, profiles)
     return _checked_control_marker(_load(profiles.marker))
 
 

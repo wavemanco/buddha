@@ -428,6 +428,15 @@ def _relation_policy(
     relation: dict[str, object] | None = None,
 ) -> dict[str, object]:
     """Carry only actual per-packet derivation dependencies, never ambient use."""
+    finite = source_screen._CONTROL_PROFILES_V2.get() is not None
+    direct: list[tuple[dict[str, object], str]] = []
+    if finite:
+        for item in dependencies:
+            present = {"reference", "controls_sha256"} & item.keys()
+            if present:
+                if present != {"reference", "controls_sha256"}:
+                    raise SourceFeedbackError("direct provenance needs its reference and controls")
+                direct.append((_object(item["reference"]), _digest(item["controls_sha256"])))
     markers = [
         _object(item["policy"])["host_control_relation"]
         for item in dependencies
@@ -436,6 +445,13 @@ def _relation_policy(
     if relation is not None:
         markers.append(relation)
     result = dict(policy)
+    if finite:
+        if "host_control_relation" in result:
+            markers.insert(0, result["host_control_relation"])
+        composed = source_screen._compose_control_relations(markers, rows=direct)
+        if composed is not None:
+            result["host_control_relation"] = composed
+        return result
     for value in markers:
         marker = source_screen._checked_control_marker(value)
         if "host_control_relation" in result and result["host_control_relation"] != marker:

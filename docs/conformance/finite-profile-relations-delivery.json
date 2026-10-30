@@ -1,0 +1,164 @@
+{
+  "actions": {
+    "container_actions": 0,
+    "live_execution_cleared": false,
+    "new_allocations": 0,
+    "original_database_reads": 0,
+    "private_actor_reads": 0,
+    "real_provider_calls": 0
+  },
+  "basis_head": "2002aee1f3c331c6f4358581b3f558a923be365e",
+  "current_run_constraints": {
+    "current_run_execution_variant_prepared": false,
+    "custody_vs_routing": "174+19 are registration epochs, not proof of one common hash per UUID. The complete owner custody table and smaller routed source-anchor table must be checked separately using existing native/task role validators.",
+    "descriptor_identity": "A fresh companion descriptor changes the B profile. A later external one-action wrapper must validate existing da37 using literal B and existing prepared-state lease/freshness checks; no wrapper or command is cleared.",
+    "fixed_science_set_or_equality_guard_changed": false,
+    "generic_head_collector_admitted_to_frozen_run": false,
+    "required_literal_source_screen_results_sha256": "efecd1fdcc01074c45ffe9507010ab0cc799f719e08eead90f9cf80208fce87c"
+  },
+  "date": "2026-10-30",
+  "evidence": [
+    {
+      "path": "runs/checks/finite-profile-relations-20261030-v1/final-checks-v3.json",
+      "sha256": "a6fea3be363bb5bbcfb4c76a3b71aa2b3a5fd98424a14e611432bc0b3bfef0f0"
+    },
+    {
+      "path": "runs/checks/finite-profile-relations-20261030-v1/rows-focused-green.log",
+      "sha256": "a78c3a045f15477146037bae312c5897c972a5ab37e1e2b06bb5f9fbb2911006"
+    },
+    {
+      "path": "runs/checks/finite-profile-relations-20261030-v1/production-rows-final.diff",
+      "sha256": "9e71b0b7277c8cd8a9bea982f67b81d1c78e5236a5f06f7f34e685e5ea58bf79"
+    },
+    {
+      "path": "runs/checks/finite-profile-relations-20261030-v1/supplied-direct-control-red.log",
+      "sha256": "0d12a1d024e7777b5db103fba89d46a1601f5234d15a117338c6a3b7e0c62c8c"
+    },
+    {
+      "path": "runs/checks/finite-profile-relations-20261030-v1/initial-checks-v1.json",
+      "sha256": "f6650ca6ebd23b53173725b0ff1a3d1079c76b939efff17b2d083dda0b39f602"
+    },
+    {
+      "path": "runs/checks/finite-profile-relations-20261030-v1/final-checks-v2.json",
+      "sha256": "9503ba0d7862a2ead9734e226368dd998b96e00cc2f63134f0ecd4fdb25fe5be"
+    },
+    {
+      "path": "runs/checks/finite-profile-relations-20261030-v1/peer-review-v1.json",
+      "sha256": "9f2d186c7d703841865c219afd40a033319d7f5c1c0eca6008b701096d09c354"
+    },
+    {
+      "path": "runs/checks/finite-profile-relations-20261030-v1/peer-rerun-v1.log",
+      "sha256": "829c9b11995d6ec48b41733044bb3200af22183718a0afaf1b86cccd63a6a552"
+    },
+    {
+      "path": "runs/checks/finite-profile-relations-20261030-v1/doc-preservation-v3.json",
+      "sha256": "9d7f19831dd4b6000a24cb5ed49440c8170e8ba70100f88606443d7b457efb69"
+    },
+    {
+      "path": "runs/checks/finite-profile-relations-20261030-v1/rows-lint.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "path": "runs/checks/finite-profile-relations-20261030-v1/rows-format.log",
+      "sha256": "1e4413d82a2694561006cd96547415ca554b53796de924ca0a2188ecee8d3f2a"
+    },
+    {
+      "path": "runs/checks/finite-profile-relations-20261030-v1/rows-types.log",
+      "sha256": "14c86ee194cc9406b4f38866ce2eb1ba7e54c55437faf1ccc89f0195c485674d"
+    },
+    {
+      "path": "runs/checks/finite-profile-relations-20261030-v1/rows-security.log",
+      "sha256": "ad4e95629163652855e2c8a23f6a71e0523b25e413fd017f3ed4fcc38190d476"
+    },
+    {
+      "path": "runs/checks/finite-profile-relations-20261030-v1/rows-dev_audit.log",
+      "sha256": "79d30422388543b2563e1dde76bb7e7857d7ef0c6fdf05c8c71598633ca07e1e"
+    },
+    {
+      "path": "runs/checks/finite-profile-relations-20261030-v1/rows-runtime_audit.log",
+      "sha256": "79d30422388543b2563e1dde76bb7e7857d7ef0c6fdf05c8c71598633ca07e1e"
+    },
+    {
+      "path": "runs/checks/finite-profile-relations-20261030-v1/rows-compile.log",
+      "sha256": "02a713f76226c52a198adae80526740fc4d6057636326bc8dec49635db8ae7a7"
+    }
+  ],
+  "existing_authority": {
+    "combined_cap_usd": 150,
+    "phase_allocations_changed": false,
+    "recorded_attempt_limit": 16384
+  },
+  "format": "buddha.finite-profile-relations-delivery.v1",
+  "history_and_review_finding": {
+    "initial_cut": "Seven new methods61.069s plus five legacy methods375.387s passed before later guards; not final-cut results.",
+    "qualification": "A supported supplied root-builder boundary, not a demonstrated normal three-producer lineage or observed current-run error.",
+    "repair": "Union validated direct provenance references/controls with inherited markers inside v2 only.",
+    "second_cut": "Seven methods60.648s and seven quality checks passed before review identified direct-C omission.",
+    "supplied_boundary_red": {
+      "expected_failure": "v1 AB marker returned where uniform direct C plus supplied inherited AB requires v2 ABC",
+      "log": "supplied-direct-control-red.log",
+      "methods": 1,
+      "production_before": {
+        "buddha/source_feedback.py": "8fab26e2b854a66b2ae094569c7dbde004fd35b9c48213e73459cf580c2f1b4e",
+        "buddha/source_screen.py": "a04e70c1d5f57e6ca2e7aaafd5b8f4e770d503cbfb6f40af92302ac54b764470"
+      },
+      "seconds": 0.016,
+      "sha256": "0d12a1d024e7777b5db103fba89d46a1601f5234d15a117338c6a3b7e0c62c8c",
+      "test_snapshot": "The RED method is retained in the final test module; the whole test-file snapshot was not separately captured before additional direct-row negative checks were added."
+    }
+  },
+  "implementation": {
+    "bindings": "PID/thread/root/grant, canonical scheduled references, pinned canonical legacy marker; contradictory hashes for an exact reference refuse.",
+    "composition": "At most256 combined actual direct provenance rows and marker dependencies. Singleton stays unmarked; AB-only remains exact v1; AC/BC contain no ambient third; ABC carries the literal legacy AB compatibility proof.",
+    "scope": "Separate internal v2 context for exactly three caller-checked hashes; v1 remains strict and both nesting directions refuse.",
+    "visibility": "Relation data stays in host provenance. Exact task/note projection is checked; no arbitrary private-actor request-wording identity claim."
+  },
+  "limits": [
+    "No descriptor loader, owner custody/adoption, physical producer identity, writer entry point or current-run execution variant implemented.",
+    "Canonical marker pins and external lexical paths are caller-data checks, not source/runtime/owner authority or no-link/reparse proof.",
+    "Genuine old AB four-file byte replay is separate from supplied C-ancestry/root-declaration boundaries; no complete C packet/producer pipeline claimed.",
+    "No actual193-owner file/receipt compatibility, whole reconstruction, timing speedup, uncertain cleanup reconciliation, deployment or live clearance.",
+    "Hosted CI is pending publication; all local and independent results above retain their exact source cuts."
+  ],
+  "next": "Finite producer/retained-owner custody and anchor routing, followed by supplied cross-root rehearsal, exact-source hosted proof, fresh full-current raw/receipt reconstruction and endpoint/cleanup reconciliation.",
+  "public_source_sha256": {
+    "buddha/gateway.py": "e93e9a3bb5b0aa2dedccd92df78116021eab709523bb777395fd9f13bb936706",
+    "buddha/source_feedback.py": "520d189a75543660aede5dcde494d22c12f10a78275fa79b4099883022ebb66e",
+    "buddha/source_screen.py": "e052f2eb09cc0424661cf6b4d18bb118bd2b190de5085ef8cc5bbcf9d742cb2a",
+    "buddha/source_screen_results.py": "995572675514eec5f7815605bace60353d4068f6b2b7e9ef1e27f493f3268fe1",
+    "buddha/unified_continuation.py": "636c45d070727edace3fec4f5eaf093c9455645475225308cc6260d906065139",
+    "tests/test_finite_profile_relations.py": "1a6145df45cee376cd1c3ce11f64401f4b4df6643868c1637f107a0e96d02f4e"
+  },
+  "spec": [
+    "DESIGN3",
+    "DESIGN7",
+    "DESIGN9",
+    "DESIGN10",
+    "ENG-OBS-01"
+  ],
+  "status": "internal_primitive_locally_verified_not_adopted",
+  "unchanged": [
+    "CORE",
+    "persisted owner/ledger schema",
+    "candidate feedback payload and actor template",
+    "helper-role membership",
+    "original model/settings/benchmark",
+    "original grants/phase allocations/attempts/reviewer setup",
+    "original run artifacts"
+  ],
+  "verification": {
+    "configured_quality_steps_passed": 7,
+    "diff_whitespace": "PASS",
+    "documented_optional_check_commands_added": 1,
+    "final_methods": 9,
+    "final_passed": 9,
+    "final_seconds": 67.708,
+    "historical_powershell_blocks_preserved": 11,
+    "independent_methods": 9,
+    "independent_passed": 9,
+    "independent_review": "PASS, source/test/docs; no blocking findings at this stated scope.",
+    "independent_seconds": 66.259,
+    "original_acceptance_tails_preserved": 7,
+    "prior_raw_revision_rows_preserved": 204
+  }
+}
