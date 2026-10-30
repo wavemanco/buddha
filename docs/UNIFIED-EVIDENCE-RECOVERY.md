@@ -642,3 +642,86 @@ now contains original and c548 control profiles; changing host helpers again
 requires a checked compatibility case. No profile policy is widened, no lost
 Docker cause is recovered and no reconstruction speedup is established here.
 Keep the earlier command on hold until the next explicit handoff.
+
+## Bounded A/B-to-C continuation contract
+
+**Preparation only.** A means the original producer, B the frozen `c54819f`
+producer, and C the prospective repaired producer. The current registry contains
+174 inactive A owners and 19 B owners; the sole active B generation owner has
+zero operations. The [metadata census](conformance/current-owner-metadata-delivery.json)
+does not validate their owner files or authorize adoption. The original
+174-owner/604-operation cut remains intact and inactive; the current total is
+657 operations/$5.523144/zero held. No new command or source migration is cleared.
+
+### Smallest checked extension
+
+Use one new continuation-descriptor version with a finite literal A/B/C profile
+table and an exact retained-owner map, rather than widening v1 or accepting an
+arbitrary number of profiles. Each profile binds its actual producer root,
+helper/control hashes, CORE and runtime. Original protected selection/seed,
+CORE/runtime and full helper-role membership stay fixed; only individually
+reviewed helper revisions may differ. Each retained-owner entry binds its
+directory, run UUID, grant, semantic and raw manifest hashes, ledger/prefix
+anchor and actual profile. Reject missing or extra owners, aliases, duplicate
+producer identities under different labels, and relabeling an existing UUID.
+Only explicitly scheduled, absent future roles may acquire C owners. The map
+is checked host data, not authority supplied by a saved marker.
+
+Keep the original inactive-cut rule. The 19 retained B owners form a separate
+checked group, including the active owner's explicit unfinished state; they
+must not be inserted into v1's inactive original cut. C cannot resume the
+prepared B screen using C's installed helpers. Preserve B's exact owner,
+attempt history and receipts. If necessary, first complete that screen with
+literal B through a freshly checked one-action development descriptor; the
+existing `da37a817` trial descriptor is not that descriptor. Such an action may
+create the screen's remaining scheduled B owners, so refreeze their exact map
+afterward rather than pretending the current 193-owner count is permanent.
+This is an option requiring its own compatibility and cleanup clearance.
+
+### Keep host provenance out of model input
+
+The control-relation marker is currently host-only: it is stored in feedback
+provenance, while the candidate receives only the admitted task/note projection,
+configuration and, where applicable, literal parent bundle. Notes' source IDs
+do not hash the full provenance policy; no provenance file is mounted for the
+worker. Consequently a host-only extension needs no scientific prompt, feedback
+payload, template, model, reasoning, token or benchmark change.
+
+Route every existing A/B packet's derivation through its exact pinned legacy
+relation before entering the new derivation scope. Preserve all four original
+packet files byte-for-byte; do not substitute an A/B/C marker inside an old
+packet. A new host-only relation/provenance version may bind the new descriptor
+and the actual A/B/C dependencies, including a pinned legacy A/B dependency.
+Do not add ambient profiles that the packet did not use. Existing v1 parsers
+and rejection rules remain strict. For unchanged evidence, require identical
+admitted task/note bytes, configuration, parent and official request settings.
+New execution identities can change a Gateway request hash while its body is
+unchanged; compare both separately. Arbitrary private actor-authored messages
+are not promised identical, and new measured data may legitimately change notes.
+
+| Public touchpoint | Required treatment |
+| --- | --- |
+| [Continuation scope and owner routing](../buddha/unified_continuation.py#L174), [original-cut check](../buddha/unified_continuation.py#L926) | Add a separate versioned finite map; preserve process/thread/root/grant binding and all inactive A checks. |
+| [Literal screen controls](../buddha/source_screen.py#L718), [generation owner](../buddha/candidate_generation.py#L599) | Check the owner's actual installed producer; keep active B and any prepared B screen under B. |
+| [Two-profile marker](../buddha/source_screen.py#L72), [dependency policy](../buddha/source_feedback.py#L425), [packet reconstruction](../buddha/source_feedback.py#L1374) | Route legacy v1 replay exactly; version only new host relations/provenance, not old packet bytes. |
+| [Feedback projection](../buddha/candidate_run.py#L214), [worker input](../buddha/candidate_worker.py#L198), [request identity](../buddha/gateway.py#L1106) | Keep model-visible projection/settings and distinguish body identity from owner/request identity. |
+| [Fresh post-lock checks](../buddha/unified_continuation.py#L334), [one-action dispatch](../buddha/unified_continuation.py#L1256) | Retain ordinary leases, after-lock freshness, execution identity, budget/attempt/model limits and phase fence. |
+
+### Minimum supplied acceptance cases
+
+| Case | Required result |
+| --- | --- |
+| Legacy A/B replay, including transitive feedback | All four packet bytes and old receipts remain exact; unchanged task/note projection and request body/settings match. |
+| Active B presented to C; unknown owner/profile, producer alias or borrowed scope | Refuse before owner creation, ledger transition or send; include wrong process/thread/root/grant/runtime and unsupported fourth profile. |
+| Literal B completion and subsequent C role | Same B UUID/attempt prefix, no duplicate paid receipt; C creates only its explicitly absent future role after a clean prepared-screen boundary. |
+| A/B/C dependency and interruption | Preserve legacy marker bytes, record only actual dependencies, retain failures/costs/holds, and resume without rebinding existing owners. |
+| Freshness, funding and phase changes | Mutated source/raw cut/owner/grant or post-lock state, exhausted budget/attempts, changed model settings and a closed phase stop before dispatch. |
+
+Implement and rehearse only this bounded contract next. Adoption later requires
+a fresh full-current raw cut, exact source/runtime pins and owner/receipt checks;
+the 193-row metadata receipt is insufficient. Exact-source hosted verification,
+bounded actual reconstruction and uncertain cleanup/endpoint reconciliation
+remain separate gates. Original $150/16,384 phase allocations and reviewer scope
+stay unchanged; preparation grants no extra API allocation or live clearance.
+The [delivery](conformance/three-profile-continuation-contract-delivery.json)
+records this design review, not an implemented compatibility result.

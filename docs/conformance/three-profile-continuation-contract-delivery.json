@@ -1,0 +1,147 @@
+{
+  "basis_head": "fa05a549b6a97d600f2e827bcc2aa729b7037e6c",
+  "contract": {
+    "path": "docs/UNIFIED-EVIDENCE-RECOVERY.md",
+    "section": "Bounded A/B-to-C continuation contract"
+  },
+  "date": "2026-10-30",
+  "existing_authority": {
+    "combined_api_cap_usd": 150,
+    "new_allocation_created": false,
+    "phase_allocations_changed": false,
+    "recorded_attempt_limit": 16384,
+    "reviewer_setup_changed": false
+  },
+  "format": "buddha.three-profile-continuation-contract-delivery.v1",
+  "later_adoption_requires": [
+    "Fresh full-current raw cut and exact source/runtime/owner/receipt validation; current metadata census is insufficient.",
+    "Exact-source hosted verification and bounded actual-history reconstruction.",
+    "Failed endpoint/uncertain cleanup reconciliation and a separate checked handoff; the held da37 trial command is not a one-action study descriptor."
+  ],
+  "live_execution_cleared": false,
+  "proposed_minimum": [
+    "One new continuation version with exactly the known A/B/C producer profiles, complete literal source/runtime/control bindings and a bounded exact retained-owner map; v1 remains strict.",
+    "Preserve the original inactive A cut; separately anchor retained B identities and explicit active state. Never resume an existing B owner or prepared screen under installed C helpers.",
+    "Route each old packet through its exact legacy A/B relation and preserve all four packet files. New host-only provenance may bind actual new dependencies and the pinned old relation; no ambient relation replacement.",
+    "Permit C ownership only for explicitly scheduled absent future roles after a clean prepared-screen boundary; reject missing or extra owners, duplicate or aliased producers, UUID relabeling and unsupported profiles."
+  ],
+  "proposed_supplied_checks": [
+    "Legacy A/B packet and transitive-feedback byte replay, projected task/note and request-body/settings equality.",
+    "Active B to C, unknown/unlisted owner/profile, duplicate producer identity, fourth profile and wrong process/thread/root/grant/runtime refuse before writes or sends.",
+    "Literal B screen completion retains same owner/attempt prefix and receipts; only later absent scheduled roles can create C owners.",
+    "New mixed dependencies preserve pinned old relations, only actual dependency markers, retained failures/accounting and same-owner interruption recovery.",
+    "Source/raw-cut/owner/grant/post-lock mutation, closed phase and exhausted model/budget/attempt limits refuse before dispatch."
+  ],
+  "public_source_sha256": {
+    "buddha/authorization.py": "9c2c1bfaf76e0f4d8108d75363b07d2f591edff7fa8247d69594a5a8bbd01270",
+    "buddha/candidate_generation.py": "599ec9c7a31bec585b8bf65cf8576098f0d76dbf5af7cf564682fa45546a8112",
+    "buddha/candidate_run.py": "888275b5c8d06ceb159385602dad2fb5a4b9a994f9075774b2cac5dd3f50a23e",
+    "buddha/candidate_worker.py": "4acdb845a1d78c36c4bbe1f0441c1ccb2dd6ffc7b44ebf770f15d3cf37c8f895",
+    "buddha/gateway.py": "e93e9a3bb5b0aa2dedccd92df78116021eab709523bb777395fd9f13bb936706",
+    "buddha/source_feedback.py": "03b4323bf006ae6428d22dc2f247c7876d8d4c1a5f03a17fb7e1c6d5a1927ff0",
+    "buddha/source_screen.py": "66538f02b1ab0d32d1db8eca66c2708d6fd476b236b995361d75ffb0780c7a56",
+    "buddha/unified_continuation.py": "636c45d070727edace3fec4f5eaf093c9455645475225308cc6260d906065139"
+  },
+  "public_touchpoints": {
+    "buddha/authorization.py": [
+      807,
+      816
+    ],
+    "buddha/candidate_generation.py": [
+      599,
+      657
+    ],
+    "buddha/candidate_run.py": [
+      214,
+      258,
+      335,
+      388
+    ],
+    "buddha/candidate_worker.py": [
+      198
+    ],
+    "buddha/gateway.py": [
+      522,
+      1106
+    ],
+    "buddha/source_feedback.py": [
+      264,
+      425,
+      943,
+      1248,
+      1292,
+      1374
+    ],
+    "buddha/source_screen.py": [
+      72,
+      120,
+      132,
+      365,
+      718
+    ],
+    "buddha/unified_continuation.py": [
+      174,
+      190,
+      243,
+      334,
+      926,
+      1256,
+      1271
+    ]
+  },
+  "public_visibility_review": {
+    "host_only": "source_feedback provenance.policy host_control_relation and parent/base provenance hashes remain outside feedback.json task/note data; candidate worker receives no provenance mount.",
+    "invariance": "For unchanged evidence compare admitted task/note bytes, config, literal parent, request body and official settings separately from host execution/Gateway request identity.",
+    "limits": "No private actor source or request text read. No promise of identical arbitrary actor-authored messages or notes derived from newly measured data.",
+    "peer": "postkey_check_trace",
+    "record": "Retained parent/peer chat review; no separate review artifact written.",
+    "status": "public_path_traced"
+  },
+  "retained_state_scope": {
+    "active_B_owner_operations": 0,
+    "additional_B_owners": "A separately cleared literal-B screen action may create its remaining finite scheduled owners; a later adoption cut must enumerate them afresh.",
+    "current_held_microusd": 0,
+    "current_microusd": 5523144,
+    "current_operations": 657,
+    "current_registered_owners": 193,
+    "full_current_owner_files_or_receipts_validated_by_this_slice": false,
+    "later_B_owners": 19,
+    "original_A_inactive_owners": 174,
+    "original_prefix_microusd": 4845090,
+    "original_prefix_operations": 604,
+    "source": "docs/conformance/current-owner-metadata-delivery.json",
+    "source_sha256": "6584fa5261d26ad2aece49db3a0f1435137000e7b0eff8b8cdce3685abb05d95"
+  },
+  "spec": [
+    "DESIGN3",
+    "DESIGN7",
+    "DESIGN9",
+    "DESIGN10",
+    "ENG-OBS-01"
+  ],
+  "status": "prepared_public_source_contract_not_implemented",
+  "unchanged_guards": [
+    "process/thread/study-root/grant and scheduled-role bindings",
+    "original inactive-cut rule and historical raw packet bytes",
+    "original protected selection/seed, identical original CORE/runtime and full helper-role membership",
+    "literal owner/source/CORE/runtime and producer identity",
+    "ordinary work leases, after-lock freshness and execution identity",
+    "original phase fence, model/settings, budget, attempts and reviewer limits"
+  ],
+  "validation": {
+    "application_source_changes": 0,
+    "container_actions": 0,
+    "diff_whitespace": "PASS",
+    "guide_prefix_preserved": true,
+    "historical_delivery_pin_rechecked": true,
+    "kind": "documentation_and_public_source_review_only",
+    "new_tests_executed": 0,
+    "new_user_commands": 0,
+    "original_acceptance_tails_preserved": 7,
+    "original_database_reads": 0,
+    "prior_plan_raw_rows_preserved": 203,
+    "private_actor_reads": 0,
+    "provider_calls": 0,
+    "public_source_pins_rechecked": 8
+  }
+}
