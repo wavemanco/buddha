@@ -1,0 +1,126 @@
+{
+  "basis_head": "5f24fb314e414db3d00b870fabeb210ad2fd08b6",
+  "behavior": {
+    "CORE_and_fixed_helper_membership_changed": false,
+    "benchmark_or_model_settings_changed": false,
+    "local_task_reuse": "One immutable selected TaskSet per controls/materialization/preflight routine; preserve malformed/empty-directory rejection before task or authority access. Reuse the same selected rows in the task loop.",
+    "no_cache": true,
+    "no_new_dependency_or_production_module": true,
+    "passive_screen_reuse": "collect_source_screen passes its already validated SourceScreen to its sole private _source caller; that helper derives a fresh record. The failed-source sibling also binds the TaskSet locally.",
+    "strict_boundaries": "All artifact constructors, source/selection/hash checks, file/runtime/owner/publication checks and fresh NativeEvidence finishes stay unchanged."
+  },
+  "date": "2026-10-30",
+  "evidence": {
+    "baseline-red.log": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\source-screen-local-reuse-20261030-v1\\baseline-red.log",
+      "sha256": "0118c0fcf4736d8fc4fad90c4de74e261fa6076507998e23513347fd614d4091"
+    },
+    "focused-green.log": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\source-screen-local-reuse-20261030-v1\\focused-green.log",
+      "sha256": "3d5fda3e6769ac61f00a3e82013d0da299c6cf68b2f2c3db34d6b639f42b4927"
+    },
+    "local-checks-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\source-screen-local-reuse-20261030-v1\\local-checks-v1.json",
+      "sha256": "2c1925057fa578d9145fcad97e4f34e6b43f834c24f7cb87bb43450f02d9511b"
+    },
+    "production.diff": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\source-screen-local-reuse-20261030-v1\\production.diff",
+      "sha256": "60361d2bfd915bb3b9b19fb3b8560a873b16fccca10c739ad88d08210012442e"
+    },
+    "regression.log": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\source-screen-local-reuse-20261030-v1\\regression.log",
+      "sha256": "57ee533c10220aa5431cf4a4cf272541cfb627ff462cf6763a831bc2c927db86"
+    }
+  },
+  "format": "buddha.source-screen-local-reuse-delivery.v1",
+  "hosted_verification": "Pending exact published-source CI; no full-suite or hosted pass claimed by local checks.",
+  "independent_review": {
+    "new_methods_rerun": 4,
+    "new_seconds": 15.38,
+    "record": "Retained parent-chat review; no separate review artifact written.",
+    "reviewer": "executor_failure_contract",
+    "scope": "Exact two helper diffs, sole caller and failed-source sibling, immutability/fresh copies/evidence/failure-order invariants plus supplied-only four-method rerun.",
+    "status": "PASS"
+  },
+  "limits": [
+    "Measured 51-to-27 population scans and three-to-one declaration constructions are supplied-fixture work reductions, not a timing ratio or actual193-history speedup.",
+    "Native/report-byte preservation is checked within each synthetic source cut; source-bound report identities may change with declared host source.",
+    "No new raw/parsed cache, weaker validator, evidence-finishing bypass, owner replacement or source migration.",
+    "Hosted verification, actual retained-history compatibility, cleanup reconciliation and live clearance remain separate."
+  ],
+  "live_execution_cleared": false,
+  "retained_history_gate": {
+    "active_B_owner_operations": 0,
+    "current_owners": 193,
+    "frozen_c548_source_changed": false,
+    "installed_C_producer_profile_adopted": false,
+    "later_profile_B_owners": 19,
+    "old_profile_A_inactive_owners": 174,
+    "requirements": [
+      "Existing policy admits exactly two profiles; do not silently widen it or relabel B owners as C.",
+      "Active B screen is bound to literal B helper sources. A fresh checked B one-action descriptor is an existing bounded option, not the unchanged trial command.",
+      "Closing B does not remove A/B provenance: a separately reviewed bounded versioned per-owner/profile relation is needed before C adoption; preserve earlier AB feedback bytes."
+    ]
+  },
+  "source_sha256": {
+    "buddha/source_screen.py": "66538f02b1ab0d32d1db8eca66c2708d6fd476b236b995361d75ffb0780c7a56",
+    "buddha/source_screen_results.py": "995572675514eec5f7815605bace60353d4068f6b2b7e9ef1e27f493f3268fe1",
+    "tests/test_source_screen_local_reuse.py": "d9cbb5d229cdcee0b116540d9c245589c200979b4bfa4e14fb263f5aaff76c58"
+  },
+  "spec": [
+    "DESIGN9",
+    "ENG-OBS-01"
+  ],
+  "status": "local_checked_hosted_pending_retained_history_unverified",
+  "validation": {
+    "actual_containers": 0,
+    "actual_retained_history_reads": 0,
+    "api_calls": 0,
+    "baseline": {
+      "command": "python -B -m unittest discover -s tests -p 'test_source_screen_local_reuse.py' -v",
+      "expected_failures": 2,
+      "log": "baseline-red.log",
+      "methods": 4,
+      "passes": 2,
+      "production": "unchanged_base_head",
+      "seconds": 16.29
+    },
+    "changed_task_recipe_source_selection_hash_and_publication": "PASS within selected supplied-data regressions",
+    "configured_quality_checks": 7,
+    "distinct_local_methods_passed": 21,
+    "existing_methods": 17,
+    "existing_passes": 17,
+    "existing_seconds": 70.828,
+    "fresh_nested_copy_mutation_resistance": "PASS",
+    "invalid_directory_short_circuit": "PASS",
+    "literal_native_bytes_and_typed_id_order": "PASS",
+    "new_methods": 4,
+    "new_passes": 4,
+    "new_seconds": 15.234,
+    "quality_exit_codes": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "work_counts": {
+      "baseline_passive_source_screen_constructions": 3,
+      "baseline_population_calls": {
+        "controls": 16,
+        "materialize": 16,
+        "preflight": 19
+      },
+      "changed_passive_source_screen_constructions": 1,
+      "changed_population_calls": {
+        "controls": 10,
+        "materialize": 10,
+        "preflight": 7
+      },
+      "dataset_rows": 1000,
+      "selected_tasks": 2
+    }
+  }
+}

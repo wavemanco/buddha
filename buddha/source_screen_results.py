@@ -137,7 +137,7 @@ def _owners(
 
 def _source(
     reader: NativeEvidence,
-    record: dict[str, object],
+    screen: object,
     tasks: TaskSet,
     location: Path,
     runtime_sha256: str,
@@ -145,7 +145,9 @@ def _source(
 ) -> tuple[_Generation, dict[str, object], str]:
     from buddha.source_screen import SourceScreen, _generation_formats, _version
 
-    screen = SourceScreen.from_bytes(_json(record))
+    if not isinstance(screen, SourceScreen):
+        raise reader.error_type("source needs its original screen")
+    record = screen.to_record()
     root = location / "generation"
     owner = reader.owner(root / "owners/0")
     task_path, descriptor = location / "task.json", location / "generation.json"
@@ -225,8 +227,9 @@ def _failed_source(
     location = reader.root / "tasks" / str(index)
     root = location / "generation"
     owner = reader.owner(root / "owners/0")
-    task = screen.tasks.tasks[index]
-    if reader.bound(owner, location / "task.json") != screen.tasks.select([task.id]).to_bytes():
+    tasks = screen.tasks
+    task = tasks.tasks[index]
+    if reader.bound(owner, location / "task.json") != tasks.select([task.id]).to_bytes():
         raise reader.error_type("failed source changes the original task")
     descriptor = location / "generation.json"
     if reader.bound(owner, descriptor) != _json(_generation_recipe(location, screen)) or (
@@ -505,7 +508,7 @@ def collect_source_screen(
                 if actual != names:
                     raise SourceScreenError("screen contains missing or orphan completion seals")
             source, reference, source_digest = _source(
-                reader, record, tasks.select([task.id]), location, runtime_sha256, current
+                reader, screen, tasks.select([task.id]), location, runtime_sha256, current
             )
             available, summary, evaluation_digest = _native(
                 reader, record, source, reference, location, current

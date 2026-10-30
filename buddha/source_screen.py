@@ -553,7 +553,8 @@ def _generation_recipe(location: Path, screen: SourceScreen) -> dict[str, object
 
 
 def _task_controls(location: Path, screen: SourceScreen, index: int) -> dict[Path, str]:
-    task = screen.tasks.select([screen.tasks.tasks[index].id])
+    tasks = screen.tasks
+    task = tasks.select([tasks.tasks[index].id])
     return {
         location / "task.json": task.fingerprint(),
         location / "generation.json": pipeline._sha(_generation_recipe(location, screen)),
@@ -565,7 +566,8 @@ def _materialize(directory: Path, screen: SourceScreen, index: int) -> tuple[Pat
     if not location.exists():
         location.mkdir()
     _root(location)
-    task = screen.tasks.select([screen.tasks.tasks[index].id])
+    tasks = screen.tasks
+    task = tasks.select([tasks.tasks[index].id])
     pipeline._same_or_write(location / "task.json", task.to_bytes())
     descriptor = location / "generation.json"
     pipeline._same_or_write(descriptor, _json(_generation_recipe(location, screen)))
@@ -817,9 +819,11 @@ def _preflight(
 ) -> set[str]:
     """Check every retained owner and the reverse funding schedule before calls."""
     tasks = list((directory / "tasks").iterdir())
-    if {task.name for task in tasks} != {str(index) for index in range(len(tasks))} or (
-        not tasks or len(tasks) > len(screen.tasks.tasks)
-    ):
+    if {task.name for task in tasks} != {str(index) for index in range(len(tasks))} or not tasks:
+        raise SourceScreenError("screen task schedule has foreign or missing entries")
+    population = screen.tasks
+    task_rows = population.tasks
+    if len(tasks) > len(task_rows):
         raise SourceScreenError("screen task schedule has foreign or missing entries")
     funded = {
         _text(row["run_id"]): row
@@ -833,7 +837,7 @@ def _preflight(
     for task in sorted(tasks, key=lambda path: int(path.name)):
         _root(task)
         index = int(task.name)
-        expected_task = screen.tasks.select([screen.tasks.tasks[index].id]).to_bytes()
+        expected_task = population.select([task_rows[index].id]).to_bytes()
         if pipeline._read(task / "task.json") != expected_task:
             raise SourceScreenError("original task input differs from the fixed population")
         generation = _object(record["generation"])
@@ -951,7 +955,7 @@ def _preflight(
     ):
         raise SourceScreenError("known funded owner is missing; replacement is not recovery")
     if (directory / "report.json").exists() and (
-        unfinished or (len(tasks) != len(screen.tasks.tasks) and not terminal_failure)
+        unfinished or (len(tasks) != len(task_rows) and not terminal_failure)
     ):
         raise SourceScreenError("root completion lacks its complete original schedule")
     return identifiers

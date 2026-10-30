@@ -511,3 +511,46 @@ filenames are excluded. Cumulative profile rows overlap, and some exceed the
 prefix as a speed comparison. Named hash checks are not an atomic filesystem
 snapshot. Cleanup, retained-profile compatibility, CI and live clearance remain
 separate gates under [PLAN.md](PLAN.md); the run command remains on hold.
+
+
+## Local reuse of already validated task data
+
+The [first local reuse repair](conformance/source-screen-local-reuse-delivery.json)
+removes two proved sources of duplicate work. Controls, materialization and
+preflight routines now bind their immutable selected TaskSet once. The passive
+collector passes the SourceScreen it already validated to its private source
+helper, instead of reconstructing the same screen for every task. The failed-
+source path uses the same local-binding approach. No cache was added.
+
+In the same supplied 1,000-row/two-task fixture, controls/materialization/
+preflight population scans fall from16/16/19 to10/10/7:51 to27 in total. A
+separate saved-screen inspection constructs its strict SourceScreen once
+instead of three times. Literal native bytes, typed-ID order, fresh nested
+copies, unchanged saved reports/files/accounting and malformed/tampered input
+rejections pass at the declared synthetic scope. Four new and seventeen
+existing methods pass, all seven configured local quality checks pass, and an
+independent rerun of the four new methods passes. These are work-count results,
+not a measured speedup for the actual retained study.
+
+All artifact constructors and file/digest/runtime/owner/publication checks stay
+strict. Every evidence finish remains fresh. The two production files are
+existing helper roles outside CORE; helper membership, benchmark requests and
+model settings do not change. The executing c548 source is untouched.
+
+The current history contains A and B producer profiles and one active B owner.
+The new helper source cannot silently replace that owner or become a third
+admitted profile. A frozen-B one-action path exists, but needs a new checked
+study descriptor and closes the whole prepared screen, not just generation.
+Any later new-source adoption still needs a bounded versioned owner/profile
+relation preserving earlier A/B feedback. This is a compatibility gate, not
+another spending allocation or a cleared command. [PLAN.md](PLAN.md) remains
+the scheduling authority.
+
+```powershell
+python -B -m unittest discover -s tests -p test_source_screen_local_reuse.py -v
+```
+
+This optional developer command runs the four supplied-data checks once in
+temporary folders. Run it from the project folder containing this version of
+the code. It needs no keys, makes no paid calls and starts no containers. No
+separate PowerShell window is needed; Ctrl+C stops it.
