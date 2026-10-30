@@ -91,6 +91,39 @@ class PrivateString(str):
 
 
 class ResultDiagnosticProjectionTests(unittest.TestCase):
+    def test_pre_cleanup_failure_is_projected_without_changing_primary_reason(self):
+        original = failure()
+        execution = original["child"]["child"]["generation"]["execution"]
+        diagnostic = {
+            "format": "buddha.executor-pre-cleanup-failure.v1",
+            "stage": "create",
+            "reason": "control",
+        }
+        execution["pre_cleanup_failure"] = diagnostic | {"message": CANARY}
+        before = copy.deepcopy(original)
+        result = launch_common._result_diagnostic(original, phase="search")
+        generation = result["chain"][-1]["generation"]
+        self.assertEqual(generation["pre_cleanup_failure"], diagnostic)
+        self.assertEqual(generation["executor_reason"], "cleanup")
+        self.assertEqual(generation["reason"], "execution")
+        self.assertNotIn(CANARY.encode(), _json(result))
+        generation["pre_cleanup_failure"]["stage"] = "changed"
+        self.assertEqual(original, before)
+        for value in (Trap(), diagnostic | {"format": PrivateString(CANARY)}, {}):
+            execution["pre_cleanup_failure"] = value
+            result = launch_common._result_diagnostic(original, phase="search")
+            self.assertNotIn("pre_cleanup_failure", result["chain"][-1]["generation"])
+        for value in (CANARY * 100_000, PrivateString(CANARY), "complete"):
+            execution["pre_cleanup_failure"] = diagnostic | {"reason": value}
+            result = launch_common._result_diagnostic(original, phase="search")
+            self.assertNotIn(CANARY.encode(), _json(result))
+            self.assertLess(len(_json(result)), 8_000)
+            projected = result["chain"][-1]["generation"]
+            if type(value) is str:
+                self.assertEqual(projected["pre_cleanup_failure"]["reason"], "other")
+            else:
+                self.assertNotIn("pre_cleanup_failure", projected)
+
     def test_cleanup_and_terminal_metadata_survive_without_private_fields(self):
         original = failure()
         before = copy.deepcopy(original)

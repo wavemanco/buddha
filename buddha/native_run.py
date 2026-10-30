@@ -673,10 +673,7 @@ class NativeSession:
             failed_execution = {
                 "exit_code": None,
                 "image_id": self.spec.image_id,
-                "container_id": error.container_id,
-                "cleanup_status": error.cleanup_status,
-                "reason": failure,
-            }
+            } | error.to_record()
         finally:
             self.close()
         worker = self.done or {"status": "failed", "reason": failure or "protocol", "audit": {}}

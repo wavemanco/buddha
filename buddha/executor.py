@@ -61,12 +61,71 @@ WORKER_ENV = {
 }
 
 
+def _pre_cleanup_record(value: object) -> dict[str, object] | None:
+    if type(value) is not tuple or len(value) != 2:
+        return None
+    stage, reason = value
+    if any(type(item) is not str or len(item) > 64 for item in (stage, reason)):
+        return None
+    return {
+        "format": "buddha.executor-pre-cleanup-failure.v1",
+        "stage": stage
+        if stage
+        in {
+            "image_inspect",
+            "create",
+            "container_verify",
+            "start",
+            "initial_frame",
+            "exchange",
+            "wait",
+            "stdout",
+            "stderr",
+            "watchdog",
+        }
+        else "other",
+        "reason": reason
+        if reason
+        in {
+            "configuration",
+            "control",
+            "ownership",
+            "launch",
+            "output",
+            "diagnostics",
+            "timeout",
+            "host",
+            "cancelled",
+        }
+        else "other",
+    }
+
+
 class ExecutorError(ReleaseError):
     def __init__(
-        self, reason: str, *, cleanup_status: str = "not_created", container_id: str | None = None
+        self,
+        reason: str,
+        *,
+        cleanup_status: str = "not_created",
+        container_id: str | None = None,
+        pre_cleanup_failure: tuple[str, str] | None = None,
     ) -> None:
         self.reason, self.cleanup_status, self.container_id = reason, cleanup_status, container_id
+        self.pre_cleanup_failure = pre_cleanup_failure
         super().__init__(f"isolated execution stopped: {reason}; cleanup {cleanup_status}")
+
+    def to_record(self) -> dict[str, object]:
+        record: dict[str, object] = {
+            "container_id": self.container_id,
+            "cleanup_status": self.cleanup_status,
+            "reason": self.reason,
+        }
+        try:
+            if diagnostic := _pre_cleanup_record(self.pre_cleanup_failure):
+                record["pre_cleanup_failure"] = diagnostic
+        except BaseException:
+            pass  # Optional diagnostics must not replace the original execution failure.
+        return record
 
 
 @dataclass(frozen=True)
@@ -461,19 +520,29 @@ def run_container(
     stop = threading.Event()
     lock = threading.Lock()
     failure: list[str] = []
+    failure_stage = "exchange"
     counts = {"stdout": 0, "stderr": 0, "frames": 0}
     stderr_digest = hashlib.sha256()
     started = time.monotonic()
     proof = b""
     cleanup = "not_created"
     error: BaseException | None = None
+    pre_cleanup_failure: tuple[str, str] | None = None
+    stage = "image_inspect"
     exit_code = -1
 
-    def fail(reason: str) -> None:
+    def fail(reason: str, *, stage: str = "exchange") -> None:
+        nonlocal failure_stage
         with lock:
             if not failure:
                 failure.append(reason)
+                failure_stage = stage
         stop.set()
+
+    def check_failure() -> None:
+        with lock:
+            if failure:
+                raise ExecutorError(failure[0], pre_cleanup_failure=(failure_stage, failure[0]))
 
     def enqueue(value: dict[str, object] | None) -> None:
         while not stop.is_set():
@@ -506,7 +575,7 @@ def run_container(
                     raise ChannelError("frame limit")
                 enqueue(value)
         except Exception:
-            fail("output")
+            fail("output", stage="stdout")
 
     def stderr(stream: io.BufferedReader) -> None:
         try:
@@ -514,14 +583,14 @@ def run_container(
                 counts["stderr"] += len(raw)
                 stderr_digest.update(raw)
                 if counts["stderr"] > limits.max_stderr_bytes:
-                    fail("diagnostics")
+                    fail("diagnostics", stage="stderr")
                     return
         except Exception:
-            fail("diagnostics")
+            fail("diagnostics", stage="stderr")
 
     def watchdog() -> None:
         if not stop.wait(limits.wall_seconds):
-            fail("timeout")
+            fail("timeout", stage="watchdog")
         if failure and identity:
             try:
                 control(["kill", identity])
@@ -539,15 +608,18 @@ def run_container(
             or image_config.get("Volumes")
         ):
             raise ExecutorError("configuration")
+        stage = "create"
         raw = control(_create_args(spec, limits, name, owner)).strip()
         if not re.fullmatch(b"[0-9a-f]{64}", raw):
             raise ExecutorError("launch")
         identity = raw.decode("ascii")
+        stage = "container_verify"
         record = inspect_id(identity)
         _owned(record, identity, name, owner)
         proof_record = _load(_configuration(record, spec, limits))
         proof_record["engine_endpoint_sha256"] = hashlib.sha256(endpoint.encode()).hexdigest()
         proof = _json(proof_record)
+        stage = "start"
         process = subprocess.Popen(  # nosec B603
             [executable, "--host", endpoint, "start", "-ai", identity],
             stdin=subprocess.PIPE,
@@ -564,7 +636,9 @@ def run_container(
         ]
         for thread in threads:
             thread.start()
+        stage = "initial_frame"
         write_frame(cast(BinaryIO, process.stdin), initial)
+        stage = "exchange"
         while not failure:
             try:
                 frame = events.get(timeout=0.05)
@@ -572,29 +646,48 @@ def run_container(
                 continue
             if frame is None:
                 break
-            with lock:
-                if failure:
-                    raise ExecutorError(failure[0])
+            check_failure()
             reply = handle(frame)  # Synchronous owner: never abandon a dispatched paid call.
             if failure:
                 break
             if reply is not None:
                 write_frame(cast(BinaryIO, process.stdin), reply)
-        if failure:
-            raise ExecutorError(failure[0])
+        check_failure()
         process.stdin.close()
+        stage = "wait"
         try:
             exit_code = process.wait(timeout=limits.wall_seconds)
         except subprocess.TimeoutExpired:
-            fail("timeout")
-            raise ExecutorError("timeout") from None
-        if failure:
-            raise ExecutorError(failure[0])
+            fail("timeout", stage="wait")
+            raise ExecutorError("timeout", pre_cleanup_failure=("wait", "timeout")) from None
+        check_failure()
     except BaseException as caught:
         error = caught
-        fail("cancelled" if isinstance(caught, (KeyboardInterrupt, SystemExit)) else "host")
+        reason = "cancelled" if isinstance(caught, (KeyboardInterrupt, SystemExit)) else "host"
+        try:
+            if type(caught) is ExecutorError:
+                value = caught.pre_cleanup_failure
+                if value is None:
+                    value = (stage, caught.reason)
+            else:
+                value = (stage, reason)
+            if diagnostic := _pre_cleanup_record(value):
+                pre_cleanup_failure = (
+                    cast(str, diagnostic["stage"]),
+                    cast(str, diagnostic["reason"]),
+                )
+        except BaseException:
+            pass  # Diagnostic capture cannot replace the failure or its mandatory cleanup.
+        fail(reason, stage=stage)
     finally:
         stop.set()
+        try:
+            if error is None:
+                with lock:
+                    if failure:
+                        pre_cleanup_failure = (failure_stage, failure[0])
+        except BaseException:
+            pass  # Observe only failures recorded before cleanup begins.
         # Recover only our preselected UUID+label when create acknowledgement was lost.
         try:
             if identity is None:
@@ -647,7 +740,12 @@ def run_container(
         if error is None and failure:
             error = ExecutorError(failure[0])
     if cleanup == "unknown":
-        raise ExecutorError("cleanup", cleanup_status=cleanup, container_id=identity) from None
+        raise ExecutorError(
+            "cleanup",
+            cleanup_status=cleanup,
+            container_id=identity,
+            pre_cleanup_failure=pre_cleanup_failure,
+        ) from None
     if error:
         if isinstance(error, (KeyboardInterrupt, SystemExit)):
             raise error

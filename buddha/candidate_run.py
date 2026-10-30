@@ -730,11 +730,7 @@ class CandidateSession:
                     )
                     self._write("answers.json", answers.to_record())
         except executor.ExecutorError as error:
-            execution = {
-                "container_id": error.container_id,
-                "cleanup_status": error.cleanup_status,
-                "reason": error.reason,
-            }
+            execution = error.to_record()
             reason = "execution"
         except KeyboardInterrupt:
             status, reason, interrupted = "stopped", "cancelled", True

@@ -643,6 +643,50 @@ requires a checked compatibility case. No profile policy is widened, no lost
 Docker cause is recovered and no reconstruction speedup is established here.
 Keep the earlier command on hold until the next explicit handoff.
 
+#### Retaining the execution failure before cleanup
+
+A [separately checked executor repair](conformance/executor-pre-cleanup-diagnostics-delivery.json)
+can retain a small safe cause when cleanup uncertainty becomes the main failure.
+For example, future execution metadata can contain:
+
+```json
+{
+  "reason": "cleanup",
+  "cleanup_status": "unknown",
+  "pre_cleanup_failure": {
+    "format": "buddha.executor-pre-cleanup-failure.v1",
+    "stage": "create",
+    "reason": "control"
+  }
+}
+```
+
+This means the create step failed at the Docker control interface, and cleanup
+could not subsequently be confirmed. `cleanup` remains the main failure; the earlier
+cause does not grant permission to retry or declare the container removed.
+Only fixed stage/reason labels are retained, with no command text, exception
+message, endpoint, key or agent output.
+
+The record observes execution failure before the cleanup boundary. It does not
+claim to identify the first fault among concurrent threads. A fault that appears
+only during cleanup cannot acquire an invented earlier cause. Malformed
+field types are omitted and unrecognized labels become `other`; diagnostic
+errors cannot replace the original failure.
+
+Candidate generation/improvement, native evaluation and fixed-seed generation
+retain this optional record in their existing session reports. The launcher
+currently displays it only for inline generation reports; native/fixed-seed
+terminal display is not added. Final assessment still supplies only its existing
+header/position fields at this boundary, without opening referenced files.
+
+The final executor cohort passes 26 supplied-only tests; an independent rerun
+reports all 38 selected current-source methods passing. The delivery distinguishes
+those observations from the initial missing-cause failure, intermediate review
+corrections, earlier passing cuts and their quality-check scopes. No real
+container or provider, actual retained-history compatibility, cleanup clearance
+or recovery of the historical657 cause is established. Source adoption and a
+new explicit live handoff remain separate; the earlier command stays on hold.
+
 ## Bounded A/B-to-C continuation contract
 
 **Preparation only.** A means the original producer, B the frozen `c54819f`
