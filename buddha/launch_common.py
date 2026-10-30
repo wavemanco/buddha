@@ -396,6 +396,46 @@ def _result_diagnostic(value: object, *, phase: str) -> dict[str, object]:
                 ),
                 "calls": integers(generation.get("calls"), ("requested", "completed", "stopped")),
             }
+            failure = row(execution.get("pre_cleanup_failure"))
+            form = failure.get("format")
+            if (
+                type(form) is str
+                and len(form) <= 80
+                and form == "buddha.executor-pre-cleanup-failure.v1"
+                and all(type(failure.get(key)) is str for key in ("stage", "reason"))
+            ):
+                cast(dict[str, object], projected["generation"])["pre_cleanup_failure"] = {
+                    "format": form,
+                    "stage": token(
+                        failure.get("stage"),
+                        {
+                            "image_inspect",
+                            "create",
+                            "container_verify",
+                            "start",
+                            "initial_frame",
+                            "exchange",
+                            "wait",
+                            "stdout",
+                            "stderr",
+                            "watchdog",
+                        },
+                    ),
+                    "reason": token(
+                        failure.get("reason"),
+                        {
+                            "configuration",
+                            "control",
+                            "ownership",
+                            "launch",
+                            "output",
+                            "diagnostics",
+                            "timeout",
+                            "host",
+                            "cancelled",
+                        },
+                    ),
+                }
         terminal = row(row(current.get("outcome")).get("terminal"))
         if terminal:
             selected = integers(

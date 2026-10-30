@@ -236,6 +236,58 @@ class ExecutorFixture(unittest.TestCase):
 
 
 class ExecutorInputTests(ExecutorFixture):
+    def test_failure_records_are_optional_bounded_fresh_and_best_effort(self):
+        legacy = {"container_id": None, "cleanup_status": "unknown", "reason": "cleanup"}
+        self.assertEqual(ExecutorError("cleanup", cleanup_status="unknown").to_record(), legacy)
+        error = ExecutorError(
+            "cleanup", cleanup_status="unknown", pre_cleanup_failure=("create", "control")
+        )
+        expected = legacy | {
+            "pre_cleanup_failure": {
+                "format": "buddha.executor-pre-cleanup-failure.v1",
+                "stage": "create",
+                "reason": "control",
+            }
+        }
+        record = error.to_record()
+        self.assertEqual(record, expected)
+        record["pre_cleanup_failure"]["stage"] = "changed"
+        self.assertEqual(error.to_record(), expected)
+
+        class PrivateString(str):
+            def __len__(self):
+                raise AssertionError("must not inspect string subclasses")
+
+            def __hash__(self):
+                raise AssertionError("must not hash string subclasses")
+
+            def __eq__(self, other):
+                raise AssertionError("must not compare string subclasses")
+
+        for value in (
+            None,
+            [],
+            ("create",),
+            ("create", None),
+            ("private-marker" * 100_000, "control"),
+            (PrivateString("private-marker"), "control"),
+            ("create", PrivateString("private-marker")),
+        ):
+            error.pre_cleanup_failure = value
+            self.assertEqual(error.to_record(), legacy)
+        error.pre_cleanup_failure = ("private-marker", "private-marker")
+        self.assertEqual(
+            error.to_record()["pre_cleanup_failure"],
+            {
+                "format": "buddha.executor-pre-cleanup-failure.v1",
+                "stage": "other",
+                "reason": "other",
+            },
+        )
+        for failure in (RuntimeError("private-marker"), KeyboardInterrupt("private-marker")):
+            with patch("buddha.executor._pre_cleanup_record", side_effect=failure):
+                self.assertEqual(error.to_record(), legacy)
+
     def test_container_fields_validate_absent_mount_metadata_without_weakening_live_spec(self):
         from buddha import executor
 
@@ -571,7 +623,14 @@ class ExecutorLifecycleTests(ExecutorFixture):
         self.assertNotIn("child-private-marker", str(failed.exception))
 
     def test_stderr_delivered_after_worker_exit_still_enforces_its_byte_limit(self):
+        self.late_diagnostics_case()
+
+    def test_stderr_failure_during_cleanup_is_not_invented_as_a_pre_cleanup_failure(self):
+        self.late_diagnostics_case(remove_error=OSError("child-private-marker"))
+
+    def late_diagnostics_case(self, *, remove_error=None):
         fixture = DockerFixture(self.spec(), Limits(max_stderr_bytes=2))
+        fixture.remove_error = remove_error
         cleanup_waited = threading.Event()
         delivered = threading.Event()
         waits = []
@@ -602,8 +661,9 @@ class ExecutorLifecycleTests(ExecutorFixture):
         with self.assertRaises(ExecutorError) as failed:
             self.execute(fixture)
         self.assertTrue(delivered.is_set())
-        self.assertEqual(failed.exception.reason, "diagnostics")
-        self.assertEqual(failed.exception.cleanup_status, "removed")
+        self.assertEqual(failed.exception.reason, "cleanup" if remove_error else "diagnostics")
+        self.assertEqual(failed.exception.cleanup_status, "unknown" if remove_error else "removed")
+        self.assertIsNone(failed.exception.pre_cleanup_failure)
         self.assertNotIn("child-private-marker", str(failed.exception))
 
     def test_callback_failure_is_sanitized_and_still_removes_container(self):
@@ -642,6 +702,7 @@ class ExecutorLifecycleTests(ExecutorFixture):
             self.execute(fixture)
         self.assertEqual(fixture.started, [])
         self.assertEqual(failed.exception.cleanup_status, "unknown")
+        self.assertEqual(failed.exception.pre_cleanup_failure, ("container_verify", "ownership"))
         self.assertFalse(any(argv[1] in {"rm", "kill"} for argv in fixture.calls))
 
     def test_cleanup_failure_cannot_return_a_successful_result(self):
@@ -652,7 +713,126 @@ class ExecutorLifecycleTests(ExecutorFixture):
         self.assertEqual(failed.exception.reason, "cleanup")
         self.assertEqual(failed.exception.cleanup_status, "unknown")
         self.assertEqual(failed.exception.container_id, CONTAINER)
+        self.assertIsNone(failed.exception.pre_cleanup_failure)
+        self.assertNotIn("pre_cleanup_failure", failed.exception.to_record())
         self.assertNotIn("child-private-marker", str(failed.exception))
+
+    def test_pre_cleanup_failure_survives_without_changing_cleanup_precedence(self):
+        for stage, reason in (
+            ("image_inspect", "control"),
+            ("create", "control"),
+            ("start", "host"),
+            ("exchange", "host"),
+            ("exchange", "cancelled"),
+        ):
+            fixture = DockerFixture(self.spec(), Limits())
+            fixture.remove_error = OSError("child-private-marker")
+            if stage == "image_inspect":
+
+                def control(*args, **kwargs):
+                    raise OSError("child-private-marker")
+
+                fixture.control = control
+            if stage == "create":
+                fixture.create_error = subprocess.TimeoutExpired("child-private-marker", 10)
+
+            def handle(frame, stage=stage, reason=reason):
+                if stage == "exchange":
+                    if reason == "cancelled":
+                        raise KeyboardInterrupt("child-private-marker")
+                    raise RuntimeError("child-private-marker")
+                return None
+
+            start = fixture.popen
+            if stage == "start":
+
+                def start(*args, **kwargs):
+                    raise OSError("child-private-marker")
+
+            with (
+                self.subTest(stage=stage),
+                patch.object(fixture, "popen", side_effect=start),
+                self.assertRaises(ExecutorError) as failed,
+            ):
+                self.execute(fixture, handle)
+            self.assertEqual(failed.exception.reason, "cleanup")
+            self.assertEqual(failed.exception.cleanup_status, "unknown")
+            self.assertEqual(
+                getattr(failed.exception, "pre_cleanup_failure", None), (stage, reason)
+            )
+            self.assertIsNone(failed.exception.__cause__)
+            self.assertNotIn("child-private-marker", str(failed.exception))
+
+    def test_recorded_output_and_watchdog_origins_survive_main_loop_and_cleanup(self):
+        for origin, reason in (("stdout", "output"), ("watchdog", "timeout")):
+            fixture = DockerFixture(
+                self.spec(),
+                Limits(wall_seconds=0.05 if origin == "watchdog" else 60),
+                stdout=b"private-marker\n" if origin == "stdout" else b"{}\n",
+            )
+            fixture.remove_error = OSError("private-marker")
+
+            def handle(frame, origin=origin):
+                if origin == "watchdog":
+                    threading.Event().wait(0.15)
+
+            with self.subTest(origin=origin), self.assertRaises(ExecutorError) as failed:
+                self.execute(fixture, handle)
+            self.assertEqual(failed.exception.reason, "cleanup")
+            self.assertEqual(failed.exception.cleanup_status, "unknown")
+            self.assertEqual(failed.exception.pre_cleanup_failure, (origin, reason))
+
+    def test_optional_capture_failure_cannot_replace_cleanup(self):
+        for broken in (
+            "absent-reason",
+            "hostile-reason",
+            "falsey-capture",
+            "hostile-capture",
+            "capture-interrupted",
+        ):
+            fixture = DockerFixture(self.spec(), Limits())
+            fixture.remove_error = OSError("private-marker")
+            original = ExecutorError("control")
+            inspected = []
+            if broken == "absent-reason":
+                del original.reason
+            elif broken == "hostile-reason":
+
+                class PrivateReason:
+                    def __bool__(self):
+                        raise AssertionError("must not inspect an unknown reason")
+
+                    def __str__(self):
+                        raise AssertionError("must not copy a private reason")
+
+                original.reason = PrivateReason()
+            elif broken == "falsey-capture":
+                original.pre_cleanup_failure = ()
+            elif broken == "hostile-capture":
+
+                class PrivateCapture:
+                    def __bool__(self, inspected=inspected):
+                        inspected.append("bool")
+                        raise AssertionError("must not inspect an opaque capture")
+
+                original.pre_cleanup_failure = PrivateCapture()
+            fixture.create_error = original
+            with self.subTest(broken=broken):
+                if broken == "capture-interrupted":
+                    with patch(
+                        "buddha.executor._pre_cleanup_record",
+                        side_effect=KeyboardInterrupt("private-marker"),
+                    ):
+                        with self.assertRaises(ExecutorError) as failed:
+                            self.execute(fixture)
+                else:
+                    with self.assertRaises(ExecutorError) as failed:
+                        self.execute(fixture)
+                self.assertEqual(failed.exception.reason, "cleanup")
+                self.assertEqual(failed.exception.cleanup_status, "unknown")
+                self.assertIsNone(failed.exception.pre_cleanup_failure)
+                self.assertEqual(inspected, [])
+                self.assertNotIn("private-marker", str(failed.exception))
 
     def test_worker_timeout_waits_for_inflight_owner_callback_before_returning(self):
         fixture = DockerFixture(self.spec(), Limits(wall_seconds=0.1))

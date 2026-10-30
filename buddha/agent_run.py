@@ -450,13 +450,7 @@ class AgentSession:
                         docker_endpoint=self.endpoint,
                     )
                 except executor.ExecutorError as error:
-                    executions.append(
-                        {
-                            "container_id": error.container_id,
-                            "cleanup_status": error.cleanup_status,
-                            "reason": error.reason,
-                        }
-                    )
+                    executions.append(error.to_record())
                     break
                 executions.append(
                     {key: value for key, value in asdict(result).items() if key != "_configuration"}
