@@ -472,3 +472,42 @@ history using this 193-owner roster and the existing frozen two-profile controls
 No third helper profile is adopted automatically. Cleanup reconciliation,
 retained-history compatibility, exact-source hosted completion and live clearance
 remain open; the command stays on hold under [PLAN.md](PLAN.md).
+
+
+## Bounded profile of the actual 657-attempt history
+
+The [actual-history profile](conformance/current657-reconstruction-profile-delivery.json)
+ran the whole passive checker once, with a 300-second observation limit and a
+330-second parent process limit. It stopped as **partial_deadline**, saved its
+profile and exited normally with the incomplete-result code. The reconstruction
+prefix took 300.142179 seconds; the parent took 305.304399 seconds including
+startup and final checks. The whole checker and its first study restoration
+did not return. This is not completed recovery verification.
+
+The observed prefix completed 1,666 task-population constructions; a 1,667th
+was interrupted. It made 1,666,495 metadata checks, 16,729 capture reads returning
+9,265,872,222 bytes across 2,462 paths, and 390 owner parses for 1,300 owner
+requests. Those are repeated application-work counts, not unique disk data or
+physical transfers. They identify population processing as a concrete repair
+target; the next source review must establish which work can safely be reused.
+
+All 98 reviewed public source/support pins, seven named inputs and four
+authorization-file hashes remained exact on final rechecks. The guard recorded
+no denied operation. It made no model call, container start or original write;
+SQLite opened only memory databases. The 186 successful inner capture finishes
+do not establish the interrupted whole-history finish. Original metadata still
+comes from the separate 193-owner census; this profile does not replace it.
+
+The supplied-memory boundary check passed all 44 checks. Its earlier two failed
+rehearsals remain recorded: a generic failure, then a typed failure in supplied
+image setup after 15 checks. [SQLite's serializer](https://raw.githubusercontent.com/sqlite/sqlite/version-3.50.4/src/memdb.c)
+internally asks for a page count, which the actual reader does not need or permit. Building the known
+supplied image before guard installation corrected that fixture without
+relaxing the reader. The actual application and frozen source were unchanged.
+
+Only pinned public function/caller rows are exported; private code, locals and
+filenames are excluded. Cumulative profile rows overlap, and some exceed the
+300-second observation time. Do not add them or treat this one instrumented
+prefix as a speed comparison. Named hash checks are not an atomic filesystem
+snapshot. Cleanup, retained-profile compatibility, CI and live clearance remain
+separate gates under [PLAN.md](PLAN.md); the run command remains on hold.
