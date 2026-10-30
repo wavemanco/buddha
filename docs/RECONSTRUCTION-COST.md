@@ -376,3 +376,49 @@ This optional developer command runs the small supplied-study and file-integrity
 checks once in temporary test folders. It may take a few minutes, needs no API
 keys and makes no paid calls. Use this checkout; no separate window is needed.
 Ctrl+C stops it.
+
+
+## Synthetic reconstruction profile after the 657-attempt stop
+
+The October 30 [profile record](conformance/synthetic-reconstruction-profile-observation.json)
+checks a small supplied fixture at the frozen `c54819f` source, with 96 public
+source pins. It performs one unprofiled strict reconstruction and exactly one
+profiled reconstruction using the existing directory-list sharing mechanism.
+No application code was changed by this observation.
+
+Both calls reproduce the same checked signature, next `prepare_proposal` action
+and supplied activity. The retained fixture stays at 185 files and 1,506,730
+bytes with the same complete inventory fingerprint. Each call makes 1,970
+capture reads returning 21,682,686 bytes across 84 distinct paths; each also
+records 40 owner parses, 184 owner requests and 347 task-population
+constructions. These are repeated-work counts, not counts of unique owners or
+physical disk transfers.
+
+| Directory-list work | Strict call | Shared call |
+| --- | ---: | ---: |
+| Constructor walks | 24 | 5 |
+| Strict capture-finish walks | 41 | 41 |
+| Fresh passive-scope exit walks | 0 | 5 |
+| Total walks | 65 | 51 |
+
+This confirms the earlier optimization's work counts in this supplied case;
+it is not a new optimization. The strict call took 6.184625 seconds without a
+profiler; the shared call took 8.961907 seconds with a profiler. Different
+instrumentation and cache order prevent a speed comparison. The complete
+observation took 103.714291 seconds, including preparation and verification.
+Public cumulative profile rows overlap and must not be added together.
+
+Before profiling, a separate SQLite-guard probe passed 42 checks, including 14
+expected denials. A fixture-link probe passed 19 checks, including ten expected
+denials. These guards constrain trusted, pinned fixture code; they are not an
+operating-system sandbox. The fixture uses supplied replies and owned synthetic
+databases. The observation records zero actual provider calls, container starts,
+original-data reads, original-file SQL connections and original writes.
+
+The unexecuted v1 draft and v2–v4 setup failures remain separate evidence.
+Each failed setup records zero profiled reconstructions. V5 completed, and its
+saved result received independent review. It does not identify hotspots in the
+actual 657-attempt history, reconcile uncertain container cleanup, validate a
+third control profile or clear another live command. Next, continue the bounded
+current-owner metadata and compatibility investigation and collect exact-source
+PR #190 CI evidence. The command remains on hold under [PLAN.md](PLAN.md).
