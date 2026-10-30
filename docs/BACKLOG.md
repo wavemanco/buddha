@@ -250,3 +250,19 @@ movement through preparation, beyond CPU/I/O liveness alone. Their existence
 does not certify complete/valid owner state, a new API attempt or a completed
 recovery; accounting and original file contents were not reopened. Repeated
 reconstruction and unclear stage reporting remain an unresolved concern.
+
+### Actual continuation stop: October 30, 2026
+
+The [hash-joined stop record](conformance/continuation-executor-stop-observation.json)
+retains 657 attempts/$5.523144/zero held and no final/plain work. Generation for
+cell 0/0/0/1 task 0 failed before ready, with execution reason cleanup, cleanup
+unknown, null container ID and zero callbacks/operations for this failed attempt.
+The executor replaced its initial cause with cleanup; the candidate outcome
+then labeled missing done as protocol. This normal returned failure bypasses
+the coordinator exception diagnostic. Preserve specific safe execution detail
+through returned results as well as escaped exceptions, without raw messages,
+keys, source text, outputs or changed benchmark semantics. No initial cause
+can be reconstructed from the retained record alone. Current default-context
+Docker availability and an old exited container do not reconcile the failed
+endpoint or establish an orphan. Hold the command for bounded reconciliation,
+separately checked host-helper diagnostics and reconstruction profiling.
