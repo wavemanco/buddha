@@ -547,7 +547,16 @@ cut, without establishing provider access or permission to restart the run.
 
 ### Current checked continuation
 
-**Ready for operator use under the original authorization.** The command below
+The [saved October 30 stop](conformance/continuation-executor-stop-observation.json)
+retains 657 attempts, $5.523144 recorded cost and zero held. Final assessment
+and both plain references remain unstarted. The first task of the next cell
+failed before its isolated worker became ready; container cleanup was unknown
+and this failed attempt made no model callbacks. The outer `protocol` label
+does not establish a NoveltyBench-settings error. The exact initial executor
+cause was discarded. Keep all original records and grants; another live
+command will follow separately checked cleanup and diagnostic work.
+
+**Historical clearance: this command was run and has now stopped. Do not rerun it until the follow-up checks are complete.** The command below
 selects diagnostic-only `c54819f`
 source and continuation `da37a817`; the historical command above is superseded.
 All ten exact-source CI jobs now pass their saved-evidence checks: 2,141
