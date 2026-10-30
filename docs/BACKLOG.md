@@ -241,3 +241,12 @@ completed checkpoints in separately reviewed source while preserving fresh
 evidence, source, authority and budget checks. Keep the live executing source
 and original records unchanged; the existing CI-only stall rule does not
 authorize automatically terminating this live experiment.
+
+A [subsequent observation](conformance/live-continuation-progress-follow-up.json)
+finds all four preparation paths present in the same process: the witness
+directory, plan, proposal context and first-owner directory. Preserve the
+earlier absence receipt unchanged. The appearance of these paths is actual
+movement through preparation, beyond CPU/I/O liveness alone. Their existence
+does not certify complete/valid owner state, a new API attempt or a completed
+recovery; accounting and original file contents were not reopened. Repeated
+reconstruction and unclear stage reporting remain an unresolved concern.
