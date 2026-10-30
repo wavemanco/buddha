@@ -422,3 +422,53 @@ actual 657-attempt history, reconcile uncertain container cleanup, validate a
 third control profile or clear another live command. Next, continue the bounded
 current-owner metadata and compatibility investigation and collect exact-source
 PR #190 CI evidence. The command remains on hold under [PLAN.md](PLAN.md).
+
+
+## Current 193-owner metadata after the 657-attempt stop
+
+The [metadata delivery](conformance/current-owner-metadata-delivery.json) records
+one bounded observation of the original search authority selected by the exact saved
+outer observation. SQLite queries ran only on its in-memory deserialized image.
+The new JSON retains registration fields and status/cost aggregates; it copies
+no response payloads or owner roster into repository documentation.
+
+There are 193 registered owners: 174 from the preserved 604-operation cut and
+19 later registrations. Independent saved-metadata review confirms all 174 old
+run IDs, registered manifest hashes and directory anchors match that cut and
+remain inactive/deactivated. Their aggregate stays at 604 completed operations,
+$4.845090 spent and zero held. The later owners add 53 operations/$0.678054.
+Current search totals are 657 completed operations/$5.523144/zero held, with no
+reserved, dispatched or unknown operations. The sole active owner is the next
+screen's task-0 generation owner, with zero operations and zero held.
+
+These are registry comparisons, not fresh reads or validation of owner manifests,
+ledgers, requests or receipts. Other grants were not opened: whole-study totals
+are explicitly labeled metadata from the saved outer observation. The earlier
+604 cut is preserved rather than replaced by the current roster.
+
+The first supplied v2 rehearsal retained six passes and one full-main error whose
+exact cause was discarded. Supplied v3 passed seven methods. The first actual v2
+census then refused with `input_open_changed`, without identifying its input.
+A separate three-input metadata probe reproduced a Windows 3.13.12 stat/fstat
+ctime discrepancy on the authority. [CPython issue #157671](https://github.com/python/cpython/issues/157671)
+contains 3.14 reproductions; support for this host's 3.13.12 finding comes from
+the retained local measurement. [Python's 3.13 documentation](https://docs.python.org/3.13/library/os.html#os.stat_result.st_ctime_ns)
+provides Windows birth time and deprecates ctime for creation time. The new
+observer missed the existing cross-API/same-API distinction already present in
+[releases.file_hash](../buddha/releases.py), lines 362-367.
+
+External census v3 uses Windows birth time across APIs while retaining ctime
+within each API and in the final path identity. No application source changed.
+Supplied v4 passed all eight methods, including a native modified-file case and
+injected identity/ctime refusals. The separate actual v3 observation finished in
+0.185521 seconds, retaining the same authority image SHA-256 before and after:
+`9bdc6e040b548c1997faec81b796fea1be8b6000678954dc1ed4163a5c972b3a`.
+It made no original-file SQLite connection, original mutation, provider call or
+container start. This is a metadata observation, not a reconstruction-time bound,
+atomic snapshot, receipt audit or diagnosis of the original executor failure.
+
+Next prepare one bounded reconstruction/profile of the actual 657-attempt
+history using this 193-owner roster and the existing frozen two-profile controls.
+No third helper profile is adopted automatically. Cleanup reconciliation,
+retained-history compatibility, exact-source hosted completion and live clearance
+remain open; the command stays on hold under [PLAN.md](PLAN.md).
