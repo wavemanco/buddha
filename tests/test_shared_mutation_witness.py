@@ -566,7 +566,21 @@ class SharedMutationWitnessTests(unittest.TestCase):
         capacity = SourceFeedbackTooLarge("supplied complete-feedback capacity boundary")
         attempts = []
 
-        def too_large(directory, reference, failures, *, full_answers):
+        def too_large(
+            directory, reference, failures, *, full_answers, parent_screen=None, completed=None
+        ):
+            if parent_screen is not None:
+                self.assertIs(type(parent_screen), self.api.source_screen.SourceScreen)
+                self.assertEqual(
+                    parent_screen.to_bytes(),
+                    (Path(reference["directory"]) / "screen.json").read_bytes(),
+                )
+            if completed is not None:
+                self.assertIs(type(completed), self.api.source_screen_results._CompletedScreenRead)
+                self.assertIs(completed.screen, parent_screen)
+                self.assertEqual(completed.reader.root, Path(reference["directory"]))
+                self.assertEqual(completed.reader.authorization, Path(reference["authorization"]))
+                self.assertEqual(sha(completed.report_raw), reference["report_sha256"])
             attempts.append((directory, reference, failures, full_answers, self.location.is_dir()))
             raise capacity
 
@@ -709,7 +723,23 @@ class WitnessFacadeCapacityTests(unittest.TestCase):
         )
         calls = []
 
-        def too_large(directory, reference, failures, *, full_answers):
+        def too_large(
+            directory, reference, failures, *, full_answers, parent_screen=None, completed=None
+        ):
+            if parent_screen is not None:
+                self.assertIs(type(parent_screen), source_search.source_screen.SourceScreen)
+                self.assertEqual(
+                    parent_screen.to_bytes(),
+                    (Path(reference["directory"]) / "screen.json").read_bytes(),
+                )
+            if completed is not None:
+                self.assertIs(
+                    type(completed), source_search.source_screen_results._CompletedScreenRead
+                )
+                self.assertIs(completed.screen, parent_screen)
+                self.assertEqual(completed.reader.root, Path(reference["directory"]))
+                self.assertEqual(completed.reader.authorization, Path(reference["authorization"]))
+                self.assertEqual(sha(completed.report_raw), reference["report_sha256"])
             calls.append(
                 (directory, reference["directory"], failures, full_answers, location.is_dir())
             )

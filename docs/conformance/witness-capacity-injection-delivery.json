@@ -1,0 +1,106 @@
+{
+  "format": "buddha.witness-capacity-injection-delivery.v2",
+  "status": "two_original_failures_local_pass_hosted_pending",
+  "spec": [
+    "DESIGN sections3,9",
+    "PLAN IMP-01",
+    "ENG-OBS-01"
+  ],
+  "base": "76618604359f089707a8857b4d3df8f33ef0d028",
+  "verification": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\witness-capacity-injection-20261031-v1\\verification-summary-v1.json",
+    "sha256": "b892c123d9b733b93b2acf370d3d4bd6b9dca149d4abd93f90ce3234647c1bd2"
+  },
+  "test_sha256": "8a4e8d0f55610390c9b23d6c9a3af3e65d23f9fc4e6e416cb99fc1cd425c3698",
+  "production_bytes_changed": false,
+  "red": {
+    "scope": "Actual hosted206-210 failures plus exact206 static caller/signature cause; no local baseline rerun.",
+    "ci_snapshot": {
+      "path": "../ci-202-211-snapshot-20261031-v1/metadata-snapshot-v1.json",
+      "sha256": "7b31c3147ef7d3c43e096f6d2c08af43819cea5beb7eab6adc5f7414ed689d80"
+    },
+    "failure_evidence_sha256": "b2b467f4667444fb15bac6cd9a4e20fa0e8b650d57324f43a966ca814d7037c2",
+    "static_cause_sha256": "5da0eff57f5485268303ca38dc3995b27233362cfa20b172785f2131856e3b69"
+  },
+  "green": {
+    "result": {
+      "path": "focused-result-v1.json",
+      "sha256": "9038761e52337d2e7ba4aaf56c265af6e19db66e01772157505d2d40a338cde4"
+    },
+    "runner": {
+      "path": "run-focused-v1.py",
+      "sha256": "52ae09335ab7aed3eafe8e90b862c191d9a0cd8d2b690d23a5e2af5df78558fc"
+    },
+    "methods": 2,
+    "executions": 2,
+    "per_method_deadline_seconds": 180,
+    "total_deadline_seconds": 360,
+    "parent_seconds": 70.60171079984866,
+    "unittest_seconds": [
+      41.132,
+      29.024
+    ],
+    "child_seconds": [
+      41.322935400065035,
+      29.2675683000125
+    ],
+    "timeouts": 0,
+    "automatic_retry": false,
+    "test_pin_before_after_same": true,
+    "stderr_logs": [
+      {
+        "path": "method-0-stderr-v1.log",
+        "sha256": "3fded38b2be58f83efeff67cafcbaf230f3fa9819f97100da530e6b497e5dbba"
+      },
+      {
+        "path": "method-1-stderr-v1.log",
+        "sha256": "5096a85fd2ef5e43c86322e48fbd0c89a6e8b1b72f7a598e828d6efc1f55cd0e"
+      }
+    ]
+  },
+  "affected_quality_checks": [
+    {
+      "name": "lint",
+      "command": "python -m ruff check tests/test_shared_mutation_witness.py",
+      "exit_code": 0,
+      "seconds": 0.273677,
+      "output": "All checks passed!\n"
+    },
+    {
+      "name": "format",
+      "command": "python -m ruff format --check tests/test_shared_mutation_witness.py",
+      "exit_code": 0,
+      "seconds": 0.227827,
+      "output": "1 file already formatted\n"
+    },
+    {
+      "name": "compile",
+      "command": "python -I -B -c \"from pathlib import Path; p=Path('tests/test_shared_mutation_witness.py'); compile(p.read_bytes(), str(p), 'exec'); print('one test file compiled in memory')\"",
+      "exit_code": 0,
+      "seconds": 0.1640166,
+      "output": "one test file compiled in memory\r\n"
+    }
+  ],
+  "command_function": "The recorded two unittest commands each run one supplied-fixture capacity case once, without keys, API spending or containers. Lint/format/compilation inspect the changed test only; no full suite or model run.",
+  "original_invariants": {
+    "typed_capacity_exception": true,
+    "same_exception_identity": true,
+    "phase_reason": true,
+    "lazy_passive_read": true,
+    "empty_prefix": true,
+    "no_new_owner": true,
+    "no_send": true,
+    "all_original_ast_unchanged_after_removing_only_added_signatures_and_guards": true
+  },
+  "limits": [
+    "Two supplied-fixture methods only; no full suite, producer, profile, original data, real API or Docker execution.",
+    "No hosted CI success for this uncommitted cut is claimed.",
+    "Existing actual capacity guard behavior is not changed or weakened. Defaults accepting absent checked context remain supported."
+  ],
+  "preservation": {
+    "raw_revision_rows": 220,
+    "original_acceptance_tails": 7,
+    "original_paid_sources_inputs_grants": "untouched"
+  },
+  "guide_sha256": "d27f9c41f5188b965256106aef2bc88e2b6005d61d456c8a8f35618c03d04066"
+}

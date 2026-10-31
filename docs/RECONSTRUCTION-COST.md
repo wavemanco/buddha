@@ -1002,3 +1002,22 @@ After the proposal-feedback repair, require its equivalence/refusal checks and
 one separately pinned full-size observation. If that still misses the bound,
 make an explicit measured execution-strategy decision before adding more small
 optimizations. Preserve the benchmark, partials and existing limits throughout.
+
+
+## Capacity-injection test compatibility
+
+Hosted Ubuntu checks exposed two older test doubles that accepted only the
+previous private bundle arguments. The new checked-parent/completed-read
+arguments therefore raised TypeError before the doubles could inject the
+intended capacity exception. That explained the generic protocol stop in those
+tests; it was not evidence that the real capacity guard had stopped working.
+
+The [compatibility correction](conformance/witness-capacity-injection-delivery.json)
+adds only the two known optional arguments to those doubles and validates their
+exact types, fresh declaration bytes, references/authority and report hash when
+present. It does not accept arbitrary keywords. Every original typed exception,
+identity, phase, lazy-read, empty-prefix, no-owner and no-send assertion remains.
+Both exact failing methods pass once, without retries, in 70.602 parent seconds;
+affected lint, formatting and in-memory compilation pass. Application code is
+unchanged. These local results do not turn historical red checks green; the new
+stack still needs exact-source hosted CI before merge or paid use.
