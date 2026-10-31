@@ -866,3 +866,40 @@ synthetic data in temporary folders. Run it from the project folder containing
 this code version. It can take several minutes. It needs no keys, spends no API
 money and starts no containers. No separate PowerShell window is needed; Ctrl+C
 stops it. This command does not run the large rehearsal or any paid experiment.
+
+
+## Current-source full-size observation: v10
+
+The [current-source observation](conformance/current-scale-observation.json)
+uses clean PR208 source with all 351 Python files pinned and the original eight
+fixture files unchanged. It reuses the reviewed supplied driver, real scheduler,
+normal owners/receipts and declared 1,000-row/three-task/large-environment scope.
+
+The producer reached its unchanged 1,200-second deadline at 1,200.099 seconds;
+the whole parent took 1,200.285 seconds. It did not reach the required 193 owners
+and 660 operations. The conditional 900-second fresh restoration did not run.
+This is an incomplete construction observation, not a failed fresh-restoration
+test, a completed full-scale gate or a new scientific measurement.
+
+The last returned-action message was at 1,146.206 seconds, for the third common
+witness proposal. Its 41-owner/145-operation fields were captured before that
+action began. They are not final ledger totals. No terminal child report or
+final accounting reconciliation was produced. All source pins still match;
+the raw fixture, logs and deadline evidence remain retained. No retry, cleanup,
+continuation or time-limit extension was performed. Different source cuts and
+uncontrolled conditions do not establish a speed ratio against earlier runs.
+
+The next narrow repair is a direct handoff: a study restoration already checks
+a completed screen immediately before checking its witness. Pass the validated
+private result locally between those calls, retaining the first full collector,
+aggregate receipt adoption, owner/census checks and every fresh reuse guard.
+Keep it local to that iteration; a study-wide cache or new platform is not needed.
+Only new measured equivalence/work-count and adversarial evidence can justify
+another separately pinned full observation. The existing limits remain intact.
+
+The preparation map also identifies five existing construction stages to reuse
+for the eventual fresh comparison. Historical preparation mains carry old paths,
+source-count/preservation assumptions and old database reads, so they must not be
+rerun unchanged. Fresh protocol/source/selection/policy/analysis identities, then
+funding and review identities, must be bound through the current validators.
+None of that clears a paid launch or transfers the stopped run's grants.
