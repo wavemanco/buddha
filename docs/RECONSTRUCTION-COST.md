@@ -716,3 +716,42 @@ temporary folders. Run it from the project folder containing this code version.
 It may take several minutes. It needs no keys, spends no API money and starts no
 containers. It needs no separate PowerShell window; Ctrl+C stops it. This command
 runs the small checks, not the large producer or its performance gate.
+
+
+## Validate decoded task rows once
+
+The [task-row repair](conformance/task-row-validation-delivery.json) removes one
+proved duplicate pass. The strict JSON loader already checks literal decoded
+types, root dictionaries, duplicate keys, finite numbers and the existing raw/
+ASCII-canonical byte bounds. Dataset rows then need the remaining UTF-8 check
+for every decoded string, including escaped surrogates in unused metadata keys
+and values. One standard-library serialization through the existing UTF-8 guard
+provides that check. The original decoded row is retained without normalization.
+
+The generic metadata validator stays unchanged for arbitrary Python metadata
+and reserved native-field protection. This change adds no cache or dependency,
+and preserves task types/order, full source bytes, native output and provenance.
+
+The old implementation fails the new work-count test with 1,000 redundant
+metadata walks; the new one makes zero. All 25 scoped methods pass, including
+18 raw-JSON rejection cases, 40 nested-value differential cases, valid Unicode,
+source/native identity checks and existing answer/metadata guards. All seven
+quality checks pass. Exact published-head hosted CI remains pending.
+
+A separate pure-function comparison uses the stopped synthetic source's 1,000
+rows/645,466 bytes: five ABBA blocks, ten calls per implementation. Every result
+is identical. Local median call times are 16.654 ms for the published baseline
+and 12.585 ms for the candidate. This is warm local function evidence, not a
+whole-harness speedup or acceptance of the 193-owner/660-operation workload.
+Temporary allocations can differ; no peak-memory improvement is established.
+The 617 repeated population constructions seen in the prefix remain a further
+target. Another full producer is not scheduled merely because these checks pass.
+
+```powershell
+python -B -m unittest discover -s tests -p test_task_row_validation.py -v
+```
+
+This optional developer command runs the six task-row checks once, using
+synthetic data. Run it from the folder containing this code version. It needs
+no keys, spends no API money and starts no containers. It needs no separate
+PowerShell window; Ctrl+C stops it. It does not run the large performance gate.

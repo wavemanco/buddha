@@ -102,7 +102,8 @@ def _population(release: Release, raw: bytes) -> dict[str | int, tuple[Task, dic
         raise ReleaseError("dataset must contain from 1 to 100000 JSONL tasks")
     result = {}
     for line in lines:
-        row = _metadata(_load(line), set())
+        row = _load(line)
+        _utf8(json.dumps(row, ensure_ascii=False, separators=(",", ":"), allow_nan=False))
         task = Task(
             _id(row.get(_text(schema["id_field"]))),
             _utf8(row.get(_text(schema["prompt_field"]))),
