@@ -218,40 +218,103 @@ untrusted-code controls. Retain it as algorithmic inspiration without reopening
 the whole design.
 [Pinned README](https://github.com/google-research/harness2/blob/1cfe254e8d25b15f37048c3730134686abe60335/README.md#results-and-resume).
 
-## How this should affect our ongoing work
+## Reuse decision for the stopped experiment
 
-The following is a recommendation for the existing IMP-01 reliability work and
-the optional reuse item [ENG-INFRA-01](BACKLOG.md#eng-infra-01-evaluate-existing-reliability-infrastructure).
-It does not add scientific completion gates or supersede PLAN.md.
+Updated October 30, 2026 after the user's correction: the research must reduce
+implementation work now, rather than merely recommend another study after all
+custom recovery work is finished. [PLAN.md's current checkpoint](PLAN.md#current-checkpoint)
+is the single schedule. The [decision delivery](conformance/reliability-reuse-decision.json)
+records the bounded offline probe and source trace; neither clears a paid restart.
 
-1. **Finish the narrow stopped-run repair under its original contract.** Keep
-   saved replies, charges, holds, source identities and official settings.
-   Adopting another runner during recovery would introduce another compatibility
-   problem before the current one is resolved.
-2. **Use established lifecycle patterns in separately versioned repairs.** Retain
-   the primary typed failure even when cleanup fails; record intended runtime
-   identity before launch; classify agent/provider/executor failures separately;
-   expose completed-step progress rather than only a periodically printed clock.
-   These are prospective recommendations, not claims that all are implemented.
-3. **Run one small offline reuse comparison when PLAN schedules it.** Compare the
-   existing stage runner with a DBOS wrapper using supplied replies, and inspect
-   one result/export boundary with Inspect. Store only small immutable references
-   in workflow state. Measure changed code, recovery work, elapsed time and
-   operational burden. Stop if the wrapper merely duplicates our controller.
-4. **Choose from evidence.** Adopt a component only if it removes maintenance
-   while preserving the contracts below. Consider Temporal later if multiple
-   machines or worker-version management become a concrete need. Do not deploy
-   all the shortlisted platforms.
+### Reuse the complete runner and existing retry machinery first
 
-The offline comparison should inject failures before sending, after simulated
-provider acceptance but before local receipt, after receipt persistence, during
-checkpoint writes, at executor startup/cleanup and across software changes.
-Require exact replay of completed replies, no second simulated send for a saved
-operation, retained uncertainty for ambiguous calls, denial of an incompatible
-source, unchanged official evaluator artifacts and explicit partial-result
-reasons. Check Windows and Linux separately and confirm original files remain
-unchanged. These acceptance checks test compatibility; they do not establish
-that Buddha improves creativity or that a provider offers exactly-once billing.
+A public-code trace found an important distinction: the original pinned runner
+already contains the full development, freeze, final, both plain-reference and
+publication sequence. A third host version is needed to deploy newer helpers,
+not inherently to perform the scientific comparison. The original one-action
+hook already provides normal work leases and accounting. The native pipeline
+already handles same-owner attempt ordinals, saved replies and sealing.
+
+The smallest direct recovery case is therefore: reconcile the failed runtime's
+cleanup; retain the failed pre-ready attempt, owner UUID and manifest; exercise
+the next ordinary attempt through the existing screen action, including its
+declared task rows; stop before the next study action, witness or cell. Reentry must verify completion or refuse target drift. Reuse
+those paths and existing fixtures instead of adding another retry scheduler.
+This is a selected acceptance case, **not an executed recovery test**.
+
+The original runner may still be too slow in practice. Its retained 604-prefix
+check took 1,753.039 seconds; its later 657-prefix profile reached a 300-second
+observation deadline before the first restoration returned. These observations
+have different scopes and establish no timing ratio or full 657-history bound.
+They do identify why an unchanged runner cannot be cleared merely because its
+phase sequence exists. See the [profile delivery](conformance/current657-reconstruction-profile-delivery.json).
+A narrow host upgrade remains an option if that measured cost or a necessary
+repair justifies it; broader mixed-version machinery is parked unless required.
+
+### What the isolated DBOS test can and cannot establish
+
+The follow-up checks pinned DBOS 3.4.0 in a separate local environment, using
+SQLite, small artifact references and supplied model replies. It changes no
+production dependency or original record. Separate-process crash/restart is the
+relevant boundary: repeatedly calling a function in one process is insufficient.
+The retained probe distinguishes a saved step from an interrupted step without
+a checkpoint, and exercises Buddha's existing Gateway rather than inventing a
+replacement accounting ledger. Missing, failed and unmeasured cases remain
+explicit in the delivery.
+
+DBOS's documented recovery reexecutes an uncheckpointed step; disabling configured
+exception retries does not remove that recovery behavior. Its checkpoint cannot
+substitute for the Gateway's reservation/uncertain-outcome policy or the source
+and work-lease checks. Nor does wrapping the current study loop remove the
+history reconstruction *inside* that loop. A wrapper earns adoption only if it
+replaces a concrete owned responsibility with less maintained code and passes
+these integration boundaries. A successful generic crash/restart demonstration
+alone does not satisfy that condition.
+[Recovery contract](https://docs.dbos.dev/architecture#how-workflow-recovery-works),
+[configured step retries](https://docs.dbos.dev/python/tutorials/step-tutorial#configurable-retries).
+
+License qualification: DBOS's core is MIT, but the stock pinned installation
+requires psycopg with its binary extra. The trial resolves an LGPL-licensed
+PostgreSQL driver even though it uses SQLite. This was flagged before local
+use; no LGPL component is vendored or added to Buddha's distributed dependency
+path. An eventual adoption must consider the complete dependency closure.
+[DBOS dependency declaration](https://github.com/dbos-inc/dbos-transact-py/blob/3.4.0/pyproject.toml),
+[psycopg license](https://github.com/psycopg/psycopg/blob/3.3.6/LICENSE.txt).
+
+The bounded probe finished in **7m23s** within its 15-minute timebox on native
+Windows. The saved step ran once across two processes. An interrupted step was
+entered twice, but the existing Gateway blocked a second supplied send with an
+unknown-operation hold despite ample remaining funds. The source-drift case
+retains a typed rejection; its fixture was cleaned, so zero-operation accounting
+was not verified. Observer startup/expected-exit errors and unverified whole-tree
+child cleanup remain qualified. No Linux, original-history or full-phase
+integration was tested. Root independently rehashed the bound artifacts and
+checked process/step/send joins without rerunning a worker or opening a database.
+
+**Decision: do not adopt DBOS for the current recovery.** The prototype removes
+zero production code. Reuse the existing full-phase coordinator and retry
+pipeline; park broader host-version machinery unless the bounded recovery test
+shows it is necessary. DBOS remains an unadopted candidate for replacing generic
+journaling in a future clean-run runner. This negative decision does not license
+unbounded custom salvage.
+
+### Scope and decisions
+
+| Component | Current decision | Development time it should save |
+| --- | --- | --- |
+| Existing full-phase runner, one-action hook and native retry pipeline | Reuse first; prove the targeted failed-screen boundary before broader integration | Avoid a new phase coordinator and retry scheduler; keep existing owner/accounting semantics |
+| DBOS | Bounded probe complete; do not adopt into current recovery, since this wrapper removes no maintained responsibility | Can replace outer durable-step bookkeeping only if an integration actually removes it; cannot fix internal reconstruction or missing old evidence |
+| Inspect AI | Retain as a candidate for a later clean evaluation runner, not a current viewer/exporter side project | Potentially replaces evaluation orchestration; an exporter would not remove the present bottleneck |
+| Harbor / SWE-ReX patterns | Adapt typed failure preservation and durable intended runtime identity where a concrete repair needs them | Reuse lifecycle/failure design instead of inventing another policy layer; preserve confinement and accounting |
+| Temporal / other full platforms | No deployment for this recovery | Avoid new service and migration work without a distributed requirement |
+
+These are engineering decisions about the current local experiment, not claims
+that a platform cannot support Buddha. Before further implementation, name the
+selected route, the responsibility it removes and the end-to-end acceptance
+case. If a bounded rehearsal shows salvage needs a broader architecture,
+explicitly compare its remaining cost with a separately approved clean experiment.
+Preserve the old partial and its costs in either case. Do not silently migrate
+history, repeat paid operations or relabel a new run as continuation.
 
 ## Source register and limits of this research
 
