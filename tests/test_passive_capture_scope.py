@@ -157,6 +157,53 @@ class PassiveCaptureScopeTests(unittest.TestCase):
     def test_changed_existing_root_lease_requires_a_fresh_constructor(self):
         self.check_changed_lease(self.root / "running.lock")
 
+    def test_changed_lease_with_colliding_metadata_requires_a_fresh_constructor(self):
+        signature = doctor._signature
+        for name in ("running.lock", ".search.lock", ".trial-running.lock"):
+            with self.subTest(lease=name):
+                lease = self.root / name
+                lease.write_bytes(b"123")
+                information = lease.lstat()
+                fixed = signature(information)
+
+                def colliding_metadata(value, information=information, fixed=fixed):
+                    if (value.st_dev, value.st_ino) == (
+                        information.st_dev,
+                        information.st_ino,
+                    ):
+                        return fixed
+                    return signature(value)
+
+                # Deterministic metadata collision, without sleeping or changing
+                # the checked evidence reader's independent file guards.
+                with patch.object(doctor, "_signature", side_effect=colliding_metadata):
+                    self.check_changed_lease(lease)
+                lease.unlink()
+
+    def test_oversized_lease_uses_strict_construction_without_reading_it(self):
+        (self.root / "running.lock").write_bytes(b"x" * 129)
+        with (
+            patch.object(doctor, "_entries", wraps=doctor._entries) as scans,
+            patch.object(doctor, "_read", side_effect=AssertionError("oversized lease read")),
+            scope(),
+        ):
+            first, second = doctor._Capture(self.root), doctor._Capture(self.root)
+            self.assertEqual(first.entries, second.entries)
+            self.assertEqual(scans.call_count, 2)
+
+    def test_unreadable_lease_uses_strict_construction(self):
+        (self.root / "running.lock").write_bytes(b"123")
+        for error in (OSError, doctor.ValidationError):
+            with (
+                self.subTest(error=error),
+                patch.object(doctor, "_entries", wraps=doctor._entries) as scans,
+                patch.object(doctor, "_read", side_effect=error("unavailable lease")),
+                scope(),
+            ):
+                first, second = doctor._Capture(self.root), doctor._Capture(self.root)
+                self.assertEqual(first.entries, second.entries)
+                self.assertEqual(scans.call_count, 2)
+
     @contextmanager
     def held_trial(self, label):
         from buddha import trial_fence
