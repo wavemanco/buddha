@@ -755,3 +755,34 @@ This optional developer command runs the six task-row checks once, using
 synthetic data. Run it from the folder containing this code version. It needs
 no keys, spends no API money and starts no containers. It needs no separate
 PowerShell window; Ctrl+C stops it. It does not run the large performance gate.
+
+
+## Reuse the checked witness declaration
+
+The [feedback repair](conformance/feedback-parent-reuse-delivery.json) passes the
+already validated immutable parent screen into the ordinary witness-feedback
+builder. It still inspects the complete published screen, reads and hashes the
+declaration afresh, requires exact declaration bytes, and performs every existing
+fresh finish. Standalone, comparison and failed-child builders keep their paths.
+
+Six scoped methods pass, including wrong/untyped declarations, changed source,
+report, owner and authority bytes, unsettled database sidecars and late drift.
+The same supplied feedback plan, packet and provenance bytes need one declaration
+construction instead of two, and 55 population constructions instead of 61.
+The full inspection remains one and fresh finishes remain nine. These are local
+work counts, not a measured whole-harness speed or memory improvement.
+
+All seven local quality checks pass. A separate full shared-witness test reached
+its unchanged 180-second child limit without a terminal test result; it remains
+explicitly incomplete. The larger history producer and prefix profile were not
+repeated. Exact-source hosted CI and the 193-owner/660-operation gate remain open.
+
+```powershell
+python -B -m unittest discover -s tests -p test_feedback_parent_reuse.py -v
+```
+
+This optional developer command runs four feedback-reuse checks once with
+synthetic data in temporary folders. Run it from the project folder containing
+this code version. It can take several minutes. It needs no keys, spends no API
+money and starts no containers. A separate PowerShell window is unnecessary;
+Ctrl+C stops it. It does not run the full witness or large performance gate.

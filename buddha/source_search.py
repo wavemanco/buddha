@@ -932,6 +932,7 @@ def _bundle(
     *,
     full_answers: bool,
     comparison: dict[str, object] | None = None,
+    parent_screen: source_screen.SourceScreen | None = None,
 ) -> dict[str, Any]:
     if comparison is not None:
         if not full_answers:
@@ -946,6 +947,14 @@ def _bundle(
     if failures:
         return source_feedback._build_failures(
             directory, parent, failures, existing=directory.exists(), full_answers=full_answers
+        )
+    if parent_screen is not None:
+        return source_feedback._build(
+            directory,
+            parent,
+            existing=directory.exists(),
+            full_answers=full_answers,
+            parent_screen=parent_screen,
         )
     return source_feedback._build(
         directory, parent, existing=directory.exists(), full_answers=full_answers
@@ -1448,7 +1457,7 @@ def _witness_materials(
     bundle = (
         _bundle(location / "feedback", reference, [], full_answers=True, comparison=comparison)
         if comparison is not None
-        else _bundle(location / "feedback", reference, [], full_answers=True)
+        else _bundle(location / "feedback", reference, [], full_answers=True, parent_screen=parent)
     )
     hashes = {name + ".json": pipeline._sha(bundle[name]) for name in _FILES}
     template = _object(record["proposal_template"])
