@@ -267,26 +267,27 @@ Docker availability and an old exited container do not reconcile the failed
 endpoint or establish an orphan. Hold the command for bounded reconciliation,
 separately checked host-helper diagnostics and reconstruction profiling.
 
-## ENG-INFRA-01: evaluate existing reliability infrastructure
+## ENG-INFRA-01: reuse existing reliability infrastructure
 
-Recorded October 30, 2026 at the user's request to research reusable components
-around the self-improvement harness. Status: research complete; integration
-unselected and untested. This is optional maintenance/reuse within IMP-01, not
-another scientific completion gate. PLAN.md determines when it is scheduled;
-the stopped-run finite-owner recovery remains next.
+Recorded October 30, 2026. Status: original research complete; bounded reuse
+decision complete. Apply it before further generic recovery work within IMP-01. This is not
+an additional scientific gate. [PLAN.md](PLAN.md#current-checkpoint) owns the
+schedule and the [research note](HARNESS-RELIABILITY-RESEARCH.md#reuse-decision-for-the-stopped-experiment)
+records what we reuse, test, park and decline for the current repair.
 
-The [research note](HARNESS-RELIABILITY-RESEARCH.md) recommends Inspect AI as the
-first evaluation-platform candidate, a small DBOS workflow comparison, and
-Temporal only if distributed/versioned workers justify another service. Harbor
-and SWE-ReX provide useful failure-policy and runtime-lifecycle patterns.
-LangGraph's resume semantics and Restate's server license need special care.
-These recommendations do not authorize installing or adopting a platform.
+Reuse the original full-phase runner, its one-action dispatch and native retry
+pipeline where the targeted failed-screen acceptance supports them. The
+isolated DBOS probe completed in 7m23s: do not adopt its wrapper into current
+recovery; it removes no production code and leaves reconstruction unchanged.
+Require a concrete maintenance responsibility removed, preserved original
+operation/source identities, completed replies, grants, unknown holds, immutable
+artifacts, confinement and unchanged official NoveltyBench. Record incomplete
+and unmeasured cases. Do not treat an exporter, successful synthetic checkpoint
+or new coordinator around the old loop as a demonstrated solution to repeated
+history reconstruction.
 
-Any later offline comparison must preserve original operation/source identities,
-completed replies, shared authorization, uncertain-cost holds, immutable
-artifacts, confinement and unchanged official NoveltyBench assessment. Inject
-failures around simulated provider acceptance, receipts/checkpoints, executor
-startup/cleanup and software changes. Require explicit partial outcomes and
-Windows/Linux evidence; measure recovery work and maintenance removed. Reject a
-wrapper that merely duplicates the current coordinator. No real provider calls,
-old-record migration or frozen-run source changes are implied by this item.
+The stock DBOS trial has an explicitly flagged LGPL driver dependency; it stays
+in an isolated local evaluation, outside Buddha's production dependencies.
+Broader platform adoption, source migration and a new paid experiment are not
+authorized by the trial. Preserve the stopped run; escalate architectural scope
+expansion under PLAN's stop rule instead of extending salvage indefinitely.
