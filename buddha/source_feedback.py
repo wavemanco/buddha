@@ -218,6 +218,7 @@ def _build(
     existing: bool = False,
     full_answers: bool = True,
     sink: _Capture | None = None,
+    parent_screen: source_screen.SourceScreen | None = None,
 ) -> dict[str, object]:
     directory = _destination(directory, existing=existing)
     ref = _object(reference, {"directory", "authorization", "report_sha256"})
@@ -243,7 +244,16 @@ def _build(
     screen_path = original / "screen.json"
     screen_sha256 = _digest(report["screen_sha256"])
     screen_raw = pipeline._read(screen_path, screen_sha256)
-    screen = source_screen.SourceScreen.from_bytes(screen_raw)
+    if parent_screen is not None and (
+        type(parent_screen) is not source_screen.SourceScreen
+        or parent_screen.to_bytes() != screen_raw
+    ):
+        raise SourceFeedbackError("supplied parent differs from the inspected screen declaration")
+    screen = (
+        source_screen.SourceScreen.from_bytes(screen_raw)
+        if parent_screen is None
+        else parent_screen
+    )
     record = screen.to_record()
     for section in ("generation", "native"):
         for path in _object(_object(record[section])["roots"]).values():
@@ -254,7 +264,11 @@ def _build(
         raise SourceFeedbackError("native feedback requires the explicit supported projection")
     source, split = _object(record["source"]), _object(record["split"])
     source_sha256, split_sha256 = _sha(_json(source)), _sha(_json(split))
-    tasks = TaskSet.from_bytes(_json(source)).select(record["selected_ids"])
+    tasks = (
+        TaskSet.from_bytes(_json(source)).select(record["selected_ids"])
+        if parent_screen is None
+        else parent_screen.tasks
+    )
     rows = _list(report["tasks"])
     if len(rows) != len(tasks.tasks):
         raise SourceFeedbackError("feedback task population differs from the verified screen")
