@@ -550,7 +550,65 @@ the scheduling authority.
 python -B -m unittest discover -s tests -p test_source_screen_local_reuse.py -v
 ```
 
-This optional developer command runs the four supplied-data checks once in
+This optional developer command runs the five supplied-data checks once in
 temporary folders. Run it from the project folder containing this version of
 the code. It needs no keys, makes no paid calls and starts no containers. No
 separate PowerShell window is needed; Ctrl+C stops it.
+
+
+## One selected-task view per immutable screen
+
+The [instance-local task-view repair](conformance/source-screen-task-view-delivery.json)
+reuses the selected TaskSet derived from one already validated SourceScreen.
+Its public `tasks` property, including the existing inspection interface, stays
+in place. A private standard-library `cached_property` retains that immutable
+artifact for this instance; its calculation is the unchanged old getter body.
+There is no shared lookup table, persistent cache or cache of file/owner reads.
+
+In the supplied 1,000-row/two-task fixture, population scans change as follows:
+The three routines run in the listed order on the same screen. The first builds
+the view; the later routines reuse it. These are not separate cold-entry costs.
+
+| Routine | Previous local-binding repair | Instance-local view |
+| --- | --- | --- |
+| Controls | 10 | 7 |
+| Materialization | 10 | 4 |
+| Preflight | 7 | 4 |
+| Total | 27 | 15 |
+
+A separate check reads the same screen's task view five times: population scans
+fall from 15 to three. A newly constructed screen still performs its own three
+view-construction scans. Exact selected bytes, fingerprints, string-versus-integer
+ID order and fresh record copies remain unchanged. Malformed new declarations
+and changed saved task/recipe data still reject. Constructors, file/digest/owner
+checks and every fresh capture finish remain strict.
+
+Both regression cases fail before the repair and pass afterward. Seventeen
+selected implementer methods and all seven configured quality checks pass at
+the recorded source cut. A separate independent rerun reports all five local-
+reuse methods passing; that summary is retained in the parent review message,
+not a separately supplied raw log. The delivery keeps these observations separate.
+They establish work reduction in supplied fixtures, not a timing ratio, completed
+actual-history reconstruction or scientific improvement.
+
+There is a memory tradeoff: each live SourceScreen can retain one additional
+TaskSet containing the complete sealed dataset payload. Its canonical bytes can
+occupy up to 32 MiB, plus object/dictionary overhead. This is not a total RAM
+bound; many screens, temporary record copies and concurrent calculations can
+retain more. Python 3.13 can compute the first cached value more than once when
+threads arrive together. The calculation is deterministic, but the measured
+once-per-instance reuse applies to sequential access, not a concurrency guarantee.
+[Standard-library contract](https://docs.python.org/3.13/library/functools.html#functools.cached_property).
+
+The same production/test bytes are now integrated on parent ed387f3. One bounded
+composed observation passes seven methods (the five local-reuse methods plus
+two targeted screen-recovery methods) in36.215 seconds, with five requested
+static checks. The earlier17-method/full-seven-quality cut stays separate.
+Source review found no defects. Object memory retained by this task view is
+outside the evidence reader's raw-byte retention budget; aggregate and peak
+process memory have not been measured. No actual-history timing is inferred.
+
+This is prospective helper source. It does not change the frozen B checkout,
+replace existing owner bindings, authorize spending or clear the stopped command.
+Source adoption and actual retained-history checks retain their own recorded
+scopes under [PLAN.md](PLAN.md).

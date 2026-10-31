@@ -63,6 +63,46 @@ class SourceScreenLocalReuseTests(unittest.TestCase):
             ]
         return fixture
 
+    def test_task_view_reuses_immutable_selected_bytes_per_instance(self):
+        fixture = self.fixture(thousand=True)
+        screen = fixture.screen()
+        original = screen.to_bytes(), screen.fingerprint()
+        expected = fixture.source.select(["1", 1])
+        self.assertIsInstance(source_screen.SourceScreen.tasks, property)
+        with patch.object(answers, "_population", wraps=answers._population) as population:
+            views = [screen.tasks for _ in range(5)]
+        self.assertEqual(population.call_count, 3)
+        self.assertTrue(all(view.to_bytes() == expected.to_bytes() for view in views))
+        selected = views[0]
+        self.assertEqual(selected.fingerprint(), expected.fingerprint())
+        self.assertEqual(
+            [(type(task.id), task.id, task.count) for task in selected.tasks],
+            [(str, "1", 2), (int, 1, 2)],
+        )
+        selected.to_record()["tasks"][0]["prompt"] = "changed exposed copy"
+        selected.to_record()["selection"].reverse()
+        screen.to_record()["selected_ids"].reverse()
+        self.assertEqual(screen.tasks.to_bytes(), expected.to_bytes())
+        self.assertEqual((screen.to_bytes(), screen.fingerprint()), original)
+
+        fresh = source_screen.SourceScreen.from_bytes(screen.to_bytes())
+        with patch.object(answers, "_population", wraps=answers._population) as population:
+            self.assertEqual(fresh.tasks.to_bytes(), expected.to_bytes())
+        self.assertEqual(population.call_count, 3)
+        invalid = screen.to_record()
+        invalid["source"]["tasks"][0]["prompt"] = "not the sealed task"
+        with self.assertRaises(source_screen.SourceScreenError):
+            source_screen.SourceScreen.from_bytes(_json(invalid))
+
+        class DerivedScreen(source_screen.SourceScreen):
+            pass
+
+        for value in (screen, DerivedScreen.from_bytes(screen.to_bytes())):
+            with self.assertRaises(AttributeError):
+                value.tasks = expected
+            with self.assertRaises(AttributeError):
+                del value.tasks
+
     def test_thousand_row_controls_materialization_and_preflight_reuse_local_population(self):
         fixture = self.fixture(thousand=True)
         screen = fixture.screen()
@@ -116,7 +156,7 @@ class SourceScreenLocalReuseTests(unittest.TestCase):
         artifact.to_record()["outputs"][0]["answers"].clear()
         self.assertEqual((screen.to_bytes(), selected.to_bytes(), artifact.to_bytes()), before)
         self.assertEqual(artifact.native_bytes(), expected_native)
-        self.assertEqual(counts, {"controls": 10, "materialize": 10, "preflight": 7})
+        self.assertEqual(counts, {"controls": 7, "materialize": 4, "preflight": 4})
 
     def test_passive_screen_reuses_one_validated_declaration_and_preserves_saved_bytes(self):
         fixture = self.fixture()
