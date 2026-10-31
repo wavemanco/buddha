@@ -1062,3 +1062,45 @@ synthetic data in temporary folders. Run it from the project folder containing
 this code version. It can take several minutes. It needs no keys, spends no API
 money and starts no containers. No separate PowerShell window is needed; Ctrl+C
 stops it. It does not run the large performance gate or the paid comparison.
+
+
+## Separate fixture construction from recovery acceptance
+
+The [v12 result and strategy record](conformance/setup-recovery-gate-decision.json)
+retains the final observation under the original paired limits. Clean PR213
+source has 353 pinned Python files and the same eight fixture files. The producer
+stops at 1,200.151 seconds (1,200.420 parent), before 193 owners/660 operations;
+the conditional 900-second fresh-process check does not run. The last returned
+action's 42/146 fields are before-action snapshots, not final ledger accounting.
+No terminal child cut is available. All source pins still match; raw synthetic
+history/logs and every previous partial remain retained, without retry or cleanup.
+
+The acceptance-origin audit identifies an important distinction. The 1,200-second
+construction allowance was an engineering diagnostic bound, first paired with
+the 900-second check in the fixture proposal. It is not a NoveltyBench constant
+or an inspected scientific/user throughput requirement. The representative
+193-owner count comes from sanitized earlier metadata; 660 is fixture arithmetic
+at nine admitted descendants plus a prepared next screen. They remain the chosen
+comparable cut, not benchmark scoring definitions.
+
+Construction includes fixture/bootstrap work and many growing-history
+restore/check/advance cycles. The fresh-process checker performs one restoration,
+current-source check and complete finish after validating the genuine saved cut.
+A construction deadline prevents that test; it does not show that the test
+exceeded 900 seconds. Fresh process does not mean cleared filesystem caches.
+Conversely, a reader pass would not establish practical full-run throughput.
+
+The proposed next strategy is one newly pinned offline construction allowance
+of up to three hours, followed by the unchanged 900-second check, with identical
+genuine counts/metadata, source/fixture pins, guards and partial-record rules.
+This uses supplied replies and spends no API money. Three hours is a ceiling,
+not a completion forecast. It would leave construction throughput unresolved.
+The user has been asked to choose this approach or retain 20-minute construction
+as a required gate. That choice is pending at this publication; no longer run,
+new allocation, automatic resume/extension, platform or source optimization is
+adopted here. Existing frozen observations are not relabeled as passes.
+
+If stricter construction throughput is required, first decide a bounded fixture-
+construction or runtime strategy using the measured evidence. Do not continue
+an unbounded sequence of small optimizations. Preserve the actual benchmark,
+source/accounting/freshness safeguards and scientific comparison throughout.
