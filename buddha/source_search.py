@@ -20,6 +20,7 @@ from buddha import (
     gateway,
     source_feedback,
     source_screen,
+    source_screen_results,
     trial_fence,
 )
 from buddha import native_pipeline as pipeline
@@ -483,9 +484,18 @@ def _ref(directory: Path, authorization: Path) -> dict[str, object]:
 
 
 def _read_ref(
-    reader: NativeEvidence, value: object, *, proposal: bool = False, capture: bool = False
+    reader: NativeEvidence,
+    value: object,
+    *,
+    proposal: bool = False,
+    capture: bool = False,
+    completed: source_screen_results._CompletedScreenRead | None = None,
 ) -> dict[str, Any]:
-    if type(capture) is not bool or (capture and proposal):
+    if (
+        type(capture) is not bool
+        or (capture and proposal)
+        or (completed is not None and (capture or proposal))
+    ):
         raise SourceSearchError("nested byte capture requires a screen and explicit boolean")
     reference = _object(value, {"directory", "authorization", "report_sha256"})
     directory = pipeline._absolute(reference["directory"])
@@ -499,7 +509,12 @@ def _read_ref(
         if proposal
         else source_screen.inspect_source_screen
     )
-    if capture:
+    if completed is not None:
+        checked = source_screen_results._reuse_completed_screen(
+            completed, directory, reader.authorization, expected
+        )
+        result = _load(checked.report_raw)
+    elif capture:
         result = source_screen.inspect_source_screen(
             directory,
             authorization=reader.authorization,
@@ -933,6 +948,7 @@ def _bundle(
     full_answers: bool,
     comparison: dict[str, object] | None = None,
     parent_screen: source_screen.SourceScreen | None = None,
+    completed: source_screen_results._CompletedScreenRead | None = None,
 ) -> dict[str, Any]:
     if comparison is not None:
         if not full_answers:
@@ -955,6 +971,7 @@ def _bundle(
             existing=directory.exists(),
             full_answers=full_answers,
             parent_screen=parent_screen,
+            completed=completed,
         )
     return source_feedback._build(
         directory, parent, existing=directory.exists(), full_answers=full_answers
@@ -962,12 +979,18 @@ def _bundle(
 
 
 def _parent_evidence(
-    reader: NativeEvidence, reference: dict[str, object]
+    reader: NativeEvidence,
+    reference: dict[str, object],
+    *,
+    completed: source_screen_results._CompletedScreenRead | None = None,
 ) -> tuple[dict[str, Any], source_screen.SourceScreen]:
     root = pipeline._absolute(reference["directory"])
-    report = _read_ref(reader, reference)
+    report = _read_ref(reader, reference, completed=completed)
     raw = reader.raw(root / "screen.json", report["screen_sha256"])
-    return report, source_screen.SourceScreen.from_bytes(raw)
+    parent = source_screen.SourceScreen.from_bytes(raw) if completed is None else completed.screen
+    if parent.to_bytes() != raw:
+        raise SourceSearchError("completed parent declaration differs")
+    return report, parent
 
 
 def _parent_screen(
@@ -1383,7 +1406,10 @@ def _witness_location(reader: NativeEvidence, reference: dict[str, object]) -> P
 
 
 def _witness_parent(
-    reader: NativeEvidence, treatment: _WitnessTreatment
+    reader: NativeEvidence,
+    treatment: _WitnessTreatment,
+    *,
+    completed: source_screen_results._CompletedScreenRead | None = None,
 ) -> source_screen.SourceScreen:
     record = treatment.to_record()
     if reader.root != _witness_path(record["scope"]) or reader.authorization != _witness_path(
@@ -1391,7 +1417,7 @@ def _witness_parent(
     ):
         raise SourceSearchError("witness reader belongs to another original scope or authority")
     reference = _object(record["parent"])
-    report, parent = _parent_evidence(reader, reference)
+    report, parent = _parent_evidence(reader, reference, completed=completed)
     base = source_screen.SourceScreen.from_bytes(_json(record["base_screen"]))
     if "feedback_comparison" in record:
         original = _original(reader)
@@ -1446,8 +1472,42 @@ def _witness_parent(
     return parent
 
 
+def _witness_parent_read(
+    reader: NativeEvidence, treatment: _WitnessTreatment
+) -> tuple[source_screen.SourceScreen, source_screen_results._CompletedScreenRead | None]:
+    record = treatment.to_record()
+    if reader.root != _witness_path(record["scope"]) or reader.authorization != _witness_path(
+        _object(record["parent"])["authorization"]
+    ):
+        raise SourceSearchError("witness reader belongs to another original scope or authority")
+    completed = None
+    if (
+        "feedback_comparison" not in record
+        and source_screen._CONTROL_PROFILES.get() is None
+        and source_screen._CONTROL_PROFILES_V2.get() is None
+        and source_screen_results._read_context(reader.root) is not None
+    ):
+        reference = _object(record["parent"], {"directory", "authorization", "report_sha256"})
+        directory = pipeline._absolute(reference["directory"])
+        if reference["authorization"] != str(reader.authorization) or not directory.is_relative_to(
+            reader.root
+        ):
+            raise SourceSearchError("a nested result belongs to another search or authority")
+        completed = source_screen_results._collect_source_screen(
+            directory,
+            authorization=reader.authorization,
+            expected_report_sha256=_digest(reference["report_sha256"]),
+            retain=True,
+            observation_root=reader.root,
+        )
+    return _witness_parent(reader, treatment, completed=completed), completed
+
+
 def _witness_materials(
-    treatment: _WitnessTreatment, parent: source_screen.SourceScreen
+    treatment: _WitnessTreatment,
+    parent: source_screen.SourceScreen,
+    *,
+    completed: source_screen_results._CompletedScreenRead | None = None,
 ) -> tuple[source_screen.SourceScreen, dict[str, Any], dict[str, Any]]:
     record = treatment.to_record()
     reference = _object(record["parent"])
@@ -1457,7 +1517,14 @@ def _witness_materials(
     bundle = (
         _bundle(location / "feedback", reference, [], full_answers=True, comparison=comparison)
         if comparison is not None
-        else _bundle(location / "feedback", reference, [], full_answers=True, parent_screen=parent)
+        else _bundle(
+            location / "feedback",
+            reference,
+            [],
+            full_answers=True,
+            parent_screen=parent,
+            completed=completed,
+        )
     )
     hashes = {name + ".json": pipeline._sha(bundle[name]) for name in _FILES}
     template = _object(record["proposal_template"])
@@ -1490,8 +1557,8 @@ def _witness_plan(
     treatment = _search_witness_treatment(reader, state, parent)
     if _witness_path(treatment.to_record()["directory"]) != location:
         raise SourceSearchError("witness plan belongs to another original location")
-    checked_parent = _witness_parent(reader, treatment)
-    _, plan, bundle = _witness_materials(treatment, checked_parent)
+    checked_parent, completed = _witness_parent_read(reader, treatment)
+    _, plan, bundle = _witness_materials(treatment, checked_parent, completed=completed)
     return plan, bundle
 
 
@@ -1585,7 +1652,7 @@ def _witness_progress_at(reader: NativeEvidence, treatment: _WitnessTreatment) -
     record = treatment.to_record()
     reference = _object(record["parent"])
     location = _witness_path(record["directory"])
-    parent = _witness_parent(reader, treatment)
+    parent, completed = _witness_parent_read(reader, treatment)
     funding = _witness_funding(reader, location)
     current = authority_observation(reader.capture, reader.authorization, funding)
     progress: dict[str, Any] = {
@@ -1603,7 +1670,7 @@ def _witness_progress_at(reader: NativeEvidence, treatment: _WitnessTreatment) -
         if any(name.startswith(prefix) for name in reader.capture.entries):
             raise SourceSearchError("witness entries precede the original plan")
         return progress
-    _, plan, bundle = _witness_materials(treatment, parent)
+    _, plan, bundle = _witness_materials(treatment, parent, completed=completed)
     if reader.raw(location / "plan.json") != _json(plan):
         raise SourceSearchError("witness changes its original candidate or measured feedback")
     required = {location / "proposal.json": _json(plan["proposal_descriptor"])} | {
@@ -1880,8 +1947,8 @@ def _advance_witness(
             location.mkdir()
         _root(location)
         fresh = NativeEvidence(reader.root, reader.authorization, error_type=SourceSearchError)
-        parent = _witness_parent(fresh, treatment)
-        _, plan, bundle = _witness_materials(treatment, parent)
+        parent, completed = _witness_parent_read(fresh, treatment)
+        _, plan, bundle = _witness_materials(treatment, parent, completed=completed)
         proposal = None
         if role == "generation":
             proposal = _read_ref(
@@ -1992,8 +2059,8 @@ def _execute_witness(
             location.mkdir()
         _root(location)
         fresh = NativeEvidence(directory, authority.path, error_type=SourceSearchError)
-        parent = _witness_parent(fresh, treatment)
-        _, plan, bundle = _witness_materials(treatment, parent)
+        parent, completed = _witness_parent_read(fresh, treatment)
+        _, plan, bundle = _witness_materials(treatment, parent, completed=completed)
         fresh.capture.finish()
         _write_witness_inputs(treatment, plan, bundle)
     observed_phase = "witness_feedback"

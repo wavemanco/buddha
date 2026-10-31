@@ -1,0 +1,101 @@
+{
+  "format": "buddha.witness-screen-read-reuse-delivery.v1",
+  "status": "scoped_and_composed_pass_scale_open",
+  "spec": [
+    "DESIGN sections3,9,10",
+    "PLAN IMP-01",
+    "ENG-OBS-01"
+  ],
+  "base": "3a4bfeba8c50e37a3adb4930facfd82203153312",
+  "initial_verification_base": "93f942d2b2804695f0756a23022c4af10aafe3b8",
+  "change": "One witness-local completed read replaces duplicate semantic reconstruction; all actual owner/control checks and fresh byte/tree/database/purpose/context checks remain.",
+  "verification": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\witness-screen-read-reuse-20261031-v1\\verification-summary-v2.json",
+    "sha256": "7986b6b510aa95a9c66c8412c774e512c0433ac68a0bc3aaed36582926d08bad"
+  },
+  "results": {
+    "red": {
+      "methods": 1,
+      "failures": 1,
+      "errors": 0,
+      "unittest_seconds": 16.3,
+      "reason": "exact HEAD production reconstructs completed screen twice, expected once"
+    },
+    "first_candidate": {
+      "methods": 5,
+      "failures": 0,
+      "errors": 7,
+      "unittest_seconds": 31.206,
+      "reason": "fresh finish leaked doctor._Busy rather than SourceScreenError; preserved failed result"
+    },
+    "final": {
+      "methods": 8,
+      "new_methods": 6,
+      "existing_methods": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "unittest_seconds": 63.843,
+      "qa_commands": 7,
+      "qa_exit_codes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "composition": {
+      "methods": 7,
+      "new_entrypoint_and_equivalence": 2,
+      "prior_207_completeness": 5,
+      "failures": 0,
+      "errors": 0,
+      "unittest_summary": [
+        "----------------------------------------------------------------------",
+        "Ran 7 tests in 22.072s",
+        "",
+        "OK"
+      ],
+      "static_commands": 5,
+      "exit_codes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "active_runner_seconds": 188.1935041998513,
+  "bounds": {
+    "per_child_seconds": 180,
+    "active_total_seconds": 360
+  },
+  "source_count_at_composition": 351,
+  "source_pins_match_at_composition": true,
+  "pin_manifest_correction": "Earlier v1/v2 pin maps are empty because their filter excluded the absolute workspace runs component. Their vacuous match value is NOT source integrity evidence. Preserve those files. Corrected v3 relative-path maps bind all351 source files before/after the composition cohort. The four edited208 hashes were separately observed before/after earlier cohorts and match unchanged.",
+  "source_sha256": {
+    "buddha/source_feedback.py": "4d37ee1de89eaebfa1bacb2527677eacda0592f7dc99e0d90772ef7605819bdb",
+    "buddha/source_screen_results.py": "b7215fc901f4fd54910278411c4a664e932977db4a215bf505379e1e8b66c0da",
+    "buddha/source_search.py": "35dd57b6cb955daae87a48a3960dd8f3b51e95354afc33011e7050db8c288e6a",
+    "tests/test_witness_screen_read_reuse.py": "e5fe7186d970eadd33373f18e5eb784f13fed05cd5e759e407d96ae1c97c2cfb",
+    "docs/RECONSTRUCTION-COST.md": "b9d5dcc8d90338aead27363d22762ab652b95589ce194a869b6041f3142317f5"
+  },
+  "independent_review": "Final static review found no additional defect; no reviewer tests or original-data access. Root review required optional-context fallback and removal of imported TestCase discovery duplication.",
+  "preservation": {
+    "raw_revision_rows": 216,
+    "original_acceptance_tails": 7,
+    "original_paid_sources_inputs_grants_and_benchmark": "unchanged"
+  },
+  "limitations": [
+    "Private frozen container contains a mutable retained reader, not a security token",
+    "Decoded retained objects and lease probes do not supply a total-RAM bound",
+    "No full witness, producer, profile or whole-harness speed result at this cut",
+    "Exact-source hosted CI and remaining fresh-comparison gates stay open"
+  ],
+  "next": "One newly pinned genuine193owner/660operation observation using unchanged1200producer/conditional900checker limits. No automatic retry/extension, paid launch or old-fund transfer."
+}
