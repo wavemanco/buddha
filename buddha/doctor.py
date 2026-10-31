@@ -58,6 +58,7 @@ _LIMITATIONS = [
     "No retry, lock removal, reconciliation, owner replacement or permission to spend.",
 ]
 _STATES = ("completed", "reserved", "dispatched", "unknown")
+_MAX_LOCK_BYTES = 128
 
 
 class _Busy(Exception):
@@ -192,9 +193,12 @@ def _tree_context(root: Path) -> tuple[tuple[object, ...], object] | None:
                 information = path.lstat()
             except FileNotFoundError:
                 continue
-            locks.append((str(path), _signature(information), information.st_nlink))
-    except OSError:
-        return None  # Strict construction needs no optimization-only lock metadata.
+            if information.st_size > _MAX_LOCK_BYTES:
+                return None
+            digest = _sha(_read(path, _MAX_LOCK_BYTES))
+            locks.append((str(path), _signature(information), information.st_nlink, digest))
+    except (OSError, ValidationError):
+        return None  # Unreadable lease bytes cannot enable constructor sharing.
     return (identity, tuple(locks)), held
 
 
@@ -498,7 +502,7 @@ def _lock(capture: _Capture) -> tuple[dict[str, object], dict[str, object]]:
             # its writer unlinking it; the tree's metadata bracket checks drift.
             empty = _regular(capture.root / name).st_size == 0
             return lock | {"status": "legacy_empty" if empty else "invalid", "name": name}, writer
-        raw = capture.read(capture.root / name, 128)
+        raw = capture.read(capture.root / name, _MAX_LOCK_BYTES)
         text = raw.decode("ascii")
         if name != "running.lock" or not re.fullmatch(r"[1-9][0-9]{0,9}", text):
             raise ValidationError("invalid lock record")

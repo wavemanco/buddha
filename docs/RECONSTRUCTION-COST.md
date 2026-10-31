@@ -612,3 +612,39 @@ This is prospective helper source. It does not change the frozen B checkout,
 replace existing owner bindings, authorize spending or clear the stopped command.
 Source adoption and actual retained-history checks retain their own recorded
 scopes under [PLAN.md](PLAN.md).
+
+
+## Lease-content check before constructor reuse
+
+The [lease repair](conformance/lease-capture-repair-delivery.json) addresses the
+Windows failure in PR #201. A run lock can be rewritten without a detectable
+change to its size or timestamps. The constructor-sharing context now also
+hashes its small contents. Changed bytes require fresh construction; unreadable,
+non-regular or oversized lock files disable this optional reuse. The regular file reader
+and every capture finish retain their existing checks.
+
+The probe reads at most four known lock files, at most 128 bytes each, per
+context check. Only their digests are retained. These optimization probes are
+outside the capture's raw-byte accounting; their aggregate overhead is unmeasured.
+Separate metadata/read observations are not an atomic snapshot and do not prove
+writer identity or detect every transient change that is later undone.
+
+A deterministic test forces identical metadata across three changed lock files:
+it fails before the repair and passes afterward. The 19-method scoped cohort
+finishes in 117.395 seconds, with 18 passes and one existing Windows symlink-
+privilege skip. This includes natural supplied-study restoration parity; it is
+not a comparable-size history result. A later loop-binding lint correction is
+followed by a passing affected regression, lint, format and compilation check.
+Types, security and both dependency audits also pass at their recorded cut.
+Hosted verification of the new source remains pending; no full-suite pass or
+live clearance is claimed.
+
+```powershell
+python -B -m unittest discover -s tests -p test_passive_capture_scope.py -v
+```
+
+This optional developer command runs the passive-reader guard checks once in
+temporary folders, including supplied-study restoration. Run it from the project
+folder containing this code version. It needs no keys, makes no paid calls and
+starts no containers. It needs no separate PowerShell window; Ctrl+C stops it.
+The whole module includes broader checks than the scoped cohort reported above.
