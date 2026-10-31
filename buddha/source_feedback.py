@@ -219,6 +219,7 @@ def _build(
     full_answers: bool = True,
     sink: _Capture | None = None,
     parent_screen: source_screen.SourceScreen | None = None,
+    completed: object = None,
 ) -> dict[str, object]:
     directory = _destination(directory, existing=existing)
     ref = _object(reference, {"directory", "authorization", "report_sha256"})
@@ -231,7 +232,14 @@ def _build(
         raise SourceFeedbackError("feedback destination overlaps retained screen evidence")
     report_path = original / "report.json"
     report_raw = pipeline._read(report_path, expected)
-    if sink is None:
+    if completed is not None:
+        from buddha.source_screen_results import _reuse_completed_screen
+
+        if sink is not None or parent_screen is None:
+            raise SourceFeedbackError("completed read requires its simple local parent feedback")
+        checked = _reuse_completed_screen(completed, original, authorization, expected)
+        report = _load(checked.report_raw)
+    elif sink is None:
         report = source_screen.inspect_source_screen(
             original, authorization=authorization, expected_report_sha256=expected
         )
@@ -433,6 +441,8 @@ def _build(
         pipeline._read(screen_path, screen_sha256) != screen_raw
     ):
         raise SourceFeedbackError("original screen changed during feedback construction")
+    if completed is not None:
+        _reuse_completed_screen(completed, original, authorization, expected)
     return _load(raw_result)
 
 

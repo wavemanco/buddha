@@ -821,3 +821,48 @@ synthetic data. Run it from the project folder containing this code version.
 It needs no keys, spends no API money and starts no containers. No separate
 PowerShell window is needed; Ctrl+C stops it. It does not run the large
 performance gate or the full experiment.
+
+
+## Inspect one witness parent once
+
+The [witness-read repair](conformance/witness-screen-read-reuse-delivery.json)
+lets one ordinary witness operation carry its completed screen inspection into
+feedback construction. It keeps the validated declaration, canonical report
+bytes and private evidence reader only for that invocation. Public inspectors
+still return detached dictionaries. Standalone, comparison, failed-child and
+explicit receiving-capture paths retain their complete inspection paths.
+
+Before and after deriving feedback, reuse freshly checks consumed files,
+database sidecars and retained directory membership. It also rechecks the trial
+purpose, which reads ancestor markers outside that file capture, and binds the
+same references, process/thread, observation limits and containing-root lease.
+Unavailable initial optional context falls back to normal inspection; a changed
+retained context rejects. Original owner/control checks still run. This local
+result grants no new execution or spending authority.
+
+The old witness-plan entry point fails the new count check with two full screen
+collections; the candidate uses one and preserves exact plan/packet/provenance
+bytes. Eight focused methods and seven quality checks pass, followed by seven
+composed methods and five affected static checks on the preceding repair.
+Tamper, sidecar, namespace, ancestor-marker, scope, policy, lease-context and late
+drift guards are covered. The initial leaked internal-error result is retained;
+the final boundary translates it without weakening refusal.
+
+The composed check binds all 351 Python source files before/after. Earlier empty
+pin inventories are explicitly disqualified; their command logs retain their
+own limited role. The frozen result contains a private mutable reader, not a
+deeply immutable security token. Retaining decoded records and probing leases
+does not provide a total-memory bound. Whole-harness speed and the scale gate
+remain unmeasured. Next is one newly pinned full-size supplied rehearsal with
+the existing 1,200-second producer and conditional 900-second passive-check
+limits, retaining any incomplete result without automatic retry or extension.
+
+```powershell
+python -B -m unittest discover -s tests -p test_witness_screen_read_reuse.py -v
+```
+
+This optional developer command runs six witness-reuse checks once with
+synthetic data in temporary folders. Run it from the project folder containing
+this code version. It can take several minutes. It needs no keys, spends no API
+money and starts no containers. No separate PowerShell window is needed; Ctrl+C
+stops it. This command does not run the large rehearsal or any paid experiment.
