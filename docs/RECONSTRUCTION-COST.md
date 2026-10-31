@@ -903,3 +903,49 @@ source-count/preservation assumptions and old database reads, so they must not b
 rerun unchanged. Fresh protocol/source/selection/policy/analysis identities, then
 funding and review identities, must be bound through the current validators.
 None of that clears a paid launch or transfers the stopped run's grants.
+
+
+## Pass the checked screen directly to its witness
+
+The [study handoff repair](conformance/study-screen-handoff-delivery.json) reuses
+the completed-read result at the next existing seam. During restoration, the
+study checks a completed screen immediately before checking that screen's
+witness. It now passes that same result locally between those calls.
+
+The first complete collector still runs. Its receipts still enter the study's
+existing aggregate capture, under the same byte/path limits. All finite-owner,
+census and provenance checks run before an eligible result is offered. Witness
+reuse retains exact references/authority, current policy/process/thread/lease,
+fresh consumed-file/sidecar/retained-tree checks and the uncaptured trial-purpose
+check. Unsupported initial contexts and comparison witnesses use normal paths.
+
+The one-element holder stays local, potentially until the next assignment or
+restoration return; it never enters saved study state and is used only for the
+immediately following witness. There is no study-wide registry, persistent cache,
+new schema, dependency or module-role membership.
+
+The actual restoration entry point fails on the old code with two collections;
+the candidate uses one. Eight methods passed in the first nine-method cohort;
+its sole error was the new packet-equivalence fixture lacking the witness parent
+directory. All seven quality checks passed. The fixture was corrected through
+the normal witness-input writer, and that saved-plan equivalence method plus
+three affected checks then passed with production bytes unchanged. Thus nine
+unique methods pass across those cuts, not one nine-pass cohort. Both 352-source
+before/after maps match; the initial failure remains recorded.
+
+Saved-plan state projections, plan/packet bytes, aggregate receipt maps/totals
+and database sets match the default path. Aggregate overflow, finite-owner drift,
+changed artifacts/authority/sidecars/context and late outer-finish drift reject.
+Independent review found no blocker. These are supplied-fixture work/consistency
+checks, not whole-harness speed, peak-memory, hosted-CI or full-scale acceptance.
+Next is one separately pinned full-size observation under the existing limits.
+
+```powershell
+python -B -m unittest discover -s tests -p test_study_screen_handoff.py -v
+```
+
+This optional developer command runs seven handoff checks once with synthetic
+data in temporary folders. Run it from the project folder containing this code
+version. It can take several minutes. It needs no keys, spends no API money and
+starts no containers. No separate PowerShell window is needed; Ctrl+C stops it.
+It does not run the large performance gate or the paid comparison.

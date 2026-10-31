@@ -490,11 +490,22 @@ def _read_ref(
     proposal: bool = False,
     capture: bool = False,
     completed: source_screen_results._CompletedScreenRead | None = None,
+    retained: list[source_screen_results._CompletedScreenRead] | None = None,
 ) -> dict[str, Any]:
     if (
         type(capture) is not bool
         or (capture and proposal)
         or (completed is not None and (capture or proposal))
+        or (
+            retained is not None
+            and (
+                type(retained) is not list
+                or retained
+                or not capture
+                or proposal
+                or completed is not None
+            )
+        )
     ):
         raise SourceSearchError("nested byte capture requires a screen and explicit boolean")
     reference = _object(value, {"directory", "authorization", "report_sha256"})
@@ -509,7 +520,18 @@ def _read_ref(
         if proposal
         else source_screen.inspect_source_screen
     )
-    if completed is not None:
+    if retained is not None:
+        checked = source_screen_results._collect_source_screen(
+            directory,
+            authorization=reader.authorization,
+            expected_report_sha256=expected,
+            sink=reader.capture,
+            retain=True,
+            observation_root=reader.root,
+        )
+        result = _load(checked.report_raw)
+        retained.append(checked)
+    elif completed is not None:
         checked = source_screen_results._reuse_completed_screen(
             completed, directory, reader.authorization, expected
         )
@@ -1473,13 +1495,18 @@ def _witness_parent(
 
 
 def _witness_parent_read(
-    reader: NativeEvidence, treatment: _WitnessTreatment
+    reader: NativeEvidence,
+    treatment: _WitnessTreatment,
+    *,
+    completed: source_screen_results._CompletedScreenRead | None = None,
 ) -> tuple[source_screen.SourceScreen, source_screen_results._CompletedScreenRead | None]:
     record = treatment.to_record()
     if reader.root != _witness_path(record["scope"]) or reader.authorization != _witness_path(
         _object(record["parent"])["authorization"]
     ):
         raise SourceSearchError("witness reader belongs to another original scope or authority")
+    if completed is not None and "feedback_comparison" not in record:
+        return _witness_parent(reader, treatment, completed=completed), completed
     completed = None
     if (
         "feedback_comparison" not in record
@@ -1645,14 +1672,19 @@ def _witness_funding(reader: NativeEvidence, location: Path) -> dict[str, Any]:
 
 
 @_checked
-def _witness_progress_at(reader: NativeEvidence, treatment: _WitnessTreatment) -> dict[str, Any]:
+def _witness_progress_at(
+    reader: NativeEvidence,
+    treatment: _WitnessTreatment,
+    *,
+    completed: source_screen_results._CompletedScreenRead | None = None,
+) -> dict[str, Any]:
     """Reconstruct one nonrecursive witness, including every original pending owner."""
     if type(treatment) is not _WitnessTreatment or not isinstance(reader, NativeEvidence):
         raise SourceSearchError("witness needs immutable treatment and original evidence")
     record = treatment.to_record()
     reference = _object(record["parent"])
     location = _witness_path(record["directory"])
-    parent, completed = _witness_parent_read(reader, treatment)
+    parent, completed = _witness_parent_read(reader, treatment, completed=completed)
     funding = _witness_funding(reader, location)
     current = authority_observation(reader.capture, reader.authorization, funding)
     progress: dict[str, Any] = {
