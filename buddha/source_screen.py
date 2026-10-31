@@ -12,7 +12,7 @@ from collections.abc import Callable, Iterator, Mapping, Sequence
 from contextlib import contextmanager
 from contextvars import ContextVar
 from dataclasses import dataclass, field
-from functools import wraps
+from functools import cached_property, wraps
 from pathlib import Path
 from typing import cast
 
@@ -464,6 +464,10 @@ class SourceScreen(_Artifact):
 
     @property
     def tasks(self) -> TaskSet:
+        return self._task_view
+
+    @cached_property
+    def _task_view(self) -> TaskSet:
         record = self.to_record()
         return TaskSet.from_bytes(_json(record["source"])).select(record["selected_ids"])
 

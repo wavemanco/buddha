@@ -1,0 +1,255 @@
+{
+  "basis_head": "ed387f38c48a889562092dc24c02ea5ce0dec5f1",
+  "behavior": {
+    "AST_comparison": "Original tasks getter body matches new _task_view body; every other SourceScreen method is unchanged.",
+    "concurrency": "Python3.13 cached_property may compute a first value multiple times on simultaneous access. The pure calculation is deterministic; sequential work counts do not establish once-only concurrency. No new locking.",
+    "memory": "Each live SourceScreen may retain one extra selected TaskSet with the complete sealed dataset payload. Canonical TaskSet bytes are bounded32MiB plus object/dictionary overhead; no process-wide memory bound or measured RSS is claimed. This memory is outside the evidence reader raw-byte retention accounting.",
+    "no_new_dependency_or_module": true,
+    "no_persistent_global_or_file_IO_cache": true,
+    "public_contract": "tasks remains a property/data descriptor with .fget; existing census instrumentation and subclass setter/deletion rejection remain supported. No public cache API.",
+    "scope": "SourceScreen only: public @property tasks delegates to private @cached_property _task_view; unchanged original getter body derives a strict selected TaskSet from the instance canonical bytes.",
+    "source_role_membership_changed": false,
+    "stdlib_reference": "https://docs.python.org/3.13/library/functools.html#functools.cached_property",
+    "strictness": "SourceScreen/TaskSet constructors, fresh to_record copies, canonical bytes/fingerprints, field layout and all file/owner/authority/capture finishes stay unchanged."
+  },
+  "date": "2026-10-30",
+  "evidence": {
+    "census": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\source-screen-task-view-20261030-v1\\census-v1.log",
+      "sha256": "68f8af1a61cc296d638b98bf476735b4cf102406dd735b5635ab5dbdb8891475"
+    },
+    "first_green": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\source-screen-task-view-20261030-v1\\green-v1.log",
+      "sha256": "829ce995eff1e1250708bfb93f1d812f45fec9003d3987668ef92c774fa37112"
+    },
+    "full-local": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\source-screen-task-view-20261030-v1\\full-local-v1.log",
+      "sha256": "a73d3d3ee24b751ee405e8620c5a319aa3d41ee330ad6c0184c5cfc1597d0591"
+    },
+    "local_checks": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\source-screen-task-view-20261030-v1\\local-checks-v1.json",
+      "sha256": "4adb354056b5796f1baf70db58dead975a7aa374c634a0c074179104ffbcf812"
+    },
+    "production_diff": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\source-screen-task-view-20261030-v1\\buddha-final-v1.diff",
+      "sha256": "68bd6b38dd672a626965b51a30c25350ed54452342256dda9779b23ba0bf145b"
+    },
+    "qa-compile": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\source-screen-task-view-20261030-v1\\qa-compile-v1.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "qa-development-audit": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\source-screen-task-view-20261030-v1\\qa-development-audit-v1.log",
+      "sha256": "e82148c0c30269ca5a2c35420ece6af011a4faf5a375325d750e243ffdb10625"
+    },
+    "qa-format": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\source-screen-task-view-20261030-v1\\qa-format-v1.log",
+      "sha256": "7e3c3bcacb011a22d4bd9deaedf28dd542e340a9deb9513beb9bee81e91f99e8"
+    },
+    "qa-lint": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\source-screen-task-view-20261030-v1\\qa-lint-v1.log",
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+    },
+    "qa-runtime-audit": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\source-screen-task-view-20261030-v1\\qa-runtime-audit-v1.log",
+      "sha256": "e82148c0c30269ca5a2c35420ece6af011a4faf5a375325d750e243ffdb10625"
+    },
+    "qa-security": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\source-screen-task-view-20261030-v1\\qa-security-v1.log",
+      "sha256": "9ec21dc77e6e51e9beb7736dd859765dd4d19f740fddcaefc9f39f166ebba7a1"
+    },
+    "qa-types": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\source-screen-task-view-20261030-v1\\qa-types-v1.log",
+      "sha256": "1c13773bc21d8ae3a759614f3a828d16af7aa66d04f93c4daeeb51d5d6be16c1"
+    },
+    "red": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\source-screen-task-view-20261030-v1\\red-v1.log",
+      "sha256": "7568f14eb834a9a506f15552631a876524a87f67913edc65b25820b859fadf3c"
+    },
+    "red_supplied_test": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\source-screen-task-view-20261030-v1\\supplied-red-test-v1.py",
+      "sha256": "b19b508548782df64669ebbac556e53ee11e9ee9e431bad0f4bb22e165a14e89"
+    },
+    "screen-contracts": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\source-screen-task-view-20261030-v1\\screen-contracts-v1.log",
+      "sha256": "2274369ac324755366534734b65e3e57ecf090fc8d41922faea138c608ef9c21"
+    },
+    "test_diff": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\source-screen-task-view-20261030-v1\\tests-final-v1.diff",
+      "sha256": "a6ad004ccbfd476a56a2eb953706a69ebdc5f14e81e863d44dc43fd9b6ce7c56"
+    },
+    "parent_integration": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\source-screen-task-view-20261030-v1\\parent-integration-v2.json",
+      "sha256": "00ad9942a55cbca7c4f5400c66fb2e98a7f9c5d05c4b81b6947c5669a2897879"
+    },
+    "composed_checks": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\source-screen-task-view-20261030-v1\\composed-checks-v2.json",
+      "sha256": "94af108cb5bf6e043a6087f1dd11d6221f1972d33ff6ae2ba79f98df384a9d52"
+    }
+  },
+  "format": "buddha.source-screen-task-view-delivery.v1",
+  "hosted_verification": "Pending exact published-source CI; no full-suite or hosted pass claimed.",
+  "independent_check": {
+    "methods_reported_passed": 5,
+    "record": "Retained parent review message/tool result; no external artifact path or raw-log hash supplied.",
+    "reported_source_sha256": {
+      "buddha/source_screen.py": "0daea3eb6d0e33062bf57f5924ee8dca4f2f99c116d02a07aa03b0fa8e3fd837",
+      "tests/test_source_screen_local_reuse.py": "b19b508548782df64669ebbac556e53ee11e9ee9e431bad0f4bb22e165a14e89"
+    },
+    "scope": "All five SourceScreenLocalReuseTests at the same frozen bytes; no actual data, provider, container or runtime-ratio evidence.",
+    "seconds_reported": 42.891,
+    "status": "PASS reported",
+    "basis_head": "21dfd2054970ccfec01fc71cf27c6dad5a249df2"
+  },
+  "limits": [
+    "Original17-method/full-seven-QA proof uses21dfd2. Exact production/test bytes survive fast-forwarded387; seven composed methods and five static checks on that parent are recorded separately, not combined or transferred.",
+    "One derived immutable artifact is memoized per instance; new SourceScreen objects and every file/owner/capture boundary remain independently checked.",
+    "The memory tradeoff is explicit and no actual-history RSS/time/profile measurement was taken.",
+    "Source-bound adoption requires a separately checked profile/owner handoff; never replace an existing B owner or patch c548 silently.",
+    "Exact-source hosted CI, actual retained-history reconstruction, cleanup reconciliation and live clearance remain separate.",
+    "No model request, new spending allocation, scientific improvement or completed recovery is established."
+  ],
+  "live_execution_cleared": false,
+  "preservation": {
+    "CORE_and_fixed_science_bytes": "unchanged",
+    "PowerShell_blocks": "byte-identical",
+    "actual_owners_grants_receipts": "not rewritten or migrated",
+    "benchmark_generation_judge_settings_funding": "unchanged",
+    "optional_command_explanation": "four -> five current supplied-data checks; historical four-new/seventeen-existing evidence remains unchanged",
+    "source_role_and_module_membership": "unchanged; only the existing source_screen helper hash changes"
+  },
+  "source_sha256": {
+    "buddha/source_screen.py": "0daea3eb6d0e33062bf57f5924ee8dca4f2f99c116d02a07aa03b0fa8e3fd837",
+    "docs/RECONSTRUCTION-COST.md": "071b1885a151e794a9fec180c16cacb89d4ec34fdc94db9ed028a8d65bc5a010",
+    "tests/test_source_screen_local_reuse.py": "b19b508548782df64669ebbac556e53ee11e9ee9e431bad0f4bb22e165a14e89"
+  },
+  "spec": [
+    "DESIGN5",
+    "DESIGN7",
+    "DESIGN9",
+    "ENG-OBS-01"
+  ],
+  "status": "current_parent_composed_checks_pass_hosted_and_representative_scale_pending",
+  "validation": {
+    "actual_container_startups": 0,
+    "actual_provider_calls": 0,
+    "actual_retained_history_reads": 0,
+    "baseline_red": {
+      "failures": 2,
+      "full_supplied_test_snapshot_retained": true,
+      "methods": 2,
+      "production_source_screen_sha256": "e052f2eb09cc0424661cf6b4d18bb118bd2b190de5085ef8cc5bbcf9d742cb2a",
+      "seconds": 6.597
+    },
+    "cohort_timing": "Cohorts ran as separate overlapping observations; do not add durations or calculate a controlled speedup.",
+    "coverage": [
+      "same-instance reuse and independent fresh-instance view validation",
+      "exact source/selected/native bytes, fingerprints and string/int ID order",
+      "returned nested-record mutation does not alter cached artifacts or screen bytes",
+      "public property and subclass assignment/deletion protection",
+      "malformed declarations, saved-task/recipe tampering and invalid-directory failure order",
+      "unchanged census .fget instrumentation, owner/funding bijection and late bytes/database-sidecar detection",
+      "passive inspection after retired sources, lineage/owner preservation and final native-report recheck"
+    ],
+    "final_implementer": {
+      "bandit_issues": 0,
+      "cohorts": {
+        "census": {
+          "exit_code": 0,
+          "methods": 4,
+          "seconds": 100.854
+        },
+        "full-local": {
+          "exit_code": 0,
+          "methods": 5,
+          "seconds": 34.283
+        },
+        "screen-contracts": {
+          "exit_code": 0,
+          "methods": 8,
+          "seconds": 105.925
+        }
+      },
+      "configured_quality_checks_passed": 7,
+      "development_dependency_audit": "No known vulnerabilities reported for pinned inputs.",
+      "diff_check": "PASS",
+      "distinct_methods_passed": 17,
+      "ruff_formatted_files": 289,
+      "runtime_dependency_audit": "No known vulnerabilities reported for unchanged standard-library-only runtime requirements.",
+      "strict_mypy_sources": 89,
+      "basis_head": "21dfd2054970ccfec01fc71cf27c6dad5a249df2"
+    },
+    "first_green": {
+      "methods": 2,
+      "seconds": 3.073,
+      "subset_of_final_local_cohort": true,
+      "basis_head": "21dfd2054970ccfec01fc71cf27c6dad5a249df2"
+    },
+    "current_parent_composed": {
+      "basis_head": "ed387f38c48a889562092dc24c02ea5ce0dec5f1",
+      "methods": 7,
+      "seconds": 36.21475669997744,
+      "failures": 0,
+      "errors": 0,
+      "per_cohort_deadline_seconds": 180,
+      "whole_parent_deadline_seconds": 360,
+      "cohorts": {
+        "targeted_screen_recovery": {
+          "methods": 2,
+          "seconds": 20.51741710002534
+        },
+        "local_reuse": {
+          "methods": 5,
+          "seconds": 14.245027499971911
+        }
+      },
+      "static_checks": 5,
+      "static_scope": "Focused Ruff/format3files, configured strict mypy89, Bandit and in-memory compilation290. No dependency change; prior audits remain their original cut.",
+      "old_seventeen_not_added_to_current_seven": true,
+      "full_suite_or_hosted": false
+    }
+  },
+  "work_counts": {
+    "cache_state": "Cold before controls; materialization and preflight reuse the view built on that same SourceScreen. Not three independent cold-entry measurements.",
+    "controls": {
+      "after": 7,
+      "before": 10
+    },
+    "five_sequential_accesses": {
+      "after": 3,
+      "before": 15,
+      "fresh_instance_first_view": 3
+    },
+    "fixture": "1000 supplied dataset rows, two selected tasks with typed IDs string1 and integer1; retained nested metadata and literal native output checks",
+    "interpretation": "Instrumented population-construction counts in supplied fixtures, not actual-run work/time measurements, timing ratios or a universal bound.",
+    "materialization": {
+      "after": 4,
+      "before": 10
+    },
+    "measurement_order": [
+      "controls",
+      "materialization",
+      "preflight"
+    ],
+    "preflight": {
+      "after": 4,
+      "before": 7
+    },
+    "same_screen_instance": true,
+    "three_routine_total": {
+      "after": 15,
+      "before": 27
+    }
+  },
+  "initial_basis_head": "21dfd2054970ccfec01fc71cf27c6dad5a249df2",
+  "plan_revision": 210,
+  "independent_current_source_review": {
+    "status": "no_defects_found",
+    "source_pins": {
+      "buddha/source_screen.py": "0daea3eb6d0e33062bf57f5924ee8dca4f2f99c116d02a07aa03b0fa8e3fd837",
+      "tests/test_source_screen_local_reuse.py": "b19b508548782df64669ebbac556e53ee11e9ee9e431bad0f4bb22e165a14e89"
+    },
+    "scope": "Static source/immutability/public-interface review, no independent new worker run. Extra TaskSet lifetime/memory explicitly qualified."
+  },
+  "route_choice": "Pending user preparation choice under PLAN209. This shared optimization installs nothing into the stopped run and does not select or fund a new experiment."
+}
