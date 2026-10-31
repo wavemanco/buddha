@@ -786,3 +786,38 @@ synthetic data in temporary folders. Run it from the project folder containing
 this code version. It can take several minutes. It needs no keys, spends no API
 money and starts no containers. A separate PowerShell window is unnecessary;
 Ctrl+C stops it. It does not run the full witness or large performance gate.
+
+
+## Prove source completeness without rebuilding it
+
+The [completeness repair](conformance/screen-completeness-delivery.json) removes
+another duplicate population construction. The strict task-source constructor
+already checks every source row, rejects duplicate typed IDs and proves that
+every selected task matches its source row. Comparing its unique task count with
+the source's exact line count then proves that no source task was omitted. The
+unchanged split checks use that validated complete source directly.
+
+This preserves task order/types, complete source bytes, split/family/duplicate-
+prompt protection and all byte limits. It counts literal LF separators, matching
+the existing dataset reader; CRLF, an optional final LF and escaped newlines
+retain their meanings. Malformed or unused bad rows still fail strict validation.
+No cache, permissive parser or new declaration format is introduced.
+
+Forty focused/denial methods and seven quality checks pass at the initial cut.
+Nine separate local-reuse/census methods also pass. After alignment onto the
+feedback repair, nine composed methods and five affected static checks pass with
+both changed files byte-identical. One screen construction now scans the source
+once instead of three times. The composed feedback comparison uses 57 versus53
+population constructions, retaining one full inspection and nine finishes. These
+counts belong to their respective source cuts; they are not a whole-harness
+speed or memory result. Hosted CI, the full witness and scale gate stay open.
+
+```powershell
+python -B -m unittest discover -s tests -p test_screen_completeness.py -v
+```
+
+This optional developer command runs five completeness checks once with
+synthetic data. Run it from the project folder containing this code version.
+It needs no keys, spends no API money and starts no containers. No separate
+PowerShell window is needed; Ctrl+C stops it. It does not run the large
+performance gate or the full experiment.
