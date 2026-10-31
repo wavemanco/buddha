@@ -2,6 +2,7 @@
 
 import hashlib
 from collections.abc import Callable
+from contextlib import ExitStack
 from dataclasses import asdict
 from datetime import UTC, datetime
 from pathlib import Path
@@ -22,7 +23,7 @@ from buddha import (
 from buddha import launch_common as common
 from buddha import native_pipeline as pipeline
 from buddha.answers import TaskSet
-from buddha.doctor import _Busy, _Unsupported
+from buddha.doctor import _Busy, _observation_policy, _Unsupported
 from buddha.gateway import RawHTTPTransport
 from buddha.provider import ModelSpec
 from buddha.releases import ReleaseError, Selection, _digest, _json, _load, _object, file_hash
@@ -84,26 +85,28 @@ def _parameters(record: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def _configuration(path: Path, digest: str) -> tuple[dict[str, Any], dict[Path, str]]:
+def _configuration(
+    path: Path, digest: str, *, observation: ExitStack | None = None
+) -> tuple[dict[str, Any], dict[Path, str]]:
     if not isinstance(path, Path):
         raise UnifiedLaunchError("combined launch needs an explicit Path")
     path, digest = common._path(str(path.absolute())), _digest(digest)
-    record = cast(
-        dict[str, Any],
-        _object(
-            _load(pipeline._read(path, digest)),
-            {
-                "format",
-                "primary_launch",
-                "comparison_plan",
-                "reference_grant",
-                "total_limits",
-                "directory",
-                "source_sha256",
-            },
-        ),
+    record = cast(dict[str, Any], _object(_load(pipeline._read(path, digest))))
+    version_two = record.get("format") == "buddha.unified-launch.v2"
+    _object(
+        record,
+        {
+            "format",
+            "primary_launch",
+            "comparison_plan",
+            "reference_grant",
+            "total_limits",
+            "directory",
+            "source_sha256",
+        }
+        | ({"observation_policy"} if version_two else set()),
     )
-    if record["format"] != "buddha.unified-launch.v1":
+    if record["format"] not in {"buddha.unified-launch.v1", "buddha.unified-launch.v2"}:
         raise UnifiedLaunchError("unsupported combined launch")
     for name in ("primary_launch", "comparison_plan"):
         comparison_observation._reference(record[name])
@@ -118,6 +121,15 @@ def _configuration(path: Path, digest: str) -> tuple[dict[str, Any], dict[Path, 
         controls.get(common._path(source)) != pin for source, pin in required_sources.items()
     ):
         raise UnifiedLaunchError("combined runner sources are not reviewed")
+    if version_two:
+        reference = comparison_observation._reference(record["observation_policy"])
+        policy_path, policy_digest = common._path(reference["path"]), _digest(reference["sha256"])
+        if controls.get(policy_path) != policy_digest or observation is None:
+            raise UnifiedLaunchError("combined observation policy lacks its reviewed binding")
+        policy = _object(_load(pipeline._read(policy_path, policy_digest)))
+        if policy.get("format") != "buddha.evidence-observation-policy.v2":
+            raise UnifiedLaunchError("combined launch needs an explicit version two policy")
+        observation.enter_context(_observation_policy(policy))
     for source, expected in controls.items():
         if file_hash(source, max_bytes=256 * 1024**2) != expected:
             raise UnifiedLaunchError("combined source or control changed")
@@ -244,7 +256,19 @@ def _raw_review(
 
 
 def _check(path: Path, expected_sha256: str, *, owned_lock: bool = False) -> dict[str, Any]:
-    record, controls = _configuration(path, expected_sha256)
+    with ExitStack() as observation:
+        record, controls = _configuration(path, expected_sha256, observation=observation)
+        return _check_configuration(path, expected_sha256, record, controls, owned_lock=owned_lock)
+
+
+def _check_configuration(
+    path: Path,
+    expected_sha256: str,
+    record: dict[str, Any],
+    controls: dict[Path, str],
+    *,
+    owned_lock: bool,
+) -> dict[str, Any]:
     parameters = _parameters(record)
     funded = cast(dict[str, Any], unified_funding.check_funding(**parameters))
     primary = funded["primary"]
@@ -489,8 +513,9 @@ def launch(
         with common._heartbeat(notice, ["checking"], [None], heartbeat_seconds):
             return _check(path, expected_sha256, owned_lock=owned)
 
+    observation = ExitStack()
     try:
-        record, _ = _configuration(path, expected_sha256)
+        record, _ = _configuration(path, expected_sha256, observation=observation)
         directory = common._path(record["directory"])
         _workspace(directory)
         directory.mkdir(exist_ok=True)
@@ -639,3 +664,5 @@ def launch(
         )
         partial(reason)
         raise
+    finally:
+        observation.close()

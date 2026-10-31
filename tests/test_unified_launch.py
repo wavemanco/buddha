@@ -412,7 +412,7 @@ class UnifiedLaunchLifecycleTests(unittest.TestCase):
     def seams(self):
         with ExitStack() as stack:
             targets = {
-                "buddha.unified_launch._configuration": lambda *a: (
+                "buddha.unified_launch._configuration": lambda *a, **k: (
                     copy.deepcopy(self.record),
                     {self.path: self.digest},
                 ),

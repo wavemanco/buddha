@@ -1,0 +1,67 @@
+{
+  "format": "buddha.scale-replay-deadline-observation.v1",
+  "date": "2026-10-31",
+  "status": "partial_deadline",
+  "reason": "producer_deadline_exceeded",
+  "producer_seconds": 1200.1445536999963,
+  "parent_seconds": 1202.7083902999293,
+  "target": {
+    "owners": 193,
+    "operations": 660
+  },
+  "target_reached": false,
+  "conditional_900s_checker_ran": false,
+  "source_pins_after_match": true,
+  "source_pin_count": 346,
+  "prefix_profile": {
+    "status": "prefix_calls_returned",
+    "seconds": 97.77040419983678,
+    "strict_finish_completed": true,
+    "owners": 27,
+    "operations": 96,
+    "position": {
+      "arm": null,
+      "repetition": 1,
+      "slot": null,
+      "stage": "common_witness_proposal_capacity",
+      "start": 0
+    },
+    "raw_inputs_unchanged": true,
+    "source_pins_after_match": true,
+    "guard_denials": [],
+    "population_constructions": 617,
+    "population_cumulative_seconds": 42.0113707,
+    "metadata_validations": 617159,
+    "limits": "One instrumented prefix, not scale acceptance or controlled speed comparison. Cumulative times overlap; no inferred percentage speedup."
+  },
+  "evidence": {
+    "scale-replay-parent-result-v9.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\scale-replay-parent-result-v9.json",
+      "sha256": "e7a123263dde7fe8c8439dfba5b94a332e56ee471acc06802ecfc7e339dc2de8"
+    },
+    "scale-replay-source-proposal-v9.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\scale-replay-source-proposal-v9.json",
+      "sha256": "3c4f1b31b966b5fa6b8300a76471faecf273d639cdf2608f1fad71d566eaff01"
+    },
+    "producer-stdout-v9.log": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\producer-stdout-v9.log",
+      "sha256": "b9221f409a38d2f60bbd1998542f51fc6c30cea96d7d83a50235726af6026a7b"
+    },
+    "prefix-profile-v9-result-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\prefix-profile-v9-result-v1.json",
+      "sha256": "e3e8b43d2a8c3202bed8b9de40f52e25e415b8783f6586fdb15db64c85a7b437"
+    },
+    "prefix-profile-v9-parent-result-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\prefix-profile-v9-parent-result-v1.json",
+      "sha256": "6c7f6a3e7c2ab516b8c756a15f8cf3012adb092af32f9a7a5e2815a6162df3e7"
+    },
+    "prefix-profile-proposal-reviewed-v3.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\prefix-profile-proposal-reviewed-v3.json",
+      "sha256": "7e109eda86f8ecbde8293db9990bd7c877d54ef0a19acb7c8135e4150db6aaa2"
+    }
+  },
+  "original_paid_data_access": false,
+  "actual_provider_calls": 0,
+  "actual_containers": 0,
+  "paid_execution_cleared": false
+}
