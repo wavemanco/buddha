@@ -1021,3 +1021,44 @@ Both exact failing methods pass once, without retries, in 70.602 parent seconds;
 affected lint, formatting and in-memory compilation pass. Application code is
 unchanged. These local results do not turn historical red checks green; the new
 stack still needs exact-source hosted CI before merge or paid use.
+
+
+## Reuse the screen during proposal-feedback verification
+
+The [proposal-feedback repair](conformance/proposal-feedback-screen-reuse-delivery.json)
+carries the existing checked-screen result through the ordinary witness proposal
+inspector. The descriptor, runtime, owner/funding and provenance checks still run.
+Feedback is still derived in full, and all four canonical packet files are read
+and checked again. Only the redundant deep inspection of that same underlying
+screen is replaced by the existing fresh guarded result.
+
+The shortcut applies to ordinary v1/v3 feedback only. Exact type/ref/authority,
+current policy/process/thread/lease, consumed files, database sidecars, retained
+namespaces and trial-purpose checks remain. Default, active-execution, explicit
+sink, comparison and failed-child paths retain complete inspection. No new proof
+class, population cache, registry, schema, role list or dependency is introduced.
+
+A real supplied witness proposal is materialized through the existing actions.
+Restoring it collects the screen twice on the baseline and once with this repair.
+Both witness and proposal feedback packets are still fully built. State
+projections, packet/source bytes and aggregate receipts match the default path.
+Wrong type/reference/policy/profile, changed source/authority/sidecars, packet
+tampering and late provenance/file changes remain refused.
+
+Seven initial methods and all seven quality checks pass. After alignment onto
+the CI test-double correction, the requested restoration and two capacity cases
+also pass across separate cuts. A misqualified facade test caused one loader
+error; it remains recorded, followed by the correctly qualified method's pass.
+Nine unique methods pass overall, not one clean three-method composition run.
+All 353 source maps match, with production/new-test bytes unchanged across the
+alignment. Hosted CI and whole-harness timing/memory/scale acceptance stay open.
+
+```powershell
+python -B -m unittest discover -s tests -p test_proposal_feedback_screen_reuse.py -v
+```
+
+This optional developer command runs five proposal-feedback checks once with
+synthetic data in temporary folders. Run it from the project folder containing
+this code version. It can take several minutes. It needs no keys, spends no API
+money and starts no containers. No separate PowerShell window is needed; Ctrl+C
+stops it. It does not run the large performance gate or the paid comparison.

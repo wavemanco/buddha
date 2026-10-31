@@ -491,11 +491,16 @@ def _read_ref(
     capture: bool = False,
     completed: source_screen_results._CompletedScreenRead | None = None,
     retained: list[source_screen_results._CompletedScreenRead] | None = None,
+    feedback_screen: object = None,
 ) -> dict[str, Any]:
     if (
         type(capture) is not bool
         or (capture and proposal)
         or (completed is not None and (capture or proposal))
+        or (
+            feedback_screen is not None
+            and (not proposal or capture or completed is not None or retained is not None)
+        )
         or (
             retained is not None
             and (
@@ -520,7 +525,14 @@ def _read_ref(
         if proposal
         else source_screen.inspect_source_screen
     )
-    if retained is not None:
+    if feedback_screen is not None:
+        result = candidate_improvement.inspect_candidate_improvement(
+            directory,
+            authorization=reader.authorization,
+            expected_report_sha256=expected,
+            _feedback_screen=feedback_screen,
+        )
+    elif retained is not None:
         checked = source_screen_results._collect_source_screen(
             directory,
             authorization=reader.authorization,
@@ -1757,7 +1769,11 @@ def _witness_progress_at(
             progress.update(next_owner=None, next_role=None)
         return progress
     proposal_ref = _ref(proposal_dir, reader.authorization)
-    proposal = _read_ref(reader, proposal_ref, proposal=True)
+    proposal = (
+        _read_ref(reader, proposal_ref, proposal=True, feedback_screen=completed)
+        if completed is not None
+        else _read_ref(reader, proposal_ref, proposal=True)
+    )
     capacity = _capacity_progress(
         reader,
         proposal,

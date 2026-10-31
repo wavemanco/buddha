@@ -116,6 +116,8 @@ def _definition(
     runtime_sha256: str,
     provenance_sha256: str,
     profiles: dict[str, object],
+    *,
+    _feedback_screen: object = None,
 ) -> tuple[dict[str, object], dict[str, object], str]:
     """Check original descriptor/data only; never open or execute producer programs."""
     recipe = _object(_load(consume(descriptor)))
@@ -193,8 +195,16 @@ def _definition(
 
     if Path(source_feedback.__file__).absolute() != Path(__file__).with_name("source_feedback.py"):
         raise CandidateImprovementError("a different feedback inspector was imported")
-    bundle = source_feedback.inspect_source_feedback(
-        path.parent, expected_provenance_sha256=provenance_sha256
+    bundle = (
+        source_feedback.inspect_source_feedback(
+            path.parent,
+            expected_provenance_sha256=provenance_sha256,
+            _completed_screen=_feedback_screen,
+        )
+        if _feedback_screen is not None
+        else source_feedback.inspect_source_feedback(
+            path.parent, expected_provenance_sha256=provenance_sha256
+        )
     )
     if (
         detached
@@ -795,9 +805,17 @@ def inspect_candidate_improvement(
     authorization: Path,
     expected_report_sha256: str,
     sink: _Capture | None = None,
+    _feedback_screen: object = None,
 ) -> dict[str, object]:
     from buddha.candidate_improvement_results import collect_candidate_improvement
 
+    if _feedback_screen is not None and sink is None:
+        return collect_candidate_improvement(
+            directory,
+            authorization=authorization,
+            expected_report_sha256=_digest(expected_report_sha256),
+            _feedback_screen=_feedback_screen,
+        )
     return collect_candidate_improvement(
         directory,
         authorization=authorization,
