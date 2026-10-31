@@ -843,3 +843,68 @@ evaluation checks still validate their own role-specific inputs and settings.
 Keep the original live command on hold pending exact-source hosted results,
 a fresh full-current cut and owner/receipt reconstruction, and endpoint/cleanup
 reconciliation. No new grant, key input or user action is needed for this slice.
+
+### Targeted screen recovery using the existing runner
+
+The [bounded recovery delivery](conformance/targeted-screen-recovery-delivery.json)
+checks whether the original runner can reuse its existing screen retry path.
+It adds two acceptance tests and changes no production code, runtime, benchmark,
+model, grant or original run record.
+
+One test supplies a failure before the isolated worker becomes ready, with
+unknown cleanup and no callbacks or charges. After cleanup is supplied as a
+precondition, the existing runner keeps the same owner and manifest, preserves
+the failed attempt, completes the screen through the next ordinary attempt,
+and checks both declared task rows. Reopening that completed screen needs no
+key, worker or new provider send, and preserves its supplied files/accounting.
+The other test separately checks that the one-action dispatch hook returns
+after one screen action. Its trial scope and leases are mocked: it does not
+prove complete trial reconstruction or an operator target-position guard.
+
+The unchanged original runner and the current checkout each pass the same two
+tests in separate processes: 18.655 and 17.781 seconds, 38.282 seconds combined.
+That is two unique methods executed twice, not four different tests or a speed
+comparison. Both declared task rows are inside one screen; stopping after that
+screen does not mean stopping after each task. Cleanup is a caller prerequisite;
+these tests do not add an automatic cleanup latch or reconcile a real container.
+
+Separately, the failed owner's bound recipe identifies its explicit Docker
+endpoint. A read-only inventory on that endpoint found no current container
+matching the selected image and agent/runner mounts, under the original
+executor's ownership-label and immutable-container-spec assumptions. No known
+original Python launcher was found. These observations support current absence
+at their recorded times; they do not reconstruct the missing Docker UUID,
+initial error or historical removal. The original cleanup report stays unknown.
+Fresh runtime, source, owner/accounting and work-lease checks remain required
+before dispatch. This is not blanket live-restart clearance.
+
+An optional local check is:
+
+```powershell
+python -B -m unittest discover -s tests -p test_targeted_screen_recovery.py -v
+```
+
+This runs the two supplied tests once against the current checkout, creates
+and cleans temporary test records, and reports pass or fail. It needs no keys,
+spends no API money and starts no Docker container. Use an idle PowerShell
+window; a separate window is fine. Press Ctrl+C to stop. This command does not
+check the real stopped experiment or reproduce the separately pinned old-source
+observation by itself. It is not a live-run command.
+
+The separate passive retained-history check is capped at 15 minutes, with a
+30-second parent cleanup allowance. A deadline result is retained as incomplete,
+with the last observed stage and completed integrity checks stated explicitly.
+Do not extend the deadline silently, rerun paid work, or treat passing the small
+supplied screen as proof that the whole accumulated experiment is ready.
+PLAN.md determines the next action after that observation.
+
+The original-source check reached that limit after900.215 seconds without
+completing its first study reconstruction. It stopped cooperatively; the parent
+finished in905.883 seconds without killing it. Named source/input checks and
+all four authority-image hashes passed afterward. Full-history integrity and
+compatibility did not complete, so the observation remains an explicit partial.
+The observer counted9,717 population constructions and82,467 completed capture
+reads returning51.510GB across2,617 distinct paths. Those are repeated
+application reads, not physical disk traffic or a predicted completion time.
+No keys, provider calls, containers, original writes or file-SQLite connections
+were used. Broader migration is held pending the route decision in PLAN.md.
