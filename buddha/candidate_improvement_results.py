@@ -106,6 +106,7 @@ def collect_candidate_improvement(
     authorization: Path,
     expected_report_sha256: str | None = None,
     sink: _Capture | None = None,
+    _feedback_screen: object = None,
 ) -> dict[str, object]:
     """Reconstruct complete custody, or verify one explicitly pinned publication."""
     from buddha import candidate_improvement as stage
@@ -199,6 +200,11 @@ def collect_candidate_improvement(
             runtime_sha256,
             provenance_sha256,
             _object(owner.manifest["profiles"]),
+            **(
+                {"_feedback_screen": _feedback_screen}
+                if _feedback_screen is not None and sink is None
+                else {}
+            ),
         )
         totals = _prefix(
             reader,

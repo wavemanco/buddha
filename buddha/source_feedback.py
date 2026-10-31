@@ -1412,7 +1412,10 @@ def _packet_files(directory: Path, *, partial: bool = False) -> None:
 
 
 def inspect_source_feedback(
-    directory: Path, *, expected_provenance_sha256: str
+    directory: Path,
+    *,
+    expected_provenance_sha256: str,
+    _completed_screen: object = None,
 ) -> dict[str, object]:
     """Verify an existing measured packet against its original screen, without writes."""
     try:
@@ -1434,7 +1437,25 @@ def inspect_source_feedback(
             "buddha.source-screen-feedback.v8",
         }
         reference = _object(original["reference"])
-        if version in {
+        retained = None
+        if _completed_screen is not None and version in {
+            "buddha.source-screen-feedback.v1",
+            "buddha.source-screen-feedback.v3",
+        }:
+            from buddha.source_screen_results import _CompletedScreenRead
+
+            if type(_completed_screen) is not _CompletedScreenRead:
+                raise SourceFeedbackError("feedback reuse needs its private completed screen read")
+            retained = _completed_screen
+            bundle = _build(
+                directory,
+                reference,
+                existing=True,
+                full_answers=full_answers,
+                parent_screen=retained.screen,
+                completed=retained,
+            )
+        elif version in {
             "buddha.source-screen-feedback.v6",
             "buddha.source-screen-feedback.v7",
             "buddha.source-screen-feedback.v8",
@@ -1501,6 +1522,15 @@ def inspect_source_feedback(
             if pipeline._read(directory / name, _sha(raw)) != raw:
                 raise SourceFeedbackError("saved feedback changed during inspection")
         _packet_files(directory)
+        if retained is not None:
+            from buddha.source_screen_results import _reuse_completed_screen
+
+            _reuse_completed_screen(
+                retained,
+                pipeline._absolute(reference["directory"]),
+                pipeline._absolute(reference["authorization"]),
+                _digest(reference["report_sha256"]),
+            )
         return bundle
     except (ValueError, TypeError, KeyError, OSError, RecursionError, OverflowError) as error:
         if isinstance(error, SourceFeedbackError):
