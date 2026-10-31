@@ -648,3 +648,71 @@ temporary folders, including supplied-study restoration. Run it from the project
 folder containing this code version. It needs no keys, makes no paid calls and
 starts no containers. It needs no separate PowerShell window; Ctrl+C stops it.
 The whole module includes broader checks than the scoped cohort reported above.
+
+
+## Comparable supplied workload
+
+The fresh-comparison preparation reuses the existing source-study scheduler,
+Gateway, authority records and supplied-worker fixtures. It adds no production
+controller or orchestration dependency. Eight test/helper files parameterize
+those fixtures while preserving their one-task/two-answer defaults.
+
+The small exact-parent cohort passes four methods in 81.213 seconds: the legacy
+default, 1,000-source-row/three-task/ten-answer bootstrap, and two environment
+metadata checks. The scaled bootstrap creates thirteen genuine supplied owners,
+46 operations and zero held. Its dataset is 645,466 bytes and canonical TaskSet
+1,113,890 bytes. This smoke uses only 64 synthetic environment members.
+
+The larger declared workload uses 24,043 actual synthetic installed-file members,
+a matching manifest/helper and at least 4,013,984 bytes of supported environment
+metadata. A source screen is at least 5,315,388 bytes. Source/dataset/split records
+are sized before any owner is created. Normal ledger and receipt writers create
+the history; no historical row, operation or manifest is fabricated or rewritten.
+After nine admitted descendants, the intended cut has 193 study owners and 660
+operations, with the next screen's first generation owner prepared but uncalled.
+Earlier fixture-bootstrap owners remain outside that study count.
+
+The producer has a 1,200-second limit. Only if it reaches and checks that cut does
+one fresh restoration, current-source check and complete reader finish run under
+a separate 900-second limit. A timeout or error remains a partial result with
+its stage, reason and retained files. There is no automatic retry or extension.
+The driver denies real network/container calls and retains synthetic directories.
+
+These are targeted source/metadata/count dimensions, not an exact copy or a
+universal worst case. Answer text, agent programs, model replies and request
+bodies are synthetic; costs are fixture accounting, not live-spend estimates.
+No Docker confinement, original-history compatibility, model quality or
+scientific improvement follows. Remaining phases, exact-source hosted CI,
+outgoing request settings and a separately reviewed funded handoff stay open.
+
+The final five scoped methods pass in two separately bounded observations:
+162.612 seconds for the complete tiny witness and 78.882 seconds for the four
+bootstrap/environment checks. The witness behavior test uses six source rows,
+one environment resource and ordinary one-call supplied workers, yielding
+14 study owners/11 operations. It retains all three tasks' ten complete answers;
+its cheaper call counts are not the full workload's 660-operation proof.
+
+The first large-metadata producer stopped after 290.937 seconds at a witness
+proposal assertion. Its retained feedback contains three task records, while the
+old fixture expected one. The real controller gives the improver full selected
+feedback and restricts only its further-generation check to the first task.
+That fixture expectation is corrected. An earlier wrapper failure caused by
+stripping Windows architecture variables is retained separately and corrected
+without permitting subprocesses through its guard.
+
+Three later 180-second observations remain partial. A diagnostic reached
+14 owners/50 operations and began witness publication; frame samples show
+filesystem/source/history verification doing work, not a quantified dominant
+cost. A later small-check failure caught an unforwarded callback setting, which
+is now corrected. These records are not combined into a scale-gate pass. The
+newly pinned corrected full producer is unexecuted at this publication cut.
+
+```powershell
+python -B -m unittest discover -s tests -p "test_scale_*.py" -v
+```
+
+This optional developer command runs the five supplied-fixture checks once in
+temporary folders. Run it from the project folder containing this code version.
+It may take several minutes. It needs no keys, spends no API money and starts no
+containers. It needs no separate PowerShell window; Ctrl+C stops it. This command
+runs the small checks, not the large producer or its performance gate.
