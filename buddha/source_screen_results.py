@@ -448,11 +448,10 @@ def _collect_source_screen(
         read_context = _read_context(observation_root) if retain else None
         if retain and (
             expected_report_sha256 is None
-            or sink is not None
             or read_context is None
             or not directory.is_relative_to(observation_root)
         ):
-            raise SourceScreenError("retained read requires one pinned standalone publication")
+            raise SourceScreenError("retained read requires one pinned original publication")
         reader = NativeEvidence(directory, authorization, error_type=SourceScreenError)
         anchor = reader.owner(directory / "tasks/0/generation/owners/0")
         screen_raw = reader.bound(anchor, directory / "screen.json")
@@ -705,6 +704,8 @@ def _collect_source_screen(
             _reuse_completed_screen(
                 completed, directory, authorization, _digest(expected_report_sha256)
             )
+            if sink is not None:
+                _adopt_capture(reader.capture, sink)
         elif sink is None:
             reader.capture.finish()
         else:

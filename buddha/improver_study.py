@@ -17,6 +17,7 @@ from buddha import (
     candidate_improvement,
     source_feedback,
     source_screen,
+    source_screen_results,
     trial_fence,
 )
 from buddha import native_pipeline as pipeline
@@ -967,7 +968,11 @@ def _screen(
     state: dict[str, Any],
     directory: Path,
     screen: source_screen.SourceScreen,
+    *,
+    retained: list[source_screen_results._CompletedScreenRead] | None = None,
 ) -> dict[str, Any] | None:
+    if retained is not None and (type(retained) is not list or retained):
+        raise ImproverStudyError("screen handoff needs one empty local result container")
     shared._screen_owner_for(
         reader,
         _controls_for(state, directory / "tasks/0/generation/owners/0"),
@@ -993,7 +998,13 @@ def _screen(
     reader.template = {"native": record["native"], "stages": stages}
     reader.funded = state["funding"]
     if _presence(reader, directory / "report.json"):
-        report = shared._read_ref(reader, _reference(reader, directory), capture=True)
+        local: list[source_screen_results._CompletedScreenRead] = []
+        if retained is not None and source_screen_results._read_context(reader.root) is not None:
+            report = shared._read_ref(
+                reader, _reference(reader, directory), capture=True, retained=local
+            )
+        else:
+            report = shared._read_ref(reader, _reference(reader, directory), capture=True)
         expected = {path for path in state["owner_paths"] if path.is_relative_to(directory)}
         checked: set[Path] = set()
         for value in _rows(_object(report["provenance"])["owners"], 1, len(expected)):
@@ -1062,6 +1073,8 @@ def _screen(
                 no_model=role == "evaluation" and int(path.name) == len(stages),
             )
         state["checked"].update(checked)
+        if retained is not None and local and _object(report["admission"])["eligible"] is True:
+            retained.append(local[0])
         return report
     unfinished, terminal = False, False
     for index, task in enumerate(screen.tasks.tasks):
@@ -1195,6 +1208,8 @@ def _witness(
     parent: dict[str, object],
     directory: Path,
     base: source_screen.SourceScreen,
+    *,
+    completed: source_screen_results._CompletedScreenRead | None = None,
 ) -> tuple[Any, dict[str, Any]]:
     from buddha.launch_common import _continued_witness_controls
 
@@ -1214,7 +1229,11 @@ def _witness(
             else {}
         ),
     )
-    progress = shared._witness_progress_at(reader, treatment)
+    progress = (
+        shared._witness_progress_at(reader, treatment, completed=completed)
+        if completed is not None
+        else shared._witness_progress_at(reader, treatment)
+    )
     if progress.get("proposal_capacity") is not None:
         state["capacity_paths"].add(_path_value(progress["proposal_capacity"]["path"]))
     state["checked"].update(progress["owner_treatments"])
@@ -1541,7 +1560,8 @@ def _restore_observed(
                     screen=base,
                 )
                 continue
-            report = _screen(reader, state, screen_root, base)
+            retained: list[source_screen_results._CompletedScreenRead] = []
+            report = _screen(reader, state, screen_root, base, retained=retained)
             if report is None:
                 _set_action(
                     state,
@@ -1560,7 +1580,14 @@ def _restore_observed(
                     result=report,
                 )
                 continue
-            treatment, progress = _witness(reader, state, reference, location / "witness", base)
+            treatment, progress = _witness(
+                reader,
+                state,
+                reference,
+                location / "witness",
+                base,
+                completed=retained[0] if retained else None,
+            )
             if progress["result"] is None:
                 role = progress["lower_role"]
                 stage = "common_witness_" + (
@@ -1712,7 +1739,8 @@ def _restore_observed(
                         proposal=proposal,
                     )
                     continue
-                report = _screen(reader, state, location / "screen", child)
+                retained = []
+                report = _screen(reader, state, location / "screen", child, retained=retained)
                 if report is None:
                     _set_action(
                         state, "screen", location / "screen", _position(*coordinate, "screen")
@@ -1725,7 +1753,12 @@ def _restore_observed(
                     status = "ineligible"
                 else:
                     treatment, progress = _witness(
-                        reader, state, screen_ref, location / "witness", state["screens"][start]
+                        reader,
+                        state,
+                        screen_ref,
+                        location / "witness",
+                        state["screens"][start],
+                        completed=retained[0] if retained else None,
                     )
                     if progress["result"] is None:
                         role = progress["lower_role"]
