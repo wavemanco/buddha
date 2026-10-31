@@ -949,3 +949,56 @@ data in temporary folders. Run it from the project folder containing this code
 version. It can take several minutes. It needs no keys, spends no API money and
 starts no containers. No separate PowerShell window is needed; Ctrl+C stops it.
 It does not run the large performance gate or the paid comparison.
+
+
+## Current residual profile: v11
+
+The [current residual evidence](conformance/current-residual-profile.json)
+retains the next clean-source producer deadline partial and a separate diagnostic.
+The producer stops at 1,200.111 seconds; its parent takes 1,200.312 seconds. It
+does not reach 193 owners/660 operations, so the conditional 900-second checker
+does not run. The last action's 41/146 fields are before-action counters.
+
+One later passive profile completes restoration, current-source checking and a
+strict reader finish in 71.719 instrumented seconds (72.597 parent). That read
+reconciles the retained synthetic prefix to 42 owners/146 operations. The saved
+475-file study map and raw authority hash match before/after, and all 352 current
+Python source pins match. The profile is not the full-size acceptance check.
+
+The remaining cost is now measured on current source:
+
+| Work | Calls | Cumulative instrumented seconds |
+| --- | ---: | ---: |
+| Deep screen collection | 6 | 33.117 |
+| Proposal feedback inspection | 3 | 22.793 |
+| Task-population validation | 571 | 20.182 |
+| Fresh capture finishes | 99 | 11.295 |
+
+These times overlap; do not add them. Three first screen collections are still
+required. The other three occur inside proposal-feedback inspection and total
+15.341 seconds. The next repair carries the already checked screen through only
+that ordinary path, preserving full feedback derivation, all four packet-file
+checks and fresh custody. It cannot claim the entire inspector time as savings.
+The separate counted-parent planning path did not execute in this prefix.
+
+A small pure-data comparison also examined decoded-population copies. It shows
+a possible local function benefit, but ordinary deepcopy rejects a 600-level
+JSON case accepted by the existing validator. Correct reuse would need defensive
+copy, validation-policy, fallback and retention rules. That alternative is
+deferred in favor of the existing typed result; it is not a harness improvement
+or memory result and introduces no new cache in this slice.
+
+The diagnostic keeps its 300-second cooperative/330-second hard limits. Five
+denied probes and one allowed-output/memory-SQLite probe record emit audit events
+only; they do not attempt prohibited operations. Runtime denials are empty.
+Python-audited mutations and non-memory SQLite are denied; no universal AST or
+hostile-Python sandbox is claimed. Raw equality covers study files plus authority,
+not the whole fixture workspace. Filtered statistics contain 400 public rows and
+1,089 public caller entries, with no raw/unfiltered statistics or locals exported.
+A 2.86-second read-contention caveat during production is retained. Different
+prefixes, code cuts and instrumentation establish no controlled speed ratio.
+
+After the proposal-feedback repair, require its equivalence/refusal checks and
+one separately pinned full-size observation. If that still misses the bound,
+make an explicit measured execution-strategy decision before adding more small
+optimizations. Preserve the benchmark, partials and existing limits throughout.

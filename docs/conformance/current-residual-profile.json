@@ -1,0 +1,135 @@
+{
+  "format": "buddha.current-residual-profile.v1",
+  "status": "producer_partial_diagnostic_pass_scale_open",
+  "spec": [
+    "DESIGN sections3,9,10",
+    "PLAN IMP-01",
+    "ENG-OBS-01"
+  ],
+  "executed_source_head": "deb071c4066770d170904edd8587e9ba57c1c1ff",
+  "producer": {
+    "status": "partial",
+    "reason": "deadline_exceeded",
+    "seconds": 1200.1114048999734,
+    "parent_seconds": 1200.311712300172,
+    "required_cut_reached": false,
+    "conditional900check": "not_run",
+    "result": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\scale-replay-parent-result-v11.json",
+      "sha256": "10001604e797dcde044fe967ef8a66fb301500e5c7e5c92943fdf7d4b5a0f191"
+    },
+    "independent_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\independent-terminal-verification-v11.json",
+      "sha256": "e32fc0a070538f9a57e92962cc8714ac05f5533932ea931dda391dbce957e5a4"
+    }
+  },
+  "diagnostic": {
+    "status": "prefix_calls_returned",
+    "seconds": 71.71882489998825,
+    "parent_seconds": 72.59708620002493,
+    "prefix": {
+      "action": "witness",
+      "operations": 146,
+      "owners": 42,
+      "position": {
+        "arm": null,
+        "repetition": 0,
+        "slot": null,
+        "stage": "common_witness_generation",
+        "start": 1
+      }
+    },
+    "strict_finish": true,
+    "unchanged_study_file_count": 475,
+    "authority_unchanged": true,
+    "source_pins_match": 352,
+    "bounds": [
+      300,
+      330
+    ],
+    "result": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\prefix-profile-v11-result-v1.json",
+      "sha256": "789a167e7ae1a81ab5dec5c19572403abe529232fa3390319ba60f3590a43f34"
+    },
+    "parent": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\prefix-profile-v11-parent-result-v1.json",
+      "sha256": "3d0e24a488e669e993e7984252df64db356fe02c63bc77b60597648bd6428854"
+    },
+    "proposal": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\prefix-profile-v11-proposal-DRAFT-v1.json",
+      "sha256": "1bd5844a77f2b48b023368006263b4465a8337856c1d93b1fdb92fed2ca49262"
+    },
+    "review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\independent-prefix-profile-result-review-v11-v1.json",
+      "sha256": "ecd4f9c5f1e647b3828b4163f4de2907667ed435d10d1badfd89df651b090d24"
+    },
+    "profile": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\prefix-profile-v11-public-v1.pstats",
+    "profile_sha256": "59c676408d5d0af5e23bc0fa3194fce42dde61d0927f1ef8da02633e218fa2b9"
+  },
+  "profile_facts": {
+    "deep_collectors": 6,
+    "deep_collectors_cumulative_seconds": 33.1172094,
+    "mandatory_initial_collectors": 3,
+    "duplicate_proposal_feedback_collectors": 3,
+    "duplicate_collector_cumulative_seconds": 15.341288,
+    "feedback_inspector_calls": 3,
+    "feedback_inspector_total_cumulative_seconds": 22.7925377,
+    "population_calls": 571,
+    "population_cumulative_seconds": 20.1824121,
+    "warning": "Cumulative times overlap and replacement overhead/hit rate are unmeasured. No speed ratio follows."
+  },
+  "independent_interpretation": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\current-residual-trace-20261031-v1\\profile-analysis-summary-v1.md",
+    "sha256": "7d36affd7bfeef37d6124238af427f8d0a22585b820d53f6ee478bd261258317"
+  },
+  "deferred_population_alternative": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\population-copy-design-20261031-v1\\micro-result-v1.json",
+    "sha256": "910832471cfa09fe5f73df3ec8d7a4e56b525545e6aef4cfa7f89a615adcbb49"
+  },
+  "guard_self_checks": [
+    {
+      "case": "outside_write",
+      "event": "open",
+      "result": "denied_audit_event_only"
+    },
+    {
+      "case": "disk_sqlite",
+      "event": "sqlite3.connect",
+      "result": "denied_audit_event_only"
+    },
+    {
+      "case": "filesystem_mutation",
+      "event": "os.remove",
+      "result": "denied_audit_event_only"
+    },
+    {
+      "case": "process",
+      "event": "subprocess.Popen",
+      "result": "denied_audit_event_only"
+    },
+    {
+      "case": "network",
+      "event": "socket.connect",
+      "result": "denied_audit_event_only"
+    },
+    {
+      "case": "four_output_writes_and_literal_memory_sqlite",
+      "result": "allowed_audit_events_only"
+    }
+  ],
+  "runtime_guard_denials": [],
+  "limitations": [
+    "Fixed pinned passive-reader graph; no universal AST or adversarial-Python sandbox is claimed. Writes are limited to the four fixed output opens; other audited filesystem mutations and on-disk SQLite are denied. Before/after raw maps cover study files plus authority, not all WORK inputs. No locals/private code or raw stats exported. Instrumented cumulative times overlap. Cooperative interruption may need the own-child 330s parent; partials never establish scale acceptance.",
+    "One overly broad read-only rg discovery traversed retained synthetic JSON for 2.86 seconds during v11 production; no controlled speed-ratio claim.",
+    "No193/660scale gate or scientific improvement",
+    "Source/record consistency is not benchmark-judge authenticity or a permission to spend"
+  ],
+  "next": "Existing completed-screen result through ordinary proposal feedback, preserving fullpacket/custody. One separately pinnedscale observation after proof; explicit measuredstrategy decision before furthermicrofixes ifitmisses.",
+  "preservation": {
+    "raw_revision_rows": 219,
+    "original_acceptance_tails": 7,
+    "app_source_byte_changes_in_this_slice": 0,
+    "original_paid_sources_grants_inputs": "untouched"
+  },
+  "guide_sha256": "74a2674f8690e2effc1425d8461c875e0eba9808114d894a1030364128f4fe00"
+}
