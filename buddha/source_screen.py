@@ -380,11 +380,10 @@ class SourceScreen(_Artifact):
         if record["format"] not in {"buddha.source-screen.v1", "buddha.source-screen.v2"}:
             raise SourceScreenError("unsupported source screen")
         source = TaskSet.from_bytes(_json(record["source"]))
-        release, dataset = _source(source.to_record())
-        full = TaskSet.from_dataset(release, dataset)
-        if {task.id for task in source.tasks} != {task.id for task in full.tasks}:
+        _, dataset = _source(source.to_record())
+        if len(source.tasks) != dataset.count(b"\n") + int(not dataset.endswith(b"\n")):
             raise SourceScreenError("source screen requires the complete source population")
-        development = _split(record["split"], full)
+        development = _split(record["split"], source)
         selected = _ids(record["selected_ids"], development)
         if len(selected) > 64:
             raise SourceScreenError("a source screen accepts at most 64 development tasks")
