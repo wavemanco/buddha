@@ -1,0 +1,65 @@
+{
+  "format": "buddha.fresh-observation-policy-delivery.v1",
+  "date": "2026-10-31",
+  "plan_revision": 213,
+  "basis_head": "d13d6567d63da1a6a5db4b7ca36c7a27696be54a",
+  "spec": [
+    "DESIGN7",
+    "DESIGN9",
+    "ENG-OBS-01"
+  ],
+  "status": "focused_and_quality_pass_hosted_and_scale_gates_open",
+  "live_execution_cleared": false,
+  "behavior": {
+    "new_descriptor": "buddha.unified-launch.v2",
+    "leaf": "observation_policy path/SHA must match outer source_sha256 and existing primary controls; raw owners inherit controls.",
+    "scope": "Existing validator enters before heavy _arm. Standalone check owns ExitStack; launch retains stack through exception/partial handlers and closes in finally.",
+    "legacy": "v1 schema/defaults unchanged, no new policy read; no CLI override or module-membership change.",
+    "limits": "Evidence-read capacity is not RSS or API funding; no default expansion or grant creation."
+  },
+  "validation": {
+    "methods": 22,
+    "new_methods": 6,
+    "legacy_lifecycle": 13,
+    "legacy_cli": 3,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "unittest_seconds": 6.33,
+    "whole_parent_seconds": 64.03234979999252,
+    "focused_child_deadline_seconds": 180,
+    "parent_deadline_seconds": 360,
+    "configured_quality_checks": 7,
+    "mypy_sources": 89,
+    "source_pins": 347,
+    "scope": "Real ordinary parser/CLI/context and Capture path limiter; supplied controller/funding/lifecycle seams. No full current-source trial or actual paid route claimed.",
+    "hosted": "Pending exact published head."
+  },
+  "source_sha256": {
+    "buddha/unified_launch.py": "5fc91d4d05778d7eaaa4526942e2f5833efc898c177af83120ba628fa6b53c32",
+    "tests/test_unified_launch.py": "da914b66ed264a25d03ac77b42dd055c8ec6f87c0e9dbfbd1740ad09df0c7fe4",
+    "tests/test_unified_observation_policy.py": "a3992467049c830a8e36d68fe3834c91156416d8369dff8860d7614832f7039a",
+    "docs/UNIFIED-LAUNCH.md": "9f4f80db2cd2f0871d6eb4584fc85df1e87dee683015a0625d10f2a88f510b26"
+  },
+  "evidence": {
+    "checks-result-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-observation-policy-20261031-v1\\checks-result-v1.json",
+      "sha256": "10280a48506c494c31a7bc60ffd7348d99b47e16943fc1e7a1b026f813707fe1"
+    },
+    "focused-child-result-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-observation-policy-20261031-v1\\focused-child-result-v1.json",
+      "sha256": "cda564a79f870110bd429dfe5933892ea19a9ca2079ae5703815202e56820576"
+    },
+    "source-pins-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-observation-policy-20261031-v1\\source-pins-v1.json",
+      "sha256": "383686379443df828424ae2d0348e71c71cd1ee2e696ec475ee3717f33ae3a40"
+    }
+  },
+  "preservation": {
+    "raw_revision_rows": 212,
+    "original_acceptance_tails": 7,
+    "old_paid_records_grants": "untouched; no transfer/reuse",
+    "default_or_legacy_limits": "unchanged"
+  },
+  "remaining": "Scale construction/fresh-check gate failed to close. Profile-guided population-work repair, ordinary full-phase rehearsal, exact-source CI, outgoing requests and separately approved fresh funding/handoff remain."
+}

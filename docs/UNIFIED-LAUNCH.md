@@ -114,3 +114,38 @@ stops it while retaining evidence. Exit code 0 means computational completion
 (or a passing check), 3 means incomplete/blocked, 130 means cancellation and 2
 means a refused or failed launch. No exit code closes the separate scientific
 review gates.
+
+
+## Explicit reader limits for a fresh comparison
+
+Ordinary `buddha.unified-launch.v2` adds one `observation_policy` reference,
+containing its absolute file path and SHA-256 fingerprint. The same leaf must be
+in the outer source/control map and the primary launch's bindings. The existing
+validator checks the pinned policy before heavy inspection or key entry. Changing
+the file stops checks/dispatch. The policy stays active through primary work,
+both plain references, publication and incomplete-result recording, and resets
+when the invocation ends. Version 1 keeps its existing schema and defaults.
+
+The prepared policy allows 32 GiB of cumulative evidence reading, 100,000 tree
+entries and 65,536 consumed paths per existing observation limits, with zero
+retained raw-byte cache. This is not a total process-memory allowance. Funding
+files continue to govern API spending. This configuration support creates no
+allowance, owners or live-run permission; the earlier funded experiment remains
+a separate retained partial.
+
+All 22 focused checks and seven quality checks pass. The focused checks include
+the real ordinary command parser/context with supplied controller outcomes,
+policy drift and missing-primary-binding refusals, real path-limit enforcement,
+partial/error/cancellation scope and reset, and legacy behavior. They do not
+establish full actual-provider operation or scientific improvement. The separate
+large-workload gate remains open after its declared deadline partial.
+
+```powershell
+python -B -m unittest discover -s tests -p test_unified_observation_policy.py -v
+```
+
+This optional developer command runs the six policy checks once in temporary
+folders, using supplied controller outcomes. Run it from the folder containing
+this code version. It needs no keys, spends no API money and starts no containers.
+It needs no separate PowerShell window; Ctrl+C stops it. It is a configuration
+check, not a live comparison.
