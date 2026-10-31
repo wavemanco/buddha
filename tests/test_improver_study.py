@@ -49,7 +49,16 @@ def observe_fixture_workers(fixture, observer):
 
 
 class FiniteImproverStudyTests(unittest.TestCase):
-    def fixture_before_new_api(self, *, proposal_capacity=False, capacity_output_tokens=32_768):
+    def fixture_before_new_api(
+        self,
+        *,
+        proposal_capacity=False,
+        capacity_output_tokens=32_768,
+        harness_factory=None,
+        task_ids=(TASK_ID,),
+        generation_callbacks=1,
+        unique_children=False,
+    ):
         import test_source_screen_outcome
 
         from buddha import candidate_improvement, source_feedback, source_search
@@ -59,8 +68,12 @@ class FiniteImproverStudyTests(unittest.TestCase):
         self.feedback_api, self.shared = source_feedback, source_search
         self.outcome = test_source_screen_outcome.SourceScreenOutcomeTests("runTest")
         self.addCleanup(self.outcome.doCleanups)
-        self.h = h = self.outcome.fixture()
+        self.h = h = self.outcome.fixture(harness_factory=harness_factory)
         self.root, self.engine = h.root, h.engine
+        self.task_ids = list(task_ids)
+        self.answer_count = h.source.select(self.task_ids).tasks[0].count
+        self.generation_callbacks = generation_callbacks
+        self.unique_children = unique_children
         if proposal_capacity:
             # Configure the prospective fixture before selections or owners exist.
             profile = self.engine.fixture.profiles["profiles"]["primary"]["spec"]
@@ -81,9 +94,12 @@ class FiniteImproverStudyTests(unittest.TestCase):
                     capabilities=section["selection"]["capabilities"],
                 ).to_record()
         h.record["format"] = "buddha.source-screen.v2"
-        h.record["selected_ids"] = [TASK_ID]
-        h.record["generation"]["max_calls"] = 3
-        h.record["native"]["max_calls"] = 3
+        h.record["selected_ids"] = self.task_ids
+        h.record["generation"]["max_calls"] = max(3, generation_callbacks)
+        h.record["generation"]["max_callbacks"] = max(
+            h.record["generation"]["max_callbacks"], generation_callbacks
+        )
+        h.record["native"]["max_calls"] = max(3, *self.engine.native_callback_counts)
         self.records, self.sources = {}, {}
         self.expected_common = {}
         self.events, self.improvements, self.generated = [], [], []
@@ -127,7 +143,11 @@ class FiniteImproverStudyTests(unittest.TestCase):
                         ["/runner", str(roots["runner"])],
                     ]
                     screen = h.screen(record)
-                    h.programs[screen.candidate_id].update(answers=[LITERAL, ""], callbacks=1)
+                    h.programs[screen.candidate_id].update(
+                        answers=self.answer_values(),
+                        callbacks=generation_callbacks,
+                        distinct=self.answer_count,
+                    )
                     self.starts.append({"name": item["name"], "screen": screen.to_record()})
                     self.records[screen.candidate_id] = screen.to_record()
         self.base = h.Screen.from_bytes(_json(self.starts[0]["screen"]))
@@ -232,6 +252,17 @@ class FiniteImproverStudyTests(unittest.TestCase):
 
         return RawHTTPTransport(allow_paid=True)
 
+    def answer_values(self):
+        # Preserve the original two-answer fixture literally.
+        return (
+            [self.literal, ""]
+            if self.answer_count == 2
+            else [
+                self.literal,
+                *("Supplied answer " + str(index) for index in range(1, self.answer_count)),
+            ]
+        )
+
     def supplied(self):
         from contextlib import ExitStack
 
@@ -263,9 +294,9 @@ class FiniteImproverStudyTests(unittest.TestCase):
         if "candidate-improvement-worker" in initial["format"]:
             return self.improve(spec, initial, handle)
         if spec.role == "agent":
-            self.assertEqual(initial["task"]["id"], TASK_ID)
+            self.assertIn(initial["task"]["id"], self.task_ids)
             self.assertIs(type(initial["task"]["id"]), str)
-            self.assertEqual(initial["task"]["count"], 2)
+            self.assertEqual(initial["task"]["count"], self.answer_count)
             raw = (dict(spec.mounts)["/agent"] / "candidate.py").read_bytes()
             self.h.unusable_task = TASK_ID if b"metric-ineligible" in raw else None
             self.generated.append(
@@ -285,9 +316,9 @@ class FiniteImproverStudyTests(unittest.TestCase):
             record["generation"]["selection"] = manifest["selection"]
             self.h.programs[initial["agent_sha256"]] = {
                 "record": record,
-                "callbacks": 1,
-                "answers": [self.literal, ""],
-                "distinct": 2,
+                "callbacks": self.generation_callbacks,
+                "answers": self.answer_values(),
+                "distinct": self.answer_count,
                 "utility": self.baseline_utility if raw.startswith(b"# supplied source: S") else 7,
             }
         for sentinel in (b"VALIDATION-ONLY-SENTINEL", b"FINAL-ONLY-SENTINEL", b"dataset_base64"):
@@ -327,12 +358,18 @@ class FiniteImproverStudyTests(unittest.TestCase):
                 sha(_json({"candidate.py": sha(initial["parent_bundle"]["source"].encode())})),
             )
         notes = [json.loads(row["note"]) for row in initial["feedback"]]
-        self.assertEqual([row["task"]["id"] for row in initial["feedback"]], [TASK_ID])
+        self.assertEqual(
+            [row["task"]["id"] for row in initial["feedback"]],
+            self.task_ids,
+        )
         for note in notes:
             measured = note.get("measurements", note)
             self.assertEqual(
                 measured["answers"],
-                [{"position": 0, "text": self.literal}, {"position": 1, "text": ""}],
+                [
+                    {"position": index, "text": text}
+                    for index, text in enumerate(self.answer_values())
+                ],
             )
             self.assertEqual(measured["omitted_answer_positions"], 0)
         mode = "valid"
@@ -344,7 +381,7 @@ class FiniteImproverStudyTests(unittest.TestCase):
         else:
             start, repetition, arm, slot = cell
             child = source("OWN-C-" + "-".join(str(value) for value in cell))
-            if cell in {(1, 1, 0, 0), (1, 1, 1, 0)}:
+            if not self.unique_children and cell in {(1, 1, 0, 0), (1, 1, 1, 0)}:
                 child = source("OWN-C-shared-across-arms")
             outcome = self.outcomes.get(cell, "valid")
             if outcome == "failed":
