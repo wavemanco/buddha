@@ -3,10 +3,13 @@
 The user's October 26, 2026 instruction establishes two evidence tracks sharing
 one frozen experiment. Human availability does not block the AI-only work.
 [PLAN.md](PLAN.md) owns current status and scheduling.
-The user subsequently approved the exact comparison scope, $150 API cap and
-native reviewer setup on the same date. The [funded live guide](UNIFIED-LIVE.md)
-provides the command; the [approval record](conformance/imp01-unified-approval-decision.json)
-retains that explicit decision.
+The October 26 approval and [funded live guide](UNIFIED-LIVE.md) apply to the
+interrupted original experiment. They remain historical evidence; their command,
+grants and native-review scope do not authorize the fresh comparison. The
+[approval record](conformance/imp01-unified-approval-decision.json) retains that
+earlier decision. Fresh preparation follows PLAN.md and requires its own
+checked handoff and separate funding. The two evidence tracks below continue
+to describe the intended review policy.
 
 | Track | Evidence | Completion and claims |
 | --- | --- | --- |
@@ -44,6 +47,10 @@ whole-set judgments. The explicitly selected model is `gpt-6.1-sol` with `ultra`
 reasoning. This consumes unpriced
 Codex-plan usage outside the approved $150 API cap. A model review remains
 model-dependent evidence; it does not establish human agreement.
+
+These model, reasoning and context limits record the earlier selection. They
+allocate no reviewer work to the fresh comparison. Its proposed review setup
+must be bound into the fresh scope and approval before contexts are started.
 
 The current human sample covers Buddha's conditions. Comparisons with the two
 plain references retain their AI-evaluated scope unless a separate human sample
