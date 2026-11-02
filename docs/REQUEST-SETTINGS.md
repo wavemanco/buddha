@@ -94,6 +94,42 @@ accounts or model availability. Those exact inputs must be checked before the
 fresh live handoff. The existing command above remains an optional local check;
 no new user command or API key is needed for this checkpoint.
 
+## Prepared-profile checkpoint: November 2, 2026
+
+The fresh preparation's actual profile file and both plain-model configurations
+pass a separate, no-cost compatibility check. Seven synthetic request bodies
+are accepted; all 27 deliberately incorrect variants are rejected. Independent
+sampling ignores the supplied history; in-context sampling preserves it,
+including an empty earlier answer. Both controls bind the expected profile
+file and the same public fixed-seed source.
+
+The Luna and Opus judge bodies match the pinned public SDK-capture fixture.
+The explicit Sonnet body changes only Opus's model field. These preserve
+Luna's omitted overrides and the utility judges' adaptive HIGH effort and
+16,000-token allowance. The code-authoring profile is inspected separately: it does not
+require generation's LOW effort, and no authoring request is produced here.
+[Exact evidence and limits](conformance/fresh-request-profile-delivery.json).
+
+This closes prepared-profile compatibility only. It does not execute P/C,
+the installed native SDK or the refusal-only fallback trigger, and it checks
+no account, price, capacity or live readiness. Earlier simulated HTTP tests
+retain their separate scope. Exact outgoing behavior must still be checked
+before a paid handoff.
+
+No action is needed from the operator. For developers, this optional command
+replays the diagnostic once against the recorded local preparation:
+
+```powershell
+python -I -B C:\Users\arvik\code\buddha\runs\reviews\fresh-request-profile-check\docs\conformance\check-fresh-request-profiles.py
+```
+
+It needs the named local files with their recorded fingerprints. It reads five
+configuration files and one public fixture, prints a JSON result, and changes
+no run files. It needs no keys or Docker and spends no API money. Use the
+current PowerShell window; Ctrl+C stops it. The direct command has no enforced
+time limit; the saved observation took 0.364 seconds under a 120-second limit.
+This is a check of this frozen preparation, not a generic check for other runs.
+
 ## What the next comparison measures
 
 Using Luna inside Buddha is different from a plain Luna control. The prepared
