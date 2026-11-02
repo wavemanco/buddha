@@ -78,6 +78,22 @@ proofs, quality measurements or scientific results. Before a live handoff,
 recheck the exact prepared profiles, selected sources, worker/host code, model
 compatibility, official evaluator, accounts, capacity and spending authority.
 
+## Current-source checkpoint: November 2, 2026
+
+The [fresh-comparison verification](conformance/fresh-comparison-checkpoint.json)
+records 57 passing existing checks at published source `1daf9b6` (the same
+application code as PR #213). The four cohorts cover required request settings,
+official reference bodies, native SDK transport and HTTP usage/response handling.
+They use dummy keys and simulated provider connections. All 358 bound source
+and fixture hashes match afterward; no real API request or Docker run occurred.
+
+This confirms the current helper behavior, including configurable low-effort
+generation and the distinct judge settings above. It does not certify a future
+experiment's prepared profiles, selected source requests, runtime, provider
+accounts or model availability. Those exact inputs must be checked before the
+fresh live handoff. The existing command above remains an optional local check;
+no new user command or API key is needed for this checkpoint.
+
 ## What the next comparison measures
 
 Using Luna inside Buddha is different from a plain Luna control. The prepared

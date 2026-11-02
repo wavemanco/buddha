@@ -1,0 +1,173 @@
+{
+  "format": "buddha.fresh-comparison-checkpoint.v1",
+  "date": "2026-11-02",
+  "status": "bounded_preflight_verified_scale_and_fresh_composition_open",
+  "spec": [
+    "PLAN IMP-01",
+    "DESIGN sections3,5,7,9,10"
+  ],
+  "published_application_head": "afb6aea841dc17641677b9073f6e336d326ff4dc",
+  "request_check_head": "1daf9b693b9eb6642cacb7a1fc228aa829578355",
+  "hosted": {
+    "scope": "Exact213 tree, ten terminal job logs and completed steps; no rerun",
+    "evidence": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\proposal-feedback-reuse-hosted-20261102-v1\\all-ten-complete-v1.json",
+      "sha256": "9e85bf1f3e68350c11ead39f919e7445354dc72ff3f24f08ce53afcd6c3bd5d4"
+    },
+    "checkout_merge": "8e80d43412222270b47640772a1db0b06d943247",
+    "checkout_and_head_tree": "77e0ffd4ff1e622d3decfefc7afd03be826baa9a",
+    "completed_occurrences_per_os": 2221,
+    "linux": {
+      "pass": 2216,
+      "skip": 5
+    },
+    "windows": {
+      "pass": 2220,
+      "skip": 1
+    },
+    "successful_quality_steps": 70,
+    "existing_reader_checks_passed": 9,
+    "capture_qualification": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\proposal-feedback-reuse-hosted-20261102-v1\\log-capture-qualification-v1.json",
+      "sha256": "552cd20146d361d8a0a92e73a6765b7c203b25e4f8305e9829497d7b9e5ef027"
+    },
+    "limitation": "Internal worker terminal.json not separately available; retained console/order and successful job/step evidence. The five saved Windows UTF-8 logs have CRLF normalized to LF; their hashes bind those saved files, not original HTTP/archive bytes. Census/order/outcomes are semantic log evidence. No scientific or live-readiness claim."
+  },
+  "neighboring_pr_metadata": {
+    "evidence": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-212-214-snapshot-20261102-v1\\metadata-snapshot-v1.json",
+      "sha256": "8a730bb59ca5d32b7e750fffa9997a03ea126f594a92da72998a5f1fe44afcd6"
+    },
+    "prs": [
+      212,
+      213,
+      214
+    ],
+    "successful_jobs": 30,
+    "scope": "Exact-head metadata only for212/214; full log proof above is213."
+  },
+  "request_checks": {
+    "evidence": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\current-request-preflight-20261102-v1\\verification-summary-v1.json",
+      "sha256": "d492e15808df38dfbdf11126ebe529b84ce8082100c8140beb73566d53f32ce5"
+    },
+    "cohorts": [
+      {
+        "pattern": "test_*request_settings.py",
+        "methods": 10,
+        "command": [
+          "python",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_*request_settings.py",
+          "-v"
+        ],
+        "seconds": 27.02697140001692
+      },
+      {
+        "pattern": "test_reference.py",
+        "methods": 5,
+        "command": [
+          "python",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_reference.py",
+          "-v"
+        ],
+        "seconds": 0.11467669997364283
+      },
+      {
+        "pattern": "test_native_transport.py",
+        "methods": 11,
+        "command": [
+          "python",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_native_transport.py",
+          "-v"
+        ],
+        "seconds": 0.2659233999438584
+      },
+      {
+        "pattern": "test_wire.py",
+        "methods": 31,
+        "command": [
+          "python",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_wire.py",
+          "-v"
+        ],
+        "seconds": 0.10015280009247363
+      }
+    ],
+    "passed": 57,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "timeouts": 0,
+    "bound_source_fixture_files": 358,
+    "command_function": "Run each cohort once in the stated checkout using synthetic keys and fake HTTP. No API money or real keys needed; temporary test files are created. No separate PowerShell window needed; Ctrl+C stops it. These commands check current helpers, not the future prepared experiment.",
+    "scope": "Configurable low-effort generator settings; official distinctiveness settings/omissions; high-adaptive utility settings and refusal fallback; native transport and HTTP receipt/usage handling.",
+    "limitations": [
+      "Exact newly prepared profiles, selected sources, protocol or handoff",
+      "Current provider/account/model compatibility or verified current prices",
+      "Sandboxed selected-model runs, actual API behavior or Docker composition",
+      "Fresh funded authority, launch adoption, scientific outcomes or complete scale gate"
+    ],
+    "real_provider_calls": 0,
+    "real_docker_runs": 0,
+    "real_key_reads": 0
+  },
+  "remaining_composition": {
+    "source_audit": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-ordinary-preparation-map-20261031-v1\\current-source-phase-map-receipt-v2.json",
+      "sha256": "82080e7b77d85b18615e2a714e989040de7c7460330a8c4cebf668340cdd6098"
+    },
+    "existing": "Real controllers: v4 primary/v1 outer, failed descendants, two starter final cells. v2 policy lifecycle supplies phase outcomes.",
+    "next_case": "Reuse existing integration with v2 policy bound through both primary and outer controls before owners; successful initial/evolved descendants, six reduced final cells, both plain modes, exact original-grant accounting, partial/resume/publication and keyless replay.",
+    "implementation_or_run_in_this_slice": false,
+    "new_timing_bound_adopted": false,
+    "not_full_scientific_workload": true
+  },
+  "scale": {
+    "status": "pending_user_setup_choice",
+    "last_construction": "v12 deadline partial at1200.151seconds;193/660notreached",
+    "reader900": "not_run",
+    "longer_construction_adopted": false,
+    "old_partials_unchanged": true
+  },
+  "preservation": {
+    "prior_raw_revision_rows": 223,
+    "original_acceptance_tails": 7,
+    "application_changes": 0,
+    "original_paid_state_read_or_written": false,
+    "funding_transferred": false,
+    "real_api_cost_usd": 0,
+    "merged_prs": 0,
+    "live_command_cleared": false,
+    "scope": "Original three-development/26-final WildChat questions, P/C sources, two starts/repetitions/opportunities, official1.1, two plain controls, nonblocking human extension retained."
+  },
+  "plan_sha256": "accf3132cc711209f9229a812b049336421fe440c6dcdaa37c3b32073ee89728",
+  "guide_sha256": "7a2f9c0d99ee98bf83ab6c68d8a1ab3124085cf748083d5cfe9dbc857b920173"
+}
