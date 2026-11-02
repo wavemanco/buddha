@@ -5,13 +5,15 @@ original study and plain-reference controllers. It uses fresh synthetic tasks,
 dummy keys, supplied worker messages and mocked HTTPS replies. It spends no
 money, runs no operating-system containers and touches no actual study owners.
 
-One reduced study setup is shared by the execution, interruption, resume and
-completed-readback checks. Both declared child opportunities fail through the
-worker protocol, leaving two starter assessment cells and two explicit missing
-descendant slots. This keeps the integration check bounded; it does not measure
-the effectiveness of the real improvers.
+The module contains two reduced cases that share one test body and use separate
+fresh records. The original v1 case has two failed child opportunities, two
+starter final cells and two missing descendant slots. The ordinary v2 case binds
+the existing reader policy through both primary and combined controls, then
+requires six final cells covering starter, initial and evolved roles. It also
+checks the selected policy at real phase entry and partial recording, and checks
+that normal limits return after interruption, completion and replay.
 
-The passing execution covers:
+Both cases require the following flow:
 
 1. The original primary study completes before either plain reference starts.
 2. Independent generation completes and is sealed. An injected interruption
@@ -40,7 +42,7 @@ The fixture uses synthetic model profiles and supplied evaluator artifacts.
 It does not certify the official judges' live decisions or replace the required
 outgoing-request checks for the actual models before live use.
 
-The single grouped test passed in 1,107.930 seconds (18 minutes 28 seconds),
+Historical original-v1 result at its published cut: the grouped test passed in 1,107.930 seconds (18 minutes 28 seconds),
 without a failed run or restart. It observed 28 supplied workers and 25 mocked
 HTTPS operations: 13 for the primary study and 12 for both references together.
 The shared raw grant had eight original owners. All recorded synthetic costs
@@ -52,12 +54,47 @@ cancellation observation stayed unchanged during resume and completed replay.
 verification, adoption and funded-handoff gates. This rehearsal grants no
 spending permission and does not change the actual study's 3/26-task workload.
 
-For developers reproducing this optional check, the first command moves the
-current PowerShell window to this checkout. The second runs this one rehearsal
-once, using temporary test records and dummy credentials. It spends nothing,
-needs no separate window and may take many minutes. Ctrl+C stops the test.
+## Current bounded results: November 2, 2026
+
+The [current delivery](conformance/ordinary-v2-rehearsal-delivery.json) retains
+different outcomes. The new v2 attempt reaches all six reduced primary final
+cells and the planned plain-generation interruption. After resuming the same
+records, its 1,800-second child deadline stops it during checking; the parent's
+observed duration is 1,800.066 seconds. The method does not finish. Full v2
+publication and completed keyless replay remain unverified in this attempt.
+No local repeat or deadline extension is adopted. Hosted execution remains pending.
+
+The separate original-v1 regression passes in 1,154.186 seconds, including both
+plain modes, publication and keyless completed replay. Its 25 simulated API
+operations settle with zero held synthetic cost and 28 supplied workers. These
+are test ledger values, not provider charges. All 353 Python source pins match
+before and after both attempts. Their different workloads and timings establish
+no speed ratio. The tests use two-answer synthetic tasks and supplied evaluator
+artifacts; these are not official benchmark scores or scientific gains.
+
+A separate policy-suppression probe deliberately removes the outer policy
+context. The first controller observer detects the default limits and produces
+one expected assertion failure. This shows assertion sensitivity, not an
+application defect or a successful test. Six existing policy methods also pass.
+Local quality checks use an isolated copy of the existing 39 pinned tool
+packages; the initial missing-Ruff startup failure remains recorded separately.
+
+For developers reproducing the optional module check, the first command selects
+the checkout containing this slice. The second runs both cases once with fresh
+temporary records and dummy credentials. It needs no API keys or Docker, spends
+no API money, uses the current PowerShell window and may take many minutes.
+Ctrl+C stops it. Direct unittest invocation has no enforced total deadline; the
+recorded local observations used a separate bounded driver.
 
 ```powershell
-cd C:\Users\arvik\code\buddha\runs\reviews\unified-launch-rehearsal
+cd C:\Users\arvik\code\buddha\runs\reviews\ordinary-v2-positive-rehearsal
 python -m unittest discover -s tests -p test_unified_launch_integration.py -v
+```
+
+To run only the new v2 case once from that same checkout, use the optional
+command below. It has the same key, cost, temporary-file and stopping behavior,
+and no enforced total deadline. It does not run the 193-owner history check.
+
+```powershell
+python -m unittest discover -s tests -p test_unified_launch_integration.py -k policy_bound_v2 -v
 ```

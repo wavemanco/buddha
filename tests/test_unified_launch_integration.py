@@ -1,14 +1,16 @@
 """Actual unified controllers with supplied workers and fake HTTPS, never OS containers.
 
-One small v4 fixture has failed counted children and two starter final cells.
-The same original roots survive raw-generation interruption, resume and passive
-complete replay. This is engineering integration evidence, not a live study.
+Small v4 fixtures cover failed children under the original v1 outer operator
+and selected descendants under the policy-bound v2 operator. The same original
+roots survive interruption, resume and passive complete replay. This is
+engineering integration evidence, not a live study.
 """
 
 import copy
 import json
 import traceback
 import unittest
+from contextlib import ExitStack, contextmanager
 from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
@@ -18,8 +20,12 @@ from test_unified_launch import grant_record, reference
 
 from buddha import (
     baseline,
+    comparison_observation,
+    doctor,
+    improver_assessment,
     improver_handoff,
     improver_launch,
+    improver_study,
     plain_comparison,
     unified_funding,
     unified_launch,
@@ -54,6 +60,12 @@ def diagnostic(error):
 
 class UnifiedLaunchIntegrationTests(unittest.TestCase):
     def test_original_controllers_raw_frontier_resume_and_keyless_complete_replay(self):
+        self._rehearse(version_two=False)
+
+    def test_policy_bound_v2_selected_descendants_and_original_controller_replay(self):
+        self._rehearse(version_two=True)
+
+    def _rehearse(self, *, version_two):
         import test_baseline as raw_fixtures
         import test_improver_assessment as assessment_fixtures
         import test_improver_launch as primary_fixtures
@@ -66,7 +78,8 @@ class UnifiedLaunchIntegrationTests(unittest.TestCase):
         fixture.fixture(proposal_capacity=True)
         harness = finite_fixtures.ImproverStudyCapacityTests("runTest")
         _, development = harness.fixture(finite_fixture=fixture.f)
-        fixture.f.outcomes = {(0, 0, arm, 0): "failed" for arm in range(2)}
+        if not version_two:
+            fixture.f.outcomes = {(0, 0, arm, 0): "failed" for arm in range(2)}
         definition = copy.deepcopy(fixture.definition)
         definition.update(
             format="buddha.improver-assessment-trial.v4",
@@ -119,6 +132,17 @@ class UnifiedLaunchIntegrationTests(unittest.TestCase):
         sources = {
             str(path): sha(path.read_bytes()) for path in (*unified_launch._sources(), plan_path)
         }
+        policy_path = bundle["folder"] / "observation-policy.json"
+        policy = {
+            "format": "buddha.evidence-observation-policy.v2",
+            "max_total_bytes": 32 * 1024**3,
+            "max_tree_entries": 100_000,
+            "max_consumed_paths": 65_536,
+            "max_resident_bytes": 0,
+        }
+        if version_two:
+            policy_path.write_bytes(_json(policy))
+            sources[str(policy_path)] = sha(policy_path.read_bytes())
         bundle["proposal"]["source_sha256"].update(sources)
         bundle["proposal_path"].write_bytes(_json(bundle["proposal"]))
         bundle["approval"]["proposal_sha256"] = sha(bundle["proposal_path"].read_bytes())
@@ -131,7 +155,7 @@ class UnifiedLaunchIntegrationTests(unittest.TestCase):
         }
         workspace = bundle["folder"] / "unified-workspace"
         outer = {
-            "format": "buddha.unified-launch.v1",
+            "format": "buddha.unified-launch.v2" if version_two else "buddha.unified-launch.v1",
             "primary_launch": reference(bundle["path"]),
             "comparison_plan": reference(plan_path),
             "reference_grant": grant_record(shared),
@@ -139,6 +163,15 @@ class UnifiedLaunchIntegrationTests(unittest.TestCase):
             "directory": str(workspace),
             "source_sha256": sources,
         }
+        if version_two:
+            outer["observation_policy"] = reference(policy_path)
+            self.assertEqual(
+                [
+                    record["source_sha256"][str(policy_path)]
+                    for record in (bundle["proposal"], bundle["record"], outer)
+                ],
+                [sha(policy_path.read_bytes())] * 3,
+            )
         path = bundle["folder"] / "unified-launch.json"
         path.write_bytes(_json(outer))
         digest = sha(path.read_bytes())
@@ -152,12 +185,20 @@ class UnifiedLaunchIntegrationTests(unittest.TestCase):
                 str(bundle["approval_path"]),
             )
         }
+        if version_two:
+            static[str(policy_path)] = policy_path.read_bytes()
         grants = dict(bundle["authorities"]) | {"shared_plain_references": shared}
         terms = {name: grant_record(authority) for name, authority in grants.items()}
         self.assertTrue(all(not case.directory.exists() for case in raw.values()))
         self.assertFalse(bundle["directory"].exists())
         self.assertFalse(workspace.exists())
         worker_groups, worker_counts = [], {}
+        policy_seen = set()
+        original_limits = doctor._observation_limits()
+        selected_limits = tuple(
+            policy[name] for name in ("max_total_bytes", "max_tree_entries", "max_consumed_paths")
+        )
+        improvements_at_final = []
         primary_execute = fixture.execute
 
         def routed_execute(spec, *, initial, handle, **options):
@@ -169,6 +210,8 @@ class UnifiedLaunchIntegrationTests(unittest.TestCase):
             else:
                 self.assertTrue(owner.is_relative_to(bundle["directory"]))
                 if owner.is_relative_to(fixture.trial / "final"):
+                    if version_two and not improvements_at_final:
+                        improvements_at_final.append(len(fixture.f.improvements))
                     fixture.schedule = json.loads(
                         (fixture.trial / "freeze/schedule.json").read_bytes()
                     )
@@ -181,6 +224,42 @@ class UnifiedLaunchIntegrationTests(unittest.TestCase):
             worker_groups.append(group)
             worker_counts[group] = worker_counts.get(group, 0) + 1
             return execute(spec, initial=initial, handle=handle, **options)
+
+        @contextmanager
+        def observing_policy():
+            def observed(name, function):
+                def call(*args, **kwargs):
+                    self.assertEqual(doctor._observation_limits(), selected_limits)
+                    policy_seen.add(name)
+                    return function(*args, **kwargs)
+
+                return call
+
+            # Observe captured real controllers; never supply phase results.
+            with ExitStack() as stack:
+                if version_two:
+                    for module, name, label in (
+                        (unified_launch, "_check", "check"),
+                        (improver_launch, "launch", "primary"),
+                        (
+                            improver_assessment,
+                            "prepare_improver_assessment_trial",
+                            "prepare-primary",
+                        ),
+                        (improver_study, "run_improver_study", "development"),
+                        (improver_assessment, "freeze_improver_descendants", "freeze"),
+                        (improver_assessment, "run_improver_assessment", "final"),
+                        (baseline, "prepare_baseline", "prepare-plain"),
+                        (baseline, "run_baseline", "plain"),
+                        (plain_comparison, "compare_plain_references", "publication"),
+                        (comparison_observation, "save_observation", "partial"),
+                    ):
+                        stack.enter_context(
+                            patch.object(
+                                module, name, side_effect=observed(label, getattr(module, name))
+                            )
+                        )
+                yield
 
         native_owner = raw["regenerate"].directory / "owners/1"
         prepare_gateway = baseline.prepare_gateway
@@ -200,20 +279,23 @@ class UnifiedLaunchIntegrationTests(unittest.TestCase):
 
         def launch():
             try:
-                result = unified_launch.launch(
-                    path,
-                    expected_sha256=digest,
-                    live=True,
-                    prompt_keys=True,
-                    confirm_project_keys=True,
-                    transport=RawHTTPTransport(
-                        allow_paid=True, timeout_seconds=bundle["record"]["timeout_seconds"]
-                    ),
-                    notice=lambda text: print("[unified-rehearsal-notice] " + text, flush=True),
-                )
+                with observing_policy():
+                    result = unified_launch.launch(
+                        path,
+                        expected_sha256=digest,
+                        live=True,
+                        prompt_keys=True,
+                        confirm_project_keys=True,
+                        transport=RawHTTPTransport(
+                            allow_paid=True, timeout_seconds=bundle["record"]["timeout_seconds"]
+                        ),
+                        notice=lambda text: print("[unified-rehearsal-notice] " + text, flush=True),
+                    )
             except Exception as error:
                 diagnostic(error)
                 raise
+            finally:
+                self.assertEqual(doctor._observation_limits(), original_limits)
             checkpoint(
                 "original_launch_returned",
                 status=result["status"],
@@ -236,9 +318,47 @@ class UnifiedLaunchIntegrationTests(unittest.TestCase):
         self.assertFalse((raw["regenerate"].directory / "running.lock").exists())
         self.assertFalse(raw["in-context"].directory.exists())
         self.assertEqual(fixture.schedule["counts"]["maximum_cells"], 6)
-        self.assertEqual(fixture.schedule["counts"]["cells"], 2)
-        self.assertEqual(fixture.schedule["counts"]["no_valid_descendant_slots"], 2)
-        self.assertTrue(all(arm["role"] == "starter" for arm in fixture.schedule["arms"]))
+        if version_two:
+            self.assertEqual(fixture.schedule["counts"]["cells"], 6)
+            self.assertEqual(fixture.schedule["counts"]["no_valid_descendant_slots"], 0)
+            self.assertEqual(
+                [arm["role"] for arm in fixture.schedule["arms"]],
+                ["starter", "initial", "evolved"],
+            )
+            final_report = json.loads((fixture.trial / "final/report.json").read_bytes())
+            self.assertEqual(
+                final_report["coverage"], {"expected": 6, "generated": 6, "evaluated": 6}
+            )
+            self.assertTrue(final_report["analysis"]["coverage"]["complete"])
+            expected_cells = [
+                (arm["role"], type(identifier), identifier, arm["agent_sha256"])
+                for arm in fixture.schedule["arms"]
+                for identifier in definition["final_ids"]
+            ]
+            self.assertCountEqual(
+                [
+                    (cell["role"], type(cell["task_id"]), cell["task_id"], cell["agent_sha256"])
+                    for cell in final_report["cells"]
+                ],
+                expected_cells,
+            )
+            self.assertCountEqual(
+                [
+                    (
+                        role,
+                        type(initial["task"]["id"]),
+                        initial["task"]["id"],
+                        initial["agent_sha256"],
+                    )
+                    for _, worker_role, role, initial in fixture.final_events
+                    if worker_role == "agent"
+                ],
+                expected_cells,
+            )
+        else:
+            self.assertEqual(fixture.schedule["counts"]["cells"], 2)
+            self.assertEqual(fixture.schedule["counts"]["no_valid_descendant_slots"], 2)
+            self.assertTrue(all(arm["role"] == "starter" for arm in fixture.schedule["arms"]))
         observations = list((workspace / "observations").glob("*.json"))
         self.assertEqual(len(observations), 1)
         observation_raw = observations[0].read_bytes()
@@ -333,6 +453,23 @@ class UnifiedLaunchIntegrationTests(unittest.TestCase):
         )
         self.assertTrue(all(Path(source).read_bytes() == data for source, data in static.items()))
         self.assertNotIn("publication_sha256", complete)
+        if version_two:
+            self.assertEqual(improvements_at_final, [len(fixture.f.improvements)])
+            self.assertEqual(
+                policy_seen,
+                {
+                    "check",
+                    "primary",
+                    "prepare-primary",
+                    "development",
+                    "freeze",
+                    "final",
+                    "prepare-plain",
+                    "plain",
+                    "publication",
+                    "partial",
+                },
+            )
         checkpoint(
             "original_comparison_complete",
             totals=totals,
@@ -358,7 +495,11 @@ class UnifiedLaunchIntegrationTests(unittest.TestCase):
             ),
             patch("buddha.baseline.run_baseline", side_effect=AssertionError("reference rerun")),
         ):
-            replay = unified_launch.launch(path, expected_sha256=digest, notice=lambda text: None)
+            with observing_policy():
+                replay = unified_launch.launch(
+                    path, expected_sha256=digest, notice=lambda text: None
+                )
+        self.assertEqual(doctor._observation_limits(), original_limits)
         self.assertEqual(replay, complete)
         self.assertEqual([files(root) for root in roots], before)
         self.assertEqual((worker_counts, sum(case.physical_sends for case in raw.values())), counts)
