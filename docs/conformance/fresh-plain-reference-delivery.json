@@ -1,0 +1,167 @@
+{
+  "format": "buddha.fresh-plain-reference-delivery.v1",
+  "status": "complete_unfunded_plain_descriptors_only",
+  "date": "2026-11-02",
+  "spec": [
+    "PLAN IMP-01/EVAL-02",
+    "DESIGN sections3,5,7,9,10"
+  ],
+  "base_head": "e76db4ac896f8ccdbd2e7b3f2ad60b8bf99e79b9",
+  "driver": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\fresh-plain-reference-preparation\\docs\\conformance\\prepare-fresh-plain-references.py",
+    "sha256": "8a60b6b35567714ae26f9dfd2992700968844e4b68f50e14a8378e65d4a22708"
+  },
+  "tests": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\fresh-plain-reference-preparation\\tests\\test_fresh_plain_reference_preparation.py",
+    "sha256": "b8f5f8a372ed76e231e929406433b897792b6415fc63549b4b38ff7ab36d9bc3"
+  },
+  "input_manifest": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-plain-input-graph-20261102-v1\\inputs-v2.json",
+    "sha256": "7b3dd14567a7b23cde68ce2667a5a31616be519b98558245f83236badcc5c6fc"
+  },
+  "input_graph": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-plain-input-graph-20261102-v1\\candidate-inputs-v1.json",
+    "sha256": "7ab5dd3b65b496e60a45bf223b075806b734226a9da50b6686bb546537be09b5"
+  },
+  "input_classification": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-plain-input-graph-20261102-v1\\independent-classification-v1.json",
+    "sha256": "0f8d38b8f690c8236ce12276a7f6ad4b3141b0588a76f2de19b3cea0d7b72d59"
+  },
+  "source_manifest_review": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-plain-input-graph-20261102-v1\\independent-source-manifest-review-v1.json",
+    "sha256": "5463fab832fa989ded0fcb3db79fc34073477f981c0d7fc27d8e509dffacabf6"
+  },
+  "admitted_inputs": {
+    "old_immutable_library_public_python_files": 355,
+    "fresh_primary_metadata_roles": 6,
+    "shared_non_agent_component_files": 19,
+    "primary_result_anchor": 1,
+    "total_named_primary_files": 26,
+    "selected_P_C_program_bodies_custody_evidence_or_old_history_read": false
+  },
+  "construction": {
+    "parent": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-plain-preparation-20261102-v1\\parent-result-v1.json",
+      "sha256": "ae947e98f12caf80f18cef0e284cb0a5a6af43a61a1e893ac4f0c118d8d391be"
+    },
+    "result": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-fresh-plain-20261102-v1\\preparation-result.json",
+      "sha256": "7c7adddfb5f92e21e73aa1475a3ebbfec71e99eb4f75dabb6b964e2991100be2"
+    },
+    "intent": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-fresh-plain-20261102-v1\\intent.json",
+      "sha256": "d72c7e82895e1dd6f1d56c23e0da2789dc7d2e6265164051f3ba2cd88ea9902f"
+    },
+    "deadline_seconds": 300,
+    "seconds": 1.7390954999718815,
+    "exit_code": 0,
+    "indexed_files": 12,
+    "plus_result": true,
+    "shared_components_copied": 0,
+    "source_and_inputs_preserved": true,
+    "scope": "Actual existing data-only validators; no answer generation, native model judging, owner, grant, runtime, key prompt or provider call."
+  },
+  "references": {
+    "modes": [
+      "regenerate",
+      "in-context"
+    ],
+    "tasks_per_mode": 26,
+    "answers_per_task": 10,
+    "answer_positions_per_mode": 260,
+    "fixed_seed_sha256": "2b87bfe0d3c97ee45db2d45260985ffe0234eca93967f4689fb7c59f82603921",
+    "worker_files": 5,
+    "generation_owner_vs_executor": "One future owner per mode; AgentSession._run invokes a separate container for each task. No execution occurs during this preparation.",
+    "matching": "Same primary provider/model/declared output cap/profile, tasks, release, native instrument and stages; empty instructions. Evolved Buddha sampling behavior and actual outgoing settings remain separately checked.",
+    "nominal_envelopes": {
+      "budget_microusd_per_stage": 650000000,
+      "generation_max_calls": 312,
+      "native_max_calls": 6656,
+      "aggregation": "Both original per-task budgets and call ceilings multiplied by26. This corrects historical preparation calls-only scaling.",
+      "funding": "Unallocated envelopes only; not a bill, forecast, allocation or approved global cap. No old grant is transferred."
+    }
+  },
+  "verification": {
+    "supplied": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-plain-reference-preparation-20261102-v1\\supplied-result-agent-v1.json",
+      "sha256": "77e2a932bf836bf46fd67c2f77ddff745be8aeb7691dc501cf9f19af47f2c5af"
+    },
+    "supplied_scope": "5 PASS,0failures/errors/skips,0.015seconds. One test imports real public executor metadata helpers; no container/process/network/SQL/frozen-data route is allowed. It is not appmodules=[] evidence.",
+    "quality": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-plain-preparation-20261102-v1\\quality-result-v1.json",
+      "sha256": "8c49a020d05026bc15980517326159eac64477d7330013239d2cc6a28f0f65c3"
+    },
+    "quality_scope": "8 scoped commands pass,357in-memorycompiles and source pins unchanged. Dependency audits cover declared harness/development requirements, not archived native-reference dependencies. Full-suite/hosted success remains separate.",
+    "quality_seconds": 31.466583600034937,
+    "census": {
+      "format": "buddha.ci-test-shards.v1",
+      "total": 2235,
+      "count": 5,
+      "index": 0,
+      "selected": 1,
+      "counts": [
+        1,
+        586,
+        516,
+        568,
+        564
+      ],
+      "isolated_test": "test_improver_study.FiniteImproverStudyTests.test_finite_fixed_operators_common_conditions_negative_slots_and_original_recovery",
+      "census_sha256": "ed7bce5d963ca9ef6b262763d0941adb32ae70e7495d534f8eae7699bca30c24"
+    },
+    "completion_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-plain-preparation-20261102-v1\\independent-completion-review-v1.json",
+      "sha256": "4aa329f221f8744ba138321f433fc97f01f2ebf04248984cf6d199878d4d4fc2"
+    }
+  },
+  "withdrawn_before_execution": {
+    "manifest": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-plain-input-graph-20261102-v1\\inputs-v1.json",
+      "sha256": "b9af59e2226f9091f3086b09391a3e3928fa83847d385d9bd53f1a8f3c08c61a"
+    },
+    "reason": "Source review found Windows-native result leaf keys were queried with literal POSIX separators. A PureWindowsPath lookup and supplied alias/missing regression fix it without rewriting primary records. Withdrawn candidate was not executed against data."
+  },
+  "separation_source_trace": {
+    "note": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\custody-review-public-trace-20261102-v1\\public-interface-note-v1.json",
+      "sha256": "142144b5a2e9254f3908d7c9c277063eae19dbaf3eb62d43a1a9c6499501565e"
+    },
+    "scope": "Public static source/worker/mount trace only; no private program/config/seal semantics or base-model history attestation. Full TaskSet stays host-owned, worker payloads use current/selected tasks and development notes.",
+    "custody": "Existing named-process declaration remains unchanged and structurally checked by primary preparation. Renaming process_id is not a new exposure attestation."
+  },
+  "remaining": [
+    "Prospective separation/custody and review configuration/adoption.",
+    "Comparable-size history gate and pending construction-time choice.",
+    "Full-platform composition and this slice hosted CI.",
+    "Actual outgoing requests, model/account/price/image/runtime/native-panel capacity checks.",
+    "Separate shared funding and checked handoff."
+  ],
+  "no_new_production_benchmark_or_dependency_changes": true,
+  "scientific_gain_claim": false,
+  "live_run_cleared": false,
+  "preceding_ci_at_2255_utc": {
+    "pr216": {
+      "run_id": 41523387954,
+      "head": "14b79a964d3b18da537888712db1ca7b868ca4bd",
+      "success": 5,
+      "in_progress": 5,
+      "failed": 0,
+      "snapshot": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci216-watch-20261102-v1\\snapshot-225500-v1.json",
+        "sha256": "b8191de3087ac77450205de2e15de499fa2d058d2e59185dc6fa305127cdd720"
+      }
+    },
+    "pr217": {
+      "run_id": 41534530902,
+      "head": "e76db4ac896f8ccdbd2e7b3f2ad60b8bf99e79b9",
+      "success": 4,
+      "in_progress": 6,
+      "failed": 0,
+      "snapshot": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-primary-preparation-20261102-v1\\ci-snapshot-225500-v1.json",
+        "sha256": "3dbaa27038ab573a819b102456326cf047bf82bf0e6c4f1acd8a2224b54cdbda"
+      }
+    },
+    "scope": "Metadata snapshots only; no full-platform proof for216/217 or hosted verification of this new plain recipe. Active logs unavailable does not prove idleness."
+  }
+}
