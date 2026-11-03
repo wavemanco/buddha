@@ -343,3 +343,93 @@ evolution. That is a bounded finding about these interfaces, not a claim that
 other platforms cannot be extended to provide it. The practical opportunity is
 to replace generic orchestration selectively while keeping the experiment's
 specialized contracts small and authoritative.
+
+## November 2 local / November 3 UTC 2026: Inspect observability reconsideration
+
+The user asked us to seriously consider Inspect AI if observability is the
+responsibility being solved. The earlier parked decision remains the historical
+recovery decision. Reopen this separate reuse question: can Inspect replace
+`buddha.progress.Progress`'s custom display/poll loop and the launcher's duplicate
+`launch_common._heartbeat` status polling? **Research only; no adoption yet.**
+
+Inspect supplies structured evaluation/sample logs, a live viewer, errors,
+metadata and model usage. Its runtime tracer records action entry/exit and can
+identify unfinished, cancelled, errored or timed-out actions. These are concrete
+replacements to assess before writing another progress display or polling layer.
+[Viewer](https://inspect.aisi.org.uk/log-viewer.html),
+[log API](https://inspect.aisi.org.uk/eval-logs.html),
+[tracing](https://inspect.aisi.org.uk/tracing.html).
+
+A custom `Task`/`Solver` can call an existing scaffold, and a custom scorer can
+expose existing results. A later custom `ModelAPI` is available if required;
+using it would require verifying literal request conversion and retry behavior.
+The first slice should keep Gateway, its ledger/uncertain holds, executor and
+frozen official NoveltyBench 1.1 evaluator authoritative and unchanged.
+[Solvers](https://inspect.aisi.org.uk/solvers.html),
+[scorers](https://inspect.aisi.org.uk/custom-scorers.html),
+[model adapters](https://inspect.aisi.org.uk/extensions-model-api.html).
+
+Observability and full-history reconstruction are separate responsibilities.
+Wrapping the study in a solver still calls its existing `_restore` and integrity
+checks; no measured evidence says a viewer makes those checks cheaper. Inspect
+checkpoints could support a later state-management redesign, but that is not
+adopted here. The current v13 construction/reader, source and limits remain fixed;
+this reconsideration adds no runtime gate or automatic migration.
+
+Inspect Evals already implements NoveltyBench, but its stock task is incompatible
+with our frozen comparison without adaptation: defaults include ten independent
+generations, shuffled input and a small Skywork reward model; partitioning uses
+DeBERTa. Reuse our exact native scorer and grouping/utility/request contracts,
+not the stock task's scoring or generation defaults. Its implementation also
+uses a separate dependency environment.
+[Task source](https://github.com/UKGovernmentBEIS/inspect_evals/blob/main/src/inspect_evals/novelty_bench/novelty_bench.py),
+[scoring source](https://github.com/UKGovernmentBEIS/inspect_evals/blob/main/src/inspect_evals/novelty_bench/score.py),
+[partition source](https://github.com/UKGovernmentBEIS/inspect_evals/blob/main/src/inspect_evals/novelty_bench/partition.py).
+
+Completed samples can be reused on retry, but stable IDs and explicit partials
+are required. Sample retries default off; eval-set adds retry machinery, while
+model-request retries are documented as unlimited by default. Disable automatic
+retries in the first slice and preserve Buddha's paid-effect/retry decisions.
+Inspect cost limits use usage and model prices; they do not establish our
+pre-dispatch reservations, shared grants or uncertain-charge hold contract.
+[Recovery/retry](https://inspect.aisi.org.uk/handling-errors.html),
+[CLI defaults](https://github.com/UKGovernmentBEIS/inspect_ai/blob/main/src/inspect_ai/_cli/eval.py),
+[cost limits](https://inspect.aisi.org.uk/setting-limits.html#cost-limit).
+
+Checkpointing needs cooperative `checkpointer`/`track`/`tick` integration. It
+captures declared agent state, events/store and selected sandbox files, not
+arbitrary memory, running tools or external effects. Long calls delay checkpoints;
+checkpoint failures continue by default unless strict mode is selected. No
+checkpoint/resume policy or retention default is adopted by this proposal.
+[Checkpoint contract](https://inspect.aisi.org.uk/checkpointing.html).
+
+Logs contain prompts/messages/outputs. Disabling general raw model API logging
+still retains error requests/responses, so flags alone do not establish privacy.
+Use only synthetic inputs initially; require explicit safe-event/redaction and
+source/receipt hash bindings before enabling real records. Inspect's security
+policy treats task/solver Python as executable code and Docker as limited
+isolation; retain our executor, sealed-input boundaries and immutable evidence.
+[Logging controls](https://inspect.aisi.org.uk/eval-logs.html#model-api-logging),
+[recording filters](https://inspect.aisi.org.uk/extensions-model-api.html#filtering-model-call-data),
+[security policy](https://github.com/UKGovernmentBEIS/inspect_ai/blob/main/SECURITY.md).
+
+**Recommended next slice, separately source-bound and time-boxed:** one offline synthetic
+compatibility cohort under a declared parent timeout, with no automatic retry or
+extension. One existing stage should expose success and typed failure through a
+no-model Inspect task, safe stage events, stable sample IDs and source/receipt
+hashes. Demonstrate live progress, an unfinished-action diagnosis, explicit
+partial/error display and unchanged underlying results/accounting/requests.
+
+Adopt only if that bounded result supports deleting the named custom display and
+duplicate heartbeat/polling responsibility on the integrated path; do not add a
+second coordinator or keep two polling systems. Preserve passive evidence and
+financial guards. If it cannot remove that responsibility, park it with the
+specific failed boundary recorded. Checkpointing and wider scheduling remain
+separate decisions. No live-readiness, performance or scientific claim follows.
+
+Before enabling the trial, pin an Inspect release and resolve/audit its runtime
+and test dependencies in isolation, including license compatibility. Core Inspect
+is MIT; that does not clear transitive packages, benchmark weights or datasets.
+[Core license](https://github.com/UKGovernmentBEIS/inspect_ai/blob/main/LICENSE).
+Living official sources above were checked November 3 UTC. This reconsideration
+installs nothing and executes no evaluation, container, model or original record.
