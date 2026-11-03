@@ -1,14 +1,17 @@
 # Proposed history check after the C1 repair
 
-This prepares the next IMP-01 measurement in [PLAN.md](PLAN.md). It has not run
-and is not approved for execution. The earlier one-off three-hour construction
-attempt was used by v13; its partial result and files remain unchanged.
+This prepares the next IMP-01 measurement in [PLAN.md](PLAN.md). The user approved
+one new bounded attempt on November 3, 2026, after checks. Execution has not
+started: hosted CI and final pin/path checks remain. The earlier one-off
+construction attempt was used by v13; its partial result and files remain unchanged.
+The [approval record](conformance/c1-history-approval.json) records the later
+decision separately from the original unapproved preparation.
 
 The purpose is to check whether Buddha can reconstruct a realistic amount of
 saved work within 15 minutes before starting another paid comparison. It tests
 the history reader, not creativity, useful diversity or improver effectiveness.
 
-## The proposed single attempt
+## The approved single attempt
 
 | Step | Work | Limit and outcome |
 | --- | --- | --- |
@@ -41,12 +44,12 @@ scripts, manifest, metadata corrections and review limits.
 
 ## Before execution
 
-Obtain a new decision on this single long attempt, complete all configured
-exact-source hosted checks, and recheck every source/script/manifest pin. Recheck
+The new single-attempt decision is recorded. Complete all configured exact-source
+hosted checks and recheck every source/script/manifest pin. Recheck
 all eight runtime destinations immediately before launch: each must be absent,
 including aliases. The parent checks the workspace first; the other outputs use
 exclusive creation. Do not rely on their absence at preparation time.
 
 No operator command is issued by this proposal. No additional PowerShell window
-or keys are needed from the user. If selected and cleared, the agent runs it once
+or keys are needed from the user. Once checks clear, the agent runs it once
 under the existing phase timeouts and retains any incomplete observation.
