@@ -417,5 +417,199 @@ class AnswerArtifactTests(unittest.TestCase):
             Answers.from_bytes(encoded(record))
 
 
+class TaskPopulationReuseTests(unittest.TestCase):
+    def setUp(self):
+        self.fixture = AnswerArtifactTests("runTest")
+        self.rows = [
+            {
+                "id": 1,
+                "prompt": "Synthetic numeric prompt \u00e9",
+                "prompt_paraphrases": ["alternate numeric prompt"],
+                "nested": {"values": [None, False, {"snow": "\u2603", "zero": -0.0, "tiny": 1e-7}]},
+            },
+            {"id": "1", "prompt": "Synthetic string prompt", "nested": {"values": [1, True]}},
+            {"id": "outside", "prompt": "Synthetic unselected prompt", "category": "retained"},
+        ]
+        self.dataset = jsonl(self.rows)
+        self.release = self.fixture.make_release(self.dataset)
+        self.tasks = TaskSet.from_dataset(self.release, self.dataset)
+
+    @staticmethod
+    def canonical(value):
+        return json.dumps(
+            value, ensure_ascii=True, sort_keys=True, separators=(",", ":"), allow_nan=False
+        ).encode()
+
+    def original_row(self, task_id):
+        return next(
+            row for row in self.rows if (type(row["id"]), row["id"]) == (type(task_id), task_id)
+        )
+
+    def task_record(self, ids, *, dataset=None):
+        import base64
+
+        dataset = self.dataset if dataset is None else dataset
+        release = self.release if dataset == self.dataset else self.fixture.make_release(dataset)
+        return {
+            "format": "buddha.tasks.v1",
+            "release": release.to_record(),
+            "release_sha256": release.fingerprint(),
+            "dataset_sha256": hashlib.sha256(dataset).hexdigest(),
+            "dataset_base64": base64.b64encode(dataset).decode("ascii"),
+            "selection": list(ids),
+            "tasks": [
+                {"id": task_id, "prompt": self.original_row(task_id)["prompt"], "count": 3}
+                for task_id in ids
+            ],
+        }
+
+    def answer_record(self, ids):
+        tasks = self.task_record(ids)
+        return {
+            "format": "buddha.answers.v1",
+            "tasks": tasks,
+            "tasks_sha256": hashlib.sha256(self.canonical(tasks)).hexdigest(),
+            "agent_sha256": "d" * 64,
+            "metadata": {"model": "synthetic"},
+            "outputs": [{"task_id": task_id, "answers": ["", "same", "same"]} for task_id in ids],
+        }
+
+    def expected_native(self, ids):
+        return b"".join(
+            self.canonical(
+                self.original_row(task_id)
+                | {"model": "synthetic", "generations": ["", "same", "same"]}
+            )
+            + b"\n"
+            for task_id in ids
+        )
+
+    def test_exact_taskset_selection_uses_no_population_validation(self):
+        from buddha import answers as module
+
+        with patch.object(module, "_population", wraps=module._population) as population:
+            selected = self.tasks.select(["1", 1])
+        self.assertEqual(selected.to_record(), self.task_record(["1", 1]))
+        self.assertEqual(
+            [(type(task.id), task.id, task.count) for task in selected.tasks],
+            [(str, "1", 3), (int, 1, 3)],
+        )
+        self.assertEqual(population.call_count, 0)
+
+    def test_saved_answers_validate_population_once_and_preserve_native_rows(self):
+        from buddha import answers as module
+
+        record = self.answer_record(["1", 1])
+        noncanonical = json.dumps(record, ensure_ascii=False, indent=2).encode()
+        expected_bytes = self.canonical(record)
+        self.assertNotEqual(noncanonical, expected_bytes)
+        with patch.object(module, "_population", wraps=module._population) as population:
+            answers = Answers.from_bytes(noncanonical)
+        self.assertEqual(answers.to_bytes(), expected_bytes)
+        self.assertEqual(answers.fingerprint(), hashlib.sha256(expected_bytes).hexdigest())
+        self.assertEqual(answers.native_bytes(), self.expected_native(["1", 1]))
+        self.assertEqual(population.call_count, 1)
+
+    def test_new_tasksets_validate_every_unselected_source_row(self):
+        from buddha import answers as module
+
+        valid = json.dumps(self.task_record([1]), indent=2).encode()
+        with patch.object(module, "_population", wraps=module._population) as population:
+            for _ in range(2):
+                self.assertEqual(TaskSet.from_bytes(valid).to_record(), self.task_record([1]))
+        self.assertEqual(population.call_count, 2)
+        for mutation in ({"nested": {"bad": "\ud800"}}, {"id": 1}, {"prompt": []}):
+            rows = copy.deepcopy(self.rows)
+            rows[-1].update(mutation)
+            record = self.task_record([1], dataset=jsonl(rows))
+            with self.subTest(mutation=mutation):
+                with patch.object(module, "_population", wraps=module._population) as population:
+                    with self.assertRaises(ReleaseError):
+                        TaskSet.from_bytes(self.canonical(record))
+                self.assertEqual(population.call_count, 1)
+
+    def test_selection_chains_and_defensive_views_preserve_full_typed_source(self):
+        selected = self.tasks.select([1])
+        exposed = selected.to_record()
+        exposed["tasks"][0]["prompt"] = "changed"
+        exposed["release"]["task"]["count"] = 1
+        exposed["selection"].clear()
+        derived = selected.select(["outside", "1", 1])
+        self.assertEqual(derived.to_record(), self.task_record(["outside", "1", 1]))
+        self.assertEqual(derived.select(["1"]).to_record(), self.task_record(["1"]))
+        self.assertEqual(self.tasks.to_record(), self.task_record([1, "1", "outside"]))
+        answers = Answers.from_bytes(self.canonical(self.answer_record(["outside", "1", 1])))
+        view = answers.to_record()
+        view["outputs"][0]["answers"].clear()
+        view["metadata"]["model"] = "changed"
+        view["tasks"]["tasks"][0]["prompt"] = "changed"
+        self.assertEqual(answers.native_bytes(), self.expected_native(["outside", "1", 1]))
+        self.assertEqual(derived.select([1]).to_record(), self.task_record([1]))
+
+    def test_copy_and_pickle_roundtrips_keep_derived_artifacts(self):
+        import pickle
+
+        tasks = self.tasks.select(["1"])
+        answers = Answers.from_bytes(self.canonical(self.answer_record(["1"])))
+        for name, operation in (
+            ("shallow", copy.copy),
+            ("deep", copy.deepcopy),
+            ("pickle", lambda value: pickle.loads(pickle.dumps(value))),
+        ):
+            with self.subTest(operation=name):
+                restored_tasks, restored_answers = operation(tasks), operation(answers)
+                self.assertEqual(restored_tasks, tasks)
+                self.assertEqual(
+                    restored_tasks.select(["outside"]).to_record(), self.task_record(["outside"])
+                )
+                self.assertEqual(
+                    restored_answers.to_bytes(), self.canonical(self.answer_record(["1"]))
+                )
+                self.assertEqual(restored_answers.native_bytes(), self.expected_native(["1"]))
+
+    def test_subclass_constructor_and_selection_guards_are_not_bypassed(self):
+        from buddha import answers as module
+
+        class GuardedTasks(TaskSet):
+            def __post_init__(self):
+                super().__post_init__()
+                if self.to_record()["selection"] == ["outside"]:
+                    raise ReleaseError("synthetic subclass selection guard")
+
+        with patch.object(module, "_population", wraps=module._population) as population:
+            tasks = GuardedTasks.from_bytes(self.canonical(self.task_record([1])))
+        self.assertGreaterEqual(population.call_count, 1)
+        with patch.object(module, "_population", wraps=module._population) as population:
+            selected = tasks.select(["1"])
+        self.assertIs(type(selected), GuardedTasks)
+        self.assertEqual(selected.to_record(), self.task_record(["1"]))
+        self.assertGreaterEqual(population.call_count, 1)
+        with self.assertRaises(ReleaseError):
+            tasks.select(["outside"])
+
+    def test_native_subclass_fallback_revalidates_population(self):
+        from buddha import answers as module
+
+        class DerivedTasks(TaskSet):
+            pass
+
+        tasks = DerivedTasks.from_bytes(self.canonical(self.task_record(["1", 1])))
+        with patch.object(module, "_population", wraps=module._population) as population:
+            native = module._native(self.answer_record(["1", 1]), tasks)
+        self.assertEqual(native, self.expected_native(["1", 1]))
+        self.assertGreaterEqual(population.call_count, 1)
+        rows = copy.deepcopy(self.rows)
+        rows[-1]["nested"] = {"bad": "\ud800"}
+        forged = self.task_record([1], dataset=jsonl(rows))
+
+        class InvalidViewTasks(TaskSet):
+            def to_record(self):
+                return copy.deepcopy(forged)
+
+        invalid_view = InvalidViewTasks.from_bytes(self.canonical(self.task_record([1])))
+        with self.assertRaises(ReleaseError):
+            module._native(self.answer_record([1]), invalid_view)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -71,7 +71,7 @@ class SourceScreenLocalReuseTests(unittest.TestCase):
         self.assertIsInstance(source_screen.SourceScreen.tasks, property)
         with patch.object(answers, "_population", wraps=answers._population) as population:
             views = [screen.tasks for _ in range(5)]
-        self.assertEqual(population.call_count, 3)
+        self.assertEqual(population.call_count, 1)  # Validate the new source; derive its selection.
         self.assertTrue(all(view.to_bytes() == expected.to_bytes() for view in views))
         selected = views[0]
         self.assertEqual(selected.fingerprint(), expected.fingerprint())
@@ -88,7 +88,7 @@ class SourceScreenLocalReuseTests(unittest.TestCase):
         fresh = source_screen.SourceScreen.from_bytes(screen.to_bytes())
         with patch.object(answers, "_population", wraps=answers._population) as population:
             self.assertEqual(fresh.tasks.to_bytes(), expected.to_bytes())
-        self.assertEqual(population.call_count, 3)
+        self.assertEqual(population.call_count, 1)
         invalid = screen.to_record()
         invalid["source"]["tasks"][0]["prompt"] = "not the sealed task"
         with self.assertRaises(source_screen.SourceScreenError):
@@ -156,7 +156,7 @@ class SourceScreenLocalReuseTests(unittest.TestCase):
         artifact.to_record()["outputs"][0]["answers"].clear()
         self.assertEqual((screen.to_bytes(), selected.to_bytes(), artifact.to_bytes()), before)
         self.assertEqual(artifact.native_bytes(), expected_native)
-        self.assertEqual(counts, {"controls": 7, "materialize": 4, "preflight": 4})
+        self.assertEqual(counts, {"controls": 1, "materialize": 0, "preflight": 0})
 
     def test_passive_screen_reuses_one_validated_declaration_and_preserves_saved_bytes(self):
         fixture = self.fixture()
