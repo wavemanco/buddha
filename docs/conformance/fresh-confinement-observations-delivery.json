@@ -1,0 +1,158 @@
+{
+  "format": "buddha.fresh-confinement-observations-delivery.v1",
+  "date": "2026-11-02",
+  "status": "pass_existing_probe_two_images_scoped_only",
+  "base_head": "2cba028061c1c419dd4aff9ca4133e072a64391f",
+  "spec": "DESIGN \u00a7\u00a79/10; PLAN IMP-01 pre-live confinement subcheck",
+  "observation": {
+    "parent_seconds": 40.38790030009113,
+    "child_seconds": 40.06494319997728,
+    "parent_exit_code": 0,
+    "child_joined": true,
+    "credential_environment_forwarded": false,
+    "actual_provider_calls": 0,
+    "case_containers": 22,
+    "canary_containers": 2,
+    "unique_container_ids": 24,
+    "outer_hard_deadline_imposed": false
+  },
+  "result": {
+    "path": "C:/Users/arvik/code/buddha/runs/checks/fresh-confinement-20261102-v1/confinement-result-v1.json",
+    "sha256": "9ab7fbc5e9a37c92fafada058849eed12c63ce8d85e773eb6273b601cc099c21"
+  },
+  "parent": {
+    "path": "C:/Users/arvik/code/buddha/runs/checks/fresh-confinement-20261102-v1/parent-result-v1.json",
+    "sha256": "bc94834d309a9fae2f2c215b29fc0581b2b792aacdfff9627b54bd315331bf89"
+  },
+  "probe": {
+    "path": "C:/Users/arvik/code/buddha/runs/reviews/fresh-confinement-check/docs/conformance/nb02c3-executor-probe.py",
+    "sha256": "d9fba9037c228b5b8f72c718f2245c65ef91cf955e6615c32a78bb1787d2d797",
+    "preserved": true,
+    "module_overrides": [
+      "ENVIRONMENT",
+      "EVIDENCE"
+    ],
+    "logic_or_limits_changed": false
+  },
+  "diagnostic": {
+    "path": "C:/Users/arvik/code/buddha/runs/checks/fresh-confinement-20261102-v1/probe-images-v1.py",
+    "sha256": "968b6765edafb1f63a8bc271ee062dfcf5c87a124fc8a6f63bddf81c02a53bc9",
+    "matches_parent_pin": true,
+    "preserved": true
+  },
+  "images": [
+    {
+      "role": "source",
+      "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+      "evidence": {
+        "path": "C:/Users/arvik/code/buddha/runs/reviews/fresh-confinement-check/runs/checks/fresh-confinement-20261102-v1/source-evidence-v1.json",
+        "sha256": "17b6ddbfcd4b2e9daab05237e59fffabf624309fcd26da758dbb8726f7934c25"
+      },
+      "evidence_matches_result": true,
+      "case_count": 11,
+      "all_owned_cases_removed": true,
+      "all_owned_case_ids_checked_absent": true,
+      "unrelated_canary_alive_after_every_case": true,
+      "canary_untouched_during_cases": true,
+      "canary_final_cleanup": "removed"
+    },
+    {
+      "role": "native",
+      "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+      "evidence": {
+        "path": "C:/Users/arvik/code/buddha/runs/reviews/fresh-confinement-check/runs/checks/fresh-confinement-20261102-v1/native-evidence-v1.json",
+        "sha256": "39bb824b8d31a1332cde83a82dfd5a1636bec31eb579dfba2cd0d27f3c1ecc83"
+      },
+      "evidence_matches_result": true,
+      "case_count": 11,
+      "all_owned_cases_removed": true,
+      "all_owned_case_ids_checked_absent": true,
+      "unrelated_canary_alive_after_every_case": true,
+      "canary_untouched_during_cases": true,
+      "canary_final_cleanup": "removed"
+    }
+  ],
+  "case_names": [
+    "evaluator_boundary",
+    "agent_boundary",
+    "source_bytecode",
+    "network",
+    "scratch",
+    "cpu_throttle",
+    "descendant_timeout",
+    "stdout_unterminated",
+    "stderr_flood",
+    "memory_pressure",
+    "pid_pressure"
+  ],
+  "expected_stops": {
+    "descendant_timeout": "timeout",
+    "stdout_unterminated": "output",
+    "stderr_flood": "diagnostics"
+  },
+  "ordinary_limits": {
+    "cpus": 0.5,
+    "max_frames": 100,
+    "max_stderr_bytes": 8192,
+    "max_stdout_bytes": 2097152,
+    "memory_mib": 128,
+    "pids": 16,
+    "scratch_mib": 8,
+    "wall_seconds": 8
+  },
+  "descendant_limits": {
+    "cpus": 0.5,
+    "max_frames": 100000,
+    "max_stderr_bytes": 65536,
+    "max_stdout_bytes": 134217728,
+    "memory_mib": 64,
+    "pids": 8,
+    "scratch_mib": 4,
+    "wall_seconds": 1.5
+  },
+  "canary_wall_seconds": 55,
+  "preservation": {
+    "public_python_pin_count": 360,
+    "public_source_pins_preserved": true,
+    "bound_environments": [
+      {
+        "role": "source",
+        "path": "C:/Users/arvik/code/buddha/runs/reviews/fresh-confinement-check/docs/conformance/src01-runtime-environment.json",
+        "sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+        "matches_record": true
+      },
+      {
+        "role": "native",
+        "path": "C:/Users/arvik/code/buddha/runs/reviews/fresh-confinement-check/docs/conformance/nb02c3b-runtime-environment.json",
+        "sha256": "90e905e2fc381e62adc0553a8e195b7d120886fa597743297e5032dbbfd0eedf",
+        "matches_record": true
+      }
+    ],
+    "helper_preserved": true,
+    "application_dependency_platform_changes": 0,
+    "images_built_or_pulled": 0
+  },
+  "limitations": [
+    "Existing synthetic ordinary-image boundary/resource cases only; no actual agent/evaluator/SDK execution, private program or real task data.",
+    "No keys, provider calls, experiment owners/grants or paid approval.",
+    "Probe8s/128MiB and descendant1.5s/64MiB controls are not the prepared study workload limits or a capacity/throughput result.",
+    "Docker daemon/CLI and host kernel trusted; no security-exploit audit, universal escape guarantee or dependency/license clearance.",
+    "Current CI metadata and full ordered hosted-test evidence remain separate; no refresh or claim added here.",
+    "No outer hard-kill deadline; worker wall time does not bound synchronous host financial finalization."
+  ],
+  "documentation": {
+    "new_tests_or_probes_run_by_documentation_task": 0,
+    "commands_added": 0,
+    "plan_update_owner": "root",
+    "independent_review": "Bound separate independent review passed within the existing restricted-fixture scope."
+  },
+  "next": "Retain remaining comparable-size, prospective scientific-input/adoption, account/price/capacity, separate funding and final handoff gates in the single PLAN.",
+  "independent_review": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-confinement-20261102-v1\\independent-confinement-review-v1.json",
+    "sha256": "c4b68c56bafee2ac1a5cc8bf114283649f81a0964f6dea0df26b59ac18a178f7"
+  },
+  "roadmap_preservation": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-confinement-20261102-v1\\plan-preservation-v232.json",
+    "sha256": "9d3e6c72ef598eaffc6016b31f3d5ccd556a1c48d33b4238093a0a7d722f9d41"
+  }
+}
