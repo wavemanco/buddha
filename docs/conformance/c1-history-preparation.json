@@ -1,0 +1,86 @@
+{
+  "format": "buddha.c1-history-preparation.v1",
+  "date": "2026-11-03",
+  "status": "prepared_not_approved_not_executed",
+  "plan_item": "IMP-01",
+  "purpose": "Measure reconstruction at the unchanged comparable-size history gate after one local C1 interpretation repair. No creativity/improver-effectiveness claim.",
+  "executing_source_head": "9ded9b9f3decb6a1d66a6497efa53b3e1ce5dd62",
+  "public_python_pins": 365,
+  "fixture_hashes_unchanged": 8,
+  "required_cut": {
+    "answer_counts": [
+      10,
+      10,
+      10
+    ],
+    "native_environment_bytes_floor": 4013984,
+    "native_inventory_rows": 24043,
+    "operations": 660,
+    "owners": 193,
+    "screen_bytes_floor": 5315388,
+    "selected_tasks": 3,
+    "source_rows": 1000,
+    "task_source_bytes": 1113890
+  },
+  "limits": {
+    "producer_seconds_proposed": 10800,
+    "conditional_fresh_reader_seconds": 900,
+    "total_hard_deadline": null,
+    "additional_setup_hash_reporting_overhead": true,
+    "automatic_retry_or_resume": false
+  },
+  "observation_policy": {
+    "format": "buddha.evidence-observation-policy.v2",
+    "max_consumed_paths": 65536,
+    "max_resident_bytes": 0,
+    "max_total_bytes": 34359738368,
+    "max_tree_entries": 100000
+  },
+  "execution_performed": false,
+  "provider_calls": 0,
+  "containers": 0,
+  "original_or_retained_history_body_access": false,
+  "prior_single_three_hour_allowance_consumed": true,
+  "release_requires": [
+    "New explicit decision for this single long attempt",
+    "All configured exact-source hosted checks pass",
+    "Final source/script/manifest pins match",
+    "Immediate absence and alias checks for all eight outputs and their parent"
+  ],
+  "review": "Independent bounded source review verifies parent/child syntax-tree equivalence to v13 after namespace/PROJECT/docstring substitutions, actual365source pins, unchanged8fixtures, cut/work dimensions/policy/phase timeouts. No code import or history access. Root reviewed the actual diffs and limits.",
+  "metadata_correction": "Preparation revision2 corrects stale cleanup prose from v13 to v14; initial manifest/binding/diff retained as frozen snapshots. Runtime scripts unchanged.",
+  "output_preflight_limit": "Parent itself checks WORK first; other seven outputs use later exclusive creation. Release must recheck all eight destinations and aliases immediately before launch, including output-parent aliases. Preparation-time absence is not a future guarantee.",
+  "performance_limit": "Each scheduler action still restores/checks the growing history. The C1 local work reduction is not a prediction of completion within either phase limit.",
+  "records": {
+    "scale-replay-binding-v14-v1.json": {
+      "path": "runs/checks/scale-replay-c1-preparation-20261103-v1/scale-replay-binding-v14-v1.json",
+      "sha256": "e5861b4b3fcf41076a9943fabe5598a1af7fbd45f3247458d17cc71343552941"
+    },
+    "scale-replay-source-proposal-v14.json": {
+      "path": "runs/checks/scale-replay-c1-preparation-20261103-v1/scale-replay-source-proposal-v14.json",
+      "sha256": "b017a0347d85ea24e7dcf77c5aa199bddb48f452408b6ff82a54dbb5183a3bc9"
+    },
+    "scale-replay-parent-reviewed-v14.py": {
+      "path": "runs/checks/scale-replay-c1-preparation-20261103-v1/scale-replay-parent-reviewed-v14.py",
+      "sha256": "8f214c8d1ae9e13f8e79bf28467aba30b2b483951794edf3dcb67d56529b74cd"
+    },
+    "scale-replay-child-reviewed-v14.py": {
+      "path": "runs/checks/scale-replay-c1-preparation-20261103-v1/scale-replay-child-reviewed-v14.py",
+      "sha256": "2dce8f3fb841918c7f9573c7a65b5d900e89273786b8dc60cbd20cf264aa438a"
+    },
+    "scale-replay-parent-v14-vs-v13.diff": {
+      "path": "runs/checks/scale-replay-c1-preparation-20261103-v1/scale-replay-parent-v14-vs-v13.diff",
+      "sha256": "2128abe37ef8d930a36180404b70cc9d35f99ec053ec4e922671da2b172bdfaf"
+    },
+    "scale-replay-child-v14-vs-v13.diff": {
+      "path": "runs/checks/scale-replay-c1-preparation-20261103-v1/scale-replay-child-v14-vs-v13.diff",
+      "sha256": "84d9d3ae33321ae31d652bf652ba8e2363d427a6ef5d9752e1ec000745824d9b"
+    },
+    "scale-replay-manifest-v14-vs-v13.diff": {
+      "path": "runs/checks/scale-replay-c1-preparation-20261103-v1/scale-replay-manifest-v14-vs-v13.diff",
+      "sha256": "d741b783d79a4605f8d64e3f4c031bc912212fe0eed79e08e1681c10eda0556a"
+    }
+  },
+  "operator_command_issued": false,
+  "paid_execution_cleared": false
+}
