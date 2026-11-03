@@ -186,5 +186,9 @@
   "roadmap_preservation": {
     "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-combined-20261102-v1\\plan-preservation-v233.json",
     "sha256": "9a3244a6cb2de837d0e7e15f13b2fcd80e9998a6d92cc426d4ecce1d44980cf8"
+  },
+  "orientation_preservation": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-combined-20261102-v1\\plan-preservation-v234.json",
+    "sha256": "1468003e8d3d79b3fd6ba72e7528b1b62166da842a98d9be6b3b43129acdb1f0"
   }
 }
