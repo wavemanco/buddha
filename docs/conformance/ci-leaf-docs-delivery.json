@@ -1,0 +1,154 @@
+{
+  "format": "buddha.ci-leaf-docs-delivery.v1",
+  "date": "2026-11-02",
+  "status": "focused_local_and_root_quality_passed_hosted_pending",
+  "spec": "PLAN IMP-01/ENG-OBS-01 engineering efficiency; DESIGN \u00a7\u00a79/10; existing CI progress contract unchanged",
+  "base_head": "eed4866ff83d91f0e4dc5c4eb67048792c78c83d",
+  "original_branch_base": "fbe68efe04a62cdf701b714fdf911791a034eb5f",
+  "scope": "Skip only the long unittest suite for a verified cumulative PR merge changing five exact inert leaf paths; no broad Markdown/JSON skip.",
+  "current_source_sha256": {
+    "ci_leaf_docs.py": "d9d8b173d60a392552f3fade2619a6f960602356b7e42752a37d10c45628b8ff",
+    "tests/test_ci_leaf_docs.py": "db544140cfd9b7ece333b1361d8c482359c800b01a39ab6491bac5443abcbdfb",
+    ".github/workflows/ci.yml": "15770ce0a74beb9cceb8bb59627623c4eb9a84cb0acb83a643e647699b28d1be",
+    "ci_test_shard.py": "1f0399d5ab9a923fb1b9bb90639ac48c5d0e79bdb19e64e38197974edb34daec"
+  },
+  "allowlist": [
+    "docs/PLAN.md",
+    "docs/FRESH-REQUEST-OBSERVATIONS.md",
+    "docs/FRESH-CONFINEMENT-OBSERVATIONS.md",
+    "docs/conformance/fresh-request-observations-delivery.json",
+    "docs/conformance/fresh-confinement-observations-delivery.json"
+  ],
+  "preserved": {
+    "matrix_jobs": 10,
+    "operating_systems": [
+      "ubuntu-latest",
+      "windows-latest"
+    ],
+    "shards": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "existing_quality_and_audits": true,
+    "new_helper_in_quality_coverage": true,
+    "ci_test_shard_byte_unchanged": true,
+    "full_lane_idle_seconds": 3600,
+    "permissions": "contents: read"
+  },
+  "guard": [
+    "Actual checkout equals GITHUB_SHA; its ordered two parents equal event base/head, available at checkout depth2.",
+    "Nonempty cumulative base-to-merge raw diff admits only unique regular100644 A/M changes at the five exact paths.",
+    "Unknown/mixed paths, nonPR, empty/unverifiable inputs, renames/deletions/nonregular entries retain full tests.",
+    "Qualifying content receives UTF-8, exact-report-format, duplicate-key/nonfinite-value JSON and Git whitespace validation; invalid content fails visibly.",
+    "Only the long suite is conditional; no workflow paths-ignore, dependency, service, cache or application change."
+  ],
+  "evidence": [
+    {
+      "name": "first-cohort-v1.json",
+      "path": "C:/Users/arvik/code/buddha/runs/checks/ci-leaf-docs-20261103-v1/first-cohort-v1.json",
+      "sha256": "886cc49cc671507d304fc346aef2c9002232b63888e0a493b7d1a61c87610ba2"
+    },
+    {
+      "name": "final-cohort-v1.json",
+      "path": "C:/Users/arvik/code/buddha/runs/checks/ci-leaf-docs-20261103-v1/final-cohort-v1.json",
+      "sha256": "bccb84889b693a0787a7f7d7841e6d28759a250885846d5e65697c510db44a6e"
+    },
+    {
+      "name": "independent-review-v1.json",
+      "path": "C:/Users/arvik/code/buddha/runs/checks/ci-leaf-docs-20261103-v1/independent-review-v1.json",
+      "sha256": "a8c6432c5dfad0c4dd0b2a4e6c453cd52d14e01085c3009244533fa8f64f8143"
+    },
+    {
+      "name": "overflow-red-v1.json",
+      "path": "C:/Users/arvik/code/buddha/runs/checks/ci-leaf-docs-20261103-v1/overflow-red-v1.json",
+      "sha256": "c5d7ab5af5e566adb0a7e47917c8591a40a806494313d2cd6e26051bc6b90b4b"
+    },
+    {
+      "name": "independent-review-v2.json",
+      "path": "C:/Users/arvik/code/buddha/runs/checks/ci-leaf-docs-20261103-v1/independent-review-v2.json",
+      "sha256": "981e31eafe73e248ffdfeeb42079582a8f52b938c735151ea285c38c8f4f10ba"
+    },
+    {
+      "name": "overflow-green-tool-result-v1.json",
+      "path": "C:/Users/arvik/code/buddha/runs/checks/ci-leaf-docs-20261103-v1/overflow-green-tool-result-v1.json",
+      "sha256": "273b7bd0dac7b4f4aa5d973830a882e6279f79cfca2936ea3d878eddb99b39e6"
+    },
+    {
+      "name": "source-quality-v2.json",
+      "path": "C:/Users/arvik/code/buddha/runs/checks/ci-leaf-docs-20261103-v1/source-quality-v2.json",
+      "sha256": "ae1a0930a3443f7e67d76d26d01991d264fe30a8e4d2d49aa0e4be9243a4a66d"
+    },
+    {
+      "name": "quality-tools-v2.json",
+      "path": "C:/Users/arvik/code/buddha/runs/checks/ci-leaf-docs-20261103-v1/quality-tools-v2.json",
+      "sha256": "93e3c3dec8f84a25fc65bd043e164e1ae25dfa1db19fc1e4a55252fbbc335111"
+    }
+  ],
+  "earlier_cuts": {
+    "first_cohort": "Eight tests passed and one positive fixture errored on whitespace; type and security checks also failed. All failures retained, not a passing cut.",
+    "reviewed_initial_green": {
+      "helper_sha256": "5ec0fabd95b2543f31219895b33949afcc59ca036309930ce2fdda2a23c1de8e",
+      "tests": 9,
+      "unittest_seconds": 2.939,
+      "quality": "Focused lint/format/types/security and compilation/diff pass at that exact earlier cut."
+    }
+  },
+  "numeric_repair": {
+    "finding": "Exponent numeric text1e10000 and -1e10000 decoded to infinity despite the earlier parse_constant guard.",
+    "red": {
+      "tests": 9,
+      "failures": 2,
+      "errors": 0,
+      "unittest_seconds": 3.493
+    },
+    "fix": "math.isfinite parse_float guard; finite125.5 remains accepted. No broader schema added.",
+    "green": {
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "unittest_seconds": 3.168,
+      "tool_seconds": 3.4890729,
+      "exit_code": 0
+    },
+    "independent_followup": "PASS for exact current source and retained evidence; reviewer did not rerun tests."
+  },
+  "current_quality": {
+    "status": "pass_root_executed_retained_records",
+    "ruff_lint": true,
+    "formatted_files": 307,
+    "mypy_source_files": 90,
+    "bandit": true,
+    "in_memory_compiles": 364,
+    "original_public_python_pins_preserved": 362,
+    "requirements_unchanged": true,
+    "dependency_audits": "Prior exact39-pin audits reused; no dependency changes.",
+    "documentation_task_runs": 0
+  },
+  "hosted": {
+    "status": "No hosted-current leaf-lane/platform/fork proof yet",
+    "full_suite_coverage_claim": false,
+    "local_depth_two_fixture_only": true
+  },
+  "documentation": {
+    "guide": "docs/CI-TESTS.md",
+    "added_lines": 43,
+    "optional_command": "python -B -m unittest discover -s tests -p test_ci_leaf_docs.py -v",
+    "command_scope": "Runs nine focused local checks once in the current window; temporary Git fixtures, no keys/Docker/API money; Ctrl+C stops. Expect Ran9tests/OK, not zero. No enforced overall command deadline; saved cohort3.168s.",
+    "plan_update_owner": "root; no PLAN edits by documentation agent"
+  },
+  "limitations": [
+    "CI/helper code has the existing PR-checkout trust model; it is not protection against malicious PR code rewriting the workflow/helper/test runner.",
+    "The allowlist was reviewed as leaf evidence at this source; all other guides, protocol/runtime/dependency/configuration JSON and source paths retain full tests.",
+    "Full-suite omission is reported explicitly and cannot be counted as a completed unittest census or full hosted coverage.",
+    "No application, benchmark, paid runtime/state, model/account/budget, dependency or native-engine change."
+  ],
+  "next": "Root appends PLAN235 preservation evidence, reviews and publishes its own stacked slice; hosted verification remains separate.",
+  "roadmap_preservation": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-leaf-docs-20261103-v1\\plan-preservation-v235.json",
+    "sha256": "508f395d611960fd67cdda3e6245815cc9aacc122e25d61e42af3d703bf715a3"
+  },
+  "scope_of_goal_progress": "CI maintenance only; IMP-01 remains fresh preparation and the comparable-size history decision remains pending."
+}

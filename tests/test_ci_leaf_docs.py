@@ -92,7 +92,10 @@ class LeafScopeTests(unittest.TestCase):
             root = Path(directory)
             path = root / REPORT
             path.parent.mkdir(parents=True)
-            path.write_text(json.dumps({"format": leaf.REPORTS[REPORT]}), encoding="utf-8")
+            path.write_text(
+                json.dumps({"format": leaf.REPORTS[REPORT], "finite_number": 125.5}),
+                encoding="utf-8",
+            )
             leaf._validate(root, [REPORT])
             for value in (
                 b"\xff",
@@ -101,6 +104,8 @@ class LeafScopeTests(unittest.TestCase):
                 b"null",
                 b'{"format":"other"}',
                 json.dumps({"format": leaf.REPORTS[REPORT], "value": float("nan")}).encode(),
+                ('{"format":' + json.dumps(leaf.REPORTS[REPORT]) + ',"value":1e10000}').encode(),
+                ('{"format":' + json.dumps(leaf.REPORTS[REPORT]) + ',"value":-1e10000}').encode(),
                 ('{"format":' + json.dumps(leaf.REPORTS[REPORT]) + ',"x":1,"x":2}').encode(),
                 b" " * (leaf.MAX_BYTES + 1),
             ):

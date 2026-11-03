@@ -1,6 +1,7 @@
 """Validate five inert report paths before omitting only CI's long test suite."""
 
 import json
+import math
 import os
 import re
 import shutil
@@ -83,6 +84,13 @@ def _constant(_value: str) -> NoReturn:
     raise InvalidLeaf("nonfinite JSON value")
 
 
+def _finite_float(value: str) -> float:
+    number = float(value)
+    if not math.isfinite(number):
+        raise InvalidLeaf("nonfinite decoded JSON value")
+    return number
+
+
 def _validate(root: Path, paths: list[str]) -> None:
     for name in paths:
         path = root / name
@@ -91,7 +99,12 @@ def _validate(root: Path, paths: list[str]) -> None:
         try:
             text = path.read_bytes().decode("utf-8-sig")
             if name in REPORTS:
-                value = json.loads(text, object_pairs_hook=_pairs, parse_constant=_constant)
+                value = json.loads(
+                    text,
+                    object_pairs_hook=_pairs,
+                    parse_constant=_constant,
+                    parse_float=_finite_float,
+                )
                 if type(value) is not dict or value.get("format") != REPORTS[name]:
                     raise InvalidLeaf("unexpected leaf report format")
         except (UnicodeError, ValueError, RecursionError) as error:

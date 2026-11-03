@@ -1,16 +1,59 @@
 # CI test progress and the 60-minute stop rule
 
-CI checks the complete discovered unittest suite on Windows and Linux. Each OS
-uses five separate test processes. Every discovered test occurrence belongs to
-exactly one process on that OS; duplicate test names are retained. Each process
-keeps its selected tests in their original order. Class and module fixtures run
-separately in each process that needs them.
+CI keeps five matrix jobs on each of Windows and Linux. The full-suite lane
+checks the complete discovered unittest suite; the narrow leaf-document lane
+validates its documents and omits only that long suite. All setup and quality
+checks remain. In the full-suite lane, every discovered test occurrence belongs
+to exactly one process on each OS; duplicate names and original order are
+retained. Class and module fixtures run separately in each process that needs them.
 
 The largest finite-study test has its own process. The other tests are assigned
 by a stable hash of their names. Each process prints the full assignment list,
 its selected count and a shared inventory fingerprint, so missing or duplicate
 assignments can be checked. Discovery errors, empty groups and an ambiguous
 isolated name stop the check instead of silently reducing coverage.
+
+## Narrow leaf-document lane
+
+Only these five exact paths are eligible; there is no Markdown/JSON wildcard:
+
+- `docs/PLAN.md`
+- `docs/FRESH-REQUEST-OBSERVATIONS.md`
+- `docs/FRESH-CONFINEMENT-OBSERVATIONS.md`
+- `docs/conformance/fresh-request-observations-delivery.json`
+- `docs/conformance/fresh-confinement-observations-delivery.json`
+
+The guard verifies the checked-out GitHub merge against its declared base and
+head, then examines the complete pull-request change, including earlier commits.
+Eligible regular-file additions/modifications must pass UTF-8, strict report-JSON
+and Git whitespace checks. Duplicate fields, nonfinite decoded numbers and
+wrong report formats fail visibly. An earlier code change cannot hide behind
+a documentation-only final commit.
+
+Non-PR runs, empty or unverifiable changes, unknown/mixed paths, renames, deletions
+and nonregular files retain the full suite. Code, workflow, dependency, runtime
+and protocol changes therefore keep full checks. All ten job names, tool setup,
+audits, lint, format, types, security and compilation remain; only the long
+unittest step can be omitted. Its 3,600-second progress rule is unchanged.
+A successful leaf lane is not a completed full test suite.
+
+The [delivery record](conformance/ci-leaf-docs-delivery.json) separates earlier
+checks, the exponent-overflow regression and final checks. Hosted execution of
+this new lane has not yet been established; local Git fixtures are not hosted
+fork proof. The implementation PR itself changes code/workflow and takes the
+full lane.
+
+For developers, this optional command runs the nine focused guard tests once in
+the current PowerShell window using temporary local Git repositories. It needs
+Python and Git, no API keys or Docker, and spends no model budget. Ctrl+C stops it.
+It does not run the full suite or submit GitHub jobs.
+Expect `Ran 9 tests` and `OK`; zero tests means this checkout lacks the slice.
+This direct command has no enforced overall time limit. The saved local cohort
+took 3.168 seconds; that observation is not a deadline.
+
+```powershell
+python -B -m unittest discover -s tests -p test_ci_leaf_docs.py -v
+```
 
 ## What counts as progress
 
