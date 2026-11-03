@@ -1,0 +1,99 @@
+{
+  "format": "buddha.v13-prefix-profile-delivery.v1",
+  "date_utc": "2026-11-03",
+  "status": "partial_deadline",
+  "stage": "restore",
+  "reason": "internal_300_second_timer",
+  "child_seconds": 300.0884137998801,
+  "parent_seconds": 308.12717780005187,
+  "child_exit_code": 3,
+  "external_timeout": false,
+  "executing_source": {
+    "head": "2ebd318adcdc836afcbf7e69e975e80f6ca7b8a6",
+    "public_python_pins": 364,
+    "before_after_match": true
+  },
+  "integrity": {
+    "study_files": 1200,
+    "study_and_raw_authority_unchanged": true,
+    "metadata_binding_unchanged": true,
+    "guard_denials": []
+  },
+  "measurement": {
+    "generated_evidence_reads": 95,
+    "outcome_validations": 95,
+    "output_validations": 95,
+    "answers_post_init_line_288": 285,
+    "answers_native_bytes": 95,
+    "answer_native_derivations": 380,
+    "population_validations": 1388,
+    "release_load_calls": 1402373
+  },
+  "interpretation": "Source trace explains three interpretations of the same generated C1 artifact per evidence read, plus recomputation of already validated native bytes. Counts select one local dataflow repair; they do not establish a speedup.",
+  "selected_repair": "Carry the original raw digest/path and immutable parsed Answers through existing output/outcome/evidence validation; retain already computed native bytes. Preserve fresh reads, raw digest comparisons, provenance joins, defensive copies and reader finish. No global or cross-owner cache.",
+  "timing_limits": "Interrupted, public-key-filtered profile; cumulative rows overlap and some exceed the interrupt window. Do not sum them, infer isolated shares, forecast throughput or claim causality from these timings.",
+  "acceptance": {
+    "restore_completed": false,
+    "check_current_completed": false,
+    "reader_finish_completed": false,
+    "terminal_owner_operation_census": null,
+    "required_cut": {
+      "owners": 193,
+      "operations": 660
+    },
+    "reader_900_seconds_run": false,
+    "scale_gate_passed": false,
+    "paid_execution_cleared": false
+  },
+  "effects": {
+    "provider_calls": 0,
+    "containers": 0,
+    "new_construction": false,
+    "producer_resume": false,
+    "original_paid_state_supplied": false,
+    "automatic_retry": false,
+    "new_long_attempt_authorized": false
+  },
+  "records": {
+    "v13-prefix-metadata-binding-v1.json": {
+      "path": "runs/checks/v13-prefix-profile-20261103-v1/v13-prefix-metadata-binding-v1.json",
+      "sha256": "0a7afcd63fe13f3df5f67d1666720d766d65a14ada45a1b28ac791c68e361e47"
+    },
+    "prefix-profile-v13-proposal-DRAFT-v1.json": {
+      "path": "runs/checks/v13-prefix-profile-20261103-v1/prefix-profile-v13-proposal-DRAFT-v1.json",
+      "sha256": "bd2f1c15dff8089ca88196e85ff0ae72529342edf963e06d2495031620933fb1"
+    },
+    "profile-prefix-v13-DRAFT-v1.py": {
+      "path": "runs/checks/v13-prefix-profile-20261103-v1/profile-prefix-v13-DRAFT-v1.py",
+      "sha256": "cf8bf23f479efe34af8fab9ddd59053374e3bcc733118d2788070722b4a4d78a"
+    },
+    "run-prefix-profile-v13-parent-DRAFT-v1.py": {
+      "path": "runs/checks/v13-prefix-profile-20261103-v1/run-prefix-profile-v13-parent-DRAFT-v1.py",
+      "sha256": "eb615524df34e99528e991957a3e5d87ab40acb36d7babc12923a16d3c9412e3"
+    },
+    "parent-guard-check-result-v1.json": {
+      "path": "runs/checks/v13-prefix-profile-20261103-v1/parent-guard-check-result-v1.json",
+      "sha256": "b9d56042e9fc3a692011f65d41f2478f0771e4d1e3f3e83d838205bbe8d91944"
+    },
+    "prefix-profile-v13-parent-result-v1.json": {
+      "path": "runs/checks/v13-prefix-profile-20261103-v1/prefix-profile-v13-parent-result-v1.json",
+      "sha256": "c9e81721159918b0a0762e6190008cfee44ed4ef454d8f38aacda4af0cdfdc5a"
+    },
+    "prefix-profile-v13-result-v1.json": {
+      "path": "runs/checks/v13-prefix-profile-20261103-v1/prefix-profile-v13-result-v1.json",
+      "sha256": "013d89e1c5bf7f2a147dab7d7c3e853a42f5e2b508774090c1f029305c83f2d0"
+    },
+    "prefix-profile-v13-public-v1.pstats": {
+      "path": "runs/checks/v13-prefix-profile-20261103-v1/prefix-profile-v13-public-v1.pstats",
+      "sha256": "6c3ceb234adc4165995260c2bf7bcd616b8fbdea7b553bc6ea8246880de1316e"
+    },
+    "prefix-profile-v13-stdout-v1.log": {
+      "path": "runs/checks/v13-prefix-profile-20261103-v1/prefix-profile-v13-stdout-v1.log",
+      "sha256": "c4dc48db6d9468b156d5c09605d628154bbb2b8324ca0f1a9a349e313d77705c"
+    },
+    "prefix-profile-v13-stderr-v1.log": {
+      "path": "runs/checks/v13-prefix-profile-20261103-v1/prefix-profile-v13-stderr-v1.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}
