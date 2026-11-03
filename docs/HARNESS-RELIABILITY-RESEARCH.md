@@ -388,7 +388,7 @@ uses a separate dependency environment.
 
 Completed samples can be reused on retry, but stable IDs and explicit partials
 are required. Sample retries default off; eval-set adds retry machinery, while
-model-request retries are documented as unlimited by default. Disable automatic
+model-request retries are documented as unlimited by default. Disable Inspect-owned automatic
 retries in the first slice and preserve Buddha's paid-effect/retry decisions.
 Inspect cost limits use usage and model prices; they do not establish our
 pre-dispatch reservations, shared grants or uncertain-charge hold contract.
