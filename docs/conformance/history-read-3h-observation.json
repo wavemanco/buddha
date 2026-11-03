@@ -1,7 +1,7 @@
 {
   "format": "buddha.history-read-3h-observation.v1",
-  "status": "running",
-  "checkpoint_utc": "2026-11-03T03:38:16.169737+00:00",
+  "status": "partial",
+  "checkpoint_utc": "2026-11-03T06:37:18.703728+00:00",
   "spec": [
     "DESIGN sections3,9,10",
     "PLAN IMP-01",
@@ -66,13 +66,31 @@
     "max_tree_entries": 100000
   },
   "producer": {
-    "status": "running",
-    "stdout_path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-3h-20261102-v1\\producer-stdout-v13.log",
-    "stderr_path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-3h-20261102-v1\\producer-stderr-v13.log"
+    "child_source_pins_after_match": null,
+    "deadline_seconds": 10800,
+    "exit_code": null,
+    "logs": {
+      "stderr": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-3h-20261102-v1\\producer-stderr-v13.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-3h-20261102-v1\\producer-stdout-v13.log",
+        "sha256": "cfbc94476efbf87b16323d504fad5ff9f89dc607306cf060da8f441ff38aeaaf"
+      }
+    },
+    "mode": "producer",
+    "reason": "deadline_exceeded",
+    "result": null,
+    "seconds": 10800.310449200217,
+    "source_pins_after_match": true,
+    "status": "partial_deadline",
+    "timeout": true,
+    "child_terminal_result": "absent_after_deadline_termination"
   },
   "reader": {
-    "status": "not_started",
-    "reason": "conditional_on_producer_cut"
+    "status": "not_run",
+    "reason": "producer_required_cut_not_reached"
   },
   "gate_passed": false,
   "parent_guard_check": {
@@ -95,9 +113,79 @@
   "original_paid_history_access": false,
   "paid_execution_cleared": false,
   "limitations": [
-    "Running is not a completed build or reader pass.",
+    "Construction exceeded its single10800second ceiling before the required cut; the900second reader remains untested.",
     "Fresh process does not mean cold filesystem caches.",
     "A reader pass would not establish practical whole-run throughput or scientific improvement.",
     "Final-source/platform, adoption/account/reviewer and separate funding/handoff requirements remain."
-  ]
+  ],
+  "reason": "deadline_exceeded",
+  "stage": "construction",
+  "required_cut_reached": false,
+  "parent_result": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-3h-20261102-v1\\scale-replay-parent-result-v13.json",
+    "sha256": "022d0462df46a1205ddf13477c7e93311916d2ac61ace17f6eb2ad399debc574"
+  },
+  "parent_seconds": 10805.364028200042,
+  "last_logged_returned_action": {
+    "format": "buddha.scale-replay-progress.v1",
+    "phase": "producer",
+    "stage": "producing_history",
+    "event": "returned_action",
+    "elapsed_seconds": 10537.87,
+    "action": "prepare_child",
+    "position": {
+      "start": 0,
+      "repetition": 1,
+      "arm": 0,
+      "slot": 0,
+      "stage": "screen"
+    },
+    "owners_before": 102,
+    "operations_before": 354
+  },
+  "counter_qualification": "102 owners/354 operations are snapshots BEFORE prepare_child; no terminal owner/ledger reconciliation was performed. They are not terminal totals.",
+  "public_python_pins_after_match": 364,
+  "source_after_qualification": "Parent rehashed all364 admitted public Python pins after stopping the child; the killed child supplied no final integrity result.",
+  "construction_call_trace": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-3h-20261102-v1\\construction-call-trace-v1.md",
+    "sha256": "f6068c95e712d1e5d7b5b4e5da9fc3ce6ca1b11eeb882bfe4576c137913d0618"
+  },
+  "outer_exec_exit_code": 1,
+  "outer_exit_qualification": "Observed outer PowerShell/tool status; producer child exit code remains unknown/null after timeout. Parent semantic result is partial_deadline.",
+  "retained_workspace": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-3h-20261102-v1\\retained-scale-v13",
+  "automatic_retry_resume_extension": false,
+  "ci_snapshot": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci217-224-snapshot-20261103-v1\\snapshot-222-225-20261103T063035Z-v1.json",
+    "sha256": "8f6d089eae8b59f45f08403c433c70c0ffc1f64327342663855f8229d281c6a8"
+  },
+  "ci_qualification": "Executing source PR225 and PR223:10/10 successful. PR224:9 successful/1active. Older PR222:9successful/1failed; Windows export directory rename WinError5, not a watchdog timeout; no fix or rerun claimed.",
+  "older_ci_failure": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci217-224-snapshot-20261103-v1\\pr222-windows2-job-125675624549-failure-receipt-20261103T063453Z-v1.json",
+    "sha256": "f5f6793f7aacfc2fa43cd1c8524e38b25466dd1560ea35b352d275fb9056082e",
+    "error": "PermissionError: WinError5 at benchmark.export_evaluation os.rename(staging,destination)",
+    "cause": "unexplained",
+    "application_and_failing_test_unchanged_between_222_and_225": true,
+    "later_green_is_not_a_demonstrated_fix": true,
+    "rerun_or_fix_performed": false
+  },
+  "posthoc_timeline": {
+    "result": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-3h-20261102-v1\\progress-timeline-v13.json",
+      "sha256": "f706137e9357248b6bb837acab3584dc95fd5ae6a67d5920460015bd66eaca76"
+    },
+    "runnable_analysis": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-3h-20261102-v1\\analyze-progress-timeline-v13.py",
+      "sha256": "998d371a0ba101b4361a6e09ac54ded14716569cdc6f36df3d1b68f230f3113c"
+    },
+    "completed_action_count": 75,
+    "completed_action_seconds": 1827.068,
+    "between_action_gap_count": 74,
+    "between_action_gap_seconds": 8623.252,
+    "complete_interval_seconds": 10450.32,
+    "between_action_percent_of_complete_intervals": 82.516631,
+    "maximum_between_action_gap_seconds": 479.13,
+    "initial_logged_work_seconds_separate": 87.55,
+    "unmatched_start_count": 0,
+    "qualification": "Observable wall intervals from this one log only; not percentages of whole parent runtime. Initial work is separate and timeout tail unassigned. Gaps include scheduler restoration/checking, dispatch preparation and logging; no CPU/hotspot/causal speedup/future throughput claim."
+  }
 }

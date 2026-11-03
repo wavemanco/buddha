@@ -1095,8 +1095,8 @@ of up to three hours, followed by the unchanged 900-second check, with identical
 genuine counts/metadata, source/fixture pins, guards and partial-record rules.
 This uses supplied replies and spends no API money. Three hours is a ceiling,
 not a completion forecast. It would leave construction throughput unresolved.
-The user has been asked to choose this approach or retain 20-minute construction
-as a required gate. That choice is pending at this publication; no longer run,
+At the v12 publication, the user had been asked to choose this approach or retain
+20-minute construction as a required gate. That choice was pending then; no longer run,
 new allocation, automatic resume/extension, platform or source optimization is
 adopted here. Existing frozen observations are not relabeled as passes.
 
@@ -1110,14 +1110,14 @@ source/accounting/freshness safeguards and scientific comparison throughout.
 The user selected the proposed approach above: one new synthetic build capped
 at 10,800 seconds, then one separate fresh-process reader capped at 900 seconds
 only if the genuine 193-owner/660-operation cut is reached. That v13 attempt is
-now running. The [observation record](conformance/history-read-3h-observation.json)
+now retained as a deadline partial. The [observation record](conformance/history-read-3h-observation.json)
 binds its source, drivers, approval and retained checks. The earlier v12 result
 and decision record remain historical evidence; they are not rewritten or resumed.
 
 This is an offline performance check for Buddha's history handling. It uses
 supplied answers and new synthetic records, needs no keys, spends no model API
 money and starts no containers. It does not open the original paid run or change
-its funding. The agent has started it; the user needs no command or extra window.
+its funding. The agent ran this observation; the user needs no command or extra window.
 Its parent stops the build at three hours and the conditional reader at fifteen
 minutes, retaining an incomplete result if either limit is reached. It does not
 retry, resume or extend itself. Three hours is a ceiling, not a forecast.
@@ -1133,3 +1133,41 @@ this source-bound history gate, not full-run throughput or better creativity.
 The next work would be the existing final-source/platform and funded-handoff
 checks for the bounded comparison. A partial retains its exact stage and reason;
 it does not authorize another long attempt or a paid run.
+
+### Three-hour attempt: terminal partial
+
+The single v13 build stopped at its 10,800-second ceiling: measured producer
+wall time 10,800.310 seconds, whole parent 10,805.364 seconds. It did not reach
+the required cut, so the separate 900-second reader did not run. All 364 public
+Python pins match after termination. The killed child supplied no final result;
+its stderr is empty. Logs and synthetic files remain retained without retry,
+resume, cleanup or extension. No model API calls, containers or original paid
+state were used. This is a construction partial, not a failed reader test.
+
+The last returned action was `prepare_child` at 10,537.870 seconds. Its 102-owner /
+354-operation fields describe the state before that action; they are not final
+accounting. No terminal ledger reconciliation was performed. The
+[observation record](conformance/history-read-3h-observation.json) binds the raw
+parent result, logs, source pins and source-only call trace.
+
+The fixture invokes the ordinary scheduler once. The scheduler reconstructs and
+checks the study before each action; the fixture adds its extra cut checks only
+after the required cut. This identifies repeated runtime work, not a measured
+CPU hotspot or a throughput forecast. A future observability integration and a
+change to that reconstruction path are separate responsibilities.
+
+The saved log permits one further measurement without another run. Its 75
+completed action intervals total 1,827.068 seconds; the 74 bounded gaps between
+them total 8,623.252 seconds. Thus 82.5% of the 10,450.320 seconds covered by
+those completed intervals was between actions. Initial work is separate and the
+timeout tail is unassigned, so this is not a percentage of the whole parent
+runtime. The largest gap was 479.130 seconds. The source trace places scheduler
+restoration/checking in these gaps, alongside dispatch preparation and logging;
+the measurement does not isolate any one function's cost or CPU usage. The
+observation record binds the runnable analysis and exact result.
+
+The performance gate remains open. No larger construction allowance, new long
+attempt, source optimization, platform migration or paid launch is adopted by
+this result. Preserve the declared scientific comparison and choose a concrete
+construction/runtime strategy from these retained measurements before another
+large attempt.
