@@ -5,7 +5,7 @@ import sys
 import threading
 import time
 from collections.abc import Callable, Iterator, Mapping
-from contextlib import contextmanager
+from contextlib import AbstractContextManager, contextmanager
 from contextvars import ContextVar
 from pathlib import Path
 from types import GetSetDescriptorType, ModuleType, TracebackType
@@ -706,6 +706,36 @@ def _emit(notice: Callable[[str], None], message: str) -> None:
         return
 
 
+ObserverScope = Callable[[str], AbstractContextManager[object]]
+
+
+@contextmanager
+def _observer_scope(observer: ObserverScope, label: str) -> Iterator[None]:
+    """Keep observer failures separate from operation outcomes and process control."""
+    manager = None
+    try:
+        manager = observer(label)
+        manager.__enter__()
+    except Exception:
+        manager = None
+    try:
+        yield
+    except BaseException:
+        if manager is not None:
+            try:
+                manager.__exit__(*sys.exc_info())
+            except BaseException:
+                # Cleanup must not mask the operation's existing exception.
+                manager = None
+        raise
+    else:
+        if manager is not None:
+            try:
+                manager.__exit__(None, None, None)
+            except Exception:
+                return
+
+
 @contextmanager
 def _heartbeat(
     notice: Callable[[str], None],
@@ -714,7 +744,12 @@ def _heartbeat(
     seconds: float,
     *,
     thread_name: str = "launch-progress",
+    observer: ObserverScope | None = None,
 ) -> Iterator[None]:
+    if observer is not None:
+        with _observer_scope(observer, "launcher"):
+            yield
+        return
     stop = threading.Event()
     started = time.monotonic()
 
