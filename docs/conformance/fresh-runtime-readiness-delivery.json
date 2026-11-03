@@ -1,0 +1,256 @@
+{
+  "format": "buddha.fresh-runtime-readiness-delivery.v1",
+  "date": "2026-11-02",
+  "status": "point_in_time_installed_image_inventory_passed",
+  "spec": [
+    "PLAN IMP-01/EVAL-02 runtime preflight",
+    "DESIGN sections9,10"
+  ],
+  "base_head": "b79895583d9de09bff53ba5dcaa43fd63eca35af",
+  "previous_goal_turn": "progress: PR220 published",
+  "metadata_inspection": {
+    "parent": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-runtime-readiness-20261102-v1\\image-inspection-parent-v1.json",
+      "sha256": "24f5eff194b050480aeb31795640324d04db1b1e505c33f1cca8f177ae5313fa"
+    },
+    "result": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-runtime-readiness-20261102-v1\\image-inspection-v1.json",
+      "sha256": "de6f8ca09d3542c45679cb5cf8a568b23e321e2d64d577bc88e8567018e93925"
+    },
+    "deadline_seconds": 90,
+    "seconds": 0.6996762999333441,
+    "server": {
+      "Version": "29.5.3",
+      "Os": "linux",
+      "Arch": "amd64"
+    },
+    "docker_sha256": "c0e4f0379277708eea93b39fcbbfb9bad6f4ee97cc3eb7d326bf5d534fbf1762",
+    "endpoint_sha256": "9f79e88dea954be7b4307bb02abaab3d72e4f1857f80e113b16bca2b2d076327",
+    "images": {
+      "source": {
+        "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+        "os": "linux",
+        "architecture": "amd64",
+        "user": "65532:65532",
+        "expected_config_equal": true,
+        "installed_files_measured": false
+      },
+      "native": {
+        "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+        "os": "linux",
+        "architecture": "amd64",
+        "user": "65532:65532",
+        "expected_config_equal": true,
+        "installed_files_measured": false
+      }
+    },
+    "input_sha256": {
+      "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-fresh-primary-20261102-v2\\components\\source-environment\\runtime.json": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-fresh-primary-20261102-v2\\components\\native-environment\\environment.json": "90e905e2fc381e62adc0553a8e195b7d120886fa597743297e5032dbbfd0eedf"
+    },
+    "scope": "Read-only metadata before audit; no containers/pulls/builds at this stage."
+  },
+  "actual_audits": {
+    "parent": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-runtime-readiness-20261102-v1\\installed-audits-parent-v1.json",
+      "sha256": "3d4a43930f312e65ff8f40486d45e6c7be0b3d218e4e06d2f4fdcd3efacc24ce"
+    },
+    "result": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-runtime-readiness-20261102-v1\\installed-audits-result-v1.json",
+      "sha256": "5aa99f1b0e2ec546208ccf7aa238359e50add13650c117ab0d8e137d5bed31a5"
+    },
+    "parent_seconds": 20.222487800056115,
+    "controller_seconds": 19.990189400035888,
+    "exit_code": 0,
+    "child_status_required": "pass_installed_inventory_audits",
+    "child_joined": true,
+    "worker_limits_seconds": {
+      "source": 15,
+      "native": 60
+    },
+    "outer_hard_deadline_imposed": false,
+    "observer": "Existing executor owns worker watchdogs,10-second CLI controls and cleanup. Tool handle19048 was observed live until its terminal exit; no observation timeout/restart occurred.",
+    "observations": {
+      "source": {
+        "evidence": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-runtime-readiness-20261102-v1\\source-installed-observation-v1.json",
+          "sha256": "2215893bfe89b8e08d17396d9eb7a7eee10147b96378f5d220ecde704dc8c243"
+        },
+        "manifest_sha256": "3da67017216e00138f3ba69dad28ec9214ece8a504920bf3720801e57c22b782",
+        "base_entries": 1120,
+        "venv_entries": 16,
+        "exit_code": 0,
+        "cleanup_status": "removed",
+        "limits": {
+          "wall_seconds": 15,
+          "memory_mib": 128
+        },
+        "scope": "Unchanged existing fresh_audit; exact fresh/stored/expected manifest equality."
+      },
+      "native": {
+        "evidence": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-runtime-readiness-20261102-v1\\native-installed-observation-v1.json",
+          "sha256": "8d835c9c9c4fd9100d6fd0e803ddd2076a0e77302fb62dacb1805f3f32dca991"
+        },
+        "format": "buddha.fresh-native-inventory-audit.v1",
+        "helper_sha256": "6c5cc5475dbd1f8d511fbc6e4adbcc20ca5c00ef770cc202874a3333d471eff4",
+        "manifest_sha256": "b6b8ab4d349926577905b95b0784c622d6e443f34ea2b73625e09e72b497cf4b",
+        "inventory_sha256": "9de92b2b91f22d60930d26f83a448b9ee1ea7e2751a2c71517a215da22dec6c0",
+        "inventory_count": 24043,
+        "distribution_count": 57,
+        "record_checked_files": 24033,
+        "unowned_site_packages_count": 0,
+        "actual_inventory_equals_expected_stored_inventory": true,
+        "exit_code": 0,
+        "cleanup_status": "removed",
+        "limits": {
+          "wall_seconds": 60,
+          "memory_mib": 512
+        },
+        "scope": "Existing installed collect_audit and NativeWorker._environment inventory comparison; no full kernel/platform equality, SDK or actor execution."
+      }
+    },
+    "input_pins_preserved": true,
+    "public_source_360_pins_preserved": true,
+    "diagnostic_sources_preserved": true,
+    "diagnostic_source_sha256": {
+      "audit-installed-v1.py": "a9ceabdf8fed1562539c69f6fef3868b2b3a8421a656941deccda2ef4f58e586",
+      "native-audit-worker-v1.py": "839fd1ad3bd44ec9004e5c0fa7642952f3a771ef17f52264a5d5ebe47b2f6faf"
+    },
+    "static_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-runtime-readiness-20261102-v1\\independent-installed-audit-static-review-v1.json",
+      "sha256": "26eebc9ba66f47c0693d37767208433e8d732a30d6f4dc64d7f8fdd1698c7c66"
+    }
+  },
+  "actual_execution_scope": {
+    "audit_containers_created": 2,
+    "audit_containers_exit0_one_frame_removed": 2,
+    "model_api_calls": 0,
+    "sdk_model_requests": 0,
+    "actors_or_task_data_supplied": false,
+    "provider_keys_supplied": false,
+    "paid_accounting_owners_created": 0,
+    "grants_created_or_transferred": 0,
+    "original_sql_or_run_history_read": false,
+    "image_pulls_builds": 0,
+    "source_reuse": "Unchanged src01-runtime-probe.fresh_audit, then compare returned manifest hash to prepared expected3da.",
+    "native_reuse": "Installed helper6c5 collect_audit; verify stored manifestb6b hash and format before import, compare actual inventory to stored inventory as NativeWorker._environment. Do not require full kernel/platform metadata equality.",
+    "mounts": "Runner-only read-only mounts; no actor, task, home, Docker socket, repository or key mount.",
+    "configured_executor_checks": [
+      "network:none",
+      "read-only root",
+      "non-root65532:65532",
+      "cap-dropALL",
+      "no-new-privileges",
+      "private cgroup/IPCnone",
+      "memory/pids/CPU/tmpfs/stdout/stderr/frame limits",
+      "owned create/verify/remove"
+    ],
+    "raw_boolean_note": "The internal actors_tasks_keys_owners_grants_created_or_used:false field refers to experiment accounting owners/grants. Two ordinary executor container ownership labels were created and checked."
+  },
+  "cleanup": {
+    "postcheck": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-runtime-readiness-20261102-v1\\postcleanup-v1.json",
+      "sha256": "0fc6105651f16475b6bc35e41c11a21ff8556fb4ac441737513f6cd54ec0fc23"
+    },
+    "both_selected_ids_absent": true,
+    "source_temporary_runner_absent": true,
+    "native_runner_copy_matches": true,
+    "native_worker": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-runtime-readiness-20261102-v1\\native-audit-worker-v1.py",
+      "sha256": "839fd1ad3bd44ec9004e5c0fa7642952f3a771ef17f52264a5d5ebe47b2f6faf"
+    },
+    "initial_extra_check_stopped": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-runtime-readiness-20261102-v1\\postcleanup-environment-mismatch-v1.json",
+      "sha256": "28f52102600932787b0cbf118aef0826af7c7c2af222dd0b361bdcb6e514b216"
+    },
+    "initial_extra_check_scope": "Stopped before query on endpoint fingerprint mismatch; it supplies no removal outcome.",
+    "endpoint_alias_check": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-runtime-readiness-20261102-v1\\endpoint-alias-check-v1.json",
+      "sha256": "8f4ff52f22314f9b2511f41905cf2c2f0b16dd1452c5af8bbf71e65d1a3186db"
+    },
+    "same_daemon_engine_id_hash": true,
+    "endpoint_fingerprints_distinct": true,
+    "scope": "Successful read-only query used the exact audit endpoint and only its two selected IDs. No context switch, fingerprint substitution, unrelated container listing/removal or audit rerun."
+  },
+  "independent_completion": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-runtime-readiness-20261102-v1\\independent-completion-review-v1.json",
+    "sha256": "82c45c9824043d672fcb46a6a7609bf83fca3776ef26ef7b3bc6b93b292184f9"
+  },
+  "independent_completion_scope": "Named safe observation metadata and public/diagnostic code only; no runtime input bodies, Docker calls, tests or audit reruns. Source manifest canonical hash checked independently; native equality relies on pinned worker plus actual recorded compact result/configuration, not a second native inventory execution.",
+  "quality": {
+    "application_or_existing_python_changed": false,
+    "current_tracked_public_python_pins": 360,
+    "previous_full_scoped_quality": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-request-profiles-20261102-v1\\quality-result-v1.json",
+      "sha256": "34f9179489666be0f363270f83bcce3e8822ef2e0cb060fe2e83274625c6c345"
+    },
+    "scope": "Evidence/docs-only slice.360current source pins match the prior eight scoped quality commands. New actual checks are image metadata plus the two installed audits and selected-ID cleanup. Full suites/hosted remain separate; no new unit test or blanket native-environment vulnerability/license clearance."
+  },
+  "ci_snapshot": {
+    "recorded_utc": "2026-11-02T23:58:31Z",
+    "prs": {
+      "216": {
+        "successful": 8,
+        "in_progress": 2,
+        "snapshot": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci216-watch-20261102-v1\\snapshot-235831-v1.json",
+          "sha256": "3a2c14186d794b4b0796e3baa86d796cb089bd7f41116c9d976d9dab639d41f8"
+        }
+      },
+      "217": {
+        "successful": 5,
+        "in_progress": 5,
+        "snapshot": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-primary-preparation-20261102-v1\\ci-snapshot-235831-v1.json",
+          "sha256": "590585d51d86cacf70e10a955ff8119294afde6034bc580bebfa864118fba87c"
+        }
+      },
+      "218": {
+        "successful": 3,
+        "in_progress": 7,
+        "snapshot": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-plain-preparation-20261102-v1\\ci-snapshot-235831-v1.json",
+          "sha256": "b100a37c22590f4e0c807240f05781e19b9e5986694d8b04e10c332cb5a69054"
+        }
+      },
+      "219": {
+        "successful": 0,
+        "in_progress": 10,
+        "snapshot": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci219-watch-20261102-v1\\snapshot-235831-v1.json",
+          "sha256": "95a5b31f018add68f2e1aca16ae5423341095caf6a9d7d7ac75bc31aa416c9fc"
+        }
+      },
+      "220": {
+        "successful": 0,
+        "in_progress": 10,
+        "snapshot": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-request-profiles-20261102-v1\\ci-snapshot-235831-v1.json",
+          "sha256": "ade29a82e9686c2882592d78da306e3c92353656f2521fcd13c442719c93a3d3"
+        }
+      }
+    },
+    "failures": 0,
+    "scope": "Metadata only; no idle inference, cancellation/rerun or full-platform claim."
+  },
+  "plan_preservation": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-runtime-readiness-20261102-v1\\plan-preservation-v1.json",
+    "sha256": "0774368970dc98f4605f949097be88777d2084728b5ef28bdcb9554ea4f200ee"
+  },
+  "limitations": [
+    "Point-in-time installed images and audit envelopes only; not all future runtime readiness.",
+    "No actual P/C emission, generation, proposal, native judge SDK/wire, refusal-trigger or model review.",
+    "No benchmark workload memory/startup/full-panel capacity measurement. Native512MiB is the inventory audit envelope, not adoption of a changed experiment limit.",
+    "The complete historical hostile confinement suite was not rerun; source/native audit workers are trusted public code.",
+    "No new dependency-vulnerability/license clearance; existing native-runtime findings/notices remain. No image published.",
+    "Endpoint fingerprints remain separate even when the observed daemon-ID hash agrees. Final live scope must bind its actual configured endpoint.",
+    "No scientific result, new custody/exposure/independence attestation, budget adoption or paid-run command."
+  ],
+  "next": [
+    "Construction-time choice remains pending; no scale attempt has started.",
+    "Full hosted/platform composition and comparable-size reader gate.",
+    "Prospective adoption/separation, actual P/C/native request behavior and workload capacity.",
+    "Accounts/prices, separate fresh allocation and checked handoff before paid calls."
+  ]
+}
