@@ -1,0 +1,227 @@
+{
+  "format": "buddha.inspect-observer-proof-delivery.v1",
+  "status": "candidate_seam_with_terminal_partial_proof_no_adoption",
+  "plan_item": "ENG-OBS-01",
+  "date": "2026-11-03",
+  "scope": "One optional stdlib observer-context seam plus one source-bound synthetic Inspect compatibility attempt. No whole-CLI or dependency-runtime adoption.",
+  "guide": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\inspect-observer-proof\\docs\\INSPECT-OBSERVABILITY-PROOF.md",
+    "sha256": "96ee62e4ce905e49ef216e3f6e40f2b40a1a501aab86d2275fda5b98f95de112"
+  },
+  "implementation": {
+    "files": {
+      "buddha/progress.py": "8d8afa171542cad7049d9c677182a8a36e8bc0131f1afd69aab3fa0d5878f6f5",
+      "buddha/launch_common.py": "19c47f521e455971766a71a847dcaeb270802af24f2e129ffb661633784eb6a3",
+      "tests/test_observer_scope.py": "7b3c126e8af81647018e808886814176697c20ea4d8a6d963e6c4be45c7e42c1"
+    },
+    "optional_interface": [
+      "Progress(observer=factory)",
+      "launch_common._heartbeat(observer=factory)"
+    ],
+    "factory_labels": [
+      "progress",
+      "launcher"
+    ],
+    "inspect_import_in_application": false,
+    "production_dependency_manifest_changed": false,
+    "replacement_scope": "On the explicitly injected path, observer contexts replace existing Progress snapshot/display/polling and duplicate launcher heartbeat. Ordinary None path remains; no complete launcher is switched to Inspect.",
+    "body_exception_scope": "Actual body exceptions retain identity and cannot be suppressed/masked by observer cleanup; ordinary observer failures fail open without starting legacy polling."
+  },
+  "dependency_preflight": {
+    "inspect_version": "0.3.287",
+    "platform": "CPython3.13 Windows amd64",
+    "exact_packages": 80,
+    "metadata_resolution_license_audit": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\inspect-ai-dependency-preflight-20261103-v1\\dependency-preflight-v1.json",
+      "sha256": "05045a63ad9f17d73d6f20dfbba71e84fb00f1b677cadb8fc58b2da7a7ae320e"
+    },
+    "proof_only_scope_decision": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\inspect-ai-dependency-preflight-20261103-v1\\proof-only-scope-decision-v1.json",
+      "sha256": "d3fb0a21e1708fda8447be9a761fce5cdb163c9b57f3b23627c125fcc4f63687"
+    },
+    "wheel_lock": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\inspect-ai-dependency-preflight-20261103-v1\\wheel-lock-v2.txt",
+      "sha256": "84ca066fdaea0c3a975c16687734f75c917341d3046e6bc8d8ba73215cd9cdf0"
+    },
+    "license_census": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\inspect-ai-dependency-preflight-20261103-v1\\wheel-license-census-v2.json",
+      "sha256": "ec984cf1abab9e735768cfc28f8c518f78217033d809ea99c554d1dafe0e896c"
+    },
+    "advisory_audit": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\inspect-ai-dependency-preflight-20261103-v1\\audit-v2.json",
+      "sha256": "87c1eb823b2bf47a5bdd48f3cc78fe2a377e9092529a9f79891ceb630bb322a2"
+    },
+    "advisory_scope": "Dated exact80-version query: zero reported vulnerabilities/skips; no general security or distribution clearance.",
+    "flagged_notices": [
+      "certifi MPL-2.0 existing development-only exception",
+      "botocore bundled MPL-2.0 certificate material",
+      "debugpy incorporated EPL-1.0 PyDev.Debugger",
+      "NumPy Windows GNU runtime component with GCC exception"
+    ]
+  },
+  "provisioning": {
+    "result": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\inspect-ai-dependency-preflight-20261103-v1\\provision-result-v1.json",
+      "sha256": "89e39c42974d1f90fde21fa683924543253fcd9f0596caa773fcce19312114c5"
+    },
+    "parent": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\inspect-ai-dependency-preflight-20261103-v1\\provision-parent-result-v1.json",
+      "sha256": "405eadc76c7a2d3b73bc79c0e203e4e75235de5d9f1772eb9455a3041cfb40e7"
+    },
+    "status": "complete_exact80_metadata_only_verified",
+    "package_versions_verified": 80,
+    "installed_file_count": 6871,
+    "inspect_import_during_provisioning": false,
+    "boundary": "A separate development-proof venv only; no application requirement or distribution change."
+  },
+  "scoped_unit_verification": {
+    "summary": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\inspect-observer-seam-20261103-v1\\verification-summary-v1.json",
+      "sha256": "1382e593405960c338dcf7d4d1859cf30dd50680f09cc06157998bb24107cf81"
+    },
+    "green": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\inspect-observer-seam-20261103-v1\\green-result-v1.json",
+      "sha256": "4eedc2f08a2bf96961a0f948cb9655e714c40934da408d9fbb9429ac89edad60"
+    },
+    "green_source_pins": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\inspect-observer-seam-20261103-v1\\green-source-pins-v1.json",
+      "sha256": "707d10a37c70f0efda742036e24682346e8474f518e4dae2fdca6e977249f05e"
+    },
+    "quality": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\inspect-observer-seam-20261103-v1\\quality-result-v1.json",
+      "sha256": "47c8739863d529f6b2537a249743ffb940769221f7cce190a011e6f90fa05d62"
+    },
+    "tests": 26,
+    "failures": 0,
+    "errors": 0,
+    "inspect_modules_loaded": [],
+    "scope": "7 new context checks plus 18 existing Progress checks and 1 existing heartbeat regression; four affected quality commands and in-memory compile. Not actual Inspect evaluation."
+  },
+  "actual_attempt": {
+    "attempts": 1,
+    "retry": false,
+    "total_deadline_seconds": 180,
+    "prepared_snapshot": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\inspect-observer-proof-20261103-v1\\proof-preparation-v5.json",
+      "sha256": "6383c61a04c4f43a2e086e87020842499ec5d85fe1cd2598933ca001ab192277"
+    },
+    "binding": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\inspect-observer-proof-20261103-v1\\cohort-binding-v1.json",
+      "sha256": "cb94dbc442f36f908b99e282bdb73e14568e3f9e88903c103db817e3a087e34d"
+    },
+    "driver": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\inspect-observer-proof-20261103-v1\\inspect-cohort-v1.py",
+      "sha256": "3e9c51a2659882769aa4b0ce4416710ab07abe92bbba1c51e9fe4e578fed2b64"
+    },
+    "parent_source": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\inspect-observer-proof-20261103-v1\\run-inspect-cohort-v1.py",
+      "sha256": "e76a6457e54150d9d1cd68e10d642f4df921220d72d13c5cca3271276db1ecf0"
+    },
+    "parent_result": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\inspect-observer-proof-20261103-v1\\cohort-parent-result-v1.json",
+      "sha256": "6b85a9321a6450590c7c31528e8ebdc7dd98ba3174ce7c401651cbec219f8e18"
+    },
+    "stderr": {
+      "cohort": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\inspect-observer-proof-20261103-v1\\runtime-v1\\cohort-stderr.txt",
+        "sha256": "577fdba2507da75b42edb726ecfaf815c2c6cd9f321305675f44b651e66155b1"
+      },
+      "viewer": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\inspect-observer-proof-20261103-v1\\runtime-v1\\viewer-stderr.txt",
+        "sha256": "bdbc7ecc06de880e0eadb815ffd79c5325c118db85cd279acc475ead52a2a3e0"
+      }
+    },
+    "status": "partial_cleanup_or_source_check",
+    "primary_parent_failure": {
+      "class": "AssertionError",
+      "phase": "cohort_and_viewer"
+    },
+    "cleanup_observations": [
+      {
+        "operation": "viewer_liveness_before_cleanup",
+        "role": "viewer",
+        "class": "OwnedViewerExitedEarly"
+      }
+    ],
+    "seconds": 9.20205090008676,
+    "timeout": false,
+    "source_count": 365,
+    "source_after_match": true,
+    "owned_processes": [
+      {
+        "role": "cohort",
+        "job_assigned": true,
+        "pid": 57320,
+        "exit_before_cleanup": 1,
+        "exit_after_cleanup": 1,
+        "owned_process_joined": true
+      },
+      {
+        "role": "viewer",
+        "job_assigned": true,
+        "pid": 57096,
+        "exit_before_cleanup": 1,
+        "expected_alive_before_cleanup": false,
+        "exit_after_cleanup": 1,
+        "owned_process_joined": true
+      }
+    ],
+    "cli_queries_while_open": 0,
+    "viewer_reply": null,
+    "reached": "KnownFolder/cache isolation checks completed; both actual Inspect imports started and failed during import-time CPU detection.",
+    "not_reached": [
+      "Task or sample creation/execution",
+      "observer trace action",
+      "running viewer or readiness HTTP response",
+      "trace CLI query",
+      "in-memory or durable EvalLog validation"
+    ],
+    "intended_eval_contract": "Two unscored model=None samples; fail_on_error=True preserves actual overall error for deliberate ValidationError. This was never executed."
+  },
+  "failure_attribution": {
+    "kind": "proof_admission_error_not_established_Inspect_incompatibility",
+    "literal_probe": "/proc/self/mountinfo",
+    "source_derived_windows_path": "C:\\proc\\self\\mountinfo",
+    "host_file_opened_to_check_existence": false,
+    "public_cpu_source": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\inspect-ai-dependency-preflight-20261103-v1\\proof-venv\\Lib\\site-packages\\inspect_ai\\_util\\cpu.py",
+      "sha256": "45150950ec4972dbac92e3d626465bd86f1f8e22682c8102b6796c17d193bb17"
+    },
+    "source_chain": [
+      "util/_subprocess.py:538 default_max_subprocesses()",
+      "util/_subprocess.py:393 effective_cpu_count()",
+      "_util/cpu.py:72 cgroup_cpu_quota()",
+      "_util/cpu.py:93 _cpu_hierarchy()",
+      "_util/cpu.py:130 _read(mounts)",
+      "_util/cpu.py:282 path.read_text()",
+      "inspect-cohort-v1.py:134 audit refusal",
+      "inspect-cohort-v1.py:65 RuntimeError"
+    ],
+    "explanation": "The proof guard denied the Linux CPU probe before normal open, raising RuntimeError. The installed helper catches OSError/ValueError at cpu.py:283 and returns None for normal absent/unreadable probes. RuntimeError bypassed that fallback. Source analysis establishes this guard boundary; further imports/runtime behavior remain unmeasured."
+  },
+  "retained_limits": [
+    "First actual partial retained and not retried; further cohorts parked.",
+    "No original/private tasks, actors, authority or ledger inputs; no model/provider/container calls or new funding.",
+    "No successful samples, live viewer, observer traces, durable evaluation logs, performance improvement or whole-CLI adoption established.",
+    "No dependency change in Buddha application requirements; isolated proof-only licensing decision remains narrow.",
+    "No comparable-size history gate, IMP-01/EVAL-02 scientific claim or live readiness gate closed.",
+    "Python audit guards are scoped admission controls, not a universal operating-system sandbox."
+  ],
+  "final_checkout_quality": {
+    "status": "pass",
+    "result": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\inspect-observer-seam-20261103-v1\\full-quality-result-v2.json",
+      "sha256": "32889dd487348097ece43acb2031d0686af46427572d3e8e82bfa00a60f58ceb"
+    },
+    "seconds": 43.090331100160256,
+    "configured_format_files": 308,
+    "mypy_files": 90,
+    "bandit_issues": 0,
+    "runtime_and_development_audits": "zero reported vulnerabilities; existing exact39 development-tool closure",
+    "in_memory_compile_python_files": 365,
+    "source_pins_preserved": true,
+    "prior_green_source_map_equal": true,
+    "previous26test_result_reused": true,
+    "scope": "Configured whole repository quality only; no unit tests, Inspect imports, provider/model, Docker/container, original records or retained history. Existing exact39 check-tools; no installs."
+  }
+}

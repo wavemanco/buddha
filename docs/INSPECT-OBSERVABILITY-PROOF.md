@@ -1,20 +1,51 @@
 # Inspect observability compatibility proof
 
-This is the bounded ENG-OBS-01 proof in [PLAN.md](PLAN.md), not adoption of a new
-runner. It tests one synthetic stage, with no model calls, against pinned Inspect
-AI 0.3.287. The existing Gateway, authority ledger, executor and official
-NoveltyBench 1.1 evaluation remain authoritative.
+This records the bounded ENG-OBS-01 candidate in [PLAN.md](PLAN.md). Its first
+actual proof attempt stopped during Inspect import, before either synthetic
+sample ran. Inspect AI 0.3.287 remains unadopted. The existing Gateway, authority
+ledger, executor and official NoveltyBench 1.1 evaluation remain authoritative.
 
 The intended replacement is the custom display/polling in `Progress` and the
 duplicate launcher heartbeat on an explicitly selected Inspect path. A second
 coordinator or another loop reading `progress.snapshot` does not satisfy that
 requirement. The existing paths retain their behaviour while this is a candidate.
 
-The cohort must show a successful stage, an actual typed failure and a genuinely
-open action observed before it finishes. It must retain the deliberate failure,
+The intended cohort must show a successful stage, an actual typed failure and a
+genuinely open action observed before it finishes. It must retain the deliberate failure,
 compare the underlying request-construction result with a direct call, and
 show no extra model, ledger or execution effects. Its parent deadline will include
-viewer shutdown. No retry or automatic deadline extension is part of the proof.
+viewer shutdown. That acceptance remains unmeasured; the stopped attempt was not
+retried, and further cohorts are parked.
+
+## Actual partial result: November 3, 2026
+
+The isolated development environment was provisioned with all 80 pinned package
+versions verified. Buddha's dependency requirements were unchanged. The small
+stdlib observer seam passes 26 focused tests, including existing progress and
+heartbeat regressions. Those tests did not import Inspect and do not establish
+framework compatibility or whole-CLI adoption.
+Final configured quality checks and compilation of all 365 public Python files
+also pass; the earlier 26-test result was reused without rerunning it.
+
+The one actual attempt returned after 9.202 seconds within its 180-second total
+limit. Both owned children exited and were joined; all 365 bound public Python
+files remained unchanged. The parent retained an explicit partial result.
+
+Inspect's import-time CPU detector attempted the literal Linux path
+`/proc/self/mountinfo`, which maps to `C:\proc\self\mountinfo` on this Windows
+drive. The proof's read guard raised `RuntimeError` before the file could open.
+Inspect's helper normally catches `OSError` and `ValueError` for absent or
+unreadable CPU probes; our different exception prevented that fallback. This
+observed failure identifies an overly restrictive proof admission, not an
+established Windows incompatibility in Inspect. The host path was not opened to
+check whether it exists.
+
+No sample, observer trace action, running viewer, trace query or evaluation log
+was reached. Startup-isolation records and both stderr files are retained in the
+[delivery record](conformance/inspect-observer-proof-delivery.json). The candidate
+seam and isolated package installation do not adopt Inspect as Buddha's runner,
+prove a reduction in reconstruction time, release the history gate, or authorize
+paid work. No further cohort or retry is scheduled.
 
 ## Dependency scope decision: November 2 local / November 3 UTC 2026
 
@@ -65,4 +96,4 @@ unsupported. A port race must end as a startup failure, without selecting anothe
 port or terminating an unrelated viewer. Stop and join only the owned process.
 The proof admits no external network, model requests, real benchmark inputs,
 original run records or source-actor execution. Public API compatibility and
-actual viewer behaviour remain unmeasured until the cohort runs.
+actual viewer behaviour remain unmeasured after the import-time stop.
