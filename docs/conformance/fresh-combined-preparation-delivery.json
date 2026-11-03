@@ -1,0 +1,190 @@
+{
+  "actual_observation": {
+    "child_joined": true,
+    "credential_environment_forwarded": false,
+    "deadline_seconds": 180,
+    "exit_code": 0,
+    "full_handoff_or_capacity_check_performed": false,
+    "indexed_output_files": 4,
+    "indexed_output_names": [
+      "comparison-plan.json",
+      "handoff-primary-unfunded.json",
+      "reference-input-bindings.json",
+      "unallocated-combined-declaration.json"
+    ],
+    "input_pins_preserved": true,
+    "parent": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-combined-20261102-v1\\preparation-parent-v1.json",
+      "sha256": "99b62b7f1446adfc27fd62ba162732291eeb6913d9c387b4a635b5fbb390753b"
+    },
+    "result": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-fresh-combined-20261102-v1\\preparation-result.json",
+      "sha256": "0d6c3a735d2a47cf5561f2d89f2174c700d2e1c0572763aaff8bf0964a07d1ef"
+    },
+    "result_additional_to_index": true,
+    "seconds": 1.367518600076437,
+    "test_source_preserved": true
+  },
+  "base_head": "fbe68efe04a62cdf701b714fdf911791a034eb5f",
+  "bindings": {
+    "assessment": "Exact review-bound assessment selected; base review handoff unchanged except additive source bindings.",
+    "final_actual_outer_review_inputs_deferred_not_placeholder_approved": true,
+    "future_primary_plain_runtime_authority_outer_launch_and_review_paths_absent_at_recorded_check": true,
+    "method": "all_conditions_then_equal_prompts_descriptive.v1",
+    "plain_references": [
+      "regenerate",
+      "in-context"
+    ],
+    "tracks": {
+      "actual_human_ratings_created": false,
+      "ai_only_blocked_by_humans": false
+    }
+  },
+  "builder": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\fresh-combined-preparation\\docs\\conformance\\prepare-fresh-combined.py",
+    "sha256": "faff0ed2ef701ce8bc254d4d5b545beef43bbcf57d3c28ff1c86729f80369a35"
+  },
+  "format": "buddha.fresh-combined-preparation-delivery.v1",
+  "guide": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\fresh-combined-preparation\\docs\\FRESH-COMBINED-PREPARATION.md",
+    "sha256": "80c148f1a830bb0460b277afae9c226b0dc47e1fbaa898a6c4b6f1001e0f5001"
+  },
+  "inherited_preparations": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-fresh-primary-20261102-v2\\preparation-result.json",
+      "sha256": "fd299e4f14772281db78fdbc898aaa4f79e7858c4247ab2aca901111c4908399"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-fresh-plain-20261102-v1\\preparation-result.json",
+      "sha256": "7c7adddfb5f92e21e73aa1475a3ebbfec71e99eb4f75dabb6b964e2991100be2"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-fresh-review-20261102-v1\\preparation-result.json",
+      "sha256": "3161025789c53185949a25c667440c6c9f31cb56ac25f001ceaa9fecfe7fd74a"
+    }
+  ],
+  "input_manifest": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-combined-20261102-v1\\inputs-v1.json",
+    "sha256": "ecc917d5bdaaf23fddc4c79b41ef766f994191bbe1df0d9bd93bd0413f6925ef"
+  },
+  "input_scope": {
+    "TaskSet_private_program_custody_evidence_protocol_prose_inputs": false,
+    "metadata_roles": 11,
+    "named_metadata_public_control_files": 15,
+    "parent_total_input_pins": 372,
+    "public_library_source_pins": 355,
+    "task_file_reference_only": true
+  },
+  "limits": [
+    "Declaration construction only, not prospective adoption, funding, execution permission or scientific success.",
+    "No workers, model calls, real reviewers, authorities, owners or runtime created by this recipe. No original paid state, SQL/history or private source semantics read.",
+    "Task/protocol/custody and earlier full-handoff checks are inherited recorded evidence, not a new full checker/capacity rerun. Reference-only task bytes and inherited controls were not reopened.",
+    "Known nominal phase/owner envelopes are not an aggregate grant, forecast or current-price/account certification. Shared-reference and combined allocations remain unset.",
+    "Structural consistency does not attest truthful exposure, pretraining absence, semantic-family independence or reviewer independence; no new attestation or process rename.",
+    "Existing proposal-capacity policy remains a candidate: actual future proposal calls supply its evidence, not an extra standalone paid API probe or advance capacity pass.",
+    "Future actual approval/authority/outer/review controls must be bound and validated before original owners. Native reviewer/model/context choices are not freshly adopted or allocated.",
+    "Trusted metadata recipe with named before/after preservation; no hostile-code sandbox, atomic snapshot, full-suite/hosted CI, full workload capacity or live-clearance claim."
+  ],
+  "static_checks": {
+    "ruff_check": "pass",
+    "ruff_format": "pass",
+    "scope": "Recipe and test files at the exact builder/test hashes above; final broader QA can be attached separately."
+  },
+  "status": "completed_unfunded_declaration_only",
+  "supplied_checks": {
+    "application_modules_loaded": [],
+    "deadline_seconds": 120,
+    "errors": 0,
+    "failures": 0,
+    "parent_seconds": 0.10994429979473352,
+    "receipt": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-combined-20261102-v1\\supplied-result-v1.json",
+      "sha256": "bd5ad700be3eb36c40eb47227a970ccff58b4893ec5fd2dedb26a9df36786a36"
+    },
+    "scope": "Supplied metadata transformation, refusal and additive-binding tests; no main-admission or real-input/full-handoff claim.",
+    "skips": 0,
+    "source_pins_equal": true,
+    "tests": 5,
+    "unittest_seconds": 0.001
+  },
+  "terms": {
+    "combined_allocation": null,
+    "funding_status": "unallocated",
+    "plain_nominal_owner_envelopes": {
+      "in-context": {
+        "generation": {
+          "budget_microusd": 650000000,
+          "max_calls": 312
+        },
+        "native": {
+          "budget_microusd": 650000000,
+          "max_calls": 6656
+        }
+      },
+      "regenerate": {
+        "generation": {
+          "budget_microusd": 650000000,
+          "max_calls": 312
+        },
+        "native": {
+          "budget_microusd": 650000000,
+          "max_calls": 6656
+        }
+      }
+    },
+    "primary_phase_limits": {
+      "final": {
+        "budget_microusd": 85000000,
+        "max_calls": 10240
+      },
+      "search": {
+        "budget_microusd": 40000000,
+        "max_calls": 4096
+      },
+      "validation": {
+        "budget_microusd": 0,
+        "max_calls": 0
+      }
+    },
+    "shared_reference_allocation": null
+  },
+  "tests": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\fresh-combined-preparation\\tests\\test_fresh_combined_preparation.py",
+    "sha256": "12336babca7838c96f7a9b5e5229989bd9dab10f49b330f0acb4f0f54276c02d"
+  },
+  "date": "2026-11-02",
+  "spec": [
+    "PLAN IMP-01",
+    "DESIGN sections3,5,7,9"
+  ],
+  "quality": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-combined-20261102-v1\\quality-result-v1.json",
+    "sha256": "9a0895553b8feb25753d68365e6610b4672c878cf8480006fa87a6e24e88f9e0"
+  },
+  "quality_commands": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-combined-20261102-v1\\quality-tool-results-v1.json",
+    "sha256": "7fc786eb0a0eaa20ba9fcf299a9ba0e21467aea6b09f1099fae3116e5405e416"
+  },
+  "independent_reviews": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-combined-20261102-v1\\combined-preparation-review-v1.json",
+      "sha256": "0709f13b3286a1453e6895f02b6f529e9fa095b106def3cca6a768790a149c61"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-combined-20261102-v1\\price-bounds-review-v1.json",
+      "sha256": "0ccfbff9c4bd25ca32c5ab3886575cd43d7f35274ed6ad41f7e8a3dba0f70af9"
+    }
+  ],
+  "public_price_bounds": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-combined-20261102-v1\\price-bounds-observation-v1.json",
+    "sha256": "f91e4265e93ae094489874ec16c14164d13aa88aabb89c46e7de001a15717bbf"
+  },
+  "capacity_contract_trace": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-confinement-20261102-v1\\capacity-contract-trace-v1.json",
+    "sha256": "ebae06f4e3fda710104e48a4789a8ea6acc2c68a7b42d0bf3e70649a46831f65"
+  },
+  "roadmap_preservation": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-combined-20261102-v1\\plan-preservation-v233.json",
+    "sha256": "9a3244a6cb2de837d0e7e15f13b2fcd80e9998a6d92cc426d4ecce1d44980cf8"
+  }
+}

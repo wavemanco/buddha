@@ -146,3 +146,24 @@ selection. Administrative logging and the fixed official evaluator can be
 shared. Report generation cost and total search/research cost separately.
 Prepare and cost those controls prospectively; do not add them silently to an
 existing frozen workload or treat an improver comparison as their substitute.
+
+## Public-price checkpoint: November 3 UTC / November 2 local, 2026
+
+The prepared profile passed a no-provider price-bound check at 02:04 UTC. All five roles cover the reviewed public Standard-rate multipliers; two unsupported cache overrides are rejected. The frozen profile file remains unchanged. These stored rates are conservative ceilings used by budget checks, not a forecast of total spend or a provider invoice.
+
+All figures below are USD per million tokens. Stored ceilings retain the existing 10% cushion.
+
+| Model and prepared role | Public base input / output | Stored input / output ceiling |
+| --- | ---: | ---: |
+| GPT-5.6 Luna — seed and grouping | $0.20 / $1.20 | $0.55 / $1.98 |
+| GPT-6.1 Sol — proposal | $2.00 / $10.00 | $5.50 / $16.50 |
+| Claude Opus 5 — quality | $5.00 / $25.00 | $11.00 / $27.50 |
+| Claude Sonnet 5 — fallback | $2.00 / $10.00 | $4.40 / $11.00 |
+
+The OpenAI model pages specify 1.05-million-token context windows and 128,000 maximum output tokens. Above 272,000 input tokens, the reviewed long-context multipliers are 2× input and 1.5× output. The default 30-minute cache write costs 1.25× input. Applying these multipliers plus the cushion gives the stored Luna and Sol ceilings. [Luna model](https://developers.openai.com/api/docs/models/gpt-5.6-luna), [Sol model](https://developers.openai.com/api/docs/models/gpt-6.1-sol), [OpenAI pricing](https://developers.openai.com/api/docs/pricing).
+
+OpenAI also documents a 2.5× write multiplier for extended caching up to 12 hours through Responses. That option is outside this frozen Gateway route: the pure guard rejects both `prompt_cache_options` and `prompt_cache_retention`. The existing ceiling is not permission to enable an unsupported cache mode. [Prompt-caching documentation](https://developers.openai.com/api/docs/guides/prompt-caching).
+
+For Anthropic, the reviewed maximum one-hour cache-write prices are $10 input for Opus and $4 input for Sonnet. Their stored input ceilings include that write price plus the cushion; output ceilings include the public output price plus the cushion. [Opus model](https://platform.claude.com/docs/en/models/opus-5/overview), [Sonnet model](https://platform.claude.com/docs/en/models/sonnet-5/overview), [Anthropic pricing](https://platform.claude.com/docs/en/about-claude/pricing).
+
+This is a dated public-price and pure-guard check. It does not establish account access, balance, capacity, invoice reconciliation, a new funding allocation or live approval. No model or profile was substituted, and no new selection or spending authorization is inferred. Prices and the exact accepted requests must be rechecked for the eventual funded handoff.
