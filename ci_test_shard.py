@@ -225,6 +225,7 @@ def _terminal_bytes(args: argparse.Namespace, code: int) -> bytes:
             "mode": "inventory" if args.list_only else "tests",
             "idle_seconds": float(args.idle_seconds),
             "exit_code": code,
+            **({"partition_seed": args.partition_seed} if args.partition_seed is not None else {}),
         },
         sort_keys=True,
         separators=(",", ":"),
@@ -272,6 +273,8 @@ def _watch(args: argparse.Namespace) -> int:
         ]
         if args.isolate is not None:
             command.extend(["--isolate", args.isolate])
+        if args.partition_seed is not None:
+            command.extend(["--partition-seed", str(args.partition_seed)])
         if args.list_only:
             command.append("--list-only")
         if sys.platform == "win32":
@@ -380,17 +383,28 @@ def _collect(node: object) -> list[unittest.TestCase]:
     raise ValueError("collection contains an unsupported test object")
 
 
-def _partition(cases: list[unittest.TestCase], count: int, isolate: str | None) -> list[list[int]]:
+def _partition(
+    cases: list[unittest.TestCase],
+    count: int,
+    isolate: str | None,
+    *,
+    partition_seed: int | None = None,
+) -> list[list[int]]:
     if type(count) is not int or not 1 <= count <= len(cases):
         raise ValueError("shard count must be positive and no larger than the test census")
+    if partition_seed is not None and (
+        type(partition_seed) is not int or not 0 <= partition_seed < 2**32
+    ):
+        raise ValueError("partition seed must be an unsigned 32-bit integer")
     names = [case.id() for case in cases]
     if any(type(name) is not str or not name for name in names):
         raise ValueError("every test occurrence needs its original string identity")
     if isolate is not None and (count < 2 or names.count(isolate) != 1):
         raise ValueError("isolation requires multiple shards and exactly one matching test")
     groups: list[list[int]] = [[] for _ in range(count)]
+    prefix = b"" if partition_seed is None else str(partition_seed).encode() + b"\0"
     for ordinal, name in enumerate(names):
-        digest = int.from_bytes(hashlib.sha256(name.encode()).digest())
+        digest = int.from_bytes(hashlib.sha256(prefix + name.encode()).digest())
         shard = (
             (0 if name == isolate else 1 + digest % (count - 1))
             if isolate is not None
@@ -411,7 +425,7 @@ def _execute(args: argparse.Namespace, parser: argparse.ArgumentParser, progress
         if loader.errors:
             raise ValueError("discovery failed:\n" + "\n".join(map(str, loader.errors)))
         cases = _collect(suite)
-        groups = _partition(cases, args.count, args.isolate)
+        groups = _partition(cases, args.count, args.isolate, partition_seed=args.partition_seed)
     except (ValueError, ImportError) as error:
         parser.error(str(error))
     assignments = {ordinal: shard for shard, group in enumerate(groups) for ordinal in group}
@@ -431,6 +445,11 @@ def _execute(args: argparse.Namespace, parser: argparse.ArgumentParser, progress
                 "counts": [len(group) for group in groups],
                 "isolated_test": args.isolate,
                 "census_sha256": hashlib.sha256(raw).hexdigest(),
+                **(
+                    {"partition_seed": args.partition_seed}
+                    if args.partition_seed is not None
+                    else {}
+                ),
             }
         ),
         flush=True,
@@ -459,12 +478,15 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--count", type=int, required=True)
     parser.add_argument("--index", type=int, required=True)
     parser.add_argument("--isolate")
+    parser.add_argument("--partition-seed", type=int)
     parser.add_argument("--list-only", action="store_true")
     parser.add_argument("--idle-seconds", type=float, default=3600.0)
     parser.add_argument("--_worker", type=Path, help=argparse.SUPPRESS)
     args = parser.parse_args(argv)
     if not 0 <= args.index < args.count:
         parser.error("shard index must be between zero and count minus one")
+    if args.partition_seed is not None and not 0 <= args.partition_seed < 2**32:
+        parser.error("partition seed must be an unsigned 32-bit integer")
     if not math.isfinite(args.idle_seconds) or not 0 < args.idle_seconds <= 3600:
         parser.error("idle deadline must be positive, finite and no more than 3600 seconds")
     if args._worker is None:

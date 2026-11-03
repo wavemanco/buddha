@@ -26,11 +26,19 @@ retaining exactly those filesystem calls and reads. Both matched cases pass;
 pair establishes reduced computation, not a reliable throughput or hosted CI
 gain. Native binding setup is under 1% of this case and stays unchanged.
 
-**Next bounded work.** Verify the candidate in hosted CI. Assess one configuration
-seed for the existing assignment hash from recorded durations, preserving the
-isolated test and full ordered coverage; do not introduce a runtime duration
-database or scheduler. The isolated method alone took 9,829.672 Windows seconds,
-so redistribution cannot eliminate that observed cost. Further repeated-I/O
+**Distribution candidate.** A single optional seed for the existing assignment
+hash is now implemented, with 1688 explicitly selected in CI from separate
+historical Windows/Linux models. No runtime duration database or scheduler is
+introduced. Actual inventory retains all 2,272 occurrences in their original
+within-group order and keeps the isolated method alone. All 26 runner/watchdog
+and nine leaf-guard methods pass; hosted verification and savings remain open.
+The model excludes eight unpriced new tests and still permits a Windows
+regression under conservative residual assumptions. This targets longest-job
+latency, not a promise of lower total billed Actions minutes.
+
+**Next bounded work.** Verify both candidates in hosted CI before claiming speed
+improvement. The isolated method alone took 9,829.672 Windows seconds, so
+redistribution cannot eliminate that observed cost. Further repeated-I/O
 reduction needs its own measured shared-path change; retain the history gate.
 
 **Acceptance.** Retain every existing test occurrence, duplicate multiplicity,

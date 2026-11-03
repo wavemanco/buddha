@@ -8,7 +8,8 @@ to exactly one process on each OS; duplicate names and original order are
 retained. Class and module fixtures run separately in each process that needs them.
 
 The largest finite-study test has its own process. The other tests are assigned
-by a stable hash of their names. Each process prints the full assignment list,
+by a stable hash of their names and the configured CI partition seed. Each
+process prints the full assignment list,
 its selected count and a shared inventory fingerprint, so missing or duplicate
 assignments can be checked. Discovery errors, empty groups and an ambiguous
 isolated name stop the check instead of silently reducing coverage.
@@ -297,3 +298,58 @@ needed. Further reduction of repeated history reads remains separately bounded.
 The original CI run passed all ten jobs and the workflow at 12:54:30 UTC. The
 already approved v14 observation started after the final pin/path checks, using
 protected `9ded9b9` source; this candidate is not used in that frozen attempt.
+
+### Rebalance the existing hash assignment
+
+CI now explicitly supplies `--partition-seed 1688`. This only distributes tests
+between CI jobs; model sampling and NoveltyBench judging settings are unchanged.
+The assignment hashes the UTF-8 decimal seed, one NUL byte (0x00), then the UTF-8
+test ID. The isolated method stays in group 0. Every occurrence, including
+duplicate names, remains present, with original order retained within each group.
+
+Omitting the option retains the original unsalted assignment and original
+inventory/terminal-record shape. Explicit `0` is a seeded assignment. Values must
+be integers from 0 through 4,294,967,295. A supplied value appears in the inventory
+header and the checked terminal receipt; a receipt for another seed is rejected.
+Worker containment, genuine-progress deadlines and all quality checks remain.
+
+The selection examined 4,096 candidate seeds using the completed original
+Windows and Linux logs separately. Each non-isolated group reports its 30 slowest cases;
+remaining elapsed time is allocated uniformly to the unmeasured occurrences for
+this estimate. The ranking balances each OS's avoidable longest-group cost
+relative to its fixed-weight model floor. It does not optimize benchmark scores.
+
+| Historical model | Recorded longest group | Seed 1688 estimate |
+| --- | ---: | ---: |
+| Windows | 13,425.957 s (3h44) | 11,097.938 s (3h05) |
+| Linux | 4,197.521 s (70 min) | 3,586.268 s (60 min) |
+
+The projections cover the original 2,264 occurrences. Eight added tests are
+unpriced and excluded from that model. The actual current inventory retains all
+2,272 occurrences in groups `[1, 579, 546, 601, 545]`; complete hosted execution
+and timing remain pending. Conservative residual-cost model bounds still permit
+a slower Windows result. Host variation, source changes, fixture duplication and
+cache effects require actual measurement before claiming a saving.
+
+This targets waiting for the longest job. It removes no test work and does not
+promise fewer total billed Actions minutes. Under the historical fixed weights,
+even perfect distribution has a Windows floor near three hours. Reducing
+repeated verification remains separate work.
+
+All 26 runner/watchdog methods pass, including wrong-seed receipt rejection and
+actual five-group execution of a tiny supplied suite. Nine leaf-document guard
+methods also pass; all existing test bodies remain. The
+[delivery record](conformance/ci-partition-seed-delivery.json) retains the complete
+timing model, current inventory, checks and limitations.
+
+This optional developer command prints the seeded assignment once in the current
+PowerShell window. It imports test modules and creates ordinary temporary runner
+files, but runs no test bodies and spends no model budget. No keys, Docker or
+separate window are needed. Ctrl+C stops it.
+
+```powershell
+python -m ci_test_shard --count 5 --index 0 --partition-seed 1688 --list-only --isolate test_improver_study.FiniteImproverStudyTests.test_finite_fixed_operators_common_conditions_negative_slots_and_original_recovery
+```
+
+This change is stacked on the lexical-path candidate. The frozen v14 observation
+continues on its separately protected source and does not use this CI change.

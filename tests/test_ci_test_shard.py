@@ -1,5 +1,6 @@
 """Full-census CI partitioning with ordinary unittest fixtures and tiny suites."""
 
+import hashlib
 import importlib
 import io
 import json
@@ -79,6 +80,145 @@ class CiTestShardTests(unittest.TestCase):
                 self.api._partition(cases, count, isolate)
         with self.assertRaises(ValueError):
             self.api._partition([], 1, None)
+
+    def test_optional_partition_seed_preserves_default_and_every_ordered_occurrence(self):
+        cases = [case("probe." + str(index), []) for index in range(80)]
+        cases.append(case(cases[1].id(), []))
+        for count, isolate in ((4, None), (5, cases[0].id())):
+            with self.subTest(count=count, isolate=isolate):
+                old = [[] for _ in range(count)]
+                for ordinal, item in enumerate(cases):
+                    value = int.from_bytes(hashlib.sha256(item.id().encode()).digest())
+                    index = (
+                        (0 if item.id() == isolate else 1 + value % (count - 1))
+                        if isolate
+                        else value % count
+                    )
+                    old[index].append(ordinal)
+                self.assertEqual(self.api._partition(cases, count, isolate), old)
+                for seed in (0, 782, 2**32 - 1):
+                    groups = self.api._partition(cases, count, isolate, partition_seed=seed)
+                    self.assertEqual(sorted(i for group in groups for i in group), list(range(81)))
+                    self.assertTrue(all(group == sorted(group) and group for group in groups))
+                    self.assertTrue(any(1 in group and 80 in group for group in groups))
+                    if isolate:
+                        self.assertEqual(groups[0], [0])
+                    self.assertEqual(
+                        groups, self.api._partition(cases, count, isolate, partition_seed=seed)
+                    )
+                self.assertNotEqual(
+                    old, self.api._partition(cases, count, isolate, partition_seed=0)
+                )
+
+    def test_partition_seed_is_bounded_and_bound_into_terminal_receipts(self):
+        cases = [case("probe." + str(index), []) for index in range(40)]
+        for value in (True, False, -1, 2**32, 1.0, "4", object()):
+            with self.subTest(value=value), self.assertRaises(ValueError):
+                self.api._partition(cases, 4, None, partition_seed=value)
+        args = SimpleNamespace(
+            count=5,
+            index=1,
+            isolate="isolated",
+            list_only=False,
+            idle_seconds=3600,
+            partition_seed=None,
+        )
+        expected = (
+            b'{"count":5,"exit_code":0,"format":"buddha.ci-test-shard-terminal.v1",'
+            b'"idle_seconds":3600.0,"index":1,"isolate":"isolated","mode":"tests"}'
+        )
+        self.assertEqual(self.api._terminal_bytes(args, 0), expected)
+        args.partition_seed = 0
+        first = self.api._terminal_bytes(args, 0)
+        self.assertEqual(json.loads(first)["partition_seed"], 0)
+        args.partition_seed = 1
+        self.assertNotEqual(first, self.api._terminal_bytes(args, 0))
+
+    def test_seeded_workers_execute_the_complete_manifest_and_reject_wrong_seed_receipt(self):
+        executed, common = [], None
+        for index in range(5):
+            with self.subTest(index=index), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                self.fixture(root)
+                result = self.command(
+                    root,
+                    "--count",
+                    "5",
+                    "--index",
+                    str(index),
+                    "--isolate",
+                    "test_probe.Probe.test_000",
+                    "--partition-seed",
+                    "782",
+                )
+                self.assertEqual(result.returncode, 0, result.stderr)
+                rows = [json.loads(line) for line in result.stdout.splitlines()]
+                self.assertEqual(rows[0]["partition_seed"], 782)
+                expected = [row["id"] for row in rows[1:] if row["shard"] == index]
+                self.assertEqual((root / "order").read_text().splitlines(), expected)
+                self.assertEqual((root / "setup").read_text(), "S")
+                self.assertEqual((root / "cleanup").read_text(), "C")
+                self.assertEqual((root / "module-setup").read_text(), "M")
+                self.assertEqual((root / "module-cleanup").read_text(), "Z")
+                if common is None:
+                    common = rows[1:]
+                self.assertEqual(common, rows[1:])
+                for row in rows[1:]:
+                    digest = int.from_bytes(hashlib.sha256(b"782\0" + row["id"].encode()).digest())
+                    self.assertEqual(
+                        row["shard"],
+                        0 if row["id"] == "test_probe.Probe.test_000" else 1 + digest % 4,
+                    )
+                executed.extend(expected)
+        self.assertIsNotNone(common)
+        self.assertEqual(sorted(executed), sorted(row["id"] for row in common))
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            self.fixture(root)
+            original = Path(self.api.__file__).read_text()
+            marker = "code = _execute(args, parser, progress)"
+            self.assertEqual(original.count(marker), 1)
+            copied = root / "runner.py"
+            copied.write_text(
+                original.replace(marker, marker + "\n        args.partition_seed += 1"),
+                encoding="utf-8",
+            )
+            with patch.object(self.api, "__file__", str(copied)):
+                result = self.command(
+                    root, "--count", "1", "--index", "0", "--partition-seed", "782"
+                )
+            self.assertEqual(result.returncode, 125, result.stderr)
+            self.assertIn("terminal", result.stderr)
+
+    def test_seeded_inventory_is_process_hash_independent_and_invalid_cli_never_starts_tests(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            self.fixture(root)
+            args = (
+                "--count",
+                "5",
+                "--index",
+                "0",
+                "--isolate",
+                "test_probe.Probe.test_000",
+                "--partition-seed",
+                "0",
+                "--list-only",
+            )
+            first = self.command(root, *args, seed="1")
+            second = self.command(root, *args, seed="9001")
+            self.assertEqual((first.returncode, second.returncode), (0, 0), first.stderr)
+            self.assertEqual(first.stdout, second.stdout)
+            self.assertEqual(json.loads(first.stdout.splitlines()[0])["partition_seed"], 0)
+            for value in ("-1", "4294967296", "nan", "1.2"):
+                with self.subTest(value=value):
+                    invalid = self.command(
+                        root, "--count", "1", "--index", "0", "--partition-seed", value
+                    )
+                    self.assertEqual(invalid.returncode, 2, invalid.stderr)
+            self.assertFalse((root / "body").exists())
+            self.assertFalse((root / "setup").exists())
+            self.assertFalse((root / "module-setup").exists())
 
     def command(self, root, *args, seed="1", timeout=12):
         allowed = (
