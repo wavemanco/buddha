@@ -194,3 +194,106 @@ The workflow supplies five groups, the exact isolated test name and the same
 and compilation checks remain required by the workflow. Local helper checks
 and an inventory are not a passing full hosted matrix. Current delivery and
 remaining verification are recorded in [PLAN.md](PLAN.md).
+
+## Windows cost investigation — November 3, 2026
+
+The user requested faster Windows checks without compromising quality and asked
+that the current run proceed unchanged. ENG-CI-01 in [BACKLOG.md](BACKLOG.md#eng-ci-01-reduce-windows-verification-cost-without-reducing-coverage)
+records the boundary; this work is parallel to the approved history observation.
+
+The completed shard 1 jobs in [run 41608659735](https://github.com/wavemanco/buddha/actions/runs/41608659735)
+use source `9ded9b9f3decb6a1d66a6497efa53b3e1ce5dd62` and the same 593 selected
+test IDs from the 2,264-occurrence inventory. Windows skipped one; Linux skipped
+three. These are observed job timings, not a controlled machine comparison.
+
+| Work measured | Windows | Linux |
+| --- | ---: | ---: |
+| All selected tests in shard 1 | 8,073.995 s (134.6 min) | 1,297.521 s (21.6 min) |
+| Original controllers, resume and keyless replay | 1,143.003 s | 197.437 s |
+| Proposal-capacity checks across the six-cell grid | 1,002.969 s | 147.091 s |
+| Prospective six-cell comparison | 938.088 s | 128.630 s |
+
+The three methods together account for 3,084.060 Windows seconds, about 38% of
+that job's test time. The test suite occupies about 99% of its captured log
+interval; tool installation and quality checks account for roughly 72 seconds
+outside it. Dependency caching could save some setup time, but does not explain
+or address the dominant measured cost.
+
+These integration tests construct experiments, preserve accounting and source
+records, reconstruct histories, and verify recovery and keyless replay. Several
+reach the same fresh-file/history verification path repeatedly. The stable name
+hash distributes test counts, not measured durations; 593 short tests and 593
+integration tests are not equivalent workloads. Tests in one assignment execute
+in one contained worker, rather than starting a process for every test.
+
+All five Linux groups completed in 3,586.268, 1,297.521, 4,197.521, 1,311.636 and
+3,041.937 seconds respectively. The isolated group contains just one end-to-end
+method; that same method took 9,829.672 seconds on Windows. Redistributing other
+methods cannot shorten that observed isolated method itself.
+
+The bounded local profile now completes one unchanged source-search recovery
+case with fresh supplied fixtures. It performs 55 source-screen collections,
+93,855 calls to the ancestor guard, 2,191,311 filesystem status calls and 116,574
+buffered reads. This establishes substantial repeated verification work in that
+case. Native API binding setup takes under 1% of its profiled time and is left
+unchanged. Neither these results nor the OS ratios identify antivirus, a specific
+filesystem mechanism or SQLite latency as the cause of the Windows difference.
+
+Any repair must retain fresh reads and all identity/link/reparse, byte-bound,
+hash, final-observation, accounting and cleanup checks. Existing test occurrences,
+both OSes, all ten jobs, every quality check, contained workers, terminal receipts
+and the 60-minute genuine-progress rule remain required. Local profiles are not
+passing hosted CI or a claim that the separate 193-owner history gate fits.
+
+### First bounded repair: reuse the path calculation
+
+The candidate reuses only the calculated ancestor paths for ordinary concrete
+paths. It still checks every ancestor against the filesystem on every call.
+It caches no file contents, hashes, stat results, open handles or permission to
+trust a file. Exact spelling and path type form the key. At most 512 entries are
+retained; spellings over 1,024 characters or 32 separators, and custom path types,
+keep the original lazy behavior. These are cache eligibility limits, not new
+reasons to refuse a path. The lexical objects use process memory outside the
+raw-byte reader allowance; this is not a process RAM ceiling.
+
+Both runs of the matched local case passed, with their children joined and their
+respective source pins unchanged:
+
+| Observed work | Before | Candidate |
+| --- | ---: | ---: |
+| Ancestor-path construction steps | 3,117,019 | 956,557 |
+| Filesystem status calls | 2,191,311 | 2,191,311 |
+| Buffered reads | 116,574 | 116,574 |
+| Instrumented elapsed seconds | 151.303 | 147.205 |
+
+The construction reduction is established. This one sequential instrumented pair
+does not establish a reliable throughput gain: buffered-read time itself changed
+from 40.037 to 49.389 seconds. Function times overlap. Whole hosted CI savings
+remain unmeasured, and this small repair does not solve the repeated-I/O cost.
+
+The three earlier profiling attempts stopped on instrumentation admission errors:
+a required public fixture, owned temporary descriptors and internal atomic links.
+Their partial records remain; they are not production defects or timing baselines.
+The final pair uses the same corrected collector, case, assertions and bounds.
+The [delivery record](conformance/windows-ci-performance-delivery.json) binds the
+actual observations, original regression, 61 focused checks and quality results.
+The existing 2,264 test bodies remain, with four additional methods. No workflow,
+runner, dependency, containment, durability or watchdog setting changes here.
+
+This optional developer command runs those four new checks once in the current
+PowerShell window. It uses temporary local files, needs no keys or Docker and
+spends no model budget. Ctrl+C stops it. It does not run the full suite.
+
+```powershell
+python -B -m unittest discover -s tests -p test_releases.py -k AncestorGeometryTests -v
+```
+
+Next, use the retained duration evidence to assess a single optional seed for
+the existing assignment hash, keeping isolated group 0 and every test occurrence
+in its original order within its new group. Offline estimates must stay separate
+from actual hosted savings. No runtime duration database or new scheduler is
+needed. Further reduction of repeated history reads remains separately bounded.
+
+The original CI run passed all ten jobs and the workflow at 12:54:30 UTC. The
+already approved v14 observation started after the final pin/path checks, using
+protected `9ded9b9` source; this candidate is not used in that frozen attempt.

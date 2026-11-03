@@ -1,0 +1,406 @@
+{
+  "format": "buddha.windows-ci-performance-delivery.v1",
+  "date": "2026-11-03",
+  "plan_item": "ENG-CI-01",
+  "design_sections": [
+    9,
+    10
+  ],
+  "status": "local_candidate_checked_hosted_verification_pending",
+  "problem": "Repeated full history/source verification plus count-based test grouping makes Windows CI expensive.",
+  "hosted_evidence": [
+    {
+      "path": "runs\\checks\\pr230-progress-20261103T094957Z\\shard1-windows-ubuntu-comparison.json",
+      "sha256": "25084c81e40a910eed982bccb5ed2c3b2cfdc0db232f330dd537ba1d0186fe33"
+    },
+    {
+      "path": "runs\\checks\\pr230-progress-20261103T094957Z\\ubuntu2-3-costs-summary.json",
+      "sha256": "2a96abf35b5b3575d92082953695d263f1f67c5902a4562dbaa2e64469e0ef67"
+    },
+    {
+      "path": "runs\\checks\\pr230-progress-20261103T094957Z\\ubuntu4-cost-diagnosis.json",
+      "sha256": "263983b376685128a06e4292f0df8a5c733c37776bb7eb0f9aedabe86d87bfd0"
+    },
+    {
+      "path": "runs\\checks\\windows-ci-shard0-20261103-v1\\summary-v1.json",
+      "sha256": "65e047123c867df03b7b474b9e482b9987902cf4344a46d42aa13dfb851a1fba"
+    }
+  ],
+  "hosted_run": {
+    "id": 41608659735,
+    "pr_head": "9ded9b9f3decb6a1d66a6497efa53b3e1ce5dd62",
+    "merge_checkout": "06ba057c625cd1bbc5a0fcb2a7bd9c5c3801f99f",
+    "existing_test_occurrences": 2264,
+    "current_run_changed": false,
+    "same_593_selected_ids_seconds": {
+      "Windows": 8073.995,
+      "Ubuntu": 1297.521
+    },
+    "platform_skips_in_that_group": {
+      "Windows": 1,
+      "Ubuntu": 3
+    },
+    "isolated_single_test_seconds": {
+      "Windows": 9829.672,
+      "Ubuntu": 3586.268
+    },
+    "all_ubuntu_group_seconds": [
+      3586.268,
+      1297.521,
+      4197.521,
+      1311.636,
+      3041.937
+    ]
+  },
+  "candidate": {
+    "files": [
+      "buddha/releases.py",
+      "buddha/history.py",
+      "tests/test_releases.py"
+    ],
+    "change": "Reuse exact-spelling concrete Path ancestor geometry only; every filesystem observation still runs.",
+    "cache": {
+      "entries": 512,
+      "maximum_eligible_characters": 1024,
+      "maximum_eligible_separators": 32,
+      "fallback": "Original lazy parents iterable for subclasses and oversized values, without new rejection.",
+      "scope": "Process-lifetime lexical path objects; no bytes, hashes, stat data, handles or filesystem authority.",
+      "memory_limit_qualification": "Entry and geometry eligibility bounds; not a process RSS ceiling or reader raw-byte allowance."
+    },
+    "source_pin_deltas": {
+      "buddha/history.py": {
+        "before": "d42e92a7e6c88a2f72090eaaa50de39dc355957e7c61f5b89dd97162d8b0eefa",
+        "after": "dc97a88745c638a16626edcc10e2c47f24cd4f6e62412f1bccea75d4b74fa66a"
+      },
+      "buddha/releases.py": {
+        "before": "2285f5417be9caba5c8aa675e417dcf7ce0310de77dbfd290ad76bc76ec68c1a",
+        "after": "35ebd4f13d067191993fbf921ec97f9782cc1252608b54074d0a5b823523bf54"
+      },
+      "tests/test_releases.py": {
+        "before": "bea974f3e004343a3b7dee93a3d792e666ffa37c8c6917b37d79c2d0824d5c49",
+        "after": "de4e5f453ce90b8d9147efeb6a63fb34daf28f97f4be849f227adcb31d56a44e"
+      }
+    },
+    "public_python_count": 365
+  },
+  "matched_local_profile": {
+    "case": "test_source_search.SourceSearchTests.test_completed_replay_and_retired_producer_passive_read_preserve_original_snapshot",
+    "python": "3.13.12 (tags/v3.13.12:1cbe481, Feb  3 2026, 18:22:25) [MSC v.1944 64 bit (AMD64)]",
+    "instrumentation": "Same cProfile/guard/Job/case/bounds; descriptions, digests and admitted source bytes differ.",
+    "baseline": {
+      "parent": {
+        "path": "runs\\checks\\windows-ci-profile-20261103-v4\\parent-result.json",
+        "sha256": "d7d837f84493227634f6f8d7025404131c239dc2d7e3a83ea6f5643b68fad990"
+      },
+      "child": {
+        "path": "runs\\checks\\windows-ci-profile-20261103-v4\\profile-result.json",
+        "sha256": "56292e35f5509786167eca2777613fa114ae0bfe2b841840cf6a4b738ea93c09"
+      },
+      "inputs": {
+        "path": "runs\\checks\\windows-ci-profile-20261103-v4\\inputs.json",
+        "sha256": "e00be1c8f2e49e945113484d0db4d6e5a7e872d4e6b4d05870230eb5b20d2ad3"
+      },
+      "profile": {
+        "path": "runs\\checks\\windows-ci-profile-20261103-v4\\profile-public.pstats",
+        "sha256": "62f2454715ae3b25a53ec04610bcacb0492f06eaed019a46a25eb13caab51105"
+      },
+      "wall_seconds": 151.30280210007913,
+      "process_cpu_seconds": 144.703125
+    },
+    "candidate": {
+      "parent": {
+        "path": "runs\\checks\\windows-ci-profile-20261103-v5\\parent-result.json",
+        "sha256": "3b1ea04e8cbe263b39dad1f5855258e44d3974bf99a8003568e2252138f08eee"
+      },
+      "child": {
+        "path": "runs\\checks\\windows-ci-profile-20261103-v5\\profile-result.json",
+        "sha256": "a6f19dedd13f33e8b178f2002e5ba56a7ac5cd16a56504595e3fd25751232440"
+      },
+      "inputs": {
+        "path": "runs\\checks\\windows-ci-profile-20261103-v5\\inputs.json",
+        "sha256": "553cf15d0ad499a1510f2979ce867fadd9eca9635af020a44360197d90bf3e8e"
+      },
+      "profile": {
+        "path": "runs\\checks\\windows-ci-profile-20261103-v5\\profile-public.pstats",
+        "sha256": "aef3aa9142072f429dfaf12019ce37a930685dba08c5fe29069ab54672eaa87d"
+      },
+      "wall_seconds": 147.2047005998902,
+      "process_cpu_seconds": 141.328125
+    },
+    "both_cases_passed": true,
+    "both_children_joined": true,
+    "both_source_sets_unchanged_during_execution": true,
+    "same_audit_counts": {
+      "ctypes.dlopen": 23738,
+      "ctypes.dlsym": 47476,
+      "open": 61842,
+      "os.listdir": 10,
+      "os.scandir": 19620,
+      "sqlite3.connect": 2407,
+      "sqlite_memory": 2089,
+      "sqlite_work": 318
+    },
+    "same_selected_stat_read_open_guard_call_counts": true,
+    "function_comparisons": [
+      {
+        "before": {
+          "file": "~",
+          "function": "<built-in method nt.stat>",
+          "primitive_calls": 2191311,
+          "calls": 2191311,
+          "own_seconds": 31.484441200000003,
+          "cumulative_seconds": 33.625082
+        },
+        "after": {
+          "file": "~",
+          "function": "<built-in method nt.stat>",
+          "primitive_calls": 2191311,
+          "calls": 2191311,
+          "own_seconds": 32.2860037,
+          "cumulative_seconds": 34.676918300000004
+        }
+      },
+      {
+        "before": {
+          "file": "~",
+          "function": "<method 'read' of '_io.BufferedReader' objects>",
+          "primitive_calls": 116574,
+          "calls": 116574,
+          "own_seconds": 40.0374184,
+          "cumulative_seconds": 40.0374184
+        },
+        "after": {
+          "file": "~",
+          "function": "<method 'read' of '_io.BufferedReader' objects>",
+          "primitive_calls": 116574,
+          "calls": 116574,
+          "own_seconds": 49.3891367,
+          "cumulative_seconds": 49.3891367
+        }
+      },
+      {
+        "before": {
+          "file": "~",
+          "function": "<built-in method _io.open>",
+          "primitive_calls": 61598,
+          "calls": 61598,
+          "own_seconds": 4.8241787,
+          "cumulative_seconds": 4.8548329
+        },
+        "after": {
+          "file": "~",
+          "function": "<built-in method _io.open>",
+          "primitive_calls": 61598,
+          "calls": 61598,
+          "own_seconds": 4.8624526,
+          "cumulative_seconds": 4.890471000000001
+        }
+      },
+      {
+        "before": {
+          "file": "stdlib/pathlib/_local.py",
+          "function": "__getitem__",
+          "primitive_calls": 3117019,
+          "calls": 3117019,
+          "own_seconds": 2.9573694,
+          "cumulative_seconds": 19.253781800000002
+        },
+        "after": {
+          "file": "stdlib/pathlib/_local.py",
+          "function": "__getitem__",
+          "primitive_calls": 956557,
+          "calls": 956557,
+          "own_seconds": 0.9185295000000001,
+          "cumulative_seconds": 5.5871291
+        }
+      },
+      {
+        "before": {
+          "file": "buddha/history.py",
+          "function": "_plain",
+          "primitive_calls": 93855,
+          "calls": 93855,
+          "own_seconds": 2.1793729,
+          "cumulative_seconds": 36.5159025
+        },
+        "after": {
+          "file": "buddha/history.py",
+          "function": "_plain",
+          "primitive_calls": 93855,
+          "calls": 93855,
+          "own_seconds": 1.5828124000000001,
+          "cumulative_seconds": 25.986786000000002
+        }
+      },
+      {
+        "before": {
+          "file": "buddha/releases.py",
+          "function": "_information",
+          "primitive_calls": 566970,
+          "calls": 566970,
+          "own_seconds": 0.5385098,
+          "cumulative_seconds": 10.5214532
+        },
+        "after": {
+          "file": "buddha/releases.py",
+          "function": "_information",
+          "primitive_calls": 566970,
+          "calls": 566970,
+          "own_seconds": 0.47982050000000004,
+          "cumulative_seconds": 10.3645393
+        }
+      },
+      {
+        "before": {
+          "file": "buddha/releases.py",
+          "function": "file_hash",
+          "primitive_calls": 31369,
+          "calls": 31369,
+          "own_seconds": 0.7226578,
+          "cumulative_seconds": 18.4015838
+        },
+        "after": {
+          "file": "buddha/releases.py",
+          "function": "file_hash",
+          "primitive_calls": 31369,
+          "calls": 31369,
+          "own_seconds": 0.5805085,
+          "cumulative_seconds": 14.932430100000001
+        }
+      },
+      {
+        "before": null,
+        "after": {
+          "file": "buddha/releases.py",
+          "function": "_parents",
+          "primitive_calls": 129983,
+          "calls": 129983,
+          "own_seconds": 0.43625420000000004,
+          "cumulative_seconds": 0.6188092000000001
+        }
+      },
+      {
+        "before": null,
+        "after": {
+          "file": "buddha/releases.py",
+          "function": "_lexical_parents",
+          "primitive_calls": 487,
+          "calls": 487,
+          "own_seconds": 0.004005900000000001,
+          "cumulative_seconds": 0.0766699
+        }
+      }
+    ],
+    "limits": [
+      "One sequential instrumented pair on a local host; not a replicated timing result or hosted speedup.",
+      "Cumulative function times overlap and must not be summed.",
+      "Buffered-read time changed substantially between runs; no precise throughput gain is attributed to the repair.",
+      "Audit open counts exclude native CreateFileW opens; logical process I/O is not physical disk latency.",
+      "Native binding setup was under1percent of this full case; it was not changed.",
+      "No antivirus, filesystem or SQLite cause follows from the OS ratios."
+    ]
+  },
+  "retained_instrumentation_partials": [
+    {
+      "version": 1,
+      "parent": {
+        "path": "runs\\checks\\windows-ci-profile-20261103-v1\\parent-result.json",
+        "sha256": "7e8a5b2ec860237066516e2f2131a6d4df964cdad1cec0dc039857958fbbaf2a"
+      },
+      "status": "partial",
+      "seconds": 6.694245900027454,
+      "child_status": "partial_integrity_or_guard",
+      "guard_denials": [
+        "open",
+        "open",
+        "open"
+      ],
+      "qualification": "Instrumentation admission stop; not a production defect, completed case or cost baseline."
+    },
+    {
+      "version": 2,
+      "parent": {
+        "path": "runs\\checks\\windows-ci-profile-20261103-v2\\parent-result.json",
+        "sha256": "b0ec2dd44a0c402e21df36a5cbbffe56035163c2eeb23b8de433c9c09d4bb495"
+      },
+      "status": "partial",
+      "seconds": 13.159716400085017,
+      "child_status": "partial_integrity_or_guard",
+      "guard_denials": [
+        "open",
+        "open"
+      ],
+      "qualification": "Instrumentation admission stop; not a production defect, completed case or cost baseline."
+    },
+    {
+      "version": 3,
+      "parent": {
+        "path": "runs\\checks\\windows-ci-profile-20261103-v3\\parent-result.json",
+        "sha256": "5e7fc2b0591a53a6d8e8582b0e3ec62bb71e70afae477b3f8da9ca408a819134"
+      },
+      "status": "partial",
+      "seconds": 12.810388299869373,
+      "child_status": "partial_integrity_or_guard",
+      "guard_denials": [
+        "os.link",
+        "open"
+      ],
+      "qualification": "Instrumentation admission stop; not a production defect, completed case or cost baseline."
+    }
+  ],
+  "local_checks": {
+    "final_inventory_validation": {
+      "path": "runs/checks/windows-ci-profile-20261103-v5/final-validation-v2.json",
+      "sha256": "f5017b0a04bd465cbcb26940d40befb72820ed30f22fc286e5891db4a23363fa",
+      "all_old_occurrences_order_multiplicity_and_assignment_retained": 2264,
+      "new_total": 2268,
+      "existing_release_test_class_ast_unchanged": true
+    },
+    "tool_exports": {
+      "path": "runs\\checks\\windows-ci-profile-20261103-v5\\local-check-tool-exports.json",
+      "sha256": "ef7a00d7c2e72eebd9f9d4e70dde4b3e2dba0396ffa2cf2ef75b348c6d2a6584"
+    },
+    "unique_methods": 61,
+    "existing_platform_privilege_skips": 2,
+    "new_methods": 4,
+    "new_regression_red": "Original history._plain constructed the same ancestor list twice, expected once; all original stat observations already passed.",
+    "new_regression_green": "Four new methods pass; actual fresh changed bytes/hardlink denial and original-order stat calls retained.",
+    "configured_quality": [
+      "Ruff lint",
+      "Ruff formatting",
+      "strict mypy90 files",
+      "Bandit",
+      "development dependency audit",
+      "runtime dependency audit",
+      "compilation"
+    ],
+    "review": "Independent three-file source review found no blocker after lazy fallback correction; final test-only strengthening uses an owned missing path.",
+    "full_new_source_hosted_ci": "pending"
+  },
+  "preserved": [
+    "All2264 pre-existing test occurrences/bodies remain, plus4 new methods.",
+    "Workflow/CI runner/dependency files and ten-job matrix are unchanged.",
+    "Containment, checked terminal results and3600-second genuine-progress policy are unchanged.",
+    "Fresh reads, stat/identity/link/reparse/byte/hash/final checks, error ordering and SQLite durability are unchanged.",
+    "Protected9ded source and approved v14 history scripts/fixtures/limits are unchanged."
+  ],
+  "next": [
+    "Full hosted verification of this small candidate; no whole-CI performance claim yet.",
+    "Evaluate one optional seed for the existing assignment hash using retained duration evidence; keep isolated0, all occurrences and original per-group order.",
+    "Further reduction of repeated history verification remains separate bounded work; no automatic platform migration or weakened freshness."
+  ],
+  "paid_api_calls": 0,
+  "scientific_native_reviewer_calls": 0,
+  "real_containers": 0,
+  "original_paid_state_read_or_written": false,
+  "v14_started_under_separate_existing_approval": true,
+  "v14_preflight_utc": "2026-11-03T12:57:01.306699+00:00",
+  "v14_launch_observation": "Parent stdout reported producer starting after that preflight; exact logical launch timestamp was not instrumented.",
+  "v14_executing_source": "9ded9b9f3decb6a1d66a6497efa53b3e1ce5dd62",
+  "v14_uses_this_candidate": false,
+  "v14_immediate_preflight": {
+    "path": "runs/checks/scale-replay-c1-preparation-20261103-v1/immediate-preflight-v14-v1.json",
+    "sha256": "8523fd96ed984ce6206961cf2b9132a11c321af1f389832f92aca1c9974727de"
+  },
+  "scientific_improvement_claim": false
+}

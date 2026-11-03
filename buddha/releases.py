@@ -10,9 +10,10 @@ import ntpath
 import os
 import re
 import stat
-from collections.abc import Mapping
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass, field
-from pathlib import Path, PurePosixPath
+from functools import lru_cache
+from pathlib import Path, PosixPath, PurePosixPath, WindowsPath
 from typing import cast
 from urllib.parse import urlsplit
 
@@ -303,6 +304,22 @@ class Release:
         return hashlib.sha256(self.data).hexdigest()
 
 
+@lru_cache(maxsize=512)
+def _lexical_parents(kind: type[Path], spelling: str) -> tuple[Path, ...]:
+    """Reuse only bounded path geometry; never filesystem observations."""
+    return tuple(kind(spelling).parents)
+
+
+def _parents(path: Path) -> Sequence[Path]:
+    # Keep custom path behavior and oversized geometry on the original lazy path.
+    if type(path) not in (PosixPath, WindowsPath):
+        return path.parents
+    spelling = str(path)
+    if len(spelling) > 1024 or spelling.count(os.sep) > 32:
+        return path.parents
+    return _lexical_parents(type(path), spelling)
+
+
 def _information(path: Path) -> os.stat_result:
     information = path.lstat()
     if stat.S_ISLNK(information.st_mode) or (
@@ -317,7 +334,7 @@ def _root(path: Path) -> Path:
     if not isinstance(path, Path):
         raise ReleaseError("component root must be a Path")
     absolute = path.absolute()
-    for part in (absolute, *absolute.parents):
+    for part in (absolute, *_parents(absolute)):
         _information(part)
     if not absolute.is_dir():
         raise ReleaseError("component root must be an existing directory")
@@ -344,7 +361,7 @@ def file_hash(path: Path, *, max_bytes: int = MAX_FILE_BYTES) -> str:
         if not isinstance(path, Path) or type(max_bytes) is not int or max_bytes < 0:
             raise ReleaseError("file hash requires a Path and nonnegative byte ceiling")
         path = path.absolute()
-        for parent in path.parents:
+        for parent in _parents(path):
             _information(parent)
         information = _information(path)
         if not stat.S_ISREG(information.st_mode) or information.st_nlink != 1:

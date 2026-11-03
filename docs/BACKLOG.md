@@ -4,6 +4,49 @@
 and the next slice. This file records the context and acceptance boundaries of
 unfinished commitments; it does not create another implementation schedule.
 
+## ENG-CI-01: reduce Windows verification cost without reducing coverage
+
+Recorded November 3, 2026 after the user requested practical Windows CI times
+while allowing the current run to proceed unchanged. This is parallel engineering
+work under DESIGN sections 9–10; [PLAN.md](PLAN.md) retains scheduling authority.
+It does not add a scientific acceptance gate or change the approved v14 history
+observation, its executing source, limits or allocation.
+
+**Problem.** In the completed source-`9ded9b9` shard 1, the same 593 selected test
+IDs took 8,073.995 seconds on Windows and 1,297.521 seconds on Linux. Their OS
+skip counts differ. About 99% of that Windows job's captured log interval was
+test execution; three integration methods account for 3,084.060 seconds.
+Installation caching alone cannot address this observed dominant cost.
+
+**Current evidence and first repair.** The completed local integration profile
+performs 2,191,311 status calls and 116,574 buffered reads. A small lexical-only
+ancestor-path cache reduces calculation steps from 3,117,019 to 956,557 while
+retaining exactly those filesystem calls and reads. Both matched cases pass;
+61 focused methods and configured quality checks pass. This single instrumented
+pair establishes reduced computation, not a reliable throughput or hosted CI
+gain. Native binding setup is under 1% of this case and stays unchanged.
+
+**Next bounded work.** Verify the candidate in hosted CI. Assess one configuration
+seed for the existing assignment hash from recorded durations, preserving the
+isolated test and full ordered coverage; do not introduce a runtime duration
+database or scheduler. The isolated method alone took 9,829.672 Windows seconds,
+so redistribution cannot eliminate that observed cost. Further repeated-I/O
+reduction needs its own measured shared-path change; retain the history gate.
+
+**Acceptance.** Retain every existing test occurrence, duplicate multiplicity,
+ordered execution within each assignment, both OSes, all ten jobs and every
+quality check. Preserve process containment, checked terminal results and the
+3,600-second genuine-progress rule. Application changes must preserve fresh
+bytes, identity/link/reparse checks, bounds, hashes, final rereads, ledger
+durability and error/cleanup behavior. A timing claim must name its actual
+workload, machine, instrumentation and limitations. Do not infer antivirus,
+filesystem or SQLite causality from an OS timing ratio alone.
+
+**Boundary.** No fewer tests, broad skips, raw-artifact cache, weaker durability,
+new platform or altered paid experiment. The original CI run was left unchanged
+and has completed all ten jobs and the workflow.
+See [CI-TESTS.md](CI-TESTS.md) for measurements and the existing stop policy.
+
 ## DGM-01: complete inherited source self-improvement
 
 Recorded October 21, 2026 after the comparison with Darwin Gödel Machine (DGM).

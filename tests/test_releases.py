@@ -4,6 +4,7 @@ import copy
 import hashlib
 import json
 import os
+import stat
 import tempfile
 import unittest
 from dataclasses import FrozenInstanceError
@@ -11,6 +12,7 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
 
+from buddha import history, releases
 from buddha.releases import (
     Release,
     ReleaseError,
@@ -423,6 +425,85 @@ class ReleaseSelectionTests(unittest.TestCase):
             commands = [{"module": "src.evaluate", "argv": [token]}]
             with self.subTest(token=token), self.assertRaises(ReleaseError):
                 self.release(commands=commands)
+
+
+class AncestorGeometryTests(unittest.TestCase):
+    def setUp(self):
+        cached = getattr(releases, "_lexical_parents", None)
+        if cached is not None:
+            cached.cache_clear()
+            self.addCleanup(cached.cache_clear)
+
+    def test_plain_reuses_geometry_but_repeats_every_stat_in_original_order(self):
+        path = Path.cwd() / "unchanged-spelling" / "selected.bin"
+        expected = [str(item) for item in (path, *path.parents)]
+        kind, parent_property = type(path), type(path).parents
+        geometry, observations = [], []
+
+        def parents(selected):
+            geometry.append(str(selected))
+            return parent_property.fget(selected)
+
+        def lstat(selected):
+            observations.append(str(selected))
+            return SimpleNamespace(st_mode=stat.S_IFREG, st_file_attributes=0)
+
+        with patch.object(kind, "parents", property(parents)), patch.object(kind, "lstat", lstat):
+            history._plain(path)
+            history._plain(Path(str(path)))
+        self.assertEqual(observations, expected * 2)
+        self.assertEqual(geometry, [str(path)])
+
+    def test_geometry_does_not_cache_bytes_or_hardlink_acceptance(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "selected.bin"
+            path.write_bytes(b"first")
+            self.assertEqual(releases.file_hash(path), hashlib.sha256(b"first").hexdigest())
+            path.write_bytes(b"second")
+            self.assertEqual(releases.file_hash(path), hashlib.sha256(b"second").hexdigest())
+            os.link(path, path.with_name("alias.bin"))
+            with self.assertRaises(ReleaseError):
+                releases.file_hash(path)
+
+    def test_geometry_cache_has_bounded_entries_and_preserves_exact_spelling(self):
+        upper, lower = Path("MixedCASE/Leaf"), Path("mixedcase/Leaf")
+        with patch.object(Path, "lstat", side_effect=AssertionError("geometry accessed disk")):
+            first = releases._parents(upper)
+            self.assertIs(first, releases._parents(Path(str(upper))))
+            self.assertEqual(tuple(map(str, first)), tuple(map(str, upper.parents)))
+            self.assertEqual(
+                tuple(map(str, releases._parents(lower))), tuple(map(str, lower.parents))
+            )
+            self.assertIsNot(first, releases._parents(lower))
+            for index in range(600):
+                releases._parents(Path(f"bounded-{index}/leaf"))
+            self.assertEqual(releases._lexical_parents.cache_info().currsize, 512)
+
+    def test_subclass_and_oversized_geometry_keep_the_strict_uncached_path(self):
+        class ChangingPath(type(Path())):
+            @property
+            def parents(self):
+                self.calls = getattr(self, "calls", 0) + 1
+                return (Path(str(self.calls)),)
+
+        custom = ChangingPath("custom")
+        self.assertEqual(releases._parents(custom), (Path("1"),))
+        self.assertEqual(releases._parents(custom), (Path("2"),))
+        for path in (Path("x" * 1025), Path(*(["x"] * 35))):
+            with self.subTest(spelling=str(path)):
+                self.assertEqual(tuple(releases._parents(path)), tuple(path.parents))
+        self.assertEqual(releases._lexical_parents.cache_info().currsize, 0)
+
+        class LazyParents(type(Path())):
+            @property
+            def parents(self):
+                yield missing
+                raise AssertionError("a later custom parent must not be evaluated first")
+
+        with tempfile.TemporaryDirectory() as temporary:
+            missing = Path(temporary) / "missing"
+            with self.assertRaises(ReleaseError):
+                releases.file_hash(LazyParents(Path(temporary) / "unused-file"))
 
 
 if __name__ == "__main__":
