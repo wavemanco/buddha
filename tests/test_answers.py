@@ -232,6 +232,30 @@ class AnswerArtifactTests(unittest.TestCase):
         with self.assertRaises(FrozenInstanceError):
             answers.data = b"changed"
 
+    def test_native_bytes_reuses_the_validated_immutable_conversion(self):
+        from buddha.answers import _native
+
+        original = self.answers()
+        expected = original.native_bytes()
+        noncanonical = json.dumps(original.to_record(), indent=2).encode()
+        self.assertNotEqual(noncanonical, original.to_bytes())
+        with (
+            patch("buddha.answers._native", wraps=_native) as convert,
+            patch.object(TaskSet, "from_bytes", wraps=TaskSet.from_bytes) as parse_tasks,
+        ):
+            answers = Answers.from_bytes(noncanonical)
+            self.assertEqual(answers.native_bytes(), expected)
+            exposed = answers.to_record()
+            exposed["outputs"][0]["answers"].clear()
+            exposed["tasks"]["tasks"][0]["prompt"] = "mutated"
+            exposed["metadata"]["settings"]["values"].clear()
+            self.assertEqual(answers.native_bytes(), expected)
+            self.assertEqual(answers.to_bytes(), original.to_bytes())
+            self.assertEqual(answers.fingerprint(), original.fingerprint())
+            self.assertEqual(answers.to_record(), original.to_record())
+            self.assertEqual(convert.call_count, 1)
+            self.assertEqual(parse_tasks.call_count, 1)
+
     def test_population_order_source_agent_metadata_and_answer_changes_change_identity(self):
         baseline = self.answers().fingerprint()
         self.assertNotEqual(self.answers(agent_sha256="e" * 64).fingerprint(), baseline)

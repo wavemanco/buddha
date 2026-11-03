@@ -285,6 +285,8 @@ def _native(record: dict[str, object], tasks: TaskSet) -> bytes:
 
 @dataclass(frozen=True)
 class Answers(_Artifact):
+    _native_data: bytes = field(init=False, repr=False, compare=False)
+
     def __post_init__(self) -> None:
         record = _object(
             _load(self.data),
@@ -296,7 +298,7 @@ class Answers(_Artifact):
         if _digest(record["tasks_sha256"]) != tasks.fingerprint():
             raise ReleaseError("answer population differs from its frozen task artifact")
         _digest(record["agent_sha256"])
-        _native(record, tasks)
+        object.__setattr__(self, "_native_data", _native(record, tasks))
         object.__setattr__(self, "data", _json(record))
 
     @classmethod
@@ -334,5 +336,4 @@ class Answers(_Artifact):
         )
 
     def native_bytes(self) -> bytes:
-        record = self.to_record()
-        return _native(record, TaskSet.from_bytes(_json(record["tasks"])))
+        return self._native_data

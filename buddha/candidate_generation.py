@@ -7,6 +7,7 @@ host inputs are checked. Passive consumption needs no producer program/runtime.
 import base64
 import hashlib
 from collections.abc import Callable, Mapping, Sequence
+from dataclasses import dataclass
 from functools import wraps
 from pathlib import Path
 from typing import cast
@@ -313,6 +314,23 @@ def prepare_candidate_generation(
     return directory
 
 
+@dataclass(frozen=True)
+class _AnswersEvidence:
+    """One interpretation within this check; every later raw read still runs."""
+
+    path: Path
+    raw_sha256: str
+    answers: Answers
+
+    def outputs(self) -> dict[str, Path]:
+        return {"answers": self.path}
+
+    def checked(self, path: Path, raw: bytes) -> Answers:
+        if path != self.path or hashlib.sha256(raw).hexdigest() != self.raw_sha256:
+            raise CandidateGenerationError("candidate C1 changed during validation")
+        return self.answers
+
+
 def _outputs(
     attempt: Path,
     report: dict[str, object],
@@ -321,12 +339,13 @@ def _outputs(
     descriptor_raw: bytes,
     runtime_sha256: str,
     owner: dict[str, object],
-) -> dict[str, Path]:
+) -> _AnswersEvidence:
     path = attempt / "answers.json"
     answer_raw = pipeline._read(
         path, _object(report["artifacts"], {"answers.json"})["answers.json"]
     )
-    answers = Answers.from_bytes(answer_raw).to_record()
+    parsed = Answers.from_bytes(answer_raw)
+    answers = parsed.to_record()
     calls = _object(report["calls"], {"requested", "completed", "stopped"})
     count = _integer(calls["completed"], 0, cast(int, recipe["max_callbacks"]))
     execution = _object(report["execution"])
@@ -356,7 +375,7 @@ def _outputs(
         or execution.get("image_id") != _object(recipe["executor"])["image_id"]
     ):
         raise CandidateGenerationError("candidate C1/report/cleanup lineage differs")
-    return {"answers": path}
+    return _AnswersEvidence(path, hashlib.sha256(answer_raw).hexdigest(), parsed)
 
 
 def _wrap_outcome(attempt: Path, session: object, report: dict[str, object]) -> dict[str, object]:
@@ -449,7 +468,7 @@ def _validate_outcome(
     owner: dict[str, object],
     totals: dict[str, int],
     read: Callable[[Path], bytes],
-) -> dict[str, Path]:
+) -> _AnswersEvidence | None:
     _object(
         outcome,
         {
@@ -536,14 +555,15 @@ def _validate_outcome(
         if hashlib.sha256(read(attempt / _path(name))).hexdigest() != _digest(digest):
             raise CandidateGenerationError("generation outcome artifact differs")
     expected = {"session/report.json", "session/done.json"}
-    outputs = {}
+    outputs = None
     if outcome["disposition"] == "generated":
         if terminal["ready_seen"] is not True or done["status"] != "complete":
             raise CandidateGenerationError("generated C1 has no ready completed terminal")
         outputs = _outputs(
             attempt / "session", report, recipe, tasks, descriptor_raw, runtime_sha256, owner
         )
-        answers = Answers.from_bytes(read(attempt / "session/answers.json"))
+        path = attempt / "session/answers.json"
+        answers = outputs.checked(path, read(path))
         if _json(
             cast(list[dict[str, object]], answers.to_record()["outputs"])[0]["answers"]
         ) != _json(done["answers"]):
@@ -686,7 +706,7 @@ def run_candidate_generation(directory: Path, *, transport: RawHTTPTransport) ->
             for path in _sources(recipe["format"]):
                 consume(path)
             if prospective:
-                return _validate_outcome(
+                result = _validate_outcome(
                     attempt,
                     report,
                     recipe,
@@ -697,12 +717,13 @@ def run_candidate_generation(directory: Path, *, transport: RawHTTPTransport) ->
                     gateway.ledger.totals(),
                     lambda path: pipeline._read(path),
                 )
+                return result.outputs() if result is not None else {}
             result = _outputs(
                 attempt, report, recipe, tasks, consume(descriptor), runtime_sha256, owner
             )
             if report["gateway_totals"] != gateway.ledger.totals():
                 raise CandidateGenerationError("candidate accounting changed before publication")
-            return result
+            return result.outputs()
 
         def observation(reason: str, report: dict[str, object] | None) -> dict[str, object]:
             ordinal = 0
@@ -981,7 +1002,7 @@ def _read_evidence(
         capture.read(attempt / ("session/report.json" if prospective else "report.json"))
     )
     if prospective:
-        _validate_outcome(
+        checked_answers = _validate_outcome(
             attempt,
             cast(dict[str, object], outcome),
             recipe,
@@ -993,7 +1014,9 @@ def _read_evidence(
             capture.read,
         )
     else:
-        _outputs(attempt, report, recipe, tasks, bound(descriptor), runtime_sha256, owner)
+        checked_answers = _outputs(
+            attempt, report, recipe, tasks, bound(descriptor), runtime_sha256, owner
+        )
     totals = _object(report["gateway_totals"])
     if (
         any(type(item) is not int for item in totals.values())
@@ -1037,7 +1060,11 @@ def _read_evidence(
     answers_path = (
         attempt / ("session/answers.json" if prospective else "answers.json") if generated else None
     )
-    answers = Answers.from_bytes(capture.read(answers_path)) if answers_path is not None else None
+    answers = None
+    if answers_path is not None:
+        if checked_answers is None:
+            raise CandidateGenerationError("generated source has no checked C1")
+        answers = checked_answers.checked(answers_path, capture.read(answers_path))
     fingerprints = capture.fingerprints()
     return {
         "tasks": tasks,

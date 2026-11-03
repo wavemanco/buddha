@@ -158,6 +158,137 @@ class CandidateGenerationOutcomeTests(unittest.TestCase):
                 )
                 self.assertEqual(self.inspect(h), report)
 
+    def test_passive_c1_is_interpreted_once_with_fresh_reads_and_publication_parity(self):
+        from buddha.candidate_generation import read_candidate_generation_source
+        from buddha.doctor import _Capture
+
+        for prospective in (False, True):
+            with self.subTest(prospective=prospective):
+                h = self.prepare_v2() if prospective else self.fixture()
+                if not prospective:
+                    h.prepare()
+                report = h.run_generation()
+                path = h.attempt() / ("session/answers.json" if prospective else "answers.json")
+                raw = path.read_bytes()
+                before = self.tree(h.directory)
+                authority_before = h.fixture.authority.path.read_bytes()
+                original_read = _Capture.read
+                reads = []
+
+                def read(
+                    capture,
+                    filename,
+                    *args,
+                    path=path,
+                    reads=reads,
+                    original_read=original_read,
+                    **kwargs,
+                ):
+                    if filename == path:
+                        reads.append(filename)
+                    return original_read(capture, filename, *args, **kwargs)
+
+                with (
+                    patch.object(_Capture, "read", new=read),
+                    patch.object(Answers, "from_bytes", wraps=Answers.from_bytes) as parse,
+                    patch(
+                        "buddha.candidate_generation.Gateway", side_effect=AssertionError("passive")
+                    ),
+                    patch(
+                        "buddha.candidate_run.CandidateSession",
+                        side_effect=AssertionError("passive"),
+                    ),
+                    patch("buddha.executor.run_container", side_effect=AssertionError("passive")),
+                    patch("http.client.HTTPSConnection", side_effect=AssertionError("passive")),
+                ):
+                    tasks, answers, returned_path, files, _ = read_candidate_generation_source(
+                        report["source_generation"] if prospective else h.source_reference(),
+                        h.fixture.authority.path,
+                    )
+                self.assertEqual(len(reads), 5 if prospective else 3)
+                self.assertEqual(parse.call_count, 1)
+                self.assertEqual(tasks.fingerprint(), h.candidate.tasks.fingerprint())
+                self.assertEqual(returned_path, path)
+                self.assertEqual(files[path], hashlib.sha256(raw).hexdigest())
+                self.assertEqual(answers.to_bytes(), Answers.from_bytes(raw).to_bytes())
+                if prospective:
+                    with patch.object(Answers, "from_bytes", wraps=Answers.from_bytes) as parse:
+                        self.assertEqual(self.inspect(h), report)
+                    self.assertEqual(parse.call_count, 1)
+                self.assertEqual(self.tree(h.directory), before)
+                self.assertEqual(h.fixture.authority.path.read_bytes(), authority_before)
+
+    def test_c1_change_after_initial_validation_or_before_finish_is_rejected(self):
+        from buddha import candidate_generation
+        from buddha.doctor import _Capture
+
+        h = self.prepare_v2()
+        report = h.run_generation()
+        path = h.attempt() / "session/answers.json"
+        raw = path.read_bytes()
+        changed = json.loads(raw)
+        changed["outputs"][0]["answers"][0] = "different valid literal answer"
+        replacement = Answers.from_bytes(_json(changed)).to_bytes()
+        for boundary in ("initial", "finish"):
+            with self.subTest(boundary=boundary):
+                original = (
+                    candidate_generation._outputs if boundary == "initial" else _Capture.finish
+                )
+
+                def replace(*args, boundary=boundary, original=original, **kwargs):
+                    if boundary == "initial":
+                        result = original(*args, **kwargs)
+                        path.write_bytes(replacement)
+                        return result
+                    path.write_bytes(replacement)
+                    return original(*args, **kwargs)
+
+                target = candidate_generation if boundary == "initial" else _Capture
+                method = "_outputs" if boundary == "initial" else "finish"
+                try:
+                    with patch.object(target, method, new=replace):
+                        with self.assertRaises(candidate_generation.CandidateGenerationError):
+                            candidate_generation.read_candidate_generation_source(
+                                report["source_generation"], h.fixture.authority.path
+                            )
+                finally:
+                    path.write_bytes(raw)
+
+    def test_checked_c1_binds_original_noncanonical_bytes_and_exact_path(self):
+        from buddha import candidate_generation
+
+        h = self.prepare_v2()
+        report = h.run_generation()
+        original = candidate_generation._outputs
+        with patch.object(candidate_generation, "_outputs", wraps=original) as outputs:
+            _, expected, path, _, _ = candidate_generation.read_candidate_generation_source(
+                report["source_generation"], h.fixture.authority.path
+            )
+        args = outputs.call_args.args
+        raw = path.read_bytes()
+        noncanonical = json.dumps(json.loads(raw), indent=2).encode()
+        self.assertNotEqual(noncanonical, expected.to_bytes())
+        amended_report = args[1] | {
+            "artifacts": {"answers.json": hashlib.sha256(noncanonical).hexdigest()}
+        }
+        try:
+            path.write_bytes(noncanonical)
+            checked = original(args[0], amended_report, *args[2:])
+            parsed = checked.checked(path, path.read_bytes())
+            self.assertEqual(parsed.to_bytes(), expected.to_bytes())
+            self.assertEqual(parsed.native_bytes(), expected.native_bytes())
+            self.assertIs(checked.checked(path, noncanonical), parsed)
+            for other_path, other_raw in (
+                (path.with_name("other.json"), noncanonical),
+                (path, raw),
+                (path, noncanonical + b"\n"),
+            ):
+                with self.subTest(path=other_path, raw_size=len(other_raw)):
+                    with self.assertRaises(candidate_generation.CandidateGenerationError):
+                        checked.checked(other_path, other_raw)
+        finally:
+            path.write_bytes(raw)
+
     def test_post_ready_agent_error_after_known_reply_is_terminal_and_passive(self):
         h = self.prepare_v2()
 
