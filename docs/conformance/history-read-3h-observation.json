@@ -1,0 +1,103 @@
+{
+  "format": "buddha.history-read-3h-observation.v1",
+  "status": "running",
+  "checkpoint_utc": "2026-11-03T03:38:16.169737+00:00",
+  "spec": [
+    "DESIGN sections3,9,10",
+    "PLAN IMP-01",
+    "ENG-OBS-01"
+  ],
+  "approval": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-3h-20261102-v1\\user-decision-v13.json",
+    "sha256": "308d0f8247d3e59d2784fe7763b9d05d8191a8ad353b2678c85316663a22ed9e"
+  },
+  "authorization": {
+    "maximum_build_attempts": 1,
+    "construction_seconds": 10800,
+    "conditional_fresh_reader_seconds": 900,
+    "condition": "genuine required cut and metadata/integrity checks pass",
+    "automatic_retry_resume_extension": false,
+    "new_api_allocation": false
+  },
+  "executing_source": {
+    "head": "2ebd318adcdc836afcbf7e69e975e80f6ca7b8a6",
+    "tree": "99c3ea03348fde9aa4a3e3020bbb971c76401b70",
+    "project": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\ci-leaf-docs",
+    "public_python_count": 364,
+    "all87_app_files_equal_v12": true,
+    "all8_fixed_fixtures_equal_v12": true,
+    "binding": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-3h-20261102-v1\\scale-replay-binding-v13-v1.json",
+      "sha256": "1107fbf37bb81c9112e0eaa8ab25e3004c9c299316e1f5a0b77a488a01be5c25"
+    },
+    "manifest": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-3h-20261102-v1\\scale-replay-source-proposal-v13.json",
+      "sha256": "a82eb7c5018164373abf0d446ec62e958e58525e6c146e296d7ad682c32bdb07"
+    },
+    "parent": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-3h-20261102-v1\\scale-replay-parent-reviewed-v13.py",
+      "sha256": "7defc1e39716a63614ea599101e3e6ebb1122da8cba52c72380dc8b0d0eac9ae"
+    },
+    "child": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-3h-20261102-v1\\scale-replay-child-reviewed-v13.py",
+      "sha256": "5841e9e6727a5f1db898f2dbbe8038d82082e0814df8cfbb796b65207c51df5d"
+    }
+  },
+  "required_cut": {
+    "answer_counts": [
+      10,
+      10,
+      10
+    ],
+    "native_environment_bytes_floor": 4013984,
+    "native_inventory_rows": 24043,
+    "operations": 660,
+    "owners": 193,
+    "screen_bytes_floor": 5315388,
+    "selected_tasks": 3,
+    "source_rows": 1000,
+    "task_source_bytes": 1113890
+  },
+  "observation_policy": {
+    "format": "buddha.evidence-observation-policy.v2",
+    "max_consumed_paths": 65536,
+    "max_resident_bytes": 0,
+    "max_total_bytes": 34359738368,
+    "max_tree_entries": 100000
+  },
+  "producer": {
+    "status": "running",
+    "stdout_path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-3h-20261102-v1\\producer-stdout-v13.log",
+    "stderr_path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-3h-20261102-v1\\producer-stderr-v13.log"
+  },
+  "reader": {
+    "status": "not_started",
+    "reason": "conditional_on_producer_cut"
+  },
+  "gate_passed": false,
+  "parent_guard_check": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-3h-20261102-v1\\parent-source-guard-result-v1.json",
+    "sha256": "9b114d9811fa86085f79e742e6943d42a852b462c8c15bac53e0cfaaa331008d"
+  },
+  "parent_guard_runnable_check": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-3h-20261102-v1\\check-parent-source-guard-v1.py",
+    "sha256": "757e6596a8e3347b38df4c3f9ccd2917d22260d7104b449a68fe94a6c52deccb"
+  },
+  "reporting_guard": "Each successful phase requires the child source-integrity flag to be exactly true; dummy-case check reproduces v12 false success and verifies producer/check refusals without a real fixture.",
+  "prior_v12_preservation": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-3h-20261102-v1\\prior-v12-top-level-hashes-v1.json",
+    "sha256": "65945a3c63e30aa19e91f3c9984a1b25db5d70ae7ccd9b0c88bc7966b38c4bf4"
+  },
+  "prior_v12_public_record": "setup-recovery-gate-decision.json",
+  "earlier_attempts": "retained at original limits; no retry/resume/relabel",
+  "real_model_calls": 0,
+  "real_containers": 0,
+  "original_paid_history_access": false,
+  "paid_execution_cleared": false,
+  "limitations": [
+    "Running is not a completed build or reader pass.",
+    "Fresh process does not mean cold filesystem caches.",
+    "A reader pass would not establish practical whole-run throughput or scientific improvement.",
+    "Final-source/platform, adoption/account/reviewer and separate funding/handoff requirements remain."
+  ]
+}

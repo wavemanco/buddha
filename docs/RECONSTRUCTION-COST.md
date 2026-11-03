@@ -1104,3 +1104,32 @@ If stricter construction throughput is required, first decide a bounded fixture-
 construction or runtime strategy using the measured evidence. Do not continue
 an unbounded sequence of small optimizations. Preserve the actual benchmark,
 source/accounting/freshness safeguards and scientific comparison throughout.
+
+### November 2: one approved three-hour construction attempt
+
+The user selected the proposed approach above: one new synthetic build capped
+at 10,800 seconds, then one separate fresh-process reader capped at 900 seconds
+only if the genuine 193-owner/660-operation cut is reached. That v13 attempt is
+now running. The [observation record](conformance/history-read-3h-observation.json)
+binds its source, drivers, approval and retained checks. The earlier v12 result
+and decision record remain historical evidence; they are not rewritten or resumed.
+
+This is an offline performance check for Buddha's history handling. It uses
+supplied answers and new synthetic records, needs no keys, spends no model API
+money and starts no containers. It does not open the original paid run or change
+its funding. The agent has started it; the user needs no command or extra window.
+Its parent stops the build at three hours and the conditional reader at fifteen
+minutes, retaining an incomplete result if either limit is reached. It does not
+retry, resume or extend itself. Three hours is a ceiling, not a forecast.
+
+The application code and all eight scale-fixture files match v12. The new
+wrapper also corrects a reporting edge case: a child's failed source-integrity
+check must prevent an overall success. A small check using dummy files and
+mocked child calls reproduces the old false success and verifies the correction;
+it does not run the large fixture or establish its performance.
+
+A completed build alone does not pass reconstruction. A reader pass closes only
+this source-bound history gate, not full-run throughput or better creativity.
+The next work would be the existing final-source/platform and funded-handoff
+checks for the bounded comparison. A partial retains its exact stage and reason;
+it does not authorize another long attempt or a paid run.
