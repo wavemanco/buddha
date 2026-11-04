@@ -163,6 +163,60 @@ class DiagnosticsTests(unittest.TestCase):
             self.assertNotIn(canary, saved)
         self.assertIsNone(self.outcome()["provider_request_id"])
 
+    def test_credentials_in_received_data_never_enter_receipts_or_sidecars(self):
+        for index, location in enumerate(
+            ("body", "escaped_body", "request_id", "read_failure", "error_code")
+        ):
+            with self.subTest(location=location):
+                self.operation = f"{index:064x}"
+                key = "rate_limit_exceeded" if location == "error_code" else "req_SECRET123"
+                other = "OTHER-SECRET123"
+                envelope = self.envelope()
+                envelope["choices"][0]["message"]["content"] = key if location == "body" else other
+                raw = json.dumps(envelope).encode()
+                if location == "escaped_body":
+                    raw = raw.replace(
+                        other.encode(), b"".join(f"\\u{ord(c):04x}".encode() for c in other)
+                    )
+                if location in {"request_id", "read_failure"}:
+                    raw = raw.replace(other.encode(), b"safe")
+                if location == "error_code":
+                    raw = json.dumps({"error": {"code": key}}).encode()
+                connection, response = self.connection(
+                    status=429 if location == "error_code" else 200,
+                    raw=raw,
+                    request_id=key
+                    if location in {"request_id", "read_failure"}
+                    else "req_12345678",
+                )
+                if location == "read_failure":
+                    response.read.side_effect = OSError("read failed")
+                # Each earlier unknown remains held; use a fresh mocked study for
+                # this independent response boundary, without reconciling it.
+                self.authority, self.ledger = authorized_run(
+                    self.directory.parent / f"secret-{index}", budget_microusd=10_000, max_calls=20
+                )
+                self.directory = self.ledger.directory
+                self.transport = DiagnosticHTTPTransport(self.directory, allow_paid=True)
+                with (
+                    patch("buddha.provider.http.client.HTTPSConnection", return_value=connection),
+                    patch.dict("os.environ", {"OPENAI_API_KEY": key, "ANTHROPIC_API_KEY": other}),
+                    self.assertRaises(ProviderUncertain) as error,
+                ):
+                    BudgetBroker(self.ledger, self.transport).execute(self.operation, self.call)
+                self.assertNotIn(key, str(error.exception))
+                self.assertEqual(self.ledger.get(self.operation).status, "unknown")
+                self.assertIsNone(self.ledger.get(self.operation).response)
+                self.assertEqual(self.ledger.totals()["reserved_microusd"], 120)
+                for path in self.directory.rglob("*"):
+                    if path.is_file():
+                        self.assertNotIn(key.encode(), path.read_bytes())
+                        self.assertNotIn(other.encode(), path.read_bytes())
+                self.assertIsNone(self.outcome()["error_code"])
+                if location in {"request_id", "read_failure"}:
+                    self.assertIsNone(self.outcome()["provider_request_id"])
+                connection.request.assert_called_once()
+
     def test_timeout_exception_message_is_not_persisted(self):
         connection, _ = self.connection()
         connection.getresponse.side_effect = TimeoutError("TIMEOUT-SECRET-CANARY")

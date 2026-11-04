@@ -209,6 +209,12 @@ class DiagnosticHTTPTransport(HTTPTransport):
             prepared.close()
 
     def send_prepared(self, prepared: PreparedHTTP) -> Reply:
+        from buddha.gateway import _contains_secret, _secrets
+
+        headers = dict(prepared.headers)
+        secrets = _secrets(
+            headers.get("Authorization", "").removeprefix("Bearer ") or headers.get("x-api-key", "")
+        )
         record = dict(prepared.diagnostic)
         destination = self.directory / "diagnostics" / str(record["operation_id"])
         provider, connection = prepared.provider, prepared.connection
@@ -246,10 +252,14 @@ class DiagnosticHTTPTransport(HTTPTransport):
             received_id = response.getheader(
                 "x-request-id" if provider == "openai" else "request-id"
             )
+            if any(_contains_secret((received_id or "").encode(), key) for key in secrets):
+                raise ProviderUncertain("provider response cannot be retained safely")
             if isinstance(received_id, str) and _REQUEST_ID.fullmatch(received_id):
                 request_id = received_id
             phase = "read_body"
             raw = response.read(_LIMIT + 1)
+            if any(_contains_secret(raw, key) for key in secrets):
+                raise ProviderUncertain("provider response cannot be retained safely")
             if status != 200:
                 error_code = _code(raw) if len(raw) <= _LIMIT else None
                 raise ProviderUncertain("provider HTTP response cannot be reconciled")

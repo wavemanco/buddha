@@ -27,6 +27,7 @@ CONTRACT_TESTS = (
     "test_ci_test_shard",
     "test_common",
     "test_credentials",
+    "test_diagnostics",
     "test_executor",
     "test_frozen_seed",
     "test_gateway",

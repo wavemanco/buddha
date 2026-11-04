@@ -1,5 +1,6 @@
 """Paid-call boundaries exercised without SDKs, credentials, or network."""
 
+import hashlib
 import json
 import unittest
 from dataclasses import replace
@@ -10,7 +11,8 @@ from unittest.mock import Mock, patch
 
 from authorization_helpers import authorized_run
 
-from buddha.authorization import AuthorizedLedger
+from buddha.authorization import AuthorizedLedger, runtime_fingerprint
+from buddha.benchmark import _canonical
 from buddha.evaluation import ValidationError
 from buddha.ledger import BudgetExceeded, Ledger
 from buddha.provider import (
@@ -216,18 +218,88 @@ class ProviderTests(unittest.TestCase):
             self.assertEqual(ledger.get("op").status, "completed")
             self.assertEqual(ledger.totals()["spent_microusd"], 200)
 
-    def test_token_bound_breach_is_billed_even_below_reserved_cost(self):
-        ledger = MemoryLedger()
-        transport = Mock()
-        transport.send.return_value = reply(input_tokens=101, output_tokens=0)
-        broker = BudgetBroker(ledger, transport)
-        with self.assertRaises(BoundBreach):
-            broker.execute("op", call())
-        self.assertEqual(ledger.operation.status, "completed")
-        self.assertEqual(ledger.operation.actual_microusd, 101)
-        with self.assertRaises(BoundBreach):
-            broker.execute("op", call())
-        transport.send.assert_called_once()
+    def test_token_bound_breach_keeps_receipt_and_hold_below_reserved_cost(self):
+        for usage in ({"input_tokens": 101, "output_tokens": 0}, {"output_tokens": 11}):
+            with self.subTest(usage=usage):
+                ledger = MemoryLedger()
+                transport = Mock()
+                received = reply(**usage)
+                transport.send.return_value = received
+                broker = BudgetBroker(ledger, transport)
+                with self.assertRaises(BoundBreach):
+                    broker.execute("op", call())
+                self.assertEqual(ledger.operation.status, "unknown")
+                self.assertIsNone(ledger.operation.actual_microusd)
+                self.assertEqual(ledger.operation.reserve_microusd, 120)
+                self.assertEqual(ledger.operation.response, received.to_record())
+                with self.assertRaises(PendingOperation):
+                    broker.execute("op", call())
+                transport.send.assert_called_once()
+
+    def test_token_breach_reopens_and_blocks_other_operations_and_shared_runs(self):
+        with TemporaryDirectory() as directory:
+            first = Path(directory) / "first"
+            authority, ledger = authorized_run(first, max_calls=10)
+            second = Path(directory) / "second"
+            second.mkdir()
+            manifest = json.loads((first / "manifest.json").read_bytes())
+            del manifest["record_sha256"]
+            manifest["run_id"] = second.name
+            digest = hashlib.sha256(_canonical(manifest)).hexdigest()
+            (second / "manifest.json").write_bytes(
+                _canonical(manifest | {"record_sha256": digest}) + b"\n"
+            )
+            Ledger(
+                second / "operations.sqlite3",
+                run_id=second.name,
+                manifest_sha256=digest,
+                budget_microusd=1000,
+                max_calls=10,
+            )
+            authority.bind_run(second, runtime_sha256=runtime_fingerprint())
+            transport = Mock()
+            received = reply(input_tokens=101, output_tokens=0)
+            transport.send.return_value = received
+            with self.assertRaises(BoundBreach):
+                BudgetBroker(ledger, transport).execute("op", call())
+            reopened = authority.for_run(first)
+            self.assertEqual(reopened.get("op").response, received.to_record())
+            self.assertEqual(reopened.totals()["reserved_microusd"], 120)
+            self.assertEqual(reopened.totals()["spent_microusd"], 0)
+            with self.assertRaises(PendingOperation):
+                BudgetBroker(reopened, transport).execute("op", call())
+            for owner in (reopened, authority.for_run(second)):
+                with self.subTest(owner=owner.run_id), self.assertRaises(BudgetExceeded):
+                    BudgetBroker(owner, transport).execute("next", call())
+                self.assertIsNone(owner.get("next"))
+            transport.send.assert_called_once()
+
+    def test_historical_completed_token_breach_is_not_rewritten_or_resent(self):
+        with TemporaryDirectory() as directory:
+            ledger = Ledger(
+                Path(directory) / "historical.sqlite3",
+                run_id="historical",
+                manifest_sha256="a" * 64,
+                budget_microusd=1000,
+                max_calls=3,
+            )
+            ledger.reserve("op", call().fingerprint(), 120)
+            ledger.dispatch("op")
+            saved = reply(input_tokens=101, output_tokens=0)
+            ledger.complete(
+                "op",
+                response=saved.to_record(),
+                actual_microusd=101,
+                provider_request_id=saved.provider_request_id,
+            )
+            before = ledger.path.read_bytes()
+            transport = Mock()
+            with self.assertRaises(BoundBreach):
+                BudgetBroker(ledger, transport).execute("op", call())
+            self.assertEqual(ledger.path.read_bytes(), before)
+            self.assertEqual(ledger.get("op").status, "completed")
+            self.assertEqual(ledger.totals()["spent_microusd"], 101)
+            transport.send.assert_not_called()
 
     def test_unexpected_pricing_tier_holds_reservation_and_preserves_receipt(self):
         ledger = MemoryLedger()
@@ -463,6 +535,89 @@ class ProviderTests(unittest.TestCase):
             with self.assertRaises(ValidationError) as error:
                 HTTPTransport(allow_paid=True).send(call())
         self.assertNotIn("secret-sentinel", str(error.exception))
+
+    def test_http_never_returns_credentials_in_body_or_request_id(self):
+        for provider in ("openai", "anthropic"):
+            for location in ("body", "escaped_body", "request_id"):
+                with self.subTest(provider=provider, location=location):
+                    key, other = "req_SECRET123", "OTHER-SECRET123"
+                    selected = spec(provider=provider)
+                    if provider == "openai":
+                        envelope = {
+                            "model": "test-model",
+                            "usage": {"prompt_tokens": 1, "completion_tokens": 1},
+                            "choices": [
+                                {
+                                    "finish_reason": "stop",
+                                    "message": {"content": key if location == "body" else other},
+                                }
+                            ],
+                        }
+                    else:
+                        envelope = {
+                            "model": "test-model",
+                            "usage": {"input_tokens": 1, "output_tokens": 1},
+                            "stop_reason": "end_turn",
+                            "content": [
+                                {"type": "text", "text": key if location == "body" else other}
+                            ],
+                        }
+                    raw = json.dumps(envelope).encode()
+                    if location == "escaped_body":
+                        raw = raw.replace(
+                            other.encode(), b"".join(f"\\u{ord(c):04x}".encode() for c in other)
+                        )
+                    if location == "request_id":
+                        raw = raw.replace(other.encode(), b"safe")
+                    response = Mock(status=200)
+                    response.read.return_value = raw
+                    response.getheader.return_value = (
+                        key if location == "request_id" else "req-safe"
+                    )
+                    connection = Mock()
+                    connection.getresponse.return_value = response
+                    env = {
+                        "OPENAI_API_KEY": key if provider == "openai" else other,
+                        "ANTHROPIC_API_KEY": key if provider == "anthropic" else other,
+                    }
+                    with (
+                        patch(
+                            "buddha.provider.http.client.HTTPSConnection", return_value=connection
+                        ),
+                        patch.dict("os.environ", env),
+                    ):
+                        with self.assertRaises(ProviderUncertain) as error:
+                            HTTPTransport(allow_paid=True).send(call(selected))
+                    self.assertNotIn(key, str(error.exception))
+                    self.assertNotIn(other, str(error.exception))
+                    connection.request.assert_called_once()
+                    connection.close.assert_called_once()
+
+    def test_prepared_http_keeps_dispatched_key_screening_after_environment_changes(self):
+        key = "DISPATCHED-KEY123"
+        response = Mock(status=200)
+        response.read.return_value = json.dumps(
+            {
+                "model": "test-model",
+                "usage": {"prompt_tokens": 1, "completion_tokens": 1},
+                "choices": [{"finish_reason": "stop", "message": {"content": key}}],
+            }
+        ).encode()
+        response.getheader.return_value = "req-safe"
+        connection = Mock()
+        connection.getresponse.return_value = response
+        transport = HTTPTransport(allow_paid=True)
+        with (
+            patch("buddha.provider.http.client.HTTPSConnection", return_value=connection),
+            patch.dict("os.environ", {"OPENAI_API_KEY": key}),
+        ):
+            prepared = transport.prepare("op", call())
+        try:
+            with patch.dict("os.environ", {}, clear=True), self.assertRaises(ProviderUncertain):
+                transport.send_prepared(prepared)
+        finally:
+            prepared.close()
+        connection.request.assert_called_once()
 
     def test_socket_timeout_attempts_exactly_once_and_does_not_log_secrets(self):
         connection = Mock()
