@@ -1,0 +1,160 @@
+{
+  "date": "2026-11-04",
+  "design_sections": [
+    3,
+    5,
+    7,
+    9,
+    10
+  ],
+  "executing_source": {
+    "checkout": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\history-current-source-20261104-v3",
+    "clean_detached": true,
+    "head": "eacf8b8bf8710134348f9cd5d892dac1ae1e383c",
+    "python_files": 342,
+    "tree": "41247ce244740a7e902887040ce85aafc971a485"
+  },
+  "fixture_overlay": {
+    "exact_original_bytes": true,
+    "files": 8,
+    "historical_basis": {
+      "basis_head": "f3b81725c4ba5ce817e84cc613381352a1b96378",
+      "project": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\task-population-reuse-source",
+      "source_tree": "819f6a1d40c1a86637582a94427b74dd5dfece43"
+    },
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\history-current-preparation-20261104-v3\\fixture-overlay"
+  },
+  "format": "buddha.current-history-preparation-delivery.v1",
+  "governance": {
+    "current_source_checks": {
+      "codeql_run_id": 41889852678,
+      "fast_run_id": 41889853189,
+      "observed_terminal_result": "success",
+      "receipt": {
+        "path": "runs/checks/merge-cleanup-preparation-20261104-v1/independent-main-eacf8b8-postmerge-checks-v1.json",
+        "sha256": "cd178017ba5c58d475f0e01ed84b8716160f4d38a51bef45e4f0a34b93530a6d"
+      },
+      "scope": "Post-merge short checks and CodeQL only; not full qualification",
+      "source_head": "eacf8b8bf8710134348f9cd5d892dac1ae1e383c"
+    },
+    "current_source_evidence": "Reviewed retirement plus post-merge short checks only",
+    "current_source_full_qualified": false,
+    "full_qualification_before_paid_execution": true,
+    "historical_full_qualification": {
+      "run_id": 41837067557,
+      "scope": "Historical exact-source evidence only; not transferred to current source",
+      "source_head": "6e1630328137e3c18b6941eedfa5aecd851b121f"
+    },
+    "history_execution": "New explicit exact-pack one-attempt approval and immediate checks required",
+    "new_full_run_requested_or_started": false,
+    "paid_execution_cleared": false,
+    "prior_CI_transferred": false
+  },
+  "inputs": {
+    "binding": {
+      "bytes": 3491,
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\history-current-preparation-20261104-v3\\scale-replay-binding-current-v3.json",
+      "sha256": "4d6f269c0f4070ff2f4451da08a880d41cb080ed9dac625ccb2d3374522a56fe"
+    },
+    "child": {
+      "bytes": 11664,
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\history-current-preparation-20261104-v3\\scale-replay-child-reviewed-current-v3.py",
+      "sha256": "4d5e3bd25d520de86911de734c659904f3d7820570a0bfd3c488ac51fbdc5218"
+    },
+    "manifest": {
+      "bytes": 46199,
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\history-current-preparation-20261104-v3\\scale-replay-source-proposal-current-v3.json",
+      "sha256": "9bea5ae3fc2bd13123ae88c0db29f1256138258849c5c696098c92bf878dab9c"
+    },
+    "parent": {
+      "bytes": 6118,
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\history-current-preparation-20261104-v3\\scale-replay-parent-reviewed-current-v3.py",
+      "sha256": "b194e59b344e92590979b1313cbd7d451431f7a54982e631b5d6d5d9b4ae5be3"
+    }
+  },
+  "limits": [
+    "No construction, fresh history read, model/API call, key, real container or original history access occurred.",
+    "Preparation does not establish runtime compatibility, deadline capacity, memory bounds, benchmark improvement or improver effectiveness.",
+    "Future limits remain10800-second producer and conditional900-second reader, plus overhead, with no retry/resume/extension."
+  ],
+  "plan_item": "IMP-01",
+  "preserved_contract": {
+    "cut": {
+      "admitted_decisions": 9,
+      "next_action": "screen",
+      "operation_count": 660,
+      "owners": 193,
+      "reserved_microusd": 0
+    },
+    "dimensions": {
+      "answer_counts": [
+        10,
+        10,
+        10
+      ],
+      "native_environment_bytes_min": 4013984,
+      "native_inventory_rows": 24043,
+      "screen_bytes_min": 5315388,
+      "selected_tasks": 3,
+      "source_rows": 1000,
+      "task_source_bytes": 1113890
+    },
+    "driver_workload_and_guard_AST_unchanged": true,
+    "limits": {
+      "automatic_retries": 0,
+      "fresh_full_restore_seconds": 900,
+      "producer_seconds": 10800
+    },
+    "observation_policy": {
+      "format": "buddha.evidence-observation-policy.v2",
+      "max_consumed_paths": 65536,
+      "max_resident_bytes": 0,
+      "max_total_bytes": 34359738368,
+      "max_tree_entries": 100000
+    },
+    "old_preparations_and_partials_untouched": true,
+    "study_policy": "Original v4 fixture; not a full v5 experiment rehearsal"
+  },
+  "runtime_destinations_absent": [
+    "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\history-current-preparation-20261104-v3\\retained-scale-current-v3",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\history-current-preparation-20261104-v3\\scale-replay-parent-result-current-v3.json",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\history-current-preparation-20261104-v3\\producer-stdout-current-v3.log",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\history-current-preparation-20261104-v3\\producer-stderr-current-v3.log",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\history-current-preparation-20261104-v3\\producer-result-current-v3.json",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\history-current-preparation-20261104-v3\\check-stdout-current-v3.log",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\history-current-preparation-20261104-v3\\check-stderr-current-v3.log",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\history-current-preparation-20261104-v3\\check-result-current-v3.json"
+  ],
+  "source_delta_from_integrated_v2": {
+    "added": [],
+    "changed": [
+      "buddha/launch_common.py",
+      "buddha/progress.py",
+      "buddha/search_verify.py",
+      "ci_test_shard.py",
+      "tests/test_progress.py",
+      "tests/test_search_verify.py"
+    ],
+    "removed": [
+      "tests/test_observer_scope.py"
+    ]
+  },
+  "static_receipt": {
+    "bytes": 12930,
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\history-current-preparation-20261104-v3\\static-preparation-result-current-v3.json",
+    "sha256": "2097d14b47a02d8584e1abb944e57a430aeebbd737e0f062953783f56ae2440d"
+  },
+  "status": "prepared_unapproved_static_only",
+  "verification": {
+    "fixture_imports_or_workload_execution": false,
+    "helper_cases": 6,
+    "helper_outer_seconds": 0.10159699991345406,
+    "independent_static_review": {
+      "runtime_capacity_proof": false,
+      "scope": "Read-only adversarial agent compared actual parent/child bytes with v2, workload/guard ASTs with v15, source342, overlay8, outputs and24 public metadata hash references. No fixture, helper or workload execution by that reviewer.",
+      "verdict": "pass"
+    },
+    "kind": "Static AST/source/hash/path checks plus six existing pure helper cases",
+    "parent_or_child_main_executed": false
+  }
+}
