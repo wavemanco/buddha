@@ -1639,14 +1639,6 @@ def _witness_generation_for(
     )
 
 
-def _witness_generation(
-    state: dict[str, Any], location: Path, plan: dict[str, Any], proposal: dict[str, Any]
-) -> tuple[source_screen.SourceScreen, dict[str, object], dict[Path, str]]:
-    return _witness_generation_inputs(
-        state["screen"], state["controls"], _has_source_copy(state), location, plan, proposal
-    )
-
-
 def _witness_funding(reader: NativeEvidence, location: Path) -> dict[str, Any]:
     prefix = location.relative_to(reader.root).as_posix() + "/"
     allowed = {location / role / "owners/0" for role in ("proposal", "generation")}
