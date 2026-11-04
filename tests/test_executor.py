@@ -504,6 +504,73 @@ class ExecutorLifecycleTests(ExecutorFixture):
                 docker=sys.executable,
             )
 
+    def test_owned_lifecycle_records_identity_before_create_and_after_cleanup(self):
+        from buddha import executor
+
+        fixture = DockerFixture(self.spec(), Limits())
+        events = []
+
+        def record(event):
+            if event["event"] == "before_create":
+                self.assertFalse(any(call[1] == "create" for call in fixture.calls))
+            else:
+                self.assertIn([sys.executable, "rm", "-f", CONTAINER], fixture.calls)
+                self.assertTrue(fixture.child.stdin.closed)
+            events.append(copy.deepcopy(event))
+
+        token = executor._LIFECYCLE.set(record)
+        try:
+            self.execute(fixture)
+        finally:
+            executor._LIFECYCLE.reset(token)
+        self.assertEqual([event["event"] for event in events], ["before_create", "cleanup"])
+        identity = events[0]["identity"]
+        self.assertEqual(identity["docker_endpoint"], ENDPOINT)
+        self.assertEqual(identity["image_id"], IMAGE)
+        self.assertEqual(identity["name"], fixture.record["Name"][1:])
+        self.assertEqual(identity["owner"], fixture.record["Config"]["Labels"][OWNER_LABEL])
+        self.assertEqual(events[1]["identity"], identity)
+        self.assertEqual(events[1]["container_id"], CONTAINER)
+        self.assertEqual(events[1]["cleanup_status"], "removed")
+
+    def test_owned_lifecycle_persistence_failure_prevents_create(self):
+        from buddha import executor
+
+        fixture = DockerFixture(self.spec(), Limits())
+        events = []
+
+        def failed(event):
+            events.append(event)
+            raise OSError("synthetic persistence failure")
+
+        token = executor._LIFECYCLE.set(failed)
+        try:
+            with self.assertRaises(ExecutorError):
+                self.execute(fixture)
+        finally:
+            executor._LIFECYCLE.reset(token)
+        self.assertEqual([event["event"] for event in events], ["before_create"])
+        self.assertFalse(any(call[1] == "create" for call in fixture.calls))
+        self.assertFalse(fixture.started)
+
+    def test_owned_lifecycle_terminal_failure_never_returns_success(self):
+        from buddha import executor
+
+        fixture = DockerFixture(self.spec(), Limits())
+
+        def failed(event):
+            if event["event"] == "cleanup":
+                raise OSError("synthetic terminal persistence failure")
+
+        token = executor._LIFECYCLE.set(failed)
+        try:
+            with self.assertRaises(ExecutorError) as stopped:
+                self.execute(fixture)
+        finally:
+            executor._LIFECYCLE.reset(token)
+        self.assertEqual(stopped.exception.cleanup_status, "unknown")
+        self.assertEqual(stopped.exception.container_id, CONTAINER)
+
     def test_inspected_safe_owned_container_streams_frames_and_copies_configuration(self):
         raw = b'{"message":"one"}\n'
         diagnostics = b"unpublished binary diagnostics\xff"

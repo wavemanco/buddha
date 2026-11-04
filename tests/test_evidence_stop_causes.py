@@ -12,7 +12,7 @@ from unittest.mock import patch
 import test_comparison_observation as observation_fixtures
 import test_unified_launch as unified_fixtures
 
-from buddha import credentials, doctor, improver_study, launch_common, search_evidence
+from buddha import credentials, doctor, gateway, improver_study, launch_common, search_evidence
 from buddha.common import ValidationError
 
 
@@ -114,6 +114,13 @@ class EvidenceStopCauseTests(unittest.TestCase):
             self.assertEqual(reader.maximums, [min(maximum, remaining)])
 
     def test_unknown_text_codes_cycles_and_long_chains_stay_bounded_and_redacted(self):
+        @improver_study._checked
+        def pending_cleanup():
+            raise gateway.ExecutorCleanupPending("PRIVATE-CANARY")
+
+        with self.assertRaises(improver_study.ImproverStudyError) as pending:
+            pending_cleanup()
+        self.assertEqual(launch_common._stop_reason(pending.exception), "executor_cleanup_pending")
         unknown = UntrustedError("PRIVATE-CANARY")
         unknown.__context__ = unknown
         self.assertEqual(launch_common._stop_reason(unknown), "launch_stopped")

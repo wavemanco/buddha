@@ -24,10 +24,12 @@ CONTRACT_TESTS = (
     "test_archive",
     "test_authorization",
     "test_benchmark",
+    "test_candidate_generation_outcome.CandidateGenerationOutcomeTests.test_real_executor_cleanup_sidecar_survives_c1_sealing_and_passive_replay",
     "test_ci_test_shard",
     "test_common",
     "test_credentials",
     "test_diagnostics",
+    "test_evidence_stop_causes",
     "test_executor",
     "test_frozen_seed",
     "test_gateway",
@@ -36,6 +38,7 @@ CONTRACT_TESTS = (
     "test_releases",
     "test_source_capacity",
     "test_source_review.SourceReviewTests.test_selector_boundaries_keep_whole_sets_typed_tasks_and_declared_limits",
+    "test_trial_fence.TrialFenceTests.test_executor_unknown_cleanup_fences_another_original_phase",
     "test_wire",
 )
 

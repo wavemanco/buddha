@@ -15,6 +15,7 @@ import re
 import sqlite3
 import ssl
 import sys
+import threading
 import uuid
 from collections.abc import Callable, Iterator, Mapping, Sequence
 from contextlib import contextmanager
@@ -41,6 +42,7 @@ from buddha.releases import (
     ReleaseError,
     Selection,
     _digest,
+    _information,
     _json,
     _load,
     _object,
@@ -111,6 +113,10 @@ CORE = frozenset(
 
 class GatewayError(ValidationError, ReleaseError):
     """The gateway owner, profile or request violates its frozen contract."""
+
+
+class ExecutorCleanupPending(GatewayError):
+    """A retained executor marker prevents another funded session."""
 
 
 class ReceivedReply(ProviderUncertain):
@@ -1068,6 +1074,124 @@ class Gateway:
             kind=kind,
         )
 
+    def _executor_pending(self) -> Path:
+        authority = self.ledger.authority
+        binding = trial_fence._parse_scope(_text(authority._terms()["scope"]))
+        path = (
+            binding.root / ".executor-pending.json"
+            if binding is not None
+            else authority.path.with_name(authority.path.name + ".executor-pending.json")
+        )
+        _root(path.parent)
+        return path
+
+    def _executor_lifecycle(
+        self, *, directory: Path, kind: str
+    ) -> Callable[[dict[str, object]], None]:
+        pending = self._executor_pending()
+        caller = os.getpid(), threading.get_ident()
+        intent: dict[str, object] | None = None
+        fingerprint: str | None = None
+        inode: tuple[int, int] | None = None
+
+        def unchanged() -> None:
+            information = _information(pending)
+            if (information.st_dev, information.st_ino) != inode or file_hash(
+                pending, max_bytes=MAX_JSON_BYTES
+            ) != fingerprint:
+                raise GatewayError("executor pending identity changed; marker retained")
+
+        def record(event: dict[str, object]) -> None:
+            nonlocal intent, fingerprint, inode
+            try:
+                if caller != (os.getpid(), threading.get_ident()):
+                    raise GatewayError("executor lifecycle requires its original host caller")
+                event = _object(event)
+                before = event.get("event") == "before_create"
+                _object(
+                    event,
+                    {"event", "identity"}
+                    | (set() if before else {"container_id", "cleanup_status"}),
+                )
+                identity = _object(
+                    event["identity"], {"owner", "name", "docker_endpoint", "image_id"}
+                )
+                owner = _text(identity["owner"])
+                if (
+                    not re.fullmatch("[0-9a-f]{32}", owner)
+                    or identity["name"] != "buddha-" + owner
+                    or not re.fullmatch("sha256:[0-9a-f]{64}", _text(identity["image_id"]))
+                ):
+                    raise GatewayError("invalid prospective executor identity")
+                if len(_text(identity["docker_endpoint"])) > 4128:
+                    raise GatewayError("executor endpoint identity is too long")
+                if before:
+                    self.assert_work(directory=directory, kind=kind)
+                    if intent is not None:
+                        raise GatewayError("prior executor cleanup remains unresolved")
+                    intent = {
+                        "format": "buddha.executor-pending.v1",
+                        "gateway": str(self.directory),
+                        "gateway_manifest_sha256": self.manifest_sha256,
+                        "attempt": str(directory),
+                        "kind": kind,
+                        "identity": _load(_json(identity)),
+                    }
+                    raw = _json(intent) + b"\n"
+                    _root(directory)
+                    with pending.open("xb") as stream:
+                        information = os.fstat(stream.fileno())
+                        inode = information.st_dev, information.st_ino
+                        stream.write(raw)
+                        stream.flush()
+                        os.fsync(stream.fileno())
+                    fingerprint = hashlib.sha256(raw).hexdigest()
+                    unchanged()
+                    return
+                if event["event"] != "cleanup" or intent is None or identity != intent["identity"]:
+                    raise GatewayError("cleanup differs from its prospective executor identity")
+                cleanup, container = event["cleanup_status"], event["container_id"]
+                if (
+                    cleanup not in {"not_created", "removed", "unknown"}
+                    or (
+                        container is not None and not re.fullmatch("[0-9a-f]{64}", _text(container))
+                    )
+                    or (cleanup == "removed" and container is None)
+                    or (cleanup == "not_created" and container is not None)
+                ):
+                    raise GatewayError("invalid executor cleanup evidence")
+                unchanged()
+                terminal = self.directory / ("executor-cleanup-" + owner + ".json")
+                raw = (
+                    _json(
+                        {
+                            "format": "buddha.executor-cleanup.v1",
+                            "intent": intent,
+                            "intent_sha256": fingerprint,
+                            "container_id": container,
+                            "cleanup_status": cleanup,
+                        }
+                    )
+                    + b"\n"
+                )
+                _root(self.directory)
+                with terminal.open("xb") as stream:
+                    stream.write(raw)
+                    stream.flush()
+                    os.fsync(stream.fileno())
+                if file_hash(terminal, max_bytes=MAX_JSON_BYTES) != hashlib.sha256(raw).hexdigest():
+                    raise GatewayError("executor cleanup evidence changed; marker retained")
+                if cleanup != "unknown":
+                    unchanged()
+                    pending.unlink()
+                    intent, fingerprint, inode = None, None, None
+            except (ReleaseError, OSError, ValueError, TypeError, KeyError):
+                raise GatewayError(
+                    "executor custody could not be recorded; pending work retained"
+                ) from None
+
+        return record
+
     @contextmanager
     def work(self, *, directory: Path, kind: str) -> Iterator[None]:
         """Own one complete host operation, including request send and settlement."""
@@ -1076,7 +1200,24 @@ class Gateway:
             authority.path, authority._terms(), directory=self.directory, kind=kind
         ):
             self.assert_work(directory=directory, kind=kind)
-            yield
+            if kind not in {"generation", "improvement", "native"}:
+                yield
+                return
+            try:
+                self._executor_pending().lstat()
+            except FileNotFoundError:
+                pass
+            else:
+                raise ExecutorCleanupPending(
+                    "executor cleanup is unresolved; no new session may start"
+                )
+            token = trial_fence._EXECUTOR_LIFECYCLE.set(
+                self._executor_lifecycle(directory=directory, kind=kind)
+            )
+            try:
+                yield
+            finally:
+                trial_fence._EXECUTOR_LIFECYCLE.reset(token)
 
     def operation_id(self, call: GatewayCall) -> str:
         record = _load(self._record_bytes)

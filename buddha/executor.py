@@ -26,6 +26,7 @@ from typing import BinaryIO, cast
 
 from buddha.channel import ChannelError, read_frame, write_frame
 from buddha.releases import MAX_JSON_BYTES, ReleaseError, _json, _load, _path, _root, file_hash
+from buddha.trial_fence import _EXECUTOR_LIFECYCLE as _LIFECYCLE
 
 # Private container tmpfs; this path is never used for host temporary files.
 CONTAINER_TMP = "/tmp"  # nosec B108
@@ -513,6 +514,14 @@ def run_container(
 
     owner = uuid.uuid4().hex
     name = "buddha-" + owner
+    lifecycle = _LIFECYCLE.get()
+    lifecycle_started = False
+    ownership: dict[str, object] = {
+        "owner": owner,
+        "name": name,
+        "docker_endpoint": endpoint,
+        "image_id": spec.image_id,
+    }
     identity: str | None = None
     process: subprocess.Popen[bytes] | None = None
     threads: list[threading.Thread] = []
@@ -609,6 +618,9 @@ def run_container(
         ):
             raise ExecutorError("configuration")
         stage = "create"
+        if lifecycle is not None:
+            lifecycle({"event": "before_create", "identity": _load(_json(ownership))})
+            lifecycle_started = True
         raw = control(_create_args(spec, limits, name, owner)).strip()
         if not re.fullmatch(b"[0-9a-f]{64}", raw):
             raise ExecutorError("launch")
@@ -739,6 +751,18 @@ def run_container(
                         cleanup = "unknown"
         if error is None and failure:
             error = ExecutorError(failure[0])
+        if lifecycle is not None and lifecycle_started:
+            try:
+                lifecycle(
+                    {
+                        "event": "cleanup",
+                        "identity": _load(_json(ownership)),
+                        "container_id": identity,
+                        "cleanup_status": cleanup,
+                    }
+                )
+            except BaseException:
+                cleanup = "unknown"
     if cleanup == "unknown":
         raise ExecutorError(
             "cleanup",

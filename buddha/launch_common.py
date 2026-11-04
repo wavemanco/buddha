@@ -207,6 +207,7 @@ def _continued_witness_parent_controls(
 def _stop_reason(error: BaseException) -> str:
     """Expose only fixed trusted reasons through bounded redacting error chains."""
     reasons = {
+        gateway.ExecutorCleanupPending: "executor_cleanup_pending",
         EvidenceTotalLimitError: "evidence_total_bytes_limit",
         EvidenceFieldLimitError: "evidence_field_bytes_limit",
         EvidencePathLimitError: "evidence_path_count_limit",

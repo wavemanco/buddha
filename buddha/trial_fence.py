@@ -9,7 +9,7 @@ import hashlib
 import os
 import stat
 import threading
-from collections.abc import Iterator, Mapping
+from collections.abc import Callable, Iterator, Mapping
 from contextlib import contextmanager
 from contextvars import ContextVar
 from dataclasses import dataclass
@@ -328,6 +328,9 @@ class _Held:
 
 
 _HELD: ContextVar[_Held | None] = ContextVar("buddha_trial_writer", default=None)
+_EXECUTOR_LIFECYCLE: ContextVar[Callable[[dict[str, object]], None] | None] = ContextVar(
+    "buddha_executor_lifecycle", default=None
+)
 
 
 @dataclass

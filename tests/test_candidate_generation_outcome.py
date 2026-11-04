@@ -4,19 +4,74 @@ import hashlib
 import json
 import os
 import shutil
+import sys
 import unittest
+from pathlib import Path
 from unittest.mock import patch
 
 import test_candidate_generation as generation_fixtures
 import test_candidate_run as session_fixtures
+import test_executor as executor_fixtures
 
 from buddha.answers import Answers
-from buddha.executor import ExecutorError
+from buddha.executor import ContainerSpec, ExecutorError, Limits
 from buddha.gateway import RawHTTPTransport
 from buddha.releases import _json
 
 
 class CandidateGenerationOutcomeTests(unittest.TestCase):
+    def test_real_executor_cleanup_sidecar_survives_c1_sealing_and_passive_replay(self):
+        h = self.prepare_v2()
+        settings = h.candidate.record["executor"]
+        spec = ContainerSpec(
+            settings["image_id"],
+            settings["role"],
+            tuple((target, Path(path)) for target, path in settings["mounts"]),
+            settings["runner_entrypoint"],
+            tuple(tuple(pair) for pair in settings["image_environment"]),
+        )
+        fixture = executor_fixtures.DockerFixture(
+            spec,
+            Limits(**settings["limits"]),
+            stdout=_json(h.candidate.ready())
+            + b"\n"
+            + _json(h.candidate.done(h.weak_answers))
+            + b"\n",
+        )
+        with (
+            patch.object(executor_fixtures, "IMAGE", settings["image_id"]),
+            patch.object(executor_fixtures, "ENDPOINT", settings["docker_endpoint"]),
+            patch("buddha.executor.shutil.which", return_value=sys.executable),
+            patch("subprocess.run", side_effect=fixture.control),
+            patch("subprocess.Popen", side_effect=fixture.popen),
+        ):
+            report = h.run_api(h.directory, transport=RawHTTPTransport(allow_paid=False))
+        self.assertEqual(report["status"], "complete")
+        self.assertEqual(report["disposition"], "generated")
+        seal = json.loads((h.directory / "completed/0.json").read_bytes())
+        cleanup = list((h.directory / "owners/0").glob("executor-cleanup-*.json"))
+        self.assertEqual(len(cleanup), 1)
+        self.assertEqual(
+            set(seal["files"]),
+            {"report.json", "session/report.json", "session/done.json", "session/answers.json"},
+        )
+        evidence = json.loads(cleanup[0].read_bytes())
+        self.assertEqual(evidence["cleanup_status"], "removed")
+        self.assertEqual(evidence["container_id"], executor_fixtures.CONTAINER)
+        self.assertEqual(
+            evidence["intent"]["attempt"], str(h.directory / seal["attempt"] / "session")
+        )
+        self.assertFalse(list(h.root.glob("*.executor-pending.json")))
+        self.assertEqual(self.inspect(h), report)
+        with (
+            patch("buddha.executor.run_container", side_effect=AssertionError("replay worker")),
+            patch("http.client.HTTPSConnection", side_effect=AssertionError("replay network")),
+        ):
+            self.assertEqual(
+                h.run_api(h.directory, transport=RawHTTPTransport(allow_paid=False)), report
+            )
+            h.prepare_native(reference=report["source_generation"])
+
     def prepare_v2(self, **changes):
         h = self.fixture()
         h.candidate.record.update(format="buddha.candidate-generation.v2", **changes)

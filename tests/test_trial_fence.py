@@ -142,6 +142,24 @@ class TrialFixture:
 
 
 class TrialFenceTests(unittest.TestCase):
+    def test_executor_unknown_cleanup_fences_another_original_phase(self):
+        from buddha import executor
+        from buddha.gateway import GatewayError
+
+        fixture = TrialFixture(self)
+        search = fixture.h.gateway(directory=fixture.prepare(phase="search"))
+        validation = fixture.h.gateway(directory=fixture.prepare(phase="validation"))
+        with search.work(directory=search.directory, kind="generation"):
+            callback = executor._LIFECYCLE.get()
+            callback(fixture.h.cleanup_event())
+            callback(fixture.h.cleanup_event(event="cleanup", cleanup="unknown"))
+        self.assertTrue((fixture.root / ".executor-pending.json").exists())
+        with (
+            self.assertRaises(GatewayError),
+            validation.work(directory=validation.directory, kind="generation"),
+        ):
+            self.fail("unknown search cleanup admitted a validation session")
+
     def test_legacy_bind_under_poisoned_trial_marker_is_readonly(self):
         for marker_raw in POISONED_MARKERS:
             with self.subTest(marker=marker_raw):
