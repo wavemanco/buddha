@@ -1,5 +1,12 @@
 # Third-party notices
 
+Buddha-authored code and documentation are licensed under the [MIT License](LICENSE).
+Reused third-party material retains its original license and attribution.
+External datasets and separately installed dependencies retain their applicable
+terms; Buddha's license does not relicense them.
+
+## NoveltyBench
+
 `buddha/benchmark.py` reuses the exact `JUDGE_SYSTEM` and `SCORE_SYSTEM` strings
 from NoveltyBench, and implements compatible rendering and ordering behavior.
 The reference request fixture also preserves those exact prompt strings.
