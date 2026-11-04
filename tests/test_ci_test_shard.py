@@ -47,6 +47,118 @@ class CiTestShardTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 self.api._collect(unsupported)
 
+    def test_contract_selection_keeps_order_and_refuses_missing_duplicate_or_ambiguous_scope(self):
+        cases = [
+            case("test_other.Outside.test_one", []),
+            case("test_probe.Probe.test_two", []),
+            case("test_other.Named.test_one", []),
+            case("test_probe.Probe.test_one", []),
+        ]
+        labels = ("test_probe", "test_other.Named.test_one")
+        with patch.object(self.api, "CONTRACT_TESTS", labels, create=True):
+            self.assertEqual(self.api._contract_cases(cases), cases[1:])
+            with self.assertRaises(ValueError):
+                self.api._contract_cases(cases + [cases[-1]])
+        for labels in (
+            (),
+            ["test_probe"],
+            ("test_probe", "test_probe"),
+            ("test_missing",),
+            ("test_probe", "test_probe.Probe"),
+            ("test_probe..Probe",),
+            (False,),
+        ):
+            with (
+                self.subTest(labels=labels),
+                patch.object(self.api, "CONTRACT_TESTS", labels, create=True),
+            ):
+                with self.assertRaises(ValueError):
+                    self.api._contract_cases(cases)
+
+    def contract_runner(self, root, labels):
+        original = Path(self.api.__file__).read_text(encoding="utf-8")
+        start = original.index("CONTRACT_TESTS = (")
+        end = original.index("\n)", start) + 2
+        copied = root / "contract-runner.py"
+        copied.write_text(
+            original[:start] + "CONTRACT_TESTS = " + repr(labels) + original[end:],
+            encoding="utf-8",
+        )
+        return copied
+
+    def test_contract_worker_executes_only_its_explicit_manifest_and_binds_inventory(self):
+        labels = ("test_probe.Probe.test_000", "test_probe.SkippedFixture")
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            self.fixture(root)
+            (root / "tests/test_other.py").write_text(
+                "import unittest\nfrom pathlib import Path\n"
+                "Path('other-imported').touch()\n"
+                "class Other(unittest.TestCase):\n"
+                "    def test_never(self): raise AssertionError('unselected body')\n",
+                encoding="utf-8",
+            )
+            copied = self.contract_runner(root, labels)
+            with patch.object(self.api, "__file__", str(copied)):
+                inventory = self.command(
+                    root, "--suite", "contracts", "--count", "1", "--index", "0", "--list-only"
+                )
+                self.assertEqual(inventory.returncode, 0, inventory.stderr)
+                self.assertFalse((root / "body").exists())
+                result = self.command(root, "--suite", "contracts", "--count", "1", "--index", "0")
+            self.assertEqual(result.returncode, 0, result.stderr)
+            rows = [json.loads(line) for line in result.stdout.splitlines()]
+            self.assertEqual(rows[0]["suite"], "contracts")
+            self.assertEqual(rows[0]["contract_tests"], list(labels))
+            self.assertEqual(rows[0]["total"], 3)
+            self.assertEqual(len(rows), 4)
+            self.assertTrue((root / "other-imported").is_file())
+            self.assertEqual(
+                (root / "order").read_text().splitlines(), [row["id"] for row in rows[1:]]
+            )
+            self.assertEqual(len(list(root.glob("occurrence-*"))), 3)
+
+    def test_contract_scope_errors_and_unselected_import_failure_cannot_start_bodies(self):
+        for labels in (("test_missing",), ("test_probe", "test_probe"), ("test_probe",)):
+            with self.subTest(labels=labels), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                self.fixture(root)
+                if labels == ("test_probe",):
+                    (root / "tests/test_broken.py").write_text(
+                        "raise ImportError('unselected discovery still checked')\n",
+                        encoding="utf-8",
+                    )
+                copied = self.contract_runner(root, labels)
+                with patch.object(self.api, "__file__", str(copied)):
+                    result = self.command(
+                        root, "--suite", "contracts", "--count", "1", "--index", "0"
+                    )
+                self.assertEqual(result.returncode, 2, result.stderr)
+                self.assertFalse((root / "body").exists())
+                self.assertFalse((root / "setup").exists())
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            self.fixture(root)
+            result = self.command(root, "--suite", "unknown", "--count", "1", "--index", "0")
+            self.assertEqual(result.returncode, 2, result.stderr)
+            self.assertFalse((root / "body").exists())
+
+    def test_contract_scope_is_bound_into_the_checked_terminal_receipt(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            self.fixture(root)
+            copied = self.contract_runner(root, ("test_probe",))
+            original = copied.read_text(encoding="utf-8")
+            marker = "code = _execute(args, parser, progress)"
+            self.assertEqual(original.count(marker), 1)
+            copied.write_text(
+                original.replace(marker, marker + "\n        args.suite = 'full'"), encoding="utf-8"
+            )
+            with patch.object(self.api, "__file__", str(copied)):
+                result = self.command(root, "--suite", "contracts", "--count", "1", "--index", "0")
+            self.assertEqual(result.returncode, 125, result.stderr)
+            self.assertIn("missing_or_invalid_terminal_receipt", result.stderr)
+
     def test_partition_is_exhaustive_ordered_and_isolates_only_the_named_occurrence(self):
         cases = [case("probe." + str(index), []) for index in range(40)]
         cases.append(case(cases[1].id(), []))

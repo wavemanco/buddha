@@ -1,4 +1,4 @@
-"""Partition the complete ordinary unittest census without changing test semantics."""
+"""Run full qualification or an explicit contract suite with checked progress."""
 
 import argparse
 import hashlib
@@ -18,6 +18,25 @@ from contextlib import contextmanager
 from functools import partial
 from pathlib import Path
 from typing import Any, BinaryIO
+
+CONTRACT_TESTS = (
+    "test_answers",
+    "test_archive",
+    "test_authorization",
+    "test_benchmark",
+    "test_ci_test_shard",
+    "test_common",
+    "test_credentials",
+    "test_executor",
+    "test_frozen_seed",
+    "test_gateway",
+    "test_ledger",
+    "test_provider",
+    "test_releases",
+    "test_source_capacity",
+    "test_source_review.SourceReviewTests.test_selector_boundaries_keep_whole_sets_typed_tasks_and_declared_limits",
+    "test_wire",
+)
 
 if sys.platform == "win32":
 
@@ -226,11 +245,20 @@ def _terminal_bytes(args: argparse.Namespace, code: int) -> bytes:
             "idle_seconds": float(args.idle_seconds),
             "exit_code": code,
             **({"partition_seed": args.partition_seed} if args.partition_seed is not None else {}),
+            **_suite_fields(args),
         },
         sort_keys=True,
         separators=(",", ":"),
         allow_nan=False,
     ).encode()
+
+
+def _suite_fields(args: argparse.Namespace) -> dict[str, object]:
+    return (
+        {"suite": "contracts", "contract_tests": list(CONTRACT_TESTS)}
+        if getattr(args, "suite", "full") == "contracts"
+        else {}
+    )
 
 
 @contextmanager
@@ -277,6 +305,8 @@ def _watch(args: argparse.Namespace) -> int:
             command.extend(["--partition-seed", str(args.partition_seed)])
         if args.list_only:
             command.append("--list-only")
+        if args.suite != "full":
+            command.extend(["--suite", args.suite])
         if sys.platform == "win32":
             job = _WindowsJob()
         else:
@@ -383,6 +413,41 @@ def _collect(node: object) -> list[unittest.TestCase]:
     raise ValueError("collection contains an unsupported test object")
 
 
+def _contract_cases(cases: list[unittest.TestCase]) -> list[unittest.TestCase]:
+    if (
+        type(CONTRACT_TESTS) is not tuple
+        or not CONTRACT_TESTS
+        or any(
+            type(name) is not str or not all(part.isidentifier() for part in name.split("."))
+            for name in CONTRACT_TESTS
+        )
+        or len(set(CONTRACT_TESTS)) != len(CONTRACT_TESTS)
+    ):
+        raise ValueError("contract suite needs distinct explicit test labels")
+    selected: list[unittest.TestCase] = []
+    matched: set[str] = set()
+    identifiers: set[str] = set()
+    for case in cases:
+        identifier = case.id()
+        if type(identifier) is not str or not identifier:
+            raise ValueError("every test occurrence needs its original string identity")
+        matches = [
+            name
+            for name in CONTRACT_TESTS
+            if identifier == name or identifier.startswith(name + ".")
+        ]
+        if not matches:
+            continue
+        if len(matches) != 1 or identifier in identifiers:
+            raise ValueError("contract suite has an ambiguous or duplicate test occurrence")
+        identifiers.add(identifier)
+        matched.add(matches[0])
+        selected.append(case)
+    if matched != set(CONTRACT_TESTS):
+        raise ValueError("contract suite has a missing or empty test label")
+    return selected
+
+
 def _partition(
     cases: list[unittest.TestCase],
     count: int,
@@ -425,6 +490,8 @@ def _execute(args: argparse.Namespace, parser: argparse.ArgumentParser, progress
         if loader.errors:
             raise ValueError("discovery failed:\n" + "\n".join(map(str, loader.errors)))
         cases = _collect(suite)
+        if args.suite == "contracts":
+            cases = _contract_cases(cases)
         groups = _partition(cases, args.count, args.isolate, partition_seed=args.partition_seed)
     except (ValueError, ImportError) as error:
         parser.error(str(error))
@@ -450,6 +517,7 @@ def _execute(args: argparse.Namespace, parser: argparse.ArgumentParser, progress
                     if args.partition_seed is not None
                     else {}
                 ),
+                **_suite_fields(args),
             }
         ),
         flush=True,
@@ -475,6 +543,7 @@ def _execute(args: argparse.Namespace, parser: argparse.ArgumentParser, progress
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--suite", choices=("full", "contracts"), default="full")
     parser.add_argument("--count", type=int, required=True)
     parser.add_argument("--index", type=int, required=True)
     parser.add_argument("--isolate")
