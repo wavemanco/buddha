@@ -82,8 +82,10 @@ def _configuration(path: Path, expected_sha256: str, *, fresh: bool) -> dict[str
         raise ImproverHandoffError("handoff omits or changes an installed helper pin")
     definition_raw = pipeline._read(declaration, declared)
     state = assessment._definition(definition_raw, runtime, active=False)
-    if state["record"]["format"] != assessment._CAPACITY_FORMAT:
-        raise ImproverHandoffError("fresh matched handoff requires assessment and study v4")
+    if state["record"]["format"] not in assessment._CAPACITY_FORMATS:
+        raise ImproverHandoffError(
+            "fresh matched handoff requires matching supported capacity study/assessment"
+        )
     if fresh:
         _components(state, runtime)
     improver_study._bind_controls(controls, state["controls"])

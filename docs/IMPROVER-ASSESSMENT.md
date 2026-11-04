@@ -8,7 +8,8 @@ chosen descendants on a separate, previously assigned final task set. The
 The official evaluator and its metrics remain unchanged.
 
 Assessment declarations now pair explicitly with their development format:
-v1 with study v1, v2 with study v2, v3 with study v3, and v4 with study v4.
+v1 with study v1, v2 with study v2, v3 with study v3, v4 with study v4,
+and v5 with study v5.
 Every mixed pair is
 refused before preparation. V3 adopts the
 [study's explicit comparison feedback](IMPROVER-STUDY.md#explicit-comparison-feedback-in-study-v3)
@@ -23,6 +24,11 @@ finalists can be frozen. A capacity stop remains an incomplete development
 result and cannot start final assessment. V4 retains the same aggregate funding,
 final-task custody, descendant-selection and analysis rules; it does not add a
 second capacity evaluator or silently upgrade an older declaration.
+
+V5 accepts study v5's [fully accounted failed opportunities](IMPROVER-STUDY.md#fully-accounted-bad-proposals-in-study-v5).
+It preserves their unavailable capacity checkpoints and excludes unexecuted
+children from finalist selection. Genuine incomplete or unsafe development
+still blocks final assessment; the official evaluator remains unchanged.
 
 ## Bounded v3 connection check
 

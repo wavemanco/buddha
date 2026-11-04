@@ -244,7 +244,11 @@ class _WitnessTreatment(_Artifact):
                 {"proposal_capacity"}
                 if _load(self.data).get("format") == "buddha.source-mutation-witness-treatment.v2"
                 or (
-                    _load(self.data).get("format") == "buddha.source-mutation-witness-treatment.v3"
+                    _load(self.data).get("format")
+                    in {
+                        "buddha.source-mutation-witness-treatment.v3",
+                        "buddha.source-mutation-witness-treatment.v4",
+                    }
                     and "proposal_capacity" in _load(self.data)
                 )
                 else set()
@@ -252,6 +256,10 @@ class _WitnessTreatment(_Artifact):
             | (
                 {"feedback_comparison"}
                 if _load(self.data).get("format") == "buddha.source-mutation-witness-treatment.v3"
+                or (
+                    _load(self.data).get("format") == "buddha.source-mutation-witness-treatment.v4"
+                    and "feedback_comparison" in _load(self.data)
+                )
                 else set()
             ),
         )
@@ -259,11 +267,16 @@ class _WitnessTreatment(_Artifact):
             "buddha.source-mutation-witness-treatment.v1",
             "buddha.source-mutation-witness-treatment.v2",
             "buddha.source-mutation-witness-treatment.v3",
+            "buddha.source-mutation-witness-treatment.v4",
         } or (
             _json(record["policy"]) != _json(MUTATION_WITNESS_POLICY)
             or type(record["source_copy"]) is not bool
         ):
             raise SourceSearchError("unsupported bounded witness treatment")
+        if record["format"] == "buddha.source-mutation-witness-treatment.v4" and (
+            "proposal_capacity" not in record
+        ):
+            raise SourceSearchError("settled witness outcomes require original capacity checks")
         if "proposal_capacity" in record:
             from buddha import source_capacity
 
@@ -334,9 +347,12 @@ def _witness_declaration(
     source_copy: bool,
     proposal_capacity: dict[str, object] | None = None,
     feedback_comparison: dict[str, object] | None = None,
+    settled_proposals: bool = False,
 ) -> _WitnessTreatment:
     if (
-        not isinstance(scope, Path)
+        type(settled_proposals) is not bool
+        or (settled_proposals and proposal_capacity is None)
+        or not isinstance(scope, Path)
         or not isinstance(directory, Path)
         or (
             type(base_screen) is not source_screen.SourceScreen
@@ -350,7 +366,9 @@ def _witness_declaration(
     return _WitnessTreatment.from_bytes(
         _json(
             {
-                "format": "buddha.source-mutation-witness-treatment.v3"
+                "format": "buddha.source-mutation-witness-treatment.v4"
+                if settled_proposals
+                else "buddha.source-mutation-witness-treatment.v3"
                 if feedback_comparison is not None
                 else "buddha.source-mutation-witness-treatment.v2"
                 if proposal_capacity is not None
@@ -693,6 +711,33 @@ def _capacity_progress(
     }
 
 
+def _settled_proposal_failure(proposal: dict[str, Any], progress: dict[str, Any] | None) -> bool:
+    """Failure-only permission after anchored proposal and original census checks."""
+    if (
+        progress is None
+        or progress.get("present") is not True
+        or proposal.get("status") != "complete"
+        or proposal.get("disposition") not in {"rejected", "materialized"}
+    ):
+        return False
+    checkpoint = progress["record"]
+    accounting = checkpoint["settled_owner_accounting"]
+    return bool(
+        checkpoint["decision"] == "unavailable"
+        and checkpoint["reason"] == "replacement_source_unobserved"
+        and checkpoint["replacement_count"] == 0
+        and type(accounting["reserved_microusd"]) is int
+        and accounting["reserved_microusd"] == 0
+        and type(accounting["operation_count"]) is int
+        and accounting["operation_count"] == len(checkpoint["operations"])
+        and all(
+            row["measurement"]["measurement_status"] == "complete"
+            and row["measurement"]["decision"] == "pass"
+            for row in checkpoint["operations"]
+        )
+    )
+
+
 def _publish_capacity(
     root: Path,
     authorization: Path,
@@ -700,7 +745,10 @@ def _publish_capacity(
     policy: object,
     *,
     child_directory: Path,
+    allow_settled_failure: bool = False,
 ) -> dict[str, object]:
+    if type(allow_settled_failure) is not bool:
+        raise SourceSearchError("settled failure selection requires a literal boolean")
     reader = NativeEvidence(root, authorization, error_type=SourceSearchError)
     reference = _ref(location / "proposal", authorization)
     proposal = _read_ref(reader, reference, proposal=True)
@@ -719,7 +767,9 @@ def _publish_capacity(
     fresh.capture.finish()
     if retained is None or not retained["present"]:
         raise SourceSearchError("capacity checkpoint was not published")
-    if retained["record"]["decision"] != "pass":
+    if retained["record"]["decision"] != "pass" and not (
+        allow_settled_failure and _settled_proposal_failure(proposal, retained)
+    ):
         raise _ProposalCapacityStop(retained["record"])
     return cast(dict[str, object], retained["reference"])
 
@@ -1776,8 +1826,14 @@ def _witness_progress_at(
     )
     if capacity is not None:
         progress["proposal_capacity"] = capacity["reference"] if capacity["present"] else None
+    settled_failure = record[
+        "format"
+    ] == "buddha.source-mutation-witness-treatment.v4" and _settled_proposal_failure(
+        proposal, capacity
+    )
     if capacity is not None and (
-        not capacity["present"] or capacity["record"]["decision"] != "pass"
+        not capacity["present"]
+        or (capacity["record"]["decision"] != "pass" and not settled_failure)
     ):
         progress.update(
             next_owner=None, next_role=None, lower_role="proposal_capacity", needs_prepare=False
@@ -1785,9 +1841,18 @@ def _witness_progress_at(
         return progress
     generation_ref = None
     owner_paths = [proposal_owner]
-    reason, status = proposal["reason"], "failed"
+    reason, status = (
+        (
+            capacity["record"]["reason"]
+            if settled_failure
+            and proposal["disposition"] == "materialized"
+            and capacity is not None
+            else proposal["reason"]
+        ),
+        "failed",
+    )
     progress.update(next_owner=None, next_role=None)
-    if proposal["disposition"] == "materialized":
+    if proposal["disposition"] == "materialized" and not settled_failure:
         child, recipe, inputs = _witness_generation_for(treatment, plan, proposal)
         generation_dir = location / "generation"
         progress.update(
@@ -1979,6 +2044,11 @@ def _advance_witness(
                 location,
                 record["proposal_capacity"],
                 child_directory=location / "generation",
+                **(
+                    {"allow_settled_failure": True}
+                    if record["format"] == "buddha.source-mutation-witness-treatment.v4"
+                    else {}
+                ),
             )
             return {"action": "assessed", "role": role, "result": None}
         if role not in {"proposal", "generation"}:

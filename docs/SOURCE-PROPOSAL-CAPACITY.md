@@ -5,10 +5,11 @@ observations. It does not need to buy a second copy of the same request. This
 feature does not allocate money, prepare a live handoff or enable a user command.
 The [living plan](PLAN.md) retains the remaining source and scientific gates.
 
-The policy applies when explicitly selected in source handoff v4 and
-capacity-enabled source-search manifests v5/v6. Finite improver study v4 requires
-it too, paired only with assessment v4. Older records keep their original
-interpretation.
+Historical source handoff v4 selected this policy. It remains available in
+capacity-enabled source-search manifests v5/v6. Finite improver studies v4 and
+v5 require it too, each paired only with its matching assessment version. The
+new v5 rule below counts fully accounted bad proposals as failed opportunities.
+Older records keep their original interpretation.
 The historical [one-request result](SOURCE-CAPACITY-RESULTS.md) remains evidence
 about its exact request; it does not certify future requests or evolved code.
 This prospective policy supersedes an early design draft that imposed the
@@ -60,13 +61,31 @@ its loop, confined workers, API gateway, official evaluator and accounting.
 
 In a [finite improver comparison](IMPROVER-STUDY.md#original-request-capacity-in-study-v4),
 the equivalent positions are the common starting-agent witness, every counted
-proposal and each child's mutation witness. A failed or unobserved replacement
-stops the whole study as a partial result with complete planned denominators;
-it does not become a completed rejected slot. Saved stage and billing evidence
-remain available. Matching assessment v4 rechecks development before freezing
-finalists or starting final work.
+proposal and each child's mutation witness. Under study v4, a failed or
+unobserved replacement stops the whole study as a partial result with complete
+planned denominators; it does not become a completed rejected slot. Saved stage
+and billing evidence remain available. Matching assessment v4 rechecks
+development before freezing finalists or starting final work.
 
-A negative or unavailable capacity result records a partial search with reason
+Study v5 distinguishes a fully accounted bad proposal from an unresolved or
+unsafe request. Its original terminal execution, source and custody must pass
+the existing checks; every original request must be settled with complete,
+passing reply/margin observations and exact usage/cost coverage. An original
+zero-call terminal owner also qualifies. Missing matching replacement evidence
+then consumes a failed opportunity, with the capacity checkpoint still marked
+**unavailable**. This never permits executing that source. Any returned bytes
+already saved inside the original proposal remain evidence; Buddha creates no
+descendant agent copy, screen or witness for that counted proposal.
+
+A clean bad proposal inside a counted child's mutation witness fails that
+opportunity and permits the next scheduled opportunity. A failed common
+starting witness still stops with `common_ineligible`, because it is not a
+counted opportunity. Failed margins, refused/truncated replies, unknown charges,
+missing evidence and cleanup or integrity problems retain their existing stops.
+The standalone source-search formats retain their previous rules.
+
+Outside study v5's fully accounted failure case, a negative or unavailable
+capacity result records a partial search with reason
 `proposal_capacity`, the exact stage and the saved measurement. It does not
 prepare or execute that returned child's generation owner. Earlier charges,
 rejected proposals and unresolved liabilities remain recorded; the controller
@@ -105,8 +124,9 @@ substantive source changes, improved diversity, or improved ability to improve.
 
 The capacity-enabled source route uses source handoff v4, search manifest v5
 (or capacity-enabled comparison manifest v6), source-search report v3, witness
-treatment v2 and witness report v2. The finite route uses study v4 and assessment
-v4 with the same witness/checkpoint mechanism; its existing report formats remain.
+treatment v2 and witness report v2. The finite route uses matching study/assessment
+v4 or v5. The v5 route explicitly selects witness treatment v4 for its failure-only
+rule; existing witness report v2 and capacity checkpoint v1 formats remain unchanged.
 The fixed capacity policy and each capacity checkpoint have their own v1 record formats.
 Older supported formats retain their meaning and helper inventories. The
 capacity helper is imported and added to controls only when the new policy is

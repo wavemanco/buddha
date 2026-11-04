@@ -165,6 +165,29 @@ An unresolved provider liability stays unresolved; it does not become a capacity
 measurement. Version 4 adds no request truncation, altered official score,
 scientific improvement claim, spending allocation or live launch command.
 
+## Fully accounted bad proposals in study v5
+
+Study v5 pairs only with assessment v5. It retains the same grid, budgets,
+official scores and original-request capacity policy. Earlier versions keep
+their existing behavior, including v4's partial stop for an unobserved source.
+
+A clean terminal proposal with complete original accounting can consume one
+failed opportunity when no original reply contains its replacement source.
+Every observed reply must still pass the existing completeness and margin
+checks, with exact recorded usage/cost and no held charge. A checked original
+zero-call terminal proposal qualifies too. The saved capacity checkpoint stays
+unavailable; it is never relabeled as a pass. The decision says `rejected` for
+admission failure, even if the proposal's original evidence contains source
+bytes. Those original bytes remain saved, but no descendant copy, screen or
+witness is created and its ID does not enter the admitted/duplicate set.
+
+The v5 study explicitly selects witness treatment v4. A clean bad proposal in a
+counted child's witness produces a failed witness and a completed failed
+opportunity; a failed common starting witness still stops with
+`common_ineligible`. Genuine capacity, refusal/truncation, unknown-charge,
+cleanup and integrity failures remain explicit partial stops. Matching passive
+checks reproduce these distinctions before final assessment can start.
+
 ## Failures, selection and costs
 
 An opportunity is attempted when its original checked plan is durably saved.

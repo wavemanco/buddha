@@ -582,6 +582,7 @@ def prepare(record, root, destination, pins, opaque, manifest_ref, driver_ref):
             )
             study = copy.deepcopy(old["study"])
             study.update(
+                format=improver_study._SETTLED_FORMAT,
                 experiment_id=record["experiment_id"] + "-development",
                 starts=[
                     {"name": row["name"], "screen": screen.to_record()}
@@ -683,6 +684,7 @@ def prepare(record, root, destination, pins, opaque, manifest_ref, driver_ref):
             stage = "unfunded_handoff"
             definition = copy.deepcopy(old["definition"])
             definition.update(
+                format=improver_assessment._SETTLED_FORMAT,
                 experiment_id=record["experiment_id"],
                 development=study_ref,
                 tasks={

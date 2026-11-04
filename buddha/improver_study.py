@@ -47,7 +47,9 @@ _FORMAT = "buddha.improver-study.v1"
 _AGGREGATE_FORMAT = "buddha.improver-study.v2"
 _COMPARISON_FORMAT = "buddha.improver-study.v3"
 _CAPACITY_FORMAT = "buddha.improver-study.v4"
-_COMPARATIVE_FORMATS = (_COMPARISON_FORMAT, _CAPACITY_FORMAT)
+_SETTLED_FORMAT = "buddha.improver-study.v5"
+_CAPACITY_FORMATS = (_CAPACITY_FORMAT, _SETTLED_FORMAT)
+_COMPARATIVE_FORMATS = (_COMPARISON_FORMAT, *_CAPACITY_FORMATS)
 _CONTEXT = "buddha.improver-study-context.v1"
 _PLAN = "buddha.improver-study-plan.v1"
 _DECISION = "buddha.improver-study-decision.v1"
@@ -191,7 +193,7 @@ def _declaration(
             if _object(value).get("format") in _COMPARATIVE_FORMATS
             else set()
         )
-        | ({"proposal_capacity"} if _object(value).get("format") == _CAPACITY_FORMAT else set()),
+        | ({"proposal_capacity"} if _object(value).get("format") in _CAPACITY_FORMATS else set()),
     )
     if (
         record["format"] not in (_FORMAT, _AGGREGATE_FORMAT, *_COMPARATIVE_FORMATS)
@@ -202,7 +204,7 @@ def _declaration(
         _json(record["feedback_comparison"]) != _json(FEEDBACK_COMPARISON_POLICY)
     ):
         raise ImproverStudyError("finite study changes its fixed comparison feedback treatment")
-    if record["format"] == _CAPACITY_FORMAT:
+    if record["format"] in _CAPACITY_FORMATS:
         from buddha import source_capacity
 
         source_capacity.check_proposal_capacity_policy(record["proposal_capacity"])
@@ -311,7 +313,7 @@ def _declaration(
     if active:
         for screen in screens:
             source_screen._configuration(screen, runtime)
-            if record["format"] == _CAPACITY_FORMAT:
+            if record["format"] in _CAPACITY_FORMATS:
                 try:
                     shared._capacity_configuration(screen, template, record["proposal_capacity"])
                 except shared.SourceSearchError:
@@ -392,7 +394,7 @@ def _bind_controls(controls: dict[Path, str], bindings: Mapping[Path, str]) -> N
 
 def _sources(record: dict[str, Any]) -> list[Path]:
     sources = shared._sources()
-    if record["format"] == _CAPACITY_FORMAT:
+    if record["format"] in _CAPACITY_FORMATS:
         from buddha import source_capacity
 
         return [*sources, Path(source_capacity.__file__).absolute()]
@@ -1223,9 +1225,10 @@ def _witness(
         expected_runtime_sha256=state["runtime"],
         controls=_continued_witness_controls(reader.root, directory, base, state["controls"]),
         source_copy=True,
+        settled_proposals=state["record"]["format"] == _SETTLED_FORMAT,
         **(
             {"proposal_capacity": state["record"]["proposal_capacity"]}
-            if state["record"]["format"] == _CAPACITY_FORMAT
+            if state["record"]["format"] in _CAPACITY_FORMATS
             else {}
         ),
     )
@@ -1689,7 +1692,7 @@ def _restore_observed(
                 raise ImproverStudyError(
                     "counted packet changes its complete original measured data"
                 )
-        if record["format"] == _CAPACITY_FORMAT and not _presence(
+        if record["format"] in _CAPACITY_FORMATS and not _presence(
             reader, location / "proposal/report.json"
         ):
             if any(
@@ -1720,7 +1723,8 @@ def _restore_observed(
                 state, "proposal", location / "proposal", _position(*coordinate, "proposal")
             )
             continue
-        if record["format"] == _CAPACITY_FORMAT:
+        settled_failure = False
+        if record["format"] in _CAPACITY_FORMATS:
             capacity = shared._capacity_progress(
                 reader,
                 proposal,
@@ -1733,7 +1737,12 @@ def _restore_observed(
                 raise ImproverStudyError("counted proposal omitted its declared capacity policy")
             if capacity["present"]:
                 state["capacity_paths"].add(capacity["path"])
-            if not capacity["present"] or capacity["record"]["decision"] != "pass":
+            settled_failure = record[
+                "format"
+            ] == _SETTLED_FORMAT and shared._settled_proposal_failure(proposal, capacity)
+            if not capacity["present"] or (
+                capacity["record"]["decision"] != "pass" and not settled_failure
+            ):
                 if any(_presence(reader, location / name) for name in ("witness", "decision.json")):
                     raise ImproverStudyError(
                         "counted outcome precedes its passing capacity checkpoint"
@@ -1747,7 +1756,7 @@ def _restore_observed(
                 continue
         status, screen_ref, witness_ref = "rejected", None, None
         identifier = None
-        if proposal["disposition"] == "materialized":
+        if proposal["disposition"] == "materialized" and not settled_failure:
             identifier = proposal["child"]["agent_sha256"]
             if identifier in known[key]:
                 status = "duplicate"
@@ -1850,7 +1859,7 @@ def _restore_observed(
     if state["inactive"]:
         raise ImproverStudyError("an unfinished original owner is inactive")
     state["coverage"] = _coverage(state)
-    if record["format"] == _CAPACITY_FORMAT:
+    if record["format"] in _CAPACITY_FORMATS:
         checkpoints = {
             directory / name
             for name in reader.capture.entries
@@ -2149,7 +2158,7 @@ def _observations(reader: NativeEvidence, state: dict[str, Any]) -> None:
             "witness_publication",
             "decision",
             "publication",
-        } | (capacity_stages if state["record"]["format"] == _CAPACITY_FORMAT else set()):
+        } | (capacity_stages if state["record"]["format"] in _CAPACITY_FORMATS else set()):
             raise ImproverStudyError("partial changes its original lower-stage position")
         coverage = {
             key: _integer(item, 0)
@@ -2245,7 +2254,7 @@ def _observations(reader: NativeEvidence, state: dict[str, Any]) -> None:
         # Only the capacity-failure reason requires an original negative checkpoint.
         if value["reason"] == "proposal_capacity":
             if (
-                state["record"]["format"] != _CAPACITY_FORMAT
+                state["record"]["format"] not in _CAPACITY_FORMATS
                 or stage not in capacity_stages
                 or child is not None
             ):
@@ -2255,9 +2264,10 @@ def _observations(reader: NativeEvidence, state: dict[str, Any]) -> None:
                 "screen" if stage == "proposal_capacity" else "generation"
             )
             reference = _reference(reader, location / "proposal")
+            proposal = shared._read_ref(reader, reference, proposal=True)
             capacity = shared._capacity_progress(
                 reader,
-                shared._read_ref(reader, reference, proposal=True),
+                proposal,
                 reference,
                 state["record"]["proposal_capacity"],
                 location,
@@ -2267,6 +2277,10 @@ def _observations(reader: NativeEvidence, state: dict[str, Any]) -> None:
                 capacity is None
                 or not capacity["present"]
                 or capacity["record"]["decision"] == "pass"
+                or (
+                    state["record"]["format"] == _SETTLED_FORMAT
+                    and shared._settled_proposal_failure(proposal, capacity)
+                )
             ):
                 raise ImproverStudyError("capacity partial lacks its original negative checkpoint")
         required: set[str] = set()
@@ -2492,6 +2506,11 @@ def _advance_action(
                 location,
                 state["record"]["proposal_capacity"],
                 child_directory=location / "screen",
+                **(
+                    {"allow_settled_failure": True}
+                    if state["record"]["format"] == _SETTLED_FORMAT
+                    else {}
+                ),
             )
         elif kind == "prepare_child":
             shared._materialize_child_source_for(

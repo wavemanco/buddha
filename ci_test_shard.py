@@ -35,6 +35,7 @@ CONTRACT_TESTS = (
     "test_gateway",
     "test_ledger",
     "test_provider",
+    "test_proposal_capacity.ProposalCapacityNumbersTests",
     "test_releases",
     "test_source_capacity",
     "test_source_review.SourceReviewTests.test_selector_boundaries_keep_whole_sets_typed_tasks_and_declared_limits",

@@ -1,7 +1,8 @@
 # Check a proposed matched study without starting it
 
 This is the configuration check for a fresh matched-improver handoff. It uses
-the existing study v4 and assessment v4 validators. [PLAN.md](PLAN.md) owns the
+the matching study/assessment v4 or v5 validators. Fresh preparation selects
+v5's fully accounted failed-opportunity rule. [PLAN.md](PLAN.md) owns the
 remaining work; this interface neither funds nor launches an experiment.
 
 `buddha.improver_handoff.check_improver_handoff` takes a proposal file and the
@@ -17,7 +18,7 @@ The proposal has exactly these five fields:
 | Field | Meaning |
 | --- | --- |
 | `format` | `buddha.improver-handoff.v1`. |
-| `assessment` | Absolute `path` and `sha256` of the assessment v4 declaration. That declaration binds the development study, complete task source, custody, numerical plan and rule. |
+| `assessment` | Absolute `path` and `sha256` of the assessment v4 or v5 declaration, matched to its development version. That declaration binds the development study, complete task source, custody, numerical plan and rule. |
 | `expected_runtime_sha256` | Independently reviewed runtime fingerprint used by both controllers. |
 | `directory` | Canonical absolute path for a new trial, with an existing parent. Existing destinations and overlaps with declared controls or selected components are refused. |
 | `source_sha256` | Canonical absolute file paths and hashes for every required installed helper, plus any additional reviewed controls. Aliases, a reference to the proposal itself and more than 1,023 entries are refused. |
@@ -41,7 +42,7 @@ files cannot change later. Funded preparation must check the original inputs aga
 
 The result says `configuration_checked` and funding `unallocated`. The limits
 come from the declared assessment, and totals are their sum; neither grants
-spending permission. The existing v4 contract requires two spending phases and
+spending permission. Both supported versions require two spending phases and
 a separate unused-validation authority with zero dollars and zero attempts.
 This check creates none of those authorities.
 

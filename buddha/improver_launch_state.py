@@ -98,7 +98,7 @@ def inspect_prepared_improver_trial(
     bindings = {final._path(path): digest for path, digest in bindings.items()}
     context = state["context"]
     if (
-        state["record"]["format"] != assessment._CAPACITY_FORMAT
+        state["record"]["format"] not in assessment._CAPACITY_FORMATS
         or context["format"] != assessment._BINDINGS_CONTEXT
         or context["external_declaration"] != {"path": str(declaration), "sha256": expected}
         or context["expected_runtime_sha256"] != _digest(expected_runtime_sha256)

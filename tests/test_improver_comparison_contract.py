@@ -22,6 +22,35 @@ COMPARISON_POLICY = {
 
 
 class ImproverComparisonContractTests(unittest.TestCase):
+    def test_v5_and_v4_require_exact_genuine_development_assessment_pairing(self):
+        from buddha import source_capacity
+
+        f = assessment_fixtures.ImproverAssessmentTests("runTest")
+        self.addCleanup(f.doCleanups)
+        f.setUp()
+        f.fixture(observer=self, proposal_capacity=True)
+        runtime = f.engine.candidate.expected_runtime
+        for inner in (4, 5):
+            development = copy.deepcopy(f.finite)
+            development.update(
+                format="buddha.improver-study.v" + str(inner),
+                feedback_comparison=dict(COMPARISON_POLICY),
+                proposal_capacity=source_capacity.proposal_capacity_policy(),
+            )
+            self.assertEqual(improver_study._declaration(development, runtime)[0], development)
+            for outer in (4, 5):
+                definition = self.definition(f, outer, development, f"settled-pair-{inner}-{outer}")
+                if inner == outer:
+                    self.assertEqual(
+                        improver_assessment._definition(_json(definition), runtime, active=False)[
+                            "development"
+                        ],
+                        development,
+                    )
+                else:
+                    with self.assertRaisesRegex(ReleaseError, "versions must match"):
+                        improver_assessment._definition(_json(definition), runtime, active=False)
+
     def assessment_fixture(self):
         f = assessment_fixtures.ImproverAssessmentTests("runTest")
         self.addCleanup(f.doCleanups)

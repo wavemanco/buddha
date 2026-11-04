@@ -30,6 +30,8 @@ _FORMAT = "buddha.improver-assessment-trial.v1"
 _AGGREGATE_FORMAT = "buddha.improver-assessment-trial.v2"
 _COMPARISON_FORMAT = "buddha.improver-assessment-trial.v3"
 _CAPACITY_FORMAT = "buddha.improver-assessment-trial.v4"
+_SETTLED_FORMAT = "buddha.improver-assessment-trial.v5"
+_CAPACITY_FORMATS = (_CAPACITY_FORMAT, _SETTLED_FORMAT)
 _CONTEXT = "buddha.improver-assessment-context.v1"
 _BINDINGS_CONTEXT = "buddha.improver-assessment-context.v2"
 _SCHEDULE = "buddha.improver-final-schedule.v1"
@@ -115,7 +117,7 @@ def _definition(raw: bytes, runtime: str, *, active: bool = True) -> dict[str, A
         },
     )
     if (
-        record["format"] not in (_FORMAT, _AGGREGATE_FORMAT, _COMPARISON_FORMAT, _CAPACITY_FORMAT)
+        record["format"] not in (_FORMAT, _AGGREGATE_FORMAT, _COMPARISON_FORMAT, *_CAPACITY_FORMATS)
         or record["selection_policy"] != _POLICY
     ):
         raise ImproverAssessmentError("unsupported prospective improver assessment")
@@ -136,6 +138,7 @@ def _definition(raw: bytes, runtime: str, *, active: bool = True) -> dict[str, A
         _AGGREGATE_FORMAT: improver_study._AGGREGATE_FORMAT,
         _COMPARISON_FORMAT: improver_study._COMPARISON_FORMAT,
         _CAPACITY_FORMAT: improver_study._CAPACITY_FORMAT,
+        _SETTLED_FORMAT: improver_study._SETTLED_FORMAT,
     }[record["format"]]
     if development["format"] != expected_development:
         raise ImproverAssessmentError("assessment and development funding versions must match")
@@ -240,7 +243,7 @@ def _definition(raw: bytes, runtime: str, *, active: bool = True) -> dict[str, A
     }
     for amount in expected_final.values():
         _integer(amount, 1)
-    if record["format"] in {_AGGREGATE_FORMAT, _COMPARISON_FORMAT, _CAPACITY_FORMAT}:
+    if record["format"] in {_AGGREGATE_FORMAT, _COMPARISON_FORMAT, *_CAPACITY_FORMATS}:
         improver_study._bounded_limits(limits["final"], expected_final)
         expected_final = limits["final"]
     if limits != {

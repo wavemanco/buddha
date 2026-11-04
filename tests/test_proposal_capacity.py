@@ -24,6 +24,193 @@ def sha(raw):
 
 
 class ProposalCapacityNumbersTests(unittest.TestCase):
+    def test_prechecked_witness_failure_uses_real_predicate_and_never_prepares_generation(self):
+        """Exercise progress branching with checked-input seams, not a custody proof."""
+        from unittest.mock import Mock
+
+        from buddha import candidate_improvement, source_search
+        from buddha.native_evidence import NativeEvidence
+
+        root = Path.cwd().absolute() / "prechecked-witness"
+        location = root / "witness"
+        reference = {
+            "directory": str(root / "parent"),
+            "authorization": str(root / "grant"),
+            "report_sha256": "1" * 64,
+        }
+        plan = {
+            "proposal_descriptor": {},
+            "feedback_sha256": {name + ".json": "2" * 64 for name in source_search._FILES},
+        }
+        bundle = {name: {} for name in source_search._FILES}
+        context = {
+            "format": candidate_improvement.CONTEXT_FORMAT,
+            "descriptor": str(location / "proposal.json"),
+            "expected_runtime_sha256": "3" * 64,
+            "expected_feedback_provenance_sha256": "2" * 64,
+        }
+        data = {
+            location / "plan.json": _json(plan),
+            location / "proposal.json": _json({}),
+            location / "proposal/context.json": _json(context),
+            **{
+                location / "feedback" / (name + ".json"): _json({}) for name in source_search._FILES
+            },
+        }
+        reader = object.__new__(NativeEvidence)
+        reader.root, reader.authorization = root, root / "grant"
+        reader.capture = SimpleNamespace(
+            entries={"witness/plan.json", "witness/proposal", "witness/proposal/report.json"}
+        )
+        reader.raw = Mock(side_effect=lambda path: data[path])
+        reader.owner = Mock(
+            return_value=SimpleNamespace(accounting=lambda: dict.fromkeys(source_search._TOTALS, 0))
+        )
+        parent = SimpleNamespace(candidate_id="parent", to_record=lambda: {"generation": {}})
+        for version, complete, published in ((2, True, False), (4, True, True), (4, False, False)):
+            record = {
+                "format": f"buddha.source-mutation-witness-treatment.v{version}",
+                "parent": reference,
+                "directory": str(location),
+                "proposal_template": {},
+                "review": {},
+                "expected_runtime_sha256": "3" * 64,
+                "proposal_capacity": {},
+            }
+            treatment = object.__new__(source_search._WitnessTreatment)
+            object.__setattr__(treatment, "data", _json(record))
+            capacity = {
+                "present": True,
+                "reference": {"path": str(location / "proposal-capacity.json"), "sha256": "4" * 64},
+                "record": {
+                    "decision": "unavailable",
+                    "reason": "replacement_source_unobserved",
+                    "replacement_count": 0,
+                    "operations": [
+                        {
+                            "measurement": {
+                                "measurement_status": "complete" if complete else "partial",
+                                "decision": "pass" if complete else "unavailable",
+                            }
+                        }
+                    ],
+                    "settled_owner_accounting": {"reserved_microusd": 0, "operation_count": 1},
+                },
+            }
+            proposal = {"status": "complete", "disposition": "materialized", "reason": "complete"}
+            with (
+                self.subTest(version=version, complete=complete),
+                patch.object(source_search, "_witness_parent_read", return_value=(parent, None)),
+                patch.object(source_search, "_witness_funding", return_value={}),
+                patch.object(source_search, "authority_observation", return_value={}),
+                patch.object(
+                    source_search, "_witness_materials", return_value=(None, plan, bundle)
+                ),
+                patch.object(source_search, "_witness_controls", return_value={}),
+                patch.object(source_search, "_stage_owner_for"),
+                patch.object(source_search, "_stage_seal_for", return_value=(True, False)),
+                patch.object(source_search, "_ref", return_value=reference),
+                patch.object(source_search, "_read_ref", return_value=proposal),
+                patch.object(source_search, "_capacity_progress", return_value=capacity),
+                patch.object(
+                    source_search,
+                    "_witness_generation_for",
+                    side_effect=AssertionError("unobserved child"),
+                ),
+            ):
+                progress = source_search._witness_progress_at(reader, treatment)
+                if published:
+                    self.assertEqual(progress["publication"]["status"], "failed")
+                    self.assertEqual(
+                        progress["publication"]["reason"], "replacement_source_unobserved"
+                    )
+                    self.assertIsNone(progress["publication"]["generation"])
+                    self.assertIsNone(progress["next_owner"])
+                else:
+                    self.assertIsNone(progress["publication"])
+                    self.assertEqual(progress["lower_role"], "proposal_capacity")
+
+    def test_prechecked_common_ineligible_dispatch_stops_without_another_witness(self):
+        from unittest.mock import Mock
+
+        from buddha import improver_study
+
+        root = Path.cwd().absolute() / "prechecked-common"
+        result = {"status": "failed", "reason": "invalid_proposal"}
+        state = {
+            "action": {"kind": "common_ineligible", "directory": root / "common", "result": result},
+            "funding": {"auth_operations": []},
+        }
+        reader = SimpleNamespace(root=root, _rows=lambda rows: rows)
+        authority = SimpleNamespace(path=root / "grant")
+        expected = {"status": "incomplete", "reason": "common_ineligible"}
+        with (
+            patch.object(improver_study, "_observe", return_value=expected) as observe,
+            patch.object(
+                improver_study.shared, "_advance_witness", side_effect=AssertionError("new witness")
+            ),
+        ):
+            self.assertEqual(
+                improver_study._advance_action(reader, state, authority, Mock()), expected
+            )
+        observe.assert_called_once_with(root, state, authority, "common_ineligible", result)
+
+    def test_settled_failure_permission_preserves_unavailable_capacity_and_refuses_bad_evidence(
+        self,
+    ):
+        from buddha import source_search
+
+        progress = {
+            "present": True,
+            "record": {
+                "decision": "unavailable",
+                "reason": "replacement_source_unobserved",
+                "replacement_count": 0,
+                "operations": [],
+                "settled_owner_accounting": {"operation_count": 0, "reserved_microusd": 0},
+            },
+        }
+        original = copy.deepcopy(progress)
+        for disposition in ("rejected", "materialized"):
+            proposal = {"status": "complete", "disposition": disposition}
+            self.assertTrue(source_search._settled_proposal_failure(proposal, progress))
+        row = {"measurement": {"measurement_status": "complete", "decision": "pass"}}
+        progress["record"]["operations"] = [row]
+        progress["record"]["settled_owner_accounting"]["operation_count"] = 1
+        self.assertTrue(source_search._settled_proposal_failure(proposal, progress))
+        invalid = []
+        unpublished = copy.deepcopy(progress)
+        unpublished["present"] = False
+        invalid.append(unpublished)
+        for key, value in (
+            ("decision", "fail"),
+            ("reason", "reply_unavailable"),
+            ("replacement_count", 1),
+        ):
+            changed = copy.deepcopy(progress)
+            changed["record"][key] = value
+            invalid.append(changed)
+        for field, value in (
+            ("reserved_microusd", 1),
+            ("operation_count", 0),
+            ("operation_count", True),
+        ):
+            changed = copy.deepcopy(progress)
+            changed["record"]["settled_owner_accounting"][field] = value
+            invalid.append(changed)
+        for field, value in (("measurement_status", "partial"), ("decision", "fail")):
+            changed = copy.deepcopy(progress)
+            changed["record"]["operations"][0]["measurement"][field] = value
+            invalid.append(changed)
+        for index, changed in enumerate(invalid):
+            with self.subTest(case=index):
+                self.assertFalse(source_search._settled_proposal_failure(proposal, changed))
+        self.assertFalse(
+            source_search._settled_proposal_failure({"status": "incomplete"}, progress)
+        )
+        self.assertFalse(source_search._settled_proposal_failure(proposal, None))
+        self.assertEqual(original["record"]["decision"], "unavailable")
+
     def setUp(self):
         from buddha import source_capacity
 

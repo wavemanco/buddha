@@ -2478,5 +2478,71 @@ class ImproverStudyCapacityTests(unittest.TestCase):
         )
 
 
+class SettledProposalOpportunityTests(unittest.TestCase):
+    def fixture(self, **options):
+        h = ImproverStudyCapacityTests("runTest")
+        self.addCleanup(h.doCleanups)
+        f, record = h.fixture(**options)
+        record["format"] = "buddha.improver-study.v5"
+        return f, record
+
+    def test_v5_accounted_bad_slot_reaches_checked_next_opportunity_without_descendants(self):
+        from buddha import source_search
+        from buddha.doctor import _Busy
+        from buddha.releases import _json
+
+        class PrefixReached(Exception):
+            pass
+
+        f, record = self.fixture(zero_calls=True)
+        directory, _, authority = f.prepare_study("settled-programmatic-prefix", record)
+        original_advance = f.api._advance_action
+        retained = []
+
+        def advance(reader, state, original_authority, transport):
+            if state["coverage"]["completed_opportunities"] == 1:
+                retained.append((reader, state))
+                raise PrefixReached
+            return original_advance(reader, state, original_authority, transport)
+
+        with patch.object(f.api, "_advance_action", side_effect=advance):
+            with self.assertRaises(PrefixReached):
+                f.run_study(directory)
+        reader, state = retained[0]
+        self.assertEqual(state["coverage"]["completed_opportunities"], 1)
+        self.assertEqual(state["coverage"]["expected_opportunities"], 2)
+        self.assertEqual(state["action"]["kind"], "plan")
+        self.assertEqual(state["action"]["position"]["arm"], 1)
+        decision = state["decisions"][0]
+        self.assertEqual(decision["status"], "rejected")
+        self.assertIsNone(decision["candidate_id"])
+        location = directory / "cells/0/0/0/0"
+        self.assertEqual(json.loads((location / "decision.json").read_bytes()), decision)
+        checkpoint_path = location / "proposal-capacity.json"
+        raw = checkpoint_path.read_bytes()
+        checkpoint = json.loads(raw)
+        self.assertEqual(checkpoint["decision"], "unavailable")
+        self.assertEqual(checkpoint["reason"], "replacement_source_unobserved")
+        self.assertEqual(checkpoint["settled_owner_accounting"]["operation_count"], 0)
+        self.assertEqual(checkpoint["settled_owner_accounting"]["reserved_microusd"], 0)
+        self.assertEqual(authority.summary()["reserved_microusd"], 0)
+        self.assertTrue((location / "proposal/attempts/0-0/session/child/candidate.py").exists())
+        for name in ("agent", "screen", "witness", "generation"):
+            self.assertFalse((location / name).exists())
+        proposal = source_search._read_ref(reader, decision["proposal"], proposal=True)
+        forged = checkpoint | {"decision": "pass"}
+        checkpoint_path.write_bytes(_json(forged))
+        with self.assertRaises(_Busy):
+            source_search._capacity_progress(
+                reader,
+                proposal,
+                decision["proposal"],
+                record["proposal_capacity"],
+                location,
+                child_directory=location / "screen",
+            )
+        checkpoint_path.write_bytes(raw)
+
+
 if __name__ == "__main__":
     unittest.main()

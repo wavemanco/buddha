@@ -819,6 +819,13 @@ def _receipt_roots(path: Path, expected_sha256: str) -> list[Path]:
             "analysis_plan",
             "improvement_rule",
         ),
+        "buddha.improver-assessment-trial.v5": (
+            "development",
+            "tasks",
+            "custody",
+            "analysis_plan",
+            "improvement_rule",
+        ),
     }
     path, expected_sha256 = _path(str(path.absolute())), _digest(expected_sha256)
     first = _load(pipeline._read(path, expected_sha256))
