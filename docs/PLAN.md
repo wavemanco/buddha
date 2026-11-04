@@ -112,6 +112,7 @@ Three decision actions returned. The last returned action is witness at10,487.03
 | Pack producer-stderr-v15.log (empty) | e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 |
 | Observer terminal-verification-v1.json | 11a7c5abf806907842729d5d0d5801eb646d3bef1a04cdfa62cb2382ede66ac6 |
 | Observer window3-receipt-v1.json | 20e2ee9278a1b6eb165c43f48dd62648ba492085f1ecb4bffa7072020100ecad |
+| Observer producer-os-counters-v1.json | 467fadd8fa962261ea2e6b3630ef23f7e22ef645cd33924f2ecfe3242b623758 |
 
 The observer directory is runs/checks/task-population-history-observation-20261103-v1. Root verification reads only seven named outputs and fixed public-source/pack/authority inputs, without opening WORK/history/SQL/private actors. Independent log-only observation preserves24 final-window snapshots and distinguishes reported source flags from the separate root source postcheck. V15 uses no APIs, keys, real containers or original paid history. The consumed allowance supplies no retry, resume, extension or new measurement. Reduced TaskSet validation counts remain local evidence; this result does not establish that practical construction fit has been met.
 
