@@ -1,14 +1,18 @@
-# Run manually only after approval for full qualification of the selected source.
+# Apply the exact source label only after approval for this full qualification run.
 name: checks
 
 on:
-  workflow_dispatch:
+  pull_request:
+    types: [labeled]
 
 permissions:
   contents: read
 
 jobs:
   checks:
+    if: >-
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.label.name == format('qualify-{0}', github.event.pull_request.head.sha)
     strategy:
       fail-fast: false
       matrix:
@@ -20,6 +24,7 @@ jobs:
         timeout-minutes: 60
         with:
           fetch-depth: 2
+          ref: ${{ github.event.pull_request.head.sha }}
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         timeout-minutes: 60
         with:

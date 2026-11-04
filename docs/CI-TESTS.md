@@ -31,22 +31,43 @@ and checked terminal completion remain in use.
 ## Full qualification
 
 The separate `checks` workflow in
-[qualification.yml](../.github/workflows/qualification.yml) is manual-only.
+[qualification.yml](../.github/workflows/qualification.yml) starts only when a
+maintainer applies a label matching the PR's exact source commit.
 It retains five groups per OS, the full discovered suite, the original
 partition seed, isolated large case, all quality checks and the 60-minute
-genuine-progress rule. PRs and main pushes do not launch it. A new full run
-requires the user's approval for that source.
+genuine-progress rule. Opening a PR, pushing a commit or adding an unrelated
+label does not start its test jobs. Each full run requires the user's approval
+for that exact source and its Actions-minute cost.
+
+After approval, use GitHub's PR page to apply `qualify-` followed by the full
+40-character head commit SHA, with no spaces. This is a 48-character label.
+It requests one ten-job run against that exact commit; the checkout explicitly
+uses the head SHA rather than GitHub's temporary merge commit. The PR must be
+mergeable and its head branch must belong to this repository. Fork PRs are
+excluded from this route.
+
+No PowerShell command, API key or model API money is needed. The run uses
+GitHub Actions minutes. Follow it in **Actions** and use **Cancel workflow** to
+stop it. All ten jobs must finish successfully; a skipped workflow or job is
+not a full-suite pass.
+
+A later push does not repeat qualification or transfer approval to the new
+source. An old label or another label cannot qualify that new commit. A new
+SHA label, removing and reapplying a label, or using **Re-run jobs** requires
+approval for another run. Do not apply a qualification label during routine
+development.
 
 Full qualification of the integrated source remains required before paid
 execution or a claim that the integrated system passed. PR #243 keeps its
 original workflow and gate. Retiring the obsolete document-lane controller
 also retires its nine tests; the remaining full inventory is reported normally.
 
-**Installation limitation:** GitHub requires a manually dispatched workflow
-file on the default branch. This unmerged file is not yet an available
-premerge qualification route. Installation must be resolved at integration
-before offering a full-run handoff. No long run was dispatched to test it.
-See GitHub's [dispatch prerequisite](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#onworkflow_dispatch).
+This prepares a premerge route for a same-repository PR containing the workflow.
+The positive label-to-ten-job execution remains unverified until an approved
+run occurs. No qualification label or long run was started to check this change.
+GitHub documents the [PR label event and explicit head checkout](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#pull_request)
+and the [format expression](https://docs.github.com/en/actions/reference/workflows-and-actions/expressions#format)
+used to bind the label to its source.
 
 Repository settings inspected on November 3 had no required status checks or
 branch rules. Full qualification is a project policy, not a verified automatic
