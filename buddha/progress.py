@@ -9,15 +9,11 @@ import math
 import sys
 import threading
 import time
-from contextlib import AbstractContextManager
 from pathlib import Path
 from types import TracebackType
-from typing import TYPE_CHECKING, TextIO, cast
+from typing import TextIO, cast
 
 from buddha.history import _plain
-
-if TYPE_CHECKING:
-    from buddha.launch_common import ObserverScope
 
 
 def snapshot(directory: Path, *, authorization: Path | None = None) -> dict[str, object]:
@@ -95,15 +91,12 @@ class Progress:
         poll_seconds: float = 1.0,
         heartbeat_seconds: float = 10.0,
         authorization: Path | None = None,
-        observer: "ObserverScope | None" = None,
     ) -> None:
         self.directory = Path(directory)
         self.stream = sys.stderr if stream is None else stream
         self.poll_seconds = _interval(poll_seconds)
         self.heartbeat_seconds = _interval(heartbeat_seconds)
         self.authorization = authorization
-        self._observer = observer
-        self._observer_context: AbstractContextManager[None] | None = None
         self._stop = threading.Event()
         self._thread: threading.Thread | None = None
         self._enabled = True
@@ -164,12 +157,6 @@ class Progress:
                 self._write("Progress data temporarily unavailable; waiting for next update.")
 
     def __enter__(self) -> "Progress":
-        if self._observer is not None:
-            from buddha.launch_common import _observer_scope
-
-            self._observer_context = _observer_scope(self._observer, "progress")
-            self._observer_context.__enter__()
-            return self
         self._started = time.monotonic()
         self._observe(initial=True)
         try:
@@ -187,11 +174,6 @@ class Progress:
         exc_value: BaseException | None,
         traceback: TracebackType | None,
     ) -> None:
-        if self._observer is not None:
-            context, self._observer_context = self._observer_context, None
-            if context is not None:
-                context.__exit__(exc_type, exc_value, traceback)
-            return
         self._stop.set()
         if self._thread is not None and self._thread.is_alive():
             self._thread.join(timeout=0.5)

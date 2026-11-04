@@ -5,6 +5,7 @@ import io
 import json
 import sqlite3
 import tempfile
+import threading
 import time
 import unittest
 from pathlib import Path
@@ -12,6 +13,7 @@ from unittest.mock import patch
 
 from doctor_helpers import files, native, protected
 
+from buddha import launch_common
 from buddha.ledger import Ledger
 from buddha.progress import Progress, snapshot, watch_run
 from buddha.provider import Reply
@@ -152,6 +154,39 @@ class ProgressTests(unittest.TestCase):
                 raise ValueError("worker failed")
         self.assertIn("Run stopped", output.getvalue())
         self.assertFalse(output.getvalue().split("Run stopped")[-1].count("Run complete"))
+
+    def test_launcher_heartbeat_observes_slow_check_without_accounting_and_stops_cleanly(self):
+        ticked, notices, workers = threading.Event(), [], []
+        real_thread = threading.Thread
+        original_error = ValueError("synthetic stopped check")
+
+        def thread(*args, **kwargs):
+            worker = real_thread(*args, **kwargs)
+            workers.append(worker)
+            return worker
+
+        def notice(message):
+            notices.append(message)
+            ticked.set()
+
+        with (
+            patch.object(launch_common.threading, "Thread", side_effect=thread),
+            patch.object(launch_common, "_snapshot", side_effect=AssertionError("unexpected read")),
+            self.assertRaises(ValueError) as stopped,
+        ):
+            with launch_common._heartbeat(notice, ["checking"], [None], 0.01):
+                self.assertTrue(ticked.wait(timeout=2))
+                raise original_error
+
+        self.assertIs(stopped.exception, original_error)
+        self.assertEqual(len(workers), 1)
+        self.assertFalse(workers[0].is_alive())
+        self.assertTrue(
+            any(
+                "Phase: checking; elapsed" in message and "recorded accounting unknown" in message
+                for message in notices
+            )
+        )
 
     def test_broken_output_does_not_interrupt_execution(self):
         class Broken(io.StringIO):

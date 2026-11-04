@@ -216,6 +216,14 @@ no dependency, frozen lock, benchmark setting, prepared study or scientific gate
 
 ## ENG-OBS-01: make continuation checks and stops understandable
 
+Current disposition, November 4, 2026: PR258 retires our unused observer callback,
+not an adopted Inspect integration. Existing progress and diagnostics remain;
+the observability need below remains open. Inspect is still a reuse candidate
+for transcript/result inspection and stage tracing, with compatibility unproven.
+Preserve the isolated environment and original partial proof. Any later
+integration should replace a named custom reporting responsibility.
+[Disposition and historical evidence](INSPECT-OBSERVABILITY-PROOF.md).
+
 Recorded October 29, 2026 as an existing operator-observability follow-up under
 [DESIGN section 9](DESIGN.md#9-paid-operation-integrity), not a new scientific
 gate or spending approval. In the frozen PR179 runtime,
