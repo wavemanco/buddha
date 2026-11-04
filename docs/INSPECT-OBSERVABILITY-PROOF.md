@@ -1,5 +1,26 @@
 # Inspect observability compatibility proof
 
+## Current disposition: November 4, 2026
+
+PR258 removes our unused observer callback and its prototype tests. No
+application caller enabled it, and it implemented no Inspect trace, evaluation
+log or viewer. Existing progress messages, accounting, stop diagnostics and saved
+evidence remain. The user's cleanup direction targets unnecessary code we wrote;
+this retirement does not reject useful third-party observability.
+
+Inspect remains a deferred reuse candidate. Its official [log viewer](https://inspect.aisi.org.uk/log-viewer.html)
+can inspect transcripts, scoring and results; its [action traces](https://inspect.aisi.org.uk/tracing.html)
+can expose running, failed or unfinished actions. Our isolated proof below did
+not reach those features, so compatibility and benefit remain unproven. Any
+future adoption should replace a named custom reporting responsibility rather
+than add another coordinator. No new proof attempt or dependency is scheduled.
+
+The original isolated environment, receipts and failed proof remain intact.
+The following sections describe that historical candidate and its acceptance
+criteria; they do not describe an installed application integration.
+
+## Historical candidate and proof
+
 This records the bounded ENG-OBS-01 candidate in [PLAN.md](PLAN.md). Its first
 actual proof attempt stopped during Inspect import, before either synthetic
 sample ran. Inspect AI 0.3.287 remains unadopted. The existing Gateway, authority
