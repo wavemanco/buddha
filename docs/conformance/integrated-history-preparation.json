@@ -1,0 +1,151 @@
+{
+  "format": "buddha.integrated-history-preparation.v1",
+  "recorded_utc": "2026-11-04T10:06:16.777238+00:00",
+  "status": "prepared_not_approved_not_executed",
+  "plan_item": "IMP-01",
+  "purpose": "Prepare the unchanged comparable-size history proof against the integrated application; no scientific performance claim.",
+  "executing_source_head": "3f73142a441ad2fef0c7349983fe5ace42e5ff68",
+  "source_tree": "d02699052e2af681f0d43fd3360d756d813a4abe",
+  "public_python_pins": 343,
+  "fixture_version": "unchanged original v4 workload",
+  "fixture_original_source_head": "f3b81725c4ba5ce817e84cc613381352a1b96378",
+  "fixed_fixture_pins": 8,
+  "separate_fixture_overlay": true,
+  "fixture_change_in_current_checkout": "Seven raw files match; test_improver_study.py differs only by an appended SettledProposalOpportunityTests class. Original bytes are loaded from the separately pinned overlay.",
+  "required_cut": {
+    "admitted_decisions": 9,
+    "next_action": "screen",
+    "operation_count": 660,
+    "owners": 193,
+    "reserved_microusd": 0
+  },
+  "required_dimensions": {
+    "answer_counts": [
+      10,
+      10,
+      10
+    ],
+    "native_environment_bytes_min": 4013984,
+    "native_inventory_rows": 24043,
+    "screen_bytes_min": 5315388,
+    "selected_tasks": 3,
+    "source_rows": 1000,
+    "task_source_bytes": 1113890
+  },
+  "limits": {
+    "automatic_retries": 0,
+    "fresh_full_restore_seconds": 900,
+    "producer_seconds": 10800
+  },
+  "observation_policy": {
+    "format": "buddha.evidence-observation-policy.v2",
+    "max_consumed_paths": 65536,
+    "max_resident_bytes": 0,
+    "max_total_bytes": 34359738368,
+    "max_tree_entries": 100000
+  },
+  "full_qualification": {
+    "approved_reply": "Approve one full qualification run",
+    "approved_source_head": "3f73142a441ad2fef0c7349983fe5ace42e5ff68",
+    "run_id": 41810643300,
+    "run_attempt": 1,
+    "url": "https://github.com/wavemanco/buddha/actions/runs/41810643300",
+    "event_label": "qualify-3f73142a441ad2fef0c7349983fe5ace42e5ff68",
+    "observed_status": "all_ten_jobs_in_progress_in_test_step",
+    "observation_utc": "2026-11-04T09:57:15Z",
+    "terminal_result_not_yet_verified": true,
+    "expected_tests_per_os": 2203,
+    "expected_shards_per_os": [
+      1,
+      556,
+      541,
+      582,
+      523
+    ],
+    "expected_inventory_sha256": "95c997757a2ccfa2a085e611bb7ae9fb3046158e8d20924bbd60b25f0087529c",
+    "idle_without_genuine_test_progress_seconds": 3600,
+    "maximum_job_minutes": 360,
+    "automatic_retries": 0,
+    "does_not_authorize_history_or_paid_calls_or_main_merges": true
+  },
+  "records": {
+    "scale-replay-parent-reviewed-integrated-v2.py": {
+      "path": "runs/checks/integrated-history-preparation-20261104-v1/scale-replay-parent-reviewed-integrated-v2.py",
+      "sha256": "6c071cd10f21e1c0510b74d0e75cd2fb97c0d83ecdd917f22747d078e25f228f",
+      "bytes": 6154
+    },
+    "scale-replay-child-reviewed-integrated-v2.py": {
+      "path": "runs/checks/integrated-history-preparation-20261104-v1/scale-replay-child-reviewed-integrated-v2.py",
+      "sha256": "6580ba0b76faff803afbf9daecf3a35d4bb0ffa4c620a78329d3ef42e74640ed",
+      "bytes": 11667
+    },
+    "scale-replay-source-proposal-integrated-v2.json": {
+      "path": "runs/checks/integrated-history-preparation-20261104-v1/scale-replay-source-proposal-integrated-v2.json",
+      "sha256": "ae8507a4850be3094a5ad5f42e821f42bd24e7e505deb047167370c7b9ee2e24",
+      "bytes": 44577
+    },
+    "scale-replay-binding-integrated-v2.json": {
+      "path": "runs/checks/integrated-history-preparation-20261104-v1/scale-replay-binding-integrated-v2.json",
+      "sha256": "e99381ad5f3efb53bebd25ca8a3692889b3397bcff7e1b83e74ef94d56a177d6",
+      "bytes": 3545
+    },
+    "static-preparation-result-v2.json": {
+      "path": "runs/checks/integrated-history-preparation-20261104-v1/static-preparation-result-v2.json",
+      "sha256": "e300175de78ac8c29bb2245ce884a6aa73b9a7cc718d8b4b765ef7f02dc36028",
+      "bytes": 5403
+    },
+    "final-static-check-v1.json": {
+      "path": "runs/checks/integrated-history-preparation-20261104-v1/final-static-check-v1.json",
+      "sha256": "1a3cdd5a86b232166190c4235e555002acce8f92ef0db8247d5eb086f036cf3c",
+      "bytes": 1677
+    },
+    "script-diff-v2.patch": {
+      "path": "runs/checks/integrated-history-preparation-20261104-v1/script-diff-v2.patch",
+      "sha256": "0a89e1a101ffddc12733e951008844e2946a30ac9888b80cca006ed943fd79b2",
+      "bytes": 14329
+    },
+    "origin-helper-check-v1.py": {
+      "path": "runs/checks/integrated-history-preparation-20261104-v1/origin-helper-check-v1.py",
+      "sha256": "8844c474520583d6820e4ba9a6bddb7bd5cf4b08efce5823ae04c8f9efd11463",
+      "bytes": 3276
+    },
+    "origin-helper-result-v1.json": {
+      "path": "runs/checks/integrated-history-preparation-20261104-v1/origin-helper-result-v1.json",
+      "sha256": "00394bc10b02cc8d9fe8db150ae52c348a2eee85b83eba723da4c31f278dc0e8",
+      "bytes": 682
+    }
+  },
+  "static_review": "Independent agent and root inspected the actual scripts. Pre-work and terminal checks bind imported fixture origins to the overlay and imported Buddha modules to the current source map. Original main producer/reader try-body, guard, dimension helpers, cut, policy and deadlines remain unchanged after namespace normalization.",
+  "pure_helper_check": {
+    "status": "pass",
+    "seconds": 0.026410300051793456,
+    "cases": 6,
+    "scope": "Extracted hash/origin functions with synthetic module objects and trivial temporary files only; no fixture or full-script execution."
+  },
+  "source_and_fixture_raw_hashes_match": true,
+  "executing_source_clean": true,
+  "all_eight_runtime_destinations_absent": true,
+  "application_and_workflow_changes_in_this_slice": false,
+  "all_269_original_plan_revision_rows_raw_identical": true,
+  "preparation_partials": "Initial preview retained; late-origin blocker resolved in v2. One static builder literal assertion and its correction retained. An initial root revision-row comparison assumed newest-first order; corrected filtering verifies all original raw rows.",
+  "metadata_access_deviation": "Initial builder discovery recursively enumerated retained-work filenames. No retained contents were read/imported/executed. Subsequent reads used named public inputs only.",
+  "history_execution_performed": false,
+  "fixture_imports_or_test_bodies_in_preparation": false,
+  "provider_calls": 0,
+  "real_containers": 0,
+  "old_SQL_or_retained_contents_read": false,
+  "prior_single_three_hour_allowances_consumed": true,
+  "history_approval": "not_approved",
+  "release_requires": [
+    "Complete exact-source full qualification with terminal coverage checked",
+    "New explicit one-attempt history approval for this exact pack",
+    "Immediate source, script, overlay, approval and output/ancestor identity checks"
+  ],
+  "limitations": [
+    "Static preparation and pure helper checks do not prove fixture/API runtime compatibility or deadline fit.",
+    "The unchanged v4 history measures the current reader, not a full v5 grid or live capacity.",
+    "No raw-byte cache is added; the observation policy is not an RSS ceiling.",
+    "No automatic retry, resume or extension; setup, hashing and reporting add overhead.",
+    "No operator command or API funding is cleared."
+  ]
+}

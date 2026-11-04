@@ -50,3 +50,30 @@ source; no new long attempt or optimization chain is authorized by this repair.
 
 No operator command, API key or separate PowerShell window is needed for this
 code change. It does not start an experiment.
+
+## Current-source history-check preparation
+
+The next proposed check targets frozen application source `3f73142a`, including
+the retained performance work, code retirement and safety/outcome fixes. Its
+separate full qualification is now running. That approval does not authorize
+history construction.
+
+The workload stays the same: build a synthetic history with 193 owners, 660
+recorded operations, nine admitted decisions and no unresolved spending, then
+check it in a fresh process within 15 minutes. The proposed construction limit
+is three hours; setup, hashing and reporting add time. A construction timeout
+means the read was never tested. There is no automatic retry or continuation.
+
+The original eight public fixture files are kept in a separate, pinned input
+directory. Seven match the current checkout; the eighth differs only by an
+appended test class. The fixture files and current application files have
+separate hashes and real file origins. This preserves the old v4 workload while
+using the current application. It does not test a full v5 study or establish live
+capacity, memory use, improved scores or a better improver.
+
+The [preparation record](conformance/integrated-history-preparation.json) binds
+the concrete files and limits. Independent static review and six small checks of
+the extracted file-origin helpers pass; no fixture or history workload ran.
+Execution needs a new approval after full qualification and immediate
+source/output checks. No operator command is cleared yet, and no action is needed
+in PowerShell.
