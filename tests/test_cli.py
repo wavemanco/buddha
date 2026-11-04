@@ -7,8 +7,6 @@ import sys
 import tempfile
 import unittest
 from contextlib import redirect_stderr, redirect_stdout
-from dataclasses import replace
-from datetime import UTC, datetime
 from pathlib import Path
 from types import ModuleType, SimpleNamespace
 from unittest.mock import Mock, patch
@@ -17,13 +15,44 @@ from authorization_helpers import authorized_run
 
 from buddha.__main__ import _check_upstream, _key_environment, _settings, _usd, main
 from buddha.benchmark import UPSTREAM_COMMIT
-from buddha.diagnostics import DiagnosticHTTPTransport
 from buddha.evaluation import ValidationError
-from buddha.provider import Reply
-from buddha.run import prepare_run
 
 
 class CLITests(unittest.TestCase):
+    def test_retired_launch_commands_refuse_before_keys_sources_or_argv_echo(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            destination = Path(temporary) / "NOT-CREATED"
+            for command in (
+                "prepare",
+                "run",
+                "search-prepare",
+                "search-run",
+                "continuation-prepare",
+            ):
+                for extra in (
+                    [],
+                    ["--out", str(destination), "--live", "--prompt-keys", "ARGV-SECRET-CANARY"],
+                ):
+                    with (
+                        self.subTest(command=command, supplied_arguments=bool(extra)),
+                        patch("buddha.__main__._key_environment") as keys,
+                        patch("buddha.__main__._settings") as settings,
+                        patch("buddha.__main__.load_run") as source,
+                        patch("http.client.HTTPSConnection") as connection,
+                        redirect_stdout(io.StringIO()) as output,
+                        redirect_stderr(io.StringIO()) as notices,
+                    ):
+                        self.assertEqual(main([command, *extra]), 2)
+                    record = json.loads(output.getvalue())
+                    self.assertEqual(record["reason"], "retired_command")
+                    self.assertEqual(record["command"], command)
+                    self.assertNotIn("ARGV-SECRET-CANARY", output.getvalue() + notices.getvalue())
+                    self.assertFalse(destination.exists())
+                    keys.assert_not_called()
+                    settings.assert_not_called()
+                    source.assert_not_called()
+                    connection.assert_not_called()
+
     def test_source_review_collection_forwards_explicit_and_empty_submissions(self):
         from buddha import source_review_handoff
 
@@ -265,39 +294,6 @@ class CLITests(unittest.TestCase):
         keys.assert_not_called()
         connection.assert_not_called()
 
-    def bind_authorization(self, root, target):
-        authorization = root / "authorization.sqlite3"
-        with redirect_stdout(io.StringIO()):
-            self.assertEqual(
-                main(
-                    [
-                        "authorization-create",
-                        "--out",
-                        str(authorization),
-                        "--budget-usd",
-                        "50",
-                        "--max-calls",
-                        "128",
-                        "--scope",
-                        "Mocked CLI integration only",
-                    ]
-                ),
-                0,
-            )
-            self.assertEqual(
-                main(
-                    [
-                        "authorization-bind",
-                        "--authorization",
-                        str(authorization),
-                        "--run",
-                        str(target),
-                    ]
-                ),
-                0,
-            )
-        return authorization
-
     def test_authorization_create_and_inspect_are_offline_and_inspection_is_readonly(self):
         with (
             tempfile.TemporaryDirectory() as temporary,
@@ -468,80 +464,6 @@ class CLITests(unittest.TestCase):
                     self.fail("echoed input must never be used")
             self.assertEqual(dict(os.environ), {"OPENAI_API_KEY": ""})
 
-    def test_prompted_key_sentinels_never_enter_artifacts_requests_or_output(self):
-        settings = replace(
-            _settings(Path(__file__).parent.parent / "examples" / "live-config.json", "50"),
-            bounds_checked_on=datetime.now(UTC).date().isoformat(),
-        )
-        sentinels = ("dummy-secret-openai", "dummy-secret-anthropic")
-
-        def received(prepared):
-            for secret in sentinels:
-                self.assertNotIn(secret.encode(), prepared.body)
-            body = json.loads(prepared.body)
-            name = body.get("response_format", {}).get("json_schema", {}).get("name")
-            text = "Synthetic answer."
-            if name == "Partition":
-                text = '{"groups":[[0,1,2,3,4,5,6,7,8,9]]}'
-            elif body["model"] == settings.quality.model:
-                text = '{"score":8}'
-            return Reply(text, body["model"], "dummy-receipt", 10, 5, "stop")
-
-        with tempfile.TemporaryDirectory() as temporary:
-            root = Path(temporary)
-            data = root / "data.jsonl"
-            data.write_text('{"id":"dev","prompt":"Offer a useful alternative."}\n')
-            import hashlib
-
-            target = root / "run"
-            prepare_run(
-                target,
-                dataset_path=data,
-                expected_dataset_sha256=hashlib.sha256(data.read_bytes()).hexdigest(),
-                settings=settings,
-                synthetic=True,
-            )
-            authorization = self.bind_authorization(root, target)
-            with (
-                redirect_stderr(io.StringIO()) as progress,
-                patch.dict(os.environ, {}, clear=True),
-                patch("buddha.__main__.sys.stdin.isatty", return_value=True),
-                patch("buddha.__main__.sys.stderr.isatty", return_value=True),
-                patch("buddha.__main__.getpass.getpass", side_effect=sentinels),
-                patch("buddha.provider.http.client.HTTPSConnection"),
-                patch.object(
-                    DiagnosticHTTPTransport, "send_prepared", side_effect=received
-                ) as send,
-                redirect_stdout(io.StringIO()) as output,
-            ):
-                self.assertEqual(
-                    main(
-                        [
-                            "run",
-                            "--run",
-                            str(target),
-                            "--live",
-                            "--prompt-keys",
-                            "--authorization",
-                            str(authorization),
-                        ]
-                    ),
-                    0,
-                )
-                self.assertEqual(send.call_count, 12)
-                for secret in sentinels:
-                    self.assertNotIn(secret, output.getvalue())
-                    self.assertNotIn(secret, progress.getvalue())
-                self.assertIn("OPENAI_API_KEY received", progress.getvalue())
-                self.assertIn("ANTHROPIC_API_KEY received", progress.getvalue())
-                self.assertIn("Starting", progress.getvalue())
-                self.assertIn("Run complete", progress.getvalue())
-                self.assertEqual(dict(os.environ), {})
-            for path in target.rglob("*"):
-                if path.is_file():
-                    for secret in sentinels:
-                        self.assertNotIn(secret.encode(), path.read_bytes(), str(path))
-
     def test_current_upstream_is_required_before_a_new_cli_experiment(self):
         for status, sha, accepted in [
             (200, UPSTREAM_COMMIT, True),
@@ -626,81 +548,6 @@ class CLITests(unittest.TestCase):
             self.assertEqual(main(["watch", "--run", temporary]), 2)
             self.assertEqual(json.loads(output.getvalue()), {"status": "needs_review"})
             watch.assert_called_once_with(Path(temporary))
-
-    def test_interrupted_execution_never_prints_completion(self):
-        with tempfile.TemporaryDirectory() as temporary:
-            target = str(Path(temporary) / "demo")
-            with redirect_stdout(io.StringIO()):
-                self.assertEqual(main(["demo", "--out", target]), 0)
-            with (
-                patch("buddha.__main__.run_baseline", side_effect=KeyboardInterrupt),
-                redirect_stdout(io.StringIO()) as output,
-                redirect_stderr(io.StringIO()) as progress,
-            ):
-                self.assertEqual(main(["run", "--run", target]), 130)
-            self.assertIn("interrupted", json.loads(output.getvalue())["error"])
-            self.assertNotIn("Run complete", progress.getvalue())
-            self.assertIn("Interrupted", progress.getvalue())
-
-    def test_http_failure_surfaces_safe_diagnostics_without_retry(self):
-        import hashlib
-
-        settings = replace(
-            _settings(Path(__file__).parent.parent / "examples" / "live-config.json", "50"),
-            bounds_checked_on=datetime.now(UTC).date().isoformat(),
-        )
-        with tempfile.TemporaryDirectory() as temporary:
-            root = Path(temporary)
-            data = root / "data.jsonl"
-            data.write_text('{"id":"dev","prompt":"Offer a useful alternative."}\n')
-            target = root / "run"
-            prepare_run(
-                target,
-                dataset_path=data,
-                expected_dataset_sha256=hashlib.sha256(data.read_bytes()).hexdigest(),
-                settings=settings,
-                synthetic=True,
-            )
-            authorization = self.bind_authorization(root, target)
-            response = Mock(status=429)
-            response.read.return_value = b'{"error":{"message":"secret-error-sentinel"}}'
-            response.getheader.return_value = "req_A12345678"
-            connection = Mock()
-            connection.getresponse.return_value = response
-            with (
-                patch.dict(
-                    os.environ,
-                    {
-                        "OPENAI_API_KEY": "secret-key-sentinel",
-                        "ANTHROPIC_API_KEY": "secret-key-sentinel",
-                    },
-                    clear=True,
-                ),
-                patch("http.client.HTTPSConnection", return_value=connection),
-                redirect_stdout(io.StringIO()) as output,
-                redirect_stderr(io.StringIO()) as progress,
-            ):
-                self.assertEqual(
-                    main(
-                        [
-                            "run",
-                            "--run",
-                            str(target),
-                            "--live",
-                            "--authorization",
-                            str(authorization),
-                        ]
-                    ),
-                    2,
-                )
-            result = json.loads(output.getvalue())
-            self.assertEqual(result["diagnostic"]["http_status"], 429)
-            self.assertEqual(result["diagnostic"]["provider_request_id"], "req_A12345678")
-            connection.request.assert_called_once()
-            for sentinel in ("secret-key-sentinel", "secret-error-sentinel"):
-                self.assertNotIn(sentinel, output.getvalue() + progress.getvalue())
-                for path in (target / "diagnostics").rglob("*.json"):
-                    self.assertNotIn(sentinel, path.read_text())
 
 
 if __name__ == "__main__":

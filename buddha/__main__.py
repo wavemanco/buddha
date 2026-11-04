@@ -1,4 +1,4 @@
-"""Local CLI; model network access requires the explicit run --live option."""
+"""Local research tools; paid studies use their separately checked operators."""
 
 import argparse
 import hashlib
@@ -21,14 +21,12 @@ from buddha.benchmark import (
     _object,
     _parse,
     import_evaluation,
-    load_prompts,
     prompt_manifest,
 )
 from buddha.credentials import KeyInputError as KeyInputError
 from buddha.credentials import getpass as getpass
 from buddha.credentials import key_environment as _shared_key_environment
 from buddha.credentials import os as os
-from buddha.diagnostics import DiagnosticHTTPTransport, failure_summary
 from buddha.evaluation import ValidationError
 from buddha.history import _plain
 from buddha.ledger import Ledger
@@ -41,16 +39,6 @@ def _notice(message: str) -> None:
     # Console output must never change a paid operation's outcome.
     with suppress(OSError, ValueError):
         print(f"[buddha] {message}", file=sys.stderr, flush=True)
-
-
-def _error_record(message: str, directory: Path | None) -> dict[str, object]:
-    record: dict[str, object] = {"error": message}
-    if directory is not None:
-        diagnostic = failure_summary(directory)
-        if diagnostic is not None:
-            record["diagnostic"] = diagnostic
-            _notice("Provider failure metadata was saved; the reservation remains held.")
-    return record
 
 
 def _usd(value: object) -> int:
@@ -300,6 +288,24 @@ def _review_command(args: argparse.Namespace) -> int:
 
 
 def main(argv: Sequence[str] | None = None) -> int:
+    arguments = sys.argv[1:] if argv is None else argv
+    if arguments and arguments[0] in (
+        "prepare",
+        "run",
+        "search-prepare",
+        "search-run",
+        "continuation-prepare",
+    ):
+        print(
+            json.dumps(
+                {
+                    "error": "This legacy experiment command is retired.",
+                    "reason": "retired_command",
+                    "command": arguments[0],
+                }
+            )
+        )
+        return 2
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
     review_export = commands.add_parser(
@@ -326,17 +332,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     continuation_source = commands.add_parser(
         "continuation-source", help="verify original receipt slots and saved science offline"
     )
-    continuation_prepare = commands.add_parser(
-        "continuation-prepare", help="freeze and bind a linked continuation without model calls"
-    )
-    for command in (continuation_source, continuation_prepare):
-        command.add_argument("--source", type=Path, required=True)
-        command.add_argument("--manifest-sha256", required=True)
-        command.add_argument("--ledger-sha256", required=True)
-        command.add_argument("--archive", type=Path, required=True)
-        command.add_argument("--archive-sha256", required=True)
-    continuation_prepare.add_argument("--authorization", type=Path, required=True)
-    continuation_prepare.add_argument("--out", type=Path, required=True)
+    continuation_source.add_argument("--source", type=Path, required=True)
+    continuation_source.add_argument("--manifest-sha256", required=True)
+    continuation_source.add_argument("--ledger-sha256", required=True)
+    continuation_source.add_argument("--archive", type=Path, required=True)
+    continuation_source.add_argument("--archive-sha256", required=True)
     authorization_create = commands.add_parser(
         "authorization-create", help="create one explicit shared dollar/call authorization offline"
     )
@@ -374,28 +374,6 @@ def main(argv: Sequence[str] | None = None) -> int:
     demo.add_argument("--out", type=Path, required=True)
     search_demo = commands.add_parser("search-demo", help="run or resume synthetic policy search")
     search_demo.add_argument("--out", type=Path, required=True)
-    search_prepare = commands.add_parser(
-        "search-prepare", help="freeze a bounded development search"
-    )
-    search_prepare.add_argument("--dataset", choices=DATASETS, required=True)
-    search_prepare.add_argument("--data", type=Path, required=True)
-    search_prepare.add_argument("--config", type=Path, required=True)
-    search_prepare.add_argument("--budget-usd")
-    search_prepare.add_argument("--screen-size", type=int, default=1)
-    search_prepare.add_argument("--iterations", type=int, default=1)
-    search_prepare.add_argument("--max-active", type=int, default=8)
-    search_prepare.add_argument("--seed", type=int, default=7)
-    search_prepare.add_argument(
-        "--method", choices=["archive", "latest", "uninformed"], default="archive"
-    )
-    search_prepare.add_argument("--out", type=Path, required=True)
-    search_run = commands.add_parser(
-        "search-run", help="execute or resume one frozen policy search"
-    )
-    search_run.add_argument("--run", type=Path, required=True)
-    search_run.add_argument("--live", action="store_true")
-    search_run.add_argument("--prompt-keys", action="store_true")
-    search_run.add_argument("--authorization", type=Path)
     search_inspect = commands.add_parser(
         "search-inspect", help="reconstruct search offline from receipts"
     )
@@ -419,42 +397,15 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     fetch.add_argument("--dataset", choices=DATASETS, required=True)
     fetch.add_argument("--out", type=Path, required=True)
-    prepare = commands.add_parser("prepare", help="freeze a development baseline without API calls")
-    prepare.add_argument("--dataset", choices=DATASETS, required=True)
-    prepare.add_argument("--data", type=Path, required=True)
-    prepare.add_argument("--config", type=Path, required=True)
-    prepare.add_argument("--budget-usd", help="explicit USD decimal override for the configuration")
-    prepare.add_argument(
-        "--limit", type=int, help="development pilot: first N source rows, recorded exactly"
-    )
-    prepare.add_argument("--out", type=Path, required=True)
-    run = commands.add_parser("run", help="execute/resume the frozen baseline")
-    run.add_argument("--run", type=Path, required=True)
-    run.add_argument(
-        "--live", action="store_true", help="allow model API spending under the frozen cap"
-    )
-    run.add_argument(
-        "--prompt-keys", action="store_true", help="enter missing API keys without echo or files"
-    )
-    run.add_argument("--authorization", type=Path)
     for name in ["inspect", "verify"]:
         command = commands.add_parser(
             name, help="inspect the ledger or verify all exported artifacts offline"
         )
         command.add_argument("--run", type=Path, required=True)
-    args = parser.parse_args(argv)
+    args = parser.parse_args(arguments)
     if args.command in {"source-review-export", "source-review-inspect"}:
         return _review_command(args)
     try:
-        authorization = None
-        if args.command in {"run", "search-run"}:
-            if args.live and args.authorization is None:
-                raise ValidationError("--live requires an existing --authorization database")
-            if args.authorization is not None:
-                authorization = Authorization(args.authorization)
-                bound_ledger = authorization.for_run(args.run)
-                if args.live:
-                    bound_ledger.authorize_dispatch()
         if args.command == "continuation-source":
             from buddha.continuation import read_source
 
@@ -480,33 +431,6 @@ def main(argv: Sequence[str] | None = None) -> int:
                         "unknown_operation_id": source.unknown.operation_id,
                         "unknown_hold_microusd": source.unknown.reserve_microusd,
                         "claim": "source verified; no continuation prepared or spending allocated",
-                    }
-                )
-            )
-        elif args.command == "continuation-prepare":
-            from buddha.continuation import prepare_continuation
-            from buddha.search import load_search
-
-            target = prepare_continuation(
-                args.out,
-                source=args.source,
-                source_manifest_sha256=args.manifest_sha256,
-                source_ledger_sha256=args.ledger_sha256,
-                authorization=Authorization(args.authorization),
-                archived_runtime_zip=args.archive,
-                archived_runtime_sha256=args.archive_sha256,
-            )
-            manifest, settings, _, _ = load_search(target)
-            print(
-                json.dumps(
-                    {
-                        "status": "prepared",
-                        "run": str(target),
-                        "run_id": manifest["run_id"],
-                        "model_calls": 0,
-                        "inherited_replies": 9,
-                        "budget_microusd": settings.budget_microusd,
-                        "max_calls": settings.max_calls,
                     }
                 )
             )
@@ -606,122 +530,15 @@ def main(argv: Sequence[str] | None = None) -> int:
             )
             print(json.dumps(watched))
             return 0 if watched.get("status") == "complete" else 2
-        elif args.command == "search-prepare":
-            from buddha.search import SearchSpec, prepare_search
+        elif args.command == "search-inspect":
+            from buddha.search import inspect_search
 
-            settings = _settings(args.config, args.budget_usd)
-            spec = SearchSpec(
-                iterations=args.iterations,
-                max_active=args.max_active,
-                seed=args.seed,
-                method=args.method,
-                screen_size=args.screen_size,
-            )
-            _check_upstream()
-            prepare_search(
-                args.out,
-                dataset_path=args.data,
-                expected_dataset_sha256=DATASETS[args.dataset][1],
-                settings=settings,
-                spec=spec,
-            )
-            print(
-                json.dumps(
-                    {
-                        "status": "prepared",
-                        "model_calls": 0,
-                        "budget_microusd": settings.budget_microusd,
-                    }
-                )
-            )
-        elif args.command in {"search-run", "search-inspect"}:
-            from buddha.progress import Progress
-            from buddha.search import inspect_search, load_search, run_search
-
-            if args.command == "search-inspect":
-                print(json.dumps(inspect_search(args.run)))
-            else:
-                if args.prompt_keys and not args.live:
-                    raise ValidationError("--prompt-keys requires --live")
-                manifest, settings, _, _ = load_search(args.run)
-                if manifest["format"] == "buddha.policy-search-continuation.v1":
-                    if authorization is None:
-                        raise ValidationError("linked execution requires --authorization")
-                    _notice(
-                        "Reusing 9 inherited replies. Progress counts new API operations; "
-                        "the original unknown request remains held."
-                    )
-                if args.live:
-                    settings.permit_live()
-                transport = (
-                    DiagnosticHTTPTransport(args.run, allow_paid=True)
-                    if args.live
-                    else _SearchReplay()
-                )
-                with _key_environment(settings, prompt_keys=args.prompt_keys):
-                    _notice("Starting policy search. Provider calls can take time.")
-                    with Progress(args.run):
-                        report = run_search(
-                            args.run,
-                            transport=transport,
-                            allow_paid=args.live,
-                            authorization=authorization,
-                        )
-                print(
-                    json.dumps(
-                        {"mode": "live" if args.live else "synthetic_replay", "report": report}
-                    )
-                )
+            print(json.dumps(inspect_search(args.run)))
         elif args.command == "fetch":
             _fetch(args.dataset, args.out)
-        elif args.command == "prepare":
-            settings = _settings(args.config, args.budget_usd)
-            _check_upstream()
-            expected = DATASETS[args.dataset][1]
-            prompts = load_prompts(args.data, expected_sha256=expected)
-            if args.limit is not None and not 1 <= args.limit <= len(prompts):
-                raise ValidationError("pilot limit must be within the dataset size")
-            ids = [p.id for p in prompts[: args.limit]] if args.limit is not None else None
-            prepare_run(
-                args.out,
-                dataset_path=args.data,
-                expected_dataset_sha256=expected,
-                settings=settings,
-                prompt_ids=ids,
-            )
-            print(json.dumps({"status": "prepared", "model_calls": 0}))
         else:
             manifest, settings, prompts, protocol = load_run(args.run)
-            if args.command == "run":
-                from buddha.progress import Progress
-
-                if args.prompt_keys and not args.live:
-                    raise ValidationError("--prompt-keys requires --live")
-                if args.live:
-                    settings.permit_live()
-                baseline_transport = (
-                    DiagnosticHTTPTransport(args.run, allow_paid=True)
-                    if args.live
-                    else ReplayTransport()
-                )
-                with _key_environment(settings, prompt_keys=args.prompt_keys):
-                    _notice("Starting baseline evaluation. Provider calls can take time.")
-                    with Progress(args.run):
-                        result = run_baseline(
-                            args.run,
-                            transport=baseline_transport,
-                            allow_paid=args.live,
-                            authorization=authorization,
-                        )
-                print(
-                    json.dumps(
-                        {
-                            "mode": "live" if args.live else "synthetic_replay",
-                            "summary": asdict(result),
-                        }
-                    )
-                )
-            elif args.command == "verify":
+            if args.command == "verify":
                 result, _ = import_evaluation(
                     args.run / "evaluation",
                     protocol=protocol,
@@ -764,8 +581,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 0
     except ValidationError as error:
         _notice("Stopped. See the error JSON; no automatic retry was made.")
-        directory = args.run if args.command in {"run", "search-run"} else None
-        print(json.dumps(_error_record(str(error), directory)))
+        print(json.dumps({"error": str(error)}))
         return 2
     except (OSError, ValueError):
         _notice("Stopped. See the error JSON; no automatic retry was made.")
@@ -773,13 +589,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 2
     except KeyboardInterrupt:
         _notice("Interrupted. Any uncertain provider requests retain their reservations.")
-        directory = args.run if args.command in {"run", "search-run"} else None
         print(
-            json.dumps(
-                _error_record(
-                    "interrupted; keep the run directory for review before resuming", directory
-                )
-            )
+            json.dumps({"error": "interrupted; keep the run directory for review before resuming"})
         )
         return 130
 

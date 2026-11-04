@@ -1,14 +1,11 @@
 """Current paid entry points cannot bypass shared authority or prompt for keys first."""
 
-import io
 import json
 import tempfile
 import unittest
-from contextlib import redirect_stderr, redirect_stdout
 from pathlib import Path
 from unittest.mock import Mock, patch
 
-from buddha.__main__ import main
 from buddha.evaluation import ValidationError
 from buddha.ledger import Ledger
 from buddha.provider import BudgetBroker, Call, HTTPTransport, ModelSpec, Reply
@@ -77,56 +74,6 @@ class PaidAuthorityTests(unittest.TestCase):
         self.assertEqual(result, reply)
         transport.send.assert_not_called()
         self.assertEqual(self.ledger.events(), before)
-
-    def test_missing_cli_authority_fails_before_source_loading_or_key_prompt(self):
-        for command in ("run", "search-run"):
-            with self.subTest(command=command):
-                output = io.StringIO()
-                with (
-                    redirect_stdout(output),
-                    redirect_stderr(io.StringIO()),
-                    patch("buddha.__main__._key_environment") as keys,
-                    patch("buddha.__main__.load_run") as load_baseline,
-                    patch("buddha.search.load_search") as load_search,
-                ):
-                    result = main(
-                        [
-                            command,
-                            "--run",
-                            str(self.directory / "missing"),
-                            "--live",
-                            "--prompt-keys",
-                        ]
-                    )
-                self.assertEqual(result, 2)
-                self.assertIn("authorization", json.loads(output.getvalue())["error"])
-                keys.assert_not_called()
-                load_baseline.assert_not_called()
-                load_search.assert_not_called()
-
-    def test_missing_authority_database_is_not_created_and_keys_are_not_requested(self):
-        missing = self.directory / "missing-authorization.sqlite3"
-        output = io.StringIO()
-        with (
-            redirect_stdout(output),
-            redirect_stderr(io.StringIO()),
-            patch("buddha.__main__._key_environment") as keys,
-        ):
-            result = main(
-                [
-                    "search-run",
-                    "--run",
-                    str(self.directory / "missing"),
-                    "--live",
-                    "--prompt-keys",
-                    "--authorization",
-                    str(missing),
-                ]
-            )
-        self.assertEqual(result, 2)
-        self.assertIn("authorization", json.loads(output.getvalue())["error"])
-        self.assertFalse(missing.exists())
-        keys.assert_not_called()
 
 
 if __name__ == "__main__":

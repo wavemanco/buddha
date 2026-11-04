@@ -4,19 +4,25 @@ The user authorized **up to US$50 for one first live experiment** on 2026-10-19.
 
 ## Approved unified WildChat comparison
 
+**Historical, closed for new work.** That original comparison stopped as a
+partial result. Its saved approvals, grants and evidence are retained; they do
+not fund the fresh comparison, and its old launch command is not a current
+instruction. [PLAN.md](PLAN.md) owns fresh preparation and approval.
+
 On October 26, 2026, the user approved and prospectively adopted the frozen
 comparison with **$150 combined OpenAI/Anthropic API spending and 16,384 recorded
 attempts**, allowing partial results with stage, reason, costs and holds.
 Its four distinct grants are $40/4,096 development, $0/0 unused validation,
 $85/10,240 final assessment and one shared $25/2,048 for both plain references.
-No earlier balance is reused. All grants start unused.
+No earlier balance was reused. All grants started unused at that preparation;
+this is not a statement of their present balances.
 
 The selected native reviewer is `gpt-6.1-sol` with `ultra` reasoning, at most
 forty-four fresh contexts: sixty-four staged target judgments plus twelve
 whole-set judgments. This uses unpriced Codex-plan capacity outside the API cap,
 with no reviewer API fallback. Human participation remains nonblocking.
 
-The [funded live guide](UNIFIED-LIVE.md) gives the exact command and explains
+The historical [funded live guide](UNIFIED-LIVE.md) records the old command and explains
 hidden entry of both provider keys. The [approval decision](conformance/imp01-unified-approval-decision.json)
 records the scope; the [funded handoff](conformance/imp01-unified-funded-handoff.json)
 records the prelaunch checks. No provider call or scientific reviewer is started
@@ -79,24 +85,26 @@ Create an application API key in a dedicated OpenAI project and an Anthropic key
 
 Keep the keys in your password manager or secrets manager. Never paste them into a chat, issue, command argument, configuration, or source file. Official guidance: [OpenAI API authentication](https://developers.openai.com/api/reference/overview#authentication) and [Anthropic API key setup](https://platform.claude.com/docs/en/get-api-key). Use the providers' usage dashboards and any available spending controls as additional account-level protection; the local ledger does not control unrelated account traffic.
 
-## Historical JSON-policy commands: hidden entry for one command
+## Retired JSON-policy launch commands
 
-From a normal interactive PowerShell terminal in `C:\Users\arvik\code\buddha`, a new, reviewed run uses the following form. Set `$runPath` and `$authorizationPath` to the prepared run and its existing shared authorization database. A linked run must first be frozen and bound by `continuation-prepare`; it cannot use the generic binding command:
+The completed pilot's `prepare`, `run`, `search-prepare`, `search-run` and
+`continuation-prepare` commands are retired. Calling one returns a small
+`retired_command` error before parsing supplied options, requesting keys or loading source files;
+it creates no run and makes no provider request. A closed grant still supplies
+no authority to restart an experiment.
 
-```powershell
-python -m buddha search-run --run $runPath --live --prompt-keys --authorization $authorizationPath
-```
+The [original key-entry guide](https://github.com/wavemanco/buddha/blob/e3076ba648c7b37ce465ba407779dc25a6da805a/docs/API-KEYS.md)
+and [original CLI](https://github.com/wavemanco/buddha/blob/e3076ba648c7b37ce465ba407779dc25a6da805a/buddha/__main__.py)
+preserve the historical command and behavior. Current source/improver/unified
+studies retain their separately reviewed operator handoffs; their command is
+provided only after the applicable checks and funding approval.
 
-The command prompts for missing `OPENAI_API_KEY` and `ANTHROPIC_API_KEY` values without echoing them. Paste each key at its hidden prompt. The secrets are not part of the PowerShell command, so they do not enter command history. Entry fails if a usable terminal or hidden input is unavailable; it never falls back to echoed input. The host temporarily supplies prompted values through its own process environment, then restores the previous environment on exit, including failures. It creates no credential file and does not modify persistent user/system environment variables. Python strings and environment variables are process memory; this is not a promise of cryptographic memory wiping or isolation from other software running as your user.
-
-No characters or asterisks appear during Python's hidden entry. Paste once, then press Enter. The updated CLI acknowledges the key name with `received`; this confirms local input, not successful provider authentication. After the last key it prints `Starting` and begins periodic progress updates. Observe a run from a separate terminal using `python -m buddha watch --run runs/first-live-recovery`. The watcher never requests keys or invokes models.
-
-Existing nonempty environment values take precedence, so an invalid existing key needs to be removed or replaced in the launching terminal first. A baseline uses `run` with the same `--authorization` and `--prompt-keys` options. Authorization and runtime checks happen before any key prompt.
-
-The completed policy comparison used its [dedicated handoff](POLICY-LAUNCH.md)
-for OpenAI generation/grouping and Anthropic quality judging. Its historical
-command does not launch the new Python source experiment. Source evolution
-uses its separately approved [source handoff](SOURCE-FIRST-LIVE.md).
+The shared hidden-entry helper remains available to those operators. Paste once
+at the local hidden prompt and press Enter; it acknowledges the key name without
+printing its value. It supplies prompted keys only to the launching process and
+restores the prior environment on exit. Existing environment keys take
+precedence. Hidden input refuses an unusable terminal instead of echoing a key.
+Local receipt of a key does not establish provider authentication.
 
 ## Alternative: inject environment variables from a secret manager
 

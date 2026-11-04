@@ -1,5 +1,7 @@
 # First live run: uncertain request review
 
+**Historical command record.** The completed JSON-policy experiment's `prepare`, `run`, `search-prepare`, `search-run` and `continuation-prepare` commands are retired in the current checkout. They refuse before keys, file preparation or provider calls. Commands below describe only their original pinned runtime and do not authorize a restart. Retained offline readers and synthetic demos remain available. [Guide before retirement](https://github.com/wavemanco/buddha/blob/e3076ba648c7b37ce465ba407779dc25a6da805a/docs/FIRST-LIVE-REVIEW.md) · [Original CLI source](https://github.com/wavemanco/buddha/blob/e3076ba648c7b37ce465ba407779dc25a6da805a/buddha/__main__.py).
+
 This document preserves incident evidence and recovery constraints. [PLAN.md](PLAN.md), REC-01–05, owns current implementation order and status, including the requested linked continuation.
 
 Reviewed October 19, 2026. **The original run was locally interrupted while awaiting the tenth provider response.** The user-supplied traceback ends with `KeyboardInterrupt` inside `connection.getresponse()` / SSL read. Nine authentic replies are preserved. The tenth request's processing/billing outcome and answer remain unknown, so the original run cannot automatically resume. The review made no provider requests and did not change the original ledger, manifest, dataset or frozen execution code.

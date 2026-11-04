@@ -1,10 +1,9 @@
 """Observing legacy lock metadata cannot hold Windows writer deletion open."""
 
-import io
 import os
 import threading
 import unittest
-from contextlib import contextmanager, redirect_stderr, redirect_stdout
+from contextlib import contextmanager
 from pathlib import Path
 from unittest.mock import patch
 
@@ -12,7 +11,6 @@ import test_continuation as continuation
 from doctor_helpers import legacy
 
 from buddha import doctor, search, search_evidence
-from buddha.__main__ import main
 
 
 class DoctorSearchLockTests(unittest.TestCase):
@@ -98,7 +96,7 @@ class DoctorSearchLockTests(unittest.TestCase):
         self.assertIn("running.lock", result["observed_sha256"])
 
     @unittest.skipUnless(os.name == "nt", "Windows denies deletion while an ordinary read is open")
-    def test_actual_cli_finishes_when_observer_reaches_legacy_lock_at_writer_exit(self):
+    def test_actual_writer_finishes_when_observer_reaches_legacy_lock_at_exit(self):
         fixture = continuation.ContinuationTests()
         fixture.setUp()
         self.addCleanup(fixture.doCleanups)
@@ -131,25 +129,17 @@ class DoctorSearchLockTests(unittest.TestCase):
                 raise AssertionError("observer did not reach the controlled writer boundary")
             return result
 
-        arguments = [
-            "search-run",
-            "--run",
-            str(fixture.out),
-            "--authorization",
-            str(fixture.authority_path),
-        ]
         try:
             with (
-                patch(
-                    "buddha.__main__._SearchReplay", return_value=continuation.SyntheticTransport()
-                ),
                 patch.object(search, "_walk", finish_walk),
                 patch.object(Path, "open", controlled_open),
-                redirect_stdout(io.StringIO()) as output,
-                redirect_stderr(io.StringIO()) as errors,
             ):
-                result = main(arguments)
-            self.assertEqual(result, 0, output.getvalue() + errors.getvalue())
+                report = search.run_search(
+                    fixture.out,
+                    transport=continuation.SyntheticTransport(),
+                    authorization=fixture.authority,
+                )
+            self.assertEqual(report["status"], "complete")
             self.assertFalse(lock.exists())
         finally:
             release.set()
