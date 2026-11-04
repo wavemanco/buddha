@@ -1,0 +1,177 @@
+{
+  "format": "buddha.targeted-screen-recovery-delivery.v1",
+  "date": "2026-10-30",
+  "plan_revision": 209,
+  "basis_head": "ad2b29afeed672e15d500d8f70d0012fd0c78f07",
+  "status": "supplied_recovery_passed_actual_history_operational_deadline_partial",
+  "spec_sections": [
+    "DESIGN3",
+    "DESIGN9",
+    "DESIGN10",
+    "IMP-01",
+    "ENG-INFRA-01"
+  ],
+  "production_changes": false,
+  "test_source": {
+    "path": "tests/test_targeted_screen_recovery.py",
+    "sha256": "489e3fc3fd6d6b8b1ce850e5f4a666b0060e157f4429f836edff7266f96a5916"
+  },
+  "supplied_acceptance": {
+    "unique_methods": 2,
+    "method_executions": 4,
+    "installations": [
+      "literal c54819f original runner",
+      "ad2b29a current host plus new pinned test"
+    ],
+    "literal_seconds": 18.65463800006546,
+    "current_seconds": 17.781196200056,
+    "parent_total_seconds": 38.28153260005638,
+    "parent_deadline_seconds": 1200,
+    "asserted_boundary": [
+      "Pre-ready cleanup-unknown failure with no container ID/callbacks/sends/holds and no complete screen/seal.",
+      "Same generation owner raw manifest/UUID retained; old failed attempt and generation/screen observations byte-identical after normal next attempt0-1 succeeds.",
+      "Complete supplied v2 screen includes both typed task rows with supplied distinct2/utility7 measurements and no unattempted rows.",
+      "Keyless completed-screen reentry constructs no worker/HTTPS connection, makes no new sends, and preserves whole supplied root file hashes/authority summary.",
+      "Separate mocked checked-dispatch seam calls existing _advance_action exactly once and returns even when that call leaves next state witness."
+    ],
+    "proof_limit": "Screen cleanup supplied by caller. Full trial/source/owner/lease joins not exercised by mocked dispatch seam; no operator position guard or automatic cleanup latch. No actual historical run recovered.",
+    "quality": "All seven configured local checks pass. Ruff cache-write AccessDenied warning retained; standard pip-audit/Bandit comment warnings retained. Format/in-memory compile290files,strict mypy89. In-memory compile replaces bytecode-writing compileall for this local observation.",
+    "peer_review": "No blockers found at the stated scope; no independent worker rerun."
+  },
+  "current_runtime_absence": {
+    "status": "verified_at_recorded_time_under_declared_assumptions",
+    "engine": "Original explicit recipe-bound endpoint, not current default context",
+    "matches": 0,
+    "known_original_launcher_candidates": 0,
+    "assumptions": "Frozen executor creates every candidate with ownership label and immutable selected image/mount configuration. Scoped complete inventory plus matching rules excludes current candidates on selected endpoint. Host process check covers known original Python launcher names.",
+    "historical_cleanup": "unknown and unchanged",
+    "not_proved": "Historic Docker UUID, initial cause, historic removal or daemon continuity",
+    "freshness": "Recheck selected endpoint/runtime before any dispatch; no blanket restart clearance."
+  },
+  "real_history_check": {
+    "status": "partial_deadline",
+    "selected_source_head": "c54819f8516cb6b50c1040d7f500c9ef12593f8b",
+    "descriptor_sha256": "da37a8178d930d684b38518964e277030aa4567a4b4943d4835a8ad9468adfcc",
+    "internal_deadline_seconds": 900,
+    "parent_deadline_seconds": 930,
+    "cprofile_enabled": false,
+    "guard_scope": "Reuse earlier reviewed observer guards, RAM-only/query-only SQL, no original writes, no candidate parsing/execution, no keys/network/subprocess under guard. Lightweight counts remain.",
+    "labels_qualification": "Inherited profiler labels remain; no cProfile was enabled/exported. Whole checked-state start is proved by primitive counter1. Deadline and unwind counters are separate snapshots.",
+    "reason": "operational_limit_not_met",
+    "whole_check_returned": false,
+    "full_capture_finish_established": false,
+    "wall_seconds": 900.215346,
+    "cpu_seconds": 878.5,
+    "parent_seconds": 905.8825941998512,
+    "parent_hard_terminated": false,
+    "first_study_restoration_completed": false,
+    "primitive_work_counts": {
+      "capture_constructions_completed": 639,
+      "capture_constructions_started": 639,
+      "capture_finishes_completed": 1280,
+      "capture_finishes_started": 1280,
+      "capture_reads_completed": 82467,
+      "capture_reads_started": 82468,
+      "capture_returned_bytes": 51509972689,
+      "constructor_returned_entries": 16738,
+      "constructor_walks_completed": 88,
+      "constructor_walks_started": 88,
+      "finish_returned_entries": 205864,
+      "finish_walks_completed": 1280,
+      "finish_walks_started": 1280,
+      "native_owner_parses_completed": 1509,
+      "native_owner_parses_started": 1510,
+      "owner_requests_completed": 6026,
+      "owner_requests_started": 6027,
+      "population_constructions_completed": 9717,
+      "population_constructions_started": 9717,
+      "study_restorations_started": 1,
+      "whole_checked_state_started": 1
+    },
+    "unique_completed_capture_read_paths": 2617,
+    "memory_sql_connections": 8126,
+    "guard_attempts": [],
+    "named_pin_checks_after": true,
+    "four_authority_images_unchanged": true,
+    "root_afterward_rehashed_source_pins": 98,
+    "root_afterward_rehashed_input_pins": 7
+  },
+  "evidence": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\targeted-screen-recovery-20261031-v1\\acceptance-evidence-v1.json",
+      "sha256": "582e3d9780317c6add6034bde538c52667e4b91dd6d245d72667f26328dd67aa"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\targeted-screen-recovery-20261031-v1\\runtime-reconciliation-v1.json",
+      "sha256": "64ca524e1f810615c6476104dd597a9eb5557f2288be0d26bb68c6e0f9b0cdae"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\targeted-screen-recovery-20261031-v1\\original-launcher-process-v1.json",
+      "sha256": "4a46cd4c18f1f1af13c9b49bd42b143510f83d2afc48ed6aecd502c2d0229ae3"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\targeted-screen-recovery-20261031-v1\\passive-original-v1\\preparation-v1.json",
+      "sha256": "e684c7313c4567054927481d1437f02d47870cbc61661662417f41d217bde21c"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\targeted-screen-recovery-20261031-v1\\passive-original-v1\\check-original-v1.py",
+      "sha256": "91ed7e3b1199dc05e1adbd37174c15cd554aa6718fabcafaac68c31a1d1ed1a6"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\targeted-screen-recovery-20261031-v1\\passive-original-v1\\run-parent-v1.py",
+      "sha256": "3d13df42744eb63d2dba6259354259fddfd125b59c2b68397886ea9602c044ea"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\targeted-screen-recovery-20261031-v1\\passive-original-v1\\passive-result-v1.json",
+      "sha256": "b56c6f38f7104256d8a726ba708bd64d94cf27b62d58a21ba0c2c74b4e08190b"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\targeted-screen-recovery-20261031-v1\\passive-original-v1\\deadline-partial-v1.json",
+      "sha256": "945fe135d11c9fe9a937330295d6ea219f8ba21ea73d5810af127fb27a909b63"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\targeted-screen-recovery-20261031-v1\\passive-original-v1\\parent-result-v1.json",
+      "sha256": "1b16a206d2c96cfbdac8ab79083cb1d4408f426c038328538d88434eaee05c8d"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\targeted-screen-recovery-20261031-v1\\passive-original-v1\\stdout-v1.log",
+      "sha256": "42132c9f271bdd6f7f198ac50bcc7790f1321c1425bcb8bc47ad0607db748866"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\targeted-screen-recovery-20261031-v1\\passive-original-v1\\stderr-v1.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "unchanged_original": {
+    "last_saved_attempts": 657,
+    "last_saved_spent_microusd": 5523144,
+    "last_saved_held_microusd": 0,
+    "accounting_source": "Saved stop observation, pending new full reconstruction; not invoice settlement",
+    "combined_cap_usd": 150,
+    "attempt_cap": 16384,
+    "development_tasks": 3,
+    "final_tasks": 26,
+    "metric": "official NoveltyBench1.1 unchanged",
+    "real_provider_calls": 0,
+    "original_record_writes": 0,
+    "runtime_mutations": 0,
+    "restart_cleared": false
+  },
+  "remaining": [
+    "User selects preparation route; broader old/new-version migration remains parked",
+    "Comparable-size performance/integration gate on selected source before any paid run",
+    "Operator target guard where continuation is selected, fresh runtime/source/owner/account/lease/outgoing-request checks",
+    "Full approved scientific comparison and independent review"
+  ],
+  "hosted_verification": "New tests not yet hosted; local QA/source-specific supplied checks only. No current-source full-suite claim.",
+  "operational_interpretation": {
+    "established": "The unchanged runner did not reconstruct the retained657-call history within the prospective900-second limit. Existing screen retry/reentry works at supplied scope.",
+    "not_established": [
+      "Total time needed to finish reconstruction",
+      "Any before/after speedup",
+      "Physical disk traffic: returned51.510GB counts repeated application reads, not unique data",
+      "Full actual-history compatibility, source adoption or paid readiness"
+    ],
+    "decision_required": "Prepare a fresh current-host comparison preserving scientific questions and old partial, or continue bounded old-history host upgrade. Neither is selected or funded by this observation. Any fresh paid run still needs comparable-size performance proof, exact-source CI and explicit handoff/funding approval."
+  }
+}

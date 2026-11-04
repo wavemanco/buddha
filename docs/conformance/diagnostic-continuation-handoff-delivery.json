@@ -1,0 +1,308 @@
+{
+  "completed_bounded_checks": {
+    "actual_passive_V4": "Eight passive stages and nine checkpoint checks passed with independent review; not held-lease, witness-materials or scheduler execution.",
+    "existing_images": [
+      {
+        "architecture": "amd64",
+        "id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+        "os": "linux",
+        "user": "65532:65532"
+      },
+      {
+        "architecture": "amd64",
+        "id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+        "os": "linux",
+        "user": "65532:65532"
+      }
+    ],
+    "final_metadata": "Saved read-only source/input/runtime/Docker metadata and original-preservation checks pass, independently reviewed; no API calls or container startup.",
+    "fresh_final_metadata": {
+      "existing_pinned_images": 2,
+      "historical_source_pins_unchanged": 90,
+      "independent_review": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\final-handoff-readiness-20261029-v2\\independent-actual-result-review-v2.json",
+        "sha256": "d8965bb7a34bcb43ac422364d714b13589c6ed8c715053af1d05d90fa3860719"
+      },
+      "protected_hashes_unchanged": 3277,
+      "raw_preservation": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\final-handoff-readiness-20261029-v2\\preservation-v1.json",
+        "sha256": "8ed1309dbd2cbfd518f8bd822140dee7dbdbc06a42025df3d753e6cb2007f772"
+      },
+      "receipt": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\final-handoff-readiness-20261029-v2\\metadata-preflight-result-v2.json",
+        "sha256": "ce80db10406889e6e271b5c4e6d37140217d7dcdfedbdd891eaeb63f64b256cc"
+      },
+      "runtime_fields_equal": 6,
+      "scope": "Source/input/runtime/Docker-server and two existing images plus raw original preservation; no application imports, original SQL, keys, API calls, container startup or new owners/grants.",
+      "source_public_pins": 90,
+      "trial_names_unchanged": 2149
+    },
+    "native_startup": "Original import audit5180/8 aliases passed;2487 watched files unchanged; one container removed, with independent review.",
+    "selected_source_pins": 90,
+    "six_runtime_fields_equal": true
+  },
+  "documentation_base_commit": "9c2c2a09b3717f8cd02480c5dc3b782c65caa2be",
+  "documentation_preservation": {
+    "historical_PowerShell_blocks_unchanged": 10,
+    "new_python_command_is_one_PowerShell_line": true,
+    "new_user_command_blocks": 1,
+    "original_acceptance_tails_unchanged": 7,
+    "prior_raw_revision_rows_unchanged": 193
+  },
+  "evidence": {
+    "actual_passive_V4": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\study-start-passive-20261029-v1\\study-start-passive-result-v4.json",
+      "sha256": "f16975ed4c9d5a87148ace2b76857fdd38132d6c1c4c822ed66043828d7b854e"
+    },
+    "continuation_descriptor": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\diagnostic-continuation-preparation-20261029-v1\\PROVISIONAL-imp01-trial-continuation-c54819f-v1.json",
+      "sha256": "da37a8178d930d684b38518964e277030aa4567a4b4943d4835a8ad9468adfcc"
+    },
+    "exact_source_agent_hosted_completion": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\launcher-diagnostics-hosted-20261029-v1\\all-ten-complete-v1.json",
+      "sha256": "a9a223303d2a0ef1c7bc4ce8c361e84059392b5a616b405e56cf8bd72d9fd113"
+    },
+    "exact_source_root_hosted_completion": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\launcher-diagnostics-hosted-20261029-v1\\root-all-ten-complete-v1.json",
+      "sha256": "ef6c09e6c089b986301fa059a26d55e09c16c8055a60bd19417fbcd7ee0d75ee"
+    },
+    "fresh_raw_preservation": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\final-handoff-readiness-20261029-v2\\preservation-v1.json",
+      "sha256": "8ed1309dbd2cbfd518f8bd822140dee7dbdbc06a42025df3d753e6cb2007f772"
+    },
+    "fresh_read_only_final_metadata": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\final-handoff-readiness-20261029-v2\\metadata-preflight-result-v2.json",
+      "sha256": "ce80db10406889e6e271b5c4e6d37140217d7dcdfedbdd891eaeb63f64b256cc"
+    },
+    "helper_relation": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\diagnostic-continuation-preparation-20261029-v1\\PROVISIONAL-imp01-helper-relation-c54819f-v1.json",
+      "sha256": "75db820c10920c8f5e40c33c83a592b6256e6dba73651e6c789285b6cf885d7c"
+    },
+    "independent_final_metadata_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\final-handoff-readiness-20261029-v1\\independent-actual-result-review-v2.json",
+      "sha256": "1f3f82775a66ea8aac0e217bbe09ee5b3371c271e1e367e314a70130c4382f33"
+    },
+    "independent_fresh_final_metadata_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\final-handoff-readiness-20261029-v2\\independent-actual-result-review-v2.json",
+      "sha256": "d8965bb7a34bcb43ac422364d714b13589c6ed8c715053af1d05d90fa3860719"
+    },
+    "independent_native_startup_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\native-startup-readiness-20261029-v1\\independent-result-review-v1.json",
+      "sha256": "f09792138613ea4fd2d729414028821cc318579cb6db95798c9e03c46a426612"
+    },
+    "independent_passive_V4_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\study-start-passive-20261029-v1\\independent-result-review-v4.json",
+      "sha256": "db41b2566ca32298bbdb5917cb281faa870f18e62e3b3cec4c6eb7903506183c"
+    },
+    "independent_unissued_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\diagnostic-operator-handoff-preparation-20261029-v1\\independent-draft-review-v1.json",
+      "sha256": "daf574a585512b6b9495500f33c9fce74be0b4e6830fdb8c9eb1bd4a1b57bbdf"
+    },
+    "native_startup": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\native-startup-readiness-20261029-v1\\receipt.json",
+      "sha256": "b40320d2f89ed6231f7eda9ce9eed3a3e395b03ac52c75db2fc229569492634b"
+    },
+    "outgoing_wire_settings_initial": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\launcher-safe-stop-diagnostics-20261029-v1\\request-settings-current-initial-v1.json",
+      "sha256": "a64bc2a791df6c7227bf31577b4ad629a64664060a7264524e6ee90e0345a2aa"
+    },
+    "outgoing_wire_settings_repeat": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\launcher-safe-stop-diagnostics-20261029-v1\\request-settings-current-repeat-v1.json",
+      "sha256": "075c29c079ef81c599fa31653aa0327fd2807e60591236932e261e2a58c4b36f"
+    },
+    "read_only_final_metadata": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\final-handoff-readiness-20261029-v1\\metadata-preflight-result-v2.json",
+      "sha256": "1bd536a4daf7495c26ac641015cc23989f12749342398299822458218b4ef4da"
+    },
+    "unissued_operator_preparation": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\diagnostic-operator-handoff-preparation-20261029-v1\\operator-preparation-DRAFT-v1.json",
+      "sha256": "8334072c186b0b2321a9e8feaa670a69b9e0e57b644171194b6821d6e47e97af"
+    }
+  },
+  "executing_source": {
+    "changed_public_files": [
+      "buddha/launch_common.py",
+      "buddha/unified_launch.py"
+    ],
+    "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\launcher-safe-stop-diagnostics",
+    "head": "c54819f8516cb6b50c1040d7f500c9ef12593f8b",
+    "public_pins": 90,
+    "unchanged_vs_historical": 88
+  },
+  "format": "buddha.diagnostic-continuation-handoff-delivery.v1",
+  "fresh_final_clearance": {
+    "automatic_launch_checks": "Existing original-state, key-review and work-lease guards remain at launch.",
+    "independent_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\final-handoff-readiness-20261029-v2\\independent-actual-result-review-v2.json",
+      "sha256": "d8965bb7a34bcb43ac422364d714b13589c6ed8c715053af1d05d90fa3860719"
+    },
+    "operator_command_issued": true,
+    "paid_execution_cleared": true,
+    "receipt": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\final-handoff-readiness-20261029-v2\\metadata-preflight-result-v2.json",
+      "sha256": "ce80db10406889e6e271b5c4e6d37140217d7dcdfedbdd891eaeb63f64b256cc"
+    },
+    "root_final_document_review": "PASS: root command/evidence/history validation and postkey_check_trace independent final document review; conditional adoption approved without argument or scope changes.",
+    "status": "cleared_after_full_CI_fresh_checks_and_document_review"
+  },
+  "funding": {
+    "allocations": {
+      "final": {
+        "budget_microusd": 85000000,
+        "max_calls": 10240
+      },
+      "search": {
+        "budget_microusd": 40000000,
+        "max_calls": 4096
+      },
+      "shared_plain_references": {
+        "budget_microusd": 25000000,
+        "max_calls": 2048
+      },
+      "validation": {
+        "budget_microusd": 0,
+        "max_calls": 0
+      }
+    },
+    "new_allocation": false,
+    "original_grant_count": 4,
+    "replacement_or_transfer": false,
+    "same_original_experiment": true,
+    "total_budget_microusd": 150000000,
+    "total_max_calls": 16384
+  },
+  "hosted_CI": {
+    "Linux": {
+      "passed": 2136,
+      "skipped": 5
+    },
+    "Windows": {
+      "passed": 2140,
+      "skipped": 1
+    },
+    "census_sha256": "0bfde776ac957542d3adc1981665040d40eb359ba3efbc75dd394f89ed1321cf",
+    "checkout_merge": "d4386ebc2e91c8d981fc3f24deeab3417e671925",
+    "complete_ten_job_matrix_verified": true,
+    "completion_receipt": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\launcher-diagnostics-hosted-20261029-v1\\root-all-ten-complete-v1.json",
+      "sha256": "ef6c09e6c089b986301fa059a26d55e09c16c8055a60bd19417fbcd7ee0d75ee"
+    },
+    "errors": 0,
+    "jobs": 10,
+    "missing": 0,
+    "ordered_disjoint_occurrence_union": true,
+    "per_OS_occurrences": 2141,
+    "quality_steps_successful": 70,
+    "reader_self_checks": 9,
+    "scope": "Exact saved checkout/log/receipt evidence only; not live recovery or future timing guarantees.",
+    "selected_head": "c54819f8516cb6b50c1040d7f500c9ef12593f8b",
+    "status": "complete_exact_source_verified_by_root_frozen_reader",
+    "tree": "67f63aa54a171f2ca1819ed2394f7f81462fe897"
+  },
+  "last_verified_accounting": {
+    "new_owners": 0,
+    "next_step": "witness_feedback at start1/repetition1/arm1/slot0",
+    "provenance": "Saved actual V4 checkpoint; not a fresh database inspection.",
+    "totals": {
+      "committed_microusd": 4845090,
+      "operation_count": 604,
+      "reserved_microusd": 0,
+      "spent_microusd": 4845090
+    }
+  },
+  "limits": [
+    "Operator handoff cleared after full exact-source CI, fresh checks and final root/independent document review. The documented command may spend only within the original scope when the operator runs it; this delivery did not execute it.",
+    "All10 exact-source CI jobs and fresh metadata have their own pinned evidence; neither establishes original held-lease execution, recovered-run completion, root-cause repair or scientific improvement.",
+    "Original604 attempts/4845090microUSD/zero-held values are the saved actual V4 checkpoint, not a new database inspection. The original state/key/work-lease guards still run automatically at launch.",
+    "The original benchmark, generator/judge settings, frozen scientific scope, four grants, six phases and earlier partial/failure evidence remain unchanged. Native AI review remains separate and the human extension nonblocking."
+  ],
+  "native_review": {
+    "cost": "Unpriced Codex-plan capacity outside the API cap.",
+    "human_extension_blocks_AI_only": false,
+    "maximum_fresh_contexts": 44,
+    "maximum_staged_target_judgments": 64,
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "ultra",
+    "reviewer_API_fallback": false,
+    "same_approved_scope": true,
+    "target_contexts": 32,
+    "whole_set_contexts_and_judgments": 12
+  },
+  "operator_handoff": {
+    "argv_changed_positions": [
+      2,
+      4,
+      6
+    ],
+    "command_issued": true,
+    "current_documented_argv": [
+      "python",
+      "-B",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\launcher-safe-stop-diagnostics\\docs\\conformance\\unified-run.py",
+      "--handoff",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\diagnostic-continuation-preparation-20261029-v1\\PROVISIONAL-imp01-trial-continuation-c54819f-v1.json",
+      "--sha256",
+      "da37a8178d930d684b38518964e277030aa4567a4b4943d4835a8ad9468adfcc",
+      "--continuation",
+      "--live",
+      "--prompt-keys",
+      "--confirm-project-keys"
+    ],
+    "current_python_command_one_line": "python -B \"C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\launcher-safe-stop-diagnostics\\docs\\conformance\\unified-run.py\" --handoff \"C:\\Users\\arvik\\code\\buddha\\runs\\checks\\diagnostic-continuation-preparation-20261029-v1\\PROVISIONAL-imp01-trial-continuation-c54819f-v1.json\" --sha256 da37a8178d930d684b38518964e277030aa4567a4b4943d4835a8ad9468adfcc --continuation --live --prompt-keys --confirm-project-keys",
+    "executed": false,
+    "instruction": "Use the current documented command once under the original authorization. Existing state/key/work-lease guards apply; no new allowance or actual resumed outcome is claimed.",
+    "live_command_cleared": true,
+    "meaning": [
+      "driver checkout",
+      "continuation record path",
+      "record SHA256"
+    ]
+  },
+  "outgoing_wire_settings": {
+    "focused_repeat": "The earlier one-method/four-subcase repeat passed in3.719s; retained in the passive study-start delivery.",
+    "full_repeat_methods": 10,
+    "full_repeat_wall_seconds": 15.163,
+    "initial": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\launcher-safe-stop-diagnostics-20261029-v1\\request-settings-current-initial-v1.json",
+      "sha256": "a64bc2a791df6c7227bf31577b4ad629a64664060a7264524e6ee90e0345a2aa"
+    },
+    "initial_error_cause": "unknown",
+    "initial_fixture_setup_errors": 1,
+    "initial_methods": 10,
+    "initial_wall_seconds": 15.762,
+    "new_tests_run_for_this_documentation": false,
+    "real_provider_calls": 0,
+    "repeat": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\launcher-safe-stop-diagnostics-20261029-v1\\request-settings-current-repeat-v1.json",
+      "sha256": "075c29c079ef81c599fa31653aa0327fd2807e60591236932e261e2a58c4b36f"
+    },
+    "repeat_errors": 0,
+    "repeat_failures": 0,
+    "scope": "Qualified earlier synthetic-ledger/mocked-HTTPS wire checks at exact c548; no provider access or cause inference."
+  },
+  "plan_revision": 194,
+  "recorded_utc": "2026-10-29T20:32:39.943614+00:00",
+  "remaining_phases": [
+    "search",
+    "freeze",
+    "final",
+    "plain-regenerate",
+    "plain-in-context",
+    "comparison"
+  ],
+  "root_adopted_at": "2026-10-29T20:37:07.961209+00:00",
+  "status": "cleared_for_operator_resume_existing_scope",
+  "this_slice_effects": {
+    "Docker_calls": 0,
+    "application_changes": 0,
+    "containers": 0,
+    "keys_read": 0,
+    "original_SQL_connections": 0,
+    "original_writes": 0,
+    "owner_or_grant_changes": 0,
+    "private_actor_parsing_or_execution": 0,
+    "provider_calls": 0,
+    "scope": "Documentation preparation only. Separately linked actual metadata/startup observations retain their own action counts.",
+    "source_execution_or_tests": 0
+  }
+}

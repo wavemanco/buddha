@@ -1,0 +1,54 @@
+{
+  "format": "buddha.source-capacity-funding-proposal.v1",
+  "status": "awaiting_separate_approval_not_funded",
+  "scope": "SRC-02: one actual full-output starter request capacity observation; no source execution, answer generation, judging, search or adoption",
+  "currency": "USD",
+  "budget_microusd": 7000000,
+  "max_calls": 1,
+  "automatic_retries": 0,
+  "partial_results_allowed": true,
+  "partial_requirement": "Record stage, reason, original raw evidence, costs and unresolved holds. An incomplete measurement does not become a complete positive result or release uncertain liability.",
+  "executing_code_commit": "3848ac964cf49aafb35ef2bb79253867e1a8f89a",
+  "driver_pr": "https://github.com/wavemanco/buddha/pull/85",
+  "protocol_sha256": "154482138a5a687eb6db6c7dbab4a84a29cfa2e88ee26e3b655b87eb2264d669",
+  "request": {
+    "capability": "openai.chat-completions.v1",
+    "host": "api.openai.com",
+    "path": "/v1/chat/completions",
+    "bytes": 25209,
+    "sha256": "e258ae8166c518ccd8e8a799139e35c7fa609b74fe10fcba0c8c23d1e401a838",
+    "model": "gpt-6.1-sol",
+    "service_tier": "default",
+    "reasoning_effort": "low",
+    "max_completion_tokens": 32768
+  },
+  "profile": {
+    "provider": "openai",
+    "model": "gpt-6.1-sol",
+    "input_token_ceiling": 1050000,
+    "max_output_tokens": 32768,
+    "input_microusd_per_million": 5500000,
+    "output_microusd_per_million": 16500000,
+    "bounds_source": "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+  },
+  "reserve_microusd": 6315672,
+  "unreserved_cap_slack_microusd": 684328,
+  "price_checked_on": "2026-10-23",
+  "price_scope": "Public Standard/default text-only Chat request, default 30m implicit caching; conservative long-context/default-write/regional uplift bounds. No extended-cache/tool charges or custom contract.",
+  "price_sources": [
+    "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+    "https://developers.openai.com/api/docs/pricing",
+    "https://developers.openai.com/api/docs/guides/prompt-caching"
+  ],
+  "live_prerequisites": [
+    "Separate approval for this scope; earlier allowances are closed.",
+    "Exact executing code passes hosted Windows and Ubuntu checks; no pending check is called green.",
+    "Still-applicable public Standard/default account assertions and current price review.",
+    "Fresh dedicated authority, pinned source/request/protocol/selection inputs and funded handoff prepared after approval.",
+    "User receives exact command and enters only an OpenAI key locally."
+  ],
+  "existing_authority_reuse": false,
+  "new_authority_created": false,
+  "live_command_enabled": false,
+  "claim": "One prospective exact-request measurement only; no measured-parent upgrade, future-parent guarantee, Python competence or useful-diversity improvement."
+}

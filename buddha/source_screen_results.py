@@ -4,18 +4,81 @@ Original bindings establish saved-byte consistency, not judgment authenticity.
 No executing owner, current component inventory or source program is loaded.
 """
 
+from __future__ import annotations
+
 import hashlib
 import math
+import os
 import sqlite3
+import threading
+from dataclasses import dataclass
 from pathlib import Path
-from typing import cast
+from typing import TYPE_CHECKING, cast
 
+from buddha import doctor, trial_fence
 from buddha import native_pipeline as pipeline
 from buddha.answers import TaskSet
-from buddha.doctor import _authority, _Busy, _Unsupported
-from buddha.native_evaluation import _Generation, _read_generation
-from buddha.native_evidence import NativeEvidence, authority_observation
+from buddha.doctor import _authority, _Busy, _Capture, _Unsupported
+from buddha.native_evaluation import _Generation, _read_generation, _read_published_generation
+from buddha.native_evidence import NativeEvidence, _adopt_capture, authority_observation
 from buddha.releases import MAX_JSON_BYTES, Release, _digest, _json, _load, _object, _path, _text
+
+if TYPE_CHECKING:
+    from buddha.source_screen import SourceScreen
+
+
+@dataclass(frozen=True)
+class _CompletedScreenRead:
+    screen: SourceScreen
+    report_raw: bytes
+    reader: NativeEvidence
+    context: tuple[object, ...] | None
+    observation_root: Path
+
+
+def _read_context(directory: Path) -> tuple[object, ...] | None:
+    from buddha import source_screen
+
+    lease = doctor._tree_context(directory)
+    if (
+        lease is None
+        or source_screen._CONTROL_PROFILES.get() is not None
+        or source_screen._CONTROL_PROFILES_V2.get() is not None
+    ):
+        return None
+    return os.getpid(), threading.get_ident(), doctor._observation_limits(), lease
+
+
+def _reuse_completed_screen(
+    value: object, directory: Path, authorization: Path, expected: str
+) -> _CompletedScreenRead:
+    from buddha.source_screen import SourceScreen, SourceScreenError
+
+    try:
+        if (
+            type(value) is not _CompletedScreenRead
+            or type(value.reader) is not NativeEvidence
+            or type(value.screen) is not SourceScreen
+            or value.reader.root != directory
+            or value.reader.authorization != authorization
+            or _sha(value.report_raw) != expected
+            or value.context is None
+            or value.context != _read_context(value.observation_root)
+        ):
+            raise SourceScreenError("completed screen read differs from its exact original scope")
+        value.reader.finish()
+        trial_fence.require_purpose(
+            authorization,
+            _object(value.reader.funded["config"]),
+            directory=directory,
+            expected="source screen: " + value.screen.comparison_key(),
+        )
+        return value
+    except (ValueError, TypeError, KeyError, OSError, RecursionError, _Busy, _Unsupported) as error:
+        if isinstance(error, SourceScreenError):
+            raise
+        raise SourceScreenError("completed screen evidence is invalid or changed") from None
+
 
 _CLAIM = (
     "complete common development screen; exploratory parent eligibility only; no improvement claim"
@@ -136,7 +199,7 @@ def _owners(
 
 def _source(
     reader: NativeEvidence,
-    record: dict[str, object],
+    screen: object,
     tasks: TaskSet,
     location: Path,
     runtime_sha256: str,
@@ -144,7 +207,9 @@ def _source(
 ) -> tuple[_Generation, dict[str, object], str]:
     from buddha.source_screen import SourceScreen, _generation_formats, _version
 
-    screen = SourceScreen.from_bytes(_json(record))
+    if not isinstance(screen, SourceScreen):
+        raise reader.error_type("source needs its original screen")
+    record = screen.to_record()
     root = location / "generation"
     owner = reader.owner(root / "owners/0")
     task_path, descriptor = location / "task.json", location / "generation.json"
@@ -175,24 +240,25 @@ def _source(
         "owner_manifest_sha256": owner.manifest_sha256,
         "owner_ledger_sha256": owner.ledger_sha256,
     }
-    source = _read_generation(reference, reader.authorization)
-    if source.tasks.fingerprint() != tasks.fingerprint():
-        raise reader.error_type("source C1 changes the declared screen task")
-    for path, digest in source.files.items():
-        raw = reader.capture.raw.get(path)
-        if _sha(reader.raw(path) if raw is None else raw) != digest:
-            raise reader.error_type("source evidence changed during screen observation")
-    seal = reader.record(root / "completed/0.json")
-    attempt = root / _path(seal["attempt"])
-    report = reader.record(attempt / "report.json")
+    prospective_report = None
     if record["format"] == "buddha.source-screen.v2":
-        from buddha.candidate_generation import inspect_candidate_generation
-
-        prospective_report = inspect_candidate_generation(
+        prospective_report, source, captured = _read_published_generation(
             root,
             authorization=reader.authorization,
             expected_report_sha256=_sha(reader.raw(root / "report.json")),
         )
+        if source is None or not _same(prospective_report["source_generation"], reference):
+            raise reader.error_type("source publication changes its original generation")
+        _adopt_capture(captured, reader.capture)
+    else:
+        source = _read_generation(reference, reader.authorization)
+    if source.tasks.fingerprint() != tasks.fingerprint():
+        raise reader.error_type("source C1 changes the declared screen task")
+    reader.verify_files(source.files)
+    seal = reader.record(root / "completed/0.json")
+    attempt = root / _path(seal["attempt"])
+    report = reader.record(attempt / "report.json")
+    if prospective_report is not None:
         _, digest = _publication(
             reader, root / "report.json", prospective_report, current, {owner.run_id}
         )
@@ -216,7 +282,6 @@ def _failed_source(
     runtime_sha256: str,
     current: dict[str, object],
 ) -> dict[str, object]:
-    from buddha.candidate_generation import inspect_candidate_generation
     from buddha.source_screen import SourceScreen, _generation_formats, _generation_recipe
 
     if not isinstance(screen, SourceScreen):
@@ -224,8 +289,9 @@ def _failed_source(
     location = reader.root / "tasks" / str(index)
     root = location / "generation"
     owner = reader.owner(root / "owners/0")
-    task = screen.tasks.tasks[index]
-    if reader.bound(owner, location / "task.json") != screen.tasks.select([task.id]).to_bytes():
+    tasks = screen.tasks
+    task = tasks.tasks[index]
+    if reader.bound(owner, location / "task.json") != tasks.select([task.id]).to_bytes():
         raise reader.error_type("failed source changes the original task")
     descriptor = location / "generation.json"
     if reader.bound(owner, descriptor) != _json(_generation_recipe(location, screen)) or (
@@ -240,9 +306,10 @@ def _failed_source(
     ):
         raise reader.error_type("failed source changes an original screen control")
     raw = reader.raw(root / "report.json")
-    report = inspect_candidate_generation(
+    report, _, captured = _read_published_generation(
         root, authorization=reader.authorization, expected_report_sha256=_sha(raw)
     )
+    _adopt_capture(captured, reader.capture)
     if raw != _json(report) or report["disposition"] != "candidate_execution_failed":
         raise reader.error_type("failed source lacks a checked terminal outcome")
     reference = _object(report["source_generation"])
@@ -348,9 +415,15 @@ def _native(
     return available, summary_reference, digest
 
 
-def collect_source_screen(
-    directory: Path, *, authorization: Path, expected_report_sha256: str | None = None
-) -> dict[str, object]:
+def _collect_source_screen(
+    directory: Path,
+    *,
+    authorization: Path,
+    expected_report_sha256: str | None = None,
+    sink: _Capture | None = None,
+    retain: bool = False,
+    observation_root: Path | None = None,
+) -> _CompletedScreenRead:
     """Reconstruct complete custody or verify an explicitly pinned publication."""
     from buddha.source_screen import (
         SourceScreen,
@@ -367,6 +440,18 @@ def collect_source_screen(
             pipeline._absolute(str(directory)),
             pipeline._absolute(str(authorization)),
         )
+        if sink is not None and (
+            type(sink) is not _Capture or not directory.is_relative_to(sink.root)
+        ):
+            raise SourceScreenError("screen capture requires its original containing observation")
+        observation_root = directory if observation_root is None else observation_root
+        read_context = _read_context(observation_root) if retain else None
+        if retain and (
+            expected_report_sha256 is None
+            or read_context is None
+            or not directory.is_relative_to(observation_root)
+        ):
+            raise SourceScreenError("retained read requires one pinned original publication")
         reader = NativeEvidence(directory, authorization, error_type=SourceScreenError)
         anchor = reader.owner(directory / "tasks/0/generation/owners/0")
         screen_raw = reader.bound(anchor, directory / "screen.json")
@@ -406,7 +491,10 @@ def collect_source_screen(
         controls_sha256 = pipeline._sha(
             {
                 "files": _comparison_controls(
-                    context, {Path(path): digest for path, digest in controls.items()}, screen
+                    context,
+                    {Path(path): digest for path, digest in controls.items()},
+                    screen,
+                    core=anchor.manifest["core"],
                 ),
                 "core": anchor.manifest["core"],
                 "runtime": anchor.manifest["runtime"],
@@ -446,8 +534,12 @@ def collect_source_screen(
             count = len(observed)
         reader.funded = _owners(reader, record, count, controls, failed_index=failed_index)
         config = _object(reader.funded["config"])
-        if config["scope"] != "source screen: " + screen.comparison_key():
-            raise SourceScreenError("saved screen belongs to another authority scope")
+        trial_fence.require_purpose(
+            authorization,
+            config,
+            directory=directory,
+            expected="source screen: " + screen.comparison_key(),
+        )
         current = authority_observation(reader.capture, authorization, reader.funded)
         if record["lineage"] is not None:
             lineage = _object(record["lineage"])
@@ -488,7 +580,7 @@ def collect_source_screen(
                 if actual != names:
                     raise SourceScreenError("screen contains missing or orphan completion seals")
             source, reference, source_digest = _source(
-                reader, record, tasks.select([task.id]), location, runtime_sha256, current
+                reader, screen, tasks.select([task.id]), location, runtime_sha256, current
             )
             available, summary, evaluation_digest = _native(
                 reader, record, source, reference, location, current
@@ -605,8 +697,20 @@ def collect_source_screen(
             )
         if len(_json(result)) > MAX_JSON_BYTES:
             raise SourceScreenError("screen report exceeds its bounded output ceiling")
-        reader.capture.finish()
-        return _load(_json(result))
+        completed = _CompletedScreenRead(
+            screen, _json(result), reader, read_context, observation_root
+        )
+        if retain:
+            _reuse_completed_screen(
+                completed, directory, authorization, _digest(expected_report_sha256)
+            )
+            if sink is not None:
+                _adopt_capture(reader.capture, sink)
+        elif sink is None:
+            reader.capture.finish()
+        else:
+            _adopt_capture(reader.capture, sink)
+        return completed
     except (
         ValueError,
         TypeError,
@@ -621,3 +725,21 @@ def collect_source_screen(
         if isinstance(error, SourceScreenError):
             raise
         raise SourceScreenError("source screen evidence is invalid or changed") from None
+
+
+def collect_source_screen(
+    directory: Path,
+    *,
+    authorization: Path,
+    expected_report_sha256: str | None = None,
+    sink: _Capture | None = None,
+) -> dict[str, object]:
+    """Reconstruct complete custody or verify an explicitly pinned publication."""
+    return _load(
+        _collect_source_screen(
+            directory,
+            authorization=authorization,
+            expected_report_sha256=expected_report_sha256,
+            sink=sink,
+        ).report_raw
+    )

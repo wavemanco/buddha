@@ -1,0 +1,308 @@
+{
+  "base_commit": "047da4b107c111444b766a89767a7c972e85f998",
+  "contract": {
+    "arithmetic": "Exact Fraction aggregation, isolated directed Decimal radius upper bound and lower-bound export downward with exact postchecks; no epsilon threshold",
+    "decision": "Unchanged fixed-primary strict gain/inclusive permitted loss, every candidate against every comparator, both metrics retained; affected missing-scalar contrast inconclusive",
+    "estimand": "Conditional expected paired native-score difference on the exact fixed prompt panel under the declared frozen measurement procedure",
+    "family_assumptions": "Independent family blocks conditional on pre-occasion history and well-defined bounded native measurement variables; arbitrary within-family dependence permitted",
+    "method": "fixed-panel-family-hoeffding.v1",
+    "multiple_comparisons": "Exact rational validation and final portions allocated over both metrics and all maximum look/candidate/comparator or finalist slots; no recycling unused allocation",
+    "projection": "noveltybench-1.1",
+    "reader": "Exact original complete-result hash, owner/evidence capture and source-bound original typed plan; no active calls, replacements, fabricated completeness or file-backed SQL"
+  },
+  "date": "2026-10-22",
+  "documentation_sha256": {
+    "README.md": "78fae5317a86143e3c4fdaae59d7b8cd83d055756587dfc46fede4a0b46343e1",
+    "docs/DESIGN.md": "116c0ab11f9d76481d47b20bbc6c11505e28b7923981dfbfcf39fa3eafb759e3",
+    "docs/PLAN.md": "176dd42a55ab7095d24387386ddc49c2ddd3d80b43a993e00b6884526efa8afe",
+    "docs/VALIDATION-ANALYSIS.md": "0edd9a8b3a30c0e4a0d9322b33e1dfa8ff8353d387baf9001546c4036656ff31"
+  },
+  "evidence_sha256": {
+    "analysis-docs-ancestry-v1.json": "3d3991db5d7a0bc39b5a227ab4f858e56274f7211e44db1e58ad04c412db1090",
+    "eval01-consumed-analysis-independent-shape-review-v1.md": "ffacef41dc32df2ebc564d5c76ca0080d852590209d252fcbb9597b8dbae1df2",
+    "eval01-consumed-analysis-independent-static-review-v1.json": "9e54c74683e9e41179139782ae7d1432f0a91d28990c418dfbd488141e1de00f",
+    "eval01-consumed-analysis-shape-v1.md": "71ecdcfa292d0caf7c71a64f6705a6e07f3f3de4f020bba35547196f1472c93b",
+    "eval01-directed-decimal-numerical-shape-v1.md": "4ada598cfca56b2981a818119c2e76e74bb9866a3f200ff4ed5b99c0cbf95ddb",
+    "validation-analysis-focused-v1.json": "63c36a366207301a1c30062309542d0b2324a8f6bbca3447b47b9fc0d6336df1",
+    "validation-analysis-missing-interface-red-v1.json": "28334bca17a4b170d1352aaf78566c6410e7c6b261b3c54333012622e2a18ca5",
+    "validation-analysis-quality-v1.json": "dc6ae1988917073c7ae2af193d8b7e6bde4a34b62c287f5e6e59f2166275d24f"
+  },
+  "format": "buddha.eval01-validation-analysis-delivery.v1",
+  "heldout_data_access": false,
+  "independent_review": {
+    "finding_count": 0,
+    "scope": "Static custody/numerical/rule review of the final source/test cut and existing seven-method receipt, without independent behavioral execution",
+    "sha256": "9e54c74683e9e41179139782ae7d1432f0a91d28990c418dfbd488141e1de00f",
+    "status": "pass"
+  },
+  "limitations": [
+    "Only synthetic engineering fixtures were collected; no held-out population or genuine validation/final data were read.",
+    "Source/reference hashes bind the caller-approved release; synthetic labels do not certify official source authenticity.",
+    "The method's conditional independence, well-defined measurement and source/family custody assumptions are not established by software checks.",
+    "Conservative bounds can be trivial; no repeat-count sample inflation, method switching, or proof of no improvement.",
+    "Opaque older analysis plans remain unavailable; no retrospective preregistration or invented partial result matrix.",
+    "A final error-allocation count does not freeze actual final populations, finalist policy, funding reserve, finalists, or one-way execution.",
+    "No champion promotion, generalization, human evaluation, mutation competence, model-authored source improvement or improved-improver effectiveness established.",
+    "No full local regression suite or hosted CI success at this publication is claimed."
+  ],
+  "new_funding": false,
+  "preservation": {
+    "behavior_and_quality_code_config_inputs": 230,
+    "docs_only_ancestor_change_preserved_all_code_pins": true,
+    "frozen_source_runtime_or_proposal_or_grants_or_live_records_read_or_changed": false,
+    "new_files": [
+      "buddha/validation_analysis.py",
+      "tests/test_validation_analysis.py",
+      "docs/VALIDATION-ANALYSIS.md",
+      "docs/conformance/eval01-validation-analysis-delivery.json"
+    ],
+    "old_tracked_changes": [
+      "README.md",
+      "docs/PLAN.md",
+      "docs/DESIGN.md",
+      "buddha/noveltybench_results.py"
+    ],
+    "original_src02_eval01_acceptance_tails_exact": true,
+    "original_tracked_files": 470,
+    "prior_revision_rows_byte_exact": 70
+  },
+  "quality": {
+    "checks": [
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "ruff",
+          "check",
+          "buddha",
+          "tests",
+          "agents",
+          "docs/conformance/src02-full-rehearsal.py"
+        ],
+        "elapsed_seconds": 0.14338210003916174,
+        "exit_code": 0,
+        "log_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-analysis\\runs\\reviews\\validation-analysis-quality-v1-lint.log",
+        "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "name": "lint",
+        "timed_out": false
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "ruff",
+          "format",
+          "--check",
+          "buddha",
+          "tests",
+          "agents",
+          "docs/conformance/src02-full-rehearsal.py"
+        ],
+        "elapsed_seconds": 0.11169099994003773,
+        "exit_code": 0,
+        "log_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-analysis\\runs\\reviews\\validation-analysis-quality-v1-format.log",
+        "log_sha256": "b221fa32ed80fb2ebc9605eb60fdfa0a5eaa83ce614a9f728a4fa4632fbfa89a",
+        "name": "format",
+        "timed_out": false
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "mypy",
+          "--strict",
+          "--platform",
+          "win32",
+          "--cache-dir",
+          "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-analysis\\runs\\reviews\\analysis-mypy-win32",
+          "buddha",
+          "agents"
+        ],
+        "elapsed_seconds": 4.352148500038311,
+        "exit_code": 0,
+        "log_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-analysis\\runs\\reviews\\validation-analysis-quality-v1-types-win32.log",
+        "log_sha256": "dd758c62e671570062f9954e1a5d527b0d481f03e1af252648074cae102ed75c",
+        "name": "types-win32",
+        "timed_out": false
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "mypy",
+          "--strict",
+          "--platform",
+          "linux",
+          "--cache-dir",
+          "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-analysis\\runs\\reviews\\analysis-mypy-linux",
+          "buddha",
+          "agents"
+        ],
+        "elapsed_seconds": 2.4941109999781474,
+        "exit_code": 0,
+        "log_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-analysis\\runs\\reviews\\validation-analysis-quality-v1-types-linux.log",
+        "log_sha256": "dd758c62e671570062f9954e1a5d527b0d481f03e1af252648074cae102ed75c",
+        "name": "types-linux",
+        "timed_out": false
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "bandit",
+          "-r",
+          "buddha",
+          "agents",
+          "docs/conformance/src02-full-rehearsal.py"
+        ],
+        "elapsed_seconds": 2.5869838000508025,
+        "exit_code": 0,
+        "log_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-analysis\\runs\\reviews\\validation-analysis-quality-v1-security.log",
+        "log_sha256": "778b3e82d1ea6329b614fb309509c1ede569689c3bc65226fa3b4e3fcfe4e31d",
+        "name": "security",
+        "timed_out": false
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "pip_audit",
+          "--no-deps",
+          "-r",
+          "requirements.txt"
+        ],
+        "elapsed_seconds": 18.14249890006613,
+        "exit_code": 0,
+        "log_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-analysis\\runs\\reviews\\validation-analysis-quality-v1-dependencies.log",
+        "log_sha256": "e82148c0c30269ca5a2c35420ece6af011a4faf5a375325d750e243ffdb10625",
+        "name": "dependencies",
+        "timed_out": false
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "compileall",
+          "-q",
+          "buddha",
+          "tests",
+          "agents",
+          "docs/conformance/src02-full-rehearsal.py"
+        ],
+        "elapsed_seconds": 0.8626610999926925,
+        "exit_code": 0,
+        "log_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-analysis\\runs\\reviews\\validation-analysis-quality-v1-compile.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "name": "compile",
+        "timed_out": false
+      }
+    ],
+    "configuration_inputs": 4,
+    "head": "047da4b107c111444b766a89767a7c972e85f998",
+    "inputs_unchanged": true,
+    "passed": true,
+    "python_inputs": 226
+  },
+  "real_provider_calls": 0,
+  "scope": "Passive complete-occasion original-custody analysis and the existing numerical rule; no full-trial finalization or scientific result",
+  "source_sha256": {
+    "buddha/noveltybench_results.py": "cff8abfd8d26b6a697e9e500baf2b0df429bdbaabf9d6808d4ec9e53830b4802",
+    "buddha/validation_analysis.py": "6db5e35ea6072f9f08e2749d17afdfcd242e3e4020df60f3e72142019962a25c",
+    "tests/test_validation_analysis.py": "94976ac66cf1d9497a8f1f20710ed4c84133f54cbbe8a61d66d20c23d9d35561"
+  },
+  "tests": {
+    "base_source_cut": "d3a91355a639cbb11c28b01b7badc859875c76b0",
+    "elapsed_seconds": 79.14356400002725,
+    "errors": 0,
+    "failures": 0,
+    "full_local_regression_or_hosted_ci_pass_claimed": false,
+    "guards": {
+      "denied_events": 0,
+      "memory_deserialize_internal_attach_arguments": 852,
+      "registered_synthetic_roots": 4,
+      "sqlite_attaches": 220,
+      "sqlite_connections": 1199,
+      "validated_same_connection_attach_none_callbacks": 220
+    },
+    "initial_red": "Seven ModuleNotFoundError setup errors before implementation; no behavioral defect or fixture execution implied",
+    "raw_log": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-analysis\\runs\\reviews\\validation-analysis-focused-v1.log",
+      "sha256": "1b0a782be6ae8df60c964ff945e4cac006c8bb304a8790283b57e987d82ea470"
+    },
+    "scope": "seven new acceptance methods only; contained original validation fixture, real temporary financial custody, all generation/native workers and HTTPS mocked; no real keys/providers/old artifacts/global suite",
+    "setup_correction": {
+      "old_test_sha256": "bc9d2e71afd394aaf5b2e12b1dda94260e584174008d778a65815e2d96610fce",
+      "reason": "Use actual immutable artifact from_bytes(_json(record)); no from_record API or production convenience added"
+    },
+    "status": "passed",
+    "synthetic_fixture_counts": [
+      {
+        "actual_owner_input_evidence": null,
+        "capacity_evidence": null,
+        "fake_physical_sends": 6,
+        "generation_events": 2,
+        "known_reply_evidence": null,
+        "mock_native_workers": 6,
+        "mock_workers": 8,
+        "native_events": 6,
+        "native_partial_evidence": null,
+        "test_id": "test_validation_analysis.ValidationAnalysisTests.test_native_complete_unusable_scalar_keeps_full_matrix_and_inconclusive_contrast"
+      },
+      {
+        "actual_owner_input_evidence": null,
+        "capacity_evidence": null,
+        "fake_physical_sends": 6,
+        "generation_events": 2,
+        "known_reply_evidence": null,
+        "mock_native_workers": 6,
+        "mock_workers": 8,
+        "native_events": 6,
+        "native_partial_evidence": null,
+        "test_id": "test_validation_analysis.ValidationAnalysisTests.test_original_opaque_plan_returns_unavailable_after_capture_and_cannot_be_retrofitted"
+      },
+      {
+        "actual_owner_input_evidence": null,
+        "capacity_evidence": null,
+        "fake_physical_sends": 0,
+        "generation_events": 0,
+        "known_reply_evidence": null,
+        "mock_native_workers": 0,
+        "mock_workers": 0,
+        "native_events": 0,
+        "native_partial_evidence": null,
+        "test_id": "test_validation_analysis.ValidationAnalysisTests.test_original_partial_without_complete_result_rejects_without_new_work"
+      },
+      {
+        "actual_owner_input_evidence": null,
+        "capacity_evidence": null,
+        "fake_physical_sends": 6,
+        "generation_events": 2,
+        "known_reply_evidence": null,
+        "mock_native_workers": 6,
+        "mock_workers": 8,
+        "native_events": 6,
+        "native_partial_evidence": null,
+        "test_id": "test_validation_analysis.ValidationAnalysisTests.test_original_plan_owners_native_projection_rule_and_fully_passive_repeat"
+      }
+    ],
+    "test_ids": [
+      "test_validation_analysis.ValidationAnalysisTests.test_exact_panel_family_and_repetition_aggregation",
+      "test_validation_analysis.ValidationAnalysisTests.test_independent_radius_brackets_and_exact_downward_threshold_neighbors",
+      "test_validation_analysis.ValidationAnalysisTests.test_native_complete_unusable_scalar_keeps_full_matrix_and_inconclusive_contrast",
+      "test_validation_analysis.ValidationAnalysisTests.test_original_opaque_plan_returns_unavailable_after_capture_and_cannot_be_retrofitted",
+      "test_validation_analysis.ValidationAnalysisTests.test_original_partial_without_complete_result_rejects_without_new_work",
+      "test_validation_analysis.ValidationAnalysisTests.test_original_plan_owners_native_projection_rule_and_fully_passive_repeat",
+      "test_validation_analysis.ValidationAnalysisTests.test_strict_prospective_plan_and_exact_rational_allocation"
+    ],
+    "tests_run": 7,
+    "total_fake_physical_sends": 18,
+    "total_mock_workers": 24
+  }
+}

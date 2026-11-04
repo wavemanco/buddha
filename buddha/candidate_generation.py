@@ -7,17 +7,20 @@ host inputs are checked. Passive consumption needs no producer program/runtime.
 import base64
 import hashlib
 from collections.abc import Callable, Mapping, Sequence
+from dataclasses import dataclass
 from functools import wraps
 from pathlib import Path
 from typing import cast
 
 from buddha import native_pipeline as pipeline
+from buddha import trial_fence
 from buddha.answers import Answers, TaskSet, _utf8
 from buddha.authorization import Authorization
 from buddha.doctor import _authority, _Busy, _Capture, _owner, _Unsupported
 from buddha.gateway import (
     Gateway,
     RawHTTPTransport,
+    _final_producer_contract,
     _input_records,
     _read_manifest,
     execution_identity,
@@ -108,6 +111,7 @@ def _sources(recipe_format: object = "buddha.candidate-generation.v1") -> list[P
         "answers",
         "candidate_run",
         "candidate_generation",
+        "trial_fence",
         "native_pipeline",
         "doctor",
         "process_observation",
@@ -121,6 +125,32 @@ def _sources(recipe_format: object = "buddha.candidate-generation.v1") -> list[P
         if recipe_format == "buddha.candidate-generation.v2"
         else []
     )
+
+
+@_checked
+def _recorded_sources(paths: Sequence[Path], core: object) -> list[Path]:
+    """Select a closed original candidate closure without opening retired sources."""
+    recorded = _object(core)
+    legacy = {
+        "buddha",
+        "buddha.gateway",
+        "buddha.wire",
+        "buddha.releases",
+        "buddha.authorization",
+        "buddha.ledger",
+        "buddha.history",
+        "buddha.provider",
+        "buddha.common",
+    }
+    if set(recorded) not in (legacy, legacy | {"buddha.trial_fence"}):
+        raise CandidateGenerationError("unsupported original candidate core profile")
+    for digest in recorded.values():
+        _digest(digest)
+    if "buddha.trial_fence" in recorded:
+        if sum(path.name == "trial_fence.py" for path in paths) != 1:
+            raise CandidateGenerationError("original fenced closure requires its helper")
+        return list(paths)
+    return [path for path in paths if path.name != "trial_fence.py"]
 
 
 def _recipe(
@@ -218,7 +248,9 @@ def prepare_candidate_generation(
     runtime_sha256 = _digest(expected_runtime_sha256)
     verify_selection(selection, roots, expected_sha256=selection.fingerprint())
     controls = _input_records(input_files, expected_input_hashes)
-    expected = {Path(row["path"]): row["sha256"] for row in controls}
+    expected = trial_fence._include_controls(
+        directory, {Path(row["path"]): row["sha256"] for row in controls}
+    )
 
     def consume(path: Path) -> bytes:
         raw = pipeline._read(path, expected.get(path))
@@ -236,31 +268,67 @@ def prepare_candidate_generation(
         raise CandidateGenerationError("generation output overlaps original inputs")
     _root(directory.parent)
     _path(directory.name)
-    directory.mkdir()
-    for name in ("owners", "attempts", "completed", "observations"):
-        (directory / name).mkdir()
-    context = directory / "context.json"
-    context_raw = _json(
-        {
-            "format": generation_formats(recipe["format"])["context"],
-            "descriptor": str(descriptor),
-            "expected_runtime_sha256": runtime_sha256,
-        }
-    )
-    pipeline._write(context, context_raw)
-    expected[context] = hashlib.sha256(context_raw).hexdigest()
-    prepare_gateway(
-        directory / "owners/0",
-        selection=selection,
-        roots=roots,
-        authorization=authorization,
-        budget_microusd=budget_microusd,
-        max_calls=max_calls,
-        input_files=list(expected),
-        expected_input_hashes=expected,
-        review=review,
-    )
+    with trial_fence.work(
+        authorization.path, authorization._terms(), directory=directory, kind="generation"
+    ) as trial_controls:
+        for path, digest in trial_controls.items():
+            if path in expected and expected[path] != digest:
+                raise CandidateGenerationError("original trial controls changed before preparation")
+            expected[path] = digest
+        _input_records(list(expected), expected)
+        context = directory / "context.json"
+        if len(set(expected) | {context}) > 1024:
+            raise CandidateGenerationError("generation controls exceed the owner input limit")
+        directory.mkdir()
+        for name in ("owners", "attempts", "completed", "observations"):
+            (directory / name).mkdir()
+        context_raw = _json(
+            {
+                "format": generation_formats(recipe["format"])["context"],
+                "descriptor": str(descriptor),
+                "expected_runtime_sha256": runtime_sha256,
+            }
+        )
+        pipeline._write(context, context_raw)
+        expected[context] = hashlib.sha256(context_raw).hexdigest()
+        with _final_producer_contract(
+            directory / "owners/0",
+            selection=selection,
+            roots=roots,
+            authorization=authorization,
+            settings={"budget_microusd": budget_microusd, "max_calls": max_calls},
+            review=review,
+            inputs=_input_records(list(expected), expected),
+        ):
+            prepare_gateway(
+                directory / "owners/0",
+                selection=selection,
+                roots=roots,
+                authorization=authorization,
+                budget_microusd=budget_microusd,
+                max_calls=max_calls,
+                input_files=list(expected),
+                expected_input_hashes=expected,
+                review=review,
+            )
     return directory
+
+
+@dataclass(frozen=True)
+class _AnswersEvidence:
+    """One interpretation within this check; every later raw read still runs."""
+
+    path: Path
+    raw_sha256: str
+    answers: Answers
+
+    def outputs(self) -> dict[str, Path]:
+        return {"answers": self.path}
+
+    def checked(self, path: Path, raw: bytes) -> Answers:
+        if path != self.path or hashlib.sha256(raw).hexdigest() != self.raw_sha256:
+            raise CandidateGenerationError("candidate C1 changed during validation")
+        return self.answers
 
 
 def _outputs(
@@ -271,12 +339,13 @@ def _outputs(
     descriptor_raw: bytes,
     runtime_sha256: str,
     owner: dict[str, object],
-) -> dict[str, Path]:
+) -> _AnswersEvidence:
     path = attempt / "answers.json"
     answer_raw = pipeline._read(
         path, _object(report["artifacts"], {"answers.json"})["answers.json"]
     )
-    answers = Answers.from_bytes(answer_raw).to_record()
+    parsed = Answers.from_bytes(answer_raw)
+    answers = parsed.to_record()
     calls = _object(report["calls"], {"requested", "completed", "stopped"})
     count = _integer(calls["completed"], 0, cast(int, recipe["max_callbacks"]))
     execution = _object(report["execution"])
@@ -306,7 +375,7 @@ def _outputs(
         or execution.get("image_id") != _object(recipe["executor"])["image_id"]
     ):
         raise CandidateGenerationError("candidate C1/report/cleanup lineage differs")
-    return {"answers": path}
+    return _AnswersEvidence(path, hashlib.sha256(answer_raw).hexdigest(), parsed)
 
 
 def _wrap_outcome(attempt: Path, session: object, report: dict[str, object]) -> dict[str, object]:
@@ -399,7 +468,7 @@ def _validate_outcome(
     owner: dict[str, object],
     totals: dict[str, int],
     read: Callable[[Path], bytes],
-) -> dict[str, Path]:
+) -> _AnswersEvidence | None:
     _object(
         outcome,
         {
@@ -486,14 +555,15 @@ def _validate_outcome(
         if hashlib.sha256(read(attempt / _path(name))).hexdigest() != _digest(digest):
             raise CandidateGenerationError("generation outcome artifact differs")
     expected = {"session/report.json", "session/done.json"}
-    outputs = {}
+    outputs = None
     if outcome["disposition"] == "generated":
         if terminal["ready_seen"] is not True or done["status"] != "complete":
             raise CandidateGenerationError("generated C1 has no ready completed terminal")
         outputs = _outputs(
             attempt / "session", report, recipe, tasks, descriptor_raw, runtime_sha256, owner
         )
-        answers = Answers.from_bytes(read(attempt / "session/answers.json"))
+        path = attempt / "session/answers.json"
+        answers = outputs.checked(path, read(path))
         if _json(
             cast(list[dict[str, object]], answers.to_record()["outputs"])[0]["answers"]
         ) != _json(done["answers"]):
@@ -548,10 +618,26 @@ def _v2_report(
 @_checked
 def run_candidate_generation(directory: Path, *, transport: RawHTTPTransport) -> dict[str, object]:
     """Execute or replay the same original source owner and retain partial work."""
-    if not isinstance(directory, Path):
-        raise CandidateGenerationError("generation needs an explicit Path")
+    if not isinstance(directory, Path) or not isinstance(transport, RawHTTPTransport):
+        raise CandidateGenerationError("generation needs its explicit Path and raw transport")
     directory = pipeline._absolute(str(directory))
-    with pipeline._exclusive(directory):
+    original = _read_manifest(directory / "owners/0")
+    authority_path = pipeline._absolute(original["authorization_path"])
+    if trial_fence.is_closed(directory):
+        return inspect_candidate_generation(
+            directory,
+            authorization=authority_path,
+            expected_report_sha256=file_hash(directory / "report.json"),
+        )
+    with (
+        trial_fence.work(
+            authority_path,
+            Authorization(authority_path)._terms(),
+            directory=directory,
+            kind="generation",
+        ),
+        pipeline._exclusive(directory),
+    ):
         gateway = Gateway(directory / "owners/0", transport=transport)
         owner = _read_manifest(gateway.directory)
         bindings = {
@@ -620,7 +706,7 @@ def run_candidate_generation(directory: Path, *, transport: RawHTTPTransport) ->
             for path in _sources(recipe["format"]):
                 consume(path)
             if prospective:
-                return _validate_outcome(
+                result = _validate_outcome(
                     attempt,
                     report,
                     recipe,
@@ -631,12 +717,13 @@ def run_candidate_generation(directory: Path, *, transport: RawHTTPTransport) ->
                     gateway.ledger.totals(),
                     lambda path: pipeline._read(path),
                 )
+                return result.outputs() if result is not None else {}
             result = _outputs(
                 attempt, report, recipe, tasks, consume(descriptor), runtime_sha256, owner
             )
             if report["gateway_totals"] != gateway.ledger.totals():
                 raise CandidateGenerationError("candidate accounting changed before publication")
-            return result
+            return result.outputs()
 
         def observation(reason: str, report: dict[str, object] | None) -> dict[str, object]:
             ordinal = 0
@@ -873,7 +960,10 @@ def _read_evidence(
     if generation_formats(recipe["format"]) != formats:
         raise CandidateGenerationError("candidate source modes differ")
     if prospective:
-        names = {path.name for path in _sources(recipe["format"])}
+        names = {
+            path.name
+            for path in _recorded_sources(_sources(recipe["format"]), history.manifest["core"])
+        }
         prefixes = {
             path.parent
             for path in bindings
@@ -912,7 +1002,7 @@ def _read_evidence(
         capture.read(attempt / ("session/report.json" if prospective else "report.json"))
     )
     if prospective:
-        _validate_outcome(
+        checked_answers = _validate_outcome(
             attempt,
             cast(dict[str, object], outcome),
             recipe,
@@ -924,7 +1014,9 @@ def _read_evidence(
             capture.read,
         )
     else:
-        _outputs(attempt, report, recipe, tasks, bound(descriptor), runtime_sha256, owner)
+        checked_answers = _outputs(
+            attempt, report, recipe, tasks, bound(descriptor), runtime_sha256, owner
+        )
     totals = _object(report["gateway_totals"])
     if (
         any(type(item) is not int for item in totals.values())
@@ -968,16 +1060,20 @@ def _read_evidence(
     answers_path = (
         attempt / ("session/answers.json" if prospective else "answers.json") if generated else None
     )
-    answers = Answers.from_bytes(capture.read(answers_path)) if answers_path is not None else None
-    capture.finish()
+    answers = None
+    if answers_path is not None:
+        if checked_answers is None:
+            raise CandidateGenerationError("generated source has no checked C1")
+        answers = checked_answers.checked(answers_path, capture.read(answers_path))
+    fingerprints = capture.fingerprints()
     return {
         "tasks": tasks,
         "answers": answers,
         "answers_path": answers_path,
         "files": {
-            path: hashlib.sha256(raw).hexdigest()
-            for path, raw in capture.raw.items()
-            if path != authority_path
+            Path(path): digest
+            for path, digest in fingerprints.items()
+            if Path(path) != authority_path
         },
         "terms": _object(funding["config"]),
         "generation": report,
@@ -989,29 +1085,40 @@ def _read_evidence(
     }
 
 
+def _source_from_evidence(
+    evidence: dict[str, object],
+) -> tuple[TaskSet, Answers, Path, dict[Path, str], dict[str, object]]:
+    """Project checked C1 without adding publication-only invocation bindings."""
+    if evidence["answers"] is None or evidence["answers_path"] is None:
+        raise CandidateGenerationError("a checked source failure has no C1 answers")
+    publication = cast(_Capture, evidence["capture"]).root / "report.json"
+    return (
+        cast(TaskSet, evidence["tasks"]),
+        cast(Answers, evidence["answers"]),
+        cast(Path, evidence["answers_path"]),
+        {
+            path: digest
+            for path, digest in cast(dict[Path, str], evidence["files"]).items()
+            if path != publication
+        },
+        cast(dict[str, object], evidence["terms"]),
+    )
+
+
 @_checked
 def read_candidate_generation_source(
     value: object,
     authority_path: Path,
 ) -> tuple[TaskSet, Answers, Path, dict[Path, str], dict[str, object]]:
     """Read only generated C1; a checked failed execution is never an answer source."""
-    evidence = _read_evidence(value, authority_path)
-    if evidence["answers"] is None or evidence["answers_path"] is None:
-        raise CandidateGenerationError("a checked source failure has no C1 answers")
-    return (
-        cast(TaskSet, evidence["tasks"]),
-        cast(Answers, evidence["answers"]),
-        cast(Path, evidence["answers_path"]),
-        cast(dict[Path, str], evidence["files"]),
-        cast(dict[str, object], evidence["terms"]),
-    )
+    return _source_from_evidence(_read_evidence(value, authority_path))
 
 
 @_checked
-def inspect_candidate_generation(
+def _read_published_evidence(
     directory: Path, *, authorization: Path, expected_report_sha256: str
-) -> dict[str, object]:
-    """Passively check a published v2 outcome, including original independent anchor."""
+) -> tuple[dict[str, object], dict[str, object]]:
+    """Check one published v2 outcome and retain the complete original observation."""
     from buddha.native_evidence import authority_observation
 
     if not isinstance(directory, Path) or not isinstance(authorization, Path):
@@ -1053,4 +1160,14 @@ def inspect_candidate_generation(
     if raw != _json(saved) or _json(saved) != _json(reconstructed):
         raise CandidateGenerationError("generation publication differs from its sealed outcome")
     capture.finish()
-    return saved
+    return saved, evidence
+
+
+@_checked
+def inspect_candidate_generation(
+    directory: Path, *, authorization: Path, expected_report_sha256: str
+) -> dict[str, object]:
+    """Passively check a published v2 outcome, including original independent anchor."""
+    return _read_published_evidence(
+        directory, authorization=authorization, expected_report_sha256=expected_report_sha256
+    )[0]

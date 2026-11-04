@@ -1,0 +1,208 @@
+{
+  "basis_head": "21dfd2054970ccfec01fc71cf27c6dad5a249df2",
+  "behavior": {
+    "launcher": "Extend only the existing bounded inline generation projection. Native and fixed-seed session retention does not imply their terminal display. Final header-only projection does not dereference child observations.",
+    "no_new_io_or_framework": "Reuse existing session report and launcher diagnostic publication; no new production module, dependency, endpoint, persistent cache or process lifecycle is added.",
+    "optional_record": {
+      "example": {
+        "reason": "control",
+        "stage": "create"
+      },
+      "field": "execution.pre_cleanup_failure (or an entry of executions)",
+      "fields": [
+        "format",
+        "stage",
+        "reason"
+      ],
+      "format": "buddha.executor-pre-cleanup-failure.v1"
+    },
+    "precedence": "Unknown cleanup remains ExecutorError.reason=cleanup; its existing string, chaining and cleanup decision remain unchanged. ExecutionResult and required report/outcome fields stay unchanged.",
+    "privacy": "Exact tuple/string types, token length64 before hashing, fixed stage/reason sets; unknown tokens become other and malformed records are omitted. Never inspect raw exception text, CLI/endpoint text, locals, keys, selected source or outputs.",
+    "propagation": [
+      "candidate_run.CandidateSession generation and improvement execution metadata",
+      "native_run.NativeSession failed execution metadata",
+      "agent_run.AgentSession failed execution entry"
+    ],
+    "timing": "Retain a caught execution failure or an already recorded asynchronous failure observed at the beginning of finally, before cleanup control operations. Propagate recorded stdout/stderr/watchdog stage under the existing lock. Do not label a newly observed cleanup-time fault pre-cleanup; existing late-error promotion remains.",
+    "validation": "Only None means the optional capture is absent; falsey or hostile objects never receive truthiness testing or a fabricated fallback. Capture/serialization failures, including KeyboardInterrupt, cannot replace the primary failure."
+  },
+  "date": "2026-10-30",
+  "evidence": {
+    "before_final_opaque_correction": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\executor-primary-diagnostics-20261030-v1\\final-checks-v2.json",
+      "scope": "38method/all7QA cut before the final opaque-truthiness correction; not all38 on current bytes",
+      "sha256": "bd164d244e268423ab99e6e552353369e04f8dcfc24cf26de0ad45c1c5e8477a"
+    },
+    "current_compile": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\executor-primary-diagnostics-20261030-v1\\qa-compile-v4.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "current_format": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\executor-primary-diagnostics-20261030-v1\\qa-format-v4.log",
+      "sha256": "97d85b4b6c185a05396e2d09a3c304ff0f7cc77f8b7b7bb7989ec6cd875b3898"
+    },
+    "current_lint": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\executor-primary-diagnostics-20261030-v1\\qa-lint-v4.log",
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+    },
+    "current_local_checks": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\executor-primary-diagnostics-20261030-v1\\final-checks-v4.json",
+      "sha256": "c295d0a12cb785c13ec5567145af4bc97abff847e2864897bbfb28f36455c642"
+    },
+    "current_security": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\executor-primary-diagnostics-20261030-v1\\qa-security-v3.log",
+      "sha256": "57570b22a582d24c17a71b5e1cbf2c4f4a3f86e6de0469a24bb94de49262e2ec"
+    },
+    "current_types": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\executor-primary-diagnostics-20261030-v1\\qa-types-v3.log",
+      "sha256": "8e63ae22e8213e327a5e9cbd584067681681bd8ef7f25c869877887ccdcfc4ff"
+    },
+    "final_executor_log": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\executor-primary-diagnostics-20261030-v1\\executor-v4.log",
+      "sha256": "55c01b334b4bae9b58dc725e75c2d6459cb636b6e7da330f289656ab74787497"
+    },
+    "final_production_diff": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\executor-primary-diagnostics-20261030-v1\\buddha-final-v4.diff",
+      "sha256": "58c05298364e1ba42987cb599edba0084f61a542d1d34e57d682e638372dbfb4"
+    },
+    "final_test_diff": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\executor-primary-diagnostics-20261030-v1\\tests-final-v4.diff",
+      "sha256": "2f528ab6807b800fb0e272c2f9f74a2444607491f61417f67aabb41cb7297be9"
+    },
+    "independent_review": {
+      "bytes": 4074,
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\executor-primary-diagnostics-20261030-v1\\independent-review-v1.json",
+      "sha256": "0b82e24480fba981bcfbdf9618afd6b43d9f7cf15c6baceb3381b5a25dc4993f"
+    },
+    "initial_checks": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\executor-primary-diagnostics-20261030-v1\\initial-checks-v1.json",
+      "sha256": "098a4a74502a151fe00410f7ffda723a6758ca700128c0ab2fe503a62b543e3c"
+    },
+    "initial_red_log": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\executor-primary-diagnostics-20261030-v1\\red-executor-v1.log",
+      "sha256": "e5b957146613a818854c1628a1b68d5c74146fdd4398953439290dc6eb1996e7"
+    },
+    "opaque_capture_red_log": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\executor-primary-diagnostics-20261030-v1\\red-capture-v3.log",
+      "sha256": "5027ee03cd1243a20c938c59866dd0f96688cdbbf7ce4e09215d15a7fd69db57"
+    },
+    "opaque_capture_red_test": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\executor-primary-diagnostics-20261030-v1\\red-capture-v3-test.py",
+      "sha256": "f5f39abcb4f25789b4f7a5bae31140e0f669cd03b0351b685fe5c41dfb55e72d"
+    }
+  },
+  "format": "buddha.executor-pre-cleanup-diagnostics-delivery.v1",
+  "hosted_verification": "Pending exact published-source CI; no hosted/full-suite pass claimed.",
+  "independent_review": {
+    "evidence_kind": "Summary from the independent reviewer's retained tool result; no separately saved stdout stream is claimed.",
+    "record": {
+      "bytes": 4074,
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\executor-primary-diagnostics-20261030-v1\\independent-review-v1.json",
+      "sha256": "0b82e24480fba981bcfbdf9618afd6b43d9f7cf15c6baceb3381b5a25dc4993f"
+    },
+    "reported_current_methods_passed": 38,
+    "reported_diff_check": "PASS",
+    "reported_executor_sha256": "546c987c2e985adec4d5452d955d84c139d55d308a221f7615c86fb3e798429e",
+    "reported_executor_test_sha256": "9f753a654baf117828652f80f3781ab879c8f8b2367b3bca8f8dcce1e108f4d4",
+    "reported_seconds": 4.808,
+    "scope": "Independent review reports no blocker and a current-source rerun of executor26, launcher9 and one session propagation method for each of three callers; no actual providers, containers or original-run reads.",
+    "status": "PASS reported"
+  },
+  "limits": [
+    "This is prospective source and supplied-only engineering evidence, not actual Docker confinement/lifecycle verification.",
+    "Session source binding changes require checked adoption; never patch the frozen c548 checkout or rebind an existing owner.",
+    "No actual retained-history reconstruction, cleanup/endpoint reconciliation, source adoption or live handoff is cleared.",
+    "The stopped historical657 execution cause remains irrecoverable from these changes.",
+    "No scientific improvement, reconstruction speedup, retry permission or exactly-once billing is established."
+  ],
+  "live_execution_cleared": false,
+  "plan_revision": 207,
+  "preservation": {
+    "CORE_and_fixed_science_bytes": "unchanged",
+    "cleanup_ownership_budgets_retries_settings": "unchanged",
+    "execution_result_and_limits": "unchanged",
+    "guide_old_bytes": "Removing the exact inserted subsection reproduces the original guide bytes; no operator command added.",
+    "old_reports_owners_grants_and_receipts": "not rewritten or migrated",
+    "required_json_formats_and_outcome_reasons": "unchanged; one explicitly versioned optional nested execution record is added",
+    "source_role_and_module_membership": "unchanged; the five listed host source hashes change"
+  },
+  "source_sha256": {
+    "buddha/agent_run.py": "c9fb958bd5ca37bf08a2f5ebe2a826c6e739bfb89da416a3f3c419fa3c30819b",
+    "buddha/candidate_run.py": "b2246daf91b1f6a5b10b2def5ac17a001b53d97c12fe98e2bbb054097f1ff0b5",
+    "buddha/executor.py": "546c987c2e985adec4d5452d955d84c139d55d308a221f7615c86fb3e798429e",
+    "buddha/launch_common.py": "682179023c4532788caa41c3a0657efd125239548e594af8954498f7a4b1bce2",
+    "buddha/native_run.py": "d94615d2659dac91d97ea1a602aa04f345afc359af599da26cfb1be42e9e1771",
+    "docs/UNIFIED-EVIDENCE-RECOVERY.md": "a538cc5a1b9539ec0ce8436e874328a15c711e24b453c21d89b439719b239bae",
+    "tests/test_agent_run.py": "4e22b3236aca886534b0b5513652229c9779292e779229c834bb28c4a6a1063b",
+    "tests/test_candidate_run.py": "ca1f09123374547ebc10b56fab56332f4ac668f16efaad1e31f0345f009a11b7",
+    "tests/test_executor.py": "9f753a654baf117828652f80f3781ab879c8f8b2367b3bca8f8dcce1e108f4d4",
+    "tests/test_launch_result_diagnostics.py": "c6ce49a7941c7ecfd5542dd05e7cb17ca41acb10366f023eb0a1f43c4b0f072c",
+    "tests/test_native_run.py": "43c85a7489a36fa9c8fc72929495cd6e86a7db3775cbeb33afac81a854eedf34"
+  },
+  "spec": [
+    "DESIGN9",
+    "DESIGN10",
+    "ENG-OBS-01"
+  ],
+  "status": "local_checked_hosted_unverified_no_retained_history_adoption",
+  "validation": {
+    "actual_container_startups": 0,
+    "actual_provider_calls": 0,
+    "actual_retained_history_reads": 0,
+    "before_opaque_correction": {
+      "configured_quality_checks_passed": 7,
+      "methods_passed": 38,
+      "scope": "Earlier v2 source cut, not final executor bytes."
+    },
+    "checks_cover": [
+      "create, image-inspect, start, ownership, callback, stdout and watchdog failures with unknown cleanup",
+      "cleanup-only and controlled cleanup-time late-stderr failures retain no invented earlier cause",
+      "missing/hostile reason, falsey/hostile capture and diagnostic interruption preserve cleanup",
+      "all three existing session report serializers retain metadata with zero operation/cost changes",
+      "bounded private-field filtering, exact types, giant strings, fresh copies and hostile subclasses",
+      "legacy primary reasons, no completion without cleanup, no error string/chaining change"
+    ],
+    "implementer_final": {
+      "affected_lint_format_compile": "PASS final two changed files",
+      "executor_methods_passed": 26,
+      "executor_seconds": 0.522,
+      "full_scope_quality": "The prior v2 full seven checks remain separate. Other code/tests and dependency inputs were unchanged; no claim of a new final full-seven invocation.",
+      "strict_types_and_bandit": "PASS on identical final executor bytes; the later change bound only a test closure"
+    },
+    "initial_cut": {
+      "configured_quality_checks_passed": 7,
+      "methods_passed": 35,
+      "scope": "Initial cut before root stage/capture/timing review; source pins retained in initial_checks."
+    },
+    "initial_red": {
+      "case": "supplied create failure followed by cleanup failure loses earlier cause",
+      "failures": 1,
+      "methods": 1,
+      "production": "unchanged base21dfd2",
+      "scope": "Full RED test file was not separately snapshotted; log retained.",
+      "seconds": 0.419
+    },
+    "intermediate_v3": {
+      "executor_methods_passed": 26,
+      "executor_seconds": 0.551,
+      "lint": "B023 in the new test closure; corrected by explicitly binding the inspected list. The lint failure remains retained."
+    },
+    "opaque_capture_red": {
+      "cases": [
+        "falsey capture incorrectly treated as absent",
+        "hostile capture __bool__ invoked"
+      ],
+      "full_supplied_test_snapshot_retained": true,
+      "methods": 1,
+      "production_executor_sha256": "16a4dc31b18f865f2817fc44b5a729b5d5d59835eb4353b72e86b9376f0ee505",
+      "seconds": 0.032,
+      "subcase_failures": 2
+    },
+    "root_review_corrections": [
+      "Preserve the recorded asynchronous origin through main-loop propagation under one lock.",
+      "Observe the optional failure before cleanup begins; do not invent a cause from a late cleanup-time thread failure.",
+      "Guard optional capture of a missing or hostile reason without changing mandatory cleanup.",
+      "Validate an opaque optional capture without truthiness or falsey fallback."
+    ]
+  }
+}

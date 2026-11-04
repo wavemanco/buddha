@@ -12,13 +12,14 @@ from pathlib import Path
 from typing import cast
 
 from buddha import native_pipeline as pipeline
-from buddha import native_run
+from buddha import native_run, trial_fence
 from buddha.answers import Answers, TaskSet, _utf8
 from buddha.authorization import Authorization
 from buddha.doctor import _authority, _Busy, _Capture, _owner
 from buddha.gateway import (
     Gateway,
     RawHTTPTransport,
+    _final_producer_contract,
     _input_records,
     _read_manifest,
     execution_identity,
@@ -76,6 +77,16 @@ def _generation(value: object, authority: Authorization) -> _Generation:
     return _read_generation(value, authority.path)
 
 
+def _check_candidate_reader() -> None:
+    from buddha import candidate_generation
+
+    if (
+        Path(candidate_generation.__file__).absolute()
+        != Path(__file__).with_name("candidate_generation.py").absolute()
+    ):
+        raise EvaluationError("a different candidate source reader was imported")
+
+
 def _read_generation(value: object, authority_path: Path) -> _Generation:
     reference = _object(value)
     if reference.get("format") in {
@@ -84,15 +95,30 @@ def _read_generation(value: object, authority_path: Path) -> _Generation:
     }:
         from buddha import candidate_generation
 
-        if (
-            Path(candidate_generation.__file__).absolute()
-            != Path(__file__).with_name("candidate_generation.py").absolute()
-        ):
-            raise EvaluationError("a different candidate source reader was imported")
+        _check_candidate_reader()
         return _Generation(
             *candidate_generation.read_candidate_generation_source(reference, authority_path)
         )
     return _read_baseline_generation(value, authority_path)
+
+
+@_checked
+def _read_published_generation(
+    directory: Path, *, authorization: Path, expected_report_sha256: str
+) -> tuple[dict[str, object], _Generation | None, _Capture]:
+    """Share one checked publication's evidence with its generated C1, if present."""
+    from buddha import candidate_generation
+
+    _check_candidate_reader()
+    report, evidence = candidate_generation._read_published_evidence(
+        directory, authorization=authorization, expected_report_sha256=expected_report_sha256
+    )
+    source = (
+        None
+        if evidence["answers"] is None
+        else _Generation(*candidate_generation._source_from_evidence(evidence))
+    )
+    return report, source, cast(_Capture, evidence["capture"])
 
 
 def _generation_directory(value: object) -> Path:
@@ -107,6 +133,38 @@ def _generation_directory(value: object) -> Path:
         else "baseline_directory"
     )
     return pipeline._absolute(reference[field])
+
+
+def _frozen_recipe(raw: bytes, tasks_path: Path, manifest: dict[str, object]) -> dict[str, object]:
+    """Validate the fixed generator's data/profile without an executing session."""
+    recipe = _object(_load(raw), {"format", "tasks", "config", "entrypoint", "executor", "profile"})
+    config = _object(
+        recipe["config"], {"provider", "model", "max_output_tokens", "instructions", "sampling"}
+    )
+    instructions = _utf8(config["instructions"])
+    cap = config["max_output_tokens"]
+    if (
+        recipe["format"] != "buddha.frozen-generation.v1"
+        or type(config["provider"]) is not str
+        or config["provider"] not in {"openai", "anthropic"}
+        or type(cap) is not int
+        or not 1 <= cap <= 2**63 - 1
+        or len(instructions) > 4000
+        or type(config["sampling"]) is not str
+        or config["sampling"] not in {"regenerate", "in-context"}
+    ):
+        raise EvaluationError("source generation configuration is unsupported")
+    _text(config["model"])
+    role = _object(recipe["profile"], {"capability", "profile_id"})
+    source_profile = _object(
+        _object(_object(manifest["profiles"])[_text(role["capability"])])["profiles"]
+    )
+    spec = _object(_object(source_profile[_text(role["profile_id"])])["spec"])
+    if any(spec[key] != config[key] for key in ("provider", "model", "max_output_tokens")):
+        raise EvaluationError("source generation profile differs from its treatment")
+    if pipeline._absolute(recipe["tasks"]) != tasks_path:
+        raise EvaluationError("source generation recipe changes task input")
+    return recipe
 
 
 def _read_baseline_generation(value: object, authority_path: Path) -> _Generation:
@@ -214,35 +272,7 @@ def _read_baseline_generation(value: object, authority_path: Path) -> _Generatio
     tasks = TaskSet.from_bytes(task_raw)
     recipe_path = pipeline._absolute(producer["descriptor"])
     recipe_raw = bound(recipe_path)
-    recipe = _object(
-        _load(recipe_raw), {"format", "tasks", "config", "entrypoint", "executor", "profile"}
-    )
-    config = _object(
-        recipe["config"], {"provider", "model", "max_output_tokens", "instructions", "sampling"}
-    )
-    instructions = _utf8(config["instructions"])
-    cap = config["max_output_tokens"]
-    if (
-        recipe["format"] != "buddha.frozen-generation.v1"
-        or type(config["provider"]) is not str
-        or config["provider"] not in {"openai", "anthropic"}
-        or type(cap) is not int
-        or not 1 <= cap <= 2**63 - 1
-        or len(instructions) > 4000
-        or type(config["sampling"]) is not str
-        or config["sampling"] not in {"regenerate", "in-context"}
-    ):
-        raise EvaluationError("source generation configuration is unsupported")
-    _text(config["model"])
-    role = _object(recipe["profile"], {"capability", "profile_id"})
-    source_profile = _object(
-        _object(_object(history.manifest["profiles"])[_text(role["capability"])])["profiles"]
-    )
-    spec = _object(_object(source_profile[_text(role["profile_id"])])["spec"])
-    if any(spec[key] != config[key] for key in ("provider", "model", "max_output_tokens")):
-        raise EvaluationError("source generation profile differs from its treatment")
-    if pipeline._absolute(recipe["tasks"]) != tasks_path:
-        raise EvaluationError("source generation recipe changes task input")
+    recipe = _frozen_recipe(recipe_raw, tasks_path, history.manifest)
     answers_path = attempt / "answers.json"
     answer_raw = capture.read(answers_path)
     answers = Answers.from_bytes(answer_raw)
@@ -296,11 +326,9 @@ def _read_baseline_generation(value: object, authority_path: Path) -> _Generatio
         _object(selection.to_record()["components"])["agent"]
     ).get(entrypoint):
         raise EvaluationError("source generation program identity differs")
-    capture.finish()
+    fingerprints = capture.fingerprints()
     protected = {
-        path: hashlib.sha256(raw).hexdigest()
-        for path, raw in capture.raw.items()
-        if path != authority_path
+        Path(path): digest for path, digest in fingerprints.items() if Path(path) != authority_path
     }
     return _Generation(tasks, answers, answers_path, protected, _object(funding["config"]))
 
@@ -334,6 +362,7 @@ def _sources() -> list[Path]:
                 "answers",
                 "native_pipeline",
                 "native_evaluation",
+                "trial_fence",
                 "candidate_generation",
                 "doctor",
                 "process_observation",
@@ -397,19 +426,28 @@ def _owner_stage(
         "max_calls": 1 if no_model else native["max_calls"],
     }
     if not owner.exists():
-        prepare_gateway(
+        with _final_producer_contract(
             owner,
             selection=selected,
             roots=roots,
             authorization=authority,
-            budget_microusd=cast(int, settings["budget_microusd"]),
-            max_calls=cast(int, settings["max_calls"]),
-            input_files=paths,
-            expected_input_hashes={
-                Path(_text(row["path"])): _text(row["sha256"]) for row in expected_inputs
-            },
+            settings=settings,
             review=review,
-        )
+            inputs=expected_inputs,
+        ):
+            prepare_gateway(
+                owner,
+                selection=selected,
+                roots=roots,
+                authorization=authority,
+                budget_microusd=cast(int, settings["budget_microusd"]),
+                max_calls=cast(int, settings["max_calls"]),
+                input_files=paths,
+                expected_input_hashes={
+                    Path(_text(row["path"])): _text(row["sha256"]) for row in expected_inputs
+                },
+                review=review,
+            )
     record = _read_manifest(owner)
     if (
         record["authorization_path"] != str(authority.path)
@@ -446,9 +484,12 @@ def prepare_evaluation(
         or any(not isinstance(path, Path) for path in input_files)
     ):
         raise EvaluationError("evaluation controls require a bounded ordered Path list")
-    controls = _input_records(input_files, expected_input_hashes)
-    definition, source, release = _definition(descriptor, authorization)
     directory = directory.absolute()
+    controls = _input_records(input_files, expected_input_hashes)
+    expected = trial_fence._include_controls(
+        directory, {Path(row["path"]): row["sha256"] for row in controls}
+    )
+    definition, source, release = _definition(descriptor, authorization)
     _root(directory.parent)
     _path(directory.name)
     roots = [
@@ -458,37 +499,45 @@ def prepare_evaluation(
     roots.append(_generation_directory(definition["source_generation"]))
     if any(directory.is_relative_to(root) or root.is_relative_to(directory) for root in roots):
         raise EvaluationError("evaluation output overlaps selected inputs or original generation")
-    directory.mkdir()
-    for name in ("owners", "completed", "attempts", "staging", "observations"):
-        (directory / name).mkdir()
-    pipeline._write(
-        directory / "context.json",
-        _json(
-            {
-                "format": "buddha.native-evaluation-context.v1",
-                "descriptor": str(descriptor.absolute()),
-            }
-        ),
-    )
-    native_answers = directory / "native-answers.jsonl"
-    pipeline._write(native_answers, source.answers.native_bytes())
-    frozen = source.files | {native_answers: file_hash(native_answers)}
-    available = {_path(_object(release.to_record()["artifacts"])["answers"]): native_answers}
-    _owner_stage(
-        directory,
-        descriptor.absolute(),
-        1,
-        definition,
-        source,
-        release,
-        authorization,
-        review,
-        available,
-        frozen,
-        [],
-        input_files,
-        {row["path"]: row["sha256"] for row in controls},
-    )
+    with trial_fence.work(
+        authorization.path, authorization._terms(), directory=directory, kind="native"
+    ) as trial_controls:
+        for path, digest in trial_controls.items():
+            if path in expected and expected[path] != digest:
+                raise EvaluationError("original trial controls changed before preparation")
+            expected[path] = digest
+        _input_records(list(expected), expected)
+        directory.mkdir()
+        for name in ("owners", "completed", "attempts", "staging", "observations"):
+            (directory / name).mkdir()
+        pipeline._write(
+            directory / "context.json",
+            _json(
+                {
+                    "format": "buddha.native-evaluation-context.v1",
+                    "descriptor": str(descriptor.absolute()),
+                }
+            ),
+        )
+        native_answers = directory / "native-answers.jsonl"
+        pipeline._write(native_answers, source.answers.native_bytes())
+        frozen = source.files | {native_answers: file_hash(native_answers)}
+        available = {_path(_object(release.to_record()["artifacts"])["answers"]): native_answers}
+        _owner_stage(
+            directory,
+            descriptor.absolute(),
+            1,
+            definition,
+            source,
+            release,
+            authorization,
+            review,
+            available,
+            frozen,
+            [],
+            list(expected),
+            {str(path): digest for path, digest in expected.items()},
+        )
     return directory
 
 
@@ -536,7 +585,19 @@ def run_evaluation(directory: Path, *, transport: RawHTTPTransport) -> dict[str,
     if not isinstance(directory, Path) or not isinstance(transport, RawHTTPTransport):
         raise EvaluationError("evaluation requires its original directory and raw transport")
     directory = directory.absolute()
-    with pipeline._exclusive(directory):
+    original = _read_manifest(directory / "owners/1")
+    authority_path = pipeline._absolute(original["authorization_path"])
+    if trial_fence.is_closed(directory):
+        raise EvaluationError("closed trial native work requires passive parent inspection")
+    with (
+        trial_fence.work(
+            authority_path,
+            Authorization(authority_path)._terms(),
+            directory=directory,
+            kind="native",
+        ),
+        pipeline._exclusive(directory),
+    ):
         return _run(directory, transport)
 
 

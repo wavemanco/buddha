@@ -1,0 +1,127 @@
+{
+  "actual_executor_calls": 1,
+  "all_input_pins_unchanged": true,
+  "configuration": {
+    "engine_endpoint_sha256": "30341252ca9aa2b298da11cd8527fdfbf8ab30a2f3b5a3c871188c778b20af30",
+    "host": {
+      "CapDrop": [
+        "ALL"
+      ],
+      "CgroupnsMode": "private",
+      "IpcMode": "none",
+      "LogConfig": {
+        "Config": {},
+        "Type": "none"
+      },
+      "Memory": 536870912,
+      "MemorySwap": 536870912,
+      "NanoCpus": 1000000000,
+      "NetworkMode": "none",
+      "PidMode": "",
+      "PidsLimit": 64,
+      "Privileged": false,
+      "ReadonlyRootfs": true,
+      "SecurityOpt": [
+        "no-new-privileges:true"
+      ],
+      "Tmpfs": {
+        "/scratch": "rw,size=128m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700",
+        "/tmp": "rw,size=16m,noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700"
+      },
+      "UTSMode": ""
+    },
+    "image": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+    "mounts": {
+      "/agent": "C:\\Users\\arvik\\code\\buddha\\runs\\w\\runs\\reviews\\short-child-snapshot-fixture-v1\\agent",
+      "/runner": "C:\\Users\\arvik\\code\\buddha\\runs\\w\\runs\\reviews\\diag\\runner"
+    },
+    "role": "agent"
+  },
+  "configuration_matches_previous_after_only_agent_source_restore": true,
+  "driver_sha256": "6e3359846a71d336264d05ae4f4d29d835189b93c38907ff8212d887b780c477",
+  "elapsed_seconds": 54.45910350000486,
+  "execution": {
+    "cleanup_status": "removed",
+    "container_id": "102e847f365274d7a8a9f0eac015057adebbc421265423cb23df54f788ebd1ea",
+    "elapsed_seconds": 2.308621299918741,
+    "exit_code": 0,
+    "frame_count": 2,
+    "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+    "stderr_bytes": 0,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_bytes": 350
+  },
+  "format": "buddha.source-startup-snapshot-control.v1",
+  "frames": [
+    {
+      "agent_sha256": "9b78ca6ac532b5221ccc1de37105817419840fecded9ab7da8e2abf20c649bab",
+      "runtime_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+      "task_sha256": "8b656a67c27957a554d8267bc7cebd69ec101faae15f31d713e028b55e93dff3",
+      "type": "ready"
+    },
+    {
+      "answers": [
+        "hello",
+        "goodbye"
+      ],
+      "reason": "complete",
+      "status": "complete",
+      "type": "done"
+    }
+  ],
+  "guard": {
+    "denied_events": [],
+    "model_request_frames": 0,
+    "real_paid_calls": 0,
+    "sql_connections": 0
+  },
+  "input_count": 244,
+  "interpretation": "The same299-byte candidate at a fresh verified host path reaches READY and completes with the exact existing diagnostic runner. The earlier retained-source diagnostic reached no READY and recorded EIO. This is a scoped physical-source-location control.",
+  "limits": [
+    "One separately timed invocation is not a randomized causal study, Docker/filesystem root-cause identification, production fix, arbitrary-path guarantee or completed composed search.",
+    "The original failed sources, lineage, owners, holds and incomplete states remain unchanged; no old owner is retried, remounted, resealed or completed.",
+    "The same retained diagnostic runner includes the prior bounded exception instrumentation; production runner bytes are unchanged.",
+    "No Session, Gateway, authorization, C1 answer artifact, completion seal, admission, model call, new allowance or scientific gain is produced.",
+    "The full-output capacity/model-context gate and actual positive composed witness remain open."
+  ],
+  "next_step": "Prospectively version and integrate a verified private source snapshot before each new applicable owner is prepared, then run a fresh composed witness. Keep historical owner roots and reconstruction rules unchanged.",
+  "original_agent_directory": "C:\\Users\\arvik\\code\\buddha\\runs\\w\\runs\\reviews\\p\\scratch\\case-6suxq1rj\\actual-search\\seed-witness\\proposal\\attempts\\0-0\\session\\child",
+  "original_and_snapshot_stat_population_bytes_unchanged": true,
+  "original_child_sha256": "8ce70fb96dba6d32ed48c497913f043ace23651b248e4092511540dbe70a7704",
+  "owned_mount_inspections": [
+    {
+      "non_recursive": true,
+      "phase": "before_start",
+      "raw_sha256": "d0e4ab3de594c368203c29244ee3eebc765244eb6cee0c247a70b299bc9b6a16",
+      "read_only": true,
+      "snapshot_source_matches": true
+    },
+    {
+      "non_recursive": true,
+      "phase": "after_start_attempt",
+      "raw_sha256": "167ed1c6ff08df4fe6f837a41fc888c004e89626669175072fdde5ab014ba445",
+      "read_only": true,
+      "snapshot_source_matches": true
+    }
+  ],
+  "previous_diagnostic_sha256": "123d75f2219358474c7ebbcb80bfbda41c1a1d3759897f029acc9db435e60f58",
+  "raw_inspect_environment": {
+    "command_and_user_match_previous": true,
+    "key_value_mappings_match_previous": true,
+    "raw_array_order_matches_previous": false,
+    "unique_key_value_count": 24
+  },
+  "receipt": "runs/w/runs/reviews/short-child-snapshot-proof-v1.json",
+  "receipt_sha256": "5631e8bbcfaafa9bb46c35b8496e9cfcbc42dc946ccc2007045769896618477f",
+  "retained_runner_pins": {
+    "C:\\Users\\arvik\\code\\buddha\\runs\\w\\runs\\reviews\\diag\\runner\\buddha\\__init__.py": "0857bd60619c1e1c8538fe768cbe82c781bb4e302abc6cf59130f1b17d052230",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\w\\runs\\reviews\\diag\\runner\\buddha\\candidate_worker.py": "b5e1fec0f2f9e3bbf7bf00e9d7ad035812dd704191c591ace74ac134dfb6a2ba",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\w\\runs\\reviews\\diag\\runner\\buddha\\channel.py": "c46d236865b15f1918efa23d961ed7163533c9bbef2b0cec7f61d6f8e95d6e5f",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\w\\runs\\reviews\\diag\\runner\\buddha\\releases.py": "7df7b930a34550f2f3f4069a8ff4af5036166a230c6e07a3f877e9cb3b276974",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\w\\runs\\reviews\\diag\\runner\\buddha\\wire.py": "48f40a71bf10c84dfd1d15f0baef50198cce8a229748355f116ad6a25cab12b4"
+  },
+  "source_map_sha256": "1b0e1ad2858c432d22489d5facfcfee80d6f88ee96b3f708b4abad515f0ce061",
+  "source_snapshot_directory": "C:\\Users\\arvik\\code\\buddha\\runs\\w\\runs\\reviews\\short-child-snapshot-fixture-v1\\agent",
+  "status": "one_source_location_control_passes_production_and_composed_gates_open",
+  "worker_initial_matches_previous": true
+}

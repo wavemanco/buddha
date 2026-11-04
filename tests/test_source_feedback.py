@@ -85,7 +85,7 @@ class SourceFeedbackTests(unittest.TestCase):
         self.assertEqual(result, again)
         self.assertEqual(result["source"], self.h.source.to_record())
         self.assertEqual(result["split"], self.h.record["split"])
-        self.assertEqual(result["feedback"]["format"], "buddha.candidate-development-feedback.v1")
+        self.assertEqual(result["feedback"]["format"], "buddha.candidate-development-feedback.v2")
         rows = result["feedback"]["records"]
         self.assertEqual([row["task_id"] for row in rows], ["1", 1])
         self.assertEqual(
@@ -186,7 +186,10 @@ class SourceFeedbackTests(unittest.TestCase):
         with patch.object(self.h, "execute", side_effect=execute):
             self.assertEqual(self.h.run_screen(directory)["status"], "complete")
         reference = self.h.reference(directory, authority)
-        bundle = self.build_api(self.h.root / "excerpts", reference=reference)
+        from buddha.source_feedback import _build
+
+        # Historical extraction is reconstructed only under its explicit original policy.
+        bundle = _build(self.h.root / "excerpts", reference, full_answers=False)
         for note, provenance in zip(self.notes(bundle), bundle["provenance"]["tasks"], strict=True):
             self.assertEqual([item["position"] for item in note["answers"]], list(range(10)))
             self.assertEqual(note["omitted_answer_positions"], 2)

@@ -1,0 +1,108 @@
+{
+  "format": "buddha.screen-completeness-delivery.v2",
+  "status": "scoped_and_composed_pass_scale_open",
+  "spec": [
+    "DESIGN sections3,7,9",
+    "PLAN IMP-01",
+    "ENG-OBS-01"
+  ],
+  "base": "93f942d2b2804695f0756a23022c4af10aafe3b8",
+  "initial_verification_base": "d3157803db8388d9b2ae5bc8fba135d7334acdf9",
+  "change": "Reuse validated unique complete source; exact LF cardinality replaces redundant full TaskSet reconstruction. Split and all source/row/canonical caps stay strict.",
+  "initial_verification": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\screen-completeness-20261031-v1\\delivery-v1.json",
+    "sha256": "9dd99fedc3d59f4719d442717d4a5415fd345045f3d607ecac9b2b48d0b5d74f"
+  },
+  "red": {
+    "tests": 1,
+    "failures": 1,
+    "errors": 0,
+    "reason": "Before production change, population.call_count 3 != 1; strict constructor count was1.",
+    "log": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\screen-completeness-20261031-v1\\red-cohort-v1.log",
+    "sha256": "b4b1ed532f9c26c7264aafc83c1d48cc5d521bb38c1037023f87ee30654f3629"
+  },
+  "initial_green": {
+    "report": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\screen-completeness-20261031-v1\\green-result-v1.json",
+    "sha256": "61e1e33ff608a6772b1767e0f53e9e83d1feb0067e04bc39f3763d7781fd4b27",
+    "tests": 40,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "cohorts": [
+      {
+        "cohort": "focused",
+        "selection": [
+          "test_screen_completeness.ScreenCompletenessTests",
+          "test_source_screen.SourceScreenTests.test_development_screen_preserves_typed_order_literal_source_and_fresh_views",
+          "test_source_screen.SourceScreenTests.test_full_source_split_and_development_membership_are_not_scalar_claims",
+          "test_source_screen_format.SourceScreenFormatTests",
+          "test_source_screen_local_reuse.SourceScreenLocalReuseTests.test_task_view_reuses_immutable_selected_bytes_per_instance",
+          "test_source_screen_local_reuse.SourceScreenLocalReuseTests.test_thousand_row_controls_materialization_and_preflight_reuse_local_population"
+        ],
+        "tests": 14,
+        "failures": 0,
+        "errors": 0,
+        "skips": 0,
+        "elapsed_seconds": 11.719561400124803
+      },
+      {
+        "cohort": "denials",
+        "selection": [
+          "test_answers.AnswerArtifactTests",
+          "test_policy_study.PolicyStudyTests.test_partial_source_view_cannot_hide_the_heldout_population",
+          "test_policy_study.PolicyStudyTests.test_split_is_complete_disjoint_and_bound_to_exact_source",
+          "test_policy_study.PolicyStudyTests.test_selected_ids_must_be_nonempty_unique_explicit_development_members",
+          "test_policy_study.PolicyStudyTests.test_declared_families_cannot_cross_partitions_or_omit_any_source_id",
+          "test_policy_study.PolicyStudyTests.test_normalized_prompt_duplicates_cannot_leak_across_partitions",
+          "test_policy_study.PolicyStudyTests.test_generation_limits_are_explicit_positive_and_shared_across_arms",
+          "test_policy_study.PolicyStudyTests.test_generation_and_judging_repetitions_have_distinct_bounded_axes"
+        ],
+        "tests": 26,
+        "failures": 0,
+        "errors": 0,
+        "skips": 0,
+        "elapsed_seconds": 0.22706880001351237
+      }
+    ],
+    "qa_commands_passed": 7,
+    "seconds": 59.49731189990416,
+    "all_source_pins_unchanged": true,
+    "source_count": 349,
+    "source_pins_sha256": "ff45677c34c0773f47dceb12f4f55e2263ee84912846680dd7af09e840899e9c"
+  },
+  "separate_reuse_census": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\screen-completeness-20261031-v1\\reuse-census-result-v1.json",
+    "sha256": "d88563a992cf396caf92f90041b1d8ca12ceda3a75149dc2dd797ce3a37530bf"
+  },
+  "composed": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\screen-completeness-20261031-v1\\composition-delivery-v1.json",
+    "sha256": "ffa7f11244c5aaa2b8b575ff4f9a54bae84528d05429f21fc0f18e8039691a05"
+  },
+  "composed_outcome": {
+    "tests": 9,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "affected_static_checks": 5,
+    "seconds": 36.206,
+    "source_pins": 350,
+    "feedback_population_constructions": [
+      57,
+      53
+    ],
+    "full_inspections_each": 1,
+    "finishes_each": 9
+  },
+  "source_sha256": {
+    "buddha/source_screen.py": "2a7d50eccd8598f6ac39320ca6fbd5b0aaab0f7e35623474b499b436de882b58",
+    "tests/test_screen_completeness.py": "8f0e27e29da5f40a9f4d414db3748f2ea6598eca24d48895878aa8a51be99093",
+    "docs/RECONSTRUCTION-COST.md": "0bd817f138be8a9fa68d5b72743d9d3fa5b0ae583ac8d1137ef10512f63d9d4c"
+  },
+  "independent_static_review": "No public-input counterexample found; complete source canonical bytes retain the same length under permutation. No reviewer tests or runtime proof.",
+  "preservation": {
+    "raw_revision_rows": 215,
+    "original_acceptance_tails": 7,
+    "frozen_paid_sources_inputs_and_benchmark": "unchanged"
+  },
+  "remaining": "Full witness and193owner/660operation performance, remaining phases, exact-source hosted CI, outgoing request verification and a fresh reviewed funded handoff; no paid launch cleared."
+}

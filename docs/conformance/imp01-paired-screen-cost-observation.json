@@ -1,0 +1,240 @@
+{
+  "date": "2026-10-24",
+  "evidence": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-paired-screen-cost-invocation-draft-v1.json",
+      "sha256": "1494c4825c50225cb1a4342925f4c4bca0b2df993b26834c026dee796c14c494"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-paired-screen-cost-invocation-v1.json",
+      "sha256": "08299ab31f119754f84d0bcf52ca1af0514c5cdfb191ad40acf1bb5485ec19f7"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\run-imp01-paired-screen-cost-v1.py",
+      "sha256": "a5052be87b04e0ab2aba5abd47687bca61ee44aaca00379658b7b3591a9738fa"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-paired-screen-cost-parameters-v1.json",
+      "sha256": "c8ff881afb44c8d26a3a55a88e3ecdddd10b28cf4420fad99674c609b3e6ed84"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\launch-imp01-paired-screen-cost-v1.py",
+      "sha256": "4bf72aeff78f2c2997a635ef360f2b6d59b5dd6b0b095a595abb976a3e7a89af"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-paired-screen-cost-data-review-v1.json",
+      "sha256": "f7de04baff7728e672ef863e70c425cc3debe3c483724fd60b9d1b52b4a88955"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-reader-cost-comparison-static-review-v1.json",
+      "sha256": "2758cd43e87e115746f8e1bb05423584fef1ac4f2b2f844327d57916566ce5a6"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-paired-screen-cost-baseline-v1.json",
+      "sha256": "d1dffba636c5e7fee5aaf8a22579ce5c31069ec860b7e35042b2c0eec909ff10"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-paired-screen-cost-baseline-v1.outer-result.json",
+      "sha256": "0d0c5058919b0c0a35ca321ed97e1478a8458f707f61a46a25af1aa3d1ca2336"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-paired-screen-cost-baseline-v1.outer.stdout.log",
+      "sha256": "01f7db2ab61b1458dc96ce80d35b77b192a443f7bc94e448117ef5e04f82693e"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-paired-screen-cost-baseline-v1.outer.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-paired-screen-cost-shared-v1.json",
+      "sha256": "f1048cd8a856fc1e1ab04b9140139bf992471e863978809f4faebba718b96eb9"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-paired-screen-cost-shared-v1.outer-result.json",
+      "sha256": "a0d27eeb020424f598d5a21b84390183d5e04ce1364589f524bfaf0503962fe1"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-paired-screen-cost-shared-v1.outer.stdout.log",
+      "sha256": "e68285065b7a984bc4f64e62163b14d0c1782bdada0a10a509ffc9fd44894e6b"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-paired-screen-cost-shared-v1.outer.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "exact_treatment_projection": {
+    "exclusions": "Original paths, run/invocation/operation UUIDs, logical IDs, timestamps and installed-source bindings stay in complete retained provenance; they are not treatment-content equality fields.",
+    "projection": {
+      "agent_component_sha256": "56c5eb31c989e2a02cd3f149fc652789357f2ba42a365aa184e55ae0e6aa7ef6",
+      "answers_payload_sha256": "0103c4c0546e3ed316bcb7a4592a829a65d4474f5edc5382bfdbfb581dd9421a",
+      "generation_config_sha256": "035eb3db5ff2978388a46e47fadb3cc1e0f10236f624062bf4a7db0633adbc08",
+      "runtime_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+      "stages_sha256": "6c1760fe58f2eb388264364914aa6894b381a0d909e19b039bc707469113aa11",
+      "task_file_sha256": "466bdb71565ac90b25227c31dc2114219ede8fca486c995c5fa6e4b5eac4dd69",
+      "wire_content": [
+        {
+          "actual_microusd": 11,
+          "reply_body_sha256": "4452cef429b7449c24cd55bd3c8e99afbf94ea3ccfee16cc4bc6d0a7003621f5",
+          "reply_envelope_sha256": "a3ca2feae91b00144c4c485859f7e7e1073bf184a0a5a18dd860463593aa43d7",
+          "request_body_sha256": "08e13ae72150d0323a16cb8687de6ce259b3bb5dd265cc1f73c0c12f61f8030a",
+          "request_content_sha256": "6fb37b010c830f27b7e0c2a972d24cbf0e1ac58ab698f316c2cb134a693bd6f9",
+          "role": "generation"
+        },
+        {
+          "actual_microusd": 11,
+          "reply_body_sha256": "4452cef429b7449c24cd55bd3c8e99afbf94ea3ccfee16cc4bc6d0a7003621f5",
+          "reply_envelope_sha256": "a3ca2feae91b00144c4c485859f7e7e1073bf184a0a5a18dd860463593aa43d7",
+          "request_body_sha256": "4fd6f09807a109bfcb0dff7ce1ea4db9c42d7af19218dd23b4260428e1111108",
+          "request_content_sha256": "8000984e000d7f7021a84bbc66dfd96091e757c9148ad42fa19c0d1ff1ced1df",
+          "role": "partition"
+        },
+        {
+          "actual_microusd": 11,
+          "reply_body_sha256": "4452cef429b7449c24cd55bd3c8e99afbf94ea3ccfee16cc4bc6d0a7003621f5",
+          "reply_envelope_sha256": "a3ca2feae91b00144c4c485859f7e7e1073bf184a0a5a18dd860463593aa43d7",
+          "request_body_sha256": "4fd6f09807a109bfcb0dff7ce1ea4db9c42d7af19218dd23b4260428e1111108",
+          "request_content_sha256": "8000984e000d7f7021a84bbc66dfd96091e757c9148ad42fa19c0d1ff1ced1df",
+          "role": "score"
+        }
+      ]
+    },
+    "sha256": "1391b767de073586948b145b38fa63cce4eb89cd35f1ec18a93052dbfe21ffc7"
+  },
+  "format": "buddha.paired-screen-cost-delivery.v1",
+  "independent_data_review": {
+    "format": "buddha.paired-screen-cost-data-review.v1",
+    "original_six_cell_pins_unchanged": 225,
+    "original_six_cell_population_unchanged": {
+      "databases": 56,
+      "directories": 470,
+      "files": 640
+    },
+    "result": "No mismatch in actual outer exits/streams/receipts/invocation, complete own canonical results, unchanged original trees,450 file pins plus2 directory roots, exact matched treatment projection and2vs1 counts.",
+    "scope": "Independent source/data-only review, no application/helper execution, SQL, writes or reruns. Root separately rechecked current file inventories and receipts in this publication.",
+    "status": "pass",
+    "summaries": [
+      {
+        "original_report": {
+          "authorization": "C:\\Users\\arvik\\code\\buddha\\runs\\q\\imp01-paired-screen-baseline-v1\\original-928exagl\\screen-authority-0.sqlite3",
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\q\\imp01-paired-screen-baseline-v1\\original-928exagl\\screen-first\\report.json",
+          "sha256": "1730474accdabf0c300c52b29ac5091894f3008d08ed5625b35ae29d53d47e3f"
+        },
+        "process_cpu_seconds": 0.546875,
+        "retained_population": {
+          "databases": 8,
+          "directories": 49,
+          "files": 80
+        },
+        "source_commit": "da073ef15cc30d3e0d59d60f3825c6eab4731890",
+        "untimed_evidence_walks": 2,
+        "variant": "baseline",
+        "wall_seconds": 0.5694292,
+        "whole_process_seconds": 10.881486700032838
+      },
+      {
+        "original_report": {
+          "authorization": "C:\\Users\\arvik\\code\\buddha\\runs\\q\\imp01-paired-screen-shared-v1\\original-czd8lstn\\screen-authority-0.sqlite3",
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\q\\imp01-paired-screen-shared-v1\\original-czd8lstn\\screen-first\\report.json",
+          "sha256": "9ba089696cb407a2ddfc5a243f3db81731f762c4d66c0200d46da77957b3852e"
+        },
+        "process_cpu_seconds": 0.390625,
+        "retained_population": {
+          "databases": 8,
+          "directories": 49,
+          "files": 80
+        },
+        "source_commit": "13974ce16ab92c23e69de038e128fd8696ac5f7d",
+        "untimed_evidence_walks": 1,
+        "variant": "shared",
+        "wall_seconds": 0.3986887,
+        "whole_process_seconds": 9.140980299911462
+      }
+    ],
+    "treatment_sha256": "1391b767de073586948b145b38fa63cce4eb89cd35f1ec18a93052dbfe21ffc7"
+  },
+  "limits": [
+    "Different canonical birth paths, UUIDs and source bindings remain intact; whole experiment histories are not identical.",
+    "Two weak answers and supplied callbacks do not measure production NoveltyBench throughput or scientific quality.",
+    "One warm observation per version, fixed order, nonexclusive machine, uncalibrated guard/timer overhead; no causal or scaling conclusion.",
+    "Costs of full multi-condition studies and the later PR108 review bridge were not measured here.",
+    "No new code/test/dependency/benchmark/financial-schema changes, real provider/container call or selected-source host execution."
+  ],
+  "observations": [
+    {
+      "original_report": {
+        "authorization": "C:\\Users\\arvik\\code\\buddha\\runs\\q\\imp01-paired-screen-baseline-v1\\original-928exagl\\screen-authority-0.sqlite3",
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\q\\imp01-paired-screen-baseline-v1\\original-928exagl\\screen-first\\report.json",
+        "sha256": "1730474accdabf0c300c52b29ac5091894f3008d08ed5625b35ae29d53d47e3f"
+      },
+      "process_cpu_seconds": 0.546875,
+      "retained_population": {
+        "databases": 8,
+        "directories": 49,
+        "files": 80
+      },
+      "source_commit": "da073ef15cc30d3e0d59d60f3825c6eab4731890",
+      "untimed_evidence_walks": 2,
+      "variant": "baseline",
+      "wall_seconds": 0.5694292,
+      "whole_process_seconds": 10.881486700032838
+    },
+    {
+      "original_report": {
+        "authorization": "C:\\Users\\arvik\\code\\buddha\\runs\\q\\imp01-paired-screen-shared-v1\\original-czd8lstn\\screen-authority-0.sqlite3",
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\q\\imp01-paired-screen-shared-v1\\original-czd8lstn\\screen-first\\report.json",
+        "sha256": "9ba089696cb407a2ddfc5a243f3db81731f762c4d66c0200d46da77957b3852e"
+      },
+      "process_cpu_seconds": 0.390625,
+      "retained_population": {
+        "databases": 8,
+        "directories": 49,
+        "files": 80
+      },
+      "source_commit": "13974ce16ab92c23e69de038e128fd8696ac5f7d",
+      "untimed_evidence_walks": 1,
+      "variant": "shared",
+      "wall_seconds": 0.3986887,
+      "whole_process_seconds": 9.140980299911462
+    }
+  ],
+  "original_cohort_comparison": {
+    "application_executed": false,
+    "finding": "Original finite declaration approves only the old absolute consumer path. The new worktree's literal consumer identity is absent and would be rejected by _intrinsic_inputs even active=False. This is source/data traced, not a runtime observation. Separate matched original fixtures avoid altering that guard or declaration.",
+    "original_pins_unchanged": 225,
+    "original_six_cell_current_population": {
+      "databases": 56,
+      "directories": 470,
+      "files": 640
+    }
+  },
+  "preservation": {
+    "all110_prior_raw_plan_rows_preserved": true,
+    "new_paid_allocation": false,
+    "original_acceptance_tails_preserved": true,
+    "paid_calls": 0,
+    "plan_sha256": "294136b67126fb38d7d7e6ecb6e554f7c9e30d1478c0eeb0d30c9e95fbbbcb1c",
+    "primary_plan_mirror_equal": true,
+    "source_and_original_fixture_bytes_unchanged": true
+  },
+  "processes": {
+    "automatic_retries": 0,
+    "count": 2,
+    "execution_limit_seconds_each": 120,
+    "exit_codes": [
+      0,
+      0
+    ],
+    "serial": true,
+    "timed_full_public_calls_each": 1,
+    "untimed_counted_calls_each": 1
+  },
+  "remaining": "Larger reconstruction costs, exact-current-head hosted verification, funded matched improver experiment and independent final/human/transfer work. Four roadmap gates remain open.",
+  "scope": "One bounded warm guarded matched supplied-response public-screen reader observation; larger cost gate remains open.",
+  "separate_repository_directory_roots": 2,
+  "source_cuts": {
+    "baseline": "da073ef15cc30d3e0d59d60f3825c6eab4731890",
+    "shared": "13974ce16ab92c23e69de038e128fd8696ac5f7d"
+  },
+  "source_file_pins": 450,
+  "status": "complete"
+}

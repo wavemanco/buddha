@@ -1,0 +1,22 @@
+{
+  "format": "buddha.plain-reference-comparison-proposal.v1",
+  "status": "prospective_draft_not_adopted_or_an_implemented_importer",
+  "purpose": "Add same-model plain references alongside compatible frozen Buddha results, retaining the original bounded improver question.",
+  "references": ["regenerate", "in-context"],
+  "mandatory_four_condition_run": false,
+  "instrument": "Unchanged selected official NoveltyBench 1.1 release, judges, prompts, schemas and fallback.",
+  "candidate_roles": ["starter", "initial", "evolved"],
+  "selection": "All original prospectively declared roles/starts/repetitions; no favorable posthoc source or mode selection.",
+  "unit": "Complete original prompt-level ten-answer set.",
+  "aggregation": "Average original starts and repetitions within each prompt/role before comparing to each available plain reference; equally weight declared prompts and retain original families.",
+  "missing": "Keep full planned coverage and reasons. No zero imputation or complete-case winner claim; missing required cells or scalars makes the affected comparison incomplete.",
+  "metrics": ["official utility", "official distinctiveness"],
+  "raw_reference_reuse": "One reference observation reused across Buddha conditions remains one observation, not independent duplicated samples.",
+  "inference": "Descriptive paired outcomes only at this proposal stage; no significance, promotion, generalization, human preference or useful-diversity improvement claim.",
+  "sampling": "Treat arbitrary evolved generation as its actual declared procedure. Mode labels alone do not establish independent or in-context compliance.",
+  "resources": "Bind model access/output allowance and disclose all actual calls, billed tokens including reasoning, failures, planning/selection, and per-role/total research costs. Equal ceilings do not mean equal actual consumption.",
+  "provenance": "Require prospective control bindings in original Buddha and reference inputs, original complete owner/authority/seal evidence, matching dataset/task/release/judge/generator settings and a checked passive consumer.",
+  "partial_results": "Retain original stage, reason, coverage, costs and unresolved holds. Never rerun merely to replace an unfavorable outcome.",
+  "human_review": "Existing Buddha-only human selectors do not establish a human comparison against new raw references; any extension is separately declared.",
+  "funding": "No reference allocation or enlargement/reuse of the existing proposed $150 scope. Exact combined workload, analysis, capacity, accounts and funding remain pre-live requirements."
+}

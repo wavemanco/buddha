@@ -1,0 +1,237 @@
+{
+  "format": "buddha.fresh-review-delivery.v1",
+  "status": "complete_unfunded_review_configuration_only",
+  "date": "2026-11-02",
+  "spec": [
+    "PLAN IMP-01/EVAL-02/EVAL-02-H",
+    "DESIGN sections3,5,7,9,10",
+    "REVIEW-TRACKS two-track policy"
+  ],
+  "base_head": "85bd4d4545a15238b1ebe9f38912629808a73159",
+  "library_head": "e76db4ac896f8ccdbd2e7b3f2ad60b8bf99e79b9",
+  "driver": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\fresh-review-preparation\\docs\\conformance\\prepare-fresh-review.py",
+    "sha256": "7d64e07362181a09c44ea65230cd50b6fa9fbf94eb7af139a7ce97deae61a047"
+  },
+  "public_tests": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\fresh-review-preparation\\tests\\test_fresh_review_preparation.py",
+    "sha256": "d4ac7a9838ebf260b946d565740f226896901a18b01ddef1cc0c72a5008123c4"
+  },
+  "input_manifest": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-review-input-graph-20261102-v1\\inputs-v2.json",
+    "sha256": "4b069a068074c272e57f8143f6d4a3ae378888808a6ab2f01e33369317e7d0c8"
+  },
+  "input_graph": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-review-input-graph-20261102-v1\\candidate-inputs-v1.json",
+    "sha256": "ba1d1ef995f30b234cd72cb3243160ad11ca0788e62fc38bbbb02e89953164f9"
+  },
+  "input_classification": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-review-input-graph-20261102-v1\\input-reference-classification-v1.json",
+    "sha256": "16d960f2a70170a712154fbf9fef48786c8515e0d58b6ff4b66905a429f2ecb3"
+  },
+  "original_source_review": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-review-preparation-20261102-v1\\independent-source-review-v1.json",
+    "sha256": "417ae0ebb6b834b170ba10edd7938a03dfc7e82a9fcc249defb90304a87e5919"
+  },
+  "original_manifest_review": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-review-input-graph-20261102-v1\\independent-manifest-review-v1.json",
+    "sha256": "1b3b2af2bea06a5a65b31b94cfb6dfb332eee0b265fd0b26fdf0328924cb3a44"
+  },
+  "corrected_source_manifest_review": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-review-preparation-20261102-v1\\independent-source-manifest-delta-v2.json",
+    "sha256": "c59eb2449d165c017aa236af238f61af4d595962a3f45f3382ea7e6c258d7d9f"
+  },
+  "admitted_inputs": {
+    "immutable_library_public_python_files": 355,
+    "named_files": 118,
+    "metadata_roles": 15,
+    "custody_refs_hash_only": 60,
+    "additional_inherited_static_controls_hash_only": 10,
+    "selected_program_copies": "Byte hashes only; no decode, AST, import or execution.",
+    "old_numerical_or_empirical_results": "Inherited static byte verification only; not parsed or used as numerical input.",
+    "archived_review_leaves": "Exact plan metadata plus unchanged protocol, materials and proposed route; no historical preparation main executed."
+  },
+  "construction": {
+    "parent": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-review-preparation-20261102-v1\\parent-result-v2.json",
+      "sha256": "10645948738d7378cbbed97504625e168df8c55a2e688b8b37af8f9157ab7ed8"
+    },
+    "result": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-fresh-review-20261102-v1\\preparation-result.json",
+      "sha256": "3161025789c53185949a25c667440c6c9f31cb56ac25f001ceaa9fecfe7fd74a"
+    },
+    "intent": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-fresh-review-20261102-v1\\intent.json",
+      "sha256": "5523cdad5e2eb06c17bb7a1d93a0159858f6f9f8ca696cac6cbfb249d38e6f0f"
+    },
+    "configuration_check": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-fresh-review-20261102-v1\\configuration-check.json",
+      "sha256": "7b01863a55336861039bb89571d980bcb4d407f4b3196baf371c6d23149ba9c4"
+    },
+    "seconds": 10.243557800073177,
+    "deadline_seconds": 300,
+    "exit_code": 0,
+    "indexed_files": 12,
+    "plus_result": true,
+    "reviewed_bindings": 163,
+    "source_and_input_pins_preserved_by_driver": true,
+    "funding": "unallocated",
+    "runtime_created": false,
+    "reviewers_packets_rounds_ratings_created": false,
+    "provider_calls": 0,
+    "scope": "Full existing data-only handoff/assessment/materials/selectors/analysis validators; no model/container execution or review collection."
+  },
+  "science": {
+    "retained_development_tasks": 3,
+    "retained_final_tasks": 26,
+    "starts": 2,
+    "development_repetitions": 2,
+    "opportunities_per_arm": 2,
+    "maximum_final_cells": 312,
+    "review_whole_sets": 12,
+    "review_answer_positions": 120,
+    "review_tasks": 4,
+    "review_families": 4,
+    "review_conditions": 4,
+    "roles": [
+      "starter",
+      "initial",
+      "evolved"
+    ],
+    "same_original_sample_and_order": true,
+    "same_criteria_protocol_materials_route_bytes": true,
+    "custody_evidence_before": 60,
+    "custody_evidence_after": 68,
+    "all_non_evidence_custody_fields_unchanged": true,
+    "fresh_exposure_or_reviewer_independence_attestation": false,
+    "synthetic_numerical_check": {
+      "slots": 8,
+      "rows": 312,
+      "expected_means": {
+        "initial_gain": {
+          "utility": 3,
+          "distinct": 2
+        },
+        "evolved_gain": {
+          "utility": 5,
+          "distinct": 3
+        },
+        "improver_effect": {
+          "utility": 2,
+          "distinct": 1
+        }
+      },
+      "rule_outcome": "rule_not_satisfied",
+      "empirical_or_promotion_claim": false
+    },
+    "tracks": "AI-only can proceed without human availability; actual human ratings later reference the same frozen outputs. Plain references are outside this human sample.",
+    "funding": "Old requested limits are retained as unallocated proposal fields, not adopted grants; original allocation and native model/context selection are not transferred."
+  },
+  "verification": {
+    "supplied": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-review-preparation-20261102-v1\\supplied-result-agent-v3.json",
+      "sha256": "255b40cff5497d6173613a6b129a4baa7859eeb2e0b62566ff558e67d6c48b86"
+    },
+    "supplied_scope": "4 tests, zero failures/errors/skips; unittest0.001s, child0.073374s, parent0.182453s under120. No application modules, keys or original target bodies. Pure transformation tests do not exercise main admission.",
+    "quality": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-review-preparation-20261102-v1\\quality-result-v2.json",
+      "sha256": "8bf66f5779a56df9de29d3719dcb492659f10d6443cd508a7e4eef7aae33290b"
+    },
+    "quality_scope": "All8 scoped commands pass in21.143285s;359 public Python pins and in-memory compiles preserved. Ruff/format/types/Bandit/runtime and development audits/diff pass; census discovers2239 occurrences, not a full-suite pass. Declared harness/development audits do not clear archived native-reference dependencies.",
+    "census_total": 2239,
+    "census_counts": [
+      1,
+      587,
+      517,
+      569,
+      565
+    ],
+    "census_sha256": "463c6e65138ff549875d2e18f7f3118e5f42dc1b8e6508f3922b0580bec03d99",
+    "independent_completion": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-review-preparation-20261102-v1\\independent-completion-review-v1.json",
+      "sha256": "9e5d750318faa2fb4993621a184fda967b6efd97c8c3bf9b040a16e348ea6d39"
+    },
+    "independent_completion_scope": "Named safe metadata and indexed hashes only. No task source, P/C program or custody-evidence bodies; no validators/tests/preparation replay. Driver full-input preservation is not represented as an independent full-input attestation.",
+    "plan_preservation": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-review-preparation-20261102-v1\\plan-preservation-v1.json",
+      "sha256": "28934d7e9f367aac48b8e426ef909d7af4e101a640246d280bf778870ebabbbe"
+    }
+  },
+  "retained_failures": {
+    "supplied_loader_stop": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-review-preparation-20261102-v1\\supplied-result-agent-v1.json",
+      "sha256": "d12d10e01a09d9c9fde81c577ae341b7284a1ad27d187f3bd1d01e687672a736"
+    },
+    "loader_reason": "External unittest loader wrongly treated tests as an importable package; no test ran. Corrected external loader retains all guards.",
+    "initial_source_supplied_green": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-review-preparation-20261102-v1\\supplied-result-agent-v2.json",
+      "sha256": "39cf0ba2004936326e1064ef1024f12a068c128fd00e21cc437b450fbb95f85c"
+    },
+    "first_actual_preparation": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-review-preparation-20261102-v1\\parent-result-v1.json",
+      "sha256": "bb4c3c06a7736cafbb412a1d3f85d498bcb5fe6129132425ddfe4f7a333aa574"
+    },
+    "first_actual_seconds": 1.019617599900812,
+    "first_actual_stage": "admission",
+    "first_actual_reason": "AttributeError: dict_keys has no intersection method, retained as sanitized public frame390; no output files created.",
+    "executed_original_driver": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-review-preparation-20261102-v1\\executed-driver-v1.py",
+      "sha256": "17a8f384ab093e88f0bec3e09688c9bd0fd41e8bcd0c5d1204d285ee65e8965e"
+    },
+    "original_input_manifest": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-review-input-graph-20261102-v1\\inputs-v1.json",
+      "sha256": "ed2710882d5df74703baa7cb2d3189a2ed52514dd867a09a661a414f8c16f1d1"
+    },
+    "correction": "Exactly keys().intersection to set(inherited_hashes).intersection; no allowed file, bound, guard or scientific change."
+  },
+  "ci_snapshot": {
+    "recorded_utc": "2026-11-02T23:24:04Z",
+    "pr216": {
+      "passed": 7,
+      "in_progress": 3,
+      "snapshot": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci216-watch-20261102-v1\\snapshot-232404-v1.json",
+        "sha256": "835c2995a459ea0436a97d2e728adaf13cfefcb2667c46358a84748a789e170f"
+      }
+    },
+    "pr217": {
+      "passed": 5,
+      "in_progress": 5,
+      "snapshot": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-primary-preparation-20261102-v1\\ci-snapshot-232404-v1.json",
+        "sha256": "fc1c84223341a2ecda452f0066b147738292c4d6ee100e1b76248112c48dcf58"
+      }
+    },
+    "pr218": {
+      "passed": 0,
+      "in_progress": 10,
+      "snapshot": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-plain-preparation-20261102-v1\\ci-snapshot-232404-v1.json",
+        "sha256": "7ee1bfc20baf1c03aa3b210b5fd037b489e14cd197c8116bb1b9c6f71187ebf4"
+      }
+    },
+    "failures": 0,
+    "actions_reruns_cancellations": 0,
+    "scope": "Bounded point-in-time metadata; no idle inference or new hosted-green claim. This slice has its own hosted gate after publication."
+  },
+  "preservation": {
+    "prior_raw_plan_revision_rows_in_original_order_and_terminators": 227,
+    "original_acceptance_tails": 7,
+    "root_plan_mirror_updated": true,
+    "immutable_primary_and_plain_worktrees_clean": true,
+    "original_paid_sources_owners_replies_grants": "Untouched; no original SQL/history replay or transfer."
+  },
+  "limitations": [
+    "Unfunded, unadopted configuration only; no live command.",
+    "Known trusted Python imports precede process-local guards; not a hostile-code sandbox or atomic host snapshot.",
+    "No fresh custody/independence/pretraining/opaque-program/image/runtime containment attestation.",
+    "No scientific improvement, promotion, human validity, real model review or actual outgoing-request parity claim."
+  ],
+  "next_gates": [
+    "Pending construction-time choice; no new scale attempt before the answer.",
+    "Unchanged900-second comparable-size reader after a completed accepted construction.",
+    "Full current platform/composition CI and actual runtime/native capacity.",
+    "Prospective separation and adoption of the combined primary/plain/review configuration.",
+    "Literal outgoing requests, accounts, prices and separately funded handoff before paid calls."
+  ]
+}

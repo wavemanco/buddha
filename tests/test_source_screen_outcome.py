@@ -12,10 +12,13 @@ from buddha.releases import _json
 
 
 class SourceScreenOutcomeTests(unittest.TestCase):
-    def fixture(self):
-        self.h = fixtures.SourceScreenTests("runTest")
-        self.h.setUp()
-        self.addCleanup(self.h.doCleanups)
+    def fixture(self, *, harness_factory=None):
+        if harness_factory is None:
+            self.h = fixtures.SourceScreenTests("runTest")
+            self.h.setUp()
+            self.addCleanup(self.h.doCleanups)
+        else:
+            self.h = harness_factory()
         engine = self.h.engine
 
         def answers():

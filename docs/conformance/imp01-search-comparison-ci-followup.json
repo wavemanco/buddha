@@ -1,0 +1,364 @@
+{
+  "format": "buddha.source-search-comparison-ci-followup.v1",
+  "finding": "IMP1-FB-CALL-01",
+  "status": "bounded_local_correction_hosted_pending",
+  "date": "2026-10-24",
+  "base_commit": "9bbb532c277e5fea8c478f9e9b9c5208aad68ab3",
+  "source_sha256": "7b679374af7cfed723664cb5c582e0668f6c110ec7c650181fd0e40348c5aa0a",
+  "problem": "Adding comparison=None changed the legacy call form at three bundle callers. Two unchanged existing capacity seams rejected the unexpected keyword before delivering their intended typed stop, producing protocol or generic errors.",
+  "fix": "Explicit conditional calls at every _bundle caller omit comparison when None; declared selectors remain explicit. _bundle, saved formats, old tests/stubs/assertions, evaluator, accounting and selection are unchanged.",
+  "red": "The exact two existing hosted failures reproduce: one failure and two errors in62.459seconds; 234original Python inputs unchanged.",
+  "green": {
+    "methods": 7,
+    "cohorts": 4,
+    "unittest_seconds": {
+      "original_two": 87.567,
+      "optin_preparation_three": 2.407,
+      "legacy_manifest_equality_one": 2.132,
+      "public_root_one": 32.749
+    },
+    "all_exit_codes_zero": true,
+    "all_234_source_pins_unchanged_during_each_check": true
+  },
+  "quality": "Full lint/format, strict Windows/Linux types, Bandit, both dependency audits and standard compilation pass. Compilation cache was external. Only the three intended function ASTs change; all tests and other Python files are unchanged from RED.",
+  "evidence": {
+    "source-search-callshape-red-v1": {
+      "sha256": "6cdab27817dc0cdb715fad28f157707784151d518ca3db577a4b1c9b54b26ed1",
+      "record": {
+        "format": "buddha.local-focused-observation.v1",
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_shared_mutation_witness.py",
+          "-k",
+          "unplanned",
+          "-v"
+        ],
+        "worktree": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\source-search-legacy-call-shape",
+        "returncode": 1,
+        "seconds": 62.717,
+        "input_count": 234,
+        "inputs_sha256": "7a4b8d3ddd1090bf8a4ddb06cdfa6160fd41b94cbcb1efbd6dde04d4d3406851",
+        "inputs_unchanged": true,
+        "changed": [],
+        "log_sha256": "eb2724f417afbd1a520abcd37648b4d26b01f80e852848b5c7c73271fae00027"
+      }
+    },
+    "source-search-callshape-green-v1": {
+      "sha256": "e22baabeb48c46e93de5eb2d51ceabcdb1d1c80ca13497285f2226b86003a40d",
+      "record": {
+        "format": "buddha.local-focused-observation.v1",
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_shared_mutation_witness.py",
+          "-k",
+          "unplanned",
+          "-v"
+        ],
+        "worktree": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\source-search-legacy-call-shape",
+        "returncode": 0,
+        "seconds": 87.792,
+        "input_count": 234,
+        "inputs_sha256": "ba6e1e0b5b70a6673faa9b8bbb252fe5b795330d14cc77eee60bca153f7807dc",
+        "inputs_unchanged": true,
+        "changed": [],
+        "log_sha256": "57d9d818ca6c6979bf6f8425c09daa02e66805f44d75bf061497989eb0c5a3d5"
+      }
+    },
+    "source-search-callshape-optin-preparation-v1": {
+      "sha256": "a5caea8cf35298972dddd3b48c0631e78d8749a7c01c33c420674afd8392366a",
+      "record": {
+        "format": "buddha.local-focused-observation.v1",
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_source_search_comparison.py",
+          "-k",
+          "preparation",
+          "-v"
+        ],
+        "worktree": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\source-search-legacy-call-shape",
+        "returncode": 0,
+        "seconds": 2.868,
+        "input_count": 234,
+        "inputs_sha256": "ba6e1e0b5b70a6673faa9b8bbb252fe5b795330d14cc77eee60bca153f7807dc",
+        "inputs_unchanged": true,
+        "changed": [],
+        "log_sha256": "2daf979b02b7a896b03a0c109695a7e0b92c174b4f1bac2181e63ac9622aacc7"
+      }
+    },
+    "source-search-callshape-legacy-bytes-v1": {
+      "sha256": "57f759480f6dcaae0f0d7ce23c091842c5eab375025b993919f361ca72f1ad2c",
+      "record": {
+        "format": "buddha.local-focused-observation.v1",
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_source_search_comparison.py",
+          "-k",
+          "omitted",
+          "-v"
+        ],
+        "worktree": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\source-search-legacy-call-shape",
+        "returncode": 0,
+        "seconds": 2.586,
+        "input_count": 234,
+        "inputs_sha256": "ba6e1e0b5b70a6673faa9b8bbb252fe5b795330d14cc77eee60bca153f7807dc",
+        "inputs_unchanged": true,
+        "changed": [],
+        "log_sha256": "f9edac45d6ed84c6ccbed48c61002bf0e270f91dd0697d6ed4e9adfdd5213c54"
+      }
+    },
+    "source-search-callshape-optin-root-v1": {
+      "sha256": "69c8b5266571c6eaa067ebeb745cd58268eefdec9c029f04447ec255a586c1fe",
+      "record": {
+        "format": "buddha.local-focused-observation.v1",
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_source_root_feedback.py",
+          "-k",
+          "public_root_packet",
+          "-v"
+        ],
+        "worktree": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\source-search-legacy-call-shape",
+        "returncode": 0,
+        "seconds": 33.181,
+        "input_count": 234,
+        "inputs_sha256": "ba6e1e0b5b70a6673faa9b8bbb252fe5b795330d14cc77eee60bca153f7807dc",
+        "inputs_unchanged": true,
+        "changed": [],
+        "log_sha256": "8384f5ea4281c2bf0db11f35064361d4f0da9acfadd86b69086019cc966cd65f"
+      }
+    },
+    "source-search-callshape-quality-v1": {
+      "sha256": "e09c5b0842dc8688eec7ae3cbaa69cb390c4070e5f8ce6151316586b81cfad11",
+      "record": {
+        "format": "buddha.source-search-callshape-quality.v1",
+        "input_count": 234,
+        "inputs_unchanged": true,
+        "changed": [],
+        "results": {
+          "lint": {
+            "command": [
+              "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-tools-20261024-v1\\Scripts\\python.exe",
+              "-m",
+              "ruff",
+              "check",
+              "buddha",
+              "tests",
+              "agents",
+              "ci_test_shard.py"
+            ],
+            "exit_code": 0,
+            "seconds": 0.237,
+            "log": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-search-callshape-quality-lint-v1.log",
+            "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+          },
+          "format": {
+            "command": [
+              "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-tools-20261024-v1\\Scripts\\python.exe",
+              "-m",
+              "ruff",
+              "format",
+              "--check",
+              "buddha",
+              "tests",
+              "agents",
+              "ci_test_shard.py"
+            ],
+            "exit_code": 0,
+            "seconds": 0.236,
+            "log": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-search-callshape-quality-format-v1.log",
+            "log_sha256": "53411a86092ca04474b9009b0a532f432ee1aa67a2742aa458ff34288b38df73"
+          },
+          "types-windows": {
+            "command": [
+              "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-tools-20261024-v1\\Scripts\\python.exe",
+              "-m",
+              "mypy",
+              "--strict",
+              "--platform",
+              "win32",
+              "--cache-dir",
+              "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\callshape-mypy-win32-v1",
+              "buddha",
+              "agents",
+              "ci_test_shard.py"
+            ],
+            "exit_code": 0,
+            "seconds": 4.601,
+            "log": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-search-callshape-quality-types-windows-v1.log",
+            "log_sha256": "3f34ca3611e1a278b355483a3ce21a6855656e562840ec67626c224657569fef"
+          },
+          "types-linux": {
+            "command": [
+              "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-tools-20261024-v1\\Scripts\\python.exe",
+              "-m",
+              "mypy",
+              "--strict",
+              "--platform",
+              "linux",
+              "--cache-dir",
+              "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\callshape-mypy-linux-v1",
+              "buddha",
+              "agents",
+              "ci_test_shard.py"
+            ],
+            "exit_code": 0,
+            "seconds": 4.5,
+            "log": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-search-callshape-quality-types-linux-v1.log",
+            "log_sha256": "3f34ca3611e1a278b355483a3ce21a6855656e562840ec67626c224657569fef"
+          },
+          "security": {
+            "command": [
+              "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-tools-20261024-v1\\Scripts\\python.exe",
+              "-m",
+              "bandit",
+              "-r",
+              "buddha",
+              "agents",
+              "ci_test_shard.py"
+            ],
+            "exit_code": 0,
+            "seconds": 3.843,
+            "log": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-search-callshape-quality-security-v1.log",
+            "log_sha256": "f99bf86727718b64a9cf1fe51bfc32aa0adbca480f48c8c5b78d930be0ecacd1"
+          },
+          "runtime-audit": {
+            "command": [
+              "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-tools-20261024-v1\\Scripts\\python.exe",
+              "-m",
+              "pip_audit",
+              "--no-deps",
+              "-r",
+              "requirements.txt"
+            ],
+            "exit_code": 0,
+            "seconds": 18.679,
+            "log": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-search-callshape-quality-runtime-audit-v1.log",
+            "log_sha256": "e82148c0c30269ca5a2c35420ece6af011a4faf5a375325d750e243ffdb10625"
+          },
+          "development-audit": {
+            "command": [
+              "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-tools-20261024-v1\\Scripts\\python.exe",
+              "-m",
+              "pip_audit",
+              "--disable-pip",
+              "--no-deps",
+              "--strict",
+              "-r",
+              "requirements-dev.txt"
+            ],
+            "exit_code": 0,
+            "seconds": 2.938,
+            "log": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-search-callshape-quality-development-audit-v1.log",
+            "log_sha256": "e82148c0c30269ca5a2c35420ece6af011a4faf5a375325d750e243ffdb10625"
+          }
+        }
+      }
+    },
+    "source-search-callshape-compile-v1": {
+      "sha256": "a60b6b26fda4058842a177bb066f85f29ceeeb9af4dbedf2af0caefe6dfa5993",
+      "record": {
+        "format": "buddha.source-search-callshape-compile.v1",
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-X",
+          "pycache_prefix=C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\callshape-compile-cache-v1",
+          "-m",
+          "compileall",
+          "-q",
+          "buddha",
+          "tests",
+          "agents",
+          "ci_test_shard.py"
+        ],
+        "exit_code": 0,
+        "seconds": 2.099,
+        "input_count": 234,
+        "inputs_unchanged": true,
+        "changed_during_compile": [],
+        "changed_since_red": [
+          "buddha/source_search.py"
+        ],
+        "changed_top_level_nodes": [
+          "_plan",
+          "_witness_materials",
+          "run_source_search"
+        ],
+        "top_level_node_names_unchanged": true,
+        "source_sha256": "7b679374af7cfed723664cb5c582e0668f6c110ec7c650181fd0e40348c5aa0a",
+        "log": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-search-callshape-compile-v1.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "ci": {
+    "historical_run": 40163471513,
+    "head": "9bbb532c277e5fea8c478f9e9b9c5208aad68ab3",
+    "failed_jobs": [
+      121079652936,
+      121079652878
+    ],
+    "cancellation": {
+      "source": "root agent report",
+      "request": "gh run cancel accepted",
+      "reason": "known-red obsolete run; save remaining Actions minutes",
+      "not_an_idle_60minute_stop": true,
+      "other_valid_PR130_run_untouched": true,
+      "terminal_job_cancellation_not_independently_asserted_here": true
+    }
+  },
+  "historical_logs": [
+    "source-search-comparison-ci-run40163471513-job121079652936-full.log",
+    "source-search-comparison-ci-run40163471513-job121079652878-full.log"
+  ],
+  "publication": "Correct existing ready PR131 with a forward commit; no development merge or new PR for this follow-up. Fresh exact-head hosted CI remains required.",
+  "preservation": {
+    "format": "buddha.improver-study-comparison-preservation.v1",
+    "source_evidence_sha256": "a00f60b16894b5ac725564e920ef0f27cc9f6f9ffdf3d2600f32a2888f674017",
+    "captured_files": 451,
+    "changed": [],
+    "unchanged": true,
+    "paid_calls": 0
+  },
+  "limits": [
+    "No expensive full controller lifecycle rerun or full suite/hosted success is claimed.",
+    "New root check verifies the public comparison path; the existing two unchanged regressions verify legacy typed capacity and lazy/no-owner behavior."
+  ],
+  "paid_calls": 0,
+  "original_runs_mutated": false,
+  "new_spending_allocation": false
+}

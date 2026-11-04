@@ -20,6 +20,7 @@ from buddha.ledger import (
     _schema_signature,
 )
 from buddha.provider import Reply
+from buddha.releases import _parents
 
 MAX_MANIFEST_BYTES = 32 * 1024**2
 MAX_LEDGER_BYTES = 512 * 1024**2
@@ -77,7 +78,7 @@ def _amount(value: object, name: str) -> int:
 
 def _plain(path: Path) -> None:
     """Reject links before resolving any component, including Windows junctions."""
-    for component in (path, *path.parents):
+    for component in (path, *_parents(path)):
         information = component.lstat()
         if stat.S_ISLNK(information.st_mode) or (
             getattr(information, "st_file_attributes", 0)

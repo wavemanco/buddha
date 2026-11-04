@@ -13,9 +13,10 @@ from pathlib import Path
 from typing import cast
 
 from buddha import native_pipeline as pipeline
-from buddha.doctor import _authority, _Busy, _Unsupported
+from buddha.candidate_generation import _recorded_sources
+from buddha.doctor import _authority, _Busy, _Capture, _Unsupported
 from buddha.gateway_history import read_gateway_history
-from buddha.native_evidence import NativeEvidence, authority_observation
+from buddha.native_evidence import NativeEvidence, _adopt_capture, authority_observation
 from buddha.releases import MAX_JSON_BYTES, Selection, _digest, _json, _load, _object, _path
 
 _CLAIM = (
@@ -53,9 +54,16 @@ def _prefix(
     expected = {
         pipeline._sha(
             [
-                "buddha.candidate-improvement-call.v1",
+                "buddha.candidate-improvement-call.v2"
+                if recipe["format"] == "buddha.candidate-improvement.v2"
+                else "buddha.candidate-improvement-call.v1",
                 descriptor_sha256,
                 parent,
+                *(
+                    [recipe["parent_agent_sha256"]]
+                    if recipe["format"] == "buddha.candidate-improvement.v2"
+                    else []
+                ),
                 feedback_sha256,
                 ordinal,
             ]
@@ -97,6 +105,8 @@ def collect_candidate_improvement(
     *,
     authorization: Path,
     expected_report_sha256: str | None = None,
+    sink: _Capture | None = None,
+    _feedback_screen: object = None,
 ) -> dict[str, object]:
     """Reconstruct complete custody, or verify one explicitly pinned publication."""
     from buddha import candidate_improvement as stage
@@ -110,6 +120,12 @@ def collect_candidate_improvement(
             pipeline._absolute(str(directory)),
             pipeline._absolute(str(authorization)),
         )
+        if sink is not None and (
+            type(sink) is not _Capture or not directory.is_relative_to(sink.root)
+        ):
+            raise stage.CandidateImprovementError(
+                "proposal capture requires its original containing observation"
+            )
         reader = NativeEvidence(
             directory, authorization, error_type=stage.CandidateImprovementError
         )
@@ -165,7 +181,9 @@ def collect_candidate_improvement(
         bindings = reader._bindings(owner)
         # Require the complete original installed helper closure as metadata;
         # retired producer/helper paths are never opened or re-inventoried here.
-        source_names = {path.name for path in stage._sources()}
+        source_names = {
+            path.name for path in _recorded_sources(stage._sources(), owner.manifest["core"])
+        }
         source_prefixes = {
             Path(path).parent
             for path in bindings
@@ -182,6 +200,11 @@ def collect_candidate_improvement(
             runtime_sha256,
             provenance_sha256,
             _object(owner.manifest["profiles"]),
+            **(
+                {"_feedback_screen": _feedback_screen}
+                if _feedback_screen is not None and sink is None
+                else {}
+            ),
         )
         totals = _prefix(
             reader,
@@ -252,12 +275,16 @@ def collect_candidate_improvement(
                 },
             }
         current = authority_observation(reader.capture, authorization, funding)
+        detached = recipe["format"] == "buddha.candidate-improvement.v2"
         result: dict[str, object] = {
-            "format": "buddha.candidate-improvement-stage-report.v1",
+            "format": "buddha.candidate-improvement-stage-report.v2"
+            if detached
+            else "buddha.candidate-improvement-stage-report.v1",
             "status": "complete",
             "disposition": outcome["disposition"],
             "reason": outcome["reason"],
-            "parent_agent_sha256": selection.agent_sha256,
+            "parent_agent_sha256": recipe["parent_agent_sha256"],
+            **({"improver_agent_sha256": selection.agent_sha256} if detached else {}),
             "stage_seal_sha256": seal_sha256,
             "outcome": outcome,
             "improvement": improvement,
@@ -290,7 +317,10 @@ def collect_candidate_improvement(
             raise stage.CandidateImprovementError(
                 "proposal result exceeds its bounded output ceiling"
             )
-        reader.capture.finish()
+        if sink is None:
+            reader.capture.finish()
+        else:
+            _adopt_capture(reader.capture, sink)
         return _load(_json(result))
     except (
         ValueError,
@@ -303,6 +333,8 @@ def collect_candidate_improvement(
         _Busy,
         _Unsupported,
     ) as error:
-        if isinstance(error, stage.CandidateImprovementError):
+        from buddha.source_feedback import SourceFeedbackTooLarge
+
+        if isinstance(error, (stage.CandidateImprovementError, SourceFeedbackTooLarge)):
             raise
         raise stage.CandidateImprovementError("proposal evidence is invalid or changed") from None

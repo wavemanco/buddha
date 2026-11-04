@@ -1,0 +1,236 @@
+{
+  "format": "buddha.fresh-request-profile-delivery.v1",
+  "date": "2026-11-02",
+  "status": "prepared_profile_synthetic_body_compatibility_passed",
+  "spec": [
+    "PLAN IMP-01/EVAL-02 request preflight",
+    "DESIGN sections5,7,9",
+    "REQUEST-SETTINGS frozen official settings"
+  ],
+  "base_head": "f9dc94ce0cd9ff424e966d14970191c41384f4d9",
+  "upstream_revision": "64a23be6b18ec1dacc298830aab276061b6e143c",
+  "previous_goal_turn": "progress: PR219 published",
+  "diagnostic": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\fresh-request-profile-check\\docs\\conformance\\check-fresh-request-profiles.py",
+    "sha256": "504534f1bafb760a8df6b8579c74bdcb335d3bad592ccafc289e63a7c019aa34"
+  },
+  "static_review": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-request-profile-check-20261102-v1\\independent-static-review-v1.json",
+    "sha256": "6773ecf4dde4eda94132f539622de738ddf701bda0493a7a688169f6f303dc15"
+  },
+  "observation": {
+    "parent": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-request-profiles-20261102-v1\\parent-result-v1.json",
+      "sha256": "67950a7a1a7ada76628546a9b9f839c2ade3361df652155e5545b4c2368d9e30"
+    },
+    "result": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-request-profiles-20261102-v1\\stdout-v1.json",
+      "sha256": "71dc802e1f43f6787993bd7baeac1c373b9fd72dae7ac3a2dfb111e79993d626"
+    },
+    "deadline_seconds": 120,
+    "seconds": 0.36357290018349886,
+    "exit_code": 0,
+    "timed_out": false,
+    "child_joined": true,
+    "key_environment_forwarded": false,
+    "public_source_files_before_after_equal": 360,
+    "exact_input_count": 6,
+    "input_roles": [
+      "one prepared profile",
+      "two plain generation recipes",
+      "two plain baseline descriptors",
+      "one public native SDK-capture fixture"
+    ],
+    "named_input_before_after_checks_passed": true,
+    "scope": "Trusted pure-function diagnostic with process/network/SQL audit refusal. No hostile-code sandbox, transport, owner, paid request, actual answer, model review or original history access."
+  },
+  "profile_check_result": {
+    "format": "buddha.fresh-request-profile-check.v1",
+    "status": "pass",
+    "input_sha256": {
+      "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-fresh-primary-20261102-v2\\components\\host\\profiles.json": "a582e97b86e3d651b1c7c6a6aa296adb370c8f7c33dde8f36edc2a9702878a31",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\fresh-request-profile-check\\tests\\fixtures\\native_judges.json": "d4ca7e838e9d769abb44e5215c81aca52bfda4a99a9c5a2fff4722fc46d0da99",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-fresh-plain-20261102-v1\\regenerate\\generation.json": "4c603dd6ddb133cc4241b3edb72e5bb4562b12a9fef1f790eabe4f558a83ca8c",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-fresh-plain-20261102-v1\\regenerate\\baseline.json": "09b2f58a4ff6398c60c7d17abb015540912bea6bf1bdb26e1fcd761833ecad10",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-fresh-plain-20261102-v1\\in-context\\generation.json": "793261f71ef752e2f01c0902b3f67eedb8b4a604b2515868481b5c6c4149074f",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-fresh-plain-20261102-v1\\in-context\\baseline.json": "6877f4803a4e3a429e88f40530a7d5ac77334bf62e9dcbfb0747cb126df30acd"
+    },
+    "constructor_source_sha256": {
+      "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\fresh-request-profile-check\\agents\\frozen_seed.py": "2b87bfe0d3c97ee45db2d45260985ffe0234eca93967f4689fb7c59f82603921",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\fresh-request-profile-check\\buddha\\gateway.py": "e93e9a3bb5b0aa2dedccd92df78116021eab709523bb777395fd9f13bb936706",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\fresh-request-profile-check\\buddha\\reference.py": "36356c8a25dae3501014513095cb6f838c4ae54b02a129bdffc4a5cb2dfa6f35"
+    },
+    "accepted_synthetic_requests": [
+      {
+        "route": "regenerate.first",
+        "model": "gpt-5.6-luna",
+        "body_sha256": "70387c8a37aed709e5538912360ba3cfdca46f8e072d8990fee10d3fc8142160",
+        "profile": "seed"
+      },
+      {
+        "route": "regenerate.later",
+        "model": "gpt-5.6-luna",
+        "body_sha256": "70387c8a37aed709e5538912360ba3cfdca46f8e072d8990fee10d3fc8142160",
+        "profile": "seed"
+      },
+      {
+        "route": "in-context.first",
+        "model": "gpt-5.6-luna",
+        "body_sha256": "70387c8a37aed709e5538912360ba3cfdca46f8e072d8990fee10d3fc8142160",
+        "profile": "seed"
+      },
+      {
+        "route": "in-context.later",
+        "model": "gpt-5.6-luna",
+        "body_sha256": "be096d8fd2906a18787216fe1edc0d9cc4af40797bb7095c7a1ee21d60e9c73f",
+        "profile": "seed"
+      },
+      {
+        "route": "grouping",
+        "model": "gpt-5.6-luna",
+        "body_sha256": "48806fcec72249317aaea709da4e5432e12ddf6de514c7d6ffcf27de713e1f84",
+        "profile": "grouping"
+      },
+      {
+        "route": "quality",
+        "model": "claude-opus-5",
+        "body_sha256": "f5ceffb2e25c28f27e1494d9dd022a06dc0bfc86e58ed0656c117eff9cf9ae9f",
+        "profile": "quality"
+      },
+      {
+        "route": "fallback",
+        "model": "claude-sonnet-5",
+        "body_sha256": "00509f035387c846301a426fa5db9be56944d6103e2bb09cc18217911b3d7189",
+        "profile": "fallback"
+      }
+    ],
+    "rejected_mutants": [
+      "regenerate:effort",
+      "regenerate:cap",
+      "regenerate:model",
+      "regenerate:temperature",
+      "regenerate:omit_effort",
+      "regenerate:omit_cap",
+      "in-context:effort",
+      "in-context:cap",
+      "in-context:model",
+      "in-context:temperature",
+      "in-context:omit_effort",
+      "in-context:omit_cap",
+      "grouping:model",
+      "grouping:temperature",
+      "grouping:effort",
+      "grouping:cap",
+      "grouping:omit_format",
+      "quality:model",
+      "quality:temperature",
+      "quality:effort",
+      "quality:cap",
+      "quality:omit_thinking",
+      "fallback:model",
+      "fallback:temperature",
+      "fallback:effort",
+      "fallback:cap",
+      "fallback:omit_thinking"
+    ],
+    "proposal_profile": {
+      "model": "gpt-6.1-sol",
+      "max_output_tokens": 32768,
+      "reasoning_effort_required": null,
+      "authoring_request_emitted_or_checked": false
+    },
+    "provider_calls": 0,
+    "scope": "Pinned profile/synthetic-body compatibility only; no P/C execution, installed SDK/fallback trigger/account/price/runtime/custody or live-clearance claim."
+  },
+  "interpretation": {
+    "positive_synthetic_bodies": 7,
+    "rejected_incorrect_variants": 27,
+    "joins": [
+      "Both plain descriptor paths/task references agree with their pinned recipes.",
+      "Generation/native host roots and selection inventories bind actual a582 profiles.json; no selected root walk.",
+      "Both generation selections bind seed.py to current public frozen_seed.py2b87.",
+      "Native profile mappings select grouping,quality,fallback for Luna,Opus,Sonnet."
+    ],
+    "sampling": "Independent first/later and in-context first hashes agree; in-context later differs and preserves three supplied earlier answers including an empty one.",
+    "judge_bodies": "Complete JSON equality to pinned public capture fixture; explicit Sonnet changes model only, without installed SDK execution or refusal-trigger checking.",
+    "generator": "Prepared Luna LOW4096, empty instructions, standard/default tier. Models remain configurable; this is one frozen choice.",
+    "distinctiveness": "Luna structured format and stream:false; effort/output cap/temperature omitted.",
+    "utility": "Opus/explicit Sonnet adaptive HIGH16000 and official structured format.",
+    "code_authoring": "Profile inspected separately without requiring LOW; no authoring request produced or checked."
+  },
+  "quality": {
+    "evidence": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-request-profiles-20261102-v1\\quality-result-v1.json",
+      "sha256": "34f9179489666be0f363270f83bcce3e8822ef2e0cb060fe2e83274625c6c345"
+    },
+    "all_eight_commands_passed": true,
+    "seconds": 26.37851390009746,
+    "public_python_files_compiled_in_memory": 360,
+    "public_source_pins_preserved": true,
+    "census_total": 2239,
+    "census_sha256": "463c6e65138ff549875d2e18f7f3118e5f42dc1b8e6508f3922b0580bec03d99",
+    "scope": "Ruff/format includes new diagnostic. Strict mypy and Bandit retain configured production paths, excluding conformance diagnostic/tests. Diagnostic receives lint/format/in-memory compile/static review and actual34body checks. Declared harness/development audits do not clear archived native environments. Discovery is not full-suite/hosted success."
+  },
+  "independent_completion": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-request-profile-check-20261102-v1\\independent-completion-review-v1.json",
+    "sha256": "5c47ac31f97bc2613a08edef2c4b6e2930aaa4ca9e553aaf0200eff1459ec050"
+  },
+  "independent_completion_scope": "Safe result/parent/quality and public constructor/fixture bytes only; no five prepared config bodies reopened, no diagnostic/test/validator rerun. Body-hash relationships and exact denial labels independently checked.",
+  "ci_snapshot": {
+    "recorded_utc": "2026-11-02T23:48:07Z",
+    "prs": {
+      "216": {
+        "passed": 8,
+        "running": 2,
+        "snapshot": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci216-watch-20261102-v1\\snapshot-234807-v1.json",
+          "sha256": "89dc7d5c3c2dff3a76c822a777ad88823b4309a64c13608f505aff7aa91309e7"
+        }
+      },
+      "217": {
+        "passed": 5,
+        "running": 5,
+        "snapshot": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-primary-preparation-20261102-v1\\ci-snapshot-234807-v1.json",
+          "sha256": "e1a01426ccadbfac8c5dddc4fdd693f9ebbdac23d501c20da776b3f6b0a9d836"
+        }
+      },
+      "218": {
+        "passed": 3,
+        "running": 7,
+        "snapshot": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-plain-preparation-20261102-v1\\ci-snapshot-234807-v1.json",
+          "sha256": "eb7f994087244fdf5e7ef54bc3c82827aabeea0badfe37ff7f9d860e6bcfcbaa"
+        }
+      },
+      "219": {
+        "passed": 0,
+        "running": 10,
+        "snapshot": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci219-watch-20261102-v1\\snapshot-234807-v1.json",
+          "sha256": "96a149279c1e5194165cd71354bd14581d842b099c6ddba069c870f06e514272"
+        }
+      }
+    },
+    "failures": 0,
+    "scope": "Point-in-time metadata only; no idle inference, rerun, cancellation or full-platform claim. New diagnostic slice retains its own hosted gate."
+  },
+  "plan_preservation": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-request-profiles-20261102-v1\\plan-preservation-v1.json",
+    "sha256": "db97d1cd039a435b14d6ce21a1ff18e901edd82d6ba5a3436bd184bcc04fd0d1"
+  },
+  "limitations": [
+    "Prepared-profile/synthetic-body compatibility only; actual P/C emitted requests and arbitrary evolved code behavior remain unmeasured at this new preparation.",
+    "Reference constructors/fixture equality is not installed native SDK or end-to-end wire execution. Earlier57helper/session/HTTP checks retain their separate scope.",
+    "Explicit fallback-body compatibility does not test refusal-only fallback triggering.",
+    "No fresh custody/exposure/independence/account/price/capacity/runtime attestation.",
+    "No funding transfer/allocation, scientific result or paid command.",
+    "Public-source before/after pins are not an atomic host snapshot."
+  ],
+  "next": [
+    "Pending construction-time choice; no new scale attempt while unanswered.",
+    "Full hosted/platform composition, completed comparable-size history and unchanged900-second reader.",
+    "Prospective adoption/separation, actual P/C/native outgoing behavior, runtime/capacity/accounts/prices.",
+    "Separately approved fresh funding and checked handoff before paid calls."
+  ]
+}

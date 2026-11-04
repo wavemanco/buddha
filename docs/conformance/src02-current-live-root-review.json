@@ -1,0 +1,227 @@
+{
+  "basis": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-current-live-passive-verification-v2.json",
+      "sha256": "a00f60b16894b5ac725564e920ef0f27cc9f6f9ffdf3d2600f32a2888f674017"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-current-live-root-custody-v2.json",
+      "sha256": "1e5ac8a5b523535e570596895fba90bf9af6678334769d6dcce8e3b2a67ff34d"
+    }
+  ],
+  "decisions": [
+    {
+      "decision": "established",
+      "outcome_name": "operational_completion",
+      "reason": "Original complete report, all29 inactive original owners,90 completed replies,80 answers,3 passing capacity checkpoints and2 passing validity witnesses.0 held."
+    },
+    {
+      "decision": "established",
+      "original_owners": [
+        "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed-witness\\proposal\\owners\\0",
+        "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\proposal\\owners\\0",
+        "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\witness\\proposal\\owners\\0"
+      ],
+      "outcome_name": "actual_model_authorship",
+      "reason": "Each original complete provider source field exactly matches the materialized child, private copy and source bundle identity; parent literal source and all30 ordered complete feedback answers match original measured outputs.",
+      "roles": [
+        "W0",
+        "C",
+        "W1"
+      ]
+    },
+    {
+      "changed_function_or_branch": "generate(): repeated size=min(3,remaining) JSON-array generation and extraction replaces P per-answer callback loop under the actual in-context config.",
+      "decision": "established",
+      "observable_executed_use_evidence": "On every original C task,4 callbacks return3/3/3/1 JSON strings; their flattened literal outputs exactly match the ten saved answers. No malformed-batch fallback occurred.",
+      "outcome_name": "task_procedure_change",
+      "owner_paths": [
+        "iterations/0/screen/tasks/0/generation/owners/0",
+        "iterations/0/screen/tasks/1/generation/owners/0",
+        "iterations/0/screen/tasks/2/generation/owners/0"
+      ],
+      "reason_and_limitations": "This proves the changed normal path ran on the3declared tasks, not fallback behavior, general competence or a score gain.",
+      "role": "C",
+      "source_ranges": {
+        "C.generate": {
+          "end": 190,
+          "start": 157
+        },
+        "P.generate": {
+          "end": 205,
+          "start": 196
+        }
+      }
+    },
+    {
+      "changed_function_or_branch": "C._evidence() parses complete measured notes and C.propose_improvement() attaches computed measurement_index to the original proposal payload; P has no such computation/payload field.",
+      "decision": "established",
+      "observable_executed_use_evidence": {
+        "W1_generation": {
+          "answers_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\witness\\generation\\attempts\\0-0\\session\\answers.json",
+          "answers_sha256": "be2305e71d14bb617ccf6aacb485da60e4ca3a81f83daa932c6b42edb3544b74",
+          "callback_count": 1,
+          "count": 10,
+          "literal_unique": 10,
+          "role": "W1",
+          "stage": "iterations/0/witness/generation",
+          "task_id": "curated-0"
+        },
+        "W1_literal_source_match": true,
+        "measurement_index": [
+          {
+            "distinct": 10,
+            "invalid_metrics": [],
+            "missing_scores": 0,
+            "quality_status": "scored",
+            "recorded_cost_microusd": 115507,
+            "score_range": [
+              6,
+              8
+            ],
+            "scored_answers": 10,
+            "task_id": "curated-0",
+            "utility": 6.741977015386745
+          },
+          {
+            "distinct": 2,
+            "invalid_metrics": [],
+            "missing_scores": 8,
+            "quality_status": "scored",
+            "recorded_cost_microusd": 26800,
+            "score_range": [
+              7,
+              8
+            ],
+            "scored_answers": 2,
+            "task_id": "curated-47",
+            "utility": 3.0471894789165463
+          },
+          {
+            "distinct": 1,
+            "invalid_metrics": [],
+            "missing_scores": 9,
+            "quality_status": "scored",
+            "recorded_cost_microusd": 14646,
+            "score_range": [
+              7,
+              7
+            ],
+            "scored_answers": 1,
+            "task_id": "curated-97",
+            "utility": 1.5684063494423397
+          }
+        ]
+      },
+      "original_owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\witness\\proposal\\owners\\0",
+      "outcome_name": "changed_used_improver",
+      "reason_and_limitations": "The original C-owned proposal includes C measurements and all30 literal answers, produces the literal changed W1 source, and original W1 generation returns10first-task answers. This does not prove that the model used the index causally or that the improver is more effective.",
+      "role": "C",
+      "source_ranges": {
+        "C._evidence": {
+          "end": 216,
+          "start": 196
+        },
+        "C.propose_improvement": {
+          "end": 275,
+          "start": 224
+        },
+        "P.propose_improvement": {
+          "end": 323,
+          "start": 243
+        }
+      }
+    },
+    {
+      "decision": "established",
+      "outcome_name": "role_scoped_bounded_validity",
+      "reason": "Original W0/W1 reports passed under unchanged enforced callable/copy/capacity/host-model-budget/sandbox controls. This frozen validity scope does not certify semantic task compliance or universal mutation competence."
+    },
+    {
+      "decision": "established",
+      "measurements": [
+        {
+          "admission": {
+            "eligible": true,
+            "mean_distinct": 7.333333333333333,
+            "mean_utility": 5.993768036254777,
+            "reasons": []
+          },
+          "candidate_id": "22cd302a8c12e05c5fd9bb95389f5880e713a027e60a0206799e9c4fa2f48eeb",
+          "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed",
+          "status": "complete",
+          "tasks": [
+            {
+              "distinct": 10,
+              "task_id": "curated-0",
+              "utility": 7.647300365066206
+            },
+            {
+              "distinct": 2,
+              "task_id": "curated-47",
+              "utility": 3.0471894789165463
+            },
+            {
+              "distinct": 10,
+              "task_id": "curated-97",
+              "utility": 7.2868142647815795
+            }
+          ]
+        },
+        {
+          "admission": {
+            "eligible": true,
+            "mean_distinct": 4.333333333333333,
+            "mean_utility": 3.785857614581877,
+            "reasons": []
+          },
+          "candidate_id": "fb05dfb7df368418bda13c7db20f06846ea27d96b7bee7ed2b3eff6aef5c46fb",
+          "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen",
+          "status": "complete",
+          "tasks": [
+            {
+              "distinct": 10,
+              "task_id": "curated-0",
+              "utility": 6.741977015386745
+            },
+            {
+              "distinct": 2,
+              "task_id": "curated-47",
+              "utility": 3.0471894789165463
+            },
+            {
+              "distinct": 1,
+              "task_id": "curated-97",
+              "utility": 1.5684063494423397
+            }
+          ]
+        }
+      ],
+      "outcome_name": "official_development_performance",
+      "reason": "C is lower on both common-task means; P is the numerical frontier. Admission by latest means eligible, not superior."
+    },
+    {
+      "decision": "not_established",
+      "outcome_name": "useful_diversity_or_improver_effectiveness",
+      "reason": "One previously seen3task development screen, negative mean differences and no controlled improver comparison, heldout results or human ratings."
+    }
+  ],
+  "feedback_interpretation_limit": "measurement_index.missing_scores=8/9 on C binary/digit tasks counts official null non-head positions. All distinct group heads are scored; these are not8/9 missing API judgments. Keep official scoring unchanged.",
+  "format": "buddha.current-source-root-findings.v1",
+  "fresh_mechanism_review": "Separate original record is still awaited before reconciliation or gate closure.",
+  "human_rating": false,
+  "literal_source_before_after_hashes": {
+    "C": "4196cd29ffa76c6959e6f678a8286b1fde5b56e6a34a97dcf68787e1f22b3a43",
+    "P": "77cfa68f6b3c6996fd503e1ce6f7a964eb57abdb8bde98f6761de5f6e298ff4f",
+    "W1": "1488d6348158dfe395f873ca2d830cbd1aa91c11b788900dd93f3ac5450d2e12"
+  },
+  "method": "Original passive reconstruction plus literal raw request/reply, source/private-copy, complete feedback and output joins; selected code stays data. No adaptive run or instrumentation.",
+  "paid_provider_calls_in_review": 0,
+  "recorded_at_utc": "2026-10-25T02:08:52.745790+00:00",
+  "reviewer_role_and_actual_identity": {
+    "exact_serving_model_identifier": "not exposed",
+    "human_rating": false,
+    "identity": "Codex root in this chat",
+    "role": "root evidence/custody verifier"
+  }
+}

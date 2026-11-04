@@ -1,0 +1,147 @@
+{
+  "format": "buddha.reliability-reuse-decision.v1",
+  "date": "2026-10-30",
+  "plan_revision": 208,
+  "basis_head": "69e765ed34b99475a50db834ee2a231ffac397d9",
+  "status": "bounded_decision_complete_recovery_unproven",
+  "spec_sections": [
+    "DESIGN3",
+    "DESIGN5",
+    "DESIGN7",
+    "DESIGN9",
+    "DESIGN10",
+    "IMP-01",
+    "ENG-INFRA-01"
+  ],
+  "decision": {
+    "current_dbos_adoption": false,
+    "reason": "The tested wrapper removes zero production code and leaves internal study reconstruction and domain checks unchanged.",
+    "reuse_now": [
+      "Existing full-phase coordinator",
+      "Existing checked one-action dispatch and work leases",
+      "Existing same-owner native/candidate attempt and completion code"
+    ],
+    "park_unless_required": [
+      "Generic third-host-version writer/adoption machinery",
+      "Inspect viewer/export side project",
+      "Distributed workflow service or second coordinator"
+    ],
+    "next": "Reconcile cleanup/endpoint and prove the targeted failed-screen retry/reentry under the selected existing source path. No paid command cleared."
+  },
+  "probe": {
+    "version": "DBOS3.4.0",
+    "python": "3.13",
+    "os": "native Windows",
+    "database": "isolated SQLite",
+    "timebox_minutes": 15,
+    "started_utc": "2026-10-31T00:03:35Z",
+    "finished_utc": "2026-10-31T00:10:57.933371+00:00",
+    "elapsed_seconds": 442.933371,
+    "final_five_child_sequence_seconds": 10.349,
+    "sequence_qualification": "Excludes setup and separately retained original startup timeout.",
+    "observations": {
+      "completed_step_restart": {
+        "saved_step_executions": 1,
+        "unfinished_step_executions": 2,
+        "distinct_processes": true,
+        "artifact_hash_exact": true
+      },
+      "unknown_effect_restart": {
+        "framework_step_executions": 2,
+        "fake_physical_sends": 1,
+        "existing_gateway_status": "unknown",
+        "spent_microusd": 0,
+        "held_microusd": 300,
+        "operation_count": 1,
+        "cap_microusd": 10000,
+        "available_microusd": 9700,
+        "remaining_calls": 19,
+        "restart_terminal_reason": "BudgetExceeded",
+        "separate_same_call_refusal": {
+          "type": "BudgetExceeded",
+          "reason": "an unreviewed unknown operation has halted shared spending"
+        },
+        "guard_authority": "existing Buddha Gateway, not DBOS"
+      },
+      "dependency_drift": {
+        "denied": true,
+        "exception": "GatewayError",
+        "reason": "selected component inventory changed",
+        "fake_physical_sends": 0,
+        "operation_count": null,
+        "operation_count_not_retained": "Fixture automatically cleaned on normal exit; no zero-op accounting claim",
+        "observer_expected_exit_was_wrong": true
+      }
+    },
+    "production_files_changed": 0,
+    "production_lines_removed": 0,
+    "providers_called": 0,
+    "docker_actions": 0,
+    "original_history_read": false,
+    "root_verification": "24 distinct pinned refs rehashed; saved artifact/process/step/send joins checked; no worker rerun or database opened by root."
+  },
+  "license": {
+    "dbos_core": "MIT",
+    "stock_driver_dependencies": "psycopg/psycopg-binary3.3.6: LGPL-3.0-only per retained wheel metadata",
+    "closure_wheels": 12,
+    "usage": "Flagged before isolated local evaluation. Not vendored, distributed or added to production manifests. No whole bundled-binary distribution clearance."
+  },
+  "recovery_acceptance": {
+    "status": "selected_scenario_not_executed",
+    "target": "Reconciled pre-ready failed generation -> next ordinary attempt under same original owner/manifest -> declared targeted screen (all its task rows) -> stop before next study action/witness/cell. Reentry verifies completion or refuses target drift.",
+    "passive_history_check_limit_seconds": 900,
+    "supplied_screen_reentry_limit_seconds": 1200,
+    "limits_qualification": "Prospective engineering acceptance targets, not observed timings or authorization to alter old records/source. Deadline retains partial; do not quietly increase limits. Earlier604-prefix check already exceeds900seconds.",
+    "architectural_stop": "If the bounded selected route needs broader recovery architecture, stop expansion and present bounded salvage versus separately approved clean experiment."
+  },
+  "unchanged_original": {
+    "saved_attempts": 657,
+    "saved_spent_microusd": 5523144,
+    "saved_held_microusd": 0,
+    "figures_source": "Existing saved stop observation; not newly reconciled ledgers/invoices",
+    "combined_cap_usd": 150,
+    "attempt_cap": 16384,
+    "development_tasks": 3,
+    "final_tasks": 26,
+    "official_metric_version": "1.1",
+    "plain_controls": 2,
+    "live_command_cleared": false
+  },
+  "evidence": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\reliability-reuse-decision-20261030-v1\\decision-binding-v1.json",
+      "sha256": "dd2c848b5f15401d98bbcbe153c6791e61d81b73253bd3c89304d6af34abfb5f"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\reliability-reuse-decision-20261030-v1\\verified-observation-v1.json",
+      "sha256": "8994d7ee1ffb4267c330aedba3077e436aba9ac43f7d563d76d69861e62a0b75"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\reliability-reuse-decision-20261030-v1\\READOUT.md",
+      "sha256": "d18374a287ff524adb1af1c899b6f3a1d09b2583909051730b8a4c8d6f9f387b"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\reliability-reuse-decision-20261030-v1\\existing-runner-trace-v1.json",
+      "sha256": "d893c42c48ef09cbded138c4ece99297a577c3dd9805c9d2ede518f77f2350ac"
+    }
+  ],
+  "limitations": [
+    "Initial network guard blocked Windows asyncio loopback self-pipe; 45-second startup timeout retained separately.",
+    "Corrected guard allows loopback, denies external socket.connect. No real provider calls.",
+    "First diagnostic recorder had a bytes/string error; corrected before the retained timeout receipt. Not a DBOS failure.",
+    "Source-drift child correctly denied with exit1; driver incorrectly expected0. No rerun or silent expected-value rewrite.",
+    "One native Windows smoke, not Linux/CI or full frozen-study integration.",
+    "No original193-owner data, no Docker, no source evolution or scientific result.",
+    "Whole Windows child-process-tree cleanup was not independently verified after original timed-out setup children; final five children have recorded exits.",
+    "Static trace does not establish actual657-history replay, cleanup, outgoing provider settings or paid readiness.",
+    "No Linux/full-study integration of DBOS tested. No scientific improvement established."
+  ],
+  "preservation": {
+    "original_revision_rows": 207,
+    "original_acceptance_tails": 7,
+    "original_operator_guide_changed": false,
+    "production_source_changed": false,
+    "dependency_manifests_changed": false,
+    "ci": "Documentation-only decision. No duplicate full-suite campaign; no hosted pass claimed."
+  }
+}

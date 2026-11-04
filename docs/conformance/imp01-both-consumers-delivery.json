@@ -1,0 +1,350 @@
+{
+  "format": "buddha.improver-comparison-both-consumers-delivery.v1",
+  "date": "2026-10-25",
+  "status": "bounded_original_P_and_default_C_checks_passed",
+  "base_head": "81ed7c2d4496ff7d5c65b71e0daf66d39c10f9d6",
+  "scope": "IMP-01 actual frozen-source request construction for one supplied two-answer task, rootv8 and own-edgev6. No future-grid/vendor-capacity/effectiveness claim.",
+  "implementation": {
+    "driver": "docs/conformance/imp01-comparison-consumer-rehearsal.py",
+    "sha256": "acc741007a411927ff02731089d9c9bf2ae63b4e50eb7d0e27e7f6a589e68cf3",
+    "advisory_receipt_format": "buddha.improver-comparison-consumer-rehearsal.v2",
+    "actor_option": "--actor initial|evolved; omission retains evolved C",
+    "fixed_sources_edited": false,
+    "app_or_test_sources_changed": false,
+    "actor_vs_task_parent": "Only actual fixed actor/arm paths, identities, mounts/provenance and mirrored decision expectations switch. Shared task-parent P, returned first child C, later own-edge parent C and source-C negative scores remain identical.",
+    "safety": "Original preflight/path/SQL/Docker/audit/pipe guards retain identical ASTs; selected-source host compile/exec remains refused. Only selected proposal workers use actual reviewed minimal containers; other workers and all replies/usage are supplied."
+  },
+  "observations": [
+    {
+      "actor": {
+        "arm": 0,
+        "role": "initial",
+        "source_sha256": "77cfa68f6b3c6996fd503e1ce6f7a964eb57abdb8bde98f6761de5f6e298ff4f"
+      },
+      "driver_seconds": 531.795,
+      "wrapper_seconds": 540.468,
+      "requests": [
+        {
+          "slot": 0,
+          "body_bytes": 18905,
+          "body_sha256": "c9907f0b13dfc46a79c90951d45b038279f8e18eb558066af6c9482c5abd41c4",
+          "callback_http_bytes_equal": true,
+          "parent_source_sha256": "77cfa68f6b3c6996fd503e1ce6f7a964eb57abdb8bde98f6761de5f6e298ff4f",
+          "feedback_complete": true,
+          "feedback_escaped_bytes": 1199,
+          "measurement_index_present": false,
+          "provenance_sha256": "6b092370dde40a8a0f1c94c1869b72332704ffd619a9f12792110cea60dd10e3",
+          "worker_seconds": 4.443771600024775,
+          "worker_done": {
+            "status": "complete",
+            "reason": "complete"
+          }
+        },
+        {
+          "slot": 1,
+          "body_bytes": 18237,
+          "body_sha256": "a035f28d7d4a00b1e4e5fe717108ba818623d6c9d927efdfc6f44e0e67800e9b",
+          "callback_http_bytes_equal": true,
+          "parent_source_sha256": "4196cd29ffa76c6959e6f678a8286b1fde5b56e6a34a97dcf68787e1f22b3a43",
+          "feedback_complete": true,
+          "feedback_escaped_bytes": 2177,
+          "measurement_index_present": false,
+          "provenance_sha256": "6c2cc836e595a4a4daadfb3efddb747391629be0d51d199885aec7042bcc9e43",
+          "worker_seconds": 2.190594399929978,
+          "worker_done": {
+            "status": "failed",
+            "reason": "agent_error"
+          }
+        }
+      ],
+      "worker_cleanup": "both removed",
+      "completed_original_opportunities": 4,
+      "synthetic_accounting": {
+        "committed_microusd": 110,
+        "operation_count": 10,
+        "reserved_microusd": 0,
+        "spent_microusd": 110
+      },
+      "inactive_original_owners": 16,
+      "keyless_replay_unchanged": true,
+      "evidence": {
+        "-driver.json": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-consumer-initial-v1-driver.json",
+          "sha256": "95669089b17316de86e1880bd0eaaee754796d5fc5807b4205ea13937ca71ba4",
+          "bytes": 90772
+        },
+        "-wrapper.json": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-consumer-initial-v1-wrapper.json",
+          "sha256": "a2505c9720371658260ad77676de8f64812d860010cbb2a9632b36927e666c62",
+          "bytes": 1663
+        },
+        "-closed-check.json": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-consumer-initial-v1-closed-check.json",
+          "sha256": "2bd96dcbf22f15ed790f1cd95a993a2ba9695a7945d37faa75f6c4622bad4486",
+          "bytes": 2274
+        },
+        "-inputs.json": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-consumer-initial-v1-inputs.json",
+          "sha256": "50040f5bcaaf11034275df87cfa8e8206e666939f617965582818495aeb540b3",
+          "bytes": 44703
+        },
+        "-preservation-before.json": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-consumer-initial-v1-preservation-before.json",
+          "sha256": "1393b5faab7ed9a25f691b44a3b0b583c94ffc7bd2764953938912d45856c71e",
+          "bytes": 90862
+        },
+        ".log": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-consumer-initial-v1.log",
+          "sha256": "b0fd56e56ff299d9b2bf76dbb895a0939a25baebd7f9ad878b09cb9633425824",
+          "bytes": 236
+        }
+      }
+    },
+    {
+      "actor": {
+        "arm": 1,
+        "role": "evolved",
+        "source_sha256": "4196cd29ffa76c6959e6f678a8286b1fde5b56e6a34a97dcf68787e1f22b3a43"
+      },
+      "driver_seconds": 566.456,
+      "wrapper_seconds": 570.204,
+      "requests": [
+        {
+          "slot": 0,
+          "body_bytes": 18561,
+          "body_sha256": "ee457d7b354b1c27b100c557628f028841fcab834bdabbe808d09d0adbe53178",
+          "callback_http_bytes_equal": true,
+          "parent_source_sha256": "77cfa68f6b3c6996fd503e1ce6f7a964eb57abdb8bde98f6761de5f6e298ff4f",
+          "feedback_complete": true,
+          "feedback_escaped_bytes": 1207,
+          "measurement_index_present": true,
+          "provenance_sha256": "0d2cca6b2be961faacf9f46006eadbb90b66ddcdb27cd1c4c16c1322491782a1",
+          "worker_seconds": 2.0759633000707254,
+          "worker_done": {
+            "status": "complete",
+            "reason": "complete"
+          }
+        },
+        {
+          "slot": 1,
+          "body_bytes": 17893,
+          "body_sha256": "dc1493d61eefffca21f6bd521972d605b99190d469ff98107e2c90be23282059",
+          "callback_http_bytes_equal": true,
+          "parent_source_sha256": "4196cd29ffa76c6959e6f678a8286b1fde5b56e6a34a97dcf68787e1f22b3a43",
+          "feedback_complete": true,
+          "feedback_escaped_bytes": 2185,
+          "measurement_index_present": true,
+          "provenance_sha256": "53430ddff53037534df0792152bb7dee701c702eb92e2160428caebce83e5e94",
+          "worker_seconds": 2.807942599989474,
+          "worker_done": {
+            "status": "failed",
+            "reason": "agent_error"
+          }
+        }
+      ],
+      "worker_cleanup": "both removed",
+      "completed_original_opportunities": 4,
+      "synthetic_accounting": {
+        "committed_microusd": 110,
+        "operation_count": 10,
+        "reserved_microusd": 0,
+        "spent_microusd": 110
+      },
+      "inactive_original_owners": 16,
+      "keyless_replay_unchanged": true,
+      "evidence": {
+        "-driver.json": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-consumer-evolved-default-v1-driver.json",
+          "sha256": "df5d5549978da1d0713ca99dd44e385632e3143daa8bb9f334e3eef99b6a722f",
+          "bytes": 91644
+        },
+        "-wrapper.json": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-consumer-evolved-default-v1-wrapper.json",
+          "sha256": "5d1cc90327054c214122230d080272e91b75d44aeb6498fde86a7ded9b15559e",
+          "bytes": 1665
+        },
+        "-closed-check.json": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-consumer-evolved-default-v1-closed-check.json",
+          "sha256": "88c088d414663584801f692d108a77cd118fd0b477aac07c1f5c99e0630cc1e0",
+          "bytes": 2273
+        },
+        "-inputs.json": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-consumer-evolved-default-v1-inputs.json",
+          "sha256": "50040f5bcaaf11034275df87cfa8e8206e666939f617965582818495aeb540b3",
+          "bytes": 44703
+        },
+        "-preservation-before.json": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-consumer-evolved-default-v1-preservation-before.json",
+          "sha256": "1393b5faab7ed9a25f691b44a3b0b583c94ffc7bd2764953938912d45856c71e",
+          "bytes": 90862
+        },
+        ".log": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-consumer-evolved-default-v1.log",
+          "sha256": "5873da1d63a5f25cf362390407f9953863fe26fedc1830795b268d1a36be0a31",
+          "bytes": 244
+        }
+      }
+    }
+  ],
+  "what_is_verified": [
+    "Both unchanged original functions forward the complete original development-feedback array and full literal task-parent source in each emitted request.",
+    "Decoded actual stdout request bytes equal captured HTTP body bytes exactly for all four callbacks. Strict P3-field and C4-field source-seed packets retain their original semantics.",
+    "Original Unicode/spacing and blank answers survive; root absence remains null scope and later comparison retains supplied child-minus-parent utility−3/distinct−1.",
+    "P has no derived measurement index; C retains its known task-ID-only index. Both still forward complete notes.",
+    "First supplied reply returns literal original C and is admitted; second intentionally malformed reply remains failed/rejected, with no invented source or repair. Both separate original four-opportunity schedules complete.",
+    "Keyless original-owner inspection remains unchanged in each fixture; all actual containers are removed."
+  ],
+  "default_compatibility": {
+    "raw_request_bytes_equal_original_C_only_observation": true,
+    "scope": "Only the two raw emitted request bodies; owner/provenance identities and all controller records are not claimed equal.",
+    "evidence": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-consumer-default-c-byte-comparison-v1.json",
+      "sha256": "fa3d782d91654709e867a567c972d3c6d08b71a92e0abab05fee928fd324bc5e",
+      "bytes": 1462
+    }
+  },
+  "preservation": {
+    "same_executing_input_map_sha256": "50040f5bcaaf11034275df87cfa8e8206e666939f617965582818495aeb540b3",
+    "runtime_inputs_per_observation": 244,
+    "runtime_inputs_changed": [],
+    "captured_original_current_source_files_per_observation": 451,
+    "changed_original_files": [],
+    "quality_sources_unchanged": 240,
+    "historical_receipts_and_agent_sources_unchanged": true,
+    "verification_basis": "Original wrapper before/after hash censuses; closed request/source/JSON joins checked separately. No fresh full historical audit claimed."
+  },
+  "validation": {
+    "two_cli_checks": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-consumer-cli-checks-v1.json",
+      "sha256": "21102a0db9df1080c2af95c4af62230b28bd799b7b1fcc4f69bfb671c0c778c9",
+      "bytes": 2202
+    },
+    "quality_receipt": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\comparison-consumer-both-quality-v1.json",
+      "sha256": "d4496aa66f2e8f09df3de6ede7e0663ce89c8ed2a78ac48f1a7fbeffa848f15a",
+      "bytes": 29633
+    },
+    "quality_results": [
+      {
+        "name": "lint",
+        "returncode": 0,
+        "seconds": 0.171
+      },
+      {
+        "name": "format",
+        "returncode": 0,
+        "seconds": 0.13
+      },
+      {
+        "name": "types-windows",
+        "returncode": 0,
+        "seconds": 4.276
+      },
+      {
+        "name": "types-linux",
+        "returncode": 0,
+        "seconds": 2.766
+      },
+      {
+        "name": "security",
+        "returncode": 0,
+        "seconds": 2.866
+      },
+      {
+        "name": "runtime-audit",
+        "returncode": 0,
+        "seconds": 16.355
+      },
+      {
+        "name": "development-audit",
+        "returncode": 0,
+        "seconds": 2.065
+      },
+      {
+        "name": "compile",
+        "returncode": 0,
+        "seconds": 1.023
+      },
+      {
+        "name": "driver-lint",
+        "returncode": 0,
+        "seconds": 0.102
+      },
+      {
+        "name": "driver-format",
+        "returncode": 0,
+        "seconds": 0.1
+      },
+      {
+        "name": "driver-security",
+        "returncode": 0,
+        "seconds": 0.343
+      },
+      {
+        "name": "driver-compile",
+        "returncode": 0,
+        "seconds": 0.084
+      }
+    ],
+    "new_full_test_suite_claimed": false,
+    "configured_checks": "Eight standard local checks plus four driver-specific lint/format/Bandit/compile checks; all pass.",
+    "closed_checker_correction": {
+      "evidence": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-consumer-closed-checker-path-refusal-v1.json",
+        "sha256": "82148b2a1367a673ef6b699fd587c85245ea9b7df14f3cc0cf958de68fff98f4",
+        "bytes": 536
+      },
+      "reason": "Initial independent checker omitted literal fixture path component and refused both before output. Corrected only the checker; original actual runs were not repeated or changed.",
+      "corrected_checker": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\check-consumer-closed-actors-v2.py",
+        "sha256": "20f473159505c276f8d4a188aa7f2d69af641a0893050e2d9ec084989e9c69d6",
+        "bytes": 7849
+      }
+    },
+    "wrapper": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\run-comparison-consumer-both-actors-v1.py",
+      "sha256": "39d43b7781191593f29bbac429f5b12f15b2a0336e37b61156564c6a3b0b868a",
+      "bytes": 5560
+    },
+    "hosted_state": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\comparison-consumer-both-ci-snapshot-v1.json",
+      "sha256": "fc4a1e8e5c17975a8654e1a72ae86e0c58915f1a367f84f7da1e064b623e5969",
+      "bytes": 6255
+    }
+  },
+  "limits": [
+    "Fixture model/profile, task, outcomes, usage and replies are synthetic. No real model authored a child or demonstrated that it attended to the notes.",
+    "These small requests do not certify actual future configurations, token context/output cushions, larger tasks/feedback, affordability, runtime or statistical/human outcomes.",
+    "The paired observations are separate synthetic studies for request compatibility, not a performance comparison of P and C.",
+    "The public protocol/selection/official scoring and all historical experiments remain unchanged.",
+    "No raw stdin capture or independent full passive replay audit is supplied by this slice."
+  ],
+  "next_user_direction": {
+    "selected": "Check Curated reviewer-to-improver separation first and retain Curated only if supported.",
+    "scope": "Preparation only; no API allocation, eligibility attestation or final trial adoption."
+  },
+  "money_and_execution": {
+    "real_model_api_calls": 0,
+    "real_keys_inherited": false,
+    "actual_local_proposal_containers": 4,
+    "live_spending_authority_created": false,
+    "new_user_live_command": false
+  },
+  "plan": {
+    "revision": 139,
+    "open_gates": [
+      "IMP-01",
+      "EVAL-02"
+    ],
+    "sole_next": "IMP-01: Curated separation review, then exact prospective adoption/capacity/funding/review arrangements.",
+    "development_merge": false,
+    "main_readme_changed": false
+  },
+  "independent_closed_byte_review": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\independent-both-closure-v1.json",
+    "sha256": "df92f3e526769b29336f602028a8f8810f744faceeb70da63ad2a5808d57ecad",
+    "scope": "Four stdout-base64/HTTP byte joins, saved initial/ready-digest/full-feedback/source/provenance and terminal/schema/role/accounting joins. No SQL, app import, selected-source execution or repeated observations.",
+    "limitation": "Raw stdin bytes are not captured; saved worker-initial records join through ready digests and emitted request bodies. Keyless replay and before/after source census remain attributed to the original runner records.",
+    "checker_schema_correction": "Independent reviewer initially assumed failed proposal was bare null; retained original explicit not_returned object inspected, only checker corrected, no artifact/run changed."
+  }
+}

@@ -1,0 +1,198 @@
+{
+  "format": "buddha.evidence-capacity-policy-delivery.v1",
+  "recorded_utc": "2026-10-28T18:52:26.775938+00:00",
+  "base_head": "6b5648a38d4c68d1c90b3320d889c88f4d897cd3",
+  "pre_delivery_head": "d4f54f93fb0fe966beae7d32f939c59322bd5a3a",
+  "spec_sections": [
+    5,
+    9,
+    10
+  ],
+  "scope": "Finite observation counts and raw storage rehearsal; no production launcher policy, helper migration or paid continuation.",
+  "source_sha256": {
+    "buddha/doctor.py": "9ca89af17e1c4ae34d7ececa9bea323abd3394cfb5e1d389fc815e10854ca6f2",
+    "tests/test_evidence_capacity_policy.py": "674ca16ce312c6ba9b4da0d259f9510494299bf98abc88b08dabcd56e17d5e95",
+    "docs/conformance/evidence-capacity-rehearsal.py": "4431d858d837afab7413e48fc866535f31b43410e31ae8ec292d3483a9ab0865",
+    "docs/PLAN.md": "78bec5152c881805f2db86148a53c7078d9b32df347ecb861bdb2491ea90350c",
+    "docs/UNIFIED-EVIDENCE-RECOVERY.md": "a5031c3a922fd5619b312d491052afc6a67af6f20257e9db28aeac74e0ed31bc"
+  },
+  "policy_v2": {
+    "format": "buddha.evidence-observation-policy.v2",
+    "max_consumed_paths": 65536,
+    "max_resident_bytes": 0,
+    "max_total_bytes": 34359738368,
+    "max_tree_entries": 100000
+  },
+  "hard_policy_limits": {
+    "max_total_bytes": 68719476736,
+    "max_tree_entries": 100000,
+    "max_consumed_paths": 65536,
+    "max_resident_bytes": 0
+  },
+  "defaults_and_v1_count_limits_unchanged": true,
+  "capture_limits_frozen_before_initial_inventory": true,
+  "fresh_after_context_exit_and_adoption_limits_enforced": true,
+  "preserved_guards": [
+    "individual field/ledger limits",
+    "sidecars",
+    "link/reparse rejection",
+    "portable names",
+    "inventory and consumed-byte drift",
+    "original fingerprints",
+    "preflight complete adoption union before mutation"
+  ],
+  "final_tests": {
+    "methods": 66,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "cohorts": [
+      {
+        "scope": "capacity v2",
+        "methods": 8,
+        "seconds": 35.835
+      },
+      {
+        "scope": "verified and bounded captures",
+        "methods": 22,
+        "seconds": 7.377
+      },
+      {
+        "scope": "NativeEvidence",
+        "methods": 10,
+        "seconds": 9.03
+      },
+      {
+        "scope": "fingerprints/read guards/typed stops",
+        "methods": 26,
+        "seconds": 1.755
+      }
+    ],
+    "earlier_54_method_cut": "Retained separately in runs/checks/evidence-capacity-policy-20261028-v1.json; not merged into a final120-method claim."
+  },
+  "raw_rehearsal": {
+    "result": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\evidence-capacity-opaque-20261028-v1\\result.json",
+      "sha256": "d801a63245298bca81ad01a6253f2180b8354e79688336ee283859718854d74a"
+    },
+    "layout": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\evidence-capacity-opaque-20261028-v1\\plan.json",
+      "sha256": "44dd369ea9e62b50b577e32c2df662e0047d856c71b9adfd1070200264cba51b"
+    },
+    "ownership": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\evidence-capacity-opaque-20261028-v1\\ownership.json",
+      "sha256": "e901c0872a077c5d8843527a00ea9f524aba7dbe1f809128ffd8f4b177651a57"
+    },
+    "layout_sha256": "e92855387b07e3a9b8a9c26d2465c12b2384346d5f0229b843e5b39254bac814",
+    "logical_bytes": 25769803776,
+    "consumed_regular_files": 48000,
+    "tree_entries": 81920,
+    "directories": 33920,
+    "max_file_bytes": 16777216,
+    "actual_max_owner_counts": {
+      "development": 296,
+      "final": 1248,
+      "plain_shared": 8,
+      "total": 1552
+    },
+    "task_storage_proxy_counts": {
+      "development": 60,
+      "final": 312,
+      "plain": 52,
+      "total": 424
+    },
+    "reading": "Every opaque byte checked at initial read, fresh source adoption and receiver final finish.",
+    "extra_attempts": "One additional attempt footprint per actual owner is inside fixed quotas.",
+    "limits": "Synthetic raw records; not valid benchmark records, scientific results or a universal history bound. More/larger records must stop as an explicit partial result.",
+    "original_contents_copied": false,
+    "SQL_interpretation": false,
+    "fixture_retained": true,
+    "timing_speed_claim": false
+  },
+  "quality": {
+    "ruff_check": "passed",
+    "ruff_format": "272 files pass; harmless concurrent cache warning was followed by clean --no-cache pass",
+    "strict_mypy": "88 modules pass",
+    "bandit": "passed with existing nosec warnings and no findings",
+    "in_memory_compile": "272 application/test/agent/shard files pass",
+    "standalone_script": [
+      "lint",
+      "format",
+      "Bandit",
+      "in-memory compile",
+      "exact dry layout",
+      "existing receipt not overwritten",
+      "wrong output path refused"
+    ],
+    "dependency_audits": "Identical patched pins reuse fresh/cached strict maintenance audit.",
+    "full_local_suite": "Earlier PR167 cut separately running, not claimed current full-suite pass.",
+    "hosted_CI": "Pending for this cut at publication."
+  },
+  "actual_cut": {
+    "observation": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\passive-source-cut-before-receipt-merge-v1.json",
+      "sha256": "14a367a25bbd079df792bbe73b6c93b674b876896ba3946da715d59f508c33ea"
+    },
+    "status": "restored",
+    "owners": 174,
+    "attempts": 604,
+    "spent_microusd": 4845090,
+    "reserved_microusd": 0,
+    "decisions": 7,
+    "attempted_proposals": 8,
+    "next_action": "witness_feedback",
+    "position": [
+      1,
+      1,
+      1,
+      0
+    ],
+    "next_witness_directory_exists": false,
+    "qualification": "Instrumented passive reconstruction on pre-receipt-sharing v2 source; not active continuation authority."
+  },
+  "profile": {
+    "observation": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\passive-repaired-source-cut-profile-v1.json",
+      "sha256": "f2c8d9c6ce66b613af366e7d1575882129cfd6f06ab4f6190284e7d76c9899c7"
+    },
+    "status": "restored",
+    "position_extraction": "Empty; not a coordinate attestation. Prior exact-cut observation supplies the boundary.",
+    "work_counts": {
+      "Artifact_to_record": 13974,
+      "population_reconstructions": 8137,
+      "metadata_rows": 8138665,
+      "strict_load_calls": 8232753,
+      "canonical_JSON_calls": 16473672,
+      "TaskSet_constructions": 4820
+    },
+    "wall_seconds": 1611.027,
+    "cpu_seconds": 1585.938,
+    "in_memory_SQL_connections": 6893,
+    "qualification": "Separate profiled source cut under concurrent local work; cumulative timings overlap and profiler overhead differs. No additive time attribution or before/after speed ratio."
+  },
+  "preservation": {
+    "observation": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-evidence-repair-preservation-check-v3.json",
+      "sha256": "b9c94fe84e6fa8a13ae5c999f30c82a4e42212d17203820e578d3cbd51fe392a"
+    },
+    "protected_files": 3277,
+    "changed_files": 0,
+    "trial_membership_unchanged": true,
+    "CORE_files_unchanged": 10,
+    "prior_raw_PLAN_rows": 173,
+    "original_acceptance_tails": 7
+  },
+  "activity": {
+    "keys_read": 0,
+    "provider_calls": 0,
+    "on_disk_SQL_connections": 0,
+    "historical_SQL_connections": 0,
+    "actual_containers": 0,
+    "generated_source_semantic_inspection_or_execution": 0,
+    "original_run_writes": 0,
+    "new_grants": 0,
+    "paid_restarts": 0,
+    "pull_requests_merged": 0
+  },
+  "next": "Checked helper continuity and measured descriptor work, followed by exact-source CI, request/settings/accounting and confinement preflights. IMP-01/EVAL-02 remain open."
+}

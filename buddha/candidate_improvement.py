@@ -10,11 +10,11 @@ from functools import wraps
 from pathlib import Path
 from typing import cast
 
-from buddha import candidate_generation, source_screen
+from buddha import candidate_generation, source_screen, trial_fence
 from buddha import native_pipeline as pipeline
 from buddha.answers import TaskSet, _utf8
 from buddha.authorization import Authorization
-from buddha.doctor import _Busy, _Unsupported
+from buddha.doctor import _Busy, _Capture, _Unsupported
 from buddha.gateway import (
     CAPABILITIES,
     Gateway,
@@ -74,7 +74,9 @@ def _checked[**P, T](function: Callable[P, T]) -> Callable[P, T]:
             _Busy,
             _Unsupported,
         ) as error:
-            if isinstance(error, CandidateImprovementError):
+            from buddha.source_feedback import SourceFeedbackTooLarge
+
+            if isinstance(error, (CandidateImprovementError, SourceFeedbackTooLarge)):
                 raise
             raise CandidateImprovementError(
                 "candidate improvement inputs or evidence are invalid"
@@ -114,10 +116,14 @@ def _definition(
     runtime_sha256: str,
     provenance_sha256: str,
     profiles: dict[str, object],
+    *,
+    _feedback_screen: object = None,
 ) -> tuple[dict[str, object], dict[str, object], str]:
     """Check original descriptor/data only; never open or execute producer programs."""
-    recipe = _object(
-        _load(consume(descriptor)),
+    recipe = _object(_load(consume(descriptor)))
+    detached = recipe.get("format") == "buddha.candidate-improvement.v2"
+    _object(
+        recipe,
         {
             "format",
             "config",
@@ -128,17 +134,32 @@ def _definition(
             "max_callbacks",
             "parent_agent_sha256",
             "feedback",
-        },
+        }
+        | ({"task_parent"} if detached else set()),
     )
     agent = _object(_object(selection.to_record()["components"])["agent"])
     entrypoint = _path(recipe["entrypoint"])
     if (
-        recipe["format"] != "buddha.candidate-improvement.v1"
-        or _digest(recipe["parent_agent_sha256"]) != selection.agent_sha256
+        recipe["format"]
+        not in {"buddha.candidate-improvement.v1", "buddha.candidate-improvement.v2"}
+        or (not detached and _digest(recipe["parent_agent_sha256"]) != selection.agent_sha256)
         or set(agent) != {entrypoint}
         or not entrypoint.endswith(".py")
     ):
         raise CandidateImprovementError("proposal parent differs from selected one-file source")
+    parent_id = _digest(recipe["parent_agent_sha256"])
+    if detached:
+        target = _object(recipe["task_parent"], {"path", "sha256"})
+        target_raw = consume(pipeline._absolute(target["path"]))
+        target_sha256 = _digest(target["sha256"])
+        if (
+            not target_raw
+            or len(target_raw) > MAX_SOURCE_BYTES
+            or _sha(target_raw) != target_sha256
+            or _sha(_json({"candidate.py": target_sha256})) != parent_id
+        ):
+            raise CandidateImprovementError("detached task parent differs from its source identity")
+        target_raw.decode("utf-8")
     _integer(recipe["max_callbacks"], 0, 1000)
     config = _object(
         recipe["config"], {"provider", "model", "max_output_tokens", "instructions", "sampling"}
@@ -174,16 +195,47 @@ def _definition(
 
     if Path(source_feedback.__file__).absolute() != Path(__file__).with_name("source_feedback.py"):
         raise CandidateImprovementError("a different feedback inspector was imported")
-    bundle = source_feedback.inspect_source_feedback(
-        path.parent, expected_provenance_sha256=provenance_sha256
+    bundle = (
+        source_feedback.inspect_source_feedback(
+            path.parent,
+            expected_provenance_sha256=provenance_sha256,
+            _completed_screen=_feedback_screen,
+        )
+        if _feedback_screen is not None
+        else source_feedback.inspect_source_feedback(
+            path.parent, expected_provenance_sha256=provenance_sha256
+        )
     )
+    if (
+        detached
+        and _object(bundle["feedback"])["format"] != "buddha.candidate-development-feedback.v2"
+    ):
+        raise CandidateImprovementError(
+            "detached improvement requires complete development feedback"
+        )
+    provenance_record = _object(bundle["provenance"])
+    if detached and provenance_record["format"] == "buddha.source-screen-feedback.v7":
+        raise CandidateImprovementError("root comparison supports inherited search only")
+    if (
+        provenance_record["format"]
+        in {
+            "buddha.source-screen-feedback.v5",
+            "buddha.source-screen-feedback.v6",
+            "buddha.source-screen-feedback.v8",
+        }
+        and "improver_agent_sha256" in provenance_record
+    ) and (
+        not detached
+        or _digest(provenance_record["improver_agent_sha256"]) != selection.agent_sha256
+    ):
+        raise CandidateImprovementError("frozen failure feedback belongs to another improver")
     for name in ("source", "split", "feedback", "provenance"):
         if consume(path.parent / (name + ".json")) != _json(bundle[name]):
             raise CandidateImprovementError(
                 "feedback changed after original measurement inspection"
             )
     if _sha(_json(bundle["feedback"])) != _digest(feedback["sha256"]) or (
-        _object(bundle["provenance"])["candidate_id"] != selection.agent_sha256
+        _object(bundle["provenance"])["candidate_id"] != parent_id
     ):
         raise CandidateImprovementError("measured feedback belongs to another parent or packet")
     source = TaskSet.from_bytes(_json(bundle["source"]))
@@ -242,6 +294,7 @@ def _validate_outcome(
     if raw != _json(report) + b"\n":
         raise CandidateImprovementError("original session report is not canonical")
     selected = Selection.from_bytes(_json(owner["selection"]))
+    detached = recipe["format"] == "buddha.candidate-improvement.v2"
     descriptor_sha256 = _digest(report["descriptor_sha256"])
     context_inputs = {
         _text(row["path"]): _digest(row["sha256"])
@@ -269,8 +322,14 @@ def _validate_outcome(
         or envelope["status"] != "complete"
         or envelope["disposition"] not in {"materialized", "rejected"}
         or envelope["claim"] != CLAIM
-        or report["format"] != "buddha.candidate-improvement-report.v1"
-        or report["parent_agent_sha256"] != selected.agent_sha256
+        or report["format"]
+        != (
+            "buddha.candidate-improvement-report.v2"
+            if detached
+            else "buddha.candidate-improvement-report.v1"
+        )
+        or report["parent_agent_sha256"] != recipe["parent_agent_sha256"]
+        or (detached and report.get("improver_agent_sha256") != selected.agent_sha256)
         or report["gateway_manifest_sha256"] != pipeline._sha(owner)
         or report["runtime_sha256"] != runtime_sha256
         or report["config_sha256"] != pipeline._sha(recipe["config"])
@@ -322,20 +381,32 @@ def _validate_outcome(
         proposal = _source_proposal(capture["value"])
         child_raw = proposal["source"].encode("utf-8")
         child_sha = _sha(child_raw)
-        parent_sha = _object(_object(selected.to_record()["components"])["agent"])[
+        improver_sha = _object(_object(selected.to_record()["components"])["agent"])[
             _path(recipe["entrypoint"])
         ]
+        parent_sha = _object(recipe["task_parent"])["sha256"] if detached else improver_sha
         if child_sha == parent_sha or read(session / "child/candidate.py", child_sha) != child_raw:
             raise CandidateImprovementError("child is unchanged or differs from accepted source")
         lineage_path = session / "lineage.json"
         lineage_raw = read(lineage_path, declared["lineage.json"])
         lineage = {
-            "format": "buddha.source-lineage.v1",
+            "format": "buddha.source-lineage.v2" if detached else "buddha.source-lineage.v1",
             "parent": {
-                "entrypoint": recipe["entrypoint"],
+                "entrypoint": "candidate.py" if detached else recipe["entrypoint"],
                 "source_sha256": parent_sha,
-                "agent_sha256": selected.agent_sha256,
+                "agent_sha256": recipe["parent_agent_sha256"],
             },
+            **(
+                {
+                    "improver": {
+                        "entrypoint": recipe["entrypoint"],
+                        "source_sha256": improver_sha,
+                        "agent_sha256": selected.agent_sha256,
+                    }
+                }
+                if detached
+                else {}
+            ),
             "child": {
                 "entrypoint": "candidate.py",
                 "source_sha256": child_sha,
@@ -404,7 +475,9 @@ def prepare_candidate_improvement(
         _digest(expected_feedback_provenance_sha256),
     )
     supplied = _input_records(input_files, expected_input_hashes)
-    expected = {Path(row["path"]): row["sha256"] for row in supplied}
+    expected = trial_fence._include_controls(
+        directory, {Path(row["path"]): row["sha256"] for row in supplied}
+    )
 
     def consume(path: Path) -> bytes:
         raw = pipeline._read(path, expected.get(path))
@@ -430,31 +503,43 @@ def prepare_candidate_improvement(
         raise CandidateImprovementError("proposal output overlaps original inputs")
     _root(directory.parent)
     _path(directory.name)
-    directory.mkdir()
-    for name in ("owners", "attempts", "completed", "observations"):
-        (directory / name).mkdir()
-    context = directory / "context.json"
-    context_raw = _json(
-        {
-            "format": CONTEXT_FORMAT,
-            "descriptor": str(descriptor),
-            "expected_runtime_sha256": runtime,
-            "expected_feedback_provenance_sha256": provenance,
-        }
-    )
-    pipeline._write(context, context_raw)
-    expected[context] = _sha(context_raw)
-    prepare_gateway(
-        directory / "owners/0",
-        selection=selection,
-        roots=roots,
-        authorization=authorization,
-        review=review,
-        budget_microusd=budget_microusd,
-        max_calls=max_calls,
-        input_files=list(expected),
-        expected_input_hashes=expected,
-    )
+    with trial_fence.work(
+        authorization.path, authorization._terms(), directory=directory, kind="improvement"
+    ) as trial_controls:
+        for path, digest in trial_controls.items():
+            if path in expected and expected[path] != digest:
+                raise CandidateImprovementError(
+                    "original trial controls changed before preparation"
+                )
+            expected[path] = digest
+        _input_records(list(expected), expected)
+        context = directory / "context.json"
+        if len(set(expected) | {context}) > 1024:
+            raise CandidateImprovementError("proposal controls exceed the owner input limit")
+        directory.mkdir()
+        for name in ("owners", "attempts", "completed", "observations"):
+            (directory / name).mkdir()
+        context_raw = _json(
+            {
+                "format": CONTEXT_FORMAT,
+                "descriptor": str(descriptor),
+                "expected_runtime_sha256": runtime,
+                "expected_feedback_provenance_sha256": provenance,
+            }
+        )
+        pipeline._write(context, context_raw)
+        expected[context] = _sha(context_raw)
+        prepare_gateway(
+            directory / "owners/0",
+            selection=selection,
+            roots=roots,
+            authorization=authorization,
+            review=review,
+            budget_microusd=budget_microusd,
+            max_calls=max_calls,
+            input_files=list(expected),
+            expected_input_hashes=expected,
+        )
     return directory
 
 
@@ -537,7 +622,23 @@ def run_candidate_improvement(directory: Path, *, transport: RawHTTPTransport) -
             "proposal execution needs its original Path and raw transport"
         )
     directory = pipeline._absolute(str(directory))
-    with pipeline._exclusive(directory):
+    original_manifest = _read_manifest(directory / "owners/0")
+    authority_path = pipeline._absolute(original_manifest["authorization_path"])
+    if trial_fence.is_closed(directory):
+        return inspect_candidate_improvement(
+            directory,
+            authorization=authority_path,
+            expected_report_sha256=file_hash(directory / "report.json"),
+        )
+    with (
+        trial_fence.work(
+            authority_path,
+            Authorization(authority_path)._terms(),
+            directory=directory,
+            kind="improvement",
+        ),
+        pipeline._exclusive(directory),
+    ):
         if {path.name for path in (directory / "owners").iterdir()} != {"0"}:
             raise CandidateImprovementError("proposal owner population differs")
         if not {path.name for path in (directory / "completed").iterdir()} <= {"0.json"}:
@@ -699,12 +800,25 @@ def run_candidate_improvement(directory: Path, *, transport: RawHTTPTransport) -
 
 @_checked
 def inspect_candidate_improvement(
-    directory: Path, *, authorization: Path, expected_report_sha256: str
+    directory: Path,
+    *,
+    authorization: Path,
+    expected_report_sha256: str,
+    sink: _Capture | None = None,
+    _feedback_screen: object = None,
 ) -> dict[str, object]:
     from buddha.candidate_improvement_results import collect_candidate_improvement
 
+    if _feedback_screen is not None and sink is None:
+        return collect_candidate_improvement(
+            directory,
+            authorization=authorization,
+            expected_report_sha256=_digest(expected_report_sha256),
+            _feedback_screen=_feedback_screen,
+        )
     return collect_candidate_improvement(
         directory,
         authorization=authorization,
         expected_report_sha256=_digest(expected_report_sha256),
+        sink=sink,
     )

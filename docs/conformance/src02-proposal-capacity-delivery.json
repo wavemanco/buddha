@@ -1,0 +1,296 @@
+{
+  "format": "buddha.source-proposal-capacity-delivery.v1",
+  "base_commit": "318a704f6e72ff7923ff965574b859d68f90f099",
+  "claim": "Optional host-enforced observations from actual original proposal calls; offline integration evidence only, no actual model or scientific improvement result.",
+  "source_sha256": {
+    "buddha/source_capacity.py": "4e0269eb1a734d7b233762c90f139f600ae0e4aee67fe9a23a11f1a40a8565de",
+    "buddha/source_handoff.py": "b89011004820f67ef8dac23d1b998e3b71308632470c7bd35583c502afc941a6",
+    "buddha/source_launch.py": "02907aae39aa9ef2c90d63c0ce12f057e52854ce32d43d83444de0e729ca9176",
+    "buddha/source_launch_state.py": "b86257ecb41336321417c30a376e592aaa42b028f8fd9207f046141d8715359f",
+    "buddha/source_search.py": "c36267e0bcef891f2199619986ea307a82aa1c830056ec50984fbb6a3c99fe13",
+    "tests/test_proposal_capacity.py": "c9d29b67dfea4c4da9b5d9dd8ddd7a5fa987ae79821bbd58a8574a72241f3045",
+    "docs/DESIGN.md": "9119cbe00e481b7159f9fc29615b17f471b19efe0075d057756883f3556c7ea5",
+    "docs/SOURCE-PROPOSAL-CAPACITY.md": "08a437fe32f2379889d96a87f2c1f5e1f51d27ee465330ce3b8fc1deba7f3156"
+  },
+  "protocol": {
+    "policy_format": "buddha.source-proposal-capacity-policy.v1",
+    "provider": "openai",
+    "context_tokens": 1050000,
+    "context_scope": "every completed original proposal call",
+    "min_context_slack_tokens": 8192,
+    "output_scope": "raw full replacement matching the materialized child source",
+    "min_output_slack_tokens": 8192,
+    "require_at_least_one_matching_replacement": true,
+    "planning_output_margin": "No replacement-output minimum; still context-fit, complete, unrefused literal text and coherent settled usage.",
+    "settlement": "Gateway actual-request specification, inclusive wire usage and existing ModelSpec reserve/cost arithmetic; contradictory completed custody is refused, not labelled unavailable.",
+    "barriers": [
+      "P to W0",
+      "P to C",
+      "C to W1"
+    ],
+    "comparison": "Fixed policy/consumer common controls and existing lineage; no distinct per-child measurement binding is added to common comparison controls.",
+    "not_observed": "Patch/procedural mutation without a matching full replacement remains unavailable/inconclusive.",
+    "failure": "Negative/unavailable capacity saves a partial search with proposal_capacity reason, exact stage, original measurement and unchanged liabilities; no returned-child owner is prepared."
+  },
+  "versions": {
+    "handoff": 4,
+    "search_manifest": 5,
+    "source_search_report": 3,
+    "witness_treatment": 2,
+    "witness_report": 2,
+    "checkpoint": 1
+  },
+  "historical_interpretation": "Old supported schemas and their default helper inventories remain unchanged; new capacity imports/controls are enabled only by explicit new policy.",
+  "shape_correction": {
+    "path": "runs/verification/proposal-capacity-shape-correction-v3.json",
+    "sha256": "2352e1d80aac3eca12f43e71e0dce859c6c18947d88da093982d634b2885d88a"
+  },
+  "genuine_red": [
+    {
+      "label": "proposal-capacity-red-v1",
+      "scope": "Specification API-missing RED; 5 methods and 10 missing-boundary errors. This is not composed execution-gate evidence.",
+      "receipt": {
+        "path": "runs/verification/proposal-capacity-red-v1.json",
+        "sha256": "f22aa3993a7e95cdd099ebb021b9599f33edeb1b4f7682ec783a8ead62ae9b3a"
+      },
+      "log": {
+        "path": "runs/verification/proposal-capacity-red-v1.log",
+        "sha256": "466188f29242431dce65e898d8530d7667d46a249b02717cd4ccc507fef8a238"
+      },
+      "methods": 5,
+      "failures": 0,
+      "errors": 10,
+      "elapsed_seconds": 2.076599400024861,
+      "source_pins_unchanged_during_observation": true,
+      "inputs_differing_from_delivery_cut": [
+        "buddha/source_capacity.py",
+        "buddha/source_handoff.py",
+        "buddha/source_launch.py",
+        "buddha/source_launch_state.py",
+        "buddha/source_search.py",
+        "tests/test_proposal_capacity.py"
+      ],
+      "denied_real_network_or_process_events": []
+    },
+    {
+      "label": "proposal-capacity-review-red-v2",
+      "scope": "Two component methods; 10 genuine assertion failures for legacy inventory and contradictory reserve/charge/ID/model/tier/usage checks. Supplied historical projection only, not a forged sealed-authority experiment.",
+      "receipt": {
+        "path": "runs/verification/proposal-capacity-review-red-v2.json",
+        "sha256": "a747340f3d2c1b9393d47ee5208901f6654e4f3c1cb39cae684be7302998de7e"
+      },
+      "log": {
+        "path": "runs/verification/proposal-capacity-review-red-v2.log",
+        "sha256": "b61a6840e9564441ac6ce84bb78de84b1940c7ae04e43cdc6a7145a37b2639f1"
+      },
+      "methods": 2,
+      "failures": 10,
+      "errors": 0,
+      "elapsed_seconds": 0.2794162000063807,
+      "source_pins_unchanged_during_observation": true,
+      "inputs_differing_from_delivery_cut": [
+        "buddha/source_handoff.py",
+        "buddha/source_launch.py",
+        "buddha/source_launch_state.py",
+        "buddha/source_search.py",
+        "tests/test_proposal_capacity.py"
+      ],
+      "denied_real_network_or_process_events": []
+    },
+    {
+      "label": "proposal-capacity-sealed-recovery-red-v1",
+      "scope": "Original supplied execution fixture: sealed/deactivated counted proposal without report caused a missing-report custody error before continuation.",
+      "receipt": {
+        "path": "runs/verification/proposal-capacity-sealed-recovery-red-v1.json",
+        "sha256": "304455a240700731da95a45ff7890a3d7e529e16db52ce1a81fc05c8e815e63e"
+      },
+      "log": {
+        "path": "runs/verification/proposal-capacity-sealed-recovery-red-v1.log",
+        "sha256": "45a662db4e238c32d8c6dd8bcbb919157826c6fe6a27ce95c06f89577231830c"
+      },
+      "methods": 1,
+      "failures": 0,
+      "errors": 1,
+      "elapsed_seconds": 115.36814729997423,
+      "source_pins_unchanged_during_observation": true,
+      "inputs_differing_from_delivery_cut": [
+        "buddha/source_handoff.py",
+        "buddha/source_launch.py",
+        "buddha/source_launch_state.py",
+        "buddha/source_search.py",
+        "tests/test_proposal_capacity.py"
+      ],
+      "denied_real_network_or_process_events": []
+    },
+    {
+      "label": "proposal-capacity-private-copy-red-v1",
+      "scope": "One real failure: all three probed premature-copy states were accepted. This five-interruption RED did not yet include the final test's fourth counted-before-preparation copy state.",
+      "receipt": {
+        "path": "runs/verification/proposal-capacity-private-copy-red-v1.json",
+        "sha256": "0cbab386b920b64a0c68d4962c9458e9ddff9476917814f3b1fc94676e2e1593"
+      },
+      "log": {
+        "path": "runs/verification/proposal-capacity-private-copy-red-v1.log",
+        "sha256": "3a3e57ec9e90e28417bedcef56d82b762745f264e4794dcc29e8825514a3537a"
+      },
+      "methods": 1,
+      "failures": 1,
+      "errors": 0,
+      "elapsed_seconds": 240.27694800007157,
+      "source_pins_unchanged_during_observation": true,
+      "inputs_differing_from_delivery_cut": [
+        "buddha/source_launch_state.py",
+        "buddha/source_search.py",
+        "tests/test_proposal_capacity.py"
+      ],
+      "denied_real_network_or_process_events": []
+    }
+  ],
+  "predecessor_green": [
+    {
+      "label": "proposal-capacity-final-composed-v1",
+      "scope": "Before the final early-private-copy strengthening; component cases and all three gates, common controls, checkpoint tampering and completed keyless replay.",
+      "receipt": {
+        "path": "runs/verification/proposal-capacity-final-composed-v1.json",
+        "sha256": "74c84dfede521dfed15a82ad797f3bac2fc3b67ca05a831eb97c8411c45813d7"
+      },
+      "log": {
+        "path": "runs/verification/proposal-capacity-final-composed-v1.log",
+        "sha256": "ec884101f83a9224001e7c5ab3d09246b53c860e4b25206292bb1a547b60b8e9"
+      },
+      "methods": 6,
+      "failures": 0,
+      "errors": 0,
+      "elapsed_seconds": 459.32562889996916,
+      "source_pins_unchanged_during_observation": true,
+      "inputs_differing_from_delivery_cut": [
+        "buddha/source_launch_state.py",
+        "buddha/source_search.py",
+        "tests/test_proposal_capacity.py"
+      ],
+      "denied_real_network_or_process_events": []
+    },
+    {
+      "label": "proposal-capacity-final-negative-v1",
+      "scope": "Before the final early-private-copy strengthening; observed negative at each of three roles and unchanged original settled costs on continuation.",
+      "receipt": {
+        "path": "runs/verification/proposal-capacity-final-negative-v1.json",
+        "sha256": "fc943de95313266bfbd5e0ae53c1437f6a9a78c6b08d7b7268ba82b7287eaa54"
+      },
+      "log": {
+        "path": "runs/verification/proposal-capacity-final-negative-v1.log",
+        "sha256": "1a33fc2e25579a3caab223864d23f7b87a00916eef13b90936d7e16fc6ec763c"
+      },
+      "methods": 1,
+      "failures": 0,
+      "errors": 0,
+      "elapsed_seconds": 574.674734900007,
+      "source_pins_unchanged_during_observation": true,
+      "inputs_differing_from_delivery_cut": [
+        "buddha/source_launch_state.py",
+        "buddha/source_search.py",
+        "tests/test_proposal_capacity.py"
+      ],
+      "denied_real_network_or_process_events": []
+    },
+    {
+      "label": "proposal-capacity-final-recovery-v1",
+      "scope": "Before the final early-private-copy strengthening; local publication/checkpoint recovery, unavailable replacement and unknown liability.",
+      "receipt": {
+        "path": "runs/verification/proposal-capacity-final-recovery-v1.json",
+        "sha256": "e6c05367bf0c8d7181e0e656897ea3ca584214518066fb69d8d23eede501ee30"
+      },
+      "log": {
+        "path": "runs/verification/proposal-capacity-final-recovery-v1.log",
+        "sha256": "921ac3a7c2bbc19a001c8fefc9a3badaa41634ec9403c311ba15f6efd292bfce"
+      },
+      "methods": 2,
+      "failures": 0,
+      "errors": 0,
+      "elapsed_seconds": 589.3535075000254,
+      "source_pins_unchanged_during_observation": true,
+      "inputs_differing_from_delivery_cut": [
+        "buddha/source_launch_state.py",
+        "buddha/source_search.py",
+        "tests/test_proposal_capacity.py"
+      ],
+      "denied_real_network_or_process_events": []
+    },
+    {
+      "label": "proposal-capacity-final-legacy-v1",
+      "scope": "Before the final early-private-copy strengthening; 56 historical capacity/handoff/launcher/prepared-state methods.",
+      "receipt": {
+        "path": "runs/verification/proposal-capacity-final-legacy-v1.json",
+        "sha256": "dd214ebc068f3cb0bc65db1e2d3b0c00e711a7d8531983ce546a8c9049a5aaf9"
+      },
+      "log": {
+        "path": "runs/verification/proposal-capacity-final-legacy-v1.log",
+        "sha256": "cbd97ee5101b6115160fb08373e34a8cecf75a7803765406c3b675ba49a5ebc2"
+      },
+      "methods": 56,
+      "failures": 0,
+      "errors": 0,
+      "elapsed_seconds": 977.1594259000849,
+      "source_pins_unchanged_during_observation": true,
+      "inputs_differing_from_delivery_cut": [
+        "buddha/source_launch_state.py",
+        "buddha/source_search.py",
+        "tests/test_proposal_capacity.py"
+      ],
+      "denied_real_network_or_process_events": []
+    }
+  ],
+  "final_green": {
+    "label": "proposal-capacity-private-copy-green-v1",
+    "scope": "Final runtime cut; five component methods plus a six-interruption full recovery/completion with four early-private-copy refusals, three original proposal owners, three checkpoint references and passive complete reconstruction.",
+    "receipt": {
+      "path": "runs/verification/proposal-capacity-private-copy-green-v1.json",
+      "sha256": "c50ad6d39e4ce73137f86a801a28f6da4c3902725f02e02a97567ebee8045ea0"
+    },
+    "log": {
+      "path": "runs/verification/proposal-capacity-private-copy-green-v1.log",
+      "sha256": "5772e478fba835f19801aafec6d599b19651d197fb5944da317f9cbebe8edf7f"
+    },
+    "methods": 6,
+    "failures": 0,
+    "errors": 0,
+    "elapsed_seconds": 537.2239636000013,
+    "source_pins_unchanged_during_observation": true,
+    "inputs_differing_from_delivery_cut": [],
+    "denied_real_network_or_process_events": []
+  },
+  "final_quality": {
+    "path": "runs/verification/proposal-capacity-final-quality-v1.json",
+    "sha256": "95514065addc7f896aa45782a022bc81a50e1f2708a7c3e858dfd8e8dfdb2667"
+  },
+  "independent_static_review": {
+    "latest": {
+      "path": "runs/verification/capacity-independent-review-v3.json",
+      "sha256": "e5b5a8c09446aa93c99c6af1e6bc7f9e60bd5325109689dd9602fff4fc50d5d1"
+    },
+    "latest_markdown": {
+      "path": "runs/verification/capacity-independent-review-v3.md",
+      "sha256": "b8bfd6ffb9e20d780a40b3975ccdd2ae9ebedddb8c357e9f3328c586d56ade55"
+    },
+    "earlier_preserved": [
+      {
+        "path": "runs/verification/capacity-independent-review-v1.json",
+        "sha256": "57516b3d5b6716137575629f8ddf2b92565dcf6562c527fb2647e6783fc7f8f7"
+      },
+      {
+        "path": "runs/verification/capacity-independent-review-v2.json",
+        "sha256": "86fe6f87fb5e6e73df3685fa475a1ee5031953bfbb5ce7e4c968033046c475e5"
+      }
+    ],
+    "result": "All four findings closed statically; runtime evidence is separate."
+  },
+  "limits": [
+    "Supplied executors and HTTPS responses, synthetic credentials and owned test ledgers only; no real provider, real keys, selected-source host execution or paid API calls.",
+    "No funded artifacts, new allowance, live owners, user launch command or actual-live intent were created.",
+    "Earlier supplied-response rehearsal and actual capacity history are preserved; neither is relabelled as this protocol's actual result.",
+    "No future raw request has passed in advance; current account, pricing, bounds and budget checks remain required for a separately reviewed actual-live intent.",
+    "Local Windows targeted checks only; this branch has not yet run hosted CI or the entire repository test suite.",
+    "Passing capacity proves no source quality, meaningful novelty, usefulness, mutation competence or improvement effectiveness.",
+    "A checkpoint is deterministic required publication, not an authenticated creation-time attestation."
+  ]
+}

@@ -1,5 +1,7 @@
 # Linked continuation of the interrupted pilot
 
+**Historical command record.** The completed JSON-policy experiment's `prepare`, `run`, `search-prepare`, `search-run` and `continuation-prepare` commands are retired in the current checkout. They refuse before keys, file preparation or provider calls. Commands below describe only their original pinned runtime and do not authorize a restart. Retained offline readers and synthetic demos remain available. [Guide before retirement](https://github.com/wavemanco/buddha/blob/e3076ba648c7b37ce465ba407779dc25a6da805a/docs/FIRST-LIVE-CONTINUATION.md) · [Original CLI source](https://github.com/wavemanco/buddha/blob/e3076ba648c7b37ce465ba407779dc25a6da805a/buddha/__main__.py).
+
 REC-04B operational handoff, October 20, 2026. [PLAN.md](PLAN.md) remains the single roadmap. This document preserves execution inputs and evidence for the completed REC-04L continuation.
 
 **Completed and verified October 20, 2026:** the continuation reused nine answers and completed 51 new calls for $0.274533 in new recorded cost. [Results, accounting and remaining concerns](LINKED-CONTINUATION-RESULTS.md) record the outcome. The instructions and preparation figures below are retained as the execution record.

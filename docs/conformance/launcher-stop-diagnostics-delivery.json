@@ -1,0 +1,119 @@
+{
+  "format": "buddha.launcher-stop-diagnostics-delivery.v1",
+  "status": "focused_local_checks_pass_hosted_and_actual_diagnosis_pending",
+  "spec": [
+    "DESIGN3",
+    "DESIGN9",
+    "DESIGN10"
+  ],
+  "base": "4b9029df62e7d563250567d6a61f8e8d611e7432",
+  "actual_stop_record": "trial-continuation-stop-observation.json",
+  "purpose": "Retain safe public failure locations before long incomplete-observation collection. This does not identify the already lost October 29 exception.",
+  "implementation": {
+    "files": {
+      "buddha/launch_common.py": "fb3df36d692d261a642258234a30da6a11b82da5f70b09d51c19867dfc3d947a",
+      "buddha/unified_launch.py": "788bb7e1688b5e5871f46dbad568123858438a4205abd7df1d062186fdd010ce"
+    },
+    "public_source_projection": {
+      "previous_pins": 90,
+      "changed": [
+        "buddha/launch_common.py",
+        "buddha/unified_launch.py"
+      ],
+      "unchanged": 88
+    },
+    "exception_node_limit": 8,
+    "traceback_scan_limit_per_node": 64,
+    "retained_public_frame_limit_per_node": 8,
+    "pending_node_limit": 16,
+    "location_guard": "Exact installed public package file allowlist and the actual loaded module's globals identity; basename and positive bounded line number only.",
+    "categories": "Fixed exact-type allowlist; unknown/custom classes become other. No error messages, args, class names, local variables, outside paths, keys or source text.",
+    "durability": "Existing exclusive fsynced pipeline writer saves the same safe JSON immediately in the existing observations directory, before ordinary observation reconstruction; terminal notice includes its path and SHA256.",
+    "failure_policy": "Diagnostic build, notice or save failures cannot replace the original exception or prevent the ordinary partial-recording attempt.",
+    "unchanged": [
+      "Existing reason codes",
+      "Original observation schema",
+      "Inner launcher and CLI contracts",
+      "Source inventories",
+      "Benchmark requests, scores and scientific settings",
+      "Original owners, receipts, source checkout, grants and budget limits"
+    ]
+  },
+  "tests": {
+    "file": "tests/test_launch_stop_diagnostics.py",
+    "sha256": "b695a76f5d8aa012cd01e3eb5f48c6ccdb88242a5c88066de308ca265bbd3367",
+    "baseline_RED": {
+      "methods": 6,
+      "error_entries": 8,
+      "seconds": 0.423,
+      "cause": "Feature absent in unchanged PR182 package",
+      "log": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\launcher-safe-stop-diagnostics-20261029-v1\\baseline182-red.log",
+      "sha256": "33c9bf4cf919cadd4a1592f57f6939214fab23b9e2f5bb8a7975bd1a04639ee9"
+    },
+    "final_root_GREEN": {
+      "methods": 6,
+      "seconds": 0.331,
+      "failures": 0,
+      "errors": 0
+    },
+    "existing_regressions": [
+      {
+        "module": "test_unified_launch",
+        "methods": 17,
+        "seconds": 22.68
+      },
+      {
+        "module": "test_evidence_stop_causes",
+        "methods": 7,
+        "seconds": 1.583
+      }
+    ],
+    "total_focused_methods": 30,
+    "scope": "Synthetic nested public launchers and changed-control failure, suppressed error contexts, immediate saved/emitted equality and hash, canary redaction, forged filenames and types, bounded cycles/chains, diagnostic build/save/observer failures including KeyboardInterrupt.",
+    "fixture_limits": "Supplied controller state and temporary synthetic ledgers; no original full-history reconstruction, actual private actor, provider call or container execution.",
+    "test_agent_evidence": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\launcher-safe-stop-diagnostics-20261029-v1\\tests-observation.json",
+      "sha256": "7728785716906d4eba89ef95eebc758b4a7ac64c782148967022c66b466f64b9"
+    },
+    "root_evidence": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\launcher-safe-stop-diagnostics-20261029-v1\\root-checks-v1.json",
+      "sha256": "cc470718bfb0c76130b3a49f2064f8f73cf58d9a4c1af18d034d10a539ecaa8a"
+    },
+    "retained_corrections": [
+      "Initial fixture lacked search/study directory.",
+      "Initial expected category needed the existing exact PipelineError type.",
+      "Comparing pre-rethrow diagnostic to a later traceback was corrected to comparing the persisted and emitted bytes.",
+      "Initial strict typing had five descriptor/seen annotations errors; explicit descriptor/traceback casts and set[int] resolve them without ignores or guard changes."
+    ]
+  },
+  "quality": {
+    "ruff_lint": "pass",
+    "ruff_format": "pass_286_files",
+    "mypy_strict": "pass_89_sources",
+    "bandit": "pass_existing_suppression_warnings",
+    "development_lock_audit": "pass_no_known_vulnerabilities",
+    "runtime_lock_audit": "pass_no_known_vulnerabilities",
+    "compile": "pass_external_pycache",
+    "diff_check": "pass",
+    "independent_source_review": "pass_at_recorded_three_source_hashes",
+    "full_hosted_suite": "pending_new_exact_head"
+  },
+  "original_run": {
+    "recorded_attempts": 604,
+    "spent_microusd": 4845090,
+    "held_microusd": 0,
+    "precise_exception": "unknown",
+    "rerun_instruction": "Hold historical command; no keys or paid start requested by this slice."
+  },
+  "next_work": "Complete exact-source hosted verification and a realistic no-cost study-start diagnosis/rehearsal, then prepare separately checked continuation evidence before a new operator command.",
+  "work_performed": {
+    "original_SQL_connections": 0,
+    "original_private_program_parsing_or_execution": 0,
+    "keys_read": 0,
+    "provider_calls": 0,
+    "containers_started": 0,
+    "original_writes": 0,
+    "new_allocations": 0
+  },
+  "scientific_claim": "None; IMP-01 and EVAL-02 remain open. This diagnostic repair does not explain or fix the actual search-start failure."
+}

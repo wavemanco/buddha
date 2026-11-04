@@ -1,0 +1,359 @@
+{
+  "format": "buddha.improver-v3-sealed-rehearsal-delivery.v1",
+  "date": "2026-10-25",
+  "scope": "IMP-01 bounded prospective study-v3/assessment-v3 connection; supplied workers and provider/native replies; no application change",
+  "status": "bounded_checks_passed",
+  "base_head": "8ae7ab893939ea96b7ae2a018410ead29d3e420a",
+  "ready_for_live_execution": false,
+  "implementation": {
+    "new_test": "tests/test_improver_comparison_assessment.py",
+    "test_sha256": "e4024bc963b50d1c2f0c3732a010d16b5877d0cceeb064d3b9e230b6cb6953f4",
+    "production_code_changed": false,
+    "selected_programs": "Host-execution canaries; not imported, compiled or executed. Original P/C from the live source experiment are not executed in this slice.",
+    "reused_fixture": "Existing ImproverAssessmentTests.fixture with separately bound prospective v3 trial. Its unused v1 setup grants remain zero-owner, unchanged and outside trial funding."
+  },
+  "protocol": {
+    "study_format": "buddha.improver-study.v3",
+    "assessment_format": "buddha.improver-assessment-trial.v3",
+    "starts": 1,
+    "development_repetitions": 1,
+    "opportunities_per_arm": 1,
+    "sealed_tasks": [
+      1,
+      "final"
+    ],
+    "sealed_repetitions": 1,
+    "roles": [
+      "starter",
+      "initial",
+      "evolved"
+    ],
+    "derived_final_cells": 6,
+    "funding": "Explicit v3 aggregate caps inherited from v2; exact matching search grant and separate final grant, below derived nominal maxima. All money/usage here is supplied test data.",
+    "counted_feedback": "Both original same-cell roots use v8 with null comparison, literal complete answer including blank output.",
+    "common_witness": "Absolute feedback v3 remains separate; no counted-comparison policy is injected into this witness."
+  },
+  "observed": {
+    "method_count": 1,
+    "test_seconds": 1197.903,
+    "outer_seconds": 1199.216,
+    "genuinely_completed_subtests": 44,
+    "first_execution_passed": true,
+    "development_coverage": {
+      "expected_common": 1,
+      "completed_common": 1,
+      "expected_cells": 2,
+      "completed_cells": 2,
+      "expected_opportunities": 2,
+      "attempted_opportunities": 2,
+      "completed_opportunities": 2,
+      "in_flight_opportunities": 0,
+      "unattempted_opportunities": 0
+    },
+    "final_schedule": {
+      "cells": 6,
+      "maximum_cells": 6,
+      "conditions": 1,
+      "descendant_slots": 2,
+      "no_valid_descendant_slots": 0
+    },
+    "final_coverage": {
+      "expected": 6,
+      "generated": 6,
+      "evaluated": 6
+    },
+    "source_freeze": "Starter and both descendant roles retain original byte hashes and origins. Identical descendant source bytes do not merge distinct roles/slots/owners.",
+    "owner_bindings": "Every search/final owner binds original outer controls; final owners also bind frozen schedule/ready and common packet references. All six generation selections identify the scheduled source;24 final owners.",
+    "no_final_feedback_into_development": true,
+    "all_phase_owners_inactive": true,
+    "unused_setup_unchanged": true,
+    "accounting": {
+      "search": {
+        "spent_microusd": 187,
+        "reserved_microusd": 0,
+        "committed_microusd": 187,
+        "operation_count": 17
+      },
+      "final": {
+        "spent_microusd": 198,
+        "reserved_microusd": 0,
+        "committed_microusd": 198,
+        "operation_count": 18
+      }
+    },
+    "synthetic_totals": {
+      "operation_count": 35,
+      "spent_microusd": 385,
+      "reserved_microusd": 0
+    },
+    "keyless_inspection_unchanged": true,
+    "analysis": "Complete six-row coverage; supplied role-specific qualities5/6/8 yield a synthetic improver-effect point2, but the adopted fixture rule is not satisfied and bounds are uninformative. Identical descendant programs and supplied role scores cannot establish effectiveness."
+  },
+  "guards": {
+    "no_real_keys_inherited": true,
+    "forbidden_events": [],
+    "denied_boundaries": "Fresh child audit guard rejects host external network, process creation, selected-canary compilation and generated-scratch source execution; no such attempted events observed. Ordinary trusted test/application modules execute.",
+    "executing_input_count": 240,
+    "executing_inputs_unchanged": true,
+    "protected_old_live_files": 451,
+    "changed_old_live_files": [],
+    "quality_repository_python_files": 239,
+    "quality_source_files_unchanged": true
+  },
+  "local_quality": [
+    {
+      "name": "lint",
+      "returncode": 0,
+      "seconds": 0.182,
+      "log": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\improver-v3-sealed-quality-lint-v1.log",
+        "bytes": 19,
+        "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+      }
+    },
+    {
+      "name": "format",
+      "returncode": 0,
+      "seconds": 0.137,
+      "log": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\improver-v3-sealed-quality-format-v1.log",
+        "bytes": 28,
+        "sha256": "68d1dc72195af503d4d0bc80908b4d51f60bb7bf57ca76a05d13667bb2905509"
+      }
+    },
+    {
+      "name": "types-windows",
+      "returncode": 0,
+      "seconds": 3.424,
+      "log": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\improver-v3-sealed-quality-types-windows-v1.log",
+        "bytes": 45,
+        "sha256": "3f34ca3611e1a278b355483a3ce21a6855656e562840ec67626c224657569fef"
+      }
+    },
+    {
+      "name": "types-linux",
+      "returncode": 0,
+      "seconds": 2.891,
+      "log": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\improver-v3-sealed-quality-types-linux-v1.log",
+        "bytes": 45,
+        "sha256": "3f34ca3611e1a278b355483a3ce21a6855656e562840ec67626c224657569fef"
+      }
+    },
+    {
+      "name": "security",
+      "returncode": 0,
+      "seconds": 2.943,
+      "log": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\improver-v3-sealed-quality-security-v1.log",
+        "bytes": 5362,
+        "sha256": "d2f462236d2f7d651de04066c4a2c99460de3b2c69cac6d18bd63565e0d1ea5c"
+      }
+    },
+    {
+      "name": "runtime-audit",
+      "returncode": 0,
+      "seconds": 17.45,
+      "log": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\improver-v3-sealed-quality-runtime-audit-v1.log",
+        "bytes": 268,
+        "sha256": "e82148c0c30269ca5a2c35420ece6af011a4faf5a375325d750e243ffdb10625"
+      }
+    },
+    {
+      "name": "development-audit",
+      "returncode": 0,
+      "seconds": 2.805,
+      "log": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\improver-v3-sealed-quality-development-audit-v1.log",
+        "bytes": 268,
+        "sha256": "e82148c0c30269ca5a2c35420ece6af011a4faf5a375325d750e243ffdb10625"
+      }
+    },
+    {
+      "name": "compile",
+      "returncode": 0,
+      "seconds": 1.15,
+      "log": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\improver-v3-sealed-quality-compile-v1.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "discovery": {
+    "only_discovery": true,
+    "occurrences": 1877,
+    "partition_counts": [
+      1,
+      633,
+      621,
+      622
+    ],
+    "census_sha256": "aee8dbde8c8cced63a1a0b8b531adb3b8030919a3e613c2d03a023b620b406d1",
+    "new_test_occurrences": [
+      {
+        "ordinal": 763,
+        "id": "test_improver_comparison_assessment.ImproverComparisonAssessmentTests.test_prospective_comparison_trial_freezes_and_scores_original_six_cell_grid",
+        "shard": 1
+      }
+    ],
+    "full_suite_pass_claimed": false
+  },
+  "retained_original_artifacts": {
+    "count": 33,
+    "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\improver-v3-sealed-attempt-v1-evidence",
+    "relative_path_sha256": {
+      "comparison-sealed-v3-trial.json": "a3cc3ef482ae49ce9e31deafa7b64a15ff8d90fc198582a48c0387345e817b29",
+      "comparison-sealed-v3/.buddha-evaluation-trial.json": "cab479f952a9c5324f5ac13ecbf0c53d599dfd51456b8b33ae9f13383bb98c8a",
+      "comparison-sealed-v3/definition.json": "a3cc3ef482ae49ce9e31deafa7b64a15ff8d90fc198582a48c0387345e817b29",
+      "comparison-sealed-v3/context.json": "9a734ae6ecf3d22bec65390520c90a20089fa18be4d4f210d9dacf3ce4f1a57c",
+      "comparison-sealed-v3/funding.json": "6d0d32ca620c738e8c5599f4be93c27d7121291519f9e69d05f04d63f99ddbd5",
+      "comparison-sealed-v3/freeze/schedule.json": "9ba81eed9b486bb6da697aabc992e17d7346d88405506e15a16d52f7d4c28e27",
+      "comparison-sealed-v3/freeze/ready.json": "6d47b17f1b96b30a94f459c26b99d54965c0b901943b82756ec8006939d40e13",
+      "comparison-sealed-v3/final/report.json": "37f3c3c5e7e8abedb29717dae42249c118f5089792720a4cf4c84f6c9e444926",
+      "comparison-sealed-v3/search/study/declaration.json": "3db8807190afd3aa2fd1ef4b6dd72ab5750f0fb990050775b0217c3d1d92a4fe",
+      "comparison-sealed-v3/search/study/context.json": "67725dce44adcd59416f31410edf8ccf3715e4c1d022f48a7df80181ff274c37",
+      "comparison-sealed-v3/search/study/report.json": "5f585093d6c557062a9424fb0b6b7cfa6bfdced7023ed332daaa6394b38311fc",
+      "comparison-sealed-v3/search/study/freeze/selections.json": "0462e25c77ba3fbd00c32ed03af3a88cfc14be84ee57d4b42ca417aa8b06aa00",
+      "comparison-sealed-v3/search/study/freeze/confirmation.json": "35884e4b37a4c9a7fdc7589e6cd3aca9bd67061fc2cae6015574a171576b530b",
+      "comparison-sealed-v3/search/study/common/0/0/witness/feedback/source.json": "6ed765aaa567dc77991e9b048f06595defe09d03a97c784b64e13a63fd8b341e",
+      "comparison-sealed-v3/search/study/common/0/0/witness/feedback/split.json": "8130f1ad20bf2566806bdd05718074f84ab9cce21b0172d77ad23ffea60c61c5",
+      "comparison-sealed-v3/search/study/common/0/0/witness/feedback/feedback.json": "e570f6b8fe77764ec561632f015ae9d99bf28da7572adc069740d91071c8dbf2",
+      "comparison-sealed-v3/search/study/common/0/0/witness/feedback/provenance.json": "34fbda65b251cd58c8a82544a4def8e34bd3168d6fbc9c0800c2e3eeac8fb149",
+      "comparison-sealed-v3/search/study/cells/0/0/0/0/feedback/feedback.json": "e2e20c467e2d5ff3e0a21fa4da31145192910d9f043dab7e4f791021d698a5cc",
+      "comparison-sealed-v3/search/study/cells/0/0/0/0/feedback/provenance.json": "78297bd3cedbbd03f7ef4e573947e741a8d67b58a12ed9d30826d9bfbecc010c",
+      "comparison-sealed-v3/search/study/cells/0/0/1/0/feedback/feedback.json": "ed5ffeefbb77bd49f026a5fcb5c30ff791257280b312b8cdc8b79f7227ef8692",
+      "comparison-sealed-v3/search/study/cells/0/0/1/0/feedback/provenance.json": "9931b8c9ead04e16abd6d3ef115eda9fabff81e703fed5c177010c4ddf147d97",
+      "comparison-sealed-v3/final/arms/0/tasks/0/repetitions/0/generation/completed/0.json": "6a5d9f204e56833284e9c2850542e70b3d1c3628c050c118470c6f2f7f4e3670",
+      "comparison-sealed-v3/final/arms/0/tasks/0/repetitions/0/generation/attempts/0-0/session/answers.json": "c96b2c743eeae29e35338e15504b4573f06daa178d16168dc83e1fa729c55cb2",
+      "comparison-sealed-v3/final/arms/0/tasks/1/repetitions/0/generation/completed/0.json": "9cb7b6421a1b8df452e9087853c436b0f9d387493ae881705852cc659e3a7593",
+      "comparison-sealed-v3/final/arms/0/tasks/1/repetitions/0/generation/attempts/0-0/session/answers.json": "40dc2b5dda028d603c11f0e42540892c5bbaf176ded3584c500ceacd5718566d",
+      "comparison-sealed-v3/final/arms/1/tasks/0/repetitions/0/generation/completed/0.json": "3f53fde9c8d02fc9dfbfa3723467138d237447062c63d8a7986a50e1674b347e",
+      "comparison-sealed-v3/final/arms/1/tasks/0/repetitions/0/generation/attempts/0-0/session/answers.json": "e9becbfe5078fac991c28047d0e83a6f6725924bde5d663ce80220c675385d77",
+      "comparison-sealed-v3/final/arms/1/tasks/1/repetitions/0/generation/completed/0.json": "a147c7aa99757485c789e1a1cfff1170f797d6d5eae2e127550c41618633429f",
+      "comparison-sealed-v3/final/arms/1/tasks/1/repetitions/0/generation/attempts/0-0/session/answers.json": "981ac5478e73492dae8e9123343b22f001db7e399f492c94c2cc0177c26d51cc",
+      "comparison-sealed-v3/final/arms/2/tasks/0/repetitions/0/generation/completed/0.json": "ccaf46f8e9f3c8d15e24bb5ecec4577280dcac37f0b424d6286a62a55bdf818d",
+      "comparison-sealed-v3/final/arms/2/tasks/0/repetitions/0/generation/attempts/0-0/session/answers.json": "e9becbfe5078fac991c28047d0e83a6f6725924bde5d663ce80220c675385d77",
+      "comparison-sealed-v3/final/arms/2/tasks/1/repetitions/0/generation/completed/0.json": "0085ec206e3fb1dd2889c462bb9acf5f98fa42739fb8bd82265344156994bc7e",
+      "comparison-sealed-v3/final/arms/2/tasks/1/repetitions/0/generation/attempts/0-0/session/answers.json": "981ac5478e73492dae8e9123343b22f001db7e399f492c94c2cc0177c26d51cc"
+    },
+    "source_freeze_index": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\improver-v3-sealed-original-sources-v1\\source-index.json",
+      "bytes": 3984,
+      "sha256": "1f6e3e8e8f9b476ec849938f272e6b9219f23f151138ea9a73cc3c1d01211405"
+    }
+  },
+  "evidence": {
+    "improver-v3-sealed-attempt-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\improver-v3-sealed-attempt-v1.json",
+      "bytes": 1003,
+      "sha256": "10a5f9e1bd17db5ef714fbdaacafaa3dae039f057d7deed43c938726d27297fd"
+    },
+    "improver-v3-sealed-attempt-v1-guard.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\improver-v3-sealed-attempt-v1-guard.json",
+      "bytes": 33479,
+      "sha256": "2a24a6444407060621262bf38bfe23876c13161a7ffcc5a9af9a44009aab467b"
+    },
+    "improver-v3-sealed-attempt-v1-inputs.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\improver-v3-sealed-attempt-v1-inputs.json",
+      "bytes": 43147,
+      "sha256": "982d202931498a0da464a8b5cb1a2be8d8ed4d64c13de2f4bbbcab1333894aa9"
+    },
+    "improver-v3-sealed-attempt-v1.log": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\improver-v3-sealed-attempt-v1.log",
+      "bytes": 4376,
+      "sha256": "7146c918d6db3e1c0c7295e0317607717e1a6257fc112e72584c02941e096d24"
+    },
+    "run-improver-v3-sealed-check-v1.py": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\run-improver-v3-sealed-check-v1.py",
+      "bytes": 6914,
+      "sha256": "7158f4d07934c53dec5e593908c231fc78bad34068899ac3680dc94598021270"
+    },
+    "improver-v3-sealed-quality-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\improver-v3-sealed-quality-v1.json",
+      "bytes": 28115,
+      "sha256": "d5494a3edd5e032d469d685f8f8e2c26654c9fd761e05f1715607f6591c9dcf0"
+    },
+    "improver-v3-sealed-ci-census-v1.jsonl": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\improver-v3-sealed-ci-census-v1.jsonl",
+      "bytes": 272191,
+      "sha256": "f1059b35e9ac81008ce015f40425ff9bec3d27f1d6f832f4d0c7467f138a8934"
+    },
+    "improver-v3-sealed-documentation-edit-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\improver-v3-sealed-documentation-edit-v1.json",
+      "bytes": 456,
+      "sha256": "e7429b67e7e2277b2ef2be0b5fdb11c6e5828446c043c4c1fde0eea80e213e02"
+    },
+    "improver-v3-sealed-documentation-initial-guard-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\improver-v3-sealed-documentation-initial-guard-v1.json",
+      "bytes": 329,
+      "sha256": "934f508dcf9c3c71fb624d8439e393e71b367caa7955fb3812eae93a7780fe9c"
+    }
+  },
+  "consumer_source_sha256": {
+    "buddha/__init__.py": "0857bd60619c1e1c8538fe768cbe82c781bb4e302abc6cf59130f1b17d052230",
+    "buddha/authorization.py": "9c2c1bfaf76e0f4d8108d75363b07d2f591edff7fa8247d69594a5a8bbd01270",
+    "buddha/common.py": "3a0a693a0f4a0f2eed3b858d0b3ac42148871dbca284e56e0e368726309393c0",
+    "buddha/gateway.py": "2d2d73d22af54a6fe4a76d5667b3dec01e7cf45d1698c86ea7f216dfbfe7b826",
+    "buddha/history.py": "d42e92a7e6c88a2f72090eaaa50de39dc355957e7c61f5b89dd97162d8b0eefa",
+    "buddha/ledger.py": "5c7e56f1e2c5e68046d6380ebacc03110300eae34d348d7dca683a0591d64130",
+    "buddha/provider.py": "17de071c1416afa32f9da32eb627e24264d8a0a848862fdf4853057125f18a02",
+    "buddha/releases.py": "2285f5417be9caba5c8aa675e417dcf7ce0310de77dbfd290ad76bc76ec68c1a",
+    "buddha/trial_fence.py": "7423021adc3e251e4f1d6883ccddc48e2048e4a781051a3595ebedad54d34031",
+    "buddha/wire.py": "48f40a71bf10c84dfd1d15f0baef50198cce8a229748355f116ad6a25cab12b4",
+    "buddha/channel.py": "c46d236865b15f1918efa23d961ed7163533c9bbef2b0cec7f61d6f8e95d6e5f",
+    "buddha/candidate_worker.py": "4acdb845a1d78c36c4bbe1f0441c1ccb2dd6ffc7b44ebf770f15d3cf37c8f895",
+    "buddha/executor.py": "3eccc9827ff6729fe998aea703fda14dfad9b2114a811d97808bf0c1e506c2b1",
+    "buddha/answers.py": "be860546b2692ea4a710d93855f487dd49d9c8e28eb3f2ec757df697cefb8d0b",
+    "buddha/candidate_run.py": "888275b5c8d06ceb159385602dad2fb5a4b9a994f9075774b2cac5dd3f50a23e",
+    "buddha/candidate_generation.py": "4bdcad408cd9c3258be597c2572b34750c1d15da0d931bac0e1f46c945b8a8f4",
+    "buddha/native_pipeline.py": "17c7eb15afa6940569a2ba41588d5dc80aa4a74a91d0a8b8baf905f488bec128",
+    "buddha/doctor.py": "afa511a747c4be2951ba53fea5cfe2822077a0f7a6f80a80a3255594d5b5d19b",
+    "buddha/process_observation.py": "28ad4b424ae0bec10aa2d3bf145cb62e1b26eb088db5e83fb6900fab6d5495a8",
+    "buddha/gateway_history.py": "a773ae6066e5b8a4f503e4b346b73570ace2ebeb811017f7b656cc211fded57c",
+    "buddha/search_evidence.py": "1d89ed7ae541f52b79cc643edd2615955104cceb8508036d3b288e646fa30a34",
+    "buddha/native_evidence.py": "a0acdb4acd583fdddc9257556b7878cf926b1a354cc274fc2a9ecb73737d26c7",
+    "buddha/native_worker.py": "8fa4b85ae6e75202de4b345302cb70253b6c0c5b47f004490f8d9a09750ecaa1",
+    "buddha/native_context.py": "47a488b8d731617bda21380232e5e49801e0c0b4261f69b71c24fb9eae0ba298",
+    "buddha/native_transport.py": "ccd4917132939630231b8b8c69540189cd52f60951fa08d467d90b9571ccb6c0",
+    "buddha/native_run.py": "516c992510143eb334fb4594b578e78307f5066fba1ca7811f4ba68b23bfd7d6",
+    "buddha/native_evaluation.py": "138158fba98f152c8a681b93721405ec4cbf236e584a85f3b6cad58203564605",
+    "buddha/validation_study.py": "0e1168fb9174d1f10525a8322cf5ea8d27054836816feef288137b49c0fbd4f4",
+    "buddha/improvement_rule.py": "3df31b496a0f4b83c2df9ae6a523935b73ef52975f6edc0ce0c999646a653194",
+    "buddha/source_screen_results.py": "ffc0769367c14e5ff623766128aa5d9f65bd3859f63d0d7fcf167bf3cfd520e7",
+    "buddha/validation_analysis.py": "57641faade0b7c68a760b29c10748bbb44a0e2641fdbb5eb7aaaf4cccf55258e",
+    "buddha/noveltybench_results.py": "cff8abfd8d26b6a697e9e500baf2b0df429bdbaabf9d6808d4ec9e53830b4802",
+    "buddha/improver_analysis.py": "bd8804e7e9bb2a83398aaa4cfcc3d98491eb517916e80c74a1e9e556d469587e",
+    "buddha/final_evaluation.py": "3907ac0269a31d9d31c8c502cbdccdd8660901181eef87b85a64e2888cfebbba",
+    "buddha/improver_study.py": "1b07734c85deb5a2458c582a148fe2d5e367ddd137006bb976bd4b125f39b713",
+    "buddha/improver_assessment.py": "2ecea39dd103ebc446f67cf8049ee8fb1e860273ece731947c8c73fc18eaf308"
+  },
+  "hosted_verification": {
+    "current_new_head": "pending publication and exact-head hosted checks; no success claimed",
+    "separate_ancestor": "PR130 run40157941166 passed all eight jobs at its recorded source cut; no automatic new-head clearance"
+  },
+  "preservation": {
+    "plan_revision": 136,
+    "prior_raw_revision_rows": 135,
+    "original_acceptance_tails": 10,
+    "primary_plan_mirror": true,
+    "benchmark_and_official_scoring_changed": false,
+    "old_run_or_agent_source_changed": false,
+    "main_readme_changed": false,
+    "development_pr_merged": false
+  },
+  "limitations": [
+    "All worker/judge/provider behavior and usage are supplied; no real API call, selected-source execution, model attention, output headroom, judge correctness or improved-improver claim.",
+    "The six-cell prospective fixture is not the future actual task/source/repetition grid and does not certify its runtime or affordability.",
+    "The retained33 files and separate source copies are a bounded evidence subset, not a full independent passive-replay inventory.",
+    "The shared fixture analyzer returns conditional numerical bounds, not custody attestation, independent-family proof, target repair or scientific promotion."
+  ],
+  "next": "One unfunded concrete original-P/C protocol/feasibility proposal within PLAN IMP-01; verify actual P compatibility, both actors request capacities, honest task custody, full-grid resources/runtime, statistical rule and review arrangements before any separately authorized live study.",
+  "independent_closed_artifact_review": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\improver-v3-sealed-independent-closure-v1.json",
+    "sha256": "bbb5d37f1e4c28e0d12a56d085f40efcc0c657cdf7999fab9df7ab9ea02b9306",
+    "scope": "Read-only raw bytes/JSON;33 retained files and independent original three-source capture, six source/completion/owner-hash/answer/task joins; no app import, mutable database query, selected execution or new observations. Runner-only preservation/keyless claims remain attributed to the runner; retained subset is not a full replay inventory."
+  }
+}

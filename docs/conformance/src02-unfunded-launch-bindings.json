@@ -1,0 +1,216 @@
+{
+  "account_basis": {
+    "basis": "existing user attestations",
+    "credential_binding_created": false,
+    "price_review": "retained dated evidence only; applicability and final account review still pending",
+    "pricing": "public pay-as-you-go",
+    "processing_tier": "standard/default",
+    "provider_account_verified": false,
+    "providers": [
+      "openai",
+      "anthropic"
+    ]
+  },
+  "basis_commit": "286df69e10fcaab9db1a8afeb7b5a45427380c84",
+  "current_ci_checkpoint": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-selected-producer-ci-terminal-checkpoint-v1.json",
+    "sha256": "3c7f6064e99168458f651886620cb26129997863ffc1e0ed80536057fff9b9af"
+  },
+  "draft": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-unfunded-launch-draft-v2.json",
+    "sha256": "5d326d8e75037767b33a0c6483314d2302dc5d1aed92cafd300ba242de660d6b"
+  },
+  "evidence": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\prepare-src02-unfunded-launch-draft-v1.py",
+      "sha256": "73b50b01306a7f6cfdc395ba3fec4ef755e693457e7e293049f5285bc7a1452a"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-unfunded-launch-draft-preparation-v1.json",
+      "sha256": "3149933739456e1f8b1016bfe9750662039c36019595c01aa0fddbda33333a76"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-unfunded-launch-draft-process-v1.json",
+      "sha256": "3c8aa8bce65438a6653f4551f3d1ddb085b8d06f5fb3edbd0768a43c11f60145"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-unfunded-launch-draft-process-v1.stdout.log",
+      "sha256": "098217a445c0dfec42cae64846e0895d1f5e43ac216548c50976bc51192f3ada"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-unfunded-launch-draft-process-v1.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\observe-src02-draft-metadata-v1.py",
+      "sha256": "f9c7ebaf2587485454d7d99fc2db8dfeca2400b7404434462c4f27ba2ee860c7"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-unfunded-launch-draft-read-diagnostic-v1.json",
+      "sha256": "58667d5cbf79b26a09e865504eae8a234ed520cb436f4f0084591ac7251bfdbc"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\prepare-src02-unfunded-launch-draft-v2.py",
+      "sha256": "6e18c451f9929530d73c8715f1fab263a27e17d561c5bcf1036b53d1d97c18d8"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\run-src02-unfunded-launch-draft-v2.py",
+      "sha256": "7a229533003d1b4213063fa5b56ae95d2c3802f5113306233af209fdc670633d"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-unfunded-launch-draft-v2.json",
+      "sha256": "5d326d8e75037767b33a0c6483314d2302dc5d1aed92cafd300ba242de660d6b"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-unfunded-launch-draft-preparation-v2.json",
+      "sha256": "096c2c02b5d34e95daa360ef87e5ee4db2b59b0ce871df7152cb29edbc7bc5de"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-unfunded-launch-draft-process-v2.json",
+      "sha256": "230cac75b3977a476bc1cd91aadf7ad4a4e21390f9606d8142793c3c993c8dee"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-unfunded-launch-draft-process-v2.stdout.log",
+      "sha256": "6db42c21d747c09764f7cf83e0a1459a0f0200ef1b16ed4c56fd209e4cd62f97"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-unfunded-launch-draft-process-v2.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-unfunded-launch-bindings-author-reconciliation-v1.json",
+      "sha256": "2fb6dc5677c28cea037aeb6d43a46c442ca4dbf6fd298c23486bbf3cd243c838"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-unfunded-launch-bindings-independent-review-v1.json",
+      "sha256": "fc71cbc8c6e74977796dc1ae6eaf96a8fe2f899578feb121451ece273182d6c4"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\pr111-ci-job-120825255853-terminal-v1.log",
+      "sha256": "ad7b3b59601d1a4f2920967dfd1fc9ca51b68b203b3a49d330dc4c783f1065a9"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-selected-producer-ci-terminal-checkpoint-v1.json",
+      "sha256": "3c7f6064e99168458f651886620cb26129997863ffc1e0ed80536057fff9b9af"
+    }
+  ],
+  "execution": {
+    "elapsed_seconds": 27.044202500022948,
+    "exit_code": 0,
+    "future_trees_absent": true,
+    "keys_used": false,
+    "original_authorities_created": 0,
+    "original_owners_created": 0,
+    "protected_files": 175,
+    "protected_inputs_unchanged": true,
+    "provider_calls": 0,
+    "unexpected_guard_events": 0
+  },
+  "format": "buddha.src02-unfunded-launch-bindings.v1",
+  "invocation_receipt": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-receipts-v1\\launch-001.json",
+  "launch_source_inventory": {
+    "count": 73,
+    "location": "draft.proposed.launch.record.source_sha256"
+  },
+  "launchable": false,
+  "limits": [
+    "No application validator was invoked; this drafts existing-schema bytes from pinned evidence",
+    "No actual approval, launch, authorization, account review, owner, database, provider call or selected-source execution exists from this recipe",
+    "Small passive check and control pins do not establish runtime availability or scientific improvement",
+    "No application validators or test suite ran in this documentation slice; executing-code checks retain their original scopes.",
+    "No exact-head hosted success, funded check_launch result, observed29-owner invocation census or scientific gate closure is claimed."
+  ],
+  "local_runtime_images": {
+    "native": {
+      "id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+      "native_tool_result": "41c151"
+    },
+    "scope": "Read-only docker image inspect identity observations on2026-10-24; no worker or selected source executed; availability can change",
+    "source": {
+      "id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+      "native_tool_result": "5e7304"
+    }
+  },
+  "preservation": {
+    "adopted_protocol_intent_criteria_unchanged": true,
+    "existing_source_map_bindings_unchanged": 169,
+    "historical_plan_rows": 116,
+    "new_paid_allocation": false,
+    "original_main_acceptance_tails": 10,
+    "plan_sha256": "715e511a7f64604540ffc7cca90923c02e820a182e9d1d9a8ed4c472b3858b10"
+  },
+  "producer": {
+    "documented_checkout_commit": "e34e0f18c0f59b0053ab0eb15582b6cded805c77",
+    "executing_byte_cut": "87c041b207d54305ba30621bbf4b6b935d7d19b2",
+    "identity_basis": "fixed source hashes, not a Git subprocess",
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-corrected-live-preparation"
+  },
+  "proposal": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-proposal-v2\\proposal.json",
+    "sha256": "d223ecaab0c8adcfae91f1c1893cd80ca6ba0af3d01ae101f89a3db29a94d421"
+  },
+  "proposed_approval": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-handoff-v1\\approval.json",
+    "record": {
+      "account_scope": "SRC02/03 current-source demonstration: user-attested OpenAI and Anthropic Standard/default processing and public pay-as-you-go pricing",
+      "authorization": {
+        "id": "src02-current-live-20261024-v1",
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-handoff-v1\\authorization.sqlite3",
+        "scope": "source screen: c0c9dd9ec6330af3840a79517192509c901560e323c09b48979a2c885056d829",
+        "terms_sha256": "f744dc63837ea7df9324c4a616f7b83192ae8370080bbe09a9787cafa8bb0de7"
+      },
+      "budget_microusd": 25000000,
+      "comparison_key": "c0c9dd9ec6330af3840a79517192509c901560e323c09b48979a2c885056d829",
+      "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1",
+      "format": "buddha.source-approval.v1",
+      "max_calls": 512,
+      "proposal_sha256": "d223ecaab0c8adcfae91f1c1893cd80ca6ba0af3d01ae101f89a3db29a94d421",
+      "review": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-handoff-v1\\account-review.json"
+    },
+    "sha256": "bddb217a14b7a817dc0c72a88d6b2abdd65a28ea269d7ec16a4ae7bb56d840bd"
+  },
+  "proposed_launch": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-handoff-v1\\launch.json",
+    "sha256": "74d108fd776103ab38dc81181b09a9685754b8606c8618a2cdf6fa12fa901b5a"
+  },
+  "prospective_projection": {
+    "K": 0,
+    "L": 74,
+    "assumptions": [
+      "three ordered tasks and three single-input/single-output official stages",
+      "valid unique C and successful W0/W1; eligibility and stop conditions may execute a strict prefix",
+      "standalone trial ancestry with no extra controls",
+      "any later actually pinned support record adds distinct K; draft/preparation/invocation receipts are not launch controls",
+      "six permitted sidecars are zero-length; this is not a call-count, cost or success prediction"
+    ],
+    "bound_formula": "L+28+Z with0<=Z<=6; keyed review is already included in this bound",
+    "fixed_plus_keyed_review": 75,
+    "keyed_review_additional_paths": 1,
+    "maximum_with_permitted_empty_sidecars": 108,
+    "planned_owner_count": 29,
+    "runtime_limit": 1024,
+    "status": "conditional pure set/count projection; no owner or invocation observed"
+  },
+  "remaining_requirements": [
+    "Resolve and verify the selected-head Ubuntu read-count assertion failure; finish exact executing-code hosted checks and real funded source/input reconciliation",
+    "new user allocation for25USD/512attempts; prior allowances are closed",
+    "reviewed creation of the real dedicated authority and exact approval/launch files",
+    "local actual keys, fresh launch-bound account review and final retained public-price applicability",
+    "actual bounded source demonstration and required original custody/mechanism review"
+  ],
+  "requested_terms": {
+    "allocation_status": "unallocated",
+    "budget_microusd": 25000000,
+    "max_calls": 512,
+    "partial_results_allowed": true
+  },
+  "retained_failure": {
+    "diagnosis": "Stable Windows lstat/fstat ctime disagreement; full within-API checks and raw hashes preserved in v2",
+    "original_receipt_unchanged": true,
+    "reason": "preparation_failed",
+    "stage": "source_before",
+    "status": "partial"
+  },
+  "scope": "Offline proposed launch/data construction, source/data review and documentation only",
+  "status": "non_authoritative_draft_checked"
+}

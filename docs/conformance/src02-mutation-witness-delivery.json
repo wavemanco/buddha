@@ -1,0 +1,239 @@
+{
+  "actual_composed_proof": {
+    "claim": "No successful actual composed positive witness, unchanged-runner whole-loop proof or scientific gain established.",
+    "native_scope": "Request-free simulated native ready/files/done, not official-command or scoring proof.",
+    "negative_controls": [
+      {
+        "label": "missing",
+        "reason": "no_parent_eligible",
+        "status": "complete"
+      },
+      {
+        "label": "raising",
+        "reason": "no_parent_eligible",
+        "status": "complete"
+      }
+    ],
+    "positive": "Real inherited improver consumed both complete measured answer rows and materialized changed299byte child. Further child stopped before READY; original run remains incomplete and unchanged.",
+    "real_agent_workers": 10,
+    "sha256": "b1450f35afbbec8b8734d4bc3980af8cb9880d45f6a754403da92cf3df8c22c6",
+    "simulated_native_workers": 18,
+    "status": "failed"
+  },
+  "base_commit": "3190a6e46c43016f3ced197b10658c165f56cc49",
+  "contract": {
+    "admission": "Own complete native screen, own full-output measured feedback, inherited changed further child, anchored generation of first ordered typed task/count, clean original-owner completion.",
+    "failure": "Checked anchored failure excludes parent; unknown/unsealed/unclean work stays incomplete. Failed seed completes no_parent_eligible with no selected parent or ordinary decisions.",
+    "legacy": "Explicit false retains full-output task-only manifest v2. Historical manifest v1/handoff v1 preserve original semantics and bytes. Launcher rejects a task-only preparation under a witness-required approval.",
+    "new_default": "source-search manifest v3; source-handoff v2; search report v2",
+    "owner_ceiling": "Three iterations, three tasks and three native stages: 51 -> 59 original owners. This is not a request, cost or context-capacity guarantee.",
+    "policy": "buddha.source-mutation-witness.v1",
+    "recovery": "Census every original witness owner including unpublished work; join exact inputs, schedule, funding, profile and original stage seals. Never replace an unfinished owner.",
+    "scope": "One further mutation; witness child is evidence only and has no native score/archive entry/recursive witness. Zero model callbacks may succeed. Source change need not improve behavior."
+  },
+  "diagnostic_interpretation": "The original mount reports EIO at lstat('/agent'). Identical source and unchanged production runner/initial succeed from fresh locations on another occasion. This does not identify a filesystem/Docker cause, fix or repair of the original owner; time and host paths vary.",
+  "diagnostics": [
+    {
+      "actual_executor_calls": 1,
+      "cleanup": "removed",
+      "elapsed_seconds": 38.33309430000372,
+      "frames": [
+        {
+          "answers": [],
+          "reason": "protocol",
+          "status": "failed",
+          "type": "done"
+        }
+      ],
+      "model_requests": 0,
+      "original_agent_and_inputs_unchanged": true,
+      "runner_modified": true,
+      "sha256": "4f50798d5e9ed586e43d79b69d25f20fbf009236b6a0d3e581e6bb26551aa5d2",
+      "stderr": "diagnostic:sources\nTraceback (most recent call last):\n  File \"/runner/buddha/candidate_worker.py\", line 260, in _sources\n    if inventory(root) != self.inventories[name]:\n       ~~~~~~~~~^^^^^^\n  File \"/runner/buddha/releases.py\", line 402, in inventory\n    raise ReleaseError(\"component inventory could not be read\") from None\nbuddha.releases.ReleaseError: component inventory could not be read\ndiagnostic:sources\nTraceback (most recent call last):\n  File \"/runner/buddha/candidate_worker.py\", line 260, in _sources\n    if inventory(root) != self.inventories[name]:\n       ~~~~~~~~~^^^^^^\n  File \"/runner/buddha/releases.py\", line 402, in inventory\n    raise ReleaseError(\"component inventory could not be read\") from None\nbuddha.releases.ReleaseError: component inventory could not be read\n",
+      "stderr_sha256": "70739a423d8df47b7b4be7a194be044f792ebb01c096fe0ea7741d21bd412579",
+      "version": 3
+    },
+    {
+      "actual_executor_calls": 1,
+      "cleanup": "removed",
+      "elapsed_seconds": 48.684659800026566,
+      "frames": [
+        {
+          "answers": [],
+          "reason": "protocol",
+          "status": "failed",
+          "type": "done"
+        }
+      ],
+      "model_requests": 0,
+      "original_agent_and_inputs_unchanged": true,
+      "runner_modified": true,
+      "sha256": "6c3da51ca1f94961b28635f6b297b6ee830748ef8800eb1e5ecc4802f43e77e9",
+      "stderr": "diagnostic:oserror\n{\"errno\": 5, \"error_type\": \"OSError\", \"filename\": \"/agent\", \"filename2\": null, \"operation\": \"inventory\", \"root_or_path\": \"/agent\", \"winerror\": null}\nTraceback (most recent call last):\n  File \"/runner/buddha/releases.py\", line 413, in inventory\n    directory = _root(root)\n  File \"/runner/buddha/releases.py\", line 357, in _root\n    _information(part)\n    ~~~~~~~~~~~~^^^^^^\n  File \"/runner/buddha/releases.py\", line 343, in _information\n    information = path.lstat()\n  File \"/usr/local/lib/python3.13/pathlib/_abc.py\", line 437, in lstat\n    return self.stat(follow_symlinks=False)\n           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.13/pathlib/_local.py\", line 515, in stat\n    return os.stat(self, follow_symlinks=follow_symlinks)\n           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: [Errno 5] Input/output error: '/agent'\ndiagnostic:sources\nTraceback (most recent call last):\n  File \"/runner/buddha/candidate_worker.py\", line 254, in _sources\n    if inventory(root) != self.inventories[name]:\n       ~~~~~~~~~^^^^^^\n  File \"/runner/buddha/releases.py\", line 440, in inventory\n    raise ReleaseError(\"component inventory could not be read\") from None\nbuddha.releases.ReleaseError: component inventory could not be read\ndiagnostic:oserror\n{\"errno\": 5, \"error_type\": \"OSError\", \"filename\": \"/agent\", \"filename2\": null, \"operation\": \"inventory\", \"root_or_path\": \"/agent\", \"winerror\": null}\nTraceback (most recent call last):\n  File \"/runner/buddha/releases.py\", line 413, in inventory\n    directory = _root(root)\n  File \"/runner/buddha/releases.py\", line 357, in _root\n    _information(part)\n    ~~~~~~~~~~~~^^^^^^\n  File \"/runner/buddha/releases.py\", line 343, in _information\n    information = path.lstat()\n  File \"/usr/local/lib/python3.13/pathlib/_abc.py\", line 437, in lstat\n    return self.stat(follow_symlinks=False)\n           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.13/pathlib/_local.py\", line 515, in stat\n    return os.stat(self, follow_symlinks=follow_symlinks)\n           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: [Errno 5] Input/output error: '/agent'\ndiagnostic:sources\nTraceback (most recent call last):\n  File \"/runner/buddha/candidate_worker.py\", line 254, in _sources\n    if inventory(root) != self.inventories[name]:\n       ~~~~~~~~~^^^^^^\n  File \"/runner/buddha/releases.py\", line 440, in inventory\n    raise ReleaseError(\"component inventory could not be read\") from None\nbuddha.releases.ReleaseError: component inventory could not be read\n",
+      "stderr_sha256": "4440f2221b58225c5c285056f03dec49ac5c2c2eb8a2d587e42a53fbf0702c44",
+      "version": 4
+    },
+    {
+      "actual_executor_calls": 1,
+      "cleanup": "removed",
+      "elapsed_seconds": 39.92941310000606,
+      "frames": [
+        {
+          "agent_sha256": "9b78ca6ac532b5221ccc1de37105817419840fecded9ab7da8e2abf20c649bab",
+          "runtime_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+          "task_sha256": "8b656a67c27957a554d8267bc7cebd69ec101faae15f31d713e028b55e93dff3",
+          "type": "ready"
+        },
+        {
+          "answers": [
+            "hello",
+            "goodbye"
+          ],
+          "reason": "complete",
+          "status": "complete",
+          "type": "done"
+        }
+      ],
+      "model_requests": 0,
+      "original_agent_and_inputs_unchanged": true,
+      "runner_modified": false,
+      "sha256": "bf350c1023cb9de45c552787bc9f49e37d3abb23047a5e0b0576b666481af219",
+      "stderr": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "version": 5
+    }
+  ],
+  "focused_tests": {
+    "coverage": [
+      "Missing/raising improvers and positive zero-callback witness",
+      "Failed child exclusion and parent continuation",
+      "Typed first task/count, full feedback and changed child joins",
+      "Uncertain startup, recovery and retained original owner tampering",
+      "Exact readiness owner population and coherent downgrade refusal",
+      "Historical task-only source loops and feedback replay"
+    ],
+    "observations": [
+      {
+        "elapsed_seconds": 419.8506509999279,
+        "log_sha256": "56896fa87a18510d0358c73738c7c7176560ff25048719c4bc9b96a6e0d55268",
+        "observation": "mutation-witness-bootstrap-v2",
+        "sha256": "59cfefecd978c8a3252a7dbea910acea0c7384e8435331d9c772611280ceaa41",
+        "tests": 2
+      },
+      {
+        "elapsed_seconds": 987.0160068999976,
+        "log_sha256": "74349e0dc13d919a97567c373de317684b3d4fc3f4eeccef6dc2f37ca2394fcc",
+        "observation": "mutation-witness-failures-v1",
+        "sha256": "3c68acff1bc30b2d0ef3b5e7029c83aa9650d6bd7f10c58e0e9a298e0e27dcfb",
+        "tests": 3
+      },
+      {
+        "elapsed_seconds": 522.4070271999808,
+        "log_sha256": "ebf5c992c8ab9be88b6cf9bcf4abe4febf1293915f7a909f397aa5a58282daa0",
+        "observation": "mutation-witness-recovery-v1",
+        "sha256": "0c7f4b2c3f4a7b84816f64dcc64b6d6fb730a178f54606612eabb64baf0bd724",
+        "tests": 3
+      },
+      {
+        "elapsed_seconds": 625.2741020999383,
+        "log_sha256": "2eae7f20026daa1159ae66fb51a2497cb8ff5af2f2daccf0776a3e78b72c487a",
+        "observation": "mutation-witness-readiness-v1",
+        "sha256": "222530422207ebe9be4fd5932852c664cc8e7184bbc0afe472aed8d945aa0004",
+        "tests": 32
+      },
+      {
+        "elapsed_seconds": 88.19161809992511,
+        "log_sha256": "d5500486b2d860b18a436b7576fc032701429c0138b87323a8830db2a41d7a79",
+        "observation": "mutation-witness-retained-owner-v1",
+        "sha256": "4228cf028a0cb0280fe728423ea02f0e1a4aa86dbf0313e65592befb1ea98431",
+        "tests": 1
+      },
+      {
+        "elapsed_seconds": 1152.8649561000057,
+        "log_sha256": "a39b99322aa6f0d520063304b47fe99ae6be8d8a712fbc0b0eb10751ef1614d7",
+        "observation": "mutation-witness-legacy-loop-v1",
+        "sha256": "34d712bf7390ff5ab2283b32f000d30537975a07362dcc53c4d2b2836fd86e63",
+        "tests": 3
+      },
+      {
+        "elapsed_seconds": 637.7665836999658,
+        "log_sha256": "84e1504c71a81645014024dc5638b22ff13d2b86681355b6773b3edcad4a8ebb",
+        "observation": "mutation-witness-legacy-feedback-v1",
+        "sha256": "e3027bdffd555adb3c29abe21dcbfde4997e35eeab48be5e04c992cd17f1ff7d",
+        "tests": 2
+      }
+    ],
+    "scope": "Separate fixed cohorts, not one full-suite/final-cut run; synthetic workers/HTTPS and fresh temporary or memory SQLite only. No real model calls.",
+    "unique_methods": 46
+  },
+  "format": "buddha.src02-mutation-witness-delivery.v1",
+  "funding": "No real provider calls, new allocation, keys, actual paid-run writes, held-out data or permission to use a closed allowance.",
+  "history": [
+    "Initial failed-seed behavioral RED retained.",
+    "Bootstrap fixture/setup refusals and self-observation directory-mutation failure retained; capture boundary corrected without weakening snapshot checks.",
+    "Retained-owner insertion first stopped on LF/CRLF marker guard before writing; corrected insertion and two corruption cases passed.",
+    "Earlier focused cohorts and quality cuts remain separately identified.",
+    "First read-only PowerShell comparison used unparenthesized join expressions and rejected the expected two names; corrected comparison has explicit strings. No input or evidence was altered.",
+    "First documentation assembler created the new delivery and guide, then stopped before the unchanged PLAN75 write because its CRLF marker did not match the existing mixed CRLF/LF boundary. A guarded follow-up preserved every old revision row and acceptance tail; no historical or production input changed."
+  ],
+  "open_gates": [
+    "Resolve source-mount startup condition and complete a fresh actual composed positive witness under unchanged production execution and original-owner custody.",
+    "Verify concrete full request context, output headroom and schedule capacity before another live handoff.",
+    "Full hosted regression, broader competence and controlled scientific gates remain separate."
+  ],
+  "publication_quality": {
+    "commands": [
+      {
+        "exit_code": 0,
+        "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "name": "ruff-check"
+      },
+      {
+        "exit_code": 0,
+        "log_sha256": "a8974443d12f9736423157c869f658ab1b4fc18c2ff99f12bf2cb579052f9e5b",
+        "name": "ruff-format"
+      },
+      {
+        "exit_code": 0,
+        "log_sha256": "dd758c62e671570062f9954e1a5d527b0d481f03e1af252648074cae102ed75c",
+        "name": "mypy-windows"
+      },
+      {
+        "exit_code": 0,
+        "log_sha256": "46f833e8d47068acf50c2af416801ffbfcf8ad6d4e6739c970f35618e064e0de",
+        "name": "bandit"
+      },
+      {
+        "exit_code": 0,
+        "log_sha256": "e82148c0c30269ca5a2c35420ece6af011a4faf5a375325d750e243ffdb10625",
+        "name": "pip-audit"
+      },
+      {
+        "exit_code": 0,
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "name": "compile"
+      },
+      {
+        "exit_code": 0,
+        "log_sha256": "dd758c62e671570062f9954e1a5d527b0d481f03e1af252648074cae102ed75c",
+        "name": "mypy-linux"
+      }
+    ],
+    "python_inputs": 231,
+    "sha256": "b8c3a8f476a5066e32bc9f2e1816a938b740ae042979504576e6870bcca18b05"
+  },
+  "publication_source_bridge": {
+    "changed_from_original_observation": [
+      "tests\\test_candidate_improvement.py",
+      "tests\\test_source_failure_feedback.py"
+    ],
+    "compared_python_and_config_files": 235,
+    "format": "buddha.mutation-witness-publication-source-bridge.v1",
+    "production_and_witness_checks_identical": true,
+    "qualification": "Focused tests were observed in original witness checkout; this byte bridge and seven quality checks are publication observations, not a rerun of those tests.",
+    "quality_sha256": "b8c3a8f476a5066e32bc9f2e1816a938b740ae042979504576e6870bcca18b05",
+    "setup_history": "First read-only PowerShell comparison used unparenthesized join expressions and rejected the expected two names; corrected comparison has explicit strings. No input or evidence was altered.",
+    "sha256": "10f726b3285f12e0025b0c102ea46fc7622a2cca3a045bc0855e30964adc2db8"
+  },
+  "status": "draft_actual_composed_positive_gate_open"
+}

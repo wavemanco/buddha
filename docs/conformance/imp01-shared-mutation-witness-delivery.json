@@ -1,0 +1,160 @@
+{
+  "contract": {
+    "advance": "Exact action/role/result; preparation returns before dispatch, execution returns before the next preparation, publication is local, complete replay is passive.",
+    "caller": "Actual controller root exclusion and whole-scope census between every preparation and execution; no fabricated SourceSearch state or callback registry.",
+    "capacity": "Unplanned progress is lazy; active full-packet overflow preserves SourceFeedbackTooLarge and inherited feedback_capacity/witness_feedback observations without truncation.",
+    "compatibility": "Existing source-search manifests, source-copy roots, helper basename sets, wrapper signatures, witness paths, report fields and launcher progress semantics retain their meaning.",
+    "guards": "Every active directory/packet/source-copy/preparation/publication write uses the existing work/purpose guard; unknown/incomplete owners retain their original identities and liabilities.",
+    "progress": "Original five progress fields plus lower_role, needs_prepare and real owner_treatments, reconstructed from ordinary NativeEvidence and actual captured original authority.",
+    "read_reuse": "Parent report and SourceScreen are verified once within the same current capture. No evidence is cached across mutations. All five prepare/execute/publication restore/check boundaries remain; publication phase comes from already-checked local owner treatment.",
+    "treatment": "Exact immutable eleven-key private declaration, pure value validation and fixed original source-copy/witness policies."
+  },
+  "current_checks": {
+    "acceptance": {
+      "elapsed_seconds": 391.7810087999096,
+      "log_sha256": "d252e2edede900aed7781e8274bc6e4cb538ec4b48b6359e24aa324080c55b79",
+      "methods": 4,
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-witness-green-v3.json",
+      "scope": "Genuine detached-I counted child and non-SourceSearch witness, separate prepare/execute, full late-ending/empty outputs, verified copy/no-copy paths, known reply original-owner resume, work-guard refusal unit fixtures, passive completion, lazy reads and typed capacity/phase observations. Supplied workers/replies; no actual new container or model request.",
+      "sha256": "9bd48206987a2a478ed2c2ac6f4049da3540f92855d67a400cd15fc32137c596",
+      "status": "pass"
+    },
+    "copy_history_launcher": {
+      "elapsed_seconds": 1851.1489657000639,
+      "log_sha256": "78a9ab9d62ad60af14a5cba2cfc656a4535e3747e45edb9e342bfe84aa31a94f",
+      "methods": 19,
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-witness-compat19-green-v3.json",
+      "scope": "Nineteen existing copy/history/launcher methods, including six copy methods, five history/profile methods and eight witness/native launcher readiness methods. Simulated workers/replies; no full-suite claim. No external calls/processes, selected-source execution on host, Docker, paid operations or original owner changes. Focused cohort only.",
+      "sha256": "e4ec973369f24dcee0c7de461fb6769039f28e6c5a02102a0d47a8fd49fcd98c",
+      "status": "pass"
+    },
+    "independent_code_and_test_review": {
+      "authorship": "Fresh code/test reviewer authored neither implementation nor acceptance tests; coordinating receipt author drafted the tests.",
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-witness-delivery-independent-review-v1.json",
+      "scope": "Static code/test review and in-progress artifact joins. Later plain-English PLAN breakdown preserves the same acceptance criteria; behavioral cohorts were still running at this review checkpoint.",
+      "sha256": "3dd0c8b88c7604fd4b7052230a7118f7c034009cd57928d0c34ac56c390d597e",
+      "status": "scoped_static_pass"
+    },
+    "inherited_witness": {
+      "elapsed_seconds": 2043.1964879999869,
+      "log_sha256": "d2ac35608aea27a44c214b2b1a34c7d1e14104e00791d463e826bbf591736d02",
+      "methods": 8,
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-witness-old8-green-v3.json",
+      "scope": "Eight original inherited-witness methods, including failure, full output/typed first task, cleanup, original known/unknown recovery, false publication and legacy task-only compatibility. Simulated workers/replies; no new shared-helper methods. No external calls/processes, selected-source execution on host, Docker, paid operations or original owner changes. Focused cohort only.",
+      "sha256": "29e7fdd4b16a9be0da753a17ee209f28ab07fb4cba21399b4427fbb5881cd5ef",
+      "status": "pass"
+    },
+    "older_publications": {
+      "original_files_unchanged": 429,
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\imp01-shared-witness\\runs\\reviews\\imp01-witness-old-owner-v3.json",
+      "publications": 6,
+      "scope": "The valid historical whole search stays incomplete; only its four complete lower publications and two complete negative searches are inspected.",
+      "sha256": "0f3325fdf9d9a789f573b9f56b336aaa97320a294d601be8015296ce25e18b2a",
+      "status": "pass"
+    },
+    "production_static_review": {
+      "independence": "Production authorship only; reviewer drafted tests. No independent runtime observation.",
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-witness-production-review-v3.json",
+      "sha256": "a233b78f4aea13d74b01a5e30e4dc10e75dda24162d3cd5bee99b7c8cf162306",
+      "status": "scoped_pass"
+    },
+    "quality": {
+      "commands": 7,
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\imp01-shared-witness\\runs\\reviews\\imp01-witness-quality-v3.json",
+      "sha256": "3bef3f120b59cc5038df265e4b0f385a7f8aa304e03d2e85cf2c6980d92b583e",
+      "source_and_controls_count": 255,
+      "status": "pass"
+    }
+  },
+  "format": "buddha.imp01-shared-mutation-witness-delivery.v1",
+  "history_interpretation": [
+    "Initial two-method RED reached the missing factory only after genuine common measurements, a detached fixed-I proposal and counted-child screening.",
+    "First implementation eagerly built packets before the witness directory existed; expanded RED also proved invalid template scalars and forbidden passive packet builds. Those failures are preserved.",
+    "The d5fc correction passed four acceptance methods, seven quality commands and six older publications. Its old8/19 cohorts were intentionally stopped to remove statically traced duplicate reads; no complete pass is claimed for those interrupted cohorts.",
+    "The final code reduces the source-level local current-parent inspection count from90 to30 for the traced successful facade path, preserving mandatory censuses. This is a static call count, not an isolated measured runtime speedup; scratch paths also changed.",
+    "The final held 0c7ab7ab implementation passes four new acceptance, eight inherited-witness and nineteen copy/history/launcher methods in three separate cohorts; all inputs remain unchanged. No interrupted earlier cohort is relabeled as complete."
+  ],
+  "implementation_and_test_pins": {
+    "buddha/source_search.py": "0c7ab7ab6aa284bbec130d114788b43bb39b729531eec305916692abd477c556",
+    "tests/test_shared_mutation_witness.py": "2aeed85a6b66de276443352ac6ac70461cd45fe64d2e8d64bc691e5276ae6a2d"
+  },
+  "limits": [
+    "No full-suite/hosted-CI, new actual-container, provider, model-authorship, scientific-effectiveness or funded-study claim.",
+    "No official benchmark/scoring change, new allowance, old paid-owner mutation, helper inventory expansion or source-modification permission change.",
+    "Finite repeated starts/occasions, equal descendant budgets, complete study census/selection, sealed assessment and improver-level scientific analysis remain open."
+  ],
+  "retained_history": {
+    "deliberately_stopped_d5fc_regressions": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-witness-controlled-stop-v1.json",
+      "sha256": "71896b5e8546715e4e9436b2ee1034c4febe9523bd673da797500d65cbc2c325"
+    },
+    "earlier_d5fc_acceptance_pass": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-witness-green-v2.json",
+      "sha256": "fe7f09427b546c4c26aa2c2a02891c19115759999652b65ced8440015777f59f"
+    },
+    "earlier_verification_checkpoint": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-witness-verified-checkpoint-v1.json",
+      "sha256": "5ead3db89a2a8db16f6ee1f3bb51e211cfa483448a3a34d5c2718dae02d91987"
+    },
+    "exact_retained_source_cuts": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-search-shared-witness-retained-cuts-v1.json",
+      "sha256": "e712117620c22133e0a8ae77b33c776f939b59b9d712eb4fa3fd79fe40e794e8"
+    },
+    "expanded_correction_red": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-witness-correction-red-v1.json",
+      "sha256": "09daf8f17cd7cdd8de4844a6d0c05811ab4fd21684e37494e81d4705f9e1070f"
+    },
+    "final_plan_preservation": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-witness-plan-preservation-final-v1.json",
+      "sha256": "baf2d7eea9f4088313cce16724e27de03ae9e7470d1ec205b3cf5607093d3ec0"
+    },
+    "final_source_raw": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-search-shared-witness-cut-0c7ab7ab.py.txt",
+      "sha256": "0c7ab7ab6aa284bbec130d114788b43bb39b729531eec305916692abd477c556"
+    },
+    "first_implementation_failed_compat19": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-witness-compat19-green-v1.json",
+      "sha256": "8d099f6fa76ef5129aa705ed5fda5baa5fe237a5e124e1e0d98fb4cd86524bc3"
+    },
+    "first_implementation_failed_new2": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-witness-green-v1.json",
+      "sha256": "f08519eb3f28cce3953d970940a7b1759e9ca5dccf657d4a7665520decb454ca"
+    },
+    "first_implementation_failed_old8": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-witness-old8-green-v1.json",
+      "sha256": "babb515b1b71b8fc039d37116f18cf5978a01a6c664d1cadb0be8f4804453e59"
+    },
+    "first_implementation_failed_types": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\imp01-shared-witness\\runs\\reviews\\imp01-witness-quality-v1.json",
+      "sha256": "c257de5ed4bb36179a48bcc57ece2bd49cb6de380215e329622decfc9cfb0d2e"
+    },
+    "initial_interface_red": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-witness-red-v1.json",
+      "sha256": "a3e99fb91101d1ae18a2dca381bd3c2ccb68c7fd9f653b2977eb2632713d6010"
+    },
+    "short_scratch_runner_setup": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-witness-short-runners-v3.json",
+      "sha256": "5979bae5d18203a5609c3240094aa0112651411deea436c030dd0582af02bd73"
+    },
+    "user_requested_progress_breakdown": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-witness-plan-preservation-breakdown-v1.json",
+      "sha256": "4da6aa7af9bb8aa8e21289e78294ec4be10a9757605276a0f15b5230fecfbbf0"
+    }
+  },
+  "scope": "Share the existing bounded mutation witness with a genuine fixed-improver study scope, while inherited search retains its original paths, policies and owner checks. This does not implement the finite comparison.",
+  "spec_sections": {
+    "DESIGN3.5": "Require an actual bounded further mutation and first-task generation before parent admission.",
+    "DESIGN4": "Full measured output, inherited entrypoints and protected source execution.",
+    "DESIGN8": "Permit a frozen-I study caller to use its own real scope; counted children remain authored by frozen I and their own witness is validity evidence only."
+  },
+  "status": "implemented_offline_verified_hosted_ci_pending",
+  "verification_summary": {
+    "focused_methods": 31,
+    "older_publications": 6,
+    "quality_commands": 7,
+    "scope": "Local bounded verification; no full-suite, hosted-CI, new container/model or scientific-effectiveness result.",
+    "separate_cohorts": 3,
+    "unchanged_older_files": 429,
+    "unchanged_quality_source_and_control_inputs": 255
+  }
+}

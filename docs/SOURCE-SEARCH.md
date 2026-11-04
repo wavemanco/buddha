@@ -46,7 +46,7 @@ NoveltyBench release remains 1.1 for the current study.
 
 | Outcome | What Buddha records | What happens next |
 | --- | --- | --- |
-| Complete, usable screen | Original answers, native results and common-task metrics | The child may enter the exploratory parent pool |
+| Complete, usable screen | Original answers, native results and common-task metrics | New searches also require the separate mutation witness before parent selection; historical task-only searches keep their original rule |
 | Complete screen with unusable metrics | Literal native results and the reason eligibility failed | The child stays out of the parent pool |
 | Checked candidate execution failure | Original worker declaration, task, source, receipts and cleanup evidence | No answers or numeric score are invented; the failure can inform a later proposal |
 | Incomplete or uncertain execution | Original owner, attempt, replies and any financial hold | The iteration stops; later work cannot replace the unfinished owner |
@@ -68,28 +68,80 @@ tasks that were not attempted.
 ## How failure feedback reaches the improver
 
 The worker still receives the existing list of development tasks and text notes.
-The host's version 2 feedback provenance binds the selected parent's measured
+The host's version 4 full-output feedback provenance binds the selected parent's measured
 screen and each original parent → proposal → failed-child edge. It retains the
 actual task identity, source identity, worker readiness, completed callbacks and
 costs of the relevant original owners.
 
 Every retained failure is represented in the notes, including failures descended
-from a different earlier parent. The newest failure also includes bounded literal
-source and hypothesis excerpts. Original hashes, lengths and explicit omissions
-remain in host provenance. Earlier source excerpts may be omitted; earlier
-failures are not silently removed. Base measurements remain unchanged, while
-their displayed answer excerpts shrink under the declared version 2 policy.
+from a different earlier parent. The newest failure includes its complete literal source and hypothesis. Every parent answer and all diagnostic positions remain intact; failure metadata never buys room by cutting outputs. Older failed-source text is not repeated, with hashes, lengths and omissions explicit. Legacy provenance v2 keeps its original prefix policy only for original inspection/replay.
 
 This feedback history covers checked execution failures of materialized children.
 Rejected proposals and duplicates remain in the decision and cost history; this
 packet does not yet describe them to later improvers. Interrupted or uncertain
 operations stop the loop and cannot become a failure note.
 
-The existing 4,096-byte limit per note, 1 MiB packet and full task-projection
-limits, and 32 MiB host-bundle limit still apply. If the required information
+The 1 MiB packet and full task-projection limits and 32 MiB host-bundle limit still apply. The new v2 improvement channel has no additional 4,096-byte note cap. Source-search manifests v2/v3 fix this full-output policy; original manifest v1 fixes historical extraction. If the required information
 cannot fit, construction refuses before writing the packet or creating its
-proposal owner. Feedback describes observations; it supplies no invented score,
+proposal owner. Search saves a `feedback_capacity` partial at the `feedback` stage when complete information cannot fit. Byte limits do not prove model context fit; the concrete full request still needs that pre-live check. Feedback describes observations; it supplies no invented score,
 automatic penalty or independent diagnosis of the code.
+
+## Explicit parent comparisons in new searches
+
+The optional Python setting `feedback_comparison=True` writes source-search
+manifest v6. It requires mutation witnesses and verified private source copies;
+preparation refuses settings that disable either. The default `False` preserves
+the existing preparation choices and the original v1-v5 manifest and feedback
+reconstruction rules. Existing searches do not acquire this treatment on resume.
+This option creates no spending allowance and makes no model request during
+preparation.
+
+For a selected descendant, the improver receives its complete outputs beside
+its actual parent's complete outputs, the original change hypothesis and the
+unchanged official measurements. Differences are **current minus parent**.
+The controller derives the edge from this search's checked original counted
+plan and proposal, with the exact screened occasion. It does not choose a
+comparison merely because another record has matching source code. Counted
+proposals keep the complete existing execution-failure history as well.
+
+The starting agent receives an explicit absence of a counted parent, rather
+than a made-up zero score. Root-feedback provenance v7 verifies the exact seed
+against this search's original owner-bound manifest and context. A starting
+source may have lineage from an earlier experiment; the reason is specifically
+`no_counted_parent_in_this_search`, not a claim that the source has no ancestors.
+Both outcomes use the existing protected proposal channel.
+
+The same declared treatment reaches the mutation witness. Before a child's
+counted decision exists, its witness comparison comes from the already checked
+counted plan, materialized proposal and eligible screen. Witnesses receive no
+execution-failure history. Their children remain outside the counted archive.
+Counted plans use v3, witness treatments v3 and witness plans v2; older formats
+retain their original meanings. [The feedback guide](SOURCE-FEEDBACK.md#compare-a-completed-child-with-its-actual-parent)
+explains v6 actual edges and v7 roots.
+
+Required information is never shortened. During started execution, exceeding
+sixteen nested comparisons or sixty-four edge checks saves an incomplete
+`feedback_reconstruction_limit` result. Exceeding a full-output byte ceiling
+saves `feedback_capacity`.
+Changed, missing or incompatible evidence is a protocol failure, not a resource
+limit and not permission to omit the comparison. Original records, costs and
+holds remain retained in each case.
+
+The initial resume check must verify the saved history before starting more
+work. If that check itself exceeds a feedback limit, it raises the specific
+resource error without creating a new observation, owner or provider call.
+The saved history and any earlier partial-result record stay intact. A failed
+preflight is not a completed or newly resumed search.
+
+This is an explicitly selected engineering treatment. It changes neither
+NoveltyBench scoring nor parent selection and does not establish better
+performance. Study v1/v2 and their witnesses remain unchanged; a prospective
+study v3 and matching assessment treatment are not implemented here. Seven new
+search methods, three root-packet methods and three resource-limit methods pass
+in separate supplied-response cohorts, alongside nineteen existing feedback
+methods. The [delivery record](conformance/imp01-source-search-comparison-delivery.json)
+retains source pins, exact timings and limits. Current-head hosted verification
+remains pending. No new funding or live-run command follows from this option.
 
 ## Resume, accounting and inspection
 
@@ -146,11 +198,24 @@ the actual experiment, verify its profiles and processing tiers, obtain its
 specific spending authorization, and explain the operator commands. The current
 POL-02 comparison and its authorization remain separate.
 
-Task-screen eligibility checks generation and assessment. It does not pre-run
-every child's improvement function. That function is checked when the child
-later proposes a descendant; a missing or broken improver can stop the run with
-its original evidence retained. The source-experiment and improver-competence
-gates therefore remain separate from task-screen admission.
+Manifest v3/v4 searches add a [bounded mutation witness](SOURCE-MUTATION-WITNESS.md)
+after each eligible common screen, including the starter. The candidate receives
+its complete measured outputs, makes a changed further child, and that child
+must generate on the first ordered development task before the candidate can
+be selected as a parent. This evidence child stays outside the search archive.
+A checked failure retains the native scores and excludes only parent eligibility;
+uncertain execution stops as incomplete. Historical manifest v1/v2 task-only
+searches retain their original eligibility and replay semantics. One successful
+mutation does not establish improved effectiveness or indefinite competence.
+
+New default manifest v4 searches also require verified private copies of returned
+child source before preparing their next owner. The copy preserves identity and
+lineage; subsequent proposals use that checked root. Original source stays
+retained. Existing owners are never repaired by copying or remounting. Explicit
+`source_copy=False` preserves v3 witnessed behavior; task-only historical modes
+remain unchanged. The [version and recovery rules](SOURCE-MUTATION-WITNESS.md#verified-source-copies-for-new-owners)
+state the exact scope and passing bounded actual composed check; model context
+and output headroom remain pre-live requirements.
 
 For the original source-loop delivery, 41 new acceptance methods and 92 original
 regressions passed across their recorded source scopes. These were separate
@@ -211,3 +276,25 @@ requirements. [Exact evidence and limits](conformance/src02-screen-format-delive
 This evidence establishes the exercised engineering mechanism. It does not
 establish model-authored improvement, better unseen-task performance, or an
 improver that has itself become better. Those remain separate roadmap gates.
+
+## Optional local comparison check
+
+From this checkout's project folder, run this once in your current PowerShell
+window to check the new search comparison route with supplied workers and
+replies. It creates temporary test records, needs no API keys or Docker and
+spends no API money. It does not inspect or resume a live run. Allow an hour or
+more for its complete fixture runs. Wait for `OK` or a failure; Ctrl+C stops it.
+No separate window is needed.
+
+```powershell
+python -m unittest discover -s tests -p test_source_search_comparison.py -v
+```
+
+This separate quick check confirms that proposal inspection preserves feedback
+resource errors and still rejects invalid evidence. Run it once in the same
+window. It needs no keys or Docker, makes no provider calls and changes no run
+records; Ctrl+C stops it.
+
+```powershell
+python -m unittest discover -s tests -p test_source_comparison_limits.py -v
+```

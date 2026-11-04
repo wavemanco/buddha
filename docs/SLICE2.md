@@ -1,5 +1,7 @@
 # Slice 2: one auditable NoveltyBench v1.1 baseline
 
+**Historical command record.** The completed JSON-policy experiment's `prepare`, `run`, `search-prepare`, `search-run` and `continuation-prepare` commands are retired in the current checkout. They refuse before keys, file preparation or provider calls. Commands below describe only their original pinned runtime and do not authorize a restart. Retained offline readers and synthetic demos remain available. [Guide before retirement](https://github.com/wavemanco/buddha/blob/e3076ba648c7b37ce465ba407779dc25a6da805a/docs/SLICE2.md) · [Original CLI source](https://github.com/wavemanco/buddha/blob/e3076ba648c7b37ce465ba407779dc25a6da805a/buddha/__main__.py).
+
 This is the historical slice 2 snapshot. The cap was subsequently approved at up to $50 for one first live experiment; see [slice 3](SLICE3.md) and [API key setup](API-KEYS.md) for current status. The verification counts below describe slice 2.
 
 ## Delivered behavior

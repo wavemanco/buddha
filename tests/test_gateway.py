@@ -19,6 +19,7 @@ from buddha.evaluation import ValidationError
 from buddha.gateway import (
     Gateway,
     GatewayCall,
+    GatewayError,
     RawHTTPTransport,
     execution_identity,
     prepare_gateway,
@@ -37,6 +38,126 @@ def encoded(value):
 
 
 class GatewayTests(unittest.TestCase):
+    def cleanup_event(self, *, event="before_create", cleanup="removed", owner="a" * 32):
+        return {
+            "event": event,
+            "identity": {
+                "owner": owner,
+                "name": "buddha-" + owner,
+                "docker_endpoint": "unix:///synthetic-docker.sock",
+                "image_id": "sha256:" + "b" * 64,
+            },
+            **({"container_id": "c" * 64, "cleanup_status": cleanup} if event == "cleanup" else {}),
+        }
+
+    def test_executor_terminal_is_durable_before_shared_marker_is_cleared(self):
+        from buddha import executor
+
+        gateway = self.gateway()
+        pending = self.authority.path.with_name(self.authority.path.name + ".executor-pending.json")
+        terminal = self.directory / ("executor-cleanup-" + "a" * 32 + ".json")
+        original = Path.unlink
+
+        def checked_unlink(path, *args, **kwargs):
+            if path == pending:
+                record = json.loads(terminal.read_bytes())
+                self.assertEqual(record["cleanup_status"], "removed")
+                self.assertEqual(record["intent"]["attempt"], str(self.directory))
+            return original(path, *args, **kwargs)
+
+        with gateway.work(directory=self.directory, kind="generation"):
+            callback = executor._LIFECYCLE.get()
+            callback(self.cleanup_event())
+            intent = json.loads(pending.read_bytes())
+            self.assertEqual(intent["gateway_manifest_sha256"], gateway.manifest_sha256)
+            self.assertEqual(intent["identity"], self.cleanup_event()["identity"])
+            with patch.object(Path, "unlink", checked_unlink):
+                callback(self.cleanup_event(event="cleanup"))
+        self.assertFalse(pending.exists())
+        self.assertTrue(terminal.exists())
+
+    def test_executor_unknown_blocks_next_owner_but_active_gateway_can_settle(self):
+        from buddha import executor
+
+        other = self.gateway(directory=self.prepare("other"))
+        gateway = self.gateway()
+        with gateway.work(directory=self.directory, kind="improvement"):
+            callback = executor._LIFECYCLE.get()
+            callback(self.cleanup_event())
+            self.send(gateway)
+            callback(self.cleanup_event(event="cleanup", cleanup="unknown"))
+        self.assertEqual(self.authority.summary()["operation_count"], 1)
+        self.assertEqual(self.authority.summary()["reserved_microusd"], 0)
+        with self.assertRaises(GatewayError), other.work(directory=other.directory, kind="native"):
+            self.fail("unknown cleanup admitted another owner")
+
+    def test_executor_standalone_concurrent_claims_have_one_owner(self):
+        from buddha import executor
+
+        gateways = (self.gateway(), self.gateway(directory=self.prepare("other")))
+        barrier = threading.Barrier(2)
+
+        def claim(index):
+            gateway = gateways[index]
+            try:
+                with gateway.work(directory=gateway.directory, kind="generation"):
+                    callback = executor._LIFECYCLE.get()
+                    barrier.wait(timeout=3)
+                    callback(self.cleanup_event(owner=str(index + 1) * 32))
+                    return True
+            except GatewayError:
+                return False
+
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            outcomes = list(pool.map(claim, (0, 1)))
+        self.assertEqual(sorted(outcomes), [False, True])
+
+    def test_executor_terminal_persistence_failure_retains_pending_marker(self):
+        from buddha import executor
+
+        gateway = self.gateway()
+        pending = self.authority.path.with_name(self.authority.path.name + ".executor-pending.json")
+        with gateway.work(directory=self.directory, kind="native"):
+            callback = executor._LIFECYCLE.get()
+            callback(self.cleanup_event())
+            with patch("os.fsync", side_effect=OSError("synthetic disk failure")):
+                with self.assertRaises(GatewayError):
+                    callback(self.cleanup_event(event="cleanup"))
+        self.assertTrue(pending.exists())
+        with self.assertRaises(GatewayError), gateway.work(directory=self.directory, kind="native"):
+            self.fail("failed terminal persistence cleared the stop")
+
+    def test_executor_intent_persistence_failure_retains_stop_before_create(self):
+        from buddha import executor
+
+        gateway = self.gateway()
+        pending = self.authority.path.with_name(self.authority.path.name + ".executor-pending.json")
+        with gateway.work(directory=self.directory, kind="native"):
+            callback = executor._LIFECYCLE.get()
+            with patch("os.fsync", side_effect=OSError("synthetic intent disk failure")):
+                with self.assertRaises(GatewayError):
+                    callback(self.cleanup_event())
+        self.assertTrue(pending.exists())
+        self.assertFalse(list(self.directory.glob("executor-cleanup-*.json")))
+        with self.assertRaises(GatewayError), gateway.work(directory=self.directory, kind="native"):
+            self.fail("failed intent persistence admitted another session")
+
+    def test_executor_marker_substitution_and_pre_create_failures_are_safe(self):
+        from buddha import executor
+
+        gateway = self.gateway()
+        pending = self.authority.path.with_name(self.authority.path.name + ".executor-pending.json")
+        with self.assertRaises(RuntimeError), gateway.work(directory=self.directory, kind="native"):
+            raise RuntimeError("before executor invocation")
+        self.assertFalse(pending.exists())
+        with gateway.work(directory=self.directory, kind="native"):
+            callback = executor._LIFECYCLE.get()
+            callback(self.cleanup_event())
+            pending.write_bytes(b"foreign marker")
+            with self.assertRaises(GatewayError):
+                callback(self.cleanup_event(event="cleanup"))
+        self.assertEqual(pending.read_bytes(), b"foreign marker")
+
     def setUp(self):
         temporary = tempfile.TemporaryDirectory()
         self.addCleanup(temporary.cleanup)

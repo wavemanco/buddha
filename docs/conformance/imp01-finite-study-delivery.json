@@ -1,0 +1,40 @@
+{
+  "format": "buddha.imp01-finite-study-delivery.v1",
+  "status": "missing_interface_red_observed_implementation_in_progress",
+  "spec_sections": [
+    "DESIGN3",
+    "DESIGN4",
+    "DESIGN8"
+  ],
+  "base_commit": "e21cd6b8068dd8919bf8ede4245db5d62e8b5fb2",
+  "initial_red": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-finite-red-v1.json",
+    "sha256": "ae6c773dce05f2b0fd6872d4baaabad5e418591b4c944a707edf6eb1c4d6a737",
+    "log_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-finite-red-v1.log",
+    "log_sha256": "37b8ca364f0ded0978d3b7a140e52b32ff4ccf12a557f7659bad4ad5ee5b6318",
+    "methods": 1,
+    "elapsed_seconds": 13.060319399926811,
+    "interpretation": "Genuine complete measured common screen/full feedback and detached-I proposal succeed on existing APIs before the missing new module import. One interface error is not behavioral or confinement evidence.",
+    "test_source_artifact": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\finite-test-initial-red-cut-v1.py.txt",
+      "sha256": "07e5c1be5e219a6d76c404a3a0bfd7861e21e99f50c78eae501f77b46ea02b40"
+    }
+  },
+  "accepted_contract": {
+    "shape_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-finite-controller-shape-v2.md",
+    "shape_sha256": "3c38dd8d269cde5107b43746c8f5a27462ae8573a6ef835c754f10a0d13f56fc",
+    "api_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-finite-controller-api-example-v2.md",
+    "api_sha256": "89bde531125f68bae1065271eeed75d56a8afff4e5e12b57c8c21c075a966426",
+    "test_path": "tests/test_improver_study.py",
+    "test_sha256": "07e5c1be5e219a6d76c404a3a0bfd7861e21e99f50c78eae501f77b46ea02b40",
+    "required_methods": 4
+  },
+  "scope": "Implement the finite development comparison with actual equal-budget common conditions, fixed experimental improvers, original-owner recovery, whole-study custody, exhaustive negative outcomes and C-only selection. Sealed descendant assessment and paired scientific analysis remain subsequent original IMP-01 work.",
+  "limits": [
+    "No implemented-consumer, behavior-pass, hosted-CI, model-authorship or improved-effectiveness claim.",
+    "Only one initial missing-interface method has run; all four accepted methods remain required.",
+    "No new live allowance, actual provider request or official benchmark change."
+  ],
+  "working_tree": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\imp01-study",
+  "working_branch": "codex/imp01-finite-improver-study"
+}

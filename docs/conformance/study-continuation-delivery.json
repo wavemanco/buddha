@@ -1,0 +1,231 @@
+{
+  "format": "buddha.study-continuation-delivery.v1",
+  "recorded_utc": "2026-10-29T02:38:55.114393+00:00",
+  "base": "PR177 codex/passive-observation-capture",
+  "base_head": "08bcbc0aef48711b06c7ac9795ae057375f99f01",
+  "tested_head": "009ac89d15a6fea5f80421bb794638e2589ce0af",
+  "spec_sections": [
+    5,
+    7,
+    9,
+    10
+  ],
+  "scope": "Checked remaining development through normal study freeze/publication; no final/plain/operator CLI or paid handoff.",
+  "source_sha256": {
+    "buddha/improver_study.py": "e65aa9e91409e325b906f8247d76ec55805f862f7a970321d6d12b6ff35b9984",
+    "buddha/launch_common.py": "958725d9253e4d26535c755a785d5b3c38d4a0c6f72653ca0348badd5f6cea26",
+    "buddha/unified_continuation.py": "4c8acfd6e99e8c53d1ede37ceb801d52213aced7aac9f5f70128f63ec4ccbfc8",
+    "buddha/doctor.py": "159bd50248df876b8378ec622d792c8495395681fd541fb9b4e510e722b26177",
+    "tests/test_study_continuation.py": "ba25e162b6aa8b856be14526120444dc50266ddd785307e9ab9d01cad64a9ca0",
+    "tests/test_unified_continuation.py": "b9967ddb5b44a4ded06797be5fe33aa1558a538d9f777312faccd6cbd22dc946",
+    "docs/PLAN.md": "2c380a3aa7d07bc704642d887dab9abd1e4250b3d741e6e9daac518f02da680c",
+    "docs/UNIFIED-EVIDENCE-RECOVERY.md": "99779253d18f97623a2cea57213d5bb238b7c918e2161ca83607b9f13b8ca874"
+  },
+  "contract": {
+    "descriptor_format": "buddha.study-continuation.v1",
+    "phases": [
+      "search",
+      "freeze",
+      "publication"
+    ],
+    "old_state_controls_preserved": true,
+    "old_owner_and_file_anchors_unchanged": true,
+    "owner_control_rule": "Check scheduled role/path first; anchored old owners use original controls. Only explicitly allowed new owners use truthful actual new helper/outer/driver pins. Absence alone grants nothing.",
+    "witness_parent_rule": "Use the measured parent's actual original or continued control profile; treatment base remains the starting screen.",
+    "comparison_rule": "Install only the two actually derived, fully checked host profiles. Keep differing fingerprints and exact report/relation provenance; do not declare them equal.",
+    "dispatch": "Reuse the original scheduler/action dispatcher, including capacity, incomplete-child, feedback-limit and KeyboardInterrupt observations.",
+    "freshness": "One descriptor check per normal advance, then fresh immutable cut/grant joins after ordinary leases; create a lock-aware fresh reader while reusing validated state. Checked-token entry still freshly rechecks.",
+    "v1_witness_only_boundary_unchanged": true,
+    "default_scope_off": true,
+    "CORE_global_source_names_grant_terms_scientific_definitions_unchanged": true,
+    "Python_header": "Historical first-witness paragraph retained to keep the exact tested executable bytes. Expanded development scope is documented in the guide; no new application cut solely for prose."
+  },
+  "current_checks": {
+    "full_two_slot": {
+      "status": "pass",
+      "methods": 1,
+      "seconds": 3405.218,
+      "actual_host_packages": 2,
+      "separate_host_processes": true,
+      "source_list_mocks": false,
+      "supplied_workers_and_HTTPS": true,
+      "real_provider_calls": 0,
+      "real_containers": 0,
+      "task_count": 1,
+      "answers_per_task": 2,
+      "starts": 1,
+      "repetitions": 1,
+      "arms": 2,
+      "opportunities_per_arm": 2,
+      "old_cut": "last slot-zero arm1 child witness with lineage",
+      "old_inactive_owners": 18,
+      "old_decisions": 1,
+      "child_processes": 69,
+      "all_child_exits_zero": true,
+      "child_timeout_seconds": 180,
+      "max_child_seconds": 115.12706599989906
+    },
+    "assertions": [
+      "cut proposal durable reply followed by interruption and same owner/operation/manifest/cost replay with zero second sends",
+      "one full reconstruction per normal completed action; two only for deliberate incomplete observation",
+      "both remaining slot-one proposals/screens and both witness roles",
+      "four admitted decisions",
+      "actual distinct old/new screen-control fingerprints",
+      "mixed C-only selectionv2 with exact two profiles and relation",
+      "frozen bytes match the declared-rule selected original source",
+      "slot-one proposal feedback remains correctly old/old",
+      "every old cut file hash unchanged",
+      "complete development freeze and publication",
+      "after publication, keyless replay makes no sends/workers/report/accounting/file changes",
+      "trial-wide freeze, final and plain phases unused"
+    ],
+    "preactivation_denials": [
+      "study descriptor passed to witness-only API",
+      "changed actual after-helper pin",
+      "out-of-grid owner"
+    ],
+    "denials_before_workers_or_sends": true,
+    "descriptor_entry_unit": {
+      "methods": 1,
+      "seconds": 0.325,
+      "status": "pass",
+      "scope": "One checker invocation and identical prepared state reaches existing under-lock dispatcher; unit seam, separate from real identity proof."
+    },
+    "separate_commands_not_combined_runtime": true,
+    "configured_quality": {
+      "ruff": "pass",
+      "format": "pass,282 files",
+      "strict_mypy": "pass,89 files",
+      "bandit": "pass; existing comment warnings retained",
+      "strict_development_audit": "pass,39 pinned development packages",
+      "runtime_audit": "pass, no runtime dependencies",
+      "external_compile": "pass,282 files, unchanged source bytes",
+      "all_ten_CORE_equal_original": true
+    },
+    "independent_reviews": "Earlier exact application review and later descriptor-entry delta review passed. Final source/test/guide review confirms control/scheduling/v1 boundaries and source hashes; publication-versus-replay wording corrected.",
+    "full_suite": "not claimed for this cut",
+    "hosted_CI": "pending future published Study head"
+  },
+  "earlier_evidence_separate": {
+    "initial_full_cut_missing_API_RED": {
+      "methods": 1,
+      "seconds": 511.738,
+      "qualification": "Reached genuine last-slot-zero cut before missing check_study_continuation API; not a setup failure."
+    },
+    "v1_ancestor_exemption_RED": {
+      "methods": 1,
+      "seconds": 47.13,
+      "finding": "An ancestor exemption unintentionally widened witness-only v1; fixed by making it development-only."
+    },
+    "source_review_fix": "Pre-lock reader missed newly created owned running.lock; after raw/grant revalidation under locks create fresh NativeEvidence, reuse only checked state.",
+    "first_full_incomplete": {
+      "status": "incomplete",
+      "seconds": 3678.956,
+      "last_completed_new_action": 25,
+      "timeout_seconds": 180,
+      "next_intended": "witness proposal",
+      "exact_internal_phase": "unobserved",
+      "qualification": "Before descriptor-entry one-check fix; no freeze/publication completion."
+    },
+    "descriptor_entry_RED_GREEN": {
+      "RED_seconds": 0.306,
+      "GREEN_seconds": 0.269,
+      "qualification": "Missing descriptor-entry API unit then same prepared-state dispatch; no whole-study runtime proof."
+    },
+    "second_full_incomplete": {
+      "status": "incomplete",
+      "methods": 2,
+      "seconds": 2730.62,
+      "last_completed_new_action": 23,
+      "timeout_seconds": 180,
+      "next_intended": "screen",
+      "exact_internal_phase": "unobserved",
+      "qualification": "Normal completed actions already showed one reconstruction; no freeze/publication completion."
+    },
+    "legacy_methods": [
+      {
+        "methods": 5,
+        "seconds": 122.085,
+        "scope": "prior witness continuation"
+      },
+      {
+        "methods": 3,
+        "seconds": 484.774,
+        "scope": "capacity/unknown-liability/feedback-limit partial handlers"
+      },
+      {
+        "methods": 1,
+        "seconds": 603.732,
+        "scope": "counted-cell witness and same-owner replay"
+      }
+    ],
+    "legacy_qualification": "These nine methods precede generic constructor integration and retain their recorded exact source cuts; not added to the current-cut method count.",
+    "contaminated_legacy_attempt": "Earlier5-method71.901s attempt changed source during fixture use;4pass/1driver-pin rejection remains separate, not a stable-cut verdict.",
+    "setup_limits": "Earlier capacity/180-second bootstrap failures remain setup evidence, never relabeled as behavior REDs."
+  },
+  "external_observer": {
+    "scope": "External engineering observer only; shipped app/test files and deadlines unchanged.",
+    "fixture_retention": "Only the exact parent TemporaryDirectory uses public delete=False. Defer its original bound cleanup until overall success; retain failure at original paths. Success cleanup checks resolved root, owner marker, device/inode and bound object.",
+    "child_execution": "Original script executed with runpy at its genuine __file__, original argv and script-directory sys.path; original subprocess.run/Popen still own 180-second timeout/kill/drain.",
+    "frames": "Request frame-only stack at150seconds to an exclusive external file; no locals, cProfile, startup hooks or environment-value logging.",
+    "nonempty_stack_files": 0,
+    "outcome": "pass",
+    "cleanup_error": null,
+    "fixture_retained": false,
+    "fixture_path": "C:/Users/arvik/AppData/Local/Temp/tmpqmmojg4q",
+    "source_files_verified_unchanged": 91,
+    "qualification": "Observer startup overhead is uncalibrated. Method duration is not a controlled before/after speed ratio; older failed methods ended before completion."
+  },
+  "preservation": {
+    "PLAN_prior_complete_raw_lines": 185,
+    "line_terminators_included": true,
+    "all_prior_lines_unchanged": true,
+    "seven_original_acceptance_tails_unchanged": true,
+    "original_paid_T_or_SQL_or_private_program_access": false,
+    "real_keys_read": false,
+    "real_provider_calls": 0,
+    "real_containers": 0,
+    "new_spending_allocation": false,
+    "new_dependencies": 0
+  },
+  "current_status": "Development-only gate complete at the stated cut. Parent pre-generic93b024a full-trial PASS8703.984s and integrated2349 focused checks are separate evidence. Actual-record checker57794 is running separately; no terminal result or cleared paid handoff claimed. IMP-01/EVAL-02 remain open.",
+  "external_receipts": {
+    "runs/checks/study-continuation-retained-20261028-v3/terminal.json": {
+      "sha256": "7ee34904fdd8f0d8a5e20eecf0b9123d141e53074f32a4932358879323ae8cf2"
+    },
+    "runs/checks/study-continuation-retained-20261028-v3/run.json": {
+      "sha256": "9bcca3f31a6b2ece1960d48f702e0a36ee4386040c4a4d3818bcd904ae150ca8"
+    },
+    "runs/checks/study-continuation-retained-20261028-v3/events.jsonl": {
+      "sha256": "89ddafdc03e74ad83b507933c95adefedb6523d0fe974c67fb52e4b4201e6078"
+    },
+    "runs/checks/study-continuation-retained-20261028-v3/outcome.json": {
+      "sha256": "a25fc9c40c7204fdc088f04585257db37ef4c1ef784024cbe88c6a3b9a836f12"
+    },
+    "runs/checks/study-continuation-retained-20261028-v3/tool-session.json": {
+      "sha256": "bd621d0eab4422bd701d9ed664845b6d408ff5ec68fffcb0445f27009631cdc7"
+    },
+    "runs/checks/study-continuation-retained-20261028-v3/runner.py": {
+      "sha256": "116ff69c8437f75699752ada8a04cbb914dc9e6c1f798a9427c29047554ee3ae"
+    },
+    "runs/checks/study-continuation-retained-20261028-v3/child_stack.py": {
+      "sha256": "718e56803264eaefe25cc28178bae425e86068d17959b1881206e3314e7e4229"
+    },
+    "runs/checks/study-continuation-retained-20261028-v3/plan186-preservation.json": {
+      "sha256": "b6491fdc9d1e1b80e971c3ce16521fa1188003cdd594168e756cce783d7a0a55"
+    },
+    "runs/checks/study-continuation-quality-20261028-v2/results.json": {
+      "sha256": "a691aee8531f8590df72cc6cb9378c55f3df0b030e8f98f3a3362c80d9848739"
+    },
+    "runs/checks/study-continuation-quality-20261028-v2/compile-core.json": {
+      "sha256": "3711ca83539b2879a908f118a7e6a17ffbe4700bda29a0ab517e37d2ad393612"
+    },
+    "runs/checks/study-continuation-20261028-v1.json": {
+      "sha256": "d27b1c33c08893d03f4c251c574b44770847688607d589dc8add1f8bd9e2a853"
+    }
+  },
+  "developer_command": {
+    "command": "python -B -m unittest discover -s tests -p test_study_continuation.py -v",
+    "function": "Runs descriptor-entry and supplied two-slot checks once in disposable folders; about an hour on the observed Windows host. No API keys/paid calls/real containers. A separate window is optional; Ctrl+C stops it. Ordinary tests clean temporary folders; retained observer is separate engineering evidence."
+  }
+}

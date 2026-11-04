@@ -1,0 +1,189 @@
+{
+  "format": "buddha.independent-mutation-witness-publication-review.v1",
+  "observed_utc": "2026-10-23T07:21:20.1281723Z",
+  "status": "bounded_publication_review_pass_actual_positive_gate_open",
+  "findings": [],
+  "base_commit": "3190a6e46c43016f3ced197b10658c165f56cc49",
+  "document_sha256": {
+    "docs/PLAN.md": "65bdd788209ffffd143824a0c8e3bc1d0c69532328bd986a1955a923469156b6",
+    "docs/conformance/src02-mutation-witness-delivery.json": "ddd602d20e275b2533c5da897aab0e48ccb473cc16bff8c3690f1b078ca77c90",
+    "docs/SOURCE-MUTATION-WITNESS.md": "36c34e146e1054d47a8eb3a0d14ec0f91bf891327fa3b2851792b5b122624e58",
+    "docs/SOURCE-SEARCH.md": "81e705f9dde84eff84f15c6074d31f049f3da006ec9930c5de125177726e7f94",
+    "docs/SOURCE-FEEDBACK.md": "008c7a64321b90f41a0e792c2bd66f408234797a9a69bc42294629f6f065ac54"
+  },
+  "plan": {
+    "sole_next": "SRC-02",
+    "src03_eval01_whole_rows_raw_exact": true,
+    "prior_revision_rows_raw_exact": 75,
+    "original_acceptance_tail_sha256": {
+      "SRC-02": "372aee0d4b92e4af05af3208f7435ea62690f40fe8df6223c5e2744765d0c7b9",
+      "SRC-03": "44d214e4e9227008d1131a4bda364f496fb989ad8910a21d530e37abe6f200b8",
+      "EVAL-01": "b26b7e727f20062418dcc8ff571d3be153dcf967f8512fa3ea31e7d847a0301f"
+    },
+    "six_leaf_states": [
+      "| POL-03 | Planned |",
+      "| SRC-02 | **Next** |",
+      "| SRC-03 | In progress |",
+      "| EVAL-01 | In progress |",
+      "| EVAL-02 | Planned |",
+      "| IMP-01 | Planned |"
+    ]
+  },
+  "focused": {
+    "unique_passing_methods": 46,
+    "method_identities": [
+      "test_full_output_feedback.FullOutputFeedbackTests.test_failed_child_keeps_full_parent_outputs_and_legacy_failure_packet_still_inspects",
+      "test_full_output_feedback.FullOutputFeedbackTests.test_legacy_search_keeps_original_feedback_versions_during_read_and_replay",
+      "test_source_handoff.SourceHandoffTests.test_bad_terms_spec_and_extra_fields_refuse",
+      "test_source_handoff.SourceHandoffTests.test_check_is_read_only_keyless_unallocated_and_does_not_execute",
+      "test_source_handoff.SourceHandoffTests.test_control_changes_after_review_or_during_check_refuse",
+      "test_source_handoff.SourceHandoffTests.test_duplicate_case_alias_of_a_control_refuses",
+      "test_source_handoff.SourceHandoffTests.test_handoff_version_cannot_omit_or_optionally_enable_the_fixed_policy",
+      "test_source_handoff.SourceHandoffTests.test_late_control_change_during_final_component_check_refuses",
+      "test_source_handoff.SourceHandoffTests.test_missing_installed_helper_or_runtime_binding_refuses",
+      "test_source_handoff.SourceHandoffTests.test_only_prospective_one_file_initial_screen_is_supported",
+      "test_source_handoff.SourceHandoffTests.test_relative_self_or_oversized_control_map_refuses",
+      "test_source_handoff.SourceHandoffTests.test_returns_detached_literal_values",
+      "test_source_handoff.SourceHandoffTests.test_runtime_approval_or_proposal_profile_changes_refuse",
+      "test_source_handoff.SourceHandoffTests.test_selected_component_drift_refuses_without_preparation",
+      "test_source_handoff.SourceHandoffTests.test_witness_policy_cannot_change_type_depth_task_or_closed_fields",
+      "test_source_handoff.SourceHandoffTests.test_witness_proposal_is_keyless_fixed_and_adds_only_two_owners_per_candidate",
+      "test_source_handoff.SourceHandoffTests.test_wrong_raw_pin_and_malformed_duplicate_or_nonfinite_json_refuse",
+      "test_source_launch_state.SourceLaunchStateTests.test_all_approved_initial_fields_and_external_controls_stay_original",
+      "test_source_launch_state.SourceLaunchStateTests.test_current_child_witness_precedes_decision_and_later_parent_selection",
+      "test_source_launch_state.SourceLaunchStateTests.test_failed_seed_witness_has_no_later_paid_hint_before_final_publication",
+      "test_source_launch_state.SourceLaunchStateTests.test_inactive_unfinished_original_owner_is_reported_without_reactivation",
+      "test_source_launch_state.SourceLaunchStateTests.test_original_fresh_owner_is_passive_and_stable_and_all_locks_are_busy",
+      "test_source_launch_state.SourceLaunchStateTests.test_orphan_owner_and_future_task_are_rejected_before_execution",
+      "test_source_launch_state.SourceLaunchStateTests.test_pending_native_command_cannot_change_the_prescribed_flow",
+      "test_source_launch_state.SourceLaunchStateTests.test_pending_native_readiness_retains_its_original_owner",
+      "test_source_launch_state.SourceLaunchStateTests.test_pending_seed_witness_retains_original_owner_and_inactive_stop",
+      "test_source_launch_state.SourceLaunchStateTests.test_retained_witness_owner_keeps_its_exact_allocation_and_funded_manifest",
+      "test_source_launch_state.SourceLaunchStateTests.test_sealed_witness_publication_does_not_require_another_paid_attempt",
+      "test_source_launch_state.SourceLaunchStateTests.test_witness_policy_requires_the_explicit_original_approval",
+      "test_source_launch.SourceLaunchTests.test_new_handoff_cannot_dispatch_coherently_prepared_task_only_downgrade",
+      "test_source_launch.SourceLaunchTests.test_new_handoff_rejoins_actual_required_preparation_before_execution",
+      "test_source_launch.SourceLaunchTests.test_planned_witness_owners_are_exact_siblings_and_legacy_default_is_unchanged",
+      "test_source_launch.SourceLaunchTests.test_witness_handoff_check_uses_existing_approval_and_launch_schema",
+      "test_source_launch.SourcePublicResultTests.test_fixed_host_stop_reasons_retain_exact_observation_reference",
+      "test_source_launch.SourcePublicResultTests.test_no_eligible_parent_is_explicit_without_changing_old_completion_receipts",
+      "test_source_mutation_witness.SourceMutationWitnessTests.test_changed_packet_and_rehashed_witness_publication_cannot_assert_competence",
+      "test_source_mutation_witness.SourceMutationWitnessTests.test_failed_child_witness_keeps_native_measurements_but_excludes_parent",
+      "test_source_mutation_witness.SourceMutationWitnessTests.test_failed_seed_improver_cannot_become_a_parent_from_metrics_alone",
+      "test_source_mutation_witness.SourceMutationWitnessTests.test_full_feedback_zero_callback_mutation_and_exact_first_task_are_consumed",
+      "test_source_mutation_witness.SourceMutationWitnessTests.test_known_witness_reply_resumes_original_owner_then_replays_keylessly",
+      "test_source_mutation_witness.SourceMutationWitnessTests.test_legacy_v2_task_only_schedule_and_completed_replay_are_byte_exact",
+      "test_source_mutation_witness.SourceMutationWitnessTests.test_rejected_or_failed_generation_is_terminal_but_unclean_cleanup_is_incomplete",
+      "test_source_mutation_witness.SourceMutationWitnessTests.test_unknown_witness_keeps_hold_and_forbids_generation_or_later_parent_work",
+      "test_source_search.SourceSearchTests.test_completed_replay_and_retired_producer_passive_read_preserve_original_snapshot",
+      "test_source_search.SourceSearchTests.test_failed_child_feedback_repairs_source_then_executes_the_inherited_child_improver",
+      "test_source_search.SourceSearchTests.test_rejected_duplicate_unscored_children_consume_iterations_without_parent_admission"
+    ],
+    "separate_cohorts": [
+      {
+        "name": "mutation-witness-bootstrap-v2",
+        "methods": 2,
+        "source_pins": 230,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "name": "mutation-witness-failures-v1",
+        "methods": 3,
+        "source_pins": 230,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "name": "mutation-witness-recovery-v1",
+        "methods": 3,
+        "source_pins": 230,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "name": "mutation-witness-readiness-v1",
+        "methods": 32,
+        "source_pins": 230,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "name": "mutation-witness-retained-owner-v1",
+        "methods": 1,
+        "source_pins": 231,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "name": "mutation-witness-legacy-loop-v1",
+        "methods": 3,
+        "source_pins": 231,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "name": "mutation-witness-legacy-feedback-v1",
+        "methods": 2,
+        "source_pins": 231,
+        "failures": 0,
+        "errors": 0
+      }
+    ],
+    "not_one_full_suite_or_final_source_cohort": true,
+    "raw_logs_independently_joined": true
+  },
+  "publication": {
+    "configuration_inputs": 4,
+    "only_bridge_changes": [
+      "tests\\test_candidate_improvement.py",
+      "tests\\test_source_failure_feedback.py"
+    ],
+    "all_current235pins_verified": true,
+    "production_and_witness_source_identical": true,
+    "python_inputs": 231,
+    "quality_commands": 7
+  },
+  "evidence_sha256": {
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-mutation-witness\\runs\\reviews\\mutation-witness-bootstrap-v2.json": "59cfefecd978c8a3252a7dbea910acea0c7384e8435331d9c772611280ceaa41",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-mutation-witness\\runs\\reviews\\mutation-witness-bootstrap-v2.log": "56896fa87a18510d0358c73738c7c7176560ff25048719c4bc9b96a6e0d55268",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-mutation-witness\\runs\\reviews\\mutation-witness-failures-v1.json": "3c68acff1bc30b2d0ef3b5e7029c83aa9650d6bd7f10c58e0e9a298e0e27dcfb",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-mutation-witness\\runs\\reviews\\mutation-witness-failures-v1.log": "74349e0dc13d919a97567c373de317684b3d4fc3f4eeccef6dc2f37ca2394fcc",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-mutation-witness\\runs\\reviews\\mutation-witness-recovery-v1.json": "0c7f4b2c3f4a7b84816f64dcc64b6d6fb730a178f54606612eabb64baf0bd724",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-mutation-witness\\runs\\reviews\\mutation-witness-recovery-v1.log": "ebf5c992c8ab9be88b6cf9bcf4abe4febf1293915f7a909f397aa5a58282daa0",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-mutation-witness\\runs\\reviews\\mutation-witness-readiness-v1.json": "222530422207ebe9be4fd5932852c664cc8e7184bbc0afe472aed8d945aa0004",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-mutation-witness\\runs\\reviews\\mutation-witness-readiness-v1.log": "2eae7f20026daa1159ae66fb51a2497cb8ff5af2f2daccf0776a3e78b72c487a",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-mutation-witness\\runs\\reviews\\mutation-witness-retained-owner-v1.json": "4228cf028a0cb0280fe728423ea02f0e1a4aa86dbf0313e65592befb1ea98431",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-mutation-witness\\runs\\reviews\\mutation-witness-retained-owner-v1.log": "d5500486b2d860b18a436b7576fc032701429c0138b87323a8830db2a41d7a79",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-mutation-witness\\runs\\reviews\\mutation-witness-legacy-loop-v1.json": "34d712bf7390ff5ab2283b32f000d30537975a07362dcc53c4d2b2836fd86e63",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-mutation-witness\\runs\\reviews\\mutation-witness-legacy-loop-v1.log": "a39b99322aa6f0d520063304b47fe99ae6be8d8a712fbc0b0eb10751ef1614d7",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-mutation-witness\\runs\\reviews\\mutation-witness-legacy-feedback-v1.json": "e3027bdffd555adb3c29abe21dcbfde4997e35eeab48be5e04c992cd17f1ff7d",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-mutation-witness\\runs\\reviews\\mutation-witness-legacy-feedback-v1.log": "84e1504c71a81645014024dc5638b22ff13d2b86681355b6773b3edcad4a8ebb",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-mutation-competence-delivery\\runs\\reviews\\mutation-witness-publication-quality-v1-ruff-check.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-mutation-competence-delivery\\runs\\reviews\\mutation-witness-publication-quality-v1-ruff-format.log": "a8974443d12f9736423157c869f658ab1b4fc18c2ff99f12bf2cb579052f9e5b",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-mutation-competence-delivery\\runs\\reviews\\mutation-witness-publication-quality-v1-mypy-windows.log": "dd758c62e671570062f9954e1a5d527b0d481f03e1af252648074cae102ed75c",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-mutation-competence-delivery\\runs\\reviews\\mutation-witness-publication-quality-v1-bandit.log": "46f833e8d47068acf50c2af416801ffbfcf8ad6d4e6739c970f35618e064e0de",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-mutation-competence-delivery\\runs\\reviews\\mutation-witness-publication-quality-v1-pip-audit.log": "e82148c0c30269ca5a2c35420ece6af011a4faf5a375325d750e243ffdb10625",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-mutation-competence-delivery\\runs\\reviews\\mutation-witness-publication-quality-v1-compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-mutation-competence-delivery\\runs\\reviews\\mutation-witness-publication-quality-v1-mypy-linux.log": "dd758c62e671570062f9954e1a5d527b0d481f03e1af252648074cae102ed75c",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-mutation-competence-delivery\\runs\\reviews\\mutation-witness-publication-quality-v1.json": "b8c3a8f476a5066e32bc9f2e1816a938b740ae042979504576e6870bcca18b05",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-mutation-competence-delivery\\runs\\reviews\\mutation-witness-publication-source-bridge-v1.json": "10f726b3285f12e0025b0c102ea46fc7622a2cca3a045bc0855e30964adc2db8",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-mutation-witness\\runs\\reviews\\mutation-witness-red-v1.json": "42f76acec3334c9a690e7142725bea7df67a2034ba1a7701a63965e807155a81",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-mutation-witness\\runs\\reviews\\actual-python-proof-v1.json": "b1450f35afbbec8b8734d4bc3980af8cb9880d45f6a754403da92cf3df8c22c6",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-mutation-witness\\runs\\reviews\\child-generation-diagnostic-proof-v3.json": "4f50798d5e9ed586e43d79b69d25f20fbf009236b6a0d3e581e6bb26551aa5d2",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-mutation-witness\\runs\\reviews\\child-generation-diagnostic-proof-v4.json": "6c3da51ca1f94961b28635f6b297b6ee830748ef8800eb1e5ecc4802f43e77e9",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-mutation-witness\\runs\\reviews\\child-generation-diagnostic-proof-v5.json": "bf350c1023cb9de45c552787bc9f49e37d3abb23047a5e0b0576b666481af219",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-mutation-competence-delivery\\runs\\reviews\\mutation-witness-delivery-authoring-stopped-v1.json": "bdb3b0dfb71d96ad887190a4d5d49d08d68f933822ffb02cc8befad8164767bf",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-mutation-competence-delivery\\runs\\reviews\\mutation-witness-plan-publication-v2.json": "7b18e6410ea0c7af2d59aa973fda2bc2453e669afcb5c71c17d080555c873d78"
+  },
+  "local_link_paths_resolved": 250,
+  "reviewed_limits": [
+    "Original composed proof remains failed/incomplete; positive source only materialized, not ready.",
+    "V3/V4 are instrumented localizations, V5 succeeds unchanged from fresh paths/time; no causal Docker fix or original-owner repair claim.",
+    "Native stages are request-free simulations, no new official scoring claim.",
+    "Initial behavioral RED, failed setup/capture cuts and docs-only assembler refusal remain qualified.",
+    "No full hosted pass, allocation/live permission, scientific gain, universal competence, held-out or model-context claim.",
+    "Bounded competence mechanism implementation and draft publication do not close composed positive or context-fit gates."
+  ],
+  "scope": "Static docs, existing raw JSON/logs/source hashes and read-only Git blob inspection only. No app/Python parse/import/exec, tests, SQL, Docker, network, keys, original/tracked edits. Only this new ignored helper/receipt written."
+}

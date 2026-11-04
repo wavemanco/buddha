@@ -1,5 +1,7 @@
 # Slice 3: bounded policy optimization
 
+**Historical command record.** The completed JSON-policy experiment's `prepare`, `run`, `search-prepare`, `search-run` and `continuation-prepare` commands are retired in the current checkout. They refuse before keys, file preparation or provider calls. Commands below describe only their original pinned runtime and do not authorize a restart. Retained offline readers and synthetic demos remain available. [Guide before retirement](https://github.com/wavemanco/buddha/blob/e3076ba648c7b37ce465ba407779dc25a6da805a/docs/SLICE3.md) · [Original CLI source](https://github.com/wavemanco/buddha/blob/e3076ba648c7b37ce465ba407779dc25a6da805a/buddha/__main__.py).
+
 This records the original offline checkpoint; costs and pending checks below describe that historical state. The [CLI progress follow-up](CLI-PROGRESS.md) records the first interruption and the added observation tools. The subsequent recovery pilot is now complete; see [verified results](FIRST-LIVE-RESULTS.md). [PLAN.md](PLAN.md) owns the consolidated current status and next slice.
 
 The live commands below document the original runtime. Current paid entry points require shared `--authorization`; historical manifests must use their preserved matching source for exact reconstruction. See the current [recovery contract](RECOVERY-CONTRACT.md) and [key setup](API-KEYS.md).

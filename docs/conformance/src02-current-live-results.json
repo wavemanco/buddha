@@ -1,0 +1,801 @@
+{
+  "actual_maximum_invocation_inputs": 105,
+  "all_owners_inactive": true,
+  "authorization": {
+    "authorization_id": "src02-current-live-20261024-v1",
+    "available_microusd": 24246794,
+    "budget_microusd": 25000000,
+    "committed_microusd": 753206,
+    "event_count": 419,
+    "max_calls": 512,
+    "operation_count": 90,
+    "remaining_calls": 422,
+    "reserved_microusd": 0,
+    "scope": "source screen: c0c9dd9ec6330af3840a79517192509c901560e323c09b48979a2c885056d829",
+    "spent_microusd": 753206,
+    "terms_sha256": "f744dc63837ea7df9324c4a616f7b83192ae8370080bbe09a9787cafa8bb0de7"
+  },
+  "benchmark": {
+    "comparison_key": "c0c9dd9ec6330af3840a79517192509c901560e323c09b48979a2c885056d829",
+    "name": "NoveltyBench",
+    "official_scoring_unchanged": true,
+    "upstream_revision": "64a23be6b18ec1dacc298830aab276061b6e143c",
+    "version": "1.1"
+  },
+  "claim": "Current Python task-procedure and changed-used-improver mechanisms established at original engineering scope; official development performance declined. No useful-diversity generalization or improved-improver efficacy claim.",
+  "closed_scope": true,
+  "costs_by_role": {
+    "C_proposal": {
+      "operation_count": 1,
+      "spent_microusd": 95139
+    },
+    "C_screen": {
+      "operation_count": 28,
+      "spent_microusd": 156953
+    },
+    "P_screen": {
+      "operation_count": 55,
+      "spent_microusd": 273761
+    },
+    "W0": {
+      "operation_count": 4,
+      "spent_microusd": 94901
+    },
+    "W1": {
+      "operation_count": 2,
+      "spent_microusd": 132452
+    }
+  },
+  "earlier_conditional_input_bound": {
+    "K": 0,
+    "scope": "earlier prospective declaration; observed maximum105 applies only to this actual29-owner run",
+    "value": 111
+  },
+  "executing_commit": "42e5dd2d3d32c1f085c87aaa2de44cc1391587ce",
+  "format": "buddha.current-source-actual-live-results.v1",
+  "full_feedback_answers_per_proposal": 30,
+  "generation_joins": [
+    {
+      "answers_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\0\\generation\\attempts\\0-0\\session\\answers.json",
+      "answers_sha256": "96c7d9a71bfbe507596560d2685f388cfa534611778f5b4c6648f70bf6386881",
+      "callback_count": 10,
+      "count": 10,
+      "literal_unique": 10,
+      "role": "P",
+      "stage": "seed/tasks/0/generation",
+      "task_id": "curated-0"
+    },
+    {
+      "answers_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\1\\generation\\attempts\\0-0\\session\\answers.json",
+      "answers_sha256": "26626470230be8b015f993c056bfd65014c68c2332f541e711231bdb84f1e8a4",
+      "callback_count": 10,
+      "count": 10,
+      "literal_unique": 2,
+      "role": "P",
+      "stage": "seed/tasks/1/generation",
+      "task_id": "curated-47"
+    },
+    {
+      "answers_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\2\\generation\\attempts\\0-0\\session\\answers.json",
+      "answers_sha256": "2a52faf674e96bf2f221f01c4c404184da7ec4b7913679ed8443ec17ca07f3ac",
+      "callback_count": 10,
+      "count": 10,
+      "literal_unique": 10,
+      "role": "P",
+      "stage": "seed/tasks/2/generation",
+      "task_id": "curated-97"
+    },
+    {
+      "answers_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\0\\generation\\attempts\\0-0\\session\\answers.json",
+      "answers_sha256": "1988b8d53b21829eec979644f42a29e5f3b1d96f1d379801592a0c694297305a",
+      "callback_count": 4,
+      "count": 10,
+      "literal_unique": 10,
+      "role": "C",
+      "stage": "iterations/0/screen/tasks/0/generation",
+      "task_id": "curated-0"
+    },
+    {
+      "answers_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\1\\generation\\attempts\\0-0\\session\\answers.json",
+      "answers_sha256": "d842ec4d6bf01a467ccff27f38af3148263d34a1480d280310df5549c99e7927",
+      "callback_count": 4,
+      "count": 10,
+      "literal_unique": 2,
+      "role": "C",
+      "stage": "iterations/0/screen/tasks/1/generation",
+      "task_id": "curated-47"
+    },
+    {
+      "answers_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\2\\generation\\attempts\\0-0\\session\\answers.json",
+      "answers_sha256": "9d7a274ccd993dcfca614c286893deae96d9fe2c2c004fa8a6ac2e88b9714935",
+      "callback_count": 4,
+      "count": 10,
+      "literal_unique": 1,
+      "role": "C",
+      "stage": "iterations/0/screen/tasks/2/generation",
+      "task_id": "curated-97"
+    },
+    {
+      "answers_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed-witness\\generation\\attempts\\0-0\\session\\answers.json",
+      "answers_sha256": "3847e8372f90fcfee0ac517ed67e26c4a5c81b3406492ed9096aea34490115d3",
+      "callback_count": 3,
+      "count": 10,
+      "literal_unique": 10,
+      "role": "W0",
+      "stage": "seed-witness/generation",
+      "task_id": "curated-0"
+    },
+    {
+      "answers_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\witness\\generation\\attempts\\0-0\\session\\answers.json",
+      "answers_sha256": "be2305e71d14bb617ccf6aacb485da60e4ca3a81f83daa932c6b42edb3544b74",
+      "callback_count": 1,
+      "count": 10,
+      "literal_unique": 10,
+      "role": "W1",
+      "stage": "iterations/0/witness/generation",
+      "task_id": "curated-0"
+    }
+  ],
+  "individual_review_copies": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-current-live-results\\docs\\conformance\\src02-current-live-root-review.json",
+      "sha256": "f28a355bdd1b35b7990e776ad996b8b43c08ce0aa45309d8c62fd00f2a0fd134"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-current-live-results\\docs\\conformance\\src02-current-live-mechanism-review.json",
+      "sha256": "a7e0d5adc16c9cac5744bc522255ffdcc56669a8512f7dfdf05c820672885fe1"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-current-live-results\\docs\\conformance\\src02-current-live-content-review.json",
+      "sha256": "5b3bcc223c2d8777c2a9cb244c2ecce78d16e38148f4e08de6e31bf45c47617d"
+    }
+  ],
+  "official_screens": [
+    {
+      "admission": {
+        "eligible": true,
+        "mean_distinct": 7.333333333333333,
+        "mean_utility": 5.993768036254777,
+        "reasons": []
+      },
+      "candidate_id": "22cd302a8c12e05c5fd9bb95389f5880e713a027e60a0206799e9c4fa2f48eeb",
+      "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed",
+      "status": "complete",
+      "tasks": [
+        {
+          "distinct": 10,
+          "task_id": "curated-0",
+          "utility": 7.647300365066206
+        },
+        {
+          "distinct": 2,
+          "task_id": "curated-47",
+          "utility": 3.0471894789165463
+        },
+        {
+          "distinct": 10,
+          "task_id": "curated-97",
+          "utility": 7.2868142647815795
+        }
+      ]
+    },
+    {
+      "admission": {
+        "eligible": true,
+        "mean_distinct": 4.333333333333333,
+        "mean_utility": 3.785857614581877,
+        "reasons": []
+      },
+      "candidate_id": "fb05dfb7df368418bda13c7db20f06846ea27d96b7bee7ed2b3eff6aef5c46fb",
+      "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen",
+      "status": "complete",
+      "tasks": [
+        {
+          "distinct": 10,
+          "task_id": "curated-0",
+          "utility": 6.741977015386745
+        },
+        {
+          "distinct": 2,
+          "task_id": "curated-47",
+          "utility": 3.0471894789165463
+        },
+        {
+          "distinct": 1,
+          "task_id": "curated-97",
+          "utility": 1.5684063494423397
+        }
+      ]
+    }
+  ],
+  "original_launch_receipt": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-receipts-v1\\launch-001.json",
+    "sha256": "2ca7b832ac9cc31bc78f84e45787f7a5c1bd7376c6992b930bd2ee5c67ce9adb"
+  },
+  "original_report": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\report.json",
+    "sha256": "df59709df0295863b2af87a04697ab635c23e404ced2e9100f7acfca01b80c7e"
+  },
+  "owner_count": 29,
+  "owners": [
+    {
+      "active": false,
+      "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed-witness\\proposal\\owners\\0",
+      "input_count": 87,
+      "operation_count": 1,
+      "run_id": "07036308f1d64e95be6c12698cf48071",
+      "spent_microusd": 92202
+    },
+    {
+      "active": false,
+      "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\1\\evaluation\\owners\\2",
+      "input_count": 103,
+      "operation_count": 2,
+      "run_id": "0ddbda5e757e423db6ff1c9957e77f6d",
+      "spent_microusd": 25554
+    },
+    {
+      "active": false,
+      "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\0\\evaluation\\owners\\1",
+      "input_count": 98,
+      "operation_count": 1,
+      "run_id": "0ef8da05a6c54d28893ea98bdcf8b696",
+      "spent_microusd": 764
+    },
+    {
+      "active": false,
+      "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\0\\generation\\owners\\0",
+      "input_count": 85,
+      "operation_count": 10,
+      "run_id": "11351299c61b43b99bb38e6dedde8743",
+      "spent_microusd": 5640
+    },
+    {
+      "active": false,
+      "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\2\\evaluation\\owners\\1",
+      "input_count": 97,
+      "operation_count": 1,
+      "run_id": "1167dad905344ff3865b66417e4de3ed",
+      "spent_microusd": 272
+    },
+    {
+      "active": false,
+      "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\1\\evaluation\\owners\\3",
+      "input_count": 105,
+      "operation_count": 0,
+      "run_id": "294854eaded044519218d4c504ae4393",
+      "spent_microusd": 0
+    },
+    {
+      "active": false,
+      "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\0\\evaluation\\owners\\2",
+      "input_count": 103,
+      "operation_count": 10,
+      "run_id": "3864adc6145947fb95646111900780c8",
+      "spent_microusd": 111531
+    },
+    {
+      "active": false,
+      "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\0\\evaluation\\owners\\2",
+      "input_count": 102,
+      "operation_count": 10,
+      "run_id": "46772e9a49204b47b00a891b8e0b4de0",
+      "spent_microusd": 107247
+    },
+    {
+      "active": false,
+      "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\1\\generation\\owners\\0",
+      "input_count": 86,
+      "operation_count": 4,
+      "run_id": "5ec66a0388064674a5f24ed142f2b46f",
+      "spent_microusd": 939
+    },
+    {
+      "active": false,
+      "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\2\\evaluation\\owners\\1",
+      "input_count": 98,
+      "operation_count": 1,
+      "run_id": "661dc7d3828f4fb8abf7c646084ac103",
+      "spent_microusd": 219
+    },
+    {
+      "active": false,
+      "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\2\\generation\\owners\\0",
+      "input_count": 86,
+      "operation_count": 4,
+      "run_id": "71228d49ce7645f98e2a0f31c9b596e7",
+      "spent_microusd": 935
+    },
+    {
+      "active": false,
+      "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\1\\evaluation\\owners\\3",
+      "input_count": 104,
+      "operation_count": 0,
+      "run_id": "7db8e8346c294995a9c7eea566642e01",
+      "spent_microusd": 0
+    },
+    {
+      "active": false,
+      "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\1\\evaluation\\owners\\1",
+      "input_count": 97,
+      "operation_count": 1,
+      "run_id": "905653aa919c4fa3901fc10757542421",
+      "spent_microusd": 269
+    },
+    {
+      "active": false,
+      "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\witness\\proposal\\owners\\0",
+      "input_count": 87,
+      "operation_count": 1,
+      "run_id": "a4f10fbc518743e681373278c8ec91dc",
+      "spent_microusd": 130207
+    },
+    {
+      "active": false,
+      "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\1\\evaluation\\owners\\2",
+      "input_count": 102,
+      "operation_count": 2,
+      "run_id": "b5ddd5c4869f4743ad1cf6853d75005c",
+      "spent_microusd": 26181
+    },
+    {
+      "active": false,
+      "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\1\\generation\\owners\\0",
+      "input_count": 85,
+      "operation_count": 10,
+      "run_id": "bbf8381f31694324b8953ee080a9c4d8",
+      "spent_microusd": 1617
+    },
+    {
+      "active": false,
+      "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\1\\evaluation\\owners\\1",
+      "input_count": 98,
+      "operation_count": 1,
+      "run_id": "bf4dec627ebe403fa5fe3124443764e7",
+      "spent_microusd": 307
+    },
+    {
+      "active": false,
+      "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\witness\\generation\\owners\\0",
+      "input_count": 92,
+      "operation_count": 1,
+      "run_id": "c048c45d32c6409fafa3bffb82522025",
+      "spent_microusd": 2245
+    },
+    {
+      "active": false,
+      "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed-witness\\generation\\owners\\0",
+      "input_count": 92,
+      "operation_count": 3,
+      "run_id": "c7cfdb187cee472b808205b98ca83c09",
+      "spent_microusd": 2699
+    },
+    {
+      "active": false,
+      "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\0\\evaluation\\owners\\3",
+      "input_count": 104,
+      "operation_count": 0,
+      "run_id": "c92ed0bf20704ad3b825555dc70573ff",
+      "spent_microusd": 0
+    },
+    {
+      "active": false,
+      "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\0\\evaluation\\owners\\1",
+      "input_count": 97,
+      "operation_count": 1,
+      "run_id": "d1f7526942a44840b4d577de835262d3",
+      "spent_microusd": 837
+    },
+    {
+      "active": false,
+      "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\0\\evaluation\\owners\\3",
+      "input_count": 105,
+      "operation_count": 0,
+      "run_id": "d6a2be8198374bbd9c5b46a9bf1e2a4f",
+      "spent_microusd": 0
+    },
+    {
+      "active": false,
+      "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\2\\evaluation\\owners\\2",
+      "input_count": 102,
+      "operation_count": 10,
+      "run_id": "e044704b7fc54da3ac61fdb0a4b6aa66",
+      "spent_microusd": 129913
+    },
+    {
+      "active": false,
+      "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\0\\generation\\owners\\0",
+      "input_count": 86,
+      "operation_count": 4,
+      "run_id": "ee3520835faf49e6bc2825607effe73c",
+      "spent_microusd": 3212
+    },
+    {
+      "active": false,
+      "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\2\\evaluation\\owners\\2",
+      "input_count": 103,
+      "operation_count": 1,
+      "run_id": "f088f20a38d04c8ea84927880a706b69",
+      "spent_microusd": 13492
+    },
+    {
+      "active": false,
+      "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\2\\generation\\owners\\0",
+      "input_count": 85,
+      "operation_count": 10,
+      "run_id": "f4b31c096a5840088bb10065e8ea1cdb",
+      "spent_microusd": 1785
+    },
+    {
+      "active": false,
+      "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\2\\evaluation\\owners\\3",
+      "input_count": 104,
+      "operation_count": 0,
+      "run_id": "f57aef2d52504c6f963b481ce63bc0ed",
+      "spent_microusd": 0
+    },
+    {
+      "active": false,
+      "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\proposal\\owners\\0",
+      "input_count": 87,
+      "operation_count": 1,
+      "run_id": "f71f2070027d43cc97dac55117a5c3c7",
+      "spent_microusd": 95139
+    },
+    {
+      "active": false,
+      "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\2\\evaluation\\owners\\3",
+      "input_count": 105,
+      "operation_count": 0,
+      "run_id": "ff940028d5c14db8a93e7ef1d1b79c6e",
+      "spent_microusd": 0
+    }
+  ],
+  "proposal_joins": [
+    {
+      "child_bundle_sha256": "25b2802cdfcb1a81b70a89e255a2f4e60b2aec70b2942ebd76c99478e78040f0",
+      "child_source_sha256": "6aa4cd1f941a208ed473793874522d1356c58db2a60b77807d6805422164759e",
+      "complete_feedback_joins": [
+        {
+          "answer_count": 10,
+          "answers_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\0\\generation\\attempts\\0-0\\session\\answers.json",
+          "answers_sha256": "96c7d9a71bfbe507596560d2685f388cfa534611778f5b4c6648f70bf6386881",
+          "note_utf8_bytes": 5255,
+          "task_id": "curated-0"
+        },
+        {
+          "answer_count": 10,
+          "answers_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\1\\generation\\attempts\\0-0\\session\\answers.json",
+          "answers_sha256": "26626470230be8b015f993c056bfd65014c68c2332f541e711231bdb84f1e8a4",
+          "note_utf8_bytes": 850,
+          "task_id": "curated-47"
+        },
+        {
+          "answer_count": 10,
+          "answers_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\2\\generation\\attempts\\0-0\\session\\answers.json",
+          "answers_sha256": "2a52faf674e96bf2f221f01c4c404184da7ec4b7913679ed8443ec17ca07f3ac",
+          "note_utf8_bytes": 673,
+          "task_id": "curated-97"
+        }
+      ],
+      "literal_reply_and_private_copy_match": true,
+      "measurement_index": null,
+      "operation_id": "65aef5e21e9dd7a341c86bc6ae3118fd64821546078cd18a7077ce2dae860af6",
+      "original_owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed-witness\\proposal\\owners\\0",
+      "owner_run_id": "07036308f1d64e95be6c12698cf48071",
+      "parent_bundle_sha256": "22cd302a8c12e05c5fd9bb95389f5880e713a027e60a0206799e9c4fa2f48eeb",
+      "parent_source_sha256": "77cfa68f6b3c6996fd503e1ce6f7a964eb57abdb8bde98f6761de5f6e298ff4f",
+      "request_body_sha256": "baf30ae51f658bb61a2d1b0da7638b6d507433c831ce12b7f08b3e9cf8000b19",
+      "response_body_sha256": "59cd28e789f2ce83ba4fb8119b821a32209b5c961151c3ce9b414a40bb8a5119",
+      "role": "W0"
+    },
+    {
+      "child_bundle_sha256": "fb05dfb7df368418bda13c7db20f06846ea27d96b7bee7ed2b3eff6aef5c46fb",
+      "child_source_sha256": "4196cd29ffa76c6959e6f678a8286b1fde5b56e6a34a97dcf68787e1f22b3a43",
+      "complete_feedback_joins": [
+        {
+          "answer_count": 10,
+          "answers_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\0\\generation\\attempts\\0-0\\session\\answers.json",
+          "answers_sha256": "96c7d9a71bfbe507596560d2685f388cfa534611778f5b4c6648f70bf6386881",
+          "note_utf8_bytes": 5255,
+          "task_id": "curated-0"
+        },
+        {
+          "answer_count": 10,
+          "answers_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\1\\generation\\attempts\\0-0\\session\\answers.json",
+          "answers_sha256": "26626470230be8b015f993c056bfd65014c68c2332f541e711231bdb84f1e8a4",
+          "note_utf8_bytes": 850,
+          "task_id": "curated-47"
+        },
+        {
+          "answer_count": 10,
+          "answers_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\2\\generation\\attempts\\0-0\\session\\answers.json",
+          "answers_sha256": "2a52faf674e96bf2f221f01c4c404184da7ec4b7913679ed8443ec17ca07f3ac",
+          "note_utf8_bytes": 673,
+          "task_id": "curated-97"
+        }
+      ],
+      "literal_reply_and_private_copy_match": true,
+      "measurement_index": null,
+      "operation_id": "5b849be019b6bf0ce435b72584356fda8d6b980492bd7033bb516820e6868eb0",
+      "original_owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\proposal\\owners\\0",
+      "owner_run_id": "f71f2070027d43cc97dac55117a5c3c7",
+      "parent_bundle_sha256": "22cd302a8c12e05c5fd9bb95389f5880e713a027e60a0206799e9c4fa2f48eeb",
+      "parent_source_sha256": "77cfa68f6b3c6996fd503e1ce6f7a964eb57abdb8bde98f6761de5f6e298ff4f",
+      "request_body_sha256": "baf30ae51f658bb61a2d1b0da7638b6d507433c831ce12b7f08b3e9cf8000b19",
+      "response_body_sha256": "e0c8b460881f1c14bfe2f9da2eadbffcdf02879e642d3d69399a9984ebd25176",
+      "role": "C"
+    },
+    {
+      "child_bundle_sha256": "7826e629217a8f10877dd3f347a63e03bba7427882bbfe77ab7921666b725ce4",
+      "child_source_sha256": "1488d6348158dfe395f873ca2d830cbd1aa91c11b788900dd93f3ac5450d2e12",
+      "complete_feedback_joins": [
+        {
+          "answer_count": 10,
+          "answers_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\0\\generation\\attempts\\0-0\\session\\answers.json",
+          "answers_sha256": "1988b8d53b21829eec979644f42a29e5f3b1d96f1d379801592a0c694297305a",
+          "note_utf8_bytes": 4705,
+          "task_id": "curated-0"
+        },
+        {
+          "answer_count": 10,
+          "answers_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\1\\generation\\attempts\\0-0\\session\\answers.json",
+          "answers_sha256": "d842ec4d6bf01a467ccff27f38af3148263d34a1480d280310df5549c99e7927",
+          "note_utf8_bytes": 838,
+          "task_id": "curated-47"
+        },
+        {
+          "answer_count": 10,
+          "answers_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\2\\generation\\attempts\\0-0\\session\\answers.json",
+          "answers_sha256": "9d7a274ccd993dcfca614c286893deae96d9fe2c2c004fa8a6ac2e88b9714935",
+          "note_utf8_bytes": 698,
+          "task_id": "curated-97"
+        }
+      ],
+      "literal_reply_and_private_copy_match": true,
+      "measurement_index": [
+        {
+          "distinct": 10,
+          "invalid_metrics": [],
+          "missing_scores": 0,
+          "quality_status": "scored",
+          "recorded_cost_microusd": 115507,
+          "score_range": [
+            6,
+            8
+          ],
+          "scored_answers": 10,
+          "task_id": "curated-0",
+          "utility": 6.741977015386745
+        },
+        {
+          "distinct": 2,
+          "invalid_metrics": [],
+          "missing_scores": 8,
+          "quality_status": "scored",
+          "recorded_cost_microusd": 26800,
+          "score_range": [
+            7,
+            8
+          ],
+          "scored_answers": 2,
+          "task_id": "curated-47",
+          "utility": 3.0471894789165463
+        },
+        {
+          "distinct": 1,
+          "invalid_metrics": [],
+          "missing_scores": 9,
+          "quality_status": "scored",
+          "recorded_cost_microusd": 14646,
+          "score_range": [
+            7,
+            7
+          ],
+          "scored_answers": 1,
+          "task_id": "curated-97",
+          "utility": 1.5684063494423397
+        }
+      ],
+      "operation_id": "8dbde53ca04b31b8c04194c091db0db446e9ce02e92f4586753b742c1d468aee",
+      "original_owner": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\witness\\proposal\\owners\\0",
+      "owner_run_id": "a4f10fbc518743e681373278c8ec91dc",
+      "parent_bundle_sha256": "fb05dfb7df368418bda13c7db20f06846ea27d96b7bee7ed2b3eff6aef5c46fb",
+      "parent_source_sha256": "4196cd29ffa76c6959e6f678a8286b1fde5b56e6a34a97dcf68787e1f22b3a43",
+      "request_body_sha256": "ed24988ad2f6a43978628e3ba0ad9f7655a6a054d8b17f8dd49fb3b2ec762172",
+      "response_body_sha256": "3a7a391af8c62f44bdd44ff297b96b777ac09a9ce02851beb53a18f67083a956",
+      "role": "W1"
+    }
+  ],
+  "reason": "bounded_iterations_complete",
+  "reconciliation": {
+    "content_review_clerical_correction": {
+      "correction": "Caleb is named in sentence2; male pronouns occur in sentences3and5, not sentence2. Original full text and substantive no-girl finding are unchanged.",
+      "finding": "L1",
+      "original_review_left_unchanged": true,
+      "record": "src02-current-live-content-review-v1.json"
+    },
+    "custody_basis": [
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-current-live-passive-verification-v2.json",
+        "sha256": "a00f60b16894b5ac725564e920ef0f27cc9f6f9ffdf3d2600f32a2888f674017"
+      },
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-current-live-root-custody-v2.json",
+        "sha256": "1e5ac8a5b523535e570596895fba90bf9af6678334769d6dcce8e3b2a67ff34d"
+      },
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-current-live-source-preservation-v1.json",
+        "sha256": "8a6ab1ea9c218c8bb97f533fac621a9957e47e1caf1a7e7e05c60e08ea474b46"
+      }
+    ],
+    "factual_custody_mismatch": false,
+    "format": "buddha.current-source-live-reconciliation.v1",
+    "gate_disposition": {
+      "EVAL-02": "open; useful-diversity generalization not established",
+      "IMP-01": "open; effectiveness not established",
+      "SRC-02": "complete at original engineering scope",
+      "SRC-03": "complete at original engineering scope"
+    },
+    "historical_scope_closed_for_new_calls": true,
+    "individual_records_frozen": [
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-current-live-root-findings-v1.json",
+        "sha256": "f28a355bdd1b35b7990e776ad996b8b43c08ce0aa45309d8c62fd00f2a0fd134"
+      },
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-current-live-mechanism-review-v1.json",
+        "sha256": "a7e0d5adc16c9cac5744bc522255ffdcc56669a8512f7dfdf05c820672885fe1"
+      },
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-current-live-content-review-v1.json",
+        "sha256": "5b3bcc223c2d8777c2a9cb244c2ecce78d16e38148f4e08de6e31bf45c47617d"
+      }
+    ],
+    "interpretation_limits": [
+      "Witness passing is the frozen enforced role-scope validity result, not all-answer semantic compliance. W1 index8 and W0 index0 concerns remain.",
+      "C measurement_index missing_scores counts unscored non-head duplicate positions; every distinct group head was scored.",
+      "Same-core rescue concerns remain descriptive, not replacement official partitions.",
+      "Root and fresh mechanism reviewer are automated host contexts with exact serving model identity/overlap unknown; not independent human ratings.",
+      "Host review inference is unpriced subscription usage; no additional experiment API requests were made.",
+      "No selected source patch, adaptive extra execution or witness promotion occurred."
+    ],
+    "mechanism_decisions": {
+      "changed_used_improver": "established",
+      "task_procedure_change": "established"
+    },
+    "no_new_experiment_allocation": true,
+    "official_performance": "negative on both mean development metrics; do not promote as a score improvement",
+    "recorded_at_utc": "2026-10-25T02:10:54.918104+00:00",
+    "unresolved_mechanism_disagreement": false
+  },
+  "recorded_at_utc": "2026-10-25T02:12:14.921847+00:00",
+  "review_usage": {
+    "generated_agent_execution": false,
+    "host_model_review_usage": "unpriced Codex subscription usage; not independent human ratings",
+    "new_experiment_provider_calls": 0
+  },
+  "run_directory": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1",
+  "selection": {
+    "active_ids": [
+      "22cd302a8c12e05c5fd9bb95389f5880e713a027e60a0206799e9c4fa2f48eeb"
+    ],
+    "admissions": [
+      {
+        "candidate_id": "22cd302a8c12e05c5fd9bb95389f5880e713a027e60a0206799e9c4fa2f48eeb",
+        "eligible": true,
+        "mean_distinct": 7.333333333333333,
+        "mean_utility": 5.993768036254777,
+        "reasons": []
+      },
+      {
+        "candidate_id": "fb05dfb7df368418bda13c7db20f06846ea27d96b7bee7ed2b3eff6aef5c46fb",
+        "eligible": true,
+        "mean_distinct": 4.333333333333333,
+        "mean_utility": 3.785857614581877,
+        "reasons": []
+      }
+    ],
+    "claim": "exploratory source parent allocation only; no improvement claim",
+    "comparison_key": "c0c9dd9ec6330af3840a79517192509c901560e323c09b48979a2c885056d829",
+    "controls_sha256": "60b2b82ec4a895b74be55752c06d81a4b742219090d113ce92e2118a406bf1b0",
+    "format": "buddha.source-parent-selection.v1",
+    "frontier_ids": [
+      "22cd302a8c12e05c5fd9bb95389f5880e713a027e60a0206799e9c4fa2f48eeb"
+    ],
+    "iteration": 1,
+    "max_active": 2,
+    "method": "latest",
+    "seed": 7,
+    "selected_id": "fb05dfb7df368418bda13c7db20f06846ea27d96b7bee7ed2b3eff6aef5c46fb"
+  },
+  "source_capacity_checkpoints": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\proposal-capacity.json",
+      "sha256": "d89a239b0edff7bd86624683dcc2cd7f69d999c5387573dc7ab932064578056c"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\witness\\proposal-capacity.json",
+      "sha256": "9adb56f6ffdb6fe9301f0186104c65fa1eecbcb04a97e001cdf611db8c7086d8"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed-witness\\proposal-capacity.json",
+      "sha256": "9cbd6c6865e6aec41d4ea17fb5eb01c7d1bd56d31ad3e6ee022d1275e927775d"
+    }
+  ],
+  "source_roles": [
+    {
+      "bundle_sha256": "22cd302a8c12e05c5fd9bb95389f5880e713a027e60a0206799e9c4fa2f48eeb",
+      "role": "P",
+      "source_sha256": "77cfa68f6b3c6996fd503e1ce6f7a964eb57abdb8bde98f6761de5f6e298ff4f"
+    },
+    {
+      "bundle_sha256": "25b2802cdfcb1a81b70a89e255a2f4e60b2aec70b2942ebd76c99478e78040f0",
+      "role": "W0",
+      "source_sha256": "6aa4cd1f941a208ed473793874522d1356c58db2a60b77807d6805422164759e"
+    },
+    {
+      "bundle_sha256": "fb05dfb7df368418bda13c7db20f06846ea27d96b7bee7ed2b3eff6aef5c46fb",
+      "role": "C",
+      "source_sha256": "4196cd29ffa76c6959e6f678a8286b1fde5b56e6a34a97dcf68787e1f22b3a43"
+    },
+    {
+      "bundle_sha256": "7826e629217a8f10877dd3f347a63e03bba7427882bbfe77ab7921666b725ce4",
+      "role": "W1",
+      "source_sha256": "1488d6348158dfe395f873ca2d830cbd1aa91c11b788900dd93f3ac5450d2e12"
+    }
+  ],
+  "status": "complete",
+  "terminal_output": {
+    "path": "C:\\Users\\arvik\\.codex\\attachments\\befda1fc-d5f0-43d5-bace-366bac9339a0\\Pasted text.txt",
+    "sha256": "0effca2ec9f350b4208de6ed1cb184f00c20f61a342c65eb6562f259f3bbfa34"
+  },
+  "total_answers": 80,
+  "unused_allowance_not_available_for_new_experiments": true,
+  "validation_evidence": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-current-live-passive-verification-v2.json",
+      "sha256": "a00f60b16894b5ac725564e920ef0f27cc9f6f9ffdf3d2600f32a2888f674017"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-current-live-root-custody-v2.json",
+      "sha256": "1e5ac8a5b523535e570596895fba90bf9af6678334769d6dcce8e3b2a67ff34d"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-current-live-source-preservation-v1.json",
+      "sha256": "8a6ab1ea9c218c8bb97f533fac621a9957e47e1caf1a7e7e05c60e08ea474b46"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-current-live-passive-guard-correction-v1.json",
+      "sha256": "65792e684f2bb20e77bd3e20f16b83d1eb61d171b060455025353a46d3dba800"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-current-live-custody-decoder-correction-v1.json",
+      "sha256": "60b24e890c44268feb459bc192ab9de963844de6bafb04d448ef105c62d0c213"
+    }
+  ],
+  "witness_results": [
+    {
+      "candidate_id": "22cd302a8c12e05c5fd9bb95389f5880e713a027e60a0206799e9c4fa2f48eeb",
+      "costs": {
+        "committed_microusd": 94901,
+        "operation_count": 4,
+        "reserved_microusd": 0,
+        "spent_microusd": 94901
+      },
+      "reason": "complete",
+      "status": "passed"
+    },
+    {
+      "candidate_id": "fb05dfb7df368418bda13c7db20f06846ea27d96b7bee7ed2b3eff6aef5c46fb",
+      "costs": {
+        "committed_microusd": 132452,
+        "operation_count": 2,
+        "reserved_microusd": 0,
+        "spent_microusd": 132452
+      },
+      "reason": "complete",
+      "status": "passed"
+    }
+  ]
+}

@@ -1,0 +1,202 @@
+{
+  "format": "buddha.bounded-evidence-capture-delivery.v1",
+  "recorded_utc": "2026-10-28T16:17:30.462026+00:00",
+  "base_head": "df8efb65eeadd69b87164aebceeb094644a947a3",
+  "spec_sections": [
+    5,
+    7,
+    9,
+    10
+  ],
+  "scope": "First passive-reader repair only; no live continuation implementation or permission.",
+  "source_files_sha256": {
+    "buddha/doctor.py": "7c51d8f2f241e557a8f4ca6a1b0631410e8c9c47ff0c99d65bc21a96a47694f6",
+    "tests/test_bounded_evidence_capture.py": "bd75a3e1c9cbd6768c942a05c5cb652149380a1811e93f26e1715ebd2696fd43",
+    "docs/UNIFIED-EVIDENCE-RECOVERY.md": "e92c6113268164c77f1e06eb79fee642dd34499f0cb8909fb61e64b73cd6ea62",
+    "docs/UNIFIED-LIVE.md": "d3efac5d75587a260a1fb3805fa5ac4f982e783bf6ac0a002ad612c87f19ba04",
+    "docs/PLAN.md": "8b32b2bd71748b46a1312020a6efff3f23b856f980c5fe0c971a3816ac19a102"
+  },
+  "original_stop": {
+    "observation": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-unified-comparison-20261026-v2\\NOT-CREATED-unified-workspace\\observations\\3eb9cec933a742be92d142f69194a54f.json",
+    "sha256": "042d7c1fe5ec87b90c18977acca4445697f1b16b0165ee6f2a5567248b872567",
+    "attempts": 604,
+    "spent_microusd": 4845090,
+    "reserved_microusd": 0,
+    "final_and_plain_attempts": 0,
+    "diagnostic_full_restore_seconds": 786.763,
+    "consumed_before_rejected_read": 1070166023,
+    "next_file_bytes": 4018013,
+    "allowance_bytes": 1073741824
+  },
+  "policy": {
+    "format": "buddha.evidence-observation-policy.v1",
+    "max_resident_bytes": 0,
+    "max_total_bytes_hard_maximum": 68719476736,
+    "default_consumed_byte_limit": 1073741824,
+    "production_launch_opt_ins": 0
+  },
+  "guard_changes": {
+    "zero_persistent_raw_byte_cache": true,
+    "original_size_and_digest_checked_on_reread": true,
+    "default_logical_cap_unchanged": true,
+    "individual_field_limits_preserved": true,
+    "new_external_consumed_path_limit": true,
+    "sidecar_checks_before_and_after_finish": true,
+    "legacy_finish_schema_preserved": true,
+    "full_path_fingerprints_preserved": true,
+    "execution_context_local_policy": true,
+    "policy_frozen_at_capture_construction": true
+  },
+  "tests": {
+    "red": {
+      "file": "test_bounded_evidence_capture.py",
+      "methods": 10,
+      "exit_code": 1,
+      "failures": 4,
+      "subtest_errors": 14,
+      "seconds": 0.056
+    },
+    "green_unique_methods": 74,
+    "cohorts": [
+      {
+        "file": "test_bounded_evidence_capture.py",
+        "methods": 10,
+        "seconds": 0.072,
+        "exit_code": 0,
+        "command": "python -B -m unittest discover -s tests -p test_bounded_evidence_capture.py -v",
+        "function": "Runs this local synthetic or passive-fixture test group once; no model API calls. Ctrl+C stops it."
+      },
+      {
+        "file": "test_observation_fingerprints.py",
+        "methods": 3,
+        "seconds": 0.079,
+        "exit_code": 0,
+        "command": "python -B -m unittest discover -s tests -p test_observation_fingerprints.py -v",
+        "function": "Runs this local synthetic or passive-fixture test group once; no model API calls. Ctrl+C stops it."
+      },
+      {
+        "file": "test_native_evidence.py",
+        "methods": 10,
+        "seconds": 7.043,
+        "exit_code": 0,
+        "command": "python -B -m unittest discover -s tests -p test_native_evidence.py -v",
+        "function": "Runs this local synthetic or passive-fixture test group once; no model API calls. Ctrl+C stops it."
+      },
+      {
+        "file": "test_generation_evidence_pair.py",
+        "methods": 5,
+        "seconds": 8.473,
+        "exit_code": 0,
+        "command": "python -B -m unittest discover -s tests -p test_generation_evidence_pair.py -v",
+        "function": "Runs this local synthetic or passive-fixture test group once; no model API calls. Ctrl+C stops it."
+      },
+      {
+        "file": "test_observation_reads.py",
+        "methods": 16,
+        "seconds": 0.059,
+        "exit_code": 0,
+        "command": "python -B -m unittest discover -s tests -p test_observation_reads.py -v",
+        "function": "Runs this local synthetic or passive-fixture test group once; no model API calls. Ctrl+C stops it."
+      },
+      {
+        "file": "test_doctor.py",
+        "methods": 25,
+        "seconds": 33.517,
+        "exit_code": 0,
+        "command": "python -B -m unittest discover -s tests -p test_doctor.py -v",
+        "function": "Runs this local synthetic or passive-fixture test group once; no model API calls. Ctrl+C stops it."
+      },
+      {
+        "file": "test_improver_screen_replay.py",
+        "methods": 5,
+        "seconds": 87.037,
+        "exit_code": 0,
+        "command": "python -B -m unittest discover -s tests -p test_improver_screen_replay.py -v",
+        "function": "Runs this local synthetic or passive-fixture test group once; no model API calls. Ctrl+C stops it."
+      }
+    ],
+    "local_full_suite": {
+      "status": "running_at_publication",
+      "total_methods": 2036,
+      "shard_counts": [
+        1,
+        684,
+        668,
+        683
+      ],
+      "idle_seconds": 3600,
+      "source_unchanged_since_start": true,
+      "tools_environment": "Original pinned development-tool environment; new dependency pin separately verified.",
+      "claim": "No full-suite success asserted."
+    }
+  },
+  "quality": {
+    "patched_tools_environment": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-msgpack-20261028-v1\\venv",
+    "lint": 0,
+    "format": 0,
+    "format_files": 268,
+    "strict_types": 0,
+    "type_source_files": 88,
+    "bandit": 0,
+    "existing_bandit_warning_messages_retained": true,
+    "runtime_audit": 0,
+    "strict_development_audit": 0,
+    "compile": 0,
+    "old_development_audit_failure": "msgpack CVE-2026-114613; handled separately by df8efb6, no suppression"
+  },
+  "independent_engineering_review": {
+    "scope": "Source-only guard and Mapping consumer review; not independent scientific assessment.",
+    "blocking_findings": 0,
+    "notes": [
+      "New external path bound is explicitly documented.",
+      "Verified rereads add I/O; no speed improvement claimed.",
+      "Future policy use in new threads requires explicit context propagation."
+    ]
+  },
+  "evidence": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-evidence-repair-baseline-v1.json",
+      "sha256": "114cb5ce084384350829045e0349355c4f50aa9a9c5afd04e132142750ea958a"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-evidence-kernel-real-records-v1.json",
+      "sha256": "c665deaabd1896ca490b2f8ac8e4d92aac06eac023602a6273719bcad8cbbb07"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-evidence-repair-preservation-check-v1.json",
+      "sha256": "e83c0830b601c9525b1d5ba2dd5c0acad1fee8d5e3f98ee59ebdc561b2bbb431"
+    }
+  ],
+  "raw_rehearsal": {
+    "actual_paths": 2653,
+    "bytes": 1123069491,
+    "explicit_logical_limit": 4294967296,
+    "seconds": 8.753,
+    "default_refuses": true,
+    "original_fingerprints_match": true,
+    "scope": "Raw-byte kernel only; not complete study reconstruction, SQL interpretation, full-grid capacity or a speed comparison."
+  },
+  "preservation": {
+    "protected_files": 3277,
+    "unchanged": true,
+    "executing_Python_files": 318,
+    "active_static_files": 186,
+    "older_prepared_files": 166,
+    "historical_raw_hash_only_files": 451,
+    "trial_files": 2149,
+    "prior_plan_rows": 169,
+    "acceptance_tails": 7
+  },
+  "limits": {
+    "keys_read": 0,
+    "provider_calls": 0,
+    "SQL_connections_for_actual_evidence": 0,
+    "containers_started": 0,
+    "generated_source_or_private_text_semantics_inspected": false,
+    "official_settings_changed": false,
+    "original_owners_or_grants_changed": false,
+    "full_grid_or_scientific_claim": false,
+    "hosted_CI": "Pending for new head.",
+    "next": "Repeated-work and safe error repair, then explicit reviewed old/new helper continuity and complete-grid/request/confinement/accounting checks before a paid handoff."
+  }
+}

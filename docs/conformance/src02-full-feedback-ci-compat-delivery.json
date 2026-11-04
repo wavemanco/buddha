@@ -1,0 +1,352 @@
+{
+  "base_commit": "727851863692a10cb5ed49338afee84b17edc998",
+  "closing_receipt_sha256": "f5ee4d22813c39232a0610218a037fab3752116fa31ce461b17c7865a50bec49",
+  "format": "buddha.full-feedback-ci-compat-delivery.v1",
+  "historical_repair": "An existing method explicitly pins provenance v2, packet v1, 4096-byte notes and excerpt omissions. It now constructs that synthetic historical packet with _build_failures(full_answers=False) and uses the real public inspector. Every original assertion stays unchanged; public builders remain full-output only.",
+  "hosted_red": [
+    {
+      "body_seconds": 1692.484,
+      "failures": 21,
+      "head": "0353805b4d8b15cad4213e1906837ae610d728c9",
+      "job": 120246494386,
+      "os": "ubuntu-latest",
+      "pr": 73,
+      "skips": 5,
+      "tests": 1611
+    },
+    {
+      "body_seconds": 1527.693,
+      "failures": 21,
+      "head": "727851863692a10cb5ed49338afee84b17edc998",
+      "job": 120249972697,
+      "os": "ubuntu-latest",
+      "pr": 74,
+      "skips": 5,
+      "tests": 1611
+    }
+  ],
+  "limits": [
+    "Focused mocked-worker checks do not prove actual container execution or full hosted CI success.",
+    "PR71 linked-CLI failure cause remains unidentified; PR72 later passed on both OS.",
+    "No benchmark, production, historical packet, real run, allocation or provider call changed."
+  ],
+  "local_phases": [
+    {
+      "elapsed_seconds": 4.557773699983954,
+      "errors": 0,
+      "failures": 1,
+      "log_sha256": "b1854203952a8a0003558229fdb664c6594dd4264a84ce6eb34558a08ac32906",
+      "outcome": "genuine_new_behavioral_RED",
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\full-feedback-ci-compat\\runs\\reviews\\full-feedback-ci-compat-red-v1.json",
+      "sha256": "f6012183403dbc5863bc8012cec694e5231e9ba0a3fe54343ed31ea59e545c36",
+      "tests": 1
+    },
+    {
+      "elapsed_seconds": 708.3095103999367,
+      "errors": 0,
+      "failures": 1,
+      "log_sha256": "2027a56b4df95d46c85406a9c96edd882df8ee0a6687291da710d09a9b966f9d",
+      "outcome": "FAILED_cohort_51_pass_1_newly_reached_historical_contract_failure",
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\full-feedback-ci-compat\\runs\\reviews\\full-feedback-ci-compat-green-v1.json",
+      "sha256": "3f5c5564931c3b52f794152b70968d987de5d56d22c1c7115b6710a494fad674",
+      "tests": 52
+    },
+    {
+      "elapsed_seconds": 287.27501430001575,
+      "errors": 0,
+      "failures": 0,
+      "log_sha256": "be475ea788906593f301fb051d046c0db84167478bb455e3a9916ab628b5990a",
+      "outcome": "PASS_corrected_historical_and_existing_prospective_full_output_methods",
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\full-feedback-ci-compat\\runs\\reviews\\full-feedback-ci-compat-final-targets-v2.json",
+      "sha256": "3524564d0ae8c61a44bc19d087fbf56d4e541d44e542d71d61f4f72ad91d6820",
+      "tests": 2
+    }
+  ],
+  "observed_assertion": "'buddha.candidate-improvement-worker.v2' != 'buddha.candidate-improvement-worker.v1'",
+  "observed_location": "tests/test_candidate_improvement.py:108",
+  "observed_utc": "2026-10-23T06:15:20.192850+00:00",
+  "original_hosted_red": {
+    "73": {
+      "all_covered_by_pass_join": true,
+      "diagnostics": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\full-feedback-ci-compat\\runs\\reviews\\pr73-linux-failed-job-120246494386-diagnostics-v2.json",
+        "sha256": "c6881743758ab90d233f5f44dda54c572b7a44385115df1293fa3370ad4a4c2e"
+      },
+      "failure_rows": 21,
+      "raw_log": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\full-feedback-ci-compat\\runs\\reviews\\pr73-linux-failed-job-120246494386.log",
+      "raw_log_sha256": "d837b4440cc81dbb16cfa11b180e26f5fab0a24c95503553907651f9682a8ec0",
+      "unique_failing_methods": 14,
+      "unittest_totals": [
+        "Ran 1611 tests in 1692.484s",
+        "FAILED (failures=21, skipped=5)"
+      ]
+    },
+    "74": {
+      "all_covered_by_pass_join": true,
+      "diagnostics": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\full-feedback-ci-compat\\runs\\reviews\\pr74-linux-failed-job-120249972697-diagnostics-v2.json",
+        "sha256": "28cf0007516078ffdbc031c677bfd39260b70bca7427c5af608ac0d7433bd4b2"
+      },
+      "failure_rows": 21,
+      "raw_log": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\full-feedback-ci-compat\\runs\\reviews\\pr74-linux-failed-job-120249972697.log",
+      "raw_log_sha256": "ca4ae5b11259fb2f8a72084d59bdd27c170332a538e67d055b66ea04eb07bc76",
+      "unique_failing_methods": 14,
+      "unittest_totals": [
+        "Ran 1611 tests in 1527.693s",
+        "FAILED (failures=21, skipped=5)"
+      ]
+    }
+  },
+  "passing_method_join": {
+    "final_targeted_methods": 2,
+    "first_failed_cohort_passing_methods": 51,
+    "formatting_only_after_final_targets": "Whole-module AST identical; no repeated expensive runtime cohort.",
+    "methods": [
+      "test_candidate_improvement.ImprovementTests.test_bad_capture_metadata_is_preserved_but_never_trusted",
+      "test_candidate_improvement.ImprovementTests.test_bounded_invalid_values_are_preserved_without_materialization",
+      "test_candidate_improvement.ImprovementTests.test_cancellation_after_received_proposal_saves_observation_and_original_evidence",
+      "test_candidate_improvement.ImprovementTests.test_capture_omission_and_serialization_failure_are_not_fabricated_raw_values",
+      "test_candidate_improvement.ImprovementTests.test_changed_body_at_original_improvement_slot_conflicts_without_send",
+      "test_candidate_improvement.ImprovementTests.test_child_selection_changes_only_agent_and_lineage_binds_original_inputs",
+      "test_candidate_improvement.ImprovementTests.test_cleanup_failure_and_nonzero_exit_keep_proposal_without_child",
+      "test_candidate_improvement.ImprovementTests.test_existing_child_destination_is_never_overwritten",
+      "test_candidate_improvement.ImprovementTests.test_feedback_drift_after_return_keeps_proposal_but_blocks_child",
+      "test_candidate_improvement.ImprovementTests.test_improvement_helper_and_feedback_references_must_be_original_bound_inputs",
+      "test_candidate_improvement.ImprovementTests.test_materializes_literal_child_without_host_execution",
+      "test_candidate_improvement.ImprovementTests.test_model_callbacks_account_once_and_replay_on_same_original_owner",
+      "test_candidate_improvement.ImprovementTests.test_new_logical_domain_names_parent_feedback_and_original_ordinal",
+      "test_candidate_improvement.ImprovementTests.test_no_received_frame_has_no_fabricated_proposal",
+      "test_candidate_improvement.ImprovementTests.test_nonfitting_frame_cannot_claim_captured_proposal_or_discard_charge",
+      "test_candidate_improvement.ImprovementTests.test_only_source_bound_unique_development_ids_are_accepted",
+      "test_candidate_improvement.ImprovementTests.test_operation_added_after_done_blocks_materialization_without_losing_money",
+      "test_candidate_improvement.ImprovementTests.test_quota_stop_creates_no_extra_operation_or_child",
+      "test_candidate_improvement.ImprovementTests.test_recovery_cannot_skip_original_completed_or_unknown_prefix",
+      "test_candidate_improvement.ImprovementTests.test_shared_worker_fixture_matches_each_bound_feedback_packet_version",
+      "test_candidate_improvement.ImprovementTests.test_split_membership_and_family_source_joins_are_mandatory",
+      "test_candidate_improvement.ImprovementTests.test_unknown_and_quota_stops_cannot_be_caught_into_success",
+      "test_candidate_improvement.ImprovementTests.test_worker_declared_invalid_or_unavailable_capture_stays_explicit",
+      "test_candidate_improvement.ImprovementTests.test_worker_omits_serialized_value_that_cannot_fit_wrapped_channel_depth",
+      "test_candidate_improvement.ImprovementTests.test_worker_projection_rejects_boolean_duplicate_and_full_source_inputs",
+      "test_candidate_improvement.ImprovementTests.test_worker_rejects_oversized_parent_before_loading_it",
+      "test_candidate_improvement.ImprovementTests.test_worker_rejects_returned_string_subclasses_without_losing_capture",
+      "test_candidate_improvement.ImprovementTests.test_wrong_parent_identity_and_loaded_split_helper_origin_fail",
+      "test_candidate_improvement_stage.CandidateImprovementStageTests.test_bad_protocol_cleanup_and_materialization_failures_stay_incomplete",
+      "test_candidate_improvement_stage.CandidateImprovementStageTests.test_cancellation_preserves_received_proposal_and_observation_then_reraises",
+      "test_candidate_improvement_stage.CandidateImprovementStageTests.test_changed_stored_session_report_cannot_be_sealed_as_actual_return",
+      "test_candidate_improvement_stage.CandidateImprovementStageTests.test_clean_failed_worker_outcomes_are_terminal_rejections_without_child_claims",
+      "test_candidate_improvement_stage.CandidateImprovementStageTests.test_completed_replay_and_passive_inspection_preserve_original_shared_snapshot",
+      "test_candidate_improvement_stage.CandidateImprovementStageTests.test_edited_measured_notes_provenance_and_other_parent_reject_before_owner",
+      "test_candidate_improvement_stage.CandidateImprovementStageTests.test_existing_measured_quad_inspects_without_reopening_public_writes",
+      "test_candidate_improvement_stage.CandidateImprovementStageTests.test_known_reply_and_shortened_failed_prefix_recover_on_original_owner",
+      "test_candidate_improvement_stage.CandidateImprovementStageTests.test_materialized_stage_preserves_real_session_child_lineage_and_anchor",
+      "test_candidate_improvement_stage.CandidateImprovementStageTests.test_original_expected_input_hashes_and_prepared_feedback_cannot_be_replaced",
+      "test_candidate_improvement_stage.CandidateImprovementStageTests.test_passive_inspection_rejects_forged_publication_child_bytes_and_seal_anchor",
+      "test_candidate_improvement_stage.CandidateImprovementStageTests.test_quota_stop_remains_incomplete_and_creates_no_operation",
+      "test_candidate_improvement_stage.CandidateImprovementStageTests.test_unknown_hold_blocks_new_dispatch_and_cannot_become_a_rejected_terminal",
+      "test_full_feedback_channel.FullFeedbackChannelTests.test_current_seed_forwards_complete_notes_to_both_provider_recipes",
+      "test_full_feedback_channel.FullFeedbackChannelTests.test_v1_4096_boundary_and_literal_legacy_fragment_remain",
+      "test_full_feedback_channel.FullFeedbackChannelTests.test_v2_escaped_aggregate_refuses_before_host_output_or_worker_callback",
+      "test_full_feedback_channel.FullFeedbackChannelTests.test_v2_full_note_crosses_host_frame_worker_and_trusted_seed_callback",
+      "test_full_feedback_channel.FullFeedbackChannelTests.test_versions_invalid_notes_and_traversing_host_reference_fail_closed",
+      "test_full_output_feedback.FullOutputFeedbackTests.test_failed_child_keeps_full_parent_outputs_and_legacy_failure_packet_still_inspects",
+      "test_source_failure_feedback.SourceFailureFeedbackTests.test_custody_partial_recovery_and_retirement_preserve_original_bytes",
+      "test_source_failure_feedback.SourceFailureFeedbackTests.test_explicit_history_keyword_keeps_typed_prewrite_validation",
+      "test_source_failure_feedback.SourceFailureFeedbackTests.test_history_shape_and_eight_edge_ceiling_fail_before_any_destination",
+      "test_source_failure_feedback.SourceFailureFeedbackTests.test_original_failed_child_reaches_each_task_note_and_rebuilds_passively",
+      "test_source_failure_feedback.SourceFailureFeedbackTests.test_same_parent_source_cannot_substitute_another_measured_screen_occasion",
+      "test_source_failure_feedback.SourceFailureFeedbackTests.test_two_true_edges_keep_order_and_every_older_omission_explicit"
+    ],
+    "single_green_53_method_cohort": false,
+    "unique_methods": 53
+  },
+  "preservation": {
+    "benchmark_or_paid_run_changed": false,
+    "historical_method_assertions_ast_exact": true,
+    "original_improvement_test_bodies": 27,
+    "original_improvement_test_bodies_ast_exact": true,
+    "other_original_python_files": 227,
+    "other_original_python_files_raw_exact": true,
+    "production_source_changed": false
+  },
+  "prior_quality_preserved": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\full-feedback-ci-compat\\runs\\reviews\\full-feedback-ci-compat-quality-v1.json",
+      "scope": "first one-test-file cut",
+      "sha256": "0b2f6be95060d4beec322f948070db1f0734e61336496913de348b951296914e",
+      "status": "pass"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\full-feedback-ci-compat\\runs\\reviews\\full-feedback-ci-compat-quality-v2.json",
+      "scope": "historical correction cut; only Ruff format rejected line wrapping",
+      "sha256": "997a96832a1079fe1c8d56a90c3e370e2f4d48a10f29efe8bbae4ad625f30be8",
+      "status": "failed"
+    }
+  ],
+  "production_changed": false,
+  "quality": {
+    "all_inputs_unchanged": true,
+    "commands": [
+      {
+        "argv": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-X",
+          "pycache_prefix=C:\\Users\\arvik\\AppData\\Local\\Temp\\buddha-seven-quality-0pxbb7g5\\pycache",
+          "-m",
+          "ruff",
+          "check",
+          "buddha",
+          "tests",
+          "agents"
+        ],
+        "elapsed_seconds": 0.2177608999190852,
+        "exit_code": 0,
+        "log": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\full-feedback-ci-compat\\runs\\reviews\\full-feedback-ci-compat-quality-v3-ruff-check.log",
+        "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "name": "ruff-check",
+        "pid": 29864
+      },
+      {
+        "argv": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-X",
+          "pycache_prefix=C:\\Users\\arvik\\AppData\\Local\\Temp\\buddha-seven-quality-0pxbb7g5\\pycache",
+          "-m",
+          "ruff",
+          "format",
+          "--check",
+          "buddha",
+          "tests",
+          "agents"
+        ],
+        "elapsed_seconds": 0.18787110003177077,
+        "exit_code": 0,
+        "log": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\full-feedback-ci-compat\\runs\\reviews\\full-feedback-ci-compat-quality-v3-ruff-format.log",
+        "log_sha256": "8bd907e3f37b3bb4491b54daffe622118b9bda087169decdc8250b55518cd565",
+        "name": "ruff-format",
+        "pid": 45604
+      },
+      {
+        "argv": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-X",
+          "pycache_prefix=C:\\Users\\arvik\\AppData\\Local\\Temp\\buddha-seven-quality-0pxbb7g5\\pycache",
+          "-m",
+          "mypy",
+          "--strict",
+          "buddha",
+          "agents"
+        ],
+        "elapsed_seconds": 3.108386299922131,
+        "exit_code": 0,
+        "log": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\full-feedback-ci-compat\\runs\\reviews\\full-feedback-ci-compat-quality-v3-mypy-windows.log",
+        "log_sha256": "dd758c62e671570062f9954e1a5d527b0d481f03e1af252648074cae102ed75c",
+        "name": "mypy-windows",
+        "pid": 13324
+      },
+      {
+        "argv": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-X",
+          "pycache_prefix=C:\\Users\\arvik\\AppData\\Local\\Temp\\buddha-seven-quality-0pxbb7g5\\pycache",
+          "-m",
+          "bandit",
+          "-r",
+          "buddha",
+          "agents"
+        ],
+        "elapsed_seconds": 2.8348895999370143,
+        "exit_code": 0,
+        "log": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\full-feedback-ci-compat\\runs\\reviews\\full-feedback-ci-compat-quality-v3-bandit.log",
+        "log_sha256": "fbad45d4105c159b8c4fa7ac21f8cd1a73bf5587e36f03538f8fa2c80aefc9ed",
+        "name": "bandit",
+        "pid": 11808
+      },
+      {
+        "argv": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-X",
+          "pycache_prefix=C:\\Users\\arvik\\AppData\\Local\\Temp\\buddha-seven-quality-0pxbb7g5\\pycache",
+          "-m",
+          "pip_audit",
+          "--no-deps",
+          "-r",
+          "requirements.txt"
+        ],
+        "elapsed_seconds": 19.195071000023745,
+        "exit_code": 0,
+        "log": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\full-feedback-ci-compat\\runs\\reviews\\full-feedback-ci-compat-quality-v3-pip-audit.log",
+        "log_sha256": "e82148c0c30269ca5a2c35420ece6af011a4faf5a375325d750e243ffdb10625",
+        "name": "pip-audit",
+        "pid": 7788
+      },
+      {
+        "argv": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-X",
+          "pycache_prefix=C:\\Users\\arvik\\AppData\\Local\\Temp\\buddha-seven-quality-0pxbb7g5\\pycache",
+          "-m",
+          "compileall",
+          "-q",
+          "buddha",
+          "tests",
+          "agents"
+        ],
+        "elapsed_seconds": 0.9425160000100732,
+        "exit_code": 0,
+        "log": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\full-feedback-ci-compat\\runs\\reviews\\full-feedback-ci-compat-quality-v3-compile.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "name": "compile",
+        "pid": 60624
+      },
+      {
+        "argv": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-X",
+          "pycache_prefix=C:\\Users\\arvik\\AppData\\Local\\Temp\\buddha-seven-quality-0pxbb7g5\\pycache",
+          "-m",
+          "mypy",
+          "--strict",
+          "--platform",
+          "linux",
+          "buddha",
+          "agents"
+        ],
+        "elapsed_seconds": 2.8197618999984115,
+        "exit_code": 0,
+        "log": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\full-feedback-ci-compat\\runs\\reviews\\full-feedback-ci-compat-quality-v3-mypy-linux.log",
+        "log_sha256": "dd758c62e671570062f9954e1a5d527b0d481f03e1af252648074cae102ed75c",
+        "name": "mypy-linux",
+        "pid": 43588
+      }
+    ],
+    "control_count": 4,
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\full-feedback-ci-compat\\runs\\reviews\\full-feedback-ci-compat-quality-v3.json",
+    "python_count": 229,
+    "sha256": "190950f3edcda1a93370a06546ca5f8f342b007d57519f1c5c066bff9861e5cd",
+    "status": "pass"
+  },
+  "real_provider_calls": 0,
+  "repair": "Retain exact protocol equality; derive expected version from the actual session validated feedback_v2 literal bool. Add bound-packet v1/v2 execution regression with explicit worker formats.",
+  "roadmap": {
+    "all74_prior_rows_raw_exact": true,
+    "authoring_note": "An initial append guard refused a prior-row line-ending change before any PLAN write; corrected append preserves all74 exact rows.",
+    "original_src02_src03_eval01_lines_raw_exact": true,
+    "revision": 75,
+    "same_six_research_leaves": true,
+    "sha256": "bd02988c73af19ff4faac1c810aed3414b0e274a838b52e0a5f394c456df4756",
+    "src02_remains_sole_next": true
+  },
+  "scope": "Test-only shared worker fixture version compatibility; production full-output contract retained",
+  "status": "local_compatibility_delivery_complete_hosted_pending",
+  "test_sha256": {
+    "tests/test_candidate_improvement.py": "890699cd8679a0cdd5304a4a26a84d50201d760ab42f7ae10e30b5853bba9874",
+    "tests/test_source_failure_feedback.py": "c5ef6121bc10a443e1dfe35c741bb75cd61e42648cbe4810f9392d9550cf2d76"
+  }
+}

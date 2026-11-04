@@ -3,6 +3,7 @@
 import hashlib
 import json
 import sqlite3
+import tempfile
 import unittest
 from contextlib import ExitStack, contextmanager
 from pathlib import Path
@@ -28,6 +29,66 @@ def sha(raw):
 
 class CallerEvidenceError(ReleaseError):
     pass
+
+
+class RetainedCaptureTests(unittest.TestCase):
+    def fixture(self):
+        from buddha.doctor import _Capture
+
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        root = Path(temporary.name).resolve()
+        development, final = root / "development", root / "final"
+        development.mkdir()
+        final.mkdir()
+        data, ledger = development / "reply.bin", development / "ledger.sqlite3"
+        data.write_bytes(b"original")
+        ledger.write_bytes(b"capture bytes only; not a parsed SQL owner")
+        captured = _Capture(development)
+        captured.read(data)
+        captured.database(ledger)
+        reader = NativeEvidence(final, root / "unused-authorization.sqlite3")
+        reader.retain_capture(captured)
+        return reader, captured, data, ledger
+
+    def test_join_retains_every_consumed_byte_and_database_without_source_execution(self):
+        reader, captured, _, ledger = self.fixture()
+        self.assertTrue(set(captured.raw) <= set(reader.capture.raw))
+        self.assertIn(ledger, reader.capture.databases)
+        self.assertEqual(reader.capture.raw, captured.raw)
+        reader.finish()
+
+    def test_nested_hash_verification_preserves_capture_and_refuses_invalid_inputs(self):
+        reader, captured, data, ledger = self.fixture()
+        expected = {path: sha(raw) for path, raw in captured.raw.items()}
+        reader.verify_files(expected)
+        self.assertEqual(reader.capture.raw, captured.raw)
+        for hashes in (None, {str(data): expected[data]}, {ledger: "0" * 64}):
+            with self.subTest(hashes=hashes), self.assertRaises(NativeEvidenceError):
+                reader.verify_files(hashes)
+        reader.finish()
+
+    def test_join_catches_new_entries_in_a_sibling_tree(self):
+        from buddha.doctor import _Busy
+
+        reader, _, data, _ = self.fixture()
+        (data.parent / "foreign.bin").write_bytes(b"not in the original observation")
+        with self.assertRaises(_Busy):
+            reader.finish()
+
+    def test_join_catches_late_bytes_and_sidecars_even_when_metadata_is_held_constant(self):
+        from buddha.doctor import _Busy
+
+        reader, captured, data, ledger = self.fixture()
+        snapshots = {reader.root: reader.capture.entries, captured.root: captured.entries}
+        with patch("buddha.doctor._entries", side_effect=lambda root: snapshots[root]):
+            data.write_bytes(b"modified")
+            with self.assertRaises(_Busy):
+                reader.finish()
+            data.write_bytes(b"original")
+            ledger.with_name(ledger.name + "-wal").write_bytes(b"live sidecar")
+            with self.assertRaises(_Busy):
+                reader.finish()
 
 
 class NativeEvidenceTests(unittest.TestCase):

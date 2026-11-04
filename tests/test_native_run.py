@@ -15,7 +15,7 @@ from unittest.mock import patch
 import test_gateway as fixtures
 
 import buddha.native_run as native_run
-from buddha.executor import ExecutionResult, Limits
+from buddha.executor import ExecutionResult, ExecutorError, Limits
 from buddha.gateway import GatewayCall
 from buddha.native_run import NativeRunError, NativeSession
 from buddha.provider import PendingOperation
@@ -764,6 +764,22 @@ class NativeSessionTests(unittest.TestCase):
         self.assertEqual(report["gateway_manifest_sha256"], self.gateway.manifest_sha256)
         self.assertEqual(self.fixture.authority.summary()["spent_microusd"], 11)
         self.assertEqual(json.loads((self.output / "report.json").read_bytes()), report)
+
+    def test_pre_cleanup_metadata_survives_executor_failure(self):
+        session = self.session()
+        error = ExecutorError(
+            "cleanup", cleanup_status="unknown", pre_cleanup_failure=("start", "host")
+        )
+        with patch("buddha.native_run.executor.run_container", side_effect=error):
+            report = session.run()
+        self.assertEqual(report["status"], "failed")
+        self.assertEqual(report["worker"]["reason"], "cleanup")
+        self.assertEqual(
+            report["execution"],
+            {"exit_code": None, "image_id": session.spec.image_id} | error.to_record(),
+        )
+        self.assertEqual(self.gateway.ledger.totals()["operation_count"], 0)
+        self.assertEqual(self.gateway.ledger.totals()["committed_microusd"], 0)
 
     def test_public_configuration_mutation_cannot_change_dispatched_configuration(self):
         session = self.session()

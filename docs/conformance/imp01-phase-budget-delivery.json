@@ -1,0 +1,259 @@
+{
+  "format": "buddha.imp01-phase-budget-delivery.v1",
+  "status": "bounded_local_checks_passed_hosted_verification_pending",
+  "spec": [
+    "DESIGN.md sections8/9",
+    "PLAN.md IMP-01 and IMP1-FEAS-02"
+  ],
+  "source_sha256": {
+    "buddha/improver_study.py": "f733f1d1bf92ac71c461778da9e3fa769cb12d6e54bf0067d994d35c1f51a596",
+    "buddha/improver_assessment.py": "7539b15b0b6e364638cd14bc5a86478d2210d0fdbf6c5c5c58a256d9f41f475b",
+    "tests/test_improver_phase_budget.py": "9760c4da2688b97b1877e1b6a15dda2c872715081cc4d197c8ea31bfaf0541b2"
+  },
+  "implemented": [
+    "Explicit improver-study.v2 keeps exact nominal common/arm caps and accepts positive aggregate dollar/call limits independently <= full derived totals.",
+    "Actual v2 study Authority must exactly equal both declared aggregate limits at preparation and passive census; v1 keeps complete derived limits and >= funding.",
+    "Explicit improver-assessment-trial.v2 requires matching development v2; both mixed-version directions refuse. Search equals development, validation stays zero, final is independently positive and bounded by nominal totals.",
+    "Existing transactional Authority and lower incomplete records enforce caps. Full original opportunity/final coverage remains required for completion; no partial-prefix comparative claim.",
+    "No ordinary transfer dispatch, request bound, verified price, native evaluator, statistical method or ledger implementation changes."
+  ],
+  "verification": {
+    "red": {
+      "tests": 5,
+      "exit_code": 1,
+      "unittest_seconds": 63.095,
+      "reason": "Original implementation rejects both new format tags before the intended operations."
+    },
+    "green": {
+      "new_methods": 5,
+      "unittest_seconds": 1805.427,
+      "wall_seconds": 1805.8836020999588,
+      "production_sha256": {
+        "buddha/improver_study.py": "f733f1d1bf92ac71c461778da9e3fa769cb12d6e54bf0067d994d35c1f51a596",
+        "buddha/improver_assessment.py": "7539b15b0b6e364638cd14bc5a86478d2210d0fdbf6c5c5c58a256d9f41f475b"
+      },
+      "test_source_sha256": "08de697730515dd818abbfa3b597a320c6b35c88bd95e6cdb185f7a30b750533"
+    },
+    "existing": {
+      "methods": 25,
+      "unittest_seconds": 29.153,
+      "wall_seconds": 29.41397049999796,
+      "scope": "Two genuine v1 preowner/cap methods; ten existing paired-analyzer and thirteen decision-rule methods."
+    },
+    "final_test_delta": {
+      "scope": "Add original-owner equality on all three finite budget-stop replays and genuine larger-v1-Authority preparation; reorder imports. Rerun only that changed method.",
+      "unittest_seconds": 34.358,
+      "wall_seconds": 34.70146659994498,
+      "static_method_and_import_check": {
+        "changed_methods": [
+          "test_exact_aggregate_authority_and_no_send_partial_replay"
+        ],
+        "other_methods_identical": 6,
+        "same_imports": true
+      }
+    },
+    "quality": "All seven configured check types pass. Initial lint I001 is retained; final lint/format/compile rerun after test-only correction. Type/security/runtime/development-audit results retain the unchanged production/dependency cut.",
+    "workers": "Supplied workers/native replies and mocked HTTPS through real original-owner/accounting paths. Synthetic fixture charges are not API spending; no selected candidate Python executes on the host."
+  },
+  "partial_checks": {
+    "development": "Before-first-hold, exact300microusd dollar cap, and one-call cap. Latter two settle one11microusd supplied reply, retain zero holds, complete planned denominators, no complete report, unchanged original owner set and no additional send on repeat.",
+    "final": "One-microusd/one-call grant stops before first send, keeps six scheduled cells, zero evaluated, zero spent/held, no complete report, unchanged original owners and no additional send on repeat.",
+    "complete": "Reduced positive search/final caps complete original development and six-cell three-role sealed grid; public passive replay reproduces report. Narrow in-memory declaration probes isolate both new passive exact-cap checks against genuine captured Authority."
+  },
+  "preservation": {
+    "format": "buddha.imp01-phase-budget-protected-input-check.v1",
+    "source_map_sha256": "898b18dcf6defe22090ffa146fa14c7844499c61f7d89f0fc73360e852dc3b68",
+    "unchanged_source_pins": 169,
+    "drafts": {
+      "src02-unfunded-launch-draft-v2.json": "5d326d8e75037767b33a0c6483314d2302dc5d1aed92cafd300ba242de660d6b",
+      "src02-unfunded-launch-draft-v3.json": "98df979dff780af463230587d00b051284e7e2c4a3e34072ec09359785ebc152"
+    },
+    "future_trees_absent": [
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-handoff-v1",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-receipts-v1"
+    ]
+  },
+  "ci": {
+    "selected_head": "eb71e3b93c5407e8670b5016143671fa2abf9728",
+    "ubuntu": "Original1804-test suite and configured quality steps passed; retained previous evidence.",
+    "windows": {
+      "job_id": 120852280737,
+      "conclusion": "cancelled",
+      "completed_at": "2026-10-24T16:45:14Z",
+      "reason": "The job has exceeded the maximum execution time of 6h0m0s",
+      "dominant_method": "Completed ok at16:36:19.9398533Z; a later method was interrupted. No complete suite summary.",
+      "url": "https://github.com/wavemanco/buddha/actions/runs/40087140578/job/120852280737"
+    },
+    "next": "ENG-CI-RUNTIME-01: coverage-preserving suite partition on both OSes; keep original job/logs. No original job cancellation/restart by this work."
+  },
+  "limits": [
+    "Four scientific/completion gates remain; SRC02 is sole Next. This implements a funding option, not an IMP study, grant or completed scientific comparison.",
+    "No grid, statistical method, thresholds, account attestation or IMP allocation adopted. Fixed traversal plus aggregate cap can leave unequal realized arm exposure; incomplete panels retain all planned denominators.",
+    "Approved separate current-source25USD/512attempt scope is unchanged. Its funded Authority/handoff/execution trees remain absent; selected-source Windows and final funded checks gate the live command.",
+    "No model API calls, real API-key access, original run mutation, merge or weakening of an existing test/assertion."
+  ],
+  "retained_corrections": [
+    "Raw private validators raise ReleaseError/WireError; correct negative-test expectations instead of wrapping production to fit a test.",
+    "Initial lint found test import ordering; correct only ordering. Preserve both audit cache-deserialization warnings as original tool evidence.",
+    "An initial document check counted only seven acceptance markers; the corrected check includes three scope markers. Text-only preservation missed mixed line endings; restore original raw lines and verify125 historical rows plus ten tails byte-for-byte."
+  ],
+  "evidence": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-phase-budget-red-v1.json",
+      "sha256": "a51e974f3e9e7d0acee4dd5c4fc3b09a97e0abf0b4f43f40e22b4ae58131bda6"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-phase-budget-green-v1.json",
+      "sha256": "58bf2274ed236e94ae7d8aac83176d742ddbe2fcdef6e30981452a16b34d8d54"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-phase-budget-legacy-regressions-v1.json",
+      "sha256": "233de33af5fc0792cb1f9c0b27aad38c54fbb9a1e1dd43780f4daab569442d1f"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-phase-budget-quality-v1.json",
+      "sha256": "dae401912ee75a612000f22beac675016360b9d2756e61a6828b707319067562"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-phase-budget-final-checks-v1.json",
+      "sha256": "0ab842d0a8b560a2cb4c789b1d67adcba0cf177583f74b09ba4996164ff24865"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-phase-budget-protected-inputs-v1.json",
+      "sha256": "8172b9736098610c38c8db00addeccd021ca3ddf3a72ad50578b241ff2ed8a73"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-phase-budget-green-test-source-v1.py",
+      "sha256": "08de697730515dd818abbfa3b597a320c6b35c88bd95e6cdb185f7a30b750533"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-selected-windows-terminal-v1.json",
+      "sha256": "04604a048f595634533bbd1ce0c6b6ad0dd7febb567175c41a190a140c413161"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-selected-windows-check-run-v1.json",
+      "sha256": "b6b401984c3ec1cb107d7c1e190d5a58f143a1939cf61eb8b48e5a8d11f72328"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-selected-windows-annotations-v1.json",
+      "sha256": "d6c593c3add7401f0a2975069f57b1ffb2874dd9cc131e246779cc259a09df29"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-selected-windows-terminal-v1.log",
+      "sha256": "989ce681c838a172b8a7e5c52da8cbea8a066ec3ef98ed99b0328601338b5909"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-phase-budget-final-checks-v1-added-assertions.stderr.log",
+      "sha256": "af76d5e8d77f2298a3d2938b4a95c309b56ebfd4f350501f6e1ffeb160a44201"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-phase-budget-final-checks-v1-added-assertions.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-phase-budget-final-checks-v1-compile.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-phase-budget-final-checks-v1-compile.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-phase-budget-final-checks-v1-format.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-phase-budget-final-checks-v1-format.stdout.log",
+      "sha256": "3e6bbe034e40875b9b7286a7f199e7d7d569a665a75f824425516bfba75c530f"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-phase-budget-final-checks-v1-lint.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-phase-budget-final-checks-v1-lint.stdout.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-phase-budget-green-v1.stderr.log",
+      "sha256": "2b8b1335f66cd12b17f80a6126cfcae5135fc40f754ebad8903f53732536a1c5"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-phase-budget-green-v1.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-phase-budget-legacy-regressions-v1.stderr.log",
+      "sha256": "26848f433e52d57da705e98d3defcad7a0c5b8b29236547d2fc1e136c433309a"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-phase-budget-legacy-regressions-v1.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-phase-budget-quality-v1-compile.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-phase-budget-quality-v1-compile.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-phase-budget-quality-v1-dev-audit.stderr.log",
+      "sha256": "6bd2e42d03b5eef040bca5e362b6085b53f410249db52ffc8ca2c459836362fc"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-phase-budget-quality-v1-dev-audit.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-phase-budget-quality-v1-format.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-phase-budget-quality-v1-format.stdout.log",
+      "sha256": "3e6bbe034e40875b9b7286a7f199e7d7d569a665a75f824425516bfba75c530f"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-phase-budget-quality-v1-lint.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-phase-budget-quality-v1-lint.stdout.log",
+      "sha256": "60468e6b22cbdd843694f933167e775c131ea0b35fd5683d681f5d9c89b8ad9b"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-phase-budget-quality-v1-runtime-audit.stderr.log",
+      "sha256": "e82148c0c30269ca5a2c35420ece6af011a4faf5a375325d750e243ffdb10625"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-phase-budget-quality-v1-runtime-audit.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-phase-budget-quality-v1-security.stderr.log",
+      "sha256": "d8134e6aedc5253bb1dd642a1c75e84d89fb1aa05194587ec8f0ebb0b89b356e"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-phase-budget-quality-v1-security.stdout.log",
+      "sha256": "2362a3817637b2d24bc9adb0598646ba08ff387d06155e719d901c2eaf30d553"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-phase-budget-quality-v1-types.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-phase-budget-quality-v1-types.stdout.log",
+      "sha256": "456e898515afb5ddd058a1de7a8beebfda93cee74b55f149f5167039c4aad525"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-phase-budget-red-v1.stderr.log",
+      "sha256": "a7c016318e5f4fec9b6c14cb2623b75552afd737dd9560083764e9c88da448dc"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-phase-budget-red-v1.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

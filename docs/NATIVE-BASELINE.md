@@ -12,6 +12,7 @@ and does not select or optimize an agent. [PLAN.md](PLAN.md) remains the roadmap
 | --- | --- |
 | `prepare_baseline(directory, descriptor=..., authorization=..., review=...)` | Validate the configuration and selected files, create a fresh baseline directory and bind its first generation owner to the existing shared authorization. Reads no keys and makes no provider calls. |
 | `run_baseline(directory, transport=...)` | Run the configured stages or resume their original owners. Preserve every attempt, raw reply and uncertain hold. Actual spending still requires the caller's paid transport, reviewed profiles, keys and active shared authority. |
+| `inspect_baseline(directory, authorization=..., expected_report_sha256=..., expected_definition_sha256=...)` from `buddha.baseline_results` | Read and check an already complete baseline against its original records and the two expected file hashes. Return its original report. Requires no keys, makes no provider calls and creates no owners or replacement results. |
 
 Preparation also accepts optional `input_files`: a bounded list or tuple of
 additional control-file Paths. Their original hashes are bound to generation
@@ -28,6 +29,40 @@ original values. This makes no provider calls or spending allocation.
 These are library interfaces, not a newly enabled paid command. Preparing a
 baseline does not create or extend the user's authorization. The historical
 $50 experiment and its inactive allocations remain unchanged.
+
+### Reading a completed baseline without rerunning it
+
+The passive inspector checks the original configuration, generation answers,
+stage reports, output files, completion seals and their independent anchors in
+the shared authorization. A summary file alone is insufficient. Expected report
+and descriptor hashes must come from the caller's previously frozen comparison
+controls; reading a hash from the result being checked would not establish that
+it is the intended result.
+
+Inspection reads captured evidence and queries database copies in memory. It
+opens no source database for SQL, changes no files and imports or runs no retired
+agent or evaluator implementation. Required data and original owner records must
+remain available. A changed, incomplete or unanchored baseline is rejected; this
+interface neither repairs it nor starts a continuation. Other completed work may
+have advanced the same authorization: the original report's accounting snapshot
+is checked and preserved, rather than replaced with today's totals.
+
+Official summaries remain opaque bytes, including any native `NaN`. This checks
+custody and completion; it does not reinterpret metrics or establish improved
+performance. The matched Buddha/plain comparison join, prospective controls and
+funded live handoff remain separate work. See the [bounded delivery
+record](conformance/baseline-results-delivery.json).
+
+This optional command runs the inspector's seven regression checks once in the
+current PowerShell window. It creates fresh temporary examples, uses mocked
+workers and HTTPS, and needs no Docker, keys or paid calls. It checks retirement,
+tampering, incomplete results, shared accounting, and valid ledger and opaque
+summary files larger than the JSON-file limit. It does not inspect your live
+runs. Ctrl+C stops it.
+
+```powershell
+python -m unittest discover -s tests -p test_baseline_results.py
+```
 
 The baseline descriptor has format `buddha.native-baseline.v1` and exactly these
 fields:

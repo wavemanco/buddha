@@ -78,5 +78,29 @@ them. Use `search-verify` when you want a read-only check of what was actually s
 The native release/baseline formats have their own evidence paths; this legacy
 reader does not replace the modular benchmark interface.
 
+## Reviewed provider compatibility
+
+The November 4 repair recognizes the exact provider source version introduced by
+the credential and uncertain-charge safety fix. Its pure request, receipt and
+bounds recipes are unchanged. The newly reviewed archive profile still requires
+the original generic helper bytes; unknown source versions remain unsupported.
+Archived code is never executed by this reader.
+
+The original full qualification exposed the missing profile: affected tests
+returned `unsupported` before reaching their tampering checks. The repaired tests
+first require a valid unchanged record to verify, then check that modified
+lineage, proposal replies and costs are rejected. A separate small test rejects
+an absent or changed generic helper. [Evidence and limits](conformance/search-provider-profile-delivery.json).
+
+For development, this command runs the 20 synthetic verification checks once:
+
+```powershell
+python -m unittest discover -s tests -p test_search_verify.py -v
+```
+
+Run it from the project folder in the current window. It creates temporary test
+records, needs no keys and makes no model calls. It stops when finished; Ctrl+C
+stops it early. It does not check or change an original experiment.
+
 See the [living plan](PLAN.md), [recovery contract](RECOVERY-CONTRACT.md) and
 [delivery evidence](conformance/rec05b-delivery.json) for scope and verification.

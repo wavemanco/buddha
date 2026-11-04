@@ -1,0 +1,180 @@
+{
+  "api": [
+    "prepare_evaluation_trial",
+    "freeze_finalists",
+    "run_final_evaluation",
+    "inspect_final_evaluation"
+  ],
+  "base_commit": "eb2690fdf1346af2ae9800ec923299729e24ee9d",
+  "checks": {
+    "final_functional": {
+      "denied_events": [],
+      "elapsed_seconds": 2773.1798508999636,
+      "errors": 0,
+      "failures": 0,
+      "log_sha256": "335875b0ee10321e3bfb5076153544dd8991ced25e22c82a5738bc0898d21cfb",
+      "source_pins": 209,
+      "tests": 12
+    },
+    "older_publications": {
+      "memory_sql_only": true,
+      "original_names_and_bytes_unchanged": true,
+      "publications": 6,
+      "retained_files": 429,
+      "retired_execution": false
+    },
+    "positive_callback_source_trace": {
+      "basis": "Independent trace of existing full-grid fixture through real Session/Gateway/shared-accounting code with nested mocked HTTPS; source-implied count, not a separately observed runtime counter.",
+      "final_generation": 4,
+      "final_native": 8
+    },
+    "quality": {
+      "commands": [
+        {
+          "exit_code": 0,
+          "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+          "name": "ruff-check"
+        },
+        {
+          "exit_code": 0,
+          "log_sha256": "b5440adc36860e6f7ae6b6ce188412d110e98814ba4cd83bc02324d2121e27be",
+          "name": "ruff-format"
+        },
+        {
+          "exit_code": 0,
+          "log_sha256": "7fc3a2a008fd149a547725791a88995a903553c47a281224a552ff815f4dd4db",
+          "name": "mypy-windows"
+        },
+        {
+          "exit_code": 0,
+          "log_sha256": "cd8792bbacdf3a91156e40bad30b215f63d82f32e262fbb22b13b6cd5fa7d35d",
+          "name": "bandit"
+        },
+        {
+          "exit_code": 0,
+          "log_sha256": "e82148c0c30269ca5a2c35420ece6af011a4faf5a375325d750e243ffdb10625",
+          "name": "pip-audit"
+        },
+        {
+          "exit_code": 0,
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "name": "compile"
+        },
+        {
+          "exit_code": 0,
+          "log_sha256": "7fc3a2a008fd149a547725791a88995a903553c47a281224a552ff815f4dd4db",
+          "name": "mypy-linux"
+        }
+      ],
+      "python_files": 248,
+      "source_config_pins": 252,
+      "source_inputs_sha256": "81c1745a4fcfc27246229b1597099c0443623d5ac14544688413faf9cad7ea79"
+    },
+    "shared_regressions": {
+      "denied_events": [],
+      "elapsed_seconds": 868.5070277999621,
+      "errors": 0,
+      "failures": 0,
+      "log_sha256": "e991246ab7ff3d69915e3aab7850377d90734dd7ff87476fb10a32828eba26c8",
+      "source_pins": 207,
+      "tests": 36
+    }
+  },
+  "evidence": {
+    "boundary_red": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\final-boundary-red-v1.json",
+      "sha256": "12d11dbb2ecc3d3b4c638dfd5cfb580a2ddcd4706322a810461a15392a2a3720"
+    },
+    "bounded_passive_profile_observation": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\final-passive-profile-observation-v1.json",
+      "sha256": "9ad4bfd0c5e554183f614bdc001fbfc98beec1a019174063ca2a9c8ee63e63ee"
+    },
+    "failed_cancellation_red": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\final-failed-cancellation-red-v1.json",
+      "sha256": "78e0a7fb32434d0272b97162f54f5ed0593f6c27e19cde5b6a0a5533c9c42978"
+    },
+    "final_functional": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\final-functional-green-v2.json",
+      "sha256": "8142e7c3eb1ae7313c2c16677f899d154a12a7a326bf0b0db24aa060867c70ba"
+    },
+    "independent_callback_path_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-callback-coverage-review-20261023-v1\\review.json",
+      "sha256": "2c0613f60e5c62fb8d7f01e901fb91c6614670eba753229ad23d53aa72c3c13c"
+    },
+    "independent_docs_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-docs-review-20261023-v1\\review.json",
+      "sha256": "dcea078a074f99ea3e7db497936ee8587eca4512b7d8074c47eef7e767317506"
+    },
+    "independent_fix_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-independent-review-20261023-v2\\review.json",
+      "sha256": "19a6f2cde8d59d29864fee2277d8646c7670eb6dbd6ac101640a03d8ee08e1a1"
+    },
+    "independent_original_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-independent-review-20261023-v1\\review.json",
+      "sha256": "ca0353d35efd1e16042708473e31c0f62c821316acc0a6db03df9631a8e440bf"
+    },
+    "initial_six_method_green": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\final-functional-v1.json",
+      "sha256": "73cc1aa8c101a681a305d0acb8cac10734d2537c9f82e8affb05b0bea4ac3ee7"
+    },
+    "older_publications": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-controller\\runs\\reviews\\final-old-owner-proof-v1.json",
+      "sha256": "cb37d3aa9fd8533c9399e1f985ffa1047df7e893cd714e17fdc4803e1c30e03a"
+    },
+    "original_acceptance_audit": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\eval01-original-acceptance-audit-v1.md",
+      "sha256": "03c56af98adf2d06fa6bc48c4f9522bf3759b6d42c04075c48f3a4438671a9e4"
+    },
+    "quality": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-controller\\runs\\reviews\\final-controller-quality-v1.json",
+      "sha256": "3b11698a50dd6e8c7839b034d62858b0782168089e9da755ba7898427da670d4"
+    },
+    "shared_regressions": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-controller\\runs\\reviews\\final-shared-regressions-v1.json",
+      "sha256": "4de355f84f591d8056313f7c9280e33d2b434c4395430620105ab086185483f5"
+    },
+    "source_cut": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-controller\\runs\\reviews\\final-controller-cut-v2.json",
+      "sha256": "81dff1fb2dfd3733d83488d4bd11474a22a3399f261892c4be6d9267df12bf95"
+    }
+  },
+  "final_source_sha256": {
+    "buddha/candidate_generation.py": "787206a9cbf1c52ee42e38c2921f3c7a8ebacc10c6baad0cc1e43f738d01cc71",
+    "buddha/final_evaluation.py": "7ddc2c72f3d8d181db7cb910c8734bc33506b94308420e9d8387f03317d509ad",
+    "buddha/gateway.py": "361e9f0da9a0b0ecc7dc910b27d6480788dc30041d9ad29daf9a32465067ab17",
+    "buddha/native_evaluation.py": "ffe913fbaf766865f6109fd2cc8534a7d740f23c671db4156cb6bfc4b9f192b3",
+    "buddha/trial_fence.py": "0a31b8f5e1c51e0dfee19f41729560f88d1eeaa1811c2fdba2bacd6b95d81c8c",
+    "buddha/validation_study.py": "c66141e5ccd19b2df4275be630d0623f4204a905a4f29e30ff948efc89280995",
+    "tests/test_final_evaluation.py": "d3a4beb0e4c199d7f068db875f472140f08dbf5c85a9bce2066194e67602575e"
+  },
+  "format": "buddha.eval01-final-controller-delivery.v1",
+  "history": [
+    "Initial missing-interface errors are setup evidence, not behavioral RED proof.",
+    "Initial six-method GREEN remains tied to its earlier source/test cut.",
+    "Five-method boundary RED records three assertion failures and three subtest errors; other controls pass at that old cut.",
+    "Separate checked-failure cancellation RED reproduces the additional same-original-owner recovery refusal.",
+    "Initial static B023 loop-closure error retained; explicit default binding fixes it without suppressing lint or removing assertions.",
+    "Independent review of the final fix is limited to R1/R2; earlier original-controller review retains its own cut.",
+    "Original six test ASTs are unchanged; new tests cover real composed boundaries."
+  ],
+  "limitations": [
+    "Synthetic temporary owner/accounting paths and simulated generation/native workers/replies; no actual final or benchmark execution in these cohorts.",
+    "Seven quality checks and focused cohorts do not assert a full-suite or hosted-CI pass. Exact published-head CI remains pending.",
+    "A separate small passive profile measures reconstruction cost only; larger-grid runtime/scaling and hosted Windows bottlenecks remain unmeasured. No performance optimization or reduced provenance check is introduced.",
+    "Older-publication proof covers six original supplied-program fixture publications and429files, not every paid pilot or retired profile; the interrupted search stays incomplete.",
+    "One source TaskSet, explicitly assigned final members and explicit ordered finalists only; no automatic ranking/adoption or multi-source/full-benchmark claim.",
+    "Family/exposure and bounded-score/conditional-independence declarations remain scientific assumptions to justify for an actual experiment.",
+    "No held-out gain, human validity, transfer, model-authored full-output mutation competence or improved-improver effectiveness is established. EVAL02/SRC02/SRC03/IMP01 retain those gates."
+  ],
+  "new_real_authority": false,
+  "observed_defects": {
+    "R1": "Retained REDs reproduce stale publication-boundary positions, complete-prefix publication rejection and cancellation after checked generation failure. Shared durable-prefix position and exact typed failed-prefix joins correct these paths.",
+    "R2": "Retained REDs reproduce earlier preparation before a later ownerless generation/native role root. Full original owned-role census now precedes preparation, including out-of-grid roots."
+  },
+  "original_paid_owner_changes": false,
+  "provider_calls": 0,
+  "real_keys_read": false,
+  "real_workers_in_these_cohorts": 0,
+  "scope": "Prospective one-source library trial, explicit ordered finalists, complete assigned final grid and native fixed-panel analysis; no funded or scientific experiment.",
+  "status": "implemented_offline_verified_hosted_ci_pending"
+}

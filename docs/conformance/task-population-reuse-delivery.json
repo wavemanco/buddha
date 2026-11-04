@@ -1,0 +1,127 @@
+{
+  "format": "buddha.task-population-reuse-delivery.v1",
+  "date_utc": "2026-11-03",
+  "plan_item": "IMP-01",
+  "contract": "PLAN248; DESIGN sections9-10; unchanged task/native artifact schemas",
+  "status": "focused_functional_checks_pass_hosted_and_scale_pending",
+  "source_base": "d5adcee6205cb97fb99270f20697833ae3151413",
+  "implementation_sha256": {
+    "buddha/answers.py": "3fc9df28dde21dcb40580aa843111db1e31873caf15b209faa51b4d45be26e47",
+    "tests/test_answers.py": "0a2fe69a30a9bbf188b02841bd77fbf97baf02703c914acc964ef7e849f7c07c",
+    "tests/test_source_screen_local_reuse.py": "a4969d792defc07cb658c534269de8648a0c152809dd682e351b30899f1d15ac"
+  },
+  "behavior": {
+    "external_task_constructors": "Full release/dataset/source/selection validation retained, including unselected rows.",
+    "retained_value": "Per-TaskSet immutable tuple of frozen Task plus validated serialized row string for the entire original population.",
+    "internal_selection": "Exact TaskSet validates requested IDs/order/counts, preserves bounded canonical data and shallow-copies its validated source representation. Subclass constructors remain original.",
+    "native_rows": "Exact TaskSet decodes selected derived rows; original metadata/paraphrases/typed IDs and native bytes remain. Subclasses retain full population validation.",
+    "population_helper_dictionary_contract": "unchanged for policy_panel, policy_analysis and direct row-validation callers",
+    "source_wide_reselection_defensive_views_copy_pickle": "covered",
+    "fresh_reads_hashes_owner_terminal_accounting_finish": "unchanged",
+    "global_or_raw_reader_cache": false,
+    "memory_limit": "Additional full-population strings/tasks/tuple entries per independent TaskSet; derived selections share the tuple. Temporary lookup time/memory remain linear in row count. Serialized rows can expand relative to input spelling;32MiB artifact bounds are not equal resident-cache or whole-process RAM bounds."
+  },
+  "genuine_red": {
+    "path": "runs/checks/task-population-reuse-20261103-v1/red-result-v1.json",
+    "sha256": "528d59a8084925cb200733d30a1ace51033431597f19ef74155c3ef3bd7192a2",
+    "tests": 7,
+    "passes": 5,
+    "failures": 2,
+    "errors": 0,
+    "cases": "Selection population2!=0; saved Answers population2!=1 before app change. Original AnswerArtifactTests class AST unchanged."
+  },
+  "composed_old_count_failures": {
+    "path": "runs/checks/task-population-reuse-20261103-v1/count-regression-result-v2.json",
+    "sha256": "1e04d64c6832310aab95c09f14c4189341bb212b9b9091d58317037315cc4834",
+    "task_view": [
+      3,
+      1
+    ],
+    "controls": [
+      7,
+      1
+    ],
+    "materialization": [
+      4,
+      0
+    ],
+    "preflight": [
+      4,
+      0
+    ],
+    "qualification": "First method stops at initial old count assertion; final functional cohort reaches later guards. Second method reaches its final count assertion after preceding behavior checks. Only five cost literals were subsequently updated; behavioral assertions retained."
+  },
+  "retained_admission_stop": {
+    "path": "runs/checks/task-population-reuse-20261103-v1/count-regression-result-v1.json",
+    "sha256": "24da7b84fe05bd38ce17dff175acc5182e4f4bbeeb269740332bde05ed81f543",
+    "qualification": "External test wrapper rejected the owned synthetic SQLite URI spelling before assertions. Its original_sql_denied label is a false-positive classification, not evidence of original-state access. Corrected wrapper admits only canonical ro/rw URIs for already-owned TEMP paths. Production code was unchanged by that correction."
+  },
+  "final_functional_cohort": {
+    "path": "runs/checks/task-population-reuse-20261103-v1/functional-result-v1.json",
+    "sha256": "2bd0beb3a7ce482b147f26f264c04257e5d563ec03d13318d5c6afe7bc370e2d",
+    "raw_log_sha256": "70d12d23bb814af58e87e8525323dc3d33ddbc1e8190c9073015c86d7256ccfe",
+    "tests": 78,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "guard_denials": 0,
+    "exit_code": 0,
+    "unittest_seconds": 124.787,
+    "parent_seconds": 125.4747453,
+    "outer_limit_seconds": 600,
+    "public_python_pins_unchanged": 365,
+    "each_loaded_test_executed_once_in_order": true,
+    "owned_synthetic_temp_cleanup": "complete",
+    "modules": {
+      "answers": 27,
+      "task_row_validation": 6,
+      "screen_completeness": 5,
+      "source_screen_local_reuse": 5,
+      "candidate_generation": 21,
+      "candidate_generation_outcome": 14
+    }
+  },
+  "configured_quality": {
+    "path": "runs/checks/task-population-reuse-20261103-v1/configured-quality-v1.json",
+    "semantics": "Actual root tool-returned check summary; original process streams were not retained. Ruff/format308,strict types90,Bandit,both requirement audits and308in-memory compiles pass.",
+    "sha256": "81c9beb37570b2ff9d1e81571d4bcdfc96b047b849d38b1f411cdcd8bd9821d4"
+  },
+  "independent_review": "Read-only final source/test/document/receipt review passes. Final3fc9df28 app is AST-identical to reviewed21fe13d3 after reversing only Ruff line wrapping. Original AnswerArtifactTests class AST is unchanged; full old source-screen cost-test AST matches after exactly five authorized expected-count literal changes, preserving every behavioral assertion. Final functional raw output/child/parent and fixed receipt hashes were independently checked. No tests/runtime/history executed by this review.",
+  "effects": {
+    "dependencies": false,
+    "database_or_artifact_schema": false,
+    "benchmark_or_request_settings": false,
+    "paid_api_calls": 0,
+    "real_containers": 0,
+    "original_paid_state_access": false,
+    "new_profile_or_long_history_observation": false,
+    "retry_resume_or_extension": false,
+    "paid_execution_cleared": false
+  },
+  "open_gates": [
+    "Exact-source full hosted verification",
+    "Concrete separately authorized comparable-size history observation",
+    "Final source-bound preparation refresh/adoption/account/funding/handoff",
+    "Actual matched scientific comparison and independent review"
+  ],
+  "timing_limit": "Strict validation-call counts establish removed duplicate work; temporary lookup traversal and initial serialization remain. No elapsed-speed, scaling, RSS, billed-minute or scientific-effectiveness claim. V14 remains partial and its900-second reader did not run.",
+  "inventory": {
+    "path": "runs/checks/task-population-reuse-20261103-v1/inventory-validation-v1.json",
+    "sha256": "1a4dbc7be1945476041d4efc0992a96563c6849d5bfd43fe07d4494211e766cf",
+    "actual_seeded_manifest_sha256": "47d8913efe895e72fdeabd2e76ffccbde0dffbb02fd6cd2cce7679f7f47341bb",
+    "total": 2279,
+    "old_occurrences_retained": 2272,
+    "new_method_ids": 7,
+    "counts": [
+      1,
+      581,
+      549,
+      603,
+      545
+    ],
+    "partition_seed": 1688,
+    "census_sha256": "a384aa9b86f2a3e9e5d9ce6eadee48f0adc4259709c18f06ce7cd756124e38be",
+    "qualification": "All old IDs/order/multiplicity retained and assignments equal the same-seed1688 projection. Pinned parent census is explicitly unseeded;1721 direct unseeded assignments differ. No parent code or test bodies ran in this check.",
+    "source_pins_unchanged": 365
+  }
+}

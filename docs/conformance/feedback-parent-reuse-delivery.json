@@ -1,0 +1,161 @@
+{
+  "format": "buddha.feedback-parent-reuse-delivery.v1",
+  "status": "scoped_pass_full_witness_deadline_incomplete",
+  "spec": [
+    "DESIGN sections3,9,10",
+    "PLAN IMP-01",
+    "ENG-OBS-01"
+  ],
+  "base": "d3157803db8388d9b2ae5bc8fba135d7334acdf9",
+  "change": "Reuse exact immutable parent declaration and selected TaskSet; unconditional full custody inspection and every fresh finish remain.",
+  "verification_summary": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\feedback-parent-reuse-20261031-v1\\verification-summary-v1.json",
+    "sha256": "a3df7bffe54b7de02e24a4edf2b5c1218f9f8e2214cdb7790679478ac386629b"
+  },
+  "verification": {
+    "format": "buddha.feedback-parent-reuse-verification-summary.v1",
+    "recorded_utc": "2026-10-31T10:23:06.112706+00:00",
+    "status": "scoped_feedback_and_qa_pass_shared_witness_deadline_incomplete",
+    "worktree": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\feedback-parent-reuse",
+    "base": "d3157803db8388d9b2ae5bc8fba135d7334acdf9",
+    "source_pins": {
+      "buddha/source_feedback.py": "b71675bc45326a38d824599695782a1ad3ef272452c2c6f851160cc4ccf7ada1",
+      "buddha/source_search.py": "0cb78e6801a0e58c2dcae777b6b36693873b94073297be40507a99cf6a781335",
+      "tests/test_feedback_parent_reuse.py": "82a6a361dceeab7e4c87f40fdb625cfaf57c24fc70c4d4e2c42ae2bd75266226"
+    },
+    "red": {
+      "result": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\feedback-parent-reuse-20261031-v1\\red-result-v4.json",
+        "sha256": "f2e05b0013964ff6dafa8bfaf2705386441d691e8b200a72634be5ad582199d4",
+        "bytes": 903
+      },
+      "log": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\feedback-parent-reuse-20261031-v1\\red-cohort-v4.log",
+        "sha256": "87f72f6d576d6c0ef0aad0aba10dd3a9cd244f2b9a56c60a2139a7bb15dffeda",
+        "bytes": 1153
+      },
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "unittest_seconds": 20.96,
+      "reason": "duplicate declaration construction:2 !=1; no production change before this genuine RED"
+    },
+    "prior_fixture_errors": [
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\feedback-parent-reuse-20261031-v1\\red-result-v1.json",
+        "sha256": "5876ba921084aa89b8f4dd602820327de4bea8805b298e1dc733f0a467bc5fc4",
+        "bytes": 863
+      },
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\feedback-parent-reuse-20261031-v1\\red-result-v2.json",
+        "sha256": "ed506a9c80f67f043785a0ad6d3d23f2ac7574b8e03cf3557025978c5ed9be6a",
+        "bytes": 879
+      },
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\feedback-parent-reuse-20261031-v1\\red-result-v3.json",
+        "sha256": "941a2f6c54158cf0dccc1787297e21aa833c28a65dd57d3c3fc804879c123451",
+        "bytes": 902
+      }
+    ],
+    "earlier_green_incomplete": {
+      "result": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\feedback-parent-reuse-20261031-v1\\green-result-v1.json",
+        "sha256": "78637849adf344cc8e63c92df1bcd9c4391e57ac9334731169f77befcdcdd13e",
+        "bytes": 1418
+      },
+      "log": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\feedback-parent-reuse-20261031-v1\\feedback-tests-v1.log",
+        "sha256": "d2cac584ed0f26b152a995153dac1097d01e333e780332f872598f956cafb5fc",
+        "bytes": 7224
+      },
+      "reason": "180s deadline plus observed incorrect whitespace-only manifest-denial expectation; neither a completed cohort nor an all-pass result"
+    },
+    "final_feedback": {
+      "child_result": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\feedback-parent-reuse-20261031-v1\\feedback-child-result-v2.json",
+        "sha256": "ad57d4f60b6b7bf4d9a5f311b1936154b1af6f8ecb7f8cfa009f4721b6936d0d",
+        "bytes": 430
+      },
+      "log": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\feedback-parent-reuse-20261031-v1\\feedback-tests-v2.log",
+        "sha256": "ff491eac39d65110370a7e11187a07ee14993b1503667ae9aa5d541c6b128a12",
+        "bytes": 3671
+      },
+      "counts": {
+        "selection": [
+          "test_feedback_parent_reuse.FeedbackParentReuseTests",
+          "test_source_feedback.SourceFeedbackTests.test_verified_multitask_report_builds_existing_feedback_without_writes",
+          "test_source_feedback.SourceFeedbackTests.test_report_authority_split_and_literal_source_custody_are_required"
+        ],
+        "tests": 6,
+        "failures": 0,
+        "errors": 0,
+        "skips": 0,
+        "elapsed_seconds": 94.65487139998004
+      },
+      "work_counts": {
+        "default_constructions": [
+          2,
+          61
+        ],
+        "reused_constructions": [
+          1,
+          55
+        ],
+        "inspections": 1,
+        "finishes": 9
+      },
+      "meaning": "one full inspector remains; exact plan/packet/provenance equality and identical9finish calls; declaration2to1/populations61to55 in one supplied witness materials invocation"
+    },
+    "shared_witness": {
+      "result": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\feedback-parent-reuse-20261031-v1\\green-result-v2.json",
+        "sha256": "f41c245cdab2383ecae2730a23d1c477fa007d7c3bfe16759279f6bb18157606",
+        "bytes": 2182
+      },
+      "log": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\feedback-parent-reuse-20261031-v1\\witness-tests-v2.log",
+        "sha256": "9f49df9a8b48adf19aaf963ed9024a282b22bd04a0d6bc906820ccaa3ff5562b",
+        "bytes": 5245
+      },
+      "status": "incomplete",
+      "reason": "180_second_child_deadline",
+      "process_seconds": 180.0460867001675,
+      "terminal_unittest_result_observed": false,
+      "qa_ran_in_this_parent": false
+    },
+    "qa_only": {
+      "result": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\feedback-parent-reuse-20261031-v1\\green-result-qa-v1.json",
+        "sha256": "511d4e7c167e71c242cbbbe35455822237491733becfeeb12c7be6a2aa02e244",
+        "bytes": 5099
+      },
+      "status": "pass",
+      "command_count": 7,
+      "parent_seconds": 75.99491870007478,
+      "parent_deadline_seconds": 80,
+      "qualification": "This result executes only the seven QA commands shown in results. Its inherited broad intent description is not a witness or test completion claim."
+    },
+    "combined_active_parent_seconds": 350.9334587000776,
+    "limitations": [
+      "No completed shared-witness lifecycle at this source cut",
+      "No full producer or retained-prefix profile rerun",
+      "No whole-harness runtime/peak-memory/speedup claim",
+      "No original paid data, provider calls, containers, new grants, commits or pushes",
+      "Legacy comparison/failure/standalone behavior remains on its default construction path"
+    ],
+    "claims": "Local immutable declaration reuse only; all source-file/native/funding/sidecar inspections and finishes remain."
+  },
+  "source_sha256": {
+    "buddha/source_feedback.py": "b71675bc45326a38d824599695782a1ad3ef272452c2c6f851160cc4ccf7ada1",
+    "buddha/source_search.py": "0cb78e6801a0e58c2dcae777b6b36693873b94073297be40507a99cf6a781335",
+    "tests/test_feedback_parent_reuse.py": "82a6a361dceeab7e4c87f40fdb625cfaf57c24fc70c4d4e2c42ae2bd75266226",
+    "docs/RECONSTRUCTION-COST.md": "c16df67a85c1eb244bdf6f911af2ea6e16149d414080a1d2c440cfa85dc429de"
+  },
+  "preservation": {
+    "raw_revision_rows": 214,
+    "original_acceptance_tails": 7,
+    "frozen_paid_sources_inputs_and_benchmark": "unchanged"
+  },
+  "remaining": "Full shared witness, comparable193owner/660operation performance, full phases, exact-source hosted CI and a fresh reviewed funded handoff; no paid launch cleared."
+}

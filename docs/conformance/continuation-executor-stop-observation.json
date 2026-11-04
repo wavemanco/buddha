@@ -1,0 +1,126 @@
+{
+  "format": "buddha.continuation-executor-stop-observation.v1",
+  "date": "2026-10-30",
+  "status": "incomplete",
+  "executing_source": "c54819f8516cb6b50c1040d7f500c9ef12593f8b",
+  "source_scope": "Hash-joined saved JSON metadata and public code trace; no original SQL, actor/task/output contents, process environment, credentials, model calls or run-state mutation.",
+  "evidence": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-unified-comparison-20261026-v2\\NOT-CREATED-unified-workspace\\observations\\126e5401d8d3488388ec3d4953f3f737.json",
+      "sha256": "1e7216626d98aefc69b586ff46ec070eece408b1c456985808526fe53d364c0e"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-unified-review-20261026-v2\\NOT-CREATED-trial-runtime\\search\\study\\observations\\1.json",
+      "sha256": "d685193341b410e7d389a1890e53e2d854978cb43b9a117d41e42c7841b9948f"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-unified-review-20261026-v2\\NOT-CREATED-trial-runtime\\search\\study\\cells\\0\\0\\0\\1\\screen\\observations\\0.json",
+      "sha256": "1cce177576cda4cd08a565e9f457024cc25406044d703dece956a35dd0d86fb2"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-unified-review-20261026-v2\\NOT-CREATED-trial-runtime\\search\\study\\cells\\0\\0\\0\\1\\screen\\tasks\\0\\generation\\attempts\\0-0\\report.json",
+      "sha256": "7e3ef08af565b1765aaa6054370658f9248724bdcb99e3cbb0f61ffb810ebac9"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-unified-review-20261026-v2\\NOT-CREATED-trial-runtime\\search\\study\\cells\\0\\0\\0\\1\\screen\\tasks\\0\\generation\\attempts\\0-0\\session\\report.json",
+      "sha256": "e0b2aafd37cfb56046e3a163c3923b3afb770d1ca270c869e1f8ff89ff34698b"
+    }
+  ],
+  "outer_stop": {
+    "cancelled": false,
+    "phase": "primary",
+    "reason": "protocol",
+    "source": "launcher_reported"
+  },
+  "position": {
+    "arm": 0,
+    "repetition": 0,
+    "slot": 1,
+    "stage": "screen",
+    "start": 0
+  },
+  "screen_stop": {
+    "reason": "protocol",
+    "stage": "generation",
+    "task_index": 0
+  },
+  "recorded_accounting": {
+    "source": "saved outer observation; not an independent ledger or invoice reconciliation",
+    "total_attempts": 657,
+    "spent_microusd": 5523144,
+    "reserved_microusd": 0,
+    "prior_attempts": 604,
+    "prior_spent_microusd": 4845090,
+    "additional_attempts": 53,
+    "additional_spent_microusd": 678054,
+    "final_attempts": 0,
+    "plain_reference_attempts": 0,
+    "new_allocation": false
+  },
+  "failed_generation_scope": {
+    "status": "failed",
+    "reason": "execution",
+    "execution": {
+      "cleanup_status": "unknown",
+      "container_id": null,
+      "reason": "cleanup"
+    },
+    "calls": {
+      "completed": 0,
+      "requested": 0,
+      "stopped": 0
+    },
+    "gateway_totals": {
+      "committed_microusd": 0,
+      "operation_count": 0,
+      "reserved_microusd": 0,
+      "spent_microusd": 0
+    },
+    "host_stop_reason": null,
+    "terminal": {
+      "broken": false,
+      "delivered": 0,
+      "done_reason": null,
+      "done_sha256": null,
+      "done_status": null,
+      "operation_count": 0,
+      "ready_seen": false,
+      "recorded_cost_microusd": 0,
+      "sequence": 0,
+      "stop_reason": null
+    },
+    "outcome_reason": "protocol",
+    "disposition": null
+  },
+  "classification": "executor cleanup unconfirmed before worker readiness; no model callbacks for this failed attempt",
+  "public_trace": {
+    "executor.py": "Null container identity precedes normal start branch at545-552; finally599-624 can leave cleanup unknown;649-650 replaces the original cause with cleanup. Lost create acknowledgement remains possible.",
+    "candidate_run.py": "ExecutorError becomes failed execution and retains cleanup metadata at732-738.",
+    "candidate_generation.py": "Missing done becomes protocol at417-419; this is not a NoveltyBench-settings diagnosis.",
+    "unified_launch.py": "Returned incomplete results take541-542, outside escaped-exception diagnostics608-625."
+  },
+  "current_runtime_observation": {
+    "docker_query_scope": "Current default CLI context only, not proven identical to the failed invocation endpoint. Read-only version and executor-label inventory; raw stderr not displayed.",
+    "docker_server": {
+      "version": "29.5.3",
+      "os": "linux",
+      "arch": "amd64"
+    },
+    "executor_labeled_containers": [
+      {
+        "id": "5f9f3fbf411f32348a000204b858366b91bb6cdad1586714b9ffc2fbb6e48380",
+        "status": "exited",
+        "created": "2026-10-20 11:00:10 -0700 PDT"
+      }
+    ],
+    "limits": "Current reachability does not establish overnight availability or reconcile the unknown failed container identity. No container was started, stopped, removed or restarted."
+  },
+  "current_driver_process": "No unified-run.py Python process present during inspection.",
+  "limits": [
+    "Exact initial executor cause was not retained.",
+    "Container creation without acknowledgement is possible; no orphan is established.",
+    "Existing known costs/receipts and all original grants remain retained.",
+    "No scientific improvement, complete recovery or NoveltyBench-setting change is established."
+  ],
+  "next_action": "Hold the command; reconcile endpoint/cleanup provenance, repair safe failure detail in separately checked host helpers, and bound offline reconstruction diagnosis before another paid continuation."
+}

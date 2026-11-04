@@ -1,0 +1,107 @@
+{
+  "format": "buddha.current-scale-observation.v1",
+  "status": "partial",
+  "stage": "producer",
+  "reason": "deadline_exceeded",
+  "spec": [
+    "DESIGN sections3,9,10",
+    "PLAN IMP-01",
+    "ENG-OBS-01"
+  ],
+  "executed_source_head": "f0f2c0fd9e3a4093e9b8c48ada449a9cb94cbf9c",
+  "source_worktree": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\witness-screen-read-reuse",
+  "producer_seconds": 1200.0991012000013,
+  "whole_parent_seconds": 1200.2847461998463,
+  "required_cut": {
+    "owners": 193,
+    "operations": 660,
+    "reached": false
+  },
+  "conditional_fresh_check": {
+    "deadline_seconds": 900,
+    "status": "not_run",
+    "reason": "producer_cut_not_reached"
+  },
+  "last_logged_action": {
+    "format": "buddha.scale-replay-progress.v1",
+    "phase": "producer",
+    "stage": "producing_history",
+    "event": "returned_action",
+    "elapsed_seconds": 1146.206,
+    "action": "witness",
+    "position": {
+      "start": 1,
+      "repetition": 0,
+      "arm": null,
+      "slot": null,
+      "stage": "common_witness_proposal"
+    },
+    "owners_before": 41,
+    "operations_before": 145
+  },
+  "counter_qualification": "owners_before/operations_before are BEFORE-action snapshots; no terminal child result/final ledger reconciliation. Do not report41/145 as final accounting.",
+  "source_pins": {
+    "count": 351,
+    "fixture_count": 8,
+    "after_match": true
+  },
+  "parent_result": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\scale-replay-parent-result-v10.json",
+    "sha256": "8c4ff6b079543a676b0535f43542df4d6dd12cff270bbf34f27f99ad50ff96b0"
+  },
+  "manifest": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\scale-replay-source-proposal-v10.json",
+    "sha256": "e16e945c9938f58c3a78d94ad728f265d559636ae57f481537f418ebbd526694"
+  },
+  "binding": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\scale-replay-binding-v10-final-v1.json",
+    "sha256": "6d97adf3119ba5c96cbb8ab63a11944f74a48bb8fac8daf783ca351d1b629ac2"
+  },
+  "driver_review": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\independent-driver-review-v10.json",
+    "sha256": "a0afe0eb31b422e3345ae53bb51bad402ba843c915e4c4d6a9341b1dc85c1bec"
+  },
+  "terminal_review": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\independent-terminal-verification-v10.json",
+    "sha256": "3d3988797f35254ff0be2d5ce3b4ce83ffb299cbb0687a4c56356c4902b4f063"
+  },
+  "logs": {
+    "stderr": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\producer-stderr-v10.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stdout": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\producer-stdout-v10.log",
+      "sha256": "2a9f19483ea72d14382d9985ea07d16ea3b3410bd358190c682b6f5d8bed0b6f"
+    }
+  },
+  "retained_workspace": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\retained-scale-v10",
+  "retained": [
+    "v9 evidence",
+    "v10 unbound draft",
+    "v10 raw synthetic history",
+    "all deadline and failed/intermediate checks"
+  ],
+  "retry_resume_cleanup_or_extension": false,
+  "guards": "Reviewed supplied driver denies process/network actions after trusted imports; no child terminal report exists, so a final guard-denial list was not collected.",
+  "limitations": [
+    "No full-scale pass or conditional fresh-check result",
+    "No final ledger reconciliation",
+    "No controlled speed ratio or peak-memory result",
+    "No old paid-data/source changes, API calls, actual containers, new grants or paid launch",
+    "Scientific gains and improver effectiveness remain unestablished"
+  ],
+  "next": "Direct existing screen-to-witness result handoff, first full collection/aggregate custody/census and every fresh guard retained, then separately reviewed measured gate; no new registry/framework.",
+  "preparation_reuse_map": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-ordinary-preparation-map-20261031-v1\\mapping-v1.md",
+    "sha256": "6e4c9b20fb77d78556a37beb601a566339869480c0aea1f6870f55f18c4239b3",
+    "meaning": "Five existing stages and validators, not historical main execution or a new configuration framework"
+  },
+  "request_path_static_review": "207/208 contain no outgoing builder/template/rate/dependency change; actual fresh prepared requests, account/rate/capacity and handoff checks still required before live calls.",
+  "preservation": {
+    "raw_revision_rows": 217,
+    "original_acceptance_tails": 7,
+    "source_byte_changes_in_this_docs_slice": 0
+  },
+  "guide_sha256": "242e943450ce65389d280c17b5598b137be686efc9c963042b654315e3959947"
+}

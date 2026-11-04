@@ -1,0 +1,223 @@
+{
+  "format": "buddha.imp01-larger-reader-cost-delivery.v1",
+  "status": "observation_and_saved_data_checks_pass",
+  "base_commit": "b55188581db5242487b2f06ec7b324c75bfb0053",
+  "specifications": [
+    "DESIGN section8: measurement of improvement competence and its costs",
+    "PLAN IMP-01: retained larger reconstruction-cost observation and remaining scientific scope",
+    "AGENTS: single roadmap, exact evidence, per-slice delivery"
+  ],
+  "evidence": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\run-imp01-larger-reader-cost-v1.py",
+      "sha256": "9aaecbd301b405e2dd0aa830c306bb9e1708de501343c845bb365f10eceac67d"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-larger-reader-cost-parameters-v1.json",
+      "sha256": "c8d9ca213f03d4fe314577cf0f8d85e053e2e43b6dbebfc00ca86796ee5cf208"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\launch-imp01-larger-reader-cost-v1.py",
+      "sha256": "b419d9751616d7caf518aa2ab2a362d9097c80f4fec728c3b53aa8012721455f"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-larger-reader-cost-invocation-draft-v1.json",
+      "sha256": "7cdbdd679ac19cea30886d983f93d94fc568e2f37d63126de41fdb8853d84b3f"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-larger-reader-cost-invocation-v1.json",
+      "sha256": "dc594d27a19303cc42fdea66ecb4885fa74a2c55f02ce99d105204d0c9f3435f"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-larger-reader-cost-static-review-v1.json",
+      "sha256": "ee83d62dd5918adef54352a77797ad410f873a13248ebce5529da9002804524c"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-larger-reader-cost-preflight-controls-v1.json",
+      "sha256": "6e0cb7cad52f113ec98db14481ddf56c313bb2f97ac76477de1465e7357e3400"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-larger-reader-cost-preservation-before-v1.json",
+      "sha256": "00ab8db234780b0ada2e3c4b075072f17a1863568b1b55693bc560db4b3a452d"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-larger-reader-cost-process-result-v1.json",
+      "sha256": "92f48f5422c72fd8cdbf8c7b89c6c9caf1a7d36ab490d13fe527b94f154304b0"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-larger-reader-cost-observation-v1.json",
+      "sha256": "7af6e3cd7c1b9632b0d1c9c063522855642b731c4f991f272466aff53e58cf3b"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-larger-reader-cost-profiles-v1.json",
+      "sha256": "9cddc34ff282f4318277f045a963baed67be64c0e887743a318bcddfcc7a79e5"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\review-imp01-larger-reader-cost-data-v1.py",
+      "sha256": "78ffe7599fed81c10ca17c9066687c6d96c81f183d23fdc530af04cfae3e3273"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-larger-reader-cost-independent-data-review-v1.json",
+      "sha256": "d8575a4012d40fd118bf2f496639a69362f9541ce396eca475104ddd6ea9277a"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\ci-pr111-116-117-118-checkpoint-20261024T134026Z.json",
+      "sha256": "c20b56e58d7f407af36cbda1557a65c8051b4ea16e816b7923d56daadabc08e7"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\ci-pr116-ubuntu-120852280296-terminal-evidence-v1.json",
+      "sha256": "f14fc5cda88ec43d887414d46d6aa53343f1264ff6386213b41ddd4bd8b4e262"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-public-price-refresh-20261024-v1.json",
+      "sha256": "6059d4ba208e84f8334d9ac4593e4d5b97fb94ce700e50f1fd29c4e4117f495a"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-public-price-refresh-independent-review-20261024-v1.json",
+      "sha256": "fe770d213e4f81db63c7a581a5989d02cd8cf5bbc15bf5ba440b93845f862282"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-refreshed-price-launch-pin-feasibility-v1.json",
+      "sha256": "7994ba4ea6d0eacd7fc60f1ccc3b6d35b5443edb8260c9b30cf1cc4d8d9c4a17"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-eval02-protocol-gap-source-trace-v1.json",
+      "sha256": "702e89ff5f0a829623f569ab4064b7b147400e4ca2de9f2c7c2e462a9e24d013"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-target-repair-source-trace-v1.json",
+      "sha256": "eabbc132bcb31fa3e3d922630b074b51a25202b68279b5f059c658caf65aceca"
+    }
+  ],
+  "actual_observation": {
+    "process_exit": 0,
+    "end_to_end_wall_seconds": 2498.5206154999323,
+    "counts": {
+      "conditions": 2,
+      "descendant_slots": 4,
+      "final_owners": 48,
+      "reader_passes": 6,
+      "sealed_cells": 12
+    },
+    "inventory": {
+      "bytes": 10248337,
+      "database_images": 100,
+      "directories": 861,
+      "files": 1161,
+      "sha256": "a1f8d76fbd0c7257de70d74d97ee7283162bcb3aeb05d53abbf93867ff1e7c61"
+    },
+    "source_parameter_pins": 236,
+    "timings": [
+      {
+        "mode": "plain",
+        "process_cpu_ns": 29265625000,
+        "reader": "development",
+        "wall_ns": 29497712800
+      },
+      {
+        "mode": "plain",
+        "process_cpu_ns": 32812500000,
+        "reader": "freeze",
+        "wall_ns": 33018533700
+      },
+      {
+        "mode": "plain",
+        "process_cpu_ns": 45218750000,
+        "reader": "final",
+        "wall_ns": 45469997100
+      },
+      {
+        "mode": "profile",
+        "process_cpu_ns": 45828125000,
+        "reader": "development",
+        "wall_ns": 46027188400
+      },
+      {
+        "mode": "profile",
+        "process_cpu_ns": 50062500000,
+        "reader": "freeze",
+        "wall_ns": 50595931700
+      },
+      {
+        "mode": "profile",
+        "process_cpu_ns": 74453125000,
+        "reader": "final",
+        "wall_ns": 75007601400
+      }
+    ],
+    "original_canonical_root_retained": true,
+    "paid_provider_calls": 0,
+    "guard_events": 0
+  },
+  "verification": {
+    "independent_recipe_exit": 0,
+    "actual_terminal_tool_chunk": "2eea9f",
+    "observation_terminal_tool_chunk": "73a481",
+    "raw_database_check": "Exact file-byte equality only, no SQL interpreter in independent review",
+    "source_actor_programs": "Supplied test programs/replies; no selected program host compilation/execution or model-authored result",
+    "prior_and_future": {
+      "future_paid_trees_absent": true,
+      "future_source_pins": 169,
+      "old_database_images": 56,
+      "old_directories": 470,
+      "old_files": 640
+    }
+  },
+  "hosted": {
+    "checkpoint_utc": "2026-10-24T13:40:26Z",
+    "pr116_ubuntu": {
+      "head": "eb71e3b93c5407e8670b5016143671fa2abf9728",
+      "job": 120852280296,
+      "status": "success",
+      "tests": 1804,
+      "duration_seconds": "10309.263",
+      "failures": 0,
+      "errors": 0,
+      "skips": 5,
+      "all_configured_checks": "success"
+    },
+    "pr116_windows": "in_progress_at_checkpoint",
+    "pr117_and_pr118_both_platforms": "in_progress_at_checkpoint",
+    "original_pr111_windows": "in_progress_at_checkpoint",
+    "scope": "Exact head/platform conclusions only. No full PR116 matrix or later-head CI success inferred."
+  },
+  "price_refresh": {
+    "profiles_changed": false,
+    "models_changed": false,
+    "roles_checked": 5,
+    "extra_support_pins": 3,
+    "prospective_fixed_union": 77,
+    "prospective_with_future_keyed_review": 78,
+    "conditional_maximum": 111,
+    "new_launch_created": false,
+    "existing_draft_v2_unchanged": true,
+    "allocation_status": "unallocated"
+  },
+  "remaining": {
+    "four_gates": [
+      "SRC-02",
+      "SRC-03",
+      "IMP-01",
+      "EVAL-02"
+    ],
+    "sole_next": "SRC-02",
+    "future_grid_cost_gate_closed": false,
+    "target_repair": "IMP1-TARGET-01: prospective method/evidence/coverage still required; no native-score substitution",
+    "study_inputs": "Actual treatment ancestry, supported seeds/repetitions/grid, split/custody, baselines, margins/uncertainty, independent transfer/human evidence and funded handoff remain prospective requirements."
+  },
+  "limits": [
+    "One warm fixed-order nonexclusive Windows engineering observation, with uncalibrated audit/profiling overhead.",
+    "Old and new cohorts and source cuts differ; no causal speedup, scaling law or production latency claim.",
+    "No actual model competence, human preference, scientific gain, full future-grid cost or funded launch readiness gate closes.",
+    "A profile token bound is not proof of actual combined input/output context fit or account access.",
+    "Runtime, agent, test, benchmark, source-map, frozen proposal and original launch-draft bytes unchanged."
+  ],
+  "preservation": {
+    "historical_revision_rows_unchanged": 120,
+    "original_main_acceptance_tails_unchanged": 10,
+    "plan_sha256": "0c787a6a6ed058794f5a605dc74e4a3acd0c2342cb6fba269e9f7c68411e5a20",
+    "four_gates_remain": true,
+    "src02_sole_next": true,
+    "primary_plan_mirror_equal": true
+  }
+}

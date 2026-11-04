@@ -1,0 +1,365 @@
+{
+  "format": "buddha.plain-model-comparison-cost-examples.v1",
+  "status": "conditional_arithmetic_only_not_a_forecast_cap_or_allocation",
+  "scope": {
+    "models": 1,
+    "tasks": 26,
+    "repetitions": 1,
+    "answers_per_set": 10,
+    "comparison": "one matched pair versus optional four-condition expansion",
+    "sampling_modes_required_now": "no mandatory four-condition run; prepare needed reference controls prospectively",
+    "extra_mode_automatically_scheduled": false,
+    "priority_change_authorized_by_questions": false
+  },
+  "sources": {
+    "luna": "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+    "opus5": "https://platform.claude.com/docs/en/about-claude/pricing"
+  },
+  "public_rates_verified_2026_10_25_usd_per_million": {
+    "generation": [
+      "0.2",
+      "1.2"
+    ],
+    "partition": [
+      "0.2",
+      "1.2"
+    ],
+    "utility": [
+      "5",
+      "25"
+    ]
+  },
+  "retained_local_rates_are_conservative_accounting_not_invoices": {
+    "generation": [
+      "0.55",
+      "1.98"
+    ],
+    "partition": [
+      "0.55",
+      "1.98"
+    ],
+    "utility": [
+      "11",
+      "27.5"
+    ]
+  },
+  "hypothetical_tokens_per_call_input_and_output_including_reasoning": {
+    "shorter_example": {
+      "generation": [
+        512,
+        1024
+      ],
+      "partition": [
+        8192,
+        512
+      ],
+      "utility": [
+        1500,
+        128
+      ]
+    },
+    "longer_example": {
+      "generation": [
+        12000,
+        2048
+      ],
+      "partition": [
+        24000,
+        1024
+      ],
+      "utility": [
+        4000,
+        1024
+      ]
+    }
+  },
+  "cases": [
+    {
+      "conditions": 2,
+      "case": "shorter_example",
+      "answer_sets": 52,
+      "answers": 520,
+      "provider_call_example_counts": {
+        "generation": 520,
+        "partition": 52,
+        "utility": 520
+      },
+      "costs": {
+        "public": {
+          "by_role_usd": {
+            "generation": "0.692224",
+            "partition": "0.1171456",
+            "utility": "5.564"
+          },
+          "openai_usd": "0.8093696",
+          "anthropic_usd": "5.564",
+          "total_usd": "6.3733696"
+        },
+        "retained_local": {
+          "by_role_usd": {
+            "generation": "1.2012",
+            "partition": "0.28704",
+            "utility": "10.4104"
+          },
+          "openai_usd": "1.48824",
+          "anthropic_usd": "10.4104",
+          "total_usd": "11.89864"
+        }
+      }
+    },
+    {
+      "conditions": 2,
+      "case": "longer_example",
+      "answer_sets": 52,
+      "answers": 520,
+      "provider_call_example_counts": {
+        "generation": 520,
+        "partition": 52,
+        "utility": 520
+      },
+      "costs": {
+        "public": {
+          "by_role_usd": {
+            "generation": "2.525952",
+            "partition": "0.3134976",
+            "utility": "23.712"
+          },
+          "openai_usd": "2.8394496",
+          "anthropic_usd": "23.712",
+          "total_usd": "26.5514496"
+        },
+        "retained_local": {
+          "by_role_usd": {
+            "generation": "5.54112",
+            "partition": "0.791856",
+            "utility": "37.5232"
+          },
+          "openai_usd": "6.332976",
+          "anthropic_usd": "37.5232",
+          "total_usd": "43.856176"
+        }
+      }
+    },
+    {
+      "conditions": 4,
+      "case": "shorter_example",
+      "answer_sets": 104,
+      "answers": 1040,
+      "provider_call_example_counts": {
+        "generation": 1040,
+        "partition": 104,
+        "utility": 1040
+      },
+      "costs": {
+        "public": {
+          "by_role_usd": {
+            "generation": "1.384448",
+            "partition": "0.2342912",
+            "utility": "11.128"
+          },
+          "openai_usd": "1.6187392",
+          "anthropic_usd": "11.128",
+          "total_usd": "12.7467392"
+        },
+        "retained_local": {
+          "by_role_usd": {
+            "generation": "2.4024",
+            "partition": "0.57408",
+            "utility": "20.8208"
+          },
+          "openai_usd": "2.97648",
+          "anthropic_usd": "20.8208",
+          "total_usd": "23.79728"
+        }
+      }
+    },
+    {
+      "conditions": 4,
+      "case": "longer_example",
+      "answer_sets": 104,
+      "answers": 1040,
+      "provider_call_example_counts": {
+        "generation": 1040,
+        "partition": 104,
+        "utility": 1040
+      },
+      "costs": {
+        "public": {
+          "by_role_usd": {
+            "generation": "5.051904",
+            "partition": "0.6269952",
+            "utility": "47.424"
+          },
+          "openai_usd": "5.6788992",
+          "anthropic_usd": "47.424",
+          "total_usd": "53.1028992"
+        },
+        "retained_local": {
+          "by_role_usd": {
+            "generation": "11.08224",
+            "partition": "1.583712",
+            "utility": "75.0464"
+          },
+          "openai_usd": "12.665952",
+          "anthropic_usd": "75.0464",
+          "total_usd": "87.712352"
+        }
+      }
+    }
+  ],
+  "limits": [
+    "These are two invented usage cases, not measured usage, a statistical interval or a completion guarantee.",
+    "Ten generation calls per set are assumed equally only for transparent arithmetic. Actual Buddha planning/batching can change requests and tokens; infer no compliance or cost from labels.",
+    "Ten distinct groups, one partition call and one utility call per group are assumed; no retry, refusal fallback, cache saving or uncertain liability is included.",
+    "All output vectors include billed reasoning; high effort utility can use substantially more.",
+    "This prices frozen-agent assessment only. Source evolution/search/development, native Codex reviews and independent human time are excluded.",
+    "The current $150 proposal covers a separate fixed original-versus-evolved improver workload. This table neither extends nor reallocates it.",
+    "A selected model, mode, tasks, repetitions, actual source procedure, verified prices/accounts and conservative reservations must be bound before proposing the hard live cap. Partial outcomes and unresolved holds remain explicit.",
+    "Existing eligible Buddha measurements may be reused only under prospectively declared matching and selection, reducing incremental work; no favorable posthoc reuse."
+  ],
+  "retained_local_rounding": "Ceiling to integer microusd per original operation, matching ModelSpec accounting; public examples use linear list-price arithmetic.",
+  "reference_only_cases": [
+    {
+      "plain_references": 1,
+      "case": "shorter_example",
+      "additional_answer_sets": 26,
+      "additional_answers": 260,
+      "successful_provider_call_example_counts": {
+        "generation": 260,
+        "partition": 26,
+        "utility": 260
+      },
+      "costs": {
+        "public": {
+          "by_role_usd": {
+            "generation": "0.346112",
+            "partition": "0.0585728",
+            "utility": "2.782"
+          },
+          "openai_usd": "0.4046848",
+          "anthropic_usd": "2.782",
+          "total_usd": "3.1866848"
+        },
+        "retained_local": {
+          "by_role_usd": {
+            "generation": "0.6006",
+            "partition": "0.14352",
+            "utility": "5.2052"
+          },
+          "openai_usd": "0.74412",
+          "anthropic_usd": "5.2052",
+          "total_usd": "5.94932"
+        }
+      },
+      "reuse_requires": "Prospectively compatible frozen Buddha outcomes and selection/analysis; never favorable posthoc reuse."
+    },
+    {
+      "plain_references": 1,
+      "case": "longer_example",
+      "additional_answer_sets": 26,
+      "additional_answers": 260,
+      "successful_provider_call_example_counts": {
+        "generation": 260,
+        "partition": 26,
+        "utility": 260
+      },
+      "costs": {
+        "public": {
+          "by_role_usd": {
+            "generation": "1.262976",
+            "partition": "0.1567488",
+            "utility": "11.856"
+          },
+          "openai_usd": "1.4197248",
+          "anthropic_usd": "11.856",
+          "total_usd": "13.2757248"
+        },
+        "retained_local": {
+          "by_role_usd": {
+            "generation": "2.77056",
+            "partition": "0.395928",
+            "utility": "18.7616"
+          },
+          "openai_usd": "3.166488",
+          "anthropic_usd": "18.7616",
+          "total_usd": "21.928088"
+        }
+      },
+      "reuse_requires": "Prospectively compatible frozen Buddha outcomes and selection/analysis; never favorable posthoc reuse."
+    },
+    {
+      "plain_references": 2,
+      "case": "shorter_example",
+      "additional_answer_sets": 52,
+      "additional_answers": 520,
+      "successful_provider_call_example_counts": {
+        "generation": 520,
+        "partition": 52,
+        "utility": 520
+      },
+      "costs": {
+        "public": {
+          "by_role_usd": {
+            "generation": "0.692224",
+            "partition": "0.1171456",
+            "utility": "5.564"
+          },
+          "openai_usd": "0.8093696",
+          "anthropic_usd": "5.564",
+          "total_usd": "6.3733696"
+        },
+        "retained_local": {
+          "by_role_usd": {
+            "generation": "1.2012",
+            "partition": "0.28704",
+            "utility": "10.4104"
+          },
+          "openai_usd": "1.48824",
+          "anthropic_usd": "10.4104",
+          "total_usd": "11.89864"
+        }
+      },
+      "reuse_requires": "Prospectively compatible frozen Buddha outcomes and selection/analysis; never favorable posthoc reuse."
+    },
+    {
+      "plain_references": 2,
+      "case": "longer_example",
+      "additional_answer_sets": 52,
+      "additional_answers": 520,
+      "successful_provider_call_example_counts": {
+        "generation": 520,
+        "partition": 52,
+        "utility": 520
+      },
+      "costs": {
+        "public": {
+          "by_role_usd": {
+            "generation": "2.525952",
+            "partition": "0.3134976",
+            "utility": "23.712"
+          },
+          "openai_usd": "2.8394496",
+          "anthropic_usd": "23.712",
+          "total_usd": "26.5514496"
+        },
+        "retained_local": {
+          "by_role_usd": {
+            "generation": "5.54112",
+            "partition": "0.791856",
+            "utility": "37.5232"
+          },
+          "openai_usd": "6.332976",
+          "anthropic_usd": "37.5232",
+          "total_usd": "43.856176"
+        }
+      },
+      "reuse_requires": "Prospectively compatible frozen Buddha outcomes and selection/analysis; never favorable posthoc reuse."
+    }
+  ],
+  "current_development_study_task_counts": {
+    "development": 3,
+    "final_assessment": 26,
+    "all_WildChat": false,
+    "plain_references_automatically_added": false
+  }
+}

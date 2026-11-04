@@ -8,6 +8,9 @@ All records and native output are bounded by the release JSON byte ceiling.
 import base64
 import binascii
 import hashlib
+import json
+from collections.abc import Mapping
+from copy import copy
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Self, cast
@@ -76,7 +79,8 @@ class _Artifact:
         return cls(raw)
 
     def to_record(self) -> dict[str, object]:
-        return _load(self.data)
+        # Constructors strictly validate immutable bytes; each view still decodes afresh.
+        return _object(json.loads(self.data))
 
     def to_bytes(self) -> bytes:
         return self.data
@@ -100,7 +104,8 @@ def _population(release: Release, raw: bytes) -> dict[str | int, tuple[Task, dic
         raise ReleaseError("dataset must contain from 1 to 100000 JSONL tasks")
     result = {}
     for line in lines:
-        row = _metadata(_load(line), set())
+        row = _load(line)
+        _utf8(json.dumps(row, ensure_ascii=False, separators=(",", ":"), allow_nan=False))
         task = Task(
             _id(row.get(_text(schema["id_field"]))),
             _utf8(row.get(_text(schema["prompt_field"]))),
@@ -126,9 +131,9 @@ def _source(record: dict[str, object]) -> tuple[Release, bytes]:
     return release, raw
 
 
-def _selected(
-    population: dict[str | int, tuple[Task, dict[str, object]]], ids: object
-) -> list[tuple[Task, dict[str, object]]]:
+def _selected[Row](
+    population: Mapping[str | int, tuple[Task, Row]], ids: object
+) -> list[tuple[Task, Row]]:
     if type(ids) is not list or not 1 <= len(ids) <= len(population):
         raise ReleaseError("selection must name a bounded nonempty task population")
     result = []
@@ -144,6 +149,9 @@ def _selected(
 
 @dataclass(frozen=True)
 class TaskSet(_Artifact):
+    _population_rows: tuple[tuple[Task, str], ...] = field(init=False, repr=False, compare=False)
+    _selected_tasks: tuple[Task, ...] = field(init=False, repr=False, compare=False)
+
     def __post_init__(self) -> None:
         record = _object(
             _load(self.data),
@@ -162,12 +170,26 @@ class TaskSet(_Artifact):
         release, raw = _source(record)
         if _digest(record["release_sha256"]) != release.fingerprint():
             raise ReleaseError("task release identity differs")
-        selected = _selected(_population(release, raw), record["selection"])
+        population = _population(release, raw)
+        selected = _selected(population, record["selection"])
         if hashlib.sha256(raw).hexdigest() != _digest(record["dataset_sha256"]) or _json(
             record["tasks"]
         ) != _json([task.to_record() for task, _ in selected]):
             raise ReleaseError("derived tasks differ from their frozen dataset")
         object.__setattr__(self, "data", _json(record))
+        # Retain the already validated full source, including unselected row metadata.
+        object.__setattr__(
+            self,
+            "_population_rows",
+            tuple(
+                (
+                    task,
+                    json.dumps(row, ensure_ascii=False, separators=(",", ":"), allow_nan=False),
+                )
+                for task, row in population.values()
+            ),
+        )
+        object.__setattr__(self, "_selected_tasks", tuple(task for task, _ in selected))
 
     @classmethod
     def from_dataset(cls, release: Release, raw: bytes) -> Self:
@@ -206,14 +228,29 @@ class TaskSet(_Artifact):
     def select(self, ordered_ids: object) -> Self:
         """Select an explicit host-owned population; preserve the entire sealed source."""
         record = self.to_record()
-        release, raw = _source(record)
-        selected = _selected(_population(release, raw), ordered_ids)
-        record["selection"] = [task.id for task, _ in selected]
-        record["tasks"] = [task.to_record() for task, _ in selected]
-        return type(self)(_json(record))
+        if type(self) is TaskSet:
+            selected = [task for task, _ in self._selected_rows(ordered_ids)]
+        else:
+            release, raw = _source(record)
+            selected = [task for task, _ in _selected(_population(release, raw), ordered_ids)]
+        record["selection"] = [task.id for task in selected]
+        record["tasks"] = [task.to_record() for task in selected]
+        data = _json(record)
+        if type(self) is not TaskSet:
+            return type(self)(data)
+        # Only selection changes; its source and immutable validated rows stay shared.
+        derived = copy(self)
+        object.__setattr__(derived, "data", data)
+        object.__setattr__(derived, "_selected_tasks", tuple(selected))
+        return derived
+
+    def _selected_rows(self, ordered_ids: object) -> list[tuple[Task, str]]:
+        return _selected({task.id: (task, row) for task, row in self._population_rows}, ordered_ids)
 
     @property
     def tasks(self) -> tuple[Task, ...]:
+        if type(self) is TaskSet:
+            return self._selected_tasks
         return tuple(
             Task(_id(row["id"]), _utf8(row["prompt"]), _count(row["count"]))
             for value in cast(list[object], self.to_record()["tasks"])
@@ -254,7 +291,13 @@ def _native(record: dict[str, object], tasks: TaskSet) -> bytes:
     release, raw = _source(task_record)
     schema = _object(release.to_record()["task"])
     fields = [_text(schema[name]) for name in ("id_field", "prompt_field", "answers_field")]
-    selected = _selected(_population(release, raw), task_record["selection"])
+    if type(tasks) is TaskSet:
+        selected = [
+            (task, _object(json.loads(row)))
+            for task, row in tasks._selected_rows(task_record["selection"])
+        ]
+    else:
+        selected = _selected(_population(release, raw), task_record["selection"])
     metadata = _metadata(
         record["metadata"], set(fields) | {name for _, row in selected for name in row}
     )
@@ -282,6 +325,8 @@ def _native(record: dict[str, object], tasks: TaskSet) -> bytes:
 
 @dataclass(frozen=True)
 class Answers(_Artifact):
+    _native_data: bytes = field(init=False, repr=False, compare=False)
+
     def __post_init__(self) -> None:
         record = _object(
             _load(self.data),
@@ -293,7 +338,7 @@ class Answers(_Artifact):
         if _digest(record["tasks_sha256"]) != tasks.fingerprint():
             raise ReleaseError("answer population differs from its frozen task artifact")
         _digest(record["agent_sha256"])
-        _native(record, tasks)
+        object.__setattr__(self, "_native_data", _native(record, tasks))
         object.__setattr__(self, "data", _json(record))
 
     @classmethod
@@ -331,5 +376,4 @@ class Answers(_Artifact):
         )
 
     def native_bytes(self) -> bytes:
-        record = self.to_record()
-        return _native(record, TaskSet.from_bytes(_json(record["tasks"])))
+        return self._native_data

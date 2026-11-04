@@ -1,0 +1,107 @@
+{
+  "format": "buddha.c1-interpretation-reuse-delivery.v1",
+  "date": "2026-11-03",
+  "plan_item": "IMP-01",
+  "contract": "DESIGN section9; one local repair selected by the retained-prefix diagnostic",
+  "status": "local_verification_pass_hosted_pending",
+  "source_head_before_documentation": "c3252939ce587f7f04786637498fd85049a62373",
+  "stack_base": "6a65fe945fa570004633962a0ed97d04e4eed389",
+  "implementation_sha256": {
+    "buddha/answers.py": "4c290292adfddcab42a24c2f10fd484c9f2aa684d2435dc20888992bb5ca8837",
+    "buddha/candidate_generation.py": "c1d761ef82d5d522093e17135c2e269a180ca05aa2f0b7ca7ad2746a245fb1d8",
+    "tests/test_answers.py": "8c8249b977bce984570d25da158b1cb872937d3bfee0d00a021e5d488c8a3b06",
+    "tests/test_candidate_generation_outcome.py": "3bf4af2e045278d8beb75a4046e5452cc79f3e822d98b645299d60ca8ba3b520"
+  },
+  "behavior": {
+    "reuse_scope": "one generated-evidence read; same path plus original raw SHA256",
+    "all_output_callers": 3,
+    "all_outcome_callers": 2,
+    "fresh_reads_hashes_joins_and_finish_retained": true,
+    "noncanonical_raw_acceptance_retained": true,
+    "public_records_and_projections_unchanged": true,
+    "immutable_native_bytes": "Retain only the bounded bytes already derived by unchanged constructor validation. One additional derived representation per live Answers; no zero-memory or constant-total-memory claim.",
+    "global_persistent_or_cross_owner_cache": false
+  },
+  "focused_tests": {
+    "total": 55,
+    "failures": 0,
+    "groups": {
+      "answers": 20,
+      "candidate_generation_outcomes": 14,
+      "candidate_generation": 21
+    },
+    "fresh_capture_reads": {
+      "v1": [
+        3,
+        3
+      ],
+      "v2": [
+        5,
+        5
+      ]
+    },
+    "interpretations": {
+      "v1": [
+        2,
+        1
+      ],
+      "v2": [
+        3,
+        1
+      ]
+    },
+    "native_conversions_in_constructor_plus_two_exports": [
+      3,
+      1
+    ],
+    "coverage": [
+      "exact output/native-byte and publication parity",
+      "path and original raw-digest binding",
+      "valid noncanonical JSON",
+      "post-initial-validation and pre-finish changed-file rejection",
+      "mutable-view isolation",
+      "unchanged fresh-read accounting and existing failure behavior"
+    ],
+    "transcript_limit": "Original tool output was later saved as explicitly labeled normalized transcriptions; original process streams were not retained and source pins were collected after tests. No test repeat."
+  },
+  "verification": {
+    "path": "runs/checks/c1-interpretation-reuse-20261103-v1/verification-receipt.json",
+    "sha256": "d5e2c4f8ec634aa4dd3371cc440975d03586c216adbca090de1b276de7ab5ecd"
+  },
+  "configured_quality": {
+    "path": "runs/checks/c1-interpretation-reuse-20261103-v1/configured-quality.json",
+    "sha256": "b80f924cd00ca817d6e7b139a345d00327796a52103246078c0c4d1788db8c13"
+  },
+  "final_composed_quality": {
+    "path": "runs/checks/c1-interpretation-reuse-20261103-v1/final-composed-quality-v1.json",
+    "sha256": "810ef825564333d6d0b76500cda1bf510e78ac24e63d17f530cee89e9d82c744"
+  },
+  "final_composed_source_pins": {
+    "path": "runs/checks/c1-interpretation-reuse-20261103-v1/final-composed-source-pins-v1.json",
+    "sha256": "997fe0140fe64caa273ff228681ee8e3fb0e852ffdc1e2694b633d39aadb19a0"
+  },
+  "composed_quality_limit": "Four configured commands and365in-memory compiles pass at the composed source. Parent finalization stopped on a whole-worktree-clean assertion because concurrent documentation edits were expected; this administrative partial is retained separately. No checks repeated.",
+  "reused_requirements_audits": {
+    "path": "runs/checks/inspect-observer-seam-20261103-v1/full-quality-result-v2.json",
+    "sha256": "32889dd487348097ece43acb2031d0686af46427572d3e8e82bfa00a60f58ceb"
+  },
+  "independent_review": "Read-only static review traced all3output/2outcome callers, raw binding, immutable validation and sensitive tests; no blocker. It did not execute tests/history or measure elapsed speedup.",
+  "effects": {
+    "new_dependencies": false,
+    "retained_history_reads": false,
+    "profile_runs": 0,
+    "provider_calls": 0,
+    "containers": 0,
+    "original_paid_state_access": false,
+    "new_long_construction": false,
+    "paid_execution_cleared": false
+  },
+  "open_gates": [
+    "Measured whole-history elapsed-time improvement",
+    "Valid193-owner/660-operation case reconstructed within900seconds",
+    "Final exact-source hosted/platform checks",
+    "Separately adopted scope/account/reviewer funding and handoff",
+    "Actual controlled scientific comparison and reviews"
+  ],
+  "next": "Prepare a concrete comparable-size attempt on this source for review. The prior one-off three-hour construction allowance is consumed; no new long build, resume, limit extension or optimization chain is selected by this repair."
+}

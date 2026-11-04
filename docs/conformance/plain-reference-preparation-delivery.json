@@ -1,0 +1,110 @@
+{
+  "format": "buddha.plain-reference-preparation-delivery.v1",
+  "status": "configuration_and_request_history_checked_not_funded_or_adopted",
+  "plan_revision": 157,
+  "application_python_changed": false,
+  "bundle": "C:\\Users\\arvik\\code\\buddha\\runs\\plain-reference-preparation-20261025-v1",
+  "file_count": 46,
+  "definition_checks": [
+    {
+      "sampling": "regenerate",
+      "status": "baseline_definition_pass",
+      "tasks": 26,
+      "answer_positions": 260
+    },
+    {
+      "sampling": "in-context",
+      "status": "baseline_definition_pass",
+      "tasks": 26,
+      "answer_positions": 260
+    }
+  ],
+  "generation_source_sha256": "2b87bfe0d3c97ee45db2d45260985ffe0234eca93967f4689fb7c59f82603921",
+  "configurations": {
+    "regenerate": "empty instructions, fresh conversation per answer",
+    "in-context": "empty instructions, literal previous answers and official continuation"
+  },
+  "instrument_and_generator": "same aligned candidate model/release/native profiles; compatible generator remains configurable across separately frozen experiments",
+  "runtime_proof": {
+    "status": "pass",
+    "synthetic_tasks_per_mode": 2,
+    "answers_per_task": 10,
+    "actual_containers": 4,
+    "containers_removed": 4,
+    "fake_http_requests": 40,
+    "real_provider_calls": 0,
+    "low_effort_and_wire4096_on_all": true,
+    "history_lengths_independent": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "history_lengths_in_context": [
+      1,
+      3,
+      5,
+      7,
+      9,
+      11,
+      13,
+      15,
+      17,
+      19
+    ],
+    "history_resets_next_task": true,
+    "resources": "fixture differs from draft descriptor; request/history proof, not prepared-envelope capacity certification"
+  },
+  "independent_review": "bounded pass: all46 hashes, exact final-panel metadata, fixed source/profiles and40 saved requests; no private semantics or provider access",
+  "preserved_initial_refusal": "identical finite producer imported from unapproved checkout path; corrected helper uses approved original path, no guard change or partial overwrite",
+  "budget_and_workload": {
+    "one_reference": {
+      "sets": 26,
+      "answers": 260
+    },
+    "two_references": {
+      "sets": 52,
+      "answers": 520
+    },
+    "nominal_stage_caps_not_allocation_or_quote": true,
+    "actual_reference_allocation": null,
+    "original_150_proposal_or_study_expanded": false,
+    "mandatory_four_condition_run": false
+  },
+  "evidence": {
+    "prepare-plain-references-v1.py": "d6832469e8930a0f0147d54947332689b7102dc79f2aa6d546a82a8748cab8f2",
+    "plain-reference-preparation-v1-refusal.json": "2db2cecc8ac7e5d499914a4bb7596d1f0c2473bff44bb9e4789072a6a70da75b",
+    "prepare-plain-references-v2.py": "e9a3afb4327f7debd7a5adc2cbea9fe293d2b03f4c01b49806c697b028c2d369",
+    "plain-reference-preparation-result-v2.json": "37b50da513f53d229285b911e18c82abc26d7cdf60538fac49570d6ea545f11a",
+    "plain-reference-runtime-probe-v1.py": "094a26945a101f4e327aba272ded1bf9ba6fef772ebd9502a6ae6eba27ec90ef",
+    "plain-reference-runtime-proof-v1.json": "2ba6ba32198b0b47f679efc8d6757485da013d581379a09580f7ee2808b28588",
+    "plain-reference-independent-bounded-review-v1.json": "5fca87d1fb794d2f5726d0aa078a7eefdc7ee2300d2c166ab3f497fc4ae64eae"
+  },
+  "remaining": [
+    "original control bindings before outcomes in both Buddha and reference inputs",
+    "checked passive consumption of original baseline and Buddha evidence and the comparison join",
+    "prospective analysis/review and actual combined scope/resource/price/account/capacity/funding",
+    "exact live handoff and hosted executing-code checks before a live command"
+  ],
+  "limits": {
+    "data_preparation_created_owner_authority_grant": false,
+    "runtime_proof_uses_fresh_synthetic_accounting_only": true,
+    "actual_study_owner_authority_grant_created": false,
+    "actual_keys_or_original_paid_SQL_used": false,
+    "original_P_C_or_private_final_prompts_used_in_runtime": false,
+    "native_judges_or_model_quality_tested_in_runtime": false,
+    "live_command_or_ready_claim": false,
+    "causal_human_generalization_or_improvement_claim": false,
+    "full_suite_or_hosted_pass_claim": false
+  },
+  "scientific_gates_open": [
+    "IMP-01",
+    "EVAL-02"
+  ]
+}

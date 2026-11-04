@@ -4,7 +4,7 @@ The [consolidated living plan](PLAN.md) owns current sequence, status, dependenc
 
 The [replaceable benchmark contract](BENCHMARK-INTEGRATION.md) supplies the confirmed upgrade/retirement boundary: pin a new official evaluator through release configuration, run the existing frozen agent after compatibility/funding checks, then use development results for later self-improvement. Agent treatment, benchmark driver and shared paid gateway have separate identities and responsibilities. Release selection, the funded gateway, frozen answers and native SDK transport seams are implemented at their declared bounds. [Confined full-module LLM partitioning, scoring and summary](CONFINED-NATIVE-EVALUATION.md) now run through that boundary. [Isolated fixed-seed generation](FROZEN-SEED.md#isolated-fixed-seed-generation) now derives source-bound C1 Answers through host-owned accounting; [complete selected native baselines](NATIVE-BASELINE.md) now pass generated-data direct-oracle checks offline; [configuration-only upgrades and retirement](RELEASE-UPGRADES.md) now pass controlled cross-release and actual pinned-official regression checks; the historical v1.1-specific interfaces described below remain frozen evidence, not a universal integration API.
 
-Design date: October 18, 2026; implementation status updated October 22. Slices 1–3 and bounded linked recovery are implemented. The [bounded inherited source-search loop](SOURCE-SEARCH.md) connects one-file proposals, child screening, failure feedback and later inherited mutations. Its supplied-program rehearsal executes real isolated Python with fake model replies; the actual model-authored source experiment, mutation competence and scientific improvement claims remain open. The interrupted first attempt now has a verified linked result reusing its nine replies, while the original missing request stays unknown and held. The fresh restart also completed its one-prompt pilot. Observed score differences do not establish meaningful diversity or general improvement. The latest official code and protocol checked for these experiments, v1.1, are normative; the paper supplies historical context. See [the incident review](FIRST-LIVE-REVIEW.md), [fresh-pilot results](FIRST-LIVE-RESULTS.md), [linked results](LINKED-CONTINUATION-RESULTS.md), and [pilot concerns](PILOT-REVIEW.md). No leaderboard submission has occurred.
+Design date: October 18, 2026; implementation status updated October 22. Slices 1–3 and bounded linked recovery are implemented. The [bounded inherited source-search loop](SOURCE-SEARCH.md) connects one-file proposals, child screening, failure feedback and later inherited mutations. Its supplied-program rehearsal executes real isolated Python with fake model replies. The [first actual model-authored run](SOURCE-FIRST-LIVE-RESULTS.md) now demonstrates three inherited Python descendants and a changed improvement function that authors a further child. The starter leads all three children on both mean official development metrics; broader mutation competence and scientific improvement claims remain open. The interrupted first attempt now has a verified linked result reusing its nine replies, while the original missing request stays unknown and held. The fresh restart also completed its one-prompt pilot. Observed score differences do not establish meaningful diversity or general improvement. The latest official code and protocol checked for these experiments, v1.1, are normative; the paper supplies historical context. See [the incident review](FIRST-LIVE-REVIEW.md), [fresh-pilot results](FIRST-LIVE-RESULTS.md), [linked results](LINKED-CONTINUATION-RESULTS.md), and [pilot concerns](PILOT-REVIEW.md). No leaderboard submission has occurred.
 
 ## 1. Objective and claims
 
@@ -83,7 +83,7 @@ generate(task, config, complete) -> ordered_list_of_answers
 propose_improvement(parent_bundle, development_feedback, config, complete) -> proposal
 ```
 
-The proposal has exactly `source` and `hypothesis` string fields. The [source guide](SOURCE-IMPROVEMENT.md) defines byte ceilings, development custody, materialization, lineage and recovery. The separate [source assessment guide](SOURCE-ASSESSMENT.md) defines how one selected candidate's anchored C1 reaches the existing native evaluator. The [common development screen](SOURCE-SCREEN.md) composes fixed-task native assessment, complete scalar eligibility and guarded exploratory parent selection; its bounded synthetic confined proof and both hosted OS regressions pass. The [verified feedback bridge](SOURCE-FEEDBACK.md) extracts bounded official outcomes and literal C1 excerpts into the unchanged development-note contract, preserving invalid values and explicit omissions. The bounded loop adds checked failed-child history and durable continuation while NoveltyBench 1.1 remains fixed. Formal SRC-03 checks and the IMP-01 effectiveness experiment are not implemented; an actual model-authored source experiment, mutation competence and scientific gains remain open.
+The proposal has exactly `source` and `hypothesis` string fields. The [source guide](SOURCE-IMPROVEMENT.md) defines byte ceilings, development custody, materialization, lineage and recovery. The separate [source assessment guide](SOURCE-ASSESSMENT.md) defines how one selected candidate's anchored C1 reaches the existing native evaluator. The [common development screen](SOURCE-SCREEN.md) composes fixed-task native assessment, complete scalar eligibility and guarded exploratory parent selection; its bounded synthetic confined proof and both hosted OS regressions pass. The [verified feedback bridge](SOURCE-FEEDBACK.md) extracts official outcomes and complete literal C1 outputs into versioned bounded development notes. Prospective full-output packets refuse on capacity rather than truncating; historical prefix packets retain their original interpretation. The concrete full request's model context/output headroom remains a pre-live verification gate. A prospective experiment may instead explicitly adopt [capacity observations from its actual original proposal calls](SOURCE-PROPOSAL-CAPACITY.md), with each returned child blocked until its original request census and full replacement source meet the fixed criteria; future requests have not passed in advance. The bounded loop adds checked failed-child history and durable continuation while NoveltyBench 1.1 remains fixed. The first actual source experiment demonstrates a changed and used inherited improver, with negative development-score results. Formal SRC-03 competence/protected-boundary checks and the IMP-01 effectiveness experiment remain open; the last child's further mutation ability and scientific gains are not established.
 
 `task` contains only `id`, `prompt` and `count`; `config` separately supplies the fixed resources. Improvement receives selected development tasks and reviewed notes, separately from the literal parent bundle. Each answer is a complete independent response to the original prompt. Private plans, candidate lists, probabilities, rationales for selection, and critiques are not automatically appended to answers. An answer to a request for one digit should be one digit.
 
@@ -145,9 +145,9 @@ Archive admission is exploratory and is not a statistical improvement claim. The
 
 or the prespecified symmetric rule for improving distinctiveness. Practical-effect margins, confidence method, familywise error budget, number of validation occasions, and finalist count must be fixed before observation. No numeric effect thresholds are chosen here without a variance pilot and a live budget.
 
-A workable conservative policy is a fixed maximum number of validation occasions with alpha allocated in advance across occasions, finalists and both directional rules. Paired bootstrap intervals are an approximation and should be reported as such; avoid repeatedly peeking at ordinary 95% intervals. If the budget cannot support uncertainty estimates, report an exploratory ranking and no confirmed improvement.
+The implemented first [saved validation analysis](VALIDATION-ANALYSIS.md) uses a prospectively fixed primary axis and a fixed-panel family-Hoeffding bound, allocating error across both metrics and every maximum look/candidate/comparator slot, with separate validation/final portions. Its conditional family-independence and bounded well-defined native-score assumptions are explicit; labels and separate API calls do not prove them. It concerns the exact fixed panel, not unseen-prompt generalization. The earlier paired-bootstrap proposal remains a possible prospectively reviewed alternative; bootstrap intervals are approximate, not the implemented method. Do not select methods or a favorable directional rule after observing scores, or repeatedly peek at ordinary 95% intervals. Unavailable required bounds remain inconclusive. Support-clipped bounds remain valid and explicitly uninformative; any rule satisfaction still concerns only the declared conditional fixed-panel comparison.
 
-Compare whole prompt-level answer sets as the experimental units. Ten answers to one prompt are correlated. Use repeated complete generation sets where affordable and prompt-cluster resampling with fixed seeds. Report subset results and uncertainty separately. Do not compare one candidate's easiest completed rows against another candidate's full dataset.
+Compare whole prompt-level answer sets as the experimental units. Ten answers to one prompt are correlated. Use repeated complete generation sets where affordable. The first analysis averages repetitions within each equally weighted prompt and keeps related prompts in declared family blocks; it takes no extra concentration benefit from repetitions. Prompt-cluster resampling with fixed seeds belongs to the earlier bootstrap proposal, not a second operation required by this method. Report subset results and uncertainty separately. Do not compare one candidate's easiest completed rows against another candidate's full dataset.
 
 ## 7. Data separation and valid comparisons
 
@@ -155,11 +155,22 @@ Freeze deduplication and near-duplicate prompt families before assigning develop
 
 A proposed initial allocation is 60% development, 20% validation, 20% final, separately within each benchmark source. This is approximately 60/20/20 Curated prompts and 600/200/200 WildChat prompts before family grouping. Exact membership is not created until the data preparation slice. Do not publish a supposedly frozen split with placeholder hashes.
 
-Implemented slice 3 scope is narrower: one source per experiment, normalized exact-duplicate groups plus optional explicitly declared families, and deterministic approximately 60/20/20 allocation by group count. It does not implement semantic near-duplicate detection or task/source stratification. That policy development screen takes the first sorted IDs from the frozen development split; it is an engineering screen, not a representative sample. Actual source hashes and every split ID are frozen. The source-code screen takes an explicitly declared ordered development-ID list and checks it against the complete source split; it does not claim representative sampling. Validation/final evaluation and statistical promotion remain unimplemented.
+Implemented slice 3 scope is narrower: one source per experiment, normalized exact-duplicate groups plus optional explicitly declared families, and deterministic approximately 60/20/20 allocation by group count. It does not implement semantic near-duplicate detection or task/source stratification. That policy development screen takes the first sorted IDs from the frozen development split; it is an engineering screen, not a representative sample. Actual source hashes and every split ID are frozen. The source-code screen takes an explicitly declared ordered development-ID list and checks it against the complete source split; it does not claim representative sampling. Limited validation collection and passive conditional rule analysis are now implemented through their separate guides. Semantic-family attestation, full prospective final populations/finalist policy, one-way finalization, actual champion promotion and human/transfer evidence remain open; the original slice-3 screen does not acquire those claims.
 
 The generator necessarily sees its current task during final inference. The improver, long-term memory, proposer, retrieval index, archive feedback, and human optimization decisions must not see final prompts/results through the experiment pipeline. Final evaluation is one-way: return a final report and stop the run.
 
 The benchmark is public. Process separation cannot guarantee that base models have never seen its prompts. If optimizing on a subset, a later full 1,100-prompt score mixes development and held-out data and must disclose that fact. Use a separately authored, sealed transfer set to support generalization beyond NoveltyBench; do not call reworded benchmark items independent transfer.
+
+The user's October 26, 2026 [two-track decision](REVIEW-TRACKS.md) separates
+AI-only evaluation from a parallel AI + human extension on the same frozen
+outputs. AI-only computation, analysis and accurately labeled AI findings
+proceed without waiting for people. The original human sample and criteria
+remain required for human-augmented claims, with missing ratings explicit.
+The project owner is the first selected human reviewer; each human report
+discloses that relationship. Later ratings add
+separate evidence and reports without rewriting the earlier AI-only record or
+official scores. This changes review scheduling and claim scope, not the fixed
+benchmark, analysis, budget or experimental treatment.
 
 Required comparisons, staged to respect budget:
 
@@ -170,6 +181,17 @@ Required comparisons, staged to respect budget:
 | Does keeping stepping stones help? | Latest-only search under the same budget |
 | Does evolving the improver help? | Fixed initial improver with the same archive and task-agent space |
 | Does it transfer? | Frozen finalist on sealed prompts and an independent judgment audit |
+
+For harness added-value claims, use the same generator backbone in plain-model
+and Buddha conditions. The [prospective control specification](PLAIN-MODEL-COMPARISON.md)
+retains independent and in-context sampling as options for both, with matched
+declared resources and separate actual costs. A first comparison can use one
+matched pair and claim only that mode; a full four-condition expansion needs
+its own question and costed scope. Plain controls have no Buddha instructions,
+planning, improvement or selection. Standard generation supports both modes;
+arbitrary evolved source must demonstrate the declared request/history behavior.
+A mode label alone does not establish that behavior. The initial-versus-evolved
+improver comparison is a separate question and does not replace raw controls.
 
 Match inference budgets by model, total billed tokens including reasoning, total calls, candidate generation and selection, and declared output limits. Report search/proposer and judging costs separately, plus total research expenditure. Do not call an expensive scaffold superior to a ten-call raw model without disclosing the resource difference. Novamine's public scores are a contextual target; without its implementation and cost evidence, a matched-budget causal comparison is unresolved.
 
@@ -195,6 +217,17 @@ Use SQLite transactions and append-only run events for the first local implement
 
 Read credentials only in the broker from the selected secret source. Do not print or persist raw keys. If key identity must be audited, use a keyed one-way fingerprint, with the fingerprinting secret outside artifacts. Redact credentials and personal data from structured logs; retain only necessary source text under user-controlled local storage.
 
+The prospective source path uses explicitly tagged account-review v2: HMAC-SHA256
+with the locally supplied API key as its secret and a provider/context-separated
+message. The caller must bind that context to the approved launch configuration.
+No additional secret is required. Historical implicit v1 reviews retain their
+original SHA256 semantics and frozen execution identities. Fingerprints do not
+attest account settings or authorize spending. [The keyed-review contract](KEYED-REVIEWS.md)
+records the exact construction, scope and recovery behavior.
+The [protected source launcher](SOURCE-LAUNCH.md) binds v2 fingerprints to the
+trusted raw launch hash and checks original owners before key entry. Its
+existence does not allocate funds or establish full-experiment readiness.
+
 ## 10. Source-execution boundary
 
 The [source runtime](SOURCE-RUNTIME.md), [candidate model channel](SOURCE-CANDIDATES.md) and [inherited proposal route](SOURCE-IMPROVEMENT.md) pass their declared confinement and accounting checks, including actual containers. Selected agent source executes only through that pinned runtime, never in the host Python process. These bounded checks do not establish protection against every host/kernel exploit or authorize other execution paths.
@@ -213,7 +246,7 @@ Working-directory restrictions, Python subprocesses, source allowlists, AST chec
 | Long rationales inflate diversity or utility | Strict task-form checks and binary/single-digit counterexamples |
 | Judge order/model/prompt drift | Explicit protocol identity; order-sensitivity audit; no cache reuse |
 | Missing/refused rows flatter the mean | Complete expected-ID and prompt-hash coverage before promotion |
-| Search exploits official judge | Independent frozen audit instrument and human sample; disclose divergence |
+| Search exploits official judge | Separate frozen AI audit for the AI-only track; actual blinded human sample for human-augmented claims. Disclose reviewer relationships, coverage and divergence. |
 | Validation becomes training | Limited validation occasions and separate finalization controller |
 | “Better” only means more calls | Matched inference budget and total research-cost accounting |
 | Source mutation destroys improver | Mutation competence suite plus controlled improver experiment |

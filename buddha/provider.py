@@ -344,6 +344,12 @@ class HTTPTransport:
 
     def send_prepared(self, prepared: PreparedHTTP) -> Reply:
         """Transmit once; its owner closes the prepared connection on every exit."""
+        from buddha.gateway import _contains_secret, _secrets
+
+        headers = dict(prepared.headers)
+        secrets = _secrets(
+            headers.get("Authorization", "").removeprefix("Bearer ") or headers.get("x-api-key", "")
+        )
         connection = prepared.connection
         try:
             connection.request(
@@ -353,10 +359,15 @@ class HTTPTransport:
             raw = response.read(16 * 1024 * 1024 + 1)
             if response.status != 200 or len(raw) > 16 * 1024 * 1024:
                 raise ProviderUncertain("provider response cannot be reconciled")
-            envelope = _json(raw.decode("utf-8"))
             request_id = response.getheader(
                 "x-request-id" if prepared.provider == "openai" else "request-id"
             )
+            if any(
+                _contains_secret(raw, key) or _contains_secret((request_id or "").encode(), key)
+                for key in secrets
+            ):
+                raise ProviderUncertain("provider response cannot be retained safely")
+            envelope = _json(raw.decode("utf-8"))
             return self._reply(prepared.provider, envelope, request_id or "")
         except Exception:
             raise ProviderUncertain("provider response cannot be reconciled") from None
@@ -477,10 +488,18 @@ class BudgetBroker:
                     raise
                 raise ProviderUncertain("dispatched operation has an uncertain outcome") from None
             expected_tier = {"openai": "default", "anthropic": "standard"}.get(call.spec.provider)
+            actual = call.spec.cost_microusd(result.input_tokens, result.output_tokens)
             if (
                 result.model != call.spec.model
                 or not result.provider_request_id
                 or (expected_tier and result.service_tier and result.service_tier != expected_tier)
+                or (
+                    actual <= call.spec.reserve_microusd()
+                    and (
+                        result.input_tokens > call.spec.input_token_ceiling
+                        or result.output_tokens > call.spec.max_output_tokens
+                    )
+                )
             ):
                 self.ledger.mark_unknown(
                     operation_id,
@@ -488,13 +507,13 @@ class BudgetBroker:
                     provider_request_id=result.provider_request_id or None,
                 )
                 raise BoundBreach(
-                    "provider identity or pricing tier is uncertain; "
+                    "provider identity, pricing tier or token bounds are uncertain; "
                     "receipt and reservation retained"
                 )
             self.ledger.complete(
                 operation_id,
                 response=result.to_record(),
-                actual_microusd=call.spec.cost_microusd(result.input_tokens, result.output_tokens),
+                actual_microusd=actual,
                 provider_request_id=result.provider_request_id,
             )
             self._bounds(call, result)

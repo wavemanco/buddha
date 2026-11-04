@@ -1,0 +1,120 @@
+{
+  "format": "buddha.source-capacity-funded-handoff.v1",
+  "date": "2026-10-23",
+  "status": "ready_for_user_started_one_request_observation",
+  "scope": "One OpenAI request with complete retained feedback; returned Python remains text. No generation, judging, search, adoption or code execution.",
+  "approval": {
+    "record": "docs/conformance/src02-capacity-approval.json",
+    "user_reply": "Approve $7 / one attempt; partial results allowed"
+  },
+  "handoff": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-capacity-20261023-handoff-v1\\handoff.json",
+    "sha256": "e1b0bf24be746447549786eefa1c73a97da3f7f59dbb3f1bbc27541639a3d0ba"
+  },
+  "executing_code_commit": "61ce094bd2ebbc0bef1f240586034fabe09a6760",
+  "hosted_checks": [
+    {
+      "name": "checks (ubuntu-latest)",
+      "conclusion": "SUCCESS",
+      "completed_at": "2026-10-23T18:58:36Z",
+      "url": "https://github.com/wavemanco/buddha/actions/runs/40004144466/job/120587627348"
+    },
+    {
+      "name": "checks (windows-latest)",
+      "conclusion": "SUCCESS",
+      "completed_at": "2026-10-23T21:49:28Z",
+      "url": "https://github.com/wavemanco/buddha/actions/runs/40004144466/job/120587627225"
+    }
+  ],
+  "executing_byte_identity": {
+    "bundle_code_commit": "3848ac964cf49aafb35ef2bb79253867e1a8f89a",
+    "ci_commit": "61ce094bd2ebbc0bef1f240586034fabe09a6760",
+    "changed_paths": [
+      "docs/CI-STACK-REPAIR.md",
+      "tests/test_history_path_compat.py"
+    ],
+    "copied_code_pins_equal_ci_commit": 71
+  },
+  "authority_at_prelaunch_checkpoint": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-capacity-20261023-handoff-v1\\authorization.sqlite3",
+    "sha256": "e3e730f11ff894dee331df996e18f522cf47e331b9f47be4caae82cda67af101",
+    "terms": {
+      "authorization_id": "src02-capacity-20261023-v1",
+      "budget_microusd": 7000000,
+      "currency": "USD",
+      "max_calls": 1,
+      "scope": "source capacity: 7c995d967a6fb6977571c1936482624bd51da1c1e60c41f9b2f1386c2e321a0a",
+      "terms_sha256": "e516c106cdeda029b1ae757c954da520be8f07b6414a2d02d682edc20edc55cf"
+    },
+    "totals": {
+      "committed_microusd": 0,
+      "operation_count": 0,
+      "reserved_microusd": 0,
+      "spent_microusd": 0
+    },
+    "owners": 0
+  },
+  "reserve_microusd": 6315672,
+  "cap_slack_microusd": 684328,
+  "preflight": {
+    "format": "buddha.source-capacity-check.v1",
+    "state": "fresh",
+    "stop_code": null,
+    "request_sha256": "e258ae8166c518ccd8e8a799139e35c7fa609b74fe10fcba0c8c23d1e401a838",
+    "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-capacity-20261023-live-v1",
+    "source_pin_count": 74
+  },
+  "copied_cli_keyless_check": {
+    "argv": [
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-capacity-20261023-handoff-v1\\code\\docs\\conformance\\src02-capacity-run.py",
+      "--handoff",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-capacity-20261023-handoff-v1\\handoff.json",
+      "--expected-sha256",
+      "e1b0bf24be746447549786eefa1c73a97da3f7f59dbb3f1bbc27541639a3d0ba"
+    ],
+    "isolated_python": true,
+    "no_bytecode": true,
+    "exit_code": 1,
+    "result": {
+      "format": "buddha.source-capacity-check.v1",
+      "status": "ready"
+    }
+  },
+  "operator_guide": "docs/SOURCE-CAPACITY-LIVE.md",
+  "evidence": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\capacity-funded-preflight-v1.json",
+      "sha256": "bdfb2468c277262ebd82116426a5b5792f7f396efebc17e076ad7f2a80400a2c"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\capacity-funded-ci-v1.json",
+      "sha256": "e9a24c560715763fd70cf68a9f20f87b9101ea88cf4b444886c2d6cdd256b98f"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\capacity-external-postfund-review-v1.json",
+      "sha256": "4d1077019c4460d2b9952a0e61b53fcf5cea8cde786370b8f3728954702be9bd"
+    }
+  ],
+  "independent_review": {
+    "verdict": "SCOPED_PASS_FUNDED_FRESH_READY_NO_CALLS",
+    "blockers": [],
+    "both_exact_jobs_success": true,
+    "actual_authority_memory_only_verified": true
+  },
+  "preservation": {
+    "original_input_files_unchanged": 93,
+    "frozen_source_pins_unchanged": 73,
+    "keys_read": false,
+    "provider_calls": 0,
+    "owners": 0,
+    "costs_and_holds_zero": true,
+    "future_run_directory_absent": true
+  },
+  "limits": [
+    "This is readiness and funding evidence, not an actual token/output-capacity measurement or proof of source evolution or improvement.",
+    "Keyless CLI stdout was parsed and asserted; no verbatim stdout transcript was retained. The independent reviewer checked the saved joins and static early-return path without rerunning the application.",
+    "Both hosted passes bind the exact executing code above. Later documentation commits do not replace the immutable local executing copy.",
+    "Historical approval/proposal and unfunded checkpoint remain unchanged. No earlier allocation or paid owner is altered.",
+    "Actual completion, negative or partial outcome retains its stage/reason/evidence/costs/holds. No automatic second attempt is authorized."
+  ]
+}

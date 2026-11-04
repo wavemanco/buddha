@@ -1,0 +1,210 @@
+{
+  "format": "buddha.comparative-feedback-delivery.v1",
+  "date": "2026-10-24",
+  "work_item": "IMP1-FB-01",
+  "base_commit": "69d0159a17e0a66ff2520e5f21e0e048e04d07a4",
+  "claim": "Opt-in complete immediate-parent comparison reaches the existing protected proposal channel. No effectiveness, causal attribution, full-suite or hosted-CI pass is asserted.",
+  "implemented": {
+    "api": "Optional comparison={parent,proposal,screen} on build_source_feedback/write_source_feedback. screen equals the current reference. No comparison preserves the original policy.",
+    "formats": {
+      "host_provenance": "buddha.source-screen-feedback.v6",
+      "worker_packet": "buddha.candidate-development-feedback.v2",
+      "base_provenance": [
+        "v3",
+        "v4",
+        "v5"
+      ]
+    },
+    "evidence": "Both full literal answer sets, unchanged official measurements and diagnostics, actual proposal hypothesis, independent current-minus-parent metric availability, signed original task owner costs and separate proposal cost.",
+    "custody": "Exact original proposal, returned child bytes, lineage and measured parent occasion; common source/split/ordered typed tasks/comparison settings/controls/shared authority and terms. Frozen actor is bound to the original detached proposal and next consumer.",
+    "bounded_observation": "Cycle refusal, sixteen nested comparisons and sixty-four edge checks per request-local observation. Complete note, escaped feedback, full task projection and host bundle ceilings remain enforced before publication.",
+    "publication": "Retained data-only screen and proposal captures are rechecked through the writer's trial-fence boundary. The optional proposal capture sink follows the existing screen sink pattern; retired installed helper files are not reopened.",
+    "compatibility": "Current base failure notes remain whole. Legacy v1-v5 derivations, worker protocol, ordinary controller defaults and official evaluator are unchanged."
+  },
+  "source_sha256": {
+    "buddha/source_feedback.py": "c33078bdc842b235c89b727b7d9289ea066dc915ba006f1cd1b78b0ce8ddcdb5",
+    "buddha/candidate_improvement.py": "223d5c9e92585892e4cb30114d0fb3c5c4369f75274ed63c8b88590fe98f7fab",
+    "buddha/candidate_improvement_results.py": "6e31de376ec6043334a27996d07d57c58d9b5767becaaf99e107fa20ea2d3a3f"
+  },
+  "new_focused_verification": [
+    {
+      "file": "tests/test_source_comparison_feedback.py",
+      "sha256": "dd3ee752c0b4102a7285b29b5630578f209facd293e783a4e8345536891bbaf9",
+      "tests": 9,
+      "seconds": 464.211,
+      "exit_code": 0,
+      "coverage": [
+        "Actual protected next-worker notes and original owner input pins",
+        "Strict passive inspection and keyless completed replay with unchanged sends/accounting",
+        "Independent unavailable utility, valid distinct/cost and exact negative/zero deltas",
+        "Same-source different parent occasion and genuine changed external controls refusal",
+        "Forged scalar/provenance rehash refusal",
+        "Genuine aggregate full-output capacity refusal before mkdir",
+        "Recursion and edge-budget refusal, context reset and fresh genuine build",
+        "Retired synthetic parent agent/runner replay",
+        "Late original proposal completion-seal/owner-ledger drift refusal before publication"
+      ]
+    },
+    {
+      "file": "tests/test_source_comparison_feedback_boundaries.py",
+      "sha256": "85caa24f7a76d4d3b75d4db9f62463e01bc27834c764d4e3d87defe13d2bac67",
+      "tests": 1,
+      "seconds": 249.231,
+      "exit_code": 0,
+      "coverage": [
+        "Genuine fixed-actor v6 over empty-history v3 and retained-failure v5",
+        "Complete parent/current outputs and full failed source/hypothesis",
+        "Actual same-actor next protected proposals and passive replay",
+        "Different actor rejected before owner creation",
+        "Missing/wrong actor rejected; original evidence preserved separately from mutable shared authority"
+      ]
+    },
+    {
+      "file": "tests/test_source_comparison_history.py",
+      "sha256": "b173e5e8c250bdc5087cf170a583ca700a85c4270b9ddb6391ab802339d89053",
+      "tests": 2,
+      "seconds": 142.775,
+      "exit_code": 0,
+      "coverage": [
+        "Genuine v6-consuming original failed proposal inside a later v6/v4 comparison",
+        "Complete inherited failure history and both full answer sets, exact base hash and passive replay",
+        "Public sixteen-level ceiling refuses before evidence reads and releases request-local context"
+      ]
+    }
+  ],
+  "verification_limits": "Separate supplied-worker/HTTPS cohorts establish custody, arithmetic, transport and reconstruction. They do not rerun real container confinement, measure creative performance or prove a future provider request fits its token context.",
+  "earlier_checks": [
+    {
+      "scope": "Initial opt-in API RED",
+      "tests": 1,
+      "seconds": 0.005,
+      "result": "TypeError: unsupported comparison keyword, before production implementation"
+    },
+    {
+      "scope": "Pre-capture-fix existing source feedback cohort",
+      "tests": 13,
+      "seconds": 209.312,
+      "exit_code": 0
+    },
+    {
+      "scope": "Pre-capture-fix existing failure feedback cohort",
+      "tests": 6,
+      "seconds": 194.516,
+      "exit_code": 0
+    },
+    {
+      "scope": "Initial inherited-history positive without nested v6 ancestry",
+      "tests": 1,
+      "seconds": 82.808,
+      "exit_code": 0
+    },
+    {
+      "scope": "Intermediate comparison cohorts",
+      "result": "Interrupted, incomplete; no full pass claimed. Observed API/capacity passes retained. An unprinted positive FAIL is not assigned a cause."
+    },
+    {
+      "scope": "Isolated positive lifecycle",
+      "seconds": 88.269,
+      "result": "Test guard incorrectly forbade the completed controller's existing original-authority reader. Strict passive inspection was separated from keyless replay; no production weakening."
+    },
+    {
+      "scope": "First fixed-actor boundary",
+      "seconds": 91.623,
+      "result": "Test proposed identical child source; intended rejection. Fixed fixture returns distinct subsequent source."
+    },
+    {
+      "scope": "Second fixed-actor boundary",
+      "seconds": 116.587,
+      "result": "Test treated legitimately mutable shared authority bytes as immutable original evidence. Corrected scope keeps predecessor owner evidence strict and accounting checks separate."
+    }
+  ],
+  "review": {
+    "kind": "Fresh-context static review; no API calls or source edits by reviewer.",
+    "findings_fixed": [
+      "Blanket original-input reads would have reopened retired helpers; removed in favor of original passive capture.",
+      "Original proposal owner/seal evidence was not retained through publication; optional bounded capture sink added."
+    ],
+    "final_result": "No further actionable correctness issue found in the final static pass. Dynamic adversarial checks cover both fixes."
+  },
+  "quality_checks": [
+    {
+      "command": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-tools-20261024-v1\\Scripts\\python.exe -m ruff check buddha tests agents ci_test_shard.py",
+      "exit_code": 0,
+      "status": "passed"
+    },
+    {
+      "command": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-tools-20261024-v1\\Scripts\\python.exe -m ruff format --check buddha tests agents ci_test_shard.py",
+      "exit_code": 0,
+      "status": "passed"
+    },
+    {
+      "command": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-tools-20261024-v1\\Scripts\\python.exe -m mypy --strict buddha agents ci_test_shard.py",
+      "exit_code": 0,
+      "status": "passed"
+    },
+    {
+      "command": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-tools-20261024-v1\\Scripts\\python.exe -m bandit -r buddha agents ci_test_shard.py",
+      "exit_code": 0,
+      "status": "passed"
+    },
+    {
+      "command": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-tools-20261024-v1\\Scripts\\python.exe -m pip_audit --disable-pip --no-deps --strict -r requirements-dev.txt",
+      "exit_code": 0,
+      "status": "passed"
+    },
+    {
+      "command": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-tools-20261024-v1\\Scripts\\python.exe -m pip_audit --no-deps -r requirements.txt",
+      "exit_code": 0,
+      "status": "passed",
+      "note": "Completion separately observed: No known vulnerabilities found."
+    },
+    {
+      "command": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\dev-tools-20261024-v1\\Scripts\\python.exe -m compileall -q buddha tests agents ci_test_shard.py",
+      "exit_code": 0,
+      "status": "passed"
+    }
+  ],
+  "unchanged_trusted_definitions": [
+    "source_feedback._bounded_json",
+    "source_feedback._sha",
+    "source_feedback._list",
+    "source_feedback._amount",
+    "source_feedback._prefix",
+    "source_feedback._destination",
+    "source_feedback._build",
+    "source_feedback._packet_files"
+  ],
+  "ci_inventory": {
+    "observed_only": true,
+    "total_occurrences": 1852,
+    "previous_occurrences": 1840,
+    "new_occurrences": 12,
+    "shard_counts": [
+      1,
+      625,
+      612,
+      614
+    ],
+    "census_sha256": "fffe8ecd7c735c5a6a8f7f9c05686c1d8f45fd5c1b6273b40d3327024ff5d98d",
+    "hosted_status": "Pending publication; no current full hosted-suite pass asserted.",
+    "idle_rule": "Existing sixty minutes without genuine test progress remains unchanged."
+  },
+  "historical_evidence": {
+    "captured_file_count": 451,
+    "unchanged": true,
+    "source_evidence_sha256": "a00f60b16894b5ac725564e920ef0f27cc9f6f9ffdf3d2600f32a2888f674017",
+    "comparison_file": "comparative-feedback-source-preservation-v1.json"
+  },
+  "remaining": [
+    "Versioned source-search/study integration, including explicit root/no-parent state and own-cell edge derivation",
+    "Prospective concrete IMP-01 treatment/grid/resource/uncertainty/review adoption and funding feasibility",
+    "Exact future request context/output capacity verification and separately approved live allocation",
+    "Controlled effectiveness and sealed independent EVAL-02 evidence"
+  ],
+  "paid_api_calls": 0,
+  "live_spending_authorizations_created": 0,
+  "test_authorities": "Temporary supplied-response fixtures create their own synthetic authorities and owner ledgers; no live allocation is created.",
+  "original_runs_mutated": false,
+  "benchmark_changes": false,
+  "development_prs_merged": false
+}

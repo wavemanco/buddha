@@ -673,8 +673,7 @@ def inspect_prepared_study(
                 directory
             ).as_posix() in reader.capture.entries:
                 source = _read_generation(reader.generation_reference(base), authorization)
-                for source_path, digest in source.files.items():
-                    reader.raw(source_path, digest)
+                reader.verify_files(source.files)
                 answers_path = source.answers_path
                 native = child / "native-answers.jsonl"
                 if native.relative_to(directory).as_posix() in reader.capture.entries:
@@ -941,7 +940,7 @@ def _analyze(
         planned_owner_count,
         fallback_model,
     )
-    reader.capture.finish()
+    fingerprints = reader.fingerprints()
     return {
         "format": "buddha.policy-results.v1",
         "publication_status": "complete" if complete else "incomplete",
@@ -953,8 +952,8 @@ def _analyze(
             "release_sha256": reader.release.fingerprint(),
             "original_control_hashes": reader.controls,
             "publication": str(publication),
-            "publication_sha256": _sha(reader.capture.raw[publication]),
-            "consumed_files": {str(path): _sha(raw) for path, raw in reader.capture.raw.items()},
+            "publication_sha256": fingerprints[str(publication)],
+            "consumed_files": fingerprints,
             "occasions": provenance,
             "owners": owner_rows,
         },
@@ -997,8 +996,7 @@ def _child(
         or source.tasks.fingerprint() != study.tasks.fingerprint()
     ):
         raise PolicyResultsError("occasion uses another cell generation")
-    for path, digest in source.files.items():
-        reader.raw(path, digest)
+    reader.verify_files(source.files)
     child = base if j == 0 else reader.root / "cells" / str(i) / "judgments" / str(j)
     expected_occasion = _rows(cell["judge_occasions"])[j]
     if not _same({k: occasion[k] for k in ("index", "occasion_id")}, expected_occasion) or occasion[

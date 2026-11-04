@@ -1,0 +1,544 @@
+{
+  "format": "buddha.fresh-request-observations-delivery.v1",
+  "date": "2026-11-02",
+  "status": "scoped_synthetic_container_observations_passed_no_live_clearance",
+  "spec": [
+    "DESIGN \u00a7\u00a73/5/7/9/10",
+    "PLAN IMP-01 request/runtime subchecks"
+  ],
+  "base_head": "cc3df32644420405ba59b83c19acfd7e1f07959b",
+  "documentation_only": true,
+  "source_agents": {
+    "result": {
+      "path": "C:/Users/arvik/code/buddha/runs/checks/fresh-candidate-requests-20261102-v1/candidate-requests-result-v2.json",
+      "sha256": "44c8b94159ae8d483ec4a662a6ea3169e27080ba8538e48609fd4bc59e426bf5"
+    },
+    "parent": {
+      "path": "C:/Users/arvik/code/buddha/runs/checks/fresh-candidate-requests-20261102-v1/parent-result-v2.json",
+      "sha256": "c1dc5c9f0f61b8c7f405b0bb68ebb865a7e627ebc07600be8064aa5193ca7212"
+    },
+    "parent_seconds": 9.351006699958816,
+    "parent_exit_code": 0,
+    "child_joined": true,
+    "credential_environment_forwarded": false,
+    "executed_diagnostic_sha256": "2a90496b22d969d02fe5a997f2bd8d62ba76cb9e6b84850b06a51764e7c289b2",
+    "diagnostic_source_preserved": true,
+    "bound_inputs_preserved": true,
+    "public_source_pin_count": 360,
+    "public_source_pins_preserved": true,
+    "actual_provider_calls": 0,
+    "settings": {
+      "model": "gpt-5.6-luna",
+      "reasoning_effort": "low",
+      "max_completion_tokens": 4096,
+      "service_tier": "default"
+    },
+    "actors": [
+      {
+        "role": "P",
+        "actor_sha256": "77cfa68f6b3c6996fd503e1ce6f7a964eb57abdb8bde98f6761de5f6e298ff4f",
+        "answer_count": 10,
+        "calls": {
+          "completed": 10,
+          "requested": 10,
+          "stopped": 0
+        },
+        "mock_http_count": 10,
+        "settings_match": true,
+        "wire_proof": true,
+        "exit_code": 0,
+        "cleanup_status": "removed",
+        "fixture_cleanup_completed": true
+      },
+      {
+        "role": "C",
+        "actor_sha256": "4196cd29ffa76c6959e6f678a8286b1fde5b56e6a34a97dcf68787e1f22b3a43",
+        "answer_count": 10,
+        "calls": {
+          "completed": 11,
+          "requested": 11,
+          "stopped": 0
+        },
+        "mock_http_count": 11,
+        "settings_match": true,
+        "wire_proof": true,
+        "exit_code": 0,
+        "cleanup_status": "removed",
+        "fixture_cleanup_completed": true
+      }
+    ],
+    "configured_limits": {
+      "cpus": 1,
+      "max_frames": 100000,
+      "max_stderr_bytes": 65536,
+      "max_stdout_bytes": 33554432,
+      "memory_mib": 256,
+      "pids": 64,
+      "scratch_mib": 64,
+      "wall_seconds": 900
+    },
+    "observed_diagnostic_limits": {
+      "cpus": 1,
+      "max_frames": 100000,
+      "max_stderr_bytes": 65536,
+      "max_stdout_bytes": 33554432,
+      "memory_mib": 256,
+      "pids": 64,
+      "scratch_mib": 64,
+      "wall_seconds": 180
+    },
+    "outer_hard_deadline_imposed": false,
+    "host_program_handling": "Ordinary constructor UTF-8 validation; actor compilation/execution occurs only in the container. Prior copy/hash-only wording is inaccurate.",
+    "accounting": "Synthetic virtual accounting only; no actual provider charges or fresh allocation.",
+    "model_request_route": "Actor builds the request; normal host Gateway supplies the captured mocked HTTP boundary. Native observation uses the worker exchange boundary, not a Gateway HTTP send."
+  },
+  "installed_native": {
+    "result": {
+      "path": "C:/Users/arvik/code/buddha/runs/checks/fresh-native-wire-20261102-v1/native-wire-result-v1.json",
+      "sha256": "0550071418b88235300fd23764955224d7c988914c21f3b3e63402be2d64498a"
+    },
+    "parent": {
+      "path": "C:/Users/arvik/code/buddha/runs/checks/fresh-native-wire-20261102-v1/parent-result-v1.json",
+      "sha256": "ccb9e58ed5e9d8bb8c0441da46ae624711d5c3fa8fe1b207fdbdeff37e2f2a7b"
+    },
+    "parent_seconds": 124.8421199999284,
+    "child_seconds": 124.3990925999824,
+    "parent_exit_code": 0,
+    "child_joined": true,
+    "credential_environment_forwarded": false,
+    "executed_diagnostic_sha256": "1485ff174328671e40599e0c2ac4bb79975f61de077fa2615dd5bf7ed31fe6d1",
+    "diagnostic_source_preserved": true,
+    "public_source_pin_count": 360,
+    "public_source_pins_preserved": true,
+    "bound_inputs_preserved": true,
+    "actual_provider_calls": 0,
+    "accounting_owners_or_grants": 0,
+    "evaluator": "Unchanged pinned NoveltyBench1.1 (64a23be6b18ec1dacc298830aab276061b6e143c); no benchmark/source/settings changes.",
+    "anchor": "Synthetic generation-file hash only; not C1 owner/session evidence.",
+    "selected_dataset_scope": "Ordinary byte-inventory validation allowed; no dataset as task input or chat output. Every SDK request requires the synthetic prompt marker.",
+    "configured_limits": {
+      "cpus": 1,
+      "max_frames": 100000,
+      "max_stderr_bytes": 65536,
+      "max_stdout_bytes": 134217728,
+      "memory_mib": 2048,
+      "pids": 64,
+      "scratch_mib": 128,
+      "wall_seconds": 1800
+    },
+    "observed_diagnostic_limits": {
+      "cpus": 1,
+      "max_frames": 100000,
+      "max_stderr_bytes": 65536,
+      "max_stdout_bytes": 134217728,
+      "memory_mib": 2048,
+      "pids": 64,
+      "scratch_mib": 128,
+      "wall_seconds": 180
+    },
+    "outer_hard_deadline_imposed": false,
+    "stages": [
+      {
+        "label": "partition",
+        "evidence": {
+          "path": "C:/Users/arvik/code/buddha/runs/checks/fresh-native-wire-20261102-v1/partition-observation-v1.json",
+          "sha256": "392b97ad0d86bccad8e52344125c4f6e49ed1f86821dfd77224864b187e6b91b",
+          "bytes": 2339012
+        },
+        "evidence_hash_matches_compact_result": true,
+        "response_mode": "valid",
+        "stage_index": 1,
+        "calls": [
+          {
+            "provider": "openai",
+            "model": "gpt-5.6-luna",
+            "profile_id": "grouping",
+            "field_names": [
+              "messages",
+              "model",
+              "response_format",
+              "stream"
+            ],
+            "safe_settings": {
+              "model": "gpt-5.6-luna",
+              "stream": false
+            },
+            "body_sha256": "4e1fd6de94b6bc918d149b2fa02df30ae41ac85920b9f2eccb59ec1dde576061"
+          }
+        ],
+        "completion": [
+          {
+            "status": "complete",
+            "reason": "complete"
+          }
+        ],
+        "artifact_names": [
+          "generations.jsonl",
+          "v1.1/partitions.jsonl"
+        ],
+        "exit_code": 0,
+        "cleanup_status": "removed"
+      },
+      {
+        "label": "score-valid",
+        "evidence": {
+          "path": "C:/Users/arvik/code/buddha/runs/checks/fresh-native-wire-20261102-v1/score-valid-observation-v1.json",
+          "sha256": "a745d7e0fbde9510ba3b4137a648b741053c6ae00eeb2e0c06c3d1f018243b78",
+          "bytes": 2282582
+        },
+        "evidence_hash_matches_compact_result": true,
+        "response_mode": "valid",
+        "stage_index": 2,
+        "calls": [
+          {
+            "provider": "anthropic",
+            "model": "claude-opus-5",
+            "profile_id": "quality",
+            "field_names": [
+              "max_tokens",
+              "messages",
+              "model",
+              "output_config",
+              "system",
+              "thinking"
+            ],
+            "safe_settings": {
+              "max_tokens": 16000,
+              "model": "claude-opus-5",
+              "output_config.effort": "high",
+              "thinking.type": "adaptive"
+            },
+            "body_sha256": "c56e4787e482e30755121b26767bafa9a558b2ee30277dd1ce1722e2803bc7a9"
+          }
+        ],
+        "completion": [
+          {
+            "status": "complete",
+            "reason": "complete"
+          }
+        ],
+        "artifact_names": [
+          "v1.1/partitions.jsonl",
+          "v1.1/scores.jsonl"
+        ],
+        "exit_code": 0,
+        "cleanup_status": "removed"
+      },
+      {
+        "label": "summary-valid",
+        "evidence": {
+          "path": "C:/Users/arvik/code/buddha/runs/checks/fresh-native-wire-20261102-v1/summary-valid-observation-v1.json",
+          "sha256": "b6a41dc6874d38930af20522666bd921b399884b8f5b763478928e8fc43e86e6",
+          "bytes": 2282017
+        },
+        "evidence_hash_matches_compact_result": true,
+        "response_mode": "valid",
+        "stage_index": 3,
+        "calls": [],
+        "completion": [
+          {
+            "status": "complete",
+            "reason": "complete"
+          }
+        ],
+        "artifact_names": [
+          "v1.1/scores.jsonl",
+          "v1.1/summary.json"
+        ],
+        "exit_code": 0,
+        "cleanup_status": "removed"
+      },
+      {
+        "label": "score-refusal",
+        "evidence": {
+          "path": "C:/Users/arvik/code/buddha/runs/checks/fresh-native-wire-20261102-v1/score-refusal-observation-v1.json",
+          "sha256": "99cfffb5499a648e1f97d7d5be5c274a603bb34c129b034a47127286186a206e",
+          "bytes": 2282959
+        },
+        "evidence_hash_matches_compact_result": true,
+        "response_mode": "refusal",
+        "stage_index": 2,
+        "calls": [
+          {
+            "provider": "anthropic",
+            "model": "claude-opus-5",
+            "profile_id": "quality",
+            "field_names": [
+              "max_tokens",
+              "messages",
+              "model",
+              "output_config",
+              "system",
+              "thinking"
+            ],
+            "safe_settings": {
+              "max_tokens": 16000,
+              "model": "claude-opus-5",
+              "output_config.effort": "high",
+              "thinking.type": "adaptive"
+            },
+            "body_sha256": "c56e4787e482e30755121b26767bafa9a558b2ee30277dd1ce1722e2803bc7a9"
+          },
+          {
+            "provider": "anthropic",
+            "model": "claude-sonnet-5",
+            "profile_id": "fallback",
+            "field_names": [
+              "max_tokens",
+              "messages",
+              "model",
+              "output_config",
+              "system",
+              "thinking"
+            ],
+            "safe_settings": {
+              "max_tokens": 16000,
+              "model": "claude-sonnet-5",
+              "output_config.effort": "high",
+              "thinking.type": "adaptive"
+            },
+            "body_sha256": "402dc6de2d84d83ae2234a950093bd7c73656ae423b9f488b0a2b430f7b42f93"
+          }
+        ],
+        "completion": [
+          {
+            "status": "complete",
+            "reason": "complete"
+          }
+        ],
+        "artifact_names": [
+          "v1.1/partitions.jsonl",
+          "v1.1/scores.jsonl"
+        ],
+        "exit_code": 0,
+        "cleanup_status": "removed"
+      },
+      {
+        "label": "score-length-control",
+        "evidence": {
+          "path": "C:/Users/arvik/code/buddha/runs/checks/fresh-native-wire-20261102-v1/score-length-control-observation-v1.json",
+          "sha256": "66b9416426a102c808edea84138776f8e481182376d162feaa7482710beb5489",
+          "bytes": 2282621
+        },
+        "evidence_hash_matches_compact_result": true,
+        "response_mode": "length",
+        "stage_index": 2,
+        "calls": [
+          {
+            "provider": "anthropic",
+            "model": "claude-opus-5",
+            "profile_id": "quality",
+            "field_names": [
+              "max_tokens",
+              "messages",
+              "model",
+              "output_config",
+              "system",
+              "thinking"
+            ],
+            "safe_settings": {
+              "max_tokens": 16000,
+              "model": "claude-opus-5",
+              "output_config.effort": "high",
+              "thinking.type": "adaptive"
+            },
+            "body_sha256": "c56e4787e482e30755121b26767bafa9a558b2ee30277dd1ce1722e2803bc7a9"
+          }
+        ],
+        "completion": [
+          {
+            "status": "failed",
+            "reason": "native_error"
+          }
+        ],
+        "artifact_names": [
+          "v1.1/partitions.jsonl",
+          "v1.1/scores.jsonl.partial"
+        ],
+        "exit_code": 0,
+        "cleanup_status": "removed"
+      }
+    ],
+    "expected_negative": "Non-refusal length control reports failed/native_error, retains scores.jsonl.partial and makes one Opus call with no Sonnet fallback. Process exit0 does not mean utility assessment succeeded.",
+    "composition_scope": "Native-worker-only synthetic generation-file hash anchor; no full C1 derivation, NativeSession or financial-composition proof."
+  },
+  "retained_first_source_partial": {
+    "result": {
+      "path": "C:/Users/arvik/code/buddha/runs/checks/fresh-candidate-requests-20261102-v1/candidate-requests-result-v1.json",
+      "sha256": "e243abb7664070aa9fedd2e7abeccf67f50733c71987531ab2fe7b4f367a74bd"
+    },
+    "parent": {
+      "path": "C:/Users/arvik/code/buddha/runs/checks/fresh-candidate-requests-20261102-v1/parent-result-v1.json",
+      "sha256": "5e9295f61be109c7bc81ea8a34ef16c7dc26a0a02d8b6eb817b6deea05c56cca"
+    },
+    "status": "partial",
+    "parent_seconds": 0.7636360998731107,
+    "parent_exit_code": 2,
+    "failure_stage": "fixture",
+    "containers_executed": 0,
+    "http_requests": 0,
+    "cause": {
+      "path": "C:/Users/arvik/code/buddha/runs/checks/fresh-candidate-requests-20261102-v1/fixture-socket-cause-v1.json",
+      "sha256": "32deade0c4bbf1ede417e43b6b22c477589f81a1538864702c58e444044d18ee",
+      "error_class": "RuntimeError",
+      "socket_event_names": [
+        "socket.gethostname"
+      ],
+      "cleanup": true
+    },
+    "executed_source_sha256": "99ac785ede6b8590cd4fb723c7cd0ed2908de0c6c3972b9f3dc23dcd146fa644",
+    "current_same_name_formatted_source_sha256": "6e618d346cdc5fdbf390916cadea4b7c404ba5a5f2211c1218f0fca1f2a1f6bd",
+    "current_named_file_matches_executed": false,
+    "availability_limit": "The executed99ac cut is recorded, but present same-name6e618 bytes differ. Exact historical source availability is not asserted or reconstructed. Result and parent remain unchanged.",
+    "cleanup_limit": "Recorded cleanup flag does not prove removal of every nested temporary directory."
+  },
+  "bound_input_hashes": {
+    "source_agents": {
+      "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-fresh-primary-20261102-v2\\components\\evolved-agent\\candidate.py": "4196cd29ffa76c6959e6f678a8286b1fde5b56e6a34a97dcf68787e1f22b3a43",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-fresh-primary-20261102-v2\\components\\host\\profiles.json": "a582e97b86e3d651b1c7c6a6aa296adb370c8f7c33dde8f36edc2a9702878a31",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-fresh-primary-20261102-v2\\components\\initial-agent\\candidate.py": "77cfa68f6b3c6996fd503e1ce6f7a964eb57abdb8bde98f6761de5f6e298ff4f",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-fresh-primary-20261102-v2\\components\\source-environment\\runtime.json": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-fresh-primary-20261102-v2\\inputs\\study.json": "582d17e5d26a29bf3a84d7fe4f52e7e5803b016cefc6fc74de91369e6167d0af"
+    },
+    "native": {
+      "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-fresh-plain-20261102-v1\\in-context\\baseline.json": "6877f4803a4e3a429e88f40530a7d5ac77334bf62e9dcbfb0747cb126df30acd",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-fresh-plain-20261102-v1\\regenerate\\baseline.json": "09b2f58a4ff6398c60c7d17abb015540912bea6bf1bdb26e1fcd761833ecad10",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-fresh-primary-20261102-v2\\components\\host\\profiles.json": "a582e97b86e3d651b1c7c6a6aa296adb370c8f7c33dde8f36edc2a9702878a31"
+    }
+  },
+  "ci_snapshot": {
+    "recorded_utc": "2026-11-03T01:03:02Z",
+    "evidence": [
+      {
+        "path": "C:/Users/arvik/code/buddha/runs/checks/ci216-watch-20261102-v1/snapshot-20261103T010302-v1.json",
+        "sha256": "ca8e825e5b5a1c3653e73fd1402cb29c81d042170ba1bfeb72d2266bafb965cf",
+        "pr": 216,
+        "head": "14b79a964d3b18da537888712db1ca7b868ca4bd",
+        "buckets": {
+          "success": 10,
+          "in_progress": 0,
+          "queued": 0,
+          "failure": 0,
+          "cancelled": 0
+        },
+        "state": "open",
+        "draft": false,
+        "merged": false
+      },
+      {
+        "path": "C:/Users/arvik/code/buddha/runs/checks/fresh-primary-preparation-20261102-v1/ci-snapshot-20261103T010302-v1.json",
+        "sha256": "68037ae75273f517563f2781ba8714860c3248ab59cff5a7a8d99e8370ed35df",
+        "pr": 217,
+        "head": "e76db4ac896f8ccdbd2e7b3f2ad60b8bf99e79b9",
+        "buckets": {
+          "success": 8,
+          "in_progress": 2,
+          "queued": 0,
+          "failure": 0,
+          "cancelled": 0
+        },
+        "state": "open",
+        "draft": false,
+        "merged": false
+      },
+      {
+        "path": "C:/Users/arvik/code/buddha/runs/checks/fresh-plain-preparation-20261102-v1/ci-snapshot-20261103T010302-v1.json",
+        "sha256": "03ad98ebe23bdf39e46f7a1d21aa213feac413824af72dd0fc09dfefb0e8ca7e",
+        "pr": 218,
+        "head": "85bd4d4545a15238b1ebe9f38912629808a73159",
+        "buckets": {
+          "success": 6,
+          "in_progress": 4,
+          "queued": 0,
+          "failure": 0,
+          "cancelled": 0
+        },
+        "state": "open",
+        "draft": false,
+        "merged": false
+      },
+      {
+        "path": "C:/Users/arvik/code/buddha/runs/checks/ci219-watch-20261102-v1/snapshot-20261103T010302-v1.json",
+        "sha256": "5698795e6526268e20dfcf3d36b630a2923fe727c00f4c995b4b7ebd98c1c951",
+        "pr": 219,
+        "head": "f9dc94ce0cd9ff424e966d14970191c41384f4d9",
+        "buckets": {
+          "success": 5,
+          "in_progress": 5,
+          "queued": 0,
+          "failure": 0,
+          "cancelled": 0
+        },
+        "state": "open",
+        "draft": false,
+        "merged": false
+      },
+      {
+        "path": "C:/Users/arvik/code/buddha/runs/checks/fresh-request-profiles-20261102-v1/ci-snapshot-20261103T010302-v1.json",
+        "sha256": "7847ea43e771df215218863173aef7dd430ba8faba00b862244e5f7c7d96e12e",
+        "pr": 220,
+        "head": "b79895583d9de09bff53ba5dcaa43fd63eca35af",
+        "buckets": {
+          "success": 4,
+          "in_progress": 6,
+          "queued": 0,
+          "failure": 0,
+          "cancelled": 0
+        },
+        "state": "open",
+        "draft": false,
+        "merged": false
+      },
+      {
+        "path": "C:/Users/arvik/code/buddha/runs/checks/fresh-runtime-readiness-20261102-v1/ci-snapshot-20261103T010302-v1.json",
+        "sha256": "14c1e8b1b879735229367fcd4c0f684d052800a121d29bce3bcb5d35577145d0",
+        "pr": 221,
+        "head": "cc3df32644420405ba59b83c19acfd7e1f07959b",
+        "buckets": {
+          "success": 2,
+          "in_progress": 8,
+          "queued": 0,
+          "failure": 0,
+          "cancelled": 0
+        },
+        "state": "open",
+        "draft": false,
+        "merged": false
+      }
+    ],
+    "scope": "Dated metadata only; exact heads open/non-draft/unmerged, no failures/cancellations. No full ordered hosted-coverage proof claimed; no current-state assertion."
+  },
+  "documentation_validation": {
+    "new_files": [
+      "docs/FRESH-REQUEST-OBSERVATIONS.md",
+      "docs/conformance/fresh-request-observations-delivery.json"
+    ],
+    "new_tests_or_diagnostic_runs": 0,
+    "stage_json_handling": "Five large stage JSON files parsed only for selected completion/settings/execution/hash fields; bodies and inventories not dumped.",
+    "commands_added": 0,
+    "plan_owner": "Root updates PLAN separately before publication."
+  },
+  "limitations": [
+    "Synthetic prompt/replies/answers; actual P/C and installed worker/SDK execute only within the stated diagnostic scope.",
+    "Seven actual containers report removed; no independent post-run selected-ID absence query is claimed for this combined observation.",
+    "180-second diagnostic walls are shorter than prepared900/1800-second worker limits; source256MiB/native2048MiB and remaining declared limits are retained. No parent outer hard-kill deadline.",
+    "No full26-task native capacity, real model behavior, useful diversity, utility gain, performance ratio, account/pricing/funding/custody/separation adoption or live readiness.",
+    "Existing image dependency/license limitations and comparable-size construction/read gate remain separate.",
+    "Full hosted/platform composition for the stacked current source remains separate from this dated CI snapshot."
+  ],
+  "next": "Root incorporates this bounded request evidence into the single PLAN; keep remaining prospective adoption, workload/account/price/capacity, separate funding and handoff gates.",
+  "independent_reviews": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-candidate-requests-20261102-v1\\independent-v2-static-review-v1.json",
+      "sha256": "7ee9aed274c5e9981a6e31edb695bb7df9b68de9a07ad28bb668fa77ce0a5286"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-candidate-requests-20261102-v1\\independent-completion-review-v1.json",
+      "sha256": "f5f875e5e0f802e5746ec2e7a3d6d42104fb292293f5ae975835566ccfa9d628"
+    }
+  ],
+  "roadmap_preservation": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-candidate-requests-20261102-v1\\plan-preservation-v231.json",
+    "sha256": "34dbfc9dbea7cfc6bcd48e261032e668718a9cb2a13b220d9e76b52f17ee7a4f"
+  }
+}

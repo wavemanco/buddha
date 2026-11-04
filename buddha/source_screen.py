@@ -5,17 +5,22 @@ complete execution, archive admission and confirmed improvement are separate.
 """
 
 import hashlib
-from collections.abc import Callable, Mapping, Sequence
+import os
+import re
+import threading
+from collections.abc import Callable, Iterator, Mapping, Sequence
+from contextlib import contextmanager
+from contextvars import ContextVar
 from dataclasses import dataclass, field
-from functools import wraps
+from functools import cached_property, wraps
 from pathlib import Path
 from typing import cast
 
-from buddha import candidate_generation, native_evaluation
+from buddha import candidate_generation, native_evaluation, trial_fence
 from buddha import native_pipeline as pipeline
 from buddha.answers import TaskSet, _Artifact, _source, _utf8
 from buddha.authorization import Authorization
-from buddha.doctor import _Busy, _Unsupported
+from buddha.doctor import _Busy, _Capture, _Unsupported
 from buddha.gateway import (
     CAPABILITIES,
     CORE,
@@ -45,6 +50,288 @@ from buddha.wire import _integer
 
 class SourceScreenError(ReleaseError):
     """Screen configuration, custody or exploratory admission is invalid."""
+
+
+@dataclass(frozen=True)
+class _ScreenControlProfiles:
+    root: Path
+    authorization: Path
+    before: str
+    after: str
+    marker: bytes
+    process: int
+    thread: int
+
+
+_CONTROL_PROFILES: ContextVar[_ScreenControlProfiles | None] = ContextVar(
+    "screen_control_profiles", default=None
+)
+
+
+@dataclass(frozen=True)
+class _ScreenControlProfilesV2:
+    legacy: _ScreenControlProfiles
+    current: str
+    continuation: bytes
+
+
+_CONTROL_PROFILES_V2: ContextVar[_ScreenControlProfilesV2 | None] = ContextVar(
+    "screen_control_profiles_v2", default=None
+)
+
+
+@contextmanager
+def _screen_control_profiles(
+    root: Path,
+    authorization: Path,
+    *,
+    before: str,
+    after: str,
+    continuation: dict[str, object],
+) -> Iterator[None]:
+    """Scope two already checked literal profiles; supplies no execution authority.
+
+    The caller must first verify its complete continuation and both actual screen
+    contexts. A saved marker never activates this scope or discovers a driver.
+    """
+    if not isinstance(root, Path) or not isinstance(authorization, Path):
+        raise SourceScreenError("control profiles need explicit study and grant paths")
+    root, authorization = pipeline._absolute(str(root)), pipeline._absolute(str(authorization))
+    before, after = _digest(before), _digest(after)
+    anchor = _object(continuation, {"path", "sha256"})
+    path = pipeline._absolute(anchor["path"])
+    if (
+        _CONTROL_PROFILES.get() is not None
+        or _CONTROL_PROFILES_V2.get() is not None
+        or before == after
+        or ".." in root.parts
+        or ".." in authorization.parts
+        or ".." in path.parts
+        or str(path) != anchor["path"]
+        or path.is_relative_to(root)
+    ):
+        raise SourceScreenError("control profiles need one explicit external continuation")
+    marker = _json(
+        {
+            "format": "buddha.host-control-relation.v1",
+            "continuation": {"path": str(path), "sha256": _digest(anchor["sha256"])},
+            "before_controls_sha256": before,
+            "after_controls_sha256": after,
+        }
+    )
+    token = _CONTROL_PROFILES.set(
+        _ScreenControlProfiles(
+            root, authorization, before, after, marker, os.getpid(), threading.get_ident()
+        )
+    )
+    try:
+        yield
+    finally:
+        _CONTROL_PROFILES.reset(token)
+
+
+def _external_control_anchor(root: Path, value: object) -> dict[str, object]:
+    anchor = _object(value, {"path", "sha256"})
+    path = pipeline._absolute(anchor["path"])
+    if ".." in path.parts or str(path) != anchor["path"] or path.is_relative_to(root):
+        raise SourceScreenError("control profiles need one explicit external continuation")
+    return {"path": str(path), "sha256": _digest(anchor["sha256"])}
+
+
+@contextmanager
+def _screen_control_profiles_v2(
+    root: Path,
+    authorization: Path,
+    *,
+    before: str,
+    after: str,
+    current: str,
+    continuation: dict[str, object],
+    legacy_relation: dict[str, object],
+    legacy_sha256: str,
+) -> Iterator[None]:
+    """Scope three caller-checked hashes, not owners or execution authority.
+
+    Pins and external paths are checked only for canonical byte/lexical
+    consistency. The later descriptor loader must prove physical identities.
+    """
+    if not isinstance(root, Path) or not isinstance(authorization, Path):
+        raise SourceScreenError("control profiles need explicit study and grant paths")
+    root, authorization = pipeline._absolute(str(root)), pipeline._absolute(str(authorization))
+    before, after, current = _digest(before), _digest(after), _digest(current)
+    if (
+        _CONTROL_PROFILES.get() is not None
+        or _CONTROL_PROFILES_V2.get() is not None
+        or len({before, after, current}) != 3
+        or ".." in root.parts
+        or ".." in authorization.parts
+    ):
+        raise SourceScreenError("control profiles need one explicit three-profile scope")
+    anchor = _external_control_anchor(root, continuation)
+    legacy = _object(
+        legacy_relation,
+        {"format", "continuation", "before_controls_sha256", "after_controls_sha256"},
+    )
+    legacy_anchor = _external_control_anchor(root, legacy["continuation"])
+    expected = _json(
+        {
+            "format": "buddha.host-control-relation.v1",
+            "continuation": legacy_anchor,
+            "before_controls_sha256": before,
+            "after_controls_sha256": after,
+        }
+    )
+    if (
+        _json(legacy) != expected
+        or hashlib.sha256(expected).hexdigest() != _digest(legacy_sha256)
+        or Path(cast(str, anchor["path"])) == Path(cast(str, legacy_anchor["path"]))
+        or authorization in {Path(cast(str, item["path"])) for item in (anchor, legacy_anchor)}
+    ):
+        raise SourceScreenError("three-profile scope changes its pinned legacy relation")
+    token = _CONTROL_PROFILES_V2.set(
+        _ScreenControlProfilesV2(
+            _ScreenControlProfiles(
+                root, authorization, before, after, expected, os.getpid(), threading.get_ident()
+            ),
+            current,
+            _json(anchor),
+        )
+    )
+    try:
+        yield
+    finally:
+        _CONTROL_PROFILES_V2.reset(token)
+
+
+def _checked_profiles_v2() -> _ScreenControlProfilesV2:
+    profiles = _CONTROL_PROFILES_V2.get()
+    if (
+        profiles is None
+        or profiles.legacy.process != os.getpid()
+        or profiles.legacy.thread != threading.get_ident()
+    ):
+        raise SourceScreenError("host control relation differs from its explicit checked scope")
+    return profiles
+
+
+def _finite_control_marker(
+    profiles: _ScreenControlProfilesV2, hashes: set[str]
+) -> dict[str, object]:
+    legacy = profiles.legacy
+    if hashes == {legacy.before, legacy.after}:
+        return _load(legacy.marker)
+    if (
+        not 2 <= len(hashes) <= 3
+        or profiles.current not in hashes
+        or not hashes <= {legacy.before, legacy.after, profiles.current}
+    ):
+        raise SourceScreenError("screens change their explicit three-profile controls")
+    marker: dict[str, object] = {
+        "format": "buddha.host-control-relation.v2",
+        "continuation": _load(profiles.continuation),
+        "controls_sha256": sorted(hashes),
+    }
+    if {legacy.before, legacy.after} <= hashes:
+        # This is the pinned AB compatibility proof, not an invented packet dependency.
+        marker["legacy_relation"] = _load(legacy.marker)
+    return marker
+
+
+def _checked_control_marker(value: object) -> dict[str, object]:
+    if _CONTROL_PROFILES_V2.get() is not None:
+        finite = _checked_profiles_v2()
+        if _json(value) == finite.legacy.marker:
+            return _load(finite.legacy.marker)
+        controls = _object(value).get("controls_sha256")
+        if type(controls) is not list or not 2 <= len(controls) <= 3:
+            raise SourceScreenError("invalid three-profile relation marker")
+        expected = _finite_control_marker(finite, {_digest(item) for item in controls})
+        if _json(value) != _json(expected):
+            raise SourceScreenError("host control relation differs from its explicit checked scope")
+        return expected
+    profiles = _CONTROL_PROFILES.get()
+    if (
+        profiles is None
+        or profiles.process != os.getpid()
+        or profiles.thread != threading.get_ident()
+        or _json(value) != profiles.marker
+    ):
+        raise SourceScreenError("host control relation differs from its explicit checked scope")
+    return _load(profiles.marker)
+
+
+def _compose_control_relations(
+    values: Sequence[object],
+    *,
+    rows: Sequence[tuple[dict[str, object], str]] = (),
+) -> dict[str, object] | None:
+    """Compose only actual dependencies inside the separate finite v2 scope."""
+    profiles = _checked_profiles_v2()
+    if (
+        type(values) not in {list, tuple}
+        or type(rows) not in {list, tuple}
+        or len(values) + len(rows) > 256
+    ):
+        raise SourceScreenError("control relation dependencies exceed their finite bound")
+    hashes: set[str] = set()
+    if rows:
+        _screen_control_relation(rows)
+        hashes.update(_digest(digest) for _, digest in rows)
+    for value in values:
+        marker = _checked_control_marker(value)
+        if marker["format"] == "buddha.host-control-relation.v1":
+            hashes.update((profiles.legacy.before, profiles.legacy.after))
+        else:
+            hashes.update(cast(list[str], marker["controls_sha256"]))
+    return _finite_control_marker(profiles, hashes) if len(hashes) > 1 else None
+
+
+def _control_reference(reference: object, profiles: _ScreenControlProfiles) -> dict[str, object]:
+    ref = _object(reference, {"directory", "authorization", "report_sha256"})
+    directory = pipeline._absolute(ref["directory"])
+    if str(directory) != ref["directory"] or str(profiles.authorization) != ref["authorization"]:
+        raise SourceScreenError("control comparison changes its original grant or path")
+    try:
+        relative = directory.relative_to(profiles.root).as_posix()
+    except ValueError:
+        raise SourceScreenError("control comparison borrows another study") from None
+    if not re.fullmatch(
+        r"(?:common/(?:0|[1-9][0-9]*)/(?:0|[1-9][0-9]*)|"
+        r"cells/(?:0|[1-9][0-9]*)/(?:0|[1-9][0-9]*)/"
+        r"(?:0|1)/(?:0|[1-9][0-9]*))/screen",
+        relative,
+    ):
+        raise SourceScreenError("control comparison changes its scheduled screen location")
+    _digest(ref["report_sha256"])
+    return ref
+
+
+def _screen_control_relation(
+    rows: Sequence[tuple[dict[str, object], str]],
+) -> dict[str, object] | None:
+    """Keep uniform controls strict; admit only one explicit two-profile relation."""
+    if type(rows) not in {list, tuple} or not 1 <= len(rows) <= 256:
+        raise SourceScreenError("control comparison exceeds the bounded screen population")
+    hashes = {_digest(digest) for _, digest in rows}
+    if _CONTROL_PROFILES_V2.get() is not None:
+        finite = _checked_profiles_v2()
+        if not hashes <= {finite.legacy.before, finite.legacy.after, finite.current}:
+            raise SourceScreenError("screens change their explicit three-profile controls")
+        references: dict[bytes, str] = {}
+        for reference, digest in rows:
+            key = _json(_control_reference(reference, finite.legacy))
+            if key in references and references[key] != digest:
+                raise SourceScreenError("one screen reference claims different host controls")
+            references[key] = digest
+        return _finite_control_marker(finite, hashes) if len(hashes) > 1 else None
+    if len(hashes) == 1:
+        return None
+    profiles = _CONTROL_PROFILES.get()
+    if profiles is None or hashes != {profiles.before, profiles.after}:
+        raise SourceScreenError("screens change their original common host controls")
+    for reference, _ in rows:
+        _control_reference(reference, profiles)
+    return _checked_control_marker(_load(profiles.marker))
 
 
 def _checked[**P, T](function: Callable[P, T]) -> Callable[P, T]:
@@ -93,11 +380,10 @@ class SourceScreen(_Artifact):
         if record["format"] not in {"buddha.source-screen.v1", "buddha.source-screen.v2"}:
             raise SourceScreenError("unsupported source screen")
         source = TaskSet.from_bytes(_json(record["source"]))
-        release, dataset = _source(source.to_record())
-        full = TaskSet.from_dataset(release, dataset)
-        if {task.id for task in source.tasks} != {task.id for task in full.tasks}:
+        _, dataset = _source(source.to_record())
+        if len(source.tasks) != dataset.count(b"\n") + int(not dataset.endswith(b"\n")):
             raise SourceScreenError("source screen requires the complete source population")
-        development = _split(record["split"], full)
+        development = _split(record["split"], source)
         selected = _ids(record["selected_ids"], development)
         if len(selected) > 64:
             raise SourceScreenError("a source screen accepts at most 64 development tasks")
@@ -177,6 +463,10 @@ class SourceScreen(_Artifact):
 
     @property
     def tasks(self) -> TaskSet:
+        return self._task_view
+
+    @cached_property
+    def _task_view(self) -> TaskSet:
         record = self.to_record()
         return TaskSet.from_bytes(_json(record["source"])).select(record["selected_ids"])
 
@@ -249,11 +539,16 @@ def _comparison_controls(
     context: dict[str, object],
     controls: dict[Path, str],
     screen: SourceScreen,
+    *,
+    core: object | None = None,
 ) -> str:
     """Compare original helper roles and conservative external pins, without IO."""
     comparison = _object(context["comparison_controls"], {"sources", "external"})
     sources = _object(comparison["sources"])
-    if set(sources) != {"buddha/" + path.name for path in _sources()}:
+    paths = _sources()
+    if core is not None:
+        paths = candidate_generation._recorded_sources(paths, core)
+    if set(sources) != {"buddha/" + path.name for path in paths}:
         raise SourceScreenError("comparison helper coverage differs from the screen contract")
     package: Path | None = None
     source_paths: set[Path] = set()
@@ -299,8 +594,10 @@ def _lineage(screen: SourceScreen, consume: Callable[[Path, object], bytes]) -> 
         return None
     reference = _object(record["lineage"])
     raw = consume(pipeline._absolute(reference["path"]), reference["sha256"])
-    lineage = _object(
-        _load(raw),
+    lineage = _object(_load(raw))
+    detached = lineage.get("format") == "buddha.source-lineage.v2"
+    _object(
+        lineage,
         {
             "format",
             "parent",
@@ -309,7 +606,8 @@ def _lineage(screen: SourceScreen, consume: Callable[[Path, object], bytes]) -> 
             "feedback",
             "owner",
             "proposal_sha256",
-        },
+        }
+        | ({"improver"} if detached else set()),
     )
     generation = _object(record["generation"])
     selected = Selection.from_bytes(_json(generation["selection"]))
@@ -320,7 +618,7 @@ def _lineage(screen: SourceScreen, consume: Callable[[Path, object], bytes]) -> 
     _digest(parent["source_sha256"])
     _path(parent["entrypoint"])
     if (
-        lineage["format"] != "buddha.source-lineage.v1"
+        lineage["format"] not in {"buddha.source-lineage.v1", "buddha.source-lineage.v2"}
         or child
         != {
             "agent_sha256": screen.candidate_id,
@@ -332,6 +630,17 @@ def _lineage(screen: SourceScreen, consume: Callable[[Path, object], bytes]) -> 
         or parent_id == screen.candidate_id
     ):
         raise SourceScreenError("retained lineage differs from the selected child")
+    if detached:
+        improver = _object(lineage["improver"], {"agent_sha256", "source_sha256", "entrypoint"})
+        improver_entrypoint = _path(improver["entrypoint"])
+        if (
+            parent["entrypoint"] != "candidate.py"
+            or parent_id != pipeline._sha({"candidate.py": _digest(parent["source_sha256"])})
+            or not improver_entrypoint.endswith(".py")
+            or _digest(improver["agent_sha256"])
+            != pipeline._sha({improver_entrypoint: _digest(improver["source_sha256"])})
+        ):
+            raise SourceScreenError("detached lineage changes parent or improver source identity")
     _digest(lineage["descriptor_sha256"])
     _digest(lineage["proposal_sha256"])
     feedback = _object(lineage["feedback"], {"file_sha256", "input_sha256"})
@@ -417,7 +726,8 @@ def _generation_recipe(location: Path, screen: SourceScreen) -> dict[str, object
 
 
 def _task_controls(location: Path, screen: SourceScreen, index: int) -> dict[Path, str]:
-    task = screen.tasks.select([screen.tasks.tasks[index].id])
+    tasks = screen.tasks
+    task = tasks.select([tasks.tasks[index].id])
     return {
         location / "task.json": task.fingerprint(),
         location / "generation.json": pipeline._sha(_generation_recipe(location, screen)),
@@ -429,7 +739,8 @@ def _materialize(directory: Path, screen: SourceScreen, index: int) -> tuple[Pat
     if not location.exists():
         location.mkdir()
     _root(location)
-    task = screen.tasks.select([screen.tasks.tasks[index].id])
+    tasks = screen.tasks
+    task = tasks.select([tasks.tasks[index].id])
     pipeline._same_or_write(location / "task.json", task.to_bytes())
     descriptor = location / "generation.json"
     pipeline._same_or_write(descriptor, _json(_generation_recipe(location, screen)))
@@ -478,9 +789,13 @@ def prepare_source_screen(
     directory = pipeline._absolute(str(directory))
     runtime_sha256 = _digest(expected_runtime_sha256)
     _configuration(screen, runtime_sha256)
-    if authorization.summary()["scope"] != "source screen: " + screen.comparison_key():
-        raise SourceScreenError("authority scope differs from this fixed source screen")
-    external = dict(input_bindings or {})
+    trial_fence.require_purpose(
+        authorization.path,
+        authorization._terms(),
+        directory=directory,
+        expected="source screen: " + screen.comparison_key(),
+    )
+    external = trial_fence._include_controls(directory, dict(input_bindings or {}))
     inputs = _input_records(list(external), external)
     expected = {Path(row["path"]): row["sha256"] for row in inputs}
     for source in _sources():
@@ -507,49 +822,62 @@ def prepare_source_screen(
         raise SourceScreenError("screen output overlaps original inputs or funding")
     _root(directory.parent)
     _path(directory.name)
-    directory.mkdir()
-    for name in ("tasks", "observations"):
-        (directory / name).mkdir()
-    pipeline._write(directory / "screen.json", screen.to_bytes())
-    context: dict[str, object] = {
-        "format": _version(screen, "source-screen-context"),
-        "screen_sha256": screen.fingerprint(),
-        "expected_runtime_sha256": runtime_sha256,
-        "controls": {str(path): digest for path, digest in expected.items()},
-        "comparison_controls": {
-            "sources": {
-                "buddha/" + source.name: {"path": str(source), "sha256": expected[source]}
-                for source in _sources()
+    with trial_fence.work(
+        authorization.path, authorization._terms(), directory=directory, kind="screen"
+    ) as trial_controls:
+        if any(expected.get(path) != digest for path, digest in trial_controls.items()):
+            raise SourceScreenError("original trial controls changed before screen preparation")
+        trial_fence.require_purpose(
+            authorization.path,
+            authorization._terms(),
+            directory=directory,
+            expected="source screen: " + screen.comparison_key(),
+        )
+        directory.mkdir()
+        for name in ("tasks", "observations"):
+            (directory / name).mkdir()
+        pipeline._write(directory / "screen.json", screen.to_bytes())
+        context: dict[str, object] = {
+            "format": _version(screen, "source-screen-context"),
+            "screen_sha256": screen.fingerprint(),
+            "expected_runtime_sha256": runtime_sha256,
+            "controls": {str(path): digest for path, digest in expected.items()},
+            "comparison_controls": {
+                "sources": {
+                    "buddha/" + source.name: {"path": str(source), "sha256": expected[source]}
+                    for source in _sources()
+                },
+                "external": {
+                    str(path): digest
+                    for path, digest in external.items()
+                    if path not in _sources()
+                    and path != runtime_path
+                    and (
+                        record["lineage"] is None or str(path) != _object(record["lineage"])["path"]
+                    )
+                },
             },
-            "external": {
-                str(path): digest
-                for path, digest in external.items()
-                if path not in _sources()
-                and path != runtime_path
-                and (record["lineage"] is None or str(path) != _object(record["lineage"])["path"])
-            },
-        },
-    }
-    _comparison_controls(context, expected, screen)
-    pipeline._write(directory / "context.json", _json(context))
-    expected[directory / "screen.json"] = screen.fingerprint()
-    expected[directory / "context.json"] = pipeline._sha(context)
-    location, descriptor = _materialize(directory, screen, 0)
-    expected |= _task_controls(location, screen, 0)
-    generation = _object(record["generation"])
-    candidate_generation.prepare_candidate_generation(
-        location / "generation",
-        descriptor=descriptor,
-        selection=Selection.from_bytes(_json(generation["selection"])),
-        roots=_roots(generation),
-        authorization=authorization,
-        review=review,
-        budget_microusd=cast(int, generation["budget_microusd"]),
-        max_calls=cast(int, generation["max_calls"]),
-        expected_runtime_sha256=runtime_sha256,
-        input_files=list(expected),
-        expected_input_hashes=expected,
-    )
+        }
+        _comparison_controls(context, expected, screen)
+        pipeline._write(directory / "context.json", _json(context))
+        expected[directory / "screen.json"] = screen.fingerprint()
+        expected[directory / "context.json"] = pipeline._sha(context)
+        location, descriptor = _materialize(directory, screen, 0)
+        expected |= _task_controls(location, screen, 0)
+        generation = _object(record["generation"])
+        candidate_generation.prepare_candidate_generation(
+            location / "generation",
+            descriptor=descriptor,
+            selection=Selection.from_bytes(_json(generation["selection"])),
+            roots=_roots(generation),
+            authorization=authorization,
+            review=review,
+            budget_microusd=cast(int, generation["budget_microusd"]),
+            max_calls=cast(int, generation["max_calls"]),
+            expected_runtime_sha256=runtime_sha256,
+            input_files=list(expected),
+            expected_input_hashes=expected,
+        )
     return directory
 
 
@@ -664,9 +992,11 @@ def _preflight(
 ) -> set[str]:
     """Check every retained owner and the reverse funding schedule before calls."""
     tasks = list((directory / "tasks").iterdir())
-    if {task.name for task in tasks} != {str(index) for index in range(len(tasks))} or (
-        not tasks or len(tasks) > len(screen.tasks.tasks)
-    ):
+    if {task.name for task in tasks} != {str(index) for index in range(len(tasks))} or not tasks:
+        raise SourceScreenError("screen task schedule has foreign or missing entries")
+    population = screen.tasks
+    task_rows = population.tasks
+    if len(tasks) > len(task_rows):
         raise SourceScreenError("screen task schedule has foreign or missing entries")
     funded = {
         _text(row["run_id"]): row
@@ -680,7 +1010,7 @@ def _preflight(
     for task in sorted(tasks, key=lambda path: int(path.name)):
         _root(task)
         index = int(task.name)
-        expected_task = screen.tasks.select([screen.tasks.tasks[index].id]).to_bytes()
+        expected_task = population.select([task_rows[index].id]).to_bytes()
         if pipeline._read(task / "task.json") != expected_task:
             raise SourceScreenError("original task input differs from the fixed population")
         generation = _object(record["generation"])
@@ -798,7 +1128,7 @@ def _preflight(
     ):
         raise SourceScreenError("known funded owner is missing; replacement is not recovery")
     if (directory / "report.json").exists() and (
-        unfinished or (len(tasks) != len(screen.tasks.tasks) and not terminal_failure)
+        unfinished or (len(tasks) != len(task_rows) and not terminal_failure)
     ):
         raise SourceScreenError("root completion lacks its complete original schedule")
     return identifiers
@@ -817,14 +1147,34 @@ def run_source_screen(directory: Path, *, transport: RawHTTPTransport) -> dict[s
     if not isinstance(directory, Path) or not isinstance(transport, RawHTTPTransport):
         raise SourceScreenError("screen requires its original Path and raw transport")
     directory = pipeline._absolute(str(directory))
-    with pipeline._exclusive(directory):
-        anchor = directory / "tasks/0/generation/owners/0"
+    anchor = directory / "tasks/0/generation/owners/0"
+    original = _read_manifest(anchor)
+    authority_path = pipeline._absolute(original["authorization_path"])
+    if trial_fence.is_closed(directory):
+        return inspect_source_screen(
+            directory,
+            authorization=authority_path,
+            expected_report_sha256=file_hash(directory / "report.json"),
+        )
+    with (
+        trial_fence.work(
+            authority_path,
+            Authorization(authority_path)._terms(),
+            directory=directory,
+            kind="screen",
+        ),
+        pipeline._exclusive(directory),
+    ):
         Gateway(anchor, transport=RawHTTPTransport(allow_paid=False))
         first = _read_manifest(anchor)
         screen, controls, runtime = _original(directory, first)
         authority = Authorization(pipeline._absolute(first["authorization_path"]))
-        if authority.summary()["scope"] != "source screen: " + screen.comparison_key():
-            raise SourceScreenError("existing authority scope differs from the original screen")
+        trial_fence.require_purpose(
+            authority.path,
+            authority._terms(),
+            directory=directory,
+            expected="source screen: " + screen.comparison_key(),
+        )
         review = _object(first["review"])
         _preflight(directory, screen, authority, review, controls)
         generation = _object(screen.to_record()["generation"])
@@ -927,9 +1277,17 @@ def inspect_source_screen(
     *,
     authorization: Path,
     expected_report_sha256: str,
+    sink: _Capture | None = None,
 ) -> dict[str, object]:
     from buddha.source_screen_results import collect_source_screen
 
+    if sink is not None:
+        return collect_source_screen(
+            directory,
+            authorization=authorization,
+            expected_report_sha256=_digest(expected_report_sha256),
+            sink=sink,
+        )
     return collect_source_screen(
         directory,
         authorization=authorization,
@@ -945,6 +1303,7 @@ def select_source_parent(
     max_active: int,
     seed: int,
     iteration: int,
+    _completed_screens: Sequence[object] | None = None,
 ) -> dict[str, object]:
     if type(references) not in {list, tuple} or not 1 <= len(references) <= 256:
         raise SourceScreenError("source parent pool needs 1..256 explicit complete references")
@@ -953,27 +1312,44 @@ def select_source_parent(
     _integer(max_active, 2, 64)
     _integer(seed, 0)
     _integer(iteration, 0)
+    if _completed_screens is not None and (
+        type(_completed_screens) not in {list, tuple} or len(_completed_screens) != len(references)
+    ):
+        raise SourceScreenError("parent reuse needs one exact completed read per reference")
     admissions: list[dict[str, object]] = []
     seen: set[str] = set()
     key: str | None = None
     controls_key: str | None = None
+    profiles: list[tuple[dict[str, object], str]] = []
+    control_records: list[dict[str, object]] = []
     eligible: list[dict[str, object]] = []
-    for value in references:
+    for ordinal, value in enumerate(references):
         reference = _object(value, {"directory", "authorization", "report_sha256"})
-        report = inspect_source_screen(
-            pipeline._absolute(reference["directory"]),
-            authorization=pipeline._absolute(reference["authorization"]),
-            expected_report_sha256=_digest(reference["report_sha256"]),
-        )
+        if _completed_screens is None:
+            report = inspect_source_screen(
+                pipeline._absolute(reference["directory"]),
+                authorization=pipeline._absolute(reference["authorization"]),
+                expected_report_sha256=_digest(reference["report_sha256"]),
+            )
+        else:
+            from buddha.source_screen_results import _reuse_completed_screen
+
+            checked = _reuse_completed_screen(
+                _completed_screens[ordinal],
+                pipeline._absolute(reference["directory"]),
+                pipeline._absolute(reference["authorization"]),
+                _digest(reference["report_sha256"]),
+            )
+            report = _load(checked.report_raw)
         identifier = _digest(report["candidate_id"])
         comparison = _digest(report["comparison_key"])
         control = _digest(report["controls_sha256"])
-        if (
-            identifier in seen
-            or (key is not None and comparison != key)
-            or (controls_key is not None and control != controls_key)
-        ):
+        if identifier in seen or (key is not None and comparison != key):
             raise SourceScreenError("parent pool repeats a source or changes the common comparison")
+        profiles.append((reference, control))
+        control_records.append(
+            {"reference": reference, "candidate_id": identifier, "controls_sha256": control}
+        )
         seen.add(identifier)
         key = comparison
         controls_key = control
@@ -981,6 +1357,7 @@ def select_source_parent(
         admissions.append({"candidate_id": identifier, **admission})
         if admission["eligible"] is True:
             eligible.append(report)
+    relation = _screen_control_relation(profiles)
     result: dict[str, object] = {
         "format": "buddha.source-parent-selection.v1",
         "comparison_key": key,
@@ -995,6 +1372,13 @@ def select_source_parent(
         "frontier_ids": [],
         "claim": "exploratory source parent allocation only; no improvement claim",
     }
+    if relation is not None:
+        del result["controls_sha256"]
+        result.update(
+            format="buddha.source-parent-selection.v2",
+            control_profiles=control_records,
+            host_control_relation=relation,
+        )
     if not eligible:
         return result | {"reason": "no complete source has usable common-task metrics"}
     from buddha.archive import Candidate, active_pool, frontier, select_parent

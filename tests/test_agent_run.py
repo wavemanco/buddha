@@ -16,7 +16,7 @@ import test_gateway as fixtures
 from agents import frozen_seed
 from buddha.agent_run import AgentRunError, AgentSession
 from buddha.answers import Answers, TaskSet
-from buddha.executor import ExecutionResult, Limits
+from buddha.executor import ExecutionResult, ExecutorError, Limits
 from buddha.releases import Release, ReleaseError, _json, inventory, prepare_selection
 
 
@@ -653,6 +653,18 @@ class AgentSessionTests(unittest.TestCase):
     def test_unknown_cleanup_cannot_publish_complete_answers(self):
         report = self.run_worker(self.session(), cleanup="unknown")
         self.assertEqual(report["status"], "failed")
+        self.assertFalse((self.output / "answers.json").exists())
+
+    def test_pre_cleanup_metadata_survives_executor_failure(self):
+        error = ExecutorError(
+            "cleanup", cleanup_status="unknown", pre_cleanup_failure=("create", "control")
+        )
+        with patch("buddha.agent_run.executor.run_container", side_effect=error):
+            report = self.session().run()
+        self.assertEqual((report["status"], report["reason"]), ("failed", "protocol"))
+        self.assertEqual(report["executions"], [error.to_record()])
+        self.assertEqual(self.gateway.ledger.totals()["operation_count"], 0)
+        self.assertEqual(self.gateway.ledger.totals()["committed_microusd"], 0)
         self.assertFalse((self.output / "answers.json").exists())
 
     def test_missing_done_cannot_publish_complete_answers(self):

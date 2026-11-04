@@ -21,6 +21,25 @@ observations without rewriting the configuration used by those checks.
 
 ## What executes
 
+Current funded generation, improvement and native-judge sessions record the
+exact planned container name, owner label, Docker endpoint, image, Gateway owner
+and attempt before creating a container. The exclusive pending marker covers
+the entire trial across phase grants; standalone owners share one marker per
+authorization. A failed write prevents creation. An unresolved marker blocks
+another session while the active session can still finish model accounting.
+The operator records this refusal as `executor_cleanup_pending`, even through
+redacting error wrappers; exception text and local paths are not exposed.
+
+After container removal and process/thread shutdown, the host writes an
+immutable `executor-cleanup-<owner>.json` beside the Gateway manifest and ledger,
+bound to that original manifest and attempt. Only a durable known cleanup permits
+clearing the matching marker. Failed cleanup, persistence or marker-identity
+checks retain the stop. These sidecars preserve the exact C1/attempt artifact
+inventories. There is no automatic cleanup recovery or historical-record scan;
+an old unknown cleanup, including a missing container ID, still needs explicit
+review. Original frozen sources and low-level diagnostic executor calls retain
+their original behavior.
+
 `buddha.executor.run_container()` starts a fresh, owned container for one
 command. `buddha.native_worker` imports the complete configured official modules
 and invokes their actual `main()` function with the recorded arguments. The

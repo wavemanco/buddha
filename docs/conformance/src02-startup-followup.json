@@ -1,0 +1,72 @@
+{
+  "format": "buddha.source-startup-followup.v1",
+  "observed_utc": "2026-10-23T08:34:56.4402170Z",
+  "status": "composed_positive_gate_open",
+  "observations": [
+    {
+      "name": "fresh_original_layout",
+      "proof_sha256": "012969b803657cfbac0013bf59fc75134e901d032824940fac4b398c2b3ee8f0",
+      "source_map_sha256": "c186d07468acb3a8705b5fd9c591f49cb888e7fd052192dd6e40bfcb889c31dc",
+      "source_inputs": 236,
+      "source_inputs_currently_unchanged": true,
+      "status": "failed",
+      "phase": "valid",
+      "elapsed_seconds": 798.5574542999966,
+      "real_workers": 10,
+      "simulated_native_workers": 18,
+      "guard_denials": 0,
+      "last_source_sha256": "8ce70fb96dba6d32ed48c497913f043ace23651b248e4092511540dbe70a7704",
+      "last_initial_sha256": "438a09e48eb7ed2cbb9bdf73c1ee2c766fe05dd29f7cefd7a15b98f637279d9c",
+      "last_frames": [
+        {
+          "sha256": "6ca5b251e0a394af70e58fc0d239a806e2a3497db538718de04fc5ead98a30e3",
+          "type": "done"
+        }
+      ],
+      "failure": "actual proof search incomplete",
+      "fresh_raw_stderr_captured": false,
+      "fresh_errno_determined": false
+    },
+    {
+      "name": "fresh_short_layout",
+      "proof_sha256": "fcbf7b8cd75c8de99a9ac28a265bba5766a97aca6217dbc5438e94253339d5a0",
+      "source_map_sha256": "b942d381512f64a63c71aacb83c146ac42884b3c80d7fee912ab6e3204a4256d",
+      "source_inputs": 236,
+      "source_inputs_currently_unchanged": true,
+      "status": "failed",
+      "phase": "valid",
+      "elapsed_seconds": 402.99613370001316,
+      "real_workers": 10,
+      "simulated_native_workers": 18,
+      "guard_denials": 0,
+      "last_source_sha256": "8ce70fb96dba6d32ed48c497913f043ace23651b248e4092511540dbe70a7704",
+      "last_initial_sha256": "438a09e48eb7ed2cbb9bdf73c1ee2c766fe05dd29f7cefd7a15b98f637279d9c",
+      "last_frames": [
+        {
+          "sha256": "6ca5b251e0a394af70e58fc0d239a806e2a3497db538718de04fc5ead98a30e3",
+          "type": "done"
+        }
+      ],
+      "failure": "actual proof search incomplete",
+      "fresh_raw_stderr_captured": false,
+      "fresh_errno_determined": false
+    }
+  ],
+  "interpretation": [
+    "The incomplete child-startup signature recurs in both new composed searches.",
+    "Shortening the physical path did not resolve the observed startup condition; a conventional Windows path-limit cause is not established.",
+    "The earlier instrumented diagnostic established EIO at lstat(/agent) for its original physical folder only. Neither new composed receipt captured the underlying exception.",
+    "The successful separate fresh-location control establishes execution of the same child and configuration there, not a repaired original owner or a positive composed witness."
+  ],
+  "next_discriminating_observation": "Use a bounded raw-executor diagnostic on the retained short saved child, recording the underlying pre-ready exception and actual Docker mount sources; do not repeat the broad search or retry its owner.",
+  "preservation": [
+    "Original failed owners and evidence retain their identities and incomplete state.",
+    "Production worker, source bytes, runtime, containment limits and official benchmark remain unchanged.",
+    "No API key, paid provider call, new allocation, reseal, retry of an old owner or scoring change."
+  ],
+  "limits": [
+    "Ten real workers and eighteen simulated native workers per failed search are observations, not the required fourteen/twenty-four positive proof.",
+    "Current post-run source hash checks do not replace the producer guard or establish a filesystem cause.",
+    "No mutation-competence, reliability or scientific-improvement completion claim."
+  ]
+}

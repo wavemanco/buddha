@@ -1,0 +1,166 @@
+{
+  "format": "buddha.imp01-frozen-improver-seam-delivery.v1",
+  "status": "implemented_offline_verified_hosted_ci_pending",
+  "scope": "One measured proposal with frozen executing improver I, separately pinned canonical task parent S and full measured development packet P. Not the full repeated/equal-budget improver experiment.",
+  "spec_sections": {
+    "DESIGN4": "Versioned literal parent/source proposals under the existing runtime.",
+    "DESIGN8": "Separate frozen I from S to support common starting conditions; future experiment still required.",
+    "DESIGN9": "Original owner, callback identity, charges, saved replies and unknown liabilities retained."
+  },
+  "source_cut": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-functional-cut-v1.json",
+    "sha256": "9439c767185d458f20f33a6bd7d3bf0c2729794f380ce18184390f1c685996df"
+  },
+  "implementation_pins": {
+    "buddha/candidate_improvement.py": "183351d234571c995bd866192fcaec0d80aebdcf28911dc4f9e05168643b03d0",
+    "buddha/candidate_improvement_results.py": "16373411b31e6f6eae6dcde7d31dc717c781dff0e5c96ae9cf445086a8b29f23",
+    "buddha/candidate_run.py": "888275b5c8d06ceb159385602dad2fb5a4b9a994f9075774b2cac5dd3f50a23e",
+    "buddha/candidate_worker.py": "4acdb845a1d78c36c4bbe1f0441c1ccb2dd6ffc7b44ebf770f15d3cf37c8f895",
+    "buddha/source_screen.py": "5dac87017fb8ff877d6efa581858ac9bb980c6b9b685ba20bb6b7cad11290b69",
+    "tests/test_frozen_improver.py": "6bc1d6a9138b60ac1db0843b3153e31cb85632cbced946418af2ba1a93c8b885"
+  },
+  "contract": {
+    "descriptor": "buddha.candidate-improvement.v2",
+    "worker": "buddha.candidate-improvement-worker.v3",
+    "feedback_required": "buddha.candidate-development-feedback.v2",
+    "callback_domain": "buddha.candidate-improvement-call.v2",
+    "reports": "buddha.candidate-improvement-report.v2 / buddha.candidate-improvement-stage-report.v2",
+    "lineage": "buddha.source-lineage.v2",
+    "roles": "Selected /agent is I. Canonical candidate.py target is S, supplied as literal data without another mount. Full P is measured from S at the protected stage.",
+    "unchanged_child": "Compare against S, allowing a child equal to I if I differs from S.",
+    "generic_session_limit": "Direct Session validates reviewed notes, development membership and literal S identity. Only the protected stage authenticates original measured S/P provenance.",
+    "legacy": "V1 descriptors/callbacks/reports/lineage and inherited source_search semantics retain their meaning; no helper inventory expansion, Gateway/schema/benchmark algorithm change."
+  },
+  "initial_interface_red": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-interface-red-v1.json",
+    "sha256": "65c659a822765a5cbbfc704ffbafc99335dbe5a04a5434bc5f01b83a0bd516c1",
+    "methods": 5,
+    "failures": 1,
+    "errors": 4,
+    "interpretation": "Strict old schema rejects new field/interface before owner creation; aggregate failure follows subtest refusals. Not a semantic/confinement failure."
+  },
+  "new_acceptance": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-functional-green-v1.json",
+    "sha256": "e27f471ef5da49f4c5ea771c3839fe69ea5bc664429df955d31e503f8b1af8bc",
+    "methods": 6,
+    "failures": 0,
+    "errors": 0,
+    "elapsed_seconds": 169.51086499996018,
+    "scope": "Simulated process/replies but real trusted worker dispatch, Session/Gateway/accounting, full measured packet, canonical alternate filenames, lineage reader, recovery and coherent prefix refusal."
+  },
+  "existing_regressions": {
+    "original_mixed_run": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-regressions-v1.json",
+      "sha256": "dbb8e4959a287f312995777e313a37e6da9585fd9691250c9a2ce988d5690db5",
+      "status": "failed",
+      "methods": 115,
+      "errors": 39,
+      "scope": "Strict process-free guard refused reviewed portable Python worker subprocesses in twelve methods. No product assertion failed."
+    },
+    "observed_nonportable_successes": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-regression-partition-v1.json",
+      "sha256": "70b6902c6b2d05ebcff5ecc2927f089b7865a709321557a5021acc97342b5f2e",
+      "methods": 102,
+      "scope": "Successful subset of the failed mixed run; not an all-green 115-method invocation."
+    },
+    "separate_portable_worker_run": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-portable-worker-green-v1.json",
+      "sha256": "834906c1d81f86b3fc76744fc3e81bed16aef3ec559cd530c4a0cf9a6c7ec3ce",
+      "methods": 13,
+      "failures": 0,
+      "errors": 0,
+      "reviewed_host_python_processes": 41,
+      "scope": "Reviewed literal fixtures execute in isolated Python subprocesses; no Docker/provider calls. Separate from confinement and arbitrary candidate execution."
+    },
+    "unique_existing_methods_with_successful_observation": 115
+  },
+  "quality": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\imp01-frozen-improver\\runs\\reviews\\imp01-quality-final-v2.json",
+    "sha256": "86f788d7f97a2da97054383974b292de7921297ec441ad869271f60e72d506ac",
+    "commands": 7,
+    "python_inputs": 249,
+    "source_and_configuration_inputs": 253,
+    "all_passed": true
+  },
+  "genuine_older_publications": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\imp01-frozen-improver\\runs\\reviews\\imp01-old-owner-proof-v1.json",
+    "sha256": "7ae67b69a4d8a9d7c4f198709bbe102421e778d6625cb05aac48ca413a61d05f",
+    "publications": 6,
+    "unchanged_files": 429,
+    "scope": "Specific original supplied-program fixture only, memory-only SQL, no retired-program execution. Interrupted valid search remains incomplete."
+  },
+  "confined_observation": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-confined-proof-v3.json",
+    "sha256": "26be6d76f246ab728ee12e6b5e32e3d62888a4142318cbeaa249868a97834234",
+    "actual_removed_workers": 2,
+    "mock_https_replies": 2,
+    "synthetic_spent_microusd": 22,
+    "held_microusd": 0,
+    "runtime_sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+    "scope": "Two supplied literal I programs execute in the reviewed restricted agent image, consume identical literal S/full P and save changed children. No official command, model authorship, child execution or effectiveness measurement."
+  },
+  "retained_proof_setup_failures": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-confined-proof-v1-prelaunch-stop.json",
+      "sha256": "d9d0d9fc31d7d61782fe56eb282de19f6b27cc6b96c44b634bb5266e9d7a54c6",
+      "reason": "Proof audit mishandled Windows executable=None before process creation; no proposal owner."
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-confined-proof-v2.json",
+      "sha256": "db7b4834ec59f0e65fef8f1689299bdf5ab7603b7163712d1197e12da1e9f3e7",
+      "reason": "Proof audit compared Docker.EXE and docker.exe case-sensitively, refusing image inspection. Original zero-operation proposal owner remains incomplete. No worker or send."
+    }
+  ],
+  "proof_guard_check": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-confined-proof-guard-check-v3.json",
+    "sha256": "9c3a30404155c613f0a22cd9f5a88f0f1ac91b9e5e4ddfe51f11063f97506a5c",
+    "cases": 9,
+    "scope": "Trusted private guard only; no app/fixture/process execution. Inputs are in retained authoring tool evidence; JSON alone records outcomes."
+  },
+  "reviews": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-implementation-independent-static-review-v1.json",
+      "sha256": "1ee45439a0fb9694d18cd456da27849270556838b3e2503a2d3b94dcdb85e087"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-confined-proof-static-review-v2.json",
+      "sha256": "f5c9f3dc6c4812ca514129f52a4c748e63eb71458833dc60925a5cc6f8209207"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-confined-proof-guard-diff-review-v3.json",
+      "sha256": "2b8efec7cd7029a0f4e9e453f92cdce7b560a87ef1f721d0dd7cfe04a1018371"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-confined-proof-independent-artifact-review-v1.json",
+      "sha256": "4c018a10489d63503aec614ad4d88829cf41f654ac4f70bf0e3fd53c30e32dc0"
+    }
+  ],
+  "later_base_integration": {
+    "merge_commit": "1bc0849",
+    "updated_parent": "572bf75837841162de32c4941c8c2096dfe45d96",
+    "paths": [
+      "docs/CI-STACK-REPAIR.md",
+      "tests/test_history_path_compat.py"
+    ],
+    "held_cut_pins_unchanged": 19,
+    "earlier_cohort_global_pin_difference": {
+      "new": [
+        "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\imp01-frozen-improver\\tests\\test_history_path_compat.py"
+      ],
+      "mixed": [
+        "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\imp01-frozen-improver\\tests\\test_history_path_compat.py"
+      ],
+      "portable": [
+        "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\imp01-frozen-improver\\tests\\test_history_path_compat.py"
+      ]
+    },
+    "scope": "Reviewed Windows relative-path test fix only. All exercised implementation/acceptance code bytes stayed unchanged. Seven quality checks were repeated after this integration."
+  },
+  "limits": [
+    "No complete final-head repository suite or hosted CI pass established here.",
+    "No actual model calls, new paid authority or changes to original paid-run records.",
+    "No measured gain or claim of improved improver effectiveness.",
+    "Several starting conditions/repetitions, fixed operator schedule, equal descendant budgets/selection, charged failures, detached failure-history feedback and separate sealed evaluation remain IMP-01 work."
+  ],
+  "funding": "Zero real provider calls. The separately approved capacity observation remains unfunded pending its exact driver CI; this seam neither uses nor changes that approval."
+}

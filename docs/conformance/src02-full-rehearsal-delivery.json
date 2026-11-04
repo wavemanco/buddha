@@ -1,0 +1,774 @@
+{
+  "base_commit": "6e10b0077eadfdf23555e7f7ff2b5da152f5b856",
+  "completed_actual_schedule": {
+    "completed_keyless_repeat": {
+      "new_replies": 0,
+      "new_workers": 0,
+      "receipt_sha256": "6788170959958ff4e8f2d3d460cd99d36d0bf788d943641ac93aa8619ec3e7cb",
+      "scope": "Same host process, after removing fake keys; key/environment entry, transport, worker and active-authority paths denied, SQL memory-only, fixture writes denied. Historical whole-fixture equality is a driver assertion: before/after inventories are not separately saved and cannot be independently reconstructed later.",
+      "status": "complete"
+    },
+    "final_funding": {
+      "all_owners_anchored_inactive": true,
+      "committed_microusd": 18087,
+      "operation_count": 267,
+      "owners": 51,
+      "real_API_spending": 0,
+      "reserved_microusd": 0,
+      "same_original_synthetic_authorization": true,
+      "spent_microusd": 18087,
+      "usage": "Each reply reports supplied five-input/three-output token counters; 18087 microusd is synthetic selected-profile arithmetic, not an invoice or live estimate."
+    },
+    "final_passive_review": {
+      "active_processes": 0,
+      "checked": [
+        "Pinned complete publication reproduced by passive source inspector",
+        "Owner manifests, memory-only raw ledgers, usage and selected-profile charges",
+        "Worker execution reports, unique container IDs and reported removal",
+        "Literal inherited proposal sources, three decisions and ordered development tasks",
+        "Retained prefix files/owner IDs, launch receipt seals and recorded progress ordering",
+        "Whole fixture remained byte-identical throughout this passive review"
+      ],
+      "file_backed_SQL_connections": 0,
+      "limits": [
+        "Recorded cleanup and frame telemetry do not independently establish lifetime absence or OS confinement.",
+        "Historical keyless-repeat equality is a driver assertion; its before/after manifest was not separately saved.",
+        "No new live provider, token-context, model-authorship, mutation-competence or scientific claim.",
+        "Only synthetic 5/3-token usage is reconciled; its charge is not a live cost forecast."
+      ],
+      "provider_calls": 0,
+      "receipt_sha256": "7e46568704006bad2ddcb822c47f7d6c8747c89ed7e1896b4735ad44233fac6f",
+      "review_seconds": 160.4068774000043,
+      "status": "pass"
+    },
+    "prefix": {
+      "after_durable_iteration": 0,
+      "new_synthetic_replies": 130,
+      "prefix_files_and_owner_ids_retained": true,
+      "receipt_sha256": "1b8f3a8da446a293918f497553e52650dcc1c895e99d0c258b25cbccee74464d",
+      "status": "verified_saved_incomplete_cancelled",
+      "workers": 25
+    },
+    "proof_bytes": 1061236,
+    "proof_sha256": "759ce311aff1c4164bc9c27c6c6df3fde08b304a771f42cb4af1decb7af5677b",
+    "report_sha256": "eb5aa6a9799ae32c725524a14fa17bf8981fbc2f42aed750605367c8e65ab8a1",
+    "same_owner_continuation": {
+      "new_synthetic_replies": 137,
+      "new_workers": 26,
+      "original_prefix_owner_ids_and_file_hashes_preserved": true,
+      "receipt_sha256": "2ca7b832ac9cc31bc78f84e45787f7a5c1bd7376c6992b930bd2ee5c67ce9adb",
+      "status": "complete"
+    },
+    "source_preservation": {
+      "driver_final_558_pin_recheck": "passed assertion in completed proof",
+      "historical_keyless_fixture_equality": "Driver assertion only; historical before/after full inventories were not separately saved",
+      "independent_final_fixture_preservation": "passive reviewer compared fixture bytes during its review"
+    },
+    "status": "pass",
+    "timing": {
+      "finished_utc": "2026-10-22T23:11:37.153354+00:00",
+      "post_initial_preflight_elapsed_seconds": 4648.028685899917,
+      "scope": "Timer starts after initial preflight; started_utc is later than monotonic timer start. Not full command wall time, live/provider latency or a forecast.",
+      "started_utc": "2026-10-22T21:54:09.543817+00:00"
+    },
+    "totals": {
+      "candidate_screens": 4,
+      "decisions": 3,
+      "generation_replies": 132,
+      "partition_replies": 12,
+      "physical_synthetic_replies": 267,
+      "proposal_replies": 3,
+      "real_provider_calls": 0,
+      "score_replies": 120,
+      "summary_replies": 0,
+      "unique_containers": 51,
+      "workers": 51
+    }
+  },
+  "date": "2026-10-22",
+  "earlier_failures_retained": [
+    {
+      "case": "v1 Windows Popen audit representation refused approved Docker command",
+      "cause_and_fix": "Windows Popen audits executable=None and serialized argv unless executable is explicit. The corrected guard registers exact validated argv, explicitly pins Docker executable, accepts exact list/serialized audit representations only while registered, and preserves shell/executable override and unapproved-command refusals. This is a rehearsal guard fix, not an executor or funding bypass.",
+      "observed": {
+        "phase": "preparation",
+        "seconds": 0.5050994999473915,
+        "status": "fail",
+        "synthetic_replies": 0,
+        "workers": 0
+      },
+      "proof": "full-rehearsal-proof-v1.json",
+      "proof_sha256": "e26deb24db64c74002d161d6805704f9532264199fa00372625569e00b55944e",
+      "raw_log": "full-rehearsal-run-v1.log",
+      "raw_log_sha256": "f431b6ae70de1e93cd20040c526b9bab35bcab362a5a5fb4497de5b4af6fbf1e",
+      "script_sha256": "b46f960b912a2f69a45dcf1187286b97675863790caee249d2594e8a49cf2397",
+      "source_map_sha256": "53f40de7b3767c9ac4402be064b9acd594e1edbe5b4fc840b766af3b221fc3a7"
+    },
+    {
+      "attribution_scope": "The raw launch log sanitizes the original exception. The separate cold diagnostic records socket.gethostname as the denied original metadata event; do not claim the generic launcher traceback itself exposes that event.",
+      "case": "v2 cold local hostname metadata denied by blanket socket audit",
+      "cause_and_fix": "Cold platform.machine() uses local hostname metadata. Allow only socket.gethostname; retain denial of socket construction, connect, bind and address lookup. Current driver is the separately pinned 6cf637... cut.",
+      "diagnostic_sha256": "e43cb8a4ed4534fe56e0e32230c700c3264e6ba47599a7fa3a156ab32e31e788",
+      "observed": {
+        "phase": "interrupted-prefix",
+        "seconds": 42.21081000007689,
+        "status": "fail",
+        "synthetic_replies": 0,
+        "workers": 0
+      },
+      "prefix_launch_receipt_sha256": "bbf6776645e138ffeea99b662fe600fc899a64f05b4c87db231bded947bad67b",
+      "proof": "full-rehearsal-proof-v2.json",
+      "proof_sha256": "0d03735035a93aee7ecb9290f2eaaebf4c0fe8d86d65c70c0ac199e678990884",
+      "raw_log": "full-rehearsal-run-v2.log",
+      "raw_log_sha256": "d0b98d2573f95ac1a0a091ee3d6bf13c3da25417c829ec6a72101af46e95dc75",
+      "script_sha256": "2204c3635fa251df17e52ebeaa9b24fd733b92aacc5daa676ff9a4561f6ac9e4",
+      "source_map_sha256": "b49026ea3f55846a01d155382bc47eb9c1fc6dc78df29373a712e1e3358cb572"
+    }
+  ],
+  "final_highwater": {
+    "by_executor_role": {
+      "agent": {
+        "distinct_recorded_limits": [
+          {
+            "cpus": 1,
+            "max_frames": 100000,
+            "max_stderr_bytes": 65536,
+            "max_stdout_bytes": 33554432,
+            "memory_mib": 256,
+            "pids": 64,
+            "scratch_mib": 64,
+            "wall_seconds": 900
+          }
+        ],
+        "max": {
+          "elapsed_seconds": 5.80605359992478,
+          "frame_count": 14,
+          "initial_bytes": 5708,
+          "invocation_control_bytes": 18009497,
+          "invocation_control_count": 71,
+          "observer_preflight_seconds": 33.19666719995439,
+          "stderr_bytes": 0,
+          "stdout_bytes": 45561
+        },
+        "max_host_to_worker_reply_frame_bytes": 22171,
+        "max_worker_to_host_frame_bytes": 30337,
+        "native_artifacts_max": null,
+        "observer_preflight_seconds_sum": 453.76225559972227,
+        "physical_synthetic_calls": 135,
+        "sampled_fixture_storage_max": {
+          "file_count": 571,
+          "largest_file_bytes": 4173506,
+          "total_bytes": 285658559
+        },
+        "worker_count": 15,
+        "worker_elapsed_seconds_sum": 66.30915269989055
+      },
+      "evaluator": {
+        "distinct_recorded_limits": [
+          {
+            "cpus": 1,
+            "max_frames": 100000,
+            "max_stderr_bytes": 65536,
+            "max_stdout_bytes": 134217728,
+            "memory_mib": 2048,
+            "pids": 64,
+            "scratch_mib": 128,
+            "wall_seconds": 1800
+          }
+        ],
+        "max": {
+          "elapsed_seconds": 60.683563800062984,
+          "frame_count": 14,
+          "initial_bytes": 4016927,
+          "invocation_control_bytes": 30411053,
+          "invocation_control_count": 89,
+          "observer_preflight_seconds": 38.07702999992762,
+          "stderr_bytes": 236,
+          "stdout_bytes": 2345449
+        },
+        "max_host_to_worker_reply_frame_bytes": 826,
+        "max_worker_to_host_frame_bytes": 1196645,
+        "native_artifacts_max": {
+          "file_count": 2,
+          "largest_file_bytes": 2317,
+          "total_bytes": 4312
+        },
+        "observer_preflight_seconds_sum": 1128.5892701999983,
+        "physical_synthetic_calls": 132,
+        "sampled_fixture_storage_max": {
+          "file_count": 608,
+          "largest_file_bytes": 4173506,
+          "total_bytes": 309175461
+        },
+        "worker_count": 36,
+        "worker_elapsed_seconds_sum": 1225.368851899635
+      }
+    },
+    "by_stage": {
+      "generation": {
+        "distinct_recorded_limits": [
+          {
+            "cpus": 1,
+            "max_frames": 100000,
+            "max_stderr_bytes": 65536,
+            "max_stdout_bytes": 33554432,
+            "memory_mib": 256,
+            "pids": 64,
+            "scratch_mib": 64,
+            "wall_seconds": 900
+          }
+        ],
+        "max": {
+          "elapsed_seconds": 5.80605359992478,
+          "frame_count": 14,
+          "initial_bytes": 1848,
+          "invocation_control_bytes": 18009497,
+          "invocation_control_count": 70,
+          "observer_preflight_seconds": 33.19666719995439,
+          "stderr_bytes": 0,
+          "stdout_bytes": 25990
+        },
+        "max_host_to_worker_reply_frame_bytes": 848,
+        "max_worker_to_host_frame_bytes": 3314,
+        "native_artifacts_max": null,
+        "observer_preflight_seconds_sum": 366.3550645997748,
+        "physical_synthetic_calls": 132,
+        "sampled_fixture_storage_max": {
+          "file_count": 571,
+          "largest_file_bytes": 4173506,
+          "total_bytes": 285658559
+        },
+        "worker_count": 12,
+        "worker_elapsed_seconds_sum": 61.946795299998485
+      },
+      "partition": {
+        "distinct_recorded_limits": [
+          {
+            "cpus": 1,
+            "max_frames": 100000,
+            "max_stderr_bytes": 65536,
+            "max_stdout_bytes": 134217728,
+            "memory_mib": 2048,
+            "pids": 64,
+            "scratch_mib": 128,
+            "wall_seconds": 1800
+          }
+        ],
+        "max": {
+          "elapsed_seconds": 32.071797600016,
+          "frame_count": 5,
+          "initial_bytes": 4016867,
+          "invocation_control_bytes": 26355329,
+          "invocation_control_count": 82,
+          "observer_preflight_seconds": 36.84463009994943,
+          "stderr_bytes": 236,
+          "stdout_bytes": 2345449
+        },
+        "max_host_to_worker_reply_frame_bytes": 826,
+        "max_worker_to_host_frame_bytes": 1196645,
+        "native_artifacts_max": {
+          "file_count": 2,
+          "largest_file_bytes": 1995,
+          "total_bytes": 3741
+        },
+        "observer_preflight_seconds_sum": 378.5854774999898,
+        "physical_synthetic_calls": 12,
+        "sampled_fixture_storage_max": {
+          "file_count": 588,
+          "largest_file_bytes": 4173506,
+          "total_bytes": 296281938
+        },
+        "worker_count": 12,
+        "worker_elapsed_seconds_sum": 315.968061199761
+      },
+      "proposal": {
+        "distinct_recorded_limits": [
+          {
+            "cpus": 1,
+            "max_frames": 100000,
+            "max_stderr_bytes": 65536,
+            "max_stdout_bytes": 33554432,
+            "memory_mib": 256,
+            "pids": 64,
+            "scratch_mib": 64,
+            "wall_seconds": 900
+          }
+        ],
+        "max": {
+          "elapsed_seconds": 1.5250349999405444,
+          "frame_count": 3,
+          "initial_bytes": 5708,
+          "invocation_control_bytes": 13864034,
+          "invocation_control_count": 71,
+          "observer_preflight_seconds": 31.366075600031763,
+          "stderr_bytes": 0,
+          "stdout_bytes": 45561
+        },
+        "max_host_to_worker_reply_frame_bytes": 22171,
+        "max_worker_to_host_frame_bytes": 30337,
+        "native_artifacts_max": null,
+        "observer_preflight_seconds_sum": 87.40719099994749,
+        "physical_synthetic_calls": 3,
+        "sampled_fixture_storage_max": {
+          "file_count": 466,
+          "largest_file_bytes": 4173506,
+          "total_bytes": 233218843
+        },
+        "worker_count": 3,
+        "worker_elapsed_seconds_sum": 4.362357399892062
+      },
+      "score": {
+        "distinct_recorded_limits": [
+          {
+            "cpus": 1,
+            "max_frames": 100000,
+            "max_stderr_bytes": 65536,
+            "max_stdout_bytes": 134217728,
+            "memory_mib": 2048,
+            "pids": 64,
+            "scratch_mib": 128,
+            "wall_seconds": 1800
+          }
+        ],
+        "max": {
+          "elapsed_seconds": 60.683563800062984,
+          "frame_count": 14,
+          "initial_bytes": 4016927,
+          "invocation_control_bytes": 30408016,
+          "invocation_control_count": 87,
+          "observer_preflight_seconds": 33.38393430004362,
+          "stderr_bytes": 232,
+          "stdout_bytes": 2308236
+        },
+        "max_host_to_worker_reply_frame_bytes": 683,
+        "max_worker_to_host_frame_bytes": 1140125,
+        "native_artifacts_max": {
+          "file_count": 2,
+          "largest_file_bytes": 2317,
+          "total_bytes": 4312
+        },
+        "observer_preflight_seconds_sum": 374.0805371000897,
+        "physical_synthetic_calls": 120,
+        "sampled_fixture_storage_max": {
+          "file_count": 598,
+          "largest_file_bytes": 4173506,
+          "total_bytes": 302797059
+        },
+        "worker_count": 12,
+        "worker_elapsed_seconds_sum": 643.7449095001211
+      },
+      "summary": {
+        "distinct_recorded_limits": [
+          {
+            "cpus": 1,
+            "max_frames": 100000,
+            "max_stderr_bytes": 65536,
+            "max_stdout_bytes": 134217728,
+            "memory_mib": 2048,
+            "pids": 64,
+            "scratch_mib": 128,
+            "wall_seconds": 1800
+          }
+        ],
+        "max": {
+          "elapsed_seconds": 23.01452279998921,
+          "frame_count": 4,
+          "initial_bytes": 4016802,
+          "invocation_control_bytes": 30411053,
+          "invocation_control_count": 89,
+          "observer_preflight_seconds": 38.07702999992762,
+          "stderr_bytes": 0,
+          "stdout_bytes": 2283395
+        },
+        "max_host_to_worker_reply_frame_bytes": 0,
+        "max_worker_to_host_frame_bytes": 1140125,
+        "native_artifacts_max": {
+          "file_count": 2,
+          "largest_file_bytes": 2317,
+          "total_bytes": 2387
+        },
+        "observer_preflight_seconds_sum": 375.9232555999188,
+        "physical_synthetic_calls": 0,
+        "sampled_fixture_storage_max": {
+          "file_count": 608,
+          "largest_file_bytes": 4173506,
+          "total_bytes": 309175461
+        },
+        "worker_count": 12,
+        "worker_elapsed_seconds_sum": 265.6558811997529
+      }
+    },
+    "derivation_scope": "Derived only from completed pinned driver proof JSON; no fixture walk, database access, worker, network or independent passive reconstruction.",
+    "feedback_packet_bytes_separately_measured_by_passive_reviewer": 4512,
+    "feedback_scope": "4512 bytes is the passive reviewer's retained-packet measurement, not a dedicated driver telemetry field or subtraction from envelope lengths.",
+    "final_storage": {
+      "file_count": 611,
+      "largest_file_bytes": 4173506,
+      "total_bytes": 309360274
+    },
+    "interpretation": "Stage maxima can come from different workers. Input bytes sum retained control-file lengths, not model context or unique disk use. Storage is after-worker sampled saved usage, not continuously measured disk, RAM or scratch peaks. Agent native-artifact fields are null/not applicable.",
+    "limits": [
+      "Storage maxima are after-worker samples, not continuously measured peak disk/scratch usage.",
+      "Inbound frame maximum and host reply frame maximum are distinct.",
+      "No isolated feedback-byte measure inferred; proposal configure and full HTTP request sizes are measured.",
+      "Synthetic text, groups, quality scores and usage do not establish scientific improvement, model authorship, vendor token-context fit, live price or live latency.",
+      "Original proof assertions are summarized, not independently rerun or reconstructed here."
+    ],
+    "numeric_summary_sha256": "3d72672750c7d1a13a986c04434ca2aa686383f4ca8609b5437d9239b13a709e",
+    "overall_from_proof": {
+      "elapsed_seconds": 60.683563800062984,
+      "frame_bytes": 1196645,
+      "frame_count": 14,
+      "initial_bytes": 4016927,
+      "invocation_control_bytes": 30411053,
+      "invocation_control_count": 89,
+      "stderr_bytes": 236,
+      "stdout_bytes": 2345449,
+      "storage_total_bytes": 309175461
+    },
+    "proposal_packet_sizes": [
+      {
+        "body_bytes": 22629,
+        "body_sha256": "17edf69b670903df5cf09b0efd198e916fba643c4e81149952e30da183ac8efa",
+        "index": 63,
+        "payload_bytes": 14094,
+        "payload_sha256": "e5aed744884239f577a3f3f3399121ebcab40d4098ba40bc9f3a2fb5bfa902e2",
+        "reply_bytes": 15618,
+        "reply_sha256": "ec148a82e2cbe72281e8cddf18f364dda92165ccb43f90607069c0cc7e76a8a7"
+      },
+      {
+        "body_bytes": 22379,
+        "body_sha256": "6fce5cbe488873855450ffb17444b710dbdee62a3dc7f7cf3d50f5671c805b60",
+        "index": 130,
+        "payload_bytes": 14389,
+        "payload_sha256": "275fd572a780e8a6f8df1049570a18eb462540f504744ecabe9c08a554fdcfa4",
+        "reply_bytes": 15941,
+        "reply_sha256": "88056e0da1d4aa4cad7a1ac11da2e1278964c72ac81c6e408e1284170ed28e59"
+      },
+      {
+        "body_bytes": 22701,
+        "body_sha256": "d9e25246baca211d667f0fbfec50932ee92241580693e7419723df1122e5511f",
+        "index": 197,
+        "payload_bytes": 14768,
+        "payload_sha256": "e21dff4c8f3cdc4164b7a31c2812f4d314113b80ab657ced4dcbfb87e4f78e74",
+        "reply_bytes": 16352,
+        "reply_sha256": "18e2fd9f46539b49396cdf48c5b2ef01a86d9c488df9ddad1aeb586ac0faa372"
+      }
+    ],
+    "provider_request_sizes_by_stage": {
+      "generation": {
+        "body_bytes_max": 2431,
+        "body_bytes_min": 763,
+        "body_bytes_sum": 201977,
+        "count": 132,
+        "synthetic_json_reply_bytes_max": 359,
+        "synthetic_text_payload_bytes_max": 65
+      },
+      "partition": {
+        "body_bytes_max": 2074,
+        "body_bytes_min": 2034,
+        "body_bytes_sum": 24584,
+        "count": 12,
+        "synthetic_json_reply_bytes_max": 348,
+        "synthetic_text_payload_bytes_max": 52
+      },
+      "proposal": {
+        "body_bytes_max": 22701,
+        "body_bytes_min": 22379,
+        "body_bytes_sum": 67709,
+        "count": 3,
+        "synthetic_json_reply_bytes_max": 16352,
+        "synthetic_text_payload_bytes_max": 14768
+      },
+      "score": {
+        "body_bytes_max": 1084,
+        "body_bytes_min": 1045,
+        "body_bytes_sum": 127412,
+        "count": 120,
+        "synthetic_json_reply_bytes_max": 240,
+        "synthetic_text_payload_bytes_max": 11
+      },
+      "summary": {
+        "body_bytes_max": null,
+        "body_bytes_min": null,
+        "body_bytes_sum": 0,
+        "count": 0,
+        "synthetic_json_reply_bytes_max": null,
+        "synthetic_text_payload_bytes_max": null
+      }
+    },
+    "status": "derived_from_completed_proof_and_separately_reviewed"
+  },
+  "fixed_inputs": {
+    "benchmark": "Pinned official NoveltyBench 1.1; no evaluator, model, prompt, parser or arithmetic replacement",
+    "configuration_check_sha256": "62047cb133701d444e5b2c6ec6dcb960f83a5d9622db92e236c6ed3df16e5a9a",
+    "execution_cut": {
+      "additional_ignored_inventory_builder_Python_pins": 2,
+      "base_commit": "6e10b0077eadfdf23555e7f7ff2b5da152f5b856",
+      "later_EVAL01_pure_math_files_used_during_full_schedule": false,
+      "portable_guard_test_executed_during_full_schedule": false,
+      "repository_Python_files": 219,
+      "scope": "Actual driver closure is the original 219-repository-Python cut plus other map inputs; all 558 pins are retained in the proof. Later integration does not expand that execution claim."
+    },
+    "generation_callbacks_per_task_by_source": [
+      10,
+      11,
+      11,
+      12
+    ],
+    "iterations": 3,
+    "live_funding": "UNALLOCATED: prospective $25 / 512 attempts; prior closed scopes supply no authority",
+    "proposal_sha256": "58201cb25ae027a24549f4153fcdf2bb82cdca8783c93cc687034cd5629bffa9",
+    "script_sha256": "6cf637743f6f528b5f614f00acadc334c04e2728f2101d834e521bae80ca24f3",
+    "source_bytes": [
+      13452,
+      13225,
+      13504,
+      13864
+    ],
+    "source_map_files": 558,
+    "source_map_sha256": "c937c749c5c45e1346e507b2157a7289ba15f09062d9baf053b85e11474312f5",
+    "source_sha256": [
+      "d7ba10ac6d4786cf22d7447242fa9188830f40ba5a5bf9d30c26681f7377491e",
+      "86b8f08f532c148bcffce69ff7563887e929d154141639fa2a933d40e749743e",
+      "ba20e190eaf6bb8ef869d39abf320d667eab58b11666495f2002e834a8297613",
+      "7bf27ee406f6146c379526126f653c0da8c1b47e849418dbb94b0def8864414a"
+    ],
+    "task_ids": [
+      "curated-0",
+      "curated-47",
+      "curated-97"
+    ]
+  },
+  "format": "buddha.src02-full-rehearsal-delivery.v1",
+  "full_local_test_suite_rerun": false,
+  "gate": {
+    "actual_model_authored_source_experiment": "open and unallocated",
+    "completed_passive_review": "pass",
+    "completed_proof": "pass",
+    "hosted_CI": "Separate timestamped snapshot below; pending checks are not passes.",
+    "scientific_improvement": "not established",
+    "source_preservation": "Driver's final frozen-map recheck passed; independent review kept the final fixture unchanged. This publisher reads saved JSON only.",
+    "universal_mutation_competence": "open"
+  },
+  "hosted_CI_snapshot": {
+    "PR62_attempt2_PR66_PR67": "Linux passed; Windows in progress at snapshot, not green",
+    "PR62_diagnostic": {
+      "authorized_retry": "One Windows-only attempt; running snapshot is not a pass, fix or proof of flakiness",
+      "authorized_retry_Windows_job_id": 120136434384,
+      "cause_status": "UNATTRIBUTED",
+      "isolated_exact_head_test": "One pass; test 115.292 seconds, diagnostic 115.609 seconds, no source/guard changes",
+      "isolated_receipt_sha256": "f1abea6f24b9904839e0b445d6d3b4bb347493ad37be7419debfe4009ca3fd14",
+      "original_failed_Windows_job_id": 120040013220,
+      "original_failure": "One Windows source-search known-reply resumption error; underlying cause suppressed by checked wrapper",
+      "original_log_sha256": "4f2460b48b569289a039e4d019cf1d1db33f71268c26baef377561fe2affd06b",
+      "retry_receipt_sha256": "f9e60406e857e06a90be6a035ec1940d6537e2afa07dfa53803a80507a763e97",
+      "run_id": 39840523179,
+      "test_id": "test_source_search.SourceSearchTests.test_known_reply_incomplete_resumes_original_plan_packet_and_owner_without_rebilling"
+    },
+    "PR65": "both OS passed",
+    "observed_utc": "2026-10-22T23:19:37.252Z",
+    "receipt_sha256": "71f9155693a7ef2c8af439c2ee892240b3c47e04665c8a47f16fb636f69092c8",
+    "scope": "Historical timestamped remote state, not a promise of current hosted state. No additional retry or merge is authorized by this delivery."
+  },
+  "limitations": [
+    "Generation marker strings are tracing controls, not compliant stories, glass answers or password digits; this engineering schedule proves no task quality or meaningful diversity.",
+    "Singleton partitions create ten quality heads even for closed-answer tasks; supplied grouping and quality responses are transport/arithmetic controls, not semantic judgments.",
+    "Every synthetic reply reports five input and three output tokens. These counters do not measure actual prompt/source tokenization, context fit, output adequacy, live pricing or provider cost.",
+    "267 is this frozen supplied-program success schedule, not a live forecast. Actual grouping heads, retries, fallback, rejected proposals and failed children can change counts.",
+    "Children retain the same literal improver fragment; observing inherited execution does not show an edited improver, improved improver efficacy, universal mutation competence or model authorship.",
+    "The trusted host and local Docker daemon remain in scope; supplied-file confinement is not unrestricted arbitrary-code clearance.",
+    "Completed keyless repetition occurs in the same process. Its historical full-fixture before/after equality is asserted by the driver without separately saved inventories; later passive review can inspect current anchors and accounting but cannot recreate that historical comparison.",
+    "Fake keys already exist in the dedicated process. Entry observer ordering is checked; interactive paste behavior is not exercised.",
+    "Finite measured request/frame/storage sizes do not establish simultaneous fit for every maximum-size permitted source, feedback or callback schedule. Worker wall limits do not bound synchronous host callback completion.",
+    "No general useful-diversity, causal, held-out, human-preference or leaderboard improvement claim; official NoveltyBench remains unchanged.",
+    "This draft creates no real financial authority, provider access or paid readiness; a separately approved concrete source allocation and funded handoff remain required.",
+    "The recorded 4648.028685899917-second timer starts after initial preflight. It includes controller, repeated source/configuration checks, workers and evidence checks, excludes initial preflight and is not provider latency, full command wall time or a forecast.",
+    "Passive review confirms retained prefix files/owner IDs and current complete accounting, but recorded cleanup/frame telemetry does not independently establish lifetime absence or OS confinement.",
+    "Original 219-Python rehearsal/quality evidence, separate five-method 220-Python preservation evidence and combined 222-Python quality evidence remain distinct; there is no retroactive full-suite or combined actual-execution claim."
+  ],
+  "publication_integrated_source_cut": {
+    "commit": "d5d83c9f4c8456b1ccff5f37270bb02b05bed749",
+    "scope": "Current combined quality cut after integrating the two pure mathematical EVAL-01 files; original actual rehearsal remains based on 6e10b0077eadfdf23555e7f7ff2b5da152f5b856."
+  },
+  "purpose": "Actual confined full supplied-program schedule, durable-decision interruption/original-owner continuation and separate passive review. No paid or scientific improvement claim.",
+  "separate_completed_checks": {
+    "actual_keyless_v3_configuration": {
+      "receipt_sha256": "839f91c470deec86806848c5e7508f68ed2dbd1791d9f8578fa442fe4722a38d",
+      "scope": "Actual unallocated checker under strict credential/environment, SQL, network, process and authority-creation denial; configuration consistency only"
+    },
+    "combined_checkout_seven_quality_checks_222_Python": {
+      "checks": [
+        {
+          "command": [
+            "C:\\Program Files\\Python313\\python.exe",
+            "-B",
+            "-m",
+            "ruff",
+            "check",
+            "buddha",
+            "tests",
+            "agents",
+            "docs/conformance/src02-full-rehearsal.py"
+          ],
+          "exit_code": 0,
+          "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+          "name": "lint"
+        },
+        {
+          "command": [
+            "C:\\Program Files\\Python313\\python.exe",
+            "-B",
+            "-m",
+            "ruff",
+            "format",
+            "--check",
+            "buddha",
+            "tests",
+            "agents",
+            "docs/conformance/src02-full-rehearsal.py"
+          ],
+          "exit_code": 0,
+          "log_sha256": "c799b224f99851f826dcf3ee52aac7078c57c2fccfed307d3b7e5464716bf263",
+          "name": "format"
+        },
+        {
+          "command": [
+            "C:\\Program Files\\Python313\\python.exe",
+            "-B",
+            "-m",
+            "mypy",
+            "--strict",
+            "--platform",
+            "win32",
+            "--cache-dir",
+            "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-full-rehearsal\\runs\\reviews\\full-rehearsal-mypy-win32",
+            "buddha",
+            "agents"
+          ],
+          "exit_code": 0,
+          "log_sha256": "ff7fa338160fc834760e2981fabb96c5026e1c7b5fbf91dba5fe0364c0f97c94",
+          "name": "types-win32"
+        },
+        {
+          "command": [
+            "C:\\Program Files\\Python313\\python.exe",
+            "-B",
+            "-m",
+            "mypy",
+            "--strict",
+            "--platform",
+            "linux",
+            "--cache-dir",
+            "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-full-rehearsal\\runs\\reviews\\full-rehearsal-mypy-linux",
+            "buddha",
+            "agents"
+          ],
+          "exit_code": 0,
+          "log_sha256": "ff7fa338160fc834760e2981fabb96c5026e1c7b5fbf91dba5fe0364c0f97c94",
+          "name": "types-linux"
+        },
+        {
+          "command": [
+            "C:\\Program Files\\Python313\\python.exe",
+            "-B",
+            "-m",
+            "bandit",
+            "-r",
+            "buddha",
+            "agents",
+            "docs/conformance/src02-full-rehearsal.py"
+          ],
+          "exit_code": 0,
+          "log_sha256": "028191873934d14dd84bd165ac70d0480ef36f7e7b2de5a7ddfdd676930a37da",
+          "name": "security"
+        },
+        {
+          "command": [
+            "C:\\Program Files\\Python313\\python.exe",
+            "-B",
+            "-m",
+            "pip_audit",
+            "--no-deps",
+            "-r",
+            "requirements.txt"
+          ],
+          "exit_code": 0,
+          "log_sha256": "e82148c0c30269ca5a2c35420ece6af011a4faf5a375325d750e243ffdb10625",
+          "name": "dependencies"
+        },
+        {
+          "command": [
+            "C:\\Program Files\\Python313\\python.exe",
+            "-B",
+            "-m",
+            "compileall",
+            "-q",
+            "buddha",
+            "tests",
+            "agents",
+            "docs/conformance/src02-full-rehearsal.py"
+          ],
+          "exit_code": 0,
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "name": "compile"
+        }
+      ],
+      "configuration_inputs": 4,
+      "environment_policy": "Dedicated helper enumerated names and deleted all non-SAFE_OS entries before any subprocess/environment copying; no provider key lookup/value read or restoration.",
+      "head": "d5d83c9f4c8456b1ccff5f37270bb02b05bed749",
+      "inputs_unchanged": true,
+      "no_retroactive_execution_claim": "The two newly integrated pure mathematical EVAL-01 files and portable guard test are covered only as declared by this combined quality cut. They were not run as part of the original 219-Python actual rehearsal, and this check executes no full unit suite or Docker rehearsal.",
+      "passed": true,
+      "python_inputs": 222,
+      "receipt_sha256": "9438e72660ac4b8291c896f0e955d02db7602265f1716bd11d820004eb44614f",
+      "scope": "Combined current220 tracked Python plus untracked trusted probe and portable test, deduplicated. Types cover production modules and agents for win32+linux. Lint/format/compile cover tests and trusted probe; security covers production/agents and trusted probe, matching existing scope. No unit suite, rehearsal, fixture SQL, worker or provider operation executed. This combined check does not expand the historical actual-proof219, portable220-old-cut or numerical220-old-cut scopes."
+    },
+    "five_new_portable_methods_220_python_preservation_cut": {
+      "errors": 0,
+      "failures": 0,
+      "new_test_only_lint_format_syntax_receipt_sha256": "f6773e0068b5dced84ad6e135f4a591b31987bc6cfcc76ead9421d3f4261bcc5",
+      "raw_log_sha256": "ce6dc7af62a446240a1b1afd1f049b48903f9f869b5ce1366d243545c06db814",
+      "receipt_sha256": "ba2c20f617c3efa7875809dc34e36992759dea1e54c749db938ecb5884090592",
+      "retained_quality_setup_failure": "Initial isolated Python invocation hid user-site Ruff; v1 receipt 42b60a2e693b2a1fda9c90b4a6dea725c7e8c519ceeac537f00b34647cf577cd retained. Corrected existing -B tool invocation passed without tracked-source changes.",
+      "seconds": 0.12595789995975792,
+      "skips": 0,
+      "source_preservation": "220 Python + four configuration files and all 558 driver-map pins unchanged; this is not a seven-check 220-Python cohort",
+      "test_source_sha256": "caf40b9170680f64c809f28b963ad0680ee9bd8de0248ee5c2f2a815e19aed96",
+      "tests_run": 5
+    },
+    "historical_static_review": {
+      "receipt_sha256": "cae17f52ac766f4514c3a9fe11becd4b3d947a89123e4ed3f69129614a929116",
+      "reviewed_script_sha256": "b46f960b912a2f69a45dcf1187286b97675863790caee249d2594e8a49cf2397",
+      "scope": "Earlier static source cut only, no runtime or all-map rehash claim. At that earlier cut final passive review was pending; the current completed v3 review is recorded separately above."
+    },
+    "preflight_before_first_run": {
+      "cases": 8,
+      "receipt_sha256": "1a42022c1648ba986aeafcecd444a1276610ef554744e49457fe41afed52891f",
+      "scope": "Passive valid preflight and eight refusals; this earlier-cut receipt is not a final-current-cut rerun",
+      "script_sha256": "b46f960b912a2f69a45dcf1187286b97675863790caee249d2594e8a49cf2397"
+    },
+    "prospective_acceptance_measurements": {
+      "receipt_sha256": "4ef60a31530c8bb489200b5a135e65e55065a565776369ff636668153be0aff3",
+      "scope": "57 proposal-inclusive controls, 42 launcher sources, 51 prospective owner paths and reconstructed initial configure frame shapes; not actual completed-schedule evidence"
+    },
+    "seven_quality_checks_219_python_cut": {
+      "checks": [
+        "Ruff lint",
+        "Ruff format",
+        "strict mypy win32",
+        "strict mypy linux",
+        "Bandit",
+        "pip-audit",
+        "compile"
+      ],
+      "configuration_inputs": 4,
+      "passed": true,
+      "python_inputs": 219,
+      "receipt_sha256": "3593c349dc9870548aad6706ad7c496837faf051a494ad73179327c627be894d",
+      "scope": "Separate exact 219-Python cut, excluding the later portable test file; no new full local suite or 220-Python seven-check claim",
+      "script_sha256": "6cf637743f6f528b5f614f00acadc334c04e2728f2101d834e521bae80ca24f3"
+    }
+  },
+  "status": "pass_at_declared_offline_engineering_scope"
+}

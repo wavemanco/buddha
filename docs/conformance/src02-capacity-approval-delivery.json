@@ -1,0 +1,52 @@
+{
+  "format": "buddha.source-capacity-approval-delivery.v1",
+  "status": "approved_immutable_inputs_prepared_no_authority",
+  "approval": {
+    "path": "docs/conformance/src02-capacity-approval.json",
+    "sha256": "7b9da79d7cf9c75d44f623de76191b2e55f19afebe72c90570e5f1b7d077a580"
+  },
+  "frozen_funding_proposal": {
+    "path": "docs/conformance/src02-capacity-funding-proposal.json",
+    "sha256": "7c995d967a6fb6977571c1936482624bd51da1c1e60c41f9b2f1386c2e321a0a",
+    "unchanged": true
+  },
+  "input_preview": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\capacity-unfunded-preview-v1.json",
+    "sha256": "ec8bc77c20b99d4310b90913154a633e741c6f5ab5e621caa8673282a1e90ab9"
+  },
+  "independent_review": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\capacity-unfunded-independent-review-v1.json",
+    "sha256": "1c87367afc852ac10c1d7a16fdac9cef8b3706d52ef6520f17d6e309c01c88ad",
+    "scope": "File/hash inputs only; no SQL, allocation, provider calls or CI attestation."
+  },
+  "ci_checkpoint": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\capacity-approval-ci-checkpoint-v1.json",
+    "sha256": "60c0a0fc362792e86c72a7ba850e059b9233f65d654c05a6552f67f08abe898c",
+    "executing_code_commit": "3848ac964cf49aafb35ef2bb79253867e1a8f89a",
+    "ubuntu": "SUCCESS",
+    "windows": "IN_PROGRESS",
+    "windows_job": "https://github.com/wavemanco/buddha/actions/runs/39978095457/job/120497901748"
+  },
+  "checks": {
+    "prior_plan_rows_preserved_raw_exact": 87,
+    "original_acceptance_tails_preserved": 5,
+    "frozen_approval_proposal_and_handoff_hashes": true,
+    "authorization_absent": true,
+    "run_directory_absent": true,
+    "application_test_config_changes": false
+  },
+  "budget_microusd": 7000000,
+  "max_calls": 1,
+  "partial_results_allowed": true,
+  "authority_created": false,
+  "provider_calls": 0,
+  "keys_read": false,
+  "live_command_supplied": false,
+  "remaining": [
+    "Exact executing-code Windows CI success",
+    "Dedicated authority creation and actual no-cost handoff preflight",
+    "Checked operator command and actual model observation",
+    "Broader competence and scientific gates retained by PLAN"
+  ],
+  "claim": "Approval and unfunded input custody only; no token-fit, output-margin, source-competence or benchmark-improvement evidence."
+}

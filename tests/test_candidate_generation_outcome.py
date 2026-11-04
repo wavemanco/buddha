@@ -4,19 +4,74 @@ import hashlib
 import json
 import os
 import shutil
+import sys
 import unittest
+from pathlib import Path
 from unittest.mock import patch
 
 import test_candidate_generation as generation_fixtures
 import test_candidate_run as session_fixtures
+import test_executor as executor_fixtures
 
 from buddha.answers import Answers
-from buddha.executor import ExecutorError
+from buddha.executor import ContainerSpec, ExecutorError, Limits
 from buddha.gateway import RawHTTPTransport
 from buddha.releases import _json
 
 
 class CandidateGenerationOutcomeTests(unittest.TestCase):
+    def test_real_executor_cleanup_sidecar_survives_c1_sealing_and_passive_replay(self):
+        h = self.prepare_v2()
+        settings = h.candidate.record["executor"]
+        spec = ContainerSpec(
+            settings["image_id"],
+            settings["role"],
+            tuple((target, Path(path)) for target, path in settings["mounts"]),
+            settings["runner_entrypoint"],
+            tuple(tuple(pair) for pair in settings["image_environment"]),
+        )
+        fixture = executor_fixtures.DockerFixture(
+            spec,
+            Limits(**settings["limits"]),
+            stdout=_json(h.candidate.ready())
+            + b"\n"
+            + _json(h.candidate.done(h.weak_answers))
+            + b"\n",
+        )
+        with (
+            patch.object(executor_fixtures, "IMAGE", settings["image_id"]),
+            patch.object(executor_fixtures, "ENDPOINT", settings["docker_endpoint"]),
+            patch("buddha.executor.shutil.which", return_value=sys.executable),
+            patch("subprocess.run", side_effect=fixture.control),
+            patch("subprocess.Popen", side_effect=fixture.popen),
+        ):
+            report = h.run_api(h.directory, transport=RawHTTPTransport(allow_paid=False))
+        self.assertEqual(report["status"], "complete")
+        self.assertEqual(report["disposition"], "generated")
+        seal = json.loads((h.directory / "completed/0.json").read_bytes())
+        cleanup = list((h.directory / "owners/0").glob("executor-cleanup-*.json"))
+        self.assertEqual(len(cleanup), 1)
+        self.assertEqual(
+            set(seal["files"]),
+            {"report.json", "session/report.json", "session/done.json", "session/answers.json"},
+        )
+        evidence = json.loads(cleanup[0].read_bytes())
+        self.assertEqual(evidence["cleanup_status"], "removed")
+        self.assertEqual(evidence["container_id"], executor_fixtures.CONTAINER)
+        self.assertEqual(
+            evidence["intent"]["attempt"], str(h.directory / seal["attempt"] / "session")
+        )
+        self.assertFalse(list(h.root.glob("*.executor-pending.json")))
+        self.assertEqual(self.inspect(h), report)
+        with (
+            patch("buddha.executor.run_container", side_effect=AssertionError("replay worker")),
+            patch("http.client.HTTPSConnection", side_effect=AssertionError("replay network")),
+        ):
+            self.assertEqual(
+                h.run_api(h.directory, transport=RawHTTPTransport(allow_paid=False)), report
+            )
+            h.prepare_native(reference=report["source_generation"])
+
     def prepare_v2(self, **changes):
         h = self.fixture()
         h.candidate.record.update(format="buddha.candidate-generation.v2", **changes)
@@ -157,6 +212,137 @@ class CandidateGenerationOutcomeTests(unittest.TestCase):
                     Answers.from_bytes(path.read_bytes()).to_bytes(), answers.to_bytes()
                 )
                 self.assertEqual(self.inspect(h), report)
+
+    def test_passive_c1_is_interpreted_once_with_fresh_reads_and_publication_parity(self):
+        from buddha.candidate_generation import read_candidate_generation_source
+        from buddha.doctor import _Capture
+
+        for prospective in (False, True):
+            with self.subTest(prospective=prospective):
+                h = self.prepare_v2() if prospective else self.fixture()
+                if not prospective:
+                    h.prepare()
+                report = h.run_generation()
+                path = h.attempt() / ("session/answers.json" if prospective else "answers.json")
+                raw = path.read_bytes()
+                before = self.tree(h.directory)
+                authority_before = h.fixture.authority.path.read_bytes()
+                original_read = _Capture.read
+                reads = []
+
+                def read(
+                    capture,
+                    filename,
+                    *args,
+                    path=path,
+                    reads=reads,
+                    original_read=original_read,
+                    **kwargs,
+                ):
+                    if filename == path:
+                        reads.append(filename)
+                    return original_read(capture, filename, *args, **kwargs)
+
+                with (
+                    patch.object(_Capture, "read", new=read),
+                    patch.object(Answers, "from_bytes", wraps=Answers.from_bytes) as parse,
+                    patch(
+                        "buddha.candidate_generation.Gateway", side_effect=AssertionError("passive")
+                    ),
+                    patch(
+                        "buddha.candidate_run.CandidateSession",
+                        side_effect=AssertionError("passive"),
+                    ),
+                    patch("buddha.executor.run_container", side_effect=AssertionError("passive")),
+                    patch("http.client.HTTPSConnection", side_effect=AssertionError("passive")),
+                ):
+                    tasks, answers, returned_path, files, _ = read_candidate_generation_source(
+                        report["source_generation"] if prospective else h.source_reference(),
+                        h.fixture.authority.path,
+                    )
+                self.assertEqual(len(reads), 5 if prospective else 3)
+                self.assertEqual(parse.call_count, 1)
+                self.assertEqual(tasks.fingerprint(), h.candidate.tasks.fingerprint())
+                self.assertEqual(returned_path, path)
+                self.assertEqual(files[path], hashlib.sha256(raw).hexdigest())
+                self.assertEqual(answers.to_bytes(), Answers.from_bytes(raw).to_bytes())
+                if prospective:
+                    with patch.object(Answers, "from_bytes", wraps=Answers.from_bytes) as parse:
+                        self.assertEqual(self.inspect(h), report)
+                    self.assertEqual(parse.call_count, 1)
+                self.assertEqual(self.tree(h.directory), before)
+                self.assertEqual(h.fixture.authority.path.read_bytes(), authority_before)
+
+    def test_c1_change_after_initial_validation_or_before_finish_is_rejected(self):
+        from buddha import candidate_generation
+        from buddha.doctor import _Capture
+
+        h = self.prepare_v2()
+        report = h.run_generation()
+        path = h.attempt() / "session/answers.json"
+        raw = path.read_bytes()
+        changed = json.loads(raw)
+        changed["outputs"][0]["answers"][0] = "different valid literal answer"
+        replacement = Answers.from_bytes(_json(changed)).to_bytes()
+        for boundary in ("initial", "finish"):
+            with self.subTest(boundary=boundary):
+                original = (
+                    candidate_generation._outputs if boundary == "initial" else _Capture.finish
+                )
+
+                def replace(*args, boundary=boundary, original=original, **kwargs):
+                    if boundary == "initial":
+                        result = original(*args, **kwargs)
+                        path.write_bytes(replacement)
+                        return result
+                    path.write_bytes(replacement)
+                    return original(*args, **kwargs)
+
+                target = candidate_generation if boundary == "initial" else _Capture
+                method = "_outputs" if boundary == "initial" else "finish"
+                try:
+                    with patch.object(target, method, new=replace):
+                        with self.assertRaises(candidate_generation.CandidateGenerationError):
+                            candidate_generation.read_candidate_generation_source(
+                                report["source_generation"], h.fixture.authority.path
+                            )
+                finally:
+                    path.write_bytes(raw)
+
+    def test_checked_c1_binds_original_noncanonical_bytes_and_exact_path(self):
+        from buddha import candidate_generation
+
+        h = self.prepare_v2()
+        report = h.run_generation()
+        original = candidate_generation._outputs
+        with patch.object(candidate_generation, "_outputs", wraps=original) as outputs:
+            _, expected, path, _, _ = candidate_generation.read_candidate_generation_source(
+                report["source_generation"], h.fixture.authority.path
+            )
+        args = outputs.call_args.args
+        raw = path.read_bytes()
+        noncanonical = json.dumps(json.loads(raw), indent=2).encode()
+        self.assertNotEqual(noncanonical, expected.to_bytes())
+        amended_report = args[1] | {
+            "artifacts": {"answers.json": hashlib.sha256(noncanonical).hexdigest()}
+        }
+        try:
+            path.write_bytes(noncanonical)
+            checked = original(args[0], amended_report, *args[2:])
+            parsed = checked.checked(path, path.read_bytes())
+            self.assertEqual(parsed.to_bytes(), expected.to_bytes())
+            self.assertEqual(parsed.native_bytes(), expected.native_bytes())
+            self.assertIs(checked.checked(path, noncanonical), parsed)
+            for other_path, other_raw in (
+                (path.with_name("other.json"), noncanonical),
+                (path, raw),
+                (path, noncanonical + b"\n"),
+            ):
+                with self.subTest(path=other_path, raw_size=len(other_raw)):
+                    with self.assertRaises(candidate_generation.CandidateGenerationError):
+                        checked.checked(other_path, other_raw)
+        finally:
+            path.write_bytes(raw)
 
     def test_post_ready_agent_error_after_known_reply_is_terminal_and_passive(self):
         h = self.prepare_v2()

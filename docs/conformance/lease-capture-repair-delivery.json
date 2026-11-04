@@ -1,0 +1,65 @@
+{
+  "format": "buddha.lease-capture-repair-delivery.v1",
+  "date": "2026-10-31",
+  "basis_head": "295553c520a311ba2806c58b6b4820385ee0d581",
+  "plan_revision": 211,
+  "spec": [
+    "DESIGN7",
+    "DESIGN9",
+    "ENG-OBS-01"
+  ],
+  "status": "scoped_checks_pass_hosted_pending",
+  "live_execution_cleared": false,
+  "route": "User selected fresh-comparison preparation only. Original657-call run retained partial; no migration, retirement, spending or grant transfer.",
+  "behavior": {
+    "scope": "Known root/held trial locks join constructor context by bounded content digest; oversized/unreadable/non-regular file probe disables reuse.",
+    "maximum_probe_bytes_per_context": 512,
+    "captured_evidence_or_export_format_changed": false,
+    "reader": "Existing guarded _read handles physical file identity and Windows sharing. No new file reader.",
+    "limits": "Optimization-only probes are outside capture byte accounting. Aggregate overhead unmeasured; separate stat/read observations are non-atomic and do not defeat transient ABA changes. Fresh finishes and strict fallback remain."
+  },
+  "validation": {
+    "red": "One collision method fails on3subcases before production repair; retained repeat follows earlier unsaved RED.",
+    "scoped": "19methods:18pass/1existing symlink-privilege skip;117.395545s parent;180s limit.",
+    "final_cut": "Only loop variables bound explicitly for Ruff B023 after scoped cohort. Affected collision method rerun passes3subcases; full Ruff/format/in-memory compilation pass. Production bytes unchanged from scoped cohort.",
+    "quality": "Strict mypy89, Bandit, runtime/development dependency audits pass. Initial lint failure and subsequent correction retained; no checks suppressed.",
+    "hosted": "Parent201:Linux2174 exact occurrences verified;Windows1624 successful occurrences plus separate failed550-method shard. Nine successful jobs/63quality steps; no aggregate Windows/all-ten pass. New source exact CI pending.",
+    "actual_provider_calls": 0,
+    "actual_containers": 0,
+    "actual_history_reads": 0,
+    "independent_review": "Static review found no concrete defect; qualified probe-byte accounting and non-atomic limits. No independent tests."
+  },
+  "evidence": {
+    "red-result-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\lease-capture-repair-20261031-v1\\red-result-v1.json",
+      "sha256": "2a290778cfe9dc1adeb6dc85b32d127c24750b61128db0b6f0b303bf978f8dd7"
+    },
+    "green-result-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\lease-capture-repair-20261031-v1\\green-result-v1.json",
+      "sha256": "bb30dc96b9e2d73477de627e7c95905011a5787f9e2b83cde12a4b797281fdcf"
+    },
+    "quality-result-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\lease-capture-repair-20261031-v1\\quality-result-v1.json",
+      "sha256": "d946cf19e29ea6c7d0e8e15bb13d5ffe1142ca5f86985bb3f39bd5fadbbb063a"
+    },
+    "final-checks-v2.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\lease-capture-repair-20261031-v1\\final-checks-v2.json",
+      "sha256": "de04c34e007123c705a9fd072e3135482f271f8d19819dfdea79971805c0c11f"
+    },
+    "parent_hosted_partial": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\source-screen-task-view-hosted-20261031-v1\\frozen-terminal-partial-summary-v1.json",
+      "sha256": "459c98a4febdb054334cf462d00b403eae7382565d5888a43f221ac3b472db03"
+    }
+  },
+  "source_sha256": {
+    "buddha/doctor.py": "0def07dd42d2e8e22526b41bfe5b2bd39e7f21bcd95f0ab7c38713b54ce706db",
+    "tests/test_passive_capture_scope.py": "8076295af05bb4e58eaef6c53d68801c16256da31f3ce93dc5f3b8ca15d44172",
+    "docs/RECONSTRUCTION-COST.md": "d0c4e86617abf039dcb8efe37cecc13c02fa082eb38f9109df1723275e99b17d"
+  },
+  "preservation": {
+    "old_raw_revision_rows": 210,
+    "original_acceptance_tails": 7,
+    "original_inputs_owners_grants": "not opened or rewritten",
+    "frozen_source_models_benchmark": "unchanged"
+  }
+}

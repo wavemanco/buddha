@@ -10,7 +10,7 @@ import os
 import sqlite3
 import stat
 import sys
-from collections.abc import Iterator, Mapping
+from collections.abc import Callable, Iterator, Mapping
 from contextlib import closing, contextmanager
 from ctypes import wintypes
 from dataclasses import dataclass, field
@@ -32,6 +32,22 @@ MAX_MANIFEST_BYTES = 32 * 1024**2
 MAX_LEDGER_BYTES = 512 * 1024**2
 MAX_ROWS = 100_000
 _SIDECARS = ("-wal", "-shm", "-journal")
+
+
+class EvidenceFieldLimitError(ValidationError):
+    """A bounded evidence field needs at least the observed number of bytes."""
+
+    def __init__(self, message: str, minimum_bytes: int) -> None:
+        self.minimum_bytes = minimum_bytes
+        super().__init__(message)
+
+
+class EvidenceTotalLimitError(ValidationError):
+    """Consuming another evidence file would exceed the observation allowance."""
+
+
+class EvidencePathLimitError(ValidationError):
+    """The bounded evidence file/path population was exceeded."""
 
 
 def _absolute(value: object) -> Path:
@@ -105,7 +121,7 @@ def _open_binary(path: Path) -> Iterator[BinaryIO]:
 def _read(path: Path, maximum: int) -> bytes:
     before = _regular(path)
     if before.st_size > maximum:
-        raise ValidationError("evidence file exceeds its byte ceiling")
+        raise EvidenceFieldLimitError("evidence file exceeds its byte ceiling", before.st_size)
     chunks = bytearray()
     with _open_binary(path) as stream:
         opened = os.fstat(stream.fileno())
@@ -119,12 +135,32 @@ def _read(path: Path, maximum: int) -> bytes:
         while block := stream.read(min(1024**2, maximum - len(chunks) + 1)):
             chunks.extend(block)
             if len(chunks) > maximum:
-                raise ValidationError("consumed evidence exceeds its byte ceiling")
+                raise EvidenceFieldLimitError(
+                    "consumed evidence exceeds its byte ceiling", len(chunks)
+                )
         if _signature(os.fstat(stream.fileno()))[:4] != _signature(opened)[:4]:
             raise ValidationError("opened evidence changed during observation")
     if _signature(_regular(path)) != _signature(before):
         raise ValidationError("evidence file changed during observation")
     return bytes(chunks)
+
+
+def _total_read(
+    path: Path,
+    maximum: int,
+    remaining: int,
+    *,
+    read: Callable[[Path, int], bytes] | None = None,
+) -> bytes:
+    """Preserve both pre-read ceilings and identify the one actually exceeded."""
+    try:
+        return (_read if read is None else read)(path, min(maximum, remaining))
+    except EvidenceFieldLimitError as error:
+        if error.minimum_bytes <= maximum and remaining < maximum:
+            raise EvidenceTotalLimitError(
+                "evidence observation exceeds its total byte ceiling"
+            ) from error
+        raise
 
 
 def _sidecars(path: Path) -> None:
@@ -153,7 +189,7 @@ def _tree(
             for entry in children:
                 entries += 1
                 if entries > maximum_entries:
-                    raise ValidationError("evidence directory entry ceiling exceeded")
+                    raise EvidencePathLimitError("evidence directory entry ceiling exceeded")
                 path = parent / entry.name
                 _plain(path)
                 information = path.lstat()
@@ -172,7 +208,7 @@ def _tree(
                             continue
                     files.append(name)
                     if len(files) > MAX_FILES:
-                        raise ValidationError("evidence file ceiling exceeded")
+                        raise EvidencePathLimitError("evidence file ceiling exceeded")
                 else:
                     raise ValidationError("evidence tree contains a link or nonregular member")
     # The existing portable inventory validator accepts leaf paths, not a list
@@ -296,13 +332,15 @@ class SealedEvidence:
                 if folders != run._directories:
                     raise ValidationError("evidence directories changed during verification")
                 for name in names:
-                    raw = _read(run.directory / name, min(_limit(name), MAX_TOTAL_BYTES - total))
+                    raw = _total_read(run.directory / name, _limit(name), MAX_TOTAL_BYTES - total)
                     total += len(raw)
                     if raw != run.files[name]:
                         raise ValidationError("evidence bytes changed during verification")
             if self.authorization_path is not None:
                 _sidecars(self.authorization_path)
-                raw = _read(self.authorization_path, min(MAX_LEDGER_BYTES, MAX_TOTAL_BYTES - total))
+                raw = _total_read(
+                    self.authorization_path, MAX_LEDGER_BYTES, MAX_TOTAL_BYTES - total
+                )
                 if raw != self.authorization:
                     raise ValidationError("authorization bytes changed during verification")
                 _sidecars(self.authorization_path)
@@ -320,8 +358,11 @@ def read_search_evidence(directory: Path, *, evidence: dict[str, object]) -> Sea
             record["format"] != "buddha.search-verification-input.v1"
         ):
             raise ValidationError("unsupported search verification input")
-        if len(_canonical(record)) > MAX_MANIFEST_BYTES:
-            raise ValidationError("verification input record exceeds its byte ceiling")
+        record_size = len(_canonical(record))
+        if record_size > MAX_MANIFEST_BYTES:
+            raise EvidenceFieldLimitError(
+                "verification input record exceeds its byte ceiling", record_size
+            )
         runs = record["runs"]
         if type(runs) is not list or not 1 <= len(runs) <= MAX_RUNS:
             raise ValidationError("expected a bounded nonempty run list")
@@ -334,7 +375,11 @@ def read_search_evidence(directory: Path, *, evidence: dict[str, object]) -> Sea
             path = _absolute(run["directory"])
             files = _object(run["files"])
             file_count += len(files)
-            if file_count > MAX_FILES or not {"manifest.json", "operations.sqlite3"} <= set(files):
+            if file_count > MAX_FILES:
+                raise EvidencePathLimitError(
+                    "run inventory lacks required files or exceeds its ceiling"
+                )
+            if not {"manifest.json", "operations.sqlite3"} <= set(files):
                 raise ValidationError("run inventory lacks required files or exceeds its ceiling")
             _paths(list(files))
             for digest in files.values():
@@ -363,7 +408,7 @@ def read_search_evidence(directory: Path, *, evidence: dict[str, object]) -> Sea
             entries += count
             blobs = {}
             for name in names:
-                raw = _read(path / name, min(_limit(name), MAX_TOTAL_BYTES - total))
+                raw = _total_read(path / name, _limit(name), MAX_TOTAL_BYTES - total)
                 if hashlib.sha256(raw).hexdigest() != seals[name]:
                     raise ValidationError("consumed evidence differs from its external seal")
                 total += len(raw)
@@ -372,7 +417,7 @@ def read_search_evidence(directory: Path, *, evidence: dict[str, object]) -> Sea
         authority_raw = None
         if authority_path is not None:
             _sidecars(authority_path)
-            authority_raw = _read(authority_path, min(MAX_LEDGER_BYTES, MAX_TOTAL_BYTES - total))
+            authority_raw = _total_read(authority_path, MAX_LEDGER_BYTES, MAX_TOTAL_BYTES - total)
             if hashlib.sha256(authority_raw).hexdigest() != authority_seal:
                 raise ValidationError("consumed authorization differs from its external seal")
             _sidecars(authority_path)

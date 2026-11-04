@@ -1,5 +1,7 @@
 # REC-01: recovery and shared authorization contract
 
+**Historical command record.** The completed JSON-policy experiment's `prepare`, `run`, `search-prepare`, `search-run` and `continuation-prepare` commands are retired in the current checkout. They refuse before keys, file preparation or provider calls. Commands below describe only their original pinned runtime and do not authorize a restart. Retained offline readers and synthetic demos remain available. [Guide before retirement](https://github.com/wavemanco/buddha/blob/e3076ba648c7b37ce465ba407779dc25a6da805a/docs/RECOVERY-CONTRACT.md) · [Original CLI source](https://github.com/wavemanco/buddha/blob/e3076ba648c7b37ce465ba407779dc25a6da805a/buddha/__main__.py).
+
 This is the technical contract for REC-01 in [PLAN.md](PLAN.md), not a second roadmap. It preserves the scientific evidence and defines the boundaries the following recovery slices must implement. No model request is authorized by this document alone.
 
 REC-05A now closes the legacy retained-receipt reader limitation described at

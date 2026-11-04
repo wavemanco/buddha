@@ -1,0 +1,191 @@
+{
+  "format": "buddha.source-request-capacity-protocol.v1",
+  "status": "frozen_protocol_not_implemented_not_funded",
+  "frozen_on": "2026-10-23",
+  "source_cut": "d77f0f2a7458d4c4952701967bba53f5de3c64b9",
+  "purpose": "One prospective exact-body Chat capacity observation; no measured-parent, isolated-improver, benchmark or improvement claim.",
+  "request": {
+    "capability": "openai.chat-completions.v1",
+    "provider": "openai",
+    "host": "api.openai.com",
+    "path": "/v1/chat/completions",
+    "model": "gpt-6.1-sol",
+    "service_tier": "default",
+    "reasoning_effort": "low",
+    "max_completion_tokens": 32768,
+    "bytes": 25209,
+    "sha256": "e258ae8166c518ccd8e8a799139e35c7fa609b74fe10fcba0c8c23d1e401a838",
+    "logical_target_count": 1,
+    "attempt_count": 1,
+    "automatic_retries": 0
+  },
+  "custody": {
+    "projection_receipt": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-verified-source-copy\\runs\\reviews\\starter-full-output-projection-result-v2.json",
+      "sha256": "1c1f87e7e923220d4b09118b53864fd1c765f48c400700d8944e652fb0878986"
+    },
+    "historical_measured_candidate_id": "b54a8e60ab93b7fc680af430ed7883d4176181d511a57b2efccd3dfe5f13efb8",
+    "prospective_parent_agent_sha256": "22cd302a8c12e05c5fd9bb95389f5880e713a027e60a0206799e9c4fa2f48eeb",
+    "prospective_parent_source": {
+      "bytes": 13455,
+      "sha256": "77cfa68f6b3c6996fd503e1ce6f7a964eb57abdb8bde98f6761de5f6e298ff4f"
+    },
+    "feedback_record_count": 3,
+    "literal_answer_count": 30,
+    "feedback_packet": {
+      "bytes": 7270,
+      "sha256": "5a01b3b2194cb3b82b3d188df8b36fd553238b673d25d19981fb37a888458f28"
+    },
+    "projected_task_notes": {
+      "bytes": 6998,
+      "sha256": "bf9518f818b089a1bfc98bc8bd2dda6fa1ffc001f10077c480811425251915af"
+    },
+    "claim": "Explicit historical-feedback/current-starter recombination. Do not pass it through the measured-parent proposal wrapper or relabel old measurements."
+  },
+  "decision_rule": {
+    "model_context_tokens": 1050000,
+    "selected_output_cap": 32768,
+    "minimum_context_slack_tokens": 8192,
+    "minimum_observed_output_slack_tokens": 8192,
+    "context_slack": "1050000 - usage.prompt_tokens - 32768",
+    "observed_output_slack": "32768 - usage.completion_tokens",
+    "comparison": "both slacks >= their respective minimum, inclusive boundaries",
+    "usage": "Use aggregate inclusive counters. Never subtract optional reasoning details or estimate total usage from visible text.",
+    "interpretation": "Predeclared engineering cushions only. A pass concerns this one actual request/reply; no universal source-size or future-parent guarantee."
+  },
+  "required_evidence": [
+    "Original new dedicated owner, unchanged exact request/identity and its raw successful complete response/headers.",
+    "Matching provider/model/tier, provider request ID, inclusive usage and original accounting within the frozen profile.",
+    "Exactly one choice, finish_reason stop, no refusal, no truncated/withheld response evidence.",
+    "Complete strict finite JSON with only source/hypothesis; existing _source_proposal bounds; changed UTF-8 source against pinned parent.",
+    "Saved input/output counts, both slacks, thresholds, decision, available optional usage details and artifact hashes."
+  ],
+  "outcomes": {
+    "complete_pass": "Complete changed proposal and both margins pass; measurement complete, decision observed-capacity pass.",
+    "complete_fail": "Complete changed proposal and at least one margin fails; measurement complete, decision observed-capacity fail; retain negative result.",
+    "partial": "Expected proposal/response/usage evidence missing or invalid; measurement partial, decision unavailable, explicit stage and reason. Preserve usable counts, raw evidence, costs and holds.",
+    "partial_reason_examples": [
+      "output_limit",
+      "refusal",
+      "invalid_proposal_json",
+      "source_unchanged",
+      "proposal_bound",
+      "unsupported_finish",
+      "budget",
+      "provider_unknown",
+      "usage_unavailable",
+      "cancelled"
+    ],
+    "billing": "Execution/billing completion is separate from measurement acceptance; partial measurement never releases uncertain liability."
+  },
+  "acceptance_examples": [
+    {
+      "name": "both_margins_exact",
+      "prompt_tokens": 1009040,
+      "completion_tokens": 24576,
+      "context_slack": 8192,
+      "output_slack": 8192,
+      "margin_pass": true
+    },
+    {
+      "name": "context_one_token_below",
+      "prompt_tokens": 1009041,
+      "completion_tokens": 24576,
+      "context_slack": 8191,
+      "output_slack": 8192,
+      "margin_pass": false
+    },
+    {
+      "name": "output_one_token_below",
+      "prompt_tokens": 1009040,
+      "completion_tokens": 24577,
+      "context_slack": 8192,
+      "output_slack": 8191,
+      "margin_pass": false
+    },
+    {
+      "name": "reserve_entire_output_cap",
+      "prompt_tokens": 1010000,
+      "completion_tokens": 100,
+      "context_slack": 7232,
+      "output_slack": 32668,
+      "margin_pass": false
+    }
+  ],
+  "behavioral_acceptance": [
+    "One-byte/model/cap/endpoint/profile/logical-attempt drift refuses before reservation, key lookup or send.",
+    "Inclusive total completion usage determines output slack even when optional reasoning detail is absent or large.",
+    "Length finish remains partial even if content happens to be valid JSON or observed slack appears positive.",
+    "Duplicate-key/nonfinite/fenced/missing-field/unchanged/oversized proposals remain explicit partial results; no repairs or host execution.",
+    "Known complete negative result stays complete rather than being relabeled missing data.",
+    "Raw evidence survives validation/publication failures; original-owner replay is keyless and adds no sends or charges.",
+    "Unknown/budget/interrupted work remains partial with its stage, reason and original accounting; no fresh owner or attempt bypass.",
+    "Original historical owners, sources, seals and financial scopes stay unchanged; all output paths are fresh/exclusive."
+  ],
+  "implementation": {
+    "route": "Small frozen-request driver around existing prepare_gateway/Gateway.execute and anchored native_pipeline stage publication.",
+    "reuse": [
+      "GatewayCall",
+      "RawHTTPTransport",
+      "credentials.key_environment",
+      "launch_common._heartbeat",
+      "wire.extract_usage",
+      "wire.decoded_body",
+      "releases._load",
+      "releases._source_proposal",
+      "native_pipeline.execute_stage",
+      "native_pipeline.publish_complete"
+    ],
+    "forbidden_scope_expansion": [
+      "new tokenizer/counting framework",
+      "Responses migration/parity assumption",
+      "benchmark audit",
+      "generation/quality scoring",
+      "executing/adopting returned source",
+      "loosening measured-parent provenance"
+    ],
+    "remaining": "Implement the driver and focused acceptance, rehearse the exact handoff offline, review it, then request a separately scoped allocation."
+  },
+  "funding": {
+    "approved": false,
+    "authorization_created": false,
+    "operator_command_available": false,
+    "historical_profile": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-proposal-v3\\components\\host\\profiles.json",
+      "sha256": "c2068ec8dccc0662f8d8a6ebe8a966a01fc6236447bed219e0befa2a80bed9f2"
+    },
+    "historical_profile_reserve_microusd": 6315672,
+    "claim": "Retained-profile arithmetic only, not current-price/account certification, expected charge or new allowance. Recheck/bind actual profile before approval.",
+    "required_keys_after_approval": [
+      "openai"
+    ]
+  },
+  "sources_checked": [
+    {
+      "url": "https://developers.openai.com/api/docs/guides/token-counting",
+      "checked_on": "2026-10-23",
+      "supports": "Responses count endpoint; aggregate completion includes non-visible formatting/reasoning, with no fixed visible/total gap."
+    },
+    {
+      "url": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+      "checked_on": "2026-10-23",
+      "supports": "Exact selected model, Chat endpoint support, 1050000 context and 128000 model output maximum."
+    },
+    {
+      "url": "https://developers.openai.com/api/reference/resources/chat/subresources/completions/methods/create",
+      "checked_on": "2026-10-23",
+      "supports": "Normal/length finish reasons, inclusive max_completion_tokens and actual prompt/completion usage."
+    }
+  ],
+  "preparation_reviews": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\capacity-design-challenge-v1.md",
+      "sha256": "81953c4d653fd659efc36b79cbb903448b035569a39f8f89154f2dac6e025620"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\capacity-proposal-route-v2.md",
+      "sha256": "37838d174f4a129db5f57f5d4b21ea787b06e88bd25528f689266040c17d52d7"
+    }
+  ],
+  "execution_evidence": "None. Numeric examples are frozen acceptance fixtures, not observed token counts or executed runtime checks."
+}

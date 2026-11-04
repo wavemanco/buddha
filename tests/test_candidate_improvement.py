@@ -105,7 +105,13 @@ class ImprovementTests(unittest.TestCase):
         ignore_stop=False,
     ):
         def worker(spec, *, initial, handle, limits, docker_endpoint):
-            self.assertEqual(initial["format"], "buddha.candidate-improvement-worker.v1")
+            self.assertIs(type(handle.__self__.feedback_v2), bool)
+            self.assertEqual(
+                initial["format"],
+                "buddha.candidate-improvement-worker.v2"
+                if handle.__self__.feedback_v2
+                else "buddha.candidate-improvement-worker.v1",
+            )
             self.assertNotIn(b"FINAL_SECRET", _json(initial))
             self.assertNotIn(b"VALIDATION_SECRET", _json(initial))
             self.assertNotIn(b"dataset_base64", _json(initial))
@@ -161,6 +167,23 @@ class ImprovementTests(unittest.TestCase):
             "source": "def generate(task, config, complete): return ['changed']\n",
             "hypothesis": "Change the actual procedure.",
         }
+
+    def test_shared_worker_fixture_matches_each_bound_feedback_packet_version(self):
+        for version in (1, 2):
+            with self.subTest(version=version):
+                self.feedback["format"] = f"buddha.candidate-development-feedback.v{version}"
+                self.freeze()
+                session = self.h.session()
+                self.assertIs(session.feedback_v2, version == 2)
+                self.assertEqual(
+                    session.worker["format"], f"buddha.candidate-improvement-worker.v{version}"
+                )
+                report = self.execute(session, self.child(), callbacks=1)
+                self.assertEqual((report["status"], report["reason"]), ("complete", "complete"))
+                self.assertEqual(self.h.gateway.ledger.totals()["operation_count"], 1)
+                self.assertEqual(
+                    (self.h.output / "child/candidate.py").read_text(), self.child()["source"]
+                )
 
     def worker_return(self, value, *, source=None):
         """Exercise dispatch/result code with exec intercepted, never run source on this host."""

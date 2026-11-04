@@ -1,0 +1,219 @@
+{
+  "base_head": "ebce35e1ed4b375e05fe95a8601e159fdf9a9431",
+  "files": {
+    "docs/DESIGN.md": "1f68f05f335f16a3121c228338073794390d8e54fb4402b4e4b4809dd0233aa2",
+    "docs/PLAN.md": "22801f6e9140c93f07dde78594bf1cc2f84189d2cb59c9eacbf39c7356e7498a",
+    "docs/REVIEW-TRACKS.md": "0a5f9e7fb919365c436ff6b872c79e11d4ee150b8916a66d481949c79f32ab54",
+    "docs/UNIFIED-COMPARISON-PREPARATION.md": "c607abdaf375d82a34d85d653e0bc93f2060d108ef8af5032cc123d693b9229b",
+    "docs/UNIFIED-LIVE-CONFIGURATION.md": "3b00ce7b79272190435de2f809a02982ddbaa0f0e0ebdb1ee12d7d225c0071a7",
+    "docs/conformance/imp01-review-tracks-decision.json": "80cbedb398777a08208ac71c7fb9a6c5bf94b2d500d836529d31743ebe5c63cc"
+  },
+  "format": "buddha.unified-live-configuration-delivery.v1",
+  "limits": [
+    "Static preparation and public-price/request bounds do not attest account access, invoices, model fit, full-run completion cost/duration or live provider behavior.",
+    "Raw future outer-launch and credential-review controls remain absent; no actual outer descriptor or original-owner contract exists.",
+    "AI reviewers are not human truth or statistically independent people;44contexts is neither anAPIrequest limit nor44independent raters.",
+    "AI-only work does not establish completion of the separate original human-evidence requirement or human-validation claims.",
+    "The bounded study is not a full two-dataset NoveltyBench submission or independent transfer/generalization evidence."
+  ],
+  "next": "Exact executing-source hosted verification and prospective protocol/native-model/combined-allocation decisions, then concrete funded handoff with actual original grants, approval, primary launch, outer descriptor and distinct key-review contexts. Human availability is nonblocking.",
+  "plan_revision": 166,
+  "preparation": {
+    "active_composite_files": 186,
+    "active_review_track_extension_files": 4,
+    "base_bundles": {
+      "comparison": 10,
+      "plain": 46,
+      "primary": 111,
+      "review": 15
+    },
+    "both_original_development_and_final_capacity_projections": "pass",
+    "current_numerical_analysis": "Public current consumer run once on prior312explicitlysynthetic rows/slots; all fields equal except plan_sha256, population_sha256 and analyzer_sources. Not official benchmark judging.",
+    "deferred_actual_raw_controls": 2,
+    "executing_Python_files_unchanged": 318,
+    "primary_explicit_source_and_control_entries": 97,
+    "primary_reviewed_bindings_including_intrinsics": 171,
+    "projected_primary_bindings_including_three_future_controls": 174,
+    "raw_control_count_is_actual_owner_contract": false,
+    "raw_static_controls_including_binding_file": 87
+  },
+  "preservation": {
+    "PLAN_history_and_acceptance": "Byte-preserved; active scheduling splits core AI-only and parallel human-augmented claims under the explicit user decision.",
+    "historical_files_raw_hash_only": 451,
+    "old_preparation_files": 166,
+    "old_review_track_extension_files": 4,
+    "old_review_track_policy_source_snapshot_files": 3,
+    "original_acceptance_tails": 7,
+    "previous_raw_PLAN_revision_rows": 165,
+    "tracked_Python_files": 318
+  },
+  "proposal_limits": {
+    "actual_grants_created": false,
+    "combined": {
+      "budget_microusd": 150000000,
+      "max_calls": 16384
+    },
+    "development": {
+      "budget_microusd": 40000000,
+      "max_calls": 4096
+    },
+    "primary_final": {
+      "budget_microusd": 85000000,
+      "max_calls": 10240
+    },
+    "shared_both_plain_modes": {
+      "budget_microusd": 25000000,
+      "max_calls": 2048
+    },
+    "validation": {
+      "budget_microusd": 0,
+      "max_calls": 0
+    }
+  },
+  "receipts": {
+    "anthropic_public_price_refresh": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-anthropic-price-refresh-v1.json",
+      "sha256": "828f58cea6597d3bc27e20edc6bfde9afb1ac9e504d82885f65239424742ba1a"
+    },
+    "anthropic_pure_request_scope": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-anthropic-scope-check-v1.json",
+      "sha256": "50c4ed4d24a4a9f448374819652551c28bd508b90e45111c18ec05288672b466"
+    },
+    "base_builder_verification": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-unified-static-final-verification-v2.json",
+      "sha256": "4878474f34fffd0b8d52f359dcb3255b033bcd327bfe47655dc5f418de93e3e7"
+    },
+    "base_independent_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-unified-static-independent-review-v2.json",
+      "sha256": "10fcc7dc74fa5d8728289af086742b221d15744d4aaaa82766446a039a7266fa"
+    },
+    "comparison_preparation": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-unified-comparison-preparation-v2.json",
+      "sha256": "e493299c1c89ecac885aeaaa6e4cd11afb2a0829afbee94040c81079ad9672cc"
+    },
+    "current_numerical_compatibility": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-unified-current-numerical-check-v2.json",
+      "sha256": "cf045534fd4a0194e392f743927027471d67febd27df33fccbbe9685262940fa"
+    },
+    "current_request_contract_refresh": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-request-contract-refresh-v1.json",
+      "sha256": "08f3b2f9f3c39bec8a07b87e6972a11959f133f494f30b613ad0fd79a9594ba4"
+    },
+    "current_review_track_independent_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-unified-review-tracks-independent-review-v2.json",
+      "sha256": "c8f9af9f68f1ea485775bc62060173a9c29e3b79bcfcf3d96de3cf4ed7db2cf2"
+    },
+    "current_review_track_preparation": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-unified-review-tracks-preparation-v2.json",
+      "sha256": "3846a56292b32285fe25f94a2843cff9f1979945c294a35d16f39a10261186b2"
+    },
+    "older_preparation_and_historical_preservation_inventory": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-unified-preservation-baseline-v2.json",
+      "sha256": "82e7d8d1c983455abe7da3ae65dd873e3831d5d69a6ca6769dd34d761990935a"
+    },
+    "openai_public_price_refresh": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-openai-price-refresh-v2.json",
+      "sha256": "2979d826afd11c441f7087e904c27613a81dc71481f84f47ac8ee9c68dbabc7c"
+    },
+    "plain_preparation": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-unified-plain-preparation-v2.json",
+      "sha256": "9d6dcc6979ee679d606e2dd6d362e73901ebf83d78eac018e1bb13e662cc39eb"
+    },
+    "primary_preparation": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-unified-primary-preparation-v2.json",
+      "sha256": "a913fa2862e6b2b1f04150bb6840aa93f0fc2a617e6f367930f090d3eaa7c2bb"
+    },
+    "review_preparation": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-unified-review-preparation-v2.json",
+      "sha256": "56c945d4fabc8ffeb171c25781b97369dc7a45c41ac3e1c7559d02b6ed87e6e2"
+    },
+    "source_preservation_inventory": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-unified-source-baseline-v2.json",
+      "sha256": "2c2f1096f0aad6e4073b3f44eb61614ca8c6d2338f17b61192060ec17b8ee691"
+    }
+  },
+  "recorded_utc": "2026-10-27T02:14:58.357069+00:00",
+  "review_tracks": {
+    "AI_only_waits_for_people": false,
+    "existing_rounds_and_reports": "Preserve earlier incomplete mixed rounds and all AI/computational publications; later human evidence appends separately.",
+    "human_extension": "Separate future round/report over same frozen plan/report/packet; first selected human is project owner, disclose actual prior_exposure and material access including earlier AI findings. No ratings collected.",
+    "human_plain_reference_preference_comparison_declared": false,
+    "native_reviewer_proposal": {
+      "API_fallback": false,
+      "model": "gpt-6.1-sol",
+      "money": "unpriced Codex-plan usage outside API cap",
+      "reasoning": "ultra",
+      "selected": false,
+      "target_contexts_maximum": 32,
+      "target_stage_judgments_maximum": 64,
+      "total_contexts_maximum": 44,
+      "whole_set_contexts_maximum": 12,
+      "whole_set_judgments_maximum": 12,
+      "whole_set_model_procedures": 1
+    },
+    "original_Buddha_sample": {
+      "maximum_answers": 120,
+      "sets": 12
+    },
+    "per_set_raw_replies_and_provenance": "Retain literal evidence; complete full-pack form only if required ratings exist; otherwise preserve missing coverage. No fabricated completion."
+  },
+  "roles": {
+    "configuration_builder_and_initial_checks": "delegated engineering agent unified_config_review; no scientific reviewer launched",
+    "current_wire_price_and_roster_refresh": "root agent; bounded tests, pure probes and official documentation only",
+    "independent_metadata_hash_and_policy_review": "root agent rehashes all base/overlay controls and preserved inventories; bounded policy review by delegated engineering agent"
+  },
+  "spec_sections": [
+    "DESIGN 5 measurement contract",
+    "DESIGN 7 data separation and two evidence tracks",
+    "DESIGN 8 improvement competence",
+    "DESIGN 9 paid-operation integrity"
+  ],
+  "status": "static_configuration_and_user_review_track_decision_complete_unfunded_unadopted_not_launchable",
+  "unchanged_experiment": {
+    "development_repetitions": 2,
+    "development_tasks": 3,
+    "families": 25,
+    "final_tasks": 26,
+    "maximum_Buddha_final_sets": 312,
+    "official_NoveltyBench_version": "1.1",
+    "official_upstream_commit": "64a23be6b18ec1dacc298830aab276061b6e143c",
+    "opportunities_total": 16,
+    "original_P_C_fixed_seed_method_and_metrics": "Preserved. Reviewers inspected neither selected P/C source semantics nor private prompt contents and emitted no private prompt text; trusted validators parsed task data for declared metadata/equality checks.",
+    "plain_sets_total": 52,
+    "starts": 2
+  },
+  "verification": {
+    "actual_API_calls": 0,
+    "actual_human_ratings": 0,
+    "actual_new_grants_trial_or_owners": 0,
+    "actual_scientific_AI_reviews": 0,
+    "anthropic_pure_scope_probes": {
+      "allowed": 2,
+      "denied": 10,
+      "receipt": "anthropic_pure_request_scope",
+      "result": "pass"
+    },
+    "existing_pure_roster_method": {
+      "chunk": "4174a9",
+      "command": "python -m unittest discover -s tests -p test_source_review_results.py -k pure_summary_separates_coverage_partition_disagreement_and_uncertainty -v",
+      "methods": 1,
+      "result": "pass",
+      "scope": "Supplied synthetic forms demonstrate model-only completeness/human validity zero and explicit mixed-round missing coverage; not actual ratings.",
+      "seconds": 0.351
+    },
+    "hosted_executing_head_at_latest_observation": {
+      "overall": "in_progress_not_green",
+      "ubuntu_shards_success": 4,
+      "windows_shards_in_progress": 4,
+      "workflow_run_id": 40428332344
+    },
+    "previous_runtime_proof": "conformance/unified-launch-rehearsal-delivery.json; supplied workers/mocked HTTPS and reduced cells only",
+    "quality": "Seven configured checks previously pass at unchanged executing-code cut; no repeat full suite or18minute lifecycle for documentation-only changes. Exact changed-head hosted verification remains pending.",
+    "request_contract_methods": {
+      "gateway": 5,
+      "official": 5,
+      "receipt": "current_request_contract_refresh",
+      "result": "pass"
+    }
+  }
+}

@@ -1,0 +1,228 @@
+{
+  "format": "buddha.current-source-rehearsal-results.v1",
+  "status": "complete_at_observed_engineering_scope",
+  "recorded_at_utc": "2026-10-24T01:17:35.465950+00:00",
+  "observed_producer": {
+    "base_commit": "e5ba59e2351f532bdfc205e77b3f52d8a448ef78",
+    "worktree": "runs/reviews/src02-current-rehearsal-fixed",
+    "driver_sha256": "75a8b34a450f7ae2f14625770441870f58aa130170daf70b0262c4b5314dbca9",
+    "source_map_sha256": "03d3f30145d76c20f46f737073bedb2a0ee3605827336cce3be8545d51a6e75d",
+    "pinned_inputs": 298,
+    "scope": "Base producer plus five exact preparation helpers. Later finite-controller/replay code in the publication stack is outside this observed producer cut."
+  },
+  "actual": {
+    "status": "pass",
+    "started_utc": "2026-10-24T00:11:24.216535+00:00",
+    "finished_utc": "2026-10-24T01:05:28.756970+00:00",
+    "elapsed_seconds": 3244.9917594,
+    "workers": 29,
+    "worker_stages": {
+      "generation": 8,
+      "partition": 6,
+      "proposal": 3,
+      "score": 6,
+      "summary": 6
+    },
+    "supplied_replies": 154,
+    "reply_stages": {
+      "generation": 84,
+      "partition": 6,
+      "proposal": 4,
+      "score": 60
+    },
+    "real_provider_calls": 0,
+    "actual_provider_keys_used": false,
+    "host_candidate_execution": false,
+    "host_official_execution": false,
+    "measured_answer_sets": 6,
+    "measured_answers": 60,
+    "validity_only_answer_sets": 2,
+    "validity_only_answers": 20,
+    "guard_controls": 8,
+    "frame_failures": 0,
+    "all_workers_exit_zero": true,
+    "all_workers_recorded_removed": true,
+    "recorded_owned_absence_queries": 29
+  },
+  "recovery": {
+    "interruption_point": "After original counted P-to-C proposal publication; completed request records already exist.",
+    "phases": [
+      {
+        "new_replies": 75,
+        "phase": "interrupted-prefix",
+        "workers": 15
+      },
+      {
+        "new_replies": 79,
+        "phase": "same-owner-continuation",
+        "workers": 14
+      },
+      {
+        "new_replies": 0,
+        "new_workers": 0,
+        "phase": "completed-keyless-repeat"
+      }
+    ],
+    "reused_original_owners": 15,
+    "preserved_prefix_files": 186,
+    "prefix_redispatches": 0,
+    "keyless_new_requests": 0,
+    "keyless_new_workers": 0,
+    "limit": "One controlled completed-proposal interruption; no arbitrary in-flight request interruption theorem."
+  },
+  "full_feedback_and_source": {
+    "P_measured_answers": 30,
+    "P_full_packets": "Both validity and counted proposals retain all30 literal answers and original measurement positions.",
+    "C_measured_answers": 30,
+    "C_own_full_packet": true,
+    "C_weakest_task": {
+      "ordered_utilities": [
+        8.0,
+        6.000000000000001,
+        8.0
+      ],
+      "selected_index": 1,
+      "task_id": "curated-47",
+      "unique": true
+    },
+    "proposal_workers": 3,
+    "proposal_requests": 4,
+    "proposal_body_bytes": [
+      71547,
+      71547,
+      71860,
+      73981
+    ],
+    "P_source_sha256": "77cfa68f6b3c6996fd503e1ce6f7a964eb57abdb8bde98f6761de5f6e298ff4f",
+    "W0_source_sha256": "b1ded0f486e2cae1996ff6aafe52560aa2f68395668966e568072a2841342a79",
+    "C_source_sha256": "c6953906ad49c325fa25f69b6e987d78a6660d7bbfd46077ca6386557d120b49",
+    "W1_source_sha256": "0ec65a719a92ee8fe63ff3fd5a3eb5005b1cf65349da8ddc0feb7d17cc9af788",
+    "source_bytes": [
+      13455,
+      13206,
+      15102,
+      14834
+    ],
+    "generation_callback_counts": [
+      10,
+      10,
+      11,
+      11
+    ],
+    "supplied_generation_change": "C adds a planning call before drafting; its full-screen task uses11 callbacks versus P10.",
+    "supplied_improver_change": "C selects the unique weakest measured task, makes a planning call and uses that returned plan while retaining all original measured notes in the source proposal.",
+    "C_own_changed_improver_authored_W1": true,
+    "W1_generation_exercised": true,
+    "W0_W1_counted_or_adopted": false,
+    "model_authored": false
+  },
+  "accounting": {
+    "synthetic_allowance_microusd": 25000000,
+    "synthetic_attempt_limit": 512,
+    "completed_operations": 154,
+    "synthetic_spent_committed_microusd": 9398,
+    "synthetic_by_provider_microusd": {
+      "openai": 1118,
+      "anthropic": 8280
+    },
+    "held_microusd": 0,
+    "inactive_original_owners": 29,
+    "real_api_spend": 0,
+    "scope": "Supplied usage and replies exercise real local accounting. These figures are not provider bills or live-cost estimates and consume none of the closed $7 allowance."
+  },
+  "observed_resources": {
+    "final_storage": {
+      "file_count": 360,
+      "largest_file_bytes": 4175333,
+      "total_bytes": 163479911
+    },
+    "highwater": {
+      "elapsed_seconds": 54.30435039999429,
+      "frame_bytes": 1196645,
+      "frame_count": 14,
+      "initial_bytes": 4016927,
+      "invocation_control_bytes": 30839033,
+      "invocation_control_count": 93,
+      "stderr_bytes": 236,
+      "stdout_bytes": 2399945,
+      "storage_total_bytes": 163209017
+    },
+    "runtime_limit": "54-minute local rehearsal; supplied replies do not measure real model latency. These observations support only the configured supplied route."
+  },
+  "independent_reviews": {
+    "root_data_review": "All154 owner/shared/raw-send joins and fixed-profile integer usage quotes rederived using query-only in-memory SQLite;662 read inputs unchanged.",
+    "separate_data_review": "All four proposal bodies reconstructed;137 sealed files and2437 input bindings checked;1049 reviewed inputs unchanged, including the preserved failed predecessor."
+  },
+  "preserved_history": "The earlier v3 rehearsal remains failed, with its missing callback-origin qualification and later two-worker absence observation. The correction does not rewrite those records.",
+  "remaining": [
+    "Current-parent model-authored task/improver source demonstration under the full-output route",
+    "Separate concrete live allocation and exact executing-source hosted checks",
+    "Controlled improver comparison, sealed analysis and independent final/human evidence"
+  ],
+  "limitations": [
+    "Supplied descendants and synthetic provider text/usage; no model authorship or live pricing evidence.",
+    "Canned singleton groups and quality scores, including closed-answer tasks, are not semantic judgments.",
+    "Actual byte/storage/timing observations do not establish vendor token-context fit or live latency.",
+    "Fixed supplied P/W0/C/W1 controls; no universal mutation-competence, edited-improver efficacy or improvement claim.",
+    "Host and local Docker daemon are trusted; original records and user funding are not used.",
+    "Fake keys are already in this dedicated process; the key-entry observer checks ordering, not interactive paste behavior."
+  ],
+  "evidence": [
+    {
+      "path": "runs/reviews/src02-capacity-design-20261023/current-demo-rehearsal-observed-v2.json",
+      "sha256": "5f64dce23276c7bcfa074d49883634013a3d64d89565ad31461856ba3fad9cce"
+    },
+    {
+      "path": "runs/reviews/src02-capacity-design-20261023/current-demo-rehearsal-exit-v2.json",
+      "sha256": "bbc21b5d367bdc4a31eed577285351a0fde7e3ce5c2578bae343e566194bd1bb"
+    },
+    {
+      "path": "runs/reviews/src02-capacity-design-20261023/current-demo-rehearsal-command-v2.json",
+      "sha256": "ade285192350a8d675193bb7b40c51b9b4b93c2d7fb7bc2b97d4c85bea6bebbe"
+    },
+    {
+      "path": "runs/reviews/src02-capacity-design-20261023/current-demo-rehearsal-observed-v2-prefix.json",
+      "sha256": "60d21c7d87e315d0133c2a494f4e7dde520b0fd6605daf07b671bbb33520d277"
+    },
+    {
+      "path": "runs/reviews/src02-capacity-design-20261023/current-demo-rehearsal-observed-v2-continuation.json",
+      "sha256": "2ca7b832ac9cc31bc78f84e45787f7a5c1bd7376c6992b930bd2ee5c67ce9adb"
+    },
+    {
+      "path": "runs/reviews/src02-capacity-design-20261023/current-demo-rehearsal-observed-v2-keyless.json",
+      "sha256": "6788170959958ff4e8f2d3d460cd99d36d0bf788d943641ac93aa8619ec3e7cb"
+    },
+    {
+      "path": "runs/reviews/src02-capacity-design-20261023/current-demo-rehearsal-root-data-review-v1.json",
+      "sha256": "72c49c12d1a442e499e6dcccc1ca8266feaac3ccbb830c84e438d2f3a0d97f0d"
+    },
+    {
+      "path": "runs/reviews/src02-capacity-design-20261023/current-demo-rehearsal-actual-observation-independent-review-v1.json",
+      "sha256": "7e72cd48bbedc540a212ac89f582f7e5dbb2d37230e159907eb6aba34587dd86"
+    },
+    {
+      "path": "runs/reviews/src02-capacity-design-20261023/current-demo-rehearsal-actual-observation-independent-review-v1.md",
+      "sha256": "98b9b18d97284459638dfcd247b97ec7e91c3f36d5bbad2b280cf5c2b368295b"
+    },
+    {
+      "path": "runs/reviews/src02-capacity-design-20261023/current-demo-rehearsal-actual-failure-review-v1.json",
+      "sha256": "ca7d902a07856ab68fb1ce45369ed0c6161aae2918d3af655baf26c9b50ae55d"
+    },
+    {
+      "path": "runs/reviews/src02-capacity-design-20261023/current-demo-failed-worker-absence-v1.json",
+      "sha256": "08b7ca0577443751709c6f5b56bb9e0b0f9e1e8c23fb39c0e19ca72f6a165495"
+    },
+    {
+      "path": "runs/reviews/src02-capacity-design-20261023/current-demo-v4-guard-regression-v1.json",
+      "sha256": "493462d0e36ce11fb20bf5d1563b31da91a7b1f483cd3670a24128e37c849a35"
+    },
+    {
+      "path": "runs/reviews/src02-capacity-design-20261023/current-demo-build-v2.json",
+      "sha256": "f0b4d9c4e754b6cff93151854ef6ee8fc1023b24450df5839441c128a03f5a86"
+    },
+    {
+      "path": "runs/reviews/src02-capacity-design-20261023/current-demo-build-v2-sources.json",
+      "sha256": "03d3f30145d76c20f46f737073bedb2a0ee3605827336cce3be8545d51a6e75d"
+    }
+  ]
+}

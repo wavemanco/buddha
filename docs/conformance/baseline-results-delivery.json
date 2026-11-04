@@ -1,0 +1,110 @@
+{
+  "format": "buddha.baseline-results-delivery.v1",
+  "status": "passive_original_baseline_custody_verified_comparison_pending",
+  "plan_revision": 158,
+  "contract_sections": [
+    "DESIGN 5",
+    "DESIGN 7",
+    "DESIGN 9"
+  ],
+  "interface": "buddha.baseline_results.inspect_baseline",
+  "scope": [
+    "expected original report and descriptor digests",
+    "original complete owner and authority topology",
+    "inherited controls and source generation lineage",
+    "exact C1 native answer bytes",
+    "original stage reports, complete inventories, seals and deactivation anchors",
+    "selected population coverage, unchanged opaque summary and original accounting snapshot",
+    "keyless read-only inspection after producer retirement"
+  ],
+  "not_implemented": [
+    "matched plain/Buddha metric join",
+    "original prospective study/reference control bindings",
+    "new funded live handoff"
+  ],
+  "root_cause_fixes": {
+    "nested_file_join": "Already captured databases keep their independently validated database limit; freshly joined data retains existing file and aggregate limits. All five callers use one shared helper. JSON limit is unchanged.",
+    "opaque_summary": "Hash the already sealed artifact capture instead of applying the narrower JSON limit.",
+    "red_evidence": [
+      "review reproduced original valid 34680832-byte generation ledger rejected after producer completion",
+      "permanent opaque >32MiB summary test completes original producer then fails passive reader before correction"
+    ],
+    "synthetic_fixture": "Emit existing wire-sized chunks; empty and exact-chunk boundaries retained."
+  },
+  "verification": {
+    "bounded_batches": [
+      {
+        "tests": 21,
+        "seconds": 349.615,
+        "scope": "six initial baseline-reader checks, shared native custody and selected policy/validation/source caller regressions"
+      },
+      {
+        "tests": 28,
+        "seconds": 108.676,
+        "scope": "seven final baseline-reader checks and all21 original BaselineTests after summary fix/chunked fixture"
+      }
+    ],
+    "unique_methods": 43,
+    "repeated_methods": 6,
+    "repeat_reason": "new independent opaque-summary finding required final reader and changed shared mock-worker regression",
+    "configured_quality_checks": 7,
+    "quality_note": "All seven pass; five code-dependent checks repeated after final app/test edit, unchanged dependency audit evidence retained. No full-suite pass is claimed.",
+    "independent_review": "bounded source/test/guide pass, two bound findings resolved; final exact nine-file hashes retained",
+    "hosted_ci": "this changed cut pending; ancestor206eebf workflow40248851283 completed success"
+  },
+  "evidence": {
+    "baseline-reader-final-tests-v1.json": {
+      "sha256": "25f9e930c9bce23e432f08aa12e5e4e281a66d13c2376e5b4bd391bad0684989",
+      "status": "pass",
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\baseline-reader-final-tests-v1.json"
+    },
+    "baseline-reader-summary-red-v1.json": {
+      "sha256": "4f1a9080186b552be4cc9e5728484325de2be342738374018df6b61aef91876f",
+      "status": "red",
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\baseline-reader-summary-red-v1.json"
+    },
+    "baseline-reader-summary-green-v1.json": {
+      "sha256": "d686e15f65722326fc1aab1fd585aa8b7bf93e3826c911f414946788219fc2d9",
+      "status": "pass",
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\baseline-reader-summary-green-v1.json"
+    },
+    "baseline-reader-quality-checks-v1.json": {
+      "sha256": "0b841358fd40400902a928bcdc885e5917f9be9519f9c51e5af5cdf47d2cfdfa",
+      "status": "pass",
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\baseline-reader-quality-checks-v1.json"
+    },
+    "baseline-reader-final-code-checks-v1.json": {
+      "sha256": "e1a4f12e5c03174cf5feab6912c48b25fdc5d72128c32961687a726c4c9c8d71",
+      "status": "pass",
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\baseline-reader-final-code-checks-v1.json"
+    },
+    "baseline-reader-independent-final-review-v1.json": {
+      "sha256": "1efa4e4532645500e57e61275a3a0b0feccab386c8032cb76fa7182643159220",
+      "status": "pass_no_remaining_correctness_blocker_at_reviewed_scope",
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\baseline-reader-independent-final-review-v1.json"
+    }
+  },
+  "preservation": {
+    "prior_raw_plan_revision_rows": 157,
+    "official_evaluator_or_metric_change": false,
+    "dependency_or_workflow_change": false,
+    "historical_or_prepared_run_rewrite": false,
+    "main_readme_milestone_update": false
+  },
+  "budget_clarification": {
+    "proposed_combined_api_cap_usd": 150,
+    "proposed_recorded_attempt_limit": 16384,
+    "smaller_plain_reference_dollar_figures": "hypothetical usage cases, not caps or approvals",
+    "consolidated_scope_allocation_before_launch": true,
+    "funding_created": false
+  },
+  "real_provider_calls": 0,
+  "real_keys": false,
+  "original_paid_database_sql": false,
+  "new_real_grants_or_owners": false,
+  "scientific_gates": [
+    "IMP-01 open",
+    "EVAL-02 open"
+  ],
+  "next": "prospective bindings and original comparison join, concrete consolidated workload/capacity/review/funding/handoff"
+}

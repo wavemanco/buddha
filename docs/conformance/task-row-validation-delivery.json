@@ -1,0 +1,63 @@
+{
+  "format": "buddha.task-row-validation-delivery.v1",
+  "date": "2026-10-31",
+  "plan_revision": 214,
+  "basis_head": "04a0239c756b21e5032a23b12a8120721ffd6784",
+  "spec": [
+    "DESIGN5",
+    "DESIGN7",
+    "DESIGN9",
+    "ENG-OBS-01"
+  ],
+  "status": "focused_quality_and_local_function_pass_whole_harness_scale_open",
+  "live_execution_cleared": false,
+  "change": "Only_population: unchanged strict_load(line), then existing_utf8(json.dumps(row,ensure_ascii=False,separators,allow_nan=False)); retain original row. Generic_metadata AST unchanged.",
+  "guards": "Raw/source hash and ASCII-canonical byte caps, literal JSON/rootdict, nested duplicate/nonfinite/depth rejection stay in_load; whole-string UTF8 retains lone-surrogate rejection asReleaseError. Arbitrary Python metadata still uses original generic validator.",
+  "no_new_cache_dependency_or_module_membership": true,
+  "validation": {
+    "new_methods": 6,
+    "existing_answer_methods": 19,
+    "methods_passed": 25,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "raw_rejection_cases": 18,
+    "nested_differential_cases": 40,
+    "work_count_red": "1000!=0 generic metadata calls; only intended failure,5othermethods pass.",
+    "work_count_green": "1000source rows produce0genericmetadata calls; unchanged TaskSet/native/provenance identities.",
+    "quality_checks": 7,
+    "source_pins": 348,
+    "local_comparison": "Fixed synthetic v9 dataset645466bytes/1000rows;5ABBAblocks,10calls percondition; all canonical result signatures match. Median16.653650ms baseline/12.584750ms candidate; no whole-harness speed or RSS claim.",
+    "hosted": "Pending exact published head; no full-suite green claim.",
+    "actual_provider_calls": 0,
+    "actual_containers": 0,
+    "original_data_reads": 0
+  },
+  "independent_semantic_review": "No additional public-byte-input counterexample found; UTF8error conversion reused; temporary allocation differences qualified. Static review only.",
+  "evidence": {
+    "red-result-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\task-row-validation-20261031-v1\\red-result-v1.json",
+      "sha256": "e1898e6b1385a33badb9fbd527d45e0629cba667c4a281cf0ec7ce28997ef22d"
+    },
+    "green-result-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\task-row-validation-20261031-v1\\green-result-v1.json",
+      "sha256": "03688433f9d268b0d121e498eb0006c064c86fe00f3b084fd423e43fa18e9b1e"
+    },
+    "local-population-comparison-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\task-row-validation-20261031-v1\\local-population-comparison-v1.json",
+      "sha256": "840a99ed4a085d27d3a0d2df168db999b0b4b9138b198c27a6afdf9eec21bf14"
+    }
+  },
+  "source_sha256": {
+    "buddha/answers.py": "bfd1c7655ce36b8fd0956cdf27672cb283c04e42cee5d9d968aa05b88d1cc423",
+    "tests/test_task_row_validation.py": "3c9c00cc580ce457b84f8b8fa2cfd305ff3d07166e7918e01b6f8ee19c9aa201",
+    "docs/RECONSTRUCTION-COST.md": "6a2ee2d3407a9a2408c10bf65fc913f3509c6b3b45440b11b5238f2bbb3d0820"
+  },
+  "unchanged_releases_sha256": "2285f5417be9caba5c8aa675e417dcf7ce0310de77dbfd290ad76bc76ec68c1a",
+  "preservation": {
+    "raw_revision_rows": 213,
+    "original_acceptance_tails": 7,
+    "benchmark_requests_metrics_and_frozen_paid_inputs": "unchanged"
+  },
+  "remaining": "617population constructions remain in profiled prefix. Address higher-level repeated population/saved-screen work before another full producer.193owner/660operation acceptance and fresh funded handoff remain open."
+}

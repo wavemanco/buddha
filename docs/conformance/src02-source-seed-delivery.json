@@ -1,0 +1,203 @@
+{
+  "api": {
+    "IO_or_execution_or_funding": false,
+    "function": "compose_source_seed",
+    "input": "literal exact pinned frozen-seed bytes",
+    "module": "buddha.source_seed",
+    "output": "one self-contained candidate.py byte string"
+  },
+  "base_commit": "dad918f26e1cb17bda1afc679044bb5b73eb599c",
+  "behavior": [
+    "The trusted improver validates the complete literal parent and bounded ordered development feedback before one callback through the unchanged provider recipe.",
+    "Normal provider finish, strict duplicate/nonfinite JSON rejection, literal source/hypothesis fields and UTF8 bounds; no retries, fenced-text repair or host execution of returned source.",
+    "Whole-file replacement preserves inherited candidate control. The host never reattaches the original fragment to descendants; protected runtime, broker, benchmark and source-stage guards remain authoritative."
+  ],
+  "claims_not_established": [
+    "actual confined composed-starter execution",
+    "model-authored child/grandchild",
+    "mutation-competence or admission gate",
+    "semantic task compliance or useful-diversity gain",
+    "held-out or improved-improver effectiveness",
+    "live readiness or new spending authorization"
+  ],
+  "composition": {
+    "bytes": 13452,
+    "factory_imports": [
+      "hashlib"
+    ],
+    "fragment_version": "buddha.source-seed-improver.v1",
+    "frozen_prefix_byte_exact": true,
+    "frozen_seed_sha256": "2b87bfe0d3c97ee45db2d45260985ffe0234eca93967f4689fb7c59f82603921",
+    "new_function_names": [
+      "_source_seed_constant",
+      "_source_seed_pairs",
+      "propose_improvement"
+    ],
+    "original_generation_AST_and_requests_unchanged": true,
+    "separator": "two LF bytes",
+    "sha256": "d7ba10ac6d4786cf22d7447242fa9188830f40ba5a5bf9d30c26681f7377491e"
+  },
+  "date": "2026-10-22",
+  "earlier_evidence": {
+    "behavioral_red": {
+      "raw_log_sha256": "2b1a641ae562b5953897847dac1450bc4c469f06bd115cd86bfb3dcba5724020",
+      "result": {
+        "errors": 0,
+        "failures": 2,
+        "ids": [
+          "test_source_seed.SourceSeedTests.test_parent_entrypoint_requires_exact_literal_text",
+          "test_source_seed.SourceSeedTests.test_escaped_worker_projection_bound_precedes_callback"
+        ],
+        "loader_errors": 0,
+        "skips": 0,
+        "test_seconds": 0.01164570008404553,
+        "tests_run": 2
+      },
+      "source_sha256": "4c898d1bb15f275c562c76d761868919130b67033c8ddbcc19845546c316f908",
+      "test_sha256": "5e120540b498f991ec57606aa98eb42e4b660fd7ffdf8e52207e570d157ec45b"
+    },
+    "independent_review": {
+      "scope": "Before embedded layout correction and final documentation. The trusted full-program AST and all other factory AST remain identical after correction; final35/quality checks use492d source.",
+      "sha256": "e8cfb8f9661b64792fd7e680f1c0aa554584178d5eb78b94350ddfe4bfcb3475",
+      "source_cut": "25b87fac066a11d7cdfc08198b2d94e5d000af29e71d2770cc3d62ee34c6da5e"
+    },
+    "layout": {
+      "after_composed_bytes": 13452,
+      "after_composed_sha256": "d7ba10ac6d4786cf22d7447242fa9188830f40ba5a5bf9d30c26681f7377491e",
+      "after_source_sha256": "492d3c7e599b5032526a96aa5f2582822d0d49cd836e2d3418f9dfb355ea82d1",
+      "all_other_factory_ast_unchanged": true,
+      "all_trusted_program_ast_unchanged": true,
+      "before_composed_sha256": "c7c370f2dfba8c86fb2774046419fd2830f7546e6020148c40b31ff9978352d4",
+      "before_source_sha256": "25b87fac066a11d7cdfc08198b2d94e5d000af29e71d2770cc3d62ee34c6da5e",
+      "format": "buddha.source-seed-embedded-format.v1",
+      "frozen_prefix_byte_exact": true,
+      "reason": "Derived program's diagnostic formatter requested a reformat. The exact frozen prefix and factory recipe are retained; only embedded fragment layout changes before first release."
+    },
+    "setup_and_harness_failures": "Original scoped receipt preserves missing-module setup, Windows/POSIX map bookkeeping recovery, prior mypy shared-cache failure and later isolated success. These do not become product failures or passing test bodies."
+  },
+  "final_tests": {
+    "errors": 0,
+    "failures": 0,
+    "ordered_test_ids": [
+      "test_source_seed.SourceSeedTests.test_callback_failure_escapes_once_without_retry",
+      "test_source_seed.SourceSeedTests.test_composition_has_exact_prefix_and_original_definitions",
+      "test_source_seed.SourceSeedTests.test_config_limits_and_noncallable_callback_refuse_without_request",
+      "test_source_seed.SourceSeedTests.test_escaped_worker_projection_bound_precedes_callback",
+      "test_source_seed.SourceSeedTests.test_factory_rejects_wrong_type_changed_invalid_or_oversized_seed",
+      "test_source_seed.SourceSeedTests.test_feedback_shapes_ids_note_and_task_bounds_refuse_before_callback",
+      "test_source_seed.SourceSeedTests.test_full_feedback_projection_bound_refuses_before_callback",
+      "test_source_seed.SourceSeedTests.test_generation_requests_answers_and_history_remain_exact",
+      "test_source_seed.SourceSeedTests.test_invalid_parent_refuses_before_callback",
+      "test_source_seed.SourceSeedTests.test_invalid_python_proposal_is_returned_as_data_without_compilation",
+      "test_source_seed.SourceSeedTests.test_malformed_duplicate_nonfinite_and_fenced_proposals_reject_once",
+      "test_source_seed.SourceSeedTests.test_parent_entrypoint_requires_exact_literal_text",
+      "test_source_seed.SourceSeedTests.test_proposal_source_and_utf8_hypothesis_bounds",
+      "test_source_seed.SourceSeedTests.test_proposal_uses_one_provider_callback_full_parent_and_ordered_feedback",
+      "test_source_seed.SourceSeedTests.test_refused_truncated_empty_and_bad_protocol_replies_reject_once",
+      "test_frozen_seed.FrozenSeedTests.test_anthropic_text_blocks_are_joined_literally_and_thinking_is_not_an_answer",
+      "test_frozen_seed.FrozenSeedTests.test_callback_errors_and_host_baseexception_escape_without_retry",
+      "test_frozen_seed.FrozenSeedTests.test_config_and_task_require_exact_fields_and_valid_boundary_values_before_calls",
+      "test_frozen_seed.FrozenSeedTests.test_count_two_and_ten_preserve_order_and_exact_history_for_each_provider_mode",
+      "test_frozen_seed.FrozenSeedTests.test_empty_regenerate_baseline_matches_policy_default",
+      "test_frozen_seed.FrozenSeedTests.test_exact_final_legacy_request_bytes_for_providers_modes_and_unicode",
+      "test_frozen_seed.FrozenSeedTests.test_generation_snapshots_config_and_task_before_untrusted_callback",
+      "test_frozen_seed.FrozenSeedTests.test_history_requires_literal_utf8_text_without_mutating_inputs",
+      "test_frozen_seed.FrozenSeedTests.test_malformed_response_shapes_and_unknown_finish_do_not_return_answers",
+      "test_frozen_seed.FrozenSeedTests.test_malformed_utf8_response_and_later_failure_stop_without_retry_or_partial_return",
+      "test_frozen_seed.FrozenSeedTests.test_normalization_matches_legacy_for_every_accepted_finish_reason",
+      "test_frozen_seed.FrozenSeedTests.test_placeholders_and_duplicates_are_literal_next_request_history",
+      "test_frozen_seed.FrozenSeedTests.test_refusal_and_empty_placeholders_match_legacy_without_rewriting_raw_response",
+      "test_frozen_seed.FrozenSeedTests.test_seed_has_only_stdlib_imports_and_no_file_network_or_environment_calls",
+      "test_frozen_seed.FrozenSeedTests.test_typed_ids_and_existing_numeric_boundaries_do_not_change_requests",
+      "test_source_screen_format.SourceScreenFormatTests.test_canonical_bytes_equality_hash_and_v1_v2_identities_are_preserved",
+      "test_source_screen_format.SourceScreenFormatTests.test_derived_scalar_and_data_are_immutable_and_not_constructor_inputs",
+      "test_source_screen_format.SourceScreenFormatTests.test_invalid_formats_and_controls_still_fail_full_artifact_validation",
+      "test_source_screen_format.SourceScreenFormatTests.test_record_views_still_decode_fresh_and_cannot_change_formats_or_identity",
+      "test_source_screen_format.SourceScreenFormatTests.test_repeated_format_reads_do_not_decode_the_full_validated_artifact"
+    ],
+    "skips": 0,
+    "successful": true,
+    "tests_run": 35,
+    "wall_seconds": 4.581109399907291
+  },
+  "format": "buddha.src02-source-seed-delivery.v1",
+  "local_evidence_sha256": {
+    "source-seed-embedded-format.json": "a5f55183fca1eea4eea8bf1c68592f19049267602fe5f60d8774afc8e5c43b33",
+    "source-seed-final-quality-v2.json": "097922e12e5a37dcc9d5201b89f63b0b4f674265564ea8a93025806288663225",
+    "source-seed-final-v2-child.json": "598d137954f69be879d1621cf87d57f0ecd09a066a5d376efe1a94c880f8156e",
+    "source-seed-final-v2-exit.json": "b1b426443098dd28f96039c4bb59aa92f243a5203e2ce03dfec2dde973ff1e61",
+    "source-seed-independent-review.json": "e8cfb8f9661b64792fd7e680f1c0aa554584178d5eb78b94350ddfe4bfcb3475",
+    "source-seed-scoped-validation.json": "ad6f493b36e667ccd3c7cb70c403f3b27ee8a3363987b9812f54235d9a26e237"
+  },
+  "preservation": {
+    "all_old_conformance_raw_unchanged": true,
+    "old_tracked_python": 205,
+    "old_tracked_python_raw_unchanged": true
+  },
+  "quality": {
+    "all_inputs_unchanged": true,
+    "checks": [
+      {
+        "exit_code": 0,
+        "failure_type": null,
+        "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "name": "ruff-check",
+        "wall_seconds": 0.2475600999314338
+      },
+      {
+        "exit_code": 0,
+        "failure_type": null,
+        "log_sha256": "90c880bbedeb8782257a3132de5d81bc2d9e856bf6ee94361bfe896d5b8c1f9a",
+        "name": "ruff-format",
+        "wall_seconds": 0.25367979996372014
+      },
+      {
+        "exit_code": 0,
+        "failure_type": null,
+        "log_sha256": "94052817dfe271c9180d5fb69d1a5187415e233dec083b3d4a14ff2067e6dba0",
+        "name": "mypy-win32",
+        "wall_seconds": 7.756323600071482
+      },
+      {
+        "exit_code": 0,
+        "failure_type": null,
+        "log_sha256": "94052817dfe271c9180d5fb69d1a5187415e233dec083b3d4a14ff2067e6dba0",
+        "name": "mypy-linux",
+        "wall_seconds": 7.780223099980503
+      },
+      {
+        "exit_code": 0,
+        "failure_type": null,
+        "log_sha256": "7ce57b66395330c8432ec3db2e28790e0bc1e69109dd6b964e1fcf1af32bb9d7",
+        "name": "bandit",
+        "wall_seconds": 4.223563899984583
+      },
+      {
+        "exit_code": 0,
+        "failure_type": null,
+        "log_sha256": "e82148c0c30269ca5a2c35420ece6af011a4faf5a375325d750e243ffdb10625",
+        "name": "pip-audit",
+        "wall_seconds": 22.741382600041106
+      },
+      {
+        "exit_code": 0,
+        "failure_type": null,
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "name": "compileall",
+        "wall_seconds": 0.3059785000514239
+      }
+    ],
+    "config_inputs": 4,
+    "python_inputs": 207,
+    "scope": "Workflow source paths and strict factory-module typing for both platforms; embedded improver bodies are runtime-tested, not independently strict-typed."
+  },
+  "source_sha256": "492d3c7e599b5032526a96aa5f2582822d0d49cd836e2d3418f9dfb355ea82d1",
+  "status": "bounded_starter_checks_passed_hosted_ci_pending",
+  "test_sha256": "5e120540b498f991ec57606aa98eb42e4b660fd7ffdf8e52207e570d157ec45b",
+  "trusted_derived_program_checks": {
+    "returned_model_child_compiled_or_executed": false,
+    "ruff_check_exit": 0,
+    "ruff_format_check_exit": 0,
+    "source": "Observed root tool results on exact d7ba10 artifact after layout-only correction"
+  }
+}

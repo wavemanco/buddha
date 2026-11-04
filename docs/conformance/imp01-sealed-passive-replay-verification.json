@@ -1,0 +1,62 @@
+{
+  "baseline_interpretation": "Original receipt labels the test-first baseline51dfa3c. Do not rewrite it. The actual captured executing file hashes and the separately verified byte bridge identify the final e05de4fa/68cb8f40 cut now committed in fb84fd8.",
+  "captured_input_count": 224,
+  "evidence": {
+    "driver": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\run-sealed-assessment-positive-v1.py",
+      "sha256": "bb7cc29a1859ba3e811acdcf39f03b25c5ecec4fb7e0f4bff0261e977641a69c"
+    },
+    "independent_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\sealed-assessment-positive-independent-review-v1.json",
+      "sha256": "724c40eb7bffaa28c2413be41859bebce8bd80fd87b281e1976ce6048257e7a8"
+    },
+    "log": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\sealed-assessment-positive-green-v1.log",
+      "sha256": "c386f7cc6e1ab4e9d25ad2ab48dc709e47f83e7b8f180542d894b1e3a0104ddf"
+    },
+    "receipt": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\sealed-assessment-positive-green-v1.json",
+      "sha256": "ee99c5a07e3bf398f8c71e97373ceccba2c892b2197ae352ccb3672d45d580a9"
+    }
+  },
+  "format": "buddha.sealed-assessment-positive-verification.v1",
+  "interpretation": "Adds one existing unchanged positive lifecycle to the earlier25 focused methods and seven quality commands at the final six-file cut. Earlier producer-retirement/alias regressions retain separate receipts. Full-suite/hosted verification and actual IMP-01 controlled comparison remain open. No gate is closed by this record.",
+  "limits": [
+    "No rerun, application import, worker/provider/key/SQL access, fixture read, DB write, process control or repository edit by reviewer. Only static source/driver parsing and saved receipt/log/hash comparisons; one new external review receipt.",
+    "Supplied workers/native outputs and mocked HTTPS through real controller/session/accounting paths establish this bounded lifecycle test, not actual model-authored improvement, real container execution, official benchmark validity, hostile-code confinement, performance or scientific effectiveness.",
+    "No full-suite, hosted-CI, gate-closure or future-live-readiness claim. Current clean fb84fd8 source bridge does not alter earlier draft4117 or prior test-first evidence."
+  ],
+  "observed": {
+    "denied_events": [],
+    "elapsed_seconds": 1395.9501816000557,
+    "errors": 0,
+    "failures": 0,
+    "methods": [
+      "test_real_prospective_shared_starter_grid_recovery_and_passive_integrity"
+    ],
+    "retention_errors": [],
+    "runner_error": null,
+    "source_inventory_unchanged": true,
+    "source_pins_unchanged": true,
+    "tests": 1
+  },
+  "original_baseline_label": "51dfa3c26d22f90c8e2ee8b14071a59b170837eb",
+  "producer_commit": "fb84fd8e17c328ca38cae4799e5f551411d8d3f1",
+  "scope": [
+    "Prospective trial preparation, finite development and one-way frozen three-role schedule with starter/initial/evolved and6 complete final cells. Identical selected initial/evolved source bytes retain distinct roles/measurements.",
+    "Deliberate KeyboardInterrupt after one genuinely completed generation publication, then continuation. Saved owner/manifests/operation/report/completion bytes stay exact and old generation owners are not executed again.",
+    "Complete paired adaptation retains two selected slots, all6 cells,24 final owners and zero held final reserve. The asserted improver-effect utility point2 comes from supplied5/6/8 quality controls and is engineering arithmetic evidence only.",
+    "Every development/final owner retains original trial controls. Keyless passive inspection, freeze inspection and repeated freeze equal original outputs while new Authorization/Gateway/container/lease calls are forbidden; files and mock sends stay unchanged.",
+    "Deleting the original declaration or required native publications refuses before confidence arithmetic. Unapproved foreign direct final-owner preparation is refused without creating a destination.",
+    "This selected positive method does not retire original producer roots or exercise the new four-role alias selector. Those separate regressions retain their own receipts and are not implicitly included in this one-method pass."
+  ],
+  "source_test_sha256": {
+    "buddha/executor.py": "3eccc9827ff6729fe998aea703fda14dfad9b2114a811d97808bf0c1e506c2b1",
+    "buddha/improver_assessment.py": "e05de4fa580e9456e4057ee8e990c1898cb078138a5e3fa23288a110212c035d",
+    "buddha/improver_study.py": "986c65aee51ba071e426eda9e73423bf393fc026e42d3e949e7e9ce3c820cb3d",
+    "buddha/validation_study.py": "bc13d4b860621cd9ddc4315a86d789c1817bbcb93aae20ed69544bb8e2fe43ea",
+    "tests/test_executor.py": "eda45993b4b6cceb5020657affdae4d3478cc4cd4a6f209dfbcdc5b73c94fc07",
+    "tests/test_improver_assessment.py": "68cb8f400c6b59be4ca695c79dd9e169b701fe1744dec1665e86cdb480e73ad8"
+  },
+  "status": "one_additional_positive_lifecycle_pass_at_final_sealed_replay_cut"
+}

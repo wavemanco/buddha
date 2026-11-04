@@ -1,0 +1,125 @@
+{
+  "base_head": "fb39e82b50e2604dea7eec1988d114b39d231d4f",
+  "constraints": {
+    "actual_selected_P_C_semantics_read": false,
+    "actual_study_grants_or_owners_created": false,
+    "fresh_synthetic_test_grants_created": true,
+    "historical_paid_sql_connections": 0,
+    "merged": false,
+    "native_scientific_reviewer_selected": false,
+    "original_official_instrument_changed": false,
+    "private_final_prompt_text_emitted": false,
+    "proposed_total_cap_or_workload_changed": false,
+    "real_credentials_read": false,
+    "real_provider_calls": 0,
+    "scientific_gate_closed": false,
+    "spending_approval_or_adoption_created": false
+  },
+  "contract": {
+    "both_reference_descriptor_hashes_checked": true,
+    "caller_must_supply_exact_approved_handoff_arguments": true,
+    "captured_grants_and_controls_rechecked": true,
+    "combined_caps_equal_sum_of_four_allocations": true,
+    "distinct_paths_ids_and_scopes": true,
+    "fresh_study_refuses_used_funding": true,
+    "grant_count": 4,
+    "original_primary_checker_reused": true,
+    "original_spend_holds_and_attempts_count_once": true,
+    "primary_state_and_stop_reason_preserved": true,
+    "raw_scope_binds_exact_plan_sha256": true,
+    "shared_raw_grant_count": 1,
+    "strict_integer_limits_and_unused_zero_phase": true,
+    "trial_definition_plan_consumer_and_self_bindings_joined": true
+  },
+  "existing_python_files_modified": 0,
+  "files": {
+    "buddha/unified_funding.py": "b1abda1ba94305a4df01fe60ea1a4d4fc50056d498cabb7a35382e974fb2c387",
+    "docs/UNIFIED-FUNDING-CHECK.md": "bbfac4eb397ea0a731f119a3b2150ba18737a85dd2dcf4af006fd5ca805915a0",
+    "tests/test_unified_funding.py": "3116bc9a5e06204dd48ac5955002b5112be82cbfaf07b8cf1ddab87603fc865f"
+  },
+  "format": "buddha.unified-funding-delivery.v1",
+  "fresh_prepared_files_preserved": 166,
+  "independent_engineering_review": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-funding-independent-review-v1.json",
+    "sha256": "0dba544535369853a6edb0d9d587d72feb8389bcd553022315984f690531ef27"
+  },
+  "local_checks": {
+    "combined_unique_methods": 15,
+    "composed_scope": "Real original primary-launch checker and four fresh synthetic grants, under no-key/no-writer/only-memory-SQL guards; no raw pipeline or paid provider execution.",
+    "existing_regression": "test_improver_launch.ImproverLaunchTests.test_original_prepared_owner_locks_and_unknown_hold_stop_before_key_entry",
+    "existing_regression_seconds": 22.0,
+    "existing_regression_status": "pass",
+    "final_full_new_module_seconds": 14.882,
+    "fixture_correction": "A newly inserted attempt-overrun method briefly contained the preceding test tail; restore that tail and rerun final 14-method module successfully.",
+    "hosted_changed_head_status": "pending publication",
+    "independent_focused_methods": 13,
+    "independent_focused_seconds": 2.456,
+    "new_methods": [
+      "UnifiedFundingTests.test_four_caps_count_shared_plain_once_and_result_is_detached",
+      "UnifiedFundingTests.test_invalid_numeric_limits_and_wrong_sums_refuse",
+      "UnifiedFundingTests.test_wrong_pins_trial_definition_and_unbound_consumers_refuse",
+      "UnifiedFundingTests.test_both_modes_need_one_grant_and_current_definition_bytes",
+      "UnifiedFundingTests.test_substituted_grant_identity_terms_scope_and_amounts_refuse",
+      "UnifiedFundingTests.test_protected_roots_and_noncanonical_paths_refuse",
+      "UnifiedFundingTests.test_used_raw_funding_cannot_become_a_new_combined_study",
+      "UnifiedFundingTests.test_distinct_files_with_repeated_identity_or_scope_refuse",
+      "UnifiedFundingTests.test_authority_and_bound_control_changes_during_checking_refuse",
+      "UnifiedFundingTests.test_existing_unknown_holds_and_primary_stop_are_preserved_without_owner_claim",
+      "UnifiedFundingTests.test_original_spend_and_unknown_liability_sum_once_across_phases",
+      "UnifiedFundingTests.test_changed_primary_observation_and_overrun_refuse",
+      "UnifiedFundingTests.test_shared_attempt_overrun_refuses_even_with_zero_additional_cost",
+      "UnifiedFundingComposedTests.test_original_primary_checker_and_four_synthetic_grants_compose_readonly"
+    ],
+    "new_methods_status": "pass",
+    "new_unique_method_count": 14,
+    "quality": [
+      {
+        "name": "ruff lint",
+        "status": "pass"
+      },
+      {
+        "name": "ruff formatting",
+        "status": "pass"
+      },
+      {
+        "name": "mypy strict (85 source files)",
+        "status": "pass"
+      },
+      {
+        "name": "bandit (zero reported issues)",
+        "status": "pass"
+      },
+      {
+        "name": "runtime dependency audit (no known vulnerabilities)",
+        "status": "pass"
+      },
+      {
+        "name": "strict development dependency audit (no known vulnerabilities)",
+        "status": "pass"
+      },
+      {
+        "name": "compileall",
+        "status": "pass"
+      }
+    ],
+    "resolved_test_review_finding": "Mutated-plan negative cases initially retained the prior raw scope. Preserve that synthetic grant and create a fresh same-path plan-scope-matched grant so each relationship guard is isolated.",
+    "whole_local_suite_run": false
+  },
+  "new_python_files": 2,
+  "next": "Whole-baseline original-owner preflight and append-only partial observations, then coordinated existing controllers and final prospective/account/price/request/CI/funding/live handoff checks.",
+  "original_tracked_python_files_preserved": 308,
+  "plan_revision": 161,
+  "preservation": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-funding-preservation-v1.json",
+    "sha256": "a8454c1fb18a896af698cce8dda993238789a1175c0d2c0c975a49f531f20e7c"
+  },
+  "recorded_date": "2026-10-26",
+  "scope": "Passive combined funding consistency; not a coordinated launcher, approval, account authentication, atomic four-file transaction or raw original-owner recovery.",
+  "spec_sections": [
+    "DESIGN 5",
+    "DESIGN 7",
+    "DESIGN 8",
+    "DESIGN 9"
+  ],
+  "status": "implemented_passive_scope_local_checks_pass_hosted_pending"
+}

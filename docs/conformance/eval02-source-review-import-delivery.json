@@ -1,0 +1,169 @@
+{
+  "checks": {
+    "all_source_test_configuration_pins_unchanged": true,
+    "compatibility_seconds": 0.9749178999336436,
+    "denied_events": [],
+    "errors": 0,
+    "failures": 0,
+    "new_cohort_seconds": 218.19637749996036,
+    "new_methods": 5,
+    "quality_commands_passed": 7,
+    "quality_input_count": 224,
+    "skips": 0,
+    "unchanged_compatibility_methods": 19
+  },
+  "date": "2026-10-24",
+  "evidence": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-results-api-red-v1.json",
+      "sha256": "657ed9065c9c78ff314dcf436cde8fb4293a8600f3817bd6e26cdb85be9518a0"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-results-api-red-v1.log",
+      "sha256": "99c7b70f58db0618112c31684fec2fb653b1b19347ea2d41248b3489512a2ee9"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-results-api-red-v1.test.py.txt",
+      "sha256": "9785cc9fba32977ea16edd58c671379ef9aea69ce266b012724f5ae22cb1e6c1"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\run-source-review-results-checks-v1.py",
+      "sha256": "4d5e0c34577097cc3be8659ca88bfdd733bfd8b4ae750db27179b8989b62c7cb"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-results-check-v1.json",
+      "sha256": "3a2ace6a211078a049e5185c5221c1988d8ffb9df42346833149255860b2d3fb"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-results-check-v1.log",
+      "sha256": "dfabf328e95152c78517befee535f0d6a0a726c257a23eff4acc4be670f9482c"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-results-compatibility-v1.json",
+      "sha256": "621ca9c4966c50d6cda0ec58880f4f50e75ba3cc540e055b1960d6e811f45f37"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-results-compatibility-v1.log",
+      "sha256": "91fe1c3097862ec918fda45492cda416fa8180a79bf074ac4704bfa99f9868ae"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\run-source-review-results-quality-v1.py",
+      "sha256": "5e8abccf06a761bf544b877d1e9a9cd72e681b986794f01760cf87597c2cf7e6"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-results-quality-v1.json",
+      "sha256": "66ca1f6e77065c9f414a338550a7450bbbf7fce418d52cdba59d5739c97903f0"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-results-quality-v1.inputs.json",
+      "sha256": "8d57545896c058d2754b90f41377710aa17b280ee5cc6e9deca3950886808343"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-results-quality-v1.log",
+      "sha256": "67331adefe9ba272ecf6d79087411f7725c527805b2b4efbd828b30f36d25083"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-results-quality-app-v1.py.txt",
+      "sha256": "6b3215f76245b6cb46946090b243b3891df7e1ddcc6a54c66c27df24782a9b20"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-results-quality-test-v1.py.txt",
+      "sha256": "028428480c60f59a985b18df64e950dbd4b59ed061d8a0e53db6a62d064cda26"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-results-static-review-v1.json",
+      "sha256": "0488f492efc239175e1c729e3a7aa37b082182e600bd342678286232bfecd080"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\hosted-ci-pr105-108-109-refresh-20261024T075859483206Z-v1.json",
+      "sha256": "afeb3ecdadddf00817712d116e00f67ef67b9037210533101890cdafb46c184f"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\pr105-ci-job-120784568565-terminal-v1.log",
+      "sha256": "6c04cc1a7fbecd6d1f2a1097166acb05e1cc2cb3612848d9eaef24f86bae1588"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\pr105-ci-job-120784568565-terminal-v1.json",
+      "sha256": "98ccf53f9d1edc83f52e03c53b9d461d352d8f434d0fc8f8fc0bc808cbebf389"
+    }
+  ],
+  "format": "buddha.source-review-import-delivery.v1",
+  "hosted_checkpoint": {
+    "cause": "Opt-in capacity fields leaked into legacy witness progress maps; not changed by this slice.",
+    "errors": 0,
+    "failures": 3,
+    "head": "da073ef15cc30d3e0d59d60f3825c6eab4731890",
+    "new_import_head": "not yet submitted when this delivery record was written",
+    "pr108_pr109": "both platforms in progress at retained checkpoint",
+    "selected_producer": 105,
+    "skips": 5,
+    "tests": 1769,
+    "ubuntu": "failure",
+    "windows": "in_progress"
+  },
+  "limits": [
+    "Supplied review declarations/forms are synthetic test data, not real human/model independent judgments.",
+    "The new composed cohort covers ordinary final import; no separately executed current valid-improver-descendant import claim.",
+    "A declared complete roster does not attest timing, verified people, independence, freshness, adjudication or improvement.",
+    "Combined full response/report content may hit the unchanged32MiB/aggregate limits and refuse without truncation.",
+    "No full local suite or new hosted green claim. Existing failed and pending heads retain their exact records."
+  ],
+  "preservation": {
+    "all111_prior_raw_plan_rows_preserved": true,
+    "legacy_helper_sha256": "6328f94c4280c29992cbdd87c205e45950406c00f6af636d4392fb7a6777e4fc",
+    "new_paid_allocation": false,
+    "official_scores_changed": false,
+    "original_live_inputs_changed": false,
+    "original_main_acceptance_tails_preserved": true,
+    "paid_calls": 0,
+    "plan_sha256": "19a95865172b83115004482257c4b049f8fdad5e9456ada24d6618a7987c06f0",
+    "primary_plan_mirror_equal": true
+  },
+  "remaining": "Four gates remain: SRC02/SRC03 current model-authored demonstration, IMP01 matched experiment and EVAL02 operator handoff/transfer/human and scientific evaluation. Resolve selected-producer CI before live readiness.",
+  "review": {
+    "format": "buddha.source-review-import-static-review.v1",
+    "limits": "Static review and scoped runtime checks do not establish human independence, efficacy, full-suite or hosted success; combined reports can hit the unchanged32MiB cap without truncation.",
+    "moved_exporter_body_ast_unchanged_except_name_annotation_and_return_handoff": true,
+    "pre_execution_corrections": [
+      "canonical round path and finite JSON submission-ref boundary",
+      "preserve sanitized explicit refusal messages",
+      "prospectively align the small test cohort's assigned final population before owner preparation"
+    ],
+    "reviewed": [
+      "same surviving capture through submissions/serialization/final finish",
+      "original importer control pin",
+      "separate pinned pre-distribution round identity with no timing/independence attestation",
+      "frozen legacy schema adapter and unchanged historical helper",
+      "bounded/canonical paths and finite JSON refs",
+      "duplicate ID/path/raw-hash refusal",
+      "missing versus malformed versus integrity failure",
+      "declared human/model and unavailable-source coverage",
+      "order-invariant grouping comparison without pair expansion",
+      "unmodified full responses, uncertainty and official scores",
+      "plain-English optional command and whole-cohort duration"
+    ],
+    "scope": "Independent source-only code and guide review; no app/helper imports, SQL, behavior runs or writes by reviewer. Root separately checked held pins and unchanged moved exporter body AST.",
+    "source_files": {
+      "buddha/source_review.py": "662606b5a3bef052bfbd2a5fbb55d3ae7420743b3cc2aaceed291663de28ef2d",
+      "buddha/source_review_results.py": "6b3215f76245b6cb46946090b243b3891df7e1ddcc6a54c66c27df24782a9b20",
+      "tests/test_source_review_results.py": "028428480c60f59a985b18df64e950dbd4b59ed061d8a0e53db6a62d064cda26"
+    },
+    "status": "no_blocker_at_held_cut"
+  },
+  "scope": "Passive library import/reporting over original source-output review evidence; no operator distribution or scientific evaluation.",
+  "source_files": {
+    "buddha/source_review.py": "662606b5a3bef052bfbd2a5fbb55d3ae7420743b3cc2aaceed291663de28ef2d",
+    "buddha/source_review_results.py": "6b3215f76245b6cb46946090b243b3891df7e1ddcc6a54c66c27df24782a9b20",
+    "tests/test_source_review_results.py": "028428480c60f59a985b18df64e950dbd4b59ed061d8a0e53db6a62d064cda26"
+  },
+  "status": "scoped_checks_pass",
+  "tests_first": {
+    "initial_red": "Missing module import before fixture/owner setup; one observed error, no behaviors run.",
+    "no_behavioral_red_invented_for_static_findings": true,
+    "pre_execution_corrections": [
+      "canonical round path and finite JSON submission-ref boundary",
+      "preserve sanitized explicit refusal messages",
+      "prospectively align the small test cohort's assigned final population before owner preparation"
+    ]
+  }
+}

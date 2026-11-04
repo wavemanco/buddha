@@ -1,0 +1,78 @@
+{
+  "format": "buddha.cell-witness-continuation-delivery.v1",
+  "recorded_utc": "2026-10-28T21:27:03.709786+00:00",
+  "implementation_commit": "b64119f19e1f422758e409ca51279b3fa5604885",
+  "prerequisite_merge": "27a9eb14d3dfefcef4740e0cebb3717370e3f72b",
+  "spec_sections": [
+    5,
+    7,
+    9,
+    10
+  ],
+  "scope": "One counted-child witness, both roles and terminal replay; no whole-development/final/plain/paid readiness.",
+  "source_sha256": {
+    "buddha/unified_continuation.py": "a19ee5d0b94c78d8e5fc5363a05a61140e6a5ed2cefe5d77980dbd15de220970",
+    "tests/test_unified_continuation.py": "cf75ead7d2840143b4380ed294b937bba87d11c27512534396eba64e4aee6ba2",
+    "tests/test_cell_witness_continuation.py": "14ff15b7c7bbb7342ee34beeeb9d4fb359fea3ce76aacf506c3e869d951c123d",
+    "docs/PLAN.md": "155f7169cc7aa9424f3fd3ed6ef2aad9b75b87057565f66aac2607e536ebf2b1",
+    "docs/UNIFIED-EVIDENCE-RECOVERY.md": "b7c52c444f6980b822832afc51cda48b11d0f59c23ed491cb17ea6d7e3130abb"
+  },
+  "engineering_receipt": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\cell-witness-continuation-20261028-v1.json",
+    "sha256": "fb952a578b5cc5f0a238ed68bd53d620beeb6cb4a698b86899c304bbed2386eb"
+  },
+  "checks": {
+    "genuine_RED": {
+      "methods": 1,
+      "seconds": 444.913,
+      "reason": "Missing witness_complete summary field after both stages had actually passed."
+    },
+    "corrected_counted_cell": {
+      "methods": 1,
+      "seconds": 505.555,
+      "status": "passed"
+    },
+    "prior_continuation_methods": {
+      "methods": 5,
+      "seconds": 113.235,
+      "status": "passed"
+    },
+    "independent_source_review": "authority_review PASS exact a19ee5d0 implementation SHA",
+    "focused_quality": "Ruff, strict mypy and Bandit passed; full hosted/current-cut suite not claimed."
+  },
+  "proof": {
+    "actual_package_roots": 2,
+    "old_inactive_owners": 11,
+    "new_witness_roles": [
+      "proposal",
+      "generation"
+    ],
+    "same_owner_operation_manifest_and_cost": true,
+    "second_sends_each_replay": 0,
+    "terminal_replay_creates_decision": false,
+    "v1_scope_broadened": false
+  },
+  "preservation": {
+    "raw_files": 3277,
+    "trial_files": 2149,
+    "changed_files": 0,
+    "trial_membership_unchanged": true,
+    "CORE_files_equal_original": 10,
+    "check": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-evidence-repair-preservation-check-v5.json",
+      "sha256": "1286e85d6238ceded38fe50ea9da13218811a4c2ab1e8edc696b130cc2535c7f"
+    },
+    "prior_PLAN_raw_rows": 177,
+    "original_acceptance_tails": 7
+  },
+  "activity": {
+    "real_keys": 0,
+    "provider_calls": 0,
+    "actual_containers": 0,
+    "original_on_disk_SQL": 0,
+    "actual_run_new_owners": 0,
+    "new_allocations": 0,
+    "PR_merges": 0
+  },
+  "next": "Explicit remaining-development continuation, then final/plain/publication integration; exact-source hosted and request/account/confinement checks before a local paid command."
+}

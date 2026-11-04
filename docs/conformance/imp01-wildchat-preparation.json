@@ -1,0 +1,677 @@
+{
+  "format": "buddha.imp01-wildchat-preparation.v1",
+  "date": "2026-10-25",
+  "status": "complete_bounded_prospective_data_and_custody_preparation_unfunded",
+  "runtime_manifest": false,
+  "guide": "../IMPROVER-WILDCHAT-PREPARATION.md",
+  "user_direction": "Official WildChat for the next sealed comparison, selected and explicitly reconfirmed. Follow recommendation without another population question. Preparation only; no new API funding. Curated remains historical/qualified evidence with no additional run scheduled.",
+  "source": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-preparation-20261025-v1\\source.json",
+    "sha256": "b55ef9861b8a1f55a1cfbe22ae9c9ac153dd4fa34c50fc06f30f306d9d539977",
+    "bytes": 1114374,
+    "dataset": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\references\\noveltybench-conformance\\64a23be6b18ec1dacc298830aab276061b6e143c\\data\\wildchat-1k.jsonl",
+      "sha256": "8534288089508df3f413c1151a58d5fa5bda9d8f8385ae2815384d4e310a54ca",
+      "bytes": 645466
+    },
+    "release": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-preparation-20261025-v1\\release.json",
+      "sha256": "a01b72926421b05147e1202db7a23943f76cde869b5b00455896cb5ffff90408",
+      "bytes": 1796
+    },
+    "complete_tasks": 1000,
+    "answer_count": 10,
+    "original_typed_ids_text_and_source_bytes_preserved": true,
+    "official_source_files_verified": 9,
+    "official_evaluator_commands_settings_models_unchanged": true,
+    "upstream_current_head_at_check": "64a23be6b18ec1dacc298830aab276061b6e143c",
+    "upstream_current_head_committer_date": "2026-09-10T13:44:41Z",
+    "preparation": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-preparation-20261025-v1\\source-preparation.json",
+      "sha256": "55756e020b5306a39641456a24d7830df721622cddad50c7942f427154bf57fc",
+      "bytes": 1821
+    }
+  },
+  "custody_review": {
+    "method": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\wildchat-data-custody-20261025-v1\\method.json",
+      "sha256": "6d52bdbfa0b6c625c4c14c5894b2f00ef93e255eacf2ea27dbdb5341358103c3",
+      "bytes": 4201
+    },
+    "public_receipt": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\wildchat-data-custody-20261025-v1\\receipt.public.json",
+      "sha256": "86b783487df8cb861152d397916e592aeb5fa63e6ba1658814b43be9f4fea3e7",
+      "bytes": 8669
+    },
+    "public_map": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\wildchat-data-custody-20261025-v1\\family-map.public.json",
+      "sha256": "04bcdf3eaf791d2513e12f1a4bd7cb705fd289c9c91f07b5fed4fab7df1c12a8",
+      "bytes": 730383
+    },
+    "full_read_coverage": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\wildchat-data-custody-20261025-v1\\coverage-final.public.json",
+      "sha256": "cde403043bd20226d0f87b78b7e89c57edcef4d92c5f24f763008e4d2675c616",
+      "bytes": 243756
+    },
+    "private_notes_seal_only": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\wildchat-data-custody-20261025-v1\\custodian-notes.md",
+      "sha256": "7271be09e6aaf9aadfafa08c9adc079d5614ccbf27cc9af65c358af5f5a6c57d"
+    },
+    "counts": {
+      "source_rows": 1000,
+      "full_read_rows": 1000,
+      "families": 969,
+      "multi_task_families": 23,
+      "multi_task_members": 54,
+      "normalized_exact_duplicate_families": 0,
+      "uncertain_type_or_interpretation_items": 69,
+      "uncertain_family_items": 44,
+      "any_uncertain_items": 107,
+      "type_counts": {
+        "A": 212,
+        "C": 408,
+        "E": 22,
+        "K": 313,
+        "O": 19,
+        "P": 21,
+        "R": 5
+      }
+    },
+    "primary_context_counts": {
+      "custodian-a": 350,
+      "custody-b": 350,
+      "custody-c": 300
+    },
+    "semantic_reconciliation": {
+      "primary_custodian": "custodian-a",
+      "lexical_candidate_pairs_semantically_reviewed": 234,
+      "cross_batch_candidate_pairs": 152,
+      "second_opinion_cross_batch_pairs": 152,
+      "limits": "Full-text primary-prompt coverage is complete across three custody-only contexts. Cross-batch reconciliation used lexical candidate links and manually identified links; all 499500 possible pairs were not independently compared. False negatives and false positives remain possible."
+    },
+    "role": "Fresh fork-none data-custodian process and custody-only delegates, with no candidate-source/outcome/optimizer inputs; only opaque metadata/generic method/coverage returnedroot. Descriptive notes not received by optimization model.",
+    "future_role_reuse": "These custody contexts must not author/tune agents in this experiment.",
+    "model_identity_and_human_limits": "Codex AI review contexts; no separately verified per-context model identity or human ground truth/independence. No paid project provider calls; Codex preparation use is outside the experiment gateway ledger and no total-cost-efficiency claim is made.",
+    "normalization": "Custody-only NFKC/casefold/whitespace diagnostic; original tasks and native whitespace/casefold duplicate validator unchanged.",
+    "review_limits": [
+      "Primary prompt field only; original_prompt/meta/safety/chosen not semantically reviewed.",
+      "No source/answer/score/optimizer/outcome-dependent selection input inspected in the custody review; no assertion about earlier exposure or model training.",
+      "Logical role separation only, not encryption or enforced filesystem isolation. Delegates were created without inherited optimization history.",
+      "No phase or experimental split, task selection, eligibility assertion, authority/owner record, provider call, network call, or paid execution.",
+      "Broad types and conservative family-boundary judgments are fallible; uncertainty flags are not quality or eligibility judgments.",
+      "Code license and raw dataset terms remain separate."
+    ]
+  },
+  "allocation": {
+    "recipe": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\wildchat-prospective-allocation-recipe-v2.json",
+      "sha256": "be3558b4ffd36c4e82b3d93c41768ae70a6c17340c9da1d64d610da183b9fcca",
+      "bytes": 4330
+    },
+    "public_recipe": "imp01-wildchat-allocation-recipe.json",
+    "allocator": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\prepare-wildchat-family-allocation-v2.py",
+      "sha256": "ed3bcc5baa63dec21576035fb97f19d4156bb7769885a7cd13162870912195ca",
+      "bytes": 24195
+    },
+    "receipt": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-preparation-20261025-v1\\allocation-v2\\allocation.json",
+      "sha256": "35188709e05fe9c51f07ccb4ccc9f39dd95c234fb7259975e471851d2461447a",
+      "bytes": 4507
+    },
+    "split": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-preparation-20261025-v1\\allocation-v2\\split.json",
+      "sha256": "f41b15d2e60c4146d7b0d47864d017f683e6d882745eb7748336c42360b9182b",
+      "bytes": 174238
+    },
+    "development_panel": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-preparation-20261025-v1\\allocation-v2\\development-panel.json",
+      "sha256": "617e3fbfa70f05dba47d3a645f16a113f30231c6d19d3fd0ba773a9432038a9b",
+      "bytes": 133
+    },
+    "opaque_population": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-preparation-20261025-v1\\allocation-v2\\population-metadata.json",
+      "sha256": "feb2ffd0cf965cb9c85f1fa5167e8427099e62a181426762e981d31004647db9",
+      "bytes": 389576
+    },
+    "public_population": "imp01-wildchat-population.json",
+    "counts": {
+      "development": 599,
+      "final": 26,
+      "validation": 375
+    },
+    "ordered_development_ids": [
+      "WildChat-34a58684e220b6fc70ef19c009694426",
+      "WildChat-80db260e5cdf6d3953f3e3a8d087fe3a",
+      "WildChat-9c6d0c684a953e9cc1f8d6fc0daafbc9"
+    ],
+    "ordered_final_ids": [
+      "WildChat-09e2cb3909b3c726bb728b18d410c9a4",
+      "WildChat-24fe5ea324986bb07a06b779ad17e3c2",
+      "WildChat-263288a3677729bbf7c3537fd2d1f582",
+      "WildChat-292b1b4b1e567197240b19d35d2fd88b",
+      "WildChat-3d3987ae7312208327c352a4baf95393",
+      "WildChat-404b560a967fa3242d5c295f8dd1d935",
+      "WildChat-4119ae189ad757b57f4ca0159c745b63",
+      "WildChat-4d39bdd6bcb57d39848178c7bd7e02ac",
+      "WildChat-5dc762673f0b02a5728afd73e1269d82",
+      "WildChat-65411735abedc7b3fce11c2f3a557d48",
+      "WildChat-73a2c1f45b915614f368fa2e8839ca7c",
+      "WildChat-762705287b14a1246726fbe38fc4add2",
+      "WildChat-7f4f9350692f11e70e61604f31641add",
+      "WildChat-9641e5ce88864a0909df5ffc8d77c88f",
+      "WildChat-9cc52c4b7ace68aaa7d6ee35ddb1e23d",
+      "WildChat-a73ea890a9495093e3577deb5b207ee3",
+      "WildChat-bc7a7af6535ae8f5b14608e148f359cb",
+      "WildChat-cbbe448ba4f294db31d0dfb554991135",
+      "WildChat-cdee3ca4eb3e18028fc4b3a652cb35a4",
+      "WildChat-cf53a014db00314d6e68d8d2bd395a89",
+      "WildChat-d36e11467e2d4f69c3d522d0ebbc99e4",
+      "WildChat-d3da4ad03509c152fbb224d7f81565a4",
+      "WildChat-d63bac08f49848c43e12a3d0f8b39e28",
+      "WildChat-dbc377d89e58c0386f40fedb19d55a6a",
+      "WildChat-dd86e0b01f454b2456f2e5639c290e1c",
+      "WildChat-f461ac8f72ce59ac80b6cf5093330154"
+    ],
+    "final_family_count": 25,
+    "final_family_size_histogram": {
+      "1": 24,
+      "2": 1
+    },
+    "final_type_counts": {
+      "A": 6,
+      "C": 10,
+      "E": 1,
+      "K": 8,
+      "P": 1
+    },
+    "majority_family_stratum_counts": {
+      "A": {
+        "development": 125,
+        "final": 6,
+        "validation": 81
+      },
+      "C": {
+        "development": 247,
+        "final": 10,
+        "validation": 154
+      },
+      "E": {
+        "development": 13,
+        "final": 1,
+        "validation": 8
+      },
+      "K": {
+        "development": 187,
+        "final": 8,
+        "validation": 117
+      },
+      "O": {
+        "development": 12,
+        "final": 0,
+        "validation": 6
+      },
+      "P": {
+        "development": 12,
+        "final": 1,
+        "validation": 7
+      },
+      "R": {
+        "development": 3,
+        "final": 0,
+        "validation": 2
+      }
+    },
+    "actual_task_type_counts": {
+      "development": {
+        "A": 124,
+        "C": 247,
+        "E": 13,
+        "K": 188,
+        "O": 12,
+        "P": 12,
+        "R": 3
+      },
+      "final": {
+        "A": 6,
+        "C": 10,
+        "E": 1,
+        "K": 8,
+        "P": 1
+      },
+      "validation": {
+        "A": 82,
+        "C": 151,
+        "E": 8,
+        "K": 117,
+        "O": 7,
+        "P": 8,
+        "R": 2
+      }
+    },
+    "selection_uses_uncertainty_flags": false,
+    "uncertainty_flags_by_phase": {
+      "development": {
+        "family_boundary_uncertain": 25,
+        "type_or_interpretation_uncertain": 37
+      },
+      "final": {},
+      "validation": {
+        "family_boundary_uncertain": 19,
+        "type_or_interpretation_uncertain": 32
+      }
+    },
+    "self_tests_passed": 14,
+    "source_and_native_split_validators_passed": true,
+    "independent_reproduction": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\wildchat-allocation-independent-review-v2.json",
+      "sha256": "b1f1b1cf863059d43331f6cafe379d40da40f9650888b8b4707380624119ec39",
+      "bytes": 6107
+    },
+    "independent_three_output_bytes_equal": true,
+    "independent_family_order_and_label_invariance": true,
+    "coarsened_family_map": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-preparation-20261025-v1\\coarsened-family-map-v2.json",
+      "sha256": "2510442274d4746854d1d029b459d4a2b0159a75fd63cc3fa230cb19f477910e",
+      "bytes": 610229
+    },
+    "coarsened_family_count": 967,
+    "coarsened_multi_task_families": 24,
+    "coarsened_multi_task_members": 57,
+    "blocked_final_tasks": 8,
+    "blocked_final_families": 5,
+    "blocked_final_overlap": 0,
+    "all_coarsened_families_and_cross_components_one_phase": true,
+    "task_phase_changes_from_v1": 4,
+    "final_ids_unchanged_from_v1": false
+  },
+  "prospective_custody": {
+    "declaration": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-preparation-20261025-v1\\custody-v2.json",
+      "sha256": "e83a52033cfe140e5f26c88f1348ac6eb5d785bb044739c8a8582e32180802da",
+      "bytes": 726542
+    },
+    "basis": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\wildchat-prospective-custody-basis-v2.json",
+      "sha256": "92f1d97d5d1a0c71ece2c0deeb529a32e9e3fef7d6f3d3c312bbe96e449315bb",
+      "bytes": 15692
+    },
+    "check": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\wildchat-prospective-custody-check-v2.json",
+      "sha256": "699a19a56f3dbc34098a2f2170287c2f9c99d63a9b0c622df5d9f9c71fcb835d",
+      "bytes": 2362
+    },
+    "scope": "Exact26assignedfinal declaredeligible only for documented prospective optimization process, including frozen P/C and root/source-author decisions;974othermembersunknown.",
+    "eligible_final_members": 26,
+    "unknown_other_members": 974,
+    "actual_data_role_prompt_disclosures": 1000,
+    "bound_evidence_files": 60,
+    "guard_roundtrip_passed": true,
+    "denial_probes": [
+      {
+        "probe": "unknown_selected_final",
+        "result": "rejected"
+      },
+      {
+        "probe": "exposed_selected_final",
+        "result": "rejected"
+      },
+      {
+        "probe": "semantic_disclosure_to_same_optimizer",
+        "result": "rejected"
+      },
+      {
+        "probe": "missing_source_member",
+        "result": "rejected"
+      },
+      {
+        "probe": "changed_task_hash",
+        "result": "rejected"
+      },
+      {
+        "probe": "family_crosses_phases",
+        "result": "rejected"
+      },
+      {
+        "probe": "blocked_unknown_member_cannot_be_selected_final",
+        "result": "rejected"
+      }
+    ],
+    "independent_contract_review": "Exact v2 metadata,1000 task/family/phase/hash joins,60evidencepins,26eligibleunblocked/974unknownincl8blocked validated independently. Native guard/roundtrip plus3criticaldenials rerun;7denial receipt separately reviewed. No prompt/privatepair/descriptive content received; no eligibility waiver or global-unseen claim.",
+    "logical_isolation_only": true,
+    "global_historical_model_training_invisibility_attested": false,
+    "overlap_blocked_unknown_members": 8,
+    "independent_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\wildchat-prospective-custody-independent-review-v2.json",
+      "sha256": "eb43beaafc8ebc4c52def768f460215088b69a26a0b0f3878939e28bea28d6db",
+      "bytes": 2778
+    }
+  },
+  "proposed_formula_not_adopted": {
+    "alpha_total": "1/20",
+    "distinct_radius_approximation": 5.667834937399166,
+    "each_of_six_tails": "1/120",
+    "family_independence_attested": false,
+    "method": "Existing fixed-panel family Hoeffding radius formula; not a new public-analyzer observation or power estimate.",
+    "repetitions_do_not_change_family_radius": true,
+    "squared_family_weight_sum": {
+      "denominator": 169,
+      "numerator": 7
+    },
+    "utility_radius_approximation": 6.297594374887963
+  },
+  "retained_reader_refusal": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\wildchat-allocation-checker-normalization-refusal-v1.json",
+    "sha256": "80ddcdd24b6616bc428c158291b9ea0fc32d97ff59bde11f1bb853c32255fe98",
+    "bytes": 1076
+  },
+  "next": "Existing all-proposal capacity integration for counted/common/child-witness paths through explicit study/assessmentv4, then concrete configuration/grid/resource/runtime/statistics/review/funding checks before a separate live launch.",
+  "validation": {
+    "tracked_python_files_unchanged": 288,
+    "captured_old_run_files_unchanged": 451,
+    "prior_raw_plan_revision_rows_preserved": 140,
+    "original_acceptance_tails_preserved": 10,
+    "new_application_full_suite_or_hosted_green_claim": false,
+    "reason": "Data/configuration/documentation preparation using existing constructors/validators, not an application change or actual native/provider execution.",
+    "editing_baseline": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\wildchat-preparation-baseline-v1.json",
+      "sha256": "bc86a9b4022b628f1395fbf0a86b6506ef2be5c97af8da862ed785f2189c85a5",
+      "bytes": 434805
+    },
+    "local_markdown_links_checked": 408,
+    "reserved_final_full_prompt_literals_absent_from_public_drafts": 26
+  },
+  "protected_scope": {
+    "official_metric_algorithm_or_scoring_changed": false,
+    "selected_P_C_source_changed_or_executed": false,
+    "private_descriptive_notes_returned_to_root_model": false,
+    "SQL_queries": 0,
+    "paid_project_provider_calls": 0,
+    "real_keys_used": false,
+    "new_trial_owner_authority_allocation": false,
+    "new_user_launch_command": false,
+    "main_readme_milestone_updated": false,
+    "development_pr_merged": false,
+    "effectiveness_or_generalization_claim": false
+  },
+  "retained_superseded_preparation": {
+    "reason": "Before any execution, bounded Curated/WildChat custody check found relationships adding whole-family links across development/validation; preserve v1 rather than change its records. No original final task was overlap-blocked. V2 coarsens and conservatively excludes all8blockedmembers from final before quotas/selection. Four task phase assignments change; final IDs differ deterministically;3development IDs unchanged. No outcome/model score exists for this preparation.",
+    "allocation": {
+      "recipe": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\wildchat-prospective-allocation-recipe-v1.json",
+        "sha256": "f23a8584ac37135b7fe3fcf709ebb2c201dced279d6180d726d00b5cd6d9d573",
+        "bytes": 3270
+      },
+      "public_recipe": "imp01-wildchat-allocation-recipe.json",
+      "allocator": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\prepare-wildchat-family-allocation-v1.py",
+        "sha256": "f51df99ed17b40eb751ace437b6fafd6671ce4310be3956e3f1eafa09ebadea2",
+        "bytes": 12143
+      },
+      "receipt": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-preparation-20261025-v1\\allocation-v1\\allocation.json",
+        "sha256": "2e47b0b50704dfb0fae9c0fb2a5cff3324b5f5dbb770ca8d30f2d557bb7cc3f1",
+        "bytes": 3025
+      },
+      "split": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-preparation-20261025-v1\\allocation-v1\\split.json",
+        "sha256": "74ee81641639794f09572f8376c9e157541f62bb84213fbe671cfaa3e898f551",
+        "bytes": 174238
+      },
+      "development_panel": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-preparation-20261025-v1\\allocation-v1\\development-panel.json",
+        "sha256": "617e3fbfa70f05dba47d3a645f16a113f30231c6d19d3fd0ba773a9432038a9b",
+        "bytes": 133
+      },
+      "opaque_population": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-preparation-20261025-v1\\allocation-v1\\population-metadata.json",
+        "sha256": "94ee21ed463af9e97534c72f6fc3dfbf196fcbfb904763d0635249034724e163",
+        "bytes": 388886
+      },
+      "public_population": "imp01-wildchat-population.json",
+      "counts": {
+        "development": 599,
+        "final": 26,
+        "validation": 375
+      },
+      "ordered_development_ids": [
+        "WildChat-34a58684e220b6fc70ef19c009694426",
+        "WildChat-80db260e5cdf6d3953f3e3a8d087fe3a",
+        "WildChat-9c6d0c684a953e9cc1f8d6fc0daafbc9"
+      ],
+      "ordered_final_ids": [
+        "WildChat-09e2cb3909b3c726bb728b18d410c9a4",
+        "WildChat-24fe5ea324986bb07a06b779ad17e3c2",
+        "WildChat-263288a3677729bbf7c3537fd2d1f582",
+        "WildChat-292b1b4b1e567197240b19d35d2fd88b",
+        "WildChat-3d3987ae7312208327c352a4baf95393",
+        "WildChat-404b560a967fa3242d5c295f8dd1d935",
+        "WildChat-4119ae189ad757b57f4ca0159c745b63",
+        "WildChat-4d39bdd6bcb57d39848178c7bd7e02ac",
+        "WildChat-5dc762673f0b02a5728afd73e1269d82",
+        "WildChat-65411735abedc7b3fce11c2f3a557d48",
+        "WildChat-73a2c1f45b915614f368fa2e8839ca7c",
+        "WildChat-762705287b14a1246726fbe38fc4add2",
+        "WildChat-7f4f9350692f11e70e61604f31641add",
+        "WildChat-9641e5ce88864a0909df5ffc8d77c88f",
+        "WildChat-9cc52c4b7ace68aaa7d6ee35ddb1e23d",
+        "WildChat-a73ea890a9495093e3577deb5b207ee3",
+        "WildChat-bc7a7af6535ae8f5b14608e148f359cb",
+        "WildChat-cdee3ca4eb3e18028fc4b3a652cb35a4",
+        "WildChat-cf53a014db00314d6e68d8d2bd395a89",
+        "WildChat-d36e11467e2d4f69c3d522d0ebbc99e4",
+        "WildChat-d3da4ad03509c152fbb224d7f81565a4",
+        "WildChat-d63bac08f49848c43e12a3d0f8b39e28",
+        "WildChat-dbc377d89e58c0386f40fedb19d55a6a",
+        "WildChat-dd86e0b01f454b2456f2e5639c290e1c",
+        "WildChat-e56aa1f569e46da8fc94183e35394ea6",
+        "WildChat-f461ac8f72ce59ac80b6cf5093330154"
+      ],
+      "final_family_count": 25,
+      "final_family_size_histogram": {
+        "1": 24,
+        "2": 1
+      },
+      "final_type_counts": {
+        "A": 6,
+        "C": 10,
+        "E": 1,
+        "K": 8,
+        "P": 1
+      },
+      "majority_family_stratum_counts": {
+        "A": {
+          "development": 126,
+          "final": 6,
+          "validation": 81
+        },
+        "C": {
+          "development": 246,
+          "final": 10,
+          "validation": 154
+        },
+        "E": {
+          "development": 13,
+          "final": 1,
+          "validation": 8
+        },
+        "K": {
+          "development": 187,
+          "final": 8,
+          "validation": 117
+        },
+        "O": {
+          "development": 12,
+          "final": 0,
+          "validation": 6
+        },
+        "P": {
+          "development": 12,
+          "final": 1,
+          "validation": 7
+        },
+        "R": {
+          "development": 3,
+          "final": 0,
+          "validation": 2
+        }
+      },
+      "actual_task_type_counts": {
+        "development": {
+          "A": 125,
+          "C": 246,
+          "E": 13,
+          "K": 188,
+          "O": 12,
+          "P": 12,
+          "R": 3
+        },
+        "final": {
+          "A": 6,
+          "C": 10,
+          "E": 1,
+          "K": 8,
+          "P": 1
+        },
+        "validation": {
+          "A": 81,
+          "C": 152,
+          "E": 8,
+          "K": 117,
+          "O": 7,
+          "P": 8,
+          "R": 2
+        }
+      },
+      "selection_uses_uncertainty_flags": false,
+      "uncertainty_flags_by_phase": {
+        "development": {
+          "family_boundary_uncertain": 25,
+          "type_or_interpretation_uncertain": 37
+        },
+        "final": {},
+        "validation": {
+          "family_boundary_uncertain": 19,
+          "type_or_interpretation_uncertain": 32
+        }
+      },
+      "self_tests_passed": 8,
+      "source_and_native_split_validators_passed": true,
+      "independent_reproduction": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\wildchat-allocation-independent-review-v1.json",
+        "sha256": "ceceb57e75d1bed8b3772a7e6c1aca310f2222eaf1a307bc86ac1a2f9e8e31c9",
+        "bytes": 6084
+      },
+      "independent_three_output_bytes_equal": true,
+      "independent_family_order_and_label_invariance": true
+    },
+    "custody": {
+      "declaration": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-preparation-20261025-v1\\custody-v1.json",
+        "sha256": "f7d800a853ed26c156041367a5073e4cce54c787e98b5bb0acef61b60b5aeb87",
+        "bytes": 721703
+      },
+      "basis": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\wildchat-prospective-custody-basis-v1.json",
+        "sha256": "43c8f4659dbde7d8d54a5d568ba88f0dacce77158a9ced6c758df7fa128a8b55",
+        "bytes": 7056
+      },
+      "check": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\wildchat-prospective-custody-check-v1.json",
+        "sha256": "b2a65293bdfad0782c84471df6bb1bf668860b6add33195724e932012e29108d",
+        "bytes": 1887
+      },
+      "scope": "Exact26assignedfinal declaredeligible only for documented prospective optimization process, including frozen P/C and root/source-author decisions;974othermembersunknown.",
+      "eligible_final_members": 26,
+      "unknown_other_members": 974,
+      "actual_data_role_prompt_disclosures": 1000,
+      "bound_evidence_files": 37,
+      "guard_roundtrip_passed": true,
+      "denial_probes": [
+        {
+          "probe": "unknown_selected_final",
+          "result": "rejected"
+        },
+        {
+          "probe": "exposed_selected_final",
+          "result": "rejected"
+        },
+        {
+          "probe": "semantic_disclosure_to_same_optimizer",
+          "result": "rejected"
+        },
+        {
+          "probe": "missing_source_member",
+          "result": "rejected"
+        },
+        {
+          "probe": "changed_task_hash",
+          "result": "rejected"
+        },
+        {
+          "probe": "family_crosses_phases",
+          "result": "rejected"
+        }
+      ],
+      "independent_contract_review": "Final metadata/basis/declaration read at exact recorded hashes; no blocker, process-renaming waiver, guard bypass, authority/global-unseen claim. Reviewer did not read private/sourceTaskSet contents or rerun validators.",
+      "logical_isolation_only": true,
+      "global_historical_model_training_invisibility_attested": false
+    },
+    "draft_count_correction": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\wildchat-v2-initial-draft-correction-v1.json",
+      "sha256": "58b85f06758513bba540c3bf591e94e2873d4d43db7cbeda8c64cde55481a5f2",
+      "bytes": 1930
+    }
+  },
+  "active_preparation_version": 2,
+  "cross_source_review": {
+    "public_blocked_map": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\wildchat-data-custody-20261025-v1\\cross-source-blocked.public.json",
+      "sha256": "36d929b482a4e8a56f573f1c2d52c2f4bd45c4b90247bef3659c4cdac50f8cab",
+      "bytes": 8380
+    },
+    "public_receipt": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\wildchat-data-custody-20261025-v1\\cross-source-receipt.public.json",
+      "sha256": "e291c3dc0076f6c223d104f388d15558beef61a574c9c1a5b3f75e4071036e06",
+      "bytes": 6712
+    },
+    "private_reconciliation_seal_only": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\wildchat-data-custody-20261025-v1\\cross-source-reconciliation.private.json",
+      "sha256": "cfc73cbab73ecfd780bfc1905ac0ddd8cf2d1405c5bf4506bb1d0d96c60bd617",
+      "bytes": 187394
+    },
+    "private_notes_seal_only": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\wildchat-data-custody-20261025-v1\\cross-source-notes.private.md",
+      "sha256": "7e2c39b1bab46dc8b9c6a5eef4d9e81214ec7f879294ab32309c9f9f19d56da3",
+      "bytes": 37917
+    },
+    "counts": {
+      "wildchat_primaries": 1000,
+      "curated_primaries_full_read": 100,
+      "curated_alternatives_exact_checked": 1000,
+      "exact_matches_native": 0,
+      "exact_matches_nfkc": 0,
+      "lexical_pairs_reviewed": 307,
+      "total_unique_semantic_pairs_reviewed": 321,
+      "pair_status_counts": {
+        "reject": 311,
+        "uncertain_join": 9,
+        "join": 1
+      },
+      "direct_linked_wildchat_tasks": 8,
+      "affected_original_families": 7,
+      "blocked_wildchat_tasks_after_original_family_closure": 8,
+      "wildchat_only_coarsened_components": 5
+    },
+    "limits": [
+      "All100Curated primary prompts were fully read; all1000WildChat primaries were fully read in the prior custody pass across three contexts. Current candidate text refresh scope is recorded separately.",
+      "All100000primary pairs received lexical comparison; only retrieved and manually identified candidates received explicit pairwise semantic disposition. No exhaustive all-pairs semantic claim.",
+      "Curated alternatives received complete mechanical exact checks; no full semantic alternative review is claimed.",
+      "Semantic judgments are fallible. An unblocked task is not thereby eligible or independent.",
+      "No root allocation/split/active custody files, selected-final IDs, candidate source, answers, scores, or optimizer material were read.",
+      "No phases, source-family assignments, eligibility decisions, allocations, authority records or paid/provider/network operations were created or changed."
+    ],
+    "partner_ids_or_descriptions_returned_to_optimization": false,
+    "meaning": "Relatedness/uncertain-relatedness to previously reviewed Curated, not proven agent-tuning contamination. Block all conservative closure from final; join W-only components without returning Curated partner IDs."
+  }
+}

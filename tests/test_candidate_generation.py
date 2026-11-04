@@ -49,6 +49,7 @@ class CandidateGenerationTests(unittest.TestCase):
         self.request_text = "offline candidate call"
         self.physical_sends = 0
         self.native_workers = 0
+        self.native_callback_counts = (1, 1)
         self.native_fail_once = False
         self.native_timeout_once = False
         self.generation_timeout_once = False
@@ -239,34 +240,40 @@ class CandidateGenerationTests(unittest.TestCase):
             if index == 2:
                 self.assertEqual(handle.__self__.profiles, {})
                 self.assertFalse(handle.__self__.gateway.transport.allow_paid)
-            response = self.exchange(
-                handle,
-                {
-                    "type": "request",
-                    "seq": 0,
-                    "request": {
-                        "provider": "openai",
-                        "method": "POST",
-                        "url": "https://api.openai.com/v1/chat/completions",
-                        "body_base64": base64.b64encode(self.fixture.body).decode(),
-                        "headers": [],
-                        "logical_id": sha(_json(["candidate-native", index])),
-                        "attempt": 0,
-                    },
-                },
-                timeout=self.native_timeout_once,
-            )
-            self.native_timeout_once = False
-            if response["type"] == "stop":
-                handle(
+            count = self.native_callback_counts[index] if index < 2 else 1
+            for sequence in range(count):
+                response = self.exchange(
+                    handle,
                     {
-                        "type": "done",
-                        "status": "stopped",
-                        "reason": response["reason"],
-                        "audit": audit,
-                    }
+                        "type": "request",
+                        "seq": sequence,
+                        "request": {
+                            "provider": "openai",
+                            "method": "POST",
+                            "url": "https://api.openai.com/v1/chat/completions",
+                            "body_base64": base64.b64encode(self.fixture.body).decode(),
+                            "headers": [],
+                            "logical_id": sha(
+                                _json(
+                                    ["candidate-native", index] + ([sequence] if sequence else [])
+                                )
+                            ),
+                            "attempt": 0,
+                        },
+                    },
+                    timeout=self.native_timeout_once,
                 )
-                return self.execution(spec)
+                self.native_timeout_once = False
+                if response["type"] == "stop":
+                    handle(
+                        {
+                            "type": "done",
+                            "status": "stopped",
+                            "reason": response["reason"],
+                            "audit": audit,
+                        }
+                    )
+                    return self.execution(spec)
             if self.native_fail_once:
                 self.native_fail_once = False
                 handle(

@@ -1,0 +1,105 @@
+{
+  "format": "buddha.source-proposal-capacity-integration-delivery.v1",
+  "status": "targeted_local_verification_pass",
+  "retirement_base_commit": "82ba34a8d693128e9e39a179506f568fe43f9fab",
+  "original_capacity_commit": "0db967d6e73674d376681b19c90443d3f4e0241c",
+  "integrated_code_commit": "dc55e46fff2089d4d013d56506a5cc8f039a63b5",
+  "integration": "Clean cherry-pick into a new worktree; no manual conflict resolution, original worktree or root live-fixture mutation.",
+  "source_sha256": {
+    "buddha/source_capacity.py": "4e0269eb1a734d7b233762c90f139f600ae0e4aee67fe9a23a11f1a40a8565de",
+    "buddha/source_handoff.py": "b89011004820f67ef8dac23d1b998e3b71308632470c7bd35583c502afc941a6",
+    "buddha/source_launch.py": "02907aae39aa9ef2c90d63c0ce12f057e52854ce32d43d83444de0e729ca9176",
+    "buddha/source_launch_state.py": "b86257ecb41336321417c30a376e592aaa42b028f8fd9207f046141d8715359f",
+    "buddha/source_search.py": "1fc397c17cce5a9441c01e2d0d1405809080aef49f0a6e43b998a89c4860b158",
+    "tests/test_proposal_capacity.py": "c9d29b67dfea4c4da9b5d9dd8ddd7a5fa987ae79821bbd58a8574a72241f3045",
+    "tests/test_improver_study.py": "ab4567dd3838555269a98fc5161c7ba1e542230b6c06ac0adc9dd0cec261b0d6",
+    "buddha/improver_study.py": "96d78a6078da6c6cfdc17db2dd55b3d732eed3594fa2460efdbdc3aa2de8f536",
+    "buddha/improver_assessment.py": "f3b6fbce08bfe1de18dcb631b297b0203cb43d5ec9359fabe517bbb71739db83"
+  },
+  "original_capacity_runtime_files_changed": [
+    "buddha/source_search.py"
+  ],
+  "source_search_change_from_original": "Exactly the root completed-witness change: 12 additions and 3 deletions; capacity barriers, early-private-copy refusals and conditional legacy closure remain in place.",
+  "preserved_completed_witness_contract": {
+    "prerequisites": "Full original input bindings validated against original owner, then genuine original completed seal/deactivation/inventory checks.",
+    "published_predicate": "sealed and generation/report.json present",
+    "physical_reads_when_published": [
+      "witness task.json",
+      "witness generation.json",
+      "original pinned runtime path"
+    ],
+    "physical_reads_when_not_published": "Every original input remains required.",
+    "remaining_verification": "Original published generation is reconstructed by the existing passive inspector; no old producer source is executed.",
+    "active_work": "Fresh preparation, pending generation and active control checks remain guarded."
+  },
+  "original_capacity_evidence": {
+    "worktree": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-proposal-capacity",
+    "delivery": {
+      "path": "docs/conformance/src02-proposal-capacity-delivery.json",
+      "sha256": "248f32c831ca2194a5b713014913be17e8e526e13750e468c647e9947953a7ac"
+    },
+    "source_files_rechecked": 8,
+    "referenced_external_artifacts_rechecked": 24,
+    "unchanged": true,
+    "scope": "Original 65-method predecessor cut and final 6-method cut remain original evidence; neither is relabelled as integrated runtime proof."
+  },
+  "integrated_runtime_checks": {
+    "capacity_components_and_six_interruptions": {
+      "label": "proposal-capacity-integrated-six-v1",
+      "receipt": {
+        "path": "runs/verification/proposal-capacity-integrated-six-v1.json",
+        "sha256": "e6939e55155e66f628a99b0fe9e2dd9c27b7525525bd15bcea722661ec7ca13a"
+      },
+      "log": {
+        "path": "runs/verification/proposal-capacity-integrated-six-v1.log",
+        "sha256": "198fe3dc08cd4f12175877513c955372164ec7c5c160a6499ea16d5826be4761"
+      },
+      "methods": 6,
+      "failures": 0,
+      "errors": 0,
+      "elapsed_seconds": 589.3076403000159,
+      "all_recorded_input_pins_still_match": true,
+      "denied_real_network_or_process_events": []
+    },
+    "finite_completed_witness_retirement": {
+      "label": "proposal-capacity-integrated-retirement-v1",
+      "receipt": {
+        "path": "runs/verification/proposal-capacity-integrated-retirement-v1.json",
+        "sha256": "51cab739b8bfb603cd6c00f24cff99175fd5bd85ad67a43b6ca55f23731a7209"
+      },
+      "log": {
+        "path": "runs/verification/proposal-capacity-integrated-retirement-v1.log",
+        "sha256": "21e0aef62705fc70b6f28ddd9f2f15f94c42ec575736f3b0781dfba2d5e8b4ec"
+      },
+      "methods": 1,
+      "failures": 0,
+      "errors": 0,
+      "elapsed_seconds": 278.8517935000127,
+      "all_recorded_input_pins_still_match": true,
+      "denied_real_network_or_process_events": []
+    },
+    "scope": "Independent supplied-worker/HTTPS fixtures in fresh scratch; no real provider, real credentials or selected-source host execution."
+  },
+  "integrated_quality": {
+    "path": "runs/verification/proposal-capacity-integration-quality-v1.json",
+    "sha256": "9a23aa49c37219437f7d26743245bcbd15c87649896fcb35076f869f0c506c28"
+  },
+  "independent_static_review": {
+    "json": {
+      "path": "runs/verification/capacity-integration-independent-review-v1.json",
+      "sha256": "01bd6985ff67ad8e065b840f75002f3ad6925d69e82515327b6831e8c8bbc9ad"
+    },
+    "markdown": {
+      "path": "runs/verification/capacity-integration-independent-review-v1.md",
+      "sha256": "90fdf9d4b8ea51578e586e7d2f3c8474652f7d627977b6b3fd8b7277bccc3bcc"
+    },
+    "result": "No integration blocker identified; static evidence remains separate from runtime results."
+  },
+  "limits": [
+    "Two targeted integrated cohorts and seven quality commands on Windows; no entire-suite or hosted-CI pass is claimed.",
+    "No actual model-authored source run, paid call, live allocation, owner, actual-live intent or user launch command was created.",
+    "No NoveltyBench metric, official evaluator, scientific acceptance criterion, authority or financial limit was changed by integration.",
+    "Original capacity delivery and root retirement delivery remain unchanged; this record supplements their separate cuts.",
+    "PLAN, main README and root-owned report were not edited; this observation does not close SRC-02/03, IMP-01 or EVAL-02."
+  ]
+}

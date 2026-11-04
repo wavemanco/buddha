@@ -1,0 +1,318 @@
+# Check that a parent can make a runnable further child
+
+An agent can answer tasks successfully and still have a missing or broken
+improvement function. A task score alone cannot tell Buddha whether that agent
+can continue a source-evolution chain. New source searches therefore check both
+abilities before selecting a parent.
+
+This check uses the existing isolated Python executor, development evidence and
+spending controls. It does not change NoveltyBench's evaluator, grouping rule,
+distinctiveness score or utility score. [PLAN.md](PLAN.md) owns scheduling;
+[SOURCE-SEARCH.md](SOURCE-SEARCH.md) describes the surrounding loop.
+
+## What happens for each possible parent
+
+1. Run its complete common development screen and retain the official results.
+2. Give its own inherited improvement function every selected output **in full**,
+   alongside that screen's measurements, using the verified
+   [feedback bridge](SOURCE-FEEDBACK.md).
+3. Ask it for a changed Python child through the existing protected proposal
+   stage. The returned source must pass that stage's normal validation and
+   materialization checks.
+4. Run that further child's generation function on the first development task
+   in the screen's fixed order, preserving the task's original ID and requested
+   answer count. Require a complete, anchored generation result and clean
+   execution cleanup.
+
+The starting agent goes through this check too. A function may succeed without
+calling a model. No callback minimum is imposed.
+
+When a new source search explicitly selects `feedback_comparison=True`, the
+witness also receives the candidate's actual counted-parent comparison, with
+both complete sets of outputs. The starting agent instead receives the explicit
+`no_counted_parent_in_this_search` state. This optional treatment is explained
+in [the search guide](SOURCE-SEARCH.md#explicit-parent-comparisons-in-new-searches).
+Existing searches and study v1/v2 keep their original witness feedback.
+
+```mermaid
+flowchart LR
+    S[Complete development screen] --> F[Full outputs and measured feedback]
+    F --> I[Candidate's own improver]
+    I --> C[Changed further child]
+    C --> G[First-task generation]
+    G --> P[Eligible parent]
+```
+
+The further child is evidence that this one mutation worked. It does not enter
+the search archive, receive a native benchmark score or replace a later search
+proposal. It is not asked to make another child as part of this check. Ordinary
+search iterations still prepare and record their own proposals and common
+screens.
+
+This is deliberately a narrow check. One successful further mutation does not
+prove that an improver is effective, improves quality, works on other tasks or
+will keep working indefinitely. The separate controlled improver comparison and
+held-out evaluation remain necessary. Changed source can behave the same way;
+this check does not require a semantic improvement. The further child's own
+improver is not tested recursively here. If it later becomes an ordinary search
+candidate, it must pass its own check before parent selection.
+
+## What the outcomes mean
+
+| Outcome | Record and consequence |
+| --- | --- |
+| Changed child materialized and first-task generation completes | A saved `passed` witness permits this candidate to enter the parent pool. Its common-screen scores remain the basis for parent selection. |
+| Checked proposal rejection or checked generation failure | A saved `failed` witness excludes this candidate from the parent pool. Its literal source, common-screen outputs and official scores remain retained. |
+| Interrupted request, unknown charge, missing completion or uncertain cleanup | The search is explicitly incomplete. It retains the original owner, any replies and financial holds. It cannot skip the work or create a replacement owner. |
+| Starting agent has no eligible parent outcome | The search completes with reason `no_parent_eligible`, no ordinary iteration decisions and no selected parent. This is a complete negative result. |
+| Later child fails the check | Its decision is `mutation_witness_failed`; previously eligible parents remain available. Its native measurements are not changed or converted into a penalty. |
+
+Failure here means an observed failure under the recorded conditions. It is not
+proof that the program can never improve anything. Uncertain execution cannot
+be relabeled as a checked failure merely to let the loop continue.
+
+## Original records, recovery and costs
+
+In inherited search, the starting check lives in `seed-witness/`. Each later check lives in
+`iterations/<index>/witness/`, beside its common screen. Each contains its own
+plan, full feedback packet, proposal, optional generation stage and final
+witness publication. These locations keep the common screen's original
+financial census and feedback destination checks intact.
+
+The plan binds the candidate's own screen, exact feedback bytes, first ordered
+task and proposal recipe before execution. Later anchored proposal and generation
+records bind the actual further child and original execution owners. Completion
+requires the lower stages' independent completion anchors. Altering a JSON publication
+and calculating a new hash cannot substitute for those anchors.
+
+Recovery inspects every prepared witness owner, including work that has not
+published a final report. A received reply is reused only through that original
+owner; it is not billed again. An unknown request keeps its hold. A sealed stage
+that only needs to publish local results does not request another paid attempt.
+
+Witness model calls consume the same approved experiment allowance. Reports
+show witness costs separately and include them once in the search's original
+owner totals. The maximum owner count increases by two for each possible common
+screen: one improvement owner and one generation owner. For a three-iteration,
+three-task study with three native stages per task, the structural ceiling rises
+from 51 to 59 owners. That is an owner count, not a request count, cost estimate
+or promise that every maximum-size input fits.
+
+Before another live handoff, verify the concrete full requests, model context,
+output headroom, schedule capacity, processing terms and new allocation. This
+implementation does not fund another run or reuse an older closed allowance.
+
+## Reuse the check while keeping an experimental improver fixed
+
+The controlled comparison keeps its chosen improver fixed for every counted
+proposal. It can still use this capability check: the counted child's own
+improver authors one further child solely for assessment. That further child
+does not become another counted proposal or replace the experimental improver.
+
+The shared library connection in `buddha.source_search` takes an explicit
+immutable declaration of the real study scope, output directory, measured
+parent, common controls, limits and source-copy policy. It does not require a
+SourceSearch manifest or its `seed/iterations` layout.
+
+| Function | Purpose and effect |
+| --- | --- |
+| `_witness_declaration(...)` | Validate and freeze the planned settings in memory. It creates no files, spending owner or request. |
+| `_witness_progress_at(reader, treatment)` | Read and verify the original local owners, measured inputs, funding and saved outcomes. It starts no worker and changes nothing. |
+| `_advance_witness(reader, treatment, ...)` | Prepare one owner, execute one already prepared stage, or publish checked results. Preparation returns before any worker starts. Execution can spend the original approved allowance. A completed result can be returned passively without credentials or an executing authority object. |
+
+The caller must serialize its actual study scope and check its full schedule,
+controls and owner census between advances. The shared helper verifies the
+individual witness; it cannot establish that another study cell is complete.
+It enters the existing phase guard before local writes or execution. Uncertain
+lower stages keep their actual incomplete result, original owner and holds.
+Historical search paths and formats retain their existing interpretation.
+The [delivery record](conformance/imp01-shared-mutation-witness-delivery.json)
+records31 focused methods in three separate cohorts, seven quality commands
+and six genuine older-publication checks. This is local bounded verification;
+published-head CI, the finite comparison and scientific claims remain open.
+
+## Original verification and limit
+
+Forty-six focused test methods pass across separate recorded offline cohorts.
+Seven quality checks also pass on the publication branch. The production code
+and witness tests are byte-identical across that transfer; only the two newer
+CI compatibility test repairs differ. This is not a full-suite or hosted-CI pass.
+
+The actual Python-worker proof completes the missing-improver and raising-improver
+negative controls. Its positive parent reads both full measured output rows and
+produces a changed child, but that child's original mounted folder fails with an
+input/output error before the worker is ready. The search correctly stays
+incomplete. The original fixture and its pending owner remain unchanged.
+
+A separate fresh-location control runs those same child bytes successfully with
+the unchanged production worker and original configuration. This does not repair
+the original owner or establish the cause of the mount failure. At that
+checkpoint a fresh actual composed positive witness still needed to pass before
+a live handoff. The native stages in this proof are simulated and make no
+scoring-conformance claim.
+
+The [delivery record](conformance/src02-mutation-witness-delivery.json) retains
+the passing cohorts, original failed proof, bounded diagnostics and these limits.
+No model calls, new allocation or operator run is required for this publication.
+
+### Fresh startup checks
+
+Two later, separately identified composed searches also stop before the further
+child becomes ready: one uses a fresh folder in the original layout, and one uses
+a shorter checkout and output path. Each observes ten real agent workers and
+eighteen simulated native workers. Neither completes the required positive
+witness. The shorter location does not resolve the failure.
+
+Both new attempts use the same child, worker, runtime and canonical generation
+input as the successful standalone control. Their receipts do not capture the
+underlying startup exception. The earlier diagnostic's input/output error cannot
+therefore be assigned to these attempts, and a Windows path-limit cause is not
+established. All 236 pinned inputs in each producer checkout still match after
+execution.
+
+The [follow-up record](conformance/src02-startup-followup.json) keeps the exact
+proof hashes, observed counts and limits. The failed owners remain incomplete
+with their original evidence; no owner is replaced or retried.
+
+A later [bounded diagnostic](conformance/src02-startup-localization.json) on
+that retained short folder captures an input/output error at `/agent` during
+source inventory, before runtime or candidate execution. Docker's before-start
+and cleanup inspections both identify the intended read-only, non-recursive
+source mount. The worker still cannot read it. The diagnostic uses two copied
+trusted runner files with bounded exception reporting; removing that reporting
+reproduces their original parsed statements. It performs one executor call,
+removes its owned container and leaves the retained child and inputs unchanged.
+This localizes the fault for that invocation; it does not identify a Docker or
+filesystem cause or repair a source-search owner.
+
+The trusted host created and fsynced the returned child after the parent
+container finished. A separate [source-copy control](conformance/src02-startup-snapshot-control.json)
+now uses that same 299-byte child at a fresh verified host location, keeping the
+existing diagnostic runner, worker input and limits. It reaches readiness and
+returns the expected `hello` and `goodbye`, with no stderr, model request or SQL.
+Both sources and all 244 input pins remain unchanged, and the owned container is
+removed. Restoring only the source path reproduces the prior configuration.
+The raw Docker environment array has a different order; its 24 unique key/value
+pairs match exactly.
+
+This supported a prospective verified-copy route. One separately timed control
+does not identify the filesystem cause, repair the original owner or complete a
+source search. At that checkpoint the actual composed positive gate remained
+open. The later versioned route and fresh proof below address that next step;
+no paid calls were made and no historical owner was repaired.
+
+## Verified source copies for new owners
+
+New manifest v4 searches copy each materialized returned child's `candidate.py`
+to a deterministic private directory beside its next screen or generation stage.
+The host checks the original hash, byte limit, UTF-8 and exact file inventory,
+then checks the copy and its selected components before preparing that owner.
+The copy has the same code identity and lineage. Runtime, non-agent components,
+resource limits, comparison controls and official scores keep their meanings.
+Later improvement proposals use the checked source root from that child's screen.
+
+This applies to returned children. The initial caller-supplied seed keeps its
+reviewed root. The copy adds no model call or stage owner. A partial preparation
+can reuse only exact bytes at the same planned location. Once its owner exists,
+a missing or changed copy is refused; it is never recreated or remounted as a
+recovery shortcut. The original returned source and proposal remain retained.
+
+The fresh actual composed check now passes all three expected cases with
+14 real isolated Python workers and 24 simulated native workers. A capable
+parent consumes the complete measured answers, creates a changed further child
+and runs it on the first task. Missing or raising improvers are excluded; the
+ordinary child without an improver is also excluded as expected. All original
+owners finish with zero model operations or held funds, owned containers are
+removed, and two passive reads per case preserve file names and bytes.
+
+Eleven new acceptance methods, four existing regressions and seven quality
+checks pass at their recorded fixed cuts. Six genuine older publications remain
+readable with all 429 original file names and bytes unchanged, without opening
+original databases or running retired source. All 245 actual-proof inputs stay
+fixed; its 244 common project/configuration files match the verification checkout
+byte for byte.
+The [delivery record](conformance/src02-verified-source-copy-delivery.json) keeps
+the exact receipts, source bridge, initial failures and qualifications.
+
+The check uses supplied programs and request-free simulated judging. It proves
+this bounded engineering path; it does not establish model-authored improvement,
+universal mutation competence, official scoring semantics or a filesystem cause.
+Concrete model context and output headroom remain checks before any new live
+handoff. Earlier failed searches remain incomplete with their original owners.
+
+## Versions and library settings
+
+New `prepare_source_search(...)` calls default to `mutation_witness=True` and
+`source_copy=None`, writing source-search manifest v4. The fixed witness policy is
+`buddha.source-mutation-witness.v1`: one further mutation and generation on the
+first ordered development task. New complete publications use search-report
+v2 and bind this policy.
+
+New live proposals use source-handoff v3, which requires the fixed witness and
+`buddha.source-copy.v1` policies. The launcher derives both from the originally
+reviewed proposal and verifies the prepared search before dispatch. A coherent
+older search cannot satisfy a new approval requiring source copies.
+
+`source_copy=False` with the witness enabled explicitly prepares historical
+manifest v3. `source_copy=True` requires the witness and selects v4. `None`
+follows the witnessed default; other types are refused. Historical handoffs v1/v2
+explicitly select no copy, retaining their original preparation/replay policy.
+
+Explicit `mutation_witness=False` retains full-output task-only manifest v2 for
+reviewed compatibility callers. Historical manifest v1 retains its original
+prefix-feedback meaning; manifest v2 retains its task-only meaning. Existing
+handoff v1/v2 records and completed reports are not upgraded, resealed or assigned
+new competence claims. These are Python library settings, not additional
+PowerShell commands.
+
+Full outputs remain subject to explicit packet and request capacity limits.
+Buddha stops and records a partial result when complete required information
+cannot fit. It does not shorten outputs to make this check pass.
+
+Explicit `feedback_comparison=True` requires both the witness and verified
+source copies and selects search manifest v6. Its fixed comparison policy is
+bound into the original first owner. Counted plans use v3; the corresponding
+witness treatment uses v3 and its plan uses v2. The default `False` preserves
+the original v1-v5 search policies and packet derivations, including ordinary
+v4 and optional-capacity v5 preparation.
+
+For a child awaiting its counted decision, the witness derives its comparison
+from that child's checked original counted plan, materialized proposal and
+eligible screen in the same search. It cannot borrow a matching source from
+another run. A shared custody check verifies the original parent, proposal and
+child; the root route verifies the exact declared seed against the owner-bound
+manifest and context. A seed may retain earlier external lineage because the
+root claim concerns counted parents in this search only. Witness feedback
+still has no failed-child history; ordinary counted proposals retain their
+complete history.
+
+During started search execution, exceeding sixteen nested comparisons or
+sixty-four edge checks records an incomplete `feedback_reconstruction_limit`;
+exceeding full-output byte limits records `feedback_capacity`. Initial resume
+validation can instead refuse before dispatch without a new observation; the
+[search guide](SOURCE-SEARCH.md#explicit-parent-comparisons-in-new-searches)
+states that boundary. Corrupt, missing or incompatible evidence remains
+a protocol stop. Original records, costs and holds are retained. Neither limit
+allows shortened answers, skipped comparisons or fabricated parent scores.
+
+Study v1/v2 witness treatments remain unchanged. A prospective study v3 and
+matching assessment treatment are not implemented by this search option.
+Thirteen new search/root/limit methods and nineteen existing feedback methods
+pass in separate supplied-response cohorts. The [delivery record](conformance/imp01-source-search-comparison-delivery.json)
+retains their exact scopes and substantial runtimes; current-head hosted
+verification remains pending. Earlier verification records retain their original
+scope. Official scoring, selection,
+funding and live-run instructions are unchanged. Comparison feedback supplies
+diagnostic evidence, not demonstrated improvement.
+
+## Optional local check
+
+From this checkout's project folder, run this in your current PowerShell window
+to check the shared helper and inherited-search capacity handling once. It uses
+temporary fixtures and simulated workers and replies, needs no keys or Docker,
+and spends no API money. It does not inspect or resume a live run. Allow several
+minutes; wait for `OK` or a failure. Ctrl+C stops it. No separate window is needed.
+
+```powershell
+python -m unittest discover -s tests -p test_shared_mutation_witness.py -v
+```

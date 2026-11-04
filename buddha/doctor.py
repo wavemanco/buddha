@@ -10,7 +10,10 @@ import os
 import re
 import sqlite3
 import stat
-from collections.abc import Callable
+import threading
+from collections.abc import Callable, Iterator, Mapping
+from contextlib import contextmanager
+from contextvars import ContextVar
 from dataclasses import dataclass
 from pathlib import Path
 from typing import cast
@@ -37,9 +40,13 @@ from buddha.search_evidence import (
     MAX_LEDGER_BYTES,
     MAX_MANIFEST_BYTES,
     MAX_TOTAL_BYTES,
+    EvidenceFieldLimitError,
+    EvidencePathLimitError,
+    EvidenceTotalLimitError,
     _absolute,
     _read,
     _regular,
+    _total_read,
     read_authority,
 )
 
@@ -51,6 +58,7 @@ _LIMITATIONS = [
     "No retry, lock removal, reconciliation, owner replacement or permission to spend.",
 ]
 _STATES = ("completed", "reserved", "dispatched", "unknown")
+_MAX_LOCK_BYTES = 128
 
 
 class _Busy(Exception):
@@ -72,8 +80,13 @@ def _json(raw: bytes, *, checksum: bool = False) -> dict[str, object]:
     return record
 
 
-def _entries(root: Path) -> dict[str, tuple[int, int, int, int, int]]:
+def _entries(
+    root: Path, *, maximum: int | None = None
+) -> dict[str, tuple[int, int, int, int, int]]:
     """Inspect bounded local metadata; never traverse a link or recorded path."""
+    if maximum is not None and (type(maximum) is not int or not 1 <= maximum <= 100_000):
+        raise ValidationError("unsupported observation tree-entry ceiling")
+    maximum = MAX_FILES if maximum is None else maximum
     _plain(root)
     if not root.is_dir():
         raise ValidationError("observation requires a local directory")
@@ -84,10 +97,9 @@ def _entries(root: Path) -> dict[str, tuple[int, int, int, int, int]]:
         _plain(parent)
         with os.scandir(parent) as children:
             for entry in children:
-                if len(result) >= MAX_FILES:
-                    raise ValidationError("observation directory entry ceiling exceeded")
+                if len(result) >= maximum:
+                    raise EvidencePathLimitError("observation directory entry ceiling exceeded")
                 path = parent / entry.name
-                _plain(path)
                 information = path.lstat()
                 name = path.relative_to(root).as_posix()
                 _path(name)
@@ -102,22 +114,226 @@ def _entries(root: Path) -> dict[str, tuple[int, int, int, int, int]]:
     return result
 
 
+_OBSERVATION_LIMIT: ContextVar[tuple[int, int | None, int | None] | None] = ContextVar(
+    "evidence_observation_limit", default=None
+)
+
+
+@contextmanager
+def _observation_policy(value: object) -> Iterator[None]:
+    """Select finite observation limits, never an RSS or spending allowance.
+
+    Version one keeps legacy count limits; version two explicitly selects them.
+    Both retain no raw-byte cache and keep individual field limits. Captures
+    freeze selected limits, including after this context exits.
+    """
+    record = _object(value)
+    v2 = record.get("format") == "buddha.evidence-observation-policy.v2"
+    fields = {"format", "max_total_bytes", "max_resident_bytes"}
+    if v2:
+        fields |= {"max_tree_entries", "max_consumed_paths"}
+    if (
+        set(record) != fields
+        or type(record["format"]) is not str
+        or record["format"]
+        not in {"buddha.evidence-observation-policy.v1", "buddha.evidence-observation-policy.v2"}
+        or type(record["max_total_bytes"]) is not int
+        or not 1 <= record["max_total_bytes"] <= 64 * 1024**3
+        or type(record["max_resident_bytes"]) is not int
+        or record["max_resident_bytes"] != 0
+    ):
+        raise ValidationError("unsupported bounded evidence observation policy")
+    counts: tuple[int | None, int | None] = (None, None)
+    if v2:
+        for key, maximum in (("max_tree_entries", 100_000), ("max_consumed_paths", 65_536)):
+            if type(record[key]) is not int or not 1 <= cast(int, record[key]) <= maximum:
+                raise ValidationError("unsupported bounded evidence observation policy")
+        counts = (cast(int, record["max_tree_entries"]), cast(int, record["max_consumed_paths"]))
+    token = _OBSERVATION_LIMIT.set((record["max_total_bytes"], counts[0], counts[1]))
+    try:
+        yield
+    finally:
+        _OBSERVATION_LIMIT.reset(token)
+
+
+def _observation_limits() -> tuple[int, int, int]:
+    selected = _OBSERVATION_LIMIT.get()
+    total, entries, paths = (MAX_TOTAL_BYTES, None, None) if selected is None else selected
+    return total, MAX_FILES if entries is None else entries, MAX_FILES if paths is None else paths
+
+
+def _tree_context(root: Path) -> tuple[tuple[object, ...], object] | None:
+    """Observe local locks and the actual held lease, never unrelated ancestors."""
+    from buddha import trial_fence
+
+    held = trial_fence._HELD.get()
+    identity: tuple[object, ...] = ()
+    if held is not None:
+        if not held.active or held.pid != os.getpid() or held.thread != threading.get_ident():
+            return None
+        try:
+            trial_fence._assert_held(held.binding)
+        except trial_fence.TrialFenceError:
+            return None
+        identity = (
+            id(held),
+            str(held.binding.root),
+            held.binding.definition_sha256,
+            held.binding.version,
+            held.device,
+            held.inode,
+        )
+    paths = [root / name for name in (".trial-running.lock", "running.lock", ".search.lock")]
+    if held is not None:
+        paths.append(held.binding.root / trial_fence._LOCK)
+    locks = []
+    try:
+        for path in paths:
+            try:
+                information = path.lstat()
+            except FileNotFoundError:
+                continue
+            if information.st_size > _MAX_LOCK_BYTES:
+                return None
+            digest = _sha(_read(path, _MAX_LOCK_BYTES))
+            locks.append((str(path), _signature(information), information.st_nlink, digest))
+    except (OSError, ValidationError):
+        return None  # Unreadable lease bytes cannot enable constructor sharing.
+    return (identity, tuple(locks)), held
+
+
+class _TreeObservation:
+    """Bounded constructor metadata only; all receipt verification stays fresh."""
+
+    def __init__(self) -> None:
+        self.owner = os.getpid(), threading.get_ident()
+        _, self.maximum_entries, self.maximum_roots = _observation_limits()
+        self.roots: dict[
+            tuple[object, ...],
+            tuple[Path, int, dict[str, tuple[int, int, int, int, int]], object],
+        ] = {}
+        self.count = 0
+
+    def entries(self, capture: "_Capture") -> dict[str, tuple[int, int, int, int, int]]:
+        if self.owner != (os.getpid(), threading.get_ident()):
+            return capture._tree_entries()
+        context = _tree_context(capture.root)
+        if context is None:
+            return capture._tree_entries()
+        key = (
+            str(capture.root),
+            capture._maximum,
+            capture._maximum_entries,
+            capture._maximum_paths,
+            context[0],
+        )
+        if key in self.roots:
+            _plain(capture.root)
+            if not capture.root.is_dir():
+                raise ValidationError("observation requires a local directory")
+            return dict(self.roots[key][2])
+        entries = capture._tree_entries()
+        if (
+            len(self.roots) < self.maximum_roots
+            and self.count + len(entries) <= self.maximum_entries
+        ):
+            self.roots[key] = capture.root, capture._maximum_entries, dict(entries), context[1]
+            self.count += len(entries)
+        return entries
+
+    def finish(self) -> None:
+        for key, (root, maximum, entries, _) in self.roots.items():
+            context = _tree_context(root)
+            if context is None or context[0] != key[-1]:
+                raise _Busy("observed local tree or writer lease changed")
+            current = _entries(root) if maximum == MAX_FILES else _entries(root, maximum=maximum)
+            if current != entries:
+                raise _Busy("observed local tree or writer lease changed")
+
+
+_PASSIVE_TREES: ContextVar[_TreeObservation | None] = ContextVar(
+    "evidence_passive_tree_observation", default=None
+)
+
+
+@contextmanager
+def _passive_tree_observation() -> Iterator[None]:
+    """Share initial metadata within one trusted passive call, never raw bytes.
+
+    Finite registry exhaustion falls back to ordinary construction. Every
+    capture finish/adoption remains strict, and successful exit freshly checks
+    shared roots and their lease context. A failed call discards the registry.
+    """
+    current = _PASSIVE_TREES.get()
+    if current is not None and current.owner == (os.getpid(), threading.get_ident()):
+        yield
+        return
+    observation = _TreeObservation()
+    token = _PASSIVE_TREES.set(observation)
+    try:
+        yield
+        observation.finish()
+    finally:
+        _PASSIVE_TREES.reset(token)
+
+
+class _CapturedBytes(Mapping[Path, bytes]):
+    """Read-only access to original receipts, with verified bounded rereads."""
+
+    def __init__(self, capture: "_Capture") -> None:
+        self.capture = capture
+
+    def __getitem__(self, path: Path) -> bytes:
+        size, _ = self.capture._receipts[path]
+        return self.capture.read(path, size)
+
+    def __iter__(self) -> Iterator[Path]:
+        return iter(self.capture._receipts)
+
+    def __len__(self) -> int:
+        return len(self.capture._receipts)
+
+    def __contains__(self, path: object) -> bool:
+        return path in self.capture._receipts
+
+
 class _Capture:
+    """Retain size/digest receipts, not raw bytes; default logical limit is 1 GiB.
+
+    Each returned file remains bounded separately. The consumed-byte ceiling is
+    frozen at construction and includes external inputs and nested adoption.
+    It is not a process-memory limit or a total archive-size allowance.
+    """
+
     def __init__(self, root: Path) -> None:
         self.root = root
-        self.entries = _entries(root)
-        self.raw: dict[Path, bytes] = {}
+        self._maximum, self._maximum_entries, self._maximum_paths = _observation_limits()
+        observation = _PASSIVE_TREES.get()
+        self.entries = self._tree_entries() if observation is None else observation.entries(self)
+        self._receipts: dict[Path, tuple[int, str]] = {}
+        self.raw: Mapping[Path, bytes] = _CapturedBytes(self)
         self.total = 0
         self.databases: set[Path] = set()
 
+    def _tree_entries(self) -> dict[str, tuple[int, int, int, int, int]]:
+        if self._maximum_entries == MAX_FILES:
+            return _entries(self.root)
+        return _entries(self.root, maximum=self._maximum_entries)
+
     def read(self, path: Path, maximum: int = MAX_MANIFEST_BYTES) -> bytes:
-        if path in self.raw:
-            if len(self.raw[path]) > maximum:
-                raise ValidationError("observed input exceeds this field's ceiling")
-            return self.raw[path]
-        raw = _read(path, min(maximum, MAX_TOTAL_BYTES - self.total))
+        if path in self._receipts:
+            size, digest = self._receipts[path]
+            if size > maximum:
+                raise EvidenceFieldLimitError("observed input exceeds this field's ceiling", size)
+            raw = _read(path, size)
+            if len(raw) != size or _sha(raw) != digest:
+                raise _Busy("consumed input changed")
+            return raw
+        if len(self._receipts) >= self._maximum_paths:
+            raise EvidencePathLimitError("consumed evidence path ceiling exceeded")
+        raw = _total_read(path, maximum, self._maximum - self.total, read=_read)
         self.total += len(raw)
-        self.raw[path] = raw
+        self._receipts[path] = (len(raw), _sha(raw))
         return raw
 
     def sidecars(self, path: Path) -> None:
@@ -145,17 +361,63 @@ class _Capture:
     def finish(self) -> dict[str, str]:
         for path in self.databases:
             self.sidecars(path)
-        for path, raw in tuple(self.raw.items()):
-            if _read(path, len(raw)) != raw:
-                raise _Busy("consumed input changed")
-        if _entries(self.root) != self.entries:
+        for path in tuple(self._receipts):
+            self.raw[path]
+        for path in self.databases:
+            self.sidecars(path)
+        if self._tree_entries() != self.entries:
             raise _Busy("observed local tree changed")
         return {
             path.relative_to(self.root).as_posix()
             if path.is_relative_to(self.root)
-            else "authorization": _sha(raw)
-            for path, raw in self.raw.items()
+            else "authorization": digest
+            for path, (_, digest) in self._receipts.items()
         }
+
+    def fingerprints(self) -> dict[str, str]:
+        self.finish()
+        return {str(path): digest for path, (_, digest) in self._receipts.items()}
+
+    def adopt(self, source: "_Capture") -> None:
+        """Merge original receipts at a fresh source observation cut.
+
+        This is not an atomic file snapshot. The receiver's final fresh finish
+        remains necessary before active work, including for newly adopted paths.
+        """
+        if type(self) is not _Capture or type(source) is not _Capture or source is self:
+            raise ValidationError("capture adoption needs two original bounded observations")
+        source.finish()
+        # Preserve the legacy database/sidecar insertion order without rereads.
+        ordered = {}
+        for database in source.databases:
+            receipt = source._receipts.get(database)
+            if receipt is None:
+                raise ValidationError("database observation lacks its original byte receipt")
+            if receipt[0] > MAX_LEDGER_BYTES:
+                raise EvidenceFieldLimitError(
+                    "observed input exceeds this field's ceiling", receipt[0]
+                )
+            for suffix in ("-journal", "-wal", "-shm"):
+                sidecar = database.with_name(database.name + suffix)
+                if sidecar in source._receipts:
+                    ordered[sidecar] = source._receipts[sidecar]
+            ordered[database] = receipt
+        ordered.update(source._receipts)
+        receipts = dict(self._receipts)
+        for path, receipt in ordered.items():
+            if path in receipts and receipts[path] != receipt:
+                raise _Busy("consumed input changed")
+            receipts[path] = receipt
+        if len(receipts) > self._maximum_paths:
+            raise EvidencePathLimitError("consumed evidence path ceiling exceeded")
+        total = sum(size for size, _ in receipts.values())
+        if total > self._maximum:
+            raise EvidenceTotalLimitError("evidence observation exceeds its total byte ceiling")
+        self._receipts, self.total, self.databases = (
+            receipts,
+            total,
+            self.databases | source.databases,
+        )
 
 
 @dataclass(frozen=True)
@@ -240,7 +502,7 @@ def _lock(capture: _Capture) -> tuple[dict[str, object], dict[str, object]]:
             # its writer unlinking it; the tree's metadata bracket checks drift.
             empty = _regular(capture.root / name).st_size == 0
             return lock | {"status": "legacy_empty" if empty else "invalid", "name": name}, writer
-        raw = capture.read(capture.root / name, 128)
+        raw = capture.read(capture.root / name, _MAX_LOCK_BYTES)
         text = raw.decode("ascii")
         if name != "running.lock" or not re.fullmatch(r"[1-9][0-9]{0,9}", text):
             raise ValidationError("invalid lock record")

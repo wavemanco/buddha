@@ -1,0 +1,69 @@
+{
+  "base_commit": "92e02810c8d758a661a7392e60a191772ab74460",
+  "checks": [
+    "Root traced CORE, generic installed source closure and all exact-core expectations; only this expected list was stale.",
+    "Root ruff check and format check pass for the one changed test file. Both exact set equalities, blocked/loaded scientific-import assertions, zero operation/one original binding and execution identity assertion stay intact."
+  ],
+  "format": "buddha.eval01-core-ci-compat-delivery.v1",
+  "funding": "No new allocation, operator command or use of a closed paid scope.",
+  "green": {
+    "denied_events": [],
+    "elapsed_seconds": 0.6314161999616772,
+    "errors": 0,
+    "failures": 0,
+    "fresh_python_children": [
+      {
+        "argv_sha256": "a8ff0caefcbfcbb57fde9ee7eccae3d06bf8a1cde32ed6d55d0752c10b22d493",
+        "executable": "C:\\Program Files\\Python313\\python.exe"
+      }
+    ],
+    "inputs_sha256": "f4091eb61f2648b84a1a7db1b5fdf6d47df8075f4a2239ce49bd3ba87f28086b",
+    "log_sha256": "fa133a597185224bf37a42ea0222ac01d5b233ec970d97ea8ed28ae63437efa2",
+    "scope": "One affected method; its isolated child deliberately uses fresh local SQLite. No keys, Docker, paid request, full suite or hosted-CI pass. Parent audit hooks do not propagate into that child; the method blocks HTTPS and constructs only RawHTTPTransport(allow_paid=False).",
+    "script_sha256": "8a80cc6f882c8012f9aedfff22fb9f3affda98d1e852aec56b802a9b7945386e",
+    "sha256": "be361dbd239fc006870fb0fe2a57caf0c3fac34cc680318129ef7e4f5f3ae0d5",
+    "skips": 0,
+    "source_pins_unchanged": true,
+    "test": "test_common.CommonTests.test_fresh_generic_core_prepares_real_authority_without_scientific_imports",
+    "tests": 1
+  },
+  "limits": [
+    "Original CI head and merge checkout are retained separately; no full repository rerun or hosted-green claim for the correction.",
+    "One expected fresh Python subprocess and fresh temporary local SQLite are part of the test; no provider keys, paid requests, original run writes or production changes.",
+    "The seven prior quality checks remain evidence for unchanged production; this literal test expectation change does not rerun those checks or certify scientific readiness."
+  ],
+  "observed_ci_red": {
+    "base_commit_for_fix": "999302a06a8e88f24ee3ccdba2c8440d45b66ef4",
+    "completed_at": "2026-10-23T10:35:32Z",
+    "conclusion": "failure",
+    "diagnosis": "Production CORE and installed helper closure intentionally include trial_fence. The independent exact expected set did not add it. Preserve exact equalities and banned-science assertions.",
+    "elapsed_seconds": 2587.472,
+    "failure": "tests/test_common.py:399 exact core set lacks buddha.trial_fence",
+    "failures": 1,
+    "format": "buddha.core-ci-compat-ci-red.v1",
+    "head_sha": "a6557d7b279f2e3eda866ad6e7833a90a66d6a3d",
+    "job_id": 120352145144,
+    "job_log_sha256": "a0a70f2180c8939962b84a606e6ce684c0c18be358378ea851843af8c1d4f5c5",
+    "job_metadata_sha256": "e2a7ffa0dff7958c5db810e85ddbde3cab3cd2d98d8dfe2df176f9079cae7a39",
+    "job_url": "https://github.com/wavemanco/buddha/actions/runs/39934964119/job/120352145144",
+    "merge_checkout_sha": "7b04d80d19cac5248f7a594ff5046b3a9e40cc13",
+    "relevant_files_unchanged_since_failing_head": true,
+    "run_id": 39934964119,
+    "skipped": 5,
+    "test": "test_common.CommonTests.test_fresh_generic_core_prepares_real_authority_without_scientific_imports",
+    "tests": 1672
+  },
+  "original_red_record_sha256": "0a516ac83a3954f0a09b0b60fbe407614bda348f5bf496986bf964d79f671700",
+  "scope": "Add the deliberately installed trial_fence module to one independent generic-core expected set. No production or invariant changes.",
+  "source_bridge": {
+    "all_pins_rechecked_at_packaging": true,
+    "green_original_base": "999302a06a8e88f24ee3ccdba2c8440d45b66ef4",
+    "new_expected_test_sha256": "e0d44cead3aeac9cad7bbd02d81fa2b7b7e3d042b2a35fa9eda5a5bc1bfd5f65",
+    "old_expected_test_sha256": "b270320e96d2fc4bdf91a9449346d22ae4a5b5ba975259301d95c07e59ef6bf6",
+    "pinned_including_private_runner": 245,
+    "project_python_and_config_count": 244,
+    "publication_base": "92e02810c8d758a661a7392e60a191772ab74460",
+    "same_python_and_config_after_docs_only_fast_forward": true
+  },
+  "status": "focused_check_passed_hosted_pending"
+}

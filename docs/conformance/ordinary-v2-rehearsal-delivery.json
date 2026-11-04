@@ -1,0 +1,290 @@
+{
+  "format": "buddha.ordinary-v2-rehearsal-delivery.v1",
+  "status": "implemented_local_v2_deadline_partial_hosted_pending",
+  "date": "2026-11-02",
+  "spec": [
+    "PLAN IMP-01",
+    "DESIGN sections3,5,7,9,10"
+  ],
+  "base_head": "e2a7af59d2d8304b1851f32ab0a693c7608fc54c",
+  "executed_candidate_test_sha256": "de77123d0ba39615e9da99e7e25f948112bc5aa1786f4324b0cae91d303a21c5",
+  "source_scope": "Base application plus one uncommitted test-file candidate; no production, dependency manifest or benchmark change. Publication keeps the tested Python bytes.",
+  "test": {
+    "path": "tests/test_unified_launch_integration.py",
+    "added": "test_policy_bound_v2_selected_descendants_and_original_controller_replay",
+    "preserved": "test_original_controllers_raw_frontier_resume_and_keyless_complete_replay",
+    "shared_body": "_rehearse",
+    "source_sha256": "de77123d0ba39615e9da99e7e25f948112bc5aa1786f4324b0cae91d303a21c5",
+    "scope": "Real controllers; supplied worker messages and HTTPS/evaluator artifacts. Existing v4 primary, v1/v2 outer operators, six reduced v2 final cells, two synthetic tasks/two answers each; not the actual3/26 task grid.",
+    "policy": "Existing v2 policy bound in primary proposal, primary launch and outer map before trial/plain owners; phase observers forward to captured real functions.",
+    "source_identity": "Actual final worker agent_sha256 plus role and typed task ID match the six schedule/report cells. Initial/evolved task-source bytes may legitimately match; distinct role/control joins are retained."
+  },
+  "observations": {
+    "policy-suppression": {
+      "evidence": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ordinary-v2-positive-rehearsal-20261102-v1\\policy-suppression-parent-result-v1.json",
+        "sha256": "8634dea07951920a3d58f6c7d7e812d803f3eb1f3fa583cedb58248f12a0f668"
+      },
+      "classification": "expected_assertion_sensitivity",
+      "parent_seconds": 14.753699399996549,
+      "child": {
+        "case": "policy-suppression",
+        "test": "test_unified_launch_integration.UnifiedLaunchIntegrationTests.test_policy_bound_v2_selected_descendants_and_original_controller_replay",
+        "seconds": 14.136918699834496,
+        "tests_run": 1,
+        "failures": 1,
+        "errors": 0,
+        "skips": 0,
+        "successful": false,
+        "expected_policy_sensitivity_observed": true,
+        "failure_details": [
+          {
+            "test": "test_unified_launch_integration.UnifiedLaunchIntegrationTests.test_policy_bound_v2_selected_descendants_and_original_controller_replay",
+            "type": "AssertionError",
+            "message": "Tuples differ: (1073741824, 10000, 10000) != (34359738368, 100000, 65536)\n\nFirst differing element 0:\n1073741824\n34359738368\n\n- (1073741824, 10000, 10000)\n+ (34359738368, 100000, 65536)",
+            "frames": [
+              [
+                "case.py",
+                "testPartExecutor",
+                58
+              ],
+              [
+                "case.py",
+                "run",
+                651
+              ],
+              [
+                "case.py",
+                "_callTestMethod",
+                606
+              ],
+              [
+                "test_unified_launch_integration.py",
+                "test_policy_bound_v2_selected_descendants_and_original_controller_replay",
+                66
+              ],
+              [
+                "test_unified_launch_integration.py",
+                "_rehearse",
+                315
+              ],
+              [
+                "test_unified_launch_integration.py",
+                "launch",
+                283
+              ],
+              [
+                "unified_launch.py",
+                "launch",
+                527
+              ],
+              [
+                "unified_launch.py",
+                "inspect",
+                514
+              ],
+              [
+                "mock.py",
+                "__call__",
+                1169
+              ],
+              [
+                "mock.py",
+                "_mock_call",
+                1173
+              ],
+              [
+                "mock.py",
+                "_execute_mock_call",
+                1234
+              ],
+              [
+                "test_unified_launch_integration.py",
+                "call",
+                232
+              ],
+              [
+                "case.py",
+                "assertEqual",
+                907
+              ],
+              [
+                "case.py",
+                "assertTupleEqual",
+                1124
+              ],
+              [
+                "case.py",
+                "assertSequenceEqual",
+                1095
+              ],
+              [
+                "case.py",
+                "fail",
+                732
+              ]
+            ]
+          }
+        ],
+        "external_operation_denials": [],
+        "loopback_ipc": {
+          "bind": 0,
+          "connect": 0
+        }
+      },
+      "source_pins_match": true
+    },
+    "v1": {
+      "evidence": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ordinary-v2-positive-rehearsal-20261102-v1\\v1-parent-result-v1.json",
+        "sha256": "f92bec4d4ee4a5a6f1e25569ab09600f207740f5b7474705a2a18d342db5f6d1"
+      },
+      "classification": "v1_full_pass",
+      "parent_seconds": 1154.7387385000475,
+      "child": {
+        "case": "v1",
+        "test": "test_unified_launch_integration.UnifiedLaunchIntegrationTests.test_original_controllers_raw_frontier_resume_and_keyless_complete_replay",
+        "seconds": 1154.1857799000572,
+        "tests_run": 1,
+        "failures": 0,
+        "errors": 0,
+        "skips": 0,
+        "successful": true,
+        "expected_policy_sensitivity_observed": false,
+        "failure_details": [],
+        "external_operation_denials": [],
+        "loopback_ipc": {
+          "bind": 0,
+          "connect": 0
+        }
+      },
+      "source_pins_match": true
+    },
+    "v2": {
+      "evidence": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ordinary-v2-positive-rehearsal-20261102-v1\\v2-parent-result-v1.json",
+        "sha256": "4912be8fac661a0e6ab540428c43235e63700a7f6b9be25c71aa77f5dca5d041"
+      },
+      "classification": "v2_deadline_partial",
+      "parent_seconds": 1800.0661943999585,
+      "child": null,
+      "source_pins_match": true
+    }
+  },
+  "v2_partial_scope": {
+    "last_completed_checkpoint": "cancelled_original_frontier",
+    "primary_final_cells": 6,
+    "raw_operations": 4,
+    "workers_before_interruption": {
+      "primary-development": 20,
+      "primary-final": 24,
+      "plain-regenerate": 2
+    },
+    "stopped_during": "resumed checking, inferred from subsequent checking notices and frozen control flow",
+    "not_verified": [
+      "full v2 method",
+      "completed v2 comparison publication",
+      "completed v2 keyless replay",
+      "terminal complete after-state/accounting validation",
+      "final v2 guard-denial census"
+    ],
+    "child_terminal_result": null,
+    "application_defect_inferred": false
+  },
+  "independent_terminal_reviews": {
+    "v1": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ordinary-v2-positive-rehearsal-20261102-v1\\v1-terminal-review-v1.json",
+      "sha256": "47b4c61532f5ad53cdf678a4570154708155e3135ef0a68b241b1c321533bb32"
+    },
+    "v2": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ordinary-v2-positive-rehearsal-20261102-v1\\v2-terminal-review-v1.json",
+      "sha256": "a71b06fa6555e0e8567f5aeb828b24609bf723e80777150cc90ed42f7c3b3980"
+    }
+  },
+  "quality": {
+    "evidence": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ordinary-v2-positive-rehearsal-20261102-v1\\quality-result-v2.json",
+      "sha256": "91478a18df53d707724ae6f3d4f9815800d2feac1da0480c84b69ffa6437b0e2"
+    },
+    "initial_missing_tool_failure": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ordinary-v2-positive-rehearsal-20261102-v1\\quality-result-v1.json",
+      "sha256": "bbe784d588feb8055b365321513a7d950c5af0b45717cc371a848be57f4a3b28"
+    },
+    "six_policy_methods": {
+      "log": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ordinary-v2-positive-rehearsal-20261102-v1\\quality-policy-regressions-v1.log",
+        "sha256": "3fe07308e87d9d28fa01e13da4498392c69761682e50b541b2e813bd1974e976"
+      },
+      "passed": 6,
+      "seconds": 2.531
+    },
+    "completed_tool_commands": [
+      "ruff",
+      "format",
+      "types",
+      "security",
+      "runtime-audit",
+      "development-audit",
+      "census",
+      "diff"
+    ],
+    "compiled_in_memory_files": 353,
+    "source_pins_match": true,
+    "tool_environment": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ordinary-v2-positive-rehearsal-20261102-v1\\check-environment-v2.json",
+      "sha256": "2fec9d3897350499348e89a69969028f98fc45d7e51f7f3d92f0dff9f61c258d"
+    },
+    "census": {
+      "format": "buddha.ci-test-shards.v1",
+      "total": 2222,
+      "count": 5,
+      "index": 0,
+      "selected": 1,
+      "counts": [
+        1,
+        581,
+        512,
+        567,
+        561
+      ],
+      "isolated_test": "test_improver_study.FiniteImproverStudyTests.test_finite_fixed_operators_common_conditions_negative_slots_and_original_recovery",
+      "census_sha256": "20c555e5be340139bca76308891af0edb88dbc1131afd11523dabc4ae3d7a8ac"
+    },
+    "scope": "Six configured tool commands plus in-memory syntax compilation, diff check and metadata-only discovery. No full-suite or full-v2 pass is inferred; reference/native dependency advisory scope remains separate.",
+    "command_function": "Quality commands check the current code once; they need no model API keys and spend no model API money. Dependency auditing may query public advisory services. The isolated tools install the existing declared requirements outside the checkout and leave global packages unchanged. Discovery lists tests without running bodies."
+  },
+  "driver": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ordinary-v2-positive-rehearsal-20261102-v1\\run-case-v1.py",
+    "sha256": "20e518f9ff1fe0b68b2b902d3eaca810cdd855da5d6fd6fedcb39bf7e10bf715",
+    "reuses": "ci_test_shard._WindowsJob gated owned-process containment",
+    "child_limits_seconds": {
+      "policy-suppression": 300,
+      "v1": 1800,
+      "v2": 1800
+    },
+    "parent_budget": "Observed child-wait/cleanup budget plus30seconds; not an independently enforced parent timer, and durations exclude initial/final source hashing.",
+    "scope": "Normal Python external process/DNS/nonloopback socket audit denial; loopback IPC allowed. This is not an arbitrary-Python/filesystem security sandbox. Each child receives synthetic credentials only.",
+    "automatic_retry": false
+  },
+  "preservation": {
+    "prior_raw_revision_rows": 224,
+    "original_acceptance_tails": 7,
+    "production_source_changes": 0,
+    "benchmark_changes": 0,
+    "dependency_manifest_changes": 0,
+    "original_paid_state_access": false,
+    "real_model_api_spend_usd": 0,
+    "real_os_containers": 0,
+    "paid_funding_transferred": false,
+    "setup_time_choice_adopted": false,
+    "scale193_660_reader_run": false,
+    "full_v2_gate_closed": false,
+    "scientific_claims_closed": false,
+    "live_command_cleared": false
+  },
+  "files": {
+    "docs/PLAN.md": "d74190b6f30b99f5692b14640595eb7d869bb546ca8588474702c09048c148eb",
+    "docs/UNIFIED-LAUNCH-REHEARSAL.md": "33b978be8dd189914e12591a8434abe07afa8c21a2d33424d187420389923c2e",
+    "tests/test_unified_launch_integration.py": "de77123d0ba39615e9da99e7e25f948112bc5aa1786f4324b0cae91d303a21c5"
+  }
+}

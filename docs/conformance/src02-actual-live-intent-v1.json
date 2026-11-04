@@ -1,0 +1,220 @@
+{
+  "adopted_from": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-actual-live-intent-draft-v1.json",
+    "sha256": "82a2ed35b43c6efbe1fd4d70db1388718e530c724966efe90dcafcd4ea05b89c"
+  },
+  "adopted_on_utc": "2026-10-24",
+  "benchmark": {
+    "answers_per_task": 10,
+    "dataset_sha256": "ca9b6f470e5d7f7e34a281e2fdaa6f6e51c38bdae075ea580d184139ec391fa7",
+    "metric_version": "1.1",
+    "official_commit": "64a23be6b18ec1dacc298830aab276061b6e143c",
+    "partition_and_quality": "Preserve the pinned official native settings, parsers, retries, fallback, summaries and both official metrics. No private semantic replacement or post-hoc class relabelling.",
+    "population": "Previously seen development tasks; no held-out or human-preference claim.",
+    "projection": "noveltybench-1.1",
+    "release_sha256": "8fd676bd8b25c6bcfd66664b1179473703a343fd7dc94833a1dea8dd5f9e39fb",
+    "selected_ids": [
+      "curated-0",
+      "curated-47",
+      "curated-97"
+    ],
+    "split": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-source-20261023-proposal-v2\\inputs\\split.json",
+      "sha256": "8f12f6989a450bc247a5932c2478f270e79ecb5b489a904154686f21ceacd0b1"
+    },
+    "task_source": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-source-20261023-proposal-v2\\inputs\\source.json",
+      "sha256": "1abe00411ec98183ed278399215e88e334a4825345b324f971bb0eb47e2e6eba"
+    }
+  },
+  "capacity_and_partial_rules": {
+    "actual_observation": "Every actual completed original proposal call must have a complete unrefused normal text reply and valid model/default-tier/inclusive usage; context minus actual input usage minus actual request output cap must leave 8192 tokens. At least one raw full-replacement reply must match each returned materialized child and leave output cap minus inclusive output usage at least 8192 tokens. Complete small planning calls do not require replacement-output slack.",
+    "before_child": "Enforce P-to-W0, P-to-C and C-to-W1 barriers after original reply settlement and before returned-child host preparation/execution. No future unknown request body is certified in advance; no byte-to-token conversion assumption.",
+    "continuation": "Reuse original owners, requests, replies, charges and holds. Supported interruption recovery may complete genuinely pending original work or sealed local publication under the same frozen controls; the ban on adaptive extra execution/repair does not ban this recovery. Never create substitute owners or re-dispatch a known completed reply. Unknown liability remains unresolved.",
+    "contradictory_custody": "Contradictory completed original reserve/charge/usage custody is refused; do not recategorize it as an ordinary negative capacity observation.",
+    "negative": "An observed margin failure remains negative; save exact stage, original checkpoint, reason, useful evidence, costs and holds.",
+    "stop_scope": "Keep conditional ineligible, invalid, partial, rejected and unobserved downstream roles explicit. Do not extend iterations, restore the host improver or repair selected source.",
+    "unavailable": "A route without a matching full raw replacement, missing usage or incomplete/refused response is unavailable/inconclusive, not an observed successful capacity result."
+  },
+  "claim_limits": [
+    "An actual completed mechanism may produce worse official development scores.",
+    "A changed and used improver is not an improved improver; IMP-01 remains separate.",
+    "These seen development tasks cannot establish held-out useful diversity or human preference; EVAL-02 remains separate.",
+    "Rehearsal reply counts, scores and source behavior are not live expectations.",
+    "These adopted protocol assets create no owner, allowance, key access, provider call, execution configuration or ready-to-run command."
+  ],
+  "criteria": {
+    "path": "docs/conformance/src02-actual-live-criteria-v1.json",
+    "path_basis": "repository_relative",
+    "sha256": "93246d46ef9e3f9c156645d60a3e292bbaac8cb0b098d04917a5046461e80f82"
+  },
+  "design_basis": {
+    "checkout": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-proposal-capacity-integrated",
+    "commit": "23e7be1f7b1dc8ab06a2ff79529e191e5c1b374a",
+    "interpretation": "Reviewed supported-capacity design basis, not a selected future executing producer. Final code and closure must be selected and verified separately."
+  },
+  "execution_binding": {
+    "required_before_dispatch": [
+      "exact final executing commit and complete capacity-enabled helper/runner/component closure",
+      "new isolated actual-live input bundle and exact output/review/receipt paths",
+      "v4 proposal and passive configuration-check hashes, including prospective owner input-boundary checks",
+      "exact selected-producer hosted verification evidence",
+      "current applicable account/tier/region/cache assertions and original launch/keyed account binding, separately from dated public price evidence",
+      "separate approved shared allocation and exact new authority/approval/launch paths and hashes"
+    ],
+    "status": "not_selected"
+  },
+  "fixed_callback_and_stage_controls": {
+    "generation": {
+      "local_budget_microusd": 25000000,
+      "max_callbacks_per_owner": 12,
+      "max_calls_per_owner": 12,
+      "max_output_tokens": 4096,
+      "model": "gpt-5.6-luna",
+      "provider": "openai"
+    },
+    "meaning": "Retain supported current role limits prospectively. The new shared authorization, if later approved, dominates these local ceilings. Actual evolved callbacks and native retry/fallback counts are observed, not fixed to rehearsal counts.",
+    "native": {
+      "anthropic_fallback": "claude-sonnet-5",
+      "anthropic_quality": "claude-opus-5",
+      "local_budget_microusd": 25000000,
+      "max_calls_per_owner": 256,
+      "openai_grouping": "gpt-5.6-luna"
+    },
+    "proposal": {
+      "local_budget_microusd": 25000000,
+      "max_callbacks_per_owner": 3,
+      "max_calls_per_owner": 3,
+      "max_output_tokens": 32768,
+      "model": "gpt-6.1-sol",
+      "provider": "openai"
+    }
+  },
+  "format": "buddha.current-source-actual-live-intent.v1",
+  "historical_rehearsal": {
+    "intent": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-source-20261023-proposal-v2\\inputs\\intent.json",
+      "sha256": "83619c380f313c8d93a8621b1265b730cbe183cb38a737365c14379811ae4166"
+    },
+    "interpretation": "Immutable supplied-response engineering evidence only. Neither record nor its requested terms is adopted as actual execution or spending permission.",
+    "proposal": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-source-20261023-proposal-v2\\proposal.json",
+      "sha256": "cc31b22bc7dc2d915e3dcc539d99555153ca10e362c5624dafb1403ca4cda73b"
+    }
+  },
+  "independent_design_review": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-actual-live-protocol-review-v1.json",
+    "sha256": "0a689e7505816f810c5572d785b5b4584c2bdfd6e4d8fe014a24979d58f939d2"
+  },
+  "launchable": false,
+  "ordered_roles": [
+    {
+      "action": "Evaluate the declared P seed on all three ordered tasks; retain every literal answer and original native assessment.",
+      "order": 1,
+      "role": "P_screen"
+    },
+    {
+      "action": "P uses complete P measured feedback to author W0; verify actual proposal capacity before any host-authorized W0 generation; if eligible, run first ordered development task only.",
+      "order": 2,
+      "role": "P_to_W0_validity"
+    },
+    {
+      "action": "Make a separate original P proposal using complete measured feedback; verify actual capacity and private source copy before C preparation; this is the one counted iteration.",
+      "order": 3,
+      "role": "P_to_C_counted"
+    },
+    {
+      "action": "If eligible, evaluate literal C on the same three ordered tasks under common controls.",
+      "order": 4,
+      "role": "C_screen"
+    },
+    {
+      "action": "C own inherited improver uses complete C measured feedback to author W1; verify actual capacity and copy before W1 first-task generation. This is validity-only, not an additional counted iteration.",
+      "order": 5,
+      "role": "C_to_W1_validity"
+    }
+  ],
+  "prepared_on": "2026-10-24",
+  "pricing_and_accounts": {
+    "basis_commit": "23e7be1f7b1dc8ab06a2ff79529e191e5c1b374a",
+    "checked_at_utc": "2026-10-24T04:12:54.329533+00:00",
+    "freshness": "Existing fresh Gateway account review requires a checked date within seven days, allowing the existing one-day clock tolerance. That date alone does not verify vendor rates or account settings.",
+    "interpretation": "Root dated public documentation and retained-profile bounds evidence only. This is not fresh account proof, provider authentication, a current-account credential binding or an invoice guarantee. This adoption does not independently recertify the vendor record.",
+    "public_vendor_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-current-vendor-price-review-v2.json",
+      "sha256": "e247b8d46d44ff522f16f543b1838f4aae9556b5970eda4d3ca011fc54b87a96"
+    },
+    "required_before_dispatch": "Recheck applicability/currentness at the actual handoff, preserve unchanged supported profile bounds unless separately reviewed, and bind the actual account/tier/region/cache assertions and keyed original launch review.",
+    "review_status": "public_documentation_and_stored_profile_bounds_checked_only",
+    "status": "dated_public_bound_evidence_referenced_account_and_execution_reviews_unprepared"
+  },
+  "proposal_instructions": {
+    "format": "buddha.current-source-proposal-instructions.v1",
+    "interpretation": "Only the declared proposal instruction treatment differs from the earlier default. It asks for substantive changes to both procedures but does not guarantee either outcome.",
+    "sha256": "356ecb5df0d5115c97f6b4afca7763b1a34f034d7d56691a127b0f446407da3a",
+    "text": "Use the measured development feedback to propose substantive, evidence-grounded procedural changes to both generate and propose_improvement (or their actually used helpers). Preserve complete feedback, callable interfaces and all host/model/resource boundaries. Explain each proposed change in hypothesis without claiming success. Changes confined to prompt constants, names, comments or formatting do not meet this observation's aim.",
+    "utf8_bytes": 434
+  },
+  "proposed_requested_terms": {
+    "budget_microusd": 25000000,
+    "limits": "Proposed combined maximum, not a cost estimate, completion guarantee or reuse of any closed historical allowance. Final terms remain subject to concrete reviewed allocation approval.",
+    "max_calls": 512,
+    "partial_results_allowed": true,
+    "providers": [
+      "openai",
+      "anthropic"
+    ],
+    "status": "draft_unallocated_not_authorized"
+  },
+  "protocol_adoption": {
+    "scope": "Adopt this protocol and the exact linked review criteria only. Final executing source/component closure and live bundle/funding bindings remain unprepared; this asset grants no live route.",
+    "source_basis_commit": "fb84fd8e17c328ca38cae4799e5f551411d8d3f1"
+  },
+  "purpose": "Prospectively adopted single current-parent model-authored observation jointly addressing SRC-02 and SRC-03. Protocol adoption is not execution preparation, funding or a result. This is an engineering/mechanism observation, not improved utility, distinctiveness or improver-effectiveness evidence.",
+  "search": {
+    "maximum_full_screens": 2,
+    "maximum_structural_owner_slots": 29,
+    "original_identical_spec_bytes": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-source-20261023-proposal-v2\\inputs\\search-spec.json",
+      "sha256": "48fab465353a954e8a667ac3f7b4b9695eddd11d4d2ea22d1637f26ac6c04ce3"
+    },
+    "owner_slot_limit": "Original declared owner destinations excluding recovery attempts; not an API-call estimate or permission.",
+    "spec": {
+      "format": "buddha.source-search.v1",
+      "iterations": 1,
+      "max_active": 2,
+      "method": "latest",
+      "seed": 7
+    }
+  },
+  "seed": {
+    "composition": "trusted composed seed2; retain exact current frozen prefix and full-output improver fragment; no host edits to make the demonstration positive",
+    "source": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-source-20261023-proposal-v2\\components\\source-agent\\candidate.py",
+      "sha256": "77cfa68f6b3c6996fd503e1ce6f7a964eb57abdb8bde98f6761de5f6e298ff4f"
+    },
+    "utf8_bytes": 13455
+  },
+  "status": "adopted_protocol_execution_configuration_and_funding_not_prepared",
+  "supported_policies": {
+    "mutation_witness": {
+      "depth": 1,
+      "format": "buddha.source-mutation-witness.v1",
+      "task_policy": "first_ordered_development_task"
+    },
+    "proposal_capacity": {
+      "context_scope": "all_completed_proposal_calls",
+      "context_tokens": 1050000,
+      "format": "buddha.source-proposal-capacity-policy.v1",
+      "min_context_slack_tokens": 8192,
+      "min_output_slack_tokens": 8192,
+      "output_scope": "exact_returned_source_replacement",
+      "provider": "openai",
+      "require_replacement": true
+    },
+    "source_copy": {
+      "format": "buddha.source-copy.v1",
+      "method": "verified_private_snapshot_before_owner"
+    }
+  }
+}

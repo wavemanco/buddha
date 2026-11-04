@@ -1,0 +1,331 @@
+{
+  "format": "buddha.completed-screen-replay-delivery.v1",
+  "status": "bounded_replay_slice_verified",
+  "recorded_at_utc": "2026-10-24T01:00:18.359783+00:00",
+  "base_commit": "d98da8737b5ada7af6cc096041534dfa3e3c7826",
+  "design_sections": [
+    8,
+    9,
+    10
+  ],
+  "claim": "Remove one duplicate completed-screen semantic walk while retaining original custody and transitive end-byte checks. No measured whole-study speedup or scientific effectiveness claim.",
+  "delivered_inputs": {
+    "buddha/improver_study.py": "d66cd1f1b2485f94ead5c13eac69b841c3f40316b550e1116e29919de053262b",
+    "buddha/source_screen.py": "ff684da901d0db23e4c0ddb8f412253137acfd15d14910fcb909eb4b062e4459",
+    "buddha/source_screen_results.py": "60f71dfa818ad44ec75b5aabe1d85ed4f6c8793913330ce717eaee5a10812992",
+    "buddha/source_search.py": "cf61e9cd26578133d03ed9e222378635c084527a6d5457e422e2a7e0642d1dd6",
+    "tests/test_improver_screen_replay.py": "508d83e39ef0f59ddc01d58b9d96e1ca88ae57e66c724b24aca0bb73b7f5a32c",
+    "tests/test_improver_study.py": "5356ee31f17717b065bfa4811963250cba0371b4e502309552a4df15ca6aa2c3"
+  },
+  "behavior": [
+    {
+      "cut": "baseline_979",
+      "tests": 4,
+      "failures": 5,
+      "errors": 0,
+      "seconds": 109.25020789995324,
+      "source_pins_unchanged": true,
+      "denied_events": []
+    },
+    {
+      "cut": "initial_draft_4e8",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 100.21799049992114,
+      "source_pins_unchanged": true,
+      "denied_events": []
+    },
+    {
+      "cut": "capture_regression_4e8",
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "seconds": 27.93854470003862,
+      "source_pins_unchanged": true,
+      "denied_events": []
+    },
+    {
+      "cut": "corrected_raw",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 120.27325239998754,
+      "source_pins_unchanged": true,
+      "denied_events": []
+    },
+    {
+      "cut": "final_delivery",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 123.27957609994337,
+      "source_pins_unchanged": true,
+      "denied_events": []
+    }
+  ],
+  "interpretation": {
+    "baseline": "C1 reconstructed3 rather than2 times; four post-verification owner faults were not rejected. Two finite-only invariants already passed.",
+    "first_draft": "Four tests passed, but later source trace found a lost outer end-byte dependency; initial static PASS is superseded.",
+    "capture_fault": "Real nested inspection then same-length native-summary mutation; only outer metadata held constant. Missing end-byte rejection reproduced. Explicit seam, no real ctime restoration or exploit claim.",
+    "final": "All five methods pass at exact delivery d66/508; empty-native-dir and later-owner task-binding refusals retained."
+  },
+  "retained_guards": [
+    "Expected common-screen/control/runtime/review anchor",
+    "One actual full inspector and canonical original report",
+    "Exact owner census/run/manifest/ledger provenance",
+    "Every finite task/recipe/context/local budget, including summary",
+    "Empty native directory refused after failed generation",
+    "Independent inner finish; all-path bounded raw/database/sidecar handoff",
+    "Unchanged unfinished walk, whole-study census, phase fences and outer final byte finish"
+  ],
+  "quality": {
+    "initial_attempt": "6/7 passed; two Ruff B023 test callback bindings reported. Preserved, no suppression.",
+    "correction": "Bind both synchronous loop values explicitly; no assertions changed.",
+    "final_actual_commands": [
+      {
+        "name": "lint",
+        "argv": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-I",
+          "-B",
+          "-c",
+          "import runpy,sys;sys.path.append('C:\\\\Users\\\\arvik\\\\AppData\\\\Roaming\\\\Python\\\\Python313\\\\site-packages');target=sys.argv.pop(1);sys.argv[0]=target;runpy.run_module(target,run_name='__main__')",
+          "ruff",
+          "check",
+          "--no-cache",
+          "buddha",
+          "tests",
+          "agents"
+        ],
+        "exit_code": 0,
+        "error": null,
+        "seconds": 0.11641130002681166,
+        "stdout_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "log_offset": 0,
+        "log_end": 429,
+        "inputs_unchanged": true
+      },
+      {
+        "name": "format",
+        "argv": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-I",
+          "-B",
+          "-c",
+          "import runpy,sys;sys.path.append('C:\\\\Users\\\\arvik\\\\AppData\\\\Roaming\\\\Python\\\\Python313\\\\site-packages');target=sys.argv.pop(1);sys.argv[0]=target;runpy.run_module(target,run_name='__main__')",
+          "ruff",
+          "format",
+          "--check",
+          "--no-cache",
+          "buddha",
+          "tests",
+          "agents"
+        ],
+        "exit_code": 0,
+        "error": null,
+        "seconds": 0.10851329995784909,
+        "stdout_sha256": "8d6404e6e9a4ded6d6582abd979392f3a840b5e7abe8b95c4c5109590d84da89",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "log_offset": 429,
+        "log_end": 881,
+        "inputs_unchanged": true
+      },
+      {
+        "name": "types",
+        "argv": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-I",
+          "-B",
+          "-c",
+          "import runpy,sys;sys.path.append('C:\\\\Users\\\\arvik\\\\AppData\\\\Roaming\\\\Python\\\\Python313\\\\site-packages');target=sys.argv.pop(1);sys.argv[0]=target;runpy.run_module(target,run_name='__main__')",
+          "mypy",
+          "--strict",
+          "--no-incremental",
+          "--cache-dir",
+          "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-completed-screen-quality-cache-v2\\mypy",
+          "buddha",
+          "agents"
+        ],
+        "exit_code": 0,
+        "error": null,
+        "seconds": 2.611418499960564,
+        "stdout_sha256": "023862578629f14e5f15b0fc49a3f36134c1a470f7bb708e4e57fa8ae0304dc3",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "log_offset": 881,
+        "log_end": 1478,
+        "inputs_unchanged": true
+      },
+      {
+        "name": "security",
+        "argv": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-I",
+          "-B",
+          "-c",
+          "import runpy,sys;sys.path.append('C:\\\\Users\\\\arvik\\\\AppData\\\\Roaming\\\\Python\\\\Python313\\\\site-packages');target=sys.argv.pop(1);sys.argv[0]=target;runpy.run_module(target,run_name='__main__')",
+          "bandit",
+          "-r",
+          "buddha",
+          "agents"
+        ],
+        "exit_code": 0,
+        "error": null,
+        "seconds": 2.6566545999376103,
+        "stdout_sha256": "47a0ddd1b9a80f9d89b9495ce6c8859a2514cfc7a56a3a6406803fbefe19a5ef",
+        "stderr_sha256": "d8134e6aedc5253bb1dd642a1c75e84d89fb1aa05194587ec8f0ebb0b89b356e",
+        "log_offset": 1478,
+        "log_end": 7230,
+        "inputs_unchanged": true
+      },
+      {
+        "name": "dependencies",
+        "argv": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-I",
+          "-B",
+          "-c",
+          "import runpy,sys;sys.path.append('C:\\\\Users\\\\arvik\\\\AppData\\\\Roaming\\\\Python\\\\Python313\\\\site-packages');target=sys.argv.pop(1);sys.argv[0]=target;runpy.run_module(target,run_name='__main__')",
+          "pip_audit",
+          "--no-deps",
+          "--cache-dir",
+          "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-completed-screen-quality-cache-v2\\pip-audit",
+          "-r",
+          "requirements.txt"
+        ],
+        "exit_code": 0,
+        "error": null,
+        "seconds": 15.250960100092925,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e82148c0c30269ca5a2c35420ece6af011a4faf5a375325d750e243ffdb10625",
+        "log_offset": 7230,
+        "log_end": 8054,
+        "inputs_unchanged": true
+      },
+      {
+        "name": "compile",
+        "argv": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-I",
+          "-B",
+          "-X",
+          "pycache_prefix=C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-completed-screen-quality-cache-v2\\pycache",
+          "-m",
+          "compileall",
+          "-q",
+          "buddha",
+          "tests",
+          "agents"
+        ],
+        "exit_code": 0,
+        "error": null,
+        "seconds": 1.2262254999950528,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "log_offset": 8054,
+        "log_end": 8397,
+        "inputs_unchanged": true
+      },
+      {
+        "name": "diff",
+        "argv": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "exit_code": 0,
+        "error": null,
+        "seconds": 0.10093299997970462,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "log_offset": 8397,
+        "log_end": 8502,
+        "inputs_unchanged": true
+      }
+    ],
+    "all_seven_passed": true,
+    "all_pins_unchanged": true
+  },
+  "pending": {
+    "original_matrix": "Handle92713 at1d4/535 remains running.",
+    "delivery_matrix": "Fresh original full matrix at d66/508 is running as handle22668 in ip-matrix-final1.",
+    "hosted_ci": "New-slice CI not yet started.",
+    "remaining_runtime": "Repeated full-history/parent reconstruction still needs measurement before a controlled live comparison."
+  },
+  "scope_limits": [
+    "No official evaluator/request/parser/metric changes or new dependencies",
+    "No real provider/key/paid-owner changes or host selected-code execution",
+    "No source/IMP/EVAL scientific gate closure, new funding or live command"
+  ],
+  "evidence": [
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/imp01-finite-matrix-read-amplification-v1.md",
+      "sha256": "53b2489e582eba618012e1a6e06836a2f7e040990921d05f452803f76745d643"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/imp01-completed-screen-replay-red-v1.json",
+      "sha256": "a19a6472420ebf937fca5c33fe9f8e5ae54eb4892bd0e00e4f738f6c77b7d737"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/imp01-completed-screen-replay-green-v1.json",
+      "sha256": "86a4570099487ddbc364959399e7e232e4ee1e158e312557ba102f873e7ba3c8"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/imp01-completed-screen-replay-independent-static-review-v1.json",
+      "sha256": "aefc6df901e68664577c8121be6fd542b6ba0295f491b83d11de85d6d6e4819d"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/imp01-completed-screen-replay-independent-static-review-v2.json",
+      "sha256": "14095c67bc6a074800da3e01dd5a186972859533cf373b0ae5f787a63ecface0"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/imp01-completed-screen-replay-red-v2.json",
+      "sha256": "e57b77e74e69249e7b906e86f88cf1f92f3802f639ecf06141f79961c9e3b1e0"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/imp01-completed-screen-replay-red-v2.log",
+      "sha256": "9909084d0b17b21a1a17fcda4d2ca86badd33758c54d0220b5cab3c1f5cfe3f3"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/imp01-completed-screen-replay-green-v2.json",
+      "sha256": "4e4c194cc35f5a3cad245b23699909d4fddd2821a7feeb1d2f9cf00a2da6a980"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/imp01-completed-screen-capture-correction-independent-review-v1.json",
+      "sha256": "eeb293ca6b7ed206d5184512d2095fe61228754ce4e9036c150624795d01e3c6"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/imp01-completed-screen-format-bridge-v1.json",
+      "sha256": "46d460dfb1e92fab8689c8d219338a283d934bed5e0bc4cf68e49757b6728416"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/imp01-completed-screen-test-binding-correction-v1.json",
+      "sha256": "33667983c594957ab2a7e16500f3ba40e84161cd83956fc52a73e79262da9b3d"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/imp01-completed-screen-replay-green-v3.json",
+      "sha256": "793fed93026e010d355bb2bcd7ac970ecb0f79848f5c815a91c8a1ebfa2fe239"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/imp01-completed-screen-replay-green-v3.log",
+      "sha256": "4fc548369e01435661561ccaa310e99124f9ec7c9157f03c96365ec618d37942"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/imp01-completed-screen-quality-v1.json",
+      "sha256": "eb4426dea59ea0b8494507237f247bcfc73a46e3af1459cb6ea7e84cf3ad8c75"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/imp01-completed-screen-quality-v2.json",
+      "sha256": "e87c94d70038d030ccff6bf86ac91671e30d8dabb3675e4bbb729c9dc427aa76"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/imp01-completed-screen-quality-v2.log",
+      "sha256": "3d78023ce33bbd266d903542ede3490dccb049fedd89fd7b295d5e43b1e1f6c4"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/run-imp01-completed-screen-matrix-v1.py",
+      "sha256": "ba97a209551d3bb7668ee4c47c6b10772883e33fa6c1fea20c5bbd9042dc8d35"
+    }
+  ]
+}

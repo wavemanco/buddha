@@ -1,0 +1,127 @@
+{
+  "basis_commit": "b65a58941c75247a697a5dd147ad0df44ed98c29",
+  "behavior": "Exactly report.json (existing source-review-report.v1) and final complete.json. One checked original observation survives through publication. Source/round/submission changes refuse; identical unmarked prefixes resume. Completed publications are read-only full-inventory checks. Changed submission sets require fresh output; raw invalid forms and earlier reports remain retained.",
+  "checks": {
+    "compatibility": {
+      "denied_events": [],
+      "elapsed_seconds": 408.9983970000176,
+      "errors": 0,
+      "failures": 0,
+      "skips": 0,
+      "source_inventory_unchanged": true,
+      "tests_run": 52
+    },
+    "compatibility_population": "6 original handoff,5 original importer,23 CLI (21 original+2 new),18 unchanged legacy schema tests; total52 with50 existing+2new.",
+    "independent_review": "Source-only review passes original inspector-body/exception AST bridge, shared publisher, protected parents/export tree, same-reader retention, compact private-safe CLI and preliminary genuine test setup; no reviewer execution claim.",
+    "initial_red": "One missing-function ImportError before fixtures, original tool transcript and commitb252706 retained. Original API method body unchanged.",
+    "new_collection": {
+      "denied_events": [],
+      "elapsed_seconds": 271.1802338999696,
+      "errors": 0,
+      "failures": 0,
+      "skips": 0,
+      "source_inventory_unchanged": true,
+      "tests_run": 5
+    },
+    "quality": {
+      "all_pins_unchanged": true,
+      "attempted_check_count": 7,
+      "input_count": 227,
+      "status": "pass",
+      "successful_check_count": 7
+    },
+    "test_cohort_source_pins": 226
+  },
+  "evidence": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-collection-api-red-v1.json",
+      "sha256": "e5b930cc16ccea33346fd2716ac0d6da08142a6910dfcfcc569a95bc2062f7bb"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-collection-api-red-v1.log",
+      "sha256": "06799db664cebf5f8fe361d9779beeeca4b7d58fac71801141f863f0132fb168"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-collection-check-v1.json",
+      "sha256": "cea093fd9913cc519accb6fddebaa3bc628182bd4a22a0ba74525fa8e0f23241"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-collection-check-v1.log",
+      "sha256": "ab7a1b457929599f983296190e4dc8ab2232ddf7ce048ba4468ee6bcb10c0e70"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-collection-compatibility-v1.json",
+      "sha256": "74e66c1751b9e7dc09215108e5296bd5fed247f6201e6d7023edfbdd46b9f8db"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-collection-compatibility-v1.log",
+      "sha256": "588f7211eaeaa1d712907d600d6f988f02975cd0a7c171cd51d90373155ebea0"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\run-source-review-collection-checks-v1.py",
+      "sha256": "8a35a4063194c61ad690f2a6bd545d63acaaa130036677d3bb723d984f09b189"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-collection-quality-v1.json",
+      "sha256": "5b35aa84c74685fd2239f6c1803c517f846ab577e6fe92e36c5b9c412aafc8ee"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-collection-quality-v1.inputs.json",
+      "sha256": "43be197fef49381bc883291d02f2102e1860089cc988f5f894fd9bba0527cd44"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-collection-quality-v1.log",
+      "sha256": "0e2936e8b12b0b760ccfcc3430eaaca0c5c24407ff8e6ac6b026d9de05d741ea"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-collection-quality-app-v1.py.txt",
+      "sha256": "a793f2ccab5abdb625f2458f69d30b950ebfa846d80d8a9aac917cb1dea1041a"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-collection-quality-test-v1.py.txt",
+      "sha256": "c754bb835ba627109f34db0e57e138f07613849bec750bd5b048c90d8765396b"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\run-source-review-collection-quality-v1.py",
+      "sha256": "8e2b6c70e0e10697fce99f3a4e3b08a22969b57405ea20f4200ba08c105e1992"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\eval02-transfer-route-trace-v1.json",
+      "sha256": "55c0dd2d7e416050dd3286ad335a5d23d4c9b11a5f7d2802fa15dae0d512e937"
+    }
+  ],
+  "format": "buddha.source-review-collection-command-delivery.v1",
+  "future_transfer_context": {
+    "record": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\eval02-transfer-route-trace-v1.json",
+      "sha256": "55c0dd2d7e416050dd3286ad335a5d23d4c9b11a5f7d2802fa15dae0d512e937"
+    },
+    "status": "source_trace_only_unimplemented"
+  },
+  "limits": [
+    "New genuine fixture is one prospectively declared ordinary-final task/two-arm supplied-response lifecycle; pure patched-reader cases prove publication rules only. No new genuine valid-descendant improver collection claim.",
+    "Declared human/model IDs do not verify identity, independence, publication time, human authorship or scientific sampling. No actual reviews obtained/sent; no adjudication, official-score change or scientific gate closure.",
+    "Input parent directories are protected for output placement, not captured as a census. Unselected arriving forms do not change this explicitly pinned invocation.",
+    "Publication markers bind output bytes, not successful completion of an interrupted/refused invocation or atomicity with concurrent original-evidence changes. Unknown crash files remain refused/retained.",
+    "Scoped local and quality passes are not a full-suite or hosted result. Hosted checks remain separate; four original gates remain and SRC02 stays Next.",
+    "No paid API call, real key, new paid allocation, original-run/owner mutation, selected-source host execution, benchmark change or merge. Tests create synthetic temporary authorizations/owners.",
+    "Fixed87c source producer and its separate corrected unfunded bundle remain unchanged. No earlier allowance is reopened."
+  ],
+  "preservation": {
+    "historical_revision_rows_unchanged": 115,
+    "old_handoff_importer_and_legacy_tests_unchanged": true,
+    "old_public_inspector_signature_unchanged": true,
+    "original_cli_method_bodies_unchanged": 22,
+    "original_inspector_try_and_handlers_unchanged_except_tuple_return": true,
+    "original_main_acceptance_tails_unchanged": 10,
+    "plan_sha256": "6db88ad9ea4c899c9dc9794d70a640c90d3dc67eeb16efbe975703ec87f65e5d"
+  },
+  "scope": "EVAL-02 operator collection; no actual independent judgment or transfer implementation.",
+  "source_files": {
+    "buddha/__main__.py": "c3eabca1f62db85ea0b907bbb75f6cfb2f184b442c7d0384f40f8a06dde15cfd",
+    "buddha/source_review_handoff.py": "a793f2ccab5abdb625f2458f69d30b950ebfa846d80d8a9aac917cb1dea1041a",
+    "buddha/source_review_results.py": "b608c9bc3436221c87dabf9bdfad0629a7a5050be8a01acc6e4103fc2e775acf",
+    "tests/test_cli.py": "29f8299988c34998b12b0707e758dea7765377bb0ecb47c2ee0d587fee40f108",
+    "tests/test_source_review_collection.py": "c754bb835ba627109f34db0e57e138f07613849bec750bd5b048c90d8765396b"
+  }
+}

@@ -1,0 +1,193 @@
+{
+  "format": "buddha.imp01-study-capacity-delivery.v1",
+  "date": "2026-10-25",
+  "recorded_utc": "2026-10-25T10:49:06.453969+00:00",
+  "status": "bounded_local_checks_passed_hosted_verification_pending",
+  "base_head": "c692ea1865f3dac17037294bf2adf391add461ae",
+  "scope": "Explicit finite study v4 and matching assessment v4 reuse existing original-request capacity policy. Supplied workers, API replies and native outcomes; real trusted controllers, temporary filesystem/SQLite accounting. No actual original P/C execution, provider call or live allocation.",
+  "source_sha256": {
+    "buddha/improver_study.py": "6aef32d625c07e9d0f798f3ea465b2dad8f06fa022973c35d97c1bb9f19ff63d",
+    "buddha/improver_assessment.py": "06c5e69e2131b8b1fed15cda4559d333f943302e3e7ab95215511fdbb3e877fc",
+    "tests/test_improver_study.py": "78fcf49fa7d8e50142062558d0d3593ecf040d20658a185cd8965eb5485053ad",
+    "tests/test_improver_assessment.py": "06a9930e42dc436a4f54cc2b3d482bdc1dc68f34ab2d818b30a6855107b81e91"
+  },
+  "spec_sections": [
+    "DESIGN sections 3, 6, 7, 8, 9, 10",
+    "IMP-01 in PLAN.md"
+  ],
+  "implementation": {
+    "study_format": "buddha.improver-study.v4",
+    "assessment_format": "buddha.improver-assessment-trial.v4",
+    "policies": "Both exact existing feedback-comparison policy and closed proposal-capacity policy are mandatory in study v4. Only v4/v4 pairing is accepted.",
+    "legacy": "Study/assessment v1/v2/v3 keep original schema shapes, funding meaning, helper inventories and witness keyword omission. No old record is upgraded.",
+    "pre_owner": "Active v4 configuration checks supported model context and proposal output allowance before a new owner or worker. Unsupported configuration has a typed static diagnostic.",
+    "all_original_calls": "Counted proposals, common starting-agent mutation witnesses and child mutation witnesses reuse settled original requests, raw replies, inclusive usage, charges and existing checkpoint reconstruction. Planning calls are included; no second API copy is sent.",
+    "ordering": "Passing original checkpoint required before private child source copy, screen/generation, downstream witness or terminal decision. Complete original proposal precedes future artifacts. Exact checkpoint-path census refuses foreign/orphan/future records.",
+    "partial": "Negative or unavailable full replacement evidence stops the whole study as proposal_capacity partial with exact stage, child:null, complete planned denominators, costs and unresolved holds. require_replacement:true also applies to rejected, malformed, unobserved and callback-free proposals; they are not silently completed rejected opportunities.",
+    "interruption": "Original completed replies are reused after interruption without another proposal send. Capacity-failure observations rederive an actual negative original checkpoint. Genuine cancellation/resource stops may precede checkpoint publication.",
+    "assessment": "Existing full development inspection carries v4 capacity verification into finalist freeze and final execution; no second assessment-specific mechanism.",
+    "shared_helpers_unchanged": [
+      "buddha/source_search.py",
+      "buddha/source_capacity.py",
+      "buddha/candidate_improvement.py"
+    ],
+    "unchanged": [
+      "official NoveltyBench source/settings/scoring",
+      "fixed original P/C source",
+      "historical outputs and scores",
+      "dependency manifests",
+      "primary checkout app/run code"
+    ]
+  },
+  "failure_history": [
+    {
+      "observation": "Valid v4 study schema failed before implementation.",
+      "receipt": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-study-capacity-v4-red-schema-v1.json",
+        "sha256": "3f60991eab0f9740cade19a43dc50265b9dcd85011d64af2c9834616e7635b3c",
+        "bytes": 1313
+      }
+    },
+    {
+      "observation": "Initial eight-method run: six passed, one test fixture changed a template without its matching profile, one assertion expected a public error at a private shared-error boundary. Preserve original failed cut; correct tests without weakening app guards.",
+      "receipt": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-study-capacity-v4-focused-v1.json",
+        "sha256": "c43800c27f0ee1c54d8ad81814499f8836a1b0ee1dcf2433f7267e5268955f0b",
+        "bytes": 1111
+      },
+      "log": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-study-capacity-v4-focused-v1.log",
+        "sha256": "a5b4a428b43dbdcf909b2503328f83cc466623b25858a9e1189d02bf47205a9a",
+        "bytes": 4549
+      }
+    },
+    {
+      "observation": "Two new methods reproduced four failures: premature decision before original proposal; witness and decision artifacts hidden behind a negative checkpoint; masked capacity-specific preowner cause. Local v4 guards/typed diagnostic corrected. No demonstrated source execution or paid-spending bypass.",
+      "receipt": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-study-capacity-v4-new-edge-red-v1.json",
+        "sha256": "13efc53a2c4a1c7628f2e6489371741af18290c8ceeb5d90a2ea85e112ff7c9a",
+        "bytes": 2518
+      },
+      "log": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-study-capacity-v4-new-edge-red-v1.log",
+        "sha256": "765f13facb7632b4b0c8ab820ba97fa17c147ccbf9d833fde800e8e77704a1b5",
+        "bytes": 4423
+      }
+    },
+    {
+      "observation": "Valid assessment v4 schema failed before implementation. First later positive fixture was refused by the existing mismatched-profile guard; fixture setup was corrected.",
+      "red_log": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\assessment-capacity-v4-red-v1.log",
+        "sha256": "36b82689642818882b3879adc41708014c5567fd500803d05473d716b548c642",
+        "bytes": 1309
+      },
+      "fixture_log": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\assessment-capacity-v4-green-v1.log",
+        "sha256": "9128d3b54870330ffd77dfb0fccbeb9d9aa8eb43c45b9d32951bc5ac2a2287f8",
+        "bytes": 8056
+      }
+    },
+    {
+      "observation": "First composed check reached complete development and six-cell schedule, then failed because new test expected [] where existing helper returns set(). Only two assertion expectations changed. No final guard or execution stage was reached in that failed run.",
+      "receipt": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\assessment-capacity-v4-composition-result-v1.json",
+        "sha256": "4ee38705c177c2584c96c4ea921eaaa1acccd9c3b0c96fe1f926a24befca837a",
+        "bytes": 1788
+      }
+    }
+  ],
+  "passing_checks": {
+    "initial_six_study_methods": "Passed at retained initial cut: exact schemas/legacy shapes; capacity-only helper closure; all three stop positions and reply reuse; unobserved/zero-call partials; full five-checkpoint/keyless/tamper history; unknown original liability.",
+    "corrected_final_three_study_methods": {
+      "tests": 3,
+      "test_seconds": 858.067,
+      "receipt": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-study-capacity-v4-corrected-green-v1.json",
+        "sha256": "3757ba14b90d8d274e1bd8197bdf2841d0f3f3be8406b3196e414de1ce371ca1",
+        "bytes": 2657
+      },
+      "log": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-study-capacity-v4-corrected-green-v1.log",
+        "sha256": "48c395c13e05050f48cf7d3221e7edc7a59cb86176329846e8898c5e4448d300",
+        "bytes": 744
+      },
+      "checks": "New artifact/partial-stage guards; valid unsupported preowner configuration; before/after checkpoint interruption with no new original proposal send and private-copy refusal."
+    },
+    "assessment_contract": {
+      "tests": 3,
+      "test_seconds": 45.293,
+      "log": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\assessment-capacity-v4-green-v2.log",
+        "sha256": "a2ac531d4044af8285058c2aa9ed4f9af530e3c067aefa4d29b232af60865ecc",
+        "bytes": 741
+      },
+      "checks": "Valid explicit4/4; strict pairing across all16version combinations; positive bounded aggregate final caps."
+    },
+    "legacy_contract": {
+      "tests": 3,
+      "test_seconds": 45.197,
+      "log": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\assessment-capacity-v4-legacy-contract-v1.log",
+        "sha256": "1e0c389eaa3f386fe10f88b40b6e04bfd088ae8beb565c7ef6f664eef7a9153d",
+        "bytes": 744
+      }
+    },
+    "development_to_final_composition": {
+      "result": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\assessment-capacity-v4-composition-result-v2.json",
+        "sha256": "9497e0a8f5838df028f9e65e85230abdd03d45944ed8d35a8c97092ec769ad08",
+        "bytes": 1959
+      },
+      "acceptance": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\assessment-capacity-v4-composition-acceptance-v2.json",
+        "sha256": "d42ad6d26da8dfb042d03742a2883dfd64afb7189014fb6994a36355a311d0b3",
+        "bytes": 6349
+      },
+      "log": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\assessment-capacity-v4-composition-v2.log",
+        "sha256": "cd87821a917ccb75503e30d4d4ac6f31e93c9b84d903ff065a7f8cdd6db139f6",
+        "bytes": 20312
+      },
+      "qualification": "One original fixture with five capacity checkpoints and six sealed cells. Checkpoint corruption after freeze refuses before final owner/send; restored original completes final assessment/analysis and keyless verification. Exact observed counts/costs/runtime retained in acceptance and captured original metadata."
+    },
+    "independent_lifecycle_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-study-capacity-v4-independent-review-v1.json",
+      "sha256": "8485e549ffa3cea5d4c3e38de2b4347a14d4767d90f317a6a74da50c84966994",
+      "bytes": 7109
+    },
+    "local_quality": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-capacity-v4-quality-v1.json",
+      "sha256": "0e30e25cb598af0f779e5e110bc03c6736debe8925ca5d0678e5cc5c298600ad",
+      "bytes": 2635
+    },
+    "discovery": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-capacity-v4-discovery-v1.json",
+      "sha256": "699aa33629a301224edf88c2d6382f59ce7218dcae4a6dc224a08209129588ee",
+      "bytes": 1955
+    },
+    "test_cut_limits": "The initial six methods and corrected three are separately recorded source cuts, not a final full-class/full-suite run. Hosted exact-head Linux/Windows suite remains required. Discovery is1890methods, not1890passing results."
+  },
+  "preservation": {
+    "captured_original_file_count": 451,
+    "old_evidence_method": "Compare raw file hashes only; no SQL queries against original paid evidence.",
+    "tracked_python_before": 288,
+    "intentional_changed_python_files": 4,
+    "other_tracked_python_unchanged": 284,
+    "prior_raw_plan_revision_rows_unchanged": 141,
+    "original_acceptance_tails_unchanged": 10,
+    "delivery_guard": "After this file is written, check-imp01-capacity-delivery-v1.py verifies source/evidence pins, raw historical PLAN rows, links,451old files and reserved final prompt literal absence. Its separate local receipt seals this public JSON without a self-reference cycle.",
+    "no_reserved_task_text_in_public_changes": "Literal absence check only; not a universal covert-channel proof."
+  },
+  "live_and_scientific_limits": {
+    "provider_calls": 0,
+    "selected_original_source_execution": false,
+    "new_live_funding_or_owner": false,
+    "new_launch_command": false,
+    "development_merge": false,
+    "hosted_green_claim": false,
+    "effectiveness_claim": false,
+    "next": "Bind actual original P/C configuration, full-grid resources/runtime/fairness, statistical rule and target-repair/human-review arrangements before a separate reviewed live allocation. WildChat remains selected; Curated stays qualified historical/development evidence without another run.",
+    "actual_model_capacity": "Supplied replies and accounting establish software behavior only, not future original P/C request capacity, attention, semantic compliance or useful diversity.",
+    "scientific_gates": "IMP-01 and EVAL-02 remain open. Official scores stay authoritative; no historical rescore or benchmark change."
+  }
+}

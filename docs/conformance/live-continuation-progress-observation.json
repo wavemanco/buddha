@@ -1,0 +1,75 @@
+{
+  "format": "buddha.live-progress-metadata-observation.v1",
+  "scope": "Read-only OS process counters and existence of four fixed next-witness checkpoints; no contents, original SQL, process environment, credentials, stacks, provider or Docker calls, or frozen source changes.",
+  "source_commit": "c54819f8516cb6b50c1040d7f500c9ef12593f8b",
+  "observed_pid": 9472,
+  "user_reported_attempts": 604,
+  "user_reported_cost_usd": "4.845090",
+  "user_reported_held_usd": "0.000000",
+  "accounting_not_independently_reopened": true,
+  "samples": [
+    {
+      "sample_utc": "2026-10-30T03:08:49.5043418Z",
+      "process_present": true,
+      "pid": 9472,
+      "created": "2026-10-29T14:16:19.820645-07:00",
+      "user_cpu_100ns": 45958593750,
+      "kernel_cpu_100ns": 15191562500,
+      "read_operations": 2367479,
+      "read_bytes": 368639358710,
+      "write_operations": 27,
+      "write_bytes": 272,
+      "threads": 2,
+      "markers": [
+        {
+          "marker": "witness_directory",
+          "exists": false
+        },
+        {
+          "marker": "plan.json",
+          "exists": false
+        },
+        {
+          "marker": "proposal\\context.json",
+          "exists": false
+        },
+        {
+          "marker": "proposal\\owners\\0",
+          "exists": false
+        }
+      ]
+    },
+    {
+      "sample_utc": "2026-10-30T03:09:10.0921295Z",
+      "process_present": true,
+      "pid": 9472,
+      "created": "2026-10-29T14:16:19.820645-07:00",
+      "user_cpu_100ns": 46099062500,
+      "kernel_cpu_100ns": 15247343750,
+      "read_operations": 2379615,
+      "read_bytes": 370353759746,
+      "write_operations": 27,
+      "write_bytes": 272,
+      "threads": 2,
+      "markers": [
+        {
+          "marker": "witness_directory",
+          "exists": false
+        },
+        {
+          "marker": "plan.json",
+          "exists": false
+        },
+        {
+          "marker": "proposal\\context.json",
+          "exists": false
+        },
+        {
+          "marker": "proposal\\owners\\0",
+          "exists": false
+        }
+      ]
+    }
+  ],
+  "limits": "CPU and I/O growth are work evidence only. Marker absence does not identify the current frame, prove an infinite loop, or predict completion. Process I/O counters are not physical disk throughput."
+}

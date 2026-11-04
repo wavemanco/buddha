@@ -1,0 +1,191 @@
+{
+  "format": "buddha.imp01-aligned-request-preparation-delivery.v1",
+  "status": "fresh_unfunded_candidates_checked_reference_controls_and_adoption_pending",
+  "executing_source_head": "206eebfa6249082b7d010828aba937dd5ffed933",
+  "plan_revision": 156,
+  "application_python_changes_in_this_slice": 0,
+  "fresh_base": {
+    "bundle": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-aligned-20261025-v1",
+    "file_count": 98,
+    "checks": [
+      {
+        "stage": "active-study-and-inactive-intrinsic-check",
+        "status": "pass",
+        "controls": 43
+      },
+      {
+        "stage": "public-analyzer-with-synthetic-supplied-metrics-only",
+        "status": "pass",
+        "synthetic_rows": 312,
+        "squared_weight_sum": {
+          "numerator": 7,
+          "denominator": 169
+        },
+        "actual_public_analyzer_directed_radii": {
+          "utility": "6.2975943748879618803346070951799856611801085333491422930899893268227324747578514",
+          "distinct": "5.6678349373991656923011463856619870950620976800142280637809903941404592272820663"
+        },
+        "display_rounding_is_not_the_exact_directed_bound": true
+      },
+      {
+        "stage": "current-assessment-data-check",
+        "status": "pass",
+        "original_controls": 113,
+        "final_tasks": 26,
+        "final_families": 25
+      },
+      {
+        "stage": "real-fresh-unfunded-handoff-check",
+        "status": "pass",
+        "bindings": 126,
+        "planned": {
+          "development_repetitions": 2,
+          "development_tasks": 3,
+          "final_tasks": 26,
+          "maximum_final_cells": 312,
+          "opportunities_per_arm": 2,
+          "sealed_repetitions": 1,
+          "starts": 2
+        }
+      },
+      {
+        "stage": "actual-future-launch-review-input-capacity",
+        "status": "pass",
+        "outer_bindings_with_three_future_paths": 129,
+        "placeholder_paths_only": 3,
+        "both_original_development_and_final_projections": true,
+        "maximum_final_cells": 312,
+        "file_path_limit": 1024
+      }
+    ]
+  },
+  "fresh_review": {
+    "bundle": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-aligned-review-20261025-v1",
+    "file_count": 15,
+    "active_handoff": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-aligned-review-20261025-v1\\handoff-unfunded.json",
+      "sha256": "62c0df9618af307c1f8647a3539a0272f37b825358909d8cc167084ca9091a90"
+    },
+    "checks": [
+      {
+        "stage": "actual-materials-and-assessment-validation",
+        "status": "pass",
+        "whole_sets": 12,
+        "full_positions": 120,
+        "custody_evidence": 68,
+        "required_review_leaf_pins": 8,
+        "rule_text_sha256": "5df0b3a31c86ea37e15b17348a34ad064790b670be345dd93fcd0a4d18385eca",
+        "rubric_text_sha256": "733be657c9c72bdb6f66a04028f423b3f4a30e9ff8aaf8f9321296e6502f89bd",
+        "official_partition_source_sha256": "263970891ff3ee1cc8df369a33beefe5cb5de618b5dd146a5234536d97954aca",
+        "release_sha256": "a01b72926421b05147e1202db7a23943f76cde869b5b00455896cb5ffff90408",
+        "actual_assessment_controls": 121,
+        "no_actual_frozen_schedule_or_outputs_supplied": true
+      },
+      {
+        "stage": "real-fresh-handoff-and-actual-launch-capacities",
+        "status": "pass",
+        "handoff_bindings": 129,
+        "actual_bindings_with_three_future_paths": 132,
+        "required_helper_union": 55,
+        "both_development_and_final_capacities_passed": true,
+        "planned": {
+          "development_repetitions": 2,
+          "development_tasks": 3,
+          "final_tasks": 26,
+          "maximum_final_cells": 312,
+          "opportunities_per_arm": 2,
+          "sealed_repetitions": 1,
+          "starts": 2
+        },
+        "three_future_paths_created": false,
+        "phase_limits_unchanged": {
+          "final": {
+            "budget_microusd": 100000000,
+            "max_calls": 12288
+          },
+          "search": {
+            "budget_microusd": 50000000,
+            "max_calls": 4096
+          },
+          "validation": {
+            "budget_microusd": 0,
+            "max_calls": 0
+          }
+        }
+      }
+    ],
+    "negative_metadata_probes": 8
+  },
+  "unchanged": {
+    "selected_P": "77cfa68f6b3c6996fd503e1ce6f7a964eb57abdb8bde98f6761de5f6e298ff4f",
+    "selected_C": "4196cd29ffa76c6959e6f678a8286b1fde5b56e6a34a97dcf68787e1f22b3a43",
+    "old_base_files": 98,
+    "old_review_files": 24,
+    "older_configuration_files": 87,
+    "captured_original_files_raw_hashed_only": 451,
+    "current_tracked_python_files": 303,
+    "official_revision": "64a23be6b18ec1dacc298830aab276061b6e143c",
+    "models_prices_limits_headers_tiers": true,
+    "development_final_population_grid_and_resource_settings": true
+  },
+  "independent_review": {
+    "status": "no_findings_at_bounded_scope",
+    "request_probes": 44,
+    "synthetic_selected_first_request_fixtures": 2,
+    "metadata_denials": 8,
+    "capacity_projection_reexecution": "builder evidence; independent reviewer did not parse private task bodies",
+    "documentation_and_costs": "bounded independent review passes final retained-study scope and all16 exact public/conservative arithmetic cases"
+  },
+  "plain_model_comparison": {
+    "document": "docs/PLAIN-MODEL-COMPARISON.md",
+    "code_routes_reused": [
+      "buddha.baseline",
+      "agents.frozen_seed",
+      "buddha.native_run"
+    ],
+    "next_recommendation": "retain bounded improver study and prepare necessary plain references alongside prospectively compatible frozen Buddha results",
+    "both_sampling_modes_available": true,
+    "four_conditions_mandatory_now": false,
+    "evolved_source_sampling_label_is_not_compliance_proof": true,
+    "next_paid_priority": "no priority change authorized; user questions were curiosity, not reprioritization",
+    "current_150_workload_expanded": false,
+    "budget_examples": "docs/conformance/plain-model-comparison-cost-examples.json",
+    "budget_examples_sha256": "2b2e457a52bcc066424bb461ff4c9814d4e2611a7aac8fb42a88f117d4db60ce",
+    "all_1000_WildChat_tasks_in_current_run": false,
+    "current_tasks": {
+      "development": 3,
+      "final": 26
+    },
+    "full_later_benchmark": {
+      "wildchat": 1000,
+      "curated": 100,
+      "curated_unseen_claim": false
+    },
+    "user_clarification": "Curiosity is not a request to reprioritize or enlarge the run; both questions can use prospective shared frozen Buddha outcomes."
+  },
+  "evidence": {
+    "prepare-imp01-wildchat-aligned-v1.py": "fd9b9a834ec6842034df46aeb308638c18b530437e25fd25603b796774fc96ba",
+    "imp01-wildchat-aligned-preparation-v1.json": "51d44079e57c286cb833b81f4601804b6cb00e6aee6a49592677e4cf638695ea",
+    "prepare-imp01-wildchat-aligned-review-v1.py": "8d281eca98c680b1391ce247d0e9c02ae1ec7eb0bd073d1bce7b52ca0c9378f0",
+    "imp01-wildchat-aligned-review-preparation-v1.json": "b60eb1acded56c19078bbc51f9c4603b05c4ae32fedf3fddd92b1714e490d492",
+    "imp01-wildchat-aligned-engineering-audit-v1.json": "e39dfe8790e9e72091552c0fea96b8788eeabb583c45627e3aa834563cf8f68b",
+    "imp01-wildchat-aligned-review-engineering-audit-v1.json": "c7e46d041ce646300aa014bc5afbd61c7b613b72e5e2b912c53561269bb238df",
+    "imp01-aligned-old-configurations-preservation-v1.json": "07d2a4a93bcdcdf7f67134f5cc19395cd79e43a67d6e98fceaed04fff9e04027",
+    "imp01-aligned-preparation-independent-doc-cost-review-20261025.json": "2c4aac74dcdb88a59503d6632df4f6d4e824e46baff466f37530ef9416d522e8"
+  },
+  "limits": {
+    "paid_provider_calls": 0,
+    "SQL_connections_queries": 0,
+    "selected_source_decode_AST_compile_import_execute_in_this_slice": false,
+    "keys_authorization_grants_owners_trials_created": false,
+    "reviewers_rosters_rounds_packets_or_judgments_created": false,
+    "protocol_resource_numerical_adoption": false,
+    "live_launchable": false,
+    "full_local_suite_or_new_hosted_CI_pass_claim": false,
+    "scientific_result_or_gate_closure": false
+  },
+  "scientific_gates_open": [
+    "IMP-01",
+    "EVAL-02"
+  ]
+}

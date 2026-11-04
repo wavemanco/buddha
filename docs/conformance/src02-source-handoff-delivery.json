@@ -1,0 +1,210 @@
+{
+  "api": {
+    "format": "buddha.source-handoff.v1",
+    "function": "check_source_handoff",
+    "funding": "unallocated",
+    "initial_seed_only": true,
+    "keys_or_database_or_workers_or_provider_access": false,
+    "read_only": true
+  },
+  "base_commit": "f6a4e16",
+  "date": "2026-10-22",
+  "earlier_failure": {
+    "behavioral_red": {
+      "exit_code": 1,
+      "kind": "behavioral RED",
+      "raw_log_sha256": "0fb462d91fc9f1abcb446ad2c6b689677b36c4dc379435d42784f5f938891872",
+      "source_sha256": "36af91ffc6a711243284fbd1eba2847d55e4b3ed159dcd6c534105cebd763d7b",
+      "test_sha256": "089a49e062f975f06aaf35b0e64f6ec000b5b03b0b697639e11698b6d3f8df9b"
+    },
+    "fix": "Recheck supplied control hashes after final selected-component validation instead of before it.",
+    "missing_API_setup_error": {
+      "errors": 1,
+      "failures": 0,
+      "test_bodies_executed": false,
+      "tests_run": 1
+    }
+  },
+  "final_tests": {
+    "errors": 0,
+    "failures": 0,
+    "ordered_test_ids": [
+      "test_source_handoff.SourceHandoffTests.test_bad_terms_spec_and_extra_fields_refuse",
+      "test_source_handoff.SourceHandoffTests.test_check_is_read_only_keyless_unallocated_and_does_not_execute",
+      "test_source_handoff.SourceHandoffTests.test_control_changes_after_review_or_during_check_refuse",
+      "test_source_handoff.SourceHandoffTests.test_duplicate_case_alias_of_a_control_refuses",
+      "test_source_handoff.SourceHandoffTests.test_late_control_change_during_final_component_check_refuses",
+      "test_source_handoff.SourceHandoffTests.test_missing_installed_helper_or_runtime_binding_refuses",
+      "test_source_handoff.SourceHandoffTests.test_only_prospective_one_file_initial_screen_is_supported",
+      "test_source_handoff.SourceHandoffTests.test_relative_self_or_oversized_control_map_refuses",
+      "test_source_handoff.SourceHandoffTests.test_returns_detached_literal_values",
+      "test_source_handoff.SourceHandoffTests.test_runtime_approval_or_proposal_profile_changes_refuse",
+      "test_source_handoff.SourceHandoffTests.test_selected_component_drift_refuses_without_preparation",
+      "test_source_handoff.SourceHandoffTests.test_wrong_raw_pin_and_malformed_duplicate_or_nonfinite_json_refuse",
+      "test_source_screen.SourceScreenTests.test_development_screen_preserves_typed_order_literal_source_and_fresh_views",
+      "test_source_screen.SourceScreenTests.test_full_source_split_and_development_membership_are_not_scalar_claims",
+      "test_source_screen.SourceScreenTests.test_comparison_changes_controls_but_excludes_agent_identity_and_bound_root_locations",
+      "test_source_search.SourceSearchTests.test_specification_is_closed_bounded_typed_and_uses_existing_parent_methods",
+      "test_source_search.SourceSearchTests.test_prepare_rejects_wrong_scope_template_old_mode_and_original_pin_before_owner"
+    ],
+    "skips": 0,
+    "successful": true,
+    "tests_run": 17,
+    "wall_seconds": 14.283943600021303
+  },
+  "format": "buddha.src02-source-handoff-delivery.v1",
+  "limits": [
+    "No live model, pricing, full-source token capacity, installed-container or readiness validation.",
+    "The 1024 returned-control bound covers initial inputs; nested-stage additions need the actual handoff capacity check.",
+    "The prospective stage-owner bound is not a worker-attempt, API-call or cost estimate.",
+    "No authority, owner, mutation-admission gate or scientific improvement claim.",
+    "No full local suite rerun; hosted Linux/Windows checks remain separate."
+  ],
+  "preservation": {
+    "all208_old_python_raw_unchanged": true,
+    "all210_python_and4_config_final_check_inputs_unchanged": true,
+    "all_historical_conformance_raw_unchanged": true
+  },
+  "quality": {
+    "checks": [
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "ruff",
+          "check",
+          "buddha",
+          "tests",
+          "agents"
+        ],
+        "exit_code": 0,
+        "failure_type": null,
+        "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "name": "ruff-check",
+        "wall_seconds": 0.1768891999963671
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "ruff",
+          "format",
+          "--check",
+          "buddha",
+          "tests",
+          "agents"
+        ],
+        "exit_code": 0,
+        "failure_type": null,
+        "log_sha256": "35ff24d8a92c0ac97b235b057e7a009fcd264bc97ab856d529326a06c0fee756",
+        "name": "ruff-format",
+        "wall_seconds": 0.17334049998316914
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "mypy",
+          "--strict",
+          "--platform",
+          "win32",
+          "--cache-dir",
+          "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-source-handoff\\runs\\reviews\\source-handoff-final-quality-v1-mypy-win32-cache",
+          "buddha",
+          "agents"
+        ],
+        "exit_code": 0,
+        "failure_type": null,
+        "log_sha256": "1ae1a89d54d420cace381d4367eb85674ac10663afe0766641917ac6d36ebbd0",
+        "name": "mypy-win32",
+        "wall_seconds": 3.3937281999969855
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "mypy",
+          "--strict",
+          "--platform",
+          "linux",
+          "--cache-dir",
+          "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-source-handoff\\runs\\reviews\\source-handoff-final-quality-v1-mypy-linux-cache",
+          "buddha",
+          "agents"
+        ],
+        "exit_code": 0,
+        "failure_type": null,
+        "log_sha256": "1ae1a89d54d420cace381d4367eb85674ac10663afe0766641917ac6d36ebbd0",
+        "name": "mypy-linux",
+        "wall_seconds": 3.4303889999864623
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "bandit",
+          "-r",
+          "buddha",
+          "agents"
+        ],
+        "exit_code": 0,
+        "failure_type": null,
+        "log_sha256": "3b2da6b1d3f1fa15cd23000fc8433f2083a2851a9fae8ed2e1af6bde640153e8",
+        "name": "bandit",
+        "wall_seconds": 2.9341218000045046
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "pip_audit",
+          "--no-deps",
+          "-r",
+          "requirements.txt"
+        ],
+        "exit_code": 0,
+        "failure_type": null,
+        "log_sha256": "e82148c0c30269ca5a2c35420ece6af011a4faf5a375325d750e243ffdb10625",
+        "name": "pip-audit",
+        "wall_seconds": 19.57589969993569
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "compileall",
+          "-q",
+          "buddha",
+          "tests",
+          "agents"
+        ],
+        "exit_code": 0,
+        "failure_type": null,
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "name": "compileall",
+        "wall_seconds": 0.7948653000639752
+      }
+    ],
+    "config_inputs": 4,
+    "inputs_unchanged": true,
+    "passed": true,
+    "python_inputs": 207,
+    "wall_seconds": 19.795016499934718
+  },
+  "retained_evidence_sha256": {
+    "source-handoff-final-quality-v1.json": "3322e13dad1526fdb0cf96c475fe0885c2a0bc0d599143ffee829d54d1806802",
+    "source-handoff-final-v1-child.json": "72e00075aaa34736481d85fcdaa296ebec5d0c244b19ffcb0a9badbe56826511",
+    "source-handoff-final-v1-exit.json": "5d7d134ca71683fd6282a526364aeb883d14ae255fc2cfa7d24c64e9ed1874a2",
+    "source-handoff-late-control-red.json": "92d1fbc5cd7864f02b7e12db5727317eb59709370cac120912aa02a8dc562174",
+    "source-handoff-late-control-red.log": "0fb462d91fc9f1abcb446ad2c6b689677b36c4dc379435d42784f5f938891872"
+  },
+  "source_sha256": "97cce48ab1d6ca9742024d67361be2b0ea0ad56b8328485d21b2a64f4b881814",
+  "test_sha256": "4dc1bd8f5393d6c54479cd1ed53ac1176785cd14f8fc577d565f255609cc50e0"
+}

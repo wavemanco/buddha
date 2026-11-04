@@ -1,0 +1,75 @@
+{
+  "format": "buddha.imp01-hosted-witness-replay-verification.v1",
+  "status": "ubuntu_exact_pr102_pass_windows_and_later_heads_separate",
+  "scope": "Hosted full-suite verification of the completed-witness retirement correction at PR102; not the later sealed-assessment correction or full IMP-01 completion.",
+  "repository": "https://github.com/wavemanco/buddha",
+  "head": "82ba34a8d693128e9e39a179506f568fe43f9fab",
+  "job": {
+    "run_id": 40057908809,
+    "job_id": 120764869449,
+    "url": "https://github.com/wavemanco/buddha/actions/runs/40057908809/job/120764869449",
+    "platform": "ubuntu-latest",
+    "conclusion": "success",
+    "completed_at_utc": "2026-10-24T05:28:10Z"
+  },
+  "suite": {
+    "tests": 1756,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 5,
+    "seconds": 7617.954,
+    "original_full_matrix": {
+      "result": "passed",
+      "seconds": 3911.238
+    },
+    "new_retirement_regression": {
+      "result": "passed",
+      "seconds": 46.114
+    }
+  },
+  "post_test_quality": [
+    "lint",
+    "format",
+    "strict types",
+    "code security",
+    "runtime dependency audit",
+    "compile"
+  ],
+  "source_check": "All25 pre-existing finite-study method ASTs remain identical across PR101 to PR102; the genuine completed-witness retirement regression is the added method.",
+  "earlier_failure": {
+    "head": "c6eca1a07426cdbddf3ddd735be7b44f1fd38a3d",
+    "run_id": 40055058792,
+    "job_id": 120756113232,
+    "tests": 1755,
+    "errors": 1,
+    "failures": 0,
+    "skipped": 5,
+    "seconds": 9674.999,
+    "reason": "Original full-matrix method errors at the first inspection after I0/I1/S0/S1 source retirement. The sanitized CI exception does not expose the inner cause; the separately retained genuine local diagnostic supplies the missing-file chain.",
+    "review": {
+      "path": "runs/reviews/eval01-final-design-20261023/pr101-ci-run40055058792-ubuntu-terminal-review-v2.json",
+      "sha256": "1289b94baabf5236112fb40138250961d4ff738c04a2dab5ec73d444209b3bad"
+    }
+  },
+  "evidence": [
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/pr102-ci-run40057908809-ubuntu-terminal-review-v1.json",
+      "sha256": "5b0eaae6f4daff411540af0fcc557aee87a933af098d8011c5a270b55506c164"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/pr102-ci-run40057908809-ubuntu-terminal-v1-job.json",
+      "sha256": "de1014d9eaa0231011141b5468fc1e6af1336b0af84e8507660fe5e4404b5490"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/pr102-ci-run40057908809-ubuntu-terminal-v1-job-api.log",
+      "sha256": "ebf98a28a017a9614394551e54a1ca118ab08347b3114a8d28d22d68c1128238"
+    }
+  ],
+  "interpretation": [
+    "The original full finite-matrix method now has a recovered hosted passing result at this exact Ubuntu source cut. Earlier unrecovered local executions remain unrecovered.",
+    "Whole-test CI durations include active work, recovery and negative/passive checks. These separate hosted observations do not establish passive reconstruction cost or a controlled speedup.",
+    "Windows and PR103/104/105 require their own exact-head conclusions. Later source byte identity of selected files cannot stand in for those full-suite results.",
+    "Engineering verification establishes neither current model-authored source competence, improved improver effectiveness nor held-out useful diversity. Four original roadmap gates remain.",
+    "Original delivery and historical pending/failure records remain unchanged. No provider call, owner/accounting mutation, source execution, allowance or merge is performed by this evidence slice."
+  ]
+}

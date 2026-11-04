@@ -1,0 +1,40 @@
+{
+  "format": "buddha.review-tracks-decision.v1",
+  "decision_date": "2026-10-26",
+  "basis": "User requested AI-only and AI-plus-human branches, volunteered as the first human reviewer, and required human availability not to stall the project.",
+  "status": "user_selected_tracks_with_proposed_AI_review_workload_not_funded_or_adopted",
+  "shared_frozen_experiment": true,
+  "tracks": {
+    "ai_only": {
+      "blocked_by_human_availability": false,
+      "claims": "AI-evaluated results at actual completed coverage; no human-validation or human-preference claim."
+    },
+    "ai_plus_human": {
+      "first_human_reviewer": "human-user-1",
+      "reviewer_relationship": "project owner; not an unaffiliated external rater",
+      "reviewer_selected": true,
+      "ratings_collected_by_this_decision": false,
+      "original_sample": {"whole_sets": 12, "maximum_answers": 120},
+      "later_ratings": "Separate identified receipts and an augmented report referencing the same frozen outputs; preserve partial coverage and disagreements."
+    }
+  },
+  "official_scores_changed": false,
+  "original_frozen_outputs_or_reports_rewritten": false,
+  "additional_generation_or_official_benchmark_judging_required": false,
+  "proposed_native_review_workload": {
+    "target_repair_contexts_maximum": 32,
+    "target_stage_judgments_maximum": 64,
+    "whole_set_contexts_maximum": 12,
+    "whole_set_judgments_maximum": 12,
+    "whole_set_model_review_procedures": 1,
+    "total_fresh_reviewer_contexts_maximum": 44,
+    "model_proposed_not_selected": "gpt-6.1-sol",
+    "reasoning_proposed_not_selected": "ultra",
+    "monetary_cost": "unpriced Codex-plan usage outside the unchanged API proposal",
+    "actual_reviews_or_native_allocation_created": false
+  },
+  "additional_API_allocation_created": false,
+  "native_reviewer_model_or_effort_selected": false,
+  "scientific_improvement_or_human_validation_established": false,
+  "historical_preparations_retained": true
+}

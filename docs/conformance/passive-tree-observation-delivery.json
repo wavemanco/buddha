@@ -1,0 +1,220 @@
+{
+  "format": "buddha.passive-tree-observation-delivery.v1",
+  "recorded_utc": "2026-10-29T00:56:30.385433+00:00",
+  "base_head": "d5787170a41304626567cd06d304e74ab01fac2a",
+  "spec_sections": [
+    5,
+    7,
+    9
+  ],
+  "scope": "Invocation-local constructor metadata sharing in the trusted passive study reader; no paid continuation or action-deadline claim.",
+  "source_sha256": {
+    "buddha/doctor.py": "159bd50248df876b8378ec622d792c8495395681fd541fb9b4e510e722b26177",
+    "buddha/improver_study.py": "016a5096f87328decd2892974b8fca4ef134eca61abc889b30b71ecf74a9b55b",
+    "tests/test_passive_capture_scope.py": "c67a0c33154bce7ff9e6af24f8123eb632068587911e8310c4d0171735c6f1c0",
+    "tests/test_passive_tree_observation_review.py": "de3447797e864c095c13c643112c3f96ee2b6791dac91d9fafc7f71a4c0b3616",
+    "docs/PLAN.md": "84d838d442e792b14162fb8ce936cecffdfc3997f99b173c69689f7e19d372d3",
+    "docs/RECONSTRUCTION-COST.md": "f8afac503c00ea41c0b02c7d39edab86bdbe8a512236d37ab82bda86c58cec0d"
+  },
+  "mechanism": {
+    "activation": "improver_study._restore only; standalone capture construction stays strict.",
+    "key": "Literal root spelling, frozen byte/tree/path limits, process/thread and real held-lease identity plus capture-root/held-trial lock metadata.",
+    "metadata_bound": "Cached entry sum and root count use the selected tree-entry and consumed-path limits. Saturation falls back to ordinary construction without rejecting otherwise valid work.",
+    "each_capture_entries_independent": true,
+    "no_capture_or_receipt_dictionary_retention": true,
+    "persistent_raw_byte_cache": false,
+    "all_existing_finish_fingerprint_adopt_checks_unchanged": true,
+    "successful_exit_fresh_registered_trees_and_relevant_lease_checks": true,
+    "exception_discards_registry_and_preserves_primary_error": true,
+    "unrelated_ancestor_locks_excluded": true,
+    "original_observation_limits_and_all_ten_CORE_unchanged": true
+  },
+  "profile_motivation": {
+    "qualification": "Read-only retained synthetic-history profile completed one restore, then the old witness-only checker stopped on later unscheduled work. Engineering profile, not continuation acceptance or a controlled speed comparison.",
+    "capture_constructors": 211,
+    "capture_finish_calls": 353,
+    "tree_walks": 564,
+    "receipt": "runs/checks/retained-trial-profile-20261028-v2/receipt.json"
+  },
+  "genuine_RED": [
+    {
+      "scope": "Four actual same-root captures; old code executes through nullcontext fallback, not a missing-API error.",
+      "methods": 3,
+      "passes": 2,
+      "failures": 1,
+      "seconds": 0.055,
+      "observed_inside_walks": 8,
+      "required_inside_walks": 5,
+      "test_only_commit": "2d3a87c"
+    },
+    {
+      "scope": "Unrelated owned parent lock changes while ordinary capture finishes pass; first scoped implementation adds an incorrect exit rejection.",
+      "methods": 4,
+      "passes": 3,
+      "errors": 1,
+      "seconds": 0.08,
+      "error_type": "doctor._Busy",
+      "failed_app_sha256": "06ea68a6e714df2b76f5076b77af4f4055ea8da809d0a39723d0038dcc1845e8",
+      "test_only_commit": "e5affc4"
+    }
+  ],
+  "work_counts": {
+    "four_capture_actual_file_case": {
+      "ordinary_walks": 8,
+      "shared_walks": 6,
+      "strict_finishes": 4,
+      "fresh_exit_walks": 1
+    },
+    "natural_initial_state": {
+      "ordinary_walks": 2,
+      "shared_walks": 3,
+      "ordinary_returned_entries": 54,
+      "shared_returned_entries": 81,
+      "overhead_disclosed": true
+    },
+    "natural_first_counted_plan": {
+      "ordinary_constructor_walks": 24,
+      "shared_constructor_walks": 5,
+      "strict_finish_calls_both": 41,
+      "shared_exit_walks": 5,
+      "ordinary_total_walks": 65,
+      "shared_total_walks": 51,
+      "ordinary_returned_entries": 2824,
+      "shared_returned_entries": 2102,
+      "whole_study_constructors_before": 3,
+      "whole_study_constructors_after": 1,
+      "whole_study_strict_finishes_unchanged": 3
+    },
+    "natural_fixture": "One supplied v4 fixture; genuine completed common screen and mutation witness plus first written counted plan, stopped before the first counted proposal. No injected captures or semantic-validator replacement.",
+    "parity": [
+      "next action",
+      "coverage",
+      "declaration",
+      "authorization",
+      "owner accounting",
+      "complete file fingerprints"
+    ],
+    "readback_changed_files": false,
+    "readback_new_sends": 0,
+    "speed_ratio_measured": false,
+    "larger_history_180_second_fit_established": false
+  },
+  "final_checks": {
+    "commands": [
+      {
+        "scope": "19 guard methods at exact final source; root file plus child fast class.",
+        "command": "python -B -c \"import sys,unittest; sys.path.insert(0,'tests'); names=['test_passive_capture_scope.PassiveCaptureScopeTests','test_passive_tree_observation_review']; suite=unittest.defaultTestLoader.loadTestsFromNames(names); result=unittest.TextTestRunner(verbosity=2).run(suite); raise SystemExit(not result.wasSuccessful())\"",
+        "methods": 19,
+        "passes": 18,
+        "skips": 1,
+        "seconds": 0.208,
+        "skip_reason": "Windows symlink creation privilege unavailable"
+      },
+      {
+        "scope": "Natural unmodified saved-study parity/work counts.",
+        "command": "$env:PYTHONPATH='tests'; python -B -m unittest test_passive_capture_scope.MockedStudyCaptureScopeTests -v",
+        "methods": 1,
+        "passes": 1,
+        "seconds": 137.851,
+        "function": "Sets the Python lookup folder to tests in this PowerShell window, then runs the supplied-study check once. Use a separate developer window or close it afterward. It uses temporary test folders, needs no API keys, makes no paid calls and starts no real containers. Ctrl+C stops it."
+      },
+      {
+        "scope": "Legacy bounded/verified/v2-policy/Windows-read/fingerprint/native/typed-stop checks.",
+        "modules": [
+          "test_bounded_evidence_capture",
+          "test_verified_evidence_reads",
+          "test_evidence_capacity_policy",
+          "test_observation_reads",
+          "test_observation_fingerprints",
+          "test_native_evidence",
+          "test_evidence_stop_causes"
+        ],
+        "methods": 66,
+        "passes": 66,
+        "seconds": 68.505,
+        "command": "python -B -c \"import sys,unittest; sys.path.insert(0,'tests'); names=['test_bounded_evidence_capture', 'test_verified_evidence_reads', 'test_evidence_capacity_policy', 'test_observation_reads', 'test_observation_fingerprints', 'test_native_evidence', 'test_evidence_stop_causes']; suite=unittest.defaultTestLoader.loadTestsFromNames(names); result=unittest.TextTestRunner(verbosity=2).run(suite); raise SystemExit(not result.wasSuccessful())\""
+      }
+    ],
+    "unique_methods": 86,
+    "passes": 85,
+    "skips": 1,
+    "failures": 0,
+    "errors": 0,
+    "separate_commands_not_combined_timing_run": true,
+    "configured_quality": {
+      "ruff": "pass (concurrent cache-write warnings retained)",
+      "format": "pass,281 files",
+      "strict_mypy": "pass,89 files",
+      "bandit": "pass (existing comment warnings retained)",
+      "strict_development_audit": "pass",
+      "runtime_audit": "pass, no runtime dependencies",
+      "external_compile": "pass,281 files, source bytes unchanged"
+    },
+    "independent_source_review": "Root and independent reviewer passed exact159bd502/016a5096 app and c67a0c33 test scope; unrelated-ancestor finding corrected before publication.",
+    "full_suite": "not run for this cut",
+    "hosted_CI": "pending exact published head",
+    "command_function": "Each command runs its named local test selection once; supplied fixtures use temporary folders, no API keys or real provider calls. No separate window is required; Ctrl+C stops it."
+  },
+  "earlier_checks_separate": [
+    {
+      "scope": "Legacy cohort before unrelated-ancestor correction.",
+      "methods": 66,
+      "seconds": 62.822,
+      "app_sha256": "06ea68a6e714df2b76f5076b77af4f4055ea8da809d0a39723d0038dcc1845e8"
+    },
+    {
+      "scope": "Earlier child fast guards.",
+      "methods": 15,
+      "passes": 14,
+      "skips": 1,
+      "seconds": 0.134,
+      "test_sha256": "2c72b727090768cf10dbafef8533e9949d6a685dab0cab528f80fc55ab63f7c6"
+    }
+  ],
+  "preservation": {
+    "prior_raw_PLAN_rows": 183,
+    "all_prior_rows_byte_unchanged": true,
+    "seven_original_acceptance_tails_byte_unchanged": true,
+    "actual_paid_run_or_original_SQL_access_by_this_slice": false,
+    "original_source_owners_grants_science_changed": false,
+    "provider_calls": 0,
+    "real_containers": 0,
+    "new_dependencies": 0,
+    "comparison_includes_exact_line_terminators": true
+  },
+  "remaining": "Whole development still needs one complete unchanged180-second-per-action acceptance after merging this fix, with owned timeout evidence retained. Whole final/plain/publication and exact-source hosted/wire/account/confinement checks remain separate before paid handoff. IMP-01/EVAL-02 remain open.",
+  "external_receipts": {
+    "runs/checks/passive-constructor-review-red-v1.json": {
+      "sha256": "897737c0c03eb67e521cb94f5fb43f05b340fbbfbdf16ac6a3dad82e160aa407"
+    },
+    "runs/checks/passive-constructor-ancestor-red-v1.json": {
+      "sha256": "4b6b9061da22ac53840abbd92b9a399c87377070c071f8876b5064a98b05e82e"
+    },
+    "runs/checks/passive-constructor-review-green-v1.json": {
+      "sha256": "3cdae71338674e264101da11bb7e3077dbb3b59cde3728068369c00f7cfd9304"
+    },
+    "runs/checks/passive-constructor-quality-20261028-v1/natural-study-counts.json": {
+      "sha256": "db1496f1c5c8c00f38a510aebe2625d6bf4b4d6df2959f7b2210f6fd24ce7781"
+    },
+    "runs/checks/passive-constructor-quality-20261028-v1/results.json": {
+      "sha256": "8e3a9c0b6afa0dc52c254adb9714df325a13d3c7241acb999f1fc6de1c5c3143"
+    },
+    "runs/checks/passive-constructor-quality-20261028-v1/compile.json": {
+      "sha256": "08793421e9526e7403a7581b6d39a432cf9949b59d115332cc06efabb1e3ca1c"
+    },
+    "runs/checks/passive-constructor-quality-20261028-v1/plan184-preservation.json": {
+      "sha256": "ecb68360fa95775940ce979441828e67fb1eef33982f15d4d1d80f75e095804e"
+    },
+    "runs/checks/retained-trial-profile-20261028-v2/receipt.json": {
+      "sha256": "0d1077b7a5ead8c7b5da38b871a049260a64c8b90462f3b4d7c14240bea0a4dd"
+    }
+  },
+  "metadata_correction": {
+    "prior_published_head": "78948d550eea8ffac9ec635e433cc02652a1c76c",
+    "finding": "Revision183 content matched but its final LF was converted to CRLF; the first comparison excluded terminators.",
+    "repair": "Restore original LF and verify every complete prior raw row and acceptance tail including line terminators. App/test sources and test results unchanged.",
+    "superseded_CI_run": 40797688702,
+    "cancellation_reason": "Superseded documentation metadata; requested before corrected push to avoid duplicate CI cost.",
+    "previous_preservation_receipt_retained": "runs/checks/passive-constructor-quality-20261028-v1/plan184-preservation-before-line-ending-correction.json"
+  }
+}

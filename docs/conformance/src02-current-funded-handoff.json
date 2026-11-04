@@ -1,0 +1,129 @@
+{
+  "format": "buddha.current-source-funded-handoff-delivery.v1",
+  "status": "ready_awaiting_user_live_run",
+  "plan_revision": 128,
+  "recorded_at_utc": "2026-10-25T00:08:32.176049+00:00",
+  "producer_commit": "42e5dd2d3d32c1f085c87aaa2de44cc1391587ce",
+  "hosted_completion": "ci-test-progress-hosted-completion.json",
+  "handoff": {
+    "account_review_created": false,
+    "approval": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-handoff-v1\\approval.json",
+      "sha256": "9b9380a448b61480a9c08814afa1eaef6a0ea1c01deb70d52fe760bac7404251"
+    },
+    "authorization": {
+      "budget_microusd": 25000000,
+      "id": "src02-current-live-20261024-v1",
+      "max_calls": 512,
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-handoff-v1\\authorization.sqlite3",
+      "terms_sha256": "f744dc63837ea7df9324c4a616f7b83192ae8370080bbe09a9787cafa8bb0de7"
+    },
+    "checked": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-current-live-funded-check-v1.json",
+      "sha256": "ea887244502c156609fa9e090b84d14f4ecf15ab23940fd4526193d249285fb9"
+    },
+    "costs": {
+      "committed_microusd": 0,
+      "operation_count": 0,
+      "reserved_microusd": 0,
+      "spent_microusd": 0
+    },
+    "fixed_binding_count": 77,
+    "format": "buddha.current-source-funded-handoff-preparation.v1",
+    "future_input_bound": {
+      "additional_bindings_K": 0,
+      "maximum_under_existing_conditional_method": 111,
+      "not_observed_full_owner_census": true
+    },
+    "initial_invocation_control_count": 85,
+    "launch": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-handoff-v1\\launch.json",
+      "sha256": "3a4186127d30ccf8a69cea65cfcc2ed5651661f14e3892f5ab5646c625a2c65d"
+    },
+    "original_search_created": false,
+    "paid_provider_calls": 0,
+    "receipt_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-receipts-v1\\launch-001.json",
+    "recorded_at_utc": "2026-10-25T00:08:32.176049+00:00",
+    "source_entrypoint": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\ci-test-progress\\docs\\conformance\\src02-run.py",
+    "source_owners_created": 0,
+    "status": "ready_at_keyless_preflight",
+    "with_future_keyed_review": 78
+  },
+  "refresh": {
+    "required_live_helpers_match_ci_commit": 44,
+    "old_helper_difference": "gateway.py and trial_fence.py gained sealed transfer support; this standalone source scope does not enter those trial contracts.",
+    "old_source_map_preserved": 169,
+    "new_source_map": 170,
+    "bundle_files": 43,
+    "same_comparison_key": "c0c9dd9ec6330af3840a79517192509c901560e323c09b48979a2c885056d829",
+    "same_tasks": [
+      "curated-0",
+      "curated-47",
+      "curated-97"
+    ],
+    "same_experiment_and_official_instrument": true,
+    "original_independent_reviews_retained": true,
+    "new_independent_fresh_context_review_claimed": false,
+    "bootstrap": "Full pinned trusted-helper module loaded normally with guarded main inactive; no selected/generated source or AST-extracted helper execution."
+  },
+  "limits": [
+    "Preparation does not close SRC02/03 or establish score improvement.",
+    "The111input bound remains conditional on the existing declared-flow method andK=0, not an observed29-owner census.",
+    "The actual keyed account review and study owners are created by the user local launch.",
+    "Original protocol/criteria/intent, old bundles/maps and unfunded drafts remain unchanged."
+  ],
+  "evidence": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-current-live-funded-handoff-v1.json",
+      "sha256": "60041efde1b980459d506cf4a6560e9fb2c1b983f4eed7f36e637d443eeda498"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-current-live-funded-check-v1.json",
+      "sha256": "ea887244502c156609fa9e090b84d14f4ecf15ab23940fd4526193d249285fb9"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-current-live-build-v3.json",
+      "sha256": "05155105965c16b810ad6be6ed554396ef9fc08323f3873e92d8508980792f67"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\current-live-build-v3-sources.json",
+      "sha256": "8de0719298fa944327f7a1591fda3cde8064d2c7bffcc30e92e350e5e28506eb"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-current-live-build-v3-saved-check-v1.json",
+      "sha256": "b249ffde3c079c5fec471dfe4d73bf8b29f769c09150d2fd2b7e2ee631c63fbd"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-current-live-build-v3-ci-source-join-v1.json",
+      "sha256": "7fca71f2d714763edcbcfcbd73f42b1e657f8b358988f3da28f0b2b9b524078b"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-current-final-public-price-check-v1.json",
+      "sha256": "6845232018ceb898609083b3cb89db1d8fd1459ad792605877eda42196d497d4"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-current-vendor-price-review-v4.json",
+      "sha256": "fbee94b0cc3fc577768e126b56e0cdb9e370d6a428c9f87af51b29c621eed755"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-current-price-request-surface-check-v2.json",
+      "sha256": "6a3a3512cb06930a9158c43c5cab77f364d96b1918094c040042fedc29b19e64"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-current-live-runtime-readiness-v1.json",
+      "sha256": "954dd5160ffe8789d10f388102012943d354c0e0e0e12835665d11e130cc2644"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-actual-live-prepare-v3.py",
+      "sha256": "d3761f0c882992ea6b4355e9916b79dae84caad1e8c19e97d424403be0fec090"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-actual-live-prepare-v3-bootstrap-review.json",
+      "sha256": "c4e875a696d7f289902b0d1c3eb36da104dda4d49d4e9e47048a59a073d60e10"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-handoff-keyless-review-v1.json",
+      "sha256": "7707956696755775fcc0e8dcf8ce8288252ed88b202edb8ce2a65a7b68b6ec32"
+    }
+  ]
+}

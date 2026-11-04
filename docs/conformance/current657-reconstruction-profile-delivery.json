@@ -1,0 +1,178 @@
+{
+  "basis_head": "175bf3dfa70bd269ca100215c260a954672e2e62",
+  "date": "2026-10-30",
+  "evidence": {
+    "ROOT-preexecution-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\current657-reconstruction-profile-20261030-v1\\ROOT-preexecution-v1.json",
+      "sha256": "63928c348179318c51a3cf6cce145968449cde05fb1445a0454a4d0560294299"
+    },
+    "current657-profile-result-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\current657-reconstruction-profile-20261030-v1\\current657-profile-result-v1.json",
+      "sha256": "a2d1c4033f04c0c2b6a202c0b8d1ec94b90e317f2c403383cfcbbe37c04f6559"
+    },
+    "current657-public-profile-v1.pstats": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\current657-reconstruction-profile-20261030-v1\\current657-public-profile-v1.pstats",
+      "sha256": "540db9e15c591b5398607067918802f6906284bfff6d6fb87837c108cc0b9a9b"
+    },
+    "deadline-partial-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\current657-reconstruction-profile-20261030-v1\\deadline-partial-v1.json",
+      "sha256": "22bb794ac787ebe28733afb7f6e8bd2302868e310905595ba0f98eb3bdc283d5"
+    },
+    "memory-probe-parent-result-v4.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\current657-reconstruction-profile-20261030-v1\\memory-probe-parent-result-v4.json",
+      "sha256": "039dca5931095954a088304a02d31fada13dec99c7350a92189f3190fa4e1d2c"
+    },
+    "parent-result-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\current657-reconstruction-profile-20261030-v1\\parent-result-v1.json",
+      "sha256": "d236b59f74e48e9cdb4ed57b2fd53c03a9d25660e9907dc8d100124edcc1eb03"
+    },
+    "probe-memory-boundary-DRAFT-v4.py": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\current657-reconstruction-profile-20261030-v1\\probe-memory-boundary-DRAFT-v4.py",
+      "sha256": "1ef2313de19caf0df200d19c730beeb77f85f6ee89bd7e489da3845b94102858"
+    },
+    "profile-current657-DRAFT-v1.py": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\current657-reconstruction-profile-20261030-v1\\profile-current657-DRAFT-v1.py",
+      "sha256": "1990080fa948a5d037f6a40494bde18167902dabda10e4cbb803e5ba44a9bc7b"
+    },
+    "run-profile-parent-DRAFT-v1.py": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\current657-reconstruction-profile-20261030-v1\\run-profile-parent-DRAFT-v1.py",
+      "sha256": "966e046b60f193974d16cbba7a4b7132f2f0609225e88140b27a9efae0fd8255"
+    },
+    "supplied-memory-boundary-result-v4.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\current657-reconstruction-profile-20261030-v1\\supplied-memory-boundary-result-v4.json",
+      "sha256": "340c1ea800f493cfe5d1e7a95cdbcb7723e578bd96975aa8663f55b0726b337a"
+    }
+  },
+  "executing_source_head": "c54819f8516cb6b50c1040d7f500c9ef12593f8b",
+  "format": "buddha.current657-reconstruction-profile-delivery.v1",
+  "independent_review": {
+    "limits": "No original images/source reopened, no rerun or pstats deserialization by reviewer. Full reconstruction, compatibility, cleanup and live clearance are not certified.",
+    "record": "Named review retained in parent chat; no separate review artifact exists.",
+    "reviewer": "executor_failure_contract",
+    "status": "PASS_saved_partial_evidence_scope"
+  },
+  "limitations": [
+    "One interrupted, instrumented prefix is not a whole-history runtime bound or a controlled before/after speed comparison.",
+    "Cumulative profile rows overlap and can exceed observation wall time; do not add them or infer a wall-time decomposition.",
+    "Returned-byte/read counts are repeated application work, not unique disk data or physical transfers.",
+    "Successful inner capture finishes do not establish the interrupted whole capture finish.",
+    "Named pin/hash rechecks are not an atomic filesystem snapshot or an adversarial change-and-restore guarantee.",
+    "The observer guards trusted pinned code; it is not an operating-system sandbox.",
+    "No task-score improvement, source adoption, budget allocation, third-profile compatibility or live continuation is established."
+  ],
+  "live_execution_cleared": false,
+  "next": "Trace repeated task-population processing, implement the smallest proved correct reduction while preserving strict constructors and fresh evidence checks, then verify retained-profile compatibility and CI before any live command.",
+  "observed_prefix": {
+    "cpu_seconds": 279.765625,
+    "deserialized_query_only_connections": 1985,
+    "memory_sql_connections": 1987,
+    "metadata_function_calls": 1666495,
+    "parent_seconds": 305.304399,
+    "population_completed": 1666,
+    "population_started": 1667,
+    "primitive_work_counts": {
+      "capture_constructions_completed": 93,
+      "capture_constructions_started": 93,
+      "capture_finishes_completed": 186,
+      "capture_finishes_started": 186,
+      "capture_reads_completed": 16729,
+      "capture_reads_started": 16729,
+      "capture_returned_bytes": 9265872222,
+      "constructor_returned_entries": 13705,
+      "constructor_walks_completed": 26,
+      "constructor_walks_started": 26,
+      "finish_returned_entries": 18734,
+      "finish_walks_completed": 186,
+      "finish_walks_started": 186,
+      "native_owner_parses_completed": 390,
+      "native_owner_parses_started": 390,
+      "owner_requests_completed": 1300,
+      "owner_requests_started": 1300,
+      "population_constructions_completed": 1666,
+      "population_constructions_started": 1667,
+      "study_restorations_started": 1,
+      "whole_checked_state_started": 1
+    },
+    "profile_seconds": 300.142179,
+    "unique_completed_capture_read_paths": 2462
+  },
+  "preservation": {
+    "authority_snapshot_hashes": {
+      "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-unified-comparison-20261026-v2\\NOT-CREATED-plain-authorization.sqlite3": "a707035e4005323cf80b62515fa8c5ad38a8b407d635b78589f80e7967ac9f55",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-unified-live-20261026-v1\\authorization-final.sqlite3": "0c1bae2a7b12d7e653c707f01b22940283aa5ea481e1c08c7a4c6dfe82031673",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-unified-live-20261026-v1\\authorization-search.sqlite3": "9bdc6e040b548c1997faec81b796fea1be8b6000678954dc1ed4163a5c972b3a",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-unified-live-20261026-v1\\authorization-validation.sqlite3": "5031a6bf841b0157a7bc1b7f197b3318251194bf71c9406929741ef04e2d5eff"
+    },
+    "containers": 0,
+    "direct_original_sqlite_connections": 0,
+    "grants_and_scientific_settings_changed": false,
+    "model_api_calls": 0,
+    "named_checks_after": true,
+    "original_executing_source_mutated": false,
+    "original_writes": 0,
+    "persistent_raw_cache": false,
+    "selected_program_ast_or_host_execution": 0
+  },
+  "reason": "300-second observation deadline",
+  "scope": {
+    "context_limit": "These contexts come from the prior registry census; the interrupted profile does not independently reconstruct all current history.",
+    "current_registry_context": {
+      "operations": 657,
+      "owners": 193,
+      "reserved_microusd": 0,
+      "spent_microusd": 5523144
+    },
+    "first_study_restore_completed": false,
+    "four_authority_hashes_before_after_equal": true,
+    "full_capture_finish_established": false,
+    "guard_attempts": [],
+    "named_input_pins_after": 7,
+    "named_source_pins_after": 98,
+    "old_prefix_context": {
+      "operations": 604,
+      "owners": 174,
+      "spent_microusd": 4845090
+    },
+    "whole_check_returned": false,
+    "whole_checked_state_calls_started": 1
+  },
+  "spec": [
+    "DESIGN9",
+    "ENG-OBS-01"
+  ],
+  "status": "partial_deadline_saved_and_independently_reviewed",
+  "supplied_boundary_probe": {
+    "checks_passed": 44,
+    "earlier_observations": {
+      "2": {
+        "parent": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\current657-reconstruction-profile-20261030-v1\\memory-probe-parent-result-v2.json",
+          "sha256": "2db6a403e7c04c6de52332f5f0fe29b2aaeba8df8f82228193fc7896d002960f"
+        },
+        "stdout": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\current657-reconstruction-profile-20261030-v1\\memory-probe-parent-stdout-v2.bin",
+          "sha256": "b0599ee417fef1ad7f6f44ef97b764ff552b5f13da827f247116351e55c1db35"
+        }
+      },
+      "3": {
+        "parent": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\current657-reconstruction-profile-20261030-v1\\memory-probe-parent-result-v3.json",
+          "sha256": "80b2bfcbc9fb96673d5cc672d7a954b34f6cb647f3b04bb3d23ef3c36e934f57"
+        },
+        "stdout": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\current657-reconstruction-profile-20261030-v1\\memory-probe-parent-stdout-v3.bin",
+          "sha256": "498aae49a85ceda773214ca3dbbb99f5914a7690a26cc43873a6ea099d54264a"
+        }
+      }
+    },
+    "fixture_cause": "SQLite serialize uses PRAGMA page_count; the guard intentionally does not admit it, and the actual application has no serialize call. Supplied image construction moved before guard installation; all original guards remain.",
+    "history": "V1 unexecuted; v2 generic failure retained; v3 typed serialize failure after 15 successful checks; v4 supplied image setup corrected without changing the actual reader guard.",
+    "native_connections_memory_only": 7,
+    "primary_sources": [
+      "https://raw.githubusercontent.com/sqlite/sqlite/version-3.50.4/src/memdb.c",
+      "https://raw.githubusercontent.com/python/cpython/v3.13.12/Modules/_sqlite/connection.c"
+    ],
+    "scope": "All six constructor aliases, factory overrides, trusted blank-RAM DDL, mandatory image readonly rules despite caller policies, attach/extension/unsafe-pragma refusals, failed-load latch and SQL deadline interruption.",
+    "version": 4
+  }
+}

@@ -1,0 +1,145 @@
+{
+  "applicable_runtime_ci": {
+    "head": "6e10b0077eadfdf23555e7f7ff2b5da152f5b856",
+    "linux": "success",
+    "pr": 66,
+    "run": 39856060196,
+    "same_frozen_launcher_sources": true,
+    "windows": "success"
+  },
+  "approval_provenance": {
+    "question_call": "call_1c2b898e38984ff8834595ef8a67d075",
+    "scope": "three development tasks, three model-authored Python proposal iterations; unchanged NoveltyBench1.1; combined OpenAI/Anthropic",
+    "user_reply": "Approve $25 / 512 attempts; partial results allowed"
+  },
+  "approval_sha256": "12af31b063a28f18f704ab71ffac485a5fdf40fade05a4427a0785776a37b754",
+  "authorization": {
+    "authorization_id": "a165a7718a064e2489afafa15dfe0e40",
+    "available_microusd": 25000000,
+    "budget_microusd": 25000000,
+    "committed_microusd": 0,
+    "event_count": 1,
+    "max_calls": 512,
+    "operation_count": 0,
+    "remaining_calls": 512,
+    "reserved_microusd": 0,
+    "runs": [],
+    "scope": "source screen: 2cb0e12ed2200e9a02ce99b017cf929d6b0e62f6191e327e2fd10a5f5e9a2df5",
+    "spent_microusd": 0,
+    "terms_sha256": "481c419e35be959288b52e51ed5040e0ee176d6717e8008799d4213e44bae9a8"
+  },
+  "base_commit": "d3a91355a639cbb11c28b01b7badc859875c76b0",
+  "command_guide_sha256": "bdbf30bc2ca9cc79bda6bc69d2edc1e79eba2f9bbc32f55be7127b9a5390a1fe",
+  "date": "2026-10-22",
+  "evidence_sha256": {
+    "preparation.json": "eb8e923c8ddc9b99dc11d79e1bca090f2b034988315d82504314e71e6357e1a8",
+    "prepared-check.json": "42ee28cee1f538de870c1ed09eaf208003129a3122a3a0205157c102e1997e2b",
+    "source-first-live-guide-independent-review-v1.json": "ca04a542f82a954566de9c4e633e1d453f3315cf6ba862309fe11d5721cfae5c",
+    "source-funded-handoff-independent-review-v1.json": "3cba93337023a430b63adbf3ea6d5e792509c5f553881ebbcbd2f55f5c492ef4"
+  },
+  "first_receipt": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-handoff-v1\\invocations\\launch-1.json",
+  "format": "buddha.src02-funded-handoff-delivery.v1",
+  "independent_check": {
+    "account_review_absent": true,
+    "all_pins_unchanged": true,
+    "approval_sha256": "12af31b063a28f18f704ab71ffac485a5fdf40fade05a4427a0785776a37b754",
+    "attempt_count": 0,
+    "denied_events": [],
+    "elapsed_seconds": 2.52889930002857,
+    "environment_policy": "Non-SAFE_OS names deleted without reading or copying values before framework import; provider key lookups and all active entry points denied.",
+    "format": "buddha.src02-funded-handoff-independent-review.v1",
+    "funding": {
+      "authorization_id": "a165a7718a064e2489afafa15dfe0e40",
+      "budget_microusd": 25000000,
+      "committed_microusd": 0,
+      "currency": "USD",
+      "max_calls": 512,
+      "operation_count": 0,
+      "reserved_microusd": 0,
+      "scope": "source screen: 2cb0e12ed2200e9a02ce99b017cf929d6b0e62f6191e327e2fd10a5f5e9a2df5",
+      "singleton": 1,
+      "spent_microusd": 0,
+      "terms_sha256": "481c419e35be959288b52e51ed5040e0ee176d6717e8008799d4213e44bae9a8"
+    },
+    "guard_observations": {
+      "active_calls": 0,
+      "key_lookups": 0,
+      "memory_sql_connections": 3
+    },
+    "handoff_bytes_unchanged": true,
+    "helper_sha256": "8502f0c96dd24da5ce77b052e522306bccc10fcb263d1dec030617869bf6aa42",
+    "initial_invocation_control_count": 67,
+    "intended_invocation_receipt": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-handoff-v1\\invocations\\launch-1.json",
+    "invocation_receipt_absent": true,
+    "launch": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-handoff-v1\\launch.json",
+      "sha256": "ceb9ea34b3cf5ece43ba2add281e08b2571da594f37dea6427e3847cb69f139b"
+    },
+    "launcher_pins": 42,
+    "limits": "Read-only local custody/funding consistency, not provider authentication, live cost/context capacity, source authorship, completion or scientific efficacy. Image presence is root's separate preparation observation; no Docker process was started by this reviewer.",
+    "owner_count": 0,
+    "preparation_sha256": "eb8e923c8ddc9b99dc11d79e1bca090f2b034988315d82504314e71e6357e1a8",
+    "proposal_file_count": 38,
+    "proposal_sha256": "58201cb25ae027a24549f4153fcdf2bb82cdca8783c93cc687034cd5629bffa9",
+    "proposal_tree_unchanged": true,
+    "receipt_exclusions_pass": true,
+    "scope": "Existing passive check_launch on the single new handoff; no active launch, funding creation, keys, provider calls, worker or historical paid artifact access.",
+    "search_absent": true,
+    "source_pins": 56,
+    "state": "fresh",
+    "status": "pass",
+    "stop_code": null
+  },
+  "initial_check": {
+    "account_review_created": false,
+    "images_present": {
+      "native": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+      "source": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04"
+    },
+    "initial_invocation_control_count": 67,
+    "keys_read_or_prompted": false,
+    "launcher_pins_unchanged": 42,
+    "proposal_files_unchanged": 38,
+    "real_provider_calls": 0,
+    "search_created": false,
+    "source_pins_unchanged": 56,
+    "state": "fresh",
+    "stop_code": null,
+    "workers_started": 0
+  },
+  "launch": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-handoff-v1\\launch.json",
+    "sha256": "ceb9ea34b3cf5ece43ba2add281e08b2571da594f37dea6427e3847cb69f139b"
+  },
+  "limitations": [
+    "The local keyless checks do not authenticate provider accounts or prove model access.",
+    "The hard scope applies to this dedicated local authority and documented provider bounds, not unrelated account traffic or invoice reconciliation.",
+    "No paid run, model-authored descendant, mutation competence, source efficacy, held-out improvement or improved-improver claim.",
+    "Operational completion can contain rejected proposals; partial results retain exact reason/stage.",
+    "No unrelated EVAL CI or new account-setting decision is a source-launch prerequisite.",
+    "Source code/proposal/launch remain frozen while the operator uses this handoff; new development uses another worktree."
+  ],
+  "operator_guide_review": {
+    "executed_command": false,
+    "expected_command_tokens": 11,
+    "powershell_parse_errors": 0,
+    "review_sha256": "ca04a542f82a954566de9c4e633e1d453f3315cf6ba862309fe11d5721cfae5c",
+    "status": "pass"
+  },
+  "preservation": {
+    "frozen_protocol_and_56_source_pins_unchanged": true,
+    "old_authorizations_or_paid_artifacts_modified": false,
+    "original_src02_eval01_acceptance_tails_exact": true,
+    "primary_executable_or_cached_policy_runtime_modified": false,
+    "prior_plan_rows_byte_exact": 69
+  },
+  "proposal": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-proposal-v3\\proposal.json",
+    "sha256": "58201cb25ae027a24549f4153fcdf2bb82cdca8783c93cc687034cd5629bffa9"
+  },
+  "review_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-handoff-v1\\account-review.json",
+  "runtime_directory": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-full-rehearsal",
+  "runtime_head": "d4b548292b202ac20bad61d5476d5dacf8e938b0",
+  "scope": "First explicitly approved model-authored source experiment handoff; no paid execution by preparation",
+  "search_directory": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-first-source-20261022-live-v1"
+}

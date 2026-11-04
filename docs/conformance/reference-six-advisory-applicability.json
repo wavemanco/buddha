@@ -1,0 +1,305 @@
+{
+  "format": "buddha.reference-six-advisory-applicability.v1",
+  "recorded_utc": "2026-10-25T16:09:17.302103+00:00",
+  "plan_item": "ENG-REF-DEPS-01",
+  "plan_revision": 153,
+  "base_head": "3d53e8d2e53fd2bf1507f00abd08097167755cfa",
+  "status": "six_ID_source_review_complete_maintenance_open_host_TLS_unknown",
+  "scope": "Only six GHSA IDs absent from one retained 2026-10-20 advisory snapshot; absence does not establish publication date, novelty or exploitability. No reconciliation of the other 61 native GHSA IDs / all 134 frozen-manifest alert rows.",
+  "official_commit": "64a23be6b18ec1dacc298830aab276061b6e143c",
+  "permitted_route": "Confined fixed official NoveltyBench 1.1 CPU LLM partition, official LLM scoring/fallback and summary; task/answer text remains data. Not arbitrary evolved-agent execution, neural alternatives or package installation.",
+  "runtime": {
+    "image_id": "sha256:969cbc318ec2d05502665b8ef2b4020307e4335b75e5d17584910aa51e31bf83",
+    "os": "linux",
+    "architecture": "amd64",
+    "installed_manifest": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3b-runtime-installed.json",
+      "sha256": "b6b8ab4d349926577905b95b0784c622d6e443f34ea2b73625e09e72b497cf4b"
+    },
+    "environment": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-proposal-20261025-v3\\components\\native-environment\\environment.json",
+      "sha256": "90e905e2fc381e62adc0553a8e195b7d120886fa597743297e5032dbbfd0eedf"
+    },
+    "provenance_limit": "Existing retained build/import/installed evidence rehashed; no fresh image inspection or container execution."
+  },
+  "counts": {
+    "ghsa_reviewed": 6,
+    "outside_cpu_affected_version_range": 2,
+    "affected_version_with_source_route_prerequisites_absent": 3,
+    "affected_version_with_worker_path_bypassed_but_host_tls_unknown": 1,
+    "demonstrated_exploits": 0
+  },
+  "advisories": [
+    {
+      "ghsa_id": "GHSA-5p39-cfhj-2xmp",
+      "package": "anyio",
+      "installed_cpu_version": "4.14.2",
+      "primary_advisory": "https://github.com/agronholm/anyio/security/advisories/GHSA-5p39-cfhj-2xmp",
+      "status": "outside_affected_version_range",
+      "trigger": "AnyIO process pool executes code producing enough stderr to fill its undrained pipe.",
+      "route": "Pinned AnyIO 4.14.2 equals the first patched release; process-pool trigger therefore need not be disproved for this version conclusion.",
+      "import_status": "Not freshly observed; distribution installation is independently retained.",
+      "unknown": "No proof about arbitrary older AnyIO environments.",
+      "demonstrated_exploit": false,
+      "retained_global_alert_affected_range": "< 4.14.2",
+      "retained_global_alert_first_patched_version": "4.14.2"
+    },
+    {
+      "ghsa_id": "GHSA-82r6-8w77-94w6",
+      "package": "anyio",
+      "installed_cpu_version": "4.14.2",
+      "primary_advisory": "https://github.com/agronholm/anyio/security/advisories/GHSA-82r6-8w77-94w6",
+      "status": "outside_affected_version_range",
+      "trigger": "AnyIO connect_tcp/TLSStream.wrap handles a non-ASCII hostname, with an attacker able to redirect the connection and provide a certificate valid for the differently encoded name.",
+      "route": "Pinned AnyIO 4.14.2 equals the first patched release. The configured provider endpoints are additionally fixed ASCII hostnames; that is secondary source evidence, not the basis of the fixed-version result.",
+      "import_status": "Not freshly observed; distribution installation is independently retained.",
+      "unknown": "No proof about arbitrary older AnyIO environments or different endpoint configurations.",
+      "demonstrated_exploit": false,
+      "retained_global_alert_affected_range": "< 4.14.2",
+      "retained_global_alert_first_patched_version": "4.14.2"
+    },
+    {
+      "ghsa_id": "GHSA-6hm5-jgcp-p838",
+      "package": "nltk",
+      "installed_cpu_version": "3.9.1",
+      "primary_advisory": "https://github.com/nltk/nltk/security/advisories/GHSA-6hm5-jgcp-p838",
+      "status": "affected_installed_version_trigger_not_in_permitted_route_source",
+      "trigger": "Attacker-controlled fileids reach NKJPCorpusReader header/raw/words/sents/tagged_words and escape the corpus root.",
+      "route": "NLTK 3.9.1 contains the NKJP reader methods. The selected official LLM partition and LLM scoring route pass task/answer text to judge templates, not corpus-reader fileids. Official partition imports ROUGE; ROUGE imports NLTK eagerly, so import cannot be described as absent. The default RougeScorer uses rouge1 and use_stemmer=False; the selected LLM dispatch does not invoke the alternative ROUGE partition helper.",
+      "import_status": "Import is required by inspected official/ROUGE source and covered by retained complete-module import evidence; no new dynamic observation.",
+      "unknown": "Source-level route applicability only. This is not an exploit probe or a claim that all NLTK paths, imports, unsupported algorithms or later capability changes are safe.",
+      "demonstrated_exploit": false,
+      "retained_global_alert_affected_range": "<= 3.9.4",
+      "retained_global_alert_first_patched_version": "3.10.0"
+    },
+    {
+      "ghsa_id": "GHSA-p4gq-832x-fm9v",
+      "package": "nltk",
+      "installed_cpu_version": "3.9.1",
+      "primary_advisory": "https://github.com/nltk/nltk/security/advisories/GHSA-p4gq-832x-fm9v",
+      "status": "affected_installed_version_trigger_not_in_permitted_route_source",
+      "trigger": "An attacker-influenced resource URL reaches nltk.data.load/find, with encoded traversal decoded after path checks and used for a local file open.",
+      "route": "The retained NLTK 3.9.1 source contains the resource loader and URL-to-path behavior. The fixed LLM partition/scoring call path does not pass task/answer strings to NLTK load/find or request NLTK corpora/downloads. NLTK import alone is insufficient to trigger this advisory.",
+      "import_status": "Same real eager import boundary as the NKJP row; no new dynamic observation.",
+      "unknown": "The advisory references later pathsec behavior; this review retains the maintainer affected-version range without asserting every later-described security API exists in 3.9.1. No whole-library exploitability clearance.",
+      "demonstrated_exploit": false,
+      "retained_global_alert_affected_range": "<= 3.9.4",
+      "retained_global_alert_first_patched_version": "3.10.0"
+    },
+    {
+      "ghsa_id": "GHSA-6q48-6c7w-9gw2",
+      "package": "certifi",
+      "installed_cpu_version": "2025.8.3",
+      "primary_advisory": "https://github.com/certifi/python-certifi/security/advisories/GHSA-6q48-6c7w-9gw2",
+      "status": "affected_installed_version_worker_ca_path_bypassed_host_trust_unknown",
+      "trigger": "A TLS verifier trusts an affected emSign root chain; an on-path attacker possesses a compromised eMudhra intermediate key and presents a forged certificate.",
+      "route": "Worker SDK constructors are replaced with an httpx AsyncClient using make_transport and trust_env=False. That custom transport exchanges bounded request descriptions with the host instead of performing provider TLS. The host RawHTTPTransport creates stdlib http.client.HTTPSConnection; inspected source does not load the worker Certifi bundle into that connection. Therefore installation of this CPU Certifi version does not show that its CA bundle verifies actual provider traffic.",
+      "import_status": "Installed affected version is proven by retained manifest. Import and trust-store use were not freshly observed.",
+      "unknown": "Host default trust-store contents, SSL environment/configuration and whether the same emSign trust chain remains accepted by host TLS are unassessed. Overall TLS applicability remains unknown; do not mark this advisory globally cleared.",
+      "demonstrated_exploit": false,
+      "retained_global_alert_affected_range": ">= 2019.03.09, < 2026.10.19",
+      "retained_global_alert_first_patched_version": "2026.10.19"
+    },
+    {
+      "ghsa_id": "GHSA-xmj3-9gf7-h52w",
+      "package": "setuptools",
+      "installed_cpu_version": "79.0.1",
+      "primary_advisory": "https://github.com/pypa/setuptools/security/advisories/GHSA-xmj3-9gf7-h52w",
+      "status": "affected_installed_version_platform_and_installer_trigger_absent_for_route",
+      "trigger": "On Windows, an attacker-controlled wheel namespace_packages.txt reaches the legacy Wheel.install_as_egg conversion path with a drive-qualified namespace path, producing a fixed-content __init__.py outside the requested egg directory.",
+      "route": "Setuptools 79.0.1 contains the legacy installation functions, but the pinned evaluator runtime is Linux/amd64. The permitted route runs preinstalled official partition/scoring and does not install wheels or invoke this legacy installer. Both the advisory Windows prerequisite and installation operation are absent from this exact route.",
+      "import_status": "Installed version proven; whether Setuptools is incidentally imported is not established and is not the trigger distinction.",
+      "unknown": "No clearance for the Windows host, dependency building/installing, future arbitrary execution, or a different platform/installer route.",
+      "demonstrated_exploit": false,
+      "retained_global_alert_affected_range": ">= 38.2.2, < 84.1.0",
+      "retained_global_alert_first_patched_version": "84.1.0"
+    }
+  ],
+  "Certifi_version_provenance": {
+    "observation": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\certifi-advisory-provenance-v1.json",
+      "sha256": "c6b55a849bf2e05f02d85c2e0ae48a0e3da1f17cce0dae411bb781f89bbc4996",
+      "bytes": 1812
+    },
+    "sources": [
+      {
+        "endpoint": "advisories/GHSA-6q48-6c7w-9gw2",
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\certifi-advisory-provenance-1-raw-v1.json",
+        "sha256": "744e6f07692b60127a7de335386ad71a2b6e27a27f6879d969ec6fc81a9705b7",
+        "bytes": 2302,
+        "ghsa_id": "GHSA-6q48-6c7w-9gw2",
+        "html_url": "https://github.com/advisories/GHSA-6q48-6c7w-9gw2",
+        "vulnerabilities": [
+          {
+            "package": {
+              "ecosystem": "pip",
+              "name": "certifi"
+            },
+            "vulnerable_version_range": ">= 2019.03.09, < 2026.10.19",
+            "first_patched_version": "2026.10.19",
+            "vulnerable_functions": []
+          }
+        ]
+      },
+      {
+        "endpoint": "repos/certifi/python-certifi/security-advisories/GHSA-6q48-6c7w-9gw2",
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\certifi-advisory-provenance-2-raw-v1.json",
+        "sha256": "a91bc35bc43bb5120566330c7f7be10674289faf570e91670de559cd1fad42ce",
+        "bytes": 2205,
+        "ghsa_id": "GHSA-6q48-6c7w-9gw2",
+        "html_url": "https://github.com/certifi/python-certifi/security/advisories/GHSA-6q48-6c7w-9gw2",
+        "vulnerabilities": [
+          {
+            "package": {
+              "ecosystem": "pip",
+              "name": "certifi"
+            },
+            "vulnerable_version_range": ">=2019.03.09",
+            "patched_versions": "2026.10.18",
+            "vulnerable_functions": []
+          }
+        ]
+      }
+    ],
+    "qualification": "The original external report labels retained global-alert version fields as maintainer fields. This supplement identifies their actual provenance and preserves both sources. The maintainer page says patched2026.10.18; global metadata says2026.10.19. Installed2025.8.3 is affected under either. No package version is changed and neither source discrepancy resolves host TLS trust."
+  },
+  "source_anchors": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-proposal-20261025-v3\\components\\official\\src\\partition.py",
+      "lines": "31;232-258;287-310",
+      "finding": "Default RougeScorer construction, LLM algorithm and fixed v1.1 dispatch."
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-proposal-20261025-v3\\components\\official\\src\\score.py",
+      "lines": "145-159;199-225",
+      "finding": "Official LLM scorer selection and judge fallback."
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\dependency-alert-scope\\buddha\\native_worker.py",
+      "lines": "432-467",
+      "finding": "SDK adapter supplies placeholder key and custom no-network transport with trust_env=False."
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\dependency-alert-scope\\buddha\\native_transport.py",
+      "lines": "16-19;103-183",
+      "finding": "Fixed ASCII provider endpoint and custom request-description exchange."
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\dependency-alert-scope\\buddha\\gateway.py",
+      "lines": "885-952",
+      "finding": "Host stdlib HTTPSConnection performs physical provider TLS; no worker Certifi context is passed."
+    },
+    {
+      "archive_member": "rouge_score/rouge_scorer.py",
+      "lines": "40;58;82;140",
+      "finding": "NLTK eager import; defaults use_stemmer=False. Sentence tokenization exists in an alternative scorer branch, not selected rouge1/LLM dispatch."
+    },
+    {
+      "archive_member": "rouge_score/tokenizers.py",
+      "lines": "22;47",
+      "finding": "Porter imported; no stemmer constructed at default use_stemmer=False."
+    },
+    {
+      "archive_member": "nltk/corpus/reader/nkjp.py",
+      "lines": "105-177;256",
+      "finding": "Affected-family corpus API/source exists in retained 3.9.1 wheel; no PoC executed."
+    },
+    {
+      "archive_member": "nltk/data.py",
+      "lines": "467-535;734-836;944-967",
+      "finding": "Resource URL/path loader source retained; fixed LLM route does not supply resource names."
+    },
+    {
+      "archive_member": "setuptools/wheel.py",
+      "lines": "119-135;224-231",
+      "finding": "Legacy wheel namespace conversion source retained, not a scoring operation."
+    }
+  ],
+  "retained_source_sha256": {
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\dependency-alert-scope\\docs\\conformance\\dependency-alert-scope.json": "152692f3a446662ac4a998ce0f3e8d575cbfd8dda5ae0611116f3ed2c1fee5ab",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\dependency-alert-scope\\docs\\conformance\\nb02c3b-security-review.md": "0734d097922f13903a86d08bb8c63494256805bff85e6925bcb0680a1341d7ae",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\dependency-alert-scope\\docs\\conformance\\nb02c3b-installed-runtime-evidence.json": "3bbf9f5158065abba38977182b7f76a2818a569c73382f3bf41e94d2070e90d4",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\dependency-alert-scope\\docs\\conformance\\nb02c3b-import-evidence.json": "72814c71cc7858e9439425b6e5c537fc62067a185f4789ebd607f5316c3a9ca6",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\dependency-alert-scope\\docs\\conformance\\nb02c3b-cpu-requirements.txt": "ee91268b9adc20159fd79f8fa7f57208ff91842e706f3b21774e9c50a8f1f482",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\dependency-alert-scope\\buddha\\native_worker.py": "8fa4b85ae6e75202de4b345302cb70253b6c0c5b47f004490f8d9a09750ecaa1",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\dependency-alert-scope\\buddha\\native_transport.py": "ccd4917132939630231b8b8c69540189cd52f60951fa08d467d90b9571ccb6c0",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\dependency-alert-scope\\buddha\\gateway.py": "2d2d73d22af54a6fe4a76d5667b3dec01e7cf45d1698c86ea7f216dfbfe7b826",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-proposal-20261025-v3\\components\\official\\src\\partition.py": "263970891ff3ee1cc8df369a33beefe5cb5de618b5dd146a5234536d97954aca",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-proposal-20261025-v3\\components\\official\\src\\score.py": "418985a40e9e159cfeffe9a43ab2c727010d7a7a29407f4e14cab3c81b77cbae",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-proposal-20261025-v3\\components\\official\\src\\judge.py": "4decf04790b90a03368eb792dfe29045435914a73ab83a52185d9dd0d1613902",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-proposal-20261025-v3\\components\\official\\src\\common.py": "ba60bf0f2a409c3774d75880f305325a28ed34320610667542a4596c41f424af",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-proposal-20261025-v3\\components\\native-environment\\environment.json": "90e905e2fc381e62adc0553a8e195b7d120886fa597743297e5032dbbfd0eedf",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\nb02c3b-runtime-installed.json": "b6b8ab4d349926577905b95b0784c622d6e443f34ea2b73625e09e72b497cf4b",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\default-branch-dependabot-open-alerts-raw-v1.json": "82f5e0fba9a4379bf20e0755f40f9801b37c4fdbd05660e26399f440f8a15da1",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\default-branch-dependabot-triage-v1.json": "50b4d908c1226bb23468de8d0ea96393f1af4367d6baaaf5ecf8378e244f9cf9",
+    "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\default-branch-dependabot-documentation-scope-v1.json": "4eff74bdbfc97050eba1f08aeac157476a92675b21876a5e222ca9da56109279"
+  },
+  "archive_source_refs": [
+    {
+      "archive": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reference-linux-nb02c3b\\cpu\\derived-wheels\\rouge_score-0.1.2-py3-none-any.whl",
+        "sha256": "bab5e3cb074d16e6e0968044d54816798caee21c69c543be381166cb8092fa0e"
+      },
+      "members_sha256": {
+        "rouge_score/rouge_scorer.py": "9484c5fd05e22cd28b5053bf9de586b3620cf65b0c38052b8690badd51f31d1a",
+        "rouge_score/tokenizers.py": "2b7b9dae505ce8739064ba8e4791b871b13aa1f65bc54e25692f1a9ba8600508",
+        "rouge_score/tokenize.py": "dc91cea8f09507f744549160c458031d0956e35fa230c80d01f990eba20a7403"
+      },
+      "method": "Read source bytes only; no import, compilation, installation or execution."
+    },
+    {
+      "archive": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reference-linux-nb02c3b\\cpu\\artifacts\\nltk-3.9.1-py3-none-any.whl",
+        "sha256": "4fa26829c5b00715afe3061398a8989dc643b92ce7dd93fb4585a70930d168a1"
+      },
+      "members_sha256": {
+        "nltk/corpus/reader/nkjp.py": "d61b0be9e760fb3c358f603f7c562804214a9588f2ff99d7e01c33d552ff55ad",
+        "nltk/data.py": "d50fb0ee80ca7ea3dad01141f551a2ca133019e15f1f5a026573bfced001094c"
+      },
+      "method": "Read source bytes only; no import, compilation, installation or execution."
+    },
+    {
+      "archive": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reference-linux-nb02c3b\\cpu\\artifacts\\setuptools-79.0.1-py3-none-any.whl",
+        "sha256": "e147c0549f27767ba362f9da434eab9c5dc0045d5304feb602a0af001089fc51"
+      },
+      "members_sha256": {
+        "setuptools/wheel.py": "c6402dbe09bbb8f4f2615db3a95990d3003c90bc0ec914f625eb35cc0cb4ecab"
+      },
+      "method": "Read source bytes only; no import, compilation, installation or execution."
+    }
+  ],
+  "external_evidence": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\reference-six-advisory-route-review-v1.json",
+      "sha256": "7d64fee96d0db891b02c094ae6fa8f3c4e43e98440ac164895841fb68f5df83b",
+      "bytes": 20367
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\certifi-advisory-provenance-v1.json",
+      "sha256": "c6b55a849bf2e05f02d85c2e0ae48a0e3da1f17cce0dae411bb781f89bbc4996",
+      "bytes": 1812
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\build-reference-six-advisory-route-review-v1.py",
+      "sha256": "afea5171c7a1ae397ce08371fab5f14afb9579cfec42272706bbdc9028028d56",
+      "bytes": 13860
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\build-reference-six-advisory-route-review-v2.py",
+      "sha256": "1ea2c6cbaa8f9a24cdfa2d24ecd7215682bfe810709197351cb3519be60b1d28",
+      "bytes": 14331
+    }
+  ],
+  "limitations": [
+    "Source/data inspection only; no package import, installation, advisory scan, build, Docker/container, test, provider request, model call, GitHub API refresh or web fetch in this review.",
+    "No original paid SQLite opened; no selected P/C decoded, imported, compiled, parsed or executed; no task prompt bodies/private semantic notes read.",
+    "Installed does not mean imported; imported does not mean vulnerable API invoked; absence from this fixed source route is not a general dynamic non-reachability proof.",
+    "No original locks, application, docs, prepared bundles, evidence sources or dependency versions changed. Only fresh external review artifacts were written.",
+    "No broad clean audit, production-safety claim, demonstrated exploit, or new scientific gate. Host TLS trust uncertainty remains for exception maintenance.",
+    "The original route review used retained metadata only. Root additionally fetched public primary maintainer pages and both Certifi advisory API representations; no fresh vulnerability scan or exploit was run.",
+    "This supplement covers six advisory identities, not every current native alert. ENG-REF-DEPS-01 remains open; no blanket exception extension or live-readiness approval is issued.",
+    "Keep host trust-store applicability explicitly unassessed until its own evidence supports a conclusion. Existing package installation/import and fixed-route source evidence do not prove general non-reachability.",
+    "IMP-01 remains sole Next; IMP-01/EVAL-02 and the funding/reviewer decision are unchanged."
+  ]
+}

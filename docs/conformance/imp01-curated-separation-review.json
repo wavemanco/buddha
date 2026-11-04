@@ -1,0 +1,279 @@
+{
+  "format": "buddha.imp01-curated-separation-review.v1",
+  "date": "2026-10-25",
+  "status": "bounded_check_complete_full_process_eligibility_unknown",
+  "runtime_manifest": false,
+  "guide": "../IMPROVER-CURATED-SEPARATION.md",
+  "user_direction": "Check existing Curated reviewer-to-improver separation first; retain if defensible. Preparation only.",
+  "finding": {
+    "actual_recorded_proposal_callback_separation_supported": true,
+    "positive_reserved_task_leak_demonstrated": false,
+    "complete_historical_host_source_author_separation_established": false,
+    "original_26_full_process_eligibility": "unknown_not_attested",
+    "classification_review_is_automatic_contamination": false,
+    "remaining_gap": "Complete historical host/source-author contexts and influence of returned semantic descriptions on optimization decisions are not retained in reviewed artifacts. Missing evidence is not a positive leak finding."
+  },
+  "preparation": {
+    "literal_prompt_reviewers": 2,
+    "human_reviewers": false,
+    "prompts_each": 100,
+    "retained_original_reviews": [
+      {
+        "bytes": 52688,
+        "sha256": "f70f2173bf3400a2a27002e6868ef772bbb9879a8172d3ef5234291f87062f83",
+        "matches_published_pin": true,
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-review\\runs\\reviews\\pol02-candidate-split-selection-gateway.json"
+      },
+      {
+        "bytes": 42210,
+        "sha256": "bafda886ce046d826643fd35ad4cf473341b65702db67edc5db740382476e2c7",
+        "matches_published_pin": true,
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-review\\runs\\reviews\\pol02-curated-families-independent-d.json"
+      },
+      {
+        "bytes": 78338,
+        "sha256": "affc0a5232d0de33de7237a35f3bffa8d5bedf7213362dc312fc0fc9bc513c2a",
+        "matches_published_pin": true,
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-review\\runs\\reviews\\pol02-curated-family-proposal-gateway.json"
+      },
+      {
+        "bytes": 5760,
+        "sha256": "6ddcefff298e660c7c7e7ea950df49455f4f0d443d9bc220c110d2b99bbc929c",
+        "matches_published_pin": true,
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-review\\runs\\reviews\\pol02-custody-coarsening-mechanical-audit-gateway.json"
+      },
+      {
+        "bytes": 5192,
+        "sha256": "34b46c7975b3420e21c3a73f75f3adebad60af709c8077789b8f80d6b8c15002",
+        "matches_published_pin": true,
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-review\\runs\\reviews\\pol02-protocol-binding-review-d.md"
+      },
+      {
+        "bytes": 16205,
+        "sha256": "cc1aac7076a31148e8e05fa45083cec599da29362799feffd10ccc4250adedb3",
+        "matches_published_pin": true,
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\pol02-study-review\\runs\\reviews\\pol02-supplemental-panel-review-gateway.json"
+      }
+    ],
+    "returned_to_host": {
+      "family_review": "Family IDs and members, category/prompt-hash joins, reasons, uncertainty and substantive task-domain/constraint descriptions. Per-ID records examined contain hashes/lengths, not a literal prompt field.",
+      "host_preparation": "Candidate split, conservative coarsening and supplemental development panel use reconciled maps and supplied known outcome exposure. Records declare no new outcomes used for split/task selection.",
+      "known_influence": "Demonstrated influence on family grouping and prospective split/panel membership; no demonstrated influence on generation/improver source from these records alone."
+    },
+    "source_and_request_facts": {
+      "old_policy": "POL02 child policy exactly equals recovery-pilot decision policy34cecdbd8a9307796972dcc485641fc7021f97e8b2715a87feeb140ab54f424b. Published pilot verificationOct19 precedes recorded family reviewsOct21; chronology is documentary, not independently authenticated.",
+      "P_composition": "Read-only byte concatenation reproduces exact P:7938-byte frozen seed +two LF+5515-byte v2 fragment =13455 bytes/SHA77cfa68f6b3c6996fd503e1ce6f7a964eb57abdb8bde98f6761de5f6e298ff4f.",
+      "source_templates": "Inspected P/C request construction and current proposal instructions use parent source plus complete ordered development feedback; no review artifact is an explicit model payload field. Generic source text or missing explicit references cannot prove lack of source-author influence.",
+      "published_proposal_joins": "Published W0/C/W1 exact request/source joins identify feedback tasks curated-0,curated-47,curated-97 only, with30 full answers per proposal. This review used that retained published evidence and did not open original SQL or independently rehydrate requests.",
+      "source_author_limit": "The six reviews and source composition pins do not retain the complete host/root/source-author conversation or all out-of-band accesses; no complete no-final-influence assertion follows."
+    }
+  },
+  "runtime": {
+    "requests": [
+      {
+        "role": "W0",
+        "matches_checkpoint_and_prior_custody": true,
+        "original_checkpoint_body_sha256": "baf30ae51f658bb61a2d1b0da7638b6d507433c831ce12b7f08b3e9cf8000b19",
+        "packet_keys": [
+          "development_feedback",
+          "format",
+          "parent"
+        ],
+        "reconstructed_bytes": 26156,
+        "reconstructed_sha256": "baf30ae51f658bb61a2d1b0da7638b6d507433c831ce12b7f08b3e9cf8000b19",
+        "task_ids": [
+          "curated-0",
+          "curated-47",
+          "curated-97"
+        ]
+      },
+      {
+        "role": "C",
+        "matches_checkpoint_and_prior_custody": true,
+        "original_checkpoint_body_sha256": "baf30ae51f658bb61a2d1b0da7638b6d507433c831ce12b7f08b3e9cf8000b19",
+        "packet_keys": [
+          "development_feedback",
+          "format",
+          "parent"
+        ],
+        "reconstructed_bytes": 26156,
+        "reconstructed_sha256": "baf30ae51f658bb61a2d1b0da7638b6d507433c831ce12b7f08b3e9cf8000b19",
+        "task_ids": [
+          "curated-0",
+          "curated-47",
+          "curated-97"
+        ]
+      },
+      {
+        "role": "W1",
+        "matches_checkpoint_and_prior_custody": true,
+        "original_checkpoint_body_sha256": "ed24988ad2f6a43978628e3ba0ad9f7655a6a054d8b17f8dd49fb3b2ec762172",
+        "packet_keys": [
+          "development_feedback",
+          "format",
+          "measurement_index",
+          "parent"
+        ],
+        "reconstructed_bytes": 24000,
+        "reconstructed_sha256": "ed24988ad2f6a43978628e3ba0ad9f7655a6a054d8b17f8dd49fb3b2ec762172",
+        "task_ids": [
+          "curated-0",
+          "curated-47",
+          "curated-97"
+        ]
+      }
+    ],
+    "host_task_count": 100,
+    "reserved_final_count": 26,
+    "mounted_directories": [
+      "/agent",
+      "/runner"
+    ],
+    "distinct_mounted_files": 7,
+    "host_controls_are_not_worker_mounts": true,
+    "measurement_method": "Read-only literal JSON reconstruction matches prior raw-request checkpoint and custody hashes. No new SQL/raw-stdin/raw-request replay or selected-source execution.",
+    "limits": [
+      "Raw provider request bodies were not reread from SQLite. Independent JSON reconstruction from literal prompt/config/parent/full feedback exactly matches original hash-bound capacity checkpoints and the prior custody export.",
+      "No raw worker-stdin capture is present. Original session feedback/config/descriptor hashes and pinned runner construction support the bounded worker-input relationship; this is not a literal raw-stdin replay.",
+      "Full host TaskSet and split controls contain all 100 tasks and 26 final IDs. Those provenance/control files are not the mounted agent inputs or serialized feedback. Host possession must not be equated with improver-channel exposure.",
+      "No literal reserved ID/full-prompt hit or reserved-task outcome record occurs in these reconstructed callbacks or selected mounted files. This does not detect paraphrases, encoded covert channels, unrecorded earlier transmissions, historical tuning or foundation-model training exposure.",
+      "Complete historical original source-author/root contexts and prior reviewer-to-optimizer information flows are outside this runtime proof. No globally unseen population, full-process held-out eligibility, causal effectiveness or independence is attested."
+    ]
+  },
+  "known_exposure_scope": {
+    "principal_outcome_ids": [
+      "curated-0",
+      "curated-15",
+      "curated-20",
+      "curated-26",
+      "curated-30",
+      "curated-33",
+      "curated-47",
+      "curated-48",
+      "curated-50",
+      "curated-65",
+      "curated-71",
+      "curated-86",
+      "curated-97"
+    ],
+    "family_closure_ids": [
+      "curated-0",
+      "curated-1",
+      "curated-15",
+      "curated-20",
+      "curated-26",
+      "curated-30",
+      "curated-31",
+      "curated-33",
+      "curated-47",
+      "curated-48",
+      "curated-49",
+      "curated-50",
+      "curated-61",
+      "curated-65",
+      "curated-71",
+      "curated-86",
+      "curated-94",
+      "curated-95",
+      "curated-96",
+      "curated-97",
+      "curated-98",
+      "curated-99"
+    ],
+    "original_final_ids": [
+      "curated-11",
+      "curated-12",
+      "curated-14",
+      "curated-2",
+      "curated-25",
+      "curated-27",
+      "curated-29",
+      "curated-37",
+      "curated-40",
+      "curated-52",
+      "curated-53",
+      "curated-55",
+      "curated-56",
+      "curated-6",
+      "curated-63",
+      "curated-66",
+      "curated-69",
+      "curated-72",
+      "curated-74",
+      "curated-80",
+      "curated-81",
+      "curated-87",
+      "curated-88",
+      "curated-89",
+      "curated-90",
+      "curated-93"
+    ],
+    "final_disjoint_from_principal_family_closure": true,
+    "basis": "Original source-review given IDs plus the twelve POL02 selected/measured prompts and original family map. Not an exhaustive historical/debug exposure inventory."
+  },
+  "contract": {
+    "design_section": "DESIGN.md section7",
+    "trusted_host_complete_source_access_allowed": true,
+    "source_author_optimization_decisions_in_scope": true,
+    "unknown_selected_final_members_still_rejected": true,
+    "worker_only_process_renaming_establishes_full_eligibility": false,
+    "public_model_training_exposure": "unknown"
+  },
+  "followup": {
+    "recommended": "Prospective preparation of entirely official WildChat development/final population, with checked exposure and preparation-to-optimization separation. Not presumed unseen and not selected here.",
+    "alternative": "Explicitly qualified Curated development measurements. Do not bypass protected assessment eligibility or claim the original IMP-01 sealed-task effectiveness gate is complete.",
+    "user_choice_pending": true,
+    "new_population_or_split_adopted": false,
+    "user_historical_attestation_requested": false,
+    "further_absence_search_prescribed": false
+  },
+  "evidence": {
+    "preparation_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\curated-separation-preparation-flow-facts-v1.json",
+      "sha256": "0bedcbff17bc728a660f98bfcb00c30ed0578b5ad9a1448734f75231abbf0a64",
+      "bytes": 9952
+    },
+    "runtime_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\curated-current-source-channel-boundary-v1.json",
+      "sha256": "32bef4bf9eddb38a5c01a9fd1926db7958fa08ba3ced4a9a279132f11c1561d0",
+      "bytes": 33191
+    },
+    "original_inventory": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\src02-current-live-passive-verification-v2.json",
+      "sha256": "a00f60b16894b5ac725564e920ef0f27cc9f6f9ffdf3d2600f32a2888f674017",
+      "bytes": 96208
+    },
+    "editing_baseline": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\curated-separation-edit-baseline-v1.json",
+      "sha256": "5cd091284e7757e0ef2e83d853f051c8a15ec86ad7c95dcaece7d1af18a5a5a8",
+      "bytes": 632495
+    }
+  },
+  "validation": {
+    "six_original_review_hashes_match": true,
+    "all_referenced_fact_input_hashes_match": true,
+    "source_composition_matches": true,
+    "original_captured_files_unchanged": 451,
+    "tracked_python_files_unchanged": 288,
+    "prior_raw_plan_revision_rows_preserved": 139,
+    "original_acceptance_tails_preserved": 10,
+    "independent_contract_review": "No blockers: reviewed changed guide/proposal/feasibility/PLAN140 distinguish supported callback isolation, unknown full historical context and qualified alternatives without attestation, forced switch or guard bypass.",
+    "independent_runtime_draft_review": "No factual blocker; clarify database-byte hashing versus SQL query, and host controls versus actual mounts. Both clarifications incorporated.",
+    "application_lint_types_security_suite_rerun": false,
+    "reason": "Documentation and advisory evidence only; no tracked Python or application change. Fresh full-suite or hosted-green result is not claimed."
+  },
+  "protected_scope": {
+    "selected_source_execution": false,
+    "application_execution": false,
+    "sql_queries": 0,
+    "provider_calls": 0,
+    "real_keys_used": false,
+    "financial_owner_or_authority_created": false,
+    "new_allocation": false,
+    "new_trial_or_custody_attestation": false,
+    "official_benchmark_or_scores_changed": false,
+    "development_pr_merged": false,
+    "main_readme_changed": false,
+    "new_user_launch_command": false
+  }
+}

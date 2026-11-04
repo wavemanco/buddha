@@ -1,0 +1,192 @@
+{
+  "date": "2026-10-30",
+  "documentation_basis_head": "1a08b4b46a21749386097ea03f193c4119849f5e",
+  "earlier_attempts": {
+    "setup_stops": [
+      {
+        "parent": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\synthetic-reconstruction-profile-20261030-v1\\parent-result-v2.json",
+          "sha256": "3fad59b91696ed864cac62762eebc0cd0457e2117d2caba730564c79360b6a7c"
+        },
+        "phase": "fixture",
+        "profiled_reconstructions": 0,
+        "result": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\synthetic-reconstruction-profile-20261030-v1\\synthetic-profile-result-v2.json",
+          "sha256": "32cf798c0edce8ff0a405c4ce96d4ee569aae0e62ccfd8022c1a51ef5adaa34d"
+        },
+        "status": "stopped",
+        "version": 2
+      },
+      {
+        "parent": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\synthetic-reconstruction-profile-20261030-v1\\parent-result-v3.json",
+          "sha256": "ec99559dad9b8916d8f017fab19d1d54710640ecf9ec4c32eafed51fe92ce3c2"
+        },
+        "phase": "fixture",
+        "profiled_reconstructions": 0,
+        "result": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\synthetic-reconstruction-profile-20261030-v1\\synthetic-profile-result-v3.json",
+          "sha256": "17689e195e355a0aec65aeb631107c1ada0670c613341f66e8f40f8b57d3181b"
+        },
+        "status": "stopped",
+        "version": 3
+      },
+      {
+        "parent": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\synthetic-reconstruction-profile-20261030-v1\\parent-result-v4.json",
+          "sha256": "da1b26835f72a96e3cec020473cb18afef8708208521c5f49588e078cf95f084"
+        },
+        "phase": "fixture",
+        "profiled_reconstructions": 0,
+        "result": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\synthetic-reconstruction-profile-20261030-v1\\synthetic-profile-result-v4.json",
+          "sha256": "8d01f452f7ccd8328404b0062731d3aff44cc5423b8c266e82f950487ff68dbf"
+        },
+        "status": "stopped",
+        "version": 4
+      }
+    ],
+    "v1": {
+      "driver": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\synthetic-reconstruction-profile-20261030-v1\\profile-synthetic-DRAFT-v1.py",
+        "sha256": "cd65e0f6cf2c4d62fa07d01c280c0946019a8bcda73f78744c1815d6c9a34c2d"
+      },
+      "status": "unexecuted_draft"
+    }
+  },
+  "evidence": {
+    "driver": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\synthetic-reconstruction-profile-20261030-v1\\profile-synthetic-DRAFT-v5.py",
+      "sha256": "2a892bc6144a8d4adda31ddc99c1c406dca2a64730405cbc428c2993df34bd1a"
+    },
+    "parent": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\synthetic-reconstruction-profile-20261030-v1\\parent-result-v5.json",
+      "sha256": "f93649825c441baa1f0d4b59a481676d5a5f536cebc41beb8d2ef4997c119a9d"
+    },
+    "profile_opaque_bytes_only": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\synthetic-reconstruction-profile-20261030-v1\\synthetic-profile-v5.pstats",
+      "sha256": "2319d40cc8e67cd46ebc9ebb220a5727e494592527310c156d3f829dfd519a20"
+    },
+    "result": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\synthetic-reconstruction-profile-20261030-v1\\synthetic-profile-result-v5.json",
+      "sha256": "846844a34b22bf69df60430254954823d89dd16db021a3c3f99636f43e6db9e5"
+    },
+    "root_preexecution_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\synthetic-reconstruction-profile-20261030-v1\\ROOT-preexecution-review-v5.json",
+      "sha256": "0f84a024435b3a9f2a0d0ae938f6e1e95376140a3c90834ae73a17b4c5d88494"
+    }
+  },
+  "format": "buddha.synthetic-reconstruction-profile-observation.v1",
+  "guard_probes": {
+    "SQLite": {
+      "checks": 42,
+      "driver": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\synthetic-reconstruction-profile-20261030-v1\\probe-sqlite-guard-DRAFT-v1.py",
+        "sha256": "e23dcd0d1dbc81b90ca2aa824f0b83b6b7684432270bdf094d413e1eac63cc4e"
+      },
+      "expected_denials": 14,
+      "result": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\synthetic-reconstruction-profile-20261030-v1\\guard-probe-result-v1.json",
+        "sha256": "94fbe8da424ed7b30bc05b458bf410ac664c141796c6e8e3800782e65e82eaa0"
+      }
+    },
+    "fixture_link": {
+      "checks": 19,
+      "driver": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\synthetic-reconstruction-profile-20261030-v1\\probe-fixture-link-DRAFT-v1.py",
+        "sha256": "e20d8dd8eac472e13e4ba06d4accc4628109d082518423793438b5050b096e32"
+      },
+      "expected_denials": 10,
+      "result": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\synthetic-reconstruction-profile-20261030-v1\\link-probe-result-v1.json",
+        "sha256": "2ea8740e0d1160c2556e975a5b3ae8c079c7a8e6ee274311f8824216207321ec"
+      }
+    },
+    "scope": "Trusted pinned fixture-code guard, not an operating-system sandbox. The separate link probe exercises its extracted predicates; the full v5 fixture also completes."
+  },
+  "independent_review": {
+    "record": "Named peer review retained in the parent chat; no separate result-review artifact was written.",
+    "reviewer": "docker_stop_evidence",
+    "scope": "Exact v5/probe source review and saved-result review; no new profile run implied.",
+    "status": "PASS"
+  },
+  "limitations": [
+    "The 65-to-51 walk result confirms existing constructor sharing, not a new optimization.",
+    "One small supplied fixture does not locate a hotspot or establish a runtime limit for the actual 657-attempt history.",
+    "The original 604-attempt prefix and latest 657-attempt stop remain separately retained; no original accounting is reopened by this observation.",
+    "Container cleanup, failed endpoint, third-profile compatibility, PR190 hosted verification, scientific effectiveness and live clearance remain separate."
+  ],
+  "live_execution_cleared": false,
+  "next_action": "Bounded actual657 metadata and retained-profile compatibility investigation, with exact-source PR190 CI. Keep the live command held.",
+  "observed": {
+    "directory_walks": {
+      "shared": {
+        "constructor": 5,
+        "finish": 41,
+        "fresh_scope_exit": 5,
+        "total": 51
+      },
+      "strict": {
+        "constructor": 24,
+        "finish": 41,
+        "total": 65
+      }
+    },
+    "inventory": {
+      "bytes": 1506730,
+      "file_count": 185,
+      "inventory_sha256": "24de1de2e4d8174957e41b41f673a1054c2619a5874b705a11ad6fd625ae16b7"
+    },
+    "next_action": "prepare_proposal",
+    "same_inventory_and_supplied_activity": true,
+    "same_signature": true,
+    "same_work_each_call": {
+      "capture_constructions": 24,
+      "capture_read_calls": 1970,
+      "capture_returned_bytes": 21682686,
+      "finish_calls": 41,
+      "finish_walks": 41,
+      "native_owner_parses": 40,
+      "owner_requests": 184,
+      "population_constructions": 347,
+      "unique_capture_read_paths": 84
+    },
+    "shared_profiled_calls": 1,
+    "signature_sha256": "fc75de8bb6ae82bb641c15b65a0841454e5433d61b5c4c10049b60b907d43303",
+    "strict_unprofiled_calls": 1,
+    "supplied_HTTP_sends": 9,
+    "supplied_fixture_workers": 7,
+    "timing_scope": "Different instrumentation and cache order; overlapping cumulative profile times cannot be added or used as a speed ratio.",
+    "wall_seconds": {
+      "shared_profiled": 8.961907,
+      "strict_unprofiled": 6.184625,
+      "whole_observation": 103.714291
+    }
+  },
+  "preservation": {
+    "application_changes": 0,
+    "existing_RECONSTRUCTION_COST_bytes": "unchanged prefix; new section appended",
+    "original_acceptance_tails": 7,
+    "original_executing_checkout": "unchanged",
+    "prior_PLAN_raw_revision_rows": 199,
+    "source_scientific_grants_and_command_changes": 0
+  },
+  "source": {
+    "cut": "c54819f8516cb6b50c1040d7f500c9ef12593f8b",
+    "public_file_pins": 96,
+    "scope": "Public source and fixture-support pins bound by the saved result; no original actor/task/output content inspected."
+  },
+  "spec": [
+    "DESIGN9",
+    "ENG-OBS-01"
+  ],
+  "status": "checked_synthetic_scope_only",
+  "zero_recorded_actual_effects": {
+    "containers": 0,
+    "original_SQL_connections": 0,
+    "original_data_reads": 0,
+    "original_writes": 0,
+    "private_program_AST_or_execution": 0,
+    "provider_calls": 0
+  }
+}

@@ -8,6 +8,7 @@ import hashlib
 import re
 import sqlite3
 import stat
+from collections.abc import Mapping
 from contextlib import closing
 from pathlib import Path
 from typing import cast
@@ -49,6 +50,13 @@ def _rows(
     return [_object(row) for row in value]
 
 
+def _adopt_capture(source: _Capture, target: _Capture) -> None:
+    """Retain all consumed bytes/sidecars under the receiving aggregate limit."""
+    if type(source) is not _Capture or type(target) is not _Capture or source is target:
+        raise NativeEvidenceError("capture adoption needs two original bounded observations")
+    target.adopt(source)
+
+
 class NativeEvidence:
     """Read shared custody; callers supply checked release/template/funding.
 
@@ -72,6 +80,39 @@ class NativeEvidence:
         self.capture = _Capture(directory)
         self.owners: dict[Path, _Owner] = {}
         self.seals: dict[Path, str] = {}
+        self._retained: list[_Capture] = []
+
+    def retain_capture(self, capture: _Capture) -> None:
+        """Also preserve a sibling immutable tree's original metadata snapshot."""
+        _adopt_capture(capture, self.capture)
+        if capture not in self._retained:
+            self._retained.append(capture)
+
+    def verify_files(self, hashes: Mapping[Path, str]) -> None:
+        """Join nested evidence without narrowing an already validated file bound."""
+        if not isinstance(hashes, Mapping):
+            raise self.error_type("nested evidence needs a file-hash mapping")
+        for path, expected in hashes.items():
+            digest = _digest(expected)
+            if not isinstance(path, Path):
+                raise self.error_type("nested evidence needs explicit file Paths")
+            raw = self.capture.raw.get(path)
+            if raw is None:
+                raw = self.capture.read(path, MAX_FILE_BYTES)
+            if _sha(raw) != digest:
+                raise self.error_type("nested evidence changed during observation")
+
+    def finish(self) -> dict[str, str]:
+        result = self.capture.finish()
+        for capture in self._retained:
+            capture.finish()
+        return result
+
+    def fingerprints(self) -> dict[str, str]:
+        result = self.capture.fingerprints()
+        for capture in self._retained:
+            capture.finish()
+        return result
 
     def _rows(self, value: object) -> list[dict[str, object]]:
         return _rows(value, self.error_type)
@@ -174,6 +215,22 @@ class NativeEvidence:
         answers: Path,
         available: dict[str, Path],
     ) -> None:
+        expected = self.native_configuration(child, index, answers, available)
+        if (
+            report["descriptor_sha256"] != expected["descriptor_sha256"]
+            or report["command_sha256"] != expected["command_sha256"]
+            or _object(report["execution"])["image_id"] != expected["image_id"]
+        ):
+            raise self.error_type("native command/configuration lineage differs")
+
+    def native_configuration(
+        self,
+        child: Path,
+        index: int,
+        answers: Path,
+        available: dict[str, Path],
+    ) -> dict[str, object]:
+        """Check an original command and inputs, including an unsealed owner."""
         owner = self.owner(child / "owners" / str(index))
         descriptor = child / ("command-" + str(index) + ".json")
         raw = self.bound(owner, descriptor)
@@ -236,11 +293,13 @@ class NativeEvidence:
             or not _same(worker, expected_worker)
             or not _same(description["executor"], expected_executor)
             or not _same(description["profiles"], {} if last else native["profiles"])
-            or report["descriptor_sha256"] != _sha(raw)
-            or report["command_sha256"] != expected_command["sha256"]
-            or _object(report["execution"])["image_id"] != expected_executor["image_id"]
         ):
             raise self.error_type("native command/configuration lineage differs")
+        return {
+            "descriptor_sha256": _sha(raw),
+            "command_sha256": expected_command["sha256"],
+            "image_id": expected_executor["image_id"],
+        }
 
 
 def authority_observation(

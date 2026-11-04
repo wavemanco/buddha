@@ -1,0 +1,205 @@
+{
+  "format": "buddha.fresh-primary-preparation-delivery.v1",
+  "status": "complete_unfunded_primary_configuration_only",
+  "date": "2026-11-02",
+  "spec": [
+    "PLAN IMP-01",
+    "DESIGN sections3,5,7,9,10"
+  ],
+  "base_head": "14b79a964d3b18da537888712db1ca7b868ca4bd",
+  "scope": "One preparation recipe around existing validators; no production, benchmark, dependency or scientific-rule change. This is not a new execution platform.",
+  "driver": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\fresh-primary-preparation\\docs\\conformance\\prepare-fresh-primary.py",
+    "sha256": "a362fe4b5e2ed3d2eb44f7cfee09b04d0cc9726ac7b2c14fc542269f7770bbb2"
+  },
+  "tests": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\fresh-primary-preparation\\tests\\test_fresh_primary_preparation.py",
+    "sha256": "1fee5c6f0f6ce5e4c4b75254d1fdeedca7837e090d02154720b79d1b8bc4498f"
+  },
+  "inputs_manifest": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-primary-preparation-20261102-v1\\inputs-v3.json",
+    "sha256": "8ac7f8a57a167478c55b87df52f06353bd87705cfd7a1410d416b22226be75f6"
+  },
+  "input_scope": {
+    "current_public_python_pins": 355,
+    "named_static_files": 92,
+    "metadata_roles": 10,
+    "parsed_object_roles": 6,
+    "raw_component_copies": 15,
+    "hash_only_custody_references": 60,
+    "provenance_references": 7,
+    "original_runtime_or_database_reads_permitted": false,
+    "selected_program_decode_parse_import_compile_execute_permitted": false,
+    "fresh_custody_certified": false
+  },
+  "science_retained": {
+    "initial_source_sha256": "77cfa68f6b3c6996fd503e1ce6f7a964eb57abdb8bde98f6761de5f6e298ff4f",
+    "evolved_source_sha256": "4196cd29ffa76c6959e6f678a8286b1fde5b56e6a34a97dcf68787e1f22b3a43",
+    "development_tasks": 3,
+    "final_tasks": 26,
+    "final_families": 25,
+    "starts": 2,
+    "development_repetitions": 2,
+    "opportunities_per_arm": 2,
+    "maximum_final_cells": 312,
+    "seed": 7,
+    "benchmark": "Unchanged pinned official NoveltyBench 1.1",
+    "plain_controls": "Both retained in scientific scope; not constructed by this primary-only recipe."
+  },
+  "observations": {
+    "first": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-primary-preparation-20261102-v1\\parent-result-v1.json",
+      "sha256": "798343c244847730ca0c30a27560cb92b537900e5e9539dd7586e28049fc21fe"
+    },
+    "first_scope": "Stopped before destination creation with ReleaseError in1.480307seconds; original source/test bytes retained. A narrow panel diagnostic establishes a list-root copied leaf, and supplied regression reproduces the unsupported eager object-parser route.",
+    "panel_schema_diagnostic": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-primary-preparation-20261102-v1\\panel-schema-diagnostic-v1.json",
+      "sha256": "0a01049d40c555cb27c03d0bb2693f02f67065a1eb5bf35eafa207b8eaded8a2"
+    },
+    "regression_red": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-primary-preparation-20261102-v1\\regression-red-result-v1.json",
+      "sha256": "1251cf9ba46a2cc63d3bf48842940325e07742428c9f39a710484429b43f7c02"
+    },
+    "second": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-primary-preparation-20261102-v1\\parent-result-v2.json",
+      "sha256": "76f3ad53c0820673f5d543d12f08f10dab695c9dce4b6ec22d5366a971dec55e"
+    },
+    "second_scope": "Partial at unfunded_handoff in 7.538273 seconds; 104 indexed files plus result; named inputs/source/output preservation true and runtime absent. The preparation guard incorrectly blocked original _ref(source=False) byte verification; the underlying benchmark and scientific inputs were not changed.",
+    "partial_bundle": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-fresh-primary-20261102-v1\\preparation-result.json",
+      "sha256": "cfcb11b91b44c2fbea43a12d2a671ad1fc7b9e90b8168d70a4cff383a488ece7"
+    },
+    "synthetic": "NEW supplied8slots/312rows with known arithmetic passed before handoff rejection; no old empirical or numerical proof was read.",
+    "numeric_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-primary-preparation-20261102-v1\\numerical-observation-v1.json",
+      "sha256": "bda1c16eda1b195ea3e0d299344a10416eeded00d1a49b55b0a6369fc656e7d1"
+    },
+    "diagnostic_scope": "Diagnostic v1 stops before a complete result. V2 reaches a different public-import admission refusal. V3 matches the actual recipe public closure and isolates _custody -> _ref byte verification as the recorded opaque_metadata_route refusal. These are not three equivalent checker failures; all evidence is retained.",
+    "diagnostics": [
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-primary-preparation-20261102-v1\\diagnostic-parent-result-v1.json",
+        "sha256": "7608267dc48ba87adf89259acec61fd660034e96aa21cb43a2399780e556bf04"
+      },
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-primary-preparation-20261102-v1\\diagnostic-parent-result-v2.json",
+        "sha256": "05f380ab505a67e3e133ce1b563b967da6690c53988136956542f3bdb23463d1"
+      },
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-primary-preparation-20261102-v1\\diagnostic-parent-result-v3.json",
+        "sha256": "105b32676f1647f62b6ae578b3585f3740176fa62db01ad821051069b2bb6138"
+      },
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-primary-preparation-20261102-v1\\handoff-diagnostic-result-v2.json",
+        "sha256": "b57c070573b5006744c6933f6b739535ed48c43929c07aa94cf30f1e1fe77ef3"
+      },
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-primary-preparation-20261102-v1\\handoff-diagnostic-result-v3.json",
+        "sha256": "74bb8f0e9a60de4229e4ca9d982bad7fa754acad3de4a955442691473e5169aa"
+      }
+    ],
+    "reference_scope_regression_red": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-primary-preparation-20261102-v1\\reference-red-result-v1.json",
+      "sha256": "52e68b0afb8e1e47274775aa5d45e39e945de6818544cbb438c29d74bf5eeaad"
+    },
+    "third": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-primary-preparation-20261102-v1\\parent-result-v3.json",
+      "sha256": "af7612c3d1babeace53d7bf5466a3bccc7ff6f4e36b632405274980c00c85e7b"
+    },
+    "successful_bundle": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-fresh-primary-20261102-v2\\preparation-result.json",
+      "sha256": "fd299e4f14772281db78fdbc898aaa4f79e7858c4247ab2aca901111c4908399"
+    },
+    "configuration_check": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-fresh-primary-20261102-v2\\configuration-check.json",
+      "sha256": "0ecc10cb0750451ea9c80e0b4e34b51f66ebe4a7dd59fd2177bcdcb16e979c41"
+    },
+    "third_scope": "Complete unfunded configuration in 13.7884815 seconds under a 900-second direct-child bound; 105 indexed files plus result, 145 reviewed bindings, unchanged named input/source/output hashes, unallocated funding and no runtime. New destination v2 preserves the previous partial v1.",
+    "historical_source_limit": "Earlier observations bind their original code cuts. Changing the preparation recipe intentionally changes those public pins; executed driver/test byte copies are retained. Do not treat a later source-pin rejection of the old partial as the same original custody failure.",
+    "executed_previous_source_copies": [
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-primary-preparation-20261102-v1\\executed-driver-v1.py",
+        "sha256": "9f2e1c4741ba1fa1fc7a1952d67128db3cdf8b8072aaa8ac8ee73747f43169db"
+      },
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-primary-preparation-20261102-v1\\executed-tests-v1.py",
+        "sha256": "b2bd3bde67cdd6daaba56d0113bf03898e387dbaf5c998ab559d8cb59085ecc1"
+      },
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-primary-preparation-20261102-v1\\executed-driver-v2.py",
+        "sha256": "f231b2de8c8ae9d4b2f3fac689ee89cac36657da41c5748c2bd38a501ecede48"
+      },
+      {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-primary-preparation-20261102-v1\\executed-tests-v2.py",
+        "sha256": "2c00b5fcf6249573695c95e10f6f8bfce0a0229985f17e964fba5f5210474910"
+      }
+    ],
+    "successful_synthetic_artifact": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-fresh-primary-20261102-v2\\current-synthetic-numerical-check.json",
+      "sha256": "d7419cdd52d23910b3cbd3e8e50327e7e6ee18344c04210e2708d02e39eaf13e"
+    }
+  },
+  "verification": {
+    "supplied_green": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-primary-preparation-20261102-v1\\supplied-result-v4.json",
+      "sha256": "9f7e412a7be01d760393a4d22cb85ea0c35ca6cc8efb2e37d1fd2809633d2db5"
+    },
+    "green_scope": "8 PASS, 0 failures/errors/skips, 0.081 seconds; application modules not loaded. A supplied non-UTF8 helper canary uses stand-in original_ref/original_read callables; it checks exact byte-verification scope and refusal of direct/late/decoding/changed-pin/copied-program/foreign-thread direct-read/reused permissions. Actual original _ref semantics are separately source-reviewed and used by the successful real configuration checker.",
+    "source_manifest_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-primary-preparation-20261102-v1\\independent-reference-scope-review-v4.json",
+      "sha256": "c2bd41f02880506ec32c350b659220c04e693465a5207b1e9bacf248f8c43802"
+    },
+    "quality": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-primary-preparation-20261102-v1\\quality-result-v2.json",
+      "sha256": "91c28cc50afe0ca216f26a45bd8d19b18411990c3a446fc50ae25cb88635edc0"
+    },
+    "quality_scope": "Ruff/format and Bandit including recipe, strict types for 89 core files, both declared requirement audits, diff, 355 in-memory compiles and discovery of 2,230 occurrences pass; 355 pins unchanged. No full-suite or hosted-green claim. Dependency audits cover the declared harness/development requirements; they do not clear the archived native-reference environment (ENG-REF-DEPS-01).",
+    "census_sha256": "430502cb073d741738d1f822167f37ae04a85229a26b06053f7b8f621387dce4",
+    "quality_prior_cut": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-primary-preparation-20261102-v1\\quality-result-v1.json",
+      "sha256": "5e39dad623bdcce860024721408654e6de1269f9d9cfeed056462280aeb2d4a3"
+    },
+    "completion_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\fresh-primary-preparation-20261102-v1\\independent-completion-review-v1.json",
+      "sha256": "edfb32d62d186e6f1dd87f9dec31952bbcd3e61fd12ab339dbf55a3860bf7d8d"
+    }
+  },
+  "guards_and_limits": {
+    "actual_child_deadline_seconds": 900,
+    "automatic_retry": false,
+    "credential_environment_forwarded": false,
+    "guard_scope": "Process-local trusted recipe; not an arbitrary-program sandbox. SQL/network/process/key/authority/container paths refused; named file reads and exclusive output writes. Before/after hashes are not an atomic snapshot.",
+    "declared_zero_scope": "Recipe records no provider calls/SQL/owners/grants/runtime/approval/account reviews/live launches. These are guarded route and recorded counters, not an independent OS instrumentation census.",
+    "opaque_reference_scope": "Only original validation_study._ref with source is False may consume one exact named hash-only path/digest read in the same PID/thread. It discards raw bytes. Permission is consumed before reading and cleared finally; other metadata/decoding/copy routes stay blocked."
+  },
+  "remaining": [
+    "Prospective separation/custody and protocol adoption.",
+    "Comparable-size history gate; pending construction-time choice remains separate.",
+    "Full ordinary-v2 composition hosted pass.",
+    "Both plain controls and review configuration.",
+    "Actual outgoing requests, runtime, accounts, prices and capacity checks.",
+    "Separate allocation and checked live handoff."
+  ],
+  "original_paid_run": {
+    "status": "Preserved explicit partial; saved657completedcalls/$5.523144/zeroheld remains saved evidence, not freshly reconciled.",
+    "grants_or_outputs_transferred": false
+  },
+  "live_launch_cleared": false,
+  "scientific_improvement_claim": false,
+  "hosted_ci": "Pending for this new source/test recipe; prior application verification is separate.",
+  "preceding_ci216": {
+    "run_id": 41523387954,
+    "head": "14b79a964d3b18da537888712db1ca7b868ca4bd",
+    "snapshot": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci216-watch-20261102-v1\\snapshot-220117-v1.json",
+      "sha256": "0a40a84fa3fcca39c015fe60a3bac70552d83fe110a2a814cde577f893356ead"
+    },
+    "log_binding": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci216-watch-20261102-v1\\log-binding-220117-v1.json",
+      "sha256": "7585ff42cee8f3115f09ca4d9d15490a2fd5fa4e3017dafcf88a4b2aa035d058"
+    },
+    "ubuntu_jobs": "5 successful; shard4 logs show new v2 publication/keyless replay and method success",
+    "windows_jobs": "5 still running at snapshot; no full-run success claim",
+    "log_limit": "Decoded LF local serialization, not raw HTTP log bytes; full census not rebuilt by this snapshot.",
+    "source_scope": "Preceding controller/test source only, not hosted verification of this new recipe or new tests."
+  }
+}

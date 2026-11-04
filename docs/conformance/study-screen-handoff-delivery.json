@@ -1,0 +1,102 @@
+{
+  "format": "buddha.study-screen-handoff-delivery.v1",
+  "status": "scoped_pass_scale_open",
+  "spec": [
+    "DESIGN sections3,9,10",
+    "PLAN IMP-01",
+    "ENG-OBS-01"
+  ],
+  "base": "04402ead38031a7f92b53cdb276b9c35730af168",
+  "change": "Direct first completed screen read to immediately following witness; preserve first full collector, same sink adoption and finite census-before-offer.",
+  "verification": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\study-screen-handoff-20261031-v1\\verification-summary-v1.json",
+    "sha256": "3677e0e0b2e20f609957067896b63a085f755051cef0e8aecdb7f4c65df92a9b"
+  },
+  "independent_review": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\study-screen-handoff-20261031-v1\\source-review-v1.json",
+    "sha256": "1d0cbcedf20acbef4a1f4a9edf5be8136968a9e5ff1b4207e64beb6f5f7f73db"
+  },
+  "red": {
+    "exit_code": 1,
+    "elapsed": 22.557028000010177,
+    "command": [
+      "C:\\Program Files\\Python313\\python.exe",
+      "-B",
+      "-m",
+      "unittest",
+      "-v",
+      "test_study_screen_handoff.StudyScreenHandoffTests.test_restore_collects_completed_screen_once_across_screen_and_witness"
+    ],
+    "source_count": 352,
+    "source_pins_match": true,
+    "methods": 1,
+    "failures": 1,
+    "errors": 0,
+    "unit_seconds": 22.183,
+    "expected_failure": "2 != 1 full collections across actual _restore screen-to-witness; no-plan fixture"
+  },
+  "candidate_first": {
+    "methods": 9,
+    "passes": 8,
+    "failures": 0,
+    "errors": 1,
+    "unit_seconds": 77.621,
+    "scope": "no-plan workcount and other guards; equivalence fixture alone lacked witness parent",
+    "seven_qa_exit_codes": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "source_count": 352,
+    "pins_match_before_after": true
+  },
+  "corrected_equivalence": {
+    "methods": 1,
+    "passes": 1,
+    "unit_summary": [
+      "----------------------------------------------------------------------",
+      "Ran 1 test in 28.037s",
+      "",
+      "OK"
+    ],
+    "scope": "fixture-only canonical _write_witness_inputs seeds real saved plan/packet; compares state projection/plan/packet bytes and aggregate receipt maps/totals/database sets",
+    "production_unchanged": true,
+    "three_affected_checks": [
+      0,
+      0,
+      0
+    ],
+    "source_count": 352,
+    "pins_match_before_after": true
+  },
+  "unique_passing_methods_across_scoped_cuts": 9,
+  "active_verification_seconds": 156.13111640000716,
+  "bounds": {
+    "per_child_seconds": 180,
+    "active_total_seconds": 360
+  },
+  "source_sha256": {
+    "buddha/improver_study.py": "fbc8caca974cb1ea287be2c65e4ceb4cfbd1c7f3e32e69c67887c647130d4bbe",
+    "buddha/source_search.py": "c42300ffecb94dd2c4091fa74a5ea1bafc28ff2fc5ef6fbaee84bd13c82353c7",
+    "buddha/source_screen_results.py": "24b3884096f98f3409e2dd2107283032e498a448725e6894c5518f4723a578d5",
+    "tests/test_study_screen_handoff.py": "b4ec0ec2e1b66232570a12d088031a6cf8ab927db33dd435a61474178573260a",
+    "docs/RECONSTRUCTION-COST.md": "a5d59551b71090f2d5fc8da5b9d7e8569d63f241a1744a57588d47bc2bb6af1b"
+  },
+  "qualification": [
+    "Frozen container has a private mutable NativeEvidence; not a security token or deeply immutable reader",
+    "The local one-element holder may remain until next screen assignment or _restore return; it never escapes to state/action and is used only for its immediate witness",
+    "Existing aggregate adoption topology and byte/path/count limits retained; no provider permission or new schema",
+    "Lease probes and normal artifact objects remain outside raw-reader byte accounting; peak memory and whole-harness speed unmeasured",
+    "No whole producer, profile, old/private live data, actual API/Docker or scale gate result; root owns documentation/commit/PR"
+  ],
+  "preservation": {
+    "raw_revision_rows": 218,
+    "original_acceptance_tails": 7,
+    "original_paid_sources_inputs_grants_benchmark": "unchanged"
+  },
+  "remaining": "One separately pinned genuine193owner/660operation observation under unchanged1200producer/conditional900checker, then remaining phases/hosted/source/request/account/fresh funding gates. No paid launch or old-budget transfer."
+}

@@ -1,0 +1,98 @@
+{
+  "base_head": "86d8a6ddc4aa04f9145d92a20b587f70f3a38fdb",
+  "constraints": {
+    "OS_containers_run": 0,
+    "actual_selected_P_C_or_private_prompt_semantics_read": false,
+    "actual_study_grants_or_owners_created": false,
+    "actual_study_grid_or_budget_changed": false,
+    "benchmark_scoring_changed": false,
+    "historical_paid_SQL_connections": 0,
+    "merged": false,
+    "native_reviewer_selection_or_adoption_created": false,
+    "real_credentials_read": false,
+    "real_provider_calls": 0,
+    "scientific_gate_closed": false,
+    "synthetic_fixture_grants_and_owners_created": true
+  },
+  "files": {
+    "docs/UNIFIED-COMPARISON-PREPARATION.md": "e0b53a5ec461bf8484606f89a8245da5e554393d52d7cbff0adfe8ba2f604957",
+    "docs/UNIFIED-LAUNCH-REHEARSAL.md": "05ed881dd079b0d3a82ec61515d58e51409bcc7aed5a1f8a824350f3eb5cc293",
+    "docs/UNIFIED-LAUNCH.md": "cbeaa2bd7a8fd883191590271e6edafdd80bbf1f065550622219559257a6b811",
+    "tests/test_unified_launch_integration.py": "af0fdc55a55c6a1b03284c2941a87f28ac9739456d47232c9bbd81869971c3fb"
+  },
+  "format": "buddha.unified-launch-rehearsal-delivery.v1",
+  "limits": [
+    "Reduced synthetic original-controller rehearsal, not the actual3/26-task study,312-cell maximum or52 raw sets. No full-grid timing claim.",
+    "Supplied workers/evaluator artifacts are not real OS isolation, actual official-judge execution or live model decisions. Existing actual-container proofs retain their separate source/fixture scope.",
+    "Synthetic profiles and dummy keys do not certify actual model access, current account prices/bounds, outgoing real requests or latency.",
+    "No actual selected P/C semantics, private final task/prompt text, actual-study SQL, real key or provider endpoint was accessed.",
+    "Computational completion does not establish improvement, targeted repair, human preference, scientific independence or native/human reviewer completion.",
+    "Fresh executing-code configuration, exact hosted verification, prospective adoption/reviewer/account/price/request/funding decisions and an approved handoff remain required."
+  ],
+  "next": "Fresh executing-source configuration and combined handoff proposal, preserving all prior inputs; then exact hosted verification, prospective adoption/reviewer/account/price/request/funding checks and approved live handoff.",
+  "plan_revision": 165,
+  "preservation": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-launch-rehearsal-preservation-v1.json",
+    "sha256": "eb0be28ec33d1c28412fd0d89f29c136f5ef2f7eb08dad19cadc4552ba9d0faa"
+  },
+  "preservation_summary": {
+    "existing_python_modified": 0,
+    "existing_tracked_python_preserved": 317,
+    "new_python_files": 1,
+    "original_acceptance_tails_preserved": 7,
+    "original_raw_roadmap_rows_preserved": 164,
+    "prepared_files_preserved": 166
+  },
+  "roles": {
+    "guide_author": "root agent",
+    "guide_reviewer": "unified_config_review agent",
+    "independent_test_reviewer": "root agent, production-source author; current test and reused fixture paths inspected, no concerns",
+    "scientific_review_performed": false,
+    "test_author_and_runtime_operator": "unified_config_review agent"
+  },
+  "runtime_receipt": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-launch-rehearsal-runtime-v1.json",
+    "sha256": "b39f489928439f389b85d6d34c9cb80478d5720cef6ebcda0a8f4c7949a92961"
+  },
+  "spec_sections": [
+    "DESIGN sections5/7/9",
+    "PLAN IMP-01/EVAL-02"
+  ],
+  "verification": {
+    "actual_command": "python -m unittest -v test_unified_launch_integration",
+    "actual_command_environment": "PYTHONPATH set to this worktree tests directory for this process; supplied fixture temporary environment contains a dummy key only.",
+    "actual_provider_cost_usd": 0,
+    "changed_head_hosted_checks": "pending_after_publication",
+    "computational_result_review_status": "pending_separate_review",
+    "documented_reproduction": "unittest discovery of the same one test module from this checkout; command and cost/stop/window behavior explained in guide",
+    "elapsed_seconds": 1107.93,
+    "exit_code": 0,
+    "failures": 0,
+    "guarded_keyless_complete_replay": "same result and persistent bytes/accounting/worker/request counts, with credentials/dispatch/controllers/replacement preparation forbidden; ordinary transient operator lock allowed",
+    "held_microusd": 0,
+    "mocked_HTTPS_operations": 25,
+    "mypy_source_files": 88,
+    "original_baseline_preparations": 2,
+    "original_baseline_runs": 3,
+    "original_four_grants_accounted_exactly_once": true,
+    "original_primary_controller_executions": 1,
+    "primary_and_first_generation_and_original_owner_and_partial_bytes_unchanged_on_resume": true,
+    "quality_checks": 7,
+    "quality_result": "pass",
+    "raw_shared_operations": 12,
+    "raw_shared_owners": 8,
+    "restarts": 0,
+    "ruff_formatted_files": 268,
+    "session_id": 36101,
+    "single_grouped_method": true,
+    "supplied_workers": 28,
+    "synthetic_committed_microusd": 25,
+    "test_invocations": 1,
+    "worker_counts": {
+      "plain_in_context": 5,
+      "plain_regenerate": 5,
+      "primary_development": 10,
+      "primary_final": 8
+    }
+  }
+}

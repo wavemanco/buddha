@@ -1,0 +1,225 @@
+{
+  "format": "buddha.ci-partition-seed-delivery.v1",
+  "date_utc": "2026-11-03T13:34:54.504721+00:00",
+  "plan_item": "ENG-CI-01",
+  "design_sections": [
+    9,
+    10
+  ],
+  "status": "local_candidate_checked_hosted_verification_pending",
+  "base_commit": "1e148d12dddbeabea6447fd6f4cb685f642969b8",
+  "problem": "Name hashing balances occurrence counts but the completed full workflow cases have very different costs.",
+  "implementation": {
+    "option": "--partition-seed",
+    "default": null,
+    "omitted": "Exact original unsalted hash and original worker argv/census/terminal shape.",
+    "explicit_zero": "A real seeded domain, not the omitted setting.",
+    "bounds": "Only integer0 through4294967295; booleans/nonintegers refused internally and invalid CLI stops before worker discovery.",
+    "domain": "UTF-8 decimal seed, one NUL byte (0x00), UTF-8 test ID; SHA256 digest modulo nonisolated group count.",
+    "worker_binding": "Supplied seed is forwarded to worker, printed in census and bound into the checked terminal receipt.",
+    "preserved": "Named isolated occurrence0, ordinal append order, duplicate multiplicity, exhaustive/nonempty groups, owned processes, progress and cleanup.",
+    "workflow_change": "Only explicit --partition-seed1688; existing2OSx5groups/allquality/3600s genuine-progress policy retained.",
+    "runtime_duration_database_or_scheduler": false
+  },
+  "selection": {
+    "selected_seed": 1688,
+    "historical_ubuntu_only_782_adopted": false,
+    "projection": {
+      "path": "runs/checks/ci-partition-seed-os-projection-20261103-v1/os-projection-report.json",
+      "sha256": "9fb2a0982054df179b9bbb947c9624deb88a4715e6f9e4e9c88726cb9a3712dd"
+    },
+    "script": {
+      "path": "runs/checks/ci-partition-seed-os-projection-20261103-v1/project-os-partition-seeds-DRAFT.py",
+      "sha256": "47a1ad274b892244456af3b28abc73cbc409eda47bc79be5cebced8a17de50c2"
+    },
+    "source_run": 41608659735,
+    "source_head": "9ded9b9f3decb6a1d66a6497efa53b3e1ce5dd62",
+    "historic_occurrences": 2264,
+    "current_occurrences": 2272,
+    "new_unpriced_occurrences": 8,
+    "observed_os_weights": "Each nonisolated group top30 durations; remaining elapsed cost uniformly imputed to unmeasured occurrences for that OS.",
+    "ranking": "Minimize worst OS (estimated_all5_max\u2212fixed_weight_ideal_floor)/(observed_current_max\u2212floor). Then minimize worst observed-max ratio, worst floor ratio, seed. Baseline avoidable score1 and ideal model floor0; compare OS-relative avoidable work rather than raw seconds.",
+    "searched_seeds": [
+      0,
+      4095
+    ],
+    "model_floor_and_control": {
+      "Ubuntu": {
+        "observed_isolated_floor_seconds": 3586.268,
+        "nonisolated_average_seconds": 2462.15375,
+        "largest_recorded_case_seconds": 1538.219,
+        "fixed_weight_ideal_floor_seconds": 3586.268,
+        "observed_current_max_seconds": 4197.521,
+        "avoidable_gap_seconds": 611.2529999999997
+      },
+      "Windows": {
+        "observed_isolated_floor_seconds": 9829.672,
+        "nonisolated_average_seconds": 10871.69325,
+        "largest_recorded_case_seconds": 4563.449,
+        "fixed_weight_ideal_floor_seconds": 10871.69325,
+        "observed_current_max_seconds": 13425.957,
+        "avoidable_gap_seconds": 2554.26375
+      }
+    },
+    "selected_model": {
+      "seed": 1688,
+      "counts": [
+        1,
+        578,
+        544,
+        600,
+        541
+      ],
+      "os": {
+        "Ubuntu": {
+          "estimated_group_seconds": [
+            2206.2277802558287,
+            2522.132213836225,
+            2117.978922515287,
+            3002.2760833926236
+          ],
+          "known_group_seconds": [
+            1866.8090000000002,
+            2210.639,
+            1764.015,
+            2690.7550000000006
+          ],
+          "residual_fixed_model_upper_groups": [
+            3183.2059999999997,
+            3527.0359999999996,
+            3080.4119999999994,
+            4007.152
+          ],
+          "estimated_all_five_max_seconds": 3586.268,
+          "known_plus_isolated_lower_seconds": 3586.268,
+          "conservative_fixed_model_upper_seconds": 4007.152,
+          "observed_max_ratio": 0.8543776195521119,
+          "ideal_floor_ratio": 1.0,
+          "normalized_avoidable_fraction": 0.0
+        },
+        "Windows": {
+          "estimated_group_seconds": [
+            11067.782152061489,
+            11077.106501408376,
+            10243.945858828863,
+            11097.938487701555
+          ],
+          "known_group_seconds": [
+            9345.036,
+            9472.339999999998,
+            8418.164999999999,
+            9500.601999999997
+          ],
+          "residual_fixed_model_upper_groups": [
+            16095.666000000001,
+            16222.97,
+            15168.795,
+            16251.231999999998
+          ],
+          "estimated_all_five_max_seconds": 11097.938487701555,
+          "known_plus_isolated_lower_seconds": 9829.672,
+          "conservative_fixed_model_upper_seconds": 16251.231999999998,
+          "observed_max_ratio": 0.8266031604079734,
+          "ideal_floor_ratio": 1.0208104876120887,
+          "normalized_avoidable_fraction": 0.08857551914971752
+        }
+      },
+      "minimax_avoidable_score": 0.08857551914971752,
+      "worst_observed_max_ratio": 0.8543776195521119,
+      "worst_floor_ratio": 1.0208104876120887
+    },
+    "limits": [
+      "Historical fixed-weight estimate, not actual hosted speedup or runtime guarantee.",
+      "Eight new tests are unpriced/excluded, never assigned zero cost. Their full inventory inclusion is checked separately.",
+      "Differing OS skips are retained; Windows is not estimated with a constant Linux multiplier.",
+      "Conservative residual-cost model permits a slower Windows result; future source/host/order/cache/fixture effects are unmeasured.",
+      "Rebalancing targets the longest job and does not remove test work or promise fewer total billed Actions minutes.",
+      "Displayed escape sequences in the external model formula are explanatory; actual code and independent manifest verification use one0x00 byte."
+    ]
+  },
+  "coverage": {
+    "validation": {
+      "path": "runs/checks/ci-partition-seed-20261103-v1/seeded-validation.json",
+      "sha256": "eb353c300dc7b9c05815a2f5b6ea6837e9fc89d91114a2eed50c9143b6701091"
+    },
+    "seeded_inventory": {
+      "path": "runs/checks/ci-partition-seed-20261103-v1/seeded-inventory.jsonl",
+      "sha256": "306f4f475b3af49f0263ec86b59f31ca1fb00ed7d77bc0eba6a4295d595cb28f"
+    },
+    "default_inventory": {
+      "path": "runs/checks/ci-partition-seed-20261103-v1/default-inventory.jsonl",
+      "sha256": "c6c67b2f3fe57db9868ebc031ee460f8a631fd2e7c763ce387c60aa42e573b35"
+    },
+    "current_census": {
+      "path": "runs/checks/ci-partition-seed-os-projection-20261103-v1/current-census.json",
+      "sha256": "a292cbe9c304a8259853ad4e2c8cc9cf5a90cb7129825911f62ddf45ab4d0e1d"
+    },
+    "counts": [
+      1,
+      579,
+      546,
+      601,
+      545
+    ],
+    "census_sha256": "2abf4193ba0c7def0b495cb35f062a374e52f98949070a6286989e61ffc5d944",
+    "all2272_occurrences_and_duplicate_multiplicity": true,
+    "global_order_id_sequence_unchanged": true,
+    "within_each_new_group_original_order": true,
+    "isolated_group0_count": 1,
+    "old22_runner_test_method_bodies_ast_unchanged": true,
+    "application_package_files_byte_identical_to_base": 87,
+    "requirements_and_leaf_guard_files_byte_identical": true
+  },
+  "checks": {
+    "posthoc_tool_exports": {
+      "path": "runs/checks/ci-partition-seed-20261103-v1/local-check-tool-exports.json",
+      "sha256": "6e80228df8e90f17afd420c05a8afe1bf4c7f55ce2e07f648751e10c1c5c6777"
+    },
+    "expected_red": "The seeded interface/CLI was absent; the original unseeded inventory control passed. Four added feature methods failed on the absent option/keyword/receipt field; cascading errors are not independent production defects.",
+    "full_helper_cohort": {
+      "methods": 26,
+      "seconds": 39.85,
+      "status": "pass",
+      "cut": "Before final style-only literal concatenation and stronger common-inventory assertion in new tests."
+    },
+    "final_seeded_cohort": {
+      "methods": 5,
+      "seconds": 5.315,
+      "status": "pass"
+    },
+    "final_leaf_guard_cohort": {
+      "methods": 9,
+      "seconds": 5.317,
+      "status": "pass"
+    },
+    "unique_methods_exercised": 35,
+    "new_methods": 4,
+    "real_process_checks": "Five seeded tiny-suite workers preserve bodies/order/fixtures; different PYTHONHASHSEED values preserve inventory; copied public runner with altered worker-only seed returns125.",
+    "quality": [
+      "Ruff",
+      "formatting308files",
+      "strict mypy90files",
+      "Bandit",
+      "development audit",
+      "runtime audit",
+      "compilation"
+    ],
+    "independent_source_review": "No blocker found; final test-only stronger assertion was rerun and validation pins bind its final bytes.",
+    "full_new_source_hosted_ci": "pending"
+  },
+  "source_pins": {
+    "ci_test_shard.py": "39d8944a4f67d256eda4c3dc566e5a91f3d1baff1248542451f6b191e34f1e67",
+    "tests/test_ci_test_shard.py": "0ac2f70359e15ec3166d76544616007fb211de0b0753c68e9cc870e3f0100419",
+    ".github/workflows/ci.yml": "3aa512c9e73c8ca7d652aa4781a3ddbe7505170efc652f024ad1651c5aae816a"
+  },
+  "application_changes_from_base": false,
+  "benchmark_model_or_scientific_protocol_changes": false,
+  "active_ci_runs_cancelled_or_rerun": false,
+  "protected_v14_source_or_runtime_changed": false,
+  "active_v14_work_or_authority_read_by_this_slice": false,
+  "paid_model_provider_calls": 0,
+  "scientific_native_reviewer_calls": 0,
+  "real_containers": 0,
+  "original_paid_state_read_or_written": false,
+  "next": "Measure full hosted completion and timing; retain original control evidence. Do not claim gain or weaken assertions to force a pass."
+}

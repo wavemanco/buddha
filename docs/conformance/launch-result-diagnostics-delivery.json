@@ -1,0 +1,63 @@
+{
+  "format": "buddha.launch-result-diagnostics-delivery.v1",
+  "date": "2026-10-30",
+  "basis_head": "d0c7bc403afa8197036c784968135f0cac8be1d3",
+  "status": "local_checked_hosted_unverified_not_live_cleared",
+  "spec": [
+    "DESIGN9",
+    "ENG-OBS-01"
+  ],
+  "source_sha256": {
+    "buddha/launch_common.py": "9bed646db559d983c46c66b0e90e186c24391edf31939e9f59436e7fcac8fd06",
+    "buddha/improver_launch.py": "f4344091a7d2917dab0aa7619061e1a59ba9bed69c1eeefd863a8b50bc88629b",
+    "buddha/unified_launch.py": "1670f8f32ff5e9c32d4bfa42be0c027a6a8559c3a47dc7f31c007965d7ea153d",
+    "tests/test_launch_result_diagnostics.py": "5cb949f24a30e7cc00835b5cf92fa32fb4b41e61d5a9704f846c3d74eb3cd663"
+  },
+  "behavior": {
+    "projection": "At most eight exact-dictionary child nodes; cycle detection; fixed format/token sets; format length80 and token length64 before hashing; strict bool and bounded nonnegative int; fresh primitive-only output. No paths, exception messages, source, answers or referenced-file reads.",
+    "primary_hook": "Optional observer runs before partial-result slimming for both search and final; observer/build failures including KeyboardInterrupt preserve the original result.",
+    "publication": "Same best-effort JSON notice and exclusive diagnostic sidecar publisher handles exception and returned-result diagnostics before outer partial recording.",
+    "final_scope": "Header/position metadata only; child_observation references are not dereferenced.",
+    "latency_limit": "Runs after the inner controller returns; does not remove reconstruction already performed by that controller."
+  },
+  "validation": {
+    "new_methods": 8,
+    "implementer_selected_methods": 31,
+    "implementer_wall_seconds": 4.558,
+    "root_selected_methods": 56,
+    "root_wall_seconds": 223.53,
+    "independent_new_methods": 8,
+    "independent_wall_seconds": 1.567,
+    "ruff_lint": "PASS full configured scope",
+    "ruff_format_files": 287,
+    "strict_mypy_sources": 89,
+    "bandit": "PASS configured source scope; existing nosec warnings retained",
+    "development_dependency_audit": "PASS pinned development requirements; no known vulnerabilities reported",
+    "runtime_dependency_audit": "PASS empty standard-library-only runtime requirements",
+    "public_files_compiled_in_memory": 287,
+    "diff_check": "PASS",
+    "paid_provider_calls": 0,
+    "actual_container_startups": 0
+  },
+  "independent_review": {
+    "reviewer": "postkey_check_trace",
+    "status": "PASS",
+    "scope": "Actual three helper diffs and eight public synthetic tests; fresh projection, both phase hooks, privacy/cycle/length/type/mutation/interrupt isolation, publication ordering and unchanged canonical controller path."
+  },
+  "preservation": {
+    "canonical_reports_and_legacy_reasons": "unchanged",
+    "frozen_c548_checkout": "unchanged",
+    "original_source_owners_grants_receipts": "unchanged",
+    "benchmark_and_generator_judge_settings": "unchanged",
+    "CORE_and_source_role_membership": "CORE file bytes and helper-role/module membership unchanged; the three host-helper hashes change as listed."
+  },
+  "compatibility_limits": [
+    "These are prospective host-helper changes; no live command is cleared by this delivery.",
+    "Actual657 history includes original and c548 owners; the two-profile continuation mechanism does not automatically admit a third effective control profile.",
+    "A new checked mixed-history compatibility case is required before using changed helpers for this experiment; do not expand the profile policy silently.",
+    "Original executor cause and failed endpoint are not recovered; cleanup uncertainty is not resolved.",
+    "No reconstruction speedup, scientific improvement or completed recovery is established."
+  ],
+  "hosted_verification": "Exact published-source evidence not yet collected.",
+  "live_execution_cleared": false
+}

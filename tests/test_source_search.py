@@ -5,7 +5,9 @@ import hashlib
 import json
 import os
 import shutil
+import traceback
 import unittest
+from contextlib import contextmanager
 from pathlib import Path
 from unittest.mock import patch
 
@@ -54,6 +56,25 @@ GRANDCHILD = (
 
 def sha(raw):
     return hashlib.sha256(raw).hexdigest()
+
+
+@contextmanager
+def _synthetic_recovery_errors():
+    try:
+        yield
+    except Exception as error:
+        pending, seen = [error], {id(error)}
+        while pending:
+            current = pending.pop()
+            for related in (current.__cause__, current.__context__):
+                if related is not None and id(related) not in seen:
+                    seen.add(id(related))
+                    error.add_note(
+                        "Synthetic recovery exception context:\n"
+                        + "".join(traceback.format_exception(related, chain=False))
+                    )
+                    pending.append(related)
+        raise
 
 
 class SourceSearchTests(unittest.TestCase):
@@ -124,6 +145,7 @@ class SourceSearchTests(unittest.TestCase):
             "authorization": self.authority,
             "review": self.engine.fixture.review,
             "expected_runtime_sha256": self.engine.candidate.expected_runtime,
+            "mutation_witness": getattr(self, "mutation_witness", False),
         }
         return self.prepare_api(self.directory, **(values | changes))
 
@@ -138,7 +160,10 @@ class SourceSearchTests(unittest.TestCase):
         self.assertNotIn(b"dataset_base64", _json(initial))
         source = (dict(spec.mounts)["/agent"] / "candidate.py").read_bytes()
         self.assertEqual(initial["agent_sha256"], sha(_json({"candidate.py": sha(source)})))
-        if initial["format"] == "buddha.candidate-improvement-worker.v1":
+        if initial["format"] in {
+            "buddha.candidate-improvement-worker.v1",
+            "buddha.candidate-improvement-worker.v2",
+        }:
             return self.execute_improvement(spec, initial, handle, source)
         label, callbacks = self.programs[sha(source)]
         if label == "checked-failure":
@@ -369,6 +394,14 @@ class SourceSearchTests(unittest.TestCase):
             for record in event["feedback"]:
                 note = json.loads(record["note"])
                 self.assertEqual(note["kind"], "saved_native_measurements_and_failed_children")
+                self.assertEqual(
+                    note["measurements"]["answers"],
+                    [
+                        {"position": 0, "text": "  unchanged weak text  "},
+                        {"position": 1, "text": ""},
+                    ],
+                )
+                self.assertEqual(note["measurements"]["omitted_answer_positions"], 0)
                 failure = note["failures"][0]
                 self.assertEqual(
                     (failure["parent_id"], failure["child_id"], failure["task_id"]),
@@ -475,9 +508,12 @@ class SourceSearchTests(unittest.TestCase):
         self.assertGreater(summary["reserved_microusd"], 0)
         owners = {row["directory"]: row["run_id"] for row in summary["runs"]}
         sends = self.engine.physical_sends
-        with patch(
-            "buddha.gateway.RawHTTPTransport.send_prepared",
-            side_effect=AssertionError("unknown resend"),
+        with (
+            _synthetic_recovery_errors(),
+            patch(
+                "buddha.gateway.RawHTTPTransport.send_prepared",
+                side_effect=AssertionError("unknown resend"),
+            ),
         ):
             resumed = self.run_search()
         self.partial(resumed)
@@ -490,6 +526,32 @@ class SourceSearchTests(unittest.TestCase):
         )
         self.assertFalse((self.directory / "iterations/0/decision.json").exists())
         self.assertFalse((self.directory / "iterations/1").exists())
+
+    def test_synthetic_recovery_diagnostic_retains_suppressed_errno_and_original_error(self):
+        from buddha.source_search import SourceSearchError
+
+        original = PermissionError(13, "SYNTHETIC_RECOVERY_CANARY")
+        failure = SourceSearchError("synthetic redacted recovery failure")
+        with self.assertRaises(SourceSearchError) as captured:
+            with _synthetic_recovery_errors():
+                try:
+                    raise original
+                except OSError as cause:
+                    try:
+                        raise ValueError("synthetic middle error") from cause
+                    except ValueError:
+                        try:
+                            raise failure from None
+                        except SourceSearchError:
+                            original.__context__ = failure
+                            raise
+        self.assertIs(captured.exception, failure)
+        self.assertTrue(failure.__suppress_context__)
+        self.assertIs(original.__context__, failure)
+        rendered = "".join(traceback.format_exception(failure))
+        self.assertIn("PermissionError: [Errno 13] SYNTHETIC_RECOVERY_CANARY", rendered)
+        self.assertIn("ValueError: synthetic middle error", rendered)
+        self.assertEqual(len(failure.__notes__), 2)
 
     def test_late_common_control_drift_cannot_be_adopted_at_new_proposal_owner(self):
         from buddha import candidate_improvement
@@ -867,6 +929,43 @@ class SourceSearchTests(unittest.TestCase):
         prepare.assert_not_called()
         self.assertEqual(self.authority.summary()["runs"], [])
         self.assertEqual(self.engine.physical_sends, 0)
+
+
+class SourceInterruptionTests(unittest.TestCase):
+    def test_original_controller_cancellation_carries_detached_saved_observation(self):
+        f = SourceSearchTests("runTest").fixture(iterations=1)
+        self.addCleanup(f.doCleanups)
+        f.prepare()
+        with (
+            patch("buddha.source_screen.run_source_screen", side_effect=KeyboardInterrupt),
+            self.assertRaises(KeyboardInterrupt) as caught,
+        ):
+            f.run_api(f.directory, transport=RawHTTPTransport(allow_paid=False))
+        path = f.directory / "observations/0.json"
+        saved = json.loads(path.read_bytes())
+        self.assertEqual(saved["reason"], "cancelled")
+        self.assertEqual(caught.exception.partial, saved)
+        caught.exception.partial["reason"] = "changed by caller"
+        self.assertEqual(json.loads(path.read_bytes())["reason"], "cancelled")
+        self.assertEqual(f.engine.physical_sends, 0)
+
+    def test_original_controller_protocol_stop_carries_detached_saved_observation(self):
+        f = SourceSearchTests("runTest").fixture(iterations=1)
+        self.addCleanup(f.doCleanups)
+        f.prepare()
+        with (
+            patch("buddha.source_screen.run_source_screen", side_effect=ValueError("UNSAFE-TEXT")),
+            self.assertRaises(f.Error) as caught,
+        ):
+            f.run_api(f.directory, transport=RawHTTPTransport(allow_paid=False))
+        path = f.directory / "observations/0.json"
+        saved = json.loads(path.read_bytes())
+        self.assertEqual(saved["reason"], "protocol")
+        self.assertEqual(caught.exception.partial, saved)
+        caught.exception.partial["reason"] = "changed by caller"
+        self.assertEqual(json.loads(path.read_bytes())["reason"], "protocol")
+        self.assertNotIn("UNSAFE-TEXT", path.read_text())
+        self.assertEqual(f.engine.physical_sends, 0)
 
 
 if __name__ == "__main__":

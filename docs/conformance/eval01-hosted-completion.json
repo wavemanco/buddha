@@ -1,0 +1,74 @@
+{
+  "format": "buddha.eval01-hosted-completion.v1",
+  "status": "complete_supported_infrastructure_scope",
+  "observed_at": "2026-10-23T21:44:35.583608+00:00",
+  "published_pr": "https://github.com/wavemanco/buddha/pull/89",
+  "published_head": "572bf75837841162de32c4941c8c2096dfe45d96",
+  "proof": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\eval01-hosted-completion-proof-v1.json",
+    "sha256": "e3e2fe41ce92e7b2dfa217446003df3e062058f4f6867bfb8f7156333f1143d3"
+  },
+  "original_delivery": {
+    "path": "docs/conformance/eval01-final-controller-delivery.json",
+    "sha256": "9277bb5c0aada11306526be48377daf9c5ab5bd5133a1961a0f14bf6b05c478a"
+  },
+  "hosted_jobs": [
+    {
+      "job_id": 120593597291,
+      "url": "https://github.com/wavemanco/buddha/actions/runs/40005903162/job/120593597291",
+      "status": "completed",
+      "conclusion": "success",
+      "completed_at": "2026-10-23T19:30:41Z"
+    },
+    {
+      "job_id": 120593597778,
+      "url": "https://github.com/wavemanco/buddha/actions/runs/40005903162/job/120593597778",
+      "status": "completed",
+      "conclusion": "success",
+      "completed_at": "2026-10-23T21:30:58Z"
+    }
+  ],
+  "hosted_suites": [
+    {
+      "job_id": 120593597291,
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\eval01-hosted-job-120593597291-v1.log",
+      "sha256": "51e32b8e9d8d44ec720e3a4773c629b4558b382e807b735019ca934151d08fcd",
+      "bytes": 407981,
+      "suite_tests": 1714,
+      "suite_elapsed_seconds": 2679.382,
+      "outcome": "2026-10-23T19:30:24.3622598Z OK (skipped=5)"
+    },
+    {
+      "job_id": 120593597778,
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\eval01-hosted-job-120593597778-v1.log",
+      "sha256": "639a6e87ca2c4102eb23215ec0162b42328774f70d1b5427a1b7561f93f34642",
+      "bytes": 408158,
+      "suite_tests": 1714,
+      "suite_elapsed_seconds": 9881.008,
+      "outcome": "2026-10-23T21:30:36.4991295Z OK (skipped=1)"
+    }
+  ],
+  "changed_implementation_and_test_pins": {
+    "buddha/candidate_generation.py": "787206a9cbf1c52ee42e38c2921f3c7a8ebacc10c6baad0cc1e43f738d01cc71",
+    "buddha/final_evaluation.py": "7ddc2c72f3d8d181db7cb910c8734bc33506b94308420e9d8387f03317d509ad",
+    "buddha/gateway.py": "361e9f0da9a0b0ecc7dc910b27d6480788dc30041d9ad29daf9a32465067ab17",
+    "buddha/native_evaluation.py": "ffe913fbaf766865f6109fd2cc8534a7d740f23c671db4156cb6bfc4b9f192b3",
+    "buddha/trial_fence.py": "0a31b8f5e1c51e0dfee19f41729560f88d1eeaa1811c2fdba2bacd6b95d81c8c",
+    "buddha/validation_study.py": "c66141e5ccd19b2df4275be630d0623f4204a905a4f29e30ff948efc89280995",
+    "tests/test_final_evaluation.py": "d3a4beb0e4c199d7f068db875f472140f08dbf5c85a9bce2066194e67602575e"
+  },
+  "requirement_trace": {
+    "limited_validation_and_complete_population": "Original typed declaration, fixed TaskSet/controls, finite validation occasions and whole prompt answer sets.",
+    "prospective_scientific_controls": "Declared families/exposure/phases, complete typed coverage, fixed finalists/comparators, margins, rule and multiplicity/uncertainty before observation.",
+    "irreversible_finalization": "Original distinct phase grants, adaptive closure on any freeze entry, confirmed full final schedule, actual checked-cell generation/native consumer.",
+    "retained_failure_and_recovery": "Twelve final and36 shared focused methods pass at their held cuts; original owners, unknown holds, durable prefixes and missing-scalar inconclusiveness retain their existing meaning.",
+    "delivery_followthrough": "Original evidence joins14/14, seven changed implementation/test files match published head and current files; both complete hosted jobs pass1714 tests and all configured checks. Original acceptance audit is retained by original delivery."
+  },
+  "scope": "Supported prospective one-source library, explicit ordered finalists, complete assigned final grid and fixed-panel analysis. This closes EVAL-01 implementation; it is not a scientific experiment.",
+  "limits": [
+    "No actual held-out gain, human validity, transfer or improved-improver effectiveness established; EVAL-02/SRC-02/SRC-03/IMP-01 remain open.",
+    "Declared semantic families/exposure and bounded-score/conditional-independence assumptions still require justification in each actual experiment.",
+    "Both hosted successes bind the exact published head above, not later unverified commits.",
+    "Original delivery and historical pending checkpoints remain unchanged. No key, paid call, real allocation or original paid-owner mutation."
+  ]
+}

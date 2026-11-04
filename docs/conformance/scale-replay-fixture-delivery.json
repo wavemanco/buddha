@@ -1,0 +1,134 @@
+{
+  "format": "buddha.scale-replay-fixture-delivery.v1",
+  "date": "2026-10-31",
+  "plan_revision": 212,
+  "basis_head": "ade41691a9ac2b16b5016dde1a79cf22234b5755",
+  "spec": [
+    "DESIGN5",
+    "DESIGN7",
+    "DESIGN9",
+    "ENG-OBS-01"
+  ],
+  "status": "prepared_fixture_scoped_checks_pass_scale_gate_open",
+  "live_execution_cleared": false,
+  "production_changes": false,
+  "dependency_changes": false,
+  "source_sha256": {
+    "tests/scale_native_environment.py": "77cfd22f68613cffed6915852234fe9f5c0ba3e63a554b4bd566cee26aa413b8",
+    "tests/scale_replay_fixture.py": "b767d6ea141edcb55d7ea4955f724c90ae8898b39be6743c8317914c4a0acd23",
+    "tests/test_candidate_generation.py": "df8e3a8df128c943024d3c36860ffa703596bbeeb9b40a755d88b2190a91cf26",
+    "tests/test_improver_study.py": "e80c3c6be3cd5c276fa41799cbdda178bff9b83a745e48e444df37ab4c2c745e",
+    "tests/test_scale_native_environment.py": "eeb62d6d6a2324f663edad26a745b917c06f8a51e2b2cf63d185861ade2e32b2",
+    "tests/test_scale_replay_fixture.py": "2d39eafab538e8b799b7b33f6b01208f105c39734d5962fb01f4b34b02e8bd2a",
+    "tests/test_source_screen.py": "c5adcce0d4cfc864939e854a97fc80071f22dd971564319ece5ebe6dc88b690e",
+    "tests/test_source_screen_outcome.py": "917a69bc35503c4d842e819a6a7556ddd933a500e1db0f2db8d62f8992e6f499"
+  },
+  "evidence": {
+    "fixture-small-cut-v2.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\fixture-small-cut-v2.json",
+      "sha256": "951dd67937272de0f9185654cf11fc37b331a7b9f25519e904f379940daa429b"
+    },
+    "parent-checks-v3.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\parent-checks-v3.json",
+      "sha256": "e9e5f3f5f6bf2d48d0ba4b8c836889d986afec554eeed45edfd3206e366df89d"
+    },
+    "repair-parent-integration-v3.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\repair-parent-integration-v3.json",
+      "sha256": "da43e38c0560615453cc81b751249e1189ea37fd797cac1d4a937b649445328c"
+    },
+    "producer-result-v2.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\producer-result-v2.json",
+      "sha256": "82c014de8802ce6f9a3a3d37fe7c279163620ce4226bf8e9120464ed790bdece"
+    },
+    "scale-replay-parent-result-v3.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\scale-replay-parent-result-v3.json",
+      "sha256": "b90dc403a3a33f92c3dd5714e88a7e524aec554924364e6f4492158dbbff6dd1"
+    },
+    "witness-small-check-v4.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\witness-small-check-v4.json",
+      "sha256": "c3e26f2f8bd87680d1c104ea3e807abebe9bdcbc3318ad20d7a0c9a8b9d72d22"
+    },
+    "witness-branch-v5.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\witness-branch-v5.json",
+      "sha256": "4a4b33bd0e80eb310bf7ec458846bcf77c4cbdf1b7afb317c56032971251de53"
+    },
+    "branch-diagnostic-v6.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\branch-diagnostic-v6.json",
+      "sha256": "450575642dbbd649178d3b960e037d611d148ff8f6716ec54c8de94e07a5d516"
+    },
+    "final-small-cohorts-v7.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\final-small-cohorts-v7.json",
+      "sha256": "71886b392a3547e9bc7b8781eb2c5e91dcef657ccbc2cbf86aa7ec73f50aa2b2"
+    },
+    "final-small-cohorts-v8.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\final-small-cohorts-v8.json",
+      "sha256": "70c7aaff9851be8d142fbb6cf8322b2974da56841c411083a29ba0e3d8ae8fc9"
+    },
+    "final-static-v8.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\final-static-v8.json",
+      "sha256": "ba55a69ec79c06baa4824113aa68df4675e5bd6bf18a6c2050802b5c52c31e2a"
+    },
+    "footprint-target-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\footprint-target-v1.json",
+      "sha256": "905543b7fc5959c22e86820b1c3f6f341c7b22b411e53b5882b8cff2c60ad77d"
+    },
+    "control-size-target-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\control-size-target-v1.json",
+      "sha256": "2684b1634ba26bc3a85cb675d392b6b60a75f16f47802bdbc24147bf15550e83"
+    },
+    "record-shape-target-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\record-shape-target-v1.json",
+      "sha256": "27b22bab28f9feed9d559fec88e356a63dbed39c56022c177d70ad2e20726958"
+    }
+  },
+  "final_checks": {
+    "methods": 5,
+    "cohorts": "Separate180s bounds; witness162.611670s, bootstrap/environment78.882451s. All5pass; do not present summed duration as a controlled performance ratio.",
+    "static": "Full Ruff/format/in-memory compilation294files pass at final test cut. Existing current-parent mypy89/Bandit pass at unchanged production bytes; dependency inputs unchanged from PR202 audited cut.",
+    "hosted": "Exact published-head CI pending. No full-suite green claim.",
+    "small_witness": "6source rows/1environment resource,3tasks\u00d710complete answers,1generation/native callback each.14studyowners/11operations;10bootstrapops separately.",
+    "default_bootstrap": "1000source rows/64environment resources,3\u00d710answers,4generation/(1partition,10utility) callbacks.13bootstrapowners/46operations, zeroheld.",
+    "old_failure_scope": "v3large partial has a retained assertion and3feedbackrecords; old fixture expected1. Full exception message was not preserved. Repaired all-task proposal path executes in v6; complete current tiny witness passes separately."
+  },
+  "declared_large_gate": {
+    "source_rows": 1000,
+    "tasks": 3,
+    "answers_each": 10,
+    "dataset_bytes": 645466,
+    "task_source_bytes": 1113890,
+    "screen_bytes_floor": 5315388,
+    "native_environment_bytes_floor": 4013984,
+    "native_inventory_members": 24043,
+    "study_owner_target": 193,
+    "study_operation_target": 660,
+    "producer_seconds": 1200,
+    "fresh_restore_check_finish_seconds": 900,
+    "fresh_checker_only_after_target": true,
+    "status": "corrected full producer unexecuted at publication; first full metadata attempt partial before target",
+    "observation_policy": {
+      "format": "buddha.evidence-observation-policy.v2",
+      "max_total_bytes": 34359738368,
+      "max_tree_entries": 100000,
+      "max_consumed_paths": 65536,
+      "max_resident_bytes": 0
+    }
+  },
+  "representation_limits": [
+    "Synthetic answers/programs/requests differ from actual run; targeted dimensions are not universal worst-case or live-runtime guarantee.",
+    "Physical synthetic environment files back metadata; no actual image execution/confinement proof. Optional generated-module declarations omitted.",
+    "Prior bootstrap owners remain outside the193study-owner target.",
+    "Normal scheduler/authority/receipt writers generate history; no retrospective owner/ledger/manifest fabrication.",
+    "No original private prompts/programs/SQL, actual providers/containers or new spending allocation.",
+    "No original-history compatibility, benchmark score, scientific improvement or live clearance follows."
+  ],
+  "remaining_phase_reuse": [
+    "test_unified_launch_integration.UnifiedLaunchIntegrationTests.test_original_controllers_raw_frontier_resume_and_keyless_complete_replay",
+    "test_improver_assessment.ImproverAssessmentTests.test_capacity_v4_original_checkpoints_guard_the_sealed_six_cell_grid"
+  ],
+  "preservation": {
+    "raw_revision_rows": 211,
+    "original_acceptance_tails": 7,
+    "original_paid_records_and_grants": "untouched; old657call experiment remains explicit partial"
+  },
+  "earlier_setup": "First small v1 cohort retained a21.361s setup failure; existing v2 answer-path adapter was reused for injected harnesses. v2small2methods then pass78.365s, separately from current5methods. Earlier cause message was not recovered."
+}

@@ -1,0 +1,234 @@
+{
+  "format": "buddha.improver-paired-analysis-delivery.v1",
+  "status": "implemented_at_pure_numerical_scope",
+  "base_commit": "b3d226876453ed7815c114f9a30ce6cffcac0bc9",
+  "contract": [
+    "DESIGN6 unchanged fixed-primary rule",
+    "DESIGN7 separately sealed tasks remain future owner/executor work",
+    "DESIGN8 matched initial/evolved improvers, separate starter gains, failures and conditional paired effect"
+  ],
+  "files": {
+    "buddha/improver_analysis.py": "bd8804e7e9bb2a83398aaa4cfcc3d98491eb517916e80c74a1e9e556d469587e",
+    "tests/test_improver_analysis.py": "e76ea15ea01012d9760473cab55033438097b8b4a391e94e30b12ae685e5dbb0"
+  },
+  "api": "analyze_improver_panel(plan, *, population, slots, rows, rule)",
+  "method": "fixed_panel_family_hoeffding_shared_starter.v1",
+  "boundaries": {
+    "population": "Strict ordered typed task IDs, family IDs, per-task answer counts, TaskSet/custody digests; canonical population hash equals prospective plan.",
+    "slots": "Exact2G selected/null coordinates; fixed I per arm and S per start; source identities are agent digests, not raw Python-file digests.",
+    "measurements": "One explicit observed/failed row per executable S/C cell; no omitted/foreign/duplicate row, null-as-zero, starter substitution or equal-source deduplication.",
+    "aggregation": "Exact fractions, mean sealed repetitions within condition/task, equal conditions then equal prompts; family weights are prompt counts/T. No extra independent units from G or K.",
+    "contrasts": [
+      "initial C minus shared S",
+      "evolved C minus same S",
+      "evolved C minus initial C"
+    ],
+    "uncertainty": "Reuse unchanged conservative directed weighted-family Hoeffding lower-bound kernel with maximum adapter metric span and six explicit positive rational tails summing within alpha_total.",
+    "incomplete": "Affected all-planned contrast unavailable; unaffected contrast may be shown without denominator reduction. Any empty slot or unusable scalar leaves overall rule inconclusive.",
+    "rule": "Unchanged strict primary gain/inclusive other-loss rule over the paired improver-effect lower bounds, gated on entire planned panel completeness.",
+    "source_attestation": "Pure analyzer validates/returns supplied source/release/custody commitments; later protected original-evidence reader must attest those actual origins and executing closure.",
+    "operations": "No file, SQL, socket, worker or subprocess operation in numeric path; separate explicit preparation source-hash helper only."
+  },
+  "actual_checks": {
+    "initial_interface_red": {
+      "methods": 6,
+      "failures": 0,
+      "errors": 6,
+      "reason": "module absent before implementation"
+    },
+    "first_raw_green": {
+      "methods": 6,
+      "failures": 0,
+      "errors": 0
+    },
+    "expanded_green": {
+      "new_methods": 10,
+      "existing_numerical_methods": 3,
+      "existing_rule_methods": 12,
+      "total": 25,
+      "failures": 0,
+      "errors": 0,
+      "elapsed_seconds": 0.47523760003969073,
+      "unchanged_input_pins": 76,
+      "receipt": "improver-analysis-green-v4.json"
+    },
+    "new_coverage": [
+      "shared starter cancellation",
+      "negative gains versus positive improver effect",
+      "unequal prompt/family weights",
+      "six unequal prospective tails",
+      "no false replication benefit",
+      "explicit empty selection/failed scalar",
+      "fixed-length duplicate rows/slots",
+      "typed/foreign IDs and fixed source-role drift",
+      "same source unequal/equal observations",
+      "zero distinct span and unchanged strict rule",
+      "support/bool/nonfinite/count checks",
+      "immutable inputs and no I/O"
+    ],
+    "independent_numeric_oracle": "Existing rational log(2)/integer-square-root enclosure and threshold-neighbor regression ran in the25-method cohort.",
+    "additional_boundary_probes": 11,
+    "quality": {
+      "attempted": 7,
+      "successful": 7,
+      "input_count": 215,
+      "python_files": 211,
+      "config_files": 4,
+      "all_inputs_unchanged": true,
+      "commands": [
+        {
+          "name": "lint",
+          "exit_code": 0
+        },
+        {
+          "name": "format",
+          "exit_code": 0
+        },
+        {
+          "name": "types",
+          "exit_code": 0
+        },
+        {
+          "name": "security",
+          "exit_code": 0
+        },
+        {
+          "name": "dependencies",
+          "exit_code": 0
+        },
+        {
+          "name": "compile",
+          "exit_code": 0
+        },
+        {
+          "name": "diff",
+          "exit_code": 0
+        }
+      ],
+      "receipt": "improver-analysis-quality-v2.json"
+    }
+  },
+  "preserved_development_history": [
+    "Initial absent-interface RED and separate six/nine/ten-method cuts remain retained.",
+    "Raw formatter AST bridge and three draft strict-type annotation findings remain retained; only local annotations changed.",
+    "Quality launcher first stopped before checks because its default draft paths did not exist; existing explicit path arguments corrected the invocation without application/test/runner changes.",
+    "A final constructor-only count-product rejection is added without changing any previous test byte or application source. The final25-method cohort and seven quality checks rerun at that exact test cut; earlier receipts/reviews retain their own scopes."
+  ],
+  "independent_reviews": {
+    "math_and_final_implementation": "No blocker at pinned scopes; exact final app/test, fullAST formatting and type-only bridge and recorded25-method source/log pins reviewed. That review uses the prior test cut; the final product-bound test extension is independently byte-compared and final publication review checks its new receipt pins.",
+    "trust_boundary": "Eleven extra supplied-data probes pass with34 inputs unchanged; no original-custody or scientific attestation."
+  },
+  "plan": {
+    "revision": 102,
+    "historical_raw_rows_preserved": 101,
+    "original_acceptance_tails_preserved": 10,
+    "open_gates": 4,
+    "sole_next": "SRC-02"
+  },
+  "remaining": [
+    "Consume actual original owner/native evidence through protected adapter.",
+    "Prepare prospective trial with implemented executor/analyzer commitments before any development.",
+    "Freeze exact selected/null slots and run genuine separately sealed S/C assessment.",
+    "Complete full finite matrix and exact hosted checks; retain interrupted local verification without fabricated outcome.",
+    "Run funded controlled comparison and retain target repair/productivity/cost and independent final/human/transfer outcomes."
+  ],
+  "real_provider_calls": 0,
+  "new_allowance": false,
+  "paid_command_enabled": false,
+  "historical_owner_changes": false,
+  "pull_requests_merged": false,
+  "limitations": [
+    "Pure input validation and conditional fixed-panel arithmetic only; not a complete scientific or provenance consumer.",
+    "Independence/bounded native measurement assumptions are declared, not verified.",
+    "Six one-sided lower bounds are not two-sided intervals or significance tests of regressions.",
+    "No future-search, unseen-task, human-quality, useful-diversity or improved-improver finding.",
+    "No full-suite or exact published-head hosted-CI success claimed.",
+    "Target repair remains not_assessed; original IMP-01 acceptance is not narrowed."
+  ],
+  "evidence": [
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/improver-sealed-implementation-contract-v1.md",
+      "sha256": "79fefdb0758a91871f31ec8d057721b550b4b973ef27eb149734272456dcbb8f"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/improver-sealed-implementation-contract-v1.json",
+      "sha256": "1f9780f4f8208bc907bdf6c85ecd4e2760120dce8e5be6829c52f5a4a7deffc6"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/improver-paired-math-review-v1.md",
+      "sha256": "c93b4eb4bc5f778b3571197e72cea87584df3b48a7a051319dd5247ca040124f"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/improver-paired-math-review-v1.json",
+      "sha256": "2c5c927c1ed4fc7e3addb925551cad11cec0a9f590a1c4ba273706282c74c13a"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/improver-analysis-red-v1.json",
+      "sha256": "d3642562351c0badf80090fea2f20894e866495ab1293e97b24d875cc2620493"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/improver-analysis-green-v1.json",
+      "sha256": "aa9cbda448e8c41df021185e0987668df46f026bca711ff6b7696db9d11a02dd"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/improver-analysis-green-v2.json",
+      "sha256": "7ae87af1e6837bd9f86b115fd8058c9accdb489f05b7adf5bf33ecf516794248"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/improver-analysis-green-v3.json",
+      "sha256": "57ef7117f3b16ec48ec4cffcef435a89deff7863711c35559932b87f94ddcac7"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/improver-analysis-quality-v1.json",
+      "sha256": "73309f6537eeb51c3bd7d3e91159ec5f8f97d24cd83ad914fd4ac67815fed248"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/improver-analysis-quality-v1.inputs.json",
+      "sha256": "6e8b5a9b3a803df84800817feb6b77cddaaf0ff45fec1ab19d117164c7dcaefb"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/improver-analysis-quality-preflight-v1.json",
+      "sha256": "3205cb3106ee0c84db26865f7dcf6b845c8a2c688c1249d7d21460d0ed9ddd1c"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/improver-analysis-type-findings-v1.json",
+      "sha256": "b57d163c4ea9aaf20738e25d297035ca4f20f13247ad08058e0addb27f5347da"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/improver-analysis-preformat-v1/format-bridge.json",
+      "sha256": "6cc1164133876c321b75d45f62e41811510f8e40603885ccd6c24ca10a26ed44"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/improver-paired-analysis-boundary-review-v1.json",
+      "sha256": "fd8501113ba375eaedd0c6e49c18a9fcaa097f9838198a7c79dc9608c61d8809"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/improver-paired-implementation-review-v1.md",
+      "sha256": "140520318de03160693cbfd40df7accc1e61037d4f44028a7dd77bc14e82c412"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/improver-paired-implementation-review-v1.json",
+      "sha256": "1e7e0a73c4502b26fb2376faaaab9fafd407548aaf6442ae8d86fdd6cfc8213e"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/improver-analysis-plan102-preservation-v1.json",
+      "sha256": "33ebab0e27404736fdb82a5fe6654ba8eede5a34d63bb002b0453f94f152a518"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/improver-analysis-green-v4.json",
+      "sha256": "946b1f1c4c8eb125e47ab38417e94b7d86f0bf06e6b35ccaefa4ee14820f6df9"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/improver-analysis-quality-v2.json",
+      "sha256": "118e010df66da434f533e4ddfc41a2fbd89deecba6ba780bbf354eb712e5a7bd"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/improver-analysis-quality-v2.inputs.json",
+      "sha256": "59b6ab3b3c21cda68b27a372cc55e56912a36bdc66104b416224c7130515ceb5"
+    },
+    {
+      "path": "runs/reviews/eval01-final-design-20261023/improver-analysis-count-product-test-extension-v1.json",
+      "sha256": "ee38528bd959ca50b1fe4c76cdb08a5f3148a44ba702ac15f9f13b2abda57235"
+    }
+  ]
+}

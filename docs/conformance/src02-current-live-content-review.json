@@ -1,0 +1,2210 @@
+{
+  "format": "buddha.src02-current-live-content-review.v1",
+  "created_at_utc": "2026-10-25T02:07:43.333598+00:00",
+  "reviewer": {
+    "role": "supplemental_descriptive_content_reviewer",
+    "identity": "Codex host-model subagent /root/src02_live_output_review",
+    "exact_runtime_model_identifier": "not independently exposed in this review context",
+    "context": "Unblinded offline review; role identities, original official scores and trusted project instructions were visible. This is not the predeclared mechanism-adjudication record.",
+    "method": "Read complete literal text of each of all80 saved answers, inspect original selected task text/config, and preserve original assessment arrays/numbers. No provider calls or generated-agent execution/import/compile. Standard-library data reading/hashing and punctuation/digit checks only."
+  },
+  "run_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1",
+  "scope": {
+    "P": 30,
+    "C": 30,
+    "W0": 10,
+    "W1": 10,
+    "total_answers": 80,
+    "answer_files": 8,
+    "story_answers": 40,
+    "bounded_choice_or_digit_answers": 40,
+    "coverage_complete": true,
+    "index_convention": "All index fields, references and /outputs/0/answers/N pointers are zero-based. answer_position_one_based is supplied separately.",
+    "not_claimed": [
+      "human or blinded review",
+      "formal semantic equivalence judgment",
+      "held-out result",
+      "improved useful diversity",
+      "improved improver efficacy",
+      "new official partition or private replacement score",
+      "unobserved witness quality/distinctness"
+    ]
+  },
+  "summary": {
+    "unambiguous_literal_failure": "L1: W1 curated-0 index8 uses a male protagonist and no girl.",
+    "strong_relationship_mismatch": "L2: W0 curated-0 index0 returns the dog to another owner/family; ordinary possessive her-dog reading is not met. A looser thematic reading is explicitly acknowledged.",
+    "other_literal_observations": "All40 story answers contain five ordinary terminal-punctuation sentence units and read as five sentences. All20 binary replies choose exactly one of the two options. All20 password replies are exactly one ASCII digit. No other literal form/subject failure observed; this is not a universal semantic-compliance proof.",
+    "exact_story_duplicates": {
+      "observed": 0,
+      "interpretation": "Exact-string check over40 story answers only; absence of byte-identical text is not meaningful semantic-diversity evidence."
+    },
+    "semantic_concerns": "R1-R4 retain rescue-schema and specific cross-role kite/lost-child recurrence concerns, balanced with concrete causal/action/outcome differences. No partition changes or corrected distinctness counts."
+  },
+  "findings": [
+    {
+      "id": "L1",
+      "category": "observed_literal_failure",
+      "certainty": "unambiguous_subject_mismatch_in_literal_text",
+      "requirement": "Tell me a story in five sentences about a girl and her dog.",
+      "references": [
+        {
+          "role": "W1",
+          "task_id": "curated-0",
+          "answer_index_zero_based": 8,
+          "answer_position_one_based": 9,
+          "answer_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\witness\\generation\\attempts\\0-0\\session\\answers.json",
+          "answer_file_sha256": "be2305e71d14bb617ccf6aacb485da60e4ca3a81f83daa932c6b42edb3544b74",
+          "json_pointer": "/outputs/0/answers/8"
+        }
+      ],
+      "observed_fact": "The protagonist is Caleb, referred to as he in sentences 2 and 3 and He in sentence 5. The story contains Caleb and his dog Fern, with no girl.",
+      "reason": "This fails the requested girl subject while preserving five sentences and the dog relationship.",
+      "score_effect": "None assigned. W1 is a validity-only role; this does not turn its bounded host validity outcome into a scientific quality finding."
+    },
+    {
+      "id": "L2",
+      "category": "observed_text_with_strong_literal_relationship_concern",
+      "certainty": "explicit_other_owner_under_ordinary_possessive_reading",
+      "requirement": "Tell me a story in five sentences about a girl and her dog.",
+      "references": [
+        {
+          "role": "W0",
+          "task_id": "curated-0",
+          "answer_index_zero_based": 0,
+          "answer_position_one_based": 1,
+          "answer_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed-witness\\generation\\attempts\\0-0\\session\\answers.json",
+          "answer_file_sha256": "3847e8372f90fcfee0ac517ed67e26c4a5c81b3406492ed9096aea34490115d3",
+          "json_pointer": "/outputs/0/answers/0"
+        }
+      ],
+      "observed_fact": "Mia finds and shelters Pepper, then returns him to his worried owner at the bakery. Pepper's family invites Mia to visit afterward.",
+      "reason": "The story is about a girl and a found dog belonging to another family, rather than a girl and her dog. This is a strong relationship mismatch under the ordinary possessive reading. A looser thematic reading could accept a girl-dog companionship story; that interpretation limit is retained rather than hidden.",
+      "score_effect": "None assigned. W0 is a validity-only role."
+    },
+    {
+      "id": "R1",
+      "category": "interpretive_same_core_story_concern",
+      "references": [
+        {
+          "role": "P",
+          "task_id": "curated-0",
+          "answer_index_zero_based": 2,
+          "answer_position_one_based": 3,
+          "answer_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\0\\generation\\attempts\\0-0\\session\\answers.json",
+          "answer_file_sha256": "96c7d9a71bfbe507596560d2685f388cfa534611778f5b4c6648f70bf6386881",
+          "json_pointer": "/outputs/0/answers/2"
+        },
+        {
+          "role": "P",
+          "task_id": "curated-0",
+          "answer_index_zero_based": 6,
+          "answer_position_one_based": 7,
+          "answer_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\0\\generation\\attempts\\0-0\\session\\answers.json",
+          "answer_file_sha256": "96c7d9a71bfbe507596560d2685f388cfa534611778f5b4c6648f70bf6386881",
+          "json_pointer": "/outputs/0/answers/6"
+        },
+        {
+          "role": "P",
+          "task_id": "curated-0",
+          "answer_index_zero_based": 8,
+          "answer_position_one_based": 9,
+          "answer_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\0\\generation\\attempts\\0-0\\session\\answers.json",
+          "answer_file_sha256": "96c7d9a71bfbe507596560d2685f388cfa534611778f5b4c6648f70bf6386881",
+          "json_pointer": "/outputs/0/answers/8"
+        }
+      ],
+      "observed_fact": "The three stories discover vulnerable small animals, use girl/dog cooperation to release or calm them, and end with safety and a positive relationship/reward.",
+      "concern": "A recurring encounter-rescue-happy-ending schema may overstate useful narrative variety if distinctions reduce mostly to location/animal.",
+      "counterevidence_and_limit": "Greenhouse kitten adoption and gardening, library puppy reunion plus tidying, and crate-rabbit release plus carrots differ in obstacle, action and continuing outcome. A shared rescue theme does not establish identical core plots. P index7 is prolonged care and release over days and is not silently merged into this concern. Official partition remains [0,1,2,3,4,5,6,7,8,9]."
+    },
+    {
+      "id": "R2",
+      "category": "interpretive_same_core_story_concern",
+      "references": [
+        {
+          "role": "C",
+          "task_id": "curated-0",
+          "answer_index_zero_based": 0,
+          "answer_position_one_based": 1,
+          "answer_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\0\\generation\\attempts\\0-0\\session\\answers.json",
+          "answer_file_sha256": "1988b8d53b21829eec979644f42a29e5f3b1d96f1d379801592a0c694297305a",
+          "json_pointer": "/outputs/0/answers/0"
+        },
+        {
+          "role": "C",
+          "task_id": "curated-0",
+          "answer_index_zero_based": 3,
+          "answer_position_one_based": 4,
+          "answer_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\0\\generation\\attempts\\0-0\\session\\answers.json",
+          "answer_file_sha256": "1988b8d53b21829eec979644f42a29e5f3b1d96f1d379801592a0c694297305a",
+          "json_pointer": "/outputs/0/answers/3"
+        },
+        {
+          "role": "C",
+          "task_id": "curated-0",
+          "answer_index_zero_based": 5,
+          "answer_position_one_based": 6,
+          "answer_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\0\\generation\\attempts\\0-0\\session\\answers.json",
+          "answer_file_sha256": "1988b8d53b21829eec979644f42a29e5f3b1d96f1d379801592a0c694297305a",
+          "json_pointer": "/outputs/0/answers/5"
+        },
+        {
+          "role": "C",
+          "task_id": "curated-0",
+          "answer_index_zero_based": 9,
+          "answer_position_one_based": 10,
+          "answer_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\0\\generation\\attempts\\0-0\\session\\answers.json",
+          "answer_file_sha256": "1988b8d53b21829eec979644f42a29e5f3b1d96f1d379801592a0c694297305a",
+          "json_pointer": "/outputs/0/answers/9"
+        }
+      ],
+      "observed_fact": "These stories center on girl/dog encounters with small animals in difficulty, cooperative retrieval or release, and a safe ending.",
+      "concern": "The repeated rescue structure warrants a descriptive qualification to the ten-distinct official result; name/animal/setting changes alone would not prove distinct central plots.",
+      "counterevidence_and_limit": "Butterfly pursuit leading to a vine-trapped rabbit, lifting an overturned cart for a kitten, using a branch on a floating bird basket, and blanket retrieval of a puppy from a ditch supply different immediate causes/actions and post-rescue outcomes. This review does not decide a merge or assign a corrected count. Official partition remains [0,1,2,3,4,5,6,7,8,9]."
+    },
+    {
+      "id": "R3",
+      "category": "interpretive_same_core_story_concern",
+      "references": [
+        {
+          "role": "W0",
+          "task_id": "curated-0",
+          "answer_index_zero_based": 1,
+          "answer_position_one_based": 2,
+          "answer_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed-witness\\generation\\attempts\\0-0\\session\\answers.json",
+          "answer_file_sha256": "3847e8372f90fcfee0ac517ed67e26c4a5c81b3406492ed9096aea34490115d3",
+          "json_pointer": "/outputs/0/answers/1"
+        },
+        {
+          "role": "W0",
+          "task_id": "curated-0",
+          "answer_index_zero_based": 4,
+          "answer_position_one_based": 5,
+          "answer_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed-witness\\generation\\attempts\\0-0\\session\\answers.json",
+          "answer_file_sha256": "3847e8372f90fcfee0ac517ed67e26c4a5c81b3406492ed9096aea34490115d3",
+          "json_pointer": "/outputs/0/answers/4"
+        },
+        {
+          "role": "W0",
+          "task_id": "curated-0",
+          "answer_index_zero_based": 7,
+          "answer_position_one_based": 8,
+          "answer_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed-witness\\generation\\attempts\\0-0\\session\\answers.json",
+          "answer_file_sha256": "3847e8372f90fcfee0ac517ed67e26c4a5c81b3406492ed9096aea34490115d3",
+          "json_pointer": "/outputs/0/answers/7"
+        }
+      ],
+      "observed_fact": "Each story finds vulnerable small animals and girl/dog cooperation leads to their safety.",
+      "concern": "The owl, kitten and mice stories recur to the rescue template.",
+      "counterevidence_and_limit": "Injured owl transfer to a ranger, mechanical well rescue using a rope basket, and voluntary escape from an attic box via crumbs use different obstacles and solutions. W0 has no full official screen, and no unofficial witness distinctness count is produced."
+    },
+    {
+      "id": "R4",
+      "category": "interpretive_cross_role_recurrence",
+      "references": [
+        {
+          "role": "P",
+          "task_id": "curated-0",
+          "answer_index_zero_based": 5,
+          "answer_position_one_based": 6,
+          "answer_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\0\\generation\\attempts\\0-0\\session\\answers.json",
+          "answer_file_sha256": "96c7d9a71bfbe507596560d2685f388cfa534611778f5b4c6648f70bf6386881",
+          "json_pointer": "/outputs/0/answers/5"
+        },
+        {
+          "role": "C",
+          "task_id": "curated-0",
+          "answer_index_zero_based": 1,
+          "answer_position_one_based": 2,
+          "answer_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\0\\generation\\attempts\\0-0\\session\\answers.json",
+          "answer_file_sha256": "1988b8d53b21829eec979644f42a29e5f3b1d96f1d379801592a0c694297305a",
+          "json_pointer": "/outputs/0/answers/1"
+        },
+        {
+          "role": "C",
+          "task_id": "curated-0",
+          "answer_index_zero_based": 8,
+          "answer_position_one_based": 9,
+          "answer_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\0\\generation\\attempts\\0-0\\session\\answers.json",
+          "answer_file_sha256": "1988b8d53b21829eec979644f42a29e5f3b1d96f1d379801592a0c694297305a",
+          "json_pointer": "/outputs/0/answers/8"
+        },
+        {
+          "role": "W0",
+          "task_id": "curated-0",
+          "answer_index_zero_based": 5,
+          "answer_position_one_based": 6,
+          "answer_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed-witness\\generation\\attempts\\0-0\\session\\answers.json",
+          "answer_file_sha256": "3847e8372f90fcfee0ac517ed67e26c4a5c81b3406492ed9096aea34490115d3",
+          "json_pointer": "/outputs/0/answers/5"
+        }
+      ],
+      "observed_fact": "P5/C1 both recover an elevated kite with girl/dog teamwork; C8/W0-5 both reunite a lost boy with parents after the girl/dog find him.",
+      "concern": "These are concrete recurring premises across roles, stronger evidence than the required girl-and-dog subject alone.",
+      "counterevidence_and_limit": "The kite belongs to a newly met boy and is in a tree in P5, whereas C1 uses the girl's own kite, roof and rope; C8 uses a campsite/voices whereas W0-5 uses a bus stop, umbrella and community center. Separate role batches were officially assessed separately; cross-role similarity is not retroactively inserted into any official partition and does not establish derivation or copying."
+    },
+    {
+      "id": "K1",
+      "category": "interpretive_craft_concern",
+      "references": [
+        {
+          "role": "C",
+          "task_id": "curated-0",
+          "answer_index_zero_based": 1,
+          "answer_position_one_based": 2,
+          "answer_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\0\\generation\\attempts\\0-0\\session\\answers.json",
+          "answer_file_sha256": "1988b8d53b21829eec979644f42a29e5f3b1d96f1d379801592a0c694297305a",
+          "json_pointer": "/outputs/0/answers/1"
+        }
+      ],
+      "observed_fact": "The kite is on the roof. Lila then ties a fetched rope to its tail, without an intervening explanation of how she reaches the tail.",
+      "concern": "The retrieval mechanism leaves an access step unexplained.",
+      "counterevidence_and_limit": "A dangling accessible tail is possible; this is a coherence concern, not a definite contradiction or literal task failure."
+    },
+    {
+      "id": "K2",
+      "category": "interpretive_craft_concern",
+      "references": [
+        {
+          "role": "C",
+          "task_id": "curated-0",
+          "answer_index_zero_based": 5,
+          "answer_position_one_based": 6,
+          "answer_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\0\\generation\\attempts\\0-0\\session\\answers.json",
+          "answer_file_sha256": "1988b8d53b21829eec979644f42a29e5f3b1d96f1d379801592a0c694297305a",
+          "json_pointer": "/outputs/0/answers/5"
+        }
+      ],
+      "observed_fact": "Toby steadies Jade by holding the strap of the basket she is retrieving from the river.",
+      "concern": "The physical support mechanism is unclear because the basket itself is the moving retrieval target.",
+      "counterevidence_and_limit": "The exact bank/strap geometry is unstated, so this is a plausibility question rather than a demonstrated impossibility."
+    }
+  ],
+  "bounded_controls": [
+    {
+      "id": "B1",
+      "category": "bounded_answer_space_control",
+      "task_id": "curated-47",
+      "observed_fact": "P uses five Glass half full. and five Glass half empty. answers; C uses seven Glass half full and three Glass half empty answers. Every reply picks exactly one allowed choice.",
+      "interpretation": "Repetition here is expected within a two-choice space and is not a literal-compliance failure. Both original official partitions record two classes. Punctuation differences do not create an additional allowed choice."
+    },
+    {
+      "id": "B2",
+      "category": "bounded_answer_space_control",
+      "task_id": "curated-97",
+      "observed_fact": "P replies are 7,3,8,4,9,1,6,2,5,0; C replies are ten identical 7 strings. Every reply contains exactly one digit.",
+      "interpretation": "The original evaluator records ten distinct P answers and one distinct C answer. This is an observed concentration/collapse in C's allowed ten-digit output space, separate from form compliance. The task text does not require cross-answer uniqueness. This review provides no password-security assessment or safest-digit finding."
+    },
+    {
+      "id": "B3",
+      "category": "shared_subject_and_theme_countercontrol",
+      "references": [
+        {
+          "role": "P",
+          "task_id": "curated-0",
+          "answer_index_zero_based": 0,
+          "answer_position_one_based": 1,
+          "answer_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\0\\generation\\attempts\\0-0\\session\\answers.json",
+          "answer_file_sha256": "96c7d9a71bfbe507596560d2685f388cfa534611778f5b4c6648f70bf6386881",
+          "json_pointer": "/outputs/0/answers/0"
+        },
+        {
+          "role": "P",
+          "task_id": "curated-0",
+          "answer_index_zero_based": 1,
+          "answer_position_one_based": 2,
+          "answer_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\0\\generation\\attempts\\0-0\\session\\answers.json",
+          "answer_file_sha256": "96c7d9a71bfbe507596560d2685f388cfa534611778f5b4c6648f70bf6386881",
+          "json_pointer": "/outputs/0/answers/1"
+        },
+        {
+          "role": "W1",
+          "task_id": "curated-0",
+          "answer_index_zero_based": 1,
+          "answer_position_one_based": 2,
+          "answer_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\witness\\generation\\attempts\\0-0\\session\\answers.json",
+          "answer_file_sha256": "be2305e71d14bb617ccf6aacb485da60e4ca3a81f83daa932c6b42edb3544b74",
+          "json_pointer": "/outputs/0/answers/1"
+        },
+        {
+          "role": "W1",
+          "task_id": "curated-0",
+          "answer_index_zero_based": 3,
+          "answer_position_one_based": 4,
+          "answer_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\witness\\generation\\attempts\\0-0\\session\\answers.json",
+          "answer_file_sha256": "be2305e71d14bb617ccf6aacb485da60e4ca3a81f83daa932c6b42edb3544b74",
+          "json_pointer": "/outputs/0/answers/3"
+        },
+        {
+          "role": "W1",
+          "task_id": "curated-0",
+          "answer_index_zero_based": 8,
+          "answer_position_one_based": 9,
+          "answer_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\witness\\generation\\attempts\\0-0\\session\\answers.json",
+          "answer_file_sha256": "be2305e71d14bb617ccf6aacb485da60e4ca3a81f83daa932c6b42edb3544b74",
+          "json_pointer": "/outputs/0/answers/8"
+        }
+      ],
+      "observed_fact": "P0 uses a magical garden escape while P1 recovers historical letters; W1-1 teaches a hoop jump while W1-3 preserves quiet reading company. W1-8 addresses fear of a gate using gradual approach.",
+      "interpretation": "All are dog-companion stories, but that required subject does not establish plot identity. Even two training stories can have materially different problems/actions/outcomes. W1-8's subject failure remains separate from its training premise."
+    }
+  ],
+  "coverage_blocks": [
+    {
+      "id": "P-0",
+      "role": "P",
+      "role_scope": "official_three_task_screen",
+      "task_id": "curated-0",
+      "task_text": "Tell me a story in five sentences about a girl and her dog.",
+      "task_count": 10,
+      "task_evidence": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\0\\task.json",
+        "sha256": "75221a986f7f8fb67bba2a7e457c416d434a1076d200abbc2b2c140994ec4454",
+        "bytes": 115135
+      },
+      "generation_config_evidence": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\0\\generation.json",
+        "sha256": "7bb9ed5b9890173b95f1d7df1230c0d66047930a82911fd8984753cd1661f2c2",
+        "bytes": 2086
+      },
+      "generation_config": {
+        "instructions": "Answer the original task exactly, including its requested form, count, perspective, allowed choices and factual domain. Each response must be a complete independent answer. Use earlier answers to avoid repeating central content only where the permitted answer space allows it. Repeat a legal answer when constraints require it; do not invent a third choice. Prefer concrete, coherent development with different causes, actions and outcomes over changes to names or style alone. Return only the requested answer, without plans or self-review.",
+        "max_output_tokens": 4096,
+        "model": "gpt-5.6-luna",
+        "provider": "openai",
+        "sampling": "in-context"
+      },
+      "answer_file": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\0\\generation\\attempts\\0-0\\session\\answers.json",
+        "sha256": "96c7d9a71bfbe507596560d2685f388cfa534611778f5b4c6648f70bf6386881",
+        "bytes": 120024
+      },
+      "answer_file_agent_sha256": "22cd302a8c12e05c5fd9bb95389f5880e713a027e60a0206799e9c4fa2f48eeb",
+      "coverage": {
+        "read_all_complete_texts": true,
+        "output_index_zero_based": 0,
+        "answer_indices_zero_based": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "answer_positions_one_based": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "complete_answer_count": 10
+      },
+      "answers": [
+        {
+          "answer_index_zero_based": 0,
+          "answer_position_one_based": 1,
+          "json_pointer": "/outputs/0/answers/0",
+          "literal_text": "Maya and her dog, Biscuit, discovered a tiny door beneath the old oak tree.  \nWhen Maya opened it, a warm golden light spilled out and revealed a garden filled with singing flowers.  \nBiscuit chased a glowing butterfly, but the garden gate suddenly vanished behind him.  \nMaya followed the butterfly’s trail and found a forgotten key hanging from a silver rose.  \nTogether, they unlocked the gate and returned home with one shining flower as a reminder of their adventure.",
+          "literal_text_utf8_sha256": "ed377639b88d7ec0cb60c7ba389ca4af0b7f6fe3eecc06500e2e73e21af0152d",
+          "characters": 472,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "A magical garden traps the dog; following a butterfly leads to the key and escape."
+        },
+        {
+          "answer_index_zero_based": 1,
+          "answer_position_one_based": 2,
+          "json_pointer": "/outputs/0/answers/1",
+          "literal_text": "Lena and her dog, Scout, loved exploring the quiet beach near their town.  \nOne morning, they found a bottle containing a faded map washed up among the shells.  \nFollowing the map, they climbed a nearby hill and discovered a wooden chest beneath a pine tree.  \nInside was a collection of letters written by a sailor to his daughter long ago.  \nLena and Scout brought the letters to the local museum, where their mystery finally found a home.",
+          "literal_text_utf8_sha256": "f8c1cfd60a30e98859f3360395b8bd02056eab74da0436bddb57e7a139004f8d",
+          "characters": 441,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "A beach-bottle map leads to a chest of historical letters donated to a museum."
+        },
+        {
+          "answer_index_zero_based": 2,
+          "answer_position_one_based": 3,
+          "json_pointer": "/outputs/0/answers/2",
+          "literal_text": "Sofia and her dog, Pepper, heard a faint whimper coming from the town’s abandoned greenhouse.  \nThey squeezed through a broken window and found a frightened kitten trapped among the vines.  \nWhile Pepper kept the kitten calm, Sofia carefully cleared a path to the door.  \nThe kitten followed them home and soon became Pepper’s playful new companion.  \nFrom then on, the three friends tended the greenhouse together and filled it with flowers.",
+          "literal_text_utf8_sha256": "577d418cee20554d3f0cb64b59ae61e8812ff09377d6d29129b7c2dd3f3a4c81",
+          "characters": 442,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "Girl and dog find a kitten trapped in greenhouse vines, free it and adopt it; rescue-schema concern R1."
+        },
+        {
+          "answer_index_zero_based": 3,
+          "answer_position_one_based": 4,
+          "json_pointer": "/outputs/0/answers/3",
+          "literal_text": "Nora and her dog, Jasper, set out early to find the source of a mysterious bell ringing in the woods.  \nThey followed a winding trail until they reached a creek where a small brass bell was caught beneath a fallen branch.  \nJasper tugged at the branch while Nora pulled the bell free.  \nThe bell belonged to a lost goat, who soon appeared with a grateful farmer close behind.  \nAs a reward, the farmer invited Nora and Jasper to visit the farm whenever they wished.",
+          "literal_text_utf8_sha256": "c64981a8c017a06a32f6749a52905b55b599785d3113dbe70eecd885f9cb1a04",
+          "characters": 465,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "An unexplained woodland bell leads to a lost goat and its farmer; recovering an object resolves the mystery."
+        },
+        {
+          "answer_index_zero_based": 4,
+          "answer_position_one_based": 5,
+          "json_pointer": "/outputs/0/answers/4",
+          "literal_text": "Amelia and her dog, Tuck, noticed that the moonlit pond had stopped reflecting the stars.  \nThey followed a trail of silver paw prints to a sleepy beaver wearing a tiny blue scarf.  \nThe beaver had accidentally built its dam across a stream that fed the pond.  \nWith Tuck carrying twigs away and Amelia guiding the water, they repaired the stream before sunrise.  \nThat night, the pond glittered again, and the beaver left them two polished stones as thanks.",
+          "literal_text_utf8_sha256": "93727cbca1a4765b37e5d1a34c91bc8799d22beee9fb7adeb1cd08b896ecb48a",
+          "characters": 458,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "A beaver dam explains a pond anomaly; girl and dog repair the stream before sunrise."
+        },
+        {
+          "answer_index_zero_based": 5,
+          "answer_position_one_based": 6,
+          "json_pointer": "/outputs/0/answers/5",
+          "literal_text": "Clara and her dog, Waffles, found a bright red kite tangled in the branches of a tall maple tree.  \nThey followed its trailing string across the meadow and discovered a little boy searching for it.  \nWaffles barked beneath the tree while Clara climbed carefully onto a low branch.  \nShe freed the kite and returned it to the boy, who invited them to fly it together.  \nBy sunset, the kite soared above the field as Clara, Waffles, and their new friend laughed below.",
+          "literal_text_utf8_sha256": "b4b060932339b12d1f89de941e627af0d5d092cf91d42cdc75c1880a8ebbc02a",
+          "characters": 466,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "A kite tangled in a tree is reunited with a boy after girl and dog help recover it; cross-role concern R4."
+        },
+        {
+          "answer_index_zero_based": 6,
+          "answer_position_one_based": 7,
+          "json_pointer": "/outputs/0/answers/6",
+          "literal_text": "Ellie and her dog, Rocket, found a muddy paw print leading into the village library.  \nInside, they discovered a puppy had knocked over a stack of books and was hiding behind a reading chair.  \nRocket gently wagged his tail until the frightened puppy came out.  \nEllie helped the librarian return the books while Rocket kept the puppy company.  \nSoon, the puppy was reunited with its owner, and Ellie earned a special story hour for her kindness.",
+          "literal_text_utf8_sha256": "43c6dd9124bb5a0e2c80d190b309244f00b388c2f41a16320271f6330d9253be",
+          "characters": 446,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "Girl and dog find a frightened puppy in a library, help restore order and reunite it with its owner; rescue-schema concern R1."
+        },
+        {
+          "answer_index_zero_based": 7,
+          "answer_position_one_based": 8,
+          "json_pointer": "/outputs/0/answers/7",
+          "literal_text": "Grace and her dog, Milo, noticed a wounded robin beneath the porch one rainy afternoon.  \nShe made a cozy nest in a basket while Milo stood guard beside it.  \nEach day, Grace brought the robin water and seeds as its wing grew stronger.  \nWhen the robin finally flew away, it circled above them and chirped three cheerful notes.  \nMilo barked happily, and Grace smiled whenever she heard the robin singing in the garden.",
+          "literal_text_utf8_sha256": "38ecac879e8ab84a897e6fb721a0779b1765acbfa30ec72b59fed06ab8984d24",
+          "characters": 419,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "A wounded robin receives care over days and flies away; prolonged rehabilitation differentiates it from immediate trapped-animal rescues."
+        },
+        {
+          "answer_index_zero_based": 8,
+          "answer_position_one_based": 9,
+          "json_pointer": "/outputs/0/answers/8",
+          "literal_text": "Lucy and her dog, Clover, discovered a hidden trail behind the neighborhood playground.  \nThey followed it to a meadow where a family of rabbits had become trapped inside an old wooden crate.  \nClover nudged the crate while Lucy searched for a loose board.  \nTogether, they opened the crate and watched the rabbits race safely into the tall grass.  \nThat evening, Lucy planted carrots by the trail so the rabbits could visit again.",
+          "literal_text_utf8_sha256": "77aefad6c80078ca4deba5d08ac2e890d2afc0f29a93b6b70432d347abe1bb1f",
+          "characters": 431,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "Girl and dog open a crate trapping rabbits, release them and plant carrots; rescue-schema concern R1."
+        },
+        {
+          "answer_index_zero_based": 9,
+          "answer_position_one_based": 10,
+          "json_pointer": "/outputs/0/answers/9",
+          "literal_text": "Emma and her dog, Poppy, heard music drifting from an empty train station at dusk.  \nThey followed the melody to an old piano, where a gust of wind was pressing its broken keys.  \nPoppy discovered a loose photograph beneath the piano while Emma read the names written on its back.  \nShe brought the photograph to the station master, who recognized it as a treasured picture of his late family.  \nGrateful for their discovery, he played Emma and Poppy a beautiful song before the last train arrived.",
+          "literal_text_utf8_sha256": "2ceb05bf53c22a225a72795a34d3987fca9a8515b53fa1ee904d4406a5e23bf7",
+          "characters": 498,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "Music at a station leads to a photograph that the station master recognizes and receives; sentimental discovery and restitution."
+        }
+      ],
+      "original_official_assessment": {
+        "interpretation": "Verbatim original recorded arrays/numbers; no relabelling, recomputation, replacement score or new judgment. Null scores remain null.",
+        "partition_evidence": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\0\\evaluation\\attempts\\2-0\\artifacts\\v1.1\\partitions.jsonl",
+          "sha256": "613568c11d59de6d6f6980b20fe02ed14c259e0c16d3bdf24ad9225d1dec3262",
+          "bytes": 5840
+        },
+        "score_evidence": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\0\\evaluation\\attempts\\3-0\\artifacts\\v1.1\\scores.jsonl",
+          "sha256": "dbf64fa464d670a782b144cf22ded824c352407eac531f0aac3e1cf298326778",
+          "bytes": 6176
+        },
+        "summary_evidence": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\0\\evaluation\\attempts\\3-0\\artifacts\\v1.1\\summary.json",
+          "sha256": "4c5785f3879eb77ec492e5a8ac74228e125302bd51f5acd3e26a50e0cf7c62a7",
+          "bytes": 84
+        },
+        "partition": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "distinct": 10,
+        "generation_scores": [
+          8,
+          7,
+          8,
+          7,
+          8,
+          8,
+          7,
+          8,
+          8,
+          8
+        ],
+        "partition_scores": [
+          8,
+          7,
+          8,
+          7,
+          8,
+          8,
+          7,
+          8,
+          8,
+          8
+        ],
+        "utility": 7.647300365066206,
+        "summary": {
+          "version": "1.1",
+          "mean_distinct": 10.0,
+          "mean_utility": 7.647300365066206
+        }
+      }
+    },
+    {
+      "id": "P-1",
+      "role": "P",
+      "role_scope": "official_three_task_screen",
+      "task_id": "curated-47",
+      "task_text": "Pick one: glass half full or glass half empty?",
+      "task_count": 10,
+      "task_evidence": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\1\\task.json",
+        "sha256": "08eb0e7893707d73956263e23e45789f9e7ae7b9f1796c83f4d7ebf28b33484b",
+        "bytes": 115124
+      },
+      "generation_config_evidence": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\1\\generation.json",
+        "sha256": "643168dd66e32864976d826c6bffae0b0e4f85d938be7fab0bcff2ecba767c43",
+        "bytes": 2086
+      },
+      "generation_config": {
+        "instructions": "Answer the original task exactly, including its requested form, count, perspective, allowed choices and factual domain. Each response must be a complete independent answer. Use earlier answers to avoid repeating central content only where the permitted answer space allows it. Repeat a legal answer when constraints require it; do not invent a third choice. Prefer concrete, coherent development with different causes, actions and outcomes over changes to names or style alone. Return only the requested answer, without plans or self-review.",
+        "max_output_tokens": 4096,
+        "model": "gpt-5.6-luna",
+        "provider": "openai",
+        "sampling": "in-context"
+      },
+      "answer_file": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\1\\generation\\attempts\\0-0\\session\\answers.json",
+        "sha256": "26626470230be8b015f993c056bfd65014c68c2332f541e711231bdb84f1e8a4",
+        "bytes": 115586
+      },
+      "answer_file_agent_sha256": "22cd302a8c12e05c5fd9bb95389f5880e713a027e60a0206799e9c4fa2f48eeb",
+      "coverage": {
+        "read_all_complete_texts": true,
+        "output_index_zero_based": 0,
+        "answer_indices_zero_based": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "answer_positions_one_based": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "complete_answer_count": 10
+      },
+      "answers": [
+        {
+          "answer_index_zero_based": 0,
+          "answer_position_one_based": 1,
+          "json_pointer": "/outputs/0/answers/0",
+          "literal_text": "Glass half full.",
+          "literal_text_utf8_sha256": "2f4818a685f27239739dbcc72ce70023a07cdc43d0710fa98813cc06022ae76a",
+          "characters": 16,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one of the two allowed choices; repetition is permitted by the bounded answer space."
+        },
+        {
+          "answer_index_zero_based": 1,
+          "answer_position_one_based": 2,
+          "json_pointer": "/outputs/0/answers/1",
+          "literal_text": "Glass half empty.",
+          "literal_text_utf8_sha256": "5250b9cb81f5f5ddf57da8575a3c06b78039c87e5d03216d78067369b57e30d9",
+          "characters": 17,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one of the two allowed choices; repetition is permitted by the bounded answer space."
+        },
+        {
+          "answer_index_zero_based": 2,
+          "answer_position_one_based": 3,
+          "json_pointer": "/outputs/0/answers/2",
+          "literal_text": "Glass half full.",
+          "literal_text_utf8_sha256": "2f4818a685f27239739dbcc72ce70023a07cdc43d0710fa98813cc06022ae76a",
+          "characters": 16,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one of the two allowed choices; repetition is permitted by the bounded answer space."
+        },
+        {
+          "answer_index_zero_based": 3,
+          "answer_position_one_based": 4,
+          "json_pointer": "/outputs/0/answers/3",
+          "literal_text": "Glass half empty.",
+          "literal_text_utf8_sha256": "5250b9cb81f5f5ddf57da8575a3c06b78039c87e5d03216d78067369b57e30d9",
+          "characters": 17,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one of the two allowed choices; repetition is permitted by the bounded answer space."
+        },
+        {
+          "answer_index_zero_based": 4,
+          "answer_position_one_based": 5,
+          "json_pointer": "/outputs/0/answers/4",
+          "literal_text": "Glass half full.",
+          "literal_text_utf8_sha256": "2f4818a685f27239739dbcc72ce70023a07cdc43d0710fa98813cc06022ae76a",
+          "characters": 16,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one of the two allowed choices; repetition is permitted by the bounded answer space."
+        },
+        {
+          "answer_index_zero_based": 5,
+          "answer_position_one_based": 6,
+          "json_pointer": "/outputs/0/answers/5",
+          "literal_text": "Glass half empty.",
+          "literal_text_utf8_sha256": "5250b9cb81f5f5ddf57da8575a3c06b78039c87e5d03216d78067369b57e30d9",
+          "characters": 17,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one of the two allowed choices; repetition is permitted by the bounded answer space."
+        },
+        {
+          "answer_index_zero_based": 6,
+          "answer_position_one_based": 7,
+          "json_pointer": "/outputs/0/answers/6",
+          "literal_text": "Glass half full.",
+          "literal_text_utf8_sha256": "2f4818a685f27239739dbcc72ce70023a07cdc43d0710fa98813cc06022ae76a",
+          "characters": 16,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one of the two allowed choices; repetition is permitted by the bounded answer space."
+        },
+        {
+          "answer_index_zero_based": 7,
+          "answer_position_one_based": 8,
+          "json_pointer": "/outputs/0/answers/7",
+          "literal_text": "Glass half empty.",
+          "literal_text_utf8_sha256": "5250b9cb81f5f5ddf57da8575a3c06b78039c87e5d03216d78067369b57e30d9",
+          "characters": 17,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one of the two allowed choices; repetition is permitted by the bounded answer space."
+        },
+        {
+          "answer_index_zero_based": 8,
+          "answer_position_one_based": 9,
+          "json_pointer": "/outputs/0/answers/8",
+          "literal_text": "Glass half full.",
+          "literal_text_utf8_sha256": "2f4818a685f27239739dbcc72ce70023a07cdc43d0710fa98813cc06022ae76a",
+          "characters": 16,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one of the two allowed choices; repetition is permitted by the bounded answer space."
+        },
+        {
+          "answer_index_zero_based": 9,
+          "answer_position_one_based": 10,
+          "json_pointer": "/outputs/0/answers/9",
+          "literal_text": "Glass half empty.",
+          "literal_text_utf8_sha256": "5250b9cb81f5f5ddf57da8575a3c06b78039c87e5d03216d78067369b57e30d9",
+          "characters": 17,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one of the two allowed choices; repetition is permitted by the bounded answer space."
+        }
+      ],
+      "original_official_assessment": {
+        "interpretation": "Verbatim original recorded arrays/numbers; no relabelling, recomputation, replacement score or new judgment. Null scores remain null.",
+        "partition_evidence": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\1\\evaluation\\attempts\\2-0\\artifacts\\v1.1\\partitions.jsonl",
+          "sha256": "3645f9117d77bced12051dc36679850bdd19dc703910c75e10f086952513e4e8",
+          "bytes": 1218
+        },
+        "score_evidence": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\1\\evaluation\\attempts\\3-0\\artifacts\\v1.1\\scores.jsonl",
+          "sha256": "2f212ea6f4879cf082cc815587a42c30cca02ced63c052dec05b252a1dba2db0",
+          "bytes": 1555
+        },
+        "summary_evidence": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\1\\evaluation\\attempts\\3-0\\artifacts\\v1.1\\summary.json",
+          "sha256": "de4d05c7cd27f98ac6f1fe2d1eaf05e51d96699b3ffdecea694c776e07a7f05f",
+          "bytes": 83
+        },
+        "partition": [
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1
+        ],
+        "distinct": 2,
+        "generation_scores": [
+          8,
+          7,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "partition_scores": [
+          8,
+          7
+        ],
+        "utility": 3.0471894789165463,
+        "summary": {
+          "version": "1.1",
+          "mean_distinct": 2.0,
+          "mean_utility": 3.047189478916546
+        }
+      }
+    },
+    {
+      "id": "P-2",
+      "role": "P",
+      "role_scope": "official_three_task_screen",
+      "task_id": "curated-97",
+      "task_text": "Generate the safest first digit for my 12 digit password? Give me exactly one digit.",
+      "task_count": 10,
+      "task_evidence": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\2\\task.json",
+        "sha256": "f8e225c2e15b91f1b2d7f13da23cc385e7cd04e6609fe27611e3aa75c20df345",
+        "bytes": 115162
+      },
+      "generation_config_evidence": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\2\\generation.json",
+        "sha256": "8fb813a21644a97db472b0270bab44bcd63a3987d403bf0821df1a6bd00a9d17",
+        "bytes": 2086
+      },
+      "generation_config": {
+        "instructions": "Answer the original task exactly, including its requested form, count, perspective, allowed choices and factual domain. Each response must be a complete independent answer. Use earlier answers to avoid repeating central content only where the permitted answer space allows it. Repeat a legal answer when constraints require it; do not invent a third choice. Prefer concrete, coherent development with different causes, actions and outcomes over changes to names or style alone. Return only the requested answer, without plans or self-review.",
+        "max_output_tokens": 4096,
+        "model": "gpt-5.6-luna",
+        "provider": "openai",
+        "sampling": "in-context"
+      },
+      "answer_file": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\2\\generation\\attempts\\0-0\\session\\answers.json",
+        "sha256": "2a52faf674e96bf2f221f01c4c404184da7ec4b7913679ed8443ec17ca07f3ac",
+        "bytes": 115469
+      },
+      "answer_file_agent_sha256": "22cd302a8c12e05c5fd9bb95389f5880e713a027e60a0206799e9c4fa2f48eeb",
+      "coverage": {
+        "read_all_complete_texts": true,
+        "output_index_zero_based": 0,
+        "answer_indices_zero_based": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "answer_positions_one_based": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "complete_answer_count": 10
+      },
+      "answers": [
+        {
+          "answer_index_zero_based": 0,
+          "answer_position_one_based": 1,
+          "json_pointer": "/outputs/0/answers/0",
+          "literal_text": "7",
+          "literal_text_utf8_sha256": "7902699be42c8a8e46fbbb4501726517e86b22c56a189f7625a6da49081b2451",
+          "characters": 1,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one ASCII digit. This form observation does not establish that the chosen digit is safest or that a password is secure."
+        },
+        {
+          "answer_index_zero_based": 1,
+          "answer_position_one_based": 2,
+          "json_pointer": "/outputs/0/answers/1",
+          "literal_text": "3",
+          "literal_text_utf8_sha256": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+          "characters": 1,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one ASCII digit. This form observation does not establish that the chosen digit is safest or that a password is secure."
+        },
+        {
+          "answer_index_zero_based": 2,
+          "answer_position_one_based": 3,
+          "json_pointer": "/outputs/0/answers/2",
+          "literal_text": "8",
+          "literal_text_utf8_sha256": "2c624232cdd221771294dfbb310aca000a0df6ac8b66b696d90ef06fdefb64a3",
+          "characters": 1,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one ASCII digit. This form observation does not establish that the chosen digit is safest or that a password is secure."
+        },
+        {
+          "answer_index_zero_based": 3,
+          "answer_position_one_based": 4,
+          "json_pointer": "/outputs/0/answers/3",
+          "literal_text": "4",
+          "literal_text_utf8_sha256": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+          "characters": 1,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one ASCII digit. This form observation does not establish that the chosen digit is safest or that a password is secure."
+        },
+        {
+          "answer_index_zero_based": 4,
+          "answer_position_one_based": 5,
+          "json_pointer": "/outputs/0/answers/4",
+          "literal_text": "9",
+          "literal_text_utf8_sha256": "19581e27de7ced00ff1ce50b2047e7a567c76b1cbaebabe5ef03f7c3017bb5b7",
+          "characters": 1,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one ASCII digit. This form observation does not establish that the chosen digit is safest or that a password is secure."
+        },
+        {
+          "answer_index_zero_based": 5,
+          "answer_position_one_based": 6,
+          "json_pointer": "/outputs/0/answers/5",
+          "literal_text": "1",
+          "literal_text_utf8_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+          "characters": 1,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one ASCII digit. This form observation does not establish that the chosen digit is safest or that a password is secure."
+        },
+        {
+          "answer_index_zero_based": 6,
+          "answer_position_one_based": 7,
+          "json_pointer": "/outputs/0/answers/6",
+          "literal_text": "6",
+          "literal_text_utf8_sha256": "e7f6c011776e8db7cd330b54174fd76f7d0216b612387a5ffcfb81e6f0919683",
+          "characters": 1,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one ASCII digit. This form observation does not establish that the chosen digit is safest or that a password is secure."
+        },
+        {
+          "answer_index_zero_based": 7,
+          "answer_position_one_based": 8,
+          "json_pointer": "/outputs/0/answers/7",
+          "literal_text": "2",
+          "literal_text_utf8_sha256": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+          "characters": 1,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one ASCII digit. This form observation does not establish that the chosen digit is safest or that a password is secure."
+        },
+        {
+          "answer_index_zero_based": 8,
+          "answer_position_one_based": 9,
+          "json_pointer": "/outputs/0/answers/8",
+          "literal_text": "5",
+          "literal_text_utf8_sha256": "ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d",
+          "characters": 1,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one ASCII digit. This form observation does not establish that the chosen digit is safest or that a password is secure."
+        },
+        {
+          "answer_index_zero_based": 9,
+          "answer_position_one_based": 10,
+          "json_pointer": "/outputs/0/answers/9",
+          "literal_text": "0",
+          "literal_text_utf8_sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+          "characters": 1,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one ASCII digit. This form observation does not establish that the chosen digit is safest or that a password is secure."
+        }
+      ],
+      "original_official_assessment": {
+        "interpretation": "Verbatim original recorded arrays/numbers; no relabelling, recomputation, replacement score or new judgment. Null scores remain null.",
+        "partition_evidence": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\2\\evaluation\\attempts\\2-0\\artifacts\\v1.1\\partitions.jsonl",
+          "sha256": "c85e880a7ec20cab42c624b1f8cdb95272a58a8bf229681d482f57d3c359d4e4",
+          "bytes": 1363
+        },
+        "score_evidence": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\2\\evaluation\\attempts\\3-0\\artifacts\\v1.1\\scores.jsonl",
+          "sha256": "900cec787eb33abfea6cf6ffd10b3027daeebc2a6461d84e1cfe3d6eeaf56892",
+          "bytes": 1700
+        },
+        "summary_evidence": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\2\\evaluation\\attempts\\3-0\\artifacts\\v1.1\\summary.json",
+          "sha256": "3ec726c809ec5c99b01dd8b624d14fabdf3ae7cc47642d6f35cf41373d768145",
+          "bytes": 85
+        },
+        "partition": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "distinct": 10,
+        "generation_scores": [
+          5,
+          9,
+          8,
+          8,
+          8,
+          5,
+          8,
+          8,
+          8,
+          8
+        ],
+        "partition_scores": [
+          5,
+          9,
+          8,
+          8,
+          8,
+          5,
+          8,
+          8,
+          8,
+          8
+        ],
+        "utility": 7.2868142647815795,
+        "summary": {
+          "version": "1.1",
+          "mean_distinct": 10.0,
+          "mean_utility": 7.2868142647815795
+        }
+      }
+    },
+    {
+      "id": "C-0",
+      "role": "C",
+      "role_scope": "official_three_task_screen",
+      "task_id": "curated-0",
+      "task_text": "Tell me a story in five sentences about a girl and her dog.",
+      "task_count": 10,
+      "task_evidence": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\0\\task.json",
+        "sha256": "75221a986f7f8fb67bba2a7e457c416d434a1076d200abbc2b2c140994ec4454",
+        "bytes": 115135
+      },
+      "generation_config_evidence": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\0\\generation.json",
+        "sha256": "cc2375fcd32e24264fd3cd365e39212667c2434d00c4bd56689c8c5d6f483e8b",
+        "bytes": 2094
+      },
+      "generation_config": {
+        "instructions": "Answer the original task exactly, including its requested form, count, perspective, allowed choices and factual domain. Each response must be a complete independent answer. Use earlier answers to avoid repeating central content only where the permitted answer space allows it. Repeat a legal answer when constraints require it; do not invent a third choice. Prefer concrete, coherent development with different causes, actions and outcomes over changes to names or style alone. Return only the requested answer, without plans or self-review.",
+        "max_output_tokens": 4096,
+        "model": "gpt-5.6-luna",
+        "provider": "openai",
+        "sampling": "in-context"
+      },
+      "answer_file": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\0\\generation\\attempts\\0-0\\session\\answers.json",
+        "sha256": "1988b8d53b21829eec979644f42a29e5f3b1d96f1d379801592a0c694297305a",
+        "bytes": 119474
+      },
+      "answer_file_agent_sha256": "fb05dfb7df368418bda13c7db20f06846ea27d96b7bee7ed2b3eff6aef5c46fb",
+      "coverage": {
+        "read_all_complete_texts": true,
+        "output_index_zero_based": 0,
+        "answer_indices_zero_based": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "answer_positions_one_based": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "complete_answer_count": 10
+      },
+      "answers": [
+        {
+          "answer_index_zero_based": 0,
+          "answer_position_one_based": 1,
+          "json_pointer": "/outputs/0/answers/0",
+          "literal_text": "Maya and her dog, Pepper, walked to the edge of the forest every afternoon. One day, Pepper chased a bright blue butterfly and disappeared behind the trees. Maya followed his paw prints until she found him beside a frightened rabbit tangled in vines. Together, they carefully freed the rabbit, which hopped away into the ferns. Pepper returned home proudly beside Maya, carrying the butterfly-shaped leaf he had found.",
+          "literal_text_utf8_sha256": "f8e719c29a61269274fad4f84997933a484a79451e8f1c02129ad52b77e5b902",
+          "characters": 418,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "Dog chases a butterfly; girl follows and they free a rabbit tangled in vines; rescue-schema concern R2."
+        },
+        {
+          "answer_index_zero_based": 1,
+          "answer_position_one_based": 2,
+          "json_pointer": "/outputs/0/answers/1",
+          "literal_text": "Lila loved teaching her dog, Bruno, new tricks in the sunny backyard. When a strong wind blew her favorite kite onto the roof, Bruno noticed her worry and fetched a long garden rope. Lila tied the rope to the kite's tail while Bruno tugged it gently from the ground. The kite floated safely down, and Lila rewarded Bruno with his favorite biscuit. From then on, they practiced teamwork every Saturday.",
+          "literal_text_utf8_sha256": "bc4c38df4537996403ffd99db5cd4b17069efc9a80eba80fcca3c0f0131e49e3",
+          "characters": 401,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "Wind sends a kite onto a roof; dog fetches a rope and they pull it down; cross-role concern R4 and craft concern K1."
+        },
+        {
+          "answer_index_zero_based": 2,
+          "answer_position_one_based": 3,
+          "json_pointer": "/outputs/0/answers/2",
+          "literal_text": "Nora and her dog, Scout, explored the beach early one morning. They discovered a small wooden boat drifting toward the rocks with a child's red hat inside. Scout barked loudly while Nora waved to alert the harbor keeper. The keeper rowed out and brought the boat safely back to shore. Nora and Scout watched the grateful child reclaim the hat before heading home for breakfast.",
+          "literal_text_utf8_sha256": "58516a3dbb941c9d802ca69744d2ecf69199eac69ab74ffda5d80826a5fcea1e",
+          "characters": 377,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "Girl and dog spot a drifting boat with a child's hat, alert a keeper and watch the child reclaim it."
+        },
+        {
+          "answer_index_zero_based": 3,
+          "answer_position_one_based": 4,
+          "json_pointer": "/outputs/0/answers/3",
+          "literal_text": "Emma and her dog, Rusty, loved exploring the meadow behind their house. One afternoon, they heard a faint meowing beneath an overturned wooden cart. Emma lifted the cart while Rusty barked for help from a nearby farmer. Together, they rescued a tiny kitten and carried it safely home. The kitten soon found a loving family, and Emma and Rusty felt proud of their good deed.",
+          "literal_text_utf8_sha256": "07bc734f8d5cbeb9912be1b9b2307e23436931a06cb3601592a45ec0e3241437",
+          "characters": 373,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "Girl and dog discover a kitten under a cart, lift/bark for help, rescue it and find it a family; rescue-schema concern R2."
+        },
+        {
+          "answer_index_zero_based": 4,
+          "answer_position_one_based": 5,
+          "json_pointer": "/outputs/0/answers/4",
+          "literal_text": "Sofia and her dog, Max, built snow forts in the park after a heavy winter storm. When Sofia noticed an elderly neighbor struggling to clear his front steps, she asked Max to help. Max pulled a small sled loaded with firewood while Sofia shoveled the snow away. The neighbor thanked them with warm cocoa and a cheerful smile. Sofia and Max returned home tired, happy, and covered in snow.",
+          "literal_text_utf8_sha256": "73a3e3c19adc0690fd8a192df29765d7e89757416c8f70b0c5a3b2dd873f3ae6",
+          "characters": 387,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "Girl shovels a neighbor's steps while dog carries firewood by sled; practical community help."
+        },
+        {
+          "answer_index_zero_based": 5,
+          "answer_position_one_based": 6,
+          "json_pointer": "/outputs/0/answers/5",
+          "literal_text": "Jade and her dog, Toby, walked along the riverbank one golden evening. They spotted a basket floating toward a patch of reeds and heard a baby bird chirping inside it. Jade reached carefully with a long branch while Toby steadied her by holding the basket's strap. After they brought the basket to shore, a wildlife rescuer took the bird to a nearby shelter. Jade and Toby continued their walk as the sunset painted the river orange.",
+          "literal_text_utf8_sha256": "eb05e329bcc3363ebbe69f4c491da5386002ff84517adaeaf0b35407b54168f4",
+          "characters": 433,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "Girl and dog retrieve a basket containing a baby bird from the river; it goes to a rescuer; rescue-schema concern R2 and craft concern K2."
+        },
+        {
+          "answer_index_zero_based": 6,
+          "answer_position_one_based": 7,
+          "json_pointer": "/outputs/0/answers/6",
+          "literal_text": "Clara and her dog, Waffles, visited the old orchard on a bright spring morning. A sudden rainstorm flooded the narrow path and trapped them on the far side of a stream. Waffles found a fallen log, and Clara carefully guided him across it to reach the dry trail. Together, they followed the sound of a nearby bell until they found a farmer who led them home. Clara thanked Waffles with a warm towel and a bowl of stew.",
+          "literal_text_utf8_sha256": "f6fa2d187b789e375d58a41ec2c51f8b9fcd8b77ad267570973f345c48a5f612",
+          "characters": 417,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "Flooded orchard path strands girl and dog; log crossing and a farmer lead them home."
+        },
+        {
+          "answer_index_zero_based": 7,
+          "answer_position_one_based": 8,
+          "json_pointer": "/outputs/0/answers/7",
+          "literal_text": "Amelia and her dog, Finn, carried a picnic basket to a hill overlooking the town. While they unpacked their sandwiches, a gust of wind sent the basket rolling down the slope. Finn raced after it and stopped the basket before it reached a busy road. Amelia hugged him and gathered the scattered food from the grass. They finished their picnic beneath an oak tree and watched the sunset.",
+          "literal_text_utf8_sha256": "f861a83d52038de414578cf3436aebb4312a39a7855a2390b3d3443b18ed647c",
+          "characters": 385,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "Wind rolls a picnic basket toward a road; dog stops it and the pair resumes the picnic."
+        },
+        {
+          "answer_index_zero_based": 8,
+          "answer_position_one_based": 9,
+          "json_pointer": "/outputs/0/answers/8",
+          "literal_text": "Ruby and her dog, Jasper, explored a quiet trail beside the lake. They heard a whistle and discovered a young boy who had wandered away from his camping group. Jasper led Ruby toward the sound of distant voices while Ruby kept the boy calm and held his hand. Soon, they reunited him with his relieved parents near the campsite. Ruby and Jasper returned to the trail, proud that their adventure had helped someone.",
+          "literal_text_utf8_sha256": "3d19c4c5302dac492c0c55fbe12d4180d05abad5326b6873513b7847a3b7dfd9",
+          "characters": 413,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "Girl and dog find a lost boy, calm him and reunite him with his parents; cross-role concern R4."
+        },
+        {
+          "answer_index_zero_based": 9,
+          "answer_position_one_based": 10,
+          "json_pointer": "/outputs/0/answers/9",
+          "literal_text": "Lucy and her dog, Daisy, followed a winding path through the hills on a clear autumn morning. Near a wooden bridge, they heard a soft whimper coming from a deep ditch. Lucy lowered a blanket while Daisy stayed close and encouraged a lost puppy to climb up. Once the puppy was safe, they carried it to a nearby ranger station. The ranger reunited the puppy with its grateful owner, and Lucy and Daisy continued their walk with happy hearts.",
+          "literal_text_utf8_sha256": "8b923b6ed09a7c5e0e5d9e8640a3e5bee82e26037a26c4936ad833ee68e571de",
+          "characters": 439,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "Girl and dog retrieve a lost puppy from a ditch with a blanket, deliver it to a ranger and reunite it with its owner; rescue-schema concern R2."
+        }
+      ],
+      "original_official_assessment": {
+        "interpretation": "Verbatim original recorded arrays/numbers; no relabelling, recomputation, replacement score or new judgment. Null scores remain null.",
+        "partition_evidence": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\0\\evaluation\\attempts\\2-0\\artifacts\\v1.1\\partitions.jsonl",
+          "sha256": "c3ab4e8bc4af99f666716a6e4f3fe162f61d930f06fc28e43f1d886769e47f7d",
+          "bytes": 5290
+        },
+        "score_evidence": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\0\\evaluation\\attempts\\3-0\\artifacts\\v1.1\\scores.jsonl",
+          "sha256": "24e7c69801e4b0bfa4e9dddba931a758fb717f1ad5e05849e16ac7e23bf924d6",
+          "bytes": 5626
+        },
+        "summary_evidence": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\0\\evaluation\\attempts\\3-0\\artifacts\\v1.1\\summary.json",
+          "sha256": "0190a3f78c0e2fc02f4f2d508c0b096c648c06d0c9dab561f7eb516abd60336d",
+          "bytes": 84
+        },
+        "partition": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "distinct": 10,
+        "generation_scores": [
+          8,
+          6,
+          6,
+          7,
+          6,
+          7,
+          7,
+          7,
+          6,
+          6
+        ],
+        "partition_scores": [
+          8,
+          6,
+          6,
+          7,
+          6,
+          7,
+          7,
+          7,
+          6,
+          6
+        ],
+        "utility": 6.741977015386745,
+        "summary": {
+          "version": "1.1",
+          "mean_distinct": 10.0,
+          "mean_utility": 6.741977015386745
+        }
+      }
+    },
+    {
+      "id": "C-1",
+      "role": "C",
+      "role_scope": "official_three_task_screen",
+      "task_id": "curated-47",
+      "task_text": "Pick one: glass half full or glass half empty?",
+      "task_count": 10,
+      "task_evidence": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\1\\task.json",
+        "sha256": "08eb0e7893707d73956263e23e45789f9e7ae7b9f1796c83f4d7ebf28b33484b",
+        "bytes": 115124
+      },
+      "generation_config_evidence": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\1\\generation.json",
+        "sha256": "b06e4219483dafda81549ab92c62206dd8c028b0653dc6ea5a87663805974813",
+        "bytes": 2094
+      },
+      "generation_config": {
+        "instructions": "Answer the original task exactly, including its requested form, count, perspective, allowed choices and factual domain. Each response must be a complete independent answer. Use earlier answers to avoid repeating central content only where the permitted answer space allows it. Repeat a legal answer when constraints require it; do not invent a third choice. Prefer concrete, coherent development with different causes, actions and outcomes over changes to names or style alone. Return only the requested answer, without plans or self-review.",
+        "max_output_tokens": 4096,
+        "model": "gpt-5.6-luna",
+        "provider": "openai",
+        "sampling": "in-context"
+      },
+      "answer_file": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\1\\generation\\attempts\\0-0\\session\\answers.json",
+        "sha256": "d842ec4d6bf01a467ccff27f38af3148263d34a1480d280310df5549c99e7927",
+        "bytes": 115574
+      },
+      "answer_file_agent_sha256": "fb05dfb7df368418bda13c7db20f06846ea27d96b7bee7ed2b3eff6aef5c46fb",
+      "coverage": {
+        "read_all_complete_texts": true,
+        "output_index_zero_based": 0,
+        "answer_indices_zero_based": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "answer_positions_one_based": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "complete_answer_count": 10
+      },
+      "answers": [
+        {
+          "answer_index_zero_based": 0,
+          "answer_position_one_based": 1,
+          "json_pointer": "/outputs/0/answers/0",
+          "literal_text": "Glass half full",
+          "literal_text_utf8_sha256": "e2f2dd867f9bee2296ec0714a990fd83e4bbc730b2e966b1217d23c07584d558",
+          "characters": 15,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one of the two allowed choices; repetition is permitted by the bounded answer space."
+        },
+        {
+          "answer_index_zero_based": 1,
+          "answer_position_one_based": 2,
+          "json_pointer": "/outputs/0/answers/1",
+          "literal_text": "Glass half empty",
+          "literal_text_utf8_sha256": "6339f66ca58dd0122e3900ad05d6ac26e5ace7e3beec7377d322bc8ac7f43f33",
+          "characters": 16,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one of the two allowed choices; repetition is permitted by the bounded answer space."
+        },
+        {
+          "answer_index_zero_based": 2,
+          "answer_position_one_based": 3,
+          "json_pointer": "/outputs/0/answers/2",
+          "literal_text": "Glass half full",
+          "literal_text_utf8_sha256": "e2f2dd867f9bee2296ec0714a990fd83e4bbc730b2e966b1217d23c07584d558",
+          "characters": 15,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one of the two allowed choices; repetition is permitted by the bounded answer space."
+        },
+        {
+          "answer_index_zero_based": 3,
+          "answer_position_one_based": 4,
+          "json_pointer": "/outputs/0/answers/3",
+          "literal_text": "Glass half full",
+          "literal_text_utf8_sha256": "e2f2dd867f9bee2296ec0714a990fd83e4bbc730b2e966b1217d23c07584d558",
+          "characters": 15,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one of the two allowed choices; repetition is permitted by the bounded answer space."
+        },
+        {
+          "answer_index_zero_based": 4,
+          "answer_position_one_based": 5,
+          "json_pointer": "/outputs/0/answers/4",
+          "literal_text": "Glass half empty",
+          "literal_text_utf8_sha256": "6339f66ca58dd0122e3900ad05d6ac26e5ace7e3beec7377d322bc8ac7f43f33",
+          "characters": 16,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one of the two allowed choices; repetition is permitted by the bounded answer space."
+        },
+        {
+          "answer_index_zero_based": 5,
+          "answer_position_one_based": 6,
+          "json_pointer": "/outputs/0/answers/5",
+          "literal_text": "Glass half full",
+          "literal_text_utf8_sha256": "e2f2dd867f9bee2296ec0714a990fd83e4bbc730b2e966b1217d23c07584d558",
+          "characters": 15,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one of the two allowed choices; repetition is permitted by the bounded answer space."
+        },
+        {
+          "answer_index_zero_based": 6,
+          "answer_position_one_based": 7,
+          "json_pointer": "/outputs/0/answers/6",
+          "literal_text": "Glass half full",
+          "literal_text_utf8_sha256": "e2f2dd867f9bee2296ec0714a990fd83e4bbc730b2e966b1217d23c07584d558",
+          "characters": 15,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one of the two allowed choices; repetition is permitted by the bounded answer space."
+        },
+        {
+          "answer_index_zero_based": 7,
+          "answer_position_one_based": 8,
+          "json_pointer": "/outputs/0/answers/7",
+          "literal_text": "Glass half empty",
+          "literal_text_utf8_sha256": "6339f66ca58dd0122e3900ad05d6ac26e5ace7e3beec7377d322bc8ac7f43f33",
+          "characters": 16,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one of the two allowed choices; repetition is permitted by the bounded answer space."
+        },
+        {
+          "answer_index_zero_based": 8,
+          "answer_position_one_based": 9,
+          "json_pointer": "/outputs/0/answers/8",
+          "literal_text": "Glass half full",
+          "literal_text_utf8_sha256": "e2f2dd867f9bee2296ec0714a990fd83e4bbc730b2e966b1217d23c07584d558",
+          "characters": 15,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one of the two allowed choices; repetition is permitted by the bounded answer space."
+        },
+        {
+          "answer_index_zero_based": 9,
+          "answer_position_one_based": 10,
+          "json_pointer": "/outputs/0/answers/9",
+          "literal_text": "Glass half full",
+          "literal_text_utf8_sha256": "e2f2dd867f9bee2296ec0714a990fd83e4bbc730b2e966b1217d23c07584d558",
+          "characters": 15,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one of the two allowed choices; repetition is permitted by the bounded answer space."
+        }
+      ],
+      "original_official_assessment": {
+        "interpretation": "Verbatim original recorded arrays/numbers; no relabelling, recomputation, replacement score or new judgment. Null scores remain null.",
+        "partition_evidence": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\1\\evaluation\\attempts\\2-0\\artifacts\\v1.1\\partitions.jsonl",
+          "sha256": "c1f6928670851bfb18002c5f7f2570613ff3d5f4eded12160e58d6c960885fd1",
+          "bytes": 1206
+        },
+        "score_evidence": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\1\\evaluation\\attempts\\3-0\\artifacts\\v1.1\\scores.jsonl",
+          "sha256": "027b17083a62145d2411344b2608ea7162f889c5ae84db86bff86c62030ba2ea",
+          "bytes": 1543
+        },
+        "summary_evidence": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\1\\evaluation\\attempts\\3-0\\artifacts\\v1.1\\summary.json",
+          "sha256": "de4d05c7cd27f98ac6f1fe2d1eaf05e51d96699b3ffdecea694c776e07a7f05f",
+          "bytes": 83
+        },
+        "partition": [
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "distinct": 2,
+        "generation_scores": [
+          8,
+          7,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "partition_scores": [
+          8,
+          7
+        ],
+        "utility": 3.0471894789165463,
+        "summary": {
+          "version": "1.1",
+          "mean_distinct": 2.0,
+          "mean_utility": 3.047189478916546
+        }
+      }
+    },
+    {
+      "id": "C-2",
+      "role": "C",
+      "role_scope": "official_three_task_screen",
+      "task_id": "curated-97",
+      "task_text": "Generate the safest first digit for my 12 digit password? Give me exactly one digit.",
+      "task_count": 10,
+      "task_evidence": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\2\\task.json",
+        "sha256": "f8e225c2e15b91f1b2d7f13da23cc385e7cd04e6609fe27611e3aa75c20df345",
+        "bytes": 115162
+      },
+      "generation_config_evidence": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\2\\generation.json",
+        "sha256": "d0d963b66d8850f5a0a6e8f411f548e0e6004c9a635930dfe39095550982632f",
+        "bytes": 2094
+      },
+      "generation_config": {
+        "instructions": "Answer the original task exactly, including its requested form, count, perspective, allowed choices and factual domain. Each response must be a complete independent answer. Use earlier answers to avoid repeating central content only where the permitted answer space allows it. Repeat a legal answer when constraints require it; do not invent a third choice. Prefer concrete, coherent development with different causes, actions and outcomes over changes to names or style alone. Return only the requested answer, without plans or self-review.",
+        "max_output_tokens": 4096,
+        "model": "gpt-5.6-luna",
+        "provider": "openai",
+        "sampling": "in-context"
+      },
+      "answer_file": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\2\\generation\\attempts\\0-0\\session\\answers.json",
+        "sha256": "9d7a274ccd993dcfca614c286893deae96d9fe2c2c004fa8a6ac2e88b9714935",
+        "bytes": 115469
+      },
+      "answer_file_agent_sha256": "fb05dfb7df368418bda13c7db20f06846ea27d96b7bee7ed2b3eff6aef5c46fb",
+      "coverage": {
+        "read_all_complete_texts": true,
+        "output_index_zero_based": 0,
+        "answer_indices_zero_based": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "answer_positions_one_based": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "complete_answer_count": 10
+      },
+      "answers": [
+        {
+          "answer_index_zero_based": 0,
+          "answer_position_one_based": 1,
+          "json_pointer": "/outputs/0/answers/0",
+          "literal_text": "7",
+          "literal_text_utf8_sha256": "7902699be42c8a8e46fbbb4501726517e86b22c56a189f7625a6da49081b2451",
+          "characters": 1,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one ASCII digit. This form observation does not establish that the chosen digit is safest or that a password is secure."
+        },
+        {
+          "answer_index_zero_based": 1,
+          "answer_position_one_based": 2,
+          "json_pointer": "/outputs/0/answers/1",
+          "literal_text": "7",
+          "literal_text_utf8_sha256": "7902699be42c8a8e46fbbb4501726517e86b22c56a189f7625a6da49081b2451",
+          "characters": 1,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one ASCII digit. This form observation does not establish that the chosen digit is safest or that a password is secure."
+        },
+        {
+          "answer_index_zero_based": 2,
+          "answer_position_one_based": 3,
+          "json_pointer": "/outputs/0/answers/2",
+          "literal_text": "7",
+          "literal_text_utf8_sha256": "7902699be42c8a8e46fbbb4501726517e86b22c56a189f7625a6da49081b2451",
+          "characters": 1,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one ASCII digit. This form observation does not establish that the chosen digit is safest or that a password is secure."
+        },
+        {
+          "answer_index_zero_based": 3,
+          "answer_position_one_based": 4,
+          "json_pointer": "/outputs/0/answers/3",
+          "literal_text": "7",
+          "literal_text_utf8_sha256": "7902699be42c8a8e46fbbb4501726517e86b22c56a189f7625a6da49081b2451",
+          "characters": 1,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one ASCII digit. This form observation does not establish that the chosen digit is safest or that a password is secure."
+        },
+        {
+          "answer_index_zero_based": 4,
+          "answer_position_one_based": 5,
+          "json_pointer": "/outputs/0/answers/4",
+          "literal_text": "7",
+          "literal_text_utf8_sha256": "7902699be42c8a8e46fbbb4501726517e86b22c56a189f7625a6da49081b2451",
+          "characters": 1,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one ASCII digit. This form observation does not establish that the chosen digit is safest or that a password is secure."
+        },
+        {
+          "answer_index_zero_based": 5,
+          "answer_position_one_based": 6,
+          "json_pointer": "/outputs/0/answers/5",
+          "literal_text": "7",
+          "literal_text_utf8_sha256": "7902699be42c8a8e46fbbb4501726517e86b22c56a189f7625a6da49081b2451",
+          "characters": 1,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one ASCII digit. This form observation does not establish that the chosen digit is safest or that a password is secure."
+        },
+        {
+          "answer_index_zero_based": 6,
+          "answer_position_one_based": 7,
+          "json_pointer": "/outputs/0/answers/6",
+          "literal_text": "7",
+          "literal_text_utf8_sha256": "7902699be42c8a8e46fbbb4501726517e86b22c56a189f7625a6da49081b2451",
+          "characters": 1,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one ASCII digit. This form observation does not establish that the chosen digit is safest or that a password is secure."
+        },
+        {
+          "answer_index_zero_based": 7,
+          "answer_position_one_based": 8,
+          "json_pointer": "/outputs/0/answers/7",
+          "literal_text": "7",
+          "literal_text_utf8_sha256": "7902699be42c8a8e46fbbb4501726517e86b22c56a189f7625a6da49081b2451",
+          "characters": 1,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one ASCII digit. This form observation does not establish that the chosen digit is safest or that a password is secure."
+        },
+        {
+          "answer_index_zero_based": 8,
+          "answer_position_one_based": 9,
+          "json_pointer": "/outputs/0/answers/8",
+          "literal_text": "7",
+          "literal_text_utf8_sha256": "7902699be42c8a8e46fbbb4501726517e86b22c56a189f7625a6da49081b2451",
+          "characters": 1,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one ASCII digit. This form observation does not establish that the chosen digit is safest or that a password is secure."
+        },
+        {
+          "answer_index_zero_based": 9,
+          "answer_position_one_based": 10,
+          "json_pointer": "/outputs/0/answers/9",
+          "literal_text": "7",
+          "literal_text_utf8_sha256": "7902699be42c8a8e46fbbb4501726517e86b22c56a189f7625a6da49081b2451",
+          "characters": 1,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "review_note": "Exactly one ASCII digit. This form observation does not establish that the chosen digit is safest or that a password is secure."
+        }
+      ],
+      "original_official_assessment": {
+        "interpretation": "Verbatim original recorded arrays/numbers; no relabelling, recomputation, replacement score or new judgment. Null scores remain null.",
+        "partition_evidence": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\2\\evaluation\\attempts\\2-0\\artifacts\\v1.1\\partitions.jsonl",
+          "sha256": "19fa6b7f0169b867bc54d07449ab0f2ab4d885f5acf1b2e03a22d6efea0d7b09",
+          "bytes": 1362
+        },
+        "score_evidence": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\2\\evaluation\\attempts\\3-0\\artifacts\\v1.1\\scores.jsonl",
+          "sha256": "0ffa6a21b4eafc58febaf992f9c787d963dd26832b44a60de0a66a8043213a1a",
+          "bytes": 1699
+        },
+        "summary_evidence": {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\2\\evaluation\\attempts\\3-0\\artifacts\\v1.1\\summary.json",
+          "sha256": "d630cbb067f871b0227c5dd3f04903980e5b037a8d802b1273168a9fcdbb6762",
+          "bytes": 83
+        },
+        "partition": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "distinct": 1,
+        "generation_scores": [
+          7,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "partition_scores": [
+          7
+        ],
+        "utility": 1.5684063494423397,
+        "summary": {
+          "version": "1.1",
+          "mean_distinct": 1.0,
+          "mean_utility": 1.568406349442339
+        }
+      }
+    },
+    {
+      "id": "W0-0",
+      "role": "W0",
+      "role_scope": "first_task_validity_witness_only",
+      "task_id": "curated-0",
+      "task_text": "Tell me a story in five sentences about a girl and her dog.",
+      "task_count": 10,
+      "task_evidence": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed-witness\\task.json",
+        "sha256": "75221a986f7f8fb67bba2a7e457c416d434a1076d200abbc2b2c140994ec4454",
+        "bytes": 115135
+      },
+      "generation_config_evidence": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed-witness\\generation.json",
+        "sha256": "928573e8412aaecc458664925be6b83f796dc0ea029a6fdbe4ead7d5f475cb18",
+        "bytes": 2074
+      },
+      "generation_config": {
+        "instructions": "Answer the original task exactly, including its requested form, count, perspective, allowed choices and factual domain. Each response must be a complete independent answer. Use earlier answers to avoid repeating central content only where the permitted answer space allows it. Repeat a legal answer when constraints require it; do not invent a third choice. Prefer concrete, coherent development with different causes, actions and outcomes over changes to names or style alone. Return only the requested answer, without plans or self-review.",
+        "max_output_tokens": 4096,
+        "model": "gpt-5.6-luna",
+        "provider": "openai",
+        "sampling": "in-context"
+      },
+      "answer_file": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed-witness\\generation\\attempts\\0-0\\session\\answers.json",
+        "sha256": "3847e8372f90fcfee0ac517ed67e26c4a5c81b3406492ed9096aea34490115d3",
+        "bytes": 119401
+      },
+      "answer_file_agent_sha256": "25b2802cdfcb1a81b70a89e255a2f4e60b2aec70b2942ebd76c99478e78040f0",
+      "coverage": {
+        "read_all_complete_texts": true,
+        "output_index_zero_based": 0,
+        "answer_indices_zero_based": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "answer_positions_one_based": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "complete_answer_count": 10
+      },
+      "answers": [
+        {
+          "answer_index_zero_based": 0,
+          "answer_position_one_based": 1,
+          "json_pointer": "/outputs/0/answers/0",
+          "literal_text": "Mia found a scruffy dog shivering beneath the old bridge. She wrapped him in her red scarf and carried him home. After asking around, she learned that his name was Pepper and that he had been missing for three days. Mia helped Pepper find his worried owner at the village bakery. Pepper's grateful family invited Mia to visit him every weekend.",
+          "literal_text_utf8_sha256": "33565ff54aadbb065245f09e7009796d5fa98b6ecacf16c4a13136beb23e5292",
+          "characters": 344,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "L2: Strong explicit relationship mismatch under the ordinary possessive reading of her dog: Pepper belongs to a separate owner/family. The story does not establish he is Mia's dog.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "Mia rescues a dog found under a bridge and returns it to a separate worried owner/family; possessive relationship concern L2."
+        },
+        {
+          "answer_index_zero_based": 1,
+          "answer_position_one_based": 2,
+          "json_pointer": "/outputs/0/answers/1",
+          "literal_text": "Lena and her dog Scout loved exploring the forest behind their house. One afternoon, Scout followed a trail of blue feathers and led Lena to an injured owl. Lena gently placed the owl in a basket while Scout guarded them from curious foxes. A wildlife ranger treated the owl and praised Lena for bringing it in quickly. From then on, Lena and Scout became careful protectors of the woods.",
+          "literal_text_utf8_sha256": "4bd4b7eab7e3e042686e4077c5b9dfb87b4ba3fcfb0f4e2565e10beff5fe62e3",
+          "characters": 388,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "Girl and dog find an injured owl; she takes it in a basket to a wildlife ranger; rescue-schema concern R3."
+        },
+        {
+          "answer_index_zero_based": 2,
+          "answer_position_one_based": 3,
+          "json_pointer": "/outputs/0/answers/2",
+          "literal_text": "Every morning, Ruby practiced playing the violin while her dog Biscuit howled along. At first, the neighbors complained about their noisy performances. Ruby decided to teach Biscuit to sit quietly whenever she lifted her bow. After many treats and patient lessons, Biscuit learned to listen peacefully. Ruby's next concert was a success, and Biscuit proudly watched from the front row.",
+          "literal_text_utf8_sha256": "8bf85ba78d70a1c287f3f2d47aa13e936e657c4a90e83b8ed6fd4205b1639dfd",
+          "characters": 385,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "Girl trains dog to stop howling during violin practice, resolving neighbor complaints and enabling a concert."
+        },
+        {
+          "answer_index_zero_based": 3,
+          "answer_position_one_based": 4,
+          "json_pointer": "/outputs/0/answers/3",
+          "literal_text": "Nora and her dog Toby built a small boat from wooden crates beside the pond. When a strong wind pushed the boat away, Toby jumped in and paddled after it. Nora quickly called him back and used a long branch to pull the boat toward shore. Together, they repaired the boat with rope and stronger boards. Their second voyage stayed safely near the dock, and both friends celebrated with biscuits.",
+          "literal_text_utf8_sha256": "e527a008aed1ca27be65e68fbca008be71bb359df90f6185b4086e62d1b20c18",
+          "characters": 393,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "Dog jumps after a homemade boat blown away; girl recalls him, retrieves the boat and they rebuild it for a safer voyage."
+        },
+        {
+          "answer_index_zero_based": 4,
+          "answer_position_one_based": 5,
+          "json_pointer": "/outputs/0/answers/4",
+          "literal_text": "Ella and her dog Max discovered a trail of glittering stones behind the garden shed. They followed it through the meadow until they reached a lonely old well. Max barked beside the well, where Ella spotted a trapped kitten on a narrow ledge. She lowered a basket tied to a rope and gently lifted the kitten to safety. The grateful kitten's owner rewarded Ella and Max with a basket of warm muffins.",
+          "literal_text_utf8_sha256": "165b57ce2971ef3498bcff18a9b5025cfeae45dda31a1a1adf5aa80f1cd52d2f",
+          "characters": 398,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "A glittering-stone trail leads to a kitten trapped in a well; girl uses a rope basket to rescue it; rescue-schema concern R3."
+        },
+        {
+          "answer_index_zero_based": 5,
+          "answer_position_one_based": 6,
+          "json_pointer": "/outputs/0/answers/5",
+          "literal_text": "Sofia taught her dog Bruno to carry a tiny backpack during their walks. One rainy afternoon, Bruno noticed a lost boy crying near the bus stop and tugged Sofia toward him. Sofia shared their umbrella and helped the boy find his parents at the community center. Bruno received a blue ribbon for his helpfulness. Afterward, Sofia packed an extra raincoat in his backpack for future adventures.",
+          "literal_text_utf8_sha256": "96afd2004b98db558fbd2ab4facec769a9a637abfcf4a039d4ea22454911a773",
+          "characters": 391,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "Dog wearing a backpack spots a lost boy; girl helps reunite him with parents; cross-role concern R4."
+        },
+        {
+          "answer_index_zero_based": 6,
+          "answer_position_one_based": 7,
+          "json_pointer": "/outputs/0/answers/6",
+          "literal_text": "Grace and her dog Pippin entered the village garden contest together. Pippin accidentally knocked over a row of flowerpots while chasing a butterfly. Instead of giving up, Grace and Pippin replanted the flowers and decorated the pots with painted paw prints. Their garden became the most colorful display in the village. Grace learned that mistakes could grow into something beautiful with patience.",
+          "literal_text_utf8_sha256": "2c09a5d6bd6f4290f3ccffdc9c2f5bb04e10fb38f7f2a8276a1121c2a53b2e50",
+          "characters": 399,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "Dog knocks over contest flowerpots; girl and dog replant and decorate, yielding a colorful garden."
+        },
+        {
+          "answer_index_zero_based": 7,
+          "answer_position_one_based": 8,
+          "json_pointer": "/outputs/0/answers/7",
+          "literal_text": "Amara and her dog Jasper heard strange squeaks coming from the attic one evening. They climbed upstairs and found a family of tiny mice trapped inside an empty box. Amara opened the box and placed crumbs leading toward a safe hole in the wall. Jasper guarded the doorway so the mice could escape without being frightened. That night, Amara gave Jasper an extra-long cuddle for being gentle and brave.",
+          "literal_text_utf8_sha256": "44a9da3345feb9953592cafcb389e648224c6c637e36f8625ec8a42b6366b186",
+          "characters": 400,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "Girl and dog find mice trapped in an attic box and free them using crumbs and a clear escape route; rescue-schema concern R3."
+        },
+        {
+          "answer_index_zero_based": 8,
+          "answer_position_one_based": 9,
+          "json_pointer": "/outputs/0/answers/8",
+          "literal_text": "Clara and her dog Waffles planted sunflower seeds in a patch of dry soil behind their school. Each afternoon, Clara carried water while Waffles dug small holes with his paws. When a heat wave threatened the seedlings, they built a shade canopy from branches and an old sheet. The sunflowers eventually grew tall enough to brighten the entire playground. Clara and Waffles proudly collected seeds to share with everyone in town.",
+          "literal_text_utf8_sha256": "56690fa7d11b586a4290c02a02b56fd97b03f543281618b4bdb46e70911cb7b8",
+          "characters": 427,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "Girl and dog plant sunflowers, protect them from heat and share seeds after successful growth."
+        },
+        {
+          "answer_index_zero_based": 9,
+          "answer_position_one_based": 10,
+          "json_pointer": "/outputs/0/answers/9",
+          "literal_text": "Isla and her dog Comet heard a faint bell ringing from the lighthouse during a thick evening fog. They followed the sound along the rocky path and found a fisherman whose cart had broken down near the shore. Isla held a lantern while Comet fetched a rope from the lighthouse keeper's shed. Together, they helped pull the cart to level ground before the tide rose. The grateful fisherman gave Comet a silver bell and thanked Isla for her courage.",
+          "literal_text_utf8_sha256": "1a377978889d7f24186cbb19909c0ae717edbd2070957ae409e6313a596ddd4a",
+          "characters": 445,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "A foggy lighthouse bell leads to a broken fisherman's cart; lantern and rope help restore it before the tide rises."
+        }
+      ],
+      "original_official_assessment": {
+        "status": "not_scheduled_for_full_official_screen",
+        "interpretation": "Validity-only first-task answers. No official quality/distinctness result is assigned here and no result is inferred from the other roles."
+      }
+    },
+    {
+      "id": "W1-0",
+      "role": "W1",
+      "role_scope": "first_task_validity_witness_only",
+      "task_id": "curated-0",
+      "task_text": "Tell me a story in five sentences about a girl and her dog.",
+      "task_count": 10,
+      "task_evidence": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\witness\\task.json",
+        "sha256": "75221a986f7f8fb67bba2a7e457c416d434a1076d200abbc2b2c140994ec4454",
+        "bytes": 115135
+      },
+      "generation_config_evidence": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\witness\\generation.json",
+        "sha256": "0ef53ae8a4bee48a2b867e411ff6b48f32133baa24ea98de520580a8cfe95932",
+        "bytes": 2094
+      },
+      "generation_config": {
+        "instructions": "Answer the original task exactly, including its requested form, count, perspective, allowed choices and factual domain. Each response must be a complete independent answer. Use earlier answers to avoid repeating central content only where the permitted answer space allows it. Repeat a legal answer when constraints require it; do not invent a third choice. Prefer concrete, coherent development with different causes, actions and outcomes over changes to names or style alone. Return only the requested answer, without plans or self-review.",
+        "max_output_tokens": 4096,
+        "model": "gpt-5.6-luna",
+        "provider": "openai",
+        "sampling": "in-context"
+      },
+      "answer_file": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\witness\\generation\\attempts\\0-0\\session\\answers.json",
+        "sha256": "be2305e71d14bb617ccf6aacb485da60e4ca3a81f83daa932c6b42edb3544b74",
+        "bytes": 119674
+      },
+      "answer_file_agent_sha256": "7826e629217a8f10877dd3f347a63e03bba7427882bbfe77ab7921666b725ce4",
+      "coverage": {
+        "read_all_complete_texts": true,
+        "output_index_zero_based": 0,
+        "answer_indices_zero_based": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "answer_positions_one_based": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "complete_answer_count": 10
+      },
+      "answers": [
+        {
+          "answer_index_zero_based": 0,
+          "answer_position_one_based": 1,
+          "json_pointer": "/outputs/0/answers/0",
+          "literal_text": "Maya searched the kitchen for her missing red ball while her dog, Pip, watched from beneath the table. She suspected Pip had hidden it, but he kept glancing toward the laundry basket. When Maya lifted a towel, she found the ball tucked underneath it beside a fallen sock. Pip had not stolen it; he had nudged it away from the noisy washing machine. Maya laughed, tossed the ball across the yard, and thanked him for showing her the clue.",
+          "literal_text_utf8_sha256": "7cdb95142e245745dc8840bc391ef7adeafdaf4bf33e660b838a1459fc6b4b46",
+          "characters": 437,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "Girl initially suspects dog hid a missing ball; the laundry clue explains he moved it away from the washing machine."
+        },
+        {
+          "answer_index_zero_based": 1,
+          "answer_position_one_based": 2,
+          "json_pointer": "/outputs/0/answers/1",
+          "literal_text": "Lena tried to teach her dog, Scout, to jump through a hoop, but Scout walked around it and sat down. She lowered the hoop nearly to the grass and placed a treat just beyond it. Scout stepped through successfully, then repeated the move when Lena raised the hoop a little. After several tries, he bounded through the hoop with his tail wagging. Lena praised him and ended the lesson before either of them grew tired.",
+          "literal_text_utf8_sha256": "31e212d79aabd0266019246868f4dd49fc8a29c6f247fe3b0a34e300abb74163",
+          "characters": 415,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "Girl lowers a training hoop then raises it gradually until the dog learns to jump through; training contrast control B3."
+        },
+        {
+          "answer_index_zero_based": 2,
+          "answer_position_one_based": 3,
+          "json_pointer": "/outputs/0/answers/2",
+          "literal_text": "Nora challenged her dog, Basil, to a race from the porch to the old oak tree. Basil sprinted ahead while Nora ran after him, certain that she would lose. Near the tree, Basil stopped to sniff a patch of clover, giving Nora time to catch up. Nora crossed the finish line first and celebrated her unexpected victory. Basil accepted his prize, a crunchy biscuit, before demanding a rematch.",
+          "literal_text_utf8_sha256": "47a9495bae5c9a9519eec7fd7f6e1ca92607e057f752d96c3d7ea139a4e0b85a",
+          "characters": 387,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "Girl wins a race when dog pauses to sniff; dog gets a biscuit and wants a rematch."
+        },
+        {
+          "answer_index_zero_based": 3,
+          "answer_position_one_based": 4,
+          "json_pointer": "/outputs/0/answers/3",
+          "literal_text": "Every morning, Tessa ate breakfast by the window while her dog, Wren, slept on the rug nearby. One rainy day, Tessa moved her chair beside Wren and read aloud instead of going outside. Wren lifted his head, rested it on her knee, and listened to the pages turn. Tessa realized that he seemed happiest when their routine included quiet company. From then on, she saved a few minutes each morning for reading beside him.",
+          "literal_text_utf8_sha256": "b497e8ed49e04058e43bf76fff1cc206d9947d719440170ff9697f840685c159",
+          "characters": 418,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "Rain changes a morning routine into reading with the dog; girl preserves quiet companionship afterward."
+        },
+        {
+          "answer_index_zero_based": 4,
+          "answer_position_one_based": 5,
+          "json_pointer": "/outputs/0/answers/4",
+          "literal_text": "Ella noticed that one leg of her dog's wooden feeding stand had become loose. She held the stand steady while her father tightened the screw with a screwdriver. Her dog, Milo, waited nearby and sniffed the repaired leg when they finished. Ella placed his bowl on top, and Milo ate without the wobble that had startled him before. She decorated the stand with a small painted paw print to mark their successful repair.",
+          "literal_text_utf8_sha256": "983f3d428341aae5383b03ad94a2881c5897bd5a305aaf0474500a5f53eb5175",
+          "characters": 417,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "Girl and father tighten a loose feeding-stand screw; dog accepts the stable stand and girl decorates it."
+        },
+        {
+          "answer_index_zero_based": 5,
+          "answer_position_one_based": 6,
+          "json_pointer": "/outputs/0/answers/5",
+          "literal_text": "When rain began before their walk, Priya had to choose between waiting or taking her dog, Comet, around the muddy block. Comet tugged toward the door, but Priya noticed that thunder was making him uneasy. She sat beside him and waited until the loudest rumbles passed. Then they took a short walk under an umbrella, returning before the path became slippery. Comet settled happily on his blanket while Priya dried his paws.",
+          "literal_text_utf8_sha256": "eb6d1f07e41d05b968cbbd3dfa5750adc31dba30197aea62b67793c4bac20d6b",
+          "characters": 423,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "Girl waits out thunder before taking her uneasy dog for a short walk; they return and she dries his paws."
+        },
+        {
+          "answer_index_zero_based": 6,
+          "answer_position_one_based": 7,
+          "json_pointer": "/outputs/0/answers/6",
+          "literal_text": "Sofia found a blue feather beside her dog's water bowl and guessed that a bird had dropped it there. Her dog, Arlo, sniffed the feather and then wandered toward the porch. Sofia followed and saw another blue feather caught in the bristles of the welcome mat. Looking again at the first feather, she noticed a matching thread and realized both had come from a frayed decoration. She removed the loose decoration and kept one feather in her nature notebook.",
+          "literal_text_utf8_sha256": "18991450972641ddf6de1bfffb580fa17403f2a03d7d8e931c08147237d42a28",
+          "characters": 455,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "Girl follows blue-feather clues and identifies a frayed decoration as their source, then removes it."
+        },
+        {
+          "answer_index_zero_based": 7,
+          "answer_position_one_based": 8,
+          "json_pointer": "/outputs/0/answers/7",
+          "literal_text": "For her dog's birthday, June hung paper stars above the porch and placed a small cake on a table. When the wind blew, one star landed in the frosting, and June quickly lifted it out with a spoon. She moved the cake indoors, where her dog, Pepper, watched while she replaced the messy topping. Pepper ate the finished treat from a bowl and wagged at the birthday song. June took a picture of the frosting-covered star as a funny souvenir.",
+          "literal_text_utf8_sha256": "e154ec0261c4c2a36dd285d5e6ae682be8efa8e26f555e77b739b4cb8efbbf48",
+          "characters": 437,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "A paper birthday star lands in the dog's cake; girl repairs the topping indoors and keeps a funny photo."
+        },
+        {
+          "answer_index_zero_based": 8,
+          "answer_position_one_based": 9,
+          "json_pointer": "/outputs/0/answers/8",
+          "literal_text": "Caleb's dog, Fern, trembled whenever they passed the rattling gate at the end of the street. Caleb stopped several steps away and gave Fern a treat whenever she looked calmly at the gate. Over several walks, he moved a little closer while letting her retreat whenever she needed. One afternoon, Fern walked past the gate without pulling and glanced back at Caleb for praise. He rewarded her with a gentle game of tug in the quiet park.",
+          "literal_text_utf8_sha256": "a252e89a9e6fd0ffcdcb2c526d732ee54724fcffd551ea641fc85dffcf4d81ed",
+          "characters": 435,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "L1: Explicit he/his references to Caleb and no girl: subject requirement not met.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "Caleb uses treats and gradual approach to help Fern pass a rattling gate; he/his is explicit and no girl appears: literal failure L1."
+        },
+        {
+          "answer_index_zero_based": 9,
+          "answer_position_one_based": 10,
+          "json_pointer": "/outputs/0/answers/9",
+          "literal_text": "On the way to buy apples, Ruby invited her dog, Dash, to step only on the pale stones along the sidewalk. Dash followed the pattern for three stones before hopping onto the grass. Ruby laughed and began counting each successful step aloud. By the time they reached the shop, Dash had learned to wait for her next pointing finger. They bought the apples and celebrated their game with a shared rest beneath a shady tree.",
+          "literal_text_utf8_sha256": "3b4599acbbdb548affd0a4e190d139a253d2a790d3cec904786932cc18cb32f9",
+          "characters": 419,
+          "reviewed_full_text": true,
+          "literal_constraint_observation": "No literal form/subject failure observed on this descriptive reading.",
+          "sentence_terminal_unit_count": 5,
+          "review_note": "Girl makes a pale-stone stepping game on an apple-shopping walk; dog learns to follow pointing cues."
+        }
+      ],
+      "original_official_assessment": {
+        "status": "not_scheduled_for_full_official_screen",
+        "interpretation": "Validity-only first-task answers. No official quality/distinctness result is assigned here and no result is inferred from the other roles."
+      }
+    }
+  ],
+  "trusted_reference_evidence": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-current-funded-handoff\\AGENTS.md",
+      "sha256": "c8b62082a17bc363603dafc1293d5ab162b82fce39ba686bb0b213e646601f4e",
+      "bytes": 1457
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-current-funded-handoff\\docs\\SOURCE-CURRENT-LIVE.md",
+      "sha256": "1e5137f84137b2dc636114d70bc968b9e22950f4cf87651125ee6a0989b33abb",
+      "bytes": 16050
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-current-funded-handoff\\docs\\PLAN.md",
+      "sha256": "9e92b2e1967fbc02b9ae0ed890f89239c914d0c739917b32991739c5bb376275",
+      "bytes": 288955
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-current-funded-handoff\\docs\\conformance\\src02-actual-live-criteria-v1.json",
+      "sha256": "93246d46ef9e3f9c156645d60a3e292bbaac8cb0b098d04917a5046461e80f82",
+      "bytes": 10625
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-current-funded-handoff\\docs\\conformance\\src02-actual-live-intent-v1.json",
+      "sha256": "9608b943760e752e67674a47e742f5fec254f722165aeb7d07b0d794e71d4dd0",
+      "bytes": 13467
+    }
+  ],
+  "source_preservation": {
+    "operation": "Read-only review of original run and trusted references; only the two explicitly authorized new review files are created with exclusive-create mode.",
+    "tracked_file_count": 47,
+    "tracked_input_sha256": {
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\0\\generation\\attempts\\0-0\\session\\answers.json": "96c7d9a71bfbe507596560d2685f388cfa534611778f5b4c6648f70bf6386881",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\0\\task.json": "75221a986f7f8fb67bba2a7e457c416d434a1076d200abbc2b2c140994ec4454",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\0\\generation.json": "7bb9ed5b9890173b95f1d7df1230c0d66047930a82911fd8984753cd1661f2c2",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\0\\evaluation\\attempts\\2-0\\artifacts\\v1.1\\partitions.jsonl": "613568c11d59de6d6f6980b20fe02ed14c259e0c16d3bdf24ad9225d1dec3262",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\0\\evaluation\\attempts\\3-0\\artifacts\\v1.1\\scores.jsonl": "dbf64fa464d670a782b144cf22ded824c352407eac531f0aac3e1cf298326778",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\0\\evaluation\\attempts\\3-0\\artifacts\\v1.1\\summary.json": "4c5785f3879eb77ec492e5a8ac74228e125302bd51f5acd3e26a50e0cf7c62a7",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\1\\generation\\attempts\\0-0\\session\\answers.json": "26626470230be8b015f993c056bfd65014c68c2332f541e711231bdb84f1e8a4",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\1\\task.json": "08eb0e7893707d73956263e23e45789f9e7ae7b9f1796c83f4d7ebf28b33484b",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\1\\generation.json": "643168dd66e32864976d826c6bffae0b0e4f85d938be7fab0bcff2ecba767c43",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\1\\evaluation\\attempts\\2-0\\artifacts\\v1.1\\partitions.jsonl": "3645f9117d77bced12051dc36679850bdd19dc703910c75e10f086952513e4e8",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\1\\evaluation\\attempts\\3-0\\artifacts\\v1.1\\scores.jsonl": "2f212ea6f4879cf082cc815587a42c30cca02ced63c052dec05b252a1dba2db0",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\1\\evaluation\\attempts\\3-0\\artifacts\\v1.1\\summary.json": "de4d05c7cd27f98ac6f1fe2d1eaf05e51d96699b3ffdecea694c776e07a7f05f",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\2\\generation\\attempts\\0-0\\session\\answers.json": "2a52faf674e96bf2f221f01c4c404184da7ec4b7913679ed8443ec17ca07f3ac",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\2\\task.json": "f8e225c2e15b91f1b2d7f13da23cc385e7cd04e6609fe27611e3aa75c20df345",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\2\\generation.json": "8fb813a21644a97db472b0270bab44bcd63a3987d403bf0821df1a6bd00a9d17",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\2\\evaluation\\attempts\\2-0\\artifacts\\v1.1\\partitions.jsonl": "c85e880a7ec20cab42c624b1f8cdb95272a58a8bf229681d482f57d3c359d4e4",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\2\\evaluation\\attempts\\3-0\\artifacts\\v1.1\\scores.jsonl": "900cec787eb33abfea6cf6ffd10b3027daeebc2a6461d84e1cfe3d6eeaf56892",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed\\tasks\\2\\evaluation\\attempts\\3-0\\artifacts\\v1.1\\summary.json": "3ec726c809ec5c99b01dd8b624d14fabdf3ae7cc47642d6f35cf41373d768145",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\0\\generation\\attempts\\0-0\\session\\answers.json": "1988b8d53b21829eec979644f42a29e5f3b1d96f1d379801592a0c694297305a",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\0\\task.json": "75221a986f7f8fb67bba2a7e457c416d434a1076d200abbc2b2c140994ec4454",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\0\\generation.json": "cc2375fcd32e24264fd3cd365e39212667c2434d00c4bd56689c8c5d6f483e8b",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\0\\evaluation\\attempts\\2-0\\artifacts\\v1.1\\partitions.jsonl": "c3ab4e8bc4af99f666716a6e4f3fe162f61d930f06fc28e43f1d886769e47f7d",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\0\\evaluation\\attempts\\3-0\\artifacts\\v1.1\\scores.jsonl": "24e7c69801e4b0bfa4e9dddba931a758fb717f1ad5e05849e16ac7e23bf924d6",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\0\\evaluation\\attempts\\3-0\\artifacts\\v1.1\\summary.json": "0190a3f78c0e2fc02f4f2d508c0b096c648c06d0c9dab561f7eb516abd60336d",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\1\\generation\\attempts\\0-0\\session\\answers.json": "d842ec4d6bf01a467ccff27f38af3148263d34a1480d280310df5549c99e7927",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\1\\task.json": "08eb0e7893707d73956263e23e45789f9e7ae7b9f1796c83f4d7ebf28b33484b",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\1\\generation.json": "b06e4219483dafda81549ab92c62206dd8c028b0653dc6ea5a87663805974813",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\1\\evaluation\\attempts\\2-0\\artifacts\\v1.1\\partitions.jsonl": "c1f6928670851bfb18002c5f7f2570613ff3d5f4eded12160e58d6c960885fd1",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\1\\evaluation\\attempts\\3-0\\artifacts\\v1.1\\scores.jsonl": "027b17083a62145d2411344b2608ea7162f889c5ae84db86bff86c62030ba2ea",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\1\\evaluation\\attempts\\3-0\\artifacts\\v1.1\\summary.json": "de4d05c7cd27f98ac6f1fe2d1eaf05e51d96699b3ffdecea694c776e07a7f05f",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\2\\generation\\attempts\\0-0\\session\\answers.json": "9d7a274ccd993dcfca614c286893deae96d9fe2c2c004fa8a6ac2e88b9714935",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\2\\task.json": "f8e225c2e15b91f1b2d7f13da23cc385e7cd04e6609fe27611e3aa75c20df345",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\2\\generation.json": "d0d963b66d8850f5a0a6e8f411f548e0e6004c9a635930dfe39095550982632f",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\2\\evaluation\\attempts\\2-0\\artifacts\\v1.1\\partitions.jsonl": "19fa6b7f0169b867bc54d07449ab0f2ab4d885f5acf1b2e03a22d6efea0d7b09",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\2\\evaluation\\attempts\\3-0\\artifacts\\v1.1\\scores.jsonl": "0ffa6a21b4eafc58febaf992f9c787d963dd26832b44a60de0a66a8043213a1a",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\screen\\tasks\\2\\evaluation\\attempts\\3-0\\artifacts\\v1.1\\summary.json": "d630cbb067f871b0227c5dd3f04903980e5b037a8d802b1273168a9fcdbb6762",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed-witness\\generation\\attempts\\0-0\\session\\answers.json": "3847e8372f90fcfee0ac517ed67e26c4a5c81b3406492ed9096aea34490115d3",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed-witness\\task.json": "75221a986f7f8fb67bba2a7e457c416d434a1076d200abbc2b2c140994ec4454",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\seed-witness\\generation.json": "928573e8412aaecc458664925be6b83f796dc0ea029a6fdbe4ead7d5f475cb18",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\witness\\generation\\attempts\\0-0\\session\\answers.json": "be2305e71d14bb617ccf6aacb485da60e4ca3a81f83daa932c6b42edb3544b74",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\witness\\task.json": "75221a986f7f8fb67bba2a7e457c416d434a1076d200abbc2b2c140994ec4454",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\src02-current-live-20261024-run-v1\\iterations\\0\\witness\\generation.json": "0ef53ae8a4bee48a2b867e411ff6b48f32133baa24ea98de520580a8cfe95932",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-current-funded-handoff\\AGENTS.md": "c8b62082a17bc363603dafc1293d5ab162b82fce39ba686bb0b213e646601f4e",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-current-funded-handoff\\docs\\SOURCE-CURRENT-LIVE.md": "1e5137f84137b2dc636114d70bc968b9e22950f4cf87651125ee6a0989b33abb",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-current-funded-handoff\\docs\\PLAN.md": "9e92b2e1967fbc02b9ae0ed890f89239c914d0c739917b32991739c5bb376275",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-current-funded-handoff\\docs\\conformance\\src02-actual-live-criteria-v1.json": "93246d46ef9e3f9c156645d60a3e292bbaac8cb0b098d04917a5046461e80f82",
+      "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-current-funded-handoff\\docs\\conformance\\src02-actual-live-intent-v1.json": "9608b943760e752e67674a47e742f5fec254f722165aeb7d07b0d794e71d4dd0"
+    },
+    "rehash_before_publication": "all tracked inputs checked against their read-time SHA256 before either new review file was created"
+  },
+  "limitations": [
+    "Single unblinded host-model descriptive review; no human ratings, formal semantic judge, statistical independence or calibrated reliability estimate.",
+    "Roles and scores were visible, so outcome knowledge may influence interpretation.",
+    "Short stories leave physical details implicit; craft/coherence concerns are interpretive and are not conflated with literal failures.",
+    "Same subject, genre, rescue motif or positive ending alone is insufficient to establish the same central story; potential recurrence is not an official regrouping.",
+    "The punctuation count is a transparent surface check. Full prose was also read; this is not a general natural-language sentence parser.",
+    "Only P/C receive the original full official three-task assessment. Witnesses are validity-only first-task outputs; no witness official or private quality/distinctness score is inferred.",
+    "Previously seen development tasks do not support held-out, human-preference, useful-diversity or improver-effectiveness claims.",
+    "No mutation/runtime/authorship/custody mechanism adjudication, account/secrets review, billing review or general sandbox security claim is performed here."
+  ]
+}

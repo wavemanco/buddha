@@ -1,0 +1,259 @@
+{
+  "format": "buddha.source-capacity-live-results.v1",
+  "date": "2026-10-23",
+  "status": "complete",
+  "reason": "capacity_pass",
+  "scope": "One actual exact-body prospective full-output capacity observation; returned Python stays unexecuted text.",
+  "original_result": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-capacity-20261023-live-v1\\report.json",
+    "sha256": "8cf8e790f7bc3d168d4e4f8b329a306aadb9b29d942a70ea0d8e505b2f2ea15e"
+  },
+  "original_artifacts": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-capacity-20261023-live-v1\\attempts\\0-0\\raw-envelope.json",
+      "sha256": "a70f96d8b26526abffe6ad721fd1aaa0e174e1718f754033aeecb07a74a85498"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-capacity-20261023-live-v1\\attempts\\0-0\\report.json",
+      "sha256": "8a5b8f558924a5e3ebd2aeb147f4f40ced1b034499af547e61532de30a1f3508"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-capacity-20261023-live-v1\\completed\\0.json",
+      "sha256": "46ddf6b4a7bf0025d8d84d20a47d3f1bae0170ac22cc929ba9bb045c9548b20d"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-capacity-20261023-live-v1\\owner\\manifest.json",
+      "sha256": "87de8ea6a09db5a8c6c3e0f15f26979e4743f7ccac286385e93a7095e8905a98"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-capacity-20261023-live-v1\\owner\\operations.sqlite3",
+      "sha256": "95462f913036fa5751bc6aaaa12098099d3da7dce6ee79128a7d439dcb95901e"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-capacity-20261023-live-v1\\report.json",
+      "sha256": "8cf8e790f7bc3d168d4e4f8b329a306aadb9b29d942a70ea0d8e505b2f2ea15e"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-capacity-20261023-live-v1\\review.json",
+      "sha256": "e811a869e4cb7490906905b85ef0ec8e7640ca368c928bffbd79d186ced23913"
+    }
+  ],
+  "handoff": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-capacity-20261023-handoff-v1\\handoff.json",
+    "sha256": "e1b0bf24be746447549786eefa1c73a97da3f7f59dbb3f1bbc27541639a3d0ba"
+  },
+  "protocol": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-capacity-20261023-handoff-v1\\protocol.json",
+    "sha256": "154482138a5a687eb6db6c7dbab4a84a29cfa2e88ee26e3b655b87eb2264d669"
+  },
+  "original_authority": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-capacity-20261023-handoff-v1\\authorization.sqlite3",
+    "sha256": "e1cd4d45b52d54b235c25a8579fbbfdd7cfa096abe27ae2a9605a934cf039305"
+  },
+  "measurement": {
+    "context_slack": 1011480,
+    "decision": "pass",
+    "finish_reason": "stop",
+    "measurement_status": "complete",
+    "output_slack": 29785,
+    "reason": "capacity_pass",
+    "usage": {
+      "input_tokens": 5752,
+      "model": "gpt-6.1-sol",
+      "output_tokens": 2983,
+      "provider_request_id": "req_c97aebd5b8a84ae1b4f18bb880ffc4fc",
+      "service_tier": "default"
+    }
+  },
+  "request": {
+    "capability": "openai.chat-completions.v1",
+    "provider": "openai",
+    "host": "api.openai.com",
+    "path": "/v1/chat/completions",
+    "model": "gpt-6.1-sol",
+    "service_tier": "default",
+    "reasoning_effort": "low",
+    "max_completion_tokens": 32768,
+    "bytes": 25209,
+    "sha256": "e258ae8166c518ccd8e8a799139e35c7fa609b74fe10fcba0c8c23d1e401a838",
+    "logical_target_count": 1,
+    "attempt_count": 1,
+    "automatic_retries": 0
+  },
+  "decision_rule": {
+    "model_context_tokens": 1050000,
+    "selected_output_cap": 32768,
+    "minimum_context_slack_tokens": 8192,
+    "minimum_observed_output_slack_tokens": 8192,
+    "context_slack": "1050000 - usage.prompt_tokens - 32768",
+    "observed_output_slack": "32768 - usage.completion_tokens",
+    "comparison": "both slacks >= their respective minimum, inclusive boundaries",
+    "usage": "Use aggregate inclusive counters. Never subtract optional reasoning details or estimate total usage from visible text.",
+    "interpretation": "Predeclared engineering cushions only. A pass concerns this one actual request/reply; no universal source-size or future-parent guarantee."
+  },
+  "source_proposal": {
+    "bytes": 10435,
+    "sha256": "4bdb0be42ca74e87c57f1597a4440bcf547221320a59e5a29165cb48ae6f1fcc",
+    "hypothesis": "Replace one-completion-per-answer generation with coordinated small batches of independently complete answers. Joint composition may enable differences in causal structure and outcomes rather than only surface details, while explicitly permitting repeated legal choices. Batch width is limited by the configured output budget; malformed or truncated batches are discarded and recursively split into smaller groups, terminating in ordinary single-answer calls. This may reduce request overhead when batching works, though splitting can add cost and JSON validation alone cannot guarantee semantic compliance.",
+    "compiled_imported_executed_or_adopted": false
+  },
+  "custody_limit": {
+    "projection_receipt": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-verified-source-copy\\runs\\reviews\\starter-full-output-projection-result-v2.json",
+      "sha256": "1c1f87e7e923220d4b09118b53864fd1c765f48c400700d8944e652fb0878986"
+    },
+    "historical_measured_candidate_id": "b54a8e60ab93b7fc680af430ed7883d4176181d511a57b2efccd3dfe5f13efb8",
+    "prospective_parent_agent_sha256": "22cd302a8c12e05c5fd9bb95389f5880e713a027e60a0206799e9c4fa2f48eeb",
+    "prospective_parent_source": {
+      "bytes": 13455,
+      "sha256": "77cfa68f6b3c6996fd503e1ce6f7a964eb57abdb8bde98f6761de5f6e298ff4f"
+    },
+    "feedback_record_count": 3,
+    "literal_answer_count": 30,
+    "feedback_packet": {
+      "bytes": 7270,
+      "sha256": "5a01b3b2194cb3b82b3d188df8b36fd553238b673d25d19981fb37a888458f28"
+    },
+    "projected_task_notes": {
+      "bytes": 6998,
+      "sha256": "bf9518f818b089a1bfc98bc8bd2dda6fa1ffc001f10077c480811425251915af"
+    },
+    "claim": "Explicit historical-feedback/current-starter recombination. Do not pass it through the measured-parent proposal wrapper or relabel old measurements."
+  },
+  "accounting": {
+    "authorization_id": "src02-capacity-20261023-v1",
+    "available_microusd": 6919144,
+    "budget_microusd": 7000000,
+    "committed_microusd": 80856,
+    "event_count": 7,
+    "max_calls": 1,
+    "operation_count": 1,
+    "remaining_calls": 0,
+    "reserved_microusd": 0,
+    "runs": [
+      {
+        "active": false,
+        "committed_microusd": 80856,
+        "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-capacity-20261023-live-v1\\owner",
+        "historical": 0,
+        "historical_ledger_sha256": null,
+        "ledger_path": "C:\\Users\\arvik\\code\\buddha\\runs\\src02-capacity-20261023-live-v1\\owner\\operations.sqlite3",
+        "manifest_sha256": "5b09022f5cb9a66d1e33a4d94f5ccc7c2372a699a7b1ddc21d44d0c02446980e",
+        "operation_count": 1,
+        "reserved_microusd": 0,
+        "run_id": "source-capacity-e1b0bf24be746447549786eefa1c73a97da3f7f59dbb3f1bbc27541639a3d0ba",
+        "runtime_sha256": "42f5ddbb4db1d174cd2518a0ae26c8e48ed284268039d9cdb4a7e23e259e98f3",
+        "spent_microusd": 80856
+      }
+    ],
+    "scope": "source capacity: 7c995d967a6fb6977571c1936482624bd51da1c1e60c41f9b2f1386c2e321a0a",
+    "spent_microusd": 80856,
+    "terms_sha256": "e516c106cdeda029b1ae757c954da520be8f07b6414a2d02d682edc20edc55cf"
+  },
+  "allowance": {
+    "approved_budget_microusd": 7000000,
+    "approved_attempt_limit": 1,
+    "remaining_attempts": 0,
+    "closed_for_new_work": true,
+    "unused_dollars_authorize_no_later_experiment": true,
+    "costs_are_invoice_reconciled": false
+  },
+  "verification": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\capacity-actual-readonly-replay-v1.json",
+      "sha256": "32225e978c44ffe3e7e873f7327b9e5416a22adfe99eba901e53cf9ea23e26ef"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\capacity-live-independent-review-20261023-v1.json",
+      "sha256": "aec642a4e39b20cbb29358d597ea0cc520264d89d3ab713a42b85a39748d6f7c"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\pol03-original-acceptance-post-capacity-audit-v1.json",
+      "sha256": "2fe7cb422c673f0e89d9b84d73d8c56bcb9bf7147300245fc3a63e8660b4c274"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-capacity-design-20261023\\pol03-original-acceptance-post-capacity-audit-v1.md",
+      "sha256": "c247bf10a2a2e21bfff91176bec352464a1c8de5b72c2b9ef6ac3bf8159d3fd7"
+    }
+  ],
+  "preservation": {
+    "frozen_source_pins_unchanged": 73,
+    "immutable_prepared_inputs_unchanged": 93,
+    "actual_owner_input_bindings": 75,
+    "original_files_unchanged_during_verification": 101,
+    "new_calls_by_verifiers": 0,
+    "keys_read_by_verifiers": false,
+    "on_disk_sql_by_verifiers": false,
+    "returned_source_executed": false
+  },
+  "pol03_original_scope_closure": {
+    "original_acceptance_verbatim": "Specify bounded feedback extraction/feasibility before paying for larger screens; test a declared multi-iteration loop so child failures can inform later proposals. Preserve failed/invalid proposals and complete common-screen coverage. Keep admission, numerical frontier selection and confirmed promotion separate.",
+    "requirements": [
+      {
+        "original_requirement": "Specify bounded feedback extraction/feasibility before paying for larger screens",
+        "evidence": [
+          "full_feedback_guide",
+          "full_feedback_delivery",
+          "request_projection_guide",
+          "capacity_protocol",
+          "capacity_request",
+          "capacity_report",
+          "capacity_readonly_replay"
+        ],
+        "finding": "Full selected literal answers, fixed packet/projection/host byte ceilings and typed pre-owner capacity refusal are delivered. The actual unchanged 25,209-byte Chat request now returned complete changed replacement JSON with both prospectively declared context/output cushions passing.",
+        "limit": "One concrete prospective request/reply only. Parent/full feedback/request changes require another capacity assessment; no promise for all allowed source sizes or larger future screens."
+      },
+      {
+        "original_requirement": "Test a declared multi-iteration loop so child failures can inform later proposals",
+        "evidence": [
+          "source_search_guide",
+          "source_loop_delivery",
+          "source_search"
+        ],
+        "finding": "Delivered actual-container supplied-program rehearsal: three declared iterations over two tasks, 28 workers/75 synthetic replies; failed child informs repaired child, whose inherited improver then produces the measured grandchild.",
+        "limit": "Scripted model/native replies establish bounded engineering behavior, not model-authored effectiveness or semantic judgment accuracy."
+      },
+      {
+        "original_requirement": "Preserve failed/invalid proposals and complete common-screen coverage",
+        "evidence": [
+          "source_loop_delivery",
+          "source_screen_delivery",
+          "source_search_guide",
+          "source_screen_guide",
+          "source_search",
+          "source_screen"
+        ],
+        "finding": "Original proposals, clean rejections, duplicates, checked failed children, unusable native rows and incomplete/unknown stops retain separate outcomes/costs. Eligible means use the entire declared common task list; missing or unusable tasks cannot be dropped.",
+        "limit": "Rejected/duplicate outcomes are durable decision/cost history; they are not fabricated checked-failure notes. Unknown liabilities cannot be relabeled terminal invalid children."
+      },
+      {
+        "original_requirement": "Keep admission, numerical frontier selection and confirmed promotion separate",
+        "evidence": [
+          "design",
+          "source_screen_guide",
+          "source_screen_delivery",
+          "source_screen"
+        ],
+        "finding": "Complete screen, usable full-task admission and exploratory parent/frontier allocation remain separate public results. DESIGN6 reserves confirmed improvement for separately governed validation/final evidence.",
+        "limit": "No positive useful-diversity, improvement, champion-promotion or improved-improver claim follows from bounded loop completion."
+      }
+    ],
+    "prior_plan_commit": "6bb4fe38a4742dc2d73893457657b91d9a8b121e",
+    "prior_plan_sha256": "ae9f439e0e44730d87a0b927808c9a4d42ec7925370b1dc47c4c1eaedf463da9",
+    "closed": true,
+    "remaining_gates": [
+      "SRC-02",
+      "SRC-03",
+      "IMP-01",
+      "EVAL-02"
+    ]
+  },
+  "limits": [
+    "One actual request/reply, not a universal capacity guarantee for changed parent/feedback/request logic.",
+    "Historical measured feedback and the prospective current parent retain distinct identities. No new measured current parent or isolated full-output source chain is demonstrated.",
+    "Strict complete changed-source proposal text is not proof of Python correctness, further-child competence, task compliance, benchmark gain or improved-improver effectiveness.",
+    "Existing supplied-program source-loop checks support their bounded engineering scope; actual model-authored current-source outcomes and independent scientific evidence remain open.",
+    "Original approval/protocol/unfunded/funded checkpoints remain unchanged. The user made the only paid request; verification adds none.",
+    "Independent reviewer setup mistakes and raw-receipt transient state are retained in the original review, not hidden or relabeled as an outstanding final liability."
+  ]
+}

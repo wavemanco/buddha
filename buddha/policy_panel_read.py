@@ -193,7 +193,7 @@ def materialize_panel(
         packet_raw = _json(packet)
         counts = _object(planned["counts"])
         sets, positions_count = cast(int, counts["sets"]), cast(int, counts["positions"])
-        reader.capture.finish()
+        fingerprints = reader.fingerprints()
         private: dict[str, object] = {
             "format": "buddha.policy-panel-materialization.v1",
             "status": "complete" if len(items) == sets else "incomplete",
@@ -211,9 +211,7 @@ def materialize_panel(
             "packet_sha256": _sha(packet_raw),
             "sets": private_sets,
             "provenance": {
-                "consumed_files": {
-                    str(path): _sha(raw) for path, raw in reader.capture.raw.items()
-                },
+                "consumed_files": fingerprints,
                 "owners": [
                     {
                         "directory": str(owner.directory),

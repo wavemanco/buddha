@@ -1,0 +1,138 @@
+{
+  "basis_commit": "e34e0f18c0f59b0053ab0eb15582b6cded805c77",
+  "behavior": "One checked observation remains alive through output publication. Exact encoded reviewer files stay separate from private provenance and explicit pre-distribution round. Existing completed publications are checked read-only; missing/corrupt files are not refilled. Only identical allowlisted unmarked prefixes resume.",
+  "checks": {
+    "compatibility": {
+      "denied_events": [],
+      "elapsed_seconds": 232.15716309996787,
+      "errors": 0,
+      "failures": 0,
+      "skips": 0,
+      "source_inventory_unchanged": true,
+      "tests_run": 44
+    },
+    "compatibility_bridge": "Only the new test-file assertion differs between compatibility and final cohorts; all production bytes and original CLI methods remain unchanged. Original importer tests/core exporter remain byte-identical.",
+    "final_handoff": {
+      "denied_events": [],
+      "elapsed_seconds": 196.29455130000133,
+      "errors": 0,
+      "failures": 0,
+      "skips": 0,
+      "source_inventory_unchanged": true,
+      "tests_run": 6
+    },
+    "first_cohort": "Six methods finish with3 Windows native-vs-portable path assertion failures,0errors/skips/denied events and unchanged inputs. Genuine late-change assertions were not reached in this cut.",
+    "initial_api_red": "One ModuleNotFoundError before fixtures, preserved in original tool transcript/commit1a1cc30.",
+    "quality": {
+      "all_pins_unchanged": true,
+      "attempted_check_count": 7,
+      "input_count": 226,
+      "status": "pass",
+      "successful_check_count": 7
+    },
+    "static_correction": "Translate post-materialization _Busy/_Unsupported into the existing typed review error before execution; independent source/test review passes at final production hash.",
+    "test_only_correction": "Normalize actual relative names in the new shared inventory assertion with Path.as_posix; keep the full expected inventory and all other assertions. No product change; old failed cut and one-case diagnostic retained."
+  },
+  "evidence": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-handoff-api-red-v1.json",
+      "sha256": "12e456125357148831e8b0d2d478db5040f4fc2a35fa7282da2f5905545205b4"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-handoff-api-red-v1.log",
+      "sha256": "3358bd7323053cc562262400a5ad424c728c391c2a42c4e1e5edcc0563711890"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-handoff-check-v1.json",
+      "sha256": "3083ec752cf4f006a9b30f93a365240de80bce8cb0642e75f031a4a789be7548"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-handoff-check-v1.log",
+      "sha256": "b7bd21c87b6e212fd84211baba65ce77204960c1d25d59411f41819f5b596b9d"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-handoff-null-diagnostic-v1.json",
+      "sha256": "3236e146737cee4d1de11c5b404dfb00cce37ccbcebe8c5645a2d1682a0d166d"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-handoff-null-diagnostic-v1.log",
+      "sha256": "cdff01fe6c9eadc820885201698a8c202446a052c9d5225ac77fab341391ef50"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-handoff-check-v2.json",
+      "sha256": "9ed0594d54d2239233aa4cab8f229a3e7c75d2ad091e37fe406d259ca369d4bf"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-handoff-check-v2.log",
+      "sha256": "eea390c3820190caaa5b5692c838fa914856e60cd7b1d1f6b539e03ae43f1acd"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-handoff-compatibility-v1.json",
+      "sha256": "ad7829eab7ccc37fc054861a9f9d973127598a4afe78b2bc9b56b1a6df1f8bcc"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-handoff-compatibility-v1.log",
+      "sha256": "943cfe15f15555d27a5d7cc63243c98e33da733709dd2cc08d190a692725718d"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\run-source-review-handoff-checks-v1.py",
+      "sha256": "038b646c98a7f3e2cdb7057fa1a5942c41659aae48991325984a5cf3203f7976"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-handoff-quality-v1.json",
+      "sha256": "898337570cbf19452d7751b63ae7cc442989cfc8a1aa42eb815a21dd78b1fa26"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-handoff-quality-test-v1.py.txt",
+      "sha256": "f4118473b7658f74e2d3087b3a42ffef2b5af62dddec5266382ae4f1c0b17ad6"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-handoff-quality-v2.json",
+      "sha256": "ba2827198706f591ef4dd3c4953babdb235c5619cbdfb658ff048af6df409b7a"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-handoff-quality-v2.inputs.json",
+      "sha256": "356bf0da2d6b0b4faee7067228e6f705a7cb6ff592fab2c83b0d48afeff3bbc1"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-handoff-quality-v2.log",
+      "sha256": "526f9977d309a0e3a367d438b6846a044a821d3e25593f69f5773cc8397be413"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-handoff-quality-app-v2.py.txt",
+      "sha256": "fd905e9d4119b95143019c4e075e7ff5b14a01a15e9271412238d11e652e9aba"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\source-review-handoff-quality-test-v2.py.txt",
+      "sha256": "cadb5182dcab4b64c326c01a2e2538f9a1541c24981b88fc3480c030ce6c93b6"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\run-source-review-handoff-quality-v2.py",
+      "sha256": "eb43b0fd0a73b4424397c69b75a64fcdb6d580cffd012fa352f70192fef597ef"
+    }
+  ],
+  "format": "buddha.source-review-export-command-delivery.v1",
+  "limits": [
+    "New genuine cohort is an ordinary one-final-task/two-arm supplied-response lifecycle. Patched-reader publication tests do not independently prove custody or new composed valid-descendant improver export.",
+    "Declared reviewer types are not verified identities, independence, publication time, actual human judgments or a scientific sample. No automatic sending, adjudication or score changes.",
+    "A marker records publication bytes, not success of an interrupted/refused invocation or atomicity with concurrently changing original evidence. Unknown crash temporaries remain retained/refused.",
+    "Scoped local/quality passes are not a full-suite or hosted current-head pass; hosted CI remains separate.",
+    "No paid provider call, real key, new paid allocation, original-run/owner mutation, benchmark change, selected-source host execution or PR merge. Tests create their own synthetic temporary owners and authorizations.",
+    "Four original roadmap gates remain. Fixed selected SRC02 producer87c041 and its separate unfunded bundle/checks remain unchanged."
+  ],
+  "plan_scope": "EVAL-02 operator export only; collection command and transfer remain implementation work.",
+  "preservation": {
+    "historical_revision_rows_unchanged": 114,
+    "initial_api_test_body_unchanged": true,
+    "old_cli_method_bodies_unchanged": 20,
+    "original_main_acceptance_tails_unchanged": 10,
+    "plan_sha256": "6ea7d7806116569c15e41a98f30e09c9205f9da541da39f6629ca1b3d2c4633e"
+  },
+  "source_files": {
+    "buddha/__main__.py": "87c136521e480859c8645fc898556e5dc0e18101935372cb5e4b9fb306df22cd",
+    "buddha/source_review_handoff.py": "fd905e9d4119b95143019c4e075e7ff5b14a01a15e9271412238d11e652e9aba",
+    "buddha/source_review_results.py": "ffccae24fcee5de159d12e622a68ae8f13a4097e0ebc34ea8dd095485bb702d9",
+    "tests/test_cli.py": "f5a482c88f476a12256a3fdaede80a62100093a2ba3e2ca3c09c6881f63cc2e1",
+    "tests/test_source_review_handoff.py": "cadb5182dcab4b64c326c01a2e2538f9a1541c24981b88fc3480c030ce6c93b6"
+  }
+}

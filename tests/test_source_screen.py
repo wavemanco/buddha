@@ -194,12 +194,13 @@ class SourceScreenTests(unittest.TestCase):
 
         def finite_row(row, index):
             # Synthetic literal saved measurements, not host benchmark math.
-            row["partition"] = [0, 1] if program["distinct"] == 2 else [0, 0]
+            count, distinct = len(program["answers"]), program["distinct"]
+            row["partition"] = list(range(distinct)) + [0] * (count - distinct)
             row["distinct"] = program["distinct"]
             row.pop("score", None)
             if index == 1:
-                row["generation_scores"] = [7, 7] if program["distinct"] == 2 else [7, None]
-                row["partition_scores"] = [7, 7] if program["distinct"] == 2 else [7]
+                row["generation_scores"] = [7] * distinct + [None] * (count - distinct)
+                row["partition_scores"] = [7] * distinct
                 row["utility"] = program["utility"]
                 if row["id"] == self.unusable_task:
                     row["utility"] = float("nan")

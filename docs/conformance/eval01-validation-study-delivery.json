@@ -1,0 +1,851 @@
+{
+  "base_commit": "d4b548292b202ac20bad61d5476d5dacf8e938b0",
+  "date": "2026-10-22",
+  "evidence_sha256": {
+    "eval01-validation-final-static-review-v1.md": "c33162808b0ac1bfe129059b52d5e781e57588745b630d9f6bd641d7fac5bdad",
+    "validation-quality-v1.json": "fa5645d6e5da30c677f5001a77c22494efb807f42de9f8a5a7fb00df51ba032a",
+    "validation-study-boundary-red-v1.json": "8c95da25326659ad2298c79776b01f1c719de879d69c11f6592e2f11086ec840",
+    "validation-study-capacity-green-v1.json": "a3fab2aeeb45cf0d7100188795aafe9e512b92a1df006e9993e14a0827e8e056",
+    "validation-study-focused-complete-v1.json": "14831bd224583a4e52599a5f162a4c05d132f6b2971eed6e7df6e0a82fb9006d",
+    "validation-study-history-capacity-red-v1.json": "f95b9b19e2f08ae188488596856a331bc2c13928e2d4f23890b327f76aa95b3d",
+    "validation-study-native-partial-green-v1.json": "faf452c9457175da1aeff2ab0848527d322cba44d1019008ef445605a9bc13e7",
+    "validation-study-native-partial-green-v2.json": "559e80f1624608032525676c99f94a4d4c96f0aff6d436ed1fdc01abd72a0245",
+    "validation-study-native-partial-red-v1.json": "bda91430e96fda9e985a12fb4cdba7fb46a1402d9ae12cae71d383a30d568de1",
+    "validation-study-newlook-green-v1.json": "53fdebf01696c438d6f06ba8d5d4eb249e1fdfe3edee659abb114621b5f79b54",
+    "validation-study-readiness-green-v1.json": "d4678103069bd84cb6649ee08dd50c76539eeabae4cde61a2261fee44d74eccf",
+    "validation-study-readiness-red-v1.json": "c3ddc65055911aeb9115e1ed741464d2a98e2cf8a787b32f0ebd9d52cf497e0c",
+    "validation-study-red-v1.json": "f485c545e965450e92fd2187be15063f789b252bcfe05e4f3bfcafc25c26bd37",
+    "validation-study-retained-green-v1.json": "30642d041a70117ace3881bd2c238882f4cc87a77fd595fa6eb19488a58cbaa9",
+    "validation-study-retained-red-v1.json": "c1cec86ca5fdfc1719116fdf75521b5ba050caf6c4f9e697029a524dffb29c05",
+    "validation-study-retained-red-v2.json": "dad4d218b00c50fc2e6e289ba6d499bc65f16b9327841c9382bccd793e89e3f2"
+  },
+  "format": "buddha.eval01-validation-study-delivery.v1",
+  "heldout_data_access": false,
+  "independent_review": {
+    "review_sha256": "c33162808b0ac1bfe129059b52d5e781e57588745b630d9f6bd641d7fac5bdad",
+    "scope": "Final static inspection of exact production/test cut; no independent behavioral execution",
+    "status": "pass"
+  },
+  "limitations": [
+    "No full local regression suite or hosted-CI success claimed by this record.",
+    "Opaque pinned analysis-plan file is intent, not a statistical adequacy check; no confidence-bound estimator, finite scalar analysis or promotion.",
+    "Custody and semantic families remain trusted supplied metadata; normalized exact duplicates are checked, semantic near duplicates/training contamination are not certified.",
+    "Full final population, finalist policy, error allocation and one-way finalization must be prospectively frozen by the complete trial; this v1 cannot acquire those claims retroactively.",
+    "Process interruption and retained corruption are checked; no power-loss durability, global anti-peeking registry or trusted-host rollback prevention.",
+    "Capacity derives current deterministic input-path interfaces only, not future producer interfaces, context tokens, output size, costs or worker viability.",
+    "No actual model-authored source chain, universal mutation competence, human assessment or held-out/improved-improver efficacy established."
+  ],
+  "new_funding": false,
+  "preservation": {
+    "existing_core_accounting_evaluator_sources_unchanged": true,
+    "only_old_tracked_changes": [
+      "README.md",
+      "docs/PLAN.md"
+    ],
+    "original_src02_eval01_acceptance_tails_exact": true,
+    "original_tracked_files": 464,
+    "prior_plan_rows_byte_exact": 68
+  },
+  "quality": {
+    "checks": [
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "ruff",
+          "check",
+          "buddha",
+          "tests",
+          "agents",
+          "docs/conformance/src02-full-rehearsal.py"
+        ],
+        "elapsed_seconds": 0.1169039000524208,
+        "exit_code": 0,
+        "log_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-validation\\runs\\reviews\\validation-quality-v1-lint.log",
+        "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "name": "lint",
+        "timed_out": false
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "ruff",
+          "format",
+          "--check",
+          "buddha",
+          "tests",
+          "agents",
+          "docs/conformance/src02-full-rehearsal.py"
+        ],
+        "elapsed_seconds": 0.11479109991341829,
+        "exit_code": 0,
+        "log_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-validation\\runs\\reviews\\validation-quality-v1-format.log",
+        "log_sha256": "c53eecd93fbd42bd2109a3b8cb1ac1f3839c7d0dad32aedf4f8fa8f11477d6de",
+        "name": "format",
+        "timed_out": false
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "mypy",
+          "--strict",
+          "--platform",
+          "win32",
+          "--cache-dir",
+          "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-validation\\runs\\reviews\\validation-mypy-win32",
+          "buddha",
+          "agents"
+        ],
+        "elapsed_seconds": 2.9367780999746174,
+        "exit_code": 0,
+        "log_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-validation\\runs\\reviews\\validation-quality-v1-types-win32.log",
+        "log_sha256": "bbb056d74047c9da539a491357402c09020761ff6911e560d1fc89951f972115",
+        "name": "types-win32",
+        "timed_out": false
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "mypy",
+          "--strict",
+          "--platform",
+          "linux",
+          "--cache-dir",
+          "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-validation\\runs\\reviews\\validation-mypy-linux",
+          "buddha",
+          "agents"
+        ],
+        "elapsed_seconds": 2.417321400018409,
+        "exit_code": 0,
+        "log_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-validation\\runs\\reviews\\validation-quality-v1-types-linux.log",
+        "log_sha256": "bbb056d74047c9da539a491357402c09020761ff6911e560d1fc89951f972115",
+        "name": "types-linux",
+        "timed_out": false
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "bandit",
+          "-r",
+          "buddha",
+          "agents",
+          "docs/conformance/src02-full-rehearsal.py"
+        ],
+        "elapsed_seconds": 2.8235212001018226,
+        "exit_code": 0,
+        "log_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-validation\\runs\\reviews\\validation-quality-v1-security.log",
+        "log_sha256": "0583d5b85a4459dc7e72b48bb72cbe338ad4f9dcc24d8b07fc56381b180be15c",
+        "name": "security",
+        "timed_out": false
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "pip_audit",
+          "--no-deps",
+          "-r",
+          "requirements.txt"
+        ],
+        "elapsed_seconds": 17.04556630004663,
+        "exit_code": 0,
+        "log_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-validation\\runs\\reviews\\validation-quality-v1-dependencies.log",
+        "log_sha256": "e82148c0c30269ca5a2c35420ece6af011a4faf5a375325d750e243ffdb10625",
+        "name": "dependencies",
+        "timed_out": false
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "compileall",
+          "-q",
+          "buddha",
+          "tests",
+          "agents",
+          "docs/conformance/src02-full-rehearsal.py"
+        ],
+        "elapsed_seconds": 0.776341599994339,
+        "exit_code": 0,
+        "log_path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-validation\\runs\\reviews\\validation-quality-v1-compile.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "name": "compile",
+        "timed_out": false
+      }
+    ],
+    "configuration_inputs": 4,
+    "environment_policy": "Dedicated helper enumerated names and deleted all non-SAFE_OS entries before any subprocess/environment copying; no provider key lookup/value read or restoration.",
+    "inputs_unchanged": true,
+    "passed": true,
+    "python_inputs": 224
+  },
+  "real_provider_calls": 0,
+  "retained_history": {
+    "behavioral_findings": [
+      "Unconfirmed original fsync/reread was adopted on resume",
+      "Unknown/zero-operation unfinished work bypassed with a fresh look",
+      "Coherently changed retained generation/native owner controls accepted before work",
+      "Five altered partial reason/position/child/coverage/claim cases accepted",
+      "Genuine ordinary native partial report rejected during same-owner recovery",
+      "Generation-fit/native-overflow schedule consumed a look before refusal"
+    ],
+    "mixed_cut_rule": "Earlier RED/GREEN observations retain their own source pins; only the final 19-method cohort establishes the combined final-cut pass.",
+    "separate_nonbehavioral_failures": [
+      "Initial missing interface",
+      "Runner stopTest diagnostic and synthetic SQL/deserialize guard setup failures",
+      "Nonexistent transport.send sentinel corrected to actual send_prepared",
+      "Post-fix test incorrectly expected unknown on blocked repeat instead of original guard's authority reason"
+    ]
+  },
+  "scope": "EVAL-01 finite validation reservation, matched native collection and original-owner history; full scientific/finalization gate remains open",
+  "sources": {
+    "buddha/validation_study.py": "54e9f227c5dca2160bbeddf173abe3a70306ee907d32b214c0b13c959c9ba3f4",
+    "docs/VALIDATION-STUDY.md": "2445b6ca74495a35fd54d0d5b4967746fcf816a80e8a981148a2e26ae59ef4d4",
+    "tests/test_validation_study.py": "6f96a0aacf1db58914da3c2dfb416b8b64d00c76ef8eec49bf9151919806547c"
+  },
+  "test_fixture_observations": [
+    {
+      "actual_owner_input_evidence": null,
+      "capacity_evidence": null,
+      "fake_physical_sends": 0,
+      "generation_events": 0,
+      "known_reply_evidence": null,
+      "mock_native_workers": 0,
+      "mock_workers": 0,
+      "native_events": 0,
+      "native_partial_evidence": null,
+      "test_id": "test_validation_study.ValidationStudyTests.test_actual_candidate_ceiling_and_duplicate_content_ignore_path_aliases"
+    },
+    {
+      "actual_owner_input_evidence": null,
+      "capacity_evidence": null,
+      "fake_physical_sends": 0,
+      "generation_events": 0,
+      "known_reply_evidence": null,
+      "mock_native_workers": 0,
+      "mock_workers": 2,
+      "native_events": 0,
+      "native_partial_evidence": null,
+      "test_id": "test_validation_study.ValidationStudyTests.test_anchored_terminal_failure_permits_next_declared_look_without_native"
+    },
+    {
+      "actual_owner_input_evidence": null,
+      "capacity_evidence": null,
+      "fake_physical_sends": 0,
+      "generation_events": 0,
+      "known_reply_evidence": null,
+      "mock_native_workers": 0,
+      "mock_workers": 0,
+      "native_events": 0,
+      "native_partial_evidence": null,
+      "test_id": "test_validation_study.ValidationStudyTests.test_canonical_partial_corruption_cannot_replace_original_event_evidence"
+    },
+    {
+      "actual_owner_input_evidence": null,
+      "capacity_evidence": null,
+      "fake_physical_sends": 0,
+      "generation_events": 0,
+      "known_reply_evidence": null,
+      "mock_native_workers": 0,
+      "mock_workers": 1,
+      "native_events": 0,
+      "native_partial_evidence": null,
+      "test_id": "test_validation_study.ValidationStudyTests.test_checked_generation_failure_is_terminal_partial_without_native_or_replacement"
+    },
+    {
+      "actual_owner_input_evidence": null,
+      "capacity_evidence": null,
+      "fake_physical_sends": 0,
+      "generation_events": 0,
+      "known_reply_evidence": null,
+      "mock_native_workers": 0,
+      "mock_workers": 0,
+      "native_events": 0,
+      "native_partial_evidence": null,
+      "test_id": "test_validation_study.ValidationStudyTests.test_complete_occasion_without_successful_sync_and_reread_stays_poisoned"
+    },
+    {
+      "actual_owner_input_evidence": null,
+      "capacity_evidence": null,
+      "fake_physical_sends": 0,
+      "generation_events": 0,
+      "known_reply_evidence": null,
+      "mock_native_workers": 0,
+      "mock_workers": 0,
+      "native_events": 0,
+      "native_partial_evidence": null,
+      "test_id": "test_validation_study.ValidationStudyTests.test_created_slot_without_original_occasion_is_poisoned_and_never_recreated"
+    },
+    {
+      "actual_owner_input_evidence": null,
+      "capacity_evidence": {
+        "baseline": [
+          47,
+          59,
+          64,
+          66
+        ],
+        "filler_files": 958,
+        "final": [
+          1005,
+          1017,
+          1022,
+          1024
+        ]
+      },
+      "fake_physical_sends": 0,
+      "generation_events": 0,
+      "known_reply_evidence": null,
+      "mock_native_workers": 0,
+      "mock_workers": 0,
+      "native_events": 0,
+      "native_partial_evidence": null,
+      "test_id": "test_validation_study.ValidationStudyTests.test_exact_native_input_capacity_edge_reaches_original_prepare_without_work"
+    },
+    {
+      "actual_owner_input_evidence": null,
+      "capacity_evidence": null,
+      "fake_physical_sends": 0,
+      "generation_events": 0,
+      "known_reply_evidence": null,
+      "mock_native_workers": 0,
+      "mock_workers": 0,
+      "native_events": 0,
+      "native_partial_evidence": null,
+      "test_id": "test_validation_study.ValidationStudyTests.test_existing_occasion_cannot_adopt_another_grant_before_preparation"
+    },
+    {
+      "actual_owner_input_evidence": null,
+      "capacity_evidence": {
+        "baseline": [
+          47,
+          59,
+          64,
+          66
+        ],
+        "filler_files": 977,
+        "final": [
+          1024,
+          1036,
+          1041,
+          1043
+        ]
+      },
+      "fake_physical_sends": 0,
+      "generation_events": 0,
+      "known_reply_evidence": null,
+      "mock_native_workers": 0,
+      "mock_workers": 0,
+      "native_events": 0,
+      "native_partial_evidence": null,
+      "test_id": "test_validation_study.ValidationStudyTests.test_generation_fits_but_native_input_union_overflows_before_look_reservation"
+    },
+    {
+      "actual_owner_input_evidence": null,
+      "capacity_evidence": null,
+      "fake_physical_sends": 0,
+      "generation_events": 0,
+      "known_reply_evidence": null,
+      "mock_native_workers": 0,
+      "mock_workers": 0,
+      "native_events": 0,
+      "native_partial_evidence": null,
+      "test_id": "test_validation_study.ValidationStudyTests.test_independent_runtime_mismatch_rejects_before_study_creation"
+    },
+    {
+      "actual_owner_input_evidence": null,
+      "capacity_evidence": null,
+      "fake_physical_sends": 6,
+      "generation_events": 2,
+      "known_reply_evidence": {
+        "actual_microusd": 11,
+        "final_physical_sends": 6,
+        "lower_sha256": "a40840309941679c15d452a28c617de89eb6f1a585899ba3da99ec136f50c669",
+        "operation_id": "6be05e8c9f2d323ceecba7890619f1e6992886c492094665398222c087278514",
+        "original_outer_coverage": {
+          "checked_failed_generations": 0,
+          "expected_cells": 2,
+          "generated_cells": 1,
+          "native_cells": 0,
+          "unattempted_generations": 1
+        },
+        "outer_sha256": "6fca9ad734fc01724e87bd31b7846fad73d9904b4f062171ff0b0ab9a727bbbb",
+        "provider_request_id": "req-synthetic",
+        "request_sha256": "f033df05adf34e7417833167cf701e65fd95ee0922cc7107f24a3472a5cedb79"
+      },
+      "mock_native_workers": 7,
+      "mock_workers": 9,
+      "native_events": 7,
+      "native_partial_evidence": null,
+      "test_id": "test_validation_study.ValidationStudyTests.test_known_native_reply_resumes_original_owner_and_preserves_historical_partials"
+    },
+    {
+      "actual_owner_input_evidence": null,
+      "capacity_evidence": null,
+      "fake_physical_sends": 0,
+      "generation_events": 0,
+      "known_reply_evidence": null,
+      "mock_native_workers": 0,
+      "mock_workers": 0,
+      "native_events": 0,
+      "native_partial_evidence": null,
+      "test_id": "test_validation_study.ValidationStudyTests.test_normalized_prompt_duplicates_crossing_phases_reject_with_valid_source_pins"
+    },
+    {
+      "actual_owner_input_evidence": null,
+      "capacity_evidence": null,
+      "fake_physical_sends": 0,
+      "generation_events": 0,
+      "known_reply_evidence": null,
+      "mock_native_workers": 0,
+      "mock_workers": 0,
+      "native_events": 0,
+      "native_partial_evidence": null,
+      "test_id": "test_validation_study.ValidationStudyTests.test_prospective_population_custody_and_numeric_limits_reject_before_creation"
+    },
+    {
+      "actual_owner_input_evidence": null,
+      "capacity_evidence": null,
+      "fake_physical_sends": 2,
+      "generation_events": 1,
+      "known_reply_evidence": null,
+      "mock_native_workers": 2,
+      "mock_workers": 3,
+      "native_events": 2,
+      "native_partial_evidence": {
+        "actual_attempt_report": {
+          "aliases": [],
+          "artifacts": {},
+          "call_counter_scope": "worker requests and delivered raw responses, including cached replay",
+          "calls": {
+            "completed": 0,
+            "requested": 1,
+            "stopped": 1
+          },
+          "claim": "native command artifacts; experiment coverage and promotion remain separate",
+          "command_sha256": "f924486c29965b9a5d7839d8cd029971dc965a36e56a85005f2fb066685e8915",
+          "descriptor_sha256": "e9a542699543d109b724e839aebde065ebb6d7e096ac7d24c8aa845212ae61a8",
+          "execution": {
+            "cleanup_status": "removed",
+            "configuration": {
+              "fixture": "mock container, not confinement evidence"
+            },
+            "container_id": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+            "elapsed_seconds": 0.01,
+            "exit_code": 0,
+            "frame_count": 1,
+            "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+            "stderr_bytes": 0,
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stdout_bytes": 0
+          },
+          "format": "buddha.native-command-report.v1",
+          "gateway_manifest_sha256": "8e66a60c0f8c8bf6bd7ba108ee7bf3e845c9348aa790323709944066639f5e02",
+          "gateway_totals": {
+            "committed_microusd": 300,
+            "operation_count": 1,
+            "reserved_microusd": 300,
+            "spent_microusd": 0
+          },
+          "gateway_totals_scope": "entire owning gateway ledger, including prior calls and unknown holds",
+          "ready_audit_sha256": "e8bfe3d571cb88e211116bdde01138ecb3afd77703e649b240fa900fff0af6e9",
+          "status": "stopped",
+          "worker": {
+            "audit_sha256": "e8bfe3d571cb88e211116bdde01138ecb3afd77703e649b240fa900fff0af6e9",
+            "reason": "unknown",
+            "status": "stopped"
+          }
+        },
+        "actual_lower_observation": {
+          "attempt": "attempts/1-0",
+          "authorization": {
+            "authorization_id": "offline-validation-fixture",
+            "available_microusd": 999689,
+            "budget_microusd": 1000000,
+            "committed_microusd": 311,
+            "event_count": 11,
+            "max_calls": 1000,
+            "operation_count": 2,
+            "remaining_calls": 998,
+            "reserved_microusd": 300,
+            "runs": [
+              {
+                "active": true,
+                "committed_microusd": 300,
+                "directory": "C:\\Users\\arvik\\AppData\\Local\\Temp\\tmpuevix5w6\\validation-study\\validation\\0\\arms\\0\\tasks\\0\\repetitions\\0\\evaluation\\owners\\1",
+                "historical": 0,
+                "historical_ledger_sha256": null,
+                "ledger_path": "C:\\Users\\arvik\\AppData\\Local\\Temp\\tmpuevix5w6\\validation-study\\validation\\0\\arms\\0\\tasks\\0\\repetitions\\0\\evaluation\\owners\\1\\operations.sqlite3",
+                "manifest_sha256": "8e66a60c0f8c8bf6bd7ba108ee7bf3e845c9348aa790323709944066639f5e02",
+                "operation_count": 1,
+                "reserved_microusd": 300,
+                "run_id": "2b7e361f27f8427ea4a2d568cdbe5a9c",
+                "runtime_sha256": "969528f5109ba6d13ea534b96168b90b3c1f18899e2617ce3e230f37a1606493",
+                "spent_microusd": 0
+              },
+              {
+                "active": false,
+                "committed_microusd": 11,
+                "directory": "C:\\Users\\arvik\\AppData\\Local\\Temp\\tmpuevix5w6\\validation-study\\validation\\0\\arms\\0\\tasks\\0\\repetitions\\0\\generation\\owners\\0",
+                "historical": 0,
+                "historical_ledger_sha256": null,
+                "ledger_path": "C:\\Users\\arvik\\AppData\\Local\\Temp\\tmpuevix5w6\\validation-study\\validation\\0\\arms\\0\\tasks\\0\\repetitions\\0\\generation\\owners\\0\\operations.sqlite3",
+                "manifest_sha256": "ca2bd60563dd32f65d651847c0ee0e7986973a16e3b1a48123d87434d45b698e",
+                "operation_count": 1,
+                "reserved_microusd": 0,
+                "run_id": "a7a6c07b3ab043b59b5b4ae9f65e6914",
+                "runtime_sha256": "b2933cdf341b8e4581a3ce98177ab2b2f7ce585e9be766eca0dd7a0b80d067aa",
+                "spent_microusd": 11
+              }
+            ],
+            "scope": "validation study: d0a53e387a0687dbfcc1eac8ca1f7a98976524fc359c937a1c78629078e1a93a",
+            "spent_microusd": 11,
+            "terms_sha256": "320c46b6cbea28381270a739c3e3027a1ef7e11883530a2a8494172f028e85e1"
+          },
+          "claim": "incomplete native occasion; original owners, raw replies, partial artifacts and holds retained",
+          "format": "buddha.native-evaluation-report.v1",
+          "observation": "observations/0.json",
+          "owner": "owners/1",
+          "reason": "unknown",
+          "stages": [
+            {
+              "aliases": [],
+              "artifacts": {},
+              "call_counter_scope": "worker requests and delivered raw responses, including cached replay",
+              "calls": {
+                "completed": 0,
+                "requested": 1,
+                "stopped": 1
+              },
+              "claim": "native command artifacts; experiment coverage and promotion remain separate",
+              "command_sha256": "f924486c29965b9a5d7839d8cd029971dc965a36e56a85005f2fb066685e8915",
+              "descriptor_sha256": "e9a542699543d109b724e839aebde065ebb6d7e096ac7d24c8aa845212ae61a8",
+              "execution": {
+                "cleanup_status": "removed",
+                "configuration": {
+                  "fixture": "mock container, not confinement evidence"
+                },
+                "container_id": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+                "elapsed_seconds": 0.01,
+                "exit_code": 0,
+                "frame_count": 1,
+                "image_id": "sha256:757f5ffd3125ae10a83a7fb7eed05afe5e047442e4063d21bf995c03db1d0f04",
+                "stderr_bytes": 0,
+                "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "stdout_bytes": 0
+              },
+              "format": "buddha.native-command-report.v1",
+              "gateway_manifest_sha256": "8e66a60c0f8c8bf6bd7ba108ee7bf3e845c9348aa790323709944066639f5e02",
+              "gateway_totals": {
+                "committed_microusd": 300,
+                "operation_count": 1,
+                "reserved_microusd": 300,
+                "spent_microusd": 0
+              },
+              "gateway_totals_scope": "entire owning gateway ledger, including prior calls and unknown holds",
+              "ready_audit_sha256": "e8bfe3d571cb88e211116bdde01138ecb3afd77703e649b240fa900fff0af6e9",
+              "status": "stopped",
+              "worker": {
+                "audit_sha256": "e8bfe3d571cb88e211116bdde01138ecb3afd77703e649b240fa900fff0af6e9",
+                "reason": "unknown",
+                "status": "stopped"
+              }
+            }
+          ],
+          "status": "incomplete",
+          "stopped_stage": 1
+        },
+        "attempt_report_sha256": "a69ac2e456ef36151e1bc3ab966f05d12e403859d6a341c608e5e38614bc6a14",
+        "lower_sha256": "405f337e9a8cd33d5fa0b12baa3734ecff449288c3814a6971350952ba48c915",
+        "outer": {
+          "authorization": {
+            "authorization_id": "offline-validation-fixture",
+            "available_microusd": 999689,
+            "budget_microusd": 1000000,
+            "committed_microusd": 311,
+            "event_count": 11,
+            "max_calls": 1000,
+            "operation_count": 2,
+            "remaining_calls": 998,
+            "reserved_microusd": 300,
+            "runs": [
+              {
+                "active": true,
+                "committed_microusd": 300,
+                "directory": "C:\\Users\\arvik\\AppData\\Local\\Temp\\tmpuevix5w6\\validation-study\\validation\\0\\arms\\0\\tasks\\0\\repetitions\\0\\evaluation\\owners\\1",
+                "historical": 0,
+                "historical_ledger_sha256": null,
+                "ledger_path": "C:\\Users\\arvik\\AppData\\Local\\Temp\\tmpuevix5w6\\validation-study\\validation\\0\\arms\\0\\tasks\\0\\repetitions\\0\\evaluation\\owners\\1\\operations.sqlite3",
+                "manifest_sha256": "8e66a60c0f8c8bf6bd7ba108ee7bf3e845c9348aa790323709944066639f5e02",
+                "operation_count": 1,
+                "reserved_microusd": 300,
+                "run_id": "2b7e361f27f8427ea4a2d568cdbe5a9c",
+                "runtime_sha256": "969528f5109ba6d13ea534b96168b90b3c1f18899e2617ce3e230f37a1606493",
+                "spent_microusd": 0
+              },
+              {
+                "active": false,
+                "committed_microusd": 11,
+                "directory": "C:\\Users\\arvik\\AppData\\Local\\Temp\\tmpuevix5w6\\validation-study\\validation\\0\\arms\\0\\tasks\\0\\repetitions\\0\\generation\\owners\\0",
+                "historical": 0,
+                "historical_ledger_sha256": null,
+                "ledger_path": "C:\\Users\\arvik\\AppData\\Local\\Temp\\tmpuevix5w6\\validation-study\\validation\\0\\arms\\0\\tasks\\0\\repetitions\\0\\generation\\owners\\0\\operations.sqlite3",
+                "manifest_sha256": "ca2bd60563dd32f65d651847c0ee0e7986973a16e3b1a48123d87434d45b698e",
+                "operation_count": 1,
+                "reserved_microusd": 0,
+                "run_id": "a7a6c07b3ab043b59b5b4ae9f65e6914",
+                "runtime_sha256": "b2933cdf341b8e4581a3ce98177ab2b2f7ce585e9be766eca0dd7a0b80d067aa",
+                "spent_microusd": 11
+              }
+            ],
+            "scope": "validation study: d0a53e387a0687dbfcc1eac8ca1f7a98976524fc359c937a1c78629078e1a93a",
+            "spent_microusd": 11,
+            "terms_sha256": "320c46b6cbea28381270a739c3e3027a1ef7e11883530a2a8494172f028e85e1"
+          },
+          "child": {
+            "path": "C:\\Users\\arvik\\AppData\\Local\\Temp\\tmpuevix5w6\\validation-study\\validation\\0\\arms\\0\\tasks\\0\\repetitions\\0\\evaluation\\observations\\0.json",
+            "sha256": "405f337e9a8cd33d5fa0b12baa3734ecff449288c3814a6971350952ba48c915"
+          },
+          "claim": "incomplete validation; original evidence, look and liabilities retained",
+          "coverage": {
+            "checked_failed_generations": 0,
+            "expected_cells": 2,
+            "generated_cells": 1,
+            "native_cells": 0,
+            "unattempted_generations": 1
+          },
+          "format": "buddha.validation-occasion-observation.v1",
+          "observation": "observations/0.json",
+          "occasion_sha256": "4569c19e74cb7bbda83f9d9daa232210746ffe0c254f916c30cf5528ef7dbb82",
+          "ordinal": 0,
+          "position": {
+            "arm_index": 0,
+            "repetition": 0,
+            "stage": "native",
+            "task_index": 0
+          },
+          "reason": "unknown",
+          "status": "incomplete"
+        },
+        "outer_sha256": "5cfa6bd7d0f02d472c649be7766cd8bbd06930a198465930a79b6321099de5b2"
+      },
+      "test_id": "test_validation_study.ValidationStudyTests.test_real_ordinary_native_unknown_partial_repeats_without_losing_original_evidence"
+    },
+    {
+      "actual_owner_input_evidence": null,
+      "capacity_evidence": null,
+      "fake_physical_sends": 0,
+      "generation_events": 0,
+      "known_reply_evidence": null,
+      "mock_native_workers": 0,
+      "mock_workers": 0,
+      "native_events": 0,
+      "native_partial_evidence": null,
+      "test_id": "test_validation_study.ValidationStudyTests.test_real_uncompleted_generation_owner_cannot_adopt_a_changed_legal_budget"
+    },
+    {
+      "actual_owner_input_evidence": null,
+      "capacity_evidence": null,
+      "fake_physical_sends": 1,
+      "generation_events": 1,
+      "known_reply_evidence": null,
+      "mock_native_workers": 0,
+      "mock_workers": 1,
+      "native_events": 0,
+      "native_partial_evidence": null,
+      "test_id": "test_validation_study.ValidationStudyTests.test_real_uncompleted_native_owner_cannot_adopt_alternate_bound_definition"
+    },
+    {
+      "actual_owner_input_evidence": [
+        {
+          "index": 0,
+          "kind": "generation",
+          "paths": 47,
+          "run_id": "90b5d0184c5f465a9a75ce0d6fefa122"
+        },
+        {
+          "index": 1,
+          "kind": "native",
+          "paths": 59,
+          "run_id": "895d7299c05549a283a5ddf05244663f"
+        },
+        {
+          "index": 2,
+          "kind": "native",
+          "paths": 64,
+          "run_id": "71fcf2b27d9d4297b728047ee8c08b26"
+        },
+        {
+          "index": 3,
+          "kind": "native",
+          "paths": 66,
+          "run_id": "0b52a4c47e1941bf901aebbd36ec7854"
+        },
+        {
+          "index": 0,
+          "kind": "generation",
+          "paths": 47,
+          "run_id": "8940cab208254b3fb1d8492f68f3743b"
+        },
+        {
+          "index": 1,
+          "kind": "native",
+          "paths": 59,
+          "run_id": "e1c68e1230494cf19727aec31c25b157"
+        },
+        {
+          "index": 2,
+          "kind": "native",
+          "paths": 64,
+          "run_id": "60472fb95fe749389b6a697be2b9cf06"
+        },
+        {
+          "index": 3,
+          "kind": "native",
+          "paths": 66,
+          "run_id": "b15b143769af422e87c6a1394b99ba6e"
+        },
+        {
+          "index": 0,
+          "kind": "generation",
+          "paths": 47,
+          "run_id": "fac72e36553a44c4a0ac37d07eb94b7d"
+        },
+        {
+          "index": 1,
+          "kind": "native",
+          "paths": 59,
+          "run_id": "0a33f45e577644b580d243c0f91d5c79"
+        },
+        {
+          "index": 2,
+          "kind": "native",
+          "paths": 64,
+          "run_id": "fb8bff5708b14225b998c904417c3aed"
+        },
+        {
+          "index": 3,
+          "kind": "native",
+          "paths": 66,
+          "run_id": "1eecaa9bb71f423c8fa66cffc68aa93a"
+        },
+        {
+          "index": 0,
+          "kind": "generation",
+          "paths": 47,
+          "run_id": "6ae8b35bca944fe5b6e16ba5b20a8a77"
+        },
+        {
+          "index": 1,
+          "kind": "native",
+          "paths": 59,
+          "run_id": "f1017a0938104cebbea57965b759a403"
+        },
+        {
+          "index": 2,
+          "kind": "native",
+          "paths": 64,
+          "run_id": "077cc28bcddd4e55bf10578bff6c5ec7"
+        },
+        {
+          "index": 3,
+          "kind": "native",
+          "paths": 66,
+          "run_id": "0d5744be5efd4370aeacc720849b4572"
+        }
+      ],
+      "capacity_evidence": null,
+      "fake_physical_sends": 12,
+      "generation_events": 4,
+      "known_reply_evidence": null,
+      "mock_native_workers": 12,
+      "mock_workers": 16,
+      "native_events": 12,
+      "native_partial_evidence": null,
+      "test_id": "test_validation_study.ValidationStudyTests.test_reserved_occasion_is_consumed_by_every_original_generation_and_native_owner"
+    },
+    {
+      "actual_owner_input_evidence": null,
+      "capacity_evidence": null,
+      "fake_physical_sends": 0,
+      "generation_events": 0,
+      "known_reply_evidence": null,
+      "mock_native_workers": 0,
+      "mock_workers": 0,
+      "native_events": 0,
+      "native_partial_evidence": null,
+      "test_id": "test_validation_study.ValidationStudyTests.test_unfinished_look_without_operations_cannot_buy_another_look"
+    },
+    {
+      "actual_owner_input_evidence": null,
+      "capacity_evidence": null,
+      "fake_physical_sends": 1,
+      "generation_events": 1,
+      "known_reply_evidence": null,
+      "mock_native_workers": 0,
+      "mock_workers": 1,
+      "native_events": 0,
+      "native_partial_evidence": null,
+      "test_id": "test_validation_study.ValidationStudyTests.test_unknown_original_generation_retains_hold_and_blocks_new_look_before_mkdir"
+    }
+  ],
+  "test_guards": {
+    "before_map": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-validation\\runs\\reviews\\validation-study-focused-complete-v1-before.json",
+      "sha256": "498f4d90d703d2968dc80932309836fa50b240effc8d835dfb9b2ae2d9868c1d"
+    },
+    "denied_events": [],
+    "environment_policy": "non-safe names removed without reading their values before fixture imports",
+    "protected_config_inputs": 4,
+    "protected_python_inputs": 224,
+    "unchanged": true
+  },
+  "tests": {
+    "elapsed_seconds": 314.7922678999603,
+    "errors": 0,
+    "explicit_source_pins": {
+      "buddha/validation_study.py": "54e9f227c5dca2160bbeddf173abe3a70306ee907d32b214c0b13c959c9ba3f4",
+      "tests/test_validation_study.py": "6f96a0aacf1db58914da3c2dfb416b8b64d00c76ef8eec49bf9151919806547c"
+    },
+    "failures": 0,
+    "raw_log": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-validation\\runs\\reviews\\validation-study-focused-complete-v1.log",
+      "sha256": "e764d12d3e9b94d5c355225cd1e202fcaba0783cc86d63c01f670de73b4db922"
+    },
+    "status": "passed",
+    "test_ids": [
+      "test_validation_study.ValidationStudyTests.test_actual_candidate_ceiling_and_duplicate_content_ignore_path_aliases",
+      "test_validation_study.ValidationStudyTests.test_anchored_terminal_failure_permits_next_declared_look_without_native",
+      "test_validation_study.ValidationStudyTests.test_canonical_partial_corruption_cannot_replace_original_event_evidence",
+      "test_validation_study.ValidationStudyTests.test_checked_generation_failure_is_terminal_partial_without_native_or_replacement",
+      "test_validation_study.ValidationStudyTests.test_complete_occasion_without_successful_sync_and_reread_stays_poisoned",
+      "test_validation_study.ValidationStudyTests.test_created_slot_without_original_occasion_is_poisoned_and_never_recreated",
+      "test_validation_study.ValidationStudyTests.test_exact_native_input_capacity_edge_reaches_original_prepare_without_work",
+      "test_validation_study.ValidationStudyTests.test_existing_occasion_cannot_adopt_another_grant_before_preparation",
+      "test_validation_study.ValidationStudyTests.test_generation_fits_but_native_input_union_overflows_before_look_reservation",
+      "test_validation_study.ValidationStudyTests.test_independent_runtime_mismatch_rejects_before_study_creation",
+      "test_validation_study.ValidationStudyTests.test_known_native_reply_resumes_original_owner_and_preserves_historical_partials",
+      "test_validation_study.ValidationStudyTests.test_normalized_prompt_duplicates_crossing_phases_reject_with_valid_source_pins",
+      "test_validation_study.ValidationStudyTests.test_prospective_population_custody_and_numeric_limits_reject_before_creation",
+      "test_validation_study.ValidationStudyTests.test_real_ordinary_native_unknown_partial_repeats_without_losing_original_evidence",
+      "test_validation_study.ValidationStudyTests.test_real_uncompleted_generation_owner_cannot_adopt_a_changed_legal_budget",
+      "test_validation_study.ValidationStudyTests.test_real_uncompleted_native_owner_cannot_adopt_alternate_bound_definition",
+      "test_validation_study.ValidationStudyTests.test_reserved_occasion_is_consumed_by_every_original_generation_and_native_owner",
+      "test_validation_study.ValidationStudyTests.test_unfinished_look_without_operations_cannot_buy_another_look",
+      "test_validation_study.ValidationStudyTests.test_unknown_original_generation_retains_hold_and_blocks_new_look_before_mkdir"
+    ],
+    "tests_run": 19
+  },
+  "verification_scope": "Real existing controllers/Gateway/Authorization with registered temporary SQLite; worker/channel/provider outcomes mocked. No real Docker/process/network or API money. Near-limit path counts are prospective; actual path-set equality is from the separate 16-owner small fixture."
+}

@@ -1,0 +1,139 @@
+{
+  "actual_study_adopted": false,
+  "actual_target_repair_assessed": false,
+  "basis_commit": "44833fba995034aa86316ccf792c322262dd88f0",
+  "evidence": [
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-target-repair-descriptive-method-feasibility-v1.json",
+      "sha256": "1de683133a5026b07f0662aa60a0eea7571901ee57ca520563c199b233c24cae"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-target-repair-method-source-review-v1.json",
+      "sha256": "136c08250bfd0428f2d4cf8d0db7d2369e382b21dc2666a17c1a9e01a5712842"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-target-repair-exercise-v1\\preparation.json",
+      "sha256": "b4dd6a92ea2cf6be3c8644049b5338aabdb194c62bdf287e1a734306c16b30e1"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-target-repair-exercise-v1\\stage-a-input.json",
+      "sha256": "c8c1fbec3acab3eaf9c5c6e0edfaa5677a410d8986e94ce247d1becc3b2c09d5"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-target-repair-exercise-v1\\stage-b-input.json",
+      "sha256": "5fb424d0aa68935150501a0e8b46d9dd7d8d61bf7b381136d8812202a0894dbf"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-target-repair-exercise-v1\\coordinator-private.json",
+      "sha256": "8d841054249f01cbc55e0b598e4724191de7e1327ea69ac48e29c8d05ee53b2e"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-target-repair-exercise-v1\\stage-a-review.json",
+      "sha256": "3a97fbb223dce754139ef204f47a2dca7695ac45a60a1d80dfc6a06611d8737b"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-target-repair-exercise-v1\\stage-a-seal.json",
+      "sha256": "ce0a6ebfacb2e67d4e85f2cd1cd5edf2a73f38484a17281bb674c2e6e7441176"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-target-repair-exercise-v1\\stage-b-review.json",
+      "sha256": "788bece84852ac693a170d863561e9b53e6c328c6b2f9d8202a4aff01c3fae3b"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-target-repair-exercise-v1\\verification.json",
+      "sha256": "f818c369bbf8954b4042c2e8d3bc78b97174938e1cb61d660a9a2e8340bc0195"
+    },
+    {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-target-repair-exercise-independent-review-v1.json",
+      "sha256": "71c2300f2533bb26c7aad9843651d34c5d4b7efcb6afc2ca80f9c2d88ac98a18"
+    }
+  ],
+  "exercise": {
+    "absent_parent_problem_case": "S03 stays not assessable, even with complete child outputs.",
+    "all_targets_criteria_grading_parent_status_and_interpretation_unchanged": true,
+    "assessed_operational_targets": 5,
+    "child_answer_texts": 12,
+    "custody_limit": "Root records A form/hash before separate B dispatch. Withholding/access are procedural and self-declared; exact first-child file access time was not separately instrumented. No filesystem isolation, independent human judgment or real-study custody proof.",
+    "frozen_operational_targets": 7,
+    "full_child_sets": 6,
+    "full_parent_sets": 8,
+    "mixed_target_case": "S02 repairs line count but leaves punctuation unresolved.",
+    "opportunities_retained": 8,
+    "parent_answer_texts": 16,
+    "repaired_output_with_separate_private_witness_failure_case": "S08",
+    "reviewer": "Fresh model agent /root/target_review_stage_a, spawned with no parent turn history.",
+    "root_role": "Unblinded case author and coordinator, not the outcome-naive target extractor.",
+    "scope": "Eight supplied miniature two-answer cases, not a real study population or an adopted future grid.",
+    "separate_nonoperational_intention_cases": {
+      "S04": "vague captured intention",
+      "S06": "unavailable intention; child also unavailable"
+    },
+    "source_review_and_independent_saved_data_review": "No blocker within their stated bounded scopes.",
+    "stage_a_form": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-target-repair-exercise-v1\\stage-a-review.json",
+      "sha256": "3a97fbb223dce754139ef204f47a2dca7695ac45a60a1d80dfc6a06611d8737b"
+    },
+    "stage_a_seal_before_separate_b_dispatch": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-target-repair-exercise-v1\\stage-a-seal.json",
+      "sha256": "ce0a6ebfacb2e67d4e85f2cd1cd5edf2a73f38484a17281bb674c2e6e7441176"
+    },
+    "stage_b_form": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-target-repair-exercise-v1\\stage-b-review.json",
+      "sha256": "788bece84852ac693a170d863561e9b53e6c328c6b2f9d8202a4aff01c3fae3b"
+    },
+    "target_outcomes": {
+      "not_assessable": 2,
+      "observed_repair": 3,
+      "unchanged": 2
+    }
+  },
+  "format": "buddha.imp01-target-repair-method-delivery.v1",
+  "implemented_scope": "Prospectively adoptable descriptive method and manual supplementary worksheet using existing original inspectors/retained evidence. No new runtime, schema, exporter, automated repair-rate calculation or command.",
+  "method": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\imp01-target-repair-method\\docs\\IMPROVER-TARGET-REPAIR.md",
+    "sha256": "c89b9d6715b4e3f48217b9ba8017156cdf7b55573612ac8dd10b0f328d8c248e"
+  },
+  "method_rules": [
+    "Freeze actual-study method, coverage and review/custody arrangements prospectively.",
+    "Retain every planned counted opportunity and separately testable target, with immediate-parent whole same-task sets and typed identities.",
+    "Save Stage A targets/criteria/permitted grading and parent-problem judgments before child exposure.",
+    "Keep unavailable, uncertain, missing/invalid forms, method deviations and source-integrity refusal distinct.",
+    "Keep official scores, native equivalence classes and existing target_repair:not_assessed fields unchanged.",
+    "Retain all reviewer findings/disagreements, opportunity/target denominators, eligibility failures and costs separately."
+  ],
+  "not_exercised": [
+    "Real original-study material assembly, ownership/accounting or partial-prefix custody verification.",
+    "Human independence, inter-reviewer disagreement/reliability or creative-plot semantic calibration.",
+    "Empirical partial/worse or uncertain-parent cases; all operational exercise criteria were binary.",
+    "Causal effects, held-out useful diversity, actual target repair or improved improver effectiveness."
+  ],
+  "official_scores_and_analyzer_fields_unchanged": true,
+  "preservation": {
+    "application_and_test_sources_changed": false,
+    "merge_performed": false,
+    "new_allocation": false,
+    "original_acceptance_tails": 10,
+    "original_run_or_owner_change": false,
+    "prior_revision_rows": 122,
+    "provider_calls": 0,
+    "real_keys_used": false,
+    "user_command_added": false
+  },
+  "remaining_requirements": [
+    "Actual-study adoption/pins, concrete checked material assembly, complete population/custody and reviewer arrangements.",
+    "Original matched development and independent evaluation under declared resources and funding.",
+    "Actual supplementary review and retained findings alongside unchanged native reports.",
+    "Other four-gate work in PLAN remains open; SRC-02 is still the sole Next item."
+  ],
+  "source_findings": {
+    "comparison_parent": "Each counted opportunity actual immediate arm-local measured task parent.",
+    "existing_source_review_scope": "Sealed selected sets, not an all-development-edge repair exporter or target-form validator.",
+    "hypothesis_location": "Original anchored proposal completion attempt/session/proposal.json captured textual hypothesis, not slot-level input descriptor.",
+    "materialized_lineage_location": "Anchored attempt/session/lineage.json, not child/lineage.json.",
+    "missing_or_nonrecoverable_intention": "Retain explicitly; never infer from later child/score/source or provider reply excerpts.",
+    "no_runtime_extension_needed_for_descriptive_method": true,
+    "partial_study_limit": "Public finite-study inspector requires a completed grid. Declared partial/unattempted states retain legitimate missing artifacts; check available completed subrecords through applicable readers. Unvalidated partial-prefix custody stays incomplete with findings withheld."
+  },
+  "stable_finding": "IMP1-TARGET-01",
+  "status": "method_and_synthetic_exercise_recorded"
+}

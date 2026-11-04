@@ -1,0 +1,370 @@
+{
+  "format": "buddha.imp01-study-proposal-delivery.v1",
+  "recorded_utc": "2026-10-25T15:05:21.669228+00:00",
+  "base_head": "991ce73045995b28be37738ca5e07dde0037c643",
+  "status": "unfunded_configuration_checked_review_arrangements_and_adoption_pending",
+  "plan_revision": 150,
+  "scope": "Prospective data/configuration and documentation only. Existing current-source validators and analyzer use no model output or selected-source execution; source review and byte checks are not live readiness or scientific evidence.",
+  "population": {
+    "dataset": "official NB-WildChat",
+    "development_tasks": 3,
+    "final_tasks": 26,
+    "final_families": 25,
+    "curated": "qualified historical/development evidence; no new run or population choice"
+  },
+  "fixed_original_source_sha256": {
+    "P": "77cfa68f6b3c6996fd503e1ce6f7a964eb57abdb8bde98f6761de5f6e298ff4f",
+    "C": "4196cd29ffa76c6959e6f678a8286b1fde5b56e6a34a97dcf68787e1f22b3a43"
+  },
+  "proposed_grid": {
+    "starts": 2,
+    "development_occasions": 2,
+    "opportunities_per_arm": 2,
+    "counted_opportunities": 16,
+    "maximum_final_roles": 12,
+    "maximum_final_cells": 312
+  },
+  "proposed_phase_caps_unfunded_unadopted": {
+    "search": {
+      "budget_microusd": 50000000,
+      "max_calls": 4096
+    },
+    "validation": {
+      "budget_microusd": 0,
+      "max_calls": 0
+    },
+    "final": {
+      "budget_microusd": 100000000,
+      "max_calls": 12288
+    }
+  },
+  "combined_execution_only": {
+    "budget_microusd": 150000000,
+    "max_calls": 16384,
+    "review_costs_included": false,
+    "completion_guaranteed": false,
+    "equal_consumption_guaranteed": false,
+    "largest_native_reservation_microusd": 11440000
+  },
+  "checks": [
+    {
+      "stage": "active-study-and-inactive-intrinsic-check",
+      "status": "pass",
+      "controls": 43
+    },
+    {
+      "stage": "public-analyzer-with-synthetic-supplied-metrics-only",
+      "status": "pass",
+      "synthetic_rows": 312,
+      "squared_weight_sum": {
+        "numerator": 7,
+        "denominator": 169
+      },
+      "actual_public_analyzer_directed_radii": {
+        "utility": "6.2975943748879618803346070951799856611801085333491422930899893268227324747578514",
+        "distinct": "5.6678349373991656923011463856619870950620976800142280637809903941404592272820663"
+      },
+      "display_rounding_is_not_the_exact_directed_bound": true
+    },
+    {
+      "stage": "current-assessment-data-check",
+      "status": "pass",
+      "original_controls": 113,
+      "final_tasks": 26,
+      "final_families": 25
+    },
+    {
+      "stage": "real-fresh-unfunded-handoff-check",
+      "status": "pass",
+      "bindings": 126,
+      "planned": {
+        "development_repetitions": 2,
+        "development_tasks": 3,
+        "final_tasks": 26,
+        "maximum_final_cells": 312,
+        "opportunities_per_arm": 2,
+        "sealed_repetitions": 1,
+        "starts": 2
+      }
+    },
+    {
+      "stage": "actual-future-launch-review-input-capacity",
+      "status": "pass",
+      "outer_bindings_with_three_future_paths": 129,
+      "placeholder_paths_only": 3,
+      "both_original_development_and_final_projections": true,
+      "maximum_final_cells": 312,
+      "file_path_limit": 1024
+    }
+  ],
+  "numerical": {
+    "method": "fixed_panel_family_hoeffding_shared_starter.v1",
+    "alpha": {
+      "numerator": 1,
+      "denominator": 20
+    },
+    "each_of_six_tails": {
+      "numerator": 1,
+      "denominator": 120
+    },
+    "primary": "utility",
+    "minimum_gain": 0,
+    "maximum_other_loss": 0,
+    "interpretation": "Conditional one-sided lower bounds, not two-sided intervals, power analysis or proof of independent families. Complete modest gains can return rule_not_satisfied; missing required coverage can return inconclusive. No actual effect measured."
+  },
+  "review": {
+    "human_recommendation": {
+      "people": 1,
+      "sets": 12,
+      "maximum_complete_answers": 120,
+      "distinct_tasks_and_families": 4,
+      "scope": "descriptive; actual availability pending"
+    },
+    "target_repair": {
+      "opportunities": 16,
+      "outcome_naive_contexts": 2,
+      "maximum_staged_worksheets": 32,
+      "actual_model_access_cost_route": "unresolved; arrange before study outputs; actual identities and exposure before distribution"
+    },
+    "reviewers_recruited_or_contacted": false,
+    "materials_and_rules_adopted": false,
+    "scientific_gate_closed": false
+  },
+  "source_sha256": {
+    "buddha/__init__.py": "0857bd60619c1e1c8538fe768cbe82c781bb4e302abc6cf59130f1b17d052230",
+    "buddha/answers.py": "be860546b2692ea4a710d93855f487dd49d9c8e28eb3f2ec757df697cefb8d0b",
+    "buddha/archive.py": "9549deb0f347cf6114ef3f802b9dfef8a94e0db7cbbd3497697987d5e21ba2ee",
+    "buddha/authorization.py": "9c2c1bfaf76e0f4d8108d75363b07d2f591edff7fa8247d69594a5a8bbd01270",
+    "buddha/candidate_generation.py": "4bdcad408cd9c3258be597c2572b34750c1d15da0d931bac0e1f46c945b8a8f4",
+    "buddha/candidate_improvement.py": "05dd9baa4fcc0042ab11ceabef3fac9b6c5c9a343b6f568760ccaff2aa41e08a",
+    "buddha/candidate_improvement_results.py": "6a4a4ef6140bdf69e7d2223e8e2677b423ed4466e7ad5d8e7a2f81371d650344",
+    "buddha/candidate_run.py": "888275b5c8d06ceb159385602dad2fb5a4b9a994f9075774b2cac5dd3f50a23e",
+    "buddha/candidate_worker.py": "4acdb845a1d78c36c4bbe1f0441c1ccb2dd6ffc7b44ebf770f15d3cf37c8f895",
+    "buddha/channel.py": "c46d236865b15f1918efa23d961ed7163533c9bbef2b0cec7f61d6f8e95d6e5f",
+    "buddha/common.py": "3a0a693a0f4a0f2eed3b858d0b3ac42148871dbca284e56e0e368726309393c0",
+    "buddha/credentials.py": "7a7eb0a2ad9075ef242df5c207bc505d5103213c0b119661b5b51b75634d4d9a",
+    "buddha/doctor.py": "23545ca4ae302771e517f223cde93b3931ece58ccda56669b27ede2cda88116c",
+    "buddha/evaluation.py": "4cabb1a48689a140fc6f6129ed8d9eae1d047d3e09eae794170c74479413b8d6",
+    "buddha/executor.py": "3eccc9827ff6729fe998aea703fda14dfad9b2114a811d97808bf0c1e506c2b1",
+    "buddha/final_evaluation.py": "3907ac0269a31d9d31c8c502cbdccdd8660901181eef87b85a64e2888cfebbba",
+    "buddha/gateway.py": "2d2d73d22af54a6fe4a76d5667b3dec01e7cf45d1698c86ea7f216dfbfe7b826",
+    "buddha/gateway_history.py": "a773ae6066e5b8a4f503e4b346b73570ace2ebeb811017f7b656cc211fded57c",
+    "buddha/history.py": "d42e92a7e6c88a2f72090eaaa50de39dc355957e7c61f5b89dd97162d8b0eefa",
+    "buddha/improvement_rule.py": "3df31b496a0f4b83c2df9ae6a523935b73ef52975f6edc0ce0c999646a653194",
+    "buddha/improver_analysis.py": "bd8804e7e9bb2a83398aaa4cfcc3d98491eb517916e80c74a1e9e556d469587e",
+    "buddha/improver_assessment.py": "747a638614c6edc336e3c364d271e3aa50dc91b131e043f3eb4a622625508fb5",
+    "buddha/improver_handoff.py": "d0b6a32779c7d378088dc354f6c55550f01819cc2e130953db6c1efd4db69a65",
+    "buddha/improver_launch.py": "adc41645f3ad90b0114d70978c2002439bd0dc526ae0209c86b8ac1575bbcad6",
+    "buddha/improver_launch_state.py": "ed590cdc8773c4df727bbcfd3ce201aa4a3722734762a84d85220dface1cd769",
+    "buddha/improver_study.py": "f1baf7440b23df09db3b0a59ebd59fc7de52273fdb2a3d79d883a1214d78acb7",
+    "buddha/launch_common.py": "f7ebb87bfa954a6ed4a02cbbb722cda36cb28a34fca74276bcd15b1776a6c058",
+    "buddha/ledger.py": "5c7e56f1e2c5e68046d6380ebacc03110300eae34d348d7dca683a0591d64130",
+    "buddha/native_context.py": "47a488b8d731617bda21380232e5e49801e0c0b4261f69b71c24fb9eae0ba298",
+    "buddha/native_evaluation.py": "138158fba98f152c8a681b93721405ec4cbf236e584a85f3b6cad58203564605",
+    "buddha/native_evidence.py": "a0acdb4acd583fdddc9257556b7878cf926b1a354cc274fc2a9ecb73737d26c7",
+    "buddha/native_pipeline.py": "17c7eb15afa6940569a2ba41588d5dc80aa4a74a91d0a8b8baf905f488bec128",
+    "buddha/native_run.py": "516c992510143eb334fb4594b578e78307f5066fba1ca7811f4ba68b23bfd7d6",
+    "buddha/native_transport.py": "ccd4917132939630231b8b8c69540189cd52f60951fa08d467d90b9571ccb6c0",
+    "buddha/native_worker.py": "8fa4b85ae6e75202de4b345302cb70253b6c0c5b47f004490f8d9a09750ecaa1",
+    "buddha/noveltybench_results.py": "cff8abfd8d26b6a697e9e500baf2b0df429bdbaabf9d6808d4ec9e53830b4802",
+    "buddha/policy_study.py": "9b5c1633b3202b1cea0eb37bff051c2cafa25e83a4ae227393e07593791e13a2",
+    "buddha/process_observation.py": "28ad4b424ae0bec10aa2d3bf145cb62e1b26eb088db5e83fb6900fab6d5495a8",
+    "buddha/provider.py": "17de071c1416afa32f9da32eb627e24264d8a0a848862fdf4853057125f18a02",
+    "buddha/releases.py": "2285f5417be9caba5c8aa675e417dcf7ce0310de77dbfd290ad76bc76ec68c1a",
+    "buddha/search_evidence.py": "1d89ed7ae541f52b79cc643edd2615955104cceb8508036d3b288e646fa30a34",
+    "buddha/source_capacity.py": "4e0269eb1a734d7b233762c90f139f600ae0e4aee67fe9a23a11f1a40a8565de",
+    "buddha/source_feedback.py": "525f21681d44be5e927333c79be8fe429f787231a1d81e62cf802485e341c0f2",
+    "buddha/source_screen.py": "ff684da901d0db23e4c0ddb8f412253137acfd15d14910fcb909eb4b062e4459",
+    "buddha/source_screen_results.py": "ffc0769367c14e5ff623766128aa5d9f65bd3859f63d0d7fcf167bf3cfd520e7",
+    "buddha/source_search.py": "7b679374af7cfed723664cb5c582e0668f6c110ec7c650181fd0e40348c5aa0a",
+    "buddha/trial_fence.py": "7423021adc3e251e4f1d6883ccddc48e2048e4a781051a3595ebedad54d34031",
+    "buddha/validation_analysis.py": "57641faade0b7c68a760b29c10748bbb44a0e2641fdbb5eb7aaaf4cccf55258e",
+    "buddha/validation_study.py": "0e1168fb9174d1f10525a8322cf5ea8d27054836816feef288137b49c0fbd4f4",
+    "buddha/wire.py": "48f40a71bf10c84dfd1d15f0baef50198cce8a229748355f116ad6a25cab12b4",
+    "docs/conformance/imp01-run.py": "f32cebbd0a7112c45bbe98220ea1352023f0feb8d9ef1c03767c583b4cc7ec5f"
+  },
+  "reviewed_document_sha256": {
+    "docs/IMPROVER-LAUNCH.md": "4ce279c680e56ff9489f4d6347090ac0e9faf3a2501d609dbc438ec0db4da676",
+    "docs/IMPROVER-PROTOCOL-PROPOSAL.md": "981751e71dece56530b89ec5f895fd043cbd08c8bf629edcab0e15b1769056f4",
+    "docs/IMPROVER-WILDCHAT-CONFIGURATION.md": "f05cd06600f6de339d72e9229cbb98e16adcb067bbe9f974f5e759633db562bf",
+    "docs/PLAN.md": "164f4ea440591928a528058d23fd1e92241bd6febf3071220de51349def941bc"
+  },
+  "artifacts_metadata_only": {
+    "handoff": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-proposal-20261025-v3\\handoff-unfunded.json",
+      "sha256": "9176a42e1dabbac2b4df100e54fe064af561ec5ae0d16c39cd8beefb5ba4aadc",
+      "bytes": 9681
+    },
+    "assessment": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-proposal-20261025-v3\\assessment-proposed.json",
+      "sha256": "98c213b38ad7e196c8e1def682dbd682e8da1794baabe29b43c908ebd24487a4",
+      "bytes": 4032090
+    },
+    "study": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-proposal-20261025-v3\\inputs\\study.json",
+      "sha256": "d8e5dfe823211edf91e582bbedb475cd5d53361dc0219504c9caac68af26a6b4",
+      "bytes": 10640704
+    },
+    "source_runtime": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-proposal-20261025-v3\\components\\source-environment\\runtime.json",
+      "sha256": "a7311f68ab4deb2eed770d0454ddd2877250a86b8a72716abac45b4ff6d43951",
+      "bytes": 1242
+    },
+    "analysis_plan": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-proposal-20261025-v3\\analysis-plan-proposed.json",
+      "sha256": "5512aa8d166f97161022dfbae2f15ecbeb316800de8c854da5de92aa6d2910cd",
+      "bytes": 3979
+    },
+    "rule": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-proposal-20261025-v3\\improvement-rule-proposed.json",
+      "sha256": "01f8fb0510e6009cdb7190a83669219d2ca2c1c561b62d469194b338de334cfe",
+      "bytes": 102
+    },
+    "population": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-proposal-20261025-v3\\numerical-population-proposed.json",
+      "sha256": "8491520e395a686dfd33ca5fe3236db06b3fe7c196ce91cd511a96fd5b768962",
+      "bytes": 4103
+    },
+    "synthetic_public_analyzer": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-proposal-20261025-v3\\synthetic-public-analyzer-check.json",
+      "sha256": "656a33f99fab6b67916f8e17ae527f2ca7bba95aa5e22c22005b71972e02b114",
+      "bytes": 120261
+    },
+    "configuration_check": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-proposal-20261025-v3\\configuration-check.json",
+      "sha256": "78cb60c9b8be28da432e870400e7117a27339fbb714b44c7ad985e5cc59ef3d7",
+      "bytes": 22995
+    },
+    "resources": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-proposal-20261025-v3\\resource-proposal.json",
+      "sha256": "59224d1275e227245e7e4649b0b46acce67bba4dcf5db009b9c7a228b6ae35f0",
+      "bytes": 846
+    },
+    "review_arrangements_candidate": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-proposal-20261025-v3\\review\\arrangements-candidate.json",
+      "sha256": "01d7ed53efab8c41c69354d39c0907d8d126dc41fbd4ffc0f179ec3dba999803",
+      "bytes": 1208
+    },
+    "review_sampling_worksheet": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-proposal-20261025-v3\\review\\human-sampling-worksheet-draft-v1.json",
+      "sha256": "01ecb3063df5c979cb068728d39cab54598146df85799318434b9114ed0537d0",
+      "bytes": 15672
+    },
+    "review_protocol_brief": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-wildchat-proposal-20261025-v3\\review\\protocol-brief-draft-v1.md",
+      "sha256": "52a49fc609915a348b0930e4413c19d19a4b293a69fdb58ec672d1e84e4e3e8d",
+      "bytes": 4874
+    },
+    "builder": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\prepare-imp01-wildchat-proposal-v3.py",
+      "sha256": "1d558fc6a0c39c1799d1714cb17444e41acea2757ebccdf316b1a8fd37edfea8",
+      "bytes": 27462
+    },
+    "preparation_report": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-wildchat-proposal-preparation-v3.json",
+      "sha256": "40333a7aa87f5ec8b242521b84362b57cd7dc2685420ec4b7978055391dc5b0a",
+      "bytes": 28087
+    }
+  },
+  "evidence": {
+    "imp01-wildchat-proposal-preparation-v3.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-wildchat-proposal-preparation-v3.json",
+      "sha256": "40333a7aa87f5ec8b242521b84362b57cd7dc2685420ec4b7978055391dc5b0a",
+      "bytes": 28087
+    },
+    "imp01-wildchat-proposal-safe-metadata-v3.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-wildchat-proposal-safe-metadata-v3.json",
+      "sha256": "8648b017af15f9de3bdf333bcdd3e773e364a4da377f35699a386125e6021f93",
+      "bytes": 4957
+    },
+    "prepare-imp01-wildchat-proposal-v3.py": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\prepare-imp01-wildchat-proposal-v3.py",
+      "sha256": "1d558fc6a0c39c1799d1714cb17444e41acea2757ebccdf316b1a8fd37edfea8",
+      "bytes": 27462
+    },
+    "imp01-wildchat-proposal-metadata-check-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-wildchat-proposal-metadata-check-v1.json",
+      "sha256": "736951ea5cd5c5ccc82ede62441509cf65f9b0743cacb55fdaf724af42f58633",
+      "bytes": 1588
+    },
+    "imp01-resource-readiness-source-review-v2.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-resource-readiness-source-review-v2.json",
+      "sha256": "9899aece2142c20c2c3a7cb181df165379f542c70d555fdeb4a2a3616a4ab079",
+      "bytes": 19186
+    },
+    "imp01-launch-resource-metadata-review-v2.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-launch-resource-metadata-review-v2.json",
+      "sha256": "1fc97121f2084c2e3525f243b20c240e8448f0ad140b1c3ba609ddbfc2523b03",
+      "bytes": 17159
+    },
+    "imp01-prospective-numerical-review-shape-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-prospective-numerical-review-shape-v1.json",
+      "sha256": "807a3506fcc6792af16b0ea6d165f308ffb3ed9d203cb2701e5ba9ca5d6cc7bc",
+      "bytes": 17656
+    },
+    "imp01-target-review-route-followup-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-target-review-route-followup-v1.json",
+      "sha256": "2561eb3c0425301bf5e6e8db5a2eba8255a71f7c11cf03b696acaafb0ce799ea",
+      "bytes": 8548
+    },
+    "imp01-study-proposal-price-observation-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-study-proposal-price-observation-v1.json",
+      "sha256": "a51d82ede35f3a580485ca0d5e419a7a5945be6af0525a5afae2c1089a0faa5b",
+      "bytes": 1546
+    },
+    "imp01-study-proposal-parent-ci-metadata-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-study-proposal-parent-ci-metadata-v1.json",
+      "sha256": "764e97f7d81c599117c640547f2f0dc6439add0a9b1606a42395fe22011c9e65",
+      "bytes": 3615
+    },
+    "finish-imp01-study-proposal-docs-v1.py": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\finish-imp01-study-proposal-docs-v1.py",
+      "sha256": "14de1de97a8d86aa15a8a8c707b41cd9561a908179d2ee09f29e935bd69b3e2b",
+      "bytes": 11022
+    },
+    "repair-imp01-study-proposal-plan-newlines-v1.py": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\repair-imp01-study-proposal-plan-newlines-v1.py",
+      "sha256": "8b11c5815173974ab67c75b180a028f081aea228478e532c90c92de250d48261",
+      "bytes": 2441
+    },
+    "imp01-study-proposal-plan-edit-correction-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-study-proposal-plan-edit-correction-v1.json",
+      "sha256": "532d1cd1acef417bd6e1019329f29ba1cdac82ad1780c155dab0b4703d739892",
+      "bytes": 646
+    },
+    "publish-imp01-study-proposal-record-v1.py": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\publish-imp01-study-proposal-record-v1.py",
+      "sha256": "9f113c3f05813705bbf8a000e1a203092cc61223ac4e65cc665832b2abdf76d7",
+      "bytes": 11940
+    },
+    "imp01-study-proposal-public-helper-v1-error.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-study-proposal-public-helper-v1-error.json",
+      "sha256": "fefe13e1558e200eb8d81ebce9a5d60f6036eecd765e5c9700de0522188e262d",
+      "bytes": 735
+    },
+    "imp01-study-proposal-independent-doc-review-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-study-proposal-independent-doc-review-v1.json",
+      "sha256": "b67859ff5027ca4ffb855be679d80eefbd9dea98a3acdede027f49d078494cfe",
+      "bytes": 9595
+    },
+    "imp01-study-proposal-document-review-v1.json": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\imp01-study-proposal-document-review-v1.json",
+      "sha256": "bb8f7d9928ab9dfa226aab7f66be6f5c7e2693fac45918f84af4165168f6cd26",
+      "bytes": 4803
+    }
+  },
+  "preservation": {
+    "unchanged_tracked_python": 301,
+    "unchanged_captured_original_files": 451,
+    "unchanged_earlier_prepared_files": 87,
+    "new_bundle_files": 98,
+    "unchanged_prior_raw_revision_rows": 149,
+    "original_acceptance_tails": 10
+  },
+  "limitations": [
+    "All resources, numerical settings and review drafts remain proposed/unfunded, not a scientific protocol adoption or spending approval.",
+    "Three future launch/approval/keyed-review paths are placeholders for capacity only; real review pins require rechecking.",
+    "Exact executing-code hosted verification and actual funding/account checks remain separate before a live command.",
+    "No old paid SQL connection/query, key, API/model call, selected-source execution, grant/owner, scientific closure, README milestone change or development merge."
+  ]
+}

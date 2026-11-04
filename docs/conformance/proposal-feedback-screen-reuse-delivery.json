@@ -1,0 +1,121 @@
+{
+  "format": "buddha.proposal-feedback-screen-reuse-delivery.v1",
+  "status": "scoped_and_composed_pass_scale_open",
+  "spec": [
+    "DESIGN sections3,9,10",
+    "PLAN IMP-01",
+    "ENG-OBS-01"
+  ],
+  "base": "0a5552a8cfde7a4a7a5bd65f0a14ad349053dad1",
+  "initial_base": "76618604359f089707a8857b4d3df8f33ef0d028",
+  "verification": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\proposal-feedback-screen-reuse-20261031-v1\\verification-summary-v2.json",
+    "sha256": "7c7d8d1c5b75ff656e117b3f9e8254e50f31f2224d46bd765fb9ef40afce8d73"
+  },
+  "red": {
+    "exit_code": 1,
+    "elapsed": 35.26372709986754,
+    "command": [
+      "C:\\Program Files\\Python313\\python.exe",
+      "-B",
+      "-m",
+      "unittest",
+      "-v",
+      "test_proposal_feedback_screen_reuse.ProposalFeedbackScreenReuseTests.test_completed_proposal_restore_collects_its_screen_once"
+    ],
+    "source_count": 353,
+    "source_pins_match": true,
+    "unittest_seconds": 34.874,
+    "methods": 1,
+    "failures": 1,
+    "errors": 0,
+    "assertion": "2 != 1 full screen collections"
+  },
+  "green": {
+    "methods": 7,
+    "new_methods": 5,
+    "existing_methods": 2,
+    "summary": [
+      "----------------------------------------------------------------------",
+      "Ran 7 tests in 93.105s",
+      "",
+      "OK"
+    ],
+    "exit_code": 0,
+    "seven_qa_exit_codes": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "composition": {
+    "first": {
+      "real_methods_passed": 2,
+      "requested_methods_not_run": 1,
+      "loader_errors": 1,
+      "unit_seconds": 83.904,
+      "reason": "Facade target mistakenly qualified under SharedMutationWitnessTests; loader error is not a product failure",
+      "summary": [
+        "----------------------------------------------------------------------",
+        "Ran 3 tests in 83.904s",
+        "",
+        "FAILED (errors=1)"
+      ]
+    },
+    "corrected_facade": {
+      "methods": 1,
+      "passes": 1,
+      "failures": 0,
+      "errors": 0,
+      "summary": [
+        "----------------------------------------------------------------------",
+        "Ran 1 test in 34.529s",
+        "",
+        "OK"
+      ]
+    },
+    "all_three_requested_real_methods_pass_across_separate_cuts": true,
+    "source_count": 353,
+    "first_pins_match": true,
+    "corrected_pins_match": true,
+    "current_pins_match": true,
+    "four_production_and_new_test_pins_unchanged_across_ff212": true,
+    "static_checks": "Initial seven QA apply to unchanged production/new test;212 test-only repair had its own three QA checks. No unrelated audits repeated."
+  },
+  "unique_passing_methods_across_scoped_cuts": 9,
+  "cumulative_recorded_parent_seconds": 277.4118272997439,
+  "bounds": {
+    "per_child_seconds": 180,
+    "active_total_seconds": 360
+  },
+  "source_sha256": {
+    "buddha/source_search.py": "2549afa67b7118132b54e9b26be6039c1cc0823933fc5c1babf3f8c6840b1b16",
+    "buddha/candidate_improvement.py": "13c354a46f4ba1df02bd971d50055c400c4a3d7cbff887a1b75060f9d707f6a1",
+    "buddha/candidate_improvement_results.py": "4f3efdc8413759efaf043abc9bded7ace1775a935be12b5bacb32a10c0ebf02f",
+    "buddha/source_feedback.py": "e318954e13d3c50c6a72f49e799ece605a6622a21f6c712d0ad20c400ba747d7",
+    "tests/test_proposal_feedback_screen_reuse.py": "4e1c2ac7b13efd0226739136b221509f2652baa446b408a18fcc7efc06bacb54",
+    "docs/RECONSTRUCTION-COST.md": "4e21bcd49b9355390f2963113b8569bd2159d0280f267e95780bf22f7f847216"
+  },
+  "limitations": [
+    "No app population cache/context/framework/proof class or JSON/CLI schema change",
+    "Ordinary v1/v3 only; default/active/sink/comparison/failure paths retain existing inspection",
+    "Whole packet derivation and its checks preserved; type guard before private .screen access",
+    "Private frozen container holds retained mutable NativeEvidence, not a security token",
+    "No old private inputs, actual API/container, full producer/profile or scale acceptance; whole-harness time and memory unmeasured",
+    "Initial211 and composed212 source cuts remain separate; no retrofit to earlier source pins."
+  ],
+  "preservation": {
+    "raw_revision_rows": 221,
+    "original_acceptance_tails": 7,
+    "original_paid_sources_inputs_grants_benchmark": "untouched"
+  },
+  "next": "One newly pinned193owner/660operation observation1200producer/conditional900checker. Ifboundstillmisses, explicit measuredexecution-strategy decision beforemoremicrofixes. No paidlaunch.",
+  "independent_review": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\proposal-feedback-screen-reuse-20261031-v1\\source-review-v1.json",
+    "sha256": "bb391996862e28306f01a668dad3b30c05accafdb147a9bc540021f562d6ff40"
+  }
+}

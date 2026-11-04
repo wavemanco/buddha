@@ -393,6 +393,7 @@ class CommonTests(unittest.TestCase):
                     "history",
                     "provider",
                     "common",
+                    "trial_fence",
                 ]
             ),
         }

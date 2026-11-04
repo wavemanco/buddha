@@ -1,5 +1,7 @@
 # CLI progress follow-up
 
+**Historical command record.** The completed JSON-policy experiment's `prepare`, `run`, `search-prepare`, `search-run` and `continuation-prepare` commands are retired in the current checkout. They refuse before keys, file preparation or provider calls. Commands below describe only their original pinned runtime and do not authorize a restart. Retained offline readers and synthetic demos remain available. [Guide before retirement](https://github.com/wavemanco/buddha/blob/e3076ba648c7b37ce465ba407779dc25a6da805a/docs/CLI-PROGRESS.md) · [Original CLI source](https://github.com/wavemanco/buddha/blob/e3076ba648c7b37ce465ba407779dc25a6da805a/buddha/__main__.py).
+
 Implemented October 19, 2026 after the first live pilot exposed silent execution. The change covers `buddha/__main__.py`, new `buddha/progress.py`, CLI/progress tests and documentation. All nine source files bound by the existing search manifest remain byte-identical; no manifest, budget, provider setting, ledger migration or evaluation rule changed.
 
 ## User-visible behavior

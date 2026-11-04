@@ -1,0 +1,348 @@
+{
+  "base_commit": "30b026144b93acad7c47b3d7817f7f6ac279da20",
+  "contract": {
+    "account_review_format": "buddha.account-review.v2",
+    "approval_format": "buddha.source-approval.v1",
+    "controller": "Existing prepare_source_search/run_source_search; original root and owners only",
+    "credential_context": "Caller-trusted SHA256 of exact launch bytes",
+    "historical_policy_review_semantics": "v1 retained; prospective helper/guard source identity changes",
+    "initial_control_capacity": "Exact initial generation invocation path projection only; later full schedule remains a separate rehearsal gate",
+    "keys_before_checks": false,
+    "launch_format": "buddha.source-launch.v1",
+    "new_authority_created": false,
+    "receipt_safety": "Known correctly pinned launch/descriptor references establish exclusions before any receipt write; failed pin or protected destination suppresses receipt with a fixed notice"
+  },
+  "date": "2026-10-22",
+  "earlier_findings": {
+    "controller_cancellation": {
+      "behavioral_red": "Bare KeyboardInterrupt did not carry the saved observation; one real test body reached AttributeError before typed partial support",
+      "fix": "Detached SourceSearchInterrupted/SourceSearchStopped refer to exact observations only after durable write",
+      "raw_log_scope": "Tool-observed console only, not a separately retained raw log"
+    },
+    "earlier_extended_state_observation": "The separately retained 170.117-second native-partial/proposal-partial/complete observation used an earlier state/test cut. Final six-method state cohort keeps focused pending-native coverage; the full launcher owns complete/replay/unknown checks.",
+    "failed_check_receipt": {
+      "behavioral_red": "Three test bodies failed because a bad caller pin still let finally add a receipt to selected input/original owner/absent review path",
+      "failures": 3,
+      "fix": "Shared trusted-byte receipt exclusion derivation before arming output, at both launchers",
+      "raw_log_scope": "Tool-observed console only, not a separately retained raw log",
+      "seconds": 2.156,
+      "tests_run": 3
+    },
+    "intermediate_test_outcomes": "Initial selection -k matched zero tests; timed transport fixture initially disagreed with declared timeout; old in-memory unknown assertRaises expectation failed after contract clarification to returned stopped. These are retained as setup/selection/contract observations, not product defects or final passes.",
+    "other_bounded_guards": "Reject dangling output symlink; bound huge heartbeat integers before conversion; use captured ledger bytes rather than JSON-size read; retain fixed owner_prefix/quota partial reasons (pure shape test, not a claimed full occurrence).",
+    "pending_native_command": {
+      "format": "buddha.source-launch-state-red.v1",
+      "result": {
+        "errors": 0,
+        "failure": "Expected SourceSearchError was not raised for original internally consistent pending native owner bound to unapproved worker module.",
+        "failures": 1,
+        "seconds": 4.99,
+        "tests": 1
+      },
+      "scope": "Synthetic generation replies; no paid calls or real workers. Actual original wrong native descriptor was prepared before Gateway owner creation, with no manifest/ledger/authorization rewrites. execution_identity passed; passive inspector incorrectly accepted command. Raw console output was observed but not separately retained.",
+      "source_sha256": {
+        "buddha\\native_evidence.py": "1ac46e94903e800b36e6dfcdb794b14631238f3f676b6391ac85439c7fa6072d",
+        "buddha\\source_launch_state.py": "d7db01896124aa2f303d1b403ce9bab60be950d2f6cb1485e2b9d3e95e52a9dc",
+        "tests\\test_source_launch_state.py": "38dffd0b53ed269a9ff72cc0b2026870dd2295b0698315065426346ebf0285e1"
+      },
+      "status": "observed_behavioral_failure",
+      "test": "test_source_launch_state.SourceLaunchStateTests.test_pending_native_command_cannot_change_the_prescribed_flow"
+    }
+  },
+  "final_test_cohorts": {
+    "full_local_suite_rerun": false,
+    "main": {
+      "composed_scope": "Two one-task launcher cases, synthetic HTTPS and mocked workers; actual original controller/accounting/owner custody. Separate source-search/state checks retain multiple-task prefix coverage.",
+      "errors": 0,
+      "failures": 0,
+      "ordered_test_ids": [
+        "test_source_launch.SourceInterruptionTests.test_original_controller_cancellation_carries_detached_saved_observation",
+        "test_source_launch.SourceInterruptionTests.test_original_controller_protocol_stop_carries_detached_saved_observation",
+        "test_source_launch.SourceLaunchTests.test_approval_cannot_rebind_destination_actual_terms_or_scope",
+        "test_source_launch.SourceLaunchTests.test_cli_unknown_arguments_never_echo_potential_credentials",
+        "test_source_launch.SourceLaunchTests.test_closed_launch_schema_and_finite_bounded_timeout",
+        "test_source_launch.SourceLaunchTests.test_fresh_check_is_passive_and_binds_original_funding_and_destination",
+        "test_source_launch.SourceLaunchTests.test_hidden_key_cleanup_and_post_prompt_drift_stop_before_preparation",
+        "test_source_launch.SourceLaunchTests.test_input_drift_and_partial_preparation_are_not_adopted",
+        "test_source_launch.SourceLaunchTests.test_live_and_manual_project_confirmation_precede_any_key_entry",
+        "test_source_launch.SourceLaunchTests.test_pre_key_failure_records_fixed_reason_and_immediate_phase",
+        "test_source_launch.SourceLaunchTests.test_real_controller_completes_once_and_repeats_keylessly",
+        "test_source_launch.SourceLaunchTests.test_real_unknown_result_remains_partial_and_cannot_replace_original_owners",
+        "test_source_launch.SourceLaunchTests.test_receipt_cannot_overwrite_original_controls_or_authority",
+        "test_source_launch.SourceLaunchTests.test_required_launch_pin_and_conflicting_control_are_rejected",
+        "test_source_launch.SourceLaunchTests.test_returned_bindings_are_detached",
+        "test_source_launch.SourceLaunchTests.test_selected_component_and_authority_cannot_be_output_destinations",
+        "test_source_launch.SourceLaunchTests.test_wrong_caller_pin_and_malformed_json_refuse_without_keys",
+        "test_source_launch.SourcePublicResultTests.test_fixed_host_stop_reasons_retain_exact_observation_reference"
+      ],
+      "raw_log_sha256": "40e31e4c2169239eca2a5920dcd7d7299b042ecf79b380beabbf9b766403854f",
+      "seconds": 144.385,
+      "skips": 0,
+      "source_scope": {
+        "included_python_inputs": 217,
+        "noncohort_drift": {
+          "after_sha256": "5b5bab30949d92acc6812cb3103b362b64f9d98bb07072ff6b0ed8c4a113fde2",
+          "before_sha256": "55d6ade72564a4cdcc4070550e927c2b621eb8fb916767c834c7ddb9a0790bab",
+          "path": "tests/test_source_launch_receipt.py",
+          "reason": "Separately assigned receipt-test extension overlapped this run. This file is neither selected by the exact test_source_launch.py discovery pattern nor imported by the executed launcher/helper fixture modules. It has separate test evidence. The original broader inventory-drift result is preserved unchanged."
+        },
+        "original_broad_capture_unchanged": false,
+        "unchanged": true
+      },
+      "tests_run": 18
+    },
+    "original_native_evidence": {
+      "errors": 0,
+      "failures": 0,
+      "inputs_unchanged": true,
+      "ordered_test_ids": [
+        "test_native_evidence.NativeEvidenceTests.test_authority_summary_uses_only_validated_capture_and_is_detached",
+        "test_native_evidence.NativeEvidenceTests.test_changed_staging_cannot_be_adopted_as_new_native_input",
+        "test_native_evidence.NativeEvidenceTests.test_complete_native_chain_is_passive_without_a_policy_study",
+        "test_native_evidence.NativeEvidenceTests.test_original_hash_and_custom_error_identity_are_preserved",
+        "test_native_evidence.NativeEvidenceTests.test_policy_reader_inherits_shared_boundary_with_original_error_type",
+        "test_native_evidence.NativeEvidenceTests.test_seal_boolean_index_and_unsealed_extra_file_are_rejected"
+      ],
+      "raw_log_sha256": "e454c62c556ecdf381c911a651cb841b3be09bf930bfc68f53b9b890cc20d652",
+      "seconds": 7.6,
+      "skips": 0,
+      "tests_run": 6
+    },
+    "prepared_state": {
+      "errors": 0,
+      "failures": 0,
+      "input_count": 44,
+      "inputs_unchanged": true,
+      "log_sha256": "cabb2c66a77c9ad1bec908d7118fd7a2270c99dde7a040c92c1ef6978f0b4929",
+      "ordered_test_ids": [
+        "test_source_launch_state.SourceLaunchStateTests.test_all_approved_initial_fields_and_external_controls_stay_original",
+        "test_source_launch_state.SourceLaunchStateTests.test_inactive_unfinished_original_owner_is_reported_without_reactivation",
+        "test_source_launch_state.SourceLaunchStateTests.test_original_fresh_owner_is_passive_and_stable_and_all_locks_are_busy",
+        "test_source_launch_state.SourceLaunchStateTests.test_orphan_owner_and_future_task_are_rejected_before_execution",
+        "test_source_launch_state.SourceLaunchStateTests.test_pending_native_command_cannot_change_the_prescribed_flow",
+        "test_source_launch_state.SourceLaunchStateTests.test_pending_native_readiness_retains_its_original_owner"
+      ],
+      "seconds": 16.022,
+      "skips": 0,
+      "tests_run": 6
+    },
+    "shared_policy_and_receipts": {
+      "errors": 0,
+      "failures": 0,
+      "inputs_unchanged": true,
+      "ordered_test_ids": [
+        "test_source_launch_receipt.LaunchOptionTests.test_huge_heartbeat_is_a_typed_precheck_refusal_for_both_launchers",
+        "test_source_launch_receipt.PolicyLaunchReceiptTests.test_bad_caller_pin_cannot_add_a_receipt_to_selected_agent_component",
+        "test_source_launch_receipt.PolicyLaunchReceiptTests.test_bad_caller_pin_cannot_create_the_absent_original_review",
+        "test_source_launch_receipt.SourceLaunchReceiptTests.test_bad_caller_pin_cannot_add_a_receipt_to_original_prepared_owner",
+        "test_source_launch_receipt.SourceLaunchReceiptTests.test_bad_caller_pin_cannot_add_a_receipt_to_selected_agent_component",
+        "test_source_launch_receipt.SourceLaunchReceiptTests.test_bad_caller_pin_cannot_create_the_absent_original_review",
+        "test_policy_launch.PolicyLaunchTests.test_actual_controller_cancel_preserves_exact_partial_when_receipt_write_fails",
+        "test_policy_launch.PolicyLaunchTests.test_completed_child_custody_does_not_import_or_project_scientific_metrics",
+        "test_policy_launch.PolicyLaunchTests.test_conflicting_checked_binding_and_late_selected_drift_are_rejected",
+        "test_policy_launch.PolicyLaunchTests.test_console_and_receipt_failure_preserve_completed_outcome",
+        "test_policy_launch.PolicyLaunchTests.test_controller_interruption_carries_exact_saved_observation",
+        "test_policy_launch.PolicyLaunchTests.test_existing_review_is_not_replaced_and_completed_state_is_keyless",
+        "test_policy_launch.PolicyLaunchTests.test_external_pin_destination_and_actual_terms_cannot_be_rebound",
+        "test_policy_launch.PolicyLaunchTests.test_extracted_native_custody_helper_requires_its_original_launch_pin",
+        "test_policy_launch.PolicyLaunchTests.test_fresh_check_is_passive_and_binds_destination_terms_and_original_proposal",
+        "test_policy_launch.PolicyLaunchTests.test_heartbeat_starts_during_slow_check_with_unknown_accounting",
+        "test_policy_launch.PolicyLaunchTests.test_hidden_key_feedback_cleanup_and_post_prompt_drift_stop_before_prepare",
+        "test_policy_launch.PolicyLaunchTests.test_live_and_manual_account_confirmation_gate_precede_key_entry",
+        "test_policy_launch.PolicyLaunchTests.test_nonpaying_summary_is_not_blocked_by_exhausted_attempt_capacity",
+        "test_policy_launch.PolicyLaunchTests.test_pre_key_stop_has_independent_new_receipt_and_immediate_phase",
+        "test_policy_launch.PolicyLaunchTests.test_real_unknown_stop_and_passive_resume_preserve_original_owners_and_holds",
+        "test_policy_launch.PolicyLaunchTests.test_required_launch_source_and_partial_preparation_are_not_adopted",
+        "test_policy_launch.PolicyLaunchTests.test_retired_unsealed_future_owner_stops_before_keys_without_banning_zero_op_preallocation",
+        "test_policy_launch.PolicyLaunchTests.test_same_grant_at_another_root_rejects_before_keys",
+        "test_policy_launch.PolicyLaunchTests.test_second_provider_cancellation_removes_first_key_and_does_not_prepare",
+        "test_policy_launch.PolicyLaunchTests.test_transport_pin_and_nonfinite_timeout_stop_before_keys_or_preparation",
+        "test_policy_launch.PolicyLaunchTests.test_untrusted_handoff_cannot_choose_receipt_or_leak_parser_text"
+      ],
+      "raw_log_sha256": "da7b21a494bcbd9e939c703fe69f7986cc3f7795b7953f275da9aefcaec5021d",
+      "scope": "21 unchanged PolicyLaunch methods plus six receipt/options guards; connections and subprocesses blocked",
+      "seconds": 78.536,
+      "skips": 0,
+      "tests_run": 27
+    },
+    "unique_methods": 57
+  },
+  "format": "buddha.src02-source-launch-delivery.v1",
+  "limits": [
+    "No paid API call, new allocation, actual Docker execution or new benchmark study.",
+    "Full hosted Linux/Windows checks remain pending and separate from local cohorts.",
+    "Active/changing writers may prevent stable inspection and yield a checking failure rather than a specific busy code; no lock is removed.",
+    "The first source experiment still needs its new concrete full-schedule input/storage/latency/progress/recovery rehearsal and separately approved funded handoff.",
+    "Earlier unallocated bundles remain frozen at their original runtime cuts; this changed launcher/native-helper closure requires a new prospective bundle.",
+    "No real model-authored source chain, universal mutation-competence admission, held-out gain or improved-improver efficacy is established."
+  ],
+  "local_evidence_sha256": {
+    "source-launch-final-acceptance-v1.json": "b1e41d3edc5e37ccc9e6bcefb75f4895778277c3ff1defac647407fbe5f9611f",
+    "source-launch-final-acceptance-v1.scoped.json": "2541c5ca7ae085c21f9e2567c754259faf75ace25401f1330101c42557a98db5",
+    "source-launch-native-regression-v1.json": "dde261712a471f27e6aab09b6517beece97639e3e571dc1802e620973bda0817",
+    "source-launch-preservation-v1.json": "1edf596946cbc24f2a6a5bafd1382636e762e8ba7a8eb9211bcb3a640c821ffb",
+    "source-launch-quality-v1.json": "c9d2e8b894b50d7c167c57f426cfcbd3d3ed1070a4ed3895a40bc2487ae29fa7",
+    "source-launch-shared-helper-regression-v1.json": "8ac77c517cad6cca3e9ec45b69b5faf77fc1c3529e1dfbe208664ca4dd9b0435",
+    "source-launch-state-final-v1.json": "f00dd44cfaea22fe6ea984e58a48e9455cd4dd11b012771ca71fff789f732d3f",
+    "source-launch-state-pending-command-red.json": "3a2dac53e779f74e095ae8d28414ce25c2527330c73c873eff00f9409132f63b",
+    "source-launch-state-rich-observation.json": "ef050824d36b4bba123f71b93a88675e2f40b85665f86f7babe6d1c32a25cb01"
+  },
+  "preservation": {
+    "all208_other_old_python_raw_unchanged": true,
+    "all4_tool_configurations_raw_unchanged": true,
+    "all_historical_conformance_raw_unchanged": true,
+    "changed_old_python": [
+      "buddha/native_evidence.py",
+      "buddha/policy_launch.py",
+      "buddha/source_search.py"
+    ],
+    "final_quality_inputs_still_match": 222,
+    "format": "buddha.source-launch-preservation.v1",
+    "historical_conformance_files": 204,
+    "old_python_count": 211
+  },
+  "quality": {
+    "checks": [
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "ruff",
+          "check",
+          "buddha",
+          "tests",
+          "agents"
+        ],
+        "exit_code": 0,
+        "failure_type": null,
+        "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "name": "ruff-check",
+        "wall_seconds": 0.15488679998088628
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "ruff",
+          "format",
+          "--check",
+          "buddha",
+          "tests",
+          "agents"
+        ],
+        "exit_code": 0,
+        "failure_type": null,
+        "log_sha256": "7ed2a52ec9286d1418f4415096030fecc1defe016d0bcb347088ae7a4cc45589",
+        "name": "ruff-format",
+        "wall_seconds": 0.15499369997996837
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "mypy",
+          "--strict",
+          "--platform",
+          "win32",
+          "--cache-dir",
+          "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-protected-launch\\runs\\reviews\\source-launch-quality-v1-mypy-win32-cache",
+          "buddha",
+          "agents"
+        ],
+        "exit_code": 0,
+        "failure_type": null,
+        "log_sha256": "e04dda67e13c977a876daa03065b4ccf3c68383ce2545a6fb85f03149e4ae89f",
+        "name": "mypy-win32",
+        "wall_seconds": 3.0024258999619633
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "mypy",
+          "--strict",
+          "--platform",
+          "linux",
+          "--cache-dir",
+          "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\src02-protected-launch\\runs\\reviews\\source-launch-quality-v1-mypy-linux-cache",
+          "buddha",
+          "agents"
+        ],
+        "exit_code": 0,
+        "failure_type": null,
+        "log_sha256": "e04dda67e13c977a876daa03065b4ccf3c68383ce2545a6fb85f03149e4ae89f",
+        "name": "mypy-linux",
+        "wall_seconds": 3.050127699971199
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "bandit",
+          "-r",
+          "buddha",
+          "agents"
+        ],
+        "exit_code": 0,
+        "failure_type": null,
+        "log_sha256": "1c0988b95ec78b62cc9484fb4b2ff91e7e8922ac43a830b17da13a1428f0248a",
+        "name": "bandit",
+        "wall_seconds": 3.2433949999976903
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "pip_audit",
+          "--no-deps",
+          "-r",
+          "requirements.txt"
+        ],
+        "exit_code": 0,
+        "failure_type": null,
+        "log_sha256": "e82148c0c30269ca5a2c35420ece6af011a4faf5a375325d750e243ffdb10625",
+        "name": "pip-audit",
+        "wall_seconds": 20.36734809994232
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "compileall",
+          "-q",
+          "buddha",
+          "tests",
+          "agents"
+        ],
+        "exit_code": 0,
+        "failure_type": null,
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "name": "compileall",
+        "wall_seconds": 0.5613370999926701
+      }
+    ],
+    "configuration_inputs": 4,
+    "inputs_unchanged": true,
+    "passed": true,
+    "python_inputs": 218
+  },
+  "source_sha256": {
+    "buddha/launch_common.py": "24ca7720bf75364f6136b5dd76b435f35164f89f4f42a8109799f3ba55a6ec67",
+    "buddha/native_evidence.py": "a136efbcd6e47634954abbe8ac10a9589ab16969a150243c90898870b0ce7412",
+    "buddha/policy_launch.py": "e18a96494c12ac454b6c51c0d2940ca1816ed57eccbd56cfc11cf9755aae38c7",
+    "buddha/source_launch.py": "c61f11ea570d19354006b4e837e5dd3bcfc82fe418f4afdf4fd4cd41c7f48fcd",
+    "buddha/source_launch_state.py": "1827fc3ae765891cd4f70b2e60d28195ab1cffe3079240fa3748a8f3b39c958c",
+    "buddha/source_search.py": "82222e48b030d0c4ad2fefa73577724e0621ba92c3751848c060061494efce87",
+    "docs/conformance/src02-run.py": "3c9d54a800e5a161e2b979512ebfd653591b1cca36b6f21e2df2b825a6487877",
+    "tests/test_source_launch.py": "766a41c711f87c47a02928f435d79e251db041d1fec63d8b0ca13efa080d2e39",
+    "tests/test_source_launch_receipt.py": "5b5bab30949d92acc6812cb3103b362b64f9d98bb07072ff6b0ed8c4a113fde2",
+    "tests/test_source_launch_state.py": "08a52775efbfe7e5dcd1b0125d36a83214bcd0ccf191e6b41bea8628ac0374a9"
+  }
+}

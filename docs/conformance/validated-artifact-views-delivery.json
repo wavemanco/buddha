@@ -1,0 +1,299 @@
+{
+  "format": "buddha.validated-artifact-views-delivery.v1",
+  "recorded_utc": "2026-10-28T19:33:08.055536+00:00",
+  "base_head": "0918bea08ef5fb4c3d847d072266f2b6fd130a01",
+  "pre_delivery_head": "af838f93b0689ad63f338dc65610d21d13ede3f3",
+  "spec_sections": [
+    5,
+    7,
+    9
+  ],
+  "scope": "Fresh copies of strictly constructed immutable artifacts; no cache, source switch or paid restart.",
+  "source_sha256": {
+    "buddha/answers.py": "0062d028c9895ffd71890baec2df61f0b9a82144f14c4dd131afa3f37aaa19da",
+    "tests/test_validated_artifact_views.py": "abadca224a207f7744053425c354a82fe97618f6d0a8095deb7244ac9039e3fe",
+    "tests/test_source_screen_format.py": "9764c989659fcc009439438e3e16ce82e148d6b0720671a678b08edd01409d0f",
+    "docs/PLAN.md": "14425997a1128daa9a6754a709f810fa8955cb62b714c284fa44e1fc00274b5c",
+    "docs/RECONSTRUCTION-COST.md": "64fc08ae0ab8b8e42f3a35304d1cfc1a14eb58fd751a8ce31156f372e30b8b88",
+    "docs/UNIFIED-EVIDENCE-RECOVERY.md": "e03344de4f630631ea1d3c64f51cf243e72a2e44516159e7cfb69ad02975e7f8"
+  },
+  "change": {
+    "production_file": "buddha/answers.py",
+    "diff": "Add stdlib json import; to_record returns _object(json.loads(self.data)) instead of repeating _load.",
+    "new_dependencies": 0,
+    "persistent_raw_cache": false,
+    "parsed_object_cache": false,
+    "constructor_validation_changed": false,
+    "Gateway_CORE_files_changed": 0
+  },
+  "constructor_audit": [
+    {
+      "class": "TaskSet",
+      "file": "buddha/answers.py",
+      "file_sha256": "0062d028c9895ffd71890baec2df61f0b9a82144f14c4dd131afa3f37aaa19da",
+      "first_strict_load_line": 151,
+      "self_views_during_construction": [],
+      "normalized_data_assignment_lines": [
+        172
+      ]
+    },
+    {
+      "class": "Answers",
+      "file": "buddha/answers.py",
+      "file_sha256": "0062d028c9895ffd71890baec2df61f0b9a82144f14c4dd131afa3f37aaa19da",
+      "first_strict_load_line": 289,
+      "self_views_during_construction": [],
+      "normalized_data_assignment_lines": [
+        299
+      ]
+    },
+    {
+      "class": "ImprovementRule",
+      "file": "buddha/improvement_rule.py",
+      "file_sha256": "3df31b496a0f4b83c2df9ae6a523935b73ef52975f6edc0ce0c999646a653194",
+      "first_strict_load_line": 38,
+      "self_views_during_construction": [],
+      "normalized_data_assignment_lines": [
+        53
+      ]
+    },
+    {
+      "class": "ImproverAnalysisPlan",
+      "file": "buddha/improver_analysis.py",
+      "file_sha256": "bd8804e7e9bb2a83398aaa4cfcc3d98491eb517916e80c74a1e9e556d469587e",
+      "first_strict_load_line": 102,
+      "self_views_during_construction": [],
+      "normalized_data_assignment_lines": [
+        128
+      ]
+    },
+    {
+      "class": "PolicyStudy",
+      "file": "buddha/policy_study.py",
+      "file_sha256": "9b5c1633b3202b1cea0eb37bff051c2cafa25e83a4ae227393e07593791e13a2",
+      "first_strict_load_line": 109,
+      "self_views_during_construction": [],
+      "normalized_data_assignment_lines": [
+        161
+      ]
+    },
+    {
+      "class": "SourceScreen",
+      "file": "buddha/source_screen.py",
+      "file_sha256": "ff684da901d0db23e4c0ddb8f412253137acfd15d14910fcb909eb4b062e4459",
+      "first_strict_load_line": 80,
+      "self_views_during_construction": [],
+      "normalized_data_assignment_lines": [
+        175
+      ]
+    },
+    {
+      "class": "SourceSearchSpec",
+      "file": "buddha/source_search.py",
+      "file_sha256": "7b679374af7cfed723664cb5c582e0668f6c110ec7c650181fd0e40348c5aa0a",
+      "first_strict_load_line": 200,
+      "self_views_during_construction": [],
+      "normalized_data_assignment_lines": [
+        210
+      ]
+    },
+    {
+      "class": "_WitnessTreatment",
+      "file": "buddha/source_search.py",
+      "file_sha256": "7b679374af7cfed723664cb5c582e0668f6c110ec7c650181fd0e40348c5aa0a",
+      "first_strict_load_line": 228,
+      "self_views_during_construction": [],
+      "normalized_data_assignment_lines": [
+        319
+      ]
+    },
+    {
+      "class": "ValidationAnalysisPlan",
+      "file": "buddha/validation_analysis.py",
+      "file_sha256": "57641faade0b7c68a760b29c10748bbb44a0e2641fdbb5eb7aaaf4cccf55258e",
+      "first_strict_load_line": 155,
+      "self_views_during_construction": [],
+      "normalized_data_assignment_lines": [
+        193
+      ]
+    }
+  ],
+  "caller_audit": {
+    "inherited_from_bytes": "cls(raw) finishes constructor before returning. TaskSet dataset/file/select and Answers results factories call the same strict constructors.",
+    "base_artifact": "Its own post_init calls strict _load; noncanonical but valid literal bytes remain unchanged.",
+    "partial_instance_escape": "No self.to_record during any artifact constructor; no object.__new__, pickle or data-field bypass in application callers. All data replacements occur in the strict constructors after _load and through finite _json (directly or canonical local).",
+    "existing_data_assignments": "Application data assignments are constructor normalization; external assignment occurrences in relevant tests are frozen-field negative cases.",
+    "lazy_validation_dependency_found": false
+  },
+  "engineering_receipt": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\validated-artifact-views-20261028-v1.json",
+    "sha256": "8f4118cd8af477d33ee350e19bed0940a955e165bbfcf5a4dcf2724043aaaf46"
+  },
+  "work_count_RED": {
+    "methods": 5,
+    "subtest_failures": 2,
+    "errors": 0,
+    "seconds": 0.674,
+    "strict_decodes": 20,
+    "validation_serializations": 20,
+    "scope": "Ten views each of actual TaskSet/Answers built from1000 synthetic rows. Existing semantics pass; both redundant-work assertions fail."
+  },
+  "work_count_GREEN": {
+    "strict_decodes": 0,
+    "validation_serializations": 0,
+    "views": 20,
+    "synthetic_population_rows": 1000,
+    "invalid_constructor_subcases": 60,
+    "invalid_constructor_methods": 1
+  },
+  "fixture_port": "Two existing SourceScreenFormat decoder proxies count actual json.loads: zero for format-only helpers, two for two fresh views. All original independent nested mutation, frozen-data, format and fingerprint assertions retained.",
+  "checks": {
+    "pre_capacity_merge": {
+      "unique_methods": 99,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "qualification": "Tests ran on the PR170 source plus the minimal artifact change, before the later ordinary capacity merge. No final merged full-suite claim."
+    },
+    "pre_merge_cohorts": [
+      {
+        "module": "test_answers",
+        "methods": 19,
+        "seconds": 0.093
+      },
+      {
+        "module": "test_policy_study",
+        "methods": 19,
+        "seconds": 0.42
+      },
+      {
+        "module": "test_improvement_rule",
+        "methods": 13,
+        "seconds": 0.133
+      },
+      {
+        "module": "test_improver_analysis",
+        "methods": 10,
+        "seconds": 0.486
+      },
+      {
+        "module": "test_validation_analysis",
+        "methods": 7,
+        "seconds": 99.092
+      },
+      {
+        "module": "test_source_screen",
+        "methods": 20,
+        "seconds": 272.369
+      },
+      {
+        "module": "test_source_screen_format",
+        "methods": 5,
+        "seconds": 2.754
+      },
+      {
+        "module": "test_validated_artifact_views plus SourceSearchTests.test_specification_is_closed_bounded_typed_and_uses_existing_parent_methods",
+        "methods": 6,
+        "seconds": 0.702
+      }
+    ],
+    "merged_cohorts": [
+      {
+        "scope": "new5, Answers19, SourceScreenFormat5",
+        "methods": 29,
+        "seconds": 3.696,
+        "failures": 0,
+        "errors": 0,
+        "skips": 0
+      },
+      {
+        "scope": "capacity v2 integration",
+        "methods": 8,
+        "seconds": 49.986,
+        "failures": 0,
+        "errors": 0,
+        "skips": 0
+      }
+    ],
+    "qualification": "99 pre-merge and37 post-merge methods overlap and are not claimed as136 final unique methods.",
+    "differential_cases": {
+      "count": 200,
+      "seed": 175,
+      "scope": "Deterministic nested finite JSON: old strict view vs new view, serialization order/canonical bytes and unchanged original bytes match.",
+      "passed": true
+    },
+    "quality": {
+      "ruff_check": "passed",
+      "ruff_format": "273 files passed",
+      "strict_mypy": "88 source modules passed",
+      "bandit": "passed with existing nosec warnings and no findings",
+      "in_memory_compile": "273 source files passed",
+      "dependency_audits": "Unchanged patched pins inherit fresh/cached strict audit from dev-msgpack-refresh.json."
+    },
+    "full_suite": "Earlier PR167 local suite separately tracked; not this cut full-suite coverage.",
+    "hosted_CI": "Pending at publication; not claimed green."
+  },
+  "actual_reconstruction": {
+    "observation": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\passive-validated-artifact-cut-v1.json",
+      "sha256": "0f015803b1212acd41316da7de78535c60810e652536979e1c98fb67f4ae4bc5"
+    },
+    "driver": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\run-passive-validated-artifact-cut-v1.py",
+      "sha256": "2049c54c38881ade588a1652125e520057f825597be93cadbbcd22dffec19398"
+    },
+    "driver_retention": "Exact executed stdin text retained after execution; invoke as stdin from the recorded worktree to reproduce imports. This is diagnostic evidence, not a live launcher.",
+    "policy": {
+      "format": "buddha.evidence-observation-policy.v2",
+      "max_total_bytes": 34359738368,
+      "max_tree_entries": 100000,
+      "max_consumed_paths": 65536,
+      "max_resident_bytes": 0
+    },
+    "owners": 174,
+    "attempts": 604,
+    "spent_microusd": 4845090,
+    "reserved_microusd": 0,
+    "decisions": 7,
+    "attempted_proposals": 8,
+    "position": {
+      "start": 1,
+      "repetition": 1,
+      "arm": 1,
+      "slot": 0,
+      "stage": "witness_feedback"
+    },
+    "next_directory_exists": false,
+    "captured_paths": 2126,
+    "captured_bytes": 1074346851,
+    "wall_seconds": 861.192,
+    "cpu_seconds": 851.172,
+    "in_memory_SQL_connections": 6893,
+    "on_disk_SQL_connections": 0,
+    "provider_calls": 0,
+    "original_run_writes": 0,
+    "original_generated_source_semantic_inspection_or_execution": 0,
+    "qualification": "Guarded actual checkpoint reconstruction; not a controlled speed comparison, full-run duration estimate, scientific result or continuation authority."
+  },
+  "preservation": {
+    "original_source_grants_owners_records_scientific_settings_untouched": true,
+    "CORE_files_unchanged": 10,
+    "prior_raw_PLAN_rows": 174,
+    "original_acceptance_tails": 7,
+    "latest_protected_raw_check": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\unified-evidence-repair-preservation-check-v3.json",
+      "sha256": "b9c94fe84e6fa8a13ae5c999f30c82a4e42212d17203820e578d3cbd51fe392a"
+    }
+  },
+  "activity": {
+    "keys_read": 0,
+    "real_provider_calls": 0,
+    "actual_containers": 0,
+    "original_or_historical_SQL_connections": 0,
+    "new_grants": 0,
+    "paid_restarts": 0,
+    "pull_requests_merged": 0,
+    "test_SQL": "Only newly owned synthetic fixture databases."
+  },
+  "next": "Review useful anchored68-role helper projection and implement full checked continuation; recheck actual outgoing settings, accounting, confinement and exact-source CI before user handoff."
+}

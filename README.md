@@ -10,6 +10,84 @@ The design for evolving agent code draws on [DGM](https://github.com/jennyzzt/dg
 how answers are generated, grouped and scored; what the 4/5/9 result means; how
 parser recovery differs from a judge's decision; and where self-improvement fits.
 
+The separately approved **full-output capacity observation is complete**:
+one request, $0.080856 recorded cost, zero held, and both predeclared margins
+pass. [The results](docs/SOURCE-CAPACITY-RESULTS.md) close POL-03's bounded-loop
+engineering gate. Current-parent source evolution and improved effectiveness
+remain open; no further user command is needed now.
+
+The [actual-proposal capacity route](docs/SOURCE-PROPOSAL-CAPACITY.md) now
+checks original model replies before the host proceeds with returned children.
+It needs no duplicate probe. Integrated supplied-response recovery and retirement
+checks pass. The separate [actual-live protocol and unfunded bundle](docs/SOURCE-CURRENT-LIVE.md)
+are now checked and independently reviewed. A fresh corrected-source bundle
+contains forty-three files and passes its passive configuration and saved-data
+checks; [the preparation record](docs/conformance/src02-corrected-live-preparation.json)
+retains the earlier failed-head bundle unchanged. The
+[legacy progress correction](docs/SOURCE-PROPOSAL-CAPACITY.md#record-compatibility)
+and these preparation checks remain separate from exact executing-code hosted CI.
+The [unfunded launch draft](docs/conformance/src02-unfunded-launch-bindings.json)
+now fixes proposed destinations and approval/launch bindings without creating
+spending permission, owners or a runnable handoff.
+A [test-only follow-through](docs/conformance/imp01-shared-replay-expectation-delivery.json)
+corrects the stale finite-replay read count exposed by hosted CI. Sixteen related
+checks and seven quality commands pass locally; executing code and frozen inputs
+are unchanged. Exact PR #116's Ubuntu job now passes all 1,804 tests (zero
+failures, zero errors and five skips) and every configured check. Its Windows job
+is still running at the October 24, 2026 15:44:34 UTC checkpoint.
+The user approved the separate $25/512-attempt current-source demonstration,
+including explicit partial results. Funded handoff preparation and final
+launch/input/account checks remain pending; no live command is available yet.
+A negative or unavailable observation leaves an explicit partial result.
+This engineering progress closes no scientific gate.
+
+The [fresh source rehearsal](docs/SOURCE-CURRENT-REHEARSAL.md) now passes:
+29 isolated workers, 154 supplied replies, complete parent and child outputs,
+and a changed improver producing a further runnable child. It also checks
+interruption recovery and verification without API keys. We supplied test
+programs and model replies for this engineering check. The next source experiment
+will use code written by the API model under the adopted protocol; funding and
+hosted checks remain pending. It will measure the current parent itself with
+complete outputs and retain negative or inconclusive descendant outcomes.
+
+The [first cost observation](docs/RECONSTRUCTION-COST.md) now measures complete
+saved-result checks on a small six-cell fixture: about 23 seconds for development,
+25 for the frozen schedule and 36 for the final assessment. The evidence remains
+unchanged. PR #102's full Ubuntu suite also passes; Windows and later revisions
+remain separate checks. A [small matched screen observation](docs/RECONSTRUCTION-COST.md#bounded-paired-screen-observation)
+now records 0.569 and 0.399 seconds at the exact old/shared source cuts, with
+matching treatment content and a reduction from two evidence reconstructions to one.
+Costs for the full planned grid and production speed remain open.
+
+A [two-condition cost observation](docs/RECONSTRUCTION-COST.md#two-starting-conditions)
+now checks twelve sealed cells and forty-eight original final owners at source
+head `b551885`. Complete development, freeze and final readers took about
+29.5, 33.0 and 45.5 seconds, with all six plain/profiled reads preserving the
+original evidence. The whole construction and measurement process took about
+41 minutes 39 seconds. This supplied-response case retains 1,161 files and
+100 databases; it establishes no causal speedup, scaling law, paid-run readiness
+or scientific improvement. The full future-grid cost gate remains open.
+
+The [shared generation check](docs/RECONSTRUCTION-COST.md#sharing-one-checked-generation)
+now removes a duplicated reconstruction in screen, validation and launch readers,
+while preserving original source bindings and complete integrity checks.
+
+The [source-output review bridge](docs/SOURCE-REVIEW.md) prepares complete,
+prospectively selected final answer sets in the existing blinded reviewer format.
+Original scores and identities stay in a private receipt. Its passive importer
+now records missing or invalid review forms, separates declared human/model
+coverage and preserves grouping/compliance disagreements. It changes no official
+scores. The offline export command now writes separate reviewer files and a
+private frozen roster, with explicit partial coverage and safe retry/refusal.
+The offline collection command now saves full returned judgments, missing/invalid
+forms and disagreements in a separate private report. Earlier partial reports stay
+unchanged. The [transfer evaluation route](docs/FINAL-EVALUATION.md#a-separately-declared-transfer-comparison)
+now adds a separately declared sealed dataset to an ordinary trial, with its own
+allocation and the same frozen agents and official evaluator. Actual transfer
+answers can use the same review workflow with a prospectively pinned `transfer`
+sample and separate review round. Actual transfer results and the independent
+human study remain open.
+
 ## Current state
 
 The bounded **MEAS-01/MEAS-02 measurement audit is complete**. The
@@ -91,16 +169,79 @@ official results and admits only complete usable measurements to exploratory
 parent selection. It preserves official scores and records unusable results
 without selecting them. The [verified feedback bridge](docs/SOURCE-FEEDBACK.md)
 can now turn a pinned complete screen into bounded development notes accepted by
-the existing improver, with literal answer excerpts and explicit omissions.
+the existing improver, with every selected output in full. The versioned host, worker and default starter preserve complete notes; oversized packets refuse before a proposal instead of truncating outputs. Historical prefix packets remain readable under their original policy.
 The [bounded inherited source-search loop](docs/SOURCE-SEARCH.md) now connects
 these stages. A confined three-iteration rehearsal retains a failed child,
 feeds its failure into a repair, and runs the repaired child's changed improver
 to produce another descendant. It uses supplied programs and synthetic replies,
 with no real provider calls. Complete keyless replay and passive verification
-preserve its original records. An actual model-authored source experiment and
-mutation competence remain open; the new loop's hosted checks are pending.
+preserve its original records. The loop and format-reuse slices have passed
+Linux and Windows CI and merged. The [first actual model-authored source run](docs/SOURCE-FIRST-LIVE-RESULTS.md) now completes a three-link chain; broader mutation competence remains open.
+For new witnessed searches, a parent must first use its own improvement code
+to create a changed further child and run it on the first development task.
+[Verified private source copies](docs/SOURCE-MUTATION-WITNESS.md#verified-source-copies-for-new-owners)
+now bind returned code before fresh execution records are prepared. The bounded
+real-worker check passes with supplied programs and simulated judging; original
+failed owners remain unchanged. A [complete request-size check](docs/SOURCE-REQUEST-CAPACITY.md)
+now retains all 30 seed answers; model token fit and output headroom still need
+checking before another live experiment.
+The [starter source factory](docs/SOURCE-SEED.md) now combines the unchanged
+generation recipe with a versioned, one-callback Python source proposer. It
+creates a self-contained starting agent without choosing a run or allocating
+money. A child replaces the whole file and inherits its own improvement function.
+The actual starter now passes a six-worker confined chain and keyless replay
+with supplied descendants and fake replies; the later actual model-authored run is recorded separately below.
+A [read-only source handoff check](docs/SOURCE-HANDOFF.md) validates a proposed
+initial experiment without creating spending authority or execution records.
+The [first source-experiment proposal](docs/SOURCE-EXPERIMENT.md) now fixes
+three development tasks and a three-iteration inherited-source study. Its
+$25 / 512-attempt allowance funded the completed first source run; the
+[historical handoff](docs/SOURCE-FIRST-LIVE.md) retains the command and both hidden-key explanations.
+The [protected source launcher](docs/SOURCE-LAUNCH.md) now joins approved funding,
+original-owner checks, hidden keys, progress and explicit partial results through
+the existing controller. The [concrete full-schedule rehearsal](docs/SOURCE-REHEARSAL.md)
+now passes with 51 isolated workers and 267 simulated replies, including an
+interrupted continuation and completed keyless reuse. Independent passive
+review verifies the saved replies, source lineage and original owners.
+This is engineering evidence; the supplied children keep their improver
+unchanged. The [actual model-authored run](docs/SOURCE-FIRST-LIVE-RESULTS.md) now retains three successive Python descendants, including a changed and used improvement function. It completed 120 answers and 170 attempts for $1.158996 recorded, with zero held and 51 inactive original owners. The starter led every child on both mean official metrics; no score improvement was observed. No further user command is needed now.
+The protected launcher's exact-head Linux and Windows checks have passed.
 The [source-evolution backlog context](docs/BACKLOG.md) records the intended Python
 code and inherited-improver endpoint, the current gap and its existing plan gates.
+
+The [separate frozen-improver proposal path](docs/SOURCE-PROPOSAL-STAGE.md#keep-an-improver-fixed-while-changing-its-starting-agent)
+lets different improvement procedures receive the same measured starting agent
+and complete development feedback. It records the executing improver and task
+parent separately. Its [checked failure feedback](docs/SOURCE-FEEDBACK.md#a-fixed-improver-learns-from-its-own-failed-children)
+also lets a fixed improver learn from its own failed children, preserving full
+parent outputs and refusing another improver's history. The [bounded mutation
+check](docs/SOURCE-MUTATION-WITNESS.md#reuse-the-check-while-keeping-an-experimental-improver-fixed)
+can also use a study's own locations, returning after each owner preparation or
+execution so the study can check all of its records before continuing. The
+[finite comparison controller](docs/IMPROVER-STUDY.md) now connects common
+starting measurements, two fixed improvers, repeated conditions, equal resource
+limits, retained failures and descendant selection. Its engineering checks use
+supplied programs and replies. The [paired numerical analyzer](docs/IMPROVER-ANALYSIS.md)
+now keeps both descendants' gains over the shared starter separate from their
+direct comparison, with conservative uncertainty and explicit missing outcomes.
+The [sealed-assessment connection](docs/IMPROVER-ASSESSMENT.md) is implemented
+with five new assessment methods and twelve final-v1 regressions passing at
+the recorded corrected cut. It freezes selected descendants from original
+development records, retains absent descendants and separate roles for identical
+code, and feeds verified official results to that analyzer. The actual controlled
+experiment, full/hosted verification and improved-effectiveness evidence remain
+open. The separate archival correction passes its final retirement lifecycle,
+consumed-data alias checks and strict unfinished-work controls. A further
+valid-descendant lifecycle [passed at its recorded cut](docs/conformance/imp01-sealed-passive-replay-verification.json);
+the [delivery record](docs/conformance/imp01-sealed-passive-replay-delivery.json)
+keeps that evidence separate from later source versions.
+
+The [explicit aggregate-cap v2 declarations](docs/IMPROVER-ASSESSMENT.md#explicit-aggregate-caps-in-v2)
+let a separately approved improver study use combined phase limits below the
+sum of all owner ceilings. Original v1 funding rules remain available. A budget
+stop preserves a partial result and the full planned coverage; it cannot turn
+finished subsets into a completed comparison. This adds no IMP-01 allocation or
+live command and leaves the approved source demonstration unchanged.
 
 Useful-diversity gains, held-out improvement and improved-improver effectiveness
 remain **not established**. The source-chain fixture uses synthetic replies and
@@ -112,15 +253,49 @@ others uncertain; original benchmark scores and raw evidence remain unchanged. S
 [pilot review](docs/PILOT-REVIEW.md), [recovery results](docs/FIRST-LIVE-RESULTS.md)
 and [linked continuation results](docs/LINKED-CONTINUATION-RESULTS.md).
 
-At this checkpoint the living plan contains **6 remaining leaf slices**.
+The [numerical improvement rule](docs/EVALUATION-RULE.md) now implements the
+fixed-primary gain/loss comparisons for future held-out decisions. Its
+thirteen focused checks pass. It consumes supplied bounds and a coverage
+assertion. The [limited validation controller](docs/VALIDATION-STUDY.md)
+connects prospectively reserved rounds to the existing isolated generation and
+native-evaluation paths, preserving original owners and explicit partial
+evidence. The [saved validation analysis](docs/VALIDATION-ANALYSIS.md) now
+checks the original plan and complete native results before computing
+conservative bounds for both metrics and applying the fixed improvement rule.
+Missing required scores remain inconclusive. Its fixed-panel conclusions
+depend on declared family-independence assumptions; they do not establish
+unseen-task improvement. Seven focused methods and seven quality checks pass.
+The [final-evaluation controller](docs/FINAL-EVALUATION.md) now fixes every
+assigned final task, the finalist count and selection policy, original phase
+allocations and the one-way freeze before running the complete comparison.
+Its exact executing head now passes both complete hosted suites and all
+configured checks; [the scoped completion record](docs/conformance/eval01-hosted-completion.json)
+closes EVAL-01 infrastructure. New ordinary trials can declare a separate transfer
+panel before observations; both panels share one irreversible finalist freeze.
+The original three-phase trial and improver-assessment interfaces retain their
+existing scopes. Actual held-out, human and transfer evidence remains separate
+under EVAL-02; no agent is promoted here.
+
+The [trial work safeguard](docs/EVALUATION-FENCE.md) now connects the original
+phase grants and a shared writer lock to source search, feedback, validation,
+direct Gateway calls and worker Sessions. Closing a trial blocks new adaptive
+work while preserving receipt settlement and passive reads of older results.
+Complete-output feedback stays intact. Final execution requires the checked
+current cell inside the actual frozen-schedule consumer; direct calls and a
+fabricated confirmation file cannot enable it. No funded final experiment or
+scientific improvement is established by this implementation.
+
+At this checkpoint the living plan contains **4 remaining completion gates**.
+The [validation/finalization infrastructure](docs/conformance/eval01-hosted-completion.json)
+now passes both exact published-head hosted jobs; independent evaluation remains open.
 The Windows PID-lock observer follow-up is complete at its shared-reader scope;
 [the guide](docs/DOCTOR.md#windows-file-sharing) states its boundaries.
 The native pipeline is complete at its declared offline scope. Umbrella milestones
 are not counted again. They cover
-policy/search (1), source evolution (2), held-out evaluation (2) and the
-improver comparison (1). This is a checkpoint count, not a promise that research
-findings will never require a smaller slice; [PLAN.md](docs/PLAN.md) determines
-the current status and order.
+source evolution (2), held-out evaluation (1) and the
+improver comparison (1). Each gate can require several small implementation
+slices or live experiments. [PLAN.md](docs/PLAN.md) determines the current
+status and order.
 
 The normative benchmark reference is the inspected official **NoveltyBench v1.1**,
 commit `64a23be6b18ec1dacc298830aab276061b6e143c`. The paper is historical context.
@@ -179,7 +354,7 @@ This synthetic example evaluates independent-sampling and in-context seeds, prop
 
 The first live experiment was authorized for **up to $50 combined**, covering both providers and all search stages. The initial attempt was interrupted while awaiting answer 10. Its nine replies and full uncertain reservation remain intact. The completed recovery restart used a **$49.465918 cap and 118-call allowance**, accounting for the original $0.534082 committed liability and ten attempted calls. It repeated the same one-prompt, two-seed, one-proposal engineering pilot with fresh evidence. Both attempts are now historical inputs. Shared authorization imports their sealed liabilities once and enforces the combined dollar/call cap. The linked continuation reuses nine saved replies as evidence, sends a separately identified replacement for the unknown tenth, then completes the remaining search stages. Its new report separates new cost, inherited evidence cost and shared experiment accounting.
 
-The corrected linked run completed and was verified: nine saved replies reused, 51 new calls for $0.274533, with the original unknown still held. [Linked results and concerns](docs/LINKED-CONTINUATION-RESULTS.md) record the three candidate scores, repeated plots, literal/craft failures and shared accounting. The completed run is closed to new paid calls; its [execution handoff](docs/FIRST-LIVE-CONTINUATION.md) remains historical evidence. Benchmark conformance now passes at its declared offline scope; REC-05's bounded read-only verification and diagnostic gates are complete; both the blinded model-development review and bounded official-judge audit are complete; the controlled policy comparison remains open.
+The corrected linked run completed and was verified: nine saved replies reused, 51 new calls for $0.274533, with the original unknown still held. [Linked results and concerns](docs/LINKED-CONTINUATION-RESULTS.md) record the three candidate scores, repeated plots, literal/craft failures and shared accounting. The completed run is closed to new paid calls; its [execution handoff](docs/FIRST-LIVE-CONTINUATION.md) remains historical evidence. Benchmark conformance now passes at its declared offline scope; REC-05's bounded read-only verification and diagnostic gates are complete; both the blinded model-development review and bounded official-judge audit are complete; the controlled policy comparison is complete at its registered development scope.
 
 This command prints the saved completed report once in this window. It needs no
 keys, makes no changes and spends nothing:
@@ -258,6 +433,7 @@ python -m ruff format --check buddha tests agents
 python -m mypy --strict buddha agents
 python -m bandit -r buddha agents
 python -m pip_audit --no-deps -r requirements.txt
+python -m pip_audit --disable-pip --no-deps --strict -r requirements-dev.txt
 python -m compileall -q buddha tests agents
 ```
 
@@ -266,8 +442,12 @@ runs the full portable suite with temporary fixtures, prints each test name and
 lists the 30 slowest test durations; these output options do not select or skip
 tests. Ruff checks style and formatting;
 Mypy checks types; Bandit checks common source-security mistakes; `pip_audit`
-checks the core dependency list for known advisories and may access its advisory
-service; `compileall` checks Python compilation and writes local bytecode caches.
+checks the runtime and development dependency lists for known advisories and may
+access its advisory service. The development check covers the pinned tools and
+their dependencies, refuses skipped packages and makes no package changes;
+`compileall` checks Python compilation and writes local bytecode caches.
+The audits check versions named in the files, rather than inventorying or
+updating packages already installed on your computer.
 Ctrl+C stops a foreground check. Real-container proofs are separate optional
 checks documented in their guides; the core audit does not clear the larger
 native evaluator environment.
@@ -279,6 +459,11 @@ main-push jobs check `main`. Verbose names show test progress, and the duration
 summary helps identify slow cases without reducing coverage.
 
 Both jobs use Python 3.13 and the pinned tools in `requirements-dev.txt`; application runtime dependencies remain empty. Development auditing includes certifi (MPL-2.0), recorded in the recovery contract, without adding it to the application runtime. Local verification is reported separately from hosted CI. The user authorizes continued implementation with a summary and PR per slice, pausing for live execution or a required decision. Genuine source self-modification requires the separately gated source-evolution work. HyperAgents contributes conceptual inspiration only; its source is excluded. Earlier dated handoffs describing absent Git/CI are historical.
+
+CI checks development dependencies immediately after installing the tools,
+before starting the long test suite. The [development-tool refresh](docs/conformance/dev-dependency-refresh.json)
+records the affected pins, patched versions, licenses and isolated-environment
+checks. These checks do not audit the separate official evaluator environment.
 
 ## License
 

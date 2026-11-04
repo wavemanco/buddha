@@ -1,0 +1,319 @@
+{
+  "actual_v3": {
+    "automatic_retry": false,
+    "containers_started": 0,
+    "external_deadline_seconds": 90,
+    "external_parent_seconds": 0.185521,
+    "original_file_sqlite_connections": 0,
+    "original_mutations": 0,
+    "provider_calls": 0,
+    "status": "metadata_observed"
+  },
+  "authority_image": {
+    "bytes": 9625600,
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-unified-live-20261026-v1\\authorization-search.sqlite3",
+    "producer_final_raw_recheck_unchanged": true,
+    "raw_image_copied_to_disk": false,
+    "raw_payload_bytes_present_in_process_memory": true,
+    "sha256": "9bdc6e040b548c1997faec81b796fea1be8b6000678954dc1ed4163a5c972b3a",
+    "sqlite_connections_to_original_file": 0,
+    "sqlite_query_location": ":memory:"
+  },
+  "date": "2026-10-30",
+  "documentation_basis_head": "29c3472892e2dc8a0d36501ca4bbadc72a7d9761",
+  "evidence": {
+    "actual_metadata_result": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\current657-owner-metadata-20261030-v1\\current657-owner-metadata-v3.json",
+      "sha256": "23c6822e6532b100e6834dbd5fb90d180d46c62f3a1570976f472a55930b182c"
+    },
+    "actual_parent_driver_v3": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\current657-owner-metadata-20261030-v1\\run-actual-parent-v3.py",
+      "sha256": "0a51d6b7fbf187baefe026f5638f3af984b3c95dde73a238bb25afffcda04a9c"
+    },
+    "actual_parent_v3": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\current657-owner-metadata-20261030-v1\\actual-parent-result-v3.json",
+      "sha256": "3252cd8bb864aa7e3796f42cb530989553745e1f5d6e2ee9ecb83c5d81effb50"
+    },
+    "actual_stdout_v3": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\current657-owner-metadata-20261030-v1\\actual-parent-stdout-v3.bin",
+      "sha256": "406aeab16de54a5de448efe592c8b51c33fbf93985275ed1ab37ab5e87f5263d"
+    },
+    "census_v3": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\current657-owner-metadata-20261030-v1\\owner-census-DRAFT-v3.py",
+      "sha256": "25f959f1aacc310920b8640ecd7ae216555ec7bfaeb99cbedc85b7703d9b4d80"
+    },
+    "metadata_only_probe_driver": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\current657-owner-metadata-20261030-v1\\metadata-pair-probe.py",
+      "sha256": "fa7de11b82957e9a598afca0939af6e50490b01e274bd986198f3bb5864d97b2"
+    },
+    "metadata_only_probe_result": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\current657-owner-metadata-20261030-v1\\metadata-pair-result-v1.json",
+      "sha256": "4dd4c171adc552acca0a5a9320d8accdd764462c6a7060ebba72612e1a8b39a5"
+    },
+    "public_schema_fixture": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\current657-owner-metadata-20261030-v1\\public-schema-supplied-v2.json",
+      "sha256": "933df8263ed6f782e97b946437a0f9f45fb80b743cf37f11e48d82a52df9543d"
+    },
+    "supplied_parent_v4": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\current657-owner-metadata-20261030-v1\\supplied-parent-result-v4.json",
+      "sha256": "4ec173816237a83f69aada51db32405eb6b579fd6bf48ca0f8bd36f767bae6ff"
+    },
+    "supplied_rehearsal_v4": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\current657-owner-metadata-20261030-v1\\supplied-rehearsal-DRAFT-v4.py",
+      "sha256": "f52ae8594684be19af58a2aa69bdf2edbbf00e465ee829bd88cccb9b414fd2c1"
+    },
+    "supplied_result_v4": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\current657-owner-metadata-20261030-v1\\SUPPLIED-census-v4-5wdf3mgl\\rehearsal-result-v4.json",
+      "sha256": "08f19d8dbc93bb6ccc3410012c41b7d42b5e6714e94a37eeba3977728c97a860"
+    }
+  },
+  "format": "buddha.current-owner-metadata-delivery.v1",
+  "frozen_executing_source_head": "c54819f8516cb6b50c1040d7f500c9ef12593f8b",
+  "independent_review": {
+    "cleanup_or_live_clearance": false,
+    "record": "Retained collaboration message; no separate review artifact exists.",
+    "reviewer": "postkey_check_trace",
+    "scope": "Saved census/parent/stdout joins and old/current registration/status/cost metadata only; reviewer did not read original database bytes.",
+    "status": "pass"
+  },
+  "limits": [
+    "Metadata observation is not an owner-ledger/receipt audit, provider-invoice reconciliation or reconstruction runtime bound.",
+    "Final hash/identity checks do not create an atomic filesystem snapshot or exclude adversarial change-and-restore races.",
+    "This observer compatibility repair does not diagnose or repair the original generation/executor/cleanup failure.",
+    "No live command, new spending allocation, source adoption or scientific improvement is established."
+  ],
+  "metadata_summary": {
+    "active_owner_count": 1,
+    "current_search_totals": {
+      "committed_microusd": 5523144,
+      "operation_count": 657,
+      "reserved_microusd": 0,
+      "spent_microusd": 5523144
+    },
+    "current_status_counts": {
+      "completed": 657,
+      "dispatched": 0,
+      "reserved": 0,
+      "unknown": 0
+    },
+    "historical_cut_owner_count": 174,
+    "historical_cut_recomputed_or_replaced": false,
+    "historical_cut_sha256": "905179717d4582551fc50798f6f8a100d8a89352ee46bbe954a245f067a290d8",
+    "historical_owner_aggregate": {
+      "committed_microusd": 4845090,
+      "operation_count": 604,
+      "reserved_microusd": 0,
+      "spent_microusd": 4845090
+    },
+    "historical_registration_comparison": {
+      "directory_anchors_match": 174,
+      "fresh_manifest_files_read": false,
+      "inactive_and_deactivated": 174,
+      "registered_manifest_sha256_anchors_match": 174,
+      "run_ids_match": 174
+    },
+    "later_owner_aggregate": {
+      "committed_microusd": 678054,
+      "operation_count": 53,
+      "reserved_microusd": 0,
+      "spent_microusd": 678054
+    },
+    "later_owner_count": 19,
+    "other_grant_authorities_opened": false,
+    "other_grant_totals_source": "Pinned saved outer observation only.",
+    "owner_manifest_ledger_or_receipt_files_validated": false,
+    "registered_owner_count": 193,
+    "saved_whole_study_totals": {
+      "committed_microusd": 5523144,
+      "operation_count": 657,
+      "reserved_microusd": 0,
+      "spent_microusd": 5523144
+    },
+    "sole_active_owner": {
+      "operation_count": 0,
+      "relative_position": "search/study/cells/0/0/0/1/screen/tasks/0/generation/owners/0",
+      "reserved_microusd": 0,
+      "spent_microusd": 0
+    }
+  },
+  "next": "One bounded actual-657 reconstruction/profile using the 193-owner roster and frozen two-profile controls; no automatic third-helper adoption. Cleanup, retained-history compatibility, full hosted completion and live clearance remain open.",
+  "observation_scope": "One search-authority registration/status/cost census; no fresh owner-file or receipt validation.",
+  "observer_identity_repair": {
+    "cross_api_identity": "Windows birthtime plus existing dev/ino/size/mtime/nlink; non-Windows keeps ctime.",
+    "existing_pattern_missed": {
+      "lines": "362-367",
+      "path": "buddha/releases.py",
+      "scope": "Existing file_hash avoids cross-API ctime equality and retains complete path checks; the new observer had missed this distinction."
+    },
+    "host_python": "3.13.12",
+    "host_python_source": "Root's separately observed runtime metadata; the three-input metadata-pair receipt itself has no runtime-version field.",
+    "metadata_probe_content_bytes_read": 0,
+    "metadata_probe_inputs": 3,
+    "observed_mismatch": "Authority path stat ctime reflected creation; fstat ctime equaled mtime; both birthtimes and dev/ino/size/nlink/mtime agreed.",
+    "platform": "Windows",
+    "primary_references": [
+      {
+        "scope": "CPython issue contains Python 3.14 reproductions; host 3.13.12 evidence is the separate local metadata probe.",
+        "url": "https://github.com/python/cpython/issues/157671"
+      },
+      {
+        "scope": "Windows ctime deprecation and birthtime guidance.",
+        "url": "https://docs.python.org/3.13/library/os.html#os.stat_result.st_ctime_ns"
+      }
+    ],
+    "regular_file_link_hash_sidecar_and_sql_guards_preserved": true,
+    "same_api_guards": "Path-before/path-after and fstat-open/fstat-after-read retain ctime equality; returned path identity retains ctime for final reread comparison.",
+    "scope": "External census observer only; no application source, executing profile or original stop repair."
+  },
+  "outer_observation": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-unified-comparison-20261026-v2\\NOT-CREATED-unified-workspace\\observations\\126e5401d8d3488388ec3d4953f3f737.json",
+    "sha256": "1e7216626d98aefc69b586ff46ec070eece408b1c456985808526fe53d364c0e"
+  },
+  "pr190_ci_snapshot": {
+    "attempt": 1,
+    "checkout_merge_sha": "b0bcda7e86bc5f14ba65e7d3621b3bb58472abbe",
+    "ci_retriggered_by_this_slice": false,
+    "head_sha": "1a08b4b46a21749386097ea03f193c4119849f5e",
+    "limits": [
+      "Completed Linux logs only; executing-source inventory and external-reader verification remain separate.",
+      "Ubuntu-0 API step metadata was stale; its terminal log confirmed completed quality checks.",
+      "No full hosted completion or live/scientific clearance is claimed."
+    ],
+    "linux": {
+      "completed_jobs": 5,
+      "coverage": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\returned-diagnostics-hosted-20261030-v1\\linux-log-coverage.json",
+        "sha256": "7ad36a75072f816b18ee95dcaf8f5cd9c5a98e6142e1bea3663de6d6edde61ac"
+      },
+      "distinct_outcomes": 2149,
+      "errors": 0,
+      "failures": 0,
+      "job_summaries": [
+        {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\returned-diagnostics-hosted-20261030-v1\\job-124192071738-summary.json",
+          "sha256": "c7ebf9b8beb0c564227170877303f74e8b9b95fc02def5643e73d376ccae26ca"
+        },
+        {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\returned-diagnostics-hosted-20261030-v1\\job-124192071966-summary.json",
+          "sha256": "e244ada0bef66e0bef793326689ef6f15626ec2ea0f0bb89c758407136243003"
+        },
+        {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\returned-diagnostics-hosted-20261030-v1\\job-124192072570-summary.json",
+          "sha256": "a321af277e635579a287877992d50890291b308776ffc5dce32b46e011d4a2b6"
+        },
+        {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\returned-diagnostics-hosted-20261030-v1\\job-124192071395-summary.json",
+          "sha256": "1c4de4f922013924204789b745b8a3a2e8fc5cbc03af77d7cf81136f36a21199"
+        },
+        {
+          "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\returned-diagnostics-hosted-20261030-v1\\job-124192071915-summary.json",
+          "sha256": "cbea9b9d3097f37f79ad367b5cc98aa52176548354540e38c14e0f71cdfc1f3f"
+        }
+      ],
+      "ordered_selected_census_matches": true,
+      "quality_checks_passed": 35,
+      "skips": 5,
+      "successes": 2144
+    },
+    "pull_request": 190,
+    "repository": "wavemanco/buddha",
+    "run_id": 41093184113,
+    "windows": {
+      "jobs": 5,
+      "metadata_as_of": "2026-10-30T18:11:15Z",
+      "status": "in_progress"
+    }
+  },
+  "preservation": {
+    "documentation_files_changed": 3,
+    "new_grants_owners_api_operations_or_profiles": 0,
+    "original_acceptance_tails_preserved": 7,
+    "original_authorities_owners_receipts_source_and_scientific_settings_mutated": false,
+    "prior_plan_raw_revision_rows_preserved": 200
+  },
+  "retained_earlier_observations": {
+    "actual_v2": {
+      "authority_raw_read_or_deserialization_progress": "Not established by this stop record.",
+      "driver": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\current657-owner-metadata-20261030-v1\\owner-census-DRAFT-v2.py",
+        "sha256": "cb40038f871f72974699cf7d121d3eb6170d568151254a078bc05004b8f0f97c"
+      },
+      "elapsed_seconds": 0.073178,
+      "input_and_differing_field_not_retained": true,
+      "parent": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\current657-owner-metadata-20261030-v1\\actual-parent-result-v2.json",
+        "sha256": "f68a6a3599460601955efb8fdfad7f78577f9ee03936ac27293856926f9b36cb"
+      },
+      "reason": "input_open_changed",
+      "roster_published": false,
+      "status": "partial_refused",
+      "stdout": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\current657-owner-metadata-20261030-v1\\actual-parent-stdout-v2.bin",
+        "sha256": "bb61536a31e5dd5aea269cd19836d775b4c5fe655a9f5fc145a0aeeafb644b91"
+      }
+    },
+    "supplied_v2": {
+      "driver": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\current657-owner-metadata-20261030-v1\\supplied-rehearsal-DRAFT-v2.py",
+        "sha256": "0bd6e93f7397d47ca239c8457ef5eb1aacaf446c7cd5583e53e18832d4f80037"
+      },
+      "errors": 1,
+      "methods": 7,
+      "parent": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\current657-owner-metadata-20261030-v1\\supplied-parent-result-v2.json",
+        "sha256": "b1b6bbe330fc0d0dfa1a73f9674b0a9ebdb69f88a467df58f95d9aed682b8652"
+      },
+      "passes": 6,
+      "reason": "Full-main SystemExit(2); typed refusal code was discarded, exact cause remains unknown.",
+      "result": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\current657-owner-metadata-20261030-v1\\SUPPLIED-census-v2-1wznve_1\\rehearsal-result-v2.json",
+        "sha256": "8a5957b0969d645add5bf87442be8a63261743816df25271c010aecbd3b26d14"
+      },
+      "status": "failed"
+    },
+    "supplied_v3": {
+      "driver": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\current657-owner-metadata-20261030-v1\\supplied-rehearsal-DRAFT-v3.py",
+        "sha256": "9a99b66476297ac52192b081f17fc95ce767975989dd879bbbe7534785a28dc3"
+      },
+      "methods": 7,
+      "parent": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\current657-owner-metadata-20261030-v1\\supplied-parent-result-v3.json",
+        "sha256": "24a52de3aedf01da97abe99fe44eed094e4b7449d532186d7d01c9f445887a4c"
+      },
+      "result": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\current657-owner-metadata-20261030-v1\\SUPPLIED-census-v3-3yc8_uzw\\rehearsal-result-v3.json",
+        "sha256": "3c6dc8e6c513ae241d73cf93e1c9fb2b2db6d30793741434edb0e41a7d9d9208"
+      },
+      "status": "pass"
+    }
+  },
+  "spec": [
+    "DESIGN3",
+    "DESIGN9",
+    "DESIGN10"
+  ],
+  "status": "metadata_observed_and_independently_reviewed",
+  "supplied_v4": {
+    "actual_authority_images_read": 0,
+    "application_imports": 0,
+    "containers_started": 0,
+    "errors": 0,
+    "external_deadline_seconds": 90,
+    "external_parent_seconds": 0.358817,
+    "failures": 0,
+    "methods": 8,
+    "provider_calls": 0,
+    "scope": "Seven prior methods plus native create/modify birthtime!=mtime pass and injected open/read identity and same-API ctime refusals.",
+    "skips": 0,
+    "status": "pass"
+  },
+  "terms": {
+    "budget_microusd": 40000000,
+    "currency": "USD",
+    "id": "imp01-unified-20261026-v1-search",
+    "max_calls": 4096,
+    "scope_sha256": "2ecab3ce686a4a7c2272c5885b7b5d39bd3808844e144bc78d5c2fdc5eef0974",
+    "terms_sha256": "7c74bcfcd5d7ca745adb660a83562345dedb19d2a9261bb10bfc4230c7d389af"
+  }
+}

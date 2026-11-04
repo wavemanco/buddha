@@ -6,6 +6,7 @@ import json
 import sqlite3
 import unittest
 from contextlib import closing, redirect_stderr, redirect_stdout
+from pathlib import Path
 from unittest.mock import patch
 
 from search_verify_helpers import (
@@ -21,10 +22,11 @@ from search_verify_helpers import (
     source_snapshot,
 )
 
+from buddha import common, provider, search
 from buddha.__main__ import main
 from buddha.common import ValidationError, _canonical
 from buddha.policy import Policy
-from buddha.search_verify import verify_search
+from buddha.search_verify import _archive_contract, verify_search
 
 FINANCIALS = ("committed_microusd", "spent_microusd", "reserved_microusd", "operation_count")
 
@@ -39,6 +41,27 @@ class SearchVerificationTests(unittest.TestCase):
         finally:
             self.assertEqual(before, source_snapshot(evidence))
             self.assertEqual(declaration, evidence)
+
+    def test_current_provider_archive_requires_unchanged_generic_helpers(self):
+        snapshot = {
+            "buddha/provider.py": Path(provider.__file__).read_bytes(),
+            "buddha/search.py": Path(search.__file__).read_bytes(),
+            "buddha/common.py": Path(common.__file__).read_bytes(),
+        }
+        contracts = {
+            "source_sha256": {"buddha.provider": sha(snapshot["buddha/provider.py"])},
+            "controller_sha256": sha(snapshot["buddha/search.py"]),
+        }
+        _archive_contract(snapshot, contracts)
+        for replacement in (None, b"changed generic helpers"):
+            with self.subTest(missing=replacement is None):
+                changed = dict(snapshot)
+                if replacement is None:
+                    del changed["buddha/common.py"]
+                else:
+                    changed["buddha/common.py"] = replacement
+                with self.assertRaises(ValidationError):
+                    _archive_contract(changed, contracts)
 
     def test_complete_ordinary_search_checks_real_artifacts_slots_and_costs_without_execution(self):
         fixture = ordinary(self)
@@ -184,6 +207,7 @@ class SearchVerificationTests(unittest.TestCase):
 
     def test_resealed_proposal_reply_cannot_disagree_with_saved_decision(self):
         fixture = ordinary(self)
+        self.assertEqual(self.verify(fixture).status, "verified")
         decision = record(fixture.directory / "decisions/iteration-000000.json")
         operation_id = sha(
             _canonical([fixture.report["run_id"], "proposal", 0, "development", "proposal", 0])
@@ -208,6 +232,7 @@ class SearchVerificationTests(unittest.TestCase):
 
     def test_resealed_parent_change_in_both_decision_and_report_fails_lineage_replay(self):
         fixture = ordinary(self)
+        self.assertEqual(self.verify(fixture).status, "verified")
         decision_path = fixture.directory / "decisions/iteration-000000.json"
         old = record(decision_path)["parent_id"]
         alternate = next(
@@ -243,6 +268,7 @@ class SearchVerificationTests(unittest.TestCase):
 
     def test_resealed_report_costs_must_match_actual_ledger_operation_population(self):
         fixture = ordinary(self)
+        self.assertEqual(self.verify(fixture).status, "verified")
         rewrite_record(
             fixture.directory / "report.json",
             lambda value: value["costs"].update(

@@ -1,0 +1,100 @@
+{
+  "format": "buddha.setup-recovery-gate-decision.v1",
+  "status": "construction_partial_strategy_choice_pending",
+  "spec": [
+    "DESIGN sections3,9,10",
+    "PLAN IMP-01",
+    "ENG-OBS-01"
+  ],
+  "executed_source_head": "afb6aea841dc17641677b9073f6e336d326ff4dc",
+  "producer": {
+    "status": "partial_deadline",
+    "reason": "deadline_exceeded",
+    "seconds": 1200.1505190001335,
+    "parent_seconds": 1200.4195301001891,
+    "result": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\scale-replay-parent-result-v12.json",
+      "sha256": "2eb8a635a61d03225e50286e5289a6c9065b015377ca034ea42dc94be9dc352b"
+    },
+    "manifest": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\scale-replay-source-proposal-v12.json",
+      "sha256": "a00d6485e8314bed5d2c9f4c1d9906257c0c80cb548af63f40592f6890e12dce"
+    },
+    "binding": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\scale-replay-binding-v12-v1.json",
+      "sha256": "d95b5bdee2e9c9734d52076c92d1bd6a997d1802d96cef7cc1d7d027f2d9f71a"
+    },
+    "logs": {
+      "stderr": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\producer-stderr-v12.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\producer-stdout-v12.log",
+        "sha256": "13aa7a92c33ad2c573636341703bb9a3fd3235922c020967a582fb8ff1508672"
+      }
+    },
+    "retained_workspace": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\retained-scale-v12"
+  },
+  "required_cut_reached": false,
+  "conditional900check": {
+    "status": "not_run",
+    "reason": "producer_cut_not_reached"
+  },
+  "last_logged_action": {
+    "format": "buddha.scale-replay-progress.v1",
+    "phase": "producer",
+    "stage": "producing_history",
+    "event": "returned_action",
+    "elapsed_seconds": 1173.286,
+    "action": "witness",
+    "position": {
+      "start": 1,
+      "repetition": 0,
+      "arm": null,
+      "slot": null,
+      "stage": "common_witness_generation"
+    },
+    "owners_before": 42,
+    "operations_before": 146
+  },
+  "counter_qualification": "42owners/146ops are BEFORE the last returned action. No final ledger reconciliation or terminal child cut; do not report them as terminal totals.",
+  "source_after_match": 353,
+  "fixed_fixture_count": 8,
+  "acceptance_origin": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\acceptance-origin-strategy-20261031-v1\\review-v1.md",
+    "sha256": "59e46c24bc8f64065789e6cd64de05c0c9df4c039cfb612b674aef45ad112c30"
+  },
+  "pending_strategy": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\acceptance-origin-strategy-20261031-v1\\pending-strategy-addendum-v2.md",
+    "sha256": "0dde4acf7ae55ba0cac81f2ce6b7100d8589b3c1464c9a8b299394b5c159473b"
+  },
+  "proposed_new_setup_seconds": 10800,
+  "unchanged_reader_seconds": 900,
+  "strategy_adopted": false,
+  "pending_question": "Prioritize one15-minute fresh-process reconstruction after a separately bounded up-to3-hour offline construction, or require20-minute construction too?",
+  "meaning": "Current1200attempt staysfrozen. No automatic longer run/resume; limits are not benchmark scoring constants; setup timeout does not prove900reader failure.",
+  "limitations": [
+    "193/660reader result and practical full-run throughput remain unmeasured",
+    "No controlled speed/RSS/scientific claim",
+    "No API money, actual provider/container execution, original/private actor data or old grants used",
+    "A future3hourlimit is a ceiling, not a completion estimate",
+    "Existing source/request/CI/account/funding gates remain before any paid launch"
+  ],
+  "preservation": {
+    "raw_revision_rows": 222,
+    "original_acceptance_tails": 7,
+    "app_source_changes_in_this_docs_slice": 0,
+    "original_paid_sources_inputs_grants": "untouched"
+  },
+  "guide_sha256": "e87c0ed9e15e3304041fdcadfbf671caa0384520bb4a633a60ce6c1075730897",
+  "independent_terminal_review": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\scale-replay-fixture-20261031-v1\\independent-terminal-verification-v12.json",
+    "sha256": "9a0264492c310644421d9128b3bce4a9729838d1fbca9e29a2d49960370bc9ff"
+  },
+  "ci_metadata_snapshot": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\ci-212-213-snapshot-20261031-v1\\metadata-snapshot-v1.json",
+    "sha256": "b21e316e25c301580444b004158fe677b0f4b18576c2d37aae0c4392d7996853",
+    "qualification": "212zeroSuccess10inprogress;213oneSuccess9inprogress;0failed0queued0cancelled, not full hosted proof"
+  }
+}

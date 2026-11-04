@@ -1,0 +1,207 @@
+{
+  "base_commit": "6e10b0077eadfdf23555e7f7ff2b5da152f5b856",
+  "date": "2026-10-22",
+  "evidence_sha256": {
+    "eval01-independent-static-review-v1.json": "cb13a2023d41ee4c06dd2bd9a570e1b65998f42e58eb035826c1ba4d98e09ea1",
+    "improvement-rule-bounded-json-red-v2.json": "c5647354bb36cb4ce856aac7eaf6a384378613c84c4a462360c3434d53cfa379",
+    "improvement-rule-first-red-v1.json": "901f4a30e001bee5ad5f9616f75ce6688b0720141e36b2207a9e0321a5b9c32a",
+    "improvement-rule-local-review-v1.json": "7759c230426cb64b592c28bd6c8417c2fe420d5b7cd07a738fb695999421386d",
+    "improvement-rule-local-review-v2.json": "c5b89b6754877fa50dde8718feaaec8835b9a34861b97a10e7063e8607279661",
+    "improvement-rule-quality-v1.json": "ed9f00dc85e24186141675cde279bedc33674aca8de3e692f0214f1cc4c2b1f1",
+    "improvement-rule-quality-v2.json": "886b149d4653d44f3007d52ed00b5cb76d310ff8f577aba0e01f2c2c3061c2d0"
+  },
+  "format": "buddha.eval01-numerical-rule-delivery.v1",
+  "heldout_data_access": false,
+  "independent_review": {
+    "scope": "Independent static review only; root/design own RED/GREEN execution and final quality checks.",
+    "status": "pass"
+  },
+  "limitations": [
+    "Bounds and coverage are caller-supplied; this predicate does not attest provenance or completeness.",
+    "No uncertainty construction, confidence level, multiplicity/occasion allocation or numeric scientific defaults are supplied.",
+    "No validation/final controller or promotion authority is implemented by this slice; the later controller must consume this exact frozen rule.",
+    "Rule satisfaction can permit the declared loss on the other axis; non-satisfaction does not disprove improvement.",
+    "No full local regression suite, held-out gain, useful-diversity or improved-improver claim; hosted CI is a separate gate.",
+    "The earlier 12-method/old-source quality checks and final 13-method/source-quality cuts remain distinct."
+  ],
+  "new_funding": false,
+  "preservation": {
+    "intentional_changes": [
+      "README.md",
+      "docs/PLAN.md"
+    ],
+    "original_tracked_files": 456,
+    "other_original_files_unchanged": 454,
+    "prior_plan_rows_exact": 66
+  },
+  "quality": {
+    "checks": [
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "ruff",
+          "check",
+          "buddha",
+          "tests",
+          "agents"
+        ],
+        "elapsed_seconds": 0.1078559000743553,
+        "exit_code": 0,
+        "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "name": "lint"
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "ruff",
+          "format",
+          "--check",
+          "buddha",
+          "tests",
+          "agents"
+        ],
+        "elapsed_seconds": 0.10043140000198036,
+        "exit_code": 0,
+        "log_sha256": "c375f615cfe3fc02a2752c83204f39308f22c13d841d979afb4dfc9eeed86c55",
+        "name": "format"
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "mypy",
+          "--strict",
+          "--platform",
+          "win32",
+          "--cache-dir",
+          "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-contract\\runs\\reviews\\mypy-win32",
+          "buddha",
+          "agents"
+        ],
+        "elapsed_seconds": 0.4215571000240743,
+        "exit_code": 0,
+        "log_sha256": "ff7fa338160fc834760e2981fabb96c5026e1c7b5fbf91dba5fe0364c0f97c94",
+        "name": "types-win32"
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "mypy",
+          "--strict",
+          "--platform",
+          "linux",
+          "--cache-dir",
+          "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-contract\\runs\\reviews\\mypy-linux",
+          "buddha",
+          "agents"
+        ],
+        "elapsed_seconds": 0.4093747999286279,
+        "exit_code": 0,
+        "log_sha256": "ff7fa338160fc834760e2981fabb96c5026e1c7b5fbf91dba5fe0364c0f97c94",
+        "name": "types-linux"
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "bandit",
+          "-r",
+          "buddha",
+          "agents"
+        ],
+        "elapsed_seconds": 2.0860494000371546,
+        "exit_code": 0,
+        "log_sha256": "58cd9184779b1f4916b5bd70c777e86549704ca7e9df126312f2b3b704b93dd0",
+        "name": "security"
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "pip_audit",
+          "--no-deps",
+          "-r",
+          "requirements.txt"
+        ],
+        "elapsed_seconds": 15.853134000091814,
+        "exit_code": 0,
+        "log_sha256": "e82148c0c30269ca5a2c35420ece6af011a4faf5a375325d750e243ffdb10625",
+        "name": "dependencies"
+      },
+      {
+        "command": [
+          "C:\\Program Files\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "compileall",
+          "-q",
+          "buddha",
+          "tests",
+          "agents"
+        ],
+        "elapsed_seconds": 0.2266994999954477,
+        "exit_code": 0,
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "name": "compile"
+      }
+    ],
+    "configuration_inputs": 4,
+    "inputs_unchanged": true,
+    "python_inputs": 220
+  },
+  "real_provider_calls": 0,
+  "retained_red": {
+    "initial": "missing-interface error; no behavioral test body executed",
+    "serialization": {
+      "classification": "behavioral RED: original implementation did not raise the declared typed error on unencodable huge bounds",
+      "coverage_subcases": [
+        false,
+        true
+      ],
+      "errors": 0,
+      "exit_code": 1,
+      "failures": 2,
+      "int_string_digit_limit": 4300,
+      "restoration": "unittest.addCleanup(sys.set_int_max_str_digits, previous_limit), registered before mutation",
+      "tests": 13
+    }
+  },
+  "scope": "DESIGN6 numerical predicate only; EVAL-01 remains in progress",
+  "sources": {
+    "buddha/improvement_rule.py": "3df31b496a0f4b83c2df9ae6a523935b73ef52975f6edc0ce0c999646a653194",
+    "docs/EVALUATION-RULE.md": "b71864e625fc6792b479e119adb212c2ba69fe4f9ead45200931232f1dc97da7",
+    "tests/test_improvement_rule.py": "e97475df1ff3c5820282bb85585eae5b7ecea8a728de1d49902d58ed4354a761"
+  },
+  "test_methods": [
+    "test_utility_gain_is_strict_other_loss_is_inclusive",
+    "test_distinctiveness_rule_is_symmetric",
+    "test_declared_axis_cannot_be_replaced_by_the_favorable_axis",
+    "test_no_rounding_tolerance_or_float_coercion_of_large_integers",
+    "test_missing_bounds_or_incomplete_coverage_are_inconclusive",
+    "test_all_values_are_validated_even_when_coverage_is_false",
+    "test_bounds_are_an_exact_two_key_builtin_object",
+    "test_rule_fields_are_exact_and_margins_have_no_defaults",
+    "test_raw_json_is_strict_and_rule_class_cannot_be_spoofed",
+    "test_rule_canonical_identity_and_views_are_immutable",
+    "test_result_is_detached_pure_and_never_a_promotion_attestation",
+    "test_result_must_be_bounded_json_even_when_coverage_is_false",
+    "test_import_needs_no_finance_native_or_statistical_dependencies"
+  ],
+  "tests": {
+    "elapsed_seconds": 0.097,
+    "errors": 0,
+    "failures": 0,
+    "log_sha256": "11e9883c063a5ebf91e3ad800cd1d1fd228319a50663910bcc8b81257752454f",
+    "run": 13,
+    "skips": 0
+  }
+}

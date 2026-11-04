@@ -1,0 +1,173 @@
+{
+  "base_head": "3374961f0a5d8a27f8371aff268bae6bc73d64a7",
+  "constraints": {
+    "actual_P_C_or_private_prompt_semantics_read": false,
+    "actual_study_grants_or_owners_created": false,
+    "benchmark_scoring_changed": false,
+    "fresh_synthetic_test_grants_and_owners_created": true,
+    "funding_or_adoption_created": false,
+    "historical_paid_SQL_connections": 0,
+    "merged": false,
+    "native_scientific_reviewer_selected": false,
+    "real_credentials_read": false,
+    "real_provider_calls": 0,
+    "scientific_gate_closed": false
+  },
+  "contract": {
+    "complete_reports_reuse_original_reader": true,
+    "contiguous_owners_and_reverse_funding_census": true,
+    "existing_unsealed_native_owner_configuration_verified": true,
+    "fresh_extra_controls_keep_256MiB_gateway_bound": true,
+    "fresh_task_recipe_selected_profile_bytes_captured_rechecked_and_sealed": true,
+    "global_locks_dispatched_unknown_overrun_inactive_stops": true,
+    "impossible_future_materializations_refused_before_earlier_work": true,
+    "legitimate_next_step_materialization_after_sealed_predecessors_allowed": true,
+    "missing_foreign_replaced_historical_or_unbound_owner_refused": true,
+    "one_shared_raw_grant": true,
+    "original_generation_and_native_prefix_lineage_verified": true,
+    "spend_holds_and_ids_preserved_without_new_owner": true,
+    "whole_union_of_original_owner_populations": true
+  },
+  "files": {
+    "buddha/baseline_results.py": "2b728448b5b32c11749a980e0284838838f772b34fa7ff30a3437d08d72a63a2",
+    "buddha/baseline_state.py": "147f03b69712a0abebfb91c9fdf9b02ce4628323a9610df71d074b5f936df44c",
+    "buddha/native_evaluation.py": "49fcc3b6d520cbb0b830a19dd1b3cca2c97969462e59f4952c17da2c45501e17",
+    "docs/BASELINE-RECOVERY-CHECK.md": "34f573aa5d6af866ef5ef2ccc05a64a6473d2a9da5ee899542c0918f73e8b5bb",
+    "docs/UNIFIED-FUNDING-CHECK.md": "c68c49c06fd150be80d1d52a3fc0dc7e1f3f681d842c8dd42d71e488eebfd113",
+    "tests/test_baseline_state.py": "5304b0c6101031a84d96950e945b018951b1fccbcca14f0fb4932618c5074979"
+  },
+  "format": "buddha.baseline-recovery-check-delivery.v1",
+  "limits": [
+    "Custody observation, not funding approval or account authentication.",
+    "Sequential bounded observations are not an atomic live snapshot.",
+    "No lock deletion, hold release, resend or owner replacement.",
+    "No current producer/runtime/future-capacity certificate.",
+    "Existing controllers still validate newly materialized unowned frontier inputs before new provider calls.",
+    "Partial-observation persistence and coordinated execution are next, not implemented by this inspection slice."
+  ],
+  "next": "Append-only partial observations with actual stage/reason/costs/holds, then coordinated original controllers and prospective/account/price/request/CI/funding/live handoff gates.",
+  "plan_revision": 162,
+  "preservation": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\baseline-recovery-preservation-v1.json",
+    "sha256": "816e5071a44c5036a32d88b506acfd26e3b406c09cd4f71ba67fd6b0b411aaee"
+  },
+  "preservation_summary": {
+    "base_tracked_python_count": 310,
+    "existing_python_intentionally_refactored": 2,
+    "existing_python_unchanged": 308,
+    "new_python_files": 2,
+    "original_acceptance_tails_preserved": 7,
+    "prepared_files_preserved": 166,
+    "prior_raw_plan_rows_preserved": 161,
+    "recipe_guard_AST_and_complete_observation_tail_preserved": true
+  },
+  "recorded_date": "2026-10-26",
+  "review": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\eval01-final-design-20261023\\baseline-resume-preflight-independent-review-v1.json",
+    "sha256": "8ceaa871db1e22bf7d53512117185dbc1e7911a15d06f194f69d8112c3121a05"
+  },
+  "review_role": "Subagent authored tests and independently audited root-authored application code; not independent test authorship, human or scientific target review.",
+  "spec_sections": [
+    "DESIGN 5",
+    "DESIGN 7",
+    "DESIGN 9"
+  ],
+  "status": "implemented_passive_scope_local_checks_pass_hosted_pending",
+  "verification": {
+    "execution_scope": "Fresh real synthetic ledgers/owners and supplied worker/fake HTTPS fixtures; inspection has no-writer/no-key/no-selected-source/only-memory-SQL guards. No actual containers or model providers run.",
+    "final_new_module_seconds": 50.647,
+    "final_new_module_status": "pass",
+    "hosted_changed_head_status": "pending publication",
+    "new_methods": [
+      "BaselineStateTests.test_fresh_and_prepared_two_modes_are_keyless_readonly_and_detached",
+      "BaselineStateTests.test_complete_peer_work_keeps_original_publication_and_retired_producers_readable",
+      "BaselineStateTests.test_generation_failure_keeps_original_owner_and_replays_its_receipts",
+      "BaselineStateTests.test_native_failure_keeps_completed_prefix_and_same_native_owner",
+      "BaselineStateTests.test_missing_funded_peer_root_or_later_owner_cannot_be_replaced",
+      "BaselineStateTests.test_empty_foreign_and_gapped_owner_directories_refuse",
+      "BaselineStateTests.test_changed_original_controls_caller_pins_and_missing_mandatory_input_refuse",
+      "BaselineStateTests.test_prepared_recipe_requires_original_profile_plain_mode_and_empty_instructions",
+      "BaselineStateTests.test_changed_owner_selection_descriptor_staging_or_seal_refuse",
+      "BaselineStateTests.test_inactive_unfinished_original_owner_blocks_without_reactivation",
+      "BaselineStateTests.test_global_reserved_dispatched_and_unknown_peer_liabilities_are_preserved",
+      "BaselineStateTests.test_real_gateway_known_reservation_overrun_blocks_both_modes",
+      "BaselineStateTests.test_unsealed_generation_refuses_orphan_future_materializations_before_calls",
+      "BaselineStateTests.test_fresh_recipe_bytes_change_state_seal_and_late_mutation_refuses",
+      "BaselineStateTests.test_peer_execution_lock_blocks_and_remains_untouched",
+      "BaselineStateTests.test_unanchored_completed_stage_is_refused_without_blessing_it",
+      "BaselineStateTests.test_late_consumed_control_and_ledger_sidecar_changes_refuse"
+    ],
+    "new_unique_method_count": 17,
+    "quality": [
+      {
+        "name": "ruff lint",
+        "status": "pass"
+      },
+      {
+        "name": "ruff formatting",
+        "status": "pass"
+      },
+      {
+        "name": "mypy strict (86 source files)",
+        "status": "pass"
+      },
+      {
+        "name": "bandit (zero reported issues)",
+        "status": "pass"
+      },
+      {
+        "name": "runtime dependency audit (no known vulnerabilities)",
+        "status": "pass"
+      },
+      {
+        "name": "strict development dependency audit (no known vulnerabilities)",
+        "status": "pass"
+      },
+      {
+        "name": "compileall",
+        "status": "pass"
+      }
+    ],
+    "red_green": [
+      {
+        "boundary": "impossible later native preparation before sealed generation",
+        "final_positive_frontier_interruption_recovery": "included in final17",
+        "red_methods": 1,
+        "red_seconds": 1.464,
+        "red_subcases_failed": 3,
+        "targeted_green_seconds": 1.155
+      },
+      {
+        "boundary": "fresh recipe state seal and late mutation",
+        "final_status": "included in final17",
+        "red_methods": 1,
+        "red_seconds": 1.458,
+        "red_subcases_failed": 2,
+        "targeted_green_seconds": 1.455
+      }
+    ],
+    "regression_cut_note": "The two changed shared validators were unchanged after these regression runs; later fixes changed only the new baseline_state module.",
+    "regressions": [
+      {
+        "methods": 7,
+        "module": "test_baseline_results",
+        "seconds": 30.584,
+        "status": "pass"
+      },
+      {
+        "methods": 16,
+        "module": "test_native_evaluation",
+        "seconds": 98.212,
+        "status": "pass"
+      },
+      {
+        "methods": 21,
+        "module": "test_baseline",
+        "seconds": 76.563,
+        "status": "pass"
+      }
+    ],
+    "total_unique_methods": 61,
+    "whole_local_suite_run": false
+  }
+}

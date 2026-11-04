@@ -13,7 +13,7 @@ from unittest.mock import patch
 import test_gateway as fixtures
 
 from buddha.answers import Answers, TaskSet
-from buddha.executor import ExecutionResult, Limits
+from buddha.executor import ExecutionResult, ExecutorError, Limits
 from buddha.releases import Release, _json, inventory, prepare_selection
 
 
@@ -265,6 +265,18 @@ class CandidateSessionTests(unittest.TestCase):
 
     def test_host_stop_survives_forged_completion(self):
         self.host_stop_report(forged=True)
+
+    def test_pre_cleanup_metadata_survives_executor_failure(self):
+        error = ExecutorError(
+            "cleanup", cleanup_status="unknown", pre_cleanup_failure=("create", "control")
+        )
+        with patch("buddha.candidate_run.executor.run_container", side_effect=error):
+            report = self.session().run()
+        self.assertEqual((report["status"], report["reason"]), ("failed", "execution"))
+        self.assertEqual(report["execution"], error.to_record())
+        self.assertEqual(self.gateway.ledger.totals()["operation_count"], 0)
+        self.assertEqual(self.gateway.ledger.totals()["committed_microusd"], 0)
+        self.assertFalse((self.output / "answers.json").exists())
 
     def test_fourth_callback_is_stopped_without_a_fourth_operation(self):
         result = self.execute(self.session(), callbacks=4)

@@ -1,0 +1,33 @@
+{
+  "format": "buddha.c1-history-approval.v1",
+  "date_utc": "2026-11-03 09:24:24 UTC",
+  "decision": "Allow one fresh bounded attempt after checks (Recommended)",
+  "source": "Explicit user reply to the prepared PR231 single-attempt question",
+  "prepared_pr": "https://github.com/wavemanco/buddha/pull/231",
+  "prepared_commit": "1993141761226f301cd91a4fc0ec72aadecd1384",
+  "executing_source_head": "9ded9b9f3decb6a1d66a6497efa53b3e1ce5dd62",
+  "manifest_sha256": "b017a0347d85ea24e7dcf77c5aa199bddb48f452408b6ff82a54dbb5183a3bc9",
+  "preparation_binding_sha256": "e5861b4b3fcf41076a9943fabe5598a1af7fbd45f3247458d17cc71343552941",
+  "allowed_attempts": 1,
+  "limits": {
+    "producer_seconds": 10800,
+    "conditional_fresh_reader_seconds": 900,
+    "additional_setup_hash_report_overhead_allowed": true,
+    "total_hard_deadline": null,
+    "automatic_retry_or_resume": false,
+    "automatic_extension": false
+  },
+  "partial_results": "Retain stage/reason/results/logs/source checks; an incomplete producer skips the conditional reader and leaves acceptance open.",
+  "effects_authorized": "One new synthetic local CPU/disk observation only; no model APIs, keys, native review, Docker containers, original paid state or old-grant transfer.",
+  "release_gates": [
+    "All configured exact-source hosted checks pass",
+    "Immediate full source/script/manifest pin checks",
+    "Immediate absence/alias checks of all eight destinations and output parent"
+  ],
+  "at_recording": {
+    "execution_started": false,
+    "hosted_checks": "pending",
+    "final_launch_checks": "not_yet_run"
+  },
+  "original_preparation_retained": "The earlier NOT_APPROVED preparation remains its frozen record. This companion records the later user decision."
+}

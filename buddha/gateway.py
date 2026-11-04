@@ -7,6 +7,7 @@ identity from HTTP arrival order, run a benchmark, or certify dependency closure
 import ast
 import base64
 import hashlib
+import hmac
 import http.client
 import os
 import platform
@@ -14,14 +15,17 @@ import re
 import sqlite3
 import ssl
 import sys
+import threading
 import uuid
-from collections.abc import Callable, Mapping, Sequence
+from collections.abc import Callable, Iterator, Mapping, Sequence
+from contextlib import contextmanager
 from dataclasses import dataclass, field, replace
 from datetime import UTC, date, datetime
 from functools import lru_cache, wraps
 from pathlib import Path
 from typing import cast
 
+from buddha import trial_fence
 from buddha.authorization import Authorization, AuthorizedLedger
 from buddha.common import ValidationError
 from buddha.ledger import Ledger, OperationConflict
@@ -38,6 +42,7 @@ from buddha.releases import (
     ReleaseError,
     Selection,
     _digest,
+    _information,
     _json,
     _load,
     _object,
@@ -99,6 +104,7 @@ CORE = frozenset(
                 "history",
                 "provider",
                 "common",
+                "trial_fence",
             )
         ),
     }
@@ -107,6 +113,10 @@ CORE = frozenset(
 
 class GatewayError(ValidationError, ReleaseError):
     """The gateway owner, profile or request violates its frozen contract."""
+
+
+class ExecutorCleanupPending(GatewayError):
+    """A retained executor marker prevents another funded session."""
 
 
 class ReceivedReply(ProviderUncertain):
@@ -205,9 +215,38 @@ def _profile_headers(profile: dict[str, object], provider: str) -> None:
         _header_value(account_value)
 
 
+def _request_fields(provider: str) -> set[str]:
+    return {"model", "messages", "max_tokens", "temperature", "top_p", "service_tier"} | (
+        {"max_completion_tokens", "response_format", "reasoning_effort", "stream", "n", "seed"}
+        if provider == "openai"
+        else {"system", "thinking", "output_config", "stop_sequences"}
+    )
+
+
+def _request_settings(value: object, provider: str) -> dict[str, object]:
+    settings = _object(value, {"required", "forbidden"})
+    required = _object(settings["required"])
+    forbidden = settings["forbidden"]
+    if (
+        type(forbidden) is not list
+        or any(type(name) is not str for name in forbidden)
+        or len(forbidden) != len(set(forbidden))
+        or (set(required) | set(forbidden)) - _request_fields(provider)
+        or set(required) & set(forbidden)
+        or {"max_tokens", "max_completion_tokens"} <= set(required)
+    ):
+        raise GatewayError("unsupported or conflicting profile request settings")
+    _json(required)
+    return settings
+
+
 def _profile_file(value: object) -> dict[str, object]:
     record = _object(value, {"format", "profiles"})
-    if _text(record["format"]) not in {"buddha.gateway-profiles.v1", "buddha.gateway-profiles.v2"}:
+    if _text(record["format"]) not in {
+        "buddha.gateway-profiles.v1",
+        "buddha.gateway-profiles.v2",
+        "buddha.gateway-profiles.v3",
+    }:
         raise GatewayError("unsupported gateway profile file")
     profiles = _object(record["profiles"])
     if not 1 <= len(profiles) <= 128:
@@ -221,8 +260,10 @@ def _profile_file(value: object) -> dict[str, object]:
             "response_tiers",
             "allow_omitted_tier",
         }
-        if record["format"] == "buddha.gateway-profiles.v2":
+        if record["format"] != "buddha.gateway-profiles.v1":
             fields |= {"headers", "account_headers"}
+        if record["format"] == "buddha.gateway-profiles.v3":
+            fields.add("request_settings")
         profile = _object(raw, fields)
         spec = _spec(profile["spec"])
         if spec.provider not in {"openai", "anthropic"}:
@@ -234,6 +275,11 @@ def _profile_file(value: object) -> dict[str, object]:
             raise GatewayError("omitted-tier permission must be boolean")
         if "headers" in profile:
             _profile_headers(profile, spec.provider)
+        if "request_settings" in profile:
+            settings = _request_settings(profile["request_settings"], spec.provider)
+            required = _object(settings["required"])
+            if "model" in required and required["model"] != spec.model:
+                raise GatewayError("profile request settings contradict the selected model")
     return record
 
 
@@ -288,6 +334,7 @@ def _core_sources() -> dict[str, str]:
         ledger,
         provider,
         releases,
+        trial_fence,
         wire,
     )
 
@@ -300,6 +347,7 @@ def _core_sources() -> dict[str, str]:
         ledger,
         provider,
         releases,
+        trial_fence,
         wire,
     )
     package = Path(__file__).absolute().parent
@@ -335,8 +383,55 @@ def _runtime() -> dict[str, str]:
     }
 
 
+_ACCOUNT_REVIEW_V2 = "buddha.account-review.v2"
+
+
+def _credential(provider: str) -> str:
+    key = os.environ.get("OPENAI_API_KEY" if provider == "openai" else "ANTHROPIC_API_KEY")
+    if not key or len(key) > 4096 or any(not 33 <= ord(char) <= 126 for char in key):
+        raise GatewayError("provider credential is missing or invalid")
+    return key
+
+
+def _credential_fingerprint(provider: str, key: str, context: str | None) -> str:
+    if context is None:
+        return hashlib.sha256(key.encode()).hexdigest()
+    message = (_ACCOUNT_REVIEW_V2 + "\0" + provider + "\0" + context).encode("ascii")
+    return hmac.new(key.encode("ascii"), message, hashlib.sha256).hexdigest()
+
+
+@_checked
+def credential_fingerprints(
+    providers: list[str] | tuple[str, ...], *, context: str
+) -> dict[str, str]:
+    """Keyed, provider/context-separated fingerprints; no additional secret or I/O.
+
+    The already supplied high-entropy API key is the HMAC key and stays outside
+    artifacts. Context is a caller-approved SHA256, not a source of authority.
+    Validate all requested roles before reading any credential environment value.
+    """
+    context = _digest(context)
+    if type(providers) not in (list, tuple):
+        raise GatewayError("credential roles need a literal list or tuple")
+    names = _texts(list(providers))
+    if set(names) - {"openai", "anthropic"}:
+        raise GatewayError("unsupported credential provider")
+    return {name: _credential_fingerprint(name, _credential(name), context) for name in names}
+
+
 def _review(value: object, *, fresh: bool = False) -> dict[str, object]:
-    record = _object(value, {"checked_on", "credential_sha256", "account_scope"})
+    record = _object(value)
+    keyed = "format" in record
+    if keyed and _text(record["format"]) != _ACCOUNT_REVIEW_V2:
+        raise GatewayError("unsupported account review format")
+    fingerprint_field = "credential_fingerprints" if keyed else "credential_sha256"
+    _object(
+        record,
+        {"checked_on", fingerprint_field, "account_scope"}
+        | ({"format", "credential_context"} if keyed else set()),
+    )
+    if keyed:
+        _digest(record["credential_context"])
     _text(record["account_scope"])
     try:
         checked = date.fromisoformat(_text(record["checked_on"]))
@@ -344,7 +439,7 @@ def _review(value: object, *, fresh: bool = False) -> dict[str, object]:
         raise GatewayError("account/bounds review needs an ISO date") from None
     if fresh and not -1 <= (datetime.now(UTC).date() - checked).days <= 7:
         raise GatewayError("account and applicable bounds need a current review")
-    credentials = _object(record["credential_sha256"])
+    credentials = _object(record[fingerprint_field])
     if not credentials or set(credentials) - {"openai", "anthropic"}:
         raise GatewayError("review needs supported credential fingerprints")
     for digest in credentials.values():
@@ -509,6 +604,39 @@ def _input_records(
     return result
 
 
+@contextmanager
+def _final_producer_contract(
+    directory: Path,
+    *,
+    selection: Selection,
+    roots: Mapping[str, Path],
+    authorization: Authorization,
+    settings: dict[str, object],
+    review: dict[str, object],
+    inputs: list[dict[str, str]],
+) -> Iterator[None]:
+    """Private trusted-producer seam; unrelated legacy work has no new permission."""
+    terms = authorization._terms()
+    binding = trial_fence._parse_scope(cast(str, terms["scope"]))
+    if binding is None or binding.phase not in trial_fence._SEALED:
+        yield
+        return
+    with trial_fence._final_owner_contract(
+        authorization.path,
+        terms,
+        directory=directory,
+        selection=selection.to_record(),
+        roots={key: str(path) for key, path in roots.items()},
+        settings=settings,
+        review=_review(review, fresh=True),
+        profiles=_profiles(selection, roots),
+        core=_core_sources(),
+        runtime=_runtime(),
+        inputs=inputs,
+    ):
+        yield
+
+
 @_checked
 def prepare_gateway(
     directory: Path,
@@ -550,17 +678,20 @@ def prepare_gateway(
     )
     validate_manifest(record)
     digest = _sha(record)
-    directory.mkdir(parents=True, exist_ok=False)
-    with (directory / "manifest.json").open("xb") as stream:
-        stream.write(_json(record | {"record_sha256": digest}) + b"\n")
-    Ledger(
-        directory / "operations.sqlite3",
-        run_id=_text(record["run_id"]),
-        manifest_sha256=digest,
-        budget_microusd=budget_microusd,
-        max_calls=max_calls,
-    )
-    authorization.bind_run(directory, runtime_sha256=execution_identity(directory))
+    terms = authorization._terms()
+    with trial_fence.work(authorization.path, terms, directory=directory):
+        trial_fence.assert_work(authorization.path, terms, directory=directory, manifest=record)
+        directory.mkdir(parents=True, exist_ok=False)
+        with (directory / "manifest.json").open("xb") as stream:
+            stream.write(_json(record | {"record_sha256": digest}) + b"\n")
+        Ledger(
+            directory / "operations.sqlite3",
+            run_id=_text(record["run_id"]),
+            manifest_sha256=digest,
+            budget_microusd=budget_microusd,
+            max_calls=max_calls,
+        )
+        authorization.bind_run(directory, runtime_sha256=execution_identity(directory))
     return directory
 
 
@@ -621,12 +752,7 @@ def _request_spec(call: GatewayCall, profile: dict[str, object]) -> ModelSpec:
     provider = CAPABILITIES[call.capability][0]
     if provider != spec.provider or body.get("model") != spec.model:
         raise GatewayError("request model/provider differs from the selected profile")
-    allowed = {"model", "messages", "max_tokens", "temperature", "top_p", "service_tier"}
-    allowed |= (
-        {"max_completion_tokens", "response_format", "reasoning_effort", "stream", "n", "seed"}
-        if provider == "openai"
-        else {"system", "thinking", "output_config", "stop_sequences"}
-    )
+    allowed = _request_fields(provider)
     if (
         set(body) - allowed
         or body.get("stream", False) is not False
@@ -634,6 +760,14 @@ def _request_spec(call: GatewayCall, profile: dict[str, object]) -> ModelSpec:
         or body.get("n", 1) != 1
     ):
         raise GatewayError("unsupported request fields, streaming or multiple completions")
+    if "request_settings" in profile:
+        settings = _request_settings(profile["request_settings"], provider)
+        required = _object(settings["required"])
+        if any(
+            name not in body or _json(body[name]) != _json(value)
+            for name, value in required.items()
+        ) or set(cast(list[str], settings["forbidden"])) & set(body):
+            raise GatewayError("request differs from its frozen profile settings")
     messages = body.get("messages")
     if type(messages) is not list or not messages:
         raise GatewayError("text requests require messages")
@@ -803,16 +937,25 @@ class RawHTTPTransport:
         self.allow_paid, self.timeout_seconds = checked.allow_paid, checked.timeout_seconds
 
     def prepare(
-        self, operation_id: str, call: GatewayCall, spec: ModelSpec, review_fingerprint: str
+        self,
+        operation_id: str,
+        call: GatewayCall,
+        spec: ModelSpec,
+        review_fingerprint: str,
+        *,
+        credential_context: str | None = None,
     ) -> PreparedHTTP:
         _text(operation_id)
         if not self.allow_paid:
             raise GatewayError("explicit paid transport permission is required")
         provider, host, path = CAPABILITIES[call.capability]
-        key = os.environ.get("OPENAI_API_KEY" if provider == "openai" else "ANTHROPIC_API_KEY")
-        if not key or len(key) > 4096 or any(not 33 <= ord(char) <= 126 for char in key):
-            raise GatewayError("provider credential is missing or invalid")
-        if hashlib.sha256(key.encode()).hexdigest() != review_fingerprint:
+        _digest(review_fingerprint)
+        if credential_context is not None:
+            _digest(credential_context)
+        key = _credential(provider)
+        if not hmac.compare_digest(
+            _credential_fingerprint(provider, key, credential_context), review_fingerprint
+        ):
             raise GatewayError("provider credential differs from the reviewed account binding")
         header_bytes = b"\n".join(
             name.encode() + b":" + value.encode() for name, value in call.headers
@@ -909,6 +1052,173 @@ class Gateway:
         ).for_run(self.directory)
         self.transport = transport
 
+    def assert_work(self, *, directory: Path, kind: str) -> None:
+        """Check original owner and output under an already held scoped lease."""
+        if not isinstance(directory, Path):
+            raise GatewayError("owned work requires an explicit output Path")
+        current = _read_manifest(self.directory)
+        if _sha(current) != self.manifest_sha256:
+            raise GatewayError("gateway owner manifest changed")
+        authority = self.ledger.authority
+        trial_fence.assert_work(
+            authority.path,
+            authority._terms(),
+            directory=self.directory,
+            kind=kind,
+            manifest=current,
+        )
+        trial_fence.assert_work(
+            authority.path,
+            authority._terms(),
+            directory=directory,
+            kind=kind,
+        )
+
+    def _executor_pending(self) -> Path:
+        authority = self.ledger.authority
+        binding = trial_fence._parse_scope(_text(authority._terms()["scope"]))
+        path = (
+            binding.root / ".executor-pending.json"
+            if binding is not None
+            else authority.path.with_name(authority.path.name + ".executor-pending.json")
+        )
+        _root(path.parent)
+        return path
+
+    def _executor_lifecycle(
+        self, *, directory: Path, kind: str
+    ) -> Callable[[dict[str, object]], None]:
+        pending = self._executor_pending()
+        caller = os.getpid(), threading.get_ident()
+        intent: dict[str, object] | None = None
+        fingerprint: str | None = None
+        inode: tuple[int, int] | None = None
+
+        def unchanged() -> None:
+            information = _information(pending)
+            if (information.st_dev, information.st_ino) != inode or file_hash(
+                pending, max_bytes=MAX_JSON_BYTES
+            ) != fingerprint:
+                raise GatewayError("executor pending identity changed; marker retained")
+
+        def record(event: dict[str, object]) -> None:
+            nonlocal intent, fingerprint, inode
+            try:
+                if caller != (os.getpid(), threading.get_ident()):
+                    raise GatewayError("executor lifecycle requires its original host caller")
+                event = _object(event)
+                before = event.get("event") == "before_create"
+                _object(
+                    event,
+                    {"event", "identity"}
+                    | (set() if before else {"container_id", "cleanup_status"}),
+                )
+                identity = _object(
+                    event["identity"], {"owner", "name", "docker_endpoint", "image_id"}
+                )
+                owner = _text(identity["owner"])
+                if (
+                    not re.fullmatch("[0-9a-f]{32}", owner)
+                    or identity["name"] != "buddha-" + owner
+                    or not re.fullmatch("sha256:[0-9a-f]{64}", _text(identity["image_id"]))
+                ):
+                    raise GatewayError("invalid prospective executor identity")
+                if len(_text(identity["docker_endpoint"])) > 4128:
+                    raise GatewayError("executor endpoint identity is too long")
+                if before:
+                    self.assert_work(directory=directory, kind=kind)
+                    if intent is not None:
+                        raise GatewayError("prior executor cleanup remains unresolved")
+                    intent = {
+                        "format": "buddha.executor-pending.v1",
+                        "gateway": str(self.directory),
+                        "gateway_manifest_sha256": self.manifest_sha256,
+                        "attempt": str(directory),
+                        "kind": kind,
+                        "identity": _load(_json(identity)),
+                    }
+                    raw = _json(intent) + b"\n"
+                    _root(directory)
+                    with pending.open("xb") as stream:
+                        information = os.fstat(stream.fileno())
+                        inode = information.st_dev, information.st_ino
+                        stream.write(raw)
+                        stream.flush()
+                        os.fsync(stream.fileno())
+                    fingerprint = hashlib.sha256(raw).hexdigest()
+                    unchanged()
+                    return
+                if event["event"] != "cleanup" or intent is None or identity != intent["identity"]:
+                    raise GatewayError("cleanup differs from its prospective executor identity")
+                cleanup, container = event["cleanup_status"], event["container_id"]
+                if (
+                    cleanup not in {"not_created", "removed", "unknown"}
+                    or (
+                        container is not None and not re.fullmatch("[0-9a-f]{64}", _text(container))
+                    )
+                    or (cleanup == "removed" and container is None)
+                    or (cleanup == "not_created" and container is not None)
+                ):
+                    raise GatewayError("invalid executor cleanup evidence")
+                unchanged()
+                terminal = self.directory / ("executor-cleanup-" + owner + ".json")
+                raw = (
+                    _json(
+                        {
+                            "format": "buddha.executor-cleanup.v1",
+                            "intent": intent,
+                            "intent_sha256": fingerprint,
+                            "container_id": container,
+                            "cleanup_status": cleanup,
+                        }
+                    )
+                    + b"\n"
+                )
+                _root(self.directory)
+                with terminal.open("xb") as stream:
+                    stream.write(raw)
+                    stream.flush()
+                    os.fsync(stream.fileno())
+                if file_hash(terminal, max_bytes=MAX_JSON_BYTES) != hashlib.sha256(raw).hexdigest():
+                    raise GatewayError("executor cleanup evidence changed; marker retained")
+                if cleanup != "unknown":
+                    unchanged()
+                    pending.unlink()
+                    intent, fingerprint, inode = None, None, None
+            except (ReleaseError, OSError, ValueError, TypeError, KeyError):
+                raise GatewayError(
+                    "executor custody could not be recorded; pending work retained"
+                ) from None
+
+        return record
+
+    @contextmanager
+    def work(self, *, directory: Path, kind: str) -> Iterator[None]:
+        """Own one complete host operation, including request send and settlement."""
+        authority = self.ledger.authority
+        with trial_fence.work(
+            authority.path, authority._terms(), directory=self.directory, kind=kind
+        ):
+            self.assert_work(directory=directory, kind=kind)
+            if kind not in {"generation", "improvement", "native"}:
+                yield
+                return
+            try:
+                self._executor_pending().lstat()
+            except FileNotFoundError:
+                pass
+            else:
+                raise ExecutorCleanupPending(
+                    "executor cleanup is unresolved; no new session may start"
+                )
+            token = trial_fence._EXECUTOR_LIFECYCLE.set(
+                self._executor_lifecycle(directory=directory, kind=kind)
+            )
+            try:
+                yield
+            finally:
+                trial_fence._EXECUTOR_LIFECYCLE.reset(token)
+
     def operation_id(self, call: GatewayCall) -> str:
         record = _load(self._record_bytes)
         return _sha(
@@ -972,95 +1282,113 @@ class Gateway:
             ):
                 raise OperationConflict("cached billing evidence differs")
             return envelope
-        _review(current["review"], fresh=True)
-        self.ledger.authorize_dispatch()
-        operation = self.ledger.reserve(operation_id, request_hash, spec.reserve_microusd())
-        if operation.status != "reserved":
-            raise PendingOperation("attempt may already be billed; no automatic retry")
-        reviewed = _object(_object(current["review"])["credential_sha256"])
-        prepared = self.transport.prepare(
-            operation_id, replace(call, headers=headers), spec, _text(reviewed.get(spec.provider))
-        )
-        try:
-            if not self.ledger.dispatch(operation_id):
-                raise PendingOperation("another caller already claimed this physical attempt")
-            interruption: KeyboardInterrupt | SystemExit | None = None
-            try:
-                envelope = self.transport.send_prepared(prepared)
-                if not isinstance(envelope, RawEnvelope) or envelope.provider != spec.provider:
-                    raise ProviderUncertain("transport returned unsupported raw evidence")
-            except ReceivedReply as received:
-                envelope = received.envelope
-                interruption = received.interruption
-            except BaseException as error:
-                self.ledger.mark_unknown(operation_id)
-                if isinstance(error, (KeyboardInterrupt, SystemExit)):
-                    raise
-                raise ProviderUncertain("dispatched attempt has an uncertain outcome") from None
-
-            def make_receipt() -> dict[str, object]:
-                return {
-                    "format": "buddha.gateway-receipt.v1",
-                    "request": call.to_record(),
-                    "envelope": envelope.to_record(),
-                }
-
-            try:
-                receipt = make_receipt()
-            except (KeyboardInterrupt, SystemExit) as error:
-                receipt = make_receipt()
-                interruption = error
-            try:
-                request_id = envelope.provider_request_id or None
-            except WireError:
-                request_id = None
-            except (KeyboardInterrupt, SystemExit) as error:
-                request_id = None
-                interruption = error
-            try:
-                self.ledger.mark_unknown(
-                    operation_id, response=receipt, provider_request_id=request_id
+        with self.work(directory=self.directory, kind="gateway"):
+            _review(current["review"], fresh=True)
+            self.ledger.authorize_dispatch()
+            operation = self.ledger.reserve(operation_id, request_hash, spec.reserve_microusd())
+            if operation.status != "reserved":
+                raise PendingOperation("attempt may already be billed; no automatic retry")
+            review = _object(current["review"])
+            keyed = review.get("format") == _ACCOUNT_REVIEW_V2
+            reviewed = _object(review["credential_fingerprints" if keyed else "credential_sha256"])
+            args = (
+                operation_id,
+                replace(call, headers=headers),
+                spec,
+                _text(reviewed.get(spec.provider)),
+            )
+            # Keep the original four-argument route for legacy transports/reviews.
+            prepared = (
+                self.transport.prepare(
+                    *args, credential_context=_digest(review["credential_context"])
                 )
-            except (KeyboardInterrupt, SystemExit) as error:
-                self.ledger.mark_unknown(
-                    operation_id, response=receipt, provider_request_id=request_id
-                )
-                interruption = error
+                if keyed
+                else self.transport.prepare(*args)
+            )
             try:
-                usage = extract_usage(envelope)
-                if (
-                    not usage.provider_request_id
-                    or usage.model not in _texts(profile["response_models"])
-                    or usage.service_tier not in _texts(profile["response_tiers"], blank=True)
+                if not self.ledger.dispatch(operation_id):
+                    raise PendingOperation("another caller already claimed this physical attempt")
+                interruption: KeyboardInterrupt | SystemExit | None = None
+                try:
+                    envelope = self.transport.send_prepared(prepared)
+                    if not isinstance(envelope, RawEnvelope) or envelope.provider != spec.provider:
+                        raise ProviderUncertain("transport returned unsupported raw evidence")
+                except ReceivedReply as received:
+                    envelope = received.envelope
+                    interruption = received.interruption
+                except BaseException as error:
+                    self.ledger.mark_unknown(operation_id)
+                    if isinstance(error, (KeyboardInterrupt, SystemExit)):
+                        raise
+                    raise ProviderUncertain("dispatched attempt has an uncertain outcome") from None
+
+                def make_receipt() -> dict[str, object]:
+                    return {
+                        "format": "buddha.gateway-receipt.v1",
+                        "request": call.to_record(),
+                        "envelope": envelope.to_record(),
+                    }
+
+                try:
+                    receipt = make_receipt()
+                except (KeyboardInterrupt, SystemExit) as error:
+                    receipt = make_receipt()
+                    interruption = error
+                try:
+                    request_id = envelope.provider_request_id or None
+                except WireError:
+                    request_id = None
+                except (KeyboardInterrupt, SystemExit) as error:
+                    request_id = None
+                    interruption = error
+                try:
+                    self.ledger.mark_unknown(
+                        operation_id, response=receipt, provider_request_id=request_id
+                    )
+                except (KeyboardInterrupt, SystemExit) as error:
+                    self.ledger.mark_unknown(
+                        operation_id, response=receipt, provider_request_id=request_id
+                    )
+                    interruption = error
+                try:
+                    usage = extract_usage(envelope)
+                    if (
+                        not usage.provider_request_id
+                        or usage.model not in _texts(profile["response_models"])
+                        or usage.service_tier not in _texts(profile["response_tiers"], blank=True)
+                    ):
+                        raise WireError("received model/tier is outside the verified profile")
+                except WireError:
+                    if interruption is not None:
+                        raise interruption from None
+                    raise ProviderUncertain(
+                        "raw receipt retained; billing remains uncertain"
+                    ) from None
+                actual = spec.cost_microusd(usage.input_tokens, usage.output_tokens)
+                if actual <= spec.reserve_microusd() and (
+                    usage.input_tokens > spec.input_token_ceiling
+                    or usage.output_tokens > spec.max_output_tokens
                 ):
-                    raise WireError("received model/tier is outside the verified profile")
-            except WireError:
+                    raise BoundBreach(
+                        "raw usage exceeds verified token bounds; reservation retained"
+                    )
+                try:
+                    self.ledger.complete(
+                        operation_id,
+                        response=receipt,
+                        actual_microusd=actual,
+                        provider_request_id=usage.provider_request_id,
+                    )
+                except (KeyboardInterrupt, SystemExit) as error:
+                    self.ledger.complete(
+                        operation_id,
+                        response=receipt,
+                        actual_microusd=actual,
+                        provider_request_id=usage.provider_request_id,
+                    )
+                    interruption = error
                 if interruption is not None:
-                    raise interruption from None
-                raise ProviderUncertain("raw receipt retained; billing remains uncertain") from None
-            actual = spec.cost_microusd(usage.input_tokens, usage.output_tokens)
-            if actual <= spec.reserve_microusd() and (
-                usage.input_tokens > spec.input_token_ceiling
-                or usage.output_tokens > spec.max_output_tokens
-            ):
-                raise BoundBreach("raw usage exceeds verified token bounds; reservation retained")
-            try:
-                self.ledger.complete(
-                    operation_id,
-                    response=receipt,
-                    actual_microusd=actual,
-                    provider_request_id=usage.provider_request_id,
-                )
-            except (KeyboardInterrupt, SystemExit) as error:
-                self.ledger.complete(
-                    operation_id,
-                    response=receipt,
-                    actual_microusd=actual,
-                    provider_request_id=usage.provider_request_id,
-                )
-                interruption = error
-            if interruption is not None:
-                raise interruption
-            return envelope
-        finally:
-            prepared.close()
+                    raise interruption
+                return envelope
+            finally:
+                prepared.close()
