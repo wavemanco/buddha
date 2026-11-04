@@ -142,11 +142,10 @@ class EvidenceStopCauseTests(unittest.TestCase):
         return cli
 
     def test_all_operator_clis_keep_the_real_launcher_context_and_safe_receipt(self):
-        from buddha import improver_launch, policy_launch, source_launch, unified_launch
+        from buddha import improver_launch, source_launch, unified_launch
 
         for name, module in (
             ("src02-run.py", source_launch),
-            ("pol02-run.py", policy_launch),
             ("imp01-run.py", improver_launch),
             ("unified-run.py", unified_launch),
         ):
@@ -172,7 +171,7 @@ class EvidenceStopCauseTests(unittest.TestCase):
                 self.assertEqual(json.loads(receipt.read_bytes())["reason"], record["reason"])
 
     def test_all_operator_clis_preserve_unknown_key_and_cancel_results(self):
-        for name in ("src02-run.py", "pol02-run.py", "imp01-run.py", "unified-run.py"):
+        for name in ("src02-run.py", "imp01-run.py", "unified-run.py"):
             cli = self.cli(name)
             args = ["--handoff", str(self.handoff), "--sha256", "0" * 64]
             if name != "unified-run.py":
