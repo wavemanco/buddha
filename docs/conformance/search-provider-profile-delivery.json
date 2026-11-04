@@ -2,7 +2,7 @@
   "format": "buddha.search-provider-profile-delivery.v1",
   "date": "2026-11-04",
   "recorded_utc": "2026-11-04T10:38:27.793191+00:00",
-  "status": "implemented_focused_checks_pass_hosted_pending",
+  "status": "implemented_short_ci_pass_full_qualification_open",
   "plan_item": "IMP-01",
   "design_sections": [
     5,
@@ -136,7 +136,6 @@
   ],
   "remaining": [
     "Inspect remaining jobs of the original approved full run",
-    "Exact repair-source short CI",
     "A new explicit decision before any corrected-source long qualification",
     "Rebind history preparation only to the selected qualified source before a separate approval"
   ],
@@ -158,5 +157,27 @@
     "expected_census_sha256": "95c997757a2ccfa2a085e611bb7ae9fb3046158e8d20924bbd60b25f0087529c",
     "quality_steps_successful": 35,
     "windows_and_overall_result_pending": true
+  },
+  "hosted_short_ci": {
+    "source_head": "25ccd2f88ddfff6daae683dfdeb4be8a119e9ded",
+    "run_id": 41817329552,
+    "both_os_jobs": "success",
+    "tests_per_os": 445,
+    "all14_quality_steps": "success",
+    "linux_test_seconds": 52.575,
+    "windows_test_seconds": 143.7,
+    "logs": {
+      "hosted-fast-linux-126531300201.log": {
+        "path": "runs/checks/search-verification-repair-20261104-v1/hosted-fast-linux-126531300201.log",
+        "sha256": "c17d8f95a0bf1dd31923282e482b065ae3c6f97e38a64b7d55be4a2d3051b4a5",
+        "summary": "Ran 445 tests in 52.575s"
+      },
+      "hosted-fast-windows-126531299798.log": {
+        "path": "runs/checks/search-verification-repair-20261104-v1/hosted-fast-windows-126531299798.log",
+        "sha256": "e957d8fb1c3aa0a9c3f37d66faf559a018d831cc76cfe34d61f4beac31e5c03e",
+        "summary": "Ran 445 tests in 143.700s"
+      }
+    },
+    "log_encoding": "Connector-decoded text normalized to LF; original HTTP byte encoding not claimed"
   }
 }
