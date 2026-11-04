@@ -140,13 +140,9 @@ class ProposalCapacityNumbersTests(unittest.TestCase):
             )
 
     def test_enabled_helper_closure_preserves_legacy_defaults(self):
-        from buddha import source_handoff, source_launch, source_search
+        from buddha import source_search
 
         helper = Path(self.api.__file__).absolute()
-        for module in (source_handoff, source_launch):
-            with self.subTest(module=module.__name__):
-                self.assertNotIn(helper, module._sources())
-                self.assertIn(helper, module._sources(proposal_capacity=True))
         self.assertNotIn(helper, source_search._sources())
 
     def test_completed_raw_receipt_needs_exact_original_reserve_and_usage_charge(self):

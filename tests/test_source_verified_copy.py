@@ -101,7 +101,6 @@ class SourceVerifiedCopyTests(unittest.TestCase):
 
     def test_default_copy_roundtrip_binds_both_paths_preserves_lineage_and_resumes_same_owner(self):
         from buddha import candidate_generation, source_screen, source_search
-        from buddha.source_launch import _planned_owners
 
         h = witnesses._Harness(self, iterations=2)
         case = h.case
@@ -245,9 +244,30 @@ class SourceVerifiedCopyTests(unittest.TestCase):
             selected = copy.deepcopy(original_generation["selection"])
             selected["components"]["agent"] = inventory(expected)
             self.assertEqual(bound["selection"], selected)
+        # Independent expected geometry for this fixed two-child fixture.
+        screens = ("seed", "iterations/0/screen", "iterations/1/screen")
+        expected_owners = (
+            {
+                case.directory / screen / "tasks" / str(task) / role
+                for screen in screens
+                for task in range(2)
+                for role in (
+                    "generation/owners/0",
+                    "evaluation/owners/1",
+                    "evaluation/owners/2",
+                    "evaluation/owners/3",
+                )
+            }
+            | {
+                case.directory / stage / role
+                for stage in ("seed-witness", "iterations/0/witness", "iterations/1/witness")
+                for role in ("proposal/owners/0", "generation/owners/0")
+            }
+            | {case.directory / "iterations" / str(i) / "proposal/owners/0" for i in range(2)}
+        )
         self.assertEqual(
             {Path(row["directory"]) for row in case.authority.summary()["runs"]},
-            _planned_owners(case.directory, case.seed, 2, mutation_witness=True),
+            expected_owners,
         )
         before = case.h.files(case.directory), case.authority.summary(), case.engine.physical_sends
         with patch.object(

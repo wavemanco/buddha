@@ -931,5 +931,42 @@ class SourceSearchTests(unittest.TestCase):
         self.assertEqual(self.engine.physical_sends, 0)
 
 
+class SourceInterruptionTests(unittest.TestCase):
+    def test_original_controller_cancellation_carries_detached_saved_observation(self):
+        f = SourceSearchTests("runTest").fixture(iterations=1)
+        self.addCleanup(f.doCleanups)
+        f.prepare()
+        with (
+            patch("buddha.source_screen.run_source_screen", side_effect=KeyboardInterrupt),
+            self.assertRaises(KeyboardInterrupt) as caught,
+        ):
+            f.run_api(f.directory, transport=RawHTTPTransport(allow_paid=False))
+        path = f.directory / "observations/0.json"
+        saved = json.loads(path.read_bytes())
+        self.assertEqual(saved["reason"], "cancelled")
+        self.assertEqual(caught.exception.partial, saved)
+        caught.exception.partial["reason"] = "changed by caller"
+        self.assertEqual(json.loads(path.read_bytes())["reason"], "cancelled")
+        self.assertEqual(f.engine.physical_sends, 0)
+
+    def test_original_controller_protocol_stop_carries_detached_saved_observation(self):
+        f = SourceSearchTests("runTest").fixture(iterations=1)
+        self.addCleanup(f.doCleanups)
+        f.prepare()
+        with (
+            patch("buddha.source_screen.run_source_screen", side_effect=ValueError("UNSAFE-TEXT")),
+            self.assertRaises(f.Error) as caught,
+        ):
+            f.run_api(f.directory, transport=RawHTTPTransport(allow_paid=False))
+        path = f.directory / "observations/0.json"
+        saved = json.loads(path.read_bytes())
+        self.assertEqual(saved["reason"], "protocol")
+        self.assertEqual(caught.exception.partial, saved)
+        caught.exception.partial["reason"] = "changed by caller"
+        self.assertEqual(json.loads(path.read_bytes())["reason"], "protocol")
+        self.assertNotIn("UNSAFE-TEXT", path.read_text())
+        self.assertEqual(f.engine.physical_sends, 0)
+
+
 if __name__ == "__main__":
     unittest.main()

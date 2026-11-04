@@ -60,30 +60,6 @@ class FullFeedbackCapacityTests(unittest.TestCase):
             (f.h.files(f.h.root), authority.path.read_bytes(), f.h.engine.physical_sends), before
         )
 
-    def test_launch_relays_exact_saved_feedback_capacity_stop(self):
-        from buddha.source_launch import _public_result
-
-        partial = {
-            "format": "buddha.source-search-observation.v1",
-            "status": "incomplete",
-            "reason": "feedback_capacity",
-            "observation": "observations/7.json",
-            "iteration": 2,
-            "stage": "feedback",
-        }
-        original = dict(partial)
-        self.assertEqual(
-            _public_result(partial),
-            {
-                "status": "incomplete",
-                "reason": "feedback_capacity",
-                "observation": "observations/7.json",
-                "iteration": 2,
-                "stage": "feedback",
-            },
-        )
-        self.assertEqual(partial, original)
-
     def test_bounded_encoder_preserves_canonical_bytes_at_exact_byte_ceiling(self):
         from buddha.source_feedback import SourceFeedbackTooLarge, _bounded_json
 
