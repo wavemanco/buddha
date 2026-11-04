@@ -53,12 +53,18 @@ code change. It does not start an experiment.
 
 ## Current-source history-check preparation
 
-The retained November 4 preparation targets frozen application source
-`3f73142a`, including the performance work, code retirement and safety/outcome
-fixes. Its full qualification exposed passive provider-profile failures while
-other jobs continue. The pack remains unexecuted. Rebind it to the selected
-qualified correction before seeking history approval; the full-CI approval does
-not authorize construction. [PLAN.md](PLAN.md) owns that decision.
+The current preparation binds a clean, detached checkout of main's
+`eacf8b8b` source. The source checkout is separate from this documentation PR,
+so later documentation edits do not change the executing source binding.
+The [current preparation record](conformance/current-history-preparation.json)
+identifies the exact source, scripts, fixture inputs, hashes and output paths.
+
+The earlier [integrated-v2 preparation](conformance/integrated-history-preparation.json)
+remains a dated, unexecuted record for `3f73142a`. That source's full test run
+failed; the corrected `6e163032` source later passed full qualification. Current
+source includes the separately reviewed unused-hook removal and has short-CI
+evidence. The older full result does not qualify this later source. Exact-source
+full qualification remains required before paid execution.
 
 The workload stays the same: build a synthetic history with 193 owners, 660
 recorded operations, nine admitted decisions and no unresolved spending, then
@@ -68,14 +74,18 @@ means the read was never tested. There is no automatic retry or continuation.
 
 The original eight public fixture files are kept in a separate, pinned input
 directory. Seven match the current checkout; the eighth differs only by an
-appended test class. The fixture files and current application files have
+appended test class. The fixture files and the current 342 Python files have
 separate hashes and real file origins. This preserves the old v4 workload while
 using the current application. It does not test a full v5 study or establish live
 capacity, memory use, improved scores or a better improver.
 
-The [preparation record](conformance/integrated-history-preparation.json) binds
-the concrete files and limits. Independent static review and six small checks of
-the extracted file-origin helpers pass; no fixture or history workload ran.
-Execution needs a new approval after full qualification and immediate
-source/output checks. No operator command is cleared yet, and no action is needed
-in PowerShell.
+Preparation checks cover source/fixture hashes, unchanged workload and guard
+syntax, actual source identity, file-origin helpers and all eight fresh output
+destinations. They do not run fixture imports, history construction or the fresh
+reader. No paid calls, real containers or original paid-run records are used.
+
+Nothing needs running in PowerShell yet. One new, explicit approval is required
+before executing this exact history package, followed by immediate source,
+script, fixture and output-path checks. Earlier attempt allowances are consumed;
+none transfers to this package. Preparation supplies no retry, resume, extension
+or spending permission. [PLAN.md](PLAN.md) owns the next decision.
