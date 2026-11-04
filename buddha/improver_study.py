@@ -1242,7 +1242,11 @@ def _witness(
 
 
 def _select(
-    state: dict[str, Any], references: list[dict[str, object]], iteration: int
+    state: dict[str, Any],
+    references: list[dict[str, object]],
+    iteration: int,
+    *,
+    completed: list[source_screen_results._CompletedScreenRead] | None = None,
 ) -> dict[str, Any]:
     selection = state["record"]["selection"]
     return source_screen.select_source_parent(
@@ -1251,17 +1255,23 @@ def _select(
         max_active=selection["max_active"],
         seed=selection["seed"],
         iteration=iteration,
+        **({"_completed_screens": completed} if completed is not None else {}),
     )
 
 
 def _parent_source(
-    reader: NativeEvidence, state: dict[str, Any], start: int, reference: dict[str, object]
+    reader: NativeEvidence,
+    state: dict[str, Any],
+    start: int,
+    reference: dict[str, object],
+    *,
+    completed: source_screen_results._CompletedScreenRead | None = None,
 ) -> tuple[Path, str]:
     directory = _path_value(reference["directory"])
     if directory.is_relative_to(reader.root / "common"):
         path = reader.root / "inputs/starts" / str(start) / "candidate.py"
     else:
-        _, parent = shared._parent_evidence(reader, reference)
+        _, parent = shared._parent_evidence(reader, reference, completed=completed)
         path = (
             _path_value(_object(_object(parent.to_record()["generation"])["roots"])["agent"])
             / "candidate.py"
@@ -1275,7 +1285,7 @@ def _parent_source(
     digest = hashlib.sha256(raw).hexdigest()
     if (
         pipeline._sha({"candidate.py": digest})
-        != shared._read_ref(reader, reference)["candidate_id"]
+        != shared._read_ref(reader, reference, completed=completed)["candidate_id"]
     ):
         raise ImproverStudyError("literal task parent is not its measured original candidate")
     return path, digest
@@ -1362,15 +1372,25 @@ def _plan(
     previous: list[dict[str, Any]],
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     start, _, arm, slot = coordinate
-    selection = _select(state, pool, slot)
+    completed: list[source_screen_results._CompletedScreenRead] | None = None
+    if source_screen_results._read_context(reader.root) is not None:
+        completed = []
+        for reference in pool:
+            retained: list[source_screen_results._CompletedScreenRead] = []
+            shared._read_ref(reader, reference, capture=True, retained=retained)
+            completed.append(retained[0])
+    selection = _select(state, pool, slot, completed=completed)
     matches = [
-        ref
-        for ref in pool
-        if shared._read_ref(reader, ref)["candidate_id"] == selection["selected_id"]
+        (ref, completed[index] if completed is not None else None)
+        for index, ref in enumerate(pool)
+        if shared._read_ref(
+            reader, ref, completed=completed[index] if completed is not None else None
+        )["candidate_id"]
+        == selection["selected_id"]
     ]
     if len(matches) != 1:
         raise ImproverStudyError("cell has no unique original eligible selected task parent")
-    parent = matches[0]
+    parent, parent_read = matches[0]
     location = _location(reader.root, coordinate)
     packet = location / "feedback"
     improver = Selection.from_bytes(
@@ -1389,6 +1409,7 @@ def _plan(
             improver_agent_sha256=improver,
             comparison=comparison,
             existing=packet.exists(),
+            _completed_screen=parent_read if "parent" in comparison else None,
         )
         if comparison is not None
         else (
@@ -1399,15 +1420,23 @@ def _plan(
                 existing=packet.exists(),
                 full_answers=True,
                 improver_agent_sha256=improver,
+                completed=parent_read,
             )
             if failures
             else (
-                source_feedback._build(packet, parent, existing=packet.exists(), full_answers=True)
+                source_feedback._build(
+                    packet,
+                    parent,
+                    existing=packet.exists(),
+                    full_answers=True,
+                    parent_screen=parent_read.screen if parent_read is not None else None,
+                    completed=parent_read,
+                )
             )
         )
     )
     hashes = {name + ".json": pipeline._sha(bundle[name]) for name in shared._FILES}
-    source_path, source_sha = _parent_source(reader, state, start, parent)
+    source_path, source_sha = _parent_source(reader, state, start, parent, completed=parent_read)
     section = _operator(state["record"], arm, state["screens"][start])
     descriptor = {
         "format": "buddha.candidate-improvement.v2",
@@ -1431,6 +1460,9 @@ def _plan(
         "proposal_descriptor": descriptor,
         **({"feedback_comparison": comparison} if comparison is not None else {}),
     }
+    if completed is not None:
+        for reference, checked in zip(pool, completed, strict=True):
+            shared._read_ref(reader, reference, completed=checked)
     return plan, bundle
 
 

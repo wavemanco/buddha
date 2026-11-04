@@ -17,7 +17,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import cast
 
-from buddha import candidate_generation, source_screen, trial_fence
+from buddha import candidate_generation, source_screen, source_screen_results, trial_fence
 from buddha import native_pipeline as pipeline
 from buddha.answers import TaskSet, _utf8
 from buddha.doctor import _Capture
@@ -487,9 +487,15 @@ def _relation_policy(
 class _FeedbackEvidence:
     """Shared custody checks for original proposed parent-child edges."""
 
-    def __init__(self, directory: Path, base: dict[str, object]) -> None:
+    def __init__(
+        self,
+        directory: Path,
+        base: dict[str, object],
+        completed: source_screen_results._CompletedScreenRead | None = None,
+    ) -> None:
         self.directory = directory
         self.base = base
+        self.completed = completed
         self.provenance = _object(base["provenance"])
         self.authorization = pipeline._absolute(
             _object(self.provenance["reference"])["authorization"]
@@ -533,7 +539,15 @@ class _FeedbackEvidence:
         location = pipeline._absolute(ref["directory"])
         raw = self.consume(location / "report.json", ref["report_sha256"])
         observation = _COMPARISON_OBSERVATION.get()
-        if observation is None:
+        retained = self.completed
+        if retained is not None and location == retained.reader.root:
+            checked = source_screen_results._reuse_completed_screen(
+                retained, location, self.authorization, _digest(ref["report_sha256"])
+            )
+            report = _load(checked.report_raw)
+            if observation is not None:
+                observation.checks.append(checked.reader.finish)
+        elif observation is None:
             report = source_screen.inspect_source_screen(
                 location,
                 authorization=self.authorization,
@@ -709,6 +723,7 @@ def _build_failures(
     full_answers: bool = True,
     improver_agent_sha256: str | None = None,
     sink: _Capture | None = None,
+    completed: source_screen_results._CompletedScreenRead | None = None,
 ) -> dict[str, object]:
     """Rebuild checked history, including at a private partial-write destination."""
     if type(history) not in {list, tuple} or not 1 <= len(history) <= 8:
@@ -716,13 +731,24 @@ def _build_failures(
     improver = _digest(improver_agent_sha256) if improver_agent_sha256 is not None else None
     if improver is not None and full_answers is not True:
         raise SourceFeedbackError("frozen-improver failures require complete development outputs")
+    if completed is not None and (
+        type(completed) is not source_screen_results._CompletedScreenRead or sink is not None
+    ):
+        raise SourceFeedbackError("failure feedback needs its private completed screen read")
     directory = _destination(directory, existing=existing)
     if existing:
         _packet_files(directory, partial=True)
     base = (
         _build(directory, reference, existing=existing, full_answers=full_answers, sink=sink)
         if sink is not None
-        else _build(directory, reference, existing=existing, full_answers=full_answers)
+        else _build(
+            directory,
+            reference,
+            existing=existing,
+            full_answers=full_answers,
+            parent_screen=completed.screen if completed is not None else None,
+            completed=completed,
+        )
     )
     provenance = _object(base["provenance"])
     measured_sha256 = _sha(_json(provenance))
@@ -959,6 +985,13 @@ def _build_failures(
         )
     raw_base = _bounded_json(base, MAX_JSON_BYTES) if full_answers else _json(base)
     evidence.recheck()
+    if completed is not None:
+        source_screen_results._reuse_completed_screen(
+            completed,
+            pipeline._absolute(reference["directory"]),
+            pipeline._absolute(reference["authorization"]),
+            _digest(reference["report_sha256"]),
+        )
     return _load(raw_base)
 
 
@@ -1193,6 +1226,7 @@ def _build_comparison(
     *,
     existing: bool = False,
     improver_agent_sha256: str | None = None,
+    completed: source_screen_results._CompletedScreenRead | None = None,
 ) -> dict[str, object]:
     """Opt-in complete current/parent evidence, without changing legacy derivation."""
     edge = _object(comparison, {"parent", "proposal", "screen"})
@@ -1200,6 +1234,8 @@ def _build_comparison(
         raise SourceFeedbackError("comparison must name the exact current screen reference")
     directory = _destination(directory, existing=existing)
     improver = _digest(improver_agent_sha256) if improver_agent_sha256 is not None else None
+    if completed is not None and type(completed) is not source_screen_results._CompletedScreenRead:
+        raise SourceFeedbackError("comparison feedback needs its private completed screen read")
     with _comparison_observation() as observation:
         if directory in observation.active:
             raise SourceFeedbackError("comparison ancestry repeats a packet")
@@ -1214,14 +1250,21 @@ def _build_comparison(
                     history,
                     existing=existing,
                     improver_agent_sha256=improver,
+                    completed=completed,
                 )
                 if history
-                else _build(directory, reference, existing=existing)
+                else _build(
+                    directory,
+                    reference,
+                    existing=existing,
+                    parent_screen=completed.screen if completed is not None else None,
+                    completed=completed,
+                )
             )
             provenance = _object(base["provenance"])
             base_format = provenance["format"]
             base_sha256 = _sha(_json(provenance))
-            evidence = _FeedbackEvidence(directory, base)
+            evidence = _FeedbackEvidence(directory, base, completed)
             checked, parent, current, proposal, returned = evidence.edge(edge, improver)
             if any(item.get("disposition", "screened") != "screened" for item in (parent, current)):
                 raise SourceFeedbackError("comparison needs two complete measured screens")
@@ -1343,6 +1386,13 @@ def _build_comparison(
             result = _load(_bounded_json(base, MAX_JSON_BYTES))
             if len(observation.active) == 1:
                 _finish_comparison(observation)
+            if completed is not None:
+                source_screen_results._reuse_completed_screen(
+                    completed,
+                    pipeline._absolute(reference["directory"]),
+                    pipeline._absolute(reference["authorization"]),
+                    _digest(reference["report_sha256"]),
+                )
             return result
         finally:
             observation.active.remove(directory)
@@ -1356,6 +1406,7 @@ def build_source_feedback(
     improver_agent_sha256: str | None = None,
     comparison: dict[str, object] | None = None,
     existing: bool = False,
+    _completed_screen: source_screen_results._CompletedScreenRead | None = None,
 ) -> dict[str, object]:
     """Build detached prospective records, without writing or creating owners."""
     try:
@@ -1363,6 +1414,11 @@ def build_source_feedback(
             raise SourceFeedbackError("feedback destination mode requires a literal boolean")
         if type(failure_history) not in {list, tuple}:
             raise SourceFeedbackError("failure history requires an ordered literal sequence")
+        if _completed_screen is not None and (
+            type(_completed_screen) is not source_screen_results._CompletedScreenRead
+            or comparison is None
+        ):
+            raise SourceFeedbackError("feedback reuse needs its private completed parent edge")
         if comparison is not None:
             builder = (
                 _build_root_comparison
@@ -1371,6 +1427,8 @@ def build_source_feedback(
                 if "study_root" in comparison
                 else _build_comparison
             )
+            if _completed_screen is not None and builder is not _build_comparison:
+                raise SourceFeedbackError("completed screen reuse requires its direct parent edge")
             return builder(
                 directory,
                 reference,
@@ -1378,6 +1436,7 @@ def build_source_feedback(
                 failure_history,
                 existing=existing,
                 improver_agent_sha256=improver_agent_sha256,
+                **({"completed": _completed_screen} if _completed_screen is not None else {}),
             )
         return (
             _build_failures(

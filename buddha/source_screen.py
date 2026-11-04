@@ -1303,6 +1303,7 @@ def select_source_parent(
     max_active: int,
     seed: int,
     iteration: int,
+    _completed_screens: Sequence[object] | None = None,
 ) -> dict[str, object]:
     if type(references) not in {list, tuple} or not 1 <= len(references) <= 256:
         raise SourceScreenError("source parent pool needs 1..256 explicit complete references")
@@ -1311,6 +1312,10 @@ def select_source_parent(
     _integer(max_active, 2, 64)
     _integer(seed, 0)
     _integer(iteration, 0)
+    if _completed_screens is not None and (
+        type(_completed_screens) not in {list, tuple} or len(_completed_screens) != len(references)
+    ):
+        raise SourceScreenError("parent reuse needs one exact completed read per reference")
     admissions: list[dict[str, object]] = []
     seen: set[str] = set()
     key: str | None = None
@@ -1318,13 +1323,24 @@ def select_source_parent(
     profiles: list[tuple[dict[str, object], str]] = []
     control_records: list[dict[str, object]] = []
     eligible: list[dict[str, object]] = []
-    for value in references:
+    for ordinal, value in enumerate(references):
         reference = _object(value, {"directory", "authorization", "report_sha256"})
-        report = inspect_source_screen(
-            pipeline._absolute(reference["directory"]),
-            authorization=pipeline._absolute(reference["authorization"]),
-            expected_report_sha256=_digest(reference["report_sha256"]),
-        )
+        if _completed_screens is None:
+            report = inspect_source_screen(
+                pipeline._absolute(reference["directory"]),
+                authorization=pipeline._absolute(reference["authorization"]),
+                expected_report_sha256=_digest(reference["report_sha256"]),
+            )
+        else:
+            from buddha.source_screen_results import _reuse_completed_screen
+
+            checked = _reuse_completed_screen(
+                _completed_screens[ordinal],
+                pipeline._absolute(reference["directory"]),
+                pipeline._absolute(reference["authorization"]),
+                _digest(reference["report_sha256"]),
+            )
+            report = _load(checked.report_raw)
         identifier = _digest(report["candidate_id"])
         comparison = _digest(report["comparison_key"])
         control = _digest(report["controls_sha256"])

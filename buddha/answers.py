@@ -150,6 +150,7 @@ def _selected[Row](
 @dataclass(frozen=True)
 class TaskSet(_Artifact):
     _population_rows: tuple[tuple[Task, str], ...] = field(init=False, repr=False, compare=False)
+    _selected_tasks: tuple[Task, ...] = field(init=False, repr=False, compare=False)
 
     def __post_init__(self) -> None:
         record = _object(
@@ -188,6 +189,7 @@ class TaskSet(_Artifact):
                 for task, row in population.values()
             ),
         )
+        object.__setattr__(self, "_selected_tasks", tuple(task for task, _ in selected))
 
     @classmethod
     def from_dataset(cls, release: Release, raw: bytes) -> Self:
@@ -239,6 +241,7 @@ class TaskSet(_Artifact):
         # Only selection changes; its source and immutable validated rows stay shared.
         derived = copy(self)
         object.__setattr__(derived, "data", data)
+        object.__setattr__(derived, "_selected_tasks", tuple(selected))
         return derived
 
     def _selected_rows(self, ordered_ids: object) -> list[tuple[Task, str]]:
@@ -246,6 +249,8 @@ class TaskSet(_Artifact):
 
     @property
     def tasks(self) -> tuple[Task, ...]:
+        if type(self) is TaskSet:
+            return self._selected_tasks
         return tuple(
             Task(_id(row["id"]), _utf8(row["prompt"]), _count(row["count"]))
             for value in cast(list[object], self.to_record()["tasks"])

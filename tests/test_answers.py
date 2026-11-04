@@ -611,5 +611,89 @@ class TaskPopulationReuseTests(unittest.TestCase):
             module._native(self.answer_record([1]), invalid_view)
 
 
+class SelectedTaskViewTests(unittest.TestCase):
+    def setUp(self):
+        self.fixture = TaskPopulationReuseTests("runTest")
+        self.fixture.setUp()
+
+    def test_first_and_repeated_selected_views_do_not_decode_or_rebuild_tasks(self):
+        from buddha import answers as module
+
+        fixture = self.fixture
+        record = fixture.task_record(["1", 1])
+        tasks = TaskSet.from_bytes(json.dumps(record, indent=2).encode())
+        expected = tuple(Task(**row) for row in record["tasks"])
+        before = tasks.to_bytes(), tasks.fingerprint(), tasks.to_record()
+        with (
+            patch.object(module.json, "loads", wraps=json.loads) as decode,
+            patch.object(module, "Task", wraps=Task) as construct,
+        ):
+            views = [tasks.tasks for _ in range(5)]
+        self.assertEqual(views, [expected] * 5)
+        self.assertEqual(decode.call_count, 0)
+        self.assertEqual(construct.call_count, 0)
+        exposed = tasks.to_record()
+        exposed["tasks"][0]["prompt"] = "changed"
+        exposed["selection"].clear()
+        self.assertEqual(tasks.tasks, expected)
+        self.assertEqual((tasks.to_bytes(), tasks.fingerprint(), tasks.to_record()), before)
+        self.assertEqual(tasks, TaskSet.from_bytes(fixture.canonical(record)))
+        self.assertEqual(repr(tasks), "TaskSet()")
+        with self.assertRaises(FrozenInstanceError):
+            tasks.tasks[0].prompt = "changed"
+
+    def test_primed_views_and_copied_selections_reselect_full_typed_source(self):
+        import pickle
+
+        fixture = self.fixture
+        parent = fixture.tasks
+        self.assertEqual([task.id for task in parent.tasks], [1, "1", "outside"])
+        selected = parent.select(["1", 1])
+        self.assertEqual([task.id for task in selected.tasks], ["1", 1])
+        for name, operation in (
+            ("original", lambda value: value),
+            ("shallow", copy.copy),
+            ("deep", copy.deepcopy),
+            ("pickle", lambda value: pickle.loads(pickle.dumps(value))),
+        ):
+            with self.subTest(operation=name):
+                restored = operation(selected)
+                self.assertEqual(restored.tasks, selected.tasks)
+                derived = restored.select(["outside", "1"])
+                self.assertEqual([task.id for task in derived.tasks], ["outside", "1"])
+                self.assertEqual(derived.to_record(), fixture.task_record(["outside", "1"]))
+                reselected = derived.select([1])
+                self.assertEqual(reselected.tasks, (Task(**fixture.task_record([1])["tasks"][0]),))
+                raw = fixture.canonical(fixture.task_record([1]))
+                self.assertEqual(reselected.to_bytes(), raw)
+                self.assertEqual(reselected.fingerprint(), hashlib.sha256(raw).hexdigest())
+                answers = Answers.from_results(
+                    fixture.release,
+                    derived,
+                    fixture.answer_record(["outside", "1"])["outputs"],
+                    agent_sha256="d" * 64,
+                    metadata={"model": "synthetic"},
+                )
+                self.assertEqual(answers.native_bytes(), fixture.expected_native(["outside", "1"]))
+        self.assertEqual([task.id for task in parent.tasks], [1, "1", "outside"])
+        self.assertEqual([task.id for task in selected.tasks], ["1", 1])
+
+    def test_subclass_task_views_still_decode_dynamic_records(self):
+        view = [{"id": "dynamic", "prompt": "literal dynamic view", "count": 2}]
+
+        class DynamicTasks(TaskSet):
+            def to_record(self):
+                return super().to_record() | {"tasks": copy.deepcopy(view)}
+
+        fixture = self.fixture
+        tasks = DynamicTasks.from_bytes(fixture.canonical(fixture.task_record([1])))
+        self.assertEqual(tasks.tasks, (Task("dynamic", "literal dynamic view", 2),))
+        view[0] = {"id": 2, "prompt": "changed dynamic view", "count": 1}
+        self.assertEqual(tasks.tasks, (Task(2, "changed dynamic view", 1),))
+        view[0]["id"] = True
+        with self.assertRaises(ReleaseError):
+            _ = tasks.tasks
+
+
 if __name__ == "__main__":
     unittest.main()
