@@ -53,10 +53,12 @@ code change. It does not start an experiment.
 
 ## Current-source history-check preparation
 
-The next proposed check targets frozen application source `3f73142a`, including
-the retained performance work, code retirement and safety/outcome fixes. Its
-separate full qualification is now running. That approval does not authorize
-history construction.
+The retained November 4 preparation targets frozen application source
+`3f73142a`, including the performance work, code retirement and safety/outcome
+fixes. Its full qualification exposed passive provider-profile failures while
+other jobs continue. The pack remains unexecuted. Rebind it to the selected
+qualified correction before seeking history approval; the full-CI approval does
+not authorize construction. [PLAN.md](PLAN.md) owns that decision.
 
 The workload stays the same: build a synthetic history with 193 owners, 660
 recorded operations, nine admitted decisions and no unresolved spending, then

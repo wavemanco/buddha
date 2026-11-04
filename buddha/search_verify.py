@@ -82,6 +82,7 @@ _SOURCES = {
         "2477feaa8b16f3715f0ee2db5db7baedf3066969fd9128e6b773803ff2b3711f",
         "052b639a5c61317868ad19f8381aeecd6be880677eb642a07b65a2338b0bebd1",
         "17de071c1416afa32f9da32eb627e24264d8a0a848862fdf4853057125f18a02",
+        "f0e7a37d038f8a2a3454ed8fa4ca94b58eca623c5f7e7cc8bca0dec576433c73",
     },
     "buddha.ledger": {
         "7d53f6fd6b34e6ed7edd7bc44d1b7b0282e46a7d56f08fc664f244852fd1dcf4",
@@ -267,7 +268,10 @@ def _archive_contract(snapshot: dict[str, bytes], contracts: dict[str, object]) 
     needs_common = (
         needs_common
         or sources.get("buddha.provider")
-        == ("17de071c1416afa32f9da32eb627e24264d8a0a848862fdf4853057125f18a02")
+        in {
+            "17de071c1416afa32f9da32eb627e24264d8a0a848862fdf4853057125f18a02",
+            "f0e7a37d038f8a2a3454ed8fa4ca94b58eca623c5f7e7cc8bca0dec576433c73",
+        }
         or sources.get("buddha.ledger")
         == ("5c7e56f1e2c5e68046d6380ebacc03110300eae34d348d7dca683a0591d64130")
     )

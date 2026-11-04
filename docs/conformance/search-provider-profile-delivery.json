@@ -1,0 +1,162 @@
+{
+  "format": "buddha.search-provider-profile-delivery.v1",
+  "date": "2026-11-04",
+  "recorded_utc": "2026-11-04T10:38:27.793191+00:00",
+  "status": "implemented_focused_checks_pass_hosted_pending",
+  "plan_item": "IMP-01",
+  "design_sections": [
+    5,
+    9
+  ],
+  "basis_head": "cc8f4f4b71015622690a3a3b570d12cf2cff0052",
+  "problem": "Provider safety repair98cd8a8 changed the recorded source fingerprint, but the passive verifier did not recognize the exact new profile. It returned unsupported before lineage, proposal and report-cost replay checks.",
+  "full_qualification_observation": {
+    "run_id": 41810643300,
+    "source_head": "3f73142a441ad2fef0c7349983fe5ace42e5ff68",
+    "attempt": 1,
+    "observed_utc": "2026-11-04T10:35:41Z",
+    "successful_jobs": 1,
+    "failed_jobs": 2,
+    "running_jobs": 7,
+    "terminal_run_result": null,
+    "retry_started": false
+  },
+  "repair": {
+    "additional_provider_sha256": "f0e7a37d038f8a2a3454ed8fa4ca94b58eca623c5f7e7cc8bca0dec576433c73",
+    "required_common_sha256": "3a0a693a0f4a0f2eed3b858d0b3ac42148871dbca284e56e0e368726309393c0",
+    "unknown_profiles_still_unsupported": true,
+    "archive_code_remains_data": true
+  },
+  "source_files_sha256": {
+    "buddha/search_verify.py": "228be8d444f3e9631827ae695b798c559e370d75377a7a406dec670b5256522e",
+    "tests/test_search_verify.py": "d88b1d7d4fca11a43ff7583861c35564a1e5c0bb9038c001dbbbb5812515e6ee",
+    "ci_test_shard.py": "0af631ceea5d3f565da643332dc00f8c6708f01e06d0a4952d61977e066db130"
+  },
+  "pure_recipe_review": "Independent and root AST/diff checks confirm the provider change touches only HTTPTransport.send_prepared and BudgetBroker.execute. All other provider definitions, including ModelSpec, Call, Reply, _reply and _bounds, are unchanged. The passive verifier invokes neither changed method; its tests forbid broker execution, network and credential access.",
+  "verification": {
+    "original_two_methods": "RED: two ValidationError-not-raised assertions reproduce in2.103s",
+    "strengthened_three_methods": "RED: missing common not refused; both valid baselines return unsupported",
+    "entire_verifier_module": {
+      "status": "pass",
+      "tests": 20,
+      "process_seconds": 52.10252089984715,
+      "unittest_seconds": 51.821,
+      "deadline_seconds": 180
+    },
+    "independent_actual_diff_review": "pass; no blocker",
+    "lint_format_diff": "pass",
+    "strict_types": "pass on search_verify.py and ci_test_shard.py",
+    "security": "Bandit passes on changed production files",
+    "independent_review_module": {
+      "status": "pass",
+      "tests": 4,
+      "process_seconds": 21.902224800083786,
+      "unittest_seconds": 21.651,
+      "deadline_seconds": 180
+    },
+    "total_unique_methods_in_separate_runs": 24
+  },
+  "inventory_only": {
+    "fast_tests": 445,
+    "fast_census_sha256": "d73596fe2209053a33c0e58e234842b392e28ca47b6e3423412f8c623cc5c0f6",
+    "full_tests_per_os": 2204,
+    "full_counts": [
+      1,
+      556,
+      541,
+      582,
+      524
+    ],
+    "full_census_sha256": "3fb9771d4c2b7fa25557895d8758944c890ac8e0c150962521230e4119109164",
+    "partition_seed": 1688,
+    "test_bodies_executed_by_inventory": false
+  },
+  "fast_scope": "Two existing tamper tests with verified baselines and one new pure archived-helper dependency case; no whole-suite expansion.",
+  "records": {
+    "initial-two-methods.json": {
+      "path": "runs/checks/search-verification-repair-20261104-v1/initial-two-methods.json",
+      "sha256": "945e244ca6f222cdf91a042b6c177a49fd2c1b040be655b26f778ec28a63aa75"
+    },
+    "initial-two-methods.stderr.log": {
+      "path": "runs/checks/search-verification-repair-20261104-v1/initial-two-methods.stderr.log",
+      "sha256": "2852576abc547e431c5fa3af458bb4e34742f26ad56838f3d16682ba5fe9dc92"
+    },
+    "strengthened-three-red.json": {
+      "path": "runs/checks/search-verification-repair-20261104-v1/strengthened-three-red.json",
+      "sha256": "28bbf5cef4d03738985e1ff071c29d4ce54c23ffa482aa2c7dd77b540d7eaf61"
+    },
+    "strengthened-three-red.stderr.log": {
+      "path": "runs/checks/search-verification-repair-20261104-v1/strengthened-three-red.stderr.log",
+      "sha256": "413aff0b17f2399a453a8e2a2da57d4960f969f5915854e174e60b98f7b60dfd"
+    },
+    "module-green.json": {
+      "path": "runs/checks/search-verification-repair-20261104-v1/module-green.json",
+      "sha256": "16b5a3c21c947cc75e2e0ce7ef5634bea2f18f06eb53a05e2797e7c893a4fa7a"
+    },
+    "module-green.stderr.log": {
+      "path": "runs/checks/search-verification-repair-20261104-v1/module-green.stderr.log",
+      "sha256": "7e34c2e8aca7b3ec4885fd2f16f1c6ef2f66301fe266cd5b5de44ca6a28d41de"
+    },
+    "fast-inventory.txt": {
+      "path": "runs/checks/search-verification-repair-20261104-v1/fast-inventory.txt",
+      "sha256": "c40aa86a50216ce7d2743cdcc53db1ee4dff3d9b05b6cee46c7a004c4a08c313"
+    },
+    "full-inventory-header.json": {
+      "path": "runs/checks/search-verification-repair-20261104-v1/full-inventory-header.json",
+      "sha256": "1775dfcc8ca7f4e74af615bfeb5d0350a5bedb02fa910144bc19b8e98d84a131"
+    },
+    "review-module-green.json": {
+      "path": "runs/checks/search-verification-repair-20261104-v1/review-module-green.json",
+      "sha256": "71c94a989f14576e74a19f730221b3e76cf78b41d053bc60386d2538012475db"
+    },
+    "review-module-green.stderr.log": {
+      "path": "runs/checks/search-verification-repair-20261104-v1/review-module-green.stderr.log",
+      "sha256": "998cd683326383f5d588c0cd5294af6eeb3cb04c57e7640f1b905fdb3e84d002"
+    },
+    "linux-coverage-outcome-v1.json": {
+      "path": "runs/checks/premerge-qualification-route-20261104-v1/full-qualification-3f73142/linux-coverage-outcome-v1.json",
+      "sha256": "9ea8b4391d9aeff25401a9c4abcf5dc2d8c0774556abb3de2d0d74230e7032ff"
+    },
+    "root-linux-evidence-join-v1.json": {
+      "path": "runs/checks/premerge-qualification-route-20261104-v1/full-qualification-3f73142/root-linux-evidence-join-v1.json",
+      "sha256": "2a74cd1b4d663003f5fdb779824c500ad72857d9ba0526c811b91068a5c612e1"
+    }
+  },
+  "preserved": [
+    "All earlier provider profiles and validation checks",
+    "All original negative assertions",
+    "Frozen3f candidate and its one approved ongoing qualification",
+    "Original paid/synthetic partials and the unexecuted3f history pack",
+    "Official NoveltyBench settings, scientific modules, budgets and custody"
+  ],
+  "not_performed": [
+    "No new full qualification or retry",
+    "No history construction or replay of original experiment data",
+    "No model calls, keys, real containers or main merge"
+  ],
+  "remaining": [
+    "Inspect remaining jobs of the original approved full run",
+    "Exact repair-source short CI",
+    "A new explicit decision before any corrected-source long qualification",
+    "Rebind history preparation only to the selected qualified source before a separate approval"
+  ],
+  "original_full_linux_snapshot": {
+    "observed_at_utc": "2026-11-04T10:48:22.642361+00:00",
+    "head_sha": "3f73142a441ad2fef0c7349983fe5ace42e5ff68",
+    "jobs_terminal": 5,
+    "jobs_successful": 1,
+    "jobs_failed": 4,
+    "declared_and_observed_unique_methods": 2203,
+    "failed_unique_methods": 16,
+    "failure_assertions": 21,
+    "failure_modules": [
+      "test_search_verify",
+      "test_search_verify_review"
+    ],
+    "errors": 0,
+    "skipped_methods": 5,
+    "expected_census_sha256": "95c997757a2ccfa2a085e611bb7ae9fb3046158e8d20924bbd60b25f0087529c",
+    "quality_steps_successful": 35,
+    "windows_and_overall_result_pending": true
+  }
+}
