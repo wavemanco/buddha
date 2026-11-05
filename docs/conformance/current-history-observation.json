@@ -1,0 +1,164 @@
+{
+  "authorization": {
+    "automatic_retry_resume_extension": false,
+    "conditional_reader_limit_seconds": 900,
+    "consumed": true,
+    "launch": {
+      "path": "runs/checks/history-current-preparation-20261104-v3/approved-launch-v1.json",
+      "sha256": "7ee0e60e5dfd5b9d27295dbf7ea549ad135020fee9f5ddbee1c96694b428edf4"
+    },
+    "one_attempt": true,
+    "preflight": {
+      "path": "runs/checks/history-current-preparation-20261104-v3/approved-execution-preflight-v1.json",
+      "sha256": "71c58d644f47e8d0cc7039a898cde13a36f535aee7f29f48c6ceabc76df51a86"
+    },
+    "producer_limit_seconds": 10800,
+    "setup_hash_reporting_overhead_additional": true
+  },
+  "bound_scripts": {
+    "child": {
+      "path": "runs/checks/history-current-preparation-20261104-v3/scale-replay-child-reviewed-current-v3.py",
+      "sha256": "4d5e3bd25d520de86911de734c659904f3d7820570a0bfd3c488ac51fbdc5218"
+    },
+    "parent": {
+      "path": "runs/checks/history-current-preparation-20261104-v3/scale-replay-parent-reviewed-current-v3.py",
+      "sha256": "b194e59b344e92590979b1313cbd7d451431f7a54982e631b5d6d5d9b4ae5be3"
+    }
+  },
+  "client_timezone": "America/Los_Angeles",
+  "conclusions": [
+    "Construction did not establish the complete required cut within its allowance.",
+    "The 900-second reader was not run; this is not a measured reader deadline failure.",
+    "Pre/post application and fixture hashes match; no child terminal attestation exists after timeout.",
+    "Sparse action-return counts do not establish admissions, final owner census, final accounting or zero holds.",
+    "Synthetic fixtures do not measure creative quality, model-discovered source improvement or the full controlled study."
+  ],
+  "current_direction": {
+    "architectural_problem": "Live runner reconstructs full growing history before every action; read-only capture cannot simply be retained across writes",
+    "delivery_rule": "Smallest working end-to-end path before more orchestration; address repeated work at its root",
+    "implementation": "Continue Buddha; defer exact DGM adoption",
+    "new_paid_or_long_runs_authorized": false,
+    "next_preparation": "Separate forward execution responsibilities from historical inspection/recovery, reusing existing generation, official evaluation, complete feedback, source improvement and accounting boundaries",
+    "not_adopted": [
+      "DGM fork",
+      "another workflow platform",
+      "incremental replay/cache framework",
+      "cosmetic file move as a performance fix"
+    ],
+    "scientific_requirements": [
+      "Pinned official NoveltyBench 1.1 evaluation and outgoing settings remain authoritative",
+      "Generator model stays configurable; default low effort for reasoning models",
+      "Matched arms, resources, sampling/settings and declared comparisons",
+      "Prospective development/final separation and frozen analysis before new paid observations",
+      "Complete selected feedback, explicit failed opportunities, uncertainty and negative/partial outcomes",
+      "No engineering check is evidence of positive score or improver-effectiveness gains"
+    ],
+    "study_scope_unchanged": "Original three-development/26-final comparison and both plain-model references remain open; a smaller engineering proof does not complete or silently replace them"
+  },
+  "date": "2026-11-04",
+  "evidence": {
+    "binding": {
+      "path": "runs/checks/history-current-preparation-20261104-v3/scale-replay-binding-current-v3.json",
+      "sha256": "4d6f269c0f4070ff2f4451da08a880d41cb080ed9dac625ccb2d3374522a56fe"
+    },
+    "independent_terminal_review": {
+      "path": "runs/checks/history-current-preparation-20261104-v3/independent-terminal-review-v1.json",
+      "sha256": "b700be35e67b560bec894a50c7a220b92aad50f2845dbe50a0c6466b1b591657"
+    },
+    "manifest": {
+      "path": "runs/checks/history-current-preparation-20261104-v3/scale-replay-source-proposal-current-v3.json",
+      "sha256": "9bea5ae3fc2bd13123ae88c0db29f1256138258849c5c696098c92bf878dab9c"
+    },
+    "parent": {
+      "path": "runs/checks/history-current-preparation-20261104-v3/scale-replay-parent-result-current-v3.json",
+      "sha256": "3b03a366236437c88fb556fb0da387cb0e71aaac4e8c962cc5099f5b63a0645b"
+    },
+    "producer_stderr": {
+      "path": "runs/checks/history-current-preparation-20261104-v3/producer-stderr-current-v3.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "producer_stdout": {
+      "path": "runs/checks/history-current-preparation-20261104-v3/producer-stdout-current-v3.log",
+      "sha256": "ef6f8f158d1056ddcfc8433b6fab77f2d9fd7726b2c5d370a4b2aafd435726ff"
+    },
+    "root_postcheck": {
+      "path": "runs/checks/history-current-preparation-20261104-v3/root-terminal-postcheck-v1.json",
+      "sha256": "35786b93bf5a469c5817955f22560f9467f2ef2c9fe092a4824ea3cd0f09d23a"
+    }
+  },
+  "external_effects": {
+    "model_provider_calls": 0,
+    "new_full_qualification": false,
+    "original_paid_history_access": false,
+    "paid_execution_cleared": false,
+    "real_containers": 0
+  },
+  "format": "buddha.current-history-observation.v1",
+  "independent_verification": {
+    "no_final_census_or_admission_claim": true,
+    "original_processes_absent": [
+      54908,
+      69132
+    ],
+    "reader_not_run": true,
+    "runtime_result_and_log_hashes_match": true,
+    "source_and_fixture_pins_match": true,
+    "status": "pass_for_partial_outcome_not_capacity"
+  },
+  "observation": {
+    "absent_outputs": [
+      "producer-result-current-v3.json",
+      "check-stdout-current-v3.log",
+      "check-stderr-current-v3.log",
+      "check-result-current-v3.json"
+    ],
+    "child_terminal_source_and_guard_attestation": null,
+    "completed_required_cut_established": false,
+    "counter_limitation": "BEFORE action only; neither a terminal census nor an admission classification",
+    "decision_action_returns": 3,
+    "fresh_reader_ran": false,
+    "last_sparse_event": {
+      "action": "prepare_proposal",
+      "elapsed_seconds": 10678.336,
+      "event": "returned_action",
+      "format": "buddha.scale-replay-progress.v1",
+      "operations_before": 353,
+      "owners_before": 101,
+      "phase": "producer",
+      "position": {
+        "arm": 0,
+        "repetition": 1,
+        "slot": 0,
+        "stage": "proposal",
+        "start": 0
+      },
+      "stage": "producing_history"
+    },
+    "observed_outer_tool_exit_code": 1,
+    "parent_seconds": 10802.99368519988,
+    "producer_exit_code": null,
+    "producer_result_present": false,
+    "producer_seconds": 10800.248537899926,
+    "producer_timeout": true,
+    "reader_deadline_measured": false,
+    "required_cut": {
+      "admitted_decisions": 9,
+      "next_action": "screen",
+      "operation_count": 660,
+      "owners": 193,
+      "reserved_microusd": 0
+    },
+    "sparse_events": 147
+  },
+  "reason": "producer_deadline_exceeded",
+  "scope": "One approved offline supplied-history attempt; current application source, unchanged v4 fixture, not a full v5 or paid comparison",
+  "source": {
+    "all_pins_after_match": true,
+    "application_python_files": 342,
+    "clean_before_and_after": true,
+    "fixed_fixture_files": 8,
+    "head": "eacf8b8bf8710134348f9cd5d892dac1ae1e383c",
+    "tree": "41247ce244740a7e902887040ce85aafc971a485"
+  },
+  "status": "partial"
+}

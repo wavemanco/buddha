@@ -433,3 +433,48 @@ is MIT; that does not clear transitive packages, benchmark weights or datasets.
 [Core license](https://github.com/UKGovernmentBEIS/inspect_ai/blob/main/LICENSE).
 Living official sources above were checked November 3 UTC. This reconsideration
 installs nothing and executes no evaluation, container, model or original record.
+
+## November 4 follow-up: why normal execution keeps rebuilding history
+
+The current runner calls `_restore`, checks the controls, executes one action,
+and then repeats from `_restore` ([actual frozen-source loop](https://github.com/wavemanco/buddha/blob/eacf8b8bf8710134348f9cd5d892dac1ae1e383c/buddha/improver_study.py#L2601-L2606)).
+Reconstruction creates a fresh evidence reader and walks the declaration, owners,
+funding, screens, witnesses and prior decisions to infer the next action. The
+action does not return an updated live scheduler state. We reused recovery-style
+reconstruction as the ordinary scheduler. That was our implementation choice,
+not a NoveltyBench requirement. With growing history, repeated complete walks
+can accumulate approximately quadratic work; this describes the structure, not
+a measured speedup or a complete runtime profile.
+
+The motivation was consistency after interruption and detecting changed records.
+The cost is that a healthy process repeatedly rediscovers work it just completed.
+The read-only capture also records tree and receipt digests: legitimate new output
+and ledger writes make that old snapshot stale. Deleting `_restore` or keeping
+that reader alive would therefore be incorrect.
+
+The useful boundary is between a forward runner, which performs the current step
+and records its outcome, and a historical reader, which reconstructs and validates
+saved work for inspection or recovery. Both are code; the saved history is data.
+They can share formats and validators without making every live action replay the
+whole experiment. Merely moving functions to another file does not change that
+execution dependency.
+
+Established systems demonstrate this distinction. Temporal retains workflow state
+in a worker and routes later tasks back to it; eviction or failure requires replay.
+[Primary sticky-execution documentation](https://docs.temporal.io/sticky-execution).
+DBOS checkpoints step outputs and, during recovery, uses saved outputs for completed
+steps. Unfinished external effects still require idempotency or uncertainty handling.
+[Primary architecture documentation](https://docs.dbos.dev/architecture#how-workflow-recovery-works).
+These are design examples, not evidence that either integration fits Buddha. Our
+[earlier DBOS wrapper probe](conformance/reliability-reuse-decision.json) removed
+zero production code and left the internal reconstruction unchanged. Another
+wrapper would leave this root problem in place.
+
+The user's current decision is to continue Buddha and defer exact DGM adoption.
+The next design should reuse existing forward generation/evaluation/improvement
+steps and separate historical reconstruction, with current-input validation,
+transactional spending limits, unknown-charge stops, isolation and official scoring
+retained. No new platform, broad state-machine rewrite or performance benefit is
+established here. The [living plan](PLAN.md) owns the next bounded slice and the
+unchanged scientific comparison; the [history observation](conformance/current-history-observation.json)
+records the consumed three-hour construction partial.
