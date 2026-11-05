@@ -84,8 +84,19 @@ syntax, actual source identity, file-origin helpers and all eight fresh output
 destinations. They do not run fixture imports, history construction or the fresh
 reader. No paid calls, real containers or original paid-run records are used.
 
-Nothing needs running in PowerShell yet. One new, explicit approval is required
-before executing this exact history package, followed by immediate source,
-script, fixture and output-path checks. Earlier attempt allowances are consumed;
-none transfers to this package. Preparation supplies no retry, resume, extension
-or spending permission. [PLAN.md](PLAN.md) owns the next decision.
+The approved current-v3 attempt is now a construction-deadline partial: the
+producer stopped after 10800.248537899926 seconds; the parent records partial
+after 10802.99368519988 seconds. No producer terminal result or reader outputs
+exist, so the 900-second reader did not run. The allowance is consumed; no
+retry, resume, extension, new long run or paid work is authorized. The
+[current observation](conformance/current-history-observation.json) retains
+source/hash checks and the limits of sparse progress counters. Continue Buddha
+and defer exact DGM adoption. Next reuse the existing forward screen, full
+feedback, proposal and child-screen components, separating forward execution
+from historical-reader reconstruction at their shared responsibility boundary.
+A file move or an incremental-replay framework is not the fix. Scientific
+controls and the original full comparison remain required; this smaller
+engineering proof cannot replace them. The 193/660 replay gate remains unpassed;
+prospective forward-route acceptance must be defined and reviewed before paid
+execution. [PLAN.md](PLAN.md) owns the sequence.
+[Existing reliability research](HARNESS-RELIABILITY-RESEARCH.md) supplies context.
