@@ -1,0 +1,200 @@
+{
+  "format": "buddha.forward-capacity-preparation-delivery.v1",
+  "status": "prepared; not adopted; full workload and full qualification not executed",
+  "base": "07d92a866d34a07ad6c3877d34f3bef38ceb7817",
+  "application_change": "none; inherited runner sourcef1d74d3c fromPR264/394 unchanged",
+  "sources": {
+    "tests/scale_replay_fixture.py": "14bd1c8b9b44ce1600cc177f936a47a952e886ba8201cf39c6123159748e09f5",
+    "tests/test_scale_replay_fixture.py": "e63aeead5bc4350d583bd3b38e60ae09c8c13856ec46221d70d358725674434d",
+    "tests/test_forward_capacity_recipe.py": "f3f0b55843f0e4801807e9341f8ad0e49dae66a050e3f664d6c88362d1532e7f",
+    "docs/conformance/forward-capacity.py": "9a33b1f6211e8502296815e63be6ef3064f4ddfb0fb595b30751f51762198315",
+    "docs/conformance/forward-capacity-protocol.json": "98c9eb31f4906b3ecf19559b657dcf57064daf9e75a2ef23c3201c34600a40d1",
+    "ci_test_shard.py": "dd0acfcbf55010cdb4a3e159b73e2e5c166ff03d39c6c487f50ecbc04e710dc7"
+  },
+  "short_checks": {
+    "unique_methods": 8,
+    "combined_preparation_seconds": 37.37482609995641,
+    "combined_recipe_source": "eafd33bed51bc221c74b7e5d297d616dff34a0790d3813c3dcba0f59f2254eae",
+    "final_recipe_methods": 5,
+    "final_recipe_seconds": 0.8226175999734551,
+    "final_recipe_source": "9a33b1f6211e8502296815e63be6ef3064f4ddfb0fb595b30751f51762198315",
+    "metadata_observed": {
+      "generation_callbacks": 12,
+      "declared_max_calls": 2652,
+      "mock_sends": 0,
+      "answer_utf8_bytes": [
+        8192,
+        8192,
+        8192,
+        8192,
+        8192,
+        8192,
+        8192,
+        8192,
+        8192,
+        8192
+      ]
+    },
+    "limits_seconds": [
+      120,
+      60
+    ],
+    "external_network_execution": "denied in test children; local subprocess boundaries mocked"
+  },
+  "quality": [
+    {
+      "command": [
+        "ruff",
+        "check",
+        "buddha",
+        "tests",
+        "agents",
+        "ci_test_shard.py",
+        "docs/conformance/forward-capacity.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.22888059983961284,
+      "timeout": false,
+      "detail": null
+    },
+    {
+      "command": [
+        "ruff",
+        "format",
+        "--check",
+        "buddha",
+        "tests",
+        "agents",
+        "ci_test_shard.py",
+        "docs/conformance/forward-capacity.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.22218340006656945,
+      "timeout": false,
+      "detail": null
+    },
+    {
+      "command": [
+        "mypy",
+        "--strict",
+        "buddha",
+        "agents",
+        "ci_test_shard.py"
+      ],
+      "exit_code": 0,
+      "seconds": 4.052726699970663,
+      "timeout": false,
+      "detail": null
+    },
+    {
+      "command": [
+        "mypy",
+        "--check-untyped-defs",
+        "--ignore-missing-imports",
+        "docs/conformance/forward-capacity.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.6658160998485982,
+      "timeout": false,
+      "detail": null
+    },
+    {
+      "command": [
+        "bandit",
+        "-q",
+        "-r",
+        "buddha",
+        "agents",
+        "ci_test_shard.py",
+        "docs/conformance/forward-capacity.py"
+      ],
+      "exit_code": 0,
+      "seconds": 5.544827899895608,
+      "timeout": false,
+      "detail": null
+    },
+    {
+      "command": [
+        "compileall",
+        "-q",
+        "buddha",
+        "tests",
+        "agents",
+        "ci_test_shard.py",
+        "docs/conformance/forward-capacity.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.3020969000644982,
+      "timeout": false,
+      "detail": null
+    },
+    {
+      "command": [
+        "pip_audit",
+        "--disable-pip",
+        "--no-deps",
+        "--strict",
+        "-r",
+        "requirements-dev.txt"
+      ],
+      "exit_code": 0,
+      "seconds": 1.923204000107944,
+      "timeout": false,
+      "detail": null
+    },
+    {
+      "command": [
+        "pip_audit",
+        "--no-deps",
+        "-r",
+        "requirements.txt"
+      ],
+      "exit_code": 0,
+      "seconds": 26.74896030011587,
+      "timeout": false,
+      "detail": null
+    }
+  ],
+  "inventory": {
+    "full_methods_per_os": 2214,
+    "full_shards": [
+      1,
+      559,
+      545,
+      584,
+      525
+    ],
+    "full_census": "a1e2397ec132d5d36f39d9f9ee311c42389749d3fe5e29fa9b85c4b5a6002cc4",
+    "short_methods_per_os": 458,
+    "short_census": "d5456470ababaadd26d38e1f007a197eb6842cbf1f0fa8343a9170eebf505f54",
+    "mode": "list-only; no test bodies ran for this inventory"
+  },
+  "proposed_run": {
+    "attempts": 1,
+    "total_seconds": 10800,
+    "reader_seconds_within_total": 900,
+    "measured_peak_bytes_per_child_through_validation": 4294967296,
+    "expected_owners": 296,
+    "expected_operations": 1656,
+    "all_admitted_opportunities": 16,
+    "adoption_required": true,
+    "old_193_660_900_gate": "unpassed; no retrospective reclassification",
+    "retry_resume_extension": false
+  },
+  "review": "independent scientific arithmetic, source/path/error/minimality and roadmap review; exact final source binding/check follows publication",
+  "roadmap_reconciliation": {
+    "since": "2026-10-27",
+    "revision": 287,
+    "retained_prior_rows": 286,
+    "retained_acceptance_tails": 7,
+    "merged_main": "9ea94dd51508e5c9b5c3fe9782ef5267ba18bcc9",
+    "runner_candidate_pr": 264,
+    "scientific_claims": "IMP-01 comparison and useful-diversity/improver-effectiveness gains remain open; EVAL-02-H nonblocking"
+  },
+  "exclusions": [
+    "no full-size fixture/study or fresh reader executed",
+    "no paid API, real container, selected-source or official-scorer execution",
+    "no original paid SQLite, private actor body or sealed task text read",
+    "no new full qualification, funding change, main merge or framework/dependency adoption"
+  ]
+}

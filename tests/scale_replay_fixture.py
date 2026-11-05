@@ -19,6 +19,7 @@ TASK_SOURCE_BYTES = 1_113_890
 SCREEN_BYTES_FLOOR = 5_315_388
 OWNER_COUNT = 193
 OPERATION_COUNT = 660
+ANSWER_BYTES = 8192
 
 
 def _distribute(rows, key, total):
@@ -129,6 +130,7 @@ def prepare(
     sized_source=True,
     generation_callbacks=4,
     native_callbacks=(1, 10),
+    bootstrap=True,
 ):
     """Return a genuine v4 fixture/declaration, without starting its study owners."""
     f = FiniteImproverStudyTests("runTest")
@@ -144,6 +146,7 @@ def prepare(
         task_ids=TASK_IDS,
         generation_callbacks=generation_callbacks,
         unique_children=True,
+        bootstrap=bootstrap,
     )
     capacity = ImproverStudyCapacityTests("runTest")
     case.addCleanup(capacity.doCleanups)
@@ -151,6 +154,22 @@ def prepare(
     record.update(starts=copy.deepcopy(f.starts), repetitions=2, descendant_opportunities=2)
     record["selection"]["finalist_iteration"] = 2
     f.recompute_limits(record)
+    return f, record
+
+
+def prepare_forward(case, **options):
+    """Prepare prospective v5 development; execute neither bootstrap nor study."""
+    options.setdefault("generation_callbacks", 12)
+    f, record = prepare(case, bootstrap=False, **options)
+    record["format"] = "buddha.improver-study.v5"
+    original = tuple(f.answer_values())
+    if any(len(text.encode("utf-8")) > ANSWER_BYTES for text in original):
+        raise AssertionError("supplied answer exceeds the forward payload envelope")
+    frozen = tuple(text + "x" * (ANSWER_BYTES - len(text.encode("utf-8"))) for text in original)
+    f.literal = frozen[0]
+    f.answer_values = lambda: list(frozen)
+    for program in f.h.programs.values():
+        program["answers"] = list(frozen)
     return f, record
 
 
