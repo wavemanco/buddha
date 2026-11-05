@@ -1,0 +1,103 @@
+{
+  "automation_checks": {
+    "ci_contract_selector_unit_case": "pass; 0.002 unittest seconds",
+    "contract_inventory_only": {
+      "census_sha256": "539e37559334390cb6850e2a54f072b24679474fa3a1d94abbb7b36817601cc3",
+      "full_raw_inventory_retained": false,
+      "new_case_explicitly_selected": true,
+      "selected": 447,
+      "test_bodies_executed": false
+    },
+    "hosted_checks": "pending_at_preparation",
+    "ruff_test_check_and_format": "pass"
+  },
+  "client_timezone": "America/Los_Angeles",
+  "date": "2026-11-04",
+  "direction": {
+    "continue_Buddha": true,
+    "exact_DGM_adoption": "deferred",
+    "new_paid_or_long_run_authorization": false,
+    "production_forward_assembly": "pending bounded next slice using existing stage APIs",
+    "reader_writer_boundary": "Separate responsibility and live data flow; no cosmetic move or new replay/cache framework",
+    "science": "Keep pinned official scoring/settings, matched controls/resources, prospective task separation, full feedback, predeclared analysis, uncertainty and failures"
+  },
+  "execution": {
+    "attempts": 1,
+    "deadline_seconds": 120,
+    "exit_code": 0,
+    "logs": {
+      "stderr": {
+        "path": "runs/checks/forward-core-composition-20261104-v1/stderr-v1.log",
+        "sha256": "55176bf506162ed3e96175d515ec72bda2c7b79a565a50b6761d4d29813bb04a"
+      },
+      "stdout": {
+        "path": "runs/checks/forward-core-composition-20261104-v1/stdout-v1.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "parent_seconds": 27.362701299833134,
+    "receipt": {
+      "path": "runs/checks/forward-core-composition-20261104-v1/result-v1.json",
+      "sha256": "1a746bc8598abf42637f501aadc2f25af58f4683c8da49b5466b99e789702f6f"
+    },
+    "timeout": false,
+    "unittest_body_seconds": 26.679
+  },
+  "external_effects": {
+    "child_environment_API_keys": false,
+    "network_and_external_process_audit_denial_installed": true,
+    "new_full_or_long_run": false,
+    "original_history_access": false,
+    "real_containers": 0,
+    "real_model_provider_calls": 0
+  },
+  "format": "buddha.forward-core-composition.v1",
+  "observed_assertions": {
+    "aggregate_accounting_matches_owner_sum": true,
+    "all_scoped_owners_inactive": true,
+    "answers_per_parent_and_child": 10,
+    "child_comparison_key_and_controls_match_parent": true,
+    "completed_proposal_and_child_replay_no_new_session_worker_HTTPS_or_writes": true,
+    "feedback_omitted_answer_positions": 0,
+    "fixed_improver_descriptor_version": 2,
+    "fixture_HTTPS_operations": 5,
+    "fresh_synthetic_owners": 9,
+    "full_literal_answers_include": [
+      "late Unicode text",
+      "empty output",
+      "significant spaces",
+      "repeated values"
+    ],
+    "full_restore_entries_forbidden": [
+      "source_search._restore",
+      "improver_study._restore",
+      "improver_study._restore_observed"
+    ],
+    "literal_child_bytes_and_lineage_verified": true,
+    "proposal_publication_inspected_before_child_screen": true,
+    "reserved_microusd": 0,
+    "selected_tasks": 1,
+    "separate_parent_improver_child_identities": true,
+    "supplied_metric_values_equal": true,
+    "typed_task_id": 1
+  },
+  "scope": "One TEST-composed edge through existing APIs; no production forward runner implemented",
+  "scope_limits": [
+    "Screen generation/native worker outcomes and HTTPS replies are supplied fixtures.",
+    "Protected fixed-improver dispatch is exercised with selected-source loading intercepted; selected Python does not execute on the host.",
+    "The existing child adapter uses candidate.py and source_copy=False; other entrypoints and the source-copy branch are not exercised.",
+    "This does not establish actual official scorer execution, model authorship, real-container behavior or scientific improvement.",
+    "Unit fixtures clean their fresh synthetic records normally; retained evidence is source, logs and the run receipt.",
+    "This is not a newly implemented production forward runner or a measured runtime fix.",
+    "This workload differs from the 193-owner/660-operation history fixture; their times are not a speedup comparison.",
+    "The old scale gate remains unpassed; this is not full v5 or the three-development/26-final-task study."
+  ],
+  "source_cut": {
+    "application_and_agent_files_unchanged": true,
+    "base_head": "2f526870c48ab493d70346a0938abe17ef9f1241",
+    "ci_change": "Select this one case in existing short contracts; no workflow or watchdog change",
+    "test": "tests/test_candidate_improvement_stage.py",
+    "test_sha256": "34688902d9a160b47262ecf247810426a64fcad8b598ba67fc0e0e7efafbebfc"
+  },
+  "status": "engineering_check_pass"
+}

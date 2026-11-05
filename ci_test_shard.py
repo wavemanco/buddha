@@ -25,6 +25,7 @@ CONTRACT_TESTS = (
     "test_authorization",
     "test_benchmark",
     "test_candidate_generation_outcome.CandidateGenerationOutcomeTests.test_real_executor_cleanup_sidecar_survives_c1_sealing_and_passive_replay",
+    "test_candidate_improvement_stage.CandidateImprovementStageTests.test_forward_fixed_improver_composes_full_feedback_and_child_screen_without_restore",
     "test_ci_test_shard",
     "test_cli",
     "test_common",

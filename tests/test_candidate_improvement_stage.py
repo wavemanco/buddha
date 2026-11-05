@@ -194,6 +194,165 @@ class CandidateImprovementStageTests(unittest.TestCase):
         self.assertEqual(report["stage_seal_sha256"], sha(seal_path.read_bytes()))
         self.assertFalse((session / "answers.json").exists())
 
+    def test_forward_fixed_improver_composes_full_feedback_and_child_screen_without_restore(self):
+        import test_frozen_improver
+
+        from buddha import candidate_improvement, source_screen
+        from buddha.source_search import _child_screen_for
+
+        self.api()
+        answers = [
+            "A supplied opening longer than the old excerpt. " * 3 + "\u96ea\u03b1 LATE_END",
+            "",
+            "\u96ea\u03b1",
+            "  literal spaces  ",
+            "repeat",
+            "repeat",
+            "six",
+            "seven",
+            "eight",
+            "last output \u96ea",
+        ]
+        measured = []
+
+        def complete_parent(feedback):
+            feedback.source(count=10)
+            h = feedback.h
+            h.record["selected_ids"] = [1]
+            parent = h.screen()
+            h.programs[parent.candidate_id]["answers"] = answers
+            directory, authority = h.prepare(parent)
+            self.assertEqual(h.run_screen(directory)["status"], "complete")
+            measured.append((parent, authority))
+            return directory, authority, h.reference(directory, authority)
+
+        with (
+            patch("buddha.source_search._restore", side_effect=AssertionError("search restore")),
+            patch("buddha.improver_study._restore", side_effect=AssertionError("study restore")),
+            patch(
+                "buddha.improver_study._restore_observed",
+                side_effect=AssertionError("observed study restore"),
+            ),
+            patch.object(feedback_fixtures.SourceFeedbackTests, "completed", complete_parent),
+        ):
+            self.fixture()
+            h, engine = self.feedback.h, self.feedback.h.engine
+            parent, authority = measured[0]
+            self.f.authority = authority
+            packet = json.loads((self.packet / "feedback.json").read_bytes())
+            self.assertEqual(packet["format"], "buddha.candidate-development-feedback.v2")
+            self.assertEqual([row["task_id"] for row in packet["records"]], [1])
+            note = json.loads(packet["records"][0]["note"])
+            self.assertEqual(
+                note["answers"],
+                [{"position": position, "text": text} for position, text in enumerate(answers)],
+            )
+            self.assertEqual(note["omitted_answer_positions"], 0)
+
+            # Reuse the existing protected-v2 worker seam; supplied Python stays data.
+            seam = test_frozen_improver.FrozenImproverTests("runTest")
+            seam.f = self
+            seam.parent_selection = self.selection.to_record()
+            seam.parent_roots = dict(self.roots)
+            seam.parent_path = self.roots["agent"] / self.record["entrypoint"]
+            seam.parent_raw = seam.parent_path.read_bytes()
+            seam.parent_id = parent.candidate_id
+            seam.base_recipe = copy.deepcopy(self.record)
+            seam.projected = [
+                {"task": parent.tasks.tasks[0].to_record(), "note": packet["records"][0]["note"]}
+            ]
+            seam.observed, seam.connections = [], []
+            seam.case("forward-fixed", seam.operator_source("forward-fixed"))
+            self.prepare()
+            child_answers = list(reversed(answers))
+            returned = {
+                "source": "def generate(task, config, complete):\n    return "
+                + repr(child_answers)
+                + "\ndef propose_improvement(parent, feedback, config, complete): return {}\n",
+                "hypothesis": "Supplied one-edge composition; no measured improvement claim.",
+            }
+            proposal = seam.run_stage(returned, callbacks=1)
+            self.assertEqual(
+                (proposal["status"], proposal["disposition"]), ("complete", "materialized")
+            )
+            verified = self.inspect_api(
+                self.directory,
+                authorization=authority.path,
+                expected_report_sha256=sha((self.directory / "report.json").read_bytes()),
+            )
+            self.assertEqual(verified, proposal)
+            self.assertEqual(proposal["improver_agent_sha256"], seam.operator_id)
+            self.assertEqual(len(seam.observed), 1)
+            self.assertEqual(seam.observed[0][2], seam.projected)
+            child = verified["child"]
+            self.assertEqual(
+                (Path(child["directory"]) / "candidate.py").read_bytes(),
+                returned["source"].encode(),
+            )
+            lineage = json.loads(Path(child["lineage"]["path"]).read_bytes())
+            self.assertEqual(lineage["parent"]["agent_sha256"], parent.candidate_id)
+            self.assertEqual(lineage["improver"]["agent_sha256"], seam.operator_id)
+            self.assertEqual(lineage["child"]["agent_sha256"], child["agent_sha256"])
+
+            record = _child_screen_for(
+                parent, verified, self.root / "forward-child", source_copy=False
+            ).to_record()
+            child_screen = h.screen(record)
+            h.programs[child_screen.candidate_id]["answers"] = child_answers
+            self.assertEqual(child_screen.comparison_key(), parent.comparison_key())
+            destination, _ = h.prepare(child_screen, self.root / "forward-child-screen", authority)
+            child_report = h.run_screen(destination)
+            parent_report = json.loads((self.screen / "report.json").read_bytes())
+            self.assertEqual(child_report["status"], "complete")
+            self.assertEqual(child_report["parent_id"], parent.candidate_id)
+            self.assertEqual(child_report["candidate_id"], child["agent_sha256"])
+            self.assertEqual(child_report["controls_sha256"], parent_report["controls_sha256"])
+            for metric in ("distinct", "utility"):
+                self.assertEqual(
+                    child_report["tasks"][0][metric], parent_report["tasks"][0][metric]
+                )
+            funding = authority.summary()
+            self.assertEqual(
+                (len(funding["runs"]), funding["operation_count"], funding["reserved_microusd"]),
+                (9, 5, 0),
+            )
+            self.assertFalse(any(row["active"] for row in funding["runs"]))
+            for key in ("operation_count", "spent_microusd", "reserved_microusd"):
+                self.assertEqual(sum(row[key] for row in funding["runs"]), funding[key])
+            self.assertEqual((engine.workers, engine.physical_sends), (8, 4))
+            self.assertEqual(
+                sum(connection.request.call_count for connection in seam.connections), 1
+            )
+
+            before = h.files(self.root), funding, engine.workers, engine.physical_sends
+            with (
+                patch.dict(os.environ, {}, clear=True),
+                patch(
+                    "buddha.candidate_run.CandidateSession",
+                    side_effect=AssertionError("new session"),
+                ),
+                patch(
+                    "buddha.native_run.NativeSession",
+                    side_effect=AssertionError("new native session"),
+                ),
+                patch("buddha.executor.run_container", side_effect=AssertionError("new worker")),
+                patch("http.client.HTTPSConnection", side_effect=AssertionError("new HTTPS")),
+            ):
+                transport = RawHTTPTransport(allow_paid=False)
+                self.assertEqual(
+                    candidate_improvement.run_candidate_improvement(
+                        self.directory, transport=transport
+                    ),
+                    proposal,
+                )
+                self.assertEqual(
+                    source_screen.run_source_screen(destination, transport=transport), child_report
+                )
+            self.assertEqual(
+                (h.files(self.root), authority.summary(), engine.workers, engine.physical_sends),
+                before,
+            )
+
     def test_clean_failed_worker_outcomes_are_terminal_rejections_without_child_claims(self):
         self.api()
         self.fixture()

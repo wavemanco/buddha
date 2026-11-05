@@ -100,3 +100,17 @@ engineering proof cannot replace them. The 193/660 replay gate remains unpassed;
 prospective forward-route acceptance must be defined and reviewed before paid
 execution. [PLAN.md](PLAN.md) owns the sequence.
 [Existing reliability research](HARNESS-RELIABILITY-RESEARCH.md) supplies context.
+
+A first limited forward composition now passes: one synthetic task with ten
+literal outputs reaches complete feedback, a fixed-improver v2 supplied
+proposal, checked child materialization/lineage and child-screen controls with
+equal canned metrics. Existing source-screen/native-session coordination uses
+supplied worker/HTTPS/score results; no actual official scorer, selected source,
+model or container runs. Nine owners finish inactive, five supplied operation
+records settle with zero held, and keyless completed replay adds no work or
+writes. The case forbids whole source-search/finite-study restore entrypoints.
+Its first pass takes 27.363 seconds under 120 seconds; this is not a speedup against
+the different three-hour workload. Production assembly and the reader/writer
+responsibility boundary remain next; the private child-screen bridge is only
+reused by the test. The 193/660 gate, full comparison and paid clearance remain
+open. [Case, receipt and limits](conformance/forward-core-composition.json).
