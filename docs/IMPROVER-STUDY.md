@@ -55,6 +55,12 @@ original records on reentry. Full history inspection remains available. These
 checks still cost time; the change does not establish realistic-scale speed or
 scientific improvement. [PLAN.md](PLAN.md) records verification and run approvals.
 
+The supplied-fixture regression at source 3944630 passed all eight cases in
+909.678 seconds, including one complete two-arm study and the later-parent
+comparison prefix. It used supplied workers/replies rather than real models,
+selected Python, containers or official scoring. The [delivery receipt](conformance/study-forward-runner-delivery.json)
+records the exact scope; the larger scientific comparison remains open.
+
 ## Three different kinds of agent
 
 | Agent | Job |

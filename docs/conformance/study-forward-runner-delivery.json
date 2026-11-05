@@ -1,7 +1,7 @@
 {
   "format": "buddha.study-forward-runner-delivery.v1",
   "base_commit": "9ea94dd51508e5c9b5c3fe9782ef5267ba18bcc9",
-  "status": "implementation_checked; complete regression pending approval",
+  "status": "bounded regression passed; wider qualification and live comparison open",
   "production_scope": "one existing module: improver_study.py; no added execution interface/schema/dependency",
   "sources": {
     "buddha/improver_study.py": "f1d74d3c1a8cbc3763e76c02971d6b9baadb248f8c84985a73525ff58177d12a",
@@ -159,8 +159,19 @@
       "seconds": 19.129723399877548
     }
   ],
-  "independent_review": "mechanical extraction review plus independent safety/minimality reviews; identified interrupt error-set and canonical-manifest newline issues corrected",
-  "contract_ci": "pending; only three measured short guards added to normal short selection",
+  "independent_review": "mechanical extraction review plus independent safety/minimality reviews; identified interrupt error-set and canonical-manifest newline issues corrected; independent terminal review verifies8unique passes, no errors/failures/skips, raw receipt/log hashes and exact frozen source pins",
+  "contract_ci": {
+    "head": "3944630aba5cf4d63e5634b4196acfa2227a1700",
+    "run_id": 41976508614,
+    "tests_each_os": 450,
+    "all_quality_steps_each_os": 7,
+    "CodeQL": "pass",
+    "test_body_seconds": {
+      "linux": 60.744,
+      "windows": 127.135
+    },
+    "census_sha256": "4e66f6d4303b1aea3fc2c519a3f7868e64eac3e651ee08f29156f47f4043b99d"
+  },
   "functional_cases": [
     "complete small v5 two-arm study, entry/freeze/publication restoration count and one ordinary plan per coordinate",
     "v5 later-parent full comparison prefix versus independent historical reconstruction",
@@ -168,7 +179,7 @@
     "unknown witness hold/reentry",
     "fixed improver drift before dispatch"
   ],
-  "functional_status": "not passed; longer bounded regression requires explicit user approval",
+  "functional_status": "all five functional cases and three guards pass in the single approved60-minuteTOTAL attempt; supplied fixtures only",
   "local_partials": [
     {
       "test": "test_improver_study_forward.ImproverStudyForwardTests.test_v5_complete_writer_uses_three_cold_restores_and_one_plan_per_coordinate",
@@ -241,14 +252,14 @@
   "limits": [
     "supplied workers/HTTPS/native scores; selected source, official evaluator and actual model not executed",
     "no paid keys/API calls/real containers or original paid history accessed",
-    "no approved new long run/retry/extension/merge/live clearance",
+    "no additional long run/retry/extension/merge/live clearance; the one approved attempt is consumed",
     "no measured speedup,193-owner/660-operation pass, full-suite qualification or scientific improvement"
   ],
   "superseded_prototype": {
     "pr": "https://github.com/wavemanco/buddha/pull/263",
-    "state": "unmerged; not a dependency; retain artifacts without shipping extra command"
+    "state": "closed without merging; not a dependency; artifacts retained without shipping extra command"
   },
-  "next_verification": {
+  "superseded_30m_proposal": {
     "status": "prepared; not approved; not run",
     "selection": "test_improver_study_forward.ImproverStudyForwardTests",
     "method_count": 8,
@@ -259,5 +270,47 @@
     "proposal_path": "runs/checks/study-forward-runner-20261104-v1/regression-proposal-v1.json",
     "scope": "offline supplied-fixture regression only; no model calls, keys, actual containers or original paid history",
     "partial_record": "Explicit passed/failed/partial status and reason; original stdout/stderr, exact source pins, elapsed/deadline/exit/timeout and last emitted case/action retained; missing terminal counts remain unavailable"
+  },
+  "approved_regression": {
+    "head": "3944630aba5cf4d63e5634b4196acfa2227a1700",
+    "status": "passed",
+    "method_count": 8,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "seconds": 909.6782492999919,
+    "unittest_seconds": 909.149,
+    "deadline_seconds_total": 3600,
+    "timeout": false,
+    "exit_code": 0,
+    "source_pins_match": true,
+    "sources_unchanged": true,
+    "attempts": 1,
+    "automatic_retry_resume_extension": false,
+    "allowance": "consumed",
+    "case_names": [
+      "test_action_write_scope_uses_actual_tree_snapshots_and_exact_checkpoint",
+      "test_keyboard_interrupt_survives_failed_forward_refresh_without_observation",
+      "test_prepared_census_reuses_only_identical_checked_owner_bytes",
+      "test_v5_changed_fixed_improver_after_prepare_refuses_before_original_dispatch",
+      "test_v5_complete_writer_uses_three_cold_restores_and_one_plan_per_coordinate",
+      "test_v5_known_reply_reentry_reuses_owner_then_counts_bad_proposal_and_honors_fence",
+      "test_v5_slot_one_full_parent_comparison_matches_independent_cold_prefix",
+      "test_v5_unknown_witness_retains_hold_and_has_no_new_dispatch_on_reentry"
+    ],
+    "raw_artifacts": {
+      "approved-regression-60m.py": "e8f3f9455a6f8ebfc34e1890de473435ae1b9f68505675c11b8c4ad2580c5eb2",
+      "regression-proposal-v2.json": "1bb34fa9bc6db8604b9711287e03b74613ec975c184a2ebeb1056b25e76d06eb",
+      "regression-60m-launch-v1.json": "f01dc5bfe51c9bcb96bc3a2ee6478de76deb06566ec797ebba32b5dc6049589d",
+      "regression-60m-v1.json": "1b82eeb35dfb7a375f3c9795e894b51871a0e6f6338e9fa00677d77131c740c9",
+      "regression-60m-v1-stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "regression-60m-v1-stderr.log": "cc20732d4acc054fac02d42625d1ce92d6ae7629c434d2a3da98c29b9aa44285"
+    },
+    "limits": [
+      "supplied workers and replies; no actual model/scorer/selected-code/container execution",
+      "M2 later-parent prefix only, not whole M2 completion",
+      "no full qualification,193-owner/660-operation pass, scientific improvement or paid clearance",
+      "one approved attempt consumed; no retry/resume/extension/merge"
+    ]
   }
 }
