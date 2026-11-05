@@ -145,8 +145,9 @@ def checked_binding(path, expected, output, *, git_check=True):
     if protocol["format"] != "buddha.forward-capacity-protocol.v1" or (
         protocol["total_seconds"],
         protocol["reader_seconds"],
+        protocol["reporting_seconds"],
         protocol["peak_working_set_bytes"],
-    ) != (10800, 900, 4 * 1024**3):
+    ) != (16800, 1800, 600, 4 * 1024**3):
         raise ValueError("capacity limits differ from this reviewed recipe")
     return record, protocol
 
@@ -576,11 +577,13 @@ def parent(args):
     )
     try:
         for phase in ("build", "read"):
-            seconds = remaining_seconds(
+            writer_remaining = remaining_seconds(
                 started,
-                protocol["total_seconds"],
-                protocol["reader_seconds"] if phase == "read" else None,
+                protocol["total_seconds"]
+                - protocol["reader_seconds"]
+                - protocol["reporting_seconds"],
             )
+            seconds = protocol["reader_seconds"] if phase == "read" else writer_remaining
             phase_started = time.monotonic()
             print(
                 json.dumps({"phase": phase, "event": "starting", "remaining_seconds": seconds}),
@@ -668,7 +671,11 @@ def parent(args):
         "phase": phase,
         "seconds": time.monotonic() - started,
         "total_limit_seconds": protocol["total_seconds"],
+        "writer_limit_seconds": protocol["total_seconds"]
+        - protocol["reader_seconds"]
+        - protocol["reporting_seconds"],
         "reader_limit_seconds": protocol["reader_seconds"],
+        "reporting_reserved_seconds": protocol["reporting_seconds"],
         "total_deadline_exceeded": deadline_exceeded,
         "phases": phases,
         "binding_sha256": args.sha256,
