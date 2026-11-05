@@ -124,7 +124,52 @@
     }
   ],
   "independent_review": "separate static safety review and minimality/documentation review; all reported defects closed; reviewers performed no execution",
-  "hosted_short_ci": "pending",
+  "hosted_short_ci": {
+    "source_commit": "472f2d4e333f38dabb3a88224c1952dc17e6ad08",
+    "workflow_run": 41967017092,
+    "jobs": [
+      127046254682,
+      127046254937
+    ],
+    "checks": [
+      {
+        "os": "linux",
+        "total": 456,
+        "census_sha256": "7c40b8e4674da4e0b21f177ef1da136d22dc1843ee0e6881e4c4ec6609ab13e7",
+        "test_seconds": 74.497,
+        "new_test_successes": [
+          "test_source_forward.SourceForwardTests.test_accounted_bad_proposal_is_failed_opportunity_without_child_screen",
+          "test_source_forward.SourceForwardTests.test_changed_improver_overlaps_and_trial_grant_refuse_before_parent_spending",
+          "test_source_forward.SourceForwardTests.test_definition_pin_and_late_improver_drift_refuse_before_parent_dispatch",
+          "test_source_forward.SourceForwardTests.test_late_parent_report_change_retains_complete_leaves_and_refuses_publication",
+          "test_source_forward.SourceForwardTests.test_prepared_parent_full_feedback_fixed_proposal_private_child_and_keyless_replay",
+          "test_source_forward.SourceForwardTests.test_unknown_parent_keeps_original_owner_hold_and_stops_without_replacement",
+          "test_source_forward_cli.SourceForwardCLITests.test_completed_run_inspects_pinned_report_without_keys_or_current_execution_checks",
+          "test_source_forward_cli.SourceForwardCLITests.test_invalid_definition_stops_before_keys_and_transport",
+          "test_source_forward_cli.SourceForwardCLITests.test_nonlive_and_missing_definition_refuse_before_keys_or_edge_checks"
+        ],
+        "terminal": "OK"
+      },
+      {
+        "os": "windows",
+        "total": 456,
+        "census_sha256": "7c40b8e4674da4e0b21f177ef1da136d22dc1843ee0e6881e4c4ec6609ab13e7",
+        "test_seconds": 214.232,
+        "new_test_successes": [
+          "test_source_forward.SourceForwardTests.test_accounted_bad_proposal_is_failed_opportunity_without_child_screen",
+          "test_source_forward.SourceForwardTests.test_changed_improver_overlaps_and_trial_grant_refuse_before_parent_spending",
+          "test_source_forward.SourceForwardTests.test_definition_pin_and_late_improver_drift_refuse_before_parent_dispatch",
+          "test_source_forward.SourceForwardTests.test_late_parent_report_change_retains_complete_leaves_and_refuses_publication",
+          "test_source_forward.SourceForwardTests.test_prepared_parent_full_feedback_fixed_proposal_private_child_and_keyless_replay",
+          "test_source_forward.SourceForwardTests.test_unknown_parent_keeps_original_owner_hold_and_stops_without_replacement",
+          "test_source_forward_cli.SourceForwardCLITests.test_completed_run_inspects_pinned_report_without_keys_or_current_execution_checks",
+          "test_source_forward_cli.SourceForwardCLITests.test_invalid_definition_stops_before_keys_and_transport",
+          "test_source_forward_cli.SourceForwardCLITests.test_nonlive_and_missing_definition_refuse_before_keys_or_edge_checks"
+        ],
+        "terminal": "OK"
+      }
+    ]
+  },
   "full_qualification": "not run; no authorization for a new long run",
   "limits": [
     "workers, selected source loading and HTTPS/official scores supplied by fixtures",
@@ -138,5 +183,6 @@
     "initial_v1": "draft preparation failed before API calls:4errors/8tests; retained unchanged",
     "intermediate_v2": "8tests passed in63.548682200023904seconds before final metadata/publication checks",
     "final_v3": "9tests passed in88.19471450010315seconds within120seconds"
-  }
+  },
+  "hosted_quality": "all seven checks successful per OS; CodeQL/all PR checks successful at472f2d4"
 }
