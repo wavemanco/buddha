@@ -1,15 +1,128 @@
 """Small scale-worker/default proofs, not the 193-owner producer or timing gate."""
 
+import hashlib
 import json
 import unittest
 from pathlib import Path
 from unittest.mock import patch
 
 import test_improver_study as finite_fixtures
-from scale_replay_fixture import DATASET_BYTES, TASK_IDS, TASK_SOURCE_BYTES, prepare
+from scale_replay_fixture import (
+    ANSWER_BYTES,
+    DATASET_BYTES,
+    TASK_IDS,
+    TASK_SOURCE_BYTES,
+    prepare,
+    prepare_forward,
+)
 
 
 class ScaleReplayFixtureTests(unittest.TestCase):
+    def test_forward_preparation_selects_v5_and_starts_no_bootstrap_or_study(self):
+        f, record = prepare_forward(self, inventory_count=1, sized_source=False)
+        self.assertEqual(record["format"], "buddha.improver-study.v5")
+        self.assertFalse(hasattr(f, "bootstrap"))
+        self.assertEqual(f.h.authorities, [])
+        self.assertEqual((f.engine.workers, f.engine.physical_sends), (0, 0))
+        self.assertEqual(f.events, [])
+        self.assertEqual(f.outcomes, {})
+        self.assertEqual(len(f.h.source.tasks), 6)
+        self.assertEqual([task.id for task in f.base.tasks.tasks], list(TASK_IDS))
+        self.assertEqual([task.count for task in f.base.tasks.tasks], [10, 10, 10])
+        values = f.answer_values()
+        self.assertEqual([len(text.encode("utf-8")) for text in values], [8192] * 10)
+        self.assertEqual(ANSWER_BYTES, 8192)
+        self.assertEqual(f.literal, values[0])
+        self.assertTrue(values[0].startswith(finite_fixtures.LITERAL))
+        for index in range(1, 10):
+            self.assertTrue(values[index].startswith("Supplied answer " + str(index)))
+        self.assertEqual(
+            [hashlib.sha256(text.encode("utf-8")).hexdigest() for text in values],
+            [
+                "fd799460ec213ee4fcb8b2245d1ab3e9beff614d82759d5ca49eb1fc387e3cf6",
+                "bf408a0d13c6434b93120723e3f45f17c5a0e1ffa0bfee62a99df34ac67b13db",
+                "24ec136dcb99b4db1ad19e11acc2b04053db59e363093862aab067e982e38b93",
+                "ef2a9f0d391d0e81959777583545faf84f30f08dbd71363fffe93cb25222ccf0",
+                "5fbf490b82598331a6f2281058066986f0cb9cc2422025bce74066740caf1d3b",
+                "6aa5c5e3576fb3868be3464e063c7e2279db99dca63bb98870b1c7d27309d382",
+                "bc1bb3c99f6819ca63bf1310ce4f986baede8ba80fe812eb7ee42912779dde1c",
+                "6d5b810d8d57539a7c46776663c3aa8f463b4c34f1e90308ed83142ec2a05550",
+                "d9b5186631f0acec84033269046891855b6f15ce863a90654c9565f843f3a4e4",
+                "76b3387625bbb633b5bfbfdcac30257474e982ab0cd027dac06d6d1dad5319e0",
+            ],
+        )
+        frozen = tuple(values)
+        values[0] = "caller list mutation"
+        self.assertEqual(f.answer_values(), list(frozen))
+        self.assertEqual(f.literal, frozen[0])
+        self.assertTrue(
+            all(program["answers"] == list(frozen) for program in f.h.programs.values())
+        )
+        oversized = list(frozen)
+        oversized[0] += "!"
+        with (
+            patch("scale_replay_fixture.prepare", return_value=(f, record)),
+            patch.object(f, "answer_values", return_value=oversized),
+            self.assertRaisesRegex(AssertionError, "payload envelope"),
+        ):
+            prepare_forward(self)
+        self.assertEqual(len(f.base.to_record()["native"]["environment"]["inventory"]), 1)
+        self.assertEqual((f.generation_callbacks, f.engine.native_callback_counts), (12, (1, 10)))
+        self.assertEqual(
+            (
+                len(record["starts"]),
+                len(record["improvers"]),
+                record["repetitions"],
+                record["descendant_opportunities"],
+            ),
+            (2, 2, 2, 2),
+        )
+        self.assertFalse(f.scope.exists())
+
+    def test_forward_schedule_derives_296_owners_1656_requests_and_declared_call_cap(self):
+        f, record = prepare_forward(self, inventory_count=1, sized_source=False)
+        screen = record["starts"][0]["screen"]
+        tasks = len(screen["selected_ids"])
+        common = len(record["starts"]) * record["repetitions"]
+        counted = common * len(record["improvers"]) * record["descendant_opportunities"]
+        screens = common + counted
+        assessments = screens * tasks
+        witnesses = screens
+        owners = assessments * (1 + len(screen["stages"])) + witnesses * 2 + counted
+        # Each supplied proposal makes one request; a witness generates only the first task.
+        requests = (
+            assessments * (f.generation_callbacks + sum(f.engine.native_callback_counts))
+            + witnesses * (1 + f.generation_callbacks)
+            + counted
+        )
+        self.assertEqual(
+            (common, counted, screens, assessments, witnesses, owners, requests),
+            (4, 16, 20, 60, 20, 296, 1656),
+        )
+        self.assertEqual(assessments * f.base.tasks.tasks[0].count, 600)
+        scored_answers = assessments * f.base.tasks.tasks[0].count
+        witness_answers = witnesses * f.base.tasks.tasks[0].count
+        self.assertEqual(scored_answers * ANSWER_BYTES, 4_915_200)
+        self.assertEqual(witness_answers * ANSWER_BYTES, 1_638_400)
+        self.assertEqual(scored_answers + witness_answers, 800)
+        self.assertEqual((scored_answers + witness_answers) * ANSWER_BYTES, 6_553_600)
+        generation, native = screen["generation"], screen["native"]
+        model_stages = sum(stage["allow_model"] for stage in screen["stages"])
+        screen_cap = tasks * (
+            generation["max_calls"]
+            + model_stages * native["max_calls"]
+            + len(screen["stages"])
+            - model_stages
+        )
+        proposal_cap = record["proposal_template"]["max_calls"]
+        witness_cap = proposal_cap + generation["max_calls"]
+        maximum = common * (screen_cap + witness_cap) + counted * (
+            proposal_cap + screen_cap + witness_cap
+        )
+        self.assertEqual(record["limits"]["study"]["max_calls"], maximum)
+        self.assertLess(requests, maximum)
+        self.assertEqual((f.engine.workers, f.engine.physical_sends), (0, 0))
+
     def test_legacy_default_keeps_one_task_two_answers_and_one_callback(self):
         f = finite_fixtures.FiniteImproverStudyTests("runTest")
         self.addCleanup(f.doCleanups)
