@@ -107,6 +107,11 @@ text alone is policy optimization. Neither demonstrates a better improver.
 
 ### Relationship to DGM
 
+**November4 scope decision:** adopting DGM as-is, forking it or replacing Buddha
+with a DGM adapter is out of scope. Keep DGM as a reference for checking the core
+generate/evaluate/feedback/source-change workflow. The inherited Python-code
+objective below remains Buddha scope.
+
 The [DGM paper, section 3](https://arxiv.org/html/2505.22954v3#S3) describes agents
 changing their own code while the foundation model remains fixed. In the
 [reviewed implementation](https://github.com/jennyzzt/dgm/blob/a565fd2d1dca504ef5104a7cc0f3bdc4ab9b4fd2/self_improve_step.py),

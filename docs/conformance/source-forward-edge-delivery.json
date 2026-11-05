@@ -1,0 +1,142 @@
+{
+  "format": "buddha.source-forward-edge-delivery.v1",
+  "base_commit": "9ea94dd51508e5c9b5c3fe9782ef5267ba18bcc9",
+  "scope": "one production development edge plus CLI and passive reader; not the matched scientific schedule",
+  "local": {
+    "format": "buddha.bounded-check.v1",
+    "seconds": 88.19471450010315,
+    "deadline_seconds": 120,
+    "timeout": false,
+    "exit_code": 0,
+    "paid_calls": 0,
+    "sources": {
+      "buddha/source_forward.py": "c6bdfc592a491f24788025b07e72ed8751d3db87a9ddce81f38b7380a578599a",
+      "buddha/source_forward_results.py": "30a4ff55f74f3864636d6e9a3a98480c943a6fbd36dae5f951686ef82e0df41b",
+      "buddha/__main__.py": "e631b8ccc21bd01616ffd6e4e839a5684f4fc9b267b2b3834ccfe2409451c158",
+      "tests/test_source_forward.py": "7a197c1ab1f8d93f131cd535f2d2d8792ef36c762530c53f143b6eaecbf31332",
+      "tests/test_source_forward_cli.py": "53492f4af68df8c300d67c5aa28e34ea932ffa9c0aedbfc20b77df9cb0fdcb64",
+      "ci_test_shard.py": "58094dc78a8e6dd9f24b4466400ab712e6df30e70659041ced1cf936fd362651"
+    },
+    "sources_unchanged": true,
+    "guard": "deny socket connect/bind and external execution; fixtures supply workers and provider replies"
+  },
+  "unittest_seconds": 87.665,
+  "methods": 9,
+  "adversarial_checks": [
+    "wrong authority/trial grant/source drift/overlap before parent calls",
+    "proposal ceiling/review/source-pin joins",
+    "private child root and lineage join",
+    "accepted report replacement refuses publication",
+    "fully accounted rejection consumes failed opportunity",
+    "unknown parent retains owner/operation/hold with no physical retry",
+    "complete edge passive keyless replay with no durable writes",
+    "global search/study restore entrypoints forbidden"
+  ],
+  "quality": [
+    {
+      "tool": "ruff",
+      "argv": [
+        "ruff",
+        "check",
+        "buddha",
+        "tests",
+        "agents",
+        "ci_test_shard.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.10288059990853071
+    },
+    {
+      "tool": "ruff",
+      "argv": [
+        "ruff",
+        "format",
+        "--check",
+        "buddha",
+        "tests",
+        "agents",
+        "ci_test_shard.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.3175410002004355
+    },
+    {
+      "tool": "mypy",
+      "argv": [
+        "mypy",
+        "--strict",
+        "buddha",
+        "agents",
+        "ci_test_shard.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.40375469997525215
+    },
+    {
+      "tool": "bandit",
+      "argv": [
+        "bandit",
+        "-q",
+        "-r",
+        "buddha",
+        "agents",
+        "ci_test_shard.py"
+      ],
+      "exit_code": 0,
+      "seconds": 3.7251091999933124
+    },
+    {
+      "tool": "compileall",
+      "argv": [
+        "compileall",
+        "-q",
+        "buddha",
+        "tests",
+        "agents",
+        "ci_test_shard.py"
+      ],
+      "exit_code": 0,
+      "seconds": 1.3277371001895517
+    },
+    {
+      "tool": "pip_audit",
+      "argv": [
+        "pip_audit",
+        "--disable-pip",
+        "--no-deps",
+        "--strict",
+        "-r",
+        "requirements-dev.txt"
+      ],
+      "exit_code": 0,
+      "seconds": 5.3474743000697345
+    },
+    {
+      "tool": "pip_audit",
+      "argv": [
+        "pip_audit",
+        "--no-deps",
+        "-r",
+        "requirements.txt"
+      ],
+      "exit_code": 0,
+      "seconds": 20.784227299969643
+    }
+  ],
+  "independent_review": "separate static safety review and minimality/documentation review; all reported defects closed; reviewers performed no execution",
+  "hosted_short_ci": "pending",
+  "full_qualification": "not run; no authorization for a new long run",
+  "limits": [
+    "workers, selected source loading and HTTPS/official scores supplied by fixtures",
+    "no actual provider/model, selected Python, official scorer or real container executed",
+    "no history-scale/runtime speedup or scientific improvement claim",
+    "standalone grant only; frozen trial scope deliberately refused",
+    "original three-development/26-final WildChat comparison plus both plain controls remains open",
+    "DGM adoption out of scope; workflow reference only"
+  ],
+  "retained_checks": {
+    "initial_v1": "draft preparation failed before API calls:4errors/8tests; retained unchanged",
+    "intermediate_v2": "8tests passed in63.548682200023904seconds before final metadata/publication checks",
+    "final_v3": "9tests passed in88.19471450010315seconds within120seconds"
+  }
+}

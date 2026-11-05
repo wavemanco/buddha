@@ -10,7 +10,7 @@ import tempfile
 import uuid
 from collections.abc import Iterator, Sequence
 from contextlib import contextmanager, suppress
-from dataclasses import asdict
+from dataclasses import asdict, dataclass
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
 
@@ -24,6 +24,7 @@ from buddha.benchmark import (
     prompt_manifest,
 )
 from buddha.credentials import KeyInputError as KeyInputError
+from buddha.credentials import ProfileSource
 from buddha.credentials import getpass as getpass
 from buddha.credentials import key_environment as _shared_key_environment
 from buddha.credentials import os as os
@@ -72,7 +73,7 @@ def _settings(path: Path, budget_override: str | None) -> RunSettings:
 
 
 @contextmanager
-def _key_environment(settings: RunSettings, *, prompt_keys: bool) -> Iterator[None]:
+def _key_environment(settings: ProfileSource, *, prompt_keys: bool) -> Iterator[None]:
     """Optionally acquire missing credentials without files, echo or shell history.
 
     Only the trusted host runs in this process. These temporary environment values
@@ -80,6 +81,89 @@ def _key_environment(settings: RunSettings, *, prompt_keys: bool) -> Iterator[No
     """
     with _shared_key_environment(settings, prompt_keys=prompt_keys, notice=_notice):
         yield
+
+
+@dataclass(frozen=True)
+class _SourceEdgeProfiles:
+    values: tuple[ModelSpec, ...]
+
+    def profiles(self) -> tuple[ModelSpec, ...]:
+        return self.values
+
+
+def _source_edge_command(args: argparse.Namespace) -> int:
+    from buddha import launch_common
+    from buddha import native_pipeline as pipeline
+    from buddha.gateway import RawHTTPTransport
+    from buddha.releases import file_hash
+    from buddha.source_forward import SourceForwardError, check_source_edge, run_source_edge
+    from buddha.source_forward_results import inspect_source_edge
+    from buddha.source_screen import SourceScreen
+
+    try:
+        directory = args.run.absolute()
+        if args.command == "source-edge-inspect":
+            result = inspect_source_edge(
+                directory,
+                expected_definition_sha256=args.definition_sha256,
+                expected_report_sha256=args.report_sha256,
+            )
+        else:
+            if not args.live:
+                raise ValidationError("source-edge-run requires explicit --live")
+            _notice("Checking the original forward edge before reading keys.")
+            report = directory / "report.json"
+            if report.exists():
+                result = inspect_source_edge(
+                    directory,
+                    expected_definition_sha256=args.definition_sha256,
+                    expected_report_sha256=file_hash(report),
+                )
+            else:
+                checked = check_source_edge(
+                    directory, expected_definition_sha256=args.definition_sha256
+                )
+                reference = _object(checked["parent"])
+                parent = SourceScreen.from_bytes(
+                    pipeline._read(
+                        pipeline._absolute(reference["directory"]) / "screen.json",
+                        reference["screen_sha256"],
+                    )
+                ).to_record()
+                profiles = tuple(
+                    dict.fromkeys(
+                        spec
+                        for choices in (
+                            launch_common._model_specs(
+                                _object(parent["generation"]), _object(parent["native"])
+                            ),
+                            launch_common._model_specs(
+                                _object(checked["improver"]), _object(parent["native"])
+                            ),
+                        )
+                        for members in choices.values()
+                        for spec in members
+                    )
+                )
+                with (
+                    _key_environment(_SourceEdgeProfiles(profiles), prompt_keys=args.prompt_keys),
+                    launch_common._heartbeat(
+                        _notice,
+                        ["forward edge"],
+                        [pipeline._absolute(reference["authorization"])],
+                        10.0,
+                    ),
+                ):
+                    _notice("Starting the prepared forward edge. Provider calls can take time.")
+                    result = run_source_edge(
+                        directory,
+                        expected_definition_sha256=args.definition_sha256,
+                        transport=RawHTTPTransport(allow_paid=True),
+                    )
+        print(json.dumps(result))
+        return 0 if result["status"] == "complete" else 3
+    except SourceForwardError as error:
+        raise ValidationError(str(error)) from None
 
 
 def _fetch(dataset: str, destination: Path) -> None:
@@ -402,10 +486,24 @@ def main(argv: Sequence[str] | None = None) -> int:
             name, help="inspect the ledger or verify all exported artifacts offline"
         )
         command.add_argument("--run", type=Path, required=True)
+    edge_run = commands.add_parser(
+        "source-edge-run", help="execute one checked prepared source edge under its existing grant"
+    )
+    edge_inspect = commands.add_parser(
+        "source-edge-inspect", help="verify one pinned complete forward-edge report offline"
+    )
+    for command in (edge_run, edge_inspect):
+        command.add_argument("--run", type=Path, required=True)
+        command.add_argument("--definition-sha256", required=True)
+    edge_run.add_argument("--live", action="store_true")
+    edge_run.add_argument("--prompt-keys", action="store_true")
+    edge_inspect.add_argument("--report-sha256", required=True)
     args = parser.parse_args(arguments)
     if args.command in {"source-review-export", "source-review-inspect"}:
         return _review_command(args)
     try:
+        if args.command in {"source-edge-run", "source-edge-inspect"}:
+            return _source_edge_command(args)
         if args.command == "continuation-source":
             from buddha.continuation import read_source
 

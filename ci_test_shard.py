@@ -44,6 +44,8 @@ CONTRACT_TESTS = (
     "test_search_verify.SearchVerificationTests.test_resealed_parent_change_in_both_decision_and_report_fails_lineage_replay",
     "test_search_verify.SearchVerificationTests.test_resealed_report_costs_must_match_actual_ledger_operation_population",
     "test_source_capacity",
+    "test_source_forward",
+    "test_source_forward_cli",
     "test_source_review.SourceReviewTests.test_selector_boundaries_keep_whole_sets_typed_tasks_and_declared_limits",
     "test_trial_fence.TrialFenceTests.test_executor_unknown_cleanup_fences_another_original_phase",
     "test_wire",
