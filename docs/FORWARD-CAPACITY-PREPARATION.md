@@ -61,6 +61,12 @@ file in the synthetic image.
   within that total**. Progress clocks are per phase; the total deadline never
   restarts. It receives no extra time if the writer uses most of the
   allowance. There is no automatic retry, resume or extension.
+  The operator must also measure the complete command, including final log
+  hashing and report saving. A pass requires that duration to be at most three
+  hours. The driver's own complete status is insufficient: its final recording
+  follows its last deadline check. Recording or cleanup may finish late; retain
+  that time and record a partial in the separate acceptance receipt. This is
+  not a guarantee that all reporting processes are forcibly killed at the limit.
 - **4 GiB OS-reported peak working set for each child**, measured on Windows
   through final validation, just before terminal-report writing. Later
   report-writing allocations are outside that sample. This is an acceptance

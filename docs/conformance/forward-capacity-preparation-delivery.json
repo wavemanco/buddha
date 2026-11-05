@@ -8,7 +8,7 @@
     "tests/test_scale_replay_fixture.py": "e63aeead5bc4350d583bd3b38e60ae09c8c13856ec46221d70d358725674434d",
     "tests/test_forward_capacity_recipe.py": "f3f0b55843f0e4801807e9341f8ad0e49dae66a050e3f664d6c88362d1532e7f",
     "docs/conformance/forward-capacity.py": "9a33b1f6211e8502296815e63be6ef3064f4ddfb0fb595b30751f51762198315",
-    "docs/conformance/forward-capacity-protocol.json": "98c9eb31f4906b3ecf19559b657dcf57064daf9e75a2ef23c3201c34600a40d1",
+    "docs/conformance/forward-capacity-protocol.json": "d129f2afaa635f792a4a226b8303e18ae2ef87f3082fc041ee4fa9a950879138",
     "ci_test_shard.py": "dd0acfcbf55010cdb4a3e159b73e2e5c166ff03d39c6c487f50ecbc04e710dc7"
   },
   "short_checks": {
@@ -179,7 +179,9 @@
     "all_admitted_opportunities": 16,
     "adoption_required": true,
     "old_193_660_900_gate": "unpassed; no retrospective reclassification",
-    "retry_resume_extension": false
+    "retry_resume_extension": false,
+    "whole_command_elapsed_acceptance_seconds": 10800,
+    "terminal_recording_caveat": "independent whole-command timing required; recipe status alone insufficient; late completion recorded as partial externally, recording/cleanup overhead retained separately"
   },
   "review": "independent scientific arithmetic, source/path/error/minimality and roadmap review; exact final source binding/check follows publication",
   "roadmap_reconciliation": {
@@ -196,5 +198,16 @@
     "no paid API, real container, selected-source or official-scorer execution",
     "no original paid SQLite, private actor body or sealed task text read",
     "no new full qualification, funding change, main merge or framework/dependency adoption"
-  ]
+  ],
+  "hosted_short_checkpoint": {
+    "head": "48909b92dc2e38b665f955a7850d0ca01486c7fc",
+    "run": 41996769084,
+    "status": "success on both OSes; later documentation/protocol clarification is not this source head",
+    "methods_per_os": 458,
+    "passes_per_os": 458,
+    "census": "d5456470ababaadd26d38e1f007a197eb6842cbf1f0fa8343a9170eebf505f54",
+    "linux_unittest_seconds": 64.829,
+    "windows_unittest_seconds": 216.219,
+    "all_quality_steps": "passed"
+  }
 }
