@@ -1,5 +1,12 @@
 # Preparing the forward-runner capacity check
 
+**November 5 timing update:** preserve the first five-minute partial. The
+separately approved follow-up completed one common screen/witness and a cold
+prefix read in 449.549 seconds. The revised proposal below reserves writer,
+reader and reporting time separately; it remains unadopted and unexecuted.
+Use [the measurements and budget assumptions](FORWARD-TIMING-RESULTS.md) and
+PLAN item 4b for the current step. No larger run is cleared.
+
 This is preparation, not permission to run. The earlier eight-case regression
 passed, but it used a much smaller workload. This case reuses the existing
 scale fixture and the corrected ordinary study runner. It adds no production
@@ -56,15 +63,17 @@ file in the synthetic image.
 
 ## Proposed limits and their meaning
 
-- **One attempt, three hours total**, including setup, the complete writer,
-  inspection and reporting. The fresh inspection also has a **15-minute limit
-  within that total**. Progress clocks are per phase; the total deadline never
-  restarts. It receives no extra time if the writer uses most of the
-  allowance. There is no automatic retry, resume or extension.
+- **One attempt, 4 hours 40 minutes total**: four hours for setup, the writer
+  and checks before admitting the reader; a fully reserved 30-minute reader;
+  and ten minutes reserved for final checks and reporting. The reader starts
+  only while its full allowance and the reporting reserve remain. A late
+  writer stops partial rather than shrinking the reader's window. Progress
+  clocks are per phase; the total deadline never restarts. There is no
+  automatic retry, resume or extension.
   The operator must also measure the complete command, including final log
-  hashing and report saving. A pass requires that duration to be at most three
-  hours. The driver's own complete status is insufficient: its final recording
-  follows its last deadline check. Recording or cleanup may finish late; retain
+  hashing and report saving. A pass requires that duration to be at most four
+  hours and forty minutes. The driver's own complete status is insufficient:
+  its final recording follows its last deadline check. Recording or cleanup may finish late; retain
   that time and record a partial in the separate acceptance receipt. This is
   not a guarantee that all reporting processes are forcibly killed at the limit.
 - **4 GiB OS-reported peak working set for each child**, measured on Windows
@@ -82,12 +91,16 @@ used four. This declared population covers those observed counts with
 headroom, not every permitted future call pattern, the full call ceiling or
 real provider request-body sizes and latency.
 
-These are proposed operational limits, not a forecast that the case will
-finish. The total reuses the former three-hour time ceiling but asks for a
-complete larger study and its reader inside it; the old attempts allowed three
-hours for the producer alone. Earlier two-screen observations peaked around
-0.89 GB; they justify reporting a concrete memory ceiling, not predicting this
-larger case. The eight-case run's 15-minute duration is not extrapolated.
+These are proposed operational limits, not a completion forecast. Twenty
+equal-cost units at the measured 391.823-second first common cycle give a
+130.6-minute planning scenario; the writer's remaining 109.4 minutes cover
+unmeasured counted proposals, child bookkeeping, history growth and terminal
+checks. Owner-linear extrapolation of the 19.870-second prefix read gives
+seven minutes; the 30-minute allowance is a 4.28-times modeled margin. Neither
+scaling assumption is established. The earlier three-hour/15-minute proposal
+is retained in history as unadopted, not an extra acceptance criterion here.
+The prefix's roughly 1.01 GiB peak does not predict larger-case memory. The
+eight-case regression aggregate is not used to forecast this workload.
 
 Timeouts, errors, changed source, missing evidence and memory-limit misses
 remain explicit incomplete or failed acceptance results. Logs, last stage,
@@ -162,10 +175,10 @@ source, start the separately approved exact-source full qualification. A stop
 consumes that capacity attempt and does not trigger a retry or the conditional
 qualification. No label is applied during preparation.
 
-The current discovered qualification inventory is **2,214 methods per OS**,
+The current discovered qualification inventory is **2,215 methods per OS**,
 partitioned into five existing jobs per OS (ten jobs total). The explicit
 capacity workload is not a discovered unit test, so qualification does not
-silently repeat it. Short CI selects 458 contracts per OS, including the small
+silently repeat it. Short CI selects 459 contracts per OS, including the small
 preparation guards. An inventory is a count, not an executed test result.
 
 The existing full workflow stops its test worker after 60 minutes without
@@ -178,6 +191,7 @@ Full qualification uses GitHub Actions and no model API keys or charges; the
 repository was public when this preparation was checked. It is still a long
 run requiring explicit approval, regardless of billing treatment.
 
-The source-bound [preparation evidence](conformance/forward-capacity-preparation-delivery.json)
-records the short checks and discovered inventories. Those checks do not
-execute or pass the full-size case.
+The earlier [preparation receipt](conformance/forward-capacity-preparation-delivery.json)
+retains its original source and inventories. The [timing receipt](conformance/forward-timing-observation.json)
+records the new observations and revised proposal separately. Neither executes
+or passes the full-size case.

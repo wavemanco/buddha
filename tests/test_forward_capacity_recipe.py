@@ -204,6 +204,7 @@ class ForwardCapacityRecipeTests(unittest.TestCase):
                     phase = command[command.index("--phase") + 1]
                     recorded.append(phase)
                     self.assertEqual(phase, "build")
+                    self.assertLessEqual(kwargs["timeout"], 14400)
                     if expected_outcome == "timeout":
                         raise subprocess.TimeoutExpired(command, kwargs["timeout"])
                     recipe.write(
@@ -231,6 +232,64 @@ class ForwardCapacityRecipeTests(unittest.TestCase):
                 self.assertFalse(result["automatic_retry_resume_extension"])
                 self.assertFalse((output / "read-result.json").exists())
                 self.assertFalse((output / "read-stdout.log").exists())
+
+    def test_reader_receives_full_reserve_only_before_writer_deadline(self):
+        recipe = self.recipe()
+        for writer_seconds in (14399, 14401):
+            with self.subTest(writer_seconds=writer_seconds):
+                _, _, binding, record, output = self.binding(recipe)
+                protocol = json.loads((PROJECT / recipe.PROTOCOL).read_bytes())
+                clock, calls = [0.0], []
+
+                def child(
+                    command,
+                    *,
+                    elapsed=writer_seconds,
+                    destination=output,
+                    recorded=calls,
+                    timer=clock,
+                    **kwargs,
+                ):
+                    phase = command[command.index("--phase") + 1]
+                    recorded.append((phase, kwargs["timeout"]))
+                    if phase == "build":
+                        timer[0] = elapsed
+                    else:
+                        timer[0] += kwargs["timeout"]
+                    recipe.write(
+                        destination / (phase + "-result.json"),
+                        {
+                            "status": "complete",
+                            "sources_unchanged": True,
+                            "memory": {"collected": True, "peak_working_set_bytes": 1},
+                        },
+                    )
+                    return SimpleNamespace(returncode=0)
+
+                args = SimpleNamespace(binding=binding, sha256=recipe.sha(binding), out=output)
+                with (
+                    self.no_workload_imports(),
+                    patch.object(recipe, "checked_binding", return_value=(record, protocol)),
+                    patch.object(
+                        recipe.time, "monotonic", side_effect=lambda timer=clock: timer[0]
+                    ),
+                    patch.object(recipe.subprocess, "run", side_effect=child),
+                    redirect_stdout(io.StringIO()),
+                ):
+                    code = recipe.parent(args)
+                result = json.loads((output / "result.json").read_bytes())
+                self.assertEqual(calls[0], ("build", 14400))
+                self.assertEqual(result["writer_limit_seconds"], 14400)
+                self.assertEqual(result["reporting_reserved_seconds"], 600)
+                if writer_seconds < 14400:
+                    self.assertEqual(code, 0)
+                    self.assertEqual(calls, [("build", 14400), ("read", 1800)])
+                    self.assertEqual(result["status"], "complete")
+                else:
+                    self.assertEqual(code, 3)
+                    self.assertEqual(calls, [("build", 14400)])
+                    self.assertEqual(result["status"], "partial")
+                    self.assertFalse((output / "read-stdout.log").exists())
 
 
 if __name__ == "__main__":

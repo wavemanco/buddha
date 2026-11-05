@@ -1,0 +1,268 @@
+{
+  "format": "buddha.forward-timing-result-summary.v1",
+  "status": "first five-minute observation partial; approved follow-up complete at prefix only; revised full-capacity proposal unapproved",
+  "status_scope": "first 300-second observation; separately approved completed prefix is recorded under followup_observation",
+  "date": "2026-11-05",
+  "evidence_root": "C:/Users/arvik/code/buddha/runs/checks/forward-timing-20261105-v1",
+  "source": {
+    "head": "5c21db2071373f871fdc2584868e33a2a07de41a",
+    "binding": "C:/Users/arvik/code/buddha/runs/checks/forward-capacity-prep-20261104-v1/binding-v2.json",
+    "binding_sha256": "3167d9d8ecfb2937919a85dbbd51d0270b7aad1d27da2e36659b68eab3581a5a",
+    "public_pins_independently_rehashed": 297,
+    "changed_public_pins": [],
+    "application_source_changed_for_observation": false
+  },
+  "files_sha256": {
+    "check.py": "cb61b2676d95d70631fc8aad82d1f439c01a2eccd549519bfd0d2da4ff1e1b17",
+    "proposal.json": "6fd0e82ea6736cda01520bb354699d7b6d67dcb914a45eb4a5ff299f812c3087",
+    "invocation.json": "5925de2b602b2d5dd47d4a13b14d8063750d04e78ca09be8b1a4ec1f4ce284dc",
+    "observation/result.json": "0d50529086dbd41697d2dee0ea0db413d4c7d0bd89e9ba1ee7274df220a3622c",
+    "observation/stdout.log": "751443b89c55e957927f0671d4e755c7cea56ddcb419fd98176bba7532f5ccc6",
+    "observation/stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "timing": {
+    "whole_invocation_seconds": 301.6919121,
+    "parent_seconds": 301.4309144,
+    "allowance_seconds": 300,
+    "within_allowance": false,
+    "timeout": true,
+    "first_screen_action_entry_child_seconds": 151.2660963,
+    "first_screen_action_return_observed": false,
+    "action_duration": "right-censored; no completed duration or upper bound",
+    "outer_exit_code": 0,
+    "outer_exit_code_meaning": "observation receipt saved; not workload acceptance"
+  },
+  "retained_screen": "observation/workspace/tmpxt8b6r_o/forward-capacity/common/0/0/screen",
+  "lower_reports": [
+    {
+      "path": "tasks/0/generation/report.json",
+      "status": "complete",
+      "sha256": "af9f1856d14d0992910139fa5332b081ae7cfb72640f82d6ca4df1fe3f27dc97"
+    },
+    {
+      "path": "tasks/0/evaluation/report.json",
+      "status": "complete",
+      "sha256": "85d1af93d47f9c115eda8c293a963bc025c3cc29bfe7dcea9e86c22c3b8e0c71"
+    },
+    {
+      "path": "tasks/1/generation/report.json",
+      "status": "complete",
+      "sha256": "5d1fb74c528881e181bb00297d83ab39e1acab70f5dc4b2839431f38849e5a8c"
+    },
+    {
+      "path": "tasks/1/evaluation/report.json",
+      "status": "complete",
+      "sha256": "1943dbd9d582fc7d0c129bf544e80eddf6f1c88a887c8e900de6cfcc51bcf004"
+    },
+    {
+      "path": "tasks/2/generation/report.json",
+      "status": "complete",
+      "sha256": "ce137c6dc2f34872ad9a94d46df1b3098e1f5f5a981554860f074ed2a5018cab"
+    },
+    {
+      "path": "tasks/2/evaluation/report.json",
+      "status": "complete",
+      "sha256": "6cae0138cc2e7dea6a4e858b5f7808d53496568cd95edf96f91865234d78871d"
+    }
+  ],
+  "not_observed": [
+    "aggregate screen report",
+    "common mutation witness",
+    "14-owner/82-operation completed prefix",
+    "cold prefix inspection",
+    "child terminal result",
+    "terminal memory measurement",
+    "zero holds or reconciled study accounting"
+  ],
+  "review_scope": "bounded saved JSON and raw hashes only; no SQLite, full reconstruction, full reader, tests, workload execution or original paid history",
+  "effects": {
+    "paid_calls": 0,
+    "actual_containers": 0,
+    "keys_used": false,
+    "original_evidence_modified": false
+  },
+  "interpretation": "The first observation has only lower-stage completion. The separately approved follow-up completes one common screen/witness prefix with0/16countedchildren. Neither provides an empirical full-workload upper bound; the revised budget is a heuristic operating proposal.",
+  "next_proposal": {
+    "status": "user approved one attempt; terminal complete at the first common screen-and-witness prefix only; allowance consumed",
+    "scope": "one new observation of the same first common screen and witness; same payload and application source; new output, no resume",
+    "allowance_seconds": 900,
+    "outer_child_timeout": "only the remaining part of the 900-second total allowance, including setup",
+    "soft_action_boundary_seconds": 720,
+    "optional_cold_prefix_read_start_before_seconds": 720,
+    "independent_whole_invocation_acceptance_seconds": 900,
+    "late_completion": "partial regardless of child or observer status",
+    "basis": "three times the previous 300-second window; operational allowance, not completion forecast",
+    "diagnostic": "one standard-library stack dump collected at 240 seconds; diagnostic Timeout heading is not an execution timeout; host-location evidence, not benchmark proof",
+    "automatic_retry_resume_extension": false,
+    "new_repository_python_or_dependency": false,
+    "full_capacity_execution_request": "withdrawn pending better timing evidence; 10800-second total and 900-second full reader targets remain unadopted",
+    "full_ci_approved": false,
+    "script": {
+      "path": "C:/Users/arvik/code/buddha/runs/checks/forward-timing-completion-proposal-20261105-v1/check.py",
+      "sha256": "5c9f359eedc0a698a6c08ae1e2ada4efac7b65a89934ec048ca39bc2d1f01fec"
+    },
+    "source_head": "5c21db2071373f871fdc2584868e33a2a07de41a",
+    "binding_sha256": "3167d9d8ecfb2937919a85dbbd51d0270b7aad1d27da2e36659b68eab3581a5a",
+    "source_only_check": "pass;0 workload children;0 output files; no execution authority",
+    "approval_file": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\forward-timing-completion-proposal-20261105-v1\\approval.json",
+    "approval_sha256": "0f4f1425ed9f1852c719acaa1350caf1a671de7b78f7555b0aebc7d5a9a29bad"
+  },
+  "full_ci_limits": {
+    "no_genuine_test_progress_seconds": 3600,
+    "hosted_job_ceiling_seconds": 21600,
+    "earlier_source": "6e",
+    "earlier_linux_job_minutes": [
+      34,
+      53
+    ],
+    "earlier_windows_job_minutes": [
+      136,
+      172
+    ],
+    "limitation": "earlier-source observations and operational/platform limits, not a forecast for this source"
+  },
+  "historical_v4_gate": "unpassed; no retrospective pass or rewriting of preserved partials",
+  "followup_observation": {
+    "format": "buddha.forward-timing-completed-prefix-summary.v1",
+    "status": "complete at prefix only; separate approved allowance consumed",
+    "evidence_root": "C:/Users/arvik/code/buddha/runs/checks/forward-timing-completion-proposal-20261105-v1",
+    "source_head": "5c21db2071373f871fdc2584868e33a2a07de41a",
+    "binding_sha256": "3167d9d8ecfb2937919a85dbbd51d0270b7aad1d27da2e36659b68eab3581a5a",
+    "recipe_sha256": "9a33b1f6211e8502296815e63be6ef3064f4ddfb0fb595b30751f51762198315",
+    "public_pins_independently_rehashed": 297,
+    "changed_public_pins": [],
+    "files_sha256": {
+      "check.py": "5c9f359eedc0a698a6c08ae1e2ada4efac7b65a89934ec048ca39bc2d1f01fec",
+      "proposal.json": "dc2967e15386924726e0aa742c0816b6253007155160d4dd3bb133e8d141ea92",
+      "approval.json": "0f4f1425ed9f1852c719acaa1350caf1a671de7b78f7555b0aebc7d5a9a29bad",
+      "invocation.json": "5d6e8e97265a6c415c42893239f281311ae75d629f225a0f838c45b1b5522842",
+      "observation/result.json": "5f64dea6ade093cd94344e368f2706279ad7d91a24ad110f09640154fc4b1002",
+      "observation/child-result.json": "076d90c983116ce5d6c92648bf228cac8d9d1c9ab0b2e783470926b240f243d9",
+      "observation/stdout.log": "eee58fc2bf8e37995dfaa4304b305879195f417a11ec25d2b96b62e76308e5f8",
+      "observation/stderr.log": "8efd8fcc6bf8b299858ffa56a6b309d88b9e93f081966eebfcde48d20c083934",
+      "observation/workspace/tmpy50_9sh7/forward-capacity/common/0/0/screen/report.json": "ba321445fa7cc64971b395bd06db0566a42b93868f269c8faae2653114899f48",
+      "observation/workspace/tmpy50_9sh7/forward-capacity/common/0/0/witness/report.json": "0169b198ef464f528ff2040bdbdaba2ff799ee7a89297dc7a758edf93a4bfaa0"
+    },
+    "timing": {
+      "whole_invocation_seconds": 449.5494583,
+      "parent_seconds": 448.6422953000292,
+      "child_seconds": 439.69325649994425,
+      "allowance_seconds": 900,
+      "within_allowance": true,
+      "timeout": false,
+      "outer_exit_code": 0,
+      "child_exit_code": 0,
+      "prefix_cold_read_seconds": 19.87011480005458
+    },
+    "coverage": {
+      "completed_common": 1,
+      "expected_common": 4,
+      "completed_opportunities": 0,
+      "attempted_opportunities": 0,
+      "expected_opportunities": 16,
+      "in_flight_opportunities": 0,
+      "unattempted_opportunities": 16,
+      "completed_cells": 0,
+      "expected_cells": 8
+    },
+    "saved_prefix_accounting": {
+      "owners": 14,
+      "active_owners": 0,
+      "simulated_operations": 82,
+      "simulated_spent_microusd": 82,
+      "simulated_committed_microusd": 82,
+      "reserved_microusd": 0,
+      "independent_check": "all 14 saved run rows sum to the saved aggregate; no fresh SQLite reconciliation performed by this review"
+    },
+    "reports": {
+      "screen": "complete",
+      "mutation_witness": "passed",
+      "study_report_present": false
+    },
+    "memory": {
+      "collected": true,
+      "peak_working_set_bytes": 1083768832,
+      "scope": "child through final validation before terminal report writing; not full-study capacity or an OS-enforced limit"
+    },
+    "cold_prefix_check": "reviewed executing script reconstructed this prefix and checked equal coverage/accounting; independent review checked its saved evidence without rerunning the reader",
+    "guard_denials": [],
+    "diagnostic": "single 240-second faulthandler stack in host JSON encoding along witness capacity/feedback inspection; not a deadline failure, dominant-cost proof or performance bound",
+    "paid_calls": 0,
+    "actual_containers": 0,
+    "automatic_retry_resume_extension": false,
+    "first_observation_evidence_preserved": true,
+    "interpretation": "one complete starting-condition prefix only; later conditions, counted children, growing feedback, final publication and full-history reader remain unmeasured; no empirical full-workload upper bound or speedup follows",
+    "next_full_workload_allowance": "requires separate review, adoption and execution approval; no new full capacity or full qualification is approved",
+    "independent_review_scope": "bounded saved JSON, row arithmetic and raw hashes only; no SQLite, workload, tests or full reader executed"
+  },
+  "future_full_proposal": {
+    "status": "prepared proposal; not adopted or executed; needs new exact-source approval",
+    "total_seconds": 16800,
+    "writer_including_setup_and_reader_admission_seconds": 14400,
+    "reserved_full_reader_seconds": 1800,
+    "reporting_reserve_seconds": 600,
+    "peak_working_set_bytes": 4294967296,
+    "attempts": 1,
+    "scope": "same declared296-owner1656-operation16-admitted-childv5case; explicit prospective adoption required; oldv4gateunpassed",
+    "planning_model": {
+      "observed_first_common_forward_seconds": 391.8231039000675,
+      "twenty_constant_cost_units_seconds": 7836.46207800135,
+      "writer_headroom_beyond_that_scenario_seconds": 6563.53792199865,
+      "excludes_from_constant_cost_model": [
+        "16 counted proposals and child bookkeeping",
+        "comparative feedback and ancestry cost growth",
+        "complete freeze/publication checks"
+      ],
+      "observed_prefix_read_seconds": 19.87011480005458,
+      "owner_linear_full_reader_scenario_seconds": 420.11099862972543,
+      "reader_allowance_over_scenario_ratio": 4.284581945892999,
+      "limits": "heuristic finite operating allowance, not a confidence interval, measured upper bound, statistical safety factor or completion guarantee; memory only observed at prefix"
+    },
+    "reservation_rule": "both writer completion and reader admission checks must finish within14400s; reader starts only while full1800s+600sreport reserve remain; it receives1800s, never a smaller leftover window",
+    "whole_invocation": "independently measured complete command must finish within16800s, otherwise partial including finalization overhead",
+    "automatic_retry_resume_extension": false,
+    "additional_calibration_before_proposal": "none scheduled; the next proposed long observation is the full declared capacity case",
+    "conditional_qualification": "requires separate exact-source approval, starts only if adopted capacity passes;60minwithoutgenuineprogress,6hjobmaximum; no mainmerge or paidclearance",
+    "historical_targets": "old10800s total/900sreader were unadopted; preserved as historical proposal, not an extra success/failure criterion in the new16800s case"
+  },
+  "budget_preparation_checks": {
+    "status": "six small mocked recipe checks and focused quality checks pass; no capacity/full qualification executed",
+    "sources": {
+      "docs/conformance/forward-capacity.py": "53f7b2b350828b8187303a7c93bf65286111484170e2aca6cf9162d7ec0014da",
+      "docs/conformance/forward-capacity-protocol.json": "3579c666a8a15dc48a9be7e5da7485dcd0ac175d9d588bf8f47b4d8eedc32cf3",
+      "tests/test_forward_capacity_recipe.py": "3a01a5203ee8afed5ef9420e3be14a06583d16ddbdf73919e6d1bcc519c8c0b8"
+    },
+    "receipt": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\forward-timing-budget-checks-20261105-v1\\bounded-checks-v1.json",
+    "receipt_sha256": "20bc9b83b3340ff396aef47d4f41a32defe08d542ec3f313a34baa4853647705",
+    "recipe_methods": 6,
+    "recipe_test_seconds": 0.996,
+    "quality": [
+      "Ruff lint",
+      "Ruff format",
+      "recipe mypy",
+      "Bandit"
+    ],
+    "independent_source_review": "pass; full reader window preserved only with writer/admission within14400s, unchanged guards and no extension",
+    "inventory": {
+      "mode": "list-only, not test execution",
+      "full_methods_per_os": 2215,
+      "full_shards": [
+        1,
+        559,
+        545,
+        585,
+        525
+      ],
+      "full_census": "a5e1de51ec5b89d1d6059d722327a74205736095d57d33263c163f65d396f911",
+      "short_methods_per_os": 459,
+      "short_census": "6467170364d721485b3a342ba5461331146a7cf612c09b7436f4a83a87e82c15"
+    },
+    "hosted_short": "required for release; final exact-head status is recorded with the timing-results PR and external preflight; earlier5c21db2 pass remains source-qualified"
+  },
+  "bounded_reuse_opportunity": {
+    "observed": "one240sstack in native configuration JSON encoding during witness capacity/feedback inspection",
+    "static_trace": "_publish_capacity inspects a proposal before and after writing its checkpoint, reconstructing its same feedback parent each time; _witness_progress_at already passes a checked feedback_screen through _read_ref",
+    "candidate": "pass the already checked parent through both capacity proposal inspections using existing handoff/freshness guards, retaining fallback for comparative feedback",
+    "status": "not implemented; no safety or speedup claimed; not an additional acceptance gate or new calibration loop"
+  }
+}
