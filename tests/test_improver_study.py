@@ -58,6 +58,7 @@ class FiniteImproverStudyTests(unittest.TestCase):
         task_ids=(TASK_ID,),
         generation_callbacks=1,
         unique_children=False,
+        bootstrap=True,
     ):
         import test_source_screen_outcome
 
@@ -161,6 +162,8 @@ class FiniteImproverStudyTests(unittest.TestCase):
         self.unknown_scope = None
         self.known_replay = False
         self.scope = self.root / "study"
+        if not bootstrap:
+            return self
         controls = {
             path: sha(path.read_bytes())
             for path in [
@@ -1968,6 +1971,7 @@ class ImproverStudyCapacityTests(unittest.TestCase):
         zero_calls=False,
         finite_fixture=None,
         output_tokens=32_768,
+        bootstrap=True,
     ):
         from buddha import improver_study, source_capacity
 
@@ -1976,7 +1980,7 @@ class ImproverStudyCapacityTests(unittest.TestCase):
             fixture = FiniteImproverStudyTests("runTest")
             self.addCleanup(fixture.doCleanups)
             fixture.fixture_before_new_api(
-                proposal_capacity=True, capacity_output_tokens=output_tokens
+                proposal_capacity=True, capacity_output_tokens=output_tokens, bootstrap=bootstrap
             )
             observe_fixture_workers(fixture, self)
         fixture.api = improver_study

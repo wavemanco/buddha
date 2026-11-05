@@ -838,7 +838,9 @@ def _read_comparison_root(
     return _load(_json(result))
 
 
-def _census(reader: NativeEvidence, state: dict[str, Any]) -> None:
+def _census(
+    reader: NativeEvidence, state: dict[str, Any], *, previous: NativeEvidence | None = None
+) -> None:
     record = state["record"]
     task_counts = tuple(len(screen.tasks.tasks) for screen in state["screens"])
     stage_count = len(state["screens"][0].to_record()["stages"])
@@ -889,6 +891,22 @@ def _census(reader: NativeEvidence, state: dict[str, Any]) -> None:
         prefixes.add(prefix)
         paths.add(reader.root / prefix)
     for path in paths:
+        old = None if previous is None else previous.owners.get(path)
+        if old is not None and old.directory == path:
+            try:
+                valid = pipeline._sha(old.manifest) == old.manifest_sha256
+                expected = _json(old.manifest | {"record_sha256": old.manifest_sha256}) + b"\n"
+            except (ValueError, TypeError, RecursionError, OverflowError):
+                valid, expected = False, b""
+            if (
+                valid
+                and reader.capture.read(path / "manifest.json") == expected
+                and (
+                    hashlib.sha256(reader.capture.database(path / "operations.sqlite3")).hexdigest()
+                    == old.ledger_sha256
+                )
+            ):
+                reader.owners[path] = old
         reader.owner(path)
     funding = _authority(reader.capture, reader.authorization, list(reader.owners.values()))
     if funding is None:
@@ -1561,14 +1579,314 @@ def _restore(directory: Path, authorization: Path) -> tuple[NativeEvidence, dict
         return _restore_observed(directory, authorization)
 
 
+def _common_progress(
+    reader: NativeEvidence,
+    state: dict[str, Any],
+    start: int,
+    repetition: int,
+    base: source_screen.SourceScreen,
+) -> None:
+    location = reader.root / "common" / str(start) / str(repetition)
+    screen_root = location / "screen"
+    if not _presence(reader, screen_root):
+        _set_action(
+            state,
+            "prepare_common",
+            screen_root,
+            _position(start, repetition, None, None, "common_screen"),
+            screen=base,
+        )
+        return
+    retained: list[source_screen_results._CompletedScreenRead] = []
+    report = _screen(reader, state, screen_root, base, retained=retained)
+    if report is None:
+        _set_action(
+            state,
+            "screen",
+            screen_root,
+            _position(start, repetition, None, None, "common_screen"),
+        )
+        return
+    reference = _reference(reader, screen_root)
+    if _object(report["admission"])["eligible"] is not True:
+        _set_action(
+            state,
+            "common_ineligible",
+            screen_root,
+            _position(start, repetition, None, None, "common_screen"),
+            result=report,
+        )
+        return
+    treatment, progress = _witness(
+        reader,
+        state,
+        reference,
+        location / "witness",
+        base,
+        completed=retained[0] if retained else None,
+    )
+    if progress["result"] is None:
+        role = progress["lower_role"]
+        stage = "common_witness_" + (
+            "feedback"
+            if progress["needs_prepare"] and role == "proposal"
+            else (role or "publication")
+        )
+        _set_action(
+            state,
+            "witness",
+            location / "witness",
+            _position(start, repetition, None, None, stage),
+            treatment=treatment,
+        )
+        return
+    if progress["result"] not in state["witnesses"]:
+        state["witnesses"].append(progress["result"])
+    if progress["result"]["status"] != "passed":
+        _set_action(
+            state,
+            "common_ineligible",
+            location / "witness",
+            _position(start, repetition, None, None, "common_witness"),
+            result=progress["result"],
+        )
+        return
+    state["common"][(start, repetition)] = reference
+
+
+def _opportunity_progress(
+    reader: NativeEvidence,
+    state: dict[str, Any],
+    coordinate: tuple[int, int, int, int],
+    known: dict[tuple[int, int, int], set[str]],
+    *,
+    planned: tuple[dict[str, Any], dict[str, Any]] | None = None,
+) -> None:
+    record = state["record"]
+    directory = reader.root
+    start, repetition, arm, slot = coordinate
+    key = coordinate[:3]
+    location = _location(directory, coordinate)
+    pools, failures = state["pools"], state["failures"]
+    if key not in pools:
+        pools[key] = [state["common"][(start, repetition)]]
+        failures[key], known[key] = [], {state["screens"][start].candidate_id}
+    position = _position(*coordinate, "feedback")
+    if not _presence(reader, location / "plan.json"):
+        prefix = location.relative_to(directory).as_posix() + "/"
+        if any(name.startswith(prefix) for name in reader.capture.entries):
+            raise ImproverStudyError("counted work precedes its original checked plan")
+        _set_action(
+            state,
+            "plan",
+            location,
+            position,
+            coordinate=coordinate,
+            pool=pools[key],
+            failures=failures[key],
+            previous=state["cell_decisions"][key],
+        )
+        return
+    state["attempted"] = len(state["decisions"]) + 1
+    plan, bundle = (
+        _plan(reader, state, coordinate, pools[key], failures[key], state["cell_decisions"][key])
+        if planned is None
+        else planned
+    )
+    state["_current_plan"] = (coordinate, plan, bundle)
+    if reader.raw(location / "plan.json") != _json(plan):
+        raise ImproverStudyError("counted plan changes its original cell/parent/failure prefix")
+    ready = _presence(reader, location / "proposal")
+    for name in shared._FILES:
+        path = location / "feedback" / (name + ".json")
+        if (ready or _presence(reader, path)) and reader.raw(path) != _json(bundle[name]):
+            raise ImproverStudyError("counted packet changes its complete original measured data")
+    if record["format"] in _CAPACITY_FORMATS and not _presence(
+        reader, location / "proposal/report.json"
+    ):
+        if any(
+            _presence(reader, location / name)
+            for name in (
+                "agent",
+                "screen",
+                "witness",
+                "decision.json",
+                "proposal-capacity.json",
+            )
+        ):
+            raise ImproverStudyError("counted child work precedes its completed proposal")
+    if not ready:
+        _set_action(
+            state,
+            "prepare_proposal",
+            location,
+            _position(*coordinate, "proposal"),
+            coordinate=coordinate,
+            plan=plan,
+            bundle=bundle,
+        )
+        return
+    proposal = _proposal(reader, state, coordinate, plan)
+    if proposal is None:
+        _set_action(state, "proposal", location / "proposal", _position(*coordinate, "proposal"))
+        return
+    settled_failure = False
+    if record["format"] in _CAPACITY_FORMATS:
+        capacity = shared._capacity_progress(
+            reader,
+            proposal,
+            _reference(reader, location / "proposal"),
+            record["proposal_capacity"],
+            location,
+            child_directory=location / "screen",
+        )
+        if capacity is None:
+            raise ImproverStudyError("counted proposal omitted its declared capacity policy")
+        if capacity["present"]:
+            state["capacity_paths"].add(capacity["path"])
+        settled_failure = record["format"] == _SETTLED_FORMAT and shared._settled_proposal_failure(
+            proposal, capacity
+        )
+        if not capacity["present"] or (
+            capacity["record"]["decision"] != "pass" and not settled_failure
+        ):
+            if any(_presence(reader, location / name) for name in ("witness", "decision.json")):
+                raise ImproverStudyError("counted outcome precedes its passing capacity checkpoint")
+            _set_action(
+                state,
+                "proposal_capacity",
+                location,
+                _position(*coordinate, "proposal_capacity"),
+            )
+            return
+    status, screen_ref, witness_ref = "rejected", None, None
+    identifier = None
+    if proposal["disposition"] == "materialized" and not settled_failure:
+        identifier = proposal["child"]["agent_sha256"]
+        if identifier in known[key]:
+            status = "duplicate"
+            if _presence(reader, location / "screen") or _presence(reader, location / "witness"):
+                raise ImproverStudyError(
+                    "duplicate counted source executes extra screen/witness work"
+                )
+        else:
+            child = shared._child_screen_for(
+                state["screens"][start], proposal, location, source_copy=True
+            )
+            if not _presence(reader, location / "screen"):
+                _set_action(
+                    state,
+                    "prepare_child",
+                    location,
+                    _position(*coordinate, "screen"),
+                    child=child,
+                    proposal=proposal,
+                )
+                return
+            retained: list[source_screen_results._CompletedScreenRead] = []
+            report = _screen(reader, state, location / "screen", child, retained=retained)
+            if report is None:
+                _set_action(state, "screen", location / "screen", _position(*coordinate, "screen"))
+                return
+            screen_ref = _reference(reader, location / "screen")
+            if report.get("disposition") == "candidate_execution_failed":
+                status = "candidate_execution_failed"
+            elif _object(report["admission"])["eligible"] is not True:
+                status = "ineligible"
+            else:
+                treatment, progress = _witness(
+                    reader,
+                    state,
+                    screen_ref,
+                    location / "witness",
+                    state["screens"][start],
+                    completed=retained[0] if retained else None,
+                )
+                if progress["result"] is None:
+                    role = progress["lower_role"]
+                    stage = "witness_" + (
+                        "feedback"
+                        if progress["needs_prepare"] and role == "proposal"
+                        else (role or "publication")
+                    )
+                    _set_action(
+                        state,
+                        "witness",
+                        location / "witness",
+                        _position(*coordinate, stage),
+                        treatment=treatment,
+                    )
+                    return
+                if progress["result"] not in state["witnesses"]:
+                    state["witnesses"].append(progress["result"])
+                witness_ref = _reference(reader, location / "witness")
+                status = (
+                    "admitted"
+                    if progress["result"]["status"] == "passed"
+                    else "mutation_witness_failed"
+                )
+    elif _presence(reader, location / "screen") or _presence(reader, location / "witness"):
+        raise ImproverStudyError("rejected proposal executes descendant work")
+    decision = {
+        "format": _DECISION,
+        **dict(zip(_COORD, coordinate, strict=True)),
+        "status": status,
+        "candidate_id": identifier,
+        "improver_agent_sha256": plan["improver_agent_sha256"],
+        "parent": plan["parent"],
+        "proposal": _reference(reader, location / "proposal"),
+        "screen": screen_ref,
+        "witness": witness_ref,
+    }
+    if not _presence(reader, location / "decision.json"):
+        _set_action(
+            state, "decision", location, _position(*coordinate, "decision"), decision=decision
+        )
+        return
+    if reader.raw(location / "decision.json") != _json(decision):
+        raise ImproverStudyError("decision changes its actual original terminal outcomes")
+    state["cell_decisions"][key].append(decision)
+    state["decisions"].append(decision)
+    if identifier is not None:
+        known[key].add(identifier)
+    if status == "admitted":
+        pools[key].append(cast(dict[str, object], screen_ref))
+    elif status == "candidate_execution_failed":
+        failures[key].append(
+            {"parent": plan["parent"], "proposal": decision["proposal"], "screen": screen_ref}
+        )
+    state["_current_plan"] = None
+
+
+def _check_progress(reader: NativeEvidence, state: dict[str, Any]) -> None:
+    if state["checked"] != state["owner_paths"]:
+        raise ImproverStudyError("a retained owner lacks its original scheduled treatment")
+    if state["inactive"]:
+        raise ImproverStudyError("an unfinished original owner is inactive")
+    state["coverage"] = _coverage(state)
+    if state["record"]["format"] in _CAPACITY_FORMATS:
+        checkpoints = {
+            reader.root / name
+            for name in reader.capture.entries
+            if name.endswith("proposal-capacity.json")
+        }
+        if checkpoints != state["capacity_paths"]:
+            raise ImproverStudyError("foreign or premature proposal capacity checkpoint")
+
+
 def _restore_observed(
     directory: Path, authorization: Path
 ) -> tuple[NativeEvidence, dict[str, Any]]:
     reader = NativeEvidence(directory, authorization, error_type=ImproverStudyError)
     state = _original(reader)
     _census(reader, state)
+    pools: dict[tuple[int, int, int], list[dict[str, object]]] = {}
+    failures: dict[tuple[int, int, int], list[dict[str, object]]] = {}
+    known: dict[tuple[int, int, int], set[str]] = {}
     state.update(
         common={},
+        pools=pools,
+        failures=failures,
         cell_decisions={},
         decisions=[],
         attempted=0,
@@ -1577,6 +1895,7 @@ def _restore_observed(
         frozen=None,
         observations=[],
         capacity_paths=set(),
+        _current_plan=None,
     )
     record = state["record"]
     for start, base in enumerate(state["screens"]):
@@ -1585,288 +1904,16 @@ def _restore_observed(
             if state["action"] is not None:
                 _future(reader, location)
                 continue
-            screen_root = location / "screen"
-            if not _presence(reader, screen_root):
-                _set_action(
-                    state,
-                    "prepare_common",
-                    screen_root,
-                    _position(start, repetition, None, None, "common_screen"),
-                    screen=base,
-                )
-                continue
-            retained: list[source_screen_results._CompletedScreenRead] = []
-            report = _screen(reader, state, screen_root, base, retained=retained)
-            if report is None:
-                _set_action(
-                    state,
-                    "screen",
-                    screen_root,
-                    _position(start, repetition, None, None, "common_screen"),
-                )
-                continue
-            reference = _reference(reader, screen_root)
-            if _object(report["admission"])["eligible"] is not True:
-                _set_action(
-                    state,
-                    "common_ineligible",
-                    screen_root,
-                    _position(start, repetition, None, None, "common_screen"),
-                    result=report,
-                )
-                continue
-            treatment, progress = _witness(
-                reader,
-                state,
-                reference,
-                location / "witness",
-                base,
-                completed=retained[0] if retained else None,
-            )
-            if progress["result"] is None:
-                role = progress["lower_role"]
-                stage = "common_witness_" + (
-                    "feedback"
-                    if progress["needs_prepare"] and role == "proposal"
-                    else (role or "publication")
-                )
-                _set_action(
-                    state,
-                    "witness",
-                    location / "witness",
-                    _position(start, repetition, None, None, stage),
-                    treatment=treatment,
-                )
-                continue
-            state["witnesses"].append(progress["result"])
-            if progress["result"]["status"] != "passed":
-                _set_action(
-                    state,
-                    "common_ineligible",
-                    location / "witness",
-                    _position(start, repetition, None, None, "common_witness"),
-                    result=progress["result"],
-                )
-                continue
-            state["common"][(start, repetition)] = reference
-    pools: dict[tuple[int, int, int], list[dict[str, object]]] = {}
-    failures: dict[tuple[int, int, int], list[dict[str, object]]] = {}
-    known: dict[tuple[int, int, int], set[str]] = {}
+            _common_progress(reader, state, start, repetition, base)
     for coordinate in _coordinates(record):
-        start, repetition, arm, slot = coordinate
         key = coordinate[:3]
         location = _location(directory, coordinate)
         state["cell_decisions"].setdefault(key, [])
         if state["action"] is not None:
             _future(reader, location)
             continue
-        if key not in pools:
-            pools[key] = [state["common"][(start, repetition)]]
-            failures[key], known[key] = [], {state["screens"][start].candidate_id}
-        position = _position(*coordinate, "feedback")
-        if not _presence(reader, location / "plan.json"):
-            prefix = location.relative_to(directory).as_posix() + "/"
-            if any(name.startswith(prefix) for name in reader.capture.entries):
-                raise ImproverStudyError("counted work precedes its original checked plan")
-            _set_action(
-                state,
-                "plan",
-                location,
-                position,
-                coordinate=coordinate,
-                pool=pools[key],
-                failures=failures[key],
-                previous=state["cell_decisions"][key],
-            )
-            continue
-        state["attempted"] += 1
-        plan, bundle = _plan(
-            reader, state, coordinate, pools[key], failures[key], state["cell_decisions"][key]
-        )
-        if reader.raw(location / "plan.json") != _json(plan):
-            raise ImproverStudyError("counted plan changes its original cell/parent/failure prefix")
-        ready = _presence(reader, location / "proposal")
-        for name in shared._FILES:
-            path = location / "feedback" / (name + ".json")
-            if (ready or _presence(reader, path)) and reader.raw(path) != _json(bundle[name]):
-                raise ImproverStudyError(
-                    "counted packet changes its complete original measured data"
-                )
-        if record["format"] in _CAPACITY_FORMATS and not _presence(
-            reader, location / "proposal/report.json"
-        ):
-            if any(
-                _presence(reader, location / name)
-                for name in (
-                    "agent",
-                    "screen",
-                    "witness",
-                    "decision.json",
-                    "proposal-capacity.json",
-                )
-            ):
-                raise ImproverStudyError("counted child work precedes its completed proposal")
-        if not ready:
-            _set_action(
-                state,
-                "prepare_proposal",
-                location,
-                _position(*coordinate, "proposal"),
-                coordinate=coordinate,
-                plan=plan,
-                bundle=bundle,
-            )
-            continue
-        proposal = _proposal(reader, state, coordinate, plan)
-        if proposal is None:
-            _set_action(
-                state, "proposal", location / "proposal", _position(*coordinate, "proposal")
-            )
-            continue
-        settled_failure = False
-        if record["format"] in _CAPACITY_FORMATS:
-            capacity = shared._capacity_progress(
-                reader,
-                proposal,
-                _reference(reader, location / "proposal"),
-                record["proposal_capacity"],
-                location,
-                child_directory=location / "screen",
-            )
-            if capacity is None:
-                raise ImproverStudyError("counted proposal omitted its declared capacity policy")
-            if capacity["present"]:
-                state["capacity_paths"].add(capacity["path"])
-            settled_failure = record[
-                "format"
-            ] == _SETTLED_FORMAT and shared._settled_proposal_failure(proposal, capacity)
-            if not capacity["present"] or (
-                capacity["record"]["decision"] != "pass" and not settled_failure
-            ):
-                if any(_presence(reader, location / name) for name in ("witness", "decision.json")):
-                    raise ImproverStudyError(
-                        "counted outcome precedes its passing capacity checkpoint"
-                    )
-                _set_action(
-                    state,
-                    "proposal_capacity",
-                    location,
-                    _position(*coordinate, "proposal_capacity"),
-                )
-                continue
-        status, screen_ref, witness_ref = "rejected", None, None
-        identifier = None
-        if proposal["disposition"] == "materialized" and not settled_failure:
-            identifier = proposal["child"]["agent_sha256"]
-            if identifier in known[key]:
-                status = "duplicate"
-                if _presence(reader, location / "screen") or _presence(
-                    reader, location / "witness"
-                ):
-                    raise ImproverStudyError(
-                        "duplicate counted source executes extra screen/witness work"
-                    )
-            else:
-                child = shared._child_screen_for(
-                    state["screens"][start], proposal, location, source_copy=True
-                )
-                if not _presence(reader, location / "screen"):
-                    _set_action(
-                        state,
-                        "prepare_child",
-                        location,
-                        _position(*coordinate, "screen"),
-                        child=child,
-                        proposal=proposal,
-                    )
-                    continue
-                retained = []
-                report = _screen(reader, state, location / "screen", child, retained=retained)
-                if report is None:
-                    _set_action(
-                        state, "screen", location / "screen", _position(*coordinate, "screen")
-                    )
-                    continue
-                screen_ref = _reference(reader, location / "screen")
-                if report.get("disposition") == "candidate_execution_failed":
-                    status = "candidate_execution_failed"
-                elif _object(report["admission"])["eligible"] is not True:
-                    status = "ineligible"
-                else:
-                    treatment, progress = _witness(
-                        reader,
-                        state,
-                        screen_ref,
-                        location / "witness",
-                        state["screens"][start],
-                        completed=retained[0] if retained else None,
-                    )
-                    if progress["result"] is None:
-                        role = progress["lower_role"]
-                        stage = "witness_" + (
-                            "feedback"
-                            if progress["needs_prepare"] and role == "proposal"
-                            else (role or "publication")
-                        )
-                        _set_action(
-                            state,
-                            "witness",
-                            location / "witness",
-                            _position(*coordinate, stage),
-                            treatment=treatment,
-                        )
-                        continue
-                    state["witnesses"].append(progress["result"])
-                    witness_ref = _reference(reader, location / "witness")
-                    status = (
-                        "admitted"
-                        if progress["result"]["status"] == "passed"
-                        else "mutation_witness_failed"
-                    )
-        elif _presence(reader, location / "screen") or _presence(reader, location / "witness"):
-            raise ImproverStudyError("rejected proposal executes descendant work")
-        decision = {
-            "format": _DECISION,
-            **dict(zip(_COORD, coordinate, strict=True)),
-            "status": status,
-            "candidate_id": identifier,
-            "improver_agent_sha256": plan["improver_agent_sha256"],
-            "parent": plan["parent"],
-            "proposal": _reference(reader, location / "proposal"),
-            "screen": screen_ref,
-            "witness": witness_ref,
-        }
-        if not _presence(reader, location / "decision.json"):
-            _set_action(
-                state, "decision", location, _position(*coordinate, "decision"), decision=decision
-            )
-            continue
-        if reader.raw(location / "decision.json") != _json(decision):
-            raise ImproverStudyError("decision changes its actual original terminal outcomes")
-        state["cell_decisions"][key].append(decision)
-        state["decisions"].append(decision)
-        if identifier is not None:
-            known[key].add(identifier)
-        if status == "admitted":
-            pools[key].append(cast(dict[str, object], screen_ref))
-        elif status == "candidate_execution_failed":
-            failures[key].append(
-                {"parent": plan["parent"], "proposal": decision["proposal"], "screen": screen_ref}
-            )
-    state["pools"], state["failures"] = pools, failures
-    if state["checked"] != state["owner_paths"]:
-        raise ImproverStudyError("a retained owner lacks its original scheduled treatment")
-    if state["inactive"]:
-        raise ImproverStudyError("an unfinished original owner is inactive")
-    state["coverage"] = _coverage(state)
-    if record["format"] in _CAPACITY_FORMATS:
-        checkpoints = {
-            directory / name
-            for name in reader.capture.entries
-            if name.endswith("proposal-capacity.json")
-        }
-        if checkpoints != state["capacity_paths"]:
-            raise ImproverStudyError("foreign or premature proposal capacity checkpoint")
+        _opportunity_progress(reader, state, coordinate, known)
+    _check_progress(reader, state)
     _observations(reader, state)
     if _presence(reader, directory / "freeze"):
         if state["action"] is not None:
@@ -1880,6 +1927,7 @@ def _restore_observed(
             _position(0, 0, None, None, "publication"),
         )
     reader.capture.finish()
+    state["known"] = known
     return reader, state
 
 
@@ -2342,18 +2390,25 @@ def _observe(
 
 def _write_plan(
     directory: Path, state: dict[str, Any], action: dict[str, Any], authorization: Path
-) -> None:
+) -> tuple[dict[str, Any], dict[str, Any]]:
     location = action["directory"]
     location.mkdir(parents=True, exist_ok=True)
     _root(location)
-    reader = NativeEvidence(directory, authorization, error_type=ImproverStudyError)
-    plan, bundle = _plan(
-        reader, state, action["coordinate"], action["pool"], action["failures"], action["previous"]
-    )
-    reader.capture.finish()
+    with _passive_tree_observation():
+        reader = NativeEvidence(directory, authorization, error_type=ImproverStudyError)
+        plan, bundle = _plan(
+            reader,
+            state,
+            action["coordinate"],
+            action["pool"],
+            action["failures"],
+            action["previous"],
+        )
+        reader.capture.finish()
     pipeline._same_or_write(location / "plan.json", _json(plan))
     shared._write_packet(location / "feedback", plan, bundle)
     pipeline._same_or_write(location / "proposal.json", _json(plan["proposal_descriptor"]))
+    return plan, bundle
 
 
 def _prepare_proposal(
@@ -2461,6 +2516,69 @@ def inspect_improver_study(
     return saved
 
 
+def _check_action_writes(
+    previous: NativeEvidence, current: NativeEvidence, action: dict[str, Any]
+) -> None:
+    """Detect unexpected writes; consumed content still needs its original byte checks."""
+    kind, location = action["kind"], action["directory"]
+    scopes: tuple[Path, ...]
+    if kind in {"prepare_common", "plan", "prepare_proposal", "proposal", "screen", "witness"}:
+        scopes = (location,)
+    elif kind == "prepare_child":
+        scopes = (location / "agent", location / "screen")
+    elif kind in {"decision", "proposal_capacity"}:
+        scopes = (location / ("decision.json" if kind == "decision" else "proposal-capacity.json"),)
+    elif kind == "freeze":
+        scopes = (current.root / "freeze",)
+    else:
+        raise ImproverStudyError("no forward write scope for this study action")
+    before, after = previous.capture.entries, current.capture.entries
+    for name in before.keys() | after.keys():
+        path = current.root / name
+        if any(path.is_relative_to(scope) for scope in scopes):
+            continue
+        if any(scope.is_relative_to(path) for scope in scopes):
+            if name not in after or (name in before and before[name][:2] != after[name][:2]):
+                raise ImproverStudyError("study action replaced an ancestor directory")
+            _root(path)
+        elif before.get(name) != after.get(name):
+            raise ImproverStudyError("study action changed evidence outside its owned stage")
+
+
+@_passive_tree_observation()
+def _forward_read(
+    previous: NativeEvidence, state: dict[str, Any]
+) -> tuple[NativeEvidence, dict[str, Any]]:
+    """Refresh custody and the active opportunity; never replay earlier scientific decisions."""
+    reader = NativeEvidence(previous.root, previous.authorization, error_type=ImproverStudyError)
+    _check_action_writes(previous, reader, state["action"])
+    _check_current(state)
+    # Decode reuse requires fresh identical file bytes; funding and all mirrors stay fresh.
+    _census(reader, state, previous=previous)
+    state["action"], state["inactive"] = None, False
+    for start, base in enumerate(state["screens"]):
+        for repetition in range(state["record"]["repetitions"]):
+            if (start, repetition) not in state["common"] and state["action"] is None:
+                _common_progress(reader, state, start, repetition, base)
+    for coordinate in _coordinates(state["record"]):
+        key = coordinate[:3]
+        if state["action"] is not None or coordinate[3] < len(state["cell_decisions"][key]):
+            continue
+        current = state["_current_plan"]
+        planned = current[1:] if current is not None and current[0] == coordinate else None
+        _opportunity_progress(reader, state, coordinate, state["known"], planned=planned)
+    _check_progress(reader, state)
+    if state["action"] is None:
+        _set_action(
+            state,
+            "publish" if _presence(reader, reader.root / "freeze") else "freeze",
+            reader.root,
+            _position(0, 0, None, None, "publication"),
+        )
+    reader.capture.finish()
+    return reader, state
+
+
 def _advance_action(
     reader: NativeEvidence,
     state: dict[str, Any],
@@ -2494,7 +2612,8 @@ def _advance_action(
                 input_bindings=_controls_for(state, location / "tasks/0/generation/owners/0"),
             )
         elif kind == "plan":
-            _write_plan(directory, state, action, authorization)
+            plan, bundle = _write_plan(directory, state, action, authorization)
+            state["_current_plan"] = (action["coordinate"], plan, bundle)
         elif kind == "prepare_proposal":
             _prepare_proposal(state, action, authority)
         elif kind == "proposal":
@@ -2553,15 +2672,15 @@ def _advance_action(
         else:
             raise ImproverStudyError("finite study has no checked next operation")
         if child is not None and child["status"] != "complete":
-            _, observed = _restore(directory, authorization)
+            _, observed = _forward_read(reader, state)
             _check_current(observed)
             return _observe(directory, observed, authority, cast(str, child["reason"]), child)
     except shared._ProposalCapacityStop:
-        _, observed = _restore(directory, authorization)
+        _, observed = _forward_read(reader, state)
         _check_current(observed)
         return _observe(directory, observed, authority, "proposal_capacity", None)
     except source_feedback.SourceFeedbackReconstructionLimit:
-        _, observed = _restore(directory, authorization)
+        _, observed = _forward_read(reader, state)
         _check_current(observed)
         reason = (
             "feedback_reconstruction_limit"
@@ -2570,12 +2689,25 @@ def _advance_action(
         )
         return _observe(directory, observed, authority, reason, None)
     except source_feedback.SourceFeedbackTooLarge:
-        _, observed = _restore(directory, authorization)
+        _, observed = _forward_read(reader, state)
         _check_current(observed)
         return _observe(directory, observed, authority, "feedback_capacity", None)
     except KeyboardInterrupt:
-        _, observed = _restore(directory, authorization)
-        _observe(directory, observed, authority, "cancelled", None)
+        try:
+            _, observed = _forward_read(reader, state)
+            _observe(directory, observed, authority, "cancelled", None)
+        except (
+            ValueError,
+            TypeError,
+            KeyError,
+            OSError,
+            RecursionError,
+            OverflowError,
+            sqlite3.Error,
+            _Busy,
+            _Unsupported,
+        ):
+            pass  # Preserve the interrupt and lower-stage evidence if validation cannot finish.
         raise
     return None
 
@@ -2598,9 +2730,13 @@ def run_improver_study(directory: Path, *, transport: RawHTTPTransport) -> dict[
         trial_fence.work(authorization, authority._terms(), directory=directory, kind="search"),
         pipeline._exclusive(directory),
     ):
+        reader, state = _restore(directory, authorization)
         while True:
-            reader, state = _restore(directory, authorization)
             _check_current(state)
+            reader.capture.finish()
             result = _advance_action(reader, state, authority, transport)
             if result is not None:
                 return result
+            reader, state = _forward_read(reader, state)
+            if state["action"]["kind"] in {"freeze", "publish"}:
+                reader, state = _restore(directory, authorization)
