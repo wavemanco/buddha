@@ -1,0 +1,263 @@
+{
+  "format": "buddha.study-forward-runner-delivery.v1",
+  "base_commit": "9ea94dd51508e5c9b5c3fe9782ef5267ba18bcc9",
+  "status": "implementation_checked; complete regression pending approval",
+  "production_scope": "one existing module: improver_study.py; no added execution interface/schema/dependency",
+  "sources": {
+    "buddha/improver_study.py": "f1d74d3c1a8cbc3763e76c02971d6b9baadb248f8c84985a73525ff58177d12a",
+    "tests/test_improver_study.py": "de359b369f18b770027fef8486ddcda6f758db5c5916458c8d9f6f96d8a6b9db",
+    "tests/test_improver_study_forward.py": "715ac456f17a5ee54a69f1765c9815c69654a2ee978344774749aaa87ee523e5",
+    "ci_test_shard.py": "5c69dd0072f8f418fe08c750e1a1edfa0cc8ebeca6507b596a1e3255496ba2bd"
+  },
+  "changes": [
+    "share historical common/opportunity validators with live runner",
+    "carry only checked current plan/bundle, pools, known IDs and decisions",
+    "fresh observations after each write with unexpected-write detection",
+    "fresh full owner/authority/mirror census; unchanged decoded owners reused only after fresh identical manifest/ledger bytes and manifest self-check",
+    "cold reconstruction at entry, before freeze and after freeze before publication",
+    "partial refresh checks active position/coverage before original observation; interrupts preserved",
+    "new test cases omit separate unrelated bootstrap executions; original fixtures keep default bootstrap=True"
+  ],
+  "local_guard_checks": [
+    {
+      "test": "test_improver_study_forward.ImproverStudyForwardTests.test_prepared_census_reuses_only_identical_checked_owner_bytes",
+      "seconds": 2.209345999872312,
+      "deadline_seconds": 120,
+      "timeout": false,
+      "exit_code": 0,
+      "sources": {
+        "buddha/improver_study.py": "f1d74d3c1a8cbc3763e76c02971d6b9baadb248f8c84985a73525ff58177d12a",
+        "tests/test_improver_study.py": "de359b369f18b770027fef8486ddcda6f758db5c5916458c8d9f6f96d8a6b9db",
+        "tests/test_improver_study_forward.py": "715ac456f17a5ee54a69f1765c9815c69654a2ee978344774749aaa87ee523e5"
+      },
+      "sources_unchanged": true,
+      "no_model_calls": true,
+      "guard": "host identity primed before audit; network/external execution denied during tests; supplied fixtures",
+      "source_base": "9ea94dd51508e5c9b5c3fe9782ef5267ba18bcc9"
+    },
+    {
+      "test": "test_improver_study_forward.ImproverStudyForwardTests.test_action_write_scope_uses_actual_tree_snapshots_and_exact_checkpoint",
+      "seconds": 0.6612905999645591,
+      "deadline_seconds": 120,
+      "timeout": false,
+      "exit_code": 0,
+      "sources": {
+        "buddha/improver_study.py": "f1d74d3c1a8cbc3763e76c02971d6b9baadb248f8c84985a73525ff58177d12a",
+        "tests/test_improver_study.py": "de359b369f18b770027fef8486ddcda6f758db5c5916458c8d9f6f96d8a6b9db",
+        "tests/test_improver_study_forward.py": "715ac456f17a5ee54a69f1765c9815c69654a2ee978344774749aaa87ee523e5"
+      },
+      "sources_unchanged": true,
+      "no_model_calls": true,
+      "guard": "host identity primed before audit; network/external execution denied during tests; supplied fixtures",
+      "source_base": "9ea94dd51508e5c9b5c3fe9782ef5267ba18bcc9"
+    },
+    {
+      "test": "test_improver_study_forward.ImproverStudyForwardTests.test_keyboard_interrupt_survives_failed_forward_refresh_without_observation",
+      "seconds": 0.5307273999787867,
+      "deadline_seconds": 120,
+      "timeout": false,
+      "exit_code": 0,
+      "sources": {
+        "buddha/improver_study.py": "f1d74d3c1a8cbc3763e76c02971d6b9baadb248f8c84985a73525ff58177d12a",
+        "tests/test_improver_study.py": "de359b369f18b770027fef8486ddcda6f758db5c5916458c8d9f6f96d8a6b9db",
+        "tests/test_improver_study_forward.py": "715ac456f17a5ee54a69f1765c9815c69654a2ee978344774749aaa87ee523e5"
+      },
+      "sources_unchanged": true,
+      "no_model_calls": true,
+      "guard": "host identity primed before audit; network/external execution denied during tests; supplied fixtures",
+      "source_base": "9ea94dd51508e5c9b5c3fe9782ef5267ba18bcc9"
+    }
+  ],
+  "quality": [
+    {
+      "tool": "ruff",
+      "argv": [
+        "ruff",
+        "check",
+        "buddha",
+        "tests",
+        "agents",
+        "ci_test_shard.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.319664099952206
+    },
+    {
+      "tool": "ruff",
+      "argv": [
+        "ruff",
+        "format",
+        "--check",
+        "buddha",
+        "tests",
+        "agents",
+        "ci_test_shard.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.1083945999853313
+    },
+    {
+      "tool": "mypy",
+      "argv": [
+        "mypy",
+        "--strict",
+        "buddha",
+        "agents",
+        "ci_test_shard.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.38409529998898506
+    },
+    {
+      "tool": "bandit",
+      "argv": [
+        "bandit",
+        "-q",
+        "-r",
+        "buddha",
+        "agents",
+        "ci_test_shard.py"
+      ],
+      "exit_code": 0,
+      "seconds": 4.23044369998388
+    },
+    {
+      "tool": "compileall",
+      "argv": [
+        "compileall",
+        "-q",
+        "buddha",
+        "tests",
+        "agents",
+        "ci_test_shard.py"
+      ],
+      "exit_code": 0,
+      "seconds": 1.5162891000509262
+    },
+    {
+      "tool": "pip_audit",
+      "argv": [
+        "pip_audit",
+        "--disable-pip",
+        "--no-deps",
+        "--strict",
+        "-r",
+        "requirements-dev.txt"
+      ],
+      "exit_code": 0,
+      "seconds": 3.36563350004144
+    },
+    {
+      "tool": "pip_audit",
+      "argv": [
+        "pip_audit",
+        "--no-deps",
+        "-r",
+        "requirements.txt"
+      ],
+      "exit_code": 0,
+      "seconds": 19.129723399877548
+    }
+  ],
+  "independent_review": "mechanical extraction review plus independent safety/minimality reviews; identified interrupt error-set and canonical-manifest newline issues corrected",
+  "contract_ci": "pending; only three measured short guards added to normal short selection",
+  "functional_cases": [
+    "complete small v5 two-arm study, entry/freeze/publication restoration count and one ordinary plan per coordinate",
+    "v5 later-parent full comparison prefix versus independent historical reconstruction",
+    "known-reply reentry/rejection/trial fence",
+    "unknown witness hold/reentry",
+    "fixed improver drift before dispatch"
+  ],
+  "functional_status": "not passed; longer bounded regression requires explicit user approval",
+  "local_partials": [
+    {
+      "test": "test_improver_study_forward.ImproverStudyForwardTests.test_v5_complete_writer_uses_three_cold_restores_and_one_plan_per_coordinate",
+      "seconds": 120.37344080000184,
+      "deadline_seconds": 120,
+      "timeout": true,
+      "exit_code": null,
+      "sources": {
+        "buddha/improver_study.py": "cbb98c8a4442ac8bb36fcc3a3ad12795b5a129bf6d0f27f923be6bf03b9c5197",
+        "tests/test_improver_study_forward.py": "05b892eca0bc46ae6a9503ac1acf0f10415cf97cafbe6ec6119dec51bd943032"
+      },
+      "sources_unchanged": true,
+      "no_model_calls": true,
+      "guard": "actual host identity primed before audit; deny socket connect/bind and external execution during test; existing fixtures supply workers/HTTPS/native results"
+    },
+    {
+      "test": "test_improver_study_forward.ImproverStudyForwardTests.test_v5_complete_writer_uses_three_cold_restores_and_one_plan_per_coordinate",
+      "seconds": 120.20342779997736,
+      "deadline_seconds": 120,
+      "timeout": true,
+      "exit_code": null,
+      "sources": {
+        "buddha/improver_study.py": "f1d74d3c1a8cbc3763e76c02971d6b9baadb248f8c84985a73525ff58177d12a",
+        "tests/test_improver_study_forward.py": "193d31b37fcac8bb9753ada4de3a2f448df304dbddcbbf03f3d34d8b3fc3c2e2"
+      },
+      "sources_unchanged": true,
+      "no_model_calls": true,
+      "guard": "host identity primed before audit; network/external execution denied during tests; supplied fixtures",
+      "source_base": "9ea94dd51508e5c9b5c3fe9782ef5267ba18bcc9"
+    },
+    {
+      "test": "test_improver_study_forward.ImproverStudyForwardTests.test_v5_unknown_witness_retains_hold_and_has_no_new_dispatch_on_reentry",
+      "seconds": 120.33283330011182,
+      "deadline_seconds": 120,
+      "timeout": true,
+      "exit_code": null,
+      "sources": {
+        "buddha/improver_study.py": "f1d74d3c1a8cbc3763e76c02971d6b9baadb248f8c84985a73525ff58177d12a",
+        "tests/test_improver_study.py": "de359b369f18b770027fef8486ddcda6f758db5c5916458c8d9f6f96d8a6b9db",
+        "tests/test_improver_study_forward.py": "715ac456f17a5ee54a69f1765c9815c69654a2ee978344774749aaa87ee523e5"
+      },
+      "sources_unchanged": true,
+      "no_model_calls": true,
+      "guard": "host identity primed before audit; network/external execution denied during tests; supplied fixtures",
+      "source_base": "9ea94dd51508e5c9b5c3fe9782ef5267ba18bcc9"
+    },
+    {
+      "test": "test_improver_study_forward.ImproverStudyForwardTests.test_v5_changed_fixed_improver_after_prepare_refuses_before_original_dispatch",
+      "seconds": 120.54661389999092,
+      "deadline_seconds": 120,
+      "timeout": true,
+      "exit_code": null,
+      "sources": {
+        "buddha/improver_study.py": "f1d74d3c1a8cbc3763e76c02971d6b9baadb248f8c84985a73525ff58177d12a",
+        "tests/test_improver_study.py": "de359b369f18b770027fef8486ddcda6f758db5c5916458c8d9f6f96d8a6b9db",
+        "tests/test_improver_study_forward.py": "715ac456f17a5ee54a69f1765c9815c69654a2ee978344774749aaa87ee523e5"
+      },
+      "sources_unchanged": true,
+      "no_model_calls": true,
+      "guard": "host identity primed before audit; network/external execution denied during tests; supplied fixtures",
+      "source_base": "9ea94dd51508e5c9b5c3fe9782ef5267ba18bcc9"
+    }
+  ],
+  "partial_interpretation": [
+    "complete-v2 reached120seconds without retained action trace; no completion established",
+    "complete-v3 reached120seconds during common witness publication, before counted opportunities",
+    "unknown-v1 and control-v1 were concurrent; neither reached its target assertion",
+    "metadata-only postmortem found40/49 files and269243/362672 bytes, no history-size explosion; contention not established"
+  ],
+  "limits": [
+    "supplied workers/HTTPS/native scores; selected source, official evaluator and actual model not executed",
+    "no paid keys/API calls/real containers or original paid history accessed",
+    "no approved new long run/retry/extension/merge/live clearance",
+    "no measured speedup,193-owner/660-operation pass, full-suite qualification or scientific improvement"
+  ],
+  "superseded_prototype": {
+    "pr": "https://github.com/wavemanco/buddha/pull/263",
+    "state": "unmerged; not a dependency; retain artifacts without shipping extra command"
+  },
+  "next_verification": {
+    "status": "prepared; not approved; not run",
+    "selection": "test_improver_study_forward.ImproverStudyForwardTests",
+    "method_count": 8,
+    "attempts": 1,
+    "deadline_seconds_total": 1800,
+    "automatic_retry_resume_extension": false,
+    "runner_sha256": "49f7976ae992719071fa1efc551d78ad20f62fcf3d298d9c0149b9d2a52d7a3b",
+    "proposal_path": "runs/checks/study-forward-runner-20261104-v1/regression-proposal-v1.json",
+    "scope": "offline supplied-fixture regression only; no model calls, keys, actual containers or original paid history",
+    "partial_record": "Explicit passed/failed/partial status and reason; original stdout/stderr, exact source pins, elapsed/deadline/exit/timeout and last emitted case/action retained; missing terminal counts remain unavailable"
+  }
+}

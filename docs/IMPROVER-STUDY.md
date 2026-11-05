@@ -34,6 +34,27 @@ each opportunity number across the starts and occasions, alternating which
 improver goes first. This is a fixed recorded order. Repeating an occasion does
 not itself establish statistical independence.
 
+## Execution and saved-history checks
+
+The normal study runner keeps its checked plan, complete feedback, pools and
+decisions between stages. It rereads the active opportunity after each stage,
+using the same validators as the saved-history reader. The prescribed order,
+comparison feedback, capacity checks, mutation witnesses and output format stay
+the same. No extra execution command or study format is required.
+
+Each read observation ends before a stage writes files. The next observation is
+fresh. Unexpected writes outside that stage are refused, and fixed source/control
+files are checked before further work. Already decoded owner records can be
+reused only after fresh bounded manifest and ledger reads match their checked
+bytes. Shared authorization, operation mirrors and sidecars are always checked
+afresh; this reuses interpretation, not permission to spend.
+
+A fresh run reconstructs the full study at entry, before freezing descendants,
+and after freezing before publication. An interrupted run reconstructs its
+original records on reentry. Full history inspection remains available. These
+checks still cost time; the change does not establish realistic-scale speed or
+scientific improvement. [PLAN.md](PLAN.md) records verification and run approvals.
+
 ## Three different kinds of agent
 
 | Agent | Job |
