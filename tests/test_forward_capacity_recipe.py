@@ -204,7 +204,7 @@ class ForwardCapacityRecipeTests(unittest.TestCase):
                     phase = command[command.index("--phase") + 1]
                     recorded.append(phase)
                     self.assertEqual(phase, "build")
-                    self.assertLessEqual(kwargs["timeout"], 14400)
+                    self.assertLessEqual(kwargs["timeout"], 21600)
                     if expected_outcome == "timeout":
                         raise subprocess.TimeoutExpired(command, kwargs["timeout"])
                     recipe.write(
@@ -235,7 +235,7 @@ class ForwardCapacityRecipeTests(unittest.TestCase):
 
     def test_reader_receives_full_reserve_only_before_writer_deadline(self):
         recipe = self.recipe()
-        for writer_seconds in (14399, 14401):
+        for writer_seconds in (21599, 21601):
             with self.subTest(writer_seconds=writer_seconds):
                 _, _, binding, record, output = self.binding(recipe)
                 protocol = json.loads((PROJECT / recipe.PROTOCOL).read_bytes())
@@ -278,16 +278,16 @@ class ForwardCapacityRecipeTests(unittest.TestCase):
                 ):
                     code = recipe.parent(args)
                 result = json.loads((output / "result.json").read_bytes())
-                self.assertEqual(calls[0], ("build", 14400))
-                self.assertEqual(result["writer_limit_seconds"], 14400)
+                self.assertEqual(calls[0], ("build", 21600))
+                self.assertEqual(result["writer_limit_seconds"], 21600)
                 self.assertEqual(result["reporting_reserved_seconds"], 600)
-                if writer_seconds < 14400:
+                if writer_seconds < 21600:
                     self.assertEqual(code, 0)
-                    self.assertEqual(calls, [("build", 14400), ("read", 1800)])
+                    self.assertEqual(calls, [("build", 21600), ("read", 1800)])
                     self.assertEqual(result["status"], "complete")
                 else:
                     self.assertEqual(code, 3)
-                    self.assertEqual(calls, [("build", 14400)])
+                    self.assertEqual(calls, [("build", 21600)])
                     self.assertEqual(result["status"], "partial")
                     self.assertFalse((output / "read-stdout.log").exists())
 

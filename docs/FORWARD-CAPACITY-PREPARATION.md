@@ -1,11 +1,13 @@
 # Preparing the forward-runner capacity check
 
-**November 5 timing update:** preserve the first five-minute partial. The
-separately approved follow-up completed one common screen/witness and a cold
-prefix read in 449.549 seconds. The revised proposal below reserves writer,
-reader and reporting time separately; it remains unadopted and unexecuted.
-Use [the measurements and budget assumptions](FORWARD-TIMING-RESULTS.md) and
-PLAN item 4b for the current step. No larger run is cleared.
+**November 5 current preparation:** propose one fresh attempt on the current
+post-audit source: **6 hours for setup/writing/reader admission, 30 minutes
+reserved for the reader and 10 minutes for reporting: 6h40 total**. The earlier
+4h40 attempt remains an interrupted partial with unknown stop cause; its allowance
+is consumed. This proposal uses its later-round timings, not the short-prefix
+extrapolation that supported the old limit. Neither this run nor full qualification
+is authorised. [PLAN D6](PLAN.md#current-gates-to-the-completed-comparison) owns the
+next decision; [the old result](FORWARD-CAPACITY-RESULTS.md) remains unchanged.
 
 This is preparation, not permission to run. The earlier eight-case regression
 passed, but it used a much smaller workload. This case reuses the existing
@@ -63,7 +65,7 @@ file in the synthetic image.
 
 ## Proposed limits and their meaning
 
-- **One attempt, 4 hours 40 minutes total**: four hours for setup, the writer
+- **One attempt, 6 hours 40 minutes total**: six hours for setup, the writer
   and checks before admitting the reader; a fully reserved 30-minute reader;
   and ten minutes reserved for final checks and reporting. The reader starts
   only while its full allowance and the reporting reserve remain. A late
@@ -71,7 +73,7 @@ file in the synthetic image.
   clocks are per phase; the total deadline never restarts. There is no
   automatic retry, resume or extension.
   The operator must also measure the complete command, including final log
-  hashing and report saving. A pass requires that duration to be at most four
+  hashing and report saving. A pass requires that duration to be at most six
   hours and forty minutes. The driver's own complete status is insufficient:
   its final recording follows its last deadline check. Recording or cleanup may finish late; retain
   that time and record a partial in the separate acceptance receipt. This is
@@ -91,16 +93,28 @@ used four. This declared population covers those observed counts with
 headroom, not every permitted future call pattern, the full call ceiling or
 real provider request-body sizes and latency.
 
-These are proposed operational limits, not a completion forecast. Twenty
-equal-cost units at the measured 391.823-second first common cycle give a
-130.6-minute planning scenario; the writer's remaining 109.4 minutes cover
-unmeasured counted proposals, child bookkeeping, history growth and terminal
-checks. Owner-linear extrapolation of the 19.870-second prefix read gives
-seven minutes; the 30-minute allowance is a 4.28-times modeled margin. Neither
-scaling assumption is established. The earlier three-hour/15-minute proposal
-is retained in history as unadopted, not an extra acceptance criterion here.
-The prefix's roughly 1.01 GiB peak does not predict larger-case memory. The
-eight-case regression aggregate is not used to forecast this workload.
+These are proposed operating limits, not a completion forecast. The earlier
+attempt's last planning entry was at **10,372.213 seconds**, with ten saved
+admitted children and six children still unobserved. Its later two-child interval
+was **2,406.181 seconds**. A simple continuation scenario is:
+
+`10,372.2127083 + 6 * (2,406.1809058 / 2) = 17,590.7554257 seconds`
+
+That is about **4h53m11s**.
+
+That scenario excludes terminal writer work and assumes the remaining children
+cost the same as that observed pair. It already exceeds the old four-hour writer
+limit. A five-hour writer would leave only about seven minutes for final work.
+Six hours leaves **66m49s** above the scenario for larger history, final validation
+and uncertainty. That is an explicit planning margin, not an empirical upper
+bound or a guarantee. A timeout remains possible and must be reported honestly;
+there is no automatic extension.
+
+Keep the reader's 30 minutes, reporting's 10 minutes and measured 4 GiB threshold
+unchanged. No completed full-study observation supports adjusting those values.
+The earlier 19.870-second prefix read, roughly 1.01 GiB prefix peak and separate
+27.64-second cold witness do not predict complete-study reader time, memory or
+speed. The original attempt did not establish a timeout or a stop cause.
 
 Timeouts, errors, changed source, missing evidence and memory-limit misses
 remain explicit incomplete or failed acceptance results. Logs, last stage,
@@ -121,15 +135,16 @@ capacity readiness remains open. Full-suite qualification is separate.
 
 ## Commands for the reviewed handoff
 
-The final binding and exact paths/hashes will be prepared after the candidate
-is frozen and its short checks pass. The examples below are maintainer syntax;
+The final source binding and exact paths/hashes are prepared after the candidate
+is frozen. The final handoff requires its short checks and independent review to pass. The examples below are maintainer syntax;
 angle-bracket values must be replaced by that reviewed handoff. Use the
 reviewed candidate checkout named in the binding; the preserved primary
 checkout may contain older code. No command is
-needed from the project owner during preparation.
+needed from the project owner during preparation; the examples are not a live
+launch instruction.
 
 ```powershell
-python docs/conformance/forward-capacity.py --binding <binding.json> --sha256 <binding-sha256> --out <new-output-folder> --check
+& <absolute-base-python.exe> docs/conformance/forward-capacity.py --binding <binding.json> --sha256 <binding-sha256> --out <new-output-folder> --check
 ```
 
 Checks the selected source, protocol and unused output path once. It reads and
@@ -138,13 +153,16 @@ imports no workload fixtures and starts no workload process. It spends no API
 money, needs no keys and requires no separate PowerShell window.
 
 ```powershell
-python docs/conformance/forward-capacity.py --binding <binding.json> --sha256 <binding-sha256> --out <new-output-folder> --execute
+& <absolute-base-python.exe> docs/conformance/forward-capacity.py --binding <binding.json> --sha256 <binding-sha256> --out <new-output-folder> --execute
 ```
 
 Only after explicit adoption and execution approval, runs the one bounded
 offline attempt and retains its files and logs in the new folder. It uses no
-keys or API money. It occupies that terminal until completion; a separate
-window is optional. Ctrl+C stops the attempt and retains a partial result.
+keys or API money. It occupies that terminal until completion. Use a user-started standalone
+PowerShell window with the fixed base interpreter. The approved handoff will
+include the small invocation receipt that records start/end, raw exit code and
+whole-command elapsed time around the unchanged recipe, including its final
+log hashing and result saving. No keys are needed. Ctrl+C stops the attempt and retains a partial result.
 Rerunning requires a fresh approval and a new output folder; it does not resume
 an earlier attempt.
 
@@ -162,8 +180,15 @@ already supplies timed child execution. [Pyperf](https://pyperf.readthedocs.io/e
 is useful for repeated benchmark measurements, but would still require the
 domain accounting/custody checks and conditional reader; its Windows memory
 measurement also differs from this working-set criterion.
-[Inspect logs](https://inspect.aisi.org.uk/eval-logs.html) remain a possible
-inspection aid, without replacing these workload acceptance checks. No new
+The [real Inspect/owned-process proof](INSPECT-OBSERVABILITY-PROOF.md) is retained
+as component evidence. This capacity recipe does not emit Inspect action traces
+or inherit that proof's Job/descendant or observer-exit guarantees. Its existing
+parent times and joins each direct phase process; after startup, phase guards
+refuse subprocess/network work. Loss of the standalone owner can still leave a
+partial without terminal evidence. Restart survival stays deferred. Adding an
+SDK/supervisor here would create another path to qualify; it is not a D6 acceptance
+requirement. Any later Inspect enrollment belongs inside the process doing the
+study, with its own checks; no paid-path enrollment is cleared here. No new
 dependency or production scheduling layer is added for this one observation.
 
 ## Proposed execution sequence and full qualification
@@ -175,17 +200,17 @@ source, start the separately approved exact-source full qualification. A stop
 consumes that capacity attempt and does not trigger a retry or the conditional
 qualification. No label is applied during preparation.
 
-The current discovered qualification inventory is **2,215 methods per OS**,
-partitioned into five existing jobs per OS (ten jobs total). The explicit
+Current local discovery lists **2,232 methods**. The proposed qualification
+covers the complete inventory on each OS across five existing jobs (ten total). The explicit
 capacity workload is not a discovered unit test, so qualification does not
-silently repeat it. Short CI selects 459 contracts per OS, including the small
+silently repeat it. Short CI selects 476 contracts per OS, including the small
 preparation guards. An inventory is a count, not an executed test result.
 
 The existing full workflow stops its test worker after 60 minutes without
 genuine test progress; [GitHub-hosted jobs](https://docs.github.com/en/actions/reference/limits) also
 have a six-hour maximum. There
 is no automatic retry. The previous complete qualification at source 6e took
-about 34–53 minutes per Linux job and 2h16m–2h52m per Windows job. Those are
+about 34 to 53 minutes per Linux job and 2h16m to 2h52m per Windows job. Those are
 retained earlier-source job durations, not a forecast for this candidate.
 Full qualification uses GitHub Actions and no model API keys or charges; the
 repository was public when this preparation was checked. It is still a long

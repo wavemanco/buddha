@@ -1,0 +1,81 @@
+{
+  "format": "buddha.full-workload-preparation-delivery.v1",
+  "date": "2026-11-05",
+  "status": "prepared_for_source_freeze_and_approval_not_executed",
+  "base": "09e919e26c4d7d11813a92035b9566f96edeeded",
+  "limits_seconds": {
+    "setup_writer_admission": 21600,
+    "fresh_reader_reserved": 1800,
+    "reporting_reserved": 600,
+    "whole_command": 24000
+  },
+  "peak_working_set_bytes": 4294967296,
+  "time_basis": {
+    "last_observed_planning_entry_seconds": 10372.2127083,
+    "observed_later_two_child_interval_seconds": 2406.1809058,
+    "unobserved_children": 6,
+    "continuation_scenario_before_terminal_seconds": 17590.7554257,
+    "writer_slack_above_scenario_seconds": 4009.2445743,
+    "meaning": "Chosen operating margin; not forecast, upper bound, speedup or guaranteed completion",
+    "original_progress_log_sha256": "a10fcf8403bde0c6f6db69df326fbf302fde737ff892d404be9db74f3e938775"
+  },
+  "unchanged": {
+    "production_modules": 84,
+    "production_file_map_sha256": "847e7a69ac3e5571b2c33d9436342ba4fabb82a2348c1770acec6b2e05ee91c4",
+    "scale_fixture_sha256": "14bd1c8b9b44ce1600cc177f936a47a952e886ba8201cf39c6123159748e09f5",
+    "protocol_expected_and_other_acceptance_fields": "byte-decoded equal to base; no workload/guard/reader/memory reduction",
+    "owners": 296,
+    "simulated_operations": 1656,
+    "admitted_children": 16,
+    "screened_answers": 600,
+    "total_generated_answers": 800
+  },
+  "checks": {
+    "mocked_recipe_methods": 6,
+    "test_body_seconds": 0.442,
+    "whole_test_command_seconds": 0.6111934001091868,
+    "per_invocation_limit_seconds": 60,
+    "local_quality": [
+      "ruff",
+      "format",
+      "strict_mypy",
+      "bandit",
+      "diff_check"
+    ],
+    "full_inventory_only": 2232,
+    "short_inventory_only": 476,
+    "capacity_builds": 0,
+    "fresh_workload_reads": 0,
+    "qualification_runs": 0,
+    "hosted_short_ci": "Final exact-source terminal result is recorded in the PR before execution approval"
+  },
+  "execution_scope": "Existing fixed non-venv base Python; user-started standalone PowerShell; direct phase timeouts and joins, ordinary action/phase logs and original terminal records; independent whole recipe-command duration includes recipe final log hashing/result persistence.",
+  "not_transferred": [
+    "No real Inspect action traces in this capacity recipe",
+    "No Job or descendant/observer-exit guarantee from the separate component proof",
+    "No restart-survival guarantee; deferred",
+    "No paid-path or scientific clearance"
+  ],
+  "external_handoff_directory": "runs/checks/full-workload-preparation-20261105-v1",
+  "final_binding": "Created after clean commit; final HEAD/tree, full public source map and operator hash are recorded externally and in the PR. Final read-only --check must pass; no --execute during preparation.",
+  "evidence": {
+    "INDEPENDENT-LIMIT-REVIEW.md": "70b7266843743416712effbab86014f68b262f303ea7bac4cb437ee3d707f899",
+    "INDEPENDENT-PREPARATION-REVIEW.md": "e07ac645255aa96d6e4e528b601c1ed88d93d13f43883d5b43d63fa1ef0b651a",
+    "recipe-tests.log": "04e57a1fe4e75893bfcb5802475413c4240b0716a777346ccbfe7204a0e20055",
+    "full-inventory.log": "fb8355c1b3b875f4991cc253dec3200fa24eccf6b5bbdd1e98b0541c3b1d4c33",
+    "contracts-inventory.log": "649e8f5a9aad480558df4bc3694863d8243454886e8741a710da0563548c7787",
+    "FINAL-PREPARATION-REVIEW.md": "ebed838054894d828bb82e9fb4b73d5d793c9dfc652b76d9e7f733f2a0735fca"
+  },
+  "source_files": {
+    "docs/conformance/forward-capacity.py": "91aa83a9166534f86c5baa65555c794e345c11cc1c0d6b7d14d9124eb8b7dd09",
+    "docs/conformance/forward-capacity-protocol.json": "78bbd24c542a16335f818401513c5c3e4f1d81a7e507dae571caf13cfc1bdb9b",
+    "tests/test_forward_capacity_recipe.py": "7aba7385be0af814c452c03410daf8e13fcc51bc2a96a8d983d29036c34c2cd4",
+    "tests/scale_replay_fixture.py": "14bd1c8b9b44ce1600cc177f936a47a952e886ba8201cf39c6123159748e09f5"
+  },
+  "paid_calls": 0,
+  "real_containers": 0,
+  "new_long_runs": 0,
+  "automatic_retry_resume_extension": false,
+  "main_merge": false,
+  "next": "After short CI, final binding/check and independent handoff review: request one capacity attempt and separate conditional exact-source full qualification. D8 needs a fresh checked funded handoff and account/request reviews."
+}

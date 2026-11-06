@@ -147,7 +147,7 @@ def checked_binding(path, expected, output, *, git_check=True):
         protocol["reader_seconds"],
         protocol["reporting_seconds"],
         protocol["peak_working_set_bytes"],
-    ) != (16800, 1800, 600, 4 * 1024**3):
+    ) != (24000, 1800, 600, 4 * 1024**3):
         raise ValueError("capacity limits differ from this reviewed recipe")
     return record, protocol
 
