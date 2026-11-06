@@ -1,0 +1,98 @@
+{
+  "format": "buddha.final-ponytail-audit-delivery.v1",
+  "date": "2026-11-05",
+  "status": "source_audit_and_narrow_cleanup_complete",
+  "audited_source": "f8e675224b40772e449cacc4dcc3e37081dcad1f",
+  "audited_source_preserved_files": 861,
+  "coverage": {
+    "independent_domains": [
+      "science_and_evolution",
+      "financial_runtime_and_custody_integrity",
+      "code_tests_ci_and_dependencies"
+    ],
+    "tracked_files_mapped": 861,
+    "python_files_ast_parsed": 348,
+    "production_modules": 83,
+    "test_modules": 208,
+    "fully_read_integrity_modules": 24,
+    "depth_limit": "Focused critical-path source reading; not every test body or historical controller was read. Detailed per-domain coverage is in the retained reports."
+  },
+  "removal": {
+    "path": "buddha/policy_results.py",
+    "name": "inspect_prepared_study",
+    "original_lines": [
+      596,
+      710
+    ],
+    "function_lines": 115,
+    "total_deleted_lines": 117,
+    "added_production_lines": 0,
+    "dependency_change": 0,
+    "reason": "Definition-only checker for explicitly retired POL-02 launch frontend",
+    "new_file_sha256": "3d4a0a41c2fea856715c15069f637af72c5fd361bac9c8fc56d9b7e7543926eb",
+    "verification": "Independent exact byte splice; every surviving AST node identical; all83 module names preserved"
+  },
+  "retained": [
+    "Documented unified_continuation.advance_study checked-token API",
+    "Passive policy/controller/cost/panel/history readers",
+    "Original frozen checkouts and receipts",
+    "Fresh source/custody/accounting/scoring controls",
+    "README update only after proper stack integration"
+  ],
+  "checks": {
+    "independent_cross_review": "pass; eleven-line checked-token deletion rejected on semantic documentation contract",
+    "independent_post_edit": "pass",
+    "existing_policy_reader_tests": 3,
+    "test_body_seconds": [
+      0.607,
+      1.414
+    ],
+    "whole_command_seconds": [
+      1.2601634999737144,
+      1.677295999834314
+    ],
+    "per_invocation_limit_seconds": 60,
+    "local_quality": [
+      "ruff_check",
+      "ruff_format_check",
+      "mypy_strict",
+      "bandit",
+      "compileall",
+      "git_diff_check"
+    ],
+    "warnings": "Ruff cache write denied without affecting checks; existing informational Bandit nosec warnings. No suppressions changed.",
+    "hosted_short_ci": "Published PR records the terminal exact-head result separately; not full qualification"
+  },
+  "profile_context": {
+    "delivery": "docs/conformance/retained-witness-profile-delivery.json",
+    "whole_command_seconds": 27.6426664,
+    "performance_patch_adopted": false,
+    "limit": "One cold witness; not ordinary cross-stage retained-parent dispatch, complete workload capacity or study timing"
+  },
+  "next": "D6 prepare/review one source-bound full workload attempt with existing fixtures and realistic later-round time basis; execution needs fresh approval. D7 conditional exact-source full qualification and D8 funded live comparison remain open.",
+  "not_claimed": [
+    "No full test qualification",
+    "No workload-capacity or useful-diversity improvement proof",
+    "No historical stop-cause determination",
+    "No unresolved evaluator advisory/license clearance",
+    "No Codex restart-survival proof"
+  ],
+  "paid_calls": 0,
+  "real_containers": 0,
+  "new_long_runs": 0,
+  "automatic_retries": 0,
+  "main_merge": false,
+  "evidence_directory": "runs/checks/final-ponytail-audit-20261105-v1",
+  "evidence": {
+    "source-snapshot.json": "6273f7f6be22354a7ba8b1db81c7ece1ed3867ef022cbef36246fbb89614fec7",
+    "LEAN-AUDIT.md": "a359c985e14d1ed6428ecccd2aa544af341ce0dc1b03e1ba56196c4b1724f4d0",
+    "INTEGRITY-AUDIT.md": "08bd59ef1089b6d2f07b71973f76eb86b5119bcbc27c808145df48990923be2e",
+    "SCIENCE-AUDIT.md": "9edcd4dabb940246dc5c80e4819986f0c59e0730eb80c663757a3dbc2eb7c432",
+    "POST-EDIT-REVIEW.md": "9215817b01b6feccdb0df7d88bd3034eb5765caf114dd07d6a90e9b8b70701dd",
+    "focused-tests.log": "1a7bcd7c688cc50903cdf27c07ea1ed775cdc0f068894d555357b8ec462d2dac"
+  },
+  "current_documents": {
+    "docs/FINAL-PONYTAIL-AUDIT.md": "fcaa16aea37488eaf0ea244b588f0a4f988d3bc2529c198399cbb4507a68ac3f",
+    "docs/PLAN.md": "710fac3f734b0e9e7fdeb1d2b1e0b4cad73c64b978147fff84751ec2eaae0d2a"
+  }
+}
