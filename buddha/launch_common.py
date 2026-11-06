@@ -5,7 +5,7 @@ import sys
 import threading
 import time
 from collections.abc import Callable, Iterator, Mapping
-from contextlib import contextmanager
+from contextlib import AbstractContextManager, contextmanager, nullcontext
 from contextvars import ContextVar
 from pathlib import Path
 from types import GetSetDescriptorType, ModuleType, TracebackType
@@ -74,6 +74,18 @@ _WITNESS_CONTINUATION: ContextVar[
 _STUDY_CONTINUATION: ContextVar[
     Callable[[Path, Path, Mapping[Path, str]], dict[Path, str]] | None
 ] = ContextVar("study_continuation", default=None)
+
+
+_INSPECT_STAGE: ContextVar[
+    Callable[[str, Mapping[str, object] | None], AbstractContextManager[None]] | None
+] = ContextVar("inspect_stage", default=None)
+
+
+def _study_stage(
+    name: str, position: Mapping[str, object] | None = None
+) -> AbstractContextManager[None]:
+    observer = _INSPECT_STAGE.get()
+    return nullcontext() if observer is None else observer(name, position)
 
 
 class _SourceResolver(Protocol):
@@ -716,6 +728,10 @@ def _heartbeat(
     *,
     thread_name: str = "launch-progress",
 ) -> Iterator[None]:
+    if _INSPECT_STAGE.get() is not None:
+        with _study_stage("launcher"):
+            yield
+        return
     stop = threading.Event()
     started = time.monotonic()
 
@@ -791,6 +807,8 @@ def _receipt_roots(path: Path, expected_sha256: str) -> list[Path]:
             "analysis_plan",
             "improvement_rule",
         ),
+        "buddha.unified-launch.v1": ("primary_launch", "comparison_plan"),
+        "buddha.unified-launch.v2": ("primary_launch", "comparison_plan"),
     }
     path, expected_sha256 = _path(str(path.absolute())), _digest(expected_sha256)
     first = _load(pipeline._read(path, expected_sha256))
@@ -798,6 +816,8 @@ def _receipt_roots(path: Path, expected_sha256: str) -> list[Path]:
         "buddha.source-launch.v1",
         "buddha.policy-launch.v1",
         "buddha.improver-launch.v1",
+        "buddha.unified-launch.v1",
+        "buddha.unified-launch.v2",
     }:
         raise ReleaseError("receipt exclusions require a known pinned launch")
     roots, seen = {path}, {path: expected_sha256}

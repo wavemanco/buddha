@@ -58,6 +58,22 @@ This does not establish what ended these processes. No terminal receipt was
 fabricated from the later observation time, and the late process-absence check
 is not treated as the execution end time.
 
+## Subsequent bounded diagnosis: November 5
+
+The authorised historical investigation closed in300.778seconds, within its
+30-minute limit. It correlated the own-session unanswered poll with a desktop
+instance/executor transition less than a minute after the last study output.
+No retained event ties that transition directly to the workload's termination.
+Cause, exact end and exit remain unestablished. No further historical log
+search is scheduled. A sanitized receipt and selected-line hashes are retained
+in runs/checks/inspect-stage-integration-20261105-v1/forensics.json; raw host logs
+were not copied into the project.
+
+The user excludes Task Scheduler and global Windows logging. Subsequent work
+must use only project-owned processes and project-local observations. Real
+Inspect integration addresses the demonstrated visibility gap, without being
+presented as a proven fix for the historical stop or the slower second round.
+
 ## Stopping point
 
 [PLAN.md](PLAN.md) remains the roadmap. First deliver a short, independently

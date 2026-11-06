@@ -9,6 +9,7 @@ Wait for the exact funded command; see docs/UNIFIED-LAUNCH.md.
 import argparse
 import hashlib
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -26,6 +27,56 @@ class _Parser(argparse.ArgumentParser):
         raise UnifiedLaunchError("invalid command options")
 
 
+def _inspect_check(operation, handoff, expected_sha256, runtime):
+    """Keep framework state in a fresh folder, outside all original inputs."""
+    from buddha.inspect_study import run
+
+    runtime = launch_common._receipt_path(runtime)
+    roots = launch_common._receipt_roots(handoff, _digest(expected_sha256))
+    roots += [path.parent for path in roots if path.suffix.lower() == ".py"]
+    if any(runtime.is_relative_to(root) or root.is_relative_to(runtime) for root in roots):
+        raise UnifiedLaunchError("Inspect output overlaps original comparison evidence")
+    runtime.mkdir()
+    (runtime / ".env").write_bytes(b"")
+    settings = {
+        "WIN_PD_OVERRIDE_LOCAL_APPDATA": str(runtime / "appdata"),
+        "WIN_PD_OVERRIDE_APPDATA": str(runtime / "roaming"),
+        "WIN_PD_OVERRIDE_COMMON_APPDATA": str(runtime / "programdata"),
+        "XDG_DATA_HOME": str(runtime / "data"),
+        "XDG_CACHE_HOME": str(runtime / "cache"),
+        "INSPECT_LOG_DIR": str(runtime / "logs"),
+        "INSPECT_CACHE_DIR": str(runtime / "cache"),
+        "INSPECT_TRACE_FILE": str(runtime / "trace.log"),
+        "INSPECT_PY_LOGGER_FILE": str(runtime / "python.log"),
+        "INSPECT_TRACE_LEVEL": "TRACE",
+        "INSPECT_TRACEBACK_LOCALS": "0",
+        "MPLCONFIGDIR": str(runtime / "mpl"),
+        "PYTHON_DOTENV_DISABLED": "1",
+        "DO_NOT_TRACK": "1",
+    }
+    previous = {name: os.environ.get(name) for name in settings}
+    original_directory = Path.cwd()
+
+    def checked():
+        os.chdir(original_directory)
+        try:
+            return operation()
+        finally:
+            os.chdir(runtime)
+
+    try:
+        os.environ.update(settings)
+        os.chdir(runtime)
+        return run(checked, log_dir=runtime / "logs")
+    finally:
+        os.chdir(original_directory)
+        for name, value in previous.items():
+            if value is None:
+                os.environ.pop(name, None)
+            else:
+                os.environ[name] = value
+
+
 def main(argv=None):
     continuation_sha256 = None
     try:
@@ -37,7 +88,10 @@ def main(argv=None):
         parser.add_argument("--live", action="store_true")
         parser.add_argument("--prompt-keys", action="store_true")
         parser.add_argument("--confirm-project-keys", action="store_true")
+        parser.add_argument("--inspect-log-dir", type=Path)
         args = parser.parse_args(argv)
+        if args.inspect_log_dir is not None and (not args.check or args.continuation):
+            raise UnifiedLaunchError("Inspect currently supports fresh read-only checks only")
         if args.continuation:
             continuation_sha256 = _digest(args.sha256)
             from buddha.unified_continuation import (
@@ -47,12 +101,19 @@ def main(argv=None):
         if args.check:
             if args.live or args.prompt_keys or args.confirm_project_keys:
                 raise UnifiedLaunchError("check mode cannot request live work or keys")
+            handoff = args.handoff.absolute()
+
+            def check():
+                return (
+                    check_trial_continuation(handoff, expected_sha256=args.sha256).summary()
+                    if args.continuation
+                    else check_launch(handoff, expected_sha256=args.sha256)
+                )
+
             checked = (
-                check_trial_continuation(
-                    args.handoff.absolute(), expected_sha256=args.sha256
-                ).summary()
-                if args.continuation
-                else check_launch(args.handoff.absolute(), expected_sha256=args.sha256)
+                check()
+                if args.inspect_log_dir is None
+                else _inspect_check(check, handoff, args.sha256, args.inspect_log_dir.absolute())
             )
             record = {
                 "status": "checked",

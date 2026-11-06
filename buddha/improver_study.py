@@ -15,6 +15,7 @@ from typing import Any, cast
 from buddha import (
     candidate_generation,
     candidate_improvement,
+    launch_common,
     source_feedback,
     source_screen,
     source_screen_results,
@@ -2730,13 +2731,18 @@ def run_improver_study(directory: Path, *, transport: RawHTTPTransport) -> dict[
         trial_fence.work(authorization, authority._terms(), directory=directory, kind="search"),
         pipeline._exclusive(directory),
     ):
-        reader, state = _restore(directory, authorization)
+        with launch_common._study_stage("restore"):
+            reader, state = _restore(directory, authorization)
         while True:
             _check_current(state)
             reader.capture.finish()
-            result = _advance_action(reader, state, authority, transport)
+            action = state["action"]
+            with launch_common._study_stage(action["kind"], action["position"]):
+                result = _advance_action(reader, state, authority, transport)
             if result is not None:
                 return result
-            reader, state = _forward_read(reader, state)
+            with launch_common._study_stage("forward_read"):
+                reader, state = _forward_read(reader, state)
             if state["action"]["kind"] in {"freeze", "publish"}:
-                reader, state = _restore(directory, authorization)
+                with launch_common._study_stage("restore"):
+                    reader, state = _restore(directory, authorization)

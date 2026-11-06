@@ -1,5 +1,78 @@
 # Inspect observability compatibility proof
 
+## Active integration: November 5, 2026
+
+The user has authorised bounded diagnosis and actual Inspect integration.
+Implementation and short verification are in progress; no new capacity,
+qualification or paid run is authorised. The historical proof below remains a
+partial, not an adopted integration. PLAN.md is the scheduling authority.
+
+### Project-only process ownership
+
+The user has excluded Task Scheduler and global Windows logging. No task was
+registered and the denied log-setting attempt changed no Windows configuration.
+Buddha must observe only its own process IDs/descendants and project-local files.
+No command to change Windows logging is needed.
+
+The selected route is Inspect in a user-started standalone PowerShell process.
+Inspect supplies stage/action logs and its subprocess result/timeout interface;
+Buddha retains its operation identities and budget authority. Inspect0.3.287's
+subprocess cleanup stops only its direct process, so descendant cleanup remains
+an explicit short-test requirement. Reuse the existing owned Windows-job helper
+if needed; do not build another workflow engine or assume chat-independent
+lifetime from Start-Process inside a Codex tool.
+
+The independent-lifetime proof needs an exact, reviewed short command after the
+integration passes its own checks. It requires no API keys or administrator
+rights. No actual paid run, full capacity attempt or global event-log read is
+cleared by this route.
+
+## Selected entry and scope
+
+The new optional `buddha.inspect_study.run` calls one trusted offline operation
+through an actual Inspect Task/solver. The ordinary source runner now emits
+restore, action, refresh, freeze and publication events when this context is
+active. The selected context replaces launcher heartbeat polling; it does not
+observe a run by repeatedly reconstructing its history.
+
+The first user-facing selection is read-only configuration checking. Maintainer
+syntax, after a fresh checked handoff and the exact entry path are supplied:
+
+```powershell
+& <pinned-Inspect-python.exe> <candidate-root>/docs/conformance/unified-run.py --handoff <handoff.json> --sha256 <handoff-sha256> --check --inspect-log-dir <new-observation-folder>
+```
+
+Runs once, checks the same handoff and creates Inspect records in a new local
+observation folder. It spends no API money, asks for no keys and starts no model
+or agent container. The folder must be outside original inputs, source folders
+and run state. It need not use a separate window for an ordinary check; Ctrl+C
+stops it. Do not type the angle-bracket placeholders literally. A separate
+standalone window will be required for the later short lifetime proof.
+
+`--inspect-log-dir` is refused with live execution or original continuation.
+The optional Inspect environment and source closure are not cleared for paid
+execution. No stock Inspect scorer or provider replaces NoveltyBench/Gateway.
+Stage diagnostics are redacted; original exceptions, causes and canonical
+results remain authoritative. An Inspect error log must not become a successful
+Buddha result. Calls bypassing Inspect's model API do not acquire automatic
+model transcripts or usage totals by virtue of this adapter.
+
+Startup uses a fresh empty-dotenv folder, project-owned cache/data/trace paths
+and disabled traceback locals before the first Inspect import. A preloaded
+Inspect process is refused so cached global file handlers cannot escape the
+project scope. The operation keeps its original working directory. Only
+framework logging/cache controls are temporarily overridden; API keys are not
+read or copied by the observer setup. The prior guard's incorrect handling of
+an absent CPU-probe file will be corrected only in the new bounded proof;
+selected candidate confinement is unchanged.
+
+This is direct synchronous execution. Inspect's async cancel button is not a
+process-tree terminator; independent lifetime/owned-descendant checks remain
+open. The planned real-framework cohort is one shared five-minute observation
+with supplied replies/workers, not a capacity attempt. Real Inspect, viewer,
+trace and underlying-stage behavior remain unverified until its receipt says
+otherwise. No full qualification, paid clearance or speedup follows from mocks.
+
 ## Current disposition: November 4, 2026
 
 PR258 removes our unused observer callback and its prototype tests. No
