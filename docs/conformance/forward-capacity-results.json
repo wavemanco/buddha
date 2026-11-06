@@ -1,0 +1,236 @@
+{
+  "format": "buddha.forward-capacity-partial-report.v1",
+  "observed_utc": "2026-11-06T00:03:52.914752+00:00",
+  "status": "partial",
+  "reason": "execution_process_lost_missing_terminal_evidence",
+  "actual_termination_cause": "unknown",
+  "end_time": null,
+  "exit_code": null,
+  "whole_invocation_seconds": null,
+  "whole_limit_acceptance": "unverified",
+  "head": "815e15c78cea494e74407e75b3c4b3e843becd8a",
+  "tree": "732f1aaacde4d5e90ef5d1557512a662392c70a3",
+  "source_pins_unchanged": 297,
+  "public_fixture_imports": false,
+  "new_workload_or_reader": false,
+  "action_events": 162,
+  "last_saved_action": {
+    "event": "action",
+    "elapsed_seconds": 10372.21270829998,
+    "kind": "plan",
+    "position": {
+      "start": 0,
+      "repetition": 1,
+      "arm": 0,
+      "slot": 1,
+      "stage": "feedback"
+    },
+    "owners_before": 206,
+    "operations_before": 1158
+  },
+  "missing_terminal_and_reader_files": [
+    "capacity-invocation-v1.json",
+    "capacity-attempt-1/result.json",
+    "capacity-attempt-1/build-result.json",
+    "capacity-attempt-1/read-result.json",
+    "capacity-attempt-1/read-stdout.log",
+    "capacity-attempt-1/read-stderr.log"
+  ],
+  "terminal_accounting": "not reconciled; last action values are pre-action observations only",
+  "terminal_memory": "unavailable; earlier process sample cannot replace terminal acceptance",
+  "qualification": "not started; capacity-pass condition not met",
+  "attempt_consumed": true,
+  "automatic_retry_resume_extension": false,
+  "paid_calls": 0,
+  "observed_after_tool_update": "write_stdin session72739 unknown; child55612 absent; no matching frozen recipe processes at2026-11-06T00:01:31.5150630Z; actual stop mechanism unestablished",
+  "files_sha256": {
+    "capacity-approval-v1.json": "b21171e5d0f0a4d913a79cb9bbd5022c5b1fe37ec39fe0c9efdc88bc659d0d40",
+    "full-capacity-binding-v1.json": "c1ec58b801aa83d38888f10960406256e167f845ccb9020294159512b1f5f125",
+    "capacity-operator-stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "capacity-operator-stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "capacity-attempt-1/build-stdout.log": "a10fcf8403bde0c6f6db69df326fbf302fde737ff892d404be9db74f3e938775",
+    "capacity-attempt-1/build-stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "client_date": "2026-11-05",
+  "executing_pr": 266,
+  "result_interpretation": "Interrupted partial; neither capacity pass nor demonstrated deadline failure. Termination cause and whole-command duration unknown.",
+  "expected": {
+    "counted_children": 16,
+    "owners": 296,
+    "simulated_operations": 1656
+  },
+  "saved_records": {
+    "common_screens": [
+      {
+        "path": "capacity-attempt-1/workspace/tmptzz9mrrc/forward-capacity/common/0/0/screen/report.json",
+        "sha256": "37563701e362b00a9d89bcb1d817f0f2796c1023ab12b35ce7b85a1a23861508",
+        "status": "complete"
+      },
+      {
+        "path": "capacity-attempt-1/workspace/tmptzz9mrrc/forward-capacity/common/0/1/screen/report.json",
+        "sha256": "66f8669d0bcc07a70dc92015ca8fdc30ce909794d78ab5f06e2d7cf1af8931ee",
+        "status": "complete"
+      },
+      {
+        "path": "capacity-attempt-1/workspace/tmptzz9mrrc/forward-capacity/common/1/0/screen/report.json",
+        "sha256": "45d28dda75792a06e6864567c87fa95465d46b4e2ae4e42c8cd050ae88f501a3",
+        "status": "complete"
+      },
+      {
+        "path": "capacity-attempt-1/workspace/tmptzz9mrrc/forward-capacity/common/1/1/screen/report.json",
+        "sha256": "6e4709956b5dc58b6533f65e50f23a6503f1d9984abe6b429a9f1947c2a77bf1",
+        "status": "complete"
+      }
+    ],
+    "common_witnesses": [
+      {
+        "path": "capacity-attempt-1/workspace/tmptzz9mrrc/forward-capacity/common/0/0/witness/report.json",
+        "sha256": "2dee6efbef610452458a270e0d0a84e047e70738b511426d5f135d069a8014f5",
+        "status": "passed"
+      },
+      {
+        "path": "capacity-attempt-1/workspace/tmptzz9mrrc/forward-capacity/common/0/1/witness/report.json",
+        "sha256": "dd13a5b22b58dfe093612a065405fc324127f50480e1a7623f5cde943ed2190b",
+        "status": "passed"
+      },
+      {
+        "path": "capacity-attempt-1/workspace/tmptzz9mrrc/forward-capacity/common/1/0/witness/report.json",
+        "sha256": "6756cc104a358beab84108885c5b69396a98331ccfa589bb614321cf3a16247f",
+        "status": "passed"
+      },
+      {
+        "path": "capacity-attempt-1/workspace/tmptzz9mrrc/forward-capacity/common/1/1/witness/report.json",
+        "sha256": "27ab6a26a441941aa3346c820e27ebec70b39ac156ba153ba067884743f9f488",
+        "status": "passed"
+      }
+    ],
+    "admitted_decisions": [
+      {
+        "position": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "path": "capacity-attempt-1/workspace/tmptzz9mrrc/forward-capacity/cells/0/0/0/0/decision.json",
+        "sha256": "10a1d722769a32ad7daeffb65ce496cd5a75da0d699a009b120c87701d231712",
+        "status": "admitted"
+      },
+      {
+        "position": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "path": "capacity-attempt-1/workspace/tmptzz9mrrc/forward-capacity/cells/0/0/0/1/decision.json",
+        "sha256": "ef54fb19ad48f388122e96c56c7f30b26e12122482ecf76d286c4e3a48be26fa",
+        "status": "admitted"
+      },
+      {
+        "position": [
+          0,
+          0,
+          1,
+          0
+        ],
+        "path": "capacity-attempt-1/workspace/tmptzz9mrrc/forward-capacity/cells/0/0/1/0/decision.json",
+        "sha256": "8fc4cdc94e86cd6bb4467b84a01fd6135cf8f2c501364d0b8e5c5ce37ea9f01b",
+        "status": "admitted"
+      },
+      {
+        "position": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "path": "capacity-attempt-1/workspace/tmptzz9mrrc/forward-capacity/cells/0/0/1/1/decision.json",
+        "sha256": "3937bb5188ea6d362bbc148722ad55147b9110822d55958f18a8fc71035ec3fd",
+        "status": "admitted"
+      },
+      {
+        "position": [
+          0,
+          1,
+          0,
+          0
+        ],
+        "path": "capacity-attempt-1/workspace/tmptzz9mrrc/forward-capacity/cells/0/1/0/0/decision.json",
+        "sha256": "5c40b4fdc66447fa07a5bbb3075886f3b395c343dc973cdcafc4319888f2a29e",
+        "status": "admitted"
+      },
+      {
+        "position": [
+          0,
+          1,
+          1,
+          0
+        ],
+        "path": "capacity-attempt-1/workspace/tmptzz9mrrc/forward-capacity/cells/0/1/1/0/decision.json",
+        "sha256": "e8358865fefddfb138deff80bc7c444be11a0c7da3e96d26a339ee3f60d0a2b3",
+        "status": "admitted"
+      },
+      {
+        "position": [
+          1,
+          0,
+          0,
+          0
+        ],
+        "path": "capacity-attempt-1/workspace/tmptzz9mrrc/forward-capacity/cells/1/0/0/0/decision.json",
+        "sha256": "17aee07fa0f355270791e52e3f9f14f33b30ef6216da06d3770ba1b82ba561af",
+        "status": "admitted"
+      },
+      {
+        "position": [
+          1,
+          0,
+          1,
+          0
+        ],
+        "path": "capacity-attempt-1/workspace/tmptzz9mrrc/forward-capacity/cells/1/0/1/0/decision.json",
+        "sha256": "aa1a6115d4268695c0e17792b1c0601258cd8ebf70caf6268190919fd8ae6ff9",
+        "status": "admitted"
+      },
+      {
+        "position": [
+          1,
+          1,
+          0,
+          0
+        ],
+        "path": "capacity-attempt-1/workspace/tmptzz9mrrc/forward-capacity/cells/1/1/0/0/decision.json",
+        "sha256": "5417cdc8dafdae72ec74febc444cabfdb34a334d9e563780152b336bae075357",
+        "status": "admitted"
+      },
+      {
+        "position": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "path": "capacity-attempt-1/workspace/tmptzz9mrrc/forward-capacity/cells/1/1/1/0/decision.json",
+        "sha256": "0219813e2894adf5f98c6fac1b6856b6e5c91db23b55e125db7d891f8c12fd81",
+        "status": "admitted"
+      }
+    ],
+    "qualifier": "Saved JSON statuses and hashes; no new cold reconstruction or terminal financial reconciliation."
+  },
+  "entry_interval_observations": {
+    "first_counted_preparation_seconds": 1766.8389452998526,
+    "second_round_planning_seconds": 7966.0318024999,
+    "first_eight_interval_seconds": 6199.192857200047,
+    "first_eight_mean_seconds": 774.8991071500059,
+    "next_two_interval_seconds": 2406.18090580008,
+    "next_two_mean_seconds": 1203.09045290004,
+    "limitation": "Intervals between action entries include execution and boundary checks. Different conditions, samples and host times; no isolated profile, scaling bound, speed ratio or stop-cause inference."
+  },
+  "external_evidence_root": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\forward-timing-budget-checks-20261105-v1",
+  "external_observation_sha256": "406f42048d19d6b494755010e75ec5bbe88661a4b20e926fc76c8b4a9f1d2af0",
+  "host_record_review_sha256": "378d44c70df9991bb63382a34191f9da87fe9a4c42f12eb9c926e7ed21d05d5a",
+  "host_review": "Bounded Windows application IDs1000/1001 and system IDs12/41/42/107/6005/6006/6008 query found no matching events in20:00UTC-to00:05UTC; last boot2026-10-14. Does not identify process termination.",
+  "static_reuse_gap": "Scheduler has a checked completed screen; witness dispatch reconstructs it for progress and again for materials. Present in common and child paths. No isolated cost or interruption-cause claim.",
+  "next_stopping_point": "Independent evidence-linked diagnosis and minimal correction proposal before execution-code changes; no further run under this consumed allowance."
+}
