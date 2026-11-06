@@ -19,9 +19,9 @@ The selected components have separate jobs:
 - Inspect records Buddha's stages and errors in a fresh project folder. Its
   [tracing API](https://inspect.aisi.org.uk/tracing.html) supplies the logging
   mechanism; it does not need Windows task-history access.
-- A user-started standalone PowerShell process owns the run and supervises only
-  workers it creates. This avoids relying on the desktop chat's lifetime. The
-  existing Windows-job helper is the candidate for stopping owned descendants;
+- A user-started standalone PowerShell process is the preferred run owner and
+  supervises only workers it creates. Survival across a Codex restart is deferred.
+  The existing Windows-job helper is the candidate for stopping owned descendants;
   actual interpreter ownership must be checked before releasing work.
 - Existing containers still isolate candidate code. Moving the entire host
   controller into a service or another workflow platform is not required here.
@@ -37,10 +37,17 @@ an explicit short-test requirement. Reuse the existing owned Windows-job helper
 if needed; do not build another workflow engine or assume chat-independent
 lifetime from Start-Process inside a Codex tool.
 
-The independent-lifetime proof needs an exact, reviewed short command after the
-integration passes its own checks. It requires no API keys or administrator
-rights. No actual paid run, full capacity attempt or global event-log read is
-cleared by this route.
+Process ownership and restart survival are separate checks. Ownership means
+confirming that a worker belongs to this run before monitoring or stopping it;
+normal failure/timeout handling and owned-descendant cleanup remain required,
+including cleanup if the project observer exits. These can use small owned
+workers without restarting Codex. Restart survival means the study continues
+if the Codex app closes or restarts. The user has deferred that second check;
+it must not block the completed comparison. The historical stop cause is still
+unestablished. No restart experiment is scheduled, and this clarification
+authorises no new execution. No API keys or administrator rights are needed
+for the proposed ownership check. No actual paid run, full capacity attempt or
+global event-log read is cleared by this route.
 
 ## Selected entry and scope
 
@@ -61,8 +68,8 @@ Runs once, checks the same handoff and creates Inspect records in a new local
 observation folder. It spends no API money, asks for no keys and starts no model
 or agent container. The folder must be outside original inputs, source folders
 and run state. It need not use a separate window for an ordinary check; Ctrl+C
-stops it. Do not type the angle-bracket placeholders literally. A separate
-standalone window will be required for the later short lifetime proof.
+stops it. Do not type the angle-bracket placeholders literally. A standalone
+window remains preferred for the eventual study launch; restart testing is deferred.
 
 `--inspect-log-dir` is refused with live execution or original continuation.
 The optional Inspect environment and source closure are not cleared for paid
@@ -82,8 +89,9 @@ an absent CPU-probe file will be corrected only in the new bounded proof;
 selected candidate confinement is unchanged.
 
 This is direct synchronous execution. Inspect's async cancel button is not a
-process-tree terminator; independent lifetime/owned-descendant checks remain
-open. The planned real-framework cohort is one shared five-minute observation
+process-tree terminator; owned-process cleanup remains unverified. Survival
+across a Codex restart is also unverified but deferred. The planned real-framework
+cohort is one shared five-minute observation
 with supplied replies/workers, not a capacity attempt. Its actual result and
 limits are below. No full qualification, paid clearance or speedup follows from mocks.
 
