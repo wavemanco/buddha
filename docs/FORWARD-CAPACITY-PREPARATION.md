@@ -1,24 +1,72 @@
 # Preparing the forward-runner capacity check
 
-**November 5 current preparation:** propose one fresh attempt on the current
-post-audit source: **6 hours for setup/writing/reader admission, 30 minutes
-reserved for the reader and 10 minutes for reporting: 6h40 total**. The earlier
-4h40 attempt remains an interrupted partial with unknown stop cause; its allowance
-is consumed. This proposal uses its later-round timings, not the short-prefix
-extrapolation that supported the old limit. Neither this run nor full qualification
-is authorised. [PLAN D6](PLAN.md#current-gates-to-the-completed-comparison) owns the
-next decision; [the old result](FORWARD-CAPACITY-RESULTS.md) remains unchanged.
+**November 6 approval:** the user approved one offline attempt at frozen source
+`8e2fdc50d3a2761ed329b81d74707817342ded75`: **6 hours for setup/writing/reader
+admission, 30 minutes reserved for the reader and 10 minutes for reporting:
+6h40 total**, retaining the 4 GiB measured child threshold. Only if capacity
+passes with unchanged source, one full Linux/Windows qualification is also
+approved. Neither has started at this handoff. There is no retry, resume,
+extension, model/API call, key entry, real container, funding change or main merge.
+The earlier 4h40 attempt remains its own consumed partial with unknown stop cause.
+[PLAN D6/D7](PLAN.md#current-gates-to-the-completed-comparison) owns the route.
 
-This is preparation, not permission to run. The earlier eight-case regression
-passed, but it used a much smaller workload. This case reuses the existing
+This approval applies only to the frozen source and exact command below.
+The earlier eight-case regression passed, but it used a much smaller workload.
+This case reuses the existing
 scale fixture and the corrected ordinary study runner. It adds no production
 runner, model call, benchmark change or workflow platform.
 
-[PLAN.md](PLAN.md) is the living roadmap. The exact proposed values are in
+[PLAN.md](PLAN.md) is the living roadmap. The exact adopted values are in
 [the protocol](conformance/forward-capacity-protocol.json); the executable
 recipe is [forward-capacity.py](conformance/forward-capacity.py).
 
-## What the proposed case does
+## Approved standalone PowerShell command
+
+Open a **new standalone PowerShell window** and run this once. No `cd`, API keys
+or administrator rights are needed. Keep the window open until it returns.
+
+```powershell
+& 'C:\Users\arvik\code\buddha\runs\checks\full-workload-preparation-20261105-v1\launch-command.ps1'
+```
+
+Starts the approved offline check using the fixed base Python and frozen
+checkout. It records when the command starts and ends, its exit code and elapsed
+time, and refuses an existing attempt/start marker. It uses simulated replies
+and records; it spends no API money. It can occupy this window for up to the
+6h40 acceptance allowance; late cleanup/reporting remains visible and cannot
+pass. Ctrl+C cancels the attempt; do not rerun it automatically.
+
+The terminal may stay quiet between phase messages. Detailed action entries go
+to `attempt-1/build-stdout.log`; a quiet terminal alone does not establish a stall.
+After the build phase starts, this optional command in a **second PowerShell
+window** shows its last eight entries and follows new ones:
+
+```powershell
+Get-Content -LiteralPath 'C:\Users\arvik\code\buddha\runs\checks\full-workload-preparation-20261105-v1\attempt-1\build-stdout.log' -Tail 8 -Wait
+```
+
+This only reads the progress log and keeps watching it. It spends nothing and
+changes nothing. Ctrl+C stops this log view; it does not stop the main check.
+
+When the main command returns, paste its final terminal output here. Codex will
+verify the saved writer/reader results and independent invocation receipt.
+Only a complete, timely, source-matching pass can trigger the approved full
+qualification. That qualification runs all discovered tests on each OS across
+ten GitHub jobs, with the existing 60-minute stop without genuine test progress
+and six-hour maximum per job. No extra PowerShell command is needed for it.
+
+Approval and the fresh read-only check are retained in
+`runs/checks/full-workload-preparation-20261105-v1/approval.json` and
+`approved-preflight.json`. They supersede only the old preparation's unapproved
+status; the frozen protocol/source/readiness bytes remain unchanged. The binding
+SHA256 is `52c87486c525c7373f4d98839c35cdd1b3ee42e738581a7bb741b975c2ab39da`;
+the command-file SHA256 is
+`c61aba355f7f56c9730baa28c7d2eedd6c24e166f071bd7e8e0539833f82fc3f`.
+No workload has been launched from Codex. The remaining sections explain the
+unchanged workload, adopted limits and maintainer syntax; their generic examples
+are not replacement launch commands for this handoff.
+
+## What the approved case does
 
 It creates new, retained synthetic records using two starting bundles, two
 repetitions, two fixed improver arms and two opportunities per arm. Each
@@ -63,7 +111,7 @@ and leave the retained study and authorization bytes unchanged. Consumed
 control bindings are also checked; this is not a byte audit of every unused
 file in the synthetic image.
 
-## Proposed limits and their meaning
+## Adopted limits and their meaning
 
 - **One attempt, 6 hours 40 minutes total**: six hours for setup, the writer
   and checks before admitting the reader; a fully reserved 30-minute reader;
@@ -93,7 +141,7 @@ used four. This declared population covers those observed counts with
 headroom, not every permitted future call pattern, the full call ceiling or
 real provider request-body sizes and latency.
 
-These are proposed operating limits, not a completion forecast. The earlier
+These are adopted operating limits, not a completion forecast. The earlier
 attempt's last planning entry was at **10,372.213 seconds**, with ten saved
 admitted children and six children still unobserved. Its later two-child interval
 was **2,406.181 seconds**. A simple continuation scenario is:
@@ -126,16 +174,16 @@ retained. Nothing in this recipe clears paid execution.
 The old **v4 prefix with 193 owners and 660 operations**, and its fresh
 15-minute reader, remain unpassed. Its construction partials are retained.
 
-The proposal is to adopt a readiness case for the **new v5 comparison**: a
+The adopted readiness case for the **new v5 comparison** is a
 complete 296-owner/1,656-operation study and a fresh complete-report inspection.
 It covers more declared work but is a different version and terminal state.
-Adopting it requires an explicit decision; a new result cannot retrospectively
-pass the old v4 gate. Until that decision and actual passing evidence exist,
-capacity readiness remains open. Full-suite qualification is separate.
+The user has adopted this case, but it cannot retrospectively pass the old v4
+gate. Capacity readiness remains open until actual passing evidence exists.
+Full-suite qualification is separate and conditional on that pass.
 
-## Commands for the reviewed handoff
+## Maintainer syntax for future preparations
 
-The final source binding and exact paths/hashes are prepared after the candidate
+For future preparations, the source binding and exact paths/hashes are prepared after the candidate
 is frozen. The final handoff requires its short checks and independent review to pass. The examples below are maintainer syntax;
 angle-bracket values must be replaced by that reviewed handoff. Use the
 reviewed candidate checkout named in the binding; the preserved primary
@@ -159,17 +207,17 @@ money, needs no keys and requires no separate PowerShell window.
 Only after explicit adoption and execution approval, runs the one bounded
 offline attempt and retains its files and logs in the new folder. It uses no
 keys or API money. It occupies that terminal until completion. Use a user-started standalone
-PowerShell window with the fixed base interpreter. The approved handoff will
-include the small invocation receipt that records start/end, raw exit code and
+PowerShell window with the fixed base interpreter. The current handoff includes
+the small invocation receipt that records start/end, raw exit code and
 whole-command elapsed time around the unchanged recipe, including its final
 log hashing and result saving. No keys are needed. Ctrl+C stops the attempt and retains a partial result.
 Rerunning requires a fresh approval and a new output folder; it does not resume
 an earlier attempt.
 
-Freeze all necessary fixture changes before requesting the existing
-[exact-source full qualification](CI-TESTS.md#full-qualification). Its approval
-does not transfer to changed code. Neither the capacity recipe nor full
-qualification starts automatically from this preparation.
+The current approval covers frozen source `8e2fdc50`; it does not transfer to
+changed code. The [full qualification](CI-TESTS.md#full-qualification) can start
+only after the approved capacity case passes. Neither starts from reading this
+document or running a maintainer check.
 
 ## Why this uses the existing components
 
@@ -191,16 +239,15 @@ requirement. Any later Inspect enrollment belongs inside the process doing the
 study, with its own checks; no paid-path enrollment is cleared here. No new
 dependency or production scheduling layer is added for this one observation.
 
-## Proposed execution sequence and full qualification
+## Approved execution sequence and full qualification
 
-Freeze this candidate after the fixture/recipe checks and independent review.
-Seek both execution decisions together. The proposed order is the single local
-capacity attempt first; only if its adopted acceptance passes with unchanged
-source, start the separately approved exact-source full qualification. A stop
+Both execution decisions are now approved for source `8e2fdc50`. The order is
+the single local capacity attempt first; only if its adopted acceptance passes
+with unchanged source, start the conditional exact-source full qualification. A stop
 consumes that capacity attempt and does not trigger a retry or the conditional
 qualification. No label is applied during preparation.
 
-Current local discovery lists **2,232 methods**. The proposed qualification
+Current local discovery lists **2,232 methods**. The approved qualification
 covers the complete inventory on each OS across five existing jobs (ten total). The explicit
 capacity workload is not a discovered unit test, so qualification does not
 silently repeat it. Short CI selects 476 contracts per OS, including the small
@@ -214,7 +261,7 @@ about 34 to 53 minutes per Linux job and 2h16m to 2h52m per Windows job. Those a
 retained earlier-source job durations, not a forecast for this candidate.
 Full qualification uses GitHub Actions and no model API keys or charges; the
 repository was public when this preparation was checked. It is still a long
-run requiring explicit approval, regardless of billing treatment.
+run; this user approval allows one conditional attempt, regardless of billing treatment.
 
 The earlier [preparation receipt](conformance/forward-capacity-preparation-delivery.json)
 retains its original source and inventories. The [timing receipt](conformance/forward-timing-observation.json)

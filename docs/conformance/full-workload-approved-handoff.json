@@ -1,0 +1,63 @@
+{
+  "format": "buddha.full-workload-approved-handoff.v1",
+  "date": "2026-11-06",
+  "status": "approved_user_launch_pending_not_executed",
+  "executing_source": "8e2fdc50d3a2761ed329b81d74707817342ded75",
+  "documentation_only": true,
+  "executing_files_changed": false,
+  "approval": {
+    "capacity_attempts": 1,
+    "qualification_runs": 1,
+    "qualification_requires_complete_timely_unchanged_source_capacity_pass": true,
+    "qualification_jobs": 10,
+    "no_genuine_progress_seconds": 3600,
+    "qualification_job_max_seconds": 21600
+  },
+  "capacity_seconds": {
+    "writer_setup_admission": 21600,
+    "reader_reserved": 1800,
+    "reporting_reserved": 600,
+    "whole": 24000
+  },
+  "peak_working_set_bytes_per_child": 4294967296,
+  "check": {
+    "source_files": 300,
+    "seconds": 0.4644612001720816,
+    "workload_children": 0,
+    "recipe_files_written": 0,
+    "unused_actual_paths": true
+  },
+  "ci": {
+    "source_run": 42184072640,
+    "linux_job": 127780136544,
+    "windows_job": 127780136774,
+    "both_conclusions": "success",
+    "tests_per_os": 476,
+    "linux_test_seconds": 68.043,
+    "windows_test_seconds": 199.651,
+    "quality_steps_passed": 14,
+    "full_qualification": false
+  },
+  "launch": "User starts the documented script once in a new standalone PowerShell window; Codex does not launch a duplicate. No keys or API charges. Optional second-window Get-Content only tails the ordinary log.",
+  "scope_limits": [
+    "No transferred Inspect action traces, Job/descendant cleanup or restart guarantee",
+    "Missing/late evidence remains partial; no automatic retry/resume/extension",
+    "D8 paid study/funding/main merge remain uncleared"
+  ],
+  "evidence_directory": "runs/checks/full-workload-preparation-20261105-v1",
+  "evidence": {
+    "approval.json": "54dc0db346f921ad0851a47d47d46160ab61ac0ebac4e810b9f17a870a68e914",
+    "approved-preflight.json": "8cdebc064fa7cfee797354a51370dced002cbd8ee99c6119106f2a325d562314",
+    "binding.json": "52c87486c525c7373f4d98839c35cdd1b3ee42e738581a7bb741b975c2ab39da",
+    "launch-command.ps1": "c61aba355f7f56c9730baa28c7d2eedd6c24e166f071bd7e8e0539833f82fc3f",
+    "readiness.json": "2144bfb6f712c789b859f5686a41e9bb0ff5b5128d63f5bf371086f1ca6ef42a",
+    "HANDOFF-REVIEW.md": "9bb3b71ae6e9b88ecd2b73728a84a17f4b80dc9f966a58b9d39469c8477c05d2",
+    "operator-final-smoke-results.json": "9f31851b0542dceacdf3339be856b11bf290e6ecac4e2bb640a1d1ca0b12db6c",
+    "APPROVED-HANDOFF-REVIEW.md": "2c99ce4e1da37346c4f178f526ffdb38185f9f044db31f90f821af871dc5f66d"
+  },
+  "actual_workload_started": false,
+  "qualification_started": false,
+  "paid_calls": 0,
+  "real_containers": 0,
+  "new_long_runs_started": 0
+}
