@@ -2,6 +2,7 @@
 
 import asyncio
 import json
+import logging
 import os
 import sys
 import tempfile
@@ -32,11 +33,12 @@ class InspectStudyTests(unittest.TestCase):
         )
         environment.start()
         self.addCleanup(environment.stop)
-        self.events, self.errors, self.traces = [], [], []
+        self.events, self.errors, self.traces, self.trace_loggers = [], [], [], []
         self.eval_options, self.state = {}, SimpleNamespace(metadata={})
 
     @contextmanager
     def trace(self, logger, action, detail):
+        self.trace_loggers.append(logger)
         self.traces.append(("enter", json.loads(detail)))
         try:
             yield
@@ -71,6 +73,16 @@ class InspectStudyTests(unittest.TestCase):
     def run_observed(self, operation, name="logs"):
         with patch.object(inspect_study, "_framework", return_value=self.framework()):
             return inspect_study.run(operation, log_dir=self.directory / name)
+
+    def test_stage_logger_reaches_inspect_trace_handler_with_warning_root(self):
+        root, inspect_logger = logging.getLogger(), logging.getLogger("inspect_ai")
+        self.addCleanup(root.setLevel, root.level)
+        self.addCleanup(inspect_logger.setLevel, inspect_logger.level)
+        root.setLevel(logging.WARNING)
+        inspect_logger.setLevel(13)
+        self.run_observed(lambda: {"status": "checked"})
+        self.assertTrue(self.trace_loggers)
+        self.assertTrue(all(logger.isEnabledFor(13) for logger in self.trace_loggers))
 
     def test_real_entry_calls_once_on_same_thread_and_replaces_heartbeat(self):
         expected = {"status": "checked", "unlogged_private_value": "SECRET"}

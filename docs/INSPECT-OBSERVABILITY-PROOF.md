@@ -3,7 +3,7 @@
 ## Active integration: November 5, 2026
 
 The user has authorised bounded diagnosis and actual Inspect integration.
-Implementation and short verification are in progress; no new capacity,
+Implementation is prepared; its first real compatibility check is partial. No new capacity,
 qualification or paid run is authorised. The historical proof below remains a
 partial, not an adopted integration. PLAN.md is the scheduling authority.
 
@@ -13,6 +13,21 @@ The user has excluded Task Scheduler and global Windows logging. No task was
 registered and the denied log-setting attempt changed no Windows configuration.
 Buddha must observe only its own process IDs/descendants and project-local files.
 No command to change Windows logging is needed.
+
+The selected components have separate jobs:
+
+- Inspect records Buddha's stages and errors in a fresh project folder. Its
+  [tracing API](https://inspect.aisi.org.uk/tracing.html) supplies the logging
+  mechanism; it does not need Windows task-history access.
+- A user-started standalone PowerShell process owns the run and supervises only
+  workers it creates. This avoids relying on the desktop chat's lifetime. The
+  existing Windows-job helper is the candidate for stopping owned descendants;
+  actual interpreter ownership must be checked before releasing work.
+- Existing containers still isolate candidate code. Moving the entire host
+  controller into a service or another workflow platform is not required here.
+
+This scopes Buddha's observation. It does not revoke the Windows account's
+existing permissions or change Windows's own logging protocols.
 
 The selected route is Inspect in a user-started standalone PowerShell process.
 Inspect supplies stage/action logs and its subprocess result/timeout interface;
@@ -69,9 +84,45 @@ selected candidate confinement is unchanged.
 This is direct synchronous execution. Inspect's async cancel button is not a
 process-tree terminator; independent lifetime/owned-descendant checks remain
 open. The planned real-framework cohort is one shared five-minute observation
-with supplied replies/workers, not a capacity attempt. Real Inspect, viewer,
-trace and underlying-stage behavior remain unverified until its receipt says
-otherwise. No full qualification, paid clearance or speedup follows from mocks.
+with supplied replies/workers, not a capacity attempt. Its actual result and
+limits are below. No full qualification, paid clearance or speedup follows from mocks.
+
+### Actual observation: November 5
+
+One check at source `d27bede20d2969a385555b508965bf47eae171ef` stopped after
+41.680427 seconds, within its shared 300-second limit. It made no model calls.
+Real Inspect reached the existing full-feedback/proposal/child-screen test,
+which passed once, and then wrote an open-proposal marker. The parent stopped
+at a startup assertion before checking the viewer, releasing the operation or
+validating a terminal error log. The result is **partial**, not a timeout or a
+successful integration proof. There was no automatic retry.
+
+Independent review confirmed two problems:
+
+1. The viewer recorded a different process ID from its direct launcher. The
+   proof's equality assumption cannot pass. Python documents Windows virtual
+   environments' [redirector executables](https://docs.python.org/3.13/library/venv.html).
+   That is a plausible explanation, but the retained records do not establish
+   the actual ancestry or which of two startup assertions fired. A future check
+   must establish ownership of the interpreter before allowing it to work.
+2. Our logger inherited WARNING while Inspect enabled TRACE only for its own
+   logger namespace. The underlying stage ran, but Buddha's trace entries were
+   discarded before reaching Inspect. Using Inspect's namespace fixes that
+   boundary without changing global verbosity. A real Python logging-hierarchy
+   regression failed before the fix and passed afterward.
+
+The corrected local suite has 17 methods: 16 pass and one Windows symlink test
+is skipped because the account lacks that privilege. The corrected source has
+not been observed through real Inspect again. Viewer access, open-action trace,
+terminal error redaction and independent lifetime remain unproved. Exact queries
+of only the two actual interpreter IDs retained by this check found both absent;
+no unrelated process was queried or stopped. This later absence does not prove
+historical job membership or cleanup timing.
+
+[Delivery receipt](conformance/inspect-stage-integration-delivery.json) binds the
+preparation, partial result, stage record, trace and separate known-process
+postcheck by hash. Raw records stay in the ignored project check folder. Preserve
+this attempt; review any corrected short proof before another execution.
 
 ## Current disposition: November 4, 2026
 

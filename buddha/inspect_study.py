@@ -132,7 +132,9 @@ def run(operation: Callable[[], dict[str, object]], *, log_dir: Path) -> dict[st
         }
         error: BaseException | None = None
         try:
-            with util.trace_action(logging.getLogger(__name__), "Buddha", json.dumps(details)):
+            with util.trace_action(
+                logging.getLogger("inspect_ai.buddha"), "Buddha", json.dumps(details)
+            ):
                 logs.transcript().info(details | {"event": "enter", "position": coordinates})
                 try:
                     yield

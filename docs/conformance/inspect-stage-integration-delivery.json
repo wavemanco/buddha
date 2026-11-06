@@ -1,0 +1,61 @@
+{
+  "format": "buddha.inspect-stage-integration-delivery.v1",
+  "date": "2026-11-05",
+  "observed_source": "d27bede20d2969a385555b508965bf47eae171ef",
+  "status": "partial",
+  "whole_command_seconds": 41.6804265,
+  "deadline_seconds": 300,
+  "deadline_exceeded": false,
+  "attempts": 1,
+  "automatic_retry": false,
+  "paid_calls": 0,
+  "actual_evidence": [
+    "Real pinned Inspect Task reached an existing supplied-worker stage",
+    "Existing full-feedback/proposal/child-screen method ran once with zero test failures/errors",
+    "An open proposal marker was written",
+    "Inspect internal trace records and partial eval log exist"
+  ],
+  "unverified": [
+    "Viewer HTTP result",
+    "Buddha open-action trace",
+    "Terminal redacted error log and original exception preservation under real Inspect",
+    "Historical descendant job membership",
+    "Chat-independent lifetime",
+    "Capacity, qualification and live-scientific performance"
+  ],
+  "findings": [
+    {
+      "finding": "Viewer registry PID differed from direct launcher PID; the equality invariant cannot pass",
+      "causal_limit": "Two startup assertions exist and no failure frame was saved; exact fired assertion is not established; ancestry was not retained"
+    },
+    {
+      "finding": "Buddha logger inherited WARNING and dropped TRACE before Inspect handlers",
+      "repair": "Use the configured inspect_ai logger namespace; regression fails before and passes after repair",
+      "scope": "Logging correction only; does not explain historical capacity termination"
+    }
+  ],
+  "post_repair_local_checks": {
+    "methods": 17,
+    "passed": 16,
+    "skipped": 1,
+    "seconds": 0.358,
+    "skip": "Windows symlink privilege unavailable",
+    "real_framework_reexecuted": false
+  },
+  "source_controls": [
+    "Official benchmark/scoring and Gateway unchanged",
+    "Core requirements unchanged; isolated optional dependency closure only",
+    "No Task Scheduler/global Windows logging or settings"
+  ],
+  "evidence": {
+    "preparation.json": "a78a5aad20ddef210c6e4e5ccea93da339359ca07e99967f17fdd1291d168233",
+    "forensics.json": "09d36381826676ad3cfd85c35928e0fc0aa3a4a0df3a7c47d43e2a12f46d4d38",
+    "cohort.py": "f12935113643ce1dac2c2163d3917b783bcb304f1d2f5604e3f8fe746732c1d8",
+    "cohort-invocation.json": "5d89336248f5cd2bcb5d4961bfef0d74af7a30e97c17eb8f630a73f803a476ea",
+    "cohort-1/result.json": "9a0bd0e8574d8e83dea2538cd2af4b1022e3a0e73138836141386add154b1ed9",
+    "cohort-1/stage-result.json": "9f751ee81e44c453033670c4ba36b6ce8f49b96bb162611ea019fff6c3c54b8b",
+    "cohort-1/action-open.json": "9807850065dac2f35eacbf33773c2c8608e0ff9f51df678d1471d6ee8b2396a2",
+    "cohort-1/cohort.trace": "e7967e80daa01e72dcd9d72ca317326e6ea14f9cb57cf0788a908ca0cec4b332",
+    "known-process-postcheck.json": "3d91dfadb134f621faf5cdf2bf4c58def36f6b6313af281872f385427f98cdda"
+  }
+}
