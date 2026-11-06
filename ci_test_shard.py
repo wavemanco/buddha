@@ -35,6 +35,8 @@ CONTRACT_TESTS = (
     "test_executor",
     "test_frozen_seed",
     "test_gateway",
+    "test_inspect_operator",
+    "test_inspect_study",
     "test_ledger",
     "test_progress.ProgressTests.test_launcher_heartbeat_observes_slow_check_without_accounting_and_stops_cleanly",
     "test_provider",
