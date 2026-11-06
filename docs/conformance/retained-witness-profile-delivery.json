@@ -1,0 +1,137 @@
+{
+  "format": "buddha.retained-witness-profile-delivery.v1",
+  "date": "2026-11-05",
+  "status": "complete_selected_diagnostic",
+  "executing_source": "815e15c78cea494e74407e75b3c4b3e843becd8a",
+  "executing_binding_sha256": "c1ec58b801aa83d38888f10960406256e167f845ccb9020294159512b1f5f125",
+  "current_relevance": {
+    "comparison_source": "1ad5f2d4a5cb6d5d7acc1e51df8023ca2cddb750",
+    "byte_identical_files": [
+      "buddha/source_search.py",
+      "buddha/source_feedback.py",
+      "buddha/source_screen_results.py",
+      "buddha/native_evidence.py",
+      "buddha/doctor.py",
+      "tests/scale_replay_fixture.py"
+    ],
+    "identical_function_ASTs": [
+      "_restore",
+      "_opportunity_progress",
+      "_plan",
+      "_witness",
+      "_advance_action",
+      "_forward_read"
+    ],
+    "limit": "Matching relevant code does not replace the original custody closure"
+  },
+  "attempts": 1,
+  "whole_command_seconds": 27.6426664,
+  "parent_seconds": 27.540402800077572,
+  "child_seconds": 26.964818000094965,
+  "child_cpu_seconds": 24.265625,
+  "total_limit_seconds": 300,
+  "cooperative_seconds": 240,
+  "deadline_reached": false,
+  "automatic_retry": false,
+  "profiled_own_seconds": 25.415606800000003,
+  "profile_calls": 28624437,
+  "primitive_calls": 27631127,
+  "merged_pstats_keys": 727,
+  "raw_getstats_entries": 744,
+  "phase_seconds": {
+    "custody_finish": 4.221336200134829,
+    "frozen_imports_and_inputs": 1.200599499978125,
+    "reader_construction": 4.445258999941871,
+    "witness": 16.785391200101003
+  },
+  "selected_function_costs": {
+    "buddha/source_screen_results.py:418:_collect_source_screen": {
+      "calls": 1,
+      "own_seconds": 0.016711800000000002,
+      "cumulative_seconds": 6.222113200000001
+    },
+    "buddha/doctor.py:83:_entries": {
+      "calls": 39,
+      "own_seconds": 0.3016161,
+      "cumulative_seconds": 10.069798500000001
+    },
+    "buddha/doctor.py:318:_tree_entries": {
+      "calls": 39,
+      "own_seconds": 0.000203,
+      "cumulative_seconds": 10.0700015
+    },
+    "buddha/improver_study.py:1225:_witness": {
+      "calls": 1,
+      "own_seconds": 4.16e-05,
+      "cumulative_seconds": 16.7853831
+    },
+    "buddha/source_search.py:1559:_witness_parent_read": {
+      "calls": 1,
+      "own_seconds": 0.0034562000000000004,
+      "cumulative_seconds": 7.0787323
+    },
+    "buddha/source_search.py:1728:_witness_progress_at": {
+      "calls": 1,
+      "own_seconds": 0.0090827,
+      "cumulative_seconds": 15.669648700000002
+    }
+  },
+  "interpretation": {
+    "cumulative_times_overlap": true,
+    "cold_parent_collections": 1,
+    "read_ref_calls": 2,
+    "read_ref_roles": [
+      "parent",
+      "proposal"
+    ],
+    "tree_inventories": 39,
+    "capture_constructors": 13,
+    "capture_finishes": 26,
+    "path_resolve": {
+      "total_calls": 1929,
+      "total_cumulative_seconds": 0.421687,
+      "driver_readable_calls": 1873,
+      "driver_cumulative_seconds": 0.410863,
+      "limit": "These call costs are predominantly driver work; not a production optimization target"
+    },
+    "audit_hook_overhead": "No separate pstats row; complete hook/profiler overhead is not independently quantified",
+    "periodic_samples": 0,
+    "sample_explanation": "Completed before the first30second interval; final pstats is present"
+  },
+  "custody": {
+    "source_pins_verified": 297,
+    "approved_inputs_verified": 5,
+    "primary_capture_receipts_verified": 36,
+    "primary_count_is_not_all_nested_captures": true,
+    "finish_projection_is_not_full_absolute_manifest": true,
+    "saved_report_sha256": "600396af3ad2833c7c0ee8a87c6356a070eedad976cad485515c1784032c79d3",
+    "saved_outcome_reproduced": true,
+    "all_guard_denials": [],
+    "in_memory_sql_connections": 89,
+    "original_file_db_connections": 0,
+    "cleanup": "owned_job_closed_and_process_joined"
+  },
+  "decision": "No production performance patch adopted from this cold profile. Retain the checked-parent dispatch handoff as an unproven focused candidate; any correction must demonstrate actual redundant collection elimination and intact drift/context/authority checks. Do not remove fresh custody validation or introduce global caches.",
+  "remaining": [
+    "Final whole-codebase independent Ponytail audit and adversarially validated removals remain PLAN D5b",
+    "No final interrupted-plan timing, ordinary retained-parent dispatch timing, uninstrumented speedup, workload capacity, full qualification or scientific improvement claim",
+    "Historical stop cause remains unestablished; Codex restart survival stays deferred",
+    "No history rebuild/restore/resume, provider call, real container, installation or retry"
+  ],
+  "paid_calls": 0,
+  "containers": 0,
+  "independent_result_review": "pass; frozen files/results/profile/callers independently inspected without workload rerun",
+  "evidence": {
+    "profile-witness.py": "8fac94c4636b1e8140c6520eb681e8ea4cb0c0e0190fb35d1655f90c3ebd062e",
+    "preparation.json": "51b658332b7fce085f57b63321a7205e1f3fe9f2924ff762f8daa92759929cb9",
+    "input-pins.json": "35743b6b7e3c4b0aa40305d56e52dfc2520c4b943a58ab1330d2306e34c9533a",
+    "invocation.json": "13e10a0a7acf0f8a21611b98ac7e714dacd7a8cbe00fc90c6d7f7aee20b54c7f",
+    "INDEPENDENT-PROFILE-REVIEW.md": "e3f65631415fe905b461dc6f48b6fdfe0afe14eb37044ce7f88a9d5bb783084d",
+    "profile-1/result.json": "e3b0c4d68e1160fb54c2da7172b51baf1c546d41821d1998e13cca106ac093aa",
+    "profile-1/child-result.json": "b5b6f272802d54598880d8397a35a99e49e0bde19847666594608759e33a5dd1",
+    "profile-1/profile-inputs.json": "1a58ecea3975bcb080338e8902d3eae87c6c472f1855d8bec5a655ac0fc27ec6",
+    "profile-1/custody.json": "4da9c749d777ace7990ae4ecd55c7d6fb33c558d4ad7d21172543d9badcece81",
+    "profile-1/profile.pstats": "bf747bfea2540b5195566a43490b0c20b4306c49c6f4691a33a1111cfd7960ea",
+    "profile-1/ownership.json": "cc117a462fa66ed82600db86c69ccde184ab4e43c05a628422ae7a2ea21fb9b8"
+  }
+}
