@@ -1,0 +1,65 @@
+{
+  "format": "buddha.observability-audit-delivery.v1",
+  "date": "2026-11-05",
+  "base_source": "ed6a6ed875f36a10185f677a0639c437dd198da9",
+  "audit_source": "d27bede20d2969a385555b508965bf47eae171ef",
+  "status": "implemented_with_focused_checks",
+  "independent_audit": {
+    "path": "runs/checks/inspect-stage-integration-20261105-v1/PONYTAIL-AUDIT.md",
+    "sha256": "70dd7a7edaa5e6b6a2b991a1305f7b89695915d5e0d2639d891c6c60a3a44d74"
+  },
+  "adversarial_review": {
+    "path": "runs/checks/inspect-stage-integration-20261105-v1/ADVERSARIAL-REVIEW.md",
+    "sha256": "72f3d4d0f208ef0a6e42003f83e884303ebb6eb9e7b2e1ba26f56bd23b0e000e"
+  },
+  "decisions": [
+    {
+      "finding": "Repeated checked-parent reads before mutation-witness dispatch",
+      "decision": "Defer correction until the declared bounded profile yields usable measurements",
+      "limit": "Static duplication is confirmed; magnitude and historical stop cause are not established; retain all freshness/authority checks"
+    },
+    {
+      "finding": "Ordinary worker error drops captured location when cleanup succeeds",
+      "decision": "Pass existing sanitized stage/reason through the existing final ExecutorError constructor",
+      "limit": "Original guide focused unknown cleanup; this is narrow coverage extension, not historical cause recovery; preserve cancellation/late-cleanup boundary"
+    },
+    {
+      "finding": "Retired private CLI configuration helper has no shipping caller",
+      "decision": "Delete _settings; reuse existing credential fixture and preserve five credential checks and no-parse refusal",
+      "limit": "Keep _usd, _key_environment, historical operators, source readers and examples"
+    }
+  ],
+  "focused_checks": {
+    "executor_lifecycle_methods": 18,
+    "credential_budget_refusal_methods": 7,
+    "passed": 25,
+    "seconds": 0.428,
+    "independent_rerun": {
+      "lifecycle_passed": 18,
+      "lifecycle_seconds": 0.435,
+      "cli_passed": 7,
+      "cli_seconds": 0.01
+    },
+    "old_diagnostic_behavior_red": true,
+    "synthetic_workers_only": true
+  },
+  "independent_source_review": "pass; no blocker found in four-file change and connected safety/caller paths",
+  "source_files_sha256": {
+    "buddha/__main__.py": "b9c72502f9a5ef19efbb12abe8965eafc0d0e8c20218b1547e8858d9a6b914e4",
+    "buddha/executor.py": "043822d0d39ec5e5affc222bb54b983fb86155d1625c888f3b77d3bb7f130f71",
+    "tests/test_cli.py": "f58ac6dae4ed64e50e17e97dc0489e4044e5ef38564ec33c3279954dad802540",
+    "tests/test_executor.py": "2e37b30b9794b9012d44893808d4143e4763ae90153772687e354c4f720a2c2a"
+  },
+  "production_line_change": {
+    "added": 6,
+    "removed": 10,
+    "net_removed": 4
+  },
+  "paid_calls": 0,
+  "real_containers": 0,
+  "performance_change": false,
+  "full_qualification": false,
+  "capacity_pass": false,
+  "live_clearance": false,
+  "new_dependencies": 0
+}

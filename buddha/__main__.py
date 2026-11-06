@@ -62,15 +62,6 @@ def _usd(value: object) -> int:
         raise ValidationError("invalid USD budget") from None
 
 
-def _settings(path: Path, budget_override: str | None) -> RunSettings:
-    raw = _object(_parse(path.read_bytes()))
-    amount = raw.pop("budget_usd", None)
-    if "budget_microusd" in raw:
-        raise ValidationError("configuration uses budget_usd, not budget_microusd")
-    raw["budget_microusd"] = _usd(budget_override if budget_override is not None else amount)
-    return RunSettings.from_record(raw)
-
-
 @contextmanager
 def _key_environment(settings: RunSettings, *, prompt_keys: bool) -> Iterator[None]:
     """Optionally acquire missing credentials without files, echo or shell history.

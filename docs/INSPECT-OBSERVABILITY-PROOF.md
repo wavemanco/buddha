@@ -124,6 +124,21 @@ preparation, partial result, stage record, trace and separate known-process
 postcheck by hash. Raw records stay in the ignored project check folder. Preserve
 this attempt; review any corrected short proof before another execution.
 
+### Independent simplification review
+
+The requested Ponytail audit and separate adversarial review confirmed three
+findings. The scoped cleanup removes one unused private CLI settings reader,
+reuses an existing credential-test fixture, and preserves an already sanitized
+failure location after successful worker cleanup. All 25 focused checks pass,
+including an independent rerun. Credential protection, cleanup precedence and
+the official scientific controls remain. Net production code falls by four lines.
+
+Repeated parent reads before mutation dispatch are also confirmed, but their
+cost is unmeasured. That correction remains behind PLAN's bounded profiling
+gate. No whole module or dependency was proved safe to delete. The
+[audit delivery](conformance/observability-audit-delivery.json) records the
+decisions and hashes of the external audit and adversarial reports.
+
 ## Current disposition: November 4, 2026
 
 PR258 removes our unused observer callback and its prototype tests. No
