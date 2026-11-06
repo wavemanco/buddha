@@ -3,9 +3,10 @@
 ## Active integration: November 5, 2026
 
 The user has authorised bounded diagnosis and actual Inspect integration.
-Implementation is prepared; its first real compatibility check is partial. No new capacity,
-qualification or paid run is authorised. The historical proof below remains a
-partial, not an adopted integration. PLAN.md is the scheduling authority.
+The selected offline integration and owned-process boundary now pass their
+single bounded proof. No new capacity, qualification or paid run is authorised.
+The earlier partials below retain their original status. PLAN.md is the
+scheduling authority.
 
 ### Project-only process ownership
 
@@ -51,9 +52,10 @@ global event-log read is cleared by this route.
 
 ### Current ownership proof
 
-The user now says to proceed with the ownership check. Prepare and independently
-review one new local proof, with a shared five-minute limit and no automatic
-retry. Reuse the existing Windows-job helper; its direct-PID assignment is not
+The user said to proceed with the ownership check. One independently reviewed
+local proof has now completed in39.940338seconds, within its shared five-minute
+limit, with no automatic retry. It reused the existing Windows-job helper;
+its direct-PID assignment is not
 a claim about an interpreter already started by a virtual-environment launcher.
 
 Before third-party imports or work, the actual interpreter must identify itself
@@ -76,6 +78,33 @@ call, new production supervisor or paid-path clearance is part of this proof.
 The small existing helper is currently used by CI, not every study operator.
 Passing this proof establishes the selected ownership boundary; it does not
 silently wire it into old paid commands or prove workload capacity.
+
+### Completed ownership and Inspect observation
+
+At source `629a63feee77c04525b388c1cc65b61424f5cfca`, the single cohort passed all
+five cases. Actual worker/descendant exits were success0/0, nonzero17/0,
+timeout1/1, abrupt worker19/1 and observer23/0. The observer's descendant had
+already exited before outer fallback cleanup. All13retained process handles
+were signalled and closed, all launchers joined, and cleanup had no errors.
+All8actual interpreter IDs differed from their launcher IDs. Their membership
+was verified before work; all already inherited the owned Job, so conditional
+reassignment was not exercised. No numeric PID was reopened to perform cleanup.
+
+The same cohort used real Inspect once: the existing full-feedback/proposal/
+child-screen test passed, both open operation/proposal traces were observed,
+and the viewer returned HTTP200. A deliberate error was correctly recorded as
+an error, with its private canaries absent and its original exception/cause
+preserved for the caller. Model usage was empty (`none/none`); no provider
+request or real container was started. Viewer page rendering was not tested.
+
+Independent review checked all case/ownership/cleanup records and decoded every
+evaluation-archive entry using the existing pinned compression reader without
+importing Inspect or rerunning the cohort. All858source hashes matched. The
+original partial remains unchanged. The
+[delivery receipt](conformance/inspect-owned-process-delivery.json) binds the
+script, preparation, results and independent review by hash. The local raw pack
+is `runs/checks/inspect-owned-process-proof-20261105-v1`; it refuses another run
+against the existing output folder. No further attempt is authorised here.
 
 ## Selected entry and scope
 
@@ -112,18 +141,17 @@ and disabled traceback locals before the first Inspect import. A preloaded
 Inspect process is refused so cached global file handlers cannot escape the
 project scope. The operation keeps its original working directory. Only
 framework logging/cache controls are temporarily overridden; API keys are not
-read or copied by the observer setup. The prior guard's incorrect handling of
-an absent CPU-probe file will be corrected only in the new bounded proof;
-selected candidate confinement is unchanged.
+read or copied by the observer setup. The proof treats unsupported Unix
+CPU-probe files on Windows as absent; selected candidate confinement is unchanged.
 
 This is direct synchronous execution. Inspect's async cancel button is not a
-process-tree terminator; owned-process cleanup remains unverified. Survival
-across a Codex restart is also unverified but deferred. The planned real-framework
-cohort is one shared five-minute observation
-with supplied replies/workers, not a capacity attempt. Its actual result and
-limits are below. No full qualification, paid clearance or speedup follows from mocks.
+process-tree terminator; the selected external ownership proof above establishes
+cleanup only for its declared process shape. Survival across a Codex restart
+remains unverified and deferred. The completed cohort used supplied replies and
+workers, not a capacity attempt. No full qualification, paid clearance or
+speedup follows from this component proof.
 
-### Actual observation: November 5
+### Earlier observation: November 5 (preserved partial)
 
 One check at source `d27bede20d2969a385555b508965bf47eae171ef` stopped after
 41.680427 seconds, within its shared 300-second limit. It made no model calls.
@@ -147,10 +175,12 @@ Independent review confirmed two problems:
    boundary without changing global verbosity. A real Python logging-hierarchy
    regression failed before the fix and passed afterward.
 
-The corrected local suite has 17 methods: 16 pass and one Windows symlink test
-is skipped because the account lacks that privilege. The corrected source has
-not been observed through real Inspect again. Viewer access, open-action trace,
-terminal error redaction and independent lifetime remain unproved. Exact queries
+At that checkpoint, the corrected local suite had 17 methods: 16 passed and one
+Windows symlink test was skipped because the account lacked that privilege.
+The corrected source had not yet been observed through real Inspect again;
+viewer access, open-action trace, terminal redaction and independent lifetime
+were unproved. The later completed case above supplies the bounded evidence;
+restart survival remains deferred. Exact queries
 of only the two actual interpreter IDs retained by this check found both absent;
 no unrelated process was queried or stopped. This later absence does not prove
 historical job membership or cleanup timing.

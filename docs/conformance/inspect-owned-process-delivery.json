@@ -1,0 +1,141 @@
+{
+  "format": "buddha.inspect-owned-process-delivery.v1",
+  "date": "2026-11-05",
+  "status": "complete_selected_offline_scope",
+  "observed_source": "629a63feee77c04525b388c1cc65b61424f5cfca",
+  "script_sha256": "d9bbb705537adc82ad9111427a2958eecc71a5547a776e2178eb126120124a2c",
+  "attempts": 1,
+  "whole_command_seconds": 39.9403379,
+  "internal_seconds": 39.69495029980317,
+  "limit_seconds": 300,
+  "automatic_retry": false,
+  "paid_calls": 0,
+  "real_containers": 0,
+  "source_pins": 858,
+  "source_pins_unchanged": true,
+  "ownership": {
+    "actual_interpreters_verified": 8,
+    "actual_and_launcher_pids_different": 8,
+    "specific_job_membership_before_release": true,
+    "all_actual_memberships_inherited": true,
+    "conditional_reassignment_exercised": false,
+    "retained_process_handles_closed": 13,
+    "all_actual_process_handles_signalled": true,
+    "all_launchers_joined": true,
+    "cleanup_errors": []
+  },
+  "lifecycle_cases": [
+    {
+      "case": "success",
+      "status": "passed",
+      "actual_exit_code": 0,
+      "descendant_exit_code": 0,
+      "specific_job_membership_before_release": true,
+      "child_exit_before_outer_fallback": null,
+      "cleanup": "both_retained_process_handles_signalled"
+    },
+    {
+      "case": "nonzero",
+      "status": "passed",
+      "actual_exit_code": 17,
+      "descendant_exit_code": 0,
+      "specific_job_membership_before_release": true,
+      "child_exit_before_outer_fallback": null,
+      "cleanup": "both_retained_process_handles_signalled"
+    },
+    {
+      "case": "shorttimeout",
+      "status": "passed",
+      "actual_exit_code": 1,
+      "descendant_exit_code": 1,
+      "specific_job_membership_before_release": true,
+      "child_exit_before_outer_fallback": null,
+      "cleanup": "both_retained_process_handles_signalled"
+    },
+    {
+      "case": "abruptworker",
+      "status": "passed",
+      "actual_exit_code": 19,
+      "descendant_exit_code": 1,
+      "specific_job_membership_before_release": true,
+      "child_exit_before_outer_fallback": null,
+      "cleanup": "both_retained_process_handles_signalled"
+    },
+    {
+      "case": "observerexit",
+      "status": "passed",
+      "actual_exit_code": 23,
+      "descendant_exit_code": 0,
+      "specific_job_membership_before_release": true,
+      "child_exit_before_outer_fallback": 0,
+      "cleanup": "both_retained_process_handles_signalled"
+    }
+  ],
+  "inspect": {
+    "existing_full_feedback_proposal_child_screen": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0
+    },
+    "open_stages": [
+      "operation",
+      "proposal"
+    ],
+    "viewer_http_status": 200,
+    "terminal_log_status": "error",
+    "intentional_error": "sanitized ReleaseError",
+    "original_exception_identity_and_cause_preserved": true,
+    "model": "none/none",
+    "model_usage": {},
+    "eval_log_sha256": "2e25e7197298393ce0468045475d9248f5d1601403b559a7742072e0d147e4cd",
+    "reference_partition_body_sha256": "139fb73094a74c29cc2b64b50b6d3976242ee7e6f042649049baac850773524a",
+    "canaries_absent_from_all_eval_archive_entries_and_plain_compressed_logs": true,
+    "independent_archive_reader": "already-pinned zipfile-zstd only; no Inspect import or second cohort"
+  },
+  "environment": {
+    "pinned_packages": 80,
+    "pinned_installed_files_byte_checked": 6871,
+    "byte_check_slices": [
+      6429,
+      442
+    ],
+    "first_slice_limit_partial_preserved": true,
+    "dependency_install_or_upgrade": false,
+    "scope": "Existing isolated development-proof environment; not distribution/live-runtime clearance"
+  },
+  "independent_result_review": "pass, external report bound below; no missing required case",
+  "limits": [
+    "Codex restart and independent standalone-host survival remain untested and deferred",
+    "Specific supervisor boundary only; existing paid-study operators were not changed or automatically enrolled",
+    "Conditional reassignment branch was not exercised because actual membership was already inherited",
+    "No workload-capacity, full-qualification or scientific-improvement claim",
+    "Historical capacity interruption cause remains unestablished; original partials preserved",
+    "Final whole-codebase Ponytail audit remains outstanding in PLAN D5b"
+  ],
+  "evidence": {
+    "cohort.py": "d9bbb705537adc82ad9111427a2958eecc71a5547a776e2178eb126120124a2c",
+    "preparation.json": "ef06b5e107d509298017732a1814757723da87026b2c349e6a3fab6358b7e0c1",
+    "invocation.json": "00e327f3c6eafb45c55cf63745ba3ee478b4e19002cc0fb123b60bb4e15a235b",
+    "environment-byte-check.json": "e29188d7d6acb02b15ceebeaa9ec9e0ade372aabc414ee999f651f302fab0fd2",
+    "environment-byte-tail.json": "59978f15f67ed0c0f0c012dd77b8967c7c896075a0c747a937883ecb168ff9e7",
+    "INDEPENDENT-RESULT-REVIEW.md": "58d12cb4cf8def11bb1f29ea047043e98ecd182dfc466f6b63f6687043e8c25b",
+    "cohort-1/result.json": "3788b45e4ccfa5857848ba144e90d0f2743a1cf0bcff5ef34b2b750e7b032ffd",
+    "cohort-1/cohort-result.json": "9bdbc15f44b1d2c71f39b53e32d4d49ec00b17c49cae464f264e1aabefea0ada",
+    "cohort-1/open-action-observation.json": "7497e522abf30862e29e79a13348b7a0bb6b723ae30869d023035e92eba2590f",
+    "cohort-1/viewer-observation.json": "0fc0aaa1529214b5f27d725f21d6ee2bf4ee7864d418debc2f17f320b527566d",
+    "cohort-1/stage-result.json": "9f751ee81e44c453033670c4ba36b6ce8f49b96bb162611ea019fff6c3c54b8b",
+    "cohort-1/bare-abruptworker.ownership.json": "e0c77f62314e9a5ee63007e1bd9c39554640ac1e9eb3cd535e1959a0240884ea",
+    "cohort-1/bare-nonzero.ownership.json": "2ca7768854e907883438aab1892aa3e98d436950a5bb86e67f4980878fad40c6",
+    "cohort-1/bare-observerexit.ownership.json": "2e61f293d7097622273fc8b8357231f717433b34831e1c064e7f3bf2f930309a",
+    "cohort-1/bare-shorttimeout.ownership.json": "e68e78bedd9eca0ce9dc0c6d8b189320fd2700eca2522d3311ebb53b9d43cf0d",
+    "cohort-1/bare-success.ownership.json": "8e40c13615bf0798687b67a9f504f36cc81a516322e2bb13c8ecab97c7b0d50e",
+    "cohort-1/cohort.ownership.json": "0cd75296386f0cf709e76a87e72a2688c712bda99b7ff537e357e1555576debb",
+    "cohort-1/trace.ownership.json": "9ee64f9f23f44cf3d4f21459968722079e11eae1c358bdbb6cde042e583a0c48",
+    "cohort-1/viewer.ownership.json": "e665fbaa8b93a6a1373909c2d0d2cac2a03097b77f2f0bcb86a327f75ac07327",
+    "cohort-1/bare-abruptworker.result.json": "2f3f4d737cef789296ecc0e526d64903afa14c4da5fef95c3a4c13bf527eae91",
+    "cohort-1/bare-nonzero.result.json": "f67049ce71a9ac6365ccbee04d67c3c64dd0ae4d3904cf3a048eac51fda6f60e",
+    "cohort-1/bare-observerexit.result.json": "71fbe708e066200cf4bd9e17eca74f4f41e229bff796f64f5e06b8f73229fdaf",
+    "cohort-1/bare-shorttimeout.result.json": "877126d887c4f1c57d1c690dc5b01f828e426b9eb264fa190146875d016684d1",
+    "cohort-1/bare-success.result.json": "b361b7b749c542c72209053bcacd0851fc001392794cb0097ca172a57aa94299"
+  }
+}
