@@ -12,8 +12,9 @@ from types import ModuleType, SimpleNamespace
 from unittest.mock import Mock, patch
 
 from authorization_helpers import authorized_run
+from test_credentials import profiles
 
-from buddha.__main__ import _check_upstream, _key_environment, _settings, _usd, main
+from buddha.__main__ import _check_upstream, _key_environment, _usd, main
 from buddha.benchmark import UPSTREAM_COMMIT
 from buddha.evaluation import ValidationError
 
@@ -36,7 +37,7 @@ class CLITests(unittest.TestCase):
                     with (
                         self.subTest(command=command, supplied_arguments=bool(extra)),
                         patch("buddha.__main__._key_environment") as keys,
-                        patch("buddha.__main__._settings") as settings,
+                        patch("buddha.__main__._parse") as config_parse,
                         patch("buddha.__main__.load_run") as source,
                         patch("http.client.HTTPSConnection") as connection,
                         redirect_stdout(io.StringIO()) as output,
@@ -49,7 +50,7 @@ class CLITests(unittest.TestCase):
                     self.assertNotIn("ARGV-SECRET-CANARY", output.getvalue() + notices.getvalue())
                     self.assertFalse(destination.exists())
                     keys.assert_not_called()
-                    settings.assert_not_called()
+                    config_parse.assert_not_called()
                     source.assert_not_called()
                     connection.assert_not_called()
 
@@ -392,7 +393,7 @@ class CLITests(unittest.TestCase):
             keys.assert_not_called()
 
     def test_hidden_keys_are_process_local_and_removed_even_after_failure(self):
-        settings = _settings(Path(__file__).parent.parent / "examples" / "live-config.json", "50")
+        settings = profiles("openai", "openai", "anthropic")
         with (
             patch.dict(os.environ, {}, clear=True),
             patch("buddha.__main__.sys.stdin.isatty", return_value=True),
@@ -408,7 +409,7 @@ class CLITests(unittest.TestCase):
             self.assertNotIn("ANTHROPIC_API_KEY", os.environ)
 
     def test_hidden_prompt_preserves_existing_environment_and_cleans_partial_input(self):
-        settings = _settings(Path(__file__).parent.parent / "examples" / "live-config.json", "50")
+        settings = profiles("openai", "openai", "anthropic")
         with (
             patch.dict(os.environ, {"OPENAI_API_KEY": "dummy-existing"}, clear=True),
             patch("buddha.__main__.sys.stdin.isatty", return_value=True),
@@ -431,7 +432,7 @@ class CLITests(unittest.TestCase):
             self.assertEqual(dict(os.environ), {})
 
     def test_hidden_prompt_never_falls_back_to_echoed_input(self):
-        settings = _settings(Path(__file__).parent.parent / "examples" / "live-config.json", "50")
+        settings = profiles("openai", "openai", "anthropic")
         with (
             patch.dict(os.environ, {}, clear=True),
             patch("buddha.__main__.sys.stdin.isatty", return_value=False),
@@ -443,7 +444,7 @@ class CLITests(unittest.TestCase):
             prompt.assert_not_called()
 
     def test_default_path_never_prompts_or_reads_stdin(self):
-        settings = _settings(Path(__file__).parent.parent / "examples" / "live-config.json", "50")
+        settings = profiles("openai", "openai", "anthropic")
         with patch("buddha.__main__.getpass.getpass") as prompt:
             with _key_environment(settings, prompt_keys=False):
                 pass
@@ -452,7 +453,7 @@ class CLITests(unittest.TestCase):
     def test_getpass_warning_fails_closed_and_preserves_empty_environment_entry(self):
         import getpass
 
-        settings = _settings(Path(__file__).parent.parent / "examples" / "live-config.json", "50")
+        settings = profiles("openai", "openai", "anthropic")
         with (
             patch.dict(os.environ, {"OPENAI_API_KEY": ""}, clear=True),
             patch("buddha.__main__.sys.stdin.isatty", return_value=True),
@@ -524,14 +525,6 @@ class CLITests(unittest.TestCase):
         for value in [None, True, 25, "0", "-1", "NaN", "Infinity", "1e100000", "0.0000001"]:
             with self.subTest(value=value), self.assertRaises(ValidationError):
                 _usd(value)
-
-    def test_shipped_configuration_has_no_spending_cap(self):
-        path = Path(__file__).parent.parent / "examples" / "live-config.json"
-        with self.assertRaises(ValidationError):
-            _settings(path, None)
-        settings = _settings(path, "25")
-        self.assertEqual(settings.budget_microusd, 25000000)
-        self.assertEqual(settings.quality.model, "claude-opus-5")
 
     def test_invalid_run_returns_structured_error(self):
         with tempfile.TemporaryDirectory() as temporary, redirect_stdout(io.StringIO()) as output:

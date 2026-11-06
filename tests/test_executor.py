@@ -745,6 +745,39 @@ class ExecutorLifecycleTests(ExecutorFixture):
         self.assertEqual(failed.exception.cleanup_status, "removed")
         self.assertNotIn("child-private-marker", str(failed.exception))
 
+    def test_successful_cleanup_keeps_start_and_exchange_failure_locations(self):
+        for stage in ("start", "exchange"):
+            fixture = DockerFixture(self.spec(), Limits())
+
+            def handle(frame):
+                raise RuntimeError("child-private-marker")
+
+            start = fixture.popen
+            if stage == "start":
+
+                def start(*args, **kwargs):
+                    raise OSError("child-private-marker")
+
+            with (
+                self.subTest(stage=stage),
+                patch.object(fixture, "popen", side_effect=start),
+                self.assertRaises(ExecutorError) as failed,
+            ):
+                self.execute(fixture, handle)
+            self.assertEqual(failed.exception.reason, "host")
+            self.assertEqual(failed.exception.cleanup_status, "removed")
+            self.assertEqual(failed.exception.pre_cleanup_failure, (stage, "host"))
+            self.assertEqual(
+                failed.exception.to_record()["pre_cleanup_failure"],
+                {
+                    "format": "buddha.executor-pre-cleanup-failure.v1",
+                    "stage": stage,
+                    "reason": "host",
+                },
+            )
+            self.assertIsNone(failed.exception.__cause__)
+            self.assertNotIn("child-private-marker", str(failed.exception.to_record()))
+
     def test_lost_create_acknowledgement_reconciles_exact_name_and_owner(self):
         fixture = DockerFixture(self.spec(), Limits())
         fixture.create_error = subprocess.TimeoutExpired("synthetic Docker", 10)

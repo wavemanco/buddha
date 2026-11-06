@@ -774,7 +774,12 @@ def run_container(
         if isinstance(error, (KeyboardInterrupt, SystemExit)):
             raise error
         reason = error.reason if isinstance(error, ExecutorError) else "host"
-        raise ExecutorError(reason, cleanup_status=cleanup, container_id=identity) from None
+        raise ExecutorError(
+            reason,
+            cleanup_status=cleanup,
+            container_id=identity,
+            pre_cleanup_failure=pre_cleanup_failure,
+        ) from None
     if identity is None:
         raise ExecutorError("launch", cleanup_status=cleanup)
     return ExecutionResult(
