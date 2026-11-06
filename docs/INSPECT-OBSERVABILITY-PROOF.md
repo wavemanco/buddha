@@ -49,6 +49,34 @@ authorises no new execution. No API keys or administrator rights are needed
 for the proposed ownership check. No actual paid run, full capacity attempt or
 global event-log read is cleared by this route.
 
+### Current ownership proof
+
+The user now says to proceed with the ownership check. Prepare and independently
+review one new local proof, with a shared five-minute limit and no automatic
+retry. Reuse the existing Windows-job helper; its direct-PID assignment is not
+a claim about an interpreter already started by a virtual-environment launcher.
+
+Before third-party imports or work, the actual interpreter must identify itself
+through a fresh role/nonce-bound handshake and wait. Retain its Windows process
+handle, assign it to the specific owned Job if needed, verify membership and only
+then release it. Compare the viewer registry against this interpreter, not its
+launcher. Retained handles also let us verify actual worker/descendant exit
+without reopening a possibly reused numeric PID. This follows Microsoft's
+[specific-job membership API](https://learn.microsoft.com/en-us/windows/win32/api/jobapi/nf-jobapi-isprocessinjob).
+
+Use tiny owned workers for success, nonzero exit, timeout, abrupt termination and
+observer-exit cleanup. In the last case only the observer may retain its Job
+handle: Windows's [kill-on-last-close behavior](https://learn.microsoft.com/en-us/windows/win32/procthread/job-objects)
+must be observed before outer fallback cleanup. Reuse the real Inspect case once
+within the same deadline. Keep fixed failure sites, start/end and raw exits,
+membership, cleanup and source identities; preserve an explicit partial if a
+check fails or reaches the limit. No Codex restart, global activity query, model
+call, new production supervisor or paid-path clearance is part of this proof.
+
+The small existing helper is currently used by CI, not every study operator.
+Passing this proof establishes the selected ownership boundary; it does not
+silently wire it into old paid commands or prove workload capacity.
+
 ## Selected entry and scope
 
 The new optional `buddha.inspect_study.run` calls one trusted offline operation
@@ -146,6 +174,12 @@ cost is unmeasured. That correction remains behind PLAN's bounded profiling
 gate. No whole module or dependency was proved safe to delete. The
 [audit delivery](conformance/observability-audit-delivery.json) records the
 decisions and hashes of the external audit and adversarial reports.
+
+The later final whole-codebase audit remains outstanding in PLAN D5b. Use
+Ponytail, independent agents and adversarial validation of proposed removals
+after the current corrections, before freezing the next candidate. The earlier
+scoped audit is not a claim that all unnecessary code has been removed. The
+objective remains the matched NoveltyBench comparison.
 
 ## Current disposition: November 4, 2026
 
