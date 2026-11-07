@@ -1,0 +1,266 @@
+{
+  "format": "buddha.d8-live-preparation-delivery.v1",
+  "date": "2026-11-07",
+  "status": "prepared_unfunded_not_launchable",
+  "qualified_source": {
+    "head": "0d27ed4dd5aa44ce58618a6af6824141fed43f02",
+    "tree": "e35c20e5d97828db884534612bfc18a730ca67b4",
+    "python_source_files": 348,
+    "production_changes": false,
+    "qualification_run": 42352102463
+  },
+  "preparation": {
+    "seconds": 21.722590799996397,
+    "total_limit_seconds": 120,
+    "existing_builders": 4,
+    "stages": [
+      {
+        "stage": "primary",
+        "result_path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-primary-20261107-v1\\preparation-result.json",
+        "result_sha256": "d45997f301a2e3723a7a7b3ff33aa3a6c39c831d6ba6506846d5f627cf96726c",
+        "files_verified": 105,
+        "status": "complete_unfunded_configuration_only"
+      },
+      {
+        "stage": "plain",
+        "result_path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-plain-20261107-v1\\preparation-result.json",
+        "result_sha256": "54ccb1af38c6c0a902ee7f6fa73b636409eac409bbd1b36022344718805ef4fd",
+        "files_verified": 12,
+        "status": "complete_unfunded_plain_descriptors"
+      },
+      {
+        "stage": "review",
+        "result_path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-review-20261107-v1\\preparation-result.json",
+        "result_sha256": "d39988f1ae5edd778ddb0843a1f51afae9d0871e3b2d1fa1f0f5d3c73689736d",
+        "files_verified": 12,
+        "status": "complete_unfunded_review_configuration"
+      },
+      {
+        "stage": "combined",
+        "result_path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-combined-20261107-v1\\preparation-result.json",
+        "result_sha256": "ce9dfbcc2080cd79b8eaa1919f1f3f5b0be889298e26b61ca64d0ced6ce4442c",
+        "files_verified": 4,
+        "status": "complete_unfunded_combined_declaration"
+      }
+    ],
+    "new_owner_or_authority": false,
+    "original_paid_history_imported": false,
+    "effective_bindings_recorded_as_provenance": true,
+    "primary_provenance_change": "Replaced obsolete construction-script receipt with exact effective-binding receipt; six other inherited receipts preserved. No validator/count rule changed."
+  },
+  "scope": {
+    "development_tasks": 3,
+    "final_tasks": 26,
+    "source_opportunities": 16,
+    "maximum_development_sets": 60,
+    "maximum_primary_final_sets": 312,
+    "plain_sets": 52,
+    "maximum_scored_answers": 4240,
+    "witness_generation_additional": true,
+    "datasets": "Official WildChat bounded subset; not full leaderboard submission",
+    "ai_only_human_extension_nonblocking": true
+  },
+  "proposal_not_allocation": {
+    "combined_microusd": 150000000,
+    "recorded_attempts": 16384,
+    "phases": {
+      "development": [
+        40000000,
+        4096
+      ],
+      "final": [
+        85000000,
+        10240
+      ],
+      "both_plain": [
+        25000000,
+        2048
+      ]
+    },
+    "provider_caps": null,
+    "conditional_provider_ballpark_usd": {
+      "openai": [
+        8,
+        20
+      ],
+      "anthropic": [
+        20,
+        60
+      ]
+    },
+    "ballpark_scope": "Conditional arithmetic from incomplete657-operation configured-rate sample, not forecast/interval/invoice or cap",
+    "native_review": {
+      "model": "gpt-6.1-sol",
+      "reasoning": "ultra",
+      "maximum_contexts": 44,
+      "target_contexts": 32,
+      "maximum_staged_judgments": 64,
+      "whole_set_contexts": 12,
+      "cost": "Unpriced Codex-plan capacity outside APIcap; no reviewerAPI fallback",
+      "fresh_adoption": false
+    }
+  },
+  "settings": {
+    "official_commit": "64a23be6b18ec1dacc298830aab276061b6e143c",
+    "generator": {
+      "model_configurable": true,
+      "selected_model": "gpt-5.6-luna",
+      "reasoning_effort": "low",
+      "max_completion_tokens": 4096,
+      "service_tier": "default",
+      "official_cli_max_tokens": 2048,
+      "official_helper_doubles_reasoning_allowance": true
+    },
+    "partition": {
+      "model": "gpt-5.6-luna",
+      "reasoning_effort": "omitted",
+      "output_tokens": "omitted",
+      "tier": "omitted"
+    },
+    "utility": {
+      "model": "claude-opus-5",
+      "thinking": "adaptive",
+      "effort": "high",
+      "max_tokens": 16000,
+      "refusal_fallback": "claude-sonnet-5"
+    }
+  },
+  "short_checks": {
+    "request_seed": {
+      "valid_passing_methods": 72,
+      "single_all_green_invocation": false,
+      "first_invocation": "61pass/11errors from extra diagnostic socket guard beforeasync test bodies",
+      "corrected_invocation": "11pass unchangedfakeSDK tests,0.309s"
+    },
+    "stop_boundaries": {
+      "passed_methods": 6,
+      "seconds": 0.3762087000068277,
+      "first_invocation": "Audit wrapper replacedsocketclass beforeSSLimport; no testbodyentered. Separatelyauthorized corrected invocation passes."
+    },
+    "fresh_actual_artifact_profiles": {
+      "status": "pass",
+      "seconds": 0.2236888000043109,
+      "accepted_requests": 7,
+      "rejected_adversarial_variants": 27,
+      "real_provider_calls": 0,
+      "bindings": "Actual fresh primary profile and both actual plain generation/baseline hash pairs; unchanged existing checker with recorded data-only rebinding",
+      "first_invocation": "Public invocation SyntaxError beforechecker import; separatelyrecorded corrected argv invocation passes, no source or artifact repair"
+    }
+  },
+  "remaining_limits": {
+    "feedback_bytes": 1048576,
+    "largest_D6_packet_bytes": 499200,
+    "D6_does_not_cover_every_valid4096token_output": true,
+    "feedback_overflow_before_proposal_owner": "Whole-study incomplete feedback_capacity, not failedopportunity",
+    "unknown_safe_error_family_can_be_lost": true,
+    "unknown_financial_hold_and_stop_required": true,
+    "real_provider_latency_access_invoices": "Unverified",
+    "fresh_custody_scope_and_funding": "Notadopted/unallocated",
+    "generic_old_builder_pending_hints": "Historical boilerplate; PLAN D6/D7 passes govern, no new capacity gate"
+  },
+  "evidence": {
+    "manifest-proposal.json": {
+      "path": "runs/checks/d8-preparation-20261107-v1/manifest-proposal.json",
+      "sha256": "695ab8e416f9b0b077b07f9616fce9cb47371d6f6b6c4d576b2d7eb649bd7944"
+    },
+    "invocation-freeze.json": {
+      "path": "runs/checks/d8-preparation-20261107-v1/invocation-freeze.json",
+      "sha256": "db207a7017707bc320c88e3d30e1e08c9a848d0a23eb82a2be72d593fe6a012d"
+    },
+    "effective-helper-bindings.json": {
+      "path": "runs/checks/d8-preparation-20261107-v1/effective-helper-bindings.json",
+      "sha256": "ace9ebc91dd77c9a3bd4e1112da41fc0fa33b7bf5c865bb55677eb9dcaa97d2d"
+    },
+    "ROOT-MANIFEST-REVIEW-v2.json": {
+      "path": "runs/checks/d8-preparation-20261107-v1/ROOT-MANIFEST-REVIEW-v2.json",
+      "sha256": "4d8336d2106d3da16e4688eb7ed8bf4ebbe3309773e9c7ade0c9238e0b789a12"
+    },
+    "invocation-result.json": {
+      "path": "runs/checks/d8-preparation-20261107-v1/invocation-result.json",
+      "sha256": "89183ae033ef5777baaff908e443735cb62deebf57a7527af296b6363c262159"
+    },
+    "preparation-outcome.json": {
+      "path": "runs/checks/d8-preparation-20261107-v1/preparation-outcome.json",
+      "sha256": "10940a23b0d67cbd92d5ef789b6efcef7a11da8116854ef72b4142c369dec77e"
+    },
+    "ROOT-ARTIFACT-VERIFICATION.json": {
+      "path": "runs/checks/d8-preparation-20261107-v1/ROOT-ARTIFACT-VERIFICATION.json",
+      "sha256": "21e50be09502d722fb683123721e7a8e164a85b66d4737fb4b83f8a2f6769da4"
+    },
+    "runtime-bindings.json": {
+      "path": "runs/checks/d8-preparation-20261107-v1/runtime-bindings.json",
+      "sha256": "d5938a116b1bbc9f0ad8866625846b23f3c25426a41bbff40e61e74fe2996e11"
+    },
+    "STOP-AUDIT.md": {
+      "path": "runs/checks/d8-preparation-20261107-v1/STOP-AUDIT.md",
+      "sha256": "b9c74d9153b4a98959406e6efe29d81a9c30736ccb25a95539a243248f9c95fa"
+    },
+    "STOP-CHECKS.md": {
+      "path": "runs/checks/d8-preparation-20261107-v1/STOP-CHECKS.md",
+      "sha256": "462d70221fe47109692b5f29dccacf05fa766aa4a0fa929886850074abe512a1"
+    },
+    "STOP-CHECKS-v2-result.json": {
+      "path": "runs/checks/d8-preparation-20261107-v1/STOP-CHECKS-v2-result.json",
+      "sha256": "27a5a9ef54bd46d547df4c6566f9c8c506b72d9cef615e9aece5ac4e00a75ce6"
+    },
+    "STOP-BYTE-ENVELOPE.json": {
+      "path": "runs/checks/d8-preparation-20261107-v1/STOP-BYTE-ENVELOPE.json",
+      "sha256": "5a63ead2833f10c6ee88a4efcf80c9b438a39f1067d3abe4b27b694a376a02b0"
+    },
+    "request-audit/REQUEST-AUDIT.md": {
+      "path": "runs/checks/d8-preparation-20261107-v1/request-audit/REQUEST-AUDIT.md",
+      "sha256": "505e3d883fa1d9a0e6ede1b3dbff038446ebcd3d031808c93bf320e6ca2f13c8"
+    },
+    "request-audit/MANIFEST-REVIEW.json": {
+      "path": "runs/checks/d8-preparation-20261107-v1/request-audit/MANIFEST-REVIEW.json",
+      "sha256": "dd894b7434a97bad08802fb1c516bb31f0b16472fe63b15356d2d1d56d75a857"
+    },
+    "request-audit/SHORT-CHECK-RESULT.md": {
+      "path": "runs/checks/d8-preparation-20261107-v1/request-audit/SHORT-CHECK-RESULT.md",
+      "sha256": "1ec9f0d13fb87948d1f462d66bc544c2135c60ce02cd6d625e0a358c0b6aacd4"
+    },
+    "request-audit/request-tests-72-attempt.json": {
+      "path": "runs/checks/d8-preparation-20261107-v1/request-audit/request-tests-72-attempt.json",
+      "sha256": "d3a8d0d62e49117ccc46f27752ce00814d9805de1a8eed64f5913616df7e1320"
+    },
+    "request-audit/request-tests-11-corrected-attempt.json": {
+      "path": "runs/checks/d8-preparation-20261107-v1/request-audit/request-tests-11-corrected-attempt.json",
+      "sha256": "eec50cdd8840399ccfb9fd94b5d81a0b85b7609d75171996fdcb2711e28d5cdb"
+    },
+    "request-audit/fresh-profile-check-attempt.json": {
+      "path": "runs/checks/d8-preparation-20261107-v1/request-audit/fresh-profile-check-attempt.json",
+      "sha256": "523601c396d053d1750614773517f06f852767435b0b54a6c0f0f4a77c43a6d3"
+    },
+    "request-audit/fresh-profile-check-bindings.json": {
+      "path": "runs/checks/d8-preparation-20261107-v1/request-audit/fresh-profile-check-bindings.json",
+      "sha256": "e823d0754592a70d95ac904767bdfaf1b5f81f92eee8359c3a437297ebdc0707"
+    },
+    "request-audit/fresh-profile-check-corrected-attempt.json": {
+      "path": "runs/checks/d8-preparation-20261107-v1/request-audit/fresh-profile-check-corrected-attempt.json",
+      "sha256": "a3f236dbb0f87f7713cf952010a7d28956bb990a517419ba1da7b19daa9c076a"
+    },
+    "request-audit/fresh-profile-check-corrected-stdout.log": {
+      "path": "runs/checks/d8-preparation-20261107-v1/request-audit/fresh-profile-check-corrected-stdout.log",
+      "sha256": "5ab589ec69a9d1c57ce56a18f2d316d8807a07ca238fee032afd2edf8ff97226"
+    },
+    "request-audit/FINAL-REQUEST-DOC-REVIEW.md": {
+      "path": "runs/checks/d8-preparation-20261107-v1/request-audit/FINAL-REQUEST-DOC-REVIEW.md",
+      "sha256": "697c5a2c6eebf7a570ce256e2971352a1896e9efe785edd265fa93f330bdd188"
+    }
+  },
+  "prohibited_or_not_started": {
+    "paid_calls": 0,
+    "keys_read": false,
+    "containers_started": 0,
+    "new_long_runs": 0,
+    "automatic_live_retry": false,
+    "main_merge": false,
+    "funded_outer_handoff_created": false
+  },
+  "independent_review": {
+    "manifest": "pass",
+    "request_and_documentation": "pass",
+    "scope_and_budget": "pass",
+    "stop_boundaries": "pass within6selectedmethods; remainingrisksdisclosed"
+  }
+}
