@@ -22,6 +22,12 @@ authorization, providers, credentials, requests, task/answer artifacts, seed
 generation, capacity arithmetic, path/executor boundaries and the test runner.
 It also selects a pure whole-set review check from a mixed-cost module.
 
+The November 7 D8 correction selects **508 methods**, up from 476. The added
+coverage checks full feedback above the old 1 MiB limit, historical seed/policy
+compatibility, safe network-error persistence and unchanged financial holds.
+It uses the same short workflow; no full qualification is scheduled by this
+change. Earlier recorded timings belong to their original selections/source.
+
 Discovery still imports every test module and refuses import failures. Only
 selected test bodies run. Missing, duplicate or overlapping selection labels
 fail rather than quietly reducing coverage. Inventory and terminal receipts

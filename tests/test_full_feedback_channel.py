@@ -19,7 +19,7 @@ from buddha.channel import read_frame, write_frame
 from buddha.releases import MAX_FEEDBACK_BYTES, _json
 
 LEGACY = "buddha.source-seed-improver.v1"
-CURRENT = "buddha.source-seed-improver.v2"
+CURRENT = "buddha.source-seed-improver.v3"
 LEGACY_FRAGMENT_SHA256 = "3ce8b36db69a009d087ebbc0de8bd1f67234c1c090a0443feea2d80700557032"
 CHILD = {"source": "MODEL_RETURNED_CHILD_IS_DATA [", "hypothesis": "Synthetic supplied change."}
 
@@ -29,12 +29,14 @@ def sha(raw):
 
 
 class FullFeedbackChannelTests(unittest.TestCase):
-    def trusted_seed(self, *, legacy=False):
+    def trusted_seed(self, *, legacy=False, version=None):
         frozen = (Path(__file__).resolve().parents[1] / "agents/frozen_seed.py").read_bytes()
         raw = (
             source_seed.compose_source_seed(frozen, fragment_version=LEGACY)
             if legacy
-            else source_seed.compose_source_seed(frozen)
+            else source_seed.compose_source_seed(
+                frozen, fragment_version=version or source_seed.FRAGMENT_VERSION
+            )
         )
         module = ModuleType("_trusted_full_feedback_seed")
         # Only factory-verified repository seed/fragment bytes execute, never child text.
@@ -90,12 +92,13 @@ class FullFeedbackChannelTests(unittest.TestCase):
         ready, saved_done = read_frame(output), read_frame(output)
         self.assertEqual(ready["feedback_sha256"], sha(_json(initial["feedback"])))
         self.assertEqual(saved_done, done)
+        self.callback_body = complete.call_args.args[1]
         request = json.loads(complete.call_args.args[1])
         text = request["messages"][-1]["content"]
         payload = json.loads(text.split("\n\nINPUT_JSON\n", 1)[1])
         return initial, payload
 
-    def test_v2_full_note_crosses_host_frame_worker_and_trusted_seed_callback(self):
+    def test_current_full_note_crosses_host_frame_worker_and_trusted_seed_callback(self):
         frozen, raw, trusted = self.trusted_seed()
         note = "BEGIN_FULL_OUTPUT\n" + "α雪 literal line with spaces  \n" * 400 + "END_FULL_OUTPUT"
         self.assertGreater(len(note.encode("utf-8")), 4096)
@@ -168,28 +171,45 @@ class FullFeedbackChannelTests(unittest.TestCase):
                 self.assertEqual(packet["parent"], parent)
                 self.assertEqual(packet["development_feedback"], feedback)
 
-    def test_v2_escaped_aggregate_refuses_before_host_output_or_worker_callback(self):
-        _, raw, trusted = self.trusted_seed()
+    def test_historical_v2_seed_preserves_its_aggregate_limit_and_exact_bytes(self):
+        _, raw, trusted = self.trusted_seed(version=source_seed.FULL_FRAGMENT_VERSION)
+        self.assertEqual(
+            sha(source_seed.FULL_FRAGMENT.encode()),
+            "e9782c25bd17d486f7d594ef9b533d2ba18b0a5be00e0e98cb8b7714c66d5493",
+        )
+        frozen = (Path(__file__).resolve().parents[1] / "agents/frozen_seed.py").read_bytes()
+        self.assertEqual(
+            sha(frozen + b"\n\n" + source_seed.FULL_FRAGMENT.encode()),
+            "77cfa68f6b3c6996fd503e1ce6f7a964eb57abdb8bde98f6761de5f6e298ff4f",
+        )
         note = "雪" * 180000
         feedback = [{"task": {"id": "a", "prompt": "development task", "count": 2}, "note": note}]
         self.assertLess(len(note.encode()), MAX_FEEDBACK_BYTES)
         self.assertGreater(len(_json(feedback)), MAX_FEEDBACK_BYTES)
         fixture = self.fixture(note, source=raw)
-        with self.assertRaises(fixture.h.Error):
-            fixture.h.session()
-        self.assertFalse(fixture.h.output.exists())
-        fixture.feedback["records"][0]["note"] = "short complete note"
-        fixture.freeze()
         session = fixture.h.session()
-        initial = copy.deepcopy(session.worker)
-        initial["feedback"] = feedback
-        with self.assertRaises(CandidateWorkerError):
-            CandidateWorker(initial, io.BytesIO(), io.BytesIO())
         complete = Mock()
         parent = {"entrypoint": "candidate.py", "source": raw.decode(), "agent_sha256": "a" * 64}
         with self.assertRaises(trusted.SeedError):
             trusted.propose_improvement(parent, feedback, session.config, complete)
         complete.assert_not_called()
+
+    def test_full_feedback_above_old_cap_reaches_actual_frame_worker_and_callback(self):
+        from buddha.releases import MAX_FULL_FEEDBACK_BYTES
+        from buddha.wire import MAX_BODY_BYTES
+
+        _, raw, trusted = self.trusted_seed()
+        note = "BEGIN FULL OUTPUT\n" + '雪\\"\n' * 190_000 + "END FULL OUTPUT"
+        self.assertGreater(len(note.encode()), MAX_FEEDBACK_BYTES)
+        fixture = self.fixture(note, source=raw)
+        session = fixture.h.session()
+        self.assertGreater(len(_json(session.feedback)), MAX_FEEDBACK_BYTES)
+        self.assertLess(len(_json(session.feedback)), MAX_FULL_FEEDBACK_BYTES)
+        initial, payload = self.worker_dispatch(session, raw, trusted)
+        self.assertEqual(initial["feedback"][0]["note"], note)
+        self.assertEqual(payload["development_feedback"], initial["feedback"])
+        self.assertLess(len(self.callback_body), MAX_BODY_BYTES)
+        self.assertEqual(payload["format"], CURRENT)
 
     def test_versions_invalid_notes_and_traversing_host_reference_fail_closed(self):
         _, raw, trusted = self.trusted_seed()
@@ -225,7 +245,7 @@ class FullFeedbackChannelTests(unittest.TestCase):
         with self.assertRaises(source_seed.SourceSeedError):
             source_seed.compose_source_seed(
                 (Path(__file__).resolve().parents[1] / "agents/frozen_seed.py").read_bytes(),
-                fragment_version="buddha.source-seed-improver.v3",
+                fragment_version="buddha.source-seed-improver.v4",
             )
 
 

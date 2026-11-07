@@ -4,6 +4,7 @@ import hashlib
 import http.client
 import json
 import os
+import ssl
 import tempfile
 import threading
 import unittest
@@ -21,6 +22,7 @@ from buddha.gateway import (
     GatewayCall,
     GatewayError,
     RawHTTPTransport,
+    TransportUncertain,
     execution_identity,
     prepare_gateway,
 )
@@ -510,8 +512,9 @@ class GatewayTests(unittest.TestCase):
         gateway = self.gateway()
         connection = self.connection()
         connection.getresponse.side_effect = TimeoutError("synthetic timeout")
-        with self.assertRaises(ProviderUncertain):
+        with self.assertRaises(ProviderUncertain) as stopped:
             self.send(gateway, connection=connection)
+        self.assertEqual(getattr(stopped.exception, "error_family", None), "timeout")
         operation = self.operation(gateway)
         self.assertEqual(operation.status, "unknown")
         self.assertEqual(operation.reserve_microusd, 300)
@@ -519,6 +522,44 @@ class GatewayTests(unittest.TestCase):
         with self.assertRaises(ValidationError):
             self.send(gateway, replace(self.call, logical_id="after-timeout"))
         self.assertEqual(self.authority.summary()["operation_count"], 1)
+
+    def test_connection_failure_retains_safe_family_without_private_error_text(self):
+        gateway = self.gateway()
+        connection = self.connection()
+        connection.getresponse.side_effect = ConnectionResetError(KEY + " private endpoint")
+        with self.assertRaises(ProviderUncertain) as stopped:
+            self.send(gateway, connection=connection)
+        self.assertEqual(getattr(stopped.exception, "error_family", None), "connection")
+        self.assertNotIn(KEY, str(stopped.exception))
+        self.assertNotIn("private endpoint", str(stopped.exception))
+        self.assertEqual(self.operation(gateway).status, "unknown")
+        self.assertEqual(self.authority.summary()["reserved_microusd"], 300)
+        connection.request.assert_called_once()
+        with self.assertRaises(ValidationError):
+            self.send(gateway, replace(self.call, logical_id="after-connection-error"))
+        self.assertEqual(self.authority.summary()["operation_count"], 1)
+
+    def test_transport_families_are_fixed_categories_not_exception_attributes_or_text(self):
+        class UntrustedError(Exception):
+            error_family = KEY
+
+            def __str__(self):
+                raise AssertionError("private error text must not be read")
+
+        for error, family in (
+            (TimeoutError(KEY), "timeout"),
+            (ConnectionResetError(KEY), "connection"),
+            (ssl.SSLError(KEY), "tls"),
+            (http.client.BadStatusLine(KEY), "http"),
+            (OSError(KEY), "os_error"),
+            (UntrustedError(), "other"),
+        ):
+            with self.subTest(family=family):
+                uncertain = TransportUncertain(error)
+                self.assertEqual(uncertain.error_family, family)
+                self.assertNotIn(KEY, str(uncertain))
+                uncertain._error_family = KEY
+                self.assertEqual(uncertain.error_family, "other")
 
     def test_missing_usage_keeps_raw_reply_and_full_unknown_hold(self):
         gateway = self.gateway()
@@ -735,14 +776,32 @@ class GatewayTests(unittest.TestCase):
         response = self.response()
         partial = b'{"model":"test-model","usage":'
         response.read.side_effect = http.client.IncompleteRead(partial, 100)
-        with self.assertRaises(ProviderUncertain):
+        with self.assertRaises(ProviderUncertain) as stopped:
             self.send(gateway, connection=self.connection(response))
         operation = self.operation(gateway)
         self.assertEqual(operation.status, "unknown")
         envelope = self.envelope(operation)
         self.assertEqual(envelope.body, partial)
+        self.assertEqual(getattr(stopped.exception, "error_family", None), "http")
         self.assertTrue(envelope.truncated)
         self.assertEqual(envelope.received_sha256, hashlib.sha256(partial).hexdigest())
+        self.assertEqual(self.authority.summary()["reserved_microusd"], 300)
+        self.assertEqual(self.authority.summary()["spent_microusd"], 0)
+
+    def test_post_body_header_timeout_keeps_raw_receipt_and_safe_original_family(self):
+        gateway = self.gateway()
+        response = self.response()
+        response.getheaders.side_effect = TimeoutError(KEY + " private endpoint")
+        with self.assertRaises(ProviderUncertain) as stopped:
+            self.send(gateway, connection=self.connection(response))
+        self.assertEqual(getattr(stopped.exception, "error_family", None), "timeout")
+        self.assertNotIn(KEY, str(stopped.exception))
+        self.assertNotIn("private endpoint", str(stopped.exception))
+        operation = self.operation(gateway)
+        self.assertEqual(operation.status, "unknown")
+        envelope = self.envelope(operation)
+        self.assertEqual(envelope.body, response.read.return_value)
+        self.assertFalse(envelope.headers_complete)
         self.assertEqual(self.authority.summary()["reserved_microusd"], 300)
         self.assertEqual(self.authority.summary()["spent_microusd"], 0)
 

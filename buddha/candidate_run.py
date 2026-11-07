@@ -20,6 +20,7 @@ from buddha.gateway import (
     Gateway,
     GatewayCall,
     GatewayError,
+    TransportUncertain,
     _read_manifest,
     execution_identity,
 )
@@ -27,6 +28,7 @@ from buddha.ledger import BudgetExceeded, OperationConflict
 from buddha.provider import BoundBreach, PendingOperation, ProviderUncertain
 from buddha.releases import (
     MAX_FEEDBACK_BYTES,
+    MAX_FULL_FEEDBACK_BYTES,
     MAX_JSON_BYTES,
     MAX_SOURCE_BYTES,
     Release,
@@ -82,6 +84,7 @@ class CandidateSession:
         self.sequence = self.delivered = 0
         self.done: dict[str, object] | None = None
         self.stop_reason: str | None = None
+        self.provider_error_family: str | None = None
         self.calls = {"requested": 0, "completed": 0, "stopped": 0}
         self.proposal_frame: dict[str, object] | None = None
         try:
@@ -207,7 +210,9 @@ class CandidateSession:
                     raise CandidateRunError("feedback needs an absolute nontraversing path")
                 feedback_raw = consume(feedback_path)
                 self.feedback_file_sha256 = hashlib.sha256(feedback_raw).hexdigest()
-                if len(feedback_raw) > MAX_FEEDBACK_BYTES or self.feedback_file_sha256 != _digest(
+                if len(
+                    feedback_raw
+                ) > MAX_FULL_FEEDBACK_BYTES or self.feedback_file_sha256 != _digest(
                     reference["sha256"]
                 ):
                     raise CandidateRunError("feedback differs from its reviewed bytes")
@@ -218,6 +223,9 @@ class CandidateSession:
                 }:
                     raise CandidateRunError("unsupported development feedback")
                 self.feedback_v2 = packet["format"] == "buddha.candidate-development-feedback.v2"
+                maximum = MAX_FULL_FEEDBACK_BYTES if self.feedback_v2 else MAX_FEEDBACK_BYTES
+                if len(feedback_raw) > maximum:
+                    raise CandidateRunError("feedback exceeds its versioned byte ceiling")
                 if self.detached_parent and not self.feedback_v2:
                     raise CandidateRunError("detached improvement requires complete feedback")
                 values = {}
@@ -251,13 +259,13 @@ class CandidateSession:
                         identifier not in development
                         or identifier in seen
                         or not note.strip()
-                        or len(note.encode()) > (MAX_FEEDBACK_BYTES if self.feedback_v2 else 4096)
+                        or len(note.encode()) > (maximum if self.feedback_v2 else 4096)
                     ):
                         raise CandidateRunError("feedback is not unique bounded development data")
                     seen.add(identifier)
                     self.feedback.append({"task": tasks[identifier].to_record(), "note": note})
                 projected = _json(self.feedback)
-                if len(projected) > MAX_FEEDBACK_BYTES:
+                if len(projected) > maximum:
                     raise CandidateRunError("projected feedback exceeds its byte ceiling")
                 self.feedback_sha256 = hashlib.sha256(projected).hexdigest()
             else:
@@ -659,8 +667,10 @@ class CandidateSession:
                 )
                 try:
                     envelope = self.gateway.execute(call)
-                except (ProviderUncertain, PendingOperation):
+                except (ProviderUncertain, PendingOperation) as error:
                     self.stop_reason = "unknown"
+                    if type(error) is TransportUncertain:
+                        self.provider_error_family = error.error_family
                 except (BudgetExceeded, BoundBreach):
                     self.stop_reason = "authority"
                 except (GatewayError, OperationConflict):
@@ -864,6 +874,8 @@ class CandidateSession:
                 if self.proposal_frame is not None
                 else "unavailable: no bounded proposal frame received"
             )
+        if self.provider_error_family is not None:
+            report["provider_error_family"] = self.provider_error_family
         self._write("report.json", report)
         if interrupted:
             raise KeyboardInterrupt

@@ -23,6 +23,7 @@ from buddha.answers import TaskSet, _utf8
 from buddha.doctor import _Capture
 from buddha.releases import (
     MAX_FEEDBACK_BYTES,
+    MAX_FULL_FEEDBACK_BYTES,
     MAX_JSON_BYTES,
     ReleaseError,
     Selection,
@@ -67,9 +68,9 @@ _FULL_POLICY = {
     "answer_positions": "all_selected",
     "answer_text": "complete_literal_utf8",
     "diagnostic_positions": "all",
-    "max_note_utf8_bytes": MAX_FEEDBACK_BYTES,
-    "max_feedback_bytes": MAX_FEEDBACK_BYTES,
-    "max_projected_bytes": MAX_FEEDBACK_BYTES,
+    "max_note_utf8_bytes": MAX_FULL_FEEDBACK_BYTES,
+    "max_feedback_bytes": MAX_FULL_FEEDBACK_BYTES,
+    "max_projected_bytes": MAX_FULL_FEEDBACK_BYTES,
 }
 _FULL_FAILURE_POLICY = {
     **_FULL_POLICY,
@@ -116,6 +117,19 @@ class SourceFeedbackTooLarge(SourceFeedbackError):
 
 class SourceFeedbackReconstructionLimit(SourceFeedbackTooLarge):
     """Original comparison reconstruction exceeds a declared work ceiling."""
+
+
+_FULL_FEEDBACK_BYTES: ContextVar[int] = ContextVar(
+    "source_feedback_full_bytes", default=MAX_FULL_FEEDBACK_BYTES
+)
+
+
+def _policy_with_capacity(policy: Mapping[str, object]) -> dict[str, object]:
+    result = dict(policy)
+    if result.get("answer_text") == "complete_literal_utf8":
+        for key in ("max_note_utf8_bytes", "max_feedback_bytes", "max_projected_bytes"):
+            result[key] = _FULL_FEEDBACK_BYTES.get()
+    return result
 
 
 @dataclass
@@ -221,6 +235,7 @@ def _build(
     parent_screen: source_screen.SourceScreen | None = None,
     completed: object = None,
 ) -> dict[str, object]:
+    maximum = _FULL_FEEDBACK_BYTES.get() if full_answers else MAX_FEEDBACK_BYTES
     directory = _destination(directory, existing=existing)
     ref = _object(reference, {"directory", "authorization", "report_sha256"})
     original = pipeline._absolute(ref["directory"])
@@ -291,7 +306,7 @@ def _build(
         "split": {"path": str(directory / "split.json"), "sha256": split_sha256},
         "records": records,
     }
-    feedback_size = len(_bounded_json(feedback, MAX_FEEDBACK_BYTES)) if full_answers else 0
+    feedback_size = len(_bounded_json(feedback, maximum)) if full_answers else 0
     projected_size = 2
     for index, (task, value) in enumerate(zip(tasks.tasks, rows, strict=True)):
         row = _object(value)
@@ -326,7 +341,7 @@ def _build(
             if type(answer) is not str:
                 raise SourceFeedbackError("literal C1 answers require UTF-8 text")
             raw = answer.encode("utf-8")
-            if full_answers and len(raw) > MAX_FEEDBACK_BYTES:
+            if full_answers and len(raw) > maximum:
                 raise SourceFeedbackTooLarge("complete answer exceeds the feedback byte ceiling")
             excerpt = answer if full_answers else _prefix(answer) if position < 10 else ""
             excerpt_bytes = len(excerpt.encode("utf-8"))
@@ -366,10 +381,8 @@ def _build(
             "recorded_cost_microusd": cost,
             "cost_scope": "original_task_generation_and_native_owners",
         }
-        note_raw = (
-            _bounded_json(note_value, MAX_FEEDBACK_BYTES) if full_answers else _json(note_value)
-        )
-        if len(note_raw) > (MAX_FEEDBACK_BYTES if full_answers else 4096):
+        note_raw = _bounded_json(note_value, maximum) if full_answers else _json(note_value)
+        if len(note_raw) > (maximum if full_answers else 4096):
             raise SourceFeedbackTooLarge("descriptive task note exceeds its byte ceiling")
         note = note_raw.decode("utf-8")
         feedback_row: dict[str, object] = {"task_id": task.id, "note": note}
@@ -377,10 +390,10 @@ def _build(
         if full_answers:
             comma = int(bool(records))
             feedback_size += comma + len(
-                _bounded_json(feedback_row, MAX_FEEDBACK_BYTES - feedback_size - comma)
+                _bounded_json(feedback_row, maximum - feedback_size - comma)
             )
             projected_size += comma + len(
-                _bounded_json(projected_row, MAX_FEEDBACK_BYTES - projected_size - comma)
+                _bounded_json(projected_row, maximum - projected_size - comma)
             )
         records.append(feedback_row)
         projected.append(projected_row)
@@ -410,8 +423,10 @@ def _build(
                 },
             }
         )
-    if len(_json(feedback)) > MAX_FEEDBACK_BYTES or len(_json(projected)) > MAX_FEEDBACK_BYTES:
-        raise SourceFeedbackTooLarge("feedback packet or full task projection exceeds 1 MiB")
+    if len(_json(feedback)) > maximum or len(_json(projected)) > maximum:
+        raise SourceFeedbackTooLarge(
+            "feedback packet or full task projection exceeds its declared byte ceiling"
+        )
     provenance: dict[str, object] = {
         "format": "buddha.source-screen-feedback.v3"
         if full_answers
@@ -426,7 +441,7 @@ def _build(
         "comparison_key": report["comparison_key"],
         "controls_sha256": report["controls_sha256"],
         "projection": record["projection"],
-        "policy": dict(_FULL_POLICY if full_answers else _POLICY),
+        "policy": _policy_with_capacity(_FULL_POLICY if full_answers else _POLICY),
         "source_sha256": source_sha256,
         "split_sha256": split_sha256,
         "feedback_sha256": _sha(_json(feedback)),
@@ -468,7 +483,7 @@ def _relation_policy(
     ]
     if relation is not None:
         markers.append(relation)
-    result = dict(policy)
+    result = _policy_with_capacity(policy)
     if finite:
         if "host_control_relation" in result:
             markers.insert(0, result["host_control_relation"])
@@ -735,6 +750,7 @@ def _build_failures(
         type(completed) is not source_screen_results._CompletedScreenRead or sink is not None
     ):
         raise SourceFeedbackError("failure feedback needs its private completed screen read")
+    maximum = _FULL_FEEDBACK_BYTES.get() if full_answers else MAX_FEEDBACK_BYTES
     directory = _destination(directory, existing=existing)
     if existing:
         _packet_files(directory, partial=True)
@@ -894,7 +910,7 @@ def _build_failures(
                 },
                 "older_failure_excerpts_omitted": len(failures) - 1,
             }
-            yield _bounded_json(value, MAX_FEEDBACK_BYTES) if full_answers else _json(value)
+            yield _bounded_json(value, maximum) if full_answers else _json(value)
 
     if not full_answers:
         minimum = _prefix(source_prefix, utf8_bytes=128, json_bytes=1536)
@@ -912,9 +928,7 @@ def _build_failures(
         source_prefix = source_prefix[:low]
     raw_notes = notes(source_prefix)
     feedback = _object(base["feedback"])
-    feedback_size = (
-        len(_bounded_json(feedback | {"records": []}, MAX_FEEDBACK_BYTES)) if full_answers else 0
-    )
+    feedback_size = len(_bounded_json(feedback | {"records": []}, maximum)) if full_answers else 0
     projected_size = 2
     position = 0
     for row, raw, task_provenance in zip(
@@ -929,10 +943,10 @@ def _build_failures(
                 "note": note_text,
             }
             feedback_size += comma + len(
-                _bounded_json(feedback_row, MAX_FEEDBACK_BYTES - feedback_size - comma)
+                _bounded_json(feedback_row, maximum - feedback_size - comma)
             )
             projected_size += comma + len(
-                _bounded_json(projected_row, MAX_FEEDBACK_BYTES - projected_size - comma)
+                _bounded_json(projected_row, maximum - projected_size - comma)
             )
             position += 1
         _object(row)["note"] = note_text
@@ -979,9 +993,9 @@ def _build_failures(
         }
         for row in _list(feedback["records"])
     ]
-    if len(_json(feedback)) > MAX_FEEDBACK_BYTES or len(_json(projected)) > MAX_FEEDBACK_BYTES:
+    if len(_json(feedback)) > maximum or len(_json(projected)) > maximum:
         raise SourceFeedbackTooLarge(
-            "failure feedback packet or full task projection exceeds 1 MiB"
+            "failure feedback packet or full task projection exceeds its declared byte ceiling"
         )
     raw_base = _bounded_json(base, MAX_JSON_BYTES) if full_answers else _json(base)
     evidence.recheck()
@@ -997,9 +1011,10 @@ def _build_failures(
 
 def _root_comparison_notes(base: dict[str, object], reason: str) -> None:
     """Wrap complete measured notes without inventing a parent or numeric delta."""
+    maximum = _FULL_FEEDBACK_BYTES.get()
     provenance, feedback = _object(base["provenance"]), _object(base["feedback"])
     tasks = TaskSet.from_bytes(_json(base["source"]))
-    feedback_size = len(_bounded_json(feedback | {"records": []}, MAX_FEEDBACK_BYTES))
+    feedback_size = len(_bounded_json(feedback | {"records": []}, maximum))
     projected_size = 2
     for index, (value, task_provenance) in enumerate(
         zip(_list(feedback["records"]), _list(provenance["tasks"]), strict=True)
@@ -1020,19 +1035,17 @@ def _root_comparison_notes(base: dict[str, object], reason: str) -> None:
                 "recorded_cost_delta_microusd": None,
             },
         }
-        raw = _bounded_json(note, MAX_FEEDBACK_BYTES)
+        raw = _bounded_json(note, maximum)
         final_row = row | {"note": raw.decode()}
         comma = int(index > 0)
-        feedback_size += comma + len(
-            _bounded_json(final_row, MAX_FEEDBACK_BYTES - feedback_size - comma)
-        )
+        feedback_size += comma + len(_bounded_json(final_row, maximum - feedback_size - comma))
         projected_size += comma + len(
             _bounded_json(
                 {
                     "task": tasks.select([row["task_id"]]).tasks[0].to_record(),
                     "note": final_row["note"],
                 },
-                MAX_FEEDBACK_BYTES - projected_size - comma,
+                maximum - projected_size - comma,
             )
         )
         row.update(final_row)
@@ -1054,6 +1067,7 @@ def _build_root_comparison(
     root = _object(
         _object(comparison, {"root"})["root"], {"directory", "authorization", "manifest_sha256"}
     )
+    maximum = _FULL_FEEDBACK_BYTES.get()
     directory = _destination(directory, existing=existing)
     scope = pipeline._absolute(root["directory"])
     authorization = pipeline._absolute(root["authorization"])
@@ -1103,7 +1117,7 @@ def _build_root_comparison(
                 base_provenance_sha256=base_sha256,
                 comparison={"root": checked_root},
                 root_declaration=declaration,
-                feedback_sha256=_sha(_bounded_json(feedback, MAX_FEEDBACK_BYTES)),
+                feedback_sha256=_sha(_bounded_json(feedback, maximum)),
                 claim=(
                     "explicit declared search root; no counted-parent baseline or improvement claim"
                 ),
@@ -1133,6 +1147,7 @@ def _build_study_root_comparison(
         _object(comparison, {"study_root"})["study_root"],
         {"directory", "authorization", "declaration_sha256", "start", "repetition", "arm"},
     )
+    maximum = _FULL_FEEDBACK_BYTES.get()
     directory = _destination(directory, existing=existing)
     scope, authorization = (
         pipeline._absolute(root["directory"]),
@@ -1204,7 +1219,7 @@ def _build_study_root_comparison(
                 comparison={"study_root": checked_root},
                 root_declaration=declaration,
                 improver_agent_sha256=improver,
-                feedback_sha256=_sha(_bounded_json(base["feedback"], MAX_FEEDBACK_BYTES)),
+                feedback_sha256=_sha(_bounded_json(base["feedback"], maximum)),
                 claim=(
                     "explicit declared study cell root; "
                     "no counted-parent baseline or improvement claim"
@@ -1232,6 +1247,7 @@ def _build_comparison(
     edge = _object(comparison, {"parent", "proposal", "screen"})
     if _json(edge["screen"]) != _json(reference):
         raise SourceFeedbackError("comparison must name the exact current screen reference")
+    maximum = _FULL_FEEDBACK_BYTES.get()
     directory = _destination(directory, existing=existing)
     improver = _digest(improver_agent_sha256) if improver_agent_sha256 is not None else None
     if completed is not None and type(completed) is not source_screen_results._CompletedScreenRead:
@@ -1293,7 +1309,7 @@ def _build_comparison(
             rows = _list(feedback["records"])
             parent_rows = _list(_object(parent_base["feedback"])["records"])
             tasks = TaskSet.from_bytes(_json(base["source"]))
-            feedback_size = len(_bounded_json(feedback | {"records": []}, MAX_FEEDBACK_BYTES))
+            feedback_size = len(_bounded_json(feedback | {"records": []}, maximum))
             projected_size = 2
             for index, (value, parent_value, task_provenance) in enumerate(
                 zip(rows, parent_rows, _list(provenance["tasks"]), strict=True)
@@ -1343,11 +1359,11 @@ def _build_comparison(
                         "proposal_cost_scope": _COMPARISON_POLICY["proposal_cost_scope"],
                     },
                 }
-                raw = _bounded_json(note, MAX_FEEDBACK_BYTES)
+                raw = _bounded_json(note, maximum)
                 final_row = row | {"note": raw.decode()}
                 comma = int(index > 0)
                 feedback_size += comma + len(
-                    _bounded_json(final_row, MAX_FEEDBACK_BYTES - feedback_size - comma)
+                    _bounded_json(final_row, maximum - feedback_size - comma)
                 )
                 projected_size += comma + len(
                     _bounded_json(
@@ -1355,7 +1371,7 @@ def _build_comparison(
                             "task": tasks.select([row["task_id"]]).tasks[0].to_record(),
                             "note": final_row["note"],
                         },
-                        MAX_FEEDBACK_BYTES - projected_size - comma,
+                        maximum - projected_size - comma,
                     )
                 )
                 row.update(final_row)
@@ -1375,7 +1391,7 @@ def _build_comparison(
                 parent_candidate_id=parent["candidate_id"],
                 parent_provenance_sha256=_sha(_json(parent_provenance)),
                 parent_tasks=parent_provenance["tasks"],
-                feedback_sha256=_sha(_bounded_json(feedback, MAX_FEEDBACK_BYTES)),
+                feedback_sha256=_sha(_bounded_json(feedback, maximum)),
                 claim=(
                     "descriptive immediate-parent comparison of unchanged official measurements; "
                     "no causal or improvement claim"
@@ -1477,6 +1493,7 @@ def inspect_source_feedback(
     _completed_screen: object = None,
 ) -> dict[str, object]:
     """Verify an existing measured packet against its original screen, without writes."""
+    token = None
     try:
         directory = _destination(directory, existing=True)
         _packet_files(directory)
@@ -1495,6 +1512,23 @@ def inspect_source_feedback(
             "buddha.source-screen-feedback.v7",
             "buddha.source-screen-feedback.v8",
         }
+        if full_answers:
+            policy = _object(original["policy"])
+            maximum = policy.get("max_feedback_bytes")
+            if (
+                type(maximum) is not int
+                or maximum
+                not in {
+                    MAX_FEEDBACK_BYTES,
+                    MAX_FULL_FEEDBACK_BYTES,
+                }
+                or any(
+                    policy.get(key) != maximum
+                    for key in ("max_note_utf8_bytes", "max_projected_bytes")
+                )
+            ):
+                raise SourceFeedbackError("unsupported saved full-feedback capacity")
+            token = _FULL_FEEDBACK_BYTES.set(maximum)
         reference = _object(original["reference"])
         retained = None
         if _completed_screen is not None and version in {
@@ -1595,6 +1629,9 @@ def inspect_source_feedback(
         if isinstance(error, SourceFeedbackError):
             raise
         raise SourceFeedbackError("saved source feedback evidence is invalid") from None
+    finally:
+        if token is not None:
+            _FULL_FEEDBACK_BYTES.reset(token)
 
 
 def write_source_feedback(

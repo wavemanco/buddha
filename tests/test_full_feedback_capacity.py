@@ -1,6 +1,9 @@
 """Full feedback must refuse aggregate capacity before materializing oversized JSON."""
 
+import hashlib
+import tempfile
 import unittest
+from pathlib import Path
 from unittest.mock import patch
 
 import test_full_output_feedback as full_fixtures
@@ -9,9 +12,53 @@ from buddha.releases import MAX_FEEDBACK_BYTES, _json
 
 
 class FullFeedbackCapacityTests(unittest.TestCase):
+    def test_saved_capacity_is_whitelisted_and_restored_after_invalid_evidence(self):
+        from buddha import source_feedback
+        from buddha.releases import MAX_FULL_FEEDBACK_BYTES
+
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary).resolve()
+            for name in ("source", "split", "feedback"):
+                (directory / (name + ".json")).write_bytes(b"{}")
+            for maximum in (
+                True,
+                None,
+                MAX_FEEDBACK_BYTES + 1,
+                MAX_FULL_FEEDBACK_BYTES + 1,
+                MAX_FEEDBACK_BYTES,
+                MAX_FULL_FEEDBACK_BYTES,
+            ):
+                # Supported capacities proceed to the deliberately missing original reference.
+                raw = _json(
+                    {
+                        "format": "buddha.source-screen-feedback.v3",
+                        "policy": {
+                            key: maximum
+                            for key in (
+                                "max_note_utf8_bytes",
+                                "max_feedback_bytes",
+                                "max_projected_bytes",
+                            )
+                        },
+                    }
+                )
+                (directory / "provenance.json").write_bytes(raw)
+                with (
+                    self.subTest(maximum=maximum),
+                    self.assertRaises(source_feedback.SourceFeedbackError),
+                ):
+                    source_feedback.inspect_source_feedback(
+                        directory, expected_provenance_sha256=hashlib.sha256(raw).hexdigest()
+                    )
+                self.assertEqual(
+                    source_feedback._FULL_FEEDBACK_BYTES.get(), MAX_FULL_FEEDBACK_BYTES
+                )
+
     def test_two_task_aggregate_refuses_before_whole_oversized_serialization(self):
         from buddha import source_feedback
 
+        token = source_feedback._FULL_FEEDBACK_BYTES.set(MAX_FEEDBACK_BYTES)
+        self.addCleanup(source_feedback._FULL_FEEDBACK_BYTES.reset, token)
         fixture = full_fixtures.FullOutputFeedbackTests("runTest")
         fixture.setUp()
         self.addCleanup(fixture.doCleanups)
@@ -59,6 +106,22 @@ class FullFeedbackCapacityTests(unittest.TestCase):
         self.assertEqual(
             (f.h.files(f.h.root), authority.path.read_bytes(), f.h.engine.physical_sends), before
         )
+
+    def test_full_capacity_uses_json_envelope_and_still_refuses_one_extra_byte(self):
+        from buddha.channel import MAX_FRAME_BYTES
+        from buddha.releases import MAX_FULL_FEEDBACK_BYTES, MAX_JSON_BYTES
+        from buddha.source_feedback import SourceFeedbackTooLarge, _bounded_json
+
+        self.assertEqual(MAX_FULL_FEEDBACK_BYTES, MAX_JSON_BYTES)
+        self.assertEqual(MAX_FULL_FEEDBACK_BYTES, MAX_FRAME_BYTES)
+        overhead = len(_json({"value": ""}))
+        value = {"value": "x" * (MAX_FULL_FEEDBACK_BYTES - overhead)}
+        self.assertEqual(
+            len(_bounded_json(value, MAX_FULL_FEEDBACK_BYTES)), MAX_FULL_FEEDBACK_BYTES
+        )
+        value["value"] += "x"
+        with self.assertRaises(SourceFeedbackTooLarge):
+            _bounded_json(value, MAX_FULL_FEEDBACK_BYTES)
 
     def test_bounded_encoder_preserves_canonical_bytes_at_exact_byte_ceiling(self):
         from buddha.source_feedback import SourceFeedbackTooLarge, _bounded_json

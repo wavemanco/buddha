@@ -94,14 +94,19 @@ Provenance v3 (measurements), v4 (inherited failed-child history) and v5
 retain every selected answer and diagnostic position. Empty answers, whitespace,
 Unicode, control characters, repeated answers and late endings are preserved.
 Every answer has zero omitted bytes. The inherited Python improvement function
-receives the full notes; the default v2 starter includes them unchanged in its
+receives the full notes; the default v3 starter includes them unchanged in its
 actual provider request. Arbitrary evolved functions can choose their own use
 of those inputs; receiving complete data does not prove good diagnosis.
 
-The existing 1 MiB ceiling applies separately to the canonical escaped feedback
-file and to the full task-and-note projection. A note may use that allowance;
-there is no additional 4 KiB cap on the v2 channel. The detached host bundle
-still has its 32 MiB ceiling. Exceeding a limit raises `SourceFeedbackTooLarge`
+Prospective full-output feedback uses the existing 32 MiB JSON ceiling for both
+the canonical escaped feedback file and the full task-and-note projection.
+There is no independent 1 MiB or 4 KiB cap on that complete-output channel.
+Saved policies declaring the former 1 MiB bound reconstruct with that exact
+bound, including nested parent provenance; prefix contracts stay unchanged.
+The complete host bundle and worker frame must still fit their 32 MiB limits,
+and a model callback must fit its separate 16 MiB body and token/context limits.
+Feedback-file headroom does not guarantee those larger envelopes fit.
+Exceeding the feedback-file or projected-feedback ceiling raises `SourceFeedbackTooLarge`
 before writing the packet or preparing its proposal owner. Search records an
 incomplete `feedback` stage with reason `feedback_capacity`; it does not shorten
 answers or continue with a partial view. Earlier generation/evaluation spending
@@ -278,6 +283,9 @@ Workers and provider replies are supplied fixtures; these checks do not measure
 improver effectiveness. Full-suite hosted CI remains a separate gate.
 
 ## Historical v1/v2 prefix contracts (replay only)
+
+These are `source-screen-feedback` provenance versions, separate from the
+starter and candidate-feedback version numbers above.
 
 Feedback is an explicitly versioned optimization capability. The current bridge
 supports the selected NoveltyBench 1.1 projection. A compatible new evaluator can

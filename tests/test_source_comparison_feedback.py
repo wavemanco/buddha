@@ -404,7 +404,9 @@ class SourceComparisonFeedbackTests(unittest.TestCase):
             provenance_path.write_bytes(original_provenance)
         self.assertEqual(self.snapshot(), before)
 
-    def test_complete_comparison_refuses_capacity_without_shortening_either_answer_set(self):
+    def test_legacy_comparison_refuses_capacity_without_shortening_either_answer_set(self):
+        token = source_feedback._FULL_FEEDBACK_BYTES.set(MAX_FEEDBACK_BYTES)
+        self.addCleanup(source_feedback._FULL_FEEDBACK_BYTES.reset, token)
         self.fixture(literal="x" * 220_000)
         current = build_source_feedback(self.destination, reference=self.reference)
         parent = build_source_feedback(self.h.root / "unused-parent", reference=self.parent_ref)
@@ -423,6 +425,26 @@ class SourceComparisonFeedbackTests(unittest.TestCase):
                 self.destination, reference=self.reference, comparison=self.comparison
             )
         self.assertFalse(self.destination.exists())
+        self.assertEqual(self.snapshot(), before)
+
+    def test_historical_comparison_policy_and_parent_hashes_replay_unchanged(self):
+        from buddha.releases import MAX_FULL_FEEDBACK_BYTES
+
+        token = source_feedback._FULL_FEEDBACK_BYTES.set(MAX_FEEDBACK_BYTES)
+        try:
+            self.fixture()
+            written = write_source_feedback(
+                self.destination, reference=self.reference, comparison=self.comparison
+            )
+        finally:
+            source_feedback._FULL_FEEDBACK_BYTES.reset(token)
+        before = self.snapshot()
+        with self.h.readonly():
+            replayed = inspect_source_feedback(
+                self.destination, expected_provenance_sha256=written["provenance"]["sha256"]
+            )
+        self.assertEqual(replayed["provenance"]["policy"]["max_feedback_bytes"], MAX_FEEDBACK_BYTES)
+        self.assertEqual(source_feedback._FULL_FEEDBACK_BYTES.get(), MAX_FULL_FEEDBACK_BYTES)
         self.assertEqual(self.snapshot(), before)
 
     def test_invalid_current_metric_has_no_fabricated_zero_delta(self):

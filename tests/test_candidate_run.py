@@ -257,6 +257,8 @@ class CandidateSessionTests(unittest.TestCase):
             report = session.run()
         self.assertEqual((report["status"], report["reason"]), ("stopped", "unknown"))
         self.assertEqual(report["host_stop_reason"], "unknown")
+        self.assertEqual(report.get("provider_error_family"), "timeout")
+        self.assertEqual(json.loads((self.output / "report.json").read_bytes()), report)
         self.assertGreater(report["gateway_totals"]["reserved_microusd"], 0)
         self.assertFalse((self.output / "answers.json").exists())
 

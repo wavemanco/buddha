@@ -20,6 +20,7 @@ if not __package__:
 from buddha.channel import ChannelError, _depth, read_frame, write_frame  # noqa: E402
 from buddha.releases import (  # noqa: E402
     MAX_FEEDBACK_BYTES,
+    MAX_FULL_FEEDBACK_BYTES,
     MAX_JSON_BYTES,
     MAX_SOURCE_BYTES,
     ReleaseError,
@@ -177,15 +178,24 @@ class CandidateWorker:
                             "detached task parent differs from its inventory"
                         )
                     self.parent_bundle = parent
+                maximum = (
+                    MAX_FULL_FEEDBACK_BYTES
+                    if record["format"]
+                    in {
+                        "buddha.candidate-improvement-worker.v2",
+                        "buddha.candidate-improvement-worker.v3",
+                    }
+                    else MAX_FEEDBACK_BYTES
+                )
                 feedback = record["feedback"]
                 if (
                     type(feedback) is not list
                     or not 1 <= len(feedback) <= 1000
-                    or len(_json(feedback)) > MAX_FEEDBACK_BYTES
+                    or len(_json(feedback)) > maximum
                 ):
                     raise CandidateWorkerError("invalid improvement feedback")
                 note_limit = (
-                    MAX_FEEDBACK_BYTES
+                    MAX_FULL_FEEDBACK_BYTES
                     if record["format"]
                     in {
                         "buddha.candidate-improvement-worker.v2",

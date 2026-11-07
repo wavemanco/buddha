@@ -18,6 +18,20 @@ There are three roles. The **candidate agent** produces answers. The
 and official evaluator, controls spending and saves evidence. The candidate is
 not allowed to rewrite its examiner or its spending limits.
 
+**Where WildChat fits.** [WildChat](https://arxiv.org/abs/2405.01470) is a research
+dataset of real user–ChatGPT conversations, originally about one million chats.
+[NoveltyBench selects 1,000 prompts](https://arxiv.org/html/2504.05228v4#S3.SS1)
+from it for its WildChat task collection; its separate Curated collection has
+100 tasks. WildChat supplies questions, not the answering model or a judge.
+Buddha generates ten new answers to each selected task and uses the official
+judges to assess them. The current bounded study uses three WildChat tasks for
+development and 26 separate final tasks, rather than the whole dataset.
+Development feedback can guide changes to harness Python; final-task feedback
+does not return to the improver. The answering agent still receives its current
+final task when answering. We do not train foundation-model weights. This
+experiment's task separation does not establish that a public prompt was absent
+from every model's pretraining.
+
 A normal evaluation follows this path:
 
 ```mermaid
