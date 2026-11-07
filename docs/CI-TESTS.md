@@ -33,7 +33,9 @@ and checked terminal completion remain in use.
 The separate `checks` workflow in
 [qualification.yml](../.github/workflows/qualification.yml) starts only when a
 maintainer applies a label matching the PR's exact source commit.
-It retains five groups per OS, the full discovered suite, the original
+It first runs the corrected full continuation case on Windows. Only a successful
+continuation job releases the five qualification groups per OS. Those groups
+retain the full discovered suite, the original
 partition seed, isolated large case, all quality checks and the 60-minute
 genuine-progress rule. Opening a PR, pushing a commit or adding an unrelated
 label does not start its test jobs. Each full run requires the user's approval
@@ -41,14 +43,16 @@ for that exact source and its Actions-minute cost.
 
 After approval, use GitHub's PR page to apply `qualify-` followed by the full
 40-character head commit SHA, with no spaces. This is a 48-character label.
-It requests one ten-job run against that exact commit; the checkout explicitly
+It requests one continuation job and, only if that passes, ten qualification
+jobs against that exact commit; every checkout explicitly
 uses the head SHA rather than GitHub's temporary merge commit. The PR must be
 mergeable and its head branch must belong to this repository. Fork PRs are
 excluded from this route.
 
 No PowerShell command, API key or model API money is needed. The run uses
 GitHub Actions minutes. Follow it in **Actions** and use **Cancel workflow** to
-stop it. All ten jobs must finish successfully; a skipped workflow or job is
+stop it. The continuation and all ten qualification jobs must finish successfully;
+a skipped workflow or job is
 not a full-suite pass.
 
 A later push does not repeat qualification or transfer approval to the new
@@ -62,12 +66,69 @@ execution or a claim that the integrated system passed. PR #243 keeps its
 original workflow and gate. Retiring the obsolete document-lane controller
 also retires its nine tests; the remaining full inventory is reported normally.
 
-This prepares a premerge route for a same-repository PR containing the workflow.
-The positive label-to-ten-job execution remains unverified until an approved
-run occurs. No qualification label or long run was started to check this change.
+The earlier ten-job route completed at source8e, with the same test assertion
+failing on both OSes. The added continuation dependency has source/static checks
+only until an approved run occurs. No qualification label or long run was started
+to prepare this change.
 GitHub documents the [PR label event and explicit head checkout](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#pull_request)
 and the [format expression](https://docs.github.com/en/actions/reference/workflows-and-actions/expressions#format)
 used to bind the label to its source.
+
+### Prepared continuation check and timing basis
+
+**Awaiting approval; do not apply a label yet.** This reuses the existing
+`ci_test_shard` isolation selector and Windows worker containment. There is no
+new local runner, fixture or model call. GitHub's
+[job dependency](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#jobsjob_idneeds)
+holds the ten qualification jobs until the continuation job succeeds; no failure
+override is configured. Its
+[total job timeout](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#jobsjob_idtimeout-minutes)
+also includes checkout, installation and fixture setup/cleanup.
+
+The selected case is
+`test_study_continuation.StudyContinuationTests.test_retained_last_slot_zero_cut_reaches_complete_development_and_replays_keylessly`.
+It builds its own original/continued fixture, checks the corrected one-cold-read /
+one-forward-read / incomplete interruption result, reuses the original receipt
+without a duplicate send, completes development and verifies immutable old
+evidence, selection and keyless replay. Workers and HTTPS replies are supplied;
+no generated Python, real container or model API runs. It is an engineering test,
+not the live benchmark comparison.
+
+| Stage | Previous observation at source8e | Proposed stop limit |
+| --- | --- | --- |
+| Full continuation case | Test body: Linux14m29s, Windows40m32s. Conservative class-inclusive envelopes:14m35s /40m52s. | One Windows job,90minutes total, including installation and cleanup. Existing60minutes without genuine progress and180seconds per fixture subprocess remain. |
+| Full qualification, only after continuation success | Ten parallel jobs completed in3h36m46s from first job start to last completion. Slowest Linux job48m20s; Windows3h36m46s. | Ten jobs;60minutes without genuine test progress and6hours total per job. No automatic retry. |
+
+The90-minute first-job limit is a little over twice the observed Windows
+class-inclusive40m52s and leaves about49minutes for installation, host variation
+and other work. A planning baseline is roughly42minutes after adding the prior
+Windows setup overhead; it is not a runtime guarantee. We have one execution per
+OS, at the earlier source, and no new calibration run. The test-only correction
+and this workflow preparation leave production and fixture code unchanged.
+The combined sequence's observed-baseline estimate is about4h20m plus queueing;
+the two stages have not yet been measured together. Queue time is separate from
+job limits; six hours per qualification job is not a six-hour whole-workflow cap.
+
+The previous matrix consumed14h44m25s of aggregate runner time despite its
+3h37m parallel elapsed time. The new first job adds its own Windows runner time,
+and the complete suite still includes that case on both OSes. Actual billing
+depends on the repository/account; these are durations, not a price estimate.
+Model API spending remains zero.
+
+Normal assertion failure is a completed failed check. A timeout, cancellation,
+runner failure or missing normal completion evidence is an incomplete/partial
+result with its stage, reason, elapsed time, source and raw logs retained.
+Neither releases qualification. Qualification failures likewise do not clear
+paid execution. There is no retry, resume, extension, capacity rebuild or merge
+under this preparation. Existing8e capacity evidence retains its original source
+identity. [PLAN D6-D8](PLAN.md#current-gates-to-the-completed-comparison) owns
+adoption and the remaining gates.
+
+Timing evidence is retained locally in
+`runs/checks/continuation-check-preparation-20261106-v1/TIMING-BASIS.json`,
+including original job/log hashes and the difference between test-body time,
+class-inclusive bounds and whole-shard time. The source run is
+[42312404454](https://github.com/wavemanco/buddha/actions/runs/42312404454).
 
 Repository settings inspected on November 3 had no required status checks or
 branch rules. Full qualification is a project policy, not a verified automatic
