@@ -60,8 +60,12 @@ The feedback file has format `buddha.candidate-development-feedback.v2` for new 
 `source` and `split` references containing absolute `path` and raw `sha256`, and
 a `records` list. Each record has exactly `task_id` and `note`. It names the
 complete sealed source TaskSet, not a selected subset. Notes must be nonblank
-UTF-8. V2 notes use the existing 1 MiB aggregate allowance; v1 retains its 4,096-byte individual ceiling. There must be 1 through 1,000 unique records;
-both the feedback file and its projected worker input must fit in 1 MiB.
+UTF-8. Full-output v2 uses the shared 32 MiB JSON allowance; legacy v1 keeps its
+1 MiB aggregate and 4,096-byte individual ceiling. There must be 1 through 1,000
+unique records. The complete worker configuration must also fit its 32 MiB
+frame, and actual model callbacks retain their separate 16 MiB body limit.
+Historical measured-feedback policies reconstruct with their declared old
+capacity. No answer is shortened to fit a smaller allowance.
 The host validates complete source membership, disjoint partitions, family and
 normalized-duplicate custody, then requires every feedback ID to belong to
 development. It sends only the selected task records and notes to the worker.

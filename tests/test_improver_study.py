@@ -1508,9 +1508,12 @@ class FiniteImproverStudyTests(unittest.TestCase):
 
     def test_actual_full_feedback_capacity_is_partial_and_final_fence_precedes_local_writers(self):
         self.fixture_before_new_api()
-        from buddha import improver_study
+        from buddha import improver_study, source_feedback
         from buddha.releases import MAX_FEEDBACK_BYTES, ReleaseError
 
+        # Replay the declared legacy ceiling without inflating the history fixture.
+        token = source_feedback._FULL_FEEDBACK_BYTES.set(MAX_FEEDBACK_BYTES)
+        self.addCleanup(source_feedback._FULL_FEEDBACK_BYTES.reset, token)
         self.api = improver_study
         record = self.declaration(improver_study)
         record.update(starts=record["starts"][:1], repetitions=1, descendant_opportunities=1)

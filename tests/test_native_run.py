@@ -3,6 +3,7 @@
 import base64
 import copy
 import hashlib
+import http.client
 import json
 import os
 import shutil
@@ -521,6 +522,44 @@ class NativeSessionTests(unittest.TestCase):
                 {"type": "stop", "seq": 0, "reason": "unknown"},
             )
         self.assertEqual(self.fixture.authority.summary()["operation_count"], 0)
+
+    def test_connection_error_family_survives_saved_unknown_report_without_private_text(self):
+        connection = self.fixture.connection()
+        connection.getresponse.side_effect = ConnectionResetError(fixtures.KEY + " private detail")
+        report = self.unknown_report(connection)
+        self.assertEqual(report.get("provider_error_family"), "connection")
+        self.assertNotIn("private detail", json.dumps(report))
+
+    def test_partial_response_error_family_survives_saved_unknown_report(self):
+        response = self.fixture.response()
+        response.read.side_effect = http.client.IncompleteRead(b"partial response", 100)
+        report = self.unknown_report(self.fixture.connection(response))
+        self.assertEqual(report.get("provider_error_family"), "http")
+
+    def unknown_report(self, connection):
+        session = self.session()
+
+        def execute(spec, *, handle, **kwargs):
+            self.ready(session)
+            self.assertEqual(
+                self.send(session, connection=connection),
+                {"type": "stop", "seq": 0, "reason": "unknown"},
+            )
+            handle(self.done(status="stopped", reason="unknown"))
+            return ExecutionResult(
+                0, "c" * 64, session.spec.image_id, 100, 0, sha(b""), 2, 0.1, b"{}"
+            )
+
+        with patch("buddha.native_run.executor.run_container", side_effect=execute):
+            report = session.run()
+        self.assertEqual(report["status"], "stopped")
+        self.assertEqual(report["worker"]["reason"], "unknown")
+        self.assertEqual(json.loads((self.output / "report.json").read_bytes()), report)
+        self.assertNotIn(fixtures.KEY, json.dumps(report))
+        self.assertEqual(self.fixture.authority.summary()["operation_count"], 1)
+        self.assertEqual(self.fixture.authority.summary()["reserved_microusd"], 300)
+        connection.request.assert_called_once()
+        return report
 
     def test_inactive_authority_and_protocol_error_map_to_sanitized_stops(self):
         session = self.session()

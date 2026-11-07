@@ -43,6 +43,60 @@ class FullOutputFeedbackTests(unittest.TestCase):
             self.assertEqual(f.h.run_screen(directory)["status"], "complete")
         return authority, f.h.reference(directory, authority)
 
+    def test_complete_escaped_feedback_above_legacy_ceiling_is_not_shortened(self):
+        from buddha.releases import MAX_FEEDBACK_BYTES, MAX_FULL_FEEDBACK_BYTES
+
+        answers = ["BEGIN " + '雪\\"' * 80_000 + " FULL ENDING", ""]
+        _, reference = self.completed_answers(answers)
+        bundle = self.f.build_api(self.f.h.root / "expanded-full-feedback", reference=reference)
+        self.assertGreater(len(_json(bundle["feedback"])), MAX_FEEDBACK_BYTES)
+        self.assertLess(len(_json(bundle["feedback"])), MAX_FULL_FEEDBACK_BYTES)
+        for row in bundle["feedback"]["records"]:
+            note = json.loads(row["note"])
+            self.assertEqual([answer["text"] for answer in note["answers"]], answers)
+            self.assertEqual(note["omitted_answer_positions"], 0)
+        self.assertEqual(
+            bundle["provenance"]["policy"]["max_feedback_bytes"], MAX_FULL_FEEDBACK_BYTES
+        )
+
+    def test_old_full_policy_replays_exactly_and_restores_current_capacity(self):
+        from buddha import source_feedback
+        from buddha.releases import MAX_FEEDBACK_BYTES, MAX_FULL_FEEDBACK_BYTES
+
+        authority, reference = self.completed_answers(["Old full answer with ending.", ""])
+        destination = self.f.h.root / "old-full-feedback-policy"
+        token = source_feedback._FULL_FEEDBACK_BYTES.set(MAX_FEEDBACK_BYTES)
+        try:
+            written = self.f.write_api(destination, reference=reference)
+        finally:
+            source_feedback._FULL_FEEDBACK_BYTES.reset(token)
+        original = json.loads((destination / "provenance.json").read_bytes())
+        self.assertEqual(original["policy"]["max_feedback_bytes"], MAX_FEEDBACK_BYTES)
+        before = self.f.h.files(self.f.h.root), authority.summary(), self.f.h.engine.physical_sends
+        with self.f.passive():
+            replayed = source_feedback.inspect_source_feedback(
+                destination, expected_provenance_sha256=written["provenance"]["sha256"]
+            )
+        self.assertEqual(replayed["provenance"], original)
+        packet_path = destination / "feedback.json"
+        original_packet = packet_path.read_bytes()
+        try:
+            packet = json.loads(original_packet)
+            packet["records"][0]["note"] += "changed retained byte"
+            packet_path.write_bytes(_json(packet))
+            with self.f.passive(), self.assertRaises(source_feedback.SourceFeedbackError):
+                source_feedback.inspect_source_feedback(
+                    destination, expected_provenance_sha256=written["provenance"]["sha256"]
+                )
+            self.assertEqual(source_feedback._FULL_FEEDBACK_BYTES.get(), MAX_FULL_FEEDBACK_BYTES)
+        finally:
+            packet_path.write_bytes(original_packet)
+        self.assertEqual(source_feedback._FULL_FEEDBACK_BYTES.get(), MAX_FULL_FEEDBACK_BYTES)
+        self.assertEqual(
+            (self.f.h.files(self.f.h.root), authority.summary(), self.f.h.engine.physical_sends),
+            before,
+        )
+
     def test_complete_long_answer_including_ending_survives_write_and_passive_inspection(self):
         answers = ["  Beginning. " + "é雪 end\n" * 700 + "THE ACTUAL RESOLUTION.  ", ""]
         authority, reference = self.completed_answers(answers)
@@ -93,9 +147,13 @@ class FullOutputFeedbackTests(unittest.TestCase):
                 )
             )
 
-    def test_oversized_full_output_refuses_before_packet_write_without_shortening(self):
+    def test_legacy_full_capacity_refuses_before_packet_write_without_shortening(self):
+        from buddha import source_feedback
+        from buddha.releases import MAX_FEEDBACK_BYTES
         from buddha.source_feedback import SourceFeedbackTooLarge
 
+        token = source_feedback._FULL_FEEDBACK_BYTES.set(MAX_FEEDBACK_BYTES)
+        self.addCleanup(source_feedback._FULL_FEEDBACK_BYTES.reset, token)
         _, reference = self.completed_answers(["x" * (1 << 20), ""])
         destination = self.f.h.root / "oversized-full-outputs"
         before = self.f.h.files(self.f.h.root), self.f.h.engine.physical_sends

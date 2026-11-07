@@ -18,6 +18,7 @@ from buddha.gateway import (
     Gateway,
     GatewayCall,
     GatewayError,
+    TransportUncertain,
     _read_manifest,
     execution_identity,
 )
@@ -90,6 +91,7 @@ class NativeSession:
         self.ran = False
         self.done: dict[str, object] | None = None
         self.stop_reason: str | None = None
+        self.provider_error_family: str | None = None
         self.sequence = 0
         self.calls = {"requested": 0, "completed": 0, "stopped": 0}
         self.aliases: list[object] = []
@@ -510,8 +512,10 @@ class NativeSession:
         self.calls["requested"] += 1
         try:
             envelope = self.gateway.execute(call)
-        except (ProviderUncertain, PendingOperation):
+        except (ProviderUncertain, PendingOperation) as error:
             self.stop_reason = "unknown"
+            if type(error) is TransportUncertain:
+                self.provider_error_family = error.error_family
         except (BudgetExceeded, BoundBreach):
             self.stop_reason = "authority"
         except (GatewayError, OperationConflict):
@@ -712,5 +716,7 @@ class NativeSession:
             else failed_execution,
             "claim": "native command artifacts; experiment coverage and promotion remain separate",
         }
+        if self.provider_error_family is not None:
+            report["provider_error_family"] = self.provider_error_family
         self._evidence("report.json", report)
         return _load(_json(report))

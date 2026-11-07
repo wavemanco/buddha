@@ -119,12 +119,43 @@ class ExecutorCleanupPending(GatewayError):
     """A retained executor marker prevents another funded session."""
 
 
+class TransportUncertain(ProviderUncertain):
+    """Keep a safe failure family while the dispatched charge remains unknown."""
+
+    def __init__(self, error: BaseException) -> None:
+        super().__init__("provider transport outcome is uncertain")
+        self._error_family = next(
+            (
+                name
+                for kind, name in (
+                    (TimeoutError, "timeout"),
+                    (ConnectionError, "connection"),
+                    (ssl.SSLError, "tls"),
+                    (http.client.HTTPException, "http"),
+                    (OSError, "os_error"),
+                )
+                if isinstance(error, kind)
+            ),
+            "other",
+        )
+
+    @property
+    def error_family(self) -> str:
+        value = self._error_family
+        return (
+            value
+            if type(value) is str and value in {"timeout", "connection", "tls", "http", "os_error"}
+            else "other"
+        )
+
+
 class ReceivedReply(ProviderUncertain):
     """Carry already captured evidence across an interrupted local processing step."""
 
     def __init__(self, envelope: RawEnvelope, error: BaseException) -> None:
         super().__init__("received evidence needs a durable checkpoint")
         self.envelope = envelope
+        self.transport_failure = TransportUncertain(error)
         self.interruption = error if isinstance(error, (KeyboardInterrupt, SystemExit)) else None
 
 
@@ -994,12 +1025,14 @@ class RawHTTPTransport:
         selected: tuple[tuple[str, str], ...] = ()
         truncated = False
         headers_complete = False
+        read_error: http.client.IncompleteRead | None = None
         try:
             prepared.connection.request("POST", prepared.path, body=prepared.body, headers=headers)
             response = prepared.connection.getresponse()
             try:
                 raw = response.read(MAX_BODY_BYTES + 1)
             except http.client.IncompleteRead as error:
+                read_error = error
                 raw = error.partial[: MAX_BODY_BYTES + 1]
                 truncated = True
             truncated = truncated or len(raw) > MAX_BODY_BYTES
@@ -1009,7 +1042,7 @@ class RawHTTPTransport:
                 if name.lower() in HEADER_NAMES
             )
             headers_complete = True
-            return _capture(
+            envelope = _capture(
                 prepared.provider,
                 response.status,
                 raw,
@@ -1019,6 +1052,11 @@ class RawHTTPTransport:
                 headers_complete=True,
                 compression_requested=compression_requested,
             )
+            if read_error is not None:
+                raise ReceivedReply(envelope, read_error) from None
+            return envelope
+        except ReceivedReply:
+            raise
         except BaseException as error:
             if raw is not None:
                 envelope = _capture(
@@ -1034,7 +1072,7 @@ class RawHTTPTransport:
                 raise ReceivedReply(envelope, error) from None
             if isinstance(error, (KeyboardInterrupt, SystemExit)):
                 raise
-            raise ProviderUncertain("provider response could not be safely captured") from None
+            raise TransportUncertain(error) from None
 
 
 class Gateway:
@@ -1309,6 +1347,7 @@ class Gateway:
                 if not self.ledger.dispatch(operation_id):
                     raise PendingOperation("another caller already claimed this physical attempt")
                 interruption: KeyboardInterrupt | SystemExit | None = None
+                transport_failure: TransportUncertain | None = None
                 try:
                     envelope = self.transport.send_prepared(prepared)
                     if not isinstance(envelope, RawEnvelope) or envelope.provider != spec.provider:
@@ -1316,11 +1355,14 @@ class Gateway:
                 except ReceivedReply as received:
                     envelope = received.envelope
                     interruption = received.interruption
+                    transport_failure = received.transport_failure
                 except BaseException as error:
                     self.ledger.mark_unknown(operation_id)
                     if isinstance(error, (KeyboardInterrupt, SystemExit)):
                         raise
-                    raise ProviderUncertain("dispatched attempt has an uncertain outcome") from None
+                    if type(error) is TransportUncertain:
+                        raise
+                    raise TransportUncertain(error) from None
 
                 def make_receipt() -> dict[str, object]:
                     return {
@@ -1361,6 +1403,8 @@ class Gateway:
                 except WireError:
                     if interruption is not None:
                         raise interruption from None
+                    if transport_failure is not None:
+                        raise transport_failure from None
                     raise ProviderUncertain(
                         "raw receipt retained; billing remains uncertain"
                     ) from None

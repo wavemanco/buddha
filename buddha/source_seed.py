@@ -6,9 +6,12 @@ The controller still owns confinement, provenance, quotas and child admission.
 
 import hashlib
 
+from buddha.releases import MAX_FULL_FEEDBACK_BYTES
+
 FROZEN_SEED_SHA256 = "2b87bfe0d3c97ee45db2d45260985ffe0234eca93967f4689fb7c59f82603921"
 LEGACY_FRAGMENT_VERSION = "buddha.source-seed-improver.v1"
-FRAGMENT_VERSION = "buddha.source-seed-improver.v2"
+FULL_FRAGMENT_VERSION = "buddha.source-seed-improver.v2"
+FRAGMENT_VERSION = "buddha.source-seed-improver.v3"
 MAX_SOURCE_BYTES = 1024**2
 
 LEGACY_FRAGMENT = r'''# buddha.source-seed-improver.v1: appended to the unchanged frozen seed.
@@ -131,7 +134,7 @@ def propose_improvement(parent_bundle, development_feedback, config, complete):
 
 # Preserve the historical fragment literally; only the versioned feedback contract
 # changes. Both versions retain the same aggregate projection and callback bounds.
-FRAGMENT = (
+FULL_FRAGMENT = (
     LEGACY_FRAGMENT.replace(
         "# buddha.source-seed-improver.v1:", "# buddha.source-seed-improver.v2:", 1
     )
@@ -145,6 +148,23 @@ FRAGMENT = (
 )
 
 
+# Keep historical fragments literal; new full feedback shares the JSON envelope.
+FRAGMENT = (
+    FULL_FRAGMENT.replace("buddha.source-seed-improver.v2", "buddha.source-seed-improver.v3")
+    .replace('"source-seed-improvement-v2"', '"source-seed-improvement-v3"', 1)
+    .replace(
+        'len(note.encode("utf-8")) > 1024**2',
+        f'len(note.encode("utf-8")) > {MAX_FULL_FEEDBACK_BYTES}',
+        1,
+    )
+    .replace(
+        'len(encoded.encode("utf-8")) > 1024**2',
+        f'len(encoded.encode("utf-8")) > {MAX_FULL_FEEDBACK_BYTES}',
+        1,
+    )
+)
+
+
 class SourceSeedError(ValueError):
     """The supplied seed does not match the exact bounded composition contract."""
 
@@ -155,6 +175,7 @@ def compose_source_seed(
     """Return exact seed prefix plus the versioned fragment, without any execution."""
     if type(fragment_version) is not str or fragment_version not in {
         LEGACY_FRAGMENT_VERSION,
+        FULL_FRAGMENT_VERSION,
         FRAGMENT_VERSION,
     }:
         raise SourceSeedError("unsupported source improvement fragment")
@@ -166,7 +187,13 @@ def compose_source_seed(
         raise SourceSeedError("frozen seed must be UTF-8") from None
     if hashlib.sha256(frozen_seed_raw).hexdigest() != FROZEN_SEED_SHA256:
         raise SourceSeedError("frozen seed identity differs")
-    fragment = LEGACY_FRAGMENT if fragment_version == LEGACY_FRAGMENT_VERSION else FRAGMENT
+    fragment = (
+        LEGACY_FRAGMENT
+        if fragment_version == LEGACY_FRAGMENT_VERSION
+        else FULL_FRAGMENT
+        if fragment_version == FULL_FRAGMENT_VERSION
+        else FRAGMENT
+    )
     result = frozen_seed_raw + b"\n\n" + fragment.encode("utf-8")
     if len(result) > MAX_SOURCE_BYTES:
         raise SourceSeedError("composed source exceeds its byte bound")

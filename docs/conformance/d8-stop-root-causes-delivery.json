@@ -1,0 +1,105 @@
+{
+  "format": "buddha.d8-stop-root-causes-delivery.v1",
+  "date": "2026-11-07",
+  "status": "implemented_short_checked_not_live_cleared",
+  "base": "e4e84292f3bd8a8906d488c6b5c29843c481bfff",
+  "qualified_historical_source": "0d27ed4dd5aa44ce58618a6af6824141fed43f02",
+  "production_sha256": {
+    "buddha/releases.py": "aaacce28a02c502ce2d8f695b3463203eeb083ee3fae38d882a979603a885356",
+    "buddha/source_feedback.py": "afddbd4799503a8aef55300ee500b056b2f5bf91febfeea613ef1faa31e028b6",
+    "buddha/candidate_run.py": "d5ff15b198848963eaee6fba33247aac8c9dfa6b43d522b59b67557d7cd81ca4",
+    "buddha/candidate_worker.py": "bca0f96c134f1362247f7eb73d572422681e0ff68486142763e534916c0d6ea1",
+    "buddha/source_seed.py": "d0ae14f8265c3d2f6c9cdf8348b604929ff9db385ee59ea42bf34e767ab78624",
+    "buddha/gateway.py": "4bab78b645c6fe8db0379c4896c1177ae49fda012e255b37f26941eb4c02b20f",
+    "buddha/native_run.py": "cf9dac94ede8de9caedc4a45a1e0e4b0ea49ede7992f16e4192bc92363fd8fc1"
+  },
+  "feedback": {
+    "legacy_bytes": 1048576,
+    "prospective_full_bytes": 33554432,
+    "derived_from": "Existing MAX_JSON_BYTES; no new independent feedback-only ceiling",
+    "unchanged_envelopes": {
+      "json_and_frame_bytes": 33554432,
+      "http_body_bytes": 16777216,
+      "source_bytes": 1048576
+    },
+    "historical_policy_reconstruction": "Strict saved old/new limit, scoped ContextVar reset in finally, including parent provenance",
+    "starter": "Default explicit v3; exact v1/v2 fragments retained; plain generator bytes unchanged",
+    "proof": "Complete escaped Unicode feedback above1MiB survives builder and host/frame/worker/trustedv3 into captured callback in separate short regressions; tested body below16MiB. Exact32MiB/+1 and legacy refusals retained.",
+    "original_p_cap": "Confirmed by exact equality with historicalv2 SHA77cfa68f\u2026; oldP still1MiB and not silently rewritten",
+    "prospective_initial_sha256": "b84ae0e392d6dd51d46342c8502c62b365eaabb9371394f13d7c47825d2ee1a7",
+    "evolved_c_compatibility": "Unverified; exact inherited guard patterns absent, no blind patch"
+  },
+  "network": {
+    "safe_families": [
+      "timeout",
+      "connection",
+      "tls",
+      "http",
+      "os_error",
+      "other"
+    ],
+    "saved_field": "provider_error_family in candidate/native stopped reports",
+    "paths": "Pre-response, captured partial body and post-body headers; safe category preserved through ReceivedReply and Gateway conversion",
+    "unchanged": "Unknown financial hold, one dispatch, no retry/release, raw evidence, interrupt precedence, worker stop reason and ledger formats",
+    "proof": "Timeout/connection/partial/header categories and secret-redaction/report persistence checks pass",
+    "not_proven": "No recovery of old causes, prevention of outages, or durable error category if process dies before report publication"
+  },
+  "short_checks": {
+    "feedback_methods": 31,
+    "feedback_whole_seconds": [
+      5.861824300009175,
+      31.88013009999122,
+      85.9301118000003,
+      36.52224720000231
+    ],
+    "feedback_per_invocation_bound_seconds": 110,
+    "network_methods": 14,
+    "network_whole_seconds": 7.210510300006717,
+    "network_bound_seconds": 120,
+    "all_selected_passed": true,
+    "red_before_fixes_retained": true,
+    "local_quality": "Ruff all/format298files, strictmypy85sources, Bandit and whitespace pass; no new dependency",
+    "remote_short_suite_selected_methods": 508,
+    "remote_short_suite_result": "pending",
+    "full_qualification_started": false
+  },
+  "remaining_pre_live": {
+    "select_corrected_source_and_compatible_pair": true,
+    "refresh_old0d_unfunded_handoff_bindings": true,
+    "prospective_source_scope_adoption_and_funding": true,
+    "source_qualification": "Only short evidence; any new long qualification needs approval",
+    "capacity": "Complete wrapper/request/context/runtime limits still apply; no worst-case32MiB/live latency claim",
+    "conservative_policy": "8192unusedoutput/contextslack unchanged; mayreject otherwisecomplete proposal, requires prospective review to change"
+  },
+  "evidence": {
+    "feedback/ROOT-CAUSE-REVIEW.md": {
+      "path": "runs/checks/d8-stop-root-causes-20261107-v1/feedback/ROOT-CAUSE-REVIEW.md",
+      "sha256": "022e8a9c2c8c608bfe1c8784f8f48ab742fdc01451b41239ae31ba26367637c8"
+    },
+    "feedback/IMPLEMENTATION-CHECKS.json": {
+      "path": "runs/checks/d8-stop-root-causes-20261107-v1/feedback/IMPLEMENTATION-CHECKS.json",
+      "sha256": "0637f9c28942c51f2e365df585fb1bf106ffb534f114e1522075a39763a5ece1"
+    },
+    "feedback/feedback-red-result.json": {
+      "path": "runs/checks/d8-stop-root-causes-20261107-v1/feedback/feedback-red-result.json",
+      "sha256": "378729525bcc5bffdcc867d985f7c75c806d7a765f4dd8b7ab0ab877151399ca"
+    },
+    "network/NETWORK-RESULT.md": {
+      "path": "runs/checks/d8-stop-root-causes-20261107-v1/network/NETWORK-RESULT.md",
+      "sha256": "13fbbd85ddaa0bc8d750651f9f73ae5b4c51b7f352e9adf6f541d3a4e385ecb7"
+    },
+    "network/final-green.result.json": {
+      "path": "runs/checks/d8-stop-root-causes-20261107-v1/network/final-green.result.json",
+      "sha256": "6fbfafb2bf3d69c1853303231344b734c023762d22bbde7e57c6789c266ae2a7"
+    },
+    "WILDCHAT-AND-ADJACENT-STOPS.md": {
+      "path": "runs/checks/d8-stop-root-causes-20261107-v1/WILDCHAT-AND-ADJACENT-STOPS.md",
+      "sha256": "02e91df624d9b5949034eb7f5999dcf7c170de467e814e2b01c65be6505d56bb"
+    },
+    "prospective-initial-agent.json": {
+      "path": "runs/checks/d8-stop-root-causes-20261107-v1/prospective-initial-agent.json",
+      "sha256": "e0274413a575121cf8a6dfa6631903acd7cc29c235fdf57255846d6b42e7a340"
+    }
+  },
+  "no_paid_calls_keys_containers_long_runs_or_frozen_paid_history_changes": true
+}

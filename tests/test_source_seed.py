@@ -345,14 +345,20 @@ class SourceSeedTests(unittest.TestCase):
                 complete.assert_not_called()
 
     def test_full_feedback_projection_bound_refuses_before_callback(self):
+        module = ModuleType("_trusted_historical_v2_seed")
+        source = compose_source_seed(self.frozen, fragment_version="buddha.source-seed-improver.v2")
+        exec(compile(source, "<trusted-historical-v2>", "exec"), vars(module))  # nosec B102
         feedback = copy.deepcopy(self.feedback)
         feedback[0]["task"]["prompt"] = "x" * 1024**2
         complete = Mock()
-        with self.assertRaises(self.module.SeedError):
-            self.module.propose_improvement(self.parent, feedback, configuration(), complete)
+        with self.assertRaises(module.SeedError):
+            module.propose_improvement(self.parent, feedback, configuration(), complete)
         complete.assert_not_called()
 
     def test_escaped_worker_projection_bound_precedes_callback(self):
+        module = ModuleType("_trusted_historical_v2_seed")
+        source = compose_source_seed(self.frozen, fragment_version="buddha.source-seed-improver.v2")
+        exec(compile(source, "<trusted-historical-v2>", "exec"), vars(module))  # nosec B102
         feedback = copy.deepcopy(self.feedback)
         feedback[0]["task"]["prompt"] = "雪" * 180000
         self.assertLess(len(feedback[0]["task"]["prompt"].encode()), 1024**2)
@@ -360,8 +366,8 @@ class SourceSeedTests(unittest.TestCase):
         complete = Mock(
             return_value=response("openai", json.dumps({"source": CHILD, "hypothesis": "Changed."}))
         )
-        with self.assertRaises(self.module.SeedError):
-            self.module.propose_improvement(self.parent, feedback, configuration(), complete)
+        with self.assertRaises(module.SeedError):
+            module.propose_improvement(self.parent, feedback, configuration(), complete)
         complete.assert_not_called()
 
     def test_proposal_source_and_utf8_hypothesis_bounds(self):

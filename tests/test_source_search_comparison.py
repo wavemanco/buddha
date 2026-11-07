@@ -266,6 +266,9 @@ class SourceSearchComparisonTests(unittest.TestCase):
         self.assertEqual(provenance["failure_history"], result["failures"])
 
     def test_parent_addition_capacity_stops_before_child_witness_owner_without_truncation(self):
+        # Keep the original legacy-capacity refusal and all no-owner assertions.
+        token = source_feedback._FULL_FEEDBACK_BYTES.set(MAX_FEEDBACK_BYTES)
+        self.addCleanup(source_feedback._FULL_FEEDBACK_BYTES.reset, token)
         h = witness_fixtures._Harness(self, iterations=2)
         case = h.case
         h.normal_sources = [search_fixtures.REPAIRED, search_fixtures.GRANDCHILD]

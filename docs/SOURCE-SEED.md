@@ -19,7 +19,11 @@ checks UTF-8 and the 1 MiB ceiling, and returns that unchanged byte prefix,
 two newlines and the fixed `FRAGMENT` string encoded as UTF-8. The complete
 result must also fit in 1 MiB. Invalid input raises `SourceSeedError`.
 
-`FRAGMENT_VERSION` now defaults to `buddha.source-seed-improver.v2`, which forwards complete notes within the existing 1 MiB aggregate projection. Explicit `fragment_version="buddha.source-seed-improver.v1"` returns the exact historical fragment and its 4,096-byte note ceiling; this is a pure factory option, not an operator command or run. Its prompt and parsing
+`FRAGMENT_VERSION` now defaults to `buddha.source-seed-improver.v3`, which forwards
+complete notes within the shared 32 MiB JSON allowance. Explicit v1 or v2
+selection preserves those exact historical fragments: v1 has 4,096-byte notes,
+and v2 keeps its former 1 MiB complete-feedback allowance. This is a pure factory
+option, not an operator command or run. Its prompt and parsing
 behavior are part of the returned source. The factory performs no file access,
 execution, imports of the old generation module, environment lookup or network
 operation. Its supplied bytes are checked, not treated as executable input.
@@ -52,10 +56,18 @@ host remains responsible for joining it to the actual Selection and source.
 
 Each task retains its original typed ID, prompt and count. Duplicate IDs,
 invalid task/configuration fields, oversized notes and feedback exceeding the
-existing 1 MiB escaped-JSON projection ceiling refuse before a callback. Notes
-may exceed 4,096 UTF-8 bytes in v2; the complete escaped projection must still fit 1 MiB. The historical fragment keeps its original smaller bound. These checks do not authenticate
+shared 32 MiB escaped-JSON projection ceiling refuse before a callback in v3.
+The actual callback still has its 16 MiB body limit and model context boundary;
+the feedback allowance alone is not proof that its complete request fits.
+The historical v1/v2 fragments keep their original smaller bounds. These checks do not authenticate
 arbitrary note claims or replace the [measured feedback](SOURCE-FEEDBACK.md)
 and [proposal-stage](SOURCE-PROPOSAL-STAGE.md) custody checks.
+
+Changing this factory does not rewrite previously frozen agents. In particular,
+the proposed original P hash `77cfa68f…` is exactly the historical v2 composition
+and still has its internal 1 MiB guard. Before a live comparison, check the
+selected original/evolved programs in confinement and explicitly bind any
+prospective compatibility changes. Preserve their old bytes and identities.
 
 The improver makes exactly one callback. It requires the provider's normal
 terminal status, then parses strict JSON with duplicate-key and nonfinite-value

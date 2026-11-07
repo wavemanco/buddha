@@ -24,6 +24,7 @@ MAX_TREE_BYTES = 64 * 1024**3
 MAX_SOURCE_BYTES = 1024**2
 MAX_PROPOSAL_BYTES = 8 * 1024**2
 MAX_FEEDBACK_BYTES = 1024**2
+MAX_FULL_FEEDBACK_BYTES = MAX_JSON_BYTES
 ROLES = frozenset({"official", "environment", "runner", "host", "agent"})
 
 
