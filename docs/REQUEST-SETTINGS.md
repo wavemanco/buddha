@@ -1,5 +1,12 @@
 # Checking model requests before spending
 
+The [November 7 D8 handoff](D8-LIVE-COMPARISON.md#model-requests-checked-against-current-official-code)
+records the current official-source check and fresh preparation evidence.
+Its 4,096-token OpenAI wire allowance matches the official reasoning helper's
+doubling of the submission CLI's 2,048 allowance; it is not a separate override.
+The [delivery receipt](conformance/d8-live-preparation-delivery.json) distinguishes
+new offline checks from retained isolated observations. No paid run is cleared.
+
 The host selects the generator model. Luna is the current proposed choice, not
 a restriction on Buddha. Current paid routes support compatible OpenAI and
 Anthropic models. Model compatibility and verified prices still need checking
