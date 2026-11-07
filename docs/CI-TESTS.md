@@ -67,16 +67,28 @@ original workflow and gate. Retiring the obsolete document-lane controller
 also retires its nine tests; the remaining full inventory is reported normally.
 
 The earlier ten-job route completed at source8e, with the same test assertion
-failing on both OSes. The added continuation dependency has source/static checks
-only until an approved run occurs. No qualification label or long run was started
-to prepare this change.
+failing on both OSes. The corrected continuation-first route passed once at
+source `0d27ed4dd5aa44ce58618a6af6824141fed43f02` in
+[run42352102463](https://github.com/wavemanco/buddha/actions/runs/42352102463).
+The first job completed successfully before all ten matrix jobs started.
+That exact-source pass does not transfer approval to a later head.
 GitHub documents the [PR label event and explicit head checkout](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#pull_request)
 and the [format expression](https://docs.github.com/en/actions/reference/workflows-and-actions/expressions#format)
 used to bind the label to its source.
 
 ### Prepared continuation check and timing basis
 
-**Awaiting approval; do not apply a label yet.** This reuses the existing
+**Completed once at frozen source0d27; future attempts need new approval.**
+All eleven jobs passed without retries, timeouts or cancellations. The first
+case passed1/1 with63 successful subtests; its whole job took41m12s. The matrix
+completed2,232 methods per OS: Linux2,227 passed/five declared skips and
+Windows2,231 passed/one declared skip, with zero failures/errors and all70
+quality checks successful. Its parallel job span was3h17m35s; the whole sequence
+spanned3h58m49s from first job start to last completion. These are observations,
+not a speedup claim or live benchmark result. Production code remains frozen;
+this documentation update is not a new full qualification or paid clearance.
+
+The following retains the preparation's timing basis and limits. It reuses the existing
 `ci_test_shard` isolation selector and Windows worker containment. There is no
 new local runner, fixture or model call. GitHub's
 [job dependency](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#jobsjob_idneeds)
@@ -94,7 +106,7 @@ evidence, selection and keyless replay. Workers and HTTPS replies are supplied;
 no generated Python, real container or model API runs. It is an engineering test,
 not the live benchmark comparison.
 
-| Stage | Previous observation at source8e | Proposed stop limit |
+| Stage | Previous observation at source8e | Limit used in the approved attempt |
 | --- | --- | --- |
 | Full continuation case | Test body: Linux14m29s, Windows40m32s. Conservative class-inclusive envelopes:14m35s /40m52s. | One Windows job,90minutes total, including installation and cleanup. Existing60minutes without genuine progress and180seconds per fixture subprocess remain. |
 | Full qualification, only after continuation success | Ten parallel jobs completed in3h36m46s from first job start to last completion. Slowest Linux job48m20s; Windows3h36m46s. | Ten jobs;60minutes without genuine test progress and6hours total per job. No automatic retry. |
