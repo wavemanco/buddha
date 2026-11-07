@@ -274,7 +274,12 @@ def new_step(destination, operation):
     # This is only a no-key routing hint. The real descriptor API validates the
     # complete report and all evidence before it may return or dispatch.
     replay = operation == "replay" or (operation == "step" and (study / "report.json").is_file())
-    with patch.object(improver_study, "_restore", wraps=improver_study._restore) as restore:
+    with (
+        patch.object(improver_study, "_restore", wraps=improver_study._restore) as restore,
+        patch.object(
+            improver_study, "_forward_read", wraps=improver_study._forward_read
+        ) as forward,
+    ):
         if replay:
             assert not any(os.environ.get(name) for name in ("OPENAI_API_KEY", "ANTHROPIC_API_KEY"))
             with (
@@ -300,6 +305,7 @@ def new_step(destination, operation):
                     transport=RawHTTPTransport(allow_paid=True),
                 )
         restore_count = restore.call_count
+        forward_read_count = forward.call_count
     capture = _Capture(study)
     owners = {}
     for role in ("proposal", "generation"):
@@ -323,6 +329,7 @@ def new_step(destination, operation):
         "result_status": nested.get("status") if isinstance(nested, dict) else None,
         "published": (study / "report.json").exists(),
         "restore_count": restore_count,
+        "forward_read_count": forward_read_count,
     }
 
 
@@ -424,9 +431,10 @@ class StudyContinuationTests(unittest.TestCase):
             )
             self.assertIs(type(step["at_cut"] if old else step["published"]), bool)
             if not old:
-                self.assertEqual(
-                    step["restore_count"], 2 if operation.startswith("interrupt-") else 1
-                )
+                self.assertEqual(step["restore_count"], 1)
+                if operation.startswith("interrupt-"):
+                    self.assertEqual(step["forward_read_count"], 1)
+                    self.assertEqual(step["result_status"], "incomplete")
         return step
 
     def test_retained_last_slot_zero_cut_reaches_complete_development_and_replays_keylessly(self):
