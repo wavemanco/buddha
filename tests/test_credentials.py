@@ -11,7 +11,6 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import Mock, patch
 
-from buddha import credentials
 from buddha.common import ValidationError
 from buddha.credentials import KeyInputError, _read_key, key_environment
 
@@ -28,7 +27,7 @@ def console_input(characters):
     console = SimpleNamespace(getwch=Mock(side_effect=characters), putwch=output.append)
     terminal = SimpleNamespace(isatty=lambda: True)
     with (
-        patch("buddha.credentials._WINDOWS", True),
+        patch("buddha.credentials.sys.platform", "win32"),
         patch("buddha.credentials.sys.stdin", terminal),
         patch("buddha.credentials.sys.__stdin__", terminal),
         patch("buddha.credentials.sys.stderr.isatty", return_value=True),
@@ -91,7 +90,7 @@ class CredentialTests(unittest.TestCase):
 
     def test_nonwindows_entry_uses_hidden_getpass(self):
         with (
-            patch("buddha.credentials._WINDOWS", False),
+            patch("buddha.credentials.sys.platform", "linux"),
             patch("buddha.credentials.getpass.getpass", return_value="offline") as entered,
         ):
             self.assertEqual(_read_key("Key: "), "offline")
@@ -138,7 +137,7 @@ assert not forbidden.intersection(sys.modules)
 
         def prompt(label):
             self.assertIn("Paste once", notices[-1])
-            self.assertIn("asterisks" if credentials._WINDOWS else "no characters", notices[-1])
+            self.assertIn("asterisks" if sys.platform == "win32" else "no characters", notices[-1])
             return next(answers)
 
         with (

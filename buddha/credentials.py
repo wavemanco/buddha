@@ -10,8 +10,6 @@ from typing import Protocol
 
 from buddha.common import ValidationError
 
-_WINDOWS = sys.platform == "win32"
-
 
 class _Profile(Protocol):
     @property
@@ -37,7 +35,7 @@ class KeyInputError(ValidationError):
 
 
 def _read_key(prompt: str) -> str:
-    if not _WINDOWS:
+    if sys.platform != "win32":
         return getpass.getpass(prompt)
     if sys.stdin is not sys.__stdin__:
         raise KeyInputError("key_terminal_required")
@@ -92,13 +90,13 @@ def key_environment(
                     raise KeyInputError("key_terminal_required")
                 notice(
                     "Key input is masked. Paste once, then press Enter; asterisks show characters."
-                    if _WINDOWS
+                    if sys.platform == "win32"
                     else "Key input is hidden. Paste once, then press Enter; no characters appear."
                 )
                 try:
                     with warnings.catch_warnings():
                         warnings.simplefilter("error", getpass.GetPassWarning)
-                        mode = "masked" if _WINDOWS else "hidden"
+                        mode = "masked" if sys.platform == "win32" else "hidden"
                         value = _read_key(f"{name} ({mode}, this process only): ")
                 except (EOFError, OSError, getpass.GetPassWarning):
                     raise KeyInputError("key_input_unavailable") from None
