@@ -59,6 +59,7 @@ CONTRACT_TESTS = (
     "test_search_verify.SearchVerificationTests.test_resealed_parent_change_in_both_decision_and_report_fails_lineage_replay",
     "test_search_verify.SearchVerificationTests.test_resealed_report_costs_must_match_actual_ledger_operation_population",
     "test_source_capacity",
+    "test_source_feedback.SourceFeedbackTests.test_worker_projection_bound_includes_genuine_escaped_task_text_before_mkdir",
     "test_source_seed",
     "test_forward_capacity_recipe",
     "test_scale_replay_fixture.ScaleReplayFixtureTests.test_forward_preparation_selects_v5_and_starts_no_bootstrap_or_study",

@@ -421,6 +421,9 @@ class SourceFeedbackTests(unittest.TestCase):
         self.assertEqual(gateway.ledger.totals()["operation_count"], 0)
 
     def test_worker_projection_bound_includes_genuine_escaped_task_text_before_mkdir(self):
+        from buddha import source_feedback
+        from buddha.releases import MAX_FEEDBACK_BYTES, MAX_FULL_FEEDBACK_BYTES
+
         rows = copy.deepcopy(self.h.rows)
         rows[0]["prompt"], rows[1]["prompt"] = "A" + "\x01" * 100_000, "B" + "\x02" * 100_000
         self.source(rows=rows)
@@ -432,8 +435,14 @@ class SourceFeedbackTests(unittest.TestCase):
         # Two bounded notes and short file refs fit comfortably; task text is not in the packet.
         self.assertLess(2 * 4096 + 4 * len(str(destination)) + 4096, 1 << 20)
         before = self.h.files(self.h.root)
-        with self.passive(), self.assertRaises(self.Error):
-            self.write_api(destination, reference=reference)
+        # Exercise the preserved legacy ceiling without constructing a 32 MiB task fixture.
+        token = source_feedback._FULL_FEEDBACK_BYTES.set(MAX_FEEDBACK_BYTES)
+        try:
+            with self.passive(), self.assertRaises(self.Error):
+                self.write_api(destination, reference=reference)
+        finally:
+            source_feedback._FULL_FEEDBACK_BYTES.reset(token)
+        self.assertEqual(source_feedback._FULL_FEEDBACK_BYTES.get(), MAX_FULL_FEEDBACK_BYTES)
         self.assertFalse(destination.exists())
         self.assertEqual(self.h.files(self.h.root), before)
 
