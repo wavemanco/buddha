@@ -1,0 +1,149 @@
+{
+  "format": "buddha.d8-funded-handoff-delivery.v1",
+  "date": "2026-11-08",
+  "status": "funded_configuration_and_independent_readback_pass_no_execution",
+  "publication_base": "d0f5cb6f57229224de76f16b2533d6fa7ada989d",
+  "executing_source": "c28851f9a9d85b02e86ed14589de4877353561c7",
+  "runtime_python_files_same_as_approved_publication": 348,
+  "core_runtime_source_changed": false,
+  "user_approval": {
+    "path": "runs/checks/d8-funded-handoff-20261108-v1/approval-decision.json",
+    "sha256": "7b9002e9808cce8179b4cc1c6845c134a7d41e11424862bca9cecef098016539"
+  },
+  "funded_result": {
+    "path": "runs/checks/d8-funded-handoff-20261108-v1/funded-preparation-result.json",
+    "sha256": "3aa6323ee0a763ccf74d2fd08c3fab6b5479da4af80a97148cd9bb107e7a7ee1"
+  },
+  "invocation": {
+    "path": "runs/checks/d8-funded-handoff-20261108-v1/constructor-invocation.json",
+    "sha256": "de0c5443433536d135454e26f7bf38ec44ad1b932e4d07a024cc62dcfdaeddaa"
+  },
+  "prelaunch_review": {
+    "path": "runs/checks/d8-funded-handoff-20261108-v1/PRELAUNCH-INDEPENDENT-REVIEW.json",
+    "sha256": "c2f2caae15f568a62a48aaa1e0d7792c47f176cc3020c2b2bea1bcfa0d399912"
+  },
+  "model_request_review": {
+    "path": "runs/checks/d8-funded-handoff-20261108-v1/model-request-review.json",
+    "sha256": "c090fe3ed47516e6e9bc4b94f9803560c72038134fb14a83a219a0390c44945b"
+  },
+  "pricing_bound_review": {
+    "path": "runs/checks/d8-funded-handoff-20261108-v1/pricing-bound-review.json",
+    "sha256": "2335b65e90ab016487099775bde8d12d4496dff6bc49f87321e9f1852a19f9e4"
+  },
+  "request_recheck": {
+    "accepted": 7,
+    "mutants_rejected": 27,
+    "seconds": 0.268,
+    "provider_calls": 0,
+    "new_frozen_profile_changes": false
+  },
+  "funded_preparation": {
+    "seconds": 28.548930000019027,
+    "total_limit_seconds": 120,
+    "deadline_exceeded": false,
+    "authorities": {
+      "final": {
+        "budget_microusd": 85000000,
+        "id": "imp01-d8-20261108-v1-final",
+        "max_calls": 10240,
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-funded-20261108-v1\\authorization-final.sqlite3",
+        "scope": "buddha.evaluation-trial.v1:{\"definition_sha256\":\"3802517d8fb6a3ea526c56573ad2bd3c36532e6a998771125bc40d76ffa9d44f\",\"phase\":\"final\",\"root\":\"C:\\\\Users\\\\arvik\\\\code\\\\buddha\\\\runs\\\\imp01-d8-capacity-review-20261108-v3\\\\NOT-CREATED-trial-runtime\"}",
+        "terms_sha256": "be90c1cd57bac7f1cff61633e53513a33967b936bcb1321e7772514144fb0c81"
+      },
+      "search": {
+        "budget_microusd": 40000000,
+        "id": "imp01-d8-20261108-v1-search",
+        "max_calls": 4096,
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-funded-20261108-v1\\authorization-search.sqlite3",
+        "scope": "buddha.evaluation-trial.v1:{\"definition_sha256\":\"3802517d8fb6a3ea526c56573ad2bd3c36532e6a998771125bc40d76ffa9d44f\",\"phase\":\"search\",\"root\":\"C:\\\\Users\\\\arvik\\\\code\\\\buddha\\\\runs\\\\imp01-d8-capacity-review-20261108-v3\\\\NOT-CREATED-trial-runtime\"}",
+        "terms_sha256": "0acfd2aedc045e4b4f32a951dc65792e6b8e25597b1ecdb38479541c5041e2ac"
+      },
+      "shared_plain_references": {
+        "budget_microusd": 25000000,
+        "id": "imp01-d8-20261108-v1-shared_plain_references",
+        "max_calls": 2048,
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-capacity-combined-20261108-v3\\NOT-CREATED-reference-authority.sqlite3",
+        "scope": "buddha.plain-references.v1:02d11f25fb270f46f614d9736ece5264870faf0495ec470c01438e4b88ebefa9",
+        "terms_sha256": "a27c3af118bb2e83e6eedd00358449d8c1e94e0148a5fb6b94f01732a9b9c7fd"
+      },
+      "validation": {
+        "budget_microusd": 0,
+        "id": "imp01-d8-20261108-v1-validation",
+        "max_calls": 0,
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-funded-20261108-v1\\authorization-validation.sqlite3",
+        "scope": "buddha.evaluation-trial.v1:{\"definition_sha256\":\"3802517d8fb6a3ea526c56573ad2bd3c36532e6a998771125bc40d76ffa9d44f\",\"phase\":\"validation\",\"root\":\"C:\\\\Users\\\\arvik\\\\code\\\\buddha\\\\runs\\\\imp01-d8-capacity-review-20261108-v3\\\\NOT-CREATED-trial-runtime\"}",
+        "terms_sha256": "ebd4636814fa8fa506401b902d12b988e2d6aa4ce5f4c9b4246f79a4710ada7d"
+      }
+    },
+    "total_limits": {
+      "budget_microusd": 150000000,
+      "max_calls": 16384
+    },
+    "accounting": {
+      "committed_microusd": 0,
+      "operation_count": 0,
+      "reserved_microusd": 0,
+      "spent_microusd": 0
+    },
+    "primary_state": "fresh",
+    "plain_state": "fresh",
+    "phase": "primary",
+    "stop_code": null,
+    "all_prepared_sources_and_inputs_preserved": true,
+    "prepared_files_preserved": 222,
+    "actual_owners_created": 0,
+    "key_or_review_created": false,
+    "scientific_native_contexts_started": 0
+  },
+  "handoff": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-capacity-combined-20261108-v3\\NOT-CREATED-unified-launch.json",
+    "sha256": "5a399522680506e55986992ae4bb494c6141dbd3602b810be780b26197a8fdad"
+  },
+  "primary_launch": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-funded-20261108-v1\\primary-launch.json",
+    "sha256": "c20ac2cc58ee7d2e3430fd10c5073bb170a434a39a3d2bba5568e3c09be7108c"
+  },
+  "primary_approval": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-funded-20261108-v1\\primary-approval.json",
+    "sha256": "e552ab5be752e39e11f6d84e4382194e7c13192999e9639c1f63f6d02cd912f7"
+  },
+  "operator": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\d8-capacity-runtime-20261108-v1\\docs\\conformance\\unified-run.py",
+    "python": "C:\\Program Files\\Python313\\python.exe",
+    "key_flags": [
+      "--prompt-keys",
+      "--confirm-project-keys"
+    ],
+    "requires_live": true,
+    "user_starts_locally": true
+  },
+  "actual_workspace": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-capacity-combined-20261108-v3\\NOT-CREATED-unified-workspace",
+  "actual_future_raw_review": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-capacity-combined-20261108-v3\\NOT-CREATED-unified-workspace\\review.json",
+  "binding_notes": [
+    "The frozen flat review filename is only an unfunded placeholder. The actual runner writes workspace/review.json; the funded declaration records that mapping without changing frozen preparation bytes.",
+    "Current launch sources and observation policy are included alongside the prepared raw bindings, all covered by primary pins. The outer hash is added downstream rather than creating a primary hash cycle.",
+    "Nominal $650 plain-owner envelopes are not grants. Both plain controls share exactly one approved $25/2,048 authority."
+  ],
+  "request_settings": {
+    "generation": "gpt-5.6-luna baseline, LOW, 4096; same settings for both plain modes; configurable supported generator choice remains available for later separately bound studies.",
+    "distinctiveness": "gpt-5.6-luna, official full-response requests; omit reasoning/output-token/temperature/tier overrides.",
+    "utility": "claude-opus-5, adaptive HIGH,16000; official refusal-only claude-sonnet-5 fallback.",
+    "authoring": "gpt-6.1-sol, captured LOW/32768/default recipe; actual inclusive usage/replacement/census checked under v2.",
+    "native_review": "Separately approved gpt-6.1-sol/ULTRA, at most44 fresh Codex contexts, unpriced outside API cap; no API reviewer fallback."
+  },
+  "pricing": "Official model/pricing pages rechecked2026-11-08. Frozen text-rate maxima cover applicable standard/cache/long-context categories and10percentregionalpremium. No rate,model,benchmark or request-setting change. Account assertions are manual; access is checked during user-started execution.",
+  "qualifications": "Approved readiness combines the unchanged84core runtime files, prior completed full coverage with its preserved stale-test failure, current517-method bothOS short pass and independent source/byte/output reviews. No new full-suite pass is claimed.",
+  "remaining_release_checks": [
+    "Final documentation/approval hash and command verification",
+    "Ordinary hosted short CI for this documentation slice"
+  ],
+  "no_paid_calls_or_new_long_run": true,
+  "automatic_retry_or_budget_extension": false,
+  "main_merge": false,
+  "live_benchmark_result_claimed": false,
+  "funded_output_independent_review": {
+    "path": "runs/checks/d8-funded-handoff-20261108-v1/FUNDED-OUTPUT-INDEPENDENT-REVIEW.json",
+    "sha256": "19ff216d6d703f8719ad2c297e3f6ed55a2179292117c89e26353fe236548f0a",
+    "status": "pass_saved_output_and_four_grants_readonly"
+  }
+}
