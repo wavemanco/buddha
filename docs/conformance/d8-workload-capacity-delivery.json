@@ -1,0 +1,200 @@
+{
+  "format": "buddha.d8-workload-capacity-delivery.v1",
+  "date": "2026-11-08",
+  "status": "local_capacity_corrections_checked_fresh_unfunded_handoff_complete_hosted_short_pending",
+  "base": "5ab676c9254157c83f2e62372daa8b0a97865dc8",
+  "code_commit": "c28851f9a9d85b02e86ed14589de4877353561c7",
+  "core_production_unchanged_from_runtime321_files": 84,
+  "public_python_pins": 348,
+  "selected_pair": {
+    "initial": "b84ae0e392d6dd51d46342c8502c62b365eaabb9371394f13d7c47825d2ee1a7",
+    "evolved_compat2": "f1c832d5168986bf4bf220bb31f31754192cf262d523118b1f47ea0540fb6bc7",
+    "earlier_compat_unchanged": "d7ea59366d876225f8f946a646c9a3cfec41a4298047c46922fa227b747fbed8",
+    "derivation": "Exactly one per-note guard RHS changes from 1024**2 to 32*1024**2. All other selected-source bytes and historical artifacts stay unchanged.",
+    "not_reparented_to_initial": true
+  },
+  "correction": {
+    "existing_preparation_helper": "Retain any larger existing stdout allowance; otherwise set (generation max_callbacks + 3) * MAX_FRAME_BYTES. This reaches development, inherited proposal workers, final generation and plain references through existing settings.",
+    "generation_callbacks": 12,
+    "proposal_callbacks": 3,
+    "cumulative_stdout_bytes": 503316480,
+    "body_bytes_unchanged": 16777216,
+    "frame_bytes_unchanged": 33554432,
+    "worker_memory_mib_unchanged": 256,
+    "source_wall_seconds_unchanged": 900,
+    "native_wall_seconds_unchanged": 1800,
+    "native_settings_unchanged": true,
+    "new_runtime_framework_dependencies_or_tokenizer": false
+  },
+  "checks": {
+    "focused_methods": 6,
+    "focused_seconds": 1.9885087000147905,
+    "focused_deadline_seconds": 120,
+    "maximum_body_regression": "Four complete 16 MiB request bodies, including one over-quota callback, cross real base64 framing and executor stream with fake Docker. Each frame fits; combined stdout exceeds the previous 32 MiB ceiling and fits the corrected bound. No real provider or container in this test.",
+    "confined_sessions": 4,
+    "confined_seconds": 26.370463300001575,
+    "confined_deadline_seconds": 120,
+    "confined_workers_all_removed": true,
+    "confined_usage_synthetic": true,
+    "complete_current_answers": 30,
+    "complete_parent_answers_in_comparison": 30,
+    "minimum_root_note_bytes": 1358779,
+    "comparison_note_bytes": 2717388,
+    "maximum_parent_source_bytes": 1048576,
+    "largest_configuration_bytes": 11362911,
+    "largest_request_body_bytes": 12694920,
+    "largest_request_frame_bytes": 16926629,
+    "largest_observed_stdout_bytes": 16927484,
+    "captured_http_bodies_equal_callbacks": true,
+    "contract_inventory_discovered_not_executed": 517,
+    "hosted_short_ci": "Pending publication; both OSes required."
+  },
+  "context_acceptance": {
+    "basis": "Existing DESIGN section 4 permits prospectively adopted v2 observations on actual original proposal calls. Each returned child is blocked until original-call census, authoritative inclusive usage and complete replacement source satisfy the unchanged rules.",
+    "context_tokens": 1050000,
+    "requested_authoring_output_tokens": 32768,
+    "authoring_reasoning": "low",
+    "authoring_service_tier": "default",
+    "extra_unused_token_cushion": 0,
+    "future_calls_not_certified_in_advance": true,
+    "no_universal_32mib_fit_claim": "32 MiB is a feedback safety ceiling, not a promise every arbitrary document fits all packaging or a model context. Exact whole-configuration/request/frame guards remain; genuine excess and uncertain accounting retain their stops."
+  },
+  "scientific_scope_unchanged": {
+    "development_tasks": 3,
+    "final_tasks": 26,
+    "improvement_opportunities": 16,
+    "plain_controls": [
+      "independent",
+      "in-context"
+    ],
+    "official_noveltybench": "1.1 at 64a23be6b18ec1dacc298830aab276061b6e143c",
+    "full_outputs_preserved": true,
+    "api_cap_proposed_not_allocated_usd": 150,
+    "api_attempt_cap_proposed": 16384,
+    "phase_caps_usd": {
+      "development": 40,
+      "final": 85,
+      "plain_shared": 25
+    },
+    "native_reviews_proposed": "At most 44 fresh gpt-6.1-sol/ULTRA contexts, outside the API cap; unpriced Codex-plan capacity, no API fallback.",
+    "human_extension_nonblocking": true,
+    "phase_attempt_caps": {
+      "development": 4096,
+      "final": 10240,
+      "plain_shared": 2048
+    }
+  },
+  "evidence": [
+    {
+      "path": "runs/checks/d8-workload-capacity-20261108-v1/inputs/derivation.json",
+      "sha256": "b0de6515f013931db646156dc0ed29184930be201b33eba92d378e14f0eb6675"
+    },
+    {
+      "path": "runs/checks/d8-workload-capacity-20261108-v1/short-checks/result.json",
+      "sha256": "fa57bab1bb0baed301c87f43cb5f89afa6e6b1b5ea3d4c7f168897089ec091ff"
+    },
+    {
+      "path": "runs/checks/d8-workload-capacity-20261108-v1/short-checks/stderr.log",
+      "sha256": "a3fe8af91d83647452c8258274ae70b59730d583b191d48765068e1a2c8ab186"
+    },
+    {
+      "path": "runs/checks/d8-workload-capacity-20261108-v1/selected-pair/manifest.json",
+      "sha256": "a4fc08e3d9c9df4c5585c16ea2392601012656b3a21b48c6c8c3439d83147229"
+    },
+    {
+      "path": "runs/checks/d8-workload-capacity-20261108-v1/selected-pair/result.json",
+      "sha256": "28aedf4f09a31d89d3a0df2314d4e6ebad5c5d0fbac6540492bdeef90bed45d8"
+    },
+    {
+      "path": "runs/checks/d8-workload-capacity-20261108-v1/selected-pair/CODE-AND-PROBE-INDEPENDENT-REVIEW.json",
+      "sha256": "81ddc187201e21182a1530d3dd21c04b32c41d317ba8a2a455a9a6458c62ea07"
+    },
+    {
+      "path": "runs/checks/d8-workload-capacity-20261108-v1/contract-inventory.jsonl",
+      "sha256": "06adfdbfa213c02b25380d756ded912bc99d8c06868c8155235b4d75609b4079"
+    },
+    {
+      "path": "runs/checks/d8-workload-capacity-20261108-v1/preparation/invocation-result.json",
+      "sha256": "b327415e7a1d740d60ed2c3c01a933699c6f18f3ab52f5a6572d6008e82826cc"
+    },
+    {
+      "path": "runs/checks/d8-workload-capacity-20261108-v1/preparation-v2/invocation-result.json",
+      "sha256": "9c542e304c7fe80c938f99353bc28396ebc9fd511e8a9f6757d731c8627b2a26"
+    },
+    {
+      "path": "runs/checks/d8-workload-capacity-20261108-v1/preparation-v3/input-correction.json",
+      "sha256": "457b7b4af9258ca33a37ebfd5285e62a063f78bd82d4eb1d45cdb02a00bf7bc5"
+    },
+    {
+      "path": "runs/checks/d8-workload-capacity-20261108-v1/preparation-v3/PRELAUNCH-INDEPENDENT-REVIEW.json",
+      "sha256": "cdcc1d5411670115744ac80da27f1a5b72f9da0e10da947d0d390165606940f4"
+    },
+    {
+      "path": "runs/checks/d8-workload-capacity-20261108-v1/preparation-v3/manifest-proposal.json",
+      "sha256": "bd74ff5d34255b1e20f5bff2ad7314b2c996acb65b2d0f36682afa7f10b3d590"
+    },
+    {
+      "path": "runs/checks/d8-workload-capacity-20261108-v1/preparation-v3/invocation-result.json",
+      "sha256": "c54d7cda8841e20dbbd63836cd664dadda516ac4aa0b7cfe9a0180613cca883e"
+    },
+    {
+      "path": "runs/checks/d8-workload-capacity-20261108-v1/preparation-v3/OUTPUT-INDEPENDENT-REVIEW.json",
+      "sha256": "c5640a724d4362fbd33fb7bc8a0589f2b55370ca0b784f4d8b27eb0726714d38"
+    }
+  ],
+  "metadata_preparation": "Two prior short preparation partials are preserved: 2.072s stopped on stale selected input identities; 12.752s completed primary/plain then stopped because an optional derivation report added an eleventh external input. Correct only declaration data and omit that unnecessary runtime dependency, preserving its delivery evidence and the unchanged ten-input scope guard. A fresh four-stage preparation completed in22.729s. No runtime-code repair, key, allocation or API call.",
+  "original_qualification": "ad8 run 42461804489 remains failed; PR282 short 515/OS passes. No new full-suite pass or evidence-reuse exception adopted.",
+  "limits": {
+    "paid_calls": 0,
+    "new_long_runs": 0,
+    "automatic_paid_retry": false,
+    "original_paid_history_changed": false,
+    "main_merge": false,
+    "paid_execution_cleared": false
+  },
+  "next": "Verify both-OS517 short CI, then present one combined readiness/scope/custody/funding/native-review adoption request. No extra capacity rehearsal or automatic full qualification is scheduled.",
+  "preparation": {
+    "status": "complete_unfunded_four_stage_preparation",
+    "seconds": 22.729348299995763,
+    "total_limit_seconds": 120,
+    "stages": [
+      {
+        "stage": "primary",
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-capacity-primary-20261108-v3",
+        "status": "complete_unfunded_configuration_only",
+        "indexed_files": 105,
+        "result_sha256": "f6aba8239b714e994a12e9b405debe15def2f11edb9bb14df7358a4d5731d444"
+      },
+      {
+        "stage": "plain",
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-capacity-plain-20261108-v3",
+        "status": "complete_unfunded_plain_descriptors",
+        "indexed_files": 12,
+        "result_sha256": "a27ee9633dc991a0675492d1b17541c6bdcf25f6158e62610b372974a7e4e4e4"
+      },
+      {
+        "stage": "review",
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-capacity-review-20261108-v3",
+        "status": "complete_unfunded_review_configuration",
+        "indexed_files": 12,
+        "result_sha256": "84e14665641ac64f05d49391a3505b18d02e9960bc8d0f3de7dab030826b17b9"
+      },
+      {
+        "stage": "combined",
+        "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-capacity-combined-20261108-v3",
+        "status": "complete_unfunded_combined_declaration",
+        "indexed_files": 4,
+        "result_sha256": "e1f0dc5a4d3e83f2dacdafcb9909bdb57ca6c75959c284fda67e9b54fc23c67f"
+      }
+    ],
+    "indexed_files_verified": 133,
+    "source_runtime": "c28851f9a9d85b02e86ed14589de4877353561c7",
+    "source_python_files_per_stage": 348,
+    "allocation": null,
+    "model_calls": 0,
+    "containers": false,
+    "original_partials_retained": true,
+    "independent_output_review": "pass_all133_artifacts_source_bindings_identity_limits_scope_and_no_allocation",
+    "nominal_plain_owner_limits_are_not_grants": true
+  }
+}
