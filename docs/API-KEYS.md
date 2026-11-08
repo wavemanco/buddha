@@ -4,6 +4,8 @@ The user authorized **up to US$50 for one first live experiment** on 2026-10-19.
 
 ## Approved fresh D8 comparison
 
+**Live update (November 8):** the first OpenAI request returned HTTP 401 / `invalid_api_key`. No answer or judging completed. One attempt retains $0.585611 held; recorded spending is $0, not a reconciled invoice. Do not rerun the historical D8 command or delete the saved key review. The current route does not support in-place key rotation after this received unknown. Keep keys local; [the diagnosis](conformance/d8-live-auth-stop.json) records the recovery gap. Earlier zero-accounting statements below describe preparation before this attempt.
+
 On November 8, 2026, the user approved the fresh scope in [PR #283](https://github.com/wavemanco/buddha/pull/283): **$150 combined OpenAI/Anthropic API spending and 16,384 recorded attempts**, allowing partial results with stage, reason, costs and holds.
 
 | Fresh authority | API cap | Recorded attempts |

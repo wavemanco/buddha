@@ -1,0 +1,62 @@
+{
+  "format": "buddha.d8-live-auth-stop.v1",
+  "date": "2026-11-08",
+  "status": "incomplete_authentication_rejected",
+  "executing_source": "c28851f9a9d85b02e86ed14589de4877353561c7",
+  "observation": {
+    "path": "runs/imp01-d8-capacity-combined-20261108-v3/NOT-CREATED-unified-workspace/observations/298e870785284e86963c6b678b92e6f5.json",
+    "sha256": "1be16562a776db570e14179e7dd235bf7368f5cd155214896e088a0840a71034"
+  },
+  "diagnostic": {
+    "path": "runs/imp01-d8-capacity-combined-20261108-v3/NOT-CREATED-unified-workspace/observations/549d1519b13f4d3693fff3ca9ced0537.diagnostic.json",
+    "sha256": "86cf8317a4e00035497664867b9499180708037323720aeaf82f9434c5a52eff"
+  },
+  "owner_ledger": {
+    "path": "runs/imp01-d8-capacity-review-20261108-v3/NOT-CREATED-trial-runtime/search/study/common/0/0/screen/tasks/0/generation/owners/0/operations.sqlite3",
+    "sha256_at_readonly_diagnosis": "0927f390a1c213415031a15a399bfcc3d6c21790fc328a0bbf266da6764bc3bf"
+  },
+  "saved_response": {
+    "provider": "openai",
+    "http_status": 401,
+    "error_type": "invalid_request_error",
+    "error_code": "invalid_api_key",
+    "body_bytes": 730,
+    "headers_complete": true,
+    "truncated": false,
+    "withheld": false,
+    "raw_body_and_error_message_omitted": true
+  },
+  "first_operation": {
+    "operation_id": "525b88f99d61ce577cd9f93da6943ebc8bbea2357b9ddddfe1c16bf705301e87",
+    "status": "unknown",
+    "actual_microusd": null,
+    "reserve_microusd": 585611,
+    "provider_request_id_in_operations_row": null
+  },
+  "stage": "first_common_screen_first_task_generation",
+  "answers_completed": 0,
+  "judging_started": false,
+  "cleanup_status": "removed",
+  "funding_totals": {
+    "committed_microusd": 585611,
+    "operation_count": 1,
+    "reserved_microusd": 585611,
+    "spent_microusd": 0
+  },
+  "cause_limits": "The provider rejected the submitted credential. This does not establish whether it was copied incorrectly, expired, revoked or otherwise invalid; no key or process environment was inspected. Anthropic access remains untested.",
+  "diagnostic_gap": "All non-200 receipts lack the required usage evidence and become generic unknown in the current result. The retained raw receipt identifies authentication rejection; this is not a proven timeout, body/frame/token-capacity stop or failed scientific proposal.",
+  "recovery_limits": [
+    "Same command stops on the outstanding unknown.",
+    "A different key is rejected by the saved credential fingerprint.",
+    "Existing narrow historical-unknown acceptance excludes retained receipts and trial-owned history.",
+    "Do not delete reviews, alter the ledger, invent zero usage or release the hold. No supported in-place key-rotation command is established."
+  ],
+  "next": "Confirm credential provenance without receiving any key; prepare a reviewed minimal recovery or replacement that preserves this partial and its liability within the approved total. No replacement funding, restart command or paid retry is authorized by this diagnostic.",
+  "official_source": "https://developers.openai.com/api/docs/guides/error-codes",
+  "independent_review": "Source trace independently confirmed by /root/d8_network_fix; actual saved receipt inspected read-only by root.",
+  "provider_calls_during_diagnosis": 0,
+  "keys_or_environment_read": false,
+  "run_or_db_mutations": false,
+  "tests_or_long_runs": false,
+  "new_executable_source": false
+}
