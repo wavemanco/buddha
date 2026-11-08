@@ -31,7 +31,7 @@
     "status": "unknown",
     "actual_microusd": null,
     "reserve_microusd": 585611,
-    "provider_request_id_in_ledger": null
+    "provider_request_id_in_operations_row": null
   },
   "stage": "first_common_screen_first_task_generation",
   "answers_completed": 0,
