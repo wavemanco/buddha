@@ -34,7 +34,7 @@ METADATA_NAMES = ("study", "definition", "release", "custody", "population", "an
 AGENTS = {
     # Prospective input-compatibility fork; historical builders retain their original P.
     "initial": "b84ae0e392d6dd51d46342c8502c62b365eaabb9371394f13d7c47825d2ee1a7",
-    "evolved": "d7ea59366d876225f8f946a646c9a3cfec41a4298047c46922fa227b747fbed8",
+    "evolved": "f1c832d5168986bf4bf220bb31f31754192cf262d523118b1f47ea0540fb6bc7",
 }
 POLICY = {
     "format": "buddha.evidence-observation-policy.v2",
@@ -320,6 +320,8 @@ def manifest(raw):
 
 
 def relocate_screen(old, destination, release, prepare_selection):
+    from buddha.channel import MAX_FRAME_BYTES
+
     result = copy.deepcopy(old)
     for role in ("generation", "native"):
         section = result[role]
@@ -335,6 +337,11 @@ def relocate_screen(old, destination, release, prepare_selection):
             release, roots, capabilities=section["selection"]["capabilities"]
         ).to_record()
         if role == "generation":
+            limits = section["executor"]["limits"]
+            # Ready, callbacks, one over-quota request and done share the output stream.
+            limits["max_stdout_bytes"] = max(
+                limits["max_stdout_bytes"], (section["max_callbacks"] + 3) * MAX_FRAME_BYTES
+            )
             section["runtime"]["path"] = str(roots["environment"] / "runtime.json")
             section["executor"]["mounts"] = [
                 ["/agent", str(roots["agent"])],

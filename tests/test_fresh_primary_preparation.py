@@ -8,7 +8,7 @@ import tempfile
 import threading
 import unittest
 from pathlib import Path
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 DRIVER = Path(__file__).resolve().parents[1] / "docs/conformance/prepare-fresh-primary.py"
 spec = importlib.util.spec_from_file_location("fresh_primary_supplied", DRIVER)
@@ -25,8 +25,55 @@ class FreshPrimaryInputTests(unittest.TestCase):
         self.assertEqual(driver.AGENTS["initial"], hashlib.sha256(initial).hexdigest())
         self.assertEqual(
             driver.AGENTS["evolved"],
-            "d7ea59366d876225f8f946a646c9a3cfec41a4298047c46922fa227b747fbed8",
+            "f1c832d5168986bf4bf220bb31f31754192cf262d523118b1f47ea0540fb6bc7",
         )
+
+    def test_relocated_output_limit_covers_declared_callbacks_without_changing_other_limits(self):
+        from buddha.channel import MAX_FRAME_BYTES
+
+        base, _ = self.fixture()
+        destination = base / "relocated"
+        roots = {
+            name: str(base / "old/components" / name) for name in ("agent", "runner", "environment")
+        }
+        for name in roots:
+            (destination / "components" / name).mkdir(parents=True)
+        for original_ceiling in (MAX_FRAME_BYTES, 24 * MAX_FRAME_BYTES):
+            limits = {
+                "wall_seconds": 900,
+                "memory_mib": 256,
+                "max_frames": 100_000,
+                "max_stderr_bytes": 65_536,
+                "max_stdout_bytes": original_ceiling,
+            }
+            old = {
+                "generation": {
+                    "roots": roots,
+                    "selection": {"capabilities": {"generation": "profile"}},
+                    "max_callbacks": 12,
+                    "runtime": {"path": "original/runtime.json"},
+                    "executor": {"mounts": [], "limits": limits},
+                },
+                "native": {
+                    "roots": roots,
+                    "selection": {"capabilities": {"native": "profile"}},
+                    "executor": {"limits": copy.deepcopy(limits)},
+                },
+            }
+            original = copy.deepcopy(old)
+            selected = Mock()
+            selected.to_record.return_value = {"supplied": True}
+            prepare_selection = Mock(return_value=selected)
+            with self.subTest(original_ceiling=original_ceiling):
+                result = driver.relocate_screen(old, destination, object(), prepare_selection)
+                required = (old["generation"]["max_callbacks"] + 3) * MAX_FRAME_BYTES
+                expected = limits | {"max_stdout_bytes": max(original_ceiling, required)}
+                self.assertEqual(result["generation"]["executor"]["limits"], expected)
+                self.assertGreaterEqual(expected["max_stdout_bytes"], required)
+                self.assertEqual(result["generation"]["max_callbacks"], 12)
+                self.assertEqual(result["native"]["executor"], original["native"]["executor"])
+                self.assertEqual(old, original)
+                self.assertEqual(prepare_selection.call_count, 2)
 
     def test_hash_only_reference_read_is_exact_scoped_and_reset(self):
         base, _ = self.fixture()
