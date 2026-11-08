@@ -114,11 +114,22 @@ Inherited nominal per-owner envelopes are not allocations: final funding must
 bind the actual $25 shared plain-reference cap and $150 combined phase limits
 before any owner can spend.
 
-The compatible pair and unfunded bindings are now checked. Before a live command
-is issued: complete exact-source short CI, obtain approval for the required
-changed-source full qualification, adopt the actual pair/policy and truthful
-custody/scope, confirm current accounts, obtain a fresh allocation, and bind/check
-the funded outer handoff. Recheck outgoing request settings immediately before
-paid calls. No new capacity rebuild or infrastructure gate is introduced.
+The November 8 qualification completed at `ad8e5c1` with the same obsolete
+boundary-test failure on both OSes; all other methods passed or had declared
+skips, and all 70 quality checks passed. The original run remains failed.
+A separate test-only correction selects the preserved 1 MiB policy for the
+legacy rejection check, restores/verifies the 32 MiB default, and adds that case
+to short CI. Runtime `3214557` is unchanged. All 348 Python files in frozen
+qualification source `ad8e5c1` match that runtime; the corrected test head
+intentionally differs in two test-support Python files. Production code and
+configuration remain identical. It has no new full-suite pass.
+
+Before a live command is issued: finish the corrected candidate's short checks
+on both OSes and independent review, obtain the user's decision on the
+[narrow evidence-reuse proposal or a new full qualification](CI-TESTS.md#november-8-result-and-proposed-test-only-acceptance),
+then adopt the actual pair/policy and truthful custody/scope, confirm current
+accounts, obtain a fresh allocation, and bind/check the funded outer handoff.
+Recheck outgoing request settings immediately before paid calls. No new capacity
+rebuild or infrastructure gate is introduced. [Outcome](conformance/d8-qualification-outcome.json).
 
 There is **no live command to run yet**. The final funded handoff will give one exact standalone PowerShell command, explain what it spends/changes, when keys are entered and how to stop. Read-only optional commands will also have plain-English explanations. No keys belong in chat, a command line, a committed file or a report.
