@@ -504,6 +504,49 @@ class ExecutorLifecycleTests(ExecutorFixture):
                 docker=sys.executable,
             )
 
+    def test_maximum_callback_bodies_fit_frames_and_cumulative_output(self):
+        import base64
+
+        from buddha.channel import MAX_FRAME_BYTES, write_frame
+        from buddha.releases import _json
+        from buddha.wire import MAX_BODY_BYTES
+
+        body = {"messages": [{"role": "user", "content": ""}]}
+        body["messages"][0]["content"] = " " * (MAX_BODY_BYTES - len(_json(body)))
+        raw_body = _json(body)
+        self.assertEqual(len(raw_body), MAX_BODY_BYTES)
+        encoded = base64.b64encode(raw_body).decode("ascii")
+        stream = io.BytesIO()
+        write_frame(stream, {"type": "ready"})
+        callbacks = 3
+        for sequence in range(callbacks + 1):
+            frame = {
+                "type": "request",
+                "sequence": sequence,
+                "provider": "openai",
+                "body_base64": encoded,
+            }
+            before = stream.tell()
+            write_frame(stream, frame)
+            self.assertLessEqual(stream.tell() - before, MAX_FRAME_BYTES)
+        write_frame(stream, {"type": "done"})
+        output = stream.getvalue()
+        self.assertGreater(len(output), 32 * 1024**2)
+        limits = Limits(max_stdout_bytes=(callbacks + 3) * MAX_FRAME_BYTES)
+        fixture = DockerFixture(self.spec(), limits, stdout=output)
+        seen = []
+
+        def handle(frame):
+            seen.append(frame["type"])
+            if frame["type"] == "request":
+                self.assertEqual(frame["sequence"], len(seen) - 2)
+                self.assertEqual(base64.b64decode(frame["body_base64"], validate=True), raw_body)
+
+        result = self.execute(fixture, handle)
+        self.assertEqual(seen, ["ready", *["request"] * (callbacks + 1), "done"])
+        self.assertEqual(result.stdout_bytes, len(output))
+        self.assertEqual((result.frame_count, result.cleanup_status), (callbacks + 3, "removed"))
+
     def test_owned_lifecycle_records_identity_before_create_and_after_cleanup(self):
         from buddha import executor
 

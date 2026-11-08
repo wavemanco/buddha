@@ -30,7 +30,7 @@ NoveltyBench source remains pinned to `64a23be6b18ec1dacc298830aab276061b6e143c`
 
 The [submission instructions](https://novelty-bench.github.io/submit.html) specify CLI allowance 2,048 and LOW generator effort. The official [reasoning helper, lines 46–58](https://github.com/novelty-bench/novelty-bench/blob/64a23be6b18ec1dacc298830aab276061b6e143c/src/inference.py#L46-L58) doubles that allowance on the wire because reasoning and visible output share it: 4,096 is the matching request, not an independently imposed change. It does not guarantee 2,048 visible tokens. Judge settings come from [utility lines 66–77](https://github.com/novelty-bench/novelty-bench/blob/64a23be6b18ec1dacc298830aab276061b6e143c/src/judge.py#L66-L77), [partition lines 95–113](https://github.com/novelty-bench/novelty-bench/blob/64a23be6b18ec1dacc298830aab276061b6e143c/src/judge.py#L95-L113) and [refusal lines 116–128](https://github.com/novelty-bench/novelty-bench/blob/64a23be6b18ec1dacc298830aab276061b6e143c/src/judge.py#L116-L128). The generic partition CLI default is not the leaderboard's Luna selection; our declaration must select it explicitly.
 
-Python proposal authoring and native review are separate roles from answer generation. The proposed authoring model is `gpt-6.1-sol`, with its existing 32,768-output-token allowance. Do not apply the generator's LOW setting indiscriminately to these roles. Official model names above are aliases, not immutable dated model snapshots. Response model/tier mismatches stop for review rather than silently substitute another model.
+Python proposal authoring and native review are separate roles from answer generation. The proposed P3/Ccompat2 pair's four captured authoring requests use `gpt-6.1-sol`, `reasoning_effort: low`, `max_completion_tokens: 32768` and `service_tier: default`. LOW is the observed frozen authoring recipe for this pair; native Codex review remains proposed `gpt-6.1-sol`/ULTRA. This records the settings without changing them. Official model names above are aliases, not immutable dated model snapshots. Response model/tier mismatches stop for review rather than silently substitute another model.
 
 The actual native path runs the pinned official code through its locked SDKs and forwards captured request bytes unchanged through Buddha's Gateway. Required/forbidden fields are checked before reservation and key access. Earlier isolated P/C observations captured ten/eleven answer-generation calls respectively, all matching LOW/4,096. The prospective compatibility forks preserve those generation paths byte-for-byte; this is source continuity, not a new generation execution or a guarantee about every descendant. Fresh profile checks and pack bindings are recorded in the [pair-readiness receipt](conformance/d8-pair-readiness-delivery.json); the [original preparation receipt](conformance/d8-live-preparation-delivery.json) remains historical.
 
@@ -61,7 +61,7 @@ The user's screenshot describes another project. It supplies useful failure cate
 | --- | --- | --- |
 | Bad proposal stops the entire search | Study v5 can count a fully accounted malformed, unavailable, oversized or invalid proposal as a failed counted opportunity, including a counted child's witness, after complete census, settled accounting and clean cleanup. It need not become a child to count. | A failed common starting witness still stops with `common_ineligible`. Unknown billing, missing evidence or unsafe cleanup also stops; these cannot be reported as ordinary failed opportunities. |
 | Feedback was cut short | Complete answers and official feedback are preserved. D6 checked forty-eight task-feedback records with full 8,192-byte answers and zero omissions. Historical one-request full-output capacity observation also passed. | D6 does not establish that every permitted 4,096-token answer fits this byte envelope. No silent truncation is allowed. |
-| Arbitrary size ceiling | The corrected prospective full-feedback path shares the existing 32 MiB JSON allowance across builder, host, worker and new starter v3. Complete Unicode input above 1 MiB reaches the captured model callback unchanged in short regression checks. Historical 1 MiB policies and starter v1/v2 bytes remain exact. | This closes the reproduced legacy-1-MiB rejection on the corrected path. The whole configuration still must fit 32 MiB framing and each callback 16 MiB; token/context and runtime limits remain. It does not make every 32 MiB feedback document executable. Frozen agents are not automatically updated. |
+| Arbitrary size ceiling | The full-feedback path uses the existing 32 MiB JSON allowance and preserves complete outputs. The prospective Ccompat2 also raises the remaining evolved per-note guard from 1 MiB to 32 MiB. Historical policies and source bytes remain exact. | This removes the reproduced smaller guard; it does not promise every 32 MiB feedback document fits the complete 16 MiB callback body or model context. Exact request/frame checks remain, and policy v2 evaluates capacity from actual original proposal calls. |
 | Timeout caused by repeated historical reconstruction | The corrected forward runner reuses checked current state and performs fresh inspection after writes. D6 completed the intended synthetic history; D7 passed the full offline continuation regression and both full OS suites. | Fresh whole-history reads remain substantial. No new hours-long capacity rebuild or old/new-run migration is proposed. |
 | Provider takes longer than expected | Generation/proposal worker limit remains 900 seconds; native stage 1,800 seconds. A proven, owned proposal-worker timeout before its done frame can now count as a failed opportunity after complete settled callback/capacity checks, source verification and successful cleanup. No child or score is invented. | The HTTP timeout, up to 600 seconds, is a socket inactivity limit, not a whole-call guarantee. Several slow calls can exhaust a worker. The executor waits for in-flight accounting and cleanup, so host elapsed time can exceed worker lifetime. Unknown liability, timeout after done, and missing native judge scores remain partial. |
 | Timeout/disconnect may have been charged | One dispatched unknown operation retains its full hold and stops shared authority; no blind retry, fallback or automatic hold release. The corrected shared transport preserves a fixed safe error family through pre-response, partial-body and header failures into saved candidate/native reports. | The financial stop remains necessary. `provider_error_family` records only `timeout`, `connection`, `tls`, `http`, `os_error` or `other`; no raw exception text. Old causes cannot be reconstructed, and a crash before report publication is outside this report-level proof. |
@@ -74,22 +74,51 @@ Both root-cause corrections now have short red/green regressions; the [correctio
 
 | Risk | Correction / observed result | Practical boundary |
 | --- | --- | --- |
-| Escaping and wrappers enlarge requests | Actual confined workers received complete synthetic feedback of 1,572,970 bytes for a root case and 3,145,147 for an immediate-parent comparison. Both compatible actors preserved every full answer in the captured HTTP bodies, including all thirty current and thirty parent answers in the comparison. Largest body was 3,726,439 bytes; frame 4,968,657; cumulative stdout 4,969,512. | Below the unchanged 16 MiB body and 32 MiB frame/cumulative-output limits for these cases. This is representative evidence, not proof that every allowed 32 MiB feedback document or every Unicode/token distribution fits. No answer is shortened to make a limit pass. |
+| Escaping and wrappers enlarge requests | Earlier P3/Ccompat confined checks preserved thirty current and thirty parent answers: largest body 3,726,439 bytes; frame 4,968,657; cumulative stdout 4,969,512. New short executor checks use a supplied Docker fixture at the maximum 16 MiB callback-body size and with four requests whose total output exceeds the old 32 MiB cumulative allowance. | Per-body 16 MiB and per-frame 32 MiB bounds remain. The existing helper now sets cumulative stdout to at least (callback allowance + 3) times 32 MiB, retaining a larger existing value: twelve callbacks give 480 MiB. This is a derived stream allowance, not a promise every feedback document fits every downstream limit. |
 | Several slow callbacks exceed worker lifetime | Retain the existing deadlines; classify only a proven, fully settled proposal timeout as a rejected opportunity. Seven focused lifecycle/outcome checks pass, including unknown charges, uncertain cleanup, source drift and after-done counterexamples. | No latency guarantee, new timer framework, blanket timeout increase or paid retry. Genuine incomplete evaluation/accounting remains partial. |
-| Completed proposal fails an arbitrary token cushion | Explicit capacity policy v2 removes the extra 8,192 unused-context/output-token requirements. Sixteen capacity methods plus a strengthened guard check pass. V1 remains exact. | Input plus the entire declared output cap must still fit 1,050,000 tokens; actual usage must be authoritative and within bounds. Normal finish, no refusal, exact full replacement and full accounting remain required. Mock token counts do not establish live fit. |
-| Evolved program has its own smaller guard | The first confined check exposed C's own 1 MiB limit before any callback. A separate confined diagnostic located its exact guard. Prospective Ccompat changes only the seven bytes `1024**2` to `32*1024**2`; every other source byte remains exact. P3/Ccompat then passed both feedback shapes in 13.032 seconds. All four owned containers were removed, with no provider calls. | The original failure/diagnostic remain retained. These observations do not exhaust every branch of evolved or future code. Original source and prior experiment claims remain unchanged. |
+| Completed proposal fails an arbitrary token cushion | Explicit capacity policy v2 removes the extra 8,192 unused-context/output-token requirements. Existing checks preserve the exact v1 policy and hard v2 bounds. DESIGN section 4 already permits prospectively adopting observations from the actual original proposal calls instead of certifying future requests in advance. | Before admitting a returned child, authoritative input usage plus the whole requested output allowance must fit 1,050,000 tokens; normal finish, no refusal, exact complete replacement and full original-call accounting are required. No tokenizer or bytes-as-tokens heuristic is added. Future requests have not passed in advance. |
+| Evolved program has its own smaller guard | The earlier confined diagnosis corrected C's aggregate 1 MiB projection guard in Ccompat. The next boundary review found a separate per-note 1 MiB guard that remained. Prospective Ccompat2 changes only that remaining guard to 32 MiB; all other Ccompat source bytes stay exact. | Original C, Ccompat, their failures and the earlier 13.032-second four-session result remain historical evidence. P3/Ccompat2 then pass four short confined sessions in 26.370 seconds; all owned containers are removed. Complete feedback and a maximum-size parent source reach the mocked callback unchanged. These corrections do not certify every branch of future evolved programs. |
 
-The proposed pair is **P3** `b84ae0e3…` and **Ccompat** `d7ea5936…`.
-Historical P `77cfa68f…` and C `4196cd29…` remain untouched. Both compatibility
-forks keep their generation and improvement algorithms; only their input-capacity
-compatibility changes. Ccompat descends from historical C, which descended from
-historical P; it does **not** descend from P3. The refreshed comparison must report
-these actual identities and prospectively adopt the changed pair and policy.
-It must not reuse the old study's source identities or rewrite its results.
+The proposed pair is now **P3** `b84ae0e3…` and **Ccompat2**
+`f1c832d5168986bf4bf220bb31f31754192cf262d523118b1f47ea0540fb6bc7`.
+Historical P `77cfa68f…`, C `4196cd29…` and Ccompat `d7ea5936…` remain
+untouched. Ccompat2 follows Ccompat and historical C; it does not descend from
+P3. The two guard corrections change input capacity, not the generation or
+improvement algorithms. The refreshed comparison must disclose and prospectively
+adopt these actual identities and policy, without rewriting the earlier study.
+
+Fresh runtime `c28851f9a9d85b02e86ed14589de4877353561c7` pins all 348 Python
+files. All 84 core production files remain unchanged from `3214557`; four
+helper/test-support Python files differ from `5ab`, five from `3214557` including
+the earlier test-only correction. The existing preparation helper derives the
+cumulative stdout allowance from configured callbacks; proposal and plain-reference
+preparations inherit it. Memory remains 256 MiB, with the existing 900-second
+source worker and 1,800-second native worker limits. Six short checks pass in
+1.9885 seconds, using supplied executor/metadata/model-reply fixtures, not real
+containers or provider calls. The selected P3/Ccompat2 pair then passes four
+actual confined sessions in 26.370 seconds within 120 seconds. They preserve
+all thirty current and thirty parent answers and a 1,048,576-byte parent source.
+Each comparison note is 2,717,388 bytes, exceeding the old per-note guard.
+The largest complete request body is 12,694,920 bytes, below the unchanged
+16 MiB bound. Maximum observed initial configuration is 11,362,911 bytes;
+callback frame 16,926,629 bytes; cumulative stdout 16,927,484 bytes.
+Every owned container exits successfully and is removed.
+Provider replies and usage are supplied; no model call or returned-source
+execution occurs. This is transport evidence, not a live context-capacity proof.
+[Workload-capacity delivery](conformance/d8-workload-capacity-delivery.json).
+
+The local feedback ceiling is a safety bound, not a universal fit guarantee.
+The request body, JSON/base64 frame and model context have distinct limits.
+For model context, the proposal uses the existing [actual-call capacity route](SOURCE-PROPOSAL-CAPACITY.md)
+allowed by DESIGN section 4: inspect authoritative usage from every actual
+original proposal call before admitting a child. Do not add a pessimistic
+bytes-as-tokens stop, truncate answers or require another advance guarantee
+for arbitrary future descendants. Genuine excessive context, incomplete
+replies, unknown charges and unsafe cleanup retain their stops.
 
 ## Preparation status and next stopping point
 
-All four refreshed unfunded preparations completed in **21.708 seconds** within
+The earlier P3/Ccompat unfunded preparations completed in **21.708 seconds** within
 the 120-second short bound. Their directories are
 `runs/imp01-d8-ready-primary-20261107-v1`,
 `runs/imp01-d8-ready-plain-20261107-v1`,
@@ -97,6 +126,21 @@ the 120-second short bound. Their directories are
 `runs/imp01-d8-ready-combined-20261107-v1`. Exact manifests, results and all
 133 indexed output hashes are bound in the pair-readiness receipt. The earlier
 0d27 packages and their 21.723-second result remain historical.
+
+The corrected v3 refresh now completes all four existing metadata builders in
+**22.729 seconds** within 120 seconds, at runtime `c28851f`. The new unfunded
+directories are `runs/imp01-d8-capacity-primary-20261108-v3`,
+`runs/imp01-d8-capacity-plain-20261108-v3`,
+`runs/imp01-d8-capacity-review-20261108-v3` and
+`runs/imp01-d8-capacity-combined-20261108-v3`. Their independent output review
+is still pending. No owners, spending authorities or API allocations are created.
+
+Two earlier short metadata partials remain retained: 2.071671 seconds stopped
+on the old study's selected-agent identity; 12.752453 seconds completed primary
+and plain preparation before an unnecessary extra evidence reference made the
+review input count eleven instead of ten. The fresh v3 input data removes only
+that optional reference, retaining it in delivery evidence; the existing
+ten-input guard is unchanged. Fresh output folders preserve both partials.
 
 The fresh profile check's saved output accepts seven synthetic requests and
 rejects twenty-seven altered variants. Its outer summary used the wrong output
@@ -114,22 +158,23 @@ Inherited nominal per-owner envelopes are not allocations: final funding must
 bind the actual $25 shared plain-reference cap and $150 combined phase limits
 before any owner can spend.
 
-The November 8 qualification completed at `ad8e5c1` with the same obsolete
-boundary-test failure on both OSes; all other methods passed or had declared
-skips, and all 70 quality checks passed. The original run remains failed.
-A separate test-only correction selects the preserved 1 MiB policy for the
-legacy rejection check, restores/verifies the 32 MiB default, and adds that case
-to short CI. Runtime `3214557` is unchanged. All 348 Python files in frozen
-qualification source `ad8e5c1` match that runtime; the corrected test head
-intentionally differs in two test-support Python files. Production code and
-configuration remain identical. It has no new full-suite pass.
+The November 8 qualification at `ad8e5c1` remains failed on the same outdated
+boundary test per OS, with all other methods passed or declared skipped and
+all 70 quality checks successful. PR #282 corrects only that test and its short
+selection; both OSes pass 515 methods and all 14 quality checks. It has no fresh
+full-suite pass. The user's decision on [narrow evidence reuse](CI-TESTS.md#november-8-result-and-proposed-test-only-acceptance)
+remains pending. The original runtime `3214557` and earlier frozen sources remain exact.
+The fresh `c28851f` runtime, helper settings and selected pair are prospective
+preparation inputs, with no new full-suite pass.
 
-Before a live command is issued: finish the corrected candidate's short checks
-on both OSes and independent review, obtain the user's decision on the
-[narrow evidence-reuse proposal or a new full qualification](CI-TESTS.md#november-8-result-and-proposed-test-only-acceptance),
-then adopt the actual pair/policy and truthful custody/scope, confirm current
-accounts, obtain a fresh allocation, and bind/check the funded outer handoff.
-Recheck outgoing request settings immediately before paid calls. No new capacity
-rebuild or infrastructure gate is introduced. [Outcome](conformance/d8-qualification-outcome.json).
+Next finish independent output review and verify the planned 517-check
+hosted short CI. Then present **one concrete adoption/funding/handoff request**:
+actual pair and capacity policy v2, scientific scope and truthful custody,
+reviewed evidence reuse, current account terms, fresh allocation and native-review
+setup. Only after approval and final funded checks should a live command be
+issued. Recheck actual outgoing model settings immediately before paid calls.
+No new full qualification, capacity rebuild or long observation follows
+automatically. [Qualification outcome](conformance/d8-qualification-outcome.json),
+[workload-capacity delivery](conformance/d8-workload-capacity-delivery.json).
 
 There is **no live command to run yet**. The final funded handoff will give one exact standalone PowerShell command, explain what it spends/changes, when keys are entered and how to stop. Read-only optional commands will also have plain-English explanations. No keys belong in chat, a command line, a committed file or a report.

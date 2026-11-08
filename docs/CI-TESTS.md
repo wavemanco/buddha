@@ -22,7 +22,10 @@ authorization, providers, credentials, requests, task/answer artifacts, seed
 generation, capacity arithmetic, path/executor boundaries and the test runner.
 It also selects a pure whole-set review check from a mixed-cost module.
 
-The November 8 test-only correction selects **515 methods**, up from
+The November 8 workload-capacity correction selects **517 methods**, up from
+515. It adds the preparation allowance check and an executor check carrying
+four maximum-size callback requests through the real framing and stream reader.
+The preceding November 8 test-only correction selected 515 methods, up from
 514 in D8 pair readiness. It adds the escaped-task projection check that was
 missed when the default feedback ceiling changed. That case explicitly selects
 the preserved 1 MiB ceiling, retains rejection before directory/file creation,
@@ -124,6 +127,18 @@ approval. Neither acceptance nor another long run follows automatically.
 The [outcome receipt](conformance/d8-qualification-outcome.json) binds the raw
 results, source identities, correction and remaining decision. No paid run is
 cleared by this proposal.
+
+The later [workload-capacity correction](conformance/d8-workload-capacity-delivery.json)
+retains all 84 core runtime Python files unchanged. It changes prospective
+experiment inputs and the existing preparation helper: the selected evolved
+actor's remaining per-note guard uses 32 MiB, and cumulative stdout covers the
+declared callbacks rather than one fixed 32 MiB stream. The body/frame, memory,
+deadline, official scoring and accounting guards remain unchanged. Six focused
+checks and four short confined mocked-provider observations pass; the refreshed
+four-stage handoff is unfunded. Both OSes must pass the 517-method short cohort.
+Readiness adoption must explicitly cover these preparation/resource changes;
+the earlier test-only proposal does not adopt them automatically. The original
+full run remains failed, with no new full-suite pass or paid clearance claimed.
 
 ### Prepared continuation check and timing basis
 

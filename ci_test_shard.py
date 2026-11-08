@@ -40,6 +40,7 @@ CONTRACT_TESTS = (
     "test_executor",
     "test_frozen_seed",
     "test_fresh_primary_preparation.FreshPrimaryInputTests.test_prospective_pair_selects_trusted_seed_and_explicit_guard_compatibility_fork",
+    "test_fresh_primary_preparation.FreshPrimaryInputTests.test_relocated_output_limit_covers_declared_callbacks_without_changing_other_limits",
     "test_full_feedback_capacity.FullFeedbackCapacityTests.test_full_capacity_uses_json_envelope_and_still_refuses_one_extra_byte",
     "test_full_feedback_capacity.FullFeedbackCapacityTests.test_saved_capacity_is_whitelisted_and_restored_after_invalid_evidence",
     "test_full_feedback_channel",
