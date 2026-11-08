@@ -1,6 +1,7 @@
-"""Supplied metadata checks only; no frozen inputs or application imports."""
+"""Supplied metadata and trusted factory checks; no selected program execution."""
 
 import copy
+import hashlib
 import importlib.util
 import os
 import tempfile
@@ -16,6 +17,17 @@ spec.loader.exec_module(driver)
 
 
 class FreshPrimaryInputTests(unittest.TestCase):
+    def test_prospective_pair_selects_trusted_seed_and_explicit_guard_compatibility_fork(self):
+        from buddha.source_seed import compose_source_seed
+
+        frozen = DRIVER.parents[2] / "agents/frozen_seed.py"
+        initial = compose_source_seed(frozen.read_bytes())
+        self.assertEqual(driver.AGENTS["initial"], hashlib.sha256(initial).hexdigest())
+        self.assertEqual(
+            driver.AGENTS["evolved"],
+            "d7ea59366d876225f8f946a646c9a3cfec41a4298047c46922fa227b747fbed8",
+        )
+
     def test_hash_only_reference_read_is_exact_scoped_and_reset(self):
         base, _ = self.fixture()
         item, copied = base / "evidence.bin", base / "copied-program.py"

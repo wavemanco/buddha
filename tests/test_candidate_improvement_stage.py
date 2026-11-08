@@ -444,6 +444,141 @@ class CandidateImprovementStageTests(unittest.TestCase):
             self.assertEqual(sha((self.directory / "attempts" / relative).read_bytes()), digest)
         self.assertEqual(len(list((self.directory / "owners").iterdir())), 1)
 
+    def test_owned_worker_timeout_after_known_callbacks_counts_one_failed_opportunity(self):
+        from buddha.executor import ExecutorError
+
+        self.api()
+        self.prepare()
+        observed = []
+        connection = self.h.connection()
+        response = connection.getresponse.return_value
+
+        def reply_after_watchdog():
+            observed.append("watchdog expired before authoritative reply")
+            return response
+
+        connection.getresponse.side_effect = reply_after_watchdog
+        error = ExecutorError(
+            "timeout",
+            cleanup_status="removed",
+            container_id="f" * 64,
+            pre_cleanup_failure=("watchdog", "timeout"),
+        )
+        with patch.object(self.h, "connection", return_value=connection):
+            report = self.run_stage(callbacks=3, before_done_error=error)
+        self.assertEqual(
+            (report["status"], report.get("disposition"), report["reason"]),
+            ("complete", "rejected", "worker_timeout"),
+        )
+        self.assertEqual(len(observed), 3)
+        self.assertIsNone(report["child"])
+        raw = report["improvement"]
+        self.assertEqual((raw["status"], raw["reason"]), ("failed", "execution"))
+        self.assertEqual(raw["execution"], error.to_record())
+        self.assertNotIn("exit_code", raw["execution"])
+        self.assertNotIn("image_id", raw["execution"])
+        terminal = report["outcome"]["terminal"]
+        self.assertTrue(
+            all(terminal[key] is None for key in ("done_sha256", "done_status", "done_reason"))
+        )
+        history = self.owner_history()
+        self.assertEqual([op.status for op in history.operations], ["completed"] * 3)
+        totals = history.totals()
+        self.assertEqual(totals["operation_count"], 3)
+        self.assertGreater(totals["spent_microusd"], 0)
+        self.assertEqual(totals["reserved_microusd"], 0)
+        self.assertEqual(totals["committed_microusd"], totals["spent_microusd"])
+        self.assertEqual(raw["gateway_totals"], totals)
+        seal = json.loads((self.directory / "completed/0.json").read_bytes())
+        session = self.directory / seal["attempt"] / "session"
+        self.assertFalse((session / "proposal.json").exists())
+        self.assertFalse((session / "child").exists())
+        self.assertFalse((session / "lineage.json").exists())
+        owners = [
+            row
+            for row in self.f.authority.summary()["runs"]
+            if row["directory"] == str(self.directory / "owners/0")
+        ]
+        self.assertEqual(len(owners), 1)
+        self.assertFalse(owners[0]["active"])
+        before = self.feedback.h.files(self.root), self.f.authority.summary()
+        self.assertEqual(self.replay(), report)
+        self.assertEqual((self.feedback.h.files(self.root), self.f.authority.summary()), before)
+
+    def test_unproven_or_unclean_timeouts_and_unknown_billing_stay_incomplete(self):
+        from buddha.executor import ExecutorError
+
+        self.api()
+        self.fixture()
+        proven = {
+            "cleanup_status": "removed",
+            "container_id": "f" * 64,
+            "pre_cleanup_failure": ("watchdog", "timeout"),
+        }
+        cases = [
+            ("cleanup", "cleanup", proven | {"cleanup_status": "unknown"}, {}),
+            ("missing_provenance", "timeout", proven | {"pre_cleanup_failure": None}, {}),
+            (
+                "wrong_stage",
+                "timeout",
+                proven | {"pre_cleanup_failure": ("exchange", "timeout")},
+                {},
+            ),
+            ("wrong_cause", "timeout", proven | {"pre_cleanup_failure": ("watchdog", "host")}, {}),
+            ("missing_container", "timeout", proven | {"container_id": None}, {}),
+            ("generic_failure", "host", proven, {}),
+            ("unknown_billing", "timeout", proven, {"timeout": True, "ignore_stop": True}),
+        ]
+        for name, reason, values, changes in cases:
+            with self.subTest(name=name):
+                self.directory = self.root / ("unproven-timeout-" + name)
+                self.prepare()
+                error = ExecutorError(reason, **values)
+                self.partial(self.run_stage(callbacks=1, before_done_error=error, **changes))
+                history = self.owner_history()
+                if name == "unknown_billing":
+                    self.assertEqual([op.status for op in history.operations], ["unknown"])
+                    self.assertGreater(history.totals()["reserved_microusd"], 0)
+                else:
+                    self.assertEqual([op.status for op in history.operations], ["completed"])
+                    self.assertEqual(history.totals()["reserved_microusd"], 0)
+
+    def test_timeout_after_done_or_source_drift_cannot_become_a_failed_opportunity(self):
+        from buddha.executor import ExecutorError
+
+        self.api()
+        self.prepare()
+        error = ExecutorError(
+            "timeout",
+            cleanup_status="removed",
+            container_id="f" * 64,
+            pre_cleanup_failure=("watchdog", "timeout"),
+        )
+        self.partial(self.run_stage(callbacks=1, worker_error=error))
+        self.directory = self.root / "timeout-source-drift"
+        self.prepare()
+        connection = self.h.connection()
+        response = connection.getresponse.return_value
+        original = self.h.source.read_bytes()
+
+        def reply_after_drift():
+            self.h.source.write_bytes(original + b"\n# changed during callback\n")
+            return response
+
+        connection.getresponse.side_effect = reply_after_drift
+        try:
+            with patch.object(self.h, "connection", return_value=connection):
+                with self.assertRaises(self.Error):
+                    self.run_stage(callbacks=1, before_done_error=error)
+            self.assertFalse((self.directory / "completed/0.json").exists())
+            self.assertFalse((self.directory / "report.json").exists())
+            observations = list((self.directory / "observations").glob("*.json"))
+            self.assertEqual(len(observations), 1)
+            self.assertEqual(json.loads(observations[0].read_bytes())["status"], "incomplete")
+            self.assertEqual([op.status for op in self.owner_history().operations], ["completed"])
+        finally:
+            self.h.source.write_bytes(original)
+
     def test_unknown_hold_blocks_new_dispatch_and_cannot_become_a_rejected_terminal(self):
         self.api()
         self.prepare()

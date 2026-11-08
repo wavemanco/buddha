@@ -15,7 +15,7 @@ The main question is whether the evolved Python improver produces better descend
 
 That is at most 424 scored ten-answer sets/4,240 answers, plus development mutation-witness work. It is a bounded harness experiment, **not** a full leaderboard submission or a claim that all NoveltyBench tasks are unseen. The retained split/custody references must remain intact; metadata hashes alone cannot certify absence of exposure.
 
-The prepared, unfunded packages still select qualified source `0d27ed4dd5aa44ce58618a6af6824141fed43f02`. D7 passed continuation and full qualification there; D6's separately identified `8e2fdc5` capacity run completed its workload in about 5h33m. The subsequent root-cause corrections described below have short-check evidence only. Neither earlier pass transfers full qualification to changed production source or establishes live performance/scientific improvement.
+The original unfunded packages retain source `0d27ed4dd5aa44ce58618a6af6824141fed43f02`. The refreshed prospective packages bind a separate, clean runtime snapshot at `3214557b5b80bbf06fdac3924953fad5c8e51fb3`. D7 passed continuation and full qualification at 0d27; D6's separately identified `8e2fdc5` capacity run completed its workload in about 5h33m. The subsequent root-cause corrections have short-check and confined-pair evidence only. Neither earlier pass transfers full qualification to changed production source or establishes live performance/scientific improvement.
 
 ## Model requests, checked against current official code
 
@@ -32,7 +32,7 @@ The [submission instructions](https://novelty-bench.github.io/submit.html) speci
 
 Python proposal authoring and native review are separate roles from answer generation. The proposed authoring model is `gpt-6.1-sol`, with its existing 32,768-output-token allowance. Do not apply the generator's LOW setting indiscriminately to these roles. Official model names above are aliases, not immutable dated model snapshots. Response model/tier mismatches stop for review rather than silently substitute another model.
 
-The actual native path runs the pinned official code through its locked SDKs and forwards captured request bytes unchanged through Buddha's Gateway. Required/forbidden fields are checked before reservation and key access. Earlier isolated P/C observations captured ten/eleven answer-generation calls respectively, all matching LOW/4,096. These are preserved observations of the same selected source hashes, not fresh executions or guarantees about every descendant. New offline request checks and fresh pack bindings are recorded in the [delivery receipt](conformance/d8-live-preparation-delivery.json).
+The actual native path runs the pinned official code through its locked SDKs and forwards captured request bytes unchanged through Buddha's Gateway. Required/forbidden fields are checked before reservation and key access. Earlier isolated P/C observations captured ten/eleven answer-generation calls respectively, all matching LOW/4,096. The prospective compatibility forks preserve those generation paths byte-for-byte; this is source continuity, not a new generation execution or a guarantee about every descendant. Fresh profile checks and pack bindings are recorded in the [pair-readiness receipt](conformance/d8-pair-readiness-delivery.json); the [original preparation receipt](conformance/d8-live-preparation-delivery.json) remains historical.
 
 ## Proposed API allowance
 
@@ -59,25 +59,66 @@ The user's screenshot describes another project. It supplies useful failure cate
 
 | Concern | What Buddha already does / evidence | Remaining limit |
 | --- | --- | --- |
-| Bad proposal stops the entire search | A fully accounted malformed, unavailable, oversized or invalid proposal counts as a failed opportunity after complete census, settled accounting and clean cleanup. It need not become a child to count. Existing boundary tests exercise settled failures versus unresolved evidence. | Unknown billing, missing evidence or unsafe cleanup still stops; calling those a bad proposal would hide a consequential failure. |
+| Bad proposal stops the entire search | Study v5 can count a fully accounted malformed, unavailable, oversized or invalid proposal as a failed counted opportunity, including a counted child's witness, after complete census, settled accounting and clean cleanup. It need not become a child to count. | A failed common starting witness still stops with `common_ineligible`. Unknown billing, missing evidence or unsafe cleanup also stops; these cannot be reported as ordinary failed opportunities. |
 | Feedback was cut short | Complete answers and official feedback are preserved. D6 checked forty-eight task-feedback records with full 8,192-byte answers and zero omissions. Historical one-request full-output capacity observation also passed. | D6 does not establish that every permitted 4,096-token answer fits this byte envelope. No silent truncation is allowed. |
 | Arbitrary size ceiling | The corrected prospective full-feedback path shares the existing 32 MiB JSON allowance across builder, host, worker and new starter v3. Complete Unicode input above 1 MiB reaches the captured model callback unchanged in short regression checks. Historical 1 MiB policies and starter v1/v2 bytes remain exact. | This closes the reproduced legacy-1-MiB rejection on the corrected path. The whole configuration still must fit 32 MiB framing and each callback 16 MiB; token/context and runtime limits remain. It does not make every 32 MiB feedback document executable. Frozen agents are not automatically updated. |
 | Timeout caused by repeated historical reconstruction | The corrected forward runner reuses checked current state and performs fresh inspection after writes. D6 completed the intended synthetic history; D7 passed the full offline continuation regression and both full OS suites. | Fresh whole-history reads remain substantial. No new hours-long capacity rebuild or old/new-run migration is proposed. |
-| Provider takes longer than expected | Existing generation/proposal worker limit is 900 seconds; native stage 1,800 seconds. Funded HTTP timeout is chosen explicitly, up to 600 seconds. Limits and stage outcomes are retained. | Several calls at worst-case network latency need not fit a worker's total allowance. Offline checks cannot prove live latency. No new arbitrary remaining-time threshold is introduced. |
+| Provider takes longer than expected | Generation/proposal worker limit remains 900 seconds; native stage 1,800 seconds. A proven, owned proposal-worker timeout before its done frame can now count as a failed opportunity after complete settled callback/capacity checks, source verification and successful cleanup. No child or score is invented. | The HTTP timeout, up to 600 seconds, is a socket inactivity limit, not a whole-call guarantee. Several slow calls can exhaust a worker. The executor waits for in-flight accounting and cleanup, so host elapsed time can exceed worker lifetime. Unknown liability, timeout after done, and missing native judge scores remain partial. |
 | Timeout/disconnect may have been charged | One dispatched unknown operation retains its full hold and stops shared authority; no blind retry, fallback or automatic hold release. The corrected shared transport preserves a fixed safe error family through pre-response, partial-body and header failures into saved candidate/native reports. | The financial stop remains necessary. `provider_error_family` records only `timeout`, `connection`, `tls`, `http`, `os_error` or `other`; no raw exception text. Old causes cannot be reconstructed, and a crash before report publication is outside this report-level proof. |
 | Cosmetic metadata/prose differences | Native requests retain immutable SDK-produced bytes. Official schemas/parsing remain unchanged; checked reuse binds actual source/request/content rather than an informal summary. | No evidence found of this screenshot's signed-reasoning/tool-metadata/cache-annotation bugs in Buddha's text interface. Do not add speculative compatibility repairs. |
 | Source, cleanup, budget or sealed-data violation | Existing identity, owned-process cleanup, accounting, split and budget checks remain mandatory. | These stops protect the experiment. They must not be bypassed to report completion. |
 
 Both root-cause corrections now have short red/green regressions; the [correction receipt](conformance/d8-stop-root-causes-delivery.json) records exact scope and evidence. No ledger migration, new orchestration framework or official benchmark change was added. Original source0d27, its qualification and its prepared packages remain unchanged.
 
-Other preventable-stop risks to check before spending are larger JSON wrappers/escaping, the selected agents' own input checks and several individually slow calls exceeding one worker's total lifetime. The declared proposal-capacity policy also requires 8,192 unused output tokens and 8,192 context tokens: a normally completed replacement can fail that conservative margin. This is an explicit policy constraint, not a newly demonstrated implementation defect; changing it needs prospective protocol review. No new arbitrary remaining-time cutoff or speculative limit increase was added here.
+### The four pre-live risks and their actual evidence
 
-The original selected P hash `77cfa68f…` is exactly the preserved starter v2 and still rejects feedback above its own 1 MiB guard. A prospective v3 initial source is prepared separately, not adopted, with the plain generation prefix unchanged. The evolved C source was not blindly patched: it contains neither exact inherited guard pattern, which does not prove large-feedback compatibility. Verify the selected pair in confinement and explicitly bind any compatibility/source changes before a fresh live handoff. Preserve original P/C identities and report the comparison's actual source versions.
+| Risk | Correction / observed result | Practical boundary |
+| --- | --- | --- |
+| Escaping and wrappers enlarge requests | Actual confined workers received complete synthetic feedback of 1,572,970 bytes for a root case and 3,145,147 for an immediate-parent comparison. Both compatible actors preserved every full answer in the captured HTTP bodies, including all thirty current and thirty parent answers in the comparison. Largest body was 3,726,439 bytes; frame 4,968,657; cumulative stdout 4,969,512. | Below the unchanged 16 MiB body and 32 MiB frame/cumulative-output limits for these cases. This is representative evidence, not proof that every allowed 32 MiB feedback document or every Unicode/token distribution fits. No answer is shortened to make a limit pass. |
+| Several slow callbacks exceed worker lifetime | Retain the existing deadlines; classify only a proven, fully settled proposal timeout as a rejected opportunity. Seven focused lifecycle/outcome checks pass, including unknown charges, uncertain cleanup, source drift and after-done counterexamples. | No latency guarantee, new timer framework, blanket timeout increase or paid retry. Genuine incomplete evaluation/accounting remains partial. |
+| Completed proposal fails an arbitrary token cushion | Explicit capacity policy v2 removes the extra 8,192 unused-context/output-token requirements. Sixteen capacity methods plus a strengthened guard check pass. V1 remains exact. | Input plus the entire declared output cap must still fit 1,050,000 tokens; actual usage must be authoritative and within bounds. Normal finish, no refusal, exact full replacement and full accounting remain required. Mock token counts do not establish live fit. |
+| Evolved program has its own smaller guard | The first confined check exposed C's own 1 MiB limit before any callback. A separate confined diagnostic located its exact guard. Prospective Ccompat changes only the seven bytes `1024**2` to `32*1024**2`; every other source byte remains exact. P3/Ccompat then passed both feedback shapes in 13.032 seconds. All four owned containers were removed, with no provider calls. | The original failure/diagnostic remain retained. These observations do not exhaust every branch of evolved or future code. Original source and prior experiment claims remain unchanged. |
+
+The proposed pair is **P3** `b84ae0e3…` and **Ccompat** `d7ea5936…`.
+Historical P `77cfa68f…` and C `4196cd29…` remain untouched. Both compatibility
+forks keep their generation and improvement algorithms; only their input-capacity
+compatibility changes. Ccompat descends from historical C, which descended from
+historical P; it does **not** descend from P3. The refreshed comparison must report
+these actual identities and prospectively adopt the changed pair and policy.
+It must not reuse the old study's source identities or rewrite its results.
 
 ## Preparation status and next stopping point
 
-All four unfunded preparations completed in **21.723 seconds** within the 120-second short bound. Their directories are `runs/imp01-d8-primary-20261107-v1`, `runs/imp01-d8-plain-20261107-v1`, `runs/imp01-d8-review-20261107-v1` and `runs/imp01-d8-combined-20261107-v1`. Exact manifests, results and all 133 indexed output hashes are bound in the delivery receipt. Fresh profile checks accept seven synthetic requests and reject twenty-seven altered variants; seventy-eight selected test methods have valid passing observations. Separately retained audit-wrapper failures are explained in the receipt; no production invariant was changed. The four existing metadata builders are reused; any preparation-only path/hash rebinding must itself be recorded and bound as provenance. Selected programs are not imported, compiled or executed on the host; existing byte/UTF-8 validation remains. Inherited custody references remain hash-only. No original paid history, owners, grants or unresolved charges are imported into a fresh experiment.
+All four refreshed unfunded preparations completed in **21.708 seconds** within
+the 120-second short bound. Their directories are
+`runs/imp01-d8-ready-primary-20261107-v1`,
+`runs/imp01-d8-ready-plain-20261107-v1`,
+`runs/imp01-d8-ready-review-20261107-v1` and
+`runs/imp01-d8-ready-combined-20261107-v1`. Exact manifests, results and all
+133 indexed output hashes are bound in the pair-readiness receipt. The earlier
+0d27 packages and their 21.723-second result remain historical.
 
-Before a live command is issued: select and verify the corrected source and compatible improver pair; refresh the existing handoff bindings and independent review; adopt truthful custody and the final scope; obtain a fresh allocation; bind and check the funded outer handoff. Any further full qualification or long run requires separate approval. Recheck actual request settings immediately before paid calls. No new capacity rebuild or infrastructure gate is introduced.
+The fresh profile check's saved output accepts seven synthetic requests and
+rejects twenty-seven altered variants. Its outer summary used the wrong output
+key after the checker returned; this readback error is retained, with no rerun
+or inferred child exit-code/duration claim. No production rule changed to make
+the diagnostic pass. Independent reviews check the runtime code, exact C patch,
+full-answer request evidence, preparation manifests and output joins.
+
+The four existing metadata builders are reused, with preparation-only path/hash
+bindings recorded as provenance. Selected programs are copied/hashed, never
+imported, compiled or executed on the host. Inherited custody references remain
+hash-only. No original paid history, owners, grants or unresolved charges are
+imported. The combined declaration is explicitly unadopted and unfunded.
+Inherited nominal per-owner envelopes are not allocations: final funding must
+bind the actual $25 shared plain-reference cap and $150 combined phase limits
+before any owner can spend.
+
+The compatible pair and unfunded bindings are now checked. Before a live command
+is issued: complete exact-source short CI, obtain approval for the required
+changed-source full qualification, adopt the actual pair/policy and truthful
+custody/scope, confirm current accounts, obtain a fresh allocation, and bind/check
+the funded outer handoff. Recheck outgoing request settings immediately before
+paid calls. No new capacity rebuild or infrastructure gate is introduced.
 
 There is **no live command to run yet**. The final funded handoff will give one exact standalone PowerShell command, explain what it spends/changes, when keys are entered and how to stop. Read-only optional commands will also have plain-English explanations. No keys belong in chat, a command line, a committed file or a report.

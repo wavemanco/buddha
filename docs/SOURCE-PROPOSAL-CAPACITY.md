@@ -32,13 +32,21 @@ For every proposal callback, including planning:
 
 - The reply must be complete, unrefused text with a normal finish and valid
   original model, processing tier and inclusive usage.
-- The model's context window minus actual input tokens and the request's entire
-  output allowance must leave at least **8,192 tokens**.
+- Actual input tokens plus the request's entire declared output allowance must
+  not exceed the model's context window. Historical policy v1
+  additionally requires **8,192 unused tokens**; prospective policy v2 requires
+  no extra cushion.
 
-For the complete replacement source, the actual output allowance minus inclusive
-output usage must also leave at least **8,192 tokens**. Reasoning tokens remain
-part of output usage. A smaller request cannot borrow the larger profile limit
-when calculating its room.
+For the complete replacement source, inclusive output usage must not exceed
+the request's output allowance. Historical policy v1 additionally
+requires **8,192 unused output tokens**; prospective v2 removes that cushion so
+a complete, normally finished replacement is not rejected merely for using it.
+Reasoning tokens remain part of output usage. A smaller request cannot borrow
+the larger profile limit when calculating its room. Both policies retain the
+conservative input-plus-entire-declared-output context envelope, authoritative
+usage, normal finish, refusal and exact replacement checks. V2 does not accept
+truncated replies or estimate usage from bytes. It must be selected explicitly;
+the no-argument factory and all saved v1 policies keep their original meaning.
 
 This replacement observation requires at least one original raw reply containing
 a valid source proposal whose literal source matches the materialized child's
@@ -84,6 +92,16 @@ counted opportunity. Failed margins, refused/truncated replies, unknown charges,
 missing evidence and cleanup or integrity problems retain their existing stops.
 The standalone source-search formats retain their previous rules.
 
+A proposal worker's own deadline can also be a settled failure: the installed
+executor must identify an owned timeout, confirm removal, and leave no done
+frame or proposal artifact; all dispatched callbacks must have complete,
+authoritative accounting with zero held. The raw session remains failed.
+The enclosing outcome is rejected with reason `worker_timeout`, never a
+successful child or score. Study v5 still applies its full capacity census
+before counting this as a failed opportunity. Missing timeout evidence,
+unknown charges, source drift, unsafe cleanup, or a timeout after a done frame
+remain incomplete. Native judge timeouts cannot substitute for official scores.
+
 Outside study v5's fully accounted failure case, a negative or unavailable
 capacity result records a partial search with reason
 `proposal_capacity`, the exact stage and the saved measurement. It does not
@@ -127,7 +145,8 @@ The capacity-enabled source route uses source handoff v4, search manifest v5
 treatment v2 and witness report v2. The finite route uses matching study/assessment
 v4 or v5. The v5 route explicitly selects witness treatment v4 for its failure-only
 rule; existing witness report v2 and capacity checkpoint v1 formats remain unchanged.
-The fixed capacity policy and each capacity checkpoint have their own v1 record formats.
+Capacity policies support exact v1 and prospective v2 records; capacity
+checkpoints retain their v1 format and bind the selected policy's identity.
 Older supported formats retain their meaning and helper inventories. The
 capacity helper is imported and added to controls only when the new policy is
 explicitly enabled; a new proposal builder must select that expanded inventory.

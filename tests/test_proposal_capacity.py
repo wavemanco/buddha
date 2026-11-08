@@ -266,14 +266,84 @@ class ProposalCapacityNumbersTests(unittest.TestCase):
             (("x-request-id", "offline-capacity"),),
         )
 
-    def assess(self, call=None, reply=None):
+    def assess(self, call=None, reply=None, *, policy=None):
         return self.api.assess_proposal_call(
             self.call() if call is None else call,
             self.reply() if reply is None else reply,
             spec=self.spec,
             child_source_sha256=sha(self.source.encode()),
-            policy=self.api.proposal_capacity_policy(),
+            policy=self.api.proposal_capacity_policy() if policy is None else policy,
         )
+
+    def test_prospective_policy_accepts_complete_source_without_an_unused_token_cushion(self):
+        policy = self.api.proposal_capacity_policy(version=2)
+        for inputs, outputs, decision, context, output in (
+            (1_017_232, 32_768, "pass", 0, 0),
+            (1_009_041, 24_577, "pass", 8191, 8191),
+            (1_017_233, 32_768, "fail", -1, 0),
+        ):
+            with self.subTest(inputs=inputs, outputs=outputs):
+                observed = self.assess(
+                    reply=self.reply(inputs=inputs, outputs=outputs), policy=policy
+                )
+                self.assertEqual(observed["decision"], decision)
+                self.assertEqual(
+                    (observed["context_slack"], observed["output_slack"]), (context, output)
+                )
+                self.assertTrue(observed["replacement_source"])
+        original = self.assess(reply=self.reply(inputs=1_009_041, outputs=24_577))
+        self.assertEqual((original["decision"], original["reason"]), ("fail", "margin_failed"))
+        self.assertEqual(self.api.proposal_capacity_policy()["min_output_slack_tokens"], 8192)
+
+    def test_prospective_policy_keeps_closed_bounds_and_incomplete_reply_guards(self):
+        policy = self.api.proposal_capacity_policy(version=2)
+        self.assertEqual(self.api.check_proposal_capacity_policy(policy), policy)
+        for changed in (
+            policy | {"min_context_slack_tokens": -1},
+            policy | {"min_output_slack_tokens": False},
+            policy | {"context_tokens": 1_050_001},
+            policy | {"extra": True},
+            policy | {"format": "buddha.source-proposal-capacity-policy.v3"},
+        ):
+            with self.subTest(changed=changed), self.assertRaises(self.api.SourceCapacityError):
+                self.api.check_proposal_capacity_policy(changed)
+        for version in (True, 0, 3, "2"):
+            with self.subTest(version=version), self.assertRaises(self.api.SourceCapacityError):
+                self.api.proposal_capacity_policy(version=version)
+        for finish in ("length", "content_filter"):
+            with self.subTest(finish=finish):
+                observed = self.assess(reply=self.reply(finish=finish), policy=policy)
+                self.assertEqual(
+                    (observed["measurement_status"], observed["decision"]),
+                    ("partial", "unavailable"),
+                )
+        for inputs, outputs in ((1_050_001, 1), (1, 32_769)):
+            observed = self.assess(reply=self.reply(inputs=inputs, outputs=outputs), policy=policy)
+            self.assertEqual(
+                (observed["decision"], observed["reason"]), ("unavailable", "usage_bound")
+            )
+        observed = self.assess(
+            reply=self.reply(content="A complete plan, not source"), policy=policy
+        )
+        self.assertFalse(observed["replacement_source"])
+        original = self.reply()
+        refused = json.loads(original.body)
+        refused["choices"][0]["message"]["refusal"] = "denied"
+        observed = self.assess(
+            reply=replace(original, body=_json(refused), received_sha256=None), policy=policy
+        )
+        self.assertEqual((observed["decision"], observed["reason"]), ("unavailable", "refusal"))
+        missing_usage = json.loads(original.body)
+        del missing_usage["usage"]
+        observed = self.assess(
+            reply=replace(original, body=_json(missing_usage), received_sha256=None), policy=policy
+        )
+        self.assertEqual(
+            (observed["decision"], observed["reason"]), ("unavailable", "usage_unavailable")
+        )
+        for content in ("{}", _json({"source": "another source", "hypothesis": "Change"}).decode()):
+            observed = self.assess(reply=self.reply(content=content), policy=policy)
+            self.assertFalse(observed["replacement_source"])
 
     def test_actual_inclusive_boundary_not_short_visible_text_or_profile_cap(self):
         for inputs, outputs, decision, context, output in (

@@ -195,7 +195,9 @@ scientific improvement claim, spending allocation or live launch command.
 ## Fully accounted bad proposals in study v5
 
 Study v5 pairs only with assessment v5. It retains the same grid, budgets,
-official scores and original-request capacity policy. Earlier versions keep
+official scores and explicitly selected original-request capacity policy.
+Prospective policy v2 removes only the discretionary 8,192-token cushions;
+saved v1 studies retain them. Earlier versions keep
 their existing behavior, including v4's partial stop for an unobserved source.
 
 A clean terminal proposal with complete original accounting can consume one
@@ -214,6 +216,15 @@ opportunity; a failed common starting witness still stops with
 `common_ineligible`. Genuine capacity, refusal/truncation, unknown-charge,
 cleanup and integrity failures remain explicit partial stops. Matching passive
 checks reproduce these distinctions before final assessment can start.
+
+A confirmed owned proposal-worker timeout before its done frame can count as
+a failed opportunity when every callback is settled, the source is unchanged,
+cleanup succeeded and the complete capacity census passes. The original session
+still records failure; no child is invented. Unknown charges, unproven cleanup,
+source drift and timeout after a done frame remain incomplete. Worker limits
+stay at 900 seconds for generation/proposals and 1,800 for native evaluation.
+Several slow calls can exhaust that allowance; this rule prevents a fully
+accounted proposal failure from unnecessarily aborting the entire study.
 
 ## Failures, selection and costs
 

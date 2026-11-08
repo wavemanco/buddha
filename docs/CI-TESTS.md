@@ -22,9 +22,12 @@ authorization, providers, credentials, requests, task/answer artifacts, seed
 generation, capacity arithmetic, path/executor boundaries and the test runner.
 It also selects a pure whole-set review check from a mixed-cost module.
 
-The November 7 D8 correction selects **508 methods**, up from 476. The added
+The November 7 D8 pair-readiness correction selects **514 methods**, up from
+508 in the preceding correction (476 before D8). The added
 coverage checks full feedback above the old 1 MiB limit, historical seed/policy
-compatibility, safe network-error persistence and unchanged financial holds.
+compatibility, safe network-error persistence and unchanged financial holds,
+plus prospective capacity v2, the explicitly selected compatibility pair and
+settled-timeout outcomes with their unknown-charge/cleanup/source counterexamples.
 It uses the same short workflow; no full qualification is scheduled by this
 change. Earlier recorded timings belong to their original selections/source.
 

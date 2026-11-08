@@ -32,8 +32,9 @@ INPUT_NAMES = {
 }
 METADATA_NAMES = ("study", "definition", "release", "custody", "population", "analysis")
 AGENTS = {
-    "initial": "77cfa68f6b3c6996fd503e1ce6f7a964eb57abdb8bde98f6761de5f6e298ff4f",
-    "evolved": "4196cd29ffa76c6959e6f678a8286b1fde5b56e6a34a97dcf68787e1f22b3a43",
+    # Prospective input-compatibility fork; historical builders retain their original P.
+    "initial": "b84ae0e392d6dd51d46342c8502c62b365eaabb9371394f13d7c47825d2ee1a7",
+    "evolved": "d7ea59366d876225f8f946a646c9a3cfec41a4298047c46922fa227b747fbed8",
 }
 POLICY = {
     "format": "buddha.evidence-observation-policy.v2",

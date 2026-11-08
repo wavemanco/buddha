@@ -1,0 +1,226 @@
+{
+  "format": "buddha.d8-pair-readiness-delivery.v1",
+  "date": "2026-11-07",
+  "status": "short_checked_pair_and_unfunded_handoff_prepared_not_live_cleared",
+  "base": "713e57e42576a9949deda44c25a579503a662726",
+  "runtime_source": "3214557b5b80bbf06fdac3924953fad5c8e51fb3",
+  "runtime_root": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\d8-ready-runtime-20261107-v1",
+  "historical_qualified_source": "0d27ed4dd5aa44ce58618a6af6824141fed43f02",
+  "production_sha256": {
+    "buddha/candidate_improvement.py": "afbce182c71c4bb8c79e82921c7e53a60a63663788dd3c601b36c4780ef44756",
+    "buddha/source_capacity.py": "cda919600ef7b0aa74dbf2e39021be225f8c844b5df185a7c79cd6d756d00499",
+    "buddha/source_search.py": "ad576d0943a58451c2162e35905f1a430ee2e116be7d7deb76fd3cb655fb6fe3"
+  },
+  "other_changed_python_sha256": {
+    "ci_test_shard.py": "d95f8c6c505d7fbe1c47289a30cf16fc475e69a723b507aed5cf0e1afd9f02db",
+    "docs/conformance/prepare-fresh-primary.py": "2c9fbe7a475bf6b7705879f62a23393c9a900d9c8d1689c2de7e3190a843049f",
+    "tests/test_candidate_improvement.py": "dcb5ae08c9bf12c17c451732b90a7d7c0c75573745daf65f30f0b441fa817d63",
+    "tests/test_candidate_improvement_stage.py": "ad9d17475e73a3000c00c02b1e7b8a8828935b5f0b2a884675e4e85a9a34bede",
+    "tests/test_fresh_primary_preparation.py": "1fdefad2468074e333a896d3ff7ed80baf4481de70dd9c17a873f51455af22b2",
+    "tests/test_proposal_capacity.py": "6cfb7ceefa1141b4676362e952bc38c1431ac36f169275f3c2f0f0b122cdd777"
+  },
+  "risk_outcomes": {
+    "payload": "Actual selected confined programs preserve every complete synthetic current/parent answer through nested JSON escaping into captured mock HTTP bodies. Largest body3726439, frame4968657, cumulative stdout4969512 bytes; unchanged16MiB/32MiB limits. Representative observations only, not all permitted feedback or model-token fit.",
+    "deadlines": "Retain900s source/1800s native limits. Exact installed owned proposal timeout before done may become failure-only rejection after full settled census, unchanged source and removed cleanup. Raw report remains failed/execution; no success/source/score invented. Unknown charge, unproven cleanup, drift and after-done timeout remain incomplete. HTTP inactivity timeout does not guarantee complete-call duration; host waits accounting/cleanup. Failed common starting witnesses still stop common_ineligible; only eligible counted opportunities/witness failures continue.",
+    "capacity": "Explicit v2 removes only discretionary8192 context/output cushions. Exact v1/default preserved. Authoritative inclusive usage, normal finish/no refusal, input+entire declared cap within1050000, actual output within cap, full replacement and original receipt/billing census remain.",
+    "selected_agents": "Confined initial failure and one targeted diagnosis establish C own1MiBguard. Prospective Ccompat changes only RHS1024**2 to32*1024**2 at original bytes11346:11353. P3/Ccompat pass four root/comparison sessions13.032s; original P/C unchanged. Ccompat descends historical C, not P3. Allcontainers removed; mocked replies, no returned-code execution."
+  },
+  "prospective_pair": {
+    "initial": "b84ae0e392d6dd51d46342c8502c62b365eaabb9371394f13d7c47825d2ee1a7",
+    "evolved": "d7ea59366d876225f8f946a646c9a3cfec41a4298047c46922fa227b747fbed8",
+    "historical_initial": "77cfa68f6b3c6996fd503e1ce6f7a964eb57abdb8bde98f6761de5f6e298ff4f",
+    "historical_evolved": "4196cd29ffa76c6959e6f678a8286b1fde5b56e6a34a97dcf68787e1f22b3a43",
+    "plain_seed_unchanged": "2b87bfe0d3c97ee45db2d45260985ffe0234eca93967f4689fb7c59f82603921",
+    "adopted_into_historical_study": false
+  },
+  "focused_checks": {
+    "capacity_methods": 16,
+    "capacity_guard_strengthened_and_rechecked": true,
+    "capacity_seconds": 0.4648611000011442,
+    "capacity_strengthened_seconds": 0.3201075000106357,
+    "timeout_methods": 7,
+    "timeout_invocation_seconds": [
+      81.03733440001088,
+      102.02581310000096
+    ],
+    "metadata_methods": 9,
+    "final_metadata_unittest_seconds": 0.086,
+    "independent_timeout_predicate_cases": 10,
+    "independent_timeout_predicate_seconds": 0.159,
+    "full_inventory_discovered_only": 2249,
+    "short_contract_inventory": 514,
+    "new_full_qualification": false
+  },
+  "preparation": {
+    "status": "complete_unfunded_four_stage_preparation",
+    "seconds": 21.707748499989975,
+    "total_limit_seconds": 120,
+    "source_python_pins_per_stage": 348,
+    "indexed_files": 133,
+    "stages": [
+      {
+        "stage": "primary",
+        "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-ready-primary-20261107-v1",
+        "status": "complete_unfunded_configuration_only",
+        "files": 105,
+        "result_sha256": "847b4c19197d93594645e94b70a75f5277235938830e8fc81cf130cfa79fba38"
+      },
+      {
+        "stage": "plain",
+        "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-ready-plain-20261107-v1",
+        "status": "complete_unfunded_plain_descriptors",
+        "files": 12,
+        "result_sha256": "cb7e95aef705859bf3bed05809d84ada477b554310ffca2b6b7ac94fbfb1e774"
+      },
+      {
+        "stage": "review",
+        "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-ready-review-20261107-v1",
+        "status": "complete_unfunded_review_configuration",
+        "files": 12,
+        "result_sha256": "bc69dd12dab70ba9af9b7b51e4b9f8dd7affa9e8241c8041883e2138a94064a9"
+      },
+      {
+        "stage": "combined",
+        "directory": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-ready-combined-20261107-v1",
+        "status": "complete_unfunded_combined_declaration",
+        "files": 4,
+        "result_sha256": "5450bcb658d7b203a7f0ac9ed35d120ba029ad054a00b846e981f792fbe6fe31"
+      }
+    ],
+    "same_custody_references": 60,
+    "same_primary_provenance_receipts": 7,
+    "original_packs_preserved": true,
+    "owners_or_authority_created": false,
+    "funded_handoff_checked": false,
+    "nominal_owner_envelopes": "Inherited nominal bounds are not grants. Future funded construction must bind$25 reference shared cap and$150 phase allocations; unallocated declaration is not launchable."
+  },
+  "scientific_scope": {
+    "development_tasks": 3,
+    "final_tasks": 26,
+    "starts": 2,
+    "repetitions": 2,
+    "improver_arms": 2,
+    "opportunities_per_arm_condition": 2,
+    "total_opportunities": 16,
+    "plain_modes": [
+      "regenerate",
+      "in-context"
+    ],
+    "official_revision": "64a23be6b18ec1dacc298830aab276061b6e143c",
+    "official_settings_or_score_changed": false,
+    "claim": "Engineering compatibility; no live capacity, latency, score improvement or unseen-pretraining claim."
+  },
+  "proposed_funding_only": {
+    "combined_usd": 150,
+    "recorded_attempts": 16384,
+    "phase_usd": {
+      "development": 40,
+      "final": 85,
+      "both_plain": 25
+    },
+    "allocated": false,
+    "native_review": "Proposed44freshgpt-6.1-sol/ultra contexts; unpriced Codex-plan capacity outside APIcap; not started."
+  },
+  "request_check": {
+    "status": "saved_checker_output_pass",
+    "accepted": 7,
+    "rejected": 27,
+    "checker_invocations": 1,
+    "outer_summary_error": "KeyError on wrong output key after checker returned; recorded and repaired using saved stdout only, no rerun/production change. No independently retained child exit code or duration claimed."
+  },
+  "evidence": {
+    "capacity": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\d8-pair-readiness-20261107-v1\\capacity\\IMPLEMENTATION-RESULT.json",
+      "sha256": "86a5806f440a9da071ddf89cea112ebaabedc9f145463eaf27937c2f932fa41a"
+    },
+    "timeout": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\d8-pair-readiness-20261107-v1\\deadlines\\TIMEOUT-OUTCOME-DELIVERY.json",
+      "sha256": "7487962fd6a387c413c666543ba5ae55215dcc29814120003ba3c9255d0996b6"
+    },
+    "timeout_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\d8-pair-readiness-20261107-v1\\deadlines\\INDEPENDENT-TIMEOUT-REVIEW.json",
+      "sha256": "c98e51b3877b0ccc1b7e7f979f986025d9f27e0c50706a9fb0324df7d487bd27"
+    },
+    "capacity_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\d8-pair-readiness-20261107-v1\\deadlines\\CAPACITY-ADVERSARIAL-REVIEW.json",
+      "sha256": "191f063789e5f6784f5c39b76667350bb7ea46583d72cd63d88ebb511e94534e"
+    },
+    "initial_pair_partial": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\d8-pair-readiness-20261107-v1\\pair\\result.json",
+      "sha256": "a9aa40034b94384b2f6301ed22c0ac2f7cd0a5f84bc91c357ed55b131a887526"
+    },
+    "c_guard_diagnosis": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\d8-pair-readiness-20261107-v1\\pair\\c-diagnosis-1\\result.json",
+      "sha256": "d83a3b0ecdbe87be8e82ce4a66c3b1747d30fed7a8a1a4dcc7a249c5c3f10d6c"
+    },
+    "c_compatibility_patch": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\d8-pair-readiness-20261107-v1\\pair\\compatibility-1\\byte-patch.json",
+      "sha256": "f4ca9355991c4ddb674df781167614a7187e43ff1d9c2b3e0abba089fbf6ae78"
+    },
+    "pair_pass": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\d8-pair-readiness-20261107-v1\\pair\\compatibility-1\\result.json",
+      "sha256": "0924e2acd1120a62fdf737977fa27ede0bcfb73ec20779e6a2029378ae4e73f2"
+    },
+    "full_answer_integrity": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\d8-pair-readiness-20261107-v1\\pair\\compatibility-1\\full-answer-integrity.json",
+      "sha256": "9ac29e3d7bb9f8f3065c3cc25c4b07f16d2a8f7a35250108c44b64d199912987"
+    },
+    "pair_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\d8-pair-readiness-20261107-v1\\deadlines\\FINAL-PAIR-ADVERSARIAL-REVIEW.json",
+      "sha256": "c1e8652ea6f1e5d835dd2e1bd9a60ac0135a1054e24dc60a6f2faa4d1745753b"
+    },
+    "scientific_configuration_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\d8-pair-readiness-20261107-v1\\pair\\INDEPENDENT-CONFIGURATION-REVIEW.json",
+      "sha256": "b2366f195627788bc6c80cd4f15efafecf153d6f2b8193f0afbd6dbe1a2a9a9c"
+    },
+    "manifest_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\d8-pair-readiness-20261107-v1\\deadlines\\FINAL-PREPARATION-ADVERSARIAL-REVIEW.json",
+      "sha256": "b8e155424aa8fe815c538684e5dde4ff7644d3b5bd44749ef79d0be787c505ac"
+    },
+    "root_manifest_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\d8-pair-readiness-20261107-v1\\preparation\\ROOT-MANIFEST-REVIEW.json",
+      "sha256": "1133684328493bacbeae1a30511f199832396d4b4d29b313ff9461f4e4ff40a7"
+    },
+    "builder_proposal": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\d8-pair-readiness-20261107-v1\\preparation\\manifest-proposal.json",
+      "sha256": "6855c935e16ab51ac474c4c0518af5bf3d3a8cfb65501e267242fa06bae95565"
+    },
+    "builder_invocation": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\d8-pair-readiness-20261107-v1\\preparation\\invoke-reviewed-preparation-once.py",
+      "sha256": "ea0befc09adadef849fd41c790d44df932031d4bb2d8a1df6db07a3bd01e9b5f"
+    },
+    "builder_result": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\d8-pair-readiness-20261107-v1\\preparation\\invocation-result.json",
+      "sha256": "510bfac4e1142cac2e5eba03717b65b9a9e1fd4ed1e5304162f749453dcbc3d6"
+    },
+    "root_output_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\d8-pair-readiness-20261107-v1\\preparation\\ROOT-ARTIFACT-VERIFICATION.json",
+      "sha256": "4c853494cfe6fb826fe321192f1629c582daab6d06d73cd3070d747c1def80b9"
+    },
+    "request_profile_check": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\d8-pair-readiness-20261107-v1\\request-check\\result.json",
+      "sha256": "666342fba576f38456bf808b290ccb7aa03a97f2d3bf7015bf6efb997ad97c48"
+    },
+    "output_artifact_review": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\d8-pair-readiness-20261107-v1\\deadlines\\OUTPUT-ARTIFACT-ADVERSARIAL-REVIEW.json",
+      "sha256": "fdd7bead804fe0668c4823e8adccc85400953de208a463ea33f04eb75c54f579"
+    }
+  },
+  "plan": {
+    "revision": 312,
+    "prior_revision_rows_preserved": 311
+  },
+  "remaining_before_live": [
+    "Exact-source hosted short CI and approval-gated changed-source full qualification",
+    "Prospective scope/pair/policy/custody adoption and current account/price/runtime checks",
+    "Fresh allocation plus actual funded outer handoff construction and checks",
+    "Recheck outgoing request settings immediately before paid calls"
+  ],
+  "no_paid_calls": true,
+  "no_keys": true,
+  "no_new_long_runs": true,
+  "no_automatic_retry": true,
+  "no_new_framework_or_runtime_dependency": true,
+  "no_main_merge": true,
+  "qualification_or_scientific_pass_transferred": false
+}
