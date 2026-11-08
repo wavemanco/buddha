@@ -34,6 +34,38 @@ class KeyInputError(ValidationError):
         )
 
 
+def _read_key(prompt: str) -> str:
+    if sys.platform != "win32":
+        return getpass.getpass(prompt)
+    if sys.stdin is not sys.__stdin__:
+        raise KeyInputError("key_terminal_required")
+    import msvcrt
+
+    for char in prompt:
+        msvcrt.putwch(char)
+    chars: list[str] = []
+    while True:
+        char = msvcrt.getwch()
+        if char in ("\r", "\n"):
+            msvcrt.putwch("\r")
+            msvcrt.putwch("\n")
+            return "".join(chars)
+        if char == "\x03":
+            raise KeyboardInterrupt
+        if char in ("", "\x04", "\x1a"):
+            raise EOFError
+        if char in ("\x00", "\xe0"):
+            msvcrt.getwch()
+        elif char in ("\b", "\x7f"):
+            if chars:
+                chars.pop()
+                for erased in "\b \b":
+                    msvcrt.putwch(erased)
+        else:
+            chars.append(char)
+            msvcrt.putwch("*")
+
+
 @contextmanager
 def key_environment(
     settings: ProfileSource, *, prompt_keys: bool, notice: Callable[[str], None]
@@ -56,12 +88,17 @@ def key_environment(
                     continue
                 if not sys.stdin.isatty() or not sys.stderr.isatty():
                     raise KeyInputError("key_terminal_required")
-                notice("Key input is hidden. Paste once, then press Enter; no characters appear.")
+                notice(
+                    "Key input is masked. Paste once, then press Enter; asterisks show characters."
+                    if sys.platform == "win32"
+                    else "Key input is hidden. Paste once, then press Enter; no characters appear."
+                )
                 try:
                     with warnings.catch_warnings():
                         warnings.simplefilter("error", getpass.GetPassWarning)
-                        value = getpass.getpass(f"{name} (hidden, this process only): ")
-                except (EOFError, getpass.GetPassWarning):
+                        mode = "masked" if sys.platform == "win32" else "hidden"
+                        value = _read_key(f"{name} ({mode}, this process only): ")
+                except (EOFError, OSError, getpass.GetPassWarning):
                     raise KeyInputError("key_input_unavailable") from None
                 if not value or any(not 33 <= ord(char) <= 126 for char in value):
                     raise KeyInputError("key_input_invalid")

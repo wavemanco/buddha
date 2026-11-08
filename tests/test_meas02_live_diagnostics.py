@@ -43,7 +43,7 @@ class LiveInputDiagnosticsTests(unittest.TestCase):
         self.assertEqual(result.get("reason_code"), "key_terminal_required")
         self.assertIn("interactive", result.get("action", ""))
         self.assertIn("key_terminal_required", fixture.err.getvalue())
-        self.assertNotIn("Key input is hidden", fixture.err.getvalue())
+        self.assertNotIn("Key input is ", fixture.err.getvalue())
         self.assertEqual(authority.read_bytes(), before)
         self.assertFalse(fixture.study.exists())
         self.assertFalse(fixture.review.exists())
@@ -103,7 +103,7 @@ class LiveInputDiagnosticsTests(unittest.TestCase):
             patch("buddha.__main__.sys.stdin.isatty", return_value=True),
             patch("buddha.__main__.sys.stderr.isatty", return_value=True),
             patch("buddha.__main__._notice"),
-            patch("buddha.__main__.getpass.getpass", side_effect=["offline-key", EOFError()]),
+            patch("buddha.credentials._read_key", side_effect=["offline-key", EOFError()]),
         ):
             with self.assertRaises(KeyInputError) as caught:
                 with _key_environment(settings, prompt_keys=True):

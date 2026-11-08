@@ -6,12 +6,13 @@ import subprocess
 import sys
 import unittest
 import warnings
+from contextlib import contextmanager
 from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import Mock, patch
 
 from buddha.common import ValidationError
-from buddha.credentials import KeyInputError, key_environment
+from buddha.credentials import KeyInputError, _read_key, key_environment
 
 
 def profiles(*providers):
@@ -20,7 +21,81 @@ def profiles(*providers):
     )
 
 
+@contextmanager
+def console_input(characters):
+    output = []
+    console = SimpleNamespace(getwch=Mock(side_effect=characters), putwch=output.append)
+    terminal = SimpleNamespace(isatty=lambda: True)
+    with (
+        patch("buddha.credentials.sys.platform", "win32"),
+        patch("buddha.credentials.sys.stdin", terminal),
+        patch("buddha.credentials.sys.__stdin__", terminal),
+        patch("buddha.credentials.sys.stderr.isatty", return_value=True),
+        patch.dict(sys.modules, {"msvcrt": console}),
+        patch("buddha.credentials.getpass.getpass", side_effect=AssertionError("echo fallback")),
+    ):
+        yield console, output
+
+
 class CredentialTests(unittest.TestCase):
+    def test_windows_queued_paste_shows_only_stars_and_preserves_next_prompt_input(self):
+        with console_input([*"offline-one", "\r", *"offline-two", "\n"]) as (console, output):
+            self.assertEqual(_read_key("First: "), "offline-one")
+            self.assertEqual(_read_key("Second: "), "offline-two")
+        self.assertEqual("".join(output), "First: ***********\r\nSecond: ***********\r\n")
+        self.assertEqual(console.getwch.call_count, 24)
+
+    def test_windows_backspace_and_extended_keys_never_echo_input(self):
+        characters = ["\b", *"abc", "\x00", "H", "\xe0", "M", "\b", "\x7f", "d", "\r"]
+        with console_input(characters) as (_, output):
+            self.assertEqual(_read_key("Key: "), "ad")
+        self.assertEqual("".join(output), "Key: ***\b \b\b \b*\r\n")
+
+    def test_windows_cancel_eof_and_console_errors_restore_partial_environment(self):
+        for ending, kind in (
+            ("\x03", KeyboardInterrupt),
+            (KeyboardInterrupt(), KeyboardInterrupt),
+            ("\x04", KeyInputError),
+            ("\x1a", KeyInputError),
+            ("", KeyInputError),
+            (EOFError("PRIVATE-INPUT-CANARY"), KeyInputError),
+            (OSError("PRIVATE-INPUT-CANARY"), KeyInputError),
+        ):
+            with (
+                self.subTest(ending=type(ending).__name__),
+                patch.dict(os.environ, {}, clear=True),
+                console_input([*"offline-one", "\r", *"PRIVATE-INPUT-CANARY", ending]) as (
+                    _,
+                    output,
+                ),
+            ):
+                with self.assertRaises(kind) as caught:
+                    with key_environment(
+                        profiles("openai", "anthropic"), prompt_keys=True, notice=Mock()
+                    ):
+                        self.fail("cancelled or unavailable input cannot execute")
+                self.assertEqual(dict(os.environ), {})
+                self.assertNotIn("PRIVATE-INPUT-CANARY", "".join(output) + str(caught.exception))
+                if isinstance(caught.exception, KeyInputError):
+                    self.assertEqual(caught.exception.code, "key_input_unavailable")
+
+    def test_windows_replaced_stdin_refuses_without_console_read_or_fallback(self):
+        with console_input([*"offline", "\r"]) as (console, output):
+            with patch("buddha.credentials.sys.stdin", SimpleNamespace(isatty=lambda: True)):
+                with self.assertRaises(KeyInputError) as caught:
+                    _read_key("Key: ")
+        self.assertEqual(caught.exception.code, "key_terminal_required")
+        console.getwch.assert_not_called()
+        self.assertEqual(output, [])
+
+    def test_nonwindows_entry_uses_hidden_getpass(self):
+        with (
+            patch("buddha.credentials.sys.platform", "linux"),
+            patch("buddha.credentials.getpass.getpass", return_value="offline") as entered,
+        ):
+            self.assertEqual(_read_key("Key: "), "offline")
+        entered.assert_called_once_with("Key: ")
+
     def test_clean_import_needs_only_generic_host_code(self):
         root = Path(__file__).resolve().parents[1]
         script = """
@@ -61,17 +136,15 @@ assert not forbidden.intersection(sys.modules)
         answers = iter(("offline-openai", "offline-anthropic"))
 
         def prompt(label):
-            self.assertEqual(
-                notices[-1],
-                "Key input is hidden. Paste once, then press Enter; no characters appear.",
-            )
+            self.assertIn("Paste once", notices[-1])
+            self.assertIn("asterisks" if sys.platform == "win32" else "no characters", notices[-1])
             return next(answers)
 
         with (
             patch.dict(os.environ, {}, clear=True),
             patch("buddha.credentials.sys.stdin.isatty", return_value=True),
             patch("buddha.credentials.sys.stderr.isatty", return_value=True),
-            patch("buddha.credentials.getpass.getpass", side_effect=prompt) as entered,
+            patch("buddha.credentials._read_key", side_effect=prompt) as entered,
         ):
             with key_environment(settings, prompt_keys=True, notice=notices.append):
                 self.assertEqual(
@@ -92,7 +165,7 @@ assert not forbidden.intersection(sys.modules)
         lazy = SimpleNamespace(profiles=Mock(side_effect=AssertionError("profiles inspected")))
         with (
             patch.dict(os.environ, {}, clear=True),
-            patch("buddha.credentials.getpass.getpass") as entered,
+            patch("buddha.credentials._read_key") as entered,
             patch("buddha.credentials.sys.stdin.isatty") as terminal,
         ):
             with key_environment(lazy, prompt_keys=False, notice=Mock()):
@@ -103,7 +176,7 @@ assert not forbidden.intersection(sys.modules)
         existing = {"OPENAI_API_KEY": "offline-existing-a", "ANTHROPIC_API_KEY": "offline-b"}
         with (
             patch.dict(os.environ, existing, clear=True),
-            patch("buddha.credentials.getpass.getpass") as entered,
+            patch("buddha.credentials._read_key") as entered,
             patch("buddha.credentials.sys.stdin.isatty") as terminal,
         ):
             with key_environment(profiles("openai", "anthropic"), prompt_keys=True, notice=Mock()):
@@ -116,7 +189,7 @@ assert not forbidden.intersection(sys.modules)
         with (
             patch.dict(os.environ, {}, clear=True),
             patch("buddha.credentials.sys.stdin.isatty", return_value=False),
-            patch("buddha.credentials.getpass.getpass") as entered,
+            patch("buddha.credentials._read_key") as entered,
         ):
             with self.assertRaises(KeyInputError) as caught:
                 with key_environment(profiles("openai"), prompt_keys=True, notice=Mock()):
@@ -140,7 +213,7 @@ assert not forbidden.intersection(sys.modules)
                 patch.dict(os.environ, {"OPENAI_API_KEY": ""}, clear=True),
                 patch("buddha.credentials.sys.stdin.isatty", return_value=True),
                 patch("buddha.credentials.sys.stderr.isatty", return_value=True),
-                patch("buddha.credentials.getpass.getpass", side_effect=["offline-a", failure]),
+                patch("buddha.credentials._read_key", side_effect=["offline-a", failure]),
             ):
                 with self.assertRaises(KeyInputError) as caught:
                     with key_environment(
@@ -160,7 +233,7 @@ assert not forbidden.intersection(sys.modules)
             patch.dict(os.environ, {}, clear=True),
             patch("buddha.credentials.sys.stdin.isatty", return_value=True),
             patch("buddha.credentials.sys.stderr.isatty", return_value=True),
-            patch("buddha.credentials.getpass.getpass", side_effect=warned),
+            patch("buddha.credentials._read_key", side_effect=warned),
         ):
             with self.assertRaises(KeyInputError) as caught:
                 with key_environment(profiles("openai"), prompt_keys=True, notice=Mock()):
@@ -178,7 +251,7 @@ assert not forbidden.intersection(sys.modules)
                 patch.dict(os.environ, {}, clear=True),
                 patch("buddha.credentials.sys.stdin.isatty", return_value=True),
                 patch("buddha.credentials.sys.stderr.isatty", return_value=True),
-                patch("buddha.credentials.getpass.getpass", side_effect=answers),
+                patch("buddha.credentials._read_key", side_effect=answers),
             ):
                 with self.assertRaises(KeyboardInterrupt):
                     with key_environment(
@@ -198,7 +271,7 @@ assert not forbidden.intersection(sys.modules)
             patch("buddha.__main__.sys.stdin.isatty", return_value=True),
             patch("buddha.__main__.sys.stderr.isatty", return_value=True),
             patch("buddha.__main__._notice", side_effect=notices.append),
-            patch("buddha.__main__.getpass.getpass", return_value="offline-a") as entered,
+            patch("buddha.credentials._read_key", return_value="offline-a") as entered,
         ):
             with cli._key_environment(profiles("openai"), prompt_keys=True):
                 self.assertEqual(os.environ["OPENAI_API_KEY"], "offline-a")

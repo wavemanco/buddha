@@ -398,7 +398,7 @@ class CLITests(unittest.TestCase):
             patch.dict(os.environ, {}, clear=True),
             patch("buddha.__main__.sys.stdin.isatty", return_value=True),
             patch("buddha.__main__.sys.stderr.isatty", return_value=True),
-            patch("buddha.__main__.getpass.getpass", side_effect=["dummy-openai", "dummy-claude"]),
+            patch("buddha.credentials._read_key", side_effect=["dummy-openai", "dummy-claude"]),
         ):
             with self.assertRaisesRegex(RuntimeError, "stop"):
                 with _key_environment(settings, prompt_keys=True):
@@ -414,7 +414,7 @@ class CLITests(unittest.TestCase):
             patch.dict(os.environ, {"OPENAI_API_KEY": "dummy-existing"}, clear=True),
             patch("buddha.__main__.sys.stdin.isatty", return_value=True),
             patch("buddha.__main__.sys.stderr.isatty", return_value=True),
-            patch("buddha.__main__.getpass.getpass", return_value="dummy-claude") as prompt,
+            patch("buddha.credentials._read_key", return_value="dummy-claude") as prompt,
         ):
             with _key_environment(settings, prompt_keys=True):
                 self.assertEqual(os.environ["OPENAI_API_KEY"], "dummy-existing")
@@ -424,7 +424,7 @@ class CLITests(unittest.TestCase):
             patch.dict(os.environ, {}, clear=True),
             patch("buddha.__main__.sys.stdin.isatty", return_value=True),
             patch("buddha.__main__.sys.stderr.isatty", return_value=True),
-            patch("buddha.__main__.getpass.getpass", side_effect=["dummy-openai", EOFError]),
+            patch("buddha.credentials._read_key", side_effect=["dummy-openai", EOFError]),
         ):
             with self.assertRaises(ValidationError):
                 with _key_environment(settings, prompt_keys=True):
@@ -436,7 +436,7 @@ class CLITests(unittest.TestCase):
         with (
             patch.dict(os.environ, {}, clear=True),
             patch("buddha.__main__.sys.stdin.isatty", return_value=False),
-            patch("buddha.__main__.getpass.getpass") as prompt,
+            patch("buddha.credentials._read_key") as prompt,
         ):
             with self.assertRaises(ValidationError):
                 with _key_environment(settings, prompt_keys=True):
@@ -445,7 +445,7 @@ class CLITests(unittest.TestCase):
 
     def test_default_path_never_prompts_or_reads_stdin(self):
         settings = profiles("openai", "openai", "anthropic")
-        with patch("buddha.__main__.getpass.getpass") as prompt:
+        with patch("buddha.credentials._read_key") as prompt:
             with _key_environment(settings, prompt_keys=False):
                 pass
             prompt.assert_not_called()
@@ -458,7 +458,7 @@ class CLITests(unittest.TestCase):
             patch.dict(os.environ, {"OPENAI_API_KEY": ""}, clear=True),
             patch("buddha.__main__.sys.stdin.isatty", return_value=True),
             patch("buddha.__main__.sys.stderr.isatty", return_value=True),
-            patch("buddha.__main__.getpass.getpass", side_effect=getpass.GetPassWarning),
+            patch("buddha.credentials._read_key", side_effect=getpass.GetPassWarning),
         ):
             with self.assertRaises(ValidationError):
                 with _key_environment(settings, prompt_keys=True):
