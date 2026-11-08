@@ -21,14 +21,17 @@ class SourceCapacityError(ValidationError, ReleaseError):
     """The frozen request or prospective assessment parameters are invalid."""
 
 
-def proposal_capacity_policy() -> dict[str, object]:
+def proposal_capacity_policy(*, version: int = 1) -> dict[str, object]:
     """Return detached supported rules for actual proposal-owner observations."""
+    if type(version) is not int or version not in {1, 2}:
+        raise SourceCapacityError("unsupported actual proposal capacity policy version")
+    margin = 8_192 if version == 1 else 0
     return {
-        "format": "buddha.source-proposal-capacity-policy.v1",
+        "format": f"buddha.source-proposal-capacity-policy.v{version}",
         "provider": "openai",
         "context_tokens": 1_050_000,
-        "min_context_slack_tokens": 8_192,
-        "min_output_slack_tokens": 8_192,
+        "min_context_slack_tokens": margin,
+        "min_output_slack_tokens": margin,
         "context_scope": "all_completed_proposal_calls",
         "output_scope": "exact_returned_source_replacement",
         "require_replacement": True,
@@ -36,7 +39,13 @@ def proposal_capacity_policy() -> dict[str, object]:
 
 
 def check_proposal_capacity_policy(value: object) -> dict[str, object]:
-    expected = proposal_capacity_policy()
+    version = (
+        2
+        if type(value) is dict
+        and value.get("format") == "buddha.source-proposal-capacity-policy.v2"
+        else 1
+    )
+    expected = proposal_capacity_policy(version=version)
     if type(value) is not dict or _json(value) != _json(expected):
         raise SourceCapacityError("unsupported actual proposal capacity policy")
     return expected
@@ -121,7 +130,9 @@ def assess_proposal_call(
         replacement = hashlib.sha256(proposal["source"].encode("utf-8")).hexdigest() == child
     except (ReleaseError, UnicodeError):
         pass  # Complete planning text is not a replacement-source observation.
-    passed = context >= 8_192 and (not replacement or output >= 8_192)
+    passed = context >= _integer(checked["min_context_slack_tokens"]) and (
+        not replacement or output >= _integer(checked["min_output_slack_tokens"])
+    )
     return result | {
         "measurement_status": "complete",
         "decision": "pass" if passed else "fail",

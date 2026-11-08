@@ -463,7 +463,7 @@ def _capacity_configuration(
         return
     from buddha import source_capacity
 
-    source_capacity.check_proposal_capacity_policy(policy)
+    checked = source_capacity.check_proposal_capacity_policy(policy)
     generation = _object(screen.to_record()["generation"])
     selected = gateway._profiles(
         Selection.from_bytes(_json(generation["selection"])), source_screen._roots(generation)
@@ -478,7 +478,7 @@ def _capacity_configuration(
     if (
         spec.provider != "openai"
         or spec.input_token_ceiling != 1_050_000
-        or template["config"]["max_output_tokens"] < 8_192
+        or template["config"]["max_output_tokens"] < _integer(checked["min_output_slack_tokens"])
     ):
         raise SourceSearchError(
             "proposal capacity requires supported context and replacement-output bounds"

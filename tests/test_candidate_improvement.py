@@ -102,6 +102,7 @@ class ImprovementTests(unittest.TestCase):
         timeout=False,
         after_done=None,
         worker_error=None,
+        before_done_error=None,
         ignore_stop=False,
     ):
         def worker(spec, *, initial, handle, limits, docker_endpoint):
@@ -130,6 +131,8 @@ class ImprovementTests(unittest.TestCase):
                     if not ignore_stop:
                         final_status, final_reason = "stopped", reply["reason"]
                     break
+            if before_done_error is not None:
+                raise before_done_error
             handle(
                 {
                     "type": "done",

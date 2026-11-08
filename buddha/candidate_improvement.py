@@ -5,6 +5,7 @@ failure. Neither outcome is a competence, archive-admission or improvement claim
 """
 
 import hashlib
+import re
 from collections.abc import Callable, Mapping, Sequence
 from functools import wraps
 from pathlib import Path
@@ -317,6 +318,7 @@ def _validate_outcome(
     calls = _object(report["calls"], {"requested", "completed", "stopped"})
     count = _integer(totals["operation_count"], 0, cast(int, recipe["max_callbacks"]))
     execution = _object(report["execution"])
+    timed_out = _worker_timeout(report, terminal, totals)
     if (
         envelope["format"] != OUTCOME_FORMAT
         or envelope["status"] != "complete"
@@ -349,12 +351,25 @@ def _validate_outcome(
         or terminal["delivered"] != count
         or terminal["stop_reason"] is not None
         or report["host_stop_reason"] is not None
-        or type(execution.get("exit_code")) is not int
-        or execution["exit_code"] != 0
-        or execution.get("cleanup_status") != "removed"
-        or execution.get("image_id") != _object(recipe["executor"])["image_id"]
+        or (
+            not timed_out
+            and (
+                type(execution.get("exit_code")) is not int
+                or execution["exit_code"] != 0
+                or execution.get("cleanup_status") != "removed"
+                or execution.get("image_id") != _object(recipe["executor"])["image_id"]
+            )
+        )
     ):
         raise CandidateImprovementError("proposal lifecycle, original identity or prefix differs")
+    if timed_out:
+        if (
+            envelope["disposition"] != "rejected"
+            or envelope["reason"] != "worker_timeout"
+            or envelope["artifacts"] != {"session/report.json": _sha(raw)}
+        ):
+            raise CandidateImprovementError("worker timeout changes its failure-only outcome")
+        return {}
     declared = _object(report["artifacts"])
     frame_raw = read(session / "proposal.json", _digest(declared["proposal.json"]))
     frame = _object(_load(frame_raw), {"type", "status", "reason", "proposal"})
@@ -543,6 +558,37 @@ def prepare_candidate_improvement(
     return directory
 
 
+def _worker_timeout(
+    report: dict[str, object], terminal: dict[str, object], totals: Mapping[str, object]
+) -> bool:
+    """A settled owned timeout is failure-only; no worker completion is invented."""
+    execution = report["execution"]
+    if type(execution) is not dict:
+        return False
+    return bool(
+        set(execution) == {"container_id", "cleanup_status", "reason", "pre_cleanup_failure"}
+        and type(execution["container_id"]) is str
+        and re.fullmatch(r"[0-9a-f]{64}", execution["container_id"])
+        and execution["cleanup_status"] == "removed"
+        and execution["reason"] == "timeout"
+        and execution["pre_cleanup_failure"]
+        in [
+            {
+                "format": "buddha.executor-pre-cleanup-failure.v1",
+                "stage": stage,
+                "reason": "timeout",
+            }
+            for stage in ("watchdog", "wait")
+        ]
+        and report["status"] == "failed"
+        and report["reason"] == "execution"
+        and report["artifacts"] == {}
+        and all(terminal[key] is None for key in ("done_sha256", "done_status", "done_reason"))
+        and totals["reserved_microusd"] == 0
+        and totals["committed_microusd"] == totals["spent_microusd"]
+    )
+
+
 def _wrap(attempt: Path, session: object, report: dict[str, object]) -> dict[str, object]:
     # This function receives the real installed session, never an agent-supplied object.
     from buddha.candidate_run import CandidateSession
@@ -566,31 +612,37 @@ def _wrap(attempt: Path, session: object, report: dict[str, object]) -> dict[str
     calls = _object(report["calls"])
     totals = session.gateway.ledger.totals()
     execution = report["execution"]
-    accepted = (
+    settled = (
         terminal["ready"] is True
         and terminal["broken"] is False
-        and done is not None
         and session.stop_reason is None
         and report["host_stop_reason"] is None
+        and report["owner_operation_coverage_complete"] is True
+        and _json(report["gateway_totals"]) == _json(totals)
+        and session.delivered == session.sequence == totals["operation_count"]
+        and calls == {"requested": session.delivered, "completed": session.delivered, "stopped": 0}
+    )
+    accepted = (
+        settled
+        and done is not None
         and type(execution) is dict
         and type(execution.get("exit_code")) is int
         and execution["exit_code"] == 0
         and execution.get("cleanup_status") == "removed"
         and execution.get("image_id") == session.spec.image_id
-        and report["owner_operation_coverage_complete"] is True
-        and _json(report["gateway_totals"]) == _json(totals)
-        and session.delivered == session.sequence == totals["operation_count"]
-        and calls == {"requested": session.delivered, "completed": session.delivered, "stopped": 0}
         and report["status"] == done["status"]
         and report["reason"] == done["reason"]
     )
     disposition = None
+    reason = report["reason"]
     if accepted:
         if report["status"] == "complete" and report["reason"] == "complete":
             disposition = "materialized"
         elif report["status"] == "failed" and report["reason"] in _REJECTED_REASONS:
             disposition = "rejected"
-    reason = report["reason"]
+    elif settled and _worker_timeout(report, terminal, totals):
+        session._unchanged()
+        disposition, reason = "rejected", "worker_timeout"
     if disposition is None and session.stop_reason is None:
         if session.done is None or session.broken or not session.ready:
             reason = "protocol"
