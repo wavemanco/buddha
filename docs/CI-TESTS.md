@@ -22,7 +22,12 @@ authorization, providers, credentials, requests, task/answer artifacts, seed
 generation, capacity arithmetic, path/executor boundaries and the test runner.
 It also selects a pure whole-set review check from a mixed-cost module.
 
-The November 7 D8 pair-readiness correction selects **514 methods**, up from
+The November 8 test-only correction selects **515 methods**, up from
+514 in D8 pair readiness. It adds the escaped-task projection check that was
+missed when the default feedback ceiling changed. That case explicitly selects
+the preserved 1 MiB ceiling, retains rejection before directory/file creation,
+and verifies restoration to the 32 MiB default in the same test process.
+The preceding November 7 D8 pair-readiness correction selected 514 methods, up from
 508 in the preceding correction (476 before D8). The added
 coverage checks full feedback above the old 1 MiB limit, historical seed/policy
 compatibility, safe network-error persistence and unchanged financial holds,
@@ -84,6 +89,41 @@ That exact-source pass does not transfer approval to a later head.
 GitHub documents the [PR label event and explicit head checkout](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#pull_request)
 and the [format expression](https://docs.github.com/en/actions/reference/workflows-and-actions/expressions#format)
 used to bind the label to its source.
+
+### November 8 result and proposed test-only acceptance
+
+The one approved [run 42461804489](https://github.com/wavemanco/buddha/actions/runs/42461804489)
+at `ad8e5c1531d8d7357142809c6119d5867060fe18` finished **failed**, with complete
+coverage of 2,249 methods per OS. Linux had 2,243 passes, five declared skips and
+one failure; Windows had 2,247 passes, one declared skip and one failure. The
+matrix also records 5,443 genuine subtest successes per OS; each raw log set
+contains one additional synthetic `probe` event from a progress-reader test,
+which is excluded from coverage counts and retained in the evidence. The
+same escaped-projection assertion failed on both: its roughly 1.2 MiB input is
+valid under the new 32 MiB default. All 70 quality checks passed. No job timed
+out, was cancelled or was retried. The continuation prerequisite passed before
+all ten matrix jobs started. Whole job span was 3h41m09s; aggregate runner time
+was 15h28m58s. These are execution observations, not billed-money figures.
+
+The [test-only correction](../tests/test_source_feedback.py) preserves every
+original assertion, chooses the supported legacy ceiling for that one check,
+and restores/verifies the current default. Its only other Python change adds
+this method to fast selection. Production code, dependencies, workflows,
+benchmark settings, other test methods and shared fixtures are unchanged.
+
+**Evidence reuse is proposed, not adopted.** For this correction only, it would
+require complete original coverage with no other unexpected failure, exact
+production/configuration identity, the corrected method and existing boundary/
+legacy checks passing in short CI on both OSes, independent byte/AST/result
+review, and explicit user acceptance. The original run stays red; this must
+never be described as a full-suite pass at the corrected head. Declared skips
+remain skips. Future production changes retain the existing qualification rule.
+The alternative is another exact-source full qualification, requiring new
+approval. Neither acceptance nor another long run follows automatically.
+
+The [outcome receipt](conformance/d8-qualification-outcome.json) binds the raw
+results, source identities, correction and remaining decision. No paid run is
+cleared by this proposal.
 
 ### Prepared continuation check and timing basis
 

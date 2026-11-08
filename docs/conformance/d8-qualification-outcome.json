@@ -1,0 +1,155 @@
+{
+  "format": "buddha.d8-qualification-outcome.v1",
+  "date": "2026-11-08",
+  "status": "completed_failed_qualification_test_only_correction_prepared",
+  "qualification": {
+    "run_url": "https://github.com/wavemanco/buddha/actions/runs/42461804489",
+    "run_id": 42461804489,
+    "attempt": 1,
+    "source": "ad8e5c1531d8d7357142809c6119d5867060fe18",
+    "conclusion": "failure",
+    "all_jobs_terminal": 11,
+    "successful_jobs": 9,
+    "failed_jobs": 2,
+    "first_continuation": {
+      "methods_passed": 1,
+      "subtests_passed": 63,
+      "unittest_seconds": 1894.874,
+      "whole_job_seconds": 1928,
+      "limit_seconds": 5400,
+      "all_ten_matrix_jobs_gated_after_success": true
+    },
+    "matrix": {
+      "methods_per_os": 2249,
+      "shard_counts": [
+        1,
+        562,
+        557,
+        590,
+        539
+      ],
+      "ordered_disjoint_complete": true,
+      "census_sha256": "d5ae2d1beacc0e3d985bbeb7ef168ee6b3499928b57538233e739407f629087b",
+      "linux": {
+        "passed": 2243,
+        "declared_skips": 5,
+        "failed": 1,
+        "genuine_subtests_passed": 5443
+      },
+      "windows": {
+        "passed": 2247,
+        "declared_skips": 1,
+        "failed": 1,
+        "genuine_subtests_passed": 5443
+      },
+      "quality_checks_passed": 70
+    },
+    "only_unexpected_failure_per_os": "test_source_feedback.SourceFeedbackTests.test_worker_projection_bound_includes_genuine_escaped_task_text_before_mkdir",
+    "failure": "SourceFeedbackError not raised: the old approximately 1.2 MiB escaped projection is valid under the new 32 MiB default.",
+    "timing_seconds": {
+      "whole_job_span": 13269,
+      "matrix_span": 11339,
+      "all_jobs_runner_sum": 55738,
+      "matrix_runner_sum": 53810,
+      "largest_job": 11339,
+      "largest_genuine_completion_gap": 2305.3121709,
+      "idle_limit": 3600,
+      "job_limit": 21600
+    },
+    "timing_scope": "Execution observations; not a billed-money calculation or speedup claim.",
+    "timeouts": 0,
+    "cancellations": 0,
+    "retries": 0,
+    "progress_count_correction": "Each OS log set has 5,444 raw subtest-success events. One is the probe/time_ns102 fixture from tests/test_ci_test_shard.py:698-701, outside the verified selected-method IDs. Genuine count is 5,443. Raw logs and the original unfiltered summary are retained.",
+    "frozen_source_pins_unchanged": 869
+  },
+  "correction": {
+    "code_commit": "3d74b9697d25593adbdd5a62751cd84373e377e6",
+    "changed_test_support_files": {
+      "tests/test_source_feedback.py": "e8ed698130d5bb16f2804821acdc3c7f4dab38643f41c024f0e4fc841b553644",
+      "ci_test_shard.py": "d61c7ba01198ac728fc340816b729f7dbbc0a3c4db02d5539e808ee191116b60"
+    },
+    "behavior": "Select the existing 1 MiB ContextVar ceiling for this legacy rejection check, reset it in finally and assert the 32 MiB default is restored. Preserve all original assertions, before-mkdir/file checks and other test methods. Add this exact method to normal short CI.",
+    "production_dependencies_workflows_protocol_models_scoring_and_shared_fixtures_unchanged": true,
+    "full_test_population_unchanged": 2249,
+    "normal_short_cohort": 515,
+    "local_checks": {
+      "methods_passed": 3,
+      "whole_seconds": 19.81085260002874,
+      "total_limit_seconds": 120,
+      "source_unchanged": true
+    },
+    "hosted_short_ci": "Pending publication; must pass both OSes at the exact final candidate.",
+    "live_runtime": "3214557b5b80bbf06fdac3924953fad5c8e51fb3",
+    "identity_scope": "All 348 Python files in frozen ad8 match the unchanged runtime. The corrected candidate differs from that runtime in exactly two test-support Python files; production/configuration are identical."
+  },
+  "acceptance": {
+    "status": "proposal_only_not_adopted",
+    "proposed_narrow_evidence_reuse_requires": [
+      "Original complete exact-source coverage, only this obsolete assertion failed (confirmed).",
+      "Production/configuration identity and unchanged other tests; independent byte/AST review (confirmed).",
+      "Corrected legacy/default/boundary checks and 515 selected methods pass hosted short CI on Linux and Windows (pending).",
+      "Final independent evidence/document review and explicit user acceptance (pending)."
+    ],
+    "original_run_remains_red": true,
+    "corrected_head_has_no_full_suite_pass": true,
+    "alternative": "New exact-source full qualification requires a separate explicit approval; no automatic rerun.",
+    "future_production_changes_keep_normal_qualification_rule": true
+  },
+  "evidence": [
+    {
+      "path": "runs/checks/d8-pair-readiness-20261107-v1/qualification-preparation-20261108-v1/approval.json",
+      "sha256": "6b09b5df06048022e0e45afdc721cf1369bb9f1ce3ba442da9ad11f2ba203a97"
+    },
+    {
+      "path": "runs/checks/d8-pair-readiness-20261107-v1/qualification-preparation-20261108-v1/source-pins.json",
+      "sha256": "d2921051d435aa0b4ea0c74d94096f699aceae79e539369b76cb3cb5596cd141"
+    },
+    {
+      "path": "runs/checks/d8-pair-readiness-20261107-v1/qualification-preparation-20261108-v1/ROOT-PARSED-TERMINAL-RUN.json",
+      "sha256": "f40cc336a2bbf148751f48571be9fecf8a53c361e7dc679a5d0a324adb71aae2"
+    },
+    {
+      "path": "runs/checks/d8-pair-readiness-20261107-v1/qualification-preparation-20261108-v1/ROOT-PARSED-TERMINAL-JOBS.json",
+      "sha256": "d754b435091593d46ff798d246c64e7bfcb3e84e15f22d4743dfeb8391daad99"
+    },
+    {
+      "path": "runs/checks/d8-pair-readiness-20261107-v1/qualification-preparation-20261108-v1/ROOT-FIRST-JOB-VERIFICATION.json",
+      "sha256": "a6e631e4d50da9715a52740dc38e9aadfd69e0297a16cac21c051732d81379cb"
+    },
+    {
+      "path": "runs/checks/d8-pair-readiness-20261107-v1/qualification-preparation-20261108-v1/ROOT-FULL-MATRIX-VERIFICATION.json",
+      "sha256": "af35143cea5b24fad6c85a895807c743eccf8a2b3493791fe2622341db4f6940"
+    },
+    {
+      "path": "runs/checks/d8-pair-readiness-20261107-v1/qualification-preparation-20261108-v1/ROOT-FULL-MATRIX-VERIFICATION-v2.json",
+      "sha256": "5d69cbf86ed92b11b5ca33dbe76575579296d110c31ccf4f032e5536a4dd2fe8"
+    },
+    {
+      "path": "runs/checks/d8-pair-readiness-20261107-v1/qualification-preparation-20261108-v1/TERMINAL-INDEPENDENT-REVIEW.json",
+      "sha256": "0f6d3bf51e1c89db2f92f7669700518abecd6ce1eca96fba78178c6d955a5f5e"
+    },
+    {
+      "path": "runs/checks/d8-pair-readiness-20261107-v1/qualification-preparation-20261108-v1/test-only-correction/SHORT-CHECK-RESULT.json",
+      "sha256": "8068be564f62770aab633e54dcc98b227afedd6e497e8126fb67b1df05554420"
+    },
+    {
+      "path": "runs/checks/d8-pair-readiness-20261107-v1/qualification-preparation-20261108-v1/test-only-correction/INDEPENDENT-STATIC-PROOF.json",
+      "sha256": "3254fe4856665321b00689494685889ef9b5f0a0b9a13fb98c39a4766568ad39"
+    },
+    {
+      "path": "runs/checks/d8-pair-readiness-20261107-v1/qualification-preparation-20261108-v1/test-only-correction/INDEPENDENT-CORRECTION-REVIEW.json",
+      "sha256": "237886cab5ee5d50e8a9f6899b125b269e904349fb0c3b45475ece815e189688"
+    }
+  ],
+  "limits": {
+    "paid_calls": 0,
+    "new_capacity_attempts": 0,
+    "automatic_retry": false,
+    "main_merge": false,
+    "qualification_exception_adopted": false,
+    "paid_execution_cleared": false,
+    "additional_long_runs_after_recorded_qualification": 0
+  },
+  "remaining_before_live": "After the readiness decision: adopt the actual pair, capacity policy, scientific scope and truthful custody; confirm current accounts/prices; obtain a fresh allocation/native-review adoption; prepare, bind and check the funded outer handoff using existing drivers; recheck actual outgoing request settings. Presently refreshed packages are unfunded; no live command is cleared."
+}
