@@ -1,6 +1,6 @@
 # D8: approved live-comparison handoff
 
-November 8, 2026. **Readiness, scope and funding are approved; the funded handoff is constructed and checked.** Independent funded-output readback passes; final documentation review and hosted short CI remain before Codex gives the local run instruction. [PLAN D8](PLAN.md) owns scheduling. Preparation starts no provider call or native reviewer; the user enters keys and starts locally. No new long engineering run or main merge is authorized.
+November 8, 2026. **The first live attempt stopped on OpenAI authentication: HTTP 401 / `invalid_api_key`.** No answer or judge score completed. One attempt retains $0.585611 held and $0 recorded spending. Preserve the partial; do not rerun the command below with another key. [Diagnosis](conformance/d8-live-auth-stop.json), [PLAN D8](PLAN.md).
 
 ## What this comparison will tell us
 
@@ -189,8 +189,9 @@ and owners are created when the local run begins.
 
 ## Local run command
 
-**Use this prepared command only after Codex confirms that the final checks
-passed and releases the local run instruction.** Open a new ordinary PowerShell
+**Historical command used for the failed first attempt: do not run it again.**
+A credential replacement and retained unknown require reviewed recovery first.
+The original instructions below are retained as launch history. Open a new ordinary PowerShell
 window and make sure Docker Desktop is running. No `cd` command is needed:
 all paths below are absolute.
 
