@@ -82,7 +82,7 @@ class OperatorTests(unittest.TestCase):
             patch.dict(namespace, {"_controller": lambda: self.controller}),
             patch.dict(os.environ, {"OPENAI_API_KEY": key}),
             patch("buddha.__main__.sys.stdin.isatty", return_value=True),
-            patch("buddha.__main__.getpass.getpass", side_effect=prompt) as getpass,
+            patch("buddha.credentials._read_key", side_effect=prompt) as getpass,
             patch("http.client.HTTPSConnection", side_effect=AssertionError("provider forbidden")),
             patch("socket.create_connection", side_effect=AssertionError("network forbidden")),
             redirect_stdout(self.out),

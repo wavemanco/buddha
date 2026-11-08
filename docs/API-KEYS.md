@@ -2,6 +2,14 @@
 
 The user authorized **up to US$50 for one first live experiment** on 2026-10-19. That is a combined cap across OpenAI and Anthropic, including seed candidates, proposals, generation and judging. It does not authorize repeated $50 experiments. The original and completed recovery attempts are historical evidence. The [living plan](PLAN.md) governs their linked continuation; do not restart either historical directory under a fresh allowance.
 
+## Masked local key entry
+
+The updated Windows prompt shows one `*` for each character typed or pasted. Paste once, then press Enter; Backspace removes the last character and its star. Ctrl+C cancels input. The key itself is never displayed. Both OpenAI and Anthropic prompts use the shared helper.
+
+Existing environment keys still bypass the prompt. Newly entered keys remain temporary for the launch and are restored on exit. Noninteractive input is refused rather than echoed. The existing non-Windows hidden-entry path remains available. Stars confirm input was received; they do not establish that a key is valid or authenticated.
+
+This change is prospective: the stopped D8 run still uses its immutable older launcher. Do not rerun its historical command to try another key; reviewed recovery must preserve the first attempt and its held liability.
+
 ## Approved fresh D8 comparison
 
 **Live update (November 8):** the first OpenAI request returned HTTP 401 / `invalid_api_key`. No answer or judging completed. One attempt retains $0.585611 held; recorded spending is $0, not a reconciled invoice. Do not rerun the historical D8 command or delete the saved key review. The current route does not support in-place key rotation after this received unknown. Keep keys local; [the diagnosis](conformance/d8-live-auth-stop.json) records the recovery gap. Earlier zero-accounting statements below describe preparation before this attempt.
