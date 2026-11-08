@@ -2,7 +2,25 @@
 
 The user authorized **up to US$50 for one first live experiment** on 2026-10-19. That is a combined cap across OpenAI and Anthropic, including seed candidates, proposals, generation and judging. It does not authorize repeated $50 experiments. The original and completed recovery attempts are historical evidence. The [living plan](PLAN.md) governs their linked continuation; do not restart either historical directory under a fresh allowance.
 
-## Approved unified WildChat comparison
+## Approved fresh D8 comparison
+
+On November 8, 2026, the user approved the fresh scope in [PR #283](https://github.com/wavemanco/buddha/pull/283): **$150 combined OpenAI/Anthropic API spending and 16,384 recorded attempts**, allowing partial results with stage, reason, costs and holds.
+
+| Fresh authority | API cap | Recorded attempts |
+| --- | ---: | ---: |
+| Development | $40 | 4,096 |
+| Unused validation | $0 | 0 |
+| Primary final assessment | $85 | 10,240 |
+| Both plain references, shared once | $25 | 2,048 |
+| Total | **$150** | **16,384** |
+
+This adopts P3/Ccompat2, capacity policy v2, the reviewed readiness evidence and the three-development/26-final-task WildChat comparison with sixteen improvement opportunities and both plain controls. Official NoveltyBench 1.1 settings and complete feedback remain unchanged. The original failed full qualification stays failed; adoption is not a fresh full-suite pass.
+
+Native review is at most forty-four fresh `gpt-6.1-sol`/ULTRA contexts: up to sixty-four staged target judgments plus twelve whole-set judgments. It uses unpriced Codex-plan capacity outside the API cap, with no reviewer API fallback. Human participation remains nonblocking. Funding preparation starts neither provider calls nor reviewers.
+
+These are fresh limits, not a transfer of any historical unused allowance. The nominal per-owner plain-reference envelopes are not grants; the actual two plain modes must share one $25/2,048 authority. Four fresh grants are constructed and checked: all recorded spending, holds and operations are zero. No key was read; no study owner or reviewer was started. Independent funded-output readback passes; final documentation review and short CI remain before the local instruction. The [approval](conformance/d8-live-approval.json) records the decision; the [funded delivery](conformance/d8-funded-handoff-delivery.json) records the checked bindings. The [D8 guide](D8-LIVE-COMPARISON.md) supplies the local command only after final checks. Enter keys locally when prompted, never in chat, command arguments or committed files.
+
+## Historical unified WildChat comparison
 
 **Historical, closed for new work.** That original comparison stopped as a
 partial result. Its saved approvals, grants and evidence are retained; they do

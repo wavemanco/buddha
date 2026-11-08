@@ -1,0 +1,110 @@
+{
+  "format": "buddha.d8-live-approval.v1",
+  "date": "2026-11-08",
+  "status": "approved_and_prospectively_adopted_before_funding_and_execution",
+  "user_answer": "Approve readiness, scope and funding (Recommended)",
+  "question_item_id": "call_fdb0871ffbbf487f85fc92de1a313f15:0",
+  "proposal_pr": "https://github.com/wavemanco/buddha/pull/283",
+  "publication_head": "d0f5cb6f57229224de76f16b2533d6fa7ada989d",
+  "runtime_head": "c28851f9a9d85b02e86ed14589de4877353561c7",
+  "allocations": {
+    "search": {
+      "budget_microusd": 40000000,
+      "max_calls": 4096
+    },
+    "validation": {
+      "budget_microusd": 0,
+      "max_calls": 0
+    },
+    "final": {
+      "budget_microusd": 85000000,
+      "max_calls": 10240
+    },
+    "shared_plain_references": {
+      "budget_microusd": 25000000,
+      "max_calls": 2048
+    }
+  },
+  "total_limits": {
+    "budget_microusd": 150000000,
+    "max_calls": 16384
+  },
+  "scope": {
+    "development_tasks": 3,
+    "final_tasks": 26,
+    "counted_improvement_opportunities": 16,
+    "plain_controls": [
+      "regenerate",
+      "in-context"
+    ],
+    "benchmark_version": "1.1",
+    "official_commit": "64a23be6b18ec1dacc298830aab276061b6e143c",
+    "initial_source_sha256": "b84ae0e392d6dd51d46342c8502c62b365eaabb9371394f13d7c47825d2ee1a7",
+    "evolved_source_sha256": "f1c832d5168986bf4bf220bb31f31754192cf262d523118b1f47ea0540fb6bc7",
+    "capacity_policy": "buddha.source-proposal-capacity-policy.v2",
+    "full_feedback_required": true,
+    "human_extension": "nonblocking"
+  },
+  "readiness_adoption": {
+    "reviewed_evidence_reuse_accepted": true,
+    "current_short_ci": 42513927792,
+    "methods_per_os": 517,
+    "quality_checks": 14,
+    "unchanged_core_runtime_files": 84,
+    "original_full_run": 42461804489,
+    "original_full_run_conclusion": "failure",
+    "new_full_suite_pass_claimed": false,
+    "no_additional_long_engineering_run_requested_or_authorized": true
+  },
+  "native_review_selection": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "ultra",
+    "fork_turns": "none",
+    "max_contexts": 44,
+    "max_target_contexts": 32,
+    "max_staged_target_judgments": 64,
+    "max_whole_set_contexts_and_judgments": 12,
+    "billing": "Unpriced Codex-plan usage outside the API cap; not zero cost.",
+    "api_reviewer_fallback": false
+  },
+  "partial_results": {
+    "allowed": true,
+    "retain": [
+      "stage",
+      "reason",
+      "costs",
+      "unresolved_holds",
+      "usable_evidence"
+    ],
+    "unknown_charges_not_released": true,
+    "automatic_paid_retry_or_extension": false
+  },
+  "adopted_static_controls": {
+    "primary_proposal": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-capacity-combined-20261108-v3\\handoff-primary-unfunded.json",
+      "sha256": "1ceaee2d2b9d55b81172a665006329d412155c747fc8643254e5f40e14ac8af1"
+    },
+    "comparison_plan": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-capacity-combined-20261108-v3\\comparison-plan.json",
+      "sha256": "02d11f25fb270f46f614d9736ece5264870faf0495ec470c01438e4b88ebefa9"
+    },
+    "reference_input_bindings": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-capacity-combined-20261108-v3\\reference-input-bindings.json",
+      "sha256": "9188966227b8a654d3bad471c96aa4f84a397dc4389046e50007f4a660ce8a03"
+    },
+    "unallocated_combined_declaration": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-capacity-combined-20261108-v3\\unallocated-combined-declaration.json",
+      "sha256": "9c6966ef94997ca978e8c972fd87dfdee62c463b0705af539ce514b3dad1ac68"
+    }
+  },
+  "implementation_binding": {
+    "outer_launch": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-capacity-combined-20261108-v3\\NOT-CREATED-unified-launch.json",
+    "outer_workspace": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-capacity-combined-20261108-v3\\NOT-CREATED-unified-workspace",
+    "actual_raw_review": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-capacity-combined-20261108-v3\\NOT-CREATED-unified-workspace\\review.json",
+    "unfunded_placeholder_review": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-capacity-combined-20261108-v3\\NOT-CREATED-review.json",
+    "explanation": "The unfunded review placeholder is metadata only. The existing runner uses workspace/review.json; bind that actual path without mutating the frozen preparation or creating a hash cycle."
+  },
+  "account_scope": "OpenAI and Anthropic Standard/default public pay-as-you-go; dedicated inference project/workspace keys, no custom/Scale/priority/fast/batch processing. Existing account assertions are reconfirmed locally with project keys; this preparation does not authenticate either account.",
+  "execution_authority": "Prepare funded handoff and final checks only. The user enters both keys and starts locally only after the exact command is supplied. No paid call or native scientific review starts during preparation.",
+  "historical_scopes": "Prior scopes and partials remain preserved and closed; unused earlier caps are not new spending authority."
+}

@@ -1,6 +1,6 @@
-# D8: live-comparison preparation
+# D8: approved live-comparison handoff
 
-November 7, 2026. Preparation only: **unfunded and not cleared to launch**. [PLAN D8](PLAN.md) owns scheduling; this is its handoff and limits guide. No keys, model calls, new long runs or main merge are authorized here.
+November 8, 2026. **Readiness, scope and funding are approved; the funded handoff is constructed and checked.** Independent funded-output readback passes; final documentation review and hosted short CI remain before Codex gives the local run instruction. [PLAN D8](PLAN.md) owns scheduling. Preparation starts no provider call or native reviewer; the user enters keys and starts locally. No new long engineering run or main merge is authorized.
 
 ## What this comparison will tell us
 
@@ -11,11 +11,11 @@ The main question is whether the evolved Python improver produces better descend
 | Development | Three official WildChat tasks; two starts, two repeated conditions and two improver arms; two descendant opportunities per arm/condition, sixteen opportunities total. Twenty screens cover at most sixty ten-answer task sets. |
 | Primary final assessment | Twenty-six prospectively separated WildChat tasks; at most 312 ten-answer sets, or 3,120 answers. Final feedback does not return to development. |
 | Plain controls | The same generator without Buddha instructions: independent sampling and in-context sampling, each on the same twenty-six final tasks; 520 answers together. |
-| Review | AI-only results proceed independently of human availability. Proposed native review: at most forty-four fresh `gpt-6.1-sol`/ULTRA contexts, including thirty-two target contexts/up to sixty-four staged judgments and twelve whole-set judgments. Optional human ratings remain a separate, nonblocking extension. |
+| Review | AI-only results proceed independently of human availability. Approved native review: at most forty-four fresh `gpt-6.1-sol`/ULTRA contexts, including thirty-two target contexts/up to sixty-four staged judgments and twelve whole-set judgments. Optional human ratings remain a separate, nonblocking extension. |
 
 That is at most 424 scored ten-answer sets/4,240 answers, plus development mutation-witness work. It is a bounded harness experiment, **not** a full leaderboard submission or a claim that all NoveltyBench tasks are unseen. The retained split/custody references must remain intact; metadata hashes alone cannot certify absence of exposure.
 
-The original unfunded packages retain source `0d27ed4dd5aa44ce58618a6af6824141fed43f02`. The refreshed prospective packages bind a separate, clean runtime snapshot at `3214557b5b80bbf06fdac3924953fad5c8e51fb3`. D7 passed continuation and full qualification at 0d27; D6's separately identified `8e2fdc5` capacity run completed its workload in about 5h33m. The subsequent root-cause corrections have short-check and confined-pair evidence only. Neither earlier pass transfers full qualification to changed production source or establishes live performance/scientific improvement.
+The original unfunded packages retain source `0d27ed4dd5aa44ce58618a6af6824141fed43f02`; the November 7 refresh retains `3214557b5b80bbf06fdac3924953fad5c8e51fb3`. The approved fresh scope uses clean runtime `c28851f9a9d85b02e86ed14589de4877353561c7`. D7 retains its full qualification at 0d27 and D6 its separately identified `8e2fdc5` capacity result. The user now adopts the reviewed combined readiness evidence, including the later capacity corrections and PR #283's 517 passing short methods per OS. Original `ad8e` remains failed; no fresh full-suite pass or scientific improvement is claimed.
 
 ## Model requests, checked against current official code
 
@@ -23,20 +23,20 @@ NoveltyBench source remains pinned to `64a23be6b18ec1dacc298830aab276061b6e143c`
 
 | Role | Settings that must reach the provider |
 | --- | --- |
-| Answer generation | Model choice remains configurable for supported compatible routes. Proposed baseline: `gpt-5.6-luna`, LOW reasoning, `max_completion_tokens: 4096`, no temperature/top-p; declared standard/default service tier. Both plain sampling modes use the same settings. |
+| Answer generation | Model choice remains configurable for supported compatible routes. Approved baseline: `gpt-5.6-luna`, LOW reasoning, `max_completion_tokens: 4096`, no temperature/top-p; declared standard/default service tier. Both plain sampling modes use the same settings. |
 | Distinctiveness judge | Explicitly select `gpt-5.6-luna`; official full-response partition messages/schema; **omit** explicit reasoning effort, output-token limit, temperature and service tier. The pinned SDK supplies `stream: false`. Omission inherits provider behavior; it does not disable reasoning. |
 | Utility judge | `claude-opus-5`; adaptive thinking, HIGH effort, `max_tokens: 16000`, official strict score schema. |
 | Official utility refusal fallback | `claude-sonnet-5`, only after the official refusal condition. This changes the utility model explicitly; it is not a generic timeout, billing or generator fallback. |
 
 The [submission instructions](https://novelty-bench.github.io/submit.html) specify CLI allowance 2,048 and LOW generator effort. The official [reasoning helper, lines 46–58](https://github.com/novelty-bench/novelty-bench/blob/64a23be6b18ec1dacc298830aab276061b6e143c/src/inference.py#L46-L58) doubles that allowance on the wire because reasoning and visible output share it: 4,096 is the matching request, not an independently imposed change. It does not guarantee 2,048 visible tokens. Judge settings come from [utility lines 66–77](https://github.com/novelty-bench/novelty-bench/blob/64a23be6b18ec1dacc298830aab276061b6e143c/src/judge.py#L66-L77), [partition lines 95–113](https://github.com/novelty-bench/novelty-bench/blob/64a23be6b18ec1dacc298830aab276061b6e143c/src/judge.py#L95-L113) and [refusal lines 116–128](https://github.com/novelty-bench/novelty-bench/blob/64a23be6b18ec1dacc298830aab276061b6e143c/src/judge.py#L116-L128). The generic partition CLI default is not the leaderboard's Luna selection; our declaration must select it explicitly.
 
-Python proposal authoring and native review are separate roles from answer generation. The proposed P3/Ccompat2 pair's four captured authoring requests use `gpt-6.1-sol`, `reasoning_effort: low`, `max_completion_tokens: 32768` and `service_tier: default`. LOW is the observed frozen authoring recipe for this pair; native Codex review remains proposed `gpt-6.1-sol`/ULTRA. This records the settings without changing them. Official model names above are aliases, not immutable dated model snapshots. Response model/tier mismatches stop for review rather than silently substitute another model.
+Python proposal authoring and native review are separate roles from answer generation. The approved P3/Ccompat2 pair's four captured authoring requests use `gpt-6.1-sol`, `reasoning_effort: low`, `max_completion_tokens: 32768` and `service_tier: default`. LOW is the observed frozen authoring recipe for this pair; native Codex review is adopted as `gpt-6.1-sol`/ULTRA. This records the settings without changing them. Official model names above are aliases, not immutable dated model snapshots. Response model/tier mismatches stop for review rather than silently substitute another model.
 
 The actual native path runs the pinned official code through its locked SDKs and forwards captured request bytes unchanged through Buddha's Gateway. Required/forbidden fields are checked before reservation and key access. Earlier isolated P/C observations captured ten/eleven answer-generation calls respectively, all matching LOW/4,096. The prospective compatibility forks preserve those generation paths byte-for-byte; this is source continuity, not a new generation execution or a guarantee about every descendant. Fresh profile checks and pack bindings are recorded in the [pair-readiness receipt](conformance/d8-pair-readiness-delivery.json); the [original preparation receipt](conformance/d8-live-preparation-delivery.json) remains historical.
 
-## Proposed API allowance
+## Approved API allowance
 
-The earlier $150 allocation is closed. This proposal creates no authority and cannot use its unused balance.
+The earlier $150 allocation is closed. On November 8 the user approved this fresh combined $150/16,384-attempt scope. It cannot use historical unused balances. Four fresh grants are constructed and checked with zero recorded spending, holds and operations. Independent funded-output readback passes; final documentation review and short CI remain before the local instruction; preparation makes no API call. [Approval](conformance/d8-live-approval.json).
 
 | Phase | Combined OpenAI + Anthropic cap | Recorded-attempt limit |
 | --- | ---: | ---: |
@@ -49,9 +49,9 @@ These are phase caps, not provider caps or expected spending. Exhausting one pha
 
 A conditional planning ballpark is **$8–20 OpenAI and $20–60 Anthropic**, about **$28–80 combined**. This scales the earlier incomplete 657-operation sample across at most 424 scored sets, allowing roughly 3.56–10 utility groups per set. It is not a measured final-workload forecast, confidence interval or extra cap. Longer answers, fuller proposal context, different grouping, retries or model behavior can exceed it. Recorded configured-rate costs are not provider invoices.
 
-Public Standard input/output prices checked November 7, in USD per million tokens: [Luna](https://developers.openai.com/api/docs/models/gpt-5.6-luna) $0.20/$1.20; [Sol](https://developers.openai.com/api/docs/models/gpt-6.1-sol) $2/$10; [Opus](https://platform.claude.com/docs/en/about-claude/pricing) $5/$25, Sonnet $2/$10. Existing stored reservation ceilings are more conservative, including reviewed long-context/cache cases and a cushion. Account access, quota and any changed account terms still need confirmation at launch. Earlier user assertions were standard/default processing and public pay-as-you-go for both providers; they have not been silently replaced with a contract assumption.
+Public Standard input/output prices rechecked November 8, in USD per million tokens: [Luna](https://developers.openai.com/api/docs/models/gpt-5.6-luna) $0.20/$1.20; [Sol](https://developers.openai.com/api/docs/models/gpt-6.1-sol) $2/$10; [Opus](https://platform.claude.com/docs/en/about-claude/pricing) $5/$25, Sonnet $2/$10. Existing stored reservation ceilings are more conservative, including reviewed long-context/cache cases and a cushion. Account access, quota and any changed account terms still need confirmation at launch. Earlier user assertions were standard/default processing and public pay-as-you-go for both providers; they have not been silently replaced with a contract assumption.
 
-Native Codex review consumes **unpriced Codex-plan capacity outside the API allowance**. It is not free and has no reviewer API fallback. Human review does not hold up AI-only reporting. Fresh funding/scope adoption must explicitly include the native selection.
+Native Codex review consumes **unpriced Codex-plan capacity outside the API allowance**. It is not free and has no reviewer API fallback. The user adopts at most forty-four fresh `gpt-6.1-sol`/ULTRA contexts, up to sixty-four staged target judgments plus twelve whole-set judgments. Human review does not hold up AI-only reporting. No review context is started by funding preparation.
 
 ## What reduces avoidable stops, and what still can stop
 
@@ -79,13 +79,13 @@ Both root-cause corrections now have short red/green regressions; the [correctio
 | Completed proposal fails an arbitrary token cushion | Explicit capacity policy v2 removes the extra 8,192 unused-context/output-token requirements. Existing checks preserve the exact v1 policy and hard v2 bounds. DESIGN section 4 already permits prospectively adopting observations from the actual original proposal calls instead of certifying future requests in advance. | Before admitting a returned child, authoritative input usage plus the whole requested output allowance must fit 1,050,000 tokens; normal finish, no refusal, exact complete replacement and full original-call accounting are required. No tokenizer or bytes-as-tokens heuristic is added. Future requests have not passed in advance. |
 | Evolved program has its own smaller guard | The earlier confined diagnosis corrected C's aggregate 1 MiB projection guard in Ccompat. The next boundary review found a separate per-note 1 MiB guard that remained. Prospective Ccompat2 changes only that remaining guard to 32 MiB; all other Ccompat source bytes stay exact. | Original C, Ccompat, their failures and the earlier 13.032-second four-session result remain historical evidence. P3/Ccompat2 then pass four short confined sessions in 26.370 seconds; all owned containers are removed. Complete feedback and a maximum-size parent source reach the mocked callback unchanged. These corrections do not certify every branch of future evolved programs. |
 
-The proposed pair is now **P3** `b84ae0e3…` and **Ccompat2**
+The approved pair is **P3** `b84ae0e3…` and **Ccompat2**
 `f1c832d5168986bf4bf220bb31f31754192cf262d523118b1f47ea0540fb6bc7`.
 Historical P `77cfa68f…`, C `4196cd29…` and Ccompat `d7ea5936…` remain
 untouched. Ccompat2 follows Ccompat and historical C; it does not descend from
 P3. The two guard corrections change input capacity, not the generation or
-improvement algorithms. The refreshed comparison must disclose and prospectively
-adopt these actual identities and policy, without rewriting the earlier study.
+improvement algorithms. The user adopts these actual identities and policy for
+the fresh comparison; the earlier study and its source identities remain unchanged.
 
 Fresh runtime `c28851f9a9d85b02e86ed14589de4877353561c7` pins all 348 Python
 files. All 84 core production files remain unchanged from `3214557`; four
@@ -109,7 +109,7 @@ execution occurs. This is transport evidence, not a live context-capacity proof.
 
 The local feedback ceiling is a safety bound, not a universal fit guarantee.
 The request body, JSON/base64 frame and model context have distinct limits.
-For model context, the proposal uses the existing [actual-call capacity route](SOURCE-PROPOSAL-CAPACITY.md)
+For model context, the approved scope uses the existing [actual-call capacity route](SOURCE-PROPOSAL-CAPACITY.md)
 allowed by DESIGN section 4: inspect authoritative usage from every actual
 original proposal call before admitting a child. Do not add a pessimistic
 bytes-as-tokens stop, truncate answers or require another advance guarantee
@@ -132,8 +132,9 @@ The corrected v3 refresh now completes all four existing metadata builders in
 directories are `runs/imp01-d8-capacity-primary-20261108-v3`,
 `runs/imp01-d8-capacity-plain-20261108-v3`,
 `runs/imp01-d8-capacity-review-20261108-v3` and
-`runs/imp01-d8-capacity-combined-20261108-v3`. Their independent output review
-is still pending. No owners, spending authorities or API allocations are created.
+`runs/imp01-d8-capacity-combined-20261108-v3`. Independent review verifies all
+133 indexed artifacts and all source bindings. Those unfunded preparation
+packages remain immutable; they created no owners or spending authorities.
 
 Two earlier short metadata partials remain retained: 2.071671 seconds stopped
 on the old study's selected-agent identity; 12.752453 seconds completed primary
@@ -153,28 +154,84 @@ The four existing metadata builders are reused, with preparation-only path/hash
 bindings recorded as provenance. Selected programs are copied/hashed, never
 imported, compiled or executed on the host. Inherited custody references remain
 hash-only. No original paid history, owners, grants or unresolved charges are
-imported. The combined declaration is explicitly unadopted and unfunded.
-Inherited nominal per-owner envelopes are not allocations: final funding must
-bind the actual $25 shared plain-reference cap and $150 combined phase limits
-before any owner can spend.
+imported. The creation-time combined declaration remains explicitly unadopted
+and unfunded. The new approval separately adopts its fresh scope; funded records
+must bind it without rewriting that original declaration. Nominal per-owner
+envelopes are not allocations: the actual two plain modes must share one
+$25/2,048 authority within the $150 combined phase limits before spending.
 
 The November 8 qualification at `ad8e5c1` remains failed on the same outdated
-boundary test per OS, with all other methods passed or declared skipped and
-all 70 quality checks successful. PR #282 corrects only that test and its short
-selection; both OSes pass 515 methods and all 14 quality checks. It has no fresh
-full-suite pass. The user's decision on [narrow evidence reuse](CI-TESTS.md#november-8-result-and-proposed-test-only-acceptance)
-remains pending. The original runtime `3214557` and earlier frozen sources remain exact.
-The fresh `c28851f` runtime, helper settings and selected pair are prospective
-preparation inputs, with no new full-suite pass.
+boundary test per OS. PR #282 corrects that test and passes 515 short methods per
+OS. [PR #283](https://github.com/wavemanco/buddha/pull/283) then passes all 517
+short methods per OS and all 14 quality checks at `d0f5cb6` in
+[run 42513927792](https://github.com/wavemanco/buddha/actions/runs/42513927792).
+Linux/Windows test bodies are 105.467/401.642 seconds. The user adopts the
+reviewed combined readiness evidence for this fresh scope, including its
+preparation/resource changes. No original result is relabeled and no fresh
+full-suite pass is claimed.
 
-Next finish independent output review and verify the planned 517-check
-hosted short CI. Then present **one concrete adoption/funding/handoff request**:
-actual pair and capacity policy v2, scientific scope and truthful custody,
-reviewed evidence reuse, current account terms, fresh allocation and native-review
-setup. Only after approval and final funded checks should a live command be
-issued. Recheck actual outgoing model settings immediately before paid calls.
-No new full qualification, capacity rebuild or long observation follows
-automatically. [Qualification outcome](conformance/d8-qualification-outcome.json),
-[workload-capacity delivery](conformance/d8-workload-capacity-delivery.json).
+The existing funded constructor and checks complete in **28.549 seconds** within
+120 seconds. The four fresh grants are exactly $40/4,096 development, $0/0 unused
+validation, $85/10,240 final and one shared $25/2,048 for both plain controls.
+Their recorded spending, holds and operation counts are zero. No key was read;
+no study owner, provider call or native reviewer was started. The original unfunded
+artifacts and all historical grants remain unchanged. Independent funded-output
+review passes for all four grants, prepared artifacts and source bindings. Final
+documentation review and hosted short CI remain before release.
 
-There is **no live command to run yet**. The final funded handoff will give one exact standalone PowerShell command, explain what it spends/changes, when keys are entered and how to stop. Read-only optional commands will also have plain-English explanations. No keys belong in chat, a command line, a committed file or a report.
+The checked handoff is
+`C:\Users\arvik\code\buddha\runs\imp01-d8-capacity-combined-20261108-v3\NOT-CREATED-unified-launch.json`.
+Its SHA-256 is `5a399522680506e55986992ae4bb494c6141dbd3602b810be780b26197a8fdad`.
+The actual study workspace is that directory's `NOT-CREATED-unified-workspace`
+folder; its `review.json` will hold the local key-review record. These reserved
+names are intentional. The handoff file already exists; the study workspace
+and owners are created when the local run begins.
+
+## Local run command
+
+**Use this prepared command only after Codex confirms that the final checks
+passed and releases the local run instruction.** Open a new ordinary PowerShell
+window and make sure Docker Desktop is running. No `cd` command is needed:
+all paths below are absolute.
+
+```powershell
+& "C:\Program Files\Python313\python.exe" -B "C:\Users\arvik\code\buddha\runs\reviews\d8-capacity-runtime-20261108-v1\docs\conformance\unified-run.py" --handoff "C:\Users\arvik\code\buddha\runs\imp01-d8-capacity-combined-20261108-v3\NOT-CREATED-unified-launch.json" --sha256 "5a399522680506e55986992ae4bb494c6141dbd3602b810be780b26197a8fdad" --live --prompt-keys --confirm-project-keys
+```
+
+The command uses the already-checked Python 3.13 installation; PowerShell's `&`
+starts its quoted executable path. It starts **one paid computational comparison**,
+up to the approved combined
+$150/16,384-attempt scope. The long hash checks the exact approved handoff;
+`--live` permits provider requests, `--prompt-keys` asks only for missing keys,
+and `--confirm-project-keys` confirms the project-key/account assertions for both
+providers. `-B` avoids writing Python bytecode files.
+
+The command first runs checks, then asks for the OpenAI and Anthropic keys if
+those keys are not already set in this window. Key input is hidden: paste once
+and press Enter even though no characters appear. Existing environment keys
+are used instead of prompting again. Prompted keys are temporary for this launch; they are not saved globally.
+Do not put keys in chat, the command line, a report or a committed file.
+Provider access is checked during execution; this preparation does not
+authenticate the accounts.
+
+Checks before and after key entry are expected. An elapsed clock can restart
+when a new checking or execution phase begins; that does not mean a second run
+has started. Progress can show the active phase's $40 development cap, $85 final
+cap or shared $25 plain-control cap. Those are parts of the one $150 total,
+not extra allowances. A recorded attempt need not be a charged reply.
+
+Keep the window open while it runs. To stop, press **Ctrl+C once**, then wait
+for accounting and owned-process cleanup to finish. Repeated interruption or
+closing the window can prevent the final record. A stopped or incomplete run
+keeps its phase, reason, costs and unresolved holds; tell Codex rather than
+blindly running the command again.
+
+When computation finishes, just tell Codex that it completed; the saved files
+can be read from this workspace, so you do not need to paste the whole log.
+The approved native AI review follows separately after this computational
+stage, using at most forty-four fresh Sol/ULTRA contexts outside the API cap.
+Optional human review never blocks the AI-only branch.
+
+No new full qualification, capacity rebuild or long observation is scheduled
+by this handoff. [Approval](conformance/d8-live-approval.json),
+[funded delivery](conformance/d8-funded-handoff-delivery.json).
