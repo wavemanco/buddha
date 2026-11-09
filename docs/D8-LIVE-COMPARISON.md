@@ -1,10 +1,10 @@
 # D8: recovery handoff with masked key entry
 
-November 8, 2026. **The replacement handoff is funded, checked and independently reviewed.** Independent documentation review passes; ordinary short CI remains before Codex releases the command below. The original authentication-rejected partial has no answers or judge scores; its records and $0.585611 hold are preserved. [PLAN D8](PLAN.md), [approval](conformance/d8-recovery-approval.json), [delivery](conformance/d8-recovery-handoff-delivery.json).
+November 9, 2026. **The replacement run stopped after ten saved generation replies, before any judge request. Do not repeat the command below yet.** Recorded replacement cost is $0.009553 with no replacement hold. A provider-blocked reproduction found an input-mount filesystem error; the current acceptance is in [the stop review](D8-NATIVE-STOP-REVIEW.md). Historical preparation and launch details follow. The handoff had passed release checks before this launch. The original authentication-rejected partial has no answers or judge scores; its records and $0.585611 hold are preserved. [PLAN D8](PLAN.md), [approval](conformance/d8-recovery-approval.json), [delivery](conformance/d8-recovery-handoff-delivery.json).
 
 ## Recovery scope and allowance
 
-This is a fresh replacement of the same comparison, not an in-place key change. There are no completed answers to reuse. It retains P3/Ccompat2, capacity policy v2, three development and twenty-six final WildChat tasks, sixteen improvement opportunities, both plain-model controls and unchanged official NoveltyBench 1.1 settings. Native review remains at most forty-four fresh Sol/ULTRA contexts, using unpriced Codex-plan capacity outside the API cap; human review remains nonblocking.
+This is a fresh replacement of the same comparison, not an in-place key change. At preparation there were no completed answers to reuse. The launched replacement has since saved ten generation replies; preserve them for checked continuation. It retains P3/Ccompat2, capacity policy v2, three development and twenty-six final WildChat tasks, sixteen improvement opportunities, both plain-model controls and unchanged official NoveltyBench 1.1 settings. Native review remains at most forty-four fresh Sol/ULTRA contexts, using unpriced Codex-plan capacity outside the API cap; human review remains nonblocking.
 
 | Allocation | API allowance | Attempt limit |
 | --- | ---: | ---: |
@@ -16,7 +16,7 @@ This is a fresh replacement of the same comparison, not an in-place key change. 
 | Original retained liability | **$0.585611 held** | **1** |
 | Combined approved ceiling | **$150** | **16,384** |
 
-The hold is uncertain liability, not a confirmed charge or a released balance. New grants have zero recorded spending, holds, operations and owners. Metadata preparation completed in 23.133 seconds and funded checks in 31.012 seconds, each within 120 seconds. All 133 outputs and 348 source pins per stage pass independent review. The masked runtime is `16c0b9a6329cd483233e4acef823c61c62f23de1`; its 522 short checks per OS and all 14 quality checks pass. No new full-suite pass or scientific result is claimed.
+The hold is uncertain liability, not a confirmed charge or a released balance. At preparation the new grants had zero recorded spending, holds, operations and owners. That is a historical preparation result; current execution has ten recorded generation replies and $0.009553 spent. Metadata preparation completed in 23.133 seconds and funded checks in 31.012 seconds, each within 120 seconds. All 133 outputs and 348 source pins per stage pass independent review. The masked runtime is `16c0b9a6329cd483233e4acef823c61c62f23de1`; its 522 short checks per OS and all 14 quality checks pass. No new full-suite pass or scientific result is claimed.
 
 All thirty-two original stopped-run files and database contents remain byte-for-byte unchanged. All four original allowance databases are now read-only, including the unused plain-reference allowance. Windows write opens are denied; the existing SQLite write path was checked on a synthetic database. The original launcher still stops before key entry. **Keep those original allowance files read-only: do not unlock, replace or copy them for another run.** Only four project-file attributes changed; no global Windows setting or background service was added. [Python's Windows read-only flag](https://docs.python.org/3.13/library/os.html#os.chmod), [SQLite read-only handling](https://www.sqlite.org/rescode.html#readonly) and [Windows file sharing](https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-createfilew) describe the underlying controls. Local receipts record the observed checks. As with the other local budget guards, this assumes the host does not deliberately bypass them.
 
@@ -24,7 +24,7 @@ Outgoing requests remain unchanged: generator Luna LOW/4,096/default; partition 
 
 ## Recovery launch command
 
-**Use this command only after Codex confirms final release checks passed.** Open a new ordinary PowerShell window and make sure Docker Desktop is running. No `cd` is needed.
+**Historical recovery command: do not rerun until the startup failure and checked continuation are resolved.** Open a new ordinary PowerShell window and make sure Docker Desktop is running. No `cd` is needed.
 
 ```powershell
 Remove-Item -LiteralPath 'Env:\OPENAI_API_KEY', 'Env:\ANTHROPIC_API_KEY' -ErrorAction SilentlyContinue
