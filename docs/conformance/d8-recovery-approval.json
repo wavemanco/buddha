@@ -1,0 +1,145 @@
+{
+  "format": "buddha.d8-recovery-approval.v1",
+  "date": "2026-11-08",
+  "status": "approved_and_prospectively_adopted_before_funding_and_execution",
+  "user_answer": "Proceed with preparing the recovery handoff using the masked prompts. Preserve the stopped run and its hold, stay within the approved budget, and give me the new command when ready. No paid calls or new long runs.",
+  "question_item_id": null,
+  "proposal_pr": "https://github.com/wavemanco/buddha/pull/286",
+  "publication_head": "16c0b9a6329cd483233e4acef823c61c62f23de1",
+  "runtime_head": "16c0b9a6329cd483233e4acef823c61c62f23de1",
+  "allocations": {
+    "search": {
+      "budget_microusd": 39414389,
+      "max_calls": 4095
+    },
+    "validation": {
+      "budget_microusd": 0,
+      "max_calls": 0
+    },
+    "final": {
+      "budget_microusd": 85000000,
+      "max_calls": 10240
+    },
+    "shared_plain_references": {
+      "budget_microusd": 25000000,
+      "max_calls": 2048
+    }
+  },
+  "total_limits": {
+    "budget_microusd": 149414389,
+    "max_calls": 16383
+  },
+  "scope": {
+    "development_tasks": 3,
+    "final_tasks": 26,
+    "counted_improvement_opportunities": 16,
+    "plain_controls": [
+      "regenerate",
+      "in-context"
+    ],
+    "benchmark_version": "1.1",
+    "official_commit": "64a23be6b18ec1dacc298830aab276061b6e143c",
+    "initial_source_sha256": "b84ae0e392d6dd51d46342c8502c62b365eaabb9371394f13d7c47825d2ee1a7",
+    "evolved_source_sha256": "f1c832d5168986bf4bf220bb31f31754192cf262d523118b1f47ea0540fb6bc7",
+    "capacity_policy": "buddha.source-proposal-capacity-policy.v2",
+    "full_feedback_required": true,
+    "human_extension": "nonblocking"
+  },
+  "readiness_adoption": {
+    "reviewed_evidence_reuse_accepted": true,
+    "current_short_ci": 42529757777,
+    "methods_per_os": 522,
+    "quality_checks": 14,
+    "unchanged_core_runtime_files": 83,
+    "original_full_run": 42461804489,
+    "original_full_run_conclusion": "failure",
+    "new_full_suite_pass_claimed": false,
+    "no_additional_long_engineering_run_requested_or_authorized": true,
+    "production_change_since_original": "Only shared credentials.py: Windows asterisk input, safe input-error classification and direct platform guards. All scientific/request/runtime-accounting code remains byte-identical."
+  },
+  "native_review_selection": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "ultra",
+    "fork_turns": "none",
+    "max_contexts": 44,
+    "max_target_contexts": 32,
+    "max_staged_target_judgments": 64,
+    "max_whole_set_contexts_and_judgments": 12,
+    "billing": "Unpriced Codex-plan usage outside the API cap; not zero cost.",
+    "api_reviewer_fallback": false
+  },
+  "partial_results": {
+    "allowed": true,
+    "retain": [
+      "stage",
+      "reason",
+      "costs",
+      "unresolved_holds",
+      "usable_evidence"
+    ],
+    "unknown_charges_not_released": true,
+    "automatic_paid_retry_or_extension": false
+  },
+  "adopted_static_controls": {
+    "primary_proposal": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-recovery-combined-20261108-v1\\handoff-primary-unfunded.json",
+      "sha256": "69233e3955ecceefa803c6144785d76c8e57c9bd5996703cc997b2d4cf27a450"
+    },
+    "comparison_plan": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-recovery-combined-20261108-v1\\comparison-plan.json",
+      "sha256": "bbed80bde214bfeaff7154952e2934f02a3550f463edaef332f5d9d27fd74432"
+    },
+    "reference_input_bindings": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-recovery-combined-20261108-v1\\reference-input-bindings.json",
+      "sha256": "319e62d55b6e175801ef4f9d874a4df26007335887f4e42965c703d9e0ec9938"
+    },
+    "unallocated_combined_declaration": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-recovery-combined-20261108-v1\\unallocated-combined-declaration.json",
+      "sha256": "9c6c0cb04a98c36fc6be52e34d5134a7cd0cdac714607900466b6b8549b7ca9f"
+    }
+  },
+  "implementation_binding": {
+    "outer_launch": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-recovery-combined-20261108-v1\\NOT-CREATED-unified-launch.json",
+    "outer_workspace": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-recovery-combined-20261108-v1\\NOT-CREATED-unified-workspace",
+    "actual_raw_review": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-recovery-combined-20261108-v1\\NOT-CREATED-unified-workspace\\review.json",
+    "unfunded_placeholder_review": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-recovery-combined-20261108-v1\\NOT-CREATED-review.json",
+    "primary_launch": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-recovery-funded-20261108-v1\\primary-launch.json",
+    "explanation": "Use the existing workspace/review.json mapping. Fresh review accepts corrected locally entered keys; original review/receipt/owner records stay untouched."
+  },
+  "account_scope": "OpenAI and Anthropic Standard/default public pay-as-you-go; dedicated inference project/workspace keys, no custom/Scale/priority/fast/batch processing. Existing account assertions are reconfirmed locally with project keys; this preparation does not authenticate either account.",
+  "execution_authority": "User authorizes this recovery preparation and remaining-cap partition within the original150USD/16384 ceiling. No additional funding, assistant provider call, long run, automatic retry, native scientific review or main merge. User enters both keys and starts locally only after final checks and the exact command.",
+  "historical_scopes": "Original stopped comparison preserved as incomplete and its original grants protected from writes; retained original liability is deducted from this replacement. Other earlier scopes remain closed.",
+  "original_scope_approval": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\d8-funded-handoff-20261108-v1\\approval-decision.json",
+    "sha256": "7b9002e9808cce8179b4cc1c6845c134a7d41e11424862bca9cecef098016539"
+  },
+  "original_approved_ceiling": {
+    "budget_microusd": 150000000,
+    "max_calls": 16384
+  },
+  "retained_original_liability": {
+    "budget_microusd": 585611,
+    "max_calls": 1
+  },
+  "old_retirement": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\d8-recovery-handoff-20261108-v1\\old-retirement.json",
+    "sha256": "c9a56d5902a4ef198b6e2639e658b144d843c747f3c8956cb5e9f55cf575b250"
+  },
+  "readonly_proof": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\d8-recovery-handoff-20261108-v1\\readonly-proof-v2.json",
+    "sha256": "5f8a9fde1f9a6fc88cce3d077367c3ed9fef63c3b92830419355b2c42e47200b"
+  },
+  "old_launch_still_blocked": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\d8-recovery-handoff-20261108-v1\\old-launch-still-blocked.json",
+    "sha256": "d26ffbdb5e932ca6250981b9be987b27e1f5090ad1a6120f365c1790bca31016"
+  },
+  "request_continuity_review": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\d8-recovery-handoff-20261108-v1\\REQUEST-CONTINUITY-INDEPENDENT-REVIEW.json",
+    "sha256": "eb15fc9ec84aac81b3506104809c08848783bd9faf8dee99ec376e55b535d478"
+  },
+  "unfunded_output_review": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\d8-recovery-handoff-20261108-v1\\UNFUNDED-OUTPUT-INDEPENDENT-REVIEW.json",
+    "sha256": "1c47fda4d6cf88566469b04f53a3d93a3c8d893d440ba147967671bdc028ee2b"
+  },
+  "retirement_contract": "Four exact original grant files are read-only, set while existing/new write handles were excluded. All32 stopped-run files and DB bytes, one unknown attempt and585611microUSD hold remain unchanged. Normal supported paid paths need grant writes before transmission. Keep this OS protection; deliberate host unlocking/copying or direct provider use is outside this local control."
+}

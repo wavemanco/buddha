@@ -1,6 +1,51 @@
-# D8: approved live-comparison handoff
+# D8: recovery handoff with masked key entry
 
-November 8, 2026. **The first live attempt stopped on OpenAI authentication: HTTP 401 / `invalid_api_key`.** No answer or judge score completed. One attempt retains $0.585611 held and $0 recorded spending. Preserve the partial; do not rerun the command below with another key. [Diagnosis](conformance/d8-live-auth-stop.json), [PLAN D8](PLAN.md).
+November 8, 2026. **The replacement handoff is funded, checked and independently reviewed.** Independent documentation review passes; ordinary short CI remains before Codex releases the command below. The original authentication-rejected partial has no answers or judge scores; its records and $0.585611 hold are preserved. [PLAN D8](PLAN.md), [approval](conformance/d8-recovery-approval.json), [delivery](conformance/d8-recovery-handoff-delivery.json).
+
+## Recovery scope and allowance
+
+This is a fresh replacement of the same comparison, not an in-place key change. There are no completed answers to reuse. It retains P3/Ccompat2, capacity policy v2, three development and twenty-six final WildChat tasks, sixteen improvement opportunities, both plain-model controls and unchanged official NoveltyBench 1.1 settings. Native review remains at most forty-four fresh Sol/ULTRA contexts, using unpriced Codex-plan capacity outside the API cap; human review remains nonblocking.
+
+| Allocation | API allowance | Attempt limit |
+| --- | ---: | ---: |
+| Replacement development | $39.414389 | 4,095 |
+| Unused validation | $0 | 0 |
+| Replacement final assessment | $85 | 10,240 |
+| Both replacement plain references, shared | $25 | 2,048 |
+| Replacement total | **$149.414389** | **16,383** |
+| Original retained liability | **$0.585611 held** | **1** |
+| Combined approved ceiling | **$150** | **16,384** |
+
+The hold is uncertain liability, not a confirmed charge or a released balance. New grants have zero recorded spending, holds, operations and owners. Metadata preparation completed in 23.133 seconds and funded checks in 31.012 seconds, each within 120 seconds. All 133 outputs and 348 source pins per stage pass independent review. The masked runtime is `16c0b9a6329cd483233e4acef823c61c62f23de1`; its 522 short checks per OS and all 14 quality checks pass. No new full-suite pass or scientific result is claimed.
+
+All thirty-two original stopped-run files and database contents remain byte-for-byte unchanged. All four original allowance databases are now read-only, including the unused plain-reference allowance. Windows write opens are denied; the existing SQLite write path was checked on a synthetic database. The original launcher still stops before key entry. **Keep those original allowance files read-only: do not unlock, replace or copy them for another run.** Only four project-file attributes changed; no global Windows setting or background service was added. [Python's Windows read-only flag](https://docs.python.org/3.13/library/os.html#os.chmod), [SQLite read-only handling](https://www.sqlite.org/rescode.html#readonly) and [Windows file sharing](https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-createfilew) describe the underlying controls. Local receipts record the observed checks. As with the other local budget guards, this assumes the host does not deliberately bypass them.
+
+Outgoing requests remain unchanged: generator Luna LOW/4,096/default; partition Luna with the official omitted effort/output/tier overrides; utility Opus adaptive HIGH/16,000 with the official refusal-only Sonnet fallback. Captured source-authoring requests remain Sol LOW/32,768/default. The preserved official-source references below explain those settings. Authentication and actual completion remain unverified until execution.
+
+## Recovery launch command
+
+**Use this command only after Codex confirms final release checks passed.** Open a new ordinary PowerShell window and make sure Docker Desktop is running. No `cd` is needed.
+
+```powershell
+Remove-Item -LiteralPath 'Env:\OPENAI_API_KEY', 'Env:\ANTHROPIC_API_KEY' -ErrorAction SilentlyContinue
+& "C:\Program Files\Python313\python.exe" -B "C:\Users\arvik\code\buddha\runs\reviews\d8-recovery-runtime-20261108-v1\docs\conformance\unified-run.py" --handoff "C:\Users\arvik\code\buddha\runs\imp01-d8-recovery-combined-20261108-v1\NOT-CREATED-unified-launch.json" --sha256 "397f9e9aaa9808a689cd132f70a9e14f033225388138b04a69177ac8a7307a2c" --live --prompt-keys --confirm-project-keys
+```
+
+The first line clears only the two API-key variables inherited by this new PowerShell window. It spends no money and does not change saved Windows variables or other windows. This forces both prompts to request fresh input.
+
+The second line starts one paid computational comparison under the replacement allowance above. The hash binds the checked handoff. `--live` permits provider requests; `--prompt-keys` requests missing keys; `--confirm-project-keys` confirms the existing manual Standard/default, public pay-as-you-go account assertions for both providers. `-B` avoids writing Python bytecode files.
+
+Paste each complete key once and press Enter. The Windows prompts show `*` characters; Backspace removes the last character and its star. The key itself is never displayed. Keys are temporary for this launch and restored on exit. Stars confirm input arrived; provider access is checked during execution. Never put keys in chat, command arguments, reports or committed files.
+
+Keep the window open. Checks before and after key entry, and an elapsed clock restarting between phases, are expected. Progress shows the active phase's cap: $39.414389 development, $85 final or shared $25 plain references. These are parts of the replacement allowance, not extra funds. To stop, press **Ctrl+C once**, then wait for accounting and owned-process cleanup. A partial retains its stage, reason, recorded costs and unresolved holds. Tell Codex rather than repeating the command blindly.
+
+When computation finishes, tell Codex; the saved files are available here, so pasting the entire log is unnecessary. Approved native AI review follows separately. Human participation never blocks the AI-only branch. No provider call, scientific reviewer or long engineering run was started by preparation.
+
+---
+
+## Retained original guide and launch history
+
+The sections below preserve the original scope, evidence and failed launch instructions. The recovery instructions above supersede the old command and its original $40 development allocation.
 
 ## What this comparison will tell us
 

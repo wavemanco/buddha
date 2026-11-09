@@ -2,6 +2,14 @@
 
 The user authorized **up to US$50 for one first live experiment** on 2026-10-19. That is a combined cap across OpenAI and Anthropic, including seed candidates, proposals, generation and judging. It does not authorize repeated $50 experiments. The original and completed recovery attempts are historical evidence. The [living plan](PLAN.md) governs their linked continuation; do not restart either historical directory under a fresh allowance.
 
+## Current D8 recovery
+
+The user authorized preparation of the masked-prompt recovery within the existing **$150 / 16,384-attempt** ceiling. The original partial retains **$0.585611 held / one attempt**. The replacement receives **$149.414389 / 16,383 attempts**: development $39.414389 / 4,095, final $85 / 10,240, shared plain controls $25 / 2,048, validation $0 / 0. This is a partition of the original allowance, not another $150 allocation.
+
+All original records and database contents are preserved. The four old allowance files are read-only and must remain protected; their hold is neither released nor declared a charge. Fresh grants and the handoff pass existing checks and independent readback, with zero new spending, holds or owners. Independent documentation review passes; short CI precedes release. [Recovery guide and exact command](D8-LIVE-COMPARISON.md#recovery-launch-command), [approval](conformance/d8-recovery-approval.json), [delivery](conformance/d8-recovery-handoff-delivery.json).
+
+The new guide clears only the new PowerShell window's two inherited key variables before launching, so both masked prompts appear. It changes no global Windows setting. The old command is historical and blocked. Native review retains its approved unpriced Codex-plan scope outside the API allowance; human review is nonblocking.
+
 ## Masked local key entry
 
 The updated Windows prompt shows one `*` for each character typed or pasted. Paste once, then press Enter; Backspace removes the last character and its star. Ctrl+C cancels input. The key itself is never displayed. Both OpenAI and Anthropic prompts use the shared helper.
