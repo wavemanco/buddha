@@ -1,0 +1,182 @@
+{
+  "format": "buddha.d8-recovery-handoff-delivery.v1",
+  "date": "2026-11-08",
+  "status": "funded_configuration_and_independent_readback_pass_no_execution",
+  "publication_base": "16c0b9a6329cd483233e4acef823c61c62f23de1",
+  "executing_source": "16c0b9a6329cd483233e4acef823c61c62f23de1",
+  "executing_runtime": "C:/Users/arvik/code/buddha/runs/reviews/d8-recovery-runtime-20261108-v1",
+  "production_change_since_stopped_run": "Only shared credentials.py masked Windows prompt and safe input-error handling; remaining83corefiles/scoring/request/accounting code unchanged.",
+  "runtime_python_files": 348,
+  "approval": {
+    "path": "runs/checks/d8-recovery-handoff-20261108-v1/approval-decision.json",
+    "sha256": "76b15862553d6075ae501c54fef43aac7c9b4eeb59d4f1e0d0d306d17b22e91d"
+  },
+  "metadata_readback": {
+    "path": "runs/checks/d8-recovery-handoff-20261108-v1/UNFUNDED-PREPARATION-READBACK.json",
+    "sha256": "32863ecdea34442dfc9fada2147c24dee1cb06e46da891c839b735a6c947a510"
+  },
+  "independent_unfunded_review": {
+    "path": "runs/checks/d8-recovery-handoff-20261108-v1/UNFUNDED-OUTPUT-INDEPENDENT-REVIEW.json",
+    "sha256": "1c47fda4d6cf88566469b04f53a3d93a3c8d893d440ba147967671bdc028ee2b"
+  },
+  "request_review": {
+    "path": "runs/checks/d8-recovery-handoff-20261108-v1/REQUEST-CONTINUITY-INDEPENDENT-REVIEW.json",
+    "sha256": "eb15fc9ec84aac81b3506104809c08848783bd9faf8dee99ec376e55b535d478"
+  },
+  "readonly_proof": {
+    "path": "runs/checks/d8-recovery-handoff-20261108-v1/readonly-proof-v2.json",
+    "sha256": "5f8a9fde1f9a6fc88cce3d077367c3ed9fef63c3b92830419355b2c42e47200b"
+  },
+  "old_retirement": {
+    "path": "runs/checks/d8-recovery-handoff-20261108-v1/old-retirement.json",
+    "sha256": "c9a56d5902a4ef198b6e2639e658b144d843c747f3c8956cb5e9f55cf575b250"
+  },
+  "retirement_independent_review": {
+    "path": "runs/checks/d8-recovery-handoff-20261108-v1/RETIREMENT-INDEPENDENT-REVIEW.json",
+    "sha256": "406859d306373d72ffff8bfe1b777f72e0a9027fd0e1104288a52b278ca30c25"
+  },
+  "old_launch_blocked_check": {
+    "path": "runs/checks/d8-recovery-handoff-20261108-v1/old-launch-still-blocked.json",
+    "sha256": "d26ffbdb5e932ca6250981b9be987b27e1f5090ad1a6120f365c1790bca31016"
+  },
+  "prelaunch_independent_review": {
+    "path": "runs/checks/d8-recovery-handoff-20261108-v1/FUNDED-PRELAUNCH-INDEPENDENT-REVIEW.json",
+    "sha256": "7ce93a57c415e8501c5b2a798696ce31e46a77c8cb381fb93fc0d3c746a8f0b7"
+  },
+  "constructor": {
+    "path": "runs/checks/d8-recovery-handoff-20261108-v1/prepare-recovery-funded-once.py",
+    "sha256": "6890e3ae567c212cc298182e2115584f157f64bed60f544a9200284ebfc247e2"
+  },
+  "invocation": {
+    "path": "runs/checks/d8-recovery-handoff-20261108-v1/constructor-invocation.json",
+    "sha256": "3d4b229411bbdcde4f5586fed389cd53d5f7035649e2736f652dbb27a4964f94"
+  },
+  "funded_result": {
+    "path": "runs/checks/d8-recovery-handoff-20261108-v1/funded-preparation-result.json",
+    "sha256": "1ba5e37bfa47c52b421c15f5d54b56917cdb51eb319cef31361a59ca623c8f41"
+  },
+  "preflight": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-recovery-funded-20261108-v1\\preflight.json",
+    "sha256": "16720e33304efd3a1e22deac8a3683232407914013ff0ff33fb525d091b9a2f4"
+  },
+  "handoff": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-recovery-combined-20261108-v1\\NOT-CREATED-unified-launch.json",
+    "sha256": "397f9e9aaa9808a689cd132f70a9e14f033225388138b04a69177ac8a7307a2c"
+  },
+  "grants": {
+    "final": {
+      "budget_microusd": 85000000,
+      "id": "imp01-d8-recovery-20261108-v1-final",
+      "max_calls": 10240,
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-recovery-funded-20261108-v1\\authorization-final.sqlite3",
+      "scope": "buddha.evaluation-trial.v1:{\"definition_sha256\":\"54fb54fcf26663fb75acac44b7ec60b5b67bd4006109ec1e06a45d86be858019\",\"phase\":\"final\",\"root\":\"C:\\\\Users\\\\arvik\\\\code\\\\buddha\\\\runs\\\\imp01-d8-recovery-review-20261108-v1\\\\NOT-CREATED-trial-runtime\"}",
+      "terms_sha256": "063730bdd5fef3544978ddf50bbe446a13fc4d0045404f96c22c685e5fa9d3f3"
+    },
+    "search": {
+      "budget_microusd": 39414389,
+      "id": "imp01-d8-recovery-20261108-v1-search",
+      "max_calls": 4095,
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-recovery-funded-20261108-v1\\authorization-search.sqlite3",
+      "scope": "buddha.evaluation-trial.v1:{\"definition_sha256\":\"54fb54fcf26663fb75acac44b7ec60b5b67bd4006109ec1e06a45d86be858019\",\"phase\":\"search\",\"root\":\"C:\\\\Users\\\\arvik\\\\code\\\\buddha\\\\runs\\\\imp01-d8-recovery-review-20261108-v1\\\\NOT-CREATED-trial-runtime\"}",
+      "terms_sha256": "b5cb907b253a24b92f4a92fe0ad496341f34abed8041f889866ed862caff3dcf"
+    },
+    "shared_plain_references": {
+      "budget_microusd": 25000000,
+      "id": "imp01-d8-recovery-20261108-v1-shared_plain_references",
+      "max_calls": 2048,
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-recovery-combined-20261108-v1\\NOT-CREATED-reference-authority.sqlite3",
+      "scope": "buddha.plain-references.v1:bbed80bde214bfeaff7154952e2934f02a3550f463edaef332f5d9d27fd74432",
+      "terms_sha256": "60bab01466c9854c49fb7c24833c1e027c71e2dc85ae7a2043e328f32d6afef5"
+    },
+    "validation": {
+      "budget_microusd": 0,
+      "id": "imp01-d8-recovery-20261108-v1-validation",
+      "max_calls": 0,
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-recovery-funded-20261108-v1\\authorization-validation.sqlite3",
+      "scope": "buddha.evaluation-trial.v1:{\"definition_sha256\":\"54fb54fcf26663fb75acac44b7ec60b5b67bd4006109ec1e06a45d86be858019\",\"phase\":\"validation\",\"root\":\"C:\\\\Users\\\\arvik\\\\code\\\\buddha\\\\runs\\\\imp01-d8-recovery-review-20261108-v1\\\\NOT-CREATED-trial-runtime\"}",
+      "terms_sha256": "819b773cce02478b539d10430d00ca3c49d9297f3a0484a70a1991a2b3ab3b2f"
+    }
+  },
+  "funded_check": {
+    "status": "complete",
+    "seconds": 31.01180039998144,
+    "limit_seconds": 120,
+    "timeout": false,
+    "owners_created": 0,
+    "new_spent_microusd": 0,
+    "new_reserved_microusd": 0,
+    "new_operation_count": 0
+  },
+  "budget": {
+    "original_approved_ceiling": {
+      "budget_microusd": 150000000,
+      "max_calls": 16384
+    },
+    "retained_original_liability": {
+      "budget_microusd": 585611,
+      "max_calls": 1
+    },
+    "replacement_limits": {
+      "budget_microusd": 149414389,
+      "max_calls": 16383
+    },
+    "old_plus_new_exact": {
+      "budget_microusd": 150000000,
+      "max_calls": 16384
+    }
+  },
+  "retirement": {
+    "status": "retired_and_readonly_before_replacement_funding",
+    "all32_original_file_bytes_preserved": true,
+    "old_database_rows_unchanged": true,
+    "old_owner_binding_not_deactivated_or_rewritten": true,
+    "four_old_grants_readonly": true,
+    "normal_write_opens_denied_after_all_handles_closed": {
+      "search": 5,
+      "validation": 5,
+      "final": 5,
+      "shared_plain_references": 5
+    },
+    "hold_released": false,
+    "original_receipt_reconciled": false,
+    "actual_charge_unknown": true,
+    "protection_must_remain_intact": true
+  },
+  "source_qualification": {
+    "current_short_ci": 42529757777,
+    "methods_per_os": 522,
+    "quality_checks": 14,
+    "no_new_full_suite_pass": true,
+    "original_full_qualification_failure_preserved": true
+  },
+  "scientific_scope": "Same P3/Ccompat2, capacityv2,3development/26finalWildChat tasks,16opportunities,bothplaincontrols,officialNB1.1/64a23; native44freshSolULTRA contexts remain unpriced outsideAPIcap; nonblockinghumanextension. No valid answer/judge score from the authentication-rejected partial is reused.",
+  "operator": {
+    "python": "C:/Program Files/Python313/python.exe",
+    "path": "C:/Users/arvik/code/buddha/runs/reviews/d8-recovery-runtime-20261108-v1/docs/conformance/unified-run.py",
+    "flags": [
+      "--live",
+      "--prompt-keys",
+      "--confirm-project-keys"
+    ],
+    "user_starts_locally": true,
+    "clear_existing_keys_only_in_new_powershell_window": true,
+    "first_line": "Remove-Item -LiteralPath 'Env:\\OPENAI_API_KEY', 'Env:\\ANTHROPIC_API_KEY' -ErrorAction SilentlyContinue"
+  },
+  "remaining_release_checks": [
+    "Ordinary hosted short CI for documentation publication"
+  ],
+  "provider_calls": 0,
+  "real_keys_read": false,
+  "native_scientific_contexts_started": 0,
+  "new_long_runs": false,
+  "automatic_retry_or_budget_extension": false,
+  "main_merge": false,
+  "funded_output_independent_review": {
+    "path": "runs/checks/d8-recovery-handoff-20261108-v1/FUNDED-OUTPUT-INDEPENDENT-REVIEW.json",
+    "sha256": "2457d0dcc54474fae0bf9bbf77c8765eff02231c59e2c7a505147dfc87714914"
+  },
+  "prepublication_docs_command_review": {
+    "path": "runs/checks/d8-recovery-handoff-20261108-v1/DOCS-COMMAND-INDEPENDENT-REVIEW.json",
+    "sha256": "3216ac6f7dd67a2aed4869e6550280ec3e3ea029cda4d82a01ec2e1a870775e4"
+  }
+}
