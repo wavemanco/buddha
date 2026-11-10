@@ -1,4 +1,52 @@
-# D8: recovery handoff with masked key entry
+# D8: corrected-source comparison handoff
+
+November 9, 2026. **The corrected-source handoff has passed preflight and independent readback. Use only the new command below.** This handoff uses the corrected source `8fa7dc9c3d88ae748990d7530586cd7adcdfa776`. Native evaluator inputs now use scoped staging beside the allowance files, avoiding the reproduced deep-folder mount failure while keeping exact input and custody checks. [Correction](D8-NATIVE-STOP-REVIEW.md#bounded-resolution-follow-up), [current delivery](conformance/d8-corrected-handoff-delivery.json), [PLAN D8](PLAN.md).
+
+## Current scope and remaining allowance
+
+The comparison is unchanged: original versus evolved Python improvers, three development and twenty-six prospectively separated final WildChat tasks, sixteen improvement opportunities, both plain-model controls and official NoveltyBench 1.1. This run generates fresh samples. The ten answers from the stopped recovery remain unchanged historical evidence; they are not imported or relabeled as new samples. Their $0.009553 recorded cost and the earlier $0.585611 unresolved hold are deducted before this replacement receives funding.
+
+| Allocation | API cap | Recorded-attempt limit |
+| --- | ---: | ---: |
+| Corrected development | $39.404836 | 4,085 |
+| Unused validation | $0 | 0 |
+| Corrected final assessment | $85 | 10,240 |
+| Both corrected plain references, shared | $25 | 2,048 |
+| New handoff total | **$149.404836** | **16,373** |
+| Preserved recorded cost | $0.009553 | 10 |
+| Preserved unresolved hold | $0.585611 | 1 |
+| Original approved ceiling | **$150** | **16,384** |
+
+The new allowance plus preserved cost and hold fits the existing approval exactly. These are spending limits, not expected charges. All eight earlier allowance files are fenced read-only before replacement funding; database bytes, operation/owner rows and saved answers are preserved. Do not remove those protections or repeat either retired command. Their read-only checks may still pass; dispatch writes are blocked by the file protections.
+
+Both corrected-source short CI jobs pass: 547 methods per OS, zero failures/errors/skips and all fourteen quality checks. The actual deep-path Gateway/official-partition/custody check passed in 34.790 seconds with paid access blocked. An additional 1.016-second mount-read check covered the prospective agent/official directory depths. These checks cover the observed startup failure; they do not guarantee uninterrupted vendor service, every future descendant, or a completed scientific comparison. No new full-suite pass is claimed.
+
+Request settings remain unchanged: generator Luna LOW/4,096/default; official partition Luna with no explicit reasoning-effort, output-token or service-tier override; utility Opus adaptive HIGH/16,000 with official refusal-only Sonnet fallback; source author Sol LOW/32,768/default. The generator remains configurable in the code. Approved native AI review remains at most forty-four fresh Sol/ULTRA contexts, using unpriced Codex-plan capacity outside the API cap; human review remains nonblocking.
+
+Keep each `native-inputs` folder with its allowance/run records. It preserves the exact evaluator inputs for later inspection.
+
+## Corrected-source launch command
+
+Open a **new ordinary PowerShell window**, with Docker Desktop running. No administrator rights or `cd` are needed. Run both lines once:
+
+```powershell
+Remove-Item -LiteralPath 'Env:\OPENAI_API_KEY', 'Env:\ANTHROPIC_API_KEY' -ErrorAction SilentlyContinue
+& "C:\Program Files\Python313\python.exe" -B "C:\Users\arvik\code\buddha\runs\reviews\d8-corrected-runtime-20261109-v1\docs\conformance\unified-run.py" --handoff "C:\Users\arvik\code\buddha\runs\imp01-d8-corrected-combined-20261109-v1\NOT-CREATED-unified-launch.json" --sha256 "e988fb8cd5c01267eb554d4471c027b90d1dbfda2142c4d85e14fe69e2609488" --live --prompt-keys --confirm-project-keys
+```
+
+The first line clears only this window's inherited OpenAI and Anthropic key variables, forcing fresh masked prompts. It spends no money and changes no saved Windows settings or other windows.
+
+The second line starts one paid comparison within the remaining allowance above. The hash checks the prepared handoff. `--live` permits provider calls; `--prompt-keys` asks for missing keys; `--confirm-project-keys` confirms the previously verified Standard/default public pay-as-you-go account settings for both providers. `-B` avoids Python bytecode files.
+
+Paste each complete key once and press Enter. Asterisks confirm characters arrived; the keys themselves are never displayed. Keys are temporary for this process. Never put them in chat or the command itself.
+
+Keep the window open. Checks before and after key entry are expected; phase clocks can restart. Progress displays the active phase's cap: $39.404836 development, $85 final, or $25 shared plain controls. To stop, press **Ctrl+C once**, then allow accounting and owned-process cleanup to finish. If it stops, tell Codex rather than starting another attempt: partial results retain their stage, reason, costs and unresolved holds.
+
+When computation finishes, tell Codex. The saved files are available here; pasting the entire log is unnecessary. Approved AI review and reporting follow separately. Preparation itself starts no paid call, scientific reviewer or long engineering run.
+
+---
+
+## Retained masked-recovery handoff history
 
 November 9, 2026. **The replacement run stopped after ten saved generation replies, before any judge request. Do not repeat the command below yet.** Recorded replacement cost is $0.009553 with no replacement hold. A controlled comparison found a deep-folder mount failure. The corrected producer and passive reader now pass the actual host/evaluator check with paid access blocked; source `61000d6` now passes both short CI jobs (547 methods per OS), and a newly bound handoff remains. See [the correction](D8-NATIVE-STOP-REVIEW.md#bounded-resolution-follow-up). Historical preparation and launch details follow. The handoff had passed release checks before this launch. The original authentication-rejected partial has no answers or judge scores; its records and $0.585611 hold are preserved. [PLAN D8](PLAN.md), [approval](conformance/d8-recovery-approval.json), [delivery](conformance/d8-recovery-handoff-delivery.json).
 
