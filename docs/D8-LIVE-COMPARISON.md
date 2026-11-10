@@ -1,6 +1,6 @@
 # D8: corrected-source comparison handoff
 
-November 9, 2026. **The corrected-source handoff has passed preflight and independent readback. Use only the new command below.** This handoff uses the corrected source `8fa7dc9c3d88ae748990d7530586cd7adcdfa776`. Native evaluator inputs now use scoped staging beside the allowance files, avoiding the reproduced deep-folder mount failure while keeping exact input and custody checks. [Correction](D8-NATIVE-STOP-REVIEW.md#bounded-resolution-follow-up), [current delivery](conformance/d8-corrected-handoff-delivery.json), [PLAN D8](PLAN.md).
+November 9, 2026. **This run stopped on an internal generation-call quota. Do not repeat the command below.** See [the diagnosis and reuse gates](D8-CALL-QUOTA-STOP.md). The handoff passed its recorded preflight and independent readback before launch. This handoff uses the corrected source `8fa7dc9c3d88ae748990d7530586cd7adcdfa776`. Native evaluator inputs now use scoped staging beside the allowance files, avoiding the reproduced deep-folder mount failure while keeping exact input and custody checks. [Correction](D8-NATIVE-STOP-REVIEW.md#bounded-resolution-follow-up), [current delivery](conformance/d8-corrected-handoff-delivery.json), [PLAN D8](PLAN.md).
 
 ## Current scope and remaining allowance
 

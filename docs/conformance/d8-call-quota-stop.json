@@ -1,0 +1,62 @@
+{
+  "format": "buddha.d8-call-quota-stop-delivery.v1",
+  "date": "2026-11-09",
+  "status": "diagnosed_no_retry_no_source_change",
+  "executing_source": "8fa7dc9c3d88ae748990d7530586cd7adcdfa776",
+  "evidence": {
+    "path": "runs/checks/d8-quota-stop-review-20261109-v1/evidence.json",
+    "sha256": "8d4e3654aa3b7119fcf23c0faea60eed907bab05695fd5d91ff01b14a92e422b"
+  },
+  "trigger": {
+    "scope": "one_generation_worker",
+    "max_callbacks": 12,
+    "requested": 13,
+    "completed": 12,
+    "blocked_before_dispatch": 1,
+    "provider_quota": false,
+    "api_budget_exhausted": false,
+    "elapsed_session_seconds": 76.02886,
+    "cleanup": "removed",
+    "spent_microusd": 17359,
+    "reserved_microusd": 0
+  },
+  "funding": {
+    "operation_count": 403,
+    "spent_microusd": 2978370,
+    "reserved_microusd": 0,
+    "development_cap_microusd": 39404836,
+    "development_max_calls": 4085
+  },
+  "progress": {
+    "attempted_opportunities": 4,
+    "completed_cells": 0,
+    "completed_common": 4,
+    "completed_opportunities": 3,
+    "expected_cells": 8,
+    "expected_common": 4,
+    "expected_opportunities": 16,
+    "in_flight_opportunities": 1,
+    "unattempted_opportunities": 12
+  },
+  "reuse": {
+    "inactive_anchored_owners": 115,
+    "closed_owner_calls": 391,
+    "closed_owner_spent_microusd": 2961011,
+    "active_unsealed_owners": 1,
+    "unsealed_owner_calls": 12,
+    "unsealed_owner_spent_microusd": 17359,
+    "same_command_resume_cleared": false,
+    "current_format_continuation_verified": false
+  },
+  "cap_origin": {
+    "commit": "a9209c7e62942ecf474c4b1c2fcdc9638e64e8ec",
+    "date": "2026-10-22",
+    "source": "docs/SOURCE-EXPERIMENT.md:30",
+    "nature": "manually selected pilot engineering ceiling; no documented derivation or calibration found"
+  },
+  "all_403_calls_reusable_claimed": false,
+  "continuation_cleared": false,
+  "paid_execution_cleared": false,
+  "code_or_run_record_changes": false,
+  "new_long_runs": false
+}
