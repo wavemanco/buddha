@@ -56,7 +56,10 @@ All42 stopped-file hashes, ten answers and eight grant attributes are preserved.
 Actual replacement spending remains $0.009553 with no replacement hold; the
 original authentication-rejected attempt retains its separate $0.585611 hold.
 No stopped-runtime source, descriptor, budget or operation record was edited.
-A newly bound checked handoff is required; the old live command is not cleared.
+Source `61000d6` passes [short CI](https://github.com/wavemanco/buddha/actions/runs/42733728721):
+547 methods per OS, zero failures/errors/skips and all fourteen quality checks.
+This is not a new full qualification. A newly bound checked handoff is required;
+the old live command is not cleared.
 Retain the ten historical answers rather than adding a special migration system.
 Any new generation must be explicitly described in that handoff and stay inside
 the remaining approved allowance. No paid call or new long run follows automatically.
