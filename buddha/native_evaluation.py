@@ -391,7 +391,14 @@ def _owner_stage(
     control_hashes: dict[str, object] | None = None,
 ) -> tuple[Path, Path]:
     descriptor, inputs = pipeline._native_descriptor(
-        directory, index, definition, release, source.answers_path, available, frozen
+        directory,
+        index,
+        definition,
+        release,
+        source.answers_path,
+        available,
+        frozen,
+        staging_root=authority.path.parent / "native-inputs",
     )
     native = _object(definition["native"])
     selected, roots = pipeline._component(native)

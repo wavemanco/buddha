@@ -155,6 +155,20 @@ class NativeEvaluationTests(NativeEvaluationFixture):
             with self.subTest(index=index):
                 self.assertIn(expected, record["invocation"]["inputs"])
 
+    def test_deep_evaluation_uses_private_shallow_native_mounts(self):
+        directory = self.root.joinpath(*("e" + str(index) for index in range(18)))
+        directory.parent.mkdir(parents=True)
+        self.prepare(directory=directory)
+        self.assertEqual(self.run_evaluation(directory=directory)["status"], "complete")
+        root = self.fixture.authority.path.parent / "native-inputs"
+        self.assertEqual(len(self.fixture.events), 3)
+        for event in self.fixture.events:
+            index = event["initial"]["command"]["index"] + 1
+            leaf = root / sha(_json([str(directory.absolute()), index]))
+            self.assertEqual(dict(event["session"].spec.mounts)["/inputs"], leaf)
+            self.assertEqual(len(leaf.relative_to(root).parts), 1)
+        self.assertEqual(self.answers_path.read_bytes(), self.answers.to_bytes() + b"\n")
+
     def test_two_fresh_occasions_reuse_exact_anchored_c1_and_create_distinct_paid_identities(self):
         self.prepare()
         first = self.run_evaluation()

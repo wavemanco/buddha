@@ -127,11 +127,21 @@ def _native_descriptor(
     answers: Path,
     available: dict[str, Path],
     frozen_files: dict[Path, str],
+    *,
+    staging_root: Path | None = None,
 ) -> tuple[Path, list[Path]]:
     native = _object(definition["native"])
     selected, roots = _component(native)
     flow = _object(cast(list[object], definition["stages"])[index - 1])
     staging = directory / "staging" / str(index)
+    if staging_root is not None:
+        if not isinstance(staging_root, Path):
+            raise PipelineError("native staging needs an explicit Path")
+        _root(staging_root.parent)
+        staging_root.mkdir(exist_ok=True)
+        _root(staging_root)
+        # Deep Windows bind sources can fail inside Docker despite readable host bytes.
+        staging = staging_root / _sha([str(directory.absolute()), index])
     if not staging.exists():
         staging.mkdir()
     _root(staging)

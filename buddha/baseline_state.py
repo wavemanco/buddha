@@ -91,6 +91,14 @@ def _prefix(reader: NativeEvidence, tasks: TaskSet) -> int:
         completed += 1
     if completed == 0 and "native-answers.jsonl" in reader.capture.entries:
         raise BaselineStateError("native answers precede sealed generation")
+    for index in range(1, len(stages) + 1):
+        staging = (
+            reader.authorization.parent
+            / "native-inputs"
+            / _sha(_json([str(root.absolute()), index]))
+        )
+        if not _absent(staging) and index > completed:
+            raise BaselineStateError("native preparation skips a sealed predecessor")
     for name in reader.capture.entries:
         if name.startswith("command-") and "/" not in name:
             token = name.removeprefix("command-").removesuffix(".json")

@@ -311,14 +311,27 @@ class _Capture:
         observation = _PASSIVE_TREES.get()
         self.entries = self._tree_entries() if observation is None else observation.entries(self)
         self._receipts: dict[Path, tuple[int, str]] = {}
+        self._watched_trees: dict[Path, dict[str, tuple[int, int, int, int, int]]] = {}
         self.raw: Mapping[Path, bytes] = _CapturedBytes(self)
         self.total = 0
         self.databases: set[Path] = set()
 
-    def _tree_entries(self) -> dict[str, tuple[int, int, int, int, int]]:
+    def _tree_entries(self, root: Path | None = None) -> dict[str, tuple[int, int, int, int, int]]:
+        root = self.root if root is None else root
         if self._maximum_entries == MAX_FILES:
-            return _entries(self.root)
-        return _entries(self.root, maximum=self._maximum_entries)
+            return _entries(root)
+        return _entries(root, maximum=self._maximum_entries)
+
+    def watch_tree(self, root: Path) -> dict[str, tuple[int, int, int, int, int]]:
+        """Keep a selected external directory's census within this observation."""
+        entries = self._tree_entries(root)
+        if root in self._watched_trees and self._watched_trees[root] != entries:
+            raise _Busy("observed external tree changed")
+        trees = self._watched_trees | {root: entries}
+        if len(self.entries) + sum(map(len, trees.values())) > self._maximum_entries:
+            raise EvidencePathLimitError("observed tree entry ceiling exceeded")
+        self._watched_trees = trees
+        return dict(entries)
 
     def read(self, path: Path, maximum: int = MAX_MANIFEST_BYTES) -> bytes:
         if path in self._receipts:
@@ -367,6 +380,9 @@ class _Capture:
             self.sidecars(path)
         if self._tree_entries() != self.entries:
             raise _Busy("observed local tree changed")
+        for root, entries in self._watched_trees.items():
+            if self._tree_entries(root) != entries:
+                raise _Busy("observed external tree changed")
         return {
             path.relative_to(self.root).as_posix()
             if path.is_relative_to(self.root)
@@ -413,6 +429,14 @@ class _Capture:
         total = sum(size for size, _ in receipts.values())
         if total > self._maximum:
             raise EvidenceTotalLimitError("evidence observation exceeds its total byte ceiling")
+        trees = dict(self._watched_trees)
+        for root, entries in source._watched_trees.items():
+            if root in trees and trees[root] != entries:
+                raise _Busy("observed external tree changed")
+            trees[root] = entries
+        if len(self.entries) + sum(map(len, trees.values())) > self._maximum_entries:
+            raise EvidencePathLimitError("observed tree entry ceiling exceeded")
+        self._watched_trees = trees
         self._receipts, self.total, self.databases = (
             receipts,
             total,

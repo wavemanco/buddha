@@ -1080,7 +1080,10 @@ class ValidationStudyTests(unittest.TestCase):
                 | available
                 | seals
                 | {
-                    evaluation / "staging" / str(index) / (str(ordinal) + ".bin")
+                    self.root
+                    / "native-inputs"
+                    / sha(_json([str(evaluation.absolute()), index]))
+                    / (str(ordinal) + ".bin")
                     for ordinal in range(len(stage["inputs"]))
                 }
                 | set(native_evaluation._sources())
