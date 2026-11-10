@@ -11,6 +11,7 @@ from unittest.mock import patch
 
 from test_native_evaluation import NativeEvaluationFixture
 
+from buddha import native_pipeline
 from buddha.authorization import Authorization
 from buddha.doctor import _authority
 from buddha.gateway import Gateway
@@ -32,6 +33,31 @@ class CallerEvidenceError(ReleaseError):
 
 
 class RetainedCaptureTests(unittest.TestCase):
+    def test_external_tree_watch_keeps_the_existing_entry_ceiling(self):
+        from buddha.doctor import _Capture, _observation_policy
+        from buddha.search_evidence import EvidencePathLimitError
+
+        reader, _, _, _ = self.fixture()
+        leaf = reader.root.parent / "selected-inputs"
+        leaf.mkdir()
+        (leaf / "0.bin").write_bytes(b"selected")
+        with _observation_policy(
+            {
+                "format": "buddha.evidence-observation-policy.v2",
+                "max_total_bytes": 1024,
+                "max_resident_bytes": 0,
+                "max_tree_entries": 1,
+                "max_consumed_paths": 10,
+            }
+        ):
+            capture = _Capture(reader.root)
+        entries = capture.watch_tree(leaf)
+        entries.clear()
+        capture.finish()
+        (leaf / "foreign.bin").write_bytes(b"unselected")
+        with self.assertRaises(EvidencePathLimitError):
+            capture.watch_tree(leaf)
+
     def fixture(self):
         from buddha.doctor import _Capture
 
@@ -76,6 +102,19 @@ class RetainedCaptureTests(unittest.TestCase):
         with self.assertRaises(_Busy):
             reader.finish()
 
+    def test_capture_adoption_retains_an_external_tree_watch(self):
+        from buddha.doctor import _Busy
+
+        reader, captured, data, _ = self.fixture()
+        leaf = data.parent.parent / "native-input-leaf"
+        leaf.mkdir()
+        (leaf / "0.bin").write_bytes(b"original selected input")
+        captured.watch_tree(leaf)
+        reader.capture.adopt(captured)
+        (leaf / "late.bin").write_bytes(b"foreign entry after adoption")
+        with self.assertRaises(_Busy):
+            reader.capture.finish()
+
     def test_join_catches_late_bytes_and_sidecars_even_when_metadata_is_held_constant(self):
         from buddha.doctor import _Busy
 
@@ -112,8 +151,8 @@ class NativeEvidenceTests(unittest.TestCase):
             if path.is_file()
         }
 
-    def reader(self, error_type=NativeEvidenceError):
-        f = self.fixture
+    def reader(self, error_type=NativeEvidenceError, *, fixture=None):
+        f = fixture or self.fixture
         reader = NativeEvidence(f.directory, f.fixture.authority.path, error_type=error_type)
         reader.release = f.fixture.agent.release
         reader.template = {"native": f.record["native"], "stages": f.record["stages"]}
@@ -221,7 +260,8 @@ class NativeEvidenceTests(unittest.TestCase):
         f = self.fixture
         reader = self.reader()
         report, _ = reader.stage(f.directory, 1, baseline=False)
-        staged = f.directory / "staging/1/0.bin"
+        command = json.loads((f.directory / "command-1.json").read_bytes())
+        staged = Path(dict(command["executor"]["mounts"])["/inputs"]) / "0.bin"
         with self.changed(staged, staged.read_bytes() + b"\n"):
             with self.assertRaisesRegex(NativeEvidenceError, "retained input differs"):
                 self.reader().native(
@@ -229,7 +269,122 @@ class NativeEvidenceTests(unittest.TestCase):
                     1,
                     report,
                     f.answers_path,
-                    {"answers.jsonl": f.directory / "native-answers.jsonl"},
+                    {
+                        reader.release.to_record()["artifacts"]["answers"]: f.directory
+                        / "native-answers.jsonl"
+                    },
+                )
+
+    def test_private_staging_rejects_an_existing_extra_entry(self):
+        fixture, reader = self.fixture, self.reader()
+        command = json.loads((fixture.directory / "command-1.json").read_bytes())
+        extra = Path(dict(command["executor"]["mounts"])["/inputs"]) / "foreign.bin"
+        extra.write_bytes(b"unselected private-mount entry")
+        try:
+            with self.passive(), self.assertRaisesRegex(NativeEvidenceError, "unselected entries"):
+                reader.native_configuration(
+                    fixture.directory,
+                    1,
+                    fixture.answers_path,
+                    {
+                        reader.release.to_record()["artifacts"]["answers"]: fixture.directory
+                        / "native-answers.jsonl"
+                    },
+                )
+        finally:
+            extra.unlink()
+
+    def test_private_staging_rejects_an_existing_link_entry(self):
+        from buddha.common import ValidationError
+
+        fixture, reader = self.fixture, self.reader()
+        command = json.loads((fixture.directory / "command-1.json").read_bytes())
+        root = Path(dict(command["executor"]["mounts"])["/inputs"])
+        link = root / "foreign-link.bin"
+        try:
+            link.symlink_to(root / "0.bin")
+        except OSError:
+            self.skipTest("host cannot create symlinks")
+        try:
+            with self.passive(), self.assertRaises(ValidationError):
+                reader.native_configuration(
+                    fixture.directory,
+                    1,
+                    fixture.answers_path,
+                    {
+                        reader.release.to_record()["artifacts"]["answers"]: fixture.directory
+                        / "native-answers.jsonl"
+                    },
+                )
+        finally:
+            link.unlink()
+
+    def test_private_staging_watch_detects_a_late_entry_after_configuration(self):
+        from buddha.doctor import _Busy
+
+        fixture, reader = self.fixture, self.reader()
+        with self.passive():
+            reader.native_configuration(
+                fixture.directory,
+                1,
+                fixture.answers_path,
+                {
+                    reader.release.to_record()["artifacts"]["answers"]: fixture.directory
+                    / "native-answers.jsonl"
+                },
+            )
+        command = json.loads((fixture.directory / "command-1.json").read_bytes())
+        extra = Path(dict(command["executor"]["mounts"])["/inputs"]) / "late.bin"
+        extra.write_bytes(b"foreign entry after configuration")
+        try:
+            with self.passive(), self.assertRaises(_Busy):
+                reader.capture.finish()
+        finally:
+            extra.unlink()
+
+    def staging_fixture(self, *, legacy):
+        fixture = NativeEvaluationFixture("runTest")
+        fixture.setUp()
+        self.addCleanup(fixture.doCleanups)
+        original = native_pipeline._native_descriptor
+
+        def staged(*args, **kwargs):
+            kwargs["staging_root"] = None if legacy else fixture.root / "foreign-inputs"
+            return original(*args, **kwargs)
+
+        with patch.object(native_pipeline, "_native_descriptor", side_effect=staged):
+            fixture.prepare()
+            self.assertEqual(fixture.run_evaluation()["status"], "complete")
+        return fixture
+
+    def test_original_legacy_staging_still_verifies_with_the_passive_reader(self):
+        fixture = self.staging_fixture(legacy=True)
+        with self.passive():
+            reader = self.reader(fixture=fixture)
+            answers_name = reader.release.to_record()["artifacts"]["answers"]
+            available = {answers_name: fixture.directory / "native-answers.jsonl"}
+            for index, stage in enumerate(fixture.record["stages"], 1):
+                report, attempt = reader.stage(fixture.directory, index, baseline=False)
+                reader.native(fixture.directory, index, report, fixture.answers_path, available)
+                for output in stage["outputs"]:
+                    available[output["path"]] = attempt / "artifacts" / output["path"]
+            reader.finish()
+
+    def test_bound_but_unapproved_external_staging_is_rejected_by_the_passive_reader(self):
+        fixture = self.staging_fixture(legacy=False)
+        with self.passive():
+            reader = self.reader(fixture=fixture)
+            report, _ = reader.stage(fixture.directory, 1, baseline=False)
+            with self.assertRaises(NativeEvidenceError):
+                reader.native(
+                    fixture.directory,
+                    1,
+                    report,
+                    fixture.answers_path,
+                    {
+                        reader.release.to_record()["artifacts"]["answers"]: fixture.directory
+                        / "native-answers.jsonl"
+                    },
                 )
 
     def test_authority_summary_uses_only_validated_capture_and_is_detached(self):

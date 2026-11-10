@@ -314,9 +314,18 @@ def _native_descriptor(
     answers: Path,
     available: dict[str, Path],
     frozen_files: dict[Path, str],
+    *,
+    staging_root: Path | None = None,
 ) -> tuple[Path, list[Path]]:
     return native_pipeline._native_descriptor(
-        directory, index, definition, release, answers, available, frozen_files
+        directory,
+        index,
+        definition,
+        release,
+        answers,
+        available,
+        frozen_files,
+        staging_root=staging_root,
     )
 
 
@@ -377,7 +386,14 @@ def _run(directory: Path, transport: RawHTTPTransport) -> dict[str, object]:
             if answers_path is None:
                 raise BaselineError("native evaluation lacks complete C1 Answers")
             descriptor, inputs = _native_descriptor(
-                directory, index, definition, release, answers_path, available, frozen_files
+                directory,
+                index,
+                definition,
+                release,
+                answers_path,
+                available,
+                frozen_files,
+                staging_root=authority.path.parent / "native-inputs",
             )
             selected, roots = _component(native)
             bound_inputs = [

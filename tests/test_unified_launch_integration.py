@@ -270,7 +270,9 @@ class UnifiedLaunchIntegrationTests(unittest.TestCase):
                 root = raw["regenerate"].directory
                 self.assertTrue((root / "completed/0.json").is_file())
                 self.assertTrue((root / "command-1.json").is_file())
-                self.assertTrue((root / "staging/1/0.bin").is_file())
+                command = json.loads((root / "command-1.json").read_bytes())
+                staged = Path(dict(command["executor"]["mounts"])["/inputs"]) / "0.bin"
+                self.assertTrue(staged.is_file())
                 self.assertFalse(directory.exists())
                 interrupted.append(directory)
                 checkpoint("raw_generation_sealed_before_native_owner", owner_index=1)

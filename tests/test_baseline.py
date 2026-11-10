@@ -345,6 +345,20 @@ class BaselineTests(unittest.TestCase):
             self.prepare()
         self.assertEqual((self.directory / "owners/0/manifest.json").read_bytes(), before)
 
+    def test_deep_baseline_uses_private_shallow_native_mounts(self):
+        self.directory = self.root.joinpath(*("d" + str(index) for index in range(18)))
+        self.directory.parent.mkdir(parents=True)
+        self.prepare()
+        self.assertEqual(self.run_pipeline()["status"], "complete")
+        native = [event for event in self.events if event["role"] == "evaluator"]
+        self.assertEqual(len(native), 3)
+        root = self.authority.path.parent / "native-inputs"
+        for event in native:
+            index = event["initial"]["command"]["index"] + 1
+            leaf = root / sha(_json([str(self.directory.absolute()), index]))
+            self.assertEqual(dict(event["session"].spec.mounts)["/inputs"], leaf)
+            self.assertEqual(len(leaf.relative_to(root).parts), 1)
+
     def test_additional_control_inputs_are_bound_to_every_generation_and_native_owner(self):
         control = self.root / "external-study-control.json"
         control.write_bytes(b'{"frozen":"study-control"}')

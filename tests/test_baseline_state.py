@@ -335,7 +335,9 @@ class BaselineStateTests(unittest.TestCase):
         record["selection"]["components"]["agent"] = {"foreign.py": "f" * 64}
         self.corrupt(owner, _json(record))
         self.corrupt(self.definitions["regenerate"], b"{}")
-        self.corrupt(root / "staging/1/0.bin", b"changed staging")
+        command = json.loads((root / "command-1.json").read_bytes())
+        staged = Path(dict(command["executor"]["mounts"])["/inputs"]) / "0.bin"
+        self.corrupt(staged, b"changed staging")
         self.corrupt(root / "completed/1.json", b"{}")
 
     def test_inactive_unfinished_original_owner_blocks_without_reactivation(self):
@@ -408,7 +410,14 @@ class BaselineStateTests(unittest.TestCase):
         for label, path, directory in (
             ("native-answers", root / "native-answers.jsonl", False),
             ("command", root / "command-1.json", False),
-            ("staging", root / "staging/1", True),
+            ("legacy-staging", root / "staging/1", True),
+            (
+                "private-staging",
+                self.authority.path.parent
+                / "native-inputs"
+                / sha(_json([str(root.absolute()), 1])),
+                True,
+            ),
         ):
             with self.subTest(material=label):
                 preserved = self.root / ("preserved-orphan-" + label)
@@ -418,7 +427,7 @@ class BaselineStateTests(unittest.TestCase):
                 self.assertFalse(preserved.exists())
                 payload = b"synthetic impossible future material"
                 if directory:
-                    path.mkdir()
+                    path.mkdir(parents=True)
                     (path / "0.bin").write_bytes(payload)
                 else:
                     path.write_bytes(payload)
@@ -450,7 +459,8 @@ class BaselineStateTests(unittest.TestCase):
         self.assertEqual(before, 4)
         self.assertEqual(set(original_ids), {"0"})
         self.assertTrue((self.directories["regenerate"] / "command-1.json").is_file())
-        self.assertTrue((self.directories["regenerate"] / "staging/1/0.bin").is_file())
+        command = json.loads((self.directories["regenerate"] / "command-1.json").read_bytes())
+        self.assertTrue((Path(dict(command["executor"]["mounts"])["/inputs"]) / "0.bin").is_file())
         observed = self.row(self.inspect(), "regenerate")
         self.assertEqual(
             (

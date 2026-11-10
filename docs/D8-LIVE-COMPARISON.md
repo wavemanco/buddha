@@ -1,6 +1,6 @@
 # D8: recovery handoff with masked key entry
 
-November 9, 2026. **The replacement run stopped after ten saved generation replies, before any judge request. Do not repeat the command below yet.** Recorded replacement cost is $0.009553 with no replacement hold. A provider-blocked reproduction found an input-mount filesystem error; the current acceptance is in [the stop review](D8-NATIVE-STOP-REVIEW.md). Historical preparation and launch details follow. The handoff had passed release checks before this launch. The original authentication-rejected partial has no answers or judge scores; its records and $0.585611 hold are preserved. [PLAN D8](PLAN.md), [approval](conformance/d8-recovery-approval.json), [delivery](conformance/d8-recovery-handoff-delivery.json).
+November 9, 2026. **The replacement run stopped after ten saved generation replies, before any judge request. Do not repeat the command below yet.** Recorded replacement cost is $0.009553 with no replacement hold. A controlled comparison found a deep-folder mount failure. The corrected producer and passive reader now pass the actual host/evaluator check with paid access blocked; source `61000d6` now passes both short CI jobs (547 methods per OS), and a newly bound handoff remains. See [the correction](D8-NATIVE-STOP-REVIEW.md#bounded-resolution-follow-up). Historical preparation and launch details follow. The handoff had passed release checks before this launch. The original authentication-rejected partial has no answers or judge scores; its records and $0.585611 hold are preserved. [PLAN D8](PLAN.md), [approval](conformance/d8-recovery-approval.json), [delivery](conformance/d8-recovery-handoff-delivery.json).
 
 ## Recovery scope and allowance
 
@@ -21,6 +21,23 @@ The hold is uncertain liability, not a confirmed charge or a released balance. A
 All thirty-two original stopped-run files and database contents remain byte-for-byte unchanged. All four original allowance databases are now read-only, including the unused plain-reference allowance. Windows write opens are denied; the existing SQLite write path was checked on a synthetic database. The original launcher still stops before key entry. **Keep those original allowance files read-only: do not unlock, replace or copy them for another run.** Only four project-file attributes changed; no global Windows setting or background service was added. [Python's Windows read-only flag](https://docs.python.org/3.13/library/os.html#os.chmod), [SQLite read-only handling](https://www.sqlite.org/rescode.html#readonly) and [Windows file sharing](https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-createfilew) describe the underlying controls. Local receipts record the observed checks. As with the other local budget guards, this assumes the host does not deliberately bypass them.
 
 Outgoing requests remain unchanged: generator Luna LOW/4,096/default; partition Luna with the official omitted effort/output/tier overrides; utility Opus adaptive HIGH/16,000 with the official refusal-only Sonnet fallback. Captured source-authoring requests remain Sol LOW/32,768/default. The preserved official-source references below explain those settings. Authentication and actual completion remain unverified until execution.
+
+Corrected runs keep `native-inputs` beside their budget files. Keep that folder
+with the run records: it contains the exact evaluator inputs used for later checks.
+
+## Docker restart history
+
+```powershell
+docker desktop restart --timeout 60
+```
+
+The user approved this once; it tries to restart Docker Desktop, interrupting
+other Docker containers. It makes no model API calls and does not change study
+files or budgets. No separate user window is needed when Codex runs it. Its
+sixty-second limit bounds the command wait, not backend recovery. This attempt
+failed during shutdown; the user subsequently restarted Docker. The original
+mount still failed. Do not repeat it as a repair: the verified correction changes
+where the producer stages inputs. See the [evidence](D8-NATIVE-STOP-REVIEW.md#bounded-resolution-follow-up).
 
 ## Recovery launch command
 

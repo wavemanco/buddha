@@ -250,9 +250,32 @@ class NativeEvidence:
         selected = Selection.from_bytes(_json(native["selection"]))
         components = _object(selected.to_record()["components"])
         inputs = _object(self._rows(self.template["stages"])[index - 1])["inputs"]
+        legacy_staging = child / "staging" / str(index)
+        shallow_staging = (
+            self.authorization.parent
+            / "native-inputs"
+            / _sha(_json([str(child.absolute()), index]))
+        )
+        executor = _object(description["executor"])
+        mounts = executor.get("mounts")
+        if type(mounts) is not list:
+            raise self.error_type("native input mount differs from its scoped location")
+        if mounts == [
+            ["/official", _object(native["roots"])["official"]],
+            ["/runner", _object(native["roots"])["runner"]],
+            ["/inputs", str(shallow_staging)],
+        ]:
+            staging = shallow_staging
+            expected_names = {
+                str(ordinal) + ".bin" for ordinal in range(len(cast(list[str], inputs)))
+            }
+            if set(self.capture.watch_tree(staging)) != expected_names:
+                raise self.error_type("native input mount contains unselected entries")
+        else:
+            staging = legacy_staging
         expected_inputs = []
         for ordinal, name in enumerate(cast(list[str], inputs)):
-            source = child / "staging" / str(index) / (str(ordinal) + ".bin")
+            source = staging / (str(ordinal) + ".bin")
             source_raw = self.bound(owner, source)
             if source_raw != self.raw(available[name]):
                 raise self.error_type("native stage consumed another input")
@@ -285,7 +308,7 @@ class NativeEvidence:
             "mounts": [
                 ["/official", _object(native["roots"])["official"]],
                 ["/runner", _object(native["roots"])["runner"]],
-                ["/inputs", str(child / "staging" / str(index))],
+                ["/inputs", str(staging)],
             ]
         }
         if (
