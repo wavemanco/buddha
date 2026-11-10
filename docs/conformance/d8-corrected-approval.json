@@ -1,0 +1,111 @@
+{
+  "adopted_static_controls": {
+    "comparison_plan": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-corrected-combined-20261109-v1\\comparison-plan.json",
+      "sha256": "a5413d601ad9115a12eaf2e4bd525f97de725395172e25017109ae8f7d632228"
+    },
+    "primary_proposal": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-corrected-combined-20261109-v1\\handoff-primary-unfunded.json",
+      "sha256": "f04ec205b2baa9ee266aa1ccea1e73c1cf96ae44e2b0cbb34be29d6a0cdf1ee4"
+    },
+    "reference_input_bindings": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-corrected-combined-20261109-v1\\reference-input-bindings.json",
+      "sha256": "d7e5c67360ed6e3efc7812b940a55376beab81fcbda7ee04a2edefc53bf0a596"
+    },
+    "unallocated_combined_declaration": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-corrected-combined-20261109-v1\\unallocated-combined-declaration.json",
+      "sha256": "0b1f83b08551917e1a5602628cf684b6d08fe69fc12d77278f1acb8826c12ba6"
+    }
+  },
+  "allocations": {
+    "final": {
+      "budget_microusd": 85000000,
+      "max_calls": 10240
+    },
+    "search": {
+      "budget_microusd": 39404836,
+      "max_calls": 4085
+    },
+    "shared_plain_references": {
+      "budget_microusd": 25000000,
+      "max_calls": 2048
+    },
+    "validation": {
+      "budget_microusd": 0,
+      "max_calls": 0
+    }
+  },
+  "date": "2026-11-09",
+  "format": "buddha.d8-corrected-approval.v1",
+  "native_review_selection": {
+    "api_reviewer_fallback": false,
+    "billing": "Unpriced Codex-plan usage outside the API cap; not zero cost.",
+    "fork_turns": "none",
+    "max_contexts": 44,
+    "max_staged_target_judgments": 64,
+    "max_target_contexts": 32,
+    "max_whole_set_contexts_and_judgments": 12,
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "ultra"
+  },
+  "partial_results": {
+    "allowed": true,
+    "automatic_paid_retry_or_extension": false,
+    "retain": [
+      "stage",
+      "reason",
+      "costs",
+      "unresolved_holds",
+      "usable_evidence"
+    ],
+    "unknown_charges_not_released": true
+  },
+  "proposal_pr": "https://github.com/wavemanco/buddha/pull/289",
+  "publication_head": "8fa7dc9c3d88ae748990d7530586cd7adcdfa776",
+  "question_item_id": null,
+  "readiness_adoption": {
+    "correction": "Six existing production files stage native inputs beside their authority and retain exact custody; actual deep-path host/official-partition check passed with paid access blocked.",
+    "current_short_ci": 42735376634,
+    "deep_path_proof": {
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\checks\\d8-native-resolution-20261109-v1\\corrected-native-deep\\result.json",
+      "sha256": "d5363439ac63c213af4751a258341ff29a073b61e79d616e59da91860d7c4b48"
+    },
+    "methods_per_os": 547,
+    "new_full_suite_pass_claimed": false,
+    "no_additional_long_engineering_run_requested_or_authorized": true,
+    "production_short_ci": 42733728721,
+    "quality_checks": 14
+  },
+  "retained_prior_accounting": {
+    "attempts": 11,
+    "old_grants_must_be_readonly": 8,
+    "original_attempts": 16384,
+    "original_budget_microusd": 150000000,
+    "spent_microusd": 9553,
+    "unknown_hold_microusd": 585611
+  },
+  "runtime_head": "8fa7dc9c3d88ae748990d7530586cd7adcdfa776",
+  "samples": "Fresh samples on corrected source; ten saved answers remain immutable historical evidence, not reused or relabeled.",
+  "scope": {
+    "benchmark_version": "1.1",
+    "capacity_policy": "buddha.source-proposal-capacity-policy.v2",
+    "counted_improvement_opportunities": 16,
+    "development_tasks": 3,
+    "evolved_source_sha256": "f1c832d5168986bf4bf220bb31f31754192cf262d523118b1f47ea0540fb6bc7",
+    "final_tasks": 26,
+    "full_feedback_required": true,
+    "human_extension": "nonblocking",
+    "initial_source_sha256": "b84ae0e392d6dd51d46342c8502c62b365eaabb9371394f13d7c47825d2ee1a7",
+    "official_commit": "64a23be6b18ec1dacc298830aab276061b6e143c",
+    "plain_controls": [
+      "regenerate",
+      "in-context"
+    ]
+  },
+  "status": "approved_and_prospectively_adopted_before_funding_and_execution",
+  "total_limits": {
+    "budget_microusd": 149404836,
+    "max_calls": 16373
+  },
+  "user_answer": "Proceed with preparing the new handoff for the corrected source. Preserve the ten answers and accounting, stay within the approved budget, and give me the command when ready. No paid calls or new long runs."
+}

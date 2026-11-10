@@ -1,0 +1,155 @@
+{
+  "format": "buddha.d8-corrected-handoff-delivery.v1",
+  "date": "2026-11-09",
+  "status": "funded_configuration_and_independent_readback_pass_no_execution",
+  "publication_base": "8fa7dc9c3d88ae748990d7530586cd7adcdfa776",
+  "executing_source": "8fa7dc9c3d88ae748990d7530586cd7adcdfa776",
+  "executing_runtime": "C:\\Users\\arvik\\code\\buddha\\runs\\reviews\\d8-corrected-runtime-20261109-v1",
+  "production_delta": "Six existing files stage exact native inputs beside authorization, retaining legacy/new-path custody, external-leaf census/adoption and orphan checks. No new production change in this handoff slice.",
+  "runtime_python_files": 348,
+  "indexed_preparation_outputs": 133,
+  "total_limits": {
+    "budget_microusd": 149404836,
+    "max_calls": 16373
+  },
+  "grants": {
+    "final": {
+      "budget_microusd": 85000000,
+      "id": "imp01-d8-corrected-20261109-v1-final",
+      "max_calls": 10240,
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-corrected-funded-20261109-v1\\authorization-final.sqlite3",
+      "scope": "buddha.evaluation-trial.v1:{\"definition_sha256\":\"60d83d289927bb61b519c861c3da7434d96632b4d70a4b6a0f6459428b5d8834\",\"phase\":\"final\",\"root\":\"C:\\\\Users\\\\arvik\\\\code\\\\buddha\\\\runs\\\\imp01-d8-corrected-review-20261109-v1\\\\NOT-CREATED-trial-runtime\"}",
+      "terms_sha256": "b4858285c4968edbb7d88995784d41c10a305f7c916ff76ac891229d729192b6"
+    },
+    "search": {
+      "budget_microusd": 39404836,
+      "id": "imp01-d8-corrected-20261109-v1-search",
+      "max_calls": 4085,
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-corrected-funded-20261109-v1\\authorization-search.sqlite3",
+      "scope": "buddha.evaluation-trial.v1:{\"definition_sha256\":\"60d83d289927bb61b519c861c3da7434d96632b4d70a4b6a0f6459428b5d8834\",\"phase\":\"search\",\"root\":\"C:\\\\Users\\\\arvik\\\\code\\\\buddha\\\\runs\\\\imp01-d8-corrected-review-20261109-v1\\\\NOT-CREATED-trial-runtime\"}",
+      "terms_sha256": "447fce70ee16426312bb8428f9d9cf8310f4ebc18f014057a08b08674f1584dd"
+    },
+    "shared_plain_references": {
+      "budget_microusd": 25000000,
+      "id": "imp01-d8-corrected-20261109-v1-shared_plain_references",
+      "max_calls": 2048,
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-corrected-combined-20261109-v1\\NOT-CREATED-reference-authority.sqlite3",
+      "scope": "buddha.plain-references.v1:a5413d601ad9115a12eaf2e4bd525f97de725395172e25017109ae8f7d632228",
+      "terms_sha256": "6ef533e8b3d47e65ae743da16c32dc31e0f5aa0bb985f6c73d2cd786857d3aaa"
+    },
+    "validation": {
+      "budget_microusd": 0,
+      "id": "imp01-d8-corrected-20261109-v1-validation",
+      "max_calls": 0,
+      "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-corrected-funded-20261109-v1\\authorization-validation.sqlite3",
+      "scope": "buddha.evaluation-trial.v1:{\"definition_sha256\":\"60d83d289927bb61b519c861c3da7434d96632b4d70a4b6a0f6459428b5d8834\",\"phase\":\"validation\",\"root\":\"C:\\\\Users\\\\arvik\\\\code\\\\buddha\\\\runs\\\\imp01-d8-corrected-review-20261109-v1\\\\NOT-CREATED-trial-runtime\"}",
+      "terms_sha256": "4f936f5929726592793783f9307533106d67df96aacb617df52fbabebe6160c7"
+    }
+  },
+  "handoff": {
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-corrected-combined-20261109-v1\\NOT-CREATED-unified-launch.json",
+    "sha256": "e988fb8cd5c01267eb554d4471c027b90d1dbfda2142c4d85e14fe69e2609488"
+  },
+  "preserved_ten_answers": {
+    "answer_count": 10,
+    "path": "C:\\Users\\arvik\\code\\buddha\\runs\\imp01-d8-recovery-review-20261108-v1\\NOT-CREATED-trial-runtime\\search\\study\\common\\0\\0\\screen\\tasks\\0\\generation\\attempts\\0-0\\session\\answers.json",
+    "sha256": "a3e906905f1aa0243c2f6299226bbef3ada1f15903132aad1f45cbae9efbc6ec"
+  },
+  "prior_spent_microusd": 9553,
+  "prior_unknown_hold_microusd": 585611,
+  "prior_attempts": 11,
+  "prior_grants_readonly": 8,
+  "original_approved_ceiling": {
+    "budget_microusd": 150000000,
+    "max_calls": 16384
+  },
+  "samples": "Fresh; ten prior saved answers remain unchanged history, not reused as new replies.",
+  "provider_calls": 0,
+  "keys_read": false,
+  "owners_created": 0,
+  "scientific_review_contexts_started": 0,
+  "new_full_qualification_claimed": false,
+  "automatic_retry": false,
+  "new_long_run": false,
+  "main_merge": false,
+  "native_review_selection": {
+    "api_reviewer_fallback": false,
+    "billing": "Unpriced Codex-plan usage outside the API cap; not zero cost.",
+    "fork_turns": "none",
+    "max_contexts": 44,
+    "max_staged_target_judgments": 64,
+    "max_target_contexts": 32,
+    "max_whole_set_contexts_and_judgments": 12,
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "ultra"
+  },
+  "evidence": {
+    "approval-decision.json": {
+      "path": "runs/checks/d8-corrected-handoff-20261109-v1/approval-decision.json",
+      "sha256": "cfd03f6196c201d197d547011f41b7a116937cb89416831e69877155a44a7f86"
+    },
+    "invocation-freeze.json": {
+      "path": "runs/checks/d8-corrected-handoff-20261109-v1/invocation-freeze.json",
+      "sha256": "088249ab620644887f3e6898f000356d61fcdb817e5fa39ab6c816e8e4a80268"
+    },
+    "invocation-result.json": {
+      "path": "runs/checks/d8-corrected-handoff-20261109-v1/invocation-result.json",
+      "sha256": "a6f5959e0a96642dd8f60756d4e7cedef3e2dc32cfd1de4753db9057dc25f57a"
+    },
+    "INDEPENDENT-RECIPE-REVIEW.json": {
+      "path": "runs/checks/d8-corrected-handoff-20261109-v1/INDEPENDENT-RECIPE-REVIEW.json",
+      "sha256": "1b1e934795d43934bf2a7f273ced8e05a33baab04298c231a0d1c6d1814b76d5"
+    },
+    "REQUEST-CONTINUITY-INDEPENDENT-REVIEW.json": {
+      "path": "runs/checks/d8-corrected-handoff-20261109-v1/REQUEST-CONTINUITY-INDEPENDENT-REVIEW.json",
+      "sha256": "e8019ef3c7809844aac7bac690d5146b47822f30e8966b0f1dc3dc1eea687177"
+    },
+    "prior-retirement.json": {
+      "path": "runs/checks/d8-corrected-handoff-20261109-v1/prior-retirement.json",
+      "sha256": "8f75f55c355465ce2d7617f098fae356dc376f374440b3e14df2039d2e262713"
+    },
+    "RETIREMENT-INDEPENDENT-REVIEW.json": {
+      "path": "runs/checks/d8-corrected-handoff-20261109-v1/RETIREMENT-INDEPENDENT-REVIEW.json",
+      "sha256": "11250d2d28453a222a2c14f5e1905eb4de435b3b159811c166c66601a42e1779"
+    },
+    "hosted-short-ci-review.json": {
+      "path": "runs/checks/d8-corrected-handoff-20261109-v1/hosted-short-ci-review.json",
+      "sha256": "f24aaf2fef5ffa3ce992c128d5281f107b953f71ab97c0b2509f61c86043b4d1"
+    },
+    "preparation-input-preservation-before.json": {
+      "path": "runs/checks/d8-corrected-handoff-20261109-v1/preparation-input-preservation-before.json",
+      "sha256": "ec228a4b6ca6d1c4815a26f777917773d5d9058abdff53568be4933e92865d84"
+    },
+    "funded-constructor-freeze.json": {
+      "path": "runs/checks/d8-corrected-handoff-20261109-v1/funded-constructor-freeze.json",
+      "sha256": "5a412969b9c90a1183e7825dad45302b25b6385f267d9725e57ae1edec540bbc"
+    },
+    "funded-constructor-run.json": {
+      "path": "runs/checks/d8-corrected-handoff-20261109-v1/funded-constructor-run.json",
+      "sha256": "7be65e93f7edf41f372a9abd1a85881692178c0daf08bf561eec9b54d78ab252"
+    },
+    "funded-preparation-result.json": {
+      "path": "runs/checks/d8-corrected-handoff-20261109-v1/funded-preparation-result.json",
+      "sha256": "62a19afddc4043db0a93f6bba6f52f76b7475a55885c194b2d01a16e0013e566"
+    },
+    "future-agent-mount-depth-check.json": {
+      "path": "runs/checks/d8-corrected-handoff-20261109-v1/future-agent-mount-depth-check.json",
+      "sha256": "a43431752db360f6b230f2c3a036651d7f126808d16f505f8e817c2a631953ef"
+    },
+    "actual_deep_path_proof": {
+      "path": "runs/checks/d8-native-resolution-20261109-v1/corrected-native-deep/result.json",
+      "sha256": "d5363439ac63c213af4751a258341ff29a073b61e79d616e59da91860d7c4b48"
+    },
+    "FUNDED-PRELAUNCH-INDEPENDENT-REVIEW.json": {
+      "path": "runs/checks/d8-corrected-handoff-20261109-v1/FUNDED-PRELAUNCH-INDEPENDENT-REVIEW.json",
+      "sha256": "a23fc453f75e0ccee4082a6d9931202dbffc991ead372e84f0ff49ec0c07525f"
+    }
+  },
+  "independent_funded_readback": {
+    "status": "pass",
+    "unique_pins_checked": 1161,
+    "seconds": 0.230104,
+    "new_grants_zero_owners_operations_spending_holds": true,
+    "old_grants_readonly_bytes_rows_unchanged": true
+  }
+}
