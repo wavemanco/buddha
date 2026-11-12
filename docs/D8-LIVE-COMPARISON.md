@@ -8,21 +8,26 @@ did not identify the directory or field. All 19 selected files match their
 pinned names and hashes now. All four grants are unused, with zero spending
 and holds. No key review or study owner was created.
 
-One 18.315-second read-only check reran the validation that failed and matched
-the original preflight. The stopped observations and unused grants remain
-saved. The launch is on hold while the corrected source is checked and bound
-to the handoff.
+The stopped observations and original database bytes are preserved. The
+unused grants from the stopped launch are read-only. The corrected handoff
+has replacement grants under the same $150 and 16,384-attempt approval.
 
 The correction removes a duplicate inventory in native validation. If only
 directory timestamps change, verification of a frozen selection scans the
 affected component once more and requires the original file names and hashes.
 Directory identity changes, repeated drift and changed bytes still stop.
-The copied native components pass an injected timestamp test. The corrected
-source still needs to be bound into the launch before it can protect a live run.
+The second scan is a bounded recovery from a single timestamp change. It
+does not remove the directory stability requirement.
 [Stop and correction evidence](conformance/d8-fresh-post-key-stop.json).
 
-The fresh comparison is funded and checked. It uses the existing Buddha
-runner at `571fdf1` and creates a new run. Temporal, DBOS, Inspect scheduling,
+The corrected handoff is funded and checked on PR #302 source `03d3cf2`.
+The real launcher prompted for two dummy keys, held the workspace lock and
+passed all three startup checks. During the third check, one injected directory
+timestamp change triggered the recheck. The proof reached the dispatch boundary
+and stopped before creating a transport. It took 57.553 seconds, left the
+observation directory empty and made no API calls. [Corrected handoff](conformance/d8-inventory-corrected-handoff.json).
+
+The comparison uses the existing Buddha runner. Temporal, DBOS, Inspect scheduling,
 OpenTelemetry and OpenLIT are outside this launch.
 
 The original and evolved Python improvers get the same starting agents,
@@ -50,20 +55,19 @@ checks covered a settled quota failure, completed native assessment reuse
 without another request, and launcher resume after a partial plain control.
 The fresh request-profile check accepted seven synthetic requests and
 rejected 27 changed requests. It covered plain generation and the official
-judge settings. After approval, the funded check passed in 26.607 seconds.
-All four grants show zero operations, recorded spending and holds. Both
-pinned Docker images are present. Model access is checked during the live run.
-[Preparation receipt](conformance/d8-fresh-handoff-preparation.json),
-[funded handoff](conformance/d8-fresh-funded-handoff.json).
+judge settings. The corrected preparation checked 133 outputs and the new
+funded check passed in 32.121 seconds. All four replacement grants show
+zero operations, spending and holds. Model access is checked during the live run.
+[Preparation receipt](conformance/d8-fresh-handoff-preparation.json).
 
 ### Start the fresh comparison
 
-**Command on hold.** These lines record the command that stopped. Wait for
-the corrected handoff before launching again.
+Open a new ordinary PowerShell window with Docker Desktop running. Run these
+two lines once. This is the corrected v2 handoff.
 
 ```powershell
 Remove-Item -LiteralPath 'Env:\OPENAI_API_KEY', 'Env:\ANTHROPIC_API_KEY' -ErrorAction SilentlyContinue
-& "C:\Program Files\Python313\python.exe" -B "C:\Users\arvik\code\buddha\runs\reviews\d8r12\docs\conformance\unified-run.py" --handoff "C:\Users\arvik\code\buddha\runs\imp01-d8-fresh-20261112-v1-combined\NOT-CREATED-unified-launch.json" --sha256 "3d57e7193a999959dbabfcf236f1295d1924b0d9633c5121af6049cd049df566" --live --prompt-keys --confirm-project-keys
+& "C:\Program Files\Python313\python.exe" -B "C:\Users\arvik\code\buddha\runs\reviews\d8r13\docs\conformance\unified-run.py" --handoff "C:\Users\arvik\code\buddha\runs\imp01-d8-fresh-20261112-v2-combined\NOT-CREATED-unified-launch.json" --sha256 "328390bb21e158e975faa2302b2676fd38ab1c26b35539a5232be2b35a1acb75" --live --prompt-keys --confirm-project-keys
 ```
 
 The first line clears inherited key variables in that PowerShell window so
@@ -81,7 +85,7 @@ and final JSON before trying again.
 ## Current status after the quota stop
 
 The stopped run, its 403 settled calls and its $2.978370 recorded spend
-remain saved as a partial. The fresh run and its proposed budget are above.
+remain saved as a partial. The fresh run and its approved budget are above.
 
 The latest continuation attempt stopped before the history restore and key entry when two trial directory scans differed. The diagnostic located the check and left the changed entry unidentified. A short, trial-only FileSystemWatcher check saw no events and reached the restore boundary. It was a diagnostic and does not run during startup.
 
