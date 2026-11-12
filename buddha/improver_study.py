@@ -2755,9 +2755,10 @@ def run_improver_study(directory: Path, *, transport: RawHTTPTransport) -> dict[
                 if lock is None or entries != capture.entries:
                     raise ImproverStudyError("checked development changed before its writer lease")
                 capture.entries["running.lock"] = lock
+                reader.finish()
         while True:
             _check_current(state)
-            reader.finish()
+            reader.capture.finish()
             action = state["action"]
             with launch_common._study_stage(action["kind"], action["position"]):
                 result = _advance_action(reader, state, authority, transport)

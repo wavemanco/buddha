@@ -19,7 +19,7 @@ After live approval, open a new ordinary PowerShell window with Docker Desktop r
 
 ```powershell
 Remove-Item -LiteralPath 'Env:\OPENAI_API_KEY', 'Env:\ANTHROPIC_API_KEY' -ErrorAction SilentlyContinue
-& "C:\Program Files\Python313\python.exe" -B "C:\Users\arvik\code\buddha\runs\z2\docs\conformance\unified-run.py" --handoff "C:\Users\arvik\code\buddha\runs\checks\d8-continuation-startup-20261111-v1\continuation.json" --sha256 "0918f77930043cb74d33cc770a7b0385ebc977f91c8cd08d15f9fcf1b2d893e0" --continuation --live --prompt-keys --confirm-project-keys
+& "C:\Program Files\Python313\python.exe" -B "C:\Users\arvik\code\buddha\runs\z2\docs\conformance\unified-run.py" --handoff "C:\Users\arvik\code\buddha\runs\checks\d8-continuation-startup-20261111-v2\continuation.json" --sha256 "a5124dd81bd6336214be27631e463f545dbe03c6c2a3a7839a5a67fc20515609" --continuation --live --prompt-keys --confirm-project-keys
 ```
 
 The first line clears the two key variables in that window so the masked prompts appear. The second line checks the pinned handoff and continues the paid study within its remaining allowance. Use the same reviewed OpenAI and Anthropic keys from the November 9 run. The saved November 10 review passes the seven-day freshness check through November 17 UTC. Each key is temporary for the launch. Keep both keys out of chat and the command itself.
