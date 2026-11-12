@@ -2,7 +2,7 @@
 
 ## Fresh handoff and approved budget
 
-**Launch on hold for the directory-check correction.** The next runner
+**Use the v3 command below.** The corrected runner
 compares directory entry names, types and identities before and after one
 file-hashing pass. Folder timestamps are out of that comparison, and the
 timestamp retry is removed. The frozen names and file hashes still have to
@@ -17,23 +17,20 @@ pinned names and hashes now. All four grants are unused, with zero spending
 and holds. No key review or study owner was created.
 
 The stopped observations and original database bytes are preserved. The
-unused grants from the stopped launch are read-only. The corrected handoff
+unused grants from v1 and v2 are read-only. The corrected handoff
 has replacement grants under the same $150 and 16,384-attempt approval.
 
-The correction removes a duplicate inventory in native validation. If only
-directory timestamps change, verification of a frozen selection scans the
-affected component once more and requires the original file names and hashes.
-Directory identity changes, repeated drift and changed bytes still stop.
-The second scan is a bounded recovery from a single timestamp change. It
-does not remove the directory stability requirement.
-[Stop and correction evidence](conformance/d8-fresh-post-key-stop.json).
+PR #302 removed a duplicate inventory and added a timestamp retry. The v3
+runner keeps the duplicate scan removed and replaces the timestamp rule and
+retry with direct entry checks. [Original stop evidence](conformance/d8-fresh-post-key-stop.json).
 
-The corrected handoff is funded and checked on PR #302 source `03d3cf2`.
+The corrected handoff is funded and checked on PR #304 source `dee0166`.
 The real launcher prompted for two dummy keys, held the workspace lock and
-passed all three startup checks. During the third check, one injected directory
-timestamp change triggered the recheck. The proof reached the dispatch boundary
-and stopped before creating a transport. It took 57.553 seconds, left the
-observation directory empty and made no API calls. [Corrected handoff](conformance/d8-inventory-corrected-handoff.json).
+passed all three startup checks. During the third check, it accepted six
+different timestamp readings for the same directory in one inventory call.
+The proof reached the dispatch boundary and stopped before creating a transport.
+It took 60.088 seconds, left the observation directory empty and made no API
+calls. [Corrected handoff](conformance/d8-directory-entries-handoff.json).
 
 The comparison uses the existing Buddha runner. Temporal, DBOS, Inspect scheduling,
 OpenTelemetry and OpenLIT are outside this launch.
@@ -64,18 +61,18 @@ without another request, and launcher resume after a partial plain control.
 The fresh request-profile check accepted seven synthetic requests and
 rejected 27 changed requests. It covered plain generation and the official
 judge settings. The corrected preparation checked 133 outputs and the new
-funded check passed in 32.121 seconds. All four replacement grants show
+funded check passed in 31.641 seconds. All four replacement grants show
 zero operations, spending and holds. Model access is checked during the live run.
 [Preparation receipt](conformance/d8-fresh-handoff-preparation.json).
 
 ### Start the fresh comparison
 
-**Command on hold.** This v2 command pins the earlier timestamp-retry
-implementation. Wait for the handoff that binds the directory-entry correction.
+Open a new ordinary PowerShell window with Docker Desktop running. Run these
+two lines once. This is the v3 handoff with directory-entry checks.
 
 ```powershell
 Remove-Item -LiteralPath 'Env:\OPENAI_API_KEY', 'Env:\ANTHROPIC_API_KEY' -ErrorAction SilentlyContinue
-& "C:\Program Files\Python313\python.exe" -B "C:\Users\arvik\code\buddha\runs\reviews\d8r13\docs\conformance\unified-run.py" --handoff "C:\Users\arvik\code\buddha\runs\imp01-d8-fresh-20261112-v2-combined\NOT-CREATED-unified-launch.json" --sha256 "328390bb21e158e975faa2302b2676fd38ab1c26b35539a5232be2b35a1acb75" --live --prompt-keys --confirm-project-keys
+& "C:\Program Files\Python313\python.exe" -B "C:\Users\arvik\code\buddha\runs\reviews\d8r14\docs\conformance\unified-run.py" --handoff "C:\Users\arvik\code\buddha\runs\imp01-d8-fresh-20261112-v3-combined\NOT-CREATED-unified-launch.json" --sha256 "95e549233face37e51a7352f8525afb74df3d0a76e27321f842dbd7c6d5b5bbd" --live --prompt-keys --confirm-project-keys
 ```
 
 The first line clears inherited key variables in that PowerShell window so

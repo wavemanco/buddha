@@ -1,0 +1,53 @@
+{
+  "format": "buddha.d8-directory-entries-handoff.v1",
+  "date": "2026-11-12",
+  "status": "funded_and_actual_post_key_startup_passed_no_dispatch",
+  "executing_source": "dee016686aa63202de45851331193ecb84c656e2",
+  "source_fast_ci": "https://github.com/wavemanco/buddha/pull/304/checks",
+  "launcher": {
+    "path": "runs/reviews/d8r14/docs/conformance/unified-run.py",
+    "sha256": "21e1b8d11ff430df54f730bc8bd6142bf761af13cf07b6dbae2e50857d717005"
+  },
+  "handoff": {
+    "path": "runs/imp01-d8-fresh-20261112-v3-combined/NOT-CREATED-unified-launch.json",
+    "sha256": "95e549233face37e51a7352f8525afb74df3d0a76e27321f842dbd7c6d5b5bbd"
+  },
+  "preparation": {
+    "path": "runs/checks/d8-fresh-handoff-20261112-v3/invocation-result.json",
+    "sha256": "0b717fcdf000997df02c6fc29d4736c0c98b432b98fa04d99df7085e10b612ed",
+    "output_files": 133,
+    "scientific_scope_unchanged": true
+  },
+  "old_grants_fenced": {
+    "path": "runs/checks/d8-fresh-handoff-20261112-v3/old-grants-fenced.json",
+    "sha256": "4d42db3c8fd4f0e84452e6965054e2cb75ee1ca70e3719feb82cc97e0375b331",
+    "old_grant_bytes_preserved": true
+  },
+  "funded_result": {
+    "path": "runs/checks/d8-fresh-handoff-20261112-v3/funded-preparation-result.json",
+    "sha256": "3bc9bdd5538a5b2a8dc934d5183179807f3b705e33a04877568e42ed6d6a8f44",
+    "seconds": 31.64132209995296,
+    "budget_microusd": 150000000,
+    "max_calls": 16384,
+    "operation_count": 0,
+    "spent_microusd": 0,
+    "reserved_microusd": 0
+  },
+  "post_key_proof": {
+    "path": "runs/checks/d8-fresh-handoff-20261112-v3/post-key-startup-proof.json",
+    "sha256": "f6722a718ba9c931ae6314aedbf4abc3031f9b8253ba5fbe8c2c9830b4912853",
+    "whole_seconds": 60.0884769000113,
+    "actual_cli": true,
+    "startup_checks_completed": 3,
+    "dummy_prompt_inputs": 2,
+    "injected_folder_timestamp_observations": 6,
+    "affected_inventory_calls": 1,
+    "affected_file_hashes": 1,
+    "transport_created": false,
+    "keys_persisted": false,
+    "provider_calls": 0
+  },
+  "independent_readback": "passed",
+  "new_allocation": false,
+  "live_started": false
+}
