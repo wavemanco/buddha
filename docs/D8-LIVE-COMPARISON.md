@@ -9,11 +9,12 @@ report. A read-only reconstruction checked all three tasks and 12 owners in
 3.836 seconds without writing the report or calling a provider. The run has
 $149.762033 and 16,336 attempts remaining under its original approval.
 
-The stop came from a saved-evidence tree comparison. The diagnostic omitted
-the changed entry and field. The read-only reconstruction saw no difference.
-The frozen runner has a path to reuse the sealed stages. Same-run resumption
-has yet to be exercised on this partial. Keep the v3 command on hold while
-the continuation path is checked. [V3 stop evidence](conformance/d8-v3-screen-publication-stop.json).
+The stop came from a saved-evidence tree comparison after the file hashes
+and database sidecar checks passed. The diagnostic omitted the changed
+entry and field. The read-only reconstruction saw no difference. Preserve
+v3 as a partial. The separate publication-recovery exercise is dropped.
+The next live handoff will focus on completing the comparison.
+[V3 stop evidence](conformance/d8-v3-screen-publication-stop.json).
 
 The v3 runner
 compares directory entry names, types and identities before and after one
