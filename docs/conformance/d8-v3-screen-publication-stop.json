@@ -1,0 +1,30 @@
+{
+  "format": "buddha.d8-v3-screen-publication-stop.v1",
+  "date": "2026-11-12",
+  "status": "live_partial_screen_reconstructed_readonly",
+  "executing_source": "dee016686aa63202de45851331193ecb84c656e2",
+  "stage": "first_common_screen_publication",
+  "failed_predicate": "buddha/doctor.py:423",
+  "changed_entry_known": false,
+  "changed_field_known": false,
+  "diagnostic_sha256": "ccedeafe7df7a8b6ee5c2cf1739700b983a99a2685f0ded1c9422370c58ef8d3",
+  "incomplete_observation_sha256": "fb4783ac86e65e4f6709133716fd435c908af9dcc52808e2637fc3a2b7db05d2",
+  "settled_operations": 48,
+  "recorded_spent_microusd": 237967,
+  "held_microusd": 0,
+  "remaining_microusd": 149762033,
+  "remaining_attempts": 16336,
+  "saved_answers": 30,
+  "completed_task_evaluations": 3,
+  "verified_stage_seals": 12,
+  "verified_sealed_artifacts": 57,
+  "read_only_reconstruction": {
+    "path": "runs/checks/d8-fresh-handoff-20261112-v3/screen-publication-readonly-verified.json",
+    "sha256": "218e3572d49fd32e0faee83b3368398cb6288e6dc7fe4eb3eb80fd804c96a244",
+    "seconds": 3.835547999944538,
+    "provider_calls": 0,
+    "aggregate_report_written": false,
+    "ledger_unchanged": true
+  },
+  "live_continuation_checked": false
+}
