@@ -2,6 +2,25 @@
 
 ## Fresh handoff and approved budget
 
+**November 12 launch stop.** The live launch stopped after key entry when the
+native evaluator's directory metadata changed during inventory. The diagnostic
+did not identify the directory or field. All 19 selected files match their
+pinned names and hashes now. All four grants are unused, with zero spending
+and holds. No key review or study owner was created.
+
+One 18.315-second read-only check reran the validation that failed and matched
+the original preflight. The stopped observations and unused grants remain
+saved. The launch is on hold while the corrected source is checked and bound
+to the handoff.
+
+The correction removes a duplicate inventory in native validation. If only
+directory timestamps change, verification of a frozen selection scans the
+affected component once more and requires the original file names and hashes.
+Directory identity changes, repeated drift and changed bytes still stop.
+The copied native components pass an injected timestamp test. The corrected
+source still needs to be bound into the launch before it can protect a live run.
+[Stop and correction evidence](conformance/d8-fresh-post-key-stop.json).
+
 The fresh comparison is funded and checked. It uses the existing Buddha
 runner at `571fdf1` and creates a new run. Temporal, DBOS, Inspect scheduling,
 OpenTelemetry and OpenLIT are outside this launch.
@@ -39,8 +58,8 @@ pinned Docker images are present. Model access is checked during the live run.
 
 ### Start the fresh comparison
 
-Open a new ordinary PowerShell window with Docker Desktop running. Run these
-two lines once. No administrator rights or directory change are needed.
+**Command on hold.** These lines record the command that stopped. Wait for
+the corrected handoff before launching again.
 
 ```powershell
 Remove-Item -LiteralPath 'Env:\OPENAI_API_KEY', 'Env:\ANTHROPIC_API_KEY' -ErrorAction SilentlyContinue

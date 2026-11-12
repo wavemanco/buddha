@@ -387,6 +387,87 @@ class ReleaseSelectionTests(unittest.TestCase):
         with patch("os.fstat", side_effect=different_ctime):
             self.assertEqual(inventory(self.roots["agent"]), expected)
 
+    def test_selected_inventory_rechecks_only_one_directory_timestamp_change(self):
+        selection = self.prepare()
+        root = self.roots["agent"]
+        target = root / "policy.json"
+        original_hash = releases.file_hash
+        original = target.read_bytes()
+
+        def check(outcome):
+            scans = 0
+
+            def scan(path):
+                nonlocal scans
+                if path == root:
+                    scans += 1
+                    if scans == 2 and outcome == "changed_bytes":
+                        target.write_bytes(b"X" * len(original))
+                return inventory(path)
+
+            def hash_file(path, **options):
+                digest = original_hash(path, **options)
+                if path == target and (scans < 2 or outcome == "changed_again"):
+                    info = root.stat()
+                    os.utime(root, ns=(info.st_atime_ns, info.st_mtime_ns - 2_000_000_000))
+                return digest
+
+            with (
+                patch.object(releases, "inventory", side_effect=scan),
+                patch.object(releases, "file_hash", side_effect=hash_file),
+            ):
+                if outcome == "stable":
+                    with self.assertRaisesRegex(ReleaseError, "timestamps changed"):
+                        inventory(root)
+                    self.assertEqual(
+                        verify_selection(
+                            selection, self.roots, expected_sha256=selection.fingerprint()
+                        ),
+                        selection.fingerprint(),
+                    )
+                else:
+                    with self.assertRaises(ReleaseError):
+                        verify_selection(
+                            selection, self.roots, expected_sha256=selection.fingerprint()
+                        )
+            self.assertEqual(scans, 2)
+
+        for outcome in ("stable", "changed_again", "changed_bytes"):
+            with self.subTest(outcome=outcome):
+                check(outcome)
+
+    def test_directory_identity_change_takes_precedence_over_timestamp_change(self):
+        selection = self.prepare()
+        root = self.roots["environment"]
+        nested = root / "site-packages/nested"
+        original_hash, original_information = releases.file_hash, releases._information
+        changed = False
+
+        def hash_file(path, **options):
+            nonlocal changed
+            digest = original_hash(path, **options)
+            if path == nested / "dependency.py":
+                info = root.stat()
+                os.utime(root, ns=(info.st_atime_ns, info.st_mtime_ns - 2_000_000_000))
+                changed = True
+            return digest
+
+        def information(path):
+            info = original_information(path)
+            if changed and path == nested:
+                fields = {name: getattr(info, name) for name in dir(info) if name.startswith("st_")}
+                return SimpleNamespace(**(fields | {"st_ino": info.st_ino + 1}))
+            return info
+
+        with (
+            patch.object(releases, "inventory", wraps=inventory) as scans,
+            patch.object(releases, "file_hash", side_effect=hash_file),
+            patch.object(releases, "_information", side_effect=information),
+        ):
+            with self.assertRaisesRegex(ReleaseError, "directory identity changed"):
+                verify_selection(selection, self.roots, expected_sha256=selection.fingerprint())
+        self.assertEqual(scans.call_args_list.count(unittest.mock.call(root)), 1)
+
     def test_file_changed_during_hashing_is_rejected(self):
         target = self.roots["agent"] / "policy.json"
         original = target.read_bytes()

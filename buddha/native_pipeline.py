@@ -264,7 +264,7 @@ def validate_native(native: dict[str, object], stages: object, release: Release)
             "max_calls",
         },
     )
-    _component(native)
+    _, native_roots = _component(native)
     validate_native_flow(stages, release)
     _object(native["environment"])
     _object(native["hooks"], {"modules", "cache", "calls", "sdk"})
@@ -273,7 +273,6 @@ def validate_native(native: dict[str, object], stages: object, release: Release)
         native["executor"],
         {"image_id", "role", "runner_entrypoint", "image_environment", "limits", "docker_endpoint"},
     )
-    _, native_roots = _component(native)
     pairs = runtime["image_environment"]
     if type(pairs) is not list or any(type(pair) is not list or len(pair) != 2 for pair in pairs):
         raise PipelineError("invalid native image environment")

@@ -32,6 +32,10 @@ class ReleaseError(ValueError):
     """Release data or selected files violate the supported offline contract."""
 
 
+class _DirectoryTimestampChanged(ReleaseError):
+    """An inventory saw directory timestamp drift with stable identities."""
+
+
 def _json(value: object) -> bytes:
     try:
         raw = json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False).encode()
@@ -412,8 +416,17 @@ def inventory(root: Path) -> dict[str, str]:
                 result[name] = file_hash(path, max_bytes=MAX_FILE_BYTES)
                 if _signature(_information(path)) != _signature(information):
                     raise ReleaseError("component changed during inventory")
-        if any(_signature(_information(path)) != before for path, before in directories.items()):
-            raise ReleaseError("component directory changed during inventory")
+        timestamps_changed = False
+        for path, before in directories.items():
+            information = _information(path)
+            after = _signature(information)
+            if not stat.S_ISDIR(information.st_mode) or after[:3] != before[:3]:
+                raise ReleaseError("component directory identity changed during inventory")
+            timestamps_changed |= after[3:] != before[3:]
+        if timestamps_changed:
+            raise _DirectoryTimestampChanged(
+                "component directory timestamps changed during inventory"
+            )
         _inventory(result)
         return dict(sorted(result.items()))
     except OSError:
@@ -510,7 +523,12 @@ def verify_selection(
     if not isinstance(selection, Selection) or selection.fingerprint() != _digest(expected_sha256):
         raise ReleaseError("selection differs from its frozen owner identity")
     record = selection.to_record()
-    actual = {name: inventory(path) for name, path in _roots(roots).items()}
+    actual = {}
+    for name, path in _roots(roots).items():
+        try:
+            actual[name] = inventory(path)
+        except _DirectoryTimestampChanged:
+            actual[name] = inventory(path)
     if actual != record["components"]:
         raise ReleaseError("selected component inventory changed")
     return selection.fingerprint()
