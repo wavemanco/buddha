@@ -1,0 +1,44 @@
+{
+  "format": "buddha.d8-fresh-funded-handoff.v1",
+  "date": "2026-11-12",
+  "status": "funded_configuration_checked_no_execution",
+  "executing_source": "571fdf14a1b5016eb3ef4bf3b6c7b5fee5d290ee",
+  "launcher": "runs/reviews/d8r12/docs/conformance/unified-run.py",
+  "launcher_sha256": "21e1b8d11ff430df54f730bc8bd6142bf761af13cf07b6dbae2e50857d717005",
+  "approval": {
+    "path": "runs/checks/d8-fresh-handoff-20261112-v1/approval-decision.json",
+    "sha256": "79165f761cb5a7d385c86c97b9a0643dc660012055def9150f54fc13415f7964"
+  },
+  "handoff": {
+    "path": "runs/imp01-d8-fresh-20261112-v1-combined/NOT-CREATED-unified-launch.json",
+    "sha256": "3d57e7193a999959dbabfcf236f1295d1924b0d9633c5121af6049cd049df566"
+  },
+  "preflight": {
+    "path": "runs/imp01-d8-fresh-20261112-v1-funded/preflight.json",
+    "sha256": "b4b4d12d4f44a1b10f7f6d3a3ac98c5ef11a61b4ee19d98ff9212566d39100cd",
+    "phase": "primary",
+    "stop_code": null,
+    "operation_count": 0,
+    "spent_microusd": 0,
+    "reserved_microusd": 0
+  },
+  "constructor_result": {
+    "path": "runs/checks/d8-fresh-handoff-20261112-v1/funded-preparation-result.json",
+    "sha256": "66e4112d8babfd5ffeaa17fd7c5ef73657415f74298e9cf6a2967b28da24bf4e",
+    "seconds": 26.607178100035526
+  },
+  "api_limits": {
+    "search": {"budget_microusd": 40000000, "max_calls": 4096},
+    "validation": {"budget_microusd": 0, "max_calls": 0},
+    "final": {"budget_microusd": 85000000, "max_calls": 10240},
+    "shared_plain_references": {"budget_microusd": 25000000, "max_calls": 2048},
+    "total": {"budget_microusd": 150000000, "max_calls": 16384}
+  },
+  "native_review": {"model": "gpt-6.1-sol", "reasoning_effort": "ultra", "max_contexts": 44},
+  "installed_docker_images_checked": 2,
+  "independent_output_readback": "passed",
+  "keys_read": false,
+  "provider_calls": 0,
+  "owners_created": 0,
+  "native_contexts_started": 0
+}

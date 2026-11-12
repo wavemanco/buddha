@@ -1,8 +1,8 @@
 # Main live comparison
 
-## Fresh handoff and proposed budget
+## Fresh handoff and approved budget
 
-The fresh comparison is prepared and unfunded. It uses the existing Buddha
+The fresh comparison is funded and checked. It uses the existing Buddha
 runner at `571fdf1` and creates a new run. Temporal, DBOS, Inspect scheduling,
 OpenTelemetry and OpenLIT are outside this launch.
 
@@ -12,7 +12,7 @@ total. Both are assessed on the same 26 separate final tasks with official
 NoveltyBench 1.1. The plain Luna controls use independent and in-context
 sampling. Human review remains optional.
 
-| Phase | Proposed combined API cap | Recorded attempts |
+| Phase | Approved combined API cap | Recorded attempts |
 | --- | ---: | ---: |
 | Development | $40 | 4,096 |
 | Final assessment | $85 | 10,240 |
@@ -20,8 +20,8 @@ sampling. Human review remains optional.
 | **Total** | **$150** | **16,384** |
 
 The previous workload estimate was $28–80 combined. It was extrapolated
-from partial data. The proposed caps set the maximum authority for this run.
-The proposed native review keeps the existing limit of 44 fresh Sol/ULTRA
+from partial data. The approved caps set the maximum authority for this run.
+The approved native review keeps the existing limit of 44 fresh Sol/ULTRA
 contexts. That uses unpriced Codex-plan capacity outside the API cap.
 
 The existing builders checked 133 output files in 25.339 seconds. An
@@ -31,10 +31,33 @@ checks covered a settled quota failure, completed native assessment reuse
 without another request, and launcher resume after a partial plain control.
 The fresh request-profile check accepted seven synthetic requests and
 rejected 27 changed requests. It covered plain generation and the official
-judge settings. No model calls, real containers, runtime owners or grants
-were created. The completed packages reserve paths for a separate funded
-handoff. After approval, construct and check that handoff, then issue the
-exact PowerShell command. [Preparation receipt](conformance/d8-fresh-handoff-preparation.json).
+judge settings. After approval, the funded check passed in 26.607 seconds.
+All four grants show zero operations, recorded spending and holds. Both
+pinned Docker images are present. Model access is checked during the live run.
+[Preparation receipt](conformance/d8-fresh-handoff-preparation.json),
+[funded handoff](conformance/d8-fresh-funded-handoff.json).
+
+### Start the fresh comparison
+
+Open a new ordinary PowerShell window with Docker Desktop running. Run these
+two lines once. No administrator rights or directory change are needed.
+
+```powershell
+Remove-Item -LiteralPath 'Env:\OPENAI_API_KEY', 'Env:\ANTHROPIC_API_KEY' -ErrorAction SilentlyContinue
+& "C:\Program Files\Python313\python.exe" -B "C:\Users\arvik\code\buddha\runs\reviews\d8r12\docs\conformance\unified-run.py" --handoff "C:\Users\arvik\code\buddha\runs\imp01-d8-fresh-20261112-v1-combined\NOT-CREATED-unified-launch.json" --sha256 "3d57e7193a999959dbabfcf236f1295d1924b0d9633c5121af6049cd049df566" --live --prompt-keys --confirm-project-keys
+```
+
+The first line clears inherited key variables in that PowerShell window so
+both masked prompts appear. The second line checks the pinned handoff, asks
+for both keys and starts one paid comparison within the approved caps.
+`--confirm-project-keys` confirms that the keys are for the reviewed
+public pay-as-you-go accounts with default processing. `-B` prevents Python
+bytecode files. Paste each key once and press Enter. Asterisks show that the
+paste arrived. The keys are temporary for the launch.
+
+Keep the window open. To stop, press **Ctrl+C once** and allow accounting
+and worker cleanup to finish. If the run stops, share the terminal diagnostic
+and final JSON before trying again.
 
 ## Current status after the quota stop
 
@@ -98,7 +121,8 @@ Keep each `native-inputs` folder with its allowance/run records. It preserves th
 
 ## Corrected-source launch command
 
-Open a **new ordinary PowerShell window**, with Docker Desktop running. No administrator rights or `cd` are needed. Run both lines once:
+**Do not run this historical command.** It records the launch that stopped
+on the generation quota. Use the fresh command at the top of this guide.
 
 ```powershell
 Remove-Item -LiteralPath 'Env:\OPENAI_API_KEY', 'Env:\ANTHROPIC_API_KEY' -ErrorAction SilentlyContinue
