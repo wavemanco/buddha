@@ -2722,7 +2722,7 @@ def run_improver_study(directory: Path, *, transport: RawHTTPTransport) -> dict[
     directory = _path_value(str(directory))
     context = _context(directory)
     authorization = _path_value(context["authorization"])
-    if (directory / "report.json").exists():
+    if launch_common._retained_development() is None and (directory / "report.json").exists():
         return inspect_improver_study(
             directory,
             authorization=authorization,
@@ -2734,10 +2734,30 @@ def run_improver_study(directory: Path, *, transport: RawHTTPTransport) -> dict[
         pipeline._exclusive(directory),
     ):
         with launch_common._study_stage("restore"):
-            reader, state = _restore(directory, authorization)
+            retained = launch_common._take_development(directory.parent.parent)
+            if retained is None:
+                reader, state = _restore(directory, authorization)
+            else:
+                reader, state = retained
+                if (
+                    type(reader) is not NativeEvidence
+                    or str(reader.root) != str(directory)
+                    or str(reader.authorization) != str(authorization)
+                ):
+                    raise ImproverStudyError("checked development changes its original owner")
+                capture = reader.capture
+                entries = capture._tree_entries()
+                if len(entries) + sum(map(len, capture._watched_trees.values())) > (
+                    capture._maximum_entries
+                ):
+                    raise ImproverStudyError("locked development exceeds its observed tree bound")
+                lock = entries.pop("running.lock", None)
+                if lock is None or entries != capture.entries:
+                    raise ImproverStudyError("checked development changed before its writer lease")
+                capture.entries["running.lock"] = lock
         while True:
             _check_current(state)
-            reader.capture.finish()
+            reader.finish()
             action = state["action"]
             with launch_common._study_stage(action["kind"], action["position"]):
                 result = _advance_action(reader, state, authority, transport)

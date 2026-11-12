@@ -315,7 +315,7 @@ class CheckedTrialContinuation(CheckedStudyContinuation):
     def _scope(
         self,
         *,
-        before_start: Callable[[Path], None] | None = None,
+        before_start: common._WriterCheck | None = None,
         development: common._DevelopmentObservation | None = None,
     ) -> Iterator[None]:
         with (
@@ -346,6 +346,7 @@ class _CheckedState:
     state: dict[str, Any] | None = None
     study_result: bytes | None = None
     quota_attempt: Path | None = None
+    development: common._DevelopmentObservation | None = None
 
     def after_locks(
         self,
@@ -1260,6 +1261,7 @@ def _check(
             state if study_continuation else None,
             None if study_result is None else _json(study_result),
             quota_attempt,
+            (reader, state) if trial_continuation and study_result is None else None,
         )
 
 
@@ -1356,6 +1358,8 @@ def launch_trial_continuation(
     """
     from buddha import unified_launch
 
+    emit = unified_launch._notice if notice is None else notice
+    common._emit(emit, "Reading the saved study before keys.")
     prepared = _checked_state(path, expected_sha256, trial_continuation=True)
     checked = prepared.checked
     if type(checked) is not CheckedTrialContinuation:
@@ -1365,15 +1369,13 @@ def launch_trial_continuation(
             "retained quota failure needs checked adoption before launch"
         )
 
-    def before_start(trial: Path) -> None:
+    def before_start(trial: Path, owned_locks: frozenset[str]) -> None:
         checked._check_thread(checked.study)
         if str(trial) != str(checked._trial):
             raise WitnessContinuationError("continuation writer changes the checked trial")
-        # The original coordinator owns its separate workspace lease here. Its
-        # phase controllers acquire the original trial/study leases themselves.
-        prepared.after_locks(owned_locks=frozenset())
+        prepared.after_locks(owned_locks=owned_locks)
 
-    with checked._scope(before_start=before_start):
+    with checked._scope(before_start=before_start, development=prepared.development):
         return unified_launch.launch(
             checked._launch[0],
             expected_sha256=checked._launch[1],
@@ -1381,7 +1383,7 @@ def launch_trial_continuation(
             prompt_keys=prompt_keys,
             confirm_project_keys=confirm_project_keys,
             transport=transport,
-            notice=unified_launch._notice if notice is None else notice,
+            notice=emit,
             heartbeat_seconds=heartbeat_seconds,
         )
 

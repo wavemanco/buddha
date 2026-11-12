@@ -4,6 +4,7 @@ import os
 import threading
 import unittest
 from contextlib import contextmanager
+from dataclasses import replace
 from pathlib import Path
 from unittest.mock import patch
 
@@ -12,6 +13,7 @@ from test_unified_launch import sha
 
 from buddha import baseline, launch_common, plain_comparison, unified_continuation
 from buddha.doctor import _Capture
+from buddha.native_evidence import NativeEvidence
 from buddha.releases import ReleaseError, _json
 
 
@@ -25,13 +27,13 @@ class TrialFreshnessTests(unittest.TestCase):
             launch_common._phase_continuation(
                 lambda current, relative=False: dict(current),
                 lambda trial, phase, current: dict(current),
-                before_start=calls.append,
+                before_start=lambda trial, locks: calls.append((trial, locks)),
             ),
         ):
             launch_common._phase_before_start(root)
             raise RuntimeError("supplied")
         launch_common._phase_before_start(root)
-        self.assertEqual(calls, [root])
+        self.assertEqual(calls, [(root, frozenset())])
         with (
             self.assertRaises(ReleaseError),
             launch_common._phase_continuation(
@@ -114,6 +116,10 @@ class TrialFreshnessTests(unittest.TestCase):
 
     def drift(self, boundary, kind):
         case, prepared, cut, original, empty = self.fixture()
+        prepared = replace(
+            prepared,
+            development=(NativeEvidence(prepared.checked.study, prepared.search_grant), {}),
+        )
         target = cut if kind == "cut" else original
         raw = target.read_bytes()
         changed = [False]
@@ -150,7 +156,17 @@ class TrialFreshnessTests(unittest.TestCase):
 
         if boundary == "keys":
             case.enter_change = mutate
-        with case.seams():
+
+        def observe(*args, **kwargs):
+            self.assertIsNone(launch_common._retained_development())
+            return case.observe(*args, **kwargs)
+
+        with (
+            case.seams(),
+            patch(
+                "buddha.comparison_observation.save_observation", side_effect=observe
+            ) as observer,
+        ):
             try:
                 with (
                     patch.object(unified_continuation, "_checked_state", return_value=prepared),
@@ -170,6 +186,7 @@ class TrialFreshnessTests(unittest.TestCase):
                 restore()
         self.assertNotIn(("primary",), case.events)
         self.assertFalse(case.prepared)
+        observer.assert_called_once()
         if boundary == "lease":
             self.assertFalse(any(event[0] == "keys" for event in case.events))
 
