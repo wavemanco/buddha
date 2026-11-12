@@ -28,7 +28,7 @@ def sha(raw):
 
 
 class SourceFailureFeedbackTests(unittest.TestCase):
-    def edge(self):
+    def edge(self, *, quota=False):
         """Real owners and passive receipts; existing mock channel, never host source exec."""
         from buddha.candidate_improvement import (
             prepare_candidate_improvement,
@@ -104,12 +104,16 @@ class SourceFailureFeedbackTests(unittest.TestCase):
         child_record["lineage"] = self.proposal["child"]["lineage"]
         child = h.screen(child_record)
         child_directory, _ = h.prepare(child, h.root / "failed-screen", authority)
-        with patch.object(
-            h,
-            "execute",
-            side_effect=self.outcome.failed_worker(h, "1", h.execute),
-        ):
+        if quota:
+            h.programs[child.candidate_id]["callbacks"] = generation["max_callbacks"] + 1
             self.failed = h.run_screen(child_directory)
+        else:
+            with patch.object(
+                h,
+                "execute",
+                side_effect=self.outcome.failed_worker(h, "1", h.execute),
+            ):
+                self.failed = h.run_screen(child_directory)
         self.assertEqual(self.failed["disposition"], "candidate_execution_failed")
         self.history = [
             {
@@ -252,6 +256,18 @@ class SourceFailureFeedbackTests(unittest.TestCase):
                 destination, expected_provenance_sha256=provenance_pin
             )
         self.assertEqual(inspected, result)
+
+    def test_checked_quota_failure_reaches_later_feedback(self):
+        destination = self.edge(quota=True)
+        with self.h.readonly():
+            result = build_source_feedback(
+                destination, reference=self.reference, failure_history=self.history
+            )
+        count = self.parent_record["generation"]["max_callbacks"]
+        for row in result["feedback"]["records"]:
+            failure = json.loads(row["note"])["failures"][0]
+            self.assertEqual(failure["reason"], "quota")
+            self.assertEqual(failure["completed_callbacks"], count)
 
     def test_two_true_edges_keep_order_and_every_older_omission_explicit(self):
         destination = self.edge()

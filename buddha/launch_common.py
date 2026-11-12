@@ -66,6 +66,8 @@ _UNIFIED_OUTER_V1 = (
 _UNIFIED_ROLES_V1 = frozenset("buddha/" + name for name in _UNIFIED_HELPERS_V1) | frozenset(
     _UNIFIED_OUTER_V1
 )
+_UNIFIED_HELPERS_V2 = _UNIFIED_HELPERS_V1 - {"reference.py"}
+_UNIFIED_ROLES_V2 = _UNIFIED_ROLES_V1 - {"buddha/reference.py"}
 
 _WITNESS_CONTINUATION: ContextVar[
     Callable[[Path, Path, "SourceScreen", Mapping[Path, str], Path | None], dict[Path, str]] | None
@@ -488,8 +490,9 @@ def _helper_role_relation(
     before_controls: Mapping[Path, str],
     after_context: object,
     after_controls: Mapping[Path, str],
+    quota_cut: bool = False,
 ) -> dict[Path, str]:
-    """Check a bound handoff's frozen 68-role projection for one planned screen.
+    """Check a bound handoff's exact role projection for one planned screen.
 
     No I/O or launcher uses this relation. An outer loader must still join all
     original actors, grants and the cut, verify actual files and review repair
@@ -522,7 +525,10 @@ def _helper_role_relation(
     ):
         raise ReleaseError("helper relation bytes differ from their explicit reference")
     relation = _object(_load(raw), {"format", "source_manifest", "roles"})
-    if relation["format"] != "buddha.helper-role-relation.v1" or type(screen) is not SourceScreen:
+    relation_format = (
+        "buddha.helper-role-relation.v2" if quota_cut else "buddha.helper-role-relation.v1"
+    )
+    if relation["format"] != relation_format or type(screen) is not SourceScreen:
         raise ReleaseError("unsupported helper relation or planned screen")
 
     def controls(value: object, *, strings: bool = False) -> dict[Path, str]:
@@ -601,7 +607,8 @@ def _helper_role_relation(
     old_package = next(iter(screen_before.values()))[0].parent
     new_package = next(iter(screen_after.values()))[0].parent
     before = {}
-    for role in _UNIFIED_ROLES_V1:
+    roles = _UNIFIED_ROLES_V2 if quota_cut else _UNIFIED_ROLES_V1
+    for role in roles:
         path = remember(old_package.parent / role)
         if path not in recorded:
             raise ReleaseError("original source manifest lacks the frozen unified helper profile")
@@ -666,8 +673,9 @@ def _helper_role_relation(
             del expected[path]
     expected.update(after.values())
     expected[overlay] = overlay_sha
+    helpers = _UNIFIED_HELPERS_V2 if quota_cut else _UNIFIED_HELPERS_V1
     closures = (
-        ("source_screen.py", _UNIFIED_HELPERS_V1),
+        ("source_screen.py", helpers),
         (
             "candidate_generation.py",
             {
@@ -683,7 +691,7 @@ def _helper_role_relation(
             for path in expected
             if path.name == anchor and all(path.parent / name in expected for name in names)
         }
-        if not names <= _UNIFIED_HELPERS_V1 or prefixes != {new_package}:
+        if not names <= helpers or prefixes != {new_package}:
             raise ReleaseError("helper projection retains ambiguous producer source roles")
     if len(expected) > 1024 or expected != supplied[1]:
         raise ReleaseError(

@@ -265,6 +265,23 @@ class HelperRoleRelationTests(unittest.TestCase):
     def call(self, bundle=None):
         return launch_common._helper_role_relation(**(self.bundle() if bundle is None else bundle))
 
+    def test_quota_profile_uses_original_roles_without_unbound_reference(self):
+        role = "buddha/reference.py"
+        reference = self.before_roles.pop(role)
+        self.after_roles.pop(role)
+        original = _load(self.original_manifest)
+        original["source_sha256"].pop(reference["path"])
+        bundle = self.replace_manifest(self.bundle(), original)
+        relation = _load(bundle["raw"])
+        relation["format"] = "buddha.helper-role-relation.v2"
+        self.rebind(bundle, relation)
+        self.assertEqual(
+            self.call(bundle | {"quota_cut": True}),
+            bundle["after_controls"],
+        )
+        with self.assertRaises(ReleaseError):
+            self.call(bundle)
+
     def replace_manifest(self, bundle, record):
         bundle["original_source_manifest"] = _json(record)
         digest = sha(bundle["original_source_manifest"])
