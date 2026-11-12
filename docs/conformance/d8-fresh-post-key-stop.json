@@ -1,0 +1,46 @@
+{
+  "format": "buddha.d8-fresh-post-key-stop.v1",
+  "date": "2026-11-12",
+  "status": "stopped_before_dispatch_correction_checked_unbound",
+  "executing_source": "571fdf14a1b5016eb3ef4bf3b6c7b5fee5d290ee",
+  "handoff_sha256": "3d57e7193a999959dbabfcf236f1295d1924b0d9633c5121af6049cd049df566",
+  "stop": {
+    "launcher": "buddha/unified_launch.py:566",
+    "predicate": "buddha/releases.py:416",
+    "condition": "component directory changed during inventory",
+    "selected_component": "native",
+    "changed_directory": null,
+    "changed_field": null,
+    "diagnostic_sha256": "9e71c96216768d9481b5c155672393fc5450324b5a27acdd58e42b0bfbe2e698",
+    "incomplete_observation_sha256": "57459e2f1daf31c89476a24523a40c63c9a81e11be7d1294fb7d0fd9cc85d0f4"
+  },
+  "read_only_check": {
+    "path": "runs/checks/d8-fresh-handoff-20261112-v1/post-stop-readonly-check.json",
+    "sha256": "ef03c9ebba30c2b7b54dd766129a1b7a4b8c53d238323b8ff0f18e8ef311542b",
+    "seconds": 18.31511229998432,
+    "selected_native_file_hashes_matched": 19,
+    "matches_prelaunch_state": true,
+    "stop_code": null,
+    "descriptor_grants_observations_unchanged": true
+  },
+  "correction": {
+    "removed_duplicate_native_inventory": true,
+    "retry_limit_on_directory_timestamp_change": 1,
+    "requires_original_selected_file_map": true,
+    "selected_component_proof": {
+      "path": "runs/checks/d8-fresh-handoff-20261112-v1/native-inventory-correction-proof.json",
+      "sha256": "69fa38fdb88498e91ebcf53346f31c723e2352454326b5f223df9b4faa3d52f3",
+      "normal_scans": 1,
+      "scans_with_injected_timestamp_change": 2
+    },
+    "focused_tests": {"passed": 33, "skipped": 1, "seconds": 14.285},
+    "corrected_source_bound_to_live_handoff": false
+  },
+  "fresh_grants": 4,
+  "operation_count": 0,
+  "spent_microusd": 0,
+  "reserved_microusd": 0,
+  "owners_created": 0,
+  "key_review_records_created": 0,
+  "operator_retry_started": false
+}
