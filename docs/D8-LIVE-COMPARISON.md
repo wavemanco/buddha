@@ -1,21 +1,23 @@
-# Continue the main live comparison
+# Main live comparison
 
 ## Current status after the quota stop
 
-**Live continuation is paused.** The latest launch stopped before the history restore and key entry when two trial directory scans differed. The diagnostic located the check and left the changed entry unidentified. A short, trial-only FileSystemWatcher check saw no events and reached the restore boundary. It was a diagnostic and does not run during startup.
+**The next comparison will start fresh.** The stopped run, its 403 settled calls and its $2.978370 recorded spend remain saved as a partial. The new comparison will generate fresh samples under the same scientific protocol. The fresh handoff and its budget await review.
+
+The latest continuation attempt stopped before the history restore and key entry when two trial directory scans differed. The diagnostic located the check and left the changed entry unidentified. A short, trial-only FileSystemWatcher check saw no events and reached the restore boundary. It was a diagnostic and does not run during startup.
 
 The updated launcher permits a timestamp change in the outer trial scan when the same directory is still present or the file still matches its saved byte receipt. Entry names, kinds, identity and size must match. Buddha rereads changed receipt files and checks the tree again. Unread files, locks, databases, SQLite sidecars, watched external trees and the final checks under the writer locks still use strict checks. This covers a verified timestamp-only case. The cause of the latest real mismatch remains unknown.
 
-The offline recovery verified all 403 settled calls and sealed the fourth opportunity's failed generation under the original twelve-call ceiling. Four common conditions and three improvement decisions are saved. Closing the fourth study decision and completing the matched comparison still require a live continuation.
+The offline recovery verified all 403 settled calls and sealed the fourth opportunity's failed generation under the original twelve-call ceiling. Four common conditions and three improvement decisions are saved as part of the partial.
 
-| Remaining API allowance | Dollars | Recorded attempts |
+| Historical allowance remaining at the stop | Dollars | Recorded attempts |
 | --- | ---: | ---: |
 | Development | $36.426466 | 3,682 |
 | Final assessment | $85 | 10,240 |
 | Both plain controls, shared | $25 | 2,048 |
 | **Total remaining** | **$146.426466** | **15,970** |
 
-The current development ledger still has 403 settled calls, $2.978370 spent and zero held. The earlier $0.009553 spent and separate $0.585611 hold stay with their original records. These remaining limits fit the original $150 and 16,384-attempt approval. Native and human review keep their existing scope.
+The historical development ledger has 403 settled calls, $2.978370 spent and zero held. The earlier $0.009553 spent and separate $0.585611 hold stay with their original records. The table records the balance under the original $150 and 16,384-attempt approval. The fresh handoff will state its own authorized limits.
 
 ### Historical v4 continuation command
 
