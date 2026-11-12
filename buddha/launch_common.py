@@ -9,7 +9,7 @@ from contextlib import AbstractContextManager, contextmanager, nullcontext
 from contextvars import ContextVar
 from pathlib import Path
 from types import GetSetDescriptorType, ModuleType, TracebackType
-from typing import TYPE_CHECKING, Protocol, cast
+from typing import TYPE_CHECKING, Any, Protocol, cast
 
 from buddha import credentials, gateway
 from buddha import native_pipeline as pipeline
@@ -38,6 +38,7 @@ from buddha.search_evidence import (
 )
 
 if TYPE_CHECKING:
+    from buddha.native_evidence import NativeEvidence
     from buddha.source_screen import SourceScreen
 
 # Frozen v1 coverage; future source-inventory additions cannot expand this profile.
@@ -94,11 +95,15 @@ class _SourceResolver(Protocol):
     def __call__(self, current: Mapping[str, str], *, relative: bool) -> dict[str, str]: ...
 
 
+type _DevelopmentObservation = tuple["NativeEvidence", dict[str, Any]]
+
+
 _PHASE_CONTINUATION: ContextVar[
     tuple[
         _SourceResolver,
         Callable[[Path, str, Mapping[Path, str]], dict[Path, str]],
         Callable[[Path], None] | None,
+        _DevelopmentObservation | None,
     ]
     | None
 ] = ContextVar("phase_continuation", default=None)
@@ -110,21 +115,27 @@ def _phase_continuation(
     controls_resolver: Callable[[Path, str, Mapping[Path, str]], dict[Path, str]],
     *,
     before_start: Callable[[Path], None] | None = None,
+    development: _DevelopmentObservation | None = None,
 ) -> Iterator[None]:
     """Use explicit checked phase projections; this supplies no funding authority."""
     if (
         not callable(source_resolver)
         or not callable(controls_resolver)
         or before_start is not None
-        and not callable(before_start)
+        and (not callable(before_start) or development is not None)
         or _PHASE_CONTINUATION.get() is not None
     ):
         raise ReleaseError("phase continuation needs one explicit unnested scope")
-    token = _PHASE_CONTINUATION.set((source_resolver, controls_resolver, before_start))
+    token = _PHASE_CONTINUATION.set((source_resolver, controls_resolver, before_start, development))
     try:
         yield
     finally:
         _PHASE_CONTINUATION.reset(token)
+
+
+def _retained_development() -> _DevelopmentObservation | None:
+    scope = _PHASE_CONTINUATION.get()
+    return None if scope is None else scope[3]
 
 
 def _historical_sources(current: Mapping[str, str], *, relative: bool = False) -> dict[str, str]:

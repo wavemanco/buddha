@@ -312,11 +312,19 @@ class CheckedTrialContinuation(CheckedStudyContinuation):
         return result
 
     @contextmanager
-    def _scope(self, *, before_start: Callable[[Path], None] | None = None) -> Iterator[None]:
+    def _scope(
+        self,
+        *,
+        before_start: Callable[[Path], None] | None = None,
+        development: common._DevelopmentObservation | None = None,
+    ) -> Iterator[None]:
         with (
             super()._scope(),
             common._phase_continuation(
-                self._historical_sources, self._phase_controls, before_start=before_start
+                self._historical_sources,
+                self._phase_controls,
+                before_start=before_start,
+                development=development,
             ),
         ):
             yield
@@ -1111,11 +1119,21 @@ def _check(
             ):
                 if files.get(str(owner_path / name), {}).get("sha256") != digest:
                     raise WitnessContinuationError("cut omits an original owner raw anchor")
-        with checked._scope():
-            treatment, progress = improver_study._witness(
-                reader, state, cut["parent"], witness, base
-            )
         action = state["action"]
+        current_witness = (
+            action["kind"] == "witness"
+            and action["directory"] == witness
+            and all(
+                action["position"][key] == position[key]
+                for key in ("start", "repetition", "arm", "slot")
+            )
+            and _json(action["treatment"].to_record()["parent"]) == _json(cut["parent"])
+        )
+        if current_witness:
+            progress = action["witness_progress"]
+        else:
+            with checked._scope():
+                _, progress = improver_study._witness(reader, state, cut["parent"], witness, base)
         quota_attempt = None
         if quota_owner is not None:
             generation = quota_owner.parent.parent
@@ -1140,15 +1158,7 @@ def _check(
                     raise WitnessContinuationError(
                         "quota publication changes the original failed attempt"
                     )
-        if progress["result"] is None and (
-            action["kind"] != "witness"
-            or action["directory"] != witness
-            or any(
-                action["position"][key] != position[key]
-                for key in ("start", "repetition", "arm", "slot")
-            )
-            or _json(action["treatment"].to_record()["parent"]) != _json(cut["parent"])
-        ):
+        if progress["result"] is None and not current_witness:
             raise WitnessContinuationError("cut is not the original next scheduled witness")
         study_result = None
         pools = []
@@ -1181,7 +1191,7 @@ def _check(
         if isinstance(checked, CheckedTrialContinuation):
             from buddha import unified_launch
 
-            with checked._scope():
+            with checked._scope(development=(reader, state) if study_result is None else None):
                 trial_checked = unified_launch.check_launch(outer_path, expected_sha256=outer_sha)
         reader.finish()
         for authority, snapshot in snapshots.items():

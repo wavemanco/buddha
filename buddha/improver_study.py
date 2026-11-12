@@ -1639,6 +1639,7 @@ def _common_progress(
             location / "witness",
             _position(start, repetition, None, None, stage),
             treatment=treatment,
+            witness_progress=progress,
         )
         return
     if progress["result"] not in state["witnesses"]:
@@ -1816,6 +1817,7 @@ def _opportunity_progress(
                         location / "witness",
                         _position(*coordinate, stage),
                         treatment=treatment,
+                        witness_progress=progress,
                     )
                     return
                 if progress["result"] not in state["witnesses"]:
