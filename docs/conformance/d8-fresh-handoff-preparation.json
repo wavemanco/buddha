@@ -1,0 +1,47 @@
+{
+  "format": "buddha.d8-fresh-handoff-preparation.v1",
+  "date": "2026-11-12",
+  "status": "prepared_unfunded_not_launchable",
+  "executing_source": "571fdf14a1b5016eb3ef4bf3b6c7b5fee5d290ee",
+  "executing_runtime": "runs/reviews/d8r12",
+  "source_fast_ci": "https://github.com/wavemanco/buddha/pull/298/checks",
+  "runtime_python_pins": 348,
+  "indexed_output_files": 133,
+  "preparation_seconds": 25.33920639997814,
+  "independent_output_readback": "passed",
+  "declaration": {
+    "path": "runs/imp01-d8-fresh-20261112-v1-combined/unallocated-combined-declaration.json",
+    "sha256": "f65838c9d51eb0eabd86590851d4862f60647dd326c07f01c04e0e0418d1a697"
+  },
+  "preparation": {
+    "path": "runs/checks/d8-fresh-handoff-20261112-v1/invocation-result.json",
+    "sha256": "2eaf61b8a9e3ad00332d88ee541a5c4c62781fa4875f19982bcf7fe3e30a596c"
+  },
+  "synthetic_request_check": {
+    "path": "runs/checks/d8-fresh-handoff-20261112-v1/request-check.json",
+    "sha256": "b09e98f17c64c7a1168e72a2d06259986bc527a131fe486c766c4230f48fde56",
+    "accepted": 7,
+    "rejected_mutations": 27
+  },
+  "focused_tests": {
+    "status": "pass",
+    "seconds": 15.837,
+    "methods": [
+      "test_candidate_generation_outcome.CandidateGenerationOutcomeTests.test_v2_settled_quota_is_checked_failure_without_an_extra_dispatch",
+      "test_native_evaluation.NativeEvaluationTests.test_known_received_reply_recovery_reuses_original_owner_then_completes",
+      "test_unified_launch.UnifiedLaunchLifecycleTests.test_partial_raw_resumes_same_root_without_preparing_replacement"
+    ]
+  },
+  "proposed_api_limits": {
+    "search": {"budget_microusd": 40000000, "max_calls": 4096},
+    "validation": {"budget_microusd": 0, "max_calls": 0},
+    "final": {"budget_microusd": 85000000, "max_calls": 10240},
+    "shared_plain_references": {"budget_microusd": 25000000, "max_calls": 2048},
+    "total": {"budget_microusd": 150000000, "max_calls": 16384}
+  },
+  "proposed_native_review": {"model": "gpt-6.1-sol", "reasoning_effort": "ultra", "max_contexts": 44},
+  "future_paths_present": 0,
+  "provider_calls": 0,
+  "grants_created": 0,
+  "new_long_run": false
+}
