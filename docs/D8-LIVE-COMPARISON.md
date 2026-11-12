@@ -1,8 +1,45 @@
 # Main live comparison
 
+## Fresh handoff and proposed budget
+
+The fresh comparison is prepared and unfunded. It uses the existing Buddha
+runner at `571fdf1` and creates a new run. Temporal, DBOS, Inspect scheduling,
+OpenTelemetry and OpenLIT are outside this launch.
+
+The original and evolved Python improvers get the same starting agents,
+three development WildChat tasks and sixteen improvement opportunities in
+total. Both are assessed on the same 26 separate final tasks with official
+NoveltyBench 1.1. The plain Luna controls use independent and in-context
+sampling. Human review remains optional.
+
+| Phase | Proposed combined API cap | Recorded attempts |
+| --- | ---: | ---: |
+| Development | $40 | 4,096 |
+| Final assessment | $85 | 10,240 |
+| Both plain controls, shared | $25 | 2,048 |
+| **Total** | **$150** | **16,384** |
+
+The previous workload estimate was $28–80 combined. It was extrapolated
+from partial data. The proposed caps set the maximum authority for this run.
+The proposed native review keeps the existing limit of 44 fresh Sol/ULTRA
+contexts. That uses unpriced Codex-plan capacity outside the API cap.
+
+The existing builders checked 133 output files in 25.339 seconds. An
+independent check confirmed the file hashes, both agents, the task selections
+and the empty launch paths. Short
+checks covered a settled quota failure, completed native assessment reuse
+without another request, and launcher resume after a partial plain control.
+The fresh request-profile check accepted seven synthetic requests and
+rejected 27 changed requests. It covered plain generation and the official
+judge settings. No model calls, real containers, runtime owners or grants
+were created. The completed packages reserve paths for a separate funded
+handoff. After approval, construct and check that handoff, then issue the
+exact PowerShell command. [Preparation receipt](conformance/d8-fresh-handoff-preparation.json).
+
 ## Current status after the quota stop
 
-**The next comparison will start fresh.** The stopped run, its 403 settled calls and its $2.978370 recorded spend remain saved as a partial. The new comparison will generate fresh samples under the same scientific protocol. The fresh handoff and its budget await review.
+The stopped run, its 403 settled calls and its $2.978370 recorded spend
+remain saved as a partial. The fresh run and its proposed budget are above.
 
 The latest continuation attempt stopped before the history restore and key entry when two trial directory scans differed. The diagnostic located the check and left the changed entry unidentified. A short, trial-only FileSystemWatcher check saw no events and reached the restore boundary. It was a diagnostic and does not run during startup.
 
