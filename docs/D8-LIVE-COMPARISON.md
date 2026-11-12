@@ -1,5 +1,33 @@
 # D8: corrected-source comparison handoff
 
+## Prepared continuation after the quota stop
+
+**Prepared. Do not run until quota adoption succeeds and live execution is approved.** The local adoption reached its 10-minute read limit before writing. Four common conditions and three improvement decisions remain saved. The fourth opportunity still needs its quota failure sealed under the original twelve-call ceiling. This handoff continues the November 9 comparison in place with the same WildChat tasks, official NoveltyBench 1.1 settings, final assessment and two plain-model controls.
+
+| Remaining API allowance | Dollars | Recorded attempts |
+| --- | ---: | ---: |
+| Development | $36.426466 | 3,682 |
+| Final assessment | $85 | 10,240 |
+| Both plain controls, shared | $25 | 2,048 |
+| **Total remaining** | **$146.426466** | **15,970** |
+
+The current development ledger still has 403 settled calls, $2.978370 spent and zero held. The earlier $0.009553 spent and separate $0.585611 hold stay with their original records. These remaining limits fit the original $150 and 16,384-attempt approval. Native and human review keep their existing scope.
+
+### Prepared continuation command
+
+After successful quota adoption and separate live approval, open a new ordinary PowerShell window with Docker Desktop running. Run these two lines once.
+
+```powershell
+Remove-Item -LiteralPath 'Env:\OPENAI_API_KEY', 'Env:\ANTHROPIC_API_KEY' -ErrorAction SilentlyContinue
+& "C:\Program Files\Python313\python.exe" -B "C:\Users\arvik\code\buddha\runs\reviews\d8-preflight-performance-20261111-v1\docs\conformance\unified-run.py" --handoff "C:\Users\arvik\code\buddha\runs\checks\d8-preflight-performance-20261111-v1\continuation.json" --sha256 "8d13225d12ba6f5d6c3fdc3274ba3d033d84553ffa1de49e3a095653244e0d3b" --continuation --live --prompt-keys --confirm-project-keys
+```
+
+The first line clears the two key variables in that window so the masked prompts appear. The second line checks the pinned handoff and continues the paid study within its remaining allowance. Use the same reviewed OpenAI and Anthropic keys from the November 9 run. The saved November 10 review passes the seven-day freshness check through November 17 UTC. Each key is temporary for the launch. Keep both keys out of chat and the command itself.
+
+The first saved-history check runs before progress messages and may take several minutes. The successful read-only check took 7 minutes 51 seconds, and the later adoption read reached its 10-minute cap. The live startup checks the history again before and after key entry, so allow more time. Keep the window open. To stop, press **Ctrl+C once** and allow cleanup to finish. If the run stops, share the final status before trying again.
+
+---
+
 November 9, 2026. **This run stopped on an internal generation-call quota. Do not repeat the command below.** See [the diagnosis and reuse gates](D8-CALL-QUOTA-STOP.md). The handoff passed its recorded preflight and independent readback before launch. This handoff uses the corrected source `8fa7dc9c3d88ae748990d7530586cd7adcdfa776`. Native evaluator inputs now use scoped staging beside the allowance files, avoiding the reproduced deep-folder mount failure while keeping exact input and custody checks. [Correction](D8-NATIVE-STOP-REVIEW.md#bounded-resolution-follow-up), [current delivery](conformance/d8-corrected-handoff-delivery.json), [PLAN D8](PLAN.md).
 
 ## Current scope and remaining allowance
