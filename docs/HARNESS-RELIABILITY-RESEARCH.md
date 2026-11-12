@@ -12,6 +12,15 @@ for a bounded compatibility experiment, not demonstrated integrations.
 dependency, changes no executing source, migrates no records and authorizes no
 API spending. The stopped experiment and its scientific settings remain frozen.
 
+**November 12 follow-up.** Inspect has passed the real offline trace, error and
+viewer endpoint check. A separate no-model check confirmed that Inspect's
+retry skips a completed sample. The first place to evaluate replacing
+scheduling and progress code is a fresh final assessment and its two plain controls.
+Adoption requires interruption and resume with matching official scores and
+accounting. The DBOS wrapper probe removed no production code. Keep it out of
+the current recovery and reconsider only if it can replace existing restart
+bookkeeping. [Inspect proof and adoption boundary](INSPECT-OBSERVABILITY-PROOF.md).
+
 ## What problem are we solving?
 
 The current phase combines reliability engineering with experimental integrity.

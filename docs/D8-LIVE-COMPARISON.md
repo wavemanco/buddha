@@ -1,8 +1,12 @@
 # Continue the main live comparison
 
-## Prepared continuation after the quota stop
+## Current status after the quota stop
 
-**Resume the approved live comparison.** The earlier startup stop did not recur in the read-only diagnostic. The launcher now prints the failing source location if the initial check stops again. The offline recovery verified all 403 settled calls and recorded the fourth opportunity's generation failure under the original twelve-call ceiling. Four common conditions and three improvement decisions are already saved. On resume, Buddha will close the fourth opportunity using that record and continue in place with the same WildChat tasks, official NoveltyBench 1.1 settings, final assessment and two plain-model controls.
+**Live continuation is paused.** The latest launch stopped before the history restore and key entry when two trial directory scans differed. The diagnostic located the check and left the changed entry unidentified. A short, trial-only FileSystemWatcher check saw no events and reached the restore boundary. It was a diagnostic and does not run during startup.
+
+The updated launcher permits a timestamp change in the outer trial scan when the same directory is still present or the file still matches its saved byte receipt. Entry names, kinds, identity and size must match. Buddha rereads changed receipt files and checks the tree again. Unread files, locks, databases, SQLite sidecars, watched external trees and the final checks under the writer locks still use strict checks. This covers a verified timestamp-only case. The cause of the latest real mismatch remains unknown.
+
+The offline recovery verified all 403 settled calls and sealed the fourth opportunity's failed generation under the original twelve-call ceiling. Four common conditions and three improvement decisions are saved. Closing the fourth study decision and completing the matched comparison still require a live continuation.
 
 | Remaining API allowance | Dollars | Recorded attempts |
 | --- | ---: | ---: |
@@ -13,18 +17,18 @@
 
 The current development ledger still has 403 settled calls, $2.978370 spent and zero held. The earlier $0.009553 spent and separate $0.585611 hold stay with their original records. These remaining limits fit the original $150 and 16,384-attempt approval. Native and human review keep their existing scope.
 
-### Prepared continuation command
+### Historical v4 continuation command
 
-Open a new ordinary PowerShell window with Docker Desktop running. Run these two lines once.
+**Do not rerun this command.** This records the exact PowerShell invocation that stopped. The descriptor binds the earlier startup code. Use [the living plan](PLAN.md#current-gates-to-the-completed-comparison) for the next decision.
 
 ```powershell
 Remove-Item -LiteralPath 'Env:\OPENAI_API_KEY', 'Env:\ANTHROPIC_API_KEY' -ErrorAction SilentlyContinue
 & "C:\Program Files\Python313\python.exe" -B "C:\Users\arvik\code\buddha\runs\z2\docs\conformance\unified-run.py" --handoff "C:\Users\arvik\code\buddha\runs\checks\d8-continuation-startup-20261112-v4\continuation.json" --sha256 "0cdcf5cb948131a19027ca5acb675e1a3587b9bc276576470d9a1d7dcb69e26a" --continuation --live --prompt-keys --confirm-project-keys
 ```
 
-The first line clears the two key variables in that window so the masked prompts appear. The second line checks the pinned handoff and continues the paid study within its remaining allowance. Use the same reviewed OpenAI and Anthropic keys from the November 9 run. The saved November 10 review passes the seven-day freshness check through November 17 UTC. Each key is temporary for the launch. Keep both keys out of chat and the command itself.
+The first line clears the two key variables in that PowerShell window so the masked prompts appear. The second checks the pinned handoff before it can resume paid work within the remaining allowance. At the recorded stop it asked for no keys and made no calls.
 
-PowerShell first prints that it is reading the saved study. If this read is still running after 15 minutes, it prints a status message every 15 minutes. That message is informational and the read keeps running. The recovery's one history read took 11 minutes 13 seconds. The new startup carries its checked state into the writer and verifies the file and ledger fingerprints before work proceeds. Live startup time for the new version is still unmeasured. Keep the window open. To stop, press **Ctrl+C once** and allow cleanup to finish. If you stop during the initial read, the next launch starts that read from the beginning. If startup stops, share the **Startup stop diagnostic** line and the final JSON. The diagnostic shows source filenames and line numbers without printing exception text or keys.
+The launcher reports every 15 minutes while reading saved history. The read keeps running until it finishes or the operator presses **Ctrl+C once** and lets cleanup finish. A later launch starts the initial read again. The recovery's history read took 11 minutes 13 seconds. Startup carries the checked state into the writer and verifies the file and ledger fingerprints before work proceeds. The startup stop diagnostic shows source filenames and line numbers without printing exception text or keys.
 
 ---
 
