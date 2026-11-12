@@ -117,6 +117,41 @@ class ImproverLaunchStatePreparedTests(unittest.TestCase):
     def inspect(self, directory, expected, **changes):
         return inspect_keylessly(self, self.f, directory, expected | changes)
 
+    def test_scoped_development_reuses_exact_observation_and_rechecks_its_bytes(self):
+        from buddha import improver_study
+        from buddha import launch_common as common
+        from buddha.native_evidence import NativeEvidence
+
+        directory, expected = self.prepare()
+        ordinary = self.inspect(directory, expected)
+        search_root, grant = directory / "search/study", expected["authorizations"]["search"]
+        with passive_only(self):
+            retained = improver_study._restore(search_root, grant)
+
+        def scope(observation):
+            return common._phase_continuation(
+                lambda pins, *, relative: pins,
+                lambda trial, phase, controls: dict(controls),
+                development=observation,
+            )
+
+        with patch.object(
+            improver_study, "_restore", side_effect=AssertionError("duplicate replay")
+        ):
+            for reader in (
+                NativeEvidence(directory, grant),
+                NativeEvidence(search_root, expected["authorizations"]["final"]),
+            ):
+                with scope((reader, retained[1])), self.assertRaises(self.Error):
+                    self.inspect(directory, expected)
+            with scope(retained):
+                self.assertEqual(self.inspect(directory, expected), ordinary)
+                context = search_root / "context.json"
+                context.write_bytes(context.read_bytes() + b" ")
+                with self.assertRaises(self.Error):
+                    self.inspect(directory, expected)
+        self.assertIsNone(common._retained_development())
+
     def test_first_owner_locks_detached_summary_and_stable_state_seal(self):
         directory, expected = self.prepare()
         report = self.inspect(directory, expected)

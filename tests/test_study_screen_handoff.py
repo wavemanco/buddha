@@ -27,7 +27,13 @@ class StudyScreenHandoffTests(unittest.TestCase):
             ) as collect,
         ):
             reader, state = self.f.api._restore(self.directory, self.authority.path)
-            self.assertEqual(state["action"]["kind"], "witness")
+            action = state["action"]
+            self.assertEqual(action["kind"], "witness")
+            self.assertIsNone(action["witness_progress"]["result"])
+            self.assertEqual(action["witness_progress"]["next_role"], "proposal")
+            self.assertEqual(
+                action["witness_progress"]["next_owner"], action["directory"] / "proposal/owners/0"
+            )
             reader.finish()
         self.assertEqual(collect.call_count, 1)
 

@@ -7,6 +7,7 @@ from typing import Any, cast
 from buddha import final_evaluation as final
 from buddha import gateway, improver_study, source_search, validation_study
 from buddha import improver_assessment as assessment
+from buddha import launch_common as common
 from buddha import native_pipeline as pipeline
 from buddha.doctor import _authority, _Capture, _Owner
 from buddha.native_evidence import NativeEvidence, _adopt_capture
@@ -114,7 +115,19 @@ def inspect_prepared_improver_trial(
             if sha256(capture.read(path, 256 * 1024**2)).hexdigest() != pin:
                 raise assessment.ImproverAssessmentError("original outer input changed")
     search_root = root / "search/study"
-    development_reader, development = improver_study._restore(search_root, grants["search"])
+    retained = common._retained_development()
+    if retained is None:
+        development_reader, development = improver_study._restore(search_root, grants["search"])
+    else:
+        development_reader, development = retained
+        if (
+            type(development_reader) is not NativeEvidence
+            or str(development_reader.root) != str(search_root)
+            or str(development_reader.authorization) != str(grants["search"])
+        ):
+            raise assessment.ImproverAssessmentError(
+                "retained development differs from its original search root or grant"
+            )
     assessment._development_context(state, development["context"])
     if development["record"] != state["development"]:
         raise assessment.ImproverAssessmentError("original development declaration changed")
