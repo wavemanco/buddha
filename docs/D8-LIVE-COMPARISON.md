@@ -2,7 +2,20 @@
 
 ## Fresh handoff and approved budget
 
-**Use the v3 command below.** The corrected runner
+**V3 stopped during the first development screen.** All 48 operations settled
+for $0.237967, with zero held. The three task generations and official
+evaluations are sealed. Buddha stopped before publishing their combined screen
+report. A read-only reconstruction checked all three tasks and 12 owners in
+3.836 seconds without writing the report or calling a provider. The run has
+$149.762033 and 16,336 attempts remaining under its original approval.
+
+The stop came from a saved-evidence tree comparison. The diagnostic omitted
+the changed entry and field. The read-only reconstruction saw no difference.
+The frozen runner has a path to reuse the sealed stages. Same-run resumption
+has yet to be exercised on this partial. Keep the v3 command on hold while
+the continuation path is checked. [V3 stop evidence](conformance/d8-v3-screen-publication-stop.json).
+
+The v3 runner
 compares directory entry names, types and identities before and after one
 file-hashing pass. Folder timestamps are out of that comparison, and the
 timestamp retry is removed. The frozen names and file hashes still have to
@@ -10,10 +23,10 @@ match. On copies of the actual evaluator components, nine timestamp changes
 passed with each of the 19 files hashed once. A changed pinned file was rejected.
 [Offline proof](conformance/d8-directory-entries-proof.json).
 
-**November 12 launch stop.** The live launch stopped after key entry when the
+**Earlier v1 launch stop.** The live launch stopped after key entry when the
 native evaluator's directory metadata changed during inventory. The diagnostic
 did not identify the directory or field. All 19 selected files match their
-pinned names and hashes now. All four grants are unused, with zero spending
+pinned names and hashes afterward. At that stop, all four v1 grants were unused, with zero spending
 and holds. No key review or study owner was created.
 
 The stopped observations and original database bytes are preserved. The
@@ -61,14 +74,14 @@ without another request, and launcher resume after a partial plain control.
 The fresh request-profile check accepted seven synthetic requests and
 rejected 27 changed requests. It covered plain generation and the official
 judge settings. The corrected preparation checked 133 outputs and the new
-funded check passed in 31.641 seconds. All four replacement grants show
-zero operations, spending and holds. Model access is checked during the live run.
+funded check passed in 31.641 seconds. All four replacement grants started
+with zero operations, spending and holds.
 [Preparation receipt](conformance/d8-fresh-handoff-preparation.json).
 
 ### Start the fresh comparison
 
-Open a new ordinary PowerShell window with Docker Desktop running. Run these
-two lines once. This is the v3 handoff with directory-entry checks.
+**V3 command on hold after the development stop.** These lines record the
+operator command used for this run.
 
 ```powershell
 Remove-Item -LiteralPath 'Env:\OPENAI_API_KEY', 'Env:\ANTHROPIC_API_KEY' -ErrorAction SilentlyContinue
