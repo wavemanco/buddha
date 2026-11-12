@@ -10,7 +10,7 @@ from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass
 from functools import wraps
 from pathlib import Path
-from typing import cast
+from typing import TYPE_CHECKING, cast
 
 from buddha import native_pipeline as pipeline
 from buddha import trial_fence
@@ -41,6 +41,10 @@ from buddha.releases import (
     verify_selection,
 )
 from buddha.wire import _integer
+
+if TYPE_CHECKING:
+    from buddha.native_evidence import NativeEvidence
+
 
 SOURCE_FORMAT = "buddha.candidate-generation-source.v1"
 CONTEXT_FORMAT = "buddha.candidate-generation-context.v1"
@@ -378,6 +382,73 @@ def _outputs(
     return _AnswersEvidence(path, hashlib.sha256(answer_raw).hexdigest(), parsed)
 
 
+def _settled_quota(
+    report: dict[str, object],
+    terminal: dict[str, object],
+    done: dict[str, object],
+    totals: dict[str, int],
+    *,
+    max_callbacks: int,
+    image_id: str,
+) -> bool:
+    """Recognize one denied callback after a complete, settled owner prefix."""
+    execution = report.get("execution")
+    spent = totals.get("spent_microusd")
+    if (
+        report.get("reason") != "quota"
+        or type(max_callbacks) is not int
+        or max_callbacks < 1
+        or type(execution) is not dict
+        or type(spent) is not int
+        or spent < 0
+    ):
+        return False
+    requested = max_callbacks + 1
+    return (
+        report.get("format") == "buddha.candidate-generation-report.v1"
+        and report.get("status") == "stopped"
+        and report.get("host_stop_reason") == "quota"
+        and report.get("provider_error_family") is None
+        and type(report.get("max_callbacks")) is int
+        and report["max_callbacks"] == max_callbacks
+        and report.get("owner_operation_coverage_complete") is True
+        and report.get("artifacts") == {}
+        and _json(report.get("calls"))
+        == _json({"requested": requested, "completed": max_callbacks, "stopped": 1})
+        and type(execution.get("exit_code")) is int
+        and execution["exit_code"] == 0
+        and execution.get("cleanup_status") == "removed"
+        and execution.get("image_id") == image_id
+        and _json(totals)
+        == _json(
+            {
+                "operation_count": max_callbacks,
+                "spent_microusd": spent,
+                "committed_microusd": spent,
+                "reserved_microusd": 0,
+            }
+        )
+        and _json(report.get("gateway_totals")) == _json(totals)
+        and _json(done)
+        == _json({"type": "done", "status": "stopped", "reason": "quota", "answers": []})
+        and _json(terminal)
+        == _json(
+            {
+                "ready_seen": True,
+                "broken": False,
+                "sequence": requested,
+                "delivered": max_callbacks,
+                "stop_reason": "quota",
+                "done_sha256": pipeline._sha(done),
+                "done_status": "stopped",
+                "done_reason": "quota",
+                "operation_count": max_callbacks,
+                "recorded_cost_microusd": spent,
+            }
+        )
+    )
+
+
 def _wrap_outcome(attempt: Path, session: object, report: dict[str, object]) -> dict[str, object]:
     from buddha.candidate_run import CandidateSession
 
@@ -432,6 +503,15 @@ def _wrap_outcome(attempt: Path, session: object, report: dict[str, object]) -> 
         elif report["status"] == "failed" and report["reason"] == "agent_error":
             if session.ready or session.delivered == 0:
                 disposition = "candidate_execution_failed"
+    elif done is not None and _settled_quota(
+        report,
+        terminal,
+        done,
+        totals,
+        max_callbacks=session.max_callbacks,
+        image_id=session.spec.image_id,
+    ):
+        disposition = "candidate_execution_failed"
     reason = report["reason"]
     if disposition is None and session.stop_reason is None:
         if session.broken or done is None:
@@ -504,6 +584,16 @@ def _validate_outcome(
     calls = _object(report["calls"], {"requested", "completed", "stopped"})
     count = _integer(totals["operation_count"], 0, cast(int, recipe["max_callbacks"]))
     execution = _object(report["execution"])
+    settled_quota = _settled_quota(
+        report,
+        terminal,
+        done,
+        totals,
+        max_callbacks=cast(int, recipe["max_callbacks"]),
+        image_id=_text(_object(recipe["executor"])["image_id"]),
+    )
+    denied = 1 if settled_quota else 0
+    host_stop = "quota" if settled_quota else None
     if (
         outcome["format"] != OUTCOME_FORMAT
         or outcome["status"] != "complete"
@@ -521,24 +611,24 @@ def _validate_outcome(
         or outcome["reason"] != report["reason"]
         or type(terminal["ready_seen"]) is not bool
         or terminal["broken"] is not False
-        or terminal["stop_reason"] is not None
+        or terminal["stop_reason"] != host_stop
         or any(
             type(terminal[key]) is not int
             for key in ("sequence", "delivered", "operation_count", "recorded_cost_microusd")
         )
-        or terminal["sequence"] != count
+        or terminal["sequence"] != count + denied
         or terminal["delivered"] != count
         or terminal["operation_count"] != count
         or terminal["recorded_cost_microusd"] != totals["spent_microusd"]
         or _json(report["gateway_totals"]) != _json(totals)
         or report["owner_operation_coverage_complete"] is not True
         or any(type(value) is not int for value in calls.values())
-        or calls != {"requested": count, "completed": count, "stopped": 0}
+        or calls != {"requested": count + denied, "completed": count, "stopped": denied}
         or type(execution.get("exit_code")) is not int
         or execution["exit_code"] != 0
         or execution.get("cleanup_status") != "removed"
         or execution.get("image_id") != _object(recipe["executor"])["image_id"]
-        or report["host_stop_reason"] is not None
+        or report["host_stop_reason"] != host_stop
         or report["format"] != "buddha.candidate-generation-report.v1"
         or report["gateway_manifest_sha256"] != pipeline._sha(owner)
         or report["descriptor_sha256"] != hashlib.sha256(descriptor_raw).hexdigest()
@@ -569,7 +659,7 @@ def _validate_outcome(
         ) != _json(done["answers"]):
             raise CandidateGenerationError("generated C1 differs from accepted literal answers")
         expected.add("session/answers.json")
-    elif (
+    elif not settled_quota and (
         report["status"] != "failed"
         or report["reason"] != "agent_error"
         or type(done["answers"]) is not list
@@ -824,8 +914,9 @@ def _read_evidence(
     authority_path: Path,
     *,
     capture: _Capture | None = None,
+    quota_attempt: Path | None = None,
 ) -> dict[str, object]:
-    """Read original inactive evidence without the producer's source or Gateway."""
+    """Read a sealed outcome or a retained quota attempt without a Gateway."""
     reference = _object(
         value,
         {
@@ -843,6 +934,8 @@ def _read_evidence(
         "buddha.candidate-generation.v2" if prospective else "buddha.candidate-generation.v1"
     )
     root = pipeline._absolute(reference["generation_directory"])
+    if quota_attempt is not None and (not prospective or quota_attempt != root / "attempts/0-0"):
+        raise CandidateGenerationError("retained quota needs its original v2 attempt")
     _root(root)
     capture = capture if capture is not None else _Capture(root)
     owner_path = root / "owners/0"
@@ -866,7 +959,9 @@ def _read_evidence(
     if prospective:
         owner_names = {name.split("/")[1] for name in capture.entries if name.startswith("owners/")}
         seals = {name for name in capture.entries if name.startswith("completed/")}
-        if owner_names != {"0"} or seals != {"completed/0.json"}:
+        if owner_names != {"0"} or (
+            seals != {"completed/0.json"} and (quota_attempt is None or seals)
+        ):
             raise CandidateGenerationError("generation outcome has foreign owners or seals")
         for row in cast(list[dict[str, object]], funding["auth_runs"]):
             path = pipeline._absolute(row["directory"])
@@ -889,33 +984,46 @@ def _read_evidence(
         raise CandidateGenerationError(
             "candidate source is not an inactive complete original owner"
         )
-    seal_raw = capture.read(root / "completed/0.json")
-    seal_sha256 = hashlib.sha256(seal_raw).hexdigest()
-    anchors = [
-        row
-        for row in cast(list[dict[str, object]], funding["auth_deactivations"])
-        if row["run_id"] == history.run_id
-    ]
-    if (
-        seal_sha256 != _digest(reference["stage_seal_sha256"])
-        or len(anchors) != 1
-        or anchors[0]["reason"] != formats["anchor"] + seal_sha256
-    ):
-        raise CandidateGenerationError("candidate source lacks its original independent anchor")
-    seal = _object(_load(seal_raw), {"format", "index", "owner_sha256", "attempt", "files"})
-    relative = Path(_path(seal["attempt"]))
-    if (
-        seal["format"] != formats["seal"]
-        or type(seal["index"]) is not int
-        or seal["index"] != 0
-        or seal["owner_sha256"] != history.manifest_sha256
-        or len(relative.parts) != 2
-        or relative.parts[0] != "attempts"
-        or not relative.name.startswith("0-")
-    ):
-        raise CandidateGenerationError("candidate source completion identity differs")
-    attempt = root / relative
+    seal = None
+    if quota_attempt is None:
+        seal_raw = capture.read(root / "completed/0.json")
+        seal_sha256 = hashlib.sha256(seal_raw).hexdigest()
+        anchors = [
+            row
+            for row in cast(list[dict[str, object]], funding["auth_deactivations"])
+            if row["run_id"] == history.run_id
+        ]
+        if (
+            seal_sha256 != _digest(reference["stage_seal_sha256"])
+            or len(anchors) != 1
+            or anchors[0]["reason"] != formats["anchor"] + seal_sha256
+        ):
+            raise CandidateGenerationError("candidate source lacks its original independent anchor")
+        seal = _object(_load(seal_raw), {"format", "index", "owner_sha256", "attempt", "files"})
+        relative = Path(_path(seal["attempt"]))
+        if (
+            seal["format"] != formats["seal"]
+            or type(seal["index"]) is not int
+            or seal["index"] != 0
+            or seal["owner_sha256"] != history.manifest_sha256
+            or len(relative.parts) != 2
+            or relative.parts[0] != "attempts"
+            or not relative.name.startswith("0-")
+        ):
+            raise CandidateGenerationError("candidate source completion identity differs")
+        attempt = root / relative
+    else:
+        attempt = quota_attempt
     outcome = _load(capture.read(attempt / "report.json")) if prospective else None
+    if quota_attempt is not None:
+        stopped = _object(outcome)
+        if (
+            stopped.get("status") != "incomplete"
+            or stopped.get("disposition") is not None
+            or stopped.get("reason") != "quota"
+        ):
+            raise CandidateGenerationError("retained outcome is not the original quota stop")
+        outcome = stopped | {"status": "complete", "disposition": "candidate_execution_failed"}
     expected_files = (
         {"report.json", "session/report.json", "session/done.json"}
         | (
@@ -930,12 +1038,11 @@ def _read_evidence(
     actual_entries = {
         name.removeprefix(prefix) for name in capture.entries if name.startswith(prefix)
     }
-    if (
-        actual_entries != expected_files | ({"session"} if prospective else set())
-        or set(_object(seal["files"])) != expected_files
+    if actual_entries != expected_files | ({"session"} if prospective else set()) or (
+        seal is not None and set(_object(seal["files"])) != expected_files
     ):
         raise CandidateGenerationError("candidate source output inventory differs")
-    for name, digest in _object(seal["files"]).items():
+    for name, digest in ({} if seal is None else _object(seal["files"])).items():
         if hashlib.sha256(capture.read(attempt / _path(name))).hexdigest() != _digest(digest):
             raise CandidateGenerationError("candidate source artifact changed")
     bindings = {
@@ -1083,6 +1190,92 @@ def _read_evidence(
         "owner": owner,
         "capture": capture,
     }
+
+
+def _retained_quota_evidence(reader: "NativeEvidence", attempt: Path) -> dict[str, object]:
+    root = attempt.parent.parent
+    if not root.is_relative_to(reader.root):
+        raise CandidateGenerationError("retained quota is outside the checked study")
+    owner = reader.owner(root / "owners/0")
+    evidence = _read_evidence(
+        {
+            "format": SOURCE_FORMAT_V2,
+            "generation_directory": str(root),
+            "stage_seal_sha256": None,
+            "owner_manifest_sha256": owner.manifest_sha256,
+            "owner_ledger_sha256": owner.ledger_sha256,
+        },
+        reader.authorization,
+        quota_attempt=attempt,
+    )
+    reader.retain_capture(cast(_Capture, evidence["capture"]))
+    return evidence
+
+
+def _check_retained_quota(reader: "NativeEvidence", attempt: Path) -> dict[str, object]:
+    return _object(_retained_quota_evidence(reader, attempt)["outcome"])
+
+
+def _adopt_retained_quota(
+    reader: "NativeEvidence", attempt: Path, *, authority: Authorization
+) -> dict[str, object]:
+    root = attempt.parent.parent
+    if authority.path != reader.authorization:
+        raise CandidateGenerationError("quota adoption changes the original authority")
+    with (
+        trial_fence.work(authority.path, authority._terms(), directory=root, kind="generation"),
+        pipeline._exclusive(root),
+    ):
+        evidence = _retained_quota_evidence(reader, attempt)
+        owner = reader.owner(root / "owners/0")
+        outcome = _object(evidence["outcome"])
+        artifacts = _object(outcome["artifacts"])
+        raw = {
+            name: reader.raw(attempt / _path(name), digest) for name, digest in artifacts.items()
+        }
+        if (
+            (root / "completed/0.json").exists()
+            or (root / "report.json").exists()
+            or not any(
+                row["run_id"] == owner.run_id and row["active"]
+                for row in cast(list[dict[str, object]], authority.summary()["runs"])
+            )
+        ):
+            raise CandidateGenerationError("quota adoption needs its active unsealed owner")
+        cast(_Capture, evidence["capture"]).finish()
+
+        def save(destination: Path) -> dict[str, object]:
+            if destination != attempt.with_name("0-1"):
+                raise CandidateGenerationError("quota adoption needs its original attempt prefix")
+            (destination / "session").mkdir(parents=True)
+            for name, contents in raw.items():
+                pipeline._write(destination / _path(name), contents)
+            pipeline._write(destination / "report.json", _json(outcome) + b"\n")
+            return outcome
+
+        _, _, _, seal, _ = pipeline.execute_stage(
+            root,
+            0,
+            owner,
+            authority,
+            run=save,
+            validate=lambda _attempt, _outcome: {},
+            seal_format=SEAL_FORMAT_V2,
+            anchor_prefix=ANCHOR_PREFIX_V2,
+        )
+        if seal is None:
+            raise CandidateGenerationError("quota adoption did not seal its checked failure")
+        return pipeline.publish_complete(
+            root / "report.json",
+            _v2_report(
+                outcome,
+                _object(evidence["generation"]),
+                _source_reference(root, seal, owner.manifest, "buddha.candidate-generation.v2"),
+                authority.summary(),
+            ),
+            authority,
+            {owner.run_id},
+        )
 
 
 def _source_from_evidence(

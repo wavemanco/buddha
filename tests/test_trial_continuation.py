@@ -15,7 +15,9 @@ import tempfile
 import threading
 import unittest
 from contextlib import contextmanager
+from dataclasses import replace
 from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import patch
 
 import test_study_continuation as study_fixture
@@ -187,6 +189,43 @@ class TrialProjectionTests(unittest.TestCase):
                 self.assertRaises(unified_continuation.WitnessContinuationError),
             ):
                 self.checked._phase_controls(root, phase, values)
+
+    def test_retained_witness_uses_original_controls_and_later_cell_uses_new_controls(self):
+        original = self.checked.witness / "proposal/owners/0"
+        following = self.checked.witness.parent.parent / "1"
+        checked = replace(
+            self.checked,
+            _old_owners=frozenset({str(original)}),
+            _cells=(following,),
+            _screens=frozenset({self.checked._screen_sha256}),
+        )
+        self.assertEqual(checked._owner_controls(original), self.before)
+        self.assertEqual(
+            checked._owner_controls(following / "screen/tasks/0/generation/owners/0"),
+            self.after,
+        )
+        screen = SimpleNamespace(fingerprint=lambda: checked._screen_sha256)
+        self.assertEqual(
+            checked._resolve(self.study, checked.witness, screen, self.before, None),
+            self.before,
+        )
+
+    def test_unsealed_quota_cannot_enter_live_launcher(self):
+        prepared = SimpleNamespace(
+            checked=self.checked,
+            quota_attempt=self.checked.witness / "generation/attempts/0-0",
+        )
+        with (
+            patch.object(unified_continuation, "_checked_state", return_value=prepared),
+            patch("buddha.unified_launch.launch", side_effect=AssertionError("launcher called")),
+            self.assertRaisesRegex(
+                unified_continuation.WitnessContinuationError,
+                "needs checked adoption",
+            ),
+        ):
+            unified_continuation.launch_trial_continuation(
+                self.anchor, expected_sha256=self.checked.sha256, live=True
+            )
 
 
 class TrialContinuationTests(unittest.TestCase):

@@ -16,7 +16,14 @@ from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Any, cast
 
-from buddha import gateway, improver_study, source_screen, source_search, trial_fence
+from buddha import (
+    candidate_generation,
+    gateway,
+    improver_study,
+    source_screen,
+    source_search,
+    trial_fence,
+)
 from buddha import launch_common as common
 from buddha import native_pipeline as pipeline
 from buddha.authorization import Authorization
@@ -330,6 +337,7 @@ class _CheckedState:
     witness_result: bytes | None = None
     state: dict[str, Any] | None = None
     study_result: bytes | None = None
+    quota_attempt: Path | None = None
 
     def after_locks(
         self,
@@ -387,14 +395,15 @@ def _check(
             "remaining_phases",
         },
     )
+    quota_cut = trial_continuation and record["format"] == "buddha.trial-continuation.v2"
     wanted = (
-        "buddha.trial-continuation.v1"
+        "buddha.trial-continuation.v2"
+        if quota_cut
+        else "buddha.trial-continuation.v1"
         if trial_continuation
-        else (
-            "buddha.study-continuation.v1"
-            if study_continuation
-            else "buddha.witness-continuation.v1"
-        )
+        else "buddha.study-continuation.v1"
+        if study_continuation
+        else "buddha.witness-continuation.v1"
     )
     remaining = (
         ("search", "freeze", "publication")
@@ -424,7 +433,12 @@ def _check(
                 "totals",
             },
         )
-        if cut["format"] != "buddha.witness-continuation-cut.v1":
+        cut_format = (
+            "buddha.witness-continuation-cut.v2"
+            if quota_cut
+            else "buddha.witness-continuation-cut.v1"
+        )
+        if cut["format"] != cut_format:
             raise WitnessContinuationError("unsupported original witness cut")
         trial, study, witness = (common._path(cut[k]) for k in ("trial", "study", "witness"))
         if str(study) != str(trial / "search/study") or not witness.is_relative_to(study):
@@ -456,10 +470,19 @@ def _check(
                 "total_limits",
                 "directory",
                 "source_sha256",
-            },
+            }
+            | ({"observation_policy"} if quota_cut else set()),
         )
-        if outer["format"] != "buddha.unified-launch.v1":
+        outer_format = "buddha.unified-launch.v2" if quota_cut else "buddha.unified-launch.v1"
+        if outer["format"] != outer_format:
             raise WitnessContinuationError("continuation needs its original combined launch")
+        if quota_cut:
+            _, _, policy_raw = bound(outer["observation_policy"])
+            policy = _object(_load(policy_raw))
+            if policy.get("format") != "buddha.evidence-observation-policy.v2" or _json(
+                policy
+            ) != _json(record["observation_policy"]):
+                raise WitnessContinuationError("continuation changes original observation policy")
         primary_path, primary_sha, primary_raw = bound(outer["primary_launch"])
         primary = _object(
             _load(primary_raw),
@@ -507,17 +530,21 @@ def _check(
                 "consumer_sources",
             },
         )
-        if definition["format"] != "buddha.improver-assessment-trial.v4":
-            raise WitnessContinuationError(
-                "witness continuation supports original assessment v4 only"
-            )
+        assessment_format = (
+            "buddha.improver-assessment-trial.v5"
+            if quota_cut
+            else "buddha.improver-assessment-trial.v4"
+        )
+        if definition["format"] != assessment_format:
+            raise WitnessContinuationError("continuation changes the original assessment format")
         development_path, development_sha, development_raw = bound(definition["development"])
         runtime = _digest(handoff["expected_runtime_sha256"])
         development, screens = improver_study._declaration(_load(development_raw), runtime)
-        if development["format"] != improver_study._CAPACITY_FORMAT:
-            raise WitnessContinuationError(
-                "witness continuation supports original development v4 only"
-            )
+        development_format = (
+            improver_study._SETTLED_FORMAT if quota_cut else improver_study._CAPACITY_FORMAT
+        )
+        if development["format"] != development_format:
+            raise WitnessContinuationError("continuation changes the original development format")
         plan_path, plan_sha, plan_raw = bound(outer["comparison_plan"])
         plan = _object(
             _load(plan_raw),
@@ -663,7 +690,8 @@ def _check(
         relation = _object(_load(relation_raw), {"format", "source_manifest", "roles"})
         if relation["source_manifest"] != primary["proposal"]:
             raise WitnessContinuationError("helper relation changes its original source manifest")
-        pairs = _object(relation["roles"], set(common._UNIFIED_ROLES_V1))
+        roles = common._UNIFIED_ROLES_V2 if quota_cut else common._UNIFIED_ROLES_V1
+        pairs = _object(relation["roles"], set(roles))
         old_roles = {k: _object(v, {"before", "after"})["before"] for k, v in pairs.items()}
         new_roles = {k: _object(v, {"before", "after"})["after"] for k, v in pairs.items()}
         package = Path(__file__).absolute().parent.parent
@@ -742,6 +770,12 @@ def _check(
             raise WitnessContinuationError(
                 "cut witness path differs from its literal scheduled coordinate"
             )
+        allowed_stages = (
+            {"witness_generation"} if quota_cut else {"common_witness_feedback", "witness_feedback"}
+        )
+        if position["stage"] not in allowed_stages:
+            raise WitnessContinuationError("cut is outside its declared witness boundary")
+        quota_owner = witness / "generation/owners/0" if quota_cut else None
         base = screens[start]
         projected = common._helper_role_relation(
             relation_raw,
@@ -752,6 +786,7 @@ def _check(
             before_controls=before,
             after_context=_context(base, after, new_roles),
             after_controls=after,
+            quota_cut=quota_cut,
         )
         driver_path, driver_sha, _ = bound(record["driver_source"])
         if str(driver_path) != str(Path(__file__).absolute()):
@@ -839,7 +874,12 @@ def _check(
                 maximum = _field_limit(source, old_databases, frozenset(component_paths))
                 size = _integer(row["bytes"], 0, maximum)
                 alias = str(source).casefold()
-                if alias in spellings or source in snapshots or source.is_relative_to(witness):
+                if (
+                    alias in spellings
+                    or source in snapshots
+                    or not quota_cut
+                    and source.is_relative_to(witness)
+                ):
                     raise WitnessContinuationError("original cut aliases mutable or future data")
                 spellings.add(alias)
                 data = (
@@ -939,6 +979,7 @@ def _check(
                 or owner.manifest_sha256 != _digest(row["manifest_sha256"])
                 or owner.ledger_sha256 != _digest(row["ledger_sha256"])
                 or owner.run_id not in inactive
+                and owner_path != quota_owner
             ):
                 raise WitnessContinuationError(
                     "an original cut owner is changed, active or repeated"
@@ -951,6 +992,17 @@ def _check(
         if totals != _object(cut["totals"], set(_TOTALS)) or totals["reserved_microusd"]:
             raise WitnessContinuationError("original cut accounting is incomplete or held")
         allowed = {witness / role / "owners/0" for role in ("proposal", "generation")}
+        if quota_cut and not allowed <= known:
+            raise WitnessContinuationError("quota cut omits an original witness owner")
+        quota_unsealed = (
+            quota_owner is not None and reader.owner(quota_owner).run_id not in inactive
+        )
+        if quota_unsealed and (
+            known != state["owner_paths"]
+            or state["attempted"] != cut["attempted"]
+            or len(state["decisions"]) != cut["decisions"]
+        ):
+            raise WitnessContinuationError("unsealed quota cut must include all original work")
         if not known <= state["owner_paths"] or (
             not study_continuation and not state["owner_paths"] - known <= allowed
         ):
@@ -971,7 +1023,12 @@ def _check(
                 source, frozenset(reader.capture.databases), frozenset(component_paths)
             )
             size = _integer(row["bytes"], 0, maximum)
-            if alias in names or source in snapshots or source.is_relative_to(witness):
+            if (
+                alias in names
+                or source in snapshots
+                or not quota_cut
+                and source.is_relative_to(witness)
+            ):
                 raise WitnessContinuationError(
                     "original file cut has aliases, mutable funding or future data"
                 )
@@ -999,7 +1056,7 @@ def _check(
         if not {str(p) for p in required_files} <= files.keys():
             raise WitnessContinuationError("cut omits an original file or original control")
         prefix = witness.relative_to(study).as_posix()
-        roots = [prefix]
+        roots = [] if quota_cut else [prefix]
         new_files: set[str] = set()
         if isinstance(checked, CheckedStudyContinuation):
             roots += [p.relative_to(study).as_posix() for p in checked._cells]
@@ -1008,17 +1065,43 @@ def _check(
                 "report.json",
                 str(Path(prefix).parent / "decision.json").replace("\\", "/"),
             }
+        quota_publication = (
+            {
+                prefix + "/" + name
+                for name in (
+                    "generation/attempts/0-1",
+                    "generation/attempts/0-1/report.json",
+                    "generation/attempts/0-1/session",
+                    "generation/attempts/0-1/session/report.json",
+                    "generation/attempts/0-1/session/done.json",
+                    "generation/completed/0.json",
+                    "generation/report.json",
+                    "report.json",
+                )
+            }
+            if quota_cut
+            else set()
+        )
+        if quota_cut:
+            original_attempt = {
+                prefix + "/generation/attempts/0-0/" + name
+                for name in ("report.json", "session/report.json", "session/done.json")
+            }
+            if not original_attempt <= old_entries or quota_publication & old_entries:
+                raise WitnessContinuationError("cut must retain the original incomplete attempt")
+            new_files.update(quota_publication)
         ancestors = {
             parent.as_posix()
             for root in roots
             for parent in Path(root).parents
             if parent.as_posix() != "."
         }
+        new_entries = reader.capture.entries.keys() - old_entries
         if any(
             name not in new_files
             and not any(name == root or name.startswith(root + "/") for root in roots)
             and not (study_continuation and name in ancestors and (study / name).is_dir())
-            for name in reader.capture.entries.keys() - old_entries
+            for name in new_entries
         ):
             raise WitnessContinuationError("new work appears outside the one declared witness")
         for owner_path in known:
@@ -1033,8 +1116,30 @@ def _check(
                 reader, state, cut["parent"], witness, base
             )
         action = state["action"]
-        if position["stage"] not in {"common_witness_feedback", "witness_feedback"}:
-            raise WitnessContinuationError("cut is not an absent witness preparation boundary")
+        quota_attempt = None
+        if quota_owner is not None:
+            generation = quota_owner.parent.parent
+            original = generation / "attempts/0-0"
+            outcome = candidate_generation._check_retained_quota(reader, original)
+            if quota_unsealed:
+                if (
+                    progress["next_owner"] != quota_owner
+                    or progress["next_role"] != "generation"
+                    or new_entries
+                ):
+                    raise WitnessContinuationError(
+                        "quota owner differs from its original unsealed cut"
+                    )
+                quota_attempt = original
+            else:
+                reference = _object(_object(progress["publication"])["generation"])
+                saved = reader.record(
+                    generation / "report.json", _digest(reference["report_sha256"])
+                )
+                if _json(saved["outcome"]) != _json(outcome):
+                    raise WitnessContinuationError(
+                        "quota publication changes the original failed attempt"
+                    )
         if progress["result"] is None and (
             action["kind"] != "witness"
             or action["directory"] != witness
@@ -1088,7 +1193,7 @@ def _check(
             "study": str(study),
             "witness": str(witness),
             "old_owner_count": len(known),
-            "all_old_owners_inactive": True,
+            "all_old_owners_inactive": quota_attempt is None,
             "old_totals": totals,
             "new_owner_count": len(state["owner_paths"] - known),
             "effective_control_count": len(projected),
@@ -1109,7 +1214,9 @@ def _check(
             )
         if trial_checked is not None:
             summary.update(
-                format="buddha.trial-continuation-check.v1",
+                format="buddha.trial-continuation-check.v2"
+                if quota_cut
+                else "buddha.trial-continuation-check.v1",
                 scope="original_development_final_plain_comparison",
                 phase=trial_checked["phase"],
                 stop_code=trial_checked["stop_code"],
@@ -1118,6 +1225,8 @@ def _check(
                 ready_for_comparison=trial_checked["phase"] == "comparison"
                 and trial_checked["stop_code"] is None,
             )
+        if quota_cut:
+            summary["quota_adoption_required"] = quota_attempt is not None
         complete = replace(checked, _summary=_json(summary))
         directories = frozenset(name for name in capture.entries if (trial / name).is_dir())
         fingerprints = capture.fingerprints() | reader.fingerprints()
@@ -1140,6 +1249,7 @@ def _check(
             None if progress["result"] is None else _json(progress["result"]),
             state if study_continuation else None,
             None if study_result is None else _json(study_result),
+            quota_attempt,
         )
 
 
@@ -1196,6 +1306,28 @@ def check_trial_continuation(path: Path, *, expected_sha256: str) -> CheckedTria
     return checked
 
 
+def adopt_trial_quota(path: Path, *, expected_sha256: str) -> dict[str, object]:
+    """Publish one checked settled failure using the original trial and study leases."""
+    prepared = _checked_state(path, expected_sha256, trial_continuation=True)
+    checked, attempt = prepared.checked, prepared.quota_attempt
+    if type(checked) is not CheckedTrialContinuation or attempt is None:
+        raise WitnessContinuationError("continuation has no unsealed retained quota failure")
+    checked._check_thread(checked.study)
+    with checked._scope():
+        authority = Authorization(prepared.search_grant)
+        with (
+            trial_fence.work(
+                authority.path, authority._terms(), directory=checked.study, kind="search"
+            ),
+            pipeline._exclusive(checked.study),
+        ):
+            prepared.after_locks()
+            reader = NativeEvidence(
+                checked.study, authority.path, error_type=WitnessContinuationError
+            )
+            return candidate_generation._adopt_retained_quota(reader, attempt, authority=authority)
+
+
 def launch_trial_continuation(
     path: Path,
     *,
@@ -1218,6 +1350,10 @@ def launch_trial_continuation(
     checked = prepared.checked
     if type(checked) is not CheckedTrialContinuation:
         raise WitnessContinuationError("trial continuation needs its exact checked scope")
+    if prepared.quota_attempt is not None:
+        raise WitnessContinuationError(
+            "retained quota failure needs checked adoption before launch"
+        )
 
     def before_start(trial: Path) -> None:
         checked._check_thread(checked.study)

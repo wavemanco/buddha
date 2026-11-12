@@ -452,6 +452,109 @@ class CandidateGenerationOutcomeTests(unittest.TestCase):
                 if kind == "quota":
                     self.assertEqual(report["authorization"]["operation_count"], 0)
 
+    def test_v2_settled_quota_is_checked_failure_without_an_extra_dispatch(self):
+        from buddha.candidate_generation import _settled_quota
+
+        h = self.prepare_v2(max_callbacks=12)
+        h.callbacks = 13
+        report = h.run_generation(paid=True)
+
+        self.assertEqual(report["status"], "complete")
+        self.assertEqual(report["disposition"], "candidate_execution_failed")
+        self.assertEqual(report["reason"], "quota")
+        self.assertEqual(
+            report["generation"]["calls"], {"requested": 13, "completed": 12, "stopped": 1}
+        )
+        self.assertEqual(report["generation"]["gateway_totals"]["reserved_microusd"], 0)
+        self.assertEqual(h.physical_sends, 12)
+        self.assertFalse(any(h.directory.rglob("answers.json")))
+        self.assertEqual(self.inspect(h), report)
+
+        generation = report["generation"]
+        terminal = report["outcome"]["terminal"]
+        done = json.loads((h.attempt() / "session/done.json").read_bytes())
+        totals = generation["gateway_totals"]
+        evidence = dict(report=generation, terminal=terminal, done=done, totals=totals)
+        for label, changed in (
+            ("held", {"totals": totals | {"reserved_microusd": 1}}),
+            ("missing_done", {"done": {}}),
+            ("answers", {"done": done | {"answers": ["unexpected"]}}),
+            ("broken", {"terminal": terminal | {"broken": True}}),
+            ("sequence", {"terminal": terminal | {"sequence": 14}}),
+            ("coverage", {"report": generation | {"owner_operation_coverage_complete": False}}),
+            (
+                "cleanup",
+                {
+                    "report": generation
+                    | {"execution": generation["execution"] | {"cleanup_status": "retained"}}
+                },
+            ),
+            (
+                "boolean_count",
+                {"report": generation | {"calls": generation["calls"] | {"stopped": True}}},
+            ),
+        ):
+            with self.subTest(evidence=label):
+                self.assertFalse(
+                    _settled_quota(
+                        **(evidence | changed),
+                        max_callbacks=12,
+                        image_id=generation["execution"]["image_id"],
+                    )
+                )
+
+    def test_retained_quota_publishes_without_replay_or_rewriting_attempt(self):
+        from buddha.candidate_generation import _adopt_retained_quota
+        from buddha.native_evidence import NativeEvidence
+
+        h = self.prepare_v2(max_callbacks=12)
+        h.callbacks = 13
+        with patch("buddha.candidate_generation._settled_quota", return_value=False):
+            stopped = h.run_generation(paid=True)
+        self.assertEqual(stopped["reason"], "quota")
+        self.assertEqual(stopped["status"], "incomplete")
+        authority = h.fixture.authority
+        attempt = h.directory / "attempts/0-0"
+        original = self.tree(h.directory)
+        accounting = authority.summary()
+        with (
+            patch("buddha.gateway.Gateway.execute", side_effect=AssertionError("provider call")),
+            patch("buddha.executor.run_container", side_effect=AssertionError("worker replay")),
+        ):
+            outcome = _adopt_retained_quota(
+                NativeEvidence(h.directory, authority.path), attempt, authority=authority
+            )
+            self.assertEqual(self.inspect(h), outcome)
+            self.assertEqual(
+                h.run_api(h.directory, transport=RawHTTPTransport(allow_paid=False)), outcome
+            )
+
+        self.assertEqual(outcome["disposition"], "candidate_execution_failed")
+        self.assertEqual(outcome["reason"], "quota")
+        self.assertEqual(h.physical_sends, 12)
+        retained = self.tree(h.directory)
+        self.assertEqual({k: retained[k] for k in original}, original)
+        self.assertEqual(
+            {
+                k: authority.summary()[k]
+                for k in (
+                    "operation_count",
+                    "spent_microusd",
+                    "reserved_microusd",
+                    "committed_microusd",
+                )
+            },
+            {
+                k: accounting[k]
+                for k in (
+                    "operation_count",
+                    "spent_microusd",
+                    "reserved_microusd",
+                    "committed_microusd",
+                )
+            },
+        )
+
     def test_cancelled_attempt_keeps_raw_session_and_observation(self):
         h = self.prepare_v2()
 

@@ -6,7 +6,7 @@ import os
 from collections.abc import Callable, Iterator
 from contextlib import contextmanager
 from pathlib import Path
-from typing import Any, cast
+from typing import TYPE_CHECKING, Any, cast
 
 from buddha import executor
 from buddha.answers import TaskSet, _id
@@ -30,6 +30,9 @@ from buddha.releases import (
     inventory,
     verify_selection,
 )
+
+if TYPE_CHECKING:
+    from buddha.doctor import _Owner
 
 
 class PipelineError(ReleaseError):
@@ -318,7 +321,7 @@ def native_outputs(
 def execute_stage(
     directory: Path,
     index: int,
-    gateway: Gateway,
+    gateway: "Gateway | _Owner",
     authority: Authorization,
     *,
     run: Callable[[Path], dict[str, object]],
@@ -330,6 +333,7 @@ def execute_stage(
     """Run one trusted host session or reuse its independently anchored completion.
 
     The two callables are installed host code, never selected JSON/agent hooks.
+    An observed owner can publish a verified retained outcome without a Gateway.
     Generation and native callers share this publication boundary.
     """
     sealed = directory / "completed" / (str(index) + ".json")

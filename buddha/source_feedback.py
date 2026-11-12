@@ -814,7 +814,7 @@ def _build_failures(
             _json(_object(generation["outcome"])["terminal"]) != _json(terminal)
             or _object(generation["generation"])["agent_sha256"] != child["agent_sha256"]
             or type(terminal["ready_seen"]) is not bool
-            or terminal["done_reason"] != "agent_error"
+            or terminal["done_reason"] not in {"agent_error", "quota"}
         ):
             raise SourceFeedbackError("failed child has no checked original worker outcome")
         summary = {
