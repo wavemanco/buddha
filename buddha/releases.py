@@ -32,10 +32,6 @@ class ReleaseError(ValueError):
     """Release data or selected files violate the supported offline contract."""
 
 
-class _DirectoryTimestampChanged(ReleaseError):
-    """An inventory saw directory timestamp drift with stable identities."""
-
-
 def _json(value: object) -> bytes:
     try:
         raw = json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False).encode()
@@ -346,10 +342,6 @@ def _root(path: Path) -> Path:
     return absolute.resolve()
 
 
-def _walk_error(error: OSError) -> None:
-    raise error
-
-
 def _signature(information: os.stat_result) -> tuple[int, int, int, int, int]:
     return (
         information.st_dev,
@@ -392,41 +384,69 @@ def file_hash(path: Path, *, max_bytes: int = MAX_FILE_BYTES) -> str:
         raise ReleaseError("component file could not be read") from None
 
 
+def _component_entry_signature(information: os.stat_result) -> tuple[int, ...]:
+    kind = stat.S_IFMT(information.st_mode)
+    if kind == stat.S_IFDIR:
+        return (kind, information.st_dev, information.st_ino)
+    if kind != stat.S_IFREG or information.st_nlink != 1:
+        raise ReleaseError("component files must be regular without hard-link aliases")
+    return (kind, *_signature(information))
+
+
+def _component_entries(directory: Path) -> dict[str, os.stat_result]:
+    entries = {"": _information(directory)}
+    pending = [("", directory)]
+    spellings: set[str] = set()
+    while pending:
+        name, parent = pending.pop()
+        current = _information(parent)
+        if not stat.S_ISDIR(current.st_mode) or (
+            _component_entry_signature(current) != _component_entry_signature(entries[name])
+        ):
+            raise ReleaseError("component directory identity changed during inventory")
+        with os.scandir(parent) as children:
+            for child in children:
+                if len(entries) > MAX_FILES:
+                    raise ReleaseError("component entry limit exceeded")
+                path = parent / child.name
+                name = _path(path.relative_to(directory).as_posix())
+                spelling = name.casefold()
+                if spelling in spellings:
+                    raise ReleaseError("component contains aliased entry names")
+                spellings.add(spelling)
+                information = _information(path)
+                _component_entry_signature(information)
+                entries[name] = information
+                if stat.S_ISDIR(information.st_mode):
+                    pending.append((name, path))
+    return entries
+
+
 def inventory(root: Path) -> dict[str, str]:
-    """Hash every regular file; never follow links or ignore nested dependencies."""
+    """Hash each file once, checking the component tree before and after."""
     try:
         directory = _root(root)
+        before = _component_entries(directory)
         result: dict[str, str] = {}
         total = 0
-        entries = 0
-        directories = {directory: _signature(_information(directory))}
-        for parent, folders, files in directory.walk(on_error=_walk_error):
-            for path in (parent / name for name in (*folders, *files)):
-                entries += 1
-                if entries > MAX_FILES:
-                    raise ReleaseError("component entry limit exceeded")
-                name = _path(path.relative_to(directory).as_posix())
-                information = _information(path)
-                if stat.S_ISDIR(information.st_mode):
-                    directories[path] = _signature(information)
-                    continue
-                total += information.st_size
-                if information.st_size > MAX_FILE_BYTES or total > MAX_TREE_BYTES:
-                    raise ReleaseError("component byte limit exceeded")
-                result[name] = file_hash(path, max_bytes=MAX_FILE_BYTES)
-                if _signature(_information(path)) != _signature(information):
-                    raise ReleaseError("component changed during inventory")
-        timestamps_changed = False
-        for path, before in directories.items():
-            information = _information(path)
-            after = _signature(information)
-            if not stat.S_ISDIR(information.st_mode) or after[:3] != before[:3]:
-                raise ReleaseError("component directory identity changed during inventory")
-            timestamps_changed |= after[3:] != before[3:]
-        if timestamps_changed:
-            raise _DirectoryTimestampChanged(
-                "component directory timestamps changed during inventory"
-            )
+        for name, information in before.items():
+            if stat.S_ISDIR(information.st_mode):
+                continue
+            total += information.st_size
+            if information.st_size > MAX_FILE_BYTES or total > MAX_TREE_BYTES:
+                raise ReleaseError("component byte limit exceeded")
+            path = directory / name
+            result[name] = file_hash(path, max_bytes=MAX_FILE_BYTES)
+            if _component_entry_signature(_information(path)) != _component_entry_signature(
+                information
+            ):
+                raise ReleaseError("component changed during inventory")
+        after = _component_entries(directory)
+        if before.keys() != after.keys() or any(
+            _component_entry_signature(info) != _component_entry_signature(after[name])
+            for name, info in before.items()
+        ):
+            raise ReleaseError("component entries changed during inventory")
         _inventory(result)
         return dict(sorted(result.items()))
     except OSError:
@@ -523,12 +543,7 @@ def verify_selection(
     if not isinstance(selection, Selection) or selection.fingerprint() != _digest(expected_sha256):
         raise ReleaseError("selection differs from its frozen owner identity")
     record = selection.to_record()
-    actual = {}
-    for name, path in _roots(roots).items():
-        try:
-            actual[name] = inventory(path)
-        except _DirectoryTimestampChanged:
-            actual[name] = inventory(path)
+    actual = {name: inventory(path) for name, path in _roots(roots).items()}
     if actual != record["components"]:
         raise ReleaseError("selected component inventory changed")
     return selection.fingerprint()
