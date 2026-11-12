@@ -1360,7 +1360,13 @@ def launch_trial_continuation(
 
     emit = unified_launch._notice if notice is None else notice
     common._emit(emit, "Reading the saved study before keys.")
-    prepared = _checked_state(path, expected_sha256, trial_continuation=True)
+    with common._heartbeat(
+        lambda _: emit("Still reading the saved study. No new paid calls have started."),
+        ["reading saved study"],
+        [None],
+        15 * 60,
+    ):
+        prepared = _checked_state(path, expected_sha256, trial_continuation=True)
     checked = prepared.checked
     if type(checked) is not CheckedTrialContinuation:
         raise WitnessContinuationError("trial continuation needs its exact checked scope")

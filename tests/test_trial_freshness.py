@@ -18,6 +18,36 @@ from buddha.releases import ReleaseError, _json
 
 
 class TrialFreshnessTests(unittest.TestCase):
+    def test_startup_reports_a_slow_read_at_fifteen_minutes(self):
+        path, pin = Path(__file__), "0" * 64
+        notices = []
+
+        @contextmanager
+        def heartbeat(notice, phase, authority, seconds):
+            self.assertEqual(seconds, 900)
+            self.assertEqual(authority, [None])
+            notice("synthetic tick")
+            yield
+
+        with (
+            patch.object(launch_common, "_heartbeat", side_effect=heartbeat),
+            patch.object(
+                unified_continuation, "_checked_state", side_effect=RuntimeError("synthetic read")
+            ) as check,
+            self.assertRaisesRegex(RuntimeError, "synthetic read"),
+        ):
+            unified_continuation.launch_trial_continuation(
+                path, expected_sha256=pin, notice=notices.append
+            )
+        check.assert_called_once_with(path, pin, trial_continuation=True)
+        self.assertEqual(
+            notices,
+            [
+                "Reading the saved study before keys.",
+                "Still reading the saved study. No new paid calls have started.",
+            ],
+        )
+
     def test_boundary_callback_is_explicit_and_resets_after_failure(self):
         root = Path(__file__).absolute().parent
         calls = []
