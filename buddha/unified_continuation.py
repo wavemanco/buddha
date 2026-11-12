@@ -11,7 +11,7 @@ import os
 import re
 import threading
 from collections.abc import Callable, Iterator, Mapping
-from contextlib import contextmanager
+from contextlib import ExitStack, contextmanager, suppress
 from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Any, cast
@@ -1360,28 +1360,37 @@ def launch_trial_continuation(
 
     emit = unified_launch._notice if notice is None else notice
     common._emit(emit, "Reading the saved study before keys.")
-    with common._heartbeat(
-        lambda _: emit("Still reading the saved study. No new paid calls have started."),
-        ["reading saved study"],
-        [None],
-        15 * 60,
-    ):
-        prepared = _checked_state(path, expected_sha256, trial_continuation=True)
-    checked = prepared.checked
-    if type(checked) is not CheckedTrialContinuation:
-        raise WitnessContinuationError("trial continuation needs its exact checked scope")
-    if prepared.quota_attempt is not None:
-        raise WitnessContinuationError(
-            "retained quota failure needs checked adoption before launch"
-        )
+    with ExitStack() as startup:
+        try:
+            with common._heartbeat(
+                lambda _: emit("Still reading the saved study. No new paid calls have started."),
+                ["reading saved study"],
+                [None],
+                15 * 60,
+            ):
+                prepared = _checked_state(path, expected_sha256, trial_continuation=True)
+            checked = prepared.checked
+            if type(checked) is not CheckedTrialContinuation:
+                raise WitnessContinuationError("trial continuation needs its exact checked scope")
+            if prepared.quota_attempt is not None:
+                raise WitnessContinuationError(
+                    "retained quota failure needs checked adoption before launch"
+                )
 
-    def before_start(trial: Path, owned_locks: frozenset[str]) -> None:
-        checked._check_thread(checked.study)
-        if str(trial) != str(checked._trial):
-            raise WitnessContinuationError("continuation writer changes the checked trial")
-        prepared.after_locks(owned_locks=owned_locks)
+            def before_start(trial: Path, owned_locks: frozenset[str]) -> None:
+                checked._check_thread(checked.study)
+                if str(trial) != str(checked._trial):
+                    raise WitnessContinuationError("continuation writer changes the checked trial")
+                prepared.after_locks(owned_locks=owned_locks)
 
-    with checked._scope(before_start=before_start, development=prepared.development):
+            startup.enter_context(
+                checked._scope(before_start=before_start, development=prepared.development)
+            )
+        except Exception as error:
+            with suppress(Exception, KeyboardInterrupt):
+                diagnostic = _json(common._stop_diagnostic(error)).decode("utf-8")
+                common._emit(emit, "Startup stop diagnostic: " + diagnostic)
+            raise
         return unified_launch.launch(
             checked._launch[0],
             expected_sha256=checked._launch[1],

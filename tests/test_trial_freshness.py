@@ -1,5 +1,6 @@
 """Synthetic writer-boundary freshness and operator identity; no provider calls."""
 
+import json
 import os
 import threading
 import unittest
@@ -11,7 +12,7 @@ from unittest.mock import patch
 import test_unified_launch as launch_fixture
 from test_unified_launch import sha
 
-from buddha import baseline, launch_common, plain_comparison, unified_continuation
+from buddha import baseline, launch_common, plain_comparison, unified_continuation, unified_launch
 from buddha.doctor import _Capture
 from buddha.native_evidence import NativeEvidence
 from buddha.releases import ReleaseError, _json
@@ -41,12 +42,36 @@ class TrialFreshnessTests(unittest.TestCase):
             )
         check.assert_called_once_with(path, pin, trial_continuation=True)
         self.assertEqual(
-            notices,
+            notices[:2],
             [
                 "Reading the saved study before keys.",
                 "Still reading the saved study. No new paid calls have started.",
             ],
         )
+
+    def test_startup_stop_reports_the_nested_check_before_coordinator_entry(self):
+        path = Path(__file__).absolute()
+        notices = []
+        with (
+            patch.object(unified_launch, "launch") as launch,
+            self.assertRaises(unified_continuation.WitnessContinuationError) as stopped,
+        ):
+            unified_continuation.launch_trial_continuation(
+                path, expected_sha256="0" * 64, notice=notices.append
+            )
+        launch.assert_not_called()
+        self.assertEqual(launch_common._stop_reason(stopped.exception), "launch_stopped")
+        prefix = "Startup stop diagnostic: "
+        self.assertEqual(len(notices), 2)
+        self.assertTrue(notices[1].startswith(prefix))
+        diagnostic = json.loads(notices[1].removeprefix(prefix))
+        self.assertEqual(diagnostic["format"], "buddha.launch-stop-diagnostic.v1")
+        self.assertIn(
+            "native_pipeline.py",
+            {frame["file"] for link in diagnostic["chain"] for frame in link["frames"]},
+        )
+        self.assertNotIn(str(path.parent), notices[1])
+        self.assertNotIn("baseline input changed", notices[1])
 
     def test_boundary_callback_is_explicit_and_resets_after_failure(self):
         root = Path(__file__).absolute().parent
