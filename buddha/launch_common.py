@@ -96,13 +96,14 @@ class _SourceResolver(Protocol):
 
 
 type _DevelopmentObservation = tuple["NativeEvidence", dict[str, Any]]
+type _WriterCheck = Callable[[Path, frozenset[str]], None]
 
 
 _PHASE_CONTINUATION: ContextVar[
     tuple[
         _SourceResolver,
         Callable[[Path, str, Mapping[Path, str]], dict[Path, str]],
-        Callable[[Path], None] | None,
+        _WriterCheck | None,
         _DevelopmentObservation | None,
     ]
     | None
@@ -114,7 +115,7 @@ def _phase_continuation(
     source_resolver: _SourceResolver,
     controls_resolver: Callable[[Path, str, Mapping[Path, str]], dict[Path, str]],
     *,
-    before_start: Callable[[Path], None] | None = None,
+    before_start: _WriterCheck | None = None,
     development: _DevelopmentObservation | None = None,
 ) -> Iterator[None]:
     """Use explicit checked phase projections; this supplies no funding authority."""
@@ -122,7 +123,7 @@ def _phase_continuation(
         not callable(source_resolver)
         or not callable(controls_resolver)
         or before_start is not None
-        and (not callable(before_start) or development is not None)
+        and not callable(before_start)
         or _PHASE_CONTINUATION.get() is not None
     ):
         raise ReleaseError("phase continuation needs one explicit unnested scope")
@@ -136,6 +137,24 @@ def _phase_continuation(
 def _retained_development() -> _DevelopmentObservation | None:
     scope = _PHASE_CONTINUATION.get()
     return None if scope is None else scope[3]
+
+
+def _discard_development() -> None:
+    scope = _PHASE_CONTINUATION.get()
+    if scope is not None and scope[3] is not None:
+        _PHASE_CONTINUATION.set((scope[0], scope[1], scope[2], None))
+
+
+def _take_development(trial: Path) -> _DevelopmentObservation | None:
+    """Consume the startup observation once, under the original writer leases."""
+    scope = _PHASE_CONTINUATION.get()
+    if scope is None or scope[3] is None:
+        return None
+    _discard_development()
+    if scope[2] is None:
+        raise ReleaseError("passive development observation cannot become a writer")
+    scope[2](trial, frozenset({".trial-running.lock", "search/study/running.lock"}))
+    return scope[3]
 
 
 def _historical_sources(current: Mapping[str, str], *, relative: bool = False) -> dict[str, str]:
@@ -169,7 +188,7 @@ def _phase_before_start(trial: Path) -> None:
     """Rejoin checked continuation evidence at the coordinator's writer boundary."""
     scope = _PHASE_CONTINUATION.get()
     if scope is not None and scope[2] is not None:
-        scope[2](trial)
+        scope[2](trial, frozenset())
 
 
 @contextmanager

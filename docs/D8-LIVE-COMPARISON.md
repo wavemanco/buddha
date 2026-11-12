@@ -1,8 +1,8 @@
-# D8: corrected-source comparison handoff
+# Continue the main live comparison
 
 ## Prepared continuation after the quota stop
 
-**Prepared. Do not run until quota adoption succeeds and live execution is approved.** The local adoption reached its 10-minute read limit before writing. Four common conditions and three improvement decisions remain saved. The fourth opportunity still needs its quota failure sealed under the original twelve-call ceiling. This handoff continues the November 9 comparison in place with the same WildChat tasks, official NoveltyBench 1.1 settings, final assessment and two plain-model controls.
+**Quota failure recorded. Paid continuation awaits approval.** The offline recovery verified all 403 settled calls and recorded the fourth opportunity's generation failure under the original twelve-call ceiling. Four common conditions and three improvement decisions are already saved. On resume, Buddha will close the fourth opportunity using that record and continue in place with the same WildChat tasks, official NoveltyBench 1.1 settings, final assessment and two plain-model controls.
 
 | Remaining API allowance | Dollars | Recorded attempts |
 | --- | ---: | ---: |
@@ -15,16 +15,16 @@ The current development ledger still has 403 settled calls, $2.978370 spent and 
 
 ### Prepared continuation command
 
-After successful quota adoption and separate live approval, open a new ordinary PowerShell window with Docker Desktop running. Run these two lines once.
+After live approval, open a new ordinary PowerShell window with Docker Desktop running. Run these two lines once.
 
 ```powershell
 Remove-Item -LiteralPath 'Env:\OPENAI_API_KEY', 'Env:\ANTHROPIC_API_KEY' -ErrorAction SilentlyContinue
-& "C:\Program Files\Python313\python.exe" -B "C:\Users\arvik\code\buddha\runs\reviews\d8-preflight-performance-20261111-v1\docs\conformance\unified-run.py" --handoff "C:\Users\arvik\code\buddha\runs\checks\d8-preflight-performance-20261111-v1\continuation.json" --sha256 "8d13225d12ba6f5d6c3fdc3274ba3d033d84553ffa1de49e3a095653244e0d3b" --continuation --live --prompt-keys --confirm-project-keys
+& "C:\Program Files\Python313\python.exe" -B "C:\Users\arvik\code\buddha\runs\z2\docs\conformance\unified-run.py" --handoff "C:\Users\arvik\code\buddha\runs\checks\d8-continuation-startup-20261111-v2\continuation.json" --sha256 "a5124dd81bd6336214be27631e463f545dbe03c6c2a3a7839a5a67fc20515609" --continuation --live --prompt-keys --confirm-project-keys
 ```
 
 The first line clears the two key variables in that window so the masked prompts appear. The second line checks the pinned handoff and continues the paid study within its remaining allowance. Use the same reviewed OpenAI and Anthropic keys from the November 9 run. The saved November 10 review passes the seven-day freshness check through November 17 UTC. Each key is temporary for the launch. Keep both keys out of chat and the command itself.
 
-The first saved-history check runs before progress messages and may take several minutes. The successful read-only check took 7 minutes 51 seconds, and the later adoption read reached its 10-minute cap. The live startup checks the history again before and after key entry, so allow more time. Keep the window open. To stop, press **Ctrl+C once** and allow cleanup to finish. If the run stops, share the final status before trying again.
+PowerShell first prints that it is reading the saved study. The recovery's one history read took 11 minutes 13 seconds. The new startup carries its checked state into the writer and verifies the file and ledger fingerprints before work proceeds. Live startup time for the new version is still unmeasured. Keep the window open. To stop, press **Ctrl+C once** and allow cleanup to finish. If the run stops, share the final status before trying again.
 
 ---
 

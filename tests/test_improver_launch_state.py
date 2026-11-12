@@ -152,6 +152,62 @@ class ImproverLaunchStatePreparedTests(unittest.TestCase):
                     self.inspect(directory, expected)
         self.assertIsNone(common._retained_development())
 
+    def test_continuation_passes_the_checked_study_into_the_locked_writer(self):
+        from buddha import improver_study
+        from buddha import launch_common as common
+        from buddha.gateway import RawHTTPTransport
+
+        directory, expected = self.prepare()
+        search = directory / "search/study"
+        retained = improver_study._restore(search, expected["authorizations"]["search"])
+        seen = []
+
+        def before_start(trial, locks):
+            self.assertEqual(trial, directory)
+            self.assertEqual(locks, {".trial-running.lock", "search/study/running.lock"})
+            self.assertTrue(all((trial / name).is_file() for name in locks))
+            seen.append(locks)
+
+        def advance(reader, state, authority, transport):
+            self.assertIs(reader, retained[0])
+            self.assertIs(state, retained[1])
+            self.assertIsNone(common._retained_development())
+            return {"status": "synthetic_terminal"}
+
+        def scope(check):
+            return common._phase_continuation(
+                lambda pins, *, relative: pins,
+                lambda trial, phase, controls: dict(controls),
+                before_start=check,
+                development=retained,
+            )
+
+        with (
+            patch.object(
+                improver_study, "_restore", side_effect=AssertionError("duplicate replay")
+            ),
+            patch.object(improver_study, "_advance_action", side_effect=advance) as action,
+        ):
+            transport = RawHTTPTransport()
+            with scope(None), self.assertRaises(self.assessment.ReleaseError):
+                improver_study.run_improver_study(search, transport=transport)
+            unexpected = search / "unexpected.json"
+            unexpected.write_bytes(b"{}")
+            try:
+                with scope(before_start), self.assertRaises(improver_study.ImproverStudyError):
+                    improver_study.run_improver_study(search, transport=transport)
+            finally:
+                unexpected.unlink()
+            action.assert_not_called()
+            with scope(before_start):
+                self.assertEqual(
+                    improver_study.run_improver_study(search, transport=transport),
+                    {"status": "synthetic_terminal"},
+                )
+                self.assertIsNone(common._retained_development())
+            action.assert_called_once()
+        self.assertEqual(len(seen), 2)
+
     def test_first_owner_locks_detached_summary_and_stable_state_seal(self):
         directory, expected = self.prepare()
         report = self.inspect(directory, expected)

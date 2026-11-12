@@ -456,6 +456,7 @@ def launch(
     observation_directory: Path | None = None
 
     def partial(reason: str, *, cancelled: bool = False) -> dict[str, object]:
+        common._discard_development()
         result: dict[str, object] = {
             "status": "incomplete",
             "phase": phase[0],
