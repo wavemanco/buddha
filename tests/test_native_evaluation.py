@@ -345,6 +345,22 @@ class NativeEvaluationTests(NativeEvaluationFixture):
             self.fixture.events[1]["session"].gateway.ledger.totals()["operation_count"], 1
         )
         self.assertEqual(observed.read_bytes(), original_observation)
+        saved_report = (self.directory / "report.json").read_bytes()
+        accounting = self.fixture.authority.summary()
+        with (
+            patch(
+                "buddha.executor.run_container",
+                side_effect=AssertionError("completed replay executed"),
+            ),
+            patch.dict(os.environ, {}, clear=True),
+        ):
+            self.assertEqual(
+                run_evaluation(self.directory, transport=RawHTTPTransport(allow_paid=False)),
+                second,
+            )
+        self.assertEqual((self.directory / "report.json").read_bytes(), saved_report)
+        self.assertEqual(self.fixture.authority.summary(), accounting)
+        self.assertEqual(self.fixture.physical_sends - self.before_sends, 2)
 
     def test_unknown_request_stops_recovery_and_other_fresh_occasion_without_releasing_hold(self):
         self.prepare()

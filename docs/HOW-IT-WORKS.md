@@ -357,11 +357,12 @@ not upgraded by later full-output work.
 For new witnessed searches, [bounded mutation checks](SOURCE-MUTATION-WITNESS.md)
 require a parent to invoke its own improvement code with complete feedback to author
 a changed further child, then run that child on the first development task.
-Verified source copies and a supplied-program proof establish that bounded
-engineering path. A current-version model demonstration and concrete capacity
-evidence remain open. The separate experiment testing whether an evolved
-improver produces better descendants is still planned. Neither changed code nor
-a higher development score establishes that claim.
+The [current-source model demonstration](SOURCE-CURRENT-LIVE-RESULTS.md) used
+complete outputs and ran changed Python. Its evolved candidate scored lower
+than the original. The larger [matched comparison](D8-LIVE-COMPARISON.md)
+tests whether the evolved improver produces better descendants under equal
+budgets. It started and is paused with partial development results. The final
+assessment and both plain-model controls are still pending.
 
 The [final-evaluation controller](FINAL-EVALUATION.md) handles a later stage:
 freeze the declared finalists once, close adaptive work and run every final task

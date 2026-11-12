@@ -1,6 +1,7 @@
 """Finite, read-only observations need not retain their complete byte history."""
 
 import hashlib
+import os
 import tempfile
 import unittest
 from pathlib import Path
@@ -164,6 +165,73 @@ class BoundedEvidenceCaptureTests(unittest.TestCase):
         (self.root / "late.bin").write_bytes(b"late")
         with self.assertRaises(doctor._Busy):
             capture.finish()
+
+    def test_startup_accepts_touched_receipted_file_and_directory_only(self):
+        directory = self.root / "saved"
+        directory.mkdir()
+        file = directory / "report.json"
+        file.write_bytes(b"result")
+        strict = doctor._Capture(self.root)
+        startup = doctor._Capture(self.root, allow_timestamp_drift=True)
+        strict.read(file)
+        startup.read(file)
+        for path in (file, directory):
+            info = path.stat()
+            os.utime(path, ns=(info.st_atime_ns, info.st_mtime_ns - 2_000_000_000))
+
+        with self.assertRaises(doctor._Busy):
+            strict.finish()
+        self.assertEqual(
+            startup.finish(), {"saved/report.json": hashlib.sha256(b"result").hexdigest()}
+        )
+        self.assertEqual(startup.fingerprints(), {str(file): hashlib.sha256(b"result").hexdigest()})
+
+    def test_startup_refuses_unread_entries_locks_sidecars_and_replacement(self):
+        for name in ("unread.json", "running.lock", "operations.sqlite3", "OPERATIONS.SQLITE3-WAL"):
+            with self.subTest(name=name):
+                file = self.root / name
+                file.write_bytes(b"original")
+                capture = doctor._Capture(self.root, allow_timestamp_drift=True)
+                if name != "unread.json":
+                    capture.read(file)
+                info = file.stat()
+                os.utime(file, ns=(info.st_atime_ns, info.st_mtime_ns - 2_000_000_000))
+                with self.assertRaises(doctor._Busy):
+                    capture.finish()
+                file.unlink()
+
+        capture = doctor._Capture(self.root, allow_timestamp_drift=True)
+        (self.root / "unexpected-owner").mkdir()
+        with self.assertRaises(doctor._Busy):
+            capture.finish()
+        (self.root / "unexpected-owner").rmdir()
+
+        file = self.root / "saved.json"
+        file.write_bytes(b"original")
+        capture = doctor._Capture(self.root, allow_timestamp_drift=True)
+        file.unlink()
+        file.mkdir()
+        with self.assertRaises(doctor._Busy):
+            capture.finish()
+
+    def test_startup_rechecks_original_bytes_when_time_changes_after_the_first_read(self):
+        file = self.root / "saved.json"
+        file.write_bytes(b"original")
+        capture = doctor._Capture(self.root, allow_timestamp_drift=True)
+        capture.read(file)
+        original_read = doctor._read
+        info = file.stat()
+
+        def changed(path, maximum):
+            raw = original_read(path, maximum)
+            if raw == b"original":
+                file.write_bytes(b"tampered")
+                os.utime(file, ns=(info.st_atime_ns, info.st_mtime_ns - 2_000_000_000))
+            return raw
+
+        with patch.object(doctor, "_read", side_effect=changed):
+            with self.assertRaisesRegex(doctor._Busy, "consumed input changed"):
+                capture.finish()
 
 
 if __name__ == "__main__":

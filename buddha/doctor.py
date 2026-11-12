@@ -81,7 +81,7 @@ def _json(raw: bytes, *, checksum: bool = False) -> dict[str, object]:
 
 
 def _entries(
-    root: Path, *, maximum: int | None = None
+    root: Path, *, maximum: int | None = None, directories: set[str] | None = None
 ) -> dict[str, tuple[int, int, int, int, int]]:
     """Inspect bounded local metadata; never traverse a link or recorded path."""
     if maximum is not None and (type(maximum) is not int or not 1 <= maximum <= 100_000):
@@ -104,6 +104,8 @@ def _entries(
                 name = path.relative_to(root).as_posix()
                 _path(name)
                 if stat.S_ISDIR(information.st_mode):
+                    if directories is not None:
+                        directories.add(name)
                     pending.append(path)
                 else:
                     _regular(path)
@@ -305,19 +307,29 @@ class _Capture:
     It is not a process-memory limit or a total archive-size allowance.
     """
 
-    def __init__(self, root: Path) -> None:
+    def __init__(self, root: Path, *, allow_timestamp_drift: bool = False) -> None:
         self.root = root
         self._maximum, self._maximum_entries, self._maximum_paths = _observation_limits()
         observation = _PASSIVE_TREES.get()
-        self.entries = self._tree_entries() if observation is None else observation.entries(self)
+        self._directories: set[str] | None = set() if allow_timestamp_drift else None
+        if self._directories is not None:
+            self.entries = self._tree_entries(directories=self._directories)
+        else:
+            self.entries = (
+                self._tree_entries() if observation is None else observation.entries(self)
+            )
         self._receipts: dict[Path, tuple[int, str]] = {}
         self._watched_trees: dict[Path, dict[str, tuple[int, int, int, int, int]]] = {}
         self.raw: Mapping[Path, bytes] = _CapturedBytes(self)
         self.total = 0
         self.databases: set[Path] = set()
 
-    def _tree_entries(self, root: Path | None = None) -> dict[str, tuple[int, int, int, int, int]]:
+    def _tree_entries(
+        self, root: Path | None = None, *, directories: set[str] | None = None
+    ) -> dict[str, tuple[int, int, int, int, int]]:
         root = self.root if root is None else root
+        if directories is not None:
+            return _entries(root, maximum=self._maximum_entries, directories=directories)
         if self._maximum_entries == MAX_FILES:
             return _entries(root)
         return _entries(root, maximum=self._maximum_entries)
@@ -371,6 +383,34 @@ class _Capture:
 
         return read
 
+    def _recheck_timestamps(
+        self, current: dict[str, tuple[int, int, int, int, int]], directories: set[str]
+    ) -> None:
+        if current.keys() != self.entries.keys():
+            raise _Busy("observed local tree changed")
+        reread = []
+        for name, signature in current.items():
+            original = self.entries[name]
+            if signature == original:
+                continue
+            if signature[:3] != original[:3]:
+                raise _Busy("observed local entry identity or size changed")
+            if name.casefold().endswith((".lock", ".sqlite3", "-journal", "-wal", "-shm")):
+                raise _Busy("observed local lock or database entry changed")
+            if name in directories:
+                continue
+            path = self.root / name
+            if path not in self._receipts or path in self.databases:
+                raise _Busy("observed local entry changed without a usable file receipt")
+            reread.append(path)
+        for path in reread:
+            self.raw[path]
+        for path in self.databases:
+            self.sidecars(path)
+        confirmed: set[str] = set()
+        if self._tree_entries(directories=confirmed) != current or confirmed != directories:
+            raise _Busy("observed local tree changed during receipt recheck")
+
     def finish(self) -> dict[str, str]:
         for path in self.databases:
             self.sidecars(path)
@@ -378,8 +418,17 @@ class _Capture:
             self.raw[path]
         for path in self.databases:
             self.sidecars(path)
-        if self._tree_entries() != self.entries:
-            raise _Busy("observed local tree changed")
+        if self._directories is None:
+            if self._tree_entries() != self.entries:
+                raise _Busy("observed local tree changed")
+        else:
+            directories: set[str] = set()
+            current = self._tree_entries(directories=directories)
+            if directories != self._directories:
+                raise _Busy("observed local entry kinds changed")
+            if current != self.entries:
+                self._recheck_timestamps(current, directories)
+                self.entries = current
         for root, entries in self._watched_trees.items():
             if self._tree_entries(root) != entries:
                 raise _Busy("observed external tree changed")

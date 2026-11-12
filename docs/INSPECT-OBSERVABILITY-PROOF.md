@@ -1,11 +1,36 @@
 # Inspect observability compatibility proof
 
-## Active integration: November 5, 2026
+## Current integration status
 
-The user has authorised bounded diagnosis and actual Inspect integration.
-The selected offline integration and owned-process boundary now pass their
-single bounded proof. No new capacity, qualification or paid run is authorised.
-The earlier partials below retain their original status. PLAN.md is the
+The pinned Inspect 0.3.287 integration passed the November 5 offline
+tracing, error and viewer endpoint check. The optional launcher entry applies to
+fresh read-only checks. It replaces the terminal heartbeat for that check.
+The saved comparison and paid runs use Buddha's existing launcher and accounting.
+
+On November 12, the same installed release reused a completed sample in a
+two-sample, no-model task. The first evaluation called both solvers and stopped
+on the second sample. Inspect's retry called only that unfinished sample and
+kept the completed sample's original result. The original log hash stayed the
+same and both model-usage totals were empty. The successful process took
+4.932 seconds. Three setup attempts stopped before either sample ran. The
+successful proof blocked external networking and retained only the private
+loopback sockets Python needs for its event loop on Windows. This establishes
+sample reuse for a loadable Inspect task. The existing Buddha observer creates
+its task in memory and has no sample retry path.
+The local receipt is `runs/checks/d8-inspect-sample-reuse-20261112-v1/result.json`
+with SHA-256 `dff6cf21620b92405e1dc72b6f06021753d7db5942e1ba197b0e6ec9cd65379f`.
+
+For a fresh study, the next candidate for replacement is the loop that
+schedules final assessment cells and the two plain-model controls. Inspect
+would own sample scheduling, completed-sample skipping and progress display.
+The scorer would still run the pinned official NoveltyBench requests through
+Buddha's Gateway. Before adopting it, interrupt a small paid-blocked grid after
+a completed sample and verify that resumption preserves exact scores, artifacts
+and ledger totals without sending again for the completed sample. An observer
+error after canonical completion must also preserve that completion. The
+current one-operation observer does not exercise this path. [Inspect sample preservation](https://inspect.aisi.org.uk/eval-logs.html#sample-preservation).
+
+The earlier partials retain their original status. [PLAN.md](PLAN.md) is the
 scheduling authority.
 
 ### Project-only process ownership

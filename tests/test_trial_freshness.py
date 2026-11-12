@@ -40,7 +40,7 @@ class TrialFreshnessTests(unittest.TestCase):
             unified_continuation.launch_trial_continuation(
                 path, expected_sha256=pin, notice=notices.append
             )
-        check.assert_called_once_with(path, pin, trial_continuation=True)
+        check.assert_called_once_with(path, pin, trial_continuation=True, startup=True)
         self.assertEqual(
             notices[:2],
             [
@@ -276,7 +276,7 @@ class TrialFreshnessTests(unittest.TestCase):
             )
         self.assertEqual(result["status"], "complete")
         checker.assert_called_once_with(
-            prepared.checked.path, prepared.checked.sha256, trial_continuation=True
+            prepared.checked.path, prepared.checked.sha256, trial_continuation=True, startup=True
         )
         self.assertEqual(observations, [{"owned_locks": frozenset()}] * 2)
 

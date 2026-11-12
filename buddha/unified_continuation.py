@@ -387,6 +387,7 @@ def _check(
     *,
     study_continuation: bool = False,
     trial_continuation: bool = False,
+    startup: bool = False,
 ) -> _CheckedState:
     study_continuation = study_continuation or trial_continuation
     path, expected = common._path(str(path.absolute())), _digest(expected)
@@ -452,7 +453,7 @@ def _check(
         trial, study, witness = (common._path(cut[k]) for k in ("trial", "study", "witness"))
         if str(study) != str(trial / "search/study") or not witness.is_relative_to(study):
             raise WitnessContinuationError("cut changes its original trial or study root")
-        capture = _Capture(trial)
+        capture = _Capture(trial, allow_timestamp_drift=startup and quota_cut)
         seen: dict[str, str] = {}
 
         def bound(reference: object) -> tuple[Path, str, bytes]:
@@ -1271,12 +1272,13 @@ def _checked_state(
     *,
     study_continuation: bool = False,
     trial_continuation: bool = False,
+    startup: bool = False,
 ) -> _CheckedState:
     if not isinstance(path, Path):
         raise WitnessContinuationError("continuation requires an explicit external Path")
     try:
         if trial_continuation:
-            return _check(path, expected_sha256, trial_continuation=True)
+            return _check(path, expected_sha256, trial_continuation=True, startup=startup)
         return (
             _check(path, expected_sha256, study_continuation=True)
             if study_continuation
@@ -1368,7 +1370,9 @@ def launch_trial_continuation(
                 [None],
                 15 * 60,
             ):
-                prepared = _checked_state(path, expected_sha256, trial_continuation=True)
+                prepared = _checked_state(
+                    path, expected_sha256, trial_continuation=True, startup=True
+                )
             checked = prepared.checked
             if type(checked) is not CheckedTrialContinuation:
                 raise WitnessContinuationError("trial continuation needs its exact checked scope")
