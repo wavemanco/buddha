@@ -387,56 +387,66 @@ class ReleaseSelectionTests(unittest.TestCase):
         with patch("os.fstat", side_effect=different_ctime):
             self.assertEqual(inventory(self.roots["agent"]), expected)
 
-    def test_selected_inventory_rechecks_only_one_directory_timestamp_change(self):
+    def test_selected_inventory_ignores_repeated_directory_touches_and_hashes_once(self):
         selection = self.prepare()
         root = self.roots["agent"]
-        target = root / "policy.json"
         original_hash = releases.file_hash
-        original = target.read_bytes()
+        hashed = []
 
-        def check(outcome):
-            scans = 0
+        def hash_file(path, **options):
+            digest = original_hash(path, **options)
+            if path.parent == root:
+                hashed.append(path.name)
+                info = root.stat()
+                os.utime(root, ns=(info.st_atime_ns, info.st_mtime_ns - 2_000_000_000))
+            return digest
 
-            def scan(path):
-                nonlocal scans
-                if path == root:
-                    scans += 1
-                    if scans == 2 and outcome == "changed_bytes":
-                        target.write_bytes(b"X" * len(original))
-                return inventory(path)
+        with patch.object(releases, "file_hash", side_effect=hash_file):
+            self.assertEqual(
+                verify_selection(selection, self.roots, expected_sha256=selection.fingerprint()),
+                selection.fingerprint(),
+            )
+        self.assertCountEqual(hashed, ["identity.txt", "policy.json"])
+
+    def test_inventory_rejects_late_name_type_and_file_changes(self):
+        original_hash = releases.file_hash
+
+        def check(change):
+            root = self.root / change
+            root.mkdir()
+            for name in ("a.txt", "b.txt"):
+                (root / name).write_bytes(b"old")
+            hashed = []
 
             def hash_file(path, **options):
                 digest = original_hash(path, **options)
-                if path == target and (scans < 2 or outcome == "changed_again"):
-                    info = root.stat()
-                    os.utime(root, ns=(info.st_atime_ns, info.st_mtime_ns - 2_000_000_000))
+                hashed.append(path)
+                if len(hashed) == 2:
+                    first = hashed[0]
+                    if change == "added_empty_directory":
+                        (root / "added").mkdir()
+                    elif change == "removed":
+                        first.unlink()
+                    elif change == "renamed":
+                        first.rename(root / "renamed.txt")
+                    elif change == "retyped":
+                        first.unlink()
+                        first.mkdir()
+                    else:
+                        info = first.stat()
+                        first.write_bytes(b"new")
+                        os.utime(first, ns=(info.st_atime_ns, info.st_mtime_ns - 2_000_000_000))
                 return digest
 
-            with (
-                patch.object(releases, "inventory", side_effect=scan),
-                patch.object(releases, "file_hash", side_effect=hash_file),
-            ):
-                if outcome == "stable":
-                    with self.assertRaisesRegex(ReleaseError, "timestamps changed"):
-                        inventory(root)
-                    self.assertEqual(
-                        verify_selection(
-                            selection, self.roots, expected_sha256=selection.fingerprint()
-                        ),
-                        selection.fingerprint(),
-                    )
-                else:
-                    with self.assertRaises(ReleaseError):
-                        verify_selection(
-                            selection, self.roots, expected_sha256=selection.fingerprint()
-                        )
-            self.assertEqual(scans, 2)
+            with patch.object(releases, "file_hash", side_effect=hash_file):
+                with self.assertRaisesRegex(ReleaseError, "entries changed"):
+                    inventory(root)
 
-        for outcome in ("stable", "changed_again", "changed_bytes"):
-            with self.subTest(outcome=outcome):
-                check(outcome)
+        for change in ("added_empty_directory", "removed", "renamed", "retyped", "changed_bytes"):
+            with self.subTest(change=change):
+                check(change)
 
-    def test_directory_identity_change_takes_precedence_over_timestamp_change(self):
+    def test_directory_identity_change_is_rejected_even_with_timestamp_tolerance(self):
         selection = self.prepare()
         root = self.roots["environment"]
         nested = root / "site-packages/nested"
@@ -464,7 +474,7 @@ class ReleaseSelectionTests(unittest.TestCase):
             patch.object(releases, "file_hash", side_effect=hash_file),
             patch.object(releases, "_information", side_effect=information),
         ):
-            with self.assertRaisesRegex(ReleaseError, "directory identity changed"):
+            with self.assertRaisesRegex(ReleaseError, "entries changed"):
                 verify_selection(selection, self.roots, expected_sha256=selection.fingerprint())
         self.assertEqual(scans.call_args_list.count(unittest.mock.call(root)), 1)
 

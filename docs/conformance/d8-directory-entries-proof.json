@@ -1,0 +1,21 @@
+{
+  "format": "buddha.d8-directory-entries-proof.v1",
+  "date": "2026-11-12",
+  "status": "offline_native_validation_pass",
+  "prior_folder_guard_introduction": "7c325abd",
+  "original_live_stop_metadata_field_known": false,
+  "census_before_and_after_hashing": true,
+  "folder_timestamps_compared": false,
+  "retry": false,
+  "frozen_file_names_and_hashes_retained": true,
+  "proof": {
+    "path": "runs/checks/d8-fresh-handoff-20261112-v2/directory-entries-proof.json",
+    "sha256": "a684ae14701ecc0e5c9e3e8262f0317dd58dd20f3442b318a3ad5eebd2821571",
+    "real_native_component_copies": 5,
+    "actual_folder_timestamp_touches": 9,
+    "file_hashes_once": 19,
+    "changed_pinned_hash_rejected": true
+  },
+  "focused_tests": {"passed": 34, "skipped": 1, "seconds": 18.265},
+  "provider_calls": 0
+}

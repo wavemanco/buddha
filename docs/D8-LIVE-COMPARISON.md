@@ -2,6 +2,14 @@
 
 ## Fresh handoff and approved budget
 
+**Launch on hold for the directory-check correction.** The next runner
+compares directory entry names, types and identities before and after one
+file-hashing pass. Folder timestamps are out of that comparison, and the
+timestamp retry is removed. The frozen names and file hashes still have to
+match. On copies of the actual evaluator components, nine timestamp changes
+passed with each of the 19 files hashed once. A changed pinned file was rejected.
+[Offline proof](conformance/d8-directory-entries-proof.json).
+
 **November 12 launch stop.** The live launch stopped after key entry when the
 native evaluator's directory metadata changed during inventory. The diagnostic
 did not identify the directory or field. All 19 selected files match their
@@ -62,8 +70,8 @@ zero operations, spending and holds. Model access is checked during the live run
 
 ### Start the fresh comparison
 
-Open a new ordinary PowerShell window with Docker Desktop running. Run these
-two lines once. This is the corrected v2 handoff.
+**Command on hold.** This v2 command pins the earlier timestamp-retry
+implementation. Wait for the handoff that binds the directory-entry correction.
 
 ```powershell
 Remove-Item -LiteralPath 'Env:\OPENAI_API_KEY', 'Env:\ANTHROPIC_API_KEY' -ErrorAction SilentlyContinue
