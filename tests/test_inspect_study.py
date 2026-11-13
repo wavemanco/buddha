@@ -315,7 +315,9 @@ class InspectStudyTests(unittest.TestCase):
                 ),
                 patch.object(improver_study, "Authorization", return_value=authority),
                 patch.object(improver_study.trial_fence, "work", return_value=nullcontext()),
-                patch.object(improver_study.pipeline, "_exclusive", return_value=nullcontext()),
+                patch.object(
+                    improver_study.pipeline, "_exclusive", return_value=nullcontext(lambda: None)
+                ),
                 patch.object(improver_study, "_restore", return_value=(reader, state)),
                 patch.object(improver_study, "_check_current"),
                 patch.object(

@@ -20,7 +20,7 @@ from buddha import candidate_generation, native_evaluation, trial_fence
 from buddha import native_pipeline as pipeline
 from buddha.answers import TaskSet, _Artifact, _source, _utf8
 from buddha.authorization import Authorization
-from buddha.doctor import _Busy, _Capture, _Unsupported
+from buddha.doctor import _active_tree, _Busy, _Capture, _Unsupported
 from buddha.gateway import (
     CAPABILITIES,
     CORE,
@@ -1162,8 +1162,8 @@ def run_source_screen(directory: Path, *, transport: RawHTTPTransport) -> dict[s
             Authorization(authority_path)._terms(),
             directory=directory,
             kind="screen",
-        ),
-        pipeline._exclusive(directory),
+        ) as trial_controls,
+        pipeline._exclusive(directory) as check_lock,
     ):
         Gateway(anchor, transport=RawHTTPTransport(allow_paid=False))
         first = _read_manifest(anchor)
@@ -1182,6 +1182,10 @@ def run_source_screen(directory: Path, *, transport: RawHTTPTransport) -> dict[s
         current_index, current_stage = 0, "generation"
 
         def observe(reason: str, child: dict[str, object] | None) -> dict[str, object]:
+            check_lock()
+            held = trial_fence._HELD.get()
+            if held is not None:
+                trial_fence._assert_held(held.binding)
             ordinal = 0
             while (directory / "observations" / (str(ordinal) + ".json")).exists():
                 ordinal += 1
@@ -1254,10 +1258,23 @@ def run_source_screen(directory: Path, *, transport: RawHTTPTransport) -> dict[s
                     return observe(_text(child["reason"]), child)
                 retained[evaluation / "report.json"] = _accepted(evaluation, child)
             current_stage = "publication"
+            from buddha.source_screen_results import _collect_source_screen, collect_source_screen
+
+            with _active_tree(directory) as active:
+                if active:
+                    completed = _collect_source_screen(
+                        directory,
+                        authorization=authority.path,
+                        accepted=retained,
+                        original=(screen, controls, review, trial_controls),
+                    )
+                    check_lock()
+                    if "report.json" not in completed.reader.capture.entries:
+                        pipeline._write(directory / "report.json", completed.report_raw)
+                    return _load(completed.report_raw)
+
             for path, digest in retained.items():
                 pipeline._read(path, digest)
-            from buddha.source_screen_results import collect_source_screen
-
             result = collect_source_screen(directory, authorization=authority.path)
             identifiers = _preflight(directory, screen, authority, review, controls)
             return pipeline.publish_complete(

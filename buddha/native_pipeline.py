@@ -3,6 +3,7 @@
 import hashlib
 import json
 import os
+import stat
 from collections.abc import Callable, Iterator
 from contextlib import contextmanager
 from pathlib import Path
@@ -18,6 +19,7 @@ from buddha.releases import (
     Release,
     ReleaseError,
     Selection,
+    _information,
     _json,
     _load,
     _object,
@@ -104,7 +106,7 @@ def _coverage(path: Path, field: str, tasks: TaskSet, expected_digest: object) -
 
 
 @contextmanager
-def _exclusive(directory: Path) -> Iterator[None]:
+def _exclusive(directory: Path) -> Iterator[Callable[[], None]]:
     _root(directory)
     path = directory / "running.lock"
     try:
@@ -114,11 +116,31 @@ def _exclusive(directory: Path) -> Iterator[None]:
             "baseline is already running or has a retained interrupted lock"
         ) from None
     try:
-        with stream:
-            stream.write(str(os.getpid()).encode("ascii"))
-            stream.flush()
-        yield
+        acquired = os.fstat(stream.fileno())
+    except OSError:
+        stream.close()
+        raise PipelineError("writer lock identity unavailable; lock retained") from None
+
+    def check() -> None:
+        try:
+            current = _information(path)
+        except OSError:
+            raise PipelineError("writer lock disappeared") from None
+        if (
+            not stat.S_ISREG(current.st_mode)
+            or current.st_nlink != 1
+            or (current.st_dev, current.st_ino) != (acquired.st_dev, acquired.st_ino)
+        ):
+            raise PipelineError("writer lock identity changed; foreign lock retained")
+
+    try:
+        stream.write(str(os.getpid()).encode("ascii"))
+        stream.flush()
+        check()
+        yield check
     finally:
+        stream.close()
+        check()
         path.unlink()
 
 

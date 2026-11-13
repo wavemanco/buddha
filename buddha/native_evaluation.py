@@ -104,14 +104,21 @@ def _read_generation(value: object, authority_path: Path) -> _Generation:
 
 @_checked
 def _read_published_generation(
-    directory: Path, *, authorization: Path, expected_report_sha256: str
+    directory: Path,
+    *,
+    authorization: Path,
+    expected_report_sha256: str,
+    defer_finish: bool = False,
 ) -> tuple[dict[str, object], _Generation | None, _Capture]:
     """Share one checked publication's evidence with its generated C1, if present."""
     from buddha import candidate_generation
 
     _check_candidate_reader()
     report, evidence = candidate_generation._read_published_evidence(
-        directory, authorization=authorization, expected_report_sha256=expected_report_sha256
+        directory,
+        authorization=authorization,
+        expected_report_sha256=expected_report_sha256,
+        defer_finish=defer_finish,
     )
     source = (
         None
