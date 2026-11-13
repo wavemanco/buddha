@@ -74,13 +74,22 @@ name, type and identity. It still checks file metadata and consumed bytes,
 ledger sidecars and the writer lock. The check accepts directory clock
 changes and rejects a replaced directory, unexpected entries, changed files,
 and new sidecars. The launcher fixture now records the bounded scan difference
-when one is available. Final worker entry remains unverified.
+when one is available.
 
-Read-only checks before and after the rehearsal matched all 638 original
-operations across 199 V5 owner ledgers. The ledger hashes, 637 settled
-operations, $5.600044 recorded spending and $11.44 hold matched before
-and after. The synthetic fixture used its own ledgers. Actual V5 replay
-remains unverified.
+The follow-up rehearsal passed in 13 minutes 3 seconds at `de260c2`, after
+both [fast CI jobs](https://github.com/wavemanco/buddha/actions/runs/43435876599)
+passed on that commit. All 890 tracked hashes matched. With provider access
+blocked, the primary launcher used one simulated replacement, kept the
+fixture's saved operations, seals and hold, and reached the entry point for
+the first final generation worker. The fixture intercepted the worker before
+starting a container or sending a final request. Local evidence is in
+`runs/checks/d8-held-launcher-20261113-v2/`.
+
+Separate read-only snapshots before and after matched all 638 original
+operations across 199 V5 owners and the ledger file hashes. The actual study
+still has 637 settled operations, $5.600044 recorded spending and $11.44 held.
+The rehearsal used its own ledgers. Actual V5 replay, the combined operator
+command and final scoring remain unverified by this rehearsal.
 
 If an authentic original result and usage later become available, the
 existing ledger transition is the smaller route. In a synthetic OpenAI
