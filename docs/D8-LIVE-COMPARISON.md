@@ -16,6 +16,14 @@ v3 as a partial. The separate publication-recovery exercise is dropped.
 The next live handoff will focus on completing the comparison.
 [V3 stop evidence](conformance/d8-v3-screen-publication-stop.json).
 
+The next runner's stop diagnostic records how many entries were added,
+removed or changed, with up to three examples and their changed metadata
+fields. It names known run-relative paths and redacts arbitrary names,
+absolute paths and file contents. A supplied-reply screen test changed
+`tasks/0/evaluation` during publication and recovered that entry and its
+`mtime_ns` field from the diagnostic. The existing evidence checks still
+decide whether publication can proceed.
+
 The v3 runner
 compares directory entry names, types and identities before and after one
 file-hashing pass. Folder timestamps are out of that comparison, and the

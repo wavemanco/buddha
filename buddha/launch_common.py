@@ -13,7 +13,7 @@ from typing import TYPE_CHECKING, Any, Protocol, cast
 
 from buddha import credentials, gateway
 from buddha import native_pipeline as pipeline
-from buddha.doctor import _Busy, _Unsupported
+from buddha.doctor import _Busy, _TreeChanged, _Unsupported
 from buddha.gateway_history import MAX_LEDGER_BYTES
 from buddha.provider import ModelSpec
 from buddha.releases import (
@@ -278,7 +278,7 @@ def _stop_reason(error: BaseException) -> str:
 
 
 def _stop_diagnostic(error: BaseException) -> dict[str, object]:
-    """Bounded public-code locations only; never inspect exception text or locals."""
+    """Bounded source locations and trusted evidence deltas, without text or locals."""
     kinds = {
         OSError: "os_error",
         ValueError: "value_error",
@@ -288,6 +288,7 @@ def _stop_diagnostic(error: BaseException) -> dict[str, object]:
         ReleaseError: "validation_error",
         pipeline.PipelineError: "validation_error",
         _Busy: "evidence_busy",
+        _TreeChanged: "evidence_busy",
         _Unsupported: "evidence_unsupported",
         credentials.KeyInputError: "key_input",
         EvidenceTotalLimitError: "evidence_total_limit",
@@ -327,7 +328,10 @@ def _stop_diagnostic(error: BaseException) -> dict[str, object]:
                 frames.append({"file": name, "line": line})
                 frames = frames[-8:]
             traceback = traceback.tb_next
-        chain.append({"kind": kinds.get(type(current), "other"), "frames": frames})
+        node: dict[str, object] = {"kind": kinds.get(type(current), "other"), "frames": frames}
+        if type(current) is _TreeChanged:
+            node["tree_difference"] = current.details
+        chain.append(node)
         for attribute in ("__context__", "__cause__"):
             nested = cast(
                 BaseException | None,

@@ -65,6 +65,59 @@ class _Busy(Exception):
     pass
 
 
+_ENTRY_FIELDS = ("device", "inode", "size", "mtime_ns", "ctime_ns")
+_DIAGNOSTIC_NAMES = frozenset(
+    """search study common cells screen witness tasks generation evaluation
+    attempts owners completed session artifacts observations staging .receive
+    v1.1 running.lock .search.lock .trial-running.lock screen.json context.json
+    report.json manifest.json operations.sqlite3 task.json generation.json
+    evaluation.json answers.json done.json partitions.jsonl scores.jsonl
+    summary.json imports-ready.json imports-final.json""".split()
+)
+
+
+class _TreeChanged(_Busy):
+    """Safe, bounded details from two already observed evidence censuses."""
+
+    def __init__(
+        self,
+        message: str,
+        before: Mapping[str, tuple[int, int, int, int, int]],
+        after: Mapping[str, tuple[int, int, int, int, int]],
+        *,
+        external: bool = False,
+    ) -> None:
+        super().__init__(message)
+        counts = dict.fromkeys(("added", "removed", "changed"), 0)
+        entries = []
+        for name in sorted(before.keys() | after.keys()):
+            old, new = before.get(name), after.get(name)
+            if old == new:
+                continue
+            change = "added" if old is None else "removed" if new is None else "changed"
+            counts[change] += 1
+            if len(entries) < 3:
+                # Candidate-controlled names must never reach the console.
+                safe = len(name) <= 200 and all(
+                    part in _DIAGNOSTIC_NAMES
+                    or re.fullmatch(r"[0-9]{1,6}(?:-[0-9]{1,6}|\.json)?", part)
+                    for part in name.split("/")
+                )
+                fields = (
+                    [label for label, a, b in zip(_ENTRY_FIELDS, old, new, strict=True) if a != b]
+                    if old is not None and new is not None
+                    else []
+                )
+                entries.append(
+                    {"entry": name if safe else None, "change": change, "fields": fields}
+                )
+        self.details = {
+            "tree": "external" if external else "local",
+            "counts": counts,
+            "entries": entries,
+        }
+
+
 class _Unsupported(Exception):
     pass
 
@@ -250,7 +303,7 @@ class _TreeObservation:
                 raise _Busy("observed local tree or writer lease changed")
             current = _entries(root) if maximum == MAX_FILES else _entries(root, maximum=maximum)
             if current != entries:
-                raise _Busy("observed local tree or writer lease changed")
+                raise _TreeChanged("observed local tree changed", entries, current)
 
 
 _PASSIVE_TREES: ContextVar[_TreeObservation | None] = ContextVar(
@@ -338,7 +391,9 @@ class _Capture:
         """Keep a selected external directory's census within this observation."""
         entries = self._tree_entries(root)
         if root in self._watched_trees and self._watched_trees[root] != entries:
-            raise _Busy("observed external tree changed")
+            raise _TreeChanged(
+                "observed external tree changed", self._watched_trees[root], entries, external=True
+            )
         trees = self._watched_trees | {root: entries}
         if len(self.entries) + sum(map(len, trees.values())) > self._maximum_entries:
             raise EvidencePathLimitError("observed tree entry ceiling exceeded")
@@ -387,29 +442,40 @@ class _Capture:
         self, current: dict[str, tuple[int, int, int, int, int]], directories: set[str]
     ) -> None:
         if current.keys() != self.entries.keys():
-            raise _Busy("observed local tree changed")
+            raise _TreeChanged("observed local tree changed", self.entries, current)
         reread = []
         for name, signature in current.items():
             original = self.entries[name]
             if signature == original:
                 continue
             if signature[:3] != original[:3]:
-                raise _Busy("observed local entry identity or size changed")
+                raise _TreeChanged(
+                    "observed local entry identity or size changed", self.entries, current
+                )
             if name.casefold().endswith((".lock", ".sqlite3", "-journal", "-wal", "-shm")):
-                raise _Busy("observed local lock or database entry changed")
+                raise _TreeChanged(
+                    "observed local lock or database entry changed", self.entries, current
+                )
             if name in directories:
                 continue
             path = self.root / name
             if path not in self._receipts or path in self.databases:
-                raise _Busy("observed local entry changed without a usable file receipt")
+                raise _TreeChanged(
+                    "observed local entry changed without a usable file receipt",
+                    self.entries,
+                    current,
+                )
             reread.append(path)
         for path in reread:
             self.raw[path]
         for path in self.databases:
             self.sidecars(path)
         confirmed: set[str] = set()
-        if self._tree_entries(directories=confirmed) != current or confirmed != directories:
-            raise _Busy("observed local tree changed during receipt recheck")
+        final = self._tree_entries(directories=confirmed)
+        if final != current:
+            raise _TreeChanged("observed local tree changed during receipt recheck", current, final)
+        if confirmed != directories:
+            raise _Busy("observed local entry kinds changed during receipt recheck")
 
     def finish(self) -> dict[str, str]:
         for path in self.databases:
@@ -419,8 +485,9 @@ class _Capture:
         for path in self.databases:
             self.sidecars(path)
         if self._directories is None:
-            if self._tree_entries() != self.entries:
-                raise _Busy("observed local tree changed")
+            current = self._tree_entries()
+            if current != self.entries:
+                raise _TreeChanged("observed local tree changed", self.entries, current)
         else:
             directories: set[str] = set()
             current = self._tree_entries(directories=directories)
@@ -430,8 +497,11 @@ class _Capture:
                 self._recheck_timestamps(current, directories)
                 self.entries = current
         for root, entries in self._watched_trees.items():
-            if self._tree_entries(root) != entries:
-                raise _Busy("observed external tree changed")
+            current = self._tree_entries(root)
+            if current != entries:
+                raise _TreeChanged(
+                    "observed external tree changed", entries, current, external=True
+                )
         return {
             path.relative_to(self.root).as_posix()
             if path.is_relative_to(self.root)
@@ -481,7 +551,9 @@ class _Capture:
         trees = dict(self._watched_trees)
         for root, entries in source._watched_trees.items():
             if root in trees and trees[root] != entries:
-                raise _Busy("observed external tree changed")
+                raise _TreeChanged(
+                    "observed external tree changed", trees[root], entries, external=True
+                )
             trees[root] = entries
         if len(self.entries) + sum(map(len, trees.values())) > self._maximum_entries:
             raise EvidencePathLimitError("observed tree entry ceiling exceeded")

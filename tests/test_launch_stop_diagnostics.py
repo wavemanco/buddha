@@ -7,6 +7,8 @@ the original study, enter credentials, send requests or run a container.
 import copy
 import hashlib
 import json
+import os
+import tempfile
 import unittest
 from contextlib import nullcontext
 from datetime import UTC, datetime
@@ -15,7 +17,14 @@ from unittest.mock import patch
 
 import test_unified_launch as unified_fixtures
 
-from buddha import improver_launch, improver_study, launch_common, native_pipeline, trial_fence
+from buddha import (
+    doctor,
+    improver_launch,
+    improver_study,
+    launch_common,
+    native_pipeline,
+    trial_fence,
+)
 from buddha.common import ValidationError
 from buddha.releases import _json
 
@@ -50,7 +59,7 @@ class LaunchStopDiagnosticTests(unittest.TestCase):
         self.assertEqual(result["reason"], launch_common._stop_reason(error))
         self.assertLessEqual(len(result["chain"]), 8)
         for node in result["chain"]:
-            self.assertEqual(set(node), {"kind", "frames"})
+            self.assertEqual(set(node) - {"tree_difference"}, {"kind", "frames"})
             self.assertIn(node["kind"], KINDS)
             self.assertLessEqual(len(node["frames"]), 8)
             for frame in node["frames"]:
@@ -202,6 +211,34 @@ class LaunchStopDiagnosticTests(unittest.TestCase):
         self.assertEqual(result["chain"], [{"kind": "other", "frames": []}])
         forged = type(CANARY, (ValidationError,), {})(CANARY)
         self.assertEqual(self.diagnostic(forged)["chain"][0]["kind"], "other")
+
+    def test_tree_mismatch_records_fields_and_redacts_unknown_names(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary).resolve()
+            report = root / "report.json"
+            report.write_bytes(b"original")
+            capture = doctor._Capture(root)
+            capture.read(report)
+            info = report.stat()
+            os.utime(report, ns=(info.st_atime_ns, info.st_mtime_ns - 2_000_000_000))
+            (root / CANARY).touch()
+            with self.assertRaises(RuntimeError) as stopped:
+                try:
+                    capture.finish()
+                except doctor._Busy:
+                    raise RuntimeError(CANARY) from None
+        result = self.diagnostic(stopped.exception)
+        evidence = result["chain"][1]
+        self.assertEqual(evidence["kind"], "evidence_busy")
+        difference = evidence["tree_difference"]
+        self.assertEqual(difference["counts"], {"added": 1, "removed": 0, "changed": 1})
+        self.assertEqual(difference["tree"], "local")
+        redacted, changed = difference["entries"]
+        self.assertEqual(redacted, {"entry": None, "change": "added", "fields": []})
+        self.assertEqual(changed["entry"], "report.json")
+        self.assertEqual(changed["change"], "changed")
+        self.assertIn("mtime_ns", changed["fields"])
+        self.assertLessEqual(set(changed["fields"]), {"mtime_ns", "ctime_ns"})
 
     def test_cycles_shared_nodes_and_long_context_chains_are_bounded(self):
         shared = ValueError(CANARY)
