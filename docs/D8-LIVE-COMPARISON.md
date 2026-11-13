@@ -1,5 +1,32 @@
 # Main live comparison
 
+## V5 provider stop
+
+On November 13, 2026 at 2:21 a.m. Pacific, the Anthropic request for the
+NoveltyBench utility judge, `claude-opus-5`, returned HTTP 503 with no usable
+usage data. It was development start 0, repetition 1, arm 1, slot 1, task 0.
+That task's generation and partition were already saved. The utility stage
+did not finish, and the worker container was removed.
+
+Buddha recorded 637 settled operations and $5.600044 of spending. The one
+unsettled request still holds $11.44 against the $40 development cap. The
+provider charge for that request is unverified. All four common screens and
+11 of 16 improvement opportunities are complete. One opportunity is in
+flight and four are unattempted. Final assessment and both plain controls
+have zero attempts.
+
+The saved outer observation is
+`3a61dc9b7e364975a23310876d13e482.json`, SHA256
+`5c76aee4be12552c7a2f9f0357fb9239d5419efd892766f856c460d59b555288`.
+The HTTP status comes from the retained operation receipt. The terminal's
+later recording phase saved the incomplete observation.
+
+Keep the V5 command on hold. The retained request ID can be used to ask
+Anthropic whether the request was billed and whether usage or a result is
+available. The existing continuation rejects this unresolved request and
+does not support this native screen stop. Provider evidence informs a
+recovery that preserves the saved work, original accounting and judge settings.
+
 ## V5 fresh comparison
 
 V5 starts with fresh outputs and the full $150 combined API cap. V3 remains a
@@ -28,7 +55,7 @@ The earlier full qualification belongs to its original source.
 
 ### V5 local launch
 
-Run once in a new PowerShell window with Docker Desktop running.
+**Historical command. V5 is on hold after the provider stop above.**
 
 ```powershell
 Remove-Item -LiteralPath 'Env:\OPENAI_API_KEY', 'Env:\ANTHROPIC_API_KEY' -ErrorAction SilentlyContinue
