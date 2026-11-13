@@ -59,10 +59,19 @@ decision to the normal launcher. With `--check`, it verifies the approval and
 saved state without keys, writes or paid requests. A live
 command requires separate approval and the original locally entered keys.
 
-The provider-blocked rehearsal completed synthetic development and wrote
-the final schedule. The last input check stopped after a source edit during
-the rehearsal. Reaching the first final worker with unchanged source remains
-to be verified before releasing the V5 command.
+The November 13 provider-blocked primary launcher rehearsal ended after
+7 minutes 37 seconds at commit `5007ca3`. It recovered the synthetic utility
+stage and completed development. After writing the final schedule, the
+launcher stopped when a nested development directory inventory differed
+between reads. The first final worker did not start. All 890 tracked source
+and repository files matched their initial hashes. The retained log identifies
+the check that stopped but does not include the entry or field that differed.
+
+Read-only checks before and after the rehearsal matched all 638 original
+operations across 199 V5 owner ledgers. The ledger hashes, 637 settled
+operations, $5.600044 recorded spending and $11.44 hold matched before
+and after. The synthetic fixture used its own ledgers. Actual V5 replay
+remains unverified.
 
 If an authentic original result and usage later become available, the
 existing ledger transition is the smaller route. In a synthetic OpenAI
