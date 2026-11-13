@@ -4,8 +4,7 @@
 
 V5 starts with fresh outputs and the full $150 combined API cap. V3 remains a
 partial with 48 settled operations, $0.237967 recorded spending and zero held.
-Its answers and scores are preserved with that run. Use the new handoff when
-released. The v3 command stays retired.
+Its answers and scores are preserved with that run. The v3 command stays retired.
 
 | Phase | API cap | Recorded attempts |
 | --- | ---: | ---: |
@@ -24,10 +23,10 @@ pass 550 contract methods per OS. Three exact-source Windows checks cover
 publication through the next study action, a substituted report and a late
 seal. The funded launcher passes its actual pre-key and post-key checks with
 dummy prompts and transport blocked. All four grants start at zero use.
-The earlier full qualification belongs to its original source. V5 uses the
-scoped readiness evidence only if the operator adopts it for this launch.
+The user adopted the scoped checks and earlier D8 capacity evidence for V5.
+The earlier full qualification belongs to its original source.
 
-### V5 local launch after readiness approval
+### V5 local launch
 
 Run once in a new PowerShell window with Docker Desktop running.
 
