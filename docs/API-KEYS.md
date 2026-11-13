@@ -8,8 +8,10 @@ The user chose the full $150 combined OpenAI and Anthropic cap for the fresh
 comparison. V3's $0.237967 and 48 settled operations remain with its historical
 partial. The four V5 grants start unused. Development gets $40 and 4,096
 attempts, final gets $85 and 10,240, both plain controls share $25 and 2,048,
-and unused validation gets zero. V5 is on hold after one Anthropic 503. Its $11.44 reservation remains pending provider evidence.
-[V5 stop and accounting](D8-LIVE-COMPARISON.md#v5-provider-stop).
+and unused validation gets zero. V5 is on hold after one Anthropic 503.
+Recovery preparation assumes a charge with no usable result. The full
+$11.44 remains held, and recorded spending stays $5.600044.
+[V5 stop and accounting](D8-LIVE-COMPARISON.md#resume-v5).
 
 ## Current D8 recovery
 

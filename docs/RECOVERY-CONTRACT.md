@@ -48,6 +48,47 @@ Old v1 manifests keep their original runtime guards. They must not be hash-bypas
 
 The continuation is a new explicitly versioned protocol: same source prompt, policy space, original proposer/judge templates, model access, limits and search rules; declared new accounting/runtime and inheritance metadata. Protocol fingerprints therefore change honestly. Those fingerprints appear in proposer feedback, so byte-identical future proposal payloads are not promised merely by matching settings. Verify scientific request bodies and archive rules against the archived constructors, and disclose any metadata-only difference. Do not claim that new host code is the old implementation.
 
+## Proposed recovery with a retained provider hold
+
+For a complete retryable provider error with no usable result or
+authoritative charge, propose a reviewed replacement under the original
+owner and grant. Adoption would update DESIGN §5 and §9. It must specify
+the evidence that the original maximum still bounds the first call,
+require the current account and tier review, and approve the exact
+replacement. The full first reservation remains committed and its original
+receipt, status and attempt count stay intact. A planning assumption does
+not enter the ledger as a settled charge.
+
+Use one durable, append-only decision in the existing authority. Bind the
+original owner, grant, request and receipt hashes to the one allowed
+replacement identity and its reviewed maximum. Under the original writer
+lock, reserve the replacement once within the owner and phase dollar and
+attempt limits. Complete that exact replacement before restarting the
+worker. Use the same model and body, the original reviewed worker headers
+and the SDK's next retry count.
+Then require the pinned worker to consume the original error and the saved
+replacement under their exact request identities before sealing the score.
+On restart, reuse a settled replacement or resume its proven unsent
+reservation. Validate and settle a durable successful receipt before
+replay if interrupted between receipt and settlement. A second ambiguous
+dispatch stops with both holds retained.
+
+Use one rule across the launcher, dispatch, stage publication and final
+funding checks. Only a verified replacement result can close the missing
+score for scientific purposes. Keep the named original charge unresolved
+and its hold committed after that result settles. Every other outstanding
+operation stays subject to the current stop rules. Keep historical source
+and manifests pinned. A changed runtime needs an explicit compatibility
+check against the original controls.
+
+Prove this through the normal launcher with a supplied response at the
+transport boundary and real provider access blocked. Reuse the saved
+generation and partition, preserve the first hold and receipt, allow
+exactly one simulated replacement, and show zero duplicate sends after
+restart. Include concurrent callback order, skipped or changed requests,
+second ambiguity, cap exhaustion and completion through final funding.
+This proposal grants no live authority.
+
 ## Acceptance gates by implementing slice
 
 | Gate | Required evidence |
