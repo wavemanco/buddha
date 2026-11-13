@@ -21,11 +21,40 @@ The saved outer observation is
 The HTTP status comes from the retained operation receipt. The terminal's
 later recording phase saved the incomplete observation.
 
-Keep the V5 command on hold. The retained request ID can be used to ask
-Anthropic whether the request was billed and whether usage or a result is
-available. The existing continuation rejects this unresolved request and
-does not support this native screen stop. Provider evidence informs a
-recovery that preserves the saved work, original accounting and judge settings.
+### Resume V5
+
+The V5 command remains on hold. A read-only check matched all 638 operation
+records across the shared ledger and 199 original owners. It verified the
+stopped task's generation and partition seals and found one unresolved
+utility request. The 637 settled calls and $11.44 hold stay in place.
+
+Ask Anthropic for the billing disposition and, if available, the original
+usable result and usage for that exact request. The next step depends on the
+reply.
+
+- **Usable original result and usage.** Verify the request identity,
+  model, usage and original price before proposing settlement. Use the
+  existing ledger transition to preserve the 503 and settle the exact
+  operation once. Check the normal launcher with provider access blocked
+  through the next study action before releasing a live command. In the
+  synthetic OpenAI utility fixture, a supplied matching result let the
+  same utility owner and summary finish without another provider request.
+- **Billing disposition only.** There is still no score to reuse. A
+  replacement needs an explicit reconciliation and a separately recorded
+  attempt under the original judge settings and cap. The current V5
+  continuation does not support this case. Keep the hold and saved work
+  while that decision is pending.
+- **No reliable disposition.** Keep the hold. The study stays paused at
+  the same request.
+
+For future runs, use the normal launcher as the single point of resume.
+It already locates the next unfinished work and can reuse matching
+settled replies and completed stages. A future change should add automatic
+recovery only for an exact, provably unsent request or a durable successful
+reply whose identity and usage can be verified. Prove no duplicate charge
+and no advance past an unfinished request. A received 503 without usage
+still needs provider reconciliation. The offline test uses simulated
+responses and leaves the V5 files untouched.
 
 ## V5 fresh comparison
 

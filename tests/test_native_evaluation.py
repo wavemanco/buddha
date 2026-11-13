@@ -17,9 +17,11 @@ import test_gateway as gateway_fixtures
 
 from buddha.answers import Answers
 from buddha.gateway import RawHTTPTransport
+from buddha.gateway_history import read_gateway_history
 from buddha.native_evaluation import EvaluationError, prepare_evaluation, run_evaluation
 from buddha.native_pipeline import PipelineError
 from buddha.releases import Release, _json, prepare_selection
+from buddha.wire import RawEnvelope, extract_usage
 
 
 def sha(raw):
@@ -377,6 +379,97 @@ class NativeEvaluationTests(NativeEvaluationFixture):
         self.assertEqual(self.run_evaluation(directory=other)["status"], "incomplete")
         self.assertEqual(self.fixture.physical_sends, after)
         self.assertEqual(self.fixture.authority.summary()["reserved_microusd"], held)
+
+    def test_received_utility_error_preserves_hold_then_reuses_reconciled_reply(self):
+        self.prepare()
+        response = self.fixture.fixture.response(status=503)
+        response.read.return_value = b"service unavailable"
+        connection = self.fixture.fixture.connection(response)
+        connect = self.fixture.agent.connection
+
+        def utility_error(*, timeout=False):
+            if self.fixture.events[-1]["initial"]["command"]["index"] == 1:
+                return connection
+            return connect(timeout=timeout)
+
+        with patch.object(self.fixture.agent, "connection", side_effect=utility_error):
+            stopped = self.run_evaluation()
+        self.assertEqual((stopped["reason"], stopped["stopped_stage"]), ("unknown", 2))
+        observation = self.check_observation(stopped)
+        partition = self.directory / "completed/1.json"
+        saved = {path: path.read_bytes() for path in (observation, partition, self.answers_path)}
+        gateway = self.fixture.events[-1]["session"].gateway
+        owner = self.directory / "owners/2"
+        self.assertEqual(gateway.directory, owner)
+
+        def operation():
+            (item,) = read_gateway_history(
+                owner,
+                manifest_sha256=gateway.manifest_sha256,
+                ledger_sha256=sha((owner / "operations.sqlite3").read_bytes()),
+            ).operations
+            return item
+
+        failed = operation()
+        self.assertEqual(failed.status, "unknown")
+        received = RawEnvelope.from_record(failed.checkpoint["envelope"])
+        self.assertEqual((received.status, received.body), (503, b"service unavailable"))
+        self.assertGreater(failed.reserve_microusd, 0)
+        before = self.fixture.authority.summary()
+        self.assertEqual(before["reserved_microusd"], failed.reserve_microusd)
+        with patch.object(
+            RawHTTPTransport, "send_prepared", side_effect=AssertionError("unexpected dispatch")
+        ) as send:
+            reentry = self.run_evaluation()
+        send.assert_not_called()
+        self.assertEqual((reentry["status"], reentry["stopped_stage"]), ("incomplete", 2))
+        self.assertEqual(operation(), failed)
+        self.assertEqual(self.fixture.authority.summary(), before)
+        connection.request.assert_called_once()
+
+        # Supply a successful result for this same request in the disposable ledger only.
+        recovered = RawEnvelope(
+            "openai", 200, _json(self.fixture.agent.response()), received.headers
+        )
+        usage = extract_usage(recovered)
+        actual = self.fixture.fixture.spec.cost_microusd(usage.input_tokens, usage.output_tokens)
+        gateway.ledger.complete(
+            failed.operation_id,
+            response=failed.checkpoint | {"envelope": recovered.to_record()},
+            actual_microusd=actual,
+            provider_request_id=usage.provider_request_id,
+        )
+        self.fixture.events.clear()
+        delivered = []
+        exchange = self.fixture.exchange
+
+        def capture_reply(*args, **kwargs):
+            reply = exchange(*args, **kwargs)
+            delivered.append(reply["envelope"])
+            return reply
+
+        with (
+            patch.object(
+                RawHTTPTransport, "send_prepared", side_effect=AssertionError("unexpected dispatch")
+            ) as send,
+            patch.object(self.fixture, "exchange", side_effect=capture_reply),
+        ):
+            self.assertEqual(self.run_evaluation(paid=False)["status"], "complete")
+        send.assert_not_called()
+        self.assertEqual(delivered, [recovered.to_record()])
+        self.assertEqual(
+            [event["initial"]["command"]["index"] for event in self.fixture.events], [1, 2]
+        )
+        self.assertEqual(self.fixture.events[0]["session"].gateway.directory, owner)
+        settled = operation()
+        self.assertEqual((settled.operation_id, settled.status), (failed.operation_id, "completed"))
+        self.assertEqual(settled.checkpoint, failed.checkpoint)
+        self.assertEqual({path: path.read_bytes() for path in saved}, saved)
+        after = self.fixture.authority.summary()
+        self.assertEqual(after["operation_count"], before["operation_count"])
+        self.assertEqual(after["spent_microusd"], before["spent_microusd"] + actual)
+        self.assertEqual(after["reserved_microusd"], 0)
+        self.assertEqual(self.fixture.physical_sends - self.before_sends, 2)
 
     def test_interrupt_after_reply_records_actual_attempt_without_inventing_a_native_report(self):
         self.prepare()
