@@ -18,7 +18,7 @@ from pathlib import Path, PurePosixPath, PureWindowsPath
 from types import MappingProxyType
 from typing import BinaryIO
 
-from buddha.authorization import _totals, _validate
+from buddha.authorization import _totals, _validate, held_replacement_state, read_held_replacement
 from buddha.common import ValidationError, _canonical, _hex, _object, _parse, _text
 from buddha.history import _plain
 from buddha.ledger import _amount
@@ -458,11 +458,27 @@ def read_authority(raw: bytes) -> dict[str, object]:
                     raise ValidationError("authorization snapshot exceeds its row ceiling")
                 records[table] = rows
             _authority_rows(records)
-            result = {
-                "config": dict(config),
-                **{table: [dict(row) for row in rows] for table, rows in records.items()},
+            terms = dict(config)
+            decoded = {table: [dict(row) for row in rows] for table, rows in records.items()}
+            result: dict[str, object] = {
+                "config": terms,
+                **decoded,
                 "totals": _totals(records["auth_operations"]),
             }
+            recovery = read_held_replacement(connection)
+            if recovery is not None:
+                result["held_replacement"] = {
+                    "state": held_replacement_state(
+                        recovery,
+                        terms,
+                        decoded["auth_runs"],
+                        decoded["auth_operations"],
+                    ),
+                    "run_id": recovery.run_id,
+                    "original_operation_id": recovery.original_operation_id,
+                    "replacement_operation_id": recovery.replacement_operation_id,
+                    "review_sha256": recovery.review_sha256,
+                }
             connection.rollback()
         # Only JSON-valued rows leave the connection, with no live storage object.
         return _object(_parse(_canonical(result)))

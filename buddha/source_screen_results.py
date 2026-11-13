@@ -20,6 +20,7 @@ from buddha import doctor, trial_fence
 from buddha import native_pipeline as pipeline
 from buddha.answers import TaskSet
 from buddha.doctor import _authority, _Busy, _Capture, _Unsupported
+from buddha.gateway import _compatible_core, _original_core
 from buddha.native_evaluation import _Generation, _read_generation, _read_published_generation
 from buddha.native_evidence import NativeEvidence, _adopt_capture, authority_observation
 from buddha.releases import MAX_JSON_BYTES, Release, _digest, _json, _load, _object, _path, _text
@@ -169,7 +170,7 @@ def _owners(
             or not _same(owner.manifest["roots"], settings["roots"])
             or not _same(owner.manifest["settings"], expected_settings)
             or not _same(owner.manifest["review"], review)
-            or not _same(owner.manifest["core"], anchor.manifest["core"])
+            or not _compatible_core(owner.manifest["core"], anchor.manifest["core"])
             or not _same(owner.manifest["runtime"], anchor.manifest["runtime"])
             or owner.manifest["authorization_path"] != str(reader.authorization)
             or any(bindings.get(path) != digest for path, digest in controls.items())
@@ -582,7 +583,7 @@ def _collect_source_screen(
                     screen,
                     core=anchor.manifest["core"],
                 ),
-                "core": anchor.manifest["core"],
+                "core": _original_core(anchor.manifest["core"]),
                 "runtime": anchor.manifest["runtime"],
             }
         )

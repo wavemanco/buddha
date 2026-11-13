@@ -29,7 +29,12 @@ from buddha.authorization import Authorization
 from buddha.doctor import _authority, _Busy, _Capture, _Unsupported
 from buddha.gateway import GatewayCall, RawHTTPTransport, _input_records, _review
 from buddha.gateway_history import HistoricalGatewayOperation
-from buddha.native_evidence import NativeEvidence, _adopt_capture, authority_observation
+from buddha.native_evidence import (
+    NativeEvidence,
+    _adopt_capture,
+    _check_stage_operations,
+    authority_observation,
+)
 from buddha.releases import (
     MAX_SOURCE_BYTES,
     Release,
@@ -1456,7 +1461,6 @@ def _stage_seal_for(
         or seal["owner_sha256"] != owner.manifest_sha256
         or not re.fullmatch(rf"attempts/{index}-(?:0|[1-9][0-9]*)", relative)
         or anchors != [prefix + hashlib.sha256(raw).hexdigest()]
-        or any(op.status != "completed" for op in owner.operations)
     ):
         raise SourceSearchError("prepared completion lacks its original anchor")
     attempt = child / relative
@@ -1471,6 +1475,14 @@ def _stage_seal_for(
         raise SourceSearchError("prepared completion inventory differs")
     for name, digest in files.items():
         reader.raw(attempt / _path(name), _digest(digest))
+    if any(op.status != "completed" for op in owner.operations):
+        _check_stage_operations(
+            owner,
+            funding,
+            reader.record(attempt / "report.json"),
+            native=role == "native" and index == 2,
+            error_type=SourceSearchError,
+        )
     return True, False
 
 

@@ -288,6 +288,10 @@ def check_launch(path: Path, *, expected_sha256: str) -> dict[str, object]:
             ):
                 raise ImproverLaunchError("original keyed review differs from approved launch")
             bindings[review_path] = hashlib.sha256(review_raw).hexdigest()
+            recovery = common._HELD_RECOVERY.get()
+            if recovery is not None:
+                if recovery["primary"] != str(path):
+                    raise ImproverLaunchError("held recovery changes its original primary launch")
             retained = improver_launch_state.inspect_prepared_improver_trial(
                 directory,
                 declaration=declaration,
@@ -296,6 +300,7 @@ def check_launch(path: Path, *, expected_sha256: str) -> dict[str, object]:
                 authorizations=paths,
                 development_review=review,
                 input_bindings=bindings,
+                **({"recovery": recovery} if recovery is not None else {}),
             )
             if retained["phase"] in {"final", "complete"}:
                 schedule = _load(pipeline._read(directory / "freeze/schedule.json"))
@@ -512,11 +517,16 @@ def launch(
                     raise ImproverLaunchError("credential differs from original reviewed binding")
                 phase[0] = "rechecking"
                 repeated = check_launch(path, expected_sha256=expected_sha256)
-                if repeated["stop_code"] is not None or any(
-                    _json(repeated[k]) != _json(checked[k])
+                changed = [
+                    k
                     for k in ("bindings", "state", "phase", "state_sha256", "funding")
-                ):
-                    raise ImproverLaunchError("original saved state changed during key entry")
+                    if _json(repeated[k]) != _json(checked[k])
+                ]
+                if repeated["stop_code"] is not None or changed:
+                    raise ImproverLaunchError(
+                        "original saved state changed during key entry: "
+                        + ", ".join(changed or ["readiness"])
+                    )
                 authorities = {name: Authorization(p) for name, p in paths.items()}
                 proposal = _object(checked["proposal"])
                 if checked["state"] == "fresh":

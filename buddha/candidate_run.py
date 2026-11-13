@@ -163,8 +163,10 @@ class CandidateSession:
                     module.__name__.split(".")[-1] + ".py"
                 ):
                     raise CandidateRunError("candidate imports a different host implementation")
-            for name in HOST_FILES:
-                consume(package / (name + ".py"))
+            from buddha.launch_common import _bound_sources
+
+            for path in _bound_sources([package / (name + ".py") for name in HOST_FILES]):
+                consume(path)
             expected_runner = {
                 "buddha/" + name + ".py": file_hash(package / (name + ".py"))
                 for name in RUNNER_FILES
@@ -199,7 +201,8 @@ class CandidateSession:
                 elif self.parent_agent_sha256 != self.agent_sha256:
                     raise CandidateRunError("improvement parent differs from selected source")
                 # Bind the improvement-only helper before importing it; v1 has no new import.
-                consume(package / "policy_study.py")
+                (policy_source,) = _bound_sources([package / "policy_study.py"])
+                consume(policy_source)
                 from buddha import policy_study
 
                 if Path(_text(policy_study.__file__)).absolute() != package / "policy_study.py":

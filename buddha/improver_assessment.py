@@ -691,7 +691,11 @@ def freeze_improver_descendants(
         report, capture = _development(state, expected)
         for phase in ("search", "validation", "final"):
             path = final._phase_authority(state, phase)
-            _, snapshot = final._quiescent_funding(path, fresh=phase in {"validation", "final"})
+            _, snapshot = final._quiescent_funding(
+                path,
+                fresh=phase != "search",
+                checked_development_funding=capture.raw.get(path) if phase == "search" else None,
+            )
             launch._finish_snapshot(path, snapshot)
         schedule = _freeze_data(state, report, capture, checked_review)
         study._capacity(

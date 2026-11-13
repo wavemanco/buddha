@@ -128,7 +128,7 @@ Full provenance equality is different from comparison compatibility. Each candid
 
 The kernel implemented in slice 1 validates numeric metrics, manifest fingerprints, prompt identity, row uniqueness, reported arithmetic, and complete coverage. Its row fingerprint is a consistency field, not a signature or proof that a judge ran. The future importer must independently bind official file bytes and metadata to a run manifest; the kernel does not attest external origin or judge honesty.
 
-Never silently drop failed evaluations. Preserve official complete-case summaries for external comparability, but produce a separate experiment status. Promotion requires complete expected coverage, evidence matching its declared protocol, compatible comparison controls, and no unresolved judge/provider failures. Generator refusal, judge refusal, malformed output, timeout, budget stop, and low-quality valid answer are different statuses. An empty generator response remains an attempted answer; it must not disappear from the denominator.
+Never silently drop failed evaluations. Preserve official complete-case summaries for external comparability, but produce a separate experiment status. Promotion requires complete expected coverage, evidence matching its declared protocol, compatible comparison controls, and no unresolved judge/provider failures. The verified utility replacement in section 9 can close a missing score while the first call's charge remains held. Generator refusal, judge refusal, malformed output, timeout, budget stop, and low-quality valid answer are different statuses. An empty generator response remains an attempted answer; it must not disappear from the denominator.
 
 ## 6. Archive and promotion
 
@@ -210,6 +210,15 @@ The user authorized up to $50 for one first live experiment on October 19, 2026.
 Before a paid run, the manifest must contain currency, hard total cap, per-request token/reasoning limits, per-role allowances, verified provider price schedule/version, retry/fallback limits, and final-evaluation reserve. Refuse missing or invalid limits. Reserve a conservative maximum charge transactionally before dispatch; concurrent workers cannot spend the same balance. Retain reservation when external completion is uncertain. A client timeout is not proof that the provider did not process or bill a call.
 
 Operation states: `planned -> reserved -> dispatched -> completed | failed | unknown`. Use a stable operation ID derived from run, candidate, stage, prompt, repetition, and attempt. Persist before dispatch and reconcile provider request IDs/usage before release or retry. Local deduplication prevents duplicate durable answers; it does not guarantee exactly-once external billing. Use provider idempotency support where documented. If no safe reconciliation exists, stop with `unknown` rather than automatically reissuing paid work.
+
+The reviewed development-utility exception covers one complete Anthropic
+503 at the first SDK attempt, with an original request that still matches
+its funded profile and full reserve. A caller-pinned approval may reserve one
+distinct replacement against the original owner and phase caps. The original
+charge stays unknown and fully held. The normal judge must consume the exact
+replayed replacement and publish a valid score before the stage can count
+as complete under section 5. Final funding still counts the original hold.
+Another ambiguous dispatch stops the run. [Recovery contract](RECOVERY-CONTRACT.md#recovery-with-a-retained-provider-hold).
 
 A strict cap is only as strong as the provider's enforceable request limits and billing contract. Where a provider cannot offer a reliable maximum billable charge, use account/project spending controls or decline that provider for hard-cap execution. Never advertise a local token estimate as a guaranteed provider bill.
 

@@ -512,13 +512,30 @@ def _phase_authority(state: dict[str, Any], phase: str) -> Path:
     return _path(state["funding"]["phases"][phase]["authorization_path"])
 
 
-def _quiescent_funding(path: Path, *, fresh: bool = False) -> tuple[dict[str, object], bytes]:
+def _quiescent_funding(
+    path: Path, *, fresh: bool = False, checked_development_funding: bytes | None = None
+) -> tuple[dict[str, object], bytes]:
     """Check a financial snapshot; caller joins its publication before finishing it."""
     funding, raw = launch._snapshot(path)
     inactive = {row["run_id"] for row in study._list(funding["auth_deactivations"])}
+    retained_hold = None
+    if "held_replacement" in funding:
+        recovery = study._obj(funding["held_replacement"])
+        if (
+            fresh
+            or checked_development_funding != raw
+            or recovery["state"] != "settled"
+            or recovery["run_id"] not in inactive
+        ):
+            raise FinalEvaluationError("freeze needs the original checked development replacement")
+        retained_hold = recovery["original_operation_id"]
     if (
         any(row["run_id"] not in inactive for row in study._list(funding["auth_runs"]))
-        or any(row["status"] != "completed" for row in study._list(funding["auth_operations"]))
+        or any(
+            row["status"] != "completed"
+            and (row["status"] != "unknown" or row["operation_id"] != retained_hold)
+            for row in study._list(funding["auth_operations"])
+        )
         or (fresh and (funding["auth_runs"] or funding["auth_operations"] or inactive))
     ):
         raise FinalEvaluationError(
@@ -939,7 +956,7 @@ def _census(
         if any(bindings.get(str(path)) != pin for path, pin in pins.items()):
             raise FinalEvaluationError("final owner omitted or changed frozen controls")
         if (
-            owner.manifest["core"] != state["context"]["host_core"]
+            not gateway._compatible_core(owner.manifest["core"], state["context"]["host_core"])
             or owner.manifest["runtime"] != state["context"]["host_runtime"]
         ):
             raise FinalEvaluationError("final owner changes the original host execution closure")
@@ -1144,6 +1161,9 @@ def _episode(
     }
     if kind == "native":
         common[descriptor] = file_hash(descriptor)
+    core = gateway._core_sources()
+    if not gateway._compatible_core(core, state["context"]["host_core"]):
+        raise FinalEvaluationError("final episode changes the original host execution closure")
     contract = {
         "directory": str(role_root),
         "kind": kind,
@@ -1158,7 +1178,7 @@ def _episode(
             "settings": {key: generation[key] for key in ("budget_microusd", "max_calls")},
             "review": occasion["review"],
             "profiles": gateway._profiles(selected, roots),
-            "core": state["context"]["host_core"],
+            "core": core,
             "runtime": state["context"]["host_runtime"],
         },
     }

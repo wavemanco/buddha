@@ -27,6 +27,7 @@ from buddha.gateway import (
 )
 from buddha.gateway_history import read_gateway_history
 from buddha.ledger import BudgetExceeded
+from buddha.provider import BoundBreach, PendingOperation, ProviderUncertain
 from buddha.releases import (
     Release,
     ReleaseError,
@@ -397,6 +398,8 @@ def _owner_stage(
     control_inputs: Sequence[Path] = (),
     control_hashes: dict[str, object] | None = None,
 ) -> tuple[Path, Path]:
+    from buddha import launch_common
+
     descriptor, inputs = pipeline._native_descriptor(
         directory,
         index,
@@ -418,7 +421,7 @@ def _owner_stage(
         *seals,
         *available.values(),
         *inputs,
-        *_sources(),
+        *launch_common._bound_sources(_sources()),
         *control_inputs,
     ]
     if index > 1:
@@ -589,8 +592,13 @@ def _partial(
 def _session(
     gateway: Gateway, descriptor: Path, started: list[Path], attempt: Path
 ) -> dict[str, object]:
+    recovery = gateway.ledger.held_replacement()
+    if recovery is not None and gateway.directory != attempt.parent.parent / "owners/2":
+        raise EvaluationError("held replacement does not belong to this utility stage")
     started.append(attempt)
-    return native_run.NativeSession(gateway, descriptor=descriptor, output=attempt).run()
+    return native_run.NativeSession(
+        gateway, descriptor=descriptor, output=attempt, held_replacement=recovery
+    ).run()
 
 
 @_checked
@@ -616,6 +624,8 @@ def run_evaluation(directory: Path, *, transport: RawHTTPTransport) -> dict[str,
 
 
 def _run(directory: Path, transport: RawHTTPTransport) -> dict[str, object]:
+    from buddha import launch_common
+
     first = Gateway(directory / "owners/1", transport=transport)
     initial = _read_manifest(first.directory)
     bound = {
@@ -631,7 +641,7 @@ def _run(directory: Path, transport: RawHTTPTransport) -> dict[str, object]:
     path = pipeline._absolute(context["descriptor"])
     authority = Authorization(pipeline._absolute(initial["authorization_path"]))
     definition, source, release = _definition(path, authority, bound[str(path)])
-    for item in _sources():
+    for item in launch_common._bound_sources(_sources()):
         if file_hash(item) != bound.get(str(item)):
             raise EvaluationError("native evaluation source is not frozen")
     native_answers = directory / "native-answers.jsonl"
@@ -699,8 +709,14 @@ def _run(directory: Path, transport: RawHTTPTransport) -> dict[str, object]:
                 started[-1] if started else None,
             )
             raise
-        except BudgetExceeded:
-            return _partial(directory, index, reports, authority, "authority")
+        except (BudgetExceeded, BoundBreach):
+            return _partial(
+                directory, index, reports, authority, "authority", started[-1] if started else None
+            )
+        except (PendingOperation, ProviderUncertain):
+            return _partial(
+                directory, index, reports, authority, "unknown", started[-1] if started else None
+            )
         except (ValueError, TypeError, KeyError, OSError, RecursionError):
             if started and started[-1].is_dir():
                 _partial(directory, index, reports, authority, "protocol", started[-1])

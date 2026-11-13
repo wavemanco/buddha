@@ -784,6 +784,8 @@ def prepare_source_screen(
     expected_runtime_sha256: str,
     input_bindings: Mapping[Path, str] | None = None,
 ) -> Path:
+    from buddha.launch_common import _bound_sources
+
     if type(screen) is not SourceScreen or not isinstance(authorization, Authorization):
         raise SourceScreenError("source screen needs its explicit artifact and existing authority")
     directory = pipeline._absolute(str(directory))
@@ -798,7 +800,8 @@ def prepare_source_screen(
     external = trial_fence._include_controls(directory, dict(input_bindings or {}))
     inputs = _input_records(list(external), external)
     expected = {Path(row["path"]): row["sha256"] for row in inputs}
-    for source in _sources():
+    sources = _bound_sources(_sources())
+    for source in sources:
         actual = file_hash(source)
         if source in expected and expected[source] != actual:
             raise SourceScreenError("screen helper differs from its original supplied hash")
@@ -845,12 +848,12 @@ def prepare_source_screen(
             "comparison_controls": {
                 "sources": {
                     "buddha/" + source.name: {"path": str(source), "sha256": expected[source]}
-                    for source in _sources()
+                    for source in sources
                 },
                 "external": {
                     str(path): digest
                     for path, digest in external.items()
-                    if path not in _sources()
+                    if path not in sources
                     and path != runtime_path
                     and (
                         record["lineage"] is None or str(path) != _object(record["lineage"])["path"]
@@ -920,7 +923,9 @@ def _original(
         directory / "context.json": bindings[directory / "context.json"],
         directory / "screen.json": screen.fingerprint(),
     }
-    if any(path not in controls for path in _sources()) or any(
+    from buddha.launch_common import _bound_sources
+
+    if any(path not in controls for path in _bound_sources(_sources())) or any(
         bindings.get(path) != digest or file_hash(path) != digest
         for path, digest in controls.items()
     ):

@@ -13,6 +13,7 @@ from typing import TYPE_CHECKING, Any, Protocol, cast
 
 from buddha import credentials, gateway
 from buddha import native_pipeline as pipeline
+from buddha.authorization import HeldReplacement
 from buddha.doctor import _Busy, _TreeChanged, _Unsupported
 from buddha.gateway_history import MAX_LEDGER_BYTES
 from buddha.provider import ModelSpec
@@ -27,6 +28,7 @@ from buddha.releases import (
     _object,
     _root,
     _text,
+    file_hash,
 )
 from buddha.search_evidence import (
     EvidenceFieldLimitError,
@@ -82,6 +84,8 @@ _STUDY_CONTINUATION: ContextVar[
 _INSPECT_STAGE: ContextVar[
     Callable[[str, Mapping[str, object] | None], AbstractContextManager[None]] | None
 ] = ContextVar("inspect_stage", default=None)
+
+_HELD_RECOVERY: ContextVar[dict[str, object] | None] = ContextVar("held_recovery", default=None)
 
 
 def _study_stage(
@@ -169,6 +173,114 @@ def _historical_sources(current: Mapping[str, str], *, relative: bool = False) -
     if relative and result.keys() != current.keys():
         raise ReleaseError("relative source projection changes its exact role coverage")
     return {name: _digest(pin) for name, pin in _object(result).items()}
+
+
+def _bound_sources(paths: list[Path]) -> list[Path]:
+    if _HELD_RECOVERY.get() is None:
+        return paths
+    return [
+        Path(name) for name in _historical_sources({str(path): file_hash(path) for path in paths})
+    ]
+
+
+def _recovery_candidate(
+    transport: gateway.RawHTTPTransport,
+) -> tuple[gateway.Gateway, HeldReplacement]:
+    recovery = _object(_HELD_RECOVERY.get())
+    broker = gateway.Gateway(_path(recovery["owner"]), transport=transport)
+    candidate = broker._held_replacement_candidate(
+        _digest(recovery["original_operation_id"]), _digest(recovery["review_sha256"])
+    )
+    if (
+        candidate.run_id != recovery["run_id"]
+        or candidate.original_receipt_sha256 != recovery["receipt_sha256"]
+    ):
+        raise ReleaseError("held recovery receipt differs from the reviewed decision")
+    return broker, candidate
+
+
+@contextmanager
+def _held_recovery(path: Path, digest: str, handoff: Path, handoff_digest: str) -> Iterator[None]:
+    """Verify exact old and executing bytes for a single approved original launch."""
+    if _HELD_RECOVERY.get() is not None or gateway._CORE_COMPATIBILITY.get() is not None:
+        raise ReleaseError("held recovery cannot be nested")
+    raw = _load(pipeline._read(path, _digest(digest)))
+    record = _object(
+        raw,
+        {"format", "handoff", "owner", "operation_id", "receipt_sha256", "executing_sources"},
+    )
+    if record["format"] != "buddha.held-recovery.v1" or record["handoff"] != {
+        "path": str(handoff.absolute()),
+        "sha256": _digest(handoff_digest),
+    }:
+        raise ReleaseError("held recovery changes its original launch")
+    old = _load(pipeline._read(handoff, handoff_digest))
+    primary_ref = _object(old.get("primary_launch", record["handoff"]))
+    primary = _load(pipeline._read(_path(primary_ref["path"]), _digest(primary_ref["sha256"])))
+    trial = _path(primary["directory"])
+    owner = _path(record["owner"])
+    if not owner.is_relative_to(trial / "search/study") or owner.parts[-3:] != (
+        "evaluation",
+        "owners",
+        "2",
+    ):
+        raise ReleaseError("held recovery needs an original development utility owner")
+    manifest = gateway._read_manifest(owner)
+    root = Path(__file__).absolute().parents[1]
+    pins = _object(record["executing_sources"])
+    actual = {
+        item.relative_to(root).as_posix(): file_hash(item)
+        for item in sorted((root / "buddha").glob("*.py"))
+    } | {name: file_hash(root / name) for name in _UNIFIED_OUTER_V1}
+    if pins != actual:
+        raise ReleaseError("held recovery executing sources differ from review")
+    old_pins = _object(old["source_sha256"]) | _object(primary["source_sha256"])
+    paths: dict[str, tuple[Path, str]] = {}
+    for name, pin in old_pins.items():
+        source = _path(name)
+        for depth in (2, 3):
+            key = Path(*source.parts[-depth:]).as_posix()
+            if key in actual:
+                if key in paths and paths[key] != (source, pin):
+                    raise ReleaseError("held recovery has ambiguous historical sources")
+                paths[key] = (source, _digest(pin))
+                break
+    historical_core = _object(manifest["core"])
+    current_core = gateway._core_sources()
+    for name in current_core:
+        key = "buddha/" + ("__init__.py" if name == "buddha" else name.rsplit(".", 1)[1] + ".py")
+        if key not in paths or paths[key][1] != historical_core.get(name):
+            raise ReleaseError("original recovery core differs from launch pins for " + key)
+
+    def sources(current: Mapping[str, str], *, relative: bool) -> dict[str, str]:
+        mapped = {}
+        for name, pin in current.items():
+            key = name if relative else Path(name).relative_to(root).as_posix()
+            if actual.get(key) != pin or key not in paths:
+                raise ReleaseError("held recovery encountered an unreviewed source")
+            original, old_pin = paths[key]
+            mapped[name if relative else str(original)] = old_pin
+        return mapped
+
+    with _phase_continuation(sources, lambda _trial, _phase, controls: dict(controls)):
+        token = _HELD_RECOVERY.set(
+            {
+                "primary": str(_path(primary_ref["path"])),
+                "owner": str(owner),
+                "run_id": _text(manifest["run_id"]),
+                "original_operation_id": _digest(record["operation_id"]),
+                "receipt_sha256": _digest(record["receipt_sha256"]),
+                "review_sha256": digest,
+            }
+        )
+        core = gateway._CORE_COMPATIBILITY.set(
+            (cast(dict[str, str], historical_core), current_core)
+        )
+        try:
+            yield
+        finally:
+            gateway._CORE_COMPATIBILITY.reset(core)
+            _HELD_RECOVERY.reset(token)
 
 
 def _continued_phase_controls(

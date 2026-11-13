@@ -13,6 +13,7 @@ import test_gateway as gateway_fixtures
 
 from buddha.answers import TaskSet
 from buddha.executor import ExecutionResult, ExecutorError
+from buddha.launch_common import _HELD_RECOVERY, _phase_continuation
 from buddha.releases import Release, _json, inventory, prepare_selection
 
 
@@ -57,8 +58,9 @@ class ImprovementTests(unittest.TestCase):
         )
         self.freeze()
 
-    def freeze(self, *, omit=(), parent_sha=None):
+    def freeze(self, *, omit=(), parent_sha=None, host_source_root=None):
         h, f = self.h, self.h.fixture
+        host_source_root = h.package if host_source_root is None else host_source_root
         self.split_path.write_bytes(_json(self.split))
         self.feedback["split"]["sha256"] = sha(self.split_path.read_bytes())
         self.feedback_path.write_bytes(_json(self.feedback))
@@ -75,7 +77,7 @@ class ImprovementTests(unittest.TestCase):
             self.source_path,
             self.split_path,
             self.feedback_path,
-            *[h.package / (name + ".py") for name in (*h.host_names, "policy_study")],
+            *[host_source_root / (name + ".py") for name in (*h.host_names, "policy_study")],
         ]
         h.directory = f.prepare(
             "improvement-" + str(h.preparations),
@@ -451,6 +453,49 @@ class ImprovementTests(unittest.TestCase):
         with patch.object(policy_study, "__file__", str(self.h.fixture.root / "foreign.py")):
             with self.assertRaises(self.h.Error):
                 self.h.session()
+
+    def test_held_recovery_uses_historical_host_bindings(self):
+        from buddha import policy_study
+
+        h = self.h
+        historical = h.fixture.root / "historical-host"
+        historical.mkdir()
+        copies = {}
+        for name in (*h.host_names, "policy_study"):
+            source = h.package / (name + ".py")
+            copy = historical / source.name
+            copy.write_bytes(source.read_bytes())
+            copies[str(source)] = str(copy)
+        self.freeze(host_source_root=historical)
+
+        def project(current, *, relative):
+            self.assertFalse(relative)
+            return {copies[path]: digest for path, digest in current.items()}
+
+        with self.assertRaises(h.Error) as ordinary:
+            h.session()
+        self.assertIn("host source/input was not frozen", str(ordinary.exception.__context__))
+        token = _HELD_RECOVERY.set({})
+        try:
+            with _phase_continuation(project, lambda _root, _phase, controls: dict(controls)):
+                self.assertTrue(h.session().improvement)
+                with (
+                    patch.object(policy_study, "__file__", str(historical / "policy_study.py")),
+                    self.assertRaises(h.Error) as foreign,
+                ):
+                    h.session(output=h.output.with_name("foreign-helper-output"))
+                self.assertIn("different split validator", str(foreign.exception.__context__))
+
+                runner = h.fixture.roots["runner"] / "buddha" / "candidate_worker.py"
+                runner.write_bytes(runner.read_bytes() + b"\n# different runner\n")
+                self.freeze(host_source_root=historical)
+                with self.assertRaises(h.Error) as mismatch:
+                    h.session()
+                self.assertIn(
+                    "runner differs from installed source", str(mismatch.exception.__context__)
+                )
+        finally:
+            _HELD_RECOVERY.reset(token)
 
     def test_feedback_drift_after_return_keeps_proposal_but_blocks_child(self):
         report = self.execute(

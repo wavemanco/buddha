@@ -27,6 +27,8 @@ CONTRACT_TESTS = (
     "test_baseline_state.BaselineStateTests.test_unsealed_generation_refuses_orphan_future_materializations_before_calls",
     "test_benchmark",
     "test_candidate_generation_outcome.CandidateGenerationOutcomeTests.test_real_executor_cleanup_sidecar_survives_c1_sealing_and_passive_replay",
+    "test_candidate_generation.CandidateGenerationTests.test_held_utility_replay_requires_both_exact_callbacks_without_another_send",
+    "test_candidate_improvement.ImprovementTests.test_held_recovery_uses_historical_host_bindings",
     "test_candidate_improvement_stage.CandidateImprovementStageTests.test_forward_fixed_improver_composes_full_feedback_and_child_screen_without_restore",
     "test_candidate_improvement_stage.CandidateImprovementStageTests.test_owned_worker_timeout_after_known_callbacks_counts_one_failed_opportunity",
     "test_candidate_improvement_stage.CandidateImprovementStageTests.test_unproven_or_unclean_timeouts_and_unknown_billing_stay_incomplete",
@@ -40,6 +42,7 @@ CONTRACT_TESTS = (
     "test_diagnostics",
     "test_evidence_stop_causes",
     "test_executor",
+    "test_final_evaluation.FinalEvaluationTests.test_freeze_accepts_only_the_verified_development_hold",
     "test_frozen_seed",
     "test_fresh_primary_preparation.FreshPrimaryInputTests.test_prospective_pair_selects_trusted_seed_and_explicit_guard_compatibility_fork",
     "test_fresh_primary_preparation.FreshPrimaryInputTests.test_relocated_output_limit_covers_declared_callbacks_without_changing_other_limits",
@@ -77,6 +80,8 @@ CONTRACT_TESTS = (
     "test_improver_study_forward.ImproverStudyForwardTests.test_keyboard_interrupt_survives_failed_forward_refresh_without_observation",
     "test_source_review.SourceReviewTests.test_selector_boundaries_keep_whole_sets_typed_tasks_and_declared_limits",
     "test_trial_fence.TrialFenceTests.test_executor_unknown_cleanup_fences_another_original_phase",
+    "test_trial_fence_gateway.TrialFenceGatewayTests.test_reviewed_503_replacement_is_atomic_and_never_redispatched",
+    "test_unified_launch.UnifiedLaunchCliTests.test_resume_decision_wraps_normal_keyless_check",
     "test_wire",
 )
 

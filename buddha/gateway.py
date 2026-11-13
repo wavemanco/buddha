@@ -19,6 +19,7 @@ import threading
 import uuid
 from collections.abc import Callable, Iterator, Mapping, Sequence
 from contextlib import contextmanager
+from contextvars import ContextVar
 from dataclasses import dataclass, field, replace
 from datetime import UTC, date, datetime
 from functools import lru_cache, wraps
@@ -26,9 +27,15 @@ from pathlib import Path
 from typing import cast
 
 from buddha import trial_fence
-from buddha.authorization import Authorization, AuthorizedLedger
+from buddha.authorization import (
+    Authorization,
+    AuthorizedLedger,
+    HeldReplacement,
+    held_receipt_sha256,
+    held_replacement_calls,
+)
 from buddha.common import ValidationError
-from buddha.ledger import Ledger, OperationConflict
+from buddha.ledger import Ledger, Operation, OperationConflict
 from buddha.provider import (
     BoundBreach,
     ModelSpec,
@@ -56,6 +63,7 @@ from buddha.wire import (
     HEADER_NAMES,
     MAX_BODY_BYTES,
     RawEnvelope,
+    Usage,
     WireError,
     decoded_body,
     extract_usage,
@@ -403,6 +411,27 @@ def _core_sources() -> dict[str, str]:
     return result
 
 
+_CORE_COMPATIBILITY: ContextVar[tuple[dict[str, str], dict[str, str]] | None] = ContextVar(
+    "core_compatibility", default=None
+)
+
+
+def _original_core(recorded: object) -> object:
+    compatibility = _CORE_COMPATIBILITY.get()
+    return (
+        compatibility[0] if compatibility is not None and recorded == compatibility[1] else recorded
+    )
+
+
+def _compatible_core(recorded: object, expected: object) -> bool:
+    if recorded == expected:
+        return True
+    compatibility = _CORE_COMPATIBILITY.get()
+    return compatibility is not None and (
+        (recorded, expected) == compatibility or (expected, recorded) == compatibility
+    )
+
+
 def _runtime() -> dict[str, str]:
     return {
         "python": sys.version,
@@ -565,7 +594,7 @@ def execution_identity(
         selection = Selection.from_bytes(_json(raw["selection"]))
         roots = {key: Path(_text(value)) for key, value in _object(raw["roots"]).items()}
         verify_selection(selection, roots, expected_sha256=_text(raw["selection_sha256"]))
-        if _core_sources() != raw["core"] or _runtime() != raw["runtime"]:
+        if not _compatible_core(raw["core"], _core_sources()) or _runtime() != raw["runtime"]:
             raise GatewayError("actual executing core or runtime changed")
         if _profiles(selection, roots) != raw["profiles"]:
             raise GatewayError("selected host profiles changed")
@@ -758,6 +787,60 @@ class GatewayCall:
         if self.headers:
             record["headers"] = [list(pair) for pair in self.headers]
         return record
+
+
+@dataclass(frozen=True)
+class HeldReplacementReplay:
+    decision: HeldReplacement
+    original: GatewayCall
+    original_envelope: RawEnvelope
+    replacement: GatewayCall
+    replacement_envelope: RawEnvelope
+
+
+def _request_fingerprint(
+    manifest: dict[str, object], call: GatewayCall, profile: dict[str, object]
+) -> str:
+    return _sha(
+        [
+            "buddha.gateway-request.v1",
+            manifest["execution_sha256"],
+            manifest["selection_sha256"],
+            _sha(profile),
+            call.to_record(),
+        ]
+    )
+
+
+def _receipt_envelope(
+    call: GatewayCall, prior: Operation, request_hash: str, spec: ModelSpec
+) -> RawEnvelope:
+    if prior.request_sha256 != request_hash or prior.reserve_microusd != spec.reserve_microusd():
+        raise OperationConflict("saved attempt differs from its bound request")
+    receipt = _object(prior.response, {"format", "request", "envelope"})
+    if receipt["format"] != "buddha.gateway-receipt.v1" or _json(receipt["request"]) != _json(
+        call.to_record()
+    ):
+        raise OperationConflict("saved request evidence differs")
+    envelope = RawEnvelope.from_record(receipt["envelope"])
+    if (
+        envelope.provider != spec.provider
+        or envelope.provider_request_id != prior.provider_request_id
+    ):
+        raise OperationConflict("saved response identity differs")
+    return envelope
+
+
+def _validated_usage(envelope: RawEnvelope, spec: ModelSpec, profile: dict[str, object]) -> Usage:
+    usage = extract_usage(envelope)
+    if (
+        envelope.provider != spec.provider
+        or not usage.provider_request_id
+        or usage.model not in _texts(profile["response_models"])
+        or usage.service_tier not in _texts(profile["response_tiers"], blank=True)
+    ):
+        raise WireError("received provider, identity, model or tier differs from the profile")
+    return usage
 
 
 def _selected_headers(call: GatewayCall, profile: dict[str, object]) -> tuple[tuple[str, str], ...]:
@@ -1269,8 +1352,9 @@ class Gateway:
             ]
         )
 
-    @_checked
-    def execute(self, call: GatewayCall) -> RawEnvelope:
+    def _bound_call(
+        self, call: GatewayCall
+    ) -> tuple[dict[str, object], dict[str, object], ModelSpec, tuple[tuple[str, str], ...], str]:
         if not isinstance(call, GatewayCall):
             raise GatewayError("gateway requires a typed request")
         current = _read_manifest(self.directory)
@@ -1281,48 +1365,103 @@ class Gateway:
         profile = _object(_object(profiles["profiles"]).get(call.profile_id))
         spec = _request_spec(call, profile)
         headers = _selected_headers(call, profile)
-        operation_id = self.operation_id(call)
-        request_hash = _sha(
-            [
-                "buddha.gateway-request.v1",
-                current["execution_sha256"],
-                current["selection_sha256"],
-                _sha(profile),
-                call.to_record(),
-            ]
+        return current, profile, spec, headers, _request_fingerprint(current, call, profile)
+
+    def _held_replacement_evidence(
+        self, original_operation_id: str, review_sha256: str
+    ) -> tuple[HeldReplacement, GatewayCall, RawEnvelope, GatewayCall]:
+        original_operation_id = _digest(original_operation_id)
+        review_sha256 = _digest(review_sha256)
+        prior = self.ledger.get(original_operation_id)
+        if prior is None or prior.status != "unknown" or prior.response is None:
+            raise OperationConflict("replacement requires the original retained unknown receipt")
+        original, replacement = held_replacement_calls(prior.response, _load(self._record_bytes))
+        current, profile, spec, _, request_hash = self._bound_call(original)
+        if self.operation_id(original) != original_operation_id:
+            raise OperationConflict("replacement differs from the original physical binding")
+        envelope = _receipt_envelope(original, prior, request_hash, spec)
+        decoded_body(envelope)
+        terms = self.ledger.authority._terms()
+        return (
+            HeldReplacement(
+                authorization_id=_text(terms["authorization_id"]),
+                terms_sha256=_digest(terms["terms_sha256"]),
+                run_id=_text(current["run_id"]),
+                manifest_sha256=self.manifest_sha256,
+                original_operation_id=original_operation_id,
+                original_request_sha256=request_hash,
+                original_receipt_sha256=held_receipt_sha256(prior.response),
+                replacement_operation_id=self.operation_id(replacement),
+                replacement_request_sha256=_request_fingerprint(current, replacement, profile),
+                reserve_microusd=prior.reserve_microusd,
+                review_sha256=review_sha256,
+            ),
+            original,
+            envelope,
+            replacement,
         )
+
+    @_checked
+    def _held_replacement_candidate(
+        self, original_operation_id: str, review_sha256: str
+    ) -> HeldReplacement:
+        """Describe a possible replacement for operator review, without changing accounting."""
+        return self._held_replacement_evidence(original_operation_id, review_sha256)[0]
+
+    @_checked
+    def _prepare_held_replacement(self, approved: HeldReplacement) -> HeldReplacementReplay:
+        """Resolve the one reviewed physical replacement before the native worker starts."""
+        if self.ledger.held_replacement() != approved:
+            raise OperationConflict("replacement requires the durable original authority decision")
+        decision, original, original_envelope, replacement = self._held_replacement_evidence(
+            approved.original_operation_id, approved.review_sha256
+        )
+        if decision != approved:
+            raise OperationConflict("approved replacement no longer matches its original evidence")
+        prior = self.ledger.get(decision.replacement_operation_id)
+        if prior is not None and prior.status == "unknown" and prior.response is not None:
+            _, profile, spec, _, request_hash = self._bound_call(replacement)
+            envelope = _receipt_envelope(replacement, prior, request_hash, spec)
+            try:
+                usage = _validated_usage(envelope, spec, profile)
+            except WireError:
+                raise ProviderUncertain("replacement billing remains uncertain") from None
+            actual = spec.cost_microusd(usage.input_tokens, usage.output_tokens)
+            if actual <= spec.reserve_microusd() and (
+                usage.input_tokens > spec.input_token_ceiling
+                or usage.output_tokens > spec.max_output_tokens
+            ):
+                raise BoundBreach("replacement receipt exceeds verified token bounds")
+            self.ledger.complete(
+                decision.replacement_operation_id,
+                response=prior.response,
+                actual_microusd=actual,
+                provider_request_id=usage.provider_request_id,
+            )
+        replacement_envelope = self.execute(replacement)
+        return HeldReplacementReplay(
+            decision, original, original_envelope, replacement, replacement_envelope
+        )
+
+    @_checked
+    def execute(self, call: GatewayCall) -> RawEnvelope:
+        current, profile, spec, headers, request_hash = self._bound_call(call)
+        operation_id = self.operation_id(call)
         prior = self.ledger.get(operation_id)
         if prior is not None and prior.status == "completed":
-            if (
-                prior.request_sha256 != request_hash
-                or prior.reserve_microusd != spec.reserve_microusd()
-            ):
-                raise OperationConflict("cached attempt differs from its bound request")
-            receipt = _object(prior.response, {"format", "request", "envelope"})
-            if receipt["format"] != "buddha.gateway-receipt.v1" or _json(
-                receipt["request"]
-            ) != _json(call.to_record()):
-                raise OperationConflict("cached request evidence differs")
-            envelope = RawEnvelope.from_record(receipt["envelope"])
-            usage = extract_usage(envelope)
+            envelope = _receipt_envelope(call, prior, request_hash, spec)
+            usage = _validated_usage(envelope, spec, profile)
             if (
                 usage.input_tokens > spec.input_token_ceiling
                 or usage.output_tokens > spec.max_output_tokens
             ):
                 raise BoundBreach("cached usage exceeds verified token bounds; no new send")
-            if (
-                envelope.provider != spec.provider
-                or usage.model not in _texts(profile["response_models"])
-                or usage.service_tier not in _texts(profile["response_tiers"], blank=True)
-                or usage.provider_request_id != prior.provider_request_id
-                or spec.cost_microusd(usage.input_tokens, usage.output_tokens)
-                != prior.actual_microusd
-            ):
+            if spec.cost_microusd(usage.input_tokens, usage.output_tokens) != prior.actual_microusd:
                 raise OperationConflict("cached billing evidence differs")
             return envelope
         with self.work(directory=self.directory, kind="gateway"):
             _review(current["review"], fresh=True)
-            self.ledger.authorize_dispatch()
+            self.ledger.authorize_dispatch(operation_id)
             operation = self.ledger.reserve(operation_id, request_hash, spec.reserve_microusd())
             if operation.status != "reserved":
                 raise PendingOperation("attempt may already be billed; no automatic retry")
@@ -1393,13 +1532,7 @@ class Gateway:
                     )
                     interruption = error
                 try:
-                    usage = extract_usage(envelope)
-                    if (
-                        not usage.provider_request_id
-                        or usage.model not in _texts(profile["response_models"])
-                        or usage.service_tier not in _texts(profile["response_tiers"], blank=True)
-                    ):
-                        raise WireError("received model/tier is outside the verified profile")
+                    usage = _validated_usage(envelope, spec, profile)
                 except WireError:
                     if interruption is not None:
                         raise interruption from None

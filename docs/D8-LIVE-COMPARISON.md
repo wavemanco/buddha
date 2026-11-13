@@ -46,17 +46,25 @@ headers passes the same profile and reservation checks. A second judge
 callback could arrive before attempt 1, so recovery must match the logical
 call and protect its reservation independently of arrival order.
 
-Use the [proposed shared recovery rule](RECOVERY-CONTRACT.md#proposed-recovery-with-a-retained-provider-hold)
-through the normal launcher. It would keep the original owner, send at
-most one separately accounted replacement after explicit approval, and
-then replay its saved result. The frozen V5 launcher blocks this today.
-The next offline proof must reach the following study action and the
-final-assessment funding check with the original hold still counted.
+Use the [shared recovery rule](RECOVERY-CONTRACT.md#recovery-with-a-retained-provider-hold)
+through the updated normal launcher. It keeps the original owner, can send
+at most one separately accounted replacement after explicit approval, and
+replays the saved result on restart. Keep the frozen V5 command on hold.
+Reuse the same reviewed decision and its SHA256 when resuming after a stop.
+The paired options `--resume-decision` and `--resume-sha256` supply that
+decision to the normal launcher. With `--check`, it verifies the approval and
+saved state without keys, writes or paid requests. A live
+command requires separate approval and the original locally entered keys.
+
+The provider-blocked rehearsal completed synthetic development and wrote
+the final schedule. The last input check stopped after a source edit during
+the rehearsal. Reaching the first final worker with unchanged source remains
+to be verified before releasing the V5 command.
 
 If an authentic original result and usage later become available, the
 existing ledger transition is the smaller route. In a synthetic OpenAI
 utility fixture, a supplied matching result let the same owner finish
-without another send. Neither offline check establishes live V5 resume.
+without another send. The offline checks leave live V5 resume unverified.
 
 ## V5 fresh comparison
 

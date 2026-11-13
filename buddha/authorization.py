@@ -5,12 +5,14 @@ with the active run's ledger in one SQLite rollback-journal transaction. This is
 a host-owned guard, not a sandbox against someone editing the host or old code.
 """
 
+import base64
 import hashlib
 import sqlite3
-from collections.abc import Iterator
+from collections.abc import Iterable, Iterator, Mapping
 from contextlib import closing, contextmanager
+from dataclasses import asdict, dataclass, replace
 from pathlib import Path
-from typing import cast
+from typing import TYPE_CHECKING, Literal, cast
 
 from buddha import trial_fence
 from buddha.common import ValidationError, _canonical, _hex, _object, _parse, _text
@@ -30,12 +32,18 @@ from buddha.ledger import (
     Operation,
     OperationConflict,
     _amount,
+    _check_halted,
     _expected_schema,
     _find,
     _operation,
+    _require,
     _response_json,
     _schema_signature,
 )
+from buddha.wire import RawEnvelope, WireError, extract_usage
+
+if TYPE_CHECKING:
+    from buddha.gateway import GatewayCall
 
 _TABLES = {
     "auth_config",
@@ -211,6 +219,297 @@ def _totals(rows: list[sqlite3.Row]) -> dict[str, int]:
         "reserved_microusd": held,
         "operation_count": len(rows),
     }
+
+
+_HELD_REPLACEMENT_EVENT = "held_replacement_reviewed.v1"
+_RETRY_HEADER = "x-stainless-retry-count"
+
+
+@dataclass(frozen=True)
+class HeldReplacement:
+    authorization_id: str
+    terms_sha256: str
+    run_id: str
+    manifest_sha256: str
+    original_operation_id: str
+    original_request_sha256: str
+    original_receipt_sha256: str
+    replacement_operation_id: str
+    replacement_request_sha256: str
+    reserve_microusd: int
+    review_sha256: str
+
+    def __post_init__(self) -> None:
+        _text(self.authorization_id, "recovery authorization ID")
+        _text(self.run_id, "recovery owner ID")
+        for value in (
+            self.terms_sha256,
+            self.manifest_sha256,
+            self.original_operation_id,
+            self.original_request_sha256,
+            self.original_receipt_sha256,
+            self.replacement_operation_id,
+            self.replacement_request_sha256,
+            self.review_sha256,
+        ):
+            _hex(value, "recovery digest")
+        if (
+            _amount(self.reserve_microusd, "recovery reservation") == 0
+            or self.original_operation_id == self.replacement_operation_id
+            or self.original_request_sha256 == self.replacement_request_sha256
+        ):
+            raise OperationConflict("replacement needs a new identity and a positive reservation")
+
+
+def held_receipt_sha256(receipt: object) -> str:
+    return hashlib.sha256(_canonical(_object(receipt))).hexdigest()
+
+
+def read_held_replacement(
+    connection: sqlite3.Connection, schema: str = "main"
+) -> HeldReplacement | None:
+    queries = {
+        "main": "SELECT run_id,operation_id,details_json FROM main.auth_events "
+        "WHERE event_type=? LIMIT 2",
+        "funding": "SELECT run_id,operation_id,details_json FROM funding.auth_events "
+        "WHERE event_type=? LIMIT 2",
+    }
+    if schema not in queries:
+        raise ValidationError("unsupported recovery authority schema")
+    rows = connection.execute(
+        queries[schema],
+        (_HELD_REPLACEMENT_EVENT,),
+    ).fetchall()
+    if not rows:
+        return None
+    if len(rows) != 1 or not isinstance(rows[0][2], str) or len(rows[0][2]) > 4096:
+        raise OperationConflict("authority does not contain one bounded recovery decision")
+    run_id, operation_id, details = rows[0]
+    try:
+        decision = HeldReplacement(**_object(_parse(details.encode("utf-8"))))  # type: ignore[arg-type]
+    except TypeError:
+        raise OperationConflict("invalid recovery decision fields") from None
+    if (run_id, operation_id) != (decision.run_id, decision.original_operation_id) or (
+        details.encode("utf-8") != _canonical(asdict(decision))
+    ):
+        raise OperationConflict("recovery decision differs from its original event identity")
+    return decision
+
+
+def _held_envelope(receipt: object) -> RawEnvelope:
+    value = _object(receipt)
+    if set(value) != {"format", "request", "envelope"} or (
+        value["format"] != "buddha.gateway-receipt.v1"
+    ):
+        raise OperationConflict("recovery requires an exact gateway receipt")
+    return RawEnvelope.from_record(value["envelope"])
+
+
+def _held_original(receipt: object) -> RawEnvelope:
+    envelope = _held_envelope(receipt)
+    if (
+        envelope.provider != "anthropic"
+        or envelope.status != 503
+        or envelope.truncated
+        or envelope.withheld
+        or not envelope.headers_complete
+        or not envelope.provider_request_id
+        or any(name == "x-should-retry" and value != "true" for name, value in envelope.headers)
+    ):
+        raise OperationConflict("recovery requires the complete Anthropic 503 receipt")
+    return envelope
+
+
+def held_replacement_calls(
+    receipt: object, manifest: Mapping[str, object]
+) -> tuple["GatewayCall", "GatewayCall"]:
+    from buddha.gateway import GatewayCall, _request_spec, _selected_headers
+
+    _held_original(receipt)
+    request = _object(_object(receipt)["request"])
+    if set(request) != {
+        "capability",
+        "profile_id",
+        "logical_id",
+        "attempt",
+        "body_base64",
+        "headers",
+    }:
+        raise OperationConflict("recovery request differs from the native request format")
+    try:
+        original = GatewayCall(
+            _text(request["capability"], "recovery capability"),
+            _text(request["profile_id"], "recovery profile"),
+            _text(request["logical_id"], "recovery logical ID"),
+            _amount(request["attempt"], "recovery attempt"),
+            base64.b64decode(_text(request["body_base64"], "recovery request body"), validate=True),
+            tuple((name, value) for name, value in cast(list[list[str]], request["headers"])),
+        )
+    except (TypeError, ValueError):
+        raise OperationConflict("invalid stored recovery request") from None
+    if (
+        original.to_record() != request
+        or original.attempt != 0
+        or dict(original.headers).get(_RETRY_HEADER) != "0"
+    ):
+        raise OperationConflict("recovery requires the first native SDK attempt")
+    replacement = replace(
+        original,
+        attempt=1,
+        headers=tuple(
+            (name, "1" if name == _RETRY_HEADER else value) for name, value in original.headers
+        ),
+    )
+    profile = _held_profile(manifest, original)
+    for call in (original, replacement):
+        if _request_spec(call, profile).provider != "anthropic":
+            raise OperationConflict("recovery request differs from the original provider profile")
+        _selected_headers(call, profile)
+    return original, replacement
+
+
+def _held_profile(manifest: Mapping[str, object], call: "GatewayCall") -> dict[str, object]:
+    capabilities = _object(manifest["profiles"])
+    profiles = _object(_object(capabilities.get(call.capability))["profiles"])
+    return _object(profiles.get(call.profile_id))
+
+
+def _held_utility_owner(scope: object, directory: Path) -> bool:
+    binding = trial_fence._parse_scope(_text(scope, "recovery scope"))
+    return (
+        binding is not None
+        and binding.phase == "search"
+        and directory.is_relative_to(binding.root / "search" / "study")
+        and directory.parts[-3:] == ("evaluation", "owners", "2")
+        and directory.parts[-6:-4] == ("screen", "tasks")
+        and directory.parts[-4].isascii()
+        and directory.parts[-4].isdigit()
+    )
+
+
+def held_replacement_state(
+    recovery: HeldReplacement | None,
+    config: Mapping[str, object],
+    runs: Iterable[Mapping[str, object]],
+    operations: Iterable[Mapping[str, object]],
+    *,
+    _reserving: bool = False,
+) -> Literal["pending", "settled", "blocked"] | None:
+    """Validate the exact original/replacement pair independently of later operations."""
+    if recovery is None:
+        return None
+    owner = next((row for row in runs if row["run_id"] == recovery.run_id), None)
+    rows = {
+        row["operation_id"]: row
+        for row in operations
+        if row["operation_id"]
+        in {recovery.original_operation_id, recovery.replacement_operation_id}
+    }
+    original = rows.get(recovery.original_operation_id)
+    if (
+        (config["authorization_id"], config["terms_sha256"])
+        != (recovery.authorization_id, recovery.terms_sha256)
+        or owner is None
+        or owner["historical"] != 0
+        or owner["manifest_sha256"] != recovery.manifest_sha256
+        or not _held_utility_owner(
+            config["scope"], Path(_text(owner["directory"], "recovery owner directory"))
+        )
+        or original is None
+        or (
+            original["run_id"],
+            original["status"],
+            original["request_sha256"],
+            original["reserve_microusd"],
+        )
+        != (recovery.run_id, "unknown", recovery.original_request_sha256, recovery.reserve_microusd)
+        or original["actual_microusd"] is not None
+    ):
+        raise OperationConflict("recovery decision differs from the retained owner or hold")
+    prior = _object(_parse(_text(original["response_json"], "recovery receipt").encode("utf-8")))
+    if (
+        held_receipt_sha256(prior) != recovery.original_receipt_sha256
+        or _held_original(prior).provider_request_id != original["provider_request_id"]
+    ):
+        raise OperationConflict("recovery decision differs from the retained receipt")
+    replacement = rows.get(recovery.replacement_operation_id)
+    if replacement is None:
+        if _reserving:
+            return "pending"
+        raise OperationConflict("recovery decision lacks its atomic reservation")
+    if (replacement["run_id"], replacement["request_sha256"], replacement["reserve_microusd"]) != (
+        recovery.run_id,
+        recovery.replacement_request_sha256,
+        recovery.reserve_microusd,
+    ):
+        raise OperationConflict("recovery operation differs from the reviewed replacement")
+    status = replacement["status"]
+    if status == "reserved":
+        return "pending"
+    if status == "dispatched" or (status == "unknown" and replacement["response_json"] is None):
+        return "blocked"
+    if status not in ("unknown", "completed"):
+        raise OperationConflict("invalid replacement status")
+    receipt = _object(
+        _parse(_text(replacement["response_json"], "replacement receipt").encode("utf-8"))
+    )
+    request = _object(prior["request"])
+    replacement_request = _object(receipt["request"])
+    headers = cast(list[list[str]], request["headers"])
+    if (
+        request["attempt"] != 0
+        or dict(headers).get(_RETRY_HEADER) != "0"
+        or replacement_request
+        != request
+        | {
+            "attempt": 1,
+            "headers": [[name, "1" if name == _RETRY_HEADER else value] for name, value in headers],
+        }
+    ):
+        raise OperationConflict("replacement receipt differs from the reviewed retry")
+    envelope = _held_envelope(receipt)
+    if envelope.provider != "anthropic":
+        raise OperationConflict("replacement response is from a different provider")
+    try:
+        usage = extract_usage(envelope)
+    except WireError:
+        if status == "unknown":
+            return "blocked"
+        raise
+    if (
+        not usage.provider_request_id
+        or usage.provider_request_id != replacement["provider_request_id"]
+        or usage.provider_request_id == original["provider_request_id"]
+    ):
+        raise OperationConflict("replacement receipt has a different provider request ID")
+    if status == "unknown":
+        return "pending"
+    if _amount(replacement["actual_microusd"], "replacement charge") > recovery.reserve_microusd:
+        return "blocked"
+    return "settled"
+
+
+def _held_state(
+    connection: sqlite3.Connection, recovery: HeldReplacement, *, reserving: bool = False
+) -> Literal["pending", "settled", "blocked"] | None:
+    return held_replacement_state(
+        recovery,
+        dict(_validate(connection, "funding")),
+        (
+            dict(row)
+            for row in connection.execute(
+                "SELECT * FROM funding.auth_runs WHERE run_id=?", (recovery.run_id,)
+            )
+        ),
+        (
+            dict(row)
+            for row in connection.execute(
+                "SELECT * FROM funding.auth_operations WHERE operation_id IN (?,?)",
+                (recovery.original_operation_id, recovery.replacement_operation_id),
+            )
+        ),
+        _reserving=reserving,
+    )
 
 
 def _manifest_record(directory: Path) -> tuple[dict[str, object], tuple[str, str, int, int]]:
@@ -817,7 +1116,13 @@ class AuthorizedLedger(Ledger):
         ):
             raise OperationConflict("bound run manifest or executable runtime changed")
 
-    def _guard(self, connection: sqlite3.Connection) -> None:
+    def _guard(
+        self,
+        connection: sqlite3.Connection,
+        operation_id: str | None,
+        *,
+        preparing_recovery: bool = False,
+    ) -> HeldReplacement | None:
         record, _ = _manifest_record(self.directory)
         trial_fence.assert_work(
             self.authority.path,
@@ -844,16 +1149,52 @@ class AuthorizedLedger(Ledger):
             "SELECT 1 FROM funding.auth_operations WHERE status='dispatched' LIMIT 1"
         ).fetchone():
             raise BudgetExceeded("an outstanding dispatch has halted further shared spending")
+        recovery = read_held_replacement(connection, "funding")
+        if recovery is not None:
+            # During atomic preparation, the reviewed event precedes the reservation
+            # inside this same transaction; no other caller observes that state.
+            state = _held_state(connection, recovery, reserving=preparing_recovery)
+            if state != "settled" and (
+                state != "pending"
+                or (self.run_id, operation_id)
+                != (recovery.run_id, recovery.replacement_operation_id)
+            ):
+                raise BudgetExceeded("only the exact reviewed recovery may spend before settlement")
         if connection.execute(
             "SELECT 1 FROM funding.auth_operations o WHERE o.status='unknown' AND NOT EXISTS "
             "(SELECT 1 FROM funding.auth_acceptances a WHERE a.source_run_id=o.run_id "
-            "AND a.operation_id=o.operation_id AND a.continuation_run_id=?) LIMIT 1",
-            (self.run_id,),
+            "AND a.operation_id=o.operation_id AND a.continuation_run_id=?) "
+            "AND o.operation_id IS NOT ? LIMIT 1",
+            (self.run_id, recovery.original_operation_id if recovery is not None else None),
         ).fetchone():
             raise BudgetExceeded("an unreviewed unknown operation has halted shared spending")
+        return recovery
 
-    def authorize_dispatch(self) -> None:
+    def _check_spending(
+        self,
+        connection: sqlite3.Connection,
+        operation_id: str,
+        request_sha256: str,
+        reserve_microusd: int,
+        *,
+        preparing_recovery: bool = False,
+    ) -> None:
+        recovery = self._guard(connection, operation_id, preparing_recovery=preparing_recovery)
+        if (
+            recovery is not None
+            and operation_id == recovery.replacement_operation_id
+            and (request_sha256, reserve_microusd)
+            != (recovery.replacement_request_sha256, recovery.reserve_microusd)
+        ):
+            raise OperationConflict("spending differs from the reviewed replacement")
+        _check_halted(
+            connection, held_operation_id=recovery.original_operation_id if recovery else None
+        )
+
+    def authorize_dispatch(self, operation_id: str | None = None) -> None:
         """Fail closed before credential prompting or paid transport preflight."""
+        if operation_id is not None:
+            _text(operation_id, "operation ID")
         with (
             trial_fence.lease(
                 self.authority.path, self.authority._terms(), directory=self.directory
@@ -861,7 +1202,83 @@ class AuthorizedLedger(Ledger):
             self._transaction() as connection,
         ):
             self._execution_contract()
-            self._guard(connection)
+            self._guard(connection, operation_id)
+
+    def held_replacement(self) -> HeldReplacement | None:
+        with self._transaction() as connection:
+            recovery = read_held_replacement(connection, "funding")
+            if recovery is not None and recovery.run_id == self.run_id:
+                _held_state(connection, recovery)
+                return recovery
+        return None
+
+    def record_held_replacement(self, recovery: HeldReplacement) -> None:
+        """Commit the reviewed decision and its new reservation under the original lease."""
+        if type(recovery) is not HeldReplacement or recovery.run_id != self.run_id:
+            raise OperationConflict("recovery decision needs its exact original owner")
+        terms = self.authority._terms()
+        if not _held_utility_owner(terms["scope"], self.directory):
+            raise OperationConflict("recovery requires the original development utility owner")
+        trial_fence.assert_work(self.authority.path, terms, directory=self.directory)
+        with self._transaction("held_replacement", recovery.replacement_operation_id) as connection:
+            existing = read_held_replacement(connection, "funding")
+            if existing is not None:
+                if existing != recovery:
+                    raise OperationConflict(
+                        "authority already contains a different recovery decision"
+                    )
+                _held_state(connection, recovery)
+                return
+            _held_state(connection, recovery, reserving=True)
+            if connection.execute(
+                "SELECT 1 FROM funding.auth_operations WHERE operation_id=? "
+                "OR (status!='completed' AND operation_id!=?) LIMIT 1",
+                (recovery.replacement_operation_id, recovery.original_operation_id),
+            ).fetchone():
+                raise OperationConflict("other unfinished or existing operations block recovery")
+            original = _operation(_require(connection, recovery.original_operation_id))
+            self._check_held_requests(recovery, original)
+            _event(
+                connection,
+                "funding",
+                _HELD_REPLACEMENT_EVENT,
+                self.run_id,
+                recovery.original_operation_id,
+                asdict(recovery),
+            )
+            self._reserve(
+                connection,
+                recovery.replacement_operation_id,
+                recovery.replacement_request_sha256,
+                recovery.reserve_microusd,
+                preparing_recovery=True,
+            )
+
+    def _check_held_requests(
+        self, recovery: HeldReplacement, operation: Operation
+    ) -> tuple["GatewayCall", dict[str, object]]:
+        from buddha.gateway import _request_fingerprint, _request_spec, _sha
+
+        manifest = _manifest_record(self.directory)[0]
+        original, replacement = held_replacement_calls(operation.response, manifest)
+        profile = _held_profile(manifest, original)
+        for call, operation_id, request_hash in (
+            (original, recovery.original_operation_id, recovery.original_request_sha256),
+            (replacement, recovery.replacement_operation_id, recovery.replacement_request_sha256),
+        ):
+            if operation_id != _sha(
+                [
+                    "buddha.gateway-attempt.v1",
+                    self.run_id,
+                    manifest["invocation"],
+                    call.logical_id,
+                    call.attempt,
+                ]
+            ) or request_hash != _request_fingerprint(manifest, call, profile):
+                raise OperationConflict("recovery request is not the exact original or SDK retry")
+        if _request_spec(replacement, profile).reserve_microusd() != recovery.reserve_microusd:
+            raise OperationConflict("reviewed recovery differs from the original request reserve")
+        return replacement, profile
 
     @contextmanager
     def _transaction(
@@ -871,7 +1288,7 @@ class AuthorizedLedger(Ledger):
             with self._transaction_current(action, operation_id) as connection:
                 yield connection
             return
-        if action not in {"reserve", "dispatch", "complete", "unknown"}:
+        if action not in {"reserve", "dispatch", "complete", "unknown", "held_replacement"}:
             raise ValidationError("unsupported shared ledger action")
         with (
             trial_fence.lease(
@@ -888,7 +1305,7 @@ class AuthorizedLedger(Ledger):
     def _transaction_current(
         self, action: str, operation_id: str | None
     ) -> Iterator[sqlite3.Connection]:
-        if action not in {"read", "reserve", "dispatch", "complete", "unknown"}:
+        if action not in {"read", "reserve", "dispatch", "complete", "unknown", "held_replacement"}:
             raise ValidationError("unsupported shared ledger action")
         if action != "read" and operation_id is None:
             raise ValidationError("shared ledger transition requires its operation identity")
@@ -954,12 +1371,20 @@ class AuthorizedLedger(Ledger):
                             "run ledger differs from its independent shared accounting"
                         )
                     prior = before.get(operation_id) if operation_id is not None else None
-                    spending = (action == "reserve" and prior is None) or (
-                        action == "dispatch" and prior is not None and prior[2] == "reserved"
+                    spending = (
+                        (action == "reserve" and prior is None)
+                        or (action == "dispatch" and prior is not None and prior[2] == "reserved")
+                        or action == "held_replacement"
                     )
                     if spending:
                         self._execution_contract()
-                        self._guard(connection)
+                    recovery = (
+                        read_held_replacement(connection, "funding")
+                        if action == "complete"
+                        else None
+                    )
+                    if recovery is not None and operation_id == recovery.original_operation_id:
+                        raise OperationConflict("the reviewed original hold must stay intact")
                     yield connection
                     after = _local_operations(connection)
                     changed = {
@@ -976,6 +1401,11 @@ class AuthorizedLedger(Ledger):
                             raise OperationConflict(
                                 "ledger transition changed unrelated operation history"
                             )
+                        if (
+                            recovery is not None
+                            and operation_id == recovery.replacement_operation_id
+                        ):
+                            self._validate_held_completion(connection, recovery, prior)
                         _mirror_operation(
                             connection, self.run_id, operation_id, prior, after[operation_id]
                         )
@@ -987,6 +1417,11 @@ class AuthorizedLedger(Ledger):
                             operation_id,
                             {"status": after[operation_id][2]},
                         )
+                    if action == "held_replacement":
+                        recorded = read_held_replacement(connection, "funding")
+                        if recorded is None or operation_id != recorded.replacement_operation_id:
+                            raise OperationConflict("recovery reservation lacks its decision")
+                        _held_state(connection, recorded)
                     if spending:
                         totals = _totals(
                             connection.execute("SELECT * FROM funding.auth_operations").fetchall()
@@ -1001,3 +1436,39 @@ class AuthorizedLedger(Ledger):
             if isinstance(error, ValidationError):
                 raise
             raise ValidationError("shared accounting transaction failed") from None
+
+    def _validate_held_completion(
+        self,
+        connection: sqlite3.Connection,
+        recovery: HeldReplacement,
+        prior: tuple[object, ...] | None,
+    ) -> None:
+        from buddha.gateway import _request_spec, _validated_usage
+
+        if prior is None or prior[2] != "unknown" or not isinstance(prior[3], str):
+            raise OperationConflict("replacement must first retain its exact received reply")
+        original = _operation(_require(connection, recovery.original_operation_id))
+        replacement, profile = self._check_held_requests(recovery, original)
+        result = _operation(_require(connection, recovery.replacement_operation_id))
+        receipt = _object(result.response)
+        if _canonical(receipt).decode("utf-8") != prior[3] or (
+            receipt.get("request") != replacement.to_record()
+        ):
+            raise OperationConflict("replacement completion differs from its durable checkpoint")
+        envelope = _held_envelope(receipt)
+        spec = _request_spec(replacement, profile)
+        usage = _validated_usage(envelope, spec, profile)
+        actual = spec.cost_microusd(usage.input_tokens, usage.output_tokens)
+        if (
+            usage.provider_request_id != result.provider_request_id
+            or usage.provider_request_id == original.provider_request_id
+            or (
+                actual <= recovery.reserve_microusd
+                and (
+                    usage.input_tokens > spec.input_token_ceiling
+                    or usage.output_tokens > spec.max_output_tokens
+                )
+            )
+            or actual != result.actual_microusd
+        ):
+            raise OperationConflict("replacement completion cannot establish reviewed billing")

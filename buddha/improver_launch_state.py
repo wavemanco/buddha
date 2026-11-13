@@ -9,9 +9,10 @@ from buddha import gateway, improver_study, source_search, validation_study
 from buddha import improver_assessment as assessment
 from buddha import launch_common as common
 from buddha import native_pipeline as pipeline
+from buddha.authorization import held_receipt_sha256, held_replacement_calls
 from buddha.doctor import _authority, _Capture, _Owner
 from buddha.native_evidence import NativeEvidence, _adopt_capture
-from buddha.releases import _digest, _json, _load
+from buddha.releases import _digest, _json, _load, _text
 
 _AMOUNTS = ("spent_microusd", "reserved_microusd", "committed_microusd", "operation_count")
 _STATUSES = ("reserved", "dispatched", "unknown", "completed")
@@ -75,6 +76,7 @@ def inspect_prepared_improver_trial(
     authorizations: dict[str, Path],
     development_review: dict[str, object],
     input_bindings: dict[Path, str],
+    recovery: dict[str, object] | None = None,
 ) -> dict[str, object]:
     """Check original custody without keys, writers, lock removal or new requests.
 
@@ -181,10 +183,46 @@ def inspect_prepared_improver_trial(
         raise assessment.ImproverAssessmentError("trial contains an unscheduled original owner")
     phases: dict[str, Any] = {}
     overrun = False
+    blocking = set()
     for name, path in grants.items():
         owners = list(readers[name].owners.values()) if name in readers else []
         funding = _grant(capture, path, state["funding"]["phases"][name], owners)
         phases[name] = _summary(path, funding)
+        replacement = funding.get("held_replacement")
+        held = set()
+        if name == "search" and replacement is not None:
+            if recovery is None or replacement["review_sha256"] != recovery["review_sha256"]:
+                blocking.add("unknown")
+            if replacement["state"] == "settled":
+                held.add(replacement["original_operation_id"])
+            elif improver_study._pending_replacement(development_reader, development) is not None:
+                held.update(
+                    (replacement["original_operation_id"], replacement["replacement_operation_id"])
+                )
+        elif name == "search" and recovery is not None:
+            owner = improver_study._replacement_owner(
+                development_reader, development, _text(recovery["run_id"])
+            )
+            if str(owner) != recovery["owner"]:
+                raise assessment.ImproverAssessmentError("recovery changes the next utility owner")
+            original = [row for row in funding["auth_operations"] if row["status"] != "completed"]
+            if (
+                len(original) != 1
+                or original[0]["operation_id"] != recovery["original_operation_id"]
+                or original[0]["status"] != "unknown"
+                or original[0]["run_id"] != recovery["run_id"]
+            ):
+                raise assessment.ImproverAssessmentError(
+                    "recovery requires its single original stop"
+                )
+            receipt = _load(_text(original[0]["response_json"]).encode("utf-8"))
+            if held_receipt_sha256(receipt) != recovery["receipt_sha256"]:
+                raise assessment.ImproverAssessmentError("recovery changes its reviewed receipt")
+            held_replacement_calls(receipt, development_reader.owner(owner).manifest)
+            held.add(original[0]["operation_id"])
+        blocking.update(
+            row["status"] for row in funding["auth_operations"] if row["operation_id"] not in held
+        )
         overrun |= any(
             row["status"] == "completed" and row["actual_microusd"] > row["reserve_microusd"]
             for row in funding["auth_operations"]
@@ -199,7 +237,7 @@ def inspect_prepared_improver_trial(
     if overrun:
         reasons.append("reservation_overrun")
     for status in ("dispatched", "unknown"):
-        if any(value["status_counts"][status] for value in phases.values()):
+        if status in blocking:
             reasons.append(status + "_operations")
     if inactive:
         reasons.append("inactive_original_owner")

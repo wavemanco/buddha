@@ -31,6 +31,39 @@ class FinalEvaluationTests(unittest.TestCase):
         self.module = final_evaluation
         self.Error = final_evaluation.FinalEvaluationError
 
+    def test_freeze_accepts_only_the_verified_development_hold(self):
+        path = Path("search-authority.sqlite3")
+        snapshot = b"original checked development authority"
+        recovery = {"state": "settled", "run_id": "judge", "original_operation_id": "original"}
+        operations = [
+            {"status": "unknown", "operation_id": "original"},
+            {"status": "completed", "operation_id": "replacement"},
+        ]
+        funding = {
+            "auth_runs": [{"run_id": "judge"}],
+            "auth_deactivations": [{"run_id": "judge"}],
+            "auth_operations": operations,
+            "held_replacement": recovery,
+        }
+        check = self.module._quiescent_funding
+        with patch.object(self.module.launch, "_snapshot", return_value=(funding, snapshot)):
+            self.assertEqual(check(path, checked_development_funding=snapshot), (funding, snapshot))
+            for options in (
+                {},
+                {"checked_development_funding": b"different authority"},
+                {"checked_development_funding": snapshot, "fresh": True},
+            ):
+                with self.subTest(options=options), self.assertRaises(self.Error):
+                    check(path, **options)
+            for state in ("pending", "blocked"):
+                recovery["state"] = state
+                with self.subTest(state=state), self.assertRaises(self.Error):
+                    check(path, checked_development_funding=snapshot)
+            recovery["state"] = "settled"
+            operations.append({"status": "unknown", "operation_id": "unrelated"})
+            with self.assertRaises(self.Error):
+                check(path, checked_development_funding=snapshot)
+
     def fixture(self):
         import test_validation_analysis
         import test_validation_study

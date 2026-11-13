@@ -499,7 +499,9 @@ def prepare_candidate_improvement(
         expected[path] = _sha(raw)
         return raw
 
-    for path in _sources():
+    from buddha.launch_common import _bound_sources
+
+    for path in _bound_sources(_sources()):
         consume(path)
     recipe, _, _ = _definition(
         consume, descriptor, selection, roots, runtime, provenance, _profiles(selection, roots)
@@ -707,7 +709,10 @@ def run_candidate_improvement(directory: Path, *, transport: RawHTTPTransport) -
                 raise CandidateImprovementError("proposal input was not original")
             return pipeline._read(path, bindings[path])
 
-        for path in _sources():
+        from buddha.launch_common import _bound_sources
+
+        sources = _bound_sources(_sources())
+        for path in sources:
             consume(path)
         context = _object(
             _load(consume(directory / "context.json")),
@@ -779,7 +784,7 @@ def run_candidate_improvement(directory: Path, *, transport: RawHTTPTransport) -
 
         def validate(attempt: Path, envelope: dict[str, object]) -> dict[str, Path]:
             execution_identity(gateway.directory)
-            for path in _sources():
+            for path in sources:
                 consume(path)
             for name in ("source", "split", "feedback", "provenance"):
                 path = pipeline._absolute(_object(recipe["feedback"])["path"]).parent / (

@@ -223,10 +223,11 @@ def _totals(connection: sqlite3.Connection) -> dict[str, int]:
     }
 
 
-def _check_halted(connection: sqlite3.Connection) -> None:
+def _check_halted(connection: sqlite3.Connection, *, held_operation_id: str | None = None) -> None:
     if connection.execute(
         "SELECT 1 FROM operations o JOIN unknown_receipts r USING(operation_id) "
-        "WHERE o.status='unknown' LIMIT 1"
+        "WHERE o.status='unknown' AND o.operation_id IS NOT ? LIMIT 1",
+        (held_operation_id,),
     ).fetchone():
         raise BudgetExceeded("an unreconciled provider receipt has halted spending")
     if connection.execute(
@@ -304,34 +305,62 @@ class Ledger:
         except sqlite3.Error as error:
             raise ValidationError("ledger storage transaction failed") from error
 
+    def _check_spending(
+        self,
+        connection: sqlite3.Connection,
+        operation_id: str,
+        request_sha256: str,
+        reserve_microusd: int,
+        *,
+        preparing_recovery: bool = False,
+    ) -> None:
+        _check_halted(connection)
+
     def reserve(self, operation_id: str, request_sha256: str, reserve_microusd: int) -> Operation:
         _text(operation_id, "operation_id")
         _hex(request_sha256, "request_sha256")
         _amount(reserve_microusd, "reserve_microusd")
         with self._transaction("reserve", operation_id) as connection:
-            prior = _find(connection, operation_id)
-            if prior is not None:
-                if (prior["request_sha256"], prior["reserve_microusd"]) != (
-                    request_sha256,
-                    reserve_microusd,
-                ):
-                    raise OperationConflict("operation ID is already bound to different parameters")
-                return _operation(prior)
-            _check_halted(connection)
-            config = connection.execute("SELECT * FROM run_config").fetchone()
-            totals = _totals(connection)
-            if (
-                totals["committed_microusd"] + reserve_microusd > config["budget_microusd"]
-                or totals["operation_count"] >= config["max_calls"]
+            return self._reserve(connection, operation_id, request_sha256, reserve_microusd)
+
+    def _reserve(
+        self,
+        connection: sqlite3.Connection,
+        operation_id: str,
+        request_sha256: str,
+        reserve_microusd: int,
+        *,
+        preparing_recovery: bool = False,
+    ) -> Operation:
+        prior = _find(connection, operation_id)
+        if prior is not None:
+            if (prior["request_sha256"], prior["reserve_microusd"]) != (
+                request_sha256,
+                reserve_microusd,
             ):
-                raise BudgetExceeded("run dollar or call cap would be exceeded")
-            connection.execute(
-                "INSERT INTO operations(operation_id,request_sha256,reserve_microusd,status) "
-                "VALUES (?,?,?,'reserved')",
-                (operation_id, request_sha256, reserve_microusd),
-            )
-            _event(connection, "reserved", operation_id, reserve_microusd)
-            return _operation(_require(connection, operation_id))
+                raise OperationConflict("operation ID is already bound to different parameters")
+            return _operation(prior)
+        self._check_spending(
+            connection,
+            operation_id,
+            request_sha256,
+            reserve_microusd,
+            preparing_recovery=preparing_recovery,
+        )
+        config = connection.execute("SELECT * FROM run_config").fetchone()
+        totals = _totals(connection)
+        if (
+            totals["committed_microusd"] + reserve_microusd > config["budget_microusd"]
+            or totals["operation_count"] >= config["max_calls"]
+        ):
+            raise BudgetExceeded("run dollar or call cap would be exceeded")
+        connection.execute(
+            "INSERT INTO operations(operation_id,request_sha256,reserve_microusd,status) "
+            "VALUES (?,?,?,'reserved')",
+            (operation_id, request_sha256, reserve_microusd),
+        )
+        _event(connection, "reserved", operation_id, reserve_microusd)
+        return _operation(_require(connection, operation_id))
 
     def dispatch(self, operation_id: str) -> bool:
         _text(operation_id, "operation_id")
@@ -339,7 +368,9 @@ class Ledger:
             row = _require(connection, operation_id)
             if row["status"] != "reserved":
                 return False
-            _check_halted(connection)
+            self._check_spending(
+                connection, operation_id, row["request_sha256"], row["reserve_microusd"]
+            )
             connection.execute(
                 "UPDATE operations SET status='dispatched' WHERE operation_id=?", (operation_id,)
             )

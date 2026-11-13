@@ -13,7 +13,10 @@ from contextlib import closing
 from pathlib import Path
 from typing import cast
 
+from buddha import gateway
+from buddha.authorization import held_replacement_calls
 from buddha.doctor import _Capture, _Owner, _owner
+from buddha.gateway_history import HistoricalGatewayOperation
 from buddha.releases import (
     MAX_JSON_BYTES,
     Release,
@@ -26,6 +29,7 @@ from buddha.releases import (
     _path,
 )
 from buddha.search_evidence import MAX_FILE_BYTES
+from buddha.wire import RawEnvelope
 
 _AMOUNTS = ("committed_microusd", "spent_microusd", "reserved_microusd", "operation_count")
 
@@ -55,6 +59,57 @@ def _adopt_capture(source: _Capture, target: _Capture) -> None:
     if type(source) is not _Capture or type(target) is not _Capture or source is target:
         raise NativeEvidenceError("capture adoption needs two original bounded observations")
     target.adopt(source)
+
+
+def _check_stage_operations(
+    owner: _Owner,
+    funding: dict[str, object],
+    report: dict[str, object],
+    *,
+    native: bool,
+    error_type: type[ReleaseError],
+) -> None:
+    unfinished = [op for op in owner.operations if op.status != "completed"]
+    if not unfinished and "held_replacement" not in report:
+        return
+    recovery = funding.get("held_replacement")
+    if not native or not isinstance(recovery, dict):
+        raise error_type("stage contains unfinished operations or unbound replacement evidence")
+    original_id = recovery["original_operation_id"]
+    replacement_id = recovery["replacement_operation_id"]
+    marker = {
+        "original_operation_id": original_id,
+        "replacement_operation_id": replacement_id,
+        "review_sha256": recovery["review_sha256"],
+    }
+    if (
+        recovery["state"] != "settled"
+        or recovery["run_id"] != owner.run_id
+        or [(op.operation_id, op.status) for op in unfinished] != [(original_id, "unknown")]
+        or not _same(report.get("held_replacement"), marker)
+    ):
+        raise error_type("native stage lacks its exact settled replacement and replay evidence")
+    original = unfinished[0]
+    replacement = next((op for op in owner.operations if op.operation_id == replacement_id), None)
+    if not isinstance(original, HistoricalGatewayOperation) or not isinstance(
+        replacement, HistoricalGatewayOperation
+    ):
+        raise error_type("native replacement lacks its raw receipts")
+    _, call = held_replacement_calls(_object(original.checkpoint), owner.manifest)
+    capability = _object(_object(owner.manifest["profiles"])[call.capability])
+    profile = _object(_object(capability["profiles"])[call.profile_id])
+    spec = gateway._request_spec(call, profile)
+    envelope = RawEnvelope.from_record(_object(replacement.receipt)["envelope"])
+    usage = gateway._validated_usage(envelope, spec, profile)
+    if (
+        replacement.reserve_microusd != spec.reserve_microusd()
+        or usage.provider_request_id != replacement.provider_request_id
+        or usage.input_tokens > spec.input_token_ceiling
+        or usage.output_tokens > spec.max_output_tokens
+        or replacement.actual_microusd
+        != spec.cost_microusd(usage.input_tokens, usage.output_tokens)
+    ):
+        raise error_type("native replacement differs from its original usage or charge")
 
 
 class NativeEvidence:
@@ -162,7 +217,6 @@ class NativeEvidence:
             or seal["index"] != index
             or seal["owner_sha256"] != owner.manifest_sha256
             or anchors != [prefix + " completed: " + digest]
-            or any(op.status != "completed" for op in owner.operations)
         ):
             raise self.error_type("stage lacks its original completion anchor")
         relative = _path(seal["attempt"])
@@ -191,6 +245,13 @@ class NativeEvidence:
             or not _same(report.get("gateway_totals"), {k: owner.accounting()[k] for k in _AMOUNTS})
         ):
             raise self.error_type("stage report differs from its original owner")
+        _check_stage_operations(
+            owner,
+            self.funded,
+            report,
+            native=index == 2 and not baseline,
+            error_type=self.error_type,
+        )
         for name, expected in _object(report["artifacts"]).items():
             key = _path(name) if index == 0 else "artifacts/" + _path(name)
             if files.get(key) != expected:
