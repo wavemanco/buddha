@@ -1,5 +1,48 @@
 # Main live comparison
 
+## V5 fresh comparison
+
+V5 starts with fresh outputs and the full $150 combined API cap. V3 remains a
+partial with 48 settled operations, $0.237967 recorded spending and zero held.
+Its answers and scores are preserved with that run. Use the new handoff when
+released. The v3 command stays retired.
+
+| Phase | API cap | Recorded attempts |
+| --- | ---: | ---: |
+| Development | $40 | 4,096 |
+| Unused validation | $0 | 0 |
+| Final assessment | $85 | 10,240 |
+| Both plain model references, shared | $25 | 2,048 |
+| **Total** | **$150** | **16,384** |
+
+V5 keeps the same three development and 26 final WildChat tasks, sixteen
+improvement opportunities, both plain model controls, and official NoveltyBench
+1.1 settings. The existing native review allowance is separate from API spending.
+
+PR #309's [fast checks](https://github.com/wavemanco/buddha/actions/runs/43342322668)
+pass 550 contract methods per OS. Three exact-source Windows checks cover
+publication through the next study action, a substituted report and a late
+seal. The funded launcher passes its actual pre-key and post-key checks with
+dummy prompts and transport blocked. All four grants start at zero use.
+The earlier full qualification belongs to its original source. V5 uses the
+scoped readiness evidence only if the operator adopts it for this launch.
+
+### V5 local launch after readiness approval
+
+Run once in a new PowerShell window with Docker Desktop running.
+
+```powershell
+Remove-Item -LiteralPath 'Env:\OPENAI_API_KEY', 'Env:\ANTHROPIC_API_KEY' -ErrorAction SilentlyContinue
+& "C:\Program Files\Python313\python.exe" -B "C:\Users\arvik\code\buddha\runs\reviews\d8r15\docs\conformance\unified-run.py" --handoff "C:\Users\arvik\code\buddha\runs\imp01-d8-fresh-20261112-v5-combined\NOT-CREATED-unified-launch.json" --sha256 "5a6ad73dd705b2d4114c4cf1faf1c074b16e37acdccb0918a39981bfb56da312" --live --prompt-keys --confirm-project-keys
+```
+
+The first line clears inherited keys in this window so the masked prompts
+appear. The second checks the handoff, prompts for OpenAI and Anthropic
+project keys, and starts the paid comparison. Paste each key once and press
+Enter. The keys are temporary for this process. Keep the window open.
+To stop, press **Ctrl+C once** and wait for cleanup and accounting. If it
+stops, share the final diagnostic and JSON before running another command.
+
 ## Fresh handoff and approved budget
 
 **V3 stopped during the first development screen.** All 48 operations settled

@@ -2,6 +2,15 @@
 
 The user authorized **up to US$50 for one first live experiment** on 2026-10-19. That is a combined cap across OpenAI and Anthropic, including seed candidates, proposals, generation and judging. It does not authorize repeated $50 experiments. The original and completed recovery attempts are historical evidence. The [living plan](PLAN.md) governs their linked continuation; do not restart either historical directory under a fresh allowance.
 
+## Fresh D8 V5 allowance
+
+The user chose the full $150 combined OpenAI and Anthropic cap for the fresh
+comparison. V3's $0.237967 and 48 settled operations remain with its historical
+partial. The four V5 grants start unused. Development gets $40 and 4,096
+attempts, final gets $85 and 10,240, both plain controls share $25 and 2,048,
+and unused validation gets zero. Enter both keys locally only after release.
+[Current command and readiness](D8-LIVE-COMPARISON.md#v5-fresh-comparison).
+
 ## Current D8 recovery
 
 The user authorized preparation of the masked-prompt recovery within the existing **$150 / 16,384-attempt** ceiling. The original partial retains **$0.585611 held / one attempt**. The replacement receives **$149.414389 / 16,383 attempts**: development $39.414389 / 4,095, final $85 / 10,240, shared plain controls $25 / 2,048, validation $0 / 0. This is a partition of the original allowance, not another $150 allocation.
