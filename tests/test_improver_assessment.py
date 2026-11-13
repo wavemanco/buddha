@@ -807,11 +807,12 @@ class ImproverAssessmentTests(unittest.TestCase):
             with patch.object(improver_study, "inspect_improver_study", side_effect=inspect):
                 return self.api._development(state, "0" * 64)[1]
 
+        empty = directory / "empty"
+        empty.mkdir()
+
         def replace_directory():
-            saved.rename(directory / "old-common")
-            saved.mkdir()
-            (directory / "old-common/report.json").rename(report)
-            (directory / "old-common").rmdir()
+            empty.rename(trial.root / "old-empty")
+            empty.mkdir()
 
         with (
             patch.object(launch_common, "_HELD_RECOVERY"),
