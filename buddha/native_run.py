@@ -19,11 +19,11 @@ from buddha.gateway import (
     Gateway,
     GatewayCall,
     GatewayError,
-    HeldReplacementReplay,
     TransportUncertain,
     _read_manifest,
     execution_identity,
 )
+from buddha.held_recovery import UtilityReplay
 from buddha.ledger import BudgetExceeded, OperationConflict
 from buddha.native_transport import NativeRequest
 from buddha.provider import BoundBreach, PendingOperation, ProviderUncertain
@@ -86,6 +86,7 @@ class NativeSession:
         descriptor: Path,
         output: Path,
         held_replacement: HeldReplacement | None = None,
+        recovery_fallback: str | None = None,
     ) -> None:
         from buddha import launch_common
 
@@ -108,8 +109,8 @@ class NativeSession:
         self.aliases: list[object] = []
         self.ready_audit_sha256: str | None = None
         self.held_replacement = held_replacement
-        self.recovery: HeldReplacementReplay | None = None
-        self.recovery_count = 0
+        self.recovery_fallback = recovery_fallback
+        self.recovery: UtilityReplay | None = None
         try:
             if not isinstance(gateway, Gateway) or not isinstance(descriptor, Path):
                 raise NativeRunError("invalid host native session")
@@ -527,19 +528,9 @@ class NativeSession:
         )
         self.calls["requested"] += 1
         try:
-            recovery = self.recovery
-            if recovery is None or call.logical_id != recovery.original.logical_id:
-                envelope = self.gateway.execute(call)
-            elif self.recovery_count == 0 and call == recovery.original:
-                envelope = recovery.original_envelope
-                self.recovery_count += 1
-            elif self.recovery_count == 1 and call == recovery.replacement:
-                envelope = recovery.replacement_envelope
-                self.recovery_count += 1
-            else:
-                raise OperationConflict(
-                    "worker recovery callback differs from the reviewed attempt"
-                )
+            envelope = (
+                self.gateway.execute(call) if self.recovery is None else self.recovery.reply(call)
+            )
         except (ProviderUncertain, PendingOperation) as error:
             self.stop_reason = "unknown"
             if type(error) is TransportUncertain:
@@ -651,7 +642,7 @@ class NativeSession:
                     or (
                         status == "complete"
                         and self.recovery is not None
-                        and self.recovery_count != 2
+                        and not self.recovery.complete
                     )
                     or (status == "stopped" and reason != self.stop_reason)
                     or reason
@@ -688,7 +679,11 @@ class NativeSession:
         with self.gateway.work(directory=self.output, kind="native"):
             if self.held_replacement is not None:
                 self._unchanged()
-                self.recovery = self.gateway._prepare_held_replacement(self.held_replacement)
+                self.recovery = UtilityReplay(
+                    self.gateway,
+                    self.gateway._prepare_held_replacement(self.held_replacement),
+                    self.recovery_fallback,
+                )
             return self._run()
 
     def _run(self) -> dict[str, object]:

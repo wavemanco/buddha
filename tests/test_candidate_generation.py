@@ -234,10 +234,8 @@ class CandidateGenerationTests(unittest.TestCase):
                 and self.held_retry_mode != "skip"
             ):
                 request = request | {"attempt": 1, "headers": [["x-stainless-retry-count", "1"]]}
-                if self.held_retry_mode == "changed":
-                    request["body_base64"] = base64.b64encode(
-                        base64.b64decode(request["body_base64"]) + b"\n"
-                    ).decode()
+                if self.held_retry_mode == "foreign":
+                    request["logical_id"] = sha(b"foreign utility callback")
                 reply = handle({"type": "request", "seq": sequence, "request": request})
                 sequence += 1
         self.physical_sends += connection.request.call_count
@@ -490,6 +488,14 @@ class CandidateGenerationTests(unittest.TestCase):
         self.assertEqual(self.run_generation()["status"], "complete")
         evaluation = task / "evaluation"
         descriptor = task / "evaluation.json"
+        original_row = self.native_row
+
+        def one_head(row, index):
+            row = original_row(row, index)
+            row.update(partition=[0, 0], distinct=1)
+            return row
+
+        self.native_row = one_head
         descriptor.write_bytes(
             _json(
                 {
@@ -527,7 +533,7 @@ class CandidateGenerationTests(unittest.TestCase):
         recovery = gateway._held_replacement_candidate(original_id, "a" * 64)
         with trial_fence.work(authority.path, authority._terms(), directory=owner):
             gateway.ledger.record_held_replacement(recovery)
-        self.held_retry_mode = "changed"
+        self.held_retry_mode = "foreign"
         connection = self.held_connection()
         with patch("http.client.HTTPSConnection", return_value=connection):
             partial = self.run_native(evaluation)
@@ -562,6 +568,97 @@ class CandidateGenerationTests(unittest.TestCase):
         reader.funded["held_replacement"]["review_sha256"] = "b" * 64
         with self.assertRaises(NativeEvidenceError):
             reader.stage(evaluation, 2, baseline=False)
+
+    def test_held_replay_allows_only_one_exact_refusal_fallback_across_restarts(self):
+        from unittest.mock import Mock
+
+        from buddha.gateway import HeldReplacementReplay
+        from buddha.held_recovery import UtilityReplay, fallback_model
+        from buddha.ledger import OperationConflict
+        from buddha.wire import RawEnvelope
+
+        self.configure_held_replacement(self.native)
+        tasks = self.candidate.tasks
+        task = tasks.tasks[0]
+        partition = _json({"id": task.id, "partition": [0, 0]}) + b"\n"
+        release = self.candidate.release.to_record()
+        release["commands"][1]["argv"] += ["--fallback-judge", "claude-fallback"]
+        frozen_release = Release.from_record(release)
+        fallback = fallback_model(frozen_release, self.stages, tasks, partition)
+        self.assertEqual(fallback, "claude-fallback")
+        with self.assertRaises(OperationConflict):
+            fallback_model(
+                frozen_release, self.stages, tasks, _json({"id": task.id, "partition": [0, 1]})
+            )
+
+        original = GatewayCall(
+            "anthropic.messages.v1",
+            "quality",
+            "primary",
+            0,
+            self.held_body(),
+            (("x-stainless-retry-count", "0"),),
+        )
+        replacement = replace(original, attempt=1, headers=(("x-stainless-retry-count", "1"),))
+        refusal = RawEnvelope("anthropic", 200, b'{"stop_reason":"refusal"}')
+        saved = HeldReplacementReplay(
+            Mock(), original, RawEnvelope("anthropic", 503, b""), replacement, refusal
+        )
+        fallback_call = replace(
+            original,
+            logical_id="fallback",
+            profile_id="fallback",
+            body=_json(json.loads(original.body) | {"model": fallback}),
+        )
+        gateway = Mock(spec=Gateway)
+        gateway.ledger = Mock()
+        gateway.operation_id.side_effect = lambda call: call.logical_id
+        operations = {}
+        gateway.ledger.get.side_effect = operations.get
+        gateway.ledger.totals.side_effect = lambda: {"operation_count": 2 + len(operations)}
+        answer = RawEnvelope("anthropic", 200, b'{"stop_reason":"end_turn"}')
+
+        def execute(call):
+            operations[call.logical_id] = answer
+            return answer
+
+        gateway.execute.side_effect = execute
+        replay = UtilityReplay(gateway, saved, fallback)
+        with self.assertRaises(OperationConflict):
+            replay.reply(fallback_call)
+        replay.reply(original)
+        for call in (fallback_call, replace(replacement, body=replacement.body + b"\n")):
+            with self.assertRaises(OperationConflict):
+                replay.reply(call)
+        replay.reply(replacement)
+        self.assertFalse(replay.complete)
+        for call in (
+            replace(original, logical_id="foreign"),
+            replace(fallback_call, attempt=1),
+            replace(fallback_call, body=fallback_call.body.replace(b"literal", b"changed")),
+        ):
+            with self.assertRaises(OperationConflict):
+                replay.reply(call)
+        gateway.execute.assert_not_called()
+        self.assertEqual(replay.reply(fallback_call), answer)
+        self.assertTrue(replay.complete)
+
+        restarted = UtilityReplay(gateway, saved, fallback)
+        restarted.reply(original)
+        restarted.reply(replacement)
+        self.assertEqual(restarted.reply(fallback_call), answer)
+        with self.assertRaises(OperationConflict):
+            restarted.reply(replace(fallback_call, logical_id="second-fallback"))
+        self.assertEqual(set(operations), {"fallback"})
+
+        without_refusal = UtilityReplay(
+            gateway, replace(saved, replacement_envelope=answer), fallback
+        )
+        without_refusal.reply(original)
+        without_refusal.reply(replacement)
+        self.assertTrue(without_refusal.complete)
+        with self.assertRaises(OperationConflict):
+            without_refusal.reply(fallback_call)
 
     def check_partial(self, result, directory):
         self.assertEqual(result["status"], "incomplete")

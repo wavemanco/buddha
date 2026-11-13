@@ -30,7 +30,8 @@ class ImproverLaunchIntegrationTests(unittest.TestCase):
         from test_source_screen import SourceScreenTests
 
         from buddha import improver_handoff, improver_launch, launch_common
-        from buddha.gateway import RawHTTPTransport
+        from buddha.gateway import RawHTTPTransport, _read_manifest
+        from buddha.releases import Selection, _json
 
         fixture = assessment_fixtures.ImproverAssessmentTests("runTest")
         self.addCleanup(fixture.doCleanups)
@@ -82,15 +83,23 @@ class ImproverLaunchIntegrationTests(unittest.TestCase):
         transport = RawHTTPTransport(allow_paid=True, timeout_seconds=300)
         replacement = fixture.engine.held_connection()
         owner = fixture.study / "common/0/0/screen/tasks/0/evaluation/owners/2"
+        partition_owner = owner.with_name("1")
         execute = fixture.execute
         initial_calls = []
         reached_final = []
+
+        class ReachedFinal(BaseException):
+            pass
 
         def run_worker(spec, *, initial, handle, **kwargs):
             stage = handle.__self__.gateway.directory
             if stage.is_relative_to(fixture.trial / "final"):
                 reached_final.append(stage)
-                raise KeyboardInterrupt("first final worker, no final provider call")
+                raise ReachedFinal
+            if stage == partition_owner:
+                generation = stage.parents[2] / "generation/owners/0"
+                actor = Selection.from_bytes(_json(_read_manifest(generation)["selection"]))
+                fixture.f.h.programs[actor.agent_sha256]["distinct"] = 1
             if stage == owner:
                 initial_calls.append(stage)
             return execute(spec, initial=initial, handle=handle, **kwargs)
@@ -100,6 +109,13 @@ class ImproverLaunchIntegrationTests(unittest.TestCase):
                 fixture.supplied(),
                 patch.dict(os.environ, {"ANTHROPIC_API_KEY": test_gateway.KEY}),
                 patch("http.client.HTTPSConnection", side_effect=connect),
+                patch(
+                    "socket.socket.connect", side_effect=AssertionError("provider access blocked")
+                ),
+                patch(
+                    "socket.socket.connect_ex",
+                    side_effect=AssertionError("provider access blocked"),
+                ),
             ):
                 return improver_launch.launch(
                     bundle["path"],
@@ -141,7 +157,7 @@ class ImproverLaunchIntegrationTests(unittest.TestCase):
             Path(decision["path"]), decision["sha256"], bundle["path"], launch_pin
         ):
             try:
-                with self.assertRaises(KeyboardInterrupt):
+                with self.assertRaises(ReachedFinal):
                     launch()
             except improver_launch.ImproverLaunchError as error:
                 current = error
@@ -151,6 +167,7 @@ class ImproverLaunchIntegrationTests(unittest.TestCase):
                 raise
         self.assertEqual(len(initial_calls), 2)
         self.assertEqual(len(reached_final), 1)
+        self.assertEqual({name: sha((root / name).read_bytes()) for name in pins}, pins)
         self.assertTrue((fixture.trial / "freeze/ready.json").is_file())
         self.assertEqual({path: path.read_bytes() for path in seals}, seals)
         replacement.request.assert_called_once()

@@ -2623,10 +2623,22 @@ def _advance_action(
         if pending is not None or replacement is not None and replacement["state"] == "settled"
         else set()
     )
-    if any(
-        row["status"] != "completed" and row["operation_id"] not in permitted
+    outstanding = [
+        row
         for row in reader._rows(state["funding"]["auth_operations"])
+        if row["status"] != "completed" and row["operation_id"] not in permitted
+    ]
+    if (
+        len(outstanding) == 1
+        and replacement is not None
+        and replacement["state"] == "settled"
+        and outstanding[0]["run_id"] == replacement["run_id"]
+        and outstanding[0]["status"] == "reserved"
     ):
+        # The utility worker checks the exact saved fallback before dispatching its reservation.
+        _replacement_owner(reader, state, replacement["run_id"])
+        outstanding.clear()
+    if outstanding:
         selected = launch_common._HELD_RECOVERY.get()
         if replacement is None and selected is not None:
             owner = _replacement_owner(reader, state, _text(selected["run_id"]))

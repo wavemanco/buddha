@@ -66,8 +66,12 @@ lock, reserve the replacement once within the owner and phase dollar and
 attempt limits. Complete that exact replacement before restarting the
 worker. Use the same model and body, the original reviewed worker headers
 and the SDK's next retry count.
-Then require the pinned worker to consume the original error and the saved
-replacement under their exact request identities before sealing the score.
+The Held Request Recovery module checks the saved utility partition has
+one class. It gives the worker the original error and the replacement under
+their exact request identities before allowing any other callback. After an
+explicit refusal in the replacement reply, it allows the frozen fallback
+model with the same request body apart from the model name. The owner ledger
+permits one fallback operation across restarts under the original limits.
 On restart, reuse a settled replacement or resume its proven unsent
 reservation. Validate and settle a durable successful receipt before
 replay if interrupted between receipt and settlement. A second ambiguous
@@ -85,8 +89,9 @@ Verify this through the normal launcher with a supplied response at the
 transport boundary and real provider access blocked. Reuse the saved
 generation and partition, preserve the first hold and receipt, allow
 exactly one simulated replacement, and show zero duplicate sends after
-restart. Include concurrent callback order, skipped or changed requests,
-second ambiguity, cap exhaustion and completion through final funding.
+restart. Include an unexpected callback before replay, skipped or changed
+requests, a legitimate refusal fallback, second ambiguity, cap exhaustion
+and completion through final funding.
 This proposal grants no live authority.
 
 ## Acceptance gates by implementing slice

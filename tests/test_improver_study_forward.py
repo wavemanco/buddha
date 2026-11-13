@@ -623,6 +623,63 @@ class ImproverStudyForwardTests(unittest.TestCase):
                 improver_study._check_action_writes(previous, current, action)
             current.finish()
 
+    def test_held_fallback_reservation_resumes_only_at_its_utility_screen(self):
+        from buddha import improver_study
+        from buddha.gateway import RawHTTPTransport
+        from buddha.native_evidence import NativeEvidence
+
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary).resolve()
+            screen = root / "screen"
+            evaluation = screen / "tasks/0/evaluation"
+            partition = evaluation / "completed/1.json"
+            partition.parent.mkdir(parents=True)
+            partition.write_bytes(b"partition seal")
+            owner = evaluation / "owners/2"
+            reader = NativeEvidence(root, root / "unused-authorization.sqlite3")
+            reader.owners[owner] = SimpleNamespace(run_id="utility")
+            authority = SimpleNamespace(path=reader.authorization)
+            transport = RawHTTPTransport(allow_paid=False)
+            outstanding = {"run_id": "utility", "operation_id": "fallback", "status": "reserved"}
+            observation = {"reason": "unknown"}
+            state = {
+                "action": {"kind": "screen", "directory": screen},
+                "funding": {
+                    "auth_operations": [outstanding],
+                    "held_replacement": {
+                        "run_id": "utility",
+                        "state": "settled",
+                        "original_operation_id": "original",
+                        "replacement_operation_id": "replacement",
+                    },
+                },
+                "observations": [observation],
+            }
+            with patch.object(
+                improver_study.source_screen,
+                "run_source_screen",
+                return_value={"status": "complete"},
+            ) as run:
+                self.assertIsNone(
+                    improver_study._advance_action(reader, state, authority, transport)
+                )
+                run.assert_called_once_with(screen, transport=transport)
+                for change in (
+                    {"status": "dispatched"},
+                    {"status": "unknown"},
+                    {"run_id": "other"},
+                ):
+                    state["funding"]["auth_operations"] = [outstanding | change]
+                    self.assertEqual(
+                        improver_study._advance_action(reader, state, authority, transport),
+                        observation,
+                    )
+                state["funding"]["auth_operations"] = [outstanding]
+                state["action"]["directory"] = root / "other-screen"
+                with self.assertRaises(improver_study.ImproverStudyError):
+                    improver_study._advance_action(reader, state, authority, transport)
+                run.assert_called_once()
+
     def test_keyboard_interrupt_survives_failed_forward_refresh_without_observation(self):
         from buddha import improver_study
         from buddha.gateway import RawHTTPTransport

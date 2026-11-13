@@ -42,9 +42,12 @@ under the same logical call, with the original body and retry header
 incremented. The Windows probe differed from the saved worker in two
 platform headers. A separate read-only check matched the original request
 to its saved receipt and verified that attempt 1 with the original worker
-headers passes the same profile and reservation checks. A second judge
-callback could arrive before attempt 1, so recovery must match the logical
-call and protect its reservation independently of arrival order.
+headers passes the same profile and reservation checks. A separate SDK probe observed a sibling callback arriving first when the
+partition had multiple classes. V5's saved partition has one class. The
+Held Request Recovery module requires the two reviewed callbacks in order.
+After an explicit Opus refusal, it allows the frozen Sonnet fallback under
+the original owner and phase limits. The fallback reserves $4.576 and fits
+the $25 owner if the replacement settles at $8.984 or less.
 
 Use the [shared recovery rule](RECOVERY-CONTRACT.md#recovery-with-a-retained-provider-hold)
 through the updated normal launcher. It keeps the original owner, can send
