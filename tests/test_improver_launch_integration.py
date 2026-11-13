@@ -160,6 +160,9 @@ class ImproverLaunchIntegrationTests(unittest.TestCase):
                 with self.assertRaises(ReachedFinal):
                     launch()
             except improver_launch.ImproverLaunchError as error:
+                checkpoint(
+                    "held_launcher_stopped", diagnostic=launch_common._stop_diagnostic(error)
+                )
                 current = error
                 while current.__context__ is not None:
                     current.__cause__ = current.__context__

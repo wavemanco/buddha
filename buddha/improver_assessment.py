@@ -20,7 +20,7 @@ from buddha import source_screen_results as saved_native
 from buddha import validation_study as study
 from buddha.answers import TaskSet, _id, _source
 from buddha.authorization import Authorization
-from buddha.doctor import _Busy, _Capture, _Unsupported
+from buddha.doctor import _active_tree, _Busy, _Capture, _Unsupported
 from buddha.improvement_rule import ImprovementRule
 from buddha.native_evidence import NativeEvidence
 from buddha.releases import ReleaseError, Selection, _digest, _json, _load, _text, file_hash
@@ -499,15 +499,16 @@ def _development_context(state: dict[str, Any], context: dict[str, Any]) -> None
 
 def _development(state: dict[str, Any], expected: str) -> tuple[dict[str, Any], _Capture]:
     directory = state["root"] / "search/study"
-    capture = _Capture(directory)
-    report = study._obj(
-        improver_study.inspect_improver_study(
-            directory,
-            authorization=final._phase_authority(state, "search"),
-            expected_report_sha256=expected,
-            sink=capture,
+    with _active_tree(directory, directory_clocks_only=True):
+        capture = _Capture(directory)
+        report = study._obj(
+            improver_study.inspect_improver_study(
+                directory,
+                authorization=final._phase_authority(state, "search"),
+                expected_report_sha256=expected,
+                sink=capture,
+            )
         )
-    )
     _development_context(state, study._obj(_load(capture.read(directory / "context.json"))))
     if report["provenance"]["declaration_sha256"] != pipeline._sha(state["development"]):
         raise ImproverAssessmentError("finite study rebound its original declaration")

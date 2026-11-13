@@ -67,6 +67,15 @@ between reads. The first final worker did not start. All 890 tracked source
 and repository files matched their initial hashes. The retained log identifies
 the check that stopped but does not include the entry or field that differed.
 
+A short offline check reproduced the same error by changing only the
+modification time of the fixture's `common` directory. During held request
+recovery, the final writer now compares the development tree by directory
+name, type and identity. It still checks file metadata and consumed bytes,
+ledger sidecars and the writer lock. The check accepts directory clock
+changes and rejects a replaced directory, unexpected entries, changed files,
+and new sidecars. The launcher fixture now records the bounded scan difference
+when one is available. Final worker entry remains unverified.
+
 Read-only checks before and after the rehearsal matched all 638 original
 operations across 199 V5 owner ledgers. The ledger hashes, 637 settled
 operations, $5.600044 recorded spending and $11.44 hold matched before
