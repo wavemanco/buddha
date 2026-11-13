@@ -25,7 +25,14 @@ from buddha import native_pipeline as pipeline
 from buddha import source_search as shared
 from buddha.answers import Answers
 from buddha.authorization import Authorization
-from buddha.doctor import _authority, _Busy, _Capture, _passive_tree_observation, _Unsupported
+from buddha.doctor import (
+    _active_tree,
+    _authority,
+    _Busy,
+    _Capture,
+    _passive_tree_observation,
+    _Unsupported,
+)
 from buddha.gateway import RawHTTPTransport, _input_records, _review
 from buddha.native_evidence import NativeEvidence, _adopt_capture, authority_observation
 from buddha.releases import (
@@ -2536,6 +2543,12 @@ def _check_action_writes(
     else:
         raise ImproverStudyError("no forward write scope for this study action")
     before, after = previous.capture.entries, current.capture.entries
+    if (
+        previous.capture._directory_identity
+        and current.capture._directory_identity
+        and previous.capture._tree_roots[previous.root] != current.capture._tree_roots[current.root]
+    ):
+        raise ImproverStudyError("study action replaced its root directory")
     for name in before.keys() | after.keys():
         path = current.root / name
         if any(path.is_relative_to(scope) for scope in scopes):
@@ -2555,7 +2568,16 @@ def _forward_read(
     """Refresh custody and the active opportunity; never replay earlier scientific decisions."""
     reader = NativeEvidence(previous.root, previous.authorization, error_type=ImproverStudyError)
     _check_action_writes(previous, reader, state["action"])
-    _check_current(state)
+    published = state["action"].get("report_sha256")
+    if published is None:
+        _check_current(state)
+    else:
+        report = state["action"]["directory"] / "report.json"
+        if not _presence(reader, report):
+            raise ImproverStudyError("returned screen publication disappeared")
+        reader.raw(report, published)
+        for path, digest in state["_writer_controls"].items():
+            reader.raw(path, digest)
     # Decode reuse requires fresh identical file bytes; funding and all mirrors stay fresh.
     _census(reader, state, previous=previous)
     state["action"], state["inactive"] = None, False
@@ -2654,6 +2676,8 @@ def _advance_action(
             )
         elif kind == "screen":
             child = source_screen.run_source_screen(location, transport=transport)
+            if child["status"] == "complete" and reader.capture._directory_identity:
+                action["report_sha256"] = pipeline._sha(child)
         elif kind == "witness":
             step = shared._advance_witness(
                 reader, action["treatment"], authorization=authority, transport=transport
@@ -2730,8 +2754,11 @@ def run_improver_study(directory: Path, *, transport: RawHTTPTransport) -> dict[
         )
     authority = Authorization(authorization)
     with (
-        trial_fence.work(authorization, authority._terms(), directory=directory, kind="search"),
-        pipeline._exclusive(directory),
+        trial_fence.work(
+            authorization, authority._terms(), directory=directory, kind="search"
+        ) as trial_controls,
+        pipeline._exclusive(directory) as check_lock,
+        _active_tree(directory) as active,
     ):
         with launch_common._study_stage("restore"):
             retained = launch_common._take_development(directory.parent.parent)
@@ -2757,6 +2784,9 @@ def run_improver_study(directory: Path, *, transport: RawHTTPTransport) -> dict[
                 capture.entries["running.lock"] = lock
                 reader.finish()
         while True:
+            if active:
+                state["_writer_controls"] = trial_controls
+            check_lock()
             _check_current(state)
             reader.capture.finish()
             action = state["action"]
@@ -2765,6 +2795,7 @@ def run_improver_study(directory: Path, *, transport: RawHTTPTransport) -> dict[
             if result is not None:
                 return result
             with launch_common._study_stage("forward_read"):
+                check_lock()
                 reader, state = _forward_read(reader, state)
             if state["action"]["kind"] in {"freeze", "publish"}:
                 with launch_common._study_stage("restore"):

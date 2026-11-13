@@ -97,6 +97,111 @@ class ImproverStudyForwardTests(unittest.TestCase):
             }
         )
 
+    def test_scoped_screen_ignores_directory_clocks_through_next_action(self):
+        from buddha import doctor, source_screen
+
+        f, record = self.fixture()
+        directory, _, authority = f.prepare_study("publication-touch", record, trial=True)
+        screen = directory / "common/0/0/screen"
+        touched = screen / "tasks/0/evaluation"
+        notes = screen / "notes.txt"
+        finalizations = []
+        finish = doctor._Capture.finish
+
+        def finish_after_touch(capture):
+            if capture.root in (screen, directory) and touched.is_dir():
+                info = touched.stat()
+                os.utime(touched, ns=(info.st_atime_ns, info.st_mtime_ns - 2_000_000_000))
+                if notes.is_file():
+                    info = notes.stat()
+                    os.utime(notes, ns=(info.st_atime_ns, info.st_mtime_ns - 2_000_000_000))
+                finalizations.append(capture.root)
+            return finish(capture)
+
+        def stop(reader, state, original_authority, transport):
+            if state["action"]["kind"] == "screen":
+                notes.write_text("unconsumed prior observation", encoding="utf-8")
+            if state["action"]["kind"] == "witness":
+                raise PrefixReached
+
+        with (
+            patch.object(doctor._Capture, "finish", finish_after_touch),
+            patch.object(source_screen, "_preflight", wraps=source_screen._preflight) as preflight,
+            self.tracked(f, before=stop),
+            self.assertRaises(PrefixReached),
+        ):
+            f.run_study(directory)
+        self.assertIn(screen, finalizations)
+        self.assertIn(directory, finalizations)
+        self.assertEqual(preflight.call_count, 1)
+        self.assertTrue((screen / "report.json").is_file())
+        self.assertEqual(authority.summary()["operation_count"], f.engine.physical_sends)
+
+    def test_scoped_study_rejects_a_compatible_substitute_for_the_returned_screen(self):
+        from buddha import source_screen
+        from buddha.releases import _json
+
+        f, record = self.fixture()
+        directory, _, authority = f.prepare_study("publication-pin", record, trial=True)
+        screen = directory / "common/0/0/screen"
+        run = source_screen.run_source_screen
+
+        def substitute(location, **options):
+            report = run(location, **options)
+            replacement = copy.deepcopy(report)
+            replacement["authorization"]["event_count"] -= 1
+            raw = _json(replacement)
+            (screen / "report.json").write_bytes(raw)
+            self.assertEqual(
+                source_screen.inspect_source_screen(
+                    screen,
+                    authorization=authority.path,
+                    expected_report_sha256=f.api.pipeline._sha(replacement),
+                ),
+                replacement,
+            )
+            return report
+
+        with (
+            patch.object(source_screen, "run_source_screen", substitute),
+            self.tracked(f) as calls,
+            self.assertRaisesRegex(f.api.ImproverStudyError, "retained input differs"),
+        ):
+            f.run_study(directory)
+        self.assertEqual([kind for kind, _ in calls["actions"]], ["screen"])
+        self.assertEqual(authority.summary()["operation_count"], f.engine.physical_sends)
+
+    def test_scoped_publication_checks_late_seals_after_staging(self):
+        from buddha import doctor
+
+        f, record = self.fixture()
+        directory, _, authority = f.prepare_study("publication-extra-seal", record, trial=True)
+        screen = directory / "common/0/0/screen"
+        seal = screen / "tasks/0/generation/completed/9.json"
+        tree = doctor._Capture._tree_entries
+        injected = []
+
+        def add_after_staging(capture, root=None, **options):
+            entries = tree(capture, root, **options)
+            if (
+                root is not None
+                and capture.root == screen
+                and root in capture._watched_trees
+                and not injected
+            ):
+                seal.write_bytes(b"{}")
+                injected.append(True)
+            return entries
+
+        with (
+            patch.object(doctor._Capture, "_tree_entries", add_after_staging),
+            self.assertRaises(f.api.ImproverStudyError),
+        ):
+            f.run_study(directory)
+        self.assertEqual(injected, [True])
+        self.assertFalse((screen / "report.json").exists())
+        self.assertEqual(authority.summary()["operation_count"], f.engine.physical_sends)
+
     def test_v5_complete_writer_uses_three_cold_restores_and_one_plan_per_coordinate(self):
         f, record = self.fixture()
         directory, _, authority = f.prepare_study("forward-complete", record)

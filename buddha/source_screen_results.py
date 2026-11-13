@@ -11,6 +11,7 @@ import math
 import os
 import sqlite3
 import threading
+from collections.abc import Mapping
 from dataclasses import dataclass
 from pathlib import Path
 from typing import TYPE_CHECKING, cast
@@ -246,6 +247,7 @@ def _source(
             root,
             authorization=reader.authorization,
             expected_report_sha256=_sha(reader.raw(root / "report.json")),
+            defer_finish=reader.capture._directory_identity,
         )
         if source is None or not _same(prospective_report["source_generation"], reference):
             raise reader.error_type("source publication changes its original generation")
@@ -254,7 +256,8 @@ def _source(
         source = _read_generation(reference, reader.authorization)
     if source.tasks.fingerprint() != tasks.fingerprint():
         raise reader.error_type("source C1 changes the declared screen task")
-    reader.verify_files(source.files)
+    if prospective_report is None or not reader.capture._directory_identity:
+        reader.verify_files(source.files)
     seal = reader.record(root / "completed/0.json")
     attempt = root / _path(seal["attempt"])
     report = reader.record(attempt / "report.json")
@@ -307,7 +310,10 @@ def _failed_source(
         raise reader.error_type("failed source changes an original screen control")
     raw = reader.raw(root / "report.json")
     report, _, captured = _read_published_generation(
-        root, authorization=reader.authorization, expected_report_sha256=_sha(raw)
+        root,
+        authorization=reader.authorization,
+        expected_report_sha256=_sha(raw),
+        defer_finish=reader.capture._directory_identity,
     )
     _adopt_capture(captured, reader.capture)
     if raw != _json(report) or report["disposition"] != "candidate_execution_failed":
@@ -415,6 +421,69 @@ def _native(
     return available, summary_reference, digest
 
 
+def _active_task(
+    reader: NativeEvidence,
+    screen: SourceScreen,
+    index: int,
+    runtime: str,
+    reference: dict[str, object] | None,
+) -> None:
+    from buddha.source_screen import _generation_formats, _generation_recipe
+
+    record = screen.to_record()
+    location = reader.root / "tasks" / str(index)
+    task = screen.tasks.tasks[index]
+    descriptor = location / "generation.json"
+    common = {
+        location / "task.json": screen.tasks.select([task.id]).to_bytes(),
+        descriptor: _json(_generation_recipe(location, screen)),
+    }
+    generation = common | {
+        location / "generation/context.json": _json(
+            {
+                "format": _generation_formats(screen)["context"],
+                "descriptor": str(descriptor),
+                "expected_runtime_sha256": runtime,
+            }
+        ),
+    }
+    groups = [([location / "generation/owners/0"], generation)]
+    if reference is not None:
+        descriptor = location / "evaluation.json"
+        native = common | {
+            descriptor: _json(
+                {
+                    "format": "buddha.native-evaluation.v1",
+                    "source_generation": reference,
+                    "native": record["native"],
+                    "stages": record["stages"],
+                }
+            ),
+            location / "evaluation/context.json": _json(
+                {"format": "buddha.native-evaluation-context.v1", "descriptor": str(descriptor)}
+            ),
+        }
+        groups.append(
+            (
+                [
+                    location / "evaluation/owners" / str(i)
+                    for i in range(1, len(_rows(record["stages"])) + 1)
+                ],
+                native,
+            )
+        )
+    for owners, expected in groups:
+        pins = {str(path): _sha(raw) for path, raw in expected.items()}
+        for owner in owners:
+            actual = reader._bindings(reader.owner(owner))
+            if any(actual.get(path) != digest for path, digest in pins.items()):
+                raise reader.error_type("active screen owner changes its task or recipe bindings")
+        for path in expected:
+            receipt = reader.capture._receipts.get(path)
+            if receipt is None or receipt[1] != pins[str(path)]:
+                raise reader.error_type("active screen changes its exact task or recipe bytes")
+
+
 def _collect_source_screen(
     directory: Path,
     *,
@@ -423,6 +492,10 @@ def _collect_source_screen(
     sink: _Capture | None = None,
     retain: bool = False,
     observation_root: Path | None = None,
+    accepted: Mapping[Path, str] | None = None,
+    original: (
+        tuple[SourceScreen, Mapping[Path, str], dict[str, object], Mapping[Path, str]] | None
+    ) = None,
 ) -> _CompletedScreenRead:
     """Reconstruct complete custody or verify an explicitly pinned publication."""
     from buddha.source_screen import (
@@ -453,6 +526,19 @@ def _collect_source_screen(
         ):
             raise SourceScreenError("retained read requires one pinned original publication")
         reader = NativeEvidence(directory, authorization, error_type=SourceScreenError)
+        if (accepted is None) != (original is None) or (
+            original is not None and not reader.capture._directory_identity
+        ):
+            raise SourceScreenError("active screen collection needs original writer evidence")
+        remaining = None if accepted is None else dict(accepted)
+
+        def accepted_child(path: Path) -> dict[str, object]:
+            if remaining is None:
+                return reader.record(path)
+            if path not in remaining:
+                raise SourceScreenError("screen has a child outside the accepted schedule")
+            return reader.record(path, remaining.pop(path))
+
         anchor = reader.owner(directory / "tasks/0/generation/owners/0")
         screen_raw = reader.bound(anchor, directory / "screen.json")
         screen = SourceScreen.from_bytes(screen_raw)
@@ -506,6 +592,19 @@ def _collect_source_screen(
                 str(directory / "context.json"): _sha(context_raw),
             }
         )
+        if original is not None:
+            original_screen, original_controls, review, trial_controls = original
+            if (
+                original_screen.to_bytes() != screen_raw
+                or {str(path): digest for path, digest in original_controls.items()} != controls
+                or not _same(anchor.manifest["review"], review)
+            ):
+                raise SourceScreenError("screen changes the originally accepted controls")
+            for path, digest in trial_controls.items():
+                reader.raw(path, digest)
+            if record["projection"] == "noveltybench-1.1":
+                projector = Path(__file__).absolute().with_name("noveltybench_results.py")
+                reader.raw(projector, controls[str(projector)])
         reader.release = Release.from_record(_object(record["source"])["release"])
         reader.template = {"native": record["native"], "stages": record["stages"]}
         pipeline.validate_native_flow(record["stages"], reader.release)
@@ -522,7 +621,7 @@ def _collect_source_screen(
             ):
                 raise SourceScreenError("prospective screen has an invalid task prefix")
             for index in range(len(observed)):
-                published = reader.record(
+                published = accepted_child(
                     directory / "tasks" / str(index) / "generation/report.json"
                 )
                 if published.get("disposition") == "candidate_execution_failed":
@@ -533,6 +632,12 @@ def _collect_source_screen(
                 raise SourceScreenError("complete screen omits scheduled tasks")
             count = len(observed)
         reader.funded = _owners(reader, record, count, controls, failed_index=failed_index)
+        invocation: dict[Path, str] = {}
+        if original is not None:
+            for owner in reader.owners.values():
+                for name, digest in reader._bindings(owner).items():
+                    if invocation.setdefault(pipeline._absolute(name), digest) != digest:
+                        raise SourceScreenError("active screen has conflicting invocation pins")
         config = _object(reader.funded["config"])
         trial_fence.require_purpose(
             authorization,
@@ -552,7 +657,14 @@ def _collect_source_screen(
         for index, task in enumerate(tasks.tasks[:count]):
             location = directory / "tasks" / str(index)
             if index == failed_index:
+                if original is not None:
+                    if (location / "evaluation").relative_to(directory).as_posix() in (
+                        reader.capture.entries
+                    ):
+                        raise SourceScreenError("failed candidate has an evaluation path")
                 failure = _failed_source(reader, screen, index, runtime_sha256, current)
+                if original is not None:
+                    _active_task(reader, screen, index, runtime_sha256, None)
                 if any(
                     name.startswith(
                         (location / "evaluation").relative_to(directory).as_posix() + "/"
@@ -579,12 +691,18 @@ def _collect_source_screen(
                 }
                 if actual != names:
                     raise SourceScreenError("screen contains missing or orphan completion seals")
+            if remaining is not None and record["format"] != "buddha.source-screen.v2":
+                accepted_child(location / "generation/report.json")
+            if remaining is not None:
+                accepted_child(location / "evaluation/report.json")
             source, reference, source_digest = _source(
                 reader, screen, tasks.select([task.id]), location, runtime_sha256, current
             )
             available, summary, evaluation_digest = _native(
                 reader, record, source, reference, location, current
             )
+            if original is not None:
+                _active_task(reader, screen, index, runtime_sha256, reference)
             projected: dict[str, object] = {
                 "task_id": task.id,
                 "distinct": None,
@@ -686,15 +804,24 @@ def _collect_source_screen(
                     else "checked candidate execution failure; no complete screen or numeric score",
                 }
             )
-        if expected_report_sha256 is not None:
+        if remaining:
+            raise SourceScreenError("screen omits an accepted child publication")
+        if expected_report_sha256 is not None or (
+            original is not None and "report.json" in reader.capture.entries
+        ):
             result, _ = _publication(
                 reader,
                 directory / "report.json",
                 result,
                 current,
                 {owner.run_id for owner in reader.owners.values()},
-                _digest(expected_report_sha256),
+                expected_report_sha256,
             )
+        if invocation and any(
+            path in invocation and invocation[path] != digest
+            for path, (_, digest) in reader.capture._receipts.items()
+        ):
+            raise SourceScreenError("active invocation pin differs from the consumed evidence")
         if len(_json(result)) > MAX_JSON_BYTES:
             raise SourceScreenError("screen report exceeds its bounded output ceiling")
         completed = _CompletedScreenRead(

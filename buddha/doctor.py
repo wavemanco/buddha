@@ -16,7 +16,7 @@ from contextlib import contextmanager
 from contextvars import ContextVar
 from dataclasses import dataclass
 from pathlib import Path
-from typing import cast
+from typing import TYPE_CHECKING, cast
 
 from buddha.authorization import _signature as _legacy_signature
 from buddha.common import ValidationError, _canonical, _hex, _object, _parse, _text
@@ -89,7 +89,7 @@ class _TreeChanged(_Busy):
     ) -> None:
         super().__init__(message)
         counts = dict.fromkeys(("added", "removed", "changed"), 0)
-        entries = []
+        entries: list[dict[str, object]] = []
         for name in sorted(before.keys() | after.keys()):
             old, new = before.get(name), after.get(name)
             if old == new:
@@ -134,7 +134,11 @@ def _json(raw: bytes, *, checksum: bool = False) -> dict[str, object]:
 
 
 def _entries(
-    root: Path, *, maximum: int | None = None, directories: set[str] | None = None
+    root: Path,
+    *,
+    maximum: int | None = None,
+    directories: set[str] | None = None,
+    directory_identity: bool = False,
 ) -> dict[str, tuple[int, int, int, int, int]]:
     """Inspect bounded local metadata; never traverse a link or recorded path."""
     if maximum is not None and (type(maximum) is not int or not 1 <= maximum <= 100_000):
@@ -144,10 +148,19 @@ def _entries(
     if not root.is_dir():
         raise ValidationError("observation requires a local directory")
     pending, files = [root], []
+    spellings: set[str] = set()
     result: dict[str, tuple[int, int, int, int, int]] = {}
     while pending:
         parent = pending.pop()
         _plain(parent)
+        if directory_identity and parent != root:
+            expected = result[parent.relative_to(root).as_posix()]
+            information = parent.lstat()
+            if (
+                not stat.S_ISDIR(information.st_mode)
+                or (information.st_dev, information.st_ino) != expected[:2]
+            ):
+                raise _Busy("observed directory changed during inventory")
         with os.scandir(parent) as children:
             for entry in children:
                 if len(result) >= maximum:
@@ -156,17 +169,79 @@ def _entries(
                 information = path.lstat()
                 name = path.relative_to(root).as_posix()
                 _path(name)
-                if stat.S_ISDIR(information.st_mode):
+                is_directory = stat.S_ISDIR(information.st_mode)
+                if is_directory:
                     if directories is not None:
                         directories.add(name)
                     pending.append(path)
                 else:
                     _regular(path)
                     files.append(name)
-                result[name] = _signature(information)
+                if directory_identity:
+                    spelling = name.casefold()
+                    if spelling in spellings:
+                        raise ValidationError("observed tree contains aliased entry names")
+                    spellings.add(spelling)
+                result[name] = (
+                    (information.st_dev, information.st_ino, -1, 0, 0)
+                    if directory_identity and is_directory
+                    else _signature(information)
+                )
     if files:
         _paths(files)
     return result
+
+
+if TYPE_CHECKING:
+    from buddha.trial_fence import _Held
+
+
+_ACTIVE_TREE: ContextVar["_Held | None"] = ContextVar("active_evidence_tree", default=None)
+
+
+@contextmanager
+def _active_tree(directory: Path) -> Iterator[bool]:
+    """Use directory identity for fresh reads under the original scoped writer."""
+    from buddha import launch_common, trial_fence
+
+    held = trial_fence._HELD.get()
+    if held is None or launch_common._PHASE_CONTINUATION.get() is not None:
+        yield False
+        return
+    trial_fence._assert_held(held.binding)
+    if not directory.is_relative_to(held.binding.root):
+        raise _Busy("active evidence is outside its held trial")
+    token = _ACTIVE_TREE.set(held)
+    try:
+        yield True
+    finally:
+        _ACTIVE_TREE.reset(token)
+
+
+def _directory_identity(root: Path) -> tuple[int, int]:
+    _plain(root)
+    information = root.lstat()
+    if not stat.S_ISDIR(information.st_mode):
+        raise _Busy("observed root is not its original directory")
+    return information.st_dev, information.st_ino
+
+
+def _same_active_entries(
+    before: Mapping[str, tuple[int, int, int, int, int]],
+    after: Mapping[str, tuple[int, int, int, int, int]],
+) -> bool:
+    if before.keys() != after.keys():
+        return False
+    for name, signature in before.items():
+        if signature == after[name]:
+            continue
+        # Consumed bytes retain their own signatures. The census independently
+        # protects membership, kind, identity, and the writer/SQLite neighbors.
+        if signature[:3] != after[name][:3]:
+            return False
+        if name.casefold().endswith((".lock", ".sqlite3", "-journal", "-wal", "-shm")):
+            return False
+    return True
 
 
 _OBSERVATION_LIMIT: ContextVar[tuple[int, int | None, int | None] | None] = ContextVar(
@@ -280,6 +355,7 @@ class _TreeObservation:
             capture._maximum,
             capture._maximum_entries,
             capture._maximum_paths,
+            capture._tree_roots.get(capture.root),
             context[0],
         )
         if key in self.roots:
@@ -301,8 +377,20 @@ class _TreeObservation:
             context = _tree_context(root)
             if context is None or context[0] != key[-1]:
                 raise _Busy("observed local tree or writer lease changed")
-            current = _entries(root) if maximum == MAX_FILES else _entries(root, maximum=maximum)
-            if current != entries:
+            identity = key[-2]
+            if identity is None:
+                current = (
+                    _entries(root) if maximum == MAX_FILES else _entries(root, maximum=maximum)
+                )
+            else:
+                if _directory_identity(root) != identity:
+                    raise _Busy("observed directory root changed")
+                current = _entries(root, maximum=maximum, directory_identity=True)
+                if _directory_identity(root) != identity:
+                    raise _Busy("observed directory root changed during inventory")
+            if current != entries and (
+                identity is None or not _same_active_entries(entries, current)
+            ):
                 raise _TreeChanged("observed local tree changed", entries, current)
 
 
@@ -363,6 +451,14 @@ class _Capture:
     def __init__(self, root: Path, *, allow_timestamp_drift: bool = False) -> None:
         self.root = root
         self._maximum, self._maximum_entries, self._maximum_paths = _observation_limits()
+        active = _ACTIVE_TREE.get()
+        self._directory_identity = (
+            not allow_timestamp_drift
+            and active is not None
+            and root.is_relative_to(active.binding.root)
+        )
+        self._writer = active if self._directory_identity else None
+        self._tree_roots = {root: _directory_identity(root)} if self._directory_identity else {}
         observation = _PASSIVE_TREES.get()
         self._directories: set[str] | None = set() if allow_timestamp_drift else None
         if self._directories is not None:
@@ -372,6 +468,7 @@ class _Capture:
                 self._tree_entries() if observation is None else observation.entries(self)
             )
         self._receipts: dict[Path, tuple[int, str]] = {}
+        self._file_signatures: dict[Path, tuple[int, int, int, int, int]] = {}
         self._watched_trees: dict[Path, dict[str, tuple[int, int, int, int, int]]] = {}
         self.raw: Mapping[Path, bytes] = _CapturedBytes(self)
         self.total = 0
@@ -381,6 +478,14 @@ class _Capture:
         self, root: Path | None = None, *, directories: set[str] | None = None
     ) -> dict[str, tuple[int, int, int, int, int]]:
         root = self.root if root is None else root
+        if self._directory_identity:
+            identity = _directory_identity(root)
+            if self._tree_roots.get(root, identity) != identity:
+                raise _Busy("observed directory root changed")
+            entries = _entries(root, maximum=self._maximum_entries, directory_identity=True)
+            if _directory_identity(root) != identity:
+                raise _Busy("observed directory root changed during inventory")
+            return entries
         if directories is not None:
             return _entries(root, maximum=self._maximum_entries, directories=directories)
         if self._maximum_entries == MAX_FILES:
@@ -389,18 +494,36 @@ class _Capture:
 
     def watch_tree(self, root: Path) -> dict[str, tuple[int, int, int, int, int]]:
         """Keep a selected external directory's census within this observation."""
+        identity = _directory_identity(root) if self._directory_identity else None
         entries = self._tree_entries(root)
         if root in self._watched_trees and self._watched_trees[root] != entries:
             raise _TreeChanged(
                 "observed external tree changed", self._watched_trees[root], entries, external=True
             )
         trees = self._watched_trees | {root: entries}
-        if len(self.entries) + sum(map(len, trees.values())) > self._maximum_entries:
+        if (
+            self._directory_identity
+            and len(trees) > self._maximum_entries
+            or len(self.entries) + sum(map(len, trees.values())) > self._maximum_entries
+        ):
             raise EvidencePathLimitError("observed tree entry ceiling exceeded")
+        if identity is not None:
+            if _directory_identity(root) != identity:
+                raise _Busy("observed directory root changed during inventory")
+            self._tree_roots[root] = identity
         self._watched_trees = trees
         return dict(entries)
 
     def read(self, path: Path, maximum: int = MAX_MANIFEST_BYTES) -> bytes:
+        signature = None
+        if self._directory_identity:
+            signature = _signature(path.lstat())
+            if self._file_signatures.get(path, signature) != signature:
+                raise _Busy("consumed input identity or metadata changed")
+            if path.is_relative_to(self.root):
+                opening = self.entries.get(path.relative_to(self.root).as_posix())
+                if opening is not None and opening != signature:
+                    raise _Busy("consumed input changed since the opening inventory")
         if path in self._receipts:
             size, digest = self._receipts[path]
             if size > maximum:
@@ -408,12 +531,17 @@ class _Capture:
             raw = _read(path, size)
             if len(raw) != size or _sha(raw) != digest:
                 raise _Busy("consumed input changed")
-            return raw
-        if len(self._receipts) >= self._maximum_paths:
-            raise EvidencePathLimitError("consumed evidence path ceiling exceeded")
-        raw = _total_read(path, maximum, self._maximum - self.total, read=_read)
-        self.total += len(raw)
-        self._receipts[path] = (len(raw), _sha(raw))
+        else:
+            if len(self._receipts) >= self._maximum_paths:
+                raise EvidencePathLimitError("consumed evidence path ceiling exceeded")
+            raw = _total_read(path, maximum, self._maximum - self.total, read=_read)
+        if signature is not None:
+            if _signature(path.lstat()) != signature:
+                raise _Busy("consumed input changed during its read")
+            self._file_signatures[path] = signature
+        if path not in self._receipts:
+            self.total += len(raw)
+            self._receipts[path] = (len(raw), _sha(raw))
         return raw
 
     def sidecars(self, path: Path) -> None:
@@ -425,6 +553,8 @@ class _Capture:
                 continue
             if information.st_size:
                 raise _Busy("SQLite sidecar prevents a stable observation")
+            if self._directory_identity and path in self.databases and sidecar not in self.raw:
+                raise _Busy("SQLite sidecar appeared during observation")
             self.read(sidecar, 0)
 
     def database(self, path: Path) -> bytes:
@@ -484,9 +614,17 @@ class _Capture:
             self.raw[path]
         for path in self.databases:
             self.sidecars(path)
+        for root, entries in self._watched_trees.items():
+            current = self._tree_entries(root)
+            if current != entries:
+                raise _TreeChanged(
+                    "observed external tree changed", entries, current, external=True
+                )
         if self._directories is None:
             current = self._tree_entries()
-            if current != self.entries:
+            if current != self.entries and (
+                not self._directory_identity or not _same_active_entries(self.entries, current)
+            ):
                 raise _TreeChanged("observed local tree changed", self.entries, current)
         else:
             directories: set[str] = set()
@@ -496,12 +634,21 @@ class _Capture:
             if current != self.entries:
                 self._recheck_timestamps(current, directories)
                 self.entries = current
-        for root, entries in self._watched_trees.items():
-            current = self._tree_entries(root)
-            if current != entries:
-                raise _TreeChanged(
-                    "observed external tree changed", entries, current, external=True
-                )
+        for root, identity in self._tree_roots.items():
+            if _directory_identity(root) != identity:
+                raise _Busy("observed directory root changed")
+        for path, signature in self._file_signatures.items():
+            if _signature(_regular(path)) != signature:
+                raise _Busy("consumed input changed after its final read")
+        if self._directory_identity:
+            for path in self.databases:
+                self.sidecars(path)
+        if self._writer is not None:
+            from buddha import trial_fence
+
+            if trial_fence._HELD.get() is not self._writer:
+                raise _Busy("original evidence writer lease changed")
+            trial_fence._assert_held(self._writer.binding)
         return {
             path.relative_to(self.root).as_posix()
             if path.is_relative_to(self.root)
@@ -555,9 +702,23 @@ class _Capture:
                     "observed external tree changed", trees[root], entries, external=True
                 )
             trees[root] = entries
-        if len(self.entries) + sum(map(len, trees.values())) > self._maximum_entries:
+        roots = dict(self._tree_roots)
+        for root, identity in source._tree_roots.items():
+            if roots.setdefault(root, identity) != identity:
+                raise _Busy("observed directory root changed")
+        signatures = dict(self._file_signatures)
+        for path, signature in source._file_signatures.items():
+            if signatures.setdefault(path, signature) != signature:
+                raise _Busy("consumed input identity or metadata changed")
+        if (
+            self._directory_identity
+            and len(roots) > self._maximum_entries
+            or len(self.entries) + sum(map(len, trees.values())) > self._maximum_entries
+        ):
             raise EvidencePathLimitError("observed tree entry ceiling exceeded")
         self._watched_trees = trees
+        self._tree_roots = roots
+        self._file_signatures = signatures
         self._receipts, self.total, self.databases = (
             receipts,
             total,

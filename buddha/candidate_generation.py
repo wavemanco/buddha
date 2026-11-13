@@ -915,6 +915,7 @@ def _read_evidence(
     *,
     capture: _Capture | None = None,
     quota_attempt: Path | None = None,
+    defer_finish: bool = False,
 ) -> dict[str, object]:
     """Read a sealed outcome or a retained quota attempt without a Gateway."""
     reference = _object(
@@ -1172,7 +1173,11 @@ def _read_evidence(
         if checked_answers is None:
             raise CandidateGenerationError("generated source has no checked C1")
         answers = checked_answers.checked(answers_path, capture.read(answers_path))
-    fingerprints = capture.fingerprints()
+    fingerprints = (
+        {str(path): digest for path, (_, digest) in capture._receipts.items()}
+        if defer_finish
+        else capture.fingerprints()
+    )
     return {
         "tasks": tasks,
         "answers": answers,
@@ -1309,7 +1314,11 @@ def read_candidate_generation_source(
 
 @_checked
 def _read_published_evidence(
-    directory: Path, *, authorization: Path, expected_report_sha256: str
+    directory: Path,
+    *,
+    authorization: Path,
+    expected_report_sha256: str,
+    defer_finish: bool = False,
 ) -> tuple[dict[str, object], dict[str, object]]:
     """Check one published v2 outcome and retain the complete original observation."""
     from buddha.native_evidence import authority_observation
@@ -1321,6 +1330,8 @@ def _read_published_evidence(
         pipeline._absolute(str(authorization)),
     )
     capture = _Capture(directory)
+    if defer_finish and not capture._directory_identity:
+        raise CandidateGenerationError("deferred publication check needs its scoped writer")
     raw = capture.read(directory / "report.json")
     if hashlib.sha256(raw).hexdigest() != _digest(expected_report_sha256):
         raise CandidateGenerationError("generation publication differs from caller approval")
@@ -1336,7 +1347,7 @@ def _read_published_evidence(
         "owner_manifest_sha256": observed.manifest_sha256,
         "owner_ledger_sha256": observed.ledger_sha256,
     }
-    evidence = _read_evidence(reference, authorization, capture=capture)
+    evidence = _read_evidence(reference, authorization, capture=capture, defer_finish=defer_finish)
     current = authority_observation(
         capture, authorization, cast(dict[str, object], evidence["funding"])
     )
@@ -1352,7 +1363,8 @@ def _read_published_evidence(
     )
     if raw != _json(saved) or _json(saved) != _json(reconstructed):
         raise CandidateGenerationError("generation publication differs from its sealed outcome")
-    capture.finish()
+    if not defer_finish:
+        capture.finish()
     return saved, evidence
 
 
