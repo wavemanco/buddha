@@ -53,6 +53,7 @@ CONTRACT_TESTS = (
     "test_inspect_study",
     "test_ledger",
     "test_native_evaluation.NativeEvaluationTests.test_deep_evaluation_uses_private_shallow_native_mounts",
+    "test_native_evaluation.NativeEvaluationTests.test_received_utility_error_preserves_hold_then_reuses_reconciled_reply",
     "test_native_evidence",
     "test_native_pipeline",
     "test_native_run.NativeSessionTests.test_connection_error_family_survives_saved_unknown_report_without_private_text",
