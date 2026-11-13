@@ -574,6 +574,39 @@ class SourceScreenTests(unittest.TestCase):
         self.assertEqual(self.engine.physical_sends, 4)
         self.assertFalse((directory / "report.json").exists())
 
+    def test_publication_tree_mismatch_keeps_the_changed_field_in_the_stop_diagnostic(self):
+        from buddha import doctor, launch_common
+
+        directory, authority = self.prepare(self.screen())
+        original_finish = doctor._Capture.finish
+        changed = directory / "tasks/0/evaluation"
+
+        def touch_before_finish(capture):
+            if (
+                capture.root == directory
+                and (directory / "tasks/1/evaluation/report.json").is_file()
+            ):
+                info = changed.stat()
+                os.utime(changed, ns=(info.st_atime_ns, info.st_mtime_ns - 2_000_000_000))
+            return original_finish(capture)
+
+        with (
+            patch.object(doctor._Capture, "finish", touch_before_finish),
+            self.assertRaises(self.Error) as stopped,
+        ):
+            self.run_screen(directory)
+        diagnostic = launch_common._stop_diagnostic(stopped.exception)
+        difference = next(
+            node["tree_difference"] for node in diagnostic["chain"] if "tree_difference" in node
+        )
+        self.assertEqual(difference["counts"], {"added": 0, "removed": 0, "changed": 1})
+        entry = difference["entries"][0]
+        self.assertEqual(entry["entry"], "tasks/0/evaluation")
+        self.assertIn("mtime_ns", entry["fields"])
+        self.assertEqual(self.engine.physical_sends, 4)
+        self.assertEqual(authority.summary()["operation_count"], 4)
+        self.assertFalse((directory / "report.json").exists())
+
     def test_returned_child_matches_typed_saved_report_before_next_paid_stage(self):
         from buddha import candidate_generation
 
