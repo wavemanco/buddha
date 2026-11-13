@@ -28,33 +28,35 @@ records across the shared ledger and 199 original owners. It verified the
 stopped task's generation and partition seals and found one unresolved
 utility request. The 637 settled calls and $11.44 hold stay in place.
 
-Ask Anthropic for the billing disposition and, if available, the original
-usable result and usage for that exact request. The next step depends on the
-reply.
+Prepare for the original request having been charged with no available
+result. This is a planning assumption. Recorded spending stays $5.600044
+and the full $11.44 hold remains committed. The $40 development grant
+has $22.959956 and 3,458 attempts left. Reserving $11.44 for one replacement
+would leave $11.519956 and 3,457 attempts there, and $2.12 in the original
+utility owner's $25 budget while both holds are outstanding. Later requests
+still have to fit their original limits.
 
-- **Usable original result and usage.** Verify the request identity,
-  model, usage and original price before proposing settlement. Use the
-  existing ledger transition to preserve the 503 and settle the exact
-  operation once. Check the normal launcher with provider access blocked
-  through the next study action before releasing a live command. In the
-  synthetic OpenAI utility fixture, a supplied matching result let the
-  same utility owner and summary finish without another provider request.
-- **Billing disposition only.** There is still no score to reuse. A
-  replacement needs an explicit reconciliation and a separately recorded
-  attempt under the original judge settings and cap. The current V5
-  continuation does not support this case. Keep the hold and saved work
-  while that decision is pending.
-- **No reliable disposition.** Keep the hold. The study stays paused at
-  the same request.
+A short check fed the saved 503 to Anthropic SDK 1.4.0 through Buddha's
+native transport with network access blocked. The SDK produced attempt 1
+under the same logical call, with the original body and retry header
+incremented. The Windows probe differed from the saved worker in two
+platform headers. A separate read-only check matched the original request
+to its saved receipt and verified that attempt 1 with the original worker
+headers passes the same profile and reservation checks. A second judge
+callback could arrive before attempt 1, so recovery must match the logical
+call and protect its reservation independently of arrival order.
 
-For future runs, use the normal launcher as the single point of resume.
-It already locates the next unfinished work and can reuse matching
-settled replies and completed stages. A future change should add automatic
-recovery only for an exact, provably unsent request or a durable successful
-reply whose identity and usage can be verified. Prove no duplicate charge
-and no advance past an unfinished request. A received 503 without usage
-still needs provider reconciliation. The offline test uses simulated
-responses and leaves the V5 files untouched.
+Use the [proposed shared recovery rule](RECOVERY-CONTRACT.md#proposed-recovery-with-a-retained-provider-hold)
+through the normal launcher. It would keep the original owner, send at
+most one separately accounted replacement after explicit approval, and
+then replay its saved result. The frozen V5 launcher blocks this today.
+The next offline proof must reach the following study action and the
+final-assessment funding check with the original hold still counted.
+
+If an authentic original result and usage later become available, the
+existing ledger transition is the smaller route. In a synthetic OpenAI
+utility fixture, a supplied matching result let the same owner finish
+without another send. Neither offline check establishes live V5 resume.
 
 ## V5 fresh comparison
 
