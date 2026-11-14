@@ -487,3 +487,100 @@ retained. No new platform, broad state-machine rewrite or performance benefit is
 established here. The [living plan](PLAN.md) owns the next bounded slice and the
 unchanged scientific comparison; the [history observation](conformance/current-history-observation.json)
 records the consumed three-hour construction partial.
+
+## November 14 follow-up: OpenResearch as an experiment host
+
+Source review of alphaXiv OpenResearch [v0.2.27](https://github.com/alphaXiv/OpenResearch/releases/tag/v0.2.27),
+commit `9a2949cfe2b7e9336169fcf6ab0c1ba6d4bc24a3`, under the
+[MIT license](https://github.com/alphaXiv/OpenResearch/blob/9a2949cfe2b7e9336169fcf6ab0c1ba6d4bc24a3/LICENSE).
+The operator reported that the V5 resume reached startup checking. This review
+used upstream documentation and source. It made no changes to V5 and exercised
+neither the released Windows binary nor subscription authentication.
+
+**Best place to try it.** OpenResearch can give a future Buddha run a named
+experiment with a committed source archive, a recorded launch command, a
+run status, and retained logs and artifacts. This could replace manual
+PowerShell output collection and the separate experiment log view.
+Inspect's proven role is narrower, inside an evaluation, where its logs and
+retry can identify completed samples. If OpenResearch takes over the host
+dashboard, keep one progress display for the operator and use Inspect for
+sample evidence where it removes work.
+[Experiment workflow](https://openresearch.sh/docs/experiments),
+[source archive](https://github.com/alphaXiv/OpenResearch/blob/9a2949cfe2b7e9336169fcf6ab0c1ba6d4bc24a3/src/compute.rs#L33-L120),
+[Buddha's Inspect proof](INSPECT-OBSERVABILITY-PROOF.md).
+
+**Recovery on Windows.** The local backend uses Git Bash, captures stdout and
+stderr and records the exit code. Its Windows Job Object lets it manage the
+launched processes. After the supervisor restarts, it can reconcile a surviving
+process or read a saved exit code. If Buddha itself exits after a provider
+request, safe continuation still depends on Buddha's saved results, operation
+IDs and accounting. OpenResearch displays stages and causes that the process
+emits. Buddha still needs to supply the exact stage and reason, and its history
+reader still does its own verification. The Git archive covers committed
+source. Python, installed dependencies, Docker images, official evaluator
+assets, task IDs and saved state still need the existing run bindings.
+[Windows launch](https://github.com/alphaXiv/OpenResearch/blob/9a2949cfe2b7e9336169fcf6ab0c1ba6d4bc24a3/src/engine/adapters/local.rs#L294-L341),
+[process ownership](https://github.com/alphaXiv/OpenResearch/blob/9a2949cfe2b7e9336169fcf6ab0c1ba6d4bc24a3/src/jobs/localbox/windows.rs#L33-L61),
+[restart reconciliation](https://github.com/alphaXiv/OpenResearch/blob/9a2949cfe2b7e9336169fcf6ab0c1ba6d4bc24a3/src/engine/submit.rs#L147-L247).
+
+The Windows experiment runner is beta and its stdin pipe opens the launch gate.
+The existing interactive PowerShell key prompt therefore needs a different
+launch path. The local backend also rejects the platform's experiment timeout
+flag. A paid host change would need a verified credential path and existing
+Buddha deadlines. Keep credentials out of run commands, archived files and
+logs. A worktree alone gives source isolation. Keep sealed task inputs and
+keys outside any delegated agent's accessible data. For a local fixture pilot,
+use local compute and turn off optional telemetry.
+[Windows requirements](https://openresearch.sh/docs/install),
+[local timeout handling](https://github.com/alphaXiv/OpenResearch/blob/9a2949cfe2b7e9336169fcf6ab0c1ba6d4bc24a3/src/compute.rs#L652-L664),
+[telemetry settings](https://openresearch.sh/docs/install).
+
+**Bring Your Own Subscription.** OpenResearch starts an installed coding
+agent using its configured subscription or API authentication. Its delegation
+tool accepts a versioned model, a specific route and an effort value from that
+route's catalog. Pin all three for an experiment. Omitting the route allows
+OpenResearch to choose its preferred one. Verify the actual login and available
+efforts on the target machine before use. For example, Claude Code can use an
+API credential from the environment. Record the selected route, requested and reported model IDs, effort, agent
+version and observed billing mode. The catalog can group aliases and a native
+agent can report an in-session model change. A verified
+subscription route can avoid separately billed Buddha API requests for that
+role while consuming provider plan capacity or usage credits if enabled.
+Managed compute has its own billing. [Agent authentication](https://openresearch.sh/docs/agents),
+[delegation tool](https://github.com/alphaXiv/OpenResearch/blob/9a2949cfe2b7e9336169fcf6ab0c1ba6d4bc24a3/src/commands/up/agent_tools.rs#L85-L106),
+[route selection](https://github.com/alphaXiv/OpenResearch/blob/9a2949cfe2b7e9336169fcf6ab0c1ba6d4bc24a3/src/local/model_routes.rs#L619-L647),
+[reported Codex routes](https://github.com/alphaXiv/OpenResearch/blob/9a2949cfe2b7e9336169fcf6ab0c1ba6d4bc24a3/src/local/harness/codex.rs#L85-L155),
+[Codex plan usage](https://help.openai.com/en/articles/11369540-using-codex-with-your-chatgpt-plan),
+[Claude plan usage](https://support.claude.com/en/articles/15036540-use-the-claude-agent-sdk-with-your-claude-plan),
+[compute billing](https://openresearch.sh/docs/billing).
+
+The first model role to consider is native review. The frozen protocol already
+specifies fresh Codex reviewers separately from paid scoring. A later
+subscription-backed proposal author or candidate generator would be a new
+experimental condition. A coding agent can add instructions, tools and history
+to a request. If testing it for answer generation, use a matched control and
+verify the output allowance and reproducibility before making a leaderboard
+claim. Direct delegation is an agent tool in this release. A supported batch
+interface for calls from Buddha's Python runner has not been verified.
+Official NoveltyBench 1.1 currently uses the pinned OpenAI Luna
+partition request and Anthropic Opus utility request. The coding-agent routes
+have no demonstrated equivalence to those requests. Keep the official
+evaluator and budget ledger in charge of official scoring. V5 continues under
+its existing protocol.
+[Buddha's frozen settings](D8-LIVE-COMPARISON.md#model-requests-checked-against-current-official-code),
+[official scoring workflow](https://github.com/novelty-bench/novelty-bench/blob/64a23be6b18ec1dacc298830aab276061b6e143c/README.md#basic-workflow),
+[submission rules](https://novelty-bench.github.io/submit.html).
+
+**Smallest useful check.** Run the existing offline Buddha demo in a disposable
+Windows OpenResearch experiment with providers blocked. Check that the run
+shows the exact source and command, preserves the saved report and the original
+12 simulated operations on reuse, and shows the structured error and failed
+exit code from a deliberately invalid inspection. Require that the experiment
+view directly replaces manual log collection. This establishes host visibility
+on a real Buddha command. Claim reattachment or cancellation only after
+observing it with a disposable process, and study resume only after testing
+interruption with identical completed work and accounting. No V5 input,
+subscription login, real container or paid request is needed for the first
+check. Both existing Buddha CLI checks passed locally in 0.291 seconds with
+socket connections blocked. This verifies the fixture before any OpenResearch
+run. [Existing offline CLI checks](../tests/test_cli.py#L489).
