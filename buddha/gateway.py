@@ -444,6 +444,9 @@ def _runtime() -> dict[str, str]:
 
 
 _ACCOUNT_REVIEW_V2 = "buddha.account-review.v2"
+_CONFIRMED_PROJECT_KEYS: ContextVar[dict[str, dict[str, str]] | None] = ContextVar(
+    "confirmed_project_keys", default=None
+)
 
 
 def _credential(provider: str) -> str:
@@ -477,6 +480,16 @@ def credential_fingerprints(
     if set(names) - {"openai", "anthropic"}:
         raise GatewayError("unsupported credential provider")
     return {name: _credential_fingerprint(name, _credential(name), context) for name in names}
+
+
+def _dispatch_fingerprints(review: Mapping[str, object]) -> dict[str, object]:
+    """Use session confirmation only for the original keyed launch contexts."""
+    if review.get("format") != _ACCOUNT_REVIEW_V2:
+        return _object(review["credential_sha256"])
+    confirmed = _CONFIRMED_PROJECT_KEYS.get()
+    if confirmed is not None and (context := _digest(review["credential_context"])) in confirmed:
+        return _object(confirmed[context])
+    return _object(review["credential_fingerprints"])
 
 
 def _review(value: object, *, fresh: bool = False) -> dict[str, object]:
@@ -1467,7 +1480,7 @@ class Gateway:
                 raise PendingOperation("attempt may already be billed; no automatic retry")
             review = _object(current["review"])
             keyed = review.get("format") == _ACCOUNT_REVIEW_V2
-            reviewed = _object(review["credential_fingerprints" if keyed else "credential_sha256"])
+            reviewed = _dispatch_fingerprints(review)
             args = (
                 operation_id,
                 replace(call, headers=headers),

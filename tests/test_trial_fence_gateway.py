@@ -48,9 +48,21 @@ class TrialFenceGatewayTests(unittest.TestCase):
         host.selection = prepare_selection(
             release, host.roots, capabilities={capability: "profiles/anthropic.json"}
         )
-        host.review |= {
-            "credential_sha256": {"anthropic": hashlib.sha256(key.encode()).hexdigest()}
-        }
+        success = outcome == "success"
+        context = "d" * 64
+        if success:
+            del host.review["credential_sha256"]
+            host.review.update(
+                format="buddha.account-review.v2",
+                credential_context=context,
+                credential_fingerprints={
+                    "anthropic": gateway._credential_fingerprint("anthropic", key, context)
+                },
+            )
+        else:
+            host.review["credential_sha256"] = {
+                "anthropic": hashlib.sha256(key.encode()).hexdigest()
+            }
         relative = "study/cells/0/0/0/0/screen/tasks/0/evaluation/owners/2"
         directory = fixture.root / "search" / relative
         directory.parent.mkdir(parents=True)
@@ -109,7 +121,6 @@ class TrialFenceGatewayTests(unittest.TestCase):
                     actual_microusd=0,
                     provider_request_id="unverified",
                 )
-            success = outcome == "success"
             response = Mock(status=200 if success else 503)
             response.getheaders.return_value = [("request-id", "replacement")]
             response.read.return_value = (
@@ -118,8 +129,37 @@ class TrialFenceGatewayTests(unittest.TestCase):
                 else b"service unavailable again"
             )
             connection = host.connection(response)
+            rotated = "anthropic-rotated-test-key-never-real" if success else key
+            if success:
+                with (
+                    patch.dict("os.environ", {"ANTHROPIC_API_KEY": rotated}, clear=True),
+                    patch("http.client.HTTPSConnection") as blocked,
+                    self.assertRaises(gateway.GatewayError),
+                ):
+                    owner._prepare_held_replacement(decision)
+                blocked.assert_not_called()
+                self.assertEqual(authority.summary(), reserved)
+            confirmed = {
+                context: {
+                    "anthropic": gateway._credential_fingerprint("anthropic", rotated, context)
+                }
+            }
+            if success:
+                token = gateway._CONFIRMED_PROJECT_KEYS.set(confirmed)
+                try:
+                    with (
+                        patch.dict("os.environ", {"ANTHROPIC_API_KEY": key}, clear=True),
+                        patch("http.client.HTTPSConnection") as blocked,
+                        self.assertRaises(gateway.GatewayError),
+                    ):
+                        owner._prepare_held_replacement(decision)
+                    blocked.assert_not_called()
+                    self.assertEqual(authority.summary(), reserved)
+                finally:
+                    gateway._CONFIRMED_PROJECT_KEYS.reset(token)
             with (
-                patch.dict("os.environ", {"ANTHROPIC_API_KEY": key}, clear=True),
+                patch.dict("os.environ", {"ANTHROPIC_API_KEY": rotated}, clear=True),
+                patch.object(gateway, "_CONFIRMED_PROJECT_KEYS") as session,
                 patch("http.client.HTTPSConnection", return_value=connection),
                 patch.object(
                     gateway,
@@ -128,6 +168,7 @@ class TrialFenceGatewayTests(unittest.TestCase):
                 ),
                 self.assertRaises(KeyboardInterrupt if success else ProviderUncertain),
             ):
+                session.get.return_value = confirmed
                 owner._prepare_held_replacement(decision)
             self.assertEqual(owner.ledger.get(decision.replacement_operation_id).status, "unknown")
             self.assertEqual(
@@ -146,6 +187,7 @@ class TrialFenceGatewayTests(unittest.TestCase):
                         owner.ledger.authorize_dispatch("unrelated")
                 send.assert_not_called()
             connection.request.assert_called_once()
+            self.assertEqual(connection.request.call_args.kwargs["headers"]["x-api-key"], rotated)
             self.assertEqual(owner.ledger.get(decision.original_operation_id), original)
             self.assertEqual(
                 authority.summary()["reserved_microusd"],
