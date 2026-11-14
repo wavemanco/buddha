@@ -23,10 +23,10 @@ later recording phase saved the incomplete observation.
 
 ### Resume V5
 
-The V5 command remains on hold. A read-only check matched all 638 operation
-records across the shared ledger and 199 original owners. It verified the
-stopped task's generation and partition seals and found one unresolved
-utility request. The 637 settled calls and $11.44 hold stay in place.
+The keyless check of the original V5 handoff passed. The live command below
+requires separate approval. A read-only check matched all 638 operation records
+across the shared ledger and 199 original owners. It verified the stopped task's
+generation and partition seals and found one unresolved utility request.
 
 Prepare for the original request having been charged with no available
 result. This is a planning assumption. Recorded spending stays $5.600044
@@ -101,13 +101,37 @@ external trees still have to match. The focused regression covers a
 directory size change, a changed file, a replaced directory, a new entry
 and a new sidecar.
 
-The corrected combined check at `a658960` reached its 15-minute limit
-without returning a readiness result. Both fast CI jobs passed at that
-commit. The check ran without keys or provider access and left the V5
-ledgers byte-for-byte intact, including 637 settled calls and the $11.44
-hold. Evidence is in `runs/checks/d8-v5-held-resume-preflight-20261113/`.
-V5 stays paused. Measure where the combined startup spends time before
-making another change or requesting another run.
+The first corrected check reached its 15-minute limit. The approved follow-up
+on the same `a658960` source finished in 16 minutes 57 seconds under its
+five-hour cap. The actual combined command returned exit code 0, `checked`,
+`primary`, and `stop_code: null`. Both fast CI jobs passed at that source.
+Reconstructing saved development took 16 minutes 19 seconds. Stage events and
+22 Python stack samples show repeated file reads and directory scans during
+feedback verification. The check used no keys or provider access. Before and
+after snapshots matched all V5 ledger hashes, including 637 settled calls,
+$5.600044 recorded spending and the $11.44 hold. Evidence is in
+`runs/checks/d8-v5-held-resume-preflight-20261113/observed/`.
+
+#### V5 resume command
+
+Run these lines in a new PowerShell window after live recovery is approved.
+The first clears inherited keys in that window so both masked prompts appear.
+The second checks the original V5 handoff and resumes the same study under its
+existing $150 combined cap and phase limits, including the retained $11.44
+hold. It can make paid requests. Use the same OpenAI and Anthropic project keys
+as V5. Startup checks run more than once and can take several minutes each.
+Keep the window open. To stop, press **Ctrl+C once** and wait for the final
+status. Keep any stop message and its closing JSON for review.
+
+```powershell
+Remove-Item -LiteralPath 'Env:\OPENAI_API_KEY', 'Env:\ANTHROPIC_API_KEY' -ErrorAction SilentlyContinue
+& 'C:\Program Files\Python313\python.exe' -B 'C:\Users\arvik\code\buddha\runs\r315c\docs\conformance\unified-run.py' `
+  --handoff 'C:\Users\arvik\code\buddha\runs\imp01-d8-fresh-20261112-v5-combined\NOT-CREATED-unified-launch.json' `
+  --sha256 '5a6ad73dd705b2d4114c4cf1faf1c074b16e37acdccb0918a39981bfb56da312' `
+  --resume-decision 'C:\Users\arvik\code\buddha\runs\checks\d8-v5-held-resume-preflight-20261113\fixed\resume-decision.json' `
+  --resume-sha256 '0b5b8557b0368ba4c03e247cf939bc729eddceb3a50d8a32185d1095e3b087fb' `
+  --live --prompt-keys --confirm-project-keys
+```
 
 If an authentic original result and usage later become available, the
 existing ledger transition is the smaller route. In a synthetic OpenAI
