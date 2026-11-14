@@ -266,6 +266,7 @@ def _held_recovery(path: Path, digest: str, handoff: Path, handoff_digest: str) 
         token = _HELD_RECOVERY.set(
             {
                 "primary": str(_path(primary_ref["path"])),
+                "trial": trial,
                 "owner": str(owner),
                 "run_id": _text(manifest["run_id"]),
                 "original_operation_id": _digest(record["operation_id"]),

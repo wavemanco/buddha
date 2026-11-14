@@ -463,17 +463,26 @@ class _Capture:
     """
 
     def __init__(self, root: Path, *, allow_timestamp_drift: bool = False) -> None:
+        from buddha import launch_common
+
         self.root = root
         self._maximum, self._maximum_entries, self._maximum_paths = _observation_limits()
         active = _ACTIVE_TREE.get()
-        self._directory_identity = (
-            not allow_timestamp_drift
-            and active is not None
+        recovery = launch_common._HELD_RECOVERY.get()
+        trial = None if recovery is None else recovery.get("trial")
+        held_recovery = isinstance(trial, Path) and root.is_relative_to(trial)
+        active_scope = (
+            active is not None
             and root.is_relative_to(active[0].binding.root)
             and (not active[1] or root == active[0].binding.root / "search/study")
         )
-        self._writer = active[0] if self._directory_identity and active is not None else None
-        self._directory_clocks_only = self._directory_identity and active is not None and active[1]
+        self._directory_identity = not allow_timestamp_drift and (held_recovery or active_scope)
+        self._writer = (
+            active[0] if self._directory_identity and active_scope and active is not None else None
+        )
+        self._directory_clocks_only = self._directory_identity and (
+            held_recovery or (active is not None and active[1])
+        )
         self._tree_roots = {root: _directory_identity(root)} if self._directory_identity else {}
         observation = _PASSIVE_TREES.get()
         self._directories: set[str] | None = set() if allow_timestamp_drift else None
