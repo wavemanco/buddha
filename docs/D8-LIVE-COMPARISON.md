@@ -91,6 +91,24 @@ still has 637 settled operations, $5.600044 recorded spending and $11.44 held.
 The rehearsal used its own ledgers. Actual V5 replay, the combined operator
 command and final scoring remain unverified by this rehearsal.
 
+The first keyless check of the original combined V5 handoff stopped during
+a nested development scan. The diagnostic recorded 50 entries with a
+different reported size and no added or removed entries. One visible entry
+was an evaluation directory. Held recovery now applies the existing
+directory identity check throughout the original trial, including startup
+and nested reads. File signatures, saved byte hashes, SQLite sidecars and
+external trees still have to match. The focused regression covers a
+directory size change, a changed file, a replaced directory, a new entry
+and a new sidecar.
+
+The corrected combined check at `a658960` reached its 15-minute limit
+without returning a readiness result. Both fast CI jobs passed at that
+commit. The check ran without keys or provider access and left the V5
+ledgers byte-for-byte intact, including 637 settled calls and the $11.44
+hold. Evidence is in `runs/checks/d8-v5-held-resume-preflight-20261113/`.
+V5 stays paused. Measure where the combined startup spends time before
+making another change or requesting another run.
+
 If an authentic original result and usage later become available, the
 existing ledger transition is the smaller route. In a synthetic OpenAI
 utility fixture, a supplied matching result let the same owner finish
