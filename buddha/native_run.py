@@ -13,6 +13,7 @@ from pathlib import Path, PurePosixPath
 from typing import Any, BinaryIO, cast
 
 from buddha import channel, executor
+from buddha.authorization import HeldReplacement
 from buddha.gateway import (
     CAPABILITIES,
     Gateway,
@@ -22,6 +23,7 @@ from buddha.gateway import (
     _read_manifest,
     execution_identity,
 )
+from buddha.held_recovery import UtilityReplay
 from buddha.ledger import BudgetExceeded, OperationConflict
 from buddha.native_transport import NativeRequest
 from buddha.provider import BoundBreach, PendingOperation, ProviderUncertain
@@ -77,7 +79,17 @@ def _decode(value: object, maximum: int) -> bytes:
 
 
 class NativeSession:
-    def __init__(self, gateway: Gateway, *, descriptor: Path, output: Path) -> None:
+    def __init__(
+        self,
+        gateway: Gateway,
+        *,
+        descriptor: Path,
+        output: Path,
+        held_replacement: HeldReplacement | None = None,
+        recovery_fallback: str | None = None,
+    ) -> None:
+        from buddha import launch_common
+
         if not isinstance(output, Path):
             raise NativeRunError("native output must be a Path")
         self.gateway = gateway
@@ -96,6 +108,9 @@ class NativeSession:
         self.calls = {"requested": 0, "completed": 0, "stopped": 0}
         self.aliases: list[object] = []
         self.ready_audit_sha256: str | None = None
+        self.held_replacement = held_replacement
+        self.recovery_fallback = recovery_fallback
+        self.recovery: UtilityReplay | None = None
         try:
             if not isinstance(gateway, Gateway) or not isinstance(descriptor, Path):
                 raise NativeRunError("invalid host native session")
@@ -122,8 +137,10 @@ class NativeSession:
                     module.__name__.split(".")[-1] + ".py"
                 ):
                     raise NativeRunError("native controller imports an unbound implementation")
-            for name in (*RUNNER_FILES, "executor", "native_run"):
-                bound(package / (name + ".py"))
+            for host_source in launch_common._bound_sources(
+                [package / (name + ".py") for name in (*RUNNER_FILES, "executor", "native_run")]
+            ):
+                bound(host_source)
             with descriptor.open("rb") as stream:
                 consumed = stream.read(MAX_JSON_BYTES + 1)
             if hashlib.sha256(consumed).hexdigest() != self.descriptor_sha256:
@@ -511,7 +528,9 @@ class NativeSession:
         )
         self.calls["requested"] += 1
         try:
-            envelope = self.gateway.execute(call)
+            envelope = (
+                self.gateway.execute(call) if self.recovery is None else self.recovery.reply(call)
+            )
         except (ProviderUncertain, PendingOperation) as error:
             self.stop_reason = "unknown"
             if type(error) is TransportUncertain:
@@ -620,6 +639,11 @@ class NativeSession:
                     raise NativeRunError("incomplete native publication")
                 if (
                     (status == "complete" and (reason != "complete" or self.stop_reason))
+                    or (
+                        status == "complete"
+                        and self.recovery is not None
+                        and not self.recovery.complete
+                    )
                     or (status == "stopped" and reason != self.stop_reason)
                     or reason
                     not in {
@@ -653,6 +677,13 @@ class NativeSession:
 
     def run(self) -> dict[str, object]:
         with self.gateway.work(directory=self.output, kind="native"):
+            if self.held_replacement is not None:
+                self._unchanged()
+                self.recovery = UtilityReplay(
+                    self.gateway,
+                    self.gateway._prepare_held_replacement(self.held_replacement),
+                    self.recovery_fallback,
+                )
             return self._run()
 
     def _run(self) -> dict[str, object]:
@@ -718,5 +749,12 @@ class NativeSession:
         }
         if self.provider_error_family is not None:
             report["provider_error_family"] = self.provider_error_family
+        if status == "complete" and self.recovery is not None:
+            decision = self.recovery.decision
+            report["held_replacement"] = {
+                "original_operation_id": decision.original_operation_id,
+                "replacement_operation_id": decision.replacement_operation_id,
+                "review_sha256": decision.review_sha256,
+            }
         self._evidence("report.json", report)
         return _load(_json(report))

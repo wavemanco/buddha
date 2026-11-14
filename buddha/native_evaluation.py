@@ -11,8 +11,8 @@ from functools import partial, wraps
 from pathlib import Path
 from typing import cast
 
+from buddha import held_recovery, native_run, trial_fence
 from buddha import native_pipeline as pipeline
-from buddha import native_run, trial_fence
 from buddha.answers import Answers, TaskSet, _utf8
 from buddha.authorization import Authorization
 from buddha.doctor import _authority, _Busy, _Capture, _owner
@@ -27,6 +27,7 @@ from buddha.gateway import (
 )
 from buddha.gateway_history import read_gateway_history
 from buddha.ledger import BudgetExceeded
+from buddha.provider import BoundBreach, PendingOperation, ProviderUncertain
 from buddha.releases import (
     Release,
     ReleaseError,
@@ -397,6 +398,8 @@ def _owner_stage(
     control_inputs: Sequence[Path] = (),
     control_hashes: dict[str, object] | None = None,
 ) -> tuple[Path, Path]:
+    from buddha import launch_common
+
     descriptor, inputs = pipeline._native_descriptor(
         directory,
         index,
@@ -418,7 +421,7 @@ def _owner_stage(
         *seals,
         *available.values(),
         *inputs,
-        *_sources(),
+        *launch_common._bound_sources(_sources()),
         *control_inputs,
     ]
     if index > 1:
@@ -587,10 +590,24 @@ def _partial(
 
 
 def _session(
-    gateway: Gateway, descriptor: Path, started: list[Path], attempt: Path
+    gateway: Gateway,
+    descriptor: Path,
+    started: list[Path],
+    attempt: Path,
+    *,
+    recovery_fallback: Callable[[], str | None],
 ) -> dict[str, object]:
+    recovery = gateway.ledger.held_replacement()
+    if recovery is not None and gateway.directory != attempt.parent.parent / "owners/2":
+        raise EvaluationError("held replacement does not belong to this utility stage")
     started.append(attempt)
-    return native_run.NativeSession(gateway, descriptor=descriptor, output=attempt).run()
+    return native_run.NativeSession(
+        gateway,
+        descriptor=descriptor,
+        output=attempt,
+        held_replacement=recovery,
+        recovery_fallback=recovery_fallback() if recovery is not None else None,
+    ).run()
 
 
 @_checked
@@ -616,6 +633,8 @@ def run_evaluation(directory: Path, *, transport: RawHTTPTransport) -> dict[str,
 
 
 def _run(directory: Path, transport: RawHTTPTransport) -> dict[str, object]:
+    from buddha import launch_common
+
     first = Gateway(directory / "owners/1", transport=transport)
     initial = _read_manifest(first.directory)
     bound = {
@@ -631,7 +650,7 @@ def _run(directory: Path, transport: RawHTTPTransport) -> dict[str, object]:
     path = pipeline._absolute(context["descriptor"])
     authority = Authorization(pipeline._absolute(initial["authorization_path"]))
     definition, source, release = _definition(path, authority, bound[str(path)])
-    for item in _sources():
+    for item in launch_common._bound_sources(_sources()):
         if file_hash(item) != bound.get(str(item)):
             raise EvaluationError("native evaluation source is not frozen")
     native_answers = directory / "native-answers.jsonl"
@@ -650,6 +669,18 @@ def _run(directory: Path, transport: RawHTTPTransport) -> dict[str, object]:
         or not {name.removesuffix(".json") for name in completed} <= owners
     ):
         raise EvaluationError("native occasion has foreign, aliased or orphan stage records")
+
+    def recovery_fallback() -> str | None:
+        partition = available[
+            cast(list[str], _object(release.to_record()["artifacts"])["results"])[0]
+        ]
+        return held_recovery.fallback_model(
+            release,
+            cast(list[dict[str, object]], stages),
+            source.tasks,
+            pipeline._read(partition, frozen[partition]),
+        )
+
     for index in range(1, len(stages) + 1):
         execution_identity(first.directory)
         _definition(path, authority, bound[str(path)])
@@ -682,7 +713,9 @@ def _run(directory: Path, transport: RawHTTPTransport) -> dict[str, object]:
                 index,
                 gateway,
                 authority,
-                run=partial(_session, gateway, descriptor, started),
+                run=partial(
+                    _session, gateway, descriptor, started, recovery_fallback=recovery_fallback
+                ),
                 validate=partial(
                     pipeline.native_outputs, index=index, definition=definition, tasks=source.tasks
                 ),
@@ -699,8 +732,14 @@ def _run(directory: Path, transport: RawHTTPTransport) -> dict[str, object]:
                 started[-1] if started else None,
             )
             raise
-        except BudgetExceeded:
-            return _partial(directory, index, reports, authority, "authority")
+        except (BudgetExceeded, BoundBreach):
+            return _partial(
+                directory, index, reports, authority, "authority", started[-1] if started else None
+            )
+        except (PendingOperation, ProviderUncertain):
+            return _partial(
+                directory, index, reports, authority, "unknown", started[-1] if started else None
+            )
         except (ValueError, TypeError, KeyError, OSError, RecursionError):
             if started and started[-1].is_dir():
                 _partial(directory, index, reports, authority, "protocol", started[-1])

@@ -48,14 +48,14 @@ Old v1 manifests keep their original runtime guards. They must not be hash-bypas
 
 The continuation is a new explicitly versioned protocol: same source prompt, policy space, original proposer/judge templates, model access, limits and search rules; declared new accounting/runtime and inheritance metadata. Protocol fingerprints therefore change honestly. Those fingerprints appear in proposer feedback, so byte-identical future proposal payloads are not promised merely by matching settings. Verify scientific request bodies and archive rules against the archived constructors, and disclose any metadata-only difference. Do not claim that new host code is the old implementation.
 
-## Proposed recovery with a retained provider hold
+## Recovery with a retained provider hold
 
 For a complete retryable provider error with no usable result or
-authoritative charge, propose a reviewed replacement under the original
-owner and grant. Adoption would update DESIGN §5 and §9. It must specify
-the evidence that the original maximum still bounds the first call,
-require the current account and tier review, and approve the exact
-replacement. The full first reservation remains committed and its original
+authoritative charge, the development utility route supports one reviewed
+replacement per original search grant. It covers complete Anthropic 503
+receipts at SDK attempt 0. The original request must match its reviewed
+profile and reserve. A current account and tier review applies to new
+spending. The full first reservation remains committed and its original
 receipt, status and attempt count stay intact. A planning assumption does
 not enter the ledger as a settled charge.
 
@@ -66,8 +66,12 @@ lock, reserve the replacement once within the owner and phase dollar and
 attempt limits. Complete that exact replacement before restarting the
 worker. Use the same model and body, the original reviewed worker headers
 and the SDK's next retry count.
-Then require the pinned worker to consume the original error and the saved
-replacement under their exact request identities before sealing the score.
+The Held Request Recovery module checks the saved utility partition has
+one class. It gives the worker the original error and the replacement under
+their exact request identities before allowing any other callback. After an
+explicit refusal in the replacement reply, it allows the frozen fallback
+model with the same request body apart from the model name. The owner ledger
+permits one fallback operation across restarts under the original limits.
 On restart, reuse a settled replacement or resume its proven unsent
 reservation. Validate and settle a durable successful receipt before
 replay if interrupted between receipt and settlement. A second ambiguous
@@ -81,12 +85,13 @@ operation stays subject to the current stop rules. Keep historical source
 and manifests pinned. A changed runtime needs an explicit compatibility
 check against the original controls.
 
-Prove this through the normal launcher with a supplied response at the
+Verify this through the normal launcher with a supplied response at the
 transport boundary and real provider access blocked. Reuse the saved
 generation and partition, preserve the first hold and receipt, allow
 exactly one simulated replacement, and show zero duplicate sends after
-restart. Include concurrent callback order, skipped or changed requests,
-second ambiguity, cap exhaustion and completion through final funding.
+restart. Include an unexpected callback before replay, skipped or changed
+requests, a legitimate refusal fallback, second ambiguity, cap exhaustion
+and completion through final funding.
 This proposal grants no live authority.
 
 ## Acceptance gates by implementing slice

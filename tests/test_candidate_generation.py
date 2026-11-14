@@ -9,15 +9,16 @@ import shutil
 import sqlite3
 import unittest
 from contextlib import closing
+from dataclasses import asdict, replace
 from pathlib import Path
 from unittest.mock import patch
 
 import test_candidate_run as candidate_fixtures
 import test_gateway as gateway_fixtures
 
-from buddha.answers import Answers
+from buddha.answers import Answers, TaskSet
 from buddha.executor import ExecutionResult, ExecutorError
-from buddha.gateway import Gateway, RawHTTPTransport
+from buddha.gateway import Gateway, GatewayCall, RawHTTPTransport
 from buddha.native_evaluation import EvaluationError, prepare_evaluation, run_evaluation
 from buddha.native_run import CHUNK_BYTES
 from buddha.releases import Release, ReleaseError, Selection, _json, inventory, prepare_selection
@@ -52,6 +53,8 @@ class CandidateGenerationTests(unittest.TestCase):
         self.native_callback_counts = (1, 1)
         self.native_fail_once = False
         self.native_timeout_once = False
+        self.held_error_once = False
+        self.held_retry_mode = "exact"
         self.generation_timeout_once = False
         self.generation_interrupt_once = False
         self.cleanup = "removed"
@@ -140,6 +143,103 @@ class CandidateGenerationTests(unittest.TestCase):
             },
         ]
         self.summary = b'{"utility":NaN,"literal":"  unchanged  "}\n'
+
+    def configure_held_replacement(self, section, *, screen=None):
+        """Add the synthetic Anthropic utility profile before owners are prepared."""
+        fixture = self.fixture
+        openai = fixture.profiles["profiles"]["primary"]
+        profile = copy.deepcopy(openai)
+        profile["spec"] = asdict(
+            replace(fixture.spec, provider="anthropic", model="claude-fixture")
+        )
+        profile.update(
+            response_models=["claude-fixture"],
+            headers={"x-stainless-retry-count": ["0", "1"]},
+            account_headers={},
+        )
+        fixture.write(
+            "host",
+            "profiles/anthropic.json",
+            json.dumps(
+                {
+                    "format": "buddha.gateway-profiles.v2",
+                    "profiles": {"quality": profile},
+                }
+            ),
+        )
+        capabilities = section["selection"]["capabilities"] | {
+            "anthropic.messages.v1": "profiles/anthropic.json",
+        }
+        fixture.release_record["requires"] = list(capabilities)
+        release = self.candidate.release = Release.from_record(fixture.release_record)
+        dataset = (fixture.roots["official"] / "data/tasks.jsonl").read_bytes()
+        source = TaskSet.from_dataset(release, dataset)
+        self.candidate.tasks = source.select([task.id for task in self.candidate.tasks.tasks])
+        self.candidate.task_path.write_bytes(self.candidate.tasks.to_bytes())
+        fixture.selection = prepare_selection(release, fixture.roots, capabilities=capabilities)
+        sections = [section] if section is self.native else [section, self.native]
+        for native in sections:
+            native["selection"] = prepare_selection(
+                release,
+                {name: Path(value) for name, value in native["roots"].items()},
+                capabilities=capabilities,
+            ).to_record()
+            native["profiles"]["anthropic"] = {"claude-fixture": "quality"}
+        fixture.review["credential_sha256"]["anthropic"] = sha(gateway_fixtures.KEY.encode())
+        if screen is not None:
+            screen.source = source
+            screen.record["source"] = source.to_record()
+            screen.record["split"]["release_sha256"] = source.release_sha256
+            screen.record["generation"]["selection"] = fixture.selection.to_record()
+
+    def held_connection(self, *, status=200):
+        response = self.fixture.response(
+            status=status,
+            headers=[("request-id", "req-held-error" if status == 503 else "req-held-answer")],
+            model="claude-fixture",
+            usage={"input_tokens": 5, "output_tokens": 3},
+        )
+        if status == 503:
+            response.read.return_value = b"synthetic service unavailable"
+        return self.fixture.connection(response)
+
+    @staticmethod
+    def held_body():
+        return _json(
+            {
+                "model": "claude-fixture",
+                "max_tokens": 100,
+                "messages": [{"role": "user", "content": "literal utility"}],
+            }
+        )
+
+    def held_callback(self, handle, sequence, logical_id):
+        request = {
+            "provider": "anthropic",
+            "method": "POST",
+            "url": "https://api.anthropic.com/v1/messages",
+            "body_base64": base64.b64encode(self.held_body()).decode(),
+            "headers": [["x-stainless-retry-count", "0"]],
+            "logical_id": logical_id,
+            "attempt": 0,
+        }
+        connection = self.held_connection(status=503 if self.held_error_once else 200)
+        self.held_error_once = False
+        with patch("http.client.HTTPSConnection", return_value=connection):
+            reply = handle({"type": "request", "seq": sequence, "request": request})
+            sequence += 1
+            if (
+                reply["type"] == "response"
+                and reply["envelope"]["status"] == 503
+                and self.held_retry_mode != "skip"
+            ):
+                request = request | {"attempt": 1, "headers": [["x-stainless-retry-count", "1"]]}
+                if self.held_retry_mode == "foreign":
+                    request["logical_id"] = sha(b"foreign utility callback")
+                reply = handle({"type": "request", "seq": sequence, "request": request})
+                sequence += 1
+        self.physical_sends += connection.request.call_count
+        return reply, sequence
 
     def prepare(self, **changes):
         values = {
@@ -241,28 +341,31 @@ class CandidateGenerationTests(unittest.TestCase):
                 self.assertEqual(handle.__self__.profiles, {})
                 self.assertFalse(handle.__self__.gateway.transport.allow_paid)
             count = self.native_callback_counts[index] if index < 2 else 1
-            for sequence in range(count):
-                response = self.exchange(
-                    handle,
-                    {
-                        "type": "request",
-                        "seq": sequence,
-                        "request": {
-                            "provider": "openai",
-                            "method": "POST",
-                            "url": "https://api.openai.com/v1/chat/completions",
-                            "body_base64": base64.b64encode(self.fixture.body).decode(),
-                            "headers": [],
-                            "logical_id": sha(
-                                _json(
-                                    ["candidate-native", index] + ([sequence] if sequence else [])
-                                )
-                            ),
-                            "attempt": 0,
+            sequence = 0
+            for ordinal in range(count):
+                identity = ["candidate-native", index] + ([ordinal] if ordinal else [])
+                logical_id = sha(_json(identity))
+                if index == 1 and "anthropic" in handle.__self__.profiles:
+                    response, sequence = self.held_callback(handle, sequence, logical_id)
+                else:
+                    response = self.exchange(
+                        handle,
+                        {
+                            "type": "request",
+                            "seq": sequence,
+                            "request": {
+                                "provider": "openai",
+                                "method": "POST",
+                                "url": "https://api.openai.com/v1/chat/completions",
+                                "body_base64": base64.b64encode(self.fixture.body).decode(),
+                                "headers": [],
+                                "logical_id": logical_id,
+                                "attempt": 0,
+                            },
                         },
-                    },
-                    timeout=self.native_timeout_once,
-                )
+                        timeout=self.native_timeout_once,
+                    )
+                    sequence += 1
                 self.native_timeout_once = False
                 if response["type"] == "stop":
                     handle(
@@ -357,10 +460,9 @@ class CandidateGenerationTests(unittest.TestCase):
         return directory
 
     def run_native(self, directory, *, paid=True):
+        keys = dict.fromkeys(("OPENAI_API_KEY", "ANTHROPIC_API_KEY"), gateway_fixtures.KEY)
         with (
-            patch.dict(
-                os.environ, {"OPENAI_API_KEY": gateway_fixtures.KEY} if paid else {}, clear=True
-            ),
+            patch.dict(os.environ, keys if paid else {}, clear=True),
             patch("buddha.executor.run_container", side_effect=self.execute),
             patch("buddha.agent_run.AgentSession", side_effect=AssertionError("seed forbidden")),
             patch(
@@ -368,6 +470,195 @@ class CandidateGenerationTests(unittest.TestCase):
             ),
         ):
             return run_evaluation(directory, transport=RawHTTPTransport(allow_paid=paid))
+
+    def test_held_utility_replay_requires_both_exact_callbacks_without_another_send(self):
+        from test_trial_fence import TrialFixture
+
+        from buddha import trial_fence
+        from buddha.doctor import _authority
+        from buddha.native_evidence import NativeEvidence, NativeEvidenceError
+
+        trial = TrialFixture(self)
+        authority = trial.authorities["search"]
+        task = trial.root / "search/study/cells/0/0/0/0/screen/tasks/0"
+        task.mkdir(parents=True)
+        self.directory = task / "generation"
+        self.configure_held_replacement(self.native)
+        self.prepare(authorization=authority)
+        self.assertEqual(self.run_generation()["status"], "complete")
+        evaluation = task / "evaluation"
+        descriptor = task / "evaluation.json"
+        original_row = self.native_row
+
+        def one_head(row, index):
+            row = original_row(row, index)
+            row.update(partition=[0, 0], distinct=1)
+            return row
+
+        self.native_row = one_head
+        descriptor.write_bytes(
+            _json(
+                {
+                    "format": "buddha.native-evaluation.v1",
+                    "source_generation": self.source_reference(),
+                    "native": self.native,
+                    "stages": self.stages,
+                }
+            )
+        )
+        prepare_evaluation(
+            evaluation,
+            descriptor=descriptor,
+            authorization=authority,
+            review=self.fixture.review,
+        )
+        self.held_error_once = True
+        initial = self.run_native(evaluation)
+        self.assertEqual((initial["status"], initial["reason"]), ("incomplete", "unknown"))
+        observation = evaluation / initial["observation"]
+        saved_observation = observation.read_bytes()
+        owner = evaluation / "owners/2"
+        gateway = self.fixture.gateway(directory=owner)
+        logical_id = sha(_json(["candidate-native", 1]))
+        original = GatewayCall(
+            "anthropic.messages.v1",
+            "quality",
+            logical_id,
+            0,
+            self.held_body(),
+            (("x-stainless-retry-count", "0"),),
+        )
+        original_id = gateway.operation_id(original)
+        original_record = gateway.ledger.get(original_id)
+        recovery = gateway._held_replacement_candidate(original_id, "a" * 64)
+        with trial_fence.work(authority.path, authority._terms(), directory=owner):
+            gateway.ledger.record_held_replacement(recovery)
+        self.held_retry_mode = "foreign"
+        connection = self.held_connection()
+        with patch("http.client.HTTPSConnection", return_value=connection):
+            partial = self.run_native(evaluation)
+        self.assertEqual((partial["status"], partial["reason"]), ("incomplete", "protocol"))
+        self.assertEqual(connection.request.call_count, 1)
+        self.assertFalse((evaluation / "completed/2.json").exists())
+
+        self.held_retry_mode = "skip"
+        settled = authority.summary()
+        with patch("http.client.HTTPSConnection", side_effect=AssertionError("unexpected send")):
+            self.assertEqual(self.run_native(evaluation, paid=False)["status"], "incomplete")
+        self.assertFalse((evaluation / "completed/2.json").exists())
+        self.assertEqual(authority.summary(), settled)
+
+        self.held_retry_mode = "exact"
+        with patch("http.client.HTTPSConnection", side_effect=AssertionError("unexpected send")):
+            self.assertEqual(self.run_native(evaluation, paid=False)["status"], "complete")
+        self.assertEqual(observation.read_bytes(), saved_observation)
+        self.assertEqual(gateway.ledger.get(original_id), original_record)
+        self.assertEqual(authority.summary()["reserved_microusd"], recovery.reserve_microusd)
+        reader = NativeEvidence(evaluation, authority.path)
+        reader.funded = _authority(reader.capture, authority.path, [reader.owner(owner)])
+        report, _ = reader.stage(evaluation, 2, baseline=False)
+        self.assertEqual(
+            report["held_replacement"],
+            {
+                "original_operation_id": original_id,
+                "replacement_operation_id": recovery.replacement_operation_id,
+                "review_sha256": recovery.review_sha256,
+            },
+        )
+        reader.funded["held_replacement"]["review_sha256"] = "b" * 64
+        with self.assertRaises(NativeEvidenceError):
+            reader.stage(evaluation, 2, baseline=False)
+
+    def test_held_replay_allows_only_one_exact_refusal_fallback_across_restarts(self):
+        from unittest.mock import Mock
+
+        from buddha.gateway import HeldReplacementReplay
+        from buddha.held_recovery import UtilityReplay, fallback_model
+        from buddha.ledger import OperationConflict
+        from buddha.wire import RawEnvelope
+
+        self.configure_held_replacement(self.native)
+        tasks = self.candidate.tasks
+        task = tasks.tasks[0]
+        partition = _json({"id": task.id, "partition": [0, 0]}) + b"\n"
+        release = self.candidate.release.to_record()
+        release["commands"][1]["argv"] += ["--fallback-judge", "claude-fallback"]
+        frozen_release = Release.from_record(release)
+        fallback = fallback_model(frozen_release, self.stages, tasks, partition)
+        self.assertEqual(fallback, "claude-fallback")
+        with self.assertRaises(OperationConflict):
+            fallback_model(
+                frozen_release, self.stages, tasks, _json({"id": task.id, "partition": [0, 1]})
+            )
+
+        original = GatewayCall(
+            "anthropic.messages.v1",
+            "quality",
+            "primary",
+            0,
+            self.held_body(),
+            (("x-stainless-retry-count", "0"),),
+        )
+        replacement = replace(original, attempt=1, headers=(("x-stainless-retry-count", "1"),))
+        refusal = RawEnvelope("anthropic", 200, b'{"stop_reason":"refusal"}')
+        saved = HeldReplacementReplay(
+            Mock(), original, RawEnvelope("anthropic", 503, b""), replacement, refusal
+        )
+        fallback_call = replace(
+            original,
+            logical_id="fallback",
+            profile_id="fallback",
+            body=_json(json.loads(original.body) | {"model": fallback}),
+        )
+        gateway = Mock(spec=Gateway)
+        gateway.ledger = Mock()
+        gateway.operation_id.side_effect = lambda call: call.logical_id
+        operations = {}
+        gateway.ledger.get.side_effect = operations.get
+        gateway.ledger.totals.side_effect = lambda: {"operation_count": 2 + len(operations)}
+        answer = RawEnvelope("anthropic", 200, b'{"stop_reason":"end_turn"}')
+
+        def execute(call):
+            operations[call.logical_id] = answer
+            return answer
+
+        gateway.execute.side_effect = execute
+        replay = UtilityReplay(gateway, saved, fallback)
+        with self.assertRaises(OperationConflict):
+            replay.reply(fallback_call)
+        replay.reply(original)
+        for call in (fallback_call, replace(replacement, body=replacement.body + b"\n")):
+            with self.assertRaises(OperationConflict):
+                replay.reply(call)
+        replay.reply(replacement)
+        self.assertFalse(replay.complete)
+        for call in (
+            replace(original, logical_id="foreign"),
+            replace(fallback_call, attempt=1),
+            replace(fallback_call, body=fallback_call.body.replace(b"literal", b"changed")),
+        ):
+            with self.assertRaises(OperationConflict):
+                replay.reply(call)
+        gateway.execute.assert_not_called()
+        self.assertEqual(replay.reply(fallback_call), answer)
+        self.assertTrue(replay.complete)
+
+        restarted = UtilityReplay(gateway, saved, fallback)
+        restarted.reply(original)
+        restarted.reply(replacement)
+        self.assertEqual(restarted.reply(fallback_call), answer)
+        with self.assertRaises(OperationConflict):
+            restarted.reply(replace(fallback_call, logical_id="second-fallback"))
+        self.assertEqual(set(operations), {"fallback"})
+
+        without_refusal = UtilityReplay(
+            gateway, replace(saved, replacement_envelope=answer), fallback
+        )
+        without_refusal.reply(original)
+        without_refusal.reply(replacement)
+        self.assertTrue(without_refusal.complete)
+        with self.assertRaises(OperationConflict):
+            without_refusal.reply(fallback_call)
 
     def check_partial(self, result, directory):
         self.assertEqual(result["status"], "incomplete")

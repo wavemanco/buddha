@@ -11,6 +11,7 @@ import hashlib
 import json
 import os
 import sys
+from contextlib import nullcontext
 from pathlib import Path
 
 if __package__ is None:
@@ -84,12 +85,29 @@ def main(argv=None):
         parser.add_argument("--handoff", type=Path, required=True)
         parser.add_argument("--sha256", required=True)
         parser.add_argument("--continuation", action="store_true")
+        parser.add_argument("--resume-decision", type=Path)
+        parser.add_argument("--resume-sha256")
         parser.add_argument("--check", action="store_true")
         parser.add_argument("--live", action="store_true")
         parser.add_argument("--prompt-keys", action="store_true")
         parser.add_argument("--confirm-project-keys", action="store_true")
         parser.add_argument("--inspect-log-dir", type=Path)
         args = parser.parse_args(argv)
+        if (args.resume_decision is None) != (args.resume_sha256 is None) or (
+            args.resume_decision is not None
+            and (args.continuation or args.inspect_log_dir is not None)
+        ):
+            raise UnifiedLaunchError("held recovery requires one paired decision and digest")
+        scope = (
+            nullcontext()
+            if args.resume_decision is None
+            else launch_common._held_recovery(
+                args.resume_decision.absolute(),
+                args.resume_sha256,
+                args.handoff.absolute(),
+                args.sha256,
+            )
+        )
         if args.inspect_log_dir is not None and (not args.check or args.continuation):
             raise UnifiedLaunchError("Inspect currently supports fresh read-only checks only")
         if args.continuation:
@@ -110,11 +128,14 @@ def main(argv=None):
                     else check_launch(handoff, expected_sha256=args.sha256)
                 )
 
-            checked = (
-                check()
-                if args.inspect_log_dir is None
-                else _inspect_check(check, handoff, args.sha256, args.inspect_log_dir.absolute())
-            )
+            with scope:
+                checked = (
+                    check()
+                    if args.inspect_log_dir is None
+                    else _inspect_check(
+                        check, handoff, args.sha256, args.inspect_log_dir.absolute()
+                    )
+                )
             record = {
                 "status": "checked",
                 "phase": checked["phase"],
@@ -123,13 +144,14 @@ def main(argv=None):
             code = 0 if checked["stop_code"] is None else 3
         else:
             execute = launch_trial_continuation if args.continuation else launch
-            result = execute(
-                args.handoff.absolute(),
-                expected_sha256=args.sha256,
-                live=args.live,
-                prompt_keys=args.prompt_keys,
-                confirm_project_keys=args.confirm_project_keys,
-            )
+            with scope:
+                result = execute(
+                    args.handoff.absolute(),
+                    expected_sha256=args.sha256,
+                    live=args.live,
+                    prompt_keys=args.prompt_keys,
+                    confirm_project_keys=args.confirm_project_keys,
+                )
             record = {
                 key: result[key]
                 for key in (

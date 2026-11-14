@@ -244,6 +244,8 @@ def prepare_candidate_generation(
     expected_input_hashes: Mapping[Path, str] | None = None,
 ) -> Path:
     """Prepare a new original owner under existing authority; no model calls."""
+    from buddha.launch_common import _bound_sources
+
     if not isinstance(directory, Path) or not isinstance(descriptor, Path):
         raise CandidateGenerationError("generation needs explicit Path inputs")
     if not isinstance(authorization, Authorization) or not isinstance(selection, Selection):
@@ -265,7 +267,7 @@ def prepare_candidate_generation(
     _runtime_selection(recipe, selection, roots, consume, runtime_sha256)
     if tasks.release_sha256 != selection.release_sha256:
         raise CandidateGenerationError("source task differs from selected release")
-    for path in _sources(recipe["format"]):
+    for path in _bound_sources(_sources(recipe["format"])):
         consume(path)
     protected = [*roots.values(), descriptor, *expected, authorization.path]
     if any(directory.is_relative_to(path) or path.is_relative_to(directory) for path in protected):
@@ -764,7 +766,10 @@ def run_candidate_generation(directory: Path, *, transport: RawHTTPTransport) ->
             consume,
             runtime_sha256,
         )
-        for path in _sources(recipe["format"]):
+        from buddha.launch_common import _bound_sources
+
+        sources = _bound_sources(_sources(recipe["format"]))
+        for path in sources:
             consume(path)
         authority = Authorization(pipeline._absolute(owner["authorization_path"]))
         actual_attempt: Path | None = None
@@ -793,7 +798,7 @@ def run_candidate_generation(directory: Path, *, transport: RawHTTPTransport) ->
 
         def validate(attempt: Path, report: dict[str, object]) -> dict[str, Path]:
             execution_identity(gateway.directory)
-            for path in _sources(recipe["format"]):
+            for path in sources:
                 consume(path)
             if prospective:
                 result = _validate_outcome(

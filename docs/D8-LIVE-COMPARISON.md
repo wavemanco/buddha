@@ -23,10 +23,10 @@ later recording phase saved the incomplete observation.
 
 ### Resume V5
 
-The V5 command remains on hold. A read-only check matched all 638 operation
-records across the shared ledger and 199 original owners. It verified the
-stopped task's generation and partition seals and found one unresolved
-utility request. The 637 settled calls and $11.44 hold stay in place.
+The keyless check of the original V5 handoff passed. The live command below
+requires separate approval. A read-only check matched all 638 operation records
+across the shared ledger and 199 original owners. It verified the stopped task's
+generation and partition seals and found one unresolved utility request.
 
 Prepare for the original request having been charged with no available
 result. This is a planning assumption. Recorded spending stays $5.600044
@@ -42,21 +42,101 @@ under the same logical call, with the original body and retry header
 incremented. The Windows probe differed from the saved worker in two
 platform headers. A separate read-only check matched the original request
 to its saved receipt and verified that attempt 1 with the original worker
-headers passes the same profile and reservation checks. A second judge
-callback could arrive before attempt 1, so recovery must match the logical
-call and protect its reservation independently of arrival order.
+headers passes the same profile and reservation checks. A separate SDK probe observed a sibling callback arriving first when the
+partition had multiple classes. V5's saved partition has one class. The
+Held Request Recovery module requires the two reviewed callbacks in order.
+After an explicit Opus refusal, it allows the frozen Sonnet fallback under
+the original owner and phase limits. The fallback reserves $4.576 and fits
+the $25 owner if the replacement settles at $8.984 or less.
 
-Use the [proposed shared recovery rule](RECOVERY-CONTRACT.md#proposed-recovery-with-a-retained-provider-hold)
-through the normal launcher. It would keep the original owner, send at
-most one separately accounted replacement after explicit approval, and
-then replay its saved result. The frozen V5 launcher blocks this today.
-The next offline proof must reach the following study action and the
-final-assessment funding check with the original hold still counted.
+Use the [shared recovery rule](RECOVERY-CONTRACT.md#recovery-with-a-retained-provider-hold)
+through the updated normal launcher. It keeps the original owner, can send
+at most one separately accounted replacement after explicit approval, and
+replays the saved result on restart. Keep the frozen V5 command on hold.
+Reuse the same reviewed decision and its SHA256 when resuming after a stop.
+The paired options `--resume-decision` and `--resume-sha256` supply that
+decision to the normal launcher. With `--check`, it verifies the approval and
+saved state without keys, writes or paid requests. A live
+command requires separate approval and the original locally entered keys.
+
+The November 13 provider-blocked primary launcher rehearsal ended after
+7 minutes 37 seconds at commit `5007ca3`. It recovered the synthetic utility
+stage and completed development. After writing the final schedule, the
+launcher stopped when a nested development directory inventory differed
+between reads. The first final worker did not start. All 890 tracked source
+and repository files matched their initial hashes. The retained log identifies
+the check that stopped but does not include the entry or field that differed.
+
+A short offline check reproduced the same error by changing only the
+modification time of the fixture's `common` directory. During held request
+recovery, the final writer now compares the development tree by directory
+name, type and identity. It still checks file metadata and consumed bytes,
+ledger sidecars and the writer lock. The check accepts directory clock
+changes and rejects a replaced directory, unexpected entries, changed files,
+and new sidecars. The launcher fixture now records the bounded scan difference
+when one is available.
+
+The follow-up rehearsal passed in 13 minutes 3 seconds at `de260c2`, after
+both [fast CI jobs](https://github.com/wavemanco/buddha/actions/runs/43435876599)
+passed on that commit. All 890 tracked hashes matched. With provider access
+blocked, the primary launcher used one simulated replacement, kept the
+fixture's saved operations, seals and hold, and reached the entry point for
+the first final generation worker. The fixture intercepted the worker before
+starting a container or sending a final request. Local evidence is in
+`runs/checks/d8-held-launcher-20261113-v2/`.
+
+Separate read-only snapshots before and after matched all 638 original
+operations across 199 V5 owners and the ledger file hashes. The actual study
+still has 637 settled operations, $5.600044 recorded spending and $11.44 held.
+The rehearsal used its own ledgers. Actual V5 replay, the combined operator
+command and final scoring remain unverified by this rehearsal.
+
+The first keyless check of the original combined V5 handoff stopped during
+a nested development scan. The diagnostic recorded 50 entries with a
+different reported size and no added or removed entries. One visible entry
+was an evaluation directory. Held recovery now applies the existing
+directory identity check throughout the original trial, including startup
+and nested reads. File signatures, saved byte hashes, SQLite sidecars and
+external trees still have to match. The focused regression covers a
+directory size change, a changed file, a replaced directory, a new entry
+and a new sidecar.
+
+The first corrected check reached its 15-minute limit. The approved follow-up
+on the same `a658960` source finished in 16 minutes 57 seconds under its
+five-hour cap. The actual combined command returned exit code 0, `checked`,
+`primary`, and `stop_code: null`. Both fast CI jobs passed at that source.
+Reconstructing saved development took 16 minutes 19 seconds. Stage events and
+22 Python stack samples show repeated file reads and directory scans during
+feedback verification. The check used no keys or provider access. Before and
+after snapshots matched all V5 ledger hashes, including 637 settled calls,
+$5.600044 recorded spending and the $11.44 hold. Evidence is in
+`runs/checks/d8-v5-held-resume-preflight-20261113/observed/`.
+
+#### V5 resume command
+
+Run these lines in a new PowerShell window after live recovery is approved.
+The first clears inherited keys in that window so both masked prompts appear.
+The second checks the original V5 handoff and resumes the same study under its
+existing $150 combined cap and phase limits, including the retained $11.44
+hold. It can make paid requests. Use the same OpenAI and Anthropic project keys
+as V5. Startup checks run more than once and can take several minutes each.
+Keep the window open. To stop, press **Ctrl+C once** and wait for the final
+status. Keep any stop message and its closing JSON for review.
+
+```powershell
+Remove-Item -LiteralPath 'Env:\OPENAI_API_KEY', 'Env:\ANTHROPIC_API_KEY' -ErrorAction SilentlyContinue
+& 'C:\Program Files\Python313\python.exe' -B 'C:\Users\arvik\code\buddha\runs\r315c\docs\conformance\unified-run.py' `
+  --handoff 'C:\Users\arvik\code\buddha\runs\imp01-d8-fresh-20261112-v5-combined\NOT-CREATED-unified-launch.json' `
+  --sha256 '5a6ad73dd705b2d4114c4cf1faf1c074b16e37acdccb0918a39981bfb56da312' `
+  --resume-decision 'C:\Users\arvik\code\buddha\runs\checks\d8-v5-held-resume-preflight-20261113\fixed\resume-decision.json' `
+  --resume-sha256 '0b5b8557b0368ba4c03e247cf939bc729eddceb3a50d8a32185d1095e3b087fb' `
+  --live --prompt-keys --confirm-project-keys
+```
 
 If an authentic original result and usage later become available, the
 existing ledger transition is the smaller route. In a synthetic OpenAI
 utility fixture, a supplied matching result let the same owner finish
-without another send. Neither offline check establishes live V5 resume.
+without another send. The offline checks leave live V5 resume unverified.
 
 ## V5 fresh comparison
 

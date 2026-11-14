@@ -795,6 +795,33 @@ class UnifiedLaunchCliTests(unittest.TestCase):
                 self.assertNotIn("SYNTHETIC-PRIVATE", json.dumps(record))
             self.assertEqual(checked.call_count, 1)
 
+    def test_resume_decision_wraps_normal_keyless_check(self):
+        entered = []
+
+        @contextmanager
+        def recovery(*bindings):
+            entered.append(bindings)
+            yield
+            entered.pop()
+
+        def check(*args, **kwargs):
+            self.assertEqual(
+                entered,
+                [(Path("decision.json").absolute(), "1" * 64, args[0], kwargs["expected_sha256"])],
+            )
+            return {"phase": "primary", "stop_code": None}
+
+        options = ["--resume-decision", "decision.json", "--resume-sha256", "1" * 64]
+        with (
+            patch.object(self.cli.launch_common, "_held_recovery", side_effect=recovery),
+            patch.object(self.cli, "check_launch", side_effect=check) as checked,
+            patch.object(self.cli, "launch", side_effect=AssertionError("live controller")),
+        ):
+            self.assertEqual(self.invoke(["--check", *options])[0], 0)
+            self.assertEqual(self.invoke(["--check", *options[:2]])[0], 2)
+            self.assertEqual(self.invoke(["--check", "--continuation", *options])[0], 2)
+            checked.assert_called_once()
+
     def test_live_completion_cancellation_and_errors_keep_safe_status_codes(self):
         with patch.object(
             self.cli,

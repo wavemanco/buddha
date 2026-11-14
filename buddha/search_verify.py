@@ -88,6 +88,7 @@ _SOURCES = {
         "7d53f6fd6b34e6ed7edd7bc44d1b7b0282e46a7d56f08fc664f244852fd1dcf4",
         "5909b46f6943a96d0f8bf26bc7eda136231fca3770f37c8439979431dde8fc0b",
         "5c7e56f1e2c5e68046d6380ebacc03110300eae34d348d7dca683a0591d64130",
+        "e55835399ccf9f65de2cb28fbf382f710e1d95b6fd6943609bddb0ecc0af8146",
     },
 }
 _CONTROLLERS = {
@@ -273,7 +274,10 @@ def _archive_contract(snapshot: dict[str, bytes], contracts: dict[str, object]) 
             "f0e7a37d038f8a2a3454ed8fa4ca94b58eca623c5f7e7cc8bca0dec576433c73",
         }
         or sources.get("buddha.ledger")
-        == ("5c7e56f1e2c5e68046d6380ebacc03110300eae34d348d7dca683a0591d64130")
+        in {
+            "5c7e56f1e2c5e68046d6380ebacc03110300eae34d348d7dca683a0591d64130",
+            "e55835399ccf9f65de2cb28fbf382f710e1d95b6fd6943609bddb0ecc0af8146",
+        }
     )
     if (common is not None or needs_common) and (
         common is None

@@ -196,22 +196,35 @@ if TYPE_CHECKING:
     from buddha.trial_fence import _Held
 
 
-_ACTIVE_TREE: ContextVar["_Held | None"] = ContextVar("active_evidence_tree", default=None)
+_ACTIVE_TREE: ContextVar["tuple[_Held, bool] | None"] = ContextVar(
+    "active_evidence_tree", default=None
+)
 
 
 @contextmanager
-def _active_tree(directory: Path) -> Iterator[bool]:
-    """Use directory identity for fresh reads under the original scoped writer."""
+def _active_tree(directory: Path, *, directory_clocks_only: bool = False) -> Iterator[bool]:
+    """Use directory identity under the original writer, with strict files during final recovery."""
     from buddha import launch_common, trial_fence
 
     held = trial_fence._HELD.get()
-    if held is None or launch_common._PHASE_CONTINUATION.get() is not None:
+    if (
+        held is None
+        or (
+            directory_clocks_only
+            and (
+                launch_common._HELD_RECOVERY.get() is None
+                or held.binding.phase != "final"
+                or directory != held.binding.root / "search/study"
+            )
+        )
+        or (not directory_clocks_only and launch_common._PHASE_CONTINUATION.get() is not None)
+    ):
         yield False
         return
     trial_fence._assert_held(held.binding)
     if not directory.is_relative_to(held.binding.root):
         raise _Busy("active evidence is outside its held trial")
-    token = _ACTIVE_TREE.set(held)
+    token = _ACTIVE_TREE.set((held, directory_clocks_only))
     try:
         yield True
     finally:
@@ -355,6 +368,7 @@ class _TreeObservation:
             capture._maximum,
             capture._maximum_entries,
             capture._maximum_paths,
+            capture._directory_clocks_only,
             capture._tree_roots.get(capture.root),
             context[0],
         )
@@ -389,7 +403,7 @@ class _TreeObservation:
                 if _directory_identity(root) != identity:
                     raise _Busy("observed directory root changed during inventory")
             if current != entries and (
-                identity is None or not _same_active_entries(entries, current)
+                identity is None or key[-3] or not _same_active_entries(entries, current)
             ):
                 raise _TreeChanged("observed local tree changed", entries, current)
 
@@ -449,15 +463,26 @@ class _Capture:
     """
 
     def __init__(self, root: Path, *, allow_timestamp_drift: bool = False) -> None:
+        from buddha import launch_common
+
         self.root = root
         self._maximum, self._maximum_entries, self._maximum_paths = _observation_limits()
         active = _ACTIVE_TREE.get()
-        self._directory_identity = (
-            not allow_timestamp_drift
-            and active is not None
-            and root.is_relative_to(active.binding.root)
+        recovery = launch_common._HELD_RECOVERY.get()
+        trial = None if recovery is None else recovery.get("trial")
+        held_recovery = isinstance(trial, Path) and root.is_relative_to(trial)
+        active_scope = (
+            active is not None
+            and root.is_relative_to(active[0].binding.root)
+            and (not active[1] or root == active[0].binding.root / "search/study")
         )
-        self._writer = active if self._directory_identity else None
+        self._directory_identity = not allow_timestamp_drift and (held_recovery or active_scope)
+        self._writer = (
+            active[0] if self._directory_identity and active_scope and active is not None else None
+        )
+        self._directory_clocks_only = self._directory_identity and (
+            held_recovery or (active is not None and active[1])
+        )
         self._tree_roots = {root: _directory_identity(root)} if self._directory_identity else {}
         observation = _PASSIVE_TREES.get()
         self._directories: set[str] | None = set() if allow_timestamp_drift else None
@@ -477,8 +502,10 @@ class _Capture:
     def _tree_entries(
         self, root: Path | None = None, *, directories: set[str] | None = None
     ) -> dict[str, tuple[int, int, int, int, int]]:
+        # A later strict capture can adopt external watched trees unchanged.
+        local = root is None
         root = self.root if root is None else root
-        if self._directory_identity:
+        if self._directory_identity and (local or not self._directory_clocks_only):
             identity = _directory_identity(root)
             if self._tree_roots.get(root, identity) != identity:
                 raise _Busy("observed directory root changed")
@@ -623,7 +650,9 @@ class _Capture:
         if self._directories is None:
             current = self._tree_entries()
             if current != self.entries and (
-                not self._directory_identity or not _same_active_entries(self.entries, current)
+                not self._directory_identity
+                or self._directory_clocks_only
+                or not _same_active_entries(self.entries, current)
             ):
                 raise _TreeChanged("observed local tree changed", self.entries, current)
         else:

@@ -15,6 +15,7 @@ from typing import Any, cast
 from buddha import (
     candidate_generation,
     candidate_improvement,
+    gateway,
     launch_common,
     source_feedback,
     source_screen,
@@ -46,6 +47,7 @@ from buddha.releases import (
     _object,
     _path,
     _root,
+    _text,
     file_hash,
 )
 from buddha.search_evidence import MAX_FILES
@@ -1219,7 +1221,7 @@ def _screen(
         if path.is_relative_to(directory):
             owner = reader.owner(path)
             if (
-                owner.manifest["core"] != anchor.manifest["core"]
+                not gateway._compatible_core(owner.manifest["core"], anchor.manifest["core"])
                 or owner.manifest["runtime"] != anchor.manifest["runtime"]
             ):
                 raise ImproverStudyError("screen owners changed their original runtime/core")
@@ -2614,10 +2616,40 @@ def _advance_action(
     action = state["action"]
     kind, location = action["kind"], action["directory"]
     directory, authorization = reader.root, authority.path
-    unknown = any(
-        row["status"] != "completed" for row in reader._rows(state["funding"]["auth_operations"])
+    pending = _pending_replacement(reader, state)
+    replacement = state["funding"].get("held_replacement")
+    permitted = (
+        {replacement["original_operation_id"], replacement["replacement_operation_id"]}
+        if pending is not None or replacement is not None and replacement["state"] == "settled"
+        else set()
     )
-    if unknown:
+    outstanding = [
+        row
+        for row in reader._rows(state["funding"]["auth_operations"])
+        if row["status"] != "completed" and row["operation_id"] not in permitted
+    ]
+    if (
+        len(outstanding) == 1
+        and replacement is not None
+        and replacement["state"] == "settled"
+        and outstanding[0]["run_id"] == replacement["run_id"]
+        and outstanding[0]["status"] == "reserved"
+    ):
+        # The utility worker checks the exact saved fallback before dispatching its reservation.
+        _replacement_owner(reader, state, replacement["run_id"])
+        outstanding.clear()
+    if outstanding:
+        selected = launch_common._HELD_RECOVERY.get()
+        if replacement is None and selected is not None:
+            owner = _replacement_owner(reader, state, _text(selected["run_id"]))
+            if str(owner) != selected["owner"]:
+                raise ImproverStudyError("held recovery changes the original utility owner")
+            broker, candidate = launch_common._recovery_candidate(transport)
+            if broker.directory != owner or broker.ledger.authority.path != authority.path:
+                raise ImproverStudyError("held recovery changes the original development grant")
+            broker.ledger.record_held_replacement(candidate)
+            refreshed, current = _forward_read(reader, state)
+            return _advance_action(refreshed, current, authority, transport)
         if state["observations"] and state["observations"][-1]["reason"] == "unknown":
             return cast(dict[str, object], state["observations"][-1])
         raise ImproverStudyError("unresolved original liability lacks its recorded lower stop")
@@ -2737,6 +2769,34 @@ def _advance_action(
             pass  # Preserve the interrupt and lower-stage evidence if validation cannot finish.
         raise
     return None
+
+
+def _pending_replacement(reader: NativeEvidence, state: dict[str, Any]) -> Path | None:
+    """Join pending recovery to the original next screen and its unfinished utility owner."""
+    recovery = state["funding"].get("held_replacement")
+    if recovery is None or recovery["state"] != "pending":
+        return None
+    return _replacement_owner(reader, state, recovery["run_id"])
+
+
+def _replacement_owner(reader: NativeEvidence, state: dict[str, Any], run_id: str) -> Path:
+    action = state["action"]
+    if action["kind"] != "screen":
+        raise ImproverStudyError("held replacement does not match the next study action")
+    matches = [path for path, owner in reader.owners.items() if owner.run_id == run_id]
+    if len(matches) != 1:
+        raise ImproverStudyError("held replacement lacks one original utility owner")
+    owner = matches[0]
+    evaluation = owner.parent.parent
+    if (
+        evaluation.parent.parent != action["directory"] / "tasks"
+        or evaluation.name != "evaluation"
+        or owner.name != "2"
+        or not _presence(reader, evaluation / "completed/1.json")
+        or _presence(reader, evaluation / "completed/2.json")
+    ):
+        raise ImproverStudyError("held replacement changes the unfinished utility stage")
+    return owner
 
 
 @_checked

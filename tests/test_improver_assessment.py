@@ -752,6 +752,104 @@ class ImproverAssessmentTests(unittest.TestCase):
         self.assertFalse(self.trial.exists())
         self.assertEqual((files(self.root), self.authorities["search"].summary()), before)
 
+    def test_held_final_development_reread_checks_identity_instead_of_directory_clocks(self):
+        from test_trial_fence import TrialFixture
+
+        from buddha import doctor, improver_study, launch_common, trial_fence
+
+        trial = TrialFixture(self)
+        directory = trial.root / "search/study"
+        saved = directory / "common"
+        saved.mkdir(parents=True)
+        report = saved / "report.json"
+        report.write_bytes(b"sealed bytes")
+        ledger = directory / "operations.sqlite3"
+        ledger.write_bytes(b"ledger bytes")
+        staged = trial.root / "staged"
+        (staged / "subdir").mkdir(parents=True)
+        context = {
+            "declaration": "fixture-declaration",
+            "declaration_sha256": "0" * 64,
+            "review": {},
+            "controls": {},
+        }
+        (directory / "context.json").write_bytes(_json(context))
+        state = {
+            "root": trial.root,
+            "record": {"development": {"path": context["declaration"], "sha256": "0" * 64}},
+            "context": {"development_review": {}},
+            "controls": {},
+            "development": {},
+            "funding": {
+                "phases": {"search": {"authorization_path": str(trial.authorities["search"].path)}}
+            },
+        }
+        final = trial.authorities["final"]
+
+        def touch(path):
+            info = path.stat()
+            os.utime(path, ns=(info.st_atime_ns, info.st_mtime_ns - 2_000_000_000))
+
+        def development(change):
+            def inspect(root, *, authorization, expected_report_sha256, sink):
+                self.assertEqual(
+                    (root, authorization), (directory, trial.authorities["search"].path)
+                )
+                with doctor._passive_tree_observation():
+                    source = doctor._Capture(directory)
+                    source.read(report)
+                    source.database(ledger)
+                    source.watch_tree(staged)
+                    change()
+                    sink.adopt(source)
+                return {"provenance": {"declaration_sha256": sha(_json({}))}}
+
+            with patch.object(improver_study, "inspect_improver_study", side_effect=inspect):
+                return self.api._development(state, "0" * 64)[1]
+
+        empty = directory / "empty"
+        empty.mkdir()
+
+        def replace_directory():
+            empty.rename(trial.root / "old-empty")
+            empty.mkdir()
+
+        with (
+            patch.object(launch_common, "_HELD_RECOVERY"),
+            launch_common._phase_continuation(lambda pins, **_: pins, lambda _, __, pins: pins),
+        ):
+            launch_common._HELD_RECOVERY.get.return_value = {}
+            with self.assertRaises(doctor._TreeChanged) as passive:
+                development(lambda: touch(saved))
+            (entry,) = launch_common._stop_diagnostic(passive.exception)["chain"]
+            detail = entry["tree_difference"]["entries"][0]
+            self.assertEqual((detail["entry"], detail["change"]), ("common", "changed"))
+            self.assertIn("mtime_ns", detail["fields"])
+            with trial_fence.lease(final.path, final._terms(), directory=trial.root / "final"):
+                capture = development(lambda: touch(saved))
+                capture.finish()
+                strict_receiver = doctor._Capture(trial.root / "final")
+                strict_receiver.adopt(capture)
+                strict_receiver.finish()
+                touch(staged / "subdir")
+                with self.assertRaises(doctor._TreeChanged):
+                    strict_receiver.finish()
+                (late := saved / "unexpected.json").write_bytes(b"extra")
+                with self.assertRaises(doctor._TreeChanged):
+                    capture.finish()
+                late.unlink()
+                with self.assertRaises(doctor._Busy):
+                    development(lambda: touch(report))
+                with self.assertRaises(doctor._Busy):
+                    development(lambda: report.write_bytes(b"edited bytes"))
+                report.write_bytes(b"sealed bytes")
+                sidecar = ledger.with_name(ledger.name + "-wal")
+                with self.assertRaises(doctor._Busy):
+                    development(lambda: sidecar.touch())
+                sidecar.unlink()
+                with self.assertRaises(doctor._TreeChanged):
+                    development(replace_directory)
+
     def test_unsupported_prospective_inputs_refuse_and_first_freeze_failure_stays_poisoned(self):
         from buddha import native_pipeline, source_screen
 

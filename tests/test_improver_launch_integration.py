@@ -7,6 +7,7 @@ recovery; this is neither a full six-cell timing check nor scientific evidence.
 
 import copy
 import json
+import os
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -21,6 +22,169 @@ def checkpoint(label, **metadata):
 
 
 class ImproverLaunchIntegrationTests(unittest.TestCase):
+    def test_held_replacement_reuses_development_and_reaches_final(self):
+        import test_gateway
+        import test_improver_assessment as assessment_fixtures
+        import test_improver_launch as launch_fixtures
+        import test_improver_study as finite_fixtures
+        from test_source_screen import SourceScreenTests
+
+        from buddha import improver_handoff, improver_launch, launch_common
+        from buddha.gateway import RawHTTPTransport, _read_manifest
+        from buddha.releases import Selection, _json
+
+        fixture = assessment_fixtures.ImproverAssessmentTests("runTest")
+        self.addCleanup(fixture.doCleanups)
+        fixture.setUp()
+        setup = SourceScreenTests.setUp
+
+        def configure(screen):
+            setup(screen)
+            screen.engine.configure_held_replacement(screen.record["native"], screen=screen)
+            screen.engine.native = copy.deepcopy(screen.record["native"])
+
+        setup_finite = finite_fixtures.FiniteImproverStudyTests.fixture_before_new_api
+
+        def compact(finite, **kwargs):
+            return setup_finite(finite, bootstrap=False, **kwargs)
+
+        with (
+            patch.object(SourceScreenTests, "setUp", configure),
+            patch.object(
+                finite_fixtures.FiniteImproverStudyTests, "fixture_before_new_api", compact
+            ),
+        ):
+            fixture.fixture(proposal_capacity=True)
+        harness = finite_fixtures.ImproverStudyCapacityTests("runTest")
+        _, development = harness.fixture(finite_fixture=fixture.f)
+        fixture.f.outcomes = {(0, 0, arm, 0): "failed" for arm in range(2)}
+        definition = copy.deepcopy(fixture.definition)
+        definition.update(
+            format="buddha.improver-assessment-trial.v4",
+            development=fixture.write("held-development.json", development),
+            native=copy.deepcopy(development["starts"][0]["screen"]["native"]),
+        )
+        definition["phase_limits"]["search"] = copy.deepcopy(development["limits"]["study"])
+        builder = launch_fixtures.ImproverLaunchTests("runTest")
+        builder.f, builder.definition, builder.root = fixture, definition, fixture.root
+        builder.api, builder.handoff = improver_launch, improver_handoff
+        builder.setUp()
+        bundle = builder.bundle()
+        root = Path(improver_launch.__file__).absolute().parents[1]
+        pins = {
+            path.relative_to(root).as_posix(): sha(path.read_bytes())
+            for path in (root / "buddha").glob("*.py")
+        } | {name: sha((root / name).read_bytes()) for name in launch_common._UNIFIED_OUTER_V1}
+        bundle["record"]["source_sha256"].update(
+            {str(root / name): digest for name, digest in pins.items()}
+        )
+        builder.save(bundle)
+        launch_pin = sha(bundle["path"].read_bytes())
+        transport = RawHTTPTransport(allow_paid=True, timeout_seconds=300)
+        replacement = fixture.engine.held_connection()
+        owner = fixture.study / "common/0/0/screen/tasks/0/evaluation/owners/2"
+        partition_owner = owner.with_name("1")
+        execute = fixture.execute
+        initial_calls = []
+        reached_final = []
+
+        class ReachedFinal(BaseException):
+            pass
+
+        def run_worker(spec, *, initial, handle, **kwargs):
+            stage = handle.__self__.gateway.directory
+            if stage.is_relative_to(fixture.trial / "final"):
+                reached_final.append(stage)
+                raise ReachedFinal
+            if stage == partition_owner:
+                generation = stage.parents[2] / "generation/owners/0"
+                actor = Selection.from_bytes(_json(_read_manifest(generation)["selection"]))
+                fixture.f.h.programs[actor.agent_sha256]["distinct"] = 1
+            if stage == owner:
+                initial_calls.append(stage)
+            return execute(spec, initial=initial, handle=handle, **kwargs)
+
+        def launch():
+            with (
+                fixture.supplied(),
+                patch.dict(os.environ, {"ANTHROPIC_API_KEY": test_gateway.KEY}),
+                patch("http.client.HTTPSConnection", side_effect=connect),
+                patch(
+                    "socket.socket.connect", side_effect=AssertionError("provider access blocked")
+                ),
+                patch(
+                    "socket.socket.connect_ex",
+                    side_effect=AssertionError("provider access blocked"),
+                ),
+            ):
+                return improver_launch.launch(
+                    bundle["path"],
+                    expected_sha256=launch_pin,
+                    live=True,
+                    confirm_project_keys=True,
+                    transport=transport,
+                    notice=lambda _message: None,
+                )
+
+        def connect(*args, **kwargs):
+            self.assertEqual(args[0], "api.anthropic.com")
+            return replacement
+
+        fixture.execute = run_worker
+        fixture.engine.held_error_once = True
+        stopped = launch()
+        self.assertEqual((stopped["status"], stopped["reason"]), ("incomplete", "unknown"))
+        authority = bundle["authorities"]["search"]
+        funding, _ = launch_common._snapshot(authority.path)
+        (unknown,) = [row for row in funding["auth_operations"] if row["status"] == "unknown"]
+        originals = {row["operation_id"]: row for row in funding["auth_operations"]}
+        partition = owner.parent.parent / "completed/1.json"
+        generation = owner.parent.parent.parent / "generation/completed/0.json"
+        seals = {path: path.read_bytes() for path in (partition, generation)}
+        decision = fixture.write(
+            "held-decision.json",
+            {
+                "format": "buddha.held-recovery.v1",
+                "handoff": builder.reference(bundle["path"]),
+                "owner": str(owner),
+                "operation_id": unknown["operation_id"],
+                "receipt_sha256": sha(unknown["response_json"].encode("utf-8")),
+                "executing_sources": pins,
+            },
+        )
+
+        with launch_common._held_recovery(
+            Path(decision["path"]), decision["sha256"], bundle["path"], launch_pin
+        ):
+            try:
+                with self.assertRaises(ReachedFinal):
+                    launch()
+            except improver_launch.ImproverLaunchError as error:
+                checkpoint(
+                    "held_launcher_stopped", diagnostic=launch_common._stop_diagnostic(error)
+                )
+                current = error
+                while current.__context__ is not None:
+                    current.__cause__ = current.__context__
+                    current = current.__context__
+                raise
+        self.assertEqual(len(initial_calls), 2)
+        self.assertEqual(len(reached_final), 1)
+        self.assertEqual({name: sha((root / name).read_bytes()) for name in pins}, pins)
+        self.assertTrue((fixture.trial / "freeze/ready.json").is_file())
+        self.assertEqual({path: path.read_bytes() for path in seals}, seals)
+        replacement.request.assert_called_once()
+        current, _ = launch_common._snapshot(authority.path)
+        self.assertEqual(
+            {
+                row["operation_id"]: row
+                for row in current["auth_operations"]
+                if row["operation_id"] in originals
+            },
+            originals,
+        )
+        self.assertEqual(current["totals"]["reserved_microusd"], unknown["reserve_microusd"])
+
     def test_original_launch_cancel_resume_and_keyless_completed_retirement(self):
         import test_improver_assessment as assessment_fixtures
         import test_improver_launch as launch_fixtures
