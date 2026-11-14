@@ -23,8 +23,8 @@ later recording phase saved the incomplete observation.
 
 ### Resume V5
 
-The keyless check of the original V5 handoff passed. The live command below
-requires separate approval. A read-only check matched all 638 operation records
+The keyless check of the original V5 handoff passed. The operator starts the
+live recovery locally. A read-only check matched all 638 operation records
 across the shared ledger and 199 original owners. It verified the stopped task's
 generation and partition seals and found one unresolved utility request.
 
@@ -112,24 +112,37 @@ after snapshots matched all V5 ledger hashes, including 637 settled calls,
 $5.600044 recorded spending and the $11.44 hold. Evidence is in
 `runs/checks/d8-v5-held-resume-preflight-20261113/observed/`.
 
+The updated recovery accepts rotated keys after operator confirmation of the
+billing project and workspace. The running process checks that the confirmed
+keys stay the same through dispatch. A short offline check at `6633224`
+verified the new source pins, original handoff, and saved utility request.
+Supplied-reply tests verified one replacement with a rotated key, rejection
+of a key swapped after confirmation, and reuse of the saved reply and hold.
+Actual V5 ledger hashes matched before and after. The earlier full keyless
+check applies to its original `a658960` source. Local evidence is in
+`runs/checks/d8-v5-held-resume-preflight-20261113/project-confirmation/`.
+
 #### V5 resume command
 
-Run these lines in a new PowerShell window after live recovery is approved.
+Run these lines in a new PowerShell window when you are ready to resume V5.
 The first clears inherited keys in that window so both masked prompts appear.
 The second checks the original V5 handoff and resumes the same study under its
 existing $150 combined cap and phase limits, including the retained $11.44
-hold. It can make paid requests. Use the same OpenAI and Anthropic project keys
-as V5. Startup checks run more than once and can take several minutes each.
+hold. It can make paid requests. By using `--confirm-project-keys`, you confirm
+that the keys you enter are for your intended OpenAI project and Anthropic
+workspace and use the reviewed standard/default public pay-as-you-go billing.
+Rotated keys are accepted. Buddha relies on your confirmation of those settings.
+Startup checks run more than once and can take several minutes each.
 Keep the window open. To stop, press **Ctrl+C once** and wait for the final
 status. Keep any stop message and its closing JSON for review.
 
 ```powershell
 Remove-Item -LiteralPath 'Env:\OPENAI_API_KEY', 'Env:\ANTHROPIC_API_KEY' -ErrorAction SilentlyContinue
-& 'C:\Program Files\Python313\python.exe' -B 'C:\Users\arvik\code\buddha\runs\r315c\docs\conformance\unified-run.py' `
+& 'C:\Program Files\Python313\python.exe' -B 'C:\Users\arvik\code\buddha\runs\r315d\docs\conformance\unified-run.py' `
   --handoff 'C:\Users\arvik\code\buddha\runs\imp01-d8-fresh-20261112-v5-combined\NOT-CREATED-unified-launch.json' `
   --sha256 '5a6ad73dd705b2d4114c4cf1faf1c074b16e37acdccb0918a39981bfb56da312' `
-  --resume-decision 'C:\Users\arvik\code\buddha\runs\checks\d8-v5-held-resume-preflight-20261113\fixed\resume-decision.json' `
-  --resume-sha256 '0b5b8557b0368ba4c03e247cf939bc729eddceb3a50d8a32185d1095e3b087fb' `
+  --resume-decision 'C:\Users\arvik\code\buddha\runs\checks\d8-v5-held-resume-preflight-20261113\project-confirmation\resume-decision.json' `
+  --resume-sha256 'b5bff5d1b7854cf9e0657caadc0270d5018738409010a880e92c74a59436b26b' `
   --live --prompt-keys --confirm-project-keys
 ```
 

@@ -50,6 +50,12 @@ reviewed key can continue that same request; no replacement owner is created.
 A completed reply can still replay without a key or another charge. An
 ambiguous dispatched request retains the existing stop rule.
 
+The combined launcher supports rotated keys for a reviewed held-request
+recovery. The operator confirms the billing project and reviewed terms.
+The launcher keeps fingerprints for the confirmed keys in memory for the
+original primary and plain launch contexts. It checks those fingerprints at
+dispatch and retains the historical reviews in the saved manifests.
+
 Historical three-field reviews use `credential_sha256` and keep their original
 SHA256 semantics. They are not silently converted to v2. The historical policy
 launcher still creates those v1 reviews. Changed Gateway code creates a new
