@@ -367,7 +367,7 @@ def _stable(first: dict[str, Any], second: dict[str, Any]) -> bool:
 def _primary_keys(checked: dict[str, Any]) -> None:
     review = checked["primary"].get("review")
     if review is not None:
-        expected = _object(review["credential_fingerprints"])
+        expected = gateway._dispatch_fingerprints(review)
         actual = gateway.credential_fingerprints(
             list(expected), context=checked["record"]["primary_launch"]["sha256"]
         )
@@ -548,17 +548,32 @@ def launch(
                 raise UnifiedLaunchError("transport differs from the original primary launch")
             specs = [gateway._spec(p) for p in checked["profiles"]]
             phase[0] = "keys"
-            with credentials.key_environment(
-                improver_launch._Profiles(specs),
-                prompt_keys=prompt_keys,
-                notice=lambda text: common._emit(notice, text),
+            with (
+                credentials.key_environment(
+                    improver_launch._Profiles(specs),
+                    prompt_keys=prompt_keys,
+                    notice=lambda text: common._emit(notice, text),
+                ),
+                ExitStack() as session,
             ):
                 fingerprints = gateway.credential_fingerprints(
                     list(dict.fromkeys(spec.provider for spec in specs)), context=expected_sha256
                 )
+                if common._HELD_RECOVERY.get() is not None:
+                    primary_review = _object(checked["primary"]["review"])
+                    primary_digest = _digest(record["primary_launch"]["sha256"])
+                    confirmed = {
+                        expected_sha256: fingerprints,
+                        primary_digest: gateway.credential_fingerprints(
+                            list(_object(primary_review["credential_fingerprints"])),
+                            context=primary_digest,
+                        ),
+                    }
+                    token = gateway._CONFIRMED_PROJECT_KEYS.set(confirmed)
+                    session.callback(gateway._CONFIRMED_PROJECT_KEYS.reset, token)
                 if (
                     checked["review"] is not None
-                    and checked["review"]["credential_fingerprints"] != fingerprints
+                    and gateway._dispatch_fingerprints(checked["review"]) != fingerprints
                 ):
                     raise UnifiedLaunchError("credential differs from the original raw review")
                 _primary_keys(checked)

@@ -637,6 +637,7 @@ class UnifiedLaunchLifecycleTests(unittest.TestCase):
         self.primary_state = "complete"
         self.primary_reports()
         self.primary_review = {
+            "format": "buddha.account-review.v2",
             "credential_fingerprints": {"openai": "c" * 64},
             "credential_context": self.record["primary_launch"]["sha256"],
         }
@@ -646,6 +647,50 @@ class UnifiedLaunchLifecycleTests(unittest.TestCase):
         self.assertFalse(self.prepared)
         self.assertFalse(self.runs)
         self.assertNotIn(("primary",), self.events)
+
+    def test_held_resume_uses_confirmed_keys_without_rewriting_account_reviews(self):
+        self.retained_review(fingerprints=dict.fromkeys(self.fingerprints, "c" * 64))
+        raw_review = self.workspace / "review.json"
+        before = raw_review.read_bytes()
+        self.primary_state = "prepared"
+        self.states["regenerate"] = "prepared"
+        primary_context = self.record["primary_launch"]["sha256"]
+        self.primary_review = {
+            "format": "buddha.account-review.v2",
+            "credential_context": primary_context,
+            "credential_fingerprints": {"openai": "d" * 64},
+        }
+        historical_primary = self.primary_review
+        self.first_partial = "regenerate"
+
+        def run_primary(path, **options):
+            self.assertEqual(
+                gateway._dispatch_fingerprints(historical_primary),
+                {"openai": self.fingerprints["openai"]},
+            )
+            result = self.primary(path, **options)
+            self.primary_review = historical_primary
+            return result
+
+        def run_reference(directory, **options):
+            self.assertEqual(gateway._dispatch_fingerprints(json.loads(before)), self.fingerprints)
+            return self.run_reference(directory, **options)
+
+        with (
+            self.seams(),
+            patch.object(self.api.common, "_HELD_RECOVERY") as held,
+            patch.object(self.api.improver_launch, "launch", side_effect=run_primary),
+            patch.object(self.api.baseline, "run_baseline", side_effect=run_reference),
+        ):
+            held.get.return_value = {"primary": str(self.launch_path)}
+            with self.assertRaises(self.api.UnifiedLaunchError):
+                self.launch(confirm_project_keys=False)
+            self.assertFalse(any(event[0] == "keys" for event in self.events))
+            result = self.launch()
+        self.assertEqual((result["status"], result["phase"]), ("incomplete", "plain-regenerate"))
+        self.assertEqual(raw_review.read_bytes(), before)
+        self.assertIsNone(gateway._CONFIRMED_PROJECT_KEYS.get())
+        self.assertEqual(gateway._dispatch_fingerprints(historical_primary), {"openai": "d" * 64})
 
     def test_missing_live_confirmation_invalid_options_or_transport_never_enter_keys(self):
         for changes in (

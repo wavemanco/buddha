@@ -513,7 +513,7 @@ def launch(
                     list(dict.fromkeys(p.provider for p in specs)), context=expected_sha256
                 )
                 review = cast(dict[str, object] | None, checked["review"])
-                if review is not None and review["credential_fingerprints"] != fingerprints:
+                if review is not None and gateway._dispatch_fingerprints(review) != fingerprints:
                     raise ImproverLaunchError("credential differs from original reviewed binding")
                 phase[0] = "rechecking"
                 repeated = check_launch(path, expected_sha256=expected_sha256)
