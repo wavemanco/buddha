@@ -428,6 +428,7 @@ def launch(
     notice: Callable[[str], None] = _notice,
     heartbeat_seconds: float = 10,
     on_incomplete: Callable[[dict[str, object]], None] | None = None,
+    _checked_primary: dict[str, Any] | None = None,
 ) -> dict[str, object]:
     """Check, enter keys once, recheck, then use original phase controllers.
 
@@ -445,6 +446,20 @@ def launch(
         and not isinstance(transport, RawHTTPTransport)
     ):
         raise ImproverLaunchError("invalid matched launch options")
+    if _checked_primary is not None:
+        recovery = common._HELD_RECOVERY.get()
+        if (
+            receipt is not None
+            or prompt_keys
+            or recovery is None
+            or recovery.get("primary") != str(path.absolute())
+            or common._retained_development() is None
+            or _checked_primary["phase"] != "search"
+            or _checked_primary["bindings"].get(str(path.absolute())) != expected_sha256
+        ):
+            raise ImproverLaunchError(
+                "combined startup needs its exact checked primary and recovery"
+            )
     requested = (
         None if receipt is None else common._receipt_path(receipt, error=ImproverLaunchError)
     )
@@ -461,9 +476,11 @@ def launch(
                 pass  # Observers cannot change the controller result or its normal saved partial.
 
     try:
-        common._emit(
-            notice, "Checking approved matched configuration and original state; no keys read yet."
-        )
+        if _checked_primary is None:
+            common._emit(
+                notice,
+                "Checking approved matched configuration and original state; no keys read yet.",
+            )
         with common._heartbeat(
             notice, phase, current_grant, heartbeat_seconds, thread_name="improver-progress"
         ):
@@ -472,7 +489,11 @@ def launch(
                 if any(requested.is_relative_to(root) for root in roots):
                     raise ImproverLaunchError("receipt overlaps original controls or output")
                 output = requested
-            checked = check_launch(path, expected_sha256=expected_sha256)
+            checked = (
+                check_launch(path, expected_sha256=expected_sha256)
+                if _checked_primary is None
+                else _checked_primary
+            )
             paths = {name: _path(p) for name, p in _object(checked["authorizations"]).items()}
             public["funding"] = checked["funding"]
             if output is not None and any(
@@ -515,18 +536,21 @@ def launch(
                 review = cast(dict[str, object] | None, checked["review"])
                 if review is not None and gateway._dispatch_fingerprints(review) != fingerprints:
                     raise ImproverLaunchError("credential differs from original reviewed binding")
-                phase[0] = "rechecking"
-                repeated = check_launch(path, expected_sha256=expected_sha256)
-                changed = [
-                    k
-                    for k in ("bindings", "state", "phase", "state_sha256", "funding")
-                    if _json(repeated[k]) != _json(checked[k])
-                ]
-                if repeated["stop_code"] is not None or changed:
-                    raise ImproverLaunchError(
-                        "original saved state changed during key entry: "
-                        + ", ".join(changed or ["readiness"])
-                    )
+                if _checked_primary is not None and review is not None:
+                    gateway._review(review, fresh=True)
+                if _checked_primary is None:
+                    phase[0] = "rechecking"
+                    repeated = check_launch(path, expected_sha256=expected_sha256)
+                    changed = [
+                        k
+                        for k in ("bindings", "state", "phase", "state_sha256", "funding")
+                        if _json(repeated[k]) != _json(checked[k])
+                    ]
+                    if repeated["stop_code"] is not None or changed:
+                        raise ImproverLaunchError(
+                            "original saved state changed during key entry: "
+                            + ", ".join(changed or ["readiness"])
+                        )
                 authorities = {name: Authorization(p) for name, p in paths.items()}
                 proposal = _object(checked["proposal"])
                 if checked["state"] == "fresh":

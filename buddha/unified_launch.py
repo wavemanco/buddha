@@ -17,6 +17,7 @@ from buddha import (
     gateway,
     improver_handoff,
     improver_launch,
+    native_run,
     plain_comparison,
     unified_funding,
 )
@@ -318,16 +319,7 @@ def _check_configuration(
     )
     if not baseline_state._absent(directory / "comparison.json") and phase != "comparison":
         raise UnifiedLaunchError("comparison publication precedes its original complete inputs")
-    repeated = baseline_state.inspect_references(
-        parameters["comparison_plan"],
-        expected_plan_sha256=parameters["expected_plan_sha256"],
-        input_bindings=controls,
-    )
-    if repeated["state_sha256"] != raw["state_sha256"]:
-        raise UnifiedLaunchError("reference state changed during combined checking")
-    for p, d in controls.items():
-        if file_hash(p, max_bytes=256 * 1024**2) != d:
-            raise UnifiedLaunchError("combined control changed during checking")
+    _recheck_references(parameters, controls, raw)
     return {
         "format": "buddha.unified-launch-check.v1",
         "record": record,
@@ -347,6 +339,21 @@ def _check_configuration(
         "directory": str(directory),
         "outer_lock_present": lock,
     }
+
+
+def _recheck_references(
+    parameters: dict[str, Any], controls: dict[Path, str], raw: dict[str, Any]
+) -> None:
+    repeated = baseline_state.inspect_references(
+        parameters["comparison_plan"],
+        expected_plan_sha256=parameters["expected_plan_sha256"],
+        input_bindings=controls,
+    )
+    if repeated["state_sha256"] != raw["state_sha256"]:
+        raise UnifiedLaunchError("reference state changed during combined checking")
+    for p, d in controls.items():
+        if file_hash(p, max_bytes=256 * 1024**2) != d:
+            raise UnifiedLaunchError("combined control changed during checking")
 
 
 def check_launch(path: Path, *, expected_sha256: str) -> dict[str, object]:
@@ -519,21 +526,53 @@ def launch(
         record, _ = _configuration(path, expected_sha256, observation=observation)
         directory = common._path(record["directory"])
         _workspace(directory)
+        recovery = common._HELD_RECOVERY.get()
+        trial = None if recovery is None else recovery.get("trial")
+        held_startup = (
+            live
+            and confirm_project_keys
+            and isinstance(trial, Path)
+            and not (trial / "search/study/report.json").exists()
+        )
+        if held_startup and recovery is not None:
+            common._emit(
+                notice, "Checking Docker and the pinned evaluator image before reading saved work."
+            )
+            try:
+                native_run.check_held_image(common._path(recovery["owner"]))
+            except ReleaseError:
+                common._emit(
+                    notice, "The saved utility evaluator did not pass its Docker preflight."
+                )
+                raise
         directory.mkdir(exist_ok=True)
         observation_directory = directory / "observations"
         observation_directory.mkdir(exist_ok=True)
         common._emit(
-            notice, "Checking the complete funded comparison and original owners before keys."
+            notice,
+            "Reading the saved study once before asking for keys."
+            if held_startup
+            else "Checking the complete funded comparison and original owners before keys.",
         )
-        checked = inspect()
-        if checked["stop_code"] is not None:
-            return partial(checked["stop_code"])
+        if not held_startup:
+            checked = inspect()
+            if checked["stop_code"] is not None:
+                return partial(checked["stop_code"])
         with baseline._exclusive(directory):
-            checked = inspect(owned=True)
+            if held_startup and recovery is not None:
+                startup_token = common._HELD_RECOVERY.set(recovery | {"retain_startup": True})
+                try:
+                    checked = inspect(owned=True)
+                finally:
+                    common._HELD_RECOVERY.reset(startup_token)
+            else:
+                checked = inspect(owned=True)
             phase[0] = checked["phase"]
             if checked["stop_code"] is not None:
                 return partial(checked["stop_code"])
-            common._phase_before_start(common._path(checked["primary"]["directory"]))
+            retained = held_startup and common._retained_development() is not None
+            if not retained:
+                common._phase_before_start(common._path(checked["primary"]["directory"]))
             if phase[0] == "comparison":
                 with common._heartbeat(notice, phase, [None], heartbeat_seconds):
                     return _publication(checked, expected_sha256)
@@ -578,10 +617,24 @@ def launch(
                     raise UnifiedLaunchError("credential differs from the original raw review")
                 _primary_keys(checked)
                 phase[0] = "checking"
-                repeated = inspect(owned=True)
-                if not _stable(checked, repeated):
-                    raise UnifiedLaunchError("original comparison changed during key entry")
-                common._phase_before_start(common._path(checked["primary"]["directory"]))
+                if retained:
+                    with ExitStack() as key_check:
+                        _configuration(path, expected_sha256, observation=key_check)
+                    if any(
+                        not baseline_state._absent(directory / name)
+                        for name in ("comparison.json", "review.json")
+                    ):
+                        raise UnifiedLaunchError("original comparison changed during key entry")
+                    _recheck_references(
+                        _parameters(record),
+                        {common._path(p): d for p, d in checked["controls"].items()},
+                        checked["references"],
+                    )
+                else:
+                    repeated = inspect(owned=True)
+                    if not _stable(checked, repeated):
+                        raise UnifiedLaunchError("original comparison changed during key entry")
+                    common._phase_before_start(common._path(checked["primary"]["directory"]))
                 phase[0] = checked["phase"]
                 active = transport or RawHTTPTransport(allow_paid=True, timeout_seconds=timeout)
                 if checked["primary"]["state"] != "complete":
@@ -596,6 +649,7 @@ def launch(
                         notice=notice,
                         heartbeat_seconds=heartbeat_seconds,
                         on_incomplete=publish_diagnostic,
+                        **({"_checked_primary": checked["primary"]} if retained else {}),
                     )
                     if result["status"] != "complete":
                         return partial(_controller_reason(result, "primary_incomplete"))

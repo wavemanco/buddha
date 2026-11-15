@@ -14,7 +14,7 @@ from typing import TYPE_CHECKING, Any, Protocol, cast
 from buddha import credentials, gateway
 from buddha import native_pipeline as pipeline
 from buddha.authorization import HeldReplacement
-from buddha.doctor import _Busy, _TreeChanged, _Unsupported
+from buddha.doctor import _Busy, _Capture, _TreeChanged, _Unsupported
 from buddha.gateway_history import MAX_LEDGER_BYTES
 from buddha.provider import ModelSpec
 from buddha.releases import (
@@ -143,10 +143,46 @@ def _retained_development() -> _DevelopmentObservation | None:
     return None if scope is None else scope[3]
 
 
+def _retain_held_development(development: _DevelopmentObservation, capture: _Capture) -> None:
+    """Carry one checked held-recovery restore into the original writer."""
+    scope = _PHASE_CONTINUATION.get()
+    recovery = _HELD_RECOVERY.get()
+    if (
+        scope is None
+        or scope[2:] != (None, None)
+        or recovery is None
+        or capture.root != recovery.get("trial")
+    ):
+        raise ReleaseError("held development requires its original unchecked startup slot")
+
+    def before_start(trial: Path, owned_locks: frozenset[str]) -> None:
+        from buddha import trial_fence
+
+        lease = trial_fence._HELD.get()
+        if (
+            trial != capture.root
+            or lease is None
+            or lease.binding.root != trial
+            or owned_locks & capture.entries.keys()
+        ):
+            raise ReleaseError("held development changes its original trial or writer")
+        trial_fence._assert_held(lease.binding)
+        entries = capture._tree_entries()
+        if entries.keys() != capture.entries.keys() | owned_locks:
+            raise ReleaseError("held development tree changed before its writer leases")
+        capture.entries.update({name: entries[name] for name in owned_locks})
+        capture.finish()
+
+    _PHASE_CONTINUATION.set((scope[0], scope[1], before_start, development))
+
+
 def _discard_development() -> None:
     scope = _PHASE_CONTINUATION.get()
     if scope is not None and scope[3] is not None:
-        _PHASE_CONTINUATION.set((scope[0], scope[1], scope[2], None))
+        before_start = scope[2]
+        if _HELD_RECOVERY.get() is not None:
+            before_start = None
+        _PHASE_CONTINUATION.set((scope[0], scope[1], before_start, None))
 
 
 def _take_development(trial: Path) -> _DevelopmentObservation | None:
@@ -204,16 +240,24 @@ def _held_recovery(path: Path, digest: str, handoff: Path, handoff_digest: str) 
     """Verify exact old and executing bytes for a single approved original launch."""
     if _HELD_RECOVERY.get() is not None or gateway._CORE_COMPATIBILITY.get() is not None:
         raise ReleaseError("held recovery cannot be nested")
-    raw = _load(pipeline._read(path, _digest(digest)))
-    record = _object(
-        raw,
-        {"format", "handoff", "owner", "operation_id", "receipt_sha256", "executing_sources"},
-    )
-    if record["format"] != "buddha.held-recovery.v1" or record["handoff"] != {
-        "path": str(handoff.absolute()),
-        "sha256": _digest(handoff_digest),
-    }:
+    fields = {"format", "handoff", "owner", "operation_id", "receipt_sha256", "executing_sources"}
+    record = _load(pipeline._read(path, _digest(digest)))
+    refresh = record.get("format") == "buddha.held-recovery.v2"
+    record = _object(record, fields | ({"prior_decision"} if refresh else set()))
+    if record["format"] not in {"buddha.held-recovery.v1", "buddha.held-recovery.v2"} or record[
+        "handoff"
+    ] != {"path": str(handoff.absolute()), "sha256": _digest(handoff_digest)}:
         raise ReleaseError("held recovery changes its original launch")
+    review_sha256 = digest
+    if refresh:
+        prior = _object(record["prior_decision"], {"path", "sha256"})
+        review_sha256 = _digest(prior["sha256"])
+        original = _object(_load(pipeline._read(_path(prior["path"]), review_sha256)), fields)
+        if original["format"] != "buddha.held-recovery.v1" or any(
+            record[key] != original[key]
+            for key in ("handoff", "owner", "operation_id", "receipt_sha256")
+        ):
+            raise ReleaseError("refreshed sources change the original held decision")
     old = _load(pipeline._read(handoff, handoff_digest))
     primary_ref = _object(old.get("primary_launch", record["handoff"]))
     primary = _load(pipeline._read(_path(primary_ref["path"]), _digest(primary_ref["sha256"])))
@@ -271,7 +315,7 @@ def _held_recovery(path: Path, digest: str, handoff: Path, handoff_digest: str) 
                 "run_id": _text(manifest["run_id"]),
                 "original_operation_id": _digest(record["operation_id"]),
                 "receipt_sha256": _digest(record["receipt_sha256"]),
-                "review_sha256": digest,
+                "review_sha256": review_sha256,
             }
         )
         core = gateway._CORE_COMPATIBILITY.set(

@@ -8,6 +8,7 @@ import json
 import os
 import shutil
 import subprocess
+import sys
 import unittest
 from dataclasses import asdict, replace
 from pathlib import Path
@@ -20,7 +21,7 @@ from buddha.executor import ExecutionResult, ExecutorError, Limits
 from buddha.gateway import GatewayCall
 from buddha.native_run import NativeRunError, NativeSession
 from buddha.provider import PendingOperation
-from buddha.releases import Release, _json, inventory, prepare_selection
+from buddha.releases import Release, ReleaseError, _json, inventory, prepare_selection
 from buddha.wire import RawEnvelope
 
 
@@ -819,6 +820,57 @@ class NativeSessionTests(unittest.TestCase):
         )
         self.assertEqual(self.gateway.ledger.totals()["operation_count"], 0)
         self.assertEqual(self.gateway.ledger.totals()["committed_microusd"], 0)
+
+    def test_held_image_preflight_uses_only_the_pinned_descriptor_and_engine(self):
+        owner = self.fixture.root / "evaluation/owners/2"
+        owner.mkdir(parents=True)
+        descriptor = owner.parent.parent / "command-2.json"
+        descriptor.write_bytes(_json(self.record))
+        binding = {"path": str(descriptor), "sha256": sha(descriptor.read_bytes())}
+        manifest = {"invocation": {"inputs": [binding]}}
+        spec = self.record["executor"]
+        image = {"Id": spec["image_id"], "Os": "linux", "Architecture": "amd64", "Config": {}}
+        argv = [
+            sys.executable,
+            "--host",
+            spec["docker_endpoint"],
+            "inspect",
+            "--format",
+            "{{json .}}",
+            spec["image_id"],
+        ]
+        with (
+            patch.object(native_run, "_read_manifest", return_value=manifest),
+            patch("buddha.executor.shutil.which", return_value=sys.executable),
+            patch("buddha.executor.subprocess.run") as control,
+        ):
+            control.return_value = subprocess.CompletedProcess(argv, 0, _json(image), b"")
+            native_run.check_held_image(owner)
+            self.assertEqual(control.call_args.args, (argv,))
+            control.reset_mock()
+            binding["sha256"] = "f" * 64
+            with self.assertRaises(ReleaseError):
+                native_run.check_held_image(owner)
+            control.assert_not_called()
+
+    def test_held_image_failure_precedes_replacement_and_container(self):
+        session = self.session()
+        error = ExecutorError("control", pre_cleanup_failure=("image_inspect", "control"))
+        with (
+            patch.object(session, "held_replacement", object()),
+            patch.object(native_run.executor, "check_image", side_effect=error) as probe,
+            patch.object(session.gateway, "_prepare_held_replacement") as replacement,
+            patch.object(native_run.executor, "run_container") as container,
+        ):
+            report = session.run()
+        probe.assert_called_once_with(session.spec.image_id, docker_endpoint=session.endpoint)
+        replacement.assert_not_called()
+        container.assert_not_called()
+        self.assertEqual(report["status"], "failed")
+        self.assertEqual(
+            report["execution"],
+            {"exit_code": None, "image_id": session.spec.image_id} | error.to_record(),
+        )
 
     def test_public_configuration_mutation_cannot_change_dispatched_configuration(self):
         session = self.session()

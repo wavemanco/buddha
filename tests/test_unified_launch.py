@@ -692,6 +692,180 @@ class UnifiedLaunchLifecycleTests(unittest.TestCase):
         self.assertIsNone(gateway._CONFIRMED_PROJECT_KEYS.get())
         self.assertEqual(gateway._dispatch_fingerprints(historical_primary), {"openai": "d" * 64})
 
+    def test_held_startup_checks_once_and_passes_checked_primary_into_execution(self):
+        from buddha import native_run
+
+        self.primary_state = "prepared"
+        self.primary_result = "incomplete"
+        context = self.record["primary_launch"]["sha256"]
+        self.primary_review = {
+            "format": "buddha.account-review.v2",
+            "credential_context": context,
+            "credential_fingerprints": {"openai": "d" * 64},
+        }
+        owner = self.primary_root / "search/study/utility"
+        recovery = {"trial": self.primary_root, "owner": str(owner)}
+        checked = None
+
+        def check(*args, **kwargs):
+            nonlocal checked
+            self.assertTrue((self.workspace / "running.lock").is_file())
+            self.assertEqual(self.events[0], ("docker",))
+            self.assertTrue(self.api.common._HELD_RECOVERY.get()["retain_startup"])
+            checked = self.check(*args, **kwargs)
+            checked["references"]["state_sha256"] = "0" * 64
+            return checked
+
+        def run(path, **options):
+            self.assertIs(options.pop("_checked_primary"), checked["primary"])
+            return self.primary(path, **options)
+
+        token = self.api.common._HELD_RECOVERY.set(recovery)
+        try:
+            with (
+                self.seams(),
+                patch.object(
+                    native_run,
+                    "check_held_image",
+                    side_effect=lambda *_args: self.events.append(("docker",)),
+                ) as image,
+                patch.object(self.api, "_check", side_effect=check) as check_call,
+                patch.object(
+                    self.api.baseline_state,
+                    "inspect_references",
+                    side_effect=lambda *_args, **_kwargs: checked["references"],
+                ) as raw_check,
+                patch.object(self.api.improver_launch, "launch", side_effect=run),
+                patch.object(self.api.common, "_retained_development", return_value=(object(), {})),
+            ):
+                result = self.launch()
+                image.assert_called_once_with(owner)
+                check_call.assert_called_once_with(self.path, self.digest, owned_lock=True)
+                raw_check.assert_called_once()
+                self.assertLess(
+                    self.events.index(("check", True)), self.events.index(("keys", True))
+                )
+                for name in ("comparison.json", "review.json"):
+                    with self.subTest(appeared_during_key_entry=name):
+                        artifact = self.workspace / name
+                        self.events.clear()
+                        check_call.reset_mock()
+                        self.enter_change = lambda target=artifact: target.write_bytes(b"{}")
+                        try:
+                            with self.assertRaisesRegex(
+                                self.api.UnifiedLaunchError, "changed during key entry"
+                            ):
+                                self.launch()
+                        finally:
+                            artifact.unlink()
+                            self.enter_change = None
+                        check_call.assert_called_once_with(self.path, self.digest, owned_lock=True)
+                        self.assertNotIn(("primary",), self.events)
+        finally:
+            self.api.common._HELD_RECOVERY.reset(token)
+        self.assertEqual((result["status"], result["reason"]), ("incomplete", "primary_incomplete"))
+        self.assertTrue(result["observation_saved"])
+        self.assertFalse(self.prepared)
+        self.assertFalse(self.runs)
+        self.assertFalse((self.workspace / "running.lock").exists())
+        self.assertEqual(self.shared.summary()["operation_count"], 0)
+
+    def test_held_startup_checks_docker_before_history_or_keys(self):
+        from buddha import executor, native_run
+
+        owner = self.primary_root / "search/study/utility"
+        token = self.api.common._HELD_RECOVERY.set(
+            {"trial": self.primary_root, "owner": str(owner)}
+        )
+        try:
+            with (
+                self.seams(),
+                patch.object(
+                    native_run,
+                    "check_held_image",
+                    side_effect=executor.ExecutorError(
+                        "control", pre_cleanup_failure=("image_inspect", "control")
+                    ),
+                ) as image,
+                self.assertRaises(executor.ExecutorError),
+            ):
+                self.launch()
+        finally:
+            self.api.common._HELD_RECOVERY.reset(token)
+        image.assert_called_once_with(owner)
+        self.assertEqual(self.events, [])
+        self.assertFalse(self.workspace.exists())
+        self.assertEqual(self.shared.summary()["operation_count"], 0)
+
+    def test_held_repin_preserves_the_durable_review_and_rejects_identity_changes(self):
+        from buddha import launch_common as common
+        from buddha.releases import ReleaseError, file_hash
+
+        def write(name, record):
+            target = self.root / name
+            target.write_bytes(_json(record))
+            return reference(target)
+
+        source_root = Path(common.__file__).absolute().parents[1]
+        executing = {
+            path.relative_to(source_root).as_posix(): file_hash(path)
+            for path in (source_root / "buddha").glob("*.py")
+        } | {name: file_hash(source_root / name) for name in common._UNIFIED_OUTER_V1}
+        primary = write(
+            "held-primary.json",
+            {
+                "directory": str(self.primary_root),
+                "source_sha256": {str(source_root / name): pin for name, pin in executing.items()},
+            },
+        )
+        handoff = write("held-combined.json", {"primary_launch": primary, "source_sha256": {}})
+        owner = self.primary_root / "search/study/task/evaluation/owners/2"
+        reviewed = {
+            "format": "buddha.held-recovery.v1",
+            "handoff": handoff,
+            "owner": str(owner),
+            "operation_id": "1" * 64,
+            "receipt_sha256": "2" * 64,
+            "executing_sources": dict(executing),
+        }
+        old = write("held-old.json", reviewed)
+        reviewed["executing_sources"]["buddha/__init__.py"] = "a" * 64
+        historical = write("held-prior-source.json", reviewed)
+        repin = reviewed | {
+            "format": "buddha.held-recovery.v2",
+            "prior_decision": historical,
+            "executing_sources": executing,
+        }
+        manifest = {"core": gateway._core_sources(), "run_id": "synthetic-held-run"}
+
+        def scope(binding):
+            return common._held_recovery(
+                Path(binding["path"]), binding["sha256"], Path(handoff["path"]), handoff["sha256"]
+            )
+
+        with patch.object(gateway, "_read_manifest", return_value=manifest):
+            with scope(old):
+                self.assertEqual(common._HELD_RECOVERY.get()["review_sha256"], old["sha256"])
+            current = write("held-repin.json", repin)
+            with scope(current):
+                self.assertNotEqual(current["sha256"], historical["sha256"])
+                self.assertEqual(common._HELD_RECOVERY.get()["review_sha256"], historical["sha256"])
+            for change in (
+                {"prior_decision": historical | {"sha256": "3" * 64}},
+                {"handoff": handoff | {"sha256": "3" * 64}},
+                {"owner": str(owner.with_name("3"))},
+                {"operation_id": "3" * 64},
+                {"receipt_sha256": "3" * 64},
+            ):
+                with (
+                    self.subTest(field=next(iter(change))),
+                    self.assertRaises(ReleaseError),
+                    scope(write("held-invalid.json", repin | change)),
+                ):
+                    self.fail("unmatched recovery entered its scope")
+        self.assertIsNone(common._HELD_RECOVERY.get())
+        self.assertIsNone(gateway._CORE_COMPATIBILITY.get())
+
     def test_missing_live_confirmation_invalid_options_or_transport_never_enter_keys(self):
         for changes in (
             {"live": False},

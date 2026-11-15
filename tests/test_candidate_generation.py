@@ -463,6 +463,7 @@ class CandidateGenerationTests(unittest.TestCase):
         keys = dict.fromkeys(("OPENAI_API_KEY", "ANTHROPIC_API_KEY"), gateway_fixtures.KEY)
         with (
             patch.dict(os.environ, keys if paid else {}, clear=True),
+            patch("buddha.executor.check_image"),
             patch("buddha.executor.run_container", side_effect=self.execute),
             patch("buddha.agent_run.AgentSession", side_effect=AssertionError("seed forbidden")),
             patch(
