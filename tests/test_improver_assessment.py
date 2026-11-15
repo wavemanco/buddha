@@ -233,6 +233,7 @@ class ImproverAssessmentTests(unittest.TestCase):
         with (
             self.f.supplied(),
             patch.object(finite_fixtures, "source", side_effect=equal_counted_source),
+            patch("buddha.executor.check_image"),
             patch("buddha.executor.run_container", side_effect=self.execute),
         ):
             yield

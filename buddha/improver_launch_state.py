@@ -251,6 +251,13 @@ def inspect_prepared_improver_trial(
         ):
             reasons.append("proposal_capacity")
     digests = capture.fingerprints()
+    if (
+        recovery is not None
+        and recovery.get("retain_startup")
+        and phase == "search"
+        and not reasons
+    ):
+        common._retain_held_development((development_reader, development), capture)
     return _load(
         _json(
             {

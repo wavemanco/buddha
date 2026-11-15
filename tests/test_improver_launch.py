@@ -423,6 +423,69 @@ class ImproverLaunchTests(unittest.TestCase):
 
 
 class ImproverLaunchInterfaceTests(unittest.TestCase):
+    def test_checked_primary_is_reused_only_for_its_exact_held_handoff(self):
+        from contextlib import nullcontext
+
+        from buddha import improver_launch as api
+        from buddha import launch_common as common
+
+        path = Path("synthetic-held-handoff.json").absolute()
+        directory = path.with_suffix("")
+        pin, fingerprint = "1" * 64, "2" * 64
+        checked = {
+            "phase": "search",
+            "state": "prepared",
+            "stop_code": None,
+            "directory": str(directory),
+            "bindings": {str(path): pin},
+            "authorizations": dict.fromkeys(("search", "validation", "final"), str(path)),
+            "funding": {"synthetic": True},
+            "proposal": {},
+            "review": {
+                "format": "buddha.account-review.v2",
+                "checked_on": datetime.now(UTC).date().isoformat(),
+                "credential_context": pin,
+                "credential_fingerprints": {"openai": fingerprint},
+                "account_scope": "Synthetic test only",
+            },
+            "profiles": [],
+            "timeout_seconds": 30,
+        }
+        opts = {
+            "live": True,
+            "confirm_project_keys": True,
+            "notice": lambda _text: None,
+            "_checked_primary": checked,
+        }
+        with (
+            patch.object(common, "_retained_development", return_value=(object(), {})),
+            patch.object(api, "check_launch", side_effect=AssertionError("duplicate restore")),
+            patch.object(api, "Authorization"),
+            patch.object(api.credentials, "key_environment", return_value=nullcontext()) as keys,
+            patch.object(
+                api.gateway, "credential_fingerprints", return_value={"openai": fingerprint}
+            ),
+            patch.object(
+                api.improver_study, "run_improver_study", return_value={"status": "incomplete"}
+            ) as study,
+            patch.object(api, "_saved_partial", return_value={"status": "incomplete"}),
+            patch.object(api.RawHTTPTransport, "prepare", side_effect=AssertionError("provider")),
+        ):
+            with self.assertRaises(api.ImproverLaunchError):
+                api.launch(path, expected_sha256=pin, **opts)
+            token = common._HELD_RECOVERY.set({"primary": str(path)})
+            try:
+                with self.assertRaises(api.ImproverLaunchError):
+                    api.launch(path, expected_sha256="3" * 64, **opts)
+                keys.assert_not_called()
+                study.assert_not_called()
+                result = api.launch(path, expected_sha256=pin, **opts)
+            finally:
+                common._HELD_RECOVERY.reset(token)
+        self.assertEqual((result["status"], result["phase"]), ("incomplete", "search"))
+        study.assert_called_once()
+        self.assertEqual(study.call_args.args, (directory / "search/study",))
+
     def test_caller_pinned_matched_launch_interfaces_are_available(self):
         from buddha.improver_launch import check_launch, launch
 

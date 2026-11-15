@@ -208,6 +208,63 @@ class ImproverLaunchStatePreparedTests(unittest.TestCase):
             action.assert_called_once()
         self.assertEqual(len(seen), 2)
 
+    def test_held_startup_reuses_checked_state_under_original_writer_locks(self):
+        from buddha import improver_study
+        from buddha import launch_common as common
+        from buddha.doctor import _Capture
+        from buddha.gateway import RawHTTPTransport
+
+        directory, expected = self.prepare()
+        search = directory / "search/study"
+        transport = RawHTTPTransport()
+        token = common._HELD_RECOVERY.set({"trial": directory, "retain_startup": True})
+        try:
+            retained = improver_study._restore(search, expected["authorizations"]["search"])
+
+            @contextmanager
+            def startup():
+                with common._phase_continuation(
+                    lambda pins, *, relative: pins,
+                    lambda trial, phase, controls: dict(controls),
+                ):
+                    capture = _Capture(directory)
+                    capture.finish()
+                    common._retain_held_development(retained, capture)
+                    yield
+
+            def advance(reader, state, authority, transport):
+                self.assertIs(reader, retained[0])
+                self.assertIs(state, retained[1])
+                self.assertIsNone(common._retained_development())
+                self.assertTrue((directory / ".trial-running.lock").is_file())
+                self.assertTrue((search / "running.lock").is_file())
+                return {"status": "synthetic_terminal"}
+
+            with (
+                patch.object(
+                    improver_study, "_restore", side_effect=AssertionError("duplicate replay")
+                ),
+                patch.object(improver_study, "_advance_action", side_effect=advance) as action,
+            ):
+                unexpected = directory / "unexpected.json"
+                with startup():
+                    unexpected.write_bytes(b"{}")
+                    try:
+                        with self.assertRaises(improver_study.ImproverStudyError) as refused:
+                            improver_study.run_improver_study(search, transport=transport)
+                        self.assertIn("tree changed", str(refused.exception.__context__))
+                    finally:
+                        unexpected.unlink()
+                action.assert_not_called()
+                with startup():
+                    self.assertEqual(
+                        improver_study.run_improver_study(search, transport=transport),
+                        {"status": "synthetic_terminal"},
+                    )
+                action.assert_called_once()
+        finally:
+            common._HELD_RECOVERY.reset(token)
+
     def test_first_owner_locks_detached_summary_and_stable_state_seal(self):
         directory, expected = self.prepare()
         report = self.inspect(directory, expected)

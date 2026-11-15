@@ -289,6 +289,48 @@ def _endpoint(docker: str) -> str:
     return _local_endpoint(endpoint)
 
 
+def _docker_executable(docker: str | None) -> str:
+    executable = shutil.which("docker") if docker is None else docker
+    if (
+        type(executable) is not str
+        or not Path(executable).is_absolute()
+        or not Path(executable).is_file()
+    ):
+        raise ExecutorError("unavailable")
+    return executable
+
+
+def _inspect_image(docker: str, endpoint: str, image_id: str) -> None:
+    image = _load(
+        _control(docker, ["--host", endpoint, "inspect", "--format", "{{json .}}", image_id])
+    )
+    config = image.get("Config")
+    if (
+        image.get("Id") != image_id
+        or image.get("Os") != "linux"
+        or image.get("Architecture") != "amd64"
+        or type(config) is not dict
+        or config.get("Volumes")
+    ):
+        raise ExecutorError("configuration")
+
+
+def check_image(image_id: str, *, docker_endpoint: str) -> None:
+    """Check the pinned local image without starting a container."""
+    if type(image_id) is not str or not re.fullmatch("sha256:[0-9a-f]{64}", image_id):
+        raise ExecutorError("configuration")
+    try:
+        _inspect_image(_docker_executable(None), _local_endpoint(docker_endpoint), image_id)
+    except ExecutorError as error:
+        raise ExecutorError(
+            error.reason, pre_cleanup_failure=("image_inspect", error.reason)
+        ) from None
+    except ReleaseError:
+        raise ExecutorError(
+            "configuration", pre_cleanup_failure=("image_inspect", "configuration")
+        ) from None
+
+
 def _tmpfs(limits: Limits) -> dict[str, str]:
     tail = "noexec,nosuid,nodev,uid=65532,gid=65532,mode=0700"
     return {
@@ -495,13 +537,7 @@ def run_container(
     if canonical != initial:
         raise ExecutorError("configuration")
     initial = canonical
-    executable = shutil.which("docker") if docker is None else docker
-    if (
-        type(executable) is not str
-        or not Path(executable).is_absolute()
-        or not Path(executable).is_file()
-    ):
-        raise ExecutorError("unavailable")
+    executable = _docker_executable(docker)
     endpoint = (
         _endpoint(executable) if docker_endpoint is None else _local_endpoint(docker_endpoint)
     )
@@ -607,16 +643,7 @@ def run_container(
                 pass  # Final owned removal remains mandatory and separately reported.
 
     try:
-        image = inspect_id(spec.image_id)
-        image_config = image.get("Config")
-        if (
-            image.get("Id") != spec.image_id
-            or image.get("Os") != "linux"
-            or image.get("Architecture") != "amd64"
-            or type(image_config) is not dict
-            or image_config.get("Volumes")
-        ):
-            raise ExecutorError("configuration")
+        _inspect_image(executable, endpoint, spec.image_id)
         stage = "create"
         if lifecycle is not None:
             lifecycle({"event": "before_create", "identity": _load(_json(ownership))})

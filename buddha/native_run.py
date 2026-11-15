@@ -13,6 +13,7 @@ from pathlib import Path, PurePosixPath
 from typing import Any, BinaryIO, cast
 
 from buddha import channel, executor
+from buddha import native_pipeline as pipeline
 from buddha.authorization import HeldReplacement
 from buddha.gateway import (
     CAPABILITIES,
@@ -76,6 +77,22 @@ def _decode(value: object, maximum: int) -> bytes:
     if len(raw) > maximum or base64.b64encode(raw).decode() != value:
         raise NativeRunError("noncanonical binary field")
     return raw
+
+
+def check_held_image(owner: Path) -> None:
+    """Check Docker readiness against the original utility stage descriptor."""
+    descriptor = owner.parent.parent / "command-2.json"
+    invocation = _object(_read_manifest(owner)["invocation"])
+    inputs = cast(list[dict[str, object]], invocation["inputs"])
+    digest = next((item["sha256"] for item in inputs if item["path"] == str(descriptor)), None)
+    description = _object(
+        _load(pipeline._read(descriptor, _digest(digest))),
+        {"format", "worker", "executor", "profiles"},
+    )
+    spec = _object(description["executor"])
+    if description["format"] != "buddha.native-command.v1" or spec.get("role") != "evaluator":
+        raise NativeRunError("held recovery needs its original utility executor")
+    executor.check_image(_text(spec["image_id"]), docker_endpoint=_text(spec["docker_endpoint"]))
 
 
 class NativeSession:
@@ -677,13 +694,6 @@ class NativeSession:
 
     def run(self) -> dict[str, object]:
         with self.gateway.work(directory=self.output, kind="native"):
-            if self.held_replacement is not None:
-                self._unchanged()
-                self.recovery = UtilityReplay(
-                    self.gateway,
-                    self.gateway._prepare_held_replacement(self.held_replacement),
-                    self.recovery_fallback,
-                )
             return self._run()
 
     def _run(self) -> dict[str, object]:
@@ -696,6 +706,14 @@ class NativeSession:
         failed_execution: dict[str, object] = {}
         try:
             execution_identity(self.gateway.directory)
+            if self.held_replacement is not None:
+                executor.check_image(self.spec.image_id, docker_endpoint=self.endpoint)
+                self.recovery = UtilityReplay(
+                    self.gateway,
+                    self.gateway._prepare_held_replacement(self.held_replacement),
+                    self.recovery_fallback,
+                )
+                self._unchanged()
             result = executor.run_container(
                 self.spec,
                 initial=self.worker,
