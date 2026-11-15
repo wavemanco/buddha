@@ -132,17 +132,22 @@ hold. It can make paid requests. By using `--confirm-project-keys`, you confirm
 that the keys you enter are for your intended OpenAI project and Anthropic
 workspace and use the reviewed standard/default public pay-as-you-go billing.
 Rotated keys are accepted. Buddha relies on your confirmation of those settings.
-Startup checks run more than once and can take several minutes each.
+The command checks Docker and the pinned evaluator image first. It reads the
+saved study once before prompting, which can still take several minutes.
+After you enter the keys, Buddha rechecks the pinned files and accounting
+under the original locks and carries the checked state into development.
+The saved Anthropic replacement reply is reused. The original $11.44 hold
+stays in place.
 Keep the window open. To stop, press **Ctrl+C once** and wait for the final
 status. Keep any stop message and its closing JSON for review.
 
 ```powershell
 Remove-Item -LiteralPath 'Env:\OPENAI_API_KEY', 'Env:\ANTHROPIC_API_KEY' -ErrorAction SilentlyContinue
-& 'C:\Program Files\Python313\python.exe' -B 'C:\Users\arvik\code\buddha\runs\r315d\docs\conformance\unified-run.py' `
+& 'C:\Program Files\Python313\python.exe' -B 'C:\Users\arvik\code\buddha\runs\r315e\docs\conformance\unified-run.py' `
   --handoff 'C:\Users\arvik\code\buddha\runs\imp01-d8-fresh-20261112-v5-combined\NOT-CREATED-unified-launch.json' `
   --sha256 '5a6ad73dd705b2d4114c4cf1faf1c074b16e37acdccb0918a39981bfb56da312' `
-  --resume-decision 'C:\Users\arvik\code\buddha\runs\checks\d8-v5-held-resume-preflight-20261113\project-confirmation\resume-decision.json' `
-  --resume-sha256 'b5bff5d1b7854cf9e0657caadc0270d5018738409010a880e92c74a59436b26b' `
+  --resume-decision 'C:\Users\arvik\code\buddha\runs\checks\d8-v5-single-restore-20261114\resume-decision.json' `
+  --resume-sha256 'edaf9974147f0c003acf5d4104a2b98589aa6d87c335c3f3a9ee5cfa31ba981e' `
   --live --prompt-keys --confirm-project-keys
 ```
 
